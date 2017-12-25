@@ -57,7 +57,7 @@ double fpeig(double K, int niter)
 	return acc;
 }
 
-double niter = 15;
+double niter = 18;
 
 static void bifurcation_diagram (float *array,
                                  int array_size,
@@ -88,21 +88,40 @@ if (K < 0.55) itermax *= 2;
 #endif
 
 int perow = itermax;
+double bump = 1.05;
+if (K < 0.6) { perow *= 2; bump = 1.1; }
+if (K < 0.55) { perow *= 4; bump = 1.2; }
 
 itermax = niter;
 
 time_t start = time(0);
 	for (int j=0; j<array_size; j++)
 	{
-		double x = (((double) j) + 0.5) / ((double) array_size);
+		double x = (((double) j) + 0.1) / ((double) array_size);
 		double eig = reig(x, K, itermax);
 		array[j] = eig;
+
+		x = (((double) j) + 0.3) / ((double) array_size);
+		eig = reig(x, K, itermax);
+		array[j] += eig;
+
+		x = (((double) j) + 0.5) / ((double) array_size);
+		eig = reig(x, K, itermax);
+		array[j] += eig;
+
+		x = (((double) j) + 0.7) / ((double) array_size);
+		eig = reig(x, K, itermax);
+		array[j] += eig;
+
+		x = (((double) j) + 0.9) / ((double) array_size);
+		eig = reig(x, K, itermax);
+		array[j] += eig;
 	}
 time_t end = time(0);
 printf("end %g itermax=%d niter=%f time=%lu\n", K, itermax, niter, end-start);
-if (end-start < perow/2) niter *= 1.05;
-if (end-start < perow) niter *= 1.05;
-if (2*perow < end-start) niter /= 1.02;
+if (end-start < perow/2) niter *= bump;
+if (end-start < perow) niter *= bump;
+if (4*perow < end-start) niter /= 1.02;
 
 
 	double norm = 0.0;

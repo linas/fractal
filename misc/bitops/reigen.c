@@ -11,15 +11,17 @@
 
 double reig(double x, double K, double lambda, int niter)
 {
-	if (niter < 0) return 1.0;
 	if (K < x) return 0.0;
-	if (K*(2.0*K-1.0) < x)
+	if (niter < 0) return 1.0;
+
+	double tkay = 2.0*K;
+	if (K*(tkay-1.0) < x)
 	{
-		return reig(0.5*x/K, K, lambda, niter-1) / (2.0*lambda*K);
+		return reig(x/tkay, K, lambda, niter-1) / (lambda * tkay);
 	}
-	double sum = reig(0.5*x/K, K, lambda, niter-1);
-	sum += reig(0.5 + 0.5*x/K, K, lambda, niter-1);
-	sum /= (2.0*lambda*K);
+	double sum = reig(x/tkay, K, lambda, niter-1);
+	sum += reig(0.5 + x/tkay, K, lambda, niter-1);
+	sum /= lambda * tkay;
 	return sum;
 }
 

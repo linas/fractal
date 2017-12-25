@@ -59,7 +59,86 @@ double add_carry(double x, double y)
 		else cbits [i-1] = 0;
 	}
 
-	// Reconstruct x in a mashed bernoulli sequence.
+	// Reconstruct x
+	return to_float(cbits, 50);
+}
+
+double mult_carry(double x, double y)
+{
+	// convert x and y into bit-strings.
+	char xbits[50];
+	char ybits[50];
+	to_bits(xbits, x, 50);
+	to_bits(ybits, y, 50);
+
+	char cbits[50];
+	for (int i=0; i<50-1; i++)
+	{
+		int prod = 0;
+		for (int j=0; j<i+1; j++)
+		{
+			prod += xbits[j] * ybits[i-j];
+		}
+		if (1 < prod) cbits[i] = 1;
+		else cbits [i] = 0;
+	}
+
+	// Reconstruct x
+	return to_float(cbits, 50);
+}
+
+double mult_carry_size(double x, double y)
+{
+	// convert x and y into bit-strings.
+	char xbits[50];
+	char ybits[50];
+	to_bits(xbits, x, 50);
+	to_bits(ybits, y, 50);
+
+	double tn = 0.5;
+	double c = 0;
+	for (int i=0; i<50-1; i++)
+	{
+		int prod = 0;
+		for (int j=0; j<i+1; j++)
+		{
+			prod += xbits[j] * ybits[i-j];
+		}
+		c += tn * ((double) prod)/ ((double) i+1);
+		tn /= 2;
+	}
+
+	return c;
+}
+
+double mult_carry_est(double x, double y)
+{
+	// convert x and y into bit-strings.
+	char xbits[50];
+	char ybits[50];
+	to_bits(xbits, x, 50);
+	to_bits(ybits, y, 50);
+
+	char cbits[50];
+	for (int i=0; i<50-1; i++)
+	{
+		int prod = 0;
+		for (int j=0; j<i+1; j++)
+		{
+			prod += xbits[j] * ybits[i-j];
+		}
+		if (1 < prod) cbits[i] = 1;
+		if (2 < prod) cbits[i-1] = 1;
+		if (4 < prod) cbits[i-2] = 1;
+		if (8 < prod) cbits[i-3] = 1;
+		if (16 < prod) cbits[i-4] = 1;
+		if (32 < prod) cbits[i-5] = 1;
+		if (64 < prod) cbits[i-6] = 1;
+		if (128 < prod) cbits[i-7] = 1;
+		else cbits [i] = 0;
+	}
+
+	// Reconstruct x
 	return to_float(cbits, 50);
 }
 
@@ -79,7 +158,10 @@ static void mapping_diagram (float *array,
 	double x = startx;
 	for (int j=0; j<array_size; j++)
 	{
-		array[j] = add_carry(x,y);
+		// array[j] = add_carry(x,y);
+		// array[j] = mult_carry(x,y);
+		// array[j] = mult_carry_size(x,y);
+		array[j] = mult_carry_est(x,y);
 		x += deltax;
 	}
 }

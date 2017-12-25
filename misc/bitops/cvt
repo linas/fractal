@@ -34,5 +34,19 @@
 # ../../generate/renorm unmap j 0.2 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unmap.png
 
-../../generate/renorm fp-eig j 0.5 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > fp-eig.png
+# ../../generate/renorm fp-eig j 0.5 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > fp-eig.png
+
+# ../../generate/takelog fp-eig-12 lo
+# ../../generate/renorm lo j 1.5 0
+# ../../generate/renorm fp-eig-12 j 0.5 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > fp-eig-12.png
+
+# ../../generate/renorm carry-add j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carry-add.png
+
+# ../../generate/renorm carry-prod j 2 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carry-prod.png
+
+../../generate/renorm carry-prod-size j 2 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carry-prod-size.png
