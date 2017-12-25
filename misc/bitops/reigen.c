@@ -20,6 +20,11 @@ double reig(double x, double K, double lambda, int niter)
 		if (0.999999999 < lambda) return 1.0 / K;
 
 		// Approximate by something that integrates to zero.
+		if (x < 0.25*K) return 1.0/K;
+		if (x > 0.75*K) return 1.0/K;
+		return -1.0/K;
+
+		// Approximate by something that integrates to zero.
 		if (x < 0.5*K) return 1.0/K;
 		return -1.0/K;
 	}
@@ -79,6 +84,8 @@ int main (int argc, char* argv[])
 
 // #define NRECU 40
 #define NRECU 20
+
+	// Compute an eigenfunction, recursively.
 	double lin = 0.0;
 	double squ = 0.0;
 	for (int i=0; i<NPTS; i++)
@@ -93,7 +100,7 @@ int main (int argc, char* argv[])
 	lin /= NPTS;
 	squ = sqrt(squ / NPTS);
 
-	printf ("# linear=%g\n#\n", lin);
+	printf ("# linear=%g squ=%g\n#\n", lin, squ);
 
 	// Renormalize to unit mean-square 
 	for (int i=0; i<NPTS; i++)
@@ -105,6 +112,7 @@ int main (int argc, char* argv[])
 	double verify[NPTS];
 	apply_xfer(verify, psi, NPTS, K);
 
+	// See how the computed and expected functions differ
 	double sumerr = 0.0;
 	for (int i=0; i<NPTS; i++)
 	{
@@ -116,6 +124,7 @@ int main (int argc, char* argv[])
 	sumerr /= NPTS;
 	printf("# eeign error: %g\n#\n", sumerr);
 
+	// Dump to file.
 	for (int i=0; i<NPTS; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) NPTS);
