@@ -10,17 +10,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define NPTS 1803
+double hits[NPTS];
+
 // Compute eignefunction, recursively.
 double reig(double x, double K, double lambda, int niter)
 {
-	if (K < x) return 0.0;
 	if (niter < 0)
 	{
+		unsigned int bin = floor (x*NPTS);
+		hits[bin] += 1.0;
+
+		if (K < x) return 0.0;
+
 		// Approximate by a constant.
 		if (0.999999999 < lambda) return 1.0 / K;
 
-		double s = sin(2.0*M_PI *3.0 *x/K);
-		return 0.5*K-x + 0.1*s;
+		// return 0.5*K-x;
+		// double s = sin(2.0*M_PI *3.0 *x/K);
+		// return 0.5*K-x + 0.1*s;
 #if 0
 		// Approximate by something that integrates to zero.
 		if (x < 0.25*K) return 1.0/K;
@@ -32,6 +40,7 @@ double reig(double x, double K, double lambda, int niter)
 		if (x < 0.5*K) return 1.0/K;
 		return -1.0/K;
 	}
+	if (K < x) return 0.0;
 
 	double tkay = 2.0*K;
 
@@ -82,7 +91,8 @@ int main (int argc, char* argv[])
 
 	printf("#\n# K = %g lambda = %g\n#\n", K, lambda);
 
-#define NPTS 1803
+	for (int i=0; i<NPTS; i++)
+		hits[i] = 0.0;
 
 	double psi[NPTS];
 
@@ -126,7 +136,14 @@ int main (int argc, char* argv[])
 		sumerr += err*err;
 	}
 	sumerr /= NPTS;
-	printf("# eeign error: %g\n#\n", sumerr);
+	printf("# eigen error: %g\n#\n", sumerr);
+
+	double cnt = 0.0;
+	for (int i=0; i<NPTS; i++)
+		cnt += hits[i];
+
+	for (int i=0; i<NPTS; i++)
+		hits[i] *= NPTS/cnt;
 
 	// Dump to file.
 	for (int i=0; i<NPTS; i++)
@@ -134,6 +151,7 @@ int main (int argc, char* argv[])
 		double x = ((double) i + 0.5) / ((double) NPTS);
 		double y = psi[i];
 		double z = verify[i];
-		printf("%d	%g %g	%g\n", i, x, y, z);
+		double w = hits[i];
+		printf("%d	%g %g	%g	%g\n", i, x, y, z, w);
 	}
 }
