@@ -5,7 +5,7 @@ rexfer.o: rexfer.c
 rexfer: rexfer.o
 
 .c.o:
-	cc -c -O2 $<
+	cc -c -std=c99 -O2 $<
 
 .o:
 	cc -o $* $<

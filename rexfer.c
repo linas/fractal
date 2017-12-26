@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 double xiter (double x, double K, int lvl)
-
+{
 	if (K < x) return 0.0;
 	if (lvl < 0)
 	{
@@ -20,8 +20,9 @@ double xiter (double x, double K, int lvl)
 	double sum = 0.0;
 	double otk = 0.5 / K;
 	double xtk = otk*x;
-	sum += xiter(xtk);
-	sum += xiter(xtk+0.5);
+	lvl --;
+	sum += xiter(xtk, K, lvl);
+	sum += xiter(xtk+0.5, K, lvl);
 	sum *= otk;
 	return sum;
 }
@@ -30,7 +31,7 @@ int main(int argc, char* argv[])
 {
 	double K = atof(argv[1]);
 #define NPTS 600
-#define NREC 15
+#define NREC 19
 
 	for (int i=0; i< NPTS; i++)
 	{
