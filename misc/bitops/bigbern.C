@@ -123,8 +123,22 @@ static void bifurcation_diagram (float *array,
 		}
 	}
 
+	// square-integrable norm
+	double norm = 0.0;
+	for (int j=0; j<array_size; j++)
+		norm += array[j] * array[j];
+
+	norm /= array_size;
+	norm = 1.0 / sqrt(norm);
+
+	for (int j=0; j<array_size; j++)
+		array[j] *= norm;
+
+#if 0
+	// lp_norm for p=1. Interesting but ...
 	for (int j=0; j<array_size; j++)
 		array[j] *= ((double) array_size) / ((double) cnt);
+#endif
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)

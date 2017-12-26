@@ -19,10 +19,14 @@ double reig(double x, double K, double lambda, int niter)
 		// Approximate by a constant.
 		if (0.999999999 < lambda) return 1.0 / K;
 
+		double s = sin(2.0*M_PI *3.0 *x/K);
+		return 0.5*K-x + 0.1*s;
+#if 0
 		// Approximate by something that integrates to zero.
 		if (x < 0.25*K) return 1.0/K;
 		if (x > 0.75*K) return 1.0/K;
 		return -1.0/K;
+#endif
 
 		// Approximate by something that integrates to zero.
 		if (x < 0.5*K) return 1.0/K;
@@ -56,9 +60,9 @@ void apply_xfer(double *out, double *in, int sz, double K)
 			unsigned int isamp1 = floor(b1 * sz);
 			unsigned int isamp2 = floor(b2 * sz);
 			if (isamp1 >= sz) printf ("ohh noo %d %g\n", isamp1, b1*sz);
-			assert (isamp1< sz); 
+			assert (isamp1< sz);
 			if (isamp2 >= sz) printf ("ohh 2 noo %d %g\n", isamp2, b2*sz);
-			assert (isamp2< sz); 
+			assert (isamp2< sz);
 			out[i] = (in[isamp1] + in [isamp2]) / tkay;
 		}
 		else
@@ -102,7 +106,7 @@ int main (int argc, char* argv[])
 
 	printf ("# linear=%g squ=%g\n#\n", lin, squ);
 
-	// Renormalize to unit mean-square 
+	// Renormalize to unit mean-square
 	for (int i=0; i<NPTS; i++)
 	{
 		psi[i] /= squ;
