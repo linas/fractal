@@ -8,4 +8,4 @@ rexfer: rexfer.o
 	cc -c -std=c99 -O2 $<
 
 .o:
-	cc -o $* $<
+	cc -o $* $< -lm

@@ -14,8 +14,8 @@ double xiter (double x, double K, int lvl)
 	if (K < x) return 0.0;
 	if (lvl < 0)
 	{
-		if (x < 0.5*K) return 1.0;
-		return -1.0;
+		if (x < 0.5*K) return 1.0/sqrt(K);
+		return -1.0/sqrt(K);
 	}
 	double sum = 0.0;
 	double otk = 0.5 / K;
@@ -37,11 +37,14 @@ int main(int argc, char* argv[])
 	{
 		double x = ((double) i + 0.5) / ((double) NPTS);
 		printf ("%d	%g", i, x);
-		for (int r=0; r<NREC; r++)
+		double s=0.0;
+		for (int r=-1; r<NREC; r++)
 		{
 			double y = xiter(x, K, r);
+			s += y;
 			printf("	%g", y);
 		}
+		printf("	%g", s);
 		printf ("\n");
 	}
 }
