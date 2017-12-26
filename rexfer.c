@@ -14,8 +14,12 @@ double xiter (double x, double K, int lvl)
 	if (K < x) return 0.0;
 	if (lvl < 0)
 	{
-		if (x < 0.5*K) return 1.0/sqrt(K);
-		return -1.0/sqrt(K);
+		if (x < 0.4) return 1.0*K/2.0;
+		if (x < 0.7) return -2.0*K/2.0;
+		return 1.0*K/2.0;
+
+		if (x < 0.5*K) return 1.0/2.0;
+		return -1.0/K;
 	}
 	double sum = 0.0;
 	double otk = 0.5 / K;
@@ -23,22 +27,24 @@ double xiter (double x, double K, int lvl)
 	lvl --;
 	sum += xiter(xtk, K, lvl);
 	sum += xiter(xtk+0.5, K, lvl);
-	sum *= otk;
+	// sum *= otk;
+	// sum *= 2;
+	// sum *= K;
 	return sum;
 }
 
 int main(int argc, char* argv[])
 {
 	double K = atof(argv[1]);
-#define NPTS 600
-#define NREC 19
+#define NPTS 400
+#define NREC 26
 
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) NPTS);
 		printf ("%d	%g", i, x);
 		double s=0.0;
-		for (int r=-1; r<NREC; r++)
+		for (int r=8; r<NREC; r++)
 		{
 			double y = xiter(x, K, r);
 			s += y;
