@@ -142,8 +142,9 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NPTS; i++)
 		cnt += hits[i];
 
-	for (int i=0; i<NPTS; i++)
-		hits[i] *= NPTS/cnt;
+// cnt = 1.0;
+// 	for (int i=0; i<NPTS; i++)
+// 		hits[i] *= NPTS/cnt;
 
 	// Dump to file.
 	for (int i=0; i<NPTS; i++)
