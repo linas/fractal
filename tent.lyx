@@ -164,7 +164,56 @@ For any given iteration, the result is the sum of the vertexes at a given
 \end_inset
 
  functions.
- By observation, one has that 
+ 
+\end_layout
+
+\begin_layout Standard
+It is convenient to define 
+\begin_inset Formula 
+\[
+\gamma_{x}\left(y\right)=\frac{x}{2}+\frac{y}{2K}
+\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula $\alpha\left(y\right)=\gamma_{0}\left(y\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta\left(y\right)=\gamma_{1}\left(y\right)$
+\end_inset
+
+, so that a general iterated sequence of intermixed 
+\begin_inset Formula $\alpha$
+\end_inset
+
+'s and 
+\begin_inset Formula $\beta$
+\end_inset
+
+'s can be written uniformly in terms of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ Given a sequence of bits 
+\begin_inset Formula $b_{1}b_{2}b_{3}\cdots b_{n}$
+\end_inset
+
+ with each 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ being zero or one, the iterated sequence can be written as
+\begin_inset Formula 
+\[
+\left(\gamma_{b_{1}}\gamma_{b_{2}}\gamma_{b_{3}}\cdots\gamma_{b_{n}}\right)\left(y\right)=\frac{1}{2}\left[b_{1}+\frac{b_{2}}{2K}+\frac{b_{3}}{\left(2K\right)^{2}}+\cdots+\frac{b_{n}}{\left(2K\right)^{n-1}}\right]+\frac{y}{\left(2K\right)^{n}}
+\]
+
+\end_inset
+
+So, for example: 
 \begin_inset Formula 
 \[
 \alpha^{n}\left(y\right)=\frac{y}{\left(2K\right)^{n}}
@@ -180,13 +229,11 @@ while
 
 \end_inset
 
-Continuing in this way, one has, in general, that
+and, in general, that
 \begin_inset Formula 
-\begin{eqnarray*}
-\beta^{n}\left(y\right) & = & \frac{1}{2}\left[1+\frac{1}{2K}+\frac{1}{\left(2K\right)^{2}}+\cdots\frac{1}{\left(2K\right)^{n-1}}\right]+\frac{y}{\left(2K\right)^{n}}\\
- & = & \frac{1}{2}\frac{1-\frac{1}{\left(2K\right)^{n}}}{1-\frac{1}{2K}}+\frac{y}{\left(2K\right)^{n}}\\
- & = & \frac{1}{2}\frac{2K}{2K-1}\left(1-\frac{1}{\left(2K\right)^{n}}\right)+\frac{y}{\left(2K\right)^{n}}
-\end{eqnarray*}
+\[
+\beta^{n}\left(y\right)=\frac{1}{2}\left[1+\frac{1}{2K}+\frac{1}{\left(2K\right)^{2}}+\cdots\frac{1}{\left(2K\right)^{n-1}}\right]+\frac{y}{\left(2K\right)^{n}}
+\]
 
 \end_inset
 
