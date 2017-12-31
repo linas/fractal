@@ -49,11 +49,10 @@ int step(char* bitseq, int nbits, double Kay, double y)
 	return 0;
 }
 
-// The tree function
-double tree_fun(double x, double Kay, double y)
+// Compute the bit sequence of x.
+void to_bit_sequence(char* bitseq, double x)
 {
 	// Decompose x into a bit sequence.
-	char bitseq[50];
 	for (int i=0; i<50; i++)
 	{
 		if (0.5 <= x)
@@ -64,6 +63,24 @@ double tree_fun(double x, double Kay, double y)
 		else bitseq[i] = 0;
 		x *= 2.0;
 	}
+}
+
+// The gamma function
+double gamma_fun(double x, int nbits, double Kay, double y)
+{
+	// Decompose x into a bit sequence.
+	char bitseq[50];
+	to_bit_sequence(bitseq, x);
+
+	return finite_pdr(bitseq, nbits, Kay, y);
+}
+
+// The tree function
+double tree_fun(double x, double Kay, double y)
+{
+	// Decompose x into a bit sequence.
+	char bitseq[50];
+	to_bit_sequence(bitseq, x);
 
 	// Construct the tree function from this sequence
 	for (int i=0; i<50; i++)
@@ -89,10 +106,18 @@ int main (int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
 		printf("%d	%g", i, x);
+#if SLICES
 		for (why=0.0; why<=1.0; why += 0.1)
 		{
 			double t = tree_fun(x, Kay, why);
 			printf("	%g", t);
+		}
+		printf("\n");
+#endif
+		for (int n=1; n<11; n++)
+		{
+			double g = gamma_fun(x, n, Kay, why);
+			printf("	%g", g);
 		}
 		printf("\n");
 	}
