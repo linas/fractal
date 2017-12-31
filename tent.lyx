@@ -113,11 +113,24 @@ Using a simplified notation
 \begin_inset Formula $g\left(y\right)=f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)$
 \end_inset
 
- allos this to be iterated a third time:
+ allows this to be iterated a third time:
 \begin_inset Formula 
-\[
-\left[\mathcal{L}^{3}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{\left(2K\right)^{3}}\left[\Theta\left(\alpha^{2}\left(y\right)\right)g\left(\alpha^{2}\left(y\right)\right)+\Theta\left(\beta\alpha\left(y\right)\right)g\left(\beta\alpha\left(y\right)\right)+\right.
-\]
+\begin{eqnarray*}
+\left[\mathcal{L}^{3}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(2K\right)^{3}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[\Theta\left(\alpha^{2}\left(y\right)\right)g\left(\alpha^{2}\left(y\right)\right)+\Theta\left(\beta\alpha\left(y\right)\right)g\left(\beta\alpha\left(y\right)\right)\right]+\right.\\
+ &  & \left.\Theta\left(\beta\left(y\right)\right)\left[\Theta\left(\alpha\beta\left(y\right)\right)g\left(\alpha\beta\left(y\right)\right)+\Theta\left(\beta^{2}\left(y\right)\right)g\left(\beta^{2}\left(y\right)\right)\right]\right]
+\end{eqnarray*}
+
+\end_inset
+
+and a fourth time, this time omitting the argument, and the various nesting
+ parenthesis.
+\begin_inset Formula 
+\begin{eqnarray*}
+\left[\mathcal{L}^{4}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(2K\right)^{4}} & \left[\Theta\alpha\Theta\alpha^{2}\left[\Theta\alpha^{3}g\alpha^{3}+\Theta\beta\alpha^{2}g\beta\alpha^{2}\right]+\right.\\
+ &  & \Theta\alpha\Theta\beta\alpha\left[\Theta\alpha\beta\alpha g\alpha\beta\alpha+\Theta\beta^{2}\alpha g\beta^{2}\alpha\right]\\
+ &  & \Theta\beta\Theta\alpha\beta\left[\Theta\alpha^{2}\beta g\alpha^{2}\beta+\Theta\beta\alpha\beta g\beta\alpha\beta\right]\\
+ &  & \left.\Theta\beta\Theta\beta^{2}\left[\Theta\alpha\beta^{2}g\alpha\beta^{2}+\Theta\beta^{3}g\beta^{3}\right]\right]
+\end{eqnarray*}
 
 \end_inset
 
