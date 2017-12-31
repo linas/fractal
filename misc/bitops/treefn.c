@@ -50,7 +50,7 @@ int step(char* bitseq, int nbits, double Kay, double y)
 }
 
 // The tree function
-double tree_fun(double x, double Kay, double y, int maxbit)
+double tree_fun(double x, double Kay, double y)
 {
 	// Decompose x into a bit sequence.
 	char bitseq[50];
@@ -66,7 +66,7 @@ double tree_fun(double x, double Kay, double y, int maxbit)
 	}
 
 	// Construct the tree function from this sequence
-	for (int i=0; i<maxbit; i++)
+	for (int i=0; i<50; i++)
 	{
 		if (0 == step(bitseq, i, Kay, y)) return 0.0;
 	}
@@ -88,9 +88,12 @@ int main (int argc, char* argv[])
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
-		double t10 = tree_fun(x, Kay, why, 10);
-		double t20 = tree_fun(x, Kay, why, 20);
-		double t30 = tree_fun(x, Kay, why, 30);
-		printf("%d	%g	%g	%g	%g\n", i, x, t10, t20, t30);
+		printf("%d	%g", i, x);
+		for (why=0.0; why<=1.0; why += 0.1)
+		{
+			double t = tree_fun(x, Kay, why);
+			printf("	%g", t);
+		}
+		printf("\n");
 	}
 }
