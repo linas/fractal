@@ -134,7 +134,63 @@ and a fourth time, this time omitting the argument, and the various nesting
 
 \end_inset
 
-This is more conveniently visualized as a tree:
+Notice that the primary structure is given by a product of step funtions.
+ This is more conveniently visualized as a tree:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename tree.eps
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For any given iteration, the result is the sum of the vertexes at a given
+ level, while the product of step functions is the product of the step functions
+ in the tree, following the path to each node.
+ Because any particular step function might be zero, it effectively acts
+ to cut off the tree at that location.
+ It is therefore interesting to understand general products of the 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ functions.
+ By observation, one has that 
+\begin_inset Formula 
+\[
+\alpha^{n}\left(y\right)=\frac{y}{\left(2K\right)^{n}}
+\]
+
+\end_inset
+
+while 
+\begin_inset Formula 
+\[
+\beta^{2}\left(y\right)=\frac{1}{2}+\frac{1}{2K}\left(\frac{1}{2}+\frac{y}{2K}\right)
+\]
+
+\end_inset
+
+Continuing in this way, one has, in general, that
+\begin_inset Formula 
+\begin{eqnarray*}
+\beta^{n}\left(y\right) & = & \frac{1}{2}\left[1+\frac{1}{2K}+\frac{1}{\left(2K\right)^{2}}+\cdots\frac{1}{\left(2K\right)^{n-1}}\right]+\frac{y}{\left(2K\right)^{n}}\\
+ & = & \frac{1}{2}\frac{1-\frac{1}{\left(2K\right)^{n}}}{1-\frac{1}{2K}}+\frac{y}{\left(2K\right)^{n}}\\
+ & = & \frac{1}{2}\frac{2K}{2K-1}\left(1-\frac{1}{\left(2K\right)^{n}}\right)+\frac{y}{\left(2K\right)^{n}}
+\end{eqnarray*}
+
+\end_inset
+
+
 \end_layout
 
 \end_body
