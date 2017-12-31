@@ -36,7 +36,7 @@ double finite_pdr_alt(char* bitseq, int nbits, double Kay, double y)
 		if (bitseq[i]) acc += tk;
 		tk *= 1.0 / (2.0*Kay);
 	}
-	acc = 0.5 * acc + y/tk;
+	acc = 0.5 * acc + y * tk;
 
 	return acc;
 }
@@ -44,15 +44,13 @@ double finite_pdr_alt(char* bitseq, int nbits, double Kay, double y)
 // The step function.
 int step(char* bitseq, int nbits, double Kay, double y)
 {
-	if (0 == nbits)
-	{
-		// if ...
-	}
+	double ve = finite_pdr(bitseq, nbits, Kay, y);
+	if (ve <= Kay) return 1;
 	return 0;
 }
 
 // The tree function
-double tree_fun(double x, double Kay, double y)
+double tree_fun(double x, double Kay, double y, int maxbit)
 {
 	// Decompose x into a bit sequence.
 	char bitseq[50];
@@ -67,11 +65,13 @@ double tree_fun(double x, double Kay, double y)
 		x *= 2.0;
 	}
 
-	double a = finite_pdr(bitseq, 3, Kay, y);
-	double b = finite_pdr_alt(bitseq, 3, Kay, y);
-
 	// Construct the tree function from this sequence
-	return a-b;
+	for (int i=0; i<maxbit; i++)
+	{
+		if (0 == step(bitseq, i, Kay, y)) return 0.0;
+	}
+
+	return 1.0;
 }
 
 int main (int argc, char* argv[])
@@ -85,10 +85,12 @@ int main (int argc, char* argv[])
 	double why = atof(argv[2]);
 
 	int npts = 803;
-	for (int i=0; i<=npts; i++)
+	for (int i=0; i<npts; i++)
 	{
-		double x = ((double) i)/ ((double) npts);
-		double t = tree_fun(x, Kay, why);
-		printf("%d	%g	%g\n", i, x, t);
+		double x = (((double) i) + 0.5)/ ((double) npts);
+		double t10 = tree_fun(x, Kay, why, 10);
+		double t20 = tree_fun(x, Kay, why, 20);
+		double t30 = tree_fun(x, Kay, why, 30);
+		printf("%d	%g	%g	%g	%g\n", i, x, t10, t20, t30);
 	}
 }
