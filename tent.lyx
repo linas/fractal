@@ -60,8 +60,6 @@
 \begin_body
 
 \begin_layout Subsection
-
-\backslash
 Iteration
 \end_layout
 
@@ -71,21 +69,21 @@ To understand the nature of the steady-state solution, its is worth iterating
  To do this, it is convenient to write it in the form
 \begin_inset Formula 
 \[
-\left[\mathcal{L}f\right]\left(y\right)=\frac{\Theta\left(K-y\right)}{2K}\left[f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)\right]
+\left[\mathcal{L}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{2K}\left[f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)\right]
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $\Theta\left(x\right)=1$
+\begin_inset Formula $\Theta\left(y\right)=1$
 \end_inset
 
  if 
-\begin_inset Formula $x\ge0$
+\begin_inset Formula $y\le K$
 \end_inset
 
- else zero; is the Heaviside theta function.
- It merely enforces the vanishing for the operator for 
+ else zero; this is a modified step function to denote the vanishing for
+ the operator for 
 \begin_inset Formula $y>K$
 \end_inset
 
@@ -99,6 +97,31 @@ where
 \end_inset
 
  are convenient shorthands for symbolic iteration.
+\end_layout
+
+\begin_layout Standard
+Iterating once gives
+\begin_inset Formula 
+\begin{eqnarray*}
+\left[\mathcal{L}^{2}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(2K\right)^{2}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[f\left(\alpha^{2}\left(y\right)\right)+f\left(\left(\beta\circ\alpha\right)\left(y\right)\right)\right]+\right.\\
+ &  & \left.\Theta\left(\beta\left(y\right)\right)\left[f\left(\left(\alpha\circ\beta\right)\left(y\right)\right)+f\left(\beta^{2}\left(y\right)\right)\right]\right]
+\end{eqnarray*}
+
+\end_inset
+
+Using a simplified notation 
+\begin_inset Formula $g\left(y\right)=f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)$
+\end_inset
+
+ allos this to be iterated a third time:
+\begin_inset Formula 
+\[
+\left[\mathcal{L}^{3}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{\left(2K\right)^{3}}\left[\Theta\left(\alpha^{2}\left(y\right)\right)g\left(\alpha^{2}\left(y\right)\right)+\Theta\left(\beta\alpha\left(y\right)\right)g\left(\beta\alpha\left(y\right)\right)+\right.
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
