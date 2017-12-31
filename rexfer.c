@@ -14,11 +14,11 @@ double xiter (double x, double K, int lvl)
 	if (K < x) return 0.0;
 	if (lvl < 0)
 	{
-		if (x < 0.4) return 1.0*K/2.0;
-		if (x < 0.7) return -2.0*K/2.0;
-		return 1.0*K/2.0;
+		if (x < 0.4) return 1.0/8.0;
+		if (x < 0.7) return -2.0/8.0;
+		return 1.0/8.0;
 
-		if (x < 0.5*K) return 1.0/2.0;
+		if (x < 0.5*K) return 1.0/K;
 		return -1.0/K;
 	}
 	double sum = 0.0;
@@ -29,7 +29,7 @@ double xiter (double x, double K, int lvl)
 	sum += xiter(xtk+0.5, K, lvl);
 	// sum *= otk;
 	// sum *= 2;
-	// sum *= K;
+	sum *= K;
 	return sum;
 }
 
