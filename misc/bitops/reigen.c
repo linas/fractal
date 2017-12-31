@@ -27,8 +27,18 @@ double reig(double x, double K, double lambda, int niter)
 		if (0.999999999 < lambda) return 1.0 / K;
 
 		// return 0.5*K-x;
-		// double s = sin(2.0*M_PI *3.0 *x/K);
-		// return 0.5*K-x + 0.1*s;
+		// return 0.5-x;
+
+		// double s = sin(2.0*M_PI *1.0 *x/K);
+		// return 0.5*K-x + 0.2*s;
+
+#if 0
+		// Approximate by something that integrates to zero.
+		if (x < 0.25*K) return -x;
+		if (x > 0.75*K) return 0.25 -x ;
+		return x - 0.5*K;
+#endif
+
 #if 0
 		// Approximate by something that integrates to zero.
 		if (x < 0.25*K) return 1.0/K;
@@ -95,8 +105,10 @@ int main (int argc, char* argv[])
 		hits[i] = 0.0;
 
 	double psi[NPTS];
+	for (int i=0; i<NPTS; i++)
+		psi[i] = 0.0;
 
-// #define NRECU 40
+// #define NRECU 30
 #define NRECU 20
 
 	// Compute an eigenfunction, recursively.
@@ -105,11 +117,19 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NPTS; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) NPTS);
-		double y = reig(x, K, lambda, NRECU);
-		lin += y;
-		squ += y*y;
-
-		psi[i] = y;
+		// if (0.57 < x && x < 0.58)
+		// if (0.55 < x && x < 0.6)
+		if (0 < x && x < 1)
+		{
+			double y = reig(x, K, lambda, NRECU);
+			lin += y;
+			squ += y*y;
+			psi[i] = y;
+		}
+		else
+		{
+			psi[i] = 0;
+		}
 	}
 	lin /= NPTS;
 	squ = sqrt(squ / NPTS);
@@ -143,8 +163,8 @@ int main (int argc, char* argv[])
 		cnt += hits[i];
 
 // cnt = 1.0;
-// 	for (int i=0; i<NPTS; i++)
-// 		hits[i] *= NPTS/cnt;
+ 	for (int i=0; i<NPTS; i++)
+ 		hits[i] *= NPTS/cnt;
 
 	// Dump to file.
 	for (int i=0; i<NPTS; i++)
