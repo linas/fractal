@@ -211,7 +211,7 @@ Downshift
 
 \begin_layout Standard
 Consider a similar shift process; I don't know if it has a commonly used
- name, so I will call if a 
+ name, so I will call it a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -284,16 +284,16 @@ exactly solvable
 \begin_inset Quotes erd
 \end_inset
 
-: the above provides a close-form solution for iterating and un-iterating
+: the above provides a closed-form solution for iterating and un-iterating
  the sequence.
 \end_layout
 
 \begin_layout Standard
 Multiplying out the above sequence, one obtains the series
 \begin_inset Formula 
-\[
-x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\left(2K\right)^{n}}
-\]
+\begin{equation}
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\left(2K\right)^{n}}\label{eq:shift series}
+\end{equation}
 
 \end_inset
 
@@ -807,9 +807,9 @@ Two interesting functions can be considered.
 
 and the other is the expander
 \begin_inset Formula 
-\[
-\mbox{pdr}_{K}(y)=x_{K}\left(\left(k_{n;1}\left(y\right)\right)\right)
-\]
+\begin{equation}
+\mbox{pdr}_{K}(y)=x_{K}\left(\left(k_{n;1}\left(y\right)\right)\right)\label{eq:expander function}
+\end{equation}
 
 \end_inset
 
@@ -1826,12 +1826,13 @@ Iterated transfer operator
 \end_layout
 
 \begin_layout Standard
-To understand the nature of the steady-state solution, its is worth iterating
- on the recurrenace relation for it, by hand, the first few times.
+To understand the nature of the steady-state solution (the Frobenius-Perron
+ eigenstate), its is worth iterating on the recurrenace relation for it,
+ by hand, the first few times.
  To do this, it is convenient to write it in the form
 \begin_inset Formula 
 \[
-\left[\mathcal{L}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{2K}\left[f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)\right]
+\left[\mathcal{L}_{K}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{2K}\left[f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)\right]
 \]
 
 \end_inset
@@ -1844,8 +1845,8 @@ where
 \begin_inset Formula $y\le K$
 \end_inset
 
- else zero; this is a modified step function to denote the vanishing for
- the operator for 
+ else zero; this is a step function to denote the vanishing for the operator
+ for 
 \begin_inset Formula $y>K$
 \end_inset
 
@@ -1942,7 +1943,7 @@ It is convenient to define
 
 \end_inset
 
- so that 
+so that 
 \begin_inset Formula $\alpha\left(y\right)=\gamma_{0}\left(y\right)$
 \end_inset
 
@@ -1964,7 +1965,7 @@ It is convenient to define
 
 .
  Given a sequence of bits 
-\begin_inset Formula $b_{1}b_{2}b_{3}\cdots b_{n}$
+\begin_inset Formula $b_{0}b_{1}b_{2}\cdots b_{n}$
 \end_inset
 
  with each 
@@ -1973,9 +1974,9 @@ It is convenient to define
 
  being either zero or one, the iterated sequence can be written as
 \begin_inset Formula 
-\[
-\left(\gamma_{b_{1}}\gamma_{b_{2}}\gamma_{b_{3}}\cdots\gamma_{b_{n}}\right)\left(y\right)=\frac{1}{2}\left[b_{1}+\frac{b_{2}}{2K}+\frac{b_{3}}{\left(2K\right)^{2}}+\cdots+\frac{b_{n}}{\left(2K\right)^{n-1}}\right]+\frac{y}{\left(2K\right)^{n}}
-\]
+\begin{equation}
+\left(\gamma_{b_{0}}\gamma_{b_{1}}\gamma_{b_{2}}\cdots\gamma_{b_{n}}\right)\left(y\right)=\frac{1}{2}\left[b_{0}+\frac{b_{1}}{2K}+\frac{b_{2}}{\left(2K\right)^{2}}+\cdots+\frac{b_{n}}{\left(2K\right)^{n}}\right]+\frac{y}{\left(2K\right)^{n+1}}\label{eq:not de Rham curve}
+\end{equation}
 
 \end_inset
 
@@ -2003,6 +2004,49 @@ and, in general, that
 
 \end_inset
 
+Iterated sequences of pairs of functions, of the form 
+\begin_inset Formula $\gamma_{b_{0}}\gamma_{b_{1}}\gamma_{b_{2}}\cdots\gamma_{b_{n}}$
+\end_inset
+
+ are reminiscent of de Rham curves, which generalize Cesaro curves andthe
+ Koch snowflake.
+ The proper definition of a de Rham curve assumes the seequence is of infinite
+ length, and applies a certain continuity condition, and is generally carried
+ out on the complex plane, so that a continuous, nowhere-differentiable
+ curve results.
+ Here, the curve is distinctly not continuous: eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:not de Rham curve"
+
+\end_inset
+
+ is a finite-length form of the shift series 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+
+\end_inset
+
+ which can be visualized as the expander function pdr 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expander function"
+
+\end_inset
+
+, as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Expander-Function"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
