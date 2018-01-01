@@ -126,6 +126,10 @@ static void bifurcation_diagram (float *array,
 		}
 	}
 
+	int pwid = 0;
+	for (int j=0; j<array_size; j++)
+		if (0.5 < array[j]) pwid ++;
+
 #if SQUARE_INTEGRABLE
 	// square-integrable norm
 	double norm = 0.0;
@@ -145,6 +149,17 @@ static void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++)
 		array[j] *= ((double) array_size) / ((double) cnt);
 #endif
+
+#ifdef TENTY
+	// Hackery for tent map
+	for (int j=0; j<array_size; j++)
+		array[j] *= 2.0*(K-0.5);
+#endif
+
+	// Bring out the colors
+	for (int j=0; j<array_size; j++)
+		array[j] *= ((double) pwid) / ((double) array_size);
+
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)
