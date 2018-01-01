@@ -101,7 +101,7 @@ int main (int argc, char* argv[])
 	double Kay = atof(argv[1]);
 	double why = atof(argv[2]);
 
-	int npts = 803;
+	int npts = 1603;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
@@ -114,6 +114,8 @@ int main (int argc, char* argv[])
 		}
 		printf("\n");
 #endif
+		double t = tree_fun(x, Kay, why);
+		printf("	%g", t);
 		for (int n=1; n<11; n++)
 		{
 			double g = gamma_fun(x, n, Kay, why);

@@ -1,10 +1,61 @@
 
-set term png small
+set term png size 640, 480
+# set out 'treefn.png'
+
+set termoption enhanced
+set encoding utf8
+
+
+# plot "treefn.dat" using 2:(0.8 * $3 + 0.1) with lines linewidth 2 title "0.0",\
+#      "treefn.dat" using 2:(0.86 * $6 + 0.07) with lines linewidth 2 title "0.3",\
+#      "treefn.dat" using 2:(0.94 * $8 + 0.04) with lines linewidth 2 title "0.5",\
+#      "treefn.dat" using 2:(1.0 * $10 + 0.0) with lines linewidth 2 title "0.7"
+
+###########################################################################
+## Used to create the figure in the paper.
+#set term postscript eps color
+#set out 'gamma-0.8-0.eps'
+#
+#set title "gamma functions"
+#set xlabel "x"
+#set ylabel 'γ_{x;n}(0)'
+#
+#set key left
+#plot "treefn.dat" using 2:(0.8) with lines linewidth 3 title "K=0.8",\
+#     "treefn.dat" using 2:4 with lines linewidth 2 title "γ_{x;1}(0)",\
+#     "treefn.dat" using 2:5 with lines linewidth 2 title "γ_{x;2}(0)",\
+#     "treefn.dat" using 2:6 with lines linewidth 2 title "γ_{x;3}(0)",\
+#     "treefn.dat" using 2:7 with lines linewidth 2 title "γ_{x;4}(0)",\
+#     "treefn.dat" using 2:8 with lines linewidth 2 title "γ_{x;5}(0)",\
+#     "treefn.dat" using 2:12 with lines linewidth 2 title "γ_{x;9}(0)"
+##
+###########################################################################
+
 set out 'treefn.png'
+# set term postscript eps color
+# set out 'gamma-0.8-0.7.eps'
 
+set multiplot
+# set title "gamma functions"
+set ylabel 'γ_{x;n}(0.7)'
+set key left
 
-plot "treefn.dat" using 2:(0.8 * $3 + 0.1) with lines linewidth 2 title "0.0",\
-     "treefn.dat" using 2:(0.86 * $6 + 0.07) with lines linewidth 2 title "0.3",\
-     "treefn.dat" using 2:(0.94 * $8 + 0.04) with lines linewidth 2 title "0.5",\
-     "treefn.dat" using 2:(1.0 * $10 + 0.0) with lines linewidth 2 title "0.7"
+set size 1.0, 0.8
+set origin 0.0, 0.2
+set xtics format ""
+plot "treefn.dat" using 2:(0.8) with lines linewidth 3 title "",\
+     "treefn.dat" using 2:4 with lines linewidth 2 title "γ_{x;1}(0.7)",\
+     "treefn.dat" using 2:5 with lines linewidth 2 title "γ_{x;2}(0.7)",\
+     "treefn.dat" using 2:6 with lines linewidth 2 title "γ_{x;3}(0.7)",\
+     "treefn.dat" using 2:7 with lines linewidth 2 title "γ_{x;4}(0.7)",\
+     "treefn.dat" using 2:8 with lines linewidth 2 title "γ_{x;5}(0.7)",\
+     "treefn.dat" using 2:12 with lines linewidth 2 title "γ_{x;9}(0.7)"
+
+set size 0.97, 0.25
+set xlabel "x"
+set ylabel 'T_{0.8}(x;0.7)'
+set ytics 0,1
+set xtics format "%2.1f"
+set origin 0.03, 0.0
+plot "treefn.dat" using 2:3 with lines linewidth 2 title ""
 
