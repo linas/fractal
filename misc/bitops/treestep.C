@@ -72,7 +72,8 @@ double tree_fun(double x, double Kay, double y)
 /*
  */
 
-static void tree_diagram (float *array,
+#if STEPS
+static void step_diagram (float *array,
                                  int array_size,
                                  double x_center,
                                  double x_width,
@@ -89,7 +90,43 @@ static void tree_diagram (float *array,
 		x -= 0.5;
 		x *= x_width;
 		x += x_center;
-		array[j] = tree_fun(x, Kay, y);
+		array[j] = step_fun(x, Kay, y);
+	}
+}
+
+DECL_MAKE_BIFUR(step_diagram)
+#endif
+
+static void tree_diagram (float *array,
+                                 int array_size,
+                                 double x_center,
+                                 double x_width,
+                                 double Kay,
+                                 int itermax,
+                                 double why)
+{
+	/* clear out the row */
+	for (int j=0; j<array_size; j++) array[j] = 0.0;
+
+	for (int j=0; j<array_size; j++)
+	{
+		double x = (((double) j) + 0.5)/ ((double) array_size);
+		x -= 0.5;
+		x *= x_width;
+		x += x_center;
+		array[j] = tree_fun(x, Kay, why);
+
+		for (int i=0; i<2499; i++)
+		{
+			double t = rand();
+			t /= RAND_MAX;
+			t -= 0.5;
+			t /= (double) array_size;
+			t *= x_width;
+			double ex = x+t;
+			array[j] += tree_fun(ex, Kay, why);
+		}
+		array[j] /= 2500.0;
 	}
 }
 
