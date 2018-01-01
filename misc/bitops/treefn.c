@@ -101,6 +101,7 @@ int main (int argc, char* argv[])
 	double Kay = atof(argv[1]);
 	double why = atof(argv[2]);
 
+#if PLOT_FUNCTION
 	int npts = 1603;
 	for (int i=0; i<npts; i++)
 	{
@@ -123,4 +124,39 @@ int main (int argc, char* argv[])
 		}
 		printf("\n");
 	}
+#endif
+
+	int nrep = atof(argv[3]);
+
+#define NBINS 801
+	double bins[NBINS];
+	for (int i=0; i< NBINS; i++) bins[i] = 0.0;
+
+#define NREP (nrep*NBINS)
+	for (int j=0; j< NREP; j++)
+	{
+		double x = rand();
+		x /= RAND_MAX;
+
+#define LVL 14
+		double g = gamma_fun(x, LVL, Kay, why);
+
+		if (0.5 < tree_fun(x, Kay, why))
+		{
+			int bin = floor(g*NBINS);
+			bins[bin] += 1.0;
+		}
+	}
+
+	for (int i=0; i< NBINS; i++)
+	{
+		bins[i] *= ((double) NBINS) / ((double) NREP);
+		double s = (((double) i) + 0.5) / ((double) NBINS);
+		printf ("%d	%g	%g\n", i, s, bins[i]);
+	}
+	fflush (stdout);
+	printf ("# bye\n");
+	fflush (stdout);
+
+	exit (0);
 }
