@@ -84,7 +84,7 @@
 \begin_body
 
 \begin_layout Title
-Exactly Solvable Iteration
+Iteration on the Real Number Line
 \end_layout
 
 \begin_layout Author
@@ -96,12 +96,8 @@ December 2017
 \end_layout
 
 \begin_layout Abstract
-This is a brief note on some exactly solvable models of iteration.
- This is a sequence of explorations that attempt to develop ideas and tools
- for analyzing and understanding diverse systems such as the Feigenbaum
- map and the iterated circle map (aka Arnold tongues).
- We don't quite get there, but do explore systems that can be understood
- through formal manipulations.
+This note describes a sequence of explorations to develop ideas and tools
+ for analyzing and understanding some very simple iterated function sequences.
 \end_layout
 
 \begin_layout Section
@@ -128,10 +124,38 @@ f^{n}(x)=(f\circ f\circ\cdots\circ f)(x)=f(f(\cdots f(x)\cdots))
 \end_inset
 
 Such iterated maps are often ergodic and sometimes chaotic.
- The below is concerned with some very simple, exactly solvable iterated
- maps.
- The goal is to approach more complex and chaotic maps, armed with this
- tool set.
+ This text is concerned with certain very simple iterated maps, attempting
+ to find the simplest possible settings, so as to clarify the dynamics,
+ to expose the core principles, and to provide usable tools that can be
+ deployed in more complex settings.
+\end_layout
+
+\begin_layout Standard
+The prototype for this effort is the Bernoulli map, which is exactly solvable,
+ and can be characterized in a rich variety of ways.
+ This has been explored in depth in my other writings, and will not be repeated
+ here.
+ Two similar maps are the tent map and the logicistic map made famous by
+ Feigenbaum.
+ These two are not 
+\begin_inset Quotes eld
+\end_inset
+
+exactly solvable
+\begin_inset Quotes erd
+\end_inset
+
+ by current technology, even though they can be computed to arbitrary accuracy.
+ The goal of this text is to push on the limits of what is possible, of
+ what can be extracted from these systems.
+\end_layout
+
+\begin_layout Standard
+This text begins with some pretty pictures, showing the iterated tent and
+ logisitic maps, so as to whet the readers appetite for the considerably
+ more dry material that follows.
+ The goal, as always to to simplify and abstract.
+ This is a difficult task.
 \end_layout
 
 \begin_layout Subsection
@@ -196,8 +220,8 @@ x=\sum_{n=0}^{\infty}b_{n}\left(x\right)2^{-n-1}
 
 \end_inset
 
-All of this is just a fancy way of writing a real number in terms of it's
- base-2 binary expansion.
+All of this is just a fancy way of saying that a real number can be written
+ in terms of it's base-2 binary expansion.
  That is, the binary digits for 
 \begin_inset Formula $x$
 \end_inset
@@ -218,9 +242,12 @@ x=0.b_{0}b_{1}b_{2}\cdots
 \end_layout
 
 \begin_layout Standard
-It is well known that the Bernoulli shift is ergodic.
- The corresponding transfer operator is exactly solvable, and has both discrete
- and continuous spectra, depending on functional space on which it acts.
+The Bernoulli shift has many interesting properties, connecting it to the
+ Cantor set and to many self-similar fractals.
+ I have explored these in many other texts, and will not repeat these here.
+ The current task is to attempt to see how many of these properties still
+ hold in slightly more complex systems, and whether any of the tools used
+ to analyze and solve the Bernoulli shift can be applied to these systems.
 \end_layout
 
 \begin_layout Subsection
@@ -761,6 +788,79 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Symbolic Dynamics
+\end_layout
+
+\begin_layout Standard
+The Bernoulli shift corresponds to the sequence of binary digits of a real
+ number.
+ Such sequences can be imaginged to belong to the space of all possible
+ sequences of binary digits, the Cartesian product of infinitely many copies
+ of the set containing two elelemnts:
+\begin_inset Formula 
+\[
+\left\{ 0,1\right\} \times\left\{ 0,1\right\} \times\left\{ 0,1\right\} \times\cdots=\left\{ 0,1\right\} ^{\omega}
+\]
+
+\end_inset
+
+This space has a natural topology, the product topology, which differs sharply
+ from the natural topology on the real-number line.
+ Essentially all of the strange pheonomena of fractals and of iterated functions
+ follows from the product topology on this sequence.
+ 
+\end_layout
+
+\begin_layout Standard
+One notable effect that can be explained in terms of the product topology
+ is the fractal self-similarity of many kinds of fractals: this arises from
+ the self-similarity of the product space under the action of a shift: specifica
+lly, the left-shift, which discards the left-most digit, and shifts the
+ rest over by one.
+ The shift operator itself is that operator that performs this shift; self-simil
+ar fractals can be seen to be eigenstates of the shift operator.
+ 
+\end_layout
+
+\begin_layout Standard
+Another notable effect is the close proximity of the Cantor set to the proceedin
+gs.
+ In a certain sense, the Cantor set can be understood to be the most basic
+ manifestation of the product space.
+ When attuned to its presence, it can be seen everywhere throughout the
+ proceedings.
+\end_layout
+
+\begin_layout Standard
+A third byproduct is the manifestation of the initifitely-deep binary tree.
+ This arises when the set 
+\begin_inset Formula $\left\{ 0,1\right\} $
+\end_inset
+
+ of the product space is re-interpreted as the set 
+\begin_inset Formula $\left\{ L,R\right\} $
+\end_inset
+
+ of left-right moves.
+ At each point in a binary sequence, one can make a choice of one of two
+ things: to move left or right.
+ This naturally suggests a binary decision tree.
+ 
+\end_layout
+
+\begin_layout Standard
+All of these things go together, like hand in glove: whenever one is manifest
+ and visible, the others are lurking right nearby, in the unseen directions.
+ All of these things can be given a formal and precise definition, and thier
+ explicit inter-relationships articulated.
+ I have done so in other writings and will not repeat here; they are not
+ immediately useful to the current proceedings.
+ None-the-less, the general interplay between these concepts is extremely
+ important to understand, and burbles constantly under the surface of the
+ current proceedings.
 \end_layout
 
 \begin_layout Subsection
