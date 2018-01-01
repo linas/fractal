@@ -138,12 +138,20 @@ int main (int argc, char* argv[])
 		double x = rand();
 		x /= RAND_MAX;
 
-#define LVL 14
-		double g = gamma_fun(x, LVL, Kay, why);
-
+#define LVL 16
 		if (0.5 < tree_fun(x, Kay, why))
 		{
+			double ay = why / (2.0* Kay);
+			double g = gamma_fun(x, LVL, Kay, ay);
+
 			int bin = floor(g*NBINS);
+			bins[bin] += 1.0;
+
+			// ====
+			double by = 0.5 + ay;
+			g = gamma_fun(x, LVL, Kay, by);
+
+			bin = floor(g*NBINS);
 			bins[bin] += 1.0;
 		}
 	}
