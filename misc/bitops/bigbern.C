@@ -29,7 +29,13 @@ void do_init(int nbits)
 	mpf_div_ui(half, half, 2);
 }
 
-void make_mpf(mpf_t& val, double x, int nbits)
+// Given a double-precision value x, this will create a random
+// bit-sequence that is nbits long, with the top 50 bits being
+// those taken from the double-precision value x, and the rest
+// randomly generated.  This is meant to provide a uniform sampling
+// on the unit interval; equivalently, uniform sampling on the
+// product space.
+void make_random_bitsequence(mpf_t& val, double x, int nbits)
 {
 	mpf_t tail;
 	mpf_init(tail);
@@ -60,10 +66,13 @@ void tent(mpf_t& ex, mpf_t Kay)
 	mpf_mul(ex, ex, Kay);
 }
 
-double feig(double x, double K)
+void feig(mpf_t& ex, mpf_t four_Kay, mpf_t& scratch)
 {
-	K *= 4.0;
-	return K * x * (1.0 - x);
+	// K *= 4.0; -- already pased in
+	// return 4 * K * x * (1.0 - x);
+	mpf_ui_sub(scratch, 1, ex);
+	mpf_mul(ex, ex, scratch);
+	mpf_mul(ex, ex, four_Kay);
 }
 
 static void bifurcation_diagram (float *array,
@@ -83,11 +92,14 @@ static void bifurcation_diagram (float *array,
 		do_init(NBITS);
 	}
 
-	mpf_t Kay, ex;
+	mpf_t Kay, ex, scratch, four_Kay;
 	mpf_init(Kay);
 	mpf_init(ex);
+	mpf_init(scratch);
+	mpf_init(four_Kay);
 
-	make_mpf(Kay, 2.0*K, NBITS);
+// hack for feigenbaum:
+K = 1.0 - 0.25* (1.0-K);
 
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
@@ -102,19 +114,20 @@ static void bifurcation_diagram (float *array,
 
 		// The incoming K is always for the top edge of the pixel.
 		// The minus sign on the jitter drives it downwards into the pixel.
-		make_mpf(Kay, 2.0*(K-jit), NBITS);
+		make_random_bitsequence(Kay, 2.0*(K-jit), NBITS);
+		mpf_mul_ui(four_Kay, Kay, 2);
 
 		double t = rand();
 		t /= RAND_MAX;
 		double x = t;
-		make_mpf(ex, x, NBITS);
+		make_random_bitsequence(ex, x, NBITS);
 
 		/* OK, now start iterating the map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
 			// bern(ex, Kay);
-			tent(ex, Kay);
-			// x = feig(x, K);
+			// tent(ex, Kay);
+			feig(ex, four_Kay, scratch);
 
 			// Excluding the settle time, together with the support
 			// normalization really brings out the details and the color
@@ -144,7 +157,8 @@ static void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++)
 		array[j] *= support;
 
-#if SQUARE_INTEGRABLE
+// #define SQUARE_INTEGRABLE
+#ifdef SQUARE_INTEGRABLE
 	// square-integrable norm
 	double norm = 0.0;
 	for (int j=0; j<array_size; j++)
