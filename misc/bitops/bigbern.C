@@ -109,26 +109,40 @@ static void bifurcation_diagram (float *array,
 		double x = t;
 		make_mpf(ex, x, NBITS);
 
-		/* OK, now start iterating the benoulli map */
+		/* OK, now start iterating the map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
 			// bern(ex, Kay);
 			tent(ex, Kay);
 			// x = feig(x, K);
 
-			x = mpf_get_d(ex);
-			double en = array_size * (x-floor(x));
-			int n = en;
-			if (0 > n) n = 0;
-			if (n >= array_size) n = array_size-1;
-			array[n] += 1.0;
-			cnt ++;
+			// Excluding the settle time, together with the support
+			// normalization really brings out the details and the color
+			// in the tent map. Note that 80 = 2 percent of the 4K
+			int settle_time = 80;
+			if (settle_time < iter)
+			{
+				x = mpf_get_d(ex);
+				double en = array_size * (x-floor(x));
+				int n = en;
+				if (0 > n) n = 0;
+				if (n >= array_size) n = array_size-1;
+				array[n] += 1.0;
+				cnt ++;
+			}
 		}
 	}
 
-	int pwid = 0;
+	// Measure the support on the row: the total number of pixels
+	// that had something in them.
+	double support = 0;
 	for (int j=0; j<array_size; j++)
-		if (0.5 < array[j]) pwid ++;
+		if (0.5 < array[j]) support += 1.0;
+	support /= array_size;
+
+	// Bring out the colors
+	for (int j=0; j<array_size; j++)
+		array[j] *= support;
 
 #if SQUARE_INTEGRABLE
 	// square-integrable norm
@@ -155,10 +169,6 @@ static void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++)
 		array[j] *= 2.0*(K-0.5);
 #endif
-
-	// Bring out the colors
-	for (int j=0; j<array_size; j++)
-		array[j] *= ((double) pwid) / ((double) array_size);
 
 }
 
