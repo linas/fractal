@@ -126,6 +126,9 @@ int main (int argc, char* argv[])
 	}
 #endif
 
+#ifdef TERRIBLE_SAMPLING
+	// This attempts to perform sampling, which provides incorrect
+	// results which are confuisig to contemplate. Don't go here.
 	int nrep = atof(argv[3]);
 
 #define NBINS 801
@@ -165,6 +168,7 @@ int main (int argc, char* argv[])
 	fflush (stdout);
 	printf ("# bye\n");
 	fflush (stdout);
+#endif
 
 	exit (0);
 }
