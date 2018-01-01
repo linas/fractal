@@ -1,6 +1,6 @@
 
 /*
- * Recurrance in the transer operator.
+ * Recurrance in the transfer operator.
  *
  * Dec 2017 Linas Vepstas
  */
