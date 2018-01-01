@@ -98,8 +98,11 @@ static void bifurcation_diagram (float *array,
 	{
 		double jit = rand();
 		jit /= RAND_MAX;
-		jit /= 800.0;
-		make_mpf(Kay, 2.0*(K+jit), NBITS);
+		jit /= array_size;
+
+		// The incoming K is always for the top edge of the pixel.
+		// The minus sign on the jitter drives it downwards into the pixel.
+		make_mpf(Kay, 2.0*(K-jit), NBITS);
 
 		double t = rand();
 		t /= RAND_MAX;
@@ -109,8 +112,8 @@ static void bifurcation_diagram (float *array,
 		/* OK, now start iterating the benoulli map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
-			bern(ex, Kay);
-			// tent(ex, Kay);
+			// bern(ex, Kay);
+			tent(ex, Kay);
 			// x = feig(x, K);
 
 			x = mpf_get_d(ex);
@@ -123,6 +126,7 @@ static void bifurcation_diagram (float *array,
 		}
 	}
 
+#if SQUARE_INTEGRABLE
 	// square-integrable norm
 	double norm = 0.0;
 	for (int j=0; j<array_size; j++)
@@ -133,8 +137,10 @@ static void bifurcation_diagram (float *array,
 
 	for (int j=0; j<array_size; j++)
 		array[j] *= norm;
+#endif
 
-#if 0
+#define LP_ONE_NORM
+#ifdef LP_ONE_NORM
 	// lp_norm for p=1. Interesting but ...
 	for (int j=0; j<array_size; j++)
 		array[j] *= ((double) array_size) / ((double) cnt);

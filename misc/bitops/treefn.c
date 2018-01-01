@@ -101,7 +101,8 @@ int main (int argc, char* argv[])
 	double Kay = atof(argv[1]);
 	double why = atof(argv[2]);
 
-#if PLOT_FUNCTION
+#define PLOT_FUNCTION
+#ifdef PLOT_FUNCTION
 	int npts = 1603;
 	for (int i=0; i<npts; i++)
 	{
