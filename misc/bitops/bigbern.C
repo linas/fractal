@@ -111,6 +111,7 @@ K = 1.0 - 0.25* (1.0-K);
 		double jit = rand();
 		jit /= RAND_MAX;
 		jit /= array_size;
+jit *= 0.25; /// argh hack for feigenbaum.
 
 		// The incoming K is always for the top edge of the pixel.
 		// The minus sign on the jitter drives it downwards into the pixel.

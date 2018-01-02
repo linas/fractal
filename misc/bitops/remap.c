@@ -27,7 +27,7 @@ double pdr(double x, double Kay)
 	}
 
 	// Reconstruct x in a mashed bernoulli sequence.
-	double acc = 0.1;
+	double acc = 1.0e-30;
 	for (int i=0; i<50; i++)
 	{
 		acc *= 1.0 / (2.0*Kay);
@@ -57,7 +57,66 @@ double cpr(double y, double K)
 	}
 
 	// Reconstruct x in a ordinary bernoulli sequence.
-	double acc = 0.1;
+	double acc = 1.0e-30;
+	for (int i=0; i<50; i++)
+	{
+		acc *= 0.5;
+		if (nbits[50-i-1])
+		{
+			acc += 0.5;
+		}
+	}
+
+	return acc;
+}
+
+// the tent compressor
+double tent_cpr(double y, double K)
+{
+	// Iterate on y using tent map, and extract symbol dynamics
+	char nbits[50];
+	for (int i=0; i<50; i++)
+	{
+		if (0.5 <= y)
+		{
+			y = 1.0 - y;
+			nbits[i] = 1;
+		}
+		else nbits[i] = 0;
+		y *= 2.0*K;
+	}
+
+	// Reconstruct x in a ordinary bernoulli sequence.
+	double acc = 1.0e-30;
+	for (int i=0; i<50; i++)
+	{
+		acc *= 0.5;
+		if (nbits[50-i-1])
+		{
+			acc += 0.5;
+		}
+	}
+
+	return acc;
+}
+
+// the logistic compressor
+double gist_cpr(double y, double K)
+{
+	// Iterate on y using the logistic map, and extract symbol dynamics
+	char nbits[50];
+	for (int i=0; i<50; i++)
+	{
+		if (0.5 <= y)
+		{
+			nbits[i] = 1;
+		}
+		else nbits[i] = 0;
+		y *= 4.0*K*(1.0-y);
+	}
+
+	// Reconstruct x in a ordinary bernoulli sequence.
+	double acc = 1.0e-30;
 	for (int i=0; i<50; i++)
 	{
 		acc *= 0.5;
@@ -136,8 +195,8 @@ int main (int argc, char* argv[])
 		printf("%d	%g	%g	%g	%g\n", i, x, y, lo, hi);
 #endif
 
-		double y = pdr (x, lam);
-		double z = cpr (y, lam);
+		double y = tent_cpr (x, lam);
+		double z = gist_cpr (x, lam);
 		printf("%d	%g	%g	%g\n", i, x, y, z);
 	}
 }
