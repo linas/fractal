@@ -163,8 +163,8 @@ Bernoulli shift
 \end_layout
 
 \begin_layout Standard
-Consider the classic Bernoulli shift.
- This is the iterated map on the unit interval, given by iteration the function
+The Bernoulli shift (aka the bit-shift map) is an iterated map on the unit
+ interval, given by iteration of the function
 \begin_inset Formula 
 \[
 b(x)=\begin{cases}
@@ -475,6 +475,9 @@ Numerically, this integration can be achieved by randomly sampling a large
 This probability distribution is an eigenstate of the transfer operator
  for the downshift; the definition of the transfer operator of the downshift
  is given later.
+ Probability distributions are the same thing as measures; this particular
+ distribution is invariant under iteration, and thus is often called the
+ invariant measure, or sometimes the Haar measure.
 \end_layout
 
 \begin_layout Standard
@@ -646,7 +649,7 @@ bifurcation diagram
 \begin_inset Quotes erd
 \end_inset
 
- comes from its use to visualize the Feigenbaum iterator.
+ comes from its use to visualize the logistic map iterator.
 \end_layout
 
 \begin_layout Standard
@@ -788,6 +791,117 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Tent Map
+\end_layout
+
+\begin_layout Standard
+The tent map is a closely related iterated map, given by iteration of the
+ function
+\begin_inset Formula 
+\[
+t_{K}(x)=\begin{cases}
+2Kx & \mbox{ for }0\le x<\frac{1}{2}\\
+2K\left(1-x\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+Its similar to the downshift, except that the second arm is reflected backwards,
+ forming a tent.
+ The bifurcation diagram is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tent-Map-Bifur"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tent Map Bifurcation Diagram
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Tent-Map-Bifur"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename tent-4K.png
+	lyxscale 60
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The bifurcation diagram for the tent map.
+ The value of 
+\begin_inset Formula $K$
+\end_inset
+
+ runs from 0.5 at the bottom of the image, to 1.0 at the top.
+ The color scheme is adjusted so that green represents the average value
+ of the distribution, red represents areas of more than double the average
+ value, while blue shows those values that are about half the average value.
+ Note that this is a different color scheme than that used in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+; that scheme would obliterate the lower half of this figure in red.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Logisitic Map
+\end_layout
+
+\begin_layout Standard
+Its conjugate:
+\end_layout
+
+\begin_layout Standard
+with 
 \end_layout
 
 \begin_layout Section
@@ -3022,7 +3136,7 @@ and of these, only three cases matter: where one of the intervals contains
 \end_layout
 
 \begin_layout Standard
-Some insight can be gained by treating all quantities as trings of bits,
+Some insight can be gained by treating all quantities as strings of bits,
  so that, for example,
 \begin_inset Formula 
 \[
