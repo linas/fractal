@@ -135,9 +135,9 @@ The prototype for this effort is the Bernoulli map, which is exactly solvable,
  and can be characterized in a rich variety of ways.
  This has been explored in depth in my other writings, and will not be repeated
  here.
- Two similar maps are the tent map and the logicistic map made famous by
- Feigenbaum.
- These two are not 
+ Two similar maps are the tent map and the logicistic map; the later is
+ particularly famous and well studied.
+ Neither of these maps are 
 \begin_inset Quotes eld
 \end_inset
 
@@ -148,6 +148,8 @@ exactly solvable
  by current technology, even though they can be computed to arbitrary accuracy.
  The goal of this text is to push on the limits of what is possible, of
  what can be extracted from these systems.
+ The approach is to explore, in greater detail, simpler systems that seem
+ to be closely related, and yet might be more tractable.
 \end_layout
 
 \begin_layout Standard
@@ -688,6 +690,7 @@ name "fig:Undershift-Bifurcation-Diagram"
 \align center
 \begin_inset Graphics
 	filename bern-4K.png
+	lyxscale 80
 	width 100col%
 
 \end_inset
@@ -826,11 +829,7 @@ reference "fig:Tent-Map-Bifur"
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -856,7 +855,7 @@ name "fig:Tent-Map-Bifur"
 \begin_inset Graphics
 	filename tent-4K.png
 	lyxscale 60
-	width 90col%
+	width 100col%
 
 \end_inset
 
@@ -884,6 +883,14 @@ reference "fig:Undershift-Bifurcation-Diagram"
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
 
 \end_layout
 
@@ -897,11 +904,139 @@ Logisitic Map
 \end_layout
 
 \begin_layout Standard
-Its conjugate:
+The logistic map is related to the tent map, and is given by iteration of
+ the function
+\begin_inset Formula 
+\[
+f_{K}\left(x\right)=4Kx(1-x)
+\]
+
+\end_inset
+
+It essentially replaces the triangle forming the tent map with a parabola
+ of the same height.
+ That is, the function is defined here so that the the same value of 
+\begin_inset Formula $K$
+\end_inset
+
+ corresponds to the same height for all three maps.
+ Although the heights of the iterators have been aligned so that they match,
+ each exhibts rather dramatically different dynamics.
+ The downshift map has a single fixed point for 
+\begin_inset Formula $K<1/2$
+\end_inset
+
+, and then explodes into a fully chaotic regime above that.
+ By contrast, the logistic map maintains a single fixed point up to 
+\begin_inset Formula $K=3/4$
+\end_inset
+
+, where it famously starts a series of period-doubling bifurcations.
+ The onset of chaos is where the bifurcations come to a limit, at 
+\begin_inset Formula $K=3.56995/4=0.892487$
+\end_inset
+
+.
+ Within this chaotic region are 
+\begin_inset Quotes eld
+\end_inset
+
+islands of stability
+\begin_inset Quotes erd
+\end_inset
+
+, which do not appear in either the downshift, or in the tent map.
+ The tent map does show a period-doubling regime, but in this region, there
+ are no fixed points: rather, the motion is chaotic, but confined to multiple
+ arms.
+ At any rate, the period doubling occurs at different values of 
+\begin_inset Formula $K$
+\end_inset
+
+ than for the logistic map.
 \end_layout
 
 \begin_layout Standard
-with 
+The bifurcation diagram is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Logistic-Map-Bifurcation"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Logistic Map Bifurcation Diagram
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Logistic-Map-Bifurcation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename feig-4K.png
+	lyxscale 60
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The logistic map bifurcation diagram.
+ The value of 
+\begin_inset Formula $K$
+\end_inset
+
+ runs from 0.875 at the bottom of the image, to 1.0 at the top.
+ The color scheme is adjusted so that green represents the average value
+ of the distribution, red represents areas of more than double the average
+ value, while blue shows those values that are about half the average value.
+ Clearly, the orbits of the iterated points spend much of thier time near
+ the edges of the diagram.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1850,8 +1985,18 @@ height "1pt"
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Transfer operators
+\end_layout
+
+\begin_layout Standard
+The discovery and study of invariant measures, as well as of decaying states
+ can be approached via the transfer operator.
+ This is an operator that captures the behavior of a distribution under
+ the action of a map.
+ The invariant measure is an eigenstate of this operator; indeed, it provides
+ a formal defintion for what it means to be invariant under the action of
+ the map.
 \end_layout
 
 \begin_layout Standard
@@ -1869,15 +2014,38 @@ Given an iterated map
 
 \end_inset
 
-For 
-\begin_inset Formula $g(x)$
+The left adjoint of the transfer operator is the composition operator (Koopman
+ operator).
+ This is defined as 
+\begin_inset Formula 
+\[
+\left[\mathcal{C}_{g}f\right]\left(y\right)=f\left(g\left(y\right)\right)
+\]
+
 \end_inset
 
- the map 
+The Koopman operator is adjoint, in the sense that 
+\begin_inset Formula $\mathcal{L}_{g}\mathcal{C}_{g}=1$
+\end_inset
+
+ but that, in general, 
+\begin_inset Formula $\mathcal{C}_{g}\mathcal{L}_{g}\ne1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+The Downshift Transfer Operator
+\end_layout
+
+\begin_layout Standard
+The transfer operator for the downshift map 
 \begin_inset Formula $b_{K}(x)$
 \end_inset
 
- one gets
+ is
 \begin_inset Formula 
 \begin{equation}
 \left[\mathcal{L}_{K}f\right]\left(y\right)=\begin{cases}
@@ -2090,7 +2258,7 @@ almost
 \end_inset
 
  an eigenfunction.
- However, its not quire right; in this definition, 
+ However, its not quite right; in this definition, 
 \begin_inset Formula $\mbox{ei}_{K}\left(x\right)\ne0$
 \end_inset
 
@@ -3314,9 +3482,23 @@ reference "fig:Undershift-Bifurcation-Diagram"
 
 \end_inset
 
-, xx and yy are clearly self-similar in some obscure way: it is visually
- clear, but providing a simple algebraic expression describing the similarity
- is difficult; I have not been successful in this.
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tent-Map-Bifur"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Logistic-Map-Bifurcation"
+
+\end_inset
+
+ are clearly self-similar in some obscure way: it is visually clear, but
+ providing a simple algebraic expression describing the similarity is difficult;
+ I have not been successful in this.
  None-the-less, it seems self-evident that it will be the dyadic monoid
  that is somehow responsible for, or underlying the symmetries (unless,
  of course, there is some other, as yet undiscovered structure).
