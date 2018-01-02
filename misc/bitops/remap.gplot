@@ -1,11 +1,15 @@
 
-# set term png size 640, 480
-# set out 'remap.png'
+set term png size 640, 480
+set out 'remap.png'
 
 set style data lines
 set key left
 
+plot "remap.dat" using 2:3 title "ei" linewidth 2, \
+     "remap.dat" using 2:($4+$5) title "Lei" linewidth 2
+
 ########################################################
+# Used to generate figure for the paper.
 #
 # set term postscript eps color
 # set out 'cpr.eps'
@@ -24,18 +28,19 @@ set key left
 # set ylabel "cpr"
 # 
 ########################################################
-
-set term postscript eps color
-set out 'pdr.eps'
-
-set title "Expander Function pdr"
-set xlabel "y"
-set ylabel "pdr"
-
-set yrange [:4.5]
-
-plot "cpr-0.55.dat" using 2:4 title "K=0.55" linewidth 2, \
-     "cpr-0.6.dat" using 2:4 title "K=0.6" linewidth 2, \
-     "cpr-0.8.dat" using 2:4 title "K=0.8" linewidth 2, \
-     "cpr-0.9.dat" using 2:4 title "K=0.9" linewidth 2
-
+# 
+# set term postscript eps color
+# set out 'pdr.eps'
+# 
+# set title "Expander Function pdr"
+# set xlabel "y"
+# set ylabel "pdr"
+# 
+# set yrange [:4.5]
+# 
+# plot "cpr-0.55.dat" using 2:4 title "K=0.55" linewidth 2, \
+#      "cpr-0.6.dat" using 2:4 title "K=0.6" linewidth 2, \
+#      "cpr-0.8.dat" using 2:4 title "K=0.8" linewidth 2, \
+#      "cpr-0.9.dat" using 2:4 title "K=0.9" linewidth 2
+# 
+###########################################################

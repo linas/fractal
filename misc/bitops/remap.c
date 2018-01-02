@@ -82,8 +82,13 @@ double xeig(double y, double K)
 
 double eig(double y, double K)
 {
-	// if (1.0 < y) return 0.0;
-	return cpr(y,K) - y;
+// y *= 3.0;
+	y -= floor(y);
+// if (K < y) return 0.0;
+// if (0.5*K < y && y < 0.5) return 0.0;
+// if (K < y) y -= 1;
+// if (K < y) y -= K;
+	return cpr(y,K) - 0.5;
 }
 
 int main (int argc, char* argv[])
@@ -96,9 +101,9 @@ int main (int argc, char* argv[])
 	double lam = atof(argv[1]);
 
 	int npts = 803;
-	for (int i=0; i<=npts; i++)
+	for (int i=0; i<npts; i++)
 	{
-		double x = ((double) i)/ ((double) npts);
+		double x = (((double) i) + 0.5)/ ((double) npts);
 #ifdef BASICS
 		double y = pdr (x, lam);
 		double z = cpr (x, lam);
