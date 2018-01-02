@@ -100,7 +100,7 @@ int main (int argc, char* argv[])
 	}
 	double lam = atof(argv[1]);
 
-	int npts = 803;
+	int npts = 3803;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
@@ -128,12 +128,16 @@ int main (int argc, char* argv[])
 		double skam = cpr (lam*x, lam);
 		printf("%d	%g	%g	%g	%g	%g	%g	%g\n", i, x, y, skalo, skahi, lo, hi, skam);
 #endif
-#define EIG
+// #define EIG
 #ifdef EIG
 		double y = eig (x, lam);
 		double lo = eig (x/(2.0*lam), lam);
 		double hi = eig ((lam+x)/(2.0*lam), lam);
 		printf("%d	%g	%g	%g	%g\n", i, x, y, lo, hi);
 #endif
+
+		double y = pdr (x, lam);
+		double z = cpr (y, lam);
+		printf("%d	%g	%g	%g\n", i, x, y, z);
 	}
 }

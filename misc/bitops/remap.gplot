@@ -1,12 +1,17 @@
 
 set term png size 640, 480
+set term png size 1024, 768
 set out 'remap.png'
 
 set style data lines
 set key left
 
-plot "remap.dat" using 2:3 title "ei" linewidth 2, \
-     "remap.dat" using 2:($4+$5) title "Lei" linewidth 2
+# Exploration of self-similarity
+#
+# plot "remap.dat" using 2:3 title "ei" linewidth 2, \
+#      "remap.dat" using 2:($4+$5) title "Lei" linewidth 2
+
+plot "remap.dat" using 2:($4-$2) title "cpr(pdr(x))"
 
 ########################################################
 # Used to generate figure for the paper.
