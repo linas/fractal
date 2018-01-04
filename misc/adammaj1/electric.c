@@ -209,7 +209,7 @@ double complex give_c(int iX, int iY){
 // http://linas.org/art-gallery/escape/ray.html
 double complex GiveGradient(double complex C ){
 
-  double g; // gradient
+  double complex g; // gradient
   int i; // iteration
   double complex Z  = 0.0; // initial value for iteration Z0
   double complex dZ = 1.0; // derivative with respect to c
@@ -220,7 +220,7 @@ double complex GiveGradient(double complex C ){
   for(i=0;i<IterationMax;i++)
     {
       
-      dZ = 2 * Z * dZ +1.0; // derivative
+      dZ = 2.0 * Z * dZ +1.0; // derivative
       Z=Z*Z+C; // complex quadratic map
       if(cabs(Z)>EscapeRadius) break; // bailout test 
     }
@@ -237,12 +237,25 @@ double complex GiveGradient(double complex C ){
   //m = m/IterationMax; // normalize = map to [0,1]
   
   
-  // the Douady-Hubbard potential is just f = e-m log2 = 2-m
+  // the Douady-Hubbard potential is just f = exp(-m log2) = 2^{-m}
+  // where ^ means superscript:  so a^b = a raised to power b.
+  // This is TeX/LaTex notation (e.g. wikipedia math formulas).
   double potential = pow(2,-m);
-  // 2Df = m zn Dzn / |zn|2 log |zn|
+
+  // 2Df = 2^{-m} (zbar)_n Dz_n / |z_n|^2 log |z_n|
+  // where zbar is the complex conjugate of z.
+  // This is because:...
+  // |z|^2 = zbar z
+  // and thus d|z| = d sqrt(zbar z) = 0.5 d(zbar z) / sqrt(zbar z)
+  // = 0.5 zbar dz / sqrt(zbar z) = 0.5 zbar dz / |z|
+  //
+  // notice that d zbar = 0  which is why d(zbar z) = zbar dz
+  // this is because zbar only depends on cbar and d cbar = 0 by
+  // orthogonality. So by defintion dc = 1
  
-  g = potential*cabs(Z*dZ)/(cabsZ*cabsZ*log(cabsZ));
-  
+  double complex Zbar = conj(Z);
+  g = potential * Zbar * dZ / (cabsZ*cabsZ*log(cabsZ));
+
   return g;
 }
  
@@ -270,7 +283,9 @@ int ComputeAndSavePixelColor(int iX, int iY){
   C = give_c(iX, iY);
    
   g = GiveGradient(C);
-  ga = carg(g); 
+
+  // ga = (carg(g) + M_PI)/(2.0*M_PI);
+  ga = 1.0 - GiveTurn(g);
   
   // index of 1D memory array
   k = f(iX, iY);  
