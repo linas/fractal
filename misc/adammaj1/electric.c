@@ -104,10 +104,10 @@ double PixelHeight; // =(CyMax-CyMin)/iHeight;
 int ColorBytes = 3; // 3*8 = 24 bit color        
 
 /* iterations  */
-const int IterationMax=18;
+const int IterationMax=88;
 
 /* bail-out value , radius of circle ;  */
-const double EscapeRadius=3.0;
+const double EscapeRadius=300.0;
 double log_2; // = log(2.0);
        
 // memmory virtual 1D array 
@@ -149,6 +149,13 @@ void GiveLinasColor(double position , int k, unsigned char c[])
     c[k] = (unsigned char) (210 + (3*(i-180))/4);
     c[k+1] = (unsigned char) (510 - 2*i);
     c[k+2] = (unsigned char) (i-180)/3;
+  }
+
+  /* Pure red set it to 240 not 255, just like above. */
+  if (iMax <= i) {
+    c[k] = 240;
+    c[k+1] = 0;
+    c[k+2] = 0;
   }
    
 }
@@ -206,11 +213,14 @@ double complex GiveGradient(double complex C ){
   //m = m/IterationMax; // normalize = map to [0,1]
   
   
-  // the Douady-Hubbard potential is just f = e-m log2 = 2-m
+  // the Douady-Hubbard potential is just f = exp(-m log2) = 2^-m
   double potential = pow(2,-m);
-  // 2Df = m zn Dzn / |zn|2 log |zn|
+
+  // Thereforre the graident of the potential is ... 
+  // 2Df = 2^-m zn Dzn / |zn|^2 log |zn|
  
-  g = potential*Z*dZ/(cabsZ*cabsZ*log(cabsZ));
+  // g = potential*Z*dZ/(cabsZ*cabsZ*log(cabsZ));
+  g = potential*cabs(Z*dZ)/(cabsZ*cabsZ*log(cabsZ));
   
   return g;
 }
