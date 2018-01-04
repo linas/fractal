@@ -1,6 +1,7 @@
 
 /* 
 
+
    http://linas.org/art-gallery/escape/ray.html
    image : 
    http://linas.org/art-gallery/escape/electric.gif
@@ -82,8 +83,8 @@ Maybe make a chic lightning rod for the barn. " Linas Vepstas
  
 /* screen ( integer) coordinate */
 
-const int iWidth  = 500; 
-const int iHeight = 500;
+const int iWidth  = 1000; 
+const int iHeight = 1000;
 
 
 /* world ( double) coordinate = parameter plane*/
@@ -174,6 +175,45 @@ double complex give_c(int iX, int iY){
  
 }
  
+
+double complex GiveGradient(double complex C ){
+
+  double g; 
+  int i; // iteration
+  double complex Z  = 0.0; // initial value for iteration Z0
+  double complex dZ = 1.0; // derivative with respect to c
+ // https://en.wikibooks.org/wiki/Fractals/Iterations_in_the_complex_plane/def_cqp#Derivative_with_respect_to_c 
+  
+  
+  // iteration
+  for(i=0;i<IterationMax;i++)
+    {
+      
+      dZ = 2 * Z * dZ +1.0; 
+      Z=Z*Z+C; 
+      if(cabs(Z)>EscapeRadius) break; // bailout test 
+    }
+   
+     
+  
+    
+  // the renormalized, fractional iteration count
+  // m(R) = n+1 - log(log |zn|) / log 2
+  // http://linas.org/art-gallery/escape/escape.html
+  double cabsZ = cabs(Z);  
+  
+  double m = i + 1.0 - log(log(cabsZ))/log_2;
+  //m = m/IterationMax; // normalize = map to [0,1]
+  
+  
+  // the Douady-Hubbard potential is just f = e-m log2 = 2-m
+  double potential = pow(2,-m);
+  // 2Df = m zn Dzn / |zn|2 log |zn|
+ 
+  g = potential*Z*dZ/(cabsZ*cabsZ*log(cabsZ));
+  
+  return g;
+}
  
 
 
@@ -181,46 +221,21 @@ int ComputeAndSavePixelColor(int iX, int iY){
  
   
   complex double C;
-  int i; // iteration
-  double complex Z= 0.0; // initial value for iteration Z0
+  double complex g;
+  double gm;
   int k; // index of the 1D array
-  double complex dZ = 1.0; // derivative with respect to z 
    
   C = give_c(iX, iY);
    
-  // iteration
-  for(i=0;i<IterationMax;i++)
-    {
-      
-      dZ = 2 * Z * dZ + 1.0; 
-      Z=Z*Z+C; 
-      if(cabs(Z)>EscapeRadius) break; // bailout test 
-    }
-   
-/*
-printf("C = %g %g\n", creal(C), cimag(C));
-printf("final Z = %g %g\n", creal(Z), cimag(Z));
-printf("final dZ = %g %g\n", creal(dZ), cimag(dZ));
-*/
-     
+  g = GiveGradient(C);
+  gm = cabs(g); 
+  
   // index of 1D memory array
   k = f(iX, iY);  
-    
-  // the renormalized, fractional iteration count
-  // m(R) = n+1 - log(log |zn|) / log 2
-  // http://linas.org/art-gallery/escape/escape.html
-    
-  double m = i + 1.0 - log(log(cabs(Z)))/log_2;
-   // m = m/IterationMax; // normalize = map to [0,1]
-  // the Douady-Hubbard potential is just f = e-m log2 = 2-m
-  double potential = pow(2,-m);
-  // 2Df = m zn Dzn / |zn|2 log |zn|
-  double cabsZ = cabs(Z);
-  double g = potential*Z*dZ/(cabsZ*cabsZ*log(cabsZ));
-  g = cabs(g); 
+  
    
   //Apply this method to both exterior and interior 
-  GiveLinasColor(g , k,  data); // 
+  GiveLinasColor(gm , k,  data); // 
       
     
  
