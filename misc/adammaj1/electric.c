@@ -1,7 +1,6 @@
 
 /* 
 
-
    http://linas.org/art-gallery/escape/ray.html
    image : 
    http://linas.org/art-gallery/escape/electric.gif
@@ -83,8 +82,8 @@ Maybe make a chic lightning rod for the barn. " Linas Vepstas
  
 /* screen ( integer) coordinate */
 
-const int iWidth  = 1000; 
-const int iHeight = 1000;
+const int iWidth  = 500; 
+const int iHeight = 500;
 
 
 /* world ( double) coordinate = parameter plane*/
@@ -193,11 +192,16 @@ int ComputeAndSavePixelColor(int iX, int iY){
   for(i=0;i<IterationMax;i++)
     {
       
-      dZ = 2 * Z * dZ ; 
+      dZ = 2 * Z * dZ + 1.0; 
       Z=Z*Z+C; 
       if(cabs(Z)>EscapeRadius) break; // bailout test 
     }
    
+/*
+printf("C = %g %g\n", creal(C), cimag(C));
+printf("final Z = %g %g\n", creal(Z), cimag(Z));
+printf("final dZ = %g %g\n", creal(dZ), cimag(dZ));
+*/
      
   // index of 1D memory array
   k = f(iX, iY);  
