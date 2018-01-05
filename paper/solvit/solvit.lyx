@@ -3305,7 +3305,7 @@ The corresponding transfer operator is
 \end_layout
 
 \begin_layout Subsection
-Eigenfunctions
+Monomial Eigenfunctions
 \end_layout
 
 \begin_layout Standard
@@ -3336,6 +3336,65 @@ Some properties can be guessed at directly.
 \end_layout
 
 \begin_layout Standard
+Clearly, 
+\begin_inset Formula $f\left(x\right)=x^{n}$
+\end_inset
+
+ is an eigenfunction, with eigenvalue 
+\begin_inset Formula $1/K^{n+1}$
+\end_inset
+
+.
+ If one considers multiplication only to operate on the positive real-number
+ line, then 
+\begin_inset Formula $n$
+\end_inset
+
+ need not be an integer.
+ In other words, the multiplication operator has a continuous spectrum in
+ this situation.
+\end_layout
+
+\begin_layout Standard
+If the domain of the operator is extended to functions on the non-negative
+ real-number line, then 
+\begin_inset Formula $n$
+\end_inset
+
+ must be positive, as otherwise 
+\begin_inset Formula $f\left(0\right)$
+\end_inset
+
+ is ill-defined.
+ But if 
+\begin_inset Formula $n$
+\end_inset
+
+ is positive, then (for 
+\begin_inset Formula $K<1$
+\end_inset
+
+) the multiplication operator only has eigenvalues greater than one, which
+ is not, in general, very desirable.
+\end_layout
+
+\begin_layout Standard
+If the domain of the multiplication operator is extended to the entire real-numb
+er line, then 
+\begin_inset Formula $n$
+\end_inset
+
+ is forced to be an integer, in order to avoid issues due to multi-valued
+ functions.
+ Extending the domain to the complex plane leads us astry, and so we will
+ not go there.
+\end_layout
+
+\begin_layout Subsection
+A Fractal Eigenfunction
+\end_layout
+
+\begin_layout Standard
 The compressor function is also an eigenfunction.
  It was previously observed in eqn 
 \begin_inset CommandInset ref
@@ -3353,6 +3412,10 @@ reference "eq:compressor self-sim"
 \end_inset
 
 whenever 
+\begin_inset Formula $1/2<K\le1$
+\end_inset
+
+ and 
 \begin_inset Formula $0\le x<K$
 \end_inset
 
@@ -3368,8 +3431,16 @@ whenever
 \begin_inset Formula $1/2K$
 \end_inset
 
-, if it could be extended to the entire real-number line.
- This can be done as follows.
+, provided that it can be extended to 
+\begin_inset Formula $1<K$
+\end_inset
+
+ and for arguments 
+\begin_inset Formula $1<x$
+\end_inset
+
+.
+ The latter can be done as follows.
  Define the extended function, valid for 
 \begin_inset Formula $0\le x<\infty$
 \end_inset
@@ -3391,7 +3462,94 @@ The extension is performed simply by treating the self-similarity as a recurrenc
 e relation, which can be iterated to move the argument into a region where
  the original defintion was sufficient.
  In essence, one applies a right-shift operator to reduce the argument.
+ Since the mutuplication operator is odd about 
+\begin_inset Formula $x=0$
+\end_inset
+
+, on can trivially extend this to negative 
+\begin_inset Formula $x$
+\end_inset
+
+ by defining 
+\begin_inset Formula $\mbox{ecpr}_{K}\left(-x\right)=-\mbox{ecpr}_{K}\left(x\right)$
+\end_inset
+
+.
  
+\end_layout
+
+\begin_layout Standard
+XXX Foobar – for 
+\begin_inset Formula $1<K$
+\end_inset
+
+ its not a function any more, its a devil's staircase.
+ so foobar'ed.
+ 
+\end_layout
+
+\begin_layout Standard
+Note that the original 
+\begin_inset Formula $\mbox{cpr}_{K}\left(x\right)$
+\end_inset
+
+ also had a translation symmetry: the upper half was equal to the lower
+ half.
+ This translation symmetry has been lost, since after all, multiplication
+ does not preserve translation.
+\end_layout
+
+\begin_layout Standard
+The ecpr function is not square integrable; it does not have an 
+\begin_inset Formula $L_{p}$
+\end_inset
+
+-norm for any 
+\begin_inset Formula $p$
+\end_inset
+
+; and this is no surprise, as its hard to imagine how it could be otherwise,
+ for a function to be self-similar under scaling.
+ 
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $\mbox{hpr}_{K}\left(x\right)=\mbox{ecpr}_{K/2}\left(x\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mbox{hpr}_{K}\left(x^{n}\right)$
+\end_inset
+
+ is an eigenfunction of 
+\begin_inset Formula $\mathcal{M}_{K}$
+\end_inset
+
+ with associated eigenvalue 
+\begin_inset Formula $1/2K^{n}$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $K<1$
+\end_inset
+
+, this has a decaying spectrum for 
+\begin_inset Formula $n<-\log2/\log K$
+\end_inset
+
+.
+ Many figures show in this text illustrate 
+\begin_inset Formula $K=0.8$
+\end_inset
+
+; for this value, any 
+\begin_inset Formula $n\lesssim3.1$
+\end_inset
+
+ will be associated with a decaying eigenvalue.
 \end_layout
 
 \begin_layout Subsection
@@ -3482,7 +3640,7 @@ Carry-bit dynamics
 
 \begin_layout Standard
 So, what do we mean by carry-bit dynamics? This is best illustrated first
- through addition
+ through addition...
 \end_layout
 
 \begin_layout Section

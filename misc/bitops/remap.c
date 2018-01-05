@@ -224,6 +224,7 @@ int main (int argc, char* argv[])
 		exit (1);
 	}
 	double lam = atof(argv[1]);
+	double rng = atof(argv[2]);
 
 #if 1
 	int npts = 3803;
@@ -256,10 +257,12 @@ int main (int argc, char* argv[])
 #endif
 #define CPR_SIM_EXT 1
 #ifdef CPR_SIM_EXT
-		// x *= 9.0;
-		double y = cpr (x, lam);
-		double ey = extcpr (x, lam);
-		double sam = extcpr (x/(2.0*lam), lam);
+		x *= rng;
+		double xx = x;
+		// double y = cpr (x, lam);
+		double y = extcpr (x, lam);
+		double ey = extcpr (xx, lam);
+		double sam = extcpr (xx/(2.0*lam), lam);
 		printf("%d	%g	%g	%g	%g\n", i, x, y, ey, sam);
 #endif
 // #define EIG

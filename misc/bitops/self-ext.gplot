@@ -8,6 +8,10 @@ set title "Compressor Function cpr"
 set xlabel "y"
 set ylabel "cpr"
 
+# set logscale x
+# set logscale y
+# set xrange [0.001: 0.1]
+
 set out 'skext.png'
 
 # This works and shows that cpr(x/2) = cpr(Kx)/2
@@ -15,6 +19,8 @@ set out 'skext.png'
 plot "skext.dat" using 2:3 title "cpr" linewidth 2, \
      "skext.dat" using 2:4 title "ecpr" linewidth 2, \
      "skext.dat" using 2:5 title "ecpr(x/2K)" linewidth 2, \
-     "skext.dat" using 2:(2*$5) title "2*ecpr(x/2K)" linewidth 2, \
+     "skext.dat" using 2:(1.97*$5) title "1.99*ecpr(x/2K)" linewidth 2, \
+     "skext.dat" using 2:(exp(1.48*log($2))) title "pow" linewidth 2, \
+
 
 
