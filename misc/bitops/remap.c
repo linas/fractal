@@ -216,6 +216,21 @@ double eig(double y, double K)
 	return cpr(y,K) - 0.5;
 }
 
+double bogus(double y, double K, double w)
+{
+	if (1.0 <= y && y < K)
+	{
+		double c = (1.0+K)/2.0;
+		double x = (y-c)/(1.0-c);
+		if (-0.5<x && x < -0.45) return 0.2; 
+		if (-0.35<x && x < -0.3) return 1.2; 
+		return 1.0 - x*x;
+	}
+	if (K <= y)
+		return w * bogus(y/K, K, w);
+	return  bogus(K*y, K, w) / w;
+}
+
 int main (int argc, char* argv[])
 {
 	if (argc < 2)
@@ -227,7 +242,7 @@ int main (int argc, char* argv[])
 	double rng = atof(argv[2]);
 
 #if 1
-	int npts = 3803;
+	int npts = 16803;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
@@ -255,7 +270,7 @@ int main (int argc, char* argv[])
 		double skam = cpr (lam*x, lam);
 		printf("%d	%g	%g	%g	%g	%g	%g	%g\n", i, x, y, skalo, skahi, lo, hi, skam);
 #endif
-#define CPR_SIM_EXT 1
+// #define CPR_SIM_EXT 1
 #ifdef CPR_SIM_EXT
 		x *= rng;
 		double xx = x;
@@ -264,6 +279,13 @@ int main (int argc, char* argv[])
 		double ey = extcpr (xx, lam);
 		double sam = extcpr (xx/(2.0*lam), lam);
 		printf("%d	%g	%g	%g	%g\n", i, x, y, ey, sam);
+#endif
+#define BOGUS 1
+#ifdef BOGUS
+		x *= 10;
+		double y = bogus (x, lam, rng);
+		double z = bogus (lam*x, lam, rng) / rng;
+		printf("%d	%g	%g	%g\n", i, x, y, z);
 #endif
 // #define EIG
 #ifdef EIG
