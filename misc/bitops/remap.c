@@ -70,6 +70,13 @@ double cpr(double y, double K)
 	return acc;
 }
 
+double extcpr(double y, double K)
+{
+	if (y < K) return cpr(y, K);
+	return 2.0 * extcpr(y/(2.0*K), K);
+}
+
+
 // deconstruct/reconstruct
 // should be same as pdr(cpr(x))
 double der(double y, double K)
@@ -218,7 +225,7 @@ int main (int argc, char* argv[])
 	}
 	double lam = atof(argv[1]);
 
-#if 0
+#if 1
 	int npts = 3803;
 	for (int i=0; i<npts; i++)
 	{
@@ -247,6 +254,14 @@ int main (int argc, char* argv[])
 		double skam = cpr (lam*x, lam);
 		printf("%d	%g	%g	%g	%g	%g	%g	%g\n", i, x, y, skalo, skahi, lo, hi, skam);
 #endif
+#define CPR_SIM_EXT 1
+#ifdef CPR_SIM_EXT
+		// x *= 9.0;
+		double y = cpr (x, lam);
+		double ey = extcpr (x, lam);
+		double sam = extcpr (x/(2.0*lam), lam);
+		printf("%d	%g	%g	%g	%g\n", i, x, y, ey, sam);
+#endif
 // #define EIG
 #ifdef EIG
 		double y = eig (x, lam);
@@ -255,15 +270,19 @@ int main (int argc, char* argv[])
 		printf("%d	%g	%g	%g	%g\n", i, x, y, lo, hi);
 #endif
 
+#ifdef ADJOINT
 		// double y = tent_cpr (x, lam);
 		// double z = gist_cpr (x, lam);
 		double y = der (x, lam);
 		double t = cpr(x, lam);
 		double z = pdr(t, lam);
 		printf("%d	%g	%g	%g\n", i, x, y, z);
+#endif
 	}
 #endif
 
+#ifdef LENGTH_OF_ALL_ONES
+	// Verify the length formula for continguous runs of all-ones.
 	int npts = 180;
 	for (int i=0; i<npts; i++)
 	{
@@ -273,4 +292,5 @@ int main (int argc, char* argv[])
 		p = ceil(p);
 		printf("%d	%g	%g	%g %g\n", i, lam, w, p, w-p);
 	}
+#endif
 }

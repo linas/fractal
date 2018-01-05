@@ -1687,9 +1687,9 @@ Equivalently, for
 
  one can trivially restate the above as
 \begin_inset Formula 
-\[
-\mbox{cpr}_{K}\left(\frac{y}{2K}\right)=\frac{1}{2}\mbox{cpr}_{K}\left(y\right)
-\]
+\begin{equation}
+\mbox{cpr}_{K}\left(\frac{y}{2K}\right)=\frac{1}{2}\mbox{cpr}_{K}\left(y\right)\label{eq:compressor self-sim}
+\end{equation}
 
 \end_inset
 
@@ -3301,7 +3301,109 @@ The corresponding transfer operator is
 
 \end_inset
 
-which has matrix elements
+
+\end_layout
+
+\begin_layout Subsection
+Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+Some properties can be guessed at directly.
+ Obviously, 
+\begin_inset Formula $f=\mbox{const.}$
+\end_inset
+
+ is a decaying/growing eigenfunction, depending on whether 
+\begin_inset Formula $K>1$
+\end_inset
+
+ or not.
+ That is, one should imagine 
+\begin_inset Formula $f=\mbox{const.}$
+\end_inset
+
+ as a uniform distribution of dust; with each iteration, it is spread either
+ farther apart (
+\begin_inset Formula $K>1$
+\end_inset
+
+) or bunched closer together (
+\begin_inset Formula $K<1$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The compressor function is also an eigenfunction.
+ It was previously observed in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:compressor self-sim"
+
+\end_inset
+
+ that 
+\begin_inset Formula 
+\[
+\mbox{cpr}_{K/2}\left(\frac{x}{K}\right)=\frac{1}{2}\mbox{cpr}_{K/2}\left(x\right)
+\]
+
+\end_inset
+
+whenever 
+\begin_inset Formula $0\le x<K$
+\end_inset
+
+ and so, 
+\begin_inset Formula $\mbox{cpr}_{K/2}$
+\end_inset
+
+ is potentially be an eigenfunction of 
+\begin_inset Formula $\mathcal{M}_{K}$
+\end_inset
+
+ with eignevalue 
+\begin_inset Formula $1/2K$
+\end_inset
+
+, if it could be extended to the entire real-number line.
+ This can be done as follows.
+ Define the extended function, valid for 
+\begin_inset Formula $0\le x<\infty$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+\mbox{ecpr}_{K}\left(x\right)=\begin{cases}
+\mbox{cpr}_{K}\left(x\right) & \mbox{if }0\le x<K\\
+2\mbox{cpr}_{K}\left(\frac{x}{2K}\right) & \mbox{if }K\le x<2K^{2}\\
+4\mbox{cpr}_{K}\left(\frac{x}{4K^{2}}\right) & \mbox{if }2K^{2}\le x<4K^{3}\\
+2^{n}\mbox{cpr}_{K}\left(\frac{x}{\left(2K\right)^{n}}\right) & \mbox{if }K\left(2K\right)^{n-1}\le x<K\left(2K\right)^{n}
+\end{cases}
+\]
+
+\end_inset
+
+The extension is performed simply by treating the self-similarity as a recurrenc
+e relation, which can be iterated to move the argument into a region where
+ the original defintion was sufficient.
+ In essence, one applies a right-shift operator to reduce the argument.
+ 
+\end_layout
+
+\begin_layout Subsection
+Haar Basis Matrix Elements
+\end_layout
+
+\begin_layout Standard
+The multiplication operator 
+\begin_inset Formula $\mathcal{M}_{K}$
+\end_inset
+
+ has matrix elements in the standard Haar basis:
 \begin_inset Formula 
 \begin{align*}
 \left\langle mi\left|{\cal M}_{K}\right|nj\right\rangle = & \int_{-\infty}^{\infty}h_{mi}\left(x\right)\left[\mathcal{M}_{K}h_{nj}\right]\left(x\right)dx\\
@@ -3330,8 +3432,9 @@ Instead of confining oneself to the unit interval, here it is convenient
 
 \end_inset
 
-and of these, only three cases matter: where one of the intervals contains
- an edge transition of the other interval.
+This holds in three cases: where one of the intervals contains an edge transitio
+n (left, middle or right) of the other interval, without also containing
+ the other two.
 \end_layout
 
 \begin_layout Standard

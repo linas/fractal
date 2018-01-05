@@ -1,0 +1,20 @@
+
+set term png size 1024, 768
+
+set style data lines
+set key left
+
+set title "Compressor Function cpr"
+set xlabel "y"
+set ylabel "cpr"
+
+set out 'skext.png'
+
+# This works and shows that cpr(x/2) = cpr(Kx)/2
+#
+plot "skext.dat" using 2:3 title "cpr" linewidth 2, \
+     "skext.dat" using 2:4 title "ecpr" linewidth 2, \
+     "skext.dat" using 2:5 title "ecpr(x/2K)" linewidth 2, \
+     "skext.dat" using 2:(2*$5) title "2*ecpr(x/2K)" linewidth 2, \
+
+
