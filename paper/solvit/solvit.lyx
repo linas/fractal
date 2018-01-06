@@ -3708,52 +3708,333 @@ n (left, middle or right) of the other interval, without also containing
  the other two.
 \end_layout
 
+\begin_layout Subsection
+The Shift and Add algorithm
+\end_layout
+
 \begin_layout Standard
-Some insight can be gained by treating all quantities as strings of bits,
- so that, for example,
+One can model the multiplication of real numbers with a number of different
+ algorithms applied to bit strings.
+ One of the simplest such algorithms is the shift-and-add algorithm, described
+ here.
+ Its just elementary-school long-form multiplication, applied to the binary
+ expansions of the numbers.
+ 
+\end_layout
+
+\begin_layout Standard
+There's a point worth laboring on: a bit string representing a real number
+ is not the same thing as the real number.
+ There are more bit-strings than there are real numbers.
+ Most famously, the two bit strings 
+\begin_inset Formula $0.0111\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $0.1000\cdots$
+\end_inset
+
+ are two obviously distinct bit-strings, but they represent the same real
+ number: one-half.
+ All real numbers of the form 
+\begin_inset Formula $j/2^{n}$
+\end_inset
+
+ (the 
+\begin_inset Quotes eld
+\end_inset
+
+dyadic rationals
+\begin_inset Quotes erd
+\end_inset
+
+) will always have dual representations; all other real numbers have a single,
+ unique representation.
+ These correspond to the 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+ in the Cantor set, or, equivalently, neighboring infinite branches in the
+ finite binary tree.
+ Bit-strings are not real numbers.
+ They're just a usable model of them.
+ The usablity is somewhat limited; its OK for working with individual points,
+ but fails miserably for the topologies: the canonical topology on the reals
+ is sharply different than the product topology on 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The goal is to compute the product 
+\begin_inset Formula $Kx$
+\end_inset
+
+ with 
+\begin_inset Formula $0\le K\le1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ so that the product is 
+\begin_inset Formula $0\le Kx\le1$
+\end_inset
+
+.
+ Both 
+\begin_inset Formula $K$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ are represented by thier binary expansions.
+ Let the binary expansions be
 \begin_inset Formula 
 \[
-K=0.b_{1}b_{2}\cdots=\sum_{n=1}^{\infty}b_{n}2^{-n}
+x=0.b_{0}b_{1}b_{2}\cdots=\sum_{n=0}^{\infty}b_{n}2^{-n-1}
 \]
 
 \end_inset
 
-where each 
-\begin_inset Formula $b_{n}$
-\end_inset
-
- is either zero or one.
- Thus, the first interval can be thought of as fixing the first 
-\begin_inset Formula $m$
-\end_inset
-
- bits of a bit-sequence.
- Unfortunately, there is no way of writing the product 
-\begin_inset Formula $Kj$
-\end_inset
-
- in closed form in terms of the bits 
-\begin_inset Formula $b_{n}$
-\end_inset
-
-.
- Computing 
-\begin_inset Formula $Kj$
-\end_inset
-
- requires the use of a carry-bit, and the carry-bit can propagate arbitrarily
- far, in complex ways.
- That is, multiplication is a recursive algorithm when performed on bit-strings,
- and the dynamics of the carry bit is chaotic.
-\end_layout
-
-\begin_layout Subsection
-Carry-bit dynamics
+and
 \end_layout
 
 \begin_layout Standard
-So, what do we mean by carry-bit dynamics? This is best illustrated first
- through addition...
+\begin_inset Formula 
+\[
+K=0.c_{0}c_{1}c_{2}\cdots=\sum_{n=0}^{\infty}c_{n}2^{-n-1}
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ are either 0 or 1, always.
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+ to be the non-negative integer
+\begin_inset Formula 
+\[
+s_{n}=b_{n}c_{0}+b_{n-1}c_{1}+\cdots+b_{0}c_{n}=\sum_{k=0}^{n}b_{k}c_{n-k}
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $0\le s_{n}\le n+1$
+\end_inset
+
+.
+ It is useful to visualize this in terms of the elementary school shifted
+ tabular form:
+\begin_inset Formula 
+\[
+\begin{array}{c}
+\begin{array}{ccccc}
+b_{0} & b_{1} & b_{2} & b_{3} & \cdots\\
+ & b_{0} & b_{1} & b_{2} & \cdots\\
+ &  & b_{0} & b_{1} & \cdots\\
++ &  &  & b_{0} & \cdots
+\end{array}\\
+\mbox{-----------------------------}\\
+\begin{array}{ccccc}
+s_{0} & s_{1} & s_{2} & s_{3} & \cdots\end{array}
+\end{array}
+\]
+
+\end_inset
+
+ This makes clear the shift-and-add form.
+ 
+\end_layout
+
+\begin_layout Standard
+The final step is to reduce the the sum series 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+ to a bit-string.
+ This is accomplished recurseively, by performing a carry operation:
+\begin_inset Formula 
+\[
+d_{n}=s_{n}+\left\lfloor \frac{d_{n+1}}{2}\right\rfloor 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left\lfloor d\right\rfloor =d\mod1$
+\end_inset
+
+ denotes the floor of 
+\begin_inset Formula $d$
+\end_inset
+
+ (the integer part of 
+\begin_inset Formula $d$
+\end_inset
+
+).
+ The desired bit sequence is then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a_{n}=d_{n}\mod\,2
+\]
+
+\end_inset
+
+The resulting sequence 
+\begin_inset Formula $\left(a_{n}\right)$
+\end_inset
+
+ is then the bit-string for the product 
+\begin_inset Formula $Kx$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula 
+\[
+Kx=0.a_{0}a_{1}a_{2}\cdots=\sum_{n=0}^{\infty}a_{n}2^{-n-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The problem with this algorithm is that the relation for the 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ is infinitely recursive, and in general is not guaranteed to terminate.
+ One has to start at 
+\begin_inset Formula $n=\infty$
+\end_inset
+
+ and move backwards from there.
+ There are two plausible scenarios for computing the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ in practice.
+ One is to search the 
+\begin_inset Formula $n$
+\end_inset
+
+ until one finds that spot where 
+\begin_inset Formula $\left\lfloor d_{N+1}/2\right\rfloor =0$
+\end_inset
+
+; one can then obtain the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n<N$
+\end_inset
+
+ without issue.
+ 
+\end_layout
+
+\begin_layout Standard
+The other way to compute is to observe that the iteration is convergent.
+ That is, one can pick some arbitrary 
+\begin_inset Formula $N$
+\end_inset
+
+, and arbitrarily force 
+\begin_inset Formula $d_{N+1}$
+\end_inset
+
+ to zero, and then work backwards from there.
+ The resulting sequence will in general have incorrect values for the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $N-1-\log_{2}\left(N+1\right)\le n$
+\end_inset
+
+ but will be correct for 
+\begin_inset Formula $n<N-1-\log_{2}\left(N+1\right)$
+\end_inset
+
+.
+ This works because, as noted initially, 
+\begin_inset Formula $s_{n}\le n+1$
+\end_inset
+
+, and so one needs at most 
+\begin_inset Formula $1+\log_{2}\left(n+1\right)$
+\end_inset
+
+ bits to write down 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Stated differently, the 
+\end_layout
+
+\begin_layout Subsection
+Tree-view
+\end_layout
+
+\begin_layout Standard
+Points:
+\end_layout
+
+\begin_layout Standard
+1) adding one bit is like shifting the tree over sideways.
+\end_layout
+
+\begin_layout Standard
+2) multiplying by one bit is like shifting the tree down-left.
+\end_layout
+
+\begin_layout Standard
+3) adding a number to itself is like shifting tree up (since its just 2x)
+\end_layout
+
+\begin_layout Standard
+4) carry bit's can be deferred during (repeated) addition.
+ Instead, keep a count for each bit, and then after accumulation is done,
+ then distribute the counts as carry bits.
+ This is useful for multiplication algo that is shift and add.
+\end_layout
+
+\begin_layout Standard
+5) so the representation here is a natural number for each bit location.
 \end_layout
 
 \begin_layout Section
