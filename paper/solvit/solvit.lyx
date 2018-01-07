@@ -3830,19 +3830,23 @@ where the
 
 \begin_layout Standard
 Define 
-\begin_inset Formula $s_{n}$
+\begin_inset Formula $s_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{n+1}$
 \end_inset
 
  to be the non-negative integer
 \begin_inset Formula 
 \[
-s_{n}=b_{n}c_{0}+b_{n-1}c_{1}+\cdots+b_{0}c_{n}=\sum_{k=0}^{n}b_{k}c_{n-k}
+s_{n+1}=b_{n}c_{0}+b_{n-1}c_{1}+\cdots+b_{0}c_{n}=\sum_{k=0}^{n}b_{k}c_{n-k}
 \]
 
 \end_inset
 
 Note that 
-\begin_inset Formula $0\le s_{n}\le n+1$
+\begin_inset Formula $0\le s_{n}\le n$
 \end_inset
 
 .
@@ -3851,15 +3855,15 @@ Note that
 \begin_inset Formula 
 \[
 \begin{array}{c}
-\begin{array}{ccccc}
-b_{0} & b_{1} & b_{2} & b_{3} & \cdots\\
- & b_{0} & b_{1} & b_{2} & \cdots\\
- &  & b_{0} & b_{1} & \cdots\\
-+ &  &  & b_{0} & \cdots
+\begin{array}{cccccc}
+0 & c_{0}b_{0} & c_{0}b_{1} & c_{0}b_{2} & c_{0}b_{3} & \cdots\\
+ &  & c_{1}b_{0} & c_{1}b_{1} & c_{1}b_{2} & \cdots\\
+ &  &  & c_{2}b_{0} & c_{2}b_{1} & \cdots\\
++ &  &  &  & c_{3}b_{0} & \cdots
 \end{array}\\
-\mbox{-----------------------------}\\
-\begin{array}{ccccc}
-s_{0} & s_{1} & s_{2} & s_{3} & \cdots\end{array}
+\mbox{--------------------------------------------}\\
+\begin{array}{cccccc}
+s_{0}\;\; & \;s_{1}\;\; & \;s_{2}\;\; & \;\;s_{3}\;\; & \;\;s_{4}\;\;\; & \cdots\end{array}
 \end{array}
 \]
 
@@ -3877,9 +3881,9 @@ The final step is to reduce the the sum series
  to a bit-string.
  This is accomplished recurseively, by performing a carry operation:
 \begin_inset Formula 
-\[
-d_{n}=s_{n}+\left\lfloor \frac{d_{n+1}}{2}\right\rfloor 
-\]
+\begin{equation}
+d_{n}=s_{n}+\left\lfloor \frac{d_{n+1}}{2}\right\rfloor \label{eq:carry bits}
+\end{equation}
 
 \end_inset
 
@@ -3928,7 +3932,14 @@ Kx=0.a_{0}a_{1}a_{2}\cdots=\sum_{n=0}^{\infty}a_{n}2^{-n-1}
 \end_layout
 
 \begin_layout Standard
-The problem with this algorithm is that the relation for the 
+The problem with this algorithm is that the relation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:carry bits"
+
+\end_inset
+
+ for the 
 \begin_inset Formula $d_{n}$
 \end_inset
 
@@ -3960,50 +3971,113 @@ The problem with this algorithm is that the relation for the
 \end_inset
 
  without issue.
- 
+ The problem here is to find such an 
+\begin_inset Formula $N$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 The other way to compute is to observe that the iteration is convergent.
- That is, one can pick some arbitrary 
-\begin_inset Formula $N$
+ The recursion 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:carry bits"
+
 \end_inset
 
-, and arbitrarily force 
-\begin_inset Formula $d_{N+1}$
+ only depends on a finite and fixed number of bits 
+\begin_inset Quotes eld
 \end_inset
 
- to zero, and then work backwards from there.
- The resulting sequence will in general have incorrect values for the 
-\begin_inset Formula $a_{n}$
+behind it
+\begin_inset Quotes erd
 \end_inset
 
- for all 
-\begin_inset Formula $N-1-\log_{2}\left(N+1\right)\le n$
+, roughly equal to 
+\begin_inset Formula $\log_{2}n$
 \end_inset
 
- but will be correct for 
-\begin_inset Formula $n<N-1-\log_{2}\left(N+1\right)$
+ bits that come after this.
+ As noted earlier, 
+\begin_inset Formula $0\le s_{n}\le n$
 \end_inset
 
-.
- This works because, as noted initially, 
-\begin_inset Formula $s_{n}\le n+1$
-\end_inset
-
-, and so one needs at most 
-\begin_inset Formula $1+\log_{2}\left(n+1\right)$
-\end_inset
-
- bits to write down 
-\begin_inset Formula $s_{n}$
+ and likewise, 
+\begin_inset Formula $0\le d_{n}\le2n+1$
 \end_inset
 
 .
-\end_layout
+ To write down 
+\begin_inset Formula $d_{n}$
+\end_inset
 
-\begin_layout Standard
-Stated differently, the 
+, one needs at most 
+\begin_inset Formula $C=1+\left\lfloor \log_{2}\left(2n+1\right)\right\rfloor $
+\end_inset
+
+ bits.
+ This implies that a given 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ can only perturb at most 
+\begin_inset Formula $C-1$
+\end_inset
+
+ bits downstream of it.
+ That is, 
+\begin_inset Formula $d_{n-C+1}$
+\end_inset
+
+ depends on 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ but 
+\begin_inset Formula $d_{n-C}$
+\end_inset
+
+ does not.
+ Thus, in order to correctly compute all bits 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ for 
+\begin_inset Formula $0\le k\le n-C$
+\end_inset
+
+, it is sufficient to set 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ to some arbitrary value (less than 
+\begin_inset Formula $2n+2$
+\end_inset
+
+) and then iterate (using the correct values for 
+\begin_inset Formula $s_{k}$
+\end_inset
+
+ when 
+\begin_inset Formula $k<n$
+\end_inset
+
+).
+ At the end, discard all 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ for 
+\begin_inset Formula $n-C<k$
+\end_inset
+
+, as they ar incorrect.
 \end_layout
 
 \begin_layout Subsection
