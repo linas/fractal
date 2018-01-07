@@ -168,12 +168,12 @@ Bernoulli shift
 The Bernoulli shift (aka the bit-shift map) is an iterated map on the unit
  interval, given by iteration of the function
 \begin_inset Formula 
-\[
+\begin{equation}
 b(x)=\begin{cases}
 2x & \mbox{ for }0\le x<\frac{1}{2}\\
 2x-1 & \mbox{ for }\frac{1}{2}\le x\le1
-\end{cases}
-\]
+\end{cases}\label{eq:Bernoulli shift}
+\end{equation}
 
 \end_inset
 
@@ -277,12 +277,12 @@ downshift
 
  the downshift is given by iterating on
 \begin_inset Formula 
-\[
+\begin{equation}
 b_{K}(x)=\begin{cases}
 2Kx & \mbox{ for }0\le x<\frac{1}{2}\\
 2K\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
-\end{cases}
-\]
+\end{cases}\label{eq:downshift}
+\end{equation}
 
 \end_inset
 
@@ -971,10 +971,6 @@ reference "fig:Logistic-Map-Bifurcation"
 wide false
 sideways false
 status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3311,9 +3307,9 @@ ng; it simply rescales things.
 
 , then the multiplication operator becomes rather complicated and difficult
  to analyze.
- In this sense, it is promising: if avoids the overt complexities of the
- logistic map, the tent map and the downshift, yet retains a mind-boggling
- complexity on the product topology.
+ In this sense, it is promising: it avoids the overt complexity of the logistic
+ map, the tent map and the downshift, yet still has a complicted behavior
+ in the product topology.
  In particular, the multiplication of two numbers appear to involve chaotic
  dynamics of the carry bit.
 \end_layout
@@ -4077,7 +4073,70 @@ behind it
 \begin_inset Formula $n-C<k$
 \end_inset
 
-, as they ar incorrect.
+, as they are incorrect.
+\end_layout
+
+\begin_layout Subsection
+Downshift, Revisited
+\end_layout
+
+\begin_layout Standard
+The downshift of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+ takes a simple form when reinterpreted on bit-strings: it is the concatenation
+ of mutiplication, followed by a left-shift.
+ Given a bit-string 
+\begin_inset Formula $\left(b_{n}\right)=0.b_{0}b_{1}b_{2}\cdots$
+\end_inset
+
+ denote its left-shift by 
+\begin_inset Formula $U$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+U\left(0.b_{0}b_{1}b_{2}\cdots\right)=0.b_{1}b_{2}\cdots
+\]
+
+\end_inset
+
+which, for real numbers, corresponds to 
+\begin_inset Formula 
+\[
+U(x)=\begin{cases}
+2x & \mbox{ for }0\le x<\frac{1}{2}\\
+2x-1 & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+which is none-other than the Bernoulli shift of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli shift"
+
+\end_inset
+
+ with a change of notation.
+ The downshift is then
+\begin_inset Formula 
+\[
+b_{K}\left(x\right)=M_{K}\left(U\left(x\right)\right)
+\]
+
+\end_inset
+
+so that the iterated downshift is an alternation between a left-shift and
+ a multiplication.
+ The act of discarding the most significant bit (the MSB) with each left-shift
+ alters the dynamics of the iterated multiplication.
 \end_layout
 
 \begin_layout Subsection
