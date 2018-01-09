@@ -3012,161 +3012,6 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-Skew Haar Basis
-\end_layout
-
-\begin_layout Standard
-The figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Undershift-Density-Distribution"
-
-\end_inset
-
- shows that the eigenfunctions seem to be composed of piece-wise flat sections.
- This suggests that the Haar wavelets might make a superior basis.
- The standard Haar basis is an (anti-)symetric square wave with a discontinuity
- at 1/2.
- This is explored in the next secion.
- Here, a breif diversion to explore a skew basis.
- The skew basis can be built from the (un-normalized) mother wavelet 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\phi\left(x\right)=\begin{cases}
-\frac{1}{K} & \mbox{for }0\le x<K\\
-\frac{-1}{1-K} & \mbox{for }K\le x<1\\
-0 & \mbox{otherwise}
-\end{cases}
-\]
-
-\end_inset
-
-A sequence of orthonormal wavelets might start as
-\begin_inset Formula 
-\[
-\psi_{-1,0}\left(x\right)=1
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\psi_{0,0}\left(x\right)=\sqrt{K\left(1-K\right)}\phi\left(x\right)
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\psi_{1,0}\left(x\right)=\frac{1}{\sqrt{K}}\psi_{0,0}\left(\frac{x}{K}\right)
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\psi_{1,1}\left(x\right)=\frac{1}{\sqrt{1-K}}\psi_{0,0}\left(\frac{x-K}{1-K}\right)
-\]
-
-\end_inset
-
- and then, in general
-\begin_inset Formula 
-\[
-\psi_{n+1,k}\left(x\right)=\begin{cases}
-\frac{1}{\sqrt{K}}\psi_{n,k/2}\left(\frac{x}{K}\right) & \mbox{for }k\mbox{ even}\\
-\frac{1}{\sqrt{1-K}}\psi_{n,\left(k-1\right)/2}\left(\frac{x-K}{1-K}\right) & \mbox{for }k\mbox{ odd}
-\end{cases}
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $k$
-\end_inset
-
- is an integer ranging from 0 to 
-\begin_inset Formula $2^{n}-1$
-\end_inset
-
-.
- Although these at first seem promising, they prove to be difficult to use
- in pencil-n-paper calculations.
- That is, they are not particularly tractable when employed to caculate
- (by hand) the matrix elements of the transfer operator.
-\end_layout
-
-\begin_layout Standard
-Another choice is to use the wavelet defined in equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Haar mother"
-
-\end_inset
-
-.
- A sequence of orthogonal wavelets might start as
-\begin_inset Formula 
-\[
-\psi_{0,0}\left(x\right)=1
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\psi_{1,0}\left(x\right)=h_{K}\left(x\right)
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\psi_{2,0}\left(x\right)=\psi_{1,0}\left(2Kx\right)
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\psi_{2,1}\left(x\right)=\psi_{1,0}\left(\frac{2Kx-1}{2K-1}\right)
-\]
-
-\end_inset
-
- and then, in general
-\begin_inset Formula 
-\[
-\psi_{n+1,k}\left(x\right)=\begin{cases}
-\psi_{n,k/2}\left(2Kx\right) & \mbox{for }k\mbox{ even}\\
-\psi_{n,\left(k-1\right)/2}\left(\frac{2Kx-1}{2K-1}\right) & \mbox{for }k\mbox{ odd}
-\end{cases}
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $k$
-\end_inset
-
- is an integer ranging from 0 to 
-\begin_inset Formula $2^{n-1}-1$
-\end_inset
-
-.
- This also does not seem to offer any computational advantage.
-\end_layout
-
-\begin_layout Subsection
 Haar Basis Matrix Elements
 \end_layout
 
@@ -3182,7 +3027,7 @@ h\left(x\right)=\begin{cases}
 
 \end_inset
 
- and has individual wavelets given by 
+and has individual wavelets given by 
 \begin_inset Formula 
 \[
 h_{nj}\left(x\right)=2^{n/2}h\left(2^{n}x-j\right)\;\mbox{ for }0\le j\le2^{n}-1
@@ -3267,7 +3112,36 @@ In all other cases, the Haar wavelets completely fail to overlap, and thus
 
 and likewise for three more.
  The observation is that the integral vanishes unless the first wavelet
- interects an edge transition of the second wavelet.
+ intersects an edge transition of the second wavelet.
+\end_layout
+
+\begin_layout Standard
+The primary failure of this basis is that there is no obvious way to diagonalize
+ the transfer operator.
+ There is no obvious way of solving it, of finding it's eigenfunctions and
+ eigenvalues.
+\end_layout
+
+\begin_layout Subsection
+The Transfer Operator is Solvable
+\end_layout
+
+\begin_layout Standard
+The transfer operator is solvable.
+ That is, there does exist a set of orthonormal functions forming a basis
+ in which the transfer operator is upper-diagonal.
+ From this basis, one may then obtain the eigenvalue spectrum and the eigenfunct
+ions.
+\end_layout
+
+\begin_layout Standard
+The functions can be explicitly constructed by iterating on the inverse
+ of the transfer operator, viz the Koopman operator on each set.
+ The construction proceeds as follows.
+\end_layout
+
+\begin_layout Subsection
+The Julia Set
 \end_layout
 
 \begin_layout Section
