@@ -3219,7 +3219,7 @@ came from
 \end_inset
 
 , for the iterated transfer operator.
- There are several inter-related ways to visualize this.
+ There are several related ways to visualize this.
  One way is to fix 
 \begin_inset Formula $y$
 \end_inset
@@ -3236,18 +3236,23 @@ j\left(\left(b_{n}\right)\right)=a_{b_{o}}\circ a_{b_{1}}\circ a_{b_{2}}\circ\cd
 
 \end_inset
 
- Here, explain.
-\end_layout
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Julia-Set-visualization"
 
-\begin_layout Standard
-Very similar to figure 
+\end_inset
+
+ shows a visualization for finite bit-sequences: in essence, the very first
+ few iterations.
+ Although it is similar to figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Range-compress"
 
 \end_inset
 
- but not the same.
+, it is not the same.
  
 \end_layout
 
@@ -3262,6 +3267,13 @@ status open
 
 \begin_layout Plain Layout
 Julia Set visualization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Julia-Set-visualization"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3282,15 +3294,75 @@ Julia Set visualization
 \end_layout
 
 \begin_layout Plain Layout
-Values on (finite) dyadics ...
- Very similar to figure 
+Consider the binary tree of dyadic fractions: that is, the tree whose rows
+ are 1/2, (1/4 3/4), (1/8 3/8 5/8 7/8), ...
+ Consider a function 
+\begin_inset Formula $J$
+\end_inset
+
+ on this tree.
+ For the head of the tree, set 
+\begin_inset Formula $J\left(1/2\right)=K$
+\end_inset
+
+.
+ For the next row, set 
+\begin_inset Formula $J\left(1/4\right)=a_{0}\left(J\left(1/2\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $J\left(3/4\right)=a_{1}\left(J\left(1/2\right)\right)$
+\end_inset
+
+.
+ Iterate in this fashion so that 
+\begin_inset Formula $J\left(\left(2k-1\right)/2^{n+1}\right)=a_{0}\left(J\left(k/2^{n}\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $J\left(\left(2k+1\right)/2^{n+1}\right)=a_{1}\left(J\left(k/2^{n}\right)\right)$
+\end_inset
+
+ recursively.
+ This produces a function 
+\begin_inset Formula $J$
+\end_inset
+
+ taking values on every dyadic fraction 
+\begin_inset Formula $k/2^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+In the above figure, 
+\begin_inset Formula $K$
+\end_inset
+
+ runs from 1/2 at the bottom to 1 at the top.
+ A single horizontal slice through the image shows a color-coded version
+ of 
+\begin_inset Formula $J$
+\end_inset
+
+, with red coding values near 1, green coding values near 1/2 and blue,
+ fading to black coding values of 1/4 and less.
+ Note that there are many faint blue lines that extend quite far down, but
+ not alll the way down: these form a stair-step.
+ The image is 1024 pixels wide: it shows the first ten rows of the binary
+ tree.
+ Although this image is similar to figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Range-compress"
 
 \end_inset
 
- but not the same.
+, it differs in many details.
  
 \begin_inset Note Note
 status collapsed
