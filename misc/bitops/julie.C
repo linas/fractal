@@ -70,7 +70,7 @@ static void julia_diagram (float *array,
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
-	mkmap(Kay, Kay);
+	mkmap(why, Kay);
 	for (int j=1; j<array_size; j++)
 	{
 		array[j] = map[j];
