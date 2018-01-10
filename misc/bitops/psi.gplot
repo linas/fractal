@@ -3,4 +3,8 @@ set term png size 1024,768
 set out 'psi.png'
 
 
-plot "psi.dat" using 2:3 with lines linewidth 2 title ""
+plot "psi.dat" using 2:3 with lines linewidth 2 title "f", \
+     "psi.dat" using 2:4 with lines linewidth 2 title "p0", \
+     "psi.dat" using 2:5 with lines linewidth 2 title "p1", \
+     "psi.dat" using 2:(0.98*($4+$5)) with lines linewidth 2 title "p0+p1", \
+     "psi.dat" using 2:7 with lines linewidth 2 title "acc"

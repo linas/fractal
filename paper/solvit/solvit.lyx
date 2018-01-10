@@ -3146,7 +3146,7 @@ The functions can be explicitly constructed by iterating on the inverse
  Let 
 \begin_inset Formula 
 \[
-\psi_{00}\left(x\right)=\begin{cases}
+\psi_{0}\left(x\right)=\begin{cases}
 \frac{1}{\sqrt{K}} & \mbox{for }0\le x\le K\\
 0 & \mbox{for }K<x\le1
 \end{cases}
@@ -3155,7 +3155,7 @@ The functions can be explicitly constructed by iterating on the inverse
 \end_inset
 
 Consider 
-\begin_inset Formula ${\cal L}_{K}\psi_{00}$
+\begin_inset Formula ${\cal L}_{K}\psi_{0}$
 \end_inset
 
 .
@@ -3177,7 +3177,7 @@ Consider
  Using this value, construct the wavelet
 \begin_inset Formula 
 \[
-\psi_{10}\left(x\right)=\begin{cases}
+\psi_{1}\left(x\right)=\begin{cases}
 \frac{1}{\sqrt{4K^{2}-2K}} & \mbox{for }0\le x\le2K^{2}-K\\
 \frac{-1}{\sqrt{4K-4K^{2}}} & \mbox{for }2K^{2}-K<x\le K\\
 0 & \mbox{for }K<x\le1
@@ -3187,11 +3187,11 @@ Consider
 \end_inset
 
 Note that this is normalized to unit length: 
-\begin_inset Formula $\int_{0}^{1}\left|\psi_{10}\left(x\right)\right|^{2}dx=1$
+\begin_inset Formula $\int_{0}^{1}\left|\psi_{1}\left(x\right)\right|^{2}dx=1$
 \end_inset
 
  and that it is explicitly orothogonal to the first: 
-\begin_inset Formula $\int_{0}^{1}\psi_{10}\left(x\right)\psi_{00}\left(x\right)dx=0$
+\begin_inset Formula $\int_{0}^{1}\psi_{1}\left(x\right)\psi_{0}\left(x\right)dx=0$
 \end_inset
 
 .
@@ -3199,11 +3199,33 @@ Note that this is normalized to unit length:
 
 \begin_layout Standard
 Consider 
-\begin_inset Formula ${\cal L}_{K}\psi_{10}$
+\begin_inset Formula ${\cal L}_{K}\psi_{1}$
 \end_inset
 
 .
  As always, it is the sum of two parts.
+ The midpoint of 
+\begin_inset Formula $\psi_{1}$
+\end_inset
+
+ is at 
+\begin_inset Formula $m_{1}=2K^{2}-K$
+\end_inset
+
+ and this mid-point is mapped to one of two different places.
+ If 
+\begin_inset Formula $m_{1}<1/2$
+\end_inset
+
+ then it is mapped to 
+\begin_inset Formula $m_{2}=2Km_{1}$
+\end_inset
+
+ else it maps to 
+\begin_inset Formula $m_{2}=2Km_{1}-K$
+\end_inset
+
+.
  
 \end_layout
 
