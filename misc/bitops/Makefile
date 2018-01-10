@@ -36,7 +36,7 @@ julie.o: julie.C
 psi.o: psi.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
-bigbern: bigbern.o $(BRAT)
+bigbern: bigbern.o # $(BRAT)
 remap: remap.o
 reigen: reigen.o
 skew: skew.o

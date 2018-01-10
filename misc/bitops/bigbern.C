@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "brat.h"
+// #include "brat.h"
 
 /*-------------------------------------------------------------------*/
 /*
@@ -98,8 +98,10 @@ static void bifurcation_diagram (float *array,
 	mpf_init(scratch);
 	mpf_init(four_Kay);
 
-// hack for feigenbaum:
-K = 1.0 - 0.25* (1.0-K);
+#ifdef FEIGEN
+	// hack for feigenbaum:
+	K = 1.0 - 0.25* (1.0-K);
+#endif
 
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
@@ -108,35 +110,63 @@ K = 1.0 - 0.25* (1.0-K);
 
 	for (int j=0; j<itermax; j++)
 	{
+#ifdef RANDO
 		double jit = rand();
 		jit /= RAND_MAX;
 		jit /= array_size;
-jit *= 0.35; /// argh hack for feigenbaum.
+#ifdef FEIGEN
+		jit *= 0.35; /// argh hack for feigenbaum.
+#endif
 
 		// The incoming K is always for the top edge of the pixel.
 		// The minus sign on the jitter drives it downwards into the pixel.
 		make_random_bitsequence(Kay, 2.0*(K-jit), NBITS);
+#ifdef FEIGEN
 		mpf_mul_ui(four_Kay, Kay, 2);
+#endif
 
 		double t = rand();
 		t /= RAND_MAX;
 		double x = t;
 		make_random_bitsequence(ex, x, NBITS);
+#endif // RANDO
+
+#define MIDPOINT
+#ifdef MIDPOINT
+		// Compute 
+		// unsigned long int deno = 128*81*125*49*121*13*17*19*23*29;
+		// unsigned long int deno = 64*27*125*49*11*13;
+		unsigned long int deno = 32*9*25;
+		unsigned long int num = K * ((double) deno);
+		while (0 == num%2) { num /=2; deno /=2; }
+		while (0 == num%3) { num /=3; deno /=3; }
+		while (0 == num%5) { num /=5; deno /=5; }
+		printf("#\n# K = %lu / %lu = %g\n#\n", num, deno, K);
+		mpf_set_ui(Kay, num);
+		mpf_div_ui(Kay, Kay, deno);
+
+		mpf_mul(ex, Kay, Kay);
+		mpf_mul_ui(ex, ex, 2);
+		mpf_sub(ex, ex, Kay);
+#endif
 
 		/* OK, now start iterating the map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
-			// bern(ex, Kay);
+			bern(ex, Kay);
 			// tent(ex, Kay);
-			feig(ex, four_Kay, scratch);
+			// feig(ex, four_Kay, scratch);
 
+#ifdef SETTLE
 			// Excluding the settle time, together with the support
 			// normalization really brings out the details and the color
 			// in the tent map. Note that 80 = 2 percent of the 4K
 			int settle_time = 80;
+#endif
+int settle_time = 0;
 			if (settle_time < iter)
 			{
-				x = mpf_get_d(ex);
+				double x = mpf_get_d(ex);
 				double en = array_size * (x-floor(x));
 				int n = en;
 				if (0 > n) n = 0;
@@ -187,9 +217,9 @@ jit *= 0.35; /// argh hack for feigenbaum.
 
 }
 
-DECL_MAKE_BIFUR(bifurcation_diagram)
+// DECL_MAKE_BIFUR(bifurcation_diagram)
 
-#if 0
+#if 1
 int main (int argc, char * argv[])
 {
 	if (argc < 3)
