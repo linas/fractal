@@ -43,7 +43,9 @@ double part(double x, double K, double (*fun)(double, double), int which)
 int main(int argc, char* argv[])
 {
 	double K = atof(argv[1]);
+	printf("#\n# K=%g\n#\n", K);
 
+#if 0
 #define NPTS 201
 	double s = 0.0;
 	for (int i=0; i< NPTS; i++)
@@ -56,5 +58,14 @@ int main(int argc, char* argv[])
 		double y = xfer(x, K, f);
 		s += y / ((double) NPTS);
 		printf("%d	%g	%g %g	%g	%g	%g\n", i, x, ef, p0, p1, y, s);
+	}
+#endif
+
+	double m = K;
+	for (int i =0; i< 20; i++)
+	{
+		if (m <= 0.5) m = 2.0*K*m;
+		else m = 2.0*K*m - K;
+		printf("%d	%g\n", i, m);
 	}
 }
