@@ -222,7 +222,9 @@ double hess_brute(double K, int m, int n)
  * basis. Using interval math, and thus "perfectly" accurate. */
 double hess(double K, int m, int n)
 {
-	// printf("ask for %d %d\n", m, n);
+	#define PRT(...) printf(__VA_ARGS__)
+	// #define PRT(...)
+	PRT("ask for %d %d\n", m, n);
 	if (m == 0 && n == 0) return 1.0; // XXX
 	m++; n++;
 
@@ -236,7 +238,7 @@ double hess(double K, int m, int n)
 	double nce = midpoints[n];
 	double nhi = midpoints[upper_sequence[n]];
 
-	// printf("left= %g %g %g right = %g %g %g\n", mlo, mce, mhi, nlo, nce, nhi);
+	PRT("left= %g %g %g right = %g %g %g\n", mlo, mce, mhi, nlo, nce, nhi);
 	// right wavelet in bottom part of xfer oper
 	double bnlo = 2.0 * K * nlo;
 	double bnce = 2.0 * K * nce;
@@ -247,13 +249,15 @@ double hess(double K, int m, int n)
 	double tnce = bnce - K;
 	double tnhi = bnhi - K;
 
-	// printf("bot= %g %g %g top = %g %g %g\n", bnlo, bnce, bnhi, tnlo, tnce, tnhi);
+	PRT("bot= %g %g %g top = %g %g %g\n", bnlo, bnce, bnhi, tnlo, tnce, tnhi);
 	// Whether or not to skip computing these branches
 	bool dobot = true;
 	bool dotop = true;
-	if (K < bnlo) dobot = false;    // if (nlo < 0.5)
-	if (tnhi < 0.0) dotop = false;  // if (nhi < 0.5)
-	// printf("dobot=%d dotop=%d\n", dobot, dotop);
+	// if (K <= bnlo) dobot = false;    // if (nlo <= 0.5)
+	// if (tnhi <= 0.0) dotop = false;  // if (nhi <= 0.5)
+	if (mhi <= bnlo) dobot = false;  // tighter bound.
+	if (tnhi <= mlo) dotop = false;  // tighter bound.
+	PRT("dobot=%d dotop=%d\n", dobot, dotop);
 
 	// Clamp to boundaries
 	if (K < bnce) bnce = K;
@@ -262,7 +266,7 @@ double hess(double K, int m, int n)
 	if (tnlo < 0.0) tnlo = 0.0;
 	if (tnce < 0.0) tnce = 0.0;
 
-	// printf("bot= %g %g %g top = %g %g %g\n", bnlo, bnce, bnhi, tnlo, tnce, tnhi);
+	PRT("bot= %g %g %g top = %g %g %g\n", bnlo, bnce, bnhi, tnlo, tnce, tnhi);
 	if (dobot)
 	{
 		// If the wavelets don't intersect, then nothing to do
@@ -284,7 +288,7 @@ punt:
 
 	// If we are here, then there is some non-trivial intersection.
 	// This will take some effort to get right.
-	// printf("Start hard work\n");
+	PRT("Start hard work\n");
 
 	// Get the wavelet values. Undo the off-by-one
 	m--; n--;
@@ -293,7 +297,7 @@ punt:
 
 	double vnlo = psi_n(0.5*(nlo+nce), K, n);
 	double vnhi = psi_n(0.5*(nhi+nce), K, n);
-	// printf("values left= %g %g  right=%g %g\n", vmlo, vmhi, vnlo, vnhi);
+	PRT("values left= %g %g  right=%g %g\n", vmlo, vmhi, vnlo, vnhi);
 
 	// Accumulate values here.
 	double acc = 0.0;
@@ -316,6 +320,7 @@ punt:
 		double xb = fmin(tnce, mce);
 		double xc = fmax(tnce, mce);
 		double xd = fmin(tnhi, mhi);
+		PRT("ints= %g %g %g %g\n", xa, xb, xc, xd);
 
 		acc += vmlo * vnlo * (xb-xa);
 		if (tnce < mce) acc += vmlo * vnhi * (xc - xb);
@@ -323,7 +328,9 @@ punt:
 		acc += vmhi * vnhi * (xd-xc);
 	}
 
+	PRT("acc = %g\n", acc);
 	acc /= 2.0 * K;
+	PRT("hess = %g\n", acc);
 	return acc;
 }
 
@@ -331,8 +338,8 @@ void show_melts(double K)
 {
 	int mxi = MAXN-1;
 	mxi = 5;
-// hess(K, 4, 3);
-// return;
+hess(K, 3, 3);
+return;
 	for (int i=0; i< mxi; i++)
 	{
 		int js = i-1;
