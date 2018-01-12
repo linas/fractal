@@ -20,9 +20,10 @@
  *
  * GSL has a simpler API, so try that first.
  */
-void eigen(double K)
+void eigen(double K, int dim)
 {
 	int mxi = MAXN-1;
+mxi = dim;
 	double* matrix = malloc(mxi*mxi*sizeof(double));
 
 	// Do we need this, or the transpose ???
@@ -51,20 +52,31 @@ void eigen(double K)
 	{
 		gsl_complex eval_i = gsl_vector_complex_get (eval, i);
 		printf ("%d eigenvalue = %g + %gi\n", i, GSL_REAL(eval_i), GSL_IMAG(eval_i));
+#if 0
+		printf ("eigenvector = \n");
+		for (j=0; j< mxi; j++)
+		{
+			gsl_complex z = gsl_vector_complex_get(&evec_i.vector, j);
+			printf("%g + %gi\n", GSL_REAL(z), GSL_IMAG(z));
+		}
+#endif
 	}
 
+	gsl_vector_complex_free(eval);
+	gsl_matrix_complex_free(evec);
 	free(matrix);
 }
 
 
 int main(int argc, char* argv[])
 {
-	if (argc < 2)
+	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s K\n", argv[0]);
+		fprintf(stderr, "Usage: %s K dim\n", argv[0]);
 		exit(1);
 	}
 	double K = atof(argv[1]);
+	int dim = atoi(argv[2]);
 	printf("#\n# K=%g\n#\n", K);
 
 #if 0
@@ -85,5 +97,5 @@ int main(int argc, char* argv[])
 
 	find_midpoints(K);
 	verify_ortho();
-	eigen(K);
+	eigen(K, dim);
 }

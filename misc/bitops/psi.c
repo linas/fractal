@@ -46,7 +46,7 @@ double part(double x, double K, double (*fun)(double, double), int which)
 	return elf;
 }
 
-#define MAXN 50
+#define MAXN 64
 double midpoints[MAXN];
 int mid_sequence[MAXN];
 int lower_sequence[MAXN];

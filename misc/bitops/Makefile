@@ -36,7 +36,7 @@ julia.o: julia.c
 julie.o: julie.C
 psi.o: psi.c
 matrix.o: matrix.C psi.c
-psiegen.o: psiegen.c psi.c
+psieigen.o: psieigen.c psi.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o # $(BRAT)
