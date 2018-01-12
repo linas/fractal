@@ -193,17 +193,17 @@ double psi(double x, double K)
 double hess(double K, int m, int n)
 {
 	fapp = n;
-#define IPTS 1311201
+#define IPTS 5311201
 	double s = 0.0;
 	for (int i=0; i< IPTS; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) IPTS);
 		x *= K;
-		// double Lfn = xfer(x, K, psi);
-double Lfn = psi_n(x, K, n);
+		double Lfn = xfer(x, K, psi);
+		// double Lfn = psi_n(x, K, n);
 		double fm = psi_n(x, K, m);
 		s += fm*Lfn;
-// printf("wtf %d %d x=%g l=%g r=%g s=%g\n", m, n, x, fm, Lfn, s*K/((double) IPTS));
+		// printf("wtf %d %d x=%g l=%g r=%g s=%g\n", m, n, x, fm, Lfn, s*K/((double) IPTS));
 	}
 	s *= K / (double) IPTS;
 	return s;
@@ -212,16 +212,31 @@ double Lfn = psi_n(x, K, n);
 void show_melts(double K)
 {
 	int mxi = MAXN-1;
-	// mxi = 6;
 	for (int i=0; i< mxi; i++)
 	{
-		for (int j=0; j< mxi; j++)
+		int js = i-1;
+		if (js < 0) js = 0;
+		for (int j=js; j< mxi; j++)
 		{
 			double g = hess(K, i, j);
+#if 0
 			if (i==j && g < 0.99) printf("Error diag: %d %g", j, g);
 			if (i !=j && 5.0e-5 < g) printf("Error off-diag: %d %d %g\n", i, j, g);
-			// printf("%d	%d	%g\n", i, j, g);
+#endif
+if (g < 2.0e-5) g = 0;
+			printf("%d	%d	%g\n", i, j, g);
+#if 0
+if (2e-5 < g) printf("------------------- %g %g %g and %g %g %g\n",
+midpoints[lower_sequence[i+1]],
+midpoints[i+1],
+midpoints[upper_sequence[i+1]],
+midpoints[lower_sequence[j+1]],
+midpoints[j+1],
+midpoints[upper_sequence[j+1]]);
+#endif
+
 		}
+		printf("# ===========\n");
 	}
 }
 
