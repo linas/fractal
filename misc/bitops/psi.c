@@ -328,7 +328,7 @@ rush:
 	if (dobot)
 	{
 		double xa = fmax(bnlo, mlo);
-		double xb = fmin(bnce, mce);
+		double xb = fmax(xa, fmin(bnce, mce));
 		double xc = fmax(bnce, mce);
 		double xd = fmin(bnhi, mhi);
 		PRT("bot ints= %g %g %g %g\n", xa, xb, xc, xd);
@@ -347,7 +347,7 @@ rush:
 	if (dotop)
 	{
 		double xa = fmax(tnlo, mlo);
-		double xb = fmin(tnce, mce);
+		double xb = fmax( xa, fmin(tnce, mce));
 		double xc = fmax(tnce, mce);
 		double xd = fmin(tnhi, mhi);
 		PRT("top ints= %g %g %g %g\n", xa, xb, xc, xd);
