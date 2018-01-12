@@ -253,10 +253,10 @@ double hess(double K, int m, int n)
 	// Whether or not to skip computing these branches
 	bool dobot = true;
 	bool dotop = true;
-	// if (K <= bnlo) dobot = false;    // if (nlo <= 0.5)
-	// if (tnhi <= 0.0) dotop = false;  // if (nhi <= 0.5)
-	if (mhi <= bnlo) dobot = false;  // tighter bound.
-	if (tnhi <= mlo) dotop = false;  // tighter bound.
+	if (K <= bnlo) dobot = false;    // if (nlo <= 0.5)
+	if (tnhi <= 0.0) dotop = false;  // if (nhi <= 0.5)
+	// if (mhi <= bnlo) dobot = false;  // tighter bound.
+	// if (tnhi <= mlo) dotop = false;  // tighter bound.
 	PRT("dobot=%d dotop=%d\n", dobot, dotop);
 
 	// Clamp to boundaries
@@ -269,23 +269,28 @@ double hess(double K, int m, int n)
 	PRT("bot= %g %g %g top = %g %g %g\n", bnlo, bnce, bnhi, tnlo, tnce, tnhi);
 	if (dobot)
 	{
+		dobot = false;
 		// If the wavelets don't intersect, then nothing to do
 		if (bnhi <= mlo) goto punt;
 		if (mhi <= bnlo) goto punt;
 		if (mlo <= bnlo && bnhi <= mce) goto punt;
 		if (mce <= bnlo && bnhi <= mhi) goto punt;
+		dobot = true;
 	}
 
 punt:
 	if (dotop)
 	{
+		dotop = false;
 		// If the wavelets don't intersect, then nothing to do
-		if (tnhi <= mlo) return 0.0;
-		if (mhi <= tnlo) return 0.0;
-		if (mlo <= tnlo && tnhi <= mce) return 0.0;
-		if (mce <= tnlo && tnhi <= mhi) return 0.0;
+		if (tnhi <= mlo) goto rush;
+		if (mhi <= tnlo) goto rush;
+		if (mlo <= tnlo && tnhi <= mce) goto rush;
+		if (mce <= tnlo && tnhi <= mhi) goto rush;
+		dotop = true;
 	}
 
+rush:
 	// If we are here, then there is some non-trivial intersection.
 	// This will take some effort to get right.
 	PRT("Start hard work\n");
@@ -307,11 +312,13 @@ punt:
 		double xb = fmin(bnce, mce);
 		double xc = fmax(bnce, mce);
 		double xd = fmin(bnhi, mhi);
+		PRT("bot ints= %g %g %g %g\n", xa, xb, xc, xd);
 
 		acc += vmlo * vnlo * (xb-xa);
 		if (bnce < mce) acc += vmlo * vnhi * (xc - xb);
 		else acc += vmhi * vnlo * (xc - xb);
 		acc += vmhi * vnhi * (xd-xc);
+		PRT("bot acc = %g\n", acc);
 	}
 
 	if (dotop)
@@ -320,15 +327,15 @@ punt:
 		double xb = fmin(tnce, mce);
 		double xc = fmax(tnce, mce);
 		double xd = fmin(tnhi, mhi);
-		PRT("ints= %g %g %g %g\n", xa, xb, xc, xd);
+		PRT("top ints= %g %g %g %g\n", xa, xb, xc, xd);
 
 		acc += vmlo * vnlo * (xb-xa);
 		if (tnce < mce) acc += vmlo * vnhi * (xc - xb);
 		else acc += vmhi * vnlo * (xc - xb);
 		acc += vmhi * vnhi * (xd-xc);
+		PRT("top acc = %g\n", acc);
 	}
 
-	PRT("acc = %g\n", acc);
 	acc /= 2.0 * K;
 	PRT("hess = %g\n", acc);
 	return acc;
