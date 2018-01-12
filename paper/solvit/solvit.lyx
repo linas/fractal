@@ -3390,16 +3390,150 @@ sufficiently complete
 \end_layout
 
 \begin_layout Standard
-This basis provides the Hessenberg representation for the transfer operator,
- in that 
+This basis provides the Hessenberg representation for the transfer operator.
+ Defining
 \begin_inset Formula 
 \[
-\int_{0}^{1}\psi_{n}\left(x\right)\left[\mathcal{L}_{K}\psi_{m}\right]\left(x\right)dx=0\quad\mbox{ for }n>m+1
+\left\langle n\left|{\cal L}_{K}\right|m\right\rangle =\int_{0}^{1}\psi_{n}\left(x\right)\left[\mathcal{L}_{K}\psi_{m}\right]\left(x\right)dx
+\]
+
+\end_inset
+
+this has the expected Hessenberg form, in that 
+\begin_inset Formula 
+\[
+\left\langle n\left|{\cal L}_{K}\right|m\right\rangle =0\quad\mbox{ for }n>m+1
 \]
 
 \end_inset
 
 This is just one diagonal short of being actually solvable.
+ A visualization of the matrix elements is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hessenberg-Operator-Matrix"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hessenberg Operator Matrix Elements
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Hessenberg-Operator-Matrix"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename matrix-0.65.png
+	lyxscale 500
+	width 33col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename matrix-0.8.png
+	lyxscale 500
+	width 33col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename matrix-0.95.png
+	lyxscale 500
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Three illustrations of the matrix elements 
+\begin_inset Formula $\left\langle n\left|{\cal L}_{K}\right|m\right\rangle $
+\end_inset
+
+ for the transfer operator 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+ for (left to right) 
+\begin_inset Formula $K=$
+\end_inset
+
+0.65, 0.8, 0.95 and 
+\begin_inset Formula $0\le n,m<48$
+\end_inset
+
+.
+ The red color represents values of 0.66 or larger, green represents values
+ of 0.33 and blue and darker correspond to 0.16 or less.
+ Almost all matrix elements are in fact precisely zero; black pixels in
+ these images correspond to matrix elements that are zero.
+ Note that the almost all of the diagonal matrix elements are exactly zero:
+ that is 
+\begin_inset Formula $\left\langle n\left|{\cal L}_{K}\right|n\right\rangle =0$
+\end_inset
+
+ for most 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The bright-red pixels are just below the diagonal: for most 
+\begin_inset Formula $n$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\left\langle n+1\left|{\cal L}_{K}\right|n\right\rangle \apprge0.5$
+\end_inset
+
+ with the occasional blueish pixel suggesting a smaler value.
+ There's no obvious regularity in the images.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection

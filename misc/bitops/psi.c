@@ -193,7 +193,8 @@ double psi(double x, double K)
 double hess(double K, int m, int n)
 {
 	fapp = n;
-#define IPTS 5311201
+// #define IPTS 5311201
+#define IPTS 811201
 	double s = 0.0;
 	for (int i=0; i< IPTS; i++)
 	{
@@ -240,6 +241,7 @@ midpoints[upper_sequence[j+1]]);
 	}
 }
 
+#ifndef NOMAIN
 int main(int argc, char* argv[])
 {
 	if (argc < 1)
@@ -270,3 +272,4 @@ int main(int argc, char* argv[])
 	verify_ortho();
 	show_melts(K);
 }
+#endif

@@ -8,7 +8,8 @@ FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
 all: bernie bigbern remap unbernie reigen skew fp-diagram \
-	carry-sum rexfer treefn treestep sampler julia julie psi
+	carry-sum rexfer treefn treestep sampler julia julie psi \
+	matrix
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -34,6 +35,7 @@ sampler.o: sampler.c
 julia.o: julia.c
 julie.o: julie.C
 psi.o: psi.c
+matrix.o: matrix.C psi.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o # $(BRAT)
@@ -50,3 +52,4 @@ sampler: sampler.o
 julia: julia.o
 julie: julie.o $(BRAT)
 psi: psi.o
+matrix: matrix.o $(BRAT)
