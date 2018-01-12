@@ -193,8 +193,7 @@ double psi(double x, double K)
 double hess(double K, int m, int n)
 {
 	fapp = n;
-// #define IPTS 31
-#define IPTS 11201
+#define IPTS 1311201
 	double s = 0.0;
 	for (int i=0; i< IPTS; i++)
 	{
@@ -213,13 +212,15 @@ double Lfn = psi_n(x, K, n);
 void show_melts(double K)
 {
 	int mxi = MAXN-1;
-	mxi = 6;
-	for (int j=0; j< mxi; j++)
+	// mxi = 6;
+	for (int i=0; i< mxi; i++)
 	{
-		for (int i=0; i< mxi; i++)
+		for (int j=0; j< mxi; j++)
 		{
 			double g = hess(K, i, j);
-			printf("%d	%d	%g\n", i, j, g);
+			if (i==j && g < 0.99) printf("Error diag: %d %g", j, g);
+			if (i !=j && 5.0e-5 < g) printf("Error off-diag: %d %d %g\n", i, j, g);
+			// printf("%d	%d	%g\n", i, j, g);
 		}
 	}
 }
