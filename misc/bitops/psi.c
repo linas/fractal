@@ -1,7 +1,10 @@
 /*
  * psi.c
  *
- * Attempt at orthonormal fns.
+ * Orthonormal Hessenberg matrix functions.
+ * Construct wave functions which put the downshift operator
+ * into Hessenberg form.
+ *
  * January 2018
  */
 #include <math.h>
@@ -142,7 +145,9 @@ double psi_n(double x, double K, int n)
 	return -norm / (upper - middle);
 }
 
-/* Verify orthogonality */
+/* Compute the matrix elements of the unit operator. These are
+ * used to verify orthogonality. Viz no mistakes were made.
+ */
 double psi_prod(int m, int n)
 {
 	if (m == 0 && n == 0) return 1.0;
@@ -167,6 +172,7 @@ double psi_prod(int m, int n)
 	return 1.0;
 }
 
+/* Verify orthogonality */
 void verify_ortho(void)
 {
 	for (int j=0; j< MAXN-1; j++)
@@ -189,8 +195,8 @@ double psi(double x, double K)
 
 
 /* Return matrix entry for the transfer operator in the hessenberg
- * basis*/
-double hess(double K, int m, int n)
+ * basis.  Brute-force integration. */
+double hess_brute(double K, int m, int n)
 {
 	fapp = n;
 // #define IPTS 5311201
@@ -208,6 +214,69 @@ double hess(double K, int m, int n)
 	}
 	s *= K / (double) IPTS;
 	return s;
+}
+
+/* Return matrix entry for the transfer operator in the hessenberg
+ * basis. Using interval math, and thus "perfectly" accurate. */
+double hess(double K, int m, int n)
+{
+	if (m == 0 && n == 0) return 1.0; // XXX
+	m++; n++;
+
+	// left wavelet
+	double mlo = midpoints[lower_sequence[m]];
+	double mce = midpoints[m];
+	double mhi = midpoints[upper_sequence[m]];
+
+	// right wavelet
+	double nlo = midpoints[lower_sequence[n]];
+	double nce = midpoints[n];
+	double nhi = midpoints[upper_sequence[n]];
+
+	// right wavelet in bottom part of xfer oper
+	double bnlo = 2.0 * K * nlo;
+	double bnce = 2.0 * K * nce;
+	double bnhi = 2.0 * K * nhi;
+
+	// right wavelet in top part of xfer oper
+	double tnlo = bnlo - K;
+	double tnce = bnce - K;
+	double tnhi = bnhi - K;
+
+	// Whether or not to skip computing these branches
+	bool dobot = true;
+	bool dotop = true;
+	if (K < bnlo) dobot = false;    // if (nlo < 0.5)
+	if (tnhi < 0.0) dotop = false;  // if (nhi < 0.5)
+
+	// Clamp to boundaries
+	if (K < bnce) bnce = K;
+	if (K < bnhi) bnhi = K;
+
+	if (tnlo < 0.0) tnlo = 0.0;
+	if (tnce < 0.0) tnce = 0.0;
+
+	double acc = 0.0;
+	if (dobot)
+	{
+		// If the wavelets don't intersect, then nothing to do
+		if (bnhi <= mlo) goto punt;
+		if (mhi <= bnlo) goto punt;
+		if (mlo <= bnlo && bnhi <= mce) goto punt;
+		if (mce <= bnlo && bnhi <= mhi) goto punt;
+	}
+
+punt:
+	if (dotop)
+	{
+		// If the wavelets don't intersect, then nothing to do
+		if (tnhi <= mlo) return acc;
+		if (mhi <= tnlo) return acc;
+		if (mlo <= tnlo && tnhi <= mce) return acc;
+		if (mce <= tnlo && tnhi <= mhi) return acc;
+	}
+
+	return acc;
 }
 
 void show_melts(double K)
