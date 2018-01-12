@@ -22,6 +22,7 @@ double psi_1(double x, double K)
 	return 0.0;
 }
 
+/* Transfer operator applied to function */
 double xfer(double x, double K, double (*fun)(double, double))
 {
 	if (K<x) return 0.0;
@@ -31,6 +32,7 @@ double xfer(double x, double K, double (*fun)(double, double))
 	return elf;
 }
 
+/* One or the other part of the transfer operator applied to function */
 double part(double x, double K, double (*fun)(double, double), int which)
 {
 	if (K<x) return 0.0;
@@ -40,8 +42,52 @@ double part(double x, double K, double (*fun)(double, double), int which)
 	return elf;
 }
 
+#define MAXN 50
+double midpoints[MAXN];
+int mid_sequence[MAXN];
+
+void find_midpoints(double K)
+{
+	/* First, find the midpoints; the numbering here is off-by-one:
+	 * the "first" midpoint is in midpoints[2].
+	 */
+	midpoints[0] = 0.0;
+	midpoints[1] = K;
+
+	double m = K;
+	for (int i=2; i< MAXN; i++)
+	{
+		if (m <= 0.5) m = 2.0*K*m;
+		else m = 2.0*K*m - K;
+		midpoints[i] = m;
+	}
+
+	/* Now sort them in sequential order. Use a super-stupid sort algo. */
+	mid_sequence[0] = 0;
+
+	for (int j=1; j< MAXN; j++)
+	{
+		double m = mid_sequence[j-1];
+		double lst = K;
+		int idx = MAXN;
+		for (int i=1; i< MAXN; i++)
+		{
+			if (m < midpoints[i] && midpoints[i] < lst) { lst = midpoints[i]; idx = i; }
+		}
+		mid_sequence[j] = idx;
+
+		printf("%d	%d	%g\n", j, idx, lst);
+	}
+}
+
+
 int main(int argc, char* argv[])
 {
+	if (argc < 1)
+	{
+		fprintf(stderr, "Usage: %s K\n", argv[0]);
+		exit(1);
+	}
 	double K = atof(argv[1]);
 	printf("#\n# K=%g\n#\n", K);
 
@@ -61,11 +107,6 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-	double m = K;
-	for (int i =0; i< 20; i++)
-	{
-		if (m <= 0.5) m = 2.0*K*m;
-		else m = 2.0*K*m - K;
-		printf("%d	%g\n", i, m);
-	}
+	find_midpoints(K);
+
 }
