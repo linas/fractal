@@ -225,7 +225,8 @@ double hess(double K, int m, int n)
 	// #define PRT(...) printf(__VA_ARGS__)
 	#define PRT(...)
 	PRT("ask for %d %d\n", m, n);
-	if (m == 0 && n == 0) return 1.0; // XXX
+	if (m == 0 && n == 0) return 1.0;
+	if (n+1 < m) return 0.0;  // Upper Hessenberg.
 	m++; n++;
 
 	// left wavelet
@@ -378,6 +379,7 @@ void verify_melts(double K)
 	{
 		int js = i-1;
 		if (js < 0) js = 0;
+		js = 0;
 		for (int j=js; j< mxi; j++)
 		{
 			double g = hess_brute(K, i, j);
@@ -427,10 +429,11 @@ midpoints[upper_sequence[j+1]]);
 	}
 }
 
+
 #ifndef NOMAIN
 int main(int argc, char* argv[])
 {
-	if (argc < 1)
+	if (argc < 2)
 	{
 		fprintf(stderr, "Usage: %s K\n", argv[0]);
 		exit(1);
