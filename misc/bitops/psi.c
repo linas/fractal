@@ -88,8 +88,8 @@ void find_midpoints(double K)
 	/* Compute the pointers to the lower and the upper ends */
 	lower_sequence[0] = 0;
 	lower_sequence[1] = 0;
-	upper_sequence[0] = K;
-	upper_sequence[1] = K;
+	upper_sequence[0] = 1;
+	upper_sequence[1] = 1;
 	for (int j=2; j< MAXN; j++)
 	{
 		double low = 0.0;
@@ -134,6 +134,7 @@ double psi_n(double x, double K, int n)
 /* Verify orthogonality */
 double psi_prod(int m, int n)
 {
+	if (m == 0 && n == 0) return 1.0;
 	m++; n++;
 
 	double mlo = midpoints[lower_sequence[m]];
@@ -166,6 +167,7 @@ void verify_ortho(void)
 			if (i == j && d < 1.0) printf("Error: not diag %d %g\n", i, d);
 		}
 	}
+	printf("Done verifying orthogonality\n");
 }
 
 int main(int argc, char* argv[])
