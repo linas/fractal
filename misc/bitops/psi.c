@@ -222,8 +222,8 @@ double hess_brute(double K, int m, int n)
  * basis. Using interval math, and thus "perfectly" accurate. */
 double hess(double K, int m, int n)
 {
-	#define PRT(...) printf(__VA_ARGS__)
-	// #define PRT(...)
+	// #define PRT(...) printf(__VA_ARGS__)
+	#define PRT(...)
 	PRT("ask for %d %d\n", m, n);
 	if (m == 0 && n == 0) return 1.0; // XXX
 	m++; n++;
@@ -275,6 +275,9 @@ double hess(double K, int m, int n)
 		if (mhi <= bnlo) goto punt;
 		if (mlo <= bnlo && bnhi <= mce) goto punt;
 		if (mce <= bnlo && bnhi <= mhi) goto punt;
+
+		if (bnlo <= mlo && mhi <= bnce) goto punt;
+		if (bnce <= mlo && mhi <= bnhi) goto punt;
 		dobot = true;
 	}
 
@@ -287,13 +290,17 @@ punt:
 		if (mhi <= tnlo) goto rush;
 		if (mlo <= tnlo && tnhi <= mce) goto rush;
 		if (mce <= tnlo && tnhi <= mhi) goto rush;
+
+		if (tnlo <= mlo && mhi <= tnce) goto rush;
+		if (tnce <= mlo && mhi <= tnhi) goto rush;
 		dotop = true;
 	}
 
 rush:
 	// If we are here, then there is some non-trivial intersection.
 	// This will take some effort to get right.
-	PRT("Start hard work\n");
+	PRT("Start hard work dobot=%d dotop=%d\n", dobot, dotop);
+	if (false == dobot && false == dotop) return 0.0;
 
 	// Get the wavelet values. Undo the off-by-one
 	m--; n--;
@@ -345,8 +352,8 @@ void show_melts(double K)
 {
 	int mxi = MAXN-1;
 	mxi = 5;
-hess(K, 3, 3);
-return;
+// hess(K, 3, 3);
+// return;
 	for (int i=0; i< mxi; i++)
 	{
 		int js = i-1;
