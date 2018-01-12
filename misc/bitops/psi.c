@@ -222,8 +222,8 @@ double hess_brute(double K, int m, int n)
  * basis. Using interval math, and thus "perfectly" accurate. */
 double hess(double K, int m, int n)
 {
-	#define PRT(...) printf(__VA_ARGS__)
-	// #define PRT(...)
+	// #define PRT(...) printf(__VA_ARGS__)
+	#define PRT(...)
 	PRT("ask for %d %d\n", m, n);
 	if (m == 0 && n == 0) return 1.0; // XXX
 	m++; n++;
@@ -372,9 +372,9 @@ void show_melts(double K)
 {
 	int mxi = MAXN-1;
 	mxi = 5;
-hess(K, 1, 2);
-printf("expect %g\n", hess_brute(K, 1, 2));
-return;
+// hess(K, 1, 2);
+// printf("expect %g\n", hess_brute(K, 1, 2));
+// return;
 	for (int i=0; i< mxi; i++)
 	{
 		int js = i-1;
@@ -387,7 +387,7 @@ return;
 			if (i==j && g < 0.99) printf("Error diag: %d %g", j, g);
 			if (i !=j && 5.0e-5 < g) printf("Error off-diag: %d %d %g\n", i, j, g);
 #endif
-if (g < 2.0e-5) g = 0;
+if (fabs(g) < 2.0e-5) g = 0;
 			printf("%d	%d	%g	%g\n", i, j, g, h);
 #if 0
 if (2e-5 < g) printf("------------------- %g %g %g and %g %g %g\n",
