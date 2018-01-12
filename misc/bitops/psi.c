@@ -222,8 +222,8 @@ double hess_brute(double K, int m, int n)
  * basis. Using interval math, and thus "perfectly" accurate. */
 double hess(double K, int m, int n)
 {
-	// #define PRT(...) printf(__VA_ARGS__)
-	#define PRT(...)
+	#define PRT(...) printf(__VA_ARGS__)
+	// #define PRT(...)
 	PRT("ask for %d %d\n", m, n);
 	if (m == 0 && n == 0) return 1.0; // XXX
 	m++; n++;
@@ -331,6 +331,7 @@ rush:
 		double xb = fmax(xa, fmin(bnce, mce));
 		double xc = fmax(bnce, mce);
 		double xd = fmin(bnhi, mhi);
+		xc = fmin(xd, xc);
 		PRT("bot ints= %g %g %g %g\n", xa, xb, xc, xd);
 
 		acc += vmlo * vnlo * (xb-xa);
@@ -347,9 +348,10 @@ rush:
 	if (dotop)
 	{
 		double xa = fmax(tnlo, mlo);
-		double xb = fmax( xa, fmin(tnce, mce));
+		double xb = fmax(xa, fmin(tnce, mce));
 		double xc = fmax(tnce, mce);
 		double xd = fmin(tnhi, mhi);
+		xc = fmin(xd, xc);
 		PRT("top ints= %g %g %g %g\n", xa, xb, xc, xd);
 
 		acc += vmlo * vnlo * (xb-xa);
@@ -372,9 +374,9 @@ void show_melts(double K)
 {
 	int mxi = MAXN-1;
 	mxi = 5;
-// hess(K, 1, 2);
-// printf("expect %g\n", hess_brute(K, 1, 2));
-// return;
+hess(K, 1, 4);
+printf("expect %g\n", hess_brute(K, 1, 4));
+return;
 	for (int i=0; i< mxi; i++)
 	{
 		int js = i-1;
