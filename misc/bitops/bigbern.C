@@ -264,6 +264,23 @@ static void midpoint_diagram (float *array,
 		array[j] *= ((double) array_size) / ((double) cnt);
 }
 
+// Compute eignefunction, recursively.
+double reig(double x, double K, int niter)
+{
+	if (K < x) return 0.0;
+	if (niter < 0)
+	{
+		// Approximate by a constant.
+		return 1.0 / K;
+	}
+
+	double tkay = 2.0*K;
+	double sum = reig(x/tkay, K, niter-1);
+	sum += reig(0.5 + x/tkay, K, niter-1);
+	sum /= tkay;
+	return sum;
+}
+
 int main (int argc, char * argv[])
 {
 	if (argc < 3)
@@ -278,13 +295,16 @@ int main (int argc, char * argv[])
 	float birr[ARRSZ];
 	float arr[ARRSZ];
 
-	bifurcation_diagram (birr, ARRSZ, 0.0, 0.0, Kay, 12000, 0.0);
+	bifurcation_diagram (birr, ARRSZ, 0.0, 0.0, Kay, 1200, 0.0);
+	fprintf(stderr, "Done with bifur\n");
 	midpoint_diagram (arr, ARRSZ, 0.0, 0.0, Kay, itermax, 0.0);
+	fprintf(stderr, "Done with mid\n");
 
 	for (int i=0; i<ARRSZ; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) ARRSZ);
-		printf("%d	%g	%g	%g\n", i, x, arr[i], birr[i]);
+		double eig = reig(x, Kay, 35);
+		printf("%d	%g	%g	%g	%g\n", i, x, arr[i], birr[i], eig);
 	}
 }
 #endif
