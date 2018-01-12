@@ -128,7 +128,7 @@ double psi_n(double x, double K, int n)
 	if (x < middle)
 		return 1.0 / sqrt(2.0 * (middle - lower));
 
-	return 1.0 / sqrt(2.0 * (upper - middle));
+	return -1.0 / sqrt(2.0 * (upper - middle));
 }
 
 /* Verify orthogonality */
@@ -170,6 +170,45 @@ void verify_ortho(void)
 	printf("Done verifying orthogonality\n");
 }
 
+int fapp = 0;
+double psi(double x, double K)
+{
+	return psi_n(x, K, fapp);
+}
+
+
+/* Return matrix entry for the transfer operator in the hessenberg
+ * basis*/
+double hess(double K, int m, int n)
+{
+	fapp = n;
+#define IPTS 11201
+	double s = 0.0;
+	for (int i=0; i< IPTS; i++)
+	{
+		double x = ((double) i + 0.5) / ((double) IPTS);
+		double Lfn = xfer(x, K, psi);
+		double fm = psi_n(x, K, m);
+		s += fm*Lfn;
+	}
+	s /= (double) IPTS;
+	return s;
+}
+
+void show_melts(double K)
+{
+	int mxi = MAXN-1;
+	mxi = 6;
+	for (int j=0; j< mxi; j++)
+	{
+		for (int i=0; i< mxi; i++)
+		{
+			double g = hess(K, i, j);
+			printf("%d	%d	%g\n", i, j, g);
+		}
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc < 1)
@@ -198,4 +237,5 @@ int main(int argc, char* argv[])
 
 	find_midpoints(K);
 	verify_ortho();
+	show_melts(K);
 }
