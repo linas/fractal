@@ -45,6 +45,8 @@ double part(double x, double K, double (*fun)(double, double), int which)
 #define MAXN 50
 double midpoints[MAXN];
 int mid_sequence[MAXN];
+int lower_sequence[MAXN];
+int upper_sequence[MAXN];
 
 void find_midpoints(double K)
 {
@@ -67,19 +69,51 @@ void find_midpoints(double K)
 
 	for (int j=1; j< MAXN; j++)
 	{
-		double m = mid_sequence[j-1];
-		double lst = K;
+		double mid = midpoints[mid_sequence[j-1]];
+		double lub = K;
 		int idx = MAXN;
 		for (int i=1; i< MAXN; i++)
 		{
-			if (m < midpoints[i] && midpoints[i] < lst) { lst = midpoints[i]; idx = i; }
+			if (mid < midpoints[i] && midpoints[i] < lub) {
+				lub = midpoints[i]; idx = i;
+			}
 		}
 		mid_sequence[j] = idx;
 
-		printf("%d	%d	%g\n", j, idx, lst);
+		printf("%d	%d	%g\n", j, idx, lub);
 	}
+
+	printf("#\n#------------------------\n#\n");
+
+	/* Compute the pointers to the lower and the upper ends */
+	lower_sequence[0] = 0;
+	lower_sequence[1] = 0;
+	for (int j=2; j< MAXN; j++)
+	{
+		double low = 0.0;
+		int idx = MAXN;
+		for (int i=1; i< j; i++)
+		{
+			if (low < midpoints[i])
+			{
+				low = midpoints[i];
+				idx = i;
+			}
+		}
+		lower_sequence[j] = idx;
+		printf("%d	%g	%g\n", j, low, midpoints[j]);
+	}	
 }
 
+/* Return the n'th wave function at the value of x. */
+double psi_n(double x, double K, int n)
+{
+	/* Get the lower, middle and upper bounds */
+	/* The middle is easy; we computed this. */
+	double middle = midpoints[n+1];
+	// double lower
+	return 0.0;
+}
 
 int main(int argc, char* argv[])
 {
