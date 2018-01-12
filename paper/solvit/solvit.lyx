@@ -3186,8 +3186,8 @@ Consider
 \begin_inset Formula 
 \[
 \psi_{1}\left(x\right)=\begin{cases}
-\frac{1}{\sqrt{2m_{1}}} & \mbox{for }0\le x\le m_{1}\\
-\frac{-1}{\sqrt{2\left(K-m_{1}\right)}} & \mbox{for }m_{1}<x\le K\\
+\frac{1}{m_{1}}\sqrt{\frac{\left(K-m_{1}\right)m_{1}}{K}} & \mbox{for }0\le x\le m_{1}\\
+\frac{-1}{K-m_{1}}\sqrt{\frac{\left(K-m_{1}\right)m_{1}}{K}} & \mbox{for }m_{1}<x\le K\\
 0 & \mbox{for }K<x\le1
 \end{cases}
 \]
@@ -3243,8 +3243,8 @@ Consider
 \[
 \psi_{2}\left(x\right)=\begin{cases}
 0 & \mbox{for }0\le x\le m_{1}\\
-\frac{1}{\sqrt{2\left(m_{2}-m_{1}\right)}} & \mbox{for }m_{1}\le x\le m_{2}\\
-\frac{-1}{\sqrt{2\left(K-m_{2}\right)}} & \mbox{for }m_{2}<x\le K\\
+\frac{1}{\left(m_{2}-m_{1}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(K-m_{2}\right)}{K-m_{1}}} & \mbox{for }m_{1}\le x\le m_{2}\\
+\frac{-1}{\left(K-m_{2}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(K-m_{2}\right)}{K-m_{1}}} & \mbox{for }m_{2}<x\le K\\
 0 & \mbox{for }K<x\le1
 \end{cases}
 \]
@@ -3255,8 +3255,8 @@ else define
 \begin_inset Formula 
 \[
 \psi_{2}\left(x\right)=\begin{cases}
-\frac{1}{\sqrt{2m_{2}}} & \mbox{for }0\le x\le m_{2}\\
-\frac{-1}{\sqrt{2\left(m_{1}-m_{2}\right)}} & \mbox{for }m_{2}\le x\le m_{1}\\
+\frac{1}{m_{2}}\sqrt{\frac{m_{2}\left(m_{2}-m_{1}\right)}{m_{1}}} & \mbox{for }0\le x\le m_{2}\\
+\frac{-1}{\left(m_{1}-m_{2}\right)}\sqrt{\frac{m_{2}\left(m_{2}-m_{1}\right)}{m_{1}}} & \mbox{for }m_{2}\le x\le m_{1}\\
 0 & \mbox{for }m_{1}<x\le1
 \end{cases}
 \]
@@ -3285,20 +3285,20 @@ Because each end of the interval on which
 \begin_layout Standard
 The rest of the basis can be constructed iteratively, based on these examples.
  Thus: let 
-\begin_inset Formula $m_{p}$
+\begin_inset Formula $m_{p-1}$
 \end_inset
 
  be the mid-point of 
-\begin_inset Formula $\psi_{p}$
+\begin_inset Formula $\psi_{p-1}$
 \end_inset
 
 .
  Let 
 \begin_inset Formula 
 \[
-m_{p+1}=\begin{cases}
-2Km_{p} & \mbox{for }m_{p}\le\frac{1}{2}\\
-2Km_{p}-K & \mbox{for }\frac{1}{2}<m_{p}
+m_{p}=\begin{cases}
+2Km_{p-1} & \mbox{for }m_{p-1}\le\frac{1}{2}\\
+2Km_{p-1}-K & \mbox{for }\frac{1}{2}<m_{p-1}
 \end{cases}
 \]
 
@@ -3309,7 +3309,7 @@ Let
 \end_inset
 
  be largest midpoint smaller than 
-\begin_inset Formula $m_{p+1}$
+\begin_inset Formula $m_{p}$
 \end_inset
 
  (and 
@@ -3321,7 +3321,7 @@ Let
 \end_inset
 
  be the smallest midpoint larger than 
-\begin_inset Formula $m_{p+1}$
+\begin_inset Formula $m_{p}$
 \end_inset
 
  (and 
@@ -3341,10 +3341,10 @@ Let
  Then define 
 \begin_inset Formula 
 \[
-\psi_{p+1}\left(x\right)=\begin{cases}
+\psi_{p}\left(x\right)=\begin{cases}
 0 & \mbox{for }0\le x\le m_{l}\\
-\frac{1}{\sqrt{2\left(m_{p+1}-m_{l}\right)}} & \mbox{for }m_{l}\le x\le m_{p+1}\\
-\frac{-1}{\sqrt{2\left(m_{u}-m_{p+1}\right)}} & \mbox{for }m_{p+1}<x\le m_{u}\\
+\frac{1}{\left(m_{p}-m_{l}\right)}\sqrt{\frac{\left(m_{p}-m_{l}\right)\left(m_{u}-m_{p}\right)}{m_{u}-m_{l}}} & \mbox{for }m_{l}\le x\le m_{p}\\
+\frac{-1}{\left(m_{u}-m_{p}\right)}\sqrt{\frac{\left(m_{p}-m_{l}\right)\left(m_{u}-m_{p}\right)}{m_{u}-m_{l}}} & \mbox{for }m_{p}<x\le m_{u}\\
 0 & \mbox{for }m_{u}<x\le1
 \end{cases}
 \]

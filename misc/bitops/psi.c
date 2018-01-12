@@ -80,7 +80,7 @@ void find_midpoints(double K)
 		}
 		mid_sequence[j] = idx;
 
-		printf("%d	%d	%g\n", j, idx, lub);
+//		printf("%d	%d	%g\n", j, idx, lub);
 	}
 
 	printf("#\n#------------------------\n#\n");
@@ -111,24 +111,35 @@ void find_midpoints(double K)
 		}
 		lower_sequence[j] = lidx;
 		upper_sequence[j] = uidx;
-		printf("%d	%g	%g	%g\n", j, low, midpoints[j], hi);
+//		printf("%d	%g	%g	%g\n", j, low, midpoints[j], hi);
 	}	
 }
 
 /* Return the n'th wave function at the value of x. */
 double psi_n(double x, double K, int n)
 {
+	if (0 == n)
+	{
+		if (K < x) return 0.0;
+		return 1.0 / sqrt(K);
+	}
+
 	/* Get the lower, middle and upper bounds */
 	n++; /* Off-by-one! */
 	double lower = midpoints[lower_sequence[n]];
 	if (x < lower) return 0.0;
 	double upper = midpoints[upper_sequence[n]];
 	if (upper < x) return 0.0;
-	double middle = midpoints[n];
-	if (x < middle)
-		return 1.0 / sqrt(2.0 * (middle - lower));
 
-	return -1.0 / sqrt(2.0 * (upper - middle));
+	double middle = midpoints[n];
+	double norm = 1.0 / (middle - lower);
+	norm += 1.0 / (upper - middle);
+	norm = 1.0 / sqrt(norm);
+
+	if (x < middle)
+		return norm / (middle - lower);
+
+	return -norm / (upper - middle);
 }
 
 /* Verify orthogonality */
@@ -182,16 +193,20 @@ double psi(double x, double K)
 double hess(double K, int m, int n)
 {
 	fapp = n;
+// #define IPTS 31
 #define IPTS 11201
 	double s = 0.0;
 	for (int i=0; i< IPTS; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) IPTS);
-		double Lfn = xfer(x, K, psi);
+		x *= K;
+		// double Lfn = xfer(x, K, psi);
+double Lfn = psi_n(x, K, n);
 		double fm = psi_n(x, K, m);
 		s += fm*Lfn;
+// printf("wtf %d %d x=%g l=%g r=%g s=%g\n", m, n, x, fm, Lfn, s*K/((double) IPTS));
 	}
-	s /= (double) IPTS;
+	s *= K / (double) IPTS;
 	return s;
 }
 
