@@ -256,7 +256,6 @@ double hess(double K, int m, int n)
 	if (tnlo < 0.0) tnlo = 0.0;
 	if (tnce < 0.0) tnce = 0.0;
 
-	double acc = 0.0;
 	if (dobot)
 	{
 		// If the wavelets don't intersect, then nothing to do
@@ -270,12 +269,51 @@ punt:
 	if (dotop)
 	{
 		// If the wavelets don't intersect, then nothing to do
-		if (tnhi <= mlo) return acc;
-		if (mhi <= tnlo) return acc;
-		if (mlo <= tnlo && tnhi <= mce) return acc;
-		if (mce <= tnlo && tnhi <= mhi) return acc;
+		if (tnhi <= mlo) return 0.0;
+		if (mhi <= tnlo) return 0.0;
+		if (mlo <= tnlo && tnhi <= mce) return 0.0;
+		if (mce <= tnlo && tnhi <= mhi) return 0.0;
 	}
 
+	// If we are here, then there is some non-trivial intersection.
+	// This will take some effort to get right.
+
+	// Get the wavelet values
+	double vmlo = psi_n(0.5*(mlo+mce), K, m);
+	double vmhi = psi_n(0.5*(mhi+mce), K, m);
+
+	double vnlo = psi_n(0.5*(nlo+nce), K, n);
+	double vnhi = psi_n(0.5*(nhi+nce), K, n);
+
+	// Accumulate values here.
+	double acc = 0.0;
+	if (dobot)
+	{
+		double xa = fmax(bnlo, mlo);
+		double xb = fmin(bnce, mce);
+		double xc = fmax(bnce, mce);
+		double xd = fmin(bnhi, mhi);
+
+		acc += vmlo * vnlo * (xb-xa);
+		if (bnce < mce) acc += vmlo * vnhi * (xc - xb);
+		else acc += vmhi * vnlo * (xc - xb);
+		acc += vmhi * vnhi * (xd-xc);
+	}
+
+	if (dotop)
+	{
+		double xa = fmax(tnlo, mlo);
+		double xb = fmin(tnce, mce);
+		double xc = fmax(tnce, mce);
+		double xd = fmin(tnhi, mhi);
+
+		acc += vmlo * vnlo * (xb-xa);
+		if (tnce < mce) acc += vmlo * vnhi * (xc - xb);
+		else acc += vmhi * vnlo * (xc - xb);
+		acc += vmhi * vnhi * (xd-xc);
+	}
+
+	acc /= 2.0 * K;
 	return acc;
 }
 
@@ -288,13 +326,14 @@ void show_melts(double K)
 		if (js < 0) js = 0;
 		for (int j=js; j< mxi; j++)
 		{
-			double g = hess(K, i, j);
+			double g = hess_brute(K, i, j);
+			double h = hess(K, i, j);
 #if 0
 			if (i==j && g < 0.99) printf("Error diag: %d %g", j, g);
 			if (i !=j && 5.0e-5 < g) printf("Error off-diag: %d %d %g\n", i, j, g);
 #endif
 if (g < 2.0e-5) g = 0;
-			printf("%d	%d	%g\n", i, j, g);
+			printf("%d	%d	%g	%g\n", i, j, g, h);
 #if 0
 if (2e-5 < g) printf("------------------- %g %g %g and %g %g %g\n",
 midpoints[lower_sequence[i+1]],
