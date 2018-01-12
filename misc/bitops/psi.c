@@ -88,20 +88,30 @@ void find_midpoints(double K)
 	/* Compute the pointers to the lower and the upper ends */
 	lower_sequence[0] = 0;
 	lower_sequence[1] = 0;
+	upper_sequence[0] = K;
+	upper_sequence[1] = K;
 	for (int j=2; j< MAXN; j++)
 	{
 		double low = 0.0;
-		int idx = MAXN;
+		double hi = K;
+		int lidx = MAXN;
+		int uidx = MAXN;
 		for (int i=1; i< j; i++)
 		{
-			if (low < midpoints[i])
+			if (low < midpoints[i] && midpoints[i] < midpoints[j])
 			{
 				low = midpoints[i];
-				idx = i;
+				lidx = i;
+			}
+			if (midpoints[i] < hi && midpoints[j] < midpoints[i])
+			{
+				hi = midpoints[i];
+				uidx = i;
 			}
 		}
-		lower_sequence[j] = idx;
-		printf("%d	%g	%g\n", j, low, midpoints[j]);
+		lower_sequence[j] = lidx;
+		upper_sequence[j] = uidx;
+		printf("%d	%g	%g	%g\n", j, low, midpoints[j], hi);
 	}	
 }
 
