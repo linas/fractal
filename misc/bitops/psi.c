@@ -331,6 +331,10 @@ rush:
 		if (bnce < mce) acc += vmlo * vnhi * (xc - xb);
 		else acc += vmhi * vnlo * (xc - xb);
 		acc += vmhi * vnhi * (xd-xc);
+
+		PRT("bot ab = %g\n", vmlo * vnlo * (xb-xa));
+		PRT("bot bc = %g\n", (bnce<mce)? vmlo*vnhi*(xc-xb) : vmhi*vnlo*(xc-xb));
+		PRT("bot cd = %g\n", vmhi * vnhi * (xd-xc));
 		PRT("bot acc = %g\n", acc);
 	}
 
@@ -346,6 +350,10 @@ rush:
 		if (tnce < mce) acc += vmlo * vnhi * (xc - xb);
 		else acc += vmhi * vnlo * (xc - xb);
 		acc += vmhi * vnhi * (xd-xc);
+
+		PRT("top ab = %g\n", vmlo * vnlo * (xb-xa));
+		PRT("top bc = %g\n", (tnce<mce)? vmlo*vnhi*(xc-xb) : vmhi*vnlo*(xc-xb));
+		PRT("top cd = %g\n", vmhi * vnhi * (xd-xc));
 		PRT("top acc = %g\n", acc);
 	}
 
@@ -359,6 +367,7 @@ void show_melts(double K)
 	int mxi = MAXN-1;
 	mxi = 5;
 hess(K, 1, 1);
+printf("expect %g\n", hess_brute(K, 1, 1));
 return;
 	for (int i=0; i< mxi; i++)
 	{
