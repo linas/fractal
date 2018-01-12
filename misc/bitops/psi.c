@@ -259,6 +259,12 @@ double hess(double K, int m, int n)
 	// if (tnhi <= mlo) dotop = false;  // tighter bound.
 	PRT("dobot=%d dotop=%d\n", dobot, dotop);
 
+	// preclampsia
+	// double rbnce = bnce;
+	double rbnhi = bnhi;
+	double rtnlo = tnlo;
+	// double rtnce = tnce;
+
 	// Clamp to boundaries
 	if (K < bnce) bnce = K;
 	if (K < bnhi) bnhi = K;
@@ -275,8 +281,8 @@ double hess(double K, int m, int n)
 		if (mhi <= bnlo) goto punt;
 
 		// If the xform wavelet sits inside of right, do nothing.
-		if (mlo <= bnlo && bnhi <= mce && bnce < bnhi) goto punt;
-		if (mce <= bnlo && bnhi <= mhi) goto punt;
+		if (mlo <= bnlo && bnhi <= mce && rbnhi < K) goto punt;
+		if (mce <= bnlo && bnhi <= mhi && rbnhi < K) goto punt;
 
 		// If right sits inside of xform wavelet, do nothing.
 		if (bnlo <= mlo && mhi <= bnce) goto punt;
@@ -293,8 +299,8 @@ punt:
 		if (mhi <= tnlo) goto rush;
 
 		// If the xform wavelet sits inside of right, do nothing.
-		if (mlo <= tnlo && tnhi <= mce && tnlo < tnce) goto rush;
-		if (mce <= tnlo && tnhi <= mhi) goto rush;
+		if (mlo <= tnlo && tnhi <= mce && 0.0 < rtnlo) goto rush;
+		if (mce <= tnlo && tnhi <= mhi && 0.0 < rtnlo) goto rush;
 
 		// If right sits inside of xform wavelet, do nothing.
 		if (tnlo <= mlo && mhi <= tnce) goto rush;
@@ -366,8 +372,8 @@ void show_melts(double K)
 {
 	int mxi = MAXN-1;
 	mxi = 5;
-hess(K, 1, 1);
-printf("expect %g\n", hess_brute(K, 1, 1));
+hess(K, 1, 2);
+printf("expect %g\n", hess_brute(K, 1, 2));
 return;
 	for (int i=0; i< mxi; i++)
 	{
