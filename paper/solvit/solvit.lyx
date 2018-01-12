@@ -3422,7 +3422,7 @@ reference "fig:Hessenberg-Operator-Matrix"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3589,7 +3589,101 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-The Julia Set
+Eigenvalues
+\end_layout
+
+\begin_layout Standard
+Given the apparent sparsity visible in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hessenberg-Operator-Matrix"
+
+\end_inset
+
+, one might think that the eigenvalue problem is fairly stable, numerically.
+ It is not.
+ Numerical exploration discovers a complex spectrum, roughly laid out in
+ a circle, of a radius depending on 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ The radius approaches 
+\begin_inset Formula $1$
+\end_inset
+
+ as 
+\begin_inset Formula $K\to1/2$
+\end_inset
+
+ and approaches 
+\begin_inset Formula $1/2$
+\end_inset
+
+ as 
+\begin_inset Formula $K\to1$
+\end_inset
+
+.
+ (Ignoring, that is, the leading eigenvalue of 1, which is easily found).
+\end_layout
+
+\begin_layout Standard
+This observation is enough to allow some speculation.
+ For 
+\begin_inset Formula $K=1$
+\end_inset
+
+, the transfer operator is solvable, and the spectrum is exactly known.
+ I've written extensively about this spectrum and the eigenvalues in other
+ publications.
+ To recap, it takes several forms: if one restricts oneself to polynomial
+ eigenfunctions, then the spectrum is real, non-negative (it has an extensive
+ kernel) and has eigenvalues of 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Restricting to square-integrable eigenfunctions, the spectrum is real,
+ non-negative, and continuous.
+ The continuous-spectrum eigenfunctions corresponding to values not equal
+ to 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+ can be understood in several ways: if forced to be differentiable, then
+ they are not bounded (they diverge) at the endpoints of the interval.
+ If forced to be bounded, then they are fractal (non-differentiable) over
+ the entire interval.
+ Curiously, I have not carefully explored or documented the unitary spectrum
+ for that operator.
+ Perhaps its time to go do that.
+\end_layout
+
+\begin_layout Standard
+In this case, the approximately curcular spectrum obtained suggests that
+ there should be a discrete real spectrum, corresponding to decaying eigenfuncti
+ons.
+ Given the behavior of the radius as 
+\begin_inset Formula $K\to1$
+\end_inset
+
+ can be interpreted as the first decaying eigenfunction of the Bernoulli
+ shift, this suggests that the radius of the general 
+\begin_inset Formula $K$
+\end_inset
+
+ circle corresponds to the real eigenvalue of the first decaying eigenfunction.
+ The relationship between unitary spectra, and real, continuous spectra
+ is new territory for me, and quite unfamiliar.
+\end_layout
+
+\begin_layout Subsection
+Julia Set
 \end_layout
 
 \begin_layout Standard

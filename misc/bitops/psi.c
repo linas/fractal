@@ -31,7 +31,7 @@ double xfer(double x, double K, double (*fun)(double, double))
 {
 	if (K<x) return 0.0;
 	double res = x / (2.0*K);
-	double elf = fun(res, K) + fun(0.5+res, K); 
+	double elf = fun(res, K) + fun(0.5+res, K);
 	elf /= 2.0*K;
 	return elf;
 }
@@ -41,7 +41,7 @@ double part(double x, double K, double (*fun)(double, double), int which)
 {
 	if (K<x) return 0.0;
 	double res = x / (2.0*K);
-	double elf = fun(0.5*which+res, K); 
+	double elf = fun(0.5*which+res, K);
 	elf /= 2.0*K;
 	return elf;
 }

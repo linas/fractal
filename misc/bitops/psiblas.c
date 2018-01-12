@@ -13,13 +13,15 @@
 #include <lapacke.h>
 #include <cblas.h>
 
-/* 
+/*
  * Eigenvalue and eigenvector problem.
  * Lapack, Eigenvalues only, use: HSEQR
  * Eigenvalues an eigenvectors: HSEQR TREVC
  * DHSEQR for double precision, ZHSEQR for complex double precision.
  *
- * We expect eigenvalues to be real. So don't screw with the complex.
+ * We expect eigenvalues to be real. But they are not.
+ * Gives same results as the GSL version. (to at least 6 decimal places).
+ * (For the ROW_MAJOR version.)
  */
 void eigen(double K, int dim)
 {
@@ -27,7 +29,7 @@ void eigen(double K, int dim)
 mxi = dim;
 	double* matrix = malloc(mxi*mxi*sizeof(double));
 
-	// Do we need this, or the transpose ??? Does it matter?
+	// This fills matrix in row-major order.
 	int idx = 0;
 	for (int i=0; i< mxi; i++)
 	{
@@ -50,9 +52,14 @@ mxi = dim;
 	double* wi = malloc(mxi* sizeof(double));
 	double* z = malloc(mxi*mxi* sizeof(double));
 	lapack_int info;
-	info = LAPACKE_dhseqr(LAPACK_COL_MAJOR, 'E', 'N', mxi, 1, mxi, matrix,
+	info = LAPACKE_dhseqr(LAPACK_ROW_MAJOR, 'E', 'N', mxi, 1, mxi, matrix,
 	                      mxi, wr, wi, z, mxi);
-	printf("duude info=%d\n", info);
+	printf("# info=%d  K=%g\n", info, K);
+	for (int i=0; i< mxi; i++)
+	{
+		double mag = sqrt(wr[i]*wr[i] + wi[i]*wi[i]);
+		printf("%d	%g	%g	%g\n", i, wr[i], wi[i], mag);
+	}
 }
 
 

@@ -13,7 +13,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_eigen.h>
 
-/* 
+/*
  * Eigenvalue and eigenvector problem.
  * GSL has a simpler API than Lapack, so try that first.
  * XXX Except its not stable...
