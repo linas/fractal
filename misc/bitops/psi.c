@@ -201,8 +201,8 @@ double psi(double x, double K)
 double hess_brute(double K, int m, int n)
 {
 	fapp = n;
-// #define IPTS 5311201
-#define IPTS 811201
+#define IPTS 5311201
+// #define IPTS 811201
 	double s = 0.0;
 	for (int i=0; i< IPTS; i++)
 	{
@@ -222,8 +222,8 @@ double hess_brute(double K, int m, int n)
  * basis. Using interval math, and thus "perfectly" accurate. */
 double hess(double K, int m, int n)
 {
-	#define PRT(...) printf(__VA_ARGS__)
-	// #define PRT(...)
+	// #define PRT(...) printf(__VA_ARGS__)
+	#define PRT(...)
 	PRT("ask for %d %d\n", m, n);
 	if (m == 0 && n == 0) return 1.0; // XXX
 	m++; n++;
@@ -370,13 +370,34 @@ rush:
 	return acc;
 }
 
+/* Verify correctness of matrix elements by brute force integration */
+void verify_melts(double K)
+{
+	int mxi = MAXN-1;
+	for (int i=0; i< mxi; i++)
+	{
+		int js = i-1;
+		if (js < 0) js = 0;
+		for (int j=js; j< mxi; j++)
+		{
+			double g = hess_brute(K, i, j);
+			double h = hess(K, i, j);
+			double diff = fabs(g-h);
+			if (5.0e-5 < diff)
+				printf("Matrix Error: %d %d expect=%g\tgot=%g\tdelta=%g\n",
+					i, j, g, h, diff);
+		}
+	}
+	printf("Done verifying matrix elements\n");
+}
+
 void show_melts(double K)
 {
 	int mxi = MAXN-1;
 	mxi = 5;
-hess(K, 1, 4);
-printf("expect %g\n", hess_brute(K, 1, 4));
-return;
+// hess(K, 1, 4);
+// printf("expect %g\n", hess_brute(K, 1, 4));
+// return;
 	for (int i=0; i< mxi; i++)
 	{
 		int js = i-1;
@@ -435,6 +456,7 @@ int main(int argc, char* argv[])
 
 	find_midpoints(K);
 	verify_ortho();
+	verify_melts(K);
 	show_melts(K);
 }
 #endif
