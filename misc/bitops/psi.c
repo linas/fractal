@@ -119,10 +119,53 @@ void find_midpoints(double K)
 double psi_n(double x, double K, int n)
 {
 	/* Get the lower, middle and upper bounds */
-	/* The middle is easy; we computed this. */
-	double middle = midpoints[n+1];
-	// double lower
-	return 0.0;
+	n++; /* Off-by-one! */
+	double lower = midpoints[lower_sequence[n]];
+	if (x < lower) return 0.0;
+	double upper = midpoints[upper_sequence[n]];
+	if (upper < x) return 0.0;
+	double middle = midpoints[n];
+	if (x < middle)
+		return 1.0 / sqrt(2.0 * (middle - lower));
+
+	return 1.0 / sqrt(2.0 * (upper - middle));
+}
+
+/* Verify orthogonality */
+double psi_prod(int m, int n)
+{
+	m++; n++;
+
+	double mlo = midpoints[lower_sequence[m]];
+	double nhi = midpoints[upper_sequence[n]];
+	if (nhi <= mlo) return 0.0;
+
+	double mhi = midpoints[upper_sequence[m]];
+	double nlo = midpoints[lower_sequence[n]];
+	if (mhi <= nlo) return 0.0;
+
+	double mc = midpoints[m];
+	if (mlo <= nlo && nhi <= mc) return 0.0;
+	if (mc <= nlo && nhi <= mhi) return 0.0;
+
+	double nc = midpoints[n];
+	if (nlo <= mlo && mhi <= nc) return 0.0;
+	if (nc <= mlo && mhi <= nhi) return 0.0;
+
+	return 1.0;
+}
+
+void verify_ortho(void)
+{
+	for (int j=0; j< MAXN-1; j++)
+	{
+		for (int i=0; i< MAXN-1; i++)
+		{
+			double d = psi_prod(i, j);
+			if (i != j && 0.0 < d) printf("Error: off-diag %d %d\n", i, j);
+			if (i == j && d < 1.0) printf("Error: not diag %d %g\n", i, d);
+		}
+	}
 }
 
 int main(int argc, char* argv[])
@@ -152,5 +195,5 @@ int main(int argc, char* argv[])
 #endif
 
 	find_midpoints(K);
-
+	verify_ortho();
 }
