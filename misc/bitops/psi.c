@@ -94,8 +94,8 @@ void find_midpoints(double K)
 	{
 		double low = 0.0;
 		double hi = K;
-		int lidx = MAXN;
-		int uidx = MAXN;
+		int lidx = 0;
+		int uidx = 1;
 		for (int i=1; i< j; i++)
 		{
 			if (low < midpoints[i] && midpoints[i] < midpoints[j])
