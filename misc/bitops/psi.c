@@ -8,6 +8,7 @@
  * January 2018
  */
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -121,6 +122,7 @@ void find_midpoints(double K)
 /* Return the n'th wave function at the value of x. */
 double psi_n(double x, double K, int n)
 {
+	// printf("psi ask for %d x=%g K=%g\n", n, x, K);
 	if (0 == n)
 	{
 		if (K < x) return 0.0;
@@ -220,6 +222,7 @@ double hess_brute(double K, int m, int n)
  * basis. Using interval math, and thus "perfectly" accurate. */
 double hess(double K, int m, int n)
 {
+	// printf("ask for %d %d\n", m, n);
 	if (m == 0 && n == 0) return 1.0; // XXX
 	m++; n++;
 
@@ -233,6 +236,7 @@ double hess(double K, int m, int n)
 	double nce = midpoints[n];
 	double nhi = midpoints[upper_sequence[n]];
 
+	// printf("left= %g %g %g right = %g %g %g\n", mlo, mce, mhi, nlo, nce, nhi);
 	// right wavelet in bottom part of xfer oper
 	double bnlo = 2.0 * K * nlo;
 	double bnce = 2.0 * K * nce;
@@ -243,11 +247,13 @@ double hess(double K, int m, int n)
 	double tnce = bnce - K;
 	double tnhi = bnhi - K;
 
+	// printf("bot= %g %g %g top = %g %g %g\n", bnlo, bnce, bnhi, tnlo, tnce, tnhi);
 	// Whether or not to skip computing these branches
 	bool dobot = true;
 	bool dotop = true;
 	if (K < bnlo) dobot = false;    // if (nlo < 0.5)
 	if (tnhi < 0.0) dotop = false;  // if (nhi < 0.5)
+	// printf("dobot=%d dotop=%d\n", dobot, dotop);
 
 	// Clamp to boundaries
 	if (K < bnce) bnce = K;
@@ -256,6 +262,7 @@ double hess(double K, int m, int n)
 	if (tnlo < 0.0) tnlo = 0.0;
 	if (tnce < 0.0) tnce = 0.0;
 
+	// printf("bot= %g %g %g top = %g %g %g\n", bnlo, bnce, bnhi, tnlo, tnce, tnhi);
 	if (dobot)
 	{
 		// If the wavelets don't intersect, then nothing to do
@@ -277,13 +284,16 @@ punt:
 
 	// If we are here, then there is some non-trivial intersection.
 	// This will take some effort to get right.
+	// printf("Start hard work\n");
 
-	// Get the wavelet values
+	// Get the wavelet values. Undo the off-by-one
+	m--; n--;
 	double vmlo = psi_n(0.5*(mlo+mce), K, m);
 	double vmhi = psi_n(0.5*(mhi+mce), K, m);
 
 	double vnlo = psi_n(0.5*(nlo+nce), K, n);
 	double vnhi = psi_n(0.5*(nhi+nce), K, n);
+	// printf("values left= %g %g  right=%g %g\n", vmlo, vmhi, vnlo, vnhi);
 
 	// Accumulate values here.
 	double acc = 0.0;
@@ -320,6 +330,9 @@ punt:
 void show_melts(double K)
 {
 	int mxi = MAXN-1;
+	mxi = 5;
+// hess(K, 4, 3);
+// return;
 	for (int i=0; i< mxi; i++)
 	{
 		int js = i-1;
