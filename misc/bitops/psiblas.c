@@ -10,6 +10,9 @@
 #define NOMAIN 1
 #include "psi.c"
 
+#include <lapacke.h>
+#include <cblas.h>
+
 /* 
  * Eigenvalue and eigenvector problem.
  * Lapack, Eigenvalues only, use: HSEQR
@@ -35,6 +38,21 @@ mxi = dim;
 			idx++;
 		}
 	}
+
+	/*
+	* lapack_int LAPACKE_dhseqr( int matrix_layout, char job, char compz, lapack_int n,
+	*                           lapack_int ilo, lapack_int ihi, double* h,
+	*                           lapack_int ldh, double* wr, double* wi, double* z,
+	*                           lapack_int ldz );
+	*/
+
+	double* wr = malloc(mxi* sizeof(double));
+	double* wi = malloc(mxi* sizeof(double));
+	double* z = malloc(mxi*mxi* sizeof(double));
+	lapack_int info;
+	info = LAPACKE_dhseqr(LAPACK_COL_MAJOR, 'E', 'N', mxi, 1, mxi, matrix,
+	                      mxi, wr, wi, z, mxi);
+	printf("duude info=%d\n", info);
 }
 
 

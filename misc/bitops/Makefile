@@ -6,6 +6,10 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
+LAPACK=/usr/lib/liblapacke.a /usr/lib/lapack/liblapack.a \
+       /usr/lib/libblas/libblas.a \
+       /usr/lib/gcc/x86_64-linux-gnu/6/libgfortran.a \
+       /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
 all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	carry-sum rexfer treefn treestep sampler julia julie psi \
@@ -18,7 +22,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	$(CC) -c $<
 
 .o:
-	$(CC) -o $@ $^ $(FUNC) -lgmp -lpthread -lm -lstdc++
+	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
 bernie.o: bernie.C $(FUNCDIR)/bitops.h
 bigbern.o: bigbern.C
@@ -56,4 +60,4 @@ julie: julie.o $(BRAT)
 psi: psi.o
 matrix: matrix.o $(BRAT)
 psieigen: psieigen.o -lgsl -lgslcblas
-psiblas: psiblas.o
+psiblas: psiblas.o $(LAPACK)
