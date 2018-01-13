@@ -44,7 +44,7 @@ mxi = dim;
 	gsl_eigen_nonsymmv_workspace * w = gsl_eigen_nonsymmv_alloc (mxi);
 	gsl_eigen_nonsymmv (&m.matrix, eval, evec, w);
 	gsl_eigen_nonsymmv_free (w);
-	gsl_eigen_nonsymmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_DESC);
+	// gsl_eigen_nonsymmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_DESC);
 
 	
 	for (int i=0; i< mxi; i++)
@@ -54,13 +54,17 @@ mxi = dim;
 		double x = GSL_REAL(eval_i);
 		double y = GSL_IMAG(eval_i);
 		double mag = sqrt(x*x+y*y);
-		printf ("%d	%g	%g	%g\n", i, x, y, mag);
-#if 0
-		printf ("eigenvector = \n");
-		for (j=0; j< mxi; j++)
+		// printf ("%d	%g	%g	%g\n", i, x, y, mag);
+#if 1
+		// if (0 == i)
 		{
-			gsl_complex z = gsl_vector_complex_get(&evec_i.vector, j);
-			printf("%g + %gi\n", GSL_REAL(z), GSL_IMAG(z));
+			gsl_vector_complex_view evec_i = gsl_matrix_complex_column (evec, i);
+			printf ("#\n# eigenvector = \n#\n");
+			for (int j=0; j< mxi; j++)
+			{
+				gsl_complex z = gsl_vector_complex_get(&evec_i.vector, j);
+				printf("%d	%g	%g\n", j, GSL_REAL(z), GSL_IMAG(z));
+			}
 		}
 #endif
 	}

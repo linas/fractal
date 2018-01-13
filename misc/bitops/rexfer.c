@@ -1,6 +1,7 @@
 
 /*
- * Recurrance in the transfer operator.
+ * Iterated transfer operator.  Attempt to find decaying
+ * eigenfunctions....
  *
  * Dec 2017 Linas Vepstas
  */
@@ -14,30 +15,42 @@ double xiter (double x, double K, int lvl)
 	if (K < x) return 0.0;
 	if (lvl < 0)
 	{
+#if ONE
+		// The lambda=1 eigenfunction
+		return 1.0/K;
+#endif
+#if WTF
 		if (x < 0.4) return 1.0/8.0;
 		if (x < 0.7) return -2.0/8.0;
 		return 1.0/8.0;
+#endif
 
 		if (x < 0.5*K) return 1.0/K;
 		return -1.0/K;
 	}
-	double sum = 0.0;
 	double otk = 0.5 / K;
 	double xtk = otk*x;
 	lvl --;
+	double sum = 0.0;
 	sum += xiter(xtk, K, lvl);
 	sum += xiter(xtk+0.5, K, lvl);
-	// sum *= otk;
+	sum *= otk;
 	// sum *= 2;
-	sum *= K;
+	// sum *= K;
 	return sum;
 }
 
 int main(int argc, char* argv[])
 {
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s K\n", argv[0]); 
+		exit(1);
+	}
+
 	double K = atof(argv[1]);
 #define NPTS 400
-#define NREC 26
+#define NREC 25
 
 	for (int i=0; i< NPTS; i++)
 	{

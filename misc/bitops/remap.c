@@ -1,7 +1,8 @@
 /*
  * remap.c
  *
- * Understand bit-sequence mappings.
+ * Understand bit-sequence mappings.  The expander and compresor
+ * functions.
  *
  * Linas Vepstas Dec 2017
  */
