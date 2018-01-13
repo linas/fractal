@@ -57,9 +57,13 @@ mxi = dim;
 		// printf ("%d	%g	%g	%g\n", i, x, y, mag);
 #if 1
 		// if (0 == i)
+		if (0 !=i && fabs(0.5/K-mag)< 0.01 && 
+			// fabs(y) < 0.0025)
+			// Look for period-three eigenvalue
+			0<y && fabs(y-0.5*sqrt(3.0)/(2.0*K)) < 0.0015)
 		{
 			gsl_vector_complex_view evec_i = gsl_matrix_complex_column (evec, i);
-			printf ("#\n# eigenvector = \n#\n");
+			printf ("#\n# eigenvalue = %g + i %g mag=%g\n#\n", x, y, mag);
 			for (int j=0; j< mxi; j++)
 			{
 				gsl_complex z = gsl_vector_complex_get(&evec_i.vector, j);
