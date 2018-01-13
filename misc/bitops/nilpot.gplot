@@ -1,0 +1,15 @@
+
+set term png size 1024,768
+set out 'nilpot.png'
+
+set xrange [0.5:1]
+set logscale x
+set logscale y
+set key left
+
+plot "nilpot.dat" using 2:3 with lines linewidth 2 title "30", \
+     "nilpot24.dat" using 2:3 with lines linewidth 2 title "24", \
+     "nilpot18.dat" using 2:3 with lines linewidth 2 title "18", \
+     "nilpot32.dat" using 2:3 with lines linewidth 2 title "32", \
+     "nilpot.dat" using 2:(0.02* exp(28*log($2))) with lines linewidth 2, \
+     "nilpot.dat" using 2:(0.01* exp(14.5*log($2))) with lines linewidth 2 
