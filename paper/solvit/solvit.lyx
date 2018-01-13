@@ -2074,16 +2074,29 @@ The transfer operator for the downshift map
 
  is
 \begin_inset Formula 
-\begin{equation}
+\[
 \left[\mathcal{L}_{K}f\right]\left(y\right)=\begin{cases}
 \frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right] & \mbox{ for }0\le y\le K\\
 0 & \mbox{ for }K<y\le1
-\end{cases}\label{eq:xfer oper}
+\end{cases}
+\]
+
+\end_inset
+
+or, written more compactly
+\begin_inset Formula 
+\begin{equation}
+\left[\mathcal{L}_{K}f\right]\left(y\right)=\frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right]\Theta\left(K-y\right)\label{eq:xfer oper}
 \end{equation}
 
 \end_inset
 
-The density distributions graphed in figure 
+where 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ is the Heaviside step function.
+ The density distributions graphed in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Density-Distribution"
@@ -2105,24 +2118,14 @@ That is, the
  satisfies 
 \begin_inset Formula 
 \begin{equation}
-\rho\left(y\right)=\frac{1}{2K}\left[\rho\left(\frac{y}{2K}\right)+\rho\left(\frac{y+K}{2K}\right)\right]\label{eq:eigen-eqn}
+\rho\left(y\right)=\frac{1}{2K}\left[\rho\left(\frac{y}{2K}\right)+\rho\left(\frac{y+K}{2K}\right)\right]\Theta\left(K-y\right)\label{eq:eigen-eqn}
 \end{equation}
 
 \end_inset
 
-whenever 
-\begin_inset Formula $0\le y\le K$
-\end_inset
-
- and 
-\begin_inset Formula $\rho(y)=0$
-\end_inset
-
- for 
-\begin_inset Formula $K<y\le1$
-\end_inset
-
-.
+This is generally refered to as the Frobenius-Perron eigenfunction, as it
+ corresponds to the largest eigenvalue of the transfer operator, and specificall
+y, the eigenvalue 1.
 \end_layout
 
 \begin_layout Standard
@@ -2135,7 +2138,7 @@ More generally, one is interested in characterizing the eigenspectrum
 \end_inset
 
 for eigenvalues 
-\begin_inset Formula $\lambda\le1$
+\begin_inset Formula $\left|\lambda\right|\le1$
 \end_inset
 
  and eigenfunctions 
@@ -2143,25 +2146,29 @@ for eigenvalues
 \end_inset
 
 .
- Typically, on is interested in imposing conditions on the eigenfunctions,
- such that the be (almost-)smooth, or integrable, or square-integrable.
- Clearly one has, in any case, that 
-\begin_inset Formula $\rho(y)=0$
+ Solving this equation requires choosing a space of functions in which to
+ work.
+ Natural choices include any of the Banach spaces, and in particular, the
+ space of square-integrable functions.
+ Particularly interesting is the space of almost-smooth functions, those
+ having discontinuities at only a countable number of locations, but otherwise
+ being infinitely differentiable.
+ Although the discussion so far implicitly conditions one to restrict oneself
+ to real-valued functions, and to consider only real-valued eigenvalues,
+ this is perhaps too sharp a restriction.
+ As will be seen below, the complex eigenvalues seem to play some important
+ role.
+ At any rate, it should be obvious that, whatever the choice of function
+ space, one must have that 
+\begin_inset Formula $\rho\left(y\right)=0$
 \end_inset
 
  whenever 
-\begin_inset Formula $K<y\le1$
+\begin_inset Formula $K<y$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-In general, the largest eigenvalue will be 
-\begin_inset Formula $\lambda=1$
-\end_inset
-
-; this is the Frobenius-Perron eignevalue.
+ This turns out to be a rather harsh condition.
 \end_layout
 
 \begin_layout Standard
@@ -2257,35 +2264,125 @@ Almost solutions
 \end_layout
 
 \begin_layout Standard
-The cpr function behaves in an interesting fashion under the transfer operator.
+If one ignores the Heaviside step function in the definition, one easily
+ finds a number of 
+\begin_inset Quotes eld
+\end_inset
+
+almost solutions
+\begin_inset Quotes erd
+\end_inset
+
+ to the transfer operator.
+ These are most easily discussed by defining the operator
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\mathcal{P}_{K}f\right]\left(y\right)=\frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right]
+\]
+
+\end_inset
+
+Solving this operator is relatively straight-forward.
+ Consider, for example, the monomial 
+\begin_inset Formula $f\left(y\right)=y^{n}$
+\end_inset
+
+.
+ Clearly, 
+\begin_inset Formula $\left[\mathcal{P}_{K}y^{n}\right]$
+\end_inset
+
+ is a polynomial of degree 
+\begin_inset Formula $n$
+\end_inset
+
+ and that therefore, the space of polynomials is closed under the action
+ of 
+\begin_inset Formula $\mathcal{P}_{K}$
+\end_inset
+
+.
+ But this result is even stronger: the monomials provide a basis in which
+ 
+\begin_inset Formula $\mathcal{P}_{K}$
+\end_inset
+
+ is upper-triangular,
+\emph on
+ i.e.
+
+\emph default
+ solvable.
+ It's eigensolutions in this basis are polynomials.
+ The eigenspectrum is clearly discrete, and is given by 
+\begin_inset Formula $\left(2K\right)^{-n-1}$
+\end_inset
+
+ for integers 
+\begin_inset Formula $n$
+\end_inset
+
+ corresponding to the degree of the polynomial eigensolution.
+ 
+\end_layout
+
+\begin_layout Standard
+This all goes horribly wrong if one instead considers 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+ and the almost-monomials 
+\begin_inset Formula $f\left(y\right)=y^{n}\Theta\left(K-y\right)$
+\end_inset
+
+.
+ This does not provide a basis that is closed under the action of 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+.
+ Attempting to find the closure by iterating on 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+ generates a splatter of step functions.
+ This case is examined more closely in the next section.
+ 
+\end_layout
+
+\begin_layout Standard
+Attempting some guess-work, the self-similarity of the cpr function suggests
+ an opening.
  Specifically, let 
 \begin_inset Formula $\mbox{ei}_{K}\left(x\right)=\mbox{cpr}_{K}\left(x\right)-1/2$
 \end_inset
 
 .
- The one finds that, for the domain 
-\begin_inset Formula $0\le y\le K$
-\end_inset
-
-
+ The one finds that
 \begin_inset Formula 
 \begin{align*}
-\left[\mathcal{L}_{K}\mbox{ei}_{K}\right]\left(y\right)= & \frac{1}{2K}\left[\mbox{ei}_{K}\left(\frac{y}{2K}\right)+\mbox{ei}_{K}\left(\frac{y+K}{2K}\right)\right]\\
+\left[\mathcal{P}_{K}\mbox{ei}_{K}\right]\left(y\right)= & \frac{1}{2K}\left[\mbox{ei}_{K}\left(\frac{y}{2K}\right)+\mbox{ei}_{K}\left(\frac{y+K}{2K}\right)\right]\\
 = & \frac{\mbox{ei}_{K}\left(y\right)}{2K}
 \end{align*}
 
 \end_inset
 
-So, in this sense, its 
-\begin_inset Quotes eld
+This is a non-polynomial, fractal eigenfunction of 
+\begin_inset Formula $\mathcal{P}_{K}$
 \end_inset
 
-almost
-\begin_inset Quotes erd
-\end_inset
+, and, with a bit of elbow-grease, one can find many more.
+ This includes the Takagi functions, and thier higher-order analogs, which
+ are, roughly speaking, Takagi functions constructed from polynomials.
+ These all have interesting self-similarity properties under the dyadic
+ monoid.
+\end_layout
 
- an eigenfunction.
- However, its not quite right; in this definition, 
+\begin_layout Standard
+Unfortunately, one has that 
 \begin_inset Formula $\mbox{ei}_{K}\left(x\right)\ne0$
 \end_inset
 
@@ -2293,13 +2390,136 @@ almost
 \begin_inset Formula $K<x$
 \end_inset
 
+; it won't do as an eigenfunction of 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
 .
- Manually forcing it to zero breaks the relationship.
  There is no obvious, simple modification of 
 \begin_inset Formula $\mbox{ei}_{K}\left(x\right)$
 \end_inset
 
- that would cause it to be a valid eigenvalue.
+ that would cause it to be a valid eigensolution of 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+.
+ Manually installing a factor of 
+\begin_inset Formula $\Theta\left(K-y\right)$
+\end_inset
+
+ and then iterating to find the closure leads to the same splatter of step
+ functions as in the case of the polynomials.
+\end_layout
+
+\begin_layout Standard
+Another interesting case arises if one attempts a Fourier-inspired basis.
+ Define 
+\begin_inset Formula 
+\[
+\mbox{e}_{K;n;l}\left(x\right)=\exp i2\pi\left(2l+1\right)\left(2K\right)^{n}x
+\]
+
+\end_inset
+
+for integer 
+\begin_inset Formula $l$
+\end_inset
+
+.
+ One then obtains a shift sequence
+\begin_inset Formula 
+\[
+\left[\mathcal{P}_{K}\mbox{e}_{K;n;l}\right]\left(x\right)=\frac{1}{2K}\mbox{e}_{K;n-1;l}\left(x\right)\left(1+\mbox{e}_{K;n;l}\left(\frac{1}{2}\right)\right)
+\]
+
+\end_inset
+
+This is not a viable candidate for 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+, as it is again beset by the step function.
+ As a shift sequence, it can be used to construct coherent states that are
+ eigenfuctions of 
+\begin_inset Formula $\mathcal{P}_{K}$
+\end_inset
+
+, having any eigenvalue within the unit disk.
+ Specifically, observe that 
+\begin_inset Formula $\mbox{e}_{K;0;l}\left(1/2\right)=\exp i\pi\left(2l+1\right)=-1$
+\end_inset
+
+ so that 
+\begin_inset Formula $\left[\mathcal{P}_{K}\mbox{e}_{K;0;l}\right]\left(x\right)=0$
+\end_inset
+
+ and so the shift sequence terminates after finite iteration.
+ Given a complex value 
+\begin_inset Formula $z$
+\end_inset
+
+, construct the coherent state as
+\begin_inset Formula 
+\[
+\phi_{l;z}\left(x\right)=\sum_{n=0}^{\infty}z^{n}\mbox{e}_{K;n;l}\left(x\right)
+\]
+
+\end_inset
+
+The shift is then
+\begin_inset Formula 
+\[
+\left[\mathcal{P}_{K}\phi_{l;z}\right]\left(x\right)=\frac{z}{2K}\sum_{n=0}^{\infty}z^{n}\left(1+\mbox{e}_{K;n+1;l}\left(\frac{1}{2}\right)\right)\mbox{e}_{K;n;l}\left(x\right)
+\]
+
+\end_inset
+
+This is not particularly useful, until one notices that for for certain
+ values of 
+\begin_inset Formula $K$
+\end_inset
+
+, the fininte series can be truncated to a finite one.
+ Specifically, fix a value of 
+\begin_inset Formula $n=N$
+\end_inset
+
+ and consider those values of 
+\begin_inset Formula $K$
+\end_inset
+
+ for which 
+\begin_inset Formula $\mbox{e}_{K;N;l}\left(1/2\right)=-1$
+\end_inset
+
+.
+ This holds whenever 
+\begin_inset Formula $\left(2K\right)^{N}$
+\end_inset
+
+ is an odd integer, that is, whenever 
+\begin_inset Formula $K=\frac{1}{2}\left(2m+1\right)^{1/N}$
+\end_inset
+
+ (and, as always, 
+\begin_inset Formula $K\le1$
+\end_inset
+
+).
+ For these special values of 
+\begin_inset Formula $K$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\left[\mathcal{P}_{K}\mbox{e}_{K;N;l}\right]\left(x\right)=0$
+\end_inset
+
+ and so 
+\end_layout
+
+\begin_layout Standard
+cyclic Diirichlet L-func
 \end_layout
 
 \begin_layout Subsection
