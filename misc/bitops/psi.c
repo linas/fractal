@@ -46,7 +46,7 @@ double part(double x, double K, double (*fun)(double, double), int which)
 	return elf;
 }
 
-#define MAXN 64
+#define MAXN 200
 double midpoints[MAXN];
 int mid_sequence[MAXN];
 int lower_sequence[MAXN];
@@ -67,7 +67,10 @@ void find_midpoints(double K)
 		else m = 2.0*K*m - K;
 		midpoints[i] = m;
 	}
+}
 
+void sequence_midpoints(double K)
+{
 	/* Now sort them in sequential order. Use a super-stupid sort algo. */
 	mid_sequence[0] = 0;
 
@@ -458,6 +461,7 @@ int main(int argc, char* argv[])
 #endif
 
 	find_midpoints(K);
+	sequence_midpoints(K);
 	verify_ortho();
 	verify_melts(K);
 	show_melts(K);

@@ -40,8 +40,8 @@ julia.o: julia.c
 julie.o: julie.C
 psi.o: psi.c
 matrix.o: matrix.C psi.c
-psieigen.o: psieigen.c psi.c
-psiblas.o: psiblas.c psi.c
+psieigen.o: psieigen.c psi.c psibig.c
+psiblas.o: psiblas.c psi.c psibig.c
 nilpot.o: nilpot.c
 
 bernie: bernie.o $(BRAT) $(FUNC)

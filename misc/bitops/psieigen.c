@@ -78,6 +78,7 @@ int main(int argc, char* argv[])
 	printf("#\n# K=%g\n#\n", K);
 
 	find_midpoints(K);
+	sequence_midpoints(K);
 	verify_ortho();
 	eigen(K, dim);
 }

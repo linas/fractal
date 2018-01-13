@@ -9,6 +9,7 @@
  */
 #define NOMAIN 1
 #include "psi.c"
+#include "psibig.c"
 
 #include <lapacke.h>
 #include <cblas.h>
@@ -90,7 +91,9 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-	find_midpoints(K);
+	// find_midpoints(K);
+	big_midpoints(K, 4000, midpoints, MAXN);
+	sequence_midpoints(K);
 	verify_ortho();
 	eigen(K, dim);
 }
