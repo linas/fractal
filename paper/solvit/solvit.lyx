@@ -4089,43 +4089,57 @@ reference "fig:Hessenberg-Operator-Matrix"
 \end_inset
 
 , one might think that the eigenvalue problem is fairly stable, numerically.
- It is not.
- Numerical exploration discovers a complex spectrum, roughly laid out in
- a circle, of a radius depending on 
-\begin_inset Formula $K$
-\end_inset
-
-.
- The radius approaches 
-\begin_inset Formula $1$
-\end_inset
-
- as 
-\begin_inset Formula $K\to1/2$
-\end_inset
-
- and approaches 
-\begin_inset Formula $1/2$
-\end_inset
-
- as 
-\begin_inset Formula $K\to1$
+ It is not all that much.
+ Numerical exploration discovers that the spectrum is a circle lying in
+ the complex plane, of radius 
+\begin_inset Formula $\left|\lambda\right|=1/2K$
 \end_inset
 
 .
  (Ignoring, that is, the leading eigenvalue of 1, which is easily found).
+ Writing the eigenvalue as 
+\begin_inset Formula $\lambda=\left|\lambda\right|\exp2\pi i\phi$
+\end_inset
+
+, the numerical exploration does not inform whether the allowed values of
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+ are always rational, irrational or may assume arbitrary real values.
+ The numerical exploration does suggest that the eigenvalues are dense on
+ the circle.
 \end_layout
 
 \begin_layout Standard
-This observation is enough to allow some speculation.
- For 
+The question of the allowed values of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is interesting because if only rational 
+\begin_inset Formula $\phi$
+\end_inset
+
+ are allowed, then the decaying eigenfunctions belong to a cyclic group,
+ and exhibit an exact form of Poincare recurrance as they decay.
+ If irrational 
+\begin_inset Formula $\phi$
+\end_inset
+
+ are allowed, then the decaying eigenfunctions are chaotic.
+\end_layout
+
+\begin_layout Standard
+For 
 \begin_inset Formula $K=1$
 \end_inset
 
-, the transfer operator is solvable, and the spectrum is exactly known.
+, the downshift is the Bernoulli shift, the transfer operator is solvable,
+ and the spectrum is exactly known.
+ This has been explored by various authors, most notabley in the work of
+ Dean Driebe.
  I've written extensively about this spectrum and the eigenvalues in other
  publications.
- Writings by Dean Driebe and many others elucidate various properties.
  To recap, it takes several forms, depending on the function space that
  one chooses to work in.
  If one restricts oneself to polynomial eigenfunctions, then the spectrum
@@ -4155,18 +4169,7 @@ This observation is enough to allow some speculation.
 \end_layout
 
 \begin_layout Standard
-In this case, the approximately circular spectrum obtained suggests that
- there are decaying eigenfunctions.
- It is not clear if these are peridoic, or chaotic.
- That is, it is not clear if 
-\begin_inset Formula $\mathcal{L}_{K}^{p}$
-\end_inset
-
- has purely real, positive-definite eigenvalues for some integer 
-\begin_inset Formula $p$
-\end_inset
-
-, or whether these never occur...
+Some illustrations
 \end_layout
 
 \begin_layout Subsection

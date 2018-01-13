@@ -49,7 +49,7 @@ void big_midpoints(double K, int nbits, double* midp, int maxn)
 	for (int i=1; i < maxn; i++)
 	{
 		midp[i] = mpf_get_d(ex);
-printf("# duuude its %d %g\n", i, midp[i]);
+		// printf("# midpoint %d %g\n", i, midp[i]);
 
 		if (0 <= mpf_cmp(ex, half))
 		{

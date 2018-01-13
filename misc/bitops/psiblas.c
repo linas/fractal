@@ -56,11 +56,17 @@ mxi = dim;
 	info = LAPACKE_dhseqr(LAPACK_ROW_MAJOR, 'E', 'N', mxi, 1, mxi, matrix,
 	                      mxi, wr, wi, z, mxi);
 	printf("# info=%d  K=%g\n", info, K);
+	double avg = 0.0;
+	double cnt = 0.0;
 	for (int i=0; i< mxi; i++)
 	{
 		double mag = sqrt(wr[i]*wr[i] + wi[i]*wi[i]);
 		printf("%d	%g	%g	%g\n", i, wr[i], wi[i], mag);
+		double a = avg/cnt;
+		if (i<20 && 0.98*a < mag && mag < 1.02*a) {avg += mag; cnt += 1; }
+		else if (0.5 < mag && mag < 0.999) {avg += mag; cnt += 1; }
 	}
+	printf("#\n# average radius= %g cnt= %g\n#\n", avg/cnt, cnt);
 }
 
 
@@ -92,7 +98,7 @@ int main(int argc, char* argv[])
 #endif
 
 	// find_midpoints(K);
-	big_midpoints(K, 4000, midpoints, MAXN);
+	big_midpoints(K, 9000, midpoints, MAXN);
 	sequence_midpoints(K);
 	verify_ortho();
 	eigen(K, dim);

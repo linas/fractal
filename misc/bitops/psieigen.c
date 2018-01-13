@@ -9,6 +9,7 @@
  */
 #define NOMAIN 1
 #include "psi.c"
+#include "psibig.c"
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_eigen.h>
@@ -49,7 +50,11 @@ mxi = dim;
 	for (int i=0; i< mxi; i++)
 	{
 		gsl_complex eval_i = gsl_vector_complex_get (eval, i);
-		printf ("%d eigenvalue = %g + %gi\n", i, GSL_REAL(eval_i), GSL_IMAG(eval_i));
+
+		double x = GSL_REAL(eval_i);
+		double y = GSL_IMAG(eval_i);
+		double mag = sqrt(x*x+y*y);
+		printf ("%d	%g	%g	%g\n", i, x, y, mag);
 #if 0
 		printf ("eigenvector = \n");
 		for (j=0; j< mxi; j++)
@@ -75,9 +80,10 @@ int main(int argc, char* argv[])
 	}
 	double K = atof(argv[1]);
 	int dim = atoi(argv[2]);
-	printf("#\n# K=%g\n#\n", K);
+	printf("#\n# GSL variant K=%g\n#\n", K);
 
-	find_midpoints(K);
+	// find_midpoints(K);
+	big_midpoints(K, 4000, midpoints, MAXN);
 	sequence_midpoints(K);
 	verify_ortho();
 	eigen(K, dim);

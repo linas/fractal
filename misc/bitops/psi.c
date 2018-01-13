@@ -46,7 +46,7 @@ double part(double x, double K, double (*fun)(double, double), int which)
 	return elf;
 }
 
-#define MAXN 200
+#define MAXN 4000
 double midpoints[MAXN];
 int mid_sequence[MAXN];
 int lower_sequence[MAXN];
@@ -189,7 +189,7 @@ void verify_ortho(void)
 			if (i == j && d < 1.0) printf("Error: not diag %d %g\n", i, d);
 		}
 	}
-	printf("Done verifying orthogonality\n");
+	printf("# Done verifying orthogonality\n");
 }
 
 int fapp = 0;
