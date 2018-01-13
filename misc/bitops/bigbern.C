@@ -252,11 +252,11 @@ static void midpoint_diagram (float *array,
 		array[n] += 1.0;
 		cnt ++;
 
-		mpf_mul(ex, ex, twoK);
-		if (0.5 < x)
+		if (0 <= mpf_cmp(ex, half))
 		{
-			mpf_sub(ex, ex, Kay);
+			mpf_sub(ex, ex, half);
 		}
+		mpf_mul(ex, ex, twoK);
 	}
 
 	// lp_norm for p=1. Interesting but ...
