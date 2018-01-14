@@ -2,9 +2,20 @@
 set term png size 1024,768
 set out 'bitshow.png'
 
+set title "Shift and XOR"
+set key left
 
-plot "bitshow.dat" using 2:3 with lines title "0.9", \
-     "bitshow.dat" using 2:4 with lines title "0.8", \
-     "bitshow.dat" using 2:5 with lines title "0.7", \
-     "bitshow.dat" using 2:6 with lines title "0.6", \
+plot "bitshow.dat" using 2:3 with lines title "0.3333", \
+     "bitshow.dat" using 2:4 with lines title "0.4", \
+     "bitshow.dat" using 2:5 with lines title "oplus", \
+     "bitshow.dat" using 2:6 with lines title "dist", \
+
+set term eps color
+set out 'bitshow.eps'
+
+set xlabel "x"
+set ylabel "K⊗x"
+
+plot "bitshow.dat" using 2:3 with lines lw 2 title "2/3⊗x", \
+     "bitshow.dat" using 2:4 with lines lw 2 title "0.8⊗x", \
 

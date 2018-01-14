@@ -5529,10 +5529,360 @@ almost
  are sparse, but are wrong when 1-bits appear in the same location: the
  XOR discards the carry bits.
  Thus, a simplified model of multiplication would the the shfit-and-XOR
- model: it preoceeds the same way as shift-and-add, but replaces addition
+ model: it proceeds the same way as shift-and-add, but replaces addition
  with XOR.
  What does this look like, and how does the equivalent of the downshift
  behave under this operation?
+\end_layout
+
+\begin_layout Subsection
+Shift-and-XOR
+\end_layout
+
+\begin_layout Standard
+The shift-and-XOR algorithm must like the shift-and-add algorithm, except
+ that it drops the carry bits.
+ Starting from the same spot, let 
+\begin_inset Formula $0\le K\le1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ and represent both by thier binary expansions:
+\begin_inset Formula 
+\[
+x=0.b_{0}b_{1}b_{2}\cdots=\sum_{n=0}^{\infty}b_{n}2^{-n-1}
+\]
+
+\end_inset
+
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+K=0.c_{0}c_{1}c_{2}\cdots=\sum_{n=0}^{\infty}c_{n}2^{-n-1}
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ are either 0 or 1.
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $s_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{n+1}$
+\end_inset
+
+ to be the result of XOR-ing instead of adding the bits.
+\begin_inset Formula 
+\[
+s_{n+1}=b_{n}c_{0}\oplus b_{n-1}c_{1}\oplus\cdots\oplus b_{0}c_{n}=\bigoplus_{k=0}^{n}b_{k}c_{n-k}
+\]
+
+\end_inset
+
+Here, the oplus symbol 
+\begin_inset Formula $\oplus$
+\end_inset
+
+ denotes the XOR operation.
+ Note that each 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+ is either zero or one.
+ Reconstructing a real number from this, one defines
+\begin_inset Formula 
+\[
+K\otimes x=0.s_{0}s_{1}s_{2}\cdots
+\]
+
+\end_inset
+
+where the otimes symbol 
+\begin_inset Formula $\otimes$
+\end_inset
+
+ is pressed into service to indicate the shift-and-XOR product.
+ Note that it is symmetric: 
+\begin_inset Formula $K\otimes x=x\otimes K$
+\end_inset
+
+ and so behaves at least a bit like ordinary multiplication.
+ Its is not distributive over ordinary addition: 
+\begin_inset Formula $\left(a+b\right)\otimes x\ne a\otimes x+b\otimes x$
+\end_inset
+
+ but it is distributive over XOR: 
+\begin_inset Formula $\left(a\oplus b\right)\otimes x=\left(a\otimes x\right)\oplus\left(b\otimes x\right)$
+\end_inset
+
+.
+ It is illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Shift-and-XOR"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Shift and XOR Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Shift-and-XOR"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename shift-xor.eps
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows two functions, 
+\begin_inset Formula $\left(2/3\right)\otimes x$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(4/5\right)\otimes x$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The range of the shift-and-XOR operation is fundamentally different from
+ multiplication.
+ First, because the carry bit is dropped, one has that 
+\begin_inset Formula $s_{0}=0$
+\end_inset
+
+ always, and so that 
+\begin_inset Formula $K\otimes x\le1/2$
+\end_inset
+
+ always, even when both 
+\begin_inset Formula $K\to1$
+\end_inset
+
+ and 
+\begin_inset Formula $x\to1$
+\end_inset
+
+.
+ Next, for any value of 
+\begin_inset Formula $1/2<K\le1$
+\end_inset
+
+, the range of 
+\begin_inset Formula $K\otimes x$
+\end_inset
+
+ runs over the entire interval 
+\begin_inset Formula $[0,1/2]$
+\end_inset
+
+ as 
+\begin_inset Formula $x$
+\end_inset
+
+ runs over the interval 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ The measure is not compressed (other than by a factor of 2) , as there
+ is in ordinary mutiplication.
+ That is, if 
+\begin_inset Formula $S\subset\left[0,1\right]$
+\end_inset
+
+ is a measureable subset of the unit interval, with measure 
+\begin_inset Formula $\mu\left(S\right)$
+\end_inset
+
+, then one has 
+\begin_inset Formula $\mu\left(K\otimes S\right)=\mu\left(S\right)/2$
+\end_inset
+
+.
+ A proof is not given here; this can be readily obtained by considering
+ the correspondence between the natural measure on the reals, and the measure
+ of cylinder sets on the product topology.
+ That is, the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ is endowed with a natural topology, the product topology.
+ The open sets of this topology are called 
+\begin_inset Quotes eld
+\end_inset
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Thier measure is uniformly distributed over unit interval, precisely because
+ the Bernoulli shift is ergodic: the one implies the other.
+\end_layout
+
+\begin_layout Standard
+Indeed, the shift-and-XOR algorithm can be best thought of as a formula
+ for shuffling the bit-strings around, without actually altering them: re-orderi
+ng them, not changing them.
+ The intuitive key to this is to observe that subtracting 
+\begin_inset Formula $x$
+\end_inset
+
+ from 1 just re-orders the unit interval, top to bottom, and that this is
+ the same as flipping all zero bits to one, and v.v.
+ That is, 
+\begin_inset Formula $1-x=x\oplus0.111\cdots$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Another way to see this shuffling is to note that 
+\begin_inset Formula $a\oplus a=0$
+\end_inset
+
+ and that 
+\begin_inset Formula $0\oplus x=x$
+\end_inset
+
+.
+ Thus, for a fixed value of 
+\begin_inset Formula $a$
+\end_inset
+
+, the string 
+\begin_inset Formula $x$
+\end_inset
+
+ and the string 
+\begin_inset Formula $a\oplus x$
+\end_inset
+
+ are paired together, in a unique way, so that either can be gotten from
+ the other.
+ The function 
+\begin_inset Formula $a\oplus[0,1]\to[0,1]$
+\end_inset
+
+ sending 
+\begin_inset Formula $x\mapsto a\oplus x$
+\end_inset
+
+ is an exchange of these unique pairings of strings.
+ If the strings are given thier natural lexicographic sort order, the mapping
+ 
+\begin_inset Formula $x\mapsto a\oplus x$
+\end_inset
+
+ is just a certain kind of shuffle of the sort order; it neither adds new
+ strings, nor deletes any, nor changes thier number.
+ The function is one-to-one and onto.
+ The multiply-and-XOR algorithm is just a repeated sequence of XOR's: 
+\begin_inset Formula 
+\[
+K\otimes x=\left(\frac{c_{0}x}{2}\right)\oplus\left(\frac{c_{1}x}{4}\right)\oplus\left(\frac{c_{2}x}{8}\right)\oplus\cdots
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $K\otimes x$
+\end_inset
+
+ is nothing more than a reshuffling of strings (along with a right-shift
+ equal to the number of leading zero-bits in the binary exapnsion of 
+\begin_inset Formula $K$
+\end_inset
+
+; the right-shift commutes with the measure on the product topology.) Thus,
+ 
+\begin_inset Formula $K\otimes x$
+\end_inset
+
+ preserves the measure on the unit interval (up to a factor of 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+ due to the above-mentioned right-shift).
+\end_layout
+
+\begin_layout Subsection
+XOR-downshift
 \end_layout
 
 \begin_layout Section
