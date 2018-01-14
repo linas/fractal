@@ -75,7 +75,7 @@ mxi = dim;
 			for (int j=0; j< mxi; j++)
 			{
 				gsl_complex z = gsl_vector_complex_get(&evec_i.vector, j);
-				// printf("%d	%g	%g\n", j, GSL_REAL(z), GSL_IMAG(z));
+				printf("# %d	%g	%g\n", j, GSL_REAL(z), GSL_IMAG(z));
 				recof[j] = GSL_REAL(z);
 				imcof[j] = GSL_IMAG(z);
 			}
