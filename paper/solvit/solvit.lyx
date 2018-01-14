@@ -3881,9 +3881,9 @@ sufficiently complete
 This basis provides the Hessenberg representation for the transfer operator.
  Defining
 \begin_inset Formula 
-\[
-\left\langle n\left|{\cal L}_{K}\right|m\right\rangle =\int_{0}^{1}\psi_{n}\left(x\right)\left[\mathcal{L}_{K}\psi_{m}\right]\left(x\right)dx
-\]
+\begin{equation}
+\left\langle n\left|{\cal L}_{K}\right|m\right\rangle =\int_{0}^{1}\psi_{n}\left(x\right)\left[\mathcal{L}_{K}\psi_{m}\right]\left(x\right)dx\label{eq:hessen-matrix-elts}
+\end{equation}
 
 \end_inset
 
@@ -4169,7 +4169,164 @@ For
 \end_layout
 
 \begin_layout Standard
-Some illustrations
+A pair of plausbile, numericly-extracted eigenfunctions are shown in image
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Decaying-Eigenfunction"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Decaying Eigenfunction, Period Two
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Decaying-Eigenfunction"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename decay-0.8.eps
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This shows a numericaly-computed decaying eigenfunction of period two, for
+ 
+\begin_inset Formula $K=0.8$
+\end_inset
+
+.
+ It is period two, in that it corresponds to an eigenvalue of 
+\begin_inset Formula $\lambda=-1/2K=-0.625$
+\end_inset
+
+, so that after one iteration of 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+, the sign flips.
+ This can be confirmed, numerically: after one iteration, the sign really
+ does flip, to within numerical errors.
+ This was computed by numerically diagonalizing the 
+\begin_inset Formula $861\times861$
+\end_inset
+
+ matrix given by the lowest terms of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hessen-matrix-elts"
+
+\end_inset
+
+, and then graphing the eigenvector closes to 
+\begin_inset Formula $\lambda=-0.625$
+\end_inset
+
+ (The GnuMP library was used to provide the required level of precision
+ in the calculations.)
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+Although this figure is drawn with curves labelled 
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+imaginary
+\begin_inset Quotes erd
+\end_inset
+
+, this is a bit fantastic, and is a numeric artifact.
+ For any period-two eigenfunction, the real and imaginary parts would have
+ no coupling, and would be independent of each other; either one could be
+ set to zero and one would still have a valid eigenfunction.
+ This differs from the case of period-three and higher, where the real and
+ imaginary parts are expected to mix.
+ (Nor are the two components orthogonal, as one might expect.) The eigenfunction
+ is also fantastic in that only slightly different numerics result in a
+ completely different eigenfunction being computed.
+ Even the functions resulting from diagonlizing the 
+\begin_inset Formula $863\times863$
+\end_inset
+
+ matrix differ fair amount from those arising from the 
+\begin_inset Formula $861\times861$
+\end_inset
+
+ matrix; there's only a general resemblance.
+ Computed eigenfunctions for period-three are not dissimilar, nor are the
+ ones for other values of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ They do seem to start having the general oscillatory character of 
+\begin_inset Formula $\sin\left(1/x\right)$
+\end_inset
+
+ as 
+\begin_inset Formula $K\to1/2$
+\end_inset
+
+, but its not clear if this is a numeric artifact, or something real.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection

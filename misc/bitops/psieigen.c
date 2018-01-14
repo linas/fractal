@@ -58,10 +58,13 @@ mxi = dim;
 #if 1
 		// if (0 == i)
 		if (0 !=i && fabs(0.5/K-mag)< 0.01 && 
-			x < 0 && 0 < y && fabs(y) < 0.0056) // OK for K=0.6
-			// x< 0 && 0 < y && fabs(y) < 0.0063) // OK for K=0.7
-			// x < 0 && 0 < y && fabs(y) < 0.0068) // OK for K=0.8
-			// x < 0 && 0 < y && fabs(y) < 0.015) // OK for K=0.9
+			// x < 0 && 0 < y && fabs(y) < 0.012) // OK for K=0.6 and 861
+			// x < 0 && 0 < y && fabs(y) < 0.0056) // OK for K=0.6 and 461
+			// x< 0 && 0 < y && fabs(y) < 0.0063) // OK for K=0.7 and 461
+			// x < 0 && 0 < y && fabs(y) < 0.0068) // OK for K=0.8 and 461
+			x < 0 && 0 < y && fabs(y) < 0.0047) // OK for K=0.8 and 861
+			// x < 0 && 0 < y && fabs(y) < 0.015) // OK for K=0.9 and 461
+			// x < 0 && 0 < y && fabs(y) < 0.0016) // OK for K=0.9 and 861
 			// Look for period-three eigenvalue
 			// 0<y && fabs(y-0.5*sqrt(3.0)/(2.0*K)) < 0.0015)
 		{
@@ -78,6 +81,10 @@ mxi = dim;
 			}
 
 #define NPTS 1201
+			double sre = 0;
+			double sim = 0;
+			double sabs = 0;
+			double sdot = 0;
 			for (int n=0; n< NPTS; n++)
 			{
 				double ex = (((double) n) + 0.5) / ((double) NPTS);
@@ -108,10 +115,22 @@ mxi = dim;
 					if (K < ex) ttf = 0;
 					ttrey += ttf * recof[j];
 					ttimy += ttf * imcof[j];
+
 				}
 				printf("%d	%g	%g	%g	%g	%g	%g	%g\n",
 					n, ex, rey, imy, trey, timy, ttrey, ttimy);
+
+				sre += rey;
+				sim += imy;
+				sabs += sqrt(rey*rey+imy*imy);
+				sdot += rey*imy;
 			}
+			sre /= NPTS;
+			sim /= NPTS;
+			sabs /= NPTS;
+			sdot /= NPTS;
+			printf("#\n# gral-re=%g gral-im=%g gral-abs=%g gral-dot=%g\n#\n",
+			     sre, sim, sabs, sdot);
 		}
 #endif
 	}

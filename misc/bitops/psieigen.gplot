@@ -9,6 +9,11 @@ set out 'psieigen.png'
 # plot "psieigen.dat" using 1:(abs($2)) with linespoints lw 2 title "re", \
 #      "psieigen.dat" using 1:(abs($3)) with linespoints lw 2 title "im"
 
+# set term eps color
+# set out 'decay-0.8.eps'
+# set title "Decaying Eigenfunction, Period Two"
+
+set yrange [-3:3]
 plot "psieigen.dat" using 2:3 with lines lw 2 title "re", \
      "psieigen.dat" using 2:4 with lines lw 2 title "im", \
      "psieigen.dat" using 2:(-$5) with lines lw 2 title "tre", \
