@@ -36,13 +36,19 @@ double bern(double x, double K)
 	return K*x;
 }
 
-double noadd(double x, double K)
+double nocarry(double x, double K)
 {
+	// Notes:
+	// 1) The mult_xor function is technically incorrect;
+	//    its too large by a factor of two.
+	//    That's why we can skip multiplying K by two.
+	// 2) The mult_xor function just shuffles, so we post-multiply by
+	//    two, to get a return value between zero and one.
 	if (0.5 <= x)
 	{
-		return mult_xor (K, (x - 0.5));
+		return 2.0 * mult_xor (K, (x - 0.5));
 	}
-	return mult_xor(K, x);
+	return 2.0*mult_xor(K, x);
 }
 
 double tent(double x, double K)
@@ -59,9 +65,9 @@ double notent(double x, double K)
 {
 	if (0.5 <= x)
 	{
-		return mult_xor (K, (1.0 - x));
+		return 2.0*mult_xor (K, (1.0 - x));
 	}
-	return mult_xor(K, x);
+	return 2.0*mult_xor(K, x);
 }
 
 double feig(double x, double K)
@@ -72,9 +78,15 @@ double feig(double x, double K)
 
 double nofeig(double x, double K)
 {
-	K *= 2.0;
-	// return mult_xor(K, x * (1.0 - x));
-	return mult_xor(K, mult_xor(x, (1.0 - x)));
+	// Below is intersting/crazy
+	// return mult_xor(K, 4.0 * x * (1.0 - x));
+
+	// Below is same as above. Multiplying by 2 commutes with mult_xor
+	// return 2.0 * mult_xor(K, 2.0 * x * (1.0 - x));
+	return 4.0 * mult_xor(K, x * (1.0 - x));
+
+	// Below is totally uniform
+	// return 2.0* mult_xor(K, 2.0 * mult_xor(x, (1.0 - x)));
 }
 
 static void bifurcation_diagram (float *array,
@@ -99,12 +111,12 @@ static void bifurcation_diagram (float *array,
 		/* OK, now start iterating the benoulli map */
 		for (int iter=0; iter < 50; iter++)
 		{
-			x = bern(x, K);
-			// x = noadd(x, K);
+			// x = bern(x, K);
+			// x = nocarry(x, K);
 			// x = tent(x, K);
 			// x = notent(x, K);
 			// x = feig(x, K);
-			// x = nofeig(x, K);
+			x = nofeig(x, K);
 
 			double en = array_size * (x-floor(x));
 			int n = en;

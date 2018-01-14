@@ -13,8 +13,14 @@
 # ../../generate/renorm lo j 1.0 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > bernlo.png
 
-# ../../generate/renorm noadd j 1.0 0
-# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > noadd.png
+# ../../generate/renorm nocarry j 1.0 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > nocarry.png
+
+# ../../generate/renorm notent j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > notent.png
+
+../../generate/renorm nofeig j 1 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > nofeig.png
 
 # ../../generate/renorm tent j 0.5 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > tent.png
@@ -37,14 +43,8 @@
 # ../../generate/renorm feig-4K-fat j 0.5 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > feig-4K-fat.png
 
-# ../../generate/renorm notent j 0.7 0
-# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > notent.png
-
 # ../../generate/renorm feig j 0.7 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > feig.png
-
-# ../../generate/renorm nofeig j 0.7 0
-# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > nofeig.png
 
 # ../../generate/renorm bigly j 0.5 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > bern-4K.png
@@ -130,6 +130,6 @@
 # ../../generate/abs j j
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.99.png
 
-../../generate/renorm matrix-999 j 1.5 0
-../../generate/abs j j
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.999.png
+# ../../generate/renorm matrix-999 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.999.png
