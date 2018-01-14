@@ -58,16 +58,59 @@ mxi = dim;
 #if 1
 		// if (0 == i)
 		if (0 !=i && fabs(0.5/K-mag)< 0.01 && 
-			// fabs(y) < 0.0025)
+			x < 0 && 0 < y && fabs(y) < 0.0056) // OK for K=0.6
+			// x< 0 && 0 < y && fabs(y) < 0.0063) // OK for K=0.7
+			// x < 0 && 0 < y && fabs(y) < 0.0068) // OK for K=0.8
+			// x < 0 && 0 < y && fabs(y) < 0.015) // OK for K=0.9
 			// Look for period-three eigenvalue
-			0<y && fabs(y-0.5*sqrt(3.0)/(2.0*K)) < 0.0015)
+			// 0<y && fabs(y-0.5*sqrt(3.0)/(2.0*K)) < 0.0015)
 		{
 			gsl_vector_complex_view evec_i = gsl_matrix_complex_column (evec, i);
 			printf ("#\n# eigenvalue = %g + i %g mag=%g\n#\n", x, y, mag);
+			double *recof = malloc(mxi*sizeof(double));
+			double *imcof = malloc(mxi*sizeof(double));
 			for (int j=0; j< mxi; j++)
 			{
 				gsl_complex z = gsl_vector_complex_get(&evec_i.vector, j);
-				printf("%d	%g	%g\n", j, GSL_REAL(z), GSL_IMAG(z));
+				// printf("%d	%g	%g\n", j, GSL_REAL(z), GSL_IMAG(z));
+				recof[j] = GSL_REAL(z);
+				imcof[j] = GSL_IMAG(z);
+			}
+
+#define NPTS 1201
+			for (int n=0; n< NPTS; n++)
+			{
+				double ex = (((double) n) + 0.5) / ((double) NPTS);
+				double rey = 0;
+				double imy = 0;
+				double trey = 0;
+				double timy = 0;
+				double ttrey = 0;
+				double ttimy = 0;
+				for (int j=0; j< mxi; j++)
+				{
+					double f = psi_n(ex, K, j);
+					rey += f * recof[j];
+					imy += f * imcof[j];
+
+					double tex = ex / (2.0*K);
+					double tf = psi_n(tex, K, j) + psi_n(0.5+tex, K, j);
+					if (K < ex) tf = 0;
+					trey += tf * recof[j];
+					timy += tf * imcof[j];
+
+					// Supposed to be doubled but its fu'ed up.
+					double ttex = tex / (2.0*K);
+					double ttf = psi_n(ttex, K, j);
+					ttf += psi_n(0.5+ttex, K, j);
+					ttf += psi_n(ttex+0.5/(2.0*K), K, j);
+					ttf += psi_n(ttex+(0.5/(2.0*K))+0.5, K, j);
+					if (K < ex) ttf = 0;
+					ttrey += ttf * recof[j];
+					ttimy += ttf * imcof[j];
+				}
+				printf("%d	%g	%g	%g	%g	%g	%g	%g\n",
+					n, ex, rey, imy, trey, timy, ttrey, ttimy);
 			}
 		}
 #endif

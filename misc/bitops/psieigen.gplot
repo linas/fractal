@@ -2,8 +2,17 @@
 set term png size 1024,768
 set out 'psieigen.png'
 
-set logscale y
-set xrange [0:350]
-set yrange [0.0001:]
+# set logscale y
+# set yrange [0.0001:]
+# set xrange [0:350]
 
-plot "psieigen.dat" using 1:(abs($2)) with linespoints lw 2 title ""
+# plot "psieigen.dat" using 1:(abs($2)) with linespoints lw 2 title "re", \
+#      "psieigen.dat" using 1:(abs($3)) with linespoints lw 2 title "im"
+
+plot "psieigen.dat" using 2:3 with lines lw 2 title "re", \
+     "psieigen.dat" using 2:4 with lines lw 2 title "im", \
+     "psieigen.dat" using 2:(-$5) with lines lw 2 title "tre", \
+     "psieigen.dat" using 2:(-$6) with lines lw 2 title "tim", \
+
+#     "psieigen.dat" using 2:7 with lines lw 2 title "ttre", \
+#     "psieigen.dat" using 2:8 with lines lw 2 title "ttim"

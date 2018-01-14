@@ -126,9 +126,9 @@ void sequence_midpoints(double K)
 double psi_n(double x, double K, int n)
 {
 	// printf("psi ask for %d x=%g K=%g\n", n, x, K);
+	if (K < x) return 0.0;
 	if (0 == n)
 	{
-		if (K < x) return 0.0;
 		return 1.0 / sqrt(K);
 	}
 
