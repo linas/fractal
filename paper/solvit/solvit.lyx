@@ -4186,7 +4186,7 @@ reference "fig:Decaying-Eigenfunction"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4425,7 +4425,7 @@ j\left(\left(b_{n}\right)\right)=a_{b_{o}}\circ a_{b_{1}}\circ a_{b_{2}}\circ\cd
 
 \end_inset
 
- Figure 
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Julia-Set-visualization"
@@ -4449,7 +4449,7 @@ reference "fig:Range-compress"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4612,6 +4612,74 @@ ng; it simply rescales things.
  in the product topology.
  In particular, the multiplication of two numbers appear to involve chaotic
  dynamics of the carry bit.
+\end_layout
+
+\begin_layout Subsection
+Downshift, Revisited
+\end_layout
+
+\begin_layout Standard
+The downshift of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+ takes a simple form when reinterpreted on bit-strings: it is the concatenation
+ of mutiplication, followed by a left-shift.
+ Given a bit-string 
+\begin_inset Formula $\left(b_{n}\right)=0.b_{0}b_{1}b_{2}\cdots$
+\end_inset
+
+ denote its left-shift by 
+\begin_inset Formula $U$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+U\left(0.b_{0}b_{1}b_{2}\cdots\right)=0.b_{1}b_{2}\cdots
+\]
+
+\end_inset
+
+which, for real numbers, corresponds to 
+\begin_inset Formula 
+\[
+U(x)=\begin{cases}
+2x & \mbox{ for }0\le x<\frac{1}{2}\\
+2x-1 & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+which is none-other than the Bernoulli shift of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli shift"
+
+\end_inset
+
+ with a change of notation.
+ The downshift is then
+\begin_inset Formula 
+\[
+b_{K}\left(x\right)=M_{K}\left(U\left(x\right)\right)
+\]
+
+\end_inset
+
+so that the iterated downshift is an alternation between a left-shift and
+ a multiplication.
+ The act of discarding the most significant bit (the MSB) with each left-shift
+ alters the dynamics of iterated multiplication.
+\end_layout
+
+\begin_layout Standard
+This suggests that studying multiplication and the multiplication operator
+ might provide fruitful insight into the downshift.
 \end_layout
 
 \begin_layout Subsection
@@ -4963,6 +5031,15 @@ Note that the
 
 \begin_layout Subsection
 Haar Basis Matrix Elements
+\end_layout
+
+\begin_layout Standard
+The Haar basis matrix elements for the downshift proved to be a bit unweildy
+ and not terribly useful.
+ The corresponding matrix elements for the multiplcation operator have the
+ same general essence, but are slightly simpler and shorter to write down.
+ In all other respects, they still have the same tractability issues.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5377,69 +5454,6 @@ behind it
 \end_layout
 
 \begin_layout Subsection
-Downshift, Revisited
-\end_layout
-
-\begin_layout Standard
-The downshift of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:downshift"
-
-\end_inset
-
- takes a simple form when reinterpreted on bit-strings: it is the concatenation
- of mutiplication, followed by a left-shift.
- Given a bit-string 
-\begin_inset Formula $\left(b_{n}\right)=0.b_{0}b_{1}b_{2}\cdots$
-\end_inset
-
- denote its left-shift by 
-\begin_inset Formula $U$
-\end_inset
-
- given by
-\begin_inset Formula 
-\[
-U\left(0.b_{0}b_{1}b_{2}\cdots\right)=0.b_{1}b_{2}\cdots
-\]
-
-\end_inset
-
-which, for real numbers, corresponds to 
-\begin_inset Formula 
-\[
-U(x)=\begin{cases}
-2x & \mbox{ for }0\le x<\frac{1}{2}\\
-2x-1 & \mbox{ for }\frac{1}{2}\le x\le1
-\end{cases}
-\]
-
-\end_inset
-
-which is none-other than the Bernoulli shift of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Bernoulli shift"
-
-\end_inset
-
- with a change of notation.
- The downshift is then
-\begin_inset Formula 
-\[
-b_{K}\left(x\right)=M_{K}\left(U\left(x\right)\right)
-\]
-
-\end_inset
-
-so that the iterated downshift is an alternation between a left-shift and
- a multiplication.
- The act of discarding the most significant bit (the MSB) with each left-shift
- alters the dynamics of the iterated multiplication.
-\end_layout
-
-\begin_layout Subsection
 Tree-view
 \end_layout
 
@@ -5459,15 +5473,32 @@ Points:
 3) adding a number to itself is like shifting tree up (since its just 2x)
 \end_layout
 
-\begin_layout Standard
-4) carry bit's can be deferred during (repeated) addition.
- Instead, keep a count for each bit, and then after accumulation is done,
- then distribute the counts as carry bits.
- This is useful for multiplication algo that is shift and add.
+\begin_layout Subsection
+Simplified Models of Multiplication
 \end_layout
 
 \begin_layout Standard
-5) so the representation here is a natural number for each bit location.
+The shift-and-add algorithm is obviously rather complex; can it be replaced
+ by something simpler? The particular question to ask is how much of the
+ chaotic dynamics of the downshift is due to the propagation of the carrry
+ bit, and how much of it is due to other parts of the algorithm? Specifically,
+ the addition of two numbers, which requires a carry bit, can be replaced
+ by a bit-wise XOR of thier bit strings: this generates 
+\begin_inset Quotes eld
+\end_inset
+
+almost
+\begin_inset Quotes erd
+\end_inset
+
+ the same results as addition, when the number of 1-bits in the strings
+ are sparse, but are wrong when 1-bits appear in the same location: the
+ XOR discards the carry bits.
+ Thus, a simplified model of multiplication would the the shfit-and-XOR
+ model: it preoceeds the same way as shift-and-add, but replaces addition
+ with XOR.
+ What does this look like, and how does the equivalent of the downshift
+ behave under this operation?
 \end_layout
 
 \begin_layout Section
