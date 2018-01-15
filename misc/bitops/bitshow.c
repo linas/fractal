@@ -28,12 +28,20 @@ int main(int argc, char* argv[])
 		double k3x = add_xor(K3, x);
 		double k4x = add_xor(K4, x);
 */
+/*
 		K3 = add_xor(K1,K2);
 		double k1x = mult_xor(K1, x);
 		double k2x = mult_xor(K2, x);
+
 		double k3x = mult_xor(K3, x);
 		double k4x = mult_xor(K4, x);
 		k4x = add_xor(k1x, k2x);
+*/
+
+		double k1x = mult_xor(K1, x);
+		double k2x = mult_xor(K1, k1x);
+		double k3x = mult_xor(K1, k2x);
+		double k4x = mult_xor(K1, k3x);
 
 		printf ("%d	%g	%g	%g	%g	%g\n", i, x, k1x, k2x, k3x, k4x);
 	}

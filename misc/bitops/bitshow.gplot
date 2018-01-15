@@ -5,17 +5,23 @@ set out 'bitshow.png'
 set title "Shift and XOR"
 set key left
 
-plot "bitshow.dat" using 2:3 with lines title "0.3333", \
-     "bitshow.dat" using 2:4 with lines title "0.4", \
-     "bitshow.dat" using 2:5 with lines title "oplus", \
-     "bitshow.dat" using 2:6 with lines title "dist", \
+plot "bitshow.dat" using 2:3 with lines title "a", \
+     "bitshow.dat" using 2:4 with lines title "b", \
+     "bitshow.dat" using 2:5 with lines title "c", \
+     "bitshow.dat" using 2:6 with lines title "d", \
 
-set term eps color
-set out 'bitshow.eps'
-
-set xlabel "x"
-set ylabel "K⊗x"
-
-plot "bitshow.dat" using 2:3 with lines lw 2 title "2/3⊗x", \
-     "bitshow.dat" using 2:4 with lines lw 2 title "0.8⊗x", \
-
+# #################################################################
+# Used to generate the shift-XOR.eps image for the paper
+#
+# set term eps color
+# set out 'bitshow.eps'
+#
+# set title "Shift and XOR"
+# set key left
+# set xlabel "x"
+# set ylabel "K⊗x"
+#
+# plot "bitshow.dat" using 2:3 with lines lw 2 title "2/3⊗x", \
+#      "bitshow.dat" using 2:4 with lines lw 2 title "0.8⊗x", \
+#
+# #################################################################
