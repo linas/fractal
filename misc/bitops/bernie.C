@@ -51,6 +51,23 @@ double nocarry(double x, double K)
 	return 2.0*mult_xor(K, x);
 }
 
+int clamp(int n)
+{
+	int max = 1;
+	if (max < n) return max;
+	return n;
+}
+
+double mangle_carry(double x, double K)
+{
+	//    two, to get a return value between zero and one.
+	if (0.5 <= x)
+	{
+		x -= 0.5;
+	}
+	return mangle_multiply(K, x, clamp);
+}
+
 double tent(double x, double K)
 {
 	K *= 2.0;

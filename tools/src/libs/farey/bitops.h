@@ -24,6 +24,9 @@ double add_xor(double a, double b);
  */
 double mult_xor(double a, double b);
 
+/** Mangled multiplication... See the code, the paper... */
+double mangle_multiply(double a, double b, int (*mangle)(int));
+
 #ifdef   __cplusplus
 };
 #endif

@@ -113,7 +113,15 @@ double mult_xor(double a, double b)
 	return bits_to_float(prod);
 }
 
-double multiply(double a, double b)
+/**
+ * Perform mangled multiplication of two floating-point numbers.
+ * If the function mangle() is the identity function, then this
+ * is just the ordinary multiplication of two floats.
+ *
+ * The function mangle() is applied to the sum of the carry bits.
+ * It ... mangles things...
+ */
+double mangle_multiply(double a, double b, int (*mangle)(int))
 {
 	a -= floor(a);
 	b -= floor(b);
@@ -146,6 +154,12 @@ double multiply(double a, double b)
 		if (1.0 <= b) b -= 1.0;
 	}
 
+	// Mangle the sum of teh carry bits in some way ...
+	for (int i=0; i< MANTISZ; i++)
+	{
+		sum[i] = mangle(sum[i]);
+	}
+
 	// The carry bits 
 	char carry[MANTISZ+2];
 	carry[MANTISZ+1] = 0;
@@ -164,6 +178,13 @@ double multiply(double a, double b)
 
 	// Now convert back to double.
 	return bits_to_float(prod);
+}
+
+static int id(int n) {return n; }
+
+double multiply(double a, double b)
+{
+	return mangle_multiply(a, b, id);
 }
 
 // #define UNIT_TEST
