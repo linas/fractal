@@ -10,7 +10,7 @@
 
 #include "bitops.h"
 
-#define MANTISZ 52
+#define MANTISZ 58
 
 // Convert float to bit string
 static void float_to_bits(double a, char* bits)
@@ -113,6 +113,60 @@ double mult_xor(double a, double b)
 	return bits_to_float(prod);
 }
 
+double multiply(double a, double b)
+{
+	a -= floor(a);
+	b -= floor(b);
+
+	// First, create a bit-expansion of a
+	char abits[MANTISZ];
+	float_to_bits(a, abits);
+
+	// The sum of the carry bits
+	char sum[MANTISZ];
+	for (int i=0; i< MANTISZ; i++)
+	{
+		sum[i] = 0;
+	}
+
+	// Now, multiply b into a.
+	for (int i=0; i< MANTISZ; i++)
+	{
+		if (0.5 <= b)
+		{
+			// Accumulate a/2^i into the product
+			for (int j=i; j<MANTISZ; j++)
+			{
+				if (abits[j-i]) sum[j] ++;
+			}
+		}
+
+		// Shift left one bit
+		b *= 2.0;
+		if (1.0 <= b) b -= 1.0;
+	}
+
+	// The carry bits 
+	char carry[MANTISZ+2];
+	carry[MANTISZ+1] = 0;
+	for (int i= MANTISZ; 0 < i; i--)
+	{
+		carry[i] = sum[i-1] + (carry[i+1] >> 1);
+	}
+	carry[0] = carry[1] >> 1;
+
+	// The product 
+	char prod[MANTISZ];
+	for (int i=0; i< MANTISZ; i++)
+	{
+		prod[i] = carry[i] % 2;
+	}
+
+	// Now convert back to double.
+	return bits_to_float(prod);
+}
+
+// #define UNIT_TEST
 #ifdef UNIT_TEST
 
 #include <stdio.h>
@@ -128,6 +182,8 @@ int main (int argc, char* argv[])
 	double x = atof(argv[1]);
 	double y = atof(argv[2]);
 
-	printf ("its %g x %g = %g\n", x,y, mult_xor(x,y));
+	printf ("its %g otimes %g = %g\n", x,y, mult_xor(x,y));
+	double mxy = multiply (x,y);
+	printf ("%g x %g = %g = %g delta=%g\n", x,y, mxy, x*y, mxy-x*y);
 }
 #endif
