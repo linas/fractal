@@ -4617,9 +4617,9 @@ The difficulties presented in the previous section suggests that studying
 
  is given by 
 \begin_inset Formula 
-\[
-M_{K}\left(x\right)=Kx
-\]
+\begin{equation}
+M_{K}\left(x\right)=Kx\label{eq:multiplication}
+\end{equation}
 
 \end_inset
 
@@ -5246,9 +5246,9 @@ Define
 
  to be the non-negative integer
 \begin_inset Formula 
-\[
-s_{n+1}=b_{n}c_{0}+b_{n-1}c_{1}+\cdots+b_{0}c_{n}=\sum_{k=0}^{n}b_{k}c_{n-k}
-\]
+\begin{equation}
+s_{n+1}=b_{n}c_{0}+b_{n-1}c_{1}+\cdots+b_{0}c_{n}=\sum_{k=0}^{n}b_{k}c_{n-k}\label{eq:carry-bits}
+\end{equation}
 
 \end_inset
 
@@ -5289,7 +5289,7 @@ The final step is to reduce the the sum series
  This is accomplished recurseively, by performing a carry operation:
 \begin_inset Formula 
 \begin{equation}
-d_{n}=s_{n}+\left\lfloor \frac{d_{n+1}}{2}\right\rfloor \label{eq:carry bits}
+d_{n}=s_{n}+\left\lfloor \frac{d_{n+1}}{2}\right\rfloor \label{eq:propagate}
 \end{equation}
 
 \end_inset
@@ -5312,9 +5312,9 @@ where
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-a_{n}=d_{n}\mod\,2
-\]
+\begin{equation}
+a_{n}=d_{n}\mod\,2\label{eq:remainder}
+\end{equation}
 
 \end_inset
 
@@ -5342,7 +5342,7 @@ Kx=0.a_{0}a_{1}a_{2}\cdots=\sum_{n=0}^{\infty}a_{n}2^{-n-1}
 The problem with this algorithm is that the relation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:carry bits"
+reference "eq:propagate"
 
 \end_inset
 
@@ -5390,7 +5390,7 @@ The other way to compute is to observe that the iteration is convergent.
  The recursion 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:carry bits"
+reference "eq:propagate"
 
 \end_inset
 
@@ -5978,19 +5978,19 @@ Given a fixed
 \end_inset
 
 , define 
-\begin_inset Formula $S_{K}:\left[0,1\right]\to\left[0,1\right]$
+\begin_inset Formula $R_{K}:\left[0,1\right]\to\left[0,1\right]$
 \end_inset
 
  as
 \begin_inset Formula 
 \[
-S_{K}\left(x\right)=2K\otimes x
+R_{K}\left(x\right)=2K\otimes x
 \]
 
 \end_inset
 
 As observed previously, 
-\begin_inset Formula $S_{K}$
+\begin_inset Formula $R_{K}$
 \end_inset
 
  is an automorphism of the unit interval, and more: it is a permuation on
@@ -6007,7 +6007,7 @@ reference "eq:Bernoulli shift"
 \end_inset
 
 ; then one has that 
-\begin_inset Formula $c_{K}=S_{K}\circ b$
+\begin_inset Formula $c_{K}=R_{K}\circ b$
 \end_inset
 
 .
@@ -6024,6 +6024,266 @@ reference "eq:Bernoulli shift"
 TODO: similarity transforms on the transfer operator...
  and the non-alteration of the eigenspectrum, even as the eigenfunctions
  are altered.
+\end_layout
+
+\begin_layout Subsection
+Multiplication on the Cantor Space
+\end_layout
+
+\begin_layout Standard
+The previous set of results indicates that all of the structure in the bifurcati
+on diagrams of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tent-Map-Bifur"
+
+\end_inset
+
+ is entirely due to the dynamics of the carry bit.
+ To explore this, the notation needs to be improved on.
+\end_layout
+
+\begin_layout Standard
+The downshift can be decomposed into multiple distinct stages.
+ First, there is a conversion from the unit interval to the Cantor space;
+ this was defined at the very start, but now we need a less awkward notation
+ for it.
+ Let 
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+\pi:2^{\omega} & \to & \left[0,1\right]\\
+0.b_{0}b_{1}b_{2}\cdots & \mapsto & x
+\end{array}
+\]
+
+\end_inset
+
+be the projection from the Cantor space to the real-number unit interval,
+ given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bernoulli-bits"
+
+\end_inset
+
+.
+ Note that it is a surjection: dyadic rationals (rationals of the form 
+\begin_inset Formula $m/2^{n}$
+\end_inset
+
+) correspond to two distinct bit strings.
+ For example, 
+\begin_inset Formula $1/2$
+\end_inset
+
+ can be represented as both 
+\begin_inset Formula $0.1000\cdots$
+\end_inset
+
+ and as 
+\begin_inset Formula $0.0111\cdots$
+\end_inset
+
+.
+ Cantor space covers the unit interval.
+ Write the inverse mapping as
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+\pi^{-1}:\left[0,1\right] & \to & 2^{\omega}\\
+x & \mapsto & 0.b_{0}b_{1}b_{2}\cdots
+\end{array}
+\]
+
+\end_inset
+
+As a function, it is injective but not surjective.
+ It is usually convenient to ignore this, and to pretend that both 
+\begin_inset Formula $\pi$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi^{-1}$
+\end_inset
+
+ are bijections, even though they are not.
+ This rarely leads to practical difficulties, as long as one stays conceptually
+ tidy.
+ Better yet, just perforrm all work on the Cantor space, and project to
+ the unit interval only when needed.
+\end_layout
+
+\begin_layout Standard
+Next, turn to multiplication.
+ This has three parts.
+ First, the summation of the carry bits: 
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+S_{K}:2^{\omega} & \to & \mathbb{N}^{\omega}\\
+0.b_{0}b_{1}b_{2}\cdots & \mapsto & \left(s_{0},s_{1},s_{2},\cdots\right)
+\end{array}
+\]
+
+\end_inset
+
+where the summation is given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:carry-bits"
+
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+ is Baire space, the space of all infinite-length sequences of non-negative
+ integers.
+ In number theory, this would be called the space of arithmetic functions.
+ The second part of multiplication is the propagation of the carry bits.
+ Denote this as 
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+C:\mathbb{N}^{\omega} & \to & \mathbb{N}^{\omega}\\
+\left(s_{0},s_{1},s_{2},\cdots\right) & \mapsto & \left(d_{0},d_{1},d_{2},\cdots\right)
+\end{array}
+\]
+
+\end_inset
+
+which is defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:propagate"
+
+\end_inset
+
+.
+ Finally, one extracts the remainder, after propagation:
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+A:\mathbb{N}^{\omega} & \to & 2^{\omega}\\
+\left(d_{0},d_{1},d_{2},\cdots\right) & \mapsto & \left(a_{0},a_{1},a_{2},\cdots\right)
+\end{array}
+\]
+
+\end_inset
+
+which is given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:remainder"
+
+\end_inset
+
+.
+ Of the three parts into which we've decomposed multiplication, only the
+ first part is parameterized by 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Thus, multiplication, on Cantor space, can be written as 
+\begin_inset Formula $M_{K}=A\circ C\circ S_{K}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To obtain multiplication on the real-number unit interval, we need merely
+ to reproject from Cantor space to the reals.
+ Thus, multiplication, given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:multiplication"
+
+\end_inset
+
+, decomposes into
+\begin_inset Formula 
+\[
+M_{K}=\pi\circ A\circ C\circ S_{K}\circ\pi^{-1}
+\]
+
+\end_inset
+
+The downshift of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+ is then 
+\begin_inset Formula 
+\[
+b_{k}=\pi\circ A\circ C\circ S_{K}\circ\pi^{-1}\circ b
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $b$
+\end_inset
+
+ is the Bernoulli shift.
+ To simplify notation, it is convenient to go ahaed and provide a symbol
+ for the shift operator:
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+B:2^{\omega} & \to & 2^{\omega}\\
+\left(b_{0},b_{1},b_{2},\cdots\right) & \mapsto & \left(b_{1},b_{2},\cdots\right)
+\end{array}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $b=\pi\circ B\circ\pi^{-1}$
+\end_inset
+
+.
+ The corresponding downshift on the Cantor space is
+\begin_inset Formula 
+\[
+B_{K}=A\circ C\circ S_{K}\circ B
+\]
+
+\end_inset
+
+which eliminated the pesky projection 
+\begin_inset Formula $\pi$
+\end_inset
+
+.
+ It should be clear that 
+\begin_inset Formula $S_{K}$
+\end_inset
+
+ is an injection, the carry operation 
+\begin_inset Formula $C$
+\end_inset
+
+ and the remainder 
+\begin_inset Formula $A$
+\end_inset
+
+ are both surjections.
+ 
 \end_layout
 
 \begin_layout Subsection
