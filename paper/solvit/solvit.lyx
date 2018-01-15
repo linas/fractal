@@ -5974,23 +5974,23 @@ The factor of 4, instead of the usual 2, makes up for the fact that shift-XOR
 
 \begin_layout Standard
 Given a fixed 
-\begin_inset Formula $1/2<K\le1$
+\begin_inset Formula $K$
 \end_inset
 
 , define 
-\begin_inset Formula $R_{K}:\left[0,1\right]\to\left[0,1\right]$
+\begin_inset Formula $\boxtimes_{K}:\left[0,1\right]\to\left[0,1\right]$
 \end_inset
 
  as
 \begin_inset Formula 
 \[
-R_{K}\left(x\right)=2K\otimes x
+\boxtimes_{K}\left(x\right)=2K\otimes x
 \]
 
 \end_inset
 
 As observed previously, 
-\begin_inset Formula $R_{K}$
+\begin_inset Formula $\boxtimes_{K}$
 \end_inset
 
  is an automorphism of the unit interval, and more: it is a permuation on
@@ -6007,7 +6007,7 @@ reference "eq:Bernoulli shift"
 \end_inset
 
 ; then one has that 
-\begin_inset Formula $c_{K}=R_{K}\circ b$
+\begin_inset Formula $c_{K}=\boxtimes_{K}\circ b$
 \end_inset
 
 .
@@ -6046,7 +6046,7 @@ reference "fig:Tent-Map-Bifur"
 
 \end_inset
 
- is entirely due to the dynamics of the carry bit.
+ is entirely due to the dynamics of the propagation of the carry sum.
  To explore this, the notation needs to be improved on.
 \end_layout
 
@@ -6200,6 +6200,12 @@ reference "eq:remainder"
 \end_inset
 
 .
+ The shift-and-XOR algorithm omits the propagation of the carry sum.
+ On Cantor space, it is just 
+\begin_inset Formula $\boxtimes_{K}=A\circ S_{K}$
+\end_inset
+
+: the XOR is just modulo-2 of the carry sum.
 \end_layout
 
 \begin_layout Standard
@@ -6240,7 +6246,7 @@ where
 \end_inset
 
  is the Bernoulli shift.
- To simplify notation, it is convenient to go ahaed and provide a symbol
+ To simplify notation, it is convenient to go ahead and provide a symbol
  for the shift operator:
 \begin_inset Formula 
 \[
@@ -6265,7 +6271,7 @@ B_{K}=A\circ C\circ S_{K}\circ B
 
 \end_inset
 
-which eliminated the pesky projection 
+which eliminates the pesky projection 
 \begin_inset Formula $\pi$
 \end_inset
 
@@ -6274,7 +6280,7 @@ which eliminated the pesky projection
 \begin_inset Formula $S_{K}$
 \end_inset
 
- is an injection, the carry operation 
+ is an injection, the propagation operation 
 \begin_inset Formula $C$
 \end_inset
 
@@ -6286,29 +6292,65 @@ which eliminated the pesky projection
  
 \end_layout
 
-\begin_layout Subsection
-Carry-bit games
+\begin_layout Standard
+As noted, the shift-and-XOR algorithm can be written as 
+\begin_inset Formula $\boxtimes_{K}=A\circ S_{K}$
+\end_inset
+
+; the step where the carry bits are propagated is dropped.
+ The XOR-version of the downshift is
 \end_layout
 
 \begin_layout Standard
-The previous set of results indicates that all of the structure in the bifurcati
-on diagrams of 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Undershift-Bifurcation-Diagram"
+\begin_inset Formula 
+\[
+c_{K}=\boxtimes_{K}\circ B=A\circ S_{K}\circ B
+\]
 
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Tent-Map-Bifur"
-
+Thus, in this new notation, it reaffirms that 
+\begin_inset Formula $B$
 \end_inset
 
- is entirely due to the dynamics of the carry bit.
- Can this be used to ...
- ?
+ is the true source of ergodicity, and that 
+\begin_inset Formula $A\circ S_{K}$
+\end_inset
+
+ being a permutation does not alter the basic ergodic property of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ All of the structure in the bifurcation diagrams can be blamed on the propagati
+on operator 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Propagation games
+\end_layout
+
+\begin_layout Standard
+Pinning the 
+\begin_inset Quotes eld
+\end_inset
+
+blame
+\begin_inset Quotes erd
+\end_inset
+
+ of complex dynamical structure on the propagation of the carry bits seems
+ to be an open invitation to replace the propagation operator 
+\begin_inset Formula $C$
+\end_inset
+
+ by just about anything, to see what happens.
+  
 \end_layout
 
 \begin_layout Section
