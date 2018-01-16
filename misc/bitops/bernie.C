@@ -53,19 +53,31 @@ double nocarry(double x, double K)
 
 int clamp(int n)
 {
-	int max = 1;
+	// return n+1; // mang-carry-1-more
+
+	if (0 == n) return n;
+	return n-1;  // mang-carry-1-less
+
+	// return n%2;     // mang-carry-mod-2.png aka shift-XOR
+	// return 1-n%2;   // mang-flip-mod.png
+
+	// return n%3;
+
+	// int max = 1;    // mang-carry-1
+	// int max = 2;    // mang-carry-2
+	int max = 3;    // mang-carry-3
+	// int max = 6;
 	if (max < n) return max;
 	return n;
 }
 
 double mangle_carry(double x, double K)
 {
-	//    two, to get a return value between zero and one.
 	if (0.5 <= x)
 	{
 		x -= 0.5;
 	}
-	return mangle_multiply(K, x, clamp);
+	return 2.0* mangle_multiply(K, x, clamp);
 }
 
 double tent(double x, double K)
@@ -133,7 +145,8 @@ static void bifurcation_diagram (float *array,
 			// x = tent(x, K);
 			// x = notent(x, K);
 			// x = feig(x, K);
-			x = nofeig(x, K);
+			// x = nofeig(x, K);
+			x = mangle_carry(x, K);
 
 			double en = array_size * (x-floor(x));
 			int n = en;

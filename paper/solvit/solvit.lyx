@@ -5277,7 +5277,24 @@ s_{0}\;\; & \;s_{1}\;\; & \;s_{2}\;\; & \;\;s_{3}\;\; & \;\;s_{4}\;\;\; & \cdots
 \end_inset
 
  This makes clear the shift-and-add form.
- 
+ The value of each individual 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+ can be visualized as a stack of blocks.
+ For the special case of 
+\begin_inset Formula $K=0.111\cdots=1$
+\end_inset
+
+ one has that 
+\begin_inset Formula $s_{n+1}=\sum_{k=0}^{n}b_{k}$
+\end_inset
+
+, that is, it is simply the total number of one-bits in the first 
+\begin_inset Formula $n$
+\end_inset
+
+ locations.
 \end_layout
 
 \begin_layout Standard
@@ -5318,7 +5335,27 @@ a_{n}=d_{n}\mod\,2\label{eq:remainder}
 
 \end_inset
 
-The resulting sequence 
+Equivalently, 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ is the remainder, the part of 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ that was not propagated to the next location.
+ Explicitly, is is 
+\begin_inset Formula $a_{n}=d_{n}-2\left\lfloor d_{n}/2\right\rfloor $
+\end_inset
+
+.
+ The carry-sum propagation can be imagined as a kind of buldozer, razing
+ the towers 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ until they are one block high, pushing the razed bits off to the next location.
+ The resulting sequence 
 \begin_inset Formula $\left(a_{n}\right)$
 \end_inset
 
@@ -6350,7 +6387,263 @@ blame
 \end_inset
 
  by just about anything, to see what happens.
-  
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Carry-bit-propagation"
+
+\end_inset
+
+ illustrates some of the things that can happen.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Carry-bit propagation
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Carry-bit-propagation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mang-carry-mod-2.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename mang-carry-1-more.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename mang-carry-1-less.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mang-carry-1.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename mang-carry-2.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename mang-carry-3.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Two triptychs of different carry-bit behaviors.
+ Define 
+\begin_inset Formula $F:\mathbb{N}^{\omega}\to\mathbb{N}^{\omega}$
+\end_inset
+
+ by 
+\begin_inset Formula $F=f\times f\times f\times\cdots$
+\end_inset
+
+ and then iterate on 
+\begin_inset Formula $A\circ C\circ F\circ S_{K}\circ B$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $f\left(n\right)=n$
+\end_inset
+
+ one obtains, of course, the standard downshift of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+.
+ The top-left image shows 
+\begin_inset Formula $f\left(n\right)=n\mod2$
+\end_inset
+
+, which is the same as iterating on the shift-XOR function 
+\begin_inset Formula $c_{K}$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $K$
+\end_inset
+
+ runs from 0 at the bottom, to 1 at the top; 
+\begin_inset Formula $x$
+\end_inset
+
+ runs from 0 to 1, left to right.
+ The uniform red square simply indicates that the iteration is completely
+ independent of 
+\begin_inset Formula $K$
+\end_inset
+
+ when 
+\begin_inset Formula $1/2<K\le1$
+\end_inset
+
+: it is fully uniform and ergodic in the same way that the Bernoulli shift
+ is.
+ The top-middle image shows 
+\begin_inset Formula $f\left(n\right)=n+1$
+\end_inset
+
+, that is, pretending that there is one carry bit too many.
+ The top-right shows 
+\begin_inset Formula $f\left(n\right)=\max\left(0,n-1\right)$
+\end_inset
+
+, that is, having one carry-bit too few.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+The bottom three shows a progression of 
+\begin_inset Formula $f\left(n\right)=\max\left(n,1\right)$
+\end_inset
+
+, 
+\begin_inset Formula $f\left(n\right)=\max\left(n,2\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(n\right)=\max\left(n,3\right)$
+\end_inset
+
+, allowing more and more carry bits to propagate.
+ In the limit, this becomes figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+ once again.
+ Except for the top-left image, the rest seem pointlessly goofy.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reviewing the images there makes it clear that although fiddling with the
+ carry bit fundamentally alters point trajectories, it completely fails
+ to open any doors that would provide insight into the structure of the
+ transfer operator.
+ The pictures are pretty, but appear to be meaningless.
+\end_layout
+
+\begin_layout Standard
+Put differently: the transfer operator is most generally and correctly defined
+ as an operator acting on the topology of a space, and specifically, as
+ the push-foreward of the iterated function.
+ That is, given any open set belonging to the topology, it assigns a different
+ open set of the topology: it is a map of sets to sets.
+ For iterated maps on the unit interval, it is essentially a map of cylinder
+ sets, the open sets of the product topology.
+ The shift-XOR experiment shows that the ergodic properties arise from the
+ Bernoulli shift, and that all other properties, commonly called 
+\begin_inset Quotes eld
+\end_inset
+
+chaotic
+\begin_inset Quotes erd
+\end_inset
+
+, are really the side effect of something else, entirely: the internal structure
+ of the transfer operator.
+ Fiddling with the carry-bits cannot reveal this structure; instead, they
+ just define other, pointlessly goofy iterated functions.
+ Point trajectories fail to reveal the internal structure of the transfer
+ operator, and at best point in a misleading direction.
+ To understand the transfer operator, it must be tackled for what it is:
+ one must look at how intervals are mapped to intervals, and what sort of
+ symmetries can be discovered in this mapping.
 \end_layout
 
 \begin_layout Section
