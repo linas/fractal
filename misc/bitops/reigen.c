@@ -13,7 +13,7 @@
 #define NPTS 1803
 double hits[NPTS];
 
-// Compute eignefunction, recursively.
+// Compute eigenfunction, recursively.
 double reig(double x, double K, double lambda, int niter)
 {
 	if (niter < 0)

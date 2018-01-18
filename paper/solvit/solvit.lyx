@@ -2438,6 +2438,16 @@ reference "fig:Undershift-Density-Distribution"
 \end_inset
 
 , free of stochastic sampling noise.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Computed in reigen.c
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -6402,7 +6412,7 @@ reference "fig:Carry-bit-propagation"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -6591,6 +6601,17 @@ reference "fig:Undershift-Bifurcation-Diagram"
 
  once again.
  Except for the top-left image, the rest seem pointlessly goofy.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with fractal/misc/bitops/bernie.C
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -6618,12 +6639,16 @@ Reviewing the images there makes it clear that although fiddling with the
  The pictures are pretty, but appear to be meaningless.
 \end_layout
 
+\begin_layout Section
+Topological Push-Forward
+\end_layout
+
 \begin_layout Standard
-Put differently: the transfer operator is most generally and correctly defined
- as an operator acting on the topology of a space, and specifically, as
- the push-foreward of the iterated function.
- That is, given any open set belonging to the topology, it assigns a different
- open set of the topology: it is a map of sets to sets.
+The transfer operator is most generally and correctly defined as an operator
+ acting on the topology of a space, and specifically, as the push-foreward
+ of the (uniform) measure by the iterated function.
+ That is, given any open set belonging to the topology, the transfer operator
+ assigns a different open set of the topology: it is a map of sets to sets.
  For iterated maps on the unit interval, it is essentially a map of cylinder
  sets, the open sets of the product topology.
  The shift-XOR experiment shows that the ergodic properties arise from the
@@ -6644,10 +6669,38 @@ chaotic
  To understand the transfer operator, it must be tackled for what it is:
  one must look at how intervals are mapped to intervals, and what sort of
  symmetries can be discovered in this mapping.
+ (One possible proof of the push-foreward claim can be found in an earlier
+ text: 
+\begin_inset Quotes eld
+\end_inset
+
+On the Minkowski Measure
+\begin_inset Quotes erd
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
-XXX give the formal defniition here, copy from other paper.
+The action of the transfer operator on the sets belonging to the topology
+ of the reals reveals several distinct kinds of actions.
+ The topology on the reals can be generated from a basis consisting of connected
+ sets.
+ The transfer operator will map some connected sets to other connected sets,
+ simply moving them around, shrinking or expanding them.
+ In other cases, a connected set will be split into two disjoint parts.
+ For maps such as the logistic map, other possibilities arise: sets are
+ folded back onto one-another.
+ It seems reasonable to argue that each of these different kinds of moves
+ creates a distinct group (or monoid) of transformations: in a certain sense,
+ those transforms that do not change th connectivity, nor do any folding,
+ are all similar to one-another.
+ It should be possible to write down exctly which sets belong to this type,
+ and then give explicit transformation properties between them.
+ Likewise, those connected sets which are split in two are all similar.
+ It seems like there should be a prototype: a generic split, followed by
+ some re-arrangement of the two parts.
+ How can this classification be written in an insightful, useful way?
 \end_layout
 
 \begin_layout Section
