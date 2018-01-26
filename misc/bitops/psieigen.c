@@ -71,21 +71,36 @@ mxi = dim;
 	gsl_vector_complex_view evec_0 = gsl_matrix_complex_column (evec, 0);
 	double *recof = malloc(mxi*sizeof(double));
 	double *imcof = malloc(mxi*sizeof(double));
+
+	gsl_complex z = gsl_vector_complex_get(&evec_0.vector, 0);
+	double sgn = GSL_REAL(z);
+	if (0 < sgn) sgn = 1.0; else sgn = -1.0;
+
 	mag = 0.0;
 	for (int j=0; j< mxi; j++)
 	{
 		gsl_complex z = gsl_vector_complex_get(&evec_0.vector, j);
 		printf("# %d	%g	%g\n", j, GSL_REAL(z), GSL_IMAG(z));
-		recof[j] = GSL_REAL(z);
-		imcof[j] = GSL_IMAG(z);
+		recof[j] = sgn * GSL_REAL(z);
+		imcof[j] = sgn * GSL_IMAG(z);
 
 		mag += recof[j] * recof[j] + imcof[j] * imcof[j];
 	}
 	mag = sqrt(mag);
 	printf("# Vector length = %g\n", mag);
 
-	for (int i=0; i< mxi; i++)
+	/* Now graph the eigenvector */
+#define NPTS 1201
+	for (int n=0; n< NPTS; n++)
 	{
+		double ex = (((double) n) + 0.5) / ((double) NPTS);
+		double y = 0;
+		for (int j=0; j< mxi; j++)
+		{
+			double f = psi_n(ex, K, j);
+			y += f * recof[j];
+		}
+		printf("%d	%g	%g\n", n, ex, y);
 	}
 #endif
 
