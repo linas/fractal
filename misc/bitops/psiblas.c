@@ -2,6 +2,8 @@
  * psiblas.c
  *
  * Eigenvalues of downshift from Hessenberg matrix functions.
+ * Uses LAPACK to find these numerically.
+ *
  * Construct wave functions which put the downshift operator
  * into Hessenberg form.
  *
@@ -15,14 +17,23 @@
 #include <cblas.h>
 
 /*
- * Eigenvalue and eigenvector problem.
+ * Eigenvalue and eigenvector problem. -- LAPACK version.
+ * This computes the eigenvalues, only, for the dim x dim submatrix
+ * of the downshift operator.
+ *
+ * One might think that the eigenvalues are going to be real. But they
+ * are not. They are complex, and seem to lie on a unit circle of
+ * radius 1/2K.  Wow!
+ *
+ * This version (LAPACK) gives the same results as the GSL version.
+ * (to at least 6 decimal places). (For the ROW_MAJOR version.)
+ * So this implies that GSL is not insane (like I thought it was).
+ *
  * Lapack, Eigenvalues only, use: HSEQR
  * Eigenvalues an eigenvectors: HSEQR TREVC
  * DHSEQR for double precision, ZHSEQR for complex double precision.
  *
- * We expect eigenvalues to be real. But they are not.
- * Gives same results as the GSL version. (to at least 6 decimal places).
- * (For the ROW_MAJOR version.)
+ * This does eigenvalues only, right now.
  */
 void eigen(double K, int dim)
 {
@@ -43,11 +54,13 @@ mxi = dim;
 	}
 
 	/*
-	* lapack_int LAPACKE_dhseqr( int matrix_layout, char job, char compz, lapack_int n,
-	*                           lapack_int ilo, lapack_int ihi, double* h,
-	*                           lapack_int ldh, double* wr, double* wi, double* z,
-	*                           lapack_int ldz );
-	*/
+	 * lapack_int LAPACKE_dhseqr(int matrix_layout,
+	 *                           char job, char  compz,
+	 *                           lapack_int n,
+	 *                           lapack_int ilo, lapack_int ihi, double* h,
+	 *                           lapack_int ldh, double* wr, double* wi,
+	 *                           double* z, lapack_int ldz );
+	 */
 
 	double* wr = malloc(mxi* sizeof(double));
 	double* wi = malloc(mxi* sizeof(double));

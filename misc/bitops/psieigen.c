@@ -15,9 +15,15 @@
 #include <gsl/gsl_eigen.h>
 
 /*
- * Eigenvalue and eigenvector problem.
- * GSL has a simpler API than Lapack, so try that first.
- * XXX Except its not stable...
+ * Eigenvalue and eigenvector problem for the downshift operator.
+ * GSL version.
+ *
+ * GSL has a simpler API than Lapack, so try that first. Both seem
+ * to agree to six decimal places or better, so I guess its both
+ * numerically stable and GSL is returning valid results.
+ *
+ * Surprisingly, the eigenvalue spectrum lies on a circle in the
+ * complex plane.
  */
 void eigen(double K, int dim)
 {
@@ -37,7 +43,7 @@ mxi = dim;
 		}
 	}
 
-	// Magic incantation
+	// Magic incantation to diagonalize the matrix.
 	gsl_matrix_view m = gsl_matrix_view_array (matrix, mxi, mxi);
 	gsl_vector_complex *eval = gsl_vector_complex_alloc (mxi);
 	gsl_matrix_complex *evec = gsl_matrix_complex_alloc (mxi, mxi);
