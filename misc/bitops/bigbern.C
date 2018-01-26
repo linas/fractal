@@ -97,6 +97,10 @@ void bifurcation_diagram (float *array,
 	mpf_init(ex);
 	mpf_init(scratch);
 
+#define FULLSCALE
+#ifdef FULLSCALE
+	K = 0.5* (1.0+K);
+#endif
 #ifdef FEIGEN
 	mpf_t four_Kay;
 	mpf_init(four_Kay);
@@ -134,8 +138,8 @@ void bifurcation_diagram (float *array,
 		/* OK, now start iterating the map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
-			bern(ex, Kay);
-			// tent(ex, Kay);
+			// bern(ex, Kay);
+			tent(ex, Kay);
 			// feig(ex, four_Kay, scratch);
 
 			// Excluding the settle time, together with the support
@@ -145,11 +149,15 @@ void bifurcation_diagram (float *array,
 			if (settle_time < iter)
 			{
 				double x = mpf_get_d(ex);
-				double en = array_size * (x-floor(x));
-#define SIDESCALE
+// #define SIDESCALE
 #ifdef SIDESCALE
-				en /= K;
+				x /= K;
 #endif
+#define SIDETENT
+#ifdef SIDETENT
+				x = (x - 2.0*K*(1.0-K)) / (K*(2.0*K - 1.0));
+#endif
+				double en = array_size * (x-floor(x));
 				int n = en;
 				if (0 > n) n = 0;
 				if (n >= array_size) n = array_size-1;
@@ -197,6 +205,13 @@ void bifurcation_diagram (float *array,
 	// Hackery for tent map
 	for (int j=0; j<array_size; j++)
 		array[j] *= 2.0*(K-0.5);
+#endif
+#ifdef SIDETENT
+	// Hackery for tent map
+	for (int j=0; j<array_size; j++)
+		// array[j] *= 2.0*(K-0.5);
+		array[j] *= 2.0*(2.0-K)*(K-0.5); // meaningless but looks nice
+		// array[j] *= K;
 #endif
 
 }
