@@ -11,11 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NPTS 1803
+#define NPTS 803
 double hits[NPTS];
 
 // Compute eigenfunction, recursively.
-double complex reig(double x, double K, double complex lambda, int niter)
+double complex reig(double x, double K, double complex olambda, int niter)
 {
 	if (niter < 0)
 	{
@@ -34,16 +34,11 @@ double complex reig(double x, double K, double complex lambda, int niter)
 	}
 	if (K < x) return 0.0;
 
-	double tkay = 2.0*K;
+	double tkay = 1.0/2.0*K;
 
-	// Short-cut. The other branch has vanishing contribution,
-	if (K*(tkay-1.0) < x)
-	{
-		return reig(x/tkay, K, lambda, niter-1) / (lambda * tkay);
-	}
-	double complex sum = reig(x/tkay, K, lambda, niter-1);
-	sum += reig(0.5 + x/tkay, K, lambda, niter-1);
-	sum /= lambda * tkay;
+	double complex sum = reig(x*tkay, K, olambda, niter-1);
+	sum += reig(0.5 + x*tkay, K, olambda, niter-1);
+	sum *= tkay * olambda;
 	return sum;
 }
 
@@ -58,6 +53,7 @@ int main (int argc, char* argv[])
 	double K = atof(argv[1]);
 	double theta = atof(argv[2]);
 	double complex lambda = cexp (I*2.0*M_PI*theta) / (2.0*K);
+	double complex olambda = 1.0 / lambda;
 
 	printf("#\n# K = %g theta = %g lambda = %g + I %g \n#\n",
 	       K, theta, creal(lambda), cimag(lambda));
@@ -65,15 +61,19 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NPTS; i++)
 		hits[i] = 0.0;
 
-// #define NRECU 30
-#define NRECU 20
+#define NRECU 19
+// #define NRECU 25
 
 	// Compute an eigenfunction, recursively.
 	for (int i=0; i<NPTS; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) NPTS);
-		double complex y = reig(x, K, lambda, NRECU);
+		double complex y = reig(x, K, olambda, NRECU);
+		double complex z = reig(x, K, olambda, NRECU+1);
 
-		printf("%d	%g	%g	%g\n", i, x, creal(y), cimag(y));
+		// z *= lambda;
+
+		printf("%d	%g	%g	%g	%g	%g\n", i, x, creal(y), cimag(y),
+		      creal(z), cimag(z));
 	}
 }
