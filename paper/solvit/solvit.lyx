@@ -710,7 +710,7 @@ bifurcation diagram
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -820,7 +820,7 @@ interesting
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 created with fractal/misc/bitops/bigbern.C 800 800 1360 0.5 0.5 1 
@@ -935,6 +935,26 @@ reference "fig:Undershift-Bifurcation-Diagram"
 \end_inset
 
 ; that scheme would obliterate the lower half of this figure in red.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+The black areas represent parts of the iterated range that are visited at
+ most a finite number of times.
+ To the left, a straight line indicates that after one iteration, points
+ in the domain 
+\begin_inset Formula $K\le x\le1$
+\end_inset
+
+ are never visited.
+ To the right, points in the domain 
+\begin_inset Formula $0\le x\le2K\left(1-K\right)$
+\end_inset
+
+ are never visited more than a finite number of times.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1094,6 +1114,130 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Sideshift
+\end_layout
+
+\begin_layout Standard
+After exactly one iteration of the downshift, all initial points 
+\begin_inset Formula $K\le x\le1$
+\end_inset
+
+ are swept up into the domain 
+\begin_inset Formula $0\le x<K$
+\end_inset
+
+, and never leave.
+ Likewise, the range of the iterated downshift is 
+\begin_inset Formula $0\le x<K$
+\end_inset
+
+.
+ Thus, an alternative representation of the downshift, filling the entire
+ unit square, can be obtained by dividing both 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ by 
+\begin_inset Formula $K$
+\end_inset
+
+ to obtain the function
+\begin_inset Formula 
+\[
+d_{K}(u)=\begin{cases}
+2Ku & \mbox{ for }0\le u<\frac{1}{2K}\\
+2Ku-1 & \mbox{ for }\frac{1}{2K}\le u\le1
+\end{cases}
+\]
+
+\end_inset
+
+The orbit of a point 
+\begin_inset Formula $x$
+\end_inset
+
+ in the downshift is identical to the orbit of a point 
+\begin_inset Formula $u=x/K$
+\end_inset
+
+ in the above.
+ This function, henceforth called the 
+\begin_inset Quotes eld
+\end_inset
+
+sideshift
+\begin_inset Quotes erd
+\end_inset
+
+, thus iterates identically to the downshift.
+ The values, however, differ by a factor of 
+\begin_inset Formula $K$
+\end_inset
+
+; this alters the symbolic dynamics of the sideshift, as compared to the
+ downshift.
+\end_layout
+
+\begin_layout Standard
+A similar situation applies to the tent map.
+ After one iteration, all initial points 
+\begin_inset Formula $K\le x\le1$
+\end_inset
+
+ are swept up into the domain 
+\begin_inset Formula $0\le x<K$
+\end_inset
+
+.
+ After a finite number of iterations, all points 
+\begin_inset Formula $0<x\le2K\left(1-K\right)$
+\end_inset
+
+ are swept up, so that the remaining iteration takes place on the domain
+ 
+\begin_inset Formula $2K\left(1-K\right)<x<K$
+\end_inset
+
+.
+ It is worth defining a 
+\begin_inset Quotes eld
+\end_inset
+
+sidetent
+\begin_inset Quotes erd
+\end_inset
+
+ function, which corresponds to the that part of the tent map in which iteration
+ is confined.
+ It is nothing more than a rescaling of the tent map, ignoring those parts
+ outside of the above domain that 
+\begin_inset Quotes eld
+\end_inset
+
+wander away
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The sidetent is given by
+\begin_inset Formula 
+\[
+s_{K}(u)=\begin{cases}
+2K\left(u+2\left(1-K\right)\right) & \mbox{ for }0\le u<\frac{2K-1}{2K}\\
+2K\left(1-u\right) & \mbox{ for }\frac{2K-1}{2K}\le u\le1
+\end{cases}
+\]
+
+\end_inset
+
+It is interesting to compare the two bifurcation diagrams, side-by-side.
 \end_layout
 
 \begin_layout Section

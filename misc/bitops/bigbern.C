@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #include "brat.h"
+#include "brat.h"
 
 /*-------------------------------------------------------------------*/
 /*
@@ -146,6 +146,10 @@ void bifurcation_diagram (float *array,
 			{
 				double x = mpf_get_d(ex);
 				double en = array_size * (x-floor(x));
+#define SIDESCALE
+#ifdef SIDESCALE
+				en /= K;
+#endif
 				int n = en;
 				if (0 > n) n = 0;
 				if (n >= array_size) n = array_size-1;
@@ -197,9 +201,10 @@ void bifurcation_diagram (float *array,
 
 }
 
-// DECL_MAKE_BIFUR(bifurcation_diagram)
+DECL_MAKE_BIFUR(bifurcation_diagram)
 
-#if 1
+#if MIDPOINT_GAMES
+// Verify the distruibution of the midpoint, so somthing like that ...
 static void midpoint_diagram (float *array,
                               int array_size,
                               double x_center,
@@ -264,7 +269,7 @@ static void midpoint_diagram (float *array,
 		array[j] *= ((double) array_size) / ((double) cnt);
 }
 
-// Compute eignefunction, recursively.
+// Compute eigenfunction, recursively.
 double reig(double x, double K, int niter)
 {
 	if (K < x) return 0.0;
