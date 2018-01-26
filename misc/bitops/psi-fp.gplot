@@ -6,4 +6,5 @@ set out 'psifp.png'
 # set yrange [0.0001:]
 # set xrange [0:350]
 
-plot "psieigen-fp.dat" using 2:3 with lines lw 2 title "re"
+plot "psieigen-fp.dat" using 2:3 with lines lw 2 title "frob-per",\
+	"bigbern-0.8.dat" using 2:(0.8*$3) with lines lw 2 title "bigie"
