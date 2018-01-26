@@ -50,9 +50,47 @@ mxi = dim;
 	gsl_eigen_nonsymmv_workspace * w = gsl_eigen_nonsymmv_alloc (mxi);
 	gsl_eigen_nonsymmv (&m.matrix, eval, evec, w);
 	gsl_eigen_nonsymmv_free (w);
-	// gsl_eigen_nonsymmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_DESC);
+
+
+#define FP_EIGENFN
+#ifdef FP_EIGENFN
+	/* Get the eigenvector for the largest eigennvalue, which
+	 * should be 1.0.  Graph it to make sure it matches what
+	 * we already know it should be.
+	 */
+	gsl_eigen_nonsymmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_DESC);
+
+	gsl_complex eval_0 = gsl_vector_complex_get (eval, 0);
+
+	double x = GSL_REAL(eval_0);
+	double y = GSL_IMAG(eval_0);
+	double mag = sqrt(x*x+y*y);
+	printf ("# eigenvalue = %20.18g + i %20.18g Magnitude=%g\n", x, y, mag);
+
+	/* Get the eigenvector */
+	gsl_vector_complex_view evec_0 = gsl_matrix_complex_column (evec, 0);
+	double *recof = malloc(mxi*sizeof(double));
+	double *imcof = malloc(mxi*sizeof(double));
+	mag = 0.0;
+	for (int j=0; j< mxi; j++)
+	{
+		gsl_complex z = gsl_vector_complex_get(&evec_0.vector, j);
+		printf("# %d	%g	%g\n", j, GSL_REAL(z), GSL_IMAG(z));
+		recof[j] = GSL_REAL(z);
+		imcof[j] = GSL_IMAG(z);
+
+		mag += recof[j] * recof[j] + imcof[j] * imcof[j];
+	}
+	mag = sqrt(mag);
+	printf("# Vector length = %g\n", mag);
+
+	for (int i=0; i< mxi; i++)
+	{
+	}
+#endif
 
 	
+#ifdef DECAYING_EXPERIMENT
 	for (int i=0; i< mxi; i++)
 	{
 		gsl_complex eval_i = gsl_vector_complex_get (eval, i);
@@ -140,6 +178,7 @@ mxi = dim;
 		}
 #endif
 	}
+#endif // DECAYING_EXPERIMENT
 
 	gsl_vector_complex_free(eval);
 	gsl_matrix_complex_free(evec);
