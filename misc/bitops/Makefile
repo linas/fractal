@@ -69,4 +69,4 @@ psiblas: psiblas.o $(LAPACK)
 nilpot: nilpot.o
 bitshow: bitshow.o $(FUNC)
 complex: complex.o
-psiunitary: psiunitary.o
+psiunitary: psiunitary.o -lgsl -lgslcblas
