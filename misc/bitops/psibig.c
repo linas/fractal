@@ -11,7 +11,17 @@
 #include <stdlib.h>
 
 
-#define NBITS 4000
+/* Compute hessenberg-matrix orthonormal basis elements wavefunction
+ * midpoints using GMP bignum math.
+ *
+ * nbits: precision to use
+ * midp: point to array in which to store the results.
+ * maxn: how many to compute.... use MAXN from other code
+ *
+ * The midpoints are NOT sorted prior to return. The are listed
+ * in the sequence in which they are found.
+ */
+
 void big_midpoints(double K, int nbits, double* midp, int maxn)
 {
 	mpf_set_default_prec(nbits);

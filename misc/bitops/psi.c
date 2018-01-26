@@ -222,12 +222,20 @@ double hess_brute(double K, int m, int n)
 }
 
 /* Return matrix entry for the transfer operator in the hessenberg
- * basis. Using interval math, and thus "perfectly" accurate. */
+ * basis. Using interval math, and thus "perfectly" accurate.
+ *
+ * Assumes that the midpoint array has ben computed (using either
+ * find_midpoints() or big_midpoints()), and placed into sorted
+ * order (using sequence_midpoints()).
+ *
+ * m and n should be non-negative.
+ */
 double hess(double K, int m, int n)
 {
 	// #define PRT(...) printf(__VA_ARGS__)
 	#define PRT(...)
 	PRT("ask for %d %d\n", m, n);
+	if (m < 0 || n < 0) return 0.0;
 	if (m == 0 && n == 0) return 1.0;
 	if (n+1 < m) return 0.0;  // Upper Hessenberg.
 	m++; n++;
