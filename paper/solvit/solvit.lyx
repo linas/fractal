@@ -3951,7 +3951,7 @@ reference "fig:Hessenberg-Operator-Matrix"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4137,6 +4137,28 @@ reference "fig:Hessenberg-Operator-Matrix"
 \end_inset
 
 .
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This was confirmed with both GSL gsl_eigen_nonsymmv() and Lapack DHSEQR
+ solvers, with matrixes up to about 
+\begin_inset Formula $2000\times2000$
+\end_inset
+
+ entries.
+ Both systems agree to at least six decimal places, if not more.
+ Both show spradic eigenvalues off the circle, but these are not numerically
+ stable; ergo, the only valid eigenvalues are thos on the circle.
+ The matrix entries were constructed using the midpoint aglorithm, described
+ in the last section.
+ To verify that they are accurate, several techiques were used: numerical
+ integration to confirm orthogonality, and the use of the GnuMP multi-precision
+ library to push up accuracy.
+\end_layout
+
+\end_inset
+
  (Ignoring, that is, the leading eigenvalue of 1, which is easily found).
  Writing the eigenvalue as 
 \begin_inset Formula $\lambda=\left|\lambda\right|\exp2\pi i\phi$
@@ -4210,7 +4232,7 @@ For
  they are not bounded (they diverge) at the endpoints of the interval.
  If forced to be bounded, then they are fractal (non-smooth) over the entire
  interval.
- The unitary spectrum corresponds to differenable-nowhere eigenfunctions
+ The unitary spectrum corresponds to differentiable-nowhere eigenfunctions
  (wait, or continuous-nowhere? I forget.)
 \end_layout
 
@@ -4230,7 +4252,7 @@ reference "fig:Decaying-Eigenfunction"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4419,6 +4441,83 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+(Non-)Unitarity
+\end_layout
+
+\begin_layout Standard
+The numerical results suggest a hypothesis that some fragment of 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+ is unitary, as it is ordinarily the case that when eigenvalues appear on
+ the unit circle, its because the operator is unitary.
+ That does not seem to be the case here.
+ Specifically, define the Frobenius-Perron eigenvector 
+\begin_inset Formula $\rho$
+\end_inset
+
+ as the one satisfying 
+\begin_inset Formula $\mathcal{L}_{K}\rho=\rho$
+\end_inset
+
+ and normalizing it to unit length, so that 
+\begin_inset Formula $\left\Vert \rho\right\Vert =1$
+\end_inset
+
+ in the Hilbert (mean-square) norm.
+ Define the reduced operator 
+\begin_inset Formula $\mathcal{R}_{K}$
+\end_inset
+
+ in terms of the matrix elements
+\begin_inset Formula 
+\[
+\frac{1}{2K}\left\langle n\left|{\cal R}_{K}\right|m\right\rangle =\left\langle n\left|{\cal L}_{K}\right|m\right\rangle -\left\langle \rho\vert n\right\rangle \left\langle \rho\vert m\right\rangle 
+\]
+
+\end_inset
+
+That is, it is just the downshift operator, with the Frobenius-Perron eigenvecto
+r removed, so that 
+\begin_inset Formula $\mathcal{R}_{K}\rho=0$
+\end_inset
+
+ .
+ Its rescaled, so that the remaining eigenvectors of 
+\begin_inset Formula $\mathcal{R}_{K}$
+\end_inset
+
+ lie on the unit circle.
+ Is this operator unitary in any way? That is, might either 
+\begin_inset Formula $\mathcal{R}_{K}\mathcal{R}_{K}^{\dagger}$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathcal{R}_{K}^{\dagger}\mathcal{R}_{K}$
+\end_inset
+
+ be the identity? Here, the 
+\begin_inset Formula $\dagger$
+\end_inset
+
+ is just the transpose, as 
+\begin_inset Formula $\mathcal{R}_{K}$
+\end_inset
+
+ is purely real.
+ Numerical exploration clearly shows that 
+\begin_inset Formula $\mathcal{R}_{K}$
+\end_inset
+
+ is neither unitary on the left nor on the right.
+ Not a surprise, but does leave the understanding of 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+ in a curious situation.
 \end_layout
 
 \begin_layout Subsection
