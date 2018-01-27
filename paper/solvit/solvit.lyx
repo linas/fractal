@@ -832,7 +832,7 @@ The visualization of the long-term dynamics is done by generating a histogram,
 \end_inset
 
 'th iteration, one has that 
-\begin_inset Formula $j/N\le b_{K}^{n}(x)<(j+1)/N$
+\begin_inset Formula $j/N\le b_{\beta}^{n}(x)<(j+1)/N$
 \end_inset
 
 , then increment the count for the 
@@ -3520,20 +3520,24 @@ The Koopman operator is adjoint, in the sense that
 \end_layout
 
 \begin_layout Subsection
-The Downshift Transfer Operator
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform Transfer Operator
 \end_layout
 
 \begin_layout Standard
 The transfer operator for the downshift map 
-\begin_inset Formula $b_{K}(x)$
+\begin_inset Formula $b_{\beta}(x)$
 \end_inset
 
  is
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{K}f\right]\left(y\right)=\begin{cases}
-\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+K}{\beta}\right)\right] & \mbox{ for }0\le y\le K\\
-0 & \mbox{ for }K<y\le1
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\begin{cases}
+\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right] & \mbox{ for }0\le y\le\beta/2\\
+0 & \mbox{ for }\beta/2<y\le1
 \end{cases}
 \]
 
@@ -3542,7 +3546,7 @@ The transfer operator for the downshift map
 or, written more compactly
 \begin_inset Formula 
 \begin{equation}
-\left[\mathcal{L}_{K}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+K}{\beta}\right)\right]\Theta\left(K-y\right)\label{eq:xfer oper}
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)\label{eq:xfer oper}
 \end{equation}
 
 \end_inset
@@ -3562,7 +3566,7 @@ reference "fig:Undershift-Density-Distribution"
  are those functions satisfying 
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{K}\rho\right]\left(y\right)=\rho\left(y\right)
+\left[\mathcal{L}_{\beta}\rho\right]\left(y\right)=\rho\left(y\right)
 \]
 
 \end_inset
@@ -3574,13 +3578,13 @@ That is, the
  satisfies 
 \begin_inset Formula 
 \begin{equation}
-\rho\left(y\right)=\frac{1}{\beta}\left[\rho\left(\frac{y}{\beta}\right)+\rho\left(\frac{y+K}{\beta}\right)\right]\Theta\left(K-y\right)\label{eq:eigen-eqn}
+\rho\left(y\right)=\frac{1}{\beta}\left[\rho\left(\frac{y}{\beta}\right)+\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)\label{eq:eigen-eqn}
 \end{equation}
 
 \end_inset
 
-This is generally referred to as the Frobenius-Perron eigenfunction, as
- it corresponds to the largest eigenvalue of the transfer operator, and
+This is generally referred to as the Ruelle-Frobenius-Perron eigenfunction,
+ as it corresponds to the largest eigenvalue of the transfer operator, and
  specifically, the eigenvalue 1.
 \end_layout
 
@@ -3588,7 +3592,7 @@ This is generally referred to as the Frobenius-Perron eigenfunction, as
 More generally, one is interested in characterizing the eigenspectrum
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{K}\rho\right]\left(y\right)=\lambda\rho\left(y\right)
+\left[\mathcal{L}_{\beta}\rho\right]\left(y\right)=\lambda\rho\left(y\right)
 \]
 
 \end_inset
@@ -3620,7 +3624,7 @@ for eigenvalues
 \end_inset
 
  whenever 
-\begin_inset Formula $K<y$
+\begin_inset Formula $\beta<2y$
 \end_inset
 
 .
@@ -3630,24 +3634,24 @@ for eigenvalues
 \begin_layout Standard
 A very minor simplification can be achieved with a change of variable.
  Let 
-\begin_inset Formula $y=K-\epsilon$
+\begin_inset Formula $y=\frac{\beta}{2}-\epsilon$
 \end_inset
 
 .
  Then the eigenequation becomes
 \begin_inset Formula 
 \[
-2\lambda K\rho\left(K-\epsilon\right)=\rho\left(\frac{1}{2}-\frac{\epsilon}{\beta}\right)+\rho\left(1-\frac{\epsilon}{\beta}\right)
+\lambda\beta\rho\left(\frac{\beta}{2}-\epsilon\right)=\rho\left(\frac{1}{2}-\frac{\epsilon}{\beta}\right)+\rho\left(1-\frac{\epsilon}{\beta}\right)
 \]
 
 \end_inset
 
 The second term vanishes whenever 
-\begin_inset Formula $K<1-\epsilon/\beta$
+\begin_inset Formula $\beta/2<1-\epsilon/\beta$
 \end_inset
 
  or 
-\begin_inset Formula $\epsilon<\beta(1-K)$
+\begin_inset Formula $\epsilon<\beta(1-\beta/2)$
 \end_inset
 
  and so one has the simpler recurrence relation
@@ -3659,7 +3663,7 @@ The second term vanishes whenever
 \end_inset
 
 whenever 
-\begin_inset Formula $K(\beta-1)<y\le K$
+\begin_inset Formula $\beta(\beta-1)<2y\le\beta$
 \end_inset
 
 .
@@ -3695,17 +3699,17 @@ reference "fig:Undershift-Density-Distribution"
 .
  Computationally, these are much, much cheaper to compute, at least for
  
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- much larger than 1/2, although convergence issues present themselves as
- 
-\begin_inset Formula $K$
+ much larger than 1, although convergence issues present themselves as 
+\begin_inset Formula $\beta$
 \end_inset
 
- approaches 1/2.
- The resulting density may be called the Frobenius-Perron eigenstate; because
- it can be quickly computed, it provides an alternative view of figure 
+ approaches 1.
+ The resulting density may be called the Ruelle-Frobenius-Perron eigenstate;
+ because it can be quickly computed, it provides an alternative view of
+ figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Density-Distribution"
@@ -3746,7 +3750,7 @@ almost solutions
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\left[\mathcal{P}_{K}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+K}{\beta}\right)\right]
+\left[\mathcal{P}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
 \]
 
 \end_inset
@@ -3758,7 +3762,7 @@ Solving this operator is relatively straight-forward.
 
 .
  Clearly, 
-\begin_inset Formula $\left[\mathcal{P}_{K}y^{n}\right]$
+\begin_inset Formula $\left[\mathcal{P}_{\beta}y^{n}\right]$
 \end_inset
 
  is a polynomial of degree 
