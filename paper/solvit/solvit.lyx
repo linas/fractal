@@ -4431,7 +4431,7 @@ reference "fig:Tree-functions"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4608,11 +4608,11 @@ The above illustrate the
 \end_inset
 
  dependence of the tree functions; the left image is for 
-\begin_inset Formula $K=0.7$
+\begin_inset Formula $\beta=1.4$
 \end_inset
 
 , the right is for 
-\begin_inset Formula $K=0.8$
+\begin_inset Formula $\beta=1.6$
 \end_inset
 
 .
@@ -4745,7 +4745,7 @@ name "fig:Tree-function-variations"
 
 \begin_layout Plain Layout
 These figures illustrate the 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  vs.
@@ -4780,10 +4780,10 @@ These figures illustrate the
 \end_inset
 
 axis, while 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- runs from one-half to one along the vertical axis.
+ runs from 1 to 2 along the vertical axis.
  As before, green indicates where the tree function is unity, and black
  where it is zero.
  The tree functions shown in figure 
@@ -4867,13 +4867,13 @@ reference "eq:xfer oper"
  Some preliminary observations include that 
 \begin_inset Formula 
 \[
-\left\langle mi\left|{\cal L}_{\beta}\right|nj\right\rangle =0\;\mbox{ if }K\le i/2^{m}
+\left\langle mi\left|{\cal L}_{\beta}\right|nj\right\rangle =0\;\mbox{ if }\beta\le i/2^{m-1}
 \]
 
 \end_inset
 
 because the transfer operator vanishes above 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta/2$
 \end_inset
 
 .
@@ -4885,10 +4885,10 @@ because the transfer operator vanishes above
 
 \end_inset
 
- or if 
+or if 
 \begin_inset Formula 
 \[
-\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{\beta j}{2^{n}}-K,\frac{\beta\left(j+1\right)}{2^{n}}-K\right]\ne\emptyset
+\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\beta\left(\frac{j}{2^{n}}-\frac{1}{2}\right),\beta\left(\frac{j+1}{2^{n}}-\frac{1}{2}\right)\right]\ne\emptyset
 \]
 
 \end_inset
@@ -4957,8 +4957,8 @@ The construction proceeds as follows.
 \begin_inset Formula 
 \[
 \psi_{0}\left(x\right)=\begin{cases}
-\frac{1}{\sqrt{K}} & \mbox{for }0\le x\le K\\
-0 & \mbox{for }K<x\le1
+\frac{1}{\sqrt{\beta/2}} & \mbox{for }0\le x\le\beta/2\\
+0 & \mbox{for }\beta/2<x\le1
 \end{cases}
 \]
 
@@ -4971,21 +4971,21 @@ Consider
 .
  It is the sum of two parts: two step-functions; one which is constant for
  
-\begin_inset Formula $x\le K$
+\begin_inset Formula $x\le\beta/2$
 \end_inset
 
  and another that is constant for 
-\begin_inset Formula $(x+K)/\beta\le K$
+\begin_inset Formula $\frac{x}{\beta}+\frac{1}{2}\le\frac{\beta}{2}$
 \end_inset
 
 .
  Solving explicitly for the location of the step, it is 
-\begin_inset Formula $x=\beta^{2}-K$
+\begin_inset Formula $x=\beta^{2}-\beta/2$
 \end_inset
 
 .
- For convenience, define t 
-\begin_inset Formula $m_{1}=\beta^{2}-K$
+ For convenience, define 
+\begin_inset Formula $m_{1}=\beta^{2}-\beta/2$
 \end_inset
 
 .
@@ -4993,9 +4993,9 @@ Consider
 \begin_inset Formula 
 \[
 \psi_{1}\left(x\right)=\begin{cases}
-\frac{1}{m_{1}}\sqrt{\frac{\left(K-m_{1}\right)m_{1}}{K}} & \mbox{for }0\le x\le m_{1}\\
-\frac{-1}{K-m_{1}}\sqrt{\frac{\left(K-m_{1}\right)m_{1}}{K}} & \mbox{for }m_{1}<x\le K\\
-0 & \mbox{for }K<x\le1
+\frac{1}{m_{1}}\sqrt{m_{1}+\frac{-2m_{1}^{2}}{\beta}} & \mbox{for }0\le x\le m_{1}\\
+\frac{-2}{\beta-2m_{1}}\sqrt{m_{1}+\frac{-2m_{1}^{2}}{\beta}} & \mbox{for }m_{1}<x\le\beta/2\\
+0 & \mbox{for }\beta/2<x\le1
 \end{cases}
 \]
 
@@ -5024,7 +5024,7 @@ Consider
 \end_inset
 
  is at 
-\begin_inset Formula $m_{1}=\beta^{2}-K$
+\begin_inset Formula $m_{1}=\beta^{2}-\beta/2$
 \end_inset
 
  and this mid-point is mapped to one of two different places.
@@ -5037,7 +5037,7 @@ Consider
 \end_inset
 
  else it maps to 
-\begin_inset Formula $m_{2}=\beta m_{1}-K$
+\begin_inset Formula $m_{2}=\beta\left(m_{1}-1/2\right)$
 \end_inset
 
 .
@@ -5050,9 +5050,9 @@ Consider
 \[
 \psi_{2}\left(x\right)=\begin{cases}
 0 & \mbox{for }0\le x\le m_{1}\\
-\frac{1}{\left(m_{2}-m_{1}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(K-m_{2}\right)}{K-m_{1}}} & \mbox{for }m_{1}\le x\le m_{2}\\
-\frac{-1}{\left(K-m_{2}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(K-m_{2}\right)}{K-m_{1}}} & \mbox{for }m_{2}<x\le K\\
-0 & \mbox{for }K<x\le1
+\frac{1}{\left(m_{2}-m_{1}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(\beta/2-m_{2}\right)}{\beta/2-m_{1}}} & \mbox{for }m_{1}\le x\le m_{2}\\
+\frac{-1}{\left(\beta/2-m_{2}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(\beta/2-m_{2}\right)}{\beta/2-m_{1}}} & \mbox{for }m_{2}<x\le\beta/2\\
+0 & \mbox{for }\beta/2<x\le1
 \end{cases}
 \]
 
@@ -5105,7 +5105,7 @@ The rest of the basis can be constructed iteratively, based on these examples.
 \[
 m_{p}=\begin{cases}
 \beta m_{p-1} & \mbox{for }m_{p-1}\le\frac{1}{2}\\
-\beta m_{p-1}-K & \mbox{for }\frac{1}{2}<m_{p-1}
+\beta m_{p-1}-\frac{\beta}{2} & \mbox{for }\frac{1}{2}<m_{p-1}
 \end{cases}
 \]
 
@@ -5141,7 +5141,7 @@ Let
 \end_inset
 
  or 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta/2$
 \end_inset
 
  if they don't exist.
@@ -5172,7 +5172,7 @@ By construction, this has the property that
 \end_inset
 
  are dense in the interval 
-\begin_inset Formula $(0,K)$
+\begin_inset Formula $(0,\beta/2)$
 \end_inset
 
 , and so this basis should be considered to be 
@@ -5184,13 +5184,13 @@ sufficiently complete
 \end_inset
 
  on the interval 
-\begin_inset Formula $[0,K]$
+\begin_inset Formula $[0,\beta/2]$
 \end_inset
 
 .
  That is, it naively seems to be a complete basis for the Hilbert space
  of square-integrable functions on 
-\begin_inset Formula $[0,K]$
+\begin_inset Formula $[0,\beta/2]$
 \end_inset
 
 , although without full proof, some perverse ways that this might fail can
@@ -5337,10 +5337,10 @@ Six illustrations of the absolute value of the matrix elements
 \end_inset
 
  for (left to right, top to bottom) 
-\begin_inset Formula $K=$
+\begin_inset Formula $\beta=$
 \end_inset
 
-0.55, 0.6, 0.65, 0.8, 0.95, 0.999 and 
+1.1, 1.2, 1.3, 1.6, 1.90, 1.998 and 
 \begin_inset Formula $0\le n,m<48$
 \end_inset
 
@@ -5372,11 +5372,15 @@ Six illustrations of the absolute value of the matrix elements
  decreasing.
  The first few images suggests a regular pattern that gets increasingly
  compressed and chaotic as 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  increases.
- The pattern might remain visible for higher K as one zooms out.
+ The pattern might remain visible for higher 
+\begin_inset Formula $\beta$
+\end_inset
+
+ as one zooms out.
 \end_layout
 
 \begin_layout Plain Layout
@@ -5478,11 +5482,15 @@ The question of the allowed values of
 
 \begin_layout Standard
 For 
-\begin_inset Formula $K=1$
+\begin_inset Formula $\beta=2$
 \end_inset
 
-, the downshift is the Bernoulli shift, the transfer operator is solvable,
- and the spectrum is exactly known.
+, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform is the Bernoulli shift, the transfer operator is solvable, and
+ the spectrum is exactly known.
  This has been explored by various authors, most notably in the work of
  Dean Driebe.
  I've written extensively about this spectrum and the eigenvalues in other
@@ -5566,7 +5574,7 @@ name "fig:Decaying-Eigenfunction"
 \begin_layout Plain Layout
 This shows a numerically-computed decaying eigenfunction of period two,
  for 
-\begin_inset Formula $K=0.8$
+\begin_inset Formula $\beta=1.6$
 \end_inset
 
 .
@@ -5664,7 +5672,7 @@ imaginary
 
 Computed eigenfunctions for period-three are not dissimilar, nor are the
  ones for other values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 .
@@ -5673,7 +5681,7 @@ Computed eigenfunctions for period-three are not dissimilar, nor are the
 \end_inset
 
  as 
-\begin_inset Formula $K\to1/2$
+\begin_inset Formula $\beta\to1$
 \end_inset
 
 , but its not clear if this is a numeric artifact, or something real.
@@ -5805,11 +5813,11 @@ Julia Set
 
 \begin_layout Standard
 Consider the two iterators 
-\begin_inset Formula $a_{0}\left(y\right)=\min\left(K,\beta y\right)$
+\begin_inset Formula $a_{0}\left(y\right)=\min\left(\frac{\beta}{2},\beta y\right)$
 \end_inset
 
  and 
-\begin_inset Formula $a_{1}\left(y\right)=\max\left(0,\beta y-K\right)$
+\begin_inset Formula $a_{1}\left(y\right)=\max\left(0,\beta y-\frac{\beta}{2}\right)$
 \end_inset
 
 .
@@ -5913,7 +5921,7 @@ Consider the binary tree of dyadic fractions: that is, the tree whose rows
 
  on this tree.
  For the head of the tree, set 
-\begin_inset Formula $J\left(1/2\right)=K$
+\begin_inset Formula $J\left(1/2\right)=\beta$
 \end_inset
 
 .
@@ -5951,10 +5959,10 @@ Consider the binary tree of dyadic fractions: that is, the tree whose rows
 \end_inset
 
 In the above figure, 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- runs from 1/2 at the bottom to 1 at the top.
+ runs from 1 at the bottom to 2 at the top.
  A single horizontal slice through the image shows a color-coded version
  of 
 \begin_inset Formula $J$
@@ -6000,13 +6008,13 @@ The Multiplication Operator
 The difficulties presented in the previous section suggests that studying
  the multiplication operator might be simpler.
  Multiplication by 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  is given by 
 \begin_inset Formula 
 \begin{equation}
-M_{\beta}\left(x\right)=Kx\label{eq:multiplication}
+M_{\beta}\left(x\right)=\beta x\label{eq:multiplication}
 \end{equation}
 
 \end_inset
@@ -6014,7 +6022,7 @@ M_{\beta}\left(x\right)=Kx\label{eq:multiplication}
 The corresponding transfer operator is 
 \begin_inset Formula 
 \[
-\left[\mathcal{M}_{\beta}f\right]\left(y\right)=\frac{1}{K}f\left(\frac{y}{K}\right)
+\left[\mathcal{M}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}f\left(\frac{y}{\beta}\right)
 \]
 
 \end_inset
@@ -6115,7 +6123,7 @@ Some properties of the multiplication operator can be guessed at directly.
 \end_inset
 
  is a decaying/growing eigenfunction, depending on whether 
-\begin_inset Formula $K>1$
+\begin_inset Formula $\beta>1$
 \end_inset
 
  or not.
@@ -6125,11 +6133,11 @@ Some properties of the multiplication operator can be guessed at directly.
 
  as a uniform distribution of dust; with each iteration, it is spread either
  farther apart (
-\begin_inset Formula $K>1$
+\begin_inset Formula $\beta>1$
 \end_inset
 
 ) or bunched closer together (
-\begin_inset Formula $K<1$
+\begin_inset Formula $\beta<1$
 \end_inset
 
 ).
@@ -6141,7 +6149,7 @@ Clearly,
 \end_inset
 
  is an eigenfunction, with eigenvalue 
-\begin_inset Formula $1/K^{n+1}$
+\begin_inset Formula $1/\beta^{n+1}$
 \end_inset
 
 .
@@ -6171,7 +6179,7 @@ If the domain of the operator is extended to functions on the non-negative
 \end_inset
 
  is positive, then (for 
-\begin_inset Formula $K<1$
+\begin_inset Formula $\beta<1$
 \end_inset
 
 ) the multiplication operator only has eigenvalues greater than one, which
@@ -6206,13 +6214,13 @@ reference "eq:compressor self-sim"
  that 
 \begin_inset Formula 
 \[
-\mbox{cpr}_{K/2}\left(\frac{x}{K}\right)=\frac{1}{2}\mbox{cpr}_{K/2}\left(x\right)
+\mbox{cpr}_{\beta}\left(\frac{x}{\beta}\right)=\frac{1}{2}\mbox{cpr}_{\beta}\left(x\right)
 \]
 
 \end_inset
 
 whenever 
-\begin_inset Formula $1<K\le2$
+\begin_inset Formula $1<\beta\le2$
 \end_inset
 
  and 
@@ -6220,7 +6228,7 @@ whenever
 \end_inset
 
  and so, 
-\begin_inset Formula $\mbox{cpr}_{K/2}$
+\begin_inset Formula $\mbox{cpr}_{\beta}$
 \end_inset
 
  is potentially be an eigenfunction of 
@@ -6228,7 +6236,7 @@ whenever
 \end_inset
 
  with eigenvalue 
-\begin_inset Formula $1/\beta$
+\begin_inset Formula $1/2\beta$
 \end_inset
 
 , provided that it is extended to arguments 
@@ -6242,17 +6250,17 @@ whenever
 \end_inset
 
  and for 
-\begin_inset Formula $1/2<K\le1$
+\begin_inset Formula $1<\beta\le2$
 \end_inset
 
  as
 \begin_inset Formula 
 \[
 \mbox{ecpr}_{\beta}\left(x\right)=\begin{cases}
-\mbox{cpr}_{\beta}\left(x\right) & \mbox{if }0\le x<K\\
-2\mbox{cpr}_{\beta}\left(\frac{x}{\beta}\right) & \mbox{if }K\le x<\beta^{2}\\
-4\mbox{cpr}_{\beta}\left(\frac{x}{4K^{2}}\right) & \mbox{if }\beta^{2}\le x<4K^{3}\\
-2^{n}\mbox{cpr}_{\beta}\left(\frac{x}{\left(\beta\right)^{n}}\right) & \mbox{if }K\left(\beta\right)^{n-1}\le x<K\left(\beta\right)^{n}
+\mbox{cpr}_{\beta}\left(x\right) & \mbox{if }0\le2x<\beta\\
+2\mbox{cpr}_{\beta}\left(\frac{x}{\beta}\right) & \mbox{if }\beta\le2x<\beta^{2}\\
+4\mbox{cpr}_{\beta}\left(\frac{x}{\beta^{2}}\right) & \mbox{if }\beta^{2}\le2x<\beta^{3}\\
+2^{n}\mbox{cpr}_{\beta}\left(\frac{x}{\beta^{n}}\right) & \mbox{if }\beta^{n}\le2x<\beta^{n+1}
 \end{cases}
 \]
 
@@ -6303,40 +6311,6 @@ The ecpr function is not square integrable; it does not have an
  
 \end_layout
 
-\begin_layout Standard
-Define 
-\begin_inset Formula $\mbox{hpr}_{\beta}\left(x\right)=\mbox{ecpr}_{K/2}\left(x\right)$
-\end_inset
-
-.
- This definition is valid only for 
-\begin_inset Formula $1<K\le2$
-\end_inset
-
- (Yes, this is confusing.) Then 
-\begin_inset Formula $\mbox{hpr}_{\beta}\left(x^{n}\right)$
-\end_inset
-
- is an eigenfunction of 
-\begin_inset Formula $\mathcal{M}_{\beta}$
-\end_inset
-
- with associated eigenvalue 
-\begin_inset Formula $1/\beta^{n}$
-\end_inset
-
- (whenever 
-\begin_inset Formula $1<K\le2$
-\end_inset
-
-).
- Note that, for 
-\begin_inset Formula $n$
-\end_inset
-
- positive, this is a decaying eigenfunction.
-\end_layout
-
 \begin_layout Subsection
 A Generic log-periodic Eigenfunction
 \end_layout
@@ -6348,28 +6322,28 @@ Inspired by the above, its should be clear how to build a generic eigenfunction.
 \end_inset
 
  be some arbitrary function, defined on the interval 
-\begin_inset Formula $1\le x<K$
+\begin_inset Formula $1\le x<\beta$
 \end_inset
 
  (given some fixed 
-\begin_inset Formula $1<K$
+\begin_inset Formula $1<\beta$
 \end_inset
 
 ).
  Define its extension as
 \begin_inset Formula 
 \[
-g_{w}^{\prime}\left(x\right)=w^{n}g\left(\frac{x}{K^{n}}\right)\;\mbox{ if }K^{n}\le x<K^{n+1}
+g_{w}^{\prime}\left(x\right)=w^{n}g\left(\frac{x}{\beta^{n}}\right)\;\mbox{ if }\beta^{n}\le x<\beta^{n+1}
 \]
 
 \end_inset
 
 This has, by construction, the self-similarity relation 
-\begin_inset Formula $g_{w}^{\prime}\left(Kx\right)=wg_{w}^{\prime}\left(x\right)$
+\begin_inset Formula $g_{w}^{\prime}\left(\beta x\right)=wg_{w}^{\prime}\left(x\right)$
 \end_inset
 
  and so is an eigenfunction with eigenvalue 
-\begin_inset Formula $w/K$
+\begin_inset Formula $w/\beta$
 \end_inset
 
 :
@@ -6378,7 +6352,7 @@ This has, by construction, the self-similarity relation
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\left[\mathcal{M}_{\beta}g_{w}^{\prime}\right]=\frac{w}{K}g_{w}^{\prime}
+\left[\mathcal{M}_{\beta}g_{w}^{\prime}\right]=\frac{w}{\beta}g_{w}^{\prime}
 \]
 
 \end_inset
@@ -6386,7 +6360,7 @@ This has, by construction, the self-similarity relation
 This function is merely log-periodic; its not fractal.
  Perhaps its silly to illustrate this; it should be obvious, but just in
  case its not, the figure below shows such a function, for 
-\begin_inset Formula $K=1.6$
+\begin_inset Formula $\beta=1.6$
 \end_inset
 
  and 
@@ -6426,7 +6400,7 @@ g a free monoid in one generator (the iteration itself), whereas fractals
 
 \begin_layout Standard
 Note that the 
-\begin_inset Formula $\mbox{hpr}_{\beta}$
+\begin_inset Formula $\mbox{cpr}_{\beta}$
 \end_inset
 
  function constructed above is a special case of this: It's self-similar,
@@ -6437,7 +6411,7 @@ Note that the
 \end_inset
 
  is an eigenfunction with eigenvalue 
-\begin_inset Formula $1/Kw^{n}$
+\begin_inset Formula $1/\beta w^{n}$
 \end_inset
 
  (for integer 
@@ -6474,7 +6448,7 @@ The multiplication operator
 \begin_inset Formula 
 \begin{align*}
 \left\langle mi\left|{\cal M}_{\beta}\right|nj\right\rangle = & \int_{-\infty}^{\infty}h_{mi}\left(x\right)\left[\mathcal{M}_{\beta}h_{nj}\right]\left(x\right)dx\\
-= & \frac{2^{\left(m+n\right)/2}}{K}\int_{-\infty}^{\infty}h\left(2^{m}x-i\right)h\left(\frac{2^{n}x}{K}-j\right)dx
+= & \frac{2^{\left(m+n\right)/2}}{\beta}\int_{-\infty}^{\infty}h\left(2^{m}x-i\right)h\left(\frac{2^{n}x}{\beta}-j\right)dx
 \end{align*}
 
 \end_inset
@@ -6494,7 +6468,7 @@ Instead of confining oneself to the unit interval, here it is convenient
  As before, matrix elements vanish unless 
 \begin_inset Formula 
 \[
-\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{Kj}{2^{n}},\frac{K\left(j+1\right)}{2^{n}}\right]\ne\emptyset
+\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{\beta j}{2^{n}},\frac{\beta\left(j+1\right)}{2^{n}}\right]\ne\emptyset
 \]
 
 \end_inset
