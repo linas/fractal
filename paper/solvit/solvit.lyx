@@ -618,6 +618,30 @@ reference "fig:Iterated-piece-wise-linear"
 \end_inset
 
  below.
+ it has the same shape, but is shorter or lower; in much of the remaining
+ text, it will be called the 
+\begin_inset Quotes eld
+\end_inset
+
+downshift
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This name is idiosyncratic to this text, but is less of a mouthful than
+ having to say 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform
+\begin_inset Quotes erd
+\end_inset
+
+ over and over.
 \end_layout
 
 \begin_layout Standard
@@ -979,7 +1003,7 @@ The above figure shows three different density distributions, for
  bins, and sampled 24000 times (or 30 times per bin) to perform the averaging
  integral.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Generated with `fractal/misc/bitops/bigbern.C` edited to print only slices.
@@ -1204,7 +1228,7 @@ The tent map is a closely related iterated map, given by iteration of the
  function
 \begin_inset Formula 
 \[
-t_{K}(x)=\begin{cases}
+t_{\beta}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}\\
 \beta\left(1-x\right) & \mbox{ for }\frac{1}{2}\le x\le1
 \end{cases}
@@ -1267,10 +1291,10 @@ name "fig:Tent-Map-Bifur"
 \begin_layout Plain Layout
 The bifurcation diagram for the tent map.
  The value of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- runs from 0.5 at the bottom of the image, to 1.0 at the top.
+ runs from 1 at the bottom of the image, to 2 at the top.
  The color scheme is adjusted so that green represents the average value
  of the distribution, red represents areas of more than double the average
  value, while blue shows those values that are about half the average value.
@@ -1293,12 +1317,12 @@ The black areas represent parts of the iterated range that are visited at
  most a finite number of times.
  To the left, a straight line indicates that after one iteration, points
  in the domain 
-\begin_inset Formula $K\le x\le1$
+\begin_inset Formula $\beta/2\le x\le1$
 \end_inset
 
  are never visited.
  To the right, points in the domain 
-\begin_inset Formula $0\le x\le\beta\left(1-K\right)$
+\begin_inset Formula $0\le x\le\beta\left(1-\beta/2\right)$
 \end_inset
 
  are never visited more than a finite number of times.
@@ -1330,7 +1354,7 @@ The logistic map is related to the tent map, and is given by iteration of
  the function
 \begin_inset Formula 
 \[
-f_{K}\left(x\right)=4Kx(1-x)
+f_{\beta}\left(x\right)=2\beta x(1-x)
 \]
 
 \end_inset
@@ -1338,24 +1362,28 @@ f_{K}\left(x\right)=4Kx(1-x)
 It essentially replaces the triangle forming the tent map with a parabola
  of the same height.
  That is, the function is defined here so that the the same value of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  corresponds to the same height for all three maps.
  Although the heights of the iterators have been aligned so that they match,
  each exhibits rather dramatically different dynamics.
- The downshift map has a single fixed point for 
-\begin_inset Formula $K<1/2$
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform has a single fixed point for 
+\begin_inset Formula $\beta<1$
 \end_inset
 
 , and then explodes into a fully chaotic regime above that.
  By contrast, the logistic map maintains a single fixed point up to 
-\begin_inset Formula $K=3/4$
+\begin_inset Formula $\beta=3/2$
 \end_inset
 
 , where it famously starts a series of period-doubling bifurcations.
  The onset of chaos is where the bifurcations come to a limit, at 
-\begin_inset Formula $K=3.56995/4=0.892487$
+\begin_inset Formula $\beta=3.56995/2=1.784975$
 \end_inset
 
 .
@@ -1367,12 +1395,16 @@ islands of stability
 \begin_inset Quotes erd
 \end_inset
 
-, which do not appear in either the downshift, or in the tent map.
+, which do not appear in either the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, or in the tent map.
  The tent map does show a period-doubling regime, but in this region, there
  are no fixed points: rather, the motion is chaotic, but confined to multiple
  arms.
  At any rate, the period doubling occurs at different values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  than for the logistic map.
@@ -1388,11 +1420,19 @@ reference "fig:Logistic-Map-Bifurcation"
 
 .
  Again, it is worth closely examining the similarities between this, and
- the corresponding tent-map diagram, as well as the downshift diagram.
+ the corresponding tent-map diagram, as well as the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform diagram.
  Naively, it would seem that the general structure of the chaotic regions
  are shared by all three maps.
  Thus, in order to understand chaos in the logistic map, it is perhaps easier
- to study it in the downshift.
+ to study it in the
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform.
 \end_layout
 
 \begin_layout Standard
@@ -1435,10 +1475,10 @@ name "fig:Logistic-Map-Bifurcation"
 \begin_layout Plain Layout
 The logistic map bifurcation diagram.
  The value of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- runs from 0.875 at the bottom of the image, to 1.0 at the top.
+ runs from 1.75 at the bottom of the image, to 2 at the top.
  The color scheme is adjusted so that green represents the average value
  of the distribution, red represents areas of more than double the average
  value, while blue shows those values that are about half the average value.
@@ -1468,17 +1508,17 @@ Sideshift
 \end_layout
 
 \begin_layout Standard
-After exactly one iteration of the downshift, all initial points 
-\begin_inset Formula $K\le x\le1$
+After exactly one iteration of the downshift , all initial points 
+\begin_inset Formula $\beta/2\le x\le1$
 \end_inset
 
  are swept up into the domain 
-\begin_inset Formula $0\le x<K$
+\begin_inset Formula $0\le x<\beta/2$
 \end_inset
 
 , and never leave.
  Likewise, the range of the iterated downshift is 
-\begin_inset Formula $0\le x<K$
+\begin_inset Formula $0\le x<\beta/2$
 \end_inset
 
 .
@@ -1492,13 +1532,13 @@ After exactly one iteration of the downshift, all initial points
 \end_inset
 
  by 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta/2$
 \end_inset
 
  to obtain the function
 \begin_inset Formula 
 \[
-d_{K}(u)=\begin{cases}
+d_{\beta}(u)=\begin{cases}
 \beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
 \beta u-1 & \mbox{ for }\frac{1}{\beta}\le u\le1
 \end{cases}
@@ -1510,8 +1550,8 @@ The orbit of a point
 \begin_inset Formula $x$
 \end_inset
 
- in the downshift is identical to the orbit of a point 
-\begin_inset Formula $u=x/K$
+ in the beta transform is identical to the orbit of a point 
+\begin_inset Formula $u=2x/\beta$
 \end_inset
 
  in the above.
@@ -1523,9 +1563,9 @@ sideshift
 \begin_inset Quotes erd
 \end_inset
 
-, thus iterates identically to the downshift.
+, iterates identically to the beta transform.
  The values, however, differ by a factor of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta/2$
 \end_inset
 
 ; this alters the symbolic dynamics of the sideshift, as compared to the
@@ -1535,21 +1575,21 @@ sideshift
 \begin_layout Standard
 A similar situation applies to the tent map.
  After one iteration, all initial points 
-\begin_inset Formula $K\le x\le1$
+\begin_inset Formula $\beta/2\le x\le1$
 \end_inset
 
  are swept up into the domain 
-\begin_inset Formula $0\le x<K$
+\begin_inset Formula $0\le x<\beta/2$
 \end_inset
 
 .
  After a finite number of iterations, all points 
-\begin_inset Formula $0<x\le\beta\left(1-K\right)$
+\begin_inset Formula $0<x\le\beta\left(1-\beta/2\right)$
 \end_inset
 
  are swept up, so that the remaining iteration takes place on the domain
  
-\begin_inset Formula $\beta\left(1-K\right)<x<K$
+\begin_inset Formula $\beta\left(1-\beta/2\right)<x<\beta/2$
 \end_inset
 
 .
@@ -1576,7 +1616,7 @@ wander away
  The sidetent is given by
 \begin_inset Formula 
 \[
-s_{K}(u)=\begin{cases}
+s_{\beta}(u)=\begin{cases}
 \beta\left(u-1\right)+2 & \mbox{ for }0\le u<\frac{\beta-1}{\beta}\\
 \beta\left(1-u\right) & \mbox{ for }\frac{\beta-1}{\beta}\le u\le1
 \end{cases}
@@ -1593,7 +1633,7 @@ Performing a left-right flip on the side-tent brings it closer in form to
  is 
 \begin_inset Formula 
 \[
-f_{K}(u)=\begin{cases}
+f_{\beta}(u)=\begin{cases}
 \beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
 2-\beta u & \mbox{ for }\frac{1}{\beta}\le u\le1
 \end{cases}
@@ -1607,7 +1647,7 @@ f_{K}(u)=\begin{cases}
 \begin_layout Standard
 The tent map (and the flipped tent) exhibits fixed points (periodic orbits;
  mode-locking) for the smaller values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 .
@@ -1624,7 +1664,7 @@ sidetarp
 :
 \begin_inset Formula 
 \[
-a_{K}(u)=\begin{cases}
+a_{\beta}(u)=\begin{cases}
 \beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
 \beta\left(1-u\right) & \mbox{ for }\frac{1}{\beta}\le u\le1
 \end{cases}
@@ -1656,7 +1696,7 @@ reference "fig:Side-Shift-and-Side-tent"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1692,7 +1732,7 @@ name "fig:Iterated-piece-wise-linear"
 \begin_layout Plain Layout
 The downshit map, shown in the upper left, generates orbits that spend all
  of thier time in the shaded area: a box of size 
-\begin_inset Formula $K\times K$
+\begin_inset Formula $\frac{\beta}{2}\times\frac{\beta}{2}$
 \end_inset
 
 .
@@ -1798,14 +1838,14 @@ name "fig:Side-Shift-and-Side-tent"
 \end_layout
 
 \begin_layout Plain Layout
-The left thwo figures show the bifurcation diagrams for the downshift and
+The left two figures show the bifurcation diagrams for the downshift and
  the tent map, rescaled so as to fit the unit square; viz the side-shift
  and the side-tent, given in the main text.
  In both figures, 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- runs from 0.5 at the bottom to 1.0 at the top.
+ runs from 1 at the bottom to 2 at the top.
  These figures are essentially identical to those of figures 
 \begin_inset CommandInset ref
 LatexCommand ref
