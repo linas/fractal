@@ -84,7 +84,7 @@
 \begin_body
 
 \begin_layout Title
-Iteration on the Real Number Line
+On the Beta Transform
 \end_layout
 
 \begin_layout Author
@@ -96,52 +96,78 @@ December 2017
 \end_layout
 
 \begin_layout Abstract
-This note describes a sequence of explorations to develop ideas and tools
- for analyzing and understanding some very simple iterated function sequences.
- The primary focus is on leveraging the space 
+The beta transformation is the iterated map 
+\begin_inset Formula $\beta x\mod1$
+\end_inset
+
+.
+ The special case of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ is known as the Bernoulli map, and is exactly solvable.
+ The Bernoulli map is interesting, as it provides a model for a certain
+ form of pure, unrestrained chaotic (ergodic) behavior: it is the full invariant
+ shift on the Cantor space 
 \begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
 \end_inset
 
-of infinite strings of binary digits, and the fact that they can be used
+.
+ The Cantor space consists of infinite strings of binary digits; it is particula
+rly notable for a variety of features, one of which is that it can be used
  to represent the real number line.
- It is well-known that this space, the Cantor space, appears in a broad
- variety of guises and incarnations the study of iterated function sequences.
- Yet somehow the reasons for its impact, and the precise mechanics remains
- murky and unclear.
- This note is an effort to clarify how it fits in, and more generally, to
- elucidate the tension between multiplication of real numbers, and how multiplic
-ation acts on real numbers represented in the Cantor space.
-\end_layout
-
-\begin_layout Abstract
-The work presented here is mostly the result of sheer persistence, rather
- than that of deep insight.
- Progress is difficult, and the results are modest.
  
 \end_layout
 
 \begin_layout Abstract
-One interesting insight emerges: the complicated structure of the iterated
- logistic map, tent map, 
-\emph on
-etc.
-
-\emph default
- is entirely due to the chaotic dynamics of the carry bit in multiplication.
- If the carry bit is suppressed, then one obtains only reshufflings, which
- have a completely uniform distribution lacking in structure.
+The beta transformation is a subshift: iterated on the unit interval, it
+ singles out a subspace of the Cantor space, in such a way that it is invariant
+ under the action of the left-shift operator.
+ That is, lopping off one bit at a time gives back the same subspace.
 \end_layout
 
 \begin_layout Abstract
-Anothe interesting, surprising result is that the eigenvalue of the transfer
- operator of the iterated function 
-\begin_inset Formula $2Kx\mod1$
+The beta transform is interesting, as it seems to capture something basic
+ about the mutiplication of two real numbers: 
+\begin_inset Formula $\beta$
 \end_inset
 
- - a kind of downscaled Bernoulli shift, similar to the tent map and the
- famous logistic map, seems to have eigenvalues lying on a circle of radius
- 
-\begin_inset Formula $1/2K$
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ It offers a window into understanding the nature of multiplication.
+ Iterating on multiplication, one would get 
+\begin_inset Formula $\beta^{n}x$
+\end_inset
+
+ – that is, exponentiation; although the mod 1 of the beta transform contorts
+ this in interesting ways.
+\end_layout
+
+\begin_layout Abstract
+Analyzing the beta transform is difficult.
+ The work presented here is mostly the result of sheer persistence, rather
+ than that of deep insight.
+ The results are modest.
+ However, several interesting insights emerge.
+ One is that the complicated structure of the chaotic regions of iterated
+ maps seems to be due to the chaotic dynamics of the carry bit in multiplication.
+ That is, the multiplication of real numbers, when expressed on Cantor space,
+ requires the use of a carry bit (from long multiplication, as taught in
+ elementary school).
+ The carry bit behaves in a complicated fashion, and seems to be the root
+ cause of chaotic structure.
+ That is, if the carry bit is suppressed, then one obtains only reshufflings
+ on the Cantor space, which have a completely uniform distribution lacking
+ in structure: they are full shifts, not subshifts.
+\end_layout
+
+\begin_layout Abstract
+Another interesting, surprising result is that the eigenvalues of the transfer
+ operator of beta transform seem to lie on a circle of radius 
+\begin_inset Formula $1/\beta$
 \end_inset
 
  in the complex plane.
@@ -326,7 +352,7 @@ downshift
 \end_inset
 
 -transformation, with 
-\begin_inset Formula $\beta=2K$
+\begin_inset Formula $\beta=\beta$
 \end_inset
 
  by convention.
@@ -347,8 +373,8 @@ Give a constant
 \begin_inset Formula 
 \begin{equation}
 b_{K}(x)=\begin{cases}
-2Kx & \mbox{ for }0\le x<\frac{1}{2}\\
-2K\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
 \end{cases}\label{eq:downshift}
 \end{equation}
 
@@ -374,7 +400,7 @@ Given the symbolic dynamics, one can reconstruct the original value whenever
  as
 \begin_inset Formula 
 \[
-x=\frac{k_{0}}{2}+\frac{1}{2K}\left(\frac{k_{1}}{2}+\frac{1}{2K}\left(\frac{k_{2}}{2}+\frac{1}{2K}\left(\frac{k_{3}}{2}+\frac{1}{2K}\left(\cdots\right)\right)\right)\right)
+x=\frac{k_{0}}{2}+\frac{1}{\beta}\left(\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
 \]
 
 \end_inset
@@ -386,7 +412,7 @@ That is, one clearly sees that
  acts as a shift on this sequence:
 \begin_inset Formula 
 \[
-b_{K}(x)=\frac{k_{1}}{2}+\frac{1}{2K}\left(\frac{k_{2}}{2}+\frac{1}{2K}\left(\frac{k_{3}}{2}+\frac{1}{2K}\left(\frac{k_{4}}{2}+\frac{1}{2K}\left(\cdots\right)\right)\right)\right)
+b_{K}(x)=\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\frac{k_{4}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
 \]
 
 \end_inset
@@ -407,7 +433,7 @@ exactly solvable
 Multiplying out the above sequence, one obtains the series
 \begin_inset Formula 
 \begin{equation}
-x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\left(2K\right)^{n}}\label{eq:shift series}
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\left(\beta\right)^{n}}\label{eq:shift series}
 \end{equation}
 
 \end_inset
@@ -921,8 +947,8 @@ The tent map is a closely related iterated map, given by iteration of the
 \begin_inset Formula 
 \[
 t_{K}(x)=\begin{cases}
-2Kx & \mbox{ for }0\le x<\frac{1}{2}\\
-2K\left(1-x\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
+\beta\left(1-x\right) & \mbox{ for }\frac{1}{2}\le x\le1
 \end{cases}
 \]
 
@@ -1014,7 +1040,7 @@ The black areas represent parts of the iterated range that are visited at
 
  are never visited.
  To the right, points in the domain 
-\begin_inset Formula $0\le x\le2K\left(1-K\right)$
+\begin_inset Formula $0\le x\le\beta\left(1-K\right)$
 \end_inset
 
  are never visited more than a finite number of times.
@@ -1215,8 +1241,8 @@ After exactly one iteration of the downshift, all initial points
 \begin_inset Formula 
 \[
 d_{K}(u)=\begin{cases}
-2Ku & \mbox{ for }0\le u<\frac{1}{2K}\\
-2Ku-1 & \mbox{ for }\frac{1}{2K}\le u\le1
+\beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
+\beta u-1 & \mbox{ for }\frac{1}{\beta}\le u\le1
 \end{cases}
 \]
 
@@ -1260,12 +1286,12 @@ A similar situation applies to the tent map.
 
 .
  After a finite number of iterations, all points 
-\begin_inset Formula $0<x\le2K\left(1-K\right)$
+\begin_inset Formula $0<x\le\beta\left(1-K\right)$
 \end_inset
 
  are swept up, so that the remaining iteration takes place on the domain
  
-\begin_inset Formula $2K\left(1-K\right)<x<K$
+\begin_inset Formula $\beta\left(1-K\right)<x<K$
 \end_inset
 
 .
@@ -1293,8 +1319,8 @@ wander away
 \begin_inset Formula 
 \[
 s_{K}(u)=\begin{cases}
-2K\left(u-1\right)+2 & \mbox{ for }0\le u<\frac{2K-1}{2K}\\
-2K\left(1-u\right) & \mbox{ for }\frac{2K-1}{2K}\le u\le1
+\beta\left(u-1\right)+2 & \mbox{ for }0\le u<\frac{\beta-1}{\beta}\\
+\beta\left(1-u\right) & \mbox{ for }\frac{\beta-1}{\beta}\le u\le1
 \end{cases}
 \]
 
@@ -1310,8 +1336,8 @@ Performing a left-right flip on the side-tent brings it closer in form to
 \begin_inset Formula 
 \[
 f_{K}(u)=\begin{cases}
-2Ku & \mbox{ for }0\le u<\frac{1}{2K}\\
-2-2Ku & \mbox{ for }\frac{1}{2K}\le u\le1
+\beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
+2-\beta u & \mbox{ for }\frac{1}{\beta}\le u\le1
 \end{cases}
 \]
 
@@ -1341,8 +1367,8 @@ sidetarp
 \begin_inset Formula 
 \[
 a_{K}(u)=\begin{cases}
-2Ku & \mbox{ for }0\le u<\frac{1}{2K}\\
-2K\left(1-u\right) & \mbox{ for }\frac{1}{2K}\le u\le1
+\beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
+\beta\left(1-u\right) & \mbox{ for }\frac{1}{\beta}\le u\le1
 \end{cases}
 \]
 
@@ -1752,7 +1778,7 @@ Given that iteration can generate strings of binary digits, and that these
 \begin_layout Standard
 \begin_inset Formula 
 \[
-x_{K}\left(\left(b_{n}\right)\right)=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{b_{n}}{\left(2K\right)^{n}}
+x_{K}\left(\left(b_{n}\right)\right)=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{b_{n}}{\left(\beta\right)^{n}}
 \]
 
 \end_inset
@@ -2074,7 +2100,7 @@ reference "fig:Compressor-Function"
  that satisfies 
 \begin_inset Formula 
 \[
-1\ge\frac{\frac{1}{2}\left(1+2K+\left(2K\right)^{2}+\cdots\left(2K\right)^{n-1}\right)}{\left(2K\right)^{n-1}}
+1\ge\frac{\frac{1}{2}\left(1+\beta+\left(\beta\right)^{2}+\cdots\left(\beta\right)^{n-1}\right)}{\left(\beta\right)^{n-1}}
 \]
 
 \end_inset
@@ -2082,7 +2108,7 @@ reference "fig:Compressor-Function"
 Solving, the bound is
 \begin_inset Formula 
 \begin{equation}
-n=1+\left\lfloor \frac{-\log2\left(1-K\right)}{\log2K}\right\rfloor \label{eq:longest-all-ones}
+n=1+\left\lfloor \frac{-\log2\left(1-K\right)}{\log\beta}\right\rfloor \label{eq:longest-all-ones}
 \end{equation}
 
 \end_inset
@@ -2215,7 +2241,7 @@ The two functions cpr and pdr are self-similar.
 , it behaves as
 \begin_inset Formula 
 \[
-\left(\mbox{pdr}_{K}\circ g\right)\left(x\right)=\mbox{pdr}_{K}\left(\frac{x}{2}\right)=\frac{1}{2K}\mbox{pdr}_{K}\left(x\right)
+\left(\mbox{pdr}_{K}\circ g\right)\left(x\right)=\mbox{pdr}_{K}\left(\frac{x}{2}\right)=\frac{1}{\beta}\mbox{pdr}_{K}\left(x\right)
 \]
 
 \end_inset
@@ -2227,7 +2253,7 @@ while under reflection
 , it behaves as 
 \begin_inset Formula 
 \[
-\left(\mbox{pdr}_{K}\circ r\right)\left(x\right)=\mbox{pdr}_{K}\left(1-x\right)=\left(\frac{K}{2K-1}-\mbox{pdr}_{K}\left(x\right)\right)
+\left(\mbox{pdr}_{K}\circ r\right)\left(x\right)=\mbox{pdr}_{K}\left(1-x\right)=\left(\frac{K}{\beta-1}-\mbox{pdr}_{K}\left(x\right)\right)
 \]
 
 \end_inset
@@ -2235,7 +2261,7 @@ while under reflection
 Note that 
 \begin_inset Formula 
 \[
-\lim_{x\to1}\,\mbox{pdr}_{K}\left(x\right)=\frac{K}{2K-1}
+\lim_{x\to1}\,\mbox{pdr}_{K}\left(x\right)=\frac{K}{\beta-1}
 \]
 
 \end_inset
@@ -2280,7 +2306,7 @@ Equivalently, for
  one can trivially restate the above as
 \begin_inset Formula 
 \begin{equation}
-\mbox{cpr}_{K}\left(\frac{y}{2K}\right)=\frac{1}{2}\mbox{cpr}_{K}\left(y\right)\label{eq:compressor self-sim}
+\mbox{cpr}_{K}\left(\frac{y}{\beta}\right)=\frac{1}{2}\mbox{cpr}_{K}\left(y\right)\label{eq:compressor self-sim}
 \end{equation}
 
 \end_inset
@@ -2303,7 +2329,7 @@ It follows that
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\mbox{cpr}_{K}\left(\frac{1}{2}+\frac{y}{2K}\right)=\frac{1}{2}+\frac{1}{2}\mbox{cpr}_{K}\left(y\right)
+\mbox{cpr}_{K}\left(\frac{1}{2}+\frac{y}{\beta}\right)=\frac{1}{2}+\frac{1}{2}\mbox{cpr}_{K}\left(y\right)
 \]
 
 \end_inset
@@ -2314,7 +2340,7 @@ Combining the above results into one, one has that
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\mbox{cpr}_{K}\left(\frac{y}{2K}\right)+\mbox{cpr}_{K}\left(\frac{1}{2}+\frac{y}{2K}\right)=\frac{1}{2}+\mbox{cpr}_{K}\left(y\right)
+\mbox{cpr}_{K}\left(\frac{y}{\beta}\right)+\mbox{cpr}_{K}\left(\frac{1}{2}+\frac{y}{\beta}\right)=\frac{1}{2}+\mbox{cpr}_{K}\left(y\right)
 \]
 
 \end_inset
@@ -2331,7 +2357,7 @@ Other things with similar symmetry
 The cpr curve is just one that belongs to a class of such curves.
  As an example, one may construct a Takagi (blancmange) curve by iterating
  triangles whose peak is located at 
-\begin_inset Formula $1/2K$
+\begin_inset Formula $1/\beta$
 \end_inset
 
 .
@@ -2356,7 +2382,7 @@ a curve constructed in this fashion.
  the left, as
 \begin_inset Formula 
 \[
-\mbox{tak}_{K;w}\left(\frac{x}{2K}\right)=x+w\;\mbox{tak}_{K;w}\left(x\right)
+\mbox{tak}_{K;w}\left(\frac{x}{\beta}\right)=x+w\;\mbox{tak}_{K;w}\left(x\right)
 \]
 
 \end_inset
@@ -2368,7 +2394,7 @@ for
  and self-similarity on the right, as
 \begin_inset Formula 
 \[
-\mbox{tak}_{K;w}\left(\frac{1}{2K}+x\left(1-\frac{1}{2K}\right)\right)=1-x+w\;\mbox{tak}_{K;w}\left(x\right)
+\mbox{tak}_{K;w}\left(\frac{1}{\beta}+x\left(1-\frac{1}{\beta}\right)\right)=1-x+w\;\mbox{tak}_{K;w}\left(x\right)
 \]
 
 \end_inset
@@ -2444,7 +2470,7 @@ name "fig:Skew-Takagi-Curve"
 This figure shows a skew Takagi curve, and the first four steps of its construct
 ion.
  The initial triangle is of height 1; the apex is located at 
-\begin_inset Formula $1/2K$
+\begin_inset Formula $1/\beta$
 \end_inset
 
 , for K=0.8 in this figure.
@@ -2494,8 +2520,8 @@ mother wavelet
 \begin_inset Formula 
 \begin{equation}
 h_{K}(x)=\begin{cases}
-2K & \mbox{for }0\le x<\frac{1}{2K}\\
-\frac{-2K}{2K-1} & \mbox{for }\frac{1}{2K}\le x\le1
+\beta & \mbox{for }0\le x<\frac{1}{\beta}\\
+\frac{-\beta}{\beta-1} & \mbox{for }\frac{1}{\beta}\le x\le1
 \end{cases}\label{eq:Haar mother}
 \end{equation}
 
@@ -2509,7 +2535,7 @@ which is then iterated on to form the fractal curve
  The self symmetries are
 \begin_inset Formula 
 \[
-\mbox{har}_{K;w}\left(\frac{x}{2K}\right)=2K+w\;\mbox{har}_{K;w}\left(x\right)
+\mbox{har}_{K;w}\left(\frac{x}{\beta}\right)=\beta+w\;\mbox{har}_{K;w}\left(x\right)
 \]
 
 \end_inset
@@ -2517,7 +2543,7 @@ which is then iterated on to form the fractal curve
  and
 \begin_inset Formula 
 \[
-\mbox{har}_{K;w}\left(\frac{1}{2K}+x\left(1-\frac{1}{2K}\right)\right)=-\frac{2K}{2K-1}+w\;\mbox{har}_{K;w}\left(x\right)
+\mbox{har}_{K;w}\left(\frac{1}{\beta}+x\left(1-\frac{1}{\beta}\right)\right)=-\frac{\beta}{\beta-1}+w\;\mbox{har}_{K;w}\left(x\right)
 \]
 
 \end_inset
@@ -2634,7 +2660,7 @@ reference "eq:longest-all-ones"
  Arbitrary finite lengths of zeros do appear; but are there fixed points,
  i.e.
  sequences that terminate in all-zeros? Clearly, 
-\begin_inset Formula $x=1/2\left(2K\right)^{n}$
+\begin_inset Formula $x=1/2\left(\beta\right)^{n}$
 \end_inset
 
  is such a fixed point: after 
@@ -2663,7 +2689,7 @@ reference "eq:downshift"
 \end_inset
 
  can be written in the form of 
-\begin_inset Formula $\left(2K\right)^{n}=2m+1$
+\begin_inset Formula $\left(\beta\right)^{n}=2m+1$
 \end_inset
 
  for some integers 
@@ -2799,7 +2825,7 @@ The transfer operator for the downshift map
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{K}f\right]\left(y\right)=\begin{cases}
-\frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right] & \mbox{ for }0\le y\le K\\
+\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+K}{\beta}\right)\right] & \mbox{ for }0\le y\le K\\
 0 & \mbox{ for }K<y\le1
 \end{cases}
 \]
@@ -2809,7 +2835,7 @@ The transfer operator for the downshift map
 or, written more compactly
 \begin_inset Formula 
 \begin{equation}
-\left[\mathcal{L}_{K}f\right]\left(y\right)=\frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right]\Theta\left(K-y\right)\label{eq:xfer oper}
+\left[\mathcal{L}_{K}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+K}{\beta}\right)\right]\Theta\left(K-y\right)\label{eq:xfer oper}
 \end{equation}
 
 \end_inset
@@ -2841,7 +2867,7 @@ That is, the
  satisfies 
 \begin_inset Formula 
 \begin{equation}
-\rho\left(y\right)=\frac{1}{2K}\left[\rho\left(\frac{y}{2K}\right)+\rho\left(\frac{y+K}{2K}\right)\right]\Theta\left(K-y\right)\label{eq:eigen-eqn}
+\rho\left(y\right)=\frac{1}{\beta}\left[\rho\left(\frac{y}{\beta}\right)+\rho\left(\frac{y+K}{\beta}\right)\right]\Theta\left(K-y\right)\label{eq:eigen-eqn}
 \end{equation}
 
 \end_inset
@@ -2904,29 +2930,29 @@ A very minor simplification can be achieved with a change of variable.
  Then the eigenequation becomes
 \begin_inset Formula 
 \[
-2\lambda K\rho\left(K-\epsilon\right)=\rho\left(\frac{1}{2}-\frac{\epsilon}{2K}\right)+\rho\left(1-\frac{\epsilon}{2K}\right)
+2\lambda K\rho\left(K-\epsilon\right)=\rho\left(\frac{1}{2}-\frac{\epsilon}{\beta}\right)+\rho\left(1-\frac{\epsilon}{\beta}\right)
 \]
 
 \end_inset
 
 The second term vanishes whenever 
-\begin_inset Formula $K<1-\epsilon/2K$
+\begin_inset Formula $K<1-\epsilon/\beta$
 \end_inset
 
  or 
-\begin_inset Formula $\epsilon<2K(1-K)$
+\begin_inset Formula $\epsilon<\beta(1-K)$
 \end_inset
 
  and so one has the simpler recurrence relation
 \begin_inset Formula 
 \begin{equation}
-\lambda\rho\left(y\right)=\frac{1}{2K}\rho\left(\frac{y}{2K}\right)\label{eq:eigen-branch}
+\lambda\rho\left(y\right)=\frac{1}{\beta}\rho\left(\frac{y}{\beta}\right)\label{eq:eigen-branch}
 \end{equation}
 
 \end_inset
 
 whenever 
-\begin_inset Formula $K(2K-1)<y\le K$
+\begin_inset Formula $K(\beta-1)<y\le K$
 \end_inset
 
 .
@@ -3013,7 +3039,7 @@ almost solutions
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\left[\mathcal{P}_{K}f\right]\left(y\right)=\frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right]
+\left[\mathcal{P}_{K}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+K}{\beta}\right)\right]
 \]
 
 \end_inset
@@ -3051,7 +3077,7 @@ Solving this operator is relatively straight-forward.
  solvable.
  It's eigensolutions in this basis are polynomials.
  The eigenspectrum is clearly discrete, and is given by 
-\begin_inset Formula $\left(2K\right)^{-n-1}$
+\begin_inset Formula $\left(\beta\right)^{-n-1}$
 \end_inset
 
  for integers 
@@ -3097,8 +3123,8 @@ Attempting some guess-work, the self-similarity of the cpr function suggests
  The one finds that
 \begin_inset Formula 
 \begin{align*}
-\left[\mathcal{P}_{K}\mbox{ei}_{K}\right]\left(y\right)= & \frac{1}{2K}\left[\mbox{ei}_{K}\left(\frac{y}{2K}\right)+\mbox{ei}_{K}\left(\frac{y+K}{2K}\right)\right]\\
-= & \frac{\mbox{ei}_{K}\left(y\right)}{2K}
+\left[\mathcal{P}_{K}\mbox{ei}_{K}\right]\left(y\right)= & \frac{1}{\beta}\left[\mbox{ei}_{K}\left(\frac{y}{\beta}\right)+\mbox{ei}_{K}\left(\frac{y+K}{\beta}\right)\right]\\
+= & \frac{\mbox{ei}_{K}\left(y\right)}{\beta}
 \end{align*}
 
 \end_inset
@@ -3150,7 +3176,7 @@ Another interesting case arises if one attempts a Fourier-inspired basis.
  Define 
 \begin_inset Formula 
 \[
-\mbox{e}_{K;n;l}\left(x\right)=\exp i2\pi\left(2l+1\right)\left(2K\right)^{n}x
+\mbox{e}_{K;n;l}\left(x\right)=\exp i2\pi\left(2l+1\right)\left(\beta\right)^{n}x
 \]
 
 \end_inset
@@ -3163,7 +3189,7 @@ for integer
  One then obtains a shift sequence
 \begin_inset Formula 
 \[
-\left[\mathcal{P}_{K}\mbox{e}_{K;n;l}\right]\left(x\right)=\frac{1}{2K}\mbox{e}_{K;n-1;l}\left(x\right)\left(1+\mbox{e}_{K;n;l}\left(\frac{1}{2}\right)\right)
+\left[\mathcal{P}_{K}\mbox{e}_{K;n;l}\right]\left(x\right)=\frac{1}{\beta}\mbox{e}_{K;n-1;l}\left(x\right)\left(1+\mbox{e}_{K;n;l}\left(\frac{1}{2}\right)\right)
 \]
 
 \end_inset
@@ -3203,7 +3229,7 @@ This is not a viable candidate for
 The shift is then
 \begin_inset Formula 
 \[
-\left[\mathcal{P}_{K}\phi_{l;z}\right]\left(x\right)=\frac{z}{2K}\sum_{n=0}^{\infty}z^{n}\left(1+\mbox{e}_{K;n+1;l}\left(\frac{1}{2}\right)\right)\mbox{e}_{K;n;l}\left(x\right)
+\left[\mathcal{P}_{K}\phi_{l;z}\right]\left(x\right)=\frac{z}{\beta}\sum_{n=0}^{\infty}z^{n}\left(1+\mbox{e}_{K;n+1;l}\left(\frac{1}{2}\right)\right)\mbox{e}_{K;n;l}\left(x\right)
 \]
 
 \end_inset
@@ -3232,7 +3258,7 @@ Specifically, fix a value of
 
 .
  This holds whenever 
-\begin_inset Formula $\left(2K\right)^{N}$
+\begin_inset Formula $\left(\beta\right)^{N}$
 \end_inset
 
  is an odd integer, that is, whenever 
@@ -3377,7 +3403,7 @@ To understand the nature of the steady-state solution (the Frobenius-Perron
  To do this, it is convenient to write it in the form
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{K}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{2K}\left[f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)\right]
+\left[\mathcal{L}_{K}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{\beta}\left[f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)\right]
 \]
 
 \end_inset
@@ -3403,7 +3429,7 @@ where
  as the Heaviside step function in earlier sections; the intent is the same,
  but the goal is to have a briefer notation here.
  Which is which should be clear from context.) The functions 
-\begin_inset Formula $\alpha\left(y\right)=y/2K$
+\begin_inset Formula $\alpha\left(y\right)=y/\beta$
 \end_inset
 
  and 
@@ -3417,7 +3443,7 @@ where
 Iterating once gives
 \begin_inset Formula 
 \begin{eqnarray*}
-\left[\mathcal{L}^{2}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(2K\right)^{2}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[f\left(\alpha^{2}\left(y\right)\right)+f\left(\left(\beta\circ\alpha\right)\left(y\right)\right)\right]+\right.\\
+\left[\mathcal{L}^{2}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(\beta\right)^{2}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[f\left(\alpha^{2}\left(y\right)\right)+f\left(\left(\beta\circ\alpha\right)\left(y\right)\right)\right]+\right.\\
  &  & \left.\Theta\left(\beta\left(y\right)\right)\left[f\left(\left(\alpha\circ\beta\right)\left(y\right)\right)+f\left(\beta^{2}\left(y\right)\right)\right]\right]
 \end{eqnarray*}
 
@@ -3430,7 +3456,7 @@ Using a simplified notation
  allows this to be iterated a third time:
 \begin_inset Formula 
 \begin{eqnarray*}
-\left[\mathcal{L}^{3}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(2K\right)^{3}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[\Theta\left(\alpha^{2}\left(y\right)\right)g\left(\alpha^{2}\left(y\right)\right)+\Theta\left(\beta\alpha\left(y\right)\right)g\left(\beta\alpha\left(y\right)\right)\right]+\right.\\
+\left[\mathcal{L}^{3}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(\beta\right)^{3}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[\Theta\left(\alpha^{2}\left(y\right)\right)g\left(\alpha^{2}\left(y\right)\right)+\Theta\left(\beta\alpha\left(y\right)\right)g\left(\beta\alpha\left(y\right)\right)\right]+\right.\\
  &  & \left.\Theta\left(\beta\left(y\right)\right)\left[\Theta\left(\alpha\beta\left(y\right)\right)g\left(\alpha\beta\left(y\right)\right)+\Theta\left(\beta^{2}\left(y\right)\right)g\left(\beta^{2}\left(y\right)\right)\right]\right]
 \end{eqnarray*}
 
@@ -3440,7 +3466,7 @@ and a fourth time, this time omitting the argument, and the various nesting
  parenthesis.
 \begin_inset Formula 
 \begin{eqnarray*}
-\left[\mathcal{L}^{4}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(2K\right)^{4}} & \left[\Theta\alpha\Theta\alpha^{2}\left[\Theta\alpha^{3}g\alpha^{3}+\Theta\beta\alpha^{2}g\beta\alpha^{2}\right]+\right.\\
+\left[\mathcal{L}^{4}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(\beta\right)^{4}} & \left[\Theta\alpha\Theta\alpha^{2}\left[\Theta\alpha^{3}g\alpha^{3}+\Theta\beta\alpha^{2}g\beta\alpha^{2}\right]+\right.\\
  &  & \Theta\alpha\Theta\beta\alpha\left[\Theta\alpha\beta\alpha g\alpha\beta\alpha+\Theta\beta^{2}\alpha g\beta^{2}\alpha\right]\\
  &  & \Theta\beta\Theta\alpha\beta\left[\Theta\alpha^{2}\beta g\alpha^{2}\beta+\Theta\beta\alpha\beta g\beta\alpha\beta\right]\\
  &  & \left.\Theta\beta\Theta\beta^{2}\left[\Theta\alpha\beta^{2}g\alpha\beta^{2}+\Theta\beta^{3}g\beta^{3}\right]\right]
@@ -3489,7 +3515,7 @@ For any given iteration, the result is the sum of the vertexes at a given
 It is convenient to define 
 \begin_inset Formula 
 \[
-\gamma_{x}\left(y\right)=\frac{x}{2}+\frac{y}{2K}
+\gamma_{x}\left(y\right)=\frac{x}{2}+\frac{y}{\beta}
 \]
 
 \end_inset
@@ -3527,7 +3553,7 @@ so that
  as
 \begin_inset Formula 
 \begin{equation}
-\left(\gamma_{b_{0}}\gamma_{b_{1}}\gamma_{b_{2}}\cdots\gamma_{b_{n}}\right)\left(y\right)=\frac{1}{2}\left[b_{0}+\frac{b_{1}}{2K}+\frac{b_{2}}{\left(2K\right)^{2}}+\cdots+\frac{b_{n}}{\left(2K\right)^{n}}\right]+\frac{y}{\left(2K\right)^{n+1}}\label{eq:not de Rham curve}
+\left(\gamma_{b_{0}}\gamma_{b_{1}}\gamma_{b_{2}}\cdots\gamma_{b_{n}}\right)\left(y\right)=\frac{1}{2}\left[b_{0}+\frac{b_{1}}{\beta}+\frac{b_{2}}{\left(\beta\right)^{2}}+\cdots+\frac{b_{n}}{\left(\beta\right)^{n}}\right]+\frac{y}{\left(\beta\right)^{n+1}}\label{eq:not de Rham curve}
 \end{equation}
 
 \end_inset
@@ -3535,7 +3561,7 @@ so that
 So, for example: 
 \begin_inset Formula 
 \[
-\alpha^{n}\left(y\right)=\frac{y}{\left(2K\right)^{n}}
+\alpha^{n}\left(y\right)=\frac{y}{\left(\beta\right)^{n}}
 \]
 
 \end_inset
@@ -3543,7 +3569,7 @@ So, for example:
 while 
 \begin_inset Formula 
 \[
-\beta^{2}\left(y\right)=\frac{1}{2}+\frac{1}{2K}\left(\frac{1}{2}+\frac{y}{2K}\right)
+\beta^{2}\left(y\right)=\frac{1}{2}+\frac{1}{\beta}\left(\frac{1}{2}+\frac{y}{\beta}\right)
 \]
 
 \end_inset
@@ -3551,7 +3577,7 @@ while
 and, in general, that
 \begin_inset Formula 
 \[
-\beta^{n}\left(y\right)=\frac{1}{2}\left[1+\frac{1}{2K}+\frac{1}{\left(2K\right)^{2}}+\cdots\frac{1}{\left(2K\right)^{n-1}}\right]+\frac{y}{\left(2K\right)^{n}}
+\beta^{n}\left(y\right)=\frac{1}{2}\left[1+\frac{1}{\beta}+\frac{1}{\left(\beta\right)^{2}}+\cdots\frac{1}{\left(\beta\right)^{n-1}}\right]+\frac{y}{\left(\beta\right)^{n}}
 \]
 
 \end_inset
@@ -4143,7 +4169,7 @@ because the transfer operator vanishes above
  In the same vein, matrix elements vanish unless 
 \begin_inset Formula 
 \[
-\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{2Kj}{2^{n}},\frac{2K\left(j+1\right)}{2^{n}}\right]\ne\emptyset
+\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{\beta j}{2^{n}},\frac{\beta\left(j+1\right)}{2^{n}}\right]\ne\emptyset
 \]
 
 \end_inset
@@ -4151,7 +4177,7 @@ because the transfer operator vanishes above
  or if 
 \begin_inset Formula 
 \[
-\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{2Kj}{2^{n}}-K,\frac{2K\left(j+1\right)}{2^{n}}-K\right]\ne\emptyset
+\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{\beta j}{2^{n}}-K,\frac{\beta\left(j+1\right)}{2^{n}}-K\right]\ne\emptyset
 \]
 
 \end_inset
@@ -4175,7 +4201,7 @@ In all other cases, the Haar wavelets completely fail to overlap, and thus
  are the values for which
 \begin_inset Formula 
 \[
-\frac{2Kj}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{2K\left(j+\frac{1}{2}\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{2K\left(j+1\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]
+\frac{\beta j}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{\beta\left(j+\frac{1}{2}\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{\beta\left(j+1\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]
 \]
 
 \end_inset
@@ -4238,17 +4264,17 @@ Consider
 \end_inset
 
  and another that is constant for 
-\begin_inset Formula $(x+K)/2K\le K$
+\begin_inset Formula $(x+K)/\beta\le K$
 \end_inset
 
 .
  Solving explicitly for the location of the step, it is 
-\begin_inset Formula $x=2K^{2}-K$
+\begin_inset Formula $x=\beta^{2}-K$
 \end_inset
 
 .
  For convenience, define t 
-\begin_inset Formula $m_{1}=2K^{2}-K$
+\begin_inset Formula $m_{1}=\beta^{2}-K$
 \end_inset
 
 .
@@ -4287,7 +4313,7 @@ Consider
 \end_inset
 
  is at 
-\begin_inset Formula $m_{1}=2K^{2}-K$
+\begin_inset Formula $m_{1}=\beta^{2}-K$
 \end_inset
 
  and this mid-point is mapped to one of two different places.
@@ -4296,11 +4322,11 @@ Consider
 \end_inset
 
  then it is mapped to 
-\begin_inset Formula $m_{2}=2Km_{1}$
+\begin_inset Formula $m_{2}=\beta m_{1}$
 \end_inset
 
  else it maps to 
-\begin_inset Formula $m_{2}=2Km_{1}-K$
+\begin_inset Formula $m_{2}=\beta m_{1}-K$
 \end_inset
 
 .
@@ -4367,8 +4393,8 @@ The rest of the basis can be constructed iteratively, based on these examples.
 \begin_inset Formula 
 \[
 m_{p}=\begin{cases}
-2Km_{p-1} & \mbox{for }m_{p-1}\le\frac{1}{2}\\
-2Km_{p-1}-K & \mbox{for }\frac{1}{2}<m_{p-1}
+\beta m_{p-1} & \mbox{for }m_{p-1}\le\frac{1}{2}\\
+\beta m_{p-1}-K & \mbox{for }\frac{1}{2}<m_{p-1}
 \end{cases}
 \]
 
@@ -4675,7 +4701,7 @@ reference "fig:Hessenberg-Operator-Matrix"
  It is not all that much.
  Numerical exploration discovers that the spectrum is a circle lying in
  the complex plane, of radius 
-\begin_inset Formula $\left|\lambda\right|=1/2K$
+\begin_inset Formula $\left|\lambda\right|=1/\beta$
 \end_inset
 
 .
@@ -4834,7 +4860,7 @@ This shows a numerically-computed decaying eigenfunction of period two,
 
 .
  It is period two, in that it corresponds to an eigenvalue of 
-\begin_inset Formula $\lambda=-1/2K=-0.625$
+\begin_inset Formula $\lambda=-1/\beta=-0.625$
 \end_inset
 
 , so that after one iteration of 
@@ -5017,7 +5043,7 @@ The numerical results suggest a hypothesis that some fragment of
  in terms of the matrix elements
 \begin_inset Formula 
 \[
-\frac{1}{2K}\left\langle n\left|{\cal R}_{K}\right|m\right\rangle =\left\langle n\left|{\cal L}_{K}\right|m\right\rangle -\left\langle \rho\vert n\right\rangle \left\langle \rho\vert m\right\rangle 
+\frac{1}{\beta}\left\langle n\left|{\cal R}_{K}\right|m\right\rangle =\left\langle n\left|{\cal L}_{K}\right|m\right\rangle -\left\langle \rho\vert n\right\rangle \left\langle \rho\vert m\right\rangle 
 \]
 
 \end_inset
@@ -5068,11 +5094,11 @@ Julia Set
 
 \begin_layout Standard
 Consider the two iterators 
-\begin_inset Formula $a_{0}\left(y\right)=\min\left(K,2Ky\right)$
+\begin_inset Formula $a_{0}\left(y\right)=\min\left(K,\beta y\right)$
 \end_inset
 
  and 
-\begin_inset Formula $a_{1}\left(y\right)=\max\left(0,2Ky-K\right)$
+\begin_inset Formula $a_{1}\left(y\right)=\max\left(0,\beta y-K\right)$
 \end_inset
 
 .
@@ -5491,7 +5517,7 @@ whenever
 \end_inset
 
  with eigenvalue 
-\begin_inset Formula $1/2K$
+\begin_inset Formula $1/\beta$
 \end_inset
 
 , provided that it is extended to arguments 
@@ -5513,9 +5539,9 @@ whenever
 \[
 \mbox{ecpr}_{K}\left(x\right)=\begin{cases}
 \mbox{cpr}_{K}\left(x\right) & \mbox{if }0\le x<K\\
-2\mbox{cpr}_{K}\left(\frac{x}{2K}\right) & \mbox{if }K\le x<2K^{2}\\
-4\mbox{cpr}_{K}\left(\frac{x}{4K^{2}}\right) & \mbox{if }2K^{2}\le x<4K^{3}\\
-2^{n}\mbox{cpr}_{K}\left(\frac{x}{\left(2K\right)^{n}}\right) & \mbox{if }K\left(2K\right)^{n-1}\le x<K\left(2K\right)^{n}
+2\mbox{cpr}_{K}\left(\frac{x}{\beta}\right) & \mbox{if }K\le x<\beta^{2}\\
+4\mbox{cpr}_{K}\left(\frac{x}{4K^{2}}\right) & \mbox{if }\beta^{2}\le x<4K^{3}\\
+2^{n}\mbox{cpr}_{K}\left(\frac{x}{\left(\beta\right)^{n}}\right) & \mbox{if }K\left(\beta\right)^{n-1}\le x<K\left(\beta\right)^{n}
 \end{cases}
 \]
 
@@ -5585,7 +5611,7 @@ Define
 \end_inset
 
  with associated eigenvalue 
-\begin_inset Formula $1/2K^{n}$
+\begin_inset Formula $1/\beta^{n}$
 \end_inset
 
  (whenever 
@@ -6673,7 +6699,7 @@ Given a fixed
  as
 \begin_inset Formula 
 \[
-\boxtimes_{K}\left(x\right)=2K\otimes x
+\boxtimes_{K}\left(x\right)=\beta\otimes x
 \]
 
 \end_inset
