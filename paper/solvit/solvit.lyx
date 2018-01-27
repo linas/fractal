@@ -3805,7 +3805,7 @@ This all goes horribly wrong if one instead considers
 \end_inset
 
  and the almost-monomials 
-\begin_inset Formula $f\left(y\right)=y^{n}\Theta\left(K-y\right)$
+\begin_inset Formula $f\left(y\right)=y^{n}\Theta\left(\frac{\beta}{2}-y\right)$
 \end_inset
 
 .
@@ -3834,7 +3834,7 @@ Attempting some guess-work, the self-similarity of the cpr function suggests
  The one finds that
 \begin_inset Formula 
 \begin{align*}
-\left[\mathcal{P}_{\beta}\mbox{ei}_{\beta}\right]\left(y\right)= & \frac{1}{\beta}\left[\mbox{ei}_{\beta}\left(\frac{y}{\beta}\right)+\mbox{ei}_{\beta}\left(\frac{y+K}{\beta}\right)\right]\\
+\left[\mathcal{P}_{\beta}\mbox{ei}_{\beta}\right]\left(y\right)= & \frac{1}{\beta}\left[\mbox{ei}_{\beta}\left(\frac{y}{\beta}\right)+\mbox{ei}_{\beta}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\\
 = & \frac{\mbox{ei}_{\beta}\left(y\right)}{\beta}
 \end{align*}
 
@@ -3857,7 +3857,7 @@ Unfortunately, one has that
 \end_inset
 
  when 
-\begin_inset Formula $K<x$
+\begin_inset Formula $\beta<2x$
 \end_inset
 
 ; it won't do as an eigenfunction of 
@@ -3875,7 +3875,7 @@ Unfortunately, one has that
 
 .
  Manually installing a factor of 
-\begin_inset Formula $\Theta\left(K-y\right)$
+\begin_inset Formula $\Theta\left(\frac{\beta}{2}-y\right)$
 \end_inset
 
  and then iterating to find the closure leads to the same splatter of step
@@ -3887,7 +3887,7 @@ Another interesting case arises if one attempts a Fourier-inspired basis.
  Define 
 \begin_inset Formula 
 \[
-\mbox{e}_{K;n;l}\left(x\right)=\exp i2\pi\left(2l+1\right)\left(\beta\right)^{n}x
+\mbox{e}_{\beta;n;l}\left(x\right)=\exp\,i2\pi\left(2l+1\right)\beta^{n}x
 \]
 
 \end_inset
@@ -3900,7 +3900,7 @@ for integer
  One then obtains a shift sequence
 \begin_inset Formula 
 \[
-\left[\mathcal{P}_{\beta}\mbox{e}_{K;n;l}\right]\left(x\right)=\frac{1}{\beta}\mbox{e}_{K;n-1;l}\left(x\right)\left(1+\mbox{e}_{K;n;l}\left(\frac{1}{2}\right)\right)
+\left[\mathcal{P}_{\beta}\mbox{e}_{\beta;n;l}\right]\left(x\right)=\frac{1}{\beta}\mbox{e}_{\beta;n-1;l}\left(x\right)\left(1+\mbox{e}_{\beta;n;l}\left(\frac{1}{2}\right)\right)
 \]
 
 \end_inset
@@ -3917,11 +3917,11 @@ This is not a viable candidate for
 
 , having any eigenvalue within the unit disk.
  Specifically, observe that 
-\begin_inset Formula $\mbox{e}_{K;0;l}\left(1/2\right)=\exp i\pi\left(2l+1\right)=-1$
+\begin_inset Formula $\mbox{e}_{\beta;0;l}\left(1/2\right)=\exp i\pi\left(2l+1\right)=-1$
 \end_inset
 
  so that 
-\begin_inset Formula $\left[\mathcal{P}_{\beta}\mbox{e}_{K;0;l}\right]\left(x\right)=0$
+\begin_inset Formula $\left[\mathcal{P}_{\beta}\mbox{e}_{\beta;0;l}\right]\left(x\right)=0$
 \end_inset
 
  and so the shift sequence terminates after finite iteration.
@@ -3932,7 +3932,7 @@ This is not a viable candidate for
 , construct the coherent state as
 \begin_inset Formula 
 \[
-\phi_{l;z}\left(x\right)=\sum_{n=0}^{\infty}z^{n}\mbox{e}_{K;n;l}\left(x\right)
+\phi_{l;z}\left(x\right)=\sum_{n=0}^{\infty}z^{n}\mbox{e}_{\beta;n;l}\left(x\right)
 \]
 
 \end_inset
@@ -3940,14 +3940,14 @@ This is not a viable candidate for
 The shift is then
 \begin_inset Formula 
 \[
-\left[\mathcal{P}_{\beta}\phi_{l;z}\right]\left(x\right)=\frac{z}{\beta}\sum_{n=0}^{\infty}z^{n}\left(1+\mbox{e}_{K;n+1;l}\left(\frac{1}{2}\right)\right)\mbox{e}_{K;n;l}\left(x\right)
+\left[\mathcal{P}_{\beta}\phi_{l;z}\right]\left(x\right)=\frac{z}{\beta}\sum_{n=0}^{\infty}z^{n}\left(1+\mbox{e}_{\beta;n+1;l}\left(\frac{1}{2}\right)\right)\mbox{e}_{\beta;n;l}\left(x\right)
 \]
 
 \end_inset
 
 This is not particularly useful, until one notices that for for certain
  values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 , this contains nilpotent subseries.
@@ -3960,39 +3960,39 @@ Specifically, fix a value of
 \end_inset
 
  and consider those values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  for which 
-\begin_inset Formula $\mbox{e}_{K;N;l}\left(1/2\right)=-1$
+\begin_inset Formula $\mbox{e}_{\beta;N;l}\left(1/2\right)=-1$
 \end_inset
 
 .
  This holds whenever 
-\begin_inset Formula $\left(\beta\right)^{N}$
+\begin_inset Formula $\beta^{N}$
 \end_inset
 
  is an odd integer, that is, whenever 
-\begin_inset Formula $K=\frac{1}{2}\left(2m+1\right)^{1/N}$
+\begin_inset Formula $\beta=\left(2m+1\right)^{1/N}$
 \end_inset
 
  (and, as always, 
-\begin_inset Formula $K\le1$
+\begin_inset Formula $\beta\le2$
 \end_inset
 
 ).
  For these special values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 , one has that 
-\begin_inset Formula $\left[\mathcal{P}_{\beta}\mbox{e}_{K;N;l}\right]\left(x\right)=0$
+\begin_inset Formula $\left[\mathcal{P}_{\beta}\mbox{e}_{\beta;N;l}\right]\left(x\right)=0$
 \end_inset
 
  and so the functions 
 \begin_inset Formula 
 \[
-\phi_{l;z;N}\left(x\right)=\sum_{n=0}^{N}z^{n}\mbox{e}_{K;n;l}\left(x\right)
+\phi_{l;z;N}\left(x\right)=\sum_{n=0}^{N}z^{n}\mbox{e}_{\beta;n;l}\left(x\right)
 \]
 
 \end_inset
@@ -4020,20 +4020,20 @@ vanish after
 \end_inset
 
  be free, the values for which 
-\begin_inset Formula $K=\frac{1}{2}\left(2m+1\right)^{1/N}$
+\begin_inset Formula $\beta=\left(2m+1\right)^{1/N}$
 \end_inset
 
  are dense in the interval 
-\begin_inset Formula $\left[1/2,1\right)$
+\begin_inset Formula $\left[1,2\right)$
 \end_inset
 
  and so any 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  is arbitrarily close to one with a nilpotent function space.
  These values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  are exactly the same values for which the bit sequences given by eqn 
@@ -4074,12 +4074,12 @@ forces
 
 \begin_layout Standard
 Presumably, there are special values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  which allow a periodic orbits to originate from a dense set.
  Such values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 , and such periodic orbits, should then correspond to specific self-similarities
@@ -4088,7 +4088,7 @@ Presumably, there are special values of
 \end_inset
 
  function, specifically manifesting as cyclic behavior in 
-\begin_inset Formula $\left(1+\mbox{e}_{K;n+1;l}\left(\frac{1}{2}\right)\right)^{p}$
+\begin_inset Formula $\left(1+\mbox{e}_{\beta;n+1;l}\left(\frac{1}{2}\right)\right)^{p}$
 \end_inset
 
  for some period 
@@ -4114,7 +4114,7 @@ To understand the nature of the steady-state solution (the Frobenius-Perron
  To do this, it is convenient to write it in the form
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{\beta}\left[f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)\right]
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{\Theta\left(y\right)}{\beta}\left[f\left(\alpha\left(y\right)\right)+f\left(\omega\left(y\right)\right)\right]
 \]
 
 \end_inset
@@ -4124,12 +4124,12 @@ where
 \end_inset
 
  if 
-\begin_inset Formula $y\le K$
+\begin_inset Formula $y\le\beta/2$
 \end_inset
 
  else zero; this is a step function to denote the vanishing for the operator
  for 
-\begin_inset Formula $y>K$
+\begin_inset Formula $2y>\beta$
 \end_inset
 
 .
@@ -4144,7 +4144,7 @@ where
 \end_inset
 
  and 
-\begin_inset Formula $\beta\left(y\right)=\frac{1}{2}+\alpha\left(y\right)$
+\begin_inset Formula $\omega\left(y\right)=\frac{1}{2}+\alpha\left(y\right)$
 \end_inset
 
  are convenient shorthands for symbolic iteration.
@@ -4154,21 +4154,21 @@ where
 Iterating once gives
 \begin_inset Formula 
 \begin{eqnarray*}
-\left[\mathcal{L}^{2}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(\beta\right)^{2}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[f\left(\alpha^{2}\left(y\right)\right)+f\left(\left(\beta\circ\alpha\right)\left(y\right)\right)\right]+\right.\\
- &  & \left.\Theta\left(\beta\left(y\right)\right)\left[f\left(\left(\alpha\circ\beta\right)\left(y\right)\right)+f\left(\beta^{2}\left(y\right)\right)\right]\right]
+\left[\mathcal{L}^{2}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\beta^{2}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[f\left(\alpha^{2}\left(y\right)\right)+f\left(\left(\omega\circ\alpha\right)\left(y\right)\right)\right]+\right.\\
+ &  & \left.\Theta\left(\omega\left(y\right)\right)\left[f\left(\left(\alpha\circ\omega\right)\left(y\right)\right)+f\left(\omega^{2}\left(y\right)\right)\right]\right]
 \end{eqnarray*}
 
 \end_inset
 
 Using a simplified notation 
-\begin_inset Formula $g\left(y\right)=f\left(\alpha\left(y\right)\right)+f\left(\beta\left(y\right)\right)$
+\begin_inset Formula $g\left(y\right)=f\left(\alpha\left(y\right)\right)+f\left(\omega\left(y\right)\right)$
 \end_inset
 
  allows this to be iterated a third time:
 \begin_inset Formula 
 \begin{eqnarray*}
-\left[\mathcal{L}^{3}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(\beta\right)^{3}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[\Theta\left(\alpha^{2}\left(y\right)\right)g\left(\alpha^{2}\left(y\right)\right)+\Theta\left(\beta\alpha\left(y\right)\right)g\left(\beta\alpha\left(y\right)\right)\right]+\right.\\
- &  & \left.\Theta\left(\beta\left(y\right)\right)\left[\Theta\left(\alpha\beta\left(y\right)\right)g\left(\alpha\beta\left(y\right)\right)+\Theta\left(\beta^{2}\left(y\right)\right)g\left(\beta^{2}\left(y\right)\right)\right]\right]
+\left[\mathcal{L}^{3}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\beta^{3}} & \left[\Theta\left(\alpha\left(y\right)\right)\left[\Theta\left(\alpha^{2}\left(y\right)\right)g\left(\alpha^{2}\left(y\right)\right)+\Theta\left(\omega\alpha\left(y\right)\right)g\left(\omega\alpha\left(y\right)\right)\right]+\right.\\
+ &  & \left.\Theta\left(\omega\left(y\right)\right)\left[\Theta\left(\alpha\omega\left(y\right)\right)g\left(\alpha\omega\left(y\right)\right)+\Theta\left(\omega^{2}\left(y\right)\right)g\left(\omega^{2}\left(y\right)\right)\right]\right]
 \end{eqnarray*}
 
 \end_inset
@@ -4177,10 +4177,10 @@ and a fourth time, this time omitting the argument, and the various nesting
  parenthesis.
 \begin_inset Formula 
 \begin{eqnarray*}
-\left[\mathcal{L}^{4}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\left(\beta\right)^{4}} & \left[\Theta\alpha\Theta\alpha^{2}\left[\Theta\alpha^{3}g\alpha^{3}+\Theta\beta\alpha^{2}g\beta\alpha^{2}\right]+\right.\\
- &  & \Theta\alpha\Theta\beta\alpha\left[\Theta\alpha\beta\alpha g\alpha\beta\alpha+\Theta\beta^{2}\alpha g\beta^{2}\alpha\right]\\
- &  & \Theta\beta\Theta\alpha\beta\left[\Theta\alpha^{2}\beta g\alpha^{2}\beta+\Theta\beta\alpha\beta g\beta\alpha\beta\right]\\
- &  & \left.\Theta\beta\Theta\beta^{2}\left[\Theta\alpha\beta^{2}g\alpha\beta^{2}+\Theta\beta^{3}g\beta^{3}\right]\right]
+\left[\mathcal{L}^{4}f\right]\left(y\right)= & \frac{\Theta\left(y\right)}{\beta^{4}} & \left[\Theta\alpha\Theta\alpha^{2}\left[\Theta\alpha^{3}g\alpha^{3}+\Theta\omega\alpha^{2}g\omega\alpha^{2}\right]+\right.\\
+ &  & \Theta\alpha\Theta\omega\alpha\left[\Theta\alpha\omega\alpha g\alpha\omega\alpha+\Theta\omega^{2}\alpha g\omega^{2}\alpha\right]\\
+ &  & \Theta\omega\Theta\alpha\omega\left[\Theta\alpha^{2}\omega g\alpha^{2}\omega+\Theta\omega\alpha\omega g\omega\alpha\omega\right]\\
+ &  & \left.\Theta\omega\Theta\omega^{2}\left[\Theta\alpha\omega^{2}g\alpha\omega^{2}+\Theta\omega^{3}g\omega^{3}\right]\right]
 \end{eqnarray*}
 
 \end_inset
@@ -4236,7 +4236,7 @@ so that
 \end_inset
 
  and 
-\begin_inset Formula $\beta\left(y\right)=\gamma_{1}\left(y\right)$
+\begin_inset Formula $\omega\left(y\right)=\gamma_{1}\left(y\right)$
 \end_inset
 
 , so that a general iterated sequence of intermixed 
@@ -4244,7 +4244,7 @@ so that
 \end_inset
 
 's and 
-\begin_inset Formula $\beta$
+\begin_inset Formula $\omega$
 \end_inset
 
 's can be written uniformly in terms of 
@@ -4264,7 +4264,7 @@ so that
  as
 \begin_inset Formula 
 \begin{equation}
-\left(\gamma_{b_{0}}\gamma_{b_{1}}\gamma_{b_{2}}\cdots\gamma_{b_{n}}\right)\left(y\right)=\frac{1}{2}\left[b_{0}+\frac{b_{1}}{\beta}+\frac{b_{2}}{\left(\beta\right)^{2}}+\cdots+\frac{b_{n}}{\left(\beta\right)^{n}}\right]+\frac{y}{\left(\beta\right)^{n+1}}\label{eq:not de Rham curve}
+\left(\gamma_{b_{0}}\gamma_{b_{1}}\gamma_{b_{2}}\cdots\gamma_{b_{n}}\right)\left(y\right)=\frac{1}{2}\left[b_{0}+\frac{b_{1}}{\beta}+\frac{b_{2}}{\beta^{2}}+\cdots+\frac{b_{n}}{\beta^{n}}\right]+\frac{y}{\beta^{n+1}}\label{eq:not de Rham curve}
 \end{equation}
 
 \end_inset
@@ -4272,7 +4272,7 @@ so that
 So, for example: 
 \begin_inset Formula 
 \[
-\alpha^{n}\left(y\right)=\frac{y}{\left(\beta\right)^{n}}
+\alpha^{n}\left(y\right)=\frac{y}{\beta^{n}}
 \]
 
 \end_inset
@@ -4280,7 +4280,7 @@ So, for example:
 while 
 \begin_inset Formula 
 \[
-\beta^{2}\left(y\right)=\frac{1}{2}+\frac{1}{\beta}\left(\frac{1}{2}+\frac{y}{\beta}\right)
+\omega^{2}\left(y\right)=\frac{1}{2}+\frac{1}{\beta}\left(\frac{1}{2}+\frac{y}{\beta}\right)
 \]
 
 \end_inset
@@ -4288,7 +4288,7 @@ while
 and, in general, that
 \begin_inset Formula 
 \[
-\beta^{n}\left(y\right)=\frac{1}{2}\left[1+\frac{1}{\beta}+\frac{1}{\left(\beta\right)^{2}}+\cdots\frac{1}{\left(\beta\right)^{n-1}}\right]+\frac{y}{\left(\beta\right)^{n}}
+\omega^{n}\left(y\right)=\frac{1}{2}\left[1+\frac{1}{\beta}+\frac{1}{\beta^{2}}+\cdots\frac{1}{\beta^{n-1}}\right]+\frac{y}{\beta^{n}}
 \]
 
 \end_inset
@@ -4362,7 +4362,7 @@ For any given fixed sequence of bits and value of
 
 , this function is either zero or one.
  One way to understand this function is to ask how it varies for fixed 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  and 
@@ -4481,7 +4481,7 @@ typical
 
  gamma functions.
  Both figures show gamma functions for 
-\begin_inset Formula $K=0.8$
+\begin_inset Formula $\beta=1.6$
 \end_inset
 
 ; the one on the left shows them for 
@@ -4496,7 +4496,7 @@ typical
  Every gamma function is a sequence of plateaus; the zig-zag line is a high-orde
 r gamma, essentially showing the limiting case.
  The tree function is unity whenever all of these curves are below 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta/2$
 \end_inset
 
 , and is zero when above.
@@ -4520,7 +4520,7 @@ r gamma, essentially showing the limiting case.
  all other orders irrelevant.
  
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Created with fractal/misc/bitops/treefn.c and plotted with treefn.gplot
