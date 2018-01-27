@@ -2085,7 +2085,7 @@ Given that iteration can generate strings of binary digits, and that these
 \begin_layout Standard
 \begin_inset Formula 
 \[
-x_{K}\left(\left(b_{n}\right)\right)=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{b_{n}}{\beta^{n}}
+x_{\beta}\left(\left(b_{n}\right)\right)=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{b_{n}}{\beta^{n}}
 \]
 
 \end_inset
@@ -2208,7 +2208,7 @@ reference "fig:Expander-Function"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2535,11 +2535,280 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-Subshifts with holes
+Shifts with holes
 \end_layout
 
 \begin_layout Standard
-Viewed as a shift space, as opposed to a cut-down binary tree, one c
+Viewed as a shift space, as opposed to a cut-down binary tree, the triming
+ can be thought of as a punching of holes into the full shift.
+ Ths requires a bit of mental gymnastics.
+ Let 
+\begin_inset Formula $\left(a,c\right)$
+\end_inset
+
+ be an (open) interval on the real number line: 
+\begin_inset Formula $\left(a,c\right)=\left\{ x\,|\,a<x<c\right\} $
+\end_inset
+
+.
+ Given the Bernoulli shift 
+\begin_inset Formula $b\left(x\right)=T_{2}\left(x\right)$
+\end_inset
+
+ from eqns 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli shift"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+, consider the set
+\begin_inset Formula 
+\[
+\mathcal{I}\left(a,c\right)=\left\{ x\,|\,b^{n}\left(x\right)\notin\left(a,c\right)\mbox{ for any }n\ge0\right\} 
+\]
+
+\end_inset
+
+That is, as one iterates on some fixed 
+\begin_inset Formula $x$
+\end_inset
+
+, one requests that no iterate 
+\begin_inset Formula $b^{n}\left(x\right)$
+\end_inset
+
+ ever lands in the interval 
+\begin_inset Formula $\left(a,c\right)$
+\end_inset
+
+.
+ In essence, one has punhed a hole in the unit interval; this corresponds
+ to a 
+\begin_inset Quotes eld
+\end_inset
+
+hole
+\begin_inset Quotes erd
+\end_inset
+
+ in the full Bernoulli shift.
+ The set 
+\begin_inset Formula $\mathcal{I}\left(a,c\right)$
+\end_inset
+
+ is what remains after punching such a hole.
+ 
+\end_layout
+
+\begin_layout Standard
+How can this be visualized? Considering the case 
+\begin_inset Formula $n=0$
+\end_inset
+
+, its clear that 
+\begin_inset Formula $\mathcal{I}\left(a,c\right)$
+\end_inset
+
+ cannot contain 
+\begin_inset Formula $\left(a,c\right)$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\mathcal{I}\left(a,c\right)\cap\left(a,c\right)=\emptyset$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $n=1$
+\end_inset
+
+, the interval 
+\begin_inset Formula $\left(a,c\right)$
+\end_inset
+
+ can come from one of two places: either from 
+\begin_inset Formula $\left(\frac{a}{2},\frac{c}{2}\right)$
+\end_inset
+
+ or from 
+\begin_inset Formula $\left(\frac{a+1}{2},\frac{c+1}{2}\right)$
+\end_inset
+
+, and so neither of these can be in 
+\begin_inset Formula $\mathcal{I}\left(a,c\right)$
+\end_inset
+
+.
+ Continuing, for 
+\begin_inset Formula $n=2$
+\end_inset
+
+, the intervals 
+\begin_inset Formula $\left(\frac{a}{4},\frac{c}{4}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left(\frac{a+1}{4},\frac{c+1}{4}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left(\frac{a+2}{4},\frac{c+2}{4}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\frac{a+3}{4},\frac{c+3}{4}\right)$
+\end_inset
+
+ must also be gone.
+ Continuing in this fashion, one proceeds with an infinite hole-punch: to
+ obtain 
+\begin_inset Formula $\mathcal{I}\left(a,c\right)$
+\end_inset
+
+, one just cuts out 
+\begin_inset Formula $\left(a,c\right)$
+\end_inset
+
+ and everything that iterates to 
+\begin_inset Formula $\left(a,c\right)$
+\end_inset
+
+.
+ For the holes, write
+\begin_inset Formula 
+\[
+\mathcal{H}\left(a,c\right)=\bigcup_{n=0}^{\infty}\bigcup_{k=0}^{2^{n}-1}\left(\frac{a+k}{2^{n}},\frac{c+k}{2^{n}}\right)
+\]
+
+\end_inset
+
+and for the interval with the holes punched out: 
+\begin_inset Formula 
+\[
+\mathcal{I}\left(a,c\right)=\left[0,1\right]\backslash\mathcal{H}\left(a,c\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\bigcup$
+\end_inset
+
+ denotes set-union and 
+\begin_inset Formula $\backslash$
+\end_inset
+
+ denotes set subtraction.
+ It is not hard to see that, in the end, this forms a contorted Cantor set,
+ using the standard midpoint-subtraction algorithm.
+ The canonical Cantor set is built by taking 
+\begin_inset Formula $\left(a,c\right)=\left(\frac{1}{3},\frac{2}{3}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that both 
+\begin_inset Formula $\mathcal{H}\left(a,c\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{I}\left(a,c\right)$
+\end_inset
+
+ are subshifts: applying the leftshift to them just returns the same set
+ again.
+ Bot are invarient under the action of the shift operator.
+ In formulas, 
+\begin_inset Formula 
+\[
+b\mathcal{H}\left(a,c\right)=\mathcal{H}\left(a,c\right)
+\]
+
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+b\mathcal{I}\left(a,c\right)=\mathcal{I}\left(a,c\right)
+\]
+
+\end_inset
+
+where, for notational simplicity, the parenthesis are not written, so that
+ for the set 
+\begin_inset Formula $S$
+\end_inset
+
+, write 
+\begin_inset Formula $bS=b\left(S\right)$
+\end_inset
+
+.
+ As shifts, its more appropriate to view both as sets of bit-sequences,
+ so that the proper relationship between one and the other should have been
+ written as
+\begin_inset Formula 
+\[
+\mathcal{I}\left(a,c\right)=\left\{ 0,1\right\} ^{\omega}\backslash\mathcal{H}\left(a,c\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How should these subshifts be visualized? Several intersting cases arise.
+ Consider first the case where both 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $c$
+\end_inset
+
+ are dyadic rationals, both having the form 
+\begin_inset Formula $\left(2m+1\right)/2^{n}$
+\end_inset
+
+ for some integers 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The bit-sequence for 
+\begin_inset Formula $a$
+\end_inset
+
+ can be taken to be some finite length of bits, followed by an infinite
+ string of all-zeroes.
+ It is convenient to represent 
+\begin_inset Formula $c$
+\end_inset
+
+ as a finite length of bits, followed by an infinite string of all-ones.
+ The cut operation states that neither of these strings, nor any that occur
+ in lexicographical order between them, can occur anywhere in 
+\begin_inset Formula $\mathcal{I}\left(a,c\right)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection
