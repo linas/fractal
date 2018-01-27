@@ -97,7 +97,7 @@ December 2017
 
 \begin_layout Abstract
 The beta transformation is the iterated map 
-\begin_inset Formula $\beta x\mod1$
+\begin_inset Formula $\beta x\,\mod1$
 \end_inset
 
 .
@@ -182,9 +182,10 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-This is an exploration of iterated maps on the unit interval of the real
+A major topic of mathematical research in the last three or four decades
+ has been the exploration of iterated maps on the unit interval of the real
  number line.
- That is, maps 
+ Specifically, maps 
 \begin_inset Formula 
 \[
 f:[0,1]\to[0,1]
@@ -200,33 +201,14 @@ f^{n}(x)=(f\circ f\circ\cdots\circ f)(x)=f(f(\cdots f(x)\cdots))
 
 \end_inset
 
-Such iterated maps are often ergodic and sometimes chaotic.
- This text is concerned with certain very simple iterated maps, attempting
- to find the simplest possible settings, so as to clarify the dynamics,
- to expose the core principles, and to provide usable tools that can be
- deployed in more complex settings.
-\end_layout
-
-\begin_layout Standard
-The prototype for this effort is the Bernoulli map, which is exactly solvable,
- and can be characterized in a rich variety of ways.
- This has been explored in depth in my other writings, and will not be repeated
- here.
- Two similar maps are the tent map and the logistic map; the later is particular
-ly famous and well studied.
- Neither of these maps are 
-\begin_inset Quotes eld
-\end_inset
-
-exactly solvable
-\begin_inset Quotes erd
-\end_inset
-
- by current technology, even though they can be computed to arbitrary accuracy.
- The goal of this text is to push on the limits of what is possible, of
- what can be extracted from these systems.
- The approach is to explore, in greater detail, simpler systems that seem
- to be closely related, and yet might be more tractable.
+There is a large body of results on such maps, stemming from a large number
+ of basic concepts that become interconnected.
+ This text touches on some of these, in a mostly shallow kind of way; yet
+ they are important for a general understanding.
+ The goal of this text is to better understand the nature of multiplication,
+ and the path taken is through the iteration of the beta transform.
+ A jumble of the various well-known and widely-explored tools and concepts
+ is introduced as the text unwinds.
 \end_layout
 
 \begin_layout Standard
@@ -326,53 +308,178 @@ The Bernoulli shift has many interesting properties, connecting it to the
  Cantor set and to many self-similar fractals.
  I have explored these in many other texts, as have other authors, and will
  not repeat these here.
- The current task is to attempt to see how many of these properties still
+ The author is too lazy to provide a bibliography; the reader is directed
+ at search engines.
+ 
+\end_layout
+
+\begin_layout Standard
+The current task is to attempt to see how many of these properties still
  hold in slightly more complex systems, and whether any of the tools used
  to analyze and solve the Bernoulli shift can be applied to these systems.
 \end_layout
 
 \begin_layout Subsection
-Downshift
+Shift space
 \end_layout
 
 \begin_layout Standard
-Consider a similar shift process; I don't know if it has a commonly used
- name, so I will call it a 
+The use of the word 
 \begin_inset Quotes eld
 \end_inset
 
-downshift
+shift
+\begin_inset Quotes erd
+\end_inset
+
+ here deserves a small bit of formality.
+ A 
+\begin_inset Quotes eld
+\end_inset
+
+shift space
+\begin_inset Quotes erd
+\end_inset
+
+ can be formally defined to be a set of infinite sequences of a set of 
+\begin_inset Formula $N$
+\end_inset
+
+ letters (or symbols), together with a shift operator 
+\begin_inset Formula $T$
+\end_inset
+
+ that takes each sequence, and lops off the left-most symbol.
+ For the Bernoulli shift, there are 
+\begin_inset Formula $N=2$
+\end_inset
+
+ letters, taken from the set 
+\begin_inset Formula $\left\{ 0,1\right\} $
+\end_inset
+
+.
+ For the Bernoulli shift, one is typically interested in the set of all
+ possible infinite sequences: this is the 
+\begin_inset Quotes eld
+\end_inset
+
+full shift
 \begin_inset Quotes erd
 \end_inset
 
 .
- Foo.
- Its called a 
-\begin_inset Formula $\beta$
+ One writes 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
 \end_inset
 
--transformation, with 
-\begin_inset Formula $\beta=\beta$
+ for this shift space, 
+\begin_inset Formula $\omega$
 \end_inset
 
- by convention.
- Bring this paper in line with the standard notation.
- 
+ denoting countable infinity.
+ For the Bernoulli shift, the map 
+\begin_inset Formula $b\left(x\right)$
+\end_inset
+
+ is the shift operator: it just lops of the left-most symbol.
 \end_layout
 
 \begin_layout Standard
-Give a constant 
-\begin_inset Formula $K$
+In general, a shift space does not have to include every possible sequence
+ of symbols; it does, however, by definition, have to be shift-invariant.
+ That is, given some set 
+\begin_inset Formula $S$
 \end_inset
 
- fixed so that 
-\begin_inset Formula $0\le K\le1$
+ of infinite sequences of 
+\begin_inset Formula $N$
 \end_inset
 
-, the downshift is given by iterating on
+ symbols, the set 
+\begin_inset Formula $S$
+\end_inset
+
+ is a shift space if and only if, by loping off the leading symbol of each
+ string, one regains 
+\begin_inset Formula $S$
+\end_inset
+
+ again.
+ In formulas, a shift space 
+\begin_inset Formula $S$
+\end_inset
+
+ must obey 
+\begin_inset Formula 
+\[
+TS=S
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For example, 
+\begin_inset Formula $S=\left\{ 000\cdots,111\cdots\right\} $
+\end_inset
+
+ contains only two elements: the string of all zeros, and the string of
+ all ones; loping off the leading digit just returns 
+\begin_inset Formula $S$
+\end_inset
+
+ again.
+ In general, shift spaces may contain a finite, or a countable, or an uncountabl
+e number of elements.
+ In general, one defines the 
+\begin_inset Quotes eld
+\end_inset
+
+full shift
+\begin_inset Quotes erd
+\end_inset
+
+ as the space 
+\begin_inset Formula $N^{\omega}$
+\end_inset
+
+ of all possible strings of 
+\begin_inset Formula $N$
+\end_inset
+
+ symbols.
+ Subsets that are shift spaces are called 
+\begin_inset Quotes eld
+\end_inset
+
+subshifts
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Beta transform
+\end_layout
+
+\begin_layout Standard
+The beta transform is similar to the Bernoulli shift, replacing the number
+ 2 by a constant real-number value 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+.
+ It can be defined as 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-b_{K}(x)=\begin{cases}
+T_{\beta}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
 \end{cases}\label{eq:downshift}
@@ -380,13 +487,32 @@ b_{K}(x)=\begin{cases}
 
 \end_inset
 
-It also generates a symbolic dynamics, defined in the same way as above:
- write
+Equivalently, it can be written far more compactly as
+\begin_inset Formula 
+\[
+T_{\beta}\left(x\right)=\beta x\,\mod1
+\]
+
+\end_inset
+
+This map, together with similar maps, is illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Iterated-piece-wise-linear"
+
+\end_inset
+
+ below.
+\end_layout
+
+\begin_layout Standard
+Just as the Bernoulli shift generates a sequence of digits, so does the
+ beta transform: write
 \begin_inset Formula 
 \begin{equation}
 k_{n}=\begin{cases}
-0 & \mbox{ if }0\le b_{K}^{n}(x)<\frac{1}{2}\\
-1 & \mbox{ if }\frac{1}{2}\le b_{K}^{n}(x)\le1
+0 & \mbox{ if }0\le T_{\beta}^{n}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}(x)\le1
 \end{cases}\label{eq:down-bits}
 \end{equation}
 
@@ -394,7 +520,7 @@ k_{n}=\begin{cases}
 
 Given the symbolic dynamics, one can reconstruct the original value whenever
  
-\begin_inset Formula $1/2<K$
+\begin_inset Formula $1<\beta$
 \end_inset
 
  as
@@ -406,13 +532,13 @@ x=\frac{k_{0}}{2}+\frac{1}{\beta}\left(\frac{k_{1}}{2}+\frac{1}{\beta}\left(\fra
 \end_inset
 
 That is, one clearly sees that 
-\begin_inset Formula $b_{K}(x)$
+\begin_inset Formula $T_{\beta}(x)$
 \end_inset
 
  acts as a shift on this sequence:
 \begin_inset Formula 
 \[
-b_{K}(x)=\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\frac{k_{4}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
+T_{\beta}(x)=\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\frac{k_{4}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
 \]
 
 \end_inset
@@ -433,7 +559,7 @@ exactly solvable
 Multiplying out the above sequence, one obtains the series
 \begin_inset Formula 
 \begin{equation}
-x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\left(\beta\right)^{n}}\label{eq:shift series}
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\beta^{n}}\label{eq:shift series}
 \end{equation}
 
 \end_inset
@@ -441,7 +567,7 @@ x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\left(\beta\right)^{n}}\label{eq:
 That is, the bit-sequence that was extracted by iteration can be used to
  reconstruct the original real number.
  Setting 
-\begin_inset Formula $K=1$
+\begin_inset Formula $\beta=2$
 \end_inset
 
  in eqn 
@@ -452,7 +578,23 @@ reference "eq:bernoulli-bits"
 \end_inset
 
  gives the Bernoulli shift.
- The symbolic dynamics is explored in a later section.
+ 
+\end_layout
+
+\begin_layout Standard
+Unlike the Bernoulli shift, not every possible bit-sequence occurs in this
+ system.
+ It is a subshift of the full shift: it is a subset of 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ that is invariant under the action of 
+\begin_inset Formula $T_{\beta}$
+\end_inset
+
+.
+ This is explored in greater detail in a later section.
+ 
 \end_layout
 
 \begin_layout Subsection
