@@ -2,17 +2,20 @@
 # set term png size 640, 480
 # set out 'bigbern.png'
 
-set term postscript eps color
+##################################################################
+# Used to generate the figure in the beta-transform text.
+#
+
+set term postscript eps color enhanced
 set out 'bigbern.eps'
 
 set style data lines
 set key right
 
-set title "Undershift density"
+set title "Beta transform density"
 set xlabel "y"
-set ylabel "ρ"
+set ylabel "{/Symbol r}"
 
-plot "bigbern-0.6.dat" using 2:3 title "K=0.6" linewidth 2, \
-     "bigbern-0.8.dat" using 2:3 title "K=0.8" linewidth 2, \
-     "bigbern-0.9.dat" using 2:3 title "K=0.9" linewidth 2
-
+plot "bigbern-0.6.dat" using 2:3 title "{/Symbol b}=1.2" linewidth 2, \
+     "bigbern-0.8.dat" using 2:3 title "{/Symbol b}=1.6" linewidth 2, \
+     "bigbern-0.9.dat" using 2:3 title "{/Symbol b}=1.8" linewidth 2
