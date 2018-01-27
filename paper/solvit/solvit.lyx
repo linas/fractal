@@ -6096,7 +6096,7 @@ reference "eq:Bernoulli shift"
  The downshift is then
 \begin_inset Formula 
 \[
-b_{\beta}\left(x\right)=M_{\beta}\left(U\left(x\right)\right)
+T_{\beta}\left(x\right)=M_{\beta}\left(U\left(x\right)\right)
 \]
 
 \end_inset
@@ -7355,16 +7355,16 @@ Define the XOR-analog of the downshift as
 \begin_inset Formula 
 \[
 c_{\beta}\left(x\right)=\begin{cases}
-4K\otimes x & \mbox{for }0\le x<\frac{1}{2}\\
-4K\otimes\left(x-\frac{1}{2}\right) & \mbox{for }\frac{1}{2}\le x<1
+2\beta\otimes x & \mbox{for }0\le x<\frac{1}{2}\\
+2\beta\otimes\left(x-\frac{1}{2}\right) & \mbox{for }\frac{1}{2}\le x<1
 \end{cases}
 \]
 
 \end_inset
 
-The factor of 4, instead of the usual 2, makes up for the fact that shift-XOR
- effectively drops the top bit; thus the goal is to map each half of the
- unit interval into the entire interval 
+The factor of 2 makes up for the fact that shift-XOR effectively drops the
+ top bit; thus the goal is to map each half of the unit interval into the
+ entire interval 
 \begin_inset Formula $[0,1]$
 \end_inset
 
@@ -7374,7 +7374,7 @@ The factor of 4, instead of the usual 2, makes up for the fact that shift-XOR
 
 \begin_layout Standard
 Given a fixed 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 , define 
@@ -7636,7 +7636,7 @@ reference "eq:downshift"
  is then 
 \begin_inset Formula 
 \[
-b_{k}=\pi\circ A\circ C\circ S_{\beta}\circ\pi^{-1}\circ b
+T_{\beta}=\pi\circ A\circ C\circ S_{\beta}\circ\pi^{-1}\circ b
 \]
 
 \end_inset
@@ -7765,7 +7765,7 @@ reference "fig:Carry-bit-propagation"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -7895,21 +7895,21 @@ reference "fig:Undershift-Bifurcation-Diagram"
 
 .
  Here, 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- runs from 0 at the bottom, to 1 at the top; 
+ runs from 0 at the bottom, to 2 at the top; 
 \begin_inset Formula $x$
 \end_inset
 
  runs from 0 to 1, left to right.
  The uniform red square simply indicates that the iteration is completely
  independent of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  when 
-\begin_inset Formula $1/2<K\le1$
+\begin_inset Formula $1<\beta\le2$
 \end_inset
 
 : it is fully uniform and ergodic in the same way that the Bernoulli shift
@@ -7994,6 +7994,15 @@ Reviewing the images there makes it clear that although fiddling with the
 
 \begin_layout Section
 Sci-fi day-dreaming
+\end_layout
+
+\begin_layout Standard
+This section provides two day-dreams inspired by this material.
+ They are just that: daydreams.
+\end_layout
+
+\begin_layout Subsection
+Limits to computation
 \end_layout
 
 \begin_layout Standard
@@ -8121,6 +8130,72 @@ The point here is that computation, by means of the time-like evolution
  much simpler system.
 \end_layout
 
+\begin_layout Subsection
+Wave function collapse
+\end_layout
+
+\begin_layout Standard
+There is also a different, bizarrely hypothetical way in which all of this
+ apparatus could manifest itself.
+ Currently, in order to avoid the rather severe issues associated with the
+ concept of quantum-mechanical wave-function collapse, the (vast?) majority
+ of practicing physicists believe in the many-worlds hypothesis.
+ Clearly, this beleif is entirely correct for microscopic systems, isolated
+ from the usual thermodynamic hustle and bustle (chlorophyll, rhodopsin
+ and the magnetically sensitive cryptochromes notwithstanding).
+ But it seems to fly in the face of daily experience, where we are aware
+ of just one reality.
+ One of my favorite hypotheses is that this is the result of the (rapid)
+ decay of macroscopic quantum states down to a probability of zero.
+ The mechanism is presumably that of decaying subshift measures.
+ Penrose argues that this has something to do with gravity; but we can go
+ one better: the natural setting for shift spaces are hyperbolic spaces,
+ as that is where there is enough room to 
+\begin_inset Quotes eld
+\end_inset
+
+fit everything
+\begin_inset Quotes erd
+\end_inset
+
+ in a uniform way consistent with a metric.
+ Curiously, the world we live in – Minkowski space, is hyerbolic.
+ This suggests that the Many Worlds interpretation is exactly right, as
+ long as one truly is in Minkowski space, but that gravitation, which essentiall
+y bends or distorts it, squeezes down the room available for multiple quantum
+ states, effectively forcing the collapse in this way.
+ 
+\end_layout
+
+\begin_layout Standard
+Put another way: the standard treatment for quantum field theory is the
+ Feynmann functional integral; it can be viewed as an integral over all
+ possible paths that a 
+\begin_inset Quotes eld
+\end_inset
+
+particle
+\begin_inset Quotes erd
+\end_inset
+
+ might take.
+ The daydream is to equate a specific path with the idea of point-dynamics
+ in an interated function.
+ As long as one considers only points, and there movement, one can be completely
+ unaware of either the invariant measure, or of the decaying eigenstates
+ of the shift operator.
+ In a standard QFT textbook, all equations appear microscopically time-reversibl
+e.
+ There's almost no idea of a measure, except for the 
+\begin_inset Formula $\exp-i\hbar S$
+\end_inset
+
+ in the Feynmann integral.
+ The incorporation of gravity into this is famously difficult.
+ The daydream here is that gravity manifests itself as eigenfunctions that
+ live off of the shell of unitary evolution.
+\end_layout
+
 \begin_layout Section
 Topological Push-Forward
 \end_layout
@@ -8160,7 +8235,7 @@ On the Minkowski Measure
 \begin_inset Quotes erd
 \end_inset
 
-.)
+, arXiv:0810.1265.)
 \end_layout
 
 \begin_layout Standard
