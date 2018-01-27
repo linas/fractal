@@ -18,15 +18,17 @@
 
 gmp_randstate_t rstate;
 mpf_t half;
+mpf_t one;
 
 void do_init(int nbits)
 {
 	gmp_randinit_default(rstate);
 	mpf_set_default_prec(nbits);
 
+	mpf_init(one);
 	mpf_init(half);
-	mpf_set_ui(half, 1);
-	mpf_div_ui(half, half, 2);
+	mpf_set_ui(one, 1);
+	mpf_div_ui(half, one, 2);
 }
 
 // Given a double-precision value x, this will create a random
@@ -48,22 +50,31 @@ void make_random_bitsequence(mpf_t& val, double x, int nbits)
 	mpf_add(val, val, tail);
 }
 
-void bern(mpf_t& ex, mpf_t Kay)
+void bern(mpf_t& ex, mpf_t TwoKay)
 {
 	if (0 <= mpf_cmp(ex, half))
 	{
 		mpf_sub(ex, ex, half);
 	}
-	mpf_mul(ex, ex, Kay);
+	mpf_mul(ex, ex, TwoKay);
 }
 
-void tent(mpf_t& ex, mpf_t Kay)
+void tent(mpf_t& ex, mpf_t TwoKay)
 {
 	if (0 <= mpf_cmp(ex, half))
 	{
 		mpf_ui_sub(ex, 1, ex);
 	}
-	mpf_mul(ex, ex, Kay);
+	mpf_mul(ex, ex, TwoKay);
+}
+
+void tarp(mpf_t& ex, mpf_t TwoKay)
+{
+	mpf_mul(ex, ex, TwoKay);
+	if (0 <= mpf_cmp(ex, one))
+	{
+		mpf_sub(ex, TwoKay, ex);
+	}
 }
 
 void feig(mpf_t& ex, mpf_t four_Kay, mpf_t& scratch)
@@ -139,7 +150,8 @@ void bifurcation_diagram (float *array,
 		for (int iter=0; iter < NBITS; iter++)
 		{
 			// bern(ex, Kay);
-			tent(ex, Kay);
+			// tent(ex, Kay);
+			tarp(ex, Kay);
 			// feig(ex, four_Kay, scratch);
 
 			// Excluding the settle time, together with the support
@@ -153,7 +165,7 @@ void bifurcation_diagram (float *array,
 #ifdef SIDESCALE
 				x /= K;
 #endif
-#define SIDETENT
+// #define SIDETENT
 #ifdef SIDETENT
 				x = (x - 2.0*K*(1.0-K)) / (K*(2.0*K - 1.0));
 #endif
