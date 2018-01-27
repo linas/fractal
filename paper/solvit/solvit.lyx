@@ -462,6 +462,121 @@ subshifts
 .
 \end_layout
 
+\begin_layout Standard
+The words 
+\begin_inset Quotes eld
+\end_inset
+
+symbolic dynamics
+\begin_inset Quotes erd
+\end_inset
+
+ also deserve some mention: given one specific sequence 
+\begin_inset Formula $x$
+\end_inset
+
+ out of the shift space, one can ponder 
+\begin_inset Quotes eld
+\end_inset
+
+where it goes to
+\begin_inset Quotes erd
+\end_inset
+
+, as one lops off a symbol at a time.
+ This gives the 
+\begin_inset Quotes eld
+\end_inset
+
+symbolic dynamics
+\begin_inset Quotes erd
+\end_inset
+
+ or the 
+\begin_inset Quotes eld
+\end_inset
+
+point dynamics
+\begin_inset Quotes erd
+\end_inset
+
+ of the sequence.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+orbit
+\begin_inset Quotes erd
+\end_inset
+
+ is defined as the set 
+\begin_inset Formula $\left\{ T^{m}x\,|\,\mbox{integer }m\ge0\right\} $
+\end_inset
+
+– that is, the set of all places that 
+\begin_inset Formula $x$
+\end_inset
+
+ goes to.
+ There are several possibilities: one is that 
+\begin_inset Formula $x$
+\end_inset
+
+ is a fixed point, so that 
+\begin_inset Formula $Tx=x$
+\end_inset
+
+.
+ Another is that 
+\begin_inset Formula $x$
+\end_inset
+
+ is a repeating sequence of symbols, in which case iteration repeats as
+ well: 
+\begin_inset Formula $T^{m}x=x$
+\end_inset
+
+ holds whenever the repeat length is 
+\begin_inset Formula $m$
+\end_inset
+
+; this is a periodic orbit.
+ Most importantly, there usually uncountably many non-periodic sequences
+ or orbits.
+ That is, the number of periodic orbits is always countable: one merely
+ arranges them in lexicographic order, and one is done.
+ As Cantor famously demonstrated (and Hilbert so carefullyexpanded on) this
+ cannot be done for the non-periodic orbits: they are uncountable.
+ 
+\end_layout
+
+\begin_layout Standard
+In what follows, the text will in general confine itself to uncountable
+ case.
+ Periodic orbits exist, but will be ignored; in a certain strict sense,
+ they constitute a set of measure zero.
+ A number of glosses like this will be made: for example, the real numbers,
+ and the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ are both uncountable; however, they are not in one-to-one correspondance,
+ as some real numbers can have two different representations as bit sequences.
+ Specifically, these are the fractions 
+\begin_inset Formula $\left(2n+1\right)/2^{m}$
+\end_inset
+
+ for positive integers 
+\begin_inset Formula $m,n$
+\end_inset
+
+ – they can be validly represented by bit-sequences ending in all-zeroes,
+ or all-ones.
+ There are countably many such fractions, termed the dyadic fractions.
+ For the most part, this difference between the real number line, and the
+ Cantor space will be ignored.
+\end_layout
+
 \begin_layout Subsection
 Beta transform
 \end_layout
@@ -602,7 +717,8 @@ Density Visualizations
 \end_layout
 
 \begin_layout Standard
-Why is this interesting to explore? This is best illustrated with some graphs.
+Why is the beta transform interesting to explore? This can be partly illustrated
+ with some graphs.
  Shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -618,7 +734,7 @@ bifurcation diagram
 \begin_inset Quotes erd
 \end_inset
 
- for the downshift.
+ for the beta transform.
  It visualizes the long-term dynamics of the downshift.
  Comparing to the usual bifuracation diagram, e.g.
  for the Feigenbaum logistic map (shown in figure 
@@ -628,7 +744,7 @@ reference "fig:Logistic-Map-Bifurcation"
 
 \end_inset
 
-) one thing becomes immediately apparent: there are no 
+) one thing becomes immediately apparent: there are no actual 
 \begin_inset Quotes eld
 \end_inset
 
@@ -647,11 +763,11 @@ islands of stability
 , no period-doubling regions.
  Although there are periodic orbits, these form a set of measure zero: the
  iteration produces purely chaotic motion for all values of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 .
- Thus, it gives a nice platform for studying 
+ Thus, the beta transform provides a clean form of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -667,7 +783,7 @@ islands of stability
 \begin_inset Quotes erd
 \end_inset
 
- popping intermittently.
+ popping up intermittently.
 \end_layout
 
 \begin_layout Standard
@@ -758,8 +874,8 @@ Numerically, this integration can be achieved by randomly sampling a large
 \end_inset
 
 This probability distribution is an eigenstate of the transfer operator
- for the downshift; the definition of the transfer operator of the downshift
- is given later.
+ for the beta transform; the definition of the transfer operator of the
+ beta transform is given later.
  Probability distributions are the same thing as measures; this particular
  distribution is invariant under iteration, and thus is often called the
  invariant measure, or sometimes the Haar measure.
@@ -767,11 +883,11 @@ This probability distribution is an eigenstate of the transfer operator
 
 \begin_layout Standard
 For each fixed 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 , one obtains a distinct distribution 
-\begin_inset Formula $\rho_{K}(y)$
+\begin_inset Formula $\rho_{\beta}(y)$
 \end_inset
 
 .
@@ -784,11 +900,11 @@ reference "fig:Undershift-Density-Distribution"
 
  illustrates some of these distributions.
  Note that, for 
-\begin_inset Formula $k<1/2$
+\begin_inset Formula $\beta<1$
 \end_inset
 
 , the distribution is given by 
-\begin_inset Formula $\rho_{K}(y)=\delta(y)$
+\begin_inset Formula $\rho_{\beta}(y)=\delta(y)$
 \end_inset
 
 , a Dirac delta function, located at 
@@ -836,15 +952,15 @@ name "fig:Undershift-Density-Distribution"
 
 \begin_layout Plain Layout
 The above figure shows three different density distributions, for 
-\begin_inset Formula $\rho_{0.6}(y)$
+\begin_inset Formula $\rho_{1.2}(y)$
 \end_inset
 
 , 
-\begin_inset Formula $\rho_{0.8}(y)$
+\begin_inset Formula $\rho_{1.6}(y)$
 \end_inset
 
  and 
-\begin_inset Formula $\rho_{0.9}(y)$
+\begin_inset Formula $\rho_{1.8}(y)$
 \end_inset
 
 , calculated numerically.
@@ -893,7 +1009,7 @@ height "1pt"
 
 \begin_layout Standard
 The general trend of the distributions, as a function of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 , can be visualized with a Feigenbaum-style 
@@ -913,16 +1029,16 @@ reference "fig:Undershift-Bifurcation-Diagram"
 
 .
  This color-codes each distribution 
-\begin_inset Formula $\rho_{K}(y)$
+\begin_inset Formula $\rho_{\beta}(y)$
 \end_inset
 
  and arranges them in a stack; a horizontal slice through the diagram correspond
 s to 
-\begin_inset Formula $\rho_{K}(y)$
+\begin_inset Formula $\rho_{\beta}(y)$
 \end_inset
 
  for a fixed value of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 .
@@ -941,7 +1057,7 @@ bifurcation diagram
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -990,34 +1106,34 @@ name "fig:Undershift-Bifurcation-Diagram"
 
 \begin_layout Plain Layout
 This figure shows the density 
-\begin_inset Formula $\rho_{K}(y)$
+\begin_inset Formula $\rho_{\beta}(y)$
 \end_inset
 
 , rendered in color.
  The constant 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
- is varied from 0 at the bottom to 1 at the top; whereas 
+ is varied from 0 at the bottom to 2 at the top; whereas 
 \begin_inset Formula $y$
 \end_inset
 
  runs from 0 on the left to 1 on the right.
  Thus, a fixed value of 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
  corresponds to a horizontal slice through the diagram.
  The color green represents values of 
-\begin_inset Formula $\rho_{K}(y)\approx0.5$
+\begin_inset Formula $\rho_{\beta}(y)\approx0.5$
 \end_inset
 
 , while red represents 
-\begin_inset Formula $\rho_{K}(y)\gtrsim1$
+\begin_inset Formula $\rho_{\beta}(y)\gtrsim1$
 \end_inset
 
  and blue-to-black represents 
-\begin_inset Formula $\rho_{K}(y)\apprle0.25$
+\begin_inset Formula $\rho_{\beta}(y)\apprle0.25$
 \end_inset
 
 .
@@ -1030,22 +1146,22 @@ interesting
 \end_inset
 
  only for 
-\begin_inset Formula $1/2<K$
+\begin_inset Formula $1<\beta$
 \end_inset
 
 ; for smaller 
-\begin_inset Formula $K$
+\begin_inset Formula $\beta$
 \end_inset
 
 's, one has that 
-\begin_inset Formula $\rho_{K}(y)=\delta(y)$
+\begin_inset Formula $\rho_{\beta}(y)=\delta(y)$
 \end_inset
 
 , indicated by the column of red pixels on the left side of the image.
- The lines forming the fan shape are not straight, they only seem to be;
- in fact, they have a slight curve.
- This means that one cannot apply guess-work to discover the overall diagram
- shown here.
+ The lines forming the fan shape are not actually straight, they only seem
+ to be; in fact, they have a slight curve.
+ This means that one cannot apply simple-minded guess-work to discover the
+ overall diagram shown here.
  
 \end_layout
 
