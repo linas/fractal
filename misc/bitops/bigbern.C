@@ -73,7 +73,7 @@ void tent(mpf_t& ex, mpf_t TwoKay)
 	mpf_mul(ex, ex, TwoKay);
 }
 
-void sideflip(mpf_t& ex, mpf_t TwoKay)
+void fliptent(mpf_t& ex, mpf_t TwoKay)
 {
 	mpf_mul(ex, ex, TwoKay);
 	if (0 <= mpf_cmp(ex, one))
@@ -161,20 +161,22 @@ void bifurcation_diagram (float *array,
 		double t = rand();
 		t /= RAND_MAX;
 		double x = t;
-// double eps = 0.1;
-// x *= K*(2.0*K - 1.0);
-// x += 2.0*K*(1.0-K);
-
 		make_random_bitsequence(ex, x, NBITS);
 
 		/* OK, now start iterating the map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
 			// bern(ex, Kay);
-			tent(ex, Kay);
-			// sideflip(ex, Kay);
 			// tarp(ex, Kay);
 			// feig(ex, four_Kay, scratch);
+// #define SIDETENT
+#ifdef SIDETENT
+			tent(ex, Kay);
+#endif
+#define FLIPTENT
+#ifdef FLIPTENT
+			fliptent(ex, Kay);
+#endif
 
 			// Excluding the settle time, together with the support
 			// normalization really brings out the details and the color
@@ -185,12 +187,16 @@ void bifurcation_diagram (float *array,
 				double x = mpf_get_d(ex);
 // #define SIDESCALE
 #ifdef SIDESCALE
-				x /= K;
+				double Q = K - jit;
+				x /= Q;
 #endif
-#define SIDETENT
 #ifdef SIDETENT
 				double Q = K - jit;
 				x = (x - 2.0*Q*(1.0-Q)) / (Q*(2.0*Q - 1.0));
+#endif
+#ifdef FLIPTENT
+				double Q = K - jit;
+				x = (x - 2.0*(1.0-Q)) / (2.0*Q - 1.0);
 #endif
 				double en = array_size * (x-floor(x));
 				int n = en;
@@ -246,7 +252,13 @@ void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++)
 		// array[j] *= 2.0*(K-0.5);
 		array[j] *= 2.0*(2.0-K)*(K-0.5); // meaningless but looks nice
-		// array[j] *= K;
+#endif
+
+#ifdef FLIPTENT
+	// Hackery for tent map
+	for (int j=0; j<array_size; j++)
+		// array[j] *= 2.0*(K-0.5);
+		array[j] *= 2.0*(2.0-K)*(K-0.5); // meaningless but looks nice
 #endif
 
 }
