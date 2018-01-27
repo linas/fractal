@@ -19,6 +19,7 @@
 gmp_randstate_t rstate;
 mpf_t half;
 mpf_t one;
+mpf_t two;
 
 void do_init(int nbits)
 {
@@ -27,7 +28,9 @@ void do_init(int nbits)
 
 	mpf_init(one);
 	mpf_init(half);
+	mpf_init(two);
 	mpf_set_ui(one, 1);
+	mpf_set_ui(two, 2);
 	mpf_div_ui(half, one, 2);
 }
 
@@ -45,8 +48,10 @@ void make_random_bitsequence(mpf_t& val, double x, int nbits)
 	mpf_set_d(val, x);
 	mpf_urandomb(tail, rstate, nbits);
 
-	// Keep the top 6 decimal digits of x
-	mpf_div_ui(tail, tail, 1000000);
+	// Keep the top 12 decimal digits of x
+	unsigned long digs = 1000000;
+	digs *= 1000000;
+	mpf_div_ui(tail, tail, digs);
 	mpf_add(val, val, tail);
 }
 
@@ -66,6 +71,15 @@ void tent(mpf_t& ex, mpf_t TwoKay)
 		mpf_ui_sub(ex, 1, ex);
 	}
 	mpf_mul(ex, ex, TwoKay);
+}
+
+void sideflip(mpf_t& ex, mpf_t TwoKay)
+{
+	mpf_mul(ex, ex, TwoKay);
+	if (0 <= mpf_cmp(ex, one))
+	{
+		mpf_sub(ex, two, ex);
+	}
 }
 
 void tarp(mpf_t& ex, mpf_t TwoKay)
@@ -130,6 +144,9 @@ void bifurcation_diagram (float *array,
 		double jit = rand();
 		jit /= RAND_MAX;
 		jit /= array_size;
+#ifdef FULLSCALE
+		jit *= 2.0;
+#endif
 #ifdef FEIGEN
 		jit *= 0.35; /// argh hack for feigenbaum.
 #endif
@@ -144,14 +161,19 @@ void bifurcation_diagram (float *array,
 		double t = rand();
 		t /= RAND_MAX;
 		double x = t;
+// double eps = 0.1;
+// x *= K*(2.0*K - 1.0);
+// x += 2.0*K*(1.0-K);
+
 		make_random_bitsequence(ex, x, NBITS);
 
 		/* OK, now start iterating the map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
 			// bern(ex, Kay);
-			// tent(ex, Kay);
-			tarp(ex, Kay);
+			tent(ex, Kay);
+			// sideflip(ex, Kay);
+			// tarp(ex, Kay);
 			// feig(ex, four_Kay, scratch);
 
 			// Excluding the settle time, together with the support
@@ -165,9 +187,10 @@ void bifurcation_diagram (float *array,
 #ifdef SIDESCALE
 				x /= K;
 #endif
-// #define SIDETENT
+#define SIDETENT
 #ifdef SIDETENT
-				x = (x - 2.0*K*(1.0-K)) / (K*(2.0*K - 1.0));
+				double Q = K - jit;
+				x = (x - 2.0*Q*(1.0-Q)) / (Q*(2.0*Q - 1.0));
 #endif
 				double en = array_size * (x-floor(x));
 				int n = en;
