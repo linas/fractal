@@ -21,23 +21,24 @@ static void matrix_diagram (float *array,
                              int array_size,
                              double x_center,
                              double x_width,
-                             double K,
+                             double row,
                              int itermax,
-                             double omega)
+                             double K)
 {
+	find_midpoints(K);
+
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
-	find_midpoints(omega);
 
-	int i = K;
-	i = 48 - i;
-	printf("working i=%d omega=%g\n", i, omega);
+	int i = row;
+	i = array_size - i;
+	printf("working i=%d K=%g\n", i, K);
 
 	int js = i-1;
 	if (js < 0) js = 0;
 	for (int j=js; j<array_size; j++)
 	{
-		array[j] = hess(omega, i, j);
+		array[j] = hess(K, i, j);
 	}
 }
 
