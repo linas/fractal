@@ -16,6 +16,7 @@
  */
 #define NOMAIN 1
 #include "psi.c"
+#include "psibig.c"
 
 static void matrix_diagram (float *array,
                              int array_size,
@@ -25,14 +26,22 @@ static void matrix_diagram (float *array,
                              int itermax,
                              double K)
 {
-	find_midpoints(K);
+	static bool init=false;
+	if (not init)
+	{
+		init = true;
+		// find_midpoints(K);
+		big_midpoints(K, 400, midpoints, MAXN);
+		sequence_midpoints(K);
+		printf("working K=%g\n", K);
+	}
 
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
 	int i = row;
 	i = array_size - i;
-	printf("working i=%d K=%g\n", i, K);
+	// if (0 == i%20) printf("working i=%d K=%g\n", i, K);
 
 	int js = i-1;
 	if (js < 0) js = 0;

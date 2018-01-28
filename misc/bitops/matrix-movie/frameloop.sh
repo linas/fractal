@@ -1,14 +1,14 @@
 #! /bin/bash
 
 
-for i in `seq 1 3`;
+for i in `seq 1 250`;
 do
-	# let K=0.6+0.1*$i
-	K="$(bc <<<  "scale=3; 0.6 + 0.1 * $i")"
+	K="$(bc <<<  "scale=5; 0.5 + $i / 503")"
 	echo "do frame $i K= $K"
-	../matrix foo 200 200 1 0 100.0 200 $K
-	../../../generate/renorm foo j 1.5 0
-	cat j.flo | ../../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-$K.png
+	../matrix foo 600 600 1 0 300.0 600 $K
+	../../../generate/renorm foo j 6.5 0
+	../../../generate/abs j j
+	cat j.flo | ../../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0$K.png
 done    
 
 

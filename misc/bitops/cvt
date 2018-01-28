@@ -178,3 +178,5 @@ cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sidetent.png
 # ../../generate/renorm matrix-999 j 1.5 0
 # ../../generate/abs j j
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.999.png
+
+# ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4
