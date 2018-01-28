@@ -29,8 +29,11 @@ int main (int argc, char* argv[])
 	for (int i=0; i<dim; i++)
 	{
 		double h = hess(K, i+1, i);
+		double d = hess(K, i, i);
+		double d1 = hess(K, i-1, i);
+		double d2 = hess(K, i-2, i);
 		lam /= h;
-		printf("%d	%g	%g\n", i, h, lam);
+		printf("%d	%g	%g	%g	%g	%g\n", i, h, d, d1, d2, lam);
 	}
 }
 

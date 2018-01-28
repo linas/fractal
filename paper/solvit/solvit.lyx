@@ -5411,7 +5411,50 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-Subdiagonal entries
+Bergman Shift
+\end_layout
+
+\begin_layout Standard
+Curiously, it appears that the Bergman shift operator is also represented
+ by an upper Hessenberg matrix; see 
+\begin_inset Quotes eld
+\end_inset
+
+Asymptotics for Hessenberg matrices for the Bergman shift operator on Jordan
+ regions
+\begin_inset Quotes erd
+\end_inset
+
+, Edward B.
+ Saff and Nikos Stylianopoulos, 
+\begin_inset CommandInset href
+LatexCommand href
+name "arXiv:1205.4183"
+target "https://arxiv.org/abs/1205.4183"
+
+\end_inset
+
+.
+ The shift operator considered there is the right-shift, not the left shift;
+ it is 
+\begin_inset Formula $\mathcal{M}:f\to zf$
+\end_inset
+
+ where 
+\begin_inset Formula $f$
+\end_inset
+
+ is a square-integrable holomorphic function onf the complex plane; viz,
+ a point in some Bergman space.
+ The Bergman (orthogonal) polynomials for the space are given directly by
+ the Hessenberg matrix; a defining property is that the matrix has subdiagonal
+ entries obeying 
+\begin_inset Formula $M_{n+1,n}>0$
+\end_inset
+
+.
+ It is thus interesting to determine if this is the case here as well.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5431,7 +5474,7 @@ reference "fig:Subdiagonal-Entries"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -5502,6 +5545,78 @@ These charts show the subdiagonal matrix entries
 
 \end_layout
 
+\begin_layout Standard
+Based on this number exploration, it appears that the question can be answered
+ in the positive.
+ Therefore, it seems not entirely foolish to pursue this 
+\begin_inset Quotes eld
+\end_inset
+
+coincidence
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Given a Hessenberg matrix with matrix entries 
+\begin_inset Formula $M_{ij}$
+\end_inset
+
+, the Bergman polynomials 
+\begin_inset Formula $p_{n}\left(z\right)$
+\end_inset
+
+ are given by the reucrrence relation
+\begin_inset Formula 
+\[
+M_{n+1,n}p_{n+1}\left(z\right)=zp_{n}\left(z\right)-\sum_{k=0}^{n}M_{k,n}p_{k}\left(z\right)
+\]
+
+\end_inset
+
+One curious property of these polynomials is that the zeros of 
+\begin_inset Formula $p_{n}\left(z\right)$
+\end_inset
+
+ correspond to the eigenvalues of the 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ principle submatrix of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Can one find a domain on the complex plane that would have such Bergman
+ polynomials? The above references paper provides a technique for doing
+ so, provided that the diagonals of 
+\begin_inset Formula $M_{ij}$
+\end_inset
+
+ have nice limits; i.e.
+ that 
+\begin_inset Formula $m_{k}=\lim_{n\to\infty}M_{n-k,n}$
+\end_inset
+
+ exists for fixed 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Subdiagonal-Entries"
+
+\end_inset
+
+ indicates that this limit does not exist, in the strict sense: the bouncing
+ continues indefinitely.
+ 
+\end_layout
+
 \begin_layout Subsection
 Eigenvalues
 \end_layout
@@ -5527,7 +5642,8 @@ status open
 
 \begin_layout Plain Layout
 This was confirmed with both GSL gsl_eigen_nonsymmv() and Lapack DHSEQR
- solvers, with matrices up to about 
+ solvers, exploring the principle sumatrix of various sizes, up to about
+ 
 \begin_inset Formula $2000\times2000$
 \end_inset
 
