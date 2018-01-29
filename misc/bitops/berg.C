@@ -19,17 +19,45 @@
 
 // Bergman polynomials for a Hessenberg operator, as per 
 // Edward B. Saff and Nikos Stylianopoulos, Asymptotics for Hessenberg 
-WTF_COMPLEX bergman(double Kay, int n, WTF_COMPLEX z)
+// Recursive implmentation gets real slow for large n.
+WTF_COMPLEX bergman_recursive(double Kay, int n, WTF_COMPLEX z)
 {
 	if (0 == n) return 1.0;
 	WTF_COMPLEX acc = 0;
 	for (int j=0; j< n; j++)
 	{
-		acc += hess(Kay, j, n-1) * bergman(Kay, j, z);
+		acc += hess(Kay, j, n-1) * bergman_recursive(Kay, j, z);
 	}
-	acc = z * bergman(Kay, n-1, z) - acc;
+	acc = z * bergman_recursive(Kay, n-1, z) - acc;
 	acc /= hess(Kay, n,n-1);
 	return acc;
+}
+
+WTF_COMPLEX bergman_cache(WTF_COMPLEX cache[], double Kay, int n, WTF_COMPLEX z)
+{
+	if (0 == n) return 1.0;
+
+	WTF_COMPLEX acc = 0;
+	for (int j=0; j< n; j++)
+	{
+		acc += hess(Kay, j, n-1) * cache[j];
+	}
+	acc = z * cache[n-1] - acc;
+	acc /= hess(Kay, n, n-1);
+	cache[n] = acc;
+	return acc;
+}
+
+WTF_COMPLEX bergman(double Kay, int n, WTF_COMPLEX z)
+{
+	if (0 == n) return 1.0;
+	WTF_COMPLEX cache[n];
+	cache[0] = 1.0;
+	for (int j=1; j<=n; j++)
+	{
+		bergman_cache(cache, Kay, j, z);
+	}
+	return cache[n];
 }
 
 double invariant_domain(double re_q, double im_q, int itermax, double Kay)
@@ -46,7 +74,7 @@ double invariant_domain(double re_q, double im_q, int itermax, double Kay)
 	WTF_COMPLEX z = re_q + I * im_q;
 	WTF_COMPLEX pz = bergman(Kay, itermax, z);
 	//	double rv = abs(pz);
-	rv = arg(pz);
+	double rv = arg(pz);
 	rv += M_PI;
 	rv /= 2.0 * M_PI;
 	// printf("duuude uh %g for %g %d\n", rv, Kay, itermax);
