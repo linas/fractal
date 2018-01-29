@@ -6,10 +6,25 @@
  * January 2018
  */
 
+#include <math.h>
+#include <complex.h>
+
 #define NOMAIN
 #include "psi.c"
 #include "psibig.c"
 
+double complex bergman(double Kay, int n, double complex z)
+{
+	if (0 == n) return 1.0;
+	double complex acc = 0;
+	for (int j=0; j< n; j++)
+	{
+		acc += hess(Kay, j, n-1) * bergman(Kay, j, z);
+	}
+	acc = z * bergman(Kay, n-1, z) - acc;
+	acc /= hess(Kay, n,n-1);
+	return acc;
+}
 
 int main (int argc, char* argv[])
 {
