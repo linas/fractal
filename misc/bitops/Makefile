@@ -72,4 +72,4 @@ nilpot: nilpot.o
 bitshow: bitshow.o $(FUNC)
 complex: complex.o
 psiunitary: psiunitary.o -lgsl -lgslcblas
-berg: berg.o $(BRAT)
+berg: berg.o $(BRAT) -lgsl -lgslcblas

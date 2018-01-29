@@ -14,6 +14,7 @@
 #define NOMAIN
 #include "psi.c"
 #include "psibig.c"
+#include "psifp.c"
 
 #define WTF_COMPLEX std::complex<double>
 
