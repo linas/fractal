@@ -47,7 +47,7 @@ nilpot.o: nilpot.c
 bitshow.o: bitshow.c $(FUNCDIR)/bitops.h
 complex.o: complex.c
 psiunitary.o: psiunitary.c
-berg.o: berg.c
+berg.o: berg.C
 
 
 bernie: bernie.o $(BRAT) $(FUNC)
@@ -72,4 +72,4 @@ nilpot: nilpot.o
 bitshow: bitshow.o $(FUNC)
 complex: complex.o
 psiunitary: psiunitary.o -lgsl -lgslcblas
-berg: berg.o
+berg: berg.o $(BRAT)

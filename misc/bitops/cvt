@@ -91,11 +91,11 @@
 # ../../generate/renorm sidebern j 0.7 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sidebern.png
 
-../../generate/renorm sidetarp j 0.7 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sidetarp.png
+# ../../generate/renorm sidetarp j 0.7 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sidetarp.png
 
-../../generate/renorm sidetent j 0.7 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sidetent.png
+# ../../generate/renorm sidetent j 0.7 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sidetent.png
 
 # ../../generate/renorm sideflip j 0.7 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sideflip.png
@@ -178,5 +178,9 @@ cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sidetent.png
 # ../../generate/renorm matrix-999 j 1.5 0
 # ../../generate/abs j j
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.999.png
+
+
+../../generate/renorm berg j 0.1 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > berg.png
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4
