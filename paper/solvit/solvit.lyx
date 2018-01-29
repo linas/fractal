@@ -3564,9 +3564,9 @@ reference "fig:Undershift-Density-Distribution"
 
  are those functions satisfying 
 \begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}\rho\right]\left(y\right)=\rho\left(y\right)
-\]
+\begin{equation}
+\left[\mathcal{L}_{\beta}\rho\right]\left(y\right)=\rho\left(y\right)\label{eq:FP-eigenvector}
+\end{equation}
 
 \end_inset
 
@@ -5575,13 +5575,18 @@ coincidence
 
  are given by the reucrrence relation
 \begin_inset Formula 
-\[
-M_{n+1,n}p_{n+1}\left(z\right)=zp_{n}\left(z\right)-\sum_{k=0}^{n}M_{k,n}p_{k}\left(z\right)
-\]
+\begin{equation}
+M_{n+1,n}p_{n+1}\left(z\right)=zp_{n}\left(z\right)-\sum_{k=0}^{n}M_{k,n}p_{k}\left(z\right)\label{eq:Bergman polys}
+\end{equation}
 
 \end_inset
 
-One curious property of these polynomials is that the zeros of 
+terminating at 
+\begin_inset Formula $p_{0}\left(z\right)=1$
+\end_inset
+
+.
+ One curious property of these polynomials is that the zeros of 
 \begin_inset Formula $p_{n}\left(z\right)$
 \end_inset
 
@@ -6230,6 +6235,120 @@ Created with fractal/misc/bitops/julie.C
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Bergman Shift, Revisited
+\end_layout
+
+\begin_layout Standard
+The Bergman polynomials define an orthonormal basis for some region of the
+ complex plane.
+ What happens if those Frobenius-Perron-Ruelle eigenvector (the one for
+ which the eigenvalue is one; the one corresponding to the invariant measure)
+ is used with that polynomial basis? What sort of function results? To be
+ precise, let 
+\begin_inset Formula $v_{n}$
+\end_inset
+
+ be the vector that solves
+\begin_inset Formula 
+\[
+\sum_{m=0}^{\infty}\left\langle n\left|{\cal L}_{\beta}\right|m\right\rangle v_{m}=v_{n}
+\]
+
+\end_inset
+
+This is readily computed numerically, and it is straightforward to verify
+ the numerics by confirming that 
+\begin_inset Formula 
+\[
+\rho\left(x\right)=\sum_{m=0}^{\infty}v_{m}\psi_{m}\left(x\right)
+\]
+
+\end_inset
+
+is the invariant measure of equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:FP-eigenvector"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:eigen-eqn"
+
+\end_inset
+
+.
+ The question is then to characterize the function 
+\begin_inset Formula 
+\[
+H\left(z\right)=\sum_{m=0}^{\infty}v_{m}p_{m}\left(z\right)
+\]
+
+\end_inset
+
+built from the Bergman polynomials of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bergman polys"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Exploring 
+\begin_inset Formula $H\left(z\right)$
+\end_inset
+
+ numerically, the answer seems to be that 
+\begin_inset Formula $\left|H\left(z\right)\right|=0$
+\end_inset
+
+ for 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset
+
+ and undefined (infinite) otherwise.
+ This result is independent of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The numerics seems stable for 
+\begin_inset Formula $\beta\lesssim1.8$
+\end_inset
+
+, but then get dicey, primarily because the matrix elements on the subdiagonal
+ are not well-behaved.
+ 
+\end_layout
+
+\begin_layout Standard
+I'm not sure what to mke of this result; it is a bit confusing.
+ The Bergman kernel is a reproducing kernel, which normally means that two
+ functions that are close in Bergman space are close holomorphically as
+ well.
+ Here, we have a function that is holomorphically close to zero; but clearly
+ the vector 
+\begin_inset Formula $v_{n}$
+\end_inset
+
+ is not at all close.
+ What is the correct way to understand this 
+\begin_inset Quotes eld
+\end_inset
+
+accident
+\begin_inset Quotes erd
+\end_inset
+
+?
 \end_layout
 
 \begin_layout Section
