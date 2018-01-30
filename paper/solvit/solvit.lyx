@@ -5411,222 +5411,6 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-Bergman Shift
-\end_layout
-
-\begin_layout Standard
-Curiously, it appears that the Bergman shift operator is also represented
- by an upper Hessenberg matrix
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Saff12,Tomeo11,Escri11"
-
-\end_inset
-
-.
- The shift operator considered there is the right-shift, not the left shift;
- it is 
-\begin_inset Formula $\mathcal{M}:f\to zf$
-\end_inset
-
- where 
-\begin_inset Formula $f$
-\end_inset
-
- is a square-integrable holomorphic function on the complex plane; viz,
- a point in some Bergman space.
- The Bergman (orthogonal) polynomials for the space are given directly by
- the Hessenberg matrix; a defining property is that the matrix has subdiagonal
- entries obeying 
-\begin_inset Formula $M_{n+1,n}>0$
-\end_inset
-
-.
- It is thus interesting to determine if this is the case here as well.
- 
-\end_layout
-
-\begin_layout Standard
-The subdiagonal entries of the Hessenberg matrix appear to be all positive
- (none are zero), and tend to have the same value, with sporadic exceptions.
- These are shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Subdiagonal-Entries"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Subdiagonal Entries
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Subdiagonal-Entries"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename berg-0.55.eps
-	width 49col%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename berg-0.8.eps
-	width 49col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-These charts show the subdiagonal matrix entries 
-\begin_inset Formula $\left\langle n+1\left|{\cal L}_{\beta}\right|n\right\rangle $
-\end_inset
-
- for the first 
-\begin_inset Formula $n<500$
-\end_inset
-
-.
- Representative values of 
-\begin_inset Formula $\beta$
-\end_inset
-
- are as labelled; other values behave similarly.
- The relation of the supremum to 
-\begin_inset Formula $\beta$
-\end_inset
-
- is not clear.
- 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Based on this numerical exploration, it appears that the question can be
- answered in the positive.
- Therefore, it seems not entirely foolish to pursue this 
-\begin_inset Quotes eld
-\end_inset
-
-coincidence
-\begin_inset Quotes erd
-\end_inset
-
-.
- Given any Hessenberg matrix with matrix entries 
-\begin_inset Formula $M_{ij}$
-\end_inset
-
-, the Bergman polynomials 
-\begin_inset Formula $p_{n}\left(z\right)$
-\end_inset
-
- are given by the reucrrence relation
-\begin_inset Formula 
-\begin{equation}
-M_{n+1,n}p_{n+1}\left(z\right)=zp_{n}\left(z\right)-\sum_{k=0}^{n}M_{k,n}p_{k}\left(z\right)\label{eq:Bergman polys}
-\end{equation}
-
-\end_inset
-
-terminating at 
-\begin_inset Formula $p_{0}\left(z\right)=1$
-\end_inset
-
-.
- One curious property of these polynomials is that the zeros of 
-\begin_inset Formula $p_{n}\left(z\right)$
-\end_inset
-
- correspond to the eigenvalues of the 
-\begin_inset Formula $n\times n$
-\end_inset
-
- principle submatrix of 
-\begin_inset Formula $M$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Can one find a domain on the complex plane that would have such Bergman
- polynomials? The above references provide a technique for doing so, provided
- that the matrix is asymptotically Toeplitz.
- That is, if the diagonals of 
-\begin_inset Formula $M_{ij}$
-\end_inset
-
- have nice limits, that 
-\begin_inset Formula $m_{k}=\lim_{n\to\infty}M_{n-k,n}$
-\end_inset
-
- exists for fixed 
-\begin_inset Formula $k$
-\end_inset
-
-, then a Jordan arc bounding a domain on the complex plane can be found.
- The figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Subdiagonal-Entries"
-
-\end_inset
-
- indicates that this limit does not exist, in the strict sense: the bouncing
- seems to continue indefinitely.
- Presumably, no such Jordan arc exists: there may be a domain on the complex
- plane for which the Bergman polynomials are appropriate, but that domain
- might be bounded by some fractal shape.
- Alternately, the domain might be a circle, but the space of the polynomials
- is not a Hilbert space, in that it fails to contain its limit points.
- Part of the issue is that the proerties of the Haar-like basis constructed
- in the previous section are unclear.
-\end_layout
-
-\begin_layout Subsection
 Eigenvalues
 \end_layout
 
@@ -6233,6 +6017,15 @@ Created with fractal/misc/bitops/julie.C
 \end_inset
 
  
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -6241,16 +6034,16 @@ Created with fractal/misc/bitops/julie.C
 \end_layout
 
 \begin_layout Subsection
-Bergman Shift, Revisited
+Generating Function
 \end_layout
 
 \begin_layout Standard
-The Bergman polynomials define an orthonormal basis for some region of the
- complex plane.
- What happens if those Frobenius-Perron-Ruelle eigenvector (the one for
- which the eigenvalue is one; the one corresponding to the invariant measure)
- is used with that polynomial basis? What sort of function results? To be
- precise, let 
+Let 
+\begin_inset Formula $v_{n}$
+\end_inset
+
+ be the Ruelle-Frobenius-Perron eigenvector in the Hessenberg basis.
+ That is, let 
 \begin_inset Formula $v_{n}$
 \end_inset
 
@@ -6286,72 +6079,469 @@ reference "eq:eigen-eqn"
 \end_inset
 
 .
- The question is then to characterize the function 
+ The truncated ordinary generating function associated with this eigenvector
+ is
 \begin_inset Formula 
 \[
-H\left(z\right)=\sum_{m=0}^{\infty}v_{m}p_{m}\left(z\right)
+G_{N}\left(z\right)=\sum_{m=0}^{N}v_{m}z^{m}
 \]
 
 \end_inset
 
-built from the Bergman polynomials of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Bergman polys"
-
+with the ordinary generating function being the limit 
+\begin_inset Formula $N\to\infty$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Exploring 
-\begin_inset Formula $H\left(z\right)$
+ A numerical study of this function indicates that most of the 
+\begin_inset Formula $N$
 \end_inset
 
- numerically, the answer seems to be that 
-\begin_inset Formula $\left|H\left(z\right)\right|=0$
+ zeroes of 
+\begin_inset Formula $G_{N}$
 \end_inset
 
- for 
-\begin_inset Formula $\left|z\right|<1$
-\end_inset
-
- and undefined (infinite) otherwise.
- This result is independent of 
+ are arranged approximately on a circle of radius 
 \begin_inset Formula $\beta$
 \end_inset
 
-.
- The numerics seems stable for 
-\begin_inset Formula $\beta\lesssim1.8$
+.The arrangement appear to be quite uniform, with more-or-less equi-distant
+ spacing of the zeros.
+ As 
+\begin_inset Formula $N$
 \end_inset
 
-, but then get dicey, primarily because the matrix elements on the subdiagonal
- are not well-behaved.
+ increases, it seems that more of the zeroes get closer to the circle, although
+ the numerical instabilities associated with double-precision math make
+ this difficult to control; an arbitrary-precision eigenvalue solver would
+ be needed to confirm this behavior.
+\end_layout
+
+\begin_layout Standard
+If this behavior persists, then the limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ cannot really be taken, and the ordinary generating function doesn't 
+\begin_inset Quotes eld
+\end_inset
+
+really exist
+\begin_inset Quotes erd
+\end_inset
+
+, per-se.
+\end_layout
+
+\begin_layout Subsection
+Bergman Space
+\end_layout
+
+\begin_layout Standard
+Given a matrix operator in Hessenberg form, it can be interpreted as a right-shi
+ft on the space of polynomials.
+ That is, given an unreduced Hessenberg matrix with matrix entries 
+\begin_inset Formula $M_{ij}$
+\end_inset
+
+, one can write a recurrance relation that defines a sequence of polynomials
+ as
+\begin_inset Formula 
+\begin{equation}
+zp_{n}\left(z\right)=\sum_{k=0}^{n+1}M_{kn}p_{k}\left(z\right)\label{eq:Hessenberg polynomials}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $p_{0}\left(z\right)=1$
+\end_inset
+
+.
+ This relation is easily solvable in 
+\begin_inset Quotes eld
+\end_inset
+
+closed form
+\begin_inset Quotes erd
+\end_inset
+
+, as the recurrance relation terminates in a finite number of steps.
  
 \end_layout
 
 \begin_layout Standard
-I'm not sure what to make of this result; it is a bit confusing.
- The Bergman kernel is a reproducing kernel, which means that two functions
- that are close in Bergman space are close holomorphically as well.
- The converse is not true, and here, we have an example of just that: a
- function that is holomorphically close to zero; but clearly the vector
+One important property of these polynomials is that the zeros of 
+\begin_inset Formula $p_{n}\left(z\right)$
+\end_inset
+
+ correspond to the eigenvalues of the 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ principle submatrix of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Numeric exploration of these polynomials confirms the previous results
+ on eigenvalues obtained from direct diagnoalization: the zeros of the 
+\begin_inset Formula $p_{n}\left(z\right)$
+\end_inset
+
+ seems to lie mostly near the circle of radius 
+\begin_inset Formula $1/2\beta$
+\end_inset
+
+, distributed uniformly over all angles.
+\end_layout
+
+\begin_layout Standard
+If all of the subdiagonal entries obey 
+\begin_inset Formula $M_{n+1,n}>0$
+\end_inset
+
+, then the polynomials form an orthonormal basis for Bergman space.
+ That is, there exists a domain in the complex plane on which the polynomials
+ provide a basis for a Hilbert space of holomorphic functions on that domain
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saff12,Tomeo11,Escri11"
+
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is a square-integrable holomorphic function on this domain, then the transpose
+ of matrix 
+\begin_inset Formula $M_{ij}$
+\end_inset
+
+ forms an operator 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ which is the right-shift operator: that is, 
+\begin_inset Formula $\mathcal{M}:f\to zf$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+One way to interpret this last statement is to say that the left-eigenvalues
+ for the Hessenberg operator form a continuous complex-valued spectrum,
+ these eigenvalues being confined to a certain region of the complex plane.
  
-\begin_inset Formula $v_{n}$
+\end_layout
+
+\begin_layout Standard
+The question here is whether it is the case that
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $M_{n+1,n}>0$
 \end_inset
 
- is anything but zero.
- What is the correct way to understand this 
-\begin_inset Quotes eld
+ for
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+the matirx elements 
+\begin_inset Formula $M_{kn}=\left\langle k\left|{\cal L}_{\beta}\right|n\right\rangle $
 \end_inset
 
-accident
-\begin_inset Quotes erd
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hessen-matrix-elts"
+
 \end_inset
 
-?
+.
+ Numeric exploration indicates that this is indeed the case, with the subdiagona
+l entries all positive (none are zero), and all tend to have the same value,
+ with sporadic exceptions.
+ These are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Subdiagonal-Entries"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Subdiagonal Entries
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Subdiagonal-Entries"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename berg-0.55.eps
+	width 49col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename berg-0.8.eps
+	width 49col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+These charts show the subdiagonal matrix entries 
+\begin_inset Formula $\left\langle n+1\left|{\cal L}_{\beta}\right|n\right\rangle $
+\end_inset
+
+ for the first 
+\begin_inset Formula $n<500$
+\end_inset
+
+.
+ Representative values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are as labelled; other values behave similarly.
+ The relation of the supremum to 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is not clear.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Can one find a domain on the complex plane that would have such Bergman
+ polynomials? The above references provide a technique for doing so, provided
+ that the matrix is asymptotically Toeplitz.
+ That is, if the diagonals of 
+\begin_inset Formula $M_{ij}$
+\end_inset
+
+ have nice limits, that 
+\begin_inset Formula $m_{k}=\lim_{n\to\infty}M_{n-k,n}$
+\end_inset
+
+ exists for fixed 
+\begin_inset Formula $k$
+\end_inset
+
+, then a Jordan arc bounding a domain on the complex plane can be found.
+ The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Subdiagonal-Entries"
+
+\end_inset
+
+ indicates that this limit does not exist, in the strict sense: the bouncing
+ seems to continue indefinitely.
+ Exactly what this implies is unclear.
+ Presumably, no such Jordan arc exists: there may be a domain on the complex
+ plane for which the Bergman polynomials are appropriate, but that domain
+ might be bounded by some fractal shape.
+ Alternately, the domain might be a circle, but the space of the polynomials
+ is somehow not a Hilbert space, in that it fails to contain its limit points.
+ Part of the issue is that the proerties of the Haar-like basis constructed
+ in the previous section are unclear.
+\end_layout
+
+\begin_layout Subsection
+Bergman Shift, Revisited
+\end_layout
+
+\begin_layout Standard
+The Bergman polynomials of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Hessenberg polynomials"
+
+\end_inset
+
+ define an orthonormal basis for some region of the complex plane.
+ For the square-integrable norm, this basis is the basis of a Hilbert space,
+ and specifically, that of a reproducing kernel Hilbert space.
+ 
+\end_layout
+
+\begin_layout Standard
+Yet, something funny happens on the unit disk.
+ Let 
+\begin_inset Formula $p_{m}\left(z\right)$
+\end_inset
+
+ be the polynomials, and for some sequence of coefficients 
+\begin_inset Formula $\left\{ a_{n}\right\} $
+\end_inset
+
+, consider a generic function 
+\begin_inset Formula 
+\[
+f\left(z\right)=\sum_{k=0}^{\infty}a_{k}p_{k}\left(z\right)
+\]
+
+\end_inset
+
+Consider the case where the 
+\begin_inset Formula $\left\{ a_{n}\right\} $
+\end_inset
+
+ are a right-eigenvector of the Hessenberg operator, that is, where 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sum_{m=0}^{\infty}M_{km}a_{m}=\lambda a_{k}
+\]
+
+\end_inset
+
+Substituting into the above, one has 
+\begin_inset Formula 
+\[
+f\left(z\right)=\sum_{k=0}^{\infty}\frac{1}{\lambda}\sum_{m=0}^{\infty}M_{km}a_{m}p_{k}\left(z\right)=\frac{z}{\lambda}\sum_{m=0}^{\infty}a_{m}p_{m}\left(z\right)=\frac{zf\left(z\right)}{\lambda}
+\]
+
+\end_inset
+
+There are two alternatives to solving this; either 
+\begin_inset Formula $f\left(z\right)=0$
+\end_inset
+
+ or 
+\begin_inset Formula $z=\lambda$
+\end_inset
+
+.
+ Since this is a reproducing kernl Hilbert space, then if 
+\begin_inset Formula $z=\lambda$
+\end_inset
+
+ is part of the domain of the Bergman space, then one must conclude that
+ 
+\begin_inset Formula $f\left(z\right)=0$
+\end_inset
+
+ everywhere.
+ That is, right-eigenvalues of 
+\begin_inset Formula $M$
+\end_inset
+
+ correspond to functions 
+\begin_inset Formula $f\left(z\right)$
+\end_inset
+
+ that are vanishing.
+\end_layout
+
+\begin_layout Standard
+Numerical exploration indicates that, for the matrix elements of eqn, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hessen-matrix-elts"
+
+\end_inset
+
+, the function 
+\begin_inset Formula $f\left(z\right)$
+\end_inset
+
+ vanishes inside the unit disk 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset
+
+, and is undefined (infinite) outside of it.
 \end_layout
 
 \begin_layout Subsection

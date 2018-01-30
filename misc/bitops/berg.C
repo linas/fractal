@@ -120,12 +120,16 @@ double invariant_domain(double re_q, double im_q, int itermax, double Kay)
 
 		fpvec = (double*) malloc(itermax * sizeof(double));
 		get_fp_eigenvector(Kay, fpvec, itermax);
+		for (int i=0; i< itermax; i++)
+		{
+			printf("%d	%g\n", i, fpvec[i]);
+		}
 	}
 
 	WTF_COMPLEX z = re_q + I * im_q;
-	// WTF_COMPLEX pz = bergman(Kay, itermax, z);
+	WTF_COMPLEX pz = bergman(Kay, itermax, z);
 	// WTF_COMPLEX pz = rfp_bergman(fpvec, Kay, z, itermax);
-	WTF_COMPLEX pz = rfp_ogf(fpvec, Kay, z, itermax);
+	// WTF_COMPLEX pz = rfp_ogf(fpvec, Kay, z, itermax);
 
 // #define MAG
 #ifdef MAG
@@ -136,12 +140,12 @@ double invariant_domain(double re_q, double im_q, int itermax, double Kay)
 	rv /= 2.0 * M_PI;
 #endif
 
-/*
-if(abs(zabs - 1.0/(2.0*Kay)) < 0.003) return 0.35;
-if(abs(zabs - 1.0) < 0.003) return 0.5;
-*/
 double zabs = abs(z);
+if(abs(zabs - 1.0/(2.0*Kay)) < 0.003) return 0.35;
+/*
+if(abs(zabs - 1.0) < 0.003) return 0.5;
 if(abs(zabs - 2.0*Kay) < 0.003) return 0.5;
+*/
 
 	// printf("duuude uh %g for %g %d\n", rv, Kay, itermax);
 	return rv;
