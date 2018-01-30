@@ -92,6 +92,21 @@ WTF_COMPLEX rfp_bergman(double* vec, double Kay, WTF_COMPLEX z, int smax)
 	return acc;
 }
 
+// Ruelle-Frobenius-Perron ordinary generating function
+WTF_COMPLEX rfp_ogf(double* vec, double Kay, WTF_COMPLEX z, int smax)
+{
+	// Compute the vector.
+	WTF_COMPLEX zn = 1;
+	WTF_COMPLEX acc = 0.0;
+	for (int j=0; j<=smax; j++)
+	{
+		acc += vec[j] * zn;
+		zn *= z;
+	}
+
+	return acc;
+}
+
 double invariant_domain(double re_q, double im_q, int itermax, double Kay)
 {
 	static double* fpvec = NULL;
@@ -109,9 +124,10 @@ double invariant_domain(double re_q, double im_q, int itermax, double Kay)
 
 	WTF_COMPLEX z = re_q + I * im_q;
 	// WTF_COMPLEX pz = bergman(Kay, itermax, z);
-	WTF_COMPLEX pz = rfp_bergman(fpvec, Kay, z, itermax);
+	// WTF_COMPLEX pz = rfp_bergman(fpvec, Kay, z, itermax);
+	WTF_COMPLEX pz = rfp_ogf(fpvec, Kay, z, itermax);
 
-#define MAG
+// #define MAG
 #ifdef MAG
 	double rv = abs(pz);
 #else
@@ -120,9 +136,12 @@ double invariant_domain(double re_q, double im_q, int itermax, double Kay)
 	rv /= 2.0 * M_PI;
 #endif
 
-double zabs = abs(z);
+/*
 if(abs(zabs - 1.0/(2.0*Kay)) < 0.003) return 0.35;
 if(abs(zabs - 1.0) < 0.003) return 0.5;
+*/
+double zabs = abs(z);
+if(abs(zabs - 2.0*Kay) < 0.003) return 0.5;
 
 	// printf("duuude uh %g for %g %d\n", rv, Kay, itermax);
 	return rv;

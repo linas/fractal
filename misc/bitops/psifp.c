@@ -64,6 +64,9 @@ mxi = dim;
 	double mag = sqrt(x*x+y*y);
 	printf ("# eigenvalue = %20.18g + i %20.18g Magnitude=%g\n#\n", x, y, mag);
 
+	if (1.0e-10 < fabs(1.0 - mag))
+		printf ("# ERROR !!!!!!!!! NOT THE UNIT EIGENVALUE!\n#\n");
+
 	/* Get the eigenvector */
 	gsl_vector_complex_view evec_0 = gsl_matrix_complex_column (evec, 0);
 
