@@ -7,11 +7,12 @@
  * Linas Vepstas January 2018
  */
 
-/*
+#ifndef NOMAIN
 #define NOMAIN
 #include "psi.c"
 #include "psibig.c"
-*/
+#undef NOMAIN
+#endif
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_eigen.h>
@@ -51,7 +52,7 @@ mxi = dim;
 	gsl_eigen_nonsymmv_free (w);
 
 
-	/* Get the eigenvector for the largest eigennvalue, which
+	/* Get the eigenvector for the largest eigenvalue, which
 	 * should be 1.0.  Graph it to make sure it matches what
 	 * we already know it should be.
 	 */
@@ -86,3 +87,32 @@ mxi = dim;
 	mag = sqrt(mag);
 	printf("# Vector length = %20.18g\n#\n", mag);
 }
+
+#ifndef NOMAIN
+int main(int argc, char* argv[])
+{
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s K\n", argv[0]);
+		exit(1);
+	}
+	double K = atof(argv[1]);
+	printf("#\n# K=%g\n#\n", K);
+	printf("#\n# eigenvector componentns\n#\n");
+
+	// find_midpoints(K);
+	big_midpoints(K, 400, midpoints, MAXN);
+	sequence_midpoints(K);
+
+#define NPTS 201
+	double* fpvec = (double*) malloc(NPTS * sizeof(double));
+	get_fp_eigenvector(K, fpvec, NPTS);
+
+	for (int i=0; i< NPTS; i++)
+	{
+		if (fpvec[i] < 0.0 && fabs(fpvec[i])<1.0e15) fpvec[i] = 0.0;
+		printf("%d	%g\n", i, fpvec[i]);
+	}
+}
+#endif
+
