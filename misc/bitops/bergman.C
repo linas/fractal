@@ -1,5 +1,5 @@
 /*
- * berg.C
+ * bergman.C
  *
  * Bergman polynomials that correspond to the beta-transform.
  *
