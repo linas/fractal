@@ -3485,7 +3485,8 @@ Transfer operators
 
 \begin_layout Standard
 The discovery and study of invariant measures, as well as of decaying states
- can be approached via the transfer operator.
+ can be approached via the transfer operator, or, properly named, the Ruelle-Fro
+benius-Perron operator.
  This is an operator that captures the behavior of a distribution under
  the action of a map.
  The invariant measure is an eigenstate of this operator; indeed, it provides
@@ -4935,9 +4936,9 @@ and likewise for three more.
 
 \begin_layout Standard
 The primary failure of this basis is that there is no obvious way to diagonalize
- the transfer operator.
+ the transfer operator in this basis.
  There is no obvious way of solving it, of finding it's eigenfunctions and
- eigenvalues.
+ eigenvalues, other than by brute-force numerical attack.
 \end_layout
 
 \begin_layout Subsection
@@ -6714,6 +6715,106 @@ A Hessenberg matrix can be brought to solvable form by applying a sequence
  of Givens rotations.
  Is the seuqnce of angles that appear in these rotations meaningful in any
  way, or are they just some form of uninteresting junk?
+\end_layout
+
+\begin_layout Section
+The Jacobi Operator
+\end_layout
+
+\begin_layout Standard
+Given a Borel measure on the real number line, one can find a sequence of
+ polynomials that are orthonormal with respect to that measure.
+ These polynomials 
+\begin_inset Formula $p_{n}\left(x\right)$
+\end_inset
+
+ are coubled together by a three-term recurrence equation
+\begin_inset Formula 
+\[
+xp_{n}\left(x\right)=a_{n+1}p_{n+1}\left(x\right)+b_{n}p_{n}\left(x\right)+a_{n}p_{n-1}\left(x\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $p_{0}\left(x\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{-1}\left(x\right)=0$
+\end_inset
+
+.
+ This recurrence relation can be taken to be an operator, known as the Jacobi
+ operator 
+\begin_inset Formula $\mathcal{J}$
+\end_inset
+
+, acting on vectors consisting of the polynomials 
+\begin_inset Formula $p\left(x\right)=\left\{ p_{n}\left(x\right)\right\} $
+\end_inset
+
+ so that
+\begin_inset Formula 
+\[
+\left[\mathcal{J}p\right]\left(x\right)=xp\left(x\right)
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $p$
+\end_inset
+
+ is an eigenvector of 
+\begin_inset Formula $\mathcal{J}$
+\end_inset
+
+ with eigenvalue 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The two sequences of coefficients 
+\begin_inset Formula $\left\{ a_{n}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ b_{n}\right\} $
+\end_inset
+
+ form three diagonals of the operator, with 
+\begin_inset Formula $\left\{ a_{n}\right\} $
+\end_inset
+
+ running down the center, and 
+\begin_inset Formula $\left\{ b_{n}\right\} $
+\end_inset
+
+ the two diagonals on either side.
+\end_layout
+
+\begin_layout Standard
+Given that the invariant measure for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:FP-eigenvector"
+
+\end_inset
+
+ and visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+ is a Borel measure, it seems reasonable to ask: what is the corresponding
+ Jacobi operator? How can the sequence of polynomials be understood? 
 \end_layout
 
 \begin_layout Section
