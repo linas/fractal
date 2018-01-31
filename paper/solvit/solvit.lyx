@@ -5798,7 +5798,7 @@ reference "fig:Decaying-Eigenfunction"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -6290,14 +6290,14 @@ Bergman Space
 Given a matrix operator in Hessenberg form, it can be interpreted as a right-shi
 ft on the space of polynomials.
  That is, given an unreduced Hessenberg matrix with matrix entries 
-\begin_inset Formula $M_{ij}$
+\begin_inset Formula $A_{ij}$
 \end_inset
 
 , one can write a recurrance relation that defines a sequence of polynomials
  as
 \begin_inset Formula 
 \begin{equation}
-zp_{n}\left(z\right)=\sum_{k=0}^{n+1}M_{kn}p_{k}\left(z\right)\label{eq:Hessenberg polynomials}
+zp_{n}\left(z\right)=\sum_{k=0}^{n+1}A_{kn}p_{k}\left(z\right)\label{eq:Hessenberg polynomials}
 \end{equation}
 
 \end_inset
@@ -6329,7 +6329,7 @@ One important property of these polynomials is that the zeros of
 \end_inset
 
  principle submatrix of 
-\begin_inset Formula $M$
+\begin_inset Formula $A$
 \end_inset
 
 .
@@ -6347,7 +6347,7 @@ One important property of these polynomials is that the zeros of
 
 \begin_layout Standard
 If all of the subdiagonal entries obey 
-\begin_inset Formula $M_{n+1,n}>0$
+\begin_inset Formula $A_{n+1,n}>0$
 \end_inset
 
 , then the polynomials form an orthonormal basis for Bergman space.
@@ -6366,15 +6366,15 @@ key "Saff12,Tomeo11,Escri11"
 
  is a square-integrable holomorphic function on this domain, then the transpose
  of matrix 
-\begin_inset Formula $M_{ij}$
+\begin_inset Formula $A_{ij}$
 \end_inset
 
  forms an operator 
-\begin_inset Formula $\mathcal{M}$
+\begin_inset Formula $\mathcal{A}$
 \end_inset
 
  which is the right-shift operator: that is, 
-\begin_inset Formula $\mathcal{M}:f\to zf$
+\begin_inset Formula $\mathcal{A}:f\to zf$
 \end_inset
 
  .
@@ -6413,7 +6413,7 @@ The question here is whether it is the case that
 \noun default
 \color inherit
 
-\begin_inset Formula $M_{n+1,n}>0$
+\begin_inset Formula $A_{n+1,n}>0$
 \end_inset
 
  for
@@ -6441,7 +6441,7 @@ The question here is whether it is the case that
 \noun default
 \color inherit
 the matirx elements 
-\begin_inset Formula $M_{kn}=\left\langle k\left|{\cal L}_{\beta}\right|n\right\rangle $
+\begin_inset Formula $A_{kn}=\left\langle k\left|{\cal L}_{\beta}\right|n\right\rangle $
 \end_inset
 
  of eqn 
@@ -6554,11 +6554,11 @@ Can one find a domain on the complex plane that would have such Bergman
  polynomials? The above references provide a technique for doing so, provided
  that the matrix is asymptotically Toeplitz.
  That is, if the diagonals of 
-\begin_inset Formula $M_{ij}$
+\begin_inset Formula $A_{ij}$
 \end_inset
 
  have nice limits, that 
-\begin_inset Formula $m_{k}=\lim_{n\to\infty}M_{n-k,n}$
+\begin_inset Formula $\lim_{n\to\infty}A_{n-k,n}$
 \end_inset
 
  exists for fixed 
@@ -6631,7 +6631,7 @@ Consider the case where the
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\sum_{m=0}^{\infty}M_{km}a_{m}=\lambda a_{k}
+\sum_{m=0}^{\infty}A_{km}a_{m}=\lambda a_{k}
 \]
 
 \end_inset
@@ -6639,7 +6639,7 @@ Consider the case where the
 Substituting into the above, one has 
 \begin_inset Formula 
 \[
-f\left(z\right)=\sum_{k=0}^{\infty}\frac{1}{\lambda}\sum_{m=0}^{\infty}M_{km}a_{m}p_{k}\left(z\right)=\frac{z}{\lambda}\sum_{m=0}^{\infty}a_{m}p_{m}\left(z\right)=\frac{zf\left(z\right)}{\lambda}
+f\left(z\right)=\sum_{k=0}^{\infty}\frac{1}{\lambda}\sum_{m=0}^{\infty}A_{km}a_{m}p_{k}\left(z\right)=\frac{z}{\lambda}\sum_{m=0}^{\infty}a_{m}p_{m}\left(z\right)=\frac{zf\left(z\right)}{\lambda}
 \]
 
 \end_inset
@@ -6664,7 +6664,7 @@ There are two alternatives to solving this; either
 
  everywhere.
  That is, right-eigenvalues of 
-\begin_inset Formula $M$
+\begin_inset Formula $A$
 \end_inset
 
  correspond to functions 
