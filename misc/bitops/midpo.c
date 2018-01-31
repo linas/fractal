@@ -16,6 +16,8 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_eigen.h>
 
+// Stupid wild-ass guess -- stick midpoints into a shift matrix
+// what happens? anything at all? doe this have any meaning?
 void swag(double K, int mxi)
 {
 	double* matrix = (double*) malloc(mxi*mxi*sizeof(double));
@@ -37,6 +39,8 @@ void swag(double K, int mxi)
 	gsl_eigen_nonsymmv_workspace * w = gsl_eigen_nonsymmv_alloc (mxi);
 	gsl_eigen_nonsymmv (&m.matrix, eval, evec, w);
 	gsl_eigen_nonsymmv_free (w);
+
+	gsl_eigen_nonsymmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_DESC);
 
 	for (int i=0; i< mxi; i++)
 	{
