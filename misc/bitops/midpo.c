@@ -18,6 +18,7 @@
 
 // Stupid wild-ass guess -- stick midpoints into a shift matrix
 // what happens? anything at all? doe this have any meaning?
+// Answer: pointless stupid shit happens...
 void swag(double K, int mxi)
 {
 	double* matrix = (double*) malloc(mxi*mxi*sizeof(double));
