@@ -12,7 +12,7 @@ all: borel
 borel: borel.o $(FUNC) $(BRAT)
 
 .o:
-	cc -o $@ $^ -lm -lstdc++ 
+	cc -o $@ $^ -lpthread -lm -lstdc++ 
 
 .cc.o:
 	cc -c $^ -std=gnu++11 -Wall -O2 -I $(FUNCDIR) -I $(GENDIR)

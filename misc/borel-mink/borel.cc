@@ -68,7 +68,7 @@ COMPLEX riesz_mink(COMPLEX z, int level)
 
 		acc += krn * measure * (b-a);
 
-		printf("%d	%g	%g	%g	%g	%g\n", i, y, measure, quest, real(acc), imag(acc));
+		// printf("%d	%g	%g	%g	%g	%g\n", i, y, measure, quest, real(acc), imag(acc));
 	}
 
 	// Normalize
