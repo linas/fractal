@@ -11,7 +11,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "stern.h"
+#include "question.h"
 
 
 int main(int argc, char *argv[])
@@ -36,12 +36,12 @@ int main(int argc, char *argv[])
 	double norm = 1.0 / (double)(1<<level);
 	for (int i=0; i< (1<<level); i++)
 	{
-		stern_brocot_tree(i, level, p, q);
-		stern_brocot_tree(i+1, level, pm, qm);
+		stern_brocot_tree128(i, level, &p, &q);
+		stern_brocot_tree128(i+1, level, &pm, &qm);
 		double x = i * norm;
 		double a = ((double) p) / (double) q;
 		double b = ((double) pm) / (double) qm;
-		stern_brocot_tree(2*i+1, level+1, pmid, qmid);
+		stern_brocot_tree128(2*i+1, level+1, &pmid, &qmid);
 		double y = ((double) pmid) / (double) qmid;
 		// unsigned long det = pm * q - p * qm;
 		double delta = norm * q * qm;

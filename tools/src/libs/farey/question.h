@@ -1,6 +1,5 @@
-
 /*
- * FUNCTION:
+ * FILE:
  * question.h
  *
  * Minkowski question mark function
@@ -52,6 +51,14 @@ long double question_inverse (long double x);
  */
 void stern_brocot_tree(unsigned long N, int level,
                        unsigned long *p, unsigned long *q);
+
+/** Same as above, but 128 bit */
+void stern_brocot_tree128(unsigned __int128 N, int level,
+                          unsigned __int128 *p, unsigned __int128 *q);
+
+/** print a 128-bit val; since glibc does not support it. */
+int pr128(unsigned __int128);
+
 #ifdef   __cplusplus
 };
 #endif

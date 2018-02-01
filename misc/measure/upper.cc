@@ -11,7 +11,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "stern.h"
+#include "question.h"
 
 int maxlev = 0;
 
@@ -35,8 +35,8 @@ double upper_bound(int lowlev, int uplev, int i)
 		int j = i >> (uplev-ill);
 		int k = j;
 
-		stern_brocot_tree(k, level, p, q);
-		stern_brocot_tree(k+1, level, pm, qm);
+		stern_brocot_tree128(k, level, p, q);
+		stern_brocot_tree128(k+1, level, pm, qm);
 		double delta = norm * q * qm / grow;
 
 		if (bound < delta)
@@ -70,8 +70,8 @@ int main(int argc, char *argv[])
 
 	for (int i=0; i< (1<<uplev); i++)
 	{
-		stern_brocot_tree(i, uplev, p, q);
-		stern_brocot_tree(i+1, uplev, pm, qm);
+		stern_brocot_tree128(i, uplev, p, q);
+		stern_brocot_tree128(i+1, uplev, pm, qm);
 		double delta = norm * q * qm / grow;
 
 		double y = ((double) p) / (double) q;

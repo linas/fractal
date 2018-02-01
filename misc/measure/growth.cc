@@ -9,7 +9,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "stern.h"
+#include "question.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 
 		// Interesting: p on a given row is q from previous row
 		// i.e. p at level == q at level-2
-		stern_brocot_tree(numerator, level, p, q);
-		stern_brocot_tree(numerator+1, level, pm, qm);
+		stern_brocot_tree128(numerator, level, p, q);
+		stern_brocot_tree128(numerator+1, level, pm, qm);
 #if 0
 		// a and b both converge to (2 - golden mean)
 		double a = ((double) p) / (double) q;

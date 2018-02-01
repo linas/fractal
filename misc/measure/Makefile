@@ -6,15 +6,15 @@ LIB = $(TOP)/lib
 
 all: measure growth bound upper box
 
-measure: measure.o stern.o
-growth: growth.o stern.o
-bound: bound.o stern.o
-upper: upper.o stern.o
-box: box.o stern.o
+measure: measure.o
+growth: growth.o
+bound: bound.o
+upper: upper.o
+box: box.o
 
 
 .o:
-	cc -o $@ $^ -lm -lstdc++
+	cc -o $@ $^ -L $(LIB) -lfunc -lm -lstdc++
 
-.cc.o: stern.h
-	cc -c $^  -Wall -O2 
+.cc.o:
+	cc -c $^  -Wall -O2 -I $(INC)

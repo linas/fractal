@@ -11,7 +11,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "stern.h"
+#include "question.h"
 
 void print_levs(int lev, int i)
 {
@@ -42,8 +42,8 @@ void print_levs(int lev, int i)
 		if (hi_end < y) { k = j+1; printf ("duuude up\n"); exit(1); }
 #endif
 
-		stern_brocot_tree(k, level, p, q);
-		stern_brocot_tree(k+1, level, pm, qm);
+		stern_brocot_tree128(k, level, p, q);
+		stern_brocot_tree128(k+1, level, pm, qm);
 		double delta = norm * q * qm;
 		delta /= grow;
 
@@ -65,13 +65,13 @@ int main(int argc, char *argv[])
 
 	for (int i=0; i< (1<<lev); i++)
 	{
-		stern_brocot_tree(i, lev, pmid, qmid);
+		stern_brocot_tree128(i, lev, pmid, qmid);
 		double y = ((double) pmid) / (double) qmid;
 		printf("%d\t%g\t", i, y);
 		print_levs(lev, i);
 		printf("\n");
 
-		stern_brocot_tree(i+1, lev, pmid, qmid);
+		stern_brocot_tree128(i+1, lev, pmid, qmid);
 		y = ((double) pmid) / (double) qmid;
 		printf("%d\t%g\t", i+1, y);
 		print_levs(lev, i);
