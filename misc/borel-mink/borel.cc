@@ -7,6 +7,7 @@
  * Linas Vepstas February 2018
  */
 
+#include <complex.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,10 +20,9 @@
  * The  Riesz–Herglotz transform on the minkowski measure.
  * `level` is the iteration level to recurse to.
  */
-COMPLEX riesz_mink(COMPLEX z, in level)
+COMPLEX riesz_mink(COMPLEX z, int level)
 {
 	unsigned __int128 p, q, pm, qm, pmid, qmid;
-	double sum = 0.0;
 
 	// Golden ratio
 	double phi = 0.5 * (1.0 + sqrt(5.0));
@@ -31,6 +31,7 @@ COMPLEX riesz_mink(COMPLEX z, in level)
 	double grow = pow(0.5 * phi * phi, level) * 0.2 * phi * phi * phi;
 
 	COMPLEX acc = 0.0;
+	double quest = 0.0;
 
 	double norm = 1.0 / (double)(1<<level);
 	for (int i=0; i< (1<<level); i++)
@@ -47,11 +48,14 @@ COMPLEX riesz_mink(COMPLEX z, in level)
 		double y = ((double) pmid) / (double) qmid;
 
 		// unsigned long det = pm * q - p * qm;
-		double delta = norm * q * qm;
-		delta /= grow;
 
-		sum += (b-a)* delta;
-		// printf("%d	%g	%g	%g\n", i, y, delta, sum);
+		// measure: the value of the measure at the midpoint.
+		double measure = norm * q * qm;
+		measure /= grow;
+
+		// The integral of the masure: should be the question mark.
+		// up to a scale factor
+		quest += (b-a)* measure;
 
 		// theta ranges -pi to pi
 		double theta = (2.0*y - 1.0) * M_PI;
@@ -61,13 +65,17 @@ COMPLEX riesz_mink(COMPLEX z, in level)
 		// The kernel
 		COMPLEX krn = (eit + z) / (eit - z);
 
-		acc += krn * delta * (b-a);
+		acc += krn * measure * (b-a);
+
+		printf("%d	%g	%g	%g	%g	%g\n", i, y, measure, quest, real(acc), imag(acc));
 	}
 
 	// Normalize
-	acc /= sum;
+	acc /= quest;
 
 	acc /= 2.0 * M_PI;
+
+	return acc;
 }
 
 int main(int argc, char *argv[])
@@ -81,7 +89,8 @@ int main(int argc, char *argv[])
 	int level = atoi(argv[1]);
 
 	COMPLEX z = 0.0;
-	COMPLEX g = reisz_mink(z, level0:
+	COMPLEX g = riesz_mink(z, level);
+	g *= 2.0*M_PI;
 
-	printf("its %g + i%g\n", real(g), imag(g));
+	printf("# its %g + i%g\n", real(g), imag(g));
 }
