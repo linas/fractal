@@ -13,7 +13,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "question.h"
+
+#ifndef DEBUG
 #include "brat.h"
+#endif
 
 // Goddamnd fucked up C++ complex numbers
 #define COMPLEX std::complex<double>
@@ -40,6 +43,7 @@ COMPLEX riesz_mink_nocache(COMPLEX z, int level)
 	double norm = 1.0 / (double)(1<<level);
 	for (int i=0; i< (1<<level); i++)
 	{
+		double x = ((double) i + 0.5) * norm;
 		stern_brocot_tree128(i, level, &p, &q);
 		stern_brocot_tree128(i+1, level, &pm, &qm);
 
@@ -56,11 +60,12 @@ COMPLEX riesz_mink_nocache(COMPLEX z, int level)
 		// measure: the value of the measure at the midpoint.
 		double measure = norm * q * qm;
 		measure /= grow;
-		measure *= (b-a);
 
 		// The integral of the masure: should be the question mark.
 		// up to a scale factor
-		quest += measure;
+		quest += measure * (b-a);
+
+		// You stupid plick: measure*(b-a) == const
 
 		// theta ranges -pi to pi
 		double theta = (2.0*y - 1.0) * M_PI;
@@ -70,9 +75,9 @@ COMPLEX riesz_mink_nocache(COMPLEX z, int level)
 		// The kernel
 		COMPLEX krn = (eit + z) / (eit - z);
 
-		acc += krn * measure;
+		acc += krn * measure * (b-a);
 
-		// printf("%d	%g	%g	%g	%g	%g\n", i, y, measure, quest, real(acc), imag(acc));
+		printf("%d	%g	%g	%g	%g	%g	%g\n", i, x, y, measure, quest, real(acc), imag(acc));
 	}
 
 	// Normalize
@@ -108,8 +113,8 @@ COMPLEX riesz_mink(COMPLEX z, int level)
 		// Growth rate
 		double grow = pow(0.5 * phi * phi, level) * 0.2 * phi * phi * phi;
 
-		double* midpoint = (double*) malloc(npts*sizeof(double));
-		double* measure = (double*) malloc(npts*sizeof(double));
+		midpoint = (double*) malloc(npts*sizeof(double));
+		measure = (double*) malloc(npts*sizeof(double));
 		double norm = 1.0 / (double) npts;
 		double quest = 0.0;
 		for (int i=0; i<npts; i++)
@@ -128,7 +133,7 @@ COMPLEX riesz_mink(COMPLEX z, int level)
 			// measure: the value of the measure at the midpoint.
 			double meas = norm * q * qm;
 			meas /= grow;
-			meas *= (b-a);
+			// meas *= (b-a);
 
 			// The integral of the masure: should be the question mark.
 			// up to a scale factor
@@ -142,17 +147,22 @@ COMPLEX riesz_mink(COMPLEX z, int level)
 		{
 			measure[i] /= quest;
 		}
+
+		printf("Done with init\n");
 		init = true;
 		}
 		pthread_mutex_unlock(&mutex);
 	}
 
 	COMPLEX acc = 0.0;
+	double norm = 1.0 / (double) npts;
 	for (int i=0; i< (1<<level); i++)
 	{
-		double y = midpoint[i];
+		double x = ((double) i + 0.5) * norm;
+		// double y = midpoint[i];
 		// theta ranges -pi to pi
-		double theta = (2.0*y - 1.0) * M_PI;
+		// double theta = (2.0*y - 1.0) * M_PI;
+		double theta = (2.0*x - 1.0) * M_PI;
 		COMPLEX it = I*theta;
 		COMPLEX eit = exp(it);
 
@@ -160,8 +170,6 @@ COMPLEX riesz_mink(COMPLEX z, int level)
 		COMPLEX krn = (eit + z) / (eit - z);
 
 		acc += krn * measure[i];
-
-		// printf("%d	%g	%g	%g	%g	%g\n", i, y, measure, quest, real(acc), imag(acc));
 	}
 
 	// Normalize
@@ -170,6 +178,7 @@ COMPLEX riesz_mink(COMPLEX z, int level)
 	return acc;
 }
 
+#ifndef DEBUG
 double xform(double re_q, double im_q, int itermax, double parm)
 {
 	COMPLEX z = re_q + I * im_q;
@@ -188,6 +197,7 @@ double xform(double re_q, double im_q, int itermax, double parm)
 }
 
 DECL_MAKE_HEIGHT(xform)
+#endif // DEBUG
 
 #ifdef DEBUG
 int main(int argc, char *argv[])
@@ -201,7 +211,8 @@ int main(int argc, char *argv[])
 	int level = atoi(argv[1]);
 
 	COMPLEX z = I*1.0;
-	COMPLEX g = riesz_mink(z, level);
+	z = 0.0;
+	COMPLEX g = riesz_mink_nocache(z, level);
 	g *= 2.0*M_PI;
 
 	printf("# its %g + i%g\n", real(g), imag(g));
