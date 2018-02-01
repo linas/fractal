@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "question.h"
+#include "brat.h"
 
 // Goddamnd fucked up C++ complex numbers
 #define COMPLEX std::complex<double>
@@ -78,6 +79,26 @@ COMPLEX riesz_mink(COMPLEX z, int level)
 	return acc;
 }
 
+double xform(double re_q, double im_q, int itermax, double parm)
+{
+	COMPLEX z = re_q + I * im_q;
+	COMPLEX g = riesz_mink(z, itermax);
+
+#define MAG
+#ifdef MAG
+	double rv = abs(g);
+#else
+	double rv = arg(g);
+	rv += M_PI;
+	rv /= 2.0 * M_PI;
+#endif
+
+	return rv;
+}
+
+DECL_MAKE_HEIGHT(xform)
+
+#ifdef DEBUG
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
@@ -88,9 +109,10 @@ int main(int argc, char *argv[])
 
 	int level = atoi(argv[1]);
 
-	COMPLEX z = 0.0;
+	COMPLEX z = I*1.0;
 	COMPLEX g = riesz_mink(z, level);
 	g *= 2.0*M_PI;
 
 	printf("# its %g + i%g\n", real(g), imag(g));
 }
+#endif

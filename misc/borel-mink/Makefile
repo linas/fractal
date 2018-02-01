@@ -9,7 +9,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 
 all: borel
 
-borel: borel.o $(FUNC)
+borel: borel.o $(FUNC) $(BRAT)
 
 .o:
 	cc -o $@ $^ -lm -lstdc++ 
