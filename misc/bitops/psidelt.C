@@ -45,18 +45,26 @@ static void diagonal_diagram (float *array,
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
-	double y = row;
+	double y = x_width - row;
 	for (int j=0; j<array_size; j++)
 	{
 		double x = ((double) j + 0.5) / ((double) array_size);
 		double sum = 0.0;
 		for (int m=0; m<itermax; m++)
 		{
+#define DIAG
+#ifdef DIAG
+			sum += psi_n(y, K, m) * psi_n(x, K, m);
+#endif
+// #define HESS
+#ifdef HESS
 			for (int n=0; n<itermax; n++)
 			{
-				sum += psi_n(y, K, m) * psi_n(x, K, n);
+				sum += psi_n(y, K, m) * hess(K, m, n) * psi_n(x, K, n);
 			}
+#endif
 		}
+		sum /= itermax;
  		array[j] = sum;
 	}
 }

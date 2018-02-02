@@ -179,8 +179,10 @@
 # ../../generate/abs j j
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.999.png
 
+# ../../generate/renorm berg j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > berg.png
 
-../../generate/renorm berg j 1 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > berg.png
+../../generate/renorm psidelt j 0.7 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > psidelt.png
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4

@@ -5152,7 +5152,7 @@ There is a set of Haar-like wavelets in which the transfer operator is of
  the form of a Hessenberg operator - that is, the operator becomes almost
  upper-diagonal, with only one diagonal, just below the main diagonal, that
  is non-zero.
- Explitly, the transfer operator 
+ Explicitly, the transfer operator 
 \begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
@@ -5177,7 +5177,7 @@ There is a set of Haar-like wavelets in which the transfer operator is of
 \end_layout
 
 \begin_layout Subsection
-Hessenberg basis
+Hessenberg wavelet basis
 \end_layout
 
 \begin_layout Standard
@@ -5414,38 +5414,16 @@ By construction, this has the property that
 \end_inset
 
 .
- A numerical exploration shows that the midpoints 
-\begin_inset Formula $m_{p}$
-\end_inset
+ 
+\end_layout
 
- are dense in the interval 
-\begin_inset Formula $(0,\beta/2)$
-\end_inset
-
-, and so this basis should be considered to be 
-\begin_inset Quotes eld
-\end_inset
-
-sufficiently complete
-\begin_inset Quotes erd
-\end_inset
-
- on the interval 
-\begin_inset Formula $[0,\beta/2]$
-\end_inset
-
-.
- That is, it naively seems to be a complete basis for the Hilbert space
- of square-integrable functions on 
-\begin_inset Formula $[0,\beta/2]$
-\end_inset
-
-, although without full proof, some perverse ways that this might fail can
- be imagined.
+\begin_layout Subsection
+Matrix Elements
 \end_layout
 
 \begin_layout Standard
-This basis provides the Hessenberg representation for the transfer operator.
+The above-defined basis provides the Hessenberg representation for the transfer
+ operator.
  Defining
 \begin_inset Formula 
 \begin{equation}
@@ -5656,6 +5634,121 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Completeness
+\end_layout
+
+\begin_layout Standard
+The Hessenberg basis construction gives a countable set of 
+\begin_inset Formula $\psi_{n}$
+\end_inset
+
+ that is an orthonormal basis on the unit interval: 
+\begin_inset Formula $\int_{0}^{1}\psi_{m}\left(x\right)\psi_{n}\left(x\right)dx=\delta_{mn}$
+\end_inset
+
+.
+ Are they complete? Obviously not on the unit interval, as they all vanish
+ for 
+\begin_inset Formula $\beta/2<x$
+\end_inset
+
+.
+ Are they complete on the interval 
+\begin_inset Formula $[0,\beta/2]$
+\end_inset
+
+, where they are also orothonormal: 
+\begin_inset Formula $\int_{0}^{\beta/2}\psi_{m}\left(x\right)\psi_{n}\left(x\right)dx=\delta_{mn}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Clearly, the 
+\begin_inset Formula $\psi_{n}$
+\end_inset
+
+ span some subspace; do they span the Hilbert space 
+\begin_inset Formula $L_{2}\left[0,\beta/2\right]$
+\end_inset
+
+ of square-integrable functions on the interval 
+\begin_inset Formula $[0,\beta/2]$
+\end_inset
+
+? To what degree can one legitimately write
+\begin_inset Formula 
+\[
+\delta\left(y-x\right)=\sum_{n=0}^{\infty}\psi_{n}\left(y\right)\psi_{n}\left(x\right)
+\]
+
+\end_inset
+
+as a resolution of the identity? A numerical exploration shows that the
+ midpoints 
+\begin_inset Formula $m_{p}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $(0,\beta/2)$
+\end_inset
+
+, and so this suggests that the basis should be considered to be 
+\begin_inset Quotes eld
+\end_inset
+
+sufficiently complete
+\begin_inset Quotes erd
+\end_inset
+
+ on the interval 
+\begin_inset Formula $[0,\beta/2]$
+\end_inset
+
+.
+ The distribution of the 
+\begin_inset Formula $m_{p}$
+\end_inset
+
+ follow exactly the distribution of the invariant measure.
+ Convergence is uniform to the same degree that the midpoints 
+\begin_inset Quotes eld
+\end_inset
+
+eventually
+\begin_inset Quotes erd
+\end_inset
+
+ fill in and become dense in some interval.
+\end_layout
+
+\begin_layout Standard
+The question of the completeness of states dogs some 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+ assumptions one wants to make.
+ For example, if the set of states is complete, and the resolution of the
+ identity hiolds, then one expects that the transfer operator resolves to
+ the iterated function:
+\begin_inset Formula 
+\[
+\delta\left(y-\left(\beta x\,\mod1\right)\right)=\sum_{n=0}^{\infty}\sum_{m=0}^{\infty}\psi_{n}\left(y\right)\left\langle n\left|{\cal L}_{\beta}\right|m\right\rangle \psi_{m}\left(x\right)
+\]
+
+\end_inset
+
+It is fun to verify that the world works as one expects it to work: the
+ above can be verified to hold numerically, for sums limited to a finite
+ cutoff.
 \end_layout
 
 \begin_layout Subsection
@@ -6386,10 +6479,6 @@ reference "fig:Frobenius-Perron-Eigenvector-Coe"
 wide false
 sideways false
 status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
