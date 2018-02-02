@@ -5659,7 +5659,7 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-Eigenvalues
+Numerical Eigenvalues
 \end_layout
 
 \begin_layout Standard
@@ -5672,8 +5672,8 @@ reference "fig:Hessenberg-Operator-Matrix"
 
 , one might think that the eigenvalue problem is fairly stable, numerically.
  It is not all that much.
- Numerical exploration discovers that the spectrum is a circle lying in
- the complex plane
+ Numerical exploration suggests that the spectrum is a circle lying in the
+ complex plane
 \begin_inset Foot
 status collapsed
 
@@ -5702,12 +5702,197 @@ This was confirmed with both GSL gsl_eigen_nonsymmv() and Lapack DHSEQR
 \end_inset
 
  (ignoring, that is, the leading eigenvalue of 1, which is easily found).
- Writing the eigenvalue as 
-\begin_inset Formula $\lambda=\left|\lambda\right|\exp2\pi i\phi$
+ 
+\end_layout
+
+\begin_layout Standard
+To be clear, this is a numerical exploration of the 
+\begin_inset Formula $N\times N$
 \end_inset
 
-, the numerical exploration does not inform whether the allowed values of
+ principle submatrix of 
+\begin_inset Formula $\left\langle n\left|{\cal L}_{\beta}\right|m\right\rangle $
+\end_inset
+
+.
+ The eigenvalue problem being posed is to find a vector 
+\begin_inset Formula $\overrightarrow{v}=\left(v_{k}\right)_{k=0}^{N}$
+\end_inset
+
+ that solves 
+\begin_inset Formula 
+\[
+\sum_{m=0}^{N}\left\langle n\left|{\cal L}_{\beta}\right|m\right\rangle v_{m}=\lambda v_{n}
+\]
+
+\end_inset
+
+for some constant 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ (with the set of possible 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ depending on 
+\begin_inset Formula $N$
+\end_inset
+
+, of course).
  
+\end_layout
+
+\begin_layout Standard
+There are various pitfalls in extrapolating from this to the 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ limit.
+ For the next few paragraphs, consider only some notion of a 
+\begin_inset Quotes eld
+\end_inset
+
+minimal
+\begin_inset Quotes erd
+\end_inset
+
+ extension from finite 
+\begin_inset Formula $N$
+\end_inset
+
+ to the limit.
+ That is, for each finite 
+\begin_inset Formula $N$
+\end_inset
+
+, one has a finite set of eigenvalues and eigenvectors.
+ In the limit, there may be accumulation points: points where the eigenvalues
+ accumulate to a limit point, in a standard topological sense.
+ What should that that topological space be? For finite 
+\begin_inset Formula $N$
+\end_inset
+
+, all eigenvectors are explicity summable, and thus can be taken to belong
+ to any Banach space 
+\begin_inset Formula $\ell_{p}$
+\end_inset
+
+.
+ One may as well take 
+\begin_inset Formula $p=2$
+\end_inset
+
+ the Hilbert space, and normalize the eigenvectors 
+\begin_inset Formula $\overrightarrow{v}$
+\end_inset
+
+ so that 
+\begin_inset Formula $1=\sum_{m=0}^{N}v_{m}^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For finite 
+\begin_inset Formula $N$
+\end_inset
+
+, it appears that most eigenvalues 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+near
+\begin_inset Quotes erd
+\end_inset
+
+ the circle 
+\begin_inset Formula $\left|\lambda\right|=1/\beta$
+\end_inset
+
+, and that they seem to be very uniformly distributed around this circle.
+ The numerical results indicate that in hte limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+, that 
+\begin_inset Quotes eld
+\end_inset
+
+most
+\begin_inset Quotes erd
+\end_inset
+
+ becomes 
+\begin_inset Quotes eld
+\end_inset
+
+almost all
+\begin_inset Quotes erd
+\end_inset
+
+ in the usual sense.
+ Similarly, 
+\begin_inset Quotes eld
+\end_inset
+
+near
+\begin_inset Quotes erd
+\end_inset
+
+ appears to mean that for any given 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ at finite 
+\begin_inset Formula $N$
+\end_inset
+
+ , one has that 
+\begin_inset Formula $\left|\lambda\right|-1/\beta\sim\mathcal{O}\left(1/N\right)$
+\end_inset
+
+.
+ As to uniformity, it seems that the spacing between nearest neighbors is
+ also 
+\begin_inset Formula $\mathcal{O}\left(1/N\right)$
+\end_inset
+
+, and that there are no 
+\begin_inset Quotes eld
+\end_inset
+
+premature
+\begin_inset Quotes erd
+\end_inset
+
+ accumulation points: egenvalues never get any closer than 
+\begin_inset Formula $\mathcal{O}\left(1/N\right)$
+\end_inset
+
+, either.
+\end_layout
+
+\begin_layout Standard
+Thus, the minimal closure, the minimal extrapolation to limit points strongly
+ suggests that the limit points really do lie, uniformly distributed, on
+ the circle 
+\begin_inset Formula $\left|\lambda\right|=1/\beta$
+\end_inset
+
+.
+ Then, writing a given accumulation point as 
+\begin_inset Formula $\lambda=\beta^{-1}\exp2\pi i\phi$
+\end_inset
+
+, what the numerics do not reveal, or, at least, do not easily reveal, is
+ whether the allowed values of 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -5715,18 +5900,13 @@ This was confirmed with both GSL gsl_eigen_nonsymmv() and Lapack DHSEQR
  The numerical exploration does suggest that the eigenvalues are dense on
  the circle.
  Certainly it is the case Hessenberg basis is countable, an so one would
- expect the eigenvalue spectrum obtained in this way to be countable as
- well.
- The question then arises whether the spectrum can be extended further.
- 
+ expect the eigenvalue spectrum obtained in this way to be at least countable,
+ as well.
+ Whether it is also uncountable seems unknownble in this naive sense.
 \end_layout
 
 \begin_layout Standard
-The question of the allowed values of 
-\begin_inset Formula $\phi$
-\end_inset
-
- is interesting because if only rational 
+This question is interesting because if only rational 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -5736,7 +5916,7 @@ The question of the allowed values of
 \begin_inset Formula $\phi$
 \end_inset
 
- are allowed, then the decaying eigenfunctions are chaotic.
+ are allowed, then the decaying eigenfunctions are more throughly chaotic.
 \end_layout
 
 \begin_layout Standard
