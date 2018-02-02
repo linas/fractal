@@ -6642,11 +6642,28 @@ key "Saff12,Tomeo11,Escri11"
 \end_inset
 
 .
- 
+ That is, one has the orthogonality relation
+\begin_inset Formula 
+\[
+\delta_{mn}=\int_{D}p_{m}\left(x-iy\right)p_{n}\left(x+iy\right)dxdy
+\]
+
+\end_inset
+
+for some domain 
+\begin_inset Formula $D\subset\mathbb{C}$
+\end_inset
+
+ of the complex plane.
 \end_layout
 
 \begin_layout Standard
-Another way to interpret this is to fix a certain, specific value of 
+The matrix operator 
+\begin_inset Formula $A$
+\end_inset
+
+ can be interpreted as an operator with a continuous spectrum.
+ To do this, fix a certain, specific value of 
 \begin_inset Formula $z=c$
 \end_inset
 
@@ -6655,25 +6672,96 @@ Another way to interpret this is to fix a certain, specific value of
 \end_inset
 
  is a vector having the property that 
-\begin_inset Formula $\mathcal{A}^{T}\overrightarrow{p}=z\overrightarrow{p}$
+\begin_inset Formula $A^{T}\overrightarrow{p}=z\overrightarrow{p}$
 \end_inset
 
- – that is, it is a left-eigenvector of 
-\begin_inset Formula $\mathcal{A}=\left[A_{ij}\right]$
+.
+ That is, 
+\begin_inset Formula $\overrightarrow{p}$
 \end_inset
 
- ant 
-\begin_inset Formula $\mathcal{A}^{T}$
+ is a left-eigenvector of 
+\begin_inset Formula $A$
 \end_inset
 
- denoting the transpose.
- Clearly, the spectrum is continuous.
- Based on numeric exploration, it appears that it is the unit disk on the
- complex plane.
+; equivalently, a right-egenvector of its transpose 
+\begin_inset Formula $A^{T}$
+\end_inset
+
+.
+ Clearly, the spectrum is continuous on the domain 
+\begin_inset Formula $D$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The question here is whether it is the case that
+The matrix operator 
+\begin_inset Formula $A$
+\end_inset
+
+ can also be interpreseted as a right-shift on Bergman space.
+ To do this, define
+\begin_inset Formula 
+\[
+\mathcal{A}\left(w,z\right)=\sum_{k=0}^{\infty}\sum_{n=0}^{\infty}p_{k}\left(w\right)A_{kn}p_{n}\left(\overline{z}\right)
+\]
+
+\end_inset
+
+and the conjugate-transpose as 
+\begin_inset Formula 
+\[
+\mathcal{A}^{\dagger}\left(z,w\right)=\sum_{k}\sum_{n}p_{n}\left(z\right)A_{kn}p_{k}\left(\overline{w}\right)
+\]
+
+\end_inset
+
+Then, given some holomorphic function 
+\begin_inset Formula $f\left(w\right)=\sum_{n}a_{n}p_{n}\left(w\right)$
+\end_inset
+
+, one has that
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{A}^{\dagger}f\right]\left(z\right)= & \int\mathcal{A}^{\dagger}\left(z,w\right)f\left(w\right)dw\\
+= & \sum_{k}\sum_{n}p_{n}\left(z\right)A_{kn}a_{k}\\
+= & z\sum_{k}a_{k}p_{n}\left(z\right)\\
+= & zf\left(z\right)
+\end{align*}
+
+\end_inset
+
+That is, given a sequence 
+\begin_inset Formula $\left(a_{0},a_{1},a_{2},\cdots\right)$
+\end_inset
+
+, the Hessenberg operator acts as a right-shift, mapping it to the sequence
+ 
+\begin_inset Formula $\left(0,a_{0},a_{1},\cdots\right)$
+\end_inset
+
+.
+ It can be called the Bergman shift operator.
+\end_layout
+
+\begin_layout Subsection
+Beta Bergman Shift
+\end_layout
+
+\begin_layout Standard
+The primary question for this section is whether the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform transfer operator, in the Hessenberg basis, can be considered
+ to be a Bergman shift.
+\end_layout
+
+\begin_layout Standard
+To obtain the orthogonal polynomial basis, one must satisfy the constraint
+ that
 \family roman
 \series medium
 \shape up
@@ -6836,8 +6924,15 @@ height "1pt"
 
 \begin_layout Standard
 Can one find a domain on the complex plane that would have such Bergman
- polynomials? The above references provide a technique for doing so, provided
- that the matrix is asymptotically Toeplitz.
+ polynomials? The references
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saff12,Escri11"
+
+\end_inset
+
+ provide a technique for doing so, provided that the matrix is asymptotically
+ Toeplitz.
  That is, if the diagonals of 
 \begin_inset Formula $A_{ij}$
 \end_inset
@@ -6858,10 +6953,31 @@ reference "fig:Subdiagonal-Entries"
 
 \end_inset
 
- indicates that this limit does not exist, in the strict sense: the bouncing
- seems to continue indefinitely.
+ indicates that this limit does not exist, in the strict sense: the values
+ bounce away from an obvious limit point indefinitely.
  Exactly what this implies is unclear.
- 
+ Perhaps it is possible to extend the results of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Saff12,Escri11"
+
+\end_inset
+
+ to matrixes that arewhere the diagonals merely have an accumulation point,
+ as opposed to a well-defined limit? 
+\end_layout
+
+\begin_layout Standard
+Based on numeric exploration, it appears that the domain is the unit disk.
+ That is, 
+\begin_inset Formula $A^{T}\overrightarrow{p}=z\overrightarrow{p}$
+\end_inset
+
+ holds for 
+\begin_inset Formula $\left|z\right|\le1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -6932,7 +7048,7 @@ There are two alternatives to solving this; either
 \end_inset
 
 .
- Since this is a reproducing kernl Hilbert space, then if 
+ Since this is a reproducing kernel Hilbert space, then if 
 \begin_inset Formula $z=\lambda$
 \end_inset
 
