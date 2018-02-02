@@ -1,25 +1,24 @@
 /*
- * matrix.C
+ * psidelt.C
+ * Verify some form of completeness.
  *
- * Visualization of the matrix elements in the Hessenberg basis.
- * Jan 2018
+ * Ferbruary 2018
+ *
  */
-
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 
 #include "brat.h"
 
-/*-------------------------------------------------------------------*/
-/*
- */
-#define NOMAIN 1
+#define MAXN 4000
+#define NOMAIN
 #include "psi.c"
 #include "psibig.c"
 
-static void matrix_diagram (float *array,
+static void diagonal_diagram (float *array,
                              int array_size,
                              double x_center,
                              double x_width,
@@ -46,16 +45,20 @@ static void matrix_diagram (float *array,
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
-	int i = row;
-	i = array_size - i;
-	// if (0 == i%20) printf("working i=%d K=%g\n", i, K);
-
-	int js = i-1;
-	if (js < 0) js = 0;
-	for (int j=js; j<array_size; j++)
+	double y = row;
+	for (int j=0; j<array_size; j++)
 	{
-		array[j] = hess(K, i, j);
+		double x = ((double) j + 0.5) / ((double) array_size);
+		double sum = 0.0;
+		for (int m=0; m<itermax; m++)
+		{
+			for (int n=0; n<itermax; n++)
+			{
+				sum += psi_n(y, K, m) * psi_n(x, K, n);
+			}
+		}
+ 		array[j] = sum;
 	}
 }
 
-DECL_MAKE_BIFUR(matrix_diagram)
+DECL_MAKE_BIFUR(diagonal_diagram)
