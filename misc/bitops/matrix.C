@@ -1,7 +1,7 @@
 /*
  * matrix.C
  *
- * Matrix elements visualization
+ * Visualization of the matrix elements in the Hessenberg basis.
  * Jan 2018
  */
 
@@ -30,9 +30,9 @@ static void matrix_diagram (float *array,
 	if (not init)
 	{
 		init = true;
-		// find_midpoints(K);
+		// find_midpoints(K, MAXN);
 		big_midpoints(K, 400, midpoints, MAXN);
-		sequence_midpoints(K);
+		sequence_midpoints(K, MAXN);
 		printf("working K=%g\n", K);
 	}
 

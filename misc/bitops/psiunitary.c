@@ -69,6 +69,6 @@ int main (int argc, char* argv[])
 
 	// find_midpoints(K);
 	big_midpoints(K, 400, midpoints, MAXN);
-	sequence_midpoints(K);
+	sequence_midpoints(K, MAXN);
 	chk(K, dim);
 }

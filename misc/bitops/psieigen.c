@@ -214,7 +214,7 @@ int main(int argc, char* argv[])
 
 	// find_midpoints(K);
 	big_midpoints(K, 4000, midpoints, MAXN);
-	sequence_midpoints(K);
-	verify_ortho();
+	sequence_midpoints(K, MAXN);
+	verify_ortho(MAXN);
 	eigen(K, dim);
 }

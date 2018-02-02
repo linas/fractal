@@ -63,9 +63,9 @@ int main (int argc, char* argv[])
 	double K = atof(argv[1]);
 	int dim = atoi(argv[2]);
 
-	// find_midpoints(K);
+	// find_midpoints(K, MAXN);
 	big_midpoints(K, 400, midpoints, MAXN);
-	sequence_midpoints(K);
+	sequence_midpoints(K, MAXN);
 
 	swag(K,dim);
 }

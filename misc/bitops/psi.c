@@ -46,13 +46,15 @@ double part(double x, double K, double (*fun)(double, double), int which)
 	return elf;
 }
 
+#ifndef MAXN
 #define MAXN 4000
+#endif
 double midpoints[MAXN];
 int mid_sequence[MAXN];
 int lower_sequence[MAXN];
 int upper_sequence[MAXN];
 
-void find_midpoints(double K)
+void find_midpoints(double K, int maxn)
 {
 	/* First, find the midpoints; the numbering here is off-by-one:
 	 * the "first" midpoint is in midpoints[2].
@@ -61,7 +63,7 @@ void find_midpoints(double K)
 	midpoints[1] = K;
 
 	double m = K;
-	for (int i=2; i< MAXN; i++)
+	for (int i=2; i< maxn; i++)
 	{
 		if (m <= 0.5) m = 2.0*K*m;
 		else m = 2.0*K*m - K;
@@ -69,17 +71,17 @@ void find_midpoints(double K)
 	}
 }
 
-void sequence_midpoints(double K)
+void sequence_midpoints(double K, int maxn)
 {
 	/* Now sort them in sequential order. Use a super-stupid sort algo. */
 	mid_sequence[0] = 0;
 
-	for (int j=1; j< MAXN; j++)
+	for (int j=1; j< maxn; j++)
 	{
 		double mid = midpoints[mid_sequence[j-1]];
 		double lub = K;
-		int idx = MAXN;
-		for (int i=1; i< MAXN; i++)
+		int idx = maxn;
+		for (int i=1; i< maxn; i++)
 		{
 			if (mid < midpoints[i] && midpoints[i] < lub) {
 				lub = midpoints[i]; idx = i;
@@ -97,7 +99,7 @@ void sequence_midpoints(double K)
 	lower_sequence[1] = 0;
 	upper_sequence[0] = 1;
 	upper_sequence[1] = 1;
-	for (int j=2; j< MAXN; j++)
+	for (int j=2; j< maxn; j++)
 	{
 		double low = 0.0;
 		double hi = K;
@@ -178,11 +180,11 @@ double psi_prod(int m, int n)
 }
 
 /* Verify orthogonality */
-void verify_ortho(void)
+void verify_ortho(int maxn)
 {
-	for (int j=0; j< MAXN-1; j++)
+	for (int j=0; j< maxn-1; j++)
 	{
-		for (int i=0; i< MAXN-1; i++)
+		for (int i=0; i< maxn-1; i++)
 		{
 			double d = psi_prod(i, j);
 			if (i != j && 0.0 < d) printf("Error: off-diag %d %d\n", i, j);
@@ -383,9 +385,9 @@ rush:
 }
 
 /* Verify correctness of matrix elements by brute force integration */
-void verify_melts(double K)
+void verify_melts(double K, int maxn)
 {
-	int mxi = MAXN-1;
+	int mxi = maxn-1;
 	for (int i=0; i< mxi; i++)
 	{
 		int js = i-1;
@@ -404,9 +406,9 @@ void verify_melts(double K)
 	printf("Done verifying matrix elements\n");
 }
 
-void show_melts(double K)
+void show_melts(double K, int maxn)
 {
-	int mxi = MAXN-1;
+	int mxi = maxn-1;
 	mxi = 5;
 // hess(K, 1, 4);
 // printf("expect %g\n", hess_brute(K, 1, 4));
@@ -468,10 +470,10 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-	find_midpoints(K);
-	sequence_midpoints(K);
-	verify_ortho();
-	verify_melts(K);
-	show_melts(K);
+	find_midpoints(K, MAXN);
+	sequence_midpoints(K, MAXN);
+	verify_ortho(MAXN);
+	verify_melts(K, MAXN);
+	show_melts(K, MAXN);
 }
 #endif

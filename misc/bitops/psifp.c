@@ -100,9 +100,9 @@ int main(int argc, char* argv[])
 	printf("#\n# K=%g\n#\n", K);
 	printf("#\n# eigenvector componentns\n#\n");
 
-	// find_midpoints(K);
+	// find_midpoints(K, MAXN);
 	big_midpoints(K, 400, midpoints, MAXN);
-	sequence_midpoints(K);
+	sequence_midpoints(K, MAXN);
 
 #define NPTS 201
 	double* fpvec = (double*) malloc(NPTS * sizeof(double));
@@ -115,4 +115,3 @@ int main(int argc, char* argv[])
 	}
 }
 #endif
-

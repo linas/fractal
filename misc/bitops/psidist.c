@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAXN 400000
 #define NOMAIN
 #include "psi.c"
 #include "psibig.c"
