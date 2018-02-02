@@ -46,11 +46,11 @@ psiblas.o: psiblas.c psi.c psibig.c
 nilpot.o: nilpot.c
 bitshow.o: bitshow.c $(FUNCDIR)/bitops.h
 complex.o: complex.c
-psiunitary.o: psiunitary.c
-bergman.o: bergman.C
-psifp.o: psifp.c
-midpo.o: midpo.c
-psidist.o: psidist.c
+psiunitary.o: psiunitary.c psi.c psibig.c psifp.c
+bergman.o: bergman.C psi.c psibig.c psifp.c
+psifp.o: psifp.c psi.c psibig.c
+midpo.o: midpo.c psi.c psibig.c
+psidist.o: psidist.c psi.c psibig.c
 
 
 bernie: bernie.o $(BRAT) $(FUNC)

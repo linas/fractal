@@ -40,11 +40,28 @@ int main(int argc, char* argv[])
 		int n = m;
 		s[n] += 1.0;
 	}
-	for (int i=0; i< nbins; i++) s[i] /= MAXN;
+	for (int i=0; i< nbins; i++) s[i] *= nbins/((double) MAXN);
+
+	// and again, high precision
+	big_midpoints(K, 13200, midpoints, MAXN);
+
+	double t[nbins];
+	for (int i=0; i< nbins; i++) t[i] = 0;
+
+	for (int i=0; i<MAXN; i++)
+	{
+		double m = midpoints[i];
+		// m /= K;
+		m *= nbins;
+		m = floor(m);
+		int n = m;
+		t[n] += 1.0;
+	}
+	for (int i=0; i< nbins; i++) t[i] *= nbins/((double) MAXN);
 
 	for (int i=0; i< nbins; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) nbins);
-		printf("%d	%g	%g\n", i, x, s[i]);
+		printf("%d	%g	%g	%g\n", i, x, s[i], t[i]);
 	}
 }
