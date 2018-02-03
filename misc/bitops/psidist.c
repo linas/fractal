@@ -1,9 +1,10 @@
 /*
  * psidist.c
- * verify the distribution of the midpoints.
+ * Verify the distribution of the midpoints.
+ * Generate the mid-points, and bin them. The result is as it should
+ * be -- its nothing other than the staionary measure.
  *
- * Ferbruary 2018
- *
+ * February 2018
  */
 #include <math.h>
 #include <stdbool.h>

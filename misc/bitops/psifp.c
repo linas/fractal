@@ -1,5 +1,5 @@
 /*
- * psifpy.c
+ * psifp.c
  *
  * Return the Ruelle-Frobenius-Perron eigenvector
  * i.e. the one with eigenvalue=1

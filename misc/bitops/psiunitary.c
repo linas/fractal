@@ -3,6 +3,8 @@
  *
  * Try to see if the downshift operator really is unitary (or not)
  * I mean given the eigenvalues...
+ * Do this by subtracting the FP eigenvector and then scaling by 2K
+ * Answer: it does not seem to be unitary.
  *
  * Linas Vepstas January 2018
  */
