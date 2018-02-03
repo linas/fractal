@@ -32,28 +32,80 @@ void bergman_vect(double Kay, complex z, complex* poly, int maxn)
 	}
 }
 
-/** Just like above, but without the z values */
+/** Just like above, but without the z values.
+ *  Returns the matrix entry.
+ *  Computed recusrively.
+ */
 double bergman_oper(double Kay, int n, int j)
 {
 	if (0 == n && 0 == j) return 1.0;
 	if (n < j) return 0.0;
 	if (j < 0) return 0.0;
 
-	double acc = bergman_oper(Kay, n, j-1);
+	double acc = bergman_oper(Kay, n-1, j-1);
+	for (int k=0; k<n; k++)
+	{
+		acc -= hess(Kay, k, n-1) * bergman_oper(Kay, k, j);
+	}
+	acc /= hess(Kay, n, n-1);
 	
 	return acc;
 }
 
-complex eval_poly(complex z, complex* poly, int maxn)
+/** Evaluate polynomial with coefficeints given in poly,
+ * up to degree */
+complex eval_poly(complex z, complex* poly, int degree)
 {
 	complex zn = 1;
 	complex acc = 0.0;
-	for (int n=0; n<maxn; n++)
+	for (int n=0; n<=degree; n++)
 	{
 		acc += zn * poly[n];
 		zn *= z;
 	}
 	return acc;
+}
+
+/** Validate the two polynomial formulas one against the other.
+ * They are bothe the same formula, we are only checking for
+ * programming bugs.
+ */
+void cross_check_code(double Kay, int maxn, complex z)
+{
+	complex poly[maxn];
+	bergman_vect(Kay, z, poly, maxn);
+
+	for (int n=0; n<maxn; n++)
+	{
+		complex coef[n+1];
+		for (int k=0; k<=n; k++)
+		{
+			coef[k] = bergman_oper(Kay, n, k);
+		}
+		complex pn = eval_poly(z, coef, n+1);
+
+		complex diff = poly[n] - pn;
+		double adiff = cabs(diff);
+		if (1.0e-12 < adiff)
+		{
+			printf("Error at n=%d, z=%g + I %g diff=%g\n",
+			        n, creal(z), cimag(z), adiff);
+			printf("pzn = %g	%g\n", creal(pn), cimag(pn));
+			printf("berg = %g	%g\n", creal(poly[n]), cimag(poly[n]));
+		}
+	}
+}
+
+void cross_check_poly(double Kay, int maxn)
+{
+	complex z;
+	int ixmax = 10;
+	for (int ix = 0; ix< ixmax; ix++)
+	{
+		double x = ((double) ix + 0.5) / ((double) ixmax);
+		z = x;
+		cross_check_code(Kay, maxn, z);
+	}
 }
 
 int main(int argc, char* argv[])
@@ -70,16 +122,5 @@ int main(int argc, char* argv[])
 	// find_midpoints(K);
 	big_midpoints(K, 400, midpoints, MAXN);
 	sequence_midpoints(K, MAXN);
-
-	complex poly[MAXN];
-	complex z = 1.0 / (2.0 * 0.8);
-	z = 1.0;
-	z = 0.5;
-	z = 1.0 / (2.0 * K);
-	bergman_vect(K, z, poly, MAXN);
-
-	for (int i=0; i<maxn; i++)
-	{
-		printf("%d	%g	%g\n", i, creal(poly[i]), cimag(poly[i]));
-	}
+	cross_check_poly(K, maxn);
 }
