@@ -6721,7 +6721,7 @@ The matrix operator
 \begin_inset Formula $A$
 \end_inset
 
-; equivalently, a right-egenvector of its transpose 
+; equivalently, a right-eigenvector of its transpose 
 \begin_inset Formula $A^{T}$
 \end_inset
 
@@ -7164,6 +7164,130 @@ reference "eq:hessen-matrix-elts"
 \end_inset
 
 , and is undefined (infinite) outside of it.
+\end_layout
+
+\begin_layout Subsection
+Left Inverse
+\end_layout
+
+\begin_layout Standard
+Suppose one is given a sequence of polyniomials 
+\begin_inset Formula $\left(p_{n}\left(z\right)\right)_{n=0}^{\infty}$
+\end_inset
+
+, such that the order of 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ is 
+\begin_inset Formula $n.$
+\end_inset
+
+ Then each individial polynomial can be expanded as 
+\begin_inset Formula 
+\[
+p_{n}\left(z\right)=\sum_{k=0}^{n}p_{nk}z^{k}
+\]
+
+\end_inset
+
+This defines an operator matrix 
+\begin_inset Formula $\mathcal{P}=\left[p_{nk}\right]$
+\end_inset
+
+ provided that the coefficients are extended so that 
+\begin_inset Formula $p_{nk}=0$
+\end_inset
+
+ whenver 
+\begin_inset Formula $k>n$
+\end_inset
+
+.
+ This matrix is manifestly lower-triangular.
+ Writing vectors 
+\begin_inset Formula $\overrightarrow{z}=\left(z^{n}\right)_{n=0}^{\infty}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overrightarrow{p}=\left(p_{n}\left(z\right)\right)_{n=0}^{\infty}$
+\end_inset
+
+ as before, the above is just the matrix equation 
+\begin_inset Formula 
+\[
+\overrightarrow{p}=\mathcal{P}\overrightarrow{z}
+\]
+
+\end_inset
+
+Combining this with the Hessenberg operator matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ from which the polynomials were constructed, the earlier equation 
+\begin_inset Formula $A^{T}\overrightarrow{p}=z\overrightarrow{p}$
+\end_inset
+
+ becomes
+\begin_inset Formula 
+\[
+A^{T}\mathcal{P}\overrightarrow{z}=z\mathcal{P}\overrightarrow{z}=\mathcal{P}z\overrightarrow{z}=\mathcal{PK}\overrightarrow{z}
+\]
+
+\end_inset
+
+In the above, the 
+\begin_inset Formula $z$
+\end_inset
+
+ without the vector notation is just a scalar, and thus commutes (trivially)
+ with 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+.
+ Its eliminated by explicitly making use of the right-shift (Koopman) operator,
+ which, in this basis, is
+\begin_inset Formula 
+\[
+\mathcal{K}=\left[\begin{array}{ccccc}
+0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & \ddots\\
+0 & 0 & 0 & 0 & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is lower-triangular, it is invertible on the right, that is, the right
+ inverse 
+\begin_inset Formula $\mathcal{P}^{-1}$
+\end_inset
+
+ exists, and so one is left with 
+\begin_inset Formula 
+\[
+\mathcal{P}^{-1}A^{T}\mathcal{P}=\mathcal{K}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+write the correpsonding operator matrix as 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ with matrix 
 \end_layout
 
 \begin_layout Subsection

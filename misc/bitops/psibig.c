@@ -50,7 +50,7 @@ void big_midpoints(double K, int nbits, double* midp, int maxn)
 	mpf_mul_ui(twoK, Kay, 2);
 
 	mpf_set(ex, Kay);
-	printf("#\n# K = %lu / %lu = %20.17g = %20.17g\n#\n",
+	printf("# K = %lu / %lu = %20.17g = %20.17g\n",
 		num, deno, K, mpf_get_d(Kay));
 
 	midp[0] = 0.0;
