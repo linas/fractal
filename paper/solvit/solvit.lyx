@@ -5235,14 +5235,27 @@ Consider
 \begin_inset Formula $m_{1}=\beta^{2}-\beta/2$
 \end_inset
 
+ and 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
 .
- Using this value, construct the wavelet
+ These will anchor a series of midpoints, beginning with 
+\begin_inset Formula $m_{-1}=0$
+\end_inset
+
+.
+ Using the midpoint 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+, construct the wavelet
 \begin_inset Formula 
 \[
 \psi_{1}\left(x\right)=\begin{cases}
-\frac{1}{m_{1}}\sqrt{m_{1}+\frac{-2m_{1}^{2}}{\beta}} & \mbox{for }0\le x\le m_{1}\\
-\frac{-2}{\beta-2m_{1}}\sqrt{m_{1}+\frac{-2m_{1}^{2}}{\beta}} & \mbox{for }m_{1}<x\le\beta/2\\
-0 & \mbox{for }\beta/2<x\le1
+\frac{1}{m_{1}}\sqrt{\frac{m_{1}\left(m_{0}-m_{1}\right)}{m_{0}}} & \mbox{for }0\le x\le m_{1}\\
+\frac{-1}{m_{0}-m_{1}}\sqrt{\frac{m_{1}\left(m_{0}-m_{1}\right)}{m_{0}}} & \mbox{for }m_{1}<x\le m_{0}\\
+0 & \mbox{for }m_{0}<x\le1
 \end{cases}
 \]
 
@@ -5297,9 +5310,9 @@ Consider
 \[
 \psi_{2}\left(x\right)=\begin{cases}
 0 & \mbox{for }0\le x\le m_{1}\\
-\frac{1}{\left(m_{2}-m_{1}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(\beta/2-m_{2}\right)}{\beta/2-m_{1}}} & \mbox{for }m_{1}\le x\le m_{2}\\
-\frac{-1}{\left(\beta/2-m_{2}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(\beta/2-m_{2}\right)}{\beta/2-m_{1}}} & \mbox{for }m_{2}<x\le\beta/2\\
-0 & \mbox{for }\beta/2<x\le1
+\frac{1}{\left(m_{2}-m_{1}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(m_{0}-m_{2}\right)}{m_{0}-m_{1}}} & \mbox{for }m_{1}\le x\le m_{2}\\
+\frac{-1}{\left(m_{0}-m_{2}\right)}\sqrt{\frac{\left(m_{2}-m_{1}\right)\left(m_{0}-m_{2}\right)}{m_{0}-m_{1}}} & \mbox{for }m_{2}<x\le m_{0}\\
+0 & \mbox{for }m_{0}<x\le1
 \end{cases}
 \]
 
@@ -5383,25 +5396,37 @@ Let
 \end_inset
 
 ).
- Let these be 
-\begin_inset Formula $0$
+ Let 
+\begin_inset Formula $m_{-1}=0$
 \end_inset
 
- or 
-\begin_inset Formula $\beta/2$
+ initiate the sequence by providing the smallest-possible 
+\begin_inset Quotes eld
 \end_inset
 
- if they don't exist.
- Then define 
+midpoint
+\begin_inset Quotes erd
+\end_inset
+
+; 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ already provides the largest possible.
+ 
+\end_layout
+
+\begin_layout Standard
+Then define 
 \begin_inset Formula 
-\[
+\begin{equation}
 \psi_{p}\left(x\right)=\begin{cases}
 0 & \mbox{for }0\le x\le m_{l}\\
-\frac{1}{\left(m_{p}-m_{l}\right)}\sqrt{\frac{\left(m_{p}-m_{l}\right)\left(m_{u}-m_{p}\right)}{m_{u}-m_{l}}} & \mbox{for }m_{l}\le x\le m_{p}\\
-\frac{-1}{\left(m_{u}-m_{p}\right)}\sqrt{\frac{\left(m_{p}-m_{l}\right)\left(m_{u}-m_{p}\right)}{m_{u}-m_{l}}} & \mbox{for }m_{p}<x\le m_{u}\\
+\frac{C_{p}}{\left(m_{p}-m_{l}\right)} & \mbox{for }m_{l}\le x\le m_{p}\\
+\frac{-C_{p}}{\left(m_{u}-m_{p}\right)} & \mbox{for }m_{p}<x\le m_{u}\\
 0 & \mbox{for }m_{u}<x\le1
-\end{cases}
-\]
+\end{cases}\label{eq:Hess-Haar-basis-fn}
+\end{equation}
 
 \end_inset
 
@@ -5414,7 +5439,19 @@ By construction, this has the property that
 \end_inset
 
 .
- 
+ The normalization constant is 
+\begin_inset Formula 
+\[
+C_{p}=\sqrt{\frac{\left(m_{p}-m_{l}\right)\left(m_{u}-m_{p}\right)}{m_{u}-m_{l}}}
+\]
+
+\end_inset
+
+which is determined by requiring that 
+\begin_inset Formula $\int_{0}^{1}\left|\psi_{p}\left(x\right)\right|^{2}dx=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -7254,6 +7291,57 @@ Szegő polynomials w.r.t.
 
 \begin_layout Standard
 And then there is Favard's theorem...
+\end_layout
+
+\begin_layout Subsection
+Moments
+\end_layout
+
+\begin_layout Standard
+Construction of the polynomial sequences require moments.
+ Since the invariant measures (and all of the eigenfunctions) are linear
+ combinations of the Hesenberg basis functions, it suffices to compute the
+ moments for these.
+ Since the basis functions are piece-wise constant, and have an explicit
+ expression given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Hess-Haar-basis-fn"
+
+\end_inset
+
+, the moments can also be given explicit expression:
+\begin_inset Formula 
+\[
+\int_{0}^{1}x^{n-1}\psi_{p}\left(x\right)dx=\frac{C_{p}}{n}\left[\frac{m_{p}^{n}-m_{l}^{n}}{m_{p}-m_{l}}-\frac{m_{u}^{n}-m_{p}^{n}}{m_{u}-m_{p}}\right]
+\]
+
+\end_inset
+
+with the midpoint 
+\begin_inset Formula $m_{p}$
+\end_inset
+
+ and the lower and upper midpoints 
+\begin_inset Formula $m_{l}<m_{p}<m_{u}$
+\end_inset
+
+ defined just as before.
+ Clearly, the moments rapidly get small as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ Likewise, for fixed 
+\begin_inset Formula $n$
+\end_inset
+
+, these also rapdily get small as 
+\begin_inset Formula $p\to\infty$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
