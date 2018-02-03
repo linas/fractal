@@ -134,6 +134,34 @@ double hess_trans_berg(double Kay, int n, int m)
 	return acc;
 }
 
+/**
+ * Unit test the shift product
+ */
+void verify_shift(double Kay, int maxn)
+{
+	for (int m=0; m< maxn; m++)
+	{
+		double sum = 0.0;
+		for (int n=0; n<=maxn; n++)
+		{
+			double htp = hess_trans_berg(Kay, m, n);
+			double poly = bergman_oper(Kay, m, n-1);
+			sum += htp;
+			double diff = fabs(htp - poly);
+			if (1.0e-12 < diff)
+			{
+				printf("Error: htp[%d, %d] = %g  berg=%g diff=%g\n",
+				        m, n, htp, poly, diff);
+			}
+		}
+		sum = fabs(sum);
+		if (0 < m && 1.0e-12 < sum)
+		{
+			printf("Error: col %d sum=%g should be zero\n\n", m, sum);
+		}
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc < 3)
@@ -149,31 +177,11 @@ int main(int argc, char* argv[])
 	big_midpoints(K, 400, midpoints, MAXN);
 	sequence_midpoints(K, MAXN);
 
+// #define UNIT_TEST_POLY
 #ifdef UNIT_TEST_POLY
 	// The unit test is currently passing.
 	cross_check_poly(K, maxn);
 #endif
 
-	for (int m=0; m< maxn; m++)
-	{
-		double sum = 0.0;
-		for (int n=0; n< maxn; n++)
-		{
-			double poly = bergman_oper(K, m, n);
-			sum += poly;
-		}
-		printf("--------bergman col %d sum=%g\n\n", m, sum);
-	}
-	for (int m=0; m< maxn; m++)
-	{
-		double sum = 0.0;
-		for (int n=0; n< maxn; n++)
-		{
-			double htp = hess_trans_berg(K, m, n);
-			double poly = bergman_oper(K, m, n);
-			sum += htp;
-			printf("htp[%d, %d] = %g  berg=%g\n", m, n, htp, poly);
-		}
-		printf("--------col sum=%g\n\n", sum);
-	}
+	verify_shift(K, maxn);
 }
