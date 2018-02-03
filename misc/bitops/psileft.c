@@ -96,15 +96,24 @@ void cross_check_code(double Kay, int maxn, complex z)
 	}
 }
 
+/**
+ * Sample a range of z's to make sure the computations
+ * are all OK. As of right now, this test is passing.
+ */
 void cross_check_poly(double Kay, int maxn)
 {
 	complex z;
-	int ixmax = 10;
+	int ixmax = 20;
 	for (int ix = 0; ix< ixmax; ix++)
 	{
 		double x = ((double) ix + 0.5) / ((double) ixmax);
-		z = x;
-		cross_check_code(Kay, maxn, z);
+		for (int iy = 0; iy < ixmax; iy++)
+		{
+			double y = ((double) iy + 0.5) / ((double) ixmax);
+			z = x + I * y;
+			z = x * cexp (I * 2.0 * M_PI * y);
+			cross_check_code(Kay, maxn, z);
+		}
 	}
 }
 
