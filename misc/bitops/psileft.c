@@ -32,9 +32,10 @@ void bergman_vect(double Kay, complex z, complex* poly, int maxn)
 	}
 }
 
-/** Just like above, but without the z values.
- *  Returns the matrix entry.
- *  Computed recusrively.
+/**
+ * Just like above, but without the z values.
+ * Returns the matrix entry p_{n,j} for the bergman polynomial matrix.
+ * Computed recusrively, in closed form.
  */
 double bergman_oper(double Kay, int n, int j)
 {
@@ -117,6 +118,22 @@ void cross_check_poly(double Kay, int maxn)
 	}
 }
 
+/**
+ * Return the product hess-transpose times bergman
+ */
+double hess_trans_berg(double Kay, int n, int m)
+{
+	double acc = 0;
+
+	// berg is zero if k < m
+	// hess iz zero if n+1 < k
+	for (int k=m; k<=n+1; k++)
+	{
+		acc += hess(Kay, k, n) * bergman_oper(Kay, k, m);
+	}
+	return acc;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc < 3)
@@ -131,5 +148,32 @@ int main(int argc, char* argv[])
 	// find_midpoints(K);
 	big_midpoints(K, 400, midpoints, MAXN);
 	sequence_midpoints(K, MAXN);
+
+#ifdef UNIT_TEST_POLY
+	// The unit test is currently passing.
 	cross_check_poly(K, maxn);
+#endif
+
+	for (int m=0; m< maxn; m++)
+	{
+		double sum = 0.0;
+		for (int n=0; n< maxn; n++)
+		{
+			double poly = bergman_oper(K, m, n);
+			sum += poly;
+		}
+		printf("--------bergman col %d sum=%g\n\n", m, sum);
+	}
+	for (int m=0; m< maxn; m++)
+	{
+		double sum = 0.0;
+		for (int n=0; n< maxn; n++)
+		{
+			double htp = hess_trans_berg(K, m, n);
+			double poly = bergman_oper(K, m, n);
+			sum += htp;
+			printf("htp[%d, %d] = %g  berg=%g\n", m, n, htp, poly);
+		}
+		printf("--------col sum=%g\n\n", sum);
+	}
 }
