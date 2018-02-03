@@ -14,7 +14,7 @@ LAPACK=/usr/lib/liblapacke.a /usr/lib/lapack/liblapack.a \
 all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	carry-sum rexfer treefn treestep sampler julia julie psi \
 	matrix psieigen psiblas nilpot bitshow complex psiunitary \
-	bergman psifp midpo psidist psidelt
+	bergman psifp midpo psidist psidelt psileft
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -52,6 +52,7 @@ psifp.o: psifp.c psi.c psibig.c
 midpo.o: midpo.c psi.c psibig.c
 psidist.o: psidist.c psi.c psibig.c
 psidelt.o: psidelt.C psi.c psibig.c
+psileft.o: psileft.c psi.c psibig.c
 
 
 bernie: bernie.o $(BRAT) $(FUNC)
@@ -82,3 +83,4 @@ midpo: midpo.o -lgsl -lgslcblas
 psidist: psidist.o
 psidist: psidist.o
 psidelt: psidelt.o $(BRAT)
+psileft: psileft.o
