@@ -280,15 +280,44 @@ void verify_koopman(double Kay, int nmax)
 double ortho(double Kay, int m, int n)
 {
 	double acc = 0.0;
-	int nm = n<m ? n : m;
+	int nm = n<m ? m : n;
+	// int nm = n<m ? n : m;
 	for (int k=0; k<nm; k++)
 	{
-		double prod = bergman_oper(Kay, m, k) * bergman_oper(Kay, n, k);
+		// double prod = bergman_oper(Kay, m, k) * bergman_oper(Kay, n, k);
+		double prod = rinverse(Kay, m, k) * rinverse(Kay, n, k);
 		prod /= ((double) (k+1));
 		prod *= pow(2.0*Kay, -2*(k+1));
 		acc += prod;
 	}
 	acc *= M_PI;
+	return acc;
+}
+
+/**
+ * scratch
+ */
+double scratch(double Kay, int m, int n)
+{
+	double acc = 0.0;
+	int nm = n<m ? m : n;
+	for (int k=0; k<nm; k++)
+	{
+		double prod = hess(Kay, k, m) * hess(Kay, k, n);
+		acc += prod;
+	}
+	return acc;
+}
+
+double herm(double Kay, int m, int n)
+{
+	double acc = 0.0;
+	int nm = n<m ? m : n;
+	for (int k=0; k<nm; k++)
+	{
+		double prod = rinverse(Kay, m, k) * rinverse(Kay, n, k);
+		acc += prod;
+	}
 	return acc;
 }
 
@@ -323,20 +352,24 @@ int main(int argc, char* argv[])
 #endif
 
 
-#if 0
+#if 1
 	for (int n=0; n<maxn; n++)
 	{
 		for (int m=0; m<maxn; m++)
 		{
 			// double poly = bergman_oper(K, n, m);
 			// double inv = rinverse(K, n, m);
-			// double ort = ortho(K, n, m);
-			double koop = binv_hess_trans_berg(K, n, m);
-			printf("[%d	%d] =	%g\n", n, m, koop);
+			double ort = ortho(K, n, m);
+			// double sym = herm(K, n, m);
+			// double koop = binv_hess_trans_berg(K, n, m);
+			double try = ort;
+			printf("[%d	%d] =	%g\n", n, m, try);
 		}
 		printf(" ---------------\n");
 	}
 #endif
+
+#if DIAGONAL_ELEMENTS
 	double ob = 1.0 / (2.0*K);
 	double obn = ob;
 	double prev = 1.0;
@@ -351,4 +384,23 @@ int main(int argc, char* argv[])
 		obn *= ob;
 		prev = poly;
 	}
+#endif
+
+#if BIZARRO
+	// Don't know if this means anything, but for K=0.8
+	// it appears that the product below H^T H has only one
+	// non-zero entry, at [6,6] having value=0.625=1/1.6
+	// All other entries in the 6th row are zero.
+	// Other rows are not like this.
+	for (int n=0; n<maxn; n++)
+	{
+		double acc = 0.0;
+		int m = 6;
+		for (int k=0; k<maxn; k++)
+		{
+			acc += hess(K, k, m) * hess(K, k, n);
+		}
+		printf("%d	%g\n", n, acc);
+	}
+#endif
 }
