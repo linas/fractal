@@ -187,8 +187,30 @@ double rinverse(double Kay, int m, int n)
 }
 
 /**
+ * If the domain of orthogonality was the unit disk,
+ * (or is it was the disk r< 1/2K) then the below would
+ * return the identity i.e. delta_mn . But it doesn't so
+ * neither of these are the domain.  So wtf? What's the domain?
+ */
+double ortho(double Kay, int m, int n)
+{
+	double acc = 0.0;
+	int nm = n<m ? n : m;
+	for (int k=0; k<nm; k++)
+	{
+		double prod = bergman_oper(Kay, m, k) * bergman_oper(Kay, n, k);
+		prod /= ((double) (k+1));
+		prod *= pow(2.0*Kay, -2*(k+1));
+		acc += prod;
+	}
+	acc *= M_PI;
+	return acc;
+}
+
+/**
  * Unit test the inverse matrix.  When multiplied, it should
  * give the identity matrix.
+ * Currently, this unit test is passing.
  */
 void verify_inverse(double Kay, int nmax)
 {
@@ -249,7 +271,18 @@ int main(int argc, char* argv[])
 
 	// The shift unit test is currently passing.
 	verify_shift(K, maxn);
+	verify_inverse(K, maxn);
 #endif
 
-	verify_inverse(K, maxn);
+	for (int n=0; n<maxn; n++)
+	{
+		for (int m=0; m<maxn; m++)
+		{
+			// double poly = bergman_oper(K, n, m);
+			// double inv = rinverse(K, n, m);
+			double ort = ortho(K, n, m);
+			printf("[%d	%d] =	%g\n", n, m, ort);
+		}
+		printf(" ---------------\n");
+	}
 }
