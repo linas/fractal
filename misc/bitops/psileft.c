@@ -136,17 +136,20 @@ double hess_trans_berg(double Kay, int n, int m)
 
 /**
  * Unit test the shift product
+ * This test is currently passing.
  */
 void verify_shift(double Kay, int maxn)
 {
 	for (int m=0; m< maxn; m++)
 	{
 		double sum = 0.0;
+		double absum = 0.0;
 		for (int n=0; n<=maxn; n++)
 		{
 			double htp = hess_trans_berg(Kay, m, n);
 			double poly = bergman_oper(Kay, m, n-1);
 			sum += htp;
+			absum += fabs(htp);
 			double diff = fabs(htp - poly);
 			if (1.0e-12 < diff)
 			{
@@ -157,7 +160,7 @@ void verify_shift(double Kay, int maxn)
 		sum = fabs(sum);
 		if (0 < m && 1.0e-12 < sum)
 		{
-			printf("Error: col %d sum=%g should be zero\n\n", m, sum);
+			printf("Error: col %d sum=%g should be zero fabs=%g\n\n", m, sum, absum);
 		}
 	}
 }
@@ -179,9 +182,11 @@ int main(int argc, char* argv[])
 
 // #define UNIT_TEST_POLY
 #ifdef UNIT_TEST_POLY
-	// The unit test is currently passing.
+	// The polynomial unit test is currently passing.
 	cross_check_poly(K, maxn);
+
+	// The shift unit test is currently passing.
+	verify_shift(K, maxn);
 #endif
 
-	verify_shift(K, maxn);
 }
