@@ -6707,7 +6707,7 @@ key "Saff12,Tomeo11,Escri11"
  That is, one has the orthogonality relation
 \begin_inset Formula 
 \[
-\delta_{mn}=\int_{D}p_{m}\left(x-iy\right)p_{n}\left(x+iy\right)dxdy
+\delta_{mn}=\int_{D}p_{m}\left(\overline{z}\right)p_{n}\left(z\right)d\mu\left(z\right)
 \]
 
 \end_inset
@@ -6716,7 +6716,12 @@ for some domain
 \begin_inset Formula $D\subset\mathbb{C}$
 \end_inset
 
- of the complex plane.
+ of the complex plane, and some (Borel) measure 
+\begin_inset Formula $d\mu$
+\end_inset
+
+ on that domain.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -6783,10 +6788,10 @@ Then, given some holomorphic function
 , one has that
 \begin_inset Formula 
 \begin{align*}
-\left[\mathcal{A}f\right]\left(w\right)= & \int\mathcal{A}\left(w,z\right)f\left(z\right)dz\\
+\left[\mathcal{A}f\right]\left(w\right)= & \int\mathcal{A}\left(w,z\right)f\left(z\right)d\mu\left(z\right)\\
 = & \sum_{k}\sum_{n}p_{k}\left(w\right)A_{kn}a_{n}\\
-= & z\sum_{n}a_{n}p_{n}\left(w\right)\\
-= & zf\left(w\right)
+= & w\sum_{n}a_{n}p_{n}\left(w\right)\\
+= & wf\left(w\right)
 \end{align*}
 
 \end_inset
@@ -6805,15 +6810,101 @@ That is, given a sequence
 \end_layout
 
 \begin_layout Standard
-XXX The above needs to be tightened.
- Its a little too breezy.
- Also, something is wrong with the orthogonality...
- XXX
+This is perhaps a bit silly, as one could instead just perform the same
+ manipulation without the 
+\begin_inset Formula $f\left(z\right)$
+\end_inset
+
+, by observing that, formally,
+\begin_inset Formula 
+\[
+\mathcal{A}\left(w,z\right)=w\sum_{k=0}^{\infty}\sum_{n=0}^{\infty}p_{k}\left(w\right)p_{n}\left(\overline{z}\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-This seems to be a special case of a more general principle: when an operator
- has a continuous spectrum, it can sometimes be interpreted as a right-shift.
+The above treatment is breezy and 
+\begin_inset Quotes eld
+\end_inset
+
+formal
+\begin_inset Quotes erd
+\end_inset
+
+, paying no heed to summability, convergence or responding to any questions
+ about what spaces the various vectors may live in.
+ This is as appropriate, since the task here is to discover which spaces
+ are the appropriate ones, when the Hessenberg matrix arises from the downshift.
+\end_layout
+
+\begin_layout Standard
+Notice that the word 
+\begin_inset Quotes eld
+\end_inset
+
+operator
+\begin_inset Quotes erd
+\end_inset
+
+ is a bit mis-used, here, as a vague synonym for 
+\begin_inset Quotes eld
+\end_inset
+
+infinite-dimensional matrix
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Properly, the word 
+\begin_inset Quotes eld
+\end_inset
+
+operator
+\begin_inset Quotes erd
+\end_inset
+
+ should be reserved for an infinite-dimensional matrix acting on some given
+ space, having general properties that are independent of the basis chosen
+ for that space.
+ So far, that might not be the case here: the infinite-dimensional matrixes
+ here might not be bounded operators; they might not even be continuous,
+ viz.
+ we have not ruled out the possibility that the space of interest is some
+ Fréchet space or some more general topological vector space.
+ It is well known that operators on such spaces can have 
+\begin_inset Quotes eld
+\end_inset
+
+unexpected
+\begin_inset Quotes erd
+\end_inset
+
+ discontinuities, unexpcected in that they are not seen in ordinary Banach
+ spaces.
+\end_layout
+
+\begin_layout Standard
+At any rate, if polynomials obtained from the downshift are orthogonal on
+ some domain 
+\begin_inset Formula $D\subset\mathbb{C}$
+\end_inset
+
+ that is the support of some measure 
+\begin_inset Formula $d\mu$
+\end_inset
+
+, it is not at all clear what this measure might be.
+ They are certainly not orthogonal on the unit disk, with uniform measure.
+\end_layout
+
+\begin_layout Standard
+Notice also that the above treatment seems to be a special case of a more
+ general principle: when an operator has a continuous spectrum, it can sometimes
+ be interpreted as a right-shift.
  That is, given some arbitrary operator 
 \begin_inset Formula $\mathcal{H}$
 \end_inset

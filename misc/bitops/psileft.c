@@ -284,10 +284,10 @@ double ortho(double Kay, int m, int n)
 	// int nm = n<m ? n : m;
 	for (int k=0; k<nm; k++)
 	{
-		// double prod = bergman_oper(Kay, m, k) * bergman_oper(Kay, n, k);
-		double prod = rinverse(Kay, m, k) * rinverse(Kay, n, k);
+		double prod = bergman_oper(Kay, m, k) * bergman_oper(Kay, n, k);
+		// double prod = rinverse(Kay, m, k) * rinverse(Kay, n, k);
 		prod /= ((double) (k+1));
-		prod *= pow(2.0*Kay, -2*(k+1));
+		// prod *= pow(2.0*Kay, -2*(k+1));
 		acc += prod;
 	}
 	acc *= M_PI;
