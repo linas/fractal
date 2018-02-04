@@ -6626,15 +6626,8 @@ with
 \end_inset
 
 .
- This relation is easily solvable in 
-\begin_inset Quotes eld
-\end_inset
-
-closed form
-\begin_inset Quotes erd
-\end_inset
-
-, as the recurrance relation terminates in a finite number of steps.
+ This relation is easily solvable in closed form, as the recurrance relation
+ terminates in a finite number of steps.
  
 \end_layout
 
@@ -7167,11 +7160,11 @@ reference "eq:hessen-matrix-elts"
 \end_layout
 
 \begin_layout Subsection
-Left Inverse
+Left Factorization
 \end_layout
 
 \begin_layout Standard
-Suppose one is given a sequence of polyniomials 
+Suppose one is given an (arbitrary) sequence of polynomials 
 \begin_inset Formula $\left(p_{n}\left(z\right)\right)_{n=0}^{\infty}$
 \end_inset
 
@@ -7195,7 +7188,7 @@ This defines an operator matrix
 \begin_inset Formula $\mathcal{P}=\left[p_{nk}\right]$
 \end_inset
 
- provided that the coefficients are extended so that 
+, provided that the coefficients are extended so that 
 \begin_inset Formula $p_{nk}=0$
 \end_inset
 
@@ -7221,15 +7214,25 @@ This defines an operator matrix
 
 \end_inset
 
-Combining this with the Hessenberg operator matrix 
+
+\end_layout
+
+\begin_layout Standard
+Consider now the case where the polynomials were constructed from some Hessenber
+g operator matrix 
 \begin_inset Formula $A$
 \end_inset
 
- from which the polynomials were constructed, the earlier equation 
+.
+ The earlier observation that 
+\begin_inset Formula $A^{T}$
+\end_inset
+
+ is a shift, namely, that 
 \begin_inset Formula $A^{T}\overrightarrow{p}=z\overrightarrow{p}$
 \end_inset
 
- becomes
+ can now be written as
 \begin_inset Formula 
 \[
 A^{T}\mathcal{P}\overrightarrow{z}=z\mathcal{P}\overrightarrow{z}=\mathcal{P}z\overrightarrow{z}=\mathcal{PK}\overrightarrow{z}
@@ -7266,8 +7269,8 @@ Since
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
- is lower-triangular, it is invertible on the right, that is, the right
- inverse 
+ is lower-triangular, it is invertible on the right, that is, the inverse
+ 
 \begin_inset Formula $\mathcal{P}^{-1}$
 \end_inset
 
@@ -7279,15 +7282,202 @@ Since
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+Rearranging, this provides an explicit decomposition of 
+\begin_inset Formula $A$
+\end_inset
+
+ into triangular matrixes:
+\begin_inset Formula 
+\[
+A^{T}=\mathcal{PKP}^{-1}
+\]
+
+\end_inset
+
+Taking the transpose, this gives
+\begin_inset Formula 
+\[
+A=\left[\mathcal{P}^{-1}\right]^{T}\mathcal{K}^{T}\mathcal{P}^{T}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\mathcal{P}^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[\mathcal{P}^{-1}\right]^{T}$
+\end_inset
+
+ both being upper-trangular, and 
+\begin_inset Formula $\mathcal{K}^{T}$
+\end_inset
+
+ being the left-shift.
+\end_layout
+
+\begin_layout Standard
+This system is solvable.
+ Given some matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ in Hessenberg form, the matrix elements of 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ can be computed resursively, in a finite number of steps (i.e.
+ in closed form), directly from 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Hessenberg polynomials"
+
+\end_inset
+
+.
+ The explicit expression is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+A_{n+1,n}p_{n+1,j}=p_{n,j-1}-\sum_{k=0}^{n}A_{kn}p_{kj}
+\]
+
+\end_inset
+
+The starting conditions are 
+\begin_inset Formula $p_{00}=1$
+\end_inset
+
+.
+ To handle the 
+\begin_inset Formula $j=0$
+\end_inset
+
+ case in the above, set 
+\begin_inset Formula $p_{n,-1}=0$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-write the correpsonding operator matrix as 
+Because 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
- with matrix 
+ is lower triangular, its inverse 
+\begin_inset Formula $\mathcal{P}^{-1}=\left[r_{kn}\right]$
+\end_inset
+
+ can be obtained explicitly.
+ Along the digaonal, one has 
+\begin_inset Formula $r_{nn}=1/p_{nn}$
+\end_inset
+
+ while the lower triangular form means 
+\begin_inset Formula $r_{kn}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k<n$
+\end_inset
+
+.
+ For the remaining entries 
+\begin_inset Formula $m<n$
+\end_inset
+
+, one has 
+\begin_inset Formula 
+\[
+0=\sum_{k=m}^{n}p_{nk}r_{km}
+\]
+
+\end_inset
+
+This can be solved in a finite number of iterations on 
+\begin_inset Formula 
+\[
+p_{nn}r_{nm}=-\sum_{k=m}^{n-1}p_{nk}r_{km}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that questions of convergence have been avoided.
+ That is, norms for 
+\begin_inset Formula $\overrightarrow{z}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overrightarrow{p}$
+\end_inset
+
+ were not specified.
+ Although one can invent several kinds of norms that might be applicable,
+ there is no particular reason to beleive that 
+\begin_inset Formula $\overrightarrow{p}$
+\end_inset
+
+ might have a finite norm.
+ Likewise, 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ may not have a finite norm.
+ For the case of the Hessenberg operator originating with the downshift
+ operator, it does not; the individual matrix elements 
+\begin_inset Formula $p_{nm}$
+\end_inset
+
+ increase without bound.
+ This is not a compact operator.
+\end_layout
+
+\begin_layout Subsection
+Beta-transform factoids
+\end_layout
+
+\begin_layout Standard
+For the downshift, experimentation reveals that when 
+\begin_inset Formula $\beta<\left(1+\sqrt{5}\right)/2$
+\end_inset
+
+ the Golden ratio, then the sum over columns of the Bergman operator vanishes.
+ That is,
+\begin_inset Formula 
+\[
+\sum_{k=0}^{\infty}p_{nk}=\delta_{n0}
+\]
+
+\end_inset
+
+This implies that every polynomial 
+\begin_inset Formula $p_{n}\left(z\right)$
+\end_inset
+
+ has a zero at 
+\begin_inset Formula $z=1$
+\end_inset
+
+ (except for 
+\begin_inset Formula $p_{0}\left(z\right)=1)$
+\end_inset
+
+.
+ Exactly how it is that the Golden ratio entered into the proceedings is
+ unknown to the author.
 \end_layout
 
 \begin_layout Subsection
