@@ -196,18 +196,32 @@ void verify_inverse(double Kay, int nmax)
 	{
 		for (int m=0; m<nmax; m++)
 		{
-			double prod = 0.0;
+			double rprod = 0.0;
+			double lprod = 0.0;
 			for (int k=0; k<=nmax; k++)
 			{
-				prod += bergman_oper(Kay, n, k) * rinverse(Kay, k, m);
+				rprod += bergman_oper(Kay, n, k) * rinverse(Kay, k, m);
+				lprod += rinverse(Kay, n, k) * bergman_oper(Kay, k, m);
 			}
-			if (n != m && 1.0e-12 < fabs(prod))
+
+			// Verify that we got the identity matrix
+			if (n != m && 1.0e-12 < fabs(rprod))
 			{
-				printf("Error: expecting zero at %d %d got %g\n", n, m, prod);
+				printf("Error: right prod expecting zero at %d %d got %g\n", n, m, rprod);
 			}
-			if (n == m && 1.0e-12 < fabs(1.0 - prod))
+			if (n == m && 1.0e-12 < fabs(1.0 - rprod))
 			{
-				printf("Error: expecting one at %d %d got %g\n", n, m, prod);
+				printf("Error: right prod expecting one at %d %d got %g\n", n, m, rprod);
+			}
+
+			// And the other one.
+			if (n != m && 1.0e-12 < fabs(lprod))
+			{
+				printf("Error: left prod expecting zero at %d %d got %g\n", n, m, lprod);
+			}
+			if (n == m && 1.0e-12 < fabs(1.0 - lprod))
+			{
+				printf("Error: left prod expecting one at %d %d got %g\n", n, m, lprod);
 			}
 		}
 	}
