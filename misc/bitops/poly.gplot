@@ -1,0 +1,33 @@
+
+# set term png size 1024,768 enhanced
+# set out 'poly.png'
+
+# plot "poly-0.6.dat" using 1:2 with lines lw 2 title "{/Symbol b}=1.2", \
+#      "poly-0.7.dat" using 1:2 with lines lw 2 title "{/Symbol b}=1.4", \
+#      "poly-0.8.dat" using 1:2 with lines lw 2 title "{/Symbol b}=1.6", \
+#      "poly-0.9.dat" using 1:2 with lines lw 2 title "{/Symbol b}=1.8", \
+#      "poly-0.6.dat" using 1:(1.2**$1) with lines lw 2 title "1.2^n", \
+#      "poly-0.6.dat" using 1:(1.8**$1) with lines lw 2 title "1.8^n", \
+
+# ##############################################################
+# The below used to generate the graph for the paper.
+#
+set term postscript eps color enhanced
+set out 'poly.eps'
+
+set logscale y
+set xrange [0:200]
+set key  left
+
+set xlabel "n"
+set ylabel "p_{nn} / {/Symbol b}^n"
+set title "Polynomial Operator Diagonal Entries"
+
+plot "poly-0.6.dat" using 1:($2 / (1.2**$1)) with lines lw 2 title "{/Symbol b}=1.2", \
+
+#   "poly-0.9.dat" using 1:($2 / (1.8**$1)) with lines lw 2 title "{/Symbol b}=1.8", \
+
+# plot  "poly-0.7.dat" using 1:($2 / (1.4**$1)) with lines lw 2 title "{/Symbol b}=1.4", \
+
+# plot    "poly-0.8.dat" using 1:($2 / (1.6**$1)) with lines lw 2 title "{/Symbol b}=1.6", \
+

@@ -314,10 +314,14 @@ int main(int argc, char* argv[])
 
 	// The shift unit test is currently passing.
 	verify_shift(K, maxn);
+
+	// The inverse test is currently passing.
 	verify_inverse(K, maxn);
+
+	// The koopman test is currently passing.
+	verify_koopman(K, maxn);
 #endif
 
-	verify_koopman(K, maxn);
 
 #if 0
 	for (int n=0; n<maxn; n++)
@@ -333,4 +337,9 @@ int main(int argc, char* argv[])
 		printf(" ---------------\n");
 	}
 #endif
+	for (int n=0; n<maxn; n++)
+	{
+		double poly = bergman_oper(K, n, n);
+		printf("%d	%g\n", n, poly);
+	}
 }
