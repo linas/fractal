@@ -7010,6 +7010,16 @@ These charts show the subdiagonal matrix entries
 
  is not clear.
  
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+genrerated with ...berg.gplot from stubbed out hess-printing code in bergman.C
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -7222,7 +7232,7 @@ p_{n}\left(z\right)=\sum_{k=0}^{n}p_{nk}z^{k}
 
 \end_inset
 
-This defines an operator matrix 
+This defines an infinite matrix 
 \begin_inset Formula $\mathcal{P}=\left[p_{nk}\right]$
 \end_inset
 
@@ -7458,8 +7468,9 @@ p_{nn}r_{nm}=-\sum_{k=m}^{n-1}p_{nk}r_{km}
 \end_layout
 
 \begin_layout Standard
-Note that questions of convergence have been avoided.
- That is, norms for 
+The above avoids questions of convergence, or any notion of the spaces on
+ which the matrixes or operators might act.
+ The norm to be used for 
 \begin_inset Formula $\vec{z}$
 \end_inset
 
@@ -7467,9 +7478,12 @@ Note that questions of convergence have been avoided.
 \begin_inset Formula $\vec{p}$
 \end_inset
 
- were not specified.
- Although one can invent several kinds of norms that might be applicable,
- there is no particular reason to beleive that 
+ is not specified.
+ This is appropriate at this stage: it is the algebraic manipulations that
+ are interesting, at this point, rather than the spaces on which the matrixes/op
+erators might act.
+ One can invent several kinds of norms that might be applicable, but there
+ is no particular reason to beleive that 
 \begin_inset Formula $\vec{p}$
 \end_inset
 
@@ -7485,7 +7499,69 @@ Note that questions of convergence have been avoided.
 \end_inset
 
  increase without bound.
- This is not a compact operator.
+ That is, 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is an infinite matrix, but it is not clear that it is also an operator.
+ If it is, it is certainly not a compact operator.
+\end_layout
+
+\begin_layout Standard
+Some of the poor behavior can be brought under control by factoring 
+\begin_inset Formula $\mathcal{P}=\mathcal{DN}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ being unitriangular (all ones on the diagonal) and 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+ a diagonal matrix, with entries 
+\begin_inset Formula $\left[\mathcal{D}\right]_{nk}=p_{nn}\delta_{nk}$
+\end_inset
+
+.
+ With this factorization, one may then write
+\begin_inset Formula 
+\[
+\mathcal{N}^{-1}A^{T}\mathcal{N}=\mathcal{DKD}^{-1}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $\mathcal{DKD}^{-1}$
+\end_inset
+
+ has off-diagonal matrix entries 
+\begin_inset Formula $\left[\mathcal{DKD}^{-1}\right]_{nk}=\delta_{n+1,k}p_{nn}/p_{kk}$
+\end_inset
+
+.
+ This is a rescaling of the shift 
+\begin_inset Formula $\left[\mathcal{K}\right]_{nk}=\delta_{n+1,k}$
+\end_inset
+
+.
+ The scaling factor is exactly the sub-diagonal of the Hessenberg.
+ That is, 
+\begin_inset Formula $p_{nn}/p_{n+1,n+1}=A_{n+1,n}$
+\end_inset
+
+.
+ The polynomials 
+\begin_inset Formula $\mathcal{N}\vec{z}$
+\end_inset
+
+ are monic.
+\end_layout
+
+\begin_layout Subsection
+Hermiticity
 \end_layout
 
 \begin_layout Subsection
@@ -7621,7 +7697,24 @@ This depicts the ratio
 \end_inset
 
 .
- 
+ This is another way of visualizaing the same information as in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Subdiagonal-Entries"
+
+\end_inset
+
+, as the ratio 
+\begin_inset Formula $p_{nn}/p_{n+1,n+1}$
+\end_inset
+
+ is just given by the subdiagonal entries 
+\begin_inset Formula $A_{n+1,n}$
+\end_inset
+
+ of the Hessenberg matrix.
+ In particular, the straight edges correspond to usually-constant values
+ on the subdiagonal.
 \begin_inset Note Note
 status collapsed
 

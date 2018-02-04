@@ -337,9 +337,18 @@ int main(int argc, char* argv[])
 		printf(" ---------------\n");
 	}
 #endif
-	for (int n=0; n<maxn; n++)
+	double ob = 1.0 / (2.0*K);
+	double obn = ob;
+	double prev = 1.0;
+	for (int n=1; n<maxn; n++)
 	{
 		double poly = bergman_oper(K, n, n);
-		printf("%d	%g\n", n, poly);
+		double ren = poly * obn;
+		double rat = poly / prev; 
+		double inv = 1.0 / rat;
+		double sub = hess(K, n, n-1);
+		printf("%d	%g	%g	%g	%g	%g\n", n-1, poly, ren, rat, inv, sub);
+		obn *= ob;
+		prev = poly;
 	}
 }
