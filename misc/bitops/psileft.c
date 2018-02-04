@@ -40,7 +40,7 @@ void bergman_vect(double Kay, complex z, complex* poly, int maxn)
 double bergman_oper(double Kay, int n, int j)
 {
 	if (0 == n && 0 == j) return 1.0;
-	if (n < j) return 0.0;
+	if (n < j) return 0.0; // lower triangular
 	if (j < 0) return 0.0;
 
 	double acc = bergman_oper(Kay, n-1, j-1);
@@ -165,6 +165,54 @@ void verify_shift(double Kay, int maxn)
 	}
 }
 
+/**
+ * Return the right inverse of the bergman polynomial operator.
+ * That is, return R such that PR = I the identity matrix,
+ * Note that both R and P are lower-triangular.
+ */
+double rinverse(double Kay, int m, int n)
+{
+	if (m<0 || n<0) return 0.0;
+	if (m < n) return 0.0; // lower triangular
+	if (m==n) return 1.0 / bergman_oper(Kay, n, n);
+
+	double acc = 0.0;
+
+	for (int k=n; k<m; k++)
+	{
+		acc -= bergman_oper(Kay, m, k) * rinverse(Kay, k, n);
+	}
+	acc /= bergman_oper(Kay, m, m);
+	return acc;
+}
+
+/**
+ * Unit test the inverse matrix.  When multiplied, it should
+ * give the identity matrix.
+ */
+void verify_inverse(double Kay, int nmax)
+{
+	for (int n=0; n<nmax; n++)
+	{
+		for (int m=0; m<nmax; m++)
+		{
+			double prod = 0.0;
+			for (int k=0; k<=nmax; k++)
+			{
+				prod += bergman_oper(Kay, n, k) * rinverse(Kay, k, m);
+			}
+			if (n != m && 1.0e-12 < fabs(prod))
+			{
+				printf("Error: expecting zero at %d %d got %g\n", n, m, prod);
+			}
+			if (n == m && 1.0e-12 < fabs(1.0 - prod))
+			{
+				printf("Error: expecting one at %d %d got %g\n", n, m, prod);
+			}
+		}
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc < 3)
@@ -189,4 +237,5 @@ int main(int argc, char* argv[])
 	verify_shift(K, maxn);
 #endif
 
+	verify_inverse(K, maxn);
 }
