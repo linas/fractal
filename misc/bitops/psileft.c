@@ -126,7 +126,7 @@ double hess_trans_berg(double Kay, int n, int m)
 	double acc = 0;
 
 	// berg is zero if k < m
-	// hess iz zero if n+1 < k
+	// hess is zero if n+1 < k
 	for (int k=m; k<=n+1; k++)
 	{
 		acc += hess(Kay, k, n) * bergman_oper(Kay, k, m);
@@ -135,7 +135,7 @@ double hess_trans_berg(double Kay, int n, int m)
 }
 
 /**
- * Unit test the shift product
+ * Unit test the shift product. That is, H^T P = PK should hold.
  * This test is currently passing.
  */
 void verify_shift(double Kay, int maxn)
@@ -187,29 +187,8 @@ double rinverse(double Kay, int m, int n)
 }
 
 /**
- * If the domain of orthogonality was the unit disk,
- * (or is it was the disk r< 1/2K) then the below would
- * return the identity i.e. delta_mn . But it doesn't so
- * neither of these are the domain.  So wtf? What's the domain?
- */
-double ortho(double Kay, int m, int n)
-{
-	double acc = 0.0;
-	int nm = n<m ? n : m;
-	for (int k=0; k<nm; k++)
-	{
-		double prod = bergman_oper(Kay, m, k) * bergman_oper(Kay, n, k);
-		prod /= ((double) (k+1));
-		prod *= pow(2.0*Kay, -2*(k+1));
-		acc += prod;
-	}
-	acc *= M_PI;
-	return acc;
-}
-
-/**
  * Unit test the inverse matrix.  When multiplied, it should
- * give the identity matrix.
+ * give the identity matrix.  Both P P^-1 = I = P^-1 P are tested.
  * Currently, this unit test is passing.
  */
 void verify_inverse(double Kay, int nmax)
@@ -249,6 +228,70 @@ void verify_inverse(double Kay, int nmax)
 	}
 }
 
+/**
+ * Return the product bergman^-1 times hess-transpose times bergman
+ * viz P^-1 H^T P .. this should just be the right-shift, nothing more.
+ */
+double binv_hess_trans_berg(double Kay, int n, int m)
+{
+	double acc = 0;
+
+	// rinv is zero if n < k
+	// H^TP is zero if m+1 < k
+	for (int k=0; k<=n; k++)
+	{
+		acc += rinverse(Kay, n, k) * hess_trans_berg(Kay, k, m);
+	}
+	return acc;
+}
+
+/**
+ * Verify that the above really does give the shift.
+ * Yes, it really does.  This unit test passes.
+ * So everything is sound.
+ */
+void verify_koopman(double Kay, int nmax)
+{
+	for (int n=0; n<nmax; n++)
+	{
+		for (int m=0; m<nmax; m++)
+		{
+			double koop = binv_hess_trans_berg(Kay, n, m);
+
+			// Verify that we got the right-shift matrix
+			if (n+1 != m && 1.0e-12 < fabs(koop))
+			{
+				printf("Error: koop expecting zero at %d %d got %g\n", n, m, koop);
+			}
+			if (n+1 == m && 1.0e-12 < fabs(1.0 - koop))
+			{
+				printf("Error: koop expecting one at %d %d got %g\n", n, m, koop);
+			}
+		}
+	}
+}
+
+/**
+ * If the domain of orthogonality was the unit disk,
+ * (or is it was the disk r< 1/2K) then the below would
+ * return the identity i.e. delta_mn . But it doesn't so
+ * neither of these are the domain.  So wtf? What's the domain?
+ */
+double ortho(double Kay, int m, int n)
+{
+	double acc = 0.0;
+	int nm = n<m ? n : m;
+	for (int k=0; k<nm; k++)
+	{
+		double prod = bergman_oper(Kay, m, k) * bergman_oper(Kay, n, k);
+		prod /= ((double) (k+1));
+		prod *= pow(2.0*Kay, -2*(k+1));
+		acc += prod;
+	}
+	acc *= M_PI;
+	return acc;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc < 3)
@@ -274,15 +317,20 @@ int main(int argc, char* argv[])
 	verify_inverse(K, maxn);
 #endif
 
+	verify_koopman(K, maxn);
+
+#if 0
 	for (int n=0; n<maxn; n++)
 	{
 		for (int m=0; m<maxn; m++)
 		{
 			// double poly = bergman_oper(K, n, m);
 			// double inv = rinverse(K, n, m);
-			double ort = ortho(K, n, m);
-			printf("[%d	%d] =	%g\n", n, m, ort);
+			// double ort = ortho(K, n, m);
+			double koop = binv_hess_trans_berg(K, n, m);
+			printf("[%d	%d] =	%g\n", n, m, koop);
 		}
 		printf(" ---------------\n");
 	}
+#endif
 }
