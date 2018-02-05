@@ -1,10 +1,11 @@
 #! /bin/bash
 
-i=0
-while [ $i -lt 100 ];
+i=1
+while [ $i -lt 1000 ];
 do
    let K=$i
-	echo $K
-   # ./psileft $K 50
+	# echo $K
+   ./psileft $K 90
+	let i=$i+1
 done
 
