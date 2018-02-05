@@ -5,23 +5,49 @@ set out 'cee.png'
 # plot "cee.dat" using 1:2 with lines lw 2 title "hand", \
 #       "ceed.dat" using 1:5 with lines lw 2 title "auto",\
 
+#   "ceef.dat" using (2*$1):5 with lines lw 2 title "hidef off-diag-0.723", \
+#     "ceeg.dat" using (2*$1):5 with lines lw 2 title "hidef off-diag-0.411"
+
+
+# set xrange [1.6:2]
+set xrange [0:1]
+plot "ceee.dat" using ((2-(2*$1))/(2-1.618034)):(1-$5) with lines lw 2 title "hidef"
+
+set out 'bee.png'
+set xrange [1:1.6]
+# plot "bee.dat" using (2*$1):5 with lines lw 2 title "ratio",
+
+#     "beeb.dat" using (2*$1):4 with lines lw 2 title "off-diag-0.723", \
+#     "beec.dat" using (2*$1):4 with lines lw 2 title "off-diag-1.711", \
 
 set xlabel "{/Symbol b}"
-set ylabel "C({/Symbol b})"
-set title "Symmetric Matrix Limiting Ratio"
+set ylabel "B({/Symbol b})"
+set title "Symmetric Matrix Limit"
 
-set xrange [1.6:2]
-plot "ceee.dat" using (2*$1):5 with lines lw 2 title "hidef", \
-     "ceef.dat" using (2*$1):5 with lines lw 2 title "hidef off-diag-0.723", \
-     "ceeg.dat" using (2*$1):5 with lines lw 2 title "hidef off-diag-0.411"
+# set logscale y
+set yrange [1:2.4]
+#set ytics ("1" 1, "1.2" 1.2, "1.4" 1.4, "1.6" 1.6, "1.8" 1.8, "2" 2, \
+#          "2.2" 2.2, "2.4" 2.4, "3" 3, "4" 4)
+
+plot "bee.dat" using (2*$1):4 with lines lw 2 title "limit-90", \
+     "beed.dat" using (2*$1):4 with lines lw 2 title "limit-150", \
+     "bee-250.dat" using (2*$1):4 with lines lw 2 title "limit-250", \
+     "bee-450.dat" using (2*$1):4 with lines lw 2 title "limit-450", \
+#     "bee.dat" using (2*$1):(1+0.08/((2*$1)-1)) with lines lw 2 title "fit"
+
+plot "bee-450.dat" using (2*$1):4 with lines lw 2 title ""
 
 # ##############################################################
-set term postscript eps color enhanced
-set out 'cee.eps'
-
-set xlabel "{/Symbol b}"
-set ylabel "C({/Symbol b})"
-set title "Symmetric Matrix Limiting Ratio"
-
-set xrange [1.6:2]
-plot "ceee.dat" using (2*$1):5 with lines lw 2 title ""
+# Used to generate the figure in the paper.
+#
+# set term postscript eps color enhanced
+# set out 'cee.eps'
+#
+# set xlabel "{/Symbol b}"
+# set ylabel "C({/Symbol b})"
+# set title "Symmetric Matrix Limiting Ratio"
+#
+# set xrange [1.6:2]
+# plot "ceee.dat" using (2*$1):5 with lines lw 2 title ""
+#
+# ##############################################################

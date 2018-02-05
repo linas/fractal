@@ -5,7 +5,7 @@ while [ $i -lt 1000 ];
 do
    let K=$i
 	# echo $K
-   ./psileft $K 90
+   ./psileft $K 450
 	let i=$i+1
 done
 
