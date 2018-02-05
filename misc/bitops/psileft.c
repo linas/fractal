@@ -37,7 +37,8 @@ void bergman_vect(double Kay, complex z, complex* poly, int maxn)
  * Returns the matrix entry p_{n,j} for the bergman polynomial matrix.
  * Computed recusrively, in closed form.
  */
-double bergman_oper(double Kay, int n, int j)
+double bergman_oper(double Kay, int n, int j);
+double bergman_oper_raw(double Kay, int n, int j)
 {
 	if (0 == n && 0 == j) return 1.0;
 	if (n < j) return 0.0; // lower triangular
@@ -51,6 +52,29 @@ double bergman_oper(double Kay, int n, int j)
 	acc /= hess(Kay, n, n-1);
 	
 	return acc;
+}
+
+double bergman_oper(double Kay, int n, int j)
+{
+	static bool init = false;
+	static double bcache[MAXN][MAXN];
+	if (!init)
+	{
+		init = true;
+		for (int p=0; p<MAXN; p++)
+		{
+			for (int q=0; q<MAXN; q++)
+			{
+				bcache[p][q] = -1e40;
+			}
+		}
+	}
+	double val = bcache[n][j];
+	if (-1e30 < val) return val;
+
+	val = bergman_oper_raw(Kay, n, j);
+	bcache[n][j] = val;
+	return val;
 }
 
 /** Evaluate polynomial with coefficeints given in poly,
@@ -170,7 +194,8 @@ void verify_shift(double Kay, int maxn)
  * That is, return R such that PR = I the identity matrix,
  * Note that both R and P are lower-triangular.
  */
-double rinverse(double Kay, int m, int n)
+double rinverse(double Kay, int m, int n);
+double rinverse_raw(double Kay, int m, int n)
 {
 	if (m<0 || n<0) return 0.0;
 	if (m < n) return 0.0; // lower triangular
@@ -184,6 +209,29 @@ double rinverse(double Kay, int m, int n)
 	}
 	acc /= bergman_oper(Kay, m, m);
 	return acc;
+}
+
+double rinverse(double Kay, int n, int j)
+{
+	static bool init = false;
+	static double bcache[MAXN][MAXN];
+	if (!init)
+	{
+		init = true;
+		for (int p=0; p<MAXN; p++)
+		{
+			for (int q=0; q<MAXN; q++)
+			{
+				bcache[p][q] = -1e40;
+			}
+		}
+	}
+	double val = bcache[n][j];
+	if (-1e30 < val) return val;
+
+	val = rinverse_raw(Kay, n, j);
+	bcache[n][j] = val;
+	return val;
 }
 
 /**
