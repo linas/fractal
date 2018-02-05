@@ -378,6 +378,8 @@ int main(int argc, char* argv[])
 	}
 	double K = atof(argv[1]);
 	int maxn = atoi(argv[2]);
+
+K = 0.5 + K*0.001 * 0.32;
 	printf("#\n# K=%g\n#\n", K);
 
 	// find_midpoints(K);
@@ -400,7 +402,7 @@ int main(int argc, char* argv[])
 #endif
 
 
-#if 0
+#if PRINT_MATRIX
 	for (int n=0; n<maxn; n++)
 	{
 		for (int m=0; m<maxn; m++)
@@ -417,6 +419,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+#ifdef COLUMN_RATIOS
 	// Well, its symmetric, so it doesn't matter: rows or cols.
 	int n = 1;
 	double prev = herm(K, n, 0);
@@ -428,6 +431,20 @@ int main(int argc, char* argv[])
 		fflush(stdout);
 		prev = sym;
 	}
+#endif
+
+#define HI_ACC_RATIOS
+#ifdef HI_ACC_RATIOS
+	int n = maxn;
+	int m = maxn;
+	// m = maxn*0.723;
+	// m = maxn*0.411;
+	// m = maxn*1.411;
+	double prev = herm(K, n, m-1);
+	double sym = herm(K, n, m);
+	double rat = sym/prev;
+	printf("%g	%d	%d %g %g\n", K, n, m, sym, rat);
+#endif
 
 #if DIAGONAL_ELEMENTS
 	double ob = 1.0 / (2.0*K);
