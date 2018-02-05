@@ -14,6 +14,7 @@
 #define NOMAIN
 #include "psi.c"
 #include "psibig.c"
+#undef NOMAIN
 
 
 /** Evaluate the entries in the Bergman vector at some fixed z */
@@ -369,6 +370,7 @@ double herm(double Kay, int m, int n)
 	return acc;
 }
 
+#ifndef NOMAIN
 int main(int argc, char* argv[])
 {
 	if (argc < 3)
@@ -481,3 +483,4 @@ K = 0.5 + K*0.001 * 0.32;
 	}
 #endif
 }
+#endif
