@@ -1,7 +1,9 @@
 /*
  * moments.c
  *
- * Moments of the downshift.
+ * Moments of the downshift invariant measure.
+ * Nothing ehre, boring.
+ *
  * Feb 2018
  */
 
@@ -55,7 +57,7 @@ int main (int argc, char* argv[])
 	{
 		double x = ((double) i + 0.5) / ((double) npts);
 		x *= K;
-		mu[i] = reigen(x, K, nrecu);
+		mu[i] = reig(x, K, nrecu);
 		sum += mu[i]*mu[i];
 	}
 
@@ -67,6 +69,7 @@ int main (int argc, char* argv[])
 		mu[i] *= sum;
 	}
 
+	double OK = 1.0/K;
 	for (int k=0; k<nmom; k++)
 	{
 		double mom = 0.0;
@@ -77,6 +80,8 @@ int main (int argc, char* argv[])
 			mom += mu[i] * xn;
 		}
 		mom /= npts;
+		mom *= OK;
 		printf("%d	%g\n", k, mom);
+		OK /= K;
 	}
 }
