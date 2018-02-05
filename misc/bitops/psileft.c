@@ -359,10 +359,10 @@ int main(int argc, char* argv[])
 		{
 			// double poly = bergman_oper(K, n, m);
 			// double inv = rinverse(K, n, m);
-			double ort = ortho(K, n, m);
-			// double sym = herm(K, n, m);
+			// double ort = ortho(K, n, m);
+			double sym = herm(K, n, m);
 			// double koop = binv_hess_trans_berg(K, n, m);
-			double try = ort;
+			double try = sym;
 			printf("[%d	%d] =	%g\n", n, m, try);
 		}
 		printf(" ---------------\n");
