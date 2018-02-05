@@ -368,12 +368,17 @@ int main(int argc, char* argv[])
 		printf(" ---------------\n");
 	}
 #endif
-	int n = 8;
-	for (int m=0; m<maxn; m++)
+
+	// Well, its symmetric, so it doesn't matter: rows or cols.
+	int n = 1;
+	double prev = herm(K, n, 0);
+	for (int m=1; m<maxn; m++)
 	{
 		double sym = herm(K, n, m);
-		printf("%d	%d %g\n", n, m, sym);
+		double rat = sym/prev;
+		printf("%d	%d %g %g\n", n, m, sym, rat);
 		fflush(stdout);
+		prev = sym;
 	}
 
 #if DIAGONAL_ELEMENTS

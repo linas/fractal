@@ -77,7 +77,7 @@ nilpot: nilpot.o
 bitshow: bitshow.o $(FUNC)
 complex: complex.o
 psiunitary: psiunitary.o -lgsl -lgslcblas
-bergman: bergman.o $(BRAT) -lgsl -lgslcblas
+bergman: bergman.o -lgsl -lgslcblas # $(BRAT)
 psifp: psifp.o -lgsl -lgslcblas
 midpo: midpo.o -lgsl -lgslcblas
 psidist: psidist.o

@@ -13,7 +13,7 @@
 #include <math.h>
 #include <complex.h>
 
-#include "brat.h"
+// #include "brat.h"
 
 #define NOMAIN
 #include "psi.c"
@@ -151,9 +151,9 @@ if(abs(zabs - 2.0*Kay) < 0.003) return 0.5;
 	return rv;
 }
 
-DECL_MAKE_HEIGHT(invariant_domain)
+// DECL_MAKE_HEIGHT(invariant_domain)
 
-#if 0
+#if 1
 int main (int argc, char* argv[])
 {
 	if (argc < 3)

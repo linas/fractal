@@ -7095,7 +7095,7 @@ These charts show the subdiagonal matrix entries
  is not clear.
  
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 genrerated with ...berg.gplot from stubbed out hess-printing code in bergman.C
@@ -7308,7 +7308,11 @@ Suppose one is given an (arbitrary) sequence of polynomials
 \begin_inset Formula $n.$
 \end_inset
 
- Then each individial polynomial can be expanded as 
+ Then each individial polynomial can be expanded as or 
+\begin_inset Formula $\beta>\varphi$
+\end_inset
+
+,
 \begin_inset Formula 
 \[
 p_{n}\left(z\right)=\sum_{k=0}^{n}p_{nk}z^{k}
@@ -7645,23 +7649,6 @@ so that
 \end_layout
 
 \begin_layout Subsection
-Hermiticity
-\end_layout
-
-\begin_layout Standard
-Consider the matrix 
-\begin_inset Formula $\mathcal{M}=\mathcal{RR}^{T}$
-\end_inset
-
-.
- It is symmetric: 
-\begin_inset Formula $\mathcal{M}=\mathcal{M}^{T}$
-\end_inset
-
- and it is positive-definite!?
-\end_layout
-
-\begin_layout Subsection
 Beta-transform factoids
 \end_layout
 
@@ -7923,6 +7910,45 @@ When the Hessenberg matrix is derived from measures on the complex plane,
 
 , while all the rest obey 
 \begin_inset Formula $0<\left[\mathcal{M}\right]_{ij}<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the standard literature, 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ is usually obtained from some moment matrix, viz, for the integral 
+\begin_inset Formula $\int\overline{z}^{m}z^{n}d\mu\left(z\right)$
+\end_inset
+
+ for some measure 
+\begin_inset Formula $d\mu\left(z\right)$
+\end_inset
+
+.
+ Might that be the case here? Taking the time to numerically characterize
+ the matrix, one finds that, or 
+\begin_inset Formula $\beta>\varphi$
+\end_inset
+
+, that the ratio of successive rows (or columns as its symmetric) very quickly
+ approaches a limit 
+\begin_inset Formula $\lim_{n\to\infty,}\left[\mathcal{M}\right]_{nm}/\left[\mathcal{M}\right]_{n-1,m}=C\left(\beta\right)$
+\end_inset
+
+ for some constant 
+\begin_inset Formula $C$
+\end_inset
+
+ that depends ony on 
+\begin_inset Formula $\beta$
+\end_inset
+
+ but not on 
+\begin_inset Formula $m$
 \end_inset
 
 .
