@@ -352,7 +352,7 @@ int main(int argc, char* argv[])
 #endif
 
 
-#if 1
+#if 0
 	for (int n=0; n<maxn; n++)
 	{
 		for (int m=0; m<maxn; m++)
@@ -368,6 +368,13 @@ int main(int argc, char* argv[])
 		printf(" ---------------\n");
 	}
 #endif
+	int n = 8;
+	for (int m=0; m<maxn; m++)
+	{
+		double sym = herm(K, n, m);
+		printf("%d	%d %g\n", n, m, sym);
+		fflush(stdout);
+	}
 
 #if DIAGONAL_ELEMENTS
 	double ob = 1.0 / (2.0*K);

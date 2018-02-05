@@ -1,0 +1,21 @@
+
+set term png size 1024,768 enhanced
+set out 'em.png'
+
+set logscale y
+set yrange [0.2:1]
+
+# OK best fit: beta=0.9
+# row 0 is (0.933**($2-1))
+#
+plot "em.dat" using 2:3 with lines lw 2 title "row 0", \
+     "em-1.dat" using 2:3 with lines lw 2 title "row 1", \
+     "em-2.dat" using 2:3 with lines lw 2 title "row 2", \
+     "em-3.dat" using 2:3 with lines lw 2 title "row 3", \
+     "em-4.dat" using 2:3 with lines lw 2 title "row 4", \
+     "em-5.dat" using 2:3 with lines lw 2 title "row 5", \
+     "em-6.dat" using 2:3 with lines lw 2 title "row 6", \
+     "em-7.dat" using 2:3 with lines lw 2 title "row 7", \
+     "em-8.dat" using 2:3 with lines lw 2 title "row 8", \
+
+#     "em-1.dat" using 2:(0.933**($2-1)) with lines lw 2 title "fit"
