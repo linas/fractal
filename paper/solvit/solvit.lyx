@@ -177,16 +177,6 @@ Another interesting, surprising result is that the eigenvalues of the transfer
  a quasi-unitary spectrum seems surprising.
 \end_layout
 
-\begin_layout Abstract
-Another result is the disappearance of a certain zero for 
-\begin_inset Formula $\beta>\left(1+\sqrt{5}\right)/2$
-\end_inset
-
- the Golden ratio.
- There's no obvious reason for the Golden ratio to appear in these proceedings;
- its a strange result.
-\end_layout
-
 \begin_layout Section
 Introduction
 \end_layout
@@ -1620,7 +1610,7 @@ s_{\beta}(u)=\begin{cases}
 \end_inset
 
 Performing a left-right flip on the side-tent brings it closer in form to
- the side-shift.
+ the beta-transformation.
  The flipped version, replacing 
 \begin_inset Formula $u\to1-u$
 \end_inset
@@ -1690,7 +1680,7 @@ reference "fig:Side-Shift-and-Side-tent"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1993,11 +1983,25 @@ key "Dajani97"
 \end_inset
 
  The symbolic dynamics of the beta-transformation was analyzed by F.
- Blanchard.
+ Blanchard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Blanchard89"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The zeta function is given by Lagarias.
+The zeta function is given by Lagarias
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lagarias94"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -5560,6 +5564,154 @@ which is determined by requiring that
 \end_layout
 
 \begin_layout Subsection
+The Golden Ratio
+\end_layout
+
+\begin_layout Standard
+The above wavelet basis seems to be well-behaved, except when 
+\begin_inset Formula $\beta=\varphi=\left(1+\sqrt{5}\right)/2$
+\end_inset
+
+ the Golden Ratio.
+ In this situation, one has that 
+\begin_inset Formula $m_{0}=\varphi/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{1}=1/2$
+\end_inset
+
+.
+ At this location, further iteration breaks down.
+ That is, 
+\begin_inset Formula $m_{2}=T_{\varphi}\left(m_{1}\right)$
+\end_inset
+
+ can either be taken to be 
+\begin_inset Formula $m_{2}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $m_{2}=m_{0}$
+\end_inset
+
+.
+ In the former case, iteration simply stops; in the later case, it repeats,
+ again, without generating new midpoints that can provide a workable basis.
+\end_layout
+
+\begin_layout Standard
+Working backwards, this issue re-appears whenever the 
+\begin_inset Formula $p$
+\end_inset
+
+'th iterate gives 
+\begin_inset Formula $m_{p}=T_{\varphi}^{p}\left(m_{0}\right)$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $p=3$
+\end_inset
+
+, the next trouble spots occur when either 
+\begin_inset Formula $\beta^{3}-\beta^{2}-1=0$
+\end_inset
+
+ or when 
+\begin_inset Formula $\beta^{3}-\beta^{2}-\beta-1=0$
+\end_inset
+
+.
+ These correspond to the values of 
+\begin_inset Formula $\beta=1.465571231876768\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=1.839286755214161\cdots$
+\end_inset
+
+.
+ These may be called 
+\begin_inset Quotes eld
+\end_inset
+
+generalized golden means
+\begin_inset Quotes erd
+\end_inset
+
+, as done by Dajani
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dajani97"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+These trouble spots naturally form an infiinite dyadic tree.
+ At the root of the tree is 
+\begin_inset Formula $\varphi$
+\end_inset
+
+, and to the left and right are the two values above.
+ Alternately, at the root of the tree, one can take the equation 
+\begin_inset Formula $\beta^{2}-\beta-1=0$
+\end_inset
+
+, and the corresponding equations on the left and right.
+ Iterating, one obtains a countable sequence of values dense in the interval
+ 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+ In between these values, one has the Cantor set; the wavelet basis above
+ forms an orthonormal 
+\begin_inset Quotes eld
+\end_inset
+
+complete
+\begin_inset Quotes erd
+\end_inset
+
+ basis whenever 
+\begin_inset Formula $\beta$
+\end_inset
+
+ does not belong to the trouble-set.
+\end_layout
+
+\begin_layout Standard
+Exercise left for the reader: Presumably, the tree contains vertexes of
+ the form 
+\begin_inset Formula $\beta^{p}-\beta^{p-1}-b_{p-2}\beta^{p-2}-b_{p-3}\beta^{p-3}-\cdots-1=$
+\end_inset
+
+ for some (finite) sequence 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ of binary digits corresponding to left-right moves on the infinite tree.
+ A wothy exercise would be to formulate th is precisely.
+ 
+\end_layout
+
+\begin_layout Standard
+Another exercise would be to provide an explicit mapping between these troubleso
+me 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values, and the dyadic rationals.
+ This mapping must take on some fractal shape, by what is that fractal,
+ and what are it's self-symmetries?
+\end_layout
+
+\begin_layout Subsection
 Matrix Elements
 \end_layout
 
@@ -8065,7 +8217,7 @@ reference "fig:Symmetric-Matrix-Limit-Ratio"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -8112,7 +8264,37 @@ This figure shows the limit
 \end_inset
 
 .
- The jump is at about 1.839286756452.
+ The jump is at about 
+\begin_inset Formula $\kappa=1.83928676\cdots$
+\end_inset
+
+.
+ Note this is one of the 
+\begin_inset Quotes eld
+\end_inset
+
+troublesome midpoints
+\begin_inset Quotes erd
+\end_inset
+
+ for the Hessenberg basis expansion: that 
+\begin_inset Formula $T_{\kappa}^{3}\left(\kappa/2\right)=0\mbox{ or }\kappa/2$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\kappa^{2}\left(\kappa-1\right)-\kappa-1=0$
+\end_inset
+
+.
+ The remaining steps presumably correspond to higher iterates 
+\begin_inset Formula $p$
+\end_inset
+
+ that satisfy 
+\begin_inset Formula $T_{\beta}^{p}\left(\beta/2\right)=0$
+\end_inset
+
+.
  
 \begin_inset Note Note
 status collapsed
@@ -8179,10 +8361,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -8230,6 +8408,28 @@ This figure shows the limit
  The overall shape is that of a hyperbola, but doesn't seem to actually
  be hyperbolic for either small or large 
 \begin_inset Formula $\beta$
+\end_inset
+
+.
+ The right-most nick in the curve appears to be at 
+\begin_inset Formula $\beta=1.465571231876768\cdots$
+\end_inset
+
+ which solves 
+\begin_inset Formula $\beta^{2}\left(\beta-1\right)-1=0$
+\end_inset
+
+; that is, it occurs at 
+\begin_inset Formula $T_{\beta}^{3}\left(\beta/2\right)=0$
+\end_inset
+
+.
+ The remaining nicks are presumably located at 
+\begin_inset Formula $T_{\beta}^{p}\left(\beta/2\right)=0$
+\end_inset
+
+ for higher iterates 
+\begin_inset Formula $p$
 \end_inset
 
 .
