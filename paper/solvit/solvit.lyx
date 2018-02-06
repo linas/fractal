@@ -1516,17 +1516,17 @@ After exactly one iteration of the downshift , all initial points
 
  to obtain the function
 \begin_inset Formula 
-\[
-d_{\beta}(u)=\begin{cases}
+\begin{equation}
+t_{\beta}(u)=\begin{cases}
 \beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
 \beta u-1 & \mbox{ for }\frac{1}{\beta}\le u\le1
-\end{cases}
-\]
+\end{cases}\label{eq:beta transform}
+\end{equation}
 
 \end_inset
 
 which can be written more compactly as 
-\begin_inset Formula $d_{\beta}\left(x\right)=\beta x\,\mod1$
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\,\mod1$
 \end_inset
 
 .
@@ -1903,11 +1903,16 @@ Beta Transformation History
 \end_layout
 
 \begin_layout Standard
-Equivalently, it can be written far more compactly as
-\end_layout
+The 
+\begin_inset Formula $\beta$
+\end_inset
 
-\begin_layout Standard
-The bit expansion 
+-transformation, in the form of 
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\,\mod1$
+\end_inset
+
+ has been well-studied over the decades.
+ The bit expansion 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:down-bits"
@@ -1922,7 +1927,7 @@ key "Renyi57"
 
 \end_inset
 
-, who demionstrates the existance of an invariant measure, given below.
+, who demonstrates the existance of the invariant measure.
  The ergodic properties of the transform were proven by W.
  Parry
 \begin_inset CommandInset citation
@@ -1935,7 +1940,7 @@ key "Parry60"
 \end_layout
 
 \begin_layout Standard
-An explicit expression for the distrubution was given by W.
+An explicit expression for the invariant measure was given by W.
  Parry
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1959,7 +1964,7 @@ where
 \begin_inset Formula 
 \[
 d_{n}\left(y\right)=\begin{cases}
-0 & \mbox{ if }T_{\beta}^{n}\left(1\right)\le y\\
+0 & \mbox{ if }t_{\beta}^{n}\left(1\right)\le y\\
 1 & \mbox{ otherwise}
 \end{cases}
 \]
@@ -1981,6 +1986,18 @@ The
 
 -transformation has been shown to have the same ergodicity properties as
  the Bernoulli shift.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dajani97"
+
+\end_inset
+
+ The symbolic dynamics of the beta-transformation was analyzed by F.
+ Blanchard.
+\end_layout
+
+\begin_layout Standard
+The zeta function is given by Lagarias.
 \end_layout
 
 \begin_layout Section
@@ -5311,12 +5328,12 @@ Consider
 
 .
  Solving explicitly for the location of the step, it is 
-\begin_inset Formula $x=\beta^{2}-\beta/2$
+\begin_inset Formula $x=\beta\left(\beta-1\right)/2$
 \end_inset
 
 .
  For convenience, define 
-\begin_inset Formula $m_{1}=\beta^{2}-\beta/2$
+\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2$
 \end_inset
 
  and 
@@ -5368,7 +5385,7 @@ Consider
 \end_inset
 
  is at 
-\begin_inset Formula $m_{1}=\beta^{2}-\beta/2$
+\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2$
 \end_inset
 
  and this mid-point is mapped to one of two different places.
@@ -5435,27 +5452,31 @@ Because each end of the interval on which
 
 \begin_layout Standard
 The rest of the basis can be constructed iteratively, based on these examples.
- Thus: let 
-\begin_inset Formula $m_{p-1}$
+ The midpoints are given by iterating 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
 \end_inset
 
- be the mid-point of 
-\begin_inset Formula $\psi_{p-1}$
+ on 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+, so that 
+\begin_inset Formula $m_{p}=T_{\beta}\left(m_{p-1}\right)=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+ is the 
+\begin_inset Formula $p$
+\end_inset
+
+'th iterate of 
+\begin_inset Formula $\beta/2$
 \end_inset
 
 .
  Let 
-\begin_inset Formula 
-\[
-m_{p}=\begin{cases}
-\beta m_{p-1} & \mbox{for }m_{p-1}\le\frac{1}{2}\\
-\beta m_{p-1}-\frac{\beta}{2} & \mbox{for }\frac{1}{2}<m_{p-1}
-\end{cases}
-\]
-
-\end_inset
-
-Let 
 \begin_inset Formula $m_{l}$
 \end_inset
 
