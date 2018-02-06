@@ -84,7 +84,7 @@
 \begin_body
 
 \begin_layout Title
-On the Beta Transform
+On the Beta Transformation
 \end_layout
 
 \begin_layout Author
@@ -588,12 +588,12 @@ In what follows, the text will in general confine itself to uncountable
 \end_layout
 
 \begin_layout Subsection
-Beta transform
+Downshift
 \end_layout
 
 \begin_layout Standard
-The beta transform is similar to the Bernoulli shift, replacing the number
- 2 by a constant real-number value 
+The downshift is similar to the Bernoulli shift, replacing the number 2
+ by a constant real-number value 
 \begin_inset Formula $1<\beta\le2$
 \end_inset
 
@@ -612,14 +612,6 @@ T_{\beta}(x)=\begin{cases}
 
 \end_inset
 
-Equivalently, it can be written far more compactly as
-\begin_inset Formula 
-\[
-T_{\beta}\left(x\right)=\beta x\,\mod1
-\]
-
-\end_inset
-
 This map, together with similar maps, is illustrated in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -628,35 +620,12 @@ reference "fig:Iterated-piece-wise-linear"
 \end_inset
 
  below.
- it has the same shape, but is shorter or lower; in much of the remaining
- text, it will be called the 
-\begin_inset Quotes eld
-\end_inset
-
-downshift
-\begin_inset Quotes erd
-\end_inset
-
-.
- This name is idiosyncratic to this text, but is less of a mouthful than
- having to say 
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset Formula $\beta$
-\end_inset
-
--transform
-\begin_inset Quotes erd
-\end_inset
-
- over and over.
+ 
 \end_layout
 
 \begin_layout Standard
 Just as the Bernoulli shift generates a sequence of digits, so does the
- beta transform: write
+ downshift: write
 \begin_inset Formula 
 \begin{equation}
 k_{n}=\begin{cases}
@@ -1514,7 +1483,7 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-Sideshift
+Beta Transformation
 \end_layout
 
 \begin_layout Standard
@@ -1556,34 +1525,50 @@ d_{\beta}(u)=\begin{cases}
 
 \end_inset
 
-The orbit of a point 
+which can be written more compactly as 
+\begin_inset Formula $d_{\beta}\left(x\right)=\beta x\,\mod1$
+\end_inset
+
+.
+ In this form, the function is known as the beta transform, and is often
+ called the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation, as if to present a typesetting challenge to publishers.
+ The orbit of a point 
 \begin_inset Formula $x$
 \end_inset
 
- in the beta transform is identical to the orbit of a point 
+ in the downshift is identical to the orbit of a point 
 \begin_inset Formula $u=2x/\beta$
 \end_inset
 
- in the above.
- This function, henceforth called the 
-\begin_inset Quotes eld
-\end_inset
-
-sideshift
-\begin_inset Quotes erd
-\end_inset
-
-, iterates identically to the beta transform.
- The values, however, differ by a factor of 
-\begin_inset Formula $\beta/2$
-\end_inset
-
-; this alters the symbolic dynamics of the sideshift, as compared to the
- downshift.
+ in the beta transformation.
+ 
 \end_layout
 
 \begin_layout Standard
-A similar situation applies to the tent map.
+Although the downshift and the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation are essentially 
+\begin_inset Quotes eld
+\end_inset
+
+the same function
+\begin_inset Quotes erd
+\end_inset
+
+, this text works almost exclusively with the downshift.
+ There is no particular technical reason for this; it is rather due to happensta
+nce.
+ 
+\end_layout
+
+\begin_layout Standard
+After a single iteration of the tent map, a similar situation applies.
  After one iteration, all initial points 
 \begin_inset Formula $\beta/2\le x\le1$
 \end_inset
@@ -1705,7 +1690,7 @@ reference "fig:Side-Shift-and-Side-tent"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1745,7 +1730,11 @@ The downshift map, shown in the upper left, generates orbits that spend
 \end_inset
 
 .
- Enlarging this box to the unit square gives the sideshift.
+ Enlarging this box to the unit square gives the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation.
  The tent map resembles the downshift, except that one arm is flipped to
  make a tent-shape.
  After a finite number of iterations, orbits move enitrely in the shaded
@@ -1907,6 +1896,91 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Beta Transformation History
+\end_layout
+
+\begin_layout Standard
+Equivalently, it can be written far more compactly as
+\end_layout
+
+\begin_layout Standard
+The bit expansion 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+
+\end_inset
+
+ was introduced by A.
+ Renyi
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Renyi57"
+
+\end_inset
+
+, who demionstrates the existance of an invariant measure, given below.
+ The ergodic properties of the transform were proven by W.
+ Parry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+
+\end_inset
+
+, who also shows that the system is weakly mixing.
+\end_layout
+
+\begin_layout Standard
+An explicit expression for the distrubution was given by W.
+ Parry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+
+\end_inset
+
+, as
+\begin_inset Formula 
+\[
+\rho_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{d_{n}\left(y\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ is the digit sequence 
+\begin_inset Formula 
+\[
+d_{n}\left(y\right)=\begin{cases}
+0 & \mbox{ if }T_{\beta}^{n}\left(1\right)\le y\\
+1 & \mbox{ otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $F$
+\end_inset
+
+ is a normalization constant.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation has been shown to have the same ergodicity properties as
+ the Bernoulli shift.
 \end_layout
 
 \begin_layout Section
@@ -7970,7 +8044,7 @@ reference "fig:Symmetric-Matrix-Limit-Ratio"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -8017,6 +8091,8 @@ This figure shows the limit
 \end_inset
 
 .
+ The jump is at about 1.839286756452.
+ 
 \begin_inset Note Note
 status collapsed
 
