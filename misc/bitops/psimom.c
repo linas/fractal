@@ -11,9 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NOMAIN
+#define NOMOMAIN
 #include "psileft.c"
-#undef NOMAIN
+#undef NOMOMAIN
 
 
 int main(int argc, char* argv[])
@@ -32,31 +32,32 @@ int main(int argc, char* argv[])
 	big_midpoints(K, 400, midpoints, MAXN);
 	sequence_midpoints(K, MAXN);
 
-#ifdef COLUMN_RATIOS
-	// Well, its symmetric, so it doesn't matter: rows or cols.
-	int n = 1;
-	double prev = herm(K, n, 0);
-	for (int m=1; m<maxn; m++)
-	{
-		double sym = herm(K, n, m);
-		double rat = sym/prev;
-		printf("%d	%d %g %g\n", n, m, sym, rat);
-		fflush(stdout);
-		prev = sym;
-	}
-#endif
-
-#define HI_ACC_RATIOS
-#ifdef HI_ACC_RATIOS
-	int n = maxn;
-	int m = maxn;
-	// m = maxn*0.723;
-	// m = maxn*0.411;
-	// m = maxn*1.711;
+	// Get a high-accuracy ratio
+	int n = 90;
+	int m = 90;
 	double prev = herm(K, n, m-1);
 	double sym = herm(K, n, m);
 	double rat = sym/prev;
-	printf("%g	%d	%d %g %g\n", K, n, m, sym, rat);
+
+	double pnt = pow(rat, n+m+1);
+	double lng = sym/pnt;
+	printf("# %g	%d	%d sym=%g rat=%g f=%g\n#\n", K, n, m, sym, rat, lng);
+
+#define PRINT_MATRIX
+#ifdef PRINT_MATRIX
+	for (int n=0; n<maxn; n++)
+	{
+		for (int m=0; m<maxn; m++)
+		{
+			double her = herm(K, n, m);
+			double pnt = pow(rat, n+m+1);
+			// double asy = her/ (pnt * lng);
+			double rem = her - pnt*lng;
+			// printf("[%d	%d] =	%g	%g	%g	%g\n", n, m, her, pnt, asy, rem);
+			printf("[%d	%d] =	%g	%g\n", n, m, her, rem);
+		}
+		printf(" ---------------\n");
+	}
 #endif
 
 }

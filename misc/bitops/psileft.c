@@ -370,7 +370,7 @@ double herm(double Kay, int m, int n)
 	return acc;
 }
 
-#ifndef NOMAIN
+#ifndef NOMOMAIN
 int main(int argc, char* argv[])
 {
 	if (argc < 3)
