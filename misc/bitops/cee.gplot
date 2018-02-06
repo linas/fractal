@@ -13,6 +13,7 @@ set out 'cee.png'
 set xrange [0:1]
 plot "ceee.dat" using ((2-(2*$1))/(2-1.618034)):(1-$5) with lines lw 2 title "hidef"
 
+# ----------------------------------------
 set out 'bee.png'
 set xrange [1:1.6]
 # plot "bee.dat" using (2*$1):5 with lines lw 2 title "ratio",
@@ -37,6 +38,40 @@ plot "bee.dat" using (2*$1):4 with lines lw 2 title "limit-90", \
 
 # plot "bee-450.dat" using (2*$1):4 with lines lw 2 title ""
 #
+# ----------------------------------------
+set term png size 1024,768 enhanced
+set out 'aee.png'
+
+set xlabel "{/Symbol b}"
+set ylabel "A({/Symbol b})"
+set title "Weight"
+
+set xrange [1.6:2]
+unset yrange
+# set logscale y
+# set yrange [1:2.4]
+
+# plot "cee-90.dat" using (2*$1):(log($6-1)) with lines lw 2 title "limit-90", \
+
+plot "cee-90.dat" using (2*$1):6 with lines lw 2 title "limit-90", \
+     "cee-120.dat" using (2*$1):6 with lines lw 2 title "limit-120", \
+     "cee-140.dat" using (2*$1):6 with lines lw 2 title "limit-140"
+
+# ##############################################################
+# Used to generate the figure in the paper.
+#
+set term postscript eps color enhanced
+set out 'aee.eps'
+
+set xlabel "{/Symbol b}"
+set ylabel "A({/Symbol b})"
+set title "Point Weight"
+
+set xrange [1.6:2]
+unset yrange
+
+plot "cee-90.dat" using (2*$1):6 with lines lw 2 title ""
+
 # ##############################################################
 # Used to generate the figure in the paper.
 #
