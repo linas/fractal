@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 	double K = atof(argv[1]);
 	int maxn = atoi(argv[2]);
 
-K = 0.81 + K*0.001 * 0.19;
+// K = 0.81 + K*0.001 * 0.19;
 
 	printf("#\n# K=%g\n#\n", K);
 
