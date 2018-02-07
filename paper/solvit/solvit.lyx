@@ -5755,7 +5755,7 @@ Exercise left for the reader: Presumably, the tree contains vertexes of
 \end_inset
 
  of binary digits corresponding to left-right moves on the infinite tree.
- A wothy exercise would be to formulate th is precisely.
+ A worthy exercise would be to formulate this precisely.
  
 \end_layout
 
@@ -5781,7 +5781,225 @@ key "Maia07"
 \end_inset
 
 , but the precise nature of this relationship is unclear.
+\end_layout
+
+\begin_layout Subsection
+Islands of Stability
+\end_layout
+
+\begin_layout Standard
+These trouble-spots can be seen to be in one-to-one accordance with the
  
+\begin_inset Quotes eld
+\end_inset
+
+islands of stability
+\begin_inset Quotes erd
+\end_inset
+
+ seen in the iterated logistic map.
+ They are, in essence, locations where periodic orbits 
+\begin_inset Quotes eld
+\end_inset
+
+could be pasted
+\begin_inset Quotes erd
+\end_inset
+
+, or where they 
+\begin_inset Quotes eld
+\end_inset
+
+naturally would appear
+\begin_inset Quotes erd
+\end_inset
+
+, if the map supported periodic attractors.
+ That is, the downshift only supports a single attractor, of period-one
+ at 
+\begin_inset Formula $x=0$
+\end_inset
+
+; there is no 
+\begin_inset Quotes eld
+\end_inset
+
+room
+\begin_inset Quotes erd
+\end_inset
+
+ for anything more.
+ This is analogous, in a way, to the phase locked loop, at zero coupling
+ constant.
+ At finite coupling strength, these 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spots
+\begin_inset Quotes erd
+\end_inset
+
+ expand out as Sinai's tongues, to have a finite size, visible on the Feigenbaum
+ diagram for the logistic map as regions where period-doubling is occuring.
+\end_layout
+
+\begin_layout Standard
+The idea here can be illustrated explicitly.
+ Given some 
+\begin_inset Quotes eld
+\end_inset
+
+small
+\begin_inset Quotes erd
+\end_inset
+
+, real 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, define the 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+-generalization of the map 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+T_{\beta,\varepsilon}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
+\beta\left(\frac{1-4\varepsilon}{4\varepsilon}\right)\left(\frac{1}{2}-x\right)+\frac{\beta}{4} & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+This simply connects the two endpoints in the middle of the downshift, 
+\begin_inset Quotes eld
+\end_inset
+
+widening
+\begin_inset Quotes erd
+\end_inset
+
+ it so that the has finite, not infinite slope, and converting the iterated
+ function from a discontinuous to a continuous one.
+ In the limit, one regains the earlier downshift: 
+\begin_inset Formula $\lim_{\varepsilon\to0}T_{\beta,\varepsilon}=T_{\beta}$
+\end_inset
+
+, as the slope of the middle bit becomes infinite.
+ For finite 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, however, one gains a critical point in the region 
+\begin_inset Formula $\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon$
+\end_inset
+
+.
+ For fixed 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, but varying 
+\begin_inset Formula $\beta$
+\end_inset
+
+, this critical point might be attractive (a fixed point) or repulsive.
+ If repulsive, it will bifurcate along a period-doubling sequence, becoming
+ a period-2, period-4, 
+\emph on
+etc
+\emph default
+.
+ orbit as 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is varied.
+ The ranges of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for which 
+\begin_inset Formula $T_{\beta,\varepsilon}$
+\end_inset
+
+ has periodic orbits are finite in size, and interleave with ranges where
+ 
+\begin_inset Formula $T_{\beta,\varepsilon}$
+\end_inset
+
+ is chaotic (ergodic).
+ As 
+\begin_inset Formula $\varepsilon\to0$
+\end_inset
+
+, the 
+\begin_inset Quotes eld
+\end_inset
+
+stable
+\begin_inset Quotes erd
+\end_inset
+
+ periodic regions shrink to zero size, and are in one-to-one correspondance
+ with the 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spots
+\begin_inset Quotes erd
+\end_inset
+
+, described above.
+\end_layout
+
+\begin_layout Standard
+To summarize: the 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spots
+\begin_inset Quotes erd
+\end_inset
+
+ don't 
+\begin_inset Quotes eld
+\end_inset
+
+just
+\begin_inset Quotes erd
+\end_inset
+
+ break the ability to create a Hessenberg basis at certain values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+: they are more 
+\begin_inset Quotes eld
+\end_inset
+
+fundamental
+\begin_inset Quotes erd
+\end_inset
+
+ than that: they indicate the regions where (
+\begin_inset Quotes eld
+\end_inset
+
+phase-locked
+\begin_inset Quotes erd
+\end_inset
+
+) periodic orbits can be made to appear.
 \end_layout
 
 \begin_layout Subsection
