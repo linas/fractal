@@ -54,6 +54,13 @@ int main(int argc, char* argv[])
 		pitw[n] = acc;
 	}
 
+	// renormalize
+	double ren = pitw[0];
+	for (int n=0; n<maxn; n++)
+	{
+		pitw[n] /= ren;
+	}
+
 	// multiply by hess
 	double ha[maxn];
 	for (int n=0; n<maxn; n++)
@@ -69,9 +76,21 @@ int main(int argc, char* argv[])
 
 	for (int n=0; n<maxn; n++)
 	{
-		printf("%d	%g	%g	%g\n", n, wvec[n], pitw[n], ha[n]);
+		double rat = ha[n] / pitw[n];
+		printf("# %d	%g	%g	%g	%g\n", n, wvec[n], pitw[n], ha[n], rat);
 	}
 
+#define NPTS 801
+	for (int i=0; i<NPTS; i++)
+	{
+		double x = ((double) i + 0.5) / ((double) NPTS);
+		double y = 0.0; 
+		for (int n=0; n<maxn; n++)
+		{
+			y += ha[n] * psi_n(x, K, n);
+		}
+		printf("%d	%g	%g\n", i, x, y);
+	}
 
 // #define PRINT_MATRIX
 #ifdef PRINT_MATRIX

@@ -404,17 +404,18 @@ K = 0.5 + K*0.001 * 0.32;
 #endif
 
 
-#if PRINT_MATRIX
+#define PRINT_MATRIX
+#ifdef PRINT_MATRIX
 	for (int n=0; n<maxn; n++)
 	{
 		for (int m=0; m<maxn; m++)
 		{
 			// double poly = bergman_oper(K, n, m);
-			// double inv = rinverse(K, n, m);
+			double inv = rinverse(K, n, m);
 			// double ort = ortho(K, n, m);
-			double sym = herm(K, n, m);
+			// double sym = herm(K, n, m);
 			// double koop = binv_hess_trans_berg(K, n, m);
-			double try = sym;
+			double try = inv;
 			printf("[%d	%d] =	%g\n", n, m, try);
 		}
 		printf(" ---------------\n");
@@ -435,7 +436,7 @@ K = 0.5 + K*0.001 * 0.32;
 	}
 #endif
 
-#define HI_ACC_RATIOS
+// #define HI_ACC_RATIOS
 #ifdef HI_ACC_RATIOS
 	int n = maxn;
 	int m = maxn;
