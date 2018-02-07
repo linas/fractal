@@ -4935,7 +4935,7 @@ These figures illustrate the
 \begin_inset Formula $x$
 \end_inset
 
-axis, while 
+ axis, while 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -4972,6 +4972,24 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+TODO: Graph the figures
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tree-functions"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tree-function-variations"
+
+\end_inset
+
+ in the usual gloriously-colored-3D style.
 \end_layout
 
 \begin_layout Subsection
@@ -5789,6 +5807,13 @@ key "Maia07"
 
 \begin_layout Subsection
 Islands of Stability And Sinai's Tongues
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Islands-of-Stability"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7773,6 +7798,17 @@ Based on numeric exploration, it appears that the domain is the unit disk.
 .
 \end_layout
 
+\begin_layout Standard
+TODO: Graph figure
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Subdiagonal-Entries"
+
+\end_inset
+
+ in the usual gloriously-colored-3D style.
+\end_layout
+
 \begin_layout Subsection
 Bergman Alternative
 \end_layout
@@ -8427,6 +8463,79 @@ This implies that every polynomial
 
 .
  
+\end_layout
+
+\begin_layout Standard
+TODO: Graph the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Polynomial-Operator-Diagonal"
+
+\end_inset
+
+ in the usual gloriously-colored-3D style.
+\end_layout
+
+\begin_layout Subsection
+Decaying Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+The matrix mechanics developed in the previous sections can be used to perform
+ asymptotic expansions that rapidly converge to decaying eigenfunctions.
+ This works most simply for the case of 
+\begin_inset Formula $\varphi<\beta$
+\end_inset
+
+.
+ TODO Write these down.
+ TODO flesh out.
+ Basically, write a vector 
+\begin_inset Formula $\vec{w}$
+\end_inset
+
+ with elements 
+\begin_inset Formula $w_{n}=\omega^{n}$
+\end_inset
+
+ for 
+\begin_inset Formula $1<\left|\omega\right|$
+\end_inset
+
+ so that this is divergent.
+ Then write the formal vector 
+\begin_inset Formula $\vec{a}=\left[\mathcal{P}^{T}\right]^{-1}\vec{w}$
+\end_inset
+
+ which is formally divergent, but can be trancated in finite dimensions,
+ and renormalized to be of unit length.
+ Doing so provides an eigenfunction of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The associated eigenvalue is 
+\begin_inset Formula $1$
+\end_inset
+
+ when 
+\begin_inset Formula $\beta<\varphi$
+\end_inset
+
+ but is less than 1 when 
+\begin_inset Formula $\varphi<\beta$
+\end_inset
+
+ (and in fact, the eigenvalue is exactly that depicted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Symmetric-Matrix-Limit-Ratio"
+
+\end_inset
+
+).
+ TODO graph some of these, explore more thoroughly, adress the issues of
+ formal divergence.
 \end_layout
 
 \begin_layout Subsection
@@ -11178,6 +11287,8 @@ Sci-fi day-dreaming
 \begin_layout Standard
 This section provides two day-dreams inspired by this material.
  They are just that: daydreams.
+ If you don't like fictional daydreaming, you won't like the material here.
+ Sorry about that.
 \end_layout
 
 \begin_layout Subsection
@@ -11375,6 +11486,22 @@ e.
  live off of the shell of unitary evolution.
 \end_layout
 
+\begin_layout Standard
+There is some practical hope of bringing this daydream to fruition: the
+ theory of subshifts has seen dramatic advances over the last few decades,
+ getting increasingly abstract, and gaining a firm footing in very general
+ settings: viz not just in metric spaces, but even in more general topological
+ vector spaces, and specifically in stereotype spaces, where most of the
+ devices used in analysis can be exercised in reasonably safe manner.
+ The point here is that most of QFT can be formulated using these more-or-less
+ conventional tools and notations.
+ The trick is to locate and extract those parts that renormalize to zero,
+ not unlike some of the formally divergent sums explored above, which can
+ none-the-less be regulated and made to give reasonable answers.
+ Or at least, that's the daydream.
+ Clearly, got far to got before it can be reality.
+\end_layout
+
 \begin_layout Section
 Topological Push-Forward
 \end_layout
@@ -11405,16 +11532,18 @@ chaotic
  To understand the transfer operator, it must be tackled for what it is:
  one must look at how intervals are mapped to intervals, and what sort of
  symmetries can be discovered in this mapping.
- (One possible proof of the push-forward claim can be found in an earlier
- text: 
-\begin_inset Quotes eld
+ (I've given one sketch of a proof of the transfer operator as a push-forward
+ in this reference:
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
 \end_inset
 
-On the Minkowski Measure
-\begin_inset Quotes erd
-\end_inset
-
-, arXiv:0810.1265.)
+.
+ There are must surely be better, more accessible and more formal and mathematic
+ally refined presentations; if you, reader, know osf such, please drop me
+ a line.)
 \end_layout
 
 \begin_layout Standard
@@ -11425,9 +11554,28 @@ The action of the transfer operator on the sets belonging to the topology
  The transfer operator will map some connected sets to other connected sets,
  simply moving them around, shrinking or expanding them.
  In other cases, a connected set will be split into two disjoint parts.
- For maps such as the logistic map, other possibilities arise: sets are
- folded back onto one-another.
- It seems reasonable to argue that each of these different kinds of moves
+ For maps that are continuous, there must be regions that have fixed-points
+ and period-doubling routes to chaos: these correspond to the (countable
+ number of) 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spots
+\begin_inset Quotes erd
+\end_inset
+
+ illustrated in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Islands-of-Stability"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It seems reasonable to argue that each of these different kinds of moves
  creates a distinct group (or monoid) of transformations: in a certain sense,
  those transforms that do not change th connectivity, nor do any folding,
  are all similar to one-another.
@@ -11437,6 +11585,15 @@ The action of the transfer operator on the sets belonging to the topology
  It seems like there should be a prototype: a generic split, followed by
  some re-arrangement of the two parts.
  How can this classification be written in an insightful, useful way?
+\end_layout
+
+\begin_layout Standard
+I beleive that there has been a sufficient number of advances in the theory
+ of subshifts so that the above vague sketch can be presented in a fairly
+ concrete way.
+ Unfortunately, most of the relevant material remains rather arcane and
+ abstract, lacking in direct accessibility to casual students.
+ I am not currently aware of any adequate yet accessible treatment.
 \end_layout
 
 \begin_layout Section
