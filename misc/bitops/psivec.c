@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
 		printf("# %d	%g	%g	%g	%g\n", n, wvec[n], pitw[n], ha[n], rat);
 	}
 
+#ifdef PRINT_INVARIANT
 #define NPTS 801
 	for (int i=0; i<NPTS; i++)
 	{
@@ -91,6 +92,7 @@ int main(int argc, char* argv[])
 		}
 		printf("%d	%g	%g\n", i, x, y);
 	}
+#endif
 
 // #define PRINT_MATRIX
 #ifdef PRINT_MATRIX
