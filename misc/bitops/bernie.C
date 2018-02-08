@@ -147,6 +147,7 @@ static void bifurcation_diagram (float *array,
 
 	K = 0.5 + 0.5*K;
 	double eps = 0.5* (1.0-K);
+	eps = omega;
 	for (int j=0; j<itermax; j++)
 	{
 		double t = rand();
@@ -175,7 +176,7 @@ static void bifurcation_diagram (float *array,
 	}
 
 	double wi = 0;
-	double cut = 0.01 * cnt / ((double) array_size);
+	double cut = 0.02 * cnt / ((double) array_size);
 	for (int j=0; j<array_size; j++)
 	{
 		if (cut < array[j]) wi += 1.0;

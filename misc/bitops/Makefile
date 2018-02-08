@@ -15,7 +15,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	carry-sum rexfer treefn treestep sampler julia julie psi \
 	matrix psieigen psiblas nilpot bitshow complex psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
-	psivec
+	psivec psimid
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -57,6 +57,7 @@ psileft.o: psileft.c psi.c psibig.c
 moments.o: moments.c
 psimom.o: psimom.c psileft.c psi.c psibig.c
 psivec.o: psivec.c psileft.c psi.c psibig.c
+psimid.o: psi.c psibig.c
 
 
 bernie: bernie.o $(BRAT) $(FUNC)
@@ -91,3 +92,4 @@ psileft: psileft.o
 moments: moments.o
 psimom: psimom.o
 psivec: psivec.o
+psimid: psimid.o
