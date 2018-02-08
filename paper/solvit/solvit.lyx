@@ -1924,7 +1924,7 @@ height "1pt"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -5860,8 +5860,16 @@ Working backwards, this issue re-appears whenever the
 \begin_inset Formula $p$
 \end_inset
 
-'th iterate gives 
-\begin_inset Formula $m_{p}=T_{\varphi}^{p}\left(m_{0}\right)$
+'th iterate 
+\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+ lands at the discontinuity, so that one may take either 
+\begin_inset Formula $m_{p}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $m_{p}=m_{0}$
 \end_inset
 
 .
@@ -5869,7 +5877,7 @@ Working backwards, this issue re-appears whenever the
 \begin_inset Formula $p=3$
 \end_inset
 
-, the next trouble spots occur when either 
+, there are two trouble spots, which occur when either 
 \begin_inset Formula $\beta^{3}-\beta^{2}-1=0$
 \end_inset
 
@@ -5887,7 +5895,14 @@ Working backwards, this issue re-appears whenever the
 \end_inset
 
 .
- These may be called 
+ Following a similar suggestion by Dajani
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dajani97"
+
+\end_inset
+
+, these may be called 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5895,25 +5910,171 @@ generalized golden means
 \begin_inset Quotes erd
 \end_inset
 
-, as done by Dajani
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Dajani97"
-
-\end_inset
-
 .
  
 \end_layout
 
 \begin_layout Standard
-These trouble spots naturally form an infiinite dyadic tree.
- At the root of the tree is 
+It should be clear that these trouble spots naturally form an infinite dyadic
+ tree.
+ Consider, for example, 
+\begin_inset Formula $m_{4}=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+, and consider the movement of 
+\begin_inset Formula $m_{4}$
+\end_inset
+
+ as 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is swept through the range 
+\begin_inset Formula $1<\beta<2$
+\end_inset
+
+.
+ This is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Location-of-Midpoints"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Location of Midpoints
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Location-of-Midpoints"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename psimid.eps
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This rather busy image illustrates the location of the first five midpoints,
+ 
+\begin_inset Formula $m_{0},m_{1},\cdots,m_{4}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The locations of the discontinuities are termed 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spots
+\begin_inset Quotes erd
+\end_inset
+
+; the first trouble spot occuring for 
+\begin_inset Formula $m_{2}$
+\end_inset
+
+ at 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+.
+ The midpoint 
+\begin_inset Formula $m_{3}$
+\end_inset
+
+ has two new trouble spots at 
+\begin_inset Formula $\beta=1.465\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=1.839\cdots$
+\end_inset
+
+; the trouble spot at 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+ being disallowed, as it already lead to a termination of midpoint iteration.
+ The midpoint 
+\begin_inset Formula $m_{4}$
+\end_inset
+
+ has three new troublespots.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+generated with psimid.c and psimid.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At the root of the tree is 
 \begin_inset Formula $\varphi$
 \end_inset
 
 , and to the left and right are the two values above.
- Alternately, at the root of the tree, one can take the equation 
+ 
+\end_layout
+
+\begin_layout Standard
+Alternately, at the root of the tree, one can take the equation 
 \begin_inset Formula $\beta^{2}-\beta-1=0$
 \end_inset
 
@@ -5980,7 +6141,7 @@ key "Maia07"
 \end_layout
 
 \begin_layout Subsection
-Islands of Stability And Arnold Tongues
+Islands of Stability as Arnold Tongues
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Islands-of-Stability"
