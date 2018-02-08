@@ -55,8 +55,8 @@ psidist.o: psidist.c psi.c psibig.c
 psidelt.o: psidelt.C psi.c psibig.c
 psileft.o: psileft.c psi.c psibig.c
 moments.o: moments.c
-psimom.o: psimom.o psileft.c psi.c psibig.c
-psivec.o: psivec.o psileft.c psi.c psibig.c
+psimom.o: psimom.c psileft.c psi.c psibig.c
+psivec.o: psivec.c psileft.c psi.c psibig.c
 
 
 bernie: bernie.o $(BRAT) $(FUNC)

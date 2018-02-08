@@ -36,6 +36,20 @@ double bern(double x, double K)
 	return K*x;
 }
 
+double island(double x, double K, double epsilon)
+{
+	K *= 2.0;
+	if (0.5+epsilon <= x)
+	{
+		return K * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return K*x;
+	}
+	return 0.25*K* (1.0 + (1.0 - 4.0*epsilon) * (0.5 - x) / epsilon);
+}
+
 double nocarry(double x, double K)
 {
 	// Notes:
@@ -131,6 +145,8 @@ static void bifurcation_diagram (float *array,
 
 	int cnt=0;
 
+	K = 0.5 + 0.5*K;
+	double eps = 0.5* (1.0-K);
 	for (int j=0; j<itermax; j++)
 	{
 		double t = rand();
@@ -138,7 +154,7 @@ static void bifurcation_diagram (float *array,
 		double x = t;
 
 		/* OK, now start iterating the benoulli map */
-		for (int iter=0; iter < 50; iter++)
+		for (int iter=0; iter < 1250; iter++)
 		{
 			// x = bern(x, K);
 			// x = nocarry(x, K);
@@ -146,7 +162,8 @@ static void bifurcation_diagram (float *array,
 			// x = notent(x, K);
 			// x = feig(x, K);
 			// x = nofeig(x, K);
-			x = mangle_carry(x, K);
+			// x = mangle_carry(x, K);
+			x = island(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
@@ -157,8 +174,17 @@ static void bifurcation_diagram (float *array,
 		}
 	}
 
+	double wi = 0;
+	double cut = 0.01 * cnt / ((double) array_size);
 	for (int j=0; j<array_size; j++)
-		array[j] *= ((double) array_size) / ((double) cnt);
+	{
+		if (cut < array[j]) wi += 1.0;
+	}
+
+	// double norm = ((double) array_size) / ((double) cnt);
+	double norm = wi / ((double) cnt);
+	for (int j=0; j<array_size; j++)
+		array[j] *= norm;
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)

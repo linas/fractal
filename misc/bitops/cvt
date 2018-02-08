@@ -22,6 +22,9 @@
 # ../../generate/renorm nofeig j 1 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > nofeig.png
 
+../../generate/renorm island j 0.5 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > island.png
+
 # ../../generate/renorm mang-carry-1 j 1 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mang-carry-1.png
 
@@ -182,7 +185,7 @@
 # ../../generate/renorm berg j 1 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > berg.png
 
-../../generate/renorm psidelt j 0.7 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > psidelt.png
+# ../../generate/renorm psidelt j 0.7 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > psidelt.png
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4
