@@ -51,15 +51,19 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	int maxn = atoi(argv[1]);
+
+#ifdef DECIMAL_PLACES
 	double guess = atof(argv[2]);
 
 	guess *= 0.5;
 	double bad = bisect(guess-0.01, guess+0.01, maxn);
 
 	printf("Its %d	%20.18g\n", maxn, 2.0*bad);
+#endif
 
+#define PRINT_MIDPOINTS
 #ifdef PRINT_MIDPOINTS
-#define NPTS 8701
+#define NPTS 18701
 	for (int i=0; i<NPTS; i++)
 	{
 		double x = ((double) i + 0.5) / ((double) NPTS);
