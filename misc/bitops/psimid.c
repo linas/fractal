@@ -18,21 +18,25 @@
 double bisect(double Klo, double Khi, int which)
 {
 	double Kmi = 0.5 * (Klo + Khi);
-	if (Khi - Klo < 1.0e-16) return Kmi;
+	double diff = Khi - Klo;
+	if (diff < 2.0e-16) return Kmi;
 
-	big_midpoints(Klo, 400, midpoints, which+4);
-	sequence_midpoints(Klo, which+4);
+	big_midpoints(Klo, 400, midpoints, which+15);
+	sequence_midpoints(Klo, which+15);
 	double mlo = midpoints[which];
 
-	big_midpoints(Khi, 400, midpoints, which+4);
-	sequence_midpoints(Khi, which+4);
+	big_midpoints(Khi, 400, midpoints, which+15);
+	sequence_midpoints(Khi, which+15);
 	double mhi = midpoints[which];
 
-	big_midpoints(Kmi, 400, midpoints, which+4);
-	sequence_midpoints(Kmi, which+4);
+	big_midpoints(Kmi, 400, midpoints, which+15);
+	sequence_midpoints(Kmi, which+15);
 	double mmi = midpoints[which];
 
-printf("Kmi=%g   mmi=%g\n", Kmi, mmi);
+printf("diff = %g\n", diff);
+printf("Klo=%20.18g   mlo=%g\n", 2.0*Klo, mlo);
+printf("Kmi=%20.18g   mmi=%g\n", 2.0*Kmi, mmi);
+printf("Khi=%20.18g   mhi=%g\n", 2.0*Khi, mhi);
 
 	if (mmi > mhi) return bisect(Kmi, Khi, which);
 	if (mlo < mmi) { printf("Errrror !!!!!!!!!\n"); exit(1); }
@@ -49,9 +53,10 @@ int main(int argc, char* argv[])
 	int maxn = atoi(argv[1]);
 	double guess = atof(argv[2]);
 
+	guess *= 0.5;
 	double bad = bisect(guess-0.01, guess+0.01, maxn);
 
-	printf("Its %d	%g\n", maxn, bad);
+	printf("Its %d	%20.18g\n", maxn, 2.0*bad);
 
 #ifdef PRINT_MIDPOINTS
 #define NPTS 8701
