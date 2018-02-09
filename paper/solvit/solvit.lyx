@@ -292,6 +292,20 @@ This text begins with some pretty pictures, showing the iterated tent and
  
 \end_layout
 
+\begin_layout Standard
+A word about the format of this paper: this is a de facto 
+\begin_inset Quotes eld
+\end_inset
+
+research diary
+\begin_inset Quotes erd
+\end_inset
+
+, not a formal report.
+ This, it contains various unfinished corners and notes-to-self.
+ 
+\end_layout
+
 \begin_layout Subsection
 Bernoulli shift
 \end_layout
@@ -2743,7 +2757,7 @@ That is, every
 
 'th right branch is pruned from the binary tree.
  For example, a run of three 1's in a row is possible only for 
-\begin_inset Formula $\beta\ge\left(1+\sqrt{5}\right)/2\approx1.618034$
+\begin_inset Formula $\beta\ge\left(1+\sqrt{5}\right)/2=1.618034\cdots$
 \end_inset
 
  the Golden Ratio.
@@ -6134,7 +6148,7 @@ key "Maia07"
 
 \begin_layout Standard
 How many trouble spots are there? The table below shows the count 
-\begin_inset Formula $n_{p}$
+\begin_inset Formula $M_{n}$
 \end_inset
 
  of the number of 
@@ -6146,7 +6160,7 @@ new
 \end_inset
 
  trouble spots, as a function of the midpoint index 
-\begin_inset Formula $p$
+\begin_inset Formula $n$
 \end_inset
 
 .
@@ -6173,7 +6187,7 @@ new
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $p$
+\begin_inset Formula $n$
 \end_inset
 
 
@@ -6268,7 +6282,7 @@ new
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $n_{p}$
+\begin_inset Formula $M_{n}$
 \end_inset
 
 
@@ -6371,7 +6385,7 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
  map.
  The trouble spots are the positive real roots of polynomials of the form
  
-\begin_inset Formula $\beta^{p}-\beta^{p-1}-b_{2}\beta^{p-2}-b_{3}\beta^{p-3}-\cdots-1=0$
+\begin_inset Formula $\beta^{n}-\beta^{n-1}-b_{2}\beta^{n-2}-b_{3}\beta^{n-3}-\cdots-1=0$
 \end_inset
 
 .
@@ -6384,7 +6398,7 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
 
  must be zero or one, this implies that the polynomils can be taken to be
  the irreducible polynomials over the field 
-\begin_inset Formula $\text{\mathbb{Z}}_{2}$
+\begin_inset Formula $\text{\mathbb{F}}_{2}$
 \end_inset
 
  which is precisely the definition of OEIS A001037.
@@ -6392,25 +6406,39 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
 \end_layout
 
 \begin_layout Standard
+The values of 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+ are given explicitly by Moreau's necklace-counting function
+\begin_inset Formula 
+\[
+M_{n}=\frac{1}{n}\sum_{d|n}2^{d}\mu\left(\frac{n}{d}\right)
+\]
+
+\end_inset
+
+where the sum runs over all integers 
+\begin_inset Formula $d$
+\end_inset
+
+ that divide 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is the Möbius function.
+\end_layout
+
+\begin_layout Standard
 The coefficients 
 \begin_inset Formula $b_{k}$
 \end_inset
 
- are not immediately obvious, but a stunningly bad conjecture is that they
- form Lyndon words, viz, that 
-\begin_inset Formula $0\cdots b_{3}b_{2}1$
-\end_inset
-
- is a Lyndon word, of length 
-\begin_inset Formula $p$
-\end_inset
-
-.
- This clearly holds up to 
-\begin_inset Formula $p=4$
-\end_inset
-
- but surely cannot hold any farther?
+ are not immediately obvious.
 \end_layout
 
 \begin_layout Standard
@@ -6428,6 +6456,359 @@ There are several ways in which these sequences of troublesome
 \end_inset
 
  values can be visualized, and doing so is a worthwhile exercise.
+\end_layout
+
+\begin_layout Subsection
+Irreducible polynomials
+\end_layout
+
+\begin_layout Standard
+Although the topic of irreducible polynomials over 
+\begin_inset Formula $\mathbb{F}_{2}$
+\end_inset
+
+ is shop-worn, there does not seem to be any specific information about
+ the irreducible polynomials under consideration here.
+ It should be noted that the irreducible polynomials over 
+\begin_inset Formula $\mathbb{F}_{2}$
+\end_inset
+
+ play a major role in the generation of pseudo-random sequences, and in
+ cryptography.
+ Notable tables include Petersen[xx], Marsh [xx] and OEIS A058943
+\end_layout
+
+\begin_layout Standard
+Thus, below follows a table and some commentary.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+p
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+root
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta^{2}-\beta-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\varphi=\frac{1+\sqrt{5}}{2}=0.618\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+etc
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Commentary: primitive polynomials, period of polyomial.
+ For degree 
+\begin_inset Formula $n$
+\end_inset
+
+ the possible periods are divisors of 
+\begin_inset Formula $2^{n}-1$
+\end_inset
+
+.
+ For each period 
+\begin_inset Formula $d$
+\end_inset
+
+ the number of polynomials of degree 
+\begin_inset Formula $n$
+\end_inset
+
+ is 
+\begin_inset Formula $\phi\left(d\right)/n$
+\end_inset
+
+ with 
+\begin_inset Formula $\phi$
+\end_inset
+
+ the Euler totient function.
+ Blah blah cyclotomic.
+\end_layout
+
+\begin_layout Subsection
+Multiplicative shifts
+\end_layout
+
+\begin_layout Standard
+A multiplicative shift is a shift assembled as an product of functions.
+ The most famous of these is the generating function for integer partitions
+\begin_inset Formula 
+\[
+P\left(z\right)=\prod_{n=1}^{\infty}\frac{1}{\left(1-z^{n}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly products occur for the necklace counting functions.
+\end_layout
+
+\begin_layout Standard
+A more obsure one expresses the Minkowski measure
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+, given as
+\begin_inset Formula 
+\[
+?^{\prime}\left(x\right)=\prod_{n=0}^{\infty}\frac{A^{\prime}\circ A^{n}\left(x\right)}{2}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+A\left(x\right)=\begin{cases}
+\frac{x}{1-x} & \mbox{ for }0\le x<\frac{1}{2}\\
+\frac{2x-1}{x} & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $A^{\prime}$
+\end_inset
+
+ being the derivative of 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $A^{n}$
+\end_inset
+
+ being the 
+\begin_inset Formula $n$
+\end_inset
+
+'th iterate.
+ The Minkowski measure integrates to the Minkwoski Question Mark function
+ 
+\begin_inset Formula $?\left(y\right)=\int_{0}^{y}?^{\prime}\left(x\right)dx$
+\end_inset
+
+; it is the prototypical 
+\begin_inset Quotes eld
+\end_inset
+
+multi-fractal measure
+\begin_inset Quotes erd
+\end_inset
+
+ (although there really is nothing 
+\begin_inset Quotes eld
+\end_inset
+
+multi-
+\begin_inset Quotes erd
+\end_inset
+
+ about it; the 
+\begin_inset Quotes eld
+\end_inset
+
+multi-
+\begin_inset Quotes erd
+\end_inset
+
+ prefix stems from a misunderstanding of its multiplicative invariance).
+ The product structure indicates that the Minkowski measure is a Gibbs measure,
+ viz arising from an invariant Hamiltonian on a one-dimensional lattice.
+\end_layout
+
+\begin_layout Standard
+The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Location-of-Midpoints"
+
+\end_inset
+
+ suggests that a similar product can be constructed from the midpoint sequence,
+ namely 
+\begin_inset Formula 
+\[
+\prod_{p=0}^{\infty}m_{p}\left(\beta\right)
+\]
+
+\end_inset
+
+for the midpoints 
+\begin_inset Formula $m_{p}\left(\beta\right)=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection
