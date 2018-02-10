@@ -21,15 +21,15 @@ double bisect(double Klo, double Khi, int which)
 	double diff = Khi - Klo;
 	if (diff < 2.0e-16) return Kmi;
 
-	big_midpoints(Klo, 400, midpoints, which+15);
+	Klo = big_midpoints(Klo, 400, midpoints, which+15);
 	sequence_midpoints(Klo, which+15);
 	double mlo = midpoints[which];
 
-	big_midpoints(Khi, 400, midpoints, which+15);
+	Khi = big_midpoints(Khi, 400, midpoints, which+15);
 	sequence_midpoints(Khi, which+15);
 	double mhi = midpoints[which];
 
-	big_midpoints(Kmi, 400, midpoints, which+15);
+	Kmi = big_midpoints(Kmi, 400, midpoints, which+15);
 	sequence_midpoints(Kmi, which+15);
 	double mmi = midpoints[which];
 

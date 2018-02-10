@@ -22,7 +22,7 @@
  * in the sequence in which they are found.
  */
 
-void big_midpoints(double K, int nbits, double* midp, int maxn)
+double big_midpoints(double K, int nbits, double* midp, int maxn)
 {
 	mpf_set_default_prec(nbits);
 
@@ -36,8 +36,12 @@ void big_midpoints(double K, int nbits, double* midp, int maxn)
 	mpf_init(ex);
 	mpf_init(twoK);
 
+	// This deno is about 57 bits or so
 	// unsigned long int deno = 128*81*125*49*121*13*17*19*23*29;
+
+	// This deno is about 29 bits or so.
 	unsigned long int deno = 64*81*125*7*11*13;
+
 	// unsigned long int deno = 32*27*25;
 	unsigned long int num = K * ((double) deno);
 	while (0 == num%2 && 0 == deno%2) { num /=2; deno /=2; }
@@ -67,5 +71,8 @@ void big_midpoints(double K, int nbits, double* midp, int maxn)
 		}
 		mpf_mul(ex, ex, twoK);
 	}
-}
 
+	// Return the actual value used, which might differ
+	// from the provided value.
+	return mpf_get_d(Kay);
+}

@@ -1,0 +1,19 @@
+
+set term png size 1024,768 enhanced
+set out 'psimult.png'
+
+set xlabel "{/Symbol b}"
+set ylabel "midpoint location"
+set title "Midpoints as function of {/Symbol b}"
+
+set xrange [1:2]
+set logscale y
+set format y "10^{%4T}"
+
+# set yrange [1e-40: 200]
+set yrange [1e-15: 1e+15]
+
+set key left inside
+
+# plot "psimult.dat" using (2*$2):3 with lines linewidth 2 title ""
+plot "psimult.dat" using (2*$2):4 with lines linewidth 2 title ""
