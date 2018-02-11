@@ -19,7 +19,7 @@ double bisect(double Klo, double Khi, int which)
 {
 	double Kmi = 0.5 * (Klo + Khi);
 	double diff = Khi - Klo;
-	if (diff < 2.0e-16) return Kmi;
+	if (diff < 4.0e-16) return Kmi;
 
 	Klo = big_midpoints(Klo, 400, midpoints, which+15);
 	sequence_midpoints(Klo, which+15);
@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
 	}
 	int maxn = atoi(argv[1]);
 
+#define DECIMAL_PLACES
 #ifdef DECIMAL_PLACES
 	double guess = atof(argv[2]);
 
@@ -61,7 +62,7 @@ int main(int argc, char* argv[])
 	printf("Its %d	%20.18g\n", maxn, 2.0*bad);
 #endif
 
-#define PRINT_MIDPOINTS
+// #define PRINT_MIDPOINTS
 #ifdef PRINT_MIDPOINTS
 #define NPTS 18701
 	for (int i=0; i<NPTS; i++)

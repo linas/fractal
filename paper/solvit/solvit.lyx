@@ -5943,7 +5943,7 @@ reference "fig:Location-of-Midpoints"
 \end_inset
 
  and 
-\begin_inset Formula $\beta=1.754877668\cdots$
+\begin_inset Formula $\beta=1.754877666\cdots$
 \end_inset
 
  and 
@@ -6402,7 +6402,7 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
 \end_inset
 
  which is precisely the definition of OEIS A001037.
- (These last few sentences can be taken as a proof).
+ Yet here, we are interested in irreducible polynomials over the reals.
 \end_layout
 
 \begin_layout Standard
@@ -6468,7 +6468,8 @@ Although the topic of irreducible polynomials over
 \end_inset
 
  is shop-worn, there does not seem to be any specific information about
- the irreducible polynomials under consideration here.
+ the irreducible polynomials under consideration here; viz polynomials that
+ are irreducible over the reals, but with coefficients being 0 or -1.
  It should be noted that the irreducible polynomials over 
 \begin_inset Formula $\mathbb{F}_{2}$
 \end_inset
@@ -6480,23 +6481,81 @@ Although the topic of irreducible polynomials over
 
 \begin_layout Standard
 Thus, below follows a table and some commentary.
+ A polynomial is included in the table it can be obtained as an iterate
+ of an earlier polynomial 
+\begin_inset Formula $p_{n}\left(\beta\right)$
+\end_inset
+
+ as either 
+\begin_inset Formula $\beta\left(p_{n}\left(\beta\right)+1\right)-1$
+\end_inset
+
+ or as 
+\begin_inset Formula $\beta p_{n}\left(\beta\right)-1$
+\end_inset
+
+ and if it does not not have a postive real root in common with an earlier
+ polynomial.
+ Thus, for example, 
+\begin_inset Formula $\beta^{3}-\beta-1$
+\end_inset
+
+ is excluded from the list, because it is not an iterate of an earlier polynomia
+l, even though it has the interesting real root 
+\begin_inset Formula $1.324717957244746$
+\end_inset
+
+.
+ The polynomial 
+\begin_inset Formula $\beta^{4}-\beta^{3}-\beta-1$
+\end_inset
+
+ can be obtained from as an iterate of 
+\begin_inset Formula $\beta^{3}-\beta^{2}-1$
+\end_inset
+
+, but it has 
+\begin_inset Formula $\varphi=1.618\cdots$
+\end_inset
+
+ as a root, and thus is not 
+\begin_inset Quotes eld
+\end_inset
+
+prime
+\begin_inset Quotes erd
+\end_inset
+
+ relative to the earlier polynomials.
+ It is confusing as to how to properly start the table, or how to number
+ the polynomials.
+ The given numbering has the property that 
+\begin_inset Formula $2n+1$
+\end_inset
+
+, taken as binary, encodes the coefficients of the polynomial.
+ The order of the polynomial is 
+\begin_inset Formula $\left\lceil \log_{2}\left(2n+1\right)\right\rceil $
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="4">
+<lyxtabular version="3" rows="11" columns="4">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-n
+order
 \end_layout
 
 \end_inset
@@ -6505,25 +6564,154 @@ n
 \begin_inset Text
 
 \begin_layout Plain Layout
-p
+\begin_inset Formula $p_{n}\left(\beta\right)$
+\end_inset
+
+
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-binary
+\begin_inset Formula $n$
+\end_inset
+
+
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 root
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
 \end_layout
 
 \end_inset
@@ -6555,7 +6743,7 @@ root
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+1
 \end_layout
 
 \end_inset
@@ -6564,7 +6752,7 @@ root
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\varphi=\frac{1+\sqrt{5}}{2}=0.618\cdots$
+\begin_inset Formula $\varphi=\frac{1+\sqrt{5}}{2}=1.618\cdots$
 \end_inset
 
 
@@ -6584,48 +6772,230 @@ root
 \end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta^{3}-\beta^{2}-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.465571231876768\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta^{3}-\beta^{2}-\beta-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.839286755214161\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta^{4}-\beta^{3}-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.38032775690976139\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta^{4}-\beta^{3}-\beta^{2}-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.7548776662466924\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta^{4}-\beta^{3}-\beta^{2}-\beta-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.9275619754829252\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 etc
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -6657,8 +7027,8 @@ etc
 \end_layout
 
 \begin_layout Standard
-Commentary: primitive polynomials, period of polyomial.
- For degree 
+Commentary: are there primitive polynomials? What is the period? For degree
+ 
 \begin_inset Formula $n$
 \end_inset
 
@@ -6666,12 +7036,11 @@ Commentary: primitive polynomials, period of polyomial.
 \begin_inset Formula $2^{n}-1$
 \end_inset
 
-.
- For each period 
+ (as in the GF(2) case)? For each period 
 \begin_inset Formula $d$
 \end_inset
 
- the number of polynomials of degree 
+ is the number of polynomials of degree 
 \begin_inset Formula $n$
 \end_inset
 
@@ -6683,8 +7052,8 @@ Commentary: primitive polynomials, period of polyomial.
 \begin_inset Formula $\phi$
 \end_inset
 
- the Euler totient function.
- Blah blah cyclotomic.
+ the Euler totient function (as in the GF(2) case)?What about complex roots?
+ Seem to be approximately cyclotomic in some sense or another...
 \end_layout
 
 \begin_layout Subsection
@@ -6798,7 +7167,7 @@ reference "fig:Location-of-Midpoints"
  namely 
 \begin_inset Formula 
 \[
-\prod_{p=0}^{\infty}m_{p}\left(\beta\right)
+\prod_{p=0}^{\infty}\frac{4m_{p}\left(\beta\right)}{\beta}
 \]
 
 \end_inset

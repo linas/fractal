@@ -37,10 +37,11 @@ double big_midpoints(double K, int nbits, double* midp, int maxn)
 	mpf_init(twoK);
 
 	// This deno is about 57 bits or so
-	// unsigned long int deno = 128*81*125*49*121*13*17*19*23*29;
+	unsigned long int deno = 121*13*17*19*23*29UL;
+	deno *= 128*81*125*49UL;
 
 	// This deno is about 29 bits or so.
-	unsigned long int deno = 64*81*125*7*11*13;
+	// unsigned long int deno = 64*81*125*7*11*13;
 
 	// unsigned long int deno = 32*27*25;
 	unsigned long int num = K * ((double) deno);
