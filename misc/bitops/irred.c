@@ -43,11 +43,34 @@ int len(int n)
 	return len;
 }
 
+/* Return true, if its iterable */
+bool iterable(int n)
+{
+	if (n <= 4) return true;
+	return ((n-1)%4 != 0) && (iterable(n/2) || iterable(n/4)) ;
+}
+
 int main(int argc, char* argv[])
 {
-	for (int n=0; n<20; n ++)
+	int nmax = 64;
+
+	int cnt = 0;
+	int plen = 0;
+	double zero[nmax];
+	for (int n=0; n<nmax; n ++)
 	{
 		double gold = find_zero(n, 1.0, 2.0);
-		printf("%d	%d	%20.18g\n", n, len(n), gold);
+		zero[n] = gold;
+
+		bool ok = true;
+		for (int j=0; j< n; j++)
+		{
+			double z = beta(n, zero[j]);
+			if (fabs(z) < 4.0e-14) { ok = false; break; }
+		}
+		if (plen != len(n)) {plen = len(n); cnt = 0; printf("\n");}
+		if (ok && iterable(n)) cnt++;
+		printf("%d ok=%d it=%d l=%d %d %20.18g\n",
+			n, ok, iterable(n), len(n), cnt, gold);
 	}
 }
