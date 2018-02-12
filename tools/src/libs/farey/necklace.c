@@ -11,7 +11,7 @@
 #include "cache.h"
 
 /* Moreaus necklace counting function. OEIS A001037 */
-long necklace_raw(int n)
+long necklace_raw(long n)
 {
 	long sum = 0;
 	int d = 1;
@@ -30,7 +30,7 @@ long necklace_raw(int n)
 
 DECLARE_UL_CACHE (necklace_cache);
 
-long necklace(int n)
+long necklace(long n)
 {
 	if (ul_one_d_cache_check (&necklace_cache, n))
 		return ul_one_d_cache_fetch(&necklace_cache, n);

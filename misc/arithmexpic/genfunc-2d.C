@@ -17,6 +17,7 @@
 #include <gpf.h>
 #include <isqrt.h>
 #include <moebius.h>
+#include <necklace.h>
 #include <totient.h>
 
 #include "brat.h"
@@ -670,9 +671,15 @@ static double xperiment(double re_q, double im_q, int itermax, double param)
 	return cabs(g);
 }
 
+static double necklace_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+	long double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, necklace);
+	return cabs(g);
+}
+
 // ========================================================
-// TODO:
-// Carmichael function
 
 
 __attribute__((constructor)) void decl_things() {
@@ -706,6 +713,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("isqrt_big", isqrt_big);
 	DECL_HEIGHT("partition_big", partition_big);
 	DECL_HEIGHT("xperiment", xperiment);
+	DECL_HEIGHT("necklace", necklace_mag);
 }
 
 // DECL_MAKE_HEIGHT(plot_big);

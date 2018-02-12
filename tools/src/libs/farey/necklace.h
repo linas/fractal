@@ -13,7 +13,7 @@ extern "C" {
 /**
  * Moreau's necklace-counting function
  */
-long necklace(int);
+long necklace(long);
 
 #ifdef   __cplusplus
 };
