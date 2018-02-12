@@ -150,9 +150,9 @@
 # ../../generate/abs j j
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.8.png
 
-../../generate/renorm matrix-phi j 1.5 0
-../../generate/abs j j
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-phi.png
+# ../../generate/renorm matrix-phi j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-phi.png
 
 # ../../generate/renorm matrix-9 j 1.5 0
 # ../../generate/abs j j
@@ -191,5 +191,8 @@ cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-phi.png
 
 # ../../generate/renorm psidelt j 0.7 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > psidelt.png
+
+../../generate/renorm zero j 1 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > zero.png
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4

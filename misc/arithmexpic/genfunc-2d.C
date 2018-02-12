@@ -675,8 +675,10 @@ static double necklace_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
 	long double complex z = re_q + I * im_q;
-	double complex g = exponential_genfunc(z, necklace);
+	// double complex g = exponential_genfunc(z, necklace);
+	double complex g = ordinary_genfunc(z, necklace);
 	return cabs(g);
+	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
 // ========================================================

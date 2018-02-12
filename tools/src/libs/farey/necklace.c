@@ -6,6 +6,9 @@
  * Linas Vepstas February 2018
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "moebius.h"
 #include "necklace.h"
 #include "cache.h"
@@ -13,6 +16,12 @@
 /* Moreaus necklace counting function. OEIS A001037 */
 long necklace_raw(long n)
 {
+	if (62 < n)
+	{
+		fprintf(stderr, "Error: necklace overflow\n");
+		exit(1);
+	}
+
 	long sum = 0;
 	int d = 1;
 	while (d <= n/2)
@@ -43,7 +52,6 @@ long necklace(long n)
 // #define UNIT_TEST
 #ifdef UNIT_TEST
 
-#include <stdio.h>
 int main (int arc, char* argv[])
 {
 	for (int i=1; i< 29; i++)

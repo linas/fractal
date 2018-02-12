@@ -256,7 +256,9 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-tree-256.png
 # ../../generate/renorm rg rg 0.4
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-12K.png
 #
+../../generate/renorm necklace rg 1.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > necklace.png
 # ------------------
-../../generate/renorm exp-x rg 1.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
+# ../../generate/renorm exp-x rg 1.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
 
