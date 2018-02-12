@@ -45,7 +45,8 @@ int len(int n)
 
 int main(int argc, char* argv[])
 {
-	int nmax = (1<<28) + 3;
+	// int nmax = (1<<28) + 3;
+	int nmax = (1<<18) + 3;
 
 #define EPS 2.0e-15
 
@@ -81,7 +82,7 @@ int main(int argc, char* argv[])
 
 		if (plen != len(n))
 		{
-			printf("total for len=%d is %d\n", plen, cnt);
+			printf("# total for len=%d is %d\n", plen, cnt);
 			plen = len(n);
 			cnt = 0;
 		}
@@ -89,8 +90,12 @@ int main(int argc, char* argv[])
 
 		if (n < 128)
 		{
+#if 0
 			printf("%d ok=%d l=%d %d %20.18g\n",
 				n, ork, len(n), cnt, gold);
+#endif
+			if (ork)
+				printf("%d	%d	%20.18g\n", n, len(n), gold);
 		}
 	}
 }

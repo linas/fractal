@@ -1,6 +1,6 @@
 
 set term png size 1024,768 enhanced
-# set term png size 2048,768 enhanced
+set term png size 2048,768 enhanced
 set out 'psimid.png'
 
 set xlabel "{/Symbol b}"
@@ -31,15 +31,23 @@ set xrange [1:2]
 set key left inside
 
  plot \
-   "psimid.dat" using (2*$2):(0.5) with lines linewidth 2 title "", \
    "psimid.dat" using (2*$2):4 with lines linewidth 2 title "   m_0", \
-   "psimid.dat" using (2*$2):5 with lines linewidth 2 title "   m_1", \
-   "psimid.dat" using (2*$2):6 with lines linewidth 2 title "   m_2", \
-   "psimid.dat" using (2*$2):7 with lines linewidth 2 title "   m_3", \
-   "psimid.dat" using (2*$2):8 with lines linewidth 2 title "   m_4", \
+   "psimid.dat" using (2*$2):9 with lines linewidth 2 title "   m_5", \
+   "psimid.dat" using (2*$2):10 with lines linewidth 2 title "   m_6", \
+   "psimid.dat" using (2*$2):11 with lines linewidth 2 title "   m_7", \
+   "irred.dat" using 3:($2==7 ? 0.5 : 0) with points title "   foo", \
 
 # plot \
-#      "psimid.dat" using (2*$2):9 with lines linewidth 2 title "   m_5", \
+#   "psimid.dat" using (2*$2):(0.5) with lines linewidth 2 title "", \
+#   "psimid.dat" using (2*$2):4 with lines linewidth 2 title "   m_0", \
+#   "psimid.dat" using (2*$2):5 with lines linewidth 2 title "   m_1", \
+#   "psimid.dat" using (2*$2):6 with lines linewidth 2 title "   m_2", \
+#   "psimid.dat" using (2*$2):7 with lines linewidth 2 title "   m_3", \
+#   "psimid.dat" using (2*$2):8 with lines linewidth 2 title "   m_4", \
+#   "psimid.dat" using (2*$2):9 with lines linewidth 2 title "   m_5", \
+#   "irred.dat" using 3:($2<6 ? $2*0.03 : 0) with points title "   foo", \
+
+# plot \
 #      "psimid.dat" using (2*$2):10 with lines linewidth 2 title "   m_6", \
 #      "psimid.dat" using (2*$2):11 with lines linewidth 2 title "   m_7", \
 #      "psimid.dat" using (2*$2):12 with lines linewidth 2 title "   m_8", \

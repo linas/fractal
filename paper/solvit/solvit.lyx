@@ -6463,72 +6463,274 @@ Irreducible polynomials
 \end_layout
 
 \begin_layout Standard
+The previous section observes that there is a 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spot
+\begin_inset Quotes erd
+\end_inset
+
+ whenever the
+\end_layout
+
+\begin_layout Standard
+the 
+\begin_inset Formula $p$
+\end_inset
+
+'th iterate 
+\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+ lands at the discontinuity, so that one may take either 
+\begin_inset Formula $m_{p}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $m_{p}=m_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Although the topic of irreducible polynomials over 
 \begin_inset Formula $\mathbb{F}_{2}$
 \end_inset
 
- is shop-worn, there does not seem to be any specific information about
- the irreducible polynomials under consideration here; viz polynomials that
- are irreducible over the reals, but with coefficients being 0 or -1.
- It should be noted that the irreducible polynomials over 
+ is shop-worn, the polynomials here are not those, even though there are
+ the same number of them.
+ The relationship of these to the irreducible polynomials over 
 \begin_inset Formula $\mathbb{F}_{2}$
 \end_inset
 
- play a major role in the generation of pseudo-random sequences, and in
- cryptography.
- Notable tables include Petersen[xx], Marsh [xx] and OEIS A058943
+, if any, is completely opaque.
+ 
 \end_layout
 
 \begin_layout Standard
 Thus, below follows a table and some commentary.
- A polynomial is included in the table it can be obtained as an iterate
- of an earlier polynomial 
-\begin_inset Formula $p_{n}\left(\beta\right)$
+ A polynomial is included in the table if it is an iterate of a previous
+ polynomial, and if it's real root is braketed by the roots of the earlier
+ iterates.
+ That is, 
+\begin_inset Formula $\ensuremath{p_{n}\left(\beta\right)}$
 \end_inset
 
- as either 
-\begin_inset Formula $\beta\left(p_{n}\left(\beta\right)+1\right)-1$
+must have the form 
+\begin_inset Formula $\ensuremath{\beta\left(p_{n/2}\left(\beta\right)+1\right)-1}$
 \end_inset
 
- or as 
-\begin_inset Formula $\beta p_{n}\left(\beta\right)-1$
+ when 
+\begin_inset Formula $n$
 \end_inset
 
- and if it does not not have a postive real root in common with an earlier
- polynomial.
- Thus, for example, 
+ is even or 
+\begin_inset Formula $\ensuremath{\beta p_{\left(n-1\right)/2}\left(\beta\right)-1}$
+\end_inset
+
+ for 
+\begin_inset Formula $n$
+\end_inset
+
+ odd.
+ The roots must be bracketed, in that, if 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ is the root 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+, then 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ is included in the list if it is the case that this pseudocode does not
+ fail:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $m_{prev}$
+\end_inset
+
+ := 
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $m$
+\end_inset
+
+ := 
+\begin_inset Formula $\left\lfloor n/2\right\rfloor $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+while (0 < 
+\begin_inset Formula $m$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Formula $m_{prev}$
+\end_inset
+
+ is even and 
+\begin_inset Formula $r_{m}$
+\end_inset
+
+ < 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ then fail
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Formula $m_{prev}$
+\end_inset
+
+ := 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Formula $m$
+\end_inset
+
+ := 
+\begin_inset Formula $\left\lfloor m/2\right\rfloor $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above is a rather awkward expression stating that roots must be bracketed
+ by pairs of previous roots.
+ It can perhaps be more easily understood by studying the location of the
+ discontinuitites in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Location-of-Midpoints"
+
+\end_inset
+
+: new discontinuities at higher orders must occur before earlier ones.
+\end_layout
+
+\begin_layout Standard
+Thus, for example, the polynomial 
 \begin_inset Formula $\beta^{3}-\beta-1$
 \end_inset
 
- is excluded from the list, because it is not an iterate of an earlier polynomia
-l, even though it has the interesting real root 
+ is excluded from the list simply because it is not an iterate of an earlier
+ polynomial, even though it has the interesting real root 
 \begin_inset Formula $1.324717957244746$
 \end_inset
 
 .
- The polynomial 
-\begin_inset Formula $\beta^{4}-\beta^{3}-\beta-1$
+ The numbering scheme does not even have a way of numering this polynomial.
+\end_layout
+
+\begin_layout Standard
+The polynomial 
+\begin_inset Formula $p_{5}=\beta^{4}-\beta^{3}-\beta-1$
 \end_inset
 
- can be obtained from as an iterate of 
-\begin_inset Formula $\beta^{3}-\beta^{2}-1$
-\end_inset
-
-, but it has 
+ is excluded because it has 
 \begin_inset Formula $\varphi=1.618\cdots$
 \end_inset
 
- as a root, and thus is not 
-\begin_inset Quotes eld
+ as a root, which was previously observed by 
+\begin_inset Formula $p_{1}$
 \end_inset
 
-prime
-\begin_inset Quotes erd
+.
+ The polynomial 
+\begin_inset Formula $p_{9}=\beta^{5}-\beta^{4}-\beta-1$
 \end_inset
 
- relative to the earlier polynomials.
- It is confusing as to how to properly start the table, or how to number
- the polynomials.
+ is excluded because it's root, 
+\begin_inset Formula $r_{9}=1.497094048762796\cdots$
+\end_inset
+
+ is greater than its predecessor 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+; it is not compared to 
+\begin_inset Formula $r_{4}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+There are other ways to start the table, and to number the polynomials.
  The given numbering has the property that 
 \begin_inset Formula $2n+1$
 \end_inset
@@ -6539,12 +6741,22 @@ prime
 \end_inset
 
 .
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with irred.c
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="11" columns="4">
+<lyxtabular version="3" rows="10" columns="4">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -6938,7 +7150,7 @@ root
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6947,7 +7159,7 @@ root
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6959,7 +7171,7 @@ root
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6968,7 +7180,7 @@ root
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6981,30 +7193,30 @@ root
 \end_inset
 </cell>
 </row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The next table lists the acceptable polynomials for order 5, 6 and 7.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-etc
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+order
 \end_layout
 
 \end_inset
@@ -7013,7 +7225,67 @@ etc
 \begin_inset Text
 
 \begin_layout Plain Layout
+sequence
+\end_layout
 
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8,10,12,13,14,15
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16,20,24,25,26,28,29,30,31
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32,36,40,42,48,49,50,52,53,54,56,57,58,59,60,61,62,63
 \end_layout
 
 \end_inset
@@ -7054,6 +7326,12 @@ Commentary: are there primitive polynomials? What is the period? For degree
 
  the Euler totient function (as in the GF(2) case)?What about complex roots?
  Seem to be approximately cyclotomic in some sense or another...
+\end_layout
+
+\begin_layout Standard
+Is there some way that this can be considered a subshift? Clearly, the no-repeat
+ed roots is trimming the tree at each stage...
+ 
 \end_layout
 
 \begin_layout Subsection
