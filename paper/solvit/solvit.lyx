@@ -6119,7 +6119,7 @@ key "Hare14"
 \end_inset
 
  who provide series expansions for the real roots of 
-\begin_inset Formula $\beta^{n}-\sum_{k=0}^{n-1}\beta^{k}=0$
+\begin_inset Formula $\beta^{p}-\sum_{k=0}^{n-1}\beta^{k}=0$
 \end_inset
 
 .
@@ -6131,7 +6131,7 @@ key "Stakhov05"
 \end_inset
 
  considers 
-\begin_inset Formula $\beta^{n+1}-\beta^{n}-1=0$
+\begin_inset Formula $\beta^{p+1}-\beta^{p}-1=0$
 \end_inset
 
  in general settings.
@@ -6146,9 +6146,13 @@ key "Maia07"
 .
 \end_layout
 
+\begin_layout Subsection
+Counting Orbits
+\end_layout
+
 \begin_layout Standard
 How many trouble spots are there? The table below shows the count 
-\begin_inset Formula $M_{n}$
+\begin_inset Formula $M_{p}$
 \end_inset
 
  of the number of 
@@ -6160,7 +6164,7 @@ new
 \end_inset
 
  trouble spots, as a function of the midpoint index 
-\begin_inset Formula $n$
+\begin_inset Formula $p$
 \end_inset
 
 .
@@ -6170,8 +6174,10 @@ new
 \begin_layout Standard
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="10">
+<lyxtabular version="3" rows="2" columns="12">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -6187,7 +6193,7 @@ new
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $n$
+\begin_inset Formula $p$
 \end_inset
 
 
@@ -6267,11 +6273,29 @@ new
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
 \end_layout
 
 \end_inset
@@ -6282,7 +6306,7 @@ new
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $M_{n}$
+\begin_inset Formula $M_{p}$
 \end_inset
 
 
@@ -6362,11 +6386,29 @@ new
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 99
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+186
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+335
 \end_layout
 
 \end_inset
@@ -6390,19 +6432,19 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
 
 .
  There is just one such root for each such polynomial.
- These polynomials must clearly be irreducible, as otherwise, the root would
- have been seen earlier.
- Since the digits 
+ These polynomials are irreducible, in the sense that the root would have
+ been seen earlier, in a lower-order polynomial.
+ Although the digits 
 \begin_inset Formula $b_{k}$
 \end_inset
 
- must be zero or one, this implies that the polynomils can be taken to be
- the irreducible polynomials over the field 
+ must be zero or one, this suggests some relationship to the irreducible
+ polynomials over the field 
 \begin_inset Formula $\text{\mathbb{F}}_{2}$
 \end_inset
 
- which is precisely the definition of OEIS A001037.
- Yet here, we are interested in irreducible polynomials over the reals.
+, as that is what the definition of OEIS A001037 counts.
+ Yet the relationship, if any, is quite unclear.
 \end_layout
 
 \begin_layout Standard
@@ -6433,49 +6475,20 @@ where the sum runs over all integers
  is the Möbius function.
 \end_layout
 
-\begin_layout Standard
-The coefficients 
-\begin_inset Formula $b_{k}$
-\end_inset
-
- are not immediately obvious.
-\end_layout
-
-\begin_layout Standard
-Clearly, iteration paths that lead to the trouble points can be formulated
- as left-right moves on the infinite binary tree.
- Is the resulting subtree a subshift? What, precisely, are it's self-symmetries?
- A relationship to OEIS A000002 Oldenburger-Kolakoski sequence is observed;
- that sequence has several fractal self-similarities which presumably describe
- the subshift.
-\end_layout
-
-\begin_layout Standard
-There are several ways in which these sequences of troublesome 
-\begin_inset Formula $\beta$
-\end_inset
-
- values can be visualized, and doing so is a worthwhile exercise.
-\end_layout
-
 \begin_layout Subsection
 Irreducible polynomials
 \end_layout
 
 \begin_layout Standard
-The previous section observes that there is a 
+The 
 \begin_inset Quotes eld
 \end_inset
 
-trouble spot
+trouble spots
 \begin_inset Quotes erd
 \end_inset
 
- whenever the
-\end_layout
-
-\begin_layout Standard
-the 
+ whenever the 
 \begin_inset Formula $p$
 \end_inset
 
@@ -6483,34 +6496,66 @@ the
 \begin_inset Formula $m_{p}=T_{\beta}^{p}\left(m_{0}\right)$
 \end_inset
 
- lands at the discontinuity, so that one may take either 
-\begin_inset Formula $m_{p}=0$
-\end_inset
-
- or 
+ lands on the starting midpoint 
 \begin_inset Formula $m_{p}=m_{0}$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Although the topic of irreducible polynomials over 
-\begin_inset Formula $\mathbb{F}_{2}$
+ Because of the piece-wise linear form of 
+\begin_inset Formula $T_{\beta}$
 \end_inset
 
- is shop-worn, the polynomials here are not those, even though there are
- the same number of them.
- The relationship of these to the irreducible polynomials over 
-\begin_inset Formula $\mathbb{F}_{2}$
+, the 
+\begin_inset Formula $p$
 \end_inset
 
-, if any, is completely opaque.
+'th iterate will be a piece-wise collection of polynomials, each of order
+ 
+\begin_inset Formula $p$
+\end_inset
+
+, and of the form 
+\begin_inset Formula $\beta^{p}-\beta^{p-1}-b_{2}\beta^{p-2}-b_{3}\beta^{p-3}-\cdots-1$
+\end_inset
+
+ for some binary digits 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ being zero or one.
+ These must be arranged in the manner such that 
+\begin_inset Formula $\beta^{p}-\beta^{p-1}-b_{2}\beta^{p-2}-b_{3}\beta^{p-3}-\cdots-1=0$
+\end_inset
+
+ at each discontinuity, as illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Location-of-Midpoints"
+
+\end_inset
+
+.
+ This limits the polynomials that can appear; it limits the possible coefficient
+s 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-Thus, below follows a table and some commentary.
+Although the count of these polynomials is the same as that for the irredicible
+ polynomials over 
+\begin_inset Formula $\mathbb{F}_{2}$
+\end_inset
+
+, the relationship, if any, is completely opaque.
+ Thus a compilation seems to be called for.
+\end_layout
+
+\begin_layout Standard
+The table below explicitly shows the polynomials for the first few orders.
  A polynomial is included in the table if it is an iterate of a previous
  polynomial, and if it's real root is braketed by the roots of the earlier
  iterates.
@@ -6535,7 +6580,15 @@ must have the form
 \end_inset
 
  odd.
- The roots must be bracketed, in that, if 
+ The roots must be bracketed by the roots of polynomials occurrring earlier
+ in the sequence; if the root is not bracketed, then the corresponding polynomia
+l does not appear in the list.
+\end_layout
+
+\begin_layout Standard
+The bracketing relationship is rather awkwardly expressed in the following
+ pseudocode.
+ Here, 
 \begin_inset Formula $r_{n}$
 \end_inset
 
@@ -6543,7 +6596,8 @@ must have the form
 \begin_inset Formula $p_{n}\left(r_{n}\right)=0$
 \end_inset
 
-, then 
+.
+ The polynomial 
 \begin_inset Formula $p_{n}$
 \end_inset
 
@@ -6688,11 +6742,12 @@ Thus, for example, the polynomial
 
  is excluded from the list simply because it is not an iterate of an earlier
  polynomial, even though it has the interesting real root 
-\begin_inset Formula $1.324717957244746$
+\begin_inset Formula $1.324717957244746\cdots$
 \end_inset
 
 .
- The numbering scheme does not even have a way of numering this polynomial.
+ The numbering scheme does not even have a way of numbering this particular
+ polynomial.
 \end_layout
 
 \begin_layout Standard
@@ -6721,7 +6776,7 @@ The polynomial
 \begin_inset Formula $r_{2}$
 \end_inset
 
-; it is not compared to 
+; the recursive algorithm does not compare to 
 \begin_inset Formula $r_{4}$
 \end_inset
 
@@ -6730,8 +6785,8 @@ The polynomial
 \end_layout
 
 \begin_layout Standard
-There are other ways to start the table, and to number the polynomials.
- The given numbering has the property that 
+There are other ways to start the table, and to index the polynomials.
+ The given indexing has the property that 
 \begin_inset Formula $2n+1$
 \end_inset
 
@@ -7202,6 +7257,12 @@ root
 
 \begin_layout Standard
 The next table lists the acceptable polynomials for order 5, 6 and 7.
+ Again, the coefficients appearing in the polynomial are encoded by the
+ binary value of 
+\begin_inset Formula $2n+1$
+\end_inset
+
+ in the sequence.
 \end_layout
 
 \begin_layout Standard
@@ -7299,24 +7360,39 @@ sequence
 \end_layout
 
 \begin_layout Standard
-Commentary: are there primitive polynomials? What is the period? For degree
- 
-\begin_inset Formula $n$
+TODO items: 
+\end_layout
+
+\begin_layout Itemize
+Any commentary about primitive polynomials? 
+\end_layout
+
+\begin_layout Itemize
+What is the period? 
+\end_layout
+
+\begin_layout Itemize
+For degree 
+\begin_inset Formula $p$
 \end_inset
 
- the possible periods are divisors of 
-\begin_inset Formula $2^{n}-1$
+, are the the possible periods are divisors of 
+\begin_inset Formula $2^{p}-1$
 \end_inset
 
- (as in the GF(2) case)? For each period 
+ (as they would be in the GF(2) case)? 
+\end_layout
+
+\begin_layout Itemize
+For each period 
 \begin_inset Formula $d$
 \end_inset
 
- is the number of polynomials of degree 
+, is the number of polynomials of degree 
 \begin_inset Formula $n$
 \end_inset
 
- is 
+ equal to 
 \begin_inset Formula $\phi\left(d\right)/n$
 \end_inset
 
@@ -7324,14 +7400,28 @@ Commentary: are there primitive polynomials? What is the period? For degree
 \begin_inset Formula $\phi$
 \end_inset
 
- the Euler totient function (as in the GF(2) case)?What about complex roots?
- Seem to be approximately cyclotomic in some sense or another...
+ the Euler totient function (as woudl be the case for GF(2)? 
 \end_layout
 
-\begin_layout Standard
-Is there some way that this can be considered a subshift? Clearly, the no-repeat
-ed roots is trimming the tree at each stage...
- 
+\begin_layout Itemize
+What are the complex roots? They seem to be approximately cyclotomic in
+ some sense or another...
+\end_layout
+
+\begin_layout Itemize
+Is there some way that the sequence can be considered a subshift? Clearly,
+ iteration paths that lead to the trouble points can be formulated as left-right
+ moves on the infinite binary tree.
+ The results is a subtree of the full dyadic tree; it is properly a subshift?
+ The sequencing property suggests that it should be, but it needs some to
+ make it explicit.
+\end_layout
+
+\begin_layout Itemize
+If its a subshift, then what, precisely, are it's self-symmetries? OEIS
+ A001037 is related to OEIS A000002 the Oldenburger-Kolakoski sequence;
+ that sequence has several fractal self-similaritiesl are they the same
+ ones that describe this subshift?
 \end_layout
 
 \begin_layout Subsection
