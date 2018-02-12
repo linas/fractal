@@ -43,16 +43,11 @@ int len(int n)
 	return len;
 }
 
-/* Return true, if its iterable */
-bool iterable(int n)
-{
-	if (n <= 4) return true;
-	return ((n-1)%4 != 0) && (iterable(n/2) || iterable(n/4)) ;
-}
-
 int main(int argc, char* argv[])
 {
-	int nmax = 64;
+	int nmax = 2048;
+
+#define EPS 4.0e-14
 
 	int cnt = 0;
 	int plen = 0;
@@ -62,15 +57,30 @@ int main(int argc, char* argv[])
 		double gold = find_zero(n, 1.0, 2.0);
 		zero[n] = gold;
 
-		bool ok = true;
+		bool aok = true;
 		for (int j=0; j< n; j++)
 		{
 			double z = beta(n, zero[j]);
-			if (fabs(z) < 4.0e-14) { ok = false; break; }
+			if (fabs(z) < 4.0e-14) { aok = false; break; }
 		}
+
+		// printf("---------\ngold=%g\n", gold);
+		bool ork = true;
+		int nhl = n;
+		int nh = nhl >> 1;
+		while (nh)
+		{
+			// printf("duuude n=%d nhl=%d nh=%d znh=%g go=%g comp=%d bad=%d\n",
+			// n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
+			if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
+			// if (1 == nhl%2 && zero[nh+1] < gold && 1 < nh) {ork = false; break; }
+			nhl = nh;
+			nh >>= 1;
+		}
+
 		if (plen != len(n)) {plen = len(n); cnt = 0; printf("\n");}
-		if (ok && iterable(n)) cnt++;
+		if (aok && ork) { cnt++; }
 		printf("%d ok=%d it=%d l=%d %d %20.18g\n",
-			n, ok, iterable(n), len(n), cnt, gold);
+			n, aok, ork, len(n), cnt, gold);
 	}
 }
