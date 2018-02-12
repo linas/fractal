@@ -23,6 +23,7 @@ long necklace_raw(int n)
 		}
 		d += 1;
 	}
+	sum += (1<<n);
 
 	return sum /n;
 }
@@ -39,12 +40,15 @@ long necklace(int n)
 	return val;
 }
 
+// #define UNIT_TEST
+#ifdef UNIT_TEST
 
 #include <stdio.h>
 int main (int arc, char* argv[])
 {
-	for (int i=1; i< 12; i++)
+	for (int i=1; i< 29; i++)
 	{
 		printf("%d	%ld\n", i, necklace(i));
 	}
 }
+#endif
