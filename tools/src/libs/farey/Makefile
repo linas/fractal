@@ -19,13 +19,13 @@ RM= rm -f
 
 OBJS=bernoulli.o binomial.o bitops.o \
      cache.o Farey.o FareyTree.o gcf.o gpf.o \
-     harmonic.o isqrt.o \
-	  modular.o moebius.o prime.o question.o question-new.o stern-brocot.o \
+     harmonic.o isqrt.o modular.o moebius.o necklace.o \
+     prime.o question.o question-new.o stern-brocot.o \
      stirling.o totient.o
 
 INCS=bernoulli.h binomial.h bitops.h cache.h cplex.h Farey.h FareyTree.h \
      flt.h gcf.h gpf.h harmonic.h isqrt.h \
-     modular.h moebius.h prime.h question.h stirling.h totient.h
+     modular.h moebius.h necklace.h prime.h question.h stirling.h totient.h
 
 all: inc $(OBJS)
 
@@ -46,6 +46,7 @@ harmonic.o:	harmonic.c harmonic.h
 isqrt.o: isqrt.c isqrt.h
 modular.o:	modular.c modular.h
 moebius.o:	moebius.c moebius.h cache.h
+necklace.o: necklace.c necklace.h
 prime.o:	prime.c prime.h
 question.o:	question.C question.h Farey.h
 question-new.o:	question-new.c flt.h question.h
