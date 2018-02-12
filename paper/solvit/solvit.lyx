@@ -6796,6 +6796,40 @@ There are other ways to start the table, and to index the polynomials.
 \end_inset
 
 .
+ The index 
+\begin_inset Formula $n$
+\end_inset
+
+ itself encodes the orbit of the midpoint.
+ That is, writing 
+\begin_inset Formula $n=b_{0}b_{1}b_{2}\cdots b_{p}$
+\end_inset
+
+ for binary digits 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+, then 
+\begin_inset Formula $T_{\beta}^{k}\left(\beta/2\right)<1/2$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $b_{k}=0$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $b_{0}=1$
+\end_inset
+
+ always corresponds to 
+\begin_inset Formula $1/2<\beta/2$
+\end_inset
+
+ always.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status collapsed
 
@@ -6811,8 +6845,9 @@ Generated with irred.c
 \begin_layout Standard
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="10" columns="4">
+<lyxtabular version="3" rows="10" columns="5">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -6851,6 +6886,15 @@ order
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+binary
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -6878,6 +6922,15 @@ root
 \begin_inset Formula $1$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -6933,6 +6986,15 @@ root
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -6974,6 +7036,15 @@ root
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -7011,6 +7082,15 @@ root
 
 \begin_layout Plain Layout
 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
 \end_layout
 
 \end_inset
@@ -7059,6 +7139,15 @@ root
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+101
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -7099,6 +7188,15 @@ root
 
 \begin_layout Plain Layout
 3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+111
 \end_layout
 
 \end_inset
@@ -7147,6 +7245,15 @@ root
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1001
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -7191,6 +7298,15 @@ root
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1101
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -7231,6 +7347,15 @@ root
 
 \begin_layout Plain Layout
 7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1111
 \end_layout
 
 \end_inset
@@ -7364,64 +7489,12 @@ TODO items:
 \end_layout
 
 \begin_layout Itemize
-Any commentary about primitive polynomials? 
-\end_layout
-
-\begin_layout Itemize
-What is the period? 
-\end_layout
-
-\begin_layout Itemize
-For degree 
-\begin_inset Formula $p$
-\end_inset
-
-, are the the possible periods are divisors of 
-\begin_inset Formula $2^{p}-1$
-\end_inset
-
- (as they would be in the GF(2) case)? 
-\end_layout
-
-\begin_layout Itemize
-For each period 
-\begin_inset Formula $d$
-\end_inset
-
-, is the number of polynomials of degree 
-\begin_inset Formula $n$
-\end_inset
-
- equal to 
-\begin_inset Formula $\phi\left(d\right)/n$
-\end_inset
-
- with 
-\begin_inset Formula $\phi$
-\end_inset
-
- the Euler totient function (as woudl be the case for GF(2)? 
+Is there a generating function?
 \end_layout
 
 \begin_layout Itemize
 What are the complex roots? They seem to be approximately cyclotomic in
  some sense or another...
-\end_layout
-
-\begin_layout Itemize
-Is there some way that the sequence can be considered a subshift? Clearly,
- iteration paths that lead to the trouble points can be formulated as left-right
- moves on the infinite binary tree.
- The results is a subtree of the full dyadic tree; it is properly a subshift?
- The sequencing property suggests that it should be, but it needs some to
- make it explicit.
-\end_layout
-
-\begin_layout Itemize
-If its a subshift, then what, precisely, are it's self-symmetries? OEIS
- A001037 is related to OEIS A000002 the Oldenburger-Kolakoski sequence;
- that sequence has several fractal self-similaritiesl are they the same
- ones that describe this subshift?
 \end_layout
 
 \begin_layout Subsection

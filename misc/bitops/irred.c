@@ -43,6 +43,21 @@ int len(int n)
 	return len;
 }
 
+void print_bitstr(int len, double gold)
+{
+	double mid = 0.5*gold;
+	while (1 < len)
+	{
+		if (mid < 0.5) printf(" 0");
+		else printf (" 1");
+
+		if (0.5 <= mid) mid -= 0.5;
+		mid *= gold;
+		len --;
+	}
+	printf("\n");
+}
+
 int main(int argc, char* argv[])
 {
 	// int nmax = (1<<28) + 3;
@@ -95,7 +110,10 @@ int main(int argc, char* argv[])
 				n, ork, len(n), cnt, gold);
 #endif
 			if (ork)
-				printf("%d	%d	%20.18g\n", n, len(n), gold);
+			{
+				printf("%d	%d	%20.18g #", n, len(n), gold);
+				print_bitstr(len(n), gold);
+			}
 		}
 	}
 }
