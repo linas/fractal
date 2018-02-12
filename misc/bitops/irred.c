@@ -45,24 +45,26 @@ int len(int n)
 
 int main(int argc, char* argv[])
 {
-	int nmax = 2048;
+	int nmax = (1<<28) + 3;
 
-#define EPS 4.0e-14
+#define EPS 2.0e-15
 
 	int cnt = 0;
 	int plen = 0;
-	double zero[nmax];
+	double* zero = (double*) malloc(nmax*sizeof(double));
 	for (int n=0; n<nmax; n ++)
 	{
 		double gold = find_zero(n, 1.0, 2.0);
 		zero[n] = gold;
 
+#if 0
 		bool aok = true;
 		for (int j=0; j< n; j++)
 		{
 			double z = beta(n, zero[j]);
 			if (fabs(z) < 4.0e-14) { aok = false; break; }
 		}
+#endif
 
 		// printf("---------\ngold=%g\n", gold);
 		bool ork = true;
@@ -73,14 +75,22 @@ int main(int argc, char* argv[])
 			// printf("duuude n=%d nhl=%d nh=%d znh=%g go=%g comp=%d bad=%d\n",
 			// n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
 			if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
-			// if (1 == nhl%2 && zero[nh+1] < gold && 1 < nh) {ork = false; break; }
 			nhl = nh;
 			nh >>= 1;
 		}
 
-		if (plen != len(n)) {plen = len(n); cnt = 0; printf("\n");}
-		if (aok && ork) { cnt++; }
-		printf("%d ok=%d it=%d l=%d %d %20.18g\n",
-			n, aok, ork, len(n), cnt, gold);
+		if (plen != len(n))
+		{
+			printf("total for len=%d is %d\n", plen, cnt);
+			plen = len(n);
+			cnt = 0;
+		}
+		if (ork) { cnt++; }
+
+		if (n < 128)
+		{
+			printf("%d ok=%d l=%d %d %20.18g\n",
+				n, ork, len(n), cnt, gold);
+		}
 	}
 }
