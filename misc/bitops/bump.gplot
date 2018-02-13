@@ -14,7 +14,7 @@ set logscale y
 
 ##################################################################
 # Used for the graph in the paper.
-
+# 
 set term postscript eps color enhanced
 set out 'bump.eps'
 set title "Inverse Distance Between Golden Means"
@@ -22,7 +22,7 @@ set title "Inverse Distance Between Golden Means"
 set logscale y
 set format y "10^{%4T}"
 set xlabel "{/Symbol b}"
-set ylabel "1 / (r_{n+1} - r_n)"
-set yrange [8:200000]
+set ylabel "1 / 1375 (r_{n+1} - r_n)"
+set yrange [0.008:200]
 
-plot "bump12.dat" using 2:($4/$2) with lines linewidth 2 title ""
+plot "bump12.dat" using 2:($4/(1375*$2)) with lines linewidth 2 title ""
