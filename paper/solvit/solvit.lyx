@@ -6065,41 +6065,7 @@ The Hessenberg basis construction gives a countable set of
 \end_inset
 
 .
- Are they complete? Obviously not when 
-\begin_inset Formula $\beta$
-\end_inset
-
- is equal to a 
-\begin_inset Quotes eld
-\end_inset
-
-trouble spot
-\begin_inset Quotes erd
-\end_inset
-
-, as discussed above.
- But the trouble spots, although dense in the interval 
-\begin_inset Formula $1<\beta<2$
-\end_inset
-
-, are countable and so 
-\begin_inset Quotes eld
-\end_inset
-
-most
-\begin_inset Quotes erd
-\end_inset
-
- values of 
-\begin_inset Formula $\beta$
-\end_inset
-
- are not problematic.
- So what about these other values?
-\end_layout
-
-\begin_layout Standard
-Obviously the 
+ Are they complete? Obviously the 
 \begin_inset Formula $\left\{ \psi_{n}\right\} $
 \end_inset
 
@@ -6120,28 +6086,7 @@ Obviously the
 \end_layout
 
 \begin_layout Standard
-Clearly, the 
-\begin_inset Formula $\psi_{n}$
-\end_inset
-
- span some subspace; do they span the Hilbert space 
-\begin_inset Formula $L_{2}\left[0,\beta/2\right]$
-\end_inset
-
- of square-integrable functions on the interval 
-\begin_inset Formula $[0,\beta/2]$
-\end_inset
-
-? To what degree can one legitimately write
-\begin_inset Formula 
-\[
-\delta\left(y-x\right)=\sum_{n=0}^{\infty}\psi_{n}\left(y\right)\psi_{n}\left(x\right)
-\]
-
-\end_inset
-
-as a resolution of the identity? A numerical exploration shows that the
- midpoints 
+A numerical exploration shows that the midpoints 
 \begin_inset Formula $m_{p}$
 \end_inset
 
@@ -6176,6 +6121,80 @@ eventually
 \end_inset
 
  fill in and become dense in some interval.
+\end_layout
+
+\begin_layout Standard
+There are some exceptions: there are some values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for which the midpoint 
+\begin_inset Formula $m_{0}$
+\end_inset
+
+ iterates 
+\begin_inset Formula $x=1/2$
+\end_inset
+
+ which can be understood to be the same as iterating back to itself (forming
+ a periodic orbit), or equivalently, iterating to zero (as these are two
+ choices for the discontinuityin the map).
+ These values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are termed 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spots
+\begin_inset Quotes erd
+\end_inset
+
+, and are explored in greter detail, in a later section.
+ They are dense in the interval 
+\begin_inset Formula $1<\beta<2$
+\end_inset
+
+, but they form a countable set that can be taken to be of measure zero.
+ Thus, most 
+\begin_inset Quotes eld
+\end_inset
+
+most
+\begin_inset Quotes erd
+\end_inset
+
+ values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are not problematic.
+ Excluding the trouble spots, the Hessenberg basis can be taken to be complete.
+\end_layout
+
+\begin_layout Standard
+Clearly, the 
+\begin_inset Formula $\psi_{n}$
+\end_inset
+
+ span some subspace; do they span the Hilbert space 
+\begin_inset Formula $L_{2}\left[0,\beta/2\right]$
+\end_inset
+
+ of square-integrable functions on the interval 
+\begin_inset Formula $[0,\beta/2]$
+\end_inset
+
+? To what degree can one legitimately write
+\begin_inset Formula 
+\[
+\delta\left(y-x\right)=\sum_{n=0}^{\infty}\psi_{n}\left(y\right)\psi_{n}\left(x\right)
+\]
+
+\end_inset
+
+as a resolution of the identity? 
 \end_layout
 
 \begin_layout Standard
@@ -7052,13 +7071,115 @@ height "1pt"
 
 \begin_layout Section
 Periodic Orbits
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Periodic-Orbits"
+\end_layout
+
+\begin_layout Standard
+The iteration of the midpoint, used to construct the Hessenberg basis, works
+ well, unless the midpoint iterates to hit the point 
+\begin_inset Formula $x=1/2$
+\end_inset
+
+ where the map has a discontinuity.
+ Here, iteration stops: at the next step, this point is defined to iterate
+ to zero, in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
 
 \end_inset
 
+.
+ Zero is a fixed point, and so there is nowhere further to go.
+ This occurs for certain values of 
+\begin_inset Formula $\beta$
+\end_inset
 
+: after a finite numper for steps, the midpoint 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ iterates to 1/2.
+ This section explores these special values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Aside from the defintion in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+, one can consider the modified map, where the less-than sign has been altered
+ to a less-than-or-equals:
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x\le\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}<x\le1
+\end{cases}
+\]
+
+\end_inset
+
+In this map, the point 
+\begin_inset Formula $x=1/2$
+\end_inset
+
+ iterates to 
+\begin_inset Formula $\beta/2$
+\end_inset
+
+, which is just the initial midpoint itself.
+ In this case, the halted orbits become periodic orbits.
+ There is a third possibility, to simply remove the points 0, 1 and 1/2
+ from the domain:
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\begin{cases}
+\beta x & \mbox{ for }0<x<\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}<x<1
+\end{cases}
+\]
+
+\end_inset
+
+In this case, if the midpoint iterate to 1/2, it can be taken to simply
+ have exited the domain of validity.
+\end_layout
+
+\begin_layout Standard
+All three variants can be considered together, so that the 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ downshift is taken as the quotient space or identification space
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WP-Quotient-Space"
+
+\end_inset
+
+ of the three variants, in the strict topological sense of a quotient space.
+ Thus, interestingly, for the downshift, the periodic orbits and the fixed
+ point both belong to the same equivalence class.
+ This has some interesting implications when one compares the downshift
+ to other iterated maps, such as the logistic map, which have non-trivial
+ stable regions.
+ Topologically, it would seem that one can perform a kind of surgery, attaching
+ stable regions exactly into those spots where, in the downshift, one has
+ an equivalence class.
+ This solves (at least for me) the long-standing problem of exactly how
+ to properly describe the topologcal conjugacy between different kinds of
+ iterated maps.
 \end_layout
 
 \begin_layout Subsection
