@@ -107,11 +107,32 @@ double find_gold(int n)
 	return 0.0;
 }
 
-void bubble_sort(int nmax)
+/**
+ * Find the zeros, then arrange them in sequential order.
+ */
+int bubble_sort(int nmax)
 {
+	// Find all of them.
+	bool bad[nmax];
+	for (int n=0; n<nmax; n ++)
+	{
+		double gold = find_gold(n);
+		bad[n] = false;
+		if (gold < 0.5) bad[n] = true;
+	}
+
+	// Discard the bad ones.
+	int cnt = 0;
 	for (int i=0; i< nmax; i++)
 	{
-		for (int j=i+1; j<nmax; j++)
+		zero[cnt] = zero[i];
+		if (!bad[i]) cnt++;
+	}
+
+	// Bubble sort them.
+	for (int i=0; i< cnt; i++)
+	{
+		for (int j=i+1; j<cnt; j++)
 		{
 			if (zero[j] < zero[i])
 			{
@@ -121,18 +142,19 @@ void bubble_sort(int nmax)
 			}
 		}
 	}
+
+	return cnt;
 }
 
+#ifdef BIN_COUNT
 int main(int argc, char* argv[])
 {
 	// int nmax = (1<<28) + 3;
-	// int nmax = (1<<18) + 3;
-	int nmax = (1<<30) + 3;
+	int nmax = (1<<18) + 3;
 	// int nmax = (1<<20) + 3;
 
 	setup_gold(nmax);
 
-#ifdef BIN_COUNT
 #define NPTS 1303
 	int npts = NPTS;
 	double bincnt[npts+1];
@@ -140,42 +162,12 @@ int main(int argc, char* argv[])
 	{
 		bincnt[i] = 0.0;
 	}
-#endif
 
 	int cnt = 0;
-	int plen = 0;
 	for (int n=0; n<nmax; n ++)
 	{
 		double gold = find_gold(n);
 
-		// printf("---------\ngold=%g\n", gold);
-		if (plen != len(n))
-		{
-			// printf("# total for len=%d is %d\n", plen, cnt);
-			printf("%d	%d\n", plen, cnt);
-			fflush(stdout);
-			plen = len(n);
-			cnt = 0;
-		}
-		if (0.5 < gold) { cnt++; }
-	}
-
-#ifdef PRINT_STUFF
-		if (n < 128)
-		{
-#if 0
-			printf("%d ok=%d l=%d %d %20.18g\n",
-				n, ork, len(n), cnt, gold);
-#endif
-			if (0.5 < gold)
-			{
-				printf("%d	%d	%20.18g #", n, len(n), gold);
-				print_bitstr(len(n), gold);
-			}
-		}
-#endif
-
-#ifdef BIN_COUNT
 		// Bin-count.
 		if (gold < 0.5) continue;
 		cnt ++;
@@ -191,7 +183,57 @@ int main(int argc, char* argv[])
 		double y = norm * bincnt[i];
 		printf("%d	%g	%g\n", i, x, y);
 	}
+}
+
+#endif // BIN_COUNT
+
+int main(int argc, char* argv[])
+{
+	// int nmax = (1<<28) + 3;
+	// int nmax = (1<<18) + 3;
+	// int nmax = (1<<20) + 3;
+	// int nmax = (1<<8) + 3;
+	int nmax = (1<<12) + 1;
+
+	setup_gold(nmax);
+
+#ifdef PRINT_STUFF
+	int cnt = 0;
+	int plen = 0;
+	for (int n=0; n<nmax; n ++)
+	{
+		double gold = find_gold(n);
+
+		// printf("---------\ngold=%g\n", gold);
+		if (plen != len(n))
+		{
+			printf("# total for len=%d is %d\n", plen, cnt);
+			plen = len(n);
+			cnt = 0;
+		}
+		if (0.5 < gold) { cnt++; }
+
+		if (n < 128)
+		{
+#if 0
+			printf("%d ok=%d l=%d %d %20.18g\n",
+				n, ork, len(n), cnt, gold);
+#endif
+			if (0.5 < gold)
+			{
+				printf("%d	%d	%20.18g #", n, len(n), gold);
+				print_bitstr(len(n), gold);
+			}
+		}
+	}
 #endif
 
-	// bubble_sort(nmax);
+	int cnt = bubble_sort(nmax);
+	for (int n=0; n<cnt-1; n ++)
+	{
+		double gold = zero[n];
+		double ratio = zero[n+1] / gold;
+		double bump = 1.0 / (ratio - 1.0);
+		printf("%d	%g %g	%g\n", n, gold, ratio, bump);
+	}
 }

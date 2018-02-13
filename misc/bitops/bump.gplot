@@ -1,0 +1,16 @@
+
+set term png size 1024,768
+set out 'bump.png'
+
+set title "Distribution of Golden Means"
+
+set logscale y
+# set logscale x
+
+# plot "bump8.dat" using 2:4 with lines linewidth 2 title " 8 ", \
+#    "bump12.dat" using 2:4 with lines linewidth 2 title " r12 ", \
+#     "bump12.dat" using 2:($4/$2) with lines linewidth 2 title " 12 ", \
+
+# plot "bump12.dat" using ($2**10):($4/$2) with lines linewidth 2 title ""
+
+plot "bump12.dat" using 2:($4/$2) with lines linewidth 2 title ""
