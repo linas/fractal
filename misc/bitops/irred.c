@@ -10,7 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Return polynomial for bitstr */
+/* Return the n'th golden polynomial. It can be constructed from
+ * the bit string of (2n+1).
+ */
 double beta(int n, double x)
 {
 	double acc = 0.0;
@@ -25,6 +27,9 @@ double beta(int n, double x)
 	return xn - acc;
 }
 
+/* Use midpoint bisection to find the single, unique
+ * positive real zero of the n'th golden polynomial.
+ */
 double find_zero(int n, double lo, double hi)
 {
 	double mid = 0.5 * (lo+hi);
@@ -58,50 +63,71 @@ void print_bitstr(int len, double gold)
 	printf("\n");
 }
 
+/** Helper array, needed for finding gold midpoints */
+double* zero = NULL;
+void setup_gold(int nmax)
+{
+	zero = (double*) malloc(nmax*sizeof(double));
+}
+
+/**
+ * Find the single, unique real zero of the n'th golden polynomial.
+ * If the value of `n` does not really correspond to a golden
+ * polynomial, return zero.
+ */
+double find_gold(int n)
+{
+	double gold = find_zero(n, 1.0, 2.0);
+	zero[n] = gold;
+
+#if 0
+	bool aok = true;
+	for (int j=0; j< n; j++)
+	{
+		double z = beta(n, zero[j]);
+		if (fabs(z) < 4.0e-14) { aok = false; break; }
+	}
+#endif
+
+#define EPS 2.0e-15
+	// printf("---------\ngold=%g\n", gold);
+	bool ork = true;
+	int nhl = n;
+	int nh = nhl >> 1;
+	while (nh)
+	{
+		// printf("duuude n=%d nhl=%d nh=%d znh=%g go=%g comp=%d bad=%d\n",
+		// n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
+		if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
+		nhl = nh;
+		nh >>= 1;
+	}
+
+	if (ork) return gold;
+	return 0.0;
+}
+
 int main(int argc, char* argv[])
 {
 	// int nmax = (1<<28) + 3;
 	int nmax = (1<<18) + 3;
 
-#define EPS 2.0e-15
+	setup_gold(nmax);
 
 	int cnt = 0;
 	int plen = 0;
-	double* zero = (double*) malloc(nmax*sizeof(double));
 	for (int n=0; n<nmax; n ++)
 	{
-		double gold = find_zero(n, 1.0, 2.0);
-		zero[n] = gold;
-
-#if 0
-		bool aok = true;
-		for (int j=0; j< n; j++)
-		{
-			double z = beta(n, zero[j]);
-			if (fabs(z) < 4.0e-14) { aok = false; break; }
-		}
-#endif
+		double gold = find_gold(n);
 
 		// printf("---------\ngold=%g\n", gold);
-		bool ork = true;
-		int nhl = n;
-		int nh = nhl >> 1;
-		while (nh)
-		{
-			// printf("duuude n=%d nhl=%d nh=%d znh=%g go=%g comp=%d bad=%d\n",
-			// n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
-			if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
-			nhl = nh;
-			nh >>= 1;
-		}
-
 		if (plen != len(n))
 		{
 			printf("# total for len=%d is %d\n", plen, cnt);
 			plen = len(n);
 			cnt = 0;
 		}
-		if (ork) { cnt++; }
+		if (0.5 < gold) { cnt++; }
 
 		if (n < 128)
 		{
@@ -109,7 +135,7 @@ int main(int argc, char* argv[])
 			printf("%d ok=%d l=%d %d %20.18g\n",
 				n, ork, len(n), cnt, gold);
 #endif
-			if (ork)
+			if (0.5 < gold)
 			{
 				printf("%d	%d	%20.18g #", n, len(n), gold);
 				print_bitstr(len(n), gold);
