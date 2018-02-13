@@ -6965,7 +6965,7 @@ reference "fig:Frobenius-Perron-Eigenvector-Coe"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -7076,6 +7076,17 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Givens rotations
+\end_layout
+
+\begin_layout Standard
+A Hessenberg matrix can be brought to solvable form by applying a sequence
+ of Givens rotations.
+ Is the sequence of angles that appear in these rotations meaningful in
+ any way, or are they just some form of uninteresting junk?
 \end_layout
 
 \begin_layout Section
@@ -10017,7 +10028,66 @@ Essentially, the claim is straight-forward: topologically, all chaotic parts
 \end_layout
 
 \begin_layout Section
-Orthogonal Polynomials
+Bergman (Hessenberg) Polynomials
+\end_layout
+
+\begin_layout Standard
+Given a matrix operator in Hessenberg form, it can be interpreted as a right-shi
+ft on the space of polynomials.
+ Such polynomials form an orthogonal basis for a certain kind of Hilbert
+ space, called the Bergman space.
+ They are studied in applied mathematics, as they are orthogonal over some
+ measure on the complex plane.
+ The Hessenberg operator is a generalization of the better-known case of
+ the Jacobi operator, which has it's own extensive theory, including spectra
+ and scattering, and is important for several exactly solvable non-linear
+ models in physics, including the Toda lattice
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Teschl00"
+
+\end_inset
+
+.
+ The Hessenberg operator presumably has an equally rich theory, but it does
+ not appear to be currently known; the breadth and scope of existing publication
+s is limited.
+\end_layout
+
+\begin_layout Standard
+The general framework for the Hessenberg polynomials is sketched, including
+ a fast and informal definition of Bergman space (the space on which the
+ polynomials are orthogonal).
+ The Hessenberg matrix is explicitly solvable on the left, and can be explicitly
+ brought into a from that exhibits the right-shift operator.
+ In the general theory, the change of basis from the shift operator to the
+ Hessenberg matrix is known to be the Cholesky decomposition of a moment
+ matrix, and specifically, the moments of the measure on which the polynomials
+ are orthogonal.
+\end_layout
+
+\begin_layout Standard
+Working backwards from the downshift, the first asymptotic term in the measure
+ can be extracted.
+ For 
+\begin_inset Formula $\beta>\varphi$
+\end_inset
+
+, it appears to be a Dirac delta (point mass) located at 
+\begin_inset Formula $z=1$
+\end_inset
+
+ on the complex plane, with a blancmange-like fractal curve giving the weight.
+ For 
+\begin_inset Formula $\beta<\varphi$
+\end_inset
+
+, it appears to be the derivative of the Dirac delta, with a different blancmang
+e-like fractal curve giving the weight.
+\end_layout
+
+\begin_layout Subsection
+Bergman Space
 \end_layout
 
 \begin_layout Standard
@@ -11885,17 +11955,6 @@ so that the asymptotic behavior of
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsection
-Givens rotations
-\end_layout
-
-\begin_layout Standard
-A Hessenberg matrix can be brought to solvable form by applying a sequence
- of Givens rotations.
- Is the sequence of angles that appear in these rotations meaningful in
- any way, or are they just some form of uninteresting junk?
 \end_layout
 
 \begin_layout Section

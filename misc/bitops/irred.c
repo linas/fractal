@@ -123,7 +123,10 @@ int bubble_sort(int nmax)
 
 	// Discard the bad ones.
 	int cnt = 0;
-	for (int i=0; i< nmax; i++)
+
+	// XXX Also discard the early ones.
+	// for (int i=0; i< nmax; i++)
+	for (int i=nmax/2; i< nmax; i++)
 	{
 		zero[cnt] = zero[i];
 		if (!bad[i]) cnt++;
