@@ -110,16 +110,26 @@ double find_gold(int n)
 int main(int argc, char* argv[])
 {
 	// int nmax = (1<<28) + 3;
-	int nmax = (1<<18) + 3;
+	// int nmax = (1<<18) + 3;
+	int nmax = (1<<24) + 3;
 
 	setup_gold(nmax);
 
+#define NPTS 1303
+	int npts = NPTS;
+	double bincnt[npts+1];
+	for (int i=0; i<npts; i++)
+	{
+		bincnt[i] = 0.0;
+	}
+
 	int cnt = 0;
-	int plen = 0;
+	// int plen = 0;
 	for (int n=0; n<nmax; n ++)
 	{
 		double gold = find_gold(n);
 
+#ifdef PRINT_STUFF
 		// printf("---------\ngold=%g\n", gold);
 		if (plen != len(n))
 		{
@@ -141,5 +151,21 @@ int main(int argc, char* argv[])
 				print_bitstr(len(n), gold);
 			}
 		}
+#endif
+
+		// Bin-count.
+		if (gold < 0.5) continue;
+		cnt ++;
+		int nbin = (gold - 1.0) * npts;
+		bincnt[nbin] += 1.0;
+	}
+
+	double norm = ((double) npts) / ((double) cnt);
+	for (int i=0; i<npts; i++)
+	{
+		double x = ((double) i + 0.5) / ((double) npts);
+		x += 1.0;
+		double y = norm * bincnt[i];
+		printf("%d	%g	%g\n", i, x, y);
 	}
 }
