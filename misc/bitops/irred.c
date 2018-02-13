@@ -111,7 +111,8 @@ int main(int argc, char* argv[])
 {
 	// int nmax = (1<<28) + 3;
 	// int nmax = (1<<18) + 3;
-	int nmax = (1<<24) + 3;
+	// int nmax = (1<<30) + 3;
+	int nmax = (1<<20) + 3;
 
 	setup_gold(nmax);
 
