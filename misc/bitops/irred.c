@@ -13,11 +13,11 @@
 /* Return the n'th golden polynomial. It can be constructed from
  * the bit string of (2n+1).
  */
-double beta(int n, double x)
+double beta(unsigned long n, double x)
 {
 	double acc = 0.0;
 	double xn = 1.0;
-	int bitstr = 2*n+1;
+	unsigned long bitstr = 2*n+1;
 	while (bitstr)
 	{
 		if (bitstr%2 == 1) acc += xn;
@@ -30,7 +30,7 @@ double beta(int n, double x)
 /* Use midpoint bisection to find the single, unique
  * positive real zero of the n'th golden polynomial.
  */
-double find_zero(int n, double lo, double hi)
+double find_zero(unsigned long n, double lo, double hi)
 {
 	double mid = 0.5 * (lo+hi);
 	if (1.0e-15 > hi-lo) return mid;
@@ -40,10 +40,10 @@ double find_zero(int n, double lo, double hi)
 }
 
 /* Return length of bitstr, length in bits */
-int len(int n)
+int len(unsigned long n)
 {
 	int len=0;
-	int bitstr = 2*n+1;
+	unsigned long bitstr = 2*n+1;
 	while (bitstr) { len++; bitstr >>= 1; }
 	return len;
 }
@@ -107,15 +107,32 @@ double find_gold(int n)
 	return 0.0;
 }
 
+void bubble_sort(int nmax)
+{
+	for (int i=0; i< nmax; i++)
+	{
+		for (int j=i+1; j<nmax; j++)
+		{
+			if (zero[j] < zero[i])
+			{
+				double tmp = zero[j];
+				zero[j] = zero[i];
+				zero[i] = tmp;
+			}
+		}
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	// int nmax = (1<<28) + 3;
 	// int nmax = (1<<18) + 3;
-	// int nmax = (1<<30) + 3;
-	int nmax = (1<<20) + 3;
+	int nmax = (1<<30) + 3;
+	// int nmax = (1<<20) + 3;
 
 	setup_gold(nmax);
 
+#ifdef BIN_COUNT
 #define NPTS 1303
 	int npts = NPTS;
 	double bincnt[npts+1];
@@ -123,23 +140,27 @@ int main(int argc, char* argv[])
 	{
 		bincnt[i] = 0.0;
 	}
+#endif
 
 	int cnt = 0;
-	// int plen = 0;
+	int plen = 0;
 	for (int n=0; n<nmax; n ++)
 	{
 		double gold = find_gold(n);
 
-#ifdef PRINT_STUFF
 		// printf("---------\ngold=%g\n", gold);
 		if (plen != len(n))
 		{
-			printf("# total for len=%d is %d\n", plen, cnt);
+			// printf("# total for len=%d is %d\n", plen, cnt);
+			printf("%d	%d\n", plen, cnt);
+			fflush(stdout);
 			plen = len(n);
 			cnt = 0;
 		}
 		if (0.5 < gold) { cnt++; }
+	}
 
+#ifdef PRINT_STUFF
 		if (n < 128)
 		{
 #if 0
@@ -154,6 +175,7 @@ int main(int argc, char* argv[])
 		}
 #endif
 
+#ifdef BIN_COUNT
 		// Bin-count.
 		if (gold < 0.5) continue;
 		cnt ++;
@@ -169,4 +191,7 @@ int main(int argc, char* argv[])
 		double y = norm * bincnt[i];
 		printf("%d	%g	%g\n", i, x, y);
 	}
+#endif
+
+	// bubble_sort(nmax);
 }

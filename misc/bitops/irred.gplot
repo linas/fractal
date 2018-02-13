@@ -2,19 +2,27 @@
 set term png size 1024,768
 set out 'irred.png'
 
+# Used for the graph in the paper.
+# set term postscript eps color enhanced
+# set out 'irred.eps'
+
 set title "Distribution of Golden Means"
 set key left
 set xrange [1:2]
-set yrange [1.0e-6:20]
+set yrange [1.0e-5:20]
 set logscale x
 set logscale y
 set format y "10^{%4T}"
+set ylabel "Normalized Bin Count"
 set xlabel "{/Symbol b}"
 set xtics ("1" 1, "1.2" 1.2, "1.4" 1.4, "1.6" 1.6, "1.8" 1.8, "2" 2)
 
-plot "irred20.dat" using 2:3 with lines linewidth 2 title "n<2^{20}", \
-     "irred24.dat" using 2:3 with lines linewidth 2 title "n<2^{24}", \
-     "irred28.dat" using 2:3 with lines linewidth 2 title "n<2^{28}", \
+
+plot "irred20.dat" using 2:3 with lines linewidth 2 title "   n<2^{20}", \
+     "irred24.dat" using 2:3 with lines linewidth 2 title "   n<2^{24}", \
+     "irred28.dat" using 2:3 with lines linewidth 2 title "   n<2^{28}", \
      "irred24.dat" using 2:(2.3e-5 * $2**18.7) with lines linewidth 2 title "{/Symbol b}^{18.7}" ,\
      "irred24.dat" using 2:(2.0e-6 * $2**22.5) with lines linewidth 2 title "{/Symbol b}^{22.5}" ,\
-     "irred24.dat" using 2:(1.6e-7 * $2**26.3) with lines linewidth 2 title "{/Symbol b}^{26.3}"
+     "irred24.dat" using 2:(1.5e-7 * $2**26.3) with lines linewidth 2 title "{/Symbol b}^{26.3}"
+
+#     "irred24.dat" using 2:(1.19e-7 * $2**26.8) with lines linewidth 2 title "{/Symbol b}^{26.8}"
