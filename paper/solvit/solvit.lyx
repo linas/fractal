@@ -7879,7 +7879,7 @@ M_{n}=\frac{2^{n}}{n}-\mathcal{O}\left(\frac{2^{n/2}}{n}\right)
 \begin_layout Standard
 The above counting function is for necklaces with only two colors.
  In general, one can have necklaces with 3 or more colors; can that happen
- here? Yes, it might: if one considers the general 
+ here? Yes, of course: if one considers the general 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -7900,28 +7900,27 @@ kneading transform
 \end_inset
 
  branches or folds in it.
- The analogous trouble-spots again appear.
- Presumably, they can be counted using the general necklace counting function.
- Is this the same as the number of Lyndon words in 
+ The analogous trouble-spots again appear, and they can appear after an
+ arbitrary finite-length orbit.
+ Insofar as they correspond to periodic orbits, they are necessarily counted
+ by the necklace-counting function.
+ That is, one must consider all possible strings of 
 \begin_inset Formula $\left\lceil \beta\right\rceil $
 \end_inset
 
- letters? After all, each orbit can be considered to be a kind-of interlacing
- of permutations.
- Is this the same as the number of irreducible polynomials in 
-\begin_inset Formula $\mathbb{F}_{n}$
+ letters, modulo a cyclic permutation: this is the very defintion of a necklace
+ (or 
+\begin_inset Quotes eld
 \end_inset
 
-? I don't know; if it is, then the connection is deep; if its not, then
- the relationship between polynomials in 
-\begin_inset Formula $\mathbb{F}_{2}$
+circular word
+\begin_inset Quotes erd
 \end_inset
 
- and the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform is accidental.
+).
+ The number of such necklaces is given by the necklace-counting function.
+ Each such orbit is necessarily represented by a Lyndon word, which is a
+ representative of the conjugacy class of the orbit.
 \end_layout
 
 \begin_layout Subsection
@@ -7938,15 +7937,15 @@ trouble spots
 \end_inset
 
  whenever the 
-\begin_inset Formula $p$
+\begin_inset Formula $k$
 \end_inset
 
 'th iterate 
-\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(m_{0}\right)$
+\begin_inset Formula $m_{k}=T_{\beta}^{k}\left(m_{0}\right)$
 \end_inset
 
  lands on the starting midpoint 
-\begin_inset Formula $m_{p}=m_{0}$
+\begin_inset Formula $m_{k}=m_{0}$
 \end_inset
 
 .
@@ -7955,25 +7954,25 @@ trouble spots
 \end_inset
 
 , the 
-\begin_inset Formula $p$
+\begin_inset Formula $k$
 \end_inset
 
 'th iterate will be a piece-wise collection of polynomials, each of order
  
-\begin_inset Formula $p$
+\begin_inset Formula $k$
 \end_inset
 
 , and of the form 
-\begin_inset Formula $\beta^{p}-\beta^{p-1}-b_{2}\beta^{p-2}-b_{3}\beta^{p-3}-\cdots-1$
+\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{2}\beta^{k-2}-b_{3}\beta^{k-3}-\cdots-1$
 \end_inset
 
  for some binary digits 
-\begin_inset Formula $b_{k}$
+\begin_inset Formula $b_{i}$
 \end_inset
 
  being zero or one.
  These must be arranged in the manner such that 
-\begin_inset Formula $\beta^{p}-\beta^{p-1}-b_{2}\beta^{p-2}-b_{3}\beta^{p-3}-\cdots-1=0$
+\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{2}\beta^{k-2}-b_{3}\beta^{k-3}-\cdots-1=0$
 \end_inset
 
  at each discontinuity, as illustrated in figure 
@@ -7986,7 +7985,7 @@ reference "fig:Location-of-Midpoints"
 .
  This limits the polynomials that can appear; it limits the possible coefficient
 s 
-\begin_inset Formula $b_{k}$
+\begin_inset Formula $b_{i}$
 \end_inset
 
 .
@@ -8000,7 +7999,16 @@ Although the count of these polynomials is the same as that for the irreducible
 \end_inset
 
 , the relationship is completely opaque (to me).
- Thus a compilation seems to be called for.
+ Apparently, this is a generic issue: the number of irreducible polynomials
+ over 
+\begin_inset Formula $\mathbb{F}_{p}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+Thus a compilation seems to be called for.
 \end_layout
 
 \begin_layout Standard
