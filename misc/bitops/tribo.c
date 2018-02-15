@@ -1,7 +1,9 @@
 /*
  * tribo.c
  *
- * Tribonacci foolishness
+ * Generalized Tribonacci numbers -- these are the same as
+ * the polynomial roots.
+ *
  * Linas Vepstas February 2018
  */
 #include <stdio.h>
@@ -11,9 +13,6 @@ int main (int argc, char* argv[])
 {
 	int nmax = 50;
 	unsigned long seq[nmax];
-	seq[0] = 1;
-	seq[1] = 0;
-	seq[2] = 1;
 
 	if (argc<3)
 	{
@@ -25,10 +24,11 @@ int main (int argc, char* argv[])
 	unsigned long mask[ilen];
 	for (int j=0; j<ilen; j++)
 	{
-		seq[j] = j+1;
+		seq[j] = 0;
 		mask[j] = atoi(argv[2+j]);
 		printf("# Mask: %d	%lu\n", j, mask[j]);
 	}
+	seq[ilen-1] = 1;
 
 	for (int i=ilen; i< nmax; i++)
 	{
