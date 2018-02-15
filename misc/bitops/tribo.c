@@ -17,21 +17,24 @@ int main (int argc, char* argv[])
 
 	if (argc<3)
 	{
-		fprintf(stderr, "Usage: %s len vals...", argv[0]);
+		fprintf(stderr, "Usage: %s len vals...\n", argv[0]);
 		exit(1);
 	}
 
 	int ilen = atoi(argv[1]);
+	unsigned long mask[ilen];
 	for (int j=0; j<ilen; j++)
 	{
-		seq[j] = atoi(argv[2+j]);
-		printf("# Initial sequence: %d	%lu\n", j, seq[j]);
+		seq[j] = j+1;
+		mask[j] = atoi(argv[2+j]);
+		printf("# Mask: %d	%lu\n", j, mask[j]);
 	}
 
 	for (int i=ilen; i< nmax; i++)
 	{
 		unsigned long sum = 0;
-		for (int j=0; j<ilen; j++) sum += seq[i-j-1];
+		for (int j=0; j<ilen; j++) sum += mask[j] * seq[i-j-1];
+
 		seq[i] = sum;
 
 		double rat = ((double) seq[i]) / ((double) seq[i-1]);
