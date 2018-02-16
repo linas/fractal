@@ -9679,7 +9679,7 @@ The ratio of successive terms is
 and is given as the (positive) real root of the polynomial
 \begin_inset Formula 
 \[
-\beta^{k+1}-b_{0}\beta^{k}-b_{1}\beta^{k-1}-\cdots-b_{k}=0
+p_{n}\left(\beta\right)=\beta^{k+1}-b_{0}\beta^{k}-b_{1}\beta^{k-1}-\cdots-b_{k}=0
 \]
 
 \end_inset
@@ -9695,13 +9695,13 @@ The generalized Fibonacci are no accident: these sequences have an ordinary
  That is,
 \begin_inset Formula 
 \[
-\sum_{m=0}^{\infty}\beta^{m}F_{m}^{\{b\}}=\frac{\beta^{k}}{1-b_{0}\beta-b_{1}\beta^{2}-\cdots-b_{k}\beta^{k+1}}
+\sum_{m=0}^{\infty}z^{m}F_{m}^{\{b\}}=\frac{z^{k}}{1-b_{0}z-b_{1}z^{2}-\cdots-b_{k}z^{k+1}}=\frac{1}{zp_{n}\left(\frac{1}{z}\right)}
 \]
 
 \end_inset
 
 The factor of 
-\begin_inset Formula $\beta^{k}$
+\begin_inset Formula $z^{k}$
 \end_inset
 
  in the numerator serves only to initiate the sequence so that 
@@ -9729,6 +9729,7 @@ These sequences are generic: they indicate how many different ways on can
  From such partitions, it appears that one can build partitions of the positive
  integers that are disjoint, and whose union is the positive integers.
  Special case of Beatty sequences...
+ or something like that ...
 \end_layout
 
 \begin_layout Standard
@@ -10559,15 +10560,15 @@ The nature of these sequences as shift sequences can be emphasized by noting
 
  matrix of the form
 \begin_inset Formula 
-\[
+\begin{equation}
 B=\left[\begin{array}{ccccc}
 b_{0} & b_{1} & b_{2} & \cdots & b_{k}\\
 1 & 0 & 0 & \cdots & 0\\
 0 & 1 & 0 & \cdots & 0\\
 0 &  & \ddots &  & \vdots\\
 0 & 0 & \cdots & 1 & 0
-\end{array}\right]
-\]
+\end{array}\right]\label{eq:golden matrix}
+\end{equation}
 
 \end_inset
 
@@ -10651,6 +10652,286 @@ multiplication theorem
  Diophantine ...
  Hessenberg matrixes on ideal domains ...
  (inspired by Jacobi matricies on principle ideal domains)...
+\end_layout
+
+\begin_layout Subsection
+Limiting Behavior
+\end_layout
+
+\begin_layout Standard
+Consider the following scenario: Pick some large integer 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ For many (not all) such integers, there will be a necklace or periodic
+ orbit, given explicitly by the binary-digit expansion of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ That orbit is associated with a specific value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+, which is obtained as the real eigenvalue of the 
+\begin_inset Quotes eld
+\end_inset
+
+golden shift matrix
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:golden matrix"
+
+\end_inset
+
+, the characteristic equation of which being 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\end_inset
+
+.
+ The bit sequence 
+\begin_inset Formula $\left\{ b_{0},b_{1,},\cdots b_{k}\right\} $
+\end_inset
+
+ is explicitly given by the binary-bit expansion of 
+\begin_inset Formula $2n+1$
+\end_inset
+
+, with 
+\begin_inset Formula $k=1+\left\lfloor \log_{2}n\right\rfloor $
+\end_inset
+
+.
+ This polynomial has one positive real root at 
+\begin_inset Formula $\beta>1$
+\end_inset
+
+ and 
+\begin_inset Formula $k-1$
+\end_inset
+
+ other roots, almost all of which are arranged near the unit circle, more-or-les
+s equidistant from one another.
+ Consider now rescaling the matrix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:golden matrix"
+
+\end_inset
+
+ by 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+.
+ This gives a new matrix, with what now might be called a Frobenius-Perron
+ eigenvalue of one, and the remaining eigenvalues distributed approximately
+ on a circle of radius 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Given the similarity of this spectrum to that obsreved numerically for eqn
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hessen-matrix-elts"
+
+\end_inset
+
+, I am lead to the hypothesis that the large-
+\begin_inset Formula $n$
+\end_inset
+
+ limit of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:golden matrix"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hessen-matrix-elts"
+
+\end_inset
+
+ are similar to one another.
+ That is, there exists some sequence of invertible matrixes 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+, the similarity matrixes, and some sequence 
+\begin_inset Formula $\mathcal{N}=\left\{ n_{1},n_{2},\cdots\right\} $
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\mathcal{L}_{\beta}=\frac{1}{\beta}\lim_{n\in\mathcal{N}}S_{n}^{-1}B_{n}S_{n}
+\]
+
+\end_inset
+
+The sequence 
+\begin_inset Formula $\mathcal{N}=\left\{ n_{1},n_{2},\cdots\right\} $
+\end_inset
+
+ is selected so that the roots of the polynomials 
+\begin_inset Formula $p_{n_{j}}$
+\end_inset
+
+ converge on 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ That is, the sequence 
+\begin_inset Formula $\mathcal{N}=\mathcal{N}_{\beta}$
+\end_inset
+
+ is admissible if, for any 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ there exists a minimal integer 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left|\beta-r_{n_{j}}\right|<\epsilon$
+\end_inset
+
+ for all 
+\begin_inset Formula $j>i$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ is the real positive root 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+.
+ This is just a precise way of saying 
+\begin_inset Quotes eld
+\end_inset
+
+the limit does what you think it does
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The tasks are then: 
+\end_layout
+
+\begin_layout Itemize
+How can one characterize the acceptable convergent sequences 
+\begin_inset Formula $\mathcal{N}=\mathcal{N}_{\beta}$
+\end_inset
+
+; is it worth the effort to characterize them?
+\end_layout
+
+\begin_layout Itemize
+How can one characterize the sequences of 
+\begin_inset Formula $S_{n};n\in\mathcal{N}_{\beta}$
+\end_inset
+
+ and what sort of elightenment might this offer? 
+\end_layout
+
+\begin_layout Itemize
+The transfer operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ was specifically associated with the iterated 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation on the unit interval.
+ By similarity, this implies that the limit 
+\begin_inset Formula $\mathcal{B}_{\beta}=\frac{1}{\beta}\lim_{n\in\mathcal{N}_{\beta}}B_{n}$
+\end_inset
+
+ is also associated with some specific iterated transformation on the unit
+ interval.
+ What is that transformation? 
+\end_layout
+
+\begin_layout Itemize
+What is the invariant measure of 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+? Presumably, the limit 
+\begin_inset Formula $\mathcal{S}_{\beta}=\lim_{n\in\mathcal{N}_{\beta}}S_{n}$
+\end_inset
+
+ exists and is well-defined, so that, given the invariant measure 
+\begin_inset Formula $\rho$
+\end_inset
+
+, 
+\emph on
+viz
+\emph default
+.
+ 
+\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho$
+\end_inset
+
+, one then obtains 
+\begin_inset Formula $\sigma=\mathcal{S}_{\beta}\rho$
+\end_inset
+
+ as the invariant measure 
+\begin_inset Formula $\mathcal{B}_{\beta}\sigma=\sigma$
+\end_inset
+
+.
+ What does 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ look like, graphed, on the unit interval? 
+\end_layout
+
+\begin_layout Itemize
+Why are these interesting questions to ask? This is, perhaps the easiest
+ to answer: the operators 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{S}_{\beta}$
+\end_inset
+
+ provide a direct bridge between the subshifts associated with the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation, and the curious number-theoretic/combinatoric properties
+ of the Golden polynomials.
 \end_layout
 
 \begin_layout Subsection
