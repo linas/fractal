@@ -10934,6 +10934,86 @@ Why are these interesting questions to ask? This is, perhaps the easiest
  of the Golden polynomials.
 \end_layout
 
+\begin_layout Standard
+One way to better understand this new operator is to hypothesize an obvious
+ visual form for it:
+\begin_inset Formula 
+\[
+B=\frac{1}{\beta}\left[\begin{array}{ccccc}
+b_{0} & b_{1} & b_{2} & b_{3} & \cdots\\
+0 & b_{0} & b_{1} & b_{2} & \cdots\\
+0 & 0 & b_{0} & b_{1} & \cdots\\
+0 & 0 & 0 & b_{0} & \cdots\\
+\vdots & \vdots & \vdots & 0 & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+This clearly acts as a shift on the sequences 
+\begin_inset Formula $F^{\{b\}}$
+\end_inset
+
+- it is the infinite-dimensional equivalent of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:golden matrix"
+
+\end_inset
+
+.
+ The vector 
+\begin_inset Formula $\vec{z}=\left(1,z^{-1},z^{-2},\cdots\right)$
+\end_inset
+
+ is clearly an eigenvector with eigenvalue 1 when 
+\begin_inset Formula $z=\beta$
+\end_inset
+
+, and clearly, for 
+\begin_inset Formula $z=z_{0}$
+\end_inset
+
+ one of the non-real polynomial zeros (
+\emph on
+viz
+\emph default
+, those approximately on the unit circle), one obtains an eigenvalue at
+ 
+\begin_inset Formula $z_{0}/\beta$
+\end_inset
+
+ - that is, arranged on a circle of radius 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Algorithmically, the above is straight-forward to obtain: given a fixed
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+, one can iterate to obtain the mid-point sequence 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+, and the binary bits 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ can be directly read off from the iteration.
+ Apparently, this definition works when the mid-point sequence is not periodic,
+ but continues indefinitely without repetition.
+ What is missing, here, is a similarity matrix 
+\begin_inset Formula $\mathcal{S}_{\beta}$
+\end_inset
+
+ that connects to some, any orthonormal basis on the unit interval.
+\end_layout
+
 \begin_layout Subsection
 Multiplicative Shifts
 \end_layout
