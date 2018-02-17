@@ -10655,6 +10655,204 @@ multiplication theorem
 \end_layout
 
 \begin_layout Subsection
+Equivalent notation
+\end_layout
+
+\begin_layout Standard
+At this point, it should be clear that there are several equivalent ways
+ of labelling the various ways of specifying the expressions under consideration.
+ These are recapped here, asserted without proof, simply as observations.
+\end_layout
+
+\begin_layout Subsubsection
+Orbits
+\end_layout
+
+\begin_layout Standard
+For every given 
+\begin_inset Formula $1<\beta<2$
+\end_inset
+
+ there is a unique orbit of midpoints 
+\begin_inset Formula $\left\{ m_{p}\right\} $
+\end_inset
+
+ given by 
+\begin_inset Formula $m_{p}=T_{\beta}\left(m_{p-1}\right)=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+.
+ The orbits are in one-to-one correspondance with 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Orbit encoding
+\end_layout
+
+\begin_layout Standard
+The midpoint generates a unique sequence of bits 
+\begin_inset Formula $\left\{ b_{0},b_{1,},\cdots,b_{k},\cdots\right\} $
+\end_inset
+
+ given by the left-right move of the mid-point, as it is iterated.
+ That is, 
+\begin_inset Formula $b_{k}=\Theta\left(m_{k}-1/2\right)$
+\end_inset
+
+ so that 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ is one if the midpoint is greater than half, else 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ is zero.
+ The bit-sequence is in one-to-one correspondance with 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Monotonicity
+\end_layout
+
+\begin_layout Standard
+The function 
+\begin_inset Formula $w=\sum_{k}b_{k}2^{-k}$
+\end_inset
+
+ is a monotonically increaing function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+, so that values of 
+\begin_inset Formula $w$
+\end_inset
+
+ are in one-to-one correspondance with 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Polynomial numbering
+\end_layout
+
+\begin_layout Standard
+If the orbit is periodic, then there exists a polynomial 
+\begin_inset Formula $p_{n}\left(z\right)=z^{k+1}-b_{0}z^{k}-b_{1}z^{k-1}-\cdots-b_{k-1}z-1$
+\end_inset
+
+ with 
+\begin_inset Formula $k=1+\left\lfloor \log_{2}n\right\rfloor $
+\end_inset
+
+ being the length of the orbit.
+ The positive real root of 
+\begin_inset Formula $p_{n}\left(z\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The integer 
+\begin_inset Formula $n$
+\end_inset
+
+ is in one-to-one correspondance with the bit sequence, and with the value
+ of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Integer sequences
+\end_layout
+
+\begin_layout Standard
+If the orbit is periodic, then there exists a sequence of integers 
+\begin_inset Formula $F^{\{b\}}$
+\end_inset
+
+ that is in one-to-one correspondance with the bit sequence, and with the
+ value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Summary
+\end_layout
+
+\begin_layout Standard
+To summarize: any one of these: the polynomial, the integer sequence, the
+ orbit, the orbit encoding, 
+\begin_inset Formula $w$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ can each be used as a stand-in for the others: they all uniquely map to
+ one-another.
+\end_layout
+
+\begin_layout Standard
+Two of the correspondances asked for periodic orbits.
+ I beleive that these can be extended to non-periodic orbits in an unambiguous
+ (and uncontroversial) way.
+ The generalized integer sequence can be extended to arbitrary length, as
+ 
+\begin_inset Formula 
+\[
+F_{m}^{\{b\}}=\sum_{j=1}^{m}b_{j-1}F_{m-j}^{\{b\}}
+\]
+
+\end_inset
+
+This extension mandates the idea that bit-sequences are never periodic,
+ but always terminate in all-zeros.
+ One cannot think of the bit-sequence as being periodic, and use the above
+ extension: it is simply not consistent.
+ Bit sequences must be taken as either finite, or infinite non-perodic.
+\end_layout
+
+\begin_layout Standard
+The polynomials also extend, but only as an asymptotic series: writing 
+\begin_inset Formula 
+\[
+p_{n}\left(z\right)=z^{k+1}\left(1-b_{0}z^{-1}-b_{1}z^{-2}-\cdots-b_{k}z^{-k-1}\right)
+\]
+
+\end_inset
+
+its clear tht one could drop the leading factor, and then extend to an infinite
+ series, as long as one is willing to accept an asymptotic series.
+ This seems awkward.
+\end_layout
+
+\begin_layout Subsection
 Limiting Behavior
 \end_layout
 
@@ -10699,7 +10897,7 @@ reference "eq:golden matrix"
 
 .
  The bit sequence 
-\begin_inset Formula $\left\{ b_{0},b_{1,},\cdots b_{k}\right\} $
+\begin_inset Formula $\left\{ b_{0},b_{1,},\cdots,b_{k}\right\} $
 \end_inset
 
  is explicitly given by the binary-bit expansion of 

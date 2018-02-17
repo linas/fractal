@@ -2,6 +2,10 @@
  * midmap.c
  *
  * Plot the left-right moves of the midpoint.
+ * As the midpoint is iterated, it makes a sequence of left-right
+ * moves. Convert these into a binary number, and graph it.
+ * It looks like some deformed compressor function, not particularly
+ * enlightening.
  *
  * February 2018
  */

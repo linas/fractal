@@ -1,6 +1,6 @@
 /*
  * zero.C
- * Complex zeros of golden polynomials
+ * Visualization of complex zeros of golden polynomials
  *
  * Ferbruary 2018
  *
@@ -38,6 +38,7 @@ static void golden_zero (float *array,
 		COMPLEX z = x + I*y;
 		COMPLEX zn = 1.0;
 
+		// Use itermax as the encoding for the bit-string.
 		COMPLEX sum = 0.0;
 		int bitstr = 2*itermax+1;
    	while (bitstr)
@@ -48,6 +49,9 @@ static void golden_zero (float *array,
 		}
 
 		sum = zn - sum;
+
+		// And now, switch to the asuymptotic series.
+		if (K < 0.0) sum /= zn; 
 
  		array[j] = abs(sum);
 
