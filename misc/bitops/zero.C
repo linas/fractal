@@ -38,6 +38,9 @@ static void golden_zero (float *array,
 		COMPLEX z = x + I*y;
 		COMPLEX zn = 1.0;
 
+		// Compute the OGF instead.
+		if (K < 0.0) z = 1.0/z;
+
 		// Use itermax as the encoding for the bit-string.
 		COMPLEX sum = 0.0;
 		int bitstr = 2*itermax+1;
@@ -50,10 +53,12 @@ static void golden_zero (float *array,
 
 		sum = zn - sum;
 
-		// And now, switch to the asuymptotic series.
-		if (K < 0.0) sum /= zn; 
+		// And now, switch to the asymptotic series.
+		// if (K < 0.0) sum /= zn;
+		if (K < 0.0) sum = z/sum;
 
  		array[j] = abs(sum);
+		array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
 		double r = x*x + y*y;
 		if (0.99 < r and r < 1.01) array[j] = 0.5;
