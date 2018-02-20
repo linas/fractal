@@ -1,0 +1,22 @@
+
+set term png size 1024, 768
+set out 'fbern.png'
+
+set style data lines
+set key right
+
+set title "Beta transform density"
+set xlabel "y"
+set ylabel "{/Symbol r}"
+
+b=1.6
+set arrow from (0.5*b), graph 0 to (0.5*b), graph 1 nohead
+set arrow from (0.5*b*(b-1)), graph 0 to (0.5*b*(b-1)), graph 1 nohead
+set arrow from (0.5*b*b*(b-1)), graph 0 to (0.5*b*b*(b-1)), graph 1 nohead
+set arrow from (0.5*b*(b*b*b-b*b-1)), graph 0 to (0.5*b*(b*b*b-b*b-1)), graph 1 nohead
+set arrow from (0.5*b*b*(b*b*b-b*b-1)), graph 0 to (0.5*b*b*(b*b*b-b*b-1)), graph 1 nohead
+set arrow from (0.5*b*(b*b*b*b*b - b*b*b*b -b*b-1)), graph 0 to (0.5*b*(b*b*b*b*b - b*b*b*b -b*b-1)), graph 1 nohead
+set arrow from (0.5*b*b*(b*b*b*b*b - b*b*b*b -b*b-1)), graph 0 to (0.5*b*b*(b*b*b*b*b - b*b*b*b -b*b-1)), graph 1 nohead
+
+plot "bigbern-0.8.dat" using 2:3 title "{/Symbol b}=1.6" linewidth 2, \
+
