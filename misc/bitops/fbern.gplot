@@ -9,6 +9,11 @@ set title "Beta transform density"
 set xlabel "y"
 set ylabel "{/Symbol r}"
 
+# For b=1.6, the midpoing evolution is:
+# 1 0.8    (* 0.5 b)
+# 1 0.48   (* 0.5 b (- b 1)) == (* b (- (* 0.5 b) 0.5))
+# 0 0.768  (* b b (- K 0.5))
+# 1 
 b=1.6
 set arrow from (0.5*b), graph 0 to (0.5*b), graph 1 nohead
 set arrow from (0.5*b*(b-1)), graph 0 to (0.5*b*(b-1)), graph 1 nohead
