@@ -63,7 +63,7 @@ irred.o: irred.c
 zero.o: zero.C
 tribo.o: tribo.c
 midmap.o: midmap.c
-fiter.o: fiter.c
+fiter.o: fiter.c psi.c
 
 
 bernie: bernie.o $(BRAT) $(FUNC)
