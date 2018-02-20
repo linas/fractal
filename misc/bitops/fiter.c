@@ -26,9 +26,14 @@ int main(int argc, char* argv[])
 	double K = atof(argv[1]);
 	double x = K;
 
-	for (int i=0; i< 10; i++)
+	int npts = 10;
+	int bits[npts];
+
+	for (int i=0; i<npts; i++)
 	{
-		printf ("%d %g\n", i, x);
+		int bit = 0;
+		if (0.5 < x) bit = 1;
+		printf ("%d %g	%d\n", i, x, bit);
 		x = bmap(K, x);
 	}
 }
