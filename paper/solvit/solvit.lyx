@@ -792,6 +792,69 @@ Unlike the Bernoulli shift, not every possible bit-sequence occurs in this
 \end_layout
 
 \begin_layout Subsection
+Associated polynomial
+\end_layout
+
+\begin_layout Standard
+The iterated shift can also be written as a finite sum.
+ This is noted here; it will be useful in later sections.
+ Observe that 
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\beta\left(x-\frac{k_{0}}{2}\right)
+\]
+
+\end_inset
+
+and that
+\begin_inset Formula 
+\[
+T_{\beta}^{2}(x)=\beta^{2}x-\frac{\beta}{2}\left(\beta k_{0}+k_{1}\right)
+\]
+
+\end_inset
+
+and that 
+\begin_inset Formula 
+\[
+T_{\beta}^{3}(x)=\beta^{3}x-\frac{\beta}{2}\left(\beta^{2}k_{0}+\beta k_{1}+k_{2}\right)
+\]
+
+\end_inset
+
+The general form is then:
+\begin_inset Formula 
+\begin{equation}
+T_{\beta}^{p}(x)=\beta^{p}x-\frac{\beta}{2}\sum_{m=0}^{p-1}k_{m}\beta^{p-m-1}\label{eq:iterated shift}
+\end{equation}
+
+\end_inset
+
+Since the 
+\begin_inset Formula $k_{m}$
+\end_inset
+
+ depend on both 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and on 
+\begin_inset Formula $x$
+\end_inset
+
+, this is not a 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ polynomial; however, it will be useful in analysis, later.
+ 
+\end_layout
+
+\begin_layout Subsection
 Density Visualizations
 \end_layout
 
@@ -10834,6 +10897,27 @@ To summarize: any one of these: the polynomial, the integer sequence, the
 \end_layout
 
 \begin_layout Standard
+An explicit expression relating the orbit encoding and the orbit can be
+ read off directly from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:iterated shift"
+
+\end_inset
+
+.
+ Plugging in, 
+\begin_inset Formula 
+\[
+m_{p}=T_{\beta}^{p+1}\left(\frac{\beta}{2}\right)=\frac{\beta}{2}\left[\beta^{p}-\sum_{k=0}^{p}b_{k}\beta^{p-k}\right]
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
 Two of the correspondances asked for periodic orbits.
  I beleive that these can be extended to non-periodic orbits in an unambiguous
  (and uncontroversial) way.
@@ -11230,6 +11314,14 @@ Algorithmically, the above is straight-forward to obtain: given a fixed
 \end_inset
 
  that connects to some, any orthonormal basis on the unit interval.
+\end_layout
+
+\begin_layout Subsection
+Invariant Measure
+\end_layout
+
+\begin_layout Standard
+The invariant ...
 \end_layout
 
 \begin_layout Subsection
