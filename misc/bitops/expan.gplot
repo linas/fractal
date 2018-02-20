@@ -1,0 +1,19 @@
+
+#
+# expan.gplot
+# Coefficients of expansion in the haar basis
+#
+set term png size 1024, 768
+set out 'expan.png'
+
+set style data lines
+set key right
+
+set title "Coefficients"
+set logscale y
+set format y "10^{%4T}"
+
+plot "expan-0.9.dat" using 1:2 title "{/Symbol b}=1.8" linewidth 2, \
+     "expan-0.8-24.dat" using 1:2 title "{/Symbol b}=1.6" linewidth 2, \
+     "expan-0.7-32.dat" using 1:2 title "{/Symbol b}=1.4" linewidth 2, \
+     "expan-0.6-44.dat" using 1:2 title "{/Symbol b}=1.2" linewidth 2, \

@@ -128,9 +128,11 @@ int main(int argc, char* argv[])
 	find_midpoints(K, MAXN);
 	sequence_midpoints(K, MAXN);
 
-	for (int i=0; i<10; i++)
+	for (int i=0; i<200; i++)
 	{
 		double cf = norm * alpha_n(K, i, npts, niter);
+		if (cf < 2.0e-15) break;
 		printf ("%d %g\n", i, cf);
+		fflush(stdout);
 	}
 }
