@@ -25,11 +25,17 @@ set ylabel "{/Symbol r}"
 #      "fiter.dat" using 2:(0.02*$8) title "psi_5" linewidth 2, \
 #      "fiter.dat" using 2:(1.11*$3 + 0.28*$4 + 0.051*$5 + 0.04*$6 + 0.021*$7 + 0.018*$8) title "sum" linewidth 2, \
 #
-# ###############################################################
 
-set out 'fiter-chi.png'
+set out 'fiter.png'
 plot "bigbern-0.8.dat" using 2:3 title "{/Symbol b}=1.6" linewidth 2, \
-     "fiter-chi.dat" using 2:($3) title "psi_0" linewidth 2, \
-     "fiter-chi.dat" using 2:($3 + 0.5*$4) title "psi_1" linewidth 2, \
-     "fiter.dat" using 2:(0.05*$5) title "psi_2" linewidth 2, \
+     "fiter.dat" using 2:(1.118*$3 + 0.2796*$4 + 0.05406*$5 + 0.0434*$6 + 0.0241*$7 + 0.01886*$8) title "sum 0-5" linewidth 2, \
+     "fiter.dat" using 2:(1.118*$3 + 0.2796*$4 + 0.05406*$5 + 0.0434*$6 + 0.0241*$7 + 0.01886*$8 + 0.002047*$9 + 0.001621*$10 + 0.001285*$11 + 0.001004*$12) title "sum 0-10" linewidth 2, \
+#
+# ###############################################################
+#
+#set out 'fiter-chi.png'
+#plot "bigbern-0.8.dat" using 2:3 title "{/Symbol b}=1.6" linewidth 2, \
+#     "fiter-chi.dat" using 2:($3) title "psi_0" linewidth 2, \
+#     "fiter-chi.dat" using 2:($3 + 0.5*$4) title "psi_1" linewidth 2, \
+#     "fiter.dat" using 2:(0.05*$5) title "psi_2" linewidth 2, \
 

@@ -41,6 +41,24 @@ double reig(double x, double K, int niter)
  */
 double alpha_n(double K, int n, int npts, int niter)
 {
+	if (0 == n)
+	{
+		/* integrate everything */
+		double delta = K / ((double) npts);
+		double sum = 0.0;
+		for (int i=0; i< npts; i++)
+		{
+			double x = ((double) i + 0.5) * delta;
+			sum += reig(x, K, niter);
+		}
+		sum *= delta;
+
+		/* Normalize per the wavelet normalization */
+		double norm = 1.0 / sqrt(K);
+		sum *= norm;
+		return sum;
+	}
+
 	/* Get the lower, middle and upper bounds */
 	n++; /* Off-by-one! */
 	double lower = midpoints[lower_sequence[n]];
@@ -62,7 +80,7 @@ double alpha_n(double K, int n, int npts, int niter)
 	double sumhi = 0.0;
 	for (int i=0; i< npts; i++)
 	{
-		double x = lower + ((double) i + 0.5) * delta;
+		double x = middle + ((double) i + 0.5) * delta;
 		sumhi += reig(x, K, niter);
 	}
 	sumhi *= delta;
