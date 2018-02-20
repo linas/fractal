@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define NOMAIN
+#include "psi.c"
+
 double bmap(double K, double x)
 {
 	if (0.5 < x)
@@ -24,16 +27,31 @@ int main(int argc, char* argv[])
 	}
 
 	double K = atof(argv[1]);
-	double x = K;
 
+	find_midpoints(K, MAXN);
+	sequence_midpoints(K, MAXN);
+
+#if 0
 	int npts = 10;
-	int bits[npts];
-
+	double x = K;
 	for (int i=0; i<npts; i++)
 	{
 		int bit = 0;
 		if (0.5 < x) bit = 1;
-		printf ("%d %g	%d\n", i, x, bit);
+		printf ("%d %g	%d	%g\n", i, x, bit, midpoints[i]);
 		x = bmap(K, x);
+	}
+#endif
+	int npts = 1601;
+	for (int i=0; i<npts; i++)
+	{
+		double x = ((double) i + 0.5) / ((double) npts);
+		printf("%d	%g", i, x);
+		for (int j = 0; j<10; j++)
+		{
+			double y = psi_n(x, K, j);
+			printf("	%g", y);
+		}
+		printf("\n");
 	}
 }

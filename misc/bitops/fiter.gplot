@@ -1,0 +1,24 @@
+
+#
+# fiter.gplot
+# Eyeballed fit to the invariant density
+#
+set term png size 1024, 768
+set out 'fiter.png'
+
+set style data lines
+set key right
+
+set title "Beta transform density"
+set xlabel "y"
+set ylabel "{/Symbol r}"
+
+plot "bigbern-0.8.dat" using 2:3 title "{/Symbol b}=1.6" linewidth 2, \
+     "fiter.dat" using 2:(1.11*$3) title "psi_0" linewidth 2, \
+     "fiter.dat" using 2:(1.11*$3 + 0.28*$4) title "psi_0+psi_1" linewidth 2, \
+     "fiter.dat" using 2:(0.05*$5) title "psi_2" linewidth 2, \
+     "fiter.dat" using 2:(0.04*$6) title "psi_3" linewidth 2, \
+     "fiter.dat" using 2:(0.02*$7) title "psi_4" linewidth 2, \
+     "fiter.dat" using 2:(0.02*$8) title "psi_5" linewidth 2, \
+     "fiter.dat" using 2:(1.11*$3 + 0.28*$4 + 0.051*$5 + 0.04*$6 + 0.021*$7 + 0.018*$8) title "sum" linewidth 2, \
+
