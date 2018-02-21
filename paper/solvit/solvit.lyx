@@ -6914,7 +6914,7 @@ r removed, so that
 \end_layout
 
 \begin_layout Subsection
-Generating Function
+Invariant Measure
 \end_layout
 
 \begin_layout Standard
@@ -6958,72 +6958,64 @@ reference "eq:eigen-eqn"
 
 \end_inset
 
-.
- The truncated ordinary generating function associated with this eigenvector
- is
-\begin_inset Formula 
-\[
-G_{N}\left(z\right)=\sum_{m=0}^{N}v_{m}z^{m}
-\]
-
+, with the 
+\begin_inset Formula $\psi_{k}\left(x\right)$
 \end_inset
 
-with the ordinary generating function being the limit 
-\begin_inset Formula $N\to\infty$
+ being the wavelets of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Hess-Haar-basis-fn"
+
 \end_inset
 
 .
- A numerical study of this function indicates that most of the 
-\begin_inset Formula $N$
-\end_inset
-
- zeros of 
-\begin_inset Formula $G_{N}$
-\end_inset
-
- are arranged approximately on a circle of radius 
-\begin_inset Formula $\beta$
-\end_inset
-
-.
- The arrangement appear to be quite uniform, with more-or-less equi-distant
- spacing of the zeros.
- As 
-\begin_inset Formula $N$
-\end_inset
-
- increases, it seems that more of the zeros get closer to the circle, although
- the numerical instabilities associated with double-precision math make
- this difficult to control; an arbitrary-precision eigenvalue solver would
- be needed to confirm this behavior.
-\end_layout
-
-\begin_layout Standard
-If this behavior persists, then the limit 
-\begin_inset Formula $N\to\infty$
-\end_inset
-
- cannot really be taken, and the ordinary generating function doesn't 
+ This expansion seems to 
 \begin_inset Quotes eld
 \end_inset
 
-really exist
+make sense
 \begin_inset Quotes erd
 \end_inset
 
-, 
-\emph on
-per se
-\emph default
-.
- The figure 
+, as the discontinuities seen in the graph of 
+\begin_inset Formula $\rho\left(x\right)$
+\end_inset
+
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+ occur at exactly the midpoints 
+\begin_inset Formula $m_{p}$
+\end_inset
+
+ and the size of each discontinuity appears to get smaller as 
+\begin_inset Formula $p$
+\end_inset
+
+ gets larger.
+ Given that the wavelet 
+\begin_inset Formula $\psi_{p}\left(x\right)$
+\end_inset
+
+ has its central discontinuity at 
+\begin_inset Formula $m_{p}$
+\end_inset
+
+ and is bounded on left and right by midpoints of lower order, this expansion
+ seems to be very natural.
+ This is supported by the diagram 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Frobenius-Perron-Eigenvector-Coe"
 
 \end_inset
 
- depicts the values of 
+, which depicts the values of 
 \begin_inset Formula $v_{n}$
 \end_inset
 
@@ -7036,7 +7028,12 @@ reference "fig:Frobenius-Perron-Eigenvector-Coe"
 \end_inset
 
 .
- Note that these are all real and positive.
+ These values of 
+\begin_inset Formula $v_{n}$
+\end_inset
+
+ are real, positive, and quickly get small; there are no difficulties or
+ issues of convergence.
 \end_layout
 
 \begin_layout Standard
@@ -7097,44 +7094,27 @@ reference "eq:fp coefficients"
 
 .
  Note that the coefficients are all real and positive.
- When 
-\begin_inset Formula $\beta>\left(1+\sqrt{5}\right)/2$
+ These can be obtained in two different ways: either by numerically diagonalizin
+g the matrix equation of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fp coefficients"
+
 \end_inset
 
- (the Golden ratio), the general but rather loose trend for the slopes seems
- to be about 
-\begin_inset Formula $\log_{2}v_{n}\sim\mathcal{O}\left(\left(1-\beta\right)n\right)$
+ or by numerically integrating 
+\begin_inset Formula $\int_{0}^{1}\rho\left(x\right)\psi_{n}\left(x\right)dx$
 \end_inset
 
 .
- For 
-\begin_inset Formula $\beta$
-\end_inset
-
- less than the Golden ratio, the falloff is sharper.
- The Golden ratio appears unexpectedly and a bit inexplicably in the proceedings
-; the next section indicates some openings.
- In this figure, the two slopes for 
-\begin_inset Formula $\beta=1.5$
-\end_inset
-
- and 
-\begin_inset Formula $\beta=1.7$
-\end_inset
-
- unexpectedly overlap.
- Apperently, this is not an accident or a numerical defect; the average
- slope really does change at 
-\begin_inset Formula $\beta=\varphi$
-\end_inset
-
- the golden ratio.
+ Either method gives the same results; diagonalization is far, far quicker.
  
 \begin_inset Note Note
 status collapsed
 
 \begin_layout Plain Layout
-Created with fractal/misc/bitopds/psifp.c and psifp.gplot
+Created with fractal/misc/bitopds/psifp.c and psifp.gplot numerical integration
+ with expan.c and expan.gplot 
 \end_layout
 
 \end_inset
@@ -7154,6 +7134,78 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Generating Function
+\end_layout
+
+\begin_layout Standard
+The truncated ordinary generating function associated with the eigenvector
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fp coefficients"
+
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+G_{N}\left(z\right)=\sum_{m=0}^{N}v_{m}z^{m}
+\]
+
+\end_inset
+
+with the ordinary generating function being the limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+.
+ A numerical study of this function indicates that most of the 
+\begin_inset Formula $N$
+\end_inset
+
+ zeros of 
+\begin_inset Formula $G_{N}$
+\end_inset
+
+ are arranged approximately on a circle of radius 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The arrangement appear to be quite uniform, with more-or-less equi-distant
+ spacing of the zeros.
+ As 
+\begin_inset Formula $N$
+\end_inset
+
+ increases, it seems that more of the zeros get closer to the circle, although
+ the numerical instabilities associated with double-precision math make
+ this difficult to control; an arbitrary-precision eigenvalue solver would
+ be needed to confirm this behavior.
+\end_layout
+
+\begin_layout Standard
+If this behavior persists, then the limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ cannot really be taken, and the ordinary generating function doesn't 
+\begin_inset Quotes eld
+\end_inset
+
+really exist
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\emph on
+per se
+\emph default
+.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -11676,93 +11728,6 @@ Essentially, the claim is straight-forward: topologically, all chaotic parts
  map.
  It almost sounds trivial, expressed this way; but the mathematical, notational
  articulation of the idea would be worthwhile.
-\end_layout
-
-\begin_layout Section
-Invariant Measure Expansion
-\end_layout
-
-\begin_layout Standard
-This section takes a quick look at the invariant measure, expressed in terms
- of the Hessenberg basis elements.
- It is an exploration of the the expansion 
-\begin_inset Formula 
-\[
-\rho\left(x\right)=\sum_{k=0}^{\infty}a_{k}\psi_{k}\left(x\right)
-\]
-
-\end_inset
-
- with 
-\begin_inset Formula $\rho\left(x\right)$
-\end_inset
-
- the invariant measure of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:FP-eigenvector"
-
-\end_inset
-
- and the 
-\begin_inset Formula $\psi_{k}\left(x\right)$
-\end_inset
-
- being the wavelets of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Hess-Haar-basis-fn"
-
-\end_inset
-
-.
- This expansion seems to 
-\begin_inset Quotes eld
-\end_inset
-
-make sense
-\begin_inset Quotes erd
-\end_inset
-
-, as the discontinuities seen in the graph of 
-\begin_inset Formula $\rho\left(x\right)$
-\end_inset
-
- in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Undershift-Density-Distribution"
-
-\end_inset
-
- occur at exactly the midpoints 
-\begin_inset Formula $m_{p}$
-\end_inset
-
- and the size of each discontinuity appears to get smaller as 
-\begin_inset Formula $p$
-\end_inset
-
- gets larger.
- Given that the wavelet 
-\begin_inset Formula $\psi_{p}\left(x\right)$
-\end_inset
-
- has its central discontinuity at 
-\begin_inset Formula $m_{p}$
-\end_inset
-
- and is bounded on left and right by midpoints of lower order, this expansion
- seems to be very natural.
- 
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $a_{k}$
-\end_inset
-
- are readily computed by numerical integration.
 \end_layout
 
 \begin_layout Section

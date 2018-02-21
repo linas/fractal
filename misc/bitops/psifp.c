@@ -4,6 +4,12 @@
  * Return the Ruelle-Frobenius-Perron eigenvector
  * i.e. the one with eigenvalue=1
  *
+ * This is obtained by just diagonalizing the matrix.
+ *
+ * A completely different approach, (much much  much slower)
+ * it the brute-force integration of individual wavelets against
+ * the invariant measure, done in expan.c
+ *
  * Linas Vepstas January 2018
  */
 

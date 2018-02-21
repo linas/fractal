@@ -1,7 +1,10 @@
 /*
  * expan.c
  *
- * Numerical integration to obtain measure coefficients
+ * Numerical integration to obtain measure coefficients.
+ * This is a completely different, alternate take on psifp.c
+ * and is much slower. It serves to cross-check results.
+ *
  * Dec 2017
  * Feb 2018
  */
