@@ -12,6 +12,7 @@
 
 #define NOMAIN
 #include "psi.c"
+#include "psibig.c"
 
 // Compute eigenfunction, recursively.
 double reig(double x, double K, int niter)
@@ -125,7 +126,8 @@ int main(int argc, char* argv[])
 	printf("# tot integral = %g\n", norm);
 	norm = 1.0 / norm;
 
-	find_midpoints(K, MAXN);
+	// find_midpoints(K, MAXN);
+	big_midpoints(K, 400, midpoints, MAXN);
 	sequence_midpoints(K, MAXN);
 
 	for (int i=0; i<200; i++)
