@@ -1,0 +1,12 @@
+
+# set term png size 1024,768
+# set out 'orbit.png'
+
+set term postscript eps color enhanced
+set out 'orbit.eps'
+
+set title "Midpoint Orbit cf. Coefficients at {/Symbol b}=1.1"
+set yrange [0:1]
+
+plot "orbit.dat" using 1:2 with lines linewidth 2 title "Orbit", \
+     "psifp-0.55.dat" using 1:($2*10* (1.1**($1))) with lines lw 2 title "Coefficient", \
