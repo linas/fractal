@@ -30,13 +30,15 @@ int main(int argc, char* argv[])
 
 	printf("#\n# npts = %d depth=%d\n#\n", npts, niter);
 
-	int nkv=800;
+	int nkv=100;
+
 	for (int i=0; i< nkv; i++)
 	{
 		double un = ((double) i + 0.5) / ((double) nkv);
 		// double K = 0.5 + 0.5*un;
 		// double K = 0.62 - 0.12*un;
-		double K = 1.0 - 0.441*un;
+		// double K = 1.0 - 0.441*un;
+		double K = 0.59 - 0.09*un;
 
 		find_midpoints(K, MAXN);
 		// big_midpoints(K, 400, midpoints, MAXN);
@@ -62,7 +64,8 @@ int main(int argc, char* argv[])
 		double cf = alpha_n(K, 1, npts, siter);
 		siter++;
 		double cfn = alpha_n(K, 1, npts, siter);
-		while (1.0e-4 < fabs(cf-cfn))
+		// while (1.0e-4 < fabs(cf-cfn))
+		while (1.0e-3 < fabs(cf-cfn))
 		{
 			cf = cfn;
 			siter++;
@@ -77,10 +80,19 @@ int main(int argc, char* argv[])
 		double cf1 = cfn;
 		printf ("%d %d	%g	%g	%g", i, siter, 2.0*K, cf0, cf1);
 		fflush(stdout);
+		double cfs[11];
+
+#pragma omp parallel
+#pragma omp for
 		for (int ord=2; ord<11; ord++)
 		{
-			double cf = alpha_n(K, ord, npts, siter);
-			printf("	%g", cf);
+			cfs[ord] = alpha_n(K, ord, npts, siter);
+		}
+
+#pragma omp single
+		for (int ord=2; ord<11; ord++)
+		{
+			printf("	%g", cfs[ord]);
 		}
 		printf("\n");
 		fflush(stdout);

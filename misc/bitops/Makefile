@@ -68,6 +68,7 @@ fiter.o: fiter.c psi.c
 expan.o: expan.c psi.c psibig.c
 orbit.o: orbit.c psi.c psibig.c
 fpcoef.o: fpcoef.c psi.c psibig.c expan.c
+	$(CC) -c $< -I $(FUNCDIR) -fopenmp
 
 
 bernie: bernie.o $(BRAT) $(FUNC)
@@ -112,3 +113,4 @@ fiter: fiter.o
 expan: expan.o
 orbit: orbit.o
 fpcoef: fpcoef.o
+	$(CC) -o $@ $^ -lgmp -lgomp -lm
