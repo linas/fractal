@@ -1,9 +1,19 @@
 
-set term png size 1024,768
+set term png size 1024,768 enhanced
 set out 'fpcoef.png'
 
 set style data lines
-set yrange [0:1]
+set yrange [0:1.5]
+set ylabel "v_1 / v_0"
+set xlabel "{/Symbol b}"
 
-plot "fpcoef-lo.dat" using 2:3 lw 2 title "", \
-     "fpcoef.dat" using 2:3 lw 2 title "hi",
+plot "fpcoef-hi.dat" using 3:($5/$4) lw 2 title "v_1", \
+     "fpcoef-hi.dat" using 3:($6/$4) lw 2 title "v_2", \
+     "fpcoef-hi.dat" using 3:($7/$4) lw 2 title "v_3", \
+     "fpcoef-det.dat" using 3:($5/$4) lw 2 title "v_1", \
+     "fpcoef-det.dat" using 3:($6/$4) lw 2 title "v_2", \
+
+
+#     "fpcoef-hi.dat" using 3:4 lw 2 title "v_0", \
+#     "fpcoef.dat" using 2:3 lw 2 title "", \
+#     "fpcoef-hi.dat" using 3:5 lw 2 title "v_1", \
