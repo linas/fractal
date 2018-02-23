@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 
 	printf("#\n# npts = %d depth=%d\n#\n", npts, niter);
 
-	int nkv=60;
+	int nkv=600;
 	for (int i=0; i< nkv; i++)
 	{
 		double K = ((double) i + 0.5) / ((double) nkv);
@@ -40,8 +40,14 @@ int main(int argc, char* argv[])
 		// big_midpoints(K, 400, midpoints, MAXN);
 		sequence_midpoints(K, MAXN);
 
-		double cf0 = alpha_n(K, 0, npts, niter);
-		double cf1 = alpha_n(K, 1, npts, niter);
+		int siter = niter;
+		if (K < 0.8) siter = 1.2*niter;
+		if (K < 0.74) siter = 1.5*niter;
+		if (K < 0.65) siter = 2*niter;
+		if (K < 0.57) siter = 3*niter;
+		if (K < 0.55) siter = 5*niter;
+		double cf0 = alpha_n(K, 0, npts, siter);
+		double cf1 = alpha_n(K, 1, npts, siter);
 		printf ("%d %g	%g\n", i, 2.0*K, cf1/cf0);
 		fflush(stdout);
 	}
