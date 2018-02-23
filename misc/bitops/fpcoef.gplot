@@ -2,18 +2,35 @@
 set term png size 1024,768 enhanced
 set out 'fpcoef.png'
 
+set title "Perron-Frobenius Eigenvector Coefficients"
 set style data lines
-set yrange [0:1.5]
-set ylabel "v_1 / v_0"
+set yrange [1e-3:1]
 set xlabel "{/Symbol b}"
+set logscale y
+set format y "10^{%4T}"
+
 
 plot "fpcoef-hi.dat" using 3:($5/$4) lw 2 title "v_1", \
      "fpcoef-hi.dat" using 3:($6/$4) lw 2 title "v_2", \
-     "fpcoef-hi.dat" using 3:($7/$4) lw 2 title "v_3", \
-     "fpcoef-det.dat" using 3:($5/$4) lw 2 title "v_1", \
-     "fpcoef-det.dat" using 3:($6/$4) lw 2 title "v_2", \
+     "fpcoef-nlo.dat" using 3:($5/$4) lw 2 title "v_1", \
+     "fpcoef-nlo.dat" using 3:($6/$4) lw 2 title "v_2", \
+     "fpcoef-nlo.dat" using 3:($7/$4) lw 2 title "v_3", \
+     "fpcoef-nlo.dat" using 3:($8/$4) lw 2 title "v_4", \
+     "fpcoef-nlo.dat" using 3:($9/$4) lw 2 title "v_5", \
+     "fpcoef-nhi.dat" using 3:($5/$4) lw 2 title "v_1", \
+     "fpcoef-nhi.dat" using 3:($6/$4) lw 2 title "v_2", \
+     "fpcoef-nhi.dat" using 3:($7/$4) lw 2 title "v_3", \
+     "fpcoef-nhi.dat" using 3:($8/$4) lw 2 title "v_4", \
+     "fpcoef-nhi.dat" using 3:($9/$4) lw 2 title "v_5", \
 
+#     "fpcoef-hi.dat" using 3:($7/$4) lw 2 title "v_3", \
+#     "fpcoef-nlo.dat" using 3:($10/$4) lw 2 title "v_6", \
+#     "fpcoef-nhi.dat" using 3:($10/$4) lw 2 title "v_6", \
 
+#     "fpcoef-det.dat" using 3:($5/$4) lw 2 title "v_1", \
+#     "fpcoef-det.dat" using 3:($6/$4) lw 2 title "v_2", \
+#     "fpcoef-nhi.dat" using 3:($11/$4) lw 2 title "v_7", \
+#     "fpcoef-nhi.dat" using 3:($12/$4) lw 2 title "v_8", \
 #     "fpcoef-hi.dat" using 3:4 lw 2 title "v_0", \
 #     "fpcoef.dat" using 2:3 lw 2 title "", \
 #     "fpcoef-hi.dat" using 3:5 lw 2 title "v_1", \

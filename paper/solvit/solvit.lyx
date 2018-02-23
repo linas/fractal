@@ -7011,7 +7011,7 @@ reference "fig:Undershift-Density-Distribution"
  This is supported by the diagram 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Frobenius-Perron-Eigenvector-Coe"
+reference "fig:FP-Coef-vs-n"
 
 \end_inset
 
@@ -7040,7 +7040,7 @@ reference "fig:Frobenius-Perron-Eigenvector-Coe"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -7049,7 +7049,7 @@ status open
 Frobenius-Perron Eigenvector Coefficients
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Frobenius-Perron-Eigenvector-Coe"
+name "fig:FP-Coef-vs-n"
 
 \end_inset
 
@@ -7123,6 +7123,258 @@ status collapsed
 \begin_layout Plain Layout
 Created with fractal/misc/bitopds/psifp.c and psifp.gplot numerical integration
  with expan.c and expan.gplot 
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Is there some simple expression for the values of 
+\begin_inset Formula $v_{n}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+? If so, it must be formed using some sort of fractal shift.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FP-Coeff-beta"
+
+\end_inset
+
+ illustrates 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ through 
+\begin_inset Formula $v_{5}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Perron-Frobenius Eigenvector Coefficients
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FP-Coeff-beta"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ through 
+\begin_inset Formula $v_{5}$
+\end_inset
+
+ as 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is varied.
+ The most prominent spike is located at 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+ the Golden Ratio.
+ All spikes correspond to orbits that terminate in a fixed point after a
+ finite number of iterations.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with fpcoef.gplot and fpcoef.c
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The orbit of the midpoint is correlated with value of the coefficients,
+ illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Orbits-and-Coefficients"
+
+\end_inset
+
+.
+ The midpoint polynomial for 
+\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(\beta/2\right)$
+\end_inset
+
+, given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:midpoint poly"
+
+\end_inset
+
+, is compared to 
+\begin_inset Formula $v_{m}\beta^{m}$
+\end_inset
+
+.
+ It can be seen to 
+\begin_inset Quotes eld
+\end_inset
+
+line up
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The two are somehow related; its not clear just how.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Orbits and Coefficients
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Orbits-and-Coefficients"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename orbit.eps
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure compares the midpoint orbit to the coefficients, providing evidence
+ for the hypothesis stated in the text.
+ The midpoint orbit is just 
+\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(\beta/2\right)$
+\end_inset
+
+.
+ Because 
+\begin_inset Formula $\beta=1.1$
+\end_inset
+
+ in this figure, the discontinuities are infrequent and appear to be quasi-regul
+ar (they are ultimately fully chaotic), as the midpoint mostly just walks
+ up to where it is knocked down again.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+coefficeint
+\begin_inset Quotes erd
+\end_inset
+
+ curve is a graph of 
+\begin_inset Formula $10v_{p}\beta^{p}$
+\end_inset
+
+ for 
+\begin_inset Formula $p$
+\end_inset
+
+ running along the horizontal axis.
+ This is the same 
+\begin_inset Formula $v_{p}$
+\end_inset
+
+ as discussed in the text, and previously shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FP-Coef-vs-n"
+
+\end_inset
+
+.
+ Here, its rescaled by its asymbptotic behavoir, and a constant of 10 to
+ place it on the same vertical scale.
+ The discontinuitites clearly line up.
+ The relationship is clearly non-trivial.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with orbit.gplot and the orbit from orbit.c
 \end_layout
 
 \end_inset
@@ -7222,172 +7474,12 @@ In the next section, it will be seen that circles of zeros in the complex
 as both sides would have zeros arranged in circles of unit radius.
  The right hand side defined and explored in detail in the next section.
  Superficially, this hypothesis is clearly false: coefficients on the left
- are all ral and positive; coefficients on the left - the 
+ are all real and positive; coefficients on the right - the 
 \begin_inset Formula $b_{k}$
 \end_inset
 
 , are bits, either zero or one.
  Yet both exhibit a circle of zeros.
- The hypothesis can be sharpened: each 
-\begin_inset Formula $v_{m}\beta^{m}$
-\end_inset
-
- is some simple rational polynomial of 
-\begin_inset Formula $\beta$
-\end_inset
-
- of order 
-\begin_inset Formula $m$
-\end_inset
-
-.
- This hypothesis is illustrated in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Orbits-and-Coefficients"
-
-\end_inset
-
-.
- Here, the midpoint polynomial for 
-\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(\beta/2\right)$
-\end_inset
-
-, given in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:midpoint poly"
-
-\end_inset
-
-, is compared to 
-\begin_inset Formula $v_{m}\beta^{m}$
-\end_inset
-
-, and can be seen to 
-\begin_inset Quotes eld
-\end_inset
-
-line up
-\begin_inset Quotes erd
-\end_inset
-
-.
- The two are somehow similar; its not clear just how.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Orbits and Coefficients
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Orbits-and-Coefficients"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename orbit.eps
-	width 80col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-This figure compares the midpoint orbit to the coefficients, providing evidence
- for the hypothesis stated in the text.
- The midpoint orbit is just 
-\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(\beta/2\right)$
-\end_inset
-
-.
- Because 
-\begin_inset Formula $\beta=1.1$
-\end_inset
-
- in this figure, the discontinuities are infrequent and appear to be quasi-regul
-ar (they are ultimately fully chaotic), as the midpoint mostly just walks
- up to where it is knocked down again.
- The 
-\begin_inset Quotes eld
-\end_inset
-
-coefficeint
-\begin_inset Quotes erd
-\end_inset
-
- curve is a graph of 
-\begin_inset Formula $10v_{p}\beta^{p}$
-\end_inset
-
- for 
-\begin_inset Formula $p$
-\end_inset
-
- running along the horizontal axis.
- This is the same 
-\begin_inset Formula $v_{p}$
-\end_inset
-
- as discussed in the text, and previously shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Frobenius-Perron-Eigenvector-Coe"
-
-\end_inset
-
-.
- Here, its rescaled by its asymbptotic behavoir, and a constant of 10 to
- place it on the same vertical scale.
- The discontinuitites clearly line up.
- The relationship is clearly non-trivial.
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Generated with orbit.gplot and the orbit from orbit.c
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
