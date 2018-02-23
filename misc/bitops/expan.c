@@ -16,6 +16,7 @@
 #define NOMAIN
 #include "psi.c"
 #include "psibig.c"
+#undef NOMAIN
 
 // Compute eigenfunction, recursively.
 double reig(double x, double K, int niter)
@@ -104,6 +105,7 @@ double alpha_n(double K, int n, int npts, int niter)
 }
 
 
+#ifndef NOEMAIN
 int main(int argc, char* argv[])
 {
 	if (argc < 4)
@@ -141,3 +143,4 @@ int main(int argc, char* argv[])
 		fflush(stdout);
 	}
 }
+#endif
