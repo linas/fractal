@@ -11897,7 +11897,7 @@ reference "eq:downshift"
 \begin{equation}
 T_{\beta,\varepsilon}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
-\frac{\beta}{4}+\beta\left(\frac{1}{4}-\varepsilon\right)\left(\frac{1-2x}{2\varepsilon}\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\frac{\beta}{4}-\beta\left(\frac{1}{4}-\varepsilon\right)\left(\frac{2x-1}{2\varepsilon}\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
 \end{cases}\label{eq:zig-zag map}
 \end{equation}
@@ -12166,7 +12166,7 @@ height "1pt"
 
 \begin_layout Standard
 The appearance of islands of stability in the Feigenbaum attractor is due
- to the presence of a fixed point at any paramter value.
+ to the presence of a fixed point at any parameter value.
  In order to 
 \begin_inset Quotes eld
 \end_inset
@@ -12197,7 +12197,7 @@ any
 \begin{equation}
 D_{\beta,\varepsilon}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
-\frac{\beta}{4}+\beta\left(\frac{1}{4}-\varepsilon\right)\left(2\cos\frac{\pi}{4}\left(1+\left(\frac{1-2x}{2\varepsilon}\right)\right)-1\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\frac{\beta}{4}+\beta\left(\frac{1}{4}-\varepsilon\right)\left(2\cos\frac{\pi}{4}\left(1+\left(\frac{2x-1}{2\varepsilon}\right)\right)-1\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
 \end{cases}\label{eq:soft map}
 \end{equation}
@@ -12247,11 +12247,7 @@ reference "fig:Critical-Z-map"
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -12500,37 +12496,263 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-So, for finite 
-\begin_inset Formula $\varepsilon$
+Two more variant maps can be considered.
+ Both replace the center piece with symmetrical sinuous S-shaped curves,
+ but in different ways.
+ Consider
+\begin_inset Formula 
+\begin{equation}
+S_{\beta,\varepsilon,\sigma}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
+\frac{\beta}{4}-\sigma\beta\left(\frac{1}{4}-\varepsilon\right)\sin\frac{\pi}{2}\left(\frac{2x-1}{2\varepsilon}\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
+\end{cases}\label{eq:sine map}
+\end{equation}
+
 \end_inset
 
-, the map 
-\begin_inset Formula $D_{\beta,\varepsilon}(x)$
+and
+\begin_inset Formula 
+\begin{equation}
+H_{\beta,\varepsilon,n,\sigma}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
+\frac{\beta}{4}-\sigma\beta\left(\frac{1}{4}-\varepsilon\right)\mbox{sgn}\left(x\right)\left(\frac{2x-1}{2\varepsilon}\mbox{sgn}\left(x\right)\right)^{n} & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
+\end{cases}\label{eq:hard map}
+\end{equation}
+
 \end_inset
 
- contains a critical point in the region 
-\begin_inset Formula $\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon$
+The 
+\begin_inset Formula $S_{\beta,\varepsilon}(x)$
+\end_inset
+
+ replaces the centeral segment with a softly-rounded segment, containing
+ two critical points: near 
+\begin_inset Formula $\frac{1}{2}-\varepsilon$
+\end_inset
+
+ and near 
+\begin_inset Formula $\frac{1}{2}+\varepsilon$
+\end_inset
+
+, where the curve flattens out to a zero slope.
+ When 
+\begin_inset Formula $\sigma=+1$
+\end_inset
+
+, the map as a whole is continuous.
+ When 
+\begin_inset Formula $\sigma=-1$
+\end_inset
+
+, the map consists of three discontinuous pieces.
+ Different values are explored in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Interpolating-Sine-Map"
+
 \end_inset
 
 .
- To arrange for a critical point at a specifically chosen trouble spot,
- one need only choose an 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Interpolating Sine Map
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Interpolating-Sine-Map"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename islsin-0.04.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename islsin-0.10.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename islsin-0.15.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset VSpace 0.3col%
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename islsin+0.04.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename islsin+0.10.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename islsin+0.15.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This illustrates a sequence of iterated maps, obtained from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sine map"
+
+\end_inset
+
+.
+ The sequence in the upper row shows 
+\begin_inset Formula $\varepsilon=0.04,$
+\end_inset
+
+ 0.10 and 0.15; with 
+\begin_inset Formula $\sigma=+1$
+\end_inset
+
+.
+ The upper row is much like the sequence shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Critical-Z-map"
+
+\end_inset
+
+, except that its made sinuous, thanks to symmetrical S-shape.
+ The bottom row shows the same 
 \begin_inset Formula $\varepsilon$
 \end_inset
 
- small enough, such that 
-\begin_inset Formula $\varepsilon<\left|m_{k}-\frac{1}{2}\right|$
+ values, but for 
+\begin_inset Formula $\sigma=-1$
 \end_inset
 
- for each 
-\begin_inset Formula $k<p$
+.
+ It is better-understood in light of figure xx.
+ As usual, the paramter 
+\begin_inset Formula $\beta$
 \end_inset
 
- prior to the trouble-spot 
-\begin_inset Formula $m_{p}=m_{0}.$
-\end_inset
-
+ runs from 1 at the bottom to 2 at the top.
+ .
  
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated by bernie.C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $H_{\beta,\varepsilon,n,\sigma}(x)$
+\end_inset
+
+ replaces the centeral segment with a segment that has a kink in the middle,
+ when 
+\begin_inset Formula $n$
+\end_inset
+
+ an a positive integer, greater than one.
+ Note that 
+\begin_inset Formula $H_{\beta,\varepsilon,1,1}(x)=T_{\beta,\varepsilon}(x)$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $\mbox{sgn}x$
+\end_inset
+
+ is the sign of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ These are illustrated in figure xx.
 \end_layout
 
 \begin_layout Standard
@@ -12574,7 +12796,8 @@ phase-locked
 \end_layout
 
 \begin_layout Standard
-Note to reader: I presume that the above observations are generically 
+Note to reader: I presume that the above observations have been previously
+ discovered by others, and might even be 
 \begin_inset Quotes eld
 \end_inset
 
@@ -12582,8 +12805,13 @@ well known
 \begin_inset Quotes erd
 \end_inset
 
-, and presented in some pop-lit on fractals, but I am not aware of any reference
-s discussing this topic.
+, 
+\emph on
+viz.
+
+\emph default
+ presented in some pop-sci literature on fractals.
+ However, I am not aware of any references discussing this topic.
  If you, dear reader, know of such references, please drop me a line at
  the posted email address.
 \end_layout
