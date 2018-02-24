@@ -39,16 +39,37 @@ double bern(double x, double K)
 // A zig-zag map, with diagonal joining the two branches
 double island(double x, double K, double epsilon)
 {
-	K *= 2.0;
+	double beta = 2.0 * K;
 	if (0.5+epsilon <= x)
 	{
-		return K * (x - 0.5);
+		return beta * (x - 0.5);
 	}
 	if (x < 0.5-epsilon)
 	{
-		return K*x;
+		return beta*x;
 	}
-	return 0.25*K* (1.0 + (1.0 - 4.0*epsilon) * (0.5 - x) / epsilon);
+	return 0.25*beta* (1.0 + (1.0 - 4.0*epsilon) * (0.5 - x) / epsilon);
+}
+
+// Like above, with with an s-curve
+double lost_island(double x, double K, double epsilon)
+{
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+
+	// om runs from  -1 to 1;
+	double om = (x - 0.5) / epsilon;
+	double kos = cos(M_PI * 0.5 * (om+1.0));
+
+	// S-curve interpolation between top and bottom.
+	return 0.25*beta + beta*(0.25-epsilon) * kos;
 }
 
 double nocarry(double x, double K)
@@ -146,14 +167,21 @@ static void bifurcation_diagram (float *array,
 
 	int cnt=0;
 
-	K = 0.5 + 0.5*K;
-	double eps = 0.5* (1.0-K);
-	eps = omega;
+	double Korg = 0.5 + 0.5*K;
+	// double eps = 0.5* (1.0-K);
+	double eps = omega;
 	for (int j=0; j<itermax; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
 		double x = t;
+
+		t = rand();
+		t /= RAND_MAX;
+		t -= 0.5;
+		t /= 800.0; // 800 pixels tall
+		t *= 0.5; // K runs from 0.5 to 1.0
+		K = Korg + t;
 
 		/* OK, now start iterating the benoulli map */
 		for (int iter=0; iter < 1250; iter++)
@@ -165,7 +193,8 @@ static void bifurcation_diagram (float *array,
 			// x = feig(x, K);
 			// x = nofeig(x, K);
 			// x = mangle_carry(x, K);
-			x = island(x, K, eps);
+			// x = island(x, K, eps);
+			x = lost_island(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
