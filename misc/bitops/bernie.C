@@ -51,7 +51,7 @@ double island(double x, double K, double epsilon)
 	return 0.25*beta* (1.0 + (1.0 - 4.0*epsilon) * (0.5 - x) / epsilon);
 }
 
-// Like above, with with an s-curve
+// Like above, but with an S-curve for the middle segment.
 double lost_island(double x, double K, double epsilon)
 {
 	double beta = 2.0 * K;
@@ -66,9 +66,35 @@ double lost_island(double x, double K, double epsilon)
 
 	// om runs from  -1 to 1;
 	double om = (x - 0.5) / epsilon;
+
+	// kos runs from 1 to -1
 	double kos = cos(M_PI * 0.5 * (om+1.0));
 
 	// S-curve interpolation between top and bottom.
+	return 0.25*beta + beta*(0.25-epsilon) * kos;
+}
+
+// Like above, but with half of an S-curve for the middle segment
+double hard_island(double x, double K, double epsilon)
+{
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+
+	// om runs from  -1 to 1;
+	double om = (x - 0.5) / epsilon;
+
+	// kos still runs from 1 to -1
+	double kos = cos(M_PI * 0.25 * (om+1.0));
+	kos = 2.0 * (kos - 0.5);
+
+	// First-quarter cosine interpolation between top and bottom.
 	return 0.25*beta + beta*(0.25-epsilon) * kos;
 }
 
@@ -194,7 +220,8 @@ static void bifurcation_diagram (float *array,
 			// x = nofeig(x, K);
 			// x = mangle_carry(x, K);
 			// x = island(x, K, eps);
-			x = lost_island(x, K, eps);
+			// x = lost_island(x, K, eps);
+			x = hard_island(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
