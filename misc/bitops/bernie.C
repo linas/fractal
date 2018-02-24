@@ -248,26 +248,32 @@ static void bifurcation_diagram (float *array,
 	double pix = 1.2 / 800;
 	int left = 4*array_size / 5;
 
+	double corner = (1 + 2.0*eps) / (1 - 2.0*eps);
+
 	double phi;
 #if 0
-	phi = 1.618 + eps;
+	phi = 1.618;
+	phi = corner + (2-corner)*phi;
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 
-	phi = 1.4655 + eps;
+	phi = 1.4655;
+	phi = corner + (2-corner)*phi;
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 
-	phi = 1.3803 + eps;
+	phi = 1.3803;
+	phi = corner + (2-corner)*phi;
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 
-	phi = 1.3247 + eps;
+	phi = 1.3247;
+	phi = corner + (2-corner)*phi;
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 #endif
 
-	int cleft = 2.0 * eps * (1-0.5*eps) * 800;
+	int cleft = eps *(1+2*eps) / (1-2*eps) * 800;
 	array[cleft] = 1.5;
 
 	phi = (1 + 2.0*eps) / (1 - 2.0*eps);
