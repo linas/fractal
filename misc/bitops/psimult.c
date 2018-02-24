@@ -24,6 +24,8 @@ int main(int argc, char* argv[])
 	}
 	int maxn = atoi(argv[1]);
 
+	printf("#\n# Produce of %d midpoints\n#\n", maxn);
+
 #define NPTS 1701
 	double accum = 0.0;
 	for (int i=0; i<NPTS; i++)
@@ -40,7 +42,7 @@ int main(int argc, char* argv[])
 		for (int m=1; m< maxn; m++)
 		{
 			prod *= 2.0 * midpoints[m] / K;
-			prod /= K;
+			// prod /= K;
 		}
 		accum += prod;
 		printf("%d	%g	%g	%g\n", i, K, prod, accum);
