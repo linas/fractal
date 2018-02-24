@@ -67,14 +67,14 @@ double lost_island(double x, double K, double epsilon)
 	// om runs from  -1 to 1;
 	double om = (x - 0.5) / epsilon;
 
-	// kos runs from 1 to -1
-	double kos = cos(M_PI * 0.5 * (om+1.0));
+	// kos runs from -1 to 1
+	double kos = sin(M_PI * 0.5 * om);
 
 	// S-curve interpolation between top and bottom.
-	return 0.25*beta + beta*(0.25-epsilon) * kos;
+	return 0.25*beta - beta*(0.25-epsilon) * kos;
 }
 
-// Like above, but with half of an S-curve for the middle segment
+// Like above, but with soft top and hard-edged bottom
 double hard_island(double x, double K, double epsilon)
 {
 	double beta = 2.0 * K;
@@ -96,6 +96,47 @@ double hard_island(double x, double K, double epsilon)
 
 	// First-quarter cosine interpolation between top and bottom.
 	return 0.25*beta + beta*(0.25-epsilon) * kos;
+}
+
+double sign(double x)
+{
+	if (x < 0.0) return -1.0;
+	if (0.0 < x) return 1.0;
+	return 0.0;
+}
+
+// Like above, but with half of an S-curve for the middle segment
+double ess_island(double x, double K, double epsilon)
+{
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+
+	// om runs from  -1 to 1;
+	double om = (x - 0.5) / epsilon;
+
+	// kos runs from -1 to 1
+	// double kos = pow(om, 3);
+
+	// double kos = om;
+	// double kos = sign(om) * om*om;
+	// double kos = om*om*om;
+	// double kos = sign(om) * om*om*om*om;
+	// double kos = om*om*om*om*om;
+
+	// double kos = -om;
+	// double kos = -sign(om) * om*om;
+	// double kos = -om*om*om;
+	// double kos = -sign(om) * om*om*om*om;
+	double kos = -om*om*om*om*om;
+
+	return 0.25*beta - beta*(0.25-epsilon) * kos;
 }
 
 double nocarry(double x, double K)
@@ -221,7 +262,8 @@ static void bifurcation_diagram (float *array,
 			// x = mangle_carry(x, K);
 			// x = island(x, K, eps);
 			// x = lost_island(x, K, eps);
-			x = hard_island(x, K, eps);
+			// x = hard_island(x, K, eps);
+			x = ess_island(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
@@ -244,12 +286,14 @@ static void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++)
 		array[j] *= norm;
 
+#ifdef GOLDEN_ISLAND
 	double beta = 2.0 * Korg;
 	double pix = 0.45 / array_size;
 	int left = (0.5 + 0.5* (beta-1)) * array_size;
 	// left -= 234; // For golden at epsilon=0.15
 	// left -= 145; // For golden at epsilon=0.10
-	left -= 54; // For golden at epsilon=0.0.4
+	// left -= 54; // For golden at epsilon=0.0.4
+	left -= 54;
 
 	double corner = (1 + 2.0*eps) / (1 - 2.0*eps);
 
@@ -274,6 +318,7 @@ static void bifurcation_diagram (float *array,
 	// phi = corner + (2-corner)*(phi-1);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+#endif
 #endif
 
 #ifdef KORNER
