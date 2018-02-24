@@ -36,6 +36,7 @@ double bern(double x, double K)
 	return K*x;
 }
 
+// A zig-zag map, with diagonal joining the two branches
 double island(double x, double K, double epsilon)
 {
 	K *= 2.0;
