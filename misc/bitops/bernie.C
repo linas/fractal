@@ -219,9 +219,9 @@ static void bifurcation_diagram (float *array,
 			// x = feig(x, K);
 			// x = nofeig(x, K);
 			// x = mangle_carry(x, K);
-			x = island(x, K, eps);
+			// x = island(x, K, eps);
 			// x = lost_island(x, K, eps);
-			// x = hard_island(x, K, eps);
+			x = hard_island(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
@@ -245,40 +245,47 @@ static void bifurcation_diagram (float *array,
 		array[j] *= norm;
 
 	double beta = 2.0 * Korg;
-	double pix = 1.2 / 800;
-	int left = 4*array_size / 5;
+	double pix = 0.45 / array_size;
+	int left = (0.5 + 0.5* (beta-1)) * array_size;
+	// left -= 234; // For golden at epsilon=0.15
+	// left -= 145; // For golden at epsilon=0.10
+	left -= 54; // For golden at epsilon=0.0.4
 
 	double corner = (1 + 2.0*eps) / (1 - 2.0*eps);
 
 	double phi;
-#if 0
-	phi = 1.618;
-	phi = corner + (2-corner)*phi;
+	phi = 1.618034;
+	phi = corner + (2-corner)*(phi-1);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 
+#if 0
 	phi = 1.4655;
-	phi = corner + (2-corner)*phi;
+	// phi = corner + (2-corner)*(phi-1);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 
 	phi = 1.3803;
-	phi = corner + (2-corner)*phi;
+	// phi = corner + (2-corner)*(phi-1);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 
 	phi = 1.3247;
-	phi = corner + (2-corner)*phi;
+	// phi = corner + (2-corner)*(phi-1);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 #endif
 
-	int cleft = eps *(1+2*eps) / (1-2*eps) * 800;
+#ifdef KORNER
+	// Draw lines indicating the left corner of the
+	// island and hard-island maps.
+	int cleft = eps *(1+2*eps) / (1-2*eps) * array_size;
 	array[cleft] = 1.5;
 
 	phi = (1 + 2.0*eps) / (1 - 2.0*eps);
-	if (fabs(beta-phi)<0.45*pix)
+	if (fabs(beta-phi)<pix)
 		for (int j=0; j<cleft; j++) {array[j] = 1.5; }
+#endif
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)
