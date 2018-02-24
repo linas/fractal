@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 		// big_midpoints(K, 400, midpoints, MAXN);
 		sequence_midpoints(K, MAXN);
 
-#ifdef OLD_SCHOOL
+#ifdef OLD_SKOOL
 		int siter = niter;
 		if (K < 0.8) siter = 1.2*niter;
 		if (K < 0.74) siter = 1.5*niter;
@@ -60,6 +60,10 @@ int main(int argc, char* argv[])
 		double cf3 = alpha_n(K, 3, npts, siter);
 		printf ("%d %d	%g	%g	%g	%g	%g\n", i, siter, 2.0*K, cf0, cf1, cf2, cf3);
 #endif
+
+		// Instead of doing above, try various depths
+		// until the system seems to settle down to a stable
+		// level of accuracy.
 		int siter = niter;
 		double cf = alpha_n(K, 1, npts, siter);
 		siter++;
