@@ -68,7 +68,8 @@ double lost_island(double x, double K, double epsilon)
 	double om = (x - 0.5) / epsilon;
 
 	// kos runs from -1 to 1
-	double kos = sin(M_PI * 0.5 * om);
+	// double kos = sin(M_PI * 0.5 * om);
+	double kos = -sin(M_PI * 0.5 * om);
 
 	// S-curve interpolation between top and bottom.
 	return 0.25*beta - beta*(0.25-epsilon) * kos;
@@ -130,11 +131,11 @@ double ess_island(double x, double K, double epsilon)
 	// double kos = sign(om) * om*om*om*om;
 	// double kos = om*om*om*om*om;
 
-	// double kos = -om;
+	double kos = -om;
 	// double kos = -sign(om) * om*om;
 	// double kos = -om*om*om;
 	// double kos = -sign(om) * om*om*om*om;
-	double kos = -om*om*om*om*om;
+	// double kos = -om*om*om*om*om;
 
 	return 0.25*beta - beta*(0.25-epsilon) * kos;
 }
@@ -261,9 +262,9 @@ static void bifurcation_diagram (float *array,
 			// x = nofeig(x, K);
 			// x = mangle_carry(x, K);
 			// x = island(x, K, eps);
-			// x = lost_island(x, K, eps);
+			x = lost_island(x, K, eps);
 			// x = hard_island(x, K, eps);
-			x = ess_island(x, K, eps);
+			// x = ess_island(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
