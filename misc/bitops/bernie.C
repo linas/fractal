@@ -219,9 +219,9 @@ static void bifurcation_diagram (float *array,
 			// x = feig(x, K);
 			// x = nofeig(x, K);
 			// x = mangle_carry(x, K);
-			// x = island(x, K, eps);
+			x = island(x, K, eps);
 			// x = lost_island(x, K, eps);
-			x = hard_island(x, K, eps);
+			// x = hard_island(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
@@ -243,6 +243,36 @@ static void bifurcation_diagram (float *array,
 	double norm = wi / ((double) cnt);
 	for (int j=0; j<array_size; j++)
 		array[j] *= norm;
+
+	double beta = 2.0 * Korg;
+	double pix = 1.2 / 800;
+	int left = 4*array_size / 5;
+
+	double phi;
+#if 0
+	phi = 1.618 + eps;
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+
+	phi = 1.4655 + eps;
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+
+	phi = 1.3803 + eps;
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+
+	phi = 1.3247 + eps;
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+#endif
+
+	int cleft = 2.0 * eps * (1-0.5*eps) * 800;
+	array[cleft] = 1.5;
+
+	phi = (1 + 2.0*eps) / (1 - 2.0*eps);
+	if (fabs(beta-phi)<0.45*pix)
+		for (int j=0; j<cleft; j++) {array[j] = 1.5; }
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)
