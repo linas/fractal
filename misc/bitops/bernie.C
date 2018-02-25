@@ -125,12 +125,16 @@ double ess_island(double x, double K, double epsilon)
 	// kos runs from -1 to 1
 	// double kos = pow(om, 3);
 
+	// With this sign convention, the map is continuous, and
+	// has an S-curve shape.
 	// double kos = om;
 	// double kos = sign(om) * om*om;
 	// double kos = om*om*om;
 	// double kos = sign(om) * om*om*om*om;
 	double kos = om*om*om*om*om;
 
+	// With this sign convention, the middle segment is increasing,
+	// and the map consists of three disjoint segments.
 	// double kos = -om;
 	// double kos = -sign(om) * om*om;
 	// double kos = -om*om*om;
