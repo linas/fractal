@@ -16,7 +16,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	matrix psieigen psiblas nilpot bitshow complex psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
-	orbit fpcoef poincare
+	orbit fpcoef poincare subdiag
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -71,6 +71,7 @@ fpcoef.o: fpcoef.c psi.c psibig.c expan.c
 	$(CC) -c $< -I $(FUNCDIR) -fopenmp
 
 poincare.o: poincare.C
+subdiag.o: subdiag.C psi.c psibig.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
@@ -117,3 +118,4 @@ fpcoef: fpcoef.o
 	$(CC) -o $@ $^ -lgmp -lgomp -lm
 
 poincare: poincare.o $(BRAT)
+subdiag: subdiag.o $(BRAT)
