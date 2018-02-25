@@ -12824,7 +12824,7 @@ reference "fig:Interpolating-Kink-Map"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -13175,8 +13175,22 @@ height "1pt"
 
 \begin_layout Standard
 Another interesting visualization is a Poincaré recurrence plot.
- The islands of stability should manifest as Arnold tongues.
- This is shown in figure 
+ The islands of stability should manifest as Arnold tongues
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WP-Arnold"
+
+\end_inset
+
+.
+ These are shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Poincaré-recurrence"
+
+\end_inset
+
+ and 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Arnold-Tongues"
@@ -13184,6 +13198,170 @@ reference "fig:Arnold-Tongues"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Poincaré recurrence
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Poincaré-recurrence"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename poinhard.png
+	lyxscale 50
+	width 49col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename poinlost.png
+	lyxscale 50
+	width 49col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The above visualize the Poincaré recurrence times for the map 
+\begin_inset Formula $D_{\beta,\varepsilon}(x)$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:soft map"
+
+\end_inset
+
+ on the left, and the map 
+\begin_inset Formula $S_{\beta,\varepsilon,1}(x)$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sine map"
+
+\end_inset
+
+ on the right.
+ In both cases, the parameter 
+\begin_inset Formula $\beta$
+\end_inset
+
+ runs from 1 to 2, left to right.
+ The parameter 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ runs from 0 to 0.2, bottom to top.
+ The Poincaré recurrance time is obtained by iterating on the maps, and
+ then counting how many iterations it takes to get near an earlier point.
+ The color coding is such that yellow/red indicates large recurrance times;
+ green is intermediate time, blue a short time, and black corresponds to
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ less than 3 or 4 or so.
+ The vertical black spikes are the Arnold tongues; they correspond to parameter
+ regions which lie in an island of stability.
+ That is, the recurrance time is low, precisely because the the point 
+\begin_inset Formula $x$
+\end_inset
+
+ is bouncing between a discrete set of values.
+ The yellow/red regions correspond to chaos, where the iterate 
+\begin_inset Formula $x$
+\end_inset
+
+ is bouncing between all possible values.
+ The largest right-most spike is located at 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+, with the sequence of spikes to the left located at the other primary golden
+ means (
+\emph on
+viz
+\emph default
+, 
+\begin_inset Formula $1.3803\cdots$
+\end_inset
+
+ and the silver mean
+\begin_inset Formula $1.3247\cdots$
+\end_inset
+
+ and so on).
+ As noted earlier, the general curve of that spike appears to follow 
+\begin_inset Formula $\beta=\delta+\left(2-\delta\right)\left(\varphi-1\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $\delta=\left(1+2\varepsilon\right)/\left(1-2\varepsilon\right)$
+\end_inset
+
+.
+ The dramatic swallow-tail shapes in the right-hand image are identical
+ to those that appear in the classic iterated circle map.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with fractal/misc/bitops/poincare.C 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13253,7 +13431,7 @@ reference "eq:hard map"
 \end_inset
 
  runs from 1 to 2, left to right.
- The paramter 
+ The parameter 
 \begin_inset Formula $\varepsilon$
 \end_inset
 
