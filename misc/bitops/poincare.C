@@ -62,6 +62,34 @@ double ess_island(double x, double K, double epsilon)
 	return 0.25*beta - beta*(0.25-epsilon) * kos;
 }
 
+// The downshift map, with half of an S-curve for the middle segment
+// With the poincare convention K/beta will got left right, while
+// the exponent (power) pee will increase from bottom upwards.
+double pee_island(double x, double K, double pee)
+{
+	double epsilon = 0.04;
+	K = 0.5 + 0.5*K;  // K runs from 1/2 to 1
+	pee *= 5; // pee runs from 0 to 5
+
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+
+	// om runs from  -1 to 1;
+	double om = (x - 0.5) / epsilon;
+
+	// kos runs from -1 to 1
+	double kos = pow(om, pee);
+
+	return 0.25*beta - beta*(0.25-epsilon) * kos;
+}
+
 /*-------------------------------------------------------------------*/
 /*
  * Compute the poincare recurrance time for the circle map
@@ -135,7 +163,15 @@ double Kbar = Kba + (t-0.5)/JITTER;
 
 static double hard_gram(double omega, double Kbar, int itermax, double param)
 {
+	double K = 0.5 + 0.5*omega;  // K runs from 1/2 to 1
+	double beta = 2.0 * K;
+if (fabs(beta-1.41421)< 0.002) return 1.0e-5; // sqrt 2
+if (fabs(beta-1.25992)< 0.002) return 1.0e-5; // cube rt 2
+if (fabs(beta-1.18921)< 0.002) return 1.0e-5; // 4th  rt 2
+if (fabs(beta-1.148698)< 0.002) return 1.0e-5; // 5th rt 2
+
 	return recurrance_time(omega, Kbar, itermax, ess_island);
+	// return recurrance_time(omega, Kbar, itermax, pee_island);
 }
 
 DECL_MAKE_HEIGHT (hard_gram);

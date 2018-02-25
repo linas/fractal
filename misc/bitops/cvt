@@ -269,9 +269,14 @@
 
 # ../../generate/renorm poinc j 0.02 0
 
-../../generate/takelog poinc lo 
-../../generate/renorm lo j 0.22 0
+# ../../generate/takelog poinc lo 
+# ../../generate/renorm lo j 0.22 0
+../../generate/renorm poinc j 0.05 0
 cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poinc.png
+
+../../generate/takelog xxx lo 
+../../generate/renorm lo j 0.22 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > xxx.png
 
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4

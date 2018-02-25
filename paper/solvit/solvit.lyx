@@ -12975,6 +12975,18 @@ reference "eq:hard map"
  In all cases, islands appear, and numerous common features are evident.
  Perhaps most interesting is that the islands do NOT contain period-doubling
  sequences.
+ The primary sequence of islands, starting from the central largest, proceeding
+ downwards, are located the inverse powers of two, 
+\emph on
+viz
+\emph default
+ at 
+\begin_inset Formula $\beta=\sqrt[k]{2}$
+\end_inset
+
+.
+ Why are the spikes located at inverse powers of two, instead or, for example,
+ the golden means? This is an interesting question worth blathering about.
  
 \begin_inset Note Note
 status collapsed
@@ -13066,7 +13078,7 @@ reference "fig:No-Period-Doubling"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -13139,6 +13151,204 @@ reference "eq:hard map"
 \end_inset
 
  makes this directly comparable to other images.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Another interesting visualization is a Poincaré recurrance plot.
+ The islands of stability should manifest as Arnold tongues.
+ This is showin in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Arnold-Tongues"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Arnold Tongues
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Arnold-Tongues"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename poinc+p5.png
+	lyxscale 50
+	width 49col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename poinc-p5.png
+	lyxscale 50
+	width 49col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The above visualize the Poincaré recurrance times for the map 
+\begin_inset Formula $H_{\beta,\varepsilon,p,\sigma}(x)$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hard map"
+
+\end_inset
+
+.
+ The parameter 
+\begin_inset Formula $\beta$
+\end_inset
+
+ runs from 1 to 2, left to right.
+ The paramter 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ runs from 0 to 0.2, bottom to top.
+ The power 
+\begin_inset Formula $p$
+\end_inset
+
+ is held fixed at 
+\begin_inset Formula $p=5$
+\end_inset
+
+.
+ The left image shows 
+\begin_inset Formula $\sigma=$
+\end_inset
+
+-1; the right shows 
+\begin_inset Formula $\sigma=+1$
+\end_inset
+
+.
+ The Poincaré recurrance time is obtained by iterating on 
+\begin_inset Formula $H_{\beta,\varepsilon,p,\sigma}(x)$
+\end_inset
+
+ and counting how many iterations it takes until 
+\begin_inset Formula $\left|x-H_{\beta,\varepsilon,p,\sigma}^{n}(x)\right|<0.009$
+\end_inset
+
+.
+ The shapes depicted are not sensitive to the recurrence delta 0.009; this
+ value is chosen primarly to make the colors prettier.
+ The color coding is such that yellow/red indicates large recurrance times
+ 
+\begin_inset Formula $n$
+\end_inset
+
+; green is intermediate time, blue a short time, and black corresponds to
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ less than 1 or 2 or so.
+ The vertical blue spikes are the Arnold tongues; they correspond to parameter
+ regions which lie in an island of stability.
+ That is, the recurrance time is low, precisely because the the point 
+\begin_inset Formula $x$
+\end_inset
+
+ is bouncing between a discrete set of values.
+ The yellow/red regions correspond to chaos, where the iterate 
+\begin_inset Formula $x$
+\end_inset
+
+ is bouncing between all possible values.
+ The central spike is located at 
+\begin_inset Formula $\beta=\sqrt{2}$
+\end_inset
+
+ with the sequence of spikes to the left located at 
+\begin_inset Formula $\sqrt[k]{2}$
+\end_inset
+
+ for increasing 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ In that sense, the large black region dominating the right side of the
+ figures correponds to 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+ These correspond to the black bands in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Interpolating-Kink-Map"
+
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with fractal/misc/bitops/poincare.C 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
