@@ -12,6 +12,78 @@
 
 #include "brat.h"
 
+// A zig-zag map, with diagonal joining the two branches
+double island(double x, double K, double epsilon)
+{
+	epsilon *= 0.20;  // Epsilon runs from 0 to 0.2
+	K = 0.5 + 0.5*K;  // K runs from 1/2 to 1
+
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+	return 0.25*beta* (1.0 + (1.0 - 4.0*epsilon) * (0.5 - x) / epsilon);
+}
+
+// Like above, but with an S-curve for the middle segment.
+double lost_island(double x, double K, double epsilon)
+{
+	epsilon *= 0.20;  // Epsilon runs from 0 to 0.2
+	K = 0.5 + 0.5*K;  // K runs from 1/2 to 1
+
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+
+	// om runs from  -1 to 1;
+	double om = (x - 0.5) / epsilon;
+
+	// kos runs from -1 to 1
+	double kos = sin(M_PI * 0.5 * om);
+	// double kos = -sin(M_PI * 0.5 * om);
+
+	// S-curve interpolation between top and bottom.
+	return 0.25*beta - beta*(0.25-epsilon) * kos;
+}
+
+// Like above, but with soft top and hard-edged bottom
+double hard_island(double x, double K, double epsilon)
+{
+	epsilon *= 0.20;  // Epsilon runs from 0 to 0.2
+	K = 0.5 + 0.5*K;  // K runs from 1/2 to 1
+
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+
+	// om runs from  -1 to 1;
+	double om = (x - 0.5) / epsilon;
+
+	// kos still runs from 1 to -1
+	double kos = cos(M_PI * 0.25 * (om+1.0));
+	kos = 2.0 * (kos - 0.5);
+
+	// First-quarter cosine interpolation between top and bottom.
+	return 0.25*beta + beta*(0.25-epsilon) * kos;
+}
+
 double sign(double x)
 {
 	if (x < 0.0) return -1.0;
@@ -49,7 +121,7 @@ double ess_island(double x, double K, double epsilon)
 	// double kos = sign(om) * om*om;
 	// double kos = om*om*om;
 	// double kos = sign(om) * om*om*om*om;
-	double kos = om*om*om*om*om;
+	// double kos = om*om*om*om*om;
 
 	// With this sign convention, the middle segment is increasing,
 	// and the map consists of three disjoint segments.
@@ -57,7 +129,7 @@ double ess_island(double x, double K, double epsilon)
 	// double kos = -sign(om) * om*om;
 	// double kos = -om*om*om;
 	// double kos = -sign(om) * om*om*om*om;
-	// double kos = -om*om*om*om*om;
+	double kos = -om*om*om*om*om;
 
 	return 0.25*beta - beta*(0.25-epsilon) * kos;
 }
@@ -163,13 +235,19 @@ double Kbar = Kba + (t-0.5)/JITTER;
 
 static double hard_gram(double omega, double Kbar, int itermax, double param)
 {
+#if 0
 	double K = 0.5 + 0.5*omega;  // K runs from 1/2 to 1
 	double beta = 2.0 * K;
+if (fabs(beta-1.618)< 0.001) return 1.0e-5; // sqrt 2
 if (fabs(beta-1.41421)< 0.002) return 1.0e-5; // sqrt 2
 if (fabs(beta-1.25992)< 0.002) return 1.0e-5; // cube rt 2
 if (fabs(beta-1.18921)< 0.002) return 1.0e-5; // 4th  rt 2
 if (fabs(beta-1.148698)< 0.002) return 1.0e-5; // 5th rt 2
+#endif
 
+	// return recurrance_time(omega, Kbar, itermax, island);
+	// return recurrance_time(omega, Kbar, itermax, hard_island);
+	// return recurrance_time(omega, Kbar, itermax, lost_island);
 	return recurrance_time(omega, Kbar, itermax, ess_island);
 	// return recurrance_time(omega, Kbar, itermax, pee_island);
 }
