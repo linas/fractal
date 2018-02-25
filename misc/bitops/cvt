@@ -25,8 +25,8 @@
 # ../../generate/renorm island j 0.5 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > island.png
 
-../../generate/renorm islan j 0.5 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > islan.png
+# ../../generate/renorm islan j 0.5 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > islan.png
 
 # ../../generate/renorm islan-00 j 0.5 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > islan-0.00.png
@@ -266,5 +266,12 @@ cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > islan.png
 
 # ../../generate/renorm zero j 1 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > zero.png
+
+# ../../generate/renorm poinc j 0.02 0
+
+../../generate/takelog poinc lo 
+../../generate/renorm lo j 0.22 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poinc.png
+
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4

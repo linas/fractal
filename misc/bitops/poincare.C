@@ -24,7 +24,8 @@ double sign(double x)
 // epsilon will increase from bottom upwards.
 double ess_island(double x, double K, double epsilon)
 {
-	epsilon *= 0.20;
+	epsilon *= 0.20;  // Epsilon runs from 0 to 0.2
+	K = 0.5 + 0.5*K;  // K runs from 1/2 to 1
 
 	double beta = 2.0 * K;
 	if (0.5+epsilon <= x)
@@ -67,9 +68,10 @@ double ess_island(double x, double K, double epsilon)
  */
 
 // #define EPSILON 0.001
-#define EPSILON 0.003
+// #define EPSILON 0.009
+#define EPSILON 0.009
 #define SETTLE_TIME 21
-#define RSAMP 3400
+#define RSAMP 1400
 
 double
 recurrance_time (double omeg, double Kba, int itermax,
