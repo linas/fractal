@@ -72,7 +72,8 @@ double tree_fun(double x, double Kay, double y)
 /*
  */
 
-#if STEPS
+// #define STEPS
+#ifdef STEPS
 static void step_diagram (float *array,
                                  int array_size,
                                  double x_center,
@@ -90,13 +91,14 @@ static void step_diagram (float *array,
 		x -= 0.5;
 		x *= x_width;
 		x += x_center;
-		array[j] = step_fun(x, Kay, y);
+		array[j] = tree_fun(x, Kay, y);
 	}
 }
 
 DECL_MAKE_BIFUR(step_diagram)
 #endif
 
+#ifdef TREE
 static void tree_diagram (float *array,
                                  int array_size,
                                  double x_center,
@@ -131,3 +133,42 @@ static void tree_diagram (float *array,
 }
 
 DECL_MAKE_BIFUR(tree_diagram)
+#endif
+
+#define STEP_COLOR
+#ifdef STEP_COLOR
+static void step_color_diagram (float *array,
+                                 int array_size,
+                                 double x_center,
+                                 double x_width,
+                                 double K,
+                                 int itermax,
+                                 double param)
+{
+	double Kay = 0.5 + 0.5*K;
+
+	/* clear out the row */
+	for (int j=0; j<array_size; j++) array[j] = 0.0;
+
+	for (int j=0; j<array_size; j++)
+	{
+		double x = (((double) j) + 0.5)/ ((double) array_size);
+		x -= 0.5;
+		x *= x_width;
+		x += x_center;
+
+#define NCOLORS 225
+		double y = 0.0;
+		for (int n=0; n<NCOLORS; n++)
+		{
+			y = (((double) n) + 0.5)/ ((double) NCOLORS);
+			y = 1.0 - y;
+			double rv = tree_fun(x, Kay, y);
+			if (0.5 < rv) break;
+		}
+		array[j] = y;
+	}
+}
+
+DECL_MAKE_BIFUR(step_color_diagram)
+#endif

@@ -4,7 +4,8 @@
  * Goofy color plot of the subdiagonal matrix elements <n+1|L|n>  
  *
  * Is not very interesting -- some structure for small n, and mixed,
- * random mess for the higher n.
+ * random mess for the higher n. This is mentioned in the paoper as
+ * a by-the-way.
  *
  * February 2018
  */

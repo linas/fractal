@@ -286,8 +286,11 @@
 # ../../generate/renorm poinc-p5 j 0.03 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poinc-p5.png
 
-../../generate/renorm subdiag j 1 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > subdiag.png
+# ../../generate/renorm subdiag j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > subdiag.png
+
+../../generate/renorm treecolor j 1 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > treecolor.png
 
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4
