@@ -92,7 +92,7 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Date
-December 2017
+December 2017 (Updated Feb 2018)
 \end_layout
 
 \begin_layout Address
@@ -124,9 +124,9 @@ rly notable for a variety of features, one of which is that it can be used
 \end_layout
 
 \begin_layout Abstract
-The beta transformation is a subshift: iterated on the unit interval, it
- singles out a subspace of the Cantor space, in such a way that it is invariant
- under the action of the left-shift operator.
+The beta transformation defines a subshift: iterated on the unit interval,
+ it singles out a subspace of the Cantor space, in such a way that it is
+ invariant under the action of the left-shift operator.
  That is, lopping off one bit at a time gives back the same subspace.
 \end_layout
 
@@ -152,35 +152,47 @@ The beta transform is interesting, as it seems to capture something basic
 
 \begin_layout Abstract
 Analyzing the beta transform is difficult.
- The work presented here is a pastiche of observations, rather than that
- of deep insight or abstract analysis.
- The results are modest.
- Several interesting insights emerge.
- One is that the complicated structure of the chaotic regions of iterated
- maps seems to be due to the chaotic dynamics of the carry bit in multiplication.
- That is, the multiplication of real numbers, when expressed on Cantor space,
- requires the use of a carry bit (from long multiplication, as taught in
- elementary school).
- The carry bit behaves in a complicated fashion, and seems to be the root
- cause of chaotic structure.
+ The work presented here is more-or-less a research diary: a pastiche of
+ observations and some shallow insights.
+ A few interesting insights emerge.
+ One is that chaos seems to be rooted in how the carry bit behaves during
+ multiplication.
+ Another observation is that one can surgically insert 
+\begin_inset Quotes eld
+\end_inset
+
+islands of stability
+\begin_inset Quotes erd
+\end_inset
+
+ into chaotic (ergodic) systems, and have some fair amount of control over
+ how those islands of stability behave.
+ In particular, one can have islands with, or without a period-doubling
  
+\begin_inset Quotes eld
+\end_inset
+
+route to chaos
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Abstract
 Another interesting, surprising result is that the eigenvalues of the transfer
- operator of beta transform seem to lie on a circle of radius 
+ operator seem to lie on a circle of radius 
 \begin_inset Formula $1/\beta$
 \end_inset
 
  in the complex plane.
- This is found numerically, using a natural Haar-wavelet-like basis that
- presents itself naturally for the problem.
  Given that the transfer operator is purely real, the appearance of such
  a quasi-unitary spectrum seems surprising.
- The relationships to orthogonal polynomials, Hessenberg matrices and Jacobi
- matrices is explored.
- In particular, the Golden ratio, and generalizations thereof, make a striking
- appearance.
+ The spectrum appears to be the limit of a dense set of quasi-cyclotomic
+ polynomials, the positive real roots of which include the Golden and silver
+ ratios, the Pisot numbers, the n-bonnaci (tribonacci, tetranacci, etc.)
+ numbers.
+ 
 \end_layout
 
 \begin_layout Section
@@ -239,12 +251,12 @@ This text attempts to report some brand-new results on the
 \end_inset
 
 -transform.
- This is perhaps surprising, as the 
+ This is perhaps surprising, as one might think that the 
 \begin_inset Formula $\beta$
 \end_inset
 
--transform can be considered to be fairly well-studied, and fairly well-understo
-od, it being among the very simplest of iterated one-dimensional maps.
+-transform is sufficiently simple so as to be well-studied and well-understood,
+ it being among the very simplest of iterated one-dimensional maps.
  This text also attempts to report these results in a naive and unsophisticated
  fashion, in the hope that this makes the text readable for the interested
  student and casual enthusiast.
@@ -280,16 +292,48 @@ new results
 \begin_inset Quotes erd
 \end_inset
 
-, and not along the usual well-worn paths.
+, off the beaten track.
 \end_layout
 
 \begin_layout Standard
 This text begins with some pretty pictures, showing the iterated tent and
- logistic maps, so as to whet the readers appetite for the considerably
- more dry material that follows.
- The goal, as always to to simplify and abstract.
- This is a difficult task.
- 
+ logistic maps, so as to remind the reader as to why this is an interesting
+ problem to study.
+ The fact is that the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is far more dry and abstract than the rather sexy logistic
+ map, or its complex cousin, the Mandelbrot set.
+ The hope is that the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is also simpler, and therefore, perhaps, easier to understand.
+ The reader will soon discover that there is nothing particularly easy about
+ it, and that, at every turn, one bumps into other interesting areas of
+ mathematics that could, perhaps should shed some light, but don't actually
+ seem to do so, in practice.
+\end_layout
+
+\begin_layout Standard
+The most fun for the casual reader might be section 5, on the periodic orbits,
+ where the quasi-cyclotomic polynomials appear; these are polynomials of
+ the form 
+\begin_inset Formula $p_{n}\left(z\right)=z^{k+1}-b_{0}z^{k}-b_{1}z^{k-1}-\cdots-b_{k-1}z-1$
+\end_inset
+
+ for the 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ being binary bits (zero or one).
+ Also quite fun is the section on the islands of stability, which sheds
+ light on how one can take a purely ergodic (chaotic) system, and surgically
+ insert, as desired, islands of stability.
+ The point here is that the classic logistic map attracted interest precisely
+ because of its interleaving of chaos and stability; it turns out, one can
+ manufacture such systems, at will.
 \end_layout
 
 \begin_layout Standard
@@ -8415,19 +8459,36 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
  map.
  The trouble spots are the positive real roots of polynomials of the form
  
-\begin_inset Formula $\beta^{n}-\beta^{n-1}-b_{2}\beta^{n-2}-b_{3}\beta^{n-3}-\cdots-1=0$
+\begin_inset Formula $\beta^{p}-\beta^{p-1}-b_{1}\beta^{p-2}-b_{2}\beta^{p-3}-\cdots-1=0$
+\end_inset
+
+ with the 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ being certain binary bit sequences.
+ There is just one such (positive , real) root for each such polynomial.
+ These polynomials are irreducible, in the sense that a bit-sequence 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ is disallowed if it has the same root as some lower-order polynomial.
+ For example, 
+\begin_inset Formula $\beta^{4}-\beta^{3}-\beta-1$
+\end_inset
+
+ is disallowed; it has the same root as 
+\begin_inset Formula $\beta^{2}-\beta-1$
 \end_inset
 
 .
- There is just one such root for each such polynomial.
- These polynomials are irreducible, in the sense that the root would have
- been seen earlier, in a lower-order polynomial.
  Although the digits 
 \begin_inset Formula $b_{k}$
 \end_inset
 
- must be zero or one, this suggests some relationship to the irreducible
- polynomials over the field 
+ must be zero or one, this definition of irreducibility, plus the counting,
+ suggests some relationship to the irreducible polynomials over the field
+ 
 \begin_inset Formula $\text{\mathbb{F}}_{2}$
 \end_inset
 
@@ -8576,7 +8637,7 @@ trouble spots
 \end_inset
 
 , and of the form 
-\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{2}\beta^{k-2}-b_{3}\beta^{k-3}-\cdots-1$
+\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{1}\beta^{k-2}-b_{2}\beta^{k-3}-\cdots-1$
 \end_inset
 
  for some binary digits 
@@ -8585,7 +8646,7 @@ trouble spots
 
  being zero or one.
  These must be arranged in the manner such that 
-\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{2}\beta^{k-2}-b_{3}\beta^{k-3}-\cdots-1=0$
+\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{1}\beta^{k-2}-b_{2}\beta^{k-3}-\cdots-1=0$
 \end_inset
 
  at each discontinuity, as illustrated in figure 
@@ -8913,6 +8974,7 @@ There are other ways to start the table, and to index the polynomials.
 \end_inset
 
  always.
+ By convention, the last digit is always 1, also.
 \end_layout
 
 \begin_layout Standard
@@ -9921,24 +9983,6 @@ Is there a generating function? What is it?
 \end_layout
 
 \begin_layout Itemize
-What are the complex roots? They seem to be approximately cyclotomic in
- some sense or another...
- they seem to be more-or-less uniformly distributed in a circle, always.
- The modulus of most of the complex roots appear to be less than one.
- This is violated for the complex roots of 
-\begin_inset Formula $p_{2^{k}}\left(\beta\right)=\beta^{k+2}-\beta^{k+1}-1$
-\end_inset
-
-, where some of the roots in the right-hand quadrant have a modulus larger
- than one.
- By contrast, the complex roots of 
-\begin_inset Formula $p_{2^{k}-1}\left(\beta\right)=\beta^{k+1}-\sum_{j=0}^{k}\beta^{j}$
-\end_inset
-
- seem to always have a modulus less than one.
-\end_layout
-
-\begin_layout Itemize
 How long is the inital segment of each periodic orbit, before the orbit
  attains it's Lyndon word form? What are the values of 
 \begin_inset Formula $\beta$
@@ -10242,6 +10286,79 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Complex Roots
+\end_layout
+
+\begin_layout Standard
+What are the complex roots? Numerical work clearly indicates that they seem
+ to be approximately cyclotomic in some sense or another.
+ They seem to be more-or-less uniformly distributed in a circle, always.
+ The modulus of most of the complex roots appear to be less than one.
+ This is violated for the complex roots of 
+\begin_inset Formula $p_{2^{k}}\left(\beta\right)=\beta^{k+2}-\beta^{k+1}-1$
+\end_inset
+
+, where some of the roots in the right-hand quadrant have a modulus larger
+ than one.
+ By contrast, the complex roots of 
+\begin_inset Formula $p_{2^{k}-1}\left(\beta\right)=\beta^{k+1}-\sum_{j=0}^{k}\beta^{j}$
+\end_inset
+
+ seem to always have a modulus less than one.
+ These two seem to be the extreme cases: in general, the polynomials appear
+ to be 
+\begin_inset Quotes eld
+\end_inset
+
+approximately cyclotomic
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Its not clear how to make this statement more precise.
+\end_layout
+
+\begin_layout Standard
+These numerical results can be argued heuristically: just divide the polynomial
+ by it's leading order.
+ That is, a general polynomial of this form is
+\begin_inset Formula 
+\[
+p_{n}\left(z\right)=z^{k+1}-\sum_{j=0}^{k}b_{j}z^{k-j}
+\]
+
+\end_inset
+
+with the convention that 
+\begin_inset Formula $b_{0}=b_{k}=1$
+\end_inset
+
+, and the bit-sequence 
+\begin_inset Formula $n=b_{0}b_{1}b_{2}\cdots b_{p}$
+\end_inset
+
+ corresponding to a terminating orbit.
+ Dividing by 
+\begin_inset Formula $z^{k+1}$
+\end_inset
+
+gives a series 
+\begin_inset Formula 
+\[
+1-\frac{1}{z}-\frac{b_{1}}{z^{2}}-\frac{b_{2}}{z^{3}}-\cdots
+\]
+
+\end_inset
+
+Clearly, this can have a zero only when 
+\begin_inset Formula $\left|z\right|<2$
+\end_inset
+
+ as otherwise, the terms get too small too quickly.
+ 
 \end_layout
 
 \begin_layout Subsection
