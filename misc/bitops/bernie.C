@@ -341,11 +341,21 @@ static void bifurcation_diagram (float *array,
 	int left = (0.5 + 0.5* (beta-1)) * array_size;
 	left -= 54;
 	double phi;
+/*
 	phi = sqrt(2.0);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+*/
 
 	phi = sqrt(2.0/(1.0-alpha));
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+
+	phi = pow(2.0/(1.0-alpha), 0.33333);
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+
+	phi = pow(2.0/(1.0-alpha), 0.25);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
 
