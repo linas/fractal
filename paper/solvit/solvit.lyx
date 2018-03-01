@@ -96,7 +96,7 @@ December 2017 (Updated Feb 2018)
 \end_layout
 
 \begin_layout Address
-linasvepstas@gmail.com
+linasvepstas@gmail.com doi:10.13140/RG.2.2.17132.26248
 \end_layout
 
 \begin_layout Abstract
@@ -12193,7 +12193,19 @@ trouble spots
 
 \begin_layout Standard
 The idea here can be illustrated explicitly.
- Given some 
+ Basically, take the natural sawtooth shape of the map, widen the middle,
+ and insert a slanting downward line, to create a zig-zag.
+ That is, connect the two endpoints in the middle of the downshift, 
+\begin_inset Quotes eld
+\end_inset
+
+widening
+\begin_inset Quotes erd
+\end_inset
+
+ it so that it has a finite, not infinite slope, thereby converting the
+ iterated function from a discontinuous to a continuous one.
+ This can be constructed directly: given some 
 \begin_inset Quotes eld
 \end_inset
 
@@ -12221,24 +12233,73 @@ reference "eq:downshift"
 \begin{equation}
 T_{\beta,\varepsilon}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
-\frac{\beta}{4}-\beta\left(\frac{1}{4}-\varepsilon\right)\left(\frac{2x-1}{2\varepsilon}\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\frac{\beta}{4}-\beta\left(\frac{1}{4}-\varepsilon\right)w & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
 \end{cases}\label{eq:zig-zag map}
 \end{equation}
 
 \end_inset
 
-This simply connects the two endpoints in the middle of the downshift, 
-\begin_inset Quotes eld
+where 
+\begin_inset Formula $w$
 \end_inset
 
-widening
-\begin_inset Quotes erd
+ is just a handy notation for a downward sloping line:
+\begin_inset Formula 
+\[
+w=\frac{2x-1}{2\varepsilon}
+\]
+
 \end_inset
 
- it so that the has finite, not infinite slope, and converting the iterated
- function from a discontinuous to a continuous one.
- In the limit, one regains the earlier downshift: 
+Observe that 
+\begin_inset Formula $w=1$
+\end_inset
+
+ when 
+\begin_inset Formula $x=\frac{1}{2}-\varepsilon$
+\end_inset
+
+ and that 
+\begin_inset Formula $w=-1$
+\end_inset
+
+ when 
+\begin_inset Formula $x=\frac{1}{2}+\varepsilon$
+\end_inset
+
+ so that 
+\begin_inset Formula $w$
+\end_inset
+
+ just smoothly interpolates between +1 and -1 over the middle interval.
+ The additional factors of 
+\begin_inset Formula $\frac{\beta}{4}-\beta\left(\frac{1}{4}-\varepsilon\right)w$
+\end_inset
+
+ just serves to insert the downward slope smack into the middle, so that
+ the endpoints join up.
+ The results is the zig-zag map, illustrated in the figure below
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename zigzag.eps
+	lyxscale 70
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the limit of 
+\begin_inset Formula $\epsilon\to0$
+\end_inset
+
+, one regains the earlier downshift: 
 \begin_inset Formula $\lim_{\varepsilon\to0}T_{\beta,\varepsilon}=T_{\beta}$
 \end_inset
 
@@ -12524,13 +12585,50 @@ any
 \begin{equation}
 D_{\beta,\varepsilon}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
-\frac{\beta}{4}-\beta\left(\frac{1}{4}-\varepsilon\right)\left(1-2\cos\frac{\pi}{4}\left(1+\left(\frac{2x-1}{2\varepsilon}\right)\right)\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\frac{\beta}{4}-\beta\left(\frac{1}{4}-\varepsilon\right)g\left(w\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
 \end{cases}\label{eq:soft map}
 \end{equation}
 
 \end_inset
 
+where the straight line has been replaced by a soft shoulder 
+\begin_inset Formula 
+\[
+g(w)=1-2\cos\frac{\pi}{4}\left(1+w\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $w$
+\end_inset
+
+ is the same as before.
+ This is scaled so that its a drop-in replacement for the straight line:
+ 
+\begin_inset Formula $g\left(\frac{1}{2}-\varepsilon\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $g\left(\frac{1}{2}+\varepsilon\right)=-1$
+\end_inset
+
+.
+ A cosine was used to create this soft shoulder, but a parabola would have
+ done just as well.
+ It is illustrated above, with the label 
+\begin_inset Quotes eld
+\end_inset
+
+soft map
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 This map also interpolates between the left and right arms of the beta transform
 , forming a single continues curve.
  The curve is smooth and rounded near 
@@ -12831,7 +12929,7 @@ Two more variant maps can be considered.
 \begin{equation}
 S_{\beta,\varepsilon,\sigma}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
-\frac{\beta}{4}-\sigma\beta\left(\frac{1}{4}-\varepsilon\right)\sin\frac{\pi}{2}\left(\frac{2x-1}{2\varepsilon}\right) & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\frac{\beta}{4}-\sigma\beta\left(\frac{1}{4}-\varepsilon\right)\sin\frac{\pi}{2}w & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
 \end{cases}\label{eq:sine map}
 \end{equation}
@@ -12843,7 +12941,7 @@ and
 \begin{equation}
 H_{\beta,\varepsilon,p,\sigma}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
-\frac{\beta}{4}-\sigma\beta\left(\frac{1}{4}-\varepsilon\right)\mbox{sgn}\left(x\right)\left|\frac{2x-1}{2\varepsilon}\right|^{p} & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\frac{\beta}{4}-\sigma\beta\left(\frac{1}{4}-\varepsilon\right)\mbox{sgn}\left(x-\frac{1}{2}\right)\left|w\right|^{p} & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
 \end{cases}\label{eq:hard map}
 \end{equation}
@@ -13312,8 +13410,9 @@ viz
 \end_inset
 
 .
- Why are the spikes located at inverse powers of two, instead or, for example,
- the golden means? This is an interesting question worth blathering about.
+ Why are the islands located at inverse powers of two, instead or, for example,
+ the golden means? The short answer: it depends on the location of the kink
+ in the map, as explored in the main text.
  
 \begin_inset Note Note
 status collapsed
@@ -13865,6 +13964,28 @@ height "1pt"
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To intuitively understand the location of the islands (the location of the
+ Arnold tongues), its easiest to examine a map with a kink in it, whose
+ location is adjustable.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{\beta,\varepsilon,\alpha,\sigma}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}-\varepsilon\\
+\frac{\beta}{4}-\sigma\beta\left(\frac{1}{4}-\varepsilon\right)h_{\alpha} & \mbox{ for }\frac{1}{2}-\varepsilon\le x<\frac{1}{2}+\varepsilon\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}+\varepsilon\le x\le1
+\end{cases}
+\]
 
 \end_inset
 
