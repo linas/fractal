@@ -144,6 +144,48 @@ double ess_island(double x, double K, double epsilon)
 	return 0.25*beta - beta*(0.25-epsilon) * kos;
 }
 
+// Like above, but the location of the kink adjustable
+double kink_island(double x, double K, double epsilon, double alpha)
+{
+	double beta = 2.0 * K;
+	if (0.5+epsilon <= x)
+	{
+		return beta * (x - 0.5);
+	}
+	if (x < 0.5-epsilon)
+	{
+		return beta*x;
+	}
+
+	// om runs from  -1 to 1;
+	double om = (x - 0.5) / epsilon;
+
+	// kos runs from -1 to 1
+	// double kos = pow(om, 3);
+
+	// With this sign convention, the map is continuous, and
+	// has an S-curve shape.
+	// double kos = om;
+	// double kos = sign(om) * om*om;
+	double kos = om*om*om;
+	// double kos = sign(om) * om*om*om*om;
+	// double kos = om*om*om*om*om;
+
+	// With this sign convention, the middle segment is increasing,
+	// and the map consists of three disjoint segments.
+	// double kos = -om;
+	// double kos = -sign(om) * om*om;
+	// double kos = -om*om*om;
+	// double kos = -sign(om) * om*om*om*om;
+	// double kos = -om*om*om*om*om;
+
+	kos = fabs(kos);
+	if (x<0.5) kos = alpha + (1.0-alpha)*kos;
+	else kos = alpha - (1.0+alpha)*kos;
+
+	return 0.25*beta - beta*(0.25-epsilon) * kos;
+}
+
 double nocarry(double x, double K)
 {
 	// Notes:
@@ -241,7 +283,8 @@ static void bifurcation_diagram (float *array,
 
 	double Korg = 0.5 + 0.5*K;
 	// double eps = 0.5* (1.0-K);
-	double eps = omega;
+	double eps = 0.04;
+	double alpha = omega;
 	for (int j=0; j<itermax; j++)
 	{
 		double t = rand();
@@ -269,7 +312,8 @@ static void bifurcation_diagram (float *array,
 			// x = island(x, K, eps);
 			// x = lost_island(x, K, eps);
 			// x = hard_island(x, K, eps);
-			x = ess_island(x, K, eps);
+			// x = ess_island(x, K, eps);
+			x = kink_island(x, K, eps, alpha);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
@@ -292,13 +336,27 @@ static void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++)
 		array[j] *= norm;
 
+	double beta = 2.0 * Korg;
+	double pix = 0.45 / array_size;
+	int left = (0.5 + 0.5* (beta-1)) * array_size;
+	left -= 54;
+	double phi;
+	phi = sqrt(2.0);
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+
+	phi = sqrt(2.0/(1.0-alpha));
+	if (fabs(beta-phi)<pix)
+		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
+
+
 #ifdef GOLDEN_ISLAND
 	double beta = 2.0 * Korg;
 	double pix = 0.45 / array_size;
 	int left = (0.5 + 0.5* (beta-1)) * array_size;
 	// left -= 234; // For golden at epsilon=0.15
 	// left -= 145; // For golden at epsilon=0.10
-	// left -= 54; // For golden at epsilon=0.0.4
+	// left -= 54; // For golden at epsilon=0.04
 	left -= 54;
 
 	double corner = (1 + 2.0*eps) / (1 - 2.0*eps);
