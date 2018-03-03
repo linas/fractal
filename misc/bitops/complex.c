@@ -2,6 +2,14 @@
  * complex.c
  *
  * Recursve complex-valued eigenfunctions for the undershift 
+ * See reigen.c for the real-number valued version of this.
+ *
+ * Upshot: this completely fails to converge onto a decaying
+ * eigenfunction; it instead just converges onto multiples of
+ * the invariant measure.  I don't have a clear mental model
+ * as to why it fails.... why it doesn't amplify the decaying
+ * modes, instead of supressing them.
+ *
  * Jan 2018
  */
 
@@ -28,8 +36,12 @@ double complex reig(double x, double K, double complex olambda, int niter)
 		double re = 1.0;
 		if (0.5*K < x) re = -1.0;
 		double im = 1.0;
+      // if (0.35*K < x && x < 0.85*K) im = -1.0;
       if (0.25*K < x && x < 0.75*K) im = -1.0;
+      // if (0.15*K < x && x < 0.65*K) im = -1.0;
+      // if (0.05*K < x && x < 0.55*K) im = -1.0;
 
+		// return re + I*re;
 		return re + I*im;
 	}
 	if (K < x) return 0.0;
@@ -47,7 +59,7 @@ int main (int argc, char* argv[])
 {
 	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s K t\n", argv[0]);
+		fprintf(stderr, "Usage: %s K theta\n", argv[0]);
 		exit (1);
 	}
 	double K = atof(argv[1]);
@@ -62,7 +74,9 @@ int main (int argc, char* argv[])
 		hits[i] = 0.0;
 
 #define NRECU 19
+// #define NRECU 22
 // #define NRECU 25
+	printf("#\n# recurse to %d\n#\n", NRECU);
 
 	// Compute an eigenfunction, recursively.
 	for (int i=0; i<NPTS; i++)

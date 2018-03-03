@@ -2,6 +2,12 @@
  * reigen.c
  *
  * Recursve eigenfunctions for the undershift
+ * See complex.c for the complex-number version of this.
+ *
+ * This finds the invariant measure just fine, simply and easily.
+ * It completely fails to find any decaying eigenstates; somehow
+ * the recursive algo damps or supresses these in some way.
+ *
  * Dec 2017
  */
 
