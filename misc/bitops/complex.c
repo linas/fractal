@@ -32,6 +32,7 @@ double complex reig(double x, double K, double complex olambda, int niter)
 
 		if (K < x) return 0.0;
 
+#if 1
 		// Approximate by something that integrates to zero.
 		double re = 1.0;
 		if (0.5*K < x) re = -1.0;
@@ -40,8 +41,20 @@ double complex reig(double x, double K, double complex olambda, int niter)
       if (0.25*K < x && x < 0.75*K) im = -1.0;
       // if (0.15*K < x && x < 0.65*K) im = -1.0;
       // if (0.05*K < x && x < 0.55*K) im = -1.0;
-
 		// return re + I*re;
+#endif
+#ifdef FAIL
+		double r = rand();
+		r /= RAND_MAX;
+		r -= 0.5;
+		double re = r;
+
+		r = rand();
+		r /= RAND_MAX;
+		r -= 0.5;
+		double im = r;
+#endif
+
 		return re + I*im;
 	}
 	if (K < x) return 0.0;
