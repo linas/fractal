@@ -22,6 +22,8 @@
 #define NPTS 803
 double hits[NPTS];
 
+double ph;
+
 // Compute eigenfunction, recursively.
 double complex reig(double x, double K, double complex olambda, int niter)
 {
@@ -32,7 +34,11 @@ double complex reig(double x, double K, double complex olambda, int niter)
 
 		if (K < x) return 0.0;
 
-#if 1
+		// double complex z = cexp (I*2.0*M_PI*x / K);
+		double re = cos(2.0*M_PI*x / K);
+		double im = cos(2.0*M_PI*(x+ph) / K);
+
+#if 0
 		// Approximate by something that integrates to zero.
 		double re = 1.0;
 		if (0.5*K < x) re = -1.0;
@@ -79,6 +85,8 @@ int main (int argc, char* argv[])
 	double theta = atof(argv[2]);
 	double complex lambda = cexp (I*2.0*M_PI*theta) / (2.0*K);
 	double complex olambda = 1.0 / lambda;
+
+	ph = theta;
 
 	printf("#\n# K = %g theta = %g lambda = %g + I %g \n#\n",
 	       K, theta, creal(lambda), cimag(lambda));
