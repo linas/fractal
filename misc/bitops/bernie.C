@@ -26,7 +26,7 @@ static double xprod(double x, double y, int itermax, double param)
 DECL_MAKE_HEIGHT (xprod);
 #endif
 
-double bern(double x, double K)
+double downshift(double x, double K)
 {
 	K *= 2.0;
 	if (0.5 <= x)
@@ -302,7 +302,7 @@ static void bifurcation_diagram (float *array,
 		/* OK, now start iterating the benoulli map */
 		for (int iter=0; iter < 1250; iter++)
 		{
-			// x = bern(x, K);
+			// x = downshift(x, K);
 			// x = nocarry(x, K);
 			// x = tent(x, K);
 			// x = notent(x, K);
