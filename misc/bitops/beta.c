@@ -24,6 +24,8 @@ double beta_xform(double x, double beta)
 	return prod - floor(prod);
 }
 
+#define NBITS 850
+
 double skippy(double beta)
 {
 	double K = 0.5*beta;
@@ -31,22 +33,42 @@ double skippy(double beta)
 	double par = 1.0;
 	par = beta_xform(par, beta);
 	double bpoly = 0.0;
-	double kpoly = 0.0;
 	double bn = 1.0;
-	double kn = 1.0;
-	for (int i=0; i<50; i++)
+	for (int i=0; i<NBITS; i++)
 	{
 		double skip = 2.0*mid-par;
 
 		bpoly += bn * skip;
-		kpoly += kn * skip;
 
 		bn /= beta;
+
+		mid = downshift(mid, K);
+		par = beta_xform(par, beta);
+	}
+
+	return beta - bpoly;
+}
+
+double skipry(double beta)
+{
+	double K = 0.5*beta;
+	double mid = K;
+	double par = 1.0;
+	par = beta_xform(par, beta);
+	double kpoly = 0.0;
+	double kn = 1.0;
+	for (int i=0; i<NBITS; i++)
+	{
+		double skip = 2.0*mid-par;
+
+		kpoly += kn * skip;
+
 		kn *= K;
 
 		mid = downshift(mid, K);
 		par = beta_xform(par, beta);
 	}
+	return kpoly;
 }
 
 int main (int argc, char* argv[])
@@ -66,4 +88,12 @@ int main (int argc, char* argv[])
 		par = beta_xform(par, beta);
 	}
 #endif
+
+#define NPTS 1601
+	for (int i=0; i<NPTS; i++)
+	{
+		double x = ((double) i + 0.5) / ((double) NPTS);
+		double beta = 1.0+x;
+		printf("%d	%g	%g	%g\n", i, beta, skippy(beta), skipry(beta));
+	}
 }

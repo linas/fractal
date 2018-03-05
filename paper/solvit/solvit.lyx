@@ -1421,7 +1421,7 @@ The tent map is a closely related iterated map, given by iteration of the
  function
 \begin_inset Formula 
 \[
-t_{\beta}(x)=\begin{cases}
+v_{\beta}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x<\frac{1}{2}\\
 \beta\left(1-x\right) & \mbox{ for }\frac{1}{2}\le x\le1
 \end{cases}
@@ -8143,7 +8143,7 @@ reference "eq:downshift"
  to a less-than-or-equals:
 \begin_inset Formula 
 \[
-T_{\beta}(x)=\begin{cases}
+T_{\beta}^{\le}(x)=\begin{cases}
 \beta x & \mbox{ for }0\le x\le\frac{1}{2}\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}<x\le1
 \end{cases}
@@ -8165,7 +8165,7 @@ In this map, the point
  from the domain:
 \begin_inset Formula 
 \[
-T_{\beta}(x)=\begin{cases}
+T_{\beta}^{<}(x)=\begin{cases}
 \beta x & \mbox{ for }0<x<\frac{1}{2}\\
 \beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}<x<1
 \end{cases}
@@ -12482,6 +12482,80 @@ This last is explored in psimult.c and psimult.gplot Its not promising.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Midpoints, revisited
+\end_layout
+
+\begin_layout Standard
+The midpoints are defined above as 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+, so that 
+\begin_inset Formula $m_{p}=T_{\beta}\left(m_{p-1}\right)=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $T_{\beta}\left(y\right)$
+\end_inset
+
+ the beta shift map of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+.
+ Almost all literature uses the beta transform 
+\begin_inset Formula $t_{\beta}\left(x\right)$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta transform"
+
+\end_inset
+
+ instead.
+ The midpoint sequence and the iterate 
+\begin_inset Formula $t_{\beta}^{p}\left(1\right)$
+\end_inset
+
+ are closely related:
+\begin_inset Formula 
+\[
+2m_{p}\mod1=t_{\beta}^{p+1}\left(1\right)
+\]
+
+\end_inset
+
+Although related, they are not the same.
+ The difference is a sequence of bits:
+\begin_inset Formula 
+\[
+c_{p}=2m_{p}-t_{\beta}^{p+1}\left(1\right)
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $c_{p}\in\left\{ 0,1\right\} $
+\end_inset
+
+ always.
+ Note that
+\begin_inset Formula 
+\[
+\beta=\sum_{p=0}^{\infty}\frac{c_{p}}{\beta^{p}}
+\]
+
+\end_inset
+
+which is not entirely obvious!
 \end_layout
 
 \begin_layout Section
