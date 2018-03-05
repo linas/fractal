@@ -12338,226 +12338,6 @@ Algorithmically, the above is straight-forward to obtain: given a fixed
  that connects to some, any orthonormal basis on the unit interval.
 \end_layout
 
-\begin_layout Subsection
-Rauzy Fractals
-\end_layout
-
-\begin_layout Standard
-Given a polynomial, one has an associated finite matrix, in Hessenberg form,
- that, iterated upon, generates a sequence.
- The projection of that sequence to a non-expanding orthogonal plane is
- a Rauzy fractal.
- What are the corresponding Rauzy fractals for this situation?
-\end_layout
-
-\begin_layout Subsection
-Multiplicative Shifts
-\end_layout
-
-\begin_layout Standard
-A multiplicative shift is a shift assembled as an product of functions.
- The most famous of these is the generating function for integer partitions
-\begin_inset Formula 
-\[
-P\left(z\right)=\prod_{n=1}^{\infty}\frac{1}{\left(1-z^{n}\right)}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Similarly products occur for the necklace counting functions.
-\end_layout
-
-\begin_layout Standard
-A more obscure one expresses the Minkowski measure
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vep-mink2008"
-
-\end_inset
-
-, given as
-\begin_inset Formula 
-\[
-?^{\prime}\left(x\right)=\prod_{n=0}^{\infty}\frac{A^{\prime}\circ A^{n}\left(x\right)}{2}
-\]
-
-\end_inset
-
-with 
-\begin_inset Formula 
-\[
-A\left(x\right)=\begin{cases}
-\frac{x}{1-x} & \mbox{ for }0\le x<\frac{1}{2}\\
-\frac{2x-1}{x} & \mbox{ for }\frac{1}{2}\le x\le1
-\end{cases}
-\]
-
-\end_inset
-
-with 
-\begin_inset Formula $A^{\prime}$
-\end_inset
-
- being the derivative of 
-\begin_inset Formula $A$
-\end_inset
-
- and 
-\begin_inset Formula $A^{n}$
-\end_inset
-
- being the 
-\begin_inset Formula $n$
-\end_inset
-
-'th iterate.
- The Minkowski measure integrates to the Minkowski Question Mark function
- 
-\begin_inset Formula $?\left(y\right)=\int_{0}^{y}?^{\prime}\left(x\right)dx$
-\end_inset
-
-; it is the prototypical 
-\begin_inset Quotes eld
-\end_inset
-
-multi-fractal measure
-\begin_inset Quotes erd
-\end_inset
-
- (although there really is nothing 
-\begin_inset Quotes eld
-\end_inset
-
-multi-
-\begin_inset Quotes erd
-\end_inset
-
- about it; the 
-\begin_inset Quotes eld
-\end_inset
-
-multi-
-\begin_inset Quotes erd
-\end_inset
-
- prefix stems from a misunderstanding of its multiplicative invariance).
- The product structure indicates that the Minkowski measure is a Gibbs measure,
- viz arising from an invariant Hamiltonian on a one-dimensional lattice.
-\end_layout
-
-\begin_layout Standard
-The figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Location-of-Midpoints"
-
-\end_inset
-
- suggests that a similar product can be constructed from the midpoint sequence,
- namely 
-\begin_inset Formula 
-\[
-\prod_{p=0}^{\infty}\frac{4m_{p}\left(\beta\right)}{\beta}
-\]
-
-\end_inset
-
-for the midpoints 
-\begin_inset Formula $m_{p}\left(\beta\right)=T_{\beta}^{p}\left(m_{0}\right)$
-\end_inset
-
-.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-This last is explored in psimult.c and psimult.gplot Its not promising.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Midpoints, revisited
-\end_layout
-
-\begin_layout Standard
-The midpoints are defined above as 
-\begin_inset Formula $m_{0}=\beta/2$
-\end_inset
-
-, so that 
-\begin_inset Formula $m_{p}=T_{\beta}\left(m_{p-1}\right)=T_{\beta}^{p}\left(m_{0}\right)$
-\end_inset
-
- with 
-\begin_inset Formula $T_{\beta}\left(y\right)$
-\end_inset
-
- the beta shift map of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:downshift"
-
-\end_inset
-
-.
- Almost all literature uses the beta transform 
-\begin_inset Formula $t_{\beta}\left(x\right)$
-\end_inset
-
- of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:beta transform"
-
-\end_inset
-
- instead.
- The midpoint sequence and the iterate 
-\begin_inset Formula $t_{\beta}^{p}\left(1\right)$
-\end_inset
-
- are closely related:
-\begin_inset Formula 
-\[
-2m_{p}\mod1=t_{\beta}^{p+1}\left(1\right)
-\]
-
-\end_inset
-
-Although related, they are not the same.
- The difference is a sequence of bits:
-\begin_inset Formula 
-\[
-c_{p}=2m_{p}-t_{\beta}^{p+1}\left(1\right)
-\]
-
-\end_inset
-
-Note that 
-\begin_inset Formula $c_{p}\in\left\{ 0,1\right\} $
-\end_inset
-
- always.
- Note that
-\begin_inset Formula 
-\[
-\beta=\sum_{p=0}^{\infty}\frac{c_{p}}{\beta^{p}}
-\]
-
-\end_inset
-
-which is not entirely obvious!
-\end_layout
-
 \begin_layout Section
 Islands of Stability as Arnold Tongues
 \begin_inset CommandInset label
@@ -14586,6 +14366,263 @@ Essentially, the claim is straight-forward: topologically, all chaotic parts
  map.
  It almost sounds trivial, expressed this way; but the mathematical, notational
  articulation of the idea would be worthwhile.
+\end_layout
+
+\begin_layout Section
+Miscellaneous unfinished ideas
+\end_layout
+
+\begin_layout Standard
+An ad-hoc collection of half-finished thoughts.
+\end_layout
+
+\begin_layout Subsection
+Multiplicative Shifts
+\end_layout
+
+\begin_layout Standard
+A multiplicative shift is a shift assembled as an product of functions.
+ The most famous of these is the generating function for integer partitions
+\begin_inset Formula 
+\[
+P\left(z\right)=\prod_{n=1}^{\infty}\frac{1}{\left(1-z^{n}\right)}
+\]
+
+\end_inset
+
+Similarly products occur for the necklace counting functions, most famously
+ the cyclotomic identity
+\begin_inset Formula 
+\[
+\frac{1}{1-\beta z}=\prod_{j=1}^{\infty}\left(\frac{1}{1-z^{j}}\right)^{M(\beta,j)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $M\left(\beta,j\right)$
+\end_inset
+
+ the necklace polynomial.
+\end_layout
+
+\begin_layout Standard
+A far more obscure product expresses the Minkowski measure
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+, given as
+\begin_inset Formula 
+\[
+?^{\prime}\left(x\right)=\prod_{n=0}^{\infty}\frac{A^{\prime}\circ A^{n}\left(x\right)}{2}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+A\left(x\right)=\begin{cases}
+\frac{x}{1-x} & \mbox{ for }0\le x<\frac{1}{2}\\
+\frac{2x-1}{x} & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $A^{\prime}$
+\end_inset
+
+ being the derivative of 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $A^{n}$
+\end_inset
+
+ being the 
+\begin_inset Formula $n$
+\end_inset
+
+'th iterate.
+ The Minkowski measure integrates to the Minkowski Question Mark function
+ 
+\begin_inset Formula $?\left(y\right)=\int_{0}^{y}?^{\prime}\left(x\right)dx$
+\end_inset
+
+; it is the prototypical 
+\begin_inset Quotes eld
+\end_inset
+
+multi-fractal measure
+\begin_inset Quotes erd
+\end_inset
+
+ (although there really is nothing 
+\begin_inset Quotes eld
+\end_inset
+
+multi-
+\begin_inset Quotes erd
+\end_inset
+
+ about it; the 
+\begin_inset Quotes eld
+\end_inset
+
+multi-
+\begin_inset Quotes erd
+\end_inset
+
+ prefix stems from a misunderstanding of its multiplicative invariance).
+ The product structure indicates that the Minkowski measure is a Gibbs measure,
+ viz arising from an invariant Hamiltonian on a one-dimensional lattice.
+\end_layout
+
+\begin_layout Standard
+The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Location-of-Midpoints"
+
+\end_inset
+
+ suggests that a similar product can be constructed from the midpoint sequence,
+ namely 
+\begin_inset Formula 
+\[
+\prod_{p=0}^{\infty}\frac{4m_{p}\left(\beta\right)}{\beta}
+\]
+
+\end_inset
+
+for the midpoints 
+\begin_inset Formula $m_{p}\left(\beta\right)=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+This last is explored in psimult.c and psimult.gplot Its not promising.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Midpoints, revisited
+\end_layout
+
+\begin_layout Standard
+The midpoints are defined above as 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+, so that 
+\begin_inset Formula $m_{p}=T_{\beta}\left(m_{p-1}\right)=T_{\beta}^{p}\left(m_{0}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $T_{\beta}\left(y\right)$
+\end_inset
+
+ the beta shift map of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+.
+ Almost all literature uses the beta transform 
+\begin_inset Formula $t_{\beta}\left(x\right)$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta transform"
+
+\end_inset
+
+ instead.
+ The midpoint sequence and the iterate 
+\begin_inset Formula $t_{\beta}^{p}\left(1\right)$
+\end_inset
+
+ are closely related:
+\begin_inset Formula 
+\[
+2m_{p}\mod1=t_{\beta}^{p+1}\left(1\right)
+\]
+
+\end_inset
+
+Although related, they are not the same.
+ The difference is a sequence of bits:
+\begin_inset Formula 
+\[
+c_{p}=2m_{p}-t_{\beta}^{p+1}\left(1\right)
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $c_{p}\in\left\{ 0,1\right\} $
+\end_inset
+
+ always.
+ Note that
+\begin_inset Formula 
+\[
+\beta=\sum_{p=0}^{\infty}\frac{c_{p}}{\beta^{p}}
+\]
+
+\end_inset
+
+which is not entirely obvious!
+\end_layout
+
+\begin_layout Subsection
+Witt vectors
+\end_layout
+
+\begin_layout Standard
+Rather than iterating upon 
+\begin_inset Formula $\beta x\mod1$
+\end_inset
+
+ consider instead the sequence
+\begin_inset Formula 
+\[
+y_{n}=y\mod\frac{1}{\beta^{n}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Rauzy Fractals
+\end_layout
+
+\begin_layout Standard
+Given a polynomial, one has an associated finite matrix, in Hessenberg form,
+ that, iterated upon, generates a sequence.
+ The projection of that sequence to a non-expanding orthogonal plane is
+ a Rauzy fractal.
+ What are the corresponding Rauzy fractals for this situation?
 \end_layout
 
 \begin_layout Section
