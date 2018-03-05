@@ -24,16 +24,46 @@ double beta_xform(double x, double beta)
 	return prod - floor(prod);
 }
 
+double skippy(double beta)
+{
+	double K = 0.5*beta;
+	double mid = K;
+	double par = 1.0;
+	par = beta_xform(par, beta);
+	double bpoly = 0.0;
+	double kpoly = 0.0;
+	double bn = 1.0;
+	double kn = 1.0;
+	for (int i=0; i<50; i++)
+	{
+		double skip = 2.0*mid-par;
+
+		bpoly += bn * skip;
+		kpoly += kn * skip;
+
+		bn /= beta;
+		kn *= K;
+
+		mid = downshift(mid, K);
+		par = beta_xform(par, beta);
+	}
+}
+
 int main (int argc, char* argv[])
 {
+#ifdef VERIFY_MIDPOINTS
 	double K = atof(argv[1]);
+	double beta = 2.0*K;
 
-	double mid = 0.5;
+	double mid = K;
 	double par = 1.0;
-	for (int i=0; i< 20; i++)
+	par = beta_xform(par, beta);
+	for (int i=0; i< 30; i++)
 	{
-		printf("%d mid=%g parry=%g diff = %g\n", i, mid, 0.5*par, mid-0.5*par);
+		double mone = 2.0*mid - floor(2.0*mid);
+		printf("%d mid=%g parry=%g diff = %g\n", i, mone, par, 2*mid-par);
 		mid = downshift(mid, K);
-		par = beta_xform(par, 2.0*K);
+		par = beta_xform(par, beta);
 	}
+#endif
 }
