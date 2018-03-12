@@ -12338,6 +12338,261 @@ Algorithmically, the above is straight-forward to obtain: given a fixed
  that connects to some, any orthonormal basis on the unit interval.
 \end_layout
 
+\begin_layout Subsection
+Factorization
+\end_layout
+
+\begin_layout Standard
+The polynomials factorize.
+ Let 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ denote the real positive root of 
+\begin_inset Formula $p_{n}\left(\beta\right)$
+\end_inset
+
+ – that is, 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+.
+ Then one has the factorizations (dropping the subscript on 
+\begin_inset Formula $r$
+\end_inset
+
+ for readability)
+\begin_inset Formula 
+\[
+p_{1}\left(\beta\right)=\beta^{2}-\beta-1=\left(\beta-r\right)\left(\beta+r-1\right)=\left(\beta-r\right)\left(\beta+p_{0}\left(r\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{0}\left(\beta\right)=\beta-1$
+\end_inset
+
+.
+ Likewise, there are two order-3 polynomials.
+ They factor as
+\begin_inset Formula 
+\[
+p_{2}\left(\beta\right)=\beta^{3}-\beta-1=\left(\beta-r\right)\left(\beta^{2}+\beta p_{0}\left(r\right)+rp_{0}\left(r\right)\right)
+\]
+
+\end_inset
+
+while
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{3}\left(\beta\right)=\beta^{3}-\beta^{2}-\beta-1=\left(\beta-r\right)\left(\beta^{2}+\beta p_{0}\left(r\right)+p_{1}\left(r\right)\right)
+\]
+
+\end_inset
+
+Continuing in this way, there are three order-4 polynomials.
+ They factor as
+\begin_inset Formula 
+\[
+p_{7}\left(\beta\right)=\beta^{4}-\beta^{3}-\beta^{2}-\beta-1=\left(\beta-r\right)\left(\beta^{3}+\beta^{2}p_{0}\left(r\right)+\beta p_{1}\left(r\right)+p_{3}\left(r\right)\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+p_{6}\left(\beta\right)=\beta^{4}-\beta^{3}-\beta^{2}-1=\left(\beta-r\right)\left(\beta^{3}+\beta^{2}p_{0}\left(r\right)+\beta p_{1}\left(r\right)+rp_{1}\left(r\right)\right)
+\]
+
+\end_inset
+
+and (noting that there is no 
+\begin_inset Formula $p_{5}$
+\end_inset
+
+ that occurs in the series)
+\begin_inset Formula 
+\[
+p_{4}\left(\beta\right)=\beta^{4}-\beta^{3}-1=\left(\beta-r\right)\left(\beta^{3}+\beta^{2}p_{0}\left(r\right)+\beta rp_{0}\left(r\right)+r^{2}p_{0}\left(r\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There's clearly a progression, but perhaps a bit difficult to grasp.
+ It can be more clearly seen by writing 
+\begin_inset Formula $p_{n}=q_{2n+1}$
+\end_inset
+
+ and then writing out 
+\begin_inset Formula $2n+1$
+\end_inset
+
+ in binary.
+ So, once again, from the top:
+\begin_inset Formula 
+\[
+p_{1}\left(\beta\right)=q_{11}\left(\beta\right)=\left(\beta-r\right)\left(\beta+q_{1}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $q_{1}=q_{1}\left(r\right)$
+\end_inset
+
+ which adopts the shorthand that the 
+\begin_inset Formula $q$
+\end_inset
+
+ polynomials on the right-hand side always have 
+\begin_inset Formula $r$
+\end_inset
+
+ as an argument, which can be dropped for clarity.
+ Note also that 
+\begin_inset Formula $q_{0}\left(x\right)=x$
+\end_inset
+
+ was already previously observed, in an earluier section.
+ That is, using the dropped-
+\begin_inset Formula $r$
+\end_inset
+
+ convention, 
+\begin_inset Formula $q_{0}=r$
+\end_inset
+
+.
+ Next
+\begin_inset Formula 
+\[
+p_{2}\left(\beta\right)=q_{101}\left(\beta\right)=\left(\beta-r\right)\left(\beta^{2}+\beta q_{1}+q_{01}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $q_{01}\left(x\right)=xq_{1}\left(x\right)$
+\end_inset
+
+.
+ Next,
+\begin_inset Formula 
+\[
+p_{3}\left(\beta\right)=q_{111}\left(\beta\right)=\left(\beta-r\right)\left(\beta^{2}+\beta q_{1}+q_{11}\right)
+\]
+
+\end_inset
+
+is the second factorization of order 3.
+ For order 4, one has
+\begin_inset Formula 
+\[
+p_{4}\left(\beta\right)=q_{1001}\left(\beta\right)=\left(\beta-r\right)\left(\beta^{3}+\beta^{2}q_{1}+\beta q_{01}+q_{001}\right)
+\]
+
+\end_inset
+
+where, this time, 
+\begin_inset Formula $q_{001}\left(x\right)=xq_{01}\left(x\right)=x^{2}q_{1}\left(x\right)$
+\end_inset
+
+.
+ Continuing,
+\begin_inset Formula 
+\[
+p_{6}\left(\beta\right)=q_{1101}\left(\beta\right)=\left(\beta-r\right)\left(\beta^{3}+\beta^{2}q_{1}+\beta q_{11}+q_{011}\right)
+\]
+
+\end_inset
+
+where, as always, 
+\begin_inset Formula $q_{011}\left(x\right)=xq_{11}\left(x\right)$
+\end_inset
+
+.
+ Finally,
+\begin_inset Formula 
+\[
+p_{7}\left(\beta\right)=q_{1111}\left(\beta\right)=\left(\beta-r\right)\left(\beta^{3}+\beta^{2}q_{1}+\beta q_{11}+q_{111}\right)
+\]
+
+\end_inset
+
+It is worth doing one more, just to clinch that the reversal of the bit
+ sequence is indeed correct.
+ For this purpose, 
+\begin_inset Formula $p_{12}=q_{11001}$
+\end_inset
+
+ should serve well.
+ One has
+\begin_inset Formula 
+\begin{align*}
+p_{12}\left(\beta\right)=q_{11001}\left(\beta\right)= & \left(\beta-r\right)\left(\beta^{4}+\beta^{3}p_{0}\left(r\right)+\beta^{2}p_{1}\left(r\right)+\beta rp_{1}\left(r\right)+r^{2}p_{1}\left(r\right)\right)\\
+= & \left(\beta-r\right)\left(\beta^{4}+\beta^{3}q_{1}+\beta^{2}q_{11}+\beta q_{011}+q_{0011}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The general pattern should now be clear.
+ Given one of the admissible bit sequences 
+\begin_inset Formula $b_{0}b_{1}b_{2}\cdots b_{k-1}b_{k}$
+\end_inset
+
+ and recalling that 
+\begin_inset Formula $b_{k}=1$
+\end_inset
+
+ always, (and that 
+\begin_inset Formula $b_{0}=1$
+\end_inset
+
+ always) one has 
+\begin_inset Formula 
+\[
+p_{n}\left(z\right)=q_{b_{0}b_{1}b_{2}\cdots b_{k-1}b_{k}}\left(z\right)=z^{k+1}-b_{0}z^{k}-b_{1}z^{k-1}-\cdots-b_{k-1}z-1
+\]
+
+\end_inset
+
+which has the factorization, with bits reversed:
+\begin_inset Formula 
+\[
+q_{b_{0}b_{1}b_{2}\cdots b_{k-1}b_{k}}\left(z\right)=\left(z-r\right)\left(z^{k}+z^{k-1}q_{b_{0}}+z^{k-2}q_{b_{1}b_{0}}+z^{k-3}q_{b_{2}b_{1}b_{0}}+\cdots+q_{b_{k-1}b_{k-2}\cdots b_{1}b_{0}}\right)
+\]
+
+\end_inset
+
+where, as already noted, each 
+\begin_inset Formula $q$
+\end_inset
+
+ is a polynomial in the root 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Although, notationally, the root 
+\begin_inset Formula $r$
+\end_inset
+
+ was taken as the real root, the above factorization works for any root.
+\end_layout
+
 \begin_layout Section
 Islands of Stability as Arnold Tongues
 \begin_inset CommandInset label
