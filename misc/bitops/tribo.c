@@ -16,7 +16,9 @@ int main (int argc, char* argv[])
 
 	if (argc<3)
 	{
-		fprintf(stderr, "Usage: %s len vals...\n", argv[0]);
+		fprintf(stderr, "Usage: %s len bits...\n", argv[0]);
+		fprintf(stderr, "Example Narayana: %s 3 1 0 1\n", argv[0]);
+		fprintf(stderr, "Example Tribonacci: %s 3 1 1 1\n", argv[0]);
 		exit(1);
 	}
 
