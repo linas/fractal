@@ -100,7 +100,7 @@ Fooling around with basic college-level equations for gravitationally-coupled
  harmonic oscillators, both classical and quantum.
 \end_layout
 
-\begin_layout Section*
+\begin_layout Section
 Introduction
 \end_layout
 
@@ -109,14 +109,147 @@ Consider two harmonic oscillators; one periodically driven, the other free
  to move, and coupled only gravitationally to the driven oscillator.
 \end_layout
 
-\begin_layout Section*
-Problem
+\begin_layout Section
+Classical Oscillators
 \end_layout
 
 \begin_layout Standard
 Consider two harmonic oscillators; one periodically driven, the other free
  to move, and coupled only gravitationally to the driven oscillator.
- setup
+ Assume that they are both classical masses, attached to a spring, and are
+ both dampened.
+ Assume the first oscillator is being driven by some force.
+ Assume that these are constrained to vibrate only along thier common axis.
+ Assume that each has a mass, spring coupling and dampening independent
+ of the other.
+ The equations of motion are:
+\begin_inset Formula 
+\[
+m_{1}\ddot{x}_{1}+\gamma_{1}\dot{x}_{1}+k_{1}x_{1}=\frac{Gm_{1}m_{2}}{\left(D+x_{1}-x_{2}\right)^{2}}+F\left(\omega\right)
+\]
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+m_{2}\ddot{x}_{2}+\gamma_{2}\dot{x}_{2}+k_{2}x_{2}=\frac{Gm_{1}m_{2}}{\left(D+x_{1}-x_{2}\right)^{2}}
+\]
+
+\end_inset
+
+Here, 
+\begin_inset Formula $F\left(\omega\right)$
+\end_inset
+
+ is a periodic driving force; it will usually be assumed to be 
+\begin_inset Formula $F\left(\omega\right)=F_{0}\sin\omega t$
+\end_inset
+
+.
+ Note that there are three different frequencies at play: the driving frequency,
+ and the natural frequencies of the two oscillators.
+ The equations are written in this form, rather than in terms of thier natural
+ frequencies, since the absolute value of the mass will be of interest,
+ later.
+ The eventual goal is to examine the system for Planck masses, and in the
+ quantum, rather than classical regime.
+ This section, however, treats only the classical regime.
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $G$
+\end_inset
+
+ is the classical Newtonian gravitational coupling, and 
+\begin_inset Formula $D$
+\end_inset
+
+ is the distance between the two masses, assumed to be point masses.
+ The coordinates are such that positive 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ means that mass 1 is moving away from mass 2, while positive 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ means that mass 2 is moving towards mass 1.
+ There are two intersting regimes: one where 
+\begin_inset Formula $D$
+\end_inset
+
+ is much larger than either displacement 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+, and another where 
+\begin_inset Formula $D$
+\end_inset
+
+ is of the same order as 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+.
+ The former case is easy to linearize, and thus provides a baseline for
+ later assumptions.
+ 
+\end_layout
+
+\begin_layout Subsection
+Widely separated masses
+\end_layout
+
+\begin_layout Standard
+Consider first the case where the distance between the masses is large,
+ compared to thier motions, viz, 
+\begin_inset Formula $D\gg x_{1},x_{2}$
+\end_inset
+
+.
+ Then one may write
+\begin_inset Formula 
+\[
+\frac{Gm_{1}m_{2}}{\left(D+x_{1}-x_{2}\right)^{2}}=\frac{Gm_{1}m_{2}}{D^{2}}\left(1-2\frac{x_{1}-x_{2}}{D}+\mathcal{O}\left(\frac{\left|x_{1}-x_{2}\right|^{2}}{D^{2}}\right)\right)
+\]
+
+\end_inset
+
+It is now worth switching notation.
+ Let 
+\begin_inset Formula $\omega_{1}=\sqrt{k_{1}/m_{1}}$
+\end_inset
+
+ be the undamped angular frequency of the first mass, and 
+\begin_inset Formula $\zeta_{1}=\gamma_{1}/\sqrt{4m_{1}k_{1}}$
+\end_inset
+
+ be the damping ratio; likewise for the second mass.
+ Write 
+\begin_inset Formula $g=Gm_{1}m_{2}/D^{2}$
+\end_inset
+
+.
+ The linearized equations then become
+\begin_inset Formula 
+\[
+\ddot{x}_{1}+2\zeta_{1}\omega_{1}\dot{x}_{1}+\omega_{1}^{2}x_{1}=g\left(1-2\frac{x_{1}-x_{2}}{D}\right)+F\left(\omega\right)
+\]
+
+\end_inset
+
+and likewise for the second mass.
+ 
 \end_layout
 
 \end_body
