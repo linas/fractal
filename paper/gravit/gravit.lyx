@@ -203,7 +203,8 @@ Here,
 .
  The former case is easy to linearize, and thus provides a baseline for
  later assumptions.
- 
+ The non-linearities in the later case can, at first approximation, be tackled
+ perturbatively.
 \end_layout
 
 \begin_layout Subsection
@@ -243,13 +244,127 @@ It is now worth switching notation.
  The linearized equations then become
 \begin_inset Formula 
 \[
-\ddot{x}_{1}+2\zeta_{1}\omega_{1}\dot{x}_{1}+\omega_{1}^{2}x_{1}=g\left(1-2\frac{x_{1}-x_{2}}{D}\right)+F\left(\omega\right)
+\ddot{x}_{1}+2\zeta_{1}\omega_{1}\dot{x}_{1}+\omega_{1}^{2}x_{1}=\frac{g}{m_{1}}\left(1-2\frac{x_{1}-x_{2}}{D}\right)+\frac{F\left(\omega\right)}{m_{1}}
 \]
 
 \end_inset
 
 and likewise for the second mass.
- 
+ For the case where the two masses are stationary, and the driving force
+ is turned off, one has the linear equation
+\begin_inset Formula 
+\[
+\left[\begin{array}{cc}
+\omega_{1}^{2}+\frac{2g}{Dm_{1}} & \frac{-2g}{Dm_{1}}\\
+\frac{2g}{Dm_{2}} & \omega_{2}^{2}-\frac{2g}{Dm_{2}}
+\end{array}\right]\left[\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array}\right]=g\left[\begin{array}{c}
+\frac{1}{m_{1}}\\
+\frac{1}{m_{2}}
+\end{array}\right]
+\]
+
+\end_inset
+
+which can be solved.
+ Tediously, the determinant is 
+\begin_inset Formula 
+\begin{align*}
+\det= & \omega_{1}^{2}\omega_{2}^{2}+\frac{2g}{Dm_{1}m_{2}}\left(m_{2}\omega_{2}^{2}-m_{1}\omega_{1}^{2}\right)\\
+= & \frac{1}{m_{1}m_{2}}\left(k_{1}k_{2}+\frac{2g}{D}\left(k_{2}-k_{1}\right)\right)
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+x_{1}=\frac{g}{m_{1}m_{2}\det}\left(m_{2}\omega_{2}^{2}-\frac{2g}{D}\left(\frac{m_{1}+m_{2}}{m_{2}}\right)\right)\mbox{\qquad\ and }\qquad x_{2}=\frac{g}{m_{1}m_{2}\det}\left(m_{1}\omega_{1}^{2}+\frac{2g}{D}\left(\frac{m_{1}+m_{2}}{m_{1}}\right)\right)
+\]
+
+\end_inset
+
+which is an uninsightful mess.
+ Effectively, the two masses are pulled towards one-another, depending on
+ the gravitational constant 
+\begin_inset Formula $g$
+\end_inset
+
+ and the spring constants 
+\begin_inset Formula $k_{1}=m_{1}\omega_{1}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{2}$
+\end_inset
+
+.
+ Of course, this is silly: instead, one should redefine 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ such that they are both at zero, when at rest; and alter 
+\begin_inset Formula $D$
+\end_inset
+
+ appropriately.
+ Rather than scribbling out the detils in a tedious manner, and then introduce
+ additional notation, its simpler to just discard the constant term, and
+ write the equations of motion as
+\begin_inset Formula 
+\[
+\ddot{x}_{1}+2\zeta_{1}\omega_{1}\dot{x}_{1}+\omega_{1}^{2}x_{1}=\frac{-2g}{m_{1}D}\left(x_{1}-x_{2}\right)+\frac{F\left(\omega\right)}{m_{1}}
+\]
+
+\end_inset
+
+where its understood that this 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ differ by a constant from the previous; likewise, 
+\begin_inset Formula $D$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ need to be adjusted.
+ Here, the values are chosen so that one explicitly has 
+\begin_inset Formula $x_{1}=x_{2}=0$
+\end_inset
+
+ when the masses are at rest.
+\end_layout
+
+\begin_layout Subsection
+Normal modes
+\end_layout
+
+\begin_layout Standard
+The above corrected equations can be solved for the normal modes.
+ Do that.
+\end_layout
+
+\begin_layout Subsection
+Energy transfer
+\end_layout
+
+\begin_layout Standard
+The driving force supplies the first mass with energy; some of that energy
+ is transmitted to the second mass, where it is dissipated.
+ What is the steady-state rate of energy transfer and dissipation?
 \end_layout
 
 \end_body
