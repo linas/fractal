@@ -1,4 +1,7 @@
 #! /bin/bash
+#
+# This makes the exponential-generating-function movie
+# Width is 200
 
 i=0
 i=27

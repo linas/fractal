@@ -20,8 +20,9 @@
 
 /*
  * Ordinary generating function for the greatest prime factor.
+ * shifted ..
  */
-void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
+void cpx_gpf_ordinary_shift(cpx_t sum, cpx_t z, int shift, int prec)
 {
 	mpf_t zabs, gabs, epsi;
 	mpf_init (gabs);
@@ -52,7 +53,7 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 
 	for (int n=1; n < niter ; n++)
 	{
-		cpx_times_ui(term, zn, gpf(n));
+		cpx_times_ui(term, zn, gpf(n+shift));
 		cpx_add(sum, sum, term);
 		cpx_mul(zn, zn, z);
 
@@ -69,6 +70,11 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 		if (0 > mpf_cmp(gabs, epsi)) return;
 #endif
 	}
+}
+
+void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
+{
+	cpx_gpf_ordinary_shift(sum, z, 0, prec);
 }
 
 /*

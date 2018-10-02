@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # cat gpf-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-phase.png
+cat gpf-ogf-deriv-0.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x.png
 
 # ../../generate/takelog gpf-real log-real
 # ../../generate/renorm log-real rg 0.24 1
@@ -79,10 +80,10 @@
 # ../../generate/mask rg hyper rma
 # cat rma.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-scribed.png
 
-../../generate/renorm recip-flat-16-fixed rg 1.6
-cat hyper.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > hyper.png
-../../generate/mask rg hyper rma
-cat rma.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-fixed-scribed.png
+# ../../generate/renorm recip-flat-16-fixed rg 1.6
+# cat hyper.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > hyper.png
+# ../../generate/mask rg hyper rma
+# cat rma.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-fixed-scribed.png
 
 # cat recip.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip.png
 

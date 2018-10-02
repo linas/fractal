@@ -139,6 +139,14 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
+#define ODF_PHASE 1
+#if ODF_PHASE
+	cpx_gpf_ordinary_shift(sum, z, itermax, 15);
+
+	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
+	return rv;
+#endif
+
 // #define PHASE 1
 #if PHASE
 	// cpx_gpf_ordinary_recip(sum, z, 15);
@@ -194,7 +202,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#define RECIP 1
+// #define RECIP 1
 #ifdef RECIP
 
 	#ifdef PROJECT_TO_SPHERE
