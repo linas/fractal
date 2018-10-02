@@ -78,6 +78,52 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 }
 
 /*
+ * Ordinary generating function for the greatest prime factor.
+ * The shift'th derivative ..
+ */
+void cpx_gpf_ordinary_derivative(cpx_t sum, cpx_t z, int shift, int prec)
+{
+	mpf_t zabs, gabs, epsi;
+	mpf_init (gabs);
+	mpf_init (zabs);
+	mpf_init (epsi);
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+
+	cpx_set_ui(sum, 0, 0);
+
+	// falls apart if z is zero.
+	cpx_abs(gabs, z);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	// Not defined for |z| > 1
+	mpf_sub_ui(gabs, gabs, 1);
+	mpf_neg(gabs, gabs);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	double dist_to_circle = mpf_get_d(gabs);
+	int niter = ceil (2.302585*prec / dist_to_circle);
+	niter += ceil (log(niter) / dist_to_circle); // gpf bounded by n
+
+	cpx_t zn, term;
+	cpx_init(zn);
+	cpx_init(term);
+	cpx_set_ui(zn, 1, 0);
+
+	for (int n=0; n < niter ; n++)
+	{
+		unsigned int fn = gpf(n+shift);
+		for (int m=0; m<shift; m++)
+		{
+			fn *= (n+shift) - m;
+		}
+		cpx_times_ui(term, zn, fn);
+		cpx_add(sum, sum, term);
+		cpx_mul(zn, zn, z);
+	}
+}
+
+/*
  * Ordinary generating function for one over the greatest prime factor.
  */
 void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec)

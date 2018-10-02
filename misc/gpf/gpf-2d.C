@@ -141,7 +141,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 #define ODF_PHASE 1
 #if ODF_PHASE
-	cpx_gpf_ordinary_shift(sum, z, itermax, 15);
+	// cpx_gpf_ordinary_shift(sum, z, itermax, 12);
+	cpx_gpf_ordinary_derivative(sum, z, itermax, 12);
 
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
 	return rv;

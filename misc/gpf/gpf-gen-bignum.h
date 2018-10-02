@@ -16,6 +16,7 @@ extern "C" {
  */
 void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec);
 void cpx_gpf_ordinary_shift(cpx_t sum, cpx_t z, int offset, int prec);
+void cpx_gpf_ordinary_derivative(cpx_t sum, cpx_t z, int offset, int prec);
 void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec);
 // void cpx_gpf_ordinary_s(cpx_t sum, cpx_t z, cpx_t s, int prec);
 // void cpx_gpf_ordinary_s(cpx_t sum, cpx_t z, int s, int prec);

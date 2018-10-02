@@ -1,7 +1,10 @@
 #! /bin/bash
 
 # cat gpf-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-phase.png
-cat gpf-ogf-deriv-0.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x.png
+# cat gpf-ogf-shift-0.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x.png
+# cat gpf-ogf-shift-1.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x1.png
+# cat gpf-ogf-deriv-2.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x2.png
+cat gpf-ogf-deriv-1.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > y1.png
 
 # ../../generate/takelog gpf-real log-real
 # ../../generate/renorm log-real rg 0.24 1

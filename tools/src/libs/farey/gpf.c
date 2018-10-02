@@ -46,6 +46,8 @@ DECLARE_UL_CACHE(gpf_cache);
  */
 unsigned long gpf(unsigned long n)
 {
+	if (0 == n) return 0;
+
 	if (ul_one_d_cache_check(&gpf_cache, n))
 	{
 		return ul_one_d_cache_fetch(&gpf_cache, n);
