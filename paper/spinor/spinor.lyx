@@ -885,7 +885,144 @@ The last few sentences suggest a fairly concrete starting point for this
 \end_layout
 
 \begin_layout Section
-Sphere bundles
+Patching
+\end_layout
+
+\begin_layout Standard
+So, start implementing the above program.
+ XXX Draft.
+\end_layout
+
+\begin_layout Subsection
+Patching
+\end_layout
+
+\begin_layout Standard
+The patching idea.
+ Drill a pair of holes, removing all spacetime points, along 
+\begin_inset Formula $vt-x$
+\end_inset
+
+ and 
+\begin_inset Formula $vt+x$
+\end_inset
+
+, for non-negative 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Note for 
+\begin_inset Formula $v<1$
+\end_inset
+
+ these are space-like holes.
+ Widen them into empty cones.
+ Add another pair of concentric cones outside of them, so the outer set
+ sit in Minkowski space.
+ Note that the cones are of the form 
+\begin_inset Formula $B\times\mathbb{R}$
+\end_inset
+
+ where 
+\begin_inset Formula $B$
+\end_inset
+
+ is a ball in 3D space (
+\emph on
+i.e.
+
+\emph default
+ in the 
+\begin_inset Formula $\left(x,y,z\right)$
+\end_inset
+
+ coordinates), and 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ is the center of the ball travellling over the time coordinate.
+\end_layout
+
+\begin_layout Standard
+Take a single spinor, 
+\begin_inset Formula $\psi_{\sigma}$
+\end_inset
+
+ and patch it onto the 
+\begin_inset Formula $x_{\bar{\sigma}\sigma}$
+\end_inset
+
+ on the left cone.
+ Do this by creating charts, just like an ordinary coordinate-chart used
+ to define an atlas for a topology, except that the coordinate space is
+ 
+\begin_inset Formula $\mathbb{P}^{1}\left(\mathbb{C}\right)$
+\end_inset
+
+ and not the textbook-usual 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ Set up this patch so that its 
+\begin_inset Quotes eld
+\end_inset
+
+flat
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Create another patch on the right cone, using 
+\begin_inset Formula $\bar{\psi}_{\bar{\sigma}}$
+\end_inset
+
+, again so its flat.
+ This leaves one index on each cone that is not attached.
+ As noted, the interior of the cone is a ball; the surface of the cone is
+ a 2-sphere.
+ Create a spinor-coordinate patch that glues these two remaining cones together.
+ Give explict expressions for all of the charts and transition maps! FIXME.
+\end_layout
+
+\begin_layout Standard
+Problem with this: The hollowed-out interiors of these cones no longer have
+ a well-defined space-time.
+ I guess that one could take the product of two spinor charts, and claim
+ that this is space-time, but its not the full-degrees-of-freedom any more.
+ But of course, we ripped apart spacetime, on purpose, so what can you expect?
+ The cones can be shrunk back down so that they are very thin.
+ 
+\end_layout
+
+\begin_layout Standard
+Speculation: because they are punctured, they do allow an electric charge
+ to be placed inside them, at no penalty (no actual singularity).
+ That is, because they are punctured, they allow a non-trivial cohomology
+ group around them, exactly the kind of cohomology needed for a naked classical
+ electric charge.
+ Cool.
+ So the puncture is not useless.
+ Oh, and in some strange way, the glueing creates a kind-of flux-tube-like
+ thing between the two cones, so 
+\begin_inset Quotes eld
+\end_inset
+
+of course
+\begin_inset Quotes erd
+\end_inset
+
+, the charge on one cone has to be the opposite of the other: they are necessari
+ly charge-conjugate.
+\end_layout
+
+\begin_layout Subsection
+Tangent bundles and sphere bundles
 \end_layout
 
 \begin_layout Standard
@@ -1036,13 +1173,15 @@ x+iy & t-z
 
 \begin_layout Standard
 Argh.
- What am I doing wrong, already ...
- this is not working out, already.
- wtf.
-\end_layout
-
-\begin_layout Standard
-This is where the trouble begins, because its a sleight-of-hand!
+ Fixme.
+ Such a decomposition as above works only as coordinates on the light-cone.
+ And the spinors are not fully free; they are limited and coupled to one-another
+, loosing a (complex) degree of freedom (two real degrees of freedom).
+ Well, actually one degree of freedom; the other they never had cause they
+ were already projective.
+ But whatever.
+ FIXME.
+ Give explicit expressions.
 \end_layout
 
 \begin_layout Section
