@@ -132,38 +132,193 @@ key "OEIS-6530"
 
 .
  I was unable to find anything at all discussing the typical analytic formulatio
-ns of this sequence, such as the ordinary or exponential <a href="https://en.wiki
-pedia.org/wiki/Generating_function">generating functions</a>.
- Thus, I thought I would do a bit of numerical exploration.
- This function exhibits a number of curious properties.
- Visualizations are given below.
- <p> Immediately below is a phase plot of the ordinary generating function
- <i>OG(gpf; z) = &Sigma;<sub>n=1</sub><sup>&infin;</sup> gpf(n) z<sup>n</sup></i
-> for complex <i>z</i>.
+ns of this sequence, such as the ordinary generating function
+\begin_inset Formula 
+\[
+G\left(z\right)=\sum_{n=1}^{\infty}\mbox{gpf}\left(n\right)z^{n}
+\]
+
+\end_inset
+
+or the exponential generating function
+\begin_inset Formula 
+\[
+E\left(z\right)=\sum_{n=1}^{\infty}\mbox{gpf}\left(n\right)\frac{z^{n}}{n!}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, I thought I would do a bit of numerical exploration.
+ The exponential generating function exhibits a variety of remarkable symmetric
+ and fractal properties.
+ On the one hand, this is perhaps not surprising, as fractal symmetries
+ are common in number theory.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-M04,Vep-mink2008"
+
+\end_inset
+
+ On the other hand, the actual figures make it clear that this function
+ is quite unlike anything else.
+ This paper is a numerical and visual exploration of the exponential generating
+ function, exposing it's patterns of self-similarities.
+ It offers essentially no analytic results; despite the 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+ structure, obtaining exact results appears to be difficult.
+\end_layout
+
+\begin_layout Section*
+Phase Plots
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-OGF"
+
+\end_inset
+
+ is a phase plot of the ordinary generating function 
+\begin_inset Formula $G\left(z\right)$
+\end_inset
+
+ for complex 
+\begin_inset Formula $z$
+\end_inset
+
+.
  This function has a radius of convergence of one, with what appears to
  be essential singularities scattered all about the unit circle.
  The function is not obviously any kind of modular form, but is suggestive
  of some sort of theta function.
  That is, there is some vague fractal self-similarity-ish behavior, which
- is very highly typical of any sort of modular form or function (see the
- <a href="../numberetic/numberetic.html">number theory page</a> on this site);
- however, its not in any "obvious" form that e.g.
- the j-function or the Eisenstein functions would have.
- Or maybe its just another "random" hyperbolic function, as concluded on
- the above-mentioned <a href="../numberetic/numberetic.html">number theory
- page</a>.
- Hmmm...
- <p> By "phase plot", it is meant a visualization of the arctan of the function,
- which gives just the phase of the complex value of <i>OG(gpf; z)</i>.
- The color coding is such that red is a phase of +pi, green is a phase of
- zero, and black is a phase of -pi.
- The sharp red-black transitions are where the phase wraps around by 2pi.
- These lines can only terminate on zeros and on poles.
+ is very typical of any sort of modular form or function;
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Num05"
+
+\end_inset
+
+ however, its not in any "obvious" form that 
+\emph on
+e.g.
+
+\emph default
+ the 
+\begin_inset Formula $j$
+\end_inset
+
+-function or the Eisenstein functions would have.
+ On the other hand, it seems that just about any 
+\begin_inset Quotes eld
+\end_inset
+
+random
+\begin_inset Quotes erd
+\end_inset
+
+ sequence has a similar general appearance, and so there is not much intuitive
+ information that can be extracted from this figure.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Phase of the Ordinary Generating Function
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Phase-of-OGF"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gpf-phase.png
+	lyxscale 50
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the phase (arctan) of the function 
+\begin_inset Formula $G\left(z\right)$
+\end_inset
+
+; that is, it shows 
+\begin_inset Formula $\varphi\left(z\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\exp i\varphi\left(z\right)=G\left(z\right)/\left|G\left(z\right)\right|$
+\end_inset
+
+.
+ The color coding is such that red indicates a phase of 
+\begin_inset Formula $+\pi$
+\end_inset
+
+, green is a phase of zero, and black is a phase of 
+\begin_inset Formula $-\pi$
+\end_inset
+
+.
+ The sharp red-black transitions are where the phase wraps around by 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+ These transition lines can only terminate on zeros and on poles; which
+ is which can be identified by whther the phase wraps counterclockwise or
+ clockwise.
  Here, the lines that terminate inside the unit circle all terminate on
- zeros; the edge of the circle is ringed with poles (and zeros).
+ zeros; the edge of the circle is ringed with both poles and zeros.
  The exterior of the unit circle is colored green: there is no analytic
- extension outside of the unit circle.
- <p> <img width=800 height=800 src="./gpf-phase.png">
+ extension of 
+\begin_inset Formula $G\left(z\right)$
+\end_inset
+
+ outside of the unit circle.
+ 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -177,6 +332,34 @@ pedia.org/wiki/Generating_function">generating functions</a>.
  appear to be any poles anywhere (except at infinity, of course).
  But then, this should be clear, as <i>gpf(n)</i> is bounded by <i>n</i>.
  <p>
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pahse of the Exponential Generating Function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
