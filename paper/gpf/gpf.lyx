@@ -1,0 +1,795 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{url} 
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "courier" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> <html> <head>
+ <title>Greatest Prime Factor</title> <meta http-equiv="Content-Type" content="t
+ext/html; charset=utf-8" /> <meta name="keywords" content="greatest prime
+ factor, largest, factor, prime, divisor"> </head> <body> <h1>Greatest Prime
+ Factor</h1>
+\end_layout
+
+\begin_layout Standard
+It would appear that very little is known about the <a href="http://mathworld.wol
+fram.com/GreatestPrimeFactor.html"> greatest prime factor</a> function <i>gpf(n)</
+i> that returns the largest prime divisor of <i>n</i>.
+ Some values are given in <a href="http://oeis.org/A006530">OEIS A006530</a>.
+ I was unable to find anything at all discussing the typical analytic formulatio
+ns of this sequence, such as the ordinary or exponential <a href="https://en.wiki
+pedia.org/wiki/Generating_function">generating functions</a>.
+ Thus, I thought I would do a bit of numerical exploration.
+ This function exhibits a number of curious properties.
+ Visualizations are given below.
+ <p> Immediately below is a phase plot of the ordinary generating function
+ <i>OG(gpf; z) = &Sigma;<sub>n=1</sub><sup>&infin;</sup> gpf(n) z<sup>n</sup></i
+> for complex <i>z</i>.
+ This function has a radius of convergence of one, with what appears to
+ be essential singularities scattered all about the unit circle.
+ The function is not obviously any kind of modular form, but is suggestive
+ of some sort of theta function.
+ That is, there is some vague fractal self-similarity-ish behavior, which
+ is very highly typical of any sort of modular form or function (see the
+ <a href="../numberetic/numberetic.html">number theory page</a> on this site);
+ however, its not in any "obvious" form that e.g.
+ the j-function or the Eisenstein functions would have.
+ Or maybe its just another "random" hyperbolic function, as concluded on
+ the above-mentioned <a href="../numberetic/numberetic.html">number theory
+ page</a>.
+ Hmmm...
+ <p> By "phase plot", it is meant a visualization of the arctan of the function,
+ which gives just the phase of the complex value of <i>OG(gpf; z)</i>.
+ The color coding is such that red is a phase of +pi, green is a phase of
+ zero, and black is a phase of -pi.
+ The sharp red-black transitions are where the phase wraps around by 2pi.
+ These lines can only terminate on zeros and on poles.
+ Here, the lines that terminate inside the unit circle all terminate on
+ zeros; the edge of the circle is ringed with poles (and zeros).
+ The exterior of the unit circle is colored green: there is no analytic
+ extension outside of the unit circle.
+ <p> <img width=800 height=800 src="./gpf-phase.png">
+\end_layout
+
+\begin_layout Standard
+<p> Immediately below is a phase plot of the exponential generating function
+ <i>EG(gpf; z) = &Sigma;<sub>n=1</sub><sup>&infin;</sup> gpf(n) z<sup>n</sup>
+ / n!</i> for complex <i>z</i>.
+ The color scheme is the same as above.
+ <p> This function appears to be entire! The width of the figure is 120;
+ that is, it graphs the domain -60 &le; x,y &le; +60 for z=x+iy.
+ The rays all appear to terminate on zeros of the function; there do not
+ appear to be any poles anywhere (except at infinity, of course).
+ But then, this should be clear, as <i>gpf(n)</i> is bounded by <i>n</i>.
+ <p>
+\end_layout
+
+\begin_layout Standard
+<img width=800 height=800 src="./gpf-exp-phase-fixed.png"> <p> Below is the
+ absolute value of the exponential generating function, explicitly showing
+ the location of the zeros as black dots.
+ Note that <i>EG(gpf; z)</i> diverges as <i>exp(|z|)</i> for large <i>|z|</i>;
+ thus the color scale below actually displays <i>EG(gpf; z) exp(-|z|)</i>
+ to make the zeros more easily visible.
+ The color map is such that red corresponds to values of 1.0 or greater,
+ and green to values around 0.5.
+ <p> <img width=800 height=800 src="./gpf-exp-abs-fixed.png"> <p> The zeros,
+ again, but with the color maps scaled by 0.24.
+ <p> <img width=800 height=800 src="./gpf-exp-abs-0.24-fixed.png"> <p> The
+ zeros, again, but with the domain (x,y) ranging from -360 to +360.
+ The big blue-black blobs to the right are five different zeros fairly close
+ to each other.
+ The color scale is adjusted so that green is about 0.2, and red is any value
+ of 0.4 or greater.
+ <p> <img width=800 height=800 src="./gpf-exp-abs-big-fixed.png"> <p> And
+ again, but with the domain (x,y) ranging from -2160 to +2160.
+ The colors are scaled to make the large-|z| zeros more clearly visible
+ (values greater than 0.031 are red).
+ This has the side-effect of exposing a new and interesting feature: rays!
+ Lanes that are free of any zeros! Rays for the cyclic groups Z<sub>2</sub>
+ and Z<sub>3</sub> are clearly visible, and with some peering, the rays
+ for Z<sub>5</sub> can be seen as well.
+ There's a hint of Z<sub>7</sub>.
+ Notably absent (or just hard to see?) are rays for Z<sub>4</sub>.
+ This seems to lead to a natural conjecture that zeros never occur on a
+ ray for Z<sub>p</sub>, p prime.
+ <p> <img width=800 height=800 src="./gpf-exp-abs-4320-fixed.png">
+\end_layout
+
+\begin_layout Standard
+<p> The above conjecture can be explored by taking slices along rays, shown
+ below.
+ It shows six slices, taken along the direction <i>z=|z|exp iθ</i> for <i>θ=0,
+ π, 2π/3, 2π/4, 2π/5, 2π/6</i> The leading divergence of <i>exp|z|</i> has
+ been removed, leaving a divergence that seems to be about of order <i>|z|/log|z
+|</i>.
+ Notable in this graph is that no zeros are visible along the rays for <i>θ=2π/4
+</i> and <i>θ=2π/6</i>.
+ This suggests the the above conjecture about primes was incorrect.
+ <p> Most notable about this picture is the pronounced smooth oscillations
+ along each ray.
+ It's visually clear that the wavelengths get longer as <i>|z|</i> gets
+ larger.
+ Closer examination shows that the wavelength goes as the square-root of
+ <i>|z|</i>.
+ <p> <img width=1024 height=768 src="./expo-fixed.png"> <p> A similar exploration
+ of rays directed along quadratic irrationals suggests that such rays pass
+ very close to zeros on a number of occasions, but none actually pass through
+ a zero.
+ The below shows a phase plot of one such ray, graphing the real vs imaginary
+ part of <i>EG(gpf; z) </i> for <i>|z|</i> running from 0 to 1000.
+ The close passes are visible: recall that since the leading exponential
+ scaling is removed, the close passes visualized here are indeed very close.
+\end_layout
+
+\begin_layout Standard
+<p> <img width=1024 height=768 src="./expo-qirr-fixed.png"> <p> So where are
+ the zeros located? Hard to say.
+ The exploration of other angles, including simple fractions (without any
+ factors of pi) suggests that these, too, manage to not hit any zeros, at
+ least, not for <i>|z| &lt; 1000</i>, although the ray for <i>θ=1/3</i>
+ really sure does come very, very close.
+ <p> Here's a table of the 11 zeros nearest the origin.
+ The coding is such that <i>z=r exp(i π φ) = x + i y</i>.
+ Accuracy is good to about the last digit.
+ <a href="https://isc.carma.newcastle.edu.au/">Plouffe's inverter</a> doesn't
+ seem to know any of these numbers.
+ They're presumably all some unknown transcendentals.
+\end_layout
+
+\begin_layout Standard
+<table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
+ </tr><tr> <td>1.5307945356883</td> <td>0.78184092190433</td> <td>-1.1851209706937<
+/td> <td>0.96892734263997</td> </tr><tr> <td>4.0367224459103</td> <td>0.39186518257
+935</td> <td>1.3451122542394</td> <td>3.8060216931609</td> </tr><tr> <td>4.56234536
+97754</td> <td>0.60435053770449</td> <td>-1.4690131787199</td> <td>4.3193744401079<
+/td> </tr><tr> <td>8.3702116601813</td> <td>0.22324068364269</td> <td>6.39470668087
+28</td> <td>5.4007564008976</td> </tr><tr> <td>8.4224011490127</td> <td>0.808914654
+05978</td> <td>-6.9498220138446</td> <td>4.7578162102767</td> </tr><tr> <td>11.3440
+04468582</td> <td>0.44048322811112</td> <td>2.1087356654558</td> <td>11.14628508860
+4</td> </tr><tr> <td>13.460094569784</td> <td>0.81744853194064</td> <td>-11.3065579
+73367</td> <td>7.3031426538461</td> </tr><tr> <td>15.804853981417</td> <td>0.187889
+38300147</td> <td>13.130504695764</td> <td>8.7967753073744</td> </tr><tr>
+ <td>16.909948423814</td> <td>0.53886030109517</td> <td>-2.0592969204905</td>
+ <td>16.784089248133</td> </tr><tr> <td>19.238778607721</td> <td>0.26037809273961</
+td> <td>13.153182482454</td> <td>14.040099461904</td> </tr><tr> <td>20.867068162569
+</td> <td>0.76767832172763</td> <td>-15.551551998824</td> <td>13.913438256922</td>
+ </tr> </table>
+\end_layout
+
+\begin_layout Standard
+<p>&nbsp; <p> Below is another table of zeros, this one for <i>EG(ngpf;
+ z)</i>, where <i>ngpf(n) = n*gpf(n)</i>.
+ That is, the gpf exponential series, except for <i>(n-1)!</i> in place
+ of <i>n</i>.
+ Note that these are in the same general location as the above, except that
+ they have moved inwards a bit.
+\end_layout
+
+\begin_layout Standard
+<table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
+ </tr><tr> <td>0.88022349562601</td> <td>0.83295289206477</td> <td>-0.7617693460645
+1</td> <td>0.44102252283587</td> </tr><tr> <td> 3.2375048946125</td> <td>0.42458721
+923649</td> <td>0.75986223121855</td> <td>3.1470696420968</td> </tr><tr> <td>
+ 3.7441361185659</td> <td>0.59817818048564</td> <td> -1.136602428757</td> <td>3.5674
+486952574</td> </tr><tr> <td> 7.4736771339129</td> <td>0.23110162504623</td>
+ <td> 5.5889493606786</td> <td>4.9618035980621</td> </tr><tr> <td> 7.511312297442</
+td> <td>0.80582634942347</td> <td>-6.1565697810839</td> <td>4.3030757558226</td>
+ </tr><tr> <td> 10.41426766772</td> <td>0.44047959714246</td> <td> 1.9360237252942<
+/td> <td>10.232730974183</td> </tr><tr> <td> 12.602613307375</td> <td>0.81645934805
+374</td> <td>-10.564968103744</td> <td>6.8707576832617</td> </tr><tr> <td>
+ 14.800600506967</td> <td>0.19203401986558</td> <td> 12.187879585189</td> <td>8.3972
+2374263</td> </tr><tr> <td> 15.997814072863</td> <td>0.53774902696863</td>
+ <td>-1.8927698515501</td> <td>15.885448605531</td> </tr><tr> <td> 18.340908478517<
+/td> <td>0.25911033247266</td> <td> 12.592535370681</td> <td>13.334803213977</td>
+ </tr><tr> <td> 19.957065054996</td> <td> 0.768238424116</td> <td>-14.896747647415<
+/td> <td>13.280487759815</td> </tr> </table> <p> Before one gets too excited,
+ its worth asking: how much of the general shape of this function is due
+ to the fact that the greatest-prime-factor series is being used, and how
+ much is "generic", shared by any similar series? To answer this question,
+ one can generate random series <i>rs(n)</i> that roughly resemble <i>gpf(n)</i>.
+ Consider, first, the series having the property that <i>2 &le; rs(n) &le;
+ n</i>, but otherwise having a uniform distribution in this range.
+ In such a case, one finds that <i>EG(rs, z)</i> does have zeros scattered
+ all over the complex plane, in a roughly similar distribution; however,
+ the rays are completely absent, as can be seen below.
+ <p> Note: the image runs out to a radius of 2160; to get the color map
+ correct, the leading exponential divergence is removed, as is also a factor
+ of log<sup>2</sup>(<i>r</i>)/<i>r</i>.
+ In other words, <i>rs(n)</i> does have a different asymptotic behavior
+ than <i>gpf(n)</i>.
+ <p> <img width=400 height=400 src="./rand-exp-fixed.png"> <p> Perhaps the
+ rays are due to the primes? One can consider a random distribution <i>rps(n)</i
+> having the property that <i>2 &le; rps(n) &le; n</i> and also that <i>rps(n)</
+i> is prime.
+ Below are <i>EG(rps, z)</i> for two such random sequences.
+ No rays, but hints of rings! Curious! And also, an odd left-right symmetry!
+ Clearly, more work can be done in this general area.
+ <p> <img width=400 height=400 src="./rand-exp-prime.png"> <img width=400
+ height=400 src="./rand-exp-prime2.png"> <p> Anyway, some more views of <i>EG(gpf,
+ z)</i>.
+ This one for the domain -20000 &le; x,y &le; +20000 for z=x+iy.
+ This time, a ray at Z<sub>4</sub> is visible.
+ The width of the rays, relative to their angular distribution, does not
+ follow any obvious hand-waving pattern.
+ The blueness in the center, vs.
+ the redness towards the edges, is annoying.
+ This suggests that I've missed some asymptotic behavior.
+ This is handled next.
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./gpf-exp-abs-40K-fixed.png"> <p> Some
+ trees in a forest...
+ photo by <a href="https://plus.google.com/115482380943396485478/posts/W1BeEfsyfDY
+">MIAN FAISAL</a>.
+\end_layout
+
+\begin_layout Standard
+<p> <img width=620 height=620 src="./trees-forest.jpg"> <p> The below is for
+ the domain -125000 &le; x,y &le; +125000 for z=x+iy.
+ It uses a different normalization than the earlier pictures: it multiplies
+ <i>GE(gpf;z)</i> by a term <i>4 r<sup>-1</sup>log(r) exp(-r)</i> where
+ <i>r=|z|</i>.
+ That is, the leading exponential divergence is easily brought under control
+ by the exponential term, leaving a much weaker divergence.
+ Dividing by <i>r</i> seems to over-compensate; multiplying by the log term
+ seems to be just about right.
+ The factor of 4 is just what is needed to get a pleasing color balance
+ in this picture: again red areas represent values greater than 1, green
+ are the values near 0.5, and blue-black are areas of about 0.2 or less.
+ (No other processing is applied to this image, nor to any other image on
+ this page or even on this entire website -- the data is always presented
+ in its "raw" form).
+ <p> The most notable aspect of this image is the narrowing of the rays.
+ If one asked for the number of zeros in a pie-sliced wedge, and graphed
+ that as a function of the angle, one would see a devil's-staircase type
+ function.
+ But, as this image shows, the treads on those stairs decrease in size as
+ the radius of the circle increases.
+ The rate is unclear; perhaps it goes as the square-root of the radius?
+ That is, there are lanes that are completely free of zeros; these lanes
+ get wider for larger radius, but at a sub-linear rate.
+ They would have to, to make room for finite-width lanes for every rational!
+ (A formula for the lane-width is discovered later, below.) <p> The widening
+ of these zero-free lanes is one of the more interesting aspects of this
+ image.
+ Clearly, there is a suggestion of a ray for every rational.
+ The simplest rationals have the widest lanes; but what, exactly, constitutes
+ "simplest", here? If the rays are arranged according to widths, do they
+ come in Farey-fraction order? <p> Also notable is a vague hint or suggestion
+ of Moire patterning along the x-axis.
+ Recall that Moire patterns occur when one regular (cyclic) grid pattern
+ is superimposed on another, but shifted over.
+ In this case, one regular pattern are the square pixels of the image; the
+ other is the location of the zeros.
+ The appearance of a Moire pattern is then strong evidence that the location
+ of the zeros are not "random", but are correlated in some regular, cyclic
+ way (as one moves from ray to ray).
+ But of course it is: up above is a graph of six slices taken along a constant
+ angle (six rays).
+ These each show a characteristic oscillation with some very strong Fourier
+ components.
+ The Moire patterns are these same Fourier components, interfering with
+ the characteristic pixel size.
+ <p> <img width=800 height=800 src="./gpf-exp-abs-250K-uni.png"> <p> How real
+ or illusory is the Moire patterning? Below shows a close-up, running along
+ the domain <i>24000 &lt; x &lt; 48000</i> and <i>-12000 &lt; y &lt; 12000</i>.
+ Again, there is a hint of yet more structure -- diagonal arrowhead/feather
+ lines.
+ Individual zeros are clearly distinguishable, and it is interesting how
+ they line up so regularly, maintaining a uniform lane.
+ <p> <img width=800 height=400 src="./exp-close.png">
+\end_layout
+
+\begin_layout Standard
+<p> The asymptotic behavior of the generating function can be guessed at
+ by numerical means.
+ The graphs below show the re-scaled quantity <i>-7/4 + EG(gpf; r) exp(-r)
+ log(r) / r</i> as a function of <i>√r</i>.
+ The strong periodic oscillations are clearly visible.
+ The rescaling hides just how small these oscillations are: So, for <i>√r
+ = 60</i>, one has <i>r = 3600</i> and <i>r exp(r)/log(r) ~ 10<sup>1566</sup></i
+>, and so the amplitude of the oscillations is 1566 orders of magnitude
+ smaller than the function itself! OK, so the exponential divergence is
+ obvious.
+ What we have left is then <i>r /log(r) ~ 440</i> so we're pulling out two
+ orders of magnitude.
+ That this does indeed seem to be the correct asymptotic scaling is reinforced
+ by the graph that shows the same oscillations out to <i>√r = 600</i>.
+ This corresponds to <i>r = 360K</i> and <i>r /log(r) ~ 2.8 · 10<sup>4</sup></i>,
+ which is large! That the oscillations are happening around 7/4 = 1.75 is
+ just a suggestion from the graph: closer numerical work suggests that the
+ centerline is perhaps at 1.744.
+\end_layout
+
+\begin_layout Standard
+<p> <img width=512 height=384 src="./gpf-osc-60-fixed.png"> <img width=512
+ height=384 src="./gpf-osc-600-fixed.png"> <p> What's the Fourier spectrum?
+ Low-frequency noise, it seems.
+ The figure below shows the amplitude of the Fourier components, as a function
+ of frequency.
+ Specifically, this shows the amplitude <i>√(a²(ω)+b²(ω))</i> where the
+ Fourier components are <br> <br> &emsp;&emsp;<i>a(ω) = ∫ f(t²) cos(2π ωt)
+ dt</i> <br> <br> &emsp;&emsp;<i>b(ω) = ∫ f(t²) sin(2π ωt) dt</i> <br> <br>
+ and where <i>f(r)</i> is the asymptotically rescaled generating function:
+ <br> <br> &emsp;&emsp;<i>f(r) = -7/4 + EG(gpf; r) exp(-r) log(r) / r</i>
+ <br> <br> The integration is taken over the range <i>10 &lt; t &lt; 610</i>.
+ This corresponds to the second graph above.
+ Again, its hard to overemphasize how small these oscillations are: the
+ integral is performed over a region where the generating function blows
+ up by 161 thousand orders of magnitude! Take some caution, however, in
+ interpreting the graph scale: the amplitude at any given frequency is probably
+ either zero or infinite; this graph is just an approximation to the true
+ Fourier spectrum, which (I presume) consists of Dirac delta functions of
+ various weights at various irrationals.
+ <p> Perhaps the most notable feature of this graph is that, indeed, it
+ looks very noisy: there is no obvious self-similar structure in it.
+ Its hard to make out what the fall-off in frequency is: its perhaps cubic.
+ In case you are wondering: no, this is NOT numeric noise; this can be most
+ easily seen in the left figure above, where the oscillations are small
+ and smooth; it is the Fourier components of this smooth graph that are
+ not smooth.
+ The calculations are performed with the <a href="https://github.com/linas/anant"
+>Algorithmic 'n Analytic Number Theory</a> multi-precision library (based
+ on gnuMP); the results are verified by repeating the calculations at various
+ different precisions.
+ <p> <img width=1024 height=768 src="./fourier-fixed.png"> <p> The zeros seem
+ to be scattered very uniformly around the complex plane.
+ How many are there? They are easy to count, using <a href="https://en.wikipedia.o
+rg/wiki/Argument_principle">Cauchy's argument principle</a>: one performs
+ an integral of the phase around a circle of radius <i>r</i>; this counts
+ the number of zeros inside the circle.
+ This counting is easy to perform numerically.
+ The result is that there are almost exactly <i>N</i> zeros within radius
+ <i>N</i> of the origin, the count being off by no more <i>O(log(r))</i>.
+ The surplus or deficit of zeros, as a function of the enclosing radius,
+ is shown in the graph below.
+ <p> The graph below suggests that the strict bound is <i>1 ± [log(r+1)
+ + Mlog(log(r+1)+1)]</i> with equality holding at <i>r=1</i> (there is one
+ zeros inside of <i>r=1</i>).
+ What's M? Good question.
+ If you only graphed out to <i>r=120</i>, you might think that <i>M=1</i>
+ is a tight, but good bound.
+ Not so, as it fails near <i>r=123</i>.
+ So maybe <i>M=2</i>? Sure, that work out to about <i>r=844</i>, where it
+ fails.
+ So maybe <i>M=3</i>? Sure, that works out to about <i>r=1832</i>, where
+ it fails.
+ So maybe <i>M=4</i>? Sure, why not, the graph below supports that hypothesis.
+ <p> Note that this linear dependence on the radius means that the density
+ of zeros is decreasing as the square root -- the area of a circle goes
+ as <i>r<sup>2</sup></i>.
+ Note that this graph is very compute-intensive to create: it represents
+ several CPU-months of calculations.
+ <p> <img width=1024 height=768 src="./zero-count-fixed.png"> <p> Below is
+ a close-up of what happens near <i>r=1832</i>, where the count surpasses
+ one of the hypothesized logarithmic bounds.
+ <p> <img width=1024 height=768 src="./zero-count-fixed-1832.png"> <p> A very
+ similar-but-very-slightly-different graph holds for <i>EG(ngpf; z)</i>,
+ where <i>ngpf(n) = n·gpf(n)</i> (the dot being simple multiplication).
+ Two bounds seem acceptable, numerically.
+ Aside from that suggested above, another possibility seems to be <i>2 ±
+ log(r<sup>2</sup>)</i>, with equality holding at <i>r=1</i> (there are
+ three zeros inside of <i>r=1</i>, which is two more than expected).
+ The logarithm is so slowly growing, that it's hard to say.
+ <p> If you squint and scroll, you might notice that this and the previous
+ graph look suspiciously similar.
+ Are they the same? No...
+ but why so similar? What's the point? For that, we need to look at a movie.
+ Oh, by the way: for any fixed radius, it seems that <i>EG(ngpf; z)</i>
+ always has about 2 to 6 (sometimes 8 or 10) more zeros than does <i>EG(gpf;
+ z)</i>.
+ It never-ever seems to have less.
+ <img width=1024 height=768 src="./zero-count-Ngpf.png"> <p> Movie time! This
+ surprised me, but what do I know? Consider the <i>n</i>'th derivative,
+ with respect to <i>z</i>, of <i>EG(gpf; z)</i>.
+ Because derivatives of the exponential series yield the series itself,
+ this derivative has the effect of acting as a shift operator on <i>gpf</i>.
+ That is, define the shift operator <i>S</i> acting on an arithmetic series
+ <i>f</i> as <i>(Sf)(n)=f(n+1)</i>.
+ It follows that <i>d<sup>n</sup>EG(gpf; z)/dz<sup>n</sup> = EG(S<sup>n</sup>gpf
+; z)</i>.
+ Where might the zeroes of this function lie? Surprise! The animation below
+ shows what happens: each frame is a shift from the prior frame.
+ Clearly, the zeros shift towards the origin; but the overall structure
+ is preserved.
+ Its hard to tell, but it seems that a pair of zeros disappear each frame.
+ Although it seems, at first, that the zeros approach the origin uniformly,
+ it quickly becomes clear that there is some tidal shearing.
+ Careful observation will show that sometimes, one zero races past another
+ one.
+ <p> There's another interesting thing: towards the end of the movie, on
+ the negative x-axis, a pair of mirrored zeros coalesce into one (double)
+ zero on the x-axis, and then split apart into two, in sequential order,
+ one falling in before the other.
+ Something similar also seems to happen on the ray 2&pi;/5, although it
+ is not clear if the two zeros actually coalesce before dropping in, or
+ if they merely get close.
+ At any rate, they start out roughly equidistant from the origin, but then
+ fall in at sharply different times.
+ <p> I've not verified the coalescing by hand.
+ If that is what is really happening, then this appears to be a blatant
+ violation that the lanes stay zero-free! This is surely something special
+ and meaningful! Since it happens near frame 100 or so, its ...
+ well, that's really a pretty big shift, for weird things to start happening.
+ Wonder what it means.
+ <p> I've never explored the action of shifts on exponential generating
+ functions before; this behavior of radial inflow is a complete surprise
+ to me.
+ It turns out to not be unique to <i>gpf</i>; the exponential generating
+ function of shifts of any of the random series discussed above also exhibit
+ this kind of flow.
+ Its presumably a well-known property of the exponential generating function;
+ its just news to me.
+ <p> The movie is 108 frames long, starting from a shift of zero.
+ The domain is <i>-100 &lt; x,y &lt; +100</i>, and so almost every zero
+ initially visible at the start of the movie has fallen into the origin
+ by the end of the movie.
+ <p> <img width=600 height=600 src="./gpf-exp-deriv-ani.gif"> <p> One last
+ image.
+ This one is for the <b>reciprocal</b> of the GPF.
+ To be precise, its for the absolute value of <i>(1/3) EG(1/gpf; z) exp(-|z|)
+ log<sup>3</sup>|z|</i>, with the domain (x,y) ranging from -2160 to +2160,
+ and the color scale such that 1.0 or greater is red, 0.5 is green and blue/black
+ is 0.25 or less.
+ (This is the same color scale as all the other images; however, some of
+ the other images are scaled by an arbitrary constant to make them pretty;
+ this one is not scaled at all, but is straight as written (with the factor
+ of 1/3 in front)).
+ The image suggests (of course) that the asymptotic scaling is <i>|EG(1/gpf;
+ z)| ~ O(exp|z| log<sup>-3</sup>|z|)</i> or thereabouts.
+ <p> Clearly, there's a new feature visible here: rings! Concentric rings!
+ Hard to tell, but, pulling out a ruler and eyeballing them, they seem to
+ be located at powers of two: the outermost at a radius of 2048, then three
+ more clearly visible at 1024, 512 and 256.
+ Hard to tell, but there is a vague hint of another ring at 1536=3*512.
+ And maybe yet many more rings! Wow! Who knew? <p> <img width=800 height=800
+ src="./recip-exp-4320-fixed.png"> <p> I lied.
+ That's not the last image -- it pays off to keep making more.
+ The below is the same as above, but over a domain ranging from -20K to
+ +20K.
+ Actually, its slightly different: it shows <i>0.005 EG(1/gpf; z) exp(-|z|)
+ log<sup>5</sup>|z|</i>, suggesting the asymptotic <i>|EG(1/gpf; z)| ~ O(exp|z|
+ log<sup>-5</sup>|z|)</i> or thereabouts.
+ The estimate of the logarithmic terms in the asymptotic behavior is a bit
+ ambiguous.
+ In this case, the asymptotic term was picked to give the appearance of
+ a uniform color balance.
+ <p> Newly visible are lines paralleling the positive x-axis, seeming maybe
+ to curl around the origin in some vaguely parabolic way.
+ There's a particularly large pseudo-parabolic orbit visible, coming in
+ from the right, about 3/4th's of the way up, turning around the origin,
+ and exiting abut 3/4th's of the way down (on the right, of course -- its
+ easy to see, once you see it.) <p> As before, there are hints of Moire patternin
+g along the x-axis, although this time, the scale of the picture is such
+ that the individual zeros can still be distinctly mad out.
+ Therefore, the Moire patterns cannot be <i>optical</i> pixel-scale effects
+ -- that is, its not an effect due to the finite size of the pixels -- it
+ does not meet the criteria for the classical, canonical definition of the
+ Moire effect in a computer graphics image.
+ Instead, the Moire patterning seems to actually exist within the function
+ itself! This suggests that perhaps the function itself can be decomposed
+ as a sum of "layers", each layer consisting of a very regular oscillatory
+ pattern, with only the sum of the patterns resulting in the apparent chaos
+ of the image.
+ <p> What are all these features? How are they to be described? What do
+ they correspond to? One can't help but get the sense that this is the projectio
+n of some structure on some bundle, some structure built of sheafs and germs,
+ but quite how to get that is unclear.
+ <p> <img width=800 height=800 src="./recip-exp-40K-fixed-lr5.png"> <p> Below
+ is same as above, except for a domain of -120K (= -1.2e5) to +120K.
+ Note the extremely vague and hard to see hints of parabola-like orbits
+ opening to the left (and not just the clearly visible ones opening to the
+ right!) There are also hints of other traceries, but its hard to say if
+ these are merely optical, visual field effects or if they have some basis
+ in mathematical reality.
+ <p> <img width=800 height=800 src="./recip-exp-240K-fixed-lr5.png"> <p> This
+ is my favorite, so here it is again, with a different asymptotic coloring
+ scheme.
+ <p> <img width=800 height=800 src="./recip-exp-240K.png"> <p> What are these
+ parabolic-like orbits? Well, there's an alternate plot that makes curve-fitting
+ easier.
+ The below unwinds the the graph from around the origin, showing instead,
+ as the above, <i>1.6 EG(1/gpf; z) exp(-|z|) log<sup>-1</sup>|z| log<sup>-4</sup>
+[log(|z|+1)+1]</i>, except that here, <i>z=r&nbsp;exp(iθ)</i> with <i>θ</i>
+ running along the vertical axis, from 0 to π.
+ Along the horizontal axis, <i>r</i> is plotted on a logarithmic scale,
+ so that <i>r</i> runs from 1 on the left to 65536 on the right.
+ Superimposed on this figure are five hand-fitted black lines.
+ One tries to capture the edge of the root-free zone.
+ This line is given by <i>sin&nbsp;θ/2&nbsp;=&nbsp;1/√r</i>.
+ Note the radical.
+ Careful examination shows that at least a few zeros appear on the wrong
+ side of this line -- the shape seems to be only approximate.
+ Four more lines try to fit the pseudo-parabolas.
+ The fits are OK on the large-<i>r</i> asymptotic region, but poor in the
+ small-<i>r</i> region.
+ The four that are drawn are given by <table cellspacing="10px"> <tr><td>768/r
+ = sin θ/2</td> </tr> <tr><td>1200/r = sin θ/2</td> </tr> <tr><td>1500/r
+ = sin θ/2</td> </tr> <tr><td>1948/r = sin θ/2</td> </tr> <tr><td>7200/r
+ = sin θ/2 (not drawn)</td> </tr> </table> The integers in the above are
+ approximate ...
+ they are obtained by eyeballing.
+ I tried to pick integers with a small number of prime factors, and these
+ seem pretty close, but there is no obvious pattern that is emerging.
+ It is worth spending a few minutes, looking at this under magnification.
+ <p> <img width=800 height=800 src="./recip-flat-16-fixed-scribed.png">
+\end_layout
+
+\begin_layout Standard
+<p> That happened to the circles? They should be vertical lines in the above!
+ Well, they are still there, just too narrow to be visible in the above.
+ They do become visible, below: five evenly spaced vertical lines, using
+ the same mapping and logarithmic scaling as above.
+ The domain of <i>r</i> is from 1024 on the left to 65536 on the right,
+ so the five vertical lines correspond to <i>r=</i>2048, 4096, 8192, 16384,
+ and 32768, respectively.
+ Otherwise, there is nothing particularly new in this image; everything
+ visible here is visible in earlier images.
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./recip-flat-10-16.png">
+\end_layout
+
+\begin_layout Standard
+<p> Just how thin are these vertical lines? The image below is a closeup
+ of the image above: in this case, <i>r</i> runs from (32768-650) to (32768+650).
+ Eye-balling the red strip, it seems maybe 350 units wide -- so maybe a
+ width of √32768=362 is a decent wild guess.
+ Is this vertical stripe really zero-free? Hard to tell from this picture.
+ There are lots of blue smears -- there are about 1300 zeros in this image
+ (as shown above, there are about <i>r</i> zeros inside a circle of radius
+ <i>r</i>).
+ Fiddling with the color-map helps isolate some of these a bit more clearly,
+ and it seems like there might be dozen or two zeros actually within the
+ red stripe, rather than all the blue being just a smear from outside the
+ stripe.
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./recip-flat-wide-15.png">
+\end_layout
+
+\begin_layout Standard
+<p> Below is <i>0.3 EG(1/gpf<sup>2</sup>; z) exp(-|z|)</i>, with the domain
+ (x,y) between -2160 and +2160.
+ The circular rings become sharply visible.
+ The primary sequence seems to be located at powers of 2; so that, here,
+ the outermost ring appears to be of radius 2048; the middle one presumably
+ with a radius of 1024, etc.
+ The other rings are presumably at other prime powers.
+ <p> <img width=800 height=800 src="./exp-2.0.png"> <p> Below is an actual
+ moire pattern! It shows the real part of <i>EG(gpf; z) exp(-|z|)</i>.
+ As noted at the very beginning, in the phase portrait, the phase forms
+ radially oriented fingers.
+ Likewise, the real part of the function consists of radially oriented,
+ roughly sinusoidal ridges and valleys.
+ At the scale of this image, the distance between peak and trough is less
+ than one pixel, and so by using a sharp sampling, one necessarily gets
+ a sampling aliasing effect.
+ The original image here is 400x400 pixels, and it shows a region <i>0 &lt;
+ x,y &lt; 2000</i> (the upper-right quadrant).
+ The moire patterning gives a hint about how the radial fingers differ from
+ being perfectly radial.
+ <p> <img width=800 height=800 src="./exp-moire.png"> <p> As above, but for
+ the region <i>0 &lt; x,y &lt; 4000</i>.
+ Should not be any need to point out that Moire patterning is very sensitive
+ to the sampling frequency.
+ <p> <img width=800 height=800 src="./exp-moire-2K.png"> <p> As above, but
+ for the region <i>0 &lt; x,y &lt; 8000</i>.
+ <p> <img width=800 height=800 src="./exp-moire-4K.png"> <p> Perhaps you are
+ starting to get bored, so I will try to wrap it up.
+ Below is one for the rising Pochhammer symbol.
+ Its normalized by a factorial, for convergence, so really its a binomial
+ coefficient.
+ Specifically, define <i>RPG(f; z) = &Sigma;<sub>n=1</sub><sup>&infin;</sup>
+ f(n) (z)<sub>n</sub> / (n!)<sup>2</sup></i> where <i>(z)<sub>n</sub> =
+ z(z+1)(z+2)...(z+n-1)</i> is the rising Pochhammer symbol.
+ The two factorials in the denominator guarantee convergence, as otherwise
+ the sum is badly behaved.
+ The color coding is as before: black is zero, green is about 0.5 and red
+ is any value that is 1.0 or larger.
+ The leading divergence is removed: the graph shows this: <i>RPG(gpf,z)
+ exp(-2 &radic; |z|) / |z|</i> Notice the <i>&radic; |z|</i> in the normalizatio
+n: such binomial-coefficient sums (Newton series, actually) are "well-known"
+ to diverge in this kind of square-root fashion.
+ (This is explored in detail in a paper by Philippe Flajolet and myself
+ on Newton series for the Riemann zeta).
+ Anyway -- notice again that there seem to be zero-free rays at angles theta=0
+ and &pi; of course, and at 2&pi;/3 and, harder to discern, at 2&pi;/5.
+ Presumably all the other rationals are there too; they are not very clear
+ in this picture.
+ The domain in this picture is just huge: -1.0e6 &lt; x,y &lt; 1.0e6 -- this
+ is far far wider than any of the previous images: the zeros are much, much
+ farther apart.
+ <p> <p> <img width=800 height=800 src="./poch-rise.png"> <p> One may also
+ consider a very similar sum, using the falling Pochhammer symbol, instead
+ of the rising one.
+ This symbol is given by <i>(z)<sub>n</sub> = z(z-1)(z-2)...(z-n+1)</i>.
+ The resulting image appears below, it is of <i>FPG(gpf,z) exp(-2 &radic;
+ |z|) / |z|</i> with normalization exactly as given and coloration as always.
+ <p> <img width=800 height=800 src="./poch-fall.png"> <p> Some of the first
+ few zeros for the rising Pochhammer generating function are shown below.
+ Note that the first two lie precisely on the real axis.
+ The others do not seem to occur at any low rational angle (the column φ
+ shows the angle in units of pi, thus a value of φ of one indicates the
+ negative x-axis), although the next few seem to try to get close to the
+ 3rd roots of unity, and the one after that the 6th root of unity.
+ After that, there is no clear progression.
+ As before, they are presumably transcendental, rather than, for example,
+ quadratic irrationals, or some such.
+ <table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
+ </tr><tr> <td>1.3949092398684</td> <td>1</td> <td>-1.3949092398684</td> <td>0</td
+> </tr><tr> <td>4.5626759564288</td> <td>1</td> <td>-4.5626759564288</td>
+ <td>0</td> </tr><tr> <td>10.245898379007</td> <td>0.64420879547681</td> <td>-4.484
+6874842696</td> <td>9.2122750589292</td> </tr><tr> <td>24.83352515618</td>
+ <td>0.63379620727208</td> <td>-10.133683877231</td> <td>22.671842068058</td>
+ </tr><tr> <td>55.576607747775</td> <td>0.3205855915997</td> <td>29.693058011758</t
+d> <td>46.979587425396</td> </tr><tr> <td>72.25879634152</td> <td>0.8121672651601</
+td> <td>-60.038996469216</td> <td>40.207618080342</td> </tr><tr> <td>117.7542072250
+2</td> <td>0.46759200907347</td> <td>11.968172804434</td> <td>117.1444243612</td>
+ </tr><tr> <td>192.15199916793</td> <td>0.81693429156798</td> <td>-161.24015864602<
+/td> <td>104.51795072638</td> </tr><tr> <td>201.03591391007</td> <td>0.251076893903
+84</td> <td>141.67211584758</td> <td>142.63397306717</td> </tr><tr> <td>285.6352301
+736</td> <td>0.54737231184267</td> <td>-42.35277394865</td> <td>282.47783498034</td
+> </tr><tr> <td>364.85530526812</td> <td>0.27307016022456</td> <td>238.63224457153<
+/td> <td>275.99645945745</td> </tr><tr> <td>442.19734166307</td> <td>0.787300293618
+36</td> <td>-347.09323384104</td> <td>273.97951747467</td> </tr> </table>
+\end_layout
+
+\begin_layout Standard
+The table below shows the first few zeros for the falling Pochhammer generating
+ function.
+ Note that the zeros differ from those above.
+ Note that they all seem to be close to, but not quite on, 4th and 8th and
+ 16th roots of unity.
+ <table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
+ </tr><tr> <td>0.72183600549901</td> <td>0.49137876622082</td> <td>0.01954810833147
+3</td> <td>0.72157126487647</td> </tr><tr> <td>10.360150450484</td> <td>0.451062615
+29342</td> <td>1.5865160932827</td> <td>10.237953117808</td> </tr><tr> <td>23.30294
+1560009</td> <td>0.47588077521583</td> <td>1.7640394756877</td> <td>23.236076477697
+</td> </tr><tr> <td>57.987569085342</td> <td>0.7605584350114</td> <td>-42.340693875
+438</td> <td>39.621002139948</td> </tr><tr> <td>67.48077369795</td> <td>0.261577329
+31857</td> <td>45.949442919987</td> <td>49.419667281528</td> </tr><tr> <td>122.3299
+5335662</td> <td>0.40689342952179</td> <td>35.273809336995</td> <td>117.13400814063
+</td> </tr><tr> <td>168.26853286447</td> <td>0.78918215559082</td> <td>-132.6928030
+5254</td> <td>103.4742439954</td> </tr><tr> <td>224.60980862841</td> <td>0.22477866
+727782</td> <td>170.89602763141</td> <td>145.75360672003</td> </tr><tr> <td>281.861
+94385292</td> <td>0.50767619198356</td> <td>-6.7965739748906</td> <td>281.779988598
+81</td> </tr><tr> <td>393.67913951173</td> <td>0.2492135681373</td> <td>279.0601011
+7129</td> <td>277.68457793146</td> </tr><tr> <td>410.84081343407</td> <td>0.7665291
+4265676</td> <td>-305.19542443344</td> <td>275.03804625552</td> </tr> </table>
+\end_layout
+
+\begin_layout Standard
+Below is the plot for the rising Pochhammer generating function, just as
+ before, but showing the domain -1.6e8 &lt; x,y &lt; 1.6e8 -- again, this
+ is several orders of magnitude wider than any earlier graphic, above.
+\end_layout
+
+\begin_layout Standard
+Although superficially similar to the other graphs shown previously, this
+ is different.
+ Note that the zeros far from the origin are clearly distinguishable visually,
+ unlike those near the origin: this indicates that the density of zeros
+ is falling like the square of the radius, that is, as the area of the graphic.
+ This is already suggested by the divergence of the function going as exp
+ of the square-root of the radius -- as if the density of zeros is tied
+ to the rate of divergence of the function along some radial ray.
+ <p> <img width=800 height=800 src="./poch-rise-321M.png"> <p> How many zeros
+ are there? As before, we have the curious similarity: the bound on the
+ rate of divergence of the function gives the count of the zeros.
+ Thus, asymptotically <i>RPG(gpf; z)</i> seems to go roughly as <i>O(|z|
+ exp (2 sqrt|z|)</i>.
+ The number of zeros inside a circle of radius <i>|z|</i> appears to be
+ given by <i>1 + &radic; |z|</i> and the error of this approximation is
+ bounded by <i>&pm; [1+log(1+|z|)/2+log(1+log(1+|z|))]</i>, as the graph
+ below shows.
+ This bound appears to be tight; nothing tighter seems to work.
+ Note that this bound extends all the way to <i>|z|=0</i> -- that is, it
+ is not violated at small <i>|z|</i>.
+ <p> <img width=1024 height=768 src="./zero-poch-rise.png"> <p> <p> If you
+ liked this, you should see the <a href="../arithmexpic/arithmexpic.html">Arithm-ex
+p-ic page</a>, which performs a similar analysis for all sorts of popular
+ arithmetic functions from number theory.
+ <p> <hr size=3> Copyright © 2016 Linas Vepstas <p> Initial version: April
+ 2016.
+ Revised version: October 2016 <p> <a rel="license" href="http://creativecommons.
+org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:
+0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span
+ xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Greatest Prime
+ Factor</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://lina
+s.org/art-gallery/gpf/" property="cc:attributionName" rel="cc:attributionURL">Lin
+as Vepstas</a> is licensed under a <a rel="license" href="http://creativecommons.
+org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International
+ License</a>.
+\end_layout
+
+\begin_layout Standard
+</body> </html> 
+\end_layout
+
+\end_body
+\end_document
