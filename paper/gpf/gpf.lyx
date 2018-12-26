@@ -537,7 +537,19 @@ reference "fig:Phase-of-OGF"
 \end_inset
 
 .
- 
+ It is convenient to define 
+\begin_inset Formula $\mbox{gpf}\left(0\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{gpf}\left(1\right)=1$
+\end_inset
+
+, so that the zero at 
+\begin_inset Formula $z=0$
+\end_inset
+
+ is a simple zero.
 \end_layout
 
 \begin_layout Plain Layout
@@ -620,7 +632,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Zeros of the Exponential Generating Functions
+Zeros of the Exponential Generating FunctionZ
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Zeros-of-E"
@@ -687,54 +699,176 @@ reference "fig:Phase-of-EGF"
  or greater, and green to values of about 2.
  The color scheme on the right exposes a clustering of the zeros that is
  less evident on the left.
- It is convenient to define 
-\begin_inset Formula $\mbox{gpf}\left(0\right)=0$
-\end_inset
-
- and 
-\begin_inset Formula $\mbox{gpf}\left(1\right)=1$
-\end_inset
-
-; this helps make make the series summation for 
-\begin_inset Formula $E\left(z\right)$
-\end_inset
-
- directly comparable to 
-\begin_inset Formula $e^{z}$
-\end_inset
-
-.
  
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-<p> The zeros, again, but with the domain (x,y) ranging from -360 to +360.
- The big blue-black blobs to the right are five different zeros fairly close
- to each other.
- The color scale is adjusted so that green is about 0.2, and red is any value
- of 0.4 or greater.
- <p> <img width=800 height=800 src="./gpf-exp-abs-big-fixed.png"> <p> And
- again, but with the domain (x,y) ranging from -2160 to +2160.
- The colors are scaled to make the large-|z| zeros more clearly visible
- (values greater than 0.031 are red).
- This has the side-effect of exposing a new and interesting feature: rays!
- Lanes that are free of any zeros! Rays for the cyclic groups Z<sub>2</sub>
- and Z<sub>3</sub> are clearly visible, and with some peering, the rays
- for Z<sub>5</sub> can be seen as well.
- There's a hint of Z<sub>7</sub>.
- Notably absent (or just hard to see?) are rays for Z<sub>4</sub>.
- This seems to lead to a natural conjecture that zeros never occur on a
- ray for Z<sub>p</sub>, p prime.
- <p> <img width=800 height=800 src="./gpf-exp-abs-4320-fixed.png">
+The zeros in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeros-of-E"
+
+\end_inset
+
+ cluster in a suggestive way.
+ Perhaps one should zoom out.
+ This is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zoom-out-EGF"
+
+\end_inset
+
+.
+ This exposes a new and interesting feature: rays! Lanes that are free of
+ any zeros! Rays for the cyclic groups 
+\begin_inset Formula $\mathbb{Z}_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{Z}_{3}$
+\end_inset
+
+ are clearly visible, and with some peering, the rays for 
+\begin_inset Formula $\mathbb{Z}_{5}$
+\end_inset
+
+  can be seen as well.
+ There's a hint of 
+\begin_inset Formula $\mathbb{Z}_{7}$
+\end_inset
+
+.
+ Notably absent (or just hard to see?) are rays for 
+\begin_inset Formula $\mathbb{Z}_{4}$
+\end_inset
+
+ .
+ This seems to lead to a natural conjecture that zeros only occur on rays
+ for 
+\begin_inset Formula $\mathbb{Z}_{p}$
+\end_inset
+
+ for 
+\begin_inset Formula $p$
+\end_inset
+
+ prime.
+ 
 \end_layout
 
 \begin_layout Standard
-<p> The above conjecture can be explored by taking slices along rays, shown
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Zoom-out of the EGF
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zoom-out-EGF"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gpf-exp-abs-big-fixed.png
+	lyxscale 40
+	width 49col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename gpf-exp-abs-4320-fixed.png
+	lyxscale 40
+	width 49cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Both figures show the magnitude 
+\begin_inset Formula $\left|E\left(z\right)\right|e^{-\left|z\right|}$
+\end_inset
+
+; the one on the left is for 
+\begin_inset Formula $-360\le x,y\le+360$
+\end_inset
+
+ while the one on the right is for 
+\begin_inset Formula $-2160\le x,y\le+2160$
+\end_inset
+
+.
+ The big blue-black blobs in the left image are five different zeros, fairly
+ close to each other.
+ The color scale of the left image is adjusted so that green is about 0.2,
+ and red is any value of 0.4 or greater.
+ The color scale of the right image is again adjusted so as to make the
+ large 
+\begin_inset Formula $\left|z\right|$
+\end_inset
+
+ zeros more clearly visible.
+ In this case, values greater than 0.031 are red.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above conjecture can be explored by taking slices along rays, shown
  below.
  It shows six slices, taken along the direction <i>z=|z|exp iθ</i> for <i>θ=0,
  π, 2π/3, 2π/4, 2π/5, 2π/6</i> The leading divergence of <i>exp|z|</i> has
