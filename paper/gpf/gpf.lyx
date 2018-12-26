@@ -2099,6 +2099,10 @@ Note that these are in the same general location as the above, except that
 
 \end_layout
 
+\begin_layout Section*
+Random Sequences
+\end_layout
+
 \begin_layout Standard
 Before one gets too excited, its worth asking: how much of the general shape
  of this function is due to the fact that the greatest-prime-factor sequence
@@ -2192,7 +2196,8 @@ The exponential generating function
 \end_inset
 
 -axis.
- 
+ This is an expression of Descartes' rule of signs, expanded from polynomials
+ to series.
 \end_layout
 
 \begin_layout Plain Layout
@@ -2268,11 +2273,7 @@ reference "fig:Random-Prime-Sequences"
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2342,28 +2343,198 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Section*
+Zero-free lanes
+\end_layout
+
 \begin_layout Standard
- Anyway, some more views of <i>EG(gpf, z)</i>.
- This one for the domain -20000 &le; x,y &le; +20000 for z=x+iy.
- This time, a ray at Z<sub>4</sub> is visible.
+The singular ray visible in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Uniform-Random-Sequence"
+
+\end_inset
+
+ provides a key for how one might want to hypothesize and talk about the
+ zero-free lanes.
+ When a sequence 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ has the property that 
+\begin_inset Formula $0<f\left(n\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+, then the exponential generating function 
+\begin_inset Formula $\mbox{EG}\left(f;z\right)$
+\end_inset
+
+ cannot have any zeros along the positive real axis.
+ That is, it is impossible to find a factor 
+\begin_inset Formula $\left(z-b\right)$
+\end_inset
+
+ for real, positive 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Without a negative 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+, there is nothing to introduce the needed minus sign.
+ With this in mind, the rotated function 
+\begin_inset Formula 
+\[
+E_{p/q}\left(z\right)=\sum_{n=1}^{\infty}\mbox{gpf}\left(n\right)e^{-2\pi ipn/q}\frac{z^{n}}{n!}
+\]
+
+\end_inset
+
+which apparantly has no roots on the real axis, whenever 
+\begin_inset Formula $p/q$
+\end_inset
+
+ is a rational.
+\end_layout
+
+\begin_layout Standard
+Continued zooms are striking.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hints-of-Projective"
+
+\end_inset
+
+ shows a further outward zoom.
+ This time, a ray at 
+\begin_inset Formula $\mathbb{Z}_{4}$
+\end_inset
+
+ is incontrovertably is visible.
  The width of the rays, relative to their angular distribution, does not
- follow any obvious hand-waving pattern.
- The blueness in the center, vs.
+ follow any obvious pattern explainable by hand-waving.
+ The blueness in the center, 
+\emph on
+vs.
+
+\emph default
  the redness towards the edges, is annoying.
- This suggests that I've missed some asymptotic behavior.
+ This suggests that the asymptotic behavior has been misjudged.
  This is handled next.
 \end_layout
 
 \begin_layout Standard
-<p> <img width=800 height=800 src="./gpf-exp-abs-40K-fixed.png"> <p> Some
- trees in a forest...
- photo by <a href="https://plus.google.com/115482380943396485478/posts/W1BeEfsyfDY
-">MIAN FAISAL</a>.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hints of Projective Geometry
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Hints-of-Projective"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gpf-exp-abs-40K-fixed.png
+	lyxscale 50
+	width 49col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename trees-forest.jpg
+	lyxscale 65
+	width 49col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The left image shows 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $-20000\le x,y\le+20000$
+\end_inset
+
+.
+ The right image is from a photo of trees, posted by 
+\begin_inset CommandInset href
+LatexCommand href
+name "Mian Faisal on Google+"
+target "https://plus.google.com/115482380943396485478/posts/W1BeEfsyfDY"
+
+\end_inset
+
+.
+ The visual resemblance suggests that there must be some way of understanding
+ 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ in terms of projective geometry, possibly starting from ascending vertical
+ lines planted on a square grid.
+ A more precise hypothesis is elusive.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Asymptotitic behavior
 \end_layout
 
 \begin_layout Standard
-<p> <img width=620 height=620 src="./trees-forest.jpg"> <p> The below is for
- the domain -125000 &le; x,y &le; +125000 for z=x+iy.
+The below is for the domain -125000 &le; x,y &le; +125000 for z=x+iy.
  It uses a different normalization than the earlier pictures: it multiplies
  <i>GE(gpf;z)</i> by a term <i>4 r<sup>-1</sup>log(r) exp(-r)</i> where
  <i>r=|z|</i>.
