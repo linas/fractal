@@ -2685,17 +2685,17 @@ The widening of these zero-free lanes is one of the more interesting aspects
 \end_layout
 
 \begin_layout Standard
-Also notable is a vague hint or suggestion of Moire patterning along the
+Also notable is a vague hint or suggestion of Moiré patterning along the
  
 \begin_inset Formula $x$
 \end_inset
 
 -axis.
- Recall that Moire patterns occur when one regular (cyclic) grid pattern
+ Recall that Moiré patterns occur when one regular (cyclic) grid pattern
  is superimposed on another, but shifted over.
  In this case, one regular pattern are the square pixels of the image; the
  other is the location of the zeros.
- The appearance of a Moire pattern is then strong evidence that the location
+ The appearance of a Moiré pattern is then strong evidence that the location
  of the zeros are not "random", but are correlated in some regular, cyclic
  way (as one moves from ray to ray).
  But of course it is: figure 
@@ -2708,7 +2708,7 @@ reference "fig:Slices-along-Rays"
  shows six slices taken along a constant angle (six rays).
  These each show a characteristic oscillation with some very strong Fourier
  components.
- The Moire patterns are these same Fourier components, interfering with
+ The Moiré patterns are these same Fourier components, interfering with
  the characteristic pixel size.
  A closeup of a ray can be seen in figure 
 \begin_inset CommandInset ref
@@ -2757,7 +2757,7 @@ name "fig:Ray-Close-up"
 \end_layout
 
 \begin_layout Plain Layout
-How real or illusory is the Moire patterning? Below shows a close-up, running
+How real or illusory is the Moiré patterning? Below shows a close-up, running
  along the domain 
 \begin_inset Formula $24000<x<48000$
 \end_inset
@@ -3127,10 +3127,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3283,52 +3279,154 @@ The Reciprocal
 \end_layout
 
 \begin_layout Standard
-<p> One last image.
- This one is for the <b>reciprocal</b> of the GPF.
- To be precise, its for the absolute value of <i>(1/3) EG(1/gpf; z) exp(-|z|)
- log<sup>3</sup>|z|</i>, with the domain (x,y) ranging from -2160 to +2160,
- and the color scale such that 1.0 or greater is red, 0.5 is green and blue/black
- is 0.25 or less.
- (This is the same color scale as all the other images; however, some of
- the other images are scaled by an arbitrary constant to make them pretty;
- this one is not scaled at all, but is straight as written (with the factor
- of 1/3 in front)).
- The image suggests (of course) that the asymptotic scaling is <i>|EG(1/gpf;
- z)| ~ O(exp|z| log<sup>-3</sup>|z|)</i> or thereabouts.
- 
-\end_layout
+One may continue in this vein.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Reciprocal-GPF"
 
-\begin_layout Standard
-<p> Clearly, there's a new feature visible here: rings! Concentric rings!
- Hard to tell, but, pulling out a ruler and eyeballing them, they seem to
- be located at powers of two: the outermost at a radius of 2048, then three
- more clearly visible at 1024, 512 and 256.
+\end_inset
+
+ shows the generating function for the reciprocal of the GPF function.
+ To be precise, the figure shows the rescaled absolute value of
+\begin_inset Formula 
+\[
+EG\left(\frac{1}{\mbox{gpf}};z\right)=\sum_{n=1}^{\infty}\frac{1}{\mbox{gpf}\left(n\right)}\,\frac{z^{n}}{n!}
+\]
+
+\end_inset
+
+ Clearly, there's a new feature visible here: rings! Concentric rings! Hard
+ to tell, but, pulling out a ruler and eyeballing them, they seem to be
+ located at powers of two: for the left image, the outermost ring is at
+ a radius of 2048, then three more clearly visible ones are at 1024, 512
+ and 256.
  Hard to tell, but there is a vague hint of another ring at 1536=3*512.
- And maybe yet many more rings! Wow! Who knew? 
+ And maybe yet many more rings! Wow! Who knew?
 \end_layout
 
 \begin_layout Standard
-<p> <img width=800 height=800 src="./recip-exp-4320-fixed.png"> 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
 \end_layout
 
-\begin_layout Standard
-<p> I lied.
- That's not the last image -- it pays off to keep making more.
- The below is the same as above, but over a domain ranging from -20K to
- +20K.
- Actually, its slightly different: it shows <i>0.005 EG(1/gpf; z) exp(-|z|)
- log<sup>5</sup>|z|</i>, suggesting the asymptotic <i>|EG(1/gpf; z)| ~ O(exp|z|
- log<sup>-5</sup>|z|)</i> or thereabouts.
- The estimate of the logarithmic terms in the asymptotic behavior is a bit
- ambiguous.
- In this case, the asymptotic term was picked to give the appearance of
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The Reciprocal GPF
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-Reciprocal-GPF"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename recip-exp-4320-fixed.png
+	lyxscale 50
+	width 49col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename recip-exp-40K-fixed-lr5.png
+	lyxscale 50
+	width 49col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Both images show the exponential generating function for the reciprocal
+ gpf, scaled to remove leading divergences.
+ The left image shows the absolute value of
+\begin_inset Formula 
+\[
+\frac{1}{3}e^{-\left|z\right|}\log^{3}\left|z\right|EG\left(\frac{1}{\mbox{gpf}};z\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+on the domain 
+\begin_inset Formula $-2160\le x,y\le+2160$
+\end_inset
+
+.
+ The color scale is as always: red corresponds to values of 1.0 or greater,
+ while green is 0.5 and blue/black is 0.25 or less.
+ The right image shows 
+\begin_inset Formula 
+\[
+0.005e^{-\left|z\right|}\log^{5}\left|z\right|EG\left(\frac{1}{\mbox{gpf}};z\right)
+\]
+
+\end_inset
+
+on the domain 
+\begin_inset Formula $-2\times10^{4}\le x,y\le+2\times10^{4}$
+\end_inset
+
+, with the same color scale.
+ Clearly, the numerical estimation of the logarithmic terms in the asymptotic
+ behavior is a bit ambiguous.
+ In both cases, the asymptotic term was picked to give the appearance of
  a uniform color balance.
  
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-<p> Newly visible are lines paralleling the positive x-axis, seeming maybe
- to curl around the origin in some vaguely parabolic way.
+The right image in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Reciprocal-GPF"
+
+\end_inset
+
+ shows something else now: visible lines paralleling the positive x-axis,
+ seeming maybe to curl around the origin in some vaguely parabolic way.
  There's a particularly large pseudo-parabolic orbit visible, coming in
  from the right, about 3/4th's of the way up, turning around the origin,
  and exiting abut 3/4th's of the way down (on the right, of course -- its
@@ -3336,14 +3434,20 @@ The Reciprocal
 \end_layout
 
 \begin_layout Standard
-<p> As before, there are hints of Moire patterning along the x-axis, although
- this time, the scale of the picture is such that the individual zeros can
- still be distinctly mad out.
- Therefore, the Moire patterns cannot be <i>optical</i> pixel-scale effects
- -- that is, its not an effect due to the finite size of the pixels -- it
- does not meet the criteria for the classical, canonical definition of the
- Moire effect in a computer graphics image.
- Instead, the Moire patterning seems to actually exist within the function
+As before, there are hints of Moiré patterning along the 
+\begin_inset Formula $x$
+\end_inset
+
+-axis, although this time, the scale of the picture is such that the individual
+ zeros can still be distinctly made out.
+ Therefore, the Moiré patterns cannot be 
+\emph on
+optical
+\emph default
+ pixel-scale effects -- that is, its not an effect due to the finite size
+ of the pixels -- it does not meet the criteria for the classical, canonical
+ definition of the Moiré effect in a computer graphics image.
+ Instead, the Moiré patterning seems to actually exist within the function
  itself! This suggests that perhaps the function itself can be decomposed
  as a sum of "layers", each layer consisting of a very regular oscillatory
  pattern, with only the sum of the patterns resulting in the apparent chaos
@@ -3457,7 +3561,7 @@ The Reciprocal
 \end_layout
 
 \begin_layout Standard
-<p> <img width=800 height=800 src="./exp-2.0.png"> <p> Below is an actual moire
+<p> <img width=800 height=800 src="./exp-2.0.png"> <p> Below is an actual moiré
  pattern! It shows the real part of <i>EG(gpf; z) exp(-|z|)</i>.
  As noted at the very beginning, in the phase portrait, the phase forms
  radially oriented fingers.
@@ -3468,7 +3572,7 @@ The Reciprocal
  a sampling aliasing effect.
  The original image here is 400x400 pixels, and it shows a region <i>0 &lt;
  x,y &lt; 2000</i> (the upper-right quadrant).
- The moire patterning gives a hint about how the radial fingers differ from
+ The moiré patterning gives a hint about how the radial fingers differ from
  being perfectly radial.
  
 \end_layout
@@ -3479,7 +3583,7 @@ The Reciprocal
 
 \begin_layout Standard
 <p> As above, but for the region <i>0 &lt; x,y &lt; 4000</i>.
- Should not be any need to point out that Moire patterning is very sensitive
+ Should not be any need to point out that Moiré patterning is very sensitive
  to the sampling frequency.
  
 \end_layout
