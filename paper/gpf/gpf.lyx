@@ -267,7 +267,7 @@ name "fig:Phase-of-OGF"
 \begin_inset Graphics
 	filename gpf-phase.png
 	lyxscale 50
-	width 90col%
+	width 100col%
 
 \end_inset
 
@@ -303,8 +303,8 @@ This figure shows the phase (arctan) of the function
 
 .
  These transition lines can only terminate on zeros and on poles; which
- is which can be identified by whther the phase wraps counterclockwise or
- clockwise.
+ is which can be identified by whether the phase wraps counterclockwise
+ or clockwise.
  Here, the lines that terminate inside the unit circle all terminate on
  zeros; the edge of the circle is ringed with both poles and zeros.
  The exterior of the unit circle is colored green: there is no analytic
@@ -316,36 +316,181 @@ This figure shows the phase (arctan) of the function
  
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-<p> Immediately below is a phase plot of the exponential generating function
- <i>EG(gpf; z) = &Sigma;<sub>n=1</sub><sup>&infin;</sup> gpf(n) z<sup>n</sup>
- / n!</i> for complex <i>z</i>.
- The color scheme is the same as above.
- <p> This function appears to be entire! The width of the figure is 120;
- that is, it graphs the domain -60 &le; x,y &le; +60 for z=x+iy.
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-EGF"
+
+\end_inset
+
+ shows the a phase plot of the exponential generating function 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ on the complex 
+\begin_inset Formula $z$
+\end_inset
+
+ plane.
+ This function appears to be entire! The width of the figure is 120; that
+ is, it graphs the domain 
+\begin_inset Formula $-60\le x,y\le+60$
+\end_inset
+
+ for 
+\begin_inset Formula $z=x+iy$
+\end_inset
+
+.
  The rays all appear to terminate on zeros of the function; there do not
  appear to be any poles anywhere (except at infinity, of course).
- But then, this should be clear, as <i>gpf(n)</i> is bounded by <i>n</i>.
- <p>
+ But then, the absence of poles should be clear, as gpf is bounded: 
+\begin_inset Formula $\mbox{gpf}\left(n\right)\le n$
+\end_inset
+
+ and so one would expect 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ to be bounded by 
+\begin_inset Formula $e^{z}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The red-black color transition in both figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-OGF"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-EGF"
+
+\end_inset
+
+ indicates a location where the phase changes by 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+ Such color transition lines can only ever terminate on poles and zeros.
+ Since phases can only wrap counterclockwise around a zero, and clockwise
+ around a pole, such transition lines can never connect two zeros; they
+ can only connect a zero to a pole.
+ Since 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ has only zeros on the (finite) complex plane, the transition lines seen
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-EGF"
+
+\end_inset
+
+ must neccessarily extend, more-or-less radially, out to infinity, where
+ they meet an essential singularity.
+ This simple effect explains most of the visual structure of this image.
+\end_layout
+
+\begin_layout Standard
+The regularity of the thickness of these phase-fingers immediately provides
+ a hypothesis about the zeros.
+ The figure reveals that the zeros seem to be more or less uniformly distributed
+ about the complex plane.
+ In order for the fingers to remain of uniform width, this implies that
+ the number of zeros within a circle of radius 
+\begin_inset Formula $r=\left|z\right|$
+\end_inset
+
+ must be proportional to the circumference of the circle.
+ Were this not the case, the fingers could not stay at a quasi-uniform width.
+ Thus, visual evidence applied to Cauchy's argument principle suggests that
+ 
+\begin_inset Formula 
+\[
+N\left(r\right)=\frac{1}{2\pi i}\oint_{\left|z\right|=r}\frac{E^{\prime}\left(z\right)}{E\left(z\right)}dz=\mathcal{O}\left(r\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $N\left(r\right)$
+\end_inset
+
+ is the number of zeros of 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ within a circle of radius 
+\begin_inset Formula $r=\left|z\right|$
+\end_inset
+
+.
+ This is explored in greater detail in a later section, where the numerical
+ evidence suggests that 
+\begin_inset Formula 
+\[
+N\left(r\right)=r+\mathcal{O}\left(\log r\right)
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula $r\to\infty$
+\end_inset
+
+ (or, at least, for values of 
+\begin_inset Formula $r$
+\end_inset
+
+ that are several orders of magnitude larger).
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Pahse of the Exponential Generating Function
+Phase of the Exponential Generating Function
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Phase-of-EGF"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -354,6 +499,56 @@ Pahse of the Exponential Generating Function
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gpf-exp-phase-fixed.png
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the phase plot of 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ on the complex 
+\begin_inset Formula $z$
+\end_inset
+
+ plane.
+ The color scheme and it's interpretation is the same as in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-OGF"
+
+\end_inset
+
+.
+ The width of the figure is 120; that is, it graphs the domain 
+\begin_inset Formula $-60\le x,y\le+60$
+\end_inset
+
+ for 
+\begin_inset Formula $z=x+iy$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
 
 \end_layout
 
@@ -362,10 +557,34 @@ Pahse of the Exponential Generating Function
 
 \end_layout
 
+\begin_layout Section*
+Zeroes
+\end_layout
+
 \begin_layout Standard
-<img width=800 height=800 src="./gpf-exp-phase-fixed.png"> <p> Below is the
- absolute value of the exponential generating function, explicitly showing
- the location of the zeros as black dots.
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-EGF"
+
+\end_inset
+
+ suggests that the zeros are fairly
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeros-of-E"
+
+\end_inset
+
+ shows the absolute value 
+\begin_inset Formula $\left|E\left(z\right)\right|$
+\end_inset
+
+; the zeros explicitly showing the location of the zeros as black dots.
  Note that <i>EG(gpf; z)</i> diverges as <i>exp(|z|)</i> for large <i>|z|</i>;
  thus the color scale below actually displays <i>EG(gpf; z) exp(-|z|)</i>
  to make the zeros more easily visible.
@@ -392,6 +611,57 @@ Pahse of the Exponential Generating Function
  This seems to lead to a natural conjecture that zeros never occur on a
  ray for Z<sub>p</sub>, p prime.
  <p> <img width=800 height=800 src="./gpf-exp-abs-4320-fixed.png">
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Zeros of the Exponential Generating Functions
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zeros-of-E"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+It is convenient to define 
+\begin_inset Formula $\mbox{gpf}\left(0\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{gpf}\left(1\right)=1$
+\end_inset
+
+; this helps make make 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ directly comparable to 
+\begin_inset Formula $e^{z}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
