@@ -3096,47 +3096,202 @@ The zeros seem to be scattered very uniformly around the complex plane.
 
 ; this counts the number of zeros inside the circle.
  This counting is easy to perform numerically.
- The result is that there are almost exactly <i>N</i> zeros within radius
- <i>N</i> of the origin, the count being off by no more <i>O(log(r))</i>.
+ The result is that there are almost exactly 
+\begin_inset Formula $N$
+\end_inset
+
+ zeros within radius 
+\begin_inset Formula $N$
+\end_inset
+
+ of the origin, the count being off by no more 
+\begin_inset Formula $\mathcal{O}\left(\log\left(r\right)\right)$
+\end_inset
+
+.
  The surplus or deficit of zeros, as a function of the enclosing radius,
- is shown in the graph below.
- 
+ is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Excess-and-Deficit"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-<p> The graph below suggests that the strict bound is <i>1 ± [log(r+1) +
- Mlog(log(r+1)+1)]</i> with equality holding at <i>r=1</i> (there is one
- zeros inside of <i>r=1</i>).
- What's M? Good question.
- If you only graphed out to <i>r=120</i>, you might think that <i>M=1</i>
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Excess and Deficit of Zeros
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Excess-and-Deficit"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename zero-count-fixed.eps
+	width 49col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename zero-count-fixed-1832.eps
+	width 49col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The excess or deficit of zeros within a circle of a given radius.
+ That is, the number of zeros within a circle of radius 
+\begin_inset Formula $r$
+\end_inset
+
+ is 
+\begin_inset Formula $r$
+\end_inset
+
+ plus the remainder shown above.
+ The figure on the right is a close-up of what happens at 
+\begin_inset Formula $r=1832$
+\end_inset
+
+, where the count surpasses one of the hypothesized logarithmic bounds.
+ Note that the data for these graphs was very compute-intensive to create:
+ it represents several CPU-months of calculations.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure suggests that the strict bound is 
+\begin_inset Formula $1\pm\left[\log\left(r+1\right)+M\log\left(\log\left(r+1\right)+1\right)\right]$
+\end_inset
+
+ with equality holding at 
+\begin_inset Formula $r=1$
+\end_inset
+
+ (there is one zero inside of 
+\begin_inset Formula $r=1$
+\end_inset
+
+).
+ What's 
+\begin_inset Formula $M$
+\end_inset
+
+? Good question.
+ If you only graphed out to 
+\begin_inset Formula $r=120$
+\end_inset
+
+, you might think that 
+\begin_inset Formula $M=1$
+\end_inset
+
  is a tight, but good bound.
- Not so, as it fails near <i>r=123</i>.
- So maybe <i>M=2</i>? Sure, that work out to about <i>r=844</i>, where it
- fails.
- So maybe <i>M=3</i>? Sure, that works out to about <i>r=1832</i>, where
- it fails.
- So maybe <i>M=4</i>? Sure, why not, the graph below supports that hypothesis.
+ Not so, as it fails near 
+\begin_inset Formula $r=123$
+\end_inset
+
+.
+ So maybe 
+\begin_inset Formula $M=2$
+\end_inset
+
+? Sure, that works out to about 
+\begin_inset Formula $r=844$
+\end_inset
+
+, where it fails.
+ So maybe 
+\begin_inset Formula $M=3$
+\end_inset
+
+? Sure, that works out to about 
+\begin_inset Formula $M=1832$
+\end_inset
+
+, where it fails.
+ So maybe 
+\begin_inset Formula $M=4$
+\end_inset
+
+? Sure, why not, the figure supports that hypothesis.
  
 \end_layout
 
 \begin_layout Standard
-<p> Note that this linear dependence on the radius means that the density
- of zeros is decreasing as the square root -- the area of a circle goes
- as <i>r<sup>2</sup></i>.
- Note that this graph is very compute-intensive to create: it represents
- several CPU-months of calculations.
- <p> <img width=1024 height=768 src="./zero-count-fixed.png"> <p> Below is
- a close-up of what happens near <i>r=1832</i>, where the count surpasses
- one of the hypothesized logarithmic bounds.
- <p> <img width=1024 height=768 src="./zero-count-fixed-1832.png"> <p> A very
- similar-but-very-slightly-different graph holds for <i>EG(ngpf; z)</i>,
- where <i>ngpf(n) = n·gpf(n)</i> (the dot being simple multiplication).
+Note that this linear dependence on the radius means that the density of
+ zeros is decreasing as the square root -- the area of a circle goes as
+ 
+\begin_inset Formula $r^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+<p> A very similar-but-very-slightly-different graph holds for <i>EG(ngpf;
+ z)</i>, where <i>ngpf(n) = n·gpf(n)</i> (the dot being simple multiplication).
  Two bounds seem acceptable, numerically.
  Aside from that suggested above, another possibility seems to be <i>2 ±
  log(r<sup>2</sup>)</i>, with equality holding at <i>r=1</i> (there are
  three zeros inside of <i>r=1</i>, which is two more than expected).
  The logarithm is so slowly growing, that it's hard to say.
- <p> If you squint and scroll, you might notice that this and the previous
+ 
+\end_layout
+
+\begin_layout Standard
+<p> If you squint and scroll, you might notice that this and the previous
  graph look suspiciously similar.
  Are they the same? No...
  but why so similar? What's the point? For that, we need to look at a movie.
@@ -3144,9 +3299,12 @@ The zeros seem to be scattered very uniformly around the complex plane.
  always has about 2 to 6 (sometimes 8 or 10) more zeros than does <i>EG(gpf;
  z)</i>.
  It never-ever seems to have less.
- <img width=1024 height=768 src="./zero-count-Ngpf.png"> <p> Movie time! This
- surprised me, but what do I know? Consider the <i>n</i>'th derivative,
- with respect to <i>z</i>, of <i>EG(gpf; z)</i>.
+ <img width=1024 height=768 src="./zero-count-Ngpf.png"> 
+\end_layout
+
+\begin_layout Standard
+<p> Movie time! This surprised me, but what do I know? Consider the <i>n</i>'th
+ derivative, with respect to <i>z</i>, of <i>EG(gpf; z)</i>.
  Because derivatives of the exponential series yield the series itself,
  this derivative has the effect of acting as a shift operator on <i>gpf</i>.
  That is, define the shift operator <i>S</i> acting on an arithmetic series
