@@ -2271,6 +2271,7 @@ reference "fig:Random-Prime-Sequences"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status collapsed
@@ -2327,6 +2328,9 @@ The exponential generating function
 
 .
  Such images all show suggestions of zero-free rings!
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset CommandInset line
 LatexCommand rule
 offset "0.5ex"
@@ -2432,13 +2436,10 @@ vs.
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2508,8 +2509,22 @@ target "https://plus.google.com/115482380943396485478/posts/W1BeEfsyfDY"
 \end_inset
 
  in terms of projective geometry, possibly starting from ascending vertical
- lines planted on a square grid.
- A more precise hypothesis is elusive.
+ pegs planted on a square grid (
+\emph on
+e.g.
+
+\emph default
+ and then deriving properties from the symmetries of a square grid:
+\emph on
+ viz.
+
+\emph default
+ the modular group 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset
+
+ which already has rampant connections to analytic number theory.) A more
+ precise hypothesis is elusive.
 \end_layout
 
 \begin_layout Plain Layout
@@ -2534,21 +2549,118 @@ Asymptotitic behavior
 \end_layout
 
 \begin_layout Standard
-The below is for the domain -125000 &le; x,y &le; +125000 for z=x+iy.
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Asymptotic-Rays"
+
+\end_inset
+
+ shows 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ over a wider domain still.
  It uses a different normalization than the earlier pictures: it multiplies
- <i>GE(gpf;z)</i> by a term <i>4 r<sup>-1</sup>log(r) exp(-r)</i> where
- <i>r=|z|</i>.
+ 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ by a term 
+\begin_inset Formula $4r^{-1}\log\left(r\right)\exp\left(-r\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $r=\left|z\right|$
+\end_inset
+
+.
  That is, the leading exponential divergence is easily brought under control
  by the exponential term, leaving a much weaker divergence.
- Dividing by <i>r</i> seems to over-compensate; multiplying by the log term
- seems to be just about right.
+ Dividing by 
+\begin_inset Formula $r$
+\end_inset
+
+ seems to over-compensate; multiplying by the log term seems to be just
+ about right.
  The factor of 4 is just what is needed to get a pleasing color balance
  in this picture: again red areas represent values greater than 1, green
  are the values near 0.5, and blue-black are areas of about 0.2 or less.
- (No other processing is applied to this image, nor to any other image on
- this page or even on this entire website -- the data is always presented
- in its "raw" form).
- <p> The most notable aspect of this image is the narrowing of the rays.
+ (No other processing is applied to this image, nor to any other image in
+ this text -- the data is always presented in its "raw" form).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Asymptotic Rays
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Asymptotic-Rays"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gpf-exp-abs-250K-uni.png
+	lyxscale 60
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The function 
+\begin_inset Formula $E\left(z\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $-1.25\times10^{5}\le x,y\le+1.25\times10^{5}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The most notable aspect of this image, as compared to the earlier ones,
+ is the narrowing of the rays.
  If one asked for the number of zeros in a pie-sliced wedge, and graphed
  that as a function of the angle, one would see a devil's-staircase type
  function.
@@ -2558,14 +2670,26 @@ The below is for the domain -125000 &le; x,y &le; +125000 for z=x+iy.
  That is, there are lanes that are completely free of zeros; these lanes
  get wider for larger radius, but at a sub-linear rate.
  They would have to, to make room for finite-width lanes for every rational!
- (A formula for the lane-width is discovered later, below.) <p> The widening
- of these zero-free lanes is one of the more interesting aspects of this
- image.
- Clearly, there is a suggestion of a ray for every rational.
+ A formula for the lane-width is discovered in a later section, below.
+\end_layout
+
+\begin_layout Standard
+The widening of these zero-free lanes is one of the more interesting aspects
+ of this image.
+ Clearly, this image, more strongly than any other, suggests of a ray for
+ every rational.
  The simplest rationals have the widest lanes; but what, exactly, constitutes
  "simplest", here? If the rays are arranged according to widths, do they
- come in Farey-fraction order? <p> Also notable is a vague hint or suggestion
- of Moire patterning along the x-axis.
+ come in Farey-fraction order? 
+\end_layout
+
+\begin_layout Standard
+Also notable is a vague hint or suggestion of Moire patterning along the
+ 
+\begin_inset Formula $x$
+\end_inset
+
+-axis.
  Recall that Moire patterns occur when one regular (cyclic) grid pattern
  is superimposed on another, but shifted over.
  In this case, one regular pattern are the square pixels of the image; the
@@ -2573,15 +2697,63 @@ The below is for the domain -125000 &le; x,y &le; +125000 for z=x+iy.
  The appearance of a Moire pattern is then strong evidence that the location
  of the zeros are not "random", but are correlated in some regular, cyclic
  way (as one moves from ray to ray).
- But of course it is: up above is a graph of six slices taken along a constant
- angle (six rays).
+ But of course it is: figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Slices-along-Rays"
+
+\end_inset
+
+ shows six slices taken along a constant angle (six rays).
  These each show a characteristic oscillation with some very strong Fourier
  components.
  The Moire patterns are these same Fourier components, interfering with
  the characteristic pixel size.
- <p> <img width=800 height=800 src="./gpf-exp-abs-250K-uni.png"> <p> How real
- or illusory is the Moire patterning? Below shows a close-up, running along
- the domain <i>24000 &lt; x &lt; 48000</i> and <i>-12000 &lt; y &lt; 12000</i>.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ray Close-up
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ray-Close-up"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How real or illusory is the Moire patterning? Below shows a close-up, running
+ along the domain <i>24000 &lt; x &lt; 48000</i> and <i>-12000 &lt; y &lt;
+ 12000</i>.
  Again, there is a hint of yet more structure -- diagonal arrowhead/feather
  lines.
  Individual zeros are clearly distinguishable, and it is interesting how
@@ -2612,8 +2784,15 @@ The below is for the domain -125000 &le; x,y &le; +125000 for z=x+iy.
 
 \begin_layout Standard
 <p> <img width=512 height=384 src="./gpf-osc-60-fixed.png"> <img width=512
- height=384 src="./gpf-osc-600-fixed.png"> <p> What's the Fourier spectrum?
- Low-frequency noise, it seems.
+ height=384 src="./gpf-osc-600-fixed.png"> 
+\end_layout
+
+\begin_layout Section*
+The Fourier Spectrum
+\end_layout
+
+\begin_layout Standard
+What's the Fourier spectrum? Low-frequency noise, it seems.
  The figure below shows the amplitude of the Fourier components, as a function
  of frequency.
  Specifically, this shows the amplitude <i>√(a²(ω)+b²(ω))</i> where the
