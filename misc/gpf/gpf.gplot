@@ -25,19 +25,28 @@ set ylabel "g"
 # plot "gpf.dat" using (sqrt($1)):($2*log($1)/($1*$1) - 1.75 ) title "" lw 2
 
 # =====================================================================
-# The below was used to generate the weeb-page figure for
+# The below was used to generate the web-page figure for
 # the oscillatory parts.
 # ----
-set out 'gpf-osc-60-fixed.png'
-set term png size 512, 384
+
+# set out 'gpf-osc-60-fixed.png'
+# set term png size 512, 384
+
+set term postscript eps color enhanced
+set out 'gpf-osc-60-fixed.eps'
 set title "GPF Exponential Generating Function Oscillations"
 set xlabel "√r"
 set ylabel "-7/4 + EG(gpf; r) exp(-r) log(r) / r"
+
+set xlabel "{/Symbol @\140\326}r"
+set ylabel "-7/4 + E(r) exp(-r) log(r) / r"
 
 # set xrange [5:60]
 set xrange [5:]
 plot "gpf-osc-60-fixed.dat" using 1:4 title "" lw 2
 #
+set out 'gpf-osc-600-fixed.eps'
+plot "gpf-osc-600-fixed.dat" using 1:4 title "" lw 2
 # =====================================================================
 # set title "GPF Exponential Generating Function Oscillations"
 # set xlabel "√r"
