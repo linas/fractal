@@ -2858,10 +2858,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2948,16 +2944,61 @@ The Fourier Spectrum
 \end_layout
 
 \begin_layout Standard
-What's the Fourier spectrum? Low-frequency noise, it seems.
- The figure below shows the amplitude of the Fourier components, as a function
- of frequency.
- Specifically, this shows the amplitude <i>√(a²(ω)+b²(ω))</i> where the
- Fourier components are <br> <br> &emsp;&emsp;<i>a(ω) = ∫ f(t²) cos(2π ωt)
- dt</i> <br> <br> &emsp;&emsp;<i>b(ω) = ∫ f(t²) sin(2π ωt) dt</i> <br> <br>
- and where <i>f(r)</i> is the asymptotically rescaled generating function:
- <br> <br> &emsp;&emsp;<i>f(r) = -7/4 + EG(gpf; r) exp(-r) log(r) / r</i>
- <br> <br> The integration is taken over the range <i>10 &lt; t &lt; 610</i>.
- This corresponds to the second graph above.
+The periodic behavior in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Asymptotic-Behavior"
+
+\end_inset
+
+ suggests a question: What's the Fourier spectrum? Low-frequency noise,
+ it seems.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Fourier-Spectrum"
+
+\end_inset
+
+ shows the amplitude of the Fourier components, as a function of frequency.
+ Specifically, this shows the amplitude 
+\begin_inset Formula $\sqrt{a^{2}\left(\omega\right)+b^{2}\left(\omega\right)}$
+\end_inset
+
+ where the Fourier components are
+\begin_inset Formula 
+\begin{align*}
+a\left(\omega\right) & =\int f\left(t^{2}\right)\cos\left(2\pi\omega t\right)dt\\
+b\left(\omega\right) & =\int f\left(t^{2}\right)\sin\left(2\pi\omega t\right)dt
+\end{align*}
+
+\end_inset
+
+and where 
+\begin_inset Formula $f\left(r\right)$
+\end_inset
+
+ is the asymptotically rescaled generating function: 
+\begin_inset Formula 
+\[
+f\left(r\right)=-7/4+E\left(r\right)r^{-1}e^{-r}\log\left(r\right)
+\]
+
+\end_inset
+
+The integration is taken over the range 
+\begin_inset Formula $10<t<610$
+\end_inset
+
+.
+ This corresponds to the right graph of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Asymptotic-Behavior"
+
+\end_inset
+
+.
  Again, its hard to overemphasize how small these oscillations are: the
  integral is performed over a region where the generating function blows
  up by 161 thousand orders of magnitude! Take some caution, however, in
@@ -2965,30 +3006,106 @@ What's the Fourier spectrum? Low-frequency noise, it seems.
  either zero or infinite; this graph is just an approximation to the true
  Fourier spectrum, which (I presume) consists of Dirac delta functions of
  various weights at various irrationals.
- <p> Perhaps the most notable feature of this graph is that, indeed, it
- looks very noisy: there is no obvious self-similar structure in it.
+ That is, it seems reasonable to hypothesize that the support for the Fourier
+ spectrum is a Cantor space; a comb that is zero at the rationals, but having
+ integrable support on what remains.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fourier Spectrum
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Fourier-Spectrum"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fourier-fixed.eps
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Perhaps the most notable feature of this graph is that, indeed, it looks
+ very noisy: there is no obvious self-similar structure in it.
  Its hard to make out what the fall-off in frequency is: its perhaps cubic.
- In case you are wondering: no, this is NOT numeric noise; this can be most
- easily seen in the left figure above, where the oscillations are small
- and smooth; it is the Fourier components of this smooth graph that are
- not smooth.
- The calculations are performed with the <a href="https://github.com/linas/anant"
->Algorithmic 'n Analytic Number Theory</a> multi-precision library (based
- on gnuMP); the results are verified by repeating the calculations at various
- different precisions.
- <p> <img width=1024 height=768 src="./fourier-fixed.png"> <p> The zeros seem
- to be scattered very uniformly around the complex plane.
- How many are there? They are easy to count, using <a href="https://en.wikipedia.o
-rg/wiki/Argument_principle">Cauchy's argument principle</a>: one performs
- an integral of the phase around a circle of radius <i>r</i>; this counts
- the number of zeros inside the circle.
+ In case you are wondering: no, this is 
+\emph on
+NOT
+\emph default
+ numeric noise; this can be most easily seen in the left graph of figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Asymptotic-Behavior"
+
+\end_inset
+
+, where the oscillations are small and smooth; it is the Fourier components
+ of this smooth graph that are not smooth.
+ The calculations are performed with the Algorithmic 'n Analytic Number
+ Theory
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Anant"
+
+\end_inset
+
+ multi-precision library (based on gnuMP); the results are verified by repeating
+ the calculations at various different precisions.
+ 
+\end_layout
+
+\begin_layout Section*
+Counting the Zeros
+\end_layout
+
+\begin_layout Standard
+The zeros seem to be scattered very uniformly around the complex plane.
+ How many are there? They are easy to count, using Cauchy's argument principle:
+ one performs an integral of the phase around a circle of radius 
+\begin_inset Formula $r$
+\end_inset
+
+; this counts the number of zeros inside the circle.
  This counting is easy to perform numerically.
  The result is that there are almost exactly <i>N</i> zeros within radius
  <i>N</i> of the origin, the count being off by no more <i>O(log(r))</i>.
  The surplus or deficit of zeros, as a function of the enclosing radius,
  is shown in the graph below.
- <p> The graph below suggests that the strict bound is <i>1 ± [log(r+1)
- + Mlog(log(r+1)+1)]</i> with equality holding at <i>r=1</i> (there is one
+ 
+\end_layout
+
+\begin_layout Standard
+<p> The graph below suggests that the strict bound is <i>1 ± [log(r+1) +
+ Mlog(log(r+1)+1)]</i> with equality holding at <i>r=1</i> (there is one
  zeros inside of <i>r=1</i>).
  What's M? Good question.
  If you only graphed out to <i>r=120</i>, you might think that <i>M=1</i>
@@ -2999,7 +3116,11 @@ rg/wiki/Argument_principle">Cauchy's argument principle</a>: one performs
  So maybe <i>M=3</i>? Sure, that works out to about <i>r=1832</i>, where
  it fails.
  So maybe <i>M=4</i>? Sure, why not, the graph below supports that hypothesis.
- <p> Note that this linear dependence on the radius means that the density
+ 
+\end_layout
+
+\begin_layout Standard
+<p> Note that this linear dependence on the radius means that the density
  of zeros is decreasing as the square root -- the area of a circle goes
  as <i>r<sup>2</sup></i>.
  Note that this graph is very compute-intensive to create: it represents

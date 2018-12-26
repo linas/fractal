@@ -1,7 +1,10 @@
 
-set term png size 1024, 768
-# set term png size 512, 384
-set out 'fourier-fixed.png'
+# set term png size 1024, 768
+# # set term png size 512, 384
+# set out 'fourier-fixed.png'
+
+set term postscript eps color enhanced
+set out 'fourier-fixed.eps'
 
 # set style data linespoints
 set style data lines
@@ -10,6 +13,9 @@ set key left
 set title "Fourier amplitude of the asymptotic EG(gpf)"
 set xlabel "ω"
 set ylabel "Amplitude"
+
+set title "Fourier Amplitude of the asymptotic remainder of E(z)"
+set xlabel "{/Symbol w}"
 
 # set xrange [0:1]
 set xrange [0:1.1]
