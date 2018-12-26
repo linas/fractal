@@ -3015,7 +3015,7 @@ reference "fig:Asymptotic-Behavior"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3124,7 +3124,7 @@ reference "fig:Excess-and-Deficit"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3270,8 +3270,7 @@ This figure suggests that the strict bound is
 
 \begin_layout Standard
 Note that this linear dependence on the radius means that the density of
- zeros is decreasing as the square root -- the area of a circle goes as
- 
+ zeros is decreasing as the square root — the area of a circle goes as 
 \begin_inset Formula $r^{2}$
 \end_inset
 
@@ -3279,76 +3278,12 @@ Note that this linear dependence on the radius means that the density of
  
 \end_layout
 
-\begin_layout Standard
-<p> A very similar-but-very-slightly-different graph holds for <i>EG(ngpf;
- z)</i>, where <i>ngpf(n) = n·gpf(n)</i> (the dot being simple multiplication).
- Two bounds seem acceptable, numerically.
- Aside from that suggested above, another possibility seems to be <i>2 ±
- log(r<sup>2</sup>)</i>, with equality holding at <i>r=1</i> (there are
- three zeros inside of <i>r=1</i>, which is two more than expected).
- The logarithm is so slowly growing, that it's hard to say.
- 
+\begin_layout Section*
+The Reciprocal
 \end_layout
 
 \begin_layout Standard
-<p> If you squint and scroll, you might notice that this and the previous
- graph look suspiciously similar.
- Are they the same? No...
- but why so similar? What's the point? For that, we need to look at a movie.
- Oh, by the way: for any fixed radius, it seems that <i>EG(ngpf; z)</i>
- always has about 2 to 6 (sometimes 8 or 10) more zeros than does <i>EG(gpf;
- z)</i>.
- It never-ever seems to have less.
- <img width=1024 height=768 src="./zero-count-Ngpf.png"> 
-\end_layout
-
-\begin_layout Standard
-<p> Movie time! This surprised me, but what do I know? Consider the <i>n</i>'th
- derivative, with respect to <i>z</i>, of <i>EG(gpf; z)</i>.
- Because derivatives of the exponential series yield the series itself,
- this derivative has the effect of acting as a shift operator on <i>gpf</i>.
- That is, define the shift operator <i>S</i> acting on an arithmetic series
- <i>f</i> as <i>(Sf)(n)=f(n+1)</i>.
- It follows that <i>d<sup>n</sup>EG(gpf; z)/dz<sup>n</sup> = EG(S<sup>n</sup>gpf
-; z)</i>.
- Where might the zeroes of this function lie? Surprise! The animation below
- shows what happens: each frame is a shift from the prior frame.
- Clearly, the zeros shift towards the origin; but the overall structure
- is preserved.
- Its hard to tell, but it seems that a pair of zeros disappear each frame.
- Although it seems, at first, that the zeros approach the origin uniformly,
- it quickly becomes clear that there is some tidal shearing.
- Careful observation will show that sometimes, one zero races past another
- one.
- <p> There's another interesting thing: towards the end of the movie, on
- the negative x-axis, a pair of mirrored zeros coalesce into one (double)
- zero on the x-axis, and then split apart into two, in sequential order,
- one falling in before the other.
- Something similar also seems to happen on the ray 2&pi;/5, although it
- is not clear if the two zeros actually coalesce before dropping in, or
- if they merely get close.
- At any rate, they start out roughly equidistant from the origin, but then
- fall in at sharply different times.
- <p> I've not verified the coalescing by hand.
- If that is what is really happening, then this appears to be a blatant
- violation that the lanes stay zero-free! This is surely something special
- and meaningful! Since it happens near frame 100 or so, its ...
- well, that's really a pretty big shift, for weird things to start happening.
- Wonder what it means.
- <p> I've never explored the action of shifts on exponential generating
- functions before; this behavior of radial inflow is a complete surprise
- to me.
- It turns out to not be unique to <i>gpf</i>; the exponential generating
- function of shifts of any of the random series discussed above also exhibit
- this kind of flow.
- Its presumably a well-known property of the exponential generating function;
- its just news to me.
- <p> The movie is 108 frames long, starting from a shift of zero.
- The domain is <i>-100 &lt; x,y &lt; +100</i>, and so almost every zero
- initially visible at the start of the movie has fallen into the origin
- by the end of the movie.
- <p> <img width=600 height=600 src="./gpf-exp-deriv-ani.gif"> <p> One last
- image.
+<p> One last image.
  This one is for the <b>reciprocal</b> of the GPF.
  To be precise, its for the absolute value of <i>(1/3) EG(1/gpf; z) exp(-|z|)
  log<sup>3</sup>|z|</i>, with the domain (x,y) ranging from -2160 to +2160,
@@ -3360,13 +3295,24 @@ Note that this linear dependence on the radius means that the density of
  of 1/3 in front)).
  The image suggests (of course) that the asymptotic scaling is <i>|EG(1/gpf;
  z)| ~ O(exp|z| log<sup>-3</sup>|z|)</i> or thereabouts.
- <p> Clearly, there's a new feature visible here: rings! Concentric rings!
+ 
+\end_layout
+
+\begin_layout Standard
+<p> Clearly, there's a new feature visible here: rings! Concentric rings!
  Hard to tell, but, pulling out a ruler and eyeballing them, they seem to
  be located at powers of two: the outermost at a radius of 2048, then three
  more clearly visible at 1024, 512 and 256.
  Hard to tell, but there is a vague hint of another ring at 1536=3*512.
- And maybe yet many more rings! Wow! Who knew? <p> <img width=800 height=800
- src="./recip-exp-4320-fixed.png"> <p> I lied.
+ And maybe yet many more rings! Wow! Who knew? 
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./recip-exp-4320-fixed.png"> 
+\end_layout
+
+\begin_layout Standard
+<p> I lied.
  That's not the last image -- it pays off to keep making more.
  The below is the same as above, but over a domain ranging from -20K to
  +20K.
@@ -3377,14 +3323,22 @@ Note that this linear dependence on the radius means that the density of
  ambiguous.
  In this case, the asymptotic term was picked to give the appearance of
  a uniform color balance.
- <p> Newly visible are lines paralleling the positive x-axis, seeming maybe
+ 
+\end_layout
+
+\begin_layout Standard
+<p> Newly visible are lines paralleling the positive x-axis, seeming maybe
  to curl around the origin in some vaguely parabolic way.
  There's a particularly large pseudo-parabolic orbit visible, coming in
  from the right, about 3/4th's of the way up, turning around the origin,
  and exiting abut 3/4th's of the way down (on the right, of course -- its
- easy to see, once you see it.) <p> As before, there are hints of Moire patternin
-g along the x-axis, although this time, the scale of the picture is such
- that the individual zeros can still be distinctly mad out.
+ easy to see, once you see it.) 
+\end_layout
+
+\begin_layout Standard
+<p> As before, there are hints of Moire patterning along the x-axis, although
+ this time, the scale of the picture is such that the individual zeros can
+ still be distinctly mad out.
  Therefore, the Moire patterns cannot be <i>optical</i> pixel-scale effects
  -- that is, its not an effect due to the finite size of the pixels -- it
  does not meet the criteria for the classical, canonical definition of the
@@ -3394,21 +3348,39 @@ g along the x-axis, although this time, the scale of the picture is such
  as a sum of "layers", each layer consisting of a very regular oscillatory
  pattern, with only the sum of the patterns resulting in the apparent chaos
  of the image.
- <p> What are all these features? How are they to be described? What do
- they correspond to? One can't help but get the sense that this is the projectio
-n of some structure on some bundle, some structure built of sheafs and germs,
+ 
+\end_layout
+
+\begin_layout Standard
+<p> What are all these features? How are they to be described? What do they
+ correspond to? One can't help but get the sense that this is the projection
+ of some structure on some bundle, some structure built of sheafs and germs,
  but quite how to get that is unclear.
- <p> <img width=800 height=800 src="./recip-exp-40K-fixed-lr5.png"> <p> Below
- is same as above, except for a domain of -120K (= -1.2e5) to +120K.
+ 
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./recip-exp-40K-fixed-lr5.png"> 
+\end_layout
+
+\begin_layout Standard
+<p> Below is same as above, except for a domain of -120K (= -1.2e5) to +120K.
  Note the extremely vague and hard to see hints of parabola-like orbits
  opening to the left (and not just the clearly visible ones opening to the
  right!) There are also hints of other traceries, but its hard to say if
  these are merely optical, visual field effects or if they have some basis
  in mathematical reality.
- <p> <img width=800 height=800 src="./recip-exp-240K-fixed-lr5.png"> <p> This
- is my favorite, so here it is again, with a different asymptotic coloring
- scheme.
- <p> <img width=800 height=800 src="./recip-exp-240K.png"> <p> What are these
+ <p> <img width=800 height=800 src="./recip-exp-240K-fixed-lr5.png"> 
+\end_layout
+
+\begin_layout Standard
+<p> This is my favorite, so here it is again, with a different asymptotic
+ coloring scheme.
+ 
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./recip-exp-240K.png"> <p> What are these
  parabolic-like orbits? Well, there's an alternate plot that makes curve-fitting
  easier.
  The below unwinds the the graph from around the origin, showing instead,
@@ -3481,8 +3453,12 @@ n of some structure on some bundle, some structure built of sheafs and germs,
  the outermost ring appears to be of radius 2048; the middle one presumably
  with a radius of 1024, etc.
  The other rings are presumably at other prime powers.
- <p> <img width=800 height=800 src="./exp-2.0.png"> <p> Below is an actual
- moire pattern! It shows the real part of <i>EG(gpf; z) exp(-|z|)</i>.
+ 
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./exp-2.0.png"> <p> Below is an actual moire
+ pattern! It shows the real part of <i>EG(gpf; z) exp(-|z|)</i>.
  As noted at the very beginning, in the phase portrait, the phase forms
  radially oriented fingers.
  Likewise, the real part of the function consists of radially oriented,
@@ -3494,13 +3470,31 @@ n of some structure on some bundle, some structure built of sheafs and germs,
  x,y &lt; 2000</i> (the upper-right quadrant).
  The moire patterning gives a hint about how the radial fingers differ from
  being perfectly radial.
- <p> <img width=800 height=800 src="./exp-moire.png"> <p> As above, but for
- the region <i>0 &lt; x,y &lt; 4000</i>.
+ 
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./exp-moire.png"> 
+\end_layout
+
+\begin_layout Standard
+<p> As above, but for the region <i>0 &lt; x,y &lt; 4000</i>.
  Should not be any need to point out that Moire patterning is very sensitive
  to the sampling frequency.
- <p> <img width=800 height=800 src="./exp-moire-2K.png"> <p> As above, but
- for the region <i>0 &lt; x,y &lt; 8000</i>.
- <p> <img width=800 height=800 src="./exp-moire-4K.png"> <p> Perhaps you are
+ 
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./exp-moire-2K.png"> 
+\end_layout
+
+\begin_layout Standard
+<p> As above, but for the region <i>0 &lt; x,y &lt; 8000</i>.
+ 
+\end_layout
+
+\begin_layout Standard
+<p> <img width=800 height=800 src="./exp-moire-4K.png"> <p> Perhaps you are
  starting to get bored, so I will try to wrap it up.
  Below is one for the rising Pochhammer symbol.
  Its normalized by a factorial, for convergence, so really its a binomial
@@ -3541,7 +3535,11 @@ n: such binomial-coefficient sums (Newton series, actually) are "well-known"
  After that, there is no clear progression.
  As before, they are presumably transcendental, rather than, for example,
  quadratic irrationals, or some such.
- <table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
+ 
+\end_layout
+
+\begin_layout Standard
+<table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
  </tr><tr> <td>1.3949092398684</td> <td>1</td> <td>-1.3949092398684</td> <td>0</td
 > </tr><tr> <td>4.5626759564288</td> <td>1</td> <td>-4.5626759564288</td>
  <td>0</td> </tr><tr> <td>10.245898379007</td> <td>0.64420879547681</td> <td>-4.484
@@ -3566,7 +3564,11 @@ The table below shows the first few zeros for the falling Pochhammer generating
  Note that the zeros differ from those above.
  Note that they all seem to be close to, but not quite on, 4th and 8th and
  16th roots of unity.
- <table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
+ 
+\end_layout
+
+\begin_layout Standard
+<table cellspacing="10px"> <tr> <th>r</th> <th>φ</th> <th>x</th> <th>y</th>
  </tr><tr> <td>0.72183600549901</td> <td>0.49137876622082</td> <td>0.01954810833147
 3</td> <td>0.72157126487647</td> </tr><tr> <td>10.360150450484</td> <td>0.451062615
 29342</td> <td>1.5865160932827</td> <td>10.237953117808</td> </tr><tr> <td>23.30294
