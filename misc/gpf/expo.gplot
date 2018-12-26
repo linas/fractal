@@ -1,6 +1,12 @@
 
-set term png size 1024, 768
-set out 'expo-fixed.png'
+set termoption enhanced
+set encoding utf8
+
+# ##################################################################
+# set term png size 1024, 768
+# set out 'expo-fixed.png'
+set term postscript eps color enhanced
+set out 'expo-fixed.eps'
 
 # set style data linespoints
 set style data lines
@@ -10,21 +16,35 @@ set title "Exponential generating function for greatest prime factor"
 set xlabel "|z|"
 set ylabel "|EG(gpf;z)| exp-|z|"
 
-# set xrange [0:1]
+# The UTF8 isn't coming out for post-script
+# plot "expo.dat" using 1:($2/($1)) title "θ = 0" lw 2, \
+#      "expo.dat" using 1:($3/($1)) title "π" lw 2, \
+#      "expo.dat" using 1:($4/($1)) title "2π/3" lw 2, \
+#      "expo.dat" using 1:($5/($1)) title "2π/4" lw 2, \
+#      "expo.dat" using 1:($6/($1)) title "2π/5" lw 2, \
+#      "expo.dat" using 1:($7/($1)) title "2π/6" lw 2
 
-plot "expo.dat" using 1:($2/($1)) title "θ = 0" lw 2, \
-     "expo.dat" using 1:($3/($1)) title "π" lw 2, \
-     "expo.dat" using 1:($4/($1)) title "2π/3" lw 2, \
-     "expo.dat" using 1:($5/($1)) title "2π/4" lw 2, \
-     "expo.dat" using 1:($6/($1)) title "2π/5" lw 2, \
-     "expo.dat" using 1:($7/($1)) title "2π/6" lw 2
-# plot "expo.dat" using 1:($2 * log($1)/($1*$1)) title "" lw 2
+set title "Exponential generating function for greatest prime factor"
+set xlabel "|z|"
+set ylabel "|E(z)| exp-|z|"
 
+plot "expo.dat" using 1:($2/($1)) title "{/Symbol q} = 0" lw 2, \
+     "expo.dat" using 1:($3/($1)) title "{/Symbol p}" lw 2, \
+     "expo.dat" using 1:($4/($1)) title "2{/Symbol p}/3" lw 2, \
+     "expo.dat" using 1:($5/($1)) title "2{/Symbol p}/4" lw 2, \
+     "expo.dat" using 1:($6/($1)) title "2{/Symbol p}/5" lw 2, \
+     "expo.dat" using 1:($7/($1)) title "2{/Symbol p}/6" lw 2
+
+# ##################################################################
 set out 'expo-qirr-fixed.png'
+set out 'expo-qirr-fixed.eps'
 # plot "expo-qirr.dat" using 1:($2/($1)) title "θ = √2/2 · 2π" lw 2
 
 set xlabel "Re EG(gpf;z) exp-|z| / √|z|"
 set ylabel "Im EG(gpf;z) exp-|z| / √|z|"
+
+set xlabel "Re E(z) exp-|z| / √|z|"
+set ylabel "Im E(z) exp-|z| / √|z|"
 
 set xzeroaxis lw 2
 set yzeroaxis lw 2
@@ -37,6 +57,7 @@ plot "expo-qirr-fixed.dat" using ($6/(sqrt($1))):($7/(sqrt($1))) title "θ = √
 
 # ====================================================================
 set out 'expo-rad-fixed.png'
+set out 'expo-rad-fixed.eps'
 
 #set xrange [-0.125:0.125]
 #set yrange [-0.125:0.125]
@@ -46,4 +67,3 @@ plot "expo-rad.dat" using ($6/($1*sqrt($1))):($7/($1*sqrt($1))) title "θ = 2/3"
 # plot "expo-rad.dat" using ($8/($1*sqrt($1))):($9/($1*sqrt($1))) title "θ = 3/4" lw 2
 # plot "expo-rad.dat" using ($10/($1*sqrt($1))):($11/($1*sqrt($1))) title "θ = phi" lw 2
 # plot "expo-rad.dat" using ($12/($1*sqrt($1))):($13/($1*sqrt($1))) title "θ = 5/7" lw 2
-
