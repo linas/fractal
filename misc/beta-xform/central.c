@@ -1,22 +1,14 @@
 /*
- * complex.c
+ * central.c
  *
- * Recursive complex-valued eigenfunctions for the undershift
+ * Central-limit-like apprach to decaying eigenfunctions.
  * See reigen.c for the real-number valued version of this.
+ * See complex.c for a failed complex-number version of this.
  *
- * Upshot: this completely fails to converge onto a decaying
- * eigenfunction; it instead just converges onto multiples of
- * the invariant measure.  I don't have a clear mental model
- * as to why it fails.... why it doesn't amplify the decaying
- * modes, instead of supressing them.
- *
- * See also central.c for a variant attempt.
- *
- * Jan 2018
+ * Dec 2018
  */
 
 #include <assert.h>
-#include <complex.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,29 +31,6 @@ double complex reig(double x, double K, double complex olambda, int niter)
 		// double complex z = cexp (I*2.0*M_PI*x / K);
 		double re = cos(2.0*M_PI*x / K);
 		double im = cos(2.0*M_PI*(x+ph) / K);
-
-#if 0
-		// Approximate by something that integrates to zero.
-		double re = 1.0;
-		if (0.5*K < x) re = -1.0;
-		double im = 1.0;
-      // if (0.35*K < x && x < 0.85*K) im = -1.0;
-      if (0.25*K < x && x < 0.75*K) im = -1.0;
-      // if (0.15*K < x && x < 0.65*K) im = -1.0;
-      // if (0.05*K < x && x < 0.55*K) im = -1.0;
-		// return re + I*re;
-#endif
-#ifdef FAIL
-		double r = rand();
-		r /= RAND_MAX;
-		r -= 0.5;
-		double re = r;
-
-		r = rand();
-		r /= RAND_MAX;
-		r -= 0.5;
-		double im = r;
-#endif
 
 		return re + I*im;
 	}

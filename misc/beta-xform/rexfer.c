@@ -1,7 +1,7 @@
 
 /*
  * Iterated transfer operator.  Attempt to find decaying
- * eigenfunctions....
+ * eigenfunctions.... doesn't actually work.
  *
  * Dec 2017 Linas Vepstas
  */

@@ -1,7 +1,7 @@
 /*
  * reigen.c
  *
- * Recursve eigenfunctions for the undershift
+ * Recursive eigenfunctions for the undershift
  * See complex.c for the complex-number version of this.
  *
  * This finds the invariant measure just fine, simply and easily.

@@ -1,6 +1,8 @@
 /*
  * beta.c
  * Sanity check beta transform vs. downshift.
+ * Computes the exact Parry-Gel'fond expression, comparse to
+ * experiments.
  *
  * March 2018
  */
