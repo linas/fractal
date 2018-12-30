@@ -7965,29 +7965,49 @@ as both sides would have zeros arranged in circles of unit radius.
 \end_layout
 
 \begin_layout Subsection
+Givens rotations
+\end_layout
+
+\begin_layout Standard
+A Hessenberg matrix can be brought to solvable form by applying a sequence
+ of Givens rotations.
+ Is the sequence of angles that appear in these rotations meaningful in
+ any way, or are they just some form of uninteresting junk?
+\end_layout
+
+\begin_layout Section
 Decaying Eigenfunctions
 \end_layout
 
 \begin_layout Standard
-This section provides insight into why the decaying eigenspectrum lies on
- the circle of radius 
+This section examines the decaying eigenspectrum more closely.
+\end_layout
+
+\begin_layout Subsection
+Decomposability
+\end_layout
+
+\begin_layout Standard
+Numerical evidence suggests that all of the spectrum (except for the unit
+ eignevalue) lies on the complex circle of radius 
 \begin_inset Formula $1/\beta$
 \end_inset
 
-.
- Its not clear if this spectrum is continuous, (
+, and that it is dense on that circle.
+ Its not clear if this spectrum is countable, or if it is uncountable, (
 \emph on
 i.e.
 
 \emph default
- is all of the circle) or whether it is punctured (
+ continuous on some or all of the circle).
+ If the spectrum is uncountable, it is not clear if it is punctured (
 \emph on
 i.e.
 
 \emph default
- missing a collection of discrete points).
- It is presumably dense on the circle, and even to have a non-zero measure
- on the circle.
+ missing a collection of discrete points, or even missing a measure-zero
+ Cantor set of values).
+ Characterizing the sectrum is an open problem.
  
 \end_layout
 
@@ -8004,7 +8024,7 @@ Consider an arbitrary real-valued function
 \begin_inset Formula $\int$
 \end_inset
 
- for both the discrete abd continuous parts of the spectrum.
+ for both the sum over both discrete and continuous parts of the spectrum.
  
 \end_layout
 
@@ -8046,7 +8066,7 @@ Since
 \end_inset
 
 .
- As mentioned, there is no 
+ There is no 
 \emph on
 a priori
 \emph default
@@ -8054,12 +8074,15 @@ a priori
 \begin_inset Formula $\lambda$
 \end_inset
 
- is uinformly distributed on this interval; that is 
+ is uniformly distributed on this interval; that is, one should treat 
 \begin_inset Formula $d\lambda$
 \end_inset
 
- is to be treated as a measure.
- In general, 
+ as a measure.
+\end_layout
+
+\begin_layout Standard
+In general, 
 \begin_inset Formula $\rho_{\lambda}\left(x\right)$
 \end_inset
 
@@ -8069,10 +8092,7 @@ a priori
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-By assumption 
+ By assumption 
 \begin_inset Formula $f\left(x\right)$
 \end_inset
 
@@ -8112,14 +8132,83 @@ this time, with the coefficients
 \end_layout
 
 \begin_layout Subsection
-Givens rotations
+Effective decomposability
 \end_layout
 
 \begin_layout Standard
-A Hessenberg matrix can be brought to solvable form by applying a sequence
- of Givens rotations.
- Is the sequence of angles that appear in these rotations meaningful in
- any way, or are they just some form of uninteresting junk?
+Numerical searches for decaying eigenfunctions need to recognize that the
+ complex spectrum implies that the transfer operator, when restricted to
+ real-valued functions, seems to behave in a 
+\begin_inset Quotes eld
+\end_inset
+
+non-linear
+\begin_inset Quotes erd
+\end_inset
+
+ fashion.
+ Consider, for example an eigenfunction 
+\begin_inset Formula $\rho_{\lambda}\left(x\right)$
+\end_inset
+
+ for fixed 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and write it's real and complex components as
+\begin_inset Formula 
+\[
+\rho_{\lambda}\left(x\right)=\sigma_{\lambda}\left(x\right)+i\tau_{\lambda}\left(x\right)
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\sigma_{\lambda}\right]\left(x\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\rho_{-\lambda}\right)\right]\left(x\right)\\
+= & \frac{1}{2\beta}\left(e^{i\pi\lambda}\rho_{\lambda}\left(x\right)+e^{-i\pi\lambda}\rho_{-\lambda}\left(x\right)\right)\\
+= & \frac{1}{\beta}\left(\sigma_{\lambda}\left(x\right)\cos\pi\lambda-\tau_{\lambda}\left(x\right)\sin\pi\lambda\right)
+\end{align*}
+
+\end_inset
+
+Both left and right sides of the above are real.
+ Clearly, 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ is a linear operator, and clearly 
+\begin_inset Formula $\sigma_{\lambda}$
+\end_inset
+
+ is not an eigenfunction, and so clearly, there is no reason to expect that
+ the left and right-hand sides of the above should be multiples of one-another.
+ Yet, 
+\begin_inset Formula $\sigma_{\lambda}$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+almost
+\begin_inset Quotes erd
+\end_inset
+
+ an eigenfunction...
+\end_layout
+
+\begin_layout Standard
+Iterating...
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}\sigma_{\lambda}\right]\left(x\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
