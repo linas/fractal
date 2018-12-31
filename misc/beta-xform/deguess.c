@@ -139,13 +139,8 @@ void do_unitary(double beta, double lambda)
 	double co = cos(M_PI*lambda);
 	double si = -sin(M_PI*lambda);
 
-#define SHOW_DENSITY
-#ifdef SHOW_DENSITY
 	// This graphs the sine and cosine density
 	for (int i=0; i< NPTS; i++)
-#else /* SHOW_DENSITY */
-	int i = 0.2*NPTS;
-#endif /* SHOW_DENSITY */
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
 		double re = creal(rho[i]);
@@ -154,11 +149,47 @@ void do_unitary(double beta, double lambda)
 		double tim = cimag(trho[i]);
 		double gre = re*co - im*si;
 		double gim = im*co + re*si;
-// x=lambda;
 		printf("%d	%g	%g	%g	%g	%g	%g	%g	%g\n", i, x,
 			re, im,
 			tre, tim,
 			tre-gre, tim-gim, tre-gre-(tim-gim)
+			);
+	}
+}
+
+// Alsmot same as above, but for fixed x.
+void do_const(double beta, double lambda)
+{
+
+#define NPTS 3801
+	double complex rho[NPTS];
+	double sum = 0.0;
+	for (int i=0; i< NPTS; i++)
+	{
+		double x = ((double)i + 0.5) / ((double) NPTS);
+		rho[i] = rhogu(x, beta, lambda);
+		sum += creal(rho[i]);
+	}
+
+	double complex trho[NPTS];
+	cxfer(trho, rho, NPTS, beta);
+
+	double co = cos(M_PI*lambda);
+	double si = -sin(M_PI*lambda);
+
+	int i = 0.2*NPTS;
+	{
+		double re = creal(rho[i]);
+		double im = cimag(rho[i]);
+		double tre = creal(trho[i]);
+		double tim = cimag(trho[i]);
+		double gre = re*co - im*si;
+		double gim = im*co + re*si;
+		printf("%d	%g	%g	%g	%g	%g	%g	%g	%g\n", i, lambda,
+			re, im,
+			tre, tim,
+			tre-gre, tim-gim,
+         sqrt((tre-gre)*(tre-gre)+(tim-gim)*(tim-gim))
 			);
 	}
 }
@@ -214,16 +245,20 @@ int main (int argc, char* argv[])
 	do_unitary(beta, lambda);
 #endif // NITARY_ONLY
 
+#ifdef ZEE
 	double complex z = abszed * (cos(M_PI*lambda) + I*sin(M_PI*lambda));
 	do_zee(beta, z);
+#endif
 
+#define EXPLORE_CONST
 #ifdef EXPLORE_CONST
+	// use with deangle.gplot
 #define NLAM 501
-	printf("#\n# Angulare dependence for beta=%g\n#\n", beta);
+	printf("#\n# Angular dependence for beta=%g\n#\n", beta);
 	for (int i=0; i< NLAM; i++)
 	{
 		double lam = ((double)i + 0.5) / ((double) NLAM);
-		do_stuff(beta, lam);
+		do_const(beta, lam);
 	}
 #endif
 }
