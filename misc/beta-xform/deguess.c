@@ -69,16 +69,8 @@ void cxfer(double complex* dest, double complex* src, int npts, double beta)
 	}
 }
 
-int main (int argc, char* argv[])
+void do_stuff(double beta, double lambda)
 {
-	if (argc < 3) {
-		fprintf(stderr, "Usage: %s K lambda\n", argv[0]);
-		exit(1);
-	}
-
-	double K = atof(argv[1]);
-	double lambda = atof(argv[2]);
-	double beta = 2.0*K;
 
 #define NPTS 3801
 	double complex rho[NPTS];
@@ -99,6 +91,7 @@ int main (int argc, char* argv[])
 		sum += creal(rho[i]);
 	}
 	double norm = sum / (double) NPTS;
+norm = 1.0;
 	for (int i=0; i< NPTS; i++)
 	{
 		rho[i] /= norm;
@@ -108,21 +101,47 @@ int main (int argc, char* argv[])
 	cxfer(trho, rho, NPTS, beta);
 
 	double co = cos(M_PI*lambda);
-	double si = sin(M_PI*lambda);
+	double si = -sin(M_PI*lambda);
 
+// #define SHOW_DENSITY
+#ifdef SHOW_DENSITY
+	// This graphs the since and cosine density
 	for (int i=0; i< NPTS; i++)
+#else /* SHOW_DENSITY */
+	int i = 0.2*NPTS;
+#endif /* SHOW_DENSITY */
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
 		double re = creal(rho[i]);
 		double im = cimag(rho[i]);
 		double tre = creal(trho[i]);
 		double tim = cimag(trho[i]);
-		double gre = tre*co - tim*si;
-		double gim = tim*co + tre*si;
-		printf("%d	%g	%g	%g	%g	%g	%g	%g\n", i, x,
-			creal(rho[i]), cimag(rho[i]),
-			creal(trho[i]), cimag(trho[i]),
-			gre-re, gim-im
+		double gre = re*co - im*si;
+		double gim = im*co + re*si;
+		printf("%d	%g	%g	%g	%g	%g	%g	%g	%g\n", i, x,
+			re, im,
+			tre, tim,
+			tre-gre, tim-gim, tre-gre-(tim-gim)
 			);
+	}
+}
+
+int main (int argc, char* argv[])
+{
+	if (argc < 3) {
+		fprintf(stderr, "Usage: %s K lambda\n", argv[0]);
+		exit(1);
+	}
+
+	double K = atof(argv[1]);
+	double lambda = atof(argv[2]);
+	double beta = 2.0*K;
+
+	// do_stuff(beta, lambda);
+
+	for (int i=0; i< NPTS; i++)
+	{
+		double lam = ((double)i + 0.5) / ((double) NPTS);
+		do_stuff(beta, lam);
 	}
 }
