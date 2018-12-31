@@ -72,19 +72,30 @@ void print_vee(double beta, double complex zee)
 {
 
 #define NPTS 3801
-	double complex rho[NPTS];
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
-		rho[i] = rhoz(x, beta, zee);
-	}
+		double complex rho = rhoz(x, beta, zee);
+		double re = creal(rho);
+		double im = cimag(rho);
 
-	for (int i=0; i< NPTS; i++)
-	{
-		double x = ((double)i + 0.5) / ((double) NPTS);
-		double re = creal(rho[i]);
-		double im = cimag(rho[i]);
-		printf("%d	%g	%g	%g\n", i, x, re, im);
+		// beta shift applied to above
+		double complex shift_rho = 0.0;
+		if (x < 0.5*beta)
+		{
+			shift_rho = rhoz(x/beta, beta, zee);
+			shift_rho += rhoz(x/beta + 0.5, beta, zee);
+			shift_rho /= beta;
+		}
+
+		// rho divided by z;
+		double complex rdz = rho / zee;
+
+		// difference
+		double complex cnst = shift_rho - rdz;
+		double rec = creal(cnst);
+		double imc = cimag(cnst);
+		printf("%d	%g	%g	%g	%g	%g\n", i, x, re, im, rec, imc);
 	}
 }
 
