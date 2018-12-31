@@ -4915,7 +4915,22 @@ where
 
  are the same digits as defined by Renyi and Parry, just rescaled for the
  beta shift convention being used here.
- It is fairly straight-forward to verify numerically that 
+ That is, 
+\begin_inset Formula 
+\[
+d_{n}\left(x\right)=\begin{cases}
+1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is fairly straight-forward to verify numerically that 
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}r_{\beta;\lambda}\right]\left(x\right)=e^{-i\pi\lambda}r_{\beta;\lambda}\left(x\right)+C\left(\beta;\lambda\right)
@@ -5188,7 +5203,63 @@ the same thing
  Obtaining an analogous basis for the beta subshift would provide everything
  needed to construct coherent states.
  A large part of the fumbling about in this text is a search for such functions.
- 
+\end_layout
+
+\begin_layout Standard
+Combining the above expressions, one can write
+\begin_inset Formula 
+\begin{align*}
+C\left(\beta;z\right)= & \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(y\right)-\frac{v_{\beta;z}\left(y\right)}{z}\\
+= & \sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\left[\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-\frac{1}{z}d_{n}\left(y\right)\right]
+\end{align*}
+
+\end_inset
+
+which apparently is a constant, independent of 
+\begin_inset Formula $y$
+\end_inset
+
+ for 
+\begin_inset Formula $0\le y<\beta/2$
+\end_inset
+
+, and zero for 
+\begin_inset Formula $y\ge\beta/2$
+\end_inset
+
+.
+ This only holds for the sum; individual terms are not independent of 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ The interesting limit is where 
+\begin_inset Formula $\left|z\right|\to\beta$
+\end_inset
+
+ and so its convenient to define
+\begin_inset Formula 
+\begin{align*}
+D\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
+= & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]
+\end{align*}
+
+\end_inset
+
+This would be holomorphic on the unit disk 
+\begin_inset Formula $\left|\zeta\right|<1$
+\end_inset
+
+, as each individual 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ is either zero or one; there won't be any poles on the unit disk.
+ That this really is independent of 
+\begin_inset Formula $y$
+\end_inset
+
+ really is a bit mind-bending.
 \end_layout
 
 \begin_layout Subsection

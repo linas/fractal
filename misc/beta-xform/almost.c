@@ -28,7 +28,21 @@ double beta_xform(double x, double beta)
 	return prod - floor(prod);
 }
 
-// Built contorted invariant measure. i.e. stick a z^n into the sum.
+// Return the Renyi-Parry bit d_n (but for shift, not for xform.)
+int d_n(int n, double x, double beta)
+{
+	double tn = 0.5*beta;
+	if (tn < x) return 0;
+
+	// compute T^N(b/2)
+	for (int i=0; i<n; i++)
+	{
+		tn = downshift(tn, 0.5*beta);
+	}
+	return (x<tn);
+}
+
+// Build contorted invariant measure. i.e. stick a z^n into the sum.
 double complex rhoz(double x, double beta, complex double z)
 {
 	if (0.5*beta < x) return 0.0;
@@ -99,6 +113,23 @@ void print_vee(double beta, double complex zee)
 	}
 }
 
+// ================================================================
+void print_d(int n, double beta)
+{
+#undef NPTS
+#define NPTS 201
+	for (int i=0; i< NPTS; i++)
+	{
+		double x = ((double)i + 0.5) / ((double) NPTS);
+		int dn = d_n(n, x, beta);
+		int dnlo = d_n(n, x/beta, beta);
+		int dnhi = d_n(n, x/beta+0.5, beta);
+		printf("%d	%8.6f	%d	%d	%d	%d\n", i, x, n, dn, dnlo, dnhi);
+	}
+}
+
+// ================================================================
+
 int main (int argc, char* argv[])
 {
 	if (argc < 4) {
@@ -111,9 +142,12 @@ int main (int argc, char* argv[])
 	double abszed = atof(argv[3]);
 	double beta = 2.0*K;
 
-#define ZEE
+// #define ZEE
 #ifdef ZEE
 	double complex z = abszed * (cos(M_PI*lambda) + I*sin(M_PI*lambda));
 	print_vee(beta, z);
 #endif
+
+	int n =  lambda;
+	print_d(n, beta);
 }
