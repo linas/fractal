@@ -1,0 +1,10 @@
+
+set term png size 1024,768
+set out 'deangle.png'
+
+plot "deangle.dat" using 2:7 with lines lw 2 title "re", \
+     "deangle.dat" using 2:8 with lines lw 2 title "im", \
+     "deangle.dat" using 2:(sin(3.1416*$2)) with lines lw 2 title "sin", \
+     "deangle.dat" using 2:(1-cos(3.1416*$2)) with lines lw 2 title "cos"
+
+

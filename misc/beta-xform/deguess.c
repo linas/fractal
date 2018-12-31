@@ -118,6 +118,7 @@ norm = 1.0;
 		double tim = cimag(trho[i]);
 		double gre = re*co - im*si;
 		double gim = im*co + re*si;
+x=lambda;
 		printf("%d	%g	%g	%g	%g	%g	%g	%g	%g\n", i, x,
 			re, im,
 			tre, tim,
@@ -139,9 +140,11 @@ int main (int argc, char* argv[])
 
 	// do_stuff(beta, lambda);
 
-	for (int i=0; i< NPTS; i++)
+#define NLAM 501
+	printf("#\n# Angulare dependence for beta=%g\n#\n", beta);
+	for (int i=0; i< NLAM; i++)
 	{
-		double lam = ((double)i + 0.5) / ((double) NPTS);
+		double lam = ((double)i + 0.5) / ((double) NLAM);
 		do_stuff(beta, lam);
 	}
 }
