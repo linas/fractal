@@ -92,7 +92,7 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Date
-December 2017 (Updated Feb 2018)
+December 2017 (Updated Feb 2018 and Dec 2018)
 \end_layout
 
 \begin_layout Address
@@ -4883,7 +4883,7 @@ rotated
  function
 \begin_inset Formula 
 \[
-r_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}e^{i\pi\lambda}
+r_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}e^{i\pi\lambda n}
 \]
 
 \end_inset
@@ -4986,7 +4986,165 @@ up to a constant
 
 \end_inset
 
+As before, it appears that 
+\begin_inset Formula $0<\left|C\left(\beta;z\right)\right|$
+\end_inset
 
+ for all 
+\begin_inset Formula $\left|z\right|<\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+.
+ However, anticipating later results, it appears that 
+\begin_inset Formula $C\left(\beta;z\right)\to0$
+\end_inset
+
+ for some values of 
+\begin_inset Formula $z$
+\end_inset
+
+ when 
+\begin_inset Formula $\left|z\right|\to\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Inspired by this, write
+\begin_inset Formula 
+\[
+w_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}d_{n}\left(x\right)e^{i\pi\lambda n}
+\]
+
+\end_inset
+
+This sum is ill-defined, as written; it might be conditionally convergent,
+ if one were lucky.
+ (Don't forget: 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ depends on 
+\begin_inset Formula $\beta$
+\end_inset
+
+ as well as 
+\begin_inset Formula $x$
+\end_inset
+
+.) Exploring this numerically, taking the limit from below suggests that
+ this sum is in fact convergent almost-everywhere, and that its quite reasonably
+ finite, but that 
+\begin_inset Formula $w_{\beta;\lambda}\left(x\right)$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+discontinuous everywhere
+\begin_inset Quotes erd
+\end_inset
+
+, as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ I place the phrase 
+\begin_inset Quotes eld
+\end_inset
+
+discontinuous everywhere
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset Quotes eld
+\end_inset
+
+scare quotes
+\begin_inset Quotes erd
+\end_inset
+
+; what is probably happening is that it is discontinuous only at the rationals
+ (or some other countable set of points), while being well-behaved 
+\begin_inset Quotes eld
+\end_inset
+
+everywhere else
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This notion can be formalized.
+ Recall that the unit interval, with the rationals removed, is a 
+\begin_inset Quotes eld
+\end_inset
+
+fat Cantor set
+\begin_inset Quotes erd
+\end_inset
+
+: it is everywhere diconnected, but of finte measure; unit measure, even.
+ Informally, it is sufficient to assign a different number to each disconnected
+ part of the Cantor set; these numbers can even be 
+\begin_inset Quotes eld
+\end_inset
+
+infinite
+\begin_inset Quotes erd
+\end_inset
+
+, but with care, the resulting function is a measure, in that it is integrable.
+ The formal mechanism for acheiving this is to pass over to the Cantor space
+ 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ and then assign finite values to each cylinder set, in a consistent way;
+ 
+\emph on
+i.e.
+
+\emph default
+ such a way that the usual axioms a measure hold: 
+\emph on
+viz.
+
+\emph default
+ sigma additivity, 
+\emph on
+etc
+\emph default
+.
+ Then, an sub-interval 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ of the unit interval corrsponds to a particular cylinder set; to get the
+ value of 
+\begin_inset Formula $\int_{a}^{b}$
+\end_inset
+
+ one only needs to 
+\begin_inset Quotes eld
+\end_inset
+
+read off
+\begin_inset Quotes erd
+\end_inset
+
+ the value attached to that cylinder set.
 \end_layout
 
 \begin_layout Subsection

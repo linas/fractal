@@ -67,7 +67,8 @@ double complex rhoz(double x, double beta, complex double z)
 
 	double tn = 1.0;
 
-	while (1.0e-18 < obn)
+	int cnt=0;
+	while (1.0e-16 < obn*cabs(zn))
 	{
 		if (x < tn) {
 			rho += obn * zn;
@@ -82,6 +83,9 @@ double complex rhoz(double x, double beta, complex double z)
 
 		// compute z^n;
 		zn *= z;
+
+		cnt++;
+		if (3000< cnt) break;
 	}
 
 	return rho;
@@ -157,18 +161,18 @@ void do_unitary(double beta, double lambda)
 	}
 }
 
-// Alsmot same as above, but for fixed x.
+// ================================================================
+// Effectively the same as do_unitary, but for fixed x;
+// i.e. picking one bin.
 void do_const(double beta, double lambda)
 {
 
 #define NPTS 3801
 	double complex rho[NPTS];
-	double sum = 0.0;
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
 		rho[i] = rhogu(x, beta, lambda);
-		sum += creal(rho[i]);
 	}
 
 	double complex trho[NPTS];
@@ -194,17 +198,54 @@ void do_const(double beta, double lambda)
 	}
 }
 
+// ================================================================
+// Effectively the same as do_const, but for general z.
+// i.e. picking one bin, like above, for fore z, below.
+void do_zconst(double beta, double complex zee)
+{
+
+#define NPTS 3801
+	double complex rho[NPTS];
+	for (int i=0; i< NPTS; i++)
+	{
+		double x = ((double)i + 0.5) / ((double) NPTS);
+		rho[i] = rhoz(x, beta, zee);
+	}
+
+	double complex trho[NPTS];
+	cxfer(trho, rho, NPTS, beta);
+
+	int i = 0.2*NPTS;
+	{
+		double re = creal(rho[i]);
+		double im = cimag(rho[i]);
+		double tre = creal(trho[i]);
+		double tim = cimag(trho[i]);
+		double complex gee = rho[i] / zee;
+		double gre = creal(gee);
+		double gim = cimag(gee);
+		double lambda = atan2(cimag(zee), creal(zee)) /  M_PI;
+		printf("%d	%g	%g	%g	%g	%g	%g	%g	%g\n", i, lambda,
+			re, im,
+			tre, tim,
+			tre-gre, tim-gim,
+         sqrt((tre-gre)*(tre-gre)+(tim-gim)*(tim-gim))
+			);
+	}
+}
+
+// ================================================================
+// Just like do_unitary, but for general z.
+
 void do_zee(double beta, double complex zee)
 {
 
 // #define NPTS 3801
 	double complex rho[NPTS];
-	double sum = 0.0;
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
 		rho[i] = rhoz(x, beta, zee);
-		sum += creal(rho[i]);
 	}
 
 	double complex trho[NPTS];
@@ -245,12 +286,13 @@ int main (int argc, char* argv[])
 	do_unitary(beta, lambda);
 #endif // NITARY_ONLY
 
+#define ZEE
 #ifdef ZEE
 	double complex z = abszed * (cos(M_PI*lambda) + I*sin(M_PI*lambda));
 	do_zee(beta, z);
 #endif
 
-#define EXPLORE_CONST
+// #define EXPLORE_CONST
 #ifdef EXPLORE_CONST
 	// use with deangle.gplot
 #define NLAM 501
@@ -258,7 +300,11 @@ int main (int argc, char* argv[])
 	for (int i=0; i< NLAM; i++)
 	{
 		double lam = ((double)i + 0.5) / ((double) NLAM);
-		do_const(beta, lam);
+		// do_const(beta, lam);
+
+		double complex zee = abszed * cexp(I*lam*M_PI);
+		do_zconst(beta, zee);
+		
 	}
 #endif
 }
