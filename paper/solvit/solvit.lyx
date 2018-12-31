@@ -4952,7 +4952,7 @@ with
 \end_layout
 
 \begin_layout Standard
-There is no particular reason to stop with unitrary rotations; one can also
+There is no particular reason to stop with unitary rotations; one can also
  consider 
 \begin_inset Formula 
 \[
@@ -4981,7 +4981,7 @@ up to a constant
  behavior continues:
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{\beta}v_{\beta;\lambda}\right]\left(x\right)=\frac{1}{z}v_{\beta;\lambda}\left(x\right)+C\left(\beta;z\right)
+\left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(x\right)=\frac{1}{z}v_{\beta;z}\left(x\right)+C\left(\beta;z\right)
 \]
 
 \end_inset
@@ -5012,6 +5012,20 @@ As before, it appears that
 \end_inset
 
 .
+ That is, 
+\begin_inset Formula $v_{\beta;z}\left(x\right)$
+\end_inset
+
+ might very well be an eigenfunction of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+, if only the limit 
+\begin_inset Formula $\left|z\right|\to\beta$
+\end_inset
+
+ could be taken in some sensible way.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5039,7 +5053,7 @@ This sum is ill-defined, as written; it might be conditionally convergent,
 
 .) Exploring this numerically, taking the limit from below suggests that
  this sum is in fact convergent almost-everywhere, and that its quite reasonably
- finite, but that 
+ finite, but also that 
 \begin_inset Formula $w_{\beta;\lambda}\left(x\right)$
 \end_inset
 
@@ -5082,6 +5096,16 @@ everywhere else
 \end_inset
 
 .
+ Oddly, this suggests the correct phrasing should be 
+\begin_inset Quotes eld
+\end_inset
+
+continuous almost everywhere
+\begin_inset Quotes erd
+\end_inset
+
+, although this requires abandoning most traditional definitions of continuity.
+ There is a way to formalize these hand-waving statements.
  
 \end_layout
 
@@ -5092,8 +5116,9 @@ If this were the Bernoulli shift, the above statements could be formalized
 \end_inset
 
 ) and then defining a measure on cylinder sets.
- The problem encountered here is that the cylinder sets, as canonically
- defined, fail to be shift-covariant when the shift is the beta-transform.
+ The problem encountered here, with the beta-transform, is that the cylinder
+ sets, as canonically defined, fail to be shift-covariant when the shift
+ is the beta-transform.
  To make forward progress, one needs a construction analogous to the cylinder
  set, but behaving appropriately (
 \begin_inset Quotes eld
