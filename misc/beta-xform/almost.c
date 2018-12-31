@@ -1,0 +1,108 @@
+/*
+ * almost.c
+ * Explore the almost-eigenfunctions that are coherent states
+ * built from the Renyi-Parry bitstream
+ *
+ * Dec 2018
+ */
+#include <complex.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+// My downshift; beta=2K so T(x) = case bx or b(x-0.5)
+double downshift(double x, double K)
+{
+	K *= 2.0;
+	if (0.5 <= x)
+	{
+		return K * (x - 0.5);
+	}
+	return K*x;
+}
+
+// Standard beta-xform is t(x) = (b x) mod 1
+double beta_xform(double x, double beta)
+{
+	double prod = x * beta;
+	return prod - floor(prod);
+}
+
+// Built contorted invariant measure. i.e. stick a z^n into the sum.
+double complex rhoz(double x, double beta, complex double z)
+{
+	if (0.5*beta < x) return 0.0;
+
+	double ob = 1.0/beta;
+	double obn = 1.0;
+	complex double zn = 1.0;
+
+	// accumulated sum
+	complex double rho = 0.0;
+
+	double tn = 0.5*beta;
+
+	int cnt=0;
+	while (1.0e-16 < obn*cabs(zn))
+	{
+		if (x < tn) {
+			rho += obn * zn;
+		}
+
+		// compute 1/beta^N
+		obn *= ob;
+
+		// compute T^N(b/2)
+		tn = downshift(tn, 0.5*beta);
+
+		// compute z^n;
+		zn *= z;
+
+		cnt++;
+		if (3000< cnt) break;
+	}
+
+	return rho;
+}
+
+// ================================================================
+
+// Print the contorted density
+void print_vee(double beta, double complex zee)
+{
+
+#define NPTS 3801
+	double complex rho[NPTS];
+	for (int i=0; i< NPTS; i++)
+	{
+		double x = ((double)i + 0.5) / ((double) NPTS);
+		rho[i] = rhoz(x, beta, zee);
+	}
+
+	for (int i=0; i< NPTS; i++)
+	{
+		double x = ((double)i + 0.5) / ((double) NPTS);
+		double re = creal(rho[i]);
+		double im = cimag(rho[i]);
+		printf("%d	%g	%g	%g\n", i, x, re, im);
+	}
+}
+
+int main (int argc, char* argv[])
+{
+	if (argc < 4) {
+		fprintf(stderr, "Usage: %s K lambda abszed\n", argv[0]);
+		exit(1);
+	}
+
+	double K = atof(argv[1]);
+	double lambda = atof(argv[2]);
+	double abszed = atof(argv[3]);
+	double beta = 2.0*K;
+
+#define ZEE
+#ifdef ZEE
+	double complex z = abszed * (cos(M_PI*lambda) + I*sin(M_PI*lambda));
+	print_vee(beta, z);
+#endif
+}

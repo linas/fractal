@@ -1,6 +1,7 @@
 /*
  * deguess.c
- * Wild-ass guess, using a spining version of Parry-Gel'fond expression.
+ * Built coherent states from the Renyi-Parry bitstream.
+ * It turns out these are "almost eignestates".
  *
  * Dec 2018
  */

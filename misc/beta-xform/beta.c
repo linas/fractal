@@ -95,6 +95,7 @@ int main (int argc, char* argv[])
 	double x = atof(argv[2]);
 	double beta = 2.0*K;
 
+#ifdef WITT_EXPLORE
 	double mid = x;
 	double par = x/K;
 	double bn = 1.0;
@@ -104,27 +105,23 @@ int main (int argc, char* argv[])
 		int kn = 0;
 		if (0.5 <= mid) kn = 1;
 
-		// en's are the invariant measure
-		int en = 0;
-		if (par <= x) en = 1;
-
 		double witt = witt_xform(x, beta, i);
 		witt *= bn;
 
 		double diff = witt-mid;
 
-		printf("%d   down=%8.6f k=%d  parry=%8.6f e=%d  witt = %8.6f diff=%8.6f\n",
-		       i, mid, kn, K*par, en, witt, diff);
+		printf("%d   down=%8.6f k=%d  parry=%8.6f  witt = %8.6f diff=%8.6f\n",
+		       i, mid, kn, K*par, witt, diff);
 
 		mid = downshift(mid, K);
 		par = beta_xform(par, beta);
 
 		bn *= beta;
 	}
+#endif // WITT_EXPLORE
+
 // #define VERIFY_MIDPOINTS
 #ifdef VERIFY_MIDPOINTS
-	double K = atof(argv[1]);
-	double beta = 2.0*K;
 
 	double mid = K;
 	double par = 1.0;
@@ -133,6 +130,25 @@ int main (int argc, char* argv[])
 	{
 		double mone = 2.0*mid - floor(2.0*mid);
 		printf("%d 2xmid mod1=%g parry=%g diff = %g\n", i, mone, par, 2*mid-par);
+		mid = downshift(mid, K);
+		par = beta_xform(par, beta);
+	}
+#endif
+
+#define VERIFY_INV_MEAS
+#ifdef VERIFY_INV_MEAS
+
+	double mid = K;
+	double par = 1.0;
+	for (int i=0; i< 30; i++)
+	{
+		int en = 0;
+		if (par <= x/K) en = 1;
+
+		int dn = 0;
+		if (mid <= x) dn = 1;
+
+		printf("%d down=%8.6f dn=%d   parry=%8.6f en=%d\n", i, mid, dn, K*par, en);
 		mid = downshift(mid, K);
 		par = beta_xform(par, beta);
 	}
