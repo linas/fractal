@@ -28,6 +28,8 @@ double beta_xform(double x, double beta)
 	return prod - floor(prod);
 }
 
+// This is attempting to be a Witt-vector-like thing.
+// This needs further work...
 double witt_xform(double x, double beta, int n)
 {
 	double prod = pow (beta, n);
@@ -94,23 +96,29 @@ int main (int argc, char* argv[])
 	double beta = 2.0*K;
 
 	double mid = x;
-	double par = x;
+	double par = x/K;
 	double bn = 1.0;
-	// par = beta_xform(par, beta);
 	for (int i=0; i< 30; i++)
 	{
-		mid = downshift(mid, K);
+		// k's are the beta-expansion
 		int kn = 0;
 		if (0.5 <= mid) kn = 1;
 
-		par = beta_xform(par, beta);
+		// en's are the invariant measure
 		int en = 0;
 		if (par <= x) en = 1;
 
 		double witt = witt_xform(x, beta, i);
 		witt *= bn;
-		printf("%d   down=%8.6f k=%d  parry=%8.6f e=%d  witt = %8.6g\n",
-		       i, mid, kn, par, en, witt);
+
+		double diff = witt-mid;
+
+		printf("%d   down=%8.6f k=%d  parry=%8.6f e=%d  witt = %8.6f diff=%8.6f\n",
+		       i, mid, kn, K*par, en, witt, diff);
+
+		mid = downshift(mid, K);
+		par = beta_xform(par, beta);
+
 		bn *= beta;
 	}
 // #define VERIFY_MIDPOINTS
