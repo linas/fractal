@@ -11,6 +11,9 @@
 
 double complex rhogu(double x, double beta, double lambda)
 {
+	x /= 0.5*beta;
+	if (1.0 < x) return 0.0;
+
 	double co = cos(M_PI*lambda);
 	double si = sin(M_PI*lambda);
 	double cn = 1.0;  // cos(N*pi*lambda)
@@ -24,7 +27,7 @@ double complex rhogu(double x, double beta, double lambda)
 
 	double tn = 1.0;
 
-	while (1.0e-16 < obn)
+	while (1.0e-18 < obn)
 	{
 		if (x < tn) {
 			rho_r += obn * cn * tn;
@@ -62,25 +65,34 @@ int main (int argc, char* argv[])
 #define NPTS 801
 	double rerho[NPTS];
 	double imrho[NPTS];
-	double ms = 0.0;
+	double sum = 0.0;
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
 		double complex rho = rhogu(x, beta, lambda);
-		rerho[i] = creal(rho);
-		imrho[i] = cimag(rho);
-		ms += rerho[i]*rerho[i] + imrho[i]*imrho[i];
+		double re = creal(rho);
+		double im = cimag(rho);
+		rerho[i] = re;
+		imrho[i] = im;
+#if INSANE
+		double rms = sqrt(re*re + im*im);
+		if (1.0e-14 < rms)
+		{
+			rerho[i] = re / rms;
+			imrho[i] = im / rms;
+		}
+#endif
+		sum += rerho[i];
 	}
-	double rms = sqrt(ms / (double) NPTS);
+	double norm = sum / (double) NPTS;
 	for (int i=0; i< NPTS; i++)
 	{
-		rerho[i] / = rms;
-		imrho[i] / = rms;
+		rerho[i] /= norm;
+		imrho[i] /= norm;
 	}
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
 		printf("%d	%g	%g	%g\n", i, x, rerho[i], imrho[i]);
 	}
-
 }
