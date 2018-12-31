@@ -142,12 +142,14 @@ int main (int argc, char* argv[])
 	double abszed = atof(argv[3]);
 	double beta = 2.0*K;
 
-// #define ZEE
+#define ZEE
 #ifdef ZEE
 	double complex z = abszed * (cos(M_PI*lambda) + I*sin(M_PI*lambda));
 	print_vee(beta, z);
 #endif
 
+#ifdef SINGLE_TERMS
 	int n =  lambda;
 	print_d(n, beta);
+#endif
 }
