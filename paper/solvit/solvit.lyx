@@ -2283,19 +2283,19 @@ key "Parry60"
 , as
 \begin_inset Formula 
 \begin{equation}
-\nu_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{d_{n}\left(y\right)}{\beta^{n}}\label{eq:invariant measure}
+\nu_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{\varepsilon_{n}\left(y\right)}{\beta^{n}}\label{eq:invariant measure}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $d_{n}$
+\begin_inset Formula $\varepsilon_{n}$
 \end_inset
 
  is the digit sequence 
 \begin_inset Formula 
 \[
-d_{n}\left(y\right)=\begin{cases}
+\varepsilon_{n}\left(y\right)=\begin{cases}
 0 & \mbox{ if }t_{\beta}^{n}\left(1\right)\le y\\
 1 & \mbox{ otherwise}
 \end{cases}
@@ -4888,7 +4888,13 @@ r_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\b
 
 \end_inset
 
-It is fairly straight-forward to verify numerically that 
+where 
+\begin_inset Formula $d_{n}\left(x\right)=\varepsilon_{n}\left(2x/\beta\right)$
+\end_inset
+
+ are the same digits as defined by Renyi and Parry, just rescaled for the
+ beta shift convention being used here.
+ It is fairly straight-forward to verify numerically that 
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}r_{\beta;\lambda}\right]\left(x\right)=e^{-i\pi\lambda}r_{\beta;\lambda}\left(x\right)+C\left(\beta;\lambda\right)
@@ -4904,7 +4910,7 @@ where
 \begin_inset Formula $x$
 \end_inset
 
- (that is, a constant for 
+ (or rather, a constant for 
 \begin_inset Formula $x<\beta/2$
 \end_inset
 
@@ -4986,7 +4992,15 @@ up to a constant
 
 \end_inset
 
-As before, it appears that 
+As before, 
+\begin_inset Formula $C\left(\beta;z\right)$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $x.$
+\end_inset
+
+ It appears that 
 \begin_inset Formula $0<\left|C\left(\beta;z\right)\right|$
 \end_inset
 
@@ -4999,7 +5013,15 @@ As before, it appears that
 \end_inset
 
 .
- However, anticipating later results, it appears that 
+ However, anticipating later results, which suggest that 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ has complex-valued eigenvalues on the circle of radius 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+, it appears that 
 \begin_inset Formula $C\left(\beta;z\right)\to0$
 \end_inset
 
