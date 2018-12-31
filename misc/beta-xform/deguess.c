@@ -80,7 +80,7 @@ int main (int argc, char* argv[])
 	double lambda = atof(argv[2]);
 	double beta = 2.0*K;
 
-#define NPTS 1801
+#define NPTS 3801
 	double complex rho[NPTS];
 	double sum = 0.0;
 	for (int i=0; i< NPTS; i++)
@@ -107,11 +107,22 @@ int main (int argc, char* argv[])
 	double complex trho[NPTS];
 	cxfer(trho, rho, NPTS, beta);
 
+	double co = cos(M_PI*lambda);
+	double si = sin(M_PI*lambda);
+
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
-		printf("%d	%g	%g	%g	%g	%g\n", i, x,
+		double re = creal(rho[i]);
+		double im = cimag(rho[i]);
+		double tre = creal(trho[i]);
+		double tim = cimag(trho[i]);
+		double gre = tre*co - tim*si;
+		double gim = tim*co + tre*si;
+		printf("%d	%g	%g	%g	%g	%g	%g	%g\n", i, x,
 			creal(rho[i]), cimag(rho[i]),
-			creal(trho[i]), cimag(trho[i]));
+			creal(trho[i]), cimag(trho[i]),
+			gre-re, gim-im
+			);
 	}
 }

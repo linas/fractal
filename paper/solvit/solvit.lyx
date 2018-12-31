@@ -2278,9 +2278,9 @@ key "Parry60"
 
 , as
 \begin_inset Formula 
-\[
-\rho_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{d_{n}\left(y\right)}{\beta^{n}}
-\]
+\begin{equation}
+\rho_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{d_{n}\left(y\right)}{\beta^{n}}\label{eq:invariant measure}
+\end{equation}
 
 \end_inset
 
@@ -8349,6 +8349,40 @@ Iterating on the transfer operator
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}^{N}\sigma_{\lambda}\right]\left(x\right)=\frac{1}{\beta^{N}}\left(\sigma_{\lambda}\left(x\right)\cos\pi N\lambda-\tau_{\lambda}\left(x\right)\sin\pi N\lambda\right)
+\]
+
+\end_inset
+
+Appling a discrete cosine transorm allows individual eignenfunctions to
+ be extracted numerically.
+ Lets take some wild guesses.
+ Starting with the Renyi-Parry invariant measure defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+ define a 
+\begin_inset Quotes eld
+\end_inset
+
+rotated
+\begin_inset Quotes erd
+\end_inset
+
+ function
+\begin_inset Formula 
+\[
+r_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}e^{i\pi\lambda}
+\]
+
+\end_inset
+
+It is fairly straight forward to verify numerically that 
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}r_{\beta;\lambda}\right]\left(x\right)=
 \]
 
 \end_inset
