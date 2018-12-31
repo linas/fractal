@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// My downshift; beta=2K so T(x) = case bx or b(x-0.5)
 double downshift(double x, double K)
 {
 	K *= 2.0;
@@ -20,6 +21,7 @@ double downshift(double x, double K)
 	return K*x;
 }
 
+// Standard beta-xform is t(x) = (b x) mod 1
 double beta_xform(double x, double beta)
 {
 	double prod = x * beta;
@@ -82,6 +84,11 @@ double skipry(double beta)
 
 int main (int argc, char* argv[])
 {
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s K x\n", argv[0]);
+		exit(1);
+	}
 	double K = atof(argv[1]);
 	double x = atof(argv[2]);
 	double beta = 2.0*K;
@@ -89,14 +96,21 @@ int main (int argc, char* argv[])
 	double mid = x;
 	double par = x;
 	double bn = 1.0;
-	par = beta_xform(par, beta);
+	// par = beta_xform(par, beta);
 	for (int i=0; i< 30; i++)
 	{
 		mid = downshift(mid, K);
+		int kn = 0;
+		if (0.5 <= mid) kn = 1;
+
 		par = beta_xform(par, beta);
+		int en = 0;
+		if (par <= x) en = 1;
+
 		double witt = witt_xform(x, beta, i);
 		witt *= bn;
-		printf("%d dd1=%g parry=%g witt = %g\n", i, mid, par, witt);
+		printf("%d   down=%8.6f k=%d  parry=%8.6f e=%d  witt = %8.6g\n",
+		       i, mid, kn, par, en, witt);
 		bn *= beta;
 	}
 // #define VERIFY_MIDPOINTS
