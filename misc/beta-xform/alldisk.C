@@ -67,7 +67,7 @@ COMPLEX dcnst(double x, double beta, COMPLEX zeta)
 		if (yobhi < tn) term += zeta;
 		if (x < tn) term -= 1.0;
 
-		dee += zetan *term;
+		dee += zetan * term;
 
 		// compute T^N(b/2)
 		tn = downshift(tn, 0.5*beta);
@@ -106,20 +106,16 @@ static void almost_zero (float *array,
 		x -= x_center;
 		x *= x_width;
 
-		COMPLEX z = x + I*y;
-
-z = 0.7 + I*0.1;
-		COMPLEX sum = dcnst(undep, beta, z);
-sum /= z;
-printf("duuude undep=%g beta=%g zeta=%g +i %g sum=%g +i %g\n",
-undep, beta, real(z), imag(z), real(sum), imag(sum));
-
-
- 		array[j] = abs(sum);
-		array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
-
 		double r = x*x + y*y;
-		if (0.99 < r and r < 1.01) array[j] = 0.5;
+		if (r <= 1.0)
+		{
+			COMPLEX zeta = x + I*y;
+			COMPLEX sum = dcnst(undep, beta, zeta);
+
+			double mag = abs(sum);
+			if (mag < 0.01) printf("maybe zero near zeta=%g +i %g\n", x,y);
+			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
+		}
 	}
 }
 
