@@ -30,8 +30,8 @@ double complex rhogu(double x, double beta, double lambda)
 	while (1.0e-18 < obn)
 	{
 		if (x < tn) {
-			rho_r += obn * cn * tn;
-			rho_i += obn * sn * tn;
+			rho_r += obn * cn;
+			rho_i += obn * sn;
 		}
 
 		// compute 1/beta^N
@@ -50,6 +50,24 @@ double complex rhogu(double x, double beta, double lambda)
 	return rho_r + I* rho_i;
 }
 
+// Real-part-only xfer operator
+void xfer(double* dest, double* src, int npts, double beta)
+{
+	for (int i=0; i<npts; i++)
+	{
+		double y = ((double)i + 0.5) / ((double) npts);
+		if (0.5*beta < y)
+		{
+			dest[i] = 0.0;
+		}
+		else
+		{
+			double x = npts * y / beta;
+			int bin = floor(x);
+			dest[i] = (src[bin] + src[bin+npts/2]) / beta;
+		}
+	}
+}
 
 int main (int argc, char* argv[])
 {
@@ -62,7 +80,7 @@ int main (int argc, char* argv[])
 	double lambda = atof(argv[2]);
 	double beta = 2.0*K;
 
-#define NPTS 801
+#define NPTS 1801
 	double rerho[NPTS];
 	double imrho[NPTS];
 	double sum = 0.0;
@@ -90,9 +108,13 @@ int main (int argc, char* argv[])
 		rerho[i] /= norm;
 		imrho[i] /= norm;
 	}
+
+	double trerho[NPTS];
+	xfer(trerho, rerho, NPTS, beta);
+
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
-		printf("%d	%g	%g	%g\n", i, x, rerho[i], imrho[i]);
+		printf("%d	%g	%g	%g	%g\n", i, x, rerho[i], imrho[i], trerho[i]);
 	}
 }
