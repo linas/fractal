@@ -2279,7 +2279,7 @@ key "Parry60"
 , as
 \begin_inset Formula 
 \begin{equation}
-\rho_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{d_{n}\left(y\right)}{\beta^{n}}\label{eq:invariant measure}
+\nu_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{d_{n}\left(y\right)}{\beta^{n}}\label{eq:invariant measure}
 \end{equation}
 
 \end_inset
@@ -4273,9 +4273,10 @@ That is, the
 
 \end_inset
 
-This is generally referred to as the Ruelle-Frobenius-Perron eigenfunction,
- as it corresponds to the largest eigenvalue of the transfer operator, and
- specifically, the eigenvalue 1.
+This is generally referred to as the Ruelle-Frobenius-Perron (RFP) eigenfunction
+, as it corresponds to the largest eigenvalue of the transfer operator,
+ and specifically, the eigenvalue 1.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4319,6 +4320,66 @@ for eigenvalues
 
 .
  This turns out to be a rather harsh condition.
+\end_layout
+
+\begin_layout Standard
+At least one basic fact is known: for at least some kinds of function spaces,
+ the RFP eigenfunction is given by Renyi and Parry, as shown in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+.
+ More precisely, it is just the rescaled form 
+\begin_inset Formula $\rho\left(x\right)=\nu\left(2x/\beta\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $x<\beta/2$
+\end_inset
+
+ and zero otherwise.
+ Changing vocabulary, this is sometimes called the 
+\begin_inset Quotes eld
+\end_inset
+
+invariant measure
+\begin_inset Quotes erd
+\end_inset
+
+; as it describes a measure on the unit interval.
+ That is, for the space of all possible measures on the unit interval, the
+ Renyi-Parry measure is one of the eigenfunctions of the transfer operator.
+ Some caution is advised here: for the special case of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, that is, the Bernoulli shift, one has as an eigenfunction the Minkowski
+ measure
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+; it has eigenvalue 1, but is otherwise quite pathological: it is continuous
+ nowhere, zero on the rationals, and divergent on the rest (i.e.
+ on a 
+\begin_inset Quotes eld
+\end_inset
+
+fat
+\begin_inset Quotes erd
+\end_inset
+
+ Cantor set).
+ There's no particular reason to think that this holds only for 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+; measures can be, in general, very unusual functions.
 \end_layout
 
 \begin_layout Standard
@@ -4420,7 +4481,7 @@ Computed in three places: rexfer.c reigen.c and complex.c
 \end_layout
 
 \begin_layout Subsection
-Almost solutions
+Almost-solutions
 \end_layout
 
 \begin_layout Standard
@@ -4823,16 +4884,16 @@ r_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\b
 
 \end_inset
 
-It is fairly straight forward to verify numerically that 
+It is fairly straight-forward to verify numerically that 
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{\beta}r_{\beta;\lambda}\right]\left(x\right)=e^{-i\pi\lambda}r_{\beta;\lambda}\left(x\right)+C\left(\lambda\right)
+\left[\mathcal{L}_{\beta}r_{\beta;\lambda}\right]\left(x\right)=e^{-i\pi\lambda}r_{\beta;\lambda}\left(x\right)+C\left(\beta;\lambda\right)
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $C\left(\lambda\right)$
+\begin_inset Formula $C\left(\beta;\lambda\right)$
 \end_inset
 
  is a constant independent of 
@@ -4844,7 +4905,37 @@ where
 \end_inset
 
  and zero otherwise).
- Further numerical exploration suggests that
+ Further numerical exploration suggests that 
+\begin_inset Formula 
+\[
+C\left(\beta;\lambda\right)=1-e^{-i\pi\lambda}+p\left(\beta;\lambda\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $p\left(\beta;\lambda\right)$
+\end_inset
+
+ a smaller function, periodic in 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ The frequency increases and the amplitude decreases with smaller 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The frequncy is interesting: it is always a multiple of 
+\begin_inset Formula $\pi/2$
+\end_inset
+
+ and seems to be approximately given by 
+\begin_inset Formula $\pi/\left(\beta-1\right)$
+\end_inset
+
+, but truncated to quarter-wavelengths.
 \end_layout
 
 \begin_layout Subsection
@@ -8407,7 +8498,7 @@ Iterating on the transfer operator
 
 \end_inset
 
-Appling a discrete cosine transform allows individual eignenfunctions to
+Appling a discrete cosine transform allows individual eigenfunctions to
  be extracted numerically.
  
 \end_layout
