@@ -50,8 +50,8 @@ double complex rhogu(double x, double beta, double lambda)
 	return rho_r + I* rho_i;
 }
 
-// Real-part-only xfer operator
-void xfer(double* dest, double* src, int npts, double beta)
+// xfer operator
+void cxfer(double complex* dest, double complex* src, int npts, double beta)
 {
 	for (int i=0; i<npts; i++)
 	{
@@ -81,17 +81,13 @@ int main (int argc, char* argv[])
 	double beta = 2.0*K;
 
 #define NPTS 1801
-	double rerho[NPTS];
-	double imrho[NPTS];
+	double complex rho[NPTS];
 	double sum = 0.0;
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
-		double complex rho = rhogu(x, beta, lambda);
-		double re = creal(rho);
-		double im = cimag(rho);
-		rerho[i] = re;
-		imrho[i] = im;
+		double complex rhog = rhogu(x, beta, lambda);
+		rho[i] = rhog;
 #if INSANE
 		double rms = sqrt(re*re + im*im);
 		if (1.0e-14 < rms)
@@ -100,21 +96,22 @@ int main (int argc, char* argv[])
 			imrho[i] = im / rms;
 		}
 #endif
-		sum += rerho[i];
+		sum += creal(rho[i]);
 	}
 	double norm = sum / (double) NPTS;
 	for (int i=0; i< NPTS; i++)
 	{
-		rerho[i] /= norm;
-		imrho[i] /= norm;
+		rho[i] /= norm;
 	}
 
-	double trerho[NPTS];
-	xfer(trerho, rerho, NPTS, beta);
+	double complex trho[NPTS];
+	cxfer(trho, rho, NPTS, beta);
 
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = ((double)i + 0.5) / ((double) NPTS);
-		printf("%d	%g	%g	%g	%g\n", i, x, rerho[i], imrho[i], trerho[i]);
+		printf("%d	%g	%g	%g	%g	%g\n", i, x,
+			creal(rho[i]), cimag(rho[i]),
+			creal(trho[i]), cimag(trho[i]));
 	}
 }
