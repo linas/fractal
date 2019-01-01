@@ -1,6 +1,7 @@
 /*
  * qdisk.C
  * Visualization of the (holomorphic) q-polynomial
+ * This is exactly equal to minus alldisk.C ! Horay! It's starting to make sense!
  *
  * December 2018
  *
@@ -104,9 +105,9 @@ static void qpoly (float *array,
 		{
 			COMPLEX zeta = x + I*y;
 			COMPLEX sum = qfunc(beta, zeta);
+			// Take minus the sum, to get what alldisk.C is showing.
+			sum = -sum;
 			double pha = atan2(imag(sum), real(sum))/M_PI;
-			pha += 1.0;
-			if (1.0 < pha) pha -= 2.0;
 			array[j] = 0.5 + 0.5 * pha;
 
 			if (1.0 < r and r <= 1.02) array[j] = 1;

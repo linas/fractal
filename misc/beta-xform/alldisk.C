@@ -3,6 +3,9 @@
  * Visualization of the almost-eigen constants on the unit disk.
  * Holomorphic version of almost.c
  *
+ * For the special case of x=0, this is just the minus the beta-polynomial,
+ * visualized in betadisk.C
+ *
  * December 2018
  *
  */
@@ -43,7 +46,7 @@ double T_n(int n, double beta)
 }
 
 // Build the "constant" function.
-// This appears to be independent of the vaue of x.
+// This appears to be independent of the value of x.
 // Which is surprising.
 COMPLEX dcnst(double x, double beta, COMPLEX zeta)
 {
