@@ -95,6 +95,32 @@ int main (int argc, char* argv[])
 	double x = atof(argv[2]);
 	double beta = 2.0*K;
 
+#define SEQUENCE
+#ifdef SEQUENCE
+	#define SEQLEN 80
+	int bits[SEQLEN];
+	long unsigned int seq[SEQLEN];
+	double mid = K;
+	for (int i=0; i<SEQLEN; i++)
+	{
+		int bit = 0;
+		if (0.5 < mid) bit = 1;
+		bits[i] = bit;
+
+		seq[i] = 0;
+		seq[0] = 1;
+		for (int j=0; j<i; j++)
+		{
+			seq[i] += bits[j] * seq[i-j-1];
+		}
+
+		double ratio = ((double) seq[i]) / ((double) seq[i-1]);
+
+		printf("its %d %g %d seq=%ld \trat=%12.10g\n", i, mid, bit, seq[i], ratio);
+		mid = downshift(mid,K);
+	}
+#endif // SEQUENCE
+
 #ifdef WITT_EXPLORE
 	double mid = x;
 	double par = x/K;
@@ -135,7 +161,7 @@ int main (int argc, char* argv[])
 	}
 #endif
 
-#define VERIFY_INV_MEAS
+// #define VERIFY_INV_MEAS
 #ifdef VERIFY_INV_MEAS
 
 	double mid = K;
