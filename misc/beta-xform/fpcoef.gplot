@@ -1,16 +1,19 @@
 
 set term png size 1024,768 enhanced
-set out 'fpcoef.png'
+# set out 'fpcoef.png'
 
-# set term postscript eps color enhanced
-# set out 'fpcoef.eps'
+set term eps color enhanced fontscale 0.57
+set out 'fpcoef.eps'
 
-set title "Perron-Frobenius Eigenvector Coefficients"
+set title "Peron-Frobenius Eigenvector Coefficients"
 set style data lines
 set yrange [1e-3:1]
 set xlabel "{/Symbol b}"
 set logscale y
 set format y "10^{%4T}"
+
+# set key bottom left
+set key at 1.18,0.01
 
 set style line 2 lt 1 lc rgb '#0072bd' # blue
 
@@ -19,10 +22,10 @@ plot "fpcoef-best.dat" using 3:($5/$4) lw 2 title "v_1", \
      "fpcoef-best.dat" using 3:($7/$4) lw 2 title "v_3", \
      "fpcoef-best.dat" using 3:($8/$4) lw 2 title "v_4", \
      "fpcoef-best.dat" using 3:($9/$4) lw 2 title "v_5", \
-     "fpcoef-best.dat" using 3:($10/$4) lw 2 title "v_6", \
-     "fpcoef-best.dat" using 3:($11/$4) lw 2 title "v_7", \
-     "fpcoef-best.dat" using 3:($12/$4) lw 2 title "v_8", \
-     "fpcoef-best.dat" using 3:($13/$4) lw 2 title "v_9", \
+#     "fpcoef-best.dat" using 3:($10/$4) lw 2 title "v_6", \
+#     "fpcoef-best.dat" using 3:($11/$4) lw 2 title "v_7", \
+#     "fpcoef-best.dat" using 3:($12/$4) lw 2 title "v_8", \
+#     "fpcoef-best.dat" using 3:($13/$4) lw 2 title "v_9", \
 
 # "fpcoef-hi.dat" using 3:($5/$4) lw 2 title "v_1", \
 #     "fpcoef-hi.dat" using 3:($6/$4) lw 2 title "v_2", \
