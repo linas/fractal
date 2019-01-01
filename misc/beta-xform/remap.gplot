@@ -1,28 +1,31 @@
 
-set term png size 640, 480
-set term png size 1024, 768
-set out 'remap.png'
-
+#set term png size 640, 480
+#set term png size 1024, 768
+#set out 'remap.png'
+#
 set style data lines
 set key left
-
-# Exploration of self-similarity
 #
-# plot "remap.dat" using 2:3 title "ei" linewidth 2, \
-#      "remap.dat" using 2:($4+$5) title "Lei" linewidth 2
-
-plot "remap.dat" using 2:($3-$2) title "der(x)", \
-     "remap.dat" using 2:($4-$2) title "pdr(cpr(x))", \
-
-# plot "remap.dat" using 2:4 title "gist_cpr(x)"
-
-# "remap.dat" using 2:3 title "tent_cpr(x)", \
-
+## Exploration of self-similarity
+##
+## plot "remap.dat" using 2:3 title "ei" linewidth 2, \
+##      "remap.dat" using 2:($4+$5) title "Lei" linewidth 2
+#
+#plot "remap.dat" using 2:($3-$2) title "der(x)", \
+#     "remap.dat" using 2:($4-$2) title "pdr(cpr(x))", \
+#
+## plot "remap.dat" using 2:4 title "gist_cpr(x)"
+#
+## "remap.dat" using 2:3 title "tent_cpr(x)", \
+#
 ########################################################
 # Used to generate figure for the paper.
 #
-# set term postscript eps color enhanced
+# set term postscript eps color enhanced fontscale 1.6
 # set out 'cpr.eps'
+# 
+# set style data lines
+# set key left
 # 
 # set title "Compressor Function cpr"
 # set xlabel "y"
@@ -33,14 +36,14 @@ plot "remap.dat" using 2:($3-$2) title "der(x)", \
 #      "cpr-0.8.dat" using 2:3 title "{/Symbol b}=1.6" linewidth 2, \
 #      "cpr-0.9.dat" using 2:3 title "{/Symbol b}=1.8" linewidth 2
 # 
-# set title "Compressor Function cpr"
-# set xlabel "y"
-# set ylabel "cpr"
 # 
 ########################################################
 # 
-# set term postscript eps color enhanced
+# set term postscript eps color enhanced fontscale 1.6
 # set out 'pdr.eps'
+# 
+# set style data lines
+# set key left
 # 
 # set title "Expander Function pdr"
 # set xlabel "y"
