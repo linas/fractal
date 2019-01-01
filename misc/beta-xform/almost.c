@@ -82,7 +82,7 @@ double complex rhoz(double x, double beta, complex double z)
 
 // ================================================================
 
-// Supper cheesy, badly designed zero finder
+// The first const...
 double complex first_cnst(double x, double beta, double complex zee)
 {
 		double complex rho = rhoz(x, beta, zee);
@@ -107,6 +107,33 @@ double complex first_cnst(double x, double beta, double complex zee)
 
 // ================================================================
 
+// Attempt the second const...
+double complex second_cnst(double x, double beta, double complex zee)
+{
+		double complex rho = rhoz(x, beta, zee);
+
+		// beta shift applied twice above
+		double complex shift_rho = 0.0;
+		if (x < 0.5*beta)
+		{
+			shift_rho = rhoz((x/beta)/beta, beta, zee);
+			shift_rho += rhoz((x/beta+0.5)/beta, beta, zee);
+			shift_rho += rhoz((x/beta)/beta + 0.5, beta, zee);
+			shift_rho += rhoz((x/beta+0.5)/beta + 0.5, beta, zee);
+			shift_rho /= beta*beta;
+		}
+
+		// rho divided by z;
+		double complex rdz = rho / (zee*zee);
+
+		// difference
+		double complex cnst = shift_rho - rdz;
+
+		return cnst;
+}
+
+// ================================================================
+
 // Print the contorted density
 void print_vee(double beta, double complex zee)
 {
@@ -119,7 +146,8 @@ void print_vee(double beta, double complex zee)
 		double re = creal(rho);
 		double im = cimag(rho);
 
-		double complex cnst = first_cnst(x, beta, zee);
+		// double complex cnst = first_cnst(x, beta, zee);
+		double complex cnst = second_cnst(x, beta, zee);
 		double rec = creal(cnst);
 		double imc = cimag(cnst);
 
@@ -128,6 +156,8 @@ void print_vee(double beta, double complex zee)
 }
 
 // ================================================================
+
+// Print the individual digits
 void print_d(int n, double beta)
 {
 #undef NPTS
@@ -144,6 +174,7 @@ void print_d(int n, double beta)
 
 // ================================================================
 
+// Stunningly cheesy, badly designed strongly inefficient hack for zero-finding.
 double complex find_zero(double beta, double complex nearzero, double complex delta)
 {
 	if (cabs(delta) < 1.0e-15) return nearzero;
@@ -183,14 +214,16 @@ int main (int argc, char* argv[])
 	double beta = 2.0*K;
 	double complex z = abszed * cexp(I*M_PI*lambda);
 
+#define ZEE
+#ifdef ZEE
+	print_vee(beta, z);
+#endif
+
+#ifdef FIND_ZERO
 	double complex zero = find_zero(beta, z, 0.02);
 	double complex eigen = 1.0/zero;
 	printf("zero= %12.10g +i %12.10g abs=%12.10g eigen= %12.10g +i %12.10g\n",
 		creal(zero), cimag(zero), cabs(zero), creal(eigen), cimag(eigen));
-
-// #define ZEE
-#ifdef ZEE
-	print_vee(beta, z);
 #endif
 
 #ifdef SINGLE_TERMS
