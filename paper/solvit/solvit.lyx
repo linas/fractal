@@ -13051,13 +13051,15 @@ That is, the
 \end_layout
 
 \begin_layout Subsection
-Equivalent notation
+Equivalent labels for orbits
 \end_layout
 
 \begin_layout Standard
 At this point, it should be clear that there are several equivalent ways
  of labeling the expressions under consideration.
- These are recapped here, asserted without proof, simply as observations.
+ These are recapped here.
+ Proofs are omitted; they are straight-forward.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -13235,6 +13237,7 @@ To summarize: any one of these: the polynomial, the integer sequence, the
 
  can each be used as a stand-in for the others: they all uniquely map to
  one-another.
+ They are all equivalent labels.
 \end_layout
 
 \begin_layout Standard
@@ -13259,10 +13262,10 @@ m_{p}=T_{\beta}^{p+1}\left(\frac{\beta}{2}\right)=\frac{\beta}{2}\left[\beta^{p}
 \end_layout
 
 \begin_layout Standard
-Two of the correspondences asked for periodic orbits.
- I believe that these can be extended to non-periodic orbits in an unambiguous
- (and uncontroversial) way.
- These are covered below.
+Two of the correspondences given above ask for periodic orbits.
+ These can be extended to non-periodic orbits in an unambiguous and uncontrovers
+ial way.
+ The extensions are covered in the next two sections.
 \end_layout
 
 \begin_layout Subsection
@@ -13272,7 +13275,8 @@ Infinite-nacci integer sequences
 \begin_layout Standard
 The beta-Fibonacci integer sequence can be extended to arbitrary (
 \emph on
-viz
+viz.
+
 \emph default
  infinite) length bit sequences, as 
 \begin_inset Formula 
@@ -13288,7 +13292,7 @@ starting with
 
 .
  The sum is always finite, but one cannot perform it without first knowing
- the first 
+ at least the first 
 \begin_inset Formula $m$
 \end_inset
 
@@ -13297,7 +13301,7 @@ starting with
 \end_inset
 
 .
- This has the desired property 
+ The integer sequence still has the desirable property it had before: 
 \begin_inset Formula 
 \[
 \beta=\lim_{m\to\infty}\frac{F_{m}^{\{b\}}}{F_{m-1}^{\{b\}}}
@@ -13305,20 +13309,20 @@ starting with
 
 \end_inset
 
-for the 
+Here, the 
 \begin_inset Formula $\beta$
 \end_inset
 
- value associated to 
+ value is the one associated to 
 \begin_inset Formula $\left\{ b\right\} $
 \end_inset
 
 .
- So, as before, either the real number 
+ So, as before, the real number 
 \begin_inset Formula $\beta$
 \end_inset
 
- or the bit sueqence 
+ and the bit sequence 
 \begin_inset Formula $\left\{ b\right\} $
 \end_inset
 
@@ -13328,10 +13332,10 @@ for the
 \begin_layout Standard
 Remarkably, one can be sloppy in how one deals with periodic orbits with
  this extention.
- One has two choices that are equivalent.
- One choice is to truncate, so that the bit-sequence ends with all-zeros,
- effectively rendering it of finite length.
- The alternative is to allow it to continue periodically.
+ One has two choices that are equivalent: One choice is to truncate, so
+ that the bit-sequence ends with all-zeros, effectively rendering it of
+ finite length.
+ The alternative is to allow it to continue periodically, forever.
  Either form results in the same 
 \begin_inset Formula $\beta$
 \end_inset
@@ -13345,16 +13349,17 @@ As an example, consider
 \end_inset
 
 , which is close to the golden ratio, but not quite.
- The generated bit-sequence is 
+ It has an infinite non-periodic (non-recurring) bit-sequence 
 \begin_inset Formula $\left\{ b\right\} =101010010100101000000100\cdots$
 \end_inset
 
- and the generated integer sequence is 
+.
+ The generated integer sequence is 
 \begin_inset Formula $F_{m}^{\{b\}}=1,1,1,2,3,5,8,12,20,32,51,82,130,209,335,535,\cdots$
 \end_inset
 
  which undershoots the Fibonacci sequence (12 appears, where we expected
- 13).
+ 13, and 20 instead of 21, and so on).
  The ratio of the last two is 
 \begin_inset Formula $535/335=1.597\cdots$
 \end_inset
@@ -13401,7 +13406,7 @@ a priori
 
 , one famously has that 1.000...=0.999...
  as an example.
- So likewise here, one can toggle between finite and infinte-periodic strings.
+ So likewise here, one can toggle between finite and infinite-periodic strings.
  So, given a finite string 
 \begin_inset Formula $\left\{ b\right\} =b_{0},b_{1},\cdots,b_{k-1},b_{k}$
 \end_inset
@@ -13425,11 +13430,21 @@ a priori
 ad infinitum
 \emph default
 , obtaining an infinite periodic string.
- The difference btween these two is simply the difference between a less-than-si
-gn, and a less-than-or-equal sign used in the generation ofthe orbit, as
- noted at the very begining of this chapter.
+ The difference between these two is simply the difference between a less-than-s
+ign, and a less-than-or-equal sign used in the generation of the orbit,
+ as noted at the very begining of this chapter.
  We have proven: finite orbits are exactly the same as infinite periodic
  orbits, at least when represented by real numbers and by integer sequences.
+ Conversely, the difference between using 
+\begin_inset Formula $<$
+\end_inset
+
+ and 
+\begin_inset Formula $\le$
+\end_inset
+
+ during iteration is immaterial for describing convergents.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -13476,6 +13491,38 @@ This is manifestly holomorphic on the unit disk, as each coefficient is
  either zero or one.
  It has a positive real zero, of course: 
 \begin_inset Formula $q^{\left\{ b\right\} }\left(1/\beta\right)=0$
+\end_inset
+
+.
+ Comparing to eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-disk"
+
+\end_inset
+
+, we see that this is exactly the same function, or rather, it's negative.
+ Indeed, following the definition, 
+\begin_inset Formula $b_{n}=d_{n}\left(1/2\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $D\left(\beta;\zeta\right)=-q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This at last provides a foot in the door for correctly describing the egeinvalue
+s of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transfr operator: they are in one-to-one correspondance with the zeros
+ of 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
 \end_inset
 
 .
@@ -13561,8 +13608,8 @@ reference "eq:golden matrix"
 
 .
  This gives a new matrix, with what now might be called a Frobenius-Perron
- eigenvalue of one, and the remaining eigenvalues distributed approximately
- on a circle of radius 
+ eigenvalue of one, and the remaining eigenvalues distributed near or approximat
+ely on a circle of radius 
 \begin_inset Formula $1/\beta$
 \end_inset
 
