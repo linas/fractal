@@ -1,7 +1,11 @@
 /*
  * almost.c
  * Explore the almost-eigenfunctions that are coherent states
- * built from the Renyi-Parry bitstream
+ * built from the Renyi-Parry bitstream.  Cleaned-up version of
+ * deguess.c
+ *
+ * These are independent of the coordinate.  These are holomorphic
+ * in z or zeta. See alldisk.C for holomorphic plot.
  *
  * Dec 2018
  */
@@ -48,7 +52,6 @@ double complex rhoz(double x, double beta, complex double z)
 	if (0.5*beta < x) return 0.0;
 
 	double ob = 1.0/beta;
-	double obn = 1.0;
 	complex double zn = 1.0;
 
 	// accumulated sum
@@ -57,26 +60,49 @@ double complex rhoz(double x, double beta, complex double z)
 	double tn = 0.5*beta;
 
 	int cnt=0;
-	while (1.0e-16 < obn*cabs(zn))
+	while (1.0e-14 < cabs(zn))
 	{
 		if (x < tn) {
-			rho += obn * zn;
+			rho += zn;
 		}
-
-		// compute 1/beta^N
-		obn *= ob;
 
 		// compute T^N(b/2)
 		tn = downshift(tn, 0.5*beta);
 
+		// compute 1/beta^N
 		// compute z^n;
-		zn *= z;
+		zn *= z * ob;
 
 		cnt++;
 		if (3000< cnt) break;
 	}
 
 	return rho;
+}
+
+// ================================================================
+
+// Supper cheesy, badly designed zero finder
+double complex first_cnst(double x, double beta, double complex zee)
+{
+		double complex rho = rhoz(x, beta, zee);
+
+		// beta shift applied to above
+		double complex shift_rho = 0.0;
+		if (x < 0.5*beta)
+		{
+			shift_rho = rhoz(x/beta, beta, zee);
+			shift_rho += rhoz(x/beta + 0.5, beta, zee);
+			shift_rho /= beta;
+		}
+
+		// rho divided by z;
+		double complex rdz = rho / zee;
+
+		// difference
+		double complex cnst = shift_rho - rdz;
+
+		return cnst;
 }
 
 // ================================================================
@@ -93,22 +119,10 @@ void print_vee(double beta, double complex zee)
 		double re = creal(rho);
 		double im = cimag(rho);
 
-		// beta shift applied to above
-		double complex shift_rho = 0.0;
-		if (x < 0.5*beta)
-		{
-			shift_rho = rhoz(x/beta, beta, zee);
-			shift_rho += rhoz(x/beta + 0.5, beta, zee);
-			shift_rho /= beta;
-		}
-
-		// rho divided by z;
-		double complex rdz = rho / zee;
-
-		// difference
-		double complex cnst = shift_rho - rdz;
+		double complex cnst = first_cnst(x, beta, zee);
 		double rec = creal(cnst);
 		double imc = cimag(cnst);
+
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, re, im, rec, imc);
 	}
 }
@@ -130,6 +144,32 @@ void print_d(int n, double beta)
 
 // ================================================================
 
+double complex find_zero(double beta, double complex nearzero, double complex delta)
+{
+	if (cabs(delta) < 1.0e-15) return nearzero;
+
+	double x = 0.3;
+
+	double complex f1 = first_cnst(x, beta, nearzero);
+	double complex f2 = first_cnst(x, beta, nearzero+delta);
+	if (cabs(f2) < cabs(f1))
+	{
+		printf("step ze=%12.10g +i %12.10g and f= %g +i %g |del|= %g\n",
+			creal(nearzero), cimag(nearzero), creal(f1), cimag(f1),
+			cabs(delta));
+		return find_zero(beta, nearzero+delta, delta);
+	}
+	else
+	{
+		printf("turn ze=%12.10g +i %12.10g and f= %g +i %g |del|= %g\n",
+			creal(nearzero), cimag(nearzero), creal(f1), cimag(f1),
+			cabs(delta));
+		return find_zero(beta, nearzero, delta*0.6*(-0.9+I));
+	}
+}
+
+// ================================================================
+
 int main (int argc, char* argv[])
 {
 	if (argc < 4) {
@@ -141,10 +181,15 @@ int main (int argc, char* argv[])
 	double lambda = atof(argv[2]);
 	double abszed = atof(argv[3]);
 	double beta = 2.0*K;
+	double complex z = abszed * cexp(I*M_PI*lambda);
 
-#define ZEE
+	double complex zero = find_zero(beta, z, 0.02);
+	double complex eigen = 1.0/zero;
+	printf("zero= %12.10g +i %12.10g abs=%12.10g eigen= %12.10g +i %12.10g\n",
+		creal(zero), cimag(zero), cabs(zero), creal(eigen), cimag(eigen));
+
+// #define ZEE
 #ifdef ZEE
-	double complex z = abszed * (cos(M_PI*lambda) + I*sin(M_PI*lambda));
 	print_vee(beta, z);
 #endif
 

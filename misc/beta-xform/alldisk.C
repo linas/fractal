@@ -1,6 +1,7 @@
 /*
  * alldisk.C
  * Visualization of the almost-eigen constants on the unit disk.
+ * Holomorphic version of almost.c
  *
  * December 2018
  *
@@ -111,10 +112,16 @@ static void almost_zero (float *array,
 		{
 			COMPLEX zeta = x + I*y;
 			COMPLEX sum = dcnst(undep, beta, zeta);
+			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
 			double mag = abs(sum);
-			if (mag < 0.01) printf("maybe zero near zeta=%g +i %g\n", x,y);
-			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
+			if (mag < 0.06) {
+				COMPLEX z = beta*zeta;
+				printf("maybe zero near z=%g +i %g = %g exp(i pi %g)\n",
+					real(z), imag(z), abs(z), atan2(y,x)/M_PI);
+array[j] = 0.5;
+for (int k=0; k<20; k++) array[j-k]=0.25 * (k%4);
+			}
 		}
 	}
 }

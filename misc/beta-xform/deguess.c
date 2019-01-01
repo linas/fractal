@@ -2,6 +2,8 @@
  * deguess.c
  * Built coherent states from the Renyi-Parry bitstream.
  * It turns out these are "almost eignestates".
+ * The independency on coordinate is shown here, but look at almost.c for a
+ * cleaner version of this
  *
  * Dec 2018
  */
