@@ -13410,8 +13410,19 @@ gn, and a less-than-or-equal sign used in the generation ofthe orbit, as
  orbits, at least when represented by real numbers and by integer sequences.
 \end_layout
 
+\begin_layout Subsection
+Infinite 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Polynomials
+\end_layout
+
 \begin_layout Standard
-The polynomials also extend, but only as an asymptotic series: writing 
+An infinite polynomial is, of course, an analytic function.
+ The goal here is to extend the finite framework.
+ The definition of the polynomials above requires a finite bit sequence.
+ This can be extended to an asymptotic series, by writing first
 \begin_inset Formula 
 \[
 p_{n}\left(z\right)=z^{k+1}\left(1-b_{0}z^{-1}-b_{1}z^{-2}-\cdots-b_{k}z^{-k-1}\right)
@@ -13419,9 +13430,33 @@ p_{n}\left(z\right)=z^{k+1}\left(1-b_{0}z^{-1}-b_{1}z^{-2}-\cdots-b_{k}z^{-k-1}\
 
 \end_inset
 
-its clear that one could drop the leading factor, and then extend to an
- infinite series, as long as one is willing to accept an asymptotic series.
- This seems awkward.
+Set 
+\begin_inset Formula $\zeta=1/z$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\[
+\zeta^{k+1}p_{n}\left(\frac{1}{\zeta}\right)=1-b_{0}\zeta-b_{1}\zeta^{2}-\cdots-b_{k}\zeta^{k+1}
+\]
+
+\end_inset
+
+which extends to the holomorphic function
+\begin_inset Formula 
+\[
+q^{\left\{ b\right\} }\left(\zeta\right)=1-\sum_{j=0}^{\infty}b_{j}\zeta^{j}
+\]
+
+\end_inset
+
+This is manifestly holomorphic on the unit disk, as each coefficient is
+ either zero or one.
+ It has a positive real zero, of course: 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(1/\beta\right)=0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection

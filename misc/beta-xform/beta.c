@@ -100,13 +100,20 @@ int main (int argc, char* argv[])
 	#define SEQLEN 80
 	int bits[SEQLEN];
 	long unsigned int seq[SEQLEN];
+	beta = atof(argv[1]);
+	K = 0.5*beta;
+	double zeta = 1.0/x;
+	double zetan = zeta;
+	double q = 1.0;
 	double mid = K;
 	for (int i=0; i<SEQLEN; i++)
 	{
+		// The bit-sequence
 		int bit = 0;
 		if (0.5 < mid) bit = 1;
 		bits[i] = bit;
 
+		// The beta-Fibonacci sequence
 		seq[i] = 0;
 		seq[0] = 1;
 		for (int j=0; j<i; j++)
@@ -114,10 +121,16 @@ int main (int argc, char* argv[])
 			seq[i] += bits[j] * seq[i-j-1];
 		}
 
+		// The beta-Fibonacci convergent
 		double ratio = ((double) seq[i]) / ((double) seq[i-1]);
 
-		printf("its %d %g %d seq=%ld \trat=%12.10g\n", i, mid, bit, seq[i], ratio);
+		// The q-function
+		q -= bit * zetan;
+
+		printf("its %d %g %d seq=%ld \trat=%12.10g q=%12.10g\n",
+			 i, mid, bit, seq[i], ratio, q);
 		mid = downshift(mid,K);
+		zetan *= zeta;
 	}
 #endif // SEQUENCE
 
