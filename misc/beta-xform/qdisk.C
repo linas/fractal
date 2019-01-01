@@ -44,7 +44,7 @@ double T_n(int n, double beta)
 // Build the q- function.
 COMPLEX qfunc(double beta, COMPLEX zeta)
 {
-	#define SEQLEN 80
+	#define SEQLEN 380
 	static bool is_init = false;
 	static int bit[SEQLEN];
 	if (not is_init)
@@ -60,7 +60,7 @@ COMPLEX qfunc(double beta, COMPLEX zeta)
 		}
 	}
 
-	COMPLEX zetan = 1.0;
+	COMPLEX zetan = zeta;
 
 	// accumulated sum
 	COMPLEX que = 1.0;
@@ -100,11 +100,16 @@ static void qpoly (float *array,
 		x *= x_width;
 
 		double r = x*x + y*y;
-		if (r <= 1.0)
+		if (r <= 2.0)
 		{
 			COMPLEX zeta = x + I*y;
 			COMPLEX sum = qfunc(beta, zeta);
-			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
+			double pha = atan2(imag(sum), real(sum))/M_PI;
+			pha += 1.0;
+			if (1.0 < pha) pha -= 2.0;
+			array[j] = 0.5 + 0.5 * pha;
+
+			if (1.0 < r and r <= 1.02) array[j] = 1;
 
 #if 0
 			double mag = abs(sum);

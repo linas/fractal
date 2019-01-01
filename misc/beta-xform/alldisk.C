@@ -114,6 +114,7 @@ static void almost_zero (float *array,
 			COMPLEX sum = dcnst(undep, beta, zeta);
 			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
+#if 0
 			double mag = abs(sum);
 			if (mag < 0.06) {
 				COMPLEX z = beta*zeta;
@@ -122,6 +123,7 @@ static void almost_zero (float *array,
 array[j] = 0.5;
 for (int k=0; k<20; k++) array[j-k]=0.25 * (k%4);
 			}
+#endif
 		}
 	}
 }
