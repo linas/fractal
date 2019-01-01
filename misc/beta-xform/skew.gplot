@@ -4,7 +4,7 @@ set term png size 640, 480
 ########################################################################
 #
 # Used to generate the image in the graph
-# set term postscript eps color
+# set term postscript eps color fontscale 1.6
 # set out 'skew.eps'
 # 
 # set style data lines
@@ -19,7 +19,7 @@ set term png size 640, 480
 #      "skew-0.8.dat" using 2:5 title "" linewidth 2, \
 #      "skew-0.8.dat" using 2:6 title "" linewidth 2, \
 #      "skew-0.8.dat" using 2:7 title "" linewidth 2
-#
+
 ########################################################################
 #
 # Used to verify self-similarity
@@ -41,29 +41,29 @@ set term png size 640, 480
 #
 # Used to generate the image in the document
 #
-#set term postscript eps color
-#set out 'haar.eps'
-#set style data lines
-#set key right
-#
-#set title "Skew Haar Curve"
-#
-#plot "skew.dat" using 2:3 title "" linewidth 2, \
-#      "skew.dat" using 2:4 title "Haar rectangle" linewidth 2, \
-#      "skew.dat" using 2:7 title "Fourth iteration" linewidth 2
-#
-########################################################################
-set out 'skew.png'
-
+set term postscript eps color fontscale 1.6
+set out 'haar.eps'
 set style data lines
 set key right
 
 set title "Skew Haar Curve"
 
-set xrange [0:1]
-plot "skew.dat" using 2:3 title "har" linewidth 2, \
-     "skew.dat" using 2:5 title "hi" linewidth 2, \
-     "skew.dat" using 2:(-1.6/0.6 + 0.7*$3) title "w har - 2K/(2K-1)" linewidth 2, \
+plot "skew.dat" using 2:3 title "" linewidth 2, \
+      "skew.dat" using 2:4 title "Haar rectangle" linewidth 2, \
+      "skew.dat" using 2:7 title "Fourth iteration" linewidth 2
+#
+########################################################################
+#set out 'skew.png'
+#
+#set style data lines
+#set key right
+#
+#set title "Skew Haar Curve"
+#
+#set xrange [0:1]
+#plot "skew.dat" using 2:3 title "har" linewidth 2, \
+#     "skew.dat" using 2:5 title "hi" linewidth 2, \
+#     "skew.dat" using 2:(-1.6/0.6 + 0.7*$3) title "w har - 2K/(2K-1)" linewidth 2, \
 
 #     "skew.dat" using 2:4 title "lo" linewidth 2, \
 #     "skew.dat" using 2:(1.6+0.7*$3) title "2K+w har" linewidth 2, \
