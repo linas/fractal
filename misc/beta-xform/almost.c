@@ -146,8 +146,8 @@ void print_vee(double beta, double complex zee)
 		double re = creal(rho);
 		double im = cimag(rho);
 
-		// double complex cnst = first_cnst(x, beta, zee);
-		double complex cnst = second_cnst(x, beta, zee);
+		double complex cnst = first_cnst(x, beta, zee);
+		// double complex cnst = second_cnst(x, beta, zee);
 		double rec = creal(cnst);
 		double imc = cimag(cnst);
 
