@@ -16,10 +16,10 @@ plot "ceee.dat" using ((2-(2*$1))/(2-1.618034)):(1-$5) with lines lw 2 title "hi
 # ----------------------------------------
 set out 'bee.png'
 set xrange [1:1.6]
-# plot "bee.dat" using (2*$1):5 with lines lw 2 title "ratio",
+ plot "bee.dat" using (2*$1):5 with lines lw 2 title "ratio",
 
-#     "beeb.dat" using (2*$1):4 with lines lw 2 title "off-diag-0.723", \
-#     "beec.dat" using (2*$1):4 with lines lw 2 title "off-diag-1.711", \
+     "beeb.dat" using (2*$1):4 with lines lw 2 title "off-diag-0.723", \
+     "beec.dat" using (2*$1):4 with lines lw 2 title "off-diag-1.711", \
 
 set xlabel "{/Symbol b}"
 set ylabel "B({/Symbol b})"
@@ -60,44 +60,45 @@ plot "cee-90.dat" using (2*$1):6 with lines lw 2 title "limit-90", \
 # ##############################################################
 # Used to generate the figure in the paper.
 #
-set term postscript eps color enhanced
-set out 'aee.eps'
-
-set xlabel "{/Symbol b}"
-set ylabel "A({/Symbol b})"
-set title "Point Weight"
-
-set xrange [1.6:2]
-unset yrange
-
-plot "cee-90.dat" using (2*$1):6 with lines lw 2 title ""
-
-# ##############################################################
-# Used to generate the figure in the paper.
-#
-# set term postscript eps color enhanced
+# set term eps color enhanced fontscale 0.58
+# set out 'aee.eps'
+# 
+# set xlabel "{/Symbol b}"
+# set ylabel "A({/Symbol b})"
+# set title "Point Weight"
+# 
+# set xrange [1.6:2]
+# unset yrange
+# 
+# plot "cee-90.dat" using (2*$1):6 with lines lw 2 title ""
+# 
+# # ##############################################################
+# # Used to generate the figure in the paper.
+# #
+# set term eps color enhanced fontscale 0.58
 # set out 'bee.eps'
-#
+# 
 # set xlabel "{/Symbol b}"
 # set ylabel "B({/Symbol b})"
 # set title "Symmetric Matrix Limit"
-#
+# 
 # set xrange [1:1.6]
 # set yrange [1:2.4]
-#
+# 
 # plot "beebest.dat" using (2*$1):4 with lines lw 2 title ""
-#
-# ##############################################################
-# Used to generate the figure in the paper.
-#
-# set term postscript eps color enhanced
+# 
+# # ##############################################################
+# # Used to generate the figure in the paper.
+# #
+# set term eps color enhanced fontscale 0.58
 # set out 'cee.eps'
-#
+# 
 # set xlabel "{/Symbol b}"
 # set ylabel "C({/Symbol b})"
 # set title "Symmetric Matrix Limiting Ratio"
-#
+# 
 # set xrange [1.6:2]
+# set yrange [0.84:1]
 # plot "ceee.dat" using (2*$1):5 with lines lw 2 title ""
-#
-# ##############################################################
+# 
+# # ##############################################################

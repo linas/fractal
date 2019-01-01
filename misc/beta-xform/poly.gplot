@@ -10,42 +10,43 @@
 #      "poly-0.6.dat" using 1:(1.8**$1) with lines lw 2 title "1.8^n", \
 
 # ##############################################################
-# The below used to generate the graph for the paper.
 #
-# set term postscript eps color enhanced
-# set out 'poly.eps'
-#
+# set term png size 1024,768 enhanced
+# set out 'poly.png'
+# 
 # set logscale y
-# set xrange [0:200]
+# # set xrange [0:200]
 # set key  left
-#
+# 
 # set xlabel "n"
 # set ylabel "p_{nn} / {/Symbol b}^n"
 # set title "Polynomial Operator Diagonal Entries"
-#
-# plot "poly-0.6.dat" using 1:($2 / (1.2**$1)) with lines lw 2 title "{/Symbol b}=1.2"
-#
+# 
+# plot "berg.dat" using 1:2 with lines lw 2 title "foo", \
+#      "poly-0.55.dat" using 1:5 with lines lw 2 title "{/Symbol b}=1.1", \
+# 
+# # plot "poly-0.6.dat" using 1:(1/$4) with lines lw 2 title "aaa {/Symbol b}=1.2", \
+# 
+# #   "poly-0.9.dat" using 1:($2 / (1.8**$1)) with lines lw 2 title "{/Symbol b}=1.8", \
+# 
+# # plot  "poly-0.7.dat" using 1:($2 / (1.4**$1)) with lines lw 2 title "{/Symbol b}=1.4", \
+# 
+# # plot    "poly-0.8.dat" using 1:($2 / (1.6**$1)) with lines lw 2 title "{/Symbol b}=1.6", \
+# 
 # ##############################################################
+# The below used to generate the graph for the paper.
 #
-set term png size 1024,768 enhanced
-set out 'poly.png'
-
-set logscale y
+# set term eps color enhanced fontscale 0.58
+# set out 'poly.eps'
+# 
+# set logscale y
 # set xrange [0:200]
-set key  left
-
-set xlabel "n"
-set ylabel "p_{nn} / {/Symbol b}^n"
-set title "Polynomial Operator Diagonal Entries"
-
-plot "berg.dat" using 1:2 with lines lw 2 title "foo", \
-     "poly-0.55.dat" using 1:5 with lines lw 2 title "{/Symbol b}=1.1", \
-
-# plot "poly-0.6.dat" using 1:(1/$4) with lines lw 2 title "aaa {/Symbol b}=1.2", \
-
-#   "poly-0.9.dat" using 1:($2 / (1.8**$1)) with lines lw 2 title "{/Symbol b}=1.8", \
-
-# plot  "poly-0.7.dat" using 1:($2 / (1.4**$1)) with lines lw 2 title "{/Symbol b}=1.4", \
-
-# plot    "poly-0.8.dat" using 1:($2 / (1.6**$1)) with lines lw 2 title "{/Symbol b}=1.6", \
-
+# set yrange [1:300]
+# set key  left
+# 
+# set xlabel "n"
+# set ylabel "p_{nn} / {/Symbol b}^n"
+# set title "Polynomial Operator Diagonal Entries for {/Symbol b}=1.2"
+# 
+# plot "poly-0.6.dat" using 1:($2 / (1.2**$1)) with lines lw 2 title ""
+# 
