@@ -13,60 +13,60 @@ set encoding utf8
 
 ###########################################################################
 ## Used to create the figure in the paper.
-# set term postscript eps color enhanced
-# set out 'gamma-0.8-0.eps'
-# 
-# set multiplot
-# set ylabel '{/Symbol g}_{x;n}(0.7)'
-# set key left
-# 
-# set size 1.0, 0.79
-# set origin 0.0, 0.21
-# set xtics format ""
-# plot "treefn-0.8-0.dat" using 2:(0.8) with lines linewidth 3 title "{/Symbol b}=1.6",\
-#      "treefn-0.8-0.dat" using 2:4 with lines linewidth 2 title "{/Symbol g}_{x;1}(0)",\
-#      "treefn-0.8-0.dat" using 2:5 with lines linewidth 2 title "{/Symbol g}_{x;2}(0)",\
-#      "treefn-0.8-0.dat" using 2:6 with lines linewidth 2 title "{/Symbol g}_{x;3}(0)",\
-#      "treefn-0.8-0.dat" using 2:7 with lines linewidth 2 title "{/Symbol g}_{x;4}(0)",\
-#      "treefn-0.8-0.dat" using 2:8 with lines linewidth 2 title "{/Symbol g}_{x;5}(0)",\
-#      "treefn-0.8-0.dat" using 2:12 with lines linewidth 2 title "{/Symbol g}_{x;9}(0)"
-# 
-# set size 0.977, 0.25
-# set origin 0.023, 0.0
-# set xlabel "x"
-# set xtics format "%2.1f"
-# set ylabel 'T_{1.6}(x;0)'
-# set ytics 0,1
-# set yrange [-0.1:1.1]
-# plot "treefn-0.8-0.dat" using 2:3 with lines linewidth 2 title ""
-#
-###########################################################################
-
-# set out 'treefn.png'
-set term postscript eps color enhanced
-set out 'gamma-0.8-0.7.eps'
+set term postscript eps color enhanced fontscale 1.4
+set out 'gamma-0.8-0.eps'
 
 set multiplot
-# set title "gamma functions"
 set ylabel '{/Symbol g}_{x;n}(0.7)'
 set key left
 
 set size 1.0, 0.79
 set origin 0.0, 0.21
 set xtics format ""
-plot "treefn-0.8-0.7.dat" using 2:(0.8) with lines linewidth 3 title "",\
-     "treefn-0.8-0.7.dat" using 2:4 with lines linewidth 2 title "{/Symbol g}_{x;1}(0.7)",\
-     "treefn-0.8-0.7.dat" using 2:5 with lines linewidth 2 title "{/Symbol g}_{x;2}(0.7)",\
-     "treefn-0.8-0.7.dat" using 2:6 with lines linewidth 2 title "{/Symbol g}_{x;3}(0.7)",\
-     "treefn-0.8-0.7.dat" using 2:7 with lines linewidth 2 title "{/Symbol g}_{x;4}(0.7)",\
-     "treefn-0.8-0.7.dat" using 2:8 with lines linewidth 2 title "{/Symbol g}_{x;5}(0.7)",\
-     "treefn-0.8-0.7.dat" using 2:12 with lines linewidth 2 title "{/Symbol g}_{x;9}(0.7)"
+plot "treefn-0.8-0.dat" using 2:(0.8) with lines linewidth 3 title "{/Symbol b}=1.6",\
+     "treefn-0.8-0.dat" using 2:4 with lines linewidth 2 title "{/Symbol g}_{x;1}(0)",\
+     "treefn-0.8-0.dat" using 2:5 with lines linewidth 2 title "{/Symbol g}_{x;2}(0)",\
+     "treefn-0.8-0.dat" using 2:6 with lines linewidth 2 title "{/Symbol g}_{x;3}(0)",\
+     "treefn-0.8-0.dat" using 2:7 with lines linewidth 2 title "{/Symbol g}_{x;4}(0)",\
+     "treefn-0.8-0.dat" using 2:8 with lines linewidth 2 title "{/Symbol g}_{x;5}(0)",\
+     "treefn-0.8-0.dat" using 2:12 with lines linewidth 2 title "{/Symbol g}_{x;9}(0)"
 
 set size 0.977, 0.25
 set origin 0.023, 0.0
 set xlabel "x"
 set xtics format "%2.1f"
-set ylabel 'T_{1.6}(x;0.7)'
+set ylabel 'T_{1.6}(x;0)'
 set ytics 0,1
 set yrange [-0.1:1.1]
-plot "treefn-0.8-0.7.dat" using 2:3 with lines linewidth 2 title ""
+plot "treefn-0.8-0.dat" using 2:3 with lines linewidth 2 title ""
+#
+###########################################################################
+
+# set out 'treefn.png'
+# set term postscript eps color enhanced fontscale 1.4
+# set out 'gamma-0.8-0.7.eps'
+# 
+# set multiplot
+# # set title "gamma functions"
+# set ylabel '{/Symbol g}_{x;n}(0.7)'
+# set key left
+# 
+# set size 1.0, 0.79
+# set origin 0.0, 0.21
+# set xtics format ""
+# plot "treefn-0.8-0.7.dat" using 2:(0.8) with lines linewidth 3 title "",\
+#      "treefn-0.8-0.7.dat" using 2:4 with lines linewidth 2 title "{/Symbol g}_{x;1}(0.7)",\
+#      "treefn-0.8-0.7.dat" using 2:5 with lines linewidth 2 title "{/Symbol g}_{x;2}(0.7)",\
+#      "treefn-0.8-0.7.dat" using 2:6 with lines linewidth 2 title "{/Symbol g}_{x;3}(0.7)",\
+#      "treefn-0.8-0.7.dat" using 2:7 with lines linewidth 2 title "{/Symbol g}_{x;4}(0.7)",\
+#      "treefn-0.8-0.7.dat" using 2:8 with lines linewidth 2 title "{/Symbol g}_{x;5}(0.7)",\
+#      "treefn-0.8-0.7.dat" using 2:12 with lines linewidth 2 title "{/Symbol g}_{x;9}(0.7)"
+# 
+# set size 0.977, 0.25
+# set origin 0.023, 0.0
+# set xlabel "x"
+# set xtics format "%2.1f"
+# set ylabel 'T_{1.6}(x;0.7)'
+# set ytics 0,1
+# set yrange [-0.1:1.1]
+# plot "treefn-0.8-0.7.dat" using 2:3 with lines linewidth 2 title ""

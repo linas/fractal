@@ -87,6 +87,7 @@ int main (int argc, char* argv[])
 		double hi = skew_takagi(0.5/K + x*(1.0 - 0.5/K), K, w, 14);
 		printf("%d	%g %g	%g	%g\n", i, x, y, lo, hi);
 #endif
+#define BASIC_HAAR
 #ifdef BASIC_HAAR
 		double y = skew_haar(x, K, w, 14);
 		double z = skew_haar(x, K, w, -1);
@@ -95,9 +96,11 @@ int main (int argc, char* argv[])
 		double r = skew_haar(x, K, w, 2);
 		printf("%d	%g %g	%g	%g	%g	%g\n", i, x, y, z, t, s, r);
 #endif
+#ifdef HAAR_SELF_SIM
 		double y = skew_haar(x, K, w, 14);
 		double lo = skew_haar(0.5*x/K, K, w, 14);
 		double hi = skew_haar(0.5/K + x*(1.0 - 0.5/K), K, w, 14);
 		printf("%d	%g %g	%g	%g\n", i, x, y, lo, hi);
+#endif
 	}
 }
