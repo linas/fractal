@@ -1,12 +1,27 @@
 
 set term png size 1024,768
-set out 'berg.png'
+# set out 'berg.png'
+# plot "berg.dat" using 1:4 with lines linewidth 2 title ""
 
-# set term postscript eps color enhanced
-# set out 'berg-0.8.eps'
+# ########################################################
+# Graphics for the paper
+set term postscript eps color enhanced fontscale 2
+set out 'berg-0.55.eps'
 
-# set yrange [0:1]
+set xrange [0:500]
+set yrange [0:1]
+set title "Subdiagonal matrix entries for {/Symbol b}=1.1"
+
+plot "berg-0.55.dat" using 1:2 with lines linewidth 2 title ""
+
+# ########################################################
+# Graphics for the paper
+set term postscript eps color enhanced fontscale 2
+set out 'berg-0.8.eps'
+
+set xrange [0:500]
+set yrange [0:1]
 set title "Subdiagonal matrix entries for {/Symbol b}=1.6"
 
-# plot "berg.dat" using 1:2 with lines linewidth 2 title ""
-plot "berg.dat" using 1:4 with lines linewidth 2 title ""
+plot "berg-0.8.dat" using 1:2 with lines linewidth 2 title ""
+
