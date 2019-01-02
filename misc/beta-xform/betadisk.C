@@ -13,12 +13,14 @@
 #include <pthread.h>
 
 #include <complex.h>
-#define COMPLEX std::complex<double>
+// #define COMPLEX std::complex<double>
+#define COMPLEX std::complex<__float128>
+typedef __float128 lodouble_t;
 
 #include "brat.h"
 
 // My downshift; beta=2K so T(x) = case bx or b(x-0.5)
-double downshift(double x, double K)
+lodouble_t downshift(lodouble_t x, lodouble_t K)
 {
 	K *= 2.0;
 	if (0.5 <= x)
@@ -30,9 +32,9 @@ double downshift(double x, double K)
 
 // Return the iterated downshift t^n(beta/2)
 // The Renyi-Parry bit d_n is given by (x<tn)
-double T_n(int n, double beta)
+lodouble_t T_n(int n, lodouble_t beta)
 {
-	double tn = 0.5*beta;
+	lodouble_t tn = 0.5*beta;
 
 	// compute T^N(b/2)
 	for (int i=0; i<n; i++)
@@ -43,21 +45,23 @@ double T_n(int n, double beta)
 }
 
 // Build the q- function.
-COMPLEX qfunc(double beta, COMPLEX zeta)
+COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 {
-	#define SEQLEN 780
+	#define SEQLEN 250
 	static bool is_init = false;
 	static int bit[SEQLEN];
 	if (not is_init)
 	{
 		is_init = true;
-		double K = 0.5*beta;
-		double mid = K;
+		lodouble_t K = 0.5*beta;
+		lodouble_t mid = K;
 		for (int i=0; i<SEQLEN; i++)
 		{
 			bit[i] = 0;
 			if (0.5 < mid) bit[i] = 1;
 			mid = downshift(mid, K);
+// printf("duuude its %d %d\n", i, bit[i]);
+bit[i] = 1 - i%2;
 		}
 	}
 
@@ -103,16 +107,18 @@ static void qpoly (float *array,
 		double r = x*x + y*y;
 		if (r <= 2.0)
 		{
-			COMPLEX zeta = x + I*y;
+			COMPLEX zeta(x,y);
 			COMPLEX sum = qfunc(beta, zeta);
 			// Take minus the sum, to get what alldisk.C is showing.
 			sum = -sum;
-			double pha = atan2(imag(sum), real(sum))/M_PI;
+			double re = real(sum);
+			double im = imag(sum);
+			double pha = atan2(im, re)/M_PI;
 			array[j] = 0.5 + 0.5 * pha;
 
 			if (1.0 < r and r <= 1.02) array[j] = 1;
 
-#if 1
+#if 0
 			double mag = abs(sum);
 			if (mag < 0.15) {
 				COMPLEX z = beta*zeta;
