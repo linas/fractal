@@ -6992,10 +6992,38 @@ There is a set of Haar-like wavelets in which the transfer operator is of
 
 .
  A matrix having this form is called a Hessenberg matrix; such matrices
- have various interesting properties, and occur naturally in spectral measure
- theory.
- In particular, they generalize the Jacobi operator for real Borel measures.
- This is explored in greater detail in this section.
+ have various interesting properties; among others, they generalize the
+ Jacobi matrix.
+ This chapter explicitly constructs an infinite-dimensional Hessenberg matrix,
+ which may now be called a Hessenberg operator.
+\end_layout
+
+\begin_layout Standard
+Hessenberg operators occur naturally in spectral measure theory; some of
+ this will be reviewed in several later chapters.
+ To get a flavor for what is to come: Given a Hessenberg operator, one may
+ construct a system of orthogonal polynomials that provide a basis for square-in
+tegrable holomorphic functions on some domain of the complex plane.
+ Such a space is called a Berman space; in this sense it generalizes the
+ Jacobi operator for real Borel measures.
+ This basis of polynomials in turn allows the Hessenberg operator to be
+ explicitly seen as a shift operator on that domain, with 
+\begin_inset Formula $\left[Hf\right]\left(z\right)=zf\left(z\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $H$
+\end_inset
+
+ the Hessenberg operator and 
+\begin_inset Formula $f\left(z\right)$
+\end_inset
+
+ a holomorphic function (specifically a Bergman function) on the Bergman
+ domain.
+ But all of this is for later chapters; its mentioned here only to whet
+ the appetite.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -7003,8 +7031,11 @@ Hessenberg wavelet basis
 \end_layout
 
 \begin_layout Standard
-The transfer operator can be fairly easily brought into Hessenberg matrix
- form.
+The transfer operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ can be fairly easily brought into Hessenberg matrix form.
  A sequence of of orthonormal functions is constructed in this section;
  when used as a basis, the transfer operator becomes almost upper-diagonal.
  
@@ -7569,10 +7600,27 @@ eventually
 \end_inset
 
  fill in and become dense in some interval.
+ Renyi
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Renyi57"
+
+\end_inset
+
+ and Parry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+
+\end_inset
+
+ do more: they show that the midpoint process is ergodic (Parry points out
+ that it's weakly mixing), and provide a formal proof that the distribution
+ is one and the same as the invariant measure.
 \end_layout
 
 \begin_layout Standard
-There are some exceptions: there are some values of 
+The above has some exceptions: there are some values of 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -7584,14 +7632,18 @@ There are some exceptions: there are some values of
 \begin_inset Formula $x=1/2$
 \end_inset
 
- which can be understood to be the same as iterating back to itself (forming
- a periodic orbit), or equivalently, iterating to zero (as these are two
- choices for the discontinuity in the map).
+, wherupon iteration stops (i.e.
+ iterates to zero), or becomes cyclic (forming a periodic orbit).
+ Which is which depends on how the point 
+\begin_inset Formula $1/2$
+\end_inset
+
+ is treated by the map.
  These values of 
 \begin_inset Formula $\beta$
 \end_inset
 
- are termed 
+ are potential 
 \begin_inset Quotes eld
 \end_inset
 
@@ -7599,7 +7651,7 @@ trouble spots
 \begin_inset Quotes erd
 \end_inset
 
-, and are explored in greater detail, in a later section.
+, and are explored in greater detail in the next chapter.
  They are dense in the interval 
 \begin_inset Formula $1<\beta<2$
 \end_inset
