@@ -4575,8 +4575,14 @@ Almost-solutions
 \end_layout
 
 \begin_layout Standard
-If one ignores the Heaviside step function in the definition, one easily
- finds a number of 
+If one ignores the Heaviside step function in the definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xfer oper"
+
+\end_inset
+
+, one easily finds a number of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4660,7 +4666,7 @@ This all goes horribly wrong if one instead considers
 \end_inset
 
  generates a splatter of step functions.
- This case is examined more closely in the next section.
+ This case is examined more closely in the next chapter.
  
 \end_layout
 
@@ -4941,7 +4947,8 @@ Presumably, there are special values of
 \begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
- is wholly unclear.
+ is wholly unclear; however, the examination of the periodic orbits of the
+ beta shift, undertaken in a later chapter, will provide a strong clue.
 \end_layout
 
 \begin_layout Subsection
@@ -4968,9 +4975,9 @@ rotated
 
  function
 \begin_inset Formula 
-\[
-r_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}e^{i\pi\lambda n}
-\]
+\begin{equation}
+v_{\beta;z}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}z^{n}\label{eq:coherent-first-order}
+\end{equation}
 
 \end_inset
 
@@ -4991,20 +4998,41 @@ d_{n}\left(x\right)=\begin{cases}
 
 \end_inset
 
+and 
+\begin_inset Formula $T$
+\end_inset
 
+ the beta shift map of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+.
+ The summation is clearly convergent (and holomorphic) for complex numbers
+ 
+\begin_inset Formula $z$
+\end_inset
+
+ within the disk 
+\begin_inset Formula $\left|z\right|<\beta$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-It is fairly straight-forward to verify numerically that 
+Exploring this numerically, one finds that 
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{\beta}r_{\beta;\lambda}\right]\left(x\right)=e^{-i\pi\lambda}r_{\beta;\lambda}\left(x\right)+C\left(\beta;\lambda\right)
+\left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(x\right)=\frac{1}{z}v_{\beta;z}\left(x\right)+C\left(\beta;z\right)
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $C\left(\beta;\lambda\right)$
+\begin_inset Formula $C\left(\beta;z\right)$
 \end_inset
 
  is a constant independent of 
@@ -5016,262 +5044,54 @@ where
 \end_inset
 
  and zero otherwise).
- Further numerical exploration suggests that 
-\begin_inset Formula 
-\[
-C\left(\beta;\lambda\right)=1-e^{-i\pi\lambda}+p\left(\beta;\lambda\right)
-\]
-
+ This is a rather very strong, and surprising statement! The sequence of
+ digits 
+\begin_inset Formula $d_{n}\left(x\right)$
 \end_inset
 
-with 
-\begin_inset Formula $p\left(\beta;\lambda\right)$
-\end_inset
-
- a smaller function, periodic in 
-\begin_inset Formula $\lambda$
+ depend strongly on 
+\begin_inset Formula $x$
 \end_inset
 
 .
- The frequency increases and the amplitude decreases with smaller 
-\begin_inset Formula $\beta$
-\end_inset
-
-.
- The frequency is interesting: it is always a multiple of 
-\begin_inset Formula $\pi/2$
-\end_inset
-
- and seems to be approximately given by 
-\begin_inset Formula $\pi/\left(\beta-1\right)$
-\end_inset
-
-, but truncated to quarter-wavelengths.
- It appears that 
-\begin_inset Formula $C\left(\beta;\lambda\right)$
-\end_inset
-
- is never zero (except at 
-\begin_inset Formula $\beta=1$
-\end_inset
-
-, which is the degenerate case).
-\end_layout
-
-\begin_layout Standard
-There is no particular reason to stop with unitary rotations; one can also
- consider 
-\begin_inset Formula 
-\begin{equation}
-v_{\beta;z}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}z^{n}\label{eq:coherent-first-order}
-\end{equation}
-
-\end_inset
-
-for complex numbers 
-\begin_inset Formula $z$
-\end_inset
-
- within the disk 
-\begin_inset Formula $\left|z\right|<\beta$
-\end_inset
-
-, where the sum might be reasonably be expected to converge.
- The same 
-\begin_inset Quotes eld
-\end_inset
-
-up to a constant
-\begin_inset Quotes erd
-\end_inset
-
- behavior continues:
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(x\right)=\frac{1}{z}v_{\beta;z}\left(x\right)+C\left(\beta;z\right)
-\]
-
-\end_inset
-
-As before, 
-\begin_inset Formula $C\left(\beta;z\right)$
-\end_inset
-
- is independent of 
-\begin_inset Formula $x.$
-\end_inset
-
- It appears that 
-\begin_inset Formula $0<\left|C\left(\beta;z\right)\right|$
-\end_inset
-
- for all 
-\begin_inset Formula $\left|z\right|<\beta$
-\end_inset
-
- and 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
-.
- However, anticipating later results, which suggest that 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- has complex-valued eigenvalues on the circle of radius 
-\begin_inset Formula $1/\beta$
-\end_inset
-
-, it appears that 
-\begin_inset Formula $C\left(\beta;z\right)\to0$
-\end_inset
-
- for some values of 
-\begin_inset Formula $z$
-\end_inset
-
- when 
-\begin_inset Formula $\left|z\right|\to\beta$
-\end_inset
-
-.
- That is, 
+ The function 
 \begin_inset Formula $v_{\beta;z}\left(x\right)$
 \end_inset
 
- might very well be an eigenfunction of 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
-, if only the limit 
-\begin_inset Formula $\left|z\right|\to\beta$
-\end_inset
-
- could be taken in some sensible way.
- 
-\end_layout
-
-\begin_layout Standard
-Inspired by this, write
-\begin_inset Formula 
-\[
-w_{\beta;\lambda}\left(x\right)=\sum_{n=0}^{\infty}d_{n}\left(x\right)e^{i\pi\lambda n}
-\]
-
-\end_inset
-
-This sum is ill-defined, as written; it might be conditionally convergent,
- if one were lucky.
- (Don't forget: 
-\begin_inset Formula $d_{n}$
-\end_inset
-
- depends on 
-\begin_inset Formula $\beta$
-\end_inset
-
- as well as 
-\begin_inset Formula $x$
-\end_inset
-
-.) Exploring this numerically, taking the limit from below suggests that
- this sum is in fact convergent almost-everywhere, and that its quite reasonably
- finite, but also that 
-\begin_inset Formula $w_{\beta;\lambda}\left(x\right)$
-\end_inset
-
- is 
-\begin_inset Quotes eld
-\end_inset
-
-discontinuous everywhere
-\begin_inset Quotes erd
-\end_inset
-
-, as a function of 
+ depends strongly on 
 \begin_inset Formula $x$
 \end_inset
 
 .
- I place the phrase 
+ That it is an 
 \begin_inset Quotes eld
 \end_inset
 
-discontinuous everywhere
+almost
 \begin_inset Quotes erd
 \end_inset
 
- in 
-\begin_inset Quotes eld
+ eigenfunction is perhaps no surprise; that the remainder 
+\begin_inset Formula $C\left(\beta;z\right)$
 \end_inset
 
-scare quotes
-\begin_inset Quotes erd
+ is a constant, independent of 
+\begin_inset Formula $x$
 \end_inset
 
-; what is probably happening is that it is discontinuous only at the rationals
- (or some other countable set of points), while being well-behaved 
-\begin_inset Quotes eld
+, is very surprising.
+ It provides a very clear indication of an analytic entanglement of the
+ digits 
+\begin_inset Formula $d_{n}\left(x\right)$
 \end_inset
 
-everywhere else
-\begin_inset Quotes erd
-\end_inset
-
-.
- Oddly, this suggests the correct phrasing should be 
-\begin_inset Quotes eld
-\end_inset
-
-continuous almost everywhere
-\begin_inset Quotes erd
-\end_inset
-
-, although this requires abandoning most traditional definitions of continuity.
- There is a way to formalize these hand-waving statements.
- 
+ in a highly non-trivial form.
+ This is worth pursuing to great extent.
 \end_layout
 
 \begin_layout Standard
-If this were the Bernoulli shift, the above statements could be formalized
- by passing over to the full shift (the Cantor space 
-\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
-\end_inset
-
-) and then defining a measure on cylinder sets.
- The problem encountered here, with the beta-transform, is that the cylinder
- sets, as canonically defined, fail to be shift-covariant when the shift
- is the beta-transform.
- To make forward progress, one needs a construction analogous to the cylinder
- sets, but behaving appropriately (
-\begin_inset Quotes eld
-\end_inset
-
-covariantly
-\begin_inset Quotes erd
-\end_inset
-
-) under the subshift.
- Armed with such a construction, one would be very powerful indeed: they
- would serve as a collection of basis vectors, from which any sort of coherent
- states could be built.
- That is, in the full shift, the cylinder sets on the Cantor space correspond
- to the Haar wavelets on the unit interval; they are effectively 
-\begin_inset Quotes eld
-\end_inset
-
-the same thing
-\begin_inset Quotes erd
-\end_inset
-
-.
- Obtaining an analogous basis for the beta subshift would provide everything
- needed to construct coherent states.
- A large part of the fumbling about in this text is a search for such functions.
-\end_layout
-
-\begin_layout Standard
-Combining the above expressions, one can write
+First, some baby-steps.
+ Combining the above expressions, one can write
 \begin_inset Formula 
 \begin{align*}
 C\left(\beta;z\right)= & \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(y\right)-\frac{v_{\beta;z}\left(y\right)}{z}\\
@@ -5280,7 +5100,7 @@ C\left(\beta;z\right)= & \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(y\righ
 
 \end_inset
 
-which apparently is a constant, independent of 
+Again: this is a constant, independent of 
 \begin_inset Formula $y$
 \end_inset
 
@@ -5329,7 +5149,7 @@ This would be holomorphic on the unit disk
 \end_layout
 
 \begin_layout Standard
-One can simplify.
+This is readily simplified.
  Set 
 \begin_inset Formula $y=0$
 \end_inset
@@ -5351,13 +5171,13 @@ D\left(\beta;\zeta\right)=-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1
 \end_layout
 
 \begin_layout Standard
-This is straight-forward to examine numerically, and reveals what looks
- like a countable number of zeros in the disk 
+This is straight-forward to examine numerically; the disk is readily plotted,
+ and reveals what looks like a countable number of zeros in the disk 
 \begin_inset Formula $\left|\zeta\right|<1$
 \end_inset
 
-, and then more in the limit 
-\begin_inset Formula $\left|\zeta\right|=1$
+, and then many more in the limit 
+\begin_inset Formula $\left|\zeta\right|\to1$
 \end_inset
 
 .
@@ -5687,7 +5507,7 @@ These are not particularly meaningful numbers; they just give a flavor for
  some locations of eigenvalues.
  The overall distribution is scattered; the zeros appear in not very predictable
  locations, mostly not far from the edge of the disk.
- Some additional insight into this behavior is given in later sections.
+ Insight into this behavior is developed in depth in later chapters.
  A typical eigenfunction is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5703,7 +5523,7 @@ reference "fig:Undershift-Density-Distribution"
 
 \end_inset
 
-, it has the same general characteristics, belonging to the same family.
+, it does have the same general characteristics, belonging to the same family.
 \end_layout
 
 \begin_layout Standard
@@ -5756,7 +5576,7 @@ name "fig:Typical-Eigenfunction"
 \end_layout
 
 \begin_layout Standard
-This section ends with several mysteries: First, why is 
+This section ends with a deep mystery: why is 
 \begin_inset Formula $C\left(\beta;z\right)$
 \end_inset
 
@@ -5764,11 +5584,8 @@ This section ends with several mysteries: First, why is
 \begin_inset Formula $y$
 \end_inset
 
- coordinate? This is a pleasant surprise, linking digits with unexpected
- analytic formulas.
- The relationship is not at all obvious; how should it be explained? Can
- profitable use be made of it? Might there be more of such identities? Surely
- there isn't just this one? 
+ coordinate? How should it be explained? How can it be put to good use?
+ Might there be more of such identities? Or is there only this one? 
 \end_layout
 
 \begin_layout Subsection
@@ -8990,9 +8807,9 @@ per se
 \end_layout
 
 \begin_layout Standard
-In the next section, it will be seen that circles of zeros in the complex
+In the next chapter, it will be seen that circles of zeros in the complex
  plane is a recurring theme.
- This suggests a hypothesis that somehow 
+ This suggests a hypothesis that somehow it might hold that
 \begin_inset Formula 
 \[
 \sum_{m}^{N}v_{m}\left(\beta z\right)^{m}\sim z^{N+1}-\sum_{k}b_{k}z^{k}
@@ -9000,8 +8817,8 @@ In the next section, it will be seen that circles of zeros in the complex
 
 \end_inset
 
-as both sides would have zeros arranged in circles of unit radius.
- The right hand side defined and explored in detail in the next section.
+as both sides have zeros arranged in circles of unit radius.
+ The right hand side is defined and explored in detail in the next chapter.
  Superficially, this hypothesis is clearly false: coefficients on the left
  are all real and positive; coefficients on the right - the 
 \begin_inset Formula $b_{k}$
