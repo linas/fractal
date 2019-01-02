@@ -47,7 +47,7 @@ lodouble_t T_n(int n, lodouble_t beta)
 // Build the q- function.
 COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 {
-	#define SEQLEN 250
+	#define SEQLEN 750
 	static bool is_init = false;
 	static int bit[SEQLEN];
 	if (not is_init)

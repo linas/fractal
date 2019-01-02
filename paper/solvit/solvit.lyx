@@ -4953,6 +4953,13 @@ Presumably, there are special values of
 
 \begin_layout Subsection
 Rotated Renyi-Parry function
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Rotated-Renyi-Parry-function"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13317,30 +13324,6 @@ s of the
 \end_inset
 
 .
- This should be qualified: those zeros that lie within, or on the unit circle.
- Furthermore, the bit sequence 
-\begin_inset Formula $\left\{ b\right\} $
-\end_inset
-
- should always be taken as the infinite sequence, rathher than the finite,
- terminating one.
- An example is in order.
-\end_layout
-
-\begin_layout Standard
-Consider 
-\begin_inset Formula $\beta=\varphi=1.6180\cdots$
-\end_inset
-
- the golden ratio.
- The corresponding finite beta-polynomial is 
-\begin_inset Formula $q^{\left\{ 11\right\} }\left(\zeta\right)=1-\zeta-\zeta^{2}$
-\end_inset
-
-, while the non-terminating periodic one is 
-\begin_inset Formula $q^{\left\{ 101010\cdots\right\} }\left(\zeta\right)=1-\zeta-\zeta^{3}-\zeta^{5}-\cdots$
-\end_inset
-
  
 \end_layout
 
@@ -13480,6 +13463,208 @@ To get an understanding of
 
 , and likewise for other eigenvectors.
  
+\end_layout
+
+\begin_layout Subsection
+Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+The analysis of periodic orbits given above, together with thier natural
+ extension to non-periodic orbits provides a sufficient amount of detail
+ to again tackle the problem of describing the transfer operator and it's
+ spectrum in a precise way.
+ This section proceeds by example.
+ 
+\end_layout
+
+\begin_layout Standard
+The zeros of the transfer operator should correspond with the zeros of 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+, or, more precisely, the zeros for which 
+\begin_inset Formula $\left|\zeta\right|\le1$
+\end_inset
+
+; the reason for this will be made clear below.
+ From the development of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Rotated-Renyi-Parry-function"
+
+\end_inset
+
+ leading to eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-disk"
+
+\end_inset
+
+, a zero 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ corresponds to an eigenvalue of 
+\begin_inset Formula $1/\zeta\beta$
+\end_inset
+
+.
+ The eigenfunctions are given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+
+\end_inset
+
+ (for 
+\begin_inset Formula $z=\zeta\beta$
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Subsubsection
+Case n=1
+\end_layout
+
+\begin_layout Standard
+Consider first 
+\begin_inset Formula $\beta=\varphi=1.6180\cdots$
+\end_inset
+
+ the golden ratio.
+ The corresponding finite beta-polynomial is 
+\begin_inset Formula $q^{\left\{ 11\right\} }\left(\zeta\right)=1-\zeta-\zeta^{2}$
+\end_inset
+
+; the infinite series is 
+\begin_inset Formula 
+\[
+q^{\left\{ 1010101\cdots\right\} }\left(\zeta\right)=1-\zeta-\zeta^{3}-\zeta^{5}-\cdots=\left(1-\zeta-\zeta^{2}\right)/\left(1-\zeta^{2}\right)
+\]
+
+\end_inset
+
+which has a positive real zero at 
+\begin_inset Formula $\zeta=1/\varphi$
+\end_inset
+
+ and poles at 
+\begin_inset Formula $\zeta=\pm1$
+\end_inset
+
+.
+ The zero corresponds to the FP eigenvalue of one.
+ The scaled shift matrix is 
+\begin_inset Formula 
+\[
+\mathcal{B}=\frac{B^{T}}{\beta}=\frac{1}{\beta}\left[\begin{array}{cc}
+1 & 1\\
+1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+which has an eigenvector 
+\begin_inset Formula $\left[\begin{array}{cc}
+\varphi & 1\end{array}\right]$
+\end_inset
+
+.
+ The eigenfunction is 
+\begin_inset Formula 
+\[
+v_{\varphi;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\varphi^{m}}=\begin{cases}
+\varphi & \mbox{for }0\le x<\frac{1}{2}\\
+1 & \mbox{for }\frac{1}{2}\le x<\varphi\\
+0 & \mbox{for }\varphi\le1
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Case n=2
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case has the finite bitstring 
+\begin_inset Formula $\left\{ b\right\} =101$
+\end_inset
+
+ and the periodic bitstring 
+\begin_inset Formula $\left\{ b\right\} =1001001\cdots$
+\end_inset
+
+.
+ The corresponding finite beta-polynomial is 
+\begin_inset Formula $q^{\left\{ 101\right\} }\left(\zeta\right)=1-\zeta-\zeta^{3}$
+\end_inset
+
+; the infinite series is 
+\begin_inset Formula 
+\[
+q^{\left\{ 1001\cdots\right\} }\left(\zeta\right)=1-\zeta-\zeta^{4}-\zeta^{7}-\cdots=\left(1-\zeta-\zeta^{3}\right)/\left(1-\zeta^{3}\right)
+\]
+
+\end_inset
+
+which has a positive real zero at 
+\begin_inset Formula $\zeta=1/\beta=0.6823\cdots$
+\end_inset
+
+ and three poles on the unit circle.
+ The FP eigenvalue of one gives 
+\begin_inset Formula $\beta=1.4655\cdots$
+\end_inset
+
+.
+ The scaled shift matrix is 
+\begin_inset Formula 
+\[
+\mathcal{B}=\frac{1}{\beta}\left[\begin{array}{ccc}
+1 & 0 & 1\\
+1 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+which has an eigenvector 
+\begin_inset Formula $\left[\begin{array}{ccc}
+\beta^{2} & \beta & 1\end{array}\right]$
+\end_inset
+
+.
+ The eigenfunction is 
+\begin_inset Formula 
+\[
+v_{\beta;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\beta^{m}}=\beta\begin{cases}
+1+\frac{1}{\beta}+\frac{1}{\beta^{2}} & \mbox{for }0\le x<\frac{1}{2\beta}\\
+1+\frac{1}{\beta^{2}} & \mbox{for }\frac{1}{2\beta}\le x<\frac{1}{2}\\
+1 & \mbox{for }\frac{1}{2}\le x<\beta\\
+0 & \mbox{for }\beta\le1
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The positive rea 
 \end_layout
 
 \begin_layout Subsection

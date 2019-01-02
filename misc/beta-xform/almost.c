@@ -228,7 +228,7 @@ int main (int argc, char* argv[])
 	double beta = 2.0*K;
 	double complex z = abszed * cexp(I*M_PI*lambda);
 
-// #define ZEE
+#define ZEE
 #ifdef ZEE
 	print_vee(beta, z);
 #endif
@@ -249,5 +249,5 @@ int main (int argc, char* argv[])
 	print_d(n, beta);
 #endif
 
-	print_bits(beta, lambda);
+	// print_bits(beta, lambda);
 }
