@@ -13006,21 +13006,33 @@ complex multiplication
  certainly suggestive of an underlying process of points on elliptic curves.
 \end_layout
 
+\begin_layout Subsection
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci sequences as shifts
+\end_layout
+
 \begin_layout Standard
-The nature of these sequences as shift sequences can be emphasized by noting
- that each sequence can be obtained by iterating on a 
+The nature of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci sequences as shift sequences can be emphasized by noting that
+ they arise from the iteration of a 
 \begin_inset Formula $\left(k+1\right)\times\left(k+1\right)$
 \end_inset
 
- matrix of the form
+ matrix in lower-Hessenberg form:
 \begin_inset Formula 
 \begin{equation}
-B=\left[\begin{array}{ccccc}
-b_{0} & b_{1} & b_{2} & \cdots & b_{k}\\
-1 & 0 & 0 & \cdots & 0\\
-0 & 1 & 0 & \cdots & 0\\
-0 &  & \ddots &  & \vdots\\
-0 & 0 & \cdots & 1 & 0
+B=\left[\begin{array}{cccccc}
+b_{0} & 1 & 0 & 0 & \cdots & 0\\
+b_{1} & 0 & 1 & 0 & \cdots & 0\\
+b_{2} & 0 & 0 & 1 & \cdots & 0\\
+\vdots & \vdots & \vdots &  & \ddots & \vdots\\
+b_{k-1} & 0 & 0 & 0 & \cdots & 1\\
+b_{k} & 0 & 0 & 0 & \cdots & 0
 \end{array}\right]\label{eq:golden matrix}
 \end{equation}
 
@@ -13039,15 +13051,96 @@ That is, the
 \end_inset
 
 .
- The characteristic equation of this matrix is, of course, the polynomial
+ That such iteration results in integer sequences has long been observed
+ in the theory of continued fractions.
+ It's useful to work an explicit example.
+ For the golden ratio, one has 
+\begin_inset Formula 
+\[
+B=\left[\begin{array}{cc}
+1 & 1\\
+1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+and the iterates are 
+\begin_inset Formula 
+\[
+B^{2}=\left[\begin{array}{cc}
+2 & 1\\
+1 & 1
+\end{array}\right],\;B^{3}=\left[\begin{array}{cc}
+3 & 2\\
+2 & 1
+\end{array}\right],\;B^{4}=\left[\begin{array}{cc}
+5 & 3\\
+3 & 2
+\end{array}\right],\;B^{n}=\left[\begin{array}{cc}
+F_{n} & F_{n-1}\\
+F_{n-1} & F_{n-2}
+\end{array}\right]
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $F_{n}$
+\end_inset
+
+ being the 
+\begin_inset Formula $n$
+\end_inset
+
+'th Fibonacci number, as usual.
+ For the general case, one has that
+\begin_inset Formula 
+\[
+B^{m}=\left[\begin{array}{cccccc}
+F_{m}^{\left\{ b\right\} } & F_{m-1}^{\left\{ b\right\} } & F_{m-2}^{\left\{ b\right\} } & \cdots & F_{m-k+1}^{\left\{ b\right\} } & F_{m-k}^{\left\{ b\right\} }\\
+F_{m-1}^{\left\{ b\right\} } & F_{m-2}^{\left\{ b\right\} } & F_{m-3}^{\left\{ b\right\} } & \cdots & F_{m-k}^{\left\{ b\right\} } & F_{m-k-1}^{\left\{ b\right\} }\\
+F_{m-2}^{\left\{ b\right\} } & F_{m-3}^{\left\{ b\right\} } &  & \cdots\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+F_{m-k+1}^{\left\{ b\right\} } &  &  & \cdots\\
+F_{m-k}^{\left\{ b\right\} } &  &  & \cdots &  & F_{m-2k}^{\left\{ b\right\} }
+\end{array}\right]
+\]
+
+\end_inset
+
+so that the top row consists of the latest sequence values.
+ When multiplied by the bits, this just generates the next iterate in the
+ sequence.
+ The upper-diagonal 1's just serve to shift columns over by one, with each
+ iteration: that is why it's a shift!
+\end_layout
+
+\begin_layout Standard
+The characteristic polynomial of this matrix is, of course, the polynomial
  
 \begin_inset Formula $p_{n}$
 \end_inset
 
-; and so it's eigenvalues are given by the roots of that polynomial.
- This matrix is in Hessenberg form; this confirms its guilt of having a
- shift-like nature.
- 
+:
+\begin_inset Formula 
+\[
+\det\left[B-xI\right]=\left(-1\right)^{k}p_{n}\left(x\right)
+\]
+
+\end_inset
+
+Thus, we can trivially conclude that the eigenvalues of 
+\begin_inset Formula $B$
+\end_inset
+
+ are given by the roots of 
+\begin_inset Formula $p_{n}\left(x\right)$
+\end_inset
+
+.
+ This matrix is in lower-Hessenberg form; this makes it obvious that it's
+ a shift; a finite shift, in this case.
 \end_layout
 
 \begin_layout Subsection
