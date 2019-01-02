@@ -8564,7 +8564,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Peron-Frobenius Eigenvector Coefficients
+Perron-Frobenius Eigenvector Coefficients
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:FP-Coeff-beta"
@@ -13238,8 +13238,8 @@ Monotonicity
 \end_layout
 
 \begin_layout Standard
-The function 
-\begin_inset Formula $w=\sum_{k}b_{k}2^{-k}$
+The compressor function 
+\begin_inset Formula $w\left(\beta\right)=\sum_{k}b_{k}2^{-k}$
 \end_inset
 
  is a monotonically increasing function of 
@@ -13247,7 +13247,7 @@ The function
 \end_inset
 
 , so that values of 
-\begin_inset Formula $w$
+\begin_inset Formula $w\left(\beta\right)$
 \end_inset
 
  are in one-to-one correspondence with 
@@ -13315,22 +13315,82 @@ If the orbit is periodic, then there exists a sequence of integers
 \end_layout
 
 \begin_layout Subsubsection
+Shift matrix
+\end_layout
+
+\begin_layout Standard
+If the orbit is periodic, then the finite bit sequence 
+\begin_inset Formula $\left\{ b\right\} =b_{0},b_{1},\cdots,b_{k}$
+\end_inset
+
+ defines a lower-Hessenberg 
+\begin_inset Quotes eld
+\end_inset
+
+golden shift
+\begin_inset Quotes erd
+\end_inset
+
+ matrix 
+\begin_inset Formula $B$
+\end_inset
+
+, as shown in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:golden matrix"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
 Summary
 \end_layout
 
 \begin_layout Standard
-To summarize: any one of these: the polynomial, the integer sequence, the
- orbit, the orbit encoding, 
-\begin_inset Formula $w$
+To summarize: any one of these: the integer 
+\begin_inset Formula $n$
 \end_inset
 
- and 
+, the polynomial 
+\begin_inset Formula $p_{n}\left(x\right)$
+\end_inset
+
+, the integer sequence 
+\begin_inset Formula $F_{m}^{\left\{ b\right\} }$
+\end_inset
+
+, the orbit of midpoints 
+\begin_inset Formula $m_{p}=T^{p}\left(\beta/2\right)$
+\end_inset
+
+, the orbit encoding 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+, the shift matrix 
+\begin_inset Formula $B$
+\end_inset
+
+, the value of the compressor function 
+\begin_inset Formula $w\left(\beta\right)$
+\end_inset
+
+ and, of course, 
 \begin_inset Formula $\beta$
 \end_inset
 
- can each be used as a stand-in for the others: they all uniquely map to
- one-another.
+ itself can each be used as a stand-in for the others.
+ Specifying one determines the others; they all uniquely map to one-another.
  They are all equivalent labels.
+ Fashionably abusing notation, 
+\begin_inset Formula $n\equiv p_{n}\left(x\right)\equiv\left\{ b\right\} \equiv F_{m}^{\left\{ b\right\} }\equiv m_{p}\equiv w\left(\beta\right)\equiv\beta\equiv B$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -13346,19 +13406,47 @@ reference "eq:iterated shift"
  Plugging in, 
 \begin_inset Formula 
 \begin{equation}
-m_{p}=T_{\beta}^{p+1}\left(\frac{\beta}{2}\right)=\frac{\beta}{2}\left[\beta^{p}-\sum_{k=0}^{p}b_{k}\beta^{p-k}\right]\label{eq:midpoint poly}
+m_{p}=T_{\beta}^{p+1}\left(\frac{\beta}{2}\right)=\frac{\beta}{2}\left[\beta^{p+1}-\sum_{j=0}^{p}b_{j}\beta^{p-j}\right]\label{eq:midpoint poly}
 \end{equation}
 
 \end_inset
 
+for 
+\begin_inset Formula $p<k$
+\end_inset
+
+ the length of the bit sequence, and 
+\begin_inset Formula $m_{k}=T_{\beta}^{k+1}\left(\beta/2\right)=\beta p_{n}\left(\beta\right)/2=0$
+\end_inset
+
+ terminating, since 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the positive root of 
+\begin_inset Formula $p_{n}\left(x\right)$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-Two of the correspondences given above ask for periodic orbits.
- These can be extended to non-periodic orbits in an unambiguous and uncontrovers
-ial way.
+Four of the correspondences given above ask for periodic orbits.
+ Three of these can be extended to non-periodic orbits in an unambiguous
+ and uncontroversial way.
  The extensions are covered in the next two sections.
+ The fourth is the numbering 
+\begin_inset Formula $n$
+\end_inset
+
+ of the finite orbits.
+ These are countable; there is no way to extend the counting number 
+\begin_inset Formula $n$
+\end_inset
+
+ to the non-periodic orbits.
+ Ineed, there ae too many: the non-periodic orbits are uncountable.
 \end_layout
 
 \begin_layout Subsection
@@ -13622,35 +13710,15 @@ s of the
 \end_layout
 
 \begin_layout Subsection
-Limiting Behavior
-\end_layout
-
-\begin_layout Standard
-Consider the following scenario: Pick some large integer 
-\begin_inset Formula $n$
-\end_inset
-
-.
- For many (not all) such integers, there will be a necklace or periodic
- orbit, given explicitly by the binary-digit expansion of 
-\begin_inset Formula $n$
-\end_inset
-
-.
- That orbit is associated with a specific value of 
 \begin_inset Formula $\beta$
 \end_inset
 
-, which is obtained as the real eigenvalue of the 
-\begin_inset Quotes eld
-\end_inset
+-Hessenberg operator
+\end_layout
 
-golden shift matrix
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset Formula $B_{n}$
+\begin_layout Standard
+Extending the golden shift matrix 
+\begin_inset Formula $B$
 \end_inset
 
  of eqn 
@@ -13660,146 +13728,15 @@ reference "eq:golden matrix"
 
 \end_inset
 
-, the characteristic equation of which being 
-\begin_inset Formula $p_{n}\left(\beta\right)=0$
-\end_inset
-
-.
- The bit sequence 
-\begin_inset Formula $\left\{ b_{0},b_{1,},\cdots,b_{k}\right\} $
-\end_inset
-
- is explicitly given by the binary-bit expansion of 
-\begin_inset Formula $2n+1$
-\end_inset
-
-, with 
-\begin_inset Formula $k=1+\left\lfloor \log_{2}n\right\rfloor $
-\end_inset
-
-.
- This polynomial has one positive real root at 
-\begin_inset Formula $\beta>1$
-\end_inset
-
- and 
-\begin_inset Formula $k-1$
-\end_inset
-
- other roots, almost all of which are arranged near the unit circle, more-or-les
-s equidistant from one another.
- Consider now rescaling the matrix 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:golden matrix"
-
-\end_inset
-
- by 
-\begin_inset Formula $1/\beta$
-\end_inset
-
-.
- This gives a new matrix, with what now might be called a Frobenius-Perron
- eigenvalue of one, and the remaining eigenvalues distributed near or approximat
-ely on a circle of radius 
-\begin_inset Formula $1/\beta$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Given the similarity of this spectrum to that observed numerically for eqn
+ to an infinite-dimensional operator is a bit trickier.
+ Of course, one could just declare the matrix elements of the operator to
+ be this-and-such, but these matrix elements are with respect to what basis?
+ Is the operator even bounded? The answer to the second question is obviously
  
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:hessen-matrix-elts"
-
-\end_inset
-
-, I am lead to the hypothesis that the large-
-\begin_inset Formula $n$
-\end_inset
-
- limit of 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:golden matrix"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:hessen-matrix-elts"
-
-\end_inset
-
- are similar to one another.
- That is, there exists some sequence of invertible matrices 
-\begin_inset Formula $S_{n}$
-\end_inset
-
-, the similarity matrices, and some sequence 
-\begin_inset Formula $\mathcal{N}=\left\{ n_{1},n_{2},\cdots\right\} $
-\end_inset
-
- such that
-\begin_inset Formula 
-\[
-\mathcal{L}_{\beta}=\frac{1}{\beta}\lim_{n\in\mathcal{N}}S_{n}^{-1}B_{n}S_{n}
-\]
-
-\end_inset
-
-The sequence 
-\begin_inset Formula $\mathcal{N}=\left\{ n_{1},n_{2},\cdots\right\} $
-\end_inset
-
- is selected so that the roots of the polynomials 
-\begin_inset Formula $p_{n_{j}}$
-\end_inset
-
- converge on 
-\begin_inset Formula $\beta$
-\end_inset
-
-.
- That is, the sequence 
-\begin_inset Formula $\mathcal{N}=\mathcal{N}_{\beta}$
-\end_inset
-
- is admissible if, for any 
-\begin_inset Formula $\epsilon>0$
-\end_inset
-
- there exists a minimal integer 
-\begin_inset Formula $i$
-\end_inset
-
- such that 
-\begin_inset Formula $\left|\beta-r_{n_{j}}\right|<\epsilon$
-\end_inset
-
- for all 
-\begin_inset Formula $j>i$
-\end_inset
-
- and 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- is the real positive root 
-\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
-\end_inset
-
-.
- This is just a precise way of saying 
 \begin_inset Quotes eld
 \end_inset
 
-the limit does what you think it does
+no
 \begin_inset Quotes erd
 \end_inset
 
@@ -13807,183 +13744,107 @@ the limit does what you think it does
 \end_layout
 
 \begin_layout Standard
-The tasks are then: 
-\end_layout
-
-\begin_layout Itemize
-How can one characterize the acceptable convergent sequences 
-\begin_inset Formula $\mathcal{N}=\mathcal{N}_{\beta}$
+The characteristic equation of 
+\begin_inset Formula $B$
 \end_inset
 
-; is it worth the effort to characterize them?
-\end_layout
-
-\begin_layout Itemize
-How can one characterize the sequences of 
-\begin_inset Formula $S_{n};n\in\mathcal{N}_{\beta}$
+ is 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
 \end_inset
 
- and what sort of enlightenment might this offer? 
-\end_layout
-
-\begin_layout Itemize
-The transfer operator 
-\begin_inset Formula $\mathcal{L}_{\beta}$
+; the Frobenius-Perron eigenvalue 
+\begin_inset Formula $\beta>1$
 \end_inset
 
- was specifically associated with the iterated 
-\begin_inset Formula $\beta$
+ is too large, although the 
+\begin_inset Formula $k-1=\left\lfloor \log_{2}n\right\rfloor $
 \end_inset
 
--transformation on the unit interval.
- By similarity, this implies that the limit 
-\begin_inset Formula $\mathcal{B}_{\beta}=\frac{1}{\beta}\lim_{n\in\mathcal{N}_{\beta}}B_{n}$
+ other roots are conveniently arranged near the unit circle, more-or-less
+ equidistant from one another.
+ The solution is to rescale 
+\begin_inset Formula $B$
 \end_inset
 
- is also associated with some specific iterated transformation on the unit
- interval.
- What is that transformation? 
-\end_layout
-
-\begin_layout Itemize
-What is the invariant measure of 
-\begin_inset Formula $\mathcal{B}_{\beta}$
-\end_inset
-
-? Presumably, the limit 
-\begin_inset Formula $\mathcal{S}_{\beta}=\lim_{n\in\mathcal{N}_{\beta}}S_{n}$
-\end_inset
-
- exists and is well-defined, so that, given the invariant measure 
-\begin_inset Formula $\rho$
-\end_inset
-
-, 
-\emph on
-viz
-\emph default
-.
- 
-\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho$
-\end_inset
-
-, one then obtains 
-\begin_inset Formula $\sigma=\mathcal{S}_{\beta}\rho$
-\end_inset
-
- as the invariant measure 
-\begin_inset Formula $\mathcal{B}_{\beta}\sigma=\sigma$
-\end_inset
-
-.
- What does 
-\begin_inset Formula $\sigma$
-\end_inset
-
- look like, graphed, on the unit interval? 
-\end_layout
-
-\begin_layout Itemize
-Why are these interesting questions to ask? This is, perhaps the easiest
- to answer: the operators 
-\begin_inset Formula $\mathcal{B}_{\beta}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathcal{S}_{\beta}$
-\end_inset
-
- provide a direct bridge between the subshifts associated with the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transformation, and the curious number-theoretic/combinatoric properties
- of the Golden polynomials.
-\end_layout
-
-\begin_layout Standard
-One way to better understand this new operator is to hypothesize an obvious
- visual form for it:
-\begin_inset Formula 
-\[
-B=\frac{1}{\beta}\left[\begin{array}{ccccc}
-b_{0} & b_{1} & b_{2} & b_{3} & \cdots\\
-0 & b_{0} & b_{1} & b_{2} & \cdots\\
-0 & 0 & b_{0} & b_{1} & \cdots\\
-0 & 0 & 0 & b_{0} & \cdots\\
-\vdots & \vdots & \vdots & \vdots & \ddots
-\end{array}\right]
-\]
-
-\end_inset
-
-(Note that 
-\begin_inset Formula $b_{0}=1$
-\end_inset
-
- always.) This clearly acts as a shift on the sequences 
-\begin_inset Formula $F^{\{b\}}$
-\end_inset
-
-- it is the infinite-dimensional equivalent of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:golden matrix"
-
-\end_inset
-
-.
- The vector 
-\begin_inset Formula $\vec{z}=\left(1,z^{-1},z^{-2},\cdots\right)$
-\end_inset
-
- is clearly an eigenvector with eigenvalue 1 when 
-\begin_inset Formula $z=\beta$
-\end_inset
-
-.
- When 
-\begin_inset Formula $z=z_{0}$
-\end_inset
-
- is one of the non-real polynomial zeros (
-\emph on
-viz
-\emph default
-, those approximately on the unit circle), one obtains an eigenvalue at
- 
-\begin_inset Formula $z_{0}/\beta$
-\end_inset
-
- - that is, arranged on a circle of radius 
+ by 
 \begin_inset Formula $1/\beta$
 \end_inset
 
 .
+ The Frobenius-Perron eigenvalue is now one, and the remaining eigenvalues
+ distributed near or on a circle of radius 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+.
+ We may as well take the transpose as well, so that 
+\begin_inset Formula $\mathcal{B}_{\beta}=B^{T}/\beta$
+\end_inset
+
+ is in upper-Hessenberg form.
+ Rescaled in this way, it now seems safe to declare, by fiat, that the operator
+ 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+ is the correct extension of the matrix 
+\begin_inset Formula $B$
+\end_inset
+
+ to infinite dimensions.
 \end_layout
 
 \begin_layout Standard
-Algorithmically, the above is straight-forward to obtain: given a fixed
+Comparing to the upper-Hessenberg form of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hessen-matrix-elts"
+
+\end_inset
+
+, and the numerical results on it's eigenvalues, it seems equally clear
+ that 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ must surely be similar.
+ That is, there must be an operator 
+\begin_inset Formula $S$
+\end_inset
+
+ such that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{L}_{\beta}=S^{-1}\mathcal{B}_{\beta}S
+\]
+
+\end_inset
+
+To get an understanding of 
+\begin_inset Formula $S$
+\end_inset
+
+, not that the invariant measure 
+\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho$
+\end_inset
+
+ becomes 
+\begin_inset Formula $\sigma=S\rho$
+\end_inset
+
+, and likewise for other eigenvectors.
  
-\begin_inset Formula $\beta$
-\end_inset
-
-, one can iterate to obtain the mid-point sequence 
-\begin_inset Formula $m_{k}$
-\end_inset
-
-, and the binary bits 
-\begin_inset Formula $b_{k}$
-\end_inset
-
- can be directly read off from the iteration.
- Apparently, this definition works when the mid-point sequence is not periodic,
- but continues indefinitely without repetition.
- What is missing, here, is a similarity matrix 
-\begin_inset Formula $\mathcal{S}_{\beta}$
-\end_inset
-
- that connects to some, any orthonormal basis on the unit interval.
 \end_layout
 
 \begin_layout Subsection
