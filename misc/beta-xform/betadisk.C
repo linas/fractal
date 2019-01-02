@@ -45,7 +45,7 @@ double T_n(int n, double beta)
 // Build the q- function.
 COMPLEX qfunc(double beta, COMPLEX zeta)
 {
-	#define SEQLEN 380
+	#define SEQLEN 780
 	static bool is_init = false;
 	static int bit[SEQLEN];
 	if (not is_init)
@@ -112,14 +112,14 @@ static void qpoly (float *array,
 
 			if (1.0 < r and r <= 1.02) array[j] = 1;
 
-#if 0
+#if 1
 			double mag = abs(sum);
-			if (mag < 0.06) {
+			if (mag < 0.15) {
 				COMPLEX z = beta*zeta;
 				printf("maybe zero near z=%g +i %g = %g exp(i pi %g)\n",
 					real(z), imag(z), abs(z), atan2(y,x)/M_PI);
 array[j] = 0.5;
-for (int k=0; k<20; k++) array[j-k]=0.25 * (k%4);
+for (int k=0; k<30; k++) array[j-k]=0.25 * (k%4);
 			}
 #endif
 		}

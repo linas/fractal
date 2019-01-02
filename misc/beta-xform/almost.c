@@ -172,6 +172,20 @@ void print_d(int n, double beta)
 	}
 }
 
+void print_bits(double beta, double x)
+{
+#undef NPTS
+#define NPTS 201
+	for (int i=0; i< NPTS; i++)
+	{
+		int n = i;
+		int dn = d_n(n, x, beta);
+		int dnlo = d_n(n, x/beta, beta);
+		int dnhi = d_n(n, x/beta+0.5, beta);
+		printf("%d	%8.6f	%d	%d	%d	%d\n", i, x, n, dn, dnlo, dnhi);
+	}
+}
+
 // ================================================================
 
 // Stunningly cheesy, badly designed strongly inefficient hack for zero-finding.
@@ -214,20 +228,26 @@ int main (int argc, char* argv[])
 	double beta = 2.0*K;
 	double complex z = abszed * cexp(I*M_PI*lambda);
 
-#define ZEE
+// #define ZEE
 #ifdef ZEE
 	print_vee(beta, z);
 #endif
 
+// #define FIND_ZERO
 #ifdef FIND_ZERO
 	double complex zero = find_zero(beta, z, 0.02);
-	double complex eigen = 1.0/zero;
-	printf("zero= %12.10g +i %12.10g abs=%12.10g eigen= %12.10g +i %12.10g\n",
-		creal(zero), cimag(zero), cabs(zero), creal(eigen), cimag(eigen));
+	double complex eign = 1.0/zero;
+	printf("\n");
+	printf("zero= %12.10g +i %12.10g = %12.10g exp(i pi %12.10g )\n",
+		creal(zero), cimag(zero), cabs(zero), atan2(cimag(zero), creal(zero))/M_PI);
+	printf("eign= %12.10g +i %12.10g = %12.10g exp(i pi %12.10g )\n",
+		creal(eign), cimag(eign), cabs(eign), atan2(cimag(eign), creal(eign))/M_PI);
 #endif
 
 #ifdef SINGLE_TERMS
 	int n =  lambda;
 	print_d(n, beta);
 #endif
+
+	print_bits(beta, lambda);
 }
