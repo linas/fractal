@@ -4332,8 +4332,12 @@ for eigenvalues
  Although the discussion so far implicitly conditions one to restrict oneself
  to real-valued functions, and to consider only real-valued eigenvalues,
  this is perhaps too sharp a restriction.
- As will be seen below, the complex eigenvalues seem to play some important
- role.
+ It will become clear in the following chapters that even the most basic
+ form of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ has a complex-valued spectrum.
  At any rate, it should be obvious that, whatever the choice of function
  space, one must have that 
 \begin_inset Formula $\rho\left(y\right)=0$
@@ -4503,6 +4507,67 @@ Computed in three places: rexfer.c reigen.c and complex.c
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+A note on complex eigenvalues
+\end_layout
+
+\begin_layout Standard
+Since the operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ is purely real, then if it has a complex spectrum, the eigenvalues and
+ eigenfunctions must come in complex-conjugate pairs.
+ This can make numerical searches and numerical convergence behave in unexpected
+ ways, so some brief commentary is in order.
+ 
+\end_layout
+
+\begin_layout Standard
+Assume that there exists some complex-valued eigenfunction 
+\begin_inset Formula $\rho_{\lambda}\left(x\right)$
+\end_inset
+
+ for fixed, complex eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Write it's real and complex components as
+\begin_inset Formula 
+\[
+\rho_{\lambda}\left(x\right)=\sigma\left(x\right)+i\tau\left(x\right)
+\]
+
+\end_inset
+
+while also writing 
+\begin_inset Formula $\lambda=a+ib$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\sigma\right]\left(x\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\bar{\rho}_{\lambda}\right)\right]\left(x\right)\\
+= & \frac{1}{2}\left(\lambda\rho_{\lambda}\left(x\right)+\bar{\lambda}\bar{\rho}_{\lambda}\left(x\right)\right)\\
+= & a\sigma\left(x\right)-b\tau\left(x\right)
+\end{align*}
+
+\end_inset
+
+Both left and right sides of the above are real.
+ If one had somehow stumbled upon 
+\begin_inset Formula $\sigma\left(x\right)$
+\end_inset
+
+ numerically, as an eigenvector-candidate, then the above admixing of the
+ imaginary component would quickly throw one off the hunt.
+ Thus, a numeric search for complex-valued eigenfunctions must necessarily
+ take into account eigenfunction pairs, with real and imaginary components
+ that mix together as above.
 \end_layout
 
 \begin_layout Subsection
@@ -7698,7 +7763,7 @@ as a resolution of the identity?
 \end_layout
 
 \begin_layout Standard
-The question of the completeness of states dogs some 
+The question of completeness dogs some 
 \begin_inset Quotes eld
 \end_inset
 
@@ -7736,8 +7801,8 @@ reference "fig:Hessenberg-Operator-Matrix"
 
 , one might think that the eigenvalue problem is fairly stable, numerically.
  It is not all that much.
- Numerical exploration suggests that the spectrum is a circle lying in the
- complex plane
+ Numerical exploration suggests that the spectrum is on or near a circle
+ lying in the complex plane
 \begin_inset Foot
 status collapsed
 
@@ -7864,7 +7929,15 @@ For finite
 \begin_inset Formula $N$
 \end_inset
 
-, it appears that most eigenvalues 
+, it appears that 
+\begin_inset Quotes eld
+\end_inset
+
+most
+\begin_inset Quotes erd
+\end_inset
+
+ eigenvalues 
 \begin_inset Formula $\lambda$
 \end_inset
 
@@ -7885,7 +7958,7 @@ near
 \begin_inset Formula $N\to\infty$
 \end_inset
 
-, that 
+, that the scare-quotes 
 \begin_inset Quotes eld
 \end_inset
 
@@ -7960,7 +8033,7 @@ Thus, the minimal closure, the minimal extrapolation to limit points strongly
 \begin_inset Formula $\phi$
 \end_inset
 
- are always rational, irrational or might assume arbitrary real values.
+ are always rational, irrational or might have some other regular structure.
  The numerical exploration does suggest that the eigenvalues are dense on
  the circle.
  Certainly it is the case Hessenberg basis is countable, an so one would
@@ -7980,7 +8053,7 @@ This question is interesting because if only rational
 \begin_inset Formula $\phi$
 \end_inset
 
- are allowed, then the decaying eigenfunctions are more throughly chaotic.
+ are allowed, then the decaying eigenfunctions are at least ergodic.
 \end_layout
 
 \begin_layout Standard
@@ -8943,392 +9016,13 @@ Givens rotations
 \end_layout
 
 \begin_layout Standard
-A Hessenberg matrix can be brought to solvable form by applying a sequence
- of Givens rotations.
+An open question: A Hessenberg matrix can be brought to solvable form by
+ applying a sequence of Givens rotations.
  Is the sequence of angles that appear in these rotations meaningful in
  any way, or are they just some form of uninteresting junk?
 \end_layout
 
-\begin_layout Section
-Decaying Eigenfunctions
-\end_layout
-
 \begin_layout Standard
-This section examines the decaying eigenspectrum more closely.
-\end_layout
-
-\begin_layout Subsection
-Decomposability
-\end_layout
-
-\begin_layout Standard
-Numerical evidence suggests that all of the spectrum (except for the unit
- eigenvalue) lies on the complex circle of radius 
-\begin_inset Formula $1/\beta$
-\end_inset
-
-, and that it is dense on that circle.
- Its not clear if this spectrum is countable, or if it is uncountable, (
-\emph on
-i.e.
-
-\emph default
- continuous on some or all of the circle).
- If the spectrum is uncountable, it is not clear if it is punctured (
-\emph on
-i.e.
-
-\emph default
- missing a collection of discrete points, or even missing a measure-zero
- Cantor set of values).
- Characterizing the spectrum is an open problem.
- 
-\end_layout
-
-\begin_layout Standard
-Consider an arbitrary real-valued function 
-\begin_inset Formula $f\left(x\right)$
-\end_inset
-
- on the unit interval.
- The existence of the eigenspectrum suggests that it can be decomposed into
- a sum over the discrete spectrum, and an integral over the continuous parts
- of the spectrum.
- For convenience, write 
-\begin_inset Formula $\int$
-\end_inset
-
- for both the sum over both discrete and continuous parts of the spectrum.
- 
-\end_layout
-
-\begin_layout Standard
-Thus, an arbitrary real-valued function should have the decomposition 
-\begin_inset Formula 
-\[
-f\left(x\right)=c\rho\left(x\right)+\int_{-1}^{1}a\left(\lambda\right)\rho_{\lambda}\left(x\right)d\lambda
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\rho\left(x\right)$
-\end_inset
-
- is the invariant measure as always, and 
-\begin_inset Formula $\rho_{\lambda}\left(x\right)$
-\end_inset
-
- is a decaying eigenstate, so that 
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}\rho_{\lambda}\right]\left(x\right)=\frac{e^{i\pi\lambda}}{\beta}\rho_{\lambda}\left(x\right)
-\]
-
-\end_inset
-
-Since 
-\begin_inset Formula $\beta$
-\end_inset
-
- is real, 
-\begin_inset Formula $\lambda$
-\end_inset
-
- is used as a convenient parameter for the complex spectrum, with 
-\begin_inset Formula $-1<\lambda\le1$
-\end_inset
-
-.
- There is no 
-\emph on
-a priori
-\emph default
- reason to believe that 
-\begin_inset Formula $\lambda$
-\end_inset
-
- is uniformly distributed on this interval; that is, one should treat 
-\begin_inset Formula $d\lambda$
-\end_inset
-
- as a measure.
-\end_layout
-
-\begin_layout Standard
-In general, 
-\begin_inset Formula $\rho_{\lambda}\left(x\right)$
-\end_inset
-
- is necessarily complex-valued.
- By complex conjugation, the eigenfunctions are conjugate, so that 
-\begin_inset Formula $\rho_{\lambda}^{*}=\rho_{-\lambda}$
-\end_inset
-
-.
- By assumption 
-\begin_inset Formula $f\left(x\right)$
-\end_inset
-
- is real valued, and the transformation of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:xfer oper"
-
-\end_inset
-
- offers no way for complex numbers to 
-\begin_inset Quotes eld
-\end_inset
-
-sneak in
-\begin_inset Quotes erd
-\end_inset
-
-.
- Thus, the integral must be purely real, and so one may write
-\begin_inset Formula 
-\[
-f\left(x\right)=c\rho\left(x\right)+\int_{0}^{1}a\left(\lambda\right)\left[\rho_{\lambda}\left(x\right)+\rho_{-\lambda}\left(x\right)\right]d\lambda
-\]
-
-\end_inset
-
-this time, with the coefficients 
-\begin_inset Formula $a\left(\lambda\right)$
-\end_inset
-
- purely real, and the sum of the decaying modes 
-\begin_inset Formula $\rho_{\lambda}\left(x\right)+\rho_{-\lambda}\left(x\right)$
-\end_inset
-
- being purely real as well.
-\end_layout
-
-\begin_layout Subsection
-Domain
-\end_layout
-
-\begin_layout Standard
-In general, the spectrum of an operator depends on the space of functions
- on which it acts.
- For example, the Bernoulli shift, 
-\begin_inset Formula $\beta=2$
-\end_inset
-
- has a discrete spectrum if one restricts oneself to the space of polynomials.
- The spectrum is countable, it has eigenvalues 
-\begin_inset Formula $2^{-n}$
-\end_inset
-
- and eigenfunctions that are the Bernoulli polynomials 
-\begin_inset Formula $B_{n}\left(x\right)$
-\end_inset
-
-; see Driebe
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Dri99"
-
-\end_inset
-
-.
- It is 
-\begin_inset Quotes eld
-\end_inset
-
-complete
-\begin_inset Quotes erd
-\end_inset
-
-, in the sense that the operator has no kernel.
-\end_layout
-
-\begin_layout Standard
-If instead, one considers the space of square-integrable functions, then
- the spectrum of the Bernoulli shift 
-\begin_inset Formula $\mathcal{L}_{2}$
-\end_inset
-
- is the unit disk on the complex plane: every complex eigenvalue 
-\begin_inset Formula $\left|z\right|<1$
-\end_inset
-
- has a countable number of eigenfunctions associated with it.
- For a fixed eigenvalue, one can describe the complete set of eigenfunctions
- either as a certain collection of sine waves, or as a certain set of self-simil
-ar fractals.
- That is, there are sets of fractals that provide a complete set of basis
- elements for the subspace of a fixed eigenvalue.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Ve-B04"
-
-\end_inset
-
- At the same time, exactly 
-\begin_inset Quotes eld
-\end_inset
-
-half
-\begin_inset Quotes erd
-\end_inset
-
- of all square-integrable eigenfunctions lie in the kernel of the Bernoulli
- shift; i.e.
- are associated with the zero eigenvalue.
- To precisely formulate the notion of 
-\begin_inset Quotes eld
-\end_inset
-
-half
-\begin_inset Quotes erd
-\end_inset
-
-, one needs to describe how to count eigenfunctions.
-\end_layout
-
-\begin_layout Standard
-With some effort, one can construct even larger spaces.
- For example, when suitably defined, one finds that the Minkowski measure
- (the 
-\begin_inset Quotes eld
-\end_inset
-
-derivative
-\begin_inset Quotes erd
-\end_inset
-
- of the Minkowski question-mark function) is an eigenfunction of the Bernoulli
- shift, corresponding to eigenvalue one.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vep-mink2008"
-
-\end_inset
-
- Thus, for a large-enough function space, the Bernoulli shift has not just
- one eigenfunction with unit eigenvalue; it has at least two! And thus,
- it must have more! The 
-\begin_inset Quotes eld
-\end_inset
-
-secret
-\begin_inset Quotes erd
-\end_inset
-
- is, of course, that the Minkowski measure is integrable, but not square-integra
-ble.
-\end_layout
-
-\begin_layout Standard
-Presumably, some form of all of these observations carry over onto the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform, as well.
- Making forward progress on describing the various spaces of functions on
- which the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform might be defined is very difficult, as is finding a suitable
- description of the spectrum on those spaces.
- That said, we plow ahead with numerical guesswork.
-\end_layout
-
-\begin_layout Subsection
-Central limit
-\end_layout
-
-\begin_layout Standard
-Numerical searches for decaying eigenfunctions need to recognize that the
- complex spectrum implies that the transfer operator, when restricted to
- real-valued functions, seems to behave in a 
-\begin_inset Quotes eld
-\end_inset
-
-non-linear
-\begin_inset Quotes erd
-\end_inset
-
- fashion.
- Consider, for example an eigenfunction 
-\begin_inset Formula $\rho_{\lambda}\left(x\right)$
-\end_inset
-
- for fixed 
-\begin_inset Formula $\lambda$
-\end_inset
-
- and write it's real and complex components as
-\begin_inset Formula 
-\[
-\rho_{\lambda}\left(x\right)=\sigma_{\lambda}\left(x\right)+i\tau_{\lambda}\left(x\right)
-\]
-
-\end_inset
-
-Then
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\sigma_{\lambda}\right]\left(x\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\rho_{-\lambda}\right)\right]\left(x\right)\\
-= & \frac{1}{2\beta}\left(e^{i\pi\lambda}\rho_{\lambda}\left(x\right)+e^{-i\pi\lambda}\rho_{-\lambda}\left(x\right)\right)\\
-= & \frac{1}{\beta}\left(\sigma_{\lambda}\left(x\right)\cos\pi\lambda-\tau_{\lambda}\left(x\right)\sin\pi\lambda\right)
-\end{align*}
-
-\end_inset
-
-Both left and right sides of the above are real.
- Clearly, 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- is a linear operator, and clearly 
-\begin_inset Formula $\sigma_{\lambda}$
-\end_inset
-
- is not an eigenfunction, and so clearly, there is no reason to expect that
- the left and right-hand sides of the above should be multiples of one-another.
- Yet, 
-\begin_inset Formula $\sigma_{\lambda}$
-\end_inset
-
- is 
-\begin_inset Quotes eld
-\end_inset
-
-almost
-\begin_inset Quotes erd
-\end_inset
-
- an eigenfunction...
- it can be found by taking a form of a 
-\begin_inset Quotes eld
-\end_inset
-
-central limit
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Iterating on the transfer operator 
-\begin_inset Formula $N$
-\end_inset
-
- times gives
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}^{N}\sigma_{\lambda}\right]\left(x\right)=\frac{1}{\beta^{N}}\left(\sigma_{\lambda}\left(x\right)\cos\pi N\lambda-\tau_{\lambda}\left(x\right)\sin\pi N\lambda\right)
-\]
-
-\end_inset
-
-Applying a discrete cosine transform allows individual eigenfunctions to
- be extracted numerically.
  
 \end_layout
 
