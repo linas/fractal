@@ -1,5 +1,5 @@
 /*
- * qdisk.C
+ * betadisk.C
  * Visualization of the (holomorphic) q-polynomial
  * This is exactly equal to minus alldisk.C ! Horay! It's starting to make sense!
  *
@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+
+#include "psibig.c"
 
 #include <complex.h>
 #if 1
@@ -61,6 +63,9 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 	if (not is_init)
 	{
 		is_init = true;
+
+#ifdef REGULAR_FLOAT_POINT
+		// This has rounding error issues.
 		lodouble_t K = 0.5*beta;
 		lodouble_t mid = K;
 		for (int i=0; i<SEQLEN; i++)
@@ -76,6 +81,9 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 // bit[i] = (0 == i%4) or (0 == (i+3)%4) or (0 == (i+2)%4);  // n=7 bitstring 1110111011.
 // printf("duuude its %d %d\n", i, bit[i]);
 		}
+#endif
+		double K = 0.5*beta;
+		midpoint_seq(K, SEQLEN+50, 0x0, bit, SEQLEN);
 	}
 
 	COMPLEX zetan = zeta;

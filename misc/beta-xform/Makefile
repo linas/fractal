@@ -75,6 +75,7 @@ poincare.o: poincare.C
 subdiag.o: subdiag.C psi.c psibig.c
 beta.o: beta.c
 witt.o: witt.c
+betadisk.o: betadisk.C psibig.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
