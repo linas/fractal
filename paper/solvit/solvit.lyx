@@ -8027,7 +8027,7 @@ near
 \begin_inset Formula $N$
 \end_inset
 
- , one has that 
+, one has that 
 \begin_inset Formula $\left|\lambda\right|-1/\beta\sim\mathcal{O}\left(1/N\right)$
 \end_inset
 
@@ -8676,8 +8676,8 @@ reference "eq:fp coefficients"
 status collapsed
 
 \begin_layout Plain Layout
-Created with fractal/misc/beta-xform/psifp.c and psifp.gplot numerical integration
- with expan.c and psifp.gplot 
+Created with fractal/misc/beta-xform/psifp.c and psifp.gplot; numerical integratio
+n with expan.c and psifp.gplot 
 \end_layout
 
 \end_inset
@@ -13630,7 +13630,7 @@ The characteristic equation of
 \end_inset
 
 with all other entries being zero.
- This is clearly in upper-Hessenberg form, with the lower-diagonal providing
+ This is clearly in upper-Hessenberg form, with the subdiagonal providing
  the shift.
 \end_layout
 
@@ -13670,20 +13670,230 @@ reference "eq:hessen-matrix-elts"
 
 \end_inset
 
-To get an understanding of 
-\begin_inset Formula $S$
-\end_inset
-
-, not that the invariant measure 
+The invariant measure 
 \begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho$
 \end_inset
 
- becomes 
+ is mapped to 
 \begin_inset Formula $\sigma=S\rho$
 \end_inset
 
-, and likewise for other eigenvectors.
+, where 
+\begin_inset Formula $\mathcal{B}_{\beta}\sigma=\sigma$
+\end_inset
+
+ is the FP-eigenvector.
+ It is easy to write down 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ explicitly: 
+\begin_inset Formula $\sigma=\left(1,\beta^{-1},\beta^{-2},\cdots\right)$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\sigma_{j}=\beta^{-j}$
+\end_inset
+
+.
+ This is obviously so: the subdiagonal entries of 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+ act as a shift on 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and the top row is just
+\begin_inset Formula 
+\[
+1=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{B}_{\beta}\right|j\right\rangle \sigma_{j}=\sum_{j=0}^{\infty}b_{j}\beta^{-j-1}=1-q^{\left\{ b\right\} }\left(\frac{1}{\beta}\right)=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Although 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+ is no more solvable than 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ in the wavelet basis is, it is certainly much, much easier to work with.
+ It also re-affirms the ansatz 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+
+\end_inset
+
+ for eigenfunctions.
+ To be explicit: if 
+\begin_inset Formula $v$
+\end_inset
+
+ is a vector satisfying 
+\begin_inset Formula $\mathcal{B}_{\beta}v=\lambda v$
+\end_inset
+
+, with vector elements 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+, then the function
+\begin_inset Formula 
+\[
+v\left(x\right)=\sum_{j=0}^{\infty}d_{j}\left(x\right)v_{j}
+\]
+
+\end_inset
+
+ is an eigenfunction of the transfoer operator: that is, 
+\begin_inset Formula $\left[\mathcal{L}_{\beta}v\right]\left(x\right)=\lambda v\left(x\right)$
+\end_inset
+
+, or, explicitly:
+\begin_inset Formula 
+\begin{equation}
+\frac{1}{\beta}\left[v\left(\frac{x}{\beta}\right)+v\left(\frac{x}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-x\right)=\lambda v\left(x\right)\label{eq:fundamental-shift}
+\end{equation}
+
+\end_inset
+
+which is just eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xfer oper"
+
+\end_inset
+
+.
+ So, for 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+, this is just 
+\begin_inset Formula $v=\sigma$
+\end_inset
+
+ which is just eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+
+\end_inset
+
+ for 
+\begin_inset Formula $z=1$
+\end_inset
+
+, the invariant measure, as always.
+ But it also says more: the 
+\emph on
+only
+\emph default
+ solutions to 
+\begin_inset Formula $\mathcal{B}_{\beta}v=\lambda v$
+\end_inset
+
+ are necessarily of the form 
+\begin_inset Formula $v=\left(1,\left(\lambda\beta\right)^{-1},\left(\lambda\beta\right)^{-2},\cdots\right)$
+\end_inset
+
+, because the subdiagonal forces this shift.
+ To satisfy the the top row of 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+, one must have that 
+\begin_inset Formula 
+\[
+\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{B}_{\beta}\right|j\right\rangle v_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
+\]
+
+\end_inset
+
+and so the eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is exactly the eigenvalue that solves the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-series 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(1/\lambda\beta\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This falls short of actually being a proof; this line of argumentation only
+ affirms the ansatz 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+
+\end_inset
+
+.
+ To recap: periodic orbits have an associated shift matrix 
+\begin_inset Formula $B$
+\end_inset
+
+; this extends naturally to a shift operator 
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+ for non-periodic orbits.
+ The shift operator has a sufficiently simple form that it's eigenvectors
+ can be explicitly written down in closed form; they are necessarily coherent
+ states.
+ The top row of the shift operator defines a holomorphic function 
+\begin_inset Formula $q^{\left\{ b\right\} }$
+\end_inset
+
+ whose zeros correspond to eigenstates of the shift operator.
+ The holomorphic function is determined by the binary digit sequence 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+.
+ The binary digit sequence is obtained from the iterated midpoint, as 
+\begin_inset Formula $b_{j}=d_{j}\left(1/2\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $d_{j}\left(x\right)=1$
+\end_inset
+
+ if 
+\begin_inset Formula $x<T^{n}\left(\beta/2\right)$
+\end_inset
+
+.
+ So far, this is all nicely consistent, but it does not prove eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fundamental-shift"
+
+\end_inset
+
  
+\end_layout
+
+\begin_layout Standard
+and one necessaril 
+\end_layout
+
+\begin_layout Standard
+for the form of 
 \end_layout
 
 \begin_layout Subsection

@@ -97,6 +97,7 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 		}
 		printf("bitstring length=%d\n", patlen+1);
 
+#ifdef FINITE_STRINGS
 		for (int i=0; i<SEQLEN; i++) bit[i] = 0;
 		for (int i=0; i<patlen; i++)
 		{
@@ -105,6 +106,17 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 		}
 		bit[patlen] = 1;
 		printf("bit[%d] is %d\n", patlen, bit[patlen]);
+#endif
+
+#define INFINITE_STRINGS
+#ifdef INFINITE_STRINGS
+		for (int i=0; i<SEQLEN; i++)
+		{
+			bit[i] = pattern[patlen - (i+1)%(patlen+1)];
+			if (i < 40) printf("bit[%d] is %d\n", i, bit[i]);
+		}
+#endif // INFINITE_STRINGS
+
 #endif // POLYNOMIAL_BITSTRINGS
 
 
