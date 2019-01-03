@@ -47,7 +47,7 @@ lodouble_t T_n(int n, lodouble_t beta)
 // Build the q- function.
 COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 {
-	#define SEQLEN 750
+	#define SEQLEN 250
 	static bool is_init = false;
 	static int bit[SEQLEN];
 	if (not is_init)
@@ -60,8 +60,13 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 			bit[i] = 0;
 			if (0.5 < mid) bit[i] = 1;
 			mid = downshift(mid, K);
-// printf("duuude its %d %d\n", i, bit[i]);
-bit[i] = 1 - i%2;
+// bit[i] = 1 - i%2; // golden ratio n=1
+// bit[i] = (0 == i%3);  // n=2 bitstring 1001001001..
+// bit[i] = (0 == i%3) or (0 == (i+2)%3);  // n=3 bitstring 1101101101..
+// bit[i] = (0 == i%4);  // n=4 bitstring 100010001..
+// bit[i] = (0 == i%4) or (0 == (i+3)%4);  // n=6 bitstring 1100110011.
+bit[i] = (0 == i%4) or (0 == (i+3)%4) or (0 == (i+2)%4);  // n=7 bitstring 1110111011.
+printf("duuude its %d %d\n", i, bit[i]);
 		}
 	}
 

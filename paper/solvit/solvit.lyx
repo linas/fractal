@@ -11149,6 +11149,28 @@ g 10 with 12, and 13 with 14.
 \end_layout
 
 \begin_layout Standard
+There is a relatively simple alternative criterion for when a value of 
+\begin_inset Formula $n$
+\end_inset
+
+ is allowed, or not: 
+\begin_inset Formula $n$
+\end_inset
+
+ is allowed when the polynomial 
+\begin_inset Formula $q_{n}\left(\zeta\right)=\zeta^{k}p_{n}\left(1/\zeta\right)$
+\end_inset
+
+ has only one root in the disk 
+\begin_inset Formula $\left|\zeta\right|<1$
+\end_inset
+
+.
+ If it has more than one root, then it is disallowed.
+ 
+\end_layout
+
+\begin_layout Standard
 Questions that present themselves include: 
 \end_layout
 
@@ -13650,10 +13672,10 @@ which has an eigenvector
  The eigenfunction is 
 \begin_inset Formula 
 \[
-v_{\beta;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\beta^{m}}=\beta\begin{cases}
-1+\frac{1}{\beta}+\frac{1}{\beta^{2}} & \mbox{for }0\le x<\frac{1}{2\beta}\\
-1+\frac{1}{\beta^{2}} & \mbox{for }\frac{1}{2\beta}\le x<\frac{1}{2}\\
-1 & \mbox{for }\frac{1}{2}\le x<\beta\\
+v_{\beta;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\beta^{m}}=\begin{cases}
+\beta+1+\frac{1}{\beta} & \mbox{for }0\le x<T\left(\frac{\beta}{2}\right)\\
+\beta+\frac{1}{\beta} & \mbox{for }T\left(\frac{\beta}{2}\right)\le x<\frac{1}{2}\\
+\beta & \mbox{for }\frac{1}{2}\le x<\beta\\
 0 & \mbox{for }\beta\le1
 \end{cases}
 \]
@@ -13663,8 +13685,207 @@ v_{\beta;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\beta^{m
 
 \end_layout
 
+\begin_layout Subsubsection
+Case n=3
+\end_layout
+
 \begin_layout Standard
-The positive rea 
+The 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case has the finite bitstring 
+\begin_inset Formula $\left\{ b\right\} =111$
+\end_inset
+
+ and the periodic bitstring 
+\begin_inset Formula $\left\{ b\right\} =1101101\cdots$
+\end_inset
+
+.
+ The corresponding finite beta-polynomial is 
+\begin_inset Formula $q^{\left\{ 111\right\} }\left(\zeta\right)=1-\zeta-\zeta^{2}-\zeta^{3}$
+\end_inset
+
+; the infinite series is 
+\begin_inset Formula 
+\[
+q^{\left\{ 110110\cdots\right\} }\left(\zeta\right)=1-\zeta-\zeta^{2}-\zeta^{4}-\cdots=\left(1-\zeta-\zeta^{2}-\zeta^{3}\right)/\left(1-\zeta^{3}\right)
+\]
+
+\end_inset
+
+which has a positive real zero at 
+\begin_inset Formula $\zeta=1/\beta=0.5436\cdots$
+\end_inset
+
+ and three poles on the unit circle.
+ The FP eigenvalue of one gives 
+\begin_inset Formula $\beta=1.8392\cdots$
+\end_inset
+
+.
+ The scaled shift matrix is 
+\begin_inset Formula 
+\[
+\mathcal{B}=\frac{1}{\beta}\left[\begin{array}{ccc}
+1 & 1 & 1\\
+1 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+which has an eigenvector 
+\begin_inset Formula $\left[\begin{array}{ccc}
+\beta^{2} & \beta & 1\end{array}\right]$
+\end_inset
+
+ (same as for 
+\begin_inset Formula $n=2)$
+\end_inset
+
+.
+ The eigenfunction is 
+\begin_inset Formula 
+\[
+v_{\beta;1}\left(x\right)=\begin{cases}
+1+\frac{1}{2}\left(\beta^{2}-1\right) & \mbox{for }0\le x<\frac{1}{2}\\
+\beta & \mbox{for }\frac{1}{2}\le x<T\left(\frac{\beta}{2}\right)\\
+\frac{1}{2}\left(\beta^{2}-1\right) & \mbox{for }T\left(\frac{\beta}{2}\right)\le x<\beta\\
+0 & \mbox{for }\beta\le1
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Case n=4,6,7
+\end_layout
+
+\begin_layout Standard
+The pattern gets repetitive.
+ There is no case 
+\begin_inset Formula $n=5$
+\end_inset
+
+, as this is not one of the allowed orbits.
+ The bitstrings are those previously listed in tables; they are 
+\begin_inset Formula $\left\{ b\right\} =1001$
+\end_inset
+
+ 
+\begin_inset Formula $\left\{ b\right\} =1101$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ b\right\} =1111$
+\end_inset
+
+.
+ The infinite series is 
+\begin_inset Formula $q^{\left\{ b\cdots\right\} }\left(\zeta\right)=q^{\left\{ b\right\} }\left(\zeta\right)/\left(1-\zeta^{4}\right)$
+\end_inset
+
+.
+ The zeros are as previously listed.
+ The scaled shift matrix is 
+\begin_inset Formula 
+\[
+\mathcal{B}=\frac{1}{\beta}\left[\begin{array}{cccc}
+1 & b_{1} & b_{2} & 1\\
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+which has an eigenvector 
+\begin_inset Formula $\left[\begin{array}{cccc}
+\beta^{3} & \beta^{2} & \beta & 1\end{array}\right]$
+\end_inset
+
+ for all three cases.
+\end_layout
+
+\begin_layout Subsubsection
+The general case
+\end_layout
+
+\begin_layout Standard
+Generalizing from the above, one finds the following:
+\end_layout
+
+\begin_layout Itemize
+For a period-
+\begin_inset Formula $k$
+\end_inset
+
+ orbit, the infinite series is 
+\begin_inset Formula $q^{\left\{ b\cdots\right\} }\left(\zeta\right)=q^{\left\{ b\right\} }\left(\zeta\right)/\left(1-\zeta^{k}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+A bit-sequence 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+ is disallowed if 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+ has more than one root in the 
+\begin_inset Formula $\left|\zeta\right|<1$
+\end_inset
+
+ disk.
+ Thus, all such polynomials have only one root, the Frobenius-Perron root.
+\end_layout
+
+\begin_layout Itemize
+The eigenvector of the shift matrix always has the same form, for a given
+ order.
+ It is neccessarily 
+\begin_inset Formula $\left[\begin{array}{cccccc}
+\beta^{k} & \beta^{k-1} & \cdots & \beta^{2} & \beta & 1\end{array}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The invariant measure has 
+\begin_inset Formula $k$
+\end_inset
+
+ plateaus.
+ The plateau boundaries are given by 
+\begin_inset Formula $T^{m}\left(\frac{1}{2}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $m=\left\{ 0,\cdots,k-1\right\} $
+\end_inset
+
+ (so that 
+\begin_inset Formula $T^{0}\left(\frac{1}{2}\right)=\frac{1}{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $T^{1}\left(\frac{1}{2}\right)=\frac{\beta}{2}$
+\end_inset
+
+, and so on).
 \end_layout
 
 \begin_layout Subsection
