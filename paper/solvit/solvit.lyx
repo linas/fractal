@@ -1102,7 +1102,41 @@ pure chaos
 \begin_inset Quotes erd
 \end_inset
 
-, without the pesky 
+,
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Formal mathematics distinguishes between many different kinds of chaotic
+ number sequences: those that are ergodic, those that are weakly or strongly
+ Bernoulli, weakly or strongly mixing.
+ The beta transform is known to be ergodic,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Renyi57"
+
+\end_inset
+
+ weakly mixing
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+
+\end_inset
+
+ and weakly Bernoulli.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dajani97"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ without the pesky 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1319,8 +1353,12 @@ iterated midpoints
 \end_inset
 
 .
+ The flat plateaus really are flat, and this is perhaps the one of the most
+ amazing aspects of this figure; ths will be a recurring theme throughout
+ the text.
+ 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Generated with `fractal/misc/bitops/bigbern.C` edited to print only slices.
@@ -4290,8 +4328,7 @@ reference "eq:downshift"
 \end_inset
 
 .
- (TODO: this needs a simple, non-tedious proof; its essentially the same
- proof as for the Bernoulli shift.) Curiously, such values 
+ Curiously, such values 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -4300,7 +4337,7 @@ reference "eq:downshift"
 \end_inset
 
 .
- A detailed discussion is presented in a subsequent section.
+ A later chapter performs explores periodic orbits in great detail.
 \end_layout
 
 \begin_layout Section
@@ -5172,8 +5209,17 @@ where
 \end_inset
 
  and zero otherwise).
- This is a rather very strong, and surprising statement! The sequence of
- digits 
+ The fact that 
+\begin_inset Formula $C\left(\beta;z\right)$
+\end_inset
+
+ is a constant independent of 
+\begin_inset Formula $x$
+\end_inset
+
+ can be taken either as a humdrum fact, typical of the territory, or as
+ a big unexplained surprise! I prefer the later.
+ The sequence of digits 
 \begin_inset Formula $d_{n}\left(x\right)$
 \end_inset
 
@@ -5191,29 +5237,11 @@ where
 \end_inset
 
 .
- That it is an 
-\begin_inset Quotes eld
-\end_inset
-
-almost
-\begin_inset Quotes erd
-\end_inset
-
- eigenfunction is perhaps no surprise; that the remainder 
-\begin_inset Formula $C\left(\beta;z\right)$
-\end_inset
-
- is a constant, independent of 
-\begin_inset Formula $x$
-\end_inset
-
-, is very surprising.
- It provides a very clear indication of an analytic entanglement of the
- digits 
+ The digits 
 \begin_inset Formula $d_{n}\left(x\right)$
 \end_inset
 
- in a highly non-trivial form.
+ are entangled in an analytic series, in very highly non-trivial form.
  This is worth pursuing to great extent.
 \end_layout
 
@@ -5259,7 +5287,7 @@ D\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
 
 \end_inset
 
-This would be holomorphic on the unit disk 
+This is holomorphic on the unit disk 
 \begin_inset Formula $\left|\zeta\right|<1$
 \end_inset
 
@@ -5267,17 +5295,17 @@ This would be holomorphic on the unit disk
 \begin_inset Formula $d_{n}$
 \end_inset
 
- is either zero or one; there won't be any poles on the unit disk.
- That this really is independent of 
+ is either zero or one; there won't be any poles inside the unit disk.
+ Again, this is independent of 
 \begin_inset Formula $y$
 \end_inset
 
- really is a bit mind-bending.
+.
  
 \end_layout
 
 \begin_layout Standard
-This is readily simplified.
+The equation is readily simplified.
  Set 
 \begin_inset Formula $y=0$
 \end_inset
@@ -5724,6 +5752,98 @@ This section ends with a deep mystery: why is
 
  coordinate? How should it be explained? How can it be put to good use?
  Might there be more of such identities? Or is there only this one? 
+\end_layout
+
+\begin_layout Subsection
+Analytic Ergodics
+\end_layout
+
+\begin_layout Standard
+Why is 
+\begin_inset Formula $C\left(\beta;z\right)$
+\end_inset
+
+ independent of the 
+\begin_inset Formula $y$
+\end_inset
+
+ coordinate? And is this surprising, or not surprising?
+\end_layout
+
+\begin_layout Standard
+Perhaps it should not be surprising.
+ The full shift (the Bernoulli shift) has an absolutely flat, uniform distributi
+on.
+ This is not a surprise: real numbers are uniformly distributed on the real
+ number line.
+ Pick almost any real number: the binary digits are uniformly distributed.
+ The FP eigenfunction of the transfer operator for the Bernoulli shift is
+ a constant.
+ This is not a surprise; the uniformity of the reals demands this.
+\end_layout
+
+\begin_layout Standard
+Compare to the invariant measure of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+, shown in the very first figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+.
+ The figure clearly consists of flat plateaus; the flatness harking back
+ to, and 
+\begin_inset Quotes eld
+\end_inset
+
+explained by
+\begin_inset Quotes erd
+\end_inset
+
+ the flatness of the real numbers.
+ But those flat regions arise from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+
+\end_inset
+
+ (with 
+\begin_inset Formula $z=1$
+\end_inset
+
+), and if one looks at the individual binary digit sequences 
+\begin_inset Formula $d_{n}\left(x\right)$
+\end_inset
+
+ for two different values of 
+\begin_inset Formula $x$
+\end_inset
+
+, these sequences become wildly, crazily, chaotically different; why should
+ they sum to the same value? This now seems to be profound, in some way
+ that the flatness of the reals is not.
+ Presumably, this should be known as 
+\begin_inset Quotes eld
+\end_inset
+
+the first theorem of analytic ergodics
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Oddly, I've never heard of such a theorem, nor recollect any proof of it
+ having scrolled past my eyes.
+ Perhaps it is known.
+ It certainly deserves greater fame; it seems like it would be quite the
+ tool to unlock many of the mysteries being fumbled-over in this text.
 \end_layout
 
 \begin_layout Subsection
