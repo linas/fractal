@@ -13,9 +13,13 @@
 #include <pthread.h>
 
 #include <complex.h>
-// #define COMPLEX std::complex<double>
-#define COMPLEX std::complex<__float128>
-typedef __float128 lodouble_t;
+#if 1
+	#define COMPLEX std::complex<double>
+	typedef double lodouble_t;
+#else
+	#define COMPLEX std::complex<__float128>
+	typedef __float128 lodouble_t;
+#endif
 
 #include "brat.h"
 
@@ -44,10 +48,10 @@ lodouble_t T_n(int n, lodouble_t beta)
 	return tn;
 }
 
-// Build the q- function.
+// Build the q-function.
 COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 {
-	#define SEQLEN 250
+	#define SEQLEN 120
 	static bool is_init = false;
 	static int bit[SEQLEN];
 	if (not is_init)
@@ -65,8 +69,8 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 // bit[i] = (0 == i%3) or (0 == (i+2)%3);  // n=3 bitstring 1101101101..
 // bit[i] = (0 == i%4);  // n=4 bitstring 100010001..
 // bit[i] = (0 == i%4) or (0 == (i+3)%4);  // n=6 bitstring 1100110011.
-bit[i] = (0 == i%4) or (0 == (i+3)%4) or (0 == (i+2)%4);  // n=7 bitstring 1110111011.
-printf("duuude its %d %d\n", i, bit[i]);
+// bit[i] = (0 == i%4) or (0 == (i+3)%4) or (0 == (i+2)%4);  // n=7 bitstring 1110111011.
+// printf("duuude its %d %d\n", i, bit[i]);
 		}
 	}
 
@@ -82,6 +86,48 @@ printf("duuude its %d %d\n", i, bit[i]);
 		// compute z^n;
 		zetan *= zeta;
 	}
+
+	return que;
+}
+
+// Build the exponential q-function.
+COMPLEX exp_qfunc(lodouble_t beta, COMPLEX zeta)
+{
+	#undef SEQLEN
+	#define SEQLEN 920
+	static bool is_init = false;
+	static int bit[SEQLEN];
+	if (not is_init)
+	{
+		is_init = true;
+		lodouble_t K = 0.5*beta;
+		lodouble_t mid = K;
+		for (int i=0; i<SEQLEN; i++)
+		{
+			bit[i] = 0;
+			if (0.5 < mid) bit[i] = 1;
+			mid = downshift(mid, K);
+		}
+	}
+
+	COMPLEX zetan = zeta;
+
+	// accumulated sum
+	COMPLEX que = 1.0;
+
+	for (int i=0; i<SEQLEN; i++)
+	{
+		if (bit[i]) que -= zetan;
+
+		// compute z^n;
+		zetan *= zeta;
+		zetan /= i+1;
+	}
+
+	double r = abs(zeta);
+	que *= exp (-r);
+	que /= log(r+1.0);
+	que *= 2.18-beta;
 
 	return que;
 }
@@ -109,10 +155,11 @@ static void qpoly (float *array,
 		x -= x_center;
 		x *= x_width;
 
-		double r = x*x + y*y;
-		if (r <= 2.0)
+		// double r = x*x + y*y;
+		// if (r <= 2.0)
 		{
 			COMPLEX zeta(x,y);
+#ifdef QFUNC
 			COMPLEX sum = qfunc(beta, zeta);
 			// Take minus the sum, to get what alldisk.C is showing.
 			sum = -sum;
@@ -122,6 +169,11 @@ static void qpoly (float *array,
 			array[j] = 0.5 + 0.5 * pha;
 
 			if (1.0 < r and r <= 1.02) array[j] = 1;
+#endif
+
+			// A goofy game.
+			COMPLEX sum = exp_qfunc(beta, zeta);
+			array[j] = abs(sum);
 
 #if 0
 			double mag = abs(sum);
