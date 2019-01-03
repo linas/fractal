@@ -133,6 +133,50 @@ double complex second_cnst(double x, double beta, double complex zee)
 }
 
 // ================================================================
+// Attempt analytic continuation at golden
+// This has two poles, one at +1 one at -1, and so subtract those.
+// Well, this doesn't work, cannot work, but still its interesting
+// to have pondered.
+double complex golden(double x)
+{
+	double beta = 0.5*(sqrt(5.0)+1.0);
+	if (0.5*beta < x) return 0.0;
+
+	double ob = -beta;
+	complex double zn = 1.0;
+
+	// accumulated sum
+	complex double rho = 0.0;
+
+	complex double pospole = 0.0;
+	complex double negpole = 0.0;
+
+	double tn = 0.5*beta;
+
+	int cnt=0;
+	while (1.0e-14 < cabs(zn))
+	{
+		if (x < tn) {
+			rho += zn;
+		}
+		pospole += zn;
+		if (1 == cnt%2) { negpole -= zn; } else { negpole += zn; }
+
+		// compute T^N(b/2)
+		tn = downshift(tn, 0.5*beta);
+
+		// compute 1/beta^N
+		zn *= ob;
+
+		cnt++;
+		if (100< cnt) break;
+	}
+
+printf("# rho= %g pos=%g neg=%g\n", cabs(rho), cabs(pospole), cabs(negpole));
+	return rho - 0.5*pospole +0.5* negpole;
+}
+
+// ================================================================
 
 // Print the contorted density
 void print_vee(double beta, double complex zee)

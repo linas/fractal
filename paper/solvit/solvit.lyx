@@ -9861,6 +9861,19 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
 
 , as that is what the definition of OEIS A001037 counts.
  Yet the relationship, if any, is quite unclear.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A hypothesis presented in a later section suggests that each orbit should
+ be thought of as a Galois group, with the length of the orbit corresponding
+ to the number of elements in the Galois group.
+ It seems that this might explain much of the structure.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13914,20 +13927,18 @@ fundamental theorem of analytic ergodics
 \end_layout
 
 \begin_layout Subsection
-Eigenfunctions
+Example eigenfunctions
 \end_layout
 
 \begin_layout Standard
-The analysis of periodic orbits given above, together with thier natural
- extension to non-periodic orbits provides enough detail to make another
- attempted tackle of spectrum and eigenfunctions of the transfer operator.
- It's something, but not still enough.
- This section proceeds by example.
- 
+The above provides a spur to further examine the spectrum of the transfer
+ operator.
+ Some examples are worked through here.
 \end_layout
 
 \begin_layout Standard
-The zeros of the transfer operator should correspond with the zeros of 
+To recap: eigenstates of the transfer operator correspond with the zeros
+ of 
 \begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
 \end_inset
 
@@ -13936,61 +13947,31 @@ The zeros of the transfer operator should correspond with the zeros of
 \end_inset
 
 .
- With the current state of affairs, larger values are prohibited, because
- of the way that the eigenfunctions are constructed.
- From the development of section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Rotated-Renyi-Parry-function"
-
-\end_inset
-
- leading to eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:holomorphic-disk"
-
-\end_inset
-
-, a zero 
-\begin_inset Formula $\zeta$
-\end_inset
-
- corresponds to an eigenvalue of 
-\begin_inset Formula $1/\zeta\beta$
-\end_inset
-
-.
- The eigenfunctions are given by eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:coherent-first-order"
-
-\end_inset
-
- (for 
-\begin_inset Formula $z=\zeta\beta$
-\end_inset
-
-.) That eqn is repeated here:
+ The reason for this limitation is that the eigenstates are explictly given
+ by 
 \begin_inset Formula 
 \[
-v_{\beta;z}\left(x\right)=\sum_{m=0}^{\infty}d_{m}\left(x\right)\zeta^{m}
+v\left(x\right)=\sum_{m=0}^{\infty}d_{m}\left(x\right)\zeta^{m}
 \]
 
 \end_inset
 
-which is absolutely convergent only for 
+for 
+\begin_inset Formula $\zeta=1/\beta\lambda$
+\end_inset
+
+; this is absolutely convergent only for 
 \begin_inset Formula $\left|\zeta\right|<1$
 \end_inset
 
 .
- It might be possible to analytically extend this to the entire complex
- plane, but that depends on the digit sequence 
+ One might hope to analytically extend this to the entire complex plane,
+ but the extension depends on the digit sequence 
 \begin_inset Formula $d_{m}\left(x\right)$
 \end_inset
 
 .
+ We're lacking in a tractable mechanism to perform this extension.
 \end_layout
 
 \begin_layout Subsubsection
@@ -14025,27 +14006,10 @@ which has a positive real zero at
 
 .
  The zero corresponds to the FP eigenvalue of one.
- The scaled shift matrix is 
+ The invariant measure is 
 \begin_inset Formula 
 \[
-\mathcal{B}=\frac{B^{T}}{\beta}=\frac{1}{\beta}\left[\begin{array}{cc}
-1 & 1\\
-1 & 0
-\end{array}\right]
-\]
-
-\end_inset
-
-which has an eigenvector 
-\begin_inset Formula $\left[\begin{array}{cc}
-\varphi & 1\end{array}\right]$
-\end_inset
-
-.
- The eigenfunction is 
-\begin_inset Formula 
-\[
-v_{\varphi;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\varphi^{m}}=\begin{cases}
+v\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\varphi^{m}}=\begin{cases}
 \varphi & \mbox{for }0\le x<\frac{1}{2}\\
 1 & \mbox{for }\frac{1}{2}\le x<\varphi\\
 0 & \mbox{for }\varphi\le1
@@ -14054,7 +14018,11 @@ v_{\varphi;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\varph
 
 \end_inset
 
+There is a negative real zero at 
+\begin_inset Formula $\zeta=-\varphi$
+\end_inset
 
+, but the eigenfunction summation is not convergent here.
 \end_layout
 
 \begin_layout Subsubsection
@@ -14092,33 +14060,15 @@ which has a positive real zero at
 \end_inset
 
  and three poles on the unit circle.
- The FP eigenvalue of one gives 
+ The FP eigenvalue provides 
 \begin_inset Formula $\beta=1.4655\cdots$
 \end_inset
 
 .
- The scaled shift matrix is 
+ The invariant measure is 
 \begin_inset Formula 
 \[
-\mathcal{B}=\frac{1}{\beta}\left[\begin{array}{ccc}
-1 & 0 & 1\\
-1 & 0 & 0\\
-0 & 1 & 0
-\end{array}\right]
-\]
-
-\end_inset
-
-which has an eigenvector 
-\begin_inset Formula $\left[\begin{array}{ccc}
-\beta^{2} & \beta & 1\end{array}\right]$
-\end_inset
-
-.
- The eigenfunction is 
-\begin_inset Formula 
-\[
-v_{\beta;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\beta^{m}}=\begin{cases}
+v\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\beta^{m}}=\begin{cases}
 \frac{\beta}{\beta-1} & \mbox{for }0\le x<T\left(\frac{\beta}{2}\right)\\
 \frac{1}{\beta-1} & \mbox{for }T\left(\frac{\beta}{2}\right)\le x<\frac{1}{2}\\
 \frac{1/\beta}{\beta-1} & \mbox{for }\frac{1}{2}\le x<\beta\\
@@ -14128,7 +14078,13 @@ v_{\beta;1}\left(x\right)=\sum_{m=0}^{\infty}\frac{d_{m}\left(x\right)}{\beta^{m
 
 \end_inset
 
+There are many equivalent ways to write the invariant measure; the above
+ just selected some representatives from the coset of equivalent expressions.
+ For example, the third entry could be written as 
+\begin_inset Formula $\beta=1/\beta\left(\beta-1\right)$
+\end_inset
 
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -14166,34 +14122,12 @@ which has a positive real zero at
 \end_inset
 
  and three poles on the unit circle.
- The FP eigenvalue of one gives 
+ The FP eigenvalue gives 
 \begin_inset Formula $\beta=1.8392\cdots$
 \end_inset
 
 .
- The scaled shift matrix is 
-\begin_inset Formula 
-\[
-\mathcal{B}=\frac{1}{\beta}\left[\begin{array}{ccc}
-1 & 1 & 1\\
-1 & 0 & 0\\
-0 & 1 & 0
-\end{array}\right]
-\]
-
-\end_inset
-
-which has an eigenvector 
-\begin_inset Formula $\left[\begin{array}{ccc}
-\beta^{2} & \beta & 1\end{array}\right]$
-\end_inset
-
- (same as for 
-\begin_inset Formula $n=2)$
-\end_inset
-
-.
- The eigenfunction is 
+ The invariant measure is 
 \begin_inset Formula 
 \[
 v_{\beta;1}\left(x\right)=\begin{cases}
@@ -14239,32 +14173,13 @@ The pattern gets repetitive.
 
 .
  The zeros are as previously listed.
- The scaled shift matrix is 
-\begin_inset Formula 
-\[
-\mathcal{B}=\frac{1}{\beta}\left[\begin{array}{cccc}
-1 & b_{1} & b_{2} & 1\\
-1 & 0 & 0 & 0\\
-0 & 1 & 0 & 0\\
-0 & 0 & 1 & 0
-\end{array}\right]
-\]
-
-\end_inset
-
-which has an eigenvector 
-\begin_inset Formula $\left[\begin{array}{cccc}
-\beta^{3} & \beta^{2} & \beta & 1\end{array}\right]$
-\end_inset
-
- for all three cases.
  The 
 \begin_inset Formula $n=4$
 \end_inset
 
  plateuas are at 
 \begin_inset Formula $\frac{1}{\beta-1}\left[\begin{array}{cccc}
-\beta & 1 & \frac{1}{\beta} & \frac{1}{\beta^{2}}\end{array}\right]$
+\beta, & 1, & \frac{1}{\beta}, & \frac{1}{\beta^{2}}\end{array}\right]$
 \end_inset
 
 .
@@ -14274,7 +14189,7 @@ which has an eigenvector
 
  plateaus are at 
 \begin_inset Formula $\left[\begin{array}{cccc}
-\frac{\beta}{\beta-1} & \frac{\beta^{2}}{\left(\beta^{2}-1\right)\left(\beta-1\right)} & \beta & \frac{\beta}{\left(\beta^{2}-1\right)\left(\beta-1\right)}\end{array}\right]$
+\frac{\beta}{\beta-1}, & \frac{\beta^{2}}{\left(\beta^{2}-1\right)\left(\beta-1\right)}, & \beta, & \frac{\beta}{\left(\beta^{2}-1\right)\left(\beta-1\right)}\end{array}\right]$
 \end_inset
 
 .
@@ -14284,10 +14199,12 @@ which has an eigenvector
 
  plateaus are at 
 \begin_inset Formula $\left[\begin{array}{cccc}
-\frac{\beta}{\beta-1} & \beta & \frac{\beta+1}{\beta\left(\beta-1\right)} & \frac{1}{\beta-1}\end{array}\right]$
+\frac{\beta}{\beta-1}, & \beta, & \frac{\beta+1}{\beta\left(\beta-1\right)}, & \frac{1}{\beta-1}\end{array}\right]$
 \end_inset
 
 .
+ Again, the values at the plateaus can be written in many different ways,
+ given the finite polynomail.
 \end_layout
 
 \begin_layout Subsubsection
@@ -14391,7 +14308,48 @@ The other plateaus appear to be at simple rational functions of
 \end_layout
 
 \begin_layout Standard
-So it seems that we are empty-handed, again.
+To solve the last issue, perhaps one can find tools in Galis theory.
+ Let 
+\begin_inset Formula $\mathbb{R}\left[\zeta\right]$
+\end_inset
+
+ be the ring of polynomials in 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ and consider the quotient ring 
+\begin_inset Formula $L=\mathbb{R}\left[\zeta\right]/q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+.
+ This 
+\begin_inset Formula $L$
+\end_inset
+
+ is a field extension of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ and so one expects a Galois group 
+\begin_inset Formula $\mbox{Gal}\left(L/\mathbb{R}\right)$
+\end_inset
+
+.
+ The plateaus of the invariant measure are presumably associated with the
+ group elements.
+ This seems like a promising direction to go in: perhaps this is just enough
+ to explain the length of an orbit, the sequence of points in the orbit,
+ the reason that some polynomials are forbidden (they don't generate prime
+ ideals), the appareance of Moreau's necklace-counting function,
+\emph on
+ etc
+\emph default
+.
+ This remains an unfinished exercise.
+\end_layout
+
+\begin_layout Standard
+At any rate, it seems that we are mostly empty-handed, again.
 \end_layout
 
 \begin_layout Subsection
