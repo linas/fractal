@@ -341,77 +341,34 @@ The most fun for the casual reader might be chapter 5, on the periodic orbits,
 \end_layout
 
 \begin_layout Standard
-More advanced readers might be interested in a report of decaying eigenvalues
- of the transfer operator; these are associated with the (non-trivial) zeros
- of of a holomorphic function on the unit disk, built up from the iterated
- midpoint of the map.
- Curiously, these decaying eigenstates are associated only with the ergodic
- orbits; when the midpoint falls into a periodic orbit, there aren't any
- associated decaying eigenstates.
- This smells like it should perhaps be obvious, but I don't know of any
- proof of this.
- Perhaps it is surprising.
- (Note well: for any fixed value of 
-\begin_inset Formula $\beta$
-\end_inset
-
-, almost all points 
-\begin_inset Formula $x$
-\end_inset
-
- will have ergodic orbits.
- I'm not talking about those.
- I'm talking about the midpoint.
- When it's periodic, then there are no decaying states, despite the fact
- that almost all other points are ergodic.
- Perhaps this is the difference between 
-\begin_inset Quotes eld
-\end_inset
-
-strong Bernoulli
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-weak Bernoulli
-\begin_inset Quotes erd
-\end_inset
-
-.
- Or maybe 
-\begin_inset Quotes eld
-\end_inset
-
-weak mixing
-\begin_inset Quotes erd
-\end_inset
-
-.
- I don't know.
- At any rate, this suggests that a dynamical system should not be confused
- with a collection of it's periodic orbits: it has a richer behavior than
- that.) 
-\end_layout
-
-\begin_layout Standard
 Perhaps the most surprising aspect of iteration (surprising to me) is that
  the invariant measure consists of flat plateaus.
- Perhaps there is a proof that such plateaus occur; I am not aware of one.
- They strike me as being very remarkable, as they indicate that different
- digit sequences, wildly and ergodically different, none-the-less manage
- to 
+ Or perhaps this is not surprising; after all, for the full shift, 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, the invariant measure is a straight line, and this is equivalent to saying
+ that the real numbers are aboslutely evenly distributed, or that the toss
+ of a perfectly fair coin is a perfectly even, random sequences of heads
+ and tails.
+ Flatness implies an even distribution.
+ So flatness is not surprising.
+ But look at it a different way: the digit sequences are wildly and ergodically
+ different, yet none-the-less manage to 
 \emph on
 sum to exactly the same value
 \emph default
 , when summed in an analytic series! Why should crazy-different, crazy-chaotic
- sequences yeild identical summations? I cartainly don't understand why.
- I cannot point to any other example, from number theory or combinatorics,
- or elsewhere, where this would be the case.
- It seems, though, that this should be a terribly important theorem of analytic
- ergodics.
+ sequences yeild identical summations? That they do should be considered
+ to be the 
+\begin_inset Quotes eld
+\end_inset
+
+fundamental theorem of analytic ergodics
+\begin_inset Quotes erd
+\end_inset
+
+.
  (I use the word 
 \begin_inset Quotes eld
 \end_inset
@@ -437,20 +394,11 @@ analytic combinatorics
 \end_inset
 
 .
- Rather than constructing analytic series over famous number-theoretic or
- combinatoric sequences, the game is to explore such series (
-\begin_inset Quotes eld
-\end_inset
-
-the ordinary generating function
-\begin_inset Quotes erd
-\end_inset
-
-,
-\emph on
- etc.
-\emph default
-) over overtly ergodic sequences.) 
+ Given a sequence of values, one explores the analytic properties of its
+ generating functions.) If this theorem has ever been clearly stated before,
+ or if it has been proven (for any case other than the Bernoulli shift),
+ I do not know.
+ It seems terribly important for analyzing subshifts.
 \end_layout
 
 \begin_layout Standard
@@ -11403,28 +11351,6 @@ g 10 with 12, and 13 with 14.
 \end_layout
 
 \begin_layout Standard
-There is a relatively simple alternative criterion for when a value of 
-\begin_inset Formula $n$
-\end_inset
-
- is allowed, or not: 
-\begin_inset Formula $n$
-\end_inset
-
- is allowed when the polynomial 
-\begin_inset Formula $q_{n}\left(\zeta\right)=\zeta^{k}p_{n}\left(1/\zeta\right)$
-\end_inset
-
- has only one root in the disk 
-\begin_inset Formula $\left|\zeta\right|<1$
-\end_inset
-
-.
- If it has more than one root, then it is disallowed.
- 
-\end_layout
-
-\begin_layout Standard
 Questions that present themselves include: 
 \end_layout
 
@@ -13686,6 +13612,26 @@ The characteristic equation of
 \end_inset
 
  to infinite dimensions.
+ Just to be explicit: given the bit-sequence 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+, the operator
+\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_inset
+
+ has the matrix elements
+\begin_inset Formula 
+\begin{align*}
+\left\langle 0\left|\mathcal{B}_{\beta}\right|j\right\rangle  & =\frac{b_{j}}{\beta}\\
+\left\langle j+1\left|\mathcal{B}_{\beta}\right|j\right\rangle  & =\frac{1}{\beta}
+\end{align*}
+
+\end_inset
+
+with all other entries being zero.
+ This is clearly in upper-Hessenberg form, with the lower-diagonal providing
+ the shift.
 \end_layout
 
 \begin_layout Standard
@@ -13700,8 +13646,7 @@ reference "eq:hessen-matrix-elts"
 
 \end_inset
 
-, and the numerical results on it's eigenvalues, it seems equally clear
- that 
+, and the numerical results on it's eigenvalues, it seems clear that 
 \begin_inset Formula $\mathcal{B}_{\beta}$
 \end_inset
 
@@ -13747,9 +13692,9 @@ Eigenfunctions
 
 \begin_layout Standard
 The analysis of periodic orbits given above, together with thier natural
- extension to non-periodic orbits provides a sufficient amount of detail
- to again tackle the problem of describing the transfer operator and it's
- spectrum in a precise way.
+ extension to non-periodic orbits provides enough detail to make another
+ attempted tackle of spectrum and eigenfunctions of the transfer operator.
+ It's something, but not still enough.
  This section proceeds by example.
  
 \end_layout
@@ -13763,7 +13708,9 @@ The zeros of the transfer operator should correspond with the zeros of
 \begin_inset Formula $\left|\zeta\right|\le1$
 \end_inset
 
-; the reason for this will be made clear below.
+.
+ With the current state of affairs, larger values are prohibited, because
+ of the way that the eigenfunctions are constructed.
  From the development of section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -13798,7 +13745,25 @@ reference "eq:coherent-first-order"
 \begin_inset Formula $z=\zeta\beta$
 \end_inset
 
-.)
+.) That eqn is repeated here:
+\begin_inset Formula 
+\[
+v_{\beta;z}\left(x\right)=\sum_{m=0}^{\infty}d_{m}\left(x\right)\zeta^{m}
+\]
+
+\end_inset
+
+which is absolutely convergent only for 
+\begin_inset Formula $\left|\zeta\right|<1$
+\end_inset
+
+.
+ It might be possible to analytically extend this to the entire complex
+ plane, but that depends on the digit sequence 
+\begin_inset Formula $d_{m}\left(x\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -14120,20 +14085,30 @@ For a period-
 \end_layout
 
 \begin_layout Itemize
-A bit-sequence 
-\begin_inset Formula $\left\{ b\right\} $
+The first label 
+\begin_inset Formula $n$
 \end_inset
 
- is disallowed if 
+ for which 
 \begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
 \end_inset
 
- has more than one root in the 
-\begin_inset Formula $\left|\zeta\right|<1$
+ has a complex zero within the disk is 
+\begin_inset Formula $n=16$
 \end_inset
 
- disk.
- Thus, all such polynomials have only one root, the Frobenius-Perron root.
+.
+ As a general rule, it seems that complex zeros inside the disk only appear
+ for 
+\begin_inset Formula $\beta<\varphi$
+\end_inset
+
+ (I beleive; have not carefully checked.
+ This seems reasonable, as later chapters show that the region of 
+\begin_inset Formula $\beta<\varphi$
+\end_inset
+
+ behaves very differently from larger values.)
 \end_layout
 
 \begin_layout Itemize
@@ -14189,13 +14164,7 @@ The other plateaus appear to be at simple rational functions of
 \end_layout
 
 \begin_layout Standard
-Perhaps the most remarkable point is the second one: there no other roots,
- besides the FP root.
- Periodic orbits do not allow decaying eigenvalues; this is perhaps the
- strongest criterion distinguishing periodic and ergodic orbits: decaying
- eigenstates are necessarily associated with ergodic orbits; periodicity
- never allows them.
- 
+So it seems that we are empty-handed, again.
 \end_layout
 
 \begin_layout Subsection
