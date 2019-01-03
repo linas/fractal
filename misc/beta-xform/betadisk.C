@@ -3,9 +3,13 @@
  * Visualization of the (holomorphic) q-polynomial
  * This is exactly equal to minus alldisk.C ! Horay! It's starting to make sense!
  *
+ * .. except that the reported zeros inside the disk are probably numeric
+ * artifacts! Yuck .. port to GMP
+ *
  * December 2018
  *
  */
+#include <gmp.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
