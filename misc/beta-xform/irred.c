@@ -24,6 +24,7 @@ double beta(unsigned long n, double x)
 		xn *= x;
 		bitstr >>= 1;
 	}
+printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
 	return xn - acc;
 }
 
@@ -199,6 +200,10 @@ int main(int argc, char* argv[])
 	int nmax = (1<<12) + 1;
 
 	setup_gold(nmax);
+
+find_gold(16);
+printf("---------\ngold=%g\n", zero[16]);
+exit(0);
 
 #ifdef PRINT_STUFF
 	int cnt = 0;

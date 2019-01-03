@@ -220,7 +220,8 @@ static void qpoly (float *array,
 		x *= x_width;
 
 		double r = x*x + y*y;
-		if (r <= 4.0)
+		// if (r <= 4.0)
+		if (r <= 1.0)
 		{
 			COMPLEX zeta(x,y);
 #define QFUNC
@@ -242,10 +243,12 @@ static void qpoly (float *array,
 			array[j] = abs(sum);
 #endif
 
-#if 0
+#if 1
 			double mag = abs(sum);
-			if (mag < 0.15) {
+			if (mag < 0.015) {
 				COMPLEX z = beta*zeta;
+				// COMPLEX z = zeta;
+z = 1.0/z;
 				printf("maybe zero near z=%g +i %g = %g exp(i pi %g)\n",
 					real(z), imag(z), abs(z), atan2(y,x)/M_PI);
 array[j] = 0.5;
