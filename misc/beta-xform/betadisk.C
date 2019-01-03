@@ -57,15 +57,16 @@ lodouble_t T_n(int n, lodouble_t beta)
 // Build the q-function.
 COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 {
-	#define SEQLEN 120
+	#define SEQLEN 820
 	static bool is_init = false;
-	static int bit[SEQLEN];
+	static int bit[SEQLEN+1];
 	if (not is_init)
 	{
 		is_init = true;
 
+// #define REGULAR_FLOAT_POINT
 #ifdef REGULAR_FLOAT_POINT
-		// This has rounding error issues.
+		// This .. works ... but bignum does a sanity check.
 		lodouble_t K = 0.5*beta;
 		lodouble_t mid = K;
 		for (int i=0; i<SEQLEN; i++)
@@ -82,8 +83,19 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 // printf("duuude its %d %d\n", i, bit[i]);
 		}
 #endif
+
+#define BIGNUM_MIDPOINTS
+#ifdef BIGNUM_MIDPOINTS
 		double K = 0.5*beta;
-		midpoint_seq(K, SEQLEN+50, 0x0, bit, SEQLEN);
+		midpoint_seq(K, SEQLEN+50, 0x0, bit, SEQLEN+1);
+
+		// Above generates a sequence starting with zero;
+		// below uses sequence starting with one...
+		for (int i=0; i<SEQLEN; i++)
+		{
+			bit[i] = bit[i+1];
+		}
+#endif
 	}
 
 	COMPLEX zetan = zeta;
@@ -103,6 +115,10 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta)
 }
 
 // Build the exponential q-function.
+// This fails to show anything interesting. OK, so it's got
+// zero's splattered everywhere on the complex plane, but they're
+// highly random, highly dependent on beta, hopping around all over
+// the place as beta changes.
 COMPLEX exp_qfunc(lodouble_t beta, COMPLEX zeta)
 {
 	#undef SEQLEN
@@ -167,10 +183,11 @@ static void qpoly (float *array,
 		x -= x_center;
 		x *= x_width;
 
-		// double r = x*x + y*y;
-		// if (r <= 2.0)
+		double r = x*x + y*y;
+		if (r <= 2.0)
 		{
 			COMPLEX zeta(x,y);
+#define QFUNC
 #ifdef QFUNC
 			COMPLEX sum = qfunc(beta, zeta);
 			// Take minus the sum, to get what alldisk.C is showing.
@@ -183,9 +200,11 @@ static void qpoly (float *array,
 			if (1.0 < r and r <= 1.02) array[j] = 1;
 #endif
 
+#ifdef EXPO_GEN_FUNC_GAME
 			// A goofy game.
 			COMPLEX sum = exp_qfunc(beta, zeta);
 			array[j] = abs(sum);
+#endif
 
 #if 0
 			double mag = abs(sum);
