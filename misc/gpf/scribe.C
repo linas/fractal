@@ -37,20 +37,22 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 	// if (loc/x - locheigh < y and y < loc/x + locheigh) return 1.0;
 #endif
 
-	// Writing z = r exp(i theta) then ...
-	// this curve corresponds to sqrt(r) = 1/sine(theta/2)
-	// double crv = exp(- 5.8*x);
-	double crv = exp(- 5.545*x);
+	// Writing z = r exp(i theta) then noting that the x-axis is logarithmic...
+	// This curve corresponds to sqrt(r) = 1/sine(theta/2)
+	// The image goes from r=1 to r=65536,
+	// log 256 = 5.545177444479562  = log (sqrt 65536)
+	double crv = exp(- 5.545177*x);
 	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 	// this curve corresponds to 768/r = sine(theta/2)
-	// 768
-	crv = exp(- 11.0903*(x-0.59906));
+	// 768 == (exp (* 11.090355 0.59906))
+	// log 65536 == 11.090354888959125
+	crv = exp(- 11.090355*(x-0.59906));
 	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 	// this curve corresponds to 1200/r = sine(theta/2)
 	// 1200
-	crv = exp(- 11.0903*(x-0.639301));
+	crv = exp(- 11.090355*(x-0.639301));
 	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 	// this curve corresponds to 1500/r = sine(theta/2)
