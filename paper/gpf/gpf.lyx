@@ -177,7 +177,7 @@ obvious
 
  structure, obtaining exact results appears to be difficult.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Some of the figures in this text show richer detail, and are particularly
@@ -3996,14 +3996,6 @@ name "fig:Moiré-Patterns"
 
 \end_layout
 
-\begin_layout Plain Layout
-Soo
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -4021,41 +4013,181 @@ The middle image shows the region
 \end_inset
 
 .
+ The images are quite dark.
+ Peering at them, one can see many black pixels.
+ Keeping in mind that black corresponds to points that or on or near a zero,
+ the shapeley filigreed lines then indicate the location of zeros, with
+ respect to a rectangular coordinate grid.
+ The interleaved red-black regions on the 
+\begin_inset Formula $\theta=\pi/3$
+\end_inset
+
+ ray in the right-most image suggests that, even in zero-free lanes, there
+ are zeros lurking not all that far away.
+\end_layout
+
+\begin_layout Section*
+The Pochhammer Symbol
 \end_layout
 
 \begin_layout Standard
-Perhaps you are starting to get bored, so I will try to wrap it up.
- Below is one for the rising Pochhammer symbol.
- Its normalized by a factorial, for convergence, so really its a binomial
- coefficient.
- Specifically, define <i>RPG(f; z) = &Sigma;<sub>n=1</sub><sup>&infin;</sup>
- f(n) (z)<sub>n</sub> / (n!)<sup>2</sup></i> where <i>(z)<sub>n</sub> =
- z(z+1)(z+2)...(z+n-1)</i> is the rising Pochhammer symbol.
+One last diversion.
+ The left image of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Rising-Pochhammer"
+
+\end_inset
+
+ shows the greatest prime factor, using the rising Pochhammer symbol in
+ the generating function.
+ Its normalized by a factorial, for convergence, so it perhaps should be
+ called a binomial coefficient generating function.
+ Specifically, define 
+\begin_inset Formula 
+\[
+\mbox{RPG}\left(f;z\right)=\sum_{n=1}^{\infty}f\left(n\right)\frac{\left(z\right)_{n}}{\left(n!\right)^{2}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left(z\right)_{n}=z\left(z+1\right)\left(z+2\right)\cdots\left(z+n-1\right)$
+\end_inset
+
+ is the rising Pochhammer symbol.
  The two factorials in the denominator guarantee convergence, as otherwise
  the sum is badly behaved.
- The color coding is as before: black is zero, green is about 0.5 and red
- is any value that is 1.0 or larger.
- The leading divergence is removed: the graph shows this: <i>RPG(gpf,z)
- exp(-2 &radic; |z|) / |z|</i> Notice the <i>&radic; |z|</i> in the normalizatio
-n: such binomial-coefficient sums (Newton series, actually) are "well-known"
- to diverge in this kind of square-root fashion.
- (This is explored in detail in a paper by Philippe Flajolet and myself
- on Newton series for the Riemann zeta).
- Anyway -- notice again that there seem to be zero-free rays at angles theta=0
- and &pi; of course, and at 2&pi;/3 and, harder to discern, at 2&pi;/5.
+ The leading divergence is removed; the graph shows 
+\begin_inset Formula $\mbox{RPG}\left(\mbox{gpf};z\right)\exp\left(-2\sqrt{\left|z\right|}\right)/\left|z\right|$
+\end_inset
+
+.
+ Notice the 
+\begin_inset Formula $\sqrt{\left|z\right|}$
+\end_inset
+
+ in the normalization: such binomial-coefficient sums (Newton series, if
+ given thier proper name) are "well-known" to diverge in this kind of square-roo
+t fashion.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fla06"
+
+\end_inset
+
+ As before, there seem to be zero-free rays at angles 
+\begin_inset Formula $\theta=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi$
+\end_inset
+
+; of course, and at 
+\begin_inset Formula $2\pi/3$
+\end_inset
+
+ and, harder to discern, at 
+\begin_inset Formula $2\pi/5$
+\end_inset
+
+.
  Presumably all the other rationals are there too; they are not very clear
  in this picture.
- The domain in this picture is just huge: -1.0e6 &lt; x,y &lt; 1.0e6 -- this
- is far far wider than any of the previous images: the zeros are much, much
- farther apart.
- <p> <p> <img width=800 height=800 src="./poch-rise.png"> <p> One may also
- consider a very similar sum, using the falling Pochhammer symbol, instead
- of the rising one.
- This symbol is given by <i>(z)<sub>n</sub> = z(z-1)(z-2)...(z-n+1)</i>.
- The resulting image appears below, it is of <i>FPG(gpf,z) exp(-2 &radic;
- |z|) / |z|</i> with normalization exactly as given and coloration as always.
- <p> <img width=800 height=800 src="./poch-fall.png"> <p> Some of the first
- few zeros for the rising Pochhammer generating function are shown below.
+ The domain in this picture is just huge: 
+\begin_inset Formula $-10^{6}\le x,y\le10^{6}$
+\end_inset
+
+ – this is far far wider than any of the previous images: the zeros are
+ much, much farther apart.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pochhammer Generating Functions
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Rising-Pochhammer"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename poch-rise.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename poch-fall.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One may also consider a very similar sum, using the falling Pochhammer symbol,
+ instead of the rising one.
+ This symbol is given by 
+\begin_inset Formula $z^{\left(n\right)}=z\left(z-1\right)\left(z-2\right)\cdots\left(z-n+1\right)$
+\end_inset
+
+.
+ The resulting image appears below, it is of 
+\begin_inset Formula $\mbox{FPG}\left(\mbox{gpf};z\right)\exp\left(-2\sqrt{\left|z\right|}\right)/\left|z\right|$
+\end_inset
+
+.
+ The scale is again 
+\begin_inset Formula $-10^{6}\le x,y\le10^{6}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Some of the first few zeros for the rising Pochhammer generating function
+ are shown below.
  Note that the first two lie precisely on the real axis.
  The others do not seem to occur at any low rational angle (the column φ
  shows the angle in units of pi, thus a value of φ of one indicates the
