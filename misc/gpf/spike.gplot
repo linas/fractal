@@ -11,7 +11,7 @@ set key right
 set title "Average of 500 radial slices near r=16000"
 set xlabel "{/Symbol q}"
 set ylabel "|EG|"
-set yrange [0:4000]
+set yrange [0:1]
 
 # Successive rows of farey fractions
 set xtics out rotate ( \
@@ -25,14 +25,17 @@ set xtics out rotate ( \
 	"1/2" 0.5)
 
 
+# So -- 3858 is the peak.
+plot "spike.dat" using ($2/6.2831852):($3/3858.65) title "" lw 2, \
+     "spike.dat" using ($2/6.2831852):(0.6666*(1.0/2 - $2/6.2832)) title "slope=2/3" lw 2, \
+     "spike.dat" using ($2/6.2831852):($2/6.2832) title "slope=1" lw 2, \
+     "spike.dat" using ($2/6.2831852):(1.5*(1.0/3 - $2/6.2832)) title "slope=3/2" lw 2, \
+     "spike.dat" using ($2/6.2831852):(2*(1.0/2-$2/6.2832)) title "slope=2" lw 2, \
+     "spike.dat" using ($2/6.2831852):(2.5*($2/6.2832 - 1.0/5)) title "slope=5/2" lw 2
+
 # So -- 178 is the least value seen in the sums; 3858 is the peak.
-plot "spike.dat" using ($2/6.2831852):3 title "" lw 2, \
-     "spike.dat" using ($2/6.2831852):((3858.65-178)*(1-(2*$2/6.2832))+178) title "off" lw 2, \
-     "spike.dat" using ($2/6.2831852):((3858.65-178)*($2/6.2832)+178) title "off" lw 2,\
-     "spike.dat" using ($2/6.2831852):(3858.65*($2/6.2832)) title "slope=1" lw 2, \
-     "spike.dat" using ($2/6.2831852):(3858.65*1.5*(1.0/3 - $2/6.2832)) title "slope=3/2" lw 2, \
-     "spike.dat" using ($2/6.2831852):(3858.65*2*(1.0/2-$2/6.2832)) title "slope=2" lw 2, \
-     "spike.dat" using ($2/6.2831852):(3858.65*2.5*($2/6.2832 - 1.0/5)) title "slope=5/2" lw 2
+#     "spike.dat" using ($2/6.2831852):((3858.65-178)*(1-(2*$2/6.2832))+178) title "off" lw 2, \
+#     "spike.dat" using ($2/6.2831852):((3858.65-178)*($2/6.2832)+178) title "off" lw 2,\
 
 # So 1685 is hieght of central peak.
 # set out 'spike-8K-100S.png'
