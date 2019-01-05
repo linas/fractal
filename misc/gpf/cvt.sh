@@ -1,6 +1,8 @@
 #! /bin/bash
 
-cat dash.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > dash.png
+../../generate/renorm foo j 4.0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > foo.png
+# cat dash.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > dash.png
 
 # cat gpf-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-phase.png
 # cat gpf-ogf-shift-0.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x.png

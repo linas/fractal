@@ -139,7 +139,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-#define ODF_PHASE 1
+// #define ODF_PHASE 1
 #if ODF_PHASE
 	// cpx_gpf_ordinary_shift(sum, z, itermax, 12);
 	cpx_gpf_ordinary_derivative(sum, z, itermax, 12);
@@ -159,7 +159,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define EXPO 1
+#define EXPO 1
 #if EXPO
 	cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_sine(sum, z, 20);
@@ -172,7 +172,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_abs(val, sum);
 
 	double rv = mpf_get_d(val);
-// rv = cpx_get_re(sum);
+rv = cpx_get_re(sum);
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
@@ -225,7 +225,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 		cpx_set_d(z, re_q, im_q);
 	#endif // PROJECT_TO_SPHERE
 
-#define UN_CIRCLE 1
+	#define UN_CIRCLE 1
 	#ifdef UN_CIRCLE
 		// printf("duuude in= %f %f \n", re_q, im_q);
 		double theta = M_PI * im_q;
