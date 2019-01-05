@@ -21,15 +21,19 @@ poch has pole at z=0 -- phase winds around to right.
 It has saddle on the neg x axis near 0.6 ..
 
 
-the flattened version
+the flattened version is done like so:
 
 ./gpf-2d  recip-flat 300 300 13 1.5 0.5 1.0 0.03
 
-generate directory:
+The scribed lines are drawn with scribe.C
+  scribe dash 800 800 1 0.5 0.5 1
+  ./cvt.sh
+  convert dash.png -fuzz 15% -fill white -opaque red dashw.png
+  convert recip-flat-16-fixed.png dashw.png -transparent black -gravity center -compose over -composite recip-flat-16-white.png
 
-draw.c
-sum diff paste   -- sum.c
-renorm
+
+and then merged with with code in the generate directory:
+The sum.c file which does sum, diff, paste, mask etc.
 
 Masking is done with the scribe function:
 mask foo scribe fout

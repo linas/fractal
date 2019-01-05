@@ -3312,10 +3312,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3471,11 +3467,7 @@ What are all these features? How are they to be described? What do they
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3501,7 +3493,7 @@ name "fig:Zoomed-Reciprocal-GPF"
 \begin_inset Graphics
 	filename recip-exp-240K-fixed-lr5.png
 	lyxscale 50
-	width 80col%
+	width 100col%
 
 \end_inset
 
@@ -3525,6 +3517,18 @@ Just as the previous figure, this shows the exponential generating function
  
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -3533,31 +3537,174 @@ Just as the previous figure, this shows the exponential generating function
 \begin_layout Standard
 What are these parabolic-like orbits? Well, there's an alternate plot that
  makes curve-fitting easier.
- The below unwinds the the graph from around the origin, showing instead,
- as the above, <i>1.6 EG(1/gpf; z) exp(-|z|) log<sup>-1</sup>|z| log<sup>-4</sup>
-[log(|z|+1)+1]</i>, except that here, <i>z=r&nbsp;exp(iθ)</i> with <i>θ</i>
- running along the vertical axis, from 0 to π.
- Along the horizontal axis, <i>r</i> is plotted on a logarithmic scale,
- so that <i>r</i> runs from 1 on the left to 65536 on the right.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Unwound-Reciprocal-GPF"
+
+\end_inset
+
+unwinds the the graph from around the origin, showing much like the previous
+\begin_inset Formula 
+\[
+1.6e^{-\left|z\right|}\log\left|z\right|\log^{4}\left[\log\left(\left|z\right|+1\right)+1\right]EG\left(\frac{1}{\mbox{gpf}};z\right)
+\]
+
+\end_inset
+
+except that here, 
+\begin_inset Formula $z=re^{i\theta}$
+\end_inset
+
+ with 
+\begin_inset Formula $\theta$
+\end_inset
+
+ running along the vertical axis, from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $\pi$
+\end_inset
+
+.
+ Along the horizontal axis, 
+\begin_inset Formula $r$
+\end_inset
+
+ is plotted on a logarithmic scale, so that 
+\begin_inset Formula $r$
+\end_inset
+
+ runs from 1 on the left to 65536 on the right.
  Superimposed on this figure are five hand-fitted black lines.
  One tries to capture the edge of the root-free zone.
- This line is given by <i>sin&nbsp;θ/2&nbsp;=&nbsp;1/√r</i>.
+ This line is given by 
+\begin_inset Formula $\sin\theta/2=1/\sqrt{r}$
+\end_inset
+
+.
  Note the radical.
  Careful examination shows that at least a few zeros appear on the wrong
  side of this line -- the shape seems to be only approximate.
- Four more lines try to fit the pseudo-parabolas.
- The fits are OK on the large-<i>r</i> asymptotic region, but poor in the
- small-<i>r</i> region.
- The four that are drawn are given by <table cellspacing="10px"> <tr><td>768/r
- = sin θ/2</td> </tr> <tr><td>1200/r = sin θ/2</td> </tr> <tr><td>1500/r
- = sin θ/2</td> </tr> <tr><td>1948/r = sin θ/2</td> </tr> <tr><td>7200/r
- = sin θ/2 (not drawn)</td> </tr> </table> The integers in the above are
- approximate ...
+ Four more curves try to fit the pseudo-parabolas.
+ The fits are OK on the large-
+\begin_inset Formula $r$
+\end_inset
+
+ asymptotic region, but poor in the small-
+\begin_inset Formula $r$
+\end_inset
+
+ region.
+ The four that are drawn are given by 
+\begin_inset Formula 
+\begin{align*}
+\frac{768}{r} & =\sin\frac{\theta}{2}\\
+\frac{1200}{r} & =\sin\frac{\theta}{2}\\
+\frac{1500}{r} & =\sin\frac{\theta}{2}\\
+\frac{1948}{r} & =\sin\frac{\theta}{2}
+\end{align*}
+
+\end_inset
+
+The integers in the above are approximate ...
  they are obtained by eyeballing.
  I tried to pick integers with a small number of prime factors, and these
  seem pretty close, but there is no obvious pattern that is emerging.
  It is worth spending a few minutes, looking at this under magnification.
- <p> <img width=800 height=800 src="./recip-flat-16-fixed-scribed.png">
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Unwound Reciprocal GPF
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Unwound-Reciprocal-GPF"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename recip-flat-16-white.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename recip-flat-10-16.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename recip-flat-wide-15.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The scribed lines are done by ..
+ the README explains.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

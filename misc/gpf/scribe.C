@@ -14,17 +14,20 @@
 static double ploto(double re_q, double im_q, int itermax, double param)
 {
 	double pixwidth = 800.0;
-	// double locwidth = 0.5 / pixwidth;
-	double locheigh = 0.8 / pixwidth;
+	// double locwidth = 1.2 / pixwidth;
+	double locheigh = 1.2 / pixwidth;
 
 	// if (0.25 < im_q) locheigh = 2.0 / pixwidth;
 	// if (0.5 < im_q) locheigh = 4.0 / pixwidth;
 	// if (0.75 < im_q) locheigh = 8.0 / pixwidth;
-	locheigh = pow(8.0, im_q) / pixwidth;
+	locheigh = 2.0* pow(8.0, im_q) / pixwidth;
 
 	double theta = M_PI * im_q;
 	double x = re_q;
 	double y = sin(0.5*theta);
+
+	int ipix = (int) (im_q*pixwidth/ 20.0);
+	int dash = 1 - ipix%2;
 
 #ifdef ALMOST
 	x = pow (x, 2.5);
@@ -38,27 +41,27 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 	// this curve corresponds to sqrt(r) = 1/sine(theta/2)
 	// double crv = exp(- 5.8*x);
 	double crv = exp(- 5.545*x);
-	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
+	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 	// this curve corresponds to 768/r = sine(theta/2)
 	// 768
 	crv = exp(- 11.0903*(x-0.59906));
-	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
+	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 	// this curve corresponds to 1200/r = sine(theta/2)
 	// 1200
 	crv = exp(- 11.0903*(x-0.639301));
-	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
+	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 	// this curve corresponds to 1500/r = sine(theta/2)
 	// 1500
 	crv = exp(- 11.0903*(x-0.659421));
-	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
+	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 	// this curve corresponds to 1948/r = sine(theta/2)
 	// 1948  (or 2000??)
 	crv = exp(- 11.0903*(x-0.682986));
-	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
+	if (dash && crv - locheigh < y and y < crv + locheigh) return 1.0;
 
 /*
 	crv = exp(- 11.09*(x-param));
