@@ -137,6 +137,22 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_init(sum);
 	cpx_init(z);
 
+	// Let hpx, hpy be coords of point in the upper half-plane ...
+	double hpx = re_q;
+	double hpy = im_q;
+
+	double are = 1.0 / (hpy*hpy);
+are *= are;
+	double theta = M_PI * tanh(hpx);
+
+	double shx = are * cos(theta);
+	double shy = are * sin(theta);
+
+	if (itermax < are) return 0.5;
+
+	re_q = shx;
+	im_q = shy;
+
 	cpx_set_d(z, re_q, im_q);
 
 // #define ODF_PHASE 1
@@ -159,7 +175,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#define EXPO 1
+// #define EXPO 1
 #if EXPO
 	cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_sine(sum, z, 20);
@@ -172,7 +188,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_abs(val, sum);
 
 	double rv = mpf_get_d(val);
-rv = cpx_get_re(sum);
+// rv = cpx_get_re(sum);
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
@@ -203,7 +219,7 @@ rv = cpx_get_re(sum);
 	return rv;
 #endif
 
-// #define RECIP 1
+#define RECIP 1
 #ifdef RECIP
 
 	#ifdef PROJECT_TO_SPHERE
@@ -225,7 +241,7 @@ rv = cpx_get_re(sum);
 		cpx_set_d(z, re_q, im_q);
 	#endif // PROJECT_TO_SPHERE
 
-	#define UN_CIRCLE 1
+	// #define UN_CIRCLE 1
 	#ifdef UN_CIRCLE
 		// printf("duuude in= %f %f \n", re_q, im_q);
 		double theta = M_PI * im_q;
@@ -239,11 +255,11 @@ rv = cpx_get_re(sum);
 		#endif
 
 
-#if LINEAR_CENTER_LINE
-		double rr = itermax;
-		rr = exp(rr * M_LN2);  // pow (2, itermax * re_q)
-	   rr += param * re_q; // left-right offsets.
-#endif
+		#if LINEAR_CENTER_LINE
+			double rr = itermax;
+			rr = exp(rr * M_LN2);  // pow (2, itermax * re_q)
+			rr += param * re_q; // left-right offsets.
+		#endif
 		double rr = itermax + param * re_q;
 		rr = exp(rr * M_LN2);  // pow (2, param * re_q)
 

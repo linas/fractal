@@ -1,6 +1,6 @@
 #! /bin/bash
 
-../../generate/renorm foo j 4.0
+../../generate/renorm foo j 1.0
 cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > foo.png
 # cat dash.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > dash.png
 
