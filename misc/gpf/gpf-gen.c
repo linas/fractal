@@ -335,7 +335,37 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define ZERO_COUNT
+#define SPIKES 1
+#ifdef SPIKES
+	if (argc < 4)
+	{
+		fprintf(stderr, "Usage: %s <r> <angular-resolution> <nsamp>\n", argv[0]);
+		exit(1);
+	}
+	double r = atof(argv[1]);
+	int nares = atoi(argv[2]);
+	int nsamp = atoi(argv[3]);
+
+	printf("#\n# R = %g  samples=%d\n#\n", r, nsamp);
+	for (int i=0; i<nares; i++)
+	{
+		double t = (((double) i) + 0.5) / ((double) nares);
+		// double theta = 2.0 * (t-0.5) * M_PI;
+		double theta = t * M_PI;
+		double w0 = gpf_bignum_exponential(r, theta);
+		double delta = 17.0*19.0/11.0;
+		for (int n=1; n<nsamp; n++)
+		{
+			double dr = ((double) n) * delta;
+			w0 += gpf_bignum_exponential(r+dr, theta);
+		}
+		w0 /= (double) nsamp;
+		printf("%d	%g	%g\n", i, theta, w0);
+		fflush(stdout);
+	}
+#endif
+
+// #define ZERO_COUNT
 #ifdef ZERO_COUNT
 	if (argc < 3)
 	{

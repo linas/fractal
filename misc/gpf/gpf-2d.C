@@ -137,12 +137,13 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_init(sum);
 	cpx_init(z);
 
+#ifdef PSEUDO_HYPERBOLIC
 	// Let hpx, hpy be coords of point in the upper half-plane ...
 	double hpx = re_q;
 	double hpy = im_q;
 
 	double are = 1.0 / (hpy*hpy);
-are *= are;
+// are *= are;
 	double theta = M_PI * tanh(hpx);
 
 	double shx = are * cos(theta);
@@ -152,6 +153,7 @@ are *= are;
 
 	re_q = shx;
 	im_q = shy;
+#endif
 
 	cpx_set_d(z, re_q, im_q);
 

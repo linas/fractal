@@ -1,0 +1,22 @@
+
+set term png size 1024, 768
+set out 'spike.png'
+
+# set term eps color enhanced fontscale 0.7
+# set out 'spike.eps'
+
+set style data lines
+set key left
+
+set title "foobar "
+set xlabel "{/Symbol q}"
+set ylabel "|EG|"
+
+
+
+plot "spike.dat" using ($2/3.1415926):3 title "" lw 2
+
+# set yrange [0:1700]
+# plot "spike-8K-100S.dat" using ($2/3.1415926):3 title "" lw 2, \
+#      "spike-8K-100S.dat" using ($2/3.1415926):(1685*(1-($2/3.1416))) title "" lw 2, \
+#     "spike-8K-100S.dat" using ($2/3.1415926):(0.5*1685*($2/3.1416)) title "" lw 2
