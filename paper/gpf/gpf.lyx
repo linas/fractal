@@ -176,6 +176,19 @@ obvious
 \end_inset
 
  structure, obtaining exact results appears to be difficult.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Some of the figures in this text show richer detail, and are particularly
+ striking when they are magnified.
+ Due to space limitations, they are kept rather small in this text.
+ Larger images can be found at https://linas.org/art-gallery/gpf/gpf.html
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
@@ -3309,7 +3322,7 @@ Clearly, there's a new feature visible here: rings! Concentric rings! Hard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3731,6 +3744,15 @@ The scribed lines are done by ..
 \end_inset
 
 
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3791,56 +3813,218 @@ Just how thin are these vertical lines? The rightmost image is a closeup
 \end_layout
 
 \begin_layout Standard
-<p> Below is <i>0.3 EG(1/gpf<sup>2</sup>; z) exp(-|z|)</i>, with the domain
- (x,y) between -2160 and +2160.
- The circular rings become sharply visible.
- The primary sequence seems to be located at powers of 2; so that, here,
- the outermost ring appears to be of radius 2048; the middle one presumably
- with a radius of 1024, etc.
- The other rings are presumably at other prime powers.
- 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Reciprocal Squared
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Reciprocal-Squared"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename exp-2.0.png
+	lyxscale 50
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+The Reciprocal Squared
 \end_layout
 
 \begin_layout Standard
-<p> <img width=800 height=800 src="./exp-2.0.png"> <p> Below is an actual moiré
- pattern! It shows the real part of <i>EG(gpf; z) exp(-|z|)</i>.
- As noted at the very beginning, in the phase portrait, the phase forms
- radially oriented fingers.
+The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Reciprocal-Squared"
+
+\end_inset
+
+ shows
+\begin_inset Formula 
+\[
+EG\left(\frac{1}{\mbox{gpf}^{2}};z\right)=\sum_{n=1}^{\infty}\frac{1}{\mbox{gpf}^{2}\left(n\right)}\,\frac{z^{n}}{n!}
+\]
+
+\end_inset
+
+with the domain 
+\begin_inset Formula $-2160\le x,y\le2160$
+\end_inset
+
+.
+ As usual, the leading order of 
+\begin_inset Formula $\exp\left|z\right|$
+\end_inset
+
+ has been removed.
+ The circular rings are far more prominent, now.
+ The primary sequence seems to be located at powers of 2; so that, here,
+ the outermost ring appears to be of radius 2048; the middle one presumably
+ with a radius of 1024, etc.
+ The other rings are presumably at other powers of various different primes.
+\end_layout
+
+\begin_layout Section*
+Moiré Patterns
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Moiré-Patterns"
+
+\end_inset
+
+ show actual Moiré patterns! All three images show the real part of 
+\begin_inset Formula $\mbox{EG}\left(\mbox{gpf};z\right)e^{-\left|z\right|}$
+\end_inset
+
+.
+ As noted at the very beginning, the phase portrait in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Phase-of-EGF"
+
+\end_inset
+
+, the phase forms radially oriented fingers.
  Likewise, the real part of the function consists of radially oriented,
  roughly sinusoidal ridges and valleys.
  At the scale of this image, the distance between peak and trough is less
  than one pixel, and so by using a sharp sampling, one necessarily gets
- a sampling aliasing effect.
- The original image here is 400x400 pixels, and it shows a region <i>0 &lt;
- x,y &lt; 2000</i> (the upper-right quadrant).
- The moiré patterning gives a hint about how the radial fingers differ from
+ a sampling aliasing effect (spatial Nyquist aliasing).
+ The left image is 400x400 pixels in size, and it shows a region 
+\begin_inset Formula $0\le x,y\le2000$
+\end_inset
+
+ (the upper-right quadrant).
+ The Moiré patterning gives a hint about how the radial fingers differ from
  being perfectly radial.
  
 \end_layout
 
 \begin_layout Standard
-<p> <img width=800 height=800 src="./exp-moire.png"> 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Moiré Patterns
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Moiré-Patterns"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename exp-moire.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename exp-moire-2K.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename exp-moire-4K.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Soo
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-<p> As above, but for the region <i>0 &lt; x,y &lt; 4000</i>.
- Should not be any need to point out that Moiré patterning is very sensitive
- to the sampling frequency.
- 
+The middle image shows the region 
+\begin_inset Formula $0\le x,y\le4000$
+\end_inset
+
+.
+ Of course, Moiré patterning is very sensitive to the sampling frequency.
+ The rightmost image shows 
+\begin_inset Formula $0\le x,y\le8000$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-<p> <img width=800 height=800 src="./exp-moire-2K.png"> 
-\end_layout
-
-\begin_layout Standard
-<p> As above, but for the region <i>0 &lt; x,y &lt; 8000</i>.
- 
-\end_layout
-
-\begin_layout Standard
-<p> <img width=800 height=800 src="./exp-moire-4K.png"> <p> Perhaps you are
- starting to get bored, so I will try to wrap it up.
+Perhaps you are starting to get bored, so I will try to wrap it up.
  Below is one for the rising Pochhammer symbol.
  Its normalized by a factorial, for convergence, so really its a binomial
  coefficient.
