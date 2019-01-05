@@ -1,14 +1,19 @@
 
 set term png size 1024, 768
-set out 'zero-poch-rise.png'
+# set out 'zero-poch-rise.png'
+set term postscript eps color enhanced fontscale 1.7
+set out 'zero-poch-rise.eps'
 
 # set style data linespoints
 set style data lines
 set key left
 
 set title "Excess/deficit of zeros of RPG(gpf; z)"
-set xlabel "sqrt radius"
-set ylabel "num zeros minus sqrt radius"
+set xlabel "{/Symbol @\326\140\140}r"
+set ylabel "num zeros minus {/Symbol @\326\140\140}r"
+
+set yrange [-13:18]
+set key at -350,17
 
 # set xrange [0:20]
 set xrange [0:1500]
@@ -19,5 +24,5 @@ set xzeroaxis lw 2
 #      "zero-count-poch-rise.dat" using (sqrt($1)):(1-(2+0.5*log($1))) title "" lw 2 lc 2
 
 plot "zero-count-poch-rise.dat" using (sqrt($1)):($2-sqrt($1)) title "" lw 2, \
-     "zero-count-poch-rise.dat" using (sqrt($1)):(1+(1+0.5*log(1+$1) + log(1+log($1+1)))) title "1 ± [1 + log(r+1)/2 + log(1+log(r+1))]" lw 2, \
+     "zero-count-poch-rise.dat" using (sqrt($1)):(1+(1+0.5*log(1+$1) + log(1+log($1+1)))) title "1 {/Symbol \261} [1 + log(r+1)/2 + log(1+log(r+1))]" lw 2, \
      "zero-count-poch-rise.dat" using (sqrt($1)):(1-(1+0.5*log(1+$1) + log(1+log($1+1)))) title "" lw 2 lc 2

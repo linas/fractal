@@ -36,15 +36,21 @@ set xzeroaxis lw 2
 #
 # set out 'zero-count-fixed.png'
 
-set term postscript eps color enhanced
-set out 'zero-count-fixed.eps'
+set term postscript eps color enhanced fontscale 1.8
 
 set title "Excess/deficit of zeros of EG(gpf; z)"
 set title "Excess/deficit of zeros of E(z)"
 
-set xrange [0:3500]
-# set xrange [1827:1837]
-# set yrange [-2:18]
+# set out 'zero-count-fixed.eps'
+# set key at -800,24
+# set yrange [-15:25]
+# set xrange [0:3500]
+
+set out 'zero-count-fixed-1832.eps'
+set key at 1824.7,19.5
+set xrange [1827:1837]
+set yrange [-2:20]
+
 plot "zero-count-fixed.dat" using 1:($2-$1) title "" lw 2, \
      "zero-count-fixed.dat" using 1:(1+log($1+1)+2*log(log($1+1)+1)) title "1 {/Symbol \261} (log(r+1) + 2 log(log(r+1)+1))" lw 2, \
      "zero-count-fixed.dat" using 1:(1-log($1+1)-2*log(log($1+1)+1)) title "" lw 2 lc 2, \
