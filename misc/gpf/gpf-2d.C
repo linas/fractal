@@ -137,14 +137,36 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_init(sum);
 	cpx_init(z);
 
+#define PSEUDO_HYPERBOLIC
 #ifdef PSEUDO_HYPERBOLIC
-	// Let hpx, hpy be coords of point in the upper half-plane ...
-	double hpx = re_q;
-	double hpy = im_q;
+	// Let pdx, pdy be coordinates on the Poincare disk
+	double pdx = re_q;
+	double pdy = im_q;
+	if (1.0 < pdx*pdx+pdy*pdy) return 1.0;
 
+	// Let hpx, hpy be coords of point in the Poincare upper half-plane ...
+	// double hpx = re_q;
+	// double hpy = im_q;
+	double hpd = pdx*pdx + (1.0-pdy)*(1.0-pdy);
+	double hpx = 2.0 * pdx / hpd;
+	double hpy = 1.0 - pdx*pdx - pdy*pdy;
+
+#define HOKEY
+#ifdef HOKEY
+	// Perform a hokey mapping of upper-half-plane to entire complex plane
 	double are = 1.0 / (hpy*hpy);
-// are *= are;
+	are *= are*are*are;
+
+	if (hpy<=0.0) hpy = 1.0e-16;
+	are = exp(4.0/hpy) - 1.0;
+
 	double theta = M_PI * tanh(hpx);
+#endif
+
+#ifdef FUNKY
+	// perform a funky mapping of upper-half-plane to entire complex plane
+
+#endif
 
 	double shx = are * cos(theta);
 	double shy = are * sin(theta);
