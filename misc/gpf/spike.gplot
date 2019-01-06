@@ -31,7 +31,7 @@ set xtics out rotate ( \
 # So -- 3858 is the peak.
 # spike.dat is a copy of spike-16K-500S.dat
 plot "spike.dat" using ($2/6.2831852):($3/3858.65) title "" lw 2, \
-     "spike.dat" using ($2/6.2831852):(0.2) title "slope = 0" lw 2, \
+     "spike.dat" using ($2/6.2831852):(0.2) title "" lw 2, \
      "spike.dat" using ($2/6.2831852):(0.6666*(1.0/2 - $2/6.2832)) title "slope = 2/3" lw 2, \
      "spike.dat" using ($2/6.2831852):($2/6.2832) title "slope = 1" lw 2, \
      "spike.dat" using ($2/6.2831852):(1.5*(1.0/3 - $2/6.2832)) title "slope = 3/2" lw 2, \
@@ -40,6 +40,8 @@ plot "spike.dat" using ($2/6.2831852):($3/3858.65) title "" lw 2, \
      "spike.dat" using ($2/6.2831852):(2.5*($2/6.2832 - 1.0/5)) title "slope = 5/2" lw 2, \
      "spike.dat" using ($2/6.2831852):(3*($2/6.2832 - 1.0/3)) title "slope = 3" lw 2, \
      "spike.dat" using ($2/6.2831852):(4*($2/6.2832 - 1.0/4)) title "slope = 4" lw 2
+
+#     "spike.dat" using ($2/6.2831852):(0.142857) title "" lw 2, \
 
 # So -- 178 is the least value seen in the sums; 3858 is the peak.
 #     "spike.dat" using ($2/6.2831852):((3858.65-178)*(1-(2*$2/6.2832))+178) title "off" lw 2, \
