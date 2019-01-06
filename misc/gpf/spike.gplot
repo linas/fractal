@@ -13,7 +13,7 @@ set title "Average of 500 radial slices near r=16000"
 set xlabel "{/Symbol q}/2{/Symbol p} labelled with Farey Fractions"
 set ylabel "Normalized |EG|"
 set yrange [0:1]
-set xrange [-0.003:0.503]
+set xrange [-0.004:0.504]
 
 # Successive rows of farey fractions
 set xtics out rotate ( \
@@ -29,7 +29,9 @@ set xtics out rotate ( \
 
 
 # So -- 3858 is the peak.
+# spike.dat is a copy of spike-16K-500S.dat
 plot "spike.dat" using ($2/6.2831852):($3/3858.65) title "" lw 2, \
+     "spike.dat" using ($2/6.2831852):(0.2) title "slope = 0" lw 2, \
      "spike.dat" using ($2/6.2831852):(0.6666*(1.0/2 - $2/6.2832)) title "slope = 2/3" lw 2, \
      "spike.dat" using ($2/6.2831852):($2/6.2832) title "slope = 1" lw 2, \
      "spike.dat" using ($2/6.2831852):(1.5*(1.0/3 - $2/6.2832)) title "slope = 3/2" lw 2, \
