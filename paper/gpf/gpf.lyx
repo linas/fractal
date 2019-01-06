@@ -2361,7 +2361,7 @@ height "1pt"
 \end_layout
 
 \begin_layout Section*
-Zero-free lanes
+Zero-free Lanes
 \end_layout
 
 \begin_layout Standard
@@ -2549,6 +2549,103 @@ height "1pt"
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What are the angular locations of the zero-free lanes? This is shown below,
+ and are labelled with Farey fractions, to show their positions, and with
+ a bunch of Ley lines to demonstrate their heights.
+ The graph was obtained by computing the absolute value 
+\begin_inset Formula $\left|\mbox{EG}\left(\mbox{gpf};z\right)\right|$
+\end_inset
+
+ along radial slices.
+ Plotting just one radial slice is noisy and indistinct, contradicting what
+ is visually obvious.
+ Thus, some noise cancellation is in order.
+ This can be done by averaging together multiple radial slices; the figure
+ below shows an average of 500 of them, taken near the radius 
+\begin_inset Formula $r=\left|z\right|$
+\end_inset
+
+ of about 16000.
+ The zero-free lanes are the spikes.
+ The tallest spike, at the angle of zero, was normalized to unit height;
+ it sets the overall scale.
+\end_layout
+
+\begin_layout Standard
+The spikes clearly correspond to the Farey fractions.
+ A few seem to be missing: for example, 2/9 and 1/8 seem to be missing.
+ Before jumping to conclusions, though, it might be the case that these
+ are drowned in the noise.
+ The heights of the spikes are very clearly predicted by straight lines
+ with rational slopes, and are in Farey-order.
+ The tallest spike is at 0/1, and by symmetry, also at 1/1.
+ The first Farey fraction between these two is (0+1)/(1+1)=1/2, which is
+ the second-tallest spike.
+ Between these two is the next Farey fraction; it lies between 0/1 and 1/2
+ and so is (0+1)/(1+2) = 1/3 – which is the location of the next tallest
+ spike.
+ After that, there are two Farey fractions: (0+1)/(1+3)=1/4 and (1+1)/(2+3)=
+ 2/5.
+ Argh! The pattern breaks down! Although the spike at 2/5 is indeed the
+ next tallest, the spike at 1/4 is unexpectedly short.
+ How is that even possible? Oh well.
+\end_layout
+
+\begin_layout Standard
+Anyway, the two spikes at 1/5 and 2/5 seem to be of exactly the same height.
+ The next row of the Farey triangle is 1/5, 2/7, 3/8 and 3/7.
+ Clearly, there's a tall spike at 3/7, same height as 2/7 but taller than
+ 2/8 and shorter than 1/5.
+ So something throws off the regular patterning, even though the Ley lines
+ clearly indicate that there is an exceptional amount of regularity.
+\end_layout
+
+\begin_layout Standard
+Note that the heights are absolute heights, and not the heights relative
+ to the noise floor.
+ Presuably, working at more distant radii, and taking more averages would
+ drop the noise floor; in the limit going to zero, I suppose.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Locations of Zero-free Lanes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename spike.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -3476,7 +3573,7 @@ What are all these features? How are they to be described? What do they
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -6498,7 +6595,7 @@ The visually apparent symmetries in the images here makes it quite clear
  that there is some sort of distorted modular symmetry at work, apparent
  just out of easy reach.
  The figures here whet the appetite.
- Perhaps a proper theory of these figures would stat with something simpler
+ Perhaps a proper theory of these figures would start with something simpler
  than the greatest prime factor function: certainly the divisor function
  and the Euler totient function appear to be far more regularly patterned,
  when passed through the exponential generating function.
