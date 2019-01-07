@@ -133,11 +133,42 @@ double complex gpf_lambert(double complex x)
 
 static double plot_big(double re_q, double im_q, int itermax, double param)
 {
-	cpx_t sum, z;
-	cpx_init(sum);
-	cpx_init(z);
+// #define HYPERBOLOID
+#ifdef HYPERBOLOID
+	// Let pdx, pdy be coordinates on the Poincare disk
+	double pdx = re_q;
+	double pdy = im_q;
+	double rsq = pdx*pdx+pdy*pdy;
+	if (1.0 <= rsq) return 1.0;
 
-#define PSEUDO_HYPERBOLIC
+	// Let lbx, bly be coordinates on the hyperboloid
+	// double tee = (1.0 + rsq) / (1.0 - rsq);
+	// double scale = 50.0;
+	double scale = 1.0;
+	double blx = scale * 2.0 * pdx / (1.0 - rsq);
+	double bly = scale * 2.0 * pdy / (1.0 - rsq);
+
+	re_q = blx;
+	im_q = bly;
+
+	double br = sqrt(blx*blx+bly*bly);
+	if (0.0 < br)
+	{
+		double bsin = bly / br;
+		double bcos = blx / br;
+		re_q = (exp(4.0*br) - 1.0)*bcos;
+		im_q = (exp(4.0*br) - 1.0)*bsin;
+	}
+	else
+	{
+		re_q = im_q = 0.0;
+	}
+// printf("duuude blx = %g %g re= %g %g\n", blx, bly, re_q, im_q);
+	double are = sqrt(re_q*re_q + im_q*im_q);
+	if (itermax < are) return 0.5;
+#endif
+
+// #define PSEUDO_HYPERBOLIC
 #ifdef PSEUDO_HYPERBOLIC
 	// Let pdx, pdy be coordinates on the Poincare disk
 	double pdx = re_q;
@@ -177,6 +208,9 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	im_q = shy;
 #endif
 
+	cpx_t sum, z;
+	cpx_init(sum);
+	cpx_init(z);
 	cpx_set_d(z, re_q, im_q);
 
 // #define ODF_PHASE 1
@@ -224,6 +258,46 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
+#define DIFEXPO 1
+#if DIFEXPO
+	complex double zee = re_q + I*im_q;
+	complex double zp = zee*zee;
+	double pre = creal(zp);
+	double pim = cimag(zp);
+	double are = sqrt(pre*pre + pim*pim);
+	if (itermax < are) return 0.5;
+
+	cpx_set_d(z, re_q, im_q);
+	cpx_gpf_exponential(sum, z, 40);
+
+	cpx_t sumzsq;
+	cpx_init(sumzsq);
+	cpx_set_d(z, pre, pim);
+	cpx_gpf_exponential(sumzsq, z, 40);
+
+	#ifdef SQUARE
+		cpx_t sumsq;
+		cpx_init(sumsq);
+		cpx_mul(sumsq, sum, sum);
+		cpx_sub(sum, sumzsq, sumsq);
+	#endif
+	cpx_sub(sum, sumzsq, sum);
+
+	// extract
+	mpf_t val;
+	mpf_init(val);
+	cpx_abs(val, sum);
+
+	double rv = mpf_get_d(val);
+
+	// Divide by z for plotting.
+	double r = sqrt(re_q*re_q + im_q*im_q);
+r = r*r;
+	double lr = log(r);
+	rv *= lr / r;
+
+	return rv;
+#endif
 // #define RANDY 1
 #if RANDY
 	cpx_random_exponential_shift(sum, z, itermax, 25);
@@ -243,7 +317,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#define RECIP 1
+// #define RECIP 1
 #ifdef RECIP
 
 	#ifdef PROJECT_TO_SPHERE

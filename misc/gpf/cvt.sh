@@ -1,7 +1,10 @@
 #! /bin/bash
 
-../../generate/renorm foo j 1.0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > foo.png
+../../generate/renorm bar j 0.7
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > bar.png
+
+# ../../generate/renorm foo j 1.0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > foo.png
 # cat dash.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > dash.png
 
 # cat gpf-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-phase.png
