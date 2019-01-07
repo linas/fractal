@@ -258,7 +258,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#define DIFEXPO 1
+// #define DIFEXPO 1
 #if DIFEXPO
 	complex double zee = re_q + I*im_q;
 	complex double zp = zee*zee;
@@ -281,7 +281,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 		cpx_mul(sumsq, sum, sum);
 		cpx_sub(sum, sumzsq, sumsq);
 	#endif
-	cpx_sub(sum, sumzsq, sum);
+	cpx_div_ui(sumzsq, sumzsq, 2);
+	cpx_sub(sum, sum, sumzsq);
 
 	// extract
 	mpf_t val;
@@ -292,7 +293,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
-r = r*r;
+// r = r*r;
 	double lr = log(r);
 	rv *= lr / r;
 
