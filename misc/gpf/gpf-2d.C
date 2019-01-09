@@ -136,8 +136,9 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 #define POLAR_PARAMETRIC
 #ifdef POLAR_PARAMETRIC
 	// Let pdx, pdy be coordinates on the Poincare disk
-	double pdx = re_q;
-	double pdy = im_q;
+	// Rotate by i
+	double pdx = -im_q;
+	double pdy = re_q;
 	double rsq = pdx*pdx+pdy*pdy;
 	if (1.0 <= rsq) return 1.0;
 
@@ -151,8 +152,9 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	// The parametric curve is const = sqrt(r) sin(0.5 theta)
 	// where const == hpy
-	double are = hpy / sin(0.5 * theta);
-	are = are*are;
+	double par = sin(0.5 * theta);
+	par = par*par;
+	double are = hpy*hpy / par;
 
 	// Finally, cartesian coordinates on the complex z-plane
 	double czx = are * cos(theta);
