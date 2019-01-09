@@ -133,6 +133,38 @@ double complex gpf_lambert(double complex x)
 
 static double plot_big(double re_q, double im_q, int itermax, double param)
 {
+#define POLAR_PARAMETRIC
+#ifdef POLAR_PARAMETRIC
+	// Let pdx, pdy be coordinates on the Poincare disk
+	double pdx = re_q;
+	double pdy = im_q;
+	double rsq = pdx*pdx+pdy*pdy;
+	if (1.0 <= rsq) return 1.0;
+
+	// Let hpx, hpy be coords of point in the Poincare upper half-plane ...
+	double hpd = pdx*pdx + (1.0-pdy)*(1.0-pdy);
+	double hpx = 2.0 * pdx / hpd;
+	double hpy = (1.0 - pdx*pdx - pdy*pdy) / hpd;
+
+	// As hpx runs from -inf to +inf so theta runs from 0 to 2pi
+	double theta = atan2 (hpx, 1.0) + M_PI;
+
+	// The parametric curve is const = sqrt(r) sin(0.5 theta)
+	// where const == hpy
+	double are = hpy / sin(0.5 * theta);
+	are = are*are;
+
+	// Finally, cartesian coordinates on the complex z-plane
+	double czx = are * cos(theta);
+	double czy = are * sin(theta);
+
+	if (itermax < are) return 0.5;
+
+	re_q = czx;
+	im_q = czy;
+
+#endif // POLAR_PARAMETRIC
+
 // #define HYPERBOLOID
 #ifdef HYPERBOLOID
 	// Let pdx, pdy be coordinates on the Poincare disk
@@ -180,7 +212,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	// double hpy = im_q;
 	double hpd = pdx*pdx + (1.0-pdy)*(1.0-pdy);
 	double hpx = 2.0 * pdx / hpd;
-	double hpy = 1.0 - pdx*pdx - pdy*pdy;
+	double hpy = (1.0 - pdx*pdx - pdy*pdy) / hpd;
 
 #define HOKEY
 #ifdef HOKEY
@@ -208,6 +240,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	im_q = shy;
 #endif
 
+	// ----------------------
+
 	cpx_t sum, z;
 	cpx_init(sum);
 	cpx_init(z);
@@ -233,7 +267,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define EXPO 1
+#define EXPO 1
 #if EXPO
 	cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_sine(sum, z, 20);
