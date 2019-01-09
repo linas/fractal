@@ -133,8 +133,9 @@ double complex gpf_lambert(double complex x)
 
 static double plot_big(double re_q, double im_q, int itermax, double param)
 {
-#define POLAR_PARAMETRIC
-#ifdef POLAR_PARAMETRIC
+
+#define HYPERBOLIC
+#ifdef HYPERBOLIC
 	// Let pdx, pdy be coordinates on the Poincare disk
 	// Rotate by i
 	double pdx = -im_q;
@@ -147,25 +148,42 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double hpx = 2.0 * pdx / hpd;
 	double hpy = (1.0 - pdx*pdx - pdy*pdy) / hpd;
 
+// #define HOKEY
+#ifdef HOKEY
+	// Perform a hokey mapping of upper-half-plane to entire complex plane
+	double are = 1.0 / (hpy*hpy);
+	are *= are*are*are;
+
+	if (hpy<=0.0) hpy = 1.0e-16;
+	are = exp(4.0/hpy) - 1.0;
+
+	double theta = M_PI * tanh(hpx);
+#endif
+
+#define POLAR_PARAMETRIC
+#ifdef POLAR_PARAMETRIC
 	// As hpx runs from -inf to +inf so theta runs from 0 to 2pi
 	double theta = atan2 (hpx, 1.0) + M_PI;
 
 	// The parametric curve is const = sqrt(r) sin(0.5 theta)
-	// where const == hpy
+	// For const == 1, this encloses the primary zero-free-lane.
+	// Ergo, we are interested in the map where const == 1/hpy
 	double par = sin(0.5 * theta);
 	par = par*par;
-	double are = hpy*hpy / par;
+	double are = par / (hpy*hpy);
+#endif // POLAR_PARAMETRIC
+
+	// Avoid long-running calculations.
+	if (itermax < are) return 0.5;
 
 	// Finally, cartesian coordinates on the complex z-plane
 	double czx = are * cos(theta);
 	double czy = are * sin(theta);
 
-	if (itermax < are) return 0.5;
-
 	re_q = czx;
 	im_q = czy;
 
-#endif // POLAR_PARAMETRIC
+#endif // HYPERBOLIC
 
 // #define HYPERBOLOID
 #ifdef HYPERBOLOID
@@ -200,46 +218,6 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 // printf("duuude blx = %g %g re= %g %g\n", blx, bly, re_q, im_q);
 	double are = sqrt(re_q*re_q + im_q*im_q);
 	if (itermax < are) return 0.5;
-#endif
-
-// #define PSEUDO_HYPERBOLIC
-#ifdef PSEUDO_HYPERBOLIC
-	// Let pdx, pdy be coordinates on the Poincare disk
-	double pdx = re_q;
-	double pdy = im_q;
-	if (1.0 < pdx*pdx+pdy*pdy) return 1.0;
-
-	// Let hpx, hpy be coords of point in the Poincare upper half-plane ...
-	// double hpx = re_q;
-	// double hpy = im_q;
-	double hpd = pdx*pdx + (1.0-pdy)*(1.0-pdy);
-	double hpx = 2.0 * pdx / hpd;
-	double hpy = (1.0 - pdx*pdx - pdy*pdy) / hpd;
-
-#define HOKEY
-#ifdef HOKEY
-	// Perform a hokey mapping of upper-half-plane to entire complex plane
-	double are = 1.0 / (hpy*hpy);
-	are *= are*are*are;
-
-	if (hpy<=0.0) hpy = 1.0e-16;
-	are = exp(4.0/hpy) - 1.0;
-
-	double theta = M_PI * tanh(hpx);
-#endif
-
-#ifdef FUNKY
-	// perform a funky mapping of upper-half-plane to entire complex plane
-
-#endif
-
-	double shx = are * cos(theta);
-	double shy = are * sin(theta);
-
-	if (itermax < are) return 0.5;
-
-	re_q = shx;
-	im_q = shy;
 #endif
 
 	// ----------------------
