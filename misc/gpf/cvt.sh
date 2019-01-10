@@ -1,6 +1,6 @@
 #! /bin/bash
 
-../../generate/renorm baz j 2.0
+../../generate/renorm baz j 1.0
 cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > baz.png
 
 # ../../generate/renorm foo j 1.0

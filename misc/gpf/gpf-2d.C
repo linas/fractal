@@ -137,7 +137,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 #define HYPERBOLIC
 #ifdef HYPERBOLIC
 
-#define Q_DISK
+// #define Q_DISK
 #ifdef Q_DISK
 	// This code converts from the q-disk (where q == nome) to upper half-plane.
 	// That is, the input coords are the nome, the output are half-plane coords.
@@ -147,7 +147,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double hpx = atan2(im_q, re_q) / M_PI;
 #endif // Q_DISK
 
-// #define POINCARE_DISK
+#define POINCARE_DISK
 #ifdef POINCARE_DISK
 	// This code converts from poincare disk to upper half-plane
 	// Let pdx, pdy be coordinates on the Poincare disk
@@ -163,19 +163,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double hpy = (1.0 - pdx*pdx - pdy*pdy) / hpd;
 #endif // POINCARE_DISK
 
-// #define HOKEY
-#ifdef HOKEY
-	// Perform a hokey mapping of upper-half-plane to entire complex plane
-	double are = 1.0 / (hpy*hpy);
-	are *= are*are*are;
-
-	if (hpy<=0.0) hpy = 1.0e-16;
-	are = exp(4.0/hpy) - 1.0;
-
-	double theta = M_PI * tanh(hpx);
-#endif
-
-#define POLAR_PARAMETRIC
+// #define POLAR_PARAMETRIC
 #ifdef POLAR_PARAMETRIC
 	// As hpx runs from -inf to +inf so theta runs from 0 to 2pi
 	double theta = atan2 (hpx, 1.0) + M_PI;
@@ -187,6 +175,20 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	par = par*par;
 	double are = par / (hpy*hpy);
 #endif // POLAR_PARAMETRIC
+
+#define HOKEY
+#ifdef HOKEY
+	// Perform a hokey mapping of upper-half-plane to entire complex plane
+	// Compared to the others above, this one looks the most like the
+	// original deal (when used with Poincare disk map.)
+	double are = 1.0 / (hpy*hpy);
+	// are *= are*are*are;
+
+	if (hpy<=0.0) hpy = 1.0e-16;
+	are = exp(4.0/hpy) - 1.0;
+
+	double theta = M_PI * tanh(hpx);
+#endif
 
 	// Avoid long-running calculations.
 	if (itermax < are) return 0.5;
@@ -262,7 +264,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#define EXPO 1
+// #define EXPO 1
 #if EXPO
 	cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_sine(sum, z, 20);
@@ -289,6 +291,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 // #define DIFEXPO 1
 #if DIFEXPO
+	// This is mostly junk, it takes the difference between the
+	// expo and its square, and its .. pretty but its junk.
 	complex double zee = re_q + I*im_q;
 	complex double zp = zee*zee;
 	double pre = creal(zp);
@@ -347,27 +351,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define RECIP 1
+#define RECIP 1
 #ifdef RECIP
-
-	#ifdef PROJECT_TO_SPHERE
-		// Perform a rojection to the Riemann spehre.
-		// Sucks, mostly. Sucks completely, actually.
-		// printf("duuude in= %f %f ", re_q, im_q);
-		double rr = sqrt(re_q*re_q + im_q*im_q);
-		if (1.0 <= rr) return 0.0;
-		re_q /= rr;
-		im_q /= rr;
-		rr = (1.0 + rr)/(1.0 - rr);
-		rr = pow(rr, param);
-
-		re_q *= rr;
-		im_q *= rr;
-		// printf("  out=%f %f\n", re_q, im_q);
-
-		if (itermax < rr) return 0.0;
-		cpx_set_d(z, re_q, im_q);
-	#endif // PROJECT_TO_SPHERE
 
 	// #define UN_CIRCLE 1
 	#ifdef UN_CIRCLE
