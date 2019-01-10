@@ -136,6 +136,20 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 #define HYPERBOLIC
 #ifdef HYPERBOLIC
+
+#define Q_DISK
+#ifdef Q_DISK
+	// This code converts from the q-disk (where q == nome) to upper half-plane.
+	// That is, the input coords are the nome, the output are half-plane coords.
+	double mod = sqrt(re_q * re_q + im_q * im_q);
+	if (1.0 <= mod) return 1.0;
+	double hpy = -log(mod) / M_PI;
+	double hpx = atan2(im_q, re_q) / M_PI;
+#endif // Q_DISK
+
+// #define POINCARE_DISK
+#ifdef POINCARE_DISK
+	// This code converts from poincare disk to upper half-plane
 	// Let pdx, pdy be coordinates on the Poincare disk
 	// Rotate by i
 	double pdx = -im_q;
@@ -147,6 +161,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double hpd = pdx*pdx + (1.0-pdy)*(1.0-pdy);
 	double hpx = 2.0 * pdx / hpd;
 	double hpy = (1.0 - pdx*pdx - pdy*pdy) / hpd;
+#endif // POINCARE_DISK
 
 // #define HOKEY
 #ifdef HOKEY
