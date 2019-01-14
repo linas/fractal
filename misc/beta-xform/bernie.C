@@ -1,7 +1,14 @@
 /*
  * bernie.C
  *
- * Altered simplified algorithmic Bernoulli map
+ * Draw Feigenboum-style bifurcation diagrams for the beta-map
+ * and lots of other maps. These diagrams collect up the "invariant
+ * measure" as they are iterated.
+ *
+ * Some of the maps replace multiplication by multiplication-like
+ * bit-mangling algorithms that are simpler (e.g. don't propagate
+ * a carry bit).
+ *
  * Dec 2017
  */
 
