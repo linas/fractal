@@ -72,7 +72,8 @@ static void bifurcation_diagram (float *array,
 		K = Korg + t;
 #endif
 
-		COMPLEX z = 1.0;
+		// COMPLEX z = 1.0;
+		COMPLEX z = cexp(x*2.0*M_PI*I);
 		/* OK, now start iterating the beta map */
 		for (int iter=0; iter < 50; iter++) // number here causes banding...
 		{
