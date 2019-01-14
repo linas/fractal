@@ -298,8 +298,11 @@
 # ../../generate/renorm alldisk j 1 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > alldisk.png
 
-../../generate/renorm betadisk j 1 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > betadisk.png
+# ../../generate/renorm betadisk j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > betadisk.png
+
+../../generate/renorm moment j 4 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > moment.png
 
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4
