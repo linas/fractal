@@ -19,7 +19,7 @@ long divisor_sum (long n, long (*f)(long))
 	for (long d=1; 2*d <= n; d++)
 	{
 		if (n%d) continue;
-		sum += f(n);
+		sum += f(d);
 	}
 	sum += f(n);
 	return sum;
@@ -33,19 +33,21 @@ long moebius_invert (long n, long (*f)(long))
 	for (long d=1; 2*d <= n; d++)
 	{
 		if (n%d) continue;
-		sum += f(n) * moebius_mu (n/d);
+		sum += f(d) * moebius_mu (n/d);
 	}
 	sum += f(n);
 	return sum;
 }
 
-main(int argc, char* argv[])
+long gpfl(long n) { return gpf(n); }
+
+int main(int argc, char* argv[])
 {
 	for (long n=1; n<25; n++)
 	{
-		long sum = divisor_sum(n, gpf);
-		long inv = moebius_invert(n, gpf);
-		long gfn = gpf(n);
-		printf("n=%d	gpf=%d	sum=%d	inv=%d\n", n, gfn, sum, inv);
+		long sum = divisor_sum(n, gpfl);
+		long inv = moebius_invert(n, gpfl);
+		long gfn = gpfl(n);
+		printf("n=%ld	gpf=%ld	sum=%ld	inv=%ld\n", n, gfn, sum, inv);
 	}
 }
