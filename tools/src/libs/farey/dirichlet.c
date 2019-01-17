@@ -66,6 +66,15 @@ long unit_direct(long k, long n)
 DECLARE_UL_CACHE(k2_cache);
 DECLARE_UL_CACHE(m2_cache);
 
+#define RUN_CACHE(KAY,CAK) \
+	if (KAY == k) { \
+		if (ul_one_d_cache_check(&CAK, n)) \
+			return ul_one_d_cache_fetch(&CAK, n); \
+		long un = unit_direct(k,n); \
+		ul_one_d_cache_store(&CAK, un, n); \
+		return un; \
+	}
+
 long unit(long k, long n)
 {
 	if (n < 1) { return 0; } // actually an error.
@@ -73,22 +82,8 @@ long unit(long k, long n)
 	if (1 == k) { return 1; }     // plus-one, the "unit"
 	if (-1 == k) { return moebius_mu(n); } // minus-one, the inverse.
 
-	if (2 == k)
-	{
-		if (ul_one_d_cache_check(&k2_cache, n))
-			return ul_one_d_cache_fetch(&k2_cache, n);
-		long un = unit_direct(k,n);
-		ul_one_d_cache_store(&k2_cache, un, n);
-		return un;
-	}
-	if (-2 == k)
-	{
-		if (ul_one_d_cache_check(&m2_cache, n))
-			return ul_one_d_cache_fetch(&m2_cache, n);
-		long un = unit_direct(k,n);
-		ul_one_d_cache_store(&m2_cache, un, n);
-		return un;
-	}
+	RUN_CACHE(2, k2_cache);
+	RUN_CACHE(-2, m2_cache);
 
 	return unit_direct(k,n);
 
@@ -157,6 +152,8 @@ int main()
    nerr += test_diff(0);
    nerr += test_diff(1);
    nerr += test_diff(2);
+   nerr += test_diff(3);
+   nerr += test_diff(4);
 
 	if (0 == nerr) printf("Dirichlet unit test passed\n");
 	return nerr;
