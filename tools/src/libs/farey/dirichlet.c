@@ -21,15 +21,20 @@
 
 long unit(long k, long n);
 
-long unit_direct(long k, long n)
+static long unit_direct(long k, long n)
 {
+#if CORRECT_BUT_NOT_NEEDED
 	if (n < 1) { return 0; } // actually an error.
 	if (0 == k) { return n==1; }  // the "identity"
 	if (1 == k) { return 1; }     // plus-one, the "unit"
 	if (-1 == k) { return moebius_mu(n); } // minus-one, the inverse.
+#endif // CORRECT_BUT_NOT_NEEDED
 
 	if (1 < k)
 	{
+// There is a faster implementation, using the "prime cache"
+// implementation used in the divisor function. But this is enough
+// for just right now.
 #define SLOW_BUT_SIMPLE
 #ifdef SLOW_BUT_SIMPLE
 		long sum = 0;
@@ -63,6 +68,8 @@ long unit_direct(long k, long n)
 }
 
 // Manual cache
+// This is super-sloppy, we should use a 2D cache, but I am
+// too lazy to deal with that just right now. This is enough.
 DECLARE_UL_CACHE(k2_cache);
 DECLARE_UL_CACHE(k3_cache);
 DECLARE_UL_CACHE(k4_cache);
@@ -96,6 +103,7 @@ long unit(long k, long n)
 	if (1 == k) { return 1; }     // plus-one, the "unit"
 	if (-1 == k) { return moebius_mu(n); } // minus-one, the inverse.
 
+	// El slobola cacho
 	RUN_CACHE(2, k2_cache);
 	RUN_CACHE(-2, m2_cache);
 	RUN_CACHE(3, k3_cache);
@@ -153,13 +161,15 @@ long test_unit(void)
 	return have_error;
 }
 
-long test_diff(int d)
+long test_diff(int rng, int d)
 {
 	long have_error=0;
 	long nmax=10000;
-	for (long n=1; n<=nmax; n++)
+	for (int k=-rng; k<= +rng; k++)
 	{
-		for (int k=-d; k<= +d; k++)
+		if (rng < d-k) continue;
+		if (d-k < -rng) continue;
+		for (long n=1; n<=nmax; n++)
 		{
 			long convo = convoid(k, d-k, n);
 			long diff = unit(d, n);
@@ -174,14 +184,16 @@ long test_diff(int d)
 	return have_error;
 }
 
+
 int main()
 {
    long nerr = test_unit();
-   nerr += test_diff(0);
-   nerr += test_diff(1);
-   nerr += test_diff(2);
-   nerr += test_diff(3);
-   nerr += test_diff(4);
+
+	for (int d=-9; d<10; d++)
+	{
+		nerr += test_diff(9, d);
+printf("done w/ d=%d\n", d);
+	}
 
 	if (0 == nerr) printf("Dirichlet unit test passed\n");
 	return nerr;
