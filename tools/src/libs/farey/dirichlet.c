@@ -19,15 +19,14 @@
 #include "cache.h"
 #include "moebius.h"
 
-// Manual cache
-DECLARE_UL_CACHE(k2_cache);
+long unit(long k, long n);
 
-
-long unit(long k, long n)
+long unit_direct(long k, long n)
 {
-	if (0 == k) { return n==1; }
-	if (1 == k) { return 1; }
-	if (-1 == k) { return moebius_mu(n); }
+	if (n < 1) { return 0; } // actually an error.
+	if (0 == k) { return n==1; }  // the "identity"
+	if (1 == k) { return 1; }     // plus-one, the "unit"
+	if (-1 == k) { return moebius_mu(n); } // minus-one, the inverse.
 
 	if (1 < k)
 	{
@@ -57,6 +56,41 @@ long unit(long k, long n)
 		return sum;
 #endif // SLOW_BUT_SIMPLE
 	}
+
+	fprintf(stderr, "Internal error Dirichelt!\n");
+	exit(1);
+	return 0;
+}
+
+// Manual cache
+DECLARE_UL_CACHE(k2_cache);
+DECLARE_UL_CACHE(m2_cache);
+
+long unit(long k, long n)
+{
+	if (n < 1) { return 0; } // actually an error.
+	if (0 == k) { return n==1; }  // the "identity"
+	if (1 == k) { return 1; }     // plus-one, the "unit"
+	if (-1 == k) { return moebius_mu(n); } // minus-one, the inverse.
+
+	if (2 == k)
+	{
+		if (ul_one_d_cache_check(&k2_cache, n))
+			return ul_one_d_cache_fetch(&k2_cache, n);
+		long un = unit_direct(k,n);
+		ul_one_d_cache_store(&k2_cache, un, n);
+		return un;
+	}
+	if (-2 == k)
+	{
+		if (ul_one_d_cache_check(&m2_cache, n))
+			return ul_one_d_cache_fetch(&m2_cache, n);
+		long un = unit_direct(k,n);
+		ul_one_d_cache_store(&m2_cache, un, n);
+		return un;
+	}
+
+	return unit_direct(k,n);
 
 	fprintf(stderr, "Internal error Dirichelt!\n");
 	exit(1);
@@ -122,6 +156,7 @@ int main()
    long nerr = test_unit();
    nerr += test_diff(0);
    nerr += test_diff(1);
+   nerr += test_diff(2);
 
 	if (0 == nerr) printf("Dirichlet unit test passed\n");
 	return nerr;
