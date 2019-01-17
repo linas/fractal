@@ -64,7 +64,21 @@ long unit_direct(long k, long n)
 
 // Manual cache
 DECLARE_UL_CACHE(k2_cache);
+DECLARE_UL_CACHE(k3_cache);
+DECLARE_UL_CACHE(k4_cache);
+DECLARE_UL_CACHE(k5_cache);
+DECLARE_UL_CACHE(k6_cache);
+DECLARE_UL_CACHE(k7_cache);
+DECLARE_UL_CACHE(k8_cache);
+DECLARE_UL_CACHE(k9_cache);
 DECLARE_UL_CACHE(m2_cache);
+DECLARE_UL_CACHE(m3_cache);
+DECLARE_UL_CACHE(m4_cache);
+DECLARE_UL_CACHE(m5_cache);
+DECLARE_UL_CACHE(m6_cache);
+DECLARE_UL_CACHE(m7_cache);
+DECLARE_UL_CACHE(m8_cache);
+DECLARE_UL_CACHE(m9_cache);
 
 #define RUN_CACHE(KAY,CAK) \
 	if (KAY == k) { \
@@ -84,6 +98,20 @@ long unit(long k, long n)
 
 	RUN_CACHE(2, k2_cache);
 	RUN_CACHE(-2, m2_cache);
+	RUN_CACHE(3, k3_cache);
+	RUN_CACHE(-3, m3_cache);
+	RUN_CACHE(4, k4_cache);
+	RUN_CACHE(-4, m4_cache);
+	RUN_CACHE(5, k5_cache);
+	RUN_CACHE(-5, m5_cache);
+	RUN_CACHE(6, k6_cache);
+	RUN_CACHE(-6, m6_cache);
+	RUN_CACHE(7, k7_cache);
+	RUN_CACHE(-7, m7_cache);
+	RUN_CACHE(8, k8_cache);
+	RUN_CACHE(-8, m8_cache);
+	RUN_CACHE(9, k9_cache);
+	RUN_CACHE(-9, m9_cache);
 
 	return unit_direct(k,n);
 
