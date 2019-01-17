@@ -127,7 +127,7 @@ long unit(long k, long n)
 	return 0;
 }
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
