@@ -15,6 +15,7 @@ unity: $(FUNC)
 
 dirichlet: genfunc-2d
 	ln -f genfunc-2d dirichlet
+	ln -f genfunc-2d dirichlet_big
 
 .o:
 	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++

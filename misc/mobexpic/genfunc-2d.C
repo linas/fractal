@@ -82,8 +82,8 @@ static double dirichlet(double re_q, double im_q, int itermax, double param)
 
 	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, fun);
-	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
-	// return cabs(g);
+	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+	return cabs(g);
 }
 
 static double dirichlet_big(double re_q, double im_q, int itermax, double param)
