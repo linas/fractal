@@ -7,7 +7,7 @@
  * So:
  * k=0  unit(0, 1)=1 unit(0, n)=0 for n>1
  * k=1  unit(1, n)=1 
- * k in general, unit(k,n) = (unit(k) * unit(1))(n)
+ * k in general, unit(k,n) = (unit(k-1) * unit(1))(n)
  * k=-1 unit (-1,n) = mobius mu(n)
  * etc.
  *
@@ -17,9 +17,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "cache.h"
+#include "dirichlet.h"
 #include "moebius.h"
-
-long unit(long k, long n);
 
 static long unit_direct(long k, long n)
 {
