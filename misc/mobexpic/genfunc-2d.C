@@ -52,7 +52,7 @@ double complex ordinary_genfunc(double complex x, long (*func)(long))
  */
 double complex exponential_genfunc(long double complex x, long (*func)(long))
 {
-	long double complex sum = 0;
+	long double complex sum = 0.0;
 	long double complex xn = x;
 
 	if (cabsl(x) < MAX_PREC) return x;
@@ -64,6 +64,7 @@ double complex exponential_genfunc(long double complex x, long (*func)(long))
 		if (n*cabsl(xn) < MAX_PREC*cabsl(sum)) break;
 		if (max_iter < n) break;
 	}
+	sum += 1.0;
 
 	long double scale = expl(-cabsl(x));
 	sum *= scale;
