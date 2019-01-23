@@ -4,11 +4,16 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass article
+\textclass amsart
 \begin_preamble
 \usepackage{url} 
 \end_preamble
 \use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -194,13 +199,14 @@ U_{nk}=\begin{cases}
 The explicitly visual lower-triangular form is
 \begin_inset Formula 
 \[
-U=\left[\begin{array}{cccccc}
+U=\left[\begin{array}{ccccccc}
 1\\
 1 & 1\\
 1 & 0 & 1\\
 1 & 1 & 0 & 1\\
 1 & 0 & 0 & 0 & 1\\
-1 & 1 & 1 & 0 & 0 & 1
+1 & 1 & 1 & 0 & 0 & 1\\
+\vdots &  &  &  &  &  & \ddots
 \end{array}\right]
 \]
 
@@ -267,7 +273,7 @@ divisor
 \end_layout
 
 \begin_layout Subsection*
-Jordan decomposition
+Questions
 \end_layout
 
 \begin_layout Standard
@@ -285,13 +291,15 @@ The matrix
 \end_inset
 
 .
+ There are not any others.
  Any triangular matrix has all eigenvalues on the diagonal, so this has
- a huge geometric multiplicity; we conclude it is not diagonalizable.
+ a huge algebraic multiplicity; we conclude it is not diagonalizable.
  The obvious questions are:
 \end_layout
 
 \begin_layout Itemize
-What is the similarity matrix that brings it into Jordan normal form? What
+It can be brought into Jordan normal form.
+ What is the similarity matrix that brings it into Jordan normal form? What
  does that similarity matrix 
 \begin_inset Quotes eld
 \end_inset
@@ -304,13 +312,19 @@ mean
 \end_layout
 
 \begin_layout Itemize
+The integers are not algebraically closed; perhaps it makes more sense to
+ ask about the Frobenius normal form?
+\end_layout
+
+\begin_layout Itemize
 If the matrix is treated as an operator, in some kind of vector space (say
  Banach 
 \begin_inset Formula $\ell_{p}$
 \end_inset
 
- space, for example), what is it's spectrum? (It will not be a single point,
- in general, but what will it be?) 
+ space, for example), what is it's spectrum? It will not be a single point,
+ in general, but what will it be? That is, the spectrum include the point-spectr
+um of eigenvalues, but is in general larger.
 \end_layout
 
 \begin_layout Itemize
@@ -326,8 +340,8 @@ Treating
 \begin_inset Formula $\mu$
 \end_inset
 
-) as a lowering operator, what are it's coherent states? But this might
- not make sense, since the algebra is Abelian, 
+) as a lowering operator, what are it's coherent states? Does this question
+ even make sense? The algebra is Abelian, 
 \begin_inset Formula $D$
 \end_inset
 
@@ -335,7 +349,14 @@ Treating
 \begin_inset Formula $D^{-1}$
 \end_inset
 
- commute, so they are not ladder operators.
+ commute, so they cannot be ladder operators in the normal sense.
+ Indeed, coherent states are eigenstates of ladder operators, and we already
+ concluded that there is only one eigenvector.
+ So doing better requires finding some space in which 
+\begin_inset Formula $D$
+\end_inset
+
+ has a non-trivial spectrum, a non-trivial structure.
  
 \end_layout
 
@@ -376,8 +397,8 @@ So, write
  bigger:
 \begin_inset Formula 
 \[
-D=\left[\begin{array}{cccccccccc}
-1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+D=\left[\begin{array}{ccccccccccc}
+1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & \cdots\\
  & 1 &  & 1 &  & 1 &  & 1 &  & 1\\
  &  & 1 &  &  & 1 &  &  & 1\\
  &  &  & 1 &  &  &  & 1\\
@@ -386,9 +407,10 @@ D=\left[\begin{array}{cccccccccc}
  &  &  &  &  &  & 1\\
  &  &  &  &  &  &  & 1\\
  &  &  &  &  &  &  &  & 1\\
- &  &  &  &  &  &  &  &  & 1
-\end{array}\right]\quad D^{-1}=\left[\begin{array}{cccccccccc}
-1 & -1 & -1 &  & -1 & 1 & -1 &  &  & 1\\
+ &  &  &  &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  &  &  &  & \ddots
+\end{array}\right]\quad D^{-1}=\left[\begin{array}{ccccccccccc}
+1 & -1 & -1 &  & -1 & 1 & -1 &  &  & 1 & \cdots\\
  & 1 &  & -1 &  & -1\\
  &  & 1 &  &  & -1 &  &  & -1\\
  &  &  & 1 &  &  &  & -1\\
@@ -397,7 +419,8 @@ D=\left[\begin{array}{cccccccccc}
  &  &  &  &  &  & 1\\
  &  &  &  &  &  &  & 1\\
  &  &  &  &  &  &  &  & 1\\
- &  &  &  &  &  &  &  &  & 1
+ &  &  &  &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  &  &  &  & \ddots
 \end{array}\right]
 \]
 
@@ -593,6 +616,206 @@ This goes nowhere, since the algebra is Abelian:
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection*
+Jordan Decomposition
+\end_layout
+
+\begin_layout Standard
+To find the Jordan decomposition, we look for the generalized eigenvectors.
+ The first one is already 
+\begin_inset Formula $D\varepsilon=\varepsilon$
+\end_inset
+
+.
+ It's useful to define 
+\begin_inset Formula $\varepsilon_{1}=\varepsilon$
+\end_inset
+
+.
+ The second one must be 
+\begin_inset Formula $\left(D-\lambda I\right)\varepsilon_{2}=\varepsilon_{1}$
+\end_inset
+
+ with 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ and 
+\begin_inset Formula $I$
+\end_inset
+
+ the identity matrix.
+ These are easier to visually read off if we write
+\begin_inset Formula 
+\[
+D-I=\left[\begin{array}{ccccccccccc}
+0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & \cdots\\
+ & 0 &  & 1 &  & 1 &  & 1 &  & 1\\
+ &  & 0 &  &  & 1 &  &  & 1\\
+ &  &  & 0 &  &  &  & 1\\
+ &  &  &  & 0 &  &  &  &  & 1\\
+ &  &  &  &  & 0\\
+ &  &  &  &  &  & 0\\
+ &  &  &  &  &  &  & 0\\
+ &  &  &  &  &  &  &  & 0\\
+ &  &  &  &  &  &  &  &  & 0\\
+ &  &  &  &  &  &  &  &  &  & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+Thus, 
+\begin_inset Formula $\varepsilon_{2}=\left(a,1,0,\cdots\right)$
+\end_inset
+
+ fills the bill, for any 
+\begin_inset Formula $a$
+\end_inset
+
+.
+  It spans a one-dimensional affine space.
+ In the following, 
+\begin_inset Formula $\varepsilon_{2}$
+\end_inset
+
+ will be called a 'generalized eigenvector' even though any vector from
+ the affine space will do; the generalized vectors are actually classes
+ of vectors.
+ 
+\end_layout
+
+\begin_layout Standard
+The next obvious one is 
+\begin_inset Formula $\varepsilon_{3}=\left(b,0,1,0,\cdots\right)$
+\end_inset
+
+ for any 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $\left(D-I\right)\varepsilon_{3}=\varepsilon_{1}$
+\end_inset
+
+.
+ These are necessarily in distinct Jordan chains.
+ Next comes 
+\begin_inset Formula $\varepsilon_{4}=\left(c,d,a-d-1,1,0,\cdots\right)$
+\end_inset
+
+ which obeys 
+\begin_inset Formula $\left(D-I\right)\varepsilon_{4}=\varepsilon_{2}$
+\end_inset
+
+, so its part of an existing Jordan chain.
+ This was written so that the 
+\begin_inset Formula $a$
+\end_inset
+
+ in 
+\begin_inset Formula $\varepsilon_{4}$
+\end_inset
+
+ is the same 
+\begin_inset Formula $a$
+\end_inset
+
+ as in 
+\begin_inset Formula $\varepsilon_{2}$
+\end_inset
+
+.
+ It spans a two-dimensional affine space (
+\emph on
+i.e.
+
+\emph default
+ holding 
+\begin_inset Formula $a$
+\end_inset
+
+ constant).
+ Then what? 
+\end_layout
+
+\begin_layout Standard
+Clearly, for any prime number 
+\begin_inset Formula $p$
+\end_inset
+
+ one has 
+\begin_inset Formula $\varepsilon_{p}=\left(a,0,\cdots,0,1,0,\cdots\right)$
+\end_inset
+
+ starts a new chain: 
+\begin_inset Formula $\left(D-I\right)\varepsilon_{p}=\varepsilon_{1}$
+\end_inset
+
+.
+ The next interesting composite is 
+\begin_inset Formula $6=1\cdot2\cdot3$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\varepsilon_{6}=\left(a,b,c,-1,-\left(b+c\right),1,0,\cdots\right)$
+\end_inset
+
+must necessarily join the chain of it's greatest prime factor: 
+\begin_inset Formula $\left(D-I\right)\varepsilon_{6}=\varepsilon_{3}$
+\end_inset
+
+.
+ There is no other way: so 
+\begin_inset Formula $\varepsilon_{n}$
+\end_inset
+
+ is necessarily a vector of length 
+\begin_inset Formula $n$
+\end_inset
+
+, with a 1 in the last position.
+ As this multiplies through, it will neccessarily hit the row with the greatest
+ prime factor in it, and this row will necessarily have only one non-zero
+ entry in it.
+ Thus, we have proven:
+\end_layout
+
+\begin_layout Lemma*
+Every Jordan chain is of length two, so that for any natural number 
+\begin_inset Formula $n$
+\end_inset
+
+, the generalized eigenvectors are 
+\begin_inset Formula $\varepsilon_{n}$
+\end_inset
+
+, which after one iteration reduces to 
+\begin_inset Formula $\varepsilon_{\mbox{gpf}\left(n\right)}=D\varepsilon_{n}$
+\end_inset
+
+ and then again to 
+\begin_inset Formula $\varepsilon_{1}=D\varepsilon_{\mbox{gpf}\left(n\right)}$
+\end_inset
+
+.
+ Here 
+\begin_inset Formula $\mbox{gpf}\left(n\right)$
+\end_inset
+
+ is the greatest prime factor of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+How can one characterize the affine spaces? 
 \end_layout
 
 \end_body
