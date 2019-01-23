@@ -142,7 +142,7 @@ so that
  It is conventional to define the one-unit as 
 \begin_inset Formula 
 \[
-1\left(n\right)=1\quad\mbox{for all }n
+\mathit{1}\left(n\right)=1\quad\mbox{for all }n
 \]
 
 \end_inset
@@ -154,7 +154,7 @@ Define the Mobius
  arithmetic sequence as minus-one, i.e.
 \begin_inset Formula 
 \[
-\mu*1=\varepsilon
+\mu*\mathit{1}=\varepsilon
 \]
 
 \end_inset
@@ -171,7 +171,7 @@ The one-unit can calso be written as an infinite-dimensional matrix.
  Write
 \begin_inset Formula 
 \[
-\left(f*1\right)\left(n\right)=\sum_{d|n}f\left(d\right)=\sum_{k=1}^{\infty}U_{nk}f\left(k\right)
+\left(f*\mathit{1}\right)\left(n\right)=\sum_{d|n}f\left(d\right)=\sum_{k=1}^{\infty}U_{nk}f\left(k\right)
 \]
 
 \end_inset
@@ -217,7 +217,26 @@ That is, the
 
 .
  It is strongly reminiscent of a Bernoulli shift.
- I find it more convenient to work with the upper-triangular form, defined
+ This can be empahsized by writing:
+\begin_inset Formula 
+\[
+U_{nk}=\begin{cases}
+\mathit{1}\left(\frac{n}{k}\right) & \mbox{if }k\mbox{ divides }n\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+so that only multiples of 
+\begin_inset Formula $k$
+\end_inset
+
+ show up, and there are zeros otherwise.
+\end_layout
+
+\begin_layout Standard
+I find it more convenient to work with the upper-triangular form, defined
  as 
 \begin_inset Formula 
 \[
@@ -239,6 +258,12 @@ divisor
 \end_inset
 
  as it has obvious relationships to the divisor function.
+ The reson that 
+\begin_inset Formula $D$
+\end_inset
+
+ is nicer is that right-eigenvectors, if they exist, are always finite.
+ As it turns out, only one exists.
 \end_layout
 
 \begin_layout Subsection*
@@ -301,7 +326,7 @@ Treating
 \begin_inset Formula $\mu$
 \end_inset
 
-) as a lowering operator, what are it's coherent states?
+) as a lowering operator, what are it's coherent states? 
 \end_layout
 
 \begin_layout Itemize
@@ -352,6 +377,189 @@ Whenever one has ladder operators, one can always define
 \end_inset
 
  positive definite? Is this trite, or is there anything deep, here? 
+\end_layout
+
+\begin_layout Subsection*
+Inverse
+\end_layout
+
+\begin_layout Standard
+So, write 
+\begin_inset Formula $D$
+\end_inset
+
+ and 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ bigger:
+\begin_inset Formula 
+\[
+D=\left[\begin{array}{cccccccccc}
+1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+ & 1 &  & 1 &  & 1 &  & 1 &  & 1\\
+ &  & 1 &  &  & 1 &  &  & 1\\
+ &  &  & 1 &  &  &  & 1\\
+ &  &  &  & 1 &  &  &  &  & 1\\
+ &  &  &  &  & 1\\
+ &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  &  &  & 1
+\end{array}\right]\quad D^{-1}=\left[\begin{array}{cccccccccc}
+1 & -1 & -1 &  & -1 & 1 & -1 &  &  & 1\\
+ & 1 &  & -1 &  & -1\\
+ &  & 1 &  &  & -1 &  &  & -1\\
+ &  &  & 1 &  &  &  & -1\\
+ &  &  &  & 1 &  &  &  &  & -1\\
+ &  &  &  &  & 1\\
+ &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  &  & 1\\
+ &  &  &  &  &  &  &  &  & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+The matrix entries of 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ are given by the Mobius 
+\begin_inset Formula $\mu$
+\end_inset
+
+ function
+\begin_inset Formula 
+\[
+\left[D^{-1}\right]_{nk}=\begin{cases}
+\mu\left(\frac{k}{n}\right) & \mbox{if }n\mbox{ divides }k\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+So just as before, each row of 
+\begin_inset Formula $D$
+\end_inset
+
+ looks like a shift, each row is just the Mobius 
+\begin_inset Formula $\mu$
+\end_inset
+
+ with zeros interspersed.
+ (I'm getting a feeling of 
+\emph on
+deja vu
+\emph default
+, did I not write this same text ten years ago? Where is it? It dead-ended
+ back then...)
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ is both a left and right inverse, because Dirichlet convolution is commutative.
+\end_layout
+
+\begin_layout Subsection*
+Some fun facts
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+ be the vector given by vector components 
+\begin_inset Formula $s_{n}=n^{-s}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\zeta=Ds$
+\end_inset
+
+, then the vector components of 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ are 
+\begin_inset Formula $\zeta_{k}=k^{-s}\zeta\left(s\right)$
+\end_inset
+
+.
+ This is not 
+\begin_inset Quotes eld
+\end_inset
+
+deep
+\begin_inset Quotes erd
+\end_inset
+
+, this is 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+, but it's somehow 
+\begin_inset Quotes eld
+\end_inset
+
+Hmm...
+\begin_inset Quotes erd
+\end_inset
+
+ inducing.
+\end_layout
+
+\begin_layout Standard
+Clearly, a similar identity holds for any completely multiplicative sequence.
+ That is, if 
+\begin_inset Formula $f\left(mn\right)=f\left(m\right)f\left(n\right)$
+\end_inset
+
+ for all integers 
+\begin_inset Formula $m,n$
+\end_inset
+
+ then writing 
+\begin_inset Formula $g=Df$
+\end_inset
+
+ one has that 
+\begin_inset Formula 
+\[
+g\left(1\right)=\sum_{n=1}^{\infty}f\left(n\right)\quad\mbox{and}\quad g\left(k\right)=f\left(k\right)g\left(1\right)
+\]
+
+\end_inset
+
+ which is obviously a formal series when the summation does not numerically
+ converge.
+\end_layout
+
+\begin_layout Standard
+Clearly, more 
+\begin_inset Quotes eld
+\end_inset
+
+fun facts
+\begin_inset Quotes erd
+\end_inset
+
+ hold for Lambert series, and so on.
+\end_layout
+
+\begin_layout Subsection*
+Momenta
 \end_layout
 
 \end_body
