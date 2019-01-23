@@ -786,7 +786,7 @@ must necessarily join the chain of it's greatest prime factor:
 \end_layout
 
 \begin_layout Lemma*
-Every Jordan chain is of length two, so that for any natural number 
+Every Jordan chain is of length three, so that for any natural number 
 \begin_inset Formula $n$
 \end_inset
 
@@ -795,11 +795,15 @@ Every Jordan chain is of length two, so that for any natural number
 \end_inset
 
 , which after one iteration reduces to 
-\begin_inset Formula $\varepsilon_{\mbox{gpf}\left(n\right)}=D\varepsilon_{n}$
+\begin_inset Formula $\varepsilon_{\mbox{gpf}\left(n\right)}=\left(D-I\right)\varepsilon_{n}$
 \end_inset
 
  and then again to 
-\begin_inset Formula $\varepsilon_{1}=D\varepsilon_{\mbox{gpf}\left(n\right)}$
+\begin_inset Formula $\varepsilon_{1}=\left(D-I\right)\varepsilon_{\mbox{gpf}\left(n\right)}$
+\end_inset
+
+ and finally 
+\begin_inset Formula $\left(D-I\right)\varepsilon_{1}=0$
 \end_inset
 
 .
@@ -815,7 +819,199 @@ Every Jordan chain is of length two, so that for any natural number
 \end_layout
 
 \begin_layout Standard
-How can one characterize the affine spaces? 
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How can one characterize the affine spaces? It seems that there are only
+ two to characterize: those for primes, and those for composites.
+ Let 
+\begin_inset Formula $e_{n}$
+\end_inset
+
+ be the standard-notation basis vector: i.e.
+ all zero's except for a 1 in the 
+\begin_inset Formula $n$
+\end_inset
+
+'th location.
+ 
+\end_layout
+
+\begin_layout Standard
+To be fully general, let 
+\begin_inset Formula $\varepsilon_{1}=ce_{1}$
+\end_inset
+
+for some constant 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ The above implicitly assumed 
+\begin_inset Formula $c=1$
+\end_inset
+
+, but the general form seems more enlightening.
+ Write elements of the affine space as 
+\begin_inset Formula 
+\[
+\varepsilon_{n}=\sum_{k=1}^{n}a_{nk}e_{k}
+\]
+
+\end_inset
+
+with various constraints applied to the 
+\begin_inset Formula $a_{nk}$
+\end_inset
+
+ to be discovered.
+ The defintion only makes sense for 
+\begin_inset Formula $a_{nn}\ne0$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $a_{11}=c$
+\end_inset
+
+ and it is useful to reference all of the later affine spaces off of the
+ same coordinates as the earlier ones.
+ That is, for prime 
+\begin_inset Formula $p$
+\end_inset
+
+, a representative 
+\begin_inset Formula $\varepsilon_{p}$
+\end_inset
+
+ is to be chosen so that 
+\begin_inset Formula $D\varepsilon_{p}=\varepsilon_{1}$
+\end_inset
+
+ with 
+\begin_inset Formula $a_{11}=c$
+\end_inset
+
+ and not some other value.
+ Likewise for the composites.
+ That is, the Jordan chain should be explicitly conserved for each representativ
+e.
+ This immediately forces one constraint: 
+\begin_inset Formula 
+\[
+\sum_{k=2}^{n}a_{nk}=a_{11}
+\]
+
+\end_inset
+
+It is also obvious that 
+\begin_inset Formula $a_{n1}$
+\end_inset
+
+ is always completely unconstrained, as 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ lies in the kernel of 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $n=p$
+\end_inset
+
+ prime, there are no further constraints.
+ We conclude that 
+\begin_inset Formula $\varepsilon_{p}$
+\end_inset
+
+ lives in a 
+\begin_inset Formula $p-1$
+\end_inset
+
+ dimensional affine space, when holding 
+\begin_inset Formula $c$
+\end_inset
+
+ fixed.
+ A reasonable canonical choice is to pick 
+\begin_inset Formula $a_{11}=1$
+\end_inset
+
+, 
+\begin_inset Formula $a_{pp}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{pk}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\ne p$
+\end_inset
+
+.
+ That is, the canonical representative is 
+\begin_inset Formula $\varepsilon_{p}=e_{p}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the compound numbers, its more complicated.
+ The greatest prime factor relationship provides a constraint 
+\begin_inset Formula $a_{nn}=a_{pp}$
+\end_inset
+
+ where 
+\begin_inset Formula $p=\mbox{gpf}\left(n\right)$
+\end_inset
+
+.
+ The other constraints trickle down; writing them is awkward without some
+ formality.
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the matrix of 
+\begin_inset Formula $a_{nk}$
+\end_inset
+
+.
+ Since the Jordan chain is of length three, one had 
+\begin_inset Formula 
+\begin{align*}
+\left(D-I\right)\varepsilon_{1} & =0\\
+\left(D-I\right)^{2}\varepsilon_{p} & =0\\
+\left(D-I\right)^{3}\varepsilon_{n} & =0
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula $\left(D-I\right)^{3}A=0$
+\end_inset
+
+.
+ As always 
+\begin_inset Formula 
+\[
+\left[D-I\right]_{nk}=\begin{cases}
+1 & \mbox{if }n\mbox{ divides }k\mbox{ and }n<k\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+which...
 \end_layout
 
 \end_body
