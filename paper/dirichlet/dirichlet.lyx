@@ -682,7 +682,7 @@ Clearly, for any prime number
 \begin_inset Formula $\varepsilon_{6}=\left(a,b,c,-1,-\left(b+c\right),1,0,\cdots\right)$
 \end_inset
 
-must necessarily join the chain of it's greatest prime factor: 
+must necessarily join the chain of it's greatest divisor: 
 \begin_inset Formula $\left(D-I\right)\varepsilon_{6}=\varepsilon_{3}$
 \end_inset
 
@@ -697,42 +697,51 @@ must necessarily join the chain of it's greatest prime factor:
 
 , with a 1 in the last position.
  As this multiplies through, it will neccessarily hit the row with the greatest
- prime factor in it, and this row will necessarily have only one non-zero
- entry in it.
+ divisor in it, and this row will necessarily have only one non-zero entry
+ in it.
+ The greatest divisor of 
+\begin_inset Formula $n$
+\end_inset
+
+ is 
+\begin_inset Formula $n/d$
+\end_inset
+
+ where 
+\begin_inset Formula $d$
+\end_inset
+
+ is the least prime factor of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Repeating this process walks through each of the prime factors of 
+\begin_inset Formula $n$
+\end_inset
+
+, with multiplicity.
  Thus, we have proven:
 \end_layout
 
 \begin_layout Lemma*
-Every Jordan chain is of length three, so that for any natural number 
-\begin_inset Formula $n$
-\end_inset
-
-, the generalized eigenvectors are 
+The length of the Jordan chain of 
 \begin_inset Formula $\varepsilon_{n}$
 \end_inset
 
-, which after one iteration reduces to 
-\begin_inset Formula $\varepsilon_{\mbox{gpf}\left(n\right)}=\left(D-I\right)\varepsilon_{n}$
+ is given by the number of prime factors 
+\begin_inset Formula $\Omega\left(n\right)$
 \end_inset
 
- and then again to 
-\begin_inset Formula $\varepsilon_{1}=\left(D-I\right)\varepsilon_{\mbox{gpf}\left(n\right)}$
+, so that 
+\begin_inset Formula 
+\[
+\left(D-I\right)^{\Omega\left(n\right)}\varepsilon_{n}=\varepsilon_{1}
+\]
+
 \end_inset
 
- and finally 
-\begin_inset Formula $\left(D-I\right)\varepsilon_{1}=0$
-\end_inset
-
-.
- Here 
-\begin_inset Formula $\mbox{gpf}\left(n\right)$
-\end_inset
-
- is the greatest prime factor of 
-\begin_inset Formula $n$
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -882,53 +891,7 @@ It is also obvious that
 
 \begin_layout Standard
 For the compound numbers, its more complicated.
- The greatest prime factor relationship provides a constraint 
-\begin_inset Formula $a_{nn}=a_{pp}$
-\end_inset
-
- where 
-\begin_inset Formula $p=\mbox{gpf}\left(n\right)$
-\end_inset
-
-.
- The other constraints trickle down; writing them is awkward without some
- formality.
- Let 
-\begin_inset Formula $A$
-\end_inset
-
- be the matrix of 
-\begin_inset Formula $a_{nk}$
-\end_inset
-
-.
- Since the Jordan chain is of length three, one had 
-\begin_inset Formula 
-\begin{align*}
-\left(D-I\right)\varepsilon_{1} & =0\\
-\left(D-I\right)^{2}\varepsilon_{p} & =0\\
-\left(D-I\right)^{3}\varepsilon_{n} & =0
-\end{align*}
-
-\end_inset
-
-and so 
-\begin_inset Formula $\left(D-I\right)^{3}A=0$
-\end_inset
-
-.
- As always 
-\begin_inset Formula 
-\[
-\left[D-I\right]_{nk}=\begin{cases}
-1 & \mbox{if }n\mbox{ divides }k\mbox{ and }n<k\\
-0 & \mbox{otherwise}
-\end{cases}
-\]
-
-\end_inset
-
-Harrumph.
+ Harrumph.
  It should be possible to write down the kernel explictily, but it's not
  coming to me.
  
