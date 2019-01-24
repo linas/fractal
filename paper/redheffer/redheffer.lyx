@@ -102,6 +102,7 @@ divisor operator
 \end_inset
 
 .
+ Its a variant of the Redheffer matrix.
 \end_layout
 
 \begin_layout Section*
@@ -1111,10 +1112,347 @@ and provides a spectrum whenever
 \end_inset
 
  is actually summable and convergent.
- 
+\end_layout
+
+\begin_layout Subsection*
+It must be singular
 \end_layout
 
 \begin_layout Standard
+Clearly, there's some funny-business here.
+ How can a countably-infinite-dimensional matrix have an uncountable number
+ of distinct eigenvalues? If an infinite-dimensional matrix is just like
+ a finite-dimensional one, but just bigger, one might expect to just rattle
+ off a countable number of eigenvalues and call it a day.
+ What's going on? Lets review where we are at.
+\end_layout
+
+\begin_layout Standard
+The sequence 
+\begin_inset Formula $s_{n}=n^{-s}$
+\end_inset
+
+ is 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+-summable on at least some non-trival portion of the plane; that is, there
+ is a region where 
+\begin_inset Formula $\sum_{n}\left|s_{n}\right|<\infty$
+\end_inset
+
+ and this region is simply connected.
+ Within this region, there are uncountably many distinct values of 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+.
+ So its not that: 
+\emph on
+viz
+\emph default
+.
+ it's not some summability mistake.
+ How do we reduce an uncountable set to a countable one?
+\end_layout
+
+\begin_layout Standard
+Clearly, the map from parameter 
+\begin_inset Formula $s$
+\end_inset
+
+ to 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+ is many-valued.
+ So, there are many complex values 
+\begin_inset Formula $s^{\prime}$
+\end_inset
+
+ for which 
+\begin_inset Formula $\zeta\left(s^{\prime}\right)=\zeta\left(s\right)$
+\end_inset
+
+.
+ But there will always be Hausdorff-separated: there will always be open
+ sets 
+\begin_inset Formula $U\ni s$
+\end_inset
+
+ and 
+\begin_inset Formula $V\ni s^{\prime}$
+\end_inset
+
+ such that 
+\begin_inset Formula $U\cap V=\varnothing$
+\end_inset
+
+.
+ Why? Because 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+ is analytic.
+ When a function 
+\begin_inset Formula $f\left(s\right)$
+\end_inset
+
+ is analytic, it is impossible to find a curve 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ with 
+\begin_inset Formula $s,s^{\prime}\in\gamma$
+\end_inset
+
+ and also have 
+\begin_inset Formula $f\left(s^{\prime}\right)-f\left(s\right)=0$
+\end_inset
+
+ on that curve (unless 
+\begin_inset Formula $f=const.$
+\end_inset
+
+).
+ The claim is that, for (almost!?) any 
+\begin_inset Formula $s$
+\end_inset
+
+ there is some open set 
+\begin_inset Formula $U$
+\end_inset
+
+ containing 
+\begin_inset Formula $s$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(s\right)$
+\end_inset
+
+ is one-to-one, so that 
+\begin_inset Formula $f$
+\end_inset
+
+ is invertable, i.e.
+ so that 
+\begin_inset Formula $f^{-1}$
+\end_inset
+
+ exists and is unique.
+ This must by some famous theorem (probably named after Picard??) that I'm
+ too lazy to look up and quote.
+ At any rate, this open set 
+\begin_inset Formula $U$
+\end_inset
+
+ has uncountably many distinct values of 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+ in it; so how do we get from that to a countable set? 
+\end_layout
+
+\begin_layout Standard
+Think out loud: Lets suppose we have a simply-connected open set 
+\begin_inset Formula $U$
+\end_inset
+
+ such that, for each 
+\begin_inset Formula $s\in U$
+\end_inset
+
+, we have that 
+\begin_inset Formula $\sum_{n=1}^{\infty}\left|n^{-s}\right|<\infty$
+\end_inset
+
+ and there is no pair 
+\begin_inset Formula $s,s^{\prime}\in U$
+\end_inset
+
+ such that 
+\begin_inset Formula $\zeta\left(s^{\prime}\right)=\zeta\left(s\right)$
+\end_inset
+
+.
+ It seems obvious that such a set 
+\begin_inset Formula $U$
+\end_inset
+
+ exists; that there are gazillions of these perfectly-well-behaved sets
+ 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ Right? This is just ordinary college-level textbook stuff, right? Am I
+ missing something?
+\end_layout
+
+\begin_layout Standard
+There are two possibilities: ether 
+\begin_inset Formula $D$
+\end_inset
+
+ is very singular, or some crazy thereom holds.
+ First, lets state the crazy theorem.
+ Assume there are a countable number of distinct complex numbers 
+\begin_inset Formula $z_{k}$
+\end_inset
+
+ that are used to form a countable basis for 
+\begin_inset Formula $D$
+\end_inset
+
+, in the sense that each 
+\begin_inset Formula $\vec{z}_{k}$
+\end_inset
+
+ is associated with 
+\begin_inset Formula $D\vec{z}_{k}=\zeta\left(z_{k}\right)\vec{z_{k}}$
+\end_inset
+
+, and such that for every 
+\begin_inset Formula $s\in U$
+\end_inset
+
+, the vector 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ can be written as a linear combination of the 
+\begin_inset Formula $\vec{z}_{k}$
+\end_inset
+
+, and that, furthermore, 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+ is given by the same linear combination.
+ That is, assume that there exists 
+\begin_inset Formula 
+\begin{align*}
+D\vec{s}= & D\sum_{k}b_{k}\vec{z}_{k}\\
+= & \sum_{k}b_{k}D\vec{z}_{k}\\
+= & \sum_{k}b_{k}\zeta\left(z_{k}\right)\vec{z}_{k}\\
+= & \zeta\left(s\right)\sum_{k}b_{k}\vec{z}_{k}\\
+= & \zeta\left(s\right)\vec{s}
+\end{align*}
+
+\end_inset
+
+This seems ridiculously implausible: turning the crank in some normal fashion,
+ we should find that the 
+\begin_inset Formula $\vec{z}_{k}$
+\end_inset
+
+ are orthogonal to one-another, which would provide that 
+\begin_inset Formula $\zeta\left(z_{k}\right)=\zeta\left(s\right)$
+\end_inset
+
+ which contradicts the assumption.
+ This proof-by-contradiction would require defining an inner product for
+ the 
+\begin_inset Formula $\vec{z}_{k}$
+\end_inset
+
+, which requires more work on assumptions of convergence.
+ Doing so would be verbose and tedious, and would result in a rigorous proof
+ of something that already seems intuitively obvious: there is no such countable
+ set of basis vectors that would serve to span the set 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ This is obvious, right? 
+\end_layout
+
+\begin_layout Standard
+The alternative conclusion is that 
+\begin_inset Formula $D$
+\end_inset
+
+ is very singular.
+ In other words, there exist vectors 
+\begin_inset Formula $\vec{v}\in\ell_{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $D\vec{v}\notin\ell_{1}$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $D$
+\end_inset
+
+ is not a bounded operator on the Banach space 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+.
+ Such a 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ would cause the following sum to diverge:
+\begin_inset Formula 
+\begin{align*}
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\left|v_{\left(nk\right)}\right|= & \left|v_{1}\right|+\left|v_{2}\right|+\left|v_{3}\right|+\cdots\\
++ & \left|v_{2}\right|+\left|v_{4}\right|+\left|v_{6}\right|+\cdots\\
++ & \left|v_{3}\right|+\left|v_{6}\right|+\left|v_{9}\right|+\cdots\\
++ & \cdots
+\end{align*}
+
+\end_inset
+
+where the 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ are the vector components and 
+\begin_inset Formula $\left(nk\right)$
+\end_inset
+
+ is just the integer product.
+ I guess that such a vector is given by 
+\begin_inset Formula $v_{k}=x^{k-1}$
+\end_inset
+
+ for some positive real 
+\begin_inset Formula $x$
+\end_inset
+
+, so that 
+\begin_inset Formula 
+\[
+\sum_{k=1}^{\infty}\left|v_{k}\right|=\sum_{k=1}^{\infty}x^{k-1}=\frac{1}{1-x}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\sum_{k=1}^{\infty}\left|v_{\left(nk\right)}\right|=x^{-n}\sum_{k=1}^{\infty}x^{nk}=\frac{1}{1-x^{n}}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\left|v_{\left(nk\right)}\right|=\sum_{n=1}^{\infty}\frac{1}{1-x^{n}}
+\]
+
+\end_inset
+
+which, if I am not mistaken, diverges for every real positive 
+\begin_inset Formula $x$
+\end_inset
+
+.
  
 \end_layout
 
