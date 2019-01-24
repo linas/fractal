@@ -89,11 +89,38 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Dirichlet Convolution
+Divisor Operator
 \end_layout
 
 \begin_layout Abstract
-Random low-quality ideas.
+Define and explore the 
+\begin_inset Quotes eld
+\end_inset
+
+divisor operator
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+This reviews low-quality ideas surrounding something that I want to call
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+divisor operator
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Why this is interesting: the divisor operator, as defined below, includes
+ the Rieman zeros as part of it's kernel.
 \end_layout
 
 \begin_layout Section*
@@ -264,7 +291,7 @@ divisor
 \end_inset
 
  as it has obvious relationships to the divisor function.
- The reson that 
+ The reason that 
 \begin_inset Formula $D$
 \end_inset
 
@@ -386,7 +413,8 @@ Inverse
 \end_layout
 
 \begin_layout Standard
-So, write 
+I find visual representations very useful.
+ So, write 
 \begin_inset Formula $D$
 \end_inset
 
@@ -468,169 +496,6 @@ Note that
 \end_inset
 
  is both a left and right inverse, because Dirichlet convolution is commutative.
-\end_layout
-
-\begin_layout Subsection*
-Spectra
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $\vec{s}=\left(s_{n}\right)$
-\end_inset
-
- be the vector given by vector components 
-\begin_inset Formula $s_{n}=n^{-s}$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\vec{\zeta}=D\vec{s}$
-\end_inset
-
-, then the vector components of 
-\begin_inset Formula $\vec{\zeta}$
-\end_inset
-
- are 
-\begin_inset Formula $\zeta_{k}=k^{-s}\zeta\left(s\right)$
-\end_inset
-
-.
- This is not 
-\begin_inset Quotes eld
-\end_inset
-
-deep
-\begin_inset Quotes erd
-\end_inset
-
-, this is 
-\begin_inset Quotes eld
-\end_inset
-
-obvious
-\begin_inset Quotes erd
-\end_inset
-
-, but it's somehow 
-\begin_inset Quotes eld
-\end_inset
-
-Hmm...
-\begin_inset Quotes erd
-\end_inset
-
- inducing.
- 
-\end_layout
-
-\begin_layout Standard
-Hmm...
- Lets pursue this thought.
- The above says that 
-\begin_inset Formula $\vec{\zeta}$
-\end_inset
-
- is just a constant multiple of 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
-, the constant of proportionality given by 
-\begin_inset Formula $\zeta\left(s\right)$
-\end_inset
-
-.
- In formulas: 
-\begin_inset Formula $\vec{\zeta}=D\vec{s}=\zeta\left(s\right)\vec{s}$
-\end_inset
-
-.
- This is a diagonalization, and eigenvector-eigenvalue equation.
- We've written down at least some of the pectrum of 
-\begin_inset Formula $D$
-\end_inset
-
- and simultaneously shown that it has a non-trivial kernel: 
-\begin_inset Formula $\mbox{ker}D$
-\end_inset
-
- includes at least the Riemann zeros.
-\end_layout
-
-\begin_layout Standard
-A similar identity holds for any completely multiplicative sequence.
- That is, if 
-\begin_inset Formula $f\left(mn\right)=f\left(m\right)f\left(n\right)$
-\end_inset
-
- for all integers 
-\begin_inset Formula $m,n$
-\end_inset
-
- then writing 
-\begin_inset Formula $g=Df$
-\end_inset
-
- one has that 
-\begin_inset Formula 
-\[
-g\left(1\right)=\sum_{n=1}^{\infty}f\left(n\right)\quad\mbox{and}\quad g\left(k\right)=f\left(k\right)g\left(1\right)
-\]
-
-\end_inset
-
-which is obviously a formal series when the summation does not numerically
- converge.
- This too has the form of an eigenvalue equation:
-\begin_inset Formula 
-\[
-Df=g\left(1\right)f
-\]
-
-\end_inset
-
-and provides a spectrum whenever 
-\begin_inset Formula $g\left(1\right)$
-\end_inset
-
- is actually summable and convergent.
- 
-\end_layout
-
-\begin_layout Subsection*
-Fun facts
-\end_layout
-
-\begin_layout Standard
-Clearly, there should be a bunch of 
-\begin_inset Quotes eld
-\end_inset
-
-fun facts
-\begin_inset Quotes erd
-\end_inset
-
- that hold for Lambert series, and so on.
- All of the 
-\begin_inset Quotes eld
-\end_inset
-
-typical
-\begin_inset Quotes erd
-\end_inset
-
- identities given in Apostol should find expression here, just in a different
- and 
-\begin_inset Quotes eld
-\end_inset
-
-Hmm...
-\begin_inset Quotes erd
-\end_inset
-
--inducing notation.
- 
 \end_layout
 
 \begin_layout Subsection*
@@ -1066,6 +931,169 @@ and so
 Harrumph.
  It should be possible to write down the kernel explictily, but it's not
  coming to me.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Spectra
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\vec{s}=\left(s_{n}\right)$
+\end_inset
+
+ be the vector given by vector components 
+\begin_inset Formula $s_{n}=n^{-s}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\vec{\zeta}=D\vec{s}$
+\end_inset
+
+, then the vector components of 
+\begin_inset Formula $\vec{\zeta}$
+\end_inset
+
+ are 
+\begin_inset Formula $\zeta_{k}=k^{-s}\zeta\left(s\right)$
+\end_inset
+
+.
+ This is not 
+\begin_inset Quotes eld
+\end_inset
+
+deep
+\begin_inset Quotes erd
+\end_inset
+
+, this is 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+, but it's somehow 
+\begin_inset Quotes eld
+\end_inset
+
+Hmm...
+\begin_inset Quotes erd
+\end_inset
+
+ inducing.
+ 
+\end_layout
+
+\begin_layout Standard
+Hmm...
+ Lets pursue this thought.
+ The above says that 
+\begin_inset Formula $\vec{\zeta}$
+\end_inset
+
+ is just a constant multiple of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, the constant of proportionality given by 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+.
+ In formulas: 
+\begin_inset Formula $\vec{\zeta}=D\vec{s}=\zeta\left(s\right)\vec{s}$
+\end_inset
+
+.
+ This is a diagonalization, and eigenvector-eigenvalue equation.
+ We've written down at least some of the spectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ and simultaneously shown that it has a non-trivial kernel: 
+\begin_inset Formula $\mbox{ker}D$
+\end_inset
+
+ includes at least the Riemann zeros.
+\end_layout
+
+\begin_layout Standard
+A similar identity holds for any completely multiplicative sequence.
+ That is, if 
+\begin_inset Formula $f\left(mn\right)=f\left(m\right)f\left(n\right)$
+\end_inset
+
+ for all integers 
+\begin_inset Formula $m,n$
+\end_inset
+
+ then writing 
+\begin_inset Formula $g=Df$
+\end_inset
+
+ one has that 
+\begin_inset Formula 
+\[
+g\left(1\right)=\sum_{n=1}^{\infty}f\left(n\right)\quad\mbox{and}\quad g\left(k\right)=f\left(k\right)g\left(1\right)
+\]
+
+\end_inset
+
+which is obviously a formal series when the summation does not numerically
+ converge.
+ This too has the form of an eigenvalue equation:
+\begin_inset Formula 
+\[
+Df=g\left(1\right)f
+\]
+
+\end_inset
+
+and provides a spectrum whenever 
+\begin_inset Formula $g\left(1\right)$
+\end_inset
+
+ is actually summable and convergent.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Fun facts
+\end_layout
+
+\begin_layout Standard
+Clearly, there should be a bunch of 
+\begin_inset Quotes eld
+\end_inset
+
+fun facts
+\begin_inset Quotes erd
+\end_inset
+
+ that hold for Lambert series, and so on.
+ All of the 
+\begin_inset Quotes eld
+\end_inset
+
+typical
+\begin_inset Quotes erd
+\end_inset
+
+ identities given in Apostol should find expression here, just in a different
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+Hmm...
+\begin_inset Quotes erd
+\end_inset
+
+-inducing notation.
  
 \end_layout
 
