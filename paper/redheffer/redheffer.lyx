@@ -1102,7 +1102,7 @@ and provides a spectrum whenever
 \end_layout
 
 \begin_layout Subsection*
-It must be singular
+Naive operator theory
 \end_layout
 
 \begin_layout Standard
@@ -1356,6 +1356,14 @@ This seems ridiculously implausible: turning the crank in some normal fashion,
 \end_layout
 
 \begin_layout Standard
+Presumably, much of what I wrote above is wrong, or doesn't follow in some
+ way, because key parts of the argument cannot actually be made.
+ Perhaps there is some nice book on operator theory that goes over this
+ material; I do not know what it is; clearly, I do not know the material
+ well enough.
+\end_layout
+
+\begin_layout Standard
 The alternative conclusion is that 
 \begin_inset Formula $D$
 \end_inset
@@ -1413,6 +1421,139 @@ Anyway, there's a lot of cognitive dissonance here; its not entirely clear
  why an unbounded operator would have a spectrum like this; perhaps this
  is a known result from Frechet spaces or something like that ...
  Hmm.
+\end_layout
+
+\begin_layout Subsection*
+Less Naive Theory
+\end_layout
+
+\begin_layout Standard
+So I guess the confusion above is due to naivete about operators.
+ Lets assume (for now) that 
+\begin_inset Formula $D$
+\end_inset
+
+ is a bounded operator on the Banach space 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+ (we've neither proven nor disproven this.) Reviewing the literature of bounded
+ operators:
+\end_layout
+
+\begin_layout Itemize
+The set of numbers 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left(D-\lambda I\right):\ell_{1}\to\ell_{1}$
+\end_inset
+
+ is one-to-one and onto is called the resolvent set, denoted by 
+\begin_inset Formula $\rho\left(D\right)$
+\end_inset
+
+.
+ It seems that perhaps the resolvent is the empty set in this case (or perhaps,
+ per Picard theorem, contains a single point).
+\end_layout
+
+\begin_layout Itemize
+The complement of the resolvent set is the spectrum, denoted as 
+\begin_inset Formula $\sigma\left(D\right)=\mathbb{C}\backslash\rho\left(\sigma\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What kind of spectra are there?
+\end_layout
+
+\begin_layout Itemize
+The point spectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ are all those values 
+\begin_inset Formula $\lambda\in\sigma\left(D\right)$
+\end_inset
+
+ for which 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+ is not one-to-one.
+ That is, the kernel of 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+ is non-trivial; 
+\emph on
+i.e.
+
+\emph default
+ there is a vector, other than the zero vector, that is in the kernel of
+ 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+.
+ It would appear that 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+ has a continuous point spectrum, although this conflicts with standard
+ terminology.
+\end_layout
+
+\begin_layout Itemize
+The continuous spectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ are all those values 
+\begin_inset Formula $\lambda\in\sigma\left(D\right)$
+\end_inset
+
+ for which 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+ is one-to-one but not onto, and the range of 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+ is dense in 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The residual spectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ are all those values 
+\begin_inset Formula $\lambda\in\sigma\left(D\right)$
+\end_inset
+
+ for which 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+ is one-to-one but not onto, and the range of 
+\begin_inset Formula $D-\lambda I$
+\end_inset
+
+ is not dense in 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+.
 \end_layout
 
 \end_body
