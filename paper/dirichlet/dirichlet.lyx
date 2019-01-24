@@ -281,7 +281,7 @@ The matrix
 \begin_inset Formula $D$
 \end_inset
 
- has only one eigenvector: 
+ has one obvious eigenvector: 
 \begin_inset Formula $D\varepsilon=\varepsilon$
 \end_inset
 
@@ -291,7 +291,7 @@ The matrix
 \end_inset
 
 .
- There are not any others.
+ There are not any others that are of finite length.
  Any triangular matrix has all eigenvalues on the diagonal, so this has
  a huge algebraic multiplicity; we conclude it is not diagonalizable.
  The obvious questions are:
@@ -471,12 +471,12 @@ Note that
 \end_layout
 
 \begin_layout Subsection*
-Some fun facts
+Spectra
 \end_layout
 
 \begin_layout Standard
 Let 
-\begin_inset Formula $s_{n}$
+\begin_inset Formula $\vec{s}=\left(s_{n}\right)$
 \end_inset
 
  be the vector given by vector components 
@@ -485,11 +485,11 @@ Let
 
 .
  Let 
-\begin_inset Formula $\zeta=Ds$
+\begin_inset Formula $\vec{\zeta}=D\vec{s}$
 \end_inset
 
 , then the vector components of 
-\begin_inset Formula $\zeta$
+\begin_inset Formula $\vec{\zeta}$
 \end_inset
 
  are 
@@ -522,10 +522,44 @@ Hmm...
 \end_inset
 
  inducing.
+ 
 \end_layout
 
 \begin_layout Standard
-Clearly, a similar identity holds for any completely multiplicative sequence.
+Hmm...
+ Lets pursue this thought.
+ The above says that 
+\begin_inset Formula $\vec{\zeta}$
+\end_inset
+
+ is just a constant multiple of 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+, the constant of proportionality given by 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+.
+ In formulas: 
+\begin_inset Formula $\vec{\zeta}=D\vec{s}=\zeta\left(s\right)\vec{s}$
+\end_inset
+
+.
+ This is a diagonalization, and eigenvector-eigenvalue equation.
+ We've written down at least some of the pectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ and simultaneously shown that it has a non-trivial kernel: 
+\begin_inset Formula $\mbox{ker}D$
+\end_inset
+
+ includes at least the Riemann zeros.
+\end_layout
+
+\begin_layout Standard
+A similar identity holds for any completely multiplicative sequence.
  That is, if 
 \begin_inset Formula $f\left(mn\right)=f\left(m\right)f\left(n\right)$
 \end_inset
@@ -546,12 +580,30 @@ g\left(1\right)=\sum_{n=1}^{\infty}f\left(n\right)\quad\mbox{and}\quad g\left(k\
 
 \end_inset
 
- which is obviously a formal series when the summation does not numerically
+which is obviously a formal series when the summation does not numerically
  converge.
+ This too has the form of an eigenvalue equation:
+\begin_inset Formula 
+\[
+Df=g\left(1\right)f
+\]
+
+\end_inset
+
+and provides a spectrum whenever 
+\begin_inset Formula $g\left(1\right)$
+\end_inset
+
+ is actually summable and convergent.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Fun facts
 \end_layout
 
 \begin_layout Standard
-Clearly, more 
+Clearly, there should be a bunch of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -559,7 +611,7 @@ fun facts
 \begin_inset Quotes erd
 \end_inset
 
- hold for Lambert series, and so on.
+ that hold for Lambert series, and so on.
  All of the 
 \begin_inset Quotes eld
 \end_inset
@@ -1011,7 +1063,10 @@ and so
 
 \end_inset
 
-which...
+Harrumph.
+ It should be possible to write down the kernel explictily, but it's not
+ coming to me.
+ 
 \end_layout
 
 \end_body
