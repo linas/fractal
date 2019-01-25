@@ -1124,8 +1124,9 @@ Lets assume (for now) that
 \begin_inset Formula $\ell_{1}$
 \end_inset
 
- (we've neither proven nor disproven this.) Reviewing common defintions for
- bounded operators:
+.
+ Actually, it isn't bounded, as shown in the next section.
+ Reviewing common defintions for bounded operators:
 \end_layout
 
 \begin_layout Itemize
@@ -1414,7 +1415,7 @@ which is useless as a bound; it is no bound at all.
  for the Lambert series is
 \begin_inset Formula 
 \[
-\sum_{n=1}^{\infty}\frac{q^{n-1}}{1-q^{n}}\approx\frac{-\log\left(1-q\right)}{1-q}
+\sum_{n=1}^{\infty}\frac{q^{n-1}}{1-q^{n}}=\frac{-\log\left(1-q\right)}{1-q}+\frac{\gamma}{1-q}-\frac{1}{2}\log\left(1-q\right)+\mathcal{O}\left(1-q\right)
 \]
 
 \end_inset
@@ -1423,7 +1424,7 @@ which implies that
 \begin_inset Formula 
 \begin{align*}
 \frac{\left|D\vec{q}\right|}{\left|\vec{q}\right|}= & \left(1-q\right)\sum_{n=1}^{\infty}\frac{q^{n-1}}{1-q^{n}}\\
-\approx & -\log\left(1-q\right)
+= & -\log\left(1-q\right)+\mathcal{O}\left(1\right)
 \end{align*}
 
 \end_inset
@@ -1432,7 +1433,80 @@ as
 \begin_inset Formula $q\to1$
 \end_inset
 
+.
+ From this we can only conclude that 
+\begin_inset Formula $D$
+\end_inset
+
+ is not a bounded operator.
+ It's operator norm is divergent in this vector-direction.
+\end_layout
+
+\begin_layout Standard
+The obvious next question is: is this the only direction in which 
+\begin_inset Formula $D$
+\end_inset
+
+ is divergent? Are there other directions? To be more precise, do there
+ exist sequences of vectors 
+\begin_inset Formula $\vec{v}_{n}$
+\end_inset
+
+ such that the 
+\begin_inset Formula $\vec{v}_{n}$
+\end_inset
+
+ are not multiples of 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+, i.e.
  
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\vec{v}_{n}\ne uhhhh....
+\]
+
+\end_inset
+
+(How do I write 
+\begin_inset Quotes eld
+\end_inset
+
+not a multiple
+\begin_inset Quotes erd
+\end_inset
+
+?) and that 
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\frac{\left|D\vec{v}_{n}\right|}{\left|\vec{v}_{n}\right|}\to\infty
+\]
+
+\end_inset
+
+And then of course the obvious: are these sequences dense? Singular? Perhaps
+ 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+ is the only one: its like the only pole in 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+ and so perhaps one can construct the analytic continuation of 
+\begin_inset Formula $D$
+\end_inset
+
+ by subtracting this one single 
+\begin_inset Quotes eld
+\end_inset
+
+pole
+\begin_inset Quotes erd
+\end_inset
+
+? How does this work?
 \end_layout
 
 \end_body
