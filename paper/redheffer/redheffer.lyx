@@ -1106,13 +1106,13 @@ Spectral Theory
 \end_layout
 
 \begin_layout Standard
-The goal of this very incomplete section is to describe the spectrum of
- 
+The goal of this section is to describe the spectrum of 
 \begin_inset Formula $D$
 \end_inset
 
 .
- It's a slow walk through standard vocabulary of spectral decompositions.
+ It's a slow walk through the standard vocabulary and definitions of spectral
+ decompositions, mostly posing questions but leaving them unanswered.
 \end_layout
 
 \begin_layout Standard
@@ -1348,6 +1348,90 @@ Note that just because the the point spectrum might be the entire complex
  plane, this does not mean that the continuous and residual spectra are
  empty.
  These are distinct questions.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Operator norm
+\end_layout
+
+\begin_layout Standard
+What's the operator norm of 
+\begin_inset Formula $D$
+\end_inset
+
+? Let's try our luck.
+ Consider the vector 
+\begin_inset Formula $\vec{q}=\left(1,q,q^{2},\cdots\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\left|\vec{q}\right|=1/\left(1-\left|q\right|\right)$
+\end_inset
+
+.
+ For the following exercise, it's pointless to imagine that 
+\begin_inset Formula $q$
+\end_inset
+
+ is a complex number; so instead, take 
+\begin_inset Formula $0\le q<1$
+\end_inset
+
+ real.
+ The norm of the divisor operator applied to this vector is 
+\begin_inset Formula 
+\[
+\left|D\vec{q}\right|=\sum_{n=1}^{\infty}\frac{q^{n-1}}{1-q^{n}}
+\]
+
+\end_inset
+
+which is a Lambert series.
+ Since
+\begin_inset Formula 
+\[
+\frac{1}{1-q^{n}}\le\frac{1}{1-q}
+\]
+
+\end_inset
+
+one can write 
+\begin_inset Formula 
+\begin{align*}
+\frac{\left|D\vec{q}\right|}{\left|\vec{q}\right|}= & \left(1-q\right)\sum_{n=1}^{\infty}\frac{q^{n-1}}{1-q^{n}}\\
+\le & \sum_{n=1}^{\infty}q^{n-1}\\
+= & \frac{1}{1-q}
+\end{align*}
+
+\end_inset
+
+which is useless as a bound; it is no bound at all.
+ Can we do better? It would seem that the asymptotic expansion 
+\begin_inset Formula $q\to1$
+\end_inset
+
+ for the Lambert series is
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{q^{n-1}}{1-q^{n}}\approx\frac{-\log\left(1-q\right)}{1-q}
+\]
+
+\end_inset
+
+which implies that
+\begin_inset Formula 
+\begin{align*}
+\frac{\left|D\vec{q}\right|}{\left|\vec{q}\right|}= & \left(1-q\right)\sum_{n=1}^{\infty}\frac{q^{n-1}}{1-q^{n}}\\
+\approx & -\log\left(1-q\right)
+\end{align*}
+
+\end_inset
+
+as 
+\begin_inset Formula $q\to1$
+\end_inset
+
  
 \end_layout
 
