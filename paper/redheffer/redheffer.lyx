@@ -103,6 +103,11 @@ divisor operator
 
 .
  Its a variant of the Redheffer matrix.
+ It is not a bounded operator on 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section*
@@ -437,26 +442,34 @@ I find visual representations very useful.
 \[
 D=\left[\begin{array}{ccccccccccc}
 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & \cdots\\
- & 1 &  & 1 &  & 1 &  & 1 &  & 1\\
- &  & 1 &  &  & 1 &  &  & 1\\
- &  &  & 1 &  &  &  & 1\\
- &  &  &  & 1 &  &  &  &  & 1\\
- &  &  &  &  & 1\\
- &  &  &  &  &  & 1\\
- &  &  &  &  &  &  & 1\\
- &  &  &  &  &  &  &  & 1\\
+ & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1\\
+ &  & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0\\
+ &  &  & 1 & 0 & 0 & 0 & 1 & 0 & 0\\
+ &  &  &  & 1 & 0 & 0 & 0 & 0 & 1\\
+ &  &  &  &  & 1 & 0 & 0 & 0 & 0\\
+ &  &  &  &  &  & 1 & 0 & 0 & 0\\
+ &  &  &  &  &  &  & 1 & 0 & 0\\
+ &  &  &  &  &  &  &  & 1 & 0\\
  &  &  &  &  &  &  &  &  & 1\\
  &  &  &  &  &  &  &  &  &  & \ddots
-\end{array}\right]\quad D^{-1}=\left[\begin{array}{ccccccccccc}
-1 & -1 & -1 &  & -1 & 1 & -1 &  &  & 1 & \cdots\\
- & 1 &  & -1 &  & -1\\
- &  & 1 &  &  & -1 &  &  & -1\\
- &  &  & 1 &  &  &  & -1\\
- &  &  &  & 1 &  &  &  &  & -1\\
- &  &  &  &  & 1\\
- &  &  &  &  &  & 1\\
- &  &  &  &  &  &  & 1\\
- &  &  &  &  &  &  &  & 1\\
+\end{array}\right]
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D^{-1}=\left[\begin{array}{ccccccccccc}
+1 & -1 & -1 & 0 & -1 & 1 & -1 & 0 & 0 & 1 & \cdots\\
+ & 1 & 0 & -1 & 0 & -1 & 0 & 0 & 0 & 0\\
+ &  & 1 & 0 & 0 & -1 & 0 & 0 & -1 & 0\\
+ &  &  & 1 & 0 & 0 & 0 & -1 & 0 & 0\\
+ &  &  &  & 1 & 0 & 0 & 0 & 0 & -1\\
+ &  &  &  &  & 1 & 0 & 0 & 0 & 0\\
+ &  &  &  &  &  & 1 & 0 & 0 & 0\\
+ &  &  &  &  &  &  & 1 & 0 & 0\\
+ &  &  &  &  &  &  &  & 1 & 0\\
  &  &  &  &  &  &  &  &  & 1\\
  &  &  &  &  &  &  &  &  &  & \ddots
 \end{array}\right]
