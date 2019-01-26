@@ -1523,7 +1523,95 @@ pole
 \begin_inset Quotes erd
 \end_inset
 
-? How does this work?
+? How does this work? Hmm.
+ But that seems like a ridiculous hope, as kind-of-looks hopelessly essential
+ - can't cut it out without cutting out kind-of everything.
+\end_layout
+
+\begin_layout Subsection*
+Lambert basis
+\end_layout
+
+\begin_layout Standard
+So different idea: define 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+ as a kind-of principle vector/direction, and then build an orthonormal
+ basis around it.
+ Apply that as a singularity x-form; what does 
+\begin_inset Formula $D$
+\end_inset
+
+ look like then? What would the vectors 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ look like in this new coord system?
+\end_layout
+
+\begin_layout Standard
+Define a sequence of vectors 
+\begin_inset Formula $\vec{q}_{n}$
+\end_inset
+
+ of the form
+\begin_inset Formula 
+\[
+\vec{q}_{n}=\left(1,1-\frac{1}{n},\left(1-\frac{1}{n}\right)^{2},\cdots\right)
+\]
+
+\end_inset
+
+The length of each vector is
+\begin_inset Formula 
+\[
+\left|\vec{q}_{n}\right|=\sum_{k=0}^{\infty}\left(1-\frac{1}{n}\right)^{k}=n
+\]
+
+\end_inset
+
+It's convient to normalize to unit length: 
+\begin_inset Formula $\hat{q}_{n}=\vec{q}_{n}/n$
+\end_inset
+
+ so that 
+\begin_inset Formula $\left|\hat{q}_{n}\right|=1$
+\end_inset
+
+.
+ With this normalization, its clear that 
+\begin_inset Formula $\hat{q}_{n}\to0$
+\end_inset
+
+ strongly, and not weakly, because each individual component in 
+\begin_inset Formula $\hat{q}_{n}$
+\end_inset
+
+ is going to zero.
+ (TODO review formal definitions of strong/weak convergence; I might be
+ mis-using the terms).
+\end_layout
+
+\begin_layout Standard
+From the previous section, 
+\begin_inset Formula 
+\[
+\left|D\hat{q}_{n}\right|=\log n+\mathcal{O}\left(1\right)
+\]
+
+\end_inset
+
+The 
+\begin_inset Formula $\hat{q}_{n}$
+\end_inset
+
+ are not mutually orthogonal; can we build some orthogonal basis that is
+ weakly/strongly orthogonal to the limit 
+\begin_inset Formula $\hat{q}_{n}\to0$
+\end_inset
+
+ in some way? (Is this how we ended up with the topologists sine, last time?)
 \end_layout
 
 \end_body
