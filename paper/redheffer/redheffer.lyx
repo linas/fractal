@@ -1072,11 +1072,7 @@ This demonstrates that
 \begin_inset Formula $D$
 \end_inset
 
- and simultaneously shown that it has a non-trivial kernel: 
-\begin_inset Formula $\mbox{ker}D$
-\end_inset
-
- includes at least the Riemann zeros.
+.
 \end_layout
 
 \begin_layout Standard
@@ -1646,7 +1642,11 @@ with
 \begin_inset Formula $L\left(s,\chi\right)$
 \end_inset
 
- the usual Dirichlet series
+ the usual Dirichlet 
+\begin_inset Formula $L-$
+\end_inset
+
+series
 \begin_inset Formula 
 \[
 L\left(s,\chi\right)=\sum_{n=1}^{\infty}\frac{\chi\left(n\right)}{n^{s}}
@@ -1654,42 +1654,102 @@ L\left(s,\chi\right)=\sum_{n=1}^{\infty}\frac{\chi\left(n\right)}{n^{s}}
 
 \end_inset
 
-Define two diagonal matrix operators 
-\begin_inset Formula $X$
+Just like 
+\begin_inset Formula $\vec{\zeta}$
 \end_inset
 
- and 
-\begin_inset Formula $Y$
+, the character vectors 
+\begin_inset Formula $\vec{\chi}\in\ell_{1}$
 \end_inset
 
- having non-zero matrix entries only along the diagonal:
+ whenever 
+\begin_inset Formula $1<\Re s$
+\end_inset
+
+ (since 
+\begin_inset Formula $\chi\left(n\right)$
+\end_inset
+
+ is always a root of unity or zero).
+ Unlike 
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+, which has no zeros for 
+\begin_inset Formula $1<\Re s$
+\end_inset
+
+ , the Dirichlet 
+\begin_inset Formula $L-$
+\end_inset
+
+series have zeros in the strip 
+\begin_inset Formula $1<\Re s<1+\varepsilon$
+\end_inset
+
+.
+ (Right? Am I imagining this? WTF?) This implies that 
+\begin_inset Formula $D$
+\end_inset
+
+ has a non-trivial kernel.
+\end_layout
+
+\begin_layout Standard
+An earlier section wrote down the matrix for 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+, which seems to be 
+\begin_inset Quotes eld
+\end_inset
+
+obviously
+\begin_inset Quotes erd
+\end_inset
+
+ the inverse, by inspection.
+ Since 
+\begin_inset Formula $D$
+\end_inset
+
+ has a kernel in 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+, one concludes that 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ must be unbounded on 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+.
+ I presume (without checking) that 
 \begin_inset Formula 
 \[
-X_{mn}=\chi\left(n\right)\delta_{mn}\quad\mbox{and}\quad Y_{mn}=\chi^{-1}\left(n\right)\delta_{mn}
+\frac{1}{L\left(s,\chi\right)}=\sum_{n=1}^{\infty}\frac{\left(\mu*\chi\right)\left(n\right)}{n^{s}}
 \]
 
 \end_inset
 
-with 
-\begin_inset Formula $\chi^{-1}\left(n\right)=1/\chi\left(n\right)$
+where 
+\begin_inset Formula $\left(\mu*\chi\right)$
 \end_inset
 
- whenever 
-\begin_inset Formula $\chi\left(n\right)\ne0$
+ is the Dirichlet convolution.
+ (double check that the above is correct, I think it is).
+ So while 
+\begin_inset Formula $D$
 \end_inset
 
- and zero otherwise.
- The matrix 
-\begin_inset Formula $XY$
+ had a divergence for the Lambert-series vector, it seems that 
+\begin_inset Formula $D^{-1}$
 \end_inset
 
- will be a diagonal matrix, with many zeros on the diagonal.
- With these matrixes, one can write 
-\begin_inset Formula $\vec{\chi}=X\vec{s}$
-\end_inset
-
-..
- never mind.
+ has much stronger divergences at the XXX zeros.
+ Hang on wtf.
  
 \end_layout
 
