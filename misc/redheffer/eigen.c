@@ -51,13 +51,13 @@ double* lapla_matrix(int dim)
  */
 void get_eigenvalues(int dim)
 {
-	double* matrix = lapla_mmatrix(dim);
+	double* matrix = lapla_matrix(dim);
 
 	// Magic incantation to diagonalize the matrix.
-	gsl_matrix_view m = gsl_matrix_view_array (matrix, mxi, mxi);
-	gsl_vector_complex *eval = gsl_vector_complex_alloc (mxi);
-	gsl_matrix_complex *evec = gsl_matrix_complex_alloc (mxi, mxi);
-	gsl_eigen_nonsymmv_workspace * w = gsl_eigen_nonsymmv_alloc (mxi);
+	gsl_matrix_view m = gsl_matrix_view_array (matrix, dim, dim);
+	gsl_vector_complex *eval = gsl_vector_complex_alloc (dim);
+	gsl_matrix_complex *evec = gsl_matrix_complex_alloc (dim, dim);
+	gsl_eigen_nonsymmv_workspace * w = gsl_eigen_nonsymmv_alloc (dim);
 	gsl_eigen_nonsymmv (&m.matrix, eval, evec, w);
 	gsl_eigen_nonsymmv_free (w);
 
