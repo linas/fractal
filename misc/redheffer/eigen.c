@@ -26,6 +26,24 @@ double* divisor_matrix(int dim)
 	return matrix;
 }
 
+double* commu_matrix(int dim)
+{
+	double* matrix = (double*) malloc(dim*dim*sizeof(double));
+
+	int idx = 0;
+	for (int i=0; i< dim; i++)
+	{
+		for (int j=0; j< dim; j++)
+		{
+			matrix[idx] = 0.0;
+			if ((j+i+1)%(i+1) == 0) matrix[idx] += 1.0;
+			if ((j+2)%(i+1) == 0) matrix[idx] += -1.0;
+			idx++;
+		}
+	}
+	return matrix;
+}
+
 double* lapla_matrix(int dim)
 {
 	double* matrix = (double*) malloc(dim*dim*sizeof(double));
@@ -37,8 +55,8 @@ double* lapla_matrix(int dim)
 		{
 			matrix[idx] = 0.0;
 			if ((j+1)%(i+1) == 0) matrix[idx] = 2.0;
-			if ((j+i+1)%(i+1) == 0) matrix[idx] = -1.0;
-			if ((j+2)%(i+1) == 0) matrix[idx] = -1.0;
+			if ((j+i+1)%(i+1) == 0) matrix[idx] += -1.0;
+			if ((j+2)%(i+1) == 0) matrix[idx] += -1.0;
 			idx++;
 		}
 	}
@@ -51,7 +69,8 @@ double* lapla_matrix(int dim)
  */
 void get_eigenvalues(int dim)
 {
-	double* matrix = lapla_matrix(dim);
+	// double* matrix = lapla_matrix(dim);
+	double* matrix = commu_matrix(dim);
 
 	// Magic incantation to diagonalize the matrix.
 	gsl_matrix_view m = gsl_matrix_view_array (matrix, dim, dim);
@@ -61,11 +80,20 @@ void get_eigenvalues(int dim)
 	gsl_eigen_nonsymmv (&m.matrix, eval, evec, w);
 	gsl_eigen_nonsymmv_free (w);
 
+	gsl_eigen_nonsymmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_DESC);
 
-	/* Get the eigenvector for the largest eigenvalue, which
-	 * should be 1.0.  Graph it to make sure it matches what
-	 * we already know it should be.
-	 */
+	for (int k=0; k<10; k++)
+	{
+		gsl_complex eval_0 = gsl_vector_complex_get (eval, k);
+
+		double x = GSL_REAL(eval_0);
+		double y = GSL_IMAG(eval_0);
+		double mag = sqrt(x*x+y*y);
+		printf ("# eigenvalue = %g + i %g Magnitude=%g\n#\n", x, y, mag);
+	}
+
+#if 0
+	/* Get the eigenvector for the largest eigenvalue.  */
 	gsl_eigen_nonsymmv_sort (eval, evec, GSL_EIGEN_SORT_ABS_DESC);
 
 	gsl_complex eval_0 = gsl_vector_complex_get (eval, 0);
@@ -75,7 +103,6 @@ void get_eigenvalues(int dim)
 	double mag = sqrt(x*x+y*y);
 	printf ("# eigenvalue = %20.18g + i %20.18g Magnitude=%g\n#\n", x, y, mag);
 
-#if 0
 	/* Get the eigenvector */
 	gsl_vector_complex_view evec_0 = gsl_matrix_complex_column (evec, 0);
 
