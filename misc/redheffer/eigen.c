@@ -26,6 +26,24 @@ double* divisor_matrix(int dim)
 	return matrix;
 }
 
+double* shift_matrix(int dim, int shift)
+{
+	double* matrix = (double*) malloc(dim*dim*sizeof(double));
+
+	int idx = 0;
+	for (int i=0; i< dim; i++)
+	{
+		int k = i+1;
+		for (int j=0; j< dim; j++)
+		{
+			matrix[idx] = 0.0;
+			int m = j+1;
+			if (k<=(m-shift) && (m - shift)%k == 0) matrix[idx] = 1.0;
+			idx++;
+		}
+	}
+	return matrix;
+}
 double* commu_matrix(int dim)
 {
 	double* matrix = (double*) malloc(dim*dim*sizeof(double));
@@ -33,11 +51,15 @@ double* commu_matrix(int dim)
 	int idx = 0;
 	for (int i=0; i< dim; i++)
 	{
+		int k = i+1;
 		for (int j=0; j< dim; j++)
 		{
+			int m = j+1;
 			matrix[idx] = 0.0;
-			if ((j+i+1)%(i+1) == 0) matrix[idx] += 1.0;
-			if ((j+2)%(i+1) == 0) matrix[idx] += -1.0;
+			int shift = 1;
+			if (k<=(m-shift) && (m - shift)%k == 0) matrix[idx] = 1.0;
+			shift  = -1;
+			if (k<=(m-shift) && (m - shift)%k == 0) matrix[idx] += -1.0;
 			idx++;
 		}
 	}
@@ -51,12 +73,18 @@ double* lapla_matrix(int dim)
 	int idx = 0;
 	for (int i=0; i< dim; i++)
 	{
+		int k = i+1;
 		for (int j=0; j< dim; j++)
 		{
 			matrix[idx] = 0.0;
-			if ((j+1)%(i+1) == 0) matrix[idx] = 2.0;
-			if ((j+i+1)%(i+1) == 0) matrix[idx] += -1.0;
-			if ((j+2)%(i+1) == 0) matrix[idx] += -1.0;
+			int m = j+1;
+			matrix[idx] = 0.0;
+			int shift = 0;
+			if (k<=(m-shift) && (m - shift)%k == 0) matrix[idx] = 2.0;
+			shift = 1;
+			if (k<=(m-shift) && (m - shift)%k == 0) matrix[idx] += -1.0;
+			shift = -1;
+			if (k<=(m-shift) && (m - shift)%k == 0) matrix[idx] += -1.0;
 			idx++;
 		}
 	}
@@ -64,13 +92,30 @@ double* lapla_matrix(int dim)
 }
 
 
+void prt_matrix(double* matrix, int dim)
+{
+	int idx = 0;
+	for (int i=0; i< dim; i++)
+	{
+		for (int j=0; j< dim; j++)
+		{
+			if (i<13 && j< 13) printf("%3.0f ", matrix[idx]);
+			idx++;
+		}
+		if (i< 13) printf("\n");
+	}
+}
+
 /*
  * Get some eigenvectors
  */
 void get_eigenvalues(int dim)
 {
-	// double* matrix = lapla_matrix(dim);
-	double* matrix = commu_matrix(dim);
+	// double* matrix = divisor_matrix(dim);
+	// double* matrix = shift_matrix(dim, -1);
+	// double* matrix = commu_matrix(dim);
+	double* matrix = lapla_matrix(dim);
+	prt_matrix(matrix, dim);
 
 	// Magic incantation to diagonalize the matrix.
 	gsl_matrix_view m = gsl_matrix_view_array (matrix, dim, dim);
