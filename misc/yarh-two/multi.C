@@ -15,7 +15,11 @@ static complex at_prime (unsigned int p)
 {
 	double pr = (double) p;
 	// return sqrt(pr*pr + pr);
-	return sqrt(pr*pr - 0.5*pr);
+	// return sqrt(pr*pr - 0.5*pr);
+	// return pr; // Riemann zeta
+	// return sqrt(pr*pr - 0.0001*pr);
+	// return sqrt(pr*pr); // Riemann again
+	return sqrt(pr*pr - 1.0e-6*pr);
 }
 
 // Helper function
@@ -80,7 +84,7 @@ complex alter_raw(unsigned int n)
 // printf("duuude alter n=%d\n", n);
 	complex val = plic_fun(n);
 	val = cpow(val, -ess);
-	if (n%2 == 0) return val;
+	if (n%2 == 1) return val;
 	return -val;
 }
 
@@ -103,8 +107,10 @@ int main()
 	{
 		cpx_one_d_cache_clear(&altern);
 		ess = 0.5 + I*y;
-		complex rslt = euler_sum_cut(alter, 1500);
-		printf("%g	%g	%g	%g\n", creal(ess), cimag(ess), creal(rslt), cimag(rslt));
+		complex eta = euler_sum_cut(alter, 2500);
+		complex cyc = 1.0 / (1.0 + 2.0* alter(2));
+		eta *= cyc;
+		printf("%g	%g	%g	%g\n", creal(ess), cimag(ess), creal(eta), cimag(eta));
 		fflush(stdout);
 	}
 }

@@ -10,7 +10,8 @@ set title "stuff"
 set xlabel "n"
 set ylabel "f(n)"
 
-set yrange[-6:6]
+# magic incantation to draw vert line
+set arrow from 0, graph 0 to 0, graph 1 nohead
 
 plot "critic.dat" using 3:4 title "" lw 2, \
-	0 lw 2 title "",  "critic.dat" using 3:(1e3*$3) lw 2 title ""
+	0 lw 2 title ""
