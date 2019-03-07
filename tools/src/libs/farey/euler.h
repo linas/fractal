@@ -22,7 +22,7 @@ extern "C" {
 //  C and C++ is fugnuts insane in complex support.
 #define complex _Complex
 
-typedef complex arithmetic(int);
+typedef complex arithmetic(unsigned int);
 
 complex euler_sum(arithmetic);
 

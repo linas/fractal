@@ -22,7 +22,7 @@ complex euler_sum(arithmetic fun)
 
 	// DBL_MAX = 1.79769e+308
 	// so log_2 of that is approx 1024
-	int n = 0;
+	unsigned int n = 0;
 	for (; n<1000; n++)
 	{
 		complex term = 0.0;
@@ -43,7 +43,7 @@ complex euler_sum(arithmetic fun)
 	for (; n<16300; n++)
 	{
 		complex term = 0.0;
-		for (int k=0; k<=n; k++)
+		for (unsigned int k=0; k<=n; k++)
 		{
 			// Avoid insane exponents
 			long double bino = binomial(n, k) * tn;
@@ -64,7 +64,7 @@ complex euler_sum(arithmetic fun)
 #include <stdio.h>
 
 complex z = 0.0;
-complex zee(int n) { return cpow(z, n-1); }
+complex zee(unsigned int n) { return cpow(z, n-1); }
 
 int main()
 {
