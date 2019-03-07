@@ -10,55 +10,40 @@
  *
  * March 2019  -- Linas Vepstas
  */
-#ifndef EULER_H__
-#define EULER_H__
 
-#include <complex.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-//  C and C++ is fugnuts insane in complex support.
-#define complex _Complex
-
-typedef complex arithmetic(int);
-
-complex euler_sum(arithmetic);
-
-
-#ifdef __cplusplus
-};
-#endif
-
-#endif /* EULER_H__ */
-
+#include <stdio.h>
 #include "binomial.h"
+#include "euler.h"
 
 complex euler_sum(arithmetic fun)
 {
 	complex sum = 0.0;
-	double tn = 0.5;
-	int n = 0;
-	while (1)
+	long double tn = 0.5;
+
+	// LDBL_MAX =1.18973e+4932
+	// so log_2 of that is approx 16384
+	for (int n=0; n<16300; n++)
 	{
 		complex term = 0.0;
 		for (int k=0; k<=n; k++)
 		{
-			term += binomial(n, k) * fun(k+1);
+			// Avoid insane exponents
+			long double bino = binomial(n, k) * tn;
+			term += bino * fun(k+1);
 		}
-		term *= tn;
 		sum += term;
+		if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
 		if (cabs(term) < 1.0e-20) return sum;
-		n++;
 		tn *= 0.5;
 	}
-	return 0.0;
+	fprintf(stderr, "Error: Euler-sum non-convergence!\n");
+	return sum;
 }
 
 #define TEST
 #ifdef TEST
 
+#include <float.h>
 #include <stdio.h>
 
 complex z = 0.0;
@@ -66,7 +51,9 @@ complex zee(int n) { return cpow(z, n-1); }
 
 int main()
 {
+	printf("LDBL_MAX =%Lg\n", LDBL_MAX);
 	z = 0.7 + I*0.5;
+	z = 0.975;
 	complex rslt = euler_sum(zee);
 	complex xpct = 1.0 / (1.0-z);
 	printf("z=%f + i%f  got %f + i%f expect %f + i%f\n",

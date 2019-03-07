@@ -40,7 +40,7 @@ binomial.o:	binomial.c binomial.h
 bitops.o: bitops.c bitops.h
 cache.o:	cache.c cache.h
 dirichlet.o: dirichlet.c dirichlet.h
-euler.o: euler.c
+euler.o: euler.c euler.h
 Farey.o:	Farey.C Farey.h
 FareyTree.o:	FareyTree.C FareyTree.h
 gcf.o:	gcf.c gcf.h
