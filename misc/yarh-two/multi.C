@@ -19,7 +19,11 @@ static complex at_prime (unsigned int p)
 	// return pr; // Riemann zeta
 	// return sqrt(pr*pr - 0.0001*pr);
 	// return sqrt(pr*pr); // Riemann again
-	return sqrt(pr*pr - 1.0e-6*pr);
+	// return sqrt(pr*pr - 1.0e-6*pr);
+	// return sqrt(pr*pr + pr);
+	return sqrt(pr*pr + 1.0e-6*pr);
+	// return sqrt(pr*pr + 1.0e-4*pr);
+	// return sqrt(pr*pr + 0.01*pr);
 }
 
 // Helper function
@@ -103,6 +107,9 @@ complex alter(unsigned int n)
 int main()
 {
 	// mktable();
+	ess = 0.3 + I*28;
+	euler_sum_cut(alter, 2500);
+exit(0);
 	for (double y = 0.0; y<30.0; y+=0.1)
 	{
 		cpx_one_d_cache_clear(&altern);

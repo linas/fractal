@@ -295,20 +295,104 @@ When
 
 \begin_layout Itemize
 When 
-\begin_inset Formula $f\left(p\right)=\sqrt{p^{2}-\varepsilon p}$
+\begin_inset Formula $f\left(p\right)=\sqrt{p^{2}+\varepsilon p}$
 \end_inset
 
  for 
-\begin_inset Formula $\varepsilon>0$
+\begin_inset Formula $\left|\varepsilon\right|>0$
 \end_inset
 
- convergence is poor, even for values as small as 
+ convergence on the critical line is poor, even for values as small as 
 \begin_inset Formula $\varepsilon=10^{-6}$
 \end_inset
 
  which is ..
  surprising.
+ ...
+ both positive and negative 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ Hmm.
+ I don't understand why, at all.
+ Just looking at the formula does not in any way suggest that the inner
+ sum is going to be more cancellative at 
+\begin_inset Formula $\varepsilon=0$
+\end_inset
+
+ ...
+ it would naively suggest faster convergence for large positive 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ ...
+ wtf.
+\end_layout
+
+\begin_layout Standard
+So lets look at this more closely.
+ When 
+\begin_inset Formula $f\left(p\right)=\sqrt{p^{2}+\varepsilon p}$
+\end_inset
+
+ for small 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ then the infidividual terms 
+\begin_inset Formula 
+\[
+t_{n}=\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{\left(f\left(k+1\right)\right)^{s}}
+\]
+
+\end_inset
+
+emulate those for the usual Hasse zeta (i.e.
  
+\begin_inset Formula $\varepsilon=0$
+\end_inset
+
+) until the term gets a bit smaller than 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ itself, whereupon the sequence of 
+\begin_inset Formula $t_{n}$
+\end_inset
+
+ starts bouncing and only very slowly decreasing.
+ This appears to be independent of 
+\begin_inset Formula $s$
+\end_inset
+
+ in the critical strip 
+\begin_inset Formula $0<\Re s<1$
+\end_inset
+
+.
+ WTF.
+ This is a very unexpected (to me) property of the binomial coefficient
+ summation.
+ Wow.
+ 
+\end_layout
+
+\begin_layout Standard
+The difference is very dramatic: for 
+\begin_inset Formula $\varepsilon=0$
+\end_inset
+
+, one gets approx (super-)exponential falloff in terms.
+ For other values, its exponential to a point and then asymptotic...
+ 
+\end_layout
+
+\begin_layout Standard
+Oh, hang on ...
+ this may be entirely due to rounding error.
+ Never mind ....
+ Sheesh
 \end_layout
 
 \begin_layout Subsubsection*

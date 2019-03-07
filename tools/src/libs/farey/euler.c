@@ -20,6 +20,7 @@ complex euler_sum_cut(arithmetic fun, unsigned int nmax)
 	complex sum = 0.0;
 	long double tn = 0.5;
 
+double prevterm=1.0;
 	// DBL_MAX = 1.79769e+308
 	// so log_2 of that is approx 1024
 	unsigned int n = 0;
@@ -31,8 +32,10 @@ complex euler_sum_cut(arithmetic fun, unsigned int nmax)
 			term += binomial(n, k) * fun(k+1);
 		}
 		term *= tn;
+printf("duuude n=%d sum=%g term=%g rat=%g\n", n, cabs(sum), cabs(term), prevterm/cabs(term));
+prevterm=cabs(term);
 		sum += term;
-		if (20 < n && cabs(term) < 1.0e-16 * cabs(sum)) return sum;
+//		if (20 < n && cabs(term) < 1.0e-16 * cabs(sum)) return sum;
 		tn *= 0.5;
 	}
 	fprintf(stderr, "Warning: Euler-sum double-precision overflow!\n");
