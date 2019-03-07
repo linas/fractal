@@ -7,6 +7,7 @@
 #include <math.h>
 #include <stdio.h>
 
+#include "cache.h"
 #include "euler.h"
 
 // When this is called, p is guaranteed to be prime
@@ -60,11 +61,24 @@ void mktable()
 	}
 }
 
+// Cache the values, for compute speed.
+#define complex _Complex
+DECLARE_CPX_CACHE(plic)
+complex plic_fun(unsigned int n)
+{
+	if (cpx_one_d_cache_check(&plic, n))
+		return cpx_one_d_cache_fetch(&plic, n);
+
+	complex val = multiplicative(at_prime, n);
+	cpx_one_d_cache_store(&plic, val, n);
+	return val;
+}
+
 complex ess = 0.0;
 complex alter(unsigned int n)
 {
 // printf("duuude alter n=%d\n", n);
-	complex fun = multiplicative(at_prime, n);
+	complex fun = plic_fun(n);
 	fun = cpow(fun, ess);
 	if (n%2 == 0) return fun;
 	return -fun;
