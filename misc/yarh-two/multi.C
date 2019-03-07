@@ -10,15 +10,15 @@
 #include "euler.h"
 
 // When this is called, p is guaranteed to be prime
-static double complex at_prime (unsigned int p)
+static complex at_prime (unsigned int p)
 {
 	double pr = (double) p;
-	return sqrt(pr*pr + pr);
-	// return sqrt(pr*pr - pr);
+	// return sqrt(pr*pr + pr);
+	return sqrt(pr*pr - pr);
 }
 
 // Helper function
-static double complex plicplic(arithmetic, unsigned int, unsigned int);
+static complex plicplic(arithmetic, unsigned int, unsigned int);
 
 /// Return the value of a completely multiplicative function at
 /// the positive integer `n`.  It is assumed that `fun` will provide
@@ -28,7 +28,7 @@ static double complex plicplic(arithmetic, unsigned int, unsigned int);
 ///
 /// When "arithmetic fun" is called, n is guaranteed to be prime
 //
-double complex multiplicative(arithmetic fun, unsigned int n)
+complex multiplicative(arithmetic fun, unsigned int n)
 {
 	/* handle trivial boundary case */
 	if (n <= 3) return fun(n);
@@ -50,6 +50,7 @@ static complex plicplic(arithmetic fun, unsigned int y, unsigned int x)
 	else return plicplic(fun, y, x+1);
 }
 
+// Suitable for graphing with gnuplot
 void mktable()
 {
 	for (int n=1; n<633; n++)
@@ -58,7 +59,24 @@ void mktable()
 		printf("%d	%g	%g\n", n, creal(v), cimag(v));
 	}
 }
+
+complex ess = 0.0;
+complex alter(unsigned int n)
+{
+printf("duuude alter n=%d\n", n);
+	complex fun = multiplicative(at_prime, n);
+	fun = cpow(fun, ess);
+	if (n%2 == 0) return fun;
+	return -fun;
+}
+
 int main()
 {
-	mktable();
+	// mktable();
+	for (double y = 0.0; y<30.0; y+=0.1)
+	{
+		ess = 0.5 + I*y;
+		complex rslt = euler_sum(alter);
+		printf("%g	%g	%g	%g\n", creal(ess), cimag(ess), creal(rslt), cimag(rslt));
+	}
 }

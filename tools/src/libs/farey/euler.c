@@ -32,7 +32,7 @@ complex euler_sum(arithmetic fun)
 		}
 		term *= tn;
 		sum += term;
-		if (cabs(term) < 1.0e-20) return sum;
+		if (20 < n && cabs(term) < 1.0e-16 * cabs(sum)) return sum;
 		tn *= 0.5;
 	}
 	fprintf(stderr, "Warning: Euler-sum double-precision overflow!\n");
