@@ -58,12 +58,10 @@ long totient_phi(long n)
 
 static long phiphi(long y, long x)
 {
-	long z;
-
 	if (x+1 == y) return x; /* phi(prime p) = p-1 */
 	if ((y%x) == 0)
 	{
-		z = y/x;
+		long z = y/x;
 		if (gcf64(x,z) == 1)
 			return totient_phi(x)*totient_phi(z); /* multiplicative property */
 		else
