@@ -12,13 +12,22 @@
 // When this is called, p is guaranteed to be prime
 static double complex at_prime (unsigned int p)
 {
-printf("duuude p=%d\n", p);
 	double pr = (double) p;
 	return sqrt(pr*pr + pr);
+	// return sqrt(pr*pr - pr);
 }
 
-// When "arithmetic fun" is called, n is guaranteed to be prime
+// Helper function
 static double complex plicplic(arithmetic, unsigned int, unsigned int);
+
+/// Return the value of a completely multiplicative function at
+/// the positive integer `n`.  It is assumed that `fun` will provide
+/// the values at `n`==prime. All that this function does is to
+/// factor `n` into a product of primes, and then call `fun` on the
+/// resulting product.
+///
+/// When "arithmetic fun" is called, n is guaranteed to be prime
+//
 double complex multiplicative(arithmetic fun, unsigned int n)
 {
 	/* handle trivial boundary case */
@@ -26,7 +35,7 @@ double complex multiplicative(arithmetic fun, unsigned int n)
 	return plicplic(fun, n, 2);
 }
 
-// Helper function for above.
+// Tail-recursive helper function for above.
 static complex plicplic(arithmetic fun, unsigned int y, unsigned int x)
 {
 	// y is prime.
@@ -41,11 +50,15 @@ static complex plicplic(arithmetic fun, unsigned int y, unsigned int x)
 	else return plicplic(fun, y, x+1);
 }
 
-int main()
+void mktable()
 {
-	for (int n=1; n<33; n++)
+	for (int n=1; n<633; n++)
 	{
 		complex v = multiplicative(at_prime, n);
-		printf("duuude at %d its %f+i%f\n", n, creal(v), cimag(v));
+		printf("%d	%g	%g\n", n, creal(v), cimag(v));
 	}
+}
+int main()
+{
+	mktable();
 }
