@@ -25,6 +25,7 @@ extern "C" {
 typedef complex arithmetic(unsigned int);
 
 complex euler_sum(arithmetic);
+complex euler_sum_cut(arithmetic, unsigned int);
 
 
 #ifdef __cplusplus

@@ -15,7 +15,7 @@
 #include "binomial.h"
 #include "euler.h"
 
-complex euler_sum(arithmetic fun)
+complex euler_sum_cut(arithmetic fun, unsigned int nmax)
 {
 	complex sum = 0.0;
 	long double tn = 0.5;
@@ -40,9 +40,11 @@ complex euler_sum(arithmetic fun)
 	// Keep going some more. Watch out for exponent overflow.
 	// LDBL_MAX = 1.18973e+4932
 	// so log_2 of that is approx 16384
-	for (; n<16300; n++)
+	// for (; n<16300; n++)
+	complex term = 0.0;
+	for (; n<nmax; n++)
 	{
-		complex term = 0.0;
+		term = 0.0;
 		for (unsigned int k=0; k<=n; k++)
 		{
 			// Avoid insane exponents
@@ -50,11 +52,20 @@ complex euler_sum(arithmetic fun)
 			term += bino * fun(k+1);
 		}
 		sum += term;
-		if (cabs(term) < 1.0e-20) return sum;
+		if (cabs(term) < 1.0e-16 * cabs(sum)) return sum;
 		tn *= 0.5;
 	}
-	fprintf(stderr, "Error: Euler-sum non-convergence!\n");
+	fprintf(stderr,
+		"Error: Euler-sum non-convergence at %d! |term|=%g |sum|=%g\n",
+		nmax, cabs(term), cabs(sum));
 	return sum;
+}
+
+complex euler_sum(arithmetic fun)
+{
+	// LDBL_MAX = 1.18973e+4932
+	// so log_2 of that is approx 16384
+	return euler_sum_cut(fun, 16300);
 }
 
 // #define TEST 1
