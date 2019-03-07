@@ -97,6 +97,7 @@ void TYPE_NAME##_one_d_cache_clear(TYPE_NAME##_cache *c)	\
 		  CACHE_CLEAR(TYPE_NAME,TYPE,IDX_TYPE)
 
 DEFINE_CACHE(ld, long double, unsigned int)
+DEFINE_CACHE(cpx, complex, unsigned int)
 DEFINE_CACHE(ui, unsigned int, unsigned int)
 DEFINE_CACHE(ul, unsigned long, unsigned long)
 DEFINE_CACHE(ull, unsigned __int128, unsigned int)

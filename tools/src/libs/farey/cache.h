@@ -5,6 +5,7 @@
  * Linas Vepstas 2005,2006
  */
 
+#include <complex.h>
 #include <pthread.h>
 #include <stdbool.h> // for boolean
 #include <stddef.h>  // for NULL
@@ -47,6 +48,45 @@ void ld_one_d_cache_store(ld_cache *c, long double val, unsigned int n);
  * Clear the cache.
  */
 void ld_one_d_cache_clear(ld_cache *c);
+
+/* ======================================================================= */
+/* Cache management - double complex. */
+
+typedef struct {
+	unsigned int nmax;
+	double complex *cache;
+	bool *ticky;
+	bool disabled;
+	pthread_spinlock_t spin;
+} cpx_cache;
+
+
+#define DECLARE_CPX_CACHE(name)         \
+	static cpx_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, \
+		.disabled = false }; \
+	__attribute__((constructor)) void name##_init(void) { \
+	pthread_spin_init(&name.spin, 0); }
+
+/** cpx_one_d_cache_check() -- check if double complex value is in the cache
+ *  Returns true if the value is in the cache, else returns false.
+ *  This assumes a 1-dimensional cache layout (simple array).
+ */
+bool cpx_one_d_cache_check(cpx_cache *c, unsigned int n);
+
+/**
+ * ld_one_d_cache_fetch - fetch value from cache
+ */
+complex cpx_one_d_cache_fetch(cpx_cache *c, unsigned int n);
+
+/**
+ * ld_one_d_cache_store - store value in cache
+ */
+void cpx_one_d_cache_store(cpx_cache *c, complex val, unsigned int n);
+
+/**
+ * Clear the cache.
+ */
+void cpx_one_d_cache_clear(cpx_cache *c);
 
 /* ======================================================================= */
 /* Cache management -- unsigned int */

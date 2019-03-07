@@ -63,7 +63,7 @@ void mktable()
 complex ess = 0.0;
 complex alter(unsigned int n)
 {
-printf("duuude alter n=%d\n", n);
+// printf("duuude alter n=%d\n", n);
 	complex fun = multiplicative(at_prime, n);
 	fun = cpow(fun, ess);
 	if (n%2 == 0) return fun;
