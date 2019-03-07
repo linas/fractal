@@ -105,5 +105,6 @@ int main()
 		ess = 0.5 + I*y;
 		complex rslt = euler_sum_cut(alter, 1500);
 		printf("%g	%g	%g	%g\n", creal(ess), cimag(ess), creal(rslt), cimag(rslt));
+		fflush(stdout);
 	}
 }
