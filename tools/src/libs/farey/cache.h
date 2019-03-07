@@ -52,9 +52,12 @@ void ld_one_d_cache_clear(ld_cache *c);
 /* ======================================================================= */
 /* Cache management - double complex. */
 
+//  C and C++ is fugnuts insane in complex support.
+#define complex _Complex
+
 typedef struct {
 	unsigned int nmax;
-	double complex *cache;
+	complex *cache;
 	bool *ticky;
 	bool disabled;
 	pthread_spinlock_t spin;
