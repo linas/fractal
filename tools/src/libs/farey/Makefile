@@ -18,7 +18,7 @@ CCP = c++ -Wall -g -O3 -std=c++14 -I $(INC)
 RM= rm -f
 
 OBJS=bernoulli.o binomial.o bitops.o \
-     cache.o dirichlet.o Farey.o FareyTree.o gcf.o gpf.o \
+     cache.o dirichlet.o euler.o Farey.o FareyTree.o gcf.o gpf.o \
      harmonic.o isqrt.o modular.o moebius.o necklace.o \
      prime.o question.o question-new.o stern-brocot.o \
      stirling.o totient.o
@@ -39,7 +39,8 @@ bernoulli.o:	bernoulli.c bernoulli.h
 binomial.o:	binomial.c binomial.h
 bitops.o: bitops.c bitops.h
 cache.o:	cache.c cache.h
-dirichlet.o: dirichlet.c
+dirichlet.o: dirichlet.c dirichlet.h
+euler.o: euler.c
 Farey.o:	Farey.C Farey.h
 FareyTree.o:	FareyTree.C FareyTree.h
 gcf.o:	gcf.c gcf.h
