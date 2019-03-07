@@ -10,6 +10,10 @@
 #include <stdbool.h> // for boolean
 #include <stddef.h>  // for NULL
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* ======================================================================= */
 /* Cache management - long double. */
 
@@ -206,3 +210,7 @@ void ull_one_d_cache_store(ull_cache *c, unsigned __int128 val, unsigned int n);
 void ull_one_d_cache_clear(ull_cache *c);
 
 /* ======================================================================= */
+
+#ifdef __cplusplus
+};
+#endif
