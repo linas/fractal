@@ -32,11 +32,10 @@ complex euler_sum(arithmetic fun)
 		}
 		term *= tn;
 		sum += term;
-if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
 		if (cabs(term) < 1.0e-20) return sum;
 		tn *= 0.5;
 	}
-	fprintf(stderr, "Warning: Euler-sum double overflow!\n");
+	fprintf(stderr, "Warning: Euler-sum double-precision overflow!\n");
 
 	// Keep going some more. Watch out for exponent overflow.
 	// LDBL_MAX = 1.18973e+4932
@@ -51,9 +50,6 @@ if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
 			term += bino * fun(k+1);
 		}
 		sum += term;
-printf("its %d sum=%f+i%f term=%g+i%g tn=%Lg\n", n, creal(sum), cimag(sum),
-creal(term), cimag(term), tn);
-if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
 		if (cabs(term) < 1.0e-20) return sum;
 		tn *= 0.5;
 	}
@@ -61,8 +57,8 @@ if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
 	return sum;
 }
 
-#define TEST
-#ifdef TEST
+// #define TEST 1
+#if TEST
 
 #include <float.h>
 #include <stdio.h>
