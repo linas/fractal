@@ -20,9 +20,28 @@ complex euler_sum(arithmetic fun)
 	complex sum = 0.0;
 	long double tn = 0.5;
 
-	// LDBL_MAX =1.18973e+4932
+	// DBL_MAX = 1.79769e+308
+	// so log_2 of that is approx 1024
+	int n = 0;
+	for (; n<1000; n++)
+	{
+		complex term = 0.0;
+		for (int k=0; k<=n; k++)
+		{
+			term += binomial(n, k) * fun(k+1);
+		}
+		term *= tn;
+		sum += term;
+if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
+		if (cabs(term) < 1.0e-20) return sum;
+		tn *= 0.5;
+	}
+	fprintf(stderr, "Warning: Euler-sum double overflow!\n");
+
+	// Keep going some more. Watch out for exponent overflow.
+	// LDBL_MAX = 1.18973e+4932
 	// so log_2 of that is approx 16384
-	for (int n=0; n<16300; n++)
+	for (; n<16300; n++)
 	{
 		complex term = 0.0;
 		for (int k=0; k<=n; k++)
@@ -32,7 +51,9 @@ complex euler_sum(arithmetic fun)
 			term += bino * fun(k+1);
 		}
 		sum += term;
-		if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
+printf("its %d sum=%f+i%f term=%g+i%g tn=%Lg\n", n, creal(sum), cimag(sum),
+creal(term), cimag(term), tn);
+if (cabs(term) < 1.0e-20) {printf("duuuude n=%d tn=%Lg\n", n, tn);}
 		if (cabs(term) < 1.0e-20) return sum;
 		tn *= 0.5;
 	}
@@ -51,7 +72,7 @@ complex zee(int n) { return cpow(z, n-1); }
 
 int main()
 {
-	printf("LDBL_MAX =%Lg\n", LDBL_MAX);
+	printf("DBL_MAX=%g LDBL_MAX =%Lg\n", DBL_MAX, LDBL_MAX);
 	z = 0.7 + I*0.5;
 	z = 0.975;
 	complex rslt = euler_sum(zee);
