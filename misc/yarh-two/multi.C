@@ -15,7 +15,7 @@ static complex at_prime (unsigned int p)
 {
 	double pr = (double) p;
 	// return sqrt(pr*pr + pr);
-	return sqrt(pr*pr - pr);
+	return sqrt(pr*pr - 0.5*pr);
 }
 
 // Helper function
@@ -62,7 +62,6 @@ void mktable()
 }
 
 // Cache the values, for compute speed.
-#define complex _Complex
 DECLARE_CPX_CACHE(plic)
 complex plic_fun(unsigned int n)
 {
@@ -71,17 +70,30 @@ complex plic_fun(unsigned int n)
 
 	complex val = multiplicative(at_prime, n);
 	cpx_one_d_cache_store(&plic, val, n);
+// printf("plic n=%d val=%f+i%f\n", n, creal(val), cimag(val));
 	return val;
 }
 
 complex ess = 0.0;
-complex alter(unsigned int n)
+complex alter_raw(unsigned int n)
 {
 // printf("duuude alter n=%d\n", n);
-	complex fun = plic_fun(n);
-	fun = cpow(fun, ess);
-	if (n%2 == 0) return fun;
-	return -fun;
+	complex val = plic_fun(n);
+	val = cpow(val, -ess);
+	if (n%2 == 0) return val;
+	return -val;
+}
+
+DECLARE_CPX_CACHE(altern)
+complex alter(unsigned int n)
+{
+	if (cpx_one_d_cache_check(&altern, n))
+		return cpx_one_d_cache_fetch(&altern, n);
+
+	complex val = alter_raw(n);
+	cpx_one_d_cache_store(&altern, val, n);
+// printf("alter n=%d val=%f+i%f\n", n, creal(val), cimag(val));
+	return val;
 }
 
 int main()
@@ -89,8 +101,9 @@ int main()
 	// mktable();
 	for (double y = 0.0; y<30.0; y+=0.1)
 	{
+		cpx_one_d_cache_clear(&altern);
 		ess = 0.5 + I*y;
-		complex rslt = euler_sum(alter);
+		complex rslt = euler_sum_cut(alter, 1500);
 		printf("%g	%g	%g	%g\n", creal(ess), cimag(ess), creal(rslt), cimag(rslt));
 	}
 }
