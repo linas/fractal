@@ -169,9 +169,9 @@ and analogously the Dirichlet series
 \begin_layout Standard
 The object being studied here is the analogous series 
 \begin_inset Formula 
-\[
-\mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}\left(f\left(n\right)\right)^{-s}
-\]
+\begin{equation}
+\mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}\left(f\left(n\right)\right)^{-s}\label{eq:mult-series}
+\end{equation}
 
 \end_inset
 
@@ -226,9 +226,85 @@ f\left(p\right)=\sqrt{p^{2}+p}
 
 \end_inset
 
- which gives a zeta-function-like sum, but clearly different.
+which gives a zeta-function-like sum, but clearly different.
  Easy to say, hard to do.
  Work not started, yet.
+\end_layout
+
+\begin_layout Standard
+Step 1.
+ Analytic continuation.
+ Given some generic sequence 
+\begin_inset Formula $f\left(p\right)\ge1$
+\end_inset
+
+, it would seem that eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mult-series"
+
+\end_inset
+
+ as a pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+.
+ The first step requires analytic continuation to 
+\begin_inset Formula $\Re s<1$
+\end_inset
+
+.
+ How? First, similar to the Dirichlet eta, there is the identity:
+\begin_inset Formula 
+\[
+\mathcal{M}_{f}\left(s\right)=\frac{1}{1-2/\left(f\left(2\right)\right)^{s}}\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{\left(f\left(n\right)\right)^{s}}
+\]
+
+\end_inset
+
+with the sum on the right being conditionally convergent for 
+\begin_inset Formula $\Re s>0$
+\end_inset
+
+.
+ However, the rate of convergence is far too slow for numerical exploration.
+ It can be improved by means of Euler summation, so that 
+\begin_inset Formula 
+\[
+\mathcal{E}_{f}\left(s\right)=\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{\left(f\left(n\right)\right)^{s}}=\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{\left(f\left(k+1\right)\right)^{s}}
+\]
+
+\end_inset
+
+should be tame enough for numerical exploration.
+\end_layout
+
+\begin_layout Subsubsection*
+Other identities, e.g.
+ Functional equation
+\end_layout
+
+\begin_layout Standard
+To emulate the Riemann zeta functional equation, we need to reciprocate
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\exp-\left(f\left(n\right)\right)^{2}\pi x
+\]
+
+\end_inset
+
+but how? For 
+\begin_inset Formula $f\left(n\right)=n$
+\end_inset
+
+, this is the Jacobi theta function...
+ 
+\end_layout
+
+\begin_layout Standard
+Other alternatives: can we do the rising factorial trick?
 \end_layout
 
 \end_body
