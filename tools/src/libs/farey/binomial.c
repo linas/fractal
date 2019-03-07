@@ -31,7 +31,7 @@ inline long double factorial (int n)
 // ======================================================
 // brute-force binomial coefficent
 // must have m<=n, m>=0
-inline long double binomial (int n, int m)
+inline long double brute_binomial (int n, int m)
 {
 	if (m==n) return 1.0L;
 	if (0>m) return 0.0L;
@@ -45,6 +45,24 @@ inline long double binomial (int n, int m)
 		bin *= (long double) (m+k);
 	}
 	bin /= factorial (l);
+	return bin;
+}
+
+// less over-flowy binomial coefficent (but ever so slightly slower)
+// must have m<=n, m>=0
+inline long double binomial (int n, int m)
+{
+	if (m==n) return 1.0L;
+	if (0>m) return 0.0L;
+	if (2*m < n) m = n-m;
+	int l = n-m;
+	if (0>l) return 0.0L;
+	int k;
+	long double bin = 1.0L;
+	for (k=1; k<=l; k++)
+	{
+		bin *= ((long double) (m+k)) / ((long double) k);
+	}
 	return bin;
 }
 

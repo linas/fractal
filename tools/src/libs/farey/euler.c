@@ -73,6 +73,7 @@ complex zee(int n) { return cpow(z, n-1); }
 int main()
 {
 	printf("DBL_MAX=%g LDBL_MAX =%Lg\n", DBL_MAX, LDBL_MAX);
+	// print_binomial();
 	z = 0.7 + I*0.5;
 	z = 0.975;
 	complex rslt = euler_sum(zee);
