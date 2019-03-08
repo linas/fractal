@@ -371,57 +371,147 @@ For
 \begin_inset Formula $\varepsilon=0$
 \end_inset
 
-, the resummation is known to yeild a globally uniformly convergent series
- for the Riemann zeta, as proven by Hasse.
+, the resummation is known to yeild a globally convergent series for the
+ Riemann zeta, as proven by Helmut Hasse in 1930; a modern treatment is
+ given by Sondow
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sondow94"
+
+\end_inset
+
+, showing uniform convergence on compact sets.
+ Numerically, what this means is that, for large enough 
+\begin_inset Formula $n$
+\end_inset
+
+, that 
+\begin_inset Formula 
+\[
+t_{n}\left(\varepsilon=0\right)\to\mathcal{O}\left(2^{-n}\right)
+\]
+
+\end_inset
+
+as a numerical observation (and not as an analytic claim).
+ Each term gets smaller by almost a factor of two.
+ At that rate, it does not take particularly long to converge well.
+ Convergence is exponential.
 \end_layout
 
 \begin_layout Standard
-emulate those for the usual Hasse zeta (i.e.
- 
-\begin_inset Formula $\varepsilon=0$
-\end_inset
-
-) until the term gets a bit smaller than 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
- itself, whereupon the sequence of 
-\begin_inset Formula $t_{n}$
-\end_inset
-
- starts bouncing and only very slowly decreasing.
- This appears to be independent of 
-\begin_inset Formula $s$
-\end_inset
-
- in the critical strip 
-\begin_inset Formula $0<\Re s<1$
+This does not happen for 
+\begin_inset Formula $\left|\varepsilon\right|>0$
 \end_inset
 
 .
- WTF.
- This is a very unexpected (to me) property of the binomial coefficient
- summation.
- Wow.
- 
-\end_layout
+ For the first few terms, one does see a smilar behavior: 
+\begin_inset Formula 
+\[
+t_{n}\left(\left|\varepsilon\right|>0\right)\sim t_{n}\left(\varepsilon=0\right)
+\]
 
-\begin_layout Standard
-The difference is very dramatic: for 
-\begin_inset Formula $\varepsilon=0$
 \end_inset
 
-, one gets approx exponential falloff in terms.
- For other values, its exponential to a point and then asymptotic...
- 
+can be seen for a few handful or dozens of terms, depending on 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ This soon disappears, being replaced by 
+\begin_inset Formula 
+\[
+t_{n}\left(\left|\varepsilon\right|>0\right)\sim\mathcal{O}\left(\frac{1}{\left(f\left(n\right)\right)^{s}}\right)
+\]
+
+\end_inset
+
+That is, the Euler series transformation trick provides no acceleration
+ at all.
 \end_layout
 
 \begin_layout Standard
 That's very very interesting.
  This requires some thinking ....
+\end_layout
+
+\begin_layout Section*
+Euler Transformation
+\end_layout
+
+\begin_layout Standard
+A recap of the Euler transformation of series is in order.
+ Given a convergent alternating series, the Euler resummation is given by
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\left(-1\right)^{n-1}a_{n}=\sum_{n=1}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}\left(-1\right)^{k}{n \choose k}a_{k+1}
+\]
+
+\end_inset
+
+A simple visual derivation proceeds by resumming with finite differences.
+ One begins simply by rewriting:
+\begin_inset Formula 
+\[
+a_{1}-a_{2}+a_{3}-\cdots=\frac{a_{1}}{2}+\frac{1}{2}\left(\Delta a_{1}-\Delta a_{2}+\Delta a_{3}-\cdots\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Delta a_{m}=a_{m}-a_{m+1}$
+\end_inset
+
+is the difference between successive terms.
+ The expression in parenthesis is again an alternating series, so the resummatio
+n is repeated.
+ One defines the finite difference 
+\begin_inset Formula $\Delta^{n}a_{m}$
+\end_inset
+
+ recursively as
+\begin_inset Formula 
+\[
+\Delta^{n}a_{m}=\Delta^{n-1}a_{m}-\Delta^{n-1}a_{m+1}
+\]
+
+\end_inset
+
+terminating the recursion by 
+\begin_inset Formula $\Delta^{0}a_{m}=a_{m}$
+\end_inset
+
+.
+ The resummation is now
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\left(-1\right)^{n-1}a_{n}=\sum_{n=0}^{\infty}\frac{\Delta^{n}a_{1}}{2^{n+1}}
+\]
+
+\end_inset
+
+and it is straight-forward to invoke the binomial theorem to obtain the
+ finite differences in terms of binomial coefficients
+\begin_inset Formula 
+\[
+\Delta^{n}a_{m}=\sum_{k=0}^{n}\left(-1\right)^{k}{n \choose k}a_{k+m}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The resumation as a whole is reminisent of Newton series.
+ That in turn suggests Flajolet and Sedgewick's Newton-Mellin-Poisson cycle
+ as a useful tool.
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Sondow94"
+key "Fla94"
 
 \end_inset
 
