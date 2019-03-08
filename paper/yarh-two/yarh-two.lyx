@@ -251,9 +251,9 @@ Can we even get off the ground, here? Such a general setting is so broad
  Numerical exploration might provide quick, easy insights.
  Perhaps a simple place to start would be a perturbation of the primes 
 \begin_inset Formula 
-\[
-f_{p}=p\left(1+\varepsilon\right)
-\]
+\begin{equation}
+f_{p}=p\left(1+\varepsilon\right)\label{eq:perturbed prime}
+\end{equation}
 
 \end_inset
 
@@ -316,9 +316,9 @@ The convergence of alternating series can often be improved by means of
  Euler summation.
  In this particular case, it seems promising to write 
 \begin_inset Formula 
-\[
-\mathcal{E}_{f}\left(s\right)=\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{f_{n}^{s}}=\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{f_{k+1}^{s}}
-\]
+\begin{equation}
+\mathcal{E}_{f}\left(s\right)=\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{f_{n}^{s}}=\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{f_{k+1}^{s}}\label{eq:resummation}
+\end{equation}
 
 \end_inset
 
@@ -396,7 +396,8 @@ t_{n}\left(\varepsilon=0\right)\to\mathcal{O}\left(2^{-n}\right)
 
 \end_inset
 
-as a numerical observation (and not as an analytic claim).
+as a numerical observation (and not as an analytic claim; but the proof
+ of uniform convergence says about as much.).
  Each term gets smaller by almost a factor of two.
  At that rate, it does not take particularly long to converge well.
  Convergence is exponential.
@@ -416,16 +417,16 @@ t_{n}\left(\left|\varepsilon\right|>0\right)\sim t_{n}\left(\varepsilon=0\right)
 
 \end_inset
 
-can be seen for a few handful or dozens of terms, depending on 
+can be seen for a handful or few dozens of terms, depending on 
 \begin_inset Formula $\varepsilon$
 \end_inset
 
 .
  This soon disappears, being replaced by 
 \begin_inset Formula 
-\[
-t_{n}\left(\left|\varepsilon\right|>0\right)\sim\mathcal{O}\left(\frac{1}{f_{n}^{s}}\right)
-\]
+\begin{equation}
+t_{n}\left(\left|\varepsilon\right|>0\right)\sim\frac{1}{f_{n}^{s}}\label{eq:asymptote}
+\end{equation}
 
 \end_inset
 
@@ -520,17 +521,16 @@ viz
 \emph default
 .
  
-\begin_inset Formula $a_{n}=a\left(n\right)$
+\begin_inset Formula $a_{n}=f\left(n\right)$
 \end_inset
 
  for some complex-analytic function 
-\begin_inset Formula $a\left(z\right)$
+\begin_inset Formula $f\left(z\right)$
 \end_inset
 
  on the complex plane.
- In such a case, the resumation is reminisent of Newton series, which in
- turn link to the Newton-Mellin-Poisson cycle, as noted by Flajolet and
- Sedgewick.
+ In such a case, the resumation suggests a Newton series, which in turn
+ link to the Newton-Mellin-Poisson cycle, as noted by Flajolet and Sedgewick.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Fla94"
@@ -541,11 +541,197 @@ key "Fla94"
 \end_layout
 
 \begin_layout Standard
-In the present case, we are not so lucky.
- Given some arbitrary multiplicative sequence, there is no naturally obvious
- extension to an interpolating function on the complex plane.
- Or is there.
- Of course there is.
+The Newton interpolation formula is
+\begin_inset Formula 
+\[
+f\left(z\right)=\sum_{n=0}^{\infty}\left(-1\right)^{n}{z-1 \choose n}\Delta^{n}a_{1}
+\]
+
+\end_inset
+
+but it is well-defined only when the finite differences are well-behaved.
+ Returning to the perturbed prime sequence of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:perturbed prime"
+
+\end_inset
+
+, the numeric evidence from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:asymptote"
+
+\end_inset
+
+ indicates that 
+\begin_inset Formula 
+\[
+\Delta^{n}a_{1}\sim\frac{2^{n}}{f_{n}^{s}}
+\]
+
+\end_inset
+
+which promptly overwhelms the binomial coefficient.
+ The perturbed prime sequence does not have a Newton interpolation.
+ This is easily seen for 
+\begin_inset Formula $z=0$
+\end_inset
+
+, as
+\begin_inset Formula 
+\[
+\left(-1\right)^{n}{-1 \choose n}=1
+\]
+
+\end_inset
+
+or generally 
+\begin_inset Formula 
+\[
+\left(-1\right)^{n}{-k \choose n}={n+k-1 \choose n}
+\]
+
+\end_inset
+
+applies to 
+\begin_inset Formula $z-1=-k$
+\end_inset
+
+.
+ For positive 
+\begin_inset Formula $z$
+\end_inset
+
+, the situation is more subtle.
+ In essence, the 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ are extremely 
+\begin_inset Quotes eld
+\end_inset
+
+jagged
+\begin_inset Quotes erd
+\end_inset
+
+, as a sequence – when 
+\begin_inset Formula $n$
+\end_inset
+
+ is a composite number, having many factors, it becomes combinatorially
+ large: 
+\begin_inset Formula $f_{n}=n\left(1+\epsilon\right)^{\Omega\left(n\right)}$
+\end_inset
+
+ where 
+\begin_inset Formula $\Omega\left(n\right)$
+\end_inset
+
+ is the number of prime factors of 
+\begin_inset Formula $n$
+\end_inset
+
+, with multiplicity.
+ When 
+\begin_inset Formula $\Omega\left(n\right)$
+\end_inset
+
+ is large, so then 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is far out of line from a placid linear progression, and the interpolant
+ is forced to interpolate ever-wilder, spikier swings.
+\end_layout
+
+\begin_layout Standard
+This suggests a new question: for which completely multiplicative functions
+ 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ does a well-behaved Newton series exist? If the Newton series is well-behaved,
+ then does it follow that eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:resummation"
+
+\end_inset
+
+ is uniformly convergent on compact domains? And finally: if the resummation
+ is uniformly convergent on compact domains, does it then follow that the
+ zeros lie in vertical strips, if not on vertical lines?
+\end_layout
+
+\begin_layout Standard
+The use of the plural in the last conjecture follows from classical identities
+ for the Liouville lambda 
+\begin_inset Formula $\lambda\left(n\right)$
+\end_inset
+
+, which is completely multiplicative, and has a Dirichlet series
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{\lambda\left(n\right)}{n^{-s}}=\frac{\zeta\left(2s\right)}{\zeta\left(s\right)}
+\]
+
+\end_inset
+
+so that the corresponding critical line lies at 
+\begin_inset Formula $2s=1+i\tau$
+\end_inset
+
+.
+ Similarly, for the completely multiplicative divisor function 
+\begin_inset Formula $\sigma_{\alpha}\left(n\right)$
+\end_inset
+
+, the Dirichlet series is
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{\sigma_{\alpha}\left(n\right)}{n^{-s}}=\zeta\left(s\right)\zeta\left(s-\alpha\right)
+\]
+
+\end_inset
+
+so that the zeros appear on two vertical lines.
+\end_layout
+
+\begin_layout Standard
+The fly in the ointment of these conjectures is that it's hardly clear that
+ the corresponding Newton series for the Liouville lambda or the divisor
+ function is 
+\begin_inset Quotes eld
+\end_inset
+
+well behaved
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
+Conclusion
+\end_layout
+
+\begin_layout Standard
+The Riemann hypothesis is a tough nut to crack, and part of that is that
+ it is unclear where to search.
+ The zeta function has a number of remarkable properties; but which of these,
+ or which combination leads to a solution? One fairly evident conjecture
+ is that 
+\begin_inset Quotes eld
+\end_inset
+
+it has something to do with multiplicative sequences
+\begin_inset Quotes erd
+\end_inset
+
+, which is what is being explored here.
+ Easier said than done.
 \end_layout
 
 \begin_layout Subsubsection*

@@ -53,14 +53,17 @@ creal(val), cimag(val));
 	// cpx_set_ui(f, p, 0);
 	double pr = (double) p;
 	// pr = sqrt(pr*pr + 0.01*pr);
-	pr *= 1.01;
+	// pr *= 1.01;
+	// pr += 1.0;
+	pr *= 1.5;
 	cpx_set_d(f, pr, 0.0);
 	cpx_recip(f, f);
 	cpx_pow(f, f, mpess, nprec);
 
-printf("duuude p=%lu ret=%f+i%f\n", p, cpx_get_re(f), cpx_get_im(f));
+	// printf("duuude p=%lu ret=%f+i%f\n", p, cpx_get_re(f), cpx_get_im(f));
 }
 
+// ------------------------------------
 // Suitable for graphing with gnuplot
 void mktable(int nprec)
 {
@@ -75,6 +78,7 @@ void mktable(int nprec)
 	cpx_clear(result);
 }
 
+// ------------------------------------
 void alter(cpx_t f, unsigned long n, int nprec)
 {
 	cpx_multiplicative_cached(f, at_prime, n, nprec);
@@ -90,11 +94,6 @@ int main()
 	nbits = 3.3*prec;
 	mpf_set_default_prec (nbits+150);
 
-#ifdef TABLE_TEST
-	ess = 2.0;
-	mktable(prec);
-#endif
-
 	cpx_t result;
 	cpx_init2(result, nbits);
 	cpx_init2(mpess, nbits);
@@ -102,22 +101,18 @@ int main()
 	ess = 0.5 + I*28;
 	ess = 0.8 + I*30;
 	ess = 0.3 + I*40;
+	ess = 1.0;
 	cpx_set_d(mpess, creal(ess), cimag(ess));
+
+#define TABLE_TEST
+#ifdef TABLE_TEST
+	mktable(prec);
+#endif
+
+#ifdef SINGLE_POINT
 	unsigned int nterms = cpx_euler_sum(result, alter, 240, 300000, prec);
 
 	printf("nterms=%d val=%f+i%f\n", nterms,
 		cpx_get_re(result), cpx_get_im(result));
-exit(0);
-#if 0
-	for (double y = 0.0; y<30.0; y+=0.1)
-	{
-		cpx_one_d_cache_clear(&altern);
-		ess = 0.5 + I*y;
-		complex eta = euler_sum_cut(alter, 2500);
-		complex cyc = 1.0 / (1.0 + 2.0* alter(2));
-		eta *= cyc;
-		printf("%g	%g	%g	%g\n", creal(ess), cimag(ess), creal(eta), cimag(eta));
-		fflush(stdout);
-	}
 #endif
 }
