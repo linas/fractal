@@ -101,18 +101,18 @@ February 2019
  The summation in question is the zeta-like series
 \begin_inset Formula 
 \[
-\mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}\left(f\left(n\right)\right)^{-s}
+\mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}f_{n}^{-s}
 \]
 
 \end_inset
 
 for 
-\begin_inset Formula $f\left(n\right)$
+\begin_inset Formula $f_{n}$
 \end_inset
 
  a completely multiplicative arithmetic function.
  The question to be posed is: what classes of 
-\begin_inset Formula $f\left(n\right)$
+\begin_inset Formula $f_{n}$
 \end_inset
 
  result in 
@@ -122,9 +122,9 @@ for
  obeying the Riemann hypothesis? A numerical survey seems straightforward,
  if the summation can be re-written to converge quickly in the critical
  strip.
- Euler summation is a basic, simple trick for acheiving this.
+ Euler resummation is a basic, simple trick for acheiving this.
  It works like a charm, for 
-\begin_inset Formula $f\left(n\right)=n$
+\begin_inset Formula $f_{n}=n$
 \end_inset
 
 , and utterly fails otherwise.
@@ -137,7 +137,7 @@ Introduction
 
 \begin_layout Standard
 A completely multiplicative sequence is an arithmetic function 
-\begin_inset Formula $f\left(n\right)$
+\begin_inset Formula $f_{n}$
 \end_inset
 
  taking values on the natural numbers 
@@ -146,7 +146,7 @@ A completely multiplicative sequence is an arithmetic function
 
  and being a homomorphism preserving the factorization of the integers:
  namely, 
-\begin_inset Formula $f\left(nm\right)=f\left(n\right)f\left(m\right)$
+\begin_inset Formula $f_{nm}=f_{n}f_{m}$
 \end_inset
 
  holds.
@@ -156,14 +156,16 @@ A completely multiplicative sequence is an arithmetic function
 
 .
  Famous examples include 
-\begin_inset Formula $f\left(n\right)=n^{-s}$
+\begin_inset Formula $f_{n}=n^{-s}$
 \end_inset
 
  and 
-\begin_inset Formula $f\left(n\right)=\chi\left(n\right)$
+\begin_inset Formula $f_{n}=\chi\left(n\right)$
 \end_inset
 
  the Dirichlet characters.
+ Of course, the divisor function and many other classical functions from
+ number theory are known.
 \end_layout
 
 \begin_layout Standard
@@ -193,13 +195,13 @@ y multiplicative nature of the series.
  Thus, an object worth consideration is the analogous series 
 \begin_inset Formula 
 \begin{equation}
-\mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}\left(f\left(n\right)\right)^{-s}\label{eq:mult-series}
+\mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}f_{n}^{-s}\label{eq:mult-series}
 \end{equation}
 
 \end_inset
 
 given a completely multiplicative arithmetic function 
-\begin_inset Formula $f\left(n\right)$
+\begin_inset Formula $f_{n}$
 \end_inset
 
 .
@@ -208,7 +210,7 @@ given a completely multiplicative arithmetic function
 \end_inset
 
 ? What sort of functions 
-\begin_inset Formula $f\left(n\right)$
+\begin_inset Formula $f_{n}$
 \end_inset
 
  result in zeros on the critical line? How general is the setting for the
@@ -217,7 +219,7 @@ given a completely multiplicative arithmetic function
 
 \begin_layout Standard
 Recall that the homomorphism 
-\begin_inset Formula $f\left(nm\right)=f\left(n\right)f\left(m\right)$
+\begin_inset Formula $f_{nm}=f_{n}f_{m}$
 \end_inset
 
  completely determines the value of 
@@ -235,7 +237,8 @@ Recall that the homomorphism
 \end_inset
 
 .
- It is not further constrained; it really can be anything.
+ It is not further constrained; there are uncountably many completely multiplica
+tive functions.
 \end_layout
 
 \begin_layout Section*
@@ -249,7 +252,7 @@ Can we even get off the ground, here? Such a general setting is so broad
  Perhaps a simple place to start would be a perturbation of the primes 
 \begin_inset Formula 
 \[
-f\left(p\right)=p\left(1+\varepsilon\right)
+f_{p}=p\left(1+\varepsilon\right)
 \]
 
 \end_inset
@@ -265,7 +268,7 @@ for some small (real or complex)
 \begin_layout Standard
 Numerical exploration requires numerically stable convergent series.
  How might one find one? Given some generic sequence 
-\begin_inset Formula $f\left(p\right)\ge1$
+\begin_inset Formula $f_{p}\ge1$
 \end_inset
 
 , it would seem likely that eqn.
@@ -292,7 +295,7 @@ reference "eq:mult-series"
  It is easy to show the identity:
 \begin_inset Formula 
 \[
-\mathcal{M}_{f}\left(s\right)=\frac{1}{1-2/\left(f\left(2\right)\right)^{s}}\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{\left(f\left(n\right)\right)^{s}}
+\mathcal{M}_{f}\left(s\right)=\frac{1}{1-2f_{2}^{-s}}\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{f_{n}^{s}}
 \]
 
 \end_inset
@@ -314,7 +317,7 @@ The convergence of alternating series can often be improved by means of
  In this particular case, it seems promising to write 
 \begin_inset Formula 
 \[
-\mathcal{E}_{f}\left(s\right)=\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{\left(f\left(n\right)\right)^{s}}=\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{\left(f\left(k+1\right)\right)^{s}}
+\mathcal{E}_{f}\left(s\right)=\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{f_{n}^{s}}=\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{f_{k+1}^{s}}
 \]
 
 \end_inset
@@ -330,7 +333,7 @@ Or so one might hope.
 
 \begin_layout Itemize
 When 
-\begin_inset Formula $f\left(p\right)=p$
+\begin_inset Formula $f_{p}=p$
 \end_inset
 
  then the sum converges quickly and easily.
@@ -345,7 +348,7 @@ When
 
 \begin_layout Itemize
 When 
-\begin_inset Formula $f\left(p\right)=p\left(1+\varepsilon\right)$
+\begin_inset Formula $f_{p}=p\left(1+\varepsilon\right)$
 \end_inset
 
  for 
@@ -362,7 +365,7 @@ These statements can be made more precise.
  Consider the individual terms 
 \begin_inset Formula 
 \[
-t_{n}=\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{\left(f\left(k+1\right)\right)^{s}}
+t_{n}=\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{f_{k+1}^{s}}
 \]
 
 \end_inset
@@ -421,7 +424,7 @@ can be seen for a few handful or dozens of terms, depending on
  This soon disappears, being replaced by 
 \begin_inset Formula 
 \[
-t_{n}\left(\left|\varepsilon\right|>0\right)\sim\mathcal{O}\left(\frac{1}{\left(f\left(n\right)\right)^{s}}\right)
+t_{n}\left(\left|\varepsilon\right|>0\right)\sim\mathcal{O}\left(\frac{1}{f_{n}^{s}}\right)
 \]
 
 \end_inset
@@ -506,16 +509,43 @@ and it is straight-forward to invoke the binomial theorem to obtain the
 \end_layout
 
 \begin_layout Standard
-The resumation as a whole is reminisent of Newton series.
- That in turn suggests Flajolet and Sedgewick's Newton-Mellin-Poisson cycle
- as a useful tool.
+A rich class of results can be obtained from algebraic re-arrangements,
+ particularly when the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ be be interpolated by a function, 
+\emph on
+viz
+\emph default
+.
+ 
+\begin_inset Formula $a_{n}=a\left(n\right)$
+\end_inset
+
+ for some complex-analytic function 
+\begin_inset Formula $a\left(z\right)$
+\end_inset
+
+ on the complex plane.
+ In such a case, the resumation is reminisent of Newton series, which in
+ turn link to the Newton-Mellin-Poisson cycle, as noted by Flajolet and
+ Sedgewick.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Fla94"
 
 \end_inset
 
+ This opens the path for the application of tools from analytic combinatorics.
+\end_layout
 
+\begin_layout Standard
+In the present case, we are not so lucky.
+ Given some arbitrary multiplicative sequence, there is no naturally obvious
+ extension to an interpolating function on the complex plane.
+ Or is there.
+ Of course there is.
 \end_layout
 
 \begin_layout Subsubsection*
