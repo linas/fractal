@@ -16,6 +16,7 @@
 #include "mp-trig.h"
 
 complex ess = 0.0;
+cpx_t mpess;
 
 // When this is called, p is guaranteed to be prime
 void at_prime(cpx_t f, unsigned long p, int nprec)
@@ -29,7 +30,7 @@ void at_prime(cpx_t f, unsigned long p, int nprec)
 	// return sqrt(pr*pr + 1.0e-6*pr);
 	// return sqrt(pr*pr + 1.0e-4*pr);
 
-#define DBL_PREC
+// #define DBL_PREC
 #ifdef DBL_PREC
 	double pr = (double) p;
 	pr = sqrt(pr*pr + 0.01*pr);
@@ -48,6 +49,15 @@ printf("duuude p=%lu ret=%f+i%f vs val=%f+i%f\n", p,
 cpx_get_re(f), cpx_get_im(f),
 creal(val), cimag(val));
 #endif
+
+	// cpx_set_ui(f, p, 0);
+	double pr = (double) p;
+	pr = sqrt(pr*pr + 0.01*pr);
+	cpx_set_d(f, pr, 0.0);
+	cpx_recip(f, f);
+	cpx_pow(f, f, mpess, nprec);
+
+printf("duuude p=%lu ret=%f+i%f\n", p, cpx_get_re(f), cpx_get_im(f));
 }
 
 // Suitable for graphing with gnuplot
@@ -86,9 +96,11 @@ int main()
 
 	cpx_t result;
 	cpx_init2(result, nbits);
+	cpx_init2(mpess, nbits);
 
 	ess = 0.5 + I*28;
-	ess = 0.5 + I*0;
+	ess = 0.8 + I*30;
+	cpx_set_d(mpess, creal(ess), cimag(ess));
 	unsigned int nterms = cpx_euler_sum(result, alter, 40, 300000, prec);
 
 	printf("nterms=%d val=%f+i%f\n", nterms,
