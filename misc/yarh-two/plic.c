@@ -52,7 +52,8 @@ creal(val), cimag(val));
 
 	// cpx_set_ui(f, p, 0);
 	double pr = (double) p;
-	pr = sqrt(pr*pr + 0.01*pr);
+	// pr = sqrt(pr*pr + 0.01*pr);
+	pr *= 1.01;
 	cpx_set_d(f, pr, 0.0);
 	cpx_recip(f, f);
 	cpx_pow(f, f, mpess, nprec);
@@ -85,7 +86,7 @@ void alter(cpx_t f, unsigned long n, int nprec)
 int main()
 {
 	int prec, nbits;
-	prec = 120;
+	prec = 320;
 	nbits = 3.3*prec;
 	mpf_set_default_prec (nbits+150);
 
@@ -100,8 +101,9 @@ int main()
 
 	ess = 0.5 + I*28;
 	ess = 0.8 + I*30;
+	ess = 0.3 + I*40;
 	cpx_set_d(mpess, creal(ess), cimag(ess));
-	unsigned int nterms = cpx_euler_sum(result, alter, 40, 300000, prec);
+	unsigned int nterms = cpx_euler_sum(result, alter, 240, 300000, prec);
 
 	printf("nterms=%d val=%f+i%f\n", nterms,
 		cpx_get_re(result), cpx_get_im(result));

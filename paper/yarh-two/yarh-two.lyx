@@ -84,7 +84,7 @@
 \begin_body
 
 \begin_layout Title
-Multiplicative Series Zeros
+Euler Summation of Multiplicative Series
 \end_layout
 
 \begin_layout Author
@@ -96,7 +96,9 @@ February 2019
 \end_layout
 
 \begin_layout Abstract
-What are the zeros of the series
+...doesn't work.
+ Which is a surprising result.
+ The summation in question is the zeta-like series
 \begin_inset Formula 
 \[
 \mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}\left(f\left(n\right)\right)^{-s}
@@ -108,7 +110,25 @@ for
 \begin_inset Formula $f\left(n\right)$
 \end_inset
 
- a completely multiplicative function?
+ a completely multiplicative arithmetic function.
+ The question to be posed is: what classes of 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ result in 
+\begin_inset Formula $\mathcal{M}_{f}\left(s\right)$
+\end_inset
+
+ obeying the Riemann hypothesis? A numerical survey seems straightforward,
+ if the summation can be re-written to converge quickly in the critical
+ strip.
+ Euler summation is a basic, simple trick for acheiving this.
+ It works like a charm, for 
+\begin_inset Formula $f\left(n\right)=n$
+\end_inset
+
+, and utterly fails otherwise.
+ 
 \end_layout
 
 \begin_layout Section*
@@ -167,7 +187,10 @@ and analogously the Dirichlet series
 \end_layout
 
 \begin_layout Standard
-The object being studied here is the analogous series 
+How far can the hypothesis be extended? What other classes of sequences
+ obey it? A natural conjecture is that it has something to do with the completel
+y multiplicative nature of the series.
+ Thus, an object worth consideration is the analogous series 
 \begin_inset Formula 
 \begin{equation}
 \mathcal{M}_{f}\left(s\right)=\sum_{n=1}^{\infty}\left(f\left(n\right)\right)^{-s}\label{eq:mult-series}
@@ -175,22 +198,25 @@ The object being studied here is the analogous series
 
 \end_inset
 
-for any completely multiplicative arithmetic function 
+given a completely multiplicative arithmetic function 
 \begin_inset Formula $f\left(n\right)$
 \end_inset
 
 .
- In relation to the Riemann hypothesis, the question is, where are the zeros
- of 
+ Several questions can be posed: Where are the zeros of 
 \begin_inset Formula $\mathcal{M}_{f}\left(s\right)$
 \end_inset
 
-? The meta-question is: is the Riemann hypothesis specific to the sequence
- of integers, or does it have a more general setting?
+? What sort of functions 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ result in zeros on the critical line? How general is the setting for the
+ Riemann hypothesis? 
 \end_layout
 
 \begin_layout Standard
-Note that the homomorphism 
+Recall that the homomorphism 
 \begin_inset Formula $f\left(nm\right)=f\left(n\right)f\left(m\right)$
 \end_inset
 
@@ -198,7 +224,7 @@ Note that the homomorphism
 \begin_inset Formula $f$
 \end_inset
 
- on composite integers; thus a completely multiplicative function is completely
+ on composite integers; thus, a completely multiplicative function is completely
  specified by its values on the set of primes 
 \begin_inset Formula $\mathbb{P}$
 \end_inset
@@ -217,28 +243,32 @@ Numerical exploration
 \end_layout
 
 \begin_layout Standard
-Can we even get off the ground, here? Numerical exploration can guide us.
- The simplest numerical exploration would be for 
+Can we even get off the ground, here? Such a general setting is so broad
+ that it's hard to find a place to start.
+ Numerical exploration might provide quick, easy insights.
+ Perhaps a simple place to start would be a perturbation of the primes 
 \begin_inset Formula 
 \[
-f\left(p\right)=\sqrt{p^{2}+p}
+f\left(p\right)=p\left(1+\varepsilon\right)
 \]
 
 \end_inset
 
-which gives a zeta-function-like sum, but clearly different.
- Easy to say, hard to do.
- Work not started, yet.
+for some small (real or complex) 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-Step 1.
- Analytic continuation.
- Given some generic sequence 
+Numerical exploration requires numerically stable convergent series.
+ How might one find one? Given some generic sequence 
 \begin_inset Formula $f\left(p\right)\ge1$
 \end_inset
 
-, it would seem that eqn.
+, it would seem likely that eqn.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -246,17 +276,20 @@ reference "eq:mult-series"
 
 \end_inset
 
- as a pole at 
+ (depending on the sequence) has a pole at 
 \begin_inset Formula $s=1$
 \end_inset
 
 .
- The first step requires analytic continuation to 
+ This obstructs naive summation; to get started, one needs some form of
+ analytic continuation, or some resummation that converges for 
 \begin_inset Formula $\Re s<1$
 \end_inset
 
 .
- How? First, similar to the Dirichlet eta, there is the identity:
+ The first obvious, simple trick is to create a conditionally convergent
+ alternating series, analoguous to the Dirichlet eta.
+ It is easy to show the identity:
 \begin_inset Formula 
 \[
 \mathcal{M}_{f}\left(s\right)=\frac{1}{1-2/\left(f\left(2\right)\right)^{s}}\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{\left(f\left(n\right)\right)^{s}}
@@ -264,13 +297,21 @@ reference "eq:mult-series"
 
 \end_inset
 
-with the sum on the right being conditionally convergent for 
+where (depending on the sequence) the sum on the right might be expected
+ to be conditionally convergent for 
 \begin_inset Formula $\Re s>0$
 \end_inset
 
 .
- However, the rate of convergence is far too slow for numerical exploration.
- It can be improved by means of Euler summation, so that 
+ As written, it is also clear that the rate of convergence is far too slow
+ for numerical exploration.
+ 
+\end_layout
+
+\begin_layout Standard
+The convergence of alternating series can often be improved by means of
+ Euler summation.
+ In this particular case, it seems promising to write 
 \begin_inset Formula 
 \[
 \mathcal{E}_{f}\left(s\right)=\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{\left(f\left(n\right)\right)^{s}}=\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{\left(f\left(k+1\right)\right)^{s}}
@@ -278,11 +319,13 @@ with the sum on the right being conditionally convergent for
 
 \end_inset
 
-should be tame enough for numerical exploration.
+with the right-hand side being tame enough for numerical exploration.
 \end_layout
 
 \begin_layout Standard
-Preliminary results:
+Or so one might hope.
+ The results surprised me.
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -291,6 +334,12 @@ When
 \end_inset
 
  then the sum converges quickly and easily.
+ Using arbitrary-precision numerics, asking for varying degrees of precision,
+ exploring the critical strip 
+\begin_inset Formula $0<\Re s<1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -302,7 +351,12 @@ When
 \begin_inset Formula $\left|\varepsilon\right|>0$
 \end_inset
 
- convergence on the critical line is poor, even for values as small as 
+ the summations start out reasonably enough, and then become poor, verging
+ on non-existant, eventually offering no advantage at all, 
+\end_layout
+
+\begin_layout Itemize
+convergence on the critical line is poor, even for values as small as 
 \begin_inset Formula $\varepsilon=10^{-6}$
 \end_inset
 
