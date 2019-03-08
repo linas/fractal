@@ -339,62 +339,27 @@ When
 \begin_inset Formula $0<\Re s<1$
 \end_inset
 
-.
+, there's no particular problem.
+ 
 \end_layout
 
 \begin_layout Itemize
 When 
-\begin_inset Formula $f\left(p\right)=\sqrt{p^{2}+\varepsilon p}$
+\begin_inset Formula $f\left(p\right)=p\left(1+\varepsilon\right)$
 \end_inset
 
  for 
 \begin_inset Formula $\left|\varepsilon\right|>0$
 \end_inset
 
- the summations start out reasonably enough, and then become poor, verging
- on non-existant, eventually offering no advantage at all, 
-\end_layout
-
-\begin_layout Itemize
-convergence on the critical line is poor, even for values as small as 
-\begin_inset Formula $\varepsilon=10^{-6}$
-\end_inset
-
- which is ..
- surprising.
- ...
- both positive and negative 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
-.
- Hmm.
- I don't understand why, at all.
- Just looking at the formula does not in any way suggest that the inner
- sum is going to be more cancellative at 
-\begin_inset Formula $\varepsilon=0$
-\end_inset
-
- ...
- it would naively suggest faster convergence for large positive 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
- ...
- wtf.
+ the summations start out reasonably enough, and then becomes poor, verging
+ on non-existant, soon offering no advantage at all over brute-force summation
+ of the alternating series.
 \end_layout
 
 \begin_layout Standard
-So lets look at this more closely.
- When 
-\begin_inset Formula $f\left(p\right)=\sqrt{p^{2}+\varepsilon p}$
-\end_inset
-
- for small 
-\begin_inset Formula $\varepsilon>0$
-\end_inset
-
- then the infidividual terms 
+These statements can be made more precise.
+ Consider the individual terms 
 \begin_inset Formula 
 \[
 t_{n}=\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{\left(f\left(k+1\right)\right)^{s}}
@@ -402,6 +367,15 @@ t_{n}=\frac{1}{2^{n+1}}\sum_{k=0}^{n}{n \choose k}\,\frac{\left(-1\right)^{k}}{\
 
 \end_inset
 
+For 
+\begin_inset Formula $\varepsilon=0$
+\end_inset
+
+, the resummation is known to yeild a globally uniformly convergent series
+ for the Riemann zeta, as proven by Hasse.
+\end_layout
+
+\begin_layout Standard
 emulate those for the usual Hasse zeta (i.e.
  
 \begin_inset Formula $\varepsilon=0$
@@ -437,56 +411,32 @@ The difference is very dramatic: for
 \begin_inset Formula $\varepsilon=0$
 \end_inset
 
-, one gets approx (super-)exponential falloff in terms.
+, one gets approx exponential falloff in terms.
  For other values, its exponential to a point and then asymptotic...
  
 \end_layout
 
 \begin_layout Standard
-Oh, hang on ...
- this may be entirely due to rounding error.
- Never mind ....
- Sheesh
-\end_layout
-
-\begin_layout Standard
-Oh double-hang on.
- The effect is real.
- Using arbitrary precision is ...
- shows the effect to be real.
- Very intersting....
- only the real deal gets accelerated by Hasse, the others fail.
-\end_layout
-
-\begin_layout Standard
 That's very very interesting.
  This requires some thinking ....
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sondow94"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection*
-Other identities, e.g.
- Functional equation
-\end_layout
-
-\begin_layout Standard
-To emulate the Riemann zeta functional equation, we need to reciprocate
-\begin_inset Formula 
-\[
-\sum_{n=1}^{\infty}\exp-\left(f\left(n\right)\right)^{2}\pi x
-\]
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/linas/src/fractal/paper/fractal"
+options "tufte"
 
 \end_inset
 
-but how? For 
-\begin_inset Formula $f\left(n\right)=n$
-\end_inset
 
-, this is the Jacobi theta function...
- 
-\end_layout
-
-\begin_layout Standard
-Other alternatives: can we do the rising factorial trick?
 \end_layout
 
 \end_body
