@@ -7,15 +7,19 @@ INCLUDES =  -I../../tools/inc -I$(ANANT) \
 FUNC=../../tools/lib/libfunc.a
 HIST=../../generate/brat.o ../../generate/util.o
 
-all: multi
+all: multi plic
 
-.o:
+plic: plic.o
+
+multi: multi.o
 	cc -o $@ $^ $(FUNC) -ldb -lpthread -lm -lstdc++
 
-	# cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
+.o:
+	# cc -o $@ $^ $(FUNC) -ldb -lpthread -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
 
 .c.o:
-	cc -c -g $^  -std=gnu11 -Wall -O2 $(INCLUDES)
+	cc -c -g $^ -std=gnu11 -Wall -O2 $(INCLUDES)
 
 .C.o:
 	cc -c $^  -Wall -O2 $(INCLUDES)

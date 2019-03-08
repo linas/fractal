@@ -1,7 +1,10 @@
 /*
  * multi.C
  *
- * Exploration of zeta series for completely multiplicative functions
+ * Exploration of zeta series for completely multiplicative functions.
+ * This is double-precision, and unfortunately, it croaks in accuracy,
+ * just when things start to get interesting.
+ *
  * Linas Vepstas March 2019
  */
 #include <math.h>
@@ -16,12 +19,12 @@ static complex at_prime (unsigned int p)
 	double pr = (double) p;
 	// return sqrt(pr*pr + pr);
 	// return sqrt(pr*pr - 0.5*pr);
-	// return pr; // Riemann zeta
+	return pr; // Riemann zeta
 	// return sqrt(pr*pr - 0.0001*pr);
 	// return sqrt(pr*pr); // Riemann again
 	// return sqrt(pr*pr - 1.0e-6*pr);
 	// return sqrt(pr*pr + pr);
-	return sqrt(pr*pr + 1.0e-6*pr);
+	// return sqrt(pr*pr + 1.0e-6*pr);
 	// return sqrt(pr*pr + 1.0e-4*pr);
 	// return sqrt(pr*pr + 0.01*pr);
 }
@@ -107,7 +110,7 @@ complex alter(unsigned int n)
 int main()
 {
 	// mktable();
-	ess = 0.3 + I*28;
+	ess = 0.5 + I*28;
 	euler_sum_cut(alter, 2500);
 exit(0);
 	for (double y = 0.0; y<30.0; y+=0.1)
