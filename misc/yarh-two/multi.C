@@ -76,11 +76,11 @@ void mktable()
 DECLARE_CPX_CACHE(plic)
 complex plic_fun(unsigned int n)
 {
-	if (cpx_one_d_cache_check(&plic, n))
-		return cpx_one_d_cache_fetch(&plic, n);
+	if (cplx_one_d_cache_check(&plic, n))
+		return cplx_one_d_cache_fetch(&plic, n);
 
 	complex val = multiplicative(at_prime, n);
-	cpx_one_d_cache_store(&plic, val, n);
+	cplx_one_d_cache_store(&plic, val, n);
 // printf("plic n=%d val=%f+i%f\n", n, creal(val), cimag(val));
 	return val;
 }
@@ -98,11 +98,11 @@ complex alter_raw(unsigned int n)
 DECLARE_CPX_CACHE(altern)
 complex alter(unsigned int n)
 {
-	if (cpx_one_d_cache_check(&altern, n))
-		return cpx_one_d_cache_fetch(&altern, n);
+	if (cplx_one_d_cache_check(&altern, n))
+		return cplx_one_d_cache_fetch(&altern, n);
 
 	complex val = alter_raw(n);
-	cpx_one_d_cache_store(&altern, val, n);
+	cplx_one_d_cache_store(&altern, val, n);
 // printf("alter n=%d val=%f+i%f\n", n, creal(val), cimag(val));
 	return val;
 }
@@ -115,7 +115,7 @@ int main()
 exit(0);
 	for (double y = 0.0; y<30.0; y+=0.1)
 	{
-		cpx_one_d_cache_clear(&altern);
+		cplx_one_d_cache_clear(&altern);
 		ess = 0.5 + I*y;
 		complex eta = euler_sum_cut(alter, 2500);
 		complex cyc = 1.0 / (1.0 + 2.0* alter(2));

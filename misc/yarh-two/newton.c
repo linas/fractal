@@ -78,9 +78,9 @@ void museq(cpx_t f, unsigned long n, int nprec)
 int main()
 {
 	int prec, nbits;
-	prec = 420;
+	prec = 620;
 	nbits = 3.3*prec;
-	mpf_set_default_prec (nbits+250);
+	mpf_set_default_prec (nbits+350);
 
 	cpx_t zee, result;
 	cpx_init2(zee, nbits);
@@ -99,10 +99,10 @@ int main()
 		cpx_set_d(zee, zz, 0.0);
 
 		unsigned int nterms =
-			cpx_newton_series(result, museq, zee, 10, 100, prec);
+			cpx_newton_series(result, museq, zee, 10, 180, prec);
 
 		// printf("z=%g nterms=%d val=%f+i%f\n",
-		printf("%g	%d	%f	%f\n",
+		printf("%g	%d	%g	%g\n",
 			zz, nterms,
 			cpx_get_re(result), cpx_get_im(result));
 		fflush(stdout);
