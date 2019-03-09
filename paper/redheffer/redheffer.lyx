@@ -344,28 +344,6 @@ This helps make clear that only multiples of
  show up, and there are zeros otherwise.
 \end_layout
 
-\begin_layout Subsection*
-Common identities
-\end_layout
-
-\begin_layout Standard
-Classical, well-known identities take on a slightly unfamiliar form.
- For reference, a few are given here.
- Define the sequence
-\begin_inset Formula 
-\[
-N\left(n\right)=n
-\]
-
-\end_inset
-
-Then
-\end_layout
-
-\begin_layout Subsection*
-The Redheffer operator
-\end_layout
-
 \begin_layout Standard
 It can be more convenient to work with the upper-triangular form, defined
  as 
@@ -389,130 +367,52 @@ divisor
 \end_inset
 
 , as it has obvious relationships to the divisor function.
- The reason that 
+ One reason that 
 \begin_inset Formula $D$
 \end_inset
 
- is nicer is that right-eigenvectors, if they exist, are always finite.
- As it turns out, only one exists.
- Huh?
-\end_layout
+ is nicer is that it maps finite sequences to finite sequences of the same
+ length.
+ That is, if 
+\begin_inset Formula $f\left(n\right)=0$
+\end_inset
 
-\begin_layout Subsection*
-Questions
+ for all 
+\begin_inset Formula $n\ge L$
+\end_inset
+
+ so that 
+\begin_inset Formula $f$
+\end_inset
+
+ is a finite sequence of length 
+\begin_inset Formula $L$
+\end_inset
+
+, then 
+\begin_inset Formula $Df$
+\end_inset
+
+ is also a sequence of length 
+\begin_inset Formula $L$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The matrix 
-\begin_inset Formula $D$
-\end_inset
-
- has one obvious eigenvector: 
-\begin_inset Formula $D\varepsilon=\varepsilon$
-\end_inset
-
-.
- Likewise 
-\begin_inset Formula $U\varepsilon=\varepsilon$
-\end_inset
-
-.
- There are not any others that are of finite length.
- Any triangular matrix has all eigenvalues on the diagonal, so this has
- a huge algebraic multiplicity; we conclude it is not diagonalizable.
- The obvious questions are:
-\end_layout
-
-\begin_layout Itemize
-It can be brought into Jordan normal form.
- What is the similarity matrix that brings it into Jordan normal form? What
- does that similarity matrix 
-\begin_inset Quotes eld
-\end_inset
-
-mean
-\begin_inset Quotes erd
-\end_inset
-
-?
-\end_layout
-
-\begin_layout Itemize
-The integers are not algebraically closed; perhaps it makes more sense to
- ask about the Frobenius normal form?
-\end_layout
-
-\begin_layout Itemize
-If the matrix is treated as an operator, in some kind of vector space (say
- Banach 
-\begin_inset Formula $\ell_{p}$
-\end_inset
-
- space, for example), what is it's spectrum? It will not be a single point,
- in general, but what will it be? That is, the spectrum include the point-spectr
-um of eigenvalues, but is in general larger.
-\end_layout
-
-\begin_layout Itemize
-Treating 
-\begin_inset Formula $D$
-\end_inset
-
- as a raising operator, and it's inverse, 
-\begin_inset Formula $D^{-1}$
-\end_inset
-
- (given by the Mobius 
-\begin_inset Formula $\mu$
-\end_inset
-
-) as a lowering operator, what are it's coherent states? Does this question
- even make sense? The algebra is Abelian, 
-\begin_inset Formula $D$
-\end_inset
-
- and 
-\begin_inset Formula $D^{-1}$
-\end_inset
-
- commute, so they cannot be ladder operators in the normal sense.
- Indeed, coherent states are eigenstates of ladder operators, and we already
- concluded that there is only one eigenvector.
- So doing better requires finding some space in which 
-\begin_inset Formula $D$
-\end_inset
-
- has a non-trivial spectrum, a non-trivial structure.
- 
-\end_layout
-
-\begin_layout Itemize
-Viewed as a shift, this is a double-sided shift; one can define 
-\begin_inset Formula $D^{n}$
-\end_inset
-
- for any integer 
-\begin_inset Formula $n$
-\end_inset
-
-.
- So this is the 
-\begin_inset Quotes eld
-\end_inset
-
-Baker's map
-\begin_inset Quotes erd
-\end_inset
-
-.
+Much of what follows will be concerned with infinite sequences, including
+ the space of summable sequences; the interplay with finite sequences (which
+ are manfestly summable) provides a nice counterpoint.
 \end_layout
 
 \begin_layout Subsection*
-Inverse
+Mobius mu as Inverse
 \end_layout
 
 \begin_layout Standard
-I find visual representations very useful.
+Visual representations provide a very useful and convenient means of thinking
+ about the meaning of formulas.
  So, write 
 \begin_inset Formula $D$
 \end_inset
@@ -679,6 +579,129 @@ fun facts
 \end_inset
 
 Redheffer matrix
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Classical, well-known identities take on a slightly unfamiliar form.
+ For reference, a few are given here.
+ Define the sequence
+\begin_inset Formula 
+\[
+N\left(n\right)=n
+\]
+
+\end_inset
+
+Then
+\end_layout
+
+\begin_layout Section*
+Questions
+\end_layout
+
+\begin_layout Standard
+The matrix 
+\begin_inset Formula $D$
+\end_inset
+
+ has one obvious eigenvector: 
+\begin_inset Formula $D\varepsilon=\varepsilon$
+\end_inset
+
+.
+ Likewise 
+\begin_inset Formula $U\varepsilon=\varepsilon$
+\end_inset
+
+.
+ There are not any others that are of finite length.
+ Any triangular matrix has all eigenvalues on the diagonal, so this has
+ a huge algebraic multiplicity; we conclude it is not diagonalizable.
+ The obvious questions are:
+\end_layout
+
+\begin_layout Itemize
+It can be brought into Jordan normal form.
+ What is the similarity matrix that brings it into Jordan normal form? What
+ does that similarity matrix 
+\begin_inset Quotes eld
+\end_inset
+
+mean
+\begin_inset Quotes erd
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Itemize
+The integers are not algebraically closed; perhaps it makes more sense to
+ ask about the Frobenius normal form?
+\end_layout
+
+\begin_layout Itemize
+If the matrix is treated as an operator, in some kind of vector space (say
+ Banach 
+\begin_inset Formula $\ell_{p}$
+\end_inset
+
+ space, for example), what is it's spectrum? It will not be a single point,
+ in general, but what will it be? That is, the spectrum include the point-spectr
+um of eigenvalues, but is in general larger.
+\end_layout
+
+\begin_layout Itemize
+Treating 
+\begin_inset Formula $D$
+\end_inset
+
+ as a raising operator, and it's inverse, 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ (given by the Mobius 
+\begin_inset Formula $\mu$
+\end_inset
+
+) as a lowering operator, what are it's coherent states? Does this question
+ even make sense? The algebra is Abelian, 
+\begin_inset Formula $D$
+\end_inset
+
+ and 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ commute, so they cannot be ladder operators in the normal sense.
+ Indeed, coherent states are eigenstates of ladder operators, and we already
+ concluded that there is only one eigenvector.
+ So doing better requires finding some space in which 
+\begin_inset Formula $D$
+\end_inset
+
+ has a non-trivial spectrum, a non-trivial structure.
+ 
+\end_layout
+
+\begin_layout Itemize
+Viewed as a shift, this is a double-sided shift; one can define 
+\begin_inset Formula $D^{n}$
+\end_inset
+
+ for any integer 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ So this is the 
+\begin_inset Quotes eld
+\end_inset
+
+Baker's map
 \begin_inset Quotes erd
 \end_inset
 
