@@ -266,6 +266,63 @@ forcing
  as an inspiration.
 \end_layout
 
+\begin_layout Standard
+To be precise, there are two models: the structure 
+\begin_inset Formula $\left(*,\varepsilon,\mathit{1}\right)$
+\end_inset
+
+ provides a model for the non-negative integers under addition
+\begin_inset Formula $\left(+,0,1\right)$
+\end_inset
+
+.
+ The structure 
+\begin_inset Formula $\left(*,\mu,\varepsilon,\mathit{1}\right)$
+\end_inset
+
+ is an extension that provides a model for all of the integers 
+\begin_inset Formula $\mathbb{Z}=\left(+,-1,0,1\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ is understood to stand for the first-order language 
+\begin_inset Formula $\mathcal{L}_{\mathbb{Z}}$
+\end_inset
+
+ of expressions obtained from these operators and constants, together with
+ equality as a relation.
+ As usual, 
+\begin_inset Quotes eld
+\end_inset
+
+less than
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $<$
+\end_inset
+
+ provides a total order on the integers.
+\end_layout
+
+\begin_layout Conjecture*
+The relation 
+\begin_inset Formula $<$
+\end_inset
+
+ on the integers embeds into the lexicographic ordering of strings.
+\end_layout
+
+\begin_layout Proof
+The above is surely a lemma not a conjecture, but I'm super-lazy right now
+ to super-triple-check.
+ Right? 
+\end_layout
+
 \begin_layout Subsection*
 As an operator
 \end_layout
@@ -446,7 +503,7 @@ and
 \[
 D^{-1}=\left[\begin{array}{ccccccccccc}
 1 & -1 & -1 & 0 & -1 & 1 & -1 & 0 & 0 & 1 & \cdots\\
- & 1 & 0 & -1 & 0 & -1 & 0 & 0 & 0 & 0\\
+ & 1 & 0 & -1 & 0 & -1 & 0 & 0 & 0 & -1\\
  &  & 1 & 0 & 0 & -1 & 0 & 0 & -1 & 0\\
  &  &  & 1 & 0 & 0 & 0 & -1 & 0 & 0\\
  &  &  &  & 1 & 0 & 0 & 0 & 0 & -1\\
@@ -503,42 +560,80 @@ Note that
 \end_inset
 
  is both a left and right inverse, because Dirichlet convolution is commutative.
-\end_layout
+ That is, 
+\begin_inset Formula $D^{-1}D=DD^{-1}=I$
+\end_inset
 
-\begin_layout Subsection*
-Fun facts
+ with 
+\begin_inset Formula $I$
+\end_inset
+
+ the identity operator.
 \end_layout
 
 \begin_layout Standard
-Clearly, there should be a bunch of 
-\begin_inset Quotes eld
+Just as the structure 
+\begin_inset Formula $\left(*,\mu,\varepsilon,\mathit{1}\right)$
 \end_inset
 
-fun facts
-\begin_inset Quotes erd
+ extracted from Dirichlet convolution provides a model of the structure
+ 
+\begin_inset Formula $\left(+,-1,0,1\right)$
 \end_inset
 
- with relationships to Dirichlet series, Lambert series, and so on.
- All of the 
-\begin_inset Quotes eld
+ 
+\emph on
+i.e.
+
+\emph default
+ a model of arithmetic, so also the structure 
+\begin_inset Formula $\left(\cdot,D^{-1},I,D\right)$
 \end_inset
 
-typical
-\begin_inset Quotes erd
+ provides a model of arithmetic as well.
+ In what folows, there will be some tension and confusion between these
+ two models.
+ The extension of relation 
+\begin_inset Formula $<$
 \end_inset
 
- identities given in Apostol should find expression here, just in a different
+ on the integers to a partial order on infinite-dimensional operators is
+ a bit less obvious.
+\end_layout
+
+\begin_layout Subsection*
+Classical identities and fun facts
+\end_layout
+
+\begin_layout Standard
+Clearly, all of the classical, well-known identities nivolving Dirichlet
+ series, Lambert series, and so on can be be re-written in slightly unrecongizab
+le form, using 
+\begin_inset Formula $U$
+\end_inset
+
  and 
-\begin_inset Quotes eld
+\begin_inset Formula $D$
 \end_inset
 
-Hmm...
-\begin_inset Quotes erd
+ instead of the classical notation.
+ This includes all of the identities that can be found in Apostol.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apo76"
+
 \end_inset
 
--inducing notation.
- Some Dirichlet series explored below.
- The simplest 
+ For reference, a few are given here.
+ The arrow 
+\begin_inset Formula $\to$
+\end_inset
+
+ is used to denote the interpretation of a classical formula.
+\end_layout
+
+\begin_layout Standard
+The simplest 
 \begin_inset Quotes eld
 \end_inset
 
@@ -561,12 +656,95 @@ fun fact
 :
 \begin_inset Formula 
 \[
-\sum_{k=1}^{\infty}U_{nk}=\sum_{k=1}^{\infty}D_{kn}=d\left(n\right)
+d=\mathit{1}*\mathit{1}\to\sum_{k=1}^{\infty}U_{nk}=\sum_{k=1}^{\infty}D_{kn}=d\left(n\right)\to\vec{d}=U\vec{\mathit{1}}=\vec{\mathit{1}}^{\top}D
 \]
 
 \end_inset
 
-Additional 
+That is, the divisor function 
+\begin_inset Formula $d\left(n\right)$
+\end_inset
+
+ is a model for the integer 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ The vector notation just emphasizes the linear-algebra aspect of the equations,
+ so that 
+\begin_inset Formula $\vec{d}$
+\end_inset
+
+ is the vector whose vector components are 
+\begin_inset Formula $d_{n}=d\left(n\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Simplifying
+\end_layout
+
+\begin_layout Standard
+Divisor functions for general powers are obtained by defining the sequence
+\begin_inset Formula 
+\[
+N\left(n\right)=n
+\]
+
+\end_inset
+
+and more generally
+\begin_inset Formula 
+\[
+N^{\alpha}\left(n\right)=n^{\alpha}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $N^{0}=\mathit{1}$
+\end_inset
+
+.
+ Then the divisor function 
+\begin_inset Formula 
+\[
+\sigma_{\alpha}\left(n\right)=\sum_{d|n}d^{\alpha}
+\]
+
+\end_inset
+
+becomes 
+\begin_inset Formula 
+\[
+\sigma_{\alpha}=\mathit{1}*\mathit{N^{\alpha}}\to\sum_{k=1}^{\infty}U_{nk}k^{\alpha}=\sum_{k=1}^{\infty}k^{\alpha}D_{kn}=\sigma_{\alpha}\left(n\right)\to\vec{\sigma}_{\alpha}=U\vec{N^{\alpha}}=\vec{N^{\alpha}}^{\top}D
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Euler totient function 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+\varphi=\mu*N\to\sum_{k=1}^{\infty}kD_{kn}^{-1}=\varphi\left(n\right)\to\vec{\varphi}=\vec{N}^{\top}D^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are also additional 
 \begin_inset Quotes eld
 \end_inset
 
@@ -574,7 +752,7 @@ fun facts
 \begin_inset Quotes erd
 \end_inset
 
- can be found in the Wikipedia article 
+ that can be found in the Wikipedia article 
 \begin_inset Quotes eld
 \end_inset
 
@@ -583,20 +761,6 @@ Redheffer matrix
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Classical, well-known identities take on a slightly unfamiliar form.
- For reference, a few are given here.
- Define the sequence
-\begin_inset Formula 
-\[
-N\left(n\right)=n
-\]
-
-\end_inset
-
-Then
 \end_layout
 
 \begin_layout Section*
@@ -2036,7 +2200,18 @@ Identities worth not forgetting.
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/linas/src/fractal/paper/fractal"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
