@@ -7,9 +7,10 @@ INCLUDES =  -I../../tools/inc -I$(ANANT) \
 FUNC=../../tools/lib/libfunc.a
 HIST=../../generate/brat.o ../../generate/util.o
 
-all: multi plic
+all: multi plic newton
 
 plic: plic.o
+newton: newton.o
 
 multi: multi.o
 	cc -o $@ $^ $(FUNC) -ldb -lpthread -lm -lstdc++
