@@ -13,11 +13,10 @@ plic: plic.o
 newton: newton.o
 
 multi: multi.o
-	cc -o $@ $^ $(FUNC) -ldb -lpthread -lm -lstdc++
+	cc -o $@ $^ $(FUNC) -lpthread -lm -lstdc++
 
 .o:
-	# cc -o $@ $^ $(FUNC) -ldb -lpthread -lm -lstdc++
-	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) $(FUNC) -lanant -lgmp -ldb -lpthread -lm -lstdc++
 
 .c.o:
 	cc -c -g $^ -std=gnu11 -Wall -O2 $(INCLUDES)
