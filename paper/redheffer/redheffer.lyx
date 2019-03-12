@@ -379,22 +379,34 @@ As a matrix operator
 
 \begin_layout Standard
 The one-unit can also be written as an infinite-dimensional matrix.
- Write
+ Picking the letter 
+\begin_inset Formula $C$
+\end_inset
+
+ for 
+\begin_inset Quotes eld
+\end_inset
+
+convolution
+\begin_inset Quotes erd
+\end_inset
+
+, write
 \begin_inset Formula 
 \[
-\left(f*\mathit{1}\right)\left(n\right)=\sum_{d|n}f\left(d\right)=\sum_{k=1}^{\infty}U_{nk}f\left(k\right)
+\left(f*\mathit{1}\right)\left(n\right)=\sum_{d|n}f\left(d\right)=\sum_{k=1}^{\infty}C_{nk}f\left(k\right)
 \]
 
 \end_inset
 
 with 
-\begin_inset Formula $U_{nk}$
+\begin_inset Formula $C_{nk}$
 \end_inset
 
  having matrix entries 
 \begin_inset Formula 
 \[
-U_{nk}=\begin{cases}
+C_{nk}=\begin{cases}
 1 & \mbox{if }k\mbox{ divides }n\\
 0 & \mbox{otherwise}
 \end{cases}
@@ -405,7 +417,7 @@ U_{nk}=\begin{cases}
 The visually explicit lower-triangular form is
 \begin_inset Formula 
 \[
-U=\left[\begin{array}{ccccccc}
+C=\left[\begin{array}{ccccccc}
 1\\
 1 & 1\\
 1 & 0 & 1\\
@@ -435,7 +447,7 @@ That is, the
  in the columns, and writing:
 \begin_inset Formula 
 \[
-U_{nk}=\begin{cases}
+C_{nk}=\begin{cases}
 \mathit{1}\left(\frac{n}{k}\right) & \mbox{if }k\mbox{ divides }n\\
 0 & \mbox{otherwise}
 \end{cases}
@@ -449,7 +461,7 @@ This helps make clear that only multiples of
 
  show up, and there are zeros otherwise.
  It also helps make clear that 
-\begin_inset Formula $U$
+\begin_inset Formula $C$
 \end_inset
 
  can be decomposed as a sum of 
@@ -514,7 +526,7 @@ It can be more convenient to work with the transpose, which is upper-triangular,
  defined as 
 \begin_inset Formula 
 \[
-D=U^{\top}
+D=C^{\top}
 \]
 
 \end_inset
@@ -713,7 +725,7 @@ Classical identities and fun facts
 Clearly, all of the classical, well-known identities involving Dirichlet
  series, Lambert series, and so on can be be re-written in slightly unrecognizab
 le form, using 
-\begin_inset Formula $U$
+\begin_inset Formula $C$
 \end_inset
 
  and 
@@ -750,7 +762,7 @@ fun fact
 \end_inset
 
  and rows of 
-\begin_inset Formula $U$
+\begin_inset Formula $C$
 \end_inset
 
  sum to the divisor function 
@@ -760,7 +772,7 @@ fun fact
 :
 \begin_inset Formula 
 \[
-d=\mathit{1}*\mathit{1}\to d\left(n\right)=\sum_{k=1}^{\infty}U_{nk}=\sum_{k=1}^{\infty}D_{kn}\to\vec{d}=U\vec{\mathit{1}}=\vec{\mathit{1}}^{\top}D
+d=\mathit{1}*\mathit{1}\to d\left(n\right)=\sum_{k=1}^{\infty}C_{nk}=\sum_{k=1}^{\infty}D_{kn}\to\vec{d}=C\vec{\mathit{1}}=\vec{\mathit{1}}^{\top}D
 \]
 
 \end_inset
@@ -787,7 +799,7 @@ That is, the divisor function
  Simplifying further, 
 \begin_inset Formula 
 \[
-\mathit{1}=\mathit{1}*\varepsilon\to1=\sum_{k=1}^{\infty}U_{nk}\delta_{k1}=U_{n1}\to\vec{\mathit{1}}=U\vec{\varepsilon}
+\mathit{1}=\mathit{1}*\varepsilon\to1=\sum_{k=1}^{\infty}C_{nk}\delta_{k1}=C_{n1}\to\vec{\mathit{1}}=C\vec{\varepsilon}
 \]
 
 \end_inset
@@ -802,7 +814,7 @@ and so the representation of
 \begin_layout Standard
 \begin_inset Formula 
 \[
-d=\mathit{1}*\mathit{1}*\varepsilon\to\vec{\mathit{d}}=UU\vec{\varepsilon}=U^{2}\vec{\varepsilon}
+d=\mathit{1}*\mathit{1}*\varepsilon\to\vec{\mathit{d}}=CC\vec{\varepsilon}=C^{2}\vec{\varepsilon}
 \]
 
 \end_inset
@@ -843,7 +855,7 @@ with
 becomes 
 \begin_inset Formula 
 \[
-\sigma_{\alpha}=\mathit{1}*\mathit{N^{\alpha}}\to\sigma_{\alpha}\left(n\right)=\sum_{k=1}^{\infty}U_{nk}k^{\alpha}=\sum_{k=1}^{\infty}k^{\alpha}D_{kn}\to\vec{\sigma}_{\alpha}=U\vec{N^{\alpha}}=\vec{N^{\alpha}}^{\top}D
+\sigma_{\alpha}=\mathit{1}*\mathit{N^{\alpha}}\to\sigma_{\alpha}\left(n\right)=\sum_{k=1}^{\infty}C_{nk}k^{\alpha}=\sum_{k=1}^{\infty}k^{\alpha}D_{kn}\to\vec{\sigma}_{\alpha}=C\vec{N^{\alpha}}=\vec{N^{\alpha}}^{\top}D
 \]
 
 \end_inset
@@ -983,14 +995,22 @@ Questions
 \end_layout
 
 \begin_layout Standard
+It is tempting to try to view operator matrix 
+\begin_inset Formula $C$
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
 Because the operator matrix 
-\begin_inset Formula $U$
+\begin_inset Formula $C$
 \end_inset
 
  can be used to generate the integers, one might think it could be easily
  interpreted as a shift operator.
  This is not the case; 
-\begin_inset Formula $U$
+\begin_inset Formula $C$
 \end_inset
 
  has no (right-)eigenvectors.
@@ -999,7 +1019,7 @@ Because the operator matrix
 \end_inset
 
  such that 
-\begin_inset Formula $U\vec{v}=\lambda\vec{v}$
+\begin_inset Formula $C\vec{v}=\lambda\vec{v}$
 \end_inset
 
 .
@@ -1017,7 +1037,7 @@ Because the operator matrix
 
 .
  In operator language, 
-\begin_inset Formula $U$
+\begin_inset Formula $C$
 \end_inset
 
  does not have a point spectrum.
