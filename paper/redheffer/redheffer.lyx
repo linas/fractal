@@ -999,17 +999,46 @@ It is tempting to try to view operator matrix
 \begin_inset Formula $C$
 \end_inset
 
- as
-\end_layout
+ as a raising operator of some sort: that is, a shift.
+ After all, it generates the integers, so this should be natural.
+ This is not the case, and can be seen in two ways.
+ One way would be to note that raising and lowering operators come in non-commut
+ing pairs.
+ In this case, the 
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Standard
-Because the operator matrix 
+lowering
+\begin_inset Quotes erd
+\end_inset
+
+ operator 
+\begin_inset Formula $C^{-1}$
+\end_inset
+
+ commutes with 
 \begin_inset Formula $C$
 \end_inset
 
- can be used to generate the integers, one might think it could be easily
- interpreted as a shift operator.
- This is not the case; 
+, that is, 
+\begin_inset Formula $C^{-1}C-CC^{-1}=0$
+\end_inset
+
+, and so the prize property of such operator pairs is lost.
+ Another way to see this is that raising operators have shift states (
+\emph on
+aka
+\emph default
+ 
+\begin_inset Quotes eld
+\end_inset
+
+coherent states
+\begin_inset Quotes erd
+\end_inset
+
+), given as eigenvectors.
+ But 
 \begin_inset Formula $C$
 \end_inset
 
@@ -1043,7 +1072,11 @@ Because the operator matrix
  does not have a point spectrum.
  It may still have a continuous or a residual spectrum; this question is
  explored below.
- 
+ So although 
+\begin_inset Formula $C$
+\end_inset
+
+ carries one from one integer to the next, it is not a shift.
 \end_layout
 
 \begin_layout Subsection*
@@ -1051,7 +1084,11 @@ The matrix operator D
 \end_layout
 
 \begin_layout Standard
-The matrix 
+The transpose of 
+\begin_inset Formula $C$
+\end_inset
+
+, the matrix 
 \begin_inset Formula $D$
 \end_inset
 
@@ -2245,20 +2282,16 @@ The obvious next question is: is this the only direction in which
  
 \begin_inset Formula 
 \[
-\lim_{n\to\infty}\vec{v}_{n}\ne uhhhh....
+\lim_{q\to1}\lim_{n\to\infty}\vec{v}_{n}-c\vec{q}\ne0
 \]
 
 \end_inset
 
-(How do I write 
-\begin_inset Quotes eld
+for any constant 
+\begin_inset Formula $c$
 \end_inset
 
-not a multiple
-\begin_inset Quotes erd
-\end_inset
-
-?) and that 
+, and having the property that 
 \begin_inset Formula 
 \[
 \lim_{n\to\infty}\frac{\left|D\vec{v}_{n}\right|}{\left|\vec{v}_{n}\right|}\to\infty
@@ -2266,20 +2299,36 @@ not a multiple
 
 \end_inset
 
-And then of course the obvious: are these sequences dense? Singular? Perhaps
- 
+The double-limit above is not rigorous as written; rather it is an informal
+ suggestion that the 
+\begin_inset Formula $\vec{v}_{n}$
+\end_inset
+
+ should not weakly converge to the same limit that the 
 \begin_inset Formula $\vec{q}$
 \end_inset
 
- is the only one: its like the only pole in 
-\begin_inset Formula $\zeta\left(s\right)$
-\end_inset
-
- and so perhaps one can construct the analytic continuation of 
+ converge to.
+ Without taking the time to make this rigorous, it seems tampting to conjecture
+ that the answer is no, there isn't.
+ The operator 
 \begin_inset Formula $D$
 \end_inset
 
- by subtracting this one single 
+ is unbounded in only one direction: the 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+ direction.
+\end_layout
+
+\begin_layout Standard
+This leads to a wacky and ill-posed question that might not make sense,
+ but I'd like to ask it anyway: Can one treat 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+ as a kind-of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2287,9 +2336,11 @@ pole
 \begin_inset Quotes erd
 \end_inset
 
-? How does this work? Hmm.
- But that seems like a ridiculous hope, as kind-of-looks hopelessly essential
- - can't cut it out without cutting out kind-of everything.
+, subtract it away from 
+\begin_inset Formula $D$
+\end_inset
+
+, and see what's left? Can this be made possible in some way? 
 \end_layout
 
 \begin_layout Subsection*
@@ -2297,21 +2348,18 @@ Lambert basis
 \end_layout
 
 \begin_layout Standard
-So different idea: define 
+For example: define 
 \begin_inset Formula $\vec{q}$
 \end_inset
 
  as a kind-of principle vector/direction, and then build an orthonormal
  basis around it.
- Apply that as a singularity x-form; what does 
+ Perform a change-of-basis, i.e.
+ apply the similarity transform; what does 
 \begin_inset Formula $D$
 \end_inset
 
- look like then? What would the vectors 
-\begin_inset Formula $\vec{s}$
-\end_inset
-
- look like in this new coord system?
+ look like then? Lets try this.
 \end_layout
 
 \begin_layout Standard
@@ -2375,7 +2423,12 @@ The
 \begin_inset Formula $\hat{q}_{n}\to0$
 \end_inset
 
- in some way? (Is this how we ended up with the topologists sine, last time?)
+ in some way? (Last time, when I tried to expand 
+\begin_inset Formula $\vec{s}$
+\end_inset
+
+ in an orthonormal basis, I ended up with the topologists sine.
+ Is this why that happened?) 
 \end_layout
 
 \begin_layout Subsection*
@@ -2456,11 +2509,13 @@ series have zeros in the strip
 \end_inset
 
 .
- (Right? Am I imagining this? WTF?) This implies that 
+ (Right? Am I imagining this? WTF? I forget...) This implies that 
 \begin_inset Formula $D$
 \end_inset
 
  has a non-trivial kernel.
+ (ummm....
+ that can't be right, can it?)
 \end_layout
 
 \begin_layout Standard
@@ -2507,7 +2562,8 @@ where
 \end_inset
 
  is the Dirichlet convolution.
- (double check that the above is correct, I think it is).
+ (double check that the above is correct, I think it is; its a classical
+ number-theory identity.).
  So while 
 \begin_inset Formula $D$
 \end_inset
@@ -2518,7 +2574,7 @@ where
 
  has much stronger divergences at the XXX zeros.
  Hang on wtf.
- Where are the zeros of the L-series, again?
+ Where are the zeros of the L-series, again? This can't all be right.
 \end_layout
 
 \begin_layout Section*
@@ -2616,6 +2672,17 @@ Identities worth not forgetting.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section*
+Conclusion
+\end_layout
+
+\begin_layout Standard
+None yet.
+ This is yet another patented sprawl of randomized ideas masquerading as
+ an essay.
+ This essay may or may not be expanded and revised at some future date.
 \end_layout
 
 \begin_layout Standard
