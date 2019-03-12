@@ -92,8 +92,16 @@ figs-within-sections
 Divisor Operator
 \end_layout
 
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Date
+January 2019
+\end_layout
+
 \begin_layout Abstract
-Define and explore the 
+The 
 \begin_inset Quotes eld
 \end_inset
 
@@ -101,14 +109,21 @@ divisor operator
 \begin_inset Quotes erd
 \end_inset
 
-.
- Its a variant of the Redheffer matrix.
- It is not a bounded operator on 
+ is defined as an infinite-dimensional matrix operator, encoding Dirichlet
+ convolution in a linear algebra setting.
+ A finite-dimensional variant is known as the Redheffer matrix.
+ As a matrix operator, it naturally acts on the Banach space 
 \begin_inset Formula $\ell_{1}$
 \end_inset
 
-.
- It can be used to model the integers.
+ of summable sequences.
+ On this space, it is not a bounded operator.
+ It's point spectrum consists of all completely multiplicative arithmetic
+ series (that are 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+-summable).
 \end_layout
 
 \begin_layout Section*
@@ -116,8 +131,8 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-This reviews low-grade ideas surrounding something that I want to call the
- 
+This reviews various low-grade ideas surrounding something that I want to
+ call the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -126,8 +141,6 @@ divisor operator
 \end_inset
 
 .
- Why this is interesting: the divisor operator, as defined below, includes
- the Riemann zeros as part of it's kernel.
  It is a variation on a 
 \begin_inset Quotes eld
 \end_inset
@@ -136,7 +149,20 @@ Redheffer matrix
 \begin_inset Quotes erd
 \end_inset
 
- (see Wikipedia).
+.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WP-Redheffer"
+
+\end_inset
+
+ It's catnip for the following reason: some of it's eigenvalues are parameterize
+d by the Riemann zeta function.
+ One might vaguely hope that exploration in this relatively novel direction
+ can shed insight on the Riemann hypothesis.
+ In practice, it's more of an exercise bridging across several well-established
+ mathematical disciplines.
+ 
 \end_layout
 
 \begin_layout Section*
@@ -152,7 +178,15 @@ Define
 \begin_inset Formula $g(n)$
 \end_inset
 
- arithmetic sequences.
+ arithmetic sequences, that is, functions from the natural numbers 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ to the complex numbers 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+.
  Define Dirichlet convolution as usual:
 \begin_inset Formula 
 \[
@@ -186,6 +220,10 @@ so that
 \begin_inset Formula $\left(f*\varepsilon\right)=\left(\varepsilon*f\right)=f$
 \end_inset
 
+ for any 
+\begin_inset Formula $f$
+\end_inset
+
 .
  It is conventional to define the one-unit as 
 \begin_inset Formula 
@@ -215,8 +253,12 @@ As such, Dirichlet convolution, together with
 \begin_inset Formula $\varepsilon$
 \end_inset
 
- and 
+, 
 \begin_inset Formula $\mathit{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
 \end_inset
 
  can be used to create a model of arithmetic.
@@ -267,7 +309,7 @@ forcing
 \end_layout
 
 \begin_layout Standard
-To be precise, there are two models: the structure 
+To be precise, there are several models: the structure 
 \begin_inset Formula $\left(*,\varepsilon,\mathit{1}\right)$
 \end_inset
 
@@ -321,6 +363,14 @@ The relation
 The above is surely a lemma not a conjecture, but I'm super-lazy right now
  to super-triple-check.
  Right? 
+\begin_inset Quotes eld
+\end_inset
+
+Homework.
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
@@ -398,11 +448,70 @@ This helps make clear that only multiples of
 \end_inset
 
  show up, and there are zeros otherwise.
+ It also helps make clear that 
+\begin_inset Formula $U$
+\end_inset
+
+ can be decomposed as a sum of 
+\begin_inset Quotes eld
+\end_inset
+
+diagonal rays
+\begin_inset Quotes erd
+\end_inset
+
+, each 
+\begin_inset Quotes eld
+\end_inset
+
+ray
+\begin_inset Quotes erd
+\end_inset
+
+ progressing along 
+\begin_inset Formula $n/k=const.$
+\end_inset
+
+ The two most obvious rays are the diagonal: 
+\begin_inset Formula $n/k=1$
+\end_inset
+
+ and the first column: 
+\begin_inset Formula $n/k=\infty$
+\end_inset
+
+.
+ The next obvious ray is 
+\begin_inset Formula $n/k=2$
+\end_inset
+
+ which is just saying 
+\begin_inset Quotes eld
+\end_inset
+
+down two, over one, place a 1 in that spot
+\begin_inset Quotes erd
+\end_inset
+
+ can be iterated.
+ The rays of non-zero entries are illustrated below.
+ All matrix entries not on a ray are zero.
 \end_layout
 
 \begin_layout Standard
-It can be more convenient to work with the upper-triangular form, defined
- as 
+\align center
+\begin_inset Graphics
+	filename rays.eps
+	width 40col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It can be more convenient to work with the transpose, which is upper-triangular,
+ defined as 
 \begin_inset Formula 
 \[
 D=U^{\top}
@@ -410,7 +519,7 @@ D=U^{\top}
 
 \end_inset
 
-where 
+The letter 
 \begin_inset Formula $D$
 \end_inset
 
@@ -536,11 +645,7 @@ The matrix entries of
 
 \end_inset
 
-So just as before, each row of 
-\begin_inset Formula $D$
-\end_inset
-
- looks like a shift, each row is just the Mobius 
+Just as before, each row is just the Mobius 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -623,7 +728,7 @@ key "Apo76"
 
 \end_inset
 
- For reference, a few are given here.
+ For reference and orientation, a few are given here.
  The arrow 
 \begin_inset Formula $\to$
 \end_inset
@@ -772,15 +877,8 @@ In what follows, most of the work will concern the operator
 \end_layout
 
 \begin_layout Standard
-There are also additional 
-\begin_inset Quotes eld
-\end_inset
-
-fun facts
-\begin_inset Quotes erd
-\end_inset
-
- that can be found in the Wikipedia article 
+There is a deep and broad collection of further such relations; the Wikipedia
+ article 
 \begin_inset Quotes eld
 \end_inset
 
@@ -788,7 +886,14 @@ Redheffer matrix
 \begin_inset Quotes erd
 \end_inset
 
-.
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WP-Redheffer"
+
+\end_inset
+
+ provides a good entry point.
 \end_layout
 
 \begin_layout Subsection*
