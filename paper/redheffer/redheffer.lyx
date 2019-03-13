@@ -111,7 +111,7 @@ divisor operator
 
  is defined as an infinite-dimensional matrix operator, encoding Dirichlet
  convolution in a linear algebra setting.
- A finite-dimensional variant is known as the Redheffer matrix.
+ The finite-dimensional variant is known as the Redheffer matrix.
  As a matrix operator, it naturally acts on the Banach space 
 \begin_inset Formula $\ell_{1}$
 \end_inset
@@ -2165,7 +2165,68 @@ What's the operator norm of
 \begin_inset Formula $D$
 \end_inset
 
-? Let's try our luck.
+? The operator norm is defined as 
+\begin_inset Formula 
+\[
+\lim\sup_{\vec{v}}\frac{\left|D\vec{v}\right|}{\left|\vec{v}\right|}
+\]
+
+\end_inset
+
+but this is clearly unbounded: taking 
+\begin_inset Formula $\vec{v}=\vec{s}$
+\end_inset
+
+, one instantly has 
+\begin_inset Formula 
+\[
+\frac{\left|D\vec{s}\right|}{\left|\vec{s}\right|}=\frac{\left|\zeta\left(s\right)\vec{s}\right|}{\left|\vec{s}\right|}=\left|\zeta\left(s\right)\right|
+\]
+
+\end_inset
+
+which diverges as 
+\begin_inset Formula $1/s$
+\end_inset
+
+ as 
+\begin_inset Formula $s\to1$
+\end_inset
+
+.
+ A simple pole, as it were.
+ It's operator norm is divergent in this vector-direction.
+ From this we can only conclude that 
+\begin_inset Formula $D$
+\end_inset
+
+ is not a bounded operator.
+\end_layout
+
+\begin_layout Standard
+Are there other problematic directions? It would appear that any Dirichlet
+ character will result in a Dirichlet 
+\begin_inset Formula $L$
+\end_inset
+
+-function having a pole at 
+\begin_inset Formula $s\to1$
+\end_inset
+
+.
+ As vector directions, they are distinct.
+ As there are a countable infininty of characters, it would appear that
+ 
+\begin_inset Formula $D$
+\end_inset
+
+ is unbounded in a countable number of distinct directions (as characters
+ are linearly independent of one-another).
+ 
+\end_layout
+
+\begin_layout Standard
+Are ther other directions? Let's try our luck.
  Consider the vector 
 \begin_inset Formula $\vec{q}=\left(1,q,q^{2},\cdots\right)$
 \end_inset
@@ -2238,12 +2299,12 @@ as
 \end_inset
 
 .
- From this we can only conclude that 
+ So this is a distinct direction in which 
 \begin_inset Formula $D$
 \end_inset
 
- is not a bounded operator.
- It's operator norm is divergent in this vector-direction.
+ is not bounded.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2261,86 +2322,51 @@ i.e.
 \end_layout
 
 \begin_layout Standard
-The obvious next question is: is this the only direction in which 
+A speculative question presents itself, at this junction: is it possible
+ to decompose 
 \begin_inset Formula $D$
 \end_inset
 
- is divergent? Are there other directions? To be more precise, do there
- exist sequences of vectors 
-\begin_inset Formula $\vec{v}_{n}$
-\end_inset
-
- such that the 
-\begin_inset Formula $\vec{v}_{n}$
-\end_inset
-
- are not multiples of 
-\begin_inset Formula $\vec{q}$
-\end_inset
-
-, i.e.
- 
+ into two parts, a bounded part, and an unbounded part? That is, is there
+ any way possible to write
 \begin_inset Formula 
 \[
-\lim_{q\to1}\lim_{n\to\infty}\vec{v}_{n}-c\vec{q}\ne0
+D=D_{bounded}\oplus D_{divergent}
 \]
 
 \end_inset
 
-for any constant 
-\begin_inset Formula $c$
-\end_inset
-
-, and having the property that 
-\begin_inset Formula 
-\[
-\lim_{n\to\infty}\frac{\left|D\vec{v}_{n}\right|}{\left|\vec{v}_{n}\right|}\to\infty
-\]
-
-\end_inset
-
-The double-limit above is not rigorous as written; rather it is an informal
- suggestion that the 
-\begin_inset Formula $\vec{v}_{n}$
-\end_inset
-
- should not weakly converge to the same limit that the 
-\begin_inset Formula $\vec{q}$
-\end_inset
-
- converge to.
- Without taking the time to make this rigorous, it seems tampting to conjecture
- that the answer is no, there isn't.
- The operator 
-\begin_inset Formula $D$
-\end_inset
-
- is unbounded in only one direction: the 
-\begin_inset Formula $\vec{q}$
-\end_inset
-
- direction.
+If so, are the two parts uniquely determined? What might they be? 
 \end_layout
 
 \begin_layout Standard
-This leads to a wacky and ill-posed question that might not make sense,
- but I'd like to ask it anyway: Can one treat 
-\begin_inset Formula $\vec{q}$
+Why even pose such a crazy question? Easy: the eigen-equation 
+\begin_inset Formula $\vec{\zeta}=D\vec{s}=\zeta\left(s\right)\vec{s}$
 \end_inset
 
- as a kind-of 
-\begin_inset Quotes eld
+ given earlier is meaninful only when 
+\begin_inset Formula $\Re s>1$
 \end_inset
 
-pole
-\begin_inset Quotes erd
+, and is otherwise blocked by a pole in 
+\begin_inset Formula $\zeta\left(s\right)$
 \end_inset
 
-, subtract it away from 
-\begin_inset Formula $D$
+ at 
+\begin_inset Formula $s=1$
 \end_inset
 
-, and see what's left? Can this be made possible in some way? 
+.
+ Now, of course,
+\begin_inset Formula $\zeta\left(s\right)$
+\end_inset
+
+ can be analytically continued to the rest of the complex plane.
+ Can one do something analogous for 
+\begin_inset Formula $D\vec{s}$
+\end_inset
+
+? How would that work? 
 \end_layout
 
 \begin_layout Subsection*
