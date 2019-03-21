@@ -121,7 +121,7 @@ The trivial shift
 \end_layout
 
 \begin_layout Standard
-The simplest examples is the single untyped point.
+The simplest example is the single untyped point.
  A dot.
 \end_layout
 
@@ -189,7 +189,7 @@ f\left(z\right)=\sum_{n=0}^{\infty}A^{n}z^{n}
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $A^{n}$
 \end_inset
 
@@ -231,11 +231,54 @@ f\left(z\right)=\sum_{n=0}^{\infty}A^{n}z^{n}
 \begin_layout Standard
 Thus, the analytic series can be thought of as an infinite sum over segments
  of varying lengths.
- Examples include coherent states from quantum mechanics, where 
+ Examples:
+\end_layout
+
+\begin_layout Itemize
+Coherent states from quantum mechanics, where 
 \begin_inset Formula $A$
 \end_inset
 
  is the raising operator of the simple harmonic oscillator.
+\end_layout
+
+\begin_layout Itemize
+Adjacency matrixes of graphs.
+ Here, 
+\begin_inset Formula $A$
+\end_inset
+
+ is an adjacency matrix of a graph.
+ If its a directed graph, then it can be interpreted as the state-transition
+ graph of a finite state machine.
+\end_layout
+
+\begin_layout Itemize
+Markov chains.
+ Here, 
+\begin_inset Formula $A$
+\end_inset
+
+ is a Markov matrix, i.e.
+ having rows and columns that sum to one.
+ The limit of 
+\begin_inset Formula $\lim_{n\to\infty}A^{n}$
+\end_inset
+
+ can be used to btain the Markov stationary state: i.e.
+ 
+\begin_inset Formula $A\vec{\pi}=\vec{\pi}$
+\end_inset
+
+ which can also be seeen ast the Frobenius-Perron eigenvector of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Obviously, Markov chains generalize finite state machines, by introducing
+ a probability for each possible state transition.
+ The generalize non-deterministic finite state machines, by assigning non-unifor
+m weights to each transition.
 \end_layout
 
 \begin_layout Standard
@@ -250,12 +293,83 @@ Its called a shift because of various obvious identities:
  and 
 \begin_inset Formula 
 \[
-f=1+Af
+f=1+Azf
 \]
 
 \end_inset
 
  and so on.
+ In general, this leads to ideas of holomorphic functional calculus, and
+ etc.
+ So, for example, whether or not the sum 
+\begin_inset Formula $f\left(z\right)$
+\end_inset
+
+ exists as a numeric value or not depends very much on what 
+\begin_inset Formula $A$
+\end_inset
+
+ is, and various rules about summability.
+ So, for example, the obvious representation 
+\begin_inset Formula 
+\[
+f\left(z\right)=\frac{1}{I-zA}
+\]
+
+\end_inset
+
+assumes that the matrix 
+\begin_inset Formula $\left[I-zA\right]$
+\end_inset
+
+ is invertible, i.e.
+ has a trivial kernel, and that its left and right inverses are identical.
+ This last property that holds for finite-dimensional matrices, but not
+ in general for infinite-dimensional ones.
+ When 
+\begin_inset Formula $\left[I-zA\right]$
+\end_inset
+
+ is not invertible (the Fredholm alternative), one has a pole; more generally
+ one has spectra.
+ Again, this all points at standard fare concerning holomorphic functinal
+ calculus.
+ For most of the purposes here, it is simpler not to worry about this, and
+ restrict oneself to the formal sum, and the algebraic manipulations that
+ can be done there-on.
+\end_layout
+
+\begin_layout Standard
+Note that the indexes 
+\begin_inset Formula $i,j$
+\end_inset
+
+ on 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+ are of the same type: they are simply-typed.
+ That is, 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+ can be contracted with one another.
+ That is, 
+\begin_inset Formula 
+\[
+\left[A^{2}\right]_{ik}=\sum_{j}A_{ij}A_{jk}
+\]
+
+\end_inset
+
+works as a definition of the product of matrices only because the first
+ and second index are of the same type.
+ This should be contrasted to tensors in general, where different indexes
+ may have different types, and are not a-priori contractible with one-another.
 \end_layout
 
 \begin_layout Subsection*
@@ -386,6 +500,62 @@ natural topology
 
 , of cylinder sets; i.e.
  of subtrees only, never taking the limit.
+\end_layout
+
+\begin_layout Subsection*
+Tensor Multiplication and Comultiplication
+\end_layout
+
+\begin_layout Standard
+Judgements in natural deduction.
+ For example, the formation rule combining two propositions 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\series bold
+
+\begin_inset Formula $B$
+\end_inset
+
+
+\series default
+, each of which are evident, allows the formation of the compound proposition
+ 
+\begin_inset Formula $A\wedge B$
+\end_inset
+
+by means of an inference rule:
+\begin_inset Formula 
+\[
+\frac{A\mbox{ prop}\qquad B\mbox{ prop}}{(A\wedge B)\mbox{ prop}}\ \wedge_{F}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Tensor algebra
+\end_layout
+
+\begin_layout Standard
+Gahhh.
+\end_layout
+
+\begin_layout Subsection*
+Typed Languages
+\end_layout
+
+\begin_layout Standard
+then types....
+ vix model theory, proof theory...
+\end_layout
+
+\begin_layout Standard
+why the fuck am I writing this drivel? Because I'm trying to re-do the the
+ sheaves stuff, all over again.
 \end_layout
 
 \end_body
