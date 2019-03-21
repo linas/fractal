@@ -95,6 +95,11 @@ Notes preparing for sci-club crypto-blockchain pesentation.
 List of possible topics
 \end_layout
 
+\begin_layout Standard
+Start with history, review of core tech concepts.
+ Finish with applications.
+\end_layout
+
 \begin_layout Itemize
 Origin of blockchain in WWII Enigma coding machines.
  Maybe explain how these work?
@@ -140,21 +145,95 @@ bitcoin as a ledger: addition subtraction
 \end_layout
 
 \begin_layout Itemize
-but also: multiplication, division, if-statements, loops, – generic algorithms
- – etherium.
+but also: multiplication, division, if-statements, loops, – Turing-complete;
+ generic programming that is verifiable, unfalsifiable, non-repudiable –
+ etherium.
+ These properties make it strong enough for legal contracts!
 \end_layout
 
 \begin_layout Itemize
-The problem with proof-of-work.
+Problems with global blockchains:
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Global blockchains are heavy.
+ Typically require all participants to store the entire chain -gigabytes
+ worth and more.
+ 
+\end_layout
+
+\begin_layout Itemize
+The problem with proof-of-work - wasteful of CPU power.
+ 
+\end_layout
+
+\begin_layout Itemize
+Moral of the story: global blockchains represent a *single* centralized
+ server.
+ They represent a centralized resource in a distributed fashion.
+ 
+\end_layout
+
+\begin_layout Itemize
+Originally, ostensibly, blockchain was to solve the banking problems of
+ double-spending of coin.
+ But the solution is sloppy: it places *all* coins from the whole wide world,
+ onto one single blockchain.
+ This is overkill.
+ All that was really needed was a single global representation for a *single*
+ coin (to see if that particular coin was spent).
+ If one cares only about a single coin, there's no real point in looking
+ at all other coins in the world - they are of no paricular interest.
+ And yet, bitcoin, etc.
+ *forces* all cons to live in one single centralized repo.
+\end_layout
+
+\begin_layout Itemize
+Scaling: 7 billion people, 256/512 bytes of ID per person: 3.5 terabytes
+ of info to keep in sync globally.
+ That's ID's only.
+ This does not count/record any pair-wise or N-wise interactions between
+ peers.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Distributed hash tables - Why.
  Examples IPFS and predecessors.
 \end_layout
 
 \begin_layout Itemize
-The problem of spam and ddos in IPFS, etc.
+Critique of DHT
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The problem of spam in IPFS, etc.
+ and potential DDOS.
+ 
+\end_layout
+
+\begin_layout Itemize
+Again - this is a symptom of representating a singleton: i.e.
+ a single global copy, instead of a locally-balancing, locally-verifiable
+ distributed system.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Anti-singleton designs.
+ The point is: chat is inherently P2P.
+ Social media is inherently P2P.
+ Financial transactions are inheretly P2P.
+ Legal contracts are inherently P2P.
+ So why are we using centralized designs to solve them? Short answer: its
+ hard to avoid entralization...
+\end_layout
+
+\begin_layout Itemize
+Distributed P2P social media: https://www.scuttlebutt.nz/stories/design-challenge-
+avoid-centralization-and-singletons
 \end_layout
 
 \begin_layout Itemize
@@ -162,7 +241,7 @@ Whisper protocols???
 \end_layout
 
 \begin_layout Itemize
-Apps: uncorruptable, uneraseable database.
+Blockhain apps: uncorruptable, uneraseable database.
  When is this desirable? For what reason? Why isn't git enough? (scope of
  git; generic databse issues.
  More to life than SQL)
@@ -180,12 +259,7 @@ Hypothetical Apps: shard storage of mapping/geographic info; a global geographic
 
 \begin_layout Itemize
 Hypothetical apps: Openbook as opensouce face-book with control over information.
-\end_layout
-
-\begin_layout Itemize
-Still got scaling issues: 7 billion people, 256/512 bytes of ID per person:
- 3.5 terabytes of info to keep in sync globally.
- 
+ (Compare/contrast to scuttlebutt !?)
 \end_layout
 
 \begin_layout Itemize
