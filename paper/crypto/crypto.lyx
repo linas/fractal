@@ -119,7 +119,8 @@ Git as a blockchain, and why it was needed - to prevent source code fraud
 \end_layout
 
 \begin_layout Itemize
-File sharing, sleepcat, torrent architectures
+File sharing, sleepycat/napster, torrent architectures (bittorrent tracker
+ is example of DHT)
 \end_layout
 
 \begin_layout Itemize
@@ -141,7 +142,11 @@ Byzantine generals
 \end_layout
 
 \begin_layout Itemize
-bitcoin as a ledger: addition subtraction
+bitcoin as database
+\end_layout
+
+\begin_layout Itemize
+bitcoin as a ledger: addition subtraction – thus, a transaction database.
 \end_layout
 
 \begin_layout Itemize
@@ -197,12 +202,34 @@ Scaling: 7 billion people, 256/512 bytes of ID per person: 3.5 terabytes
  peers.
 \end_layout
 
+\begin_layout Itemize
+namecoin expires (destroys) data after N blocks, charges fee to keep data
+ alive.
+ 
+\end_layout
+
 \end_deeper
 \begin_layout Itemize
 Distributed hash tables - Why.
- Examples IPFS and predecessors.
+ Examples IPFS and predecessors (Freenet).
+ Also bittorent tracker.
+ Pros:
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+decentralization; load-balancing
+\end_layout
+
+\begin_layout Itemize
+fault tolerance; data integrity
+\end_layout
+
+\begin_layout Itemize
+scalability; load-balancing
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Critique of DHT
 \end_layout
@@ -211,7 +238,17 @@ Critique of DHT
 \begin_layout Itemize
 The problem of spam in IPFS, etc.
  and potential DDOS.
- 
+ FreeNet forgets unaccessed data.
+\end_layout
+
+\begin_layout Itemize
+Sybil attacks: one entity (person) creates many puppet identities (sockpuppets).
+ Identity validation.
+ Defense against sybil remains open research question.
+\end_layout
+
+\begin_layout Itemize
+How does sybil attack against DHT actually work? Tech details?
 \end_layout
 
 \begin_layout Itemize
