@@ -101,8 +101,13 @@ Start with history, review of core tech concepts.
 \end_layout
 
 \begin_layout Itemize
-Origin of blockchain in WWII Enigma coding machines.
+First large-scale use of blockchain was in WWII Enigma coding machines.
  Maybe explain how these work?
+\end_layout
+
+\begin_layout Itemize
+Concept of mixing/entropy.
+ Concept of mixing at different time-scales (slow, fast).
 \end_layout
 
 \begin_layout Itemize
@@ -111,11 +116,23 @@ Public key crypto mathematics theory
 
 \begin_layout Itemize
 Public key crypto examples: PGP/GPG, x.509 certs, SSL/https, onion routing
+ described at general level
+\end_layout
+
+\begin_layout Itemize
+crypto at a detailed level ratchet double ratchet, forward secrecy, what
+ is it for, how does this work?
+\end_layout
+
+\begin_layout Itemize
+Nonce; using nonces for secret boxes; all secret boxes must have a different
+ nonce else there is no foreward secrecy
 \end_layout
 
 \begin_layout Itemize
 Git as a blockchain, and why it was needed - to prevent source code fraud
- (real, not imagined)
+ (real, not imagined - intentional insertion of corruption/bugs into Linux
+ kernel)
 \end_layout
 
 \begin_layout Itemize
@@ -124,17 +141,46 @@ File sharing, sleepycat/napster, torrent architectures (bittorrent tracker
 \end_layout
 
 \begin_layout Itemize
-bitcoin predecessors: erights.org, how to do banking in a secure container
- by delegation.
- HashCash for spam prevention.
-\end_layout
-
-\begin_layout Itemize
 Other weirdo crypto ideas: death-lottery.
 \end_layout
 
 \begin_layout Itemize
-why bitcoin solved a problem that microtransactions could not.
+Forking and fork resolution.
+ A fork prevents maintanance of state (e.g.
+ maintance of bank balances) because in one fork, a withdrawl is made, and
+ in another, there isn't (multiple accounting books).
+ 
+\end_layout
+
+\begin_layout Itemize
+Forking is easy to solve, if there is a centralized authority (one set of
+ books) – e.g.
+ a bank.
+ The bank is authoritative as to your bank account balance.
+ 
+\end_layout
+
+\begin_layout Itemize
+Centralization has disdvantages: (a) snooping (b) high cost prohibits microtrans
+actions (pennies)
+\end_layout
+
+\begin_layout Itemize
+bitcoin predecessors: erights.org, how to do banking in a secure container
+ by delegation.
+ So, many small banks (purses) are possible.
+ Trick is to keep each purse secure, honest.
+ Possibly by cryptographical proving that the computations were actually
+ performed.
+\end_layout
+
+\begin_layout Itemize
+bitcoin solves the forking problem in a distributed way 
+\end_layout
+
+\begin_layout Itemize
+HashCash for spam prevention.
+ Proof-of-work - computationally expensive operations.
 \end_layout
 
 \begin_layout Itemize
@@ -191,7 +237,7 @@ Originally, ostensibly, blockchain was to solve the banking problems of
  If one cares only about a single coin, there's no real point in looking
  at all other coins in the world - they are of no paricular interest.
  And yet, bitcoin, etc.
- *forces* all cons to live in one single centralized repo.
+ *forces* all coins to live in one single centralized repo.
 \end_layout
 
 \begin_layout Itemize
@@ -278,6 +324,26 @@ Whisper protocols???
 \end_layout
 
 \begin_layout Itemize
+Double Ratchet algorithm
+\end_layout
+
+\begin_layout Itemize
+scuttlebutt verification handshake #ssb is networking protocol
+\end_layout
+
+\begin_layout Itemize
+GnuNet as networking protocol
+\end_layout
+
+\begin_layout Itemize
+secureshare built on GnuNet has little itty-bitty blockchains everywhere
+\end_layout
+
+\begin_layout Itemize
+Liquid democracy
+\end_layout
+
+\begin_layout Itemize
 Blockhain apps: uncorruptable, uneraseable database.
  When is this desirable? For what reason? Why isn't git enough? (scope of
  git; generic databse issues.
@@ -301,6 +367,18 @@ Hypothetical apps: Openbook as opensouce face-book with control over information
 
 \begin_layout Itemize
 Still got political issues: EULA, DRM, anti-hacking, patents
+\end_layout
+
+\begin_layout Itemize
+Matrix, Wire, Onion.chat, GNU Ring (Signal vs.
+ Telegram and WhatsApp)
+\end_layout
+
+\begin_layout Itemize
+Decentralized vs.
+ Federated.
+ what moxie said about dominating carries when federated.
+ 
 \end_layout
 
 \end_body
