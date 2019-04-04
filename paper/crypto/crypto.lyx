@@ -126,18 +126,51 @@ crypto at a detailed level ratchet double ratchet, forward secrecy, what
 
 \begin_layout Itemize
 Nonce; using nonces for secret boxes; all secret boxes must have a different
- nonce else there is no foreward secrecy
+ nonce else there is no forward secrecy
 \end_layout
 
+\begin_layout Itemize
+Merkle tree (hash tree): it doesn't have to be an actual chain; it can be
+ a tree of chains, leading up to a signed root.
+ Thus the dat:// protocol and btrfs, zfs
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Bitcoin has merkle trees inside of it; where? why?
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Git as a blockchain, and why it was needed - to prevent source code fraud
  (real, not imagined - intentional insertion of corruption/bugs into Linux
  kernel)
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
-File sharing, sleepycat/napster, torrent architectures (bittorrent tracker
- is example of DHT)
+Git is a blockchain of commits.
+\end_layout
+
+\begin_layout Itemize
+Each commit is a Merkle tree of file-objects (blobs) that captures the state
+ of that filesystem tree at that particular moment.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+File sharing, sleepycat/napster, 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Gnutella, BearShare, LimeWire, Shareaza, all use tiger tree hash
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+torrent architectures (bittorrent tracker is example of DHT) 
 \end_layout
 
 \begin_layout Itemize
@@ -290,12 +323,6 @@ namecoin expires (destroys) data after N blocks, charges fee to keep data
 
 \end_deeper
 \begin_layout Itemize
-Merkle tree (hash tree): it doesn't have to be an actual chain; it can be
- a tree of chains, leading up to a signed root.
- Thus the dat:// protocol.
-\end_layout
-
-\begin_layout Itemize
 Distributed hash tables - Why.
  Examples IPFS and predecessors (Freenet).
  Also bittorent tracker.
@@ -371,6 +398,16 @@ Double Ratchet algorithm
 scuttlebutt verification handshake #ssb is networking protocol
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+How does ssb compar to I2P (invisible internet protocol)? https://geti2p.net/en/
+\end_layout
+
+\begin_layout Itemize
+How does ssb compare to Noise protocol? https://noiseprotocol.org/
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 GnuNet as networking protocol
 \end_layout
@@ -379,6 +416,17 @@ GnuNet as networking protocol
 secureshare built on GnuNet has little itty-bitty blockchains everywhere
 \end_layout
 
+\begin_layout Itemize
+Noise protocol - mutual authentication, identity hiding, forward secrecy,
+ zero round-trip encryption
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Users include WhatsApp WireGuard, Lightning, and I2P.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 homomorphic encryption
 \end_layout
