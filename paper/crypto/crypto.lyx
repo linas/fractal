@@ -143,8 +143,8 @@ Bitcoin has merkle trees inside of it; where? why?
 \end_deeper
 \begin_layout Itemize
 Git as a blockchain, and why it was needed - to prevent source code fraud
- (real, not imagined - intentional insertion of corruption/bugs into Linux
- kernel)
+ (real, not imagined - intentional covert, secret insertion of corruption/bugs
+ into Linux kernel by unknown actors (possibly NSA??))
 \end_layout
 
 \begin_deeper
@@ -233,7 +233,15 @@ Byzantine generals i.e.
 \end_layout
 
 \begin_layout Itemize
-Tangles 
+Tangles aka 
+\begin_inset Quotes eld
+\end_inset
+
+Observer Remove Conflict-Free Replicated Data type
+\begin_inset Quotes erd
+\end_inset
+
+ (OR-Set CRDT)
 \end_layout
 
 \begin_deeper
@@ -247,8 +255,11 @@ As defense of cryptocurrency against attackers.
 \end_layout
 
 \begin_layout Itemize
-Cooperative tangles https://github.com/cn-uofbasel/ssbdrv/blob/master/doc/tangle.m
-d
+Cooperative tangles: OR-Set CRDT with vector clock: arXiv:1210.3368 
+\end_layout
+
+\begin_layout Itemize
+nice diagrams: https://github.com/cn-uofbasel/ssbdrv/blob/master/doc/tangle.md
 \end_layout
 
 \end_deeper
@@ -267,6 +278,20 @@ centralization
 \end_inset
 
  in bitcoin, just not central authority.
+ There is only one growing tip in bitcoin.
+ There are NOT multiple, distributed purses.
+ Bitcoin 
+\begin_inset Quotes eld
+\end_inset
+
+wallets
+\begin_inset Quotes erd
+\end_inset
+
+ are NOT purses! They are not actually wallets, because they do not actually
+ store the value – the value is on the bitcoin blockchain, and tehre is
+ exactly zero value in the wallet itself.
+ The wallets do store the secret keys, though.
 \end_layout
 
 \begin_layout Itemize
@@ -275,7 +300,7 @@ HashCash for spam prevention.
 \end_layout
 
 \begin_layout Itemize
-bitcoin as database
+bitcoin as generic database
 \end_layout
 
 \begin_layout Itemize
@@ -283,12 +308,19 @@ bitcoin as a ledger: addition subtraction – thus, a transaction database.
 \end_layout
 
 \begin_layout Itemize
-but also: multiplication, division, if-statements, loops, – Turing-complete;
+But also: multiplication, division, if-statements, loops, – Turing-complete;
  generic programming that is verifiable, unfalsifiable, non-repudiable –
  etherium.
  These properties make it strong enough for legal contracts!
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Etherium improvements e.g.
+ rigorous mathematical proofs, from the (who were they?? I/O Hong Kong people?)
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Problems with global blockchains:
 \end_layout
@@ -344,7 +376,7 @@ namecoin expires (destroys) data after N blocks, charges fee to keep data
 \end_deeper
 \begin_layout Itemize
 Distributed hash tables - Why.
- Examples IPFS and predecessors (Freenet).
+ Examples IPFS, Tahoe-LaFS, and predecessors (Freenet).
  Also bittorent tracker.
  Pros:
 \end_layout
@@ -407,7 +439,7 @@ avoid-centralization-and-singletons
 \end_layout
 
 \begin_layout Itemize
-Whisper protocols???
+Whisper protocols??? (SWRLDS)
 \end_layout
 
 \begin_layout Itemize
@@ -495,7 +527,7 @@ no personal accounting (McDonalds emails me my credit-card receipt, instead
  of placing it in my personal general ledger.
  Ditto for Amazon, my bank, my insurance company, my doctor, etc.
  No privacy, because gmail can read my receipts.
- No automatiion: I have to hand-transcribe into gnucash)
+ No automation: I have to hand-transcribe into gnucash)
 \end_layout
 
 \end_deeper
@@ -527,6 +559,11 @@ https://statebox.org/
 
 \begin_layout Itemize
 https://www.stellar.org/how-it-works/stellar-basics/#how-it-works
+\end_layout
+
+\begin_layout Itemize
+Critique: UBI is income w/o voting rights.
+ Compare to stock ownership, where you get dividend income AND voting rights!
 \end_layout
 
 \end_deeper
@@ -569,12 +606,20 @@ Still got political issues: EULA, DRM, anti-hacking, patents
 \end_layout
 
 \begin_layout Itemize
+Anonimity: TOR, I2P (Invisible Internet Project)
+\end_layout
+
+\begin_layout Itemize
 Matrix, Wire, Onion.chat, GNU Ring (Signal vs.
  Telegram and WhatsApp)
 \end_layout
 
 \begin_layout Itemize
-Holochain
+Holochain for transactional guarantees
+\end_layout
+
+\begin_layout Itemize
+Radicle for replicated state machines
 \end_layout
 
 \end_body
