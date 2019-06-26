@@ -235,7 +235,7 @@ Several semesters worth ...
 \end_layout
 
 \begin_layout Itemize
-Get familiar with commonly used widespread notation
+Notation is KEY: commonplace, widespread notation
 \end_layout
 
 \begin_layout Itemize
@@ -257,6 +257,10 @@ Equations are tie-breakers for intuitive ideas
 
 \begin_layout Itemize
 Creativity and imagination are KEY
+\end_layout
+
+\begin_layout Itemize
+It will be  dizzying
 \end_layout
 
 \end_deeper
@@ -1123,12 +1127,209 @@ Where
 
 \end_layout
 
+\begin_layout PlainFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Partial derivatives
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Given a curve 
+\begin_inset Formula $\gamma\left(t\right)$
+\end_inset
+
+ in a manifold 
+\begin_inset Formula $M$
+\end_inset
+
+, such that the curve is is tangent to the vector 
+\begin_inset Formula $X$
+\end_inset
+
+ at 
+\begin_inset Formula $p\in M$
+\end_inset
+
+, the Lie derivative of a function 
+\begin_inset Formula $f$
+\end_inset
+
+ on 
+\begin_inset Formula $M$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\[
+\mathcal{L}_{X}f\left(p\right)=\left.\frac{f\left(\gamma\left(t\right)\right)-f\left(\gamma\left(0\right)\right)}{t}\right|_{p=\gamma\left(0\right)\mbox{ and }X=\gamma^{\prime}\left(0\right)}
+\]
+
+\end_inset
+
+where the vector (field) 
+\begin_inset Formula $X$
+\end_inset
+
+ is written as
+\begin_inset Formula 
+\[
+X=X^{\mu}\frac{\partial}{\partial x^{\mu}}=X^{\mu}\partial_{\mu}=X^{\mu}e_{\mu}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Tangent-vector-p.png
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Tangent-space-exp.png
+	lyxscale 40
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout PlainFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Electromagnetism
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+E&M is (just) a circle bundle!
+\end_layout
+
+\begin_layout Itemize
+Each group element: 
+\begin_inset Formula $g=e^{i\theta}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Vector potential:  
+\begin_inset Formula $A_{\mu}=g^{-1}\partial_{\mu}g=\left(\vec{A},\phi\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Curvature 
+\begin_inset Formula $F_{\mu\nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}=\left[\begin{array}{cccc}
+0 & E_{x} & E_{y} & E_{z}\\
+-E_{x} & 0 & -B_{z} & B_{y}\\
+-E_{y} & B_{z} & 0 & B_{x}\\
+-E_{z} & -B_{y} & B_{x} & 0
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+...or 
+\begin_inset Formula $\vec{E}=\vec{\nabla}\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{B}=\vec{\nabla}\times\vec{A}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Choice of gauge == choice of coordinates on the circle!
+\end_layout
+
+\begin_layout Itemize
+Holonomy is the Bohm-Aharonov effect!
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename Parallel_Transport.png
+	width 20col%
+
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename holonomy-quantum.png
+	lyxscale 130
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Frame
 \begin_inset Argument 4
 status open
 
 \begin_layout Plain Layout
-Frame fields
+Frame fields (Vierbeins)
 \end_layout
 
 \end_inset
@@ -1180,7 +1381,7 @@ One for each point
 status open
 
 \begin_layout Plain Layout
-Maaadf
+Metric
 \end_layout
 
 \end_inset
@@ -1188,6 +1389,32 @@ Maaadf
 
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+The metric is (just) a product of vierbeins (frames)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g_{\mu\nu}=e_{\mu}\cdot e_{\nu}=e_{\mu}^{a}\eta_{ab}e_{\nu}^{b}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\eta_{ab}=\left[\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & -1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
