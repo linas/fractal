@@ -38,11 +38,13 @@ void MakeHisto (
 		}
 		if (EOF == rc)
 		{
+			printf("Done after finding %d rows\n", cnt);
 			break;
 		}
 		cnt ++;
 
 freq = - log(freq) / log(2.0);
+freq = 32 - freq;
 
 		int ni = sizex * (0.5 + (freq - x_center) / width);
 		if (ni < 0) ni = 0;
