@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -29,6 +29,8 @@ figs-within-sections
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -67,6 +69,7 @@ figs-within-sections
 \suppress_date false
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -75,7 +78,10 @@ figs-within-sections
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -98,6 +104,16 @@ Linas Vepstas
 
 \begin_layout Date
 January 2019
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Revised 4 July 2020
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Abstract
@@ -124,6 +140,7 @@ divisor operator
 \end_inset
 
 -summable).
+ A variety of curious hypothesis and observations are stated.
 \end_layout
 
 \begin_layout Section*
@@ -153,6 +170,7 @@ Redheffer matrix
 \begin_inset CommandInset citation
 LatexCommand cite
 key "WP-Redheffer"
+literal "true"
 
 \end_inset
 
@@ -737,6 +755,7 @@ le form, using
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Apo76"
+literal "true"
 
 \end_inset
 
@@ -902,6 +921,7 @@ Redheffer matrix
 \begin_inset CommandInset citation
 LatexCommand cite
 key "WP-Redheffer"
+literal "true"
 
 \end_inset
 
@@ -2603,6 +2623,187 @@ where
 \end_layout
 
 \begin_layout Section*
+Right Inverses
+\end_layout
+
+\begin_layout Standard
+It seems possible to construct an an uncountably(!) infinite number of right
+ inverses to the matrix operator 
+\begin_inset Formula $D$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Pick some constant 
+\begin_inset Formula $\lambda\in\mathbb{C}$
+\end_inset
+
+ and consider the set of ordered pairs 
+\begin_inset Formula $\left(\chi,s\right)$
+\end_inset
+
+ that satisfy the constraint that 
+\begin_inset Formula $L\left(s,\chi\right)=\lambda$
+\end_inset
+
+ and that 
+\begin_inset Formula $1<\Re s$
+\end_inset
+
+ .
+ For the general case, I believe that this set is (countably) infinite.
+ That is, there are a countably infinite number of Dirichlet characters
+ 
+\begin_inset Formula $\chi$
+\end_inset
+
+, and that, for almost all of them, it is possible to find one (or more)
+ 
+\begin_inset Formula $s=s_{\lambda}$
+\end_inset
+
+ such that 
+\begin_inset Formula $L\left(s_{\lambda},\chi\right)=\lambda$
+\end_inset
+
+.
+ It seems that this should resemble problems in algebraic geometry, so that
+ such a 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and the corresponding points 
+\begin_inset Formula $s_{\lambda}$
+\end_inset
+
+ are points 
+\begin_inset Quotes eld
+\end_inset
+
+in general position
+\begin_inset Quotes erd
+\end_inset
+
+.
+ (I don't know any particular ways of proving either of these statements,
+ or of finding such points; but it seems intuitively obvious that this is
+ the case.
+ See, for example, 
+\begin_inset Quotes eld
+\end_inset
+
+Bohr's equivalence theorem
+\begin_inset Quotes erd
+\end_inset
+
+, section 8.11 of Apostol
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apo90"
+literal "false"
+
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Standard
+Each element of this set corresponds to a 
+\begin_inset Formula $\vec{\chi}_{\lambda}=\chi\left(n\right)n^{-s_{\lambda}}$
+\end_inset
+
+, which, by construction, is an eigenvector of 
+\begin_inset Formula $D$
+\end_inset
+
+ with eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+D\vec{\chi}_{\lambda}=\lambda\vec{\chi}_{\lambda}
+\]
+
+\end_inset
+
+It is an eigenvalue because the summation is absolutely convergent, if only
+ because we've been careful to discard those 
+\begin_inset Formula $s_{\lambda}$
+\end_inset
+
+ corresponding to conditional convergence.
+ That is, it seems reasonable to insist on having 
+\begin_inset Formula $\sum_{n}\left|n^{-s_{\lambda}}\right|<\infty$
+\end_inset
+
+ so that there is no ambiguity as to the validity of the linear matrix operator
+ eigenvalue equation.
+\end_layout
+
+\begin_layout Standard
+Thus, it seems one has a countably infinite set 
+\begin_inset Formula $\left\{ \vec{\chi}_{\lambda}\right\} $
+\end_inset
+
+.
+ Construct the matrix operator 
+\begin_inset Formula $X$
+\end_inset
+
+ from the column vectors of 
+\begin_inset Formula $\left\{ \vec{\chi}_{\lambda}\right\} $
+\end_inset
+
+.
+ Consider now the product 
+\begin_inset Formula $\Lambda=DX$
+\end_inset
+
+.
+ It would appear that this is a multiple of the identity matrix, in that
+ 
+\begin_inset Formula 
+\[
+\Lambda\vec{e}_{k}=\lambda\vec{e}_{k}
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $\vec{e}_{k}$
+\end_inset
+
+ are the usual unit basis vectors: 
+\begin_inset Formula $\vec{e}_{k}=\left(0,\cdots,0,1,0,\cdots\right)$
+\end_inset
+
+ with components 
+\begin_inset Formula $\vec{e}_{k}\left(n\right)=\delta_{kn}$
+\end_inset
+
+.
+ In an earlier section, the matrix operator 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ was constructed out of the Mobius 
+\begin_inset Formula $\mu$
+\end_inset
+
+ as both the left and right inverse.
+ Here, it would seem that 
+\begin_inset Formula $X/\lambda$
+\end_inset
+
+ is a right inverse (it cannot be a left inverse, obviously), and, it would
+ seem that there are an uncountable infinity of such inverses!
+\end_layout
+
+\begin_layout Section*
 Series Shifts
 \end_layout
 
@@ -2708,6 +2909,9 @@ None yet.
  This is yet another patented sprawl of randomized ideas masquerading as
  an essay.
  This essay may or may not be expanded and revised at some future date.
+ (My humble apologies: mostly, it would appear that I am woefully unacquainted
+ with the tools of operator theory, as surely there must be well-known theorems
+ and techniques that can be applied to the present situation.)
 \end_layout
 
 \begin_layout Standard
