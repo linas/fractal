@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -24,6 +24,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -62,6 +64,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -70,7 +73,10 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -141,7 +147,7 @@ What does this look like for the Minkowski measure
 
 \begin_layout Standard
 Another similar quantity is the Riesz–Herglotz transform, appropriate when
- the measure is peridic, i.e.
+ the measure is periodic, i.e.
  lives on the unit circle:
 \begin_inset Formula 
 \[
@@ -166,8 +172,8 @@ obvious
 
  in retrospect.
  Its the circle, with the hot-spots distributed all around where expected.
- Bsically, it just decays away from th peaks, puts zeros near the zeros.
- well -pseudo-zeros, they mostly all cancel out.
+ Basically, it just decays away from the peaks, puts zeros near the zeros.
+ Well -pseudo-zeros, they mostly all cancel out.
 \end_layout
 
 \begin_layout Standard
@@ -290,9 +296,9 @@ Cayley Transform
 \end_layout
 
 \begin_layout Standard
-And then there's this: – the the springer Encyclopedia of Math article on
- Cayley transform, which relates a unitary spectrum to a real spectrum,
- viz spectrum o a real line.
+And then there's this: – the the Springer Encyclopedia of Math article on
+ the Cayley transform, which relates a unitary spectrum to a real spectrum,
+ viz spectrum on a real line.
 \end_layout
 
 \begin_layout Standard
@@ -340,6 +346,18 @@ m_{n-1} & m_{n} & m_{n+1} & \cdots & m_{2n-1}\\
 
 \begin_layout Standard
 Show these.
+ Explicitly:
+\begin_inset Formula 
+\begin{align*}
+P_{0}\left(x\right) & =m_{0}\\
+P_{1}\left(x\right) & =m_{0}x-m_{1}\\
+P_{2}\left(x\right) & =\left(m_{0}m_{2}-m_{1}^{2}\right)x^{2}+\left(m_{1}m_{2}-m_{0}m_{3}\right)x+m_{1}m_{3}-m_{2}^{2}\\
+ & =p_{22}x^{2}+p_{21}x+p_{20}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -365,6 +383,21 @@ well known
  viz the spectrum thereof.
 \end_layout
 
+\begin_layout Standard
+Grep: Artin billiards, dynamical zeta function.
+ Factorization of the Selberg zeta for teh modular surface correspond to
+ decomposition of Shrodinger operator eigenfunctions.
+ See 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Eisele94"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Zeros
 \end_layout
@@ -379,7 +412,19 @@ Reinterpret
  This operator is a shift – blah blah Bernoulli...? Various shifts abound –
  the shift from Jacobi eqn, the shift from Favard's theorem...
  the shift from orthogonal polynomials.
- 
+\end_layout
+
+\begin_layout Standard
+x
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "/home/linas/src/fractal/paper/fractal"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
