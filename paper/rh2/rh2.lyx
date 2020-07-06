@@ -120,14 +120,21 @@ Seems to have something to do with the hyperbolic plane, continued fractions,
 
 \end_inset
 
-or let 
+Above is the Mellin transform of the Bose-Einstein distribution.
+ ...
+ well, and teh gamma is the Mellin transform of the Boltzmann distribution...
+ go figure...
+\end_layout
+
+\begin_layout Standard
+Alternately let 
 \begin_inset Formula $h\left(y\right)=\frac{1}{y}-\left\lfloor \frac{1}{y}\right\rfloor $
 \end_inset
 
 , then
 \begin_inset Formula 
 \[
-\zeta\left(s\right)=\frac{1}{s-1}-s\int_{0}^{1}h\left(y\right)y^{s-1}dx
+\zeta\left(s\right)=\frac{1}{s-1}-s\int_{0}^{1}h\left(y\right)y^{s-1}dy
 \]
 
 \end_inset
@@ -239,6 +246,65 @@ center
 \end_inset
 
 , which is infinity on the x-axis of the upper half plane.
+\end_layout
+
+\begin_layout Standard
+Its easier if we stick to the fundamental domain.
+ To do this, write 
+\begin_inset Formula $w=1/y$
+\end_inset
+
+, then 
+\begin_inset Formula $h\left(y\right)=w-\left\lfloor w\right\rfloor $
+\end_inset
+
+ and 
+\begin_inset Formula $y^{s-1}=w^{1-s}$
+\end_inset
+
+ and 
+\begin_inset Formula $dy=-dw/w^{2}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\zeta\left(s\right)=\frac{1}{s-1}-s\int_{1}^{\infty}\left(w-\left\lfloor w\right\rfloor \right)w^{-s-1}dw
+\]
+
+\end_inset
+
+is an integral along a sawtooth in the center of the fundamental domain,
+ from the center to infinity...
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $\Phi=\log w$
+\end_inset
+
+ or 
+\begin_inset Formula $w=e^{\Phi}$
+\end_inset
+
+ so that 
+\begin_inset Formula $dw=e^{\Phi}d\Phi$
+\end_inset
+
+ and 
+\begin_inset Formula $w^{-s-1}=e^{-\left(s+1\right)\Phi}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\zeta\left(s\right)=\frac{1}{s-1}-s\int_{0}^{\infty}\left(e^{\Phi}-\left\lfloor e^{\Phi}\right\rfloor \right)e^{-s\Phi}d\Phi
+\]
+
+\end_inset
+
+I'm doing this in my head, I hope I didn't make any errors....so that is the
+ Laplace transform of a nasty sawtooth...
 \end_layout
 
 \end_body
