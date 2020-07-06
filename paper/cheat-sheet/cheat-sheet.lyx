@@ -146,7 +146,7 @@ literal "false"
 
 \end_inset
 
- which also provides corresponding defintions on the 2-sphere and the limiting
+ which also provides corresponding definitions on the 2-sphere and the limiting
  case to Euclidean space.
 \end_layout
 
@@ -162,13 +162,13 @@ ds^{2}=dr^{2}+\sinh^{2}\left(r\right)\,d\phi^{2}
 \end_layout
 
 \begin_layout Subsection*
-Isometries
+Isometries, Killing vectors
 \end_layout
 
 \begin_layout Standard
 Vector fields generating one-parameter-groups of isometries (diffeomorphisms
  preserving the metric).
- See 
+ (A Killing vector is an infinitessimal generator of an isometry.) See 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ranada03,Carinena05"
@@ -199,7 +199,23 @@ which obey the commutators
 
 \end_inset
 
+See 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Carinena07"
+literal "false"
 
+\end_inset
+
+ for these in Cartesian coordinates.
+\end_layout
+
+\begin_layout Subsection*
+Measure
+\end_layout
+
+\begin_layout Standard
+Want measure invariant under Killing vectors.
 \end_layout
 
 \begin_layout Subsection*
@@ -221,17 +237,7 @@ literal "false"
 \end_inset
 
 .
- Note that this is notationally wrong, since Lagrangians are always functions
- of 
-\begin_inset Formula $q,p$
-\end_inset
-
- position and conjugate momentum, whereas Hanlitonians are functions of
  
-\begin_inset Formula $q,\dot{q}$
-\end_inset
-
-.
 \begin_inset Formula 
 \[
 \mathcal{L}=T-V=\frac{1}{2}\left(v_{r}^{2}+\sinh^{2}\left(r\right)v_{\phi}^{2}\right)-V\left(r,\phi\right)
@@ -351,6 +357,66 @@ literal "false"
 \end_layout
 
 \begin_layout Subsection*
+Harmonic oscillator
+\end_layout
+
+\begin_layout Standard
+The potential is given by 
+\begin_inset Formula 
+\[
+V\left(r,\phi\right)=-\omega^{2}\tanh^{2}r
+\]
+
+\end_inset
+
+See 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Carinena07"
+literal "false"
+
+\end_inset
+
+ for solution to the quantum harmonic oscillator for this, and also on the
+ sphere.
+ Under change of coordinate 
+\begin_inset Formula $\rho=\sinh r$
+\end_inset
+
+, the Lagrangian becomes
+\begin_inset Formula 
+\[
+\mathcal{L}=\frac{1}{2}\left(\frac{v_{\rho}^{2}}{1+\rho^{2}}+\rho^{2}v_{\phi}^{2}\right)-\frac{\omega^{2}}{2}\left(\frac{\rho^{2}}{1+\rho^{2}}\right)
+\]
+
+\end_inset
+
+See 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Carinena07"
+literal "false"
+
+\end_inset
+
+ for details, and another change-of-variable, 
+\begin_inset Formula $\rho^{\prime}=\tanh r$
+\end_inset
+
+.
+ Note the general claim that working with 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is a lot easier than working with 
+\begin_inset Formula $r$
+\end_inset
+
+ when solving equations of motion, both for the classical and the quantum
+ variants.
+\end_layout
+
+\begin_layout Subsection*
 Kepler problem
 \end_layout
 
@@ -411,9 +477,21 @@ literal "false"
 .
 \end_layout
 
+\begin_layout Subsection*
+Two-body problem
+\end_layout
+
 \begin_layout Standard
-The two-body problem, even in restricted form, is not integrable (the needed
- integral of motion does not exist); see 
+The two-body problem, when one includes 
+\emph on
+both
+\emph default
+ a Newtonian and also an oscillator potential (
+\emph on
+both at the same time
+\emph default
+) is not integrable (the needed integral of motion does not exist); see
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Shchepetilov06"
