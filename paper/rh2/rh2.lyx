@@ -151,9 +151,31 @@ Hypothesis one:
 \end_layout
 
 \begin_layout Standard
-this is an integral around the perimeter of the Poincare disk (or rather,
- the unit itnerval at the perimeter of the Poincare half-plane.
- This is sort-of-ish explored somwhere else.
+This is an integral around the perimeter of the Poincare disk (or rather,
+ the unit interval at the perimeter of the Poincare half-plane.
+ This is sort-of-ish explored earlier, and maybe written down?
+\end_layout
+
+\begin_layout Standard
+The stumbling block was the cusps are not the same thing as the Minkowski
+ question mark, even though there is some superficial resemblance.
+ Unexplored: are the cusps given by 
+\begin_inset Formula $1/?(x)$
+\end_inset
+
+, which is so strongly flat/zero at each rational...
+ would need to unflatten it somehow.
+ And answer, 
+\begin_inset Quotes eld
+\end_inset
+
+what happens between the cusps?
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Conventional wisdom: each cusp is a simple pole (Right? Per Apostol and
+ the surjective nature of the j-invariant.)
 \end_layout
 
 \begin_layout Subsubsection*
@@ -303,8 +325,253 @@ Write
 
 \end_inset
 
-I'm doing this in my head, I hope I didn't make any errors....so that is the
- Laplace transform of a nasty sawtooth...
+So that is the Laplace transform of a nasty sawtooth...
+\end_layout
+
+\begin_layout Subsubsection*
+Hypothesis three:
+\end_layout
+
+\begin_layout Standard
+Consider a Lagrangian 
+\begin_inset Formula $L=T-V$
+\end_inset
+
+ and the action 
+\begin_inset Formula $A=\int_{\mathbb{C}}dzd\overline{z}\,L\left(z,\overline{z}\right)$
+\end_inset
+
+ and the kinetic part being 
+\begin_inset Formula $T=\Delta\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Hypothesis four:
+\end_layout
+
+\begin_layout Standard
+Consider 
+\begin_inset Formula $d\mu=\left(e^{\Phi}-\left\lfloor e^{\Phi}\right\rfloor \right)d\Phi$
+\end_inset
+
+ to be some kind of volume element.
+ Volume of what?
+\end_layout
+
+\begin_layout Section*
+Hamiltonian Systems and Boundary Conditions
+\end_layout
+
+\begin_layout Standard
+The spectrum of zeros of the zeta correspond to the eigenvalues of some
+ Hermitian operator.
+ Conventionally, some Hamiltonian, i.e.
+ energy levels of some (symplectic) system.
+ How? The zeta itself resembles a functional equation solved for energy
+ levels in e.g.
+ a radar cavity.
+ How do these work?
+\end_layout
+
+\begin_layout Itemize
+The E&M waves are free-field sine waves/plane waves.
+\end_layout
+
+\begin_layout Itemize
+Subject to rectangular metal boundry conditions, one gets constraints that
+ are first-order in the field variables, e.g.
+ transeverse-electric=0 reduces to 
+\begin_inset Formula $\sin\left(kn/L\right)=0$
+\end_inset
+
+ for wavenumber 
+\begin_inset Formula $k$
+\end_inset
+
+ and cavity size 
+\begin_inset Formula $L$
+\end_inset
+
+, so that and integer number 
+\begin_inset Formula $n$
+\end_inset
+
+ of standing waves fit.
+\end_layout
+
+\begin_layout Itemize
+Subject to sphere boundary conditions, the plane wave naturally decompose
+ into spherical Bessel functions 
+\begin_inset Formula $j_{k}$
+\end_inset
+
+, so that boundary conditions lead to a constraint of the form of 
+\begin_inset Formula $Aj_{k}\left(\omega\right)+Bj_{k+1}\left(\omega\right)+C=0$
+\end_inset
+
+ for an energy level 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and constants 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ Note that this is first-order in the 
+\begin_inset Formula $j_{k}$
+\end_inset
+
+ and that the Bessel functions are effectively periodic.
+\end_layout
+
+\begin_layout Itemize
+For the chiral bag model, the waves are fermions; the bag is spherical.
+\end_layout
+
+\begin_layout Itemize
+The boundary condition is quadratic: 
+\begin_inset Formula $\overline{\psi}\hat{n}\cdot\vec{\tau}\psi-C=0$
+\end_inset
+
+ for some constant 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ The resulting constrant is quadratic in the Bessel functions, being of
+ the form 
+\begin_inset Formula $Aj_{k}^{2}\left(\omega\right)+Bj_{k-1}\left(\omega\right)j_{k+1}\left(\omega\right)+C\cdots=0$
+\end_inset
+
+.
+ The spectrum is far more complex, but is still determined by what are effective
+ly sine waves, mixing together with complicated amplitudes.
+\end_layout
+
+\begin_layout Itemize
+Notable is that the mixture is only three terms long.
+ It's only this long because the spinors are effectively three-dimensional
+ (a product of spin and isospin spinors) and thus can mix together only
+ three (spin +1, 0, -1) wave-function components differing by only one unit
+ angular momentum each.
+\end_layout
+
+\begin_layout Standard
+By contrast, the Riemann zeta looks like an infinite sum of standing waves:
+ 
+\begin_inset Formula 
+\[
+\zeta\left(\frac{1}{2}+i\omega\right)=\sum_{n}\frac{e^{-i\omega\log n}}{\sqrt{n}}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\omega$
+\end_inset
+
+ understod as the 
+\begin_inset Quotes eld
+\end_inset
+
+energy
+\begin_inset Quotes erd
+\end_inset
+
+ of a given standing wave.
+ If this is to be treated as a standing-wave boundary condition, there are
+ two problems:
+\end_layout
+
+\begin_layout Itemize
+What sort of boundary condition mixes together an 
+\begin_inset Quotes eld
+\end_inset
+
+infinite
+\begin_inset Quotes erd
+\end_inset
+
+ number of periodic waves? Why is it mixing all of them?
+\end_layout
+
+\begin_layout Itemize
+Whence the factor of 
+\begin_inset Formula $\log n$
+\end_inset
+
+ multiplying the energy? How should this be interpreted?
+\end_layout
+
+\begin_layout Section*
+Symplectic systems
+\end_layout
+
+\begin_layout Standard
+More generally, what's symplectic about the zeta? In classical mechanics,
+ one has a coordinate manifold, a tangent bundle, a symplectic form, a geodesic
+ flow.
+ What are those things for the zeta?
+\end_layout
+
+\begin_layout Standard
+We can rule out some simple cases.
+ The geodesic flow (Anosov flow) on the fundamental domain of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset
+
+ is not chaotic, its a bunch of horocycles in a Hopf fibration.
+ The quantized version thereof is described by the cylindrical Bessel function
+ 
+\begin_inset Formula $J_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The only thing I can think of that would be maybe crazy enough would be
+ ...
+ flow on an infinite binary tree composed of 
+\begin_inset Quotes eld
+\end_inset
+
+pairs of pants
+\begin_inset Quotes erd
+\end_inset
+
+.
+ That is, on a not-exactly-compact Riemann surface, having no holes, but
+ extending to infinity...
+ so what would the Teichmüller space on such a beast look like?
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pants-tree.svg
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Would it be crazy enough to have the right spectrum? How, exeactly, was
+ the Bessel function thingy arrived at, again?
 \end_layout
 
 \end_body
