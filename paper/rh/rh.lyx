@@ -1,282 +1,369 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
+\use_default_options false
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding auto
-\fontscheme pslatex
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "courier" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \paperfontsize default
-\spacing single 
-\papersize Default
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 1
-\use_natbib 0
-\use_numerical_citations 0
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
-\defskip medskip
-\quotes_language english
-\quotes_times 2
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
 
-\layout Title
+\begin_body
 
+\begin_layout Title
 Towards RH
-\layout Author
+\end_layout
 
+\begin_layout Author
 Linas Vepstas
-\layout Date
+\end_layout
 
+\begin_layout Date
 26 October 2006
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 Notes about the Riemann hypothesis, specifically, connection to Baker's
  map.
  
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 pattern recognition
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
-, a bunch of thins that look similar.
-\layout Section
+, a bunch of things that look similar.
+\end_layout
 
+\begin_layout Section
 Overview
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Consider the Bernouli map 
 \begin_inset Formula $b(x)=2x-\left\lfloor 2x\right\rfloor $
-\end_inset 
+\end_inset
 
 , which is a function of the unit interval onto the unit interval.
  Its transfer operator is 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}f\right](x)=\frac{1}{2}\left(f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right)\label{eq:}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\left[\mathcal{L}_{B}f\right](x)=\frac{1}{2}\left(f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right)\label{eq:}
+\end{equation}
 
-\end_inset 
+\end_inset
 
  which maps functions on the unit interval to other functions on the unit
  interval.
  This operator has eigenvectors given by the Hurwitz zeta function, which
  is easily expressed in terms of a closely related function, a variant of
  the polylogarithm:
-\begin_inset Formula \begin{equation}
-\beta(x,s)=\sum_{n=1}^{\infty}\frac{e^{2\pi inx}}{n^{s}}=\mbox{Li}_{s}\left(e^{2\pi ix}\right)\label{eq:}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\beta(x,s)=\sum_{n=1}^{\infty}\frac{e^{2\pi inx}}{n^{s}}=\mbox{Li}_{s}\left(e^{2\pi ix}\right)\label{eq:}
+\end{equation}
 
-\end_inset 
+\end_inset
 
  so that 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}\beta\right](x,s)=2^{-s}\beta(x,s)\label{eq:}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\left[\mathcal{L}_{B}\beta\right](x,s)=2^{-s}\beta(x,s)\label{eq:}
+\end{equation}
 
-\end_inset 
+\end_inset
 
  That is, every possibly value of 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  corresponds to an eigenvalue.
  In the above, and in what follows, 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is taken to lie on the unit interval.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 There are several remarkable aspects.
  First, one has that 
 \begin_inset Formula $\beta(0,s)=\beta(1,s)=0$
-\end_inset 
+\end_inset
 
  if and only if 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  is a zero of the Riemann zeta function.
  This seems important somehow.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 XXX wtf.
  ?? To prove RH, one would need to show that some variant of 
 \begin_inset Formula $\mathcal{L}_{B}$
-\end_inset 
+\end_inset
 
  is unitary, and that this vanishing is somehow important for the space
  of functions to be considered.
  That is, one wants to somehow show that 
 \begin_inset Formula $\mathcal{L}_{B}=\sqrt{2}\,\exp iH$
-\end_inset 
+\end_inset
 
 .
  where 
 \begin_inset Formula $H$
-\end_inset 
+\end_inset
 
  is the Hilbert-Polya operator.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The eigenvectors are countably degenerate, in that 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $s^{\prime}=s+2\pi in/\ln2$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $n\in\mathbb{Z}$
-\end_inset 
+\end_inset
 
 .
  Not sure, but I beleive no two zeros on the critical line correspond to
  degenerate eigenvalues; this would need proof.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Next curiosity: the Bernoulli operator can be interpreted as a one-sided
  shift operator on a one-dimensional lattice.
  The is suggestive of M.V.
  Berry's hypothesis that the Hilbert-Polya operator is somehow 
 \begin_inset Formula $px$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
  the momentum operator, and 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  the position operator.
-\layout Section
+\end_layout
 
+\begin_layout Section
 P-adics in general
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The general 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 -adic operator is 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{p}f\right](x)=\frac{1}{p}\sum_{k=0}^{p-1}f\left(\frac{x+k}{p}\right)\label{eq:p-adic operator}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\left[\mathcal{L}_{p}f\right](x)=\frac{1}{p}\sum_{k=0}^{p-1}f\left(\frac{x+k}{p}\right)\label{eq:p-adic operator}
+\end{equation}
 
-\end_inset 
+\end_inset
 
  and one has 
-\begin_inset Formula \begin{equation}
-\mathcal{L}_{p}\beta(x;s)=\frac{1}{p^{s}}\beta(x;s)\label{eq:p-adic beta eigeneqn}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}_{p}\beta(x;s)=\frac{1}{p^{s}}\beta(x;s)\label{eq:p-adic beta eigeneqn}
+\end{equation}
 
-\end_inset 
+\end_inset
 
  Note that 
 \begin_inset Formula $\beta(x;s)$
-\end_inset 
+\end_inset
 
  are the only eignefunctions that work for any value of 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 .
  One may construct fracal eigenfunctions that work for a given 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 , but those fractals are not eigenfuncions of the other values of 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This allows the syntetic operator to be constructed: 
-\begin_inset Formula \[
-\mathcal{Z}=\sum_{p=1}^{\infty}\mathcal{L}_{p}\]
+\begin_inset Formula 
+\[
+\mathcal{Z}=\sum_{p=1}^{\infty}\mathcal{L}_{p}
+\]
 
-\end_inset 
+\end_inset
 
  having eigenvalues given by the Rieman zeta:
-\layout Standard
+\end_layout
 
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\left[\mathcal{Z}\right]\beta(x;s)=\left[\sum_{p=1}^{\infty}\mathcal{L}_{p}\right]\beta(x;s)=\sum_{p=1}^{\infty}\frac{1}{p^{s}}\beta(x;s)=\zeta(s)\beta(x;s)\label{eq:}
+\end{equation}
 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{Z}\right]\beta(x;s)=\left[\sum_{p=1}^{\infty}\mathcal{L}_{p}\right]\beta(x;s)=\sum_{p=1}^{\infty}\frac{1}{p^{s}}\beta(x;s)=\zeta(s)\beta(x;s)\label{eq:}\end{equation}
-
-\end_inset 
+\end_inset
 
  Note that the Hurwitz zeta is the only eigenfunction of this, and that
  the fractal eigenfunctions are not.
  Similarly, 
-\begin_inset Formula \[
-\mathcal{Z}_{\chi}=\sum_{p=1}^{\infty}\chi(p)\mathcal{L}_{p}\]
+\begin_inset Formula 
+\[
+\mathcal{Z}_{\chi}=\sum_{p=1}^{\infty}\chi(p)\mathcal{L}_{p}
+\]
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\chi$
-\end_inset 
+\end_inset
 
  is a Dirichlet character clearly has 
 \begin_inset Formula $\beta(x;s)$
-\end_inset 
+\end_inset
 
  as an eigenvector, and 
 \begin_inset Formula $L(s,\chi)$
-\end_inset 
+\end_inset
 
  as an eigenvalue.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The noteworthy observation here is that the zeros of the 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
 -functions describe a set of eigenvectors that lie in the kernel of 
 \begin_inset Formula $\mathcal{Z}_{\chi}$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Is there a short exact sequence of any sort?
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Is there a Fredholm kernel we can apply here?
-\layout Section
+\end_layout
 
+\begin_layout Section
 Integer sequences
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Four examples of a discrete spectrum, taking values at the integers, embedded
  in a continuous spectrum.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The Simple Harmonic Oscillator
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The quantized Hamiltonian 
 \begin_inset Formula $H=\frac{1}{2}\left(p^{2}+x^{2}\right)$
-\end_inset 
+\end_inset
 
 , with 
 \begin_inset Formula $H\psi=\lambda\psi$
-\end_inset 
+\end_inset
 
 .
  Has a continuous spectrum 
 \begin_inset Formula $\lambda\in\mathbb{C}$
-\end_inset 
+\end_inset
 
 .
  The continuous-spectrum eigenfunctions are not square integrable.
@@ -284,311 +371,351 @@ The quantized Hamiltonian
  possible).
  There is also another discrete spectrum with decreasing energies (
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 the inverted harmonic oscillator
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 ).
  Discrete eigenfiunctions are polynomials times an overall factor 
 \begin_inset Formula $\psi_{0}(x)=e^{-x^{2}/2}$
-\end_inset 
+\end_inset
 
 .
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Polynomial eigenfunctions of Bernoulli map
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Defined above, 
 \begin_inset Formula $\mathcal{L}_{2}B_{n}(x)=2^{-n}B_{n}(x)$
-\end_inset 
+\end_inset
 
 .
  Eigenfunctions are polynomials, and thus 
 \begin_inset Formula $C^{\infty}$
-\end_inset 
+\end_inset
 
 .
  The continuous spectrum is the periodic zeta 
 \begin_inset Formula $\beta(s;x)$
-\end_inset 
+\end_inset
 
  as defined above.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Fractal eigenfunctions of Bernoulli map
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The square wave aka Haar wavelet 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 h(x)=\begin{cases}
 +1 & \mbox{ for }0\le x<1/2\\
--1 & \mbox{ for }1/2\le x<1\end{cases}\]
+-1 & \mbox{ for }1/2\le x<1
+\end{cases}
+\]
 
-\end_inset 
+\end_inset
 
  is in the kernel of 
 \begin_inset Formula $\mathcal{L}_{2}h(x)=0$
-\end_inset 
+\end_inset
 
  and thus can be used to create a fractal eigenfunction 
-\begin_inset Formula \[
-\psi(x)=\sum_{n=0}^{\infty}\lambda^{n}h\left(2^{n}x\right)\]
+\begin_inset Formula 
+\[
+\psi(x)=\sum_{n=0}^{\infty}\lambda^{n}h\left(2^{n}x\right)
+\]
 
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula $\mathcal{L}_{2}\psi=\lambda\psi$
-\end_inset 
+\end_inset
 
  for any 
 \begin_inset Formula $\left|\lambda\right|<1$
-\end_inset 
+\end_inset
 
  in the unit disk.
  The fractal symmetry of this fractal eigenfunction transforms as a 2D represent
 ation of the dyadic monoid that is the subset of the modular group.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Integrating the Haar wavelet gives the triangle wave, which transforms as
  the 3D representation.
  Intrgrating again to get a periodic parabola gives something that transforms
- under the 4D rep,
-\emph on 
- etc
-\emph default 
+ under the 4D rep, 
+\emph on
+etc
+\emph default
 .
  By contrast, using sine-waves to construct the eigenfunctions result in
  eigenfunctions that transform in an infinite-dimensional kind-of-way; thus,
  the general fourier-analysis input into the thing will be inf dimensional,with
  the square, triangle, etc.
  cases forming a discrete spectrum.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Monodromy of the Polylogarithm
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The monodromy group of the polylogarithm 
 \begin_inset Formula $\mbox{Li}_{s}(z)$
-\end_inset 
+\end_inset
 
 , for general 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
 , has an inf-dimensional representation, with one of the two generators
  of the monodromy acting as a shift operator(!).
  The exceptions occur for 
 \begin_inset Formula $s=n$
-\end_inset 
+\end_inset
 
  a positive integer.
  For 
 \begin_inset Formula $n=2$
-\end_inset 
+\end_inset
 
 , the monodromy group is nothing other than the integer Heisenberg group,
  generated by 
 \begin_inset Formula $p,x$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $\left[p,x\right]=1$
-\end_inset 
+\end_inset
 
 .
  Here, 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
  is the monodromy generator of winding around the branch point at 
 \begin_inset Formula $z=0$
-\end_inset 
+\end_inset
 
 , while 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is the monodromy generator of winding around the branch point at 
 \begin_inset Formula $z=1$
-\end_inset 
+\end_inset
 
 .
  The integer Heisenberg group has the usual representation by 3x3 matrices.
  For 
 \begin_inset Formula $n=3$
-\end_inset 
+\end_inset
 
 , there is a 4D representation (but not the Heisenberg group), and so on.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Of course, the Riemann zeta lies on the branch point of the polylogarithm,
  in that 
 \begin_inset Formula $\mbox{Li}_{s}(1)=\zeta(s)$
-\end_inset 
+\end_inset
 
 .
  However, its the 
 \begin_inset Formula $z=0$
-\end_inset 
+\end_inset
 
  monodromy that is the shift state, while the 
 \begin_inset Formula $z=1$
-\end_inset 
+\end_inset
 
  monodromy 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 injects
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  into the shift.
  Hmmm.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Dualities
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The evenly-spaced spectrum is curiously dual to the zeros of RH.
  For example, the sums: 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \delta_{n} & = & \sum_{k=2}^{n}\left(\begin{array}{c}
 n\\
-k\end{array}\right)\left(-1\right)^{k}\zeta(k)\\
- & = & \sum_{k=1}^{\infty}\left[\left(1-\frac{1}{k}\right)^{n}-1+\frac{n}{k}\right]\end{eqnarray*}
+k
+\end{array}\right)\left(-1\right)^{k}\zeta(k)\\
+ & = & \sum_{k=1}^{\infty}\left[\left(1-\frac{1}{k}\right)^{n}-1+\frac{n}{k}\right]
+\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  and the sums in Li's criterion (per Bombieri): 
-\begin_inset Formula \[
-\lambda_{n}=\sum_{\rho}\left[1-\left(1-\frac{1}{\rho}\right)^{n}\right]\]
+\begin_inset Formula 
+\[
+\lambda_{n}=\sum_{\rho}\left[1-\left(1-\frac{1}{\rho}\right)^{n}\right]
+\]
 
-\end_inset 
+\end_inset
 
  Uhh XXX to do: 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Write 
 \begin_inset Formula $\rho=\frac{1}{2}+i\tau$
-\end_inset 
+\end_inset
 
  then is 
 \begin_inset Formula $\sum_{\tau}\left[\left(1-\frac{1}{\tau}\right)^{n}-1\right]$
-\end_inset 
+\end_inset
 
  oscillatory, the way that the 
 \begin_inset Formula $\delta_{n}$
-\end_inset 
+\end_inset
 
  are? is this true for all such sequences, per Bombieri? Also, what is 
 \begin_inset Formula $\sum_{n}\lambda_{n}z^{n}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\sum_{n}\lambda_{n}z^{n}/n!$
-\end_inset 
+\end_inset
 
 ? 
-\layout Section
+\end_layout
 
+\begin_layout Section
 Singular in some way
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Rieman zeta is tangled up with a singularity in several ways.
  Two examples follow.
  
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Polylog branch point
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 For the polylogarithm 
 \begin_inset Formula $\mbox{Li}_{s}(z)$
-\end_inset 
+\end_inset
 
 , one has 
 \begin_inset Formula $\mbox{Li}_{s}(1)=\zeta(s)$
-\end_inset 
+\end_inset
 
 .
  But the polylogarithm has a branch point at 
 \begin_inset Formula $z=1$
-\end_inset 
+\end_inset
 
 , so this relation asks for the value at a branch point! Performing the
  same analysis for the Dirichlet 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
 -functions shows that these are also at the branch point of the polylogarithm.
  One the other hand, it can't be that bad, since, from the Dirichlet eta
  function, one has 
-\begin_inset Formula \[
-\zeta(s)=-\frac{1}{1-2^{1-s}}\;\mbox{Li}_{s}(-1)\]
+\begin_inset Formula 
+\[
+\zeta(s)=-\frac{1}{1-2^{1-s}}\;\mbox{Li}_{s}(-1)
+\]
 
-\end_inset 
+\end_inset
 
  and the polylog has no branch point at 
 \begin_inset Formula $z=-1$
-\end_inset 
+\end_inset
 
 .
  
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Theta function
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Starting with the classical theta function 
 \begin_inset Formula $\vartheta(z;\tau)$
-\end_inset 
+\end_inset
 
 , defined as 
-\begin_inset Formula \[
-\vartheta(z;\tau)=\sum_{n=-\infty}^{\infty}e^{i\pi\tau n^{2}+2\pi inz}\]
+\begin_inset Formula 
+\[
+\vartheta(z;\tau)=\sum_{n=-\infty}^{\infty}e^{i\pi\tau n^{2}+2\pi inz}
+\]
 
-\end_inset 
+\end_inset
 
  one has the Mellin transform 
-\begin_inset Formula \[
-\int_{0}^{\infty}\left[\vartheta(z,it)-1\right]t^{s/2}\frac{dt}{t}=\pi^{(s-1)/2}\Gamma\left(\frac{1-s}{2}\right)\left[\zeta(1-s;z)+\zeta(1-s;1-z)\right]\]
+\begin_inset Formula 
+\[
+\int_{0}^{\infty}\left[\vartheta(z,it)-1\right]t^{s/2}\frac{dt}{t}=\pi^{(s-1)/2}\Gamma\left(\frac{1-s}{2}\right)\left[\zeta(1-s;z)+\zeta(1-s;1-z)\right]
+\]
 
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $z$
-\end_inset 
+\end_inset
 
  not an integer.
  For 
 \begin_inset Formula $z=n$
-\end_inset 
+\end_inset
 
  an integer, the relation takes a different form: 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int_{0}^{\infty}\left[\vartheta(n,it)-1\right]t^{s/2}\frac{dt}{t}=2\pi^{(s-1)/2}\Gamma\left(\frac{1-s}{2}\right)\zeta(s)
+\]
 
-\begin_inset Formula \[
-\int_{0}^{\infty}\left[\vartheta(n,it)-1\right]t^{s/2}\frac{dt}{t}=2\pi^{(s-1)/2}\Gamma\left(\frac{1-s}{2}\right)\zeta(s)\]
-
-\end_inset 
+\end_inset
 
  the trick here is that th 
 \begin_inset Formula $z\to n$
-\end_inset 
+\end_inset
 
  limit is non-trivial, because the theta function has a non-trivial limit
  
-\begin_inset Formula \[
-\lim_{t\to0}\vartheta(z;it)=\sum_{n=-\infty}^{\infty}\delta(z-n)\]
+\begin_inset Formula 
+\[
+\lim_{t\to0}\vartheta(z;it)=\sum_{n=-\infty}^{\infty}\delta(z-n)
+\]
 
-\end_inset 
+\end_inset
 
  So it seems the Riemann zeta is associated with the singular points.
  
-\the_end
+\end_layout
+
+\end_body
+\end_document
