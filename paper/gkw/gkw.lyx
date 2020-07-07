@@ -91,7 +91,23 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 31 Nov 2010, 28 Jan 2016) 
+2 January 2004
+\end_layout
+
+\begin_layout Date
+Revised 2008
+\end_layout
+
+\begin_layout Date
+Revised 31 Nov 2010
+\end_layout
+
+\begin_layout Date
+Revised 28 Jan 2016
+\end_layout
+
+\begin_layout Date
+Revised 7 July 2020
 \end_layout
 
 \begin_layout Abstract
@@ -1841,8 +1857,13 @@ One can attempt to solve GKW by working in the polynomial representation.
 \begin_inset Formula $x=0$
 \end_inset
 
-, but this turns out to be a very poor choice.
- Writing 
+, but this turns out to be a very poor choice; the resulting matrix is poorly
+ conditioned.
+ Nonetheless, it is instructive as a first try.
+\end_layout
+
+\begin_layout Standard
+Writing 
 \begin_inset Formula $\mathcal{L}_{h}f=g$
 \end_inset
 
@@ -1885,7 +1906,7 @@ literal "true"
 , we have 
 \begin_inset Formula 
 \[
-\left\langle m\left|\mathcal{L}_{h}\right|k\right\rangle =(-)^{m}\;\left(\begin{array}{c}
+\left\langle m\left|\mathcal{L}_{h}\right|k\right\rangle =H_{mk}=(-)^{m}\;\left(\begin{array}{c}
 k+m+1\\
 m
 \end{array}\right)\,\zeta(k+m+2)
@@ -1893,22 +1914,147 @@ m
 
 \end_inset
 
-where we've replaced the factorials by the binomial coefficient that they
+where the factorials were replaced by the binomial coefficient that they
  form.
- Unfortunately, this is clearly a very poorly conditioned matrix.
- One can make some progress, if one wishes, by applying a regulator and
- using Levin-type sequence acceleration techniques.
- One can thus find a number of curious identities, some of which we've listed
+ The formal meaning of these matrix elements are that, if 
+\begin_inset Formula $f\left(x\right)=\sum_{n=0}^{\infty}a_{n}x^{n}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+g\left(x\right)=\left[\mathcal{L}_{h}f\right]\left(x\right)=\sum_{m=0}^{\infty}x^{m}\sum_{k=0}^{\infty}H_{mk}a_{k}
+\]
+
+\end_inset
+
+is the polynomial representation for 
+\begin_inset Formula $\mathcal{L}_{h}f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is useful to examine the matrix directly, as it has a dramatic visual
+ form.
+ It is 
+\begin_inset Formula 
+\[
+\left(-\right)^{m}H=\left[\begin{array}{cccccc}
+\zeta_{2} & \zeta_{3} & \zeta_{4} & \zeta_{5} & \zeta_{6} & \cdots\\
+2\zeta_{3} & 3\zeta_{4} & 4\zeta_{5} & 5\zeta_{6} & 6\zeta_{7}\\
+3\zeta_{4} & 6\zeta_{5} & 10\zeta_{6} & 15\zeta_{7}\\
+4\zeta_{5} & 10\zeta_{6} & 20\zeta_{7}\\
+5\zeta_{6} & 15\zeta_{7} &  &  & \ddots\\
+\vdots
+\end{array}\right]
+\]
+
+\end_inset
+
+where some visual clutter was avoided by writing 
+\begin_inset Formula $\zeta_{k}=\zeta\left(k\right)$
+\end_inset
+
+ and dropping the alternating sign 
+\begin_inset Formula $\left(-1\right)^{m}$
+\end_inset
+
+ in front of each row.
+ This says nothing new, but dramatically illustrates how the zeta shifts
+ from row to row, and makes Pascal's triangle equally manifest.
+ It suggests a curious decomposition in terms of shift operators.
+ Write 
+\begin_inset Formula $T$
+\end_inset
+
+ as the left-shift, so that 
+\begin_inset Formula $T_{ij}=\delta_{i,j-1}$
+\end_inset
+
+ and powers of the shift are 
+\begin_inset Formula $T_{ij}^{n}=\delta_{i,j-n}$
+\end_inset
+
+.
+ It is a belabored way to shift the zeta vector: 
+\begin_inset Formula $\zeta_{i+n}=\sum_{j}T_{ij}^{n}\zeta_{j}$
+\end_inset
+
+ so as to get each subsequent row of the matrix.
+ Likewise, changing notation on the binomial coefficient: 
+\begin_inset Formula $K_{jk}=\left({j+k+1\atop j}\right)$
+\end_inset
+
+ as well as for the zeta so that 
+\begin_inset Formula $Z_{j}=\zeta_{j+2}$
+\end_inset
+
+ then allows a tensor-like decomposition: 
+\begin_inset Formula 
+\[
+\left(-\right)^{m}H_{mk}=\sum_{j=0}^{\infty}K_{mk}T_{kj}^{m}Z_{j}
+\]
+
+\end_inset
+
+which emphasizes that it 
+\begin_inset Quotes eld
+\end_inset
+
+factors
+\begin_inset Quotes erd
+\end_inset
+
+ into three parts: the binomial coefficient, the shift 
+\begin_inset Quotes eld
+\end_inset
+
+tensor
+\begin_inset Quotes erd
+\end_inset
+
+, and a vector.
+ The questions worth posing are then: what happens if any of these factors
+ are replaced by a variation? One still has a transfer matrix; what is the
+ corresponding dynamical system?
+\end_layout
+
+\begin_layout Standard
+As mentioned, 
+\begin_inset Formula $H$
+\end_inset
+
+ is a very poorly conditioned matrix.
+ One way to apply brute-force muscle is to replace it by 
+\begin_inset Formula $H^{\prime}$
+\end_inset
+
+ with 
+\begin_inset Formula $H_{mk}^{\prime}=H_{mk}\exp-t\left(m+k\right)$
+\end_inset
+
+ and eventually take the limit 
+\begin_inset Formula $t\to0$
+\end_inset
+
+, but not before applying Levin-type sequence acceleration techniques.
+ One can thus find a number of curious identities, some of which were listed
  previously.
  However, the difficulty of working with divergent sums seems to outweigh
  any advantages given by the relatively simple form of the matrix elements.
- Thus, one is lead to consider the matrix elements for a polynomial expansion
- about 
+\end_layout
+
+\begin_layout Standard
+There are other polynomial bases.
+ The next most obvious one is a polynomial expansion about 
 \begin_inset Formula $x=1$
 \end_inset
 
 .
- These are far more complex, but give a very well-conditioned matrix.
+ The resulting matrix elements are far more complex, but give a very well-condit
+ioned matrix.
  These are: 
 \begin_inset Formula 
 \begin{equation}
@@ -1923,7 +2069,7 @@ m
 
 \end_inset
 
- satisfying 
+satisfying 
 \begin_inset Formula 
 \[
 (-)^{m}\frac{g^{(m)}(1)}{m!}=\sum_{n=0}^{\infty}G_{mn}(-)^{n}\frac{f^{(n)}(1)}{n!}
@@ -1931,6 +2077,22 @@ m
 
 \end_inset
 
+That is, if 
+\begin_inset Formula $f\left(x\right)=\sum_{n=0}^{\infty}a_{n}\left(1-x\right)^{n}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+g\left(x\right)=\left[\mathcal{L}_{h}f\right]\left(x\right)=\sum_{m=0}^{\infty}\left(1-x\right)^{m}\sum_{n=0}^{\infty}G_{mn}a_{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Other authors have chosen to expand about 
 \begin_inset Formula $x=1/2$
 \end_inset
@@ -1948,12 +2110,132 @@ literal "true"
 \end_inset
 
  leads to the simplest tractable expansion.
- The general case, of a Taylor's expansion about some fixed point, is explored
+ The general case, of a Taylor's expansion about some fixed point, is presented
  in appendix A.
 \end_layout
 
 \begin_layout Standard
-The eigenvector equation to be solved is then 
+The relation between 
+\begin_inset Formula $G$
+\end_inset
+
+ and 
+\begin_inset Formula $H$
+\end_inset
+
+ is that of a similarity transform.
+ Suppose one has some sequence of polynomials 
+\begin_inset Formula $p_{n}\left(x\right)$
+\end_inset
+
+ of degree 
+\begin_inset Formula $n$
+\end_inset
+
+; write matrix elements as 
+\begin_inset Formula $p_{n}\left(x\right)=\sum_{k=0}^{n}x^{k}P_{kn}$
+\end_inset
+
+ then clearly 
+\begin_inset Formula $P^{-1}HP$
+\end_inset
+
+ is the matrix operator for 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+ in the polynomial basis 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Specializing to 
+\begin_inset Formula $p_{n}\left(x\right)=\left(1-x\right)^{n}$
+\end_inset
+
+ yeilds 
+\begin_inset Formula $G=P^{-1}HP$
+\end_inset
+
+.
+ Is there another polynomial basis that brings 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+ into a tractable form? Not obviously so; the 
+\begin_inset Quotes eld
+\end_inset
+
+factorization
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $H$
+\end_inset
+
+ into a binomial, a shift and a zeta vector suggests that the polynomials
+ should be engaged in interesting identities with the zeta.
+ Although one can find such identities for the even orders 
+\begin_inset Formula $\zeta\left(2n\right)$
+\end_inset
+
+, this is not so for the odd values 
+\begin_inset Formula $\zeta\left(2n+1\right)$
+\end_inset
+
+.
+ There is a paucity of known sums involving 
+\begin_inset Formula $\zeta\left(n\right)$
+\end_inset
+
+ even as the related gamma and digamma functions are overwhelmingly rich
+ in combinatoric relations.
+\end_layout
+
+\begin_layout Subsection
+Polynomial-basis eigenfunctions
+\end_layout
+
+\begin_layout Standard
+The matrix operator 
+\begin_inset Formula $G$
+\end_inset
+
+, identified with the GKW operator in a polynomial basis, is presumably
+ diagonalizable, having an eigenvector equation 
+\begin_inset Formula $Gv=\lambda v$
+\end_inset
+
+.
+ It is commonly understood that this operator has only a discrete point
+ spectrum (XXX TODO find a reference with a proof of this), and is not singular,
+ nor is any part of it's spectrum continuous or indeterminate.
+ The well-behaved analytic combinatorics of this matrix operator is thus
+ often identified with 
+\begin_inset Quotes eld
+\end_inset
+
+the
+\begin_inset Quotes erd
+\end_inset
+
+ GKW operator.
+ In later sections, and in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+literal "false"
+
+\end_inset
+
+, it is shown that the GKW operator can be defined on spaces other than
+ those of analytic functions, where the spectrum appears to be quite different
+ in structure.
+\end_layout
+
+\begin_layout Standard
+Then eigenvector equation to be solved is then 
 \begin_inset Formula 
 \[
 \sum_{n=0}^{\infty}G_{mn}v_{n}=\lambda v_{m}
@@ -1970,16 +2252,17 @@ where
 \end_inset
 
 .
- This beast has a discrete spectrum (XXX need reference for proof), and
- so we may label the eigenvalues and eigenvectors with a label 
+ As the spectrum is countable, the eignevalues and eigenvectors may be labelled
+ with an integer label 
 \begin_inset Formula $k$
 \end_inset
 
-, so that the 
+.
+ The 
 \begin_inset Formula $k$
 \end_inset
 
-'th eigen equation is 
+'th eigen-equation is 
 \begin_inset Formula 
 \begin{equation}
 \sum_{n=0}^{\infty}G_{mn}v_{nk}=\lambda_{k}v_{mk}\label{eq:eigen-eqn}
@@ -2014,8 +2297,8 @@ and corresponds to the eigenvector
 .
  Again, note the curious appearance of powers of two.
  The zeroth eigenvalue is 1, the first eigenvalue is known as the GKW constant,
- and is about 0.3036.
- Additional eigenvalues are given in table 
+ and is approximately 0.3036.
+ Additional eigenvalues, obtained numerically, are given in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:GKW-Eigenvalues"
@@ -2111,29 +2394,28 @@ Based on numerical explorations (reported below), the series appears to
 \end_inset
 
 .
- One must not conclude that this implies that 
-\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n})$
+ It is possible that 
+\begin_inset Formula $v_{nk}\sim\mathcal{O}(2^{-n})$
 \end_inset
 
-, as this sort of asymptotic behaviour conflicts with the zeroth eigenfunction.
- Thus, one might guess at 
-\begin_inset Formula $v_{nk}~\mathcal{O}(n^{s}2^{-n})$
-\end_inset
-
- but numeric data suggests that 
-\begin_inset Formula $s=0$
+ holds; but also the numeric data does not exclude 
+\begin_inset Formula $v_{nk}\sim\mathcal{O}(2^{-n}\log\log n)$
 \end_inset
 
 .
- Numeric data also excludes the form 
-\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log n)$
+ It does appear that 
+\begin_inset Formula $v_{nk}\sim\mathcal{O}(2^{-n}n^{s})$
 \end_inset
 
- although it is possible that the softer 
-\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log\log n)$
+ for 
+\begin_inset Formula $s\ne0$
 \end_inset
 
- might hold.
+ is excluded, as is 
+\begin_inset Formula $v_{nk}\sim\mathcal{O}(2^{-n}\log n)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -9272,7 +9554,7 @@ The operator
 \end_inset
 
  is worth exploring.
- To that end, we consider lattice models...x
+ To that end, we consider lattice models...
 \end_layout
 
 \begin_layout Section
