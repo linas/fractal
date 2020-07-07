@@ -106,28 +106,86 @@ Some disconnected ideas about the Riemann hypothesis.
 \end_layout
 
 \begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+Needs no introduction.
+ See
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wolf14"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Shifts
+\end_layout
+
+\begin_layout Standard
+Shifts seem to be everywhere in this problem.
+ For example:
+\begin_inset Formula 
+\[
+\zeta\left(s\right)\Gamma\left(s\right)=\zeta\left(s\right)\int_{0}^{\infty}\frac{x^{s-1}}{e^{x}}dx=\int_{0}^{\infty}\frac{x^{s-1}}{e^{x}-1}dx\quad\mbox{for \ensuremath{\Re s>1}}
+\]
+
+\end_inset
+
+The RHS is the Mellin transform of the Bose-Einstein distribution.
+ The LHS is the Mellin transform of the Boltzmann distribution.
+ The zeta function is shifting the denominator over by one.
+ Why? How?
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $s=4$
+\end_inset
+
+ case is an integral over the Plank distribution.
+ Insofar as Planks law is counting the degeneracy of three-dimensional oscillato
+rs, then the critical line 
+\begin_inset Formula $s=\frac{1}{2}+i\tau$
+\end_inset
+
+ corresponds either to a space of imaginary dimension of 
+\begin_inset Formula $\tau$
+\end_inset
+
+ or that one has oscillators whose degeneracy at energy 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is 
+\begin_inset Formula $e^{i\tau\log\omega}/\sqrt{\omega}$
+\end_inset
+
+ which is also nonsense because degeneracy is never imaginary.
+ This whispers 
+\begin_inset Quotes eld
+\end_inset
+
+spinors
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
 Continued fractions
 \end_layout
 
 \begin_layout Standard
 Seems to have something to do with the hyperbolic plane, continued fractions,
  SL(2,Z) etc.
- Recap:
-\begin_inset Formula 
-\[
-\zeta\left(s\right)=\frac{1}{\Gamma\left(s\right)}\int_{0}^{\infty}\frac{x^{s-1}}{e^{x}-1}dx\quad\mbox{for \ensuremath{\Re s>1}}
-\]
-
-\end_inset
-
-Above is the Mellin transform of the Bose-Einstein distribution.
- ...
- well, and the gamma is the Mellin transform of the Boltzmann distribution...
- go figure...
-\end_layout
-
-\begin_layout Standard
-Alternately let 
+ I explored these ideas ad nauseum circa 2004-2006.
+ Let 
 \begin_inset Formula $h\left(y\right)=\frac{1}{y}-\left\lfloor \frac{1}{y}\right\rfloor $
 \end_inset
 
@@ -143,6 +201,10 @@ What is
 \begin_inset Formula $y$
 \end_inset
 
+? What is the physical (mathematical) interpretation of 
+\begin_inset Formula $y$
+\end_inset
+
 ?
 \end_layout
 
@@ -152,7 +214,7 @@ Hypothesis one:
 
 \begin_layout Standard
 This is an integral around the perimeter of the Poincare disk (or rather,
- the unit interval at the perimeter of the Poincare half-plane.
+ the unit interval at the perimeter of the Poincare half-plane).
  This is sort-of-ish explored earlier, and maybe written down?
 \end_layout
 
@@ -361,6 +423,156 @@ Consider
  Volume of what?
 \end_layout
 
+\begin_layout Subsubsection*
+Hypothesis five:
+\end_layout
+
+\begin_layout Standard
+The GKW redux.
+ Write 
+\begin_inset Formula 
+\[
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\;x\left[\mathcal{L}_{h}x^{s-1}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+ is the Gauss-Kuzmin-Wirsing (GKW) operator; its the transfer operator for
+ 
+\begin_inset Formula $h\left(x\right)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset
+
+.
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{h}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)
+\]
+
+\end_inset
+
+This operator can be given a matrix form, using (for example) a polynomial
+ basis; at least some of these result in a well-conditioned matrix operator
+ with matrix elements 
+\begin_inset Formula $G_{mn}$
+\end_inset
+
+.
+ Writing 
+\begin_inset Formula $p_{n}\left(x\right)$
+\end_inset
+
+ as a polynomial basis element, one then can presumably expand 
+\begin_inset Formula 
+\[
+x^{s-1}=\sum_{n=0}^{\infty}a_{n}p_{n}\left(x\right)
+\]
+
+\end_inset
+
+which is presumably well-conditioned.
+ Of course, the coefficients 
+\begin_inset Formula $a_{n}=a_{n}\left(s\right)$
+\end_inset
+
+ depend on 
+\begin_inset Formula $s$
+\end_inset
+
+.Then it is a straight-forward matter to rewrite 
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{h}x^{s-1}\right]=\sum_{m,n}p_{m}\left(x\right)G_{mn}a_{n}\left(s\right)
+\]
+
+\end_inset
+
+leaving behind 
+\begin_inset Formula 
+\[
+\int_{0}^{1}dx\;x\left[\mathcal{L}_{h}x^{s-1}\right]=\sum_{m,n}G_{mn}a_{n}\left(s\right)\int_{0}^{1}xp_{m}\left(x\right)dx
+\]
+
+\end_inset
+
+rendering the integral nearly trivial and burying complexity in the coefficients
+ 
+\begin_inset Formula $a_{n}\left(s\right)$
+\end_inset
+
+.
+ Formally, for each zero of the Riemann zeta, there is some vector 
+\begin_inset Formula $\vec{a}\left(s\right)$
+\end_inset
+
+ that, multiplied into the GKW operator, renders the entire affair to be
+ zero.
+\end_layout
+
+\begin_layout Standard
+There are two primary difficulties with this.
+ First, one natural polynomial basis is given by 
+\begin_inset Formula $p_{m}\left(x\right)=\left(x-1\right)^{m}$
+\end_inset
+
+ and writing down the expansion for 
+\begin_inset Formula $x^{s-1}$
+\end_inset
+
+ in terms of these is problematic.
+ A second is that one wants to rexpress the pole 
+\begin_inset Formula $1/\left(s-1\right)$
+\end_inset
+
+ in terms of some appropriate matrix elements as well.
+ If I recall correctly, last time I tried this, I had expansions in terms
+ of 
+\begin_inset Formula $\sin\left(1/x\right)$
+\end_inset
+
+ all over the place.
+ Perhaps not surprising; this is periodic in the same way that 
+\begin_inset Formula $h\left(x\right)$
+\end_inset
+
+ is, and so one expects a fourrier-like expansion 
+\begin_inset Formula $h\left(x\right)\sim\sum_{k}b_{k}\sin\left(1/kx\right)$
+\end_inset
+
+.
+ Put differently, the 
+\begin_inset Formula $x^{s-1}$
+\end_inset
+
+ doesn't 
+\begin_inset Quotes eld
+\end_inset
+
+want
+\begin_inset Quotes erd
+\end_inset
+
+ to be expanded in a polynomial basis, most especially on the critcal line
+ 
+\begin_inset Formula $s=1/2+i\tau$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Somewhere I have a detailed sketch of exactly how to do the above, in lyx
+ format; need to dot the i's and cross the t's on that one.
+\end_layout
+
+\begin_layout Standard
+If the connection to the GKW is to be formalized, then some more abstract
+ understanding of transfer operators is needed.
+\end_layout
+
 \begin_layout Section*
 Hamiltonian Systems and Boundary Conditions
 \end_layout
@@ -513,6 +725,53 @@ Whence the factor of
 \end_inset
 
  multiplying the energy? How should this be interpreted?
+\end_layout
+
+\begin_layout Subsubsection*
+Berry-Keating
+\end_layout
+
+\begin_layout Standard
+The conjecture the Hamiltonian is 
+\begin_inset Formula $xp$
+\end_inset
+
+.
+ Note that if we write 
+\begin_inset Formula $\gamma=ix+\frac{d}{dx}$
+\end_inset
+
+ that 
+\begin_inset Formula 
+\[
+\gamma^{2}=\frac{d^{2}}{dx^{2}}-x^{2}+i\left\{ x,\frac{d}{dx}\right\} 
+\]
+
+\end_inset
+
+the real part of which gives the simple harmonic oscillator and thus the
+ trivial zeroes, while the anticommutator gives the Berry-Keating conjecture.
+ Of course, the 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ has to be a spinor (Dirac eqn) in some way, not a number.
+ Added bonus track: the SHO eigenfunctions are gaussians, in line with the
+ GUE.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $d/dx$
+\end_inset
+
+ are non-commuting shifts.
+ What other shifts do we have that are non-commutative? The two-sided Bernoulli
+ shift/Baker's map is commutative.
 \end_layout
 
 \begin_layout Section*
