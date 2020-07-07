@@ -189,7 +189,7 @@ Seems to have something to do with the hyperbolic plane, continued fractions,
 \begin_inset Formula $h\left(y\right)=\frac{1}{y}-\left\lfloor \frac{1}{y}\right\rfloor $
 \end_inset
 
-, then
+ be the Gauss map aka the continued fraction map, then
 \begin_inset Formula 
 \[
 \zeta\left(s\right)=\frac{1}{s-1}-s\int_{0}^{1}h\left(y\right)y^{s-1}dy
@@ -573,6 +573,95 @@ If the connection to the GKW is to be formalized, then some more abstract
  understanding of transfer operators is needed.
 \end_layout
 
+\begin_layout Subsubsection*
+Why is this interesting?
+\end_layout
+
+\begin_layout Standard
+Because it is 
+\begin_inset Quotes eld
+\end_inset
+
+well known
+\begin_inset Quotes erd
+\end_inset
+
+ (Artin, Hedlund, Series; see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Leiden10"
+literal "false"
+
+\end_inset
+
+) that there is a bijection between the periodic orbits of 
+\begin_inset Formula $h$
+\end_inset
+
+ (of even period) and the closed geodesics for 
+\begin_inset Formula $\mathbb{H}/\Gamma$
+\end_inset
+
+ where 
+\begin_inset Formula $\Gamma=PSL\left(2,\mathbb{Z}\right)$
+\end_inset
+
+.
+ But this is the 
+\begin_inset Quotes eld
+\end_inset
+
+boring
+\begin_inset Quotes erd
+\end_inset
+
+ case: the periodic orbits of 
+\begin_inset Formula $h$
+\end_inset
+
+ are just the quadratic irrationals, and are countable as they are in 1-1
+ correspondance with the rationals, with the Minkowski question mark providing
+ the correspondance.
+ Thus, using the canoncial measure on the Cantor set (the canonical measure
+ on the reals) almost all orbits are not periodic.
+ Almost all orbits are not closed and (by extension) chaotic.
+ Which is good because we are looking for chaos.
+\end_layout
+
+\begin_layout Standard
+Recall that the Minkowski measure is an eignefunction of the GKW.
+ The Minkowski meaure by extension tells us how to count the non-periodic
+ orbits on modular surfaces i.e.
+ not only on the surfaces 
+\begin_inset Formula $\mathbb{H}/\Gamma$
+\end_inset
+
+ but also on 
+\begin_inset Formula $\mathbb{H}/G$
+\end_inset
+
+ for 
+\begin_inset Formula $G$
+\end_inset
+
+ some subgroup of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The common mistake is to assume that 
+\begin_inset Formula $1/\left(1+x\right)$
+\end_inset
+
+ is the only eigenfunction of the GKW with unit eigenvalue.
+ This points to uninteresting directions.
+ That the Minkowski measure is also an eigenfunction with unit eigenvalue
+ is the important result to have.
+\end_layout
+
 \begin_layout Section*
 Hamiltonian Systems and Boundary Conditions
 \end_layout
@@ -774,6 +863,96 @@ Note that
  shift/Baker's map is commutative.
 \end_layout
 
+\begin_layout Subsubsection*
+Class number
+\end_layout
+
+\begin_layout Standard
+Note the superficial resemblance to quadratic forms 
+\begin_inset Formula $Ax^{2}+Bxy+Cy^{2}$
+\end_inset
+
+ with 
+\begin_inset Formula $A,B,C\in\mathbb{Z}$
+\end_inset
+
+.
+ Two quadratic forms are equivalent when 
+\begin_inset Formula $PSL\left(2,\mathbb{Z}\right)$
+\end_inset
+
+ maps them: 
+\begin_inset Formula $Q_{1}\left(x,y\right)=Q_{2}\left(ax+by,cx+d\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $ad-bc=+1$
+\end_inset
+
+.
+ The class number 
+\begin_inset Formula $h\left(D\right)$
+\end_inset
+
+ is the number of inequivalent quadratic forms for a fixed 
+\begin_inset Formula $D=B^{2}-4AC$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There is a correspondance between equivalence classes of quadratic forms
+ and closed geodesics on modular surfaces.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Leiden10"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, we use quadratic forms for constructing the Clifford algebra.
+ From Clifford algebras we construct spinors.
+ Clifford algebras over the finitie-dimentional real vector spaces are all
+ isomorphic to the diagonal form with signature 
+\begin_inset Formula $\left(p,q\right)$
+\end_inset
+
+ i.e.
+ that 
+\begin_inset Formula $Q\left(v\right)=v_{1}^{2}+\cdots+v_{p}^{2}-v_{p+1}^{2}-\cdots-v_{p+q}^{2}$
+\end_inset
+
+ and those on complex vector spaces just are the diagonal 
+\begin_inset Formula $Q\left(z\right)=z_{1}^{2}+\cdots+z_{n}^{2}$
+\end_inset
+
+ so we have to restrict to quadratic forms over vector spaces over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ or over some other ground field 
+\begin_inset Formula $K$
+\end_inset
+
+ to get anything interesting.
+ Let us now build Weyl spinors out of these.
+ How does this work?
+\end_layout
+
+\begin_layout Standard
+OK, so what happens if we instead build Clifford algebras, not over vector
+ spaces over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ but instead over (vector spaces of) non-commutative shifts?
+\end_layout
+
 \begin_layout Section*
 Symplectic systems
 \end_layout
@@ -806,6 +985,15 @@ Artin's billiards
 \end_inset
 
 .
+ (This surface is called the 
+\begin_inset Quotes eld
+\end_inset
+
+modular surface
+\begin_inset Quotes erd
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -820,8 +1008,8 @@ pairs of pants
 \end_inset
 
 .
- That is, on a not-exactly-compact Riemann surface, having no holes, but
- extending to infinity...
+ That is, on a non-compact but maybe finite-area?? Riemann surface, having
+ no holes, but extending to infinity...
  so what would the Teichmüller space on such a beast look like?
 \end_layout
 
@@ -838,7 +1026,9 @@ pairs of pants
 
 \begin_layout Standard
 Would it be crazy enough to have the right spectrum? How, exeactly, was
- the Bessel function thingy arrived at, again? See 
+ the Bessel function thingy arrived at, again? It was the solution to the
+ shrodinger equation on the modular surface ...
+ See 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Eisele94"
