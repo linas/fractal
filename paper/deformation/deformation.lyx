@@ -834,7 +834,20 @@ This can be accomplished by allowing a measure
 \end_inset
 
 All tensors can be written as such linear combinations.
- Note that 
+ The conceptual description of 
+\begin_inset Quotes eld
+\end_inset
+
+basis vectors
+\begin_inset Quotes erd
+\end_inset
+
+ presented here is rather awkward; a superior way of talking about the vector
+ space will be provided shortly.
+\end_layout
+
+\begin_layout Standard
+Note that 
 \begin_inset Formula $U$
 \end_inset
 
@@ -966,32 +979,142 @@ Shift operator
 \begin_layout Standard
 The next question is how to extend the shift operator over the tensor product
  in a homomorphic way.
- Recall that the measure is 
-\begin_inset Quotes eld
+ Rather than thinking of 
+\begin_inset Formula $V$
 \end_inset
 
-mostly
-\begin_inset Quotes erd
+ in some unstructured way, as some unstructured vector space, it is more
+ appropriate to choose for 
+\begin_inset Formula $V$
 \end_inset
 
- invariant under the left shift, in that 
-\begin_inset Formula $\mu\left(LC_{b}^{k}\right)=\mu\left(C_{b}^{k}\right)$
+ one of the possible spaces on which the Ruelle-Frobenius-Perron operator
+ is defined.
+ That is, one constructs the basis for 
+\begin_inset Formula $V$
 \end_inset
 
- for the cylinder set 
-\begin_inset Formula $C_{b}^{k}\in U$
-\end_inset
-
- when 
-\begin_inset Formula $k\ge1$
-\end_inset
-
-, and that 
-\begin_inset Formula $\mu\left(LC_{b}^{0}\right)=\mu\left(\mathbb{B}\right)=1$
+ out of those elements that are eigenvectors of the of the transfer operator.
+ For the Bernoulli shift acting on the polynomials, the eigenvectors were
+ the Bernoulli polynomials 
+\begin_inset Formula $B_{n}$
 \end_inset
 
 .
- This extends to all elements
+ For a given 
+\begin_inset Formula $\gamma\in U$
+\end_inset
+
+, the corresponding elements in 
+\begin_inset Formula $V$
+\end_inset
+
+ are the integrals, over the invariant measure, of the 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+.
+ That is these are 
+\begin_inset Formula 
+\[
+\int_{\gamma}B_{n}d\mu=\int_{\gamma}B_{n}\left(x\right)dx
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mu\left(x\right)=B_{0}\left(x\right)=1$
+\end_inset
+
+ was the shift-invariant measure.
+ The integral can be taken literally and concretely when working in the
+ canonical projection from 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+: so, for 
+\begin_inset Formula $\gamma=C_{0}^{0}$
+\end_inset
+
+ one has
+\begin_inset Formula 
+\[
+\int_{\gamma}B_{n}d\mu=\int_{0}^{1/2}B_{n}\left(x\right)dx
+\]
+
+\end_inset
+
+ and for 
+\begin_inset Formula $\gamma=C_{0}^{1}$
+\end_inset
+
+, it is
+\begin_inset Formula 
+\[
+\int_{\gamma}B_{n}d\mu=\int_{0}^{1/4}B_{n}\left(x\right)dx+\int_{1/2}^{3/4}B_{n}\left(x\right)dx
+\]
+
+\end_inset
+
+ and so on.
+ Thus, a general element 
+\begin_inset Formula $v\in V$
+\end_inset
+
+ can be written as 
+\begin_inset Formula 
+\[
+v=\int_{\gamma}d\mu
+\]
+
+\end_inset
+
+ while a dual element 
+\begin_inset Formula $v^{*}\in V^{*}$
+\end_inset
+
+ is a series 
+\begin_inset Formula 
+\[
+v^{*}=\sum_{n=0}^{\infty}\alpha_{n}B_{n}\left(x\right)
+\]
+
+\end_inset
+
+for some sequence 
+\begin_inset Formula $\left\{ \alpha_{n}\right\} $
+\end_inset
+
+ (of real or complex numbers).
+ Thus, the dual 
+\begin_inset Formula $v^{*}$
+\end_inset
+
+ is a map 
+\begin_inset Formula $v^{*}:V\to\mathbb{R}$
+\end_inset
+
+ (or to 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+) that takes
+\begin_inset Formula 
+\[
+v^{*}:v\mapsto\int_{\gamma}\sum_{n=0}^{\infty}\alpha_{n}B_{n}\left(x\right)d\mu
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ooops dual basis, already damn.
 \end_layout
 
 \end_body
