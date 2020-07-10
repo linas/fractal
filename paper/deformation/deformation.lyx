@@ -151,11 +151,11 @@ Given a specific sequence of bits
 \end_inset
 
  there exists a corresponding real number in the interval 
-\begin_inset Formula $[0,1]=\left\{ x:x\in\mathbb{R},0\le x\le1\right\} $
+\begin_inset Formula $\left[0,1\right]=\left\{ x:x\in\mathbb{R},0\le x\le1\right\} $
 \end_inset
 
 , given by 
-\begin_inset Formula $x=\sum_{k=0}^{\infty}b_{k}2^{-k-1}$
+\begin_inset Formula $x=x\left(\beta\right)=\sum_{k=0}^{\infty}b_{k}2^{-k-1}$
 \end_inset
 
 .
@@ -165,10 +165,65 @@ Given a specific sequence of bits
 
  has two distinct bit-sequence representations, one ending in an infinite
  sequence of 0's, and the other ending in an infinite sequence of 1's.
+ It is often convenient to think of this map as a projection from 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ to the unit interval 
+\begin_inset Formula $\left[0,1\right]\subset\mathbb{R}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
-analytic series
+Formal Power Series
+\end_layout
+
+\begin_layout Standard
+More generally, one can consider the 
+\begin_inset Quotes eld
+\end_inset
+
+analytic
+\begin_inset Quotes erd
+\end_inset
+
+ series 
+\begin_inset Formula $f\left(\beta;z\right)=\sum_{k=0}^{\infty}b_{k}z^{k}$
+\end_inset
+
+ for 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset
+
+.
+ As a general rule, such series are not differentiable on the real axis
+ (i.e.
+ not differentiable when holding 
+\begin_inset Formula $\beta$
+\end_inset
+
+ fixed, and allowing 
+\begin_inset Formula $z$
+\end_inset
+
+ to be a varying real number).
+ Such functions do poses a fractal (self-similar) structure in 
+\begin_inset Formula $z$
+\end_inset
+
+ (while holding 
+\begin_inset Formula $\beta$
+\end_inset
+
+ fixed).
+ The self-similarity arises by means of the application of the shift operator.
+ Such series can be defined for 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset
+
+ but have a variety of associated differentiability issues.
 \end_layout
 
 \begin_layout Subsubsection
@@ -217,11 +272,190 @@ Creating a deformation that restores
 \end_layout
 
 \begin_layout Subsubsection
-Bernoulli map; Eigenfunctions
+Bernoulli map
+\end_layout
+
+\begin_layout Standard
+The action of the left shift on 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ projects naturally to an action on the unit interval 
+\begin_inset Formula $\left[0,1\right]\subset\mathbb{R}$
+\end_inset
+
+.
+ This action is termed the Bernoulli map, and can be obtained as follows.
+ Given 
+\begin_inset Formula $x=x\left(\beta\right)=\sum_{k=0}^{\infty}b_{k}2^{-k-1}$
+\end_inset
+
+, define 
+\begin_inset Formula $Lx=\left[Lx\right]\left(\beta\right)=x\left(L\beta\right)=\sum_{k=0}^{\infty}b_{k+1}2^{-k-1}$
+\end_inset
+
+ and it is straight-forward to verify that 
+\begin_inset Formula 
+\[
+Lx=\left\lfloor 2x\right\rfloor =\begin{cases}
+2x & \mbox{for }0\le x<1/2\\
+2x-1 & \mbox{for }1/2<x\le1
+\end{cases}
+\]
+
+\end_inset
+
+This is just the Bernoulli map.
+\end_layout
+
+\begin_layout Subsubsection
+Pushforward
+\end_layout
+
+\begin_layout Standard
+The Bernoulli map also pushes forward on the space of functions 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+, as desired, or other additive field).
+ The pushforward is given by the inverse image, that is, 
+\begin_inset Formula $Lf=f\circ L^{-1}$
+\end_inset
+
+.
+ But, as noted, the inverse 
+\begin_inset Formula $L^{-1}$
+\end_inset
+
+ doesn't properly exist, but is instead played by the two Koopman operators
+ 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ or 
+\begin_inset Formula $K_{1}$
+\end_inset
+
+ which insert either a 0 or a 1 in front of a string of bits.
+ Thier action on 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ projects naturally to an action on the unit interval as 
+\begin_inset Formula $K_{0}x=\left[K_{0}x\right]\left(\beta\right)=x\left(K_{0}\beta\right)=x/2$
+\end_inset
+
+ and similarly, 
+\begin_inset Formula $K_{1}x=\left(x+1\right)/2$
+\end_inset
+
+.
+ Thus, the pushforward is given by
+\begin_inset Formula 
+\[
+\left[Lf\right]\left(x\right)=\frac{1}{\mu_{0}}f\left(\frac{x}{2}\right)+\frac{1}{\mu_{1}}f\left(\frac{x+1}{2}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is a measure on 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+, defined in an upcoming section.
+ But convention, it is taken as 
+\begin_inset Formula $1/2$
+\end_inset
+
+ and so one has
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[Lf\right]\left(x\right)=\frac{1}{2}\left(f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right)
+\]
+
+\end_inset
+
+In this form, the 
+\begin_inset Formula $L$
+\end_inset
+
+ is a transfer operator or the Ruelle-Frobenius-Perron operator: it is an
+ operator action on a space of functions.
+ For the Bernoulli shift, this can be called the Bernoulli operator.
+\end_layout
+
+\begin_layout Subsubsection
+Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+There are a variety of different spaces on which the Bernoulli operator
+ can act.
+ Three interesting cases are the spaces of polynomials (in one variable),
+ the space of square-integrable functions, and the space of formal power
+ series.
+ Taken as an operator, it has an associated spectrum.
+ On the polynomials, the spectrum is discrete, real and contained inside
+ the unit circle.
+ On the square integrable functions, the spectrum is continuous and consists
+ of the entire unit disk.
+ For the case of polynomials, the eigenfunctinos are the Bernoulli polynomials;
+ this follows from the identity 
+\begin_inset Formula 
+\[
+\frac{1}{2}\left(B_{n}\left(\frac{x}{2}\right)+B_{n}\left(\frac{1+x}{2}\right)\right)=\frac{1}{2^{n}}B_{n}\left(x\right)
+\]
+
+\end_inset
+
+and and so one may write 
+\begin_inset Formula $LB_{n}=\lambda B_{n}$
+\end_inset
+
+ with eigenvalue 
+\begin_inset Formula $\lambda=2^{-n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $B_{0}\left(x\right)=1$
+\end_inset
+
+ is the Frobenius-Perron eigenvalue; it is the largest eigenvalue, and it
+ is shift-invariant.
+ Since it is shift-invariant, it can be taken as the measure on the unit
+ interval.
+ In this case, it corresponds with the usual measure on the reals; this
+ is not always the case for other shifts.
+ Here, the important conclusion is thaat, in general, thanks to the Frobenius-Pe
+ron theorem, eigenfunctions with unit eigenvalue exist, and these can be
+ taken as shift-invariant measures on the shift space.
 \end_layout
 
 \begin_layout Subsubsection
 Cantor set
+\end_layout
+
+\begin_layout Standard
+The space 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ of infinite strings in two symbols is the Cantor set.
 \end_layout
 
 \begin_layout Subsubsection
@@ -432,6 +666,11 @@ One is certainly free to consider non-translation-invariant measures.
 
 \begin_layout Subsubsection
 Binary tree
+\end_layout
+
+\begin_layout Standard
+The binary tree extends naturally to PSL(2,Z) and is rampant in the theory
+ of elliptic functions, modular forms and number theory in general.
 \end_layout
 
 \begin_layout Subsection
@@ -727,6 +966,32 @@ Shift operator
 \begin_layout Standard
 The next question is how to extend the shift operator over the tensor product
  in a homomorphic way.
+ Recall that the measure is 
+\begin_inset Quotes eld
+\end_inset
+
+mostly
+\begin_inset Quotes erd
+\end_inset
+
+ invariant under the left shift, in that 
+\begin_inset Formula $\mu\left(LC_{b}^{k}\right)=\mu\left(C_{b}^{k}\right)$
+\end_inset
+
+ for the cylinder set 
+\begin_inset Formula $C_{b}^{k}\in U$
+\end_inset
+
+ when 
+\begin_inset Formula $k\ge1$
+\end_inset
+
+, and that 
+\begin_inset Formula $\mu\left(LC_{b}^{0}\right)=\mu\left(\mathbb{B}\right)=1$
+\end_inset
+
+.
+ This extends to all elements
 \end_layout
 
 \end_body
