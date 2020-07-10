@@ -514,29 +514,89 @@ With that review and motivations, lets define the tensor product of shifts.
 \end_inset
 
 , each having a finite measure.
- Given a signam-additive function 
-\begin_inset Formula $f:U\to\mathbb{R}$
+ These sets will correspond to the idea of 
+\begin_inset Quotes eld
 \end_inset
 
-, one can construct a tensor product 
-\begin_inset Formula $\gamma\otimes\gamma^{\prime}$
+vectors
+\begin_inset Quotes erd
 \end_inset
 
- by considering the Cartesian product 
-\begin_inset Formula $\gamma\times\gamma^{\prime}$
+ in the normal sense.
+\end_layout
+
+\begin_layout Standard
+To define the tensor product, one wants to consiser a scalar-valued (real-valued
+) function bilinear in the product components, namely, 
+\begin_inset Formula $f:U\otimes U\to\mathbb{R}$
 \end_inset
 
-, and then extending 
-\begin_inset Formula $f$
+ such that 
+\begin_inset Formula 
+\[
+f\left(\left(a\gamma+b\gamma^{\prime}\right)\otimes\gamma^{\prime\prime}\right)=af\left(\gamma\otimes\gamma^{\prime\prime}\right)+bf\left(\gamma^{\prime}\otimes\gamma^{\prime\prime}\right)
+\]
+
 \end_inset
 
- so that 
-\begin_inset Formula $f\left(\gamma\times\gamma^{\prime}\right)=f\left(\gamma\right)f\left(\gamma^{\prime}\right)$
+
+\end_layout
+
+\begin_layout Standard
+This can be accomplished by allowing a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ play the role of a basis vector carrying index 
+\begin_inset Formula $\gamma\in U$
 \end_inset
 
 .
- To properly follow the axioms of a tensor product, one must then have that
- (multi-)linearity follows:
+ That is, define a vector space 
+\begin_inset Formula $V$
+\end_inset
+
+, the basis vectors for which are the vectors 
+\begin_inset Formula $e_{\gamma}=\mu_{\gamma}=\mu\left(\gamma\right)$
+\end_inset
+
+.
+ The basis for the tensor space 
+\begin_inset Formula $V\otimes V$
+\end_inset
+
+ is then clearly 
+\begin_inset Formula $e_{\gamma}\otimes e_{\gamma^{\prime}}$
+\end_inset
+
+ which can clearly be identified with the number 
+\begin_inset Formula $\mu\left(\gamma\right)\mu\left(\gamma^{\prime}\right)$
+\end_inset
+
+.
+ This is clearly bilinear, as, with some abuse of notation, 
+\begin_inset Formula 
+\begin{align*}
+\left(ae_{\gamma}+be_{\gamma^{\prime}}\right)\otimes e_{\gamma^{\prime\prime}} & =\left(a\mu\left(\gamma\right)+b\mu\left(\gamma^{\prime}\right)\right)\mu\left(\gamma^{\prime\prime}\right)\\
+ & =ae_{\gamma}\otimes e_{\gamma^{\prime\prime}}+be_{\gamma^{\gamma}}\otimes e_{\gamma^{\prime\prime}}
+\end{align*}
+
+\end_inset
+
+All tensors can be written as such linear combinations.
+ Note that 
+\begin_inset Formula $U$
+\end_inset
+
+ is countable: each string 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ has only a finite number of symbols that are not the wildcard 
+\begin_inset Formula $*$
+\end_inset
+
+, and these can be placed  in lexicographic order.
 \end_layout
 
 \begin_layout Subsection
