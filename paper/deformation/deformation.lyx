@@ -177,15 +177,15 @@ Shift Operator
 
 \begin_layout Standard
 The left-shift operator 
-\begin_inset Formula $T:\mathbb{B}\to\mathbb{B}$
+\begin_inset Formula $L:\mathbb{B}\to\mathbb{B}$
 \end_inset
 
  acts on sequences of bits as 
-\begin_inset Formula $T:\left(b_{0},b_{1},b_{2},\cdots\right)=\left(b_{1},b_{2},\cdots\right)$
+\begin_inset Formula $L:\left(b_{0},b_{1},b_{2},\cdots\right)=\left(b_{1},b_{2},\cdots\right)$
 \end_inset
 
 .
- The re is a right-shift 
+ There is a right-shift 
 \begin_inset Formula $K:\mathbb{B}\to\mathbb{B}$
 \end_inset
 
@@ -195,11 +195,11 @@ The left-shift operator
 
 .
  Note that 
-\begin_inset Formula $TK=I$
+\begin_inset Formula $LK=I$
 \end_inset
 
  the identity, but that 
-\begin_inset Formula $KT\ne I$
+\begin_inset Formula $KL\ne I$
 \end_inset
 
  as the shifted bit represents a loss of information.
@@ -209,7 +209,7 @@ The left-shift operator
 
 \begin_layout Standard
 Creating a deformation that restores 
-\begin_inset Formula $KT$
+\begin_inset Formula $KL$
 \end_inset
 
  as the identity is one of the primary goals of studying how deformations
@@ -322,7 +322,7 @@ wildcard
 \begin_layout Standard
 Note that the left and right shifts act naturally on the cylinder sets;
  for example, 
-\begin_inset Formula $T^{m}C_{b}^{k}=C_{b}^{k-m}$
+\begin_inset Formula $L^{m}C_{b}^{k}=C_{b}^{k-m}$
 \end_inset
 
  for 
@@ -414,7 +414,7 @@ The Bernoulli measure is specifically that of an infinite sequence of coin-flips
 
 .
  The Bernoulli measure is translation-invariant, in that 
-\begin_inset Formula $\mu_{B}\left(T^{m}C_{b}^{k}\right)=\mu_{B}\left(C_{b}^{k-m}\right)=p$
+\begin_inset Formula $\mu_{B}\left(L^{m}C_{b}^{k}\right)=\mu_{B}\left(C_{b}^{k-m}\right)=p$
 \end_inset
 
  for 
@@ -439,7 +439,7 @@ Continued fractions
 \end_layout
 
 \begin_layout Itemize
-Rep of reals
+Representation of reals
 \end_layout
 
 \begin_layout Itemize
@@ -464,6 +464,10 @@ Farey fractions generate a binary tree
 
 \begin_layout Itemize
 1-1 map of rationals to perdiodic orbits in SL(2,Z)/Gamma
+\end_layout
+
+\begin_layout Itemize
+Riemann surfaces
 \end_layout
 
 \begin_layout Subsection
@@ -495,7 +499,7 @@ Quantization via PBW therem, start product, Moyal product, Weyl algebra
 \end_layout
 
 \begin_layout Itemize
-Motivation: l;ets look at the simpler cases, more exhaustively.
+Motivation: lets look at the simpler cases, more exhaustively.
 \end_layout
 
 \begin_layout Section
@@ -505,7 +509,14 @@ Definitions
 \begin_layout Standard
 With that review and motivations, lets define the tensor product of shifts.
  For convenience, we focus on the Bernoulli shift.
- Let 
+\end_layout
+
+\begin_layout Subsection
+Tensor product
+\end_layout
+
+\begin_layout Standard
+Let 
 \begin_inset Formula $U=\left\{ \gamma\in\left\{ 0,1,*\right\} ^{\omega}:\mbox{0 and 1 appear a finite number of times}\right\} $
 \end_inset
 
@@ -596,15 +607,126 @@ All tensors can be written as such linear combinations.
 \begin_inset Formula $*$
 \end_inset
 
-, and these can be placed  in lexicographic order.
+, and these can be placed in lexicographic order.
 \end_layout
 
 \begin_layout Subsection
-It is a measure.
+Markov Property
+\end_layout
+
+\begin_layout Standard
+Armed with a vector space 
+\begin_inset Formula $V$
+\end_inset
+
+ and a suitable definition of a tensor product, one can proceed to build
+ the tensor algebra 
+\begin_inset Formula $TV=1\oplus V\oplus\left(V\otimes V\right)\oplus\cdots$
+\end_inset
+
+ in the canonical fashion.
+ The canonical construction endows the space not only with a product but
+ also a codeproduct, unit and counit and the antipode, thus rendering the
+ tensor algebra a Hopf algebra.
+\end_layout
+
+\begin_layout Standard
+The distinct aspect here is that the shift space, as studied, is not studied
+ as a completely 
+\begin_inset Quotes eld
+\end_inset
+
+free
+\begin_inset Quotes erd
+\end_inset
+
+ vector space, but rather, with special focus on the shift operator.
+ Of particular interest is the subspace of 
+\begin_inset Formula $TV$
+\end_inset
+
+ that is compatible with the shifts, that is, that part where the shifts
+ act as homomorphisms preserving the Hopf algebra structure.
+ This is easy to say, but needs explicit verification.
+\end_layout
+
+\begin_layout Standard
+The most notable aspect of the shift is the sigma-additivity of the measures
+ placed on the shift space.
+ This appears to extend to a Markov-like property on the tensor product.
+ Specifically, if 
+\begin_inset Formula $A,B,\cdots\in U$
+\end_inset
+
+ are cylinder sets that are a partition of unity, then 
+\begin_inset Formula $A\cap B\cap\cdots=\varnothing$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\left(A\right)+\mu\left(B\right)+\cdots=1$
+\end_inset
+
+.
+ Given some element 
+\begin_inset Formula $\gamma\in U$
+\end_inset
+
+, one may tensor to construct 
+\begin_inset Formula $A\otimes\gamma,B\otimes\gamma,\cdots\in U\otimes U$
+\end_inset
+
+ having the property that 
+\begin_inset Formula $\mu\left(A\otimes\gamma\right)+\mu\left(B\otimes\gamma\right)+\cdots=\mu\left(\gamma\right)$
+\end_inset
+
+.
+ This last is termed 
+\begin_inset Quotes eld
+\end_inset
+
+Markov-like
+\begin_inset Quotes erd
+\end_inset
+
+: conventionally, a square matrix has the Markov property if all of the
+ elements in a fixed colum sum to one.
+ The Markov property is important, as it is a homomorphism of probability
+ vectors: a probability vector times a Markov matrix is still a probability
+ vector.
+ The goal here is have a similar property for the measure.
+ It is no longer appropriate to talk about 
+\begin_inset Quotes eld
+\end_inset
+
+columns
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+rows
+\begin_inset Quotes erd
+\end_inset
+
+, but it is appropriate to insist on the preservation of sigma-additivity.
+\end_layout
+
+\begin_layout Standard
+By homomorphism, it would seem that sigma-additivity can be extended to
+ the entire tensor algebra.
+ Whether it also extends to the coalgebra and the antipode is not verified,
+ as these aspects of the algebra are not important to the current pursuit.
 \end_layout
 
 \begin_layout Subsection
-It has the Markov property.
+Shift operator
+\end_layout
+
+\begin_layout Standard
+The next question is how to extend the shift operator over the tensor product
+ in a homomorphic way.
 \end_layout
 
 \end_body
