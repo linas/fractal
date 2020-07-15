@@ -441,8 +441,8 @@ Note that
  interval.
  In this case, it corresponds with the usual measure on the reals; this
  is not always the case for other shifts.
- Here, the important conclusion is thaat, in general, thanks to the Frobenius-Pe
-ron theorem, eigenfunctions with unit eigenvalue exist, and these can be
+ Here, the important conclusion is that, in general, thanks to the Frobenius-Per
+on theorem, eigenfunctions with unit eigenvalue exist, and these can be
  taken as shift-invariant measures on the shift space.
 \end_layout
 
@@ -647,21 +647,34 @@ The Bernoulli measure is specifically that of an infinite sequence of coin-flips
 \end_inset
 
 .
- The Bernoulli measure is translation-invariant, in that 
-\begin_inset Formula $\mu_{B}\left(L^{m}C_{b}^{k}\right)=\mu_{B}\left(C_{b}^{k-m}\right)=p$
-\end_inset
-
- for 
-\begin_inset Formula $m\le k$
+ It is conventional to take 
+\begin_inset Formula $p=1/2$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-One is certainly free to consider non-translation-invariant measures.
- Certainly, eigenfunctions to the shift operator with non-unit eigenvalues
- correspond to such measures, but even more are possible.
+The Bernoulli measure is translation-invariant under (both of) the Koopman
+ operator(s).
+ For all open sets 
+\begin_inset Formula $A\in\mathbb{B}$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\mu_{B}\left(K_{0}A\right)=\mu_{B}\left(K_{1}A\right)=\mu_{B}\left(A\right)$
+\end_inset
+
+.
+ This is another way in which one can define an invariant measure, dual
+ to the previous discussion.
+ The duality will be made explicit below.
+\end_layout
+
+\begin_layout Standard
+Of course, one is free to consider sigma-additive functions that are not
+ translation-invariant; there are a variety of ways to define and construct
+ these, but they are not of immediate concern.
 \end_layout
 
 \begin_layout Subsubsection
@@ -819,12 +832,12 @@ This can be accomplished by allowing a measure
 \begin_inset Formula $e_{\gamma}\otimes e_{\gamma^{\prime}}$
 \end_inset
 
- which can clearly be identified with the number 
+ which can be assigned a numeric value by using 
 \begin_inset Formula $\mu\left(\gamma\right)\mu\left(\gamma^{\prime}\right)$
 \end_inset
 
 .
- This is clearly bilinear, as, with some abuse of notation, 
+ This assignment is clearly bilinear, as, with some abuse of notation, 
 \begin_inset Formula 
 \begin{align*}
 \left(ae_{\gamma}+be_{\gamma^{\prime}}\right)\otimes e_{\gamma^{\prime\prime}} & =\left(a\mu\left(\gamma\right)+b\mu\left(\gamma^{\prime}\right)\right)\mu\left(\gamma^{\prime\prime}\right)\\
@@ -1107,7 +1120,8 @@ Since the integral is real-valued, we have effectively constructed the dual
 \end_layout
 
 \begin_layout Standard
-Thus, a general element 
+This suggests a nicer notation for the vector space elements.
+ A general element 
 \begin_inset Formula $v\in V$
 \end_inset
 
@@ -1156,11 +1170,7 @@ v^{*}:v\mapsto\int_{\gamma}\sum_{n=0}^{\infty}\alpha_{n}B_{n}\left(x\right)d\mu
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-On.
+The us dual
 \end_layout
 
 \begin_layout Subsection
