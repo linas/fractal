@@ -155,7 +155,7 @@ The following causes the table of contents to be shown at the beginning
 
 \end_inset
 
-Matricies
+
 \end_layout
 
 \begin_layout Standard
@@ -223,6 +223,53 @@ tableofcontents[currentsection,currentsubsection]
 \end_inset
 
 
+\end_layout
+
+\begin_layout Frame
+
+\family roman
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Topics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\family roman
+New Features and New Ideas
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family roman
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\family roman
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Matrix API
 \end_layout
 
 \begin_layout Frame
@@ -651,7 +698,7 @@ status open
 \begin_layout Block
 
 \family typewriter
-(define (make-some-object)
+(define (my-genetics-object)
 \end_layout
 
 \begin_layout Block
@@ -770,40 +817,93 @@ manhattan distance
 \end_layout
 
 \begin_layout Itemize
-Cuts!
+Data filters and data cuts!
 \end_layout
 
 \begin_layout Standard
-Someone PLEASE DO THIS: Port to R or to SciPy(?)
+Someone:
 \end_layout
 
-\end_deeper
 \begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
 
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Matrix Subsystem
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-Scheme: 
 \family typewriter
-(use-modules (opencog matrix))
-\family default
+\begin_inset space \qquad{}
+\end_inset
 
+
+\family default
+PLEASE DO THIS: Port to R or to SciPy(?)
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\family roman
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Topics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\family roman
+New Features and New Ideas
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family roman
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\family roman
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Value Flows
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Values are Mutable
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
 \begin_inset Separator latexpar
 \end_inset
 
@@ -811,33 +911,88 @@ Scheme:
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
-\begin_inset Separator latexpar
-\end_inset
+\begin_layout Itemize
 
-
+\family typewriter
+(FloatValue 1 2 3)
 \end_layout
 
 \begin_layout Itemize
-Object-oriented API to matricies in the AtomSpace
+
+\family typewriter
+(SimpleTruthValue 0.99 0.6)
 \end_layout
 
 \begin_layout Itemize
-Generic programming: 
+
+\family typewriter
+(StringValue 
 \begin_inset Quotes eld
 \end_inset
 
-parametric polymorphism
+a
 \begin_inset Quotes erd
 \end_inset
 
+ 
+\begin_inset Quotes eld
+\end_inset
 
+b
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+c
+\begin_inset Quotes erd
+\end_inset
+
+)
 \end_layout
 
-\begin_layout Standard
-stuff
+\begin_layout Itemize
+
+\family typewriter
+(LinkValue (StringValue 
+\begin_inset Quotes eld
+\end_inset
+
+answer
+\begin_inset Quotes erd
+\end_inset
+
+) (FloatValue 42))
 \end_layout
 
+\begin_layout Itemize
+
+\family typewriter
+StreamValue
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+RandomStream
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+QueueValue
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+FormulaStream
+\end_layout
+
+\end_deeper
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator parbreak
@@ -851,7 +1006,32 @@ stuff
 status open
 
 \begin_layout Plain Layout
-Matrix Toolkit
+Values can be manipulated...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+...
+ with Atoms!
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Block
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Cop
+\family typewriter
+ying Values
 \end_layout
 
 \end_inset
@@ -860,43 +1040,221 @@ Matrix Toolkit
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-Frequencies, marginal probabilities
-\end_layout
+\begin_layout Standard
 
-\begin_layout Itemize
-Mutual Information
-\end_layout
-
-\begin_layout Itemize
-Similarity: e.g.
- cosine similarity
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $\ell_{p}$
-\end_inset
-
--norms (
-\begin_inset Quotes eld
-\end_inset
-
-manhattan distance
-\begin_inset Quotes erd
-\end_inset
-
-, etc.)
-\end_layout
-
-\begin_layout Itemize
-Cuts!
+\family typewriter
+(SetValue (Concept "foo") (Predicate "some key")
 \end_layout
 
 \begin_layout Standard
-Someone PLEASE DO THIS: Port to R or to SciPy(?)
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+(ValueOf (Concept "bar") (Predicate "other key")))
 \end_layout
 
 \end_deeper
+\begin_layout Block
+
+\end_layout
+
+\begin_layout Itemize
+Declarative Knowledge!
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+dog is-a animal, dog has-a tail
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Declare the movement of values
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Copying, arithmetic, formulas...
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Formulas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+Values can be transformed
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Triangle Numbers
+\end_layout
+
+\begin_layout Block
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Block
+(
+\family typewriter
+Lambda
+\end_layout
+
+\begin_layout Block
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+(Variable "$X")
+\end_layout
+
+\begin_layout Block
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+(Divide
+\end_layout
+
+\begin_layout Block
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+(Times (Variable "$X") (Plus (Variable "$X") (Number 1)))
+\end_layout
+
+\begin_layout Block
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+(Number 2))))
+\end_layout
+
+\begin_layout Itemize
+Verbose!
+\end_layout
+
+\begin_layout Itemize
+But Declarative!
+\end_layout
+
+\begin_layout Itemize
+Searchable!
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+afasf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+aasdf more
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+afasf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+aasdf more
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+afasf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+aasdf more
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+afasf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+aasdf more
+\end_layout
+
 \begin_layout Section*
 Summary
 \end_layout
@@ -996,197 +1354,6 @@ Even more stuff.
 \end_layout
 
 \end_deeper
-\end_deeper
-\begin_layout Section*
-\start_of_appendix
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-All of the following is optional and typically not needed.
-\end_layout
-
-\end_inset
-
-Appendix
-\end_layout
-
-\begin_layout Subsection*
-For Further Reading
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 3
-status collapsed
-
-\begin_layout Plain Layout
-allowframebreaks
-\end_layout
-
-\end_inset
-
-
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-beamertemplatebookbibitems
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Start with overview books.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring References
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Author1990"
-literal "true"
-
-\end_inset
-
-A.
- Author.
- 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-newblock
-\end_layout
-
-\end_inset
-
-
-\emph on
-Handbook of Everything
-\emph default
-.
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-newblock
-\end_layout
-
-\end_inset
-
- Some Press, 1990.
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-beamertemplatearticlebibitems
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Followed by interesting articles.
- Keep the list short.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Bibliography
-\labelwidthstring References
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "Someone2002"
-literal "true"
-
-\end_inset
-
-S.
- Someone.
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-newblock
-\end_layout
-
-\end_inset
-
- On this and that
-\emph on
-.
-
-\emph default
- 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-newblock
-\end_layout
-
-\end_inset
-
-
-\emph on
-Journal on This and That
-\emph default
-.
- 2(1):50–100, 2000.
-\end_layout
-
 \end_deeper
 \end_body
 \end_document
