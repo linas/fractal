@@ -120,6 +120,14 @@ Introduction
 \end_layout
 
 \begin_layout Standard
+Say something here.
+\end_layout
+
+\begin_layout Subsection
+Notation
+\end_layout
+
+\begin_layout Standard
 The below will employ the standard notation for quaternions, namely, anti-commut
 ing 
 \begin_inset Formula $i,j,k$
@@ -213,28 +221,28 @@ emergency use
  The representation to be used will be:
 \begin_inset Formula 
 \begin{align*}
-i_{1} & =i\tau_{1}=i\left[\begin{array}{cc}
+i_{1} & \mapsto-i\tau_{1}=-i\left[\begin{array}{cc}
 0 & 1\\
 1 & 0
 \end{array}\right]=\left[\begin{array}{cc}
-0 & i\\
-i & 0
+0 & -i\\
+-i & 0
 \end{array}\right]\\
-i_{2} & =i\tau_{2}=i\left[\begin{array}{cc}
+i_{2} & \mapsto-i\tau_{2}=-i\left[\begin{array}{cc}
 0 & -i\\
 i & 0
 \end{array}\right]=\left[\begin{array}{cc}
-0 & 1\\
--1 & 0
+0 & -1\\
+1 & 0
 \end{array}\right]\\
-i_{3} & =i\tau_{3}=i\left[\begin{array}{cc}
+i_{3} & \mapsto-i\tau_{3}=-i\left[\begin{array}{cc}
 1 & 0\\
 0 & -1
 \end{array}\right]=\left[\begin{array}{cc}
-i & 0\\
-0 & -i
+-i & 0\\
+0 & i
 \end{array}\right]\\
-i_{0} & =I=\left[\begin{array}{cc}
+i_{0} & \mapsto I=\left[\begin{array}{cc}
 1 & 0\\
 0 & 1
 \end{array}\right]
@@ -242,7 +250,125 @@ i_{0} & =I=\left[\begin{array}{cc}
 
 \end_inset
 
+The 
+\begin_inset Formula $\mapsto$
+\end_inset
+
+ symbol is actually an isomorphism.
+ In the following, there will be sloppiness, andthe equals sign will sometimes
+ be used.
+ I think this is safe, even though, clearly, the Pauli algebra is 
+\emph on
+NOT
+\emph default
+ isomorphic to the quaternion algebra! We'll try to keep this in mind, just
+ in case it tries to stab us in the back, somewhere.
+\end_layout
+
+\begin_layout Standard
+Note also there is another isomorphism, that of 
+\begin_inset Formula $i_{0}\mapsto I$
+\end_inset
+
+, 
+\begin_inset Formula $i_{1}=i\tau_{3}$
+\end_inset
+
+, 
+\begin_inset Formula $i_{2}=i\tau_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $i_{3}=i\tau_{1}$
+\end_inset
+
+ which is popular, and may hold some notational advantages.
+ So far, I don't know of a reason to prefer one over the other.
+\end_layout
+
+\begin_layout Standard
 Writing 
+\begin_inset Formula $q=a+bi_{1}+ci_{2}+di_{3}$
+\end_inset
+
+, let the conjugate be 
+\begin_inset Formula $\overline{q}=a-bi_{1}-ci_{2}-di_{3}$
+\end_inset
+
+.
+ Define the norm as 
+\begin_inset Formula $\left\Vert q\right\Vert ^{2}=\overline{q}q=q\overline{q}=a^{2}+b^{2}+c^{2}+d^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The corresponding complex matrix is 
+\begin_inset Formula 
+\[
+a+bi_{1}+ci_{2}+di_{3}\mapsto A=\left[\begin{array}{cc}
+a-id & -(c+ib)\\
+c-ib & a+id
+\end{array}\right]=\left[\begin{array}{cc}
+z & -w\\
+\overline{w} & \overline{z}
+\end{array}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $z=a-id$
+\end_inset
+
+ and 
+\begin_inset Formula $w=c+ib$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\det A=\overline{q}q$
+\end_inset
+
+.
+ The conjugate is then
+\begin_inset Formula 
+\[
+a-bi_{1}-ci_{2}-di_{3}\mapsto A^{\dagger}=\left[\begin{array}{cc}
+a+id & (c+ib)\\
+-\left(c-ib\right) & a-id
+\end{array}\right]=\left[\begin{array}{cc}
+\overline{z} & w\\
+-\overline{w} & z
+\end{array}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A^{\dagger}$
+\end_inset
+
+ is the matrix complex-conjugate-transpose.
+ Note that 
+\begin_inset Formula $A^{\dagger}A=\overline{q}qI$
+\end_inset
+
+ is diagonal.
+ That is, the unit-length quaternions, called the 
+\begin_inset Quotes eld
+\end_inset
+
+versors
+\begin_inset Quotes erd
+\end_inset
+
+, form the manifold 
+\begin_inset Formula $SU(2)$
+\end_inset
+
+ as usual.
 \end_layout
 
 \begin_layout Section
@@ -250,7 +376,25 @@ Bernoulli process
 \end_layout
 
 \begin_layout Standard
-This should be easy, as we've punded this topic to death.
+This should be easy, as we've pounded this topic to death.
+ Let 
+\begin_inset Formula $b\in2^{\omega}$
+\end_inset
+
+ be an infinite string of binary digits, where 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ is the Cantor set, as usual.
+ The object of interest is the analytic series 
+\begin_inset Formula 
+\[
+b\left(q\right)=\sum_{k=0}^{\infty}b_{k}q^{k}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
