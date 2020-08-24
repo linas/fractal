@@ -289,16 +289,16 @@ Note also there is another isomorphism, that of
 
 \begin_layout Standard
 Writing 
-\begin_inset Formula $q=a+bi_{1}+ci_{2}+di_{3}$
+\begin_inset Formula $h=a+bi_{1}+ci_{2}+di_{3}$
 \end_inset
 
 , let the conjugate be 
-\begin_inset Formula $\overline{q}=a-bi_{1}-ci_{2}-di_{3}$
+\begin_inset Formula $\overline{h}=a-bi_{1}-ci_{2}-di_{3}$
 \end_inset
 
 .
  Define the norm as 
-\begin_inset Formula $\left\Vert q\right\Vert ^{2}=\overline{q}q=q\overline{q}=a^{2}+b^{2}+c^{2}+d^{2}$
+\begin_inset Formula $\left\Vert h\right\Vert ^{2}=\overline{h}h=h\overline{h}=a^{2}+b^{2}+c^{2}+d^{2}$
 \end_inset
 
 .
@@ -308,7 +308,7 @@ Writing
 The corresponding complex matrix is 
 \begin_inset Formula 
 \[
-a+bi_{1}+ci_{2}+di_{3}\mapsto A=\left[\begin{array}{cc}
+h=a+bi_{1}+ci_{2}+di_{3}\mapsto A=\left[\begin{array}{cc}
 a-id & -(c+ib)\\
 c-ib & a+id
 \end{array}\right]=\left[\begin{array}{cc}
@@ -329,14 +329,14 @@ where
 
 .
  Note that 
-\begin_inset Formula $\det A=\overline{q}q$
+\begin_inset Formula $\det A=\overline{h}h$
 \end_inset
 
 .
  The conjugate is then
 \begin_inset Formula 
 \[
-a-bi_{1}-ci_{2}-di_{3}\mapsto A^{\dagger}=\left[\begin{array}{cc}
+\overline{h}=a-bi_{1}-ci_{2}-di_{3}\mapsto A^{\dagger}=\left[\begin{array}{cc}
 a+id & (c+ib)\\
 -\left(c-ib\right) & a-id
 \end{array}\right]=\left[\begin{array}{cc}
@@ -353,7 +353,7 @@ where
 
  is the matrix complex-conjugate-transpose.
  Note that 
-\begin_inset Formula $A^{\dagger}A=\overline{q}qI$
+\begin_inset Formula $A^{\dagger}A=\overline{h}hI$
 \end_inset
 
  is diagonal.
@@ -390,7 +390,7 @@ This should be easy, as we've pounded this topic to death.
  The object of interest is the analytic series 
 \begin_inset Formula 
 \[
-b\left(q\right)=\sum_{k=0}^{\infty}b_{k}q^{k}
+b\left(h\right)=\sum_{k=0}^{\infty}b_{k}h^{k}
 \]
 
 \end_inset
@@ -402,7 +402,7 @@ and the corresponding action of the shift operator
 .
  Naively, all of the old results still hold, with the naive substitution
  of 
-\begin_inset Formula $z\mapsto q$
+\begin_inset Formula $z\mapsto h$
 \end_inset
 
 , so nothing new seems to be gained.
@@ -411,6 +411,91 @@ and the corresponding action of the shift operator
 \end_inset
 
  and one could do likewise here, as well.
+ Of course, for the analytic series, one could write anything (any matrix)
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ for 
+\begin_inset Formula $h$
+\end_inset
+
+ in the series expansion.
+ The question is, of course 
+\begin_inset Quotes eld
+\end_inset
+
+why?
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+is there anything new when one does so?
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Hmm.
+ OK, for the moment, lets imagine a symplectic manifold and 
+\begin_inset Formula $A\in Sp\left(n\right)=U\left(n,\mathbb{H}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A$
+\end_inset
+
+ is a canonical transformation on the tangent space of the symplectic manifold.
+ Then 
+\begin_inset Formula $A^{n}$
+\end_inset
+
+ is a repeated canonical transformation, since 
+\begin_inset Formula $A^{n}\in Sp\left(n\right)$
+\end_inset
+
+.
+ By hand-waving, 
+\begin_inset Formula 
+\[
+b\left(A\right)=\sum_{k=0}^{\infty}b_{k}A^{k}\in Sp\left(n\right)
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $Sp\left(n\right)$
+\end_inset
+
+ is compact and contains it's limits.
+ The result would seem to be a five-real-parameter family, four for 
+\begin_inset Formula $A$
+\end_inset
+
+ and one for 
+\begin_inset Formula $b$
+\end_inset
+
+ that paints some wild fractal curves on the space of canonical transformations.
+ Big deal, so what?
+\end_layout
+
+\begin_layout Standard
+What about eigenfunctions of the shift operator? These would be 
+\begin_inset Formula $\mathbb{H}$
+\end_inset
+
+-valued functions on the cylinder-set (coarse) topology on 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -424,7 +509,54 @@ new thing
 
  to look for would be symplectic representations, i.e.
  to look at it in terms of position and conjugate momentum...
- Hmmm...
+ To that end, write
+\begin_inset Formula 
+\[
+J=\left(\begin{array}{cc}
+0 & 1\\
+-1 & 0
+\end{array}\right)
+\]
+
+\end_inset
+
+Write 
+\begin_inset Formula $z=x+iy$
+\end_inset
+
+ and 
+\begin_inset Formula $p=d/dz$
+\end_inset
+
+ so that 
+\begin_inset Formula $pz=1$
+\end_inset
+
+ and 
+\begin_inset Formula $[p,z]=pz-zp=1$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula 
+\[
+\hat{z}=\left(\begin{array}{c}
+z\\
+p
+\end{array}\right)
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+\left[\hat{z},\hat{z}^{T}\right]=\hat{z}\otimes\hat{z}^{T}-\hat{z}^{T}\otimes\hat{z}=J
+\]
+
+\end_inset
+
+That is ...
 \end_layout
 
 \end_body
