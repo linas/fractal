@@ -372,6 +372,86 @@ versors
  as usual.
 \end_layout
 
+\begin_layout Standard
+An alternate representation uses vector notation, so that 
+\begin_inset Formula $h\mapsto\left(r,\vec{v}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $r\in\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{v}\in\mathbb{R}^{3}$
+\end_inset
+
+.
+ The product is then simply 
+\begin_inset Formula 
+\[
+\left(r,\vec{u}\right)\left(s,\vec{v}\right)=\left(r+s-\vec{u}\cdot\vec{v},r\vec{v}+s\vec{u}+\vec{u}\times\vec{v}\right)
+\]
+
+\end_inset
+
+This notation enables a simple polar-coordinate form.
+ Write 
+\begin_inset Formula $h\mapsto\left(r,\vec{\theta}\right)$
+\end_inset
+
+; then 
+\begin_inset Formula 
+\[
+\exp h\mapsto e^{r}\left(\cos\left\Vert \vec{\theta}\right\Vert +\hat{\theta}\sin\left\Vert \vec{\theta}\right\Vert \right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{\theta}=\vec{\theta}/\left\Vert \vec{\theta}\right\Vert $
+\end_inset
+
+.
+ The logarithm is
+\begin_inset Formula 
+\[
+\ln h\mapsto\ln\left\Vert h\right\Vert +\hat{\theta}\arccos\frac{r}{\left\Vert h\right\Vert }
+\]
+
+\end_inset
+
+The polar coordinate form is then
+\begin_inset Formula 
+\[
+h\mapsto\left\Vert h\right\Vert \exp\hat{\theta}\phi=\left\Vert h\right\Vert \left(\cos\phi+\hat{\theta}\sin\phi\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\cos\phi=r/\left\Vert h\right\Vert $
+\end_inset
+
+ and 
+\begin_inset Formula $\sin\phi=\left\Vert \vec{\theta}\right\Vert /\left\Vert h\right\Vert $
+\end_inset
+
+.
+ Raising to a real power 
+\begin_inset Formula $a$
+\end_inset
+
+ then becomes
+\begin_inset Formula 
+\[
+h^{a}=\left\Vert h\right\Vert ^{a}\left(\cos a\phi+\hat{\theta}\sin a\phi\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Bernoulli process
 \end_layout
@@ -640,12 +720,64 @@ fractal eigenfunctions
 \end_layout
 
 \begin_layout Subsection
-Hurwitz zeta eigenfunctions
+Periodic zeta eigenfunctions
 \end_layout
 
 \begin_layout Standard
-Extending earlier results for the Hurwitz zet eigenfunctions (eqn 7.5 page
- 26 of 
+An earlier result, following the same kind of manipulation, found the the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+periodic
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Here, 
+\begin_inset Quotes eld
+\end_inset
+
+periodic
+\begin_inset Quotes erd
+\end_inset
+
+ is in quotes; although it appears to superficially be periodic in 
+\begin_inset Formula $x$
+\end_inset
+
+, it is not; the value of 
+\begin_inset Formula $x=1$
+\end_inset
+
+ corresponds to a branch-point of the polylogarithm.
+ This is explored in greate detail in ref.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Poly07"
+literal "false"
+
+\end_inset
+
+.
+ The name 
+\begin_inset Quotes eld
+\end_inset
+
+periodic zeta function
+\begin_inset Quotes erd
+\end_inset
+
+ comes from Tom Apostol's book on analytic number theory.
+\end_layout
+
+\end_inset
+
+ zeta eigenfunctions (eqn 7.5 page 26 of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ve-B04"
@@ -653,15 +785,140 @@ literal "false"
 
 \end_inset
 
-) write
+) which were given as
 \begin_inset Formula 
 \[
-\beta\left(x;s,\vec{\theta}\right)=2\Gamma\left(s+1\right)\sum_{n=1}^{\infty}\left(2\pi n\right)^{-s}\exp2\pi inxuhhhh
+\beta\left(x;s\right)=2\Gamma\left(s+1\right)\sum_{n=1}^{\infty}\left(2\pi n\right)^{-s}\exp2\pi inx
 \]
 
 \end_inset
 
+which produced the associated eigen-equation 
+\begin_inset Formula $\mathcal{L}\beta=2^{-s}\beta$
+\end_inset
 
+ with the understanding that 
+\begin_inset Formula $s\in\mathbb{C}$
+\end_inset
+
+ a complex number.
+ However, these manipulations are entirely formal; the same result holds
+ for 
+\begin_inset Formula $s\in\mathbb{H}$
+\end_inset
+
+ provided that we can adquately define 
+\begin_inset Formula $n^{s}$
+\end_inset
+
+ for quaternionic 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ To avoid further confusion, it is worth using the purely real form, and
+ dropping the leading gamma factor and write
+\begin_inset Formula 
+\[
+C\left(x;s\right)=\sum_{n=1}^{\infty}n^{-s}\cos2\pi nx\quad\mbox{ and }\quad S\left(x;s\right)=\sum_{n=1}^{\infty}n^{-s}\sin2\pi nx
+\]
+
+\end_inset
+
+which both satisfy 
+\begin_inset Formula $\mathcal{L}C=2^{-s}C$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $S.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To generalize to quaternionuc 
+\begin_inset Formula $s\in\mathbb{H}$
+\end_inset
+
+, write 
+\begin_inset Formula $n^{-s}=\exp\left(-s\ln n\right)$
+\end_inset
+
+.
+ This is then readily expanded in polar coordinates for the quaternions.
+ Using the vector representation, write 
+\begin_inset Formula $s\mapsto\left(r,\vec{\theta}\right)$
+\end_inset
+
+ so that 
+\begin_inset Formula $\vec{\theta}\in\mathbb{R}^{3}$
+\end_inset
+
+, one then has the vector 
+\begin_inset Formula 
+\[
+n^{-s}\mapsto\exp\left(-s\ln n\right)=n^{-r}\left(\cos\nu+\hat{\theta}\sin\nu\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\nu=\left\Vert \vec{\theta}\right\Vert \ln n$
+\end_inset
+
+ (assuming I didn't make a mistake).
+\end_layout
+
+\begin_layout Standard
+Fixing the quaternion 
+\begin_inset Formula $s$
+\end_inset
+
+, the eigenvalue is now, of course, just 
+\begin_inset Formula 
+\[
+\lambda=2^{-s}=2^{-r}\left(\cos\left\Vert \vec{\theta}\right\Vert \ln2+\hat{\theta}\sin\left\Vert \vec{\theta}\right\Vert \ln2\right)
+\]
+
+\end_inset
+
+By periodicity, the eigenvalue is unchanged by replacement 
+\begin_inset Formula $\left\Vert \vec{\theta}\right\Vert \ln2\to\left\Vert \vec{\theta}\right\Vert \ln2+2\pi m$
+\end_inset
+
+, and so we have a one-integer-paramter family of quaternions leading to
+ the same eigenvalue.
+ That is, given 
+\begin_inset Formula $s\mapsto\left(r,\vec{\theta}\right)$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+s_{m}\mapsto\left(r,\vec{\theta}+\frac{2\pi m}{\ln2}\hat{\theta}\right)
+\]
+
+\end_inset
+
+is another quaternion yielding the same eigenvalue, and so one has a parameteriz
+ed family of solutions 
+\begin_inset Formula 
+\[
+C_{m}\left(x;s\right)=\sum_{n=1}^{\infty}n^{-s_{m}}\cos2\pi nx
+\]
+
+\end_inset
+
+and likewise 
+\begin_inset Formula $S_{m}\left(x;s\right)$
+\end_inset
+
+ all having the same eigenvalue 
+\begin_inset Formula $\lambda=2^{-s}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
