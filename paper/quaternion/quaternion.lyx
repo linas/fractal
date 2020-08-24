@@ -390,7 +390,7 @@ This should be easy, as we've pounded this topic to death.
  The object of interest is the analytic series 
 \begin_inset Formula 
 \[
-b\left(h\right)=\sum_{k=0}^{\infty}b_{k}h^{k}
+b\mapsto b\left(h\right)=\sum_{k=0}^{\infty}b_{k}h^{k}
 \]
 
 \end_inset
@@ -496,6 +496,176 @@ What about eigenfunctions of the shift operator? These would be
 \end_inset
 
 .
+ I was never good at constructing these, so lets start with the simpler
+ case: the Fourier representation for functions on the unit real interval
+ 
+\begin_inset Formula $\left[0,1\right]\subset\mathbb{R}$
+\end_inset
+
+; where elements 
+\begin_inset Formula $b\in2^{\omega}$
+\end_inset
+
+ can be mapped to reals as 
+\begin_inset Formula 
+\[
+b\mapsto x=x\left(b\right)=\sum_{k=0}^{\infty}b_{k}2^{-k-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Fourier fractal representation
+\end_layout
+
+\begin_layout Standard
+For the fourier representation, write
+\begin_inset Formula 
+\[
+f\left(x\right)=\sum_{n=0}^{\infty}a_{n}\cos2\pi nx+b_{n}\sin2\pi nx
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $a_{n},b_{n}\in\mathbb{H}$
+\end_inset
+
+.
+ The transfer operator for the Bernoulli process is
+\begin_inset Formula 
+\[
+\left[\mathcal{L}f\right]\left(x\right)=\frac{1}{2}\left(f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right)
+\]
+
+\end_inset
+
+Applied to the Fourier series, this gives
+\begin_inset Formula 
+\[
+\left[\mathcal{L}f\right]\left(x\right)=\sum_{n=0}^{\infty}a_{2n}\cos2\pi nx+b_{2n}\sin2\pi nx
+\]
+
+\end_inset
+
+By orthogonality, the solutions to the eigenvalue equation 
+\begin_inset Formula $\mathcal{L}f=\lambda f$
+\end_inset
+
+ for 
+\begin_inset Formula $\lambda\in\mathbb{H}$
+\end_inset
+
+ will have 
+\begin_inset Formula $a_{0}=0$
+\end_inset
+
+ when 
+\begin_inset Formula $\lambda\ne1$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2n}=\lambda a_{n}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+.
+ Solving this indicates that the odd-indexed coefficients can be choosen
+ freely, while the even-indexed ones are powers of the odd ones.
+ That is, one has that
+\begin_inset Formula 
+\[
+a_{2^{k}\left(2j+1\right)}=\lambda^{k}a_{2j+1}
+\]
+
+\end_inset
+
+This in turn implies a linearly-independent basis for the space of eigenfunction
+s; these would be linear combinations of 
+\begin_inset Formula 
+\[
+c_{j}=\sum_{k=0}^{\infty}\lambda^{k}\cos2\pi\left(2j+1\right)x
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+s_{j}=\sum_{k=0}^{\infty}\lambda^{k}\sin2\pi\left(2j+1\right)x
+\]
+
+\end_inset
+
+This is exactly the same as before (equation 8.7, page 39 of 
+\begin_inset Quotes eld
+\end_inset
+
+the Bernoulli Operator
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-B04"
+literal "false"
+
+\end_inset
+
+).
+ These are the 
+\begin_inset Quotes eld
+\end_inset
+
+fractal eigenfunctions
+\begin_inset Quotes erd
+\end_inset
+
+, as, in general, they are at most 
+\begin_inset Formula $m$
+\end_inset
+
+-times differentiable if 
+\begin_inset Formula $2^{m}>\left\Vert \lambda\right\Vert >2^{-m+1}$
+\end_inset
+
+ (as otherise, the sums do not converge).
+\end_layout
+
+\begin_layout Subsection
+Hurwitz zeta eigenfunctions
+\end_layout
+
+\begin_layout Standard
+Extending earlier results for the Hurwitz zet eigenfunctions (eqn 7.5 page
+ 26 of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-B04"
+literal "false"
+
+\end_inset
+
+) write
+\begin_inset Formula 
+\[
+\beta\left(x;s,\vec{\theta}\right)=2\Gamma\left(s+1\right)\sum_{n=1}^{\infty}\left(2\pi n\right)^{-s}\exp2\pi inxuhhhh
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Symplectic
 \end_layout
 
 \begin_layout Standard
@@ -557,6 +727,18 @@ so that
 \end_inset
 
 That is ...
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "/home/linas/src/fractal/paper/fractal"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
