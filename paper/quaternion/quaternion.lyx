@@ -1023,7 +1023,7 @@ Continuing naively -- points on the complex plane are no longer single points,
 \end_layout
 
 \begin_layout Subsection
-Symplectic group and group actions
+Symplectic group
 \end_layout
 
 \begin_layout Standard
@@ -1146,83 +1146,258 @@ The compact symplectic group
 .
 \end_layout
 
+\begin_layout Subsection
+Simple harmonic oscillator
+\end_layout
+
 \begin_layout Standard
 Without further ado, set 
 \begin_inset Formula $n=1$
 \end_inset
 
- and write 
+.
+ Consider first the classical simple harmonic oscillator 
 \begin_inset Formula 
 \[
-J=\left(\begin{array}{cc}
-0 & 1\\
--1 & 0
-\end{array}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Quotes eld
-\end_inset
-
-new thing
-\begin_inset Quotes erd
-\end_inset
-
- to look for would be symplectic representations, i.e.
- to look at it in terms of position and conjugate momentum...
- To that end, write
-\begin_inset Formula 
-\[
-J=\left(\begin{array}{cc}
-0 & 1\\
--1 & 0
-\end{array}\right)
+H=\frac{1}{2}\left(p^{2}+x^{2}\right)
 \]
 
 \end_inset
 
 Write 
-\begin_inset Formula $z=x+iy$
-\end_inset
-
- and 
-\begin_inset Formula $p=d/dz$
-\end_inset
-
- so that 
-\begin_inset Formula $pz=1$
-\end_inset
-
- and 
-\begin_inset Formula $[p,z]=pz-zp=1$
-\end_inset
-
-.
- Write 
 \begin_inset Formula 
 \[
-\hat{z}=\left(\begin{array}{c}
-z\\
+Z=\left(\begin{array}{c}
+x\\
 p
 \end{array}\right)
 \]
 
 \end_inset
 
-so that 
+as a ordinary real-valued 2-vector; then clearly 
+\begin_inset Formula $H=Z^{T}Z/2$
+\end_inset
+
+ is preserved under coordinate changes with the symetry of 
+\begin_inset Formula $SO\left(2\right)\cong U\left(1\right)$
+\end_inset
+
+.
+ Writing the same complex 
+\begin_inset Formula $Z\in\mathbb{C}^{2}$
+\end_inset
+
+ one then has 
+\begin_inset Formula $H=Z^{\dagger}Z/2$
+\end_inset
+
+ is preserved by rotations in 
+\begin_inset Formula $SU\left(2\right)$
+\end_inset
+
+.
+ (In the more general setting, this is a special case of a Hermitian manifold,
+ having a Hermitian structure).
+\end_layout
+
+\begin_layout Standard
+The classical simple harmonic oscillator can be quantized by replacing 
+\begin_inset Formula $p\to d/dx$
+\end_inset
+
+ per usual; one obtains the ladder operators 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $a^{*}$
+\end_inset
+
+ per usual, as the rotated-by 45 degrees linear combinations of 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ These act as shift operators on the space 
+\begin_inset Formula $\left|n\right\rangle $
+\end_inset
+
+ with 
+\begin_inset Formula $\left|0\right\rangle $
+\end_inset
+
+ being the vacuum, so its a one-sided shift because 
+\begin_inset Formula $a\left|0\right\rangle =0$
+\end_inset
+
+.
+ To be more precise, the ladder operators aren't actually shifts; they have
+ an extra factor of 
+\begin_inset Formula $\sqrt{n+1}$
+\end_inset
+
+ so as to write the Hamiltonian 
+\begin_inset Formula $H=a^{*}a+1/2$
+\end_inset
+
+ having eignevalues 
+\begin_inset Formula $n+1/2$
+\end_inset
+
+.
+ The spectrum is positive-definite, there is no way to extend this to a
+ two-sided shift.
+\end_layout
+
+\begin_layout Standard
+More precisely, the spectrum is discrete only when considering the space
+ of square-integrable functions on the real line.
+ If one abandons square-integrability, the spectrum is continuous.
+ To be precise, then, the spectrum of an operator depends on the space on
+ which it acts; its a property of the space, and not of the operator.
+\end_layout
+
+\begin_layout Subsection
+Skew form
+\end_layout
+
+\begin_layout Standard
+Define
 \begin_inset Formula 
 \[
-\left[\hat{z},\hat{z}^{T}\right]=\hat{z}\otimes\hat{z}^{T}-\hat{z}^{T}\otimes\hat{z}=J
+J=\left(\begin{array}{cc}
+0 & 1\\
+-1 & 0
+\end{array}\right)
 \]
 
 \end_inset
 
-That is ...
+One then has that 
+\begin_inset Formula $Z^{T}JZ=xp-px$
+\end_inset
+
+ is non-zero only if 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ do not commute.
+ It is convenient here to reverse the sign, so write 
+\begin_inset Formula 
+\[
+H=-Z^{T}JZ=px-xp
+\]
+
+\end_inset
+
+This is invariant under the symplectic group, we can re-write 
+\begin_inset Formula $Z\to MZ$
+\end_inset
+
+ for 
+\begin_inset Formula $M\in Sp\left(2,\mathbb{C}\right)$
+\end_inset
+
+, in that 
+\begin_inset Formula $M^{T}JM=J$
+\end_inset
+
+.
+ (This of course holds in arbitrary dimensions.)
+\end_layout
+
+\begin_layout Standard
+For the special case of 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $p=d/dz$
+\end_inset
+
+, one has that 
+\begin_inset Formula $pz=1$
+\end_inset
+
+ and 
+\begin_inset Formula $[p,z]f\left(z\right)=\left(pz-zp\right)f\left(z\right)=f\left(z\right)$
+\end_inset
+
+ for any analytic series 
+\begin_inset Formula $f\left(z\right)=c_{0}+c_{1}z+c_{2}z^{2}+\cdots$
+\end_inset
+
+ , and so for this special case, 
+\begin_inset Formula $H=1$
+\end_inset
+
+.
+ The point here, is that 
+\begin_inset Formula $p$
+\end_inset
+
+ is a shift operator, acting on the analytic series 
+\begin_inset Formula $f\left(z\right)$
+\end_inset
+
+.
+ It is a one-sided shift, as 
+\begin_inset Formula $pc_{0}=0$
+\end_inset
+
+.
+ To be precise, it's not quite a shift, having an extra factor of 
+\begin_inset Formula $n$
+\end_inset
+
+ in it, as, 
+\begin_inset Formula $pz^{n}=nz^{n-1}$
+\end_inset
+
+.
+ It can be extended to a two-sided shift, since 
+\begin_inset Formula $pz^{n}=nz^{n-1}$
+\end_inset
+
+ works just fine for 
+\begin_inset Formula $n<0$
+\end_inset
+
+ but it is 
+\begin_inset Quotes eld
+\end_inset
+
+broken
+\begin_inset Quotes erd
+\end_inset
+
+ in the middle, at zero.
+\end_layout
+
+\begin_layout Standard
+One can, or course, define two-sided shifts; however, the shifts are multiplicat
+ion and division by 
+\begin_inset Formula $z$
+\end_inset
+
+ and division by 
+\begin_inset Formula $z$
+\end_inset
+
+ is not isomorphic to 
+\begin_inset Formula $p$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
