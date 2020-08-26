@@ -115,6 +115,11 @@ An exploration of quaternions, in the context of all of the usual places
  With that in mind, lets make a map of some of the nearby landscape.
 \end_layout
 
+\begin_layout Abstract
+Unfortunately, nothing is actually accomplished here; we just go round in
+ circles chasing our own tail.
+\end_layout
+
 \begin_layout Section
 Introduction
 \end_layout
@@ -617,9 +622,9 @@ with
 .
  The transfer operator for the Bernoulli process is
 \begin_inset Formula 
-\[
-\left[\mathcal{L}f\right]\left(x\right)=\frac{1}{2}\left(f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right)
-\]
+\begin{equation}
+\left[\mathcal{L}f\right]\left(x\right)=\frac{1}{2}\left(f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right)\label{eq:bernoulli shift}
+\end{equation}
 
 \end_inset
 
@@ -1488,6 +1493,195 @@ That is, it preserves the first bit of the bit-string, but wipes out the
 \end_inset
 
  here.
+ The spectrum of 
+\begin_inset Formula $H$
+\end_inset
+
+ here is very simple, though: it has exactly one eigenvector, and one eigenvalue.
+\end_layout
+
+\begin_layout Standard
+Unclear here is how 
+\begin_inset Formula $SU\left(2\right)$
+\end_inset
+
+ should act on the Bernmoulli shift.
+ For the harmonic oscillator, one can hand-wave, since there are already
+ complex numbers bubbling in the brew; for the Bernoulli shift, there is
+ not.
+ One could 
+\begin_inset Quotes eld
+\end_inset
+
+make something up
+\begin_inset Quotes erd
+\end_inset
+
+, but what does that acheive?
+\end_layout
+
+\begin_layout Standard
+For the one-sided Bernoulli shift, that is, for eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bernoulli shift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the result is mildly surprising.
+ The Koopman operator 
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+ makes two copies of a function, squeezing them into the unit interval,
+ with a prominant discontinuity at 
+\begin_inset Formula $x=1/2$
+\end_inset
+
+.
+ One has 
+\begin_inset Formula $\mathcal{LK}=1$
+\end_inset
+
+ but 
+\begin_inset Formula $\text{\ensuremath{\mathcal{KL}}}$
+\end_inset
+
+ makes two copies of the average of the two sides.
+ From 
+\begin_inset Formula $Hf=\lambda f$
+\end_inset
+
+, we conclude that 
+\begin_inset Formula $\mathcal{KL}f=\left(1-\lambda\right)f$
+\end_inset
+
+.
+ The kernel of 
+\begin_inset Formula $H$
+\end_inset
+
+ is easy to describe: given some arbitrary, unconstrainted function 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ on the unit interval, then construct
+\begin_inset Formula 
+\[
+f\left(x\right)=\left[\mathcal{K}g\right]\left(x\right)=\begin{cases}
+g\left(2x\right) & \mbox{ for }0\le x<1/2\\
+g\left(2x-1\right) & \mbox{ for }1/2\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+and its clear that 
+\begin_inset Formula $f$
+\end_inset
+
+ is in the kernel of 
+\begin_inset Formula $H$
+\end_inset
+
+ because 
+\begin_inset Formula $\mathcal{L}f=g$
+\end_inset
+
+ so 
+\begin_inset Formula $\mathcal{KL}f=\mathcal{K}g=f$
+\end_inset
+
+.
+ What's not in the kernel? Lots.
+ Everything not in the kernel can be arrived at by projecting out the kernel,
+ 
+\emph on
+i.e.
+
+\emph default
+ just subtract out the kernel.
+ This gives
+\begin_inset Formula 
+\[
+\left[Hf\right]\left(x\right)=\begin{cases}
+f\left(x\right)-\left[\mathcal{L}f\right]\left(2x\right) & \mbox{ for }0\le x<1/2\\
+f\left(x\right)-\left[\mathcal{L}f\right]\left(2x+1\right) & \mbox{ for }1/2\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+Can we find a spectrum, i,.e.
+ can we find solutions to 
+\begin_inset Formula $Hf=\lambda f$
+\end_inset
+
+? From the upper branch, conclude that we are looking for solutions to 
+\begin_inset Formula $\left[\mathcal{L}f\right]\left(x\right)=\left(1-\lambda\right)f\left(x/2\right)$
+\end_inset
+
+, while the lower branch implies that 
+\begin_inset Formula $\left[\mathcal{L}f\right]\left(x\right)=\left(1-\lambda\right)f\left(\left(x+1\right)/2\right)$
+\end_inset
+
+.
+ Combining these then forces 
+\begin_inset Formula $f\left(x/2\right)=f\left(\left(x+1\right)/2\right)$
+\end_inset
+
+ 
+\emph on
+i.e.
+
+\emph default
+ two copies of the same thing, 
+\emph on
+i.e.
+
+\emph default
+ 
+\begin_inset Formula $f=\mathcal{K}g$
+\end_inset
+
+ for some otherwise arbitary, unconstrained 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ But then 
+\begin_inset Formula $\mathcal{L}f=\mathcal{LK}g=g$
+\end_inset
+
+ and so we're back where we started: 
+\begin_inset Formula $Hf=0$
+\end_inset
+
+.
+ Thus, although manifestly 
+\begin_inset Formula $H\ne0$
+\end_inset
+
+, it does not have a spectrum at all!
+\end_layout
+
+\begin_layout Standard
+So the same skew form has given three radically different situations: 
+\begin_inset Formula $H$
+\end_inset
+
+ the identity, 
+\begin_inset Formula $H$
+\end_inset
+
+ with a single, trivial eigenvector, and 
+\begin_inset Formula $H$
+\end_inset
+
+ with no eigenvalues at all.
 \end_layout
 
 \begin_layout Standard
