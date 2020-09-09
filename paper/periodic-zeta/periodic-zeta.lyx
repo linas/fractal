@@ -129,13 +129,23 @@ periodic
 
  zeta function is given by 
 \begin_inset Formula 
-\[
-\beta\left(x;s\right)=2\Gamma\left(s+1\right)\sum_{n=1}^{\infty}\left(2\pi n\right)^{-s}\exp2\pi inx
-\]
+\begin{equation}
+F(q;s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}
+\end{equation}
 
 \end_inset
 
-Although superficially, it appears to be periodic in 
+Alternately,
+\begin_inset Formula 
+\begin{align*}
+\beta\left(x;s\right)= & 2\Gamma\left(s+1\right)\sum_{n=1}^{\infty}\left(2\pi n\right)^{-s}\exp2\pi inx\\
+= & \frac{2\Gamma\left(s+1\right)}{\left(2\pi\right)^{s}}F\left(x;s\right)
+\end{align*}
+
+\end_inset
+
+provides a slightly more conveniant normalization.
+ Although superficially, it appears to be periodic in 
 \begin_inset Formula $x$
 \end_inset
 
@@ -157,8 +167,177 @@ literal "false"
 ; we hope to expand on this below.
 \end_layout
 
+\begin_layout Section
+Assorted remarks
+\end_layout
+
 \begin_layout Standard
-Highlights include
+Misc stuff.
+\end_layout
+
+\begin_layout Subsection
+The reflection formula
+\end_layout
+
+\begin_layout Standard
+The periodic zeta can be analytically continued to the entire complex 
+\begin_inset Formula $s$
+\end_inset
+
+-plane
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Poly07"
+literal "false"
+
+\end_inset
+
+ as 
+\begin_inset Formula 
+\begin{equation}
+F(q;1-s)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{i\pi s/2}\zeta(s,q)+e^{-i\pi s/2}\zeta(s,1-q)\right]\label{eq:reflection}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}
+\]
+
+\end_inset
+
+is the Hurwitz zeta function.
+ Writing 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset
+
+, the Hurwitz series expansion is absolutely convergent for 
+\begin_inset Formula $\sigma>1$
+\end_inset
+
+ and any complex 
+\begin_inset Formula $q$
+\end_inset
+
+ that is not zero or a negative integer.
+ There are branch points at 
+\begin_inset Formula $q=0,-1,-2,\cdots$
+\end_inset
+
+, rather than simple poles: this is best understood by noting that 
+\begin_inset Formula $q^{s}=e^{s\log q}$
+\end_inset
+
+ and that 
+\begin_inset Formula $q=0$
+\end_inset
+
+ is a branch point for the logarithm, anchoring one end of a branch cut.
+\end_layout
+
+\begin_layout Standard
+There are a number of ways of writing series for the Hurwitz zeta that converge
+ on the entire complex 
+\begin_inset Formula $s$
+\end_inset
+
+-plane, and so it follows from the reflection equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:reflection"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ one has that the periodic zeta is quite well-defined.
+\end_layout
+
+\begin_layout Subsection
+Non-periodicity
+\end_layout
+
+\begin_layout Standard
+The direct substitution of 
+\begin_inset Formula $q\to q+1$
+\end_inset
+
+ in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:periodic zeta"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ gives the false suggestion of periodicity in 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ To see that it is not actually so, observe that it is related to the polylogari
+thm as 
+\begin_inset Formula $F(q,s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\[
+\mbox{Li}_{s}\left(z\right)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}
+\]
+
+\end_inset
+
+The polylogarithm has two branch points: one at 
+\begin_inset Formula $z=0$
+\end_inset
+
+, and the other at 
+\begin_inset Formula $z=1$
+\end_inset
+
+, although this second branch-point does not appear on the principal sheet.
+\end_layout
+
+\begin_layout Subsection
+Eigenfunction of the Bernoulli shift.
+\end_layout
+
+\begin_layout Standard
+Some highlights are presented below.
+ Let 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+be the Bernoulli shift, i.e.
+ 
+\begin_inset Formula 
+\[
+\left[\mathcal{L}f\right]\left(x\right)=\frac{1}{2}\left(f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right)
+\]
+
+\end_inset
+
+Direct manipulation reveals that 
+\begin_inset Formula $\mathcal{L}\beta=2^{-s}\beta$
+\end_inset
+
+ with the understanding that the series converges only when 
+\begin_inset Formula $\Re s>1$
+\end_inset
+
+.
+ Taking the manipulations to be formal, one expects to be able to analytically
+ continue to all of 
+\begin_inset Formula $s\in\mathbb{C}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
