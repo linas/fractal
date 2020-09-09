@@ -116,8 +116,18 @@ An exploration of quaternions, in the context of all of the usual places
 \end_layout
 
 \begin_layout Abstract
-Unfortunately, nothing is actually accomplished here; we just go round in
- circles chasing our own tail.
+Unfortunately, little is actually accomplished here.
+ Mostly observe that candidate shift operators have wildly different spectra.
+ (This is the 
+\begin_inset Quotes eld
+\end_inset
+
+best
+\begin_inset Quotes erd
+\end_inset
+
+ synopsis of spectra so far...
+ previous attempts were garbled.)
 \end_layout
 
 \begin_layout Section
@@ -609,9 +619,9 @@ Fourier fractal representation
 \begin_layout Standard
 For the fourier representation, write
 \begin_inset Formula 
-\[
-f\left(x\right)=\sum_{n=0}^{\infty}a_{n}\cos2\pi nx+b_{n}\sin2\pi nx
-\]
+\begin{equation}
+f\left(x\right)=\sum_{n=0}^{\infty}a_{n}\cos2\pi nx+b_{n}\sin2\pi nx\label{eq:Fourier series}
+\end{equation}
 
 \end_inset
 
@@ -1317,7 +1327,11 @@ This is invariant under the symplectic group, we can re-write
 \end_inset
 
 .
- (This of course holds in arbitrary dimensions.)
+ (This, of course, holds in arbitrary dimensions.)
+\end_layout
+
+\begin_layout Subsubsection
+Skew form on complex plane
 \end_layout
 
 \begin_layout Standard
@@ -1402,6 +1416,10 @@ tion and division by
 .
 \end_layout
 
+\begin_layout Subsubsection
+Skew form on the harmonic oscillator
+\end_layout
+
 \begin_layout Standard
 For the special case of the harmonic oscillator, the identification is 
 \begin_inset Formula $x\mapsto a^{*}$
@@ -1421,6 +1439,10 @@ For the special case of the harmonic oscillator, the identification is
 \end_inset
 
  for the harmonic oscillator as well.
+\end_layout
+
+\begin_layout Subsubsection
+Skew form on the Cantor set
 \end_layout
 
 \begin_layout Standard
@@ -1498,6 +1520,11 @@ That is, it preserves the first bit of the bit-string, but wipes out the
 \end_inset
 
  here is very simple, though: it has exactly one eigenvector, and one eigenvalue.
+ (Well, two, the zero-eigenvalue has a huge eigenspace).
+\end_layout
+
+\begin_layout Subsubsection
+Skew form on the Bernoulli shift
 \end_layout
 
 \begin_layout Standard
@@ -1505,7 +1532,7 @@ Unclear here is how
 \begin_inset Formula $SU\left(2\right)$
 \end_inset
 
- should act on the Bernmoulli shift.
+ should act on the Bernoulli shift.
  For the harmonic oscillator, one can hand-wave, since there are already
  complex numbers bubbling in the brew; for the Bernoulli shift, there is
  not.
@@ -1568,7 +1595,7 @@ noprefix "false"
 \begin_inset Formula $g\left(x\right)$
 \end_inset
 
- on the unit interval, then construct
+ on the unit interval, use it to construct twio copies:
 \begin_inset Formula 
 \[
 f\left(x\right)=\left[\mathcal{K}g\right]\left(x\right)=\begin{cases}
@@ -1615,7 +1642,11 @@ f\left(x\right)-\left[\mathcal{L}f\right]\left(2x+1\right) & \mbox{ for }1/2\le 
 
 \end_inset
 
-Can we find a spectrum, i,.e.
+Can we find a spectrum, 
+\emph on
+i.e.
+
+\emph default
  can we find solutions to 
 \begin_inset Formula $Hf=\lambda f$
 \end_inset
@@ -1661,11 +1692,221 @@ i.e.
 \end_inset
 
 .
- Thus, although manifestly 
-\begin_inset Formula $H\ne0$
+ This conclusion can only be evaded if 
+\begin_inset Formula $\lambda=1$
 \end_inset
 
-, it does not have a spectrum at all!
+; in this case, one has 
+\begin_inset Formula $Hf=f$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathcal{L}f=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Thus, the spectrum of 
+\begin_inset Formula $H$
+\end_inset
+
+ is a two-point spectrum, of 0 and 1.
+ We can double-check our work by limiting ourselves to square-integrable
+ functions, as below.
+\end_layout
+
+\begin_layout Subsubsection
+Skew form on Fourrier series
+\end_layout
+
+\begin_layout Standard
+Continuing as above, consider the skew form on Fourier series.
+ As before, take 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ to be the Fourrrier series from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fourier series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Again, 
+\begin_inset Formula $H=\mathcal{LK-KL}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{LK}=1$
+\end_inset
+
+; what is 
+\begin_inset Formula $\text{\ensuremath{\mathcal{KL}}}$
+\end_inset
+
+? It makes two copies of the average of both sides...
+ Repeating ourselves a bit; given 
+\begin_inset Formula 
+\[
+g\left(x\right)=\sum_{n=0}^{\infty}a_{n}\cos2\pi nx+b_{n}\sin2\pi nx
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\mathcal{K}g$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\left[\mathcal{K}g\right]\left(x\right)=\begin{cases}
+g\left(2x\right) & \mbox{ for }0\le x<1/2\\
+g\left(2x-1\right) & \mbox{ for }1/2\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+but that is just periodic:
+\begin_inset Formula 
+\[
+\left[\mathcal{K}g\right]\left(x\right)=\sum_{n=0}^{\infty}a_{n}\cos4\pi nx+b_{n}\sin4\pi nx
+\]
+
+\end_inset
+
+Thus, going back to eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fourier series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\left[\mathcal{KL}f\right]\left(x\right)=\sum_{n=0}^{\infty}a_{2n}\cos4\pi nx+b_{2n}\sin4\pi nx
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+\left[Hf\right]\left(x\right)=\sum_{n=0}^{\infty}\alpha_{n}\cos2\pi nx+\beta_{n}\sin2\pi nx
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+\alpha_{n}=\begin{cases}
+0 & \mbox{ for }n\mbox{ even}\\
+a_{n} & \mbox{ for }n\mbox{ odd}
+\end{cases}
+\]
+
+\end_inset
+
+and likewise for 
+\begin_inset Formula $\beta_{n}$
+\end_inset
+
+.
+ We conclude what we already know: 
+\begin_inset Formula $H$
+\end_inset
+
+ kills all functions that have even harmonics, it's the identity on those
+ with odd harmonics.
+ It's a projection, its a filter.
+ Unlike before, here we can say that 
+\begin_inset Formula $H$
+\end_inset
+
+ is the identity on 
+\begin_inset Quotes eld
+\end_inset
+
+half
+\begin_inset Quotes erd
+\end_inset
+
+ the space, and zero on 
+\begin_inset Quotes eld
+\end_inset
+
+half
+\begin_inset Quotes erd
+\end_inset
+
+ the space, and argue that it is literally 
+\begin_inset Quotes eld
+\end_inset
+
+half
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There's some temptation to write a short exact sequence
+\begin_inset Formula 
+\[
+0\to K\to F\to F/K\to0
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $F$
+\end_inset
+
+ being all Fourrier series, and 
+\begin_inset Formula $K$
+\end_inset
+
+ being Fourrier series with only even coefficients.
+ But I can't think of anything interesting to do with this.
+ It seems to be 
+\begin_inset Quotes eld
+\end_inset
+
+trivial
+\begin_inset Quotes erd
+\end_inset
+
+, because obviously 
+\begin_inset Formula $F=K\times O$
+\end_inset
+
+ with 
+\begin_inset Formula $O$
+\end_inset
+
+ the Fourrier series with odd coefficients.
+ The factorization is trivial.
+\end_layout
+
+\begin_layout Subsubsection
+Skew form conclusions
 \end_layout
 
 \begin_layout Standard
@@ -1677,11 +1918,12 @@ So the same skew form has given three radically different situations:
 \begin_inset Formula $H$
 \end_inset
 
- with a single, trivial eigenvector, and 
+ with a single, trivial eigenvector (and a huge kernel), and 
 \begin_inset Formula $H$
 \end_inset
 
- with no eigenvalues at all.
+ which is the identity on half the space, and zero on the other half of
+ the space.
 \end_layout
 
 \begin_layout Standard
