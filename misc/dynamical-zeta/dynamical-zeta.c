@@ -33,8 +33,14 @@ complex double dyn_zeta_bern(double x, double s)
 
 int main(int argc, char * argv[])
 {
-	double ess = 2.0;
-	int WIDTH = 100;
+	if (argc < 1)
+	{
+		fprintf(stderr, "Usage: %s ess\n", argv[0]);
+		exit(1);
+	}
+
+	double ess = atof(argv[1]);
+	int WIDTH = 1000;
 	printf("#\n# s=%g\n#\n", ess);
 	for (int i=0; i<WIDTH; i++)
 	{

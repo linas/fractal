@@ -1,0 +1,17 @@
+
+set term postscript eps color enhanced
+set out 'dzb.eps'
+
+# set term png small
+# set out 'dzb.png'
+
+set termoption enhanced
+set encoding utf8
+
+set title "Bernoulli Dynamical Zeta"
+set style data lines
+
+plot "dzb-2.0.dat" using 2:3 lw 2 title "Re {/Symbol z}(x;2)", \
+     "dzb-2.0.dat" using 2:4 lw 2 title "Im {/Symbol z}(x;2)", \
+     "dzb-3.0.dat" using 2:3 lw 2 title "Re {/Symbol z}(x;3)", \
+     "dzb-3.0.dat" using 2:4 lw 2 title "Im {/Symbol z}(x;3)"
