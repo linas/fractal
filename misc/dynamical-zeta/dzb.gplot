@@ -5,13 +5,16 @@ set out 'dzb.png'
 set termoption enhanced
 set encoding utf8
 
-set title "Bernoulli Dynamical Zeta"
+set title "Continued Frac Dynamical Zeta"
 set style data lines
 
 pi=3.14159265358979
 
-plot "dzb-2.0.dat" using 2:($3 - cos(2*pi*$2)) title "Re {/Symbol z}(x;2) - cos(2{/Symbol p}x)", \
-     "dzb-2.0.dat" using 2:($4 - sin(2*pi*$2)) title "Im {/Symbol z}(x;2) - sin(2{/Symbol p}x)"
+plot "dzc-2.0.dat" using 2:3 title "Re {/Symbol z}(x;2)", \
+     "dzc-2.0.dat" using 2:4 title "Im {/Symbol z}(x;2)"
+
+# plot "dzb-2.0.dat" using 2:($3 - cos(2*pi*$2)) title "Re {/Symbol z}(x;2) - cos(2{/Symbol p}x)", \
+#     "dzb-2.0.dat" using 2:($4 - sin(2*pi*$2)) title "Im {/Symbol z}(x;2) - sin(2{/Symbol p}x)"
 
 #######################################################
 # For the figure in the paper...
@@ -44,3 +47,18 @@ plot "dzb-2.0.dat" using 2:($3 - cos(2*pi*$2)) title "Re {/Symbol z}(x;2) - cos(
 # 
 # plot "dzb-2.0.dat" using 2:($3 - cos(2*pi*$2)) lw 2 title "Re {/Symbol z}(x;2) - cos(2{/Symbol p}x)", \
 #      "dzb-2.0.dat" using 2:($4 - sin(2*pi*$2)) lw 2 title "Im {/Symbol z}(x;2) - sin(2{/Symbol p}x)"
+#
+#######################################################
+# For the figure in the paper...
+# 
+set term postscript eps color enhanced
+set out 'dzc.eps'
+
+set termoption enhanced
+set encoding utf8
+
+set title "Continued Fraction Dynamical Zeta"
+set style data lines
+
+plot "dzc-2.0.dat" using 2:3 lw 2 title "Re {/Symbol z}(x;2)", \
+     "dzc-2.0.dat" using 2:4 lw 2 title "Im {/Symbol z}(x;2)"
