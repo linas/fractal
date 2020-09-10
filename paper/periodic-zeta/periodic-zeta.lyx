@@ -776,7 +776,8 @@ The periodic zeta is regained when
 Several obvious questions present themselves: is it factorizable (writeable
  as a product)? What does the reflection equation look like? That is, how
  does one perform a meromorphic continuation? What is the set of sequences
- that satisfy the equivalent of the RH?
+ that satisfy the equivalent of the RH? What is the analog of the Mobius
+ function?
 \end_layout
 
 \begin_layout Subsection
@@ -907,11 +908,155 @@ these are the Bernoulli polynomials
 \end_inset
 
  ...
- (give explicit eqn) and for 
+ (TODO: give explicit eqn) and for 
 \begin_inset Formula $\left|s\right|<1$
 \end_inset
 
  there are square-integrable functions, as given elsewhere.
+\end_layout
+
+\begin_layout Section
+Dynamical Zeta
+\end_layout
+
+\begin_layout Standard
+An earlier section proposes a dynamical zeta associated with a (typically
+ ergodic or chaotic) sequence 
+\begin_inset Formula $X=\left\{ x_{n}:0\le x_{n}\le1,n\in\mathbb{N}\right\} $
+\end_inset
+
+.
+ This dynamical zeta is of the form 
+\begin_inset Formula 
+\[
+\zeta\left(X;s\right)=\sum_{n=1}^{\infty}\frac{e^{2\pi ix_{n}}}{n^{s}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Bernoulli zeta
+\end_layout
+
+\begin_layout Standard
+The my seemingly inexhausble victim of an ergodic series s the Bernoulli
+ series.
+ So, fixing 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+, let 
+\begin_inset Formula $x_{n}=\left\lfloor 2^{n-1}x\right\rfloor =2^{n-1}x\mod1$
+\end_inset
+
+.
+ We may as well call the resulting zeta the Bernoulli zeta:
+\begin_inset Formula 
+\[
+\zeta_{B}\left(x;s\right)=\sum_{n=1}^{\infty}n^{-s}\exp2\pi i\left\lfloor 2^{n-1}x\right\rfloor 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first question is: is this a continuous function of 
+\begin_inset Formula $x$
+\end_inset
+
+? The quick answer is that it appears to be: for 
+\begin_inset Formula $x,y$
+\end_inset
+
+ close to each other, 
+\begin_inset Formula $\left|x-y\right|<2^{-m}$
+\end_inset
+
+ we have that the first 
+\begin_inset Formula $m$
+\end_inset
+
+ terms are identical and thus that 
+\begin_inset Formula 
+\[
+\left|\zeta_{B}\left(x;s\right)-\zeta_{B}\left(y;s\right)\right|<\sum_{n=m}^{\infty}n^{-s}\sim\frac{m^{-s+1}}{s-1}
+\]
+
+\end_inset
+
+which clearly gets small for 
+\begin_inset Formula $s>1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The next question: is it a differentiable function of 
+\begin_inset Formula $x$
+\end_inset
+
+? I think so ...
+ however, some work is needed to establish if it is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ (TODO: do this.).
+\end_layout
+
+\begin_layout Standard
+It is not an eigenfunction of the Bernoulli shift; one has
+\begin_inset Formula 
+\[
+\left[\mathcal{L}\zeta_{B}\right]\left(x;s\right)=\sum_{n=2}^{\infty}n^{-s}\exp2\pi i\left\lfloor 2^{n-2}x\right\rfloor =\zeta_{B}\left(\frac{x}{2};s\right)-e^{\pi ix}
+\]
+
+\end_inset
+
+which doesn't seem interesting.
+\end_layout
+
+\begin_layout Subsection
+Continued fraction zeta
+\end_layout
+
+\begin_layout Standard
+The other interesting series is, of course, the continued fraction sequence:
+ fixing 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+, let 
+\begin_inset Formula $x_{n}=h\left(x_{n-1}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $h\left(y\right)=\frac{1}{y}-\left\lfloor \frac{1}{y}\right\rfloor $
+\end_inset
+
+.
+ This sequence is the sequence of remainders of a continued fraction: let
+ 
+\begin_inset Formula $a_{n}=\left\lfloor 1/x_{n}\right\rfloor $
+\end_inset
+
+ then one has
+\begin_inset Formula 
+\[
+x=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}
+\]
+
+\end_inset
+
+The continued fraction series is another ergodic series, related to the
+ Bernoulli series via the Minkowski question mark function.
+ TODO give the explicit relationship...
+ cut an paste it from the long-forgotten papers...
 \end_layout
 
 \begin_layout Section
