@@ -750,7 +750,7 @@ periodic
 
 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Here, 
@@ -817,7 +817,7 @@ which produced the associated eigen-equation
 \end_inset
 
  a complex number.
- However, these manipulations are entirely formal; the same result holds
+ However, these manipulations are entirely analytic; the same result holds
  for 
 \begin_inset Formula $s\in\mathbb{H}$
 \end_inset
@@ -956,53 +956,44 @@ Exactly what the spectrum is, is not entirely clear.
 \end_inset
 
 .
- Perhaps it might be possible to analytically continue into the region 
+ It seems plausible that one should be able to analytically continue to
+ the region 
 \begin_inset Formula $r<1$
 \end_inset
 
- but the details of this may be daunting.
- There are no obvious branch points or other singularities, so analytic
- continuation should be possible, one might think.
- However, the polylogarithm is hiding in here, and the polylog does have
- branch-points at 
-\begin_inset Formula $x=0$
-\end_inset
-
- and 
-\begin_inset Formula $x=1$
-\end_inset
-
 .
- But that just means that the eigenfunctions might not be square-integrable
- at these end-points.
- The square-integrable eigenspectrum is worth understanding.
+ This proceedure seems to take only two steps:
+\end_layout
+
+\begin_layout Enumerate
+Write the 
+\begin_inset Quotes eld
+\end_inset
+
+reflection equation
+\begin_inset Quotes erd
+\end_inset
+
+ for the periodic zeta in terms of the Hurwitz zeta.
+ The reflection equation explicitly describes the 
+\begin_inset Formula $r<1$
+\end_inset
+
+ case.
+\end_layout
+
+\begin_layout Enumerate
+Next, note that the Hasse series for the Huritz zeta is entire in the complex
+ 
+\begin_inset Formula $s$
+\end_inset
+
+-plane.
 \end_layout
 
 \begin_layout Standard
-Suppose that the egeinfunctions can be extended to the 
-\begin_inset Formula $r=1/2$
-\end_inset
-
- line.
- The Riemann zeta zeros then ensure that 
-\begin_inset Formula $C\left(x;s\right)$
-\end_inset
-
- vanishes at the interval endpoints (by naive substitution of 
-\begin_inset Formula $x=0$
-\end_inset
-
- and 
-\begin_inset Formula $x=1$
-\end_inset
-
- into 
-\begin_inset Formula $C\left(x;s\right)$
-\end_inset
-
-.) Must be careful being naive - these endpoints also correspond to the branchpoi
-nts of the polylogarithm.
- This needs to be further clarified, via reference 
+I think that's all there's to it.
+ Details in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ve-Poly07"
@@ -1011,6 +1002,23 @@ literal "false"
 \end_inset
 
 .
+ The only remaining issue is that the periodic zeta is singular at all integer
+ values of 
+\begin_inset Formula $x$
+\end_inset
+
+; but this does not affect the complx 
+\begin_inset Formula $s$
+\end_inset
+
+-plane or the queternionic space.
+ But that just means that the eigenfunctions are not be square-integrable
+ (over 
+\begin_inset Formula $x$
+\end_inset
+
+) at these end-points.
+ The square-integrable eigenspectrum is worth understanding.
 \end_layout
 
 \begin_layout Standard
