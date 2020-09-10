@@ -151,12 +151,37 @@ provides a slightly more conveniant normalization.
 
 , it is not actually so, thus the scare quotes.
  The name comes from Tom Apostol's book on analytic number theory.
- The lack of actual periodicity comes from the fact that the value of 
-\begin_inset Formula $x=1$
+\end_layout
+
+\begin_layout Standard
+The lack of actual periodicity comes from the fact that all integer values
+ of 
+\begin_inset Formula $q$
 \end_inset
 
- corresponds to a branch-point of the polylogarithm.
- This is introduced in ref.
+ correspond to a branch-point of the polylogarithm.
+ That is, the zeta may be written as 
+\begin_inset Formula $F(q,s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\[
+\mbox{Li}_{s}\left(z\right)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}
+\]
+
+\end_inset
+
+is the polylogarithm.
+ The polylogarithm has two branch points: one at 
+\begin_inset Formula $z=0$
+\end_inset
+
+, and the other at 
+\begin_inset Formula $z=1$
+\end_inset
+
+, although the first branch-point does not appear on the principal sheet.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ve-Poly07"
@@ -164,7 +189,7 @@ literal "false"
 
 \end_inset
 
-; we hope to expand on this below.
+ This is explored a bit more, below.
 \end_layout
 
 \begin_layout Section
@@ -280,28 +305,41 @@ noprefix "false"
 \end_inset
 
 .
- To see that it is not actually so, observe that it is related to the polylogari
-thm as 
-\begin_inset Formula $F(q,s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
-\end_inset
-
-, where 
+ Instead, observe that 
 \begin_inset Formula 
 \[
-\mbox{Li}_{s}\left(z\right)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}
+\zeta\left(s,q+1\right)=\zeta\left(s,q\right)-q^{-s}
 \]
 
 \end_inset
 
-The polylogarithm has two branch points: one at 
-\begin_inset Formula $z=0$
+and
+\begin_inset Formula 
+\[
+\zeta\left(s,q-1\right)=\zeta\left(s,q\right)+\left(1-q\right)^{-s}
+\]
+
 \end_inset
 
-, and the other at 
-\begin_inset Formula $z=1$
+and so, using the reflection formula 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:reflection"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-, although this second branch-point does not appear on the principal sheet.
+ one gets 
+\begin_inset Formula 
+\[
+F\left(q+1;s\right)=F\left(q;s\right)-i\frac{\Gamma\left(1-s\right)}{\left(2\pi\right)^{1-s}}\left[\frac{e^{i\pi s/2}}{\left(1-q\right)^{1-s}}+\frac{e^{-i\pi s/2}}{q^{1-s}}\right]
+\]
+
+\end_inset
+
+The
 \end_layout
 
 \begin_layout Subsection
