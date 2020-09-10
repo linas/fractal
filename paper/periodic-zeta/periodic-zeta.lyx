@@ -112,6 +112,9 @@ Linas Vepstas
 
 \begin_layout Abstract
 A compendium of periodic-zeta facts.
+ This covers old territory, and clarifies a few minor points which I'd long
+ left vague.
+ Otherwise, there is nothing new here.
 \end_layout
 
 \begin_layout Section
@@ -135,7 +138,16 @@ F(q;s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}
 
 \end_inset
 
-Alternately,
+Although it appears to be periodic in 
+\begin_inset Formula $x$
+\end_inset
+
+ when looked at superficially, it is not actually so, thus the scare quotes.
+ The name comes from Tom Apostol's book on analytic number theory.
+\end_layout
+
+\begin_layout Standard
+A useful alternate normalization is
 \begin_inset Formula 
 \begin{align*}
 \beta\left(x;s\right)= & 2\Gamma\left(s+1\right)\sum_{n=1}^{\infty}\left(2\pi n\right)^{-s}\exp2\pi inx\\
@@ -144,13 +156,16 @@ Alternately,
 
 \end_inset
 
-provides a slightly more conveniant normalization.
- Although superficially, it appears to be periodic in 
-\begin_inset Formula $x$
+This form is nice because it reduces directly to the Bernoulli polynomials
+ 
+\begin_inset Formula $B_{m}\left(x\right)$
 \end_inset
 
-, it is not actually so, thus the scare quotes.
- The name comes from Tom Apostol's book on analytic number theory.
+ for 
+\begin_inset Formula $s=2^{-m}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -470,6 +485,118 @@ This shows that
 \end_layout
 
 \begin_layout Subsection
+Riemann zeros
+\end_layout
+
+\begin_layout Standard
+The discussion in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Poly07"
+literal "false"
+
+\end_inset
+
+ fails to clearly state that there are divergences at both ends.
+ It considers the value 
+\begin_inset Formula $s=\frac{1}{2}+i25$
+\end_inset
+
+ and clearly shows the oscillations in 
+\begin_inset Formula $q^{-s}=e^{i25\log q}/\sqrt{q}$
+\end_inset
+
+ as 
+\begin_inset Formula $q\to0$
+\end_inset
+
+.
+ There is also an oscillation 
+\begin_inset Formula $\left(1-q\right)^{-s}=e^{-i25\log\left(1-q\right)}/\sqrt{1-q}$
+\end_inset
+
+ as 
+\begin_inset Formula $q\to1$
+\end_inset
+
+.
+ It is not 
+\begin_inset Quotes eld
+\end_inset
+
+visible
+\begin_inset Quotes erd
+\end_inset
+
+ in the grah, because it is suppressed by a relative factor of 
+\begin_inset Formula $e^{-25\pi}$
+\end_inset
+
+ – its there, it just doesn't start blowing up until 
+\begin_inset Formula $q$
+\end_inset
+
+ gets much, much, much closer to 1.
+\end_layout
+
+\begin_layout Standard
+It's still sort-of bizarre to contemplate, though.
+ At the Riemann zero 
+\begin_inset Formula $s=\frac{1}{2}+i25.01085758014\cdots$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+F\left(q;\frac{1}{2}+i25.010857\cdots\right)=C\left(1-q\right)+\frac{De^{-25\pi}}{\sqrt{1-q}}+O\left(\left(1-q\right)^{2}\right)
+\]
+
+\end_inset
+
+for some constants 
+\begin_inset Formula $C,D$
+\end_inset
+
+ on the order of 1.
+ Lets do the math: the second term gets to be 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ when 
+\begin_inset Formula $\sqrt{1-q}\sim e^{-25\pi}$
+\end_inset
+
+, that is, when 
+\begin_inset Formula $1-q\sim e^{-50\pi}\approx6\times10^{-69}$
+\end_inset
+
+ which is the point where the oscillations become visible on a graph.
+ But, for the entire range of 
+\begin_inset Formula $0.99<q<1-10^{-23}$
+\end_inset
+
+ the first term was larger...
+ we had 
+\begin_inset Formula $F$
+\end_inset
+
+ approaching zero in a linear fashion.
+ The first and second terms become equal-sized when 
+\begin_inset Formula $\left(1-q\right)^{3/2}\approx e^{-25\pi}$
+\end_inset
+
+ or 
+\begin_inset Formula $1-q\approx2\times10^{-23}$
+\end_inset
+
+.
+ So, ...
+ just a hair before getting there, the square-root term has grown to become
+ the same size, and from that point on, it blows up and dominates.
+ Ouch!
+\end_layout
+
+\begin_layout Subsection
 Eigenfunction of the Bernoulli shift.
 \end_layout
 
@@ -479,7 +606,7 @@ Some highlights are presented below.
 \begin_inset Formula $\mathcal{L}$
 \end_inset
 
-be the Bernoulli shift, i.e.
+ be the Bernoulli shift, i.e.
  
 \begin_inset Formula 
 \[
@@ -557,18 +684,60 @@ i.e.
 \end_inset
 
  has a continuous spectrum over the entire complex plane.
+ Note that the shortened series 
+\begin_inset Formula $\eta$
+\end_inset
+
+ is NOT an eigenvector (its missing the first term, of course!)
 \end_layout
 
 \begin_layout Standard
-x
+It was clearly established that 
+\begin_inset Formula $\beta$
+\end_inset
+
+ has branch points at 
+\begin_inset Formula $x=0$
+\end_inset
+
+ and 
+\begin_inset Formula $x=1$
+\end_inset
+
+, due to the 
+\begin_inset Formula $q^{-s}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(1-q\right)^{-s}$
+\end_inset
+
+ terms.
+ So naively, one might think that none of these eigenfunctins are square-integra
+ble on the unit interval.
+ Yet, some are; and more, for 
+\begin_inset Formula $s=2^{-m},$
+\end_inset
+
+these are the Bernoulli polynomials 
+\begin_inset Formula $B_{m}\left(x\right)$
+\end_inset
+
+ ...
+ (give explicit eqn) and for 
+\begin_inset Formula $\left|s\right|<1$
+\end_inset
+
+ there are square-integrable functions, as given elsewhere.
+\end_layout
+
+\begin_layout Section
+The End
 \end_layout
 
 \begin_layout Standard
-x
-\end_layout
-
-\begin_layout Standard
-x
+We've done nothing other than cover old territory, and clarify a few previously
+ vague points.
 \end_layout
 
 \begin_layout Standard
