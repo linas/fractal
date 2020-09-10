@@ -316,7 +316,7 @@ noprefix "false"
 and
 \begin_inset Formula 
 \[
-\zeta\left(s,q-1\right)=\zeta\left(s,q\right)+\left(1-q\right)^{-s}
+\zeta\left(s,-q\right)=\zeta\left(s,1-q\right)+\left(-q\right)^{-s}
 \]
 
 \end_inset
@@ -334,12 +334,116 @@ noprefix "false"
  one gets 
 \begin_inset Formula 
 \[
-F\left(q+1;s\right)=F\left(q;s\right)-i\frac{\Gamma\left(1-s\right)}{\left(2\pi\right)^{1-s}}\left[\frac{e^{i\pi s/2}}{\left(1-q\right)^{1-s}}+\frac{e^{-i\pi s/2}}{q^{1-s}}\right]
+F\left(q+1;1-s\right)=F\left(q;1-s\right)+\frac{\Gamma\left(s\right)}{\left(2\pi q\right)^{s}}e^{i\pi s/2}\left[e^{-i2\pi s}-1\right]
 \]
 
 \end_inset
 
-The
+There is an obvious singularity at 
+\begin_inset Formula $q=0$
+\end_inset
+
+ in this expression.
+ This can be a bit confusing, as 
+\begin_inset Formula $F\left(q;s\right)$
+\end_inset
+
+ itself has a singularity there.
+ This is best exposed.
+ Write 
+\begin_inset Formula 
+\[
+\eta\left(s,q\right)=\zeta\left(s,q\right)-\frac{1}{q^{s}}=\zeta\left(s,q+1\right)=\sum_{n=1}^{\infty}\frac{1}{(n+q)^{s}}
+\]
+
+\end_inset
+
+In this form, 
+\begin_inset Formula $\eta\left(s,q\right)$
+\end_inset
+
+ appears to have no singularities for 
+\begin_inset Formula $-1<\Re q$
+\end_inset
+
+ and in particular appears to be 
+\begin_inset Quotes eld
+\end_inset
+
+safe
+\begin_inset Quotes erd
+\end_inset
+
+ on 
+\begin_inset Formula $0\le\Re q\le1$
+\end_inset
+
+.
+ In terms of 
+\begin_inset Formula $\eta$
+\end_inset
+
+, the reflection equation becomes
+\begin_inset Formula 
+\[
+F(q;1-s)=G(q;1-s)+\frac{\Gamma(s)}{(2\pi)^{s}}\left[\frac{e^{i\pi s/2}}{q^{s}}+\frac{e^{-i\pi s/2}}{\left(1-q\right)^{s}}\right]
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+G(q;1-s)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{i\pi s/2}\eta(s,q)+e^{-i\pi s/2}\eta(s,1-q)\right]
+\]
+
+\end_inset
+
+is free of singularities at both 
+\begin_inset Formula $q=0$
+\end_inset
+
+ and 
+\begin_inset Formula $q=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The corresponding shifts are 
+\begin_inset Formula 
+\[
+\eta\left(s,q+1\right)=\eta\left(s,q\right)-\frac{1}{\left(1+q\right)^{s}}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\eta\left(s,1-\left(q+1\right)\right)=\eta\left(s,-q\right)=\eta\left(s,1-q\right)+\frac{1}{\left(1-q\right)^{s}}
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+G(q+1;1-s)=G(q;1-s)+\frac{\Gamma(s)}{(2\pi)^{s}}\left[\frac{e^{-i\pi s/2}}{\left(1-q\right)^{s}}-\frac{e^{i\pi s/2}}{\left(1+q\right)^{s}}\right]
+\]
+
+\end_inset
+
+This shows that 
+\begin_inset Formula $G\left(q;1-s\right)$
+\end_inset
+
+ is singular at 
+\begin_inset Formula $q=2$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
