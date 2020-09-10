@@ -12,14 +12,34 @@
  * Linas Vepstas September 2020
  */
 
+#include <complex.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-double dyn_zeta_bern(double x, double s)
+complex double dyn_zeta_bern(double x, double s)
 {
-	double sum = 0.0;
+	complex double sum = 0.0;
 	for (int n=1; n<56; n++)
 	{
-		double term = pow (n, s);
+		double term = pow (n, -s);
+		complex double clock = cexp( 2.0* M_PI * I * x);
+		sum += term * clock;
+		x = 2*x;
+		if (1.0 < x) x -= 1.0;	
 	}
 	return sum;
+}
+
+int main(int argc, char * argv[])
+{
+	double ess = 2.0;
+	int WIDTH = 100;
+	printf("#\n# s=%g\n#\n", ess);
+	for (int i=0; i<WIDTH; i++)
+	{
+		double x = ((double) i) / (double) WIDTH;
+		complex double y = dyn_zeta_bern(x, ess);
+		printf("%d	%g	%g	%g\n", i, x, creal(y), cimag(y));
+	}
 }
