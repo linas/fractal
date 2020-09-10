@@ -1,9 +1,6 @@
 
-set term postscript eps color enhanced
-set out 'dzb.eps'
-
-# set term png small
-# set out 'dzb.png'
+set term png small
+set out 'dzb.png'
 
 set termoption enhanced
 set encoding utf8
@@ -11,7 +8,39 @@ set encoding utf8
 set title "Bernoulli Dynamical Zeta"
 set style data lines
 
-plot "dzb-2.0.dat" using 2:3 lw 2 title "Re {/Symbol z}(x;2)", \
-     "dzb-2.0.dat" using 2:4 lw 2 title "Im {/Symbol z}(x;2)", \
-     "dzb-3.0.dat" using 2:3 lw 2 title "Re {/Symbol z}(x;3)", \
-     "dzb-3.0.dat" using 2:4 lw 2 title "Im {/Symbol z}(x;3)"
+pi=3.14159265358979
+
+plot "dzb-2.0.dat" using 2:($3 - cos(2*pi*$2)) title "Re {/Symbol z}(x;2) - cos(2{/Symbol p}x)", \
+     "dzb-2.0.dat" using 2:($4 - sin(2*pi*$2)) title "Im {/Symbol z}(x;2) - sin(2{/Symbol p}x)"
+
+#######################################################
+# For the figure in the paper...
+# 
+# set term postscript eps color enhanced
+# set out 'dzb.eps'
+# 
+# set termoption enhanced
+# set encoding utf8
+# 
+# set title "Bernoulli Dynamical Zeta"
+# set style data lines
+# 
+# plot "dzb-2.0.dat" using 2:3 lw 2 title "Re {/Symbol z}(x;2)", \
+#      "dzb-2.0.dat" using 2:4 lw 2 title "Im {/Symbol z}(x;2)", \
+#      "dzb-3.0.dat" using 2:3 lw 2 title "Re {/Symbol z}(x;3)", \
+#      "dzb-3.0.dat" using 2:4 lw 2 title "Im {/Symbol z}(x;3)"
+#
+#######################################################
+# For the figure in the paper...
+# 
+# set term postscript eps color enhanced
+# set out 'dzb-residual.eps'
+# 
+# set termoption enhanced
+# set encoding utf8
+# 
+# set title "Bernoulli Dynamical Zeta"
+# set style data lines
+# 
+# plot "dzb-2.0.dat" using 2:($3 - cos(2*pi*$2)) lw 2 title "Re {/Symbol z}(x;2) - cos(2{/Symbol p}x)", \
+#      "dzb-2.0.dat" using 2:($4 - sin(2*pi*$2)) lw 2 title "Im {/Symbol z}(x;2) - sin(2{/Symbol p}x)"
