@@ -934,7 +934,29 @@ An earlier section proposes a dynamical zeta associated with a (typically
 
 \end_inset
 
+Closely related would be the corresponding extension of the polylogarithm
+ to
+\begin_inset Formula 
+\[
+\mbox{Li}_{s}\left(X\right)=\sum_{n=1}^{\infty}\frac{x_{n}}{n^{s}}
+\]
 
+\end_inset
+
+where 
+\begin_inset Formula $X=\left\{ x_{n}:x_{n}\in\mathbb{C},n\in\mathbb{N}\right\} $
+\end_inset
+
+.
+ The former is obtained when the points 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ are constrained to lie on the circle 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -1138,6 +1160,91 @@ Writing it out takes some effort: there are two distinct shifts that have
  This is in contrast to the periodic zeta, where the two shifts live together
  in a more harmonius fashion (which is why the periodic zeta is an eigenfunction
  of the Bernoulli operator, while these others are not.)
+\end_layout
+
+\begin_layout Subsection
+Weak topology
+\end_layout
+
+\begin_layout Standard
+The dynamical zeta was defined on a sequence of points 
+\begin_inset Formula $X=\left\{ x_{n}:0\le x_{n}\le1,n\in\mathbb{N}\right\} $
+\end_inset
+
+.
+ But where does that sequence live? Clearly, in the infinite-dimensional
+ unit cube: 
+\begin_inset Formula $X\in\left[0,1\right]^{\omega}$
+\end_inset
+
+.
+ The standard topology on the unit cube is the weak topology; the open sets
+ are the cylinder sets.
+ These are the sets where only a finite number of locations aren't the entire
+ unit interval.
+\end_layout
+
+\begin_layout Standard
+To quickly recap: the basis for the weak topology is given by the sets 
+\begin_inset Formula 
+\[
+U\left(a,b;n\right)=\left[0,1\right]^{n}\times\left(a,b\right)\times\left[0,1\right]^{\omega}
+\]
+
+\end_inset
+
+and the toplogy itself consists of the finite intersection (and countable
+ union) of such sets.
+\end_layout
+
+\begin_layout Standard
+The dynamical zeta can be defined on this topology as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\zeta\left(U\left(a,b;n\right);s\right)=n^{-s}\int_{a}^{b}e^{2\pi iy}dy=\frac{e^{2\pi ib}-e^{2\pi ia}}{2\pi in^{s}}
+\]
+
+\end_inset
+
+It has a handful of vaguely sigma-additive-like properties on the complement:
+ for 
+\begin_inset Formula $V=U\left(a,b;n\right)\cap U\left(c,d;m\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $n\ne m$
+\end_inset
+
+, then clearly 
+\begin_inset Formula $\zeta\left(V\right)=\zeta\left(U\left(a,b;n\right)\right)+\zeta\left(U\left(c,d;m\right)\right)$
+\end_inset
+
+ which is the 
+\begin_inset Quotes eld
+\end_inset
+
+opposite
+\begin_inset Quotes erd
+\end_inset
+
+ of the usual sigma additivity.
+ On the whole space, one has 
+\begin_inset Formula $\zeta\left(\left[0,1\right]^{\omega}\right)=0$
+\end_inset
+
+.
+ In a rought sense, it seems that the zeta is a complex-valued 
+\begin_inset Quotes eld
+\end_inset
+
+measure
+\begin_inset Quotes erd
+\end_inset
+
+ on the complement of the weak topology.
 \end_layout
 
 \begin_layout Section
