@@ -66,7 +66,7 @@ double orn_increment(double x)
 		if (done)
 		{
 			double mu = 0.5;
-			if (1.0 < bit) mu /= ((double) i+1);
+			if (1.0 <= bit) mu /= ((double) i+1);
 			result += mu * bit * fact;
 		}
 		else
@@ -75,7 +75,9 @@ double orn_increment(double x)
 			{
 				// Apply the measure after the xform, not before.
 				// I think that's what we want!?
-				double mu = 1.0 / ((double) i+1);
+				// double mu = 1.0 / ((double) i+1);
+			double mu = 0.5;
+			if (1.0 <= bit) mu /= ((double) i+1);
 				result += mu * (bit + 1.0) * fact;
 				done = true;
 			}
@@ -93,6 +95,30 @@ double orn_increment(double x)
 	return result;
 }
 
+/*
+ * sanity check.
+ */
+double orn_meas(double x)
+{
+	double result = 0.0;
+	double fact = 1.0;
+
+	// factorial(19) is just a little bigger than 2^56
+	for (int i=0; i<19; i++)
+	{
+		double bit = floor (x * (i+2));
+		double mu = 0.5;
+		if (1.0 <= bit) mu /= ((double) i+1);
+		result += mu * bit * fact;
+
+		x *= (double) i+2;
+		x -= floor(x);
+		fact /= i+2;
+	}
+
+	return result;
+}
+
 int main (int argc, char* argv[])
 {
 	int nbins=901;
@@ -100,7 +126,8 @@ int main (int argc, char* argv[])
 	for (int i=0; i<nbins; i++)
 	{
 		double x = ((double) i) / ((double) nbins);
-		double y = orn_increment(x);
+		// double y = orn_increment(x);
+		double y = orn_meas(x);
 		double y2 = orn_increment(y);
 		double y3 = orn_increment(y2);
 		double y4 = orn_increment(y3);
