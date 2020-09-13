@@ -121,12 +121,84 @@ Bernoulli odometer
 
 \begin_layout Standard
 As usual: the Bernoulli space 
-\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\begin_inset Formula $B=\left\{ 0,1\right\} ^{\omega}$
 \end_inset
 
  endowed with the weak product topology and thus a Borel space with the
  usual Borel measure.
  The odometer is the transition function that increments by one...
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $b=\left(b_{k}\right)=\left(b_{0},b_{1},\cdots\right)\in B$
+\end_inset
+
+ be a string of bits.
+ Let 
+\begin_inset Formula $l\left(b\right)$
+\end_inset
+
+ be the index of the first bit that is not one.
+ Then define the transition function 
+\begin_inset Formula $T:B\to B$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+\left[T\left(b\right)\right]_{k}=\begin{cases}
+0 & \mbox{ if }k<l\left(b\right)\\
+1 & \mbox{ if }k=l\left(b\right)\\
+b_{k} & \mbox{ if }k>l\left(b\right)
+\end{cases}
+\]
+
+\end_inset
+
+This can be visualized in the usual fashion.
+ Let binary strings be represented by real numbers as
+\begin_inset Formula 
+\[
+x\left(b\right)=\sum_{k=0}^{\infty}b_{k}2^{-k-1}
+\]
+
+\end_inset
+
+This mapping is surjective, not injective, as every dyadic ratonal comes
+ from two distinct strings.
+ But, as usual we ignore the difference; the set of dyadic rationals is
+ of measure zero, and we write 
+\begin_inset Formula $x^{-1}$
+\end_inset
+
+ in a care-free manner.
+ This is adequate for visualization.
+ In particular, this allows 
+\begin_inset Formula $T:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ to be defined as 
+\begin_inset Formula $T=x\circ T\circ x^{-1}$
+\end_inset
+
+.
+ This is shown in the figure below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename bernoulli-odo.eps
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, obvious questions include...
 \end_layout
 
 \end_body
