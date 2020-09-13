@@ -98,7 +98,7 @@ double orn_increment(double x)
 /*
  * sanity check.
  */
-double orn_meas(double x)
+double orn_measure(double x)
 {
 	double result = 0.0;
 	double fact = 1.0;
@@ -119,18 +119,33 @@ double orn_meas(double x)
 	return result;
 }
 
+/* ultra cheesy inverse */
+double orn_invert(double x)
+{
+	for (double y=0.0; y< 1.0; y+= 5e-4)
+	{
+		double z = orn_measure(y);
+		if (x < z) return y;
+	}
+	return 1.0;
+}
+
 int main (int argc, char* argv[])
 {
 	int nbins=901;
 
-	for (int i=0; i<nbins; i++)
+	for (int i=0; i<=nbins; i++)
 	{
 		double x = ((double) i) / ((double) nbins);
-		// double y = orn_increment(x);
-		double y = orn_meas(x);
+		// double y = orn_measure(x);
+		double y = orn_increment(x);
+		y = orn_invert(y);
 		double y2 = orn_increment(y);
+		y2 = orn_invert(y2);
 		double y3 = orn_increment(y2);
+		y3 = orn_invert(y3);
 		double y4 = orn_increment(y3);
+		y4 = orn_invert(y4);
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, y2, y3, y4);
 	}
 }
