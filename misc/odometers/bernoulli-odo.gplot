@@ -5,17 +5,28 @@ set out 'bernoulli-odo.png'
 set title "Bernoulli Odometer"
 set style data lines
 
-plot "bernoulli-odo.dat" using 2:3 title ""
+plot "bernoulli-odo.dat" using 2:4 title "2 ", \
+     "bernoulli-odo.dat" using 2:5 title "3 ", \
+     "bernoulli-odo.dat" using 2:6 title "4 "
 
 
 #######################################################
 # For the figure in the paper...
 # 
+# set term postscript eps color enhanced
+# set out 'bernoulli-odo.eps'
+# 
+# set title "Bernoulli Odometer"
+# set style data lines
+# 
+# plot "bernoulli-odo.dat" using 2:3 title ""
+
 set term postscript eps color enhanced
-set out 'bernoulli-odo.eps'
+set out 'bodo2.eps'
+plot "bernoulli-odo.dat" using 2:4 title ""
 
-set title "Bernoulli Odometer"
-set style data lines
+set out 'bodo3.eps'
+plot "bernoulli-odo.dat" using 2:5 title ""
 
-plot "bernoulli-odo.dat" using 2:3 title ""
-
+set out 'bodo4.eps'
+plot "bernoulli-odo.dat" using 2:6 title ""

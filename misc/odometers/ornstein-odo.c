@@ -1,7 +1,7 @@
 /*
- * bernoulli-odo.c
+ * ornstein-odo.c
  *
- * Bernoulli odometer
+ * Ornstein odometer
  *
  * Linas Vepstas September 2020
  */
@@ -14,23 +14,25 @@
  * Unpack the double-precision float into a string of bits,
  * increment, and re-pack into a double.
  */
-double bern_increment(double x)
+double orn_increment(double x)
 {
 	double result = 0.0;
-	double bit = 0.5;
+	double fact = 0.5;
 	bool done = false;
 
-	for (int i=0; i<56; i++)
+	// factorial(19) is just a little bigger than 2^56
+	for (int i=0; i<19; i++)
 	{
+		double bit = floor (x * (i+2));
 		if (done)
 		{
-			if (0.5 <= x) result += bit;
+			result += bit * fact;
 		}
 		else
 		{
-			if (x < 0.5)
+			if (bit < i+1)
 			{
-				result += bit;
+				result += (bit + 1.0) * fact;
 				done = true;
 			}
 			else
@@ -39,9 +41,9 @@ double bern_increment(double x)
 			}
 		}
 
-		x *= 2.0;
-		if (1.0 <= x) x -= 1.0;
-		bit *= 0.5;
+		x *= (double) i+2;
+		x = floor(x);
+		fact /= i+3;
 	}
 
 	return result;
@@ -54,10 +56,10 @@ int main (int argc, char* argv[])
 	for (int i=0; i<nbins; i++)
 	{
 		double x = ((double) i) / ((double) nbins);
-		double y = bern_increment(x);
-		double y2 = bern_increment(y);
-		double y3 = bern_increment(y2);
-		double y4 = bern_increment(y3);
+		double y = orn_increment(x);
+		double y2 = orn_increment(y);
+		double y3 = orn_increment(y2);
+		double y4 = orn_increment(y3);
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, y2, y3, y4);
 	}
 }
