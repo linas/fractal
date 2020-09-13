@@ -1,0 +1,29 @@
+
+set term png small
+set out 'ornstein-odo.png'
+
+set title "Uniform Ornstein Odometer"
+set style data lines
+
+plot "ornstein-odo.dat" using 2:3 title ""
+
+
+#######################################################
+# For the figure in the paper...
+# 
+set term postscript eps color enhanced
+set out 'ornstein-odo.eps'
+# 
+# set title "Uniform Ornstein Odometer"
+# set style data lines
+# 
+plot "ornstein-odo.dat" using 2:3 title ""
+
+set out 'oodo2.eps'
+plot "ornstein-odo.dat" using 2:4 title ""
+
+set out 'oodo3.eps'
+plot "ornstein-odo.dat" using 2:5 title ""
+
+set out 'oodo4.eps'
+plot "ornstein-odo.dat" using 2:6 title ""

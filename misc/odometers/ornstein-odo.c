@@ -42,7 +42,7 @@ double orn_increment(double x)
 		}
 
 		x *= (double) i+2;
-		x = floor(x);
+		x -= floor(x);
 		fact /= i+3;
 	}
 
