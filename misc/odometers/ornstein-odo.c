@@ -10,11 +10,12 @@
 #include <math.h>
 #include <stdio.h>
 
-/* increment the odometer by one.
+/* Uniform Ornstein odometer.
+ * Increment the odometer by one.
  * Unpack the double-precision float into a string of bits,
  * increment, and re-pack into a double.
  */
-double orn_increment(double x)
+double uni_orn_increment(double x)
 {
 	double result = 0.0;
 	double fact = 0.5;
@@ -44,6 +45,49 @@ double orn_increment(double x)
 		x *= (double) i+2;
 		x -= floor(x);
 		fact /= i+3;
+	}
+
+	return result;
+}
+
+/*
+ * Like above, but with Ornsteins non-uniform measure.
+ */
+double orn_increment(double x)
+{
+	double result = 0.0;
+	double fact = 1.0;
+	bool done = false;
+
+	// factorial(19) is just a little bigger than 2^56
+	for (int i=0; i<19; i++)
+	{
+		double bit = floor (x * (i+2));
+		if (done)
+		{
+			double mu = 0.5;
+			if (1.0 < bit) mu /= ((double) i+1);
+			result += mu * bit * fact;
+		}
+		else
+		{
+			if (bit < i+1)
+			{
+				// Apply the measure after the xform, not before.
+				// I think that's what we want!?
+				double mu = 1.0 / ((double) i+1);
+				result += mu * (bit + 1.0) * fact;
+				done = true;
+			}
+			else
+			{
+				/* do nothing here; this rolls over */
+			}
+		}
+
+		x *= (double) i+2;
+		x -= floor(x);
+		fact /= i+2;
 	}
 
 	return result;
