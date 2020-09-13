@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /* Uniform Ornstein odometer.
  * Increment the odometer by one.
@@ -75,9 +76,7 @@ double orn_increment(double x)
 			{
 				// Apply the measure after the xform, not before.
 				// I think that's what we want!?
-				// double mu = 1.0 / ((double) i+1);
-			double mu = 0.5;
-			if (1.0 <= bit) mu /= ((double) i+1);
+				double mu = 1.0 / ((double) i+1);
 				result += mu * (bit + 1.0) * fact;
 				done = true;
 			}
@@ -96,7 +95,7 @@ double orn_increment(double x)
 }
 
 /*
- * sanity check.
+ * Compute the cumulative ornstein measure.
  */
 double orn_measure(double x)
 {
@@ -106,10 +105,12 @@ double orn_measure(double x)
 	// factorial(19) is just a little bigger than 2^56
 	for (int i=0; i<19; i++)
 	{
-		double bit = floor (x * (i+2));
-		double mu = 0.5;
-		if (1.0 <= bit) mu /= ((double) i+1);
-		result += mu * bit * fact;
+		int bit = (int) floor (x * (i+2));
+		double term = 0.0;
+		if (0 < bit) term += 0.5;
+		if (1 < bit) term += (bit-1) * 0.5 / ((double) i+2);
+
+		result += term * fact;
 
 		x *= (double) i+2;
 		x -= floor(x);
@@ -137,15 +138,11 @@ int main (int argc, char* argv[])
 	for (int i=0; i<=nbins; i++)
 	{
 		double x = ((double) i) / ((double) nbins);
-		// double y = orn_measure(x);
-		double y = orn_increment(x);
-		y = orn_invert(y);
+		double y = orn_measure(x);
+		// double y = orn_increment(x);
 		double y2 = orn_increment(y);
-		y2 = orn_invert(y2);
 		double y3 = orn_increment(y2);
-		y3 = orn_invert(y3);
 		double y4 = orn_increment(y3);
-		y4 = orn_invert(y4);
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, y2, y3, y4);
 	}
 }
