@@ -108,11 +108,11 @@ double orn_measure(double x)
 		int bit = (int) floor (x * (i+2));
 		double term = 0.0;
 		if (0 < bit) term = 0.5;
-		if (1 < bit) term += bit * 0.5 / ((double) i+2);
+		if (1 < bit) term += (bit-1) * 0.5 / ((double) i+1);
 
 		result += term * fact;
 
-#if 0
+#if 1
 		printf("i=%d x=%g bit=%d term=%g fact=%g result=%g\n",
 			i, x, bit, term, 1.0/fact, result);
 #endif
@@ -140,7 +140,7 @@ int main (int argc, char* argv[])
 {
 	int nbins=901;
 
-#if 0
+#if 1
 	double x;
 	x = atof (argv[1]);
 	printf("Start x=%g\n", x);
