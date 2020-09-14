@@ -103,9 +103,10 @@ double orn_measure(double x)
 	double fact = 0.5;
 
 	// factorial(19) is just a little bigger than 2^56
-	for (int i=0; i<9; i++)
+	for (int i=0; i<19; i++)
 	{
 		int bit = (int) floor (x * (i+2));
+		if (0 == i && 0 < bit) fact *= 2.0;
 		double term = 0.0;
 		if (0 < bit) term = 0.5;
 		if (1 < bit) term += (bit-1) * 0.5 / ((double) i+1);
@@ -139,7 +140,7 @@ double orn_invert(double x)
 
 int main (int argc, char* argv[])
 {
-	int nbins=901;
+	int nbins=1101;
 
 #if 0
 	double x;
@@ -153,10 +154,13 @@ exit(1);
 	{
 		double x = ((double) i) / ((double) nbins);
 		double y = orn_measure(x);
-		// double y = orn_increment(x);
+		printf("%d	%g	%g\n", i, x, y);
+#if 0
+		double y = orn_increment(x);
 		double y2 = orn_increment(y);
 		double y3 = orn_increment(y2);
 		double y4 = orn_increment(y3);
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, y2, y3, y4);
+#endif
 	}
 }

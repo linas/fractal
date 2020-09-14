@@ -6,25 +6,37 @@ set title "Uniform Ornstein Odometer"
 set style data lines
 
 plot "ornstein-odo.dat" using 2:3 title "", \
-"ornstein-odo.dat" using 2:2 
+     "ornstein-odo.dat" using 2:2  title ""
 
 
 #######################################################
 # For the figure in the paper...
 # 
+set term postscript eps color enhanced
+set out 'orn-measure.eps'
+
+set title "Ornstein Measure"
+set style data lines
+
+plot "orn-measure.dat" using 2:3 lw 2 title "", \
+     "orn-measure.dat" using 2:2 title ""
+# 
+#######################################################
+# For the figure in the paper...
+# 
 # set term postscript eps color enhanced
-# set out 'ornstein-odo.eps'
+# set out 'uni-orn-odo.eps'
 # 
 # set title "Uniform Ornstein Odometer"
 # set style data lines
 # 
 # plot "ornstein-odo.dat" using 2:3 title ""
 # 
-# set out 'oodo2.eps'
+# set out 'uni-odo2.eps'
 # plot "ornstein-odo.dat" using 2:4 title ""
 # 
-# set out 'oodo3.eps'
+# set out 'uni-odo3.eps'
 # plot "ornstein-odo.dat" using 2:5 title ""
 # 
-# set out 'oodo4.eps'
+# set out 'uni-odo4.eps'
 # plot "ornstein-odo.dat" using 2:6 title ""
