@@ -96,32 +96,38 @@ double orn_increment(double x)
 
 /*
  * Compute the cumulative ornstein measure.
+ * XXX Except this is wrong.... its close in some ways, but I am
+ * integrating incorrectly and I have wsted too much time on this.
+ * And I'm not sure of what the point of getting it right is,
+ * except to draw a pretty picture!?
+ * graphing the derivative could be interesting, too...
  */
 double orn_measure(double x)
 {
 	double result = 0.0;
-	double fact = 0.5;
+	double fact = 1.0;
 
 	// factorial(19) is just a little bigger than 2^56
-	for (int i=0; i<19; i++)
+	for (int i=0; i<9; i++)
 	{
 		int bit = (int) floor (x * (i+2));
-		if (0 == i && 0 < bit) fact *= 2.0;
 		double term = 0.0;
 		if (0 < bit) term = 0.5;
 		if (1 < bit) term += (bit-1) * 0.5 / ((double) i+1);
 
 		result += term * fact;
 
-#if 0
-		printf("i=%d x=%g bit=%d term=%g fact=%g result=%g\n",
-			i, x, bit, term, 1.0/fact, result);
+		double gap = 0.5;
+		if (1 < bit) gap = 0.5 / ((double) i+1);
+#if 1
+		printf("i=%d x=%g bit=%d term=%g gap=%g fact=%g result=%g\n",
+			i, x, bit, term, 1.0/gap, 1.0/fact, result);
 #endif
+
 
 		x *= (double) i+2;
 		x -= floor(x);
-		fact *= 1.0 / ((double) i+1);
-		if (0 < bit) fact *= 0.5;
+		fact *= gap;
 	}
 
 	return result;
@@ -142,7 +148,7 @@ int main (int argc, char* argv[])
 {
 	int nbins=1101;
 
-#if 0
+#if 1
 	double x;
 	x = atof (argv[1]);
 	printf("Start x=%g\n", x);
