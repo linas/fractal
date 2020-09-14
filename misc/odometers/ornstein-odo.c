@@ -103,7 +103,7 @@ double orn_measure(double x)
 	double fact = 1.0;
 
 	// factorial(19) is just a little bigger than 2^56
-	for (int i=0; i<19; i++)
+	for (int i=0; i<9; i++)
 	{
 		int bit = (int) floor (x * (i+2));
 		double term = 0.0;
@@ -119,7 +119,7 @@ double orn_measure(double x)
 
 		x *= (double) i+2;
 		x -= floor(x);
-		fact /= i+2;
+		fact *= 0.5 / ((double) i+1);
 	}
 
 	return result;
