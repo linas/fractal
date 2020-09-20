@@ -50,8 +50,9 @@ double bern_increment(double x)
 int main (int argc, char* argv[])
 {
 	int nbins=901;
+nbins=1024;
 
-	for (int i=0; i<nbins; i++)
+	for (int i=0; i<=nbins; i++)
 	{
 		double x = ((double) i) / ((double) nbins);
 		double y = bern_increment(x);
