@@ -6,8 +6,9 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
-LAPACK=/usr/lib/liblapacke.a /usr/lib/lapack/liblapack.a \
-       /usr/lib/libblas/libblas.a \
+LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
+       /usr/lib/x86_64-linux-gnu/liblapack.a \
+       /usr/lib/x86_64-linux-gnu/blas/libblas.a \
        /usr/lib/gcc/x86_64-linux-gnu/6/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
@@ -17,7 +18,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
-	alldisk betadisk momenta
+	alldisk betadisk momenta sidorov
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -76,6 +77,7 @@ subdiag.o: subdiag.C psi.c psibig.c
 beta.o: beta.c
 witt.o: witt.c
 betadisk.o: betadisk.C psibig.c
+sidorov.o: sidorov.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
@@ -130,3 +132,4 @@ almost: almost.o
 alldisk: alldisk.o $(BRAT)
 betadisk: betadisk.o $(BRAT)
 momenta: momenta.o $(BRAT)
+sidorov: sidorov.o
