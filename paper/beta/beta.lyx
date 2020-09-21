@@ -135,7 +135,7 @@ The beta transformation defines a subshift: iterated on the unit interval,
 \end_layout
 
 \begin_layout Abstract
-This work reviews assorted general properties, and then focuses primarily
+This text reviews assorted general properties, and then focuses primarily
  on the transfer operator (the Ruelle–Frobenius–Perron operator) and it's
  spectrum.
  Discrete eigenvalues seem to lie on a circle of radius 
@@ -152,6 +152,13 @@ This work reviews assorted general properties, and then focuses primarily
 etc.
 \emph default
 ) numbers.
+\end_layout
+
+\begin_layout Abstract
+This text does not assume much mathematical sophistication on the part of
+ the reader, and should be approachable by those with minimal or no prior
+ experience in ergodic theory.
+ Most of the development is casual.
 \end_layout
 
 \begin_layout Section
@@ -854,8 +861,7 @@ reference "eq:bernoulli-bits"
 
 \end_inset
 
- gives the Bernoulli shift.
- Explicitly, one has 
+ gives the Bernoulli shift: 
 \begin_inset Formula $T_{2}\left(x\right)=b\left(x\right)$
 \end_inset
 
@@ -929,12 +935,12 @@ Since the
 \begin_inset Formula $x$
 \end_inset
 
-, and are discontinuous functions of 
+, and are piece-wise discontinuous functions of 
 \begin_inset Formula $x$
 \end_inset
 
-, this is not a true polynomial; however, the representation will be useful,
- later.
+, this is not a true polynomial; however, this polynomial-like representation
+ will be useful, later.
  
 \end_layout
 
@@ -1442,14 +1448,14 @@ interesting
 , indicated by the column of red pixels on the left side of the image.
  The lines forming the fan shape are not actually straight, they only seem
  to be; in fact, they have a slight curve.
- This means that one cannot apply simple-minded guess-work to discover the
- overall diagram shown here.
+ This implies that one cannot apply simple-minded guess-work to discover
+ the overall structure shown here.
  
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 created with fractal/misc/bitops/bigbern.C 800 800 1360 0.5 0.5 1 
@@ -1513,7 +1519,7 @@ reference "fig:Tent-Map-Bifur"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1573,13 +1579,13 @@ reference "fig:Undershift-Bifurcation-Diagram"
 
 The black areas represent parts of the iterated range that are visited at
  most a finite number of times.
- To the left, a straight line indicates that after one iteration, points
- in the domain 
+ To the right, the straight boundary indicates that after one iteration,
+ points in the domain 
 \begin_inset Formula $\beta/2\le x\le1$
 \end_inset
 
  are never visited.
- To the right, points in the domain 
+ To the left, points in the domain 
 \begin_inset Formula $0\le x\le\beta\left(1-\beta/2\right)$
 \end_inset
 
@@ -1686,7 +1692,7 @@ reference "fig:Logistic-Map-Bifurcation"
  Naively, it would seem that the general structure of the chaotic regions
  are shared by all three maps.
  Thus, in order to understand chaos in the logistic map, it is perhaps easier
- to study it in the
+ to study it in the 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -1795,8 +1801,7 @@ topologically conjugate
 \end_inset
 
  to one-another.
- This is perhaps surprising to some readers, but is based on the observation
- that the 
+ This is perhaps surprising, but is based on the observation that the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1824,24 +1829,8 @@ trouble points
 \end_inset
 
  can be mapped to the islands of stability, in essentially the same way
- that 
-\begin_inset Quotes eld
-\end_inset
-
-phase locking regions
-\begin_inset Quotes erd
-\end_inset
-
- or 
-\begin_inset Quotes eld
-\end_inset
-
-Arnold tongues
-\begin_inset Quotes erd
-\end_inset
-
- appear in the circle map.
- But this is all for a later section, again, mentioned here only to whet
+ that phase locking regions (Arnold tongues) appear in the circle map.
+ This is examined in a later section; it is mentioned here only to whet
  the appetite.
 \end_layout
 
@@ -1850,7 +1839,7 @@ Beta Transformation
 \end_layout
 
 \begin_layout Standard
-After exactly one iteration of the beta shift , all initial points 
+After exactly one iteration of the beta shift, all initial points 
 \begin_inset Formula $\beta/2\le x\le1$
 \end_inset
 
@@ -1888,13 +1877,20 @@ t_{\beta}(u)=\begin{cases}
 
 \end_inset
 
-which can be written more compactly as 
-\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\,\mod1$
+This can be written more compactly as 
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\mod1$
 \end_inset
 
 .
- In this form, the function is known as the beta transform, and is often
- called the 
+ In this form, the function is named 
+\begin_inset Quotes eld
+\end_inset
+
+the beta transform
+\begin_inset Quotes erd
+\end_inset
+
+, written as the 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -1979,15 +1975,7 @@ sidetent
  function, which corresponds to the that part of the tent map in which iteration
  is confined.
  It is nothing more than a rescaling of the tent map, ignoring those parts
- outside of the above domain that 
-\begin_inset Quotes eld
-\end_inset
-
-wander away
-\begin_inset Quotes erd
-\end_inset
-
-.
+ outside of the above domain that wander away.
  The sidetent is given by
 \begin_inset Formula 
 \[
@@ -2312,7 +2300,7 @@ The
 \end_inset
 
 -transformation, in the form of 
-\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\,\mod1$
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\mod1$
 \end_inset
 
  has been well-studied over the decades.
@@ -2398,7 +2386,7 @@ and
 \end_layout
 
 \begin_layout Standard
-In the same way that a dyadic rational 
+Similar to the way in which a dyadic rational 
 \begin_inset Formula $p/2^{n}$
 \end_inset
 
@@ -2425,7 +2413,9 @@ literal "true"
 
 \end_inset
 
- 
+ This signals that the beta shift behaves rather differently from the Cantor
+ set in it's embedding.
+ This is explored in greater detail in a subsequent section.
 \end_layout
 
 \begin_layout Standard
@@ -2685,10 +2675,8 @@ literal "true"
 
 \begin_layout Standard
 None of the topics or results cited above are made use of, or further expanded
- on, or even touched on below.
- That's mostly because what follows below is just a ...
- different perspective on the topic.
- Not intentionally so; it just happened to come out that way.
+ on, or even touched on in the following.
+ This is not intentional, but rather a by-product of different goals.
 \end_layout
 
 \begin_layout Section
