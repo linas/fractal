@@ -152,7 +152,6 @@ This work reviews assorted general properties, and then focuses primarily
 etc.
 \emph default
 ) numbers.
- 
 \end_layout
 
 \begin_layout Section
@@ -160,134 +159,40 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-The last three or four decades of mathematical research has seen dramatic
- advances in the theory of subshifts.
- This text is mostly not about that, except to point out that this theory
- has very broad and important impact on many branches of physics and mathematics.
- From the perspective of the amateur enthusiast, the theory of subshifts
- finally exposes and makes clear some of the mysterious and intriguing behavior
- of fractals and of chaotic dynamical systems.
-\end_layout
-
-\begin_layout Standard
-This text focuses almost entirely on just one particular map of the unit
- interval, the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform, defined as the iterated map 
-\begin_inset Formula $\beta x\mod1$
-\end_inset
-
-.
- As such, it is an example of an iterated map on the unit interval of the
- real number line.
- Such maps have the form 
+The beta transformation is the map 
 \begin_inset Formula 
 \[
-f:[0,1]\to[0,1]
+t_{\beta}(x)=\beta x\mod1
 \]
 
 \end_inset
 
-and the topic is the exploration of the consequence of iterating the map
- by composing: 
-\begin_inset Formula 
-\[
-f^{n}(x)=(f\circ f\circ\cdots\circ f)(x)=f(f(\cdots f(x)\cdots))
-\]
-
+iterated on the real unit interval 
+\begin_inset Formula $[0,1]$
 \end_inset
 
-Such one-dimensional iterated maps have been heavily studied, and there
- is a large body of results, interconnecting many different concepts and
- results from mathematics, and so having a particularly broad range.
- 
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ taken to be a real positive constant.
+ For the special case of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, this is the Bernoulli process, the ergodic process of random coin flips.
+ This case is solvable, in that it is very well-explored, as a canonical
+ model of ergodic behavior.
 \end_layout
 
 \begin_layout Standard
-This text attempts to report some brand-new results on the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform.
- This is perhaps surprising, as one might think that the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform is sufficiently simple so as to be well-studied and well-understood,
- it being among the very simplest of iterated one-dimensional maps.
- This text also attempts to report these results in a naive and unsophisticated
- fashion, in the hope that this makes the text readable for the interested
- student and casual enthusiast.
+The beta transformation is less-well studied.
+ XXX
 \end_layout
 
 \begin_layout Standard
-Thus, although the author is personally excited by the advances in the field,
- this text is neither a survey of known results on the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform, nor does it much glance at most of the typical avenues that
- are available for studying one-dimensional maps.
- This text does focus extensively on the spectrum of the transfer operator
- (the 
-\begin_inset Quotes eld
-\end_inset
-
-Ruelle Perron Frobenius operator
-\begin_inset Quotes erd
-\end_inset
-
-), and thus it contributes to the general 
-\begin_inset Quotes eld
-\end_inset
-
-Koopmania
-\begin_inset Quotes erd
-\end_inset
-
-.
- Little prior knowledge is assumed, and the needed concepts are introduced
- in a very casual and informal way.
- This will, no doubt, completely discourage and dismay the formally trained
- mathematician.
- The best I can offer is to reiterate: 
-\begin_inset Quotes eld
-\end_inset
-
-new results
-\begin_inset Quotes erd
-\end_inset
-
-, off the beaten track.
-\end_layout
-
-\begin_layout Standard
-This text begins with some pretty pictures, showing the iterated tent and
- logistic maps, so as to remind the reader as to why this is an interesting
- problem to study.
- The fact is that the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transformation is far more dry and abstract than the rather sexy logistic
- map, or its complex cousin, the Mandelbrot set.
- The hope is that the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transformation is also simpler, and therefore, perhaps, easier to understand.
- The reader will soon discover that there is nothing particularly easy about
- it, and that, at every turn, one bumps into other interesting areas of
- mathematics that could, perhaps should shed some light, but don't actually
- seem to do so, in practice.
-\end_layout
-
-\begin_layout Standard
-The most fun for the casual reader might be chapter 5, on the periodic orbits,
- where the quasi-cyclotomic polynomials appear; these are polynomials of
- the form 
+The periodic orbits of the beta transform can be characterized by quasi-cyclotom
+ic polynomials; these are polynomials of the form 
 \begin_inset Formula $p_{n}\left(z\right)=z^{k+1}-b_{0}z^{k}-b_{1}z^{k-1}-\cdots-b_{k-1}z-1$
 \end_inset
 
@@ -296,35 +201,142 @@ The most fun for the casual reader might be chapter 5, on the periodic orbits,
 \end_inset
 
  being binary bits (zero or one).
- Also quite fun is the section on the islands of stability, which sheds
- light on how one can take a purely ergodic (chaotic) system, and surgically
- insert, as desired, islands of stability.
- The point here is that the classic logistic map attracted interest precisely
- because of its interleaving of chaos and stability; it turns out, one can
- manufacture such systems, at will.
+ However, as always, the periodic orbits are a set of measure zero, and
+ a fuller picture is obtained by studying the action of the map on distributions
+ on the unit interval.
+ Informally, this is given by the pushforward of the beta transform, acting
+ on a distribution 
+\begin_inset Formula $\rho:[0,1]\to\mathbb{R}$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}\rho\right]\left(x\right)=\sum_{y\in t^{-1}\left(x\right)}\frac{\rho\left(y\right)}{\left|df/dx\right|_{y}}
+\]
+
+\end_inset
+
+where the denominator is understood as the Jacobian determinant.
+ Note that 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ is a linear operator, acting on some space of functions 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ Different spaces result in different properties for 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+; commonly explored are the polynomials, and the square-integrable functions,
+ although in certain special cases, the analysis can be extended to highly
+ singular, continuous-nowhere functions.
+ The pushforward operator is generically called the 
+\begin_inset Quotes eld
+\end_inset
+
+transfer operator
+\begin_inset Quotes erd
+\end_inset
+
+ or the 
+\begin_inset Quotes eld
+\end_inset
+
+Ruelle–Frobenius–Perron operator
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Perhaps the most surprising aspect of iteration (surprising to me) is that
- the invariant measure consists of flat plateaus.
+The largest eigenvalue is conventionally called the Frobenius–Perron eigenvalue;
+ it is usually equal to one.
+ Solutions to 
+\begin_inset Formula $\mathcal{L}_{\beta}\mu=\mu$
+\end_inset
+
+ define an invariant measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on the unit interval.
+ It is invariant in the usual sense of dynamical systems: one has 
+\begin_inset Formula $\left(\mu\circ t_{\beta}^{-1}\right)\left(x\right)=\mu\left(x\right)$
+\end_inset
+
+ for almost all 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The proper formal statement of this is to invoke the sigma-algebra 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ of Borel sets on the unit interval.
+ The inverse of the beta transform is then a map 
+\begin_inset Formula $t_{\beta}^{-1}:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+ while the measure 
+\begin_inset Formula $\mu:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+ is a sigma-additive measure.
+ The pushforward nature of the transfer operator is now more readily visible:
+ 
+\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho\circ t_{\beta}^{-1}$
+\end_inset
+
+ and one is interested in the eigenfunctions 
+\begin_inset Formula $\mathcal{L_{\beta}\rho=\lambda\rho}$
+\end_inset
+
+ of this operator, where the mapping 
+\begin_inset Formula $\rho:\mathcal{B}\to\mathbb{C}$
+\end_inset
+
+ is restricted in various ways, 
+\emph on
+e.g.
+
+\emph default
+ by limiting it to functions 
+\begin_inset Formula $\rho$
+\end_inset
+
+ that can be interpreted as being polynomials, or square-integrable, 
+\emph on
+etc.
+
+\emph default
+ on the unit interval.
+\end_layout
+
+\begin_layout Standard
+Perhaps the most surprising aspect of the invariant measure is that it consists
+ of flat plateaus.
  Or perhaps this is not surprising; after all, for the full shift, 
 \begin_inset Formula $\beta=2$
 \end_inset
 
 , the invariant measure is a straight line, and this is equivalent to saying
- that the real numbers are aboslutely evenly distributed, or that the toss
- of a perfectly fair coin is a perfectly even, random sequences of heads
- and tails.
+ that the real numbers are absolutely evenly distributed.
  Flatness implies an even distribution.
  So flatness is not surprising.
- But look at it a different way: the digit sequences are wildly and ergodically
- different, yet none-the-less manage to 
+ But from a different perspective, the digit sequences generated by the
+ beta transform are wildly and ergodically different, yet none-the-less
+ manage to 
 \emph on
 sum to exactly the same value
 \emph default
-, when summed in an analytic series! Why should crazy-different, crazy-chaotic
- sequences yeild identical summations? That they do should be considered
- to be the 
+, when summed as an analytic series! Why should this be? This suggests some
+ kind of hidden 
 \begin_inset Quotes eld
 \end_inset
 
@@ -332,55 +344,11 @@ fundamental theorem of analytic ergodics
 \begin_inset Quotes erd
 \end_inset
 
-.
- (I use the word 
-\begin_inset Quotes eld
-\end_inset
-
-analytic
-\begin_inset Quotes erd
-\end_inset
-
- here in the same sense as 
-\begin_inset Quotes eld
-\end_inset
-
-analytic number theory
-\begin_inset Quotes erd
-\end_inset
-
- or 
-\begin_inset Quotes eld
-\end_inset
-
-analytic combinatorics
-\begin_inset Quotes erd
-\end_inset
-
-.
- Given a sequence of values, one explores the analytic properties of its
- generating functions.) If this theorem has ever been clearly stated before,
- or if it has been proven (for any case other than the Bernoulli shift),
- I do not know.
- It seems terribly important for analyzing subshifts.
+; what this might be iss unknown to the author.
 \end_layout
 
 \begin_layout Standard
-A word about the format of this paper: this is a 
-\emph on
-de facto
-\emph default
- 
-\begin_inset Quotes eld
-\end_inset
-
-research diary
-\begin_inset Quotes erd
-\end_inset
-
-, not a formal report.
- This, it contains various unfinished corners and notes-to-self.
- 
+The 
 \end_layout
 
 \begin_layout Subsection
