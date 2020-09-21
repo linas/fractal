@@ -77,7 +77,7 @@ subdiag.o: subdiag.C psi.c psibig.c
 beta.o: beta.c
 witt.o: witt.c
 betadisk.o: betadisk.C psibig.c
-sidorov.o: sidorov.c
+sidorov.o: sidorov.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)

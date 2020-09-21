@@ -1,5 +1,5 @@
 /*
- * sidorov.c
+ * sidorov.C
  *
  * Understand bit-sequence mappings.  The expander and compresor
  * functions. This time with alternative expansions, per sidorov.
@@ -7,13 +7,19 @@
  * Linas Vepstas Dec 2017; Sept 2020
  */
 
+#include <vector>
+
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-// Comp[ute the m from the sidorov paper. This is one more than the
-// run of zeros.  It depends only on beta.  Note that:
+// Compute the m from the sidorov paper. This is the length of the
+// run of zeros we need to see, before exploring an alternate branch.
+// It depends only on beta. Note that the Sidorov paper incorrectly
+// states that the run of zeros is one less than m. This is false.
+// The required run  of zeros has to be at least m.
+// Note that:
 // m=1 for K < 0.25 (1+sqrt(5)) = 0.80902
 // m=2 up until about 0.878
 // m=3 up until about 0.967
@@ -26,13 +32,20 @@ int emrun(double K)
 	return (int) loga;
 }
 
+#define NBITS 50
+
+// Compute two alternate beta expansions, and compare them
+// side by side. This is currently for debugging only; it
+// spews too many prints. Use beta_expand below for the real
+// thing.
+//
 // Note that beta = 2*K
 double sdr(double y, double K, int em)
 {
 	// Generate the beta expansion bits in a greedy fashion.
-	char grebits[50];
-	double greedy[50];
-	for (int i=0; i<50; i++)
+	char grebits[NBITS];
+	double greedy[NBITS];
+	for (int i=0; i<NBITS; i++)
 	{
 		greedy[i] = y;
 		if (0.5 <= y)
@@ -46,8 +59,8 @@ double sdr(double y, double K, int em)
 
 	// Search for em runs.
 	// The Sidorov paper has an error, the m is off by one.
-	char lobits[50];
-	for (int i=0; i<50-em; i++)
+	char lobits[NBITS];
+	for (int i=0; i<NBITS-em; i++)
 	{
 		lobits[i] = grebits[i];
 		if (1 == grebits[i])
@@ -68,7 +81,7 @@ double sdr(double y, double K, int em)
 				printf("# got one at i=%d y=%g next=%g\n", i, y, y*2*K);
 				y *= 2.0*K;
 
-				for (int j=i+1; j<50; j++)
+				for (int j=i+1; j<NBITS; j++)
 				{
 					if (0.5 <= y)
 					{
@@ -88,28 +101,70 @@ double sdr(double y, double K, int em)
 	// Reconstruct both sequences;
 	double hiacc = 1.0e-30;
 	double loacc = 1.0e-30;
-	for (int i=0; i<50; i++)
+	for (int i=0; i<NBITS; i++)
 	{
 		hiacc *= 1.0 / (2.0*Jay);
 		loacc *= 1.0 / (2.0*Jay);
-		if (grebits[50-i-1])
+		if (grebits[NBITS-i-1])
 		{
 			hiacc += 0.5;
 		}
-		if (lobits[50-i-1])
+		if (lobits[NBITS-i-1])
 		{
 			loacc += 0.5;
 		}
 	}
 
 	printf("# hi=");
-	for (int i=0; i<50; i++) printf("%d", grebits[i]);
+	for (int i=0; i<NBITS; i++) printf("%d", grebits[i]);
 	printf("\n");
 	printf("# lo=");
-	for (int i=0; i<50; i++) printf("%d", lobits[i]);
+	for (int i=0; i<NBITS; i++) printf("%d", lobits[i]);
 	printf("\n");
 
 	return hiacc-loacc;
+}
+
+// Generate the beta expansion in a greedy fashion.
+// `y` is the number to expand.
+// `K` is beta/2
+// `nstart` is where to start writing the bit pattern
+// `bits` is where to write the resulting bit-vector
+// `orbit` is where to write the orbit sequence.
+void greedy_expand(double y, double K, int nstart,
+                   std::vector<double>& orbit,
+                   std::vector<bool>& bits)
+{
+	// Generate the beta expansion bits in a greedy fashion.
+	for (int i=nstart; i<NBITS; i++)
+	{
+		orbit[i] = y;
+		if (0.5 <= y)
+		{
+			y -= 0.5;
+			bits[i] = 1;
+		}
+		else bits[i] = 0;
+		y *= 2.0*K;
+	}
+}
+
+// Generate a collection of equivalent beta expansions at K.
+// `y` is the number to expand.
+// `K` is beta/2
+std::vector<std::vector<bool>> beta_expand(double y, double K)
+{
+	std::vector<std::vector<bool>> bitset;
+
+	std::vector<double> orbit;
+	std::vector<bool> greedy;
+	orbit.resize(NBITS);
+	greedy.resize(NBITS);
+
+	greedy_expand(y, K, 0, orbit, greedy);
+	bitset.push_back(greedy);
+
+	return bitset;
 }
 
 int main (int argc, char* argv[])
