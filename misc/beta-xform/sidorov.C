@@ -198,6 +198,7 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 		}
 	}
 
+#if DEBUG
 	// Debug print
 	for (size_t n=0; n<bitset.size(); n++)
 	{
@@ -207,7 +208,25 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 			printf("%d", (int) bits[i]);
 		printf("\n");
 	}
+#endif
 	return bitset;
+}
+
+// Sum the bit-sequence, returning the sum.
+// This returns sum_i b[i] (2J)^-i
+//
+double beta_sum(std::vector<bool> bits, double Jay)
+{
+	double acc = 1.0e-30;
+	for (int i=0; i<NBITS; i++)
+	{
+		acc *= 1.0 / (2.0*Jay);
+		if (bits[NBITS-i-1])
+		{
+			acc += 0.5;
+		}
+	}
+	return acc;
 }
 
 int main (int argc, char* argv[])
@@ -237,7 +256,16 @@ int main (int argc, char* argv[])
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
-		beta_expand(x, Kay, em);
-		printf("%d	%g\n", i, x);
+
+		printf("%d	%g", i, x);
+		std::vector<std::vector<bool>> bitset;
+		bitset = beta_expand(x, Kay, em);
+		for (size_t n=0; n<bitset.size(); n++)
+		{
+			std::vector<bool> bits = bitset[n];
+			double y = beta_sum(bits, Kay);
+			printf("	%g", y);
+		}
+		printf("\n");
 	}
 }
