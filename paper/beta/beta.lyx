@@ -183,11 +183,8 @@ iterated on the real unit interval
 , this is the Bernoulli process, the ergodic process of random coin flips.
  This case is solvable, in that it is very well-explored, as a canonical
  model of ergodic behavior.
-\end_layout
-
-\begin_layout Standard
-The beta transformation is less-well studied.
- XXX
+ The beta transformation is less-well studied; a full review of results
+ is presented after this introduction.
 \end_layout
 
 \begin_layout Standard
@@ -348,7 +345,10 @@ fundamental theorem of analytic ergodics
 \end_layout
 
 \begin_layout Standard
-The 
+The remainder of this section provides a very basic review of some elementary
+ properties of the beta transform, starting with the full shift, aka the
+ Bernoulli shift.
+ The section is completed with a survey of other research results.
 \end_layout
 
 \begin_layout Subsection
@@ -407,9 +407,9 @@ b_{n}\left(x\right)=\begin{cases}
 
 Of course, the symbolic dynamics recreates the initial real number:
 \begin_inset Formula 
-\[
-x=\sum_{n=0}^{\infty}b_{n}\left(x\right)2^{-n-1}
-\]
+\begin{equation}
+x=\sum_{n=0}^{\infty}b_{n}\left(x\right)2^{-n-1}\label{eq:homomorphism}
+\end{equation}
 
 \end_inset
 
@@ -435,19 +435,52 @@ x=0.b_{0}b_{1}b_{2}\cdots
 \end_layout
 
 \begin_layout Standard
-The Bernoulli shift has many interesting properties, connecting it to the
- Cantor set and to many self-similar fractals.
- I have explored these in many other texts, as have other authors, and will
- not repeat these here.
- The author is too lazy to provide a bibliography; the reader is directed
- at search engines.
+The Bernoulli shift has many interesting properties.
+ Most prominently, eqn.
  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is an embedding of the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ into the unit interval in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ The Cantor space has a natural topology, the product topology, that can
+ be extended to a sigma algebra.
+ The mapping 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ becomes a homomorphism of sigma algebras, mapping finite functions on the
+ Cantor space to Lebesgue-integrable functions on the unit interval.
+ Almost all properties of the Bernoulli shift follow from the properties
+ of the Cantor space.
+ This includes not only the transfer operator, but also any number of self-simil
+ar period-doubling fractals (such as the de Rham curves) which poses the
+ symmetries of the Cantor space.
 \end_layout
 
 \begin_layout Standard
 The current task is to attempt to see how many of these properties still
- hold in slightly more complex systems, and whether any of the tools used
- to analyze and solve the Bernoulli shift can be applied to these systems.
+ hold for the slightly more complex beta transform, whether any of the tools
+ used to analyze and solve the Bernoulli shift can be applied.
 \end_layout
 
 \begin_layout Subsection
@@ -455,16 +488,7 @@ Shift space
 \end_layout
 
 \begin_layout Standard
-The use of the word 
-\begin_inset Quotes eld
-\end_inset
-
-shift
-\begin_inset Quotes erd
-\end_inset
-
- here deserves a small bit of formality.
- A 
+A 
 \begin_inset Quotes eld
 \end_inset
 
@@ -472,7 +496,7 @@ shift space
 \begin_inset Quotes erd
 \end_inset
 
- can be formally defined to be a set of infinite sequences of a set of 
+ is formally defined to be a set of infinite sequences of a set of 
 \begin_inset Formula $N$
 \end_inset
 
@@ -537,7 +561,7 @@ In general, a shift space does not have to include every possible sequence
 \end_inset
 
  again.
- In formulas, a shift space 
+ That is, a shift space 
 \begin_inset Formula $S$
 \end_inset
 
@@ -672,12 +696,11 @@ orbit
 \end_inset
 
 ; this is a periodic orbit.
- Most importantly, there usually uncountably many non-periodic sequences
+ Most importantly, there are usually uncountably many non-periodic sequences
  or orbits.
  That is, the number of periodic orbits is always countable: one merely
  arranges them in lexicographic order, and one is done.
- As Cantor famously demonstrated (and Hilbert so carefully expanded on)
- this cannot be done for the non-periodic orbits: they are uncountable.
+ This cannot be done for the non-periodic orbits: they are uncountable.
  
 \end_layout
 
@@ -693,7 +716,7 @@ In what follows, the text will in general confine itself to uncountable
 
  are both uncountable; however, they are not in one-to-one correspondence,
  as some real numbers can have two different representations as bit sequences.
- Specifically, these are the fractions 
+ Specifically, these are the dyadic fractions 
 \begin_inset Formula $\left(2n+1\right)/2^{m}$
 \end_inset
 
@@ -703,9 +726,8 @@ In what follows, the text will in general confine itself to uncountable
 
  – they can be validly represented by bit-sequences ending in all-zeros,
  or all-ones.
- There are countably many such fractions, termed the dyadic fractions.
- For the most part, this difference between the real number line, and the
- Cantor space will be ignored.
+ There are only countably many such fractions; for the most part, this distincti
+on between the real number line, and the Cantor space will be ignored.
 \end_layout
 
 \begin_layout Subsection
@@ -907,15 +929,12 @@ Since the
 \begin_inset Formula $x$
 \end_inset
 
-, this is not a 
-\begin_inset Quotes eld
+, and are discontinuous functions of 
+\begin_inset Formula $x$
 \end_inset
 
-true
-\begin_inset Quotes erd
-\end_inset
-
- polynomial; however, it will be useful in analysis, later.
+, this is not a true polynomial; however, the representation will be useful,
+ later.
  
 \end_layout
 
