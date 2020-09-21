@@ -45,6 +45,7 @@ double sdr(double y, double K, int em)
 	}
 
 	// Search for em runs.
+	// The Sidorov paper has an error, the m is off by one.
 	char lobits[50];
 	for (int i=0; i<50-em; i++)
 	{
@@ -52,7 +53,7 @@ double sdr(double y, double K, int em)
 		if (1 == grebits[i])
 		{
 			bool found = true;
-			for (int j=1; j<em; j++)
+			for (int j=1; j<=em; j++)
 			{
 				if (1 == grebits[i+j])
 				{
@@ -100,6 +101,13 @@ double sdr(double y, double K, int em)
 			loacc += 0.5;
 		}
 	}
+
+	printf("hi=");
+	for (int i=0; i<50; i++) printf("%d", grebits[i]);
+	printf("\n");
+	printf("lo=");
+	for (int i=0; i<50; i++) printf("%d", lobits[i]);
+	printf("\n");
 
 	return hiacc-loacc;
 }
