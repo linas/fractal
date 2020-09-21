@@ -11,7 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// The expander
+// The expander. A binary bit sequence for x is obtained, and
+// resummed using K.
 double pdr(double x, double Kay)
 {
 	// Decompose x into a bit sequence.
@@ -41,7 +42,9 @@ double pdr(double x, double Kay)
 	return acc;
 }
 
-// the compressor
+// The compressor. A beta-expansion for y is obtained, i.e. a sequence
+// of bits in base-beta, and then resassembled in base two.
+//
 double cpr(double y, double K)
 {
 	// Iterate on y using mashed Bernoulli, and extract symbol dynamics
