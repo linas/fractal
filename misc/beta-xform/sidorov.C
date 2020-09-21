@@ -129,8 +129,8 @@ double sdr(double y, double K, int em)
 // `y` is the number to expand.
 // `K` is beta/2
 // `nstart` is where to start writing the bit pattern
-// `bits` is where to write the resulting bit-vector
-// `orbit` is where to write the orbit sequence.
+// `bits` is where to write the resulting bit-vector (it is never read)
+// `orbit` is where to write the orbit sequence. (it is never read)
 void greedy_expand(double y, double K, int nstart,
                    std::vector<double>& orbit,
                    std::vector<bool>& bits)
@@ -152,10 +152,12 @@ void greedy_expand(double y, double K, int nstart,
 // Generate a collection of equivalent beta expansions at K.
 // `y` is the number to expand.
 // `K` is beta/2
-std::vector<std::vector<bool>> beta_expand(double y, double K)
+// `em` is the number of zero bits to look for.
+std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 {
 	std::vector<std::vector<bool>> bitset;
 
+	// First, get the baseline orbit.
 	std::vector<double> orbit;
 	std::vector<bool> greedy;
 	orbit.resize(NBITS);
@@ -164,6 +166,34 @@ std::vector<std::vector<bool>> beta_expand(double y, double K)
 	greedy_expand(y, K, 0, orbit, greedy);
 	bitset.push_back(greedy);
 
+	// Search for em runs.
+	// The Sidorov paper has an error, the m is off by one.
+	for (int i=0; i<NBITS-em; i++)
+	{
+		std::vector<bool> gapper = greedy;
+		if (1 == greedy[i])
+		{
+			bool found = true;
+			for (int j=1; j<=em; j++)
+			{
+				if (1 == greedy[i+j])
+					found = false;
+			}
+			if (found)
+			{
+				// Set to zero, and resume expansion.
+				gapper[i] = 0;
+				y = orbit[i];
+				y *= 2.0*K;
+				orbit[i] = y;
+
+				// Get the alternate expansion.
+				greedy_expand(y, K, i+1, orbit, gapper);
+				bitset.push_back(gapper);
+				greedy = gapper;
+			}
+		}
+	}
 	return bitset;
 }
 
@@ -179,7 +209,8 @@ int main (int argc, char* argv[])
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
-#if 1
+#if CHECK_GROUND_TRUTH
+	// Perform the basic sanity check that everything is OK.
 	int npts = 313;
 	for (int i=0; i<npts; i++)
 	{
@@ -188,4 +219,12 @@ int main (int argc, char* argv[])
 		printf("%d	%g	%g\n", i, x, z);
 	}
 #endif
+
+	int npts = 13;
+	for (int i=0; i<npts; i++)
+	{
+		double x = (((double) i) + 0.5)/ ((double) npts);
+		beta_expand(x, Kay, em);
+		printf("%d	%g\n", i, x);
+	}
 }
