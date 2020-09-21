@@ -26,6 +26,9 @@
 int emrun(double K)
 {
 	double beta = 2.0*K;
+	double gold = 0.5 * (1.0 + sqrt(5));
+	if (beta <= gold) return 1;
+
 	double loga = (beta - 1.0) / (2.0-beta);
 	loga = log(loga) / log(beta);
 	loga = floor(loga) + 1.0;
@@ -193,6 +196,16 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 				greedy = gapper;
 			}
 		}
+	}
+
+	// Debug print
+	for (size_t n=0; n<bitset.size(); n++)
+	{
+		std::vector<bool> bits = bitset[n];
+		printf("# n=%lu ", n);
+		for (int i=0; i<NBITS; i++)
+			printf("%d", (int) bits[i]);
+		printf("\n");
 	}
 	return bitset;
 }
