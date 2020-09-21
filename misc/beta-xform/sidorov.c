@@ -65,7 +65,7 @@ double sdr(double y, double K, int em)
 			{
 				lobits[i] = 0;
 				y = greedy[i];
-				printf("got one at i=%d y=%g next=%g\n", i, y, y*2*K);
+				printf("# got one at i=%d y=%g next=%g\n", i, y, y*2*K);
 				y *= 2.0*K;
 
 				for (int j=i+1; j<50; j++)
@@ -102,10 +102,10 @@ double sdr(double y, double K, int em)
 		}
 	}
 
-	printf("hi=");
+	printf("# hi=");
 	for (int i=0; i<50; i++) printf("%d", grebits[i]);
 	printf("\n");
-	printf("lo=");
+	printf("# lo=");
 	for (int i=0; i<50; i++) printf("%d", lobits[i]);
 	printf("\n");
 
@@ -125,7 +125,7 @@ int main (int argc, char* argv[])
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
 #if 1
-	int npts = 13;
+	int npts = 313;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
