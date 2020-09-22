@@ -168,8 +168,12 @@ void greedy_expand(double y, double K, int nstart,
 void beta_expand_rec(double y, double K, int em, int start,
                      std::vector<double> orbit,
                      std::vector<bool> greedy,
+                     int depth,
                      std::vector<std::vector<bool>>& gap)
 {
+#define MAXDEPTH 2
+	if (MAXDEPTH < depth) return;
+
 	// Search for runs of length em.
 	// The Sidorov paper has an error, the m is off by one.
 	for (int i=start; i<NBITS-em; i++)
@@ -197,8 +201,8 @@ void beta_expand_rec(double y, double K, int em, int start,
 				gap.push_back(gapper);
 
 				// Recurse
-				beta_expand_rec(y, K, em, i+1, orbit, greedy, gap);
-				beta_expand_rec(y, K, em, i+1, lorbit, gapper, gap);
+				beta_expand_rec(y, K, em, i+1, orbit, greedy, depth+1, gap);
+				beta_expand_rec(y, K, em, i+1, lorbit, gapper, depth+1, gap);
 				return;
 			}
 		}
@@ -218,7 +222,7 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 	gap.push_back(bits);
 
 	// And now recursively get the rest.
-	beta_expand_rec(y, K, em, 0, orbit, bits, gap);
+	beta_expand_rec(y, K, em, 0, orbit, bits, 0, gap);
 
 #if 1 // DEBUG
 	// Debug print
@@ -281,10 +285,9 @@ int main (int argc, char* argv[])
 	}
 #endif
 
-#define CHECK_MORE
 #ifdef CHECK_MORE
 	// More code validation
-	int npts = 13;
+	int npts = 313;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
@@ -292,18 +295,21 @@ int main (int argc, char* argv[])
 		std::vector<std::vector<bool>> bitset;
 		bitset = beta_expand(x, Kay, em);
 
-		printf("%d	%g", i, x);
-		for (size_t n=0; n<bitset.size(); n++)
+		std::vector<bool> bits = bitset[0];
+		double y = beta_sum(bits, Kay);
+		printf("%d	%g	%g", i, x, y);
+		for (size_t n=1; n<bitset.size(); n++)
 		{
 			std::vector<bool> bits = bitset[n];
-			double y = beta_sum(bits, Kay);
-			printf("	%g", y);
+			double z = beta_sum(bits, Kay);
+			if (1.0e-7 < fabs(y-z))
+				printf(" FAIL: %g", y-z);
 		}
 		printf("\n");
 	}
 #endif
 
-#if 0
+#if 1
 	std::vector<std::vector<bool>> bitset;
 	bitset = beta_expand(x, Kay, em);
 
@@ -311,6 +317,7 @@ int main (int argc, char* argv[])
 	for (int i=0; i<npts; i++)
 	{
 		double Jay = (((double) i) + 0.5)/ ((double) npts);
+		Jay = Kay + (1.0-Kay)*Jay;
 
 		printf("%d	%g", i, Jay);
 		for (size_t n=0; n<bitset.size(); n++)
