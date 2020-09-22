@@ -158,28 +158,21 @@ void greedy_expand(double y, double K, int nstart,
 	}
 }
 
-// Generate a collection of equivalent beta expansions at K.
+// Recursively generate a collection of equivalent beta expansions at K.
 // `y` is the number to expand.
 // `K` is beta/2
 // `em` is the number of zero bits to look for.
-std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
+// `start` is where to start looking
+// `gap` is the set to which the beta exapnsion is appended.
+void beta_expand_rec(double y, double K, int em, int start,
+                     std::vector<double> orbit,
+                     std::vector<bool> greedy,
+                     std::vector<std::vector<bool>>& gap)
 {
-	std::vector<std::vector<bool>> bitset;
-
-	// First, get the baseline orbit.
-	std::vector<double> orbit;
-	std::vector<bool> greedy;
-	orbit.resize(NBITS);
-	greedy.resize(NBITS);
-
-	greedy_expand(y, K, 0, orbit, greedy);
-	bitset.push_back(greedy);
-
-	// Search for em runs.
+	// Search for runs of length em.
 	// The Sidorov paper has an error, the m is off by one.
-	for (int i=0; i<NBITS-em; i++)
+	for (int i=start; i<NBITS-em; i++)
 	{
-		std::vector<bool> gapper = greedy;
 		if (1 == greedy[i])
 		{
 			bool found = true;
@@ -190,25 +183,46 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 			}
 			if (found)
 			{
+				std::vector<bool> gapper = greedy;
+				std::vector<double> lorbit = orbit;
+
 				// Set to zero, and resume expansion.
 				gapper[i] = 0;
-				y = orbit[i];
-				y *= 2.0*K;
-				orbit[i] = y;
+				lorbit[i] = 2.0*K * orbit[i];
 
 				// Get the alternate expansion.
-				greedy_expand(y, K, i+1, orbit, gapper);
-				bitset.push_back(gapper);
-				greedy = gapper;
+				greedy_expand(y, K, i+1, lorbit, gapper);
+				gap.push_back(gapper);
+
+				// Recurse
+				beta_expand_rec(y, K, em, i+1, orbit, greedy, gap);
+				beta_expand_rec(y, K, em, i+1, lorbit, gapper, gap);
+				return;
 			}
 		}
 	}
+}
+
+std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
+{
+	std::vector<std::vector<bool>> gap;
+	std::vector<bool> bits;
+	std::vector<double> orbit;
+	bits.resize(NBITS);
+	orbit.resize(NBITS);
+
+	// First, get the baseline (greedy) orbit.
+	greedy_expand(y, K, 0, orbit, bits);
+	gap.push_back(bits);
+
+	// And now recursively get the rest.
+	beta_expand_rec(y, K, em, 0, orbit, bits, gap);
 
 #if 1 // DEBUG
 	// Debug print
-	for (size_t n=0; n<bitset.size(); n++)
+	for (size_t n=0; n<gap.size(); n++)
 	{
-		std::vector<bool> bits = bitset[n];
+		std::vector<bool> bits = gap[n];
 		printf("# n=%lu ", n);
 		for (int i=0; i<NBITS; i++)
 			printf("%d", (int) bits[i]);
@@ -216,7 +230,7 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 	}
 	printf("#\n#\n");
 #endif
-	return bitset;
+	return gap;
 }
 
 // ================================================================
