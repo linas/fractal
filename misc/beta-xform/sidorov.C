@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// #include "brat.h"
+
 // Compute the m from the sidorov paper. This is the length of the
 // run of zeros we need to see, before exploring an alternate branch.
 // It depends only on beta. Note that the Sidorov paper incorrectly
@@ -36,6 +38,8 @@ int emrun(double K)
 }
 
 #define NBITS 50
+
+// ================================================================
 
 // Compute two alternate beta expansions, and compare them
 // side by side. This is currently for debugging only; it
@@ -128,6 +132,8 @@ double sdr(double y, double K, int em)
 	return hiacc-loacc;
 }
 
+// ================================================================
+
 // Generate the beta expansion in a greedy fashion.
 // `y` is the number to expand.
 // `K` is beta/2
@@ -198,7 +204,7 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 		}
 	}
 
-#if DEBUG
+#if 1 // DEBUG
 	// Debug print
 	for (size_t n=0; n<bitset.size(); n++)
 	{
@@ -208,9 +214,12 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 			printf("%d", (int) bits[i]);
 		printf("\n");
 	}
+	printf("#\n#\n");
 #endif
 	return bitset;
 }
+
+// ================================================================
 
 // Sum the bit-sequence, returning the sum.
 // This returns sum_i b[i] (2J)^-i
@@ -229,17 +238,21 @@ double beta_sum(std::vector<bool> bits, double Jay)
 	return acc;
 }
 
+// ================================================================
+
+// Basic unit-test - debugging code
 int main (int argc, char* argv[])
 {
 	if (argc < 2)
 	{
-		fprintf(stderr, "Usage: %s K\n", argv[0]);
+		fprintf(stderr, "Usage: %s K x\n", argv[0]);
 		exit (1);
 	}
 	double Kay = atof(argv[1]);
+	double x = atof(argv[2]);
 
 	int em = emrun(Kay);
-	printf("#\n# K=%g m=%d\n#\n", Kay, em);
+	printf("#\n# K=%g m=%d x=%g\n#\n", Kay, em, x);
 
 #if CHECK_GROUND_TRUTH
 	// Perform the basic sanity check that everything is OK.
@@ -252,7 +265,9 @@ int main (int argc, char* argv[])
 	}
 #endif
 
-	int npts = 13;
+#ifdef CHECK_MORE
+	// More code validation
+	int npts = 313;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
@@ -268,4 +283,61 @@ int main (int argc, char* argv[])
 		}
 		printf("\n");
 	}
+#endif
+
+	std::vector<std::vector<bool>> bitset;
+	bitset = beta_expand(x, Kay, em);
+
+	int npts = 313;
+	for (int i=0; i<npts; i++)
+	{
+		double Jay = (((double) i) + 0.5)/ ((double) npts);
+
+		printf("%d	%g", i, Jay);
+		for (size_t n=0; n<bitset.size(); n++)
+		{
+			std::vector<bool> bits = bitset[n];
+			double y = beta_sum(bits, Jay);
+			printf("	%g", y);
+		}
+		printf("\n");
+	}
 }
+
+// ================================================================
+
+#ifdef NOT_YET
+static void sido (float *array,
+                             int array_size,
+                             double x_center,
+                             double x_width,
+                             double row,
+                             int itermax,
+                             double Kay)
+{
+	/* clear out the row */
+	for (int j=0; j<array_size; j++) array[j] = 0.0;
+
+	double beta = 2.0*Kay;
+
+	double y = row;
+	for (int j=0; j<array_size; j++)
+	{
+		double x = ((double) j + 0.5) / ((double) array_size);
+
+		std::vector<std::vector<bool>> bitset;
+		bitset = beta_expand(x, Kay, em);
+		for (size_t n=0; n<bitset.size(); n++)
+		{
+			std::vector<bool> bits = bitset[n];
+			double y = beta_sum(bits, Kay);
+
+			int idx = y * array_size;
+			if (array_size <= idx) idx = array_size-1;
+			array[idx] +=1.0;
+		}
+	}
+}
+
+DECL_MAKE_BIFUR(sido)
+#endif

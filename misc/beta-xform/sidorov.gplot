@@ -1,0 +1,20 @@
+
+set term png size 900,600
+set out 'sidorov.png'
+
+set title "Perrnts"
+set style data lines
+set xrange [0.5:1]
+# set yrange [1e-3:1]
+set xlabel "{/Symbol b}"
+set logscale y
+#set format y "10^{%4T}"
+
+plot "sidorov.dat" using 2:3 title "greedy", \
+     "sidorov.dat" using 2:4 title "1", \
+     "sidorov.dat" using 2:5 title "2", \
+     "sidorov.dat" using 2:6 title "3", \
+     "sidorov.dat" using 2:7 title "4", \
+     "sidorov.dat" using 2:8 title "5", \
+     "sidorov.dat" using 2:9 title "6", \
+     "sidorov.dat" using 2:10 title "7"
