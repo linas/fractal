@@ -4694,7 +4694,137 @@ gap
 
 \begin_layout Standard
 The first important result is that the gap is an infinite binary tree.
+ Starting with the sequence 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $k_{n}$
+\end_inset
+
+, there is a countable sequence of locations 
+\begin_inset Formula $n_{1},n_{2},\cdots$
+\end_inset
+
+ at which an alternate expansion can be made.
+ Precisely, define
+\begin_inset Formula 
+\[
+m=\left\lfloor \log_{\beta}\frac{\beta-1}{2-\beta}\right\rfloor +1
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left\lfloor \cdot\right\rfloor $
+\end_inset
+
+ denotes the floor (the integer part of a number).
+ Let 
+\begin_inset Formula $c_{m}$
+\end_inset
+
+ be the bit-sequence 
+\begin_inset Formula $c_{m}=100\cdots0$
+\end_inset
+
+ starting with 1, followed by at least 
+\begin_inset Formula $m$
+\end_inset
+
+ zeros.
+ Sidorov shows, by appeal to the Poincaré recurrence theorem, that this
+ bit-sequence occurs in an infinite number of locations in 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n_{1},n_{2},\cdots$
+\end_inset
+
+ be the locations of the bits leading up to 
+\begin_inset Formula $c_{m}$
+\end_inset
+
+.
+ Picking one of these locations, say 
+\begin_inset Formula $n_{j}$
+\end_inset
+
+, write a new sequence 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ by setting 
+\begin_inset Formula 
+\[
+k_{n}^{\prime}=\begin{cases}
+k_{n} & \mbox{ for }n\le n_{j}\\
+0 & \mbox{ for }n=n_{j}+1\\
+\kappa_{n} & \mbox{ for }n_{j}+1<n
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\kappa_{n}$
+\end_inset
+
+ is the bit-sequence obtained by resuming the expansion 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ where it has left off.
+ That is, 
+\begin_inset Formula 
+\[
+\kappa_{n_{j}+p}=k_{p}\left(T_{\beta}^{n_{j}}(\beta x)\right)
+\]
+
+\end_inset
+
+for integer 
+\begin_inset Formula $1<p$
+\end_inset
+
+.
+ This new sequence 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ does not evade the theorem; it too has an infinite sequence of the cylinders
  
+\begin_inset Formula $c_{m}$
+\end_inset
+
+ embedded in it.
+ Thus one obtains an infinite binary tree: at location 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+, one gets to make a decision: should the expansion proceed with 
+\begin_inset Formula $k_{n_{1}+1}$
+\end_inset
+
+ being a zero, or a one? Should one go low, or go high? Go left, or go right?
+ This is the binary decision tree; the gap is an infiinte binary tree.
 \end_layout
 
 \begin_layout Section
