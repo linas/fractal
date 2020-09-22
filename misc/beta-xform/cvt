@@ -301,8 +301,12 @@
 # ../../generate/renorm betadisk j 1 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > betadisk.png
 
-../../generate/renorm moment j 4 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > moment.png
+# ../../generate/renorm moment j 4 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > moment.png
 
 
 # ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4
+
+../../generate/renorm sid j 0.1 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sido.png
+

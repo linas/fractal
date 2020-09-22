@@ -132,4 +132,4 @@ almost: almost.o
 alldisk: alldisk.o $(BRAT)
 betadisk: betadisk.o $(BRAT)
 momenta: momenta.o $(BRAT)
-sidorov: sidorov.o
+sidorov: sidorov.o $(BRAT)

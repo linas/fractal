@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #include "brat.h"
+#include "brat.h"
 
 // Compute the m from the sidorov paper. This is the length of the
 // run of zeros we need to see, before exploring an alternate branch.
@@ -224,7 +224,7 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 	// And now recursively get the rest.
 	beta_expand_rec(y, K, em, 0, orbit, bits, 0, gap);
 
-#if 1 // DEBUG
+#if 0 // DEBUG
 	// Debug print
 	for (size_t n=0; n<gap.size(); n++)
 	{
@@ -260,6 +260,7 @@ double beta_sum(std::vector<bool> bits, double Jay)
 
 // ================================================================
 
+#ifdef DEBUG
 // Basic unit-test - debugging code
 int main (int argc, char* argv[])
 {
@@ -330,10 +331,10 @@ int main (int argc, char* argv[])
 	}
 #endif
 }
+#endif
 
 // ================================================================
 
-#ifdef NOT_YET
 static void sido (float *array,
                              int array_size,
                              double x_center,
@@ -345,9 +346,10 @@ static void sido (float *array,
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
-	double beta = 2.0*Kay;
+	// double beta = 2.0*Kay;
+	int em = emrun(Kay);
 
-	double y = row;
+	double Jay = row;
 	for (int j=0; j<array_size; j++)
 	{
 		double x = ((double) j + 0.5) / ((double) array_size);
@@ -357,7 +359,7 @@ static void sido (float *array,
 		for (size_t n=0; n<bitset.size(); n++)
 		{
 			std::vector<bool> bits = bitset[n];
-			double y = beta_sum(bits, Kay);
+			double y = beta_sum(bits, Jay);
 
 			int idx = y * array_size;
 			if (array_size <= idx) idx = array_size-1;
@@ -367,4 +369,3 @@ static void sido (float *array,
 }
 
 DECL_MAKE_BIFUR(sido)
-#endif
