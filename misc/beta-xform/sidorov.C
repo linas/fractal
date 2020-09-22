@@ -133,6 +133,7 @@ double sdr(double y, double K, int em)
 }
 
 // ================================================================
+double beta_sum(std::vector<bool> bits, double Jay);
 
 // Generate the beta expansion in a greedy fashion.
 // `y` is the number to expand.
@@ -188,7 +189,8 @@ void beta_expand_rec(double y, double K, int em, int start,
 
 				// Set to zero, and resume expansion.
 				gapper[i] = 0;
-				lorbit[i] = 2.0*K * orbit[i];
+				y = 2.0*K * orbit[i];
+				lorbit[i] = y;
 
 				// Get the alternate expansion.
 				greedy_expand(y, K, i+1, lorbit, gapper);
@@ -279,16 +281,18 @@ int main (int argc, char* argv[])
 	}
 #endif
 
+#define CHECK_MORE
 #ifdef CHECK_MORE
 	// More code validation
-	int npts = 313;
+	int npts = 13;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
 
-		printf("%d	%g", i, x);
 		std::vector<std::vector<bool>> bitset;
 		bitset = beta_expand(x, Kay, em);
+
+		printf("%d	%g", i, x);
 		for (size_t n=0; n<bitset.size(); n++)
 		{
 			std::vector<bool> bits = bitset[n];
@@ -299,6 +303,7 @@ int main (int argc, char* argv[])
 	}
 #endif
 
+#if 0
 	std::vector<std::vector<bool>> bitset;
 	bitset = beta_expand(x, Kay, em);
 
@@ -316,6 +321,7 @@ int main (int argc, char* argv[])
 		}
 		printf("\n");
 	}
+#endif
 }
 
 // ================================================================
