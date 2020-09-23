@@ -366,12 +366,26 @@ void MakeHisto (char * name,
 				std::vector<bool> bits = bitset[n];
 				double p = beta_sum(bits, Jay);
 				int ni = sizex * p;
-				double frac = sizex * p - ni;
-				if (sizex < ni) ni = sizex - 2;
 
-				int idx = j*sizex + ni;
-				array[idx] += 1.0 - frac;
-				array[idx+1] += frac;
+				// frac runs from 0 to 1 from left of pixel to right.
+				double frac = sizex * p - ni;
+
+				// ne is the pixel to the left or to the right.
+				int ne = ni;
+				if (frac < 0.5) ne--; else ne++;
+
+				if (sizex <= ni) ni = sizex - 1;
+				if (sizex <= ne) ne = sizex - 1;
+				if (ne < 0) ne = 0;
+
+				// weight runs from 1.0 in the center of the pixel
+				// to 0.5 at eigher edge of the pixel
+				double weight = 1.0 - fabs(frac - 0.5);
+
+				// if frac = 0.5 i.e. dead center, the center pixel
+				// gets all the weight. Else the neighbor gets some.
+				array[j*sizex + ni] += weight;
+				array[j*sizex + ne] += 1.0-weight;
 			}
 		}
 	}
