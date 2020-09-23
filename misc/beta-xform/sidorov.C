@@ -171,7 +171,7 @@ void beta_expand_rec(double y, double K, int em, int start,
                      int depth,
                      std::vector<std::vector<bool>>& gap)
 {
-#define MAXDEPTH 2
+#define MAXDEPTH 5
 	if (MAXDEPTH < depth) return;
 
 	// Search for runs of length em.
@@ -351,6 +351,7 @@ void MakeHisto (char * name,
 
 	for (int i=0; i<sizex; i++)
 	{
+		if (0 == i%100) printf("Start working column %d\n", i);
 		double x = ((double) i + 0.5) / ((double) sizex);
 
 		std::vector<std::vector<bool>> bitset;
@@ -365,10 +366,12 @@ void MakeHisto (char * name,
 				std::vector<bool> bits = bitset[n];
 				double p = beta_sum(bits, Jay);
 				int ni = sizex * p;
-				if (sizex <= ni) ni = sizex - 1;
+				double frac = sizex * p - ni;
+				if (sizex < ni) ni = sizex - 2;
 
 				int idx = j*sizex + ni;
-				array[idx] +=1.0;
+				array[idx] += 1.0 - frac;
+				array[idx+1] += frac;
 			}
 		}
 	}
