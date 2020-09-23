@@ -459,7 +459,7 @@ void MakeHisto (char * name,
 				if (ne < 0) ne = 0;
 
 				// weight runs from 1.0 in the center of the pixel
-				// to 0.5 at eigher edge of the pixel
+				// to 0.5 at either edge of the pixel
 				double weight = 1.0 - fabs(frac - 0.5);
 
 				// if frac = 0.5 i.e. dead center, the center pixel

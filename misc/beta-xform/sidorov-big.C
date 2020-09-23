@@ -40,16 +40,14 @@ void do_init(int nbits)
 // randomly generated.  This is meant to provide a uniform sampling
 // on the unit interval; equivalently, uniform sampling on the
 // product space.
-void make_random_bitsequence(mpf_class& val, double x, int nbits)
+void make_random_bitsequence(mpf_class& val, double x, int nbits, int nbins)
 {
 	mpf_class tail;
 
 	mpf_urandomb(tail.get_mpf_t(), rstate, nbits);
 
-	// Keep the top 12 decimal digits of x
-	unsigned long digs = 1000000;
-	digs *= 1000000;
-	tail /= digs;
+	// Rescale so that it's uniformly distributed over a bin.
+	tail /= nbins;
 	val = x;
 	val += tail;
 }
@@ -280,7 +278,7 @@ int main (int argc, char* argv[])
 	do_init(nbits);
 
 	mpf_class beta;
-	make_random_bitsequence(beta, 2.0*Kay, nbits);
+	make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
 
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
@@ -300,7 +298,7 @@ int main (int argc, char* argv[])
 	{
 		if (i%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		make_random_bitsequence(ex, x, nbits);
+		make_random_bitsequence(ex, x, nbits, NBINS);
 
 		std::vector<std::vector<bool>> bitset;
 		bitset = beta_expand(ex, beta, em, nbits);
@@ -318,7 +316,7 @@ int main (int argc, char* argv[])
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		for (int j=0; j<navg; j++)
 		{
-			make_random_bitsequence(ex, x, nbits);
+			make_random_bitsequence(ex, x, nbits, NBINS);
 			beta_sequence(ex, beta, em, nbits);
 		}
 	}
@@ -331,6 +329,7 @@ int main (int argc, char* argv[])
 		cnt += histo[i];
 		bnt += histbase[i];
 	}
+	fprintf(stderr, "# histogram counts=%d baseline=%d\n", (int) cnt, (int) bnt);
 	for (int i=0; i<NBINS; i++)
 	{
 		histo[i] *= NBINS/cnt;
