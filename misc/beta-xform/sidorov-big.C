@@ -58,9 +58,12 @@ void make_random_bitsequence(mpf_t& val, double x, int nbits)
 	mpf_add(val, val, tail);
 }
 
-#define NBINS 403
-double histo[NBINS];
-double histbase[NBINS];
+#define HISTOGRAM_ORBITS
+#ifdef HISTOGRAM_ORBITS
+	#define NBINS 403
+	double histo[NBINS];
+	double histbase[NBINS];
+#endif
 
 // Compute the m from the sidorov paper. This is the length of the
 // run of zeros we need to see, before exploring an alternate branch.
@@ -125,7 +128,6 @@ void beta_expand_rec(mpf_t y, mpf_t K, int em, int start, int nbits,
 #define MAXDEPTH 8
 	if (MAXDEPTH < depth) return;
 
-#define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
 #define SCALE 0.75
 	for (int i=0; i< NBITS; i++)
@@ -173,7 +175,7 @@ void beta_expand_rec(mpf_t y, mpf_t K, int em, int start, int nbits,
 }
 
 std::vector<std::vector<bool>> beta_expand(mpf_t y, mpf_t beta,
-                                          int nbits, int em)
+                                          int em, int nbits)
 {
 	std::vector<std::vector<bool>> gap;
 	std::vector<bool> bitseq;
@@ -181,14 +183,22 @@ std::vector<std::vector<bool>> beta_expand(mpf_t y, mpf_t beta,
 	bits.resize(nbits);
 	orbit.resize(nbits);
 
+	mpf_t zero;
+	mpf_init(zero);
+	mpf_set_ui(zero, 0);
+	for (int i=0; i< nbits; i++)
+	{
+		orbit[i] = zero;
+	}
+
 	// First, get the baseline (greedy) orbit.
-	greedy_expand(y, K, 0, nbits, orbit, bitseq);
+	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
 	gap.push_back(bitseq);
 
 #ifdef HISTOGRAM_ORBITS
-	for (int i=0; i< NBINS; i++)
+	for (int i=0; i< nbits; i++)
 	{
-		double x = orbit[i];
+		double x = mpf_get_d(orbit[i]);
 		int bin = x * NBINS * SCALE;
 		if (NBINS <= bin) bin=NBINS-1;
 		histbase[bin] += 1.0;
@@ -196,7 +206,7 @@ std::vector<std::vector<bool>> beta_expand(mpf_t y, mpf_t beta,
 #endif // HISTOGRAM_ORBITS
 
 	// And now recursively get the rest.
-	beta_expand_rec(y, K, em, 0, orbit, bits, 0, gap);
+	beta_expand_rec(y, beta, em, 0, nbits, orbit, bitseq, 0, gap);
 
 #if 0 // DEBUG
 	// Debug print
@@ -234,79 +244,24 @@ double beta_sum(std::vector<bool> bits, double Jay)
 
 // ================================================================
 
-#if 1 // BRINGUP_DEBUG
-// Basic unit-test - debugging code
 int main (int argc, char* argv[])
 {
-	if (argc < 2)
+	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s K x\n", argv[0]);
+		fprintf(stderr, "Usage: %s K nbits\n", argv[0]);
 		exit (1);
 	}
 	double Kay = atof(argv[1]);
-	double x = atof(argv[2]);
+	int nbits = atoi(argv[2]);
+
+	mpf_t beta;
+	mpf_init(beta);
+	make_random_bitsequence(beta, 2.0*Kay, nbits);
 
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d x=%g\n#\n", Kay, em, x);
 
-#if CHECK_GROUND_TRUTH
-	// Perform the basic sanity check that everything is OK.
-	int npts = 313;
-	for (int i=0; i<npts; i++)
-	{
-		double x = (((double) i) + 0.5)/ ((double) npts);
-		double z = sdr (x, Kay, em);
-		printf("%d	%g	%g\n", i, x, z);
-	}
-#endif
-
-#ifdef CHECK_MORE
-	// More code validation
-	int npts = 313;
-	for (int i=0; i<npts; i++)
-	{
-		double x = (((double) i) + 0.5)/ ((double) npts);
-
-		std::vector<std::vector<bool>> bitset;
-		bitset = beta_expand(x, Kay, em);
-
-		std::vector<bool> bits = bitset[0];
-		double y = beta_sum(bits, Kay);
-		printf("%d	%g	%g", i, x, y);
-		for (size_t n=1; n<bitset.size(); n++)
-		{
-			std::vector<bool> bits = bitset[n];
-			double z = beta_sum(bits, Kay);
-			if (1.0e-7 < fabs(y-z))
-				printf(" FAIL: %g", y-z);
-		}
-		printf("\n");
-	}
-#endif
-
-#if GRAPH_GAPS
-	std::vector<std::vector<bool>> bitset;
-	bitset = beta_expand(x, Kay, em);
-
-	int npts = 313;
-	for (int i=0; i<npts; i++)
-	{
-		double Jay = (((double) i) + 0.5)/ ((double) npts);
-		Jay = Kay + (1.0-Kay)*Jay;
-
-		printf("%d	%g", i, Jay);
-		for (size_t n=0; n<bitset.size(); n++)
-		{
-			std::vector<bool> bits = bitset[n];
-			double y = beta_sum(bits, Jay);
-			printf("	%g", y);
-		}
-		printf("\n");
-	}
-#endif
-
-#define EXTENDED_MEASURE
-#ifdef EXTENDED_MEASURE
+#ifdef HISTOGRAM_ORBITS
 	// Where are the extended orbits going?
 	// Draw a histogram
 	for (int i=0; i<NBINS; i++)
@@ -315,11 +270,16 @@ int main (int argc, char* argv[])
 		histbase[i] = 0.0;
 	}
 
+	mpf_t ex;
+	mpf_init(ex);
+
 	for (int i=0; i<NBINS; i++)
 	{
-		// if (i%100 ==0) printf("# done %d of %d\n", i, NBINS);
+		if (i%100 ==0) printf("# done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		beta_expand(x, Kay, em);
+		make_random_bitsequence(ex, x, nbits);
+
+		beta_expand(ex, beta, em, nbits);
 	}
 
 	// Normalize
@@ -345,78 +305,5 @@ int main (int argc, char* argv[])
 	}
 #endif
 }
-#endif
 
 // ================================================================
-
-#ifdef DRAW_THE_GAPS
-
-// This block of the code used to draw the sidorov "gaps"
-// in the paper. Full collor. Tne actual paper used.
-//  ./sidorov sid 800 800 1 0.5 0.0 1 0.75
-//
-
-#include "brat.h"
-void MakeHisto (char * name,
-                float *array,
-                int      sizex,
-                int      sizey,
-                double x_center,
-                double y_center,
-                double width,
-                double height,
-                int itermax,
-                double Kay)
-{
-	// double beta = 2.0*Kay;
-	int em = emrun(Kay);
-
-	printf("Tongues for K=%g em=%d\n", Kay, em);
-	int tot_tracks = 0;
-	for (int i=0; i<sizex; i++)
-	{
-		if (0 == i%100) printf("Start working column %d\n", i);
-		double x = ((double) i + 0.5) / ((double) sizex);
-
-		std::vector<std::vector<bool>> bitset;
-		bitset = beta_expand(x, Kay, em);
-		double rtracks = 1.0 / ((double) bitset.size());
-		tot_tracks += bitset.size();
-
-		for (int j=0; j<sizey; j++)
-		{
-			double y = ((double) j + 0.5) / ((double) sizey);
-			double Jay = Kay + (1.0 - Kay) * y;
-			for (size_t n=0; n<bitset.size(); n++)
-			{
-				std::vector<bool> bits = bitset[n];
-				double p = beta_sum(bits, Jay);
-				int ni = sizex * p;
-
-				// frac runs from 0 to 1 from left of pixel to right.
-				double frac = sizex * p - ni;
-
-				// ne is the pixel to the left or to the right.
-				int ne = ni;
-				if (frac < 0.5) ne--; else ne++;
-
-				if (sizex <= ni) ni = sizex - 1;
-				if (sizex <= ne) ne = sizex - 1;
-				if (ne < 0) ne = 0;
-
-				// weight runs from 1.0 in the center of the pixel
-				// to 0.5 at eigher edge of the pixel
-				double weight = 1.0 - fabs(frac - 0.5);
-
-				// if frac = 0.5 i.e. dead center, the center pixel
-				// gets all the weight. Else the neighbor gets some.
-				array[j*sizex + ni] += weight * rtracks;
-				array[j*sizex + ne] += (1.0-weight) * rtracks;
-			}
-		}
-	}
-	double avg = ((double) tot_tracks) / ((double) sizex);
-	printf("Graph shows an average of %g tracks per expansion\n", avg);
-}
-
-#endif
