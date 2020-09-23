@@ -91,21 +91,22 @@ int emrun(double K)
 // `nstart` is where to start writing the bit pattern
 // `bits` is where to write the resulting bit-vector (it is never read)
 // `orbit` is where to write the orbit sequence. (it is never read)
-void greedy_expand(double y, double K, int nstart,
-                   std::vector<double>& orbit,
+void greedy_expand(mpf_t y, mpf_t beta, int nstart, int nbits,
+                   std::vector<mpf_t>& orbit,
                    std::vector<bool>& bits)
 {
 	// Generate the beta expansion bits in a greedy fashion.
-	for (int i=nstart; i<NBITS; i++)
+	for (int i=nstart; i<nbits; i++)
 	{
 		orbit[i] = y;
-		if (0.5 <= y)
+		// if (0.5 <= y)
+		if (0 <= mpf_cmp(y, half))
 		{
-			y -= 0.5;
+			mpf_sub(y, y, half);
 			bits[i] = 1;
 		}
 		else bits[i] = 0;
-		y *= 2.0*K;
+		mpf_mul(y, y, beta);
 	}
 }
 
@@ -115,8 +116,8 @@ void greedy_expand(double y, double K, int nstart,
 // `em` is the number of zero bits to look for.
 // `start` is where to start looking
 // `gap` is the set to which the beta exapnsion is appended.
-void beta_expand_rec(double y, double K, int em, int start,
-                     std::vector<double> orbit,
+void beta_expand_rec(mpf_t y, mpf_t K, int em, int start, int nbits,
+                     std::vector<mpf_t> orbit,
                      std::vector<bool> greedy,
                      int depth,
                      std::vector<std::vector<bool>>& gap)
@@ -129,7 +130,7 @@ void beta_expand_rec(double y, double K, int em, int start,
 #define SCALE 0.75
 	for (int i=0; i< NBITS; i++)
 	{
-		double x = orbit[i];
+		double x = mpf_get_d(orbit[i]);
 		int bin = x * NBINS * SCALE;
 		if (NBINS <= bin) bin=NBINS-1;
 		histo[bin] += 1.0;
@@ -138,7 +139,7 @@ void beta_expand_rec(double y, double K, int em, int start,
 
 	// Search for runs of length em.
 	// The Sidorov paper has an error, the m is off by one.
-	for (int i=start; i<NBITS-em; i++)
+	for (int i=start; i<nbits-em; i++)
 	{
 		if (1 == greedy[i])
 		{
@@ -151,40 +152,41 @@ void beta_expand_rec(double y, double K, int em, int start,
 			if (found)
 			{
 				std::vector<bool> gapper = greedy;
-				std::vector<double> lorbit = orbit;
+				std::vector<mpf_t> lorbit = orbit;
 
 				// Set to zero, and resume expansion.
 				gapper[i] = 0;
-				y = 2.0*K * orbit[i];
+				mpf_mul(y, beta, orbit[i]);
 				lorbit[i] = y;
 
 				// Get the alternate expansion.
-				greedy_expand(y, K, i+1, lorbit, gapper);
+				greedy_expand(y, beta, i+1, nbits, lorbit, gapper);
 				gap.push_back(gapper);
 
 				// Recurse
-				beta_expand_rec(y, K, em, i+1, orbit, greedy, depth+1, gap);
-				beta_expand_rec(y, K, em, i+1, lorbit, gapper, depth+1, gap);
+				beta_expand_rec(y, beta, em, i+1, nbits, orbit, greedy, depth+1, gap);
+				beta_expand_rec(y, beta, em, i+1, nbits, lorbit, gapper, depth+1, gap);
 				return;
 			}
 		}
 	}
 }
 
-std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
+std::vector<std::vector<bool>> beta_expand(mpf_t y, mpf_t beta,
+                                          int nbits, int em)
 {
 	std::vector<std::vector<bool>> gap;
-	std::vector<bool> bits;
-	std::vector<double> orbit;
-	bits.resize(NBITS);
-	orbit.resize(NBITS);
+	std::vector<bool> bitseq;
+	std::vector<mpf_t> orbit;
+	bits.resize(nbits);
+	orbit.resize(nbits);
 
 	// First, get the baseline (greedy) orbit.
-	greedy_expand(y, K, 0, orbit, bits);
-	gap.push_back(bits);
+	greedy_expand(y, K, 0, nbits, orbit, bitseq);
+	gap.push_back(bitseq);
 
 #ifdef HISTOGRAM_ORBITS
-	for (int i=0; i< NBITS; i++)
+	for (int i=0; i< NBINS; i++)
 	{
 		double x = orbit[i];
 		int bin = x * NBINS * SCALE;

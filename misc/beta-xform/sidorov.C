@@ -241,7 +241,7 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 	gap.push_back(bits);
 
 #ifdef HISTOGRAM_ORBITS
-	for (int i=0; i< NBITS; i++)
+	for (int i=0; i< NBINS; i++)
 	{
 		double x = orbit[i];
 		int bin = x * NBINS * SCALE;
