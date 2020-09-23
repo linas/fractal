@@ -3098,7 +3098,7 @@ reference "fig:Expander-Function"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4541,6 +4541,10 @@ gluing together the gaps
 : a nicely intuitive idea.
 \end_layout
 
+\begin_layout Subsection
+Gaps
+\end_layout
+
 \begin_layout Standard
 It is tempting to assume that this general structure persists for the beta
  transform.
@@ -5045,6 +5049,160 @@ The first expansion will clearly yeild
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Unique 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions
+\end_layout
+
+\begin_layout Standard
+Glenndinning and Sidorov consider the conjugate problem: are there any points
+ in the unit interval for which the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion is unique? The answer is that there are non, when 
+\begin_inset Formula $1<\beta\le\varphi$
+\end_inset
+
+ where 
+\begin_inset Formula $\varphi=\left(1+\sqrt{5}\right)/2$
+\end_inset
+
+ the Golden ratio; there are two when 
+\begin_inset Formula $\varphi<\beta\le\beta_{f}$
+\end_inset
+
+ where 
+\begin_inset Formula $\beta_{f}=1.7548776\cdots$
+\end_inset
+
+ is the root of 
+\begin_inset Formula $\beta^{3}=2\beta^{2}-\beta+1$
+\end_inset
+
+, a countable number when 
+\begin_inset Formula $\beta_{f}<\beta<\beta_{c}$
+\end_inset
+
+ and an uncountable number 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ (the cardinality of the Cantor set) when 
+\begin_inset Formula $\beta_{c}\le\beta<2$
+\end_inset
+
+.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glendinning01"
+literal "false"
+
+\end_inset
+
+ The last accumulate towards 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The number 
+\begin_inset Formula $\beta_{c}$
+\end_inset
+
+ is very interesting; lets call it the Komornik–Loreti number.
+ It is a transcendental number built from the Thue–Morse sequence, having
+ the approximate value of 
+\begin_inset Formula $\beta_{c}=1.787231650\cdots$
+\end_inset
+
+ Above this number, there is only one unique 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion of 
+\begin_inset Formula $x=1$
+\end_inset
+
+.
+ Although it plays this important role in the theory of 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions, it does not seem to appear in any of the constructions in this
+ text.
+\end_layout
+
+\begin_layout Subsection
+Invariant measures
+\end_layout
+
+\begin_layout Standard
+The bit sequence 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+ generated in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is unique; one may wonder, where are all those other expansions hiding?
+ The answer becomes apparent after some thought: they are the result of
+ failing to take a 'mod 1' at certain times during the iteration.
+ That is, the sequence 
+\begin_inset Formula $T_{\beta}^{n}(x)$
+\end_inset
+
+ obeys 
+\begin_inset Formula $0\le T_{\beta}^{n}(x)<\beta/2$
+\end_inset
+
+ for all 
+\begin_inset Formula $n>0$
+\end_inset
+
+.
+ The 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can generate the desired gaps only if the input sequence breaks out of
+ this bound at the cylinder locations 
+\begin_inset Formula $n_{j}$
+\end_inset
+
+.
+ As there are an uncountable number of such locations for (almost) every
+ 
+\begin_inset Formula $x$
+\end_inset
+
+, then perhaps these accumulate to form a non-zero measure, extending beyond
+ 
+\begin_inset Formula $0\le x<\beta/2$
+\end_inset
+
+? A numerical histogramming is a straight-forward way of examining this
+ question.
 \end_layout
 
 \begin_layout Section
