@@ -1,5 +1,6 @@
 /*
- * sidorov.C
+ * sidorov-big.C
+ * Bignum version of sidorov.C
  *
  * Understand the "gaps" aka the alternative beta-expansions
  * of any given number x, as described by N Sidorov.
@@ -12,17 +13,54 @@
 
 #include <vector>
 
+#include <gmp.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#define HISTOGRAM_ORBITS
-#ifdef HISTOGRAM_ORBITS
-	#define NBINS 403
-	double histo[NBINS];
-	double histbase[NBINS];
-#endif
+gmp_randstate_t rstate;
+mpf_t half;
+mpf_t one;
+mpf_t two;
+
+void do_init(int nbits)
+{
+	gmp_randinit_default(rstate);
+	mpf_set_default_prec(nbits);
+
+	mpf_init(one);
+	mpf_init(half);
+	mpf_init(two);
+	mpf_set_ui(one, 1);
+	mpf_set_ui(two, 2);
+	mpf_div_ui(half, one, 2);
+}
+
+// Given a double-precision value x, this will create a random
+// bit-sequence that is nbits long, with the top 50 bits being
+// those taken from the double-precision value x, and the rest
+// randomly generated.  This is meant to provide a uniform sampling
+// on the unit interval; equivalently, uniform sampling on the
+// product space.
+void make_random_bitsequence(mpf_t& val, double x, int nbits)
+{
+	mpf_t tail;
+	mpf_init(tail);
+
+	mpf_set_d(val, x);
+	mpf_urandomb(tail, rstate, nbits);
+
+	// Keep the top 12 decimal digits of x
+	unsigned long digs = 1000000;
+	digs *= 1000000;
+	mpf_div_ui(tail, tail, digs);
+	mpf_add(val, val, tail);
+}
+
+#define NBINS 403
+double histo[NBINS];
+double histbase[NBINS];
 
 // Compute the m from the sidorov paper. This is the length of the
 // run of zeros we need to see, before exploring an alternate branch.
@@ -45,103 +83,7 @@ int emrun(double K)
 	return (int) loga;
 }
 
-#define NBITS 50
-
 // ================================================================
-
-// Compute two alternate beta expansions, and compare them
-// side by side. This is currently for debugging only; it
-// spews too many prints. Use beta_expand below for the real
-// thing.
-//
-// Note that beta = 2*K
-double sdr(double y, double K, int em)
-{
-	// Generate the beta expansion bits in a greedy fashion.
-	char grebits[NBITS];
-	double greedy[NBITS];
-	for (int i=0; i<NBITS; i++)
-	{
-		greedy[i] = y;
-		if (0.5 <= y)
-		{
-			y -= 0.5;
-			grebits[i] = 1;
-		}
-		else grebits[i] = 0;
-		y *= 2.0*K;
-	}
-
-	// Search for em runs.
-	// The Sidorov paper has an error, the m is off by one.
-	char lobits[NBITS];
-	for (int i=0; i<NBITS-em; i++)
-	{
-		lobits[i] = grebits[i];
-		if (1 == grebits[i])
-		{
-			bool found = true;
-			for (int j=1; j<=em; j++)
-			{
-				if (1 == grebits[i+j])
-				{
-					found = false;
-					break;
-				}
-			}
-			if (found)
-			{
-				lobits[i] = 0;
-				y = greedy[i];
-				printf("# got one at i=%d y=%g next=%g\n", i, y, y*2*K);
-				y *= 2.0*K;
-
-				for (int j=i+1; j<NBITS; j++)
-				{
-					if (0.5 <= y)
-					{
-						y -= 0.5;
-						lobits[j] = 1;
-					}
-					else lobits[j] = 0;
-					y *= 2.0*K;
-				}
-				break;
-			}
-		}
-	}
-
-	double Jay = K;
-
-	// Reconstruct both sequences;
-	double hiacc = 1.0e-30;
-	double loacc = 1.0e-30;
-	for (int i=0; i<NBITS; i++)
-	{
-		hiacc *= 1.0 / (2.0*Jay);
-		loacc *= 1.0 / (2.0*Jay);
-		if (grebits[NBITS-i-1])
-		{
-			hiacc += 0.5;
-		}
-		if (lobits[NBITS-i-1])
-		{
-			loacc += 0.5;
-		}
-	}
-
-	printf("# hi=");
-	for (int i=0; i<NBITS; i++) printf("%d", grebits[i]);
-	printf("\n");
-	printf("# lo=");
-	for (int i=0; i<NBITS; i++) printf("%d", lobits[i]);
-	printf("\n");
-
-	return hiacc-loacc;
-}
-
-// ================================================================
-double beta_sum(std::vector<bool> bits, double Jay);
 
 // Generate the beta expansion in a greedy fashion.
 // `y` is the number to expand.
@@ -182,6 +124,7 @@ void beta_expand_rec(double y, double K, int em, int start,
 #define MAXDEPTH 8
 	if (MAXDEPTH < depth) return;
 
+#define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
 #define SCALE 0.75
 	for (int i=0; i< NBITS; i++)
@@ -360,7 +303,8 @@ int main (int argc, char* argv[])
 	}
 #endif
 
-#ifdef HISTOGRAM_ORBITS
+#define EXTENDED_MEASURE
+#ifdef EXTENDED_MEASURE
 	// Where are the extended orbits going?
 	// Draw a histogram
 	for (int i=0; i<NBINS; i++)
