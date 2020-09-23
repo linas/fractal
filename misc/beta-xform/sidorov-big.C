@@ -215,6 +215,35 @@ std::vector<std::vector<bool>> beta_expand(mpf_class y, mpf_class beta,
 	return gap;
 }
 
+std::vector<bool> beta_sequence(mpf_class y, mpf_class beta,
+                                int em, int nbits)
+{
+	std::vector<bool> bitseq;
+	std::vector<mpf_class> orbit;
+	bitseq.resize(nbits);
+	orbit.resize(nbits);
+
+	for (int i=0; i< nbits; i++)
+	{
+		orbit[i] = 0;
+	}
+
+	// Get the baseline (greedy) orbit.
+	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
+
+#ifdef HISTOGRAM_ORBITS
+	for (int i=0; i< nbits; i++)
+	{
+		double x = mpf_get_d(orbit[i].get_mpf_t());
+		int bin = x * NBINS * SCALE;
+		if (NBINS <= bin) bin=NBINS-1;
+		histbase[bin] += 1.0;
+	}
+#endif // HISTOGRAM_ORBITS
+
+	return bitseq;
+}
+
 // ================================================================
 
 #if 0
@@ -265,14 +294,33 @@ int main (int argc, char* argv[])
 		histbase[i] = 0.0;
 	}
 
+	int tot_tracks = 0;
 	mpf_class ex;
 	for (int i=0; i<NBINS; i++)
 	{
-		if (i%100 ==0) printf("# done %d of %d\n", i, NBINS);
+		if (i%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		make_random_bitsequence(ex, x, nbits);
 
-		beta_expand(ex, beta, em, nbits);
+		std::vector<std::vector<bool>> bitset;
+		bitset = beta_expand(ex, beta, em, nbits);
+		tot_tracks += bitset.size();
+	}
+	double avg_tracks = ((double) tot_tracks) / NBINS;
+	printf("# Obtained average of %g tracks per orbit\n", avg_tracks);
+	fprintf(stderr, "# Obtained average of %g tracks per orbit\n", avg_tracks);
+	int navg = avg_tracks;
+
+	// Obtaina a comparable number of counts for the baseline
+	for (int i=0; i<NBINS; i++)
+	{
+		if (i%100 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
+		double x = (((double) i) + 0.5)/ ((double) NBINS);
+		for (int j=0; j<navg; j++)
+		{
+			make_random_bitsequence(ex, x, nbits);
+			beta_sequence(ex, beta, em, nbits);
+		}
 	}
 
 	// Normalize
