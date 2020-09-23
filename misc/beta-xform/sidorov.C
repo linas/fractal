@@ -335,37 +335,41 @@ int main (int argc, char* argv[])
 
 // ================================================================
 
-static void sido (float *array,
-                             int array_size,
-                             double x_center,
-                             double x_width,
-                             double row,
-                             int itermax,
-                             double Kay)
+void MakeHisto (char * name,
+                float *array,
+                int      sizex,
+                int      sizey,
+                double x_center,
+                double y_center,
+                double width,
+                double height,
+                int itermax,
+                double Kay)
 {
-	/* clear out the row */
-	for (int j=0; j<array_size; j++) array[j] = 0.0;
-
 	// double beta = 2.0*Kay;
 	int em = emrun(Kay);
 
-	double Jay = row;
-	for (int j=0; j<array_size; j++)
+	for (int i=0; i<sizex; i++)
 	{
-		double x = ((double) j + 0.5) / ((double) array_size);
+		double x = ((double) i + 0.5) / ((double) sizex);
 
 		std::vector<std::vector<bool>> bitset;
 		bitset = beta_expand(x, Kay, em);
-		for (size_t n=0; n<bitset.size(); n++)
-		{
-			std::vector<bool> bits = bitset[n];
-			double y = beta_sum(bits, Jay);
 
-			int idx = y * array_size;
-			if (array_size <= idx) idx = array_size-1;
-			array[idx] +=1.0;
+		for (int j=0; j<sizey; j++)
+		{
+			double y = ((double) j + 0.5) / ((double) sizey);
+			double Jay = Kay + (1.0 - Kay) * y;
+			for (size_t n=0; n<bitset.size(); n++)
+			{
+				std::vector<bool> bits = bitset[n];
+				double p = beta_sum(bits, Jay);
+				int ni = sizex * p;
+				if (sizex <= ni) ni = sizex - 1;
+
+				int idx = j*sizex + ni;
+				array[idx] +=1.0;
+			}
 		}
 	}
 }
-
-DECL_MAKE_BIFUR(sido)
