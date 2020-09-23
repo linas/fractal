@@ -4827,6 +4827,196 @@ for integer
  This is the binary decision tree; the gap is an infiinte binary tree.
 \end_layout
 
+\begin_layout Standard
+A visualization of the gaps is shown in figure xx.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gaps
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This visualizes the multitude of 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions available for 
+\begin_inset Formula $\beta=0.75$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ from left to right.
+ A paramter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ runs from 
+\begin_inset Formula $\alpha=\beta$
+\end_inset
+
+ at the top to 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+ at the bottom.
+ For each value of 
+\begin_inset Formula $x$
+\end_inset
+
+, an average of 512 distinct expansions 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ were computed, and then for each such expansion, the sum 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $w=\frac{1}{2}\sum_{n=0}^{\infty}k_{n}^{\prime}\alpha^{-n}$
+\end_inset
+
+ was computed.
+ The sum is normalized so that 
+\begin_inset Formula $0\le w\le1$
+\end_inset
+
+ for all possible expansions.
+ A density visualization is created by incrementing the pixel located at
+ 
+\begin_inset Formula $(w,\alpha)$
+\end_inset
+
+.
+ The color coding is such that pixels with an average density of 1.0 are
+ green, denser areas tend to yelow and read, while less dense areas tend
+ to blue.
+ Black areas have no hits.
+ Thus, the top row is green, as for the top row, 
+\begin_inset Formula $\alpha=\beta$
+\end_inset
+
+ and so all expansions give the same value 
+\begin_inset Formula $x=w$
+\end_inset
+
+, and so the distribution is uniform.
+ As 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ increases, a separation of the expansions can be seen.
+ This can be understood as follows.
+ Consider the expansions of 
+\begin_inset Formula $x=0.5000000001$
+\end_inset
+
+, the first few of which are
+\end_layout
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+ 10000000000000000000000000000000000000000000000000  
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000010010010100000000010000001000010000001010 
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000010001110000001001000001000010010001001000  
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000001110000000100100100100100100000100100000 
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000001101010010000000100100010000010010010000 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The first expansion will clearly yeild 
+\begin_inset Formula $w=1/2$
+\end_inset
+
+, independent of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ This accounts for the obvious vertical feature at 
+\begin_inset Formula $x=1/2$
+\end_inset
+
+.
+ The remaining tracks will bend to the left as 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ increases, top too bottom.
+ The general slope of each track is dominated by the first non-zero bit
+ in the expansion.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Transfer operators
 \end_layout

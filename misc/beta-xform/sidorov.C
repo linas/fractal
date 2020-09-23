@@ -171,7 +171,7 @@ void beta_expand_rec(double y, double K, int em, int start,
                      int depth,
                      std::vector<std::vector<bool>>& gap)
 {
-#define MAXDEPTH 5
+#define MAXDEPTH 8
 	if (MAXDEPTH < depth) return;
 
 	// Search for runs of length em.
@@ -242,7 +242,7 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 // ================================================================
 
 // Sum the bit-sequence, returning the sum.
-// This returns sum_i b[i] (2J)^-i
+// This returns 0.5 * sum_i=0 b[i] (2J)^-i
 //
 double beta_sum(std::vector<bool> bits, double Jay)
 {
@@ -350,6 +350,7 @@ void MakeHisto (char * name,
 	int em = emrun(Kay);
 
 	printf("Tongues for K=%g em=%d\n", Kay, em);
+	int tot_tracks = 0;
 	for (int i=0; i<sizex; i++)
 	{
 		if (0 == i%100) printf("Start working column %d\n", i);
@@ -358,6 +359,7 @@ void MakeHisto (char * name,
 		std::vector<std::vector<bool>> bitset;
 		bitset = beta_expand(x, Kay, em);
 		double rtracks = 1.0 / ((double) bitset.size());
+		tot_tracks += bitset.size();
 
 		for (int j=0; j<sizey; j++)
 		{
@@ -391,4 +393,6 @@ void MakeHisto (char * name,
 			}
 		}
 	}
+	double avg = ((double) tot_tracks) / ((double) sizex);
+	printf("Graph shows an average of %g tracks per expansion\n", avg);
 }
