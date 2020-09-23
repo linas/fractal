@@ -14,7 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "brat.h"
+#define NBINS 1803
+double histo[NBINS];
 
 // Compute the m from the sidorov paper. This is the length of the
 // run of zeros we need to see, before exploring an alternate branch.
@@ -174,6 +175,17 @@ void beta_expand_rec(double y, double K, int em, int start,
 #define MAXDEPTH 8
 	if (MAXDEPTH < depth) return;
 
+#define HISTOGRAM_ORBITS
+#ifdef HISTOGRAM_ORBITS
+	for (int i=0; i< NBITS; i++)
+	{
+		double x = orbit[i];
+		int bin = x * NBINS * 0.5;
+		if (NBINS <= bin) bin=NBINS-1;
+		histo[bin] += 1.0;
+	}
+#endif
+
 	// Search for runs of length em.
 	// The Sidorov paper has an error, the m is off by one.
 	for (int i=start; i<NBITS-em; i++)
@@ -260,7 +272,7 @@ double beta_sum(std::vector<bool> bits, double Jay)
 
 // ================================================================
 
-#ifdef DEBUG
+#if 1 // BRINGUP_DEBUG
 // Basic unit-test - debugging code
 int main (int argc, char* argv[])
 {
@@ -310,7 +322,7 @@ int main (int argc, char* argv[])
 	}
 #endif
 
-#if 1
+#if GRAPH_GAPS
 	std::vector<std::vector<bool>> bitset;
 	bitset = beta_expand(x, Kay, em);
 
@@ -330,11 +342,41 @@ int main (int argc, char* argv[])
 		printf("\n");
 	}
 #endif
+
+#define EXTENDED_MEASURE
+#ifdef EXTENDED_MEASURE
+	// Where are the extended orbits going?
+	// Draw a histogram
+	for (int i=0; i<NBINS; i++)
+		histo[i] = 0.0;
+
+	for (int i=0; i<NBINS; i++)
+	{
+		if (i%100 ==0) printf("# done %d of %d\n", i, NBINS);
+		double x = (((double) i) + 0.5)/ ((double) NBINS);
+		beta_expand(x, Kay, em);
+	}
+
+	// Print the histogram
+	for (int i=0; i<NBINS; i++)
+	{
+		double x = (((double) i) + 0.5)/ ((double) NBINS);
+		printf("%d	%g	%g\n", i, 2.0*x, histo[i]);
+	}
+#endif
 }
 #endif
 
 // ================================================================
 
+#ifdef DRAW_THE_GAPS
+
+// This block of the code used to draw the sidorov "gaps"
+// in the paper. Full collor. Tne actual paper used.
+//  ./sidorov sid 800 800 1 0.5 0.0 1 0.75
+//
+
+#include "brat.h"
 void MakeHisto (char * name,
                 float *array,
                 int      sizex,
@@ -396,3 +438,5 @@ void MakeHisto (char * name,
 	double avg = ((double) tot_tracks) / ((double) sizex);
 	printf("Graph shows an average of %g tracks per expansion\n", avg);
 }
+
+#endif
