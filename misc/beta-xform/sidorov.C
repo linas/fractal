@@ -349,6 +349,7 @@ void MakeHisto (char * name,
 	// double beta = 2.0*Kay;
 	int em = emrun(Kay);
 
+	printf("Tongues for K=%g em=%d\n", Kay, em);
 	for (int i=0; i<sizex; i++)
 	{
 		if (0 == i%100) printf("Start working column %d\n", i);
@@ -356,6 +357,7 @@ void MakeHisto (char * name,
 
 		std::vector<std::vector<bool>> bitset;
 		bitset = beta_expand(x, Kay, em);
+		double rtracks = 1.0 / ((double) bitset.size());
 
 		for (int j=0; j<sizey; j++)
 		{
@@ -384,8 +386,8 @@ void MakeHisto (char * name,
 
 				// if frac = 0.5 i.e. dead center, the center pixel
 				// gets all the weight. Else the neighbor gets some.
-				array[j*sizex + ni] += weight;
-				array[j*sizex + ne] += 1.0-weight;
+				array[j*sizex + ni] += weight * rtracks;
+				array[j*sizex + ne] += (1.0-weight) * rtracks;
 			}
 		}
 	}
