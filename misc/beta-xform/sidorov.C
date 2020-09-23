@@ -14,8 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NBINS 1803
+#define NBINS 403
 double histo[NBINS];
+double histbase[NBINS];
 
 // Compute the m from the sidorov paper. This is the length of the
 // run of zeros we need to see, before exploring an alternate branch.
@@ -177,10 +178,11 @@ void beta_expand_rec(double y, double K, int em, int start,
 
 #define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
+#define SCALE 0.75
 	for (int i=0; i< NBITS; i++)
 	{
 		double x = orbit[i];
-		int bin = x * NBINS * 0.5;
+		int bin = x * NBINS * SCALE;
 		if (NBINS <= bin) bin=NBINS-1;
 		histo[bin] += 1.0;
 	}
@@ -232,6 +234,16 @@ std::vector<std::vector<bool>> beta_expand(double y, double K, int em)
 	// First, get the baseline (greedy) orbit.
 	greedy_expand(y, K, 0, orbit, bits);
 	gap.push_back(bits);
+
+#ifdef HISTOGRAM_ORBITS
+	for (int i=0; i< NBITS; i++)
+	{
+		double x = orbit[i];
+		int bin = x * NBINS * SCALE;
+		if (NBINS <= bin) bin=NBINS-1;
+		histbase[bin] += 1.0;
+	}
+#endif // HISTOGRAM_ORBITS
 
 	// And now recursively get the rest.
 	beta_expand_rec(y, K, em, 0, orbit, bits, 0, gap);
@@ -348,20 +360,38 @@ int main (int argc, char* argv[])
 	// Where are the extended orbits going?
 	// Draw a histogram
 	for (int i=0; i<NBINS; i++)
+	{
 		histo[i] = 0.0;
+		histbase[i] = 0.0;
+	}
 
 	for (int i=0; i<NBINS; i++)
 	{
-		if (i%100 ==0) printf("# done %d of %d\n", i, NBINS);
+		// if (i%100 ==0) printf("# done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		beta_expand(x, Kay, em);
+	}
+
+	// Normalize
+	double cnt = 0.0;
+	double bnt = 0.0;
+	for (int i=0; i<NBINS; i++)
+	{
+		cnt += histo[i];
+		bnt += histbase[i];
+	}
+	for (int i=0; i<NBINS; i++)
+	{
+		histo[i] *= NBINS/cnt;
+		histbase[i] *= NBINS/bnt;
 	}
 
 	// Print the histogram
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		printf("%d	%g	%g\n", i, 2.0*x, histo[i]);
+		x /= SCALE;
+		printf("%d	%g	%g	%g\n", i, x, histo[i], histbase[i]);
 	}
 #endif
 }
