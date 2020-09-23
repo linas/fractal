@@ -13,28 +13,25 @@
 
 #include <vector>
 
-#include <gmp.h>
+#include <gmpxx.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 gmp_randstate_t rstate;
-mpf_t half;
-mpf_t one;
-mpf_t two;
+mpf_class half;
+mpf_class one;
+mpf_class two;
 
 void do_init(int nbits)
 {
 	gmp_randinit_default(rstate);
 	mpf_set_default_prec(nbits);
 
-	mpf_init(one);
-	mpf_init(half);
-	mpf_init(two);
-	mpf_set_ui(one, 1);
-	mpf_set_ui(two, 2);
-	mpf_div_ui(half, one, 2);
+	one = 1;
+	two = 2;
+	half = one / two;
 }
 
 // Given a double-precision value x, this will create a random
@@ -43,19 +40,18 @@ void do_init(int nbits)
 // randomly generated.  This is meant to provide a uniform sampling
 // on the unit interval; equivalently, uniform sampling on the
 // product space.
-void make_random_bitsequence(mpf_t& val, double x, int nbits)
+void make_random_bitsequence(mpf_class& val, double x, int nbits)
 {
-	mpf_t tail;
-	mpf_init(tail);
+	mpf_class tail;
 
-	mpf_set_d(val, x);
-	mpf_urandomb(tail, rstate, nbits);
+	val = x;
+	mpf_urandomb(tail.get_mpf_t(), rstate, nbits);
 
 	// Keep the top 12 decimal digits of x
 	unsigned long digs = 1000000;
 	digs *= 1000000;
-	mpf_div_ui(tail, tail, digs);
-	mpf_add(val, val, tail);
+	tail /= digs;
+	val += tail;
 }
 
 #define HISTOGRAM_ORBITS
@@ -94,22 +90,21 @@ int emrun(double K)
 // `nstart` is where to start writing the bit pattern
 // `bits` is where to write the resulting bit-vector (it is never read)
 // `orbit` is where to write the orbit sequence. (it is never read)
-void greedy_expand(mpf_t y, mpf_t beta, int nstart, int nbits,
-                   std::vector<mpf_t>& orbit,
+void greedy_expand(mpf_class y, mpf_class beta, int nstart, int nbits,
+                   std::vector<mpf_class>& orbit,
                    std::vector<bool>& bits)
 {
 	// Generate the beta expansion bits in a greedy fashion.
 	for (int i=nstart; i<nbits; i++)
 	{
 		orbit[i] = y;
-		// if (0.5 <= y)
-		if (0 <= mpf_cmp(y, half))
+		if (half <= y)
 		{
-			mpf_sub(y, y, half);
+			y -= half;
 			bits[i] = 1;
 		}
 		else bits[i] = 0;
-		mpf_mul(y, y, beta);
+		y *= beta;
 	}
 }
 
@@ -119,8 +114,8 @@ void greedy_expand(mpf_t y, mpf_t beta, int nstart, int nbits,
 // `em` is the number of zero bits to look for.
 // `start` is where to start looking
 // `gap` is the set to which the beta exapnsion is appended.
-void beta_expand_rec(mpf_t y, mpf_t K, int em, int start, int nbits,
-                     std::vector<mpf_t> orbit,
+void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
+                     std::vector<mpf_class> orbit,
                      std::vector<bool> greedy,
                      int depth,
                      std::vector<std::vector<bool>>& gap)
@@ -130,9 +125,9 @@ void beta_expand_rec(mpf_t y, mpf_t K, int em, int start, int nbits,
 
 #ifdef HISTOGRAM_ORBITS
 #define SCALE 0.75
-	for (int i=0; i< NBITS; i++)
+	for (int i=0; i< nbits; i++)
 	{
-		double x = mpf_get_d(orbit[i]);
+		double x = mpf_get_d(orbit[i].get_mpf_t());
 		int bin = x * NBINS * SCALE;
 		if (NBINS <= bin) bin=NBINS-1;
 		histo[bin] += 1.0;
@@ -154,11 +149,11 @@ void beta_expand_rec(mpf_t y, mpf_t K, int em, int start, int nbits,
 			if (found)
 			{
 				std::vector<bool> gapper = greedy;
-				std::vector<mpf_t> lorbit = orbit;
+				std::vector<mpf_class> lorbit = orbit;
 
 				// Set to zero, and resume expansion.
 				gapper[i] = 0;
-				mpf_mul(y, beta, orbit[i]);
+				y = beta * orbit[i];
 				lorbit[i] = y;
 
 				// Get the alternate expansion.
@@ -174,21 +169,18 @@ void beta_expand_rec(mpf_t y, mpf_t K, int em, int start, int nbits,
 	}
 }
 
-std::vector<std::vector<bool>> beta_expand(mpf_t y, mpf_t beta,
+std::vector<std::vector<bool>> beta_expand(mpf_class y, mpf_class beta,
                                           int em, int nbits)
 {
 	std::vector<std::vector<bool>> gap;
 	std::vector<bool> bitseq;
-	std::vector<mpf_t> orbit;
-	bits.resize(nbits);
+	std::vector<mpf_class> orbit;
+	bitseq.resize(nbits);
 	orbit.resize(nbits);
 
-	mpf_t zero;
-	mpf_init(zero);
-	mpf_set_ui(zero, 0);
 	for (int i=0; i< nbits; i++)
 	{
-		orbit[i] = zero;
+		orbit[i] = 0;
 	}
 
 	// First, get the baseline (greedy) orbit.
@@ -198,7 +190,7 @@ std::vector<std::vector<bool>> beta_expand(mpf_t y, mpf_t beta,
 #ifdef HISTOGRAM_ORBITS
 	for (int i=0; i< nbits; i++)
 	{
-		double x = mpf_get_d(orbit[i]);
+		double x = mpf_get_d(orbit[i].get_mpf_t());
 		int bin = x * NBINS * SCALE;
 		if (NBINS <= bin) bin=NBINS-1;
 		histbase[bin] += 1.0;
@@ -225,6 +217,7 @@ std::vector<std::vector<bool>> beta_expand(mpf_t y, mpf_t beta,
 
 // ================================================================
 
+#if 0
 // Sum the bit-sequence, returning the sum.
 // This returns 0.5 * sum_i=0 b[i] (2J)^-i
 //
@@ -241,6 +234,7 @@ double beta_sum(std::vector<bool> bits, double Jay)
 	}
 	return acc;
 }
+#endif
 
 // ================================================================
 
@@ -254,12 +248,11 @@ int main (int argc, char* argv[])
 	double Kay = atof(argv[1]);
 	int nbits = atoi(argv[2]);
 
-	mpf_t beta;
-	mpf_init(beta);
+	mpf_class beta;
 	make_random_bitsequence(beta, 2.0*Kay, nbits);
 
 	int em = emrun(Kay);
-	printf("#\n# K=%g m=%d x=%g\n#\n", Kay, em, x);
+	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
 
 #ifdef HISTOGRAM_ORBITS
 	// Where are the extended orbits going?
@@ -270,9 +263,7 @@ int main (int argc, char* argv[])
 		histbase[i] = 0.0;
 	}
 
-	mpf_t ex;
-	mpf_init(ex);
-
+	mpf_class ex;
 	for (int i=0; i<NBINS; i++)
 	{
 		if (i%100 ==0) printf("# done %d of %d\n", i, NBINS);

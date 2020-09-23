@@ -135,4 +135,4 @@ betadisk: betadisk.o $(BRAT)
 momenta: momenta.o $(BRAT)
 sidorov: sidorov.o # $(BRAT)
 sidorov-big: sidorov-big.o
-	$(CC) -o $@ $^ -lgmp -lm
+	$(CC) -o $@ $^ -lgmpxx -lgmp -lm -lstdc++
