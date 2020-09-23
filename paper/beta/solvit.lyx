@@ -4837,7 +4837,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -5046,7 +5046,7 @@ The first expansion will clearly yeild
 .
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Drawn with fractal/misc/beta-xform/sidorov.C
@@ -5212,8 +5212,189 @@ noprefix "false"
 \begin_inset Formula $0\le x<\beta/2$
 \end_inset
 
-? A numerical histogramming is a straight-forward way of examining this
- question.
+?
+\end_layout
+
+\begin_layout Standard
+This argument can be made more plausible if it can be shown that the spacing
+ between the alternative expansion points tends to a constant.
+ So, for example, if every fifth bit is a location where an alternative
+ expansion can be made, then one might expect that one-fifth of the extended
+ measure to fall outside the bound 
+\begin_inset Formula $0\le x<\beta/2$
+\end_inset
+
+.
+ This intuitive idea needs to be firmed up, as the expansion points are
+ not merely points in a linear sequence, but are points in a binary tree.
+ That is, the length of the branches in the tree must be measured, and averaged.
+\end_layout
+
+\begin_layout Standard
+Towards this end, let 
+\begin_inset Formula $D$
+\end_inset
+
+ denote the infinite binary tree, and let 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ denote a specific location on the tree.
+ In other words, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is an index into the tree.
+ The natural representation for 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is as a finite sequence of left-right moves.
+ In this case, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ can be represented as a finite string of binary digits.
+ Alternately, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ can be represented as a sequence of left-moves, followed by a mirror, and
+ again some left moves, 
+\emph on
+etc.
+
+\emph default
+ so that 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}r\cdots rg^{a_{m}}$
+\end_inset
+
+ or, more compactly, 
+\begin_inset Formula $\gamma=(a_{1},a_{2},\cdots,a_{m})$
+\end_inset
+
+ for integers 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+.
+ These are obviously the binary and the continued-fraction representations
+ for a location on the tree.
+ It is convenient to define 
+\begin_inset Formula $\log:D\to\mathbb{N}$
+\end_inset
+
+ by setting 
+\begin_inset Formula $\log\gamma$
+\end_inset
+
+ to the number of left-right moves in 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ That is, log just counts the depth into the tree; it is literally 
+\begin_inset Formula $\log\gamma=\log_{2}\mbox{len }\gamma$
+\end_inset
+
+ where 
+\begin_inset Formula $\mbox{len }\gamma$
+\end_inset
+
+ is the length of the string 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ (in the binary representation).
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $p:D\to\mathbb{N}$
+\end_inset
+
+ be a function that assigns a natural number to each node on the binary
+ tree.
+ Such a function can be said to be strictly increasing if (and only if)
+ 
+\begin_inset Formula $p\left(\gamma^{\prime}\right)>p\left(\gamma\right)$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\log\gamma^{\prime}>\log\gamma$
+\end_inset
+
+.
+ For the present situation, we wish to take 
+\begin_inset Formula $p\left(\gamma\right)$
+\end_inset
+
+ to be the distance to the branch point at 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, i.e.
+ to be the length of the bitstring 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ where the branch is taken.
+ The average distance between branch points is then
+\begin_inset Formula 
+\[
+l\left(\beta\right)=\lim_{n\to\infty}\frac{1}{2^{n}}\sum_{\gamma:\log\gamma<n}p\left(\gamma L\right)+p\left(\gamma R\right)-2p\left(\gamma\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma L$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma R$
+\end_inset
+
+ are the left and right locations under 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and the sum is limited to trees of depth 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Clearly, the weighting of this is such that the average distance is dominated
+ by the average distance between branches at the deepest level in the tree.
+ The branch-points can be said to be 
+\begin_inset Quotes eld
+\end_inset
+
+dense in the tree
+\begin_inset Quotes erd
+\end_inset
+
+ if 
+\begin_inset Formula $l\left(\beta\right)>0$
+\end_inset
+
+ and, intuitively, if something is dense in the tree, then the corresponding
+ map should have a positive measure on the real number line.
+ In this case, one then expects the out-of-bounds measure to be proportional
+ to 
+\begin_inset Formula $1/l\left(\beta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The simplest route to obtaining some insight into 
+\begin_inset Formula $l\left(\beta\right)$
+\end_inset
+
+ is by numerical exploration; for the measure, numerical histogramming is
+ a straight-forward way of getting a glimpse.
 \end_layout
 
 \begin_layout Section

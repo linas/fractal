@@ -118,7 +118,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      int depth,
                      std::vector<std::vector<bool>>& gap)
 {
-#define MAXDEPTH 8
+#define MAXDEPTH 10
 	if (MAXDEPTH < depth) return;
 
 #ifdef HISTOGRAM_ORBITS
