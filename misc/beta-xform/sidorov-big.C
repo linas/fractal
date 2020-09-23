@@ -44,13 +44,13 @@ void make_random_bitsequence(mpf_class& val, double x, int nbits)
 {
 	mpf_class tail;
 
-	val = x;
 	mpf_urandomb(tail.get_mpf_t(), rstate, nbits);
 
 	// Keep the top 12 decimal digits of x
 	unsigned long digs = 1000000;
 	digs *= 1000000;
 	tail /= digs;
+	val = x;
 	val += tail;
 }
 
@@ -247,6 +247,8 @@ int main (int argc, char* argv[])
 	}
 	double Kay = atof(argv[1]);
 	int nbits = atoi(argv[2]);
+
+	do_init(nbits);
 
 	mpf_class beta;
 	make_random_bitsequence(beta, 2.0*Kay, nbits);
