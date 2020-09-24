@@ -4787,7 +4787,7 @@ noprefix "false"
  That is, 
 \begin_inset Formula 
 \[
-\kappa_{n_{j}+p}=k_{p}\left(T_{\beta}^{n_{j}}(\beta x)\right)
+\kappa_{n_{j}+p}=k_{p}\left(\beta T_{\beta}^{n_{j}}(x)\right)
 \]
 
 \end_inset
@@ -5483,7 +5483,121 @@ The simplest route to obtaining some insight into
 \end_layout
 
 \begin_layout Standard
+Each alternative expansion arises from an alternative orbit.
+ Let 
+\begin_inset Formula $\gamma$
+\end_inset
 
+ specify that alternative; that is, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is a specific path down the binary tree.
+ it is a sequence of left-right moves down the tree.
+ Donote these as 
+\begin_inset Formula $\gamma=\left(\gamma_{0},\gamma_{1},\gamma_{2},\cdots\right)$
+\end_inset
+
+ so that 
+\begin_inset Formula $\gamma_{k}=0$
+\end_inset
+
+ for a left-move and 
+\begin_inset Formula $\gamma_{k}=1$
+\end_inset
+
+ for a right move.
+ Correspondingly, let 
+\begin_inset Formula $(p_{0},p_{1},p_{2},\cdots)$
+\end_inset
+
+ be locations of the alternative choices in the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion along that particular path.
+ The alternative orbit is then given by
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\[
+\tau_{n}\left(x\right)=\begin{cases}
+T_{\beta}^{n}\left(x\right) & \mbox{ for }n<p_{0}\\
+\left(1-\gamma_{0}\right)\beta T_{\beta}^{p_{0}-1}\left(x\right)+\gamma_{0}T_{\beta}^{p_{0}}\left(x\right) & \mbox{ for }n=p_{0}\\
+T_{\beta}^{n-p_{0}}\left(\tau_{p_{0}}\left(x\right)\right) & \mbox{ for }p_{0}<n<p_{1}\\
+\cdots & \cdots\\
+\left(1-\gamma_{k}\right)\beta\tau_{n-1}\left(x\right)+\gamma_{k}T\left(\tau_{n-1}\left(x\right)\right) & \mbox{ for }n=p_{k}\\
+T_{\beta}^{n-p_{k}}\left(\tau_{p_{k}}\left(x\right)\right) & \mbox{ for }p_{k}<n<p_{k+1}\\
+\cdots & \cdots
+\end{cases}
+\]
+
+\end_inset
+
+This sequence has a corresponding bit string expansion
+\begin_inset Formula 
+\[
+\kappa_{n}\left(x\right)=\begin{cases}
+0 & \mbox{ if }0\le\tau_{n}(x)<\frac{1}{2}\mbox{ and n\ensuremath{\ne p_{k}}}\\
+1 & \mbox{ if }\frac{1}{2}\le\tau_{n}(x)\le1\mbox{ and n\ensuremath{\ne p_{k}}}\\
+\gamma_{k} & \mbox{ if }n=p_{k}
+\end{cases}
+\]
+
+\end_inset
+
+By construction, one has that each of these bit strings provide an inequivalent
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion for the same 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ That is, one has, for all 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ that
+\begin_inset Formula 
+\[
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+by construction.
+\end_layout
+
+\begin_layout Standard
+As there are an uncountable number of paths down the binary tree, the collection
+ of such orbits 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ is also uncountable.
+ If 
+\begin_inset Formula $l\left(\beta\right)<\infty$
+\end_inset
+
+, then such orbits should also be measureable.
+ This claim
 \end_layout
 
 \begin_layout Section
