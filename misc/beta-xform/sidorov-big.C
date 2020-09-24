@@ -287,8 +287,8 @@ int main (int argc, char* argv[])
 		histbase[i] = 0.0;
 	}
 
-	int tot_tracks = 0;
-	int tot_tracklen = 0;
+	size_t tot_tracks = 0;
+	size_t tot_tracklen = 0;
 	mpf_class ex;
 	for (int i=0; i<NBINS; i++)
 	{
@@ -301,11 +301,11 @@ int main (int argc, char* argv[])
 		std::vector<std::vector<int>> branch_set;
 		beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
 
-		int ntracks = bitset.size();
-		tot_tracks += ntracks;
+		tot_tracks += bitset.size();
 
 		// Compute a histogram of the orbits. But do it only by 
 		// summing up to the last branch-point.
+		int ntracks = bitset.size();
 		for (int j=0; j<ntracks; j++)
 		{
 			std::vector<mpf_class> orbit = orbit_set[j];
@@ -322,7 +322,7 @@ int main (int argc, char* argv[])
 		}
 	}
 	double avg_tracks = ((double) tot_tracks) / NBINS;
-	double avg_tracklen = ((double) tot_tracklen) / (tot_tracks * NBINS);
+	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
 	printf("# Avg tracks/orbit: %g avg tracklen: %g\n",
 	       avg_tracks, avg_tracklen);
 	fprintf(stderr, "# Avg tracks/orbit: %g avg tracklen: %g\n",
