@@ -5360,9 +5360,32 @@ where
 \end_inset
 
 .
- Clearly, the weighting of this is such that the average distance is dominated
- by the average distance between branches at the deepest level in the tree.
- The branch-points can be said to be 
+ Regrouping terms, let 
+\begin_inset Formula 
+\[
+s_{n}\left(\beta\right)=\frac{1}{2^{n}}\sum_{\gamma:\mbox{len}\gamma=n}p\left(\gamma\right)
+\]
+
+\end_inset
+
+be the average distance (pathlength) down to the 
+\begin_inset Formula $n$
+\end_inset
+
+'th level in the tree.
+ Then 
+\begin_inset Formula 
+\[
+l\left(\beta\right)=\lim_{n\to\infty}\frac{s_{n}\left(\beta\right)}{n+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The branch-points can be thought of as being 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5371,10 +5394,11 @@ dense in the tree
 \end_inset
 
  if 
-\begin_inset Formula $l\left(\beta\right)>0$
+\begin_inset Formula $l\left(\beta\right)<\infty$
 \end_inset
 
- and, intuitively, if something is dense in the tree, then the corresponding
+.
+ Intuitively, having dense branch-points, suggests that the corresponding
  map should have a positive measure on the real number line.
  In this case, one then expects the out-of-bounds measure to be proportional
  to 
@@ -5391,36 +5415,75 @@ The simplest route to obtaining some insight into
 
  is by numerical exploration; for the measure, numerical histogramming is
  a straight-forward way of getting a glimpse.
- To that end, it is useful to define some adjunct quantities.
- Let 
-\begin_inset Formula 
-\[
-s_{n}\left(\beta\right)=\frac{1}{2^{n}}\sum_{\gamma:\mbox{len}\gamma=n}p\left(\gamma\right)
-\]
+ Towards that end, the first 22 values of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
 
+\begin_inset Formula $s_{n}\left(\beta\right)$
 \end_inset
 
-so that 
-\begin_inset Formula 
-\[
-l\left(\beta\right)=\lim_{n\to\infty}\frac{s_{n}\left(\beta\right)}{n+1}
-\]
-
-\end_inset
-
-Each of these implicitly depends on the starting point 
-\begin_inset Formula $x$
-\end_inset
-
- of the iterated sequence; that is, the 
-\begin_inset Formula $x$
-\end_inset
-
- that is being 
+ were computed for a range of 
 \begin_inset Formula $\beta$
 \end_inset
 
--expanded.
+ values.
+ These very quickly settle down: the first decimal place is determined by
+ 
+\begin_inset Formula $n=1$
+\end_inset
+
+, the second decimal place by 
+\begin_inset Formula $n=5$
+\end_inset
+
+ and the third decimal place by 
+\begin_inset Formula $n=10$
+\end_inset
+
+.
+ The value of the 
+\begin_inset Formula $s_{n}\left(\beta\right)$
+\end_inset
+
+ does have an 
+\begin_inset Formula $x$
+\end_inset
+
+ dependence, but it appears to be small and bounded, so that it's more or
+ less flat.
+ The numerical data does suggest some fractal behavior, but it is small
+ and hard to discern, and may be entirely due to small-
+\begin_inset Formula $n$
+\end_inset
+
+ effects.
+ That is, the numeric hint that for large 
+\begin_inset Formula $n$
+\end_inset
+
+ that 
+\begin_inset Formula $s_{n}\left(\beta\right)$
+\end_inset
+
+ converges uniformly to a flat distribution (as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section

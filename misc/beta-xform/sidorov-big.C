@@ -223,11 +223,10 @@ std::vector<bool> beta_sequence(mpf_class y, mpf_class beta,
 	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
 
 #ifdef HISTOGRAM_ORBITS
-#define SCALE 0.75
-	for (int i=0; i< nbits; i++)
+	for (int i=1; i< nbits; i++)
 	{
 		double x = mpf_get_d(orbit[i].get_mpf_t());
-		int bin = x * NBINS * SCALE;
+		int bin = x * NBINS;
 		if (NBINS <= bin) bin=NBINS-1;
 		histbase[bin] += 1.0;
 	}
@@ -325,10 +324,11 @@ int main (int argc, char* argv[])
 			int last = branch_points.back();
 			tot_tracklen += last;
 			tracklen[ibin] += last;
+#define SCALE 1.25
 			for (int k=0; k<=last+1; k++)
 			{
 				double x = mpf_get_d(orbit[k].get_mpf_t());
-				int bin = x * NBINS * SCALE;
+				int bin = x * NBINS / SCALE;
 				if (NBINS <= bin) bin=NBINS-1;
 				histo[bin] += 1.0;
 			}
@@ -358,8 +358,8 @@ int main (int argc, char* argv[])
 		if (i%10 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 
-		// 9000 seems to give a nice result...
-		for (int j=0; j<9000; j++)
+		// 13000 seems to give a nice result...
+		for (int j=0; j<13000; j++)
 		{
 			make_random_bitsequence(ex, x, nbits, NBINS);
 			beta_sequence(ex, beta, em, nbits);
@@ -374,7 +374,7 @@ int main (int argc, char* argv[])
 		cnt += histo[i];
 		bnt += histbase[i];
 	}
-	fprintf(stderr, "# histogram counts=%d baseline=%d\n", (int) cnt, (int) bnt);
+	fprintf(stderr, "# histogram counts=%g baseline=%g\n", cnt, bnt);
 	for (int i=0; i<NBINS; i++)
 	{
 		histo[i] *= NBINS/cnt;
@@ -385,8 +385,7 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		x /= SCALE;
-		printf("%d	%g	%g	%g	%g\n", i, x, histo[i], histbase[i], tracklen[i]);
+		printf("%d	%g	%g %g	%g	%g\n", i, x, x*SCALE, histo[i], histbase[i], tracklen[i]);
 	}
 #endif // PRINT_HISTOGRAM
 
