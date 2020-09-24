@@ -52,7 +52,7 @@ void make_random_bitsequence(mpf_class& val, double x, int nbits, int nbins)
 	val += tail;
 }
 
-#define HISTOGRAM_ORBITS
+// #define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
 	#define NBINS 403
 	double histbase[NBINS];
@@ -122,7 +122,8 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 {
 // #define MAXDEPTH 22 // obtain tracklens in 4 hours
 // #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
-#define MAXDEPTH 10 // obtain smooth measue in 2 hours
+// #define MAXDEPTH 10 // obtain smooth measue in 2 hours
+#define MAXDEPTH 7
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -260,6 +261,7 @@ double beta_sum(std::vector<bool> bits, double Jay)
 
 // ================================================================
 
+#ifdef HISTOGRAM_ORBITS
 int main (int argc, char* argv[])
 {
 	if (argc < 3)
@@ -278,7 +280,6 @@ int main (int argc, char* argv[])
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
 
-#ifdef HISTOGRAM_ORBITS
 	// Where are the extended orbits going?
 	// Draw a histogram
 	double histo[NBINS];
@@ -420,7 +421,107 @@ int main (int argc, char* argv[])
 		prev = tracksum[i];
 	}
 #endif // PRINT_LENGTH
-#endif
 }
+#endif // HISTOGRAM_ORBITS
+
+// ================================================================
+
+#include <pthread.h>
+#include "brat.h"
+
+static void extended_measure (float *array,
+                             int array_size,
+                             double x_center,
+                             double x_width,
+                             double Kay,
+                             int itermax,
+                             double param)
+{
+	static mpf_class beta;
+	static std::vector<double> Kvec;
+	static std::vector<double> trackvec;
+	int nbits = itermax;
+
+	static bool init=false;
+	static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	if (not init)
+	{
+		pthread_mutex_lock(&mutex);
+		if (not init)
+		{
+			do_init(nbits);
+#define NSAMP 16
+			printf("# Sampled unit interval %d times\n#\n", NSAMP);
+			printf("#\n# kay avg-tracks/orbit expect 2^%d=%d avg-tracklen deficit\n#\n",
+				MAXDEPTH, 1<<MAXDEPTH);
+
+
+			init = true;
+		}
+		pthread_mutex_unlock(&mutex);
+	}
+
+#define NBINS array_size
+	make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
+	int em = emrun(Kay);
+
+	/* clear out the row */
+	for (int j=0; j<array_size; j++) array[j] = 0.0;
+
+	fprintf(stderr, "working K=%g\n",  Kay);
+
+	double tot_tracks = 0.0;
+	double tot_tracklen = 0.0;
+
+	mpf_class ex;
+	for (int nsamp=0; nsamp<NSAMP; nsamp++)
+	{
+		// fprintf(stderr, "# Start sample %d of %d ------\n", nsamp, NSAMP);
+		for (int ibin=0; ibin<NBINS; ibin++)
+		{
+			// if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+			// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+			double x = (((double) ibin) + 0.5)/ ((double) NBINS);
+			make_random_bitsequence(ex, x, nbits, NBINS);
+
+			std::vector<std::vector<mpf_class>> orbit_set;
+			std::vector<std::vector<bool>> bitset;
+			std::vector<std::vector<int>> branch_set;
+			beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
+
+			tot_tracks += bitset.size();
+
+			// Compute a histogram of the orbits. But do it
+			// by summing only up to the last branch-point.
+			// (else the greedy expansion will dominate).
+			int ntracks = bitset.size();
+			for (int j=0; j<ntracks; j++)
+			{
+				std::vector<mpf_class> orbit = orbit_set[j];
+				std::vector<int> branch_points = branch_set[j];
+				int last = branch_points.back();
+				tot_tracklen += last;
+#define SCALE 1.3
+				size_t nb = branch_points.size();
+				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
+				if (orbit.size() <= norb) norb = orbit.size() -1;
+				for (size_t k=1; k<=norb; k++)
+				{
+					double x = mpf_get_d(orbit[k].get_mpf_t());
+					int bin = x * NBINS / SCALE;
+					if (NBINS <= bin) bin=NBINS-1;
+					array[bin] += 1.0;
+				}
+			}
+		}
+	}
+	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
+	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
+	printf("%g	%g	%g avg tracklen: %g\n", Kay,
+	       avg_tracks, (1<<MAXDEPTH) - avg_tracks, avg_tracklen);
+	fflush(stdout);
+}
+
+DECL_MAKE_BIFUR(extended_measure)
 
 // ================================================================
