@@ -55,7 +55,6 @@ void make_random_bitsequence(mpf_class& val, double x, int nbits, int nbins)
 #define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
 	#define NBINS 403
-	double histo[NBINS];
 	double histbase[NBINS];
 #endif
 
@@ -281,19 +280,22 @@ int main (int argc, char* argv[])
 #ifdef HISTOGRAM_ORBITS
 	// Where are the extended orbits going?
 	// Draw a histogram
+	double histo[NBINS];
+	double tracklen[NBINS];
 	for (int i=0; i<NBINS; i++)
 	{
 		histo[i] = 0.0;
 		histbase[i] = 0.0;
+		tracklen[i] = 0.0;
 	}
 
 	size_t tot_tracks = 0;
 	size_t tot_tracklen = 0;
 	mpf_class ex;
-	for (int i=0; i<NBINS; i++)
+	for (int ibin=0; ibin<NBINS; ibin++)
 	{
-		if (i%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", i, NBINS);
-		double x = (((double) i) + 0.5)/ ((double) NBINS);
+		if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 		make_random_bitsequence(ex, x, nbits, NBINS);
 
 		std::vector<std::vector<mpf_class>> orbit_set;
@@ -312,6 +314,7 @@ int main (int argc, char* argv[])
 			std::vector<int> branch_points = branch_set[j];
 			int last = branch_points.back();
 			tot_tracklen += last;
+			tracklen[ibin] += last;
 			for (int k=0; k<=last+1; k++)
 			{
 				double x = mpf_get_d(orbit[k].get_mpf_t());
@@ -320,6 +323,7 @@ int main (int argc, char* argv[])
 				histo[bin] += 1.0;
 			}
 		}
+		tracklen[ibin] /= ntracks;
 	}
 	double avg_tracks = ((double) tot_tracks) / NBINS;
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
@@ -362,7 +366,7 @@ int main (int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		x /= SCALE;
-		printf("%d	%g	%g	%g\n", i, x, histo[i], histbase[i]);
+		printf("%d	%g	%g	%g	%g\n", i, x, histo[i], histbase[i], tracklen[i]);
 	}
 #endif
 }
