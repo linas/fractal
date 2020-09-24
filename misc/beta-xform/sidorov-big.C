@@ -331,7 +331,7 @@ int main (int argc, char* argv[])
 				std::vector<int> branch_points = branch_set[j];
 				int last = branch_points.back();
 				tot_tracklen += last;
-				tracklen[ibin] += ((double) last) / ntracks;
+				tracklen[ibin] += ((double) last) / (NSAMP * ntracks);
 #define SCALE 1.3
 				size_t nb = branch_points.size();
 				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
@@ -400,8 +400,8 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		sum += histo[i];
-		bsu += histbase[i];
+		sum += histo[i] / NBINS;
+		bsu += histbase[i] / NBINS;
 		printf("%d	%g	%g %g	%g	%g %g	%g\n",
 		       i, x*SCALE, histo[i], histbase[i], x, sum, bsu, tracklen[i]);
 	}
