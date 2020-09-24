@@ -54,7 +54,7 @@ void make_random_bitsequence(mpf_class& val, double x, int nbits, int nbins)
 
 #define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
-	#define NBINS 403
+	#define NBINS 53
 	double histbase[NBINS];
 #endif
 
@@ -120,7 +120,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<std::vector<bool>>& gap,
                      std::vector<std::vector<int>>& branch_set)
 {
-#define MAXDEPTH 10
+#define MAXDEPTH 22
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -290,9 +290,9 @@ int main (int argc, char* argv[])
 	}
 
 	// Distances to the branchpoints.
-	double tracknum[MAXDEPTH+2];
-	double tracksum[MAXDEPTH+2];
-	for (int i=0; i<MAXDEPTH+2; i++)
+	double tracknum[MAXDEPTH];
+	double tracksum[MAXDEPTH];
+	for (int i=0; i<MAXDEPTH; i++)
 	{
 		tracknum[i] = 0.0;
 		tracksum[i] = 0.0;
@@ -303,7 +303,8 @@ int main (int argc, char* argv[])
 	mpf_class ex;
 	for (int ibin=0; ibin<NBINS; ibin++)
 	{
-		if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		// if (ibin%5 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 		make_random_bitsequence(ex, x, nbits, NBINS);
 
@@ -343,10 +344,10 @@ int main (int argc, char* argv[])
 	}
 	double avg_tracks = ((double) tot_tracks) / NBINS;
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
-	printf("# Avg tracks/orbit: %g avg tracklen: %g\n",
-	       avg_tracks, avg_tracklen);
-	fprintf(stderr, "# Avg tracks/orbit: %g avg tracklen: %g\n",
-	       avg_tracks, avg_tracklen);
+	printf("# Avg tracks/orbit: %g expect 2^%d=%d miss=%g avg tracklen: %g\n#\n",
+	       avg_tracks, MAXDEPTH, 1<<MAXDEPTH, (1<<MAXDEPTH) - avg_tracks, avg_tracklen);
+	fprintf(stderr, "# Avg tracks/orbit: %g expect 2^%d=%d avg tracklen: %g\n",
+	       avg_tracks, MAXDEPTH, 1<<MAXDEPTH, avg_tracklen);
 
 #ifdef PRINT_HISTORGRAM
 	int navg = avg_tracks;
@@ -388,21 +389,15 @@ int main (int argc, char* argv[])
 #endif // PRINT_HISTOGRAM
 
 	// Normalize the distance to each branch point
-	for (int i=0; i<MAXDEPTH+2; i++)
+	double prev = 0.0;
+	for (int i=0; i<MAXDEPTH; i++)
 	{
 		tracksum[i] /= tracknum[i];
 		tracknum[i] /= NBINS;
-	}
 
-	// And now the sum from the paper
-	double pee[MAXDEPTH+2];
-	double peel = 0.0;
-	for (int i=0; i<MAXDEPTH+2; i++)
-	{
-		peel += tracksum[i] * tracknum[i];
-		pee[i] = peel / tracknum[i];
+		printf("%d	%g	%g	%g\n", i, tracknum[i], tracksum[i], tracksum[i]-prev);
 
-		printf("%d	%g	%g	%g\n", i, tracknum[i], tracksum[i], pee[i]);
+		prev = tracksum[i];
 	}
 #endif
 }

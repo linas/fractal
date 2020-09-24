@@ -5281,11 +5281,11 @@ etc.
  These are obviously the binary and the continued-fraction representations
  for a location on the tree.
  It is convenient to define 
-\begin_inset Formula $\log:D\to\mathbb{N}$
+\begin_inset Formula $\mbox{len}:D\to\mathbb{N}$
 \end_inset
 
  by setting 
-\begin_inset Formula $\log\gamma$
+\begin_inset Formula $\mbox{len}\gamma$
 \end_inset
 
  to the number of left-right moves in 
@@ -5293,11 +5293,7 @@ etc.
 \end_inset
 
 .
- That is, log just counts the depth into the tree; it is literally 
-\begin_inset Formula $\log\gamma=\log_{2}\mbox{len }\gamma$
-\end_inset
-
- where 
+ That is, len just counts the depth into the tree; equivalently, 
 \begin_inset Formula $\mbox{len }\gamma$
 \end_inset
 
@@ -5342,7 +5338,7 @@ Let
  The average distance between branch points is then
 \begin_inset Formula 
 \[
-l\left(\beta\right)=\lim_{n\to\infty}\frac{1}{2^{n}}\sum_{\gamma:\log\gamma<n}p\left(\gamma L\right)+p\left(\gamma R\right)-2p\left(\gamma\right)
+l\left(\beta\right)=\lim_{n\to\infty}\frac{1}{n+1}\sum_{\gamma:\mbox{len}\gamma\le n}\frac{p\left(\gamma L\right)+p\left(\gamma R\right)-2p\left(\gamma\right)}{2^{1+\mbox{len}\gamma}}
 \]
 
 \end_inset
@@ -5399,7 +5395,7 @@ The simplest route to obtaining some insight into
  Let 
 \begin_inset Formula 
 \[
-s_{n}\left(\beta\right)=\frac{1}{2^{n}}\sum_{\gamma:\log\gamma\le n}p\left(\gamma\right)
+s_{n}\left(\beta\right)=\frac{1}{2^{n}}\sum_{\gamma:\mbox{len}\gamma=n}p\left(\gamma\right)
 \]
 
 \end_inset
@@ -5407,12 +5403,24 @@ s_{n}\left(\beta\right)=\frac{1}{2^{n}}\sum_{\gamma:\log\gamma\le n}p\left(\gamm
 so that 
 \begin_inset Formula 
 \[
-l\left(\beta\right)=\lim_{n\to\infty}s_{n}\left(\beta\right)-s_{n-1}\left(\beta\right)
+l\left(\beta\right)=\lim_{n\to\infty}\frac{s_{n}\left(\beta\right)}{n+1}
 \]
 
 \end_inset
 
+Each of these implicitly depends on the starting point 
+\begin_inset Formula $x$
+\end_inset
 
+ of the iterated sequence; that is, the 
+\begin_inset Formula $x$
+\end_inset
+
+ that is being 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expanded.
 \end_layout
 
 \begin_layout Section
