@@ -122,7 +122,8 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 {
 // #define MAXDEPTH 22 // obtain tracklens in 4 hours
 // #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
-#define MAXDEPTH 15  // obtain smooth measue in 4 hours.
+// #define MAXDEPTH 15  // obtain smooth measue in 4 hours.
+#define MAXDEPTH 8
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -302,8 +303,10 @@ int main (int argc, char* argv[])
 	size_t tot_tracks = 0;
 	size_t tot_tracklen = 0;
 	mpf_class ex;
-	for (int nsamp=0 nsamp<16; nsamp++)
+#define NSAMP 32
+	for (int nsamp=0; nsamp<NSAMP; nsamp++)
 	{
+		fprintf(stderr, "# Start sample %d of %d ------\n", nsamp, NSAMP);
 		for (int ibin=0; ibin<NBINS; ibin++)
 		{
 			if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
@@ -329,8 +332,10 @@ int main (int argc, char* argv[])
 				int last = branch_points.back();
 				tot_tracklen += last;
 				tracklen[ibin] += ((double) last) / ntracks;
-#define SCALE 1.25
-				for (int k=1; k<=last+2; k++)
+#define SCALE 1.3
+				size_t norb = 2*branch_points[ntracks-1] - branch_points[ntracks-2];
+				if (orbit.size() <= norb) norb = orbit.size() -1;
+				for (size_t k=1; k<=norb; k++)
 				{
 					double x = mpf_get_d(orbit[k].get_mpf_t());
 					int bin = x * NBINS / SCALE;
@@ -347,7 +352,7 @@ int main (int argc, char* argv[])
 			}
 		}
 	}
-	double avg_tracks = ((double) tot_tracks) / NBINS;
+	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
 	printf("# Avg tracks/orbit: %g expect 2^%d=%d miss=%g avg tracklen: %g\n#\n",
 	       avg_tracks, MAXDEPTH, 1<<MAXDEPTH, (1<<MAXDEPTH) - avg_tracks, avg_tracklen);
@@ -360,11 +365,13 @@ int main (int argc, char* argv[])
 	// Obtain a comparable number of counts for the baseline
 	for (int i=0; i<NBINS; i++)
 	{
-		if (i%10 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
+		if (i%100 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 
+// #define BASE_SAMP 13000
+#define BASE_SAMP 100
 		// 13000 seems to give a nice result...
-		for (int j=0; j<13000; j++)
+		for (int j=0; j<BASE_SAMP; j++)
 		{
 			make_random_bitsequence(ex, x, nbits, NBINS);
 			beta_sequence(ex, beta, em, nbits);
@@ -390,7 +397,7 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		printf("%d	%g	%g %g	%g	%g\n", i, x, x*SCALE, histo[i], histbase[i], tracklen[i]);
+		printf("%d	%g	%g %g	%g	%g\n", i, x*SCALE, histo[i], histbase[i], x, tracklen[i]);
 	}
 #endif // PRINT_HISTOGRAM
 
