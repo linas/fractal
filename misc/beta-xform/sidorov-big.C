@@ -54,7 +54,7 @@ void make_random_bitsequence(mpf_class& val, double x, int nbits, int nbins)
 
 #define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
-	#define NBINS 53
+	#define NBINS 403
 	double histbase[NBINS];
 #endif
 
@@ -120,7 +120,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<std::vector<bool>>& gap,
                      std::vector<std::vector<int>>& branch_set)
 {
-#define MAXDEPTH 22
+#define MAXDEPTH 19
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -303,8 +303,8 @@ int main (int argc, char* argv[])
 	mpf_class ex;
 	for (int ibin=0; ibin<NBINS; ibin++)
 	{
-		// if (ibin%5 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
-		fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 		make_random_bitsequence(ex, x, nbits, NBINS);
 
@@ -349,15 +349,17 @@ int main (int argc, char* argv[])
 	fprintf(stderr, "# Avg tracks/orbit: %g expect 2^%d=%d avg tracklen: %g\n",
 	       avg_tracks, MAXDEPTH, 1<<MAXDEPTH, avg_tracklen);
 
+#define PRINT_HISTORGRAM
 #ifdef PRINT_HISTORGRAM
-	int navg = avg_tracks;
 
 	// Obtain a comparable number of counts for the baseline
 	for (int i=0; i<NBINS; i++)
 	{
-		if (i%100 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
+		if (i%10 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		for (int j=0; j<navg; j++)
+
+		// 9000 seems to give a nice result...
+		for (int j=0; j<9000; j++)
 		{
 			make_random_bitsequence(ex, x, nbits, NBINS);
 			beta_sequence(ex, beta, em, nbits);
@@ -388,6 +390,7 @@ int main (int argc, char* argv[])
 	}
 #endif // PRINT_HISTOGRAM
 
+#ifdef PRINT_LENGTH
 	// Normalize the distance to each branch point
 	double prev = 0.0;
 	for (int i=0; i<MAXDEPTH; i++)
@@ -399,6 +402,7 @@ int main (int argc, char* argv[])
 
 		prev = tracksum[i];
 	}
+#endif // PRINT_LENGTH
 #endif
 }
 
