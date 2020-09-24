@@ -64,7 +64,7 @@ void mandelbrot_out (
 
    im_position = im_start;
    for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          re_c = re_position;
@@ -298,7 +298,7 @@ void mandelbrot_out_regulated (
 
    im_position = im_start;
    for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          re_c = re_position;
@@ -388,7 +388,7 @@ void mandelbrot_wind (
 
    im_position = im_start;
    for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          re_c = re_position;
@@ -569,7 +569,7 @@ void mandelbrot_windsimple (
    for (i=0; i<globlen; i++) glob [i] = 0.0;
    im_position = im_start;
    for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          re_c = re_position;
@@ -720,7 +720,7 @@ delta *= 0.25;
 
    im_position = im_start;
    for (i=0; i<4*sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
       re_position = re_start;
       for (j=0; j<4*sizex; j++) {
          re = re_position;
@@ -801,7 +801,7 @@ void mandelbrot_stop (
 
    im_position = im_start;
    for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          re = re_position;
@@ -853,7 +853,7 @@ void mandelbrot_stalk (
 
    im_position = im_start;
    for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          re = re_position;
@@ -1010,7 +1010,7 @@ void circle_out (
 
    im_position = im_start;
    for (i=0; i<sizey; i++) {
-      if (0 == i%30) printf(" start row %d of %d\n", i, sizey);
+      if (0 == i%30) fprintf(stderr, " start row %d of %d\n", i, sizey);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          re_K = re_position;
@@ -1125,7 +1125,7 @@ void circle_in (
       im_position = CBOX_IM_SLOPE * xs + CBOX_IM_CEPT;
       re_position = CBOX_RE_SLOPE * ys + CBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %d of %d\n", i/irow, sizey);
+      if (i%(irow)==0) fprintf(stderr, " start row %d of %d\n", i/irow, sizey);
 
       re_K = re_position;
       im_K = im_position;
@@ -1247,7 +1247,7 @@ mandelbrot_measure (
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = im = 0.0;
       for (loop=0; loop < SETTLE_COUNT; loop++) {
@@ -1346,7 +1346,7 @@ mandelbrot_offset (
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = im = 0.0;
       for (loop=0; loop < SETTLE_COUNT; loop++) {
@@ -1444,7 +1444,7 @@ mandelbrot_age (
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = im = 0.0;
       for (loop=0; loop < LOOP_COUNT; loop++) {
@@ -1607,7 +1607,7 @@ mandelbrot_lyapunov (
       im_position[4] = im_position[0];
       re_position[4] = re_position[0] - delta;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       for (j=0; j<5; j++) {
          re[j] = im[j] = 0.0;
@@ -1739,7 +1739,7 @@ mandelbrot_migrate (
       im_position[4] = im_position[0];
       re_position[4] = re_position[0] - delta;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       for (j=0; j<5; j++) {
          re[j] = im[j] = 0.0;
@@ -1845,7 +1845,7 @@ mandelbrot_squige (
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       last = 0;
       re = im = 0.0;
@@ -1934,7 +1934,7 @@ mandelbrot_phase (
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = re_position;
       im = im_position;
@@ -2040,7 +2040,7 @@ mandelbrot_orig (
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = im = 0.0;
       for (loop=0; loop < LOOP_COUNT; loop++) {
@@ -2130,7 +2130,7 @@ mandelbrot_next (
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = im = 0.0;
       for (loop=0; loop < LOOP_COUNT; loop++) {
@@ -2230,7 +2230,7 @@ whack (
       if (vopix >= sizey) vopix = sizey-1;
       loco = vopix*sizex + hopix;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = re_position;
       im = im_position;
@@ -2310,7 +2310,7 @@ random_out (
       im_position = y_width * drand48() + im_start;
       re_position = x_width * drand48() + re_start;
 
-      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
+      if (i%(irow)==0) fprintf(stderr, " start row %ld\n", i/irow);
 
       re = im = 0.0;
       for (loop=0; loop < itermax; loop++) {
@@ -2369,7 +2369,7 @@ MakeHeightLineThread(
 {
    for (; i<sizey; i += nthreads)
 	{
-      if (i%nthreads == 0) printf(" start row %d\n", i);
+      if (i%nthreads == 0) fprintf(stderr, " start row %d\n", i);
 		MakeHeightLine(glob, i, sizex, re_start, im_position,
 				delta, itermax, renorm, cb);
 		im_position -= delta * nthreads;  /* top to bottom, not bottom to top */
@@ -2423,7 +2423,7 @@ MakeHeightWrap (
    double im_position = im_start;
    for (int i=0; i<sizey; i++)
 	{
-      if (i%11==0) printf(" start row %d\n", i);
+      if (i%11==0) fprintf(stderr, " start row %d\n", i);
       MakeHeightLine(glob, i, sizex, re_start, im_position, delta, itermax, renorm, cb);
 #ifdef UNROLL
       double re_position = re_start;
@@ -2472,7 +2472,7 @@ MakeBifurWrap (
    im_position = im_start;
    for (i=0; i<sizey; i++)
 	{
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) fprintf(stderr, " start row %d\n", i);
 
 		cb (&glob[i*sizex], sizex, re_center, width, im_position, itermax, renorm);
       im_position -= delta;  /*top to bottom, not bottom to top */
