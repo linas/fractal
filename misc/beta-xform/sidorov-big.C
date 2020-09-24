@@ -117,12 +117,15 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<bool> greedy,
                      std::vector<int> branch_points,
                      int depth,
+                     std::vector<std::vector<mpf_class>>& orbit_set,
                      std::vector<std::vector<bool>>& gap,
                      std::vector<std::vector<int>>& branch_set)
 {
 #define MAXDEPTH 10
 	if (MAXDEPTH < depth)
 	{
+		orbit_set.push_back(orbit);
+		gap.push_back(greedy);
 		branch_set.push_back(branch_points);
 		return;
 	}
@@ -165,13 +168,12 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 
 				// Get the alternate expansion.
 				greedy_expand(y, beta, i+1, nbits, lorbit, gapper);
-				gap.push_back(gapper);
 
 				// Recurse
 				beta_expand_rec(y, beta, em, i+1, nbits, orbit, greedy,
-				                branch_points, depth+1, gap, branch_set);
+				                branch_points, depth+1, orbit_set, gap, branch_set);
 				beta_expand_rec(y, beta, em, i+1, nbits, lorbit, gapper,
-				                lobran, depth+1, gap, branch_set);
+				                lobran, depth+1, orbit_set, gap, branch_set);
 				return;
 			}
 		}
@@ -179,6 +181,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 }
 
 void beta_expand(mpf_class y, mpf_class beta, int em,
+                 std::vector<std::vector<mpf_class>>& orbit_set,
                  std::vector<std::vector<bool>>& gap,
                  std::vector<std::vector<int>>& branch_set,
                  int nbits)
@@ -196,7 +199,6 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
 
 	// First, get the baseline (greedy) orbit.
 	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
-	gap.push_back(bitseq);
 
 #ifdef HISTOGRAM_ORBITS
 	for (int i=0; i< nbits; i++)
@@ -210,7 +212,7 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
 
 	// And now recursively get the rest.
 	beta_expand_rec(y, beta, em, 0, nbits, orbit, bitseq, branch_points,
-	                0 /* depth*/ , gap, branch_set);
+	                0 /* depth*/, orbit_set, gap, branch_set);
 
 #if 0 // DEBUG
 	// Debug print
@@ -313,9 +315,10 @@ int main (int argc, char* argv[])
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		make_random_bitsequence(ex, x, nbits, NBINS);
 
+		std::vector<std::vector<mpf_class>> orbit_set;
 		std::vector<std::vector<bool>> bitset;
 		std::vector<std::vector<int>> branch_set;
-		beta_expand(ex, beta, em, bitset, branch_set, nbits);
+		beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
 		tot_tracks += bitset.size();
 	}
 	double avg_tracks = ((double) tot_tracks) / NBINS;
