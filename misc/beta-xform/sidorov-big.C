@@ -130,17 +130,6 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 		return;
 	}
 
-#ifdef HISTOGRAM_ORBITS
-#define SCALE 0.75
-	for (int i=0; i< nbits; i++)
-	{
-		double x = mpf_get_d(orbit[i].get_mpf_t());
-		int bin = x * NBINS * SCALE;
-		if (NBINS <= bin) bin=NBINS-1;
-		histo[bin] += 1.0;
-	}
-#endif
-
 	// Search for runs of length em.
 	// The Sidorov paper has an error, the m is off by one.
 	for (int i=start; i<nbits-em; i++)
@@ -199,16 +188,6 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
 
 	// First, get the baseline (greedy) orbit.
 	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
-
-#ifdef HISTOGRAM_ORBITS
-	for (int i=0; i< nbits; i++)
-	{
-		double x = mpf_get_d(orbit[i].get_mpf_t());
-		int bin = x * NBINS * SCALE;
-		if (NBINS <= bin) bin=NBINS-1;
-		histbase[bin] += 1.0;
-	}
-#endif // HISTOGRAM_ORBITS
 
 	// And now recursively get the rest.
 	beta_expand_rec(y, beta, em, 0, nbits, orbit, bitseq, branch_points,
@@ -320,13 +299,27 @@ int main (int argc, char* argv[])
 		std::vector<std::vector<int>> branch_set;
 		beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
 		tot_tracks += bitset.size();
+
+#define SCALE 0.75
+		// Compute a histogram of the orbits. But do it only by 
+		for (int j=0; j<orbit_set.size(); j++)
+		{
+			std::vector<mpf_class> orbit = orbit_set[j];
+			for (int i=0; i< nbits; i++)
+			{
+				double x = mpf_get_d(orbit[i].get_mpf_t());
+				int bin = x * NBINS * SCALE;
+				if (NBINS <= bin) bin=NBINS-1;
+				histo[bin] += 1.0;
+			}
+		}
 	}
 	double avg_tracks = ((double) tot_tracks) / NBINS;
 	printf("# Obtained average of %g tracks per orbit\n", avg_tracks);
 	fprintf(stderr, "# Obtained average of %g tracks per orbit\n", avg_tracks);
 	int navg = avg_tracks;
 
-	// Obtaina a comparable number of counts for the baseline
+	// Obtain a comparable number of counts for the baseline
 	for (int i=0; i<NBINS; i++)
 	{
 		if (i%100 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
