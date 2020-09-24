@@ -121,7 +121,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<std::vector<int>>& branch_set)
 {
 #define MAXDEPTH 10
-	if (MAXDEPTH < depth)
+	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
 		gap.push_back(greedy);
@@ -289,6 +289,15 @@ int main (int argc, char* argv[])
 		tracklen[i] = 0.0;
 	}
 
+	// Distances to the branchpoints.
+	double tracknum[MAXDEPTH+2];
+	double tracksum[MAXDEPTH+2];
+	for (int i=0; i<MAXDEPTH+2; i++)
+	{
+		tracknum[i] = 0.0;
+		tracksum[i] = 0.0;
+	}
+
 	size_t tot_tracks = 0;
 	size_t tot_tracklen = 0;
 	mpf_class ex;
@@ -322,6 +331,13 @@ int main (int argc, char* argv[])
 				if (NBINS <= bin) bin=NBINS-1;
 				histo[bin] += 1.0;
 			}
+
+			int nbranches = branch_points.size();
+			for (int k=0; k<nbranches; k++)
+			{
+				tracknum[k] += 1.0;
+				tracksum[k] += branch_points[k];
+			}
 		}
 		tracklen[ibin] /= ntracks;
 	}
@@ -332,6 +348,7 @@ int main (int argc, char* argv[])
 	fprintf(stderr, "# Avg tracks/orbit: %g avg tracklen: %g\n",
 	       avg_tracks, avg_tracklen);
 
+#ifdef PRINT_HISTORGRAM
 	int navg = avg_tracks;
 
 	// Obtain a comparable number of counts for the baseline
@@ -367,6 +384,25 @@ int main (int argc, char* argv[])
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		x /= SCALE;
 		printf("%d	%g	%g	%g	%g\n", i, x, histo[i], histbase[i], tracklen[i]);
+	}
+#endif // PRINT_HISTOGRAM
+
+	// Normalize the distance to each branch point
+	for (int i=0; i<MAXDEPTH+2; i++)
+	{
+		tracksum[i] /= tracknum[i];
+		tracknum[i] /= NBINS;
+	}
+
+	// And now the sum from the paper
+	double pee[MAXDEPTH+2];
+	double peel = 0.0;
+	for (int i=0; i<MAXDEPTH+2; i++)
+	{
+		peel += tracksum[i] * tracknum[i];
+		pee[i] = peel / tracknum[i];
+
+		printf("%d	%g	%g	%g\n", i, tracknum[i], tracksum[i], pee[i]);
 	}
 #endif
 }
