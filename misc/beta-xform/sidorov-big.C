@@ -224,6 +224,7 @@ std::vector<bool> beta_sequence(mpf_class y, mpf_class beta,
 	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
 
 #ifdef HISTOGRAM_ORBITS
+#define SCALE 0.75
 	for (int i=0; i< nbits; i++)
 	{
 		double x = mpf_get_d(orbit[i].get_mpf_t());
@@ -298,16 +299,19 @@ int main (int argc, char* argv[])
 		std::vector<std::vector<bool>> bitset;
 		std::vector<std::vector<int>> branch_set;
 		beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
-		tot_tracks += bitset.size();
 
-#define SCALE 0.75
+		int ntracks = bitset.size();
+		tot_tracks += ntracks;
 		// Compute a histogram of the orbits. But do it only by 
-		for (int j=0; j<orbit_set.size(); j++)
+		// summing up to the last branch-point.
+		for (int j=0; j<ntracks; j++)
 		{
 			std::vector<mpf_class> orbit = orbit_set[j];
-			for (int i=0; i< nbits; i++)
+			std::vector<int> branch_points = branch_set[j];
+			int last = branch_points.back();
+			for (int k=0; k<=last+1; k++)
 			{
-				double x = mpf_get_d(orbit[i].get_mpf_t());
+				double x = mpf_get_d(orbit[k].get_mpf_t());
 				int bin = x * NBINS * SCALE;
 				if (NBINS <= bin) bin=NBINS-1;
 				histo[bin] += 1.0;
