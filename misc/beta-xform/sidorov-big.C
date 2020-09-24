@@ -120,7 +120,9 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<std::vector<bool>>& gap,
                      std::vector<std::vector<int>>& branch_set)
 {
-#define MAXDEPTH 19
+// #define MAXDEPTH 22 // obtain tracklens in 4 hours
+// #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
+#define MAXDEPTH 15  // obtain smooth measue in 4 hours.
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -300,47 +302,50 @@ int main (int argc, char* argv[])
 	size_t tot_tracks = 0;
 	size_t tot_tracklen = 0;
 	mpf_class ex;
-	for (int ibin=0; ibin<NBINS; ibin++)
+	for (int nsamp=0 nsamp<16; nsamp++)
 	{
-		if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
-		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
-		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
-		make_random_bitsequence(ex, x, nbits, NBINS);
-
-		std::vector<std::vector<mpf_class>> orbit_set;
-		std::vector<std::vector<bool>> bitset;
-		std::vector<std::vector<int>> branch_set;
-		beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
-
-		tot_tracks += bitset.size();
-
-		// Compute a histogram of the orbits. But do it only by 
-		// summing up to the last branch-point.
-		int ntracks = bitset.size();
-		for (int j=0; j<ntracks; j++)
+		for (int ibin=0; ibin<NBINS; ibin++)
 		{
-			std::vector<mpf_class> orbit = orbit_set[j];
-			std::vector<int> branch_points = branch_set[j];
-			int last = branch_points.back();
-			tot_tracklen += last;
-			tracklen[ibin] += last;
-#define SCALE 1.25
-			for (int k=0; k<=last+1; k++)
-			{
-				double x = mpf_get_d(orbit[k].get_mpf_t());
-				int bin = x * NBINS / SCALE;
-				if (NBINS <= bin) bin=NBINS-1;
-				histo[bin] += 1.0;
-			}
+			if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+			// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+			double x = (((double) ibin) + 0.5)/ ((double) NBINS);
+			make_random_bitsequence(ex, x, nbits, NBINS);
 
-			int nbranches = branch_points.size();
-			for (int k=0; k<nbranches; k++)
+			std::vector<std::vector<mpf_class>> orbit_set;
+			std::vector<std::vector<bool>> bitset;
+			std::vector<std::vector<int>> branch_set;
+			beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
+
+			tot_tracks += bitset.size();
+
+			// Compute a histogram of the orbits. But do it
+			// by summing only up to the last branch-point.
+			// (else the greedy expansion will dominate).
+			int ntracks = bitset.size();
+			for (int j=0; j<ntracks; j++)
 			{
-				tracknum[k] += 1.0;
-				tracksum[k] += branch_points[k];
+				std::vector<mpf_class> orbit = orbit_set[j];
+				std::vector<int> branch_points = branch_set[j];
+				int last = branch_points.back();
+				tot_tracklen += last;
+				tracklen[ibin] += ((double) last) / ntracks;
+#define SCALE 1.25
+				for (int k=1; k<=last+2; k++)
+				{
+					double x = mpf_get_d(orbit[k].get_mpf_t());
+					int bin = x * NBINS / SCALE;
+					if (NBINS <= bin) bin=NBINS-1;
+					histo[bin] += 1.0;
+				}
+
+				int nbranches = branch_points.size();
+				for (int k=0; k<nbranches; k++)
+				{
+					tracknum[k] += 1.0;
+					tracksum[k] += branch_points[k];
+				}
 			}
 		}
-		tracklen[ibin] /= ntracks;
 	}
 	double avg_tracks = ((double) tot_tracks) / NBINS;
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
