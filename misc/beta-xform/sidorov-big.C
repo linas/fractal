@@ -395,10 +395,15 @@ int main (int argc, char* argv[])
 	}
 
 	// Print the histogram
+	double sum = 0.0;
+	double bsu = 0.0;
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		printf("%d	%g	%g %g	%g	%g\n", i, x*SCALE, histo[i], histbase[i], x, tracklen[i]);
+		sum += histo[i];
+		bsu += histbase[i];
+		printf("%d	%g	%g %g	%g	%g %g	%g\n",
+		       i, x*SCALE, histo[i], histbase[i], x, sum, bsu, tracklen[i]);
 	}
 #endif // PRINT_HISTOGRAM
 
