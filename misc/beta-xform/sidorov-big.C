@@ -122,8 +122,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 {
 // #define MAXDEPTH 22 // obtain tracklens in 4 hours
 // #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
-// #define MAXDEPTH 15  // obtain smooth measue in 4 hours.
-#define MAXDEPTH 8
+#define MAXDEPTH 10 // obtain smooth measue in 2 hours
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -303,13 +302,14 @@ int main (int argc, char* argv[])
 	size_t tot_tracks = 0;
 	size_t tot_tracklen = 0;
 	mpf_class ex;
-#define NSAMP 32
+#define NSAMP 512
+	printf("# Sampled unit interval %d times\n#\n", NSAMP);
 	for (int nsamp=0; nsamp<NSAMP; nsamp++)
 	{
 		fprintf(stderr, "# Start sample %d of %d ------\n", nsamp, NSAMP);
 		for (int ibin=0; ibin<NBINS; ibin++)
 		{
-			if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+			// if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 			// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 			double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 			make_random_bitsequence(ex, x, nbits, NBINS);
@@ -333,7 +333,8 @@ int main (int argc, char* argv[])
 				tot_tracklen += last;
 				tracklen[ibin] += ((double) last) / ntracks;
 #define SCALE 1.3
-				size_t norb = 2*branch_points[ntracks-1] - branch_points[ntracks-2];
+				size_t nb = branch_points.size();
+				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
 				if (orbit.size() <= norb) norb = orbit.size() -1;
 				for (size_t k=1; k<=norb; k++)
 				{
@@ -368,8 +369,8 @@ int main (int argc, char* argv[])
 		if (i%100 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 
-// #define BASE_SAMP 13000
-#define BASE_SAMP 100
+#define BASE_SAMP 13000
+// #define BASE_SAMP 100
 		// 13000 seems to give a nice result...
 		for (int j=0; j<BASE_SAMP; j++)
 		{
