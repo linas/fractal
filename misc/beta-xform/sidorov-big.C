@@ -288,6 +288,7 @@ int main (int argc, char* argv[])
 	}
 
 	int tot_tracks = 0;
+	int tot_tracklen = 0;
 	mpf_class ex;
 	for (int i=0; i<NBINS; i++)
 	{
@@ -302,6 +303,7 @@ int main (int argc, char* argv[])
 
 		int ntracks = bitset.size();
 		tot_tracks += ntracks;
+
 		// Compute a histogram of the orbits. But do it only by 
 		// summing up to the last branch-point.
 		for (int j=0; j<ntracks; j++)
@@ -309,6 +311,7 @@ int main (int argc, char* argv[])
 			std::vector<mpf_class> orbit = orbit_set[j];
 			std::vector<int> branch_points = branch_set[j];
 			int last = branch_points.back();
+			tot_tracklen += last;
 			for (int k=0; k<=last+1; k++)
 			{
 				double x = mpf_get_d(orbit[k].get_mpf_t());
@@ -319,8 +322,12 @@ int main (int argc, char* argv[])
 		}
 	}
 	double avg_tracks = ((double) tot_tracks) / NBINS;
-	printf("# Obtained average of %g tracks per orbit\n", avg_tracks);
-	fprintf(stderr, "# Obtained average of %g tracks per orbit\n", avg_tracks);
+	double avg_tracklen = ((double) tot_tracklen) / (tot_tracks * NBINS);
+	printf("# Avg tracks/orbit: %g avg tracklen: %g\n",
+	       avg_tracks, avg_tracklen);
+	fprintf(stderr, "# Avg tracks/orbit: %g avg tracklen: %g\n",
+	       avg_tracks, avg_tracklen);
+
 	int navg = avg_tracks;
 
 	// Obtain a comparable number of counts for the baseline
