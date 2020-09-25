@@ -123,7 +123,8 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 // #define MAXDEPTH 22 // obtain tracklens in 4 hours
 // #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
 // #define MAXDEPTH 10 // obtain smooth measue in 2 hours
-#define MAXDEPTH 7
+// #define MAXDEPTH 7
+#define MAXDEPTH 16
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -442,6 +443,8 @@ static void extended_measure (float *array,
 	static std::vector<double> trackvec;
 	int nbits = itermax;
 
+// #define NBINS array_size
+#define NBINS 67
 	static bool init=false;
 	static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 	if (not init)
@@ -450,9 +453,10 @@ static void extended_measure (float *array,
 		if (not init)
 		{
 			do_init(nbits);
-#define NSAMP 16
+// #define NSAMP 16
+#define NSAMP 3
 			printf("#\n# Average track length as function of K\n");
-			printf("#\n# Sampled unit interval %d times\n", NSAMP);
+			printf("#\n# Sampled unit interval %d times %d bins\n", NSAMP, NBINS);
 			printf("#\n# Column labels:\n");
 			printf("# kay avg-tracks/orbit expect 2^%d=%d avg-tracklen deficit\n#\n",
 				MAXDEPTH, 1<<MAXDEPTH);
@@ -463,7 +467,6 @@ static void extended_measure (float *array,
 		pthread_mutex_unlock(&mutex);
 	}
 
-#define NBINS array_size
 	make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
 	int em = emrun(Kay);
 

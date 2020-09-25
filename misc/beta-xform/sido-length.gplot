@@ -8,13 +8,16 @@ set xlabel "{/Symbol b}"
 set ylabel "Distance"
 
 set yrange [0:]
-set xrange [1.15:1.8]
+set xrange [1.0:2.0]
+
+set key bottom left
 
 # Initial scoping out
 
-plot "sido-len-120-16-128.dat" using (2*$1):($4/7) lw 2 title ""
+plot "sido-len-120-16-128.dat" using (2*$1):($4/7) lw 2 title "2^7 expansions", \
+     "sido-len-big.dat" using (2*$1):4 lw 2 title "2^{12} expansions"
 
-set term postscript eps color enhanced
-set out 'sido-length.eps'
-
-plot "sido-len-120-16-128.dat" using (2*$1):($4/7) lw 2 title ""
+#set term postscript eps color enhanced
+#set out 'sido-length.eps'
+#
+#plot "sido-len-120-16-128.dat" using (2*$1):($4/7) lw 2 title ""
