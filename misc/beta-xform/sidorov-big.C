@@ -123,7 +123,8 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 // #define MAXDEPTH 22 // obtain tracklens in 4 hours
 // #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
 // #define MAXDEPTH 10 // obtain smooth measue in 2 hours
-#define MAXDEPTH 7
+// #define MAXDEPTH 7
+#define MAXDEPTH 12
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -450,7 +451,8 @@ static void extended_measure (float *array,
 		if (not init)
 		{
 			do_init(nbits);
-#define NSAMP 16
+// #define NSAMP 16
+#define NSAMP 8
 			printf("#\n# Average track length as function of K\n");
 			printf("#\n# Sampled unit interval %d times\n", NSAMP);
 			printf("#\n# Column labels:\n");
@@ -463,7 +465,8 @@ static void extended_measure (float *array,
 		pthread_mutex_unlock(&mutex);
 	}
 
-#define NBINS array_size
+// #define NBINS array_size
+#define NBINS (array_size/8)
 	make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
 	int em = emrun(Kay);
 
@@ -510,6 +513,7 @@ static void extended_measure (float *array,
 				for (size_t k=1; k<=norb; k++)
 				{
 					double x = mpf_get_d(orbit[k].get_mpf_t());
+					if (10.0 < x) continue;  // wtf!???
 					int bin = x * NBINS / SCALE;
 					if (NBINS <= bin) bin=NBINS-1;
 					array[bin] += 1.0;
@@ -529,6 +533,7 @@ static void extended_measure (float *array,
 	// Collect up tracklen stats.
 	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
+	avg_tracklen *= log(2.0) / log(avg_tracks); 
 	printf("%g	%g	%g	%g\n", Kay,
 	       avg_tracks, (1<<MAXDEPTH) - avg_tracks, avg_tracklen);
 	fflush(stdout);

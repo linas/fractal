@@ -1,0 +1,20 @@
+
+set term png size 900,600
+set out 'sido-length.png'
+
+set title "Average distance between branch points"
+set style data lines
+set xlabel "{/Symbol b}"
+set ylabel "Distance"
+
+set yrange [0:]
+set xrange [1.15:1.8]
+
+# Initial scoping out
+
+plot "sido-len-120-16-128.dat" using (2*$1):($4/7) lw 2 title ""
+
+set term postscript eps color enhanced
+set out 'sido-length.eps'
+
+plot "sido-len-120-16-128.dat" using (2*$1):($4/7) lw 2 title ""
