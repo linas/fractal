@@ -123,8 +123,9 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 // #define MAXDEPTH 22 // obtain tracklens in 4 hours
 // #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
 // #define MAXDEPTH 10 // obtain smooth measue in 2 hours
-// #define MAXDEPTH 7
-#define MAXDEPTH 16
+#define MAXDEPTH 7
+// #define MAXDEPTH 12
+// #define MAXDEPTH 16
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -455,10 +456,11 @@ static void extended_measure (float *array,
 			do_init(nbits);
 // #define NSAMP 16
 #define NSAMP 3
-			printf("#\n# Average track length as function of K\n");
-			printf("#\n# Sampled unit interval %d times %d bins\n", NSAMP, NBINS);
+			printf("#\n# Dataset for average track length as function of K\n");
+			printf("#\n# Computed for %d bits precision\n", nbits);
+			printf("# Sampled unit interval %d times %d bins\n", NSAMP, NBINS);
 			printf("#\n# Column labels:\n");
-			printf("# kay avg-tracks/orbit expect 2^%d=%d avg-tracklen deficit\n#\n",
+			printf("# kay, avg-tracks/orbit expect 2^%d=%d, deficit, avg-tracklen, avg-longest, rms-len\n#\n",
 				MAXDEPTH, 1<<MAXDEPTH);
 
 
@@ -477,6 +479,8 @@ static void extended_measure (float *array,
 
 	double tot_tracks = 0.0;
 	double tot_tracklen = 0.0;
+	double tot_tracklensq = 0.0;
+	double tot_tracks_longest = 0.0;
 
 	mpf_class ex;
 	for (int nsamp=0; nsamp<NSAMP; nsamp++)
@@ -499,6 +503,7 @@ static void extended_measure (float *array,
 			// Compute a histogram of the orbits. But do it
 			// by summing only up to the last branch-point.
 			// (else the greedy expansion will dominate).
+			int longest = 0;
 			int ntracks = bitset.size();
 			for (int j=0; j<ntracks; j++)
 			{
@@ -506,6 +511,8 @@ static void extended_measure (float *array,
 				std::vector<int> branch_points = branch_set[j];
 				int last = branch_points.back();
 				tot_tracklen += last;
+				tot_tracklensq += last*last;
+				if (longest < last) longest = last;
 #define SCALE 1.3
 				size_t nb = branch_points.size();
 				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
@@ -519,6 +526,7 @@ static void extended_measure (float *array,
 					array[bin] += 1.0;
 				}
 			}
+			tot_tracks_longest += longest;
 		}
 	}
 
@@ -534,8 +542,16 @@ static void extended_measure (float *array,
 	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
 	avg_tracklen *= log(2.0) / log(avg_tracks); 
-	printf("%g	%g	%g	%g\n", Kay,
-	       avg_tracks, (1<<MAXDEPTH) - avg_tracks, avg_tracklen);
+
+	double ms_tracklen = ((double) tot_tracklensq) / tot_tracks;
+	ms_tracklen *= log(2.0) / log(avg_tracks); 
+
+	double rms_tracklen = sqrt(ms_tracklen - avg_tracklen*avg_tracklen);
+
+	double avg_longest = tot_tracks_longest / (NBINS * NSAMP);
+
+	printf("%g	%g	%g	%g	%g	%g\n", Kay,
+	       avg_tracks, (1<<MAXDEPTH) - avg_tracks, avg_tracklen, avg_longest, rms_tracklen);
 	fflush(stdout);
 }
 
