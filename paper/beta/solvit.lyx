@@ -5383,7 +5383,7 @@ be the average distance (pathlength) down to the
  taken to be 
 \begin_inset Formula 
 \[
-a_{n}\left(\beta\right)=\frac{s_{n}\left(\beta\right)}{n+1}
+\ell_{n}\left(\beta\right)=\frac{s_{n}\left(\beta\right)}{n+1}
 \]
 
 \end_inset
@@ -5391,7 +5391,7 @@ a_{n}\left(\beta\right)=\frac{s_{n}\left(\beta\right)}{n+1}
 so that 
 \begin_inset Formula 
 \[
-\ell\left(\beta\right)=\lim_{n\to\infty}a_{n}\left(\beta\right)
+\ell\left(\beta\right)=\lim_{n\to\infty}\ell_{n}\left(\beta\right)
 \]
 
 \end_inset
@@ -5400,32 +5400,8 @@ so that
 \end_layout
 
 \begin_layout Standard
-The branch-points can be thought of as being 
-\begin_inset Quotes eld
-\end_inset
-
-dense in the tree
-\begin_inset Quotes erd
-\end_inset
-
- if 
-\begin_inset Formula $l\left(\beta\right)<\infty$
-\end_inset
-
-.
- Intuitively, having dense branch-points, suggests that the corresponding
- map should have a positive measure on the real number line.
- In this case, one then expects the out-of-bounds measure to be proportional
- to 
-\begin_inset Formula $1/l\left(\beta\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 The simplest route to obtaining some insight into 
-\begin_inset Formula $l\left(\beta\right)$
+\begin_inset Formula $\ell\left(\beta\right)$
 \end_inset
 
  is by numerical exploration; for the measure, numerical histogramming is
@@ -5444,7 +5420,7 @@ The simplest route to obtaining some insight into
 \noun off
 \color none
 
-\begin_inset Formula $a_{n}\left(\beta\right)$
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
 \end_inset
 
  were computed for several hundred distinct values of 
@@ -5461,7 +5437,7 @@ The simplest route to obtaining some insight into
 
 .
  In both cases, it seems that the value of the 
-\begin_inset Formula $a_{n}\left(\beta\right)$
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
 \end_inset
 
  does have an 
@@ -5485,7 +5461,7 @@ The simplest route to obtaining some insight into
 \end_inset
 
  that 
-\begin_inset Formula $a_{n}\left(\beta\right)$
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
 \end_inset
 
  converges uniformly to a flat distribution (as a function of 
@@ -5496,7 +5472,7 @@ The simplest route to obtaining some insight into
  Thus, for the remainder, define 
 \begin_inset Formula 
 \[
-\hat{a}_{n}\left(\beta\right)=\int_{0}^{1}a_{n}\left(\beta\right)dx
+\hat{\ell}_{n}\left(\beta\right)=\int_{0}^{1}\ell_{n}\left(\beta\right)dx
 \]
 
 \end_inset
@@ -5534,7 +5510,7 @@ To understand the
 \noun off
 \color none
 
-\begin_inset Formula $\hat{a}_{n}\left(\beta\right)$
+\begin_inset Formula $\hat{\ell}_{n}\left(\beta\right)$
 \end_inset
 
  were computed for the entire interval 
@@ -5613,7 +5589,7 @@ name "fig:Average-distance-between"
 
 \begin_layout Plain Layout
 This shows the numerically estimated distance 
-\begin_inset Formula $\hat{a}_{n}\left(\beta\right)$
+\begin_inset Formula $\hat{\ell}_{n}\left(\beta\right)$
 \end_inset
 
  between branch points, as a function of 
@@ -5635,11 +5611,11 @@ This shows the numerically estimated distance
 
 .
  The 
-\begin_inset Formula $\hat{a}_{n}\left(\beta\right)$
+\begin_inset Formula $\hat{\ell}_{n}\left(\beta\right)$
 \end_inset
 
  are estimted from the 
-\begin_inset Formula $a_{n}\left(\beta\right)$
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
 \end_inset
 
  by sampling 200 random points in the interval 
@@ -5648,7 +5624,7 @@ This shows the numerically estimated distance
 
 .
  It would appear that 
-\begin_inset Formula $a_{n}\left(\beta\right)$
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
 \end_inset
 
  is fairly well-converged even at these low values of 
@@ -5656,149 +5632,6 @@ This shows the numerically estimated distance
 \end_inset
 
 .
- The prominent discontinuities are located at 
-\begin_inset Formula $\beta=\varphi=1.618\cdots$
-\end_inset
-
- and generally at solutions to 
-\begin_inset Formula $\beta^{m}\left(2-\beta\right)=\beta-1$
-\end_inset
-
- where the length of the branching cylinder changes.
- The 
-\begin_inset Formula $\Delta m=3-2$
-\end_inset
-
- jump is at 
-\begin_inset Formula $\beta=1.75487766625\cdots$
-\end_inset
-
- and 
-\begin_inset Formula $\Delta m=4-3$
-\end_inset
-
- is at 
-\begin_inset Formula $\beta=1.8667603992\cdots$
-\end_inset
-
- The approximate sizes of the jumps are shown in the table below.
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Delta m$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-jump
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.4
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-27
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6-5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-50
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -5832,11 +5665,286 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-The
+The 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Average-distance-between"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows prominent discontinuities at larger 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values.
+ These occur at the locations where the 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+length of the branching cylinder changes.
+ The first one is at 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+ and the remaining ones occur at solutions to 
+\begin_inset Formula $\beta^{m}\left(2-\beta\right)=\beta-1$
+\end_inset
+
+.
+ The approximate sizes of the jumps are shown in the table below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta\ell\left(\beta\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3-2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.618\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4-3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.7548776663\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5-4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.8667603992\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6-5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.9331849819\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The distribution of the distances seems to be well-behaved.
+ Figure xx shows the root-mean-square of the distances, as well as the longest
+ distance.
+ It appears that 
+\begin_inset Formula $\mbox{rms}\hat{\ell}\left(\beta\right)\approx2.5\hat{\ell}\left(\beta\right)$
+\end_inset
+
+ comes close to holding exactly, in that the shapes of the curves are nearly
+ identical.
+ The maximum length curve is not.
+ Although the scale is approximately 
+\begin_inset Formula $\mbox{max}\hat{\ell}\left(\beta\right)\approx10\hat{\ell}\left(\beta\right)$
+\end_inset
+
+, the shape of the curve is distinctly different.
 \end_layout
 
 \begin_layout Subsection
 Orbits and measures
+\end_layout
+
+\begin_layout Standard
+The branch-points can be thought of as being 
+\begin_inset Quotes eld
+\end_inset
+
+dense in the tree
+\begin_inset Quotes erd
+\end_inset
+
+ if 
+\begin_inset Formula $\ell\left(\beta\right)<\infty$
+\end_inset
+
+.
+ Intuitively, having dense branch-points, suggests that the corresponding
+ map should have a positive measure on the real number line.
+ In this case, one then expects the out-of-bounds measure to be roughly
+ proportional to 
+\begin_inset Formula $1/\ell\left(\beta\right)$
+\end_inset
+
+.
+ This can be made precise.
 \end_layout
 
 \begin_layout Standard
