@@ -5373,10 +5373,25 @@ be the average distance (pathlength) down to the
 \end_inset
 
 'th level in the tree.
- Then 
+ The numbering here is such that 
+\begin_inset Formula $n=0$
+\end_inset
+
+ corresponds to the first branch point, which is, in general, a few bits
+ into the string.
+ This implies that the average distance between branch-points can then be
+ taken to be 
 \begin_inset Formula 
 \[
-l\left(\beta\right)=\lim_{n\to\infty}\frac{s_{n}\left(\beta\right)}{n+1}
+a_{n}\left(\beta\right)=\frac{s_{n}\left(\beta\right)}{n+1}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+\ell\left(\beta\right)=\lim_{n\to\infty}a_{n}\left(\beta\right)
 \]
 
 \end_inset
@@ -5429,14 +5444,104 @@ The simplest route to obtaining some insight into
 \noun off
 \color none
 
-\begin_inset Formula $s_{n}\left(\beta\right)$
+\begin_inset Formula $a_{n}\left(\beta\right)$
 \end_inset
 
- were computed for a range of 
+ were computed for several hundred distinct values of 
+\begin_inset Formula $x$
+\end_inset
+
+ at 
+\begin_inset Formula $\beta=1.5$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=1.7$
+\end_inset
+
+.
+ In both cases, it seems that the value of the 
+\begin_inset Formula $a_{n}\left(\beta\right)$
+\end_inset
+
+ does have an 
+\begin_inset Formula $x$
+\end_inset
+
+ dependence, but it appears to be small and bounded, so that it's more or
+ less flat.
+ The numerical data hint at some fractal behavior, but it is small and hard
+ to discern, and may be entirely due to small-
+\begin_inset Formula $n$
+\end_inset
+
+ effects.
+ It does seem clear that expansions at small-
+\begin_inset Formula $x$
+\end_inset
+
+ are more problematic; despite this, the numerics hint that for large 
+\begin_inset Formula $n$
+\end_inset
+
+ that 
+\begin_inset Formula $a_{n}\left(\beta\right)$
+\end_inset
+
+ converges uniformly to a flat distribution (as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+).
+ Thus, for the remainder, define 
+\begin_inset Formula 
+\[
+\hat{a}_{n}\left(\beta\right)=\int_{0}^{1}a_{n}\left(\beta\right)dx
+\]
+
+\end_inset
+
+which is predicated on the assumption that the integral is well-defined
+ and exists.
+ From the numeric point of view, it is easily obtained by sampling random
+ values in the range 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To understand the 
 \begin_inset Formula $\beta$
 \end_inset
 
- values.
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ dependence, the first 16 values of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\hat{a}_{n}\left(\beta\right)$
+\end_inset
+
+ were computed for the entire interval 
+\begin_inset Formula $1<\beta<2$
+\end_inset
+
+.
  These very quickly settle down: the first decimal place is determined by
  
 \begin_inset Formula $n=1$
@@ -5451,35 +5556,23 @@ The simplest route to obtaining some insight into
 \end_inset
 
 .
- The value of the 
-\begin_inset Formula $s_{n}\left(\beta\right)$
+ Explicit values are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Average-distance-between"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- does have an 
-\begin_inset Formula $x$
+.
+ Due to the apparently rapid convergence, this figure can be taken as the
+ numeric estimate for 
+\begin_inset Formula $\hat{\ell}\left(\beta\right)$
 \end_inset
 
- dependence, but it appears to be small and bounded, so that it's more or
- less flat.
- The numerical data does suggest some fractal behavior, but it is small
- and hard to discern, and may be entirely due to small-
-\begin_inset Formula $n$
-\end_inset
-
- effects.
- That is, the numeric hint that for large 
-\begin_inset Formula $n$
-\end_inset
-
- that 
-\begin_inset Formula $s_{n}\left(\beta\right)$
-\end_inset
-
- converges uniformly to a flat distribution (as a function of 
-\begin_inset Formula $x$
-\end_inset
-
-).
+.
 \end_layout
 
 \begin_layout Standard
@@ -5489,14 +5582,17 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Average distance between bracnh points
+Average distance between branch points
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Average-distance-between"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5517,7 +5613,7 @@ Average distance between bracnh points
 
 \begin_layout Plain Layout
 This shows the numerically estimated distance 
-\begin_inset Formula $s_{n}\left(\beta\right)$
+\begin_inset Formula $\hat{a}_{n}\left(\beta\right)$
 \end_inset
 
  between branch points, as a function of 
@@ -5538,8 +5634,21 @@ This shows the numerically estimated distance
 \end_inset
 
 .
+ The 
+\begin_inset Formula $\hat{a}_{n}\left(\beta\right)$
+\end_inset
+
+ are estimted from the 
+\begin_inset Formula $a_{n}\left(\beta\right)$
+\end_inset
+
+ by sampling 200 random points in the interval 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+.
  It would appear that 
-\begin_inset Formula $s_{n}\left(\beta\right)$
+\begin_inset Formula $a_{n}\left(\beta\right)$
 \end_inset
 
  is fairly well-converged even at these low values of 
@@ -5578,7 +5687,7 @@ This shows the numerically estimated distance
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="5" columns="2">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -5619,7 +5728,7 @@ jump
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.5
+3.4
 \end_layout
 
 \end_inset
@@ -5639,7 +5748,27 @@ jump
 \begin_inset Text
 
 \begin_layout Plain Layout
-10.4
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5-4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27
 \end_layout
 
 \end_inset
@@ -5650,7 +5779,7 @@ jump
 \begin_inset Text
 
 \begin_layout Plain Layout
-5-4
+6-5
 \end_layout
 
 \end_inset
@@ -5659,7 +5788,7 @@ jump
 \begin_inset Text
 
 \begin_layout Plain Layout
-25
+50
 \end_layout
 
 \end_inset
@@ -5700,6 +5829,10 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The
 \end_layout
 
 \begin_layout Subsection

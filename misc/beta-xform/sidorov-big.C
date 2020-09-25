@@ -123,9 +123,9 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 // #define MAXDEPTH 22 // obtain tracklens in 4 hours
 // #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
 // #define MAXDEPTH 10 // obtain smooth measue in 2 hours
-#define MAXDEPTH 7
+// #define MAXDEPTH 7
 // #define MAXDEPTH 12
-// #define MAXDEPTH 16
+#define MAXDEPTH 16
 	if (MAXDEPTH <= depth)
 	{
 		orbit_set.push_back(orbit);
@@ -481,17 +481,20 @@ static void extended_measure (float *array,
 	double tot_tracklen = 0.0;
 	double tot_tracklensq = 0.0;
 	double tot_tracks_longest = 0.0;
+	double xmean[NBINS];
 
 	mpf_class ex;
-	for (int nsamp=0; nsamp<NSAMP; nsamp++)
+	for (int ibin=0; ibin<NBINS; ibin++)
 	{
-		// fprintf(stderr, "# Start sample %d of %d ------\n", nsamp, NSAMP);
-		for (int ibin=0; ibin<NBINS; ibin++)
+		// if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
+
+		double avg_x = 0.0;
+		for (int nsamp=0; nsamp<NSAMP; nsamp++)
 		{
-			// if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
-			// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
-			double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 			make_random_bitsequence(ex, x, nbits, NBINS);
+			avg_x += mpf_get_d(ex.get_mpf_t());
 
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
@@ -528,6 +531,9 @@ static void extended_measure (float *array,
 			}
 			tot_tracks_longest += longest;
 		}
+
+		avg_x /= NSAMP;
+		xmean[ibin] = avg_x;
 	}
 
 	// Normalize
