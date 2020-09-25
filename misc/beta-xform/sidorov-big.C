@@ -451,8 +451,10 @@ static void extended_measure (float *array,
 		{
 			do_init(nbits);
 #define NSAMP 16
-			printf("# Sampled unit interval %d times\n#\n", NSAMP);
-			printf("#\n# kay avg-tracks/orbit expect 2^%d=%d avg-tracklen deficit\n#\n",
+			printf("#\n# Average track length as function of K\n");
+			printf("#\n# Sampled unit interval %d times\n", NSAMP);
+			printf("#\n# Column labels:\n");
+			printf("# kay avg-tracks/orbit expect 2^%d=%d avg-tracklen deficit\n#\n",
 				MAXDEPTH, 1<<MAXDEPTH);
 
 
@@ -515,9 +517,19 @@ static void extended_measure (float *array,
 			}
 		}
 	}
+
+	// Normalize
+	double nobs = 0;
+	for (int j=0; j<NBINS; j++)
+		nobs += array[j];
+	for (int j=0; j<NBINS; j++)
+		array[j] *= NBINS/nobs;
+
+
+	// Collect up tracklen stats.
 	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
-	printf("%g	%g	%g avg tracklen: %g\n", Kay,
+	printf("%g	%g	%g	%g\n", Kay,
 	       avg_tracks, (1<<MAXDEPTH) - avg_tracks, avg_tracklen);
 	fflush(stdout);
 }
