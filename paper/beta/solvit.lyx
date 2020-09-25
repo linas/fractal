@@ -5534,6 +5534,14 @@ This shows the numerically estimated distance
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
 
 \end_layout
 
@@ -5662,7 +5670,193 @@ As there are an uncountable number of paths down the binary tree, the collection
 
 , then one might reasonably expect that such orbits accumulate on the real
  number line with a non-zero measure.
- This statement can be formalized, and it can also be probed numerically.
+\end_layout
+
+\begin_layout Standard
+A few quick remars on 
+\begin_inset Quotes eld
+\end_inset
+
+non-zero measure
+\begin_inset Quotes erd
+\end_inset
+
+ in the above sentence.
+ By convention, one starts with the product topology on 
+\begin_inset Formula $\{0,1\}^{\omega}$
+\end_inset
+
+.
+ The open sets of this topology are the cylinder sets.
+ Every such cylinder set has a postive Bernoulli measure, and when mapped
+ to the unit inverval, always results in an interval of finite measure.
+ The action of 
+\begin_inset Formula $T_{\beta}^{-1}$
+\end_inset
+
+ is well-defined on cylinder sets, and given that 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is built out of 
+\begin_inset Formula $T_{\beta}$
+\end_inset
+
+, one can conclude that 
+\begin_inset Formula $\tau^{-1}$
+\end_inset
+
+ is also a map of cylinder sets, preserving the sigma-algebra properties
+ of the product topology.
+ With that out of the way, it is straight-forward and entirely safe to treat
+ numerical histogramming of the orbits of 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ as being approximations to the true measure.
+ This is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Extended-Measures"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Extended Measures
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Extended-Measures"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sido-meas-0.75.eps
+	width 45col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename sido-meas-0.85.eps
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+These figures show the Gelfond-Parry measure in purple, and the extended
+ measure, obtained by bin-counting, in green, for two example choices of
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ A total of 
+\begin_inset Formula $2^{10}=1024$
+\end_inset
+
+ distinct expansions were used to generate these images.
+ Sampling noise was minimized by choosing 206336 distinct random initial
+ values for 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The resulting trajectories 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ were histogrammed into 403 bins.
+ The jitteriness in the graphs is purely numerical sampling noise; the actual
+ distribution presumably consists of flat segments.
+ Note that 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ wanders into regions greater than one: without the 
+\begin_inset Quotes eld
+\end_inset
+
+mod 1
+\begin_inset Quotes erd
+\end_inset
+
+ constraint, it is free to do so.
+ In order to obtain 1024 distinct expansions for each point, one must keep
+ well more than 
+\begin_inset Formula $s_{10}\left(\beta\right)$
+\end_inset
+
+ bits of precision.
+ In this case, 85 bits of precision were used.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with sido-meas.gplot after running sidorov-big.C appropriately configured.
+ In this case: for the left, its K=0.75, nbits=60, with 2^10 alternate expansions
+ and 512 random samples for each initial x.
+ On the right, K=0.85 and nbits=85.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Section
