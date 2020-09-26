@@ -4,9 +4,7 @@
  *
  * Understand the "gaps" aka the alternative beta-expansions
  * of any given number x, as described by N Sidorov.
- *
- * This includes graphing the gaps directly, as well as graphing
- * the extended measure.
+ * Contains only the core recursive code.
  *
  * Linas Vepstas Dec 2017; Sept 2020
  */
@@ -111,6 +109,7 @@ void greedy_expand(mpf_class y, mpf_class beta, int nstart, int nbits,
 // `em` is the number of zero bits to look for.
 // `start` is where to start looking
 // `gap` is the set to which the beta exapnsion is appended.
+static
 void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<mpf_class> orbit,
                      std::vector<bool> greedy,
