@@ -36,6 +36,7 @@ static void extended_measure (float *array,
 			do_init(nbits);
 // #define NSAMP 16
 #define NSAMP 3
+#define MAXDEPTH 16
 			printf("#\n# Dataset for average track length as function of K\n");
 			printf("#\n# Computed for %d bits precision\n", nbits);
 			printf("# Sampled unit interval %d times %d bins\n", NSAMP, NBINS);
@@ -79,7 +80,7 @@ static void extended_measure (float *array,
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
 			std::vector<std::vector<int>> branch_set;
-			beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
+			beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
 
 			tot_tracks += bitset.size();
 

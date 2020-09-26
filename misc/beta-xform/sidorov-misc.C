@@ -44,6 +44,7 @@ int main (int argc, char* argv[])
 		tracklen[i] = 0.0;
 	}
 
+#define MAXDEPTH 7
 	// Distances to the branchpoints.
 	double tracknum[MAXDEPTH];
 	double tracksum[MAXDEPTH];
@@ -71,7 +72,7 @@ int main (int argc, char* argv[])
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
 			std::vector<std::vector<int>> branch_set;
-			beta_expand(ex, beta, em, orbit_set, bitset, branch_set, nbits);
+			beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
 
 			tot_tracks += bitset.size();
 

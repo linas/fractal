@@ -116,17 +116,12 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<bool> greedy,
                      std::vector<int> branch_points,
                      int depth,
+                     int maxdepth,
                      std::vector<std::vector<mpf_class>>& orbit_set,
                      std::vector<std::vector<bool>>& gap,
                      std::vector<std::vector<int>>& branch_set)
 {
-// #define MAXDEPTH 22 // obtain tracklens in 4 hours
-// #define MAXDEPTH 19  // obtain non-smooth measue in 4 hours.
-// #define MAXDEPTH 10 // obtain smooth measue in 2 hours
-// #define MAXDEPTH 7
-// #define MAXDEPTH 12
-#define MAXDEPTH 16
-	if (MAXDEPTH <= depth)
+	if (maxdepth <= depth)
 	{
 		orbit_set.push_back(orbit);
 		gap.push_back(greedy);
@@ -164,9 +159,9 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 
 				// Recurse
 				beta_expand_rec(y, beta, em, i+1, nbits, orbit, greedy,
-				                branch_points, depth+1, orbit_set, gap, branch_set);
+				                branch_points, depth+1, maxdepth, orbit_set, gap, branch_set);
 				beta_expand_rec(y, beta, em, i+1, nbits, lorbit, gapper,
-				                lobran, depth+1, orbit_set, gap, branch_set);
+				                lobran, depth+1, maxdepth, orbit_set, gap, branch_set);
 				return;
 			}
 		}
@@ -174,6 +169,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 }
 
 void beta_expand(mpf_class y, mpf_class beta, int em,
+                 int maxdepth,
                  std::vector<std::vector<mpf_class>>& orbit_set,
                  std::vector<std::vector<bool>>& gap,
                  std::vector<std::vector<int>>& branch_set,
@@ -195,7 +191,7 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
 
 	// And now recursively get the rest.
 	beta_expand_rec(y, beta, em, 0, nbits, orbit, bitseq, branch_points,
-	                0 /* depth*/, orbit_set, gap, branch_set);
+	                0 /* depth*/, maxdepth, orbit_set, gap, branch_set);
 
 #if 0 // DEBUG
 	// Debug print

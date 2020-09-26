@@ -78,7 +78,8 @@ beta.o: beta.c
 witt.o: witt.c
 betadisk.o: betadisk.C psibig.c
 sidorov.o: sidorov.C
-sidorov-big.o: sidorov-big.C
+sidorov-misc.o: sidorov-misc.C sidorov-big.C
+sidorov-density.o: sidorov-density.C sidorov-big.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
