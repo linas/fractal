@@ -9,6 +9,13 @@
 
 #include "sidorov-big.C"
 
+double wave(int k, double front)
+{
+	if (front < k) return 0.0;
+	double back = (front - k) / front;  // zero to one.
+
+	return back;
+}
 
 static void fake_bifur (float *array,
                              int array_size,
@@ -28,14 +35,15 @@ static void fake_bifur (float *array,
 // #define MAXDEPTH 16
 #define MAXDEPTH 12
 
+double Kay=0.83;
+Kay = 0.55;
+double x=param;
 	static bool init=false;
 	if (not init)
 	{
 		do_init(nbits);
 		init = true;
 
-double Kay=0.83;
-double x=param;
 		make_random_bitsequence(beta, 2.0*Kay, nbits, 1.0e9);
 		int em = emrun(Kay);
 
@@ -48,6 +56,7 @@ double x=param;
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
+// printf("duude row=%g\n", row);
 	double Jay = 1.0;
 	int npaths = bitset.size();
 	for (int ipath = 0; ipath<npaths; ipath++)
@@ -60,15 +69,18 @@ double x=param;
 		for (int i=0; i<bitlen; i++)
 		{
 			acc *= 1.0 / (2.0*Jay);
-			if (bitseq[bitlen-i-1])
+			int kbit = bitlen-i-1;
+			if (bitseq[kbit])
 			{
-				acc += 0.5;
+				acc += 0.5 * wave(kbit, row);
 			}
 		}
 
+// acc *= 1.8;
 		acc *= array_size;
 		int pix = acc;
 		if (array_size <= pix) pix = array_size-1;
+		if (pix < 0) pix = 0;
 
 		array[pix] = 1.0;
 	}
