@@ -18,7 +18,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
-	alldisk betadisk momenta sidorov sidorov-big
+	alldisk betadisk momenta sidorov sidorov-misc sidorov-density
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -134,7 +134,8 @@ alldisk: alldisk.o $(BRAT)
 betadisk: betadisk.o $(BRAT)
 momenta: momenta.o $(BRAT)
 sidorov: sidorov.o # $(BRAT)
-sidorov-big: sidorov-big.o
+
+sidorov-misc: sidorov-misc.o
 	$(CC) -o $@ $^ -lgmpxx -lgmp -lm -lstdc++
 
 sidorov-density: sidorov-density.o
