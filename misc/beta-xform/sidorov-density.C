@@ -1,6 +1,6 @@
 /*
  * sidorov-density.C
- * Graph the extened density.
+ * Show the extened density measure in a bifurcation-style graph
  *
  * Linas Vepstas Sept 2020
  */
@@ -21,8 +21,6 @@ static void extended_measure (float *array,
 {
 	int nbits = itermax;
 
-// #define NBINS array_size
-#define NBINS 67
 	static bool init=false;
 	static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 	if (not init)
@@ -31,69 +29,55 @@ static void extended_measure (float *array,
 		if (not init)
 		{
 			do_init(nbits);
-// #define NSAMP 16
-#define NSAMP 3
-// #define MAXDEPTH 16
-#define MAXDEPTH 12
-			printf("#\n# Dataset for average track length as function of K\n");
-			printf("#\n# Computed for %d bits precision\n", nbits);
-			printf("# Sampled unit interval %d times %d bins\n", NSAMP, NBINS);
-			printf("#\n# Column labels:\n");
-			printf("# kay, avg-tracks/orbit expect 2^%d=%d, deficit, avg-tracklen, avg-longest, rms-len\n#\n",
-				MAXDEPTH, 1<<MAXDEPTH);
-
-
 			init = true;
 		}
 		pthread_mutex_unlock(&mutex);
 	}
 
+	double dbeta = 2.0*Kay;
+	nbits *= 1.0/(4.0*(dbeta-1.0)*(2.0-dbeta));
+#define MAXBITS 300
+	if (nbits < 0) nbits=MAXBITS;
+	if (MAXBITS < nbits) nbits=MAXBITS;
+	do_init(nbits);
+
+#define NBINS array_size
 	mpf_class beta;
-	make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
+	make_random_bitsequence(beta, dbeta, nbits, NBINS);
 	int em = emrun(Kay);
 
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
-	fprintf(stderr, "working K=%g\n",  Kay);
+	fprintf(stderr, "Working K=%g nbits=%d\n",  Kay, nbits);
 
-	double tot_tracks = 0.0;
-	double tot_tracklen = 0.0;
-	double tot_tracklensq = 0.0;
-	double tot_tracks_longest = 0.0;
-
-	mpf_class ex;
 	for (int ibin=0; ibin<NBINS; ibin++)
 	{
 		// if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
-		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
+		double x = ((double) ibin)/ ((double) NBINS);
 
+#define NSAMP 4
 		for (int nsamp=0; nsamp<NSAMP; nsamp++)
 		{
+			mpf_class ex;
 			make_random_bitsequence(ex, x, nbits, NBINS);
 
+#define MAXDEPTH 6
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
 			std::vector<std::vector<int>> branch_set;
 			beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
 
-			tot_tracks += bitset.size();
-
 			// Compute a histogram of the orbits. But do it
 			// by summing only up to the last branch-point.
 			// (else the greedy expansion will dominate).
-			int longest = 0;
 			int ntracks = bitset.size();
 			for (int j=0; j<ntracks; j++)
 			{
 				std::vector<mpf_class> orbit = orbit_set[j];
 				std::vector<int> branch_points = branch_set[j];
-				int last = branch_points.back();
-				tot_tracklen += last;
-				tot_tracklensq += last*last;
-				if (longest < last) longest = last;
-#define SCALE 1.3
+#define SCALE (4.0/3.0)
 				size_t nb = branch_points.size();
 				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
 				if (orbit.size() <= norb) norb = orbit.size() -1;
@@ -106,7 +90,6 @@ static void extended_measure (float *array,
 					array[bin] += 1.0;
 				}
 			}
-			tot_tracks_longest += longest;
 		}
 	}
 
@@ -116,23 +99,6 @@ static void extended_measure (float *array,
 		nobs += array[j];
 	for (int j=0; j<NBINS; j++)
 		array[j] *= NBINS/nobs;
-
-
-	// Collect up tracklen stats.
-	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
-	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
-	avg_tracklen *= log(2.0) / log(avg_tracks); 
-
-	double ms_tracklen = ((double) tot_tracklensq) / tot_tracks;
-	ms_tracklen *= log(2.0) / log(avg_tracks); 
-
-	double rms_tracklen = sqrt(ms_tracklen - avg_tracklen*avg_tracklen);
-
-	double avg_longest = tot_tracks_longest / (NBINS * NSAMP);
-
-	printf("%g	%g	%g	%g	%g	%g\n", Kay,
-	       avg_tracks, (1<<MAXDEPTH) - avg_tracks, avg_tracklen, avg_longest, rms_tracklen);
-	fflush(stdout);
 }
 
 DECL_MAKE_BIFUR(extended_measure)
