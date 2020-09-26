@@ -14,9 +14,9 @@ double wave(int k, double front)
 {
 	if (front < k) return 0.0;
 
-	// double hard=5.0;
-	double hard=front;
-	if (hard < front-k) return 1.0;
+	double hard=3.0;
+	// double hard=front;
+	// if (hard < front-k) return 1.0;
 
 	// double back = (front - k) / front;  // zero to one.
 	double back = (front - k) / hard;  // zero to one.
@@ -24,7 +24,17 @@ double wave(int k, double front)
 	// return sqrt(back);
 	// return back;
 	// return back*back;
-	return M_E * exp(-1.0/(back*back));
+
+	if (1.0< back) return 1.0;
+	return back;
+
+	// Smooth transition
+	double bump = exp(-0.25/(back*back));
+	back = 1.0-back;
+	double flip = exp(-0.25/(back*back));
+
+	double trans = bump / (flip+bump);
+	return trans;
 }
 
 static void fake_bifur (float *array,
@@ -63,6 +73,7 @@ double x=param;
 
 		beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
 
+#ifdef PRINT_BITS
 		int npaths = bitset.size();
 		for (int ipath = 0; ipath<npaths; ipath++)
 		{
@@ -74,6 +85,7 @@ double x=param;
 				printf("%d", (int)bitseq[i]);
 			printf("\n");
 		}
+#endif
 	}
 
 	/* clear out the row */
