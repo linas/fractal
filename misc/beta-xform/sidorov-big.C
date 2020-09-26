@@ -237,23 +237,23 @@ std::vector<bool> beta_sequence(mpf_class y, mpf_class beta,
 
 // ================================================================
 
-#if 0
 // Sum the bit-sequence, returning the sum.
 // This returns 0.5 * sum_i=0 b[i] (2J)^-i
 //
 double beta_sum(std::vector<bool> bits, double Jay)
 {
 	double acc = 1.0e-30;
-	for (int i=0; i<NBITS; i++)
+	int bitlen = bits.size();
+	if (60 < bitlen) bitlen = 60;
+	for (int i=0; i<bitlen; i++)
 	{
 		acc *= 1.0 / (2.0*Jay);
-		if (bits[NBITS-i-1])
+		if (bits[bitlen-i-1])
 		{
 			acc += 0.5;
 		}
 	}
 	return acc;
 }
-#endif
 
 // ================================================================
