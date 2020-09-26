@@ -5452,19 +5452,31 @@ The simplest route to obtaining some insight into
 \end_inset
 
  effects.
- It does seem clear that expansions at small-
-\begin_inset Formula $x$
+ A sample distribution at 
+\begin_inset Formula $n=12$
 \end_inset
 
- are more problematic; despite this, the numerics hint that for large 
-\begin_inset Formula $n$
+ and 
+\begin_inset Formula $\beta=1.66$
 \end_inset
 
- that 
+ is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Track-length-distribution"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The numerics hint that 
 \begin_inset Formula $\ell_{n}\left(\beta\right)$
 \end_inset
 
- converges uniformly to a flat distribution (as a function of 
+ converges uniformly to a relatively flat distribution (as a function of
+ 
 \begin_inset Formula $x$
 \end_inset
 
@@ -5477,14 +5489,152 @@ The simplest route to obtaining some insight into
 
 \end_inset
 
-which is predicated on the assumption that the integral is well-defined
- and exists.
- From the numeric point of view, it is easily obtained by sampling random
- values in the range 
+This appears to be well-defined, as the resuls from Sidorov state that there
+ are distinct 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions for almost every 
 \begin_inset Formula $0<x<1$
 \end_inset
 
+, and certainly the numerics show nothing amiss.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Track length distribution
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Track-length-distribution"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sido-len-dist-0.83-12.eps
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This shows the average distance between branch-points 
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
+\end_inset
+
+ at 
+\begin_inset Formula $\beta=1.66$
+\end_inset
+
+ and 
+\begin_inset Formula $n=12$
+\end_inset
+
+ as a function of the starting point 
+\begin_inset Formula $x$
+\end_inset
+
+ of the sequence.
+ A total of three samples were taken for each of 403 locations on the interval
+ 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+; thus 
+\begin_inset Formula $3\times403=1209$
+\end_inset
+
+ distinct points were examined.
+ Each of these points were expanded to 
+\begin_inset Formula $2^{12}=4096$
+\end_inset
+
+ distinct paths 
+\begin_inset Formula $\gamma$
+\end_inset
+
 .
+ Thus, each graphed datapoint is the average of these 4096 paths, times
+ three.
+ There does seem to be some kind of fractal-like variation of 
+\begin_inset Formula $\ell$
+\end_inset
+
+ over the interval, but no such structure appears in the root-mean-square
+ deviation of the lengths.
+ The line marked 
+\begin_inset Quotes eld
+\end_inset
+
+longest
+\begin_inset Quotes erd
+\end_inset
+
+ was the longest observed distnact, over the 4096 paths, times three.
+ It seems bounded and featureless.
+ The average over the entire interval was 
+\begin_inset Formula $\hat{\ell}=4.673$
+\end_inset
+
+, and 
+\begin_inset Formula $\mbox{rms}\hat{\ell}=1.310$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with sido-len-dist.gplot and data from sidorov-misc.C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

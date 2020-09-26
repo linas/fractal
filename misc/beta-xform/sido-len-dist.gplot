@@ -1,0 +1,32 @@
+
+set term png size 900,600
+set out 'sido-len-dist.png'
+
+set title "Track lengths at {/Symbol b}=1.66"
+set style data lines
+set xlabel "x"
+#set format y "10^{%4T}"
+
+
+set yrange [0:]
+set xrange [0:1]
+plot "sido-len-dist-128.dat" using 2:($5/7) title "128 lengths", \
+     "sido-len-dist-128.dat" using 2:($6/7) title "128 rms", \
+     "sido-len-dist-128.dat" using 2:($7/7) title "128 longest", \
+     "sido-len-dist-4096.dat" using 2:($5/12) title "4096 lengths", \
+     "sido-len-dist-4096.dat" using 2:($6/12) title "4096 rms", \
+     "sido-len-dist-4096.dat" using 2:($7/12) title "4096 longest"
+
+set out 'sido-len-dist-0.75.png'
+set title "Track lengths at {/Symbol b}=1.5"
+plot "sido-len-dist-0.75-12.dat" using 2:($5/12) title "0.75-12 lengths", \
+     "sido-len-dist-0.75-12.dat" using 2:($6/12) title "0.75-12 rms", \
+     "sido-len-dist-0.75-12.dat" using 2:($7/12) title "0.75-12 longest"
+
+set term postscript eps color enhanced
+set out 'sido-len-dist-0.83-12.eps'
+set title "Track lengths at {/Symbol b}=1.66"
+
+plot "sido-len-dist-4096.dat" using 2:($5/12) lw 2 title "Lengths", \
+     "sido-len-dist-4096.dat" using 2:($6/12) lw 2 title "RMS Lengths", \
+     "sido-len-dist-4096.dat" using 2:($7/12) lw 2 title "Longest"

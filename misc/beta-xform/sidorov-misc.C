@@ -77,7 +77,7 @@ int main (int argc, char* argv[])
 
 	for (int ibin=0; ibin<NBINS; ibin++)
 	{
-		// if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		if (ibin%10 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 
@@ -138,10 +138,10 @@ int main (int argc, char* argv[])
 		avg_x /= NSAMP;
 		xmean[ibin] = avg_x;
 
-		tracklen[ibin] /= tracklen[ibin];
-		tracklensq[ibin] /= tracklen[ibin];
+		tracklen[ibin] /= tracknum[ibin];
+		tracklensq[ibin] /= tracknum[ibin];
 		tracklenrms[ibin] = sqrt(tracklensq[ibin] - tracklen[ibin] * tracklen[ibin]);
-
+		tracknum[ibin] /= NSAMP;
 	}
 	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
@@ -208,11 +208,13 @@ int main (int argc, char* argv[])
 
 #define PRINT_LENGTH_DISTRIBUTION
 #ifdef PRINT_LENGTH_DISTRIBUTION
+	printf("#\n# Columns:\n");
+	printf("# bin, bin-center, avg-x, avg-tracks, track-len, track-len-rms, longest\n");
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		printf("%d	%g	%g	%g	%g	%g\n",
-		       i, x, xmean[i], tracklen[i], tracklenrms[i], trackmax[i]);
+		printf("%d	%g	%g	%g	%g	%g	%g\n",
+		       i, x, xmean[i], tracknum[i], tracklen[i], tracklenrms[i], trackmax[i]);
 	}
 #endif // PRINT_LENGTH_DISTRIBUTION
 
