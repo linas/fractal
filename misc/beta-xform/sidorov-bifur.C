@@ -20,7 +20,9 @@ double wave(int k, double front)
 	// double back = (front - k) / front;  // zero to one.
 	double back = (front - k) / hard;  // zero to one.
 
-	return back;
+	// return sqrt(back);
+	// return back;
+	return back*back;
 }
 
 static void fake_bifur (float *array,
@@ -78,6 +80,7 @@ double x=param;
 // printf("duude row=%g\n", row);
 	double Jay = 1.0;
 // Jay = 0.7;
+	double front = pow(2, row);
 	int npaths = bitset.size();
 	for (int ipath = 0; ipath<npaths; ipath++)
 	{
@@ -92,11 +95,11 @@ double x=param;
 			int kbit = bitlen-i-1;
 			if (bitseq[kbit])
 			{
-				acc += 0.5 * wave(kbit, row);
+				acc += 0.5 * wave(kbit, front);
 			}
 			else
 			{
-				// acc -= 0.1 * wave(kbit, row);
+				// acc -= 0.1 * wave(kbit, front);
 			}
 		}
 
