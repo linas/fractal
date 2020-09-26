@@ -12,7 +12,13 @@
 double wave(int k, double front)
 {
 	if (front < k) return 0.0;
-	double back = (front - k) / front;  // zero to one.
+
+	// double hard=5.0;
+	double hard=front;
+	if (hard < front-k) return 1.0;
+
+	// double back = (front - k) / front;  // zero to one.
+	double back = (front - k) / hard;  // zero to one.
 
 	return back;
 }
@@ -33,10 +39,11 @@ static void fake_bifur (float *array,
 	static std::vector<std::vector<int>> branch_set;
 
 // #define MAXDEPTH 16
-#define MAXDEPTH 12
+#define MAXDEPTH 7
 
 double Kay=0.83;
-Kay = 0.55;
+// Kay = 0.55;
+Kay = 0.75;
 double x=param;
 	static bool init=false;
 	if (not init)
@@ -51,6 +58,18 @@ double x=param;
 		make_random_bitsequence(ex, x, nbits, 1e9);
 
 		beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
+
+		int npaths = bitset.size();
+		for (int ipath = 0; ipath<npaths; ipath++)
+		{
+			std::vector<bool> bitseq = bitset[ipath];
+			printf("%d	", ipath);
+			int bitlen = bitseq.size();
+			if (60 < bitlen) bitlen = 60;
+			for (int i=0; i<bitlen; i++)
+				printf("%d", (int)bitseq[i]);
+			printf("\n");
+		}
 	}
 
 	/* clear out the row */
@@ -58,6 +77,7 @@ double x=param;
 
 // printf("duude row=%g\n", row);
 	double Jay = 1.0;
+// Jay = 0.7;
 	int npaths = bitset.size();
 	for (int ipath = 0; ipath<npaths; ipath++)
 	{
@@ -74,9 +94,12 @@ double x=param;
 			{
 				acc += 0.5 * wave(kbit, row);
 			}
+			else
+			{
+				// acc -= 0.1 * wave(kbit, row);
+			}
 		}
 
-// acc *= 1.8;
 		acc *= array_size;
 		int pix = acc;
 		if (array_size <= pix) pix = array_size-1;
