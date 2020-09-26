@@ -5,8 +5,6 @@
  * Understand the "gaps" aka the alternative beta-expansions
  * of any given number x, as described by N Sidorov.
  *
- * This includes graphing the gaps directly, and misc stuff
- *
  * Linas Vepstas Dec 2017; Sept 2020
  */
 
@@ -208,6 +206,9 @@ int main (int argc, char* argv[])
 
 #define PRINT_LENGTH_DISTRIBUTION
 #ifdef PRINT_LENGTH_DISTRIBUTION
+	// This generates distances between branch points as a function of x.
+	// (holding beta fixed.) Results is that the length seem distributed
+	// more or less uniformly.
 	printf("#\n# Columns:\n");
 	printf("# bin, bin-center, avg-x, avg-tracks, track-len, track-len-rms, longest\n");
 	for (int i=0; i<NBINS; i++)

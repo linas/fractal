@@ -36,7 +36,8 @@ static void extended_measure (float *array,
 			do_init(nbits);
 // #define NSAMP 16
 #define NSAMP 3
-#define MAXDEPTH 16
+// #define MAXDEPTH 16
+#define MAXDEPTH 12
 			printf("#\n# Dataset for average track length as function of K\n");
 			printf("#\n# Computed for %d bits precision\n", nbits);
 			printf("# Sampled unit interval %d times %d bins\n", NSAMP, NBINS);

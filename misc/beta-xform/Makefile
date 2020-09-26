@@ -18,7 +18,8 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
-	alldisk betadisk momenta sidorov sidorov-misc sidorov-density
+	alldisk betadisk momenta sidorov sidorov-misc sidorov-density \
+	sidorov-bifur
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -80,6 +81,7 @@ betadisk.o: betadisk.C psibig.c
 sidorov.o: sidorov.C
 sidorov-misc.o: sidorov-misc.C sidorov-big.C
 sidorov-density.o: sidorov-density.C sidorov-big.C
+sidorov-bifur.o: sidorov-bifur.C sidorov-big.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
@@ -140,4 +142,7 @@ sidorov-misc: sidorov-misc.o
 	$(CC) -o $@ $^ -lgmpxx -lgmp -lm -lstdc++
 
 sidorov-density: sidorov-density.o
+	$(CC) -o $@ $^ $(BRAT) -lgmpxx -lgmp -lm -lpthread -lstdc++
+
+sidorov-bifur: sidorov-bifur.o
 	$(CC) -o $@ $^ $(BRAT) -lgmpxx -lgmp -lm -lpthread -lstdc++
