@@ -1,6 +1,7 @@
 /*
  * sidorov-density.C
  * Graph fake bifurcation diagrams.
+ * Great hopes for this fizzled. There are trees, but not visually dramatic.
  *
  * Linas Vepstas Sept 2020
  */

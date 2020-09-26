@@ -19,9 +19,6 @@ static void extended_measure (float *array,
                              int itermax,
                              double param)
 {
-	static mpf_class beta;
-	static std::vector<double> Kvec;
-	static std::vector<double> trackvec;
 	int nbits = itermax;
 
 // #define NBINS array_size
@@ -51,6 +48,7 @@ static void extended_measure (float *array,
 		pthread_mutex_unlock(&mutex);
 	}
 
+	mpf_class beta;
 	make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
 	int em = emrun(Kay);
 
@@ -63,7 +61,6 @@ static void extended_measure (float *array,
 	double tot_tracklen = 0.0;
 	double tot_tracklensq = 0.0;
 	double tot_tracks_longest = 0.0;
-	double xmean[NBINS];
 
 	mpf_class ex;
 	for (int ibin=0; ibin<NBINS; ibin++)
@@ -72,11 +69,9 @@ static void extended_measure (float *array,
 		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 
-		double avg_x = 0.0;
 		for (int nsamp=0; nsamp<NSAMP; nsamp++)
 		{
 			make_random_bitsequence(ex, x, nbits, NBINS);
-			avg_x += mpf_get_d(ex.get_mpf_t());
 
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
@@ -113,9 +108,6 @@ static void extended_measure (float *array,
 			}
 			tot_tracks_longest += longest;
 		}
-
-		avg_x /= NSAMP;
-		xmean[ibin] = avg_x;
 	}
 
 	// Normalize
