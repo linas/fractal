@@ -35,7 +35,7 @@ int main (int argc, char* argv[])
 		if (1.99 < dbeta) continue;
 
 		int nbits = basebits / (4.0 * (dbeta-1.0)* (2.0-dbeta));
-		if (1.6 < dbeta) nbits *= 0.3/(2.0-dbeta);  // approx fit to high range
+		if (1.6 < dbeta) nbits *= 0.4/(2.0-dbeta);  // approx fit to high range
 		if (3200 < nbits) nbits = 3200; // punt on extreme ranges.
 		do_init(nbits);
 

@@ -36,7 +36,8 @@ static void extended_measure (float *array,
 
 	double dbeta = 2.0*Kay;
 	nbits *= 1.0/(4.0*(dbeta-1.0)*(2.0-dbeta));
-#define MAXBITS 300
+	if (1.6 < dbeta) nbits *= 0.4/(2.0-dbeta);  // approx fit to high range
+#define MAXBITS 1200
 	if (nbits < 0) nbits=MAXBITS;
 	if (MAXBITS < nbits) nbits=MAXBITS;
 	do_init(nbits);
@@ -57,7 +58,7 @@ static void extended_measure (float *array,
 		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		double x = ((double) ibin)/ ((double) NBINS);
 
-#define NSAMP 4
+#define NSAMP 32
 		for (int nsamp=0; nsamp<NSAMP; nsamp++)
 		{
 			mpf_class ex;

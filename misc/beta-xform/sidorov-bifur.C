@@ -23,7 +23,8 @@ double wave(int k, double front)
 
 	// return sqrt(back);
 	// return back;
-	return back*back;
+	// return back*back;
+	return M_E * exp(-1.0/(back*back));
 }
 
 static void fake_bifur (float *array,
