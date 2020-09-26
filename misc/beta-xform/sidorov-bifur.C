@@ -48,14 +48,29 @@ double x=param;
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
+	double Jay = 1.0;
 	int npaths = bitset.size();
 	for (int ipath = 0; ipath<npaths; ipath++)
 	{
 		std::vector<bool> bitseq = bitset[ipath];
 
-		for (int k=0; k< bitseq.size(); k++)
+		double acc = 1.0e-30;
+		int bitlen = bitseq.size();
+		if (60 < bitlen) bitlen = 60;
+		for (int i=0; i<bitlen; i++)
 		{
+			acc *= 1.0 / (2.0*Jay);
+			if (bitseq[bitlen-i-1])
+			{
+				acc += 0.5;
+			}
 		}
+
+		acc *= array_size;
+		int pix = acc;
+		if (array_size <= pix) pix = array_size-1;
+
+		array[pix] = 1.0;
 	}
 }
 
