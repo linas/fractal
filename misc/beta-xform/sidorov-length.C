@@ -32,25 +32,24 @@ int main (int argc, char* argv[])
 
 	for (int i=0; i<npts; i++)
 	{
-		double dbeta = 1.0 + (((double) i) + 0.5)/ ((double) npts);
+		double dbeta = 1.0 + (((double) i) + 0.5)/ ((double) npts+1);
 
 		mpf_class beta;
 		make_random_bitsequence(beta, dbeta, nbits, npts);
-		int em = emrun(dbeta/2.0);
+		double rbeta = mpf_get_d(beta.get_mpf_t());
+		int em = emrun(rbeta/2.0);
 
-		fprintf(stderr, "working beta=%g\n",  dbeta);
+		fprintf(stderr, "working beta=%g\n", rbeta);
 
 		double tot_tracks = 0.0;
 		double tot_tracklen = 0.0;
 		double tot_tracklensq = 0.0;
 		double tot_tracks_longest = 0.0;
 
-		double avg_x = 0.0;
 		for (int nsamp=0; nsamp<NSAMP; nsamp++)
 		{
 			mpf_class ex;
 			make_random_bitsequence(ex, 0.0, nbits, 1);
-			avg_x += mpf_get_d(ex.get_mpf_t());
 
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
@@ -73,9 +72,6 @@ int main (int argc, char* argv[])
 			tot_tracks_longest += longest;
 		}
 
-		avg_x /= NSAMP;
-printf("duuude avgx=%g\n", avg_x);
-
 		// Collect up tracklen stats.
 		double avg_tracks = ((double) tot_tracks) / NSAMP;
 		double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
@@ -88,7 +84,7 @@ printf("duuude avgx=%g\n", avg_x);
 
 		double avg_longest = tot_tracks_longest / NSAMP;
 
-		printf("%g	%g	%g	%g	%g	%g\n", 0.5*dbeta,
+		printf("%g	%g	%g	%g	%g	%g\n", 0.5*rbeta,
 		       avg_tracks, (1<<MAXDEPTH) - avg_tracks, avg_tracklen, avg_longest, rms_tracklen);
 		fflush(stdout);
 	}
