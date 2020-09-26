@@ -25,10 +25,12 @@ plot "sido-len-1600-3x67-128-rms.dat" using (2*$1):4 lw 2 title "2^7 expansions"
      (0.75/((x-1)*(2-x))) title "3/4(1-{/Symbol b})({/Symbol b}-2)"
 
 
-#set term postscript eps color enhanced
-#set out 'sido-length.eps'
-#
-#plot "sido-len-120-16-128.dat" using (2*$1):($4/7) lw 2 title ""
+set term postscript eps color enhanced
+set out 'sido-length.eps'
+
+plot "sido-len-1600-3x67-128-rms.dat" using (2*$1):4 lw 2 title "2^7 expansions", \
+     "sido-len-1200-3x67-4096-rms.dat" using (2*$1):4  lw 2 title "2^{12} expansions", \
+     (0.75/((x-1)*(2-x))) title "3/4(1-{/Symbol b})({/Symbol b}-2)"
 
 # set out 'sido-length-rms.png'
 # set title "Max and RMS distance between branch points"
