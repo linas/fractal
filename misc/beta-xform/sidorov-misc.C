@@ -17,13 +17,14 @@
 #ifdef HISTOGRAM_ORBITS
 int main (int argc, char* argv[])
 {
-	if (argc < 3)
+	if (argc < 4)
 	{
-		fprintf(stderr, "Usage: %s K nbits\n", argv[0]);
+		fprintf(stderr, "Usage: %s K nbits depth\n", argv[0]);
 		exit (1);
 	}
 	double Kay = atof(argv[1]);
 	int nbits = atoi(argv[2]);
+	int maxdepth = atoi(argv[3]);
 
 	do_init(nbits);
 
@@ -55,7 +56,7 @@ int main (int argc, char* argv[])
 		trackmax[i] = 0.0;
 	}
 
-#define MAXDEPTH 7
+#define MAXDEPTH maxdepth
 	// Distances to the branchpoints.
 	double depthnum[MAXDEPTH];
 	double depthsum[MAXDEPTH];
@@ -71,7 +72,7 @@ int main (int argc, char* argv[])
 	size_t tot_tracks_longest = 0;
 	mpf_class ex;
 
-#define NSAMP 512
+#define NSAMP 3
 	printf("# Sampled unit interval %d times\n#\n", NSAMP);
 
 	for (int ibin=0; ibin<NBINS; ibin++)
@@ -154,7 +155,7 @@ int main (int argc, char* argv[])
 
 	printf("# Avg tracks/orbit: %g expect 2^%d=%d miss=%g avg tracklen: %g\n#\n",
 	       avg_tracks, MAXDEPTH, 1<<MAXDEPTH, (1<<MAXDEPTH) - avg_tracks, avg_tracklen);
-	printf("# RMS tracklen: %g Longest-avg: %g\n", rms_tracklen, avg_longest)'
+	printf("# RMS tracklen: %g Longest-avg: %g\n", rms_tracklen, avg_longest);
 	fprintf(stderr, "# Avg tracks/orbit: %g expect 2^%d=%d avg tracklen: %g\n",
 	       avg_tracks, MAXDEPTH, 1<<MAXDEPTH, avg_tracklen);
 
@@ -211,7 +212,7 @@ int main (int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		printf("%d	%g	%g	%g	%g	%g\n",
-		       i, x, xmean[i], tracklen[i], trackrms[i], trackmax[i]);
+		       i, x, xmean[i], tracklen[i], tracklenrms[i], trackmax[i]);
 	}
 #endif // PRINT_LENGTH_DISTRIBUTION
 
