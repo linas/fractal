@@ -9,6 +9,7 @@
  */
 
 #define HISTOGRAM_ORBITS
+#define NBINS 2003
 #include "sidorov-big.C"
 
 double tee(double x, double beta)
@@ -245,7 +246,7 @@ int main (int argc, char* argv[])
 		if (onelo <= x and x <= onehi) acc += histo[i];
 	}
 	acc /= NBINS;
-	printf("integral=%g one-over-minus=%g tracklen=%g\n", acc, 1.0/acc, avg_tracklen);
+	printf("integral=%g one-over=%g tracklen=%g\n", acc, 1.0/acc, avg_tracklen);
 
 #endif // HISTO_INTEGRAL
 

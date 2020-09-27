@@ -52,7 +52,6 @@ void make_random_bitsequence(mpf_class& val, double x, int nbits, int nbins)
 
 // #define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
-	#define NBINS 403
 	double histbase[NBINS];
 #endif
 
