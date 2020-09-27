@@ -1096,7 +1096,7 @@ nice
 
 Numerically, this integration can be achieved by randomly sampling a large
  number of starting points.
- Observe that 
+ Observe that, by definition, 
 \begin_inset Formula $\rho(y)$
 \end_inset
 
@@ -1108,12 +1108,10 @@ Numerically, this integration can be achieved by randomly sampling a large
 
 \end_inset
 
-This probability distribution is an eigenstate of the transfer operator
- for the beta transform; the definition of the transfer operator of the
- beta transform is given later.
- Probability distributions are the same thing as measures; this particular
- distribution is invariant under iteration, and thus is often called the
- invariant measure, or sometimes the Haar measure.
+Probability distributions are the same thing as measures; they assign a
+ density to each point on the unit interval.
+ It can be shown that this particular distribution is invariant under iteration,
+ and thus is often called the invariant measure, or sometimes the Haar measure.
 \end_layout
 
 \begin_layout Standard
@@ -1133,7 +1131,11 @@ reference "fig:Undershift-Density-Distribution"
 
 \end_inset
 
- illustrates some of these distributions.
+ illustrates some of these distributions for a selection of fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
  Note that, for 
 \begin_inset Formula $\beta<1$
 \end_inset
@@ -1199,7 +1201,7 @@ The above figure shows three different density distributions, for
 \end_inset
 
 , calculated numerically.
- This is obtained by histogramming a large number of point trajectories,
+ These are obtained by histogramming a large number of point trajectories,
  as described in the text.
  The small quantities of jitter are due to a finite number of samples.
  To generate this figure, a total of 
@@ -1207,7 +1209,7 @@ The above figure shows three different density distributions, for
 \end_inset
 
  iterations were performed, using randomly generated arbitrary-precision
- floats (the Gnu GMP package), partitioned into 
+ floats (using the Gnu GMP package), partitioned into 
 \begin_inset Formula $N=800$
 \end_inset
 
@@ -1228,7 +1230,7 @@ iterated midpoints
 
 .
  The flat plateaus really are flat, and this is perhaps the one of the most
- amazing aspects of this figure; ths will be a recurring theme throughout
+ amazing aspects of this figure; this will be a recurring theme throughout
  the text.
  
 \begin_inset Note Note
@@ -1296,22 +1298,13 @@ s to
 \end_inset
 
 .
- The term 
-\begin_inset Quotes eld
-\end_inset
-
-bifurcation diagram
-\begin_inset Quotes erd
-\end_inset
-
- comes from its use to visualize the logistic map iterator.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1391,27 +1384,6 @@ This figure shows the density
 \end_inset
 
 .
- The diagram is 
-\begin_inset Quotes eld
-\end_inset
-
-interesting
-\begin_inset Quotes erd
-\end_inset
-
- only for 
-\begin_inset Formula $1<\beta$
-\end_inset
-
-; for smaller 
-\begin_inset Formula $\beta$
-\end_inset
-
-'s, one has that 
-\begin_inset Formula $\rho_{\beta}(y)=\delta(y)$
-\end_inset
-
-, indicated by the column of red pixels on the left side of the image.
  The lines forming the fan shape are not actually straight, they only seem
  to be; in fact, they have a slight curve.
  This means that one cannot apply simple-minded guess-work to discover the
@@ -1463,7 +1435,7 @@ After exactly one iteration of the beta shift, all initial points
 \end_inset
 
 , and never leave.
- Likewise, the range of the iterated beta shift is 
+ Likewise, the range of the iterated beta-shift is 
 \begin_inset Formula $0\le x<\beta/2$
 \end_inset
 
@@ -1489,7 +1461,7 @@ This can be written more compactly as
 \end_inset
 
 .
- In this form, the function is known as the beta transform, and is often
+ In this form, the function is known as the beta-transform, and is often
  called the 
 \begin_inset Formula $\beta$
 \end_inset
@@ -1500,12 +1472,12 @@ This can be written more compactly as
 \begin_inset Formula $x$
 \end_inset
 
- in the beta shift is identical to the orbit of a point 
+ in the beta-shift is identical to the orbit of a point 
 \begin_inset Formula $u=2x/\beta$
 \end_inset
 
- in the beta transformation.
- Explicitly comparing to the beta shift of eqn 
+ in the beta-transformation.
+ Explicitly comparing to the beta-shift of eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:downshift"
@@ -1520,7 +1492,7 @@ T_{\beta}^{n}\left(x\right)=\frac{\beta}{2}t_{\beta}^{n}\left(\frac{2x}{\beta}\r
 
 \end_inset
 
-The beta shift and the 
+The beta-shift and the 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -1532,13 +1504,13 @@ the same function
 \begin_inset Quotes erd
 \end_inset
 
-; this text works almost exclusively with the beta shift, and is thus idiosyncra
-tic, as it flouts the much more common convention of working with the 
+; this text works almost exclusively with the beta-shift, and is thus idiosyncra
+tic, as it flouts the more common convention of working with the 
 \begin_inset Formula $\beta$
 \end_inset
 
 -transformation.
- The primary reason is to retain contact with the 
+ The primary reason for doing this is to retain contact with the 
 \begin_inset Formula $\beta$
 \end_inset
 
