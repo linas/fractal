@@ -171,110 +171,172 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-The last three or four decades of mathematical research has seen dramatic
- advances in the theory of subshifts.
- This text is mostly not about that, except to point out that this theory
- has very broad and important impact on many branches of physics and mathematics.
- From the perspective of the amateur enthusiast, the theory of subshifts
- finally exposes and makes clear some of the mysterious and intriguing behavior
- of fractals and of chaotic dynamical systems.
-\end_layout
-
-\begin_layout Standard
-This text focuses almost entirely on just one particular map of the unit
- interval, the 
+The the 
 \begin_inset Formula $\beta$
 \end_inset
 
--transform, defined as the iterated map 
+-transform is the iterated map 
 \begin_inset Formula $\beta x\mod1$
 \end_inset
 
-.
- As such, it is an example of an iterated map on the unit interval of the
- real number line.
- Such maps have the form 
-\begin_inset Formula 
-\[
-f:[0,1]\to[0,1]
-\]
-
-\end_inset
-
-and the topic is the exploration of the consequence of iterating the map
- by composing: 
-\begin_inset Formula 
-\[
-f^{n}(x)=(f\circ f\circ\cdots\circ f)(x)=f(f(\cdots f(x)\cdots))
-\]
-
-\end_inset
-
-Such one-dimensional iterated maps have been heavily studied, and there
- is a large body of results, interconnecting many different concepts and
- results from mathematics, and so having a particularly broad range.
- 
-\end_layout
-
-\begin_layout Standard
-Perhaps the most surprising aspect of iteration (surprising to me) is that
- the invariant measure consists of flat plateaus.
- Or perhaps this is not surprising; after all, for the full shift, 
+ applied to the unit interval on the rel number line.
+ A very special case of this map is 
 \begin_inset Formula $\beta=2$
 \end_inset
 
-, the invariant measure is a straight line, and this is equivalent to saying
- that the real numbers are absolutely evenly distributed, or that the toss
- of a perfectly fair coin is a perfectly even, random sequences of heads
- and tails.
- Flatness implies an even distribution.
- So flatness is not surprising.
- But look at it a different way: the digit sequences are wildly and ergodically
- different, yet none-the-less manage to 
-\emph on
-sum to exactly the same value
-\emph default
-, when summed in an analytic series! Why should crazy-different, crazy-chaotic
- sequences yeild identical summations? That they do should be considered
- to be the 
+, which is named the 
 \begin_inset Quotes eld
 \end_inset
 
-fundamental theorem of analytic ergodics
+dyadic transform
 \begin_inset Quotes erd
 \end_inset
 
 .
- (I use the word 
+ The dyadic transform is, in a certain sense, 
 \begin_inset Quotes eld
 \end_inset
 
-analytic
+completely solvable
 \begin_inset Quotes erd
 \end_inset
 
- here in the same sense as 
-\begin_inset Quotes eld
+, in that it has been heavily studied and is well-understood.
+ It's dynamics is described by the Bernoulli process.
+ It is ergodic, and corresponds to a shift operator acting on the Cantor
+ space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
 \end_inset
 
-analytic number theory
-\begin_inset Quotes erd
-\end_inset
+: this is the shift that lops off one bit from an infininte bit-string.
+ The shift can be expressed as a dynamical system; the dissipative part
+ of the dynamical system is described by a transfer operator (the Ruelle-Frobeni
+us-Perron operator) acting on the Borel algebra (sigma algebra) associated
+ to the Cantor space.
+ The spectrum of the transfer operator is discrete, when limited to the
+ real-analytic functions; the spectrum is continuous when acting on square-integ
+rable functions.
+\end_layout
 
- or 
-\begin_inset Quotes eld
-\end_inset
-
-analytic combinatorics
-\begin_inset Quotes erd
+\begin_layout Standard
+Not as much is known for the case of 
+\begin_inset Formula $\beta\ne2$
 \end_inset
 
 .
- Given a sequence of values, one explores the analytic properties of its
- generating functions.) If this theorem has ever been clearly stated before,
- or if it has been proven (for any case other than the Bernoulli shift),
- I do not know.
- It seems terribly important for analyzing subshifts.
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform is still a shift, in that it can still be understood as a way
+ of lopping off one bit from an infininte bit-string in 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+.
+ However, not all possible bit-strings can occur; it is a subshift, in that
+ there is a subspace 
+\begin_inset Formula $B\subset\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ that is invariant under the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform.
+ Corresponding to this invariance is an invariant measure, first demonstrated
+ by Renyi, and given explicit form by Gelfond and Parry.
+ As an invariant measure, it is the eigenvalue-one (the Frobenius-Perron
+ eigenvalue) of the transfer operator.
+ The remaining spectrum of the transfer operator is poorly undersootd, but
+ is explored by this author in a different text.
+ Understanding the dissipative spectrum is important, as it explicitly describes
+ the rate of convergence of numerical explorations.
+\end_layout
+
+\begin_layout Standard
+The Cantor space can be mapped to the reals in the unit interval, by interpretin
+g a bit-string in 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ as a binary expansion of a real number.
+ Famously, the mapping is surjective, in that the dyadic rationals have
+ two inequivalent binary expansions: a dyadic rational can be written either
+ as 
+\begin_inset Formula $0.b_{0}b_{1}b_{2}\cdots b_{k}1000\cdots$
+\end_inset
+
+ ending in an infinite string of zeros, or as 
+\begin_inset Formula $0.b_{0}b_{1}b_{2}\cdots b_{k}0111\cdots$
+\end_inset
+
+ ending in an infinite string of one's.
+ The dyadic rationals are in one-to-one correspondance with the 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+ in the (conventional) Cantor set (the one with middle-thirds removed.) These
+ gaps are also in one-to-one correspondance with the 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+ between the left-right subtrees in an infinite tree; they are also in one-to-on
+e corrspondance with the cusps of modular forms (as the infinite binary
+ tree can be mapped into the modular group).
+ For the general 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift, 
+\begin_inset Formula $\beta\ne2,$
+\end_inset
+
+the situation changes: rather than there being only two (in-)equivalent
+ binary expansions, there are 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ (that is, uncountably many) of them! This text is an exploration of these
+ expansions for the general case.
+\end_layout
+
+\begin_layout Standard
+The remainder of the introduction introduces all of the various basic ideas
+ and notations pertinant to this system, followed by a short literature
+ review.
+ The introduction is written at a very basic level, and presumes almost
+ no prior acquaintance with dynamical systems; this text is meant to be
+ approachable by casual mathematical enthusiasts.
+ After the introduction, the main results of this paper are presented; they
+ are almost entirely grounded in a numerical exploration, as obtaining formal
+ results is quite daunting.
+\end_layout
+
+\begin_layout Standard
+The main results follow in order: the 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+ can be organized into an infinite binary tree; the locations of the branch
+ points in the tree can be explicitly specified; the distance between branch-poi
+nts can be explicitly stated.
+ The specification of the branch-points induces a dynamical system; it has
+ an invariant measure (not the Gelfond-Parry measure).
+ The distances between branch-points can be directly related to this measure.
+ The text terminates with a short conclusion and some speculations.
 \end_layout
 
 \begin_layout Subsection
