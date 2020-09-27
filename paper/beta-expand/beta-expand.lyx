@@ -1,0 +1,4898 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{url} 
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "courier" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+On the Beta Expansion
+\end_layout
+
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Date
+December 2017 (Current version: September 2020)
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Diary started in December 2017, with major updates published in February
+ 2018 and December 2018.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Address
+linasvepstas@gmail.com doi:10.13140/RG.2.2.17132.26248
+\end_layout
+
+\begin_layout Abstract
+The beta transformation is the iterated map 
+\begin_inset Formula $\beta x\,\mod1$
+\end_inset
+
+.
+ The special case of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ is known as the Bernoulli map, and is exactly solvable.
+ The Bernoulli map provides a model for pure, unrestrained chaotic (ergodic)
+ behavior: it is the full invariant shift on the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+.
+ The Cantor space consists of infinite strings of binary digits; it is notable
+ for many properties, including that it can represent the real number line.
+ 
+\end_layout
+
+\begin_layout Abstract
+The beta transformation defines a subshift: iterated on the unit interval,
+ it singles out a subspace of the Cantor space that is invariant under the
+ action of the left-shift operator.
+ That is, lopping off one bit at a time gives back the same subspace.
+\end_layout
+
+\begin_layout Abstract
+The beta transform seems to capture something basic about the multiplication
+ of two real numbers: 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ It offers insight into the nature of multiplication.
+ Iterating on multiplication, one would get 
+\begin_inset Formula $\beta^{n}x$
+\end_inset
+
+ – that is, exponentiation; the mod 1 of the beta transform contorts this
+ in strange ways.
+\end_layout
+
+\begin_layout Abstract
+Analyzing the beta transform is difficult.
+ The work presented here is more-or-less a research diary: a pastiche of
+ observations and some shallow insights.
+ One is that chaos seems to be rooted in how the carry bit behaves during
+ multiplication.
+ Another is that one can surgically insert 
+\begin_inset Quotes eld
+\end_inset
+
+islands of stability
+\begin_inset Quotes erd
+\end_inset
+
+ into chaotic (ergodic) systems, and have some fair amount of control over
+ how those islands of stability behave.
+ One can have islands with, or without a period-doubling 
+\begin_inset Quotes eld
+\end_inset
+
+route to chaos
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Abstract
+The eigenvalues of the transfer operator seem to lie on a circle of radius
+ 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+ in the complex plane.
+ Given that the transfer operator is purely real, the appearance of such
+ a quasi-unitary spectrum unexpected.
+ The spectrum appears to be the limit of a dense set of quasi-cyclotomic
+ polynomials, the positive real roots of which include the Golden and silver
+ ratios, the Pisot numbers, the n-bonacci (tribonacci, tetranacci, etc.)
+ numbers.
+ 
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+The last three or four decades of mathematical research has seen dramatic
+ advances in the theory of subshifts.
+ This text is mostly not about that, except to point out that this theory
+ has very broad and important impact on many branches of physics and mathematics.
+ From the perspective of the amateur enthusiast, the theory of subshifts
+ finally exposes and makes clear some of the mysterious and intriguing behavior
+ of fractals and of chaotic dynamical systems.
+\end_layout
+
+\begin_layout Standard
+This text focuses almost entirely on just one particular map of the unit
+ interval, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, defined as the iterated map 
+\begin_inset Formula $\beta x\mod1$
+\end_inset
+
+.
+ As such, it is an example of an iterated map on the unit interval of the
+ real number line.
+ Such maps have the form 
+\begin_inset Formula 
+\[
+f:[0,1]\to[0,1]
+\]
+
+\end_inset
+
+and the topic is the exploration of the consequence of iterating the map
+ by composing: 
+\begin_inset Formula 
+\[
+f^{n}(x)=(f\circ f\circ\cdots\circ f)(x)=f(f(\cdots f(x)\cdots))
+\]
+
+\end_inset
+
+Such one-dimensional iterated maps have been heavily studied, and there
+ is a large body of results, interconnecting many different concepts and
+ results from mathematics, and so having a particularly broad range.
+ 
+\end_layout
+
+\begin_layout Standard
+This text attempts to report some brand-new results on the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform.
+ This is perhaps surprising, as one might think that the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform is sufficiently simple so as to be well-studied and well-understood,
+ it being among the very simplest of iterated one-dimensional maps.
+ This text also attempts to report these results in a naive and unsophisticated
+ fashion, in the hope that this makes the text readable for the interested
+ student and casual enthusiast.
+\end_layout
+
+\begin_layout Standard
+Thus, although the author is personally excited by the advances in the field,
+ this text is neither a survey of known results on the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, nor does it much glance at most of the typical avenues that
+ are available for studying one-dimensional maps.
+ This text does focus extensively on the spectrum of the transfer operator
+ (the 
+\begin_inset Quotes eld
+\end_inset
+
+Ruelle Perron Frobenius operator
+\begin_inset Quotes erd
+\end_inset
+
+), and thus it contributes to the general 
+\begin_inset Quotes eld
+\end_inset
+
+Koopmania
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Little prior knowledge is assumed, and the needed concepts are introduced
+ in a very casual and informal way.
+ This will, no doubt, completely discourage and dismay the formally trained
+ mathematician.
+ The best I can offer is to reiterate: 
+\begin_inset Quotes eld
+\end_inset
+
+new results
+\begin_inset Quotes erd
+\end_inset
+
+, off the beaten track.
+\end_layout
+
+\begin_layout Standard
+This text begins with some pretty pictures, showing the iterated tent and
+ logistic maps, so as to remind the reader as to why this is an interesting
+ problem to study.
+ The fact is that the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is far more dry and abstract than the rather sexy logistic
+ map, or its complex cousin, the Mandelbrot set.
+ The hope is that the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is also simpler, and therefore, perhaps, easier to understand.
+ The reader will soon discover that there is nothing particularly easy about
+ it, and that, at every turn, one bumps into other interesting areas of
+ mathematics that could, perhaps should shed some light, but don't actually
+ seem to do so, in practice.
+\end_layout
+
+\begin_layout Standard
+The most fun for the casual reader might be chapter 5, on the periodic orbits,
+ where the quasi-cyclotomic polynomials appear; these are polynomials of
+ the form 
+\begin_inset Formula $p_{n}\left(z\right)=z^{k+1}-b_{0}z^{k}-b_{1}z^{k-1}-\cdots-b_{k-1}z-1$
+\end_inset
+
+ for the 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ being binary bits (zero or one).
+ Also quite fun is the section on the islands of stability, which sheds
+ light on how one can take a purely ergodic (chaotic) system, and surgically
+ insert, as desired, islands of stability.
+ The point here is that the classic logistic map attracted interest precisely
+ because of its interleaving of chaos and stability; it turns out, one can
+ manufacture such systems, at will.
+\end_layout
+
+\begin_layout Standard
+Perhaps the most surprising aspect of iteration (surprising to me) is that
+ the invariant measure consists of flat plateaus.
+ Or perhaps this is not surprising; after all, for the full shift, 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, the invariant measure is a straight line, and this is equivalent to saying
+ that the real numbers are absolutely evenly distributed, or that the toss
+ of a perfectly fair coin is a perfectly even, random sequences of heads
+ and tails.
+ Flatness implies an even distribution.
+ So flatness is not surprising.
+ But look at it a different way: the digit sequences are wildly and ergodically
+ different, yet none-the-less manage to 
+\emph on
+sum to exactly the same value
+\emph default
+, when summed in an analytic series! Why should crazy-different, crazy-chaotic
+ sequences yeild identical summations? That they do should be considered
+ to be the 
+\begin_inset Quotes eld
+\end_inset
+
+fundamental theorem of analytic ergodics
+\begin_inset Quotes erd
+\end_inset
+
+.
+ (I use the word 
+\begin_inset Quotes eld
+\end_inset
+
+analytic
+\begin_inset Quotes erd
+\end_inset
+
+ here in the same sense as 
+\begin_inset Quotes eld
+\end_inset
+
+analytic number theory
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+analytic combinatorics
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Given a sequence of values, one explores the analytic properties of its
+ generating functions.) If this theorem has ever been clearly stated before,
+ or if it has been proven (for any case other than the Bernoulli shift),
+ I do not know.
+ It seems terribly important for analyzing subshifts.
+\end_layout
+
+\begin_layout Standard
+A word about the format of this paper: this is a 
+\emph on
+de facto
+\emph default
+ 
+\begin_inset Quotes eld
+\end_inset
+
+research diary
+\begin_inset Quotes erd
+\end_inset
+
+, not a formal report.
+ This, it contains various unfinished corners and notes-to-self.
+ 
+\end_layout
+
+\begin_layout Subsection
+Bernoulli shift
+\end_layout
+
+\begin_layout Standard
+The Bernoulli shift (aka the bit-shift map) is an iterated map on the unit
+ interval, given by iteration of the function
+\begin_inset Formula 
+\begin{equation}
+b(x)=\begin{cases}
+2x & \mbox{ for }0\le x<\frac{1}{2}\\
+2x-1 & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}\label{eq:Bernoulli shift}
+\end{equation}
+
+\end_inset
+
+The symbolic dynamics of this map gives the binary digit expansion of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ That is, write 
+\begin_inset Formula 
+\[
+b^{n}(x)=(b\circ b\circ\cdots\circ b)(x)=b(b(\cdots b(x)\cdots))
+\]
+
+\end_inset
+
+to denote the 
+\begin_inset Formula $n$
+\end_inset
+
+-fold iteration of 
+\begin_inset Formula $b$
+\end_inset
+
+ and let 
+\begin_inset Formula $b^{0}(x)=x$
+\end_inset
+
+.
+ The symbolic dynamics is given by the bit-sequence
+\begin_inset Formula 
+\begin{equation}
+b_{n}\left(x\right)=\begin{cases}
+0 & \mbox{ if }0\le b^{n}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le b^{n}(x)\le1
+\end{cases}\label{eq:bernoulli-bits}
+\end{equation}
+
+\end_inset
+
+Of course, the symbolic dynamics recreates the initial real number:
+\begin_inset Formula 
+\begin{equation}
+x=\sum_{n=0}^{\infty}b_{n}\left(x\right)2^{-n-1}\label{eq:homomorphism}
+\end{equation}
+
+\end_inset
+
+All of this is just a fancy way of saying that a real number can be written
+ in terms of it's base-2 binary expansion.
+ That is, the binary digits for 
+\begin_inset Formula $x$
+\end_inset
+
+ are the 
+\begin_inset Formula $b_{n}=b_{n}\left(x\right)$
+\end_inset
+
+, so that
+\begin_inset Formula 
+\[
+x=0.b_{0}b_{1}b_{2}\cdots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Bernoulli shift has many interesting properties, connecting it to the
+ Cantor set and to many self-similar fractals.
+ I have explored these in many other texts, as have other authors, and will
+ not repeat these here.
+ The author is too lazy to provide a bibliography; the reader is directed
+ at search engines.
+ 
+\end_layout
+
+\begin_layout Standard
+The current task is to attempt to see how many of these properties still
+ hold in slightly more complex systems, and whether any of the tools used
+ to analyze and solve the Bernoulli shift can be applied to these systems.
+\end_layout
+
+\begin_layout Subsection
+Shift space
+\end_layout
+
+\begin_layout Standard
+The use of the word 
+\begin_inset Quotes eld
+\end_inset
+
+shift
+\begin_inset Quotes erd
+\end_inset
+
+ here deserves a small bit of formality.
+ A 
+\begin_inset Quotes eld
+\end_inset
+
+shift space
+\begin_inset Quotes erd
+\end_inset
+
+ can be formally defined to be a set of infinite sequences of a set of 
+\begin_inset Formula $N$
+\end_inset
+
+ letters (or symbols), together with a shift operator 
+\begin_inset Formula $T$
+\end_inset
+
+ that takes each sequence, and lops off the left-most symbol.
+ For the Bernoulli shift, there are 
+\begin_inset Formula $N=2$
+\end_inset
+
+ letters, taken from the set 
+\begin_inset Formula $\left\{ 0,1\right\} $
+\end_inset
+
+.
+ For the Bernoulli shift, one is typically interested in the set of all
+ possible infinite sequences: this is the 
+\begin_inset Quotes eld
+\end_inset
+
+full shift
+\begin_inset Quotes erd
+\end_inset
+
+.
+ One writes 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ for this shift space, 
+\begin_inset Formula $\omega$
+\end_inset
+
+ denoting countable infinity.
+ For the Bernoulli shift, the map 
+\begin_inset Formula $b\left(x\right)$
+\end_inset
+
+ is the shift operator: it just lops of the left-most symbol.
+\end_layout
+
+\begin_layout Standard
+In general, a shift space does not have to include every possible sequence
+ of symbols; it does, however, by definition, have to be shift-invariant.
+ That is, given some set 
+\begin_inset Formula $S$
+\end_inset
+
+ of infinite sequences of 
+\begin_inset Formula $N$
+\end_inset
+
+ symbols, the set 
+\begin_inset Formula $S$
+\end_inset
+
+ is a shift space if and only if, by loping off the leading symbol of each
+ string, one regains 
+\begin_inset Formula $S$
+\end_inset
+
+ again.
+ In formulas, a shift space 
+\begin_inset Formula $S$
+\end_inset
+
+ must obey 
+\begin_inset Formula 
+\[
+TS=S
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For example, 
+\begin_inset Formula $S=\left\{ 000\cdots,111\cdots\right\} $
+\end_inset
+
+ contains only two elements: the string of all zeros, and the string of
+ all ones; loping off the leading digit just returns 
+\begin_inset Formula $S$
+\end_inset
+
+ again.
+ In general, shift spaces may contain a finite, or a countable, or an uncountabl
+e number of elements.
+ In general, one defines the 
+\begin_inset Quotes eld
+\end_inset
+
+full shift
+\begin_inset Quotes erd
+\end_inset
+
+ as the space 
+\begin_inset Formula $N^{\omega}$
+\end_inset
+
+ of all possible strings of 
+\begin_inset Formula $N$
+\end_inset
+
+ symbols.
+ Subsets that are shift spaces are called 
+\begin_inset Quotes eld
+\end_inset
+
+subshifts
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The words 
+\begin_inset Quotes eld
+\end_inset
+
+symbolic dynamics
+\begin_inset Quotes erd
+\end_inset
+
+ also deserve some mention: given one specific sequence 
+\begin_inset Formula $x$
+\end_inset
+
+ out of the shift space, one can ponder 
+\begin_inset Quotes eld
+\end_inset
+
+where it goes to
+\begin_inset Quotes erd
+\end_inset
+
+, as one lops off a symbol at a time.
+ This gives the 
+\begin_inset Quotes eld
+\end_inset
+
+symbolic dynamics
+\begin_inset Quotes erd
+\end_inset
+
+ or the 
+\begin_inset Quotes eld
+\end_inset
+
+point dynamics
+\begin_inset Quotes erd
+\end_inset
+
+ of the sequence.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+orbit
+\begin_inset Quotes erd
+\end_inset
+
+ is defined as the set 
+\begin_inset Formula $\left\{ T^{m}x\,|\,\mbox{integer }m\ge0\right\} $
+\end_inset
+
+– that is, the set of all places that 
+\begin_inset Formula $x$
+\end_inset
+
+ goes to.
+ There are several possibilities: one is that 
+\begin_inset Formula $x$
+\end_inset
+
+ is a fixed point, so that 
+\begin_inset Formula $Tx=x$
+\end_inset
+
+.
+ Another is that 
+\begin_inset Formula $x$
+\end_inset
+
+ is a repeating sequence of symbols, in which case iteration repeats as
+ well: 
+\begin_inset Formula $T^{m}x=x$
+\end_inset
+
+ holds whenever the repeat length is 
+\begin_inset Formula $m$
+\end_inset
+
+; this is a periodic orbit.
+ Most importantly, there are usually uncountably many non-periodic sequences
+ or orbits.
+ That is, the number of periodic orbits is always countable: one merely
+ arranges them in lexicographic order, and one is done.
+ As Cantor famously demonstrated (and Hilbert so carefully expanded on)
+ this cannot be done for the non-periodic orbits: they are uncountable.
+ 
+\end_layout
+
+\begin_layout Standard
+In what follows, the text will in general confine itself to uncountable
+ case.
+ Periodic orbits exist, but will be ignored; in a certain strict sense,
+ they constitute a set of measure zero.
+ A number of glosses like this will be made: for example, the real numbers,
+ and the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ are both uncountable; however, they are not in one-to-one correspondence,
+ as some real numbers can have two different representations as bit sequences.
+ Specifically, these are the fractions 
+\begin_inset Formula $\left(2n+1\right)/2^{m}$
+\end_inset
+
+ for positive integers 
+\begin_inset Formula $m,n$
+\end_inset
+
+ – they can be validly represented by bit-sequences ending in all-zeros,
+ or all-ones.
+ There are countably many such fractions, termed the dyadic fractions.
+ For the most part, this difference between the real number line, and the
+ Cantor space will be ignored.
+\end_layout
+
+\begin_layout Subsection
+Beta shift
+\end_layout
+
+\begin_layout Standard
+The beta shift is similar to the Bernoulli shift, replacing the number 2
+ by a constant real-number value 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+.
+ It can be defined as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+T_{\beta}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}\label{eq:downshift}
+\end{equation}
+
+\end_inset
+
+This map, together with similar maps, is illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Iterated-piece-wise-linear"
+
+\end_inset
+
+ below.
+ 
+\end_layout
+
+\begin_layout Standard
+Just as the Bernoulli shift generates a sequence of digits, so does the
+ beta shift: write
+\begin_inset Formula 
+\begin{equation}
+k_{n}=\begin{cases}
+0 & \mbox{ if }0\le T_{\beta}^{n}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}(x)\le1
+\end{cases}\label{eq:down-bits}
+\end{equation}
+
+\end_inset
+
+Given the symbolic dynamics, one can reconstruct the original value whenever
+ 
+\begin_inset Formula $1<\beta$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+x=\frac{k_{0}}{2}+\frac{1}{\beta}\left(\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
+\]
+
+\end_inset
+
+That is, one clearly sees that 
+\begin_inset Formula $T_{\beta}(x)$
+\end_inset
+
+ acts as a shift on this sequence:
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\frac{k_{4}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
+\]
+
+\end_inset
+
+In this sense, this shift is 
+\begin_inset Quotes eld
+\end_inset
+
+exactly solvable
+\begin_inset Quotes erd
+\end_inset
+
+: the above provides a closed-form solution for iterating and un-iterating
+ the sequence.
+\end_layout
+
+\begin_layout Standard
+Multiplying out the above sequence, one obtains the so-called 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion
+\begin_inset Quotes erd
+\end_inset
+
+ of a real number 
+\begin_inset Formula $x$
+\end_inset
+
+, namely the series
+\begin_inset Formula 
+\begin{equation}
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\beta^{n}}\label{eq:shift series}
+\end{equation}
+
+\end_inset
+
+That is, the bit-sequence that was extracted by iteration can be used to
+ reconstruct the original real number.
+ Setting 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bernoulli-bits"
+
+\end_inset
+
+ gives the Bernoulli shift.
+ Explicitly, one has 
+\begin_inset Formula $T_{2}\left(x\right)=b\left(x\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Unlike the Bernoulli shift, not every possible bit-sequence occurs in this
+ system.
+ It is a subshift of the full shift: it is a subset of 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ that is invariant under the action of 
+\begin_inset Formula $T_{\beta}$
+\end_inset
+
+.
+ This is explored in greater detail in a later section.
+ 
+\end_layout
+
+\begin_layout Subsection
+Associated polynomial
+\end_layout
+
+\begin_layout Standard
+The iterated shift can also be written as a finite sum.
+ This is noted here; it will be useful in later sections.
+ Observe that 
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\beta\left(x-\frac{k_{0}}{2}\right)
+\]
+
+\end_inset
+
+and that
+\begin_inset Formula 
+\[
+T_{\beta}^{2}(x)=\beta^{2}x-\frac{\beta}{2}\left(\beta k_{0}+k_{1}\right)
+\]
+
+\end_inset
+
+and that 
+\begin_inset Formula 
+\[
+T_{\beta}^{3}(x)=\beta^{3}x-\frac{\beta}{2}\left(\beta^{2}k_{0}+\beta k_{1}+k_{2}\right)
+\]
+
+\end_inset
+
+The general form is then:
+\begin_inset Formula 
+\begin{equation}
+T_{\beta}^{p}(x)=\beta^{p}x-\frac{\beta}{2}\sum_{m=0}^{p-1}k_{m}\beta^{p-m-1}\label{eq:iterated shift}
+\end{equation}
+
+\end_inset
+
+Since the 
+\begin_inset Formula $k_{m}$
+\end_inset
+
+ depend on both 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and on 
+\begin_inset Formula $x$
+\end_inset
+
+, this is not a 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ polynomial; however, it will be useful in analysis, later.
+ 
+\end_layout
+
+\begin_layout Subsection
+Density Visualizations
+\end_layout
+
+\begin_layout Standard
+Why is the beta transform interesting to explore? This can be partly illustrated
+ with some graphs.
+ Shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+bifurcation diagram
+\begin_inset Quotes erd
+\end_inset
+
+ for the beta transform.
+ It visualizes the long-term dynamics of the beta shift.
+ Comparing to the usual bifurcation diagram, e.g.
+ for the Feigenbaum logistic map (shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Logistic-Map-Bifurcation"
+
+\end_inset
+
+) one thing becomes immediately apparent: there are no actual 
+\begin_inset Quotes eld
+\end_inset
+
+bifurcations
+\begin_inset Quotes erd
+\end_inset
+
+, no 
+\begin_inset Quotes eld
+\end_inset
+
+islands of stability
+\begin_inset Quotes erd
+\end_inset
+
+, no period-doubling regions.
+ Although there are periodic orbits, these form a set of measure zero: the
+ iteration produces purely chaotic motion for all values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Thus, the beta transform provides a clean form of 
+\begin_inset Quotes eld
+\end_inset
+
+pure chaos
+\begin_inset Quotes erd
+\end_inset
+
+,
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Formal mathematics distinguishes between many different kinds of chaotic
+ number sequences: those that are ergodic, those that are weakly or strongly
+ Bernoulli, weakly or strongly mixing.
+ The beta transform is known to be ergodic,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Renyi57"
+literal "true"
+
+\end_inset
+
+ weakly mixing
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+literal "true"
+
+\end_inset
+
+ and weakly Bernoulli.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dajani97"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ without the pesky 
+\begin_inset Quotes eld
+\end_inset
+
+islands of stability
+\begin_inset Quotes erd
+\end_inset
+
+ popping up intermittently.
+\end_layout
+
+\begin_layout Standard
+The visualization of the long-term dynamics is done by generating a histogram,
+ and then taking the limit, as follows.
+ One divides the unit interval into a fixed sequence of equal-sized bins;
+ say a total of 
+\begin_inset Formula $N$
+\end_inset
+
+ bins, so that each is 
+\begin_inset Formula $1/N$
+\end_inset
+
+ in width.
+ Pick a starting 
+\begin_inset Formula $x$
+\end_inset
+
+, and then iterate: if, at the 
+\begin_inset Formula $n$
+\end_inset
+
+'th iteration, one has that 
+\begin_inset Formula $j/N\le b_{\beta}^{n}(x)<(j+1)/N$
+\end_inset
+
+, then increment the count for the 
+\begin_inset Formula $j$
+\end_inset
+
+'th bin.
+ After a total of 
+\begin_inset Formula $M$
+\end_inset
+
+ iterations, let 
+\begin_inset Formula $c(j;M)$
+\end_inset
+
+ be the count in the 
+\begin_inset Formula $j$
+\end_inset
+
+'th bin.
+ This count is the histogram.
+ In the limit of a large number of iterations, as well as small bin sizes,
+ one obtains a distribution: 
+\begin_inset Formula 
+\[
+\rho(y;x)=\lim_{N\to\infty}\lim_{M\to\infty}\frac{c(j;M)}{M}\mbox{ for }\frac{j}{N}\le y<\frac{j+1}{N}
+\]
+
+\end_inset
+
+This distribution depends on the initial value 
+\begin_inset Formula $x$
+\end_inset
+
+ chosen for the point to be iterated; a 
+\begin_inset Quotes eld
+\end_inset
+
+nice
+\begin_inset Quotes erd
+\end_inset
+
+ distribution results when one averages over all starting points:
+\begin_inset Formula 
+\[
+\rho(y)=\int_{0}^{1}\rho(y;x)\,dx
+\]
+
+\end_inset
+
+Numerically, this integration can be achieved by randomly sampling a large
+ number of starting points.
+ Observe that 
+\begin_inset Formula $\rho(y)$
+\end_inset
+
+ is a probability distribution:
+\begin_inset Formula 
+\[
+1=\int_{0}^{1}\rho(x)\,dx
+\]
+
+\end_inset
+
+This probability distribution is an eigenstate of the transfer operator
+ for the beta transform; the definition of the transfer operator of the
+ beta transform is given later.
+ Probability distributions are the same thing as measures; this particular
+ distribution is invariant under iteration, and thus is often called the
+ invariant measure, or sometimes the Haar measure.
+\end_layout
+
+\begin_layout Standard
+For each fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+, one obtains a distinct distribution 
+\begin_inset Formula $\rho_{\beta}(y)$
+\end_inset
+
+.
+ The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+ illustrates some of these distributions.
+ Note that, for 
+\begin_inset Formula $\beta<1$
+\end_inset
+
+, the distribution is given by 
+\begin_inset Formula $\rho_{\beta}(y)=\delta(y)$
+\end_inset
+
+, a Dirac delta function, located at 
+\begin_inset Formula $y=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beta-shift Density Distribution
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename bigbern.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The above figure shows three different density distributions, for 
+\begin_inset Formula $\rho_{1.2}(y)$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{1.6}(y)$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho_{1.8}(y)$
+\end_inset
+
+, calculated numerically.
+ This is obtained by histogramming a large number of point trajectories,
+ as described in the text.
+ The small quantities of jitter are due to a finite number of samples.
+ To generate this figure, a total of 
+\begin_inset Formula $M=4000$
+\end_inset
+
+ iterations were performed, using randomly generated arbitrary-precision
+ floats (the Gnu GMP package), partitioned into 
+\begin_inset Formula $N=800$
+\end_inset
+
+ bins, and sampled 24000 times (or 30 times per bin) to perform the averaging
+ integral.
+ It will later be seen that the discontinuities in this graph occur at the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+iterated midpoints
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $m_{p}=T_{\beta}^{p}\left(\beta/2\right)$
+\end_inset
+
+.
+ The flat plateaus really are flat, and this is perhaps the one of the most
+ amazing aspects of this figure; ths will be a recurring theme throughout
+ the text.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with `fractal/misc/bitops/bigbern.C` edited to print only slices.
+ See bigbern.gplot for plotting.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The general trend of the distributions, as a function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+, can be visualized with a Feigenbaum-style 
+\begin_inset Quotes eld
+\end_inset
+
+bifurcation diagram
+\begin_inset Quotes erd
+\end_inset
+
+, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+.
+ This color-codes each distribution 
+\begin_inset Formula $\rho_{\beta}(y)$
+\end_inset
+
+ and arranges them in a stack; a horizontal slice through the diagram correspond
+s to 
+\begin_inset Formula $\rho_{\beta}(y)$
+\end_inset
+
+ for a fixed value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The term 
+\begin_inset Quotes eld
+\end_inset
+
+bifurcation diagram
+\begin_inset Quotes erd
+\end_inset
+
+ comes from its use to visualize the logistic map iterator.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beta-shift Bifurcation Diagram
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename bern-4K.png
+	lyxscale 80
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the density 
+\begin_inset Formula $\rho_{\beta}(y)$
+\end_inset
+
+, rendered in color.
+ The constant 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is varied from 0 at the bottom to 2 at the top; whereas 
+\begin_inset Formula $y$
+\end_inset
+
+ runs from 0 on the left to 1 on the right.
+ Thus, a fixed value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ corresponds to a horizontal slice through the diagram.
+ The color green represents values of 
+\begin_inset Formula $\rho_{\beta}(y)\approx0.5$
+\end_inset
+
+, while red represents 
+\begin_inset Formula $\rho_{\beta}(y)\gtrsim1$
+\end_inset
+
+ and blue-to-black represents 
+\begin_inset Formula $\rho_{\beta}(y)\apprle0.25$
+\end_inset
+
+.
+ The diagram is 
+\begin_inset Quotes eld
+\end_inset
+
+interesting
+\begin_inset Quotes erd
+\end_inset
+
+ only for 
+\begin_inset Formula $1<\beta$
+\end_inset
+
+; for smaller 
+\begin_inset Formula $\beta$
+\end_inset
+
+'s, one has that 
+\begin_inset Formula $\rho_{\beta}(y)=\delta(y)$
+\end_inset
+
+, indicated by the column of red pixels on the left side of the image.
+ The lines forming the fan shape are not actually straight, they only seem
+ to be; in fact, they have a slight curve.
+ This means that one cannot apply simple-minded guess-work to discover the
+ overall diagram shown here.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+created with fractal/misc/bitops/bigbern.C 800 800 1360 0.5 0.5 1 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Beta Transformation
+\end_layout
+
+\begin_layout Standard
+After exactly one iteration of the beta shift, all initial points 
+\begin_inset Formula $\beta/2\le x\le1$
+\end_inset
+
+ are swept up into the domain 
+\begin_inset Formula $0\le x<\beta/2$
+\end_inset
+
+, and never leave.
+ Likewise, the range of the iterated beta shift is 
+\begin_inset Formula $0\le x<\beta/2$
+\end_inset
+
+.
+ Thus, an alternative representation of the beta shift, filling the entire
+ unit square, can be obtained by dividing both the domain and range by 
+\begin_inset Formula $\beta/2$
+\end_inset
+
+ to obtain the function
+\begin_inset Formula 
+\begin{equation}
+t_{\beta}(u)=\begin{cases}
+\beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
+\beta u-1 & \mbox{ for }\frac{1}{\beta}\le u\le1
+\end{cases}\label{eq:beta transform}
+\end{equation}
+
+\end_inset
+
+This can be written more compactly as 
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\mod1$
+\end_inset
+
+.
+ In this form, the function is known as the beta transform, and is often
+ called the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation, presenting a typesetting challenge to search engines when
+ used in titles of papers.
+ The orbit of a point 
+\begin_inset Formula $x$
+\end_inset
+
+ in the beta shift is identical to the orbit of a point 
+\begin_inset Formula $u=2x/\beta$
+\end_inset
+
+ in the beta transformation.
+ Explicitly comparing to the beta shift of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+T_{\beta}^{n}\left(x\right)=\frac{\beta}{2}t_{\beta}^{n}\left(\frac{2x}{\beta}\right)
+\]
+
+\end_inset
+
+The beta shift and the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation are essentially 
+\begin_inset Quotes eld
+\end_inset
+
+the same function
+\begin_inset Quotes erd
+\end_inset
+
+; this text works almost exclusively with the beta shift, and is thus idiosyncra
+tic, as it flouts the much more common convention of working with the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation.
+ The primary reason is to retain contact with the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift being a subshift of the full shift.
+\end_layout
+
+\begin_layout Standard
+After a single iteration of the tent map, a similar situation applies.
+ After one iteration, all initial points 
+\begin_inset Formula $\beta/2\le x\le1$
+\end_inset
+
+ are swept up into the domain 
+\begin_inset Formula $0\le x<\beta/2$
+\end_inset
+
+.
+ After a finite number of iterations, all points 
+\begin_inset Formula $0<x\le\beta\left(1-\beta/2\right)$
+\end_inset
+
+ are swept up, so that the remaining iteration takes place on the domain
+ 
+\begin_inset Formula $\beta\left(1-\beta/2\right)<x<\beta/2$
+\end_inset
+
+.
+ It is worth defining a 
+\begin_inset Quotes eld
+\end_inset
+
+sidetent
+\begin_inset Quotes erd
+\end_inset
+
+ function, which corresponds to the that part of the tent map in which iteration
+ is confined.
+ It is nothing more than a rescaling of the tent map, ignoring those parts
+ outside of the above domain that 
+\begin_inset Quotes eld
+\end_inset
+
+wander away
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The sidetent is given by
+\begin_inset Formula 
+\[
+s_{\beta}(u)=\begin{cases}
+\beta\left(u-1\right)+2 & \mbox{ for }0\le u<\frac{\beta-1}{\beta}\\
+\beta\left(1-u\right) & \mbox{ for }\frac{\beta-1}{\beta}\le u\le1
+\end{cases}
+\]
+
+\end_inset
+
+Performing a left-right flip on the side-tent brings it closer in form to
+ the beta-transformation.
+ The flipped version, replacing 
+\begin_inset Formula $u\to1-u$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{\beta}(u)=\begin{cases}
+\beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
+2-\beta u & \mbox{ for }\frac{1}{\beta}\le u\le1
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The tent map (and the flipped tent) exhibits fixed points (periodic orbits;
+ mode-locking) for the smaller values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ These can be eliminated by shifting part of the tent downwards, so that
+ the diagonal is never intersected.
+ This suggests the 
+\begin_inset Quotes eld
+\end_inset
+
+sidetarp
+\begin_inset Quotes erd
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+a_{\beta}(u)=\begin{cases}
+\beta u & \mbox{ for }0\le u<\frac{1}{\beta}\\
+\beta\left(1-u\right) & \mbox{ for }\frac{1}{\beta}\le u\le1
+\end{cases}
+\]
+
+\end_inset
+
+The six different maps under consideration here are depicted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Iterated-piece-wise-linear"
+
+\end_inset
+
+.
+ It is interesting to compare three of the bifurcation diagrams, side-by-side.
+ These are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Side-Shift-and-Side-tent"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Iterated piece-wise linear maps
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Iterated-piece-wise-linear"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename maps.eps
+	lyxscale 60
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The beta shift map, shown in the upper left, generates orbits that spend
+ all of their time in the shaded area: a box of size 
+\begin_inset Formula $\frac{\beta}{2}\times\frac{\beta}{2}$
+\end_inset
+
+.
+ Enlarging this box to the unit square gives the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation.
+ The tent map resembles the beta shift, except that one arm is flipped to
+ make a tent-shape.
+ After a finite number of iterations, orbits move entirely in the shaded
+ region; enlarging this region to be the unit square gives the sidetent
+ map.
+ Flipping it left-right gives the fliptent map.
+ Although it is not trivially obvious, the fliptent map and the sidetent
+ map have the same orbits, and thus the same bifurcation diagram.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+The bottom three maps all have fixed points and periodic orbits, essentially
+ because the diagonal intersects the map.
+ The top three maps have no periodic orbits, and are purely chaotic, essentially
+ because the diagonal does not intersect them.
+ Note tht the slopes and the geometric proportions of all six maps are identical
+; they are merely rearrangents of the same basic elements.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beta transform and Side-tent
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Side-Shift-and-Side-tent"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sidebern.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename sidetent.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename sidetarp.png
+	lyxscale 30
+	width 32col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The left figure shows the bifurcation diagram for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, as it is normally defined as the 
+\begin_inset Formula $\beta x\mod1$
+\end_inset
+
+ map.
+ It is the same map as the beta shift, just rescaled to occupy the entire
+ unit square.
+ In all other respects, it is identical to 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+The middle figure is a similarly-rescaled tent map, given the name 
+\begin_inset Quotes eld
+\end_inset
+
+side tent
+\begin_inset Quotes erd
+\end_inset
+
+ in the main text.
+ It is essentially identical to 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tent-Map-Bifur"
+
+\end_inset
+
+, with the middle parts expanded and the sides removed.
+ In both figures, 
+\begin_inset Formula $\beta$
+\end_inset
+
+ runs from 1 at the bottom to 2 at the top.
+ The right-hand-side figure is the 
+\begin_inset Quotes eld
+\end_inset
+
+sidetarp
+\begin_inset Quotes erd
+\end_inset
+
+, clearly its an oddly-folded variant of the beta transform.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Both generated by bigbern.C, edited ad hoc, 800 800 1360 itermax 0.5 0.5 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Beta Transformation Literature Review and References
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation, in the form of 
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\,\mod1$
+\end_inset
+
+ has been well-studied over the decades.
+ The beta-expansion 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+
+\end_inset
+
+ was introduced by A.
+ Renyi
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Renyi57"
+literal "true"
+
+\end_inset
+
+, who demonstrates the existence of the invariant measure.
+ The ergodic properties of the transform were proven by W.
+ Parry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+literal "true"
+
+\end_inset
+
+, who also shows that the system is weakly mixing.
+ 
+\end_layout
+
+\begin_layout Standard
+An explicit expression for the invariant measure was independently obtained
+ by A.O.
+ Gel'fond
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gelfond59"
+literal "true"
+
+\end_inset
+
+ and by W.
+ Parry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+literal "true"
+
+\end_inset
+
+, as
+\begin_inset Formula 
+\begin{equation}
+\nu_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{\varepsilon_{n}\left(y\right)}{\beta^{n}}\label{eq:invariant measure}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\varepsilon_{n}$
+\end_inset
+
+ is the digit sequence 
+\begin_inset Formula 
+\[
+\varepsilon_{n}\left(y\right)=\begin{cases}
+0 & \mbox{ if }t_{\beta}^{n}\left(1\right)\le y\\
+1 & \mbox{ otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $F$
+\end_inset
+
+ is a normalization constant.
+ 
+\end_layout
+
+\begin_layout Standard
+In the same way that a dyadic rational 
+\begin_inset Formula $p/2^{n}$
+\end_inset
+
+ has two different binary expansions, one ending in all-zeros, and a second
+ ending in all-ones, so one may also ask if and when a real number 
+\begin_inset Formula $x$
+\end_inset
+
+ might have more than one 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion (for fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+).
+ In general, it can; N.
+ Sidorov shows that almost every number has a continuum of such expansions!
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sidorov03"
+literal "true"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Conversely, the 
+\begin_inset Quotes eld
+\end_inset
+
+univoke numbers
+\begin_inset Quotes erd
+\end_inset
+
+ are those values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for which there is only one, unique expansion for 
+\begin_inset Formula $x=1$
+\end_inset
+
+.
+ These are studied by De Vries.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeVries06"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation has been shown to have the same ergodicity properties as
+ the Bernoulli shift.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dajani97"
+literal "true"
+
+\end_inset
+
+ The fact that the beta shift, and its subshifts are all ergodic is established
+ by Climenhaga and Thompson.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Clim10"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An alternative to the notion of ergodicity is the notion of universality:
+ a 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion is universal if, for any given finite string of bits, that finite
+ string occurs somewhere in the expansion.
+ This variant of universality was introduced by Erdös and Komornik
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Erdos98"
+literal "true"
+
+\end_inset
+
+.
+ Its is shown by N.
+ Sidorov that almost every 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion is universal.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sidorov02"
+literal "true"
+
+\end_inset
+
+ Conversely, there are some values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for which rational numbers have purely periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions;
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Adamczewski10"
+literal "true"
+
+\end_inset
+
+ all such numbers are Pisot numbers.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Schmidt80"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The symbolic dynamics of the beta-transformation was analyzed by F.
+ Blanchard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Blanchard89"
+literal "true"
+
+\end_inset
+
+.
+ A characterization of the periodic points are given by Bruno Maia
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Maia07"
+literal "true"
+
+\end_inset
+
+.
+ A discussion of various open problems with respect to the beta expansion
+ is given by Akiyama.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Akiyama09"
+literal "true"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+When the beta expansion is expanded to the entire real-number line, one
+ effectively has a representation of reals in a non-integer base.
+ One may ask about arithmetic properties, such as the behavior of addition
+ and multiplication, in this base - for example, the sum or product of two
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+-integers may have a fractional part! Bounds on the lengths of these fractional
+ parts, and related topics, are explored by multiple authors.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Guimond01,Julien06,Hbaib13"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Certain values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ - generally, the Pisot numbers, generate fractal tilings,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Thurston89,Berthe05,Ito05,Adamczewski10,Akiyama09"
+literal "true"
+
+\end_inset
+
+ which are generalizations of the Rauzy fractal.
+ An overview, with common terminology and definitions is provided by Akiyama.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Akiyama17"
+literal "true"
+
+\end_inset
+
+ The tilings, sometimes called (generalized) Rauzy fractals, an be thought
+ of as living in a direct product of Euclidean and 
+\begin_inset Formula $p$
+\end_inset
+
+-adic spaces.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Berthe04"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The set of finite beta-expansions constitutes a language, in the formal
+ sense of model theory and computer science.
+ This language is recursive (that is, decidable by a Turing machine), if
+ and only if 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is a computable real number.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Simonsen11"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The zeta function, and a lap-counting function, are given by Lagarias
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lagarias94"
+literal "true"
+
+\end_inset
+
+.
+ The Hausdorff dimension, the topological entropy and general notions of
+ topological pressure arising from conditional variational principles is
+ given by Daniel Thompson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Thompson10"
+literal "true"
+
+\end_inset
+
+.
+ A proper background on this topic is given by Barreira and Saussol
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barreira01"
+literal "true"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+None of the topics or results cited above are made use of, or further expanded
+ on, or even touched on below.
+ That's mostly because what follows below is just a ...
+ different perspective on the topic.
+ Not intentionally so; it just happened to come out that way.
+\end_layout
+
+\begin_layout Section
+Symbolic Dynamics
+\end_layout
+
+\begin_layout Standard
+A breif review of the Cantor
+\end_layout
+
+\begin_layout Subsection
+Self-similarity
+\end_layout
+
+\begin_layout Standard
+The full dyadic monoid is generated by the generators 
+\begin_inset Formula $g$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ It consists of all finite-length strings of the form 
+\begin_inset Formula 
+\[
+\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r\cdots rg^{a_{m}}
+\]
+
+\end_inset
+
+for a finite-length list of positive integers 
+\begin_inset Formula $\left(a_{1},a_{2},a_{3,}\cdots,a_{m}\right)$
+\end_inset
+
+.
+ Note that this list can be interpreted as a continued fraction; this establishe
+s an isomorphism between the continued fractions and the dyadic monoid.
+ This isomorphism is conventionally called the Minkowski question-mark function.
+ We can be a bit more explicit.
+ Write 
+\begin_inset Formula 
+\[
+g_{\beta}\left(x\right)=\frac{x}{\beta}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+r_{\beta}\left(x\right)=\frac{\beta}{2\left(\beta-1\right)}-x
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $r_{\beta}\circ r_{\beta}=1$
+\end_inset
+
+ so that it is a reflection, and that 
+\begin_inset Formula $r_{2}\left(x\right)=1-x$
+\end_inset
+
+ is the reflection of the unit interval.
+ For strings of binary digits, the reflection performs the exchange of 
+\begin_inset Formula $0\leftrightarrow1$
+\end_inset
+
+; its a mirroring symmetry.
+ The above relationships then become
+\begin_inset Formula 
+\[
+g_{\beta}\circ\mbox{pdr}_{\beta}=\mbox{pdr}_{\beta}\circ g_{2}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+r_{\beta}\circ\mbox{pdr}_{\beta}=\mbox{pdr}_{\beta}\circ r_{2}
+\]
+
+\end_inset
+
+The symmetry under the dyadic monoid is simply the statement that
+\begin_inset Formula 
+\[
+\gamma_{\beta}\circ\mbox{pdr}_{\beta}=\mbox{pdr}_{\beta}\circ\gamma_{2}
+\]
+
+\end_inset
+
+for any 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ of the above form.
+\end_layout
+
+\begin_layout Section
+Beta expansions
+\end_layout
+
+\begin_layout Standard
+The Bernoulli process and it's relationship to the Cantor set provides the
+ baseline to which the beta shift can be compared.
+ The beta shift has a number of very striking differences, however, which
+ manifet themselves in the structure of the beta transformations.
+ This section will concern itself with what will be called the 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+, which, roughly speaking, are the 
+\begin_inset Quotes eld
+\end_inset
+
+spaces between numbers
+\begin_inset Quotes erd
+\end_inset
+
+, or, perhaps, the lack-thereof.
+\end_layout
+
+\begin_layout Standard
+More precisely, again consider the binary expansion of a real number
+\begin_inset Formula 
+\[
+x=0.b_{0}b_{1}b_{2}\cdots
+\]
+
+\end_inset
+
+The dyadic rationals, rationals in the form 
+\begin_inset Formula $r=\left(2k+1\right)/2^{n}$
+\end_inset
+
+ have two equivalent representations:
+\begin_inset Formula 
+\[
+r=0.b_{0}b_{1}b_{2}\cdots b_{n-2}1000\cdots
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+r=0.b_{0}b_{1}b_{2}\cdots b_{n-2}0111\cdots
+\]
+
+\end_inset
+
+These are equivalent as real numbers; they are inequivalent as elements
+ of the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+.
+ The term 
+\begin_inset Quotes eld
+\end_inset
+
+gap
+\begin_inset Quotes erd
+\end_inset
+
+ flies to mind when one writes 
+\begin_inset Formula 
+\[
+c=\sum_{n=0}^{\infty}\frac{b_{n}}{3^{n+1}}
+\]
+
+\end_inset
+
+the collection of such real numbers 
+\begin_inset Formula $c$
+\end_inset
+
+ being the conventional Cantor set as it appears in the reals.
+ It obviously has 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+.
+ These are the objects of study here.
+ They have a natural interpretation in terms ot the infinite binary tree:
+ a gap occurs whenever one makes a left-right decision in travelling down
+ the tree.
+ The left sub-tree is distinct from the right, and the gap is what lies
+ in between.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+gap
+\begin_inset Quotes erd
+\end_inset
+
+ is also interestng, as it suggests that the real numbers can be constructed
+ from the Cantor set by 
+\begin_inset Quotes eld
+\end_inset
+
+gluing together the gaps
+\begin_inset Quotes erd
+\end_inset
+
+: a nicely intuitive idea.
+\end_layout
+
+\begin_layout Subsection
+Gaps
+\end_layout
+
+\begin_layout Standard
+It is tempting to assume that this general structure persists for the beta
+ transform.
+ In fact, nothing could be farther from the truth.
+ This was demonstrated by N.
+ Sidorov and other authors
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glendinning01,Sidorov03"
+literal "false"
+
+\end_inset
+
+; we recap and expand upon those findings here.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ generates a sequence of bits 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+ defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ which can be summed as 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The summation provides a real number 
+\begin_inset Formula $x$
+\end_inset
+
+ for 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The question arises: is this expansion unique, or are there other sequences
+ 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+ that are equivalent? The surprising answer is that, for almost all 
+\begin_inset Formula $x$
+\end_inset
+
+, there are in fact an 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+uncountable
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ number of equivalent expansions! This is in stark contrast to the binary
+ case, where almost all 
+\begin_inset Formula $x$
+\end_inset
+
+ had a unique expansion, and a countable number of them (the dyadic rationals)
+ had two expansions (but no more).
+ As before, we will call a set of equivalent expansions a 
+\begin_inset Quotes eld
+\end_inset
+
+gap
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The first important result is that the gap is an infinite binary tree.
+ Starting with the sequence 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $k_{n}$
+\end_inset
+
+, there is a countable sequence of locations 
+\begin_inset Formula $n_{1},n_{2},\cdots$
+\end_inset
+
+ at which an alternate expansion can be made.
+ Precisely, define
+\begin_inset Formula 
+\[
+m=\left\lfloor \log_{\beta}\frac{\beta-1}{2-\beta}\right\rfloor +1
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left\lfloor \cdot\right\rfloor $
+\end_inset
+
+ denotes the floor (the integer part of a number).
+ Let 
+\begin_inset Formula $c_{m}$
+\end_inset
+
+ be the bit-sequence 
+\begin_inset Formula $c_{m}=100\cdots0$
+\end_inset
+
+ starting with 1, followed by at least 
+\begin_inset Formula $m$
+\end_inset
+
+ zeros.
+ Sidorov shows, by appeal to the Poincaré recurrence theorem, that this
+ bit-sequence occurs in an infinite number of locations in 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n_{1},n_{2},\cdots$
+\end_inset
+
+ be the locations of the bits leading up to 
+\begin_inset Formula $c_{m}$
+\end_inset
+
+.
+ Picking one of these locations, say 
+\begin_inset Formula $n_{j}$
+\end_inset
+
+, write a new sequence 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ by setting 
+\begin_inset Formula 
+\[
+k_{n}^{\prime}=\begin{cases}
+k_{n} & \mbox{ for }n\le n_{j}\\
+0 & \mbox{ for }n=n_{j}+1\\
+\kappa_{n} & \mbox{ for }n_{j}+1<n
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\kappa_{n}$
+\end_inset
+
+ is the bit-sequence obtained by resuming the expansion 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ where it has left off.
+ That is, 
+\begin_inset Formula 
+\[
+\kappa_{n_{j}+p}=k_{p}\left(\beta T_{\beta}^{n_{j}}(x)\right)
+\]
+
+\end_inset
+
+for integer 
+\begin_inset Formula $1<p$
+\end_inset
+
+.
+ This new sequence 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ does not evade the theorem; it too has an infinite sequence of the cylinders
+ 
+\begin_inset Formula $c_{m}$
+\end_inset
+
+ embedded in it.
+ Thus one obtains an infinite binary tree: at location 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+, one gets to make a decision: should the expansion proceed with 
+\begin_inset Formula $k_{n_{1}+1}$
+\end_inset
+
+ being a zero, or a one? Should one go low, or go high? Go left, or go right?
+ This is the binary decision tree; the gap is an infiinte binary tree.
+\end_layout
+
+\begin_layout Standard
+A visualization of the gaps is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Gap-Visualization"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gap Visualization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Gap-Visualization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sidorov-0.75.png
+	lyxscale 60
+	width 95col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This visualizes the multitude of 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions available for 
+\begin_inset Formula $\beta=0.75$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ from left to right.
+ A paramter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ runs from 
+\begin_inset Formula $\alpha=\beta$
+\end_inset
+
+ at the top to 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+ at the bottom.
+ For each value of 
+\begin_inset Formula $x$
+\end_inset
+
+, an average of 512 distinct expansions 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ were computed, and then for each such expansion, the sum 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $w=\frac{1}{2}\sum_{n=0}^{\infty}k_{n}^{\prime}\alpha^{-n}$
+\end_inset
+
+ was computed.
+ The sum is normalized so that 
+\begin_inset Formula $0\le w\le1$
+\end_inset
+
+ for all possible expansions.
+ A density visualization is created by incrementing the pixel located at
+ 
+\begin_inset Formula $(w,\alpha)$
+\end_inset
+
+.
+ The color coding is such that pixels with an average density of 1.0 are
+ green, denser areas tend to yelow and read, while less dense areas tend
+ to blue.
+ Black areas have no hits.
+ Thus, the top row is green, as for the top row, 
+\begin_inset Formula $\alpha=\beta$
+\end_inset
+
+ and so all expansions give the same value 
+\begin_inset Formula $x=w$
+\end_inset
+
+, and so the distribution is uniform.
+ As 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ increases, a separation of the expansions can be seen.
+ This can be understood as follows.
+ Consider the expansions of 
+\begin_inset Formula $x=0.5000000001$
+\end_inset
+
+, the first few of which are
+\end_layout
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+ 10000000000000000000000000000000000000000000000000  
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000010010010100000000010000001000010000001010 
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000010001110000001001000001000010010001001000  
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000001110000000100100100100100100000100100000 
+\end_layout
+
+\begin_layout Plain Layout
+
+ 01010000001101010010000000100100010000010010010000 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The first expansion will clearly yeild 
+\begin_inset Formula $w=1/2$
+\end_inset
+
+, independent of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ This accounts for the obvious vertical feature at 
+\begin_inset Formula $x=1/2$
+\end_inset
+
+.
+ The remaining tracks will bend to the left as 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ increases, top too bottom.
+ The general slope of each track is dominated by the first non-zero bit
+ in the expansion; this accounts for thier intersections.
+ Figures for other values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ follow similar trends, with more extreme bunching for small 
+\begin_inset Formula $\beta$
+\end_inset
+
+, and a more vertical and uniform arrangement for larger 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Drawn with fractal/misc/beta-xform/sidorov.C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Unique 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions
+\end_layout
+
+\begin_layout Standard
+Glenndinning and Sidorov consider the conjugate problem: are there any points
+ in the unit interval for which the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion is unique? The answer is that there are non, when 
+\begin_inset Formula $1<\beta\le\varphi$
+\end_inset
+
+ where 
+\begin_inset Formula $\varphi=\left(1+\sqrt{5}\right)/2$
+\end_inset
+
+ the Golden ratio; there are two when 
+\begin_inset Formula $\varphi<\beta\le\beta_{f}$
+\end_inset
+
+ where 
+\begin_inset Formula $\beta_{f}=1.7548776\cdots$
+\end_inset
+
+ is the root of 
+\begin_inset Formula $\beta^{3}=2\beta^{2}-\beta+1$
+\end_inset
+
+, a countable number when 
+\begin_inset Formula $\beta_{f}<\beta<\beta_{c}$
+\end_inset
+
+ and an uncountable number 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ (the cardinality of the Cantor set) when 
+\begin_inset Formula $\beta_{c}\le\beta<2$
+\end_inset
+
+.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glendinning01"
+literal "false"
+
+\end_inset
+
+ The last accumulate towards 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The number 
+\begin_inset Formula $\beta_{c}$
+\end_inset
+
+ is very interesting; lets call it the Komornik–Loreti number.
+ It is a transcendental number built from the Thue–Morse sequence, having
+ the approximate value of 
+\begin_inset Formula $\beta_{c}=1.787231650\cdots$
+\end_inset
+
+ Above this number, there is only one unique 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion of 
+\begin_inset Formula $x=1$
+\end_inset
+
+.
+ Although it plays this important role in the theory of 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions, it does not seem to appear in any of the constructions in this
+ text.
+\end_layout
+
+\begin_layout Subsection
+The tree of expansions
+\end_layout
+
+\begin_layout Standard
+The bit sequence 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+ generated in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is unique; one may wonder, where are all those other expansions hiding?
+ The answer becomes apparent after some thought: they are the result of
+ failing to take a 'mod 1' at certain times during the iteration.
+ That is, the sequence 
+\begin_inset Formula $T_{\beta}^{n}(x)$
+\end_inset
+
+ obeys 
+\begin_inset Formula $0\le T_{\beta}^{n}(x)<\beta/2$
+\end_inset
+
+ for all 
+\begin_inset Formula $n>0$
+\end_inset
+
+.
+ The 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can generate the desired gaps only if the input sequence breaks out of
+ this bound at the cylinder locations 
+\begin_inset Formula $n_{j}$
+\end_inset
+
+.
+ As there are an uncountable number of such locations for (almost) every
+ 
+\begin_inset Formula $x$
+\end_inset
+
+, then perhaps these accumulate to form a non-zero measure, extending beyond
+ 
+\begin_inset Formula $0\le x<\beta/2$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+This argument can be made more plausible if it can be shown that the spacing
+ between the alternative expansion points tends to a constant.
+ So, for example, if every fifth bit is a location where an alternative
+ expansion can be made, then one might expect that one-fifth of the extended
+ measure to fall outside the bound 
+\begin_inset Formula $0\le x<\beta/2$
+\end_inset
+
+.
+ This intuitive idea needs to be firmed up, as the expansion points are
+ not merely points in a linear sequence, but are points in a binary tree.
+ That is, the length of the branches in the tree must be measured, and averaged.
+\end_layout
+
+\begin_layout Standard
+Towards this end, let 
+\begin_inset Formula $D$
+\end_inset
+
+ denote the infinite binary tree, and let 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ denote a specific location on the tree.
+ In other words, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is an index into the tree.
+ The natural representation for 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is as a finite sequence of left-right moves.
+ In this case, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ can be represented as a finite string of binary digits.
+ Alternately, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ can be represented as a sequence of left-moves, followed by a mirror, and
+ again some left moves, 
+\emph on
+etc.
+
+\emph default
+ so that 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}r\cdots rg^{a_{m}}$
+\end_inset
+
+ or, more compactly, 
+\begin_inset Formula $\gamma=(a_{1},a_{2},\cdots,a_{m})$
+\end_inset
+
+ for integers 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+.
+ These are obviously the binary and the continued-fraction representations
+ for a location on the tree.
+ It is convenient to define 
+\begin_inset Formula $\mbox{len}:D\to\mathbb{N}$
+\end_inset
+
+ by setting 
+\begin_inset Formula $\mbox{len}\gamma$
+\end_inset
+
+ to the number of left-right moves in 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ That is, len just counts the depth into the tree; equivalently, 
+\begin_inset Formula $\mbox{len }\gamma$
+\end_inset
+
+ is the length of the string 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ (in the binary representation).
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $p:D\to\mathbb{N}$
+\end_inset
+
+ be a function that assigns a natural number to each node on the binary
+ tree.
+ Such a function can be said to be strictly increasing if (and only if)
+ 
+\begin_inset Formula $p\left(\gamma^{\prime}\right)>p\left(\gamma\right)$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\log\gamma^{\prime}>\log\gamma$
+\end_inset
+
+.
+ For the present situation, we wish to take 
+\begin_inset Formula $p\left(\gamma\right)$
+\end_inset
+
+ to be the distance to the branch point at 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, i.e.
+ to be the length of the bitstring 
+\begin_inset Formula $k_{n}^{\prime}$
+\end_inset
+
+ where the branch is taken.
+ The average distance between branch points is then
+\begin_inset Formula 
+\[
+l\left(\beta\right)=\lim_{n\to\infty}\frac{1}{n+1}\sum_{\gamma:\mbox{len}\gamma\le n}\frac{p\left(\gamma L\right)+p\left(\gamma R\right)-2p\left(\gamma\right)}{2^{1+\mbox{len}\gamma}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma L$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma R$
+\end_inset
+
+ are the left and right locations under 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and the sum is limited to trees of depth 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Regrouping terms, let 
+\begin_inset Formula 
+\[
+s_{n}\left(\beta\right)=\frac{1}{2^{n}}\sum_{\gamma:\mbox{len}\gamma=n}p\left(\gamma\right)
+\]
+
+\end_inset
+
+be the average distance (pathlength) down to the 
+\begin_inset Formula $n$
+\end_inset
+
+'th level in the tree.
+ The numbering here is such that 
+\begin_inset Formula $n=0$
+\end_inset
+
+ corresponds to the first branch point, which is, in general, a few bits
+ into the string.
+ This implies that the average distance between branch-points can then be
+ taken to be 
+\begin_inset Formula 
+\[
+\ell_{n}\left(\beta\right)=\frac{s_{n}\left(\beta\right)}{n+1}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+\ell\left(\beta\right)=\lim_{n\to\infty}\ell_{n}\left(\beta\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The simplest route to obtaining some insight into 
+\begin_inset Formula $\ell\left(\beta\right)$
+\end_inset
+
+ is by numerical exploration; for the measure, numerical histogramming is
+ a straight-forward way of getting a glimpse.
+ Towards that end, the first 22 values of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
+\end_inset
+
+ were computed for several hundred distinct values of 
+\begin_inset Formula $x$
+\end_inset
+
+ at 
+\begin_inset Formula $\beta=1.5$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=1.7$
+\end_inset
+
+.
+ In both cases, it seems that the value of the 
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
+\end_inset
+
+ does have an 
+\begin_inset Formula $x$
+\end_inset
+
+ dependence, but it appears to be small and bounded, so that it's more or
+ less flat.
+ The numerical data hint at some fractal behavior, but it is small and hard
+ to discern, and may be entirely due to small-
+\begin_inset Formula $n$
+\end_inset
+
+ effects.
+ A sample distribution at 
+\begin_inset Formula $n=12$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=1.66$
+\end_inset
+
+ is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Track-length-distribution"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The numerics hint that 
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
+\end_inset
+
+ converges uniformly to a relatively flat distribution (as a function of
+ 
+\begin_inset Formula $x$
+\end_inset
+
+).
+ Thus, for the remainder, define 
+\begin_inset Formula 
+\[
+\hat{\ell}_{n}\left(\beta\right)=\int_{0}^{1}\ell_{n}\left(\beta\right)dx
+\]
+
+\end_inset
+
+This appears to be well-defined, as the resuls from Sidorov state that there
+ are distinct 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions for almost every 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+, and certainly the numerics show nothing amiss.
+ (Note: this is a suitable 
+\begin_inset Quotes eld
+\end_inset
+
+interim
+\begin_inset Quotes erd
+\end_inset
+
+ definition for the average distance between branch points; a later section
+ defines a more appropriate expression.
+ This definition is more than enough for numerics and general exploration;
+ there is, however, a sense in which it is 
+\begin_inset Quotes eld
+\end_inset
+
+not quite right
+\begin_inset Quotes erd
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Track length distribution
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Track-length-distribution"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sido-len-dist-0.83-12.eps
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This shows the average distance between branch-points 
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
+\end_inset
+
+ at 
+\begin_inset Formula $\beta=1.66$
+\end_inset
+
+ and 
+\begin_inset Formula $n=12$
+\end_inset
+
+ as a function of the starting point 
+\begin_inset Formula $x$
+\end_inset
+
+ of the sequence.
+ A total of three samples were taken for each of 403 locations on the interval
+ 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+; thus 
+\begin_inset Formula $3\times403=1209$
+\end_inset
+
+ distinct points were examined.
+ Each of these points were expanded to 
+\begin_inset Formula $2^{12}=4096$
+\end_inset
+
+ distinct paths 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ Thus, each graphed datapoint is the average of these 4096 paths, times
+ three.
+ There does seem to be some kind of fractal-like variation of 
+\begin_inset Formula $\ell$
+\end_inset
+
+ over the interval, but no such structure appears in the root-mean-square
+ deviation of the lengths.
+ The line marked 
+\begin_inset Quotes eld
+\end_inset
+
+longest
+\begin_inset Quotes erd
+\end_inset
+
+ was the longest observed distnact, over the 4096 paths, times three.
+ It seems bounded and featureless.
+ The average over the entire interval was 
+\begin_inset Formula $\hat{\ell}=4.673$
+\end_inset
+
+, and 
+\begin_inset Formula $\mbox{rms}\hat{\ell}=1.310$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with sido-len-dist.gplot and data from sidorov-misc.C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To understand the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ dependence, the first 16 values of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\hat{\ell}_{n}\left(\beta\right)$
+\end_inset
+
+ were computed for the entire interval 
+\begin_inset Formula $1<\beta<2$
+\end_inset
+
+.
+ These very quickly settle down: the first decimal place is determined by
+ 
+\begin_inset Formula $n=1$
+\end_inset
+
+, the second decimal place by 
+\begin_inset Formula $n=5$
+\end_inset
+
+ and the third decimal place by 
+\begin_inset Formula $n=10$
+\end_inset
+
+.
+ Explicit values are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Average-distance-between"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Due to the apparently rapid convergence, this figure can be taken as the
+ numeric estimate for 
+\begin_inset Formula $\hat{\ell}\left(\beta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Average distance between branch points
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Average-distance-between"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sido-length.eps
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This shows the numerically estimated distance 
+\begin_inset Formula $\hat{\ell}_{n}\left(\beta\right)$
+\end_inset
+
+ between branch points, as a function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Four curves are shown: one at 
+\begin_inset Formula $n=4$
+\end_inset
+
+, one 
+\begin_inset Formula $n=7$
+\end_inset
+
+, one at 
+\begin_inset Formula $n=12$
+\end_inset
+
+ and, behaving as an apparent lower bound, the curve 
+\begin_inset Formula $3/4\left(\beta-1\right)\left(2-\beta\right)$
+\end_inset
+
+; the lower bound broken only by 
+\begin_inset Formula $n=4.$
+\end_inset
+
+ The 
+\begin_inset Formula $\hat{\ell}_{n}\left(\beta\right)$
+\end_inset
+
+ are estimted from the 
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
+\end_inset
+
+ by sampling 200 random points in the interval 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+.
+ It would appear that 
+\begin_inset Formula $\ell_{n}\left(\beta\right)$
+\end_inset
+
+ is fairly well-converged even at these low values of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with sido-length.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Average-distance-between"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows prominent discontinuities at larger 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values.
+ These occur at the locations where the 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+length of the branching cylinder changes.
+ The first one is at 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+ and the remaining ones occur at solutions to 
+\begin_inset Formula $\beta^{m}\left(2-\beta\right)=\beta-1$
+\end_inset
+
+.
+ The approximate sizes of the jumps are shown in the table below.
+ The numerics hint that each jump is twice as large as the jump before,
+ in the limit of large 
+\begin_inset Formula $m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta\ell\left(\beta\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3-2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.618\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4-3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.7548776663\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5-4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.8667603992\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6-5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.9331849819\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7-6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.9671682128\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8-7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.9838613961\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+107
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The distribution of the distances seems to be well-behaved.
+ Figure xx shows the root-mean-square of the distances, as well as the longest
+ distance.
+ It appears that 
+\begin_inset Formula $\mbox{rms}\hat{\ell}\left(\beta\right)\approx2.5\hat{\ell}\left(\beta\right)$
+\end_inset
+
+ comes close to holding exactly, in that the shapes of the curves are nearly
+ identical.
+ The maximum length curve is not.
+ Although the scale is approximately 
+\begin_inset Formula $\mbox{max}\hat{\ell}\left(\beta\right)\approx10\hat{\ell}\left(\beta\right)$
+\end_inset
+
+, the shape of the curve is distinctly different.
+\end_layout
+
+\begin_layout Subsection
+Orbits and measures
+\end_layout
+
+\begin_layout Standard
+The branch-points can be thought of as being 
+\begin_inset Quotes eld
+\end_inset
+
+dense in the tree
+\begin_inset Quotes erd
+\end_inset
+
+ if 
+\begin_inset Formula $\ell\left(\beta\right)<\infty$
+\end_inset
+
+.
+ Intuitively, having dense branch-points, suggests that the corresponding
+ map should have a positive measure on the real number line.
+ In this case, one then expects the out-of-bounds measure to be roughly
+ proportional to 
+\begin_inset Formula $1/\ell\left(\beta\right)$
+\end_inset
+
+.
+ This can be made precise.
+\end_layout
+
+\begin_layout Standard
+Each alternative expansion arises from an alternative orbit.
+ Let 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ specify that alternative; that is, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is a specific path down the binary tree.
+ it is a sequence of left-right moves down the tree.
+ Donote these as 
+\begin_inset Formula $\gamma=\left(\gamma_{0},\gamma_{1},\gamma_{2},\cdots\right)$
+\end_inset
+
+ so that 
+\begin_inset Formula $\gamma_{k}=0$
+\end_inset
+
+ for a left-move and 
+\begin_inset Formula $\gamma_{k}=1$
+\end_inset
+
+ for a right move.
+ Correspondingly, let 
+\begin_inset Formula $(p_{0},p_{1},p_{2},\cdots)$
+\end_inset
+
+ be locations of the alternative choices in the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion along that particular path.
+ The alternative orbit is then given by
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\[
+\tau_{n}\left(x\right)=\begin{cases}
+T_{\beta}^{n}\left(x\right) & \mbox{ for }n<p_{0}\\
+\left(1-\gamma_{0}\right)\beta T_{\beta}^{p_{0}-1}\left(x\right)+\gamma_{0}T_{\beta}^{p_{0}}\left(x\right) & \mbox{ for }n=p_{0}\\
+T_{\beta}^{n-p_{0}}\left(\tau_{p_{0}}\left(x\right)\right) & \mbox{ for }p_{0}<n<p_{1}\\
+\cdots & \cdots\\
+\left(1-\gamma_{k}\right)\beta\tau_{n-1}\left(x\right)+\gamma_{k}T\left(\tau_{n-1}\left(x\right)\right) & \mbox{ for }n=p_{k}\\
+T_{\beta}^{n-p_{k}}\left(\tau_{p_{k}}\left(x\right)\right) & \mbox{ for }p_{k}<n<p_{k+1}\\
+\cdots & \cdots
+\end{cases}
+\]
+
+\end_inset
+
+This sequence has a corresponding bit string expansion
+\begin_inset Formula 
+\[
+\kappa_{n}\left(x\right)=\begin{cases}
+0 & \mbox{ if }0\le\tau_{n}(x)<\frac{1}{2}\mbox{ and n\ensuremath{\ne p_{k}}}\\
+1 & \mbox{ if }\frac{1}{2}\le\tau_{n}(x)\le1\mbox{ and n\ensuremath{\ne p_{k}}}\\
+\gamma_{k} & \mbox{ if }n=p_{k}
+\end{cases}
+\]
+
+\end_inset
+
+By construction, one has that each of these bit strings provide an inequivalent
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion for the same 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ That is, one has, for all 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ that
+\begin_inset Formula 
+\[
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+by construction.
+\end_layout
+
+\begin_layout Standard
+As there are an uncountable number of paths down the binary tree, the collection
+ of such orbits 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ is also uncountable.
+ If 
+\begin_inset Formula $l\left(\beta\right)<\infty$
+\end_inset
+
+, then one might reasonably expect that such orbits accumulate on the real
+ number line with a non-zero measure.
+\end_layout
+
+\begin_layout Standard
+A few quick remarks on phrase 
+\begin_inset Quotes eld
+\end_inset
+
+non-zero measure
+\begin_inset Quotes erd
+\end_inset
+
+ in the previous sentence.
+ The various constructions in this text are meant to be understood as dynamical
+ systems acting on the Cantor space 
+\begin_inset Formula $\{0,1\}^{\omega}$
+\end_inset
+
+ endowed with the product topology.
+ The topology is extedned to a sigma-algebra in the conventional way; denote
+ this Borel algebra by 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+.
+ The open sets of this topology are the cylinder sets.
+ Every such cylinder set has a positive Bernoulli measure, and when mapped
+ to the unit inverval, by any map having the form of a 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion, always results in an interval of finite measure.
+ The action of 
+\begin_inset Formula $T_{\beta}^{-1}$
+\end_inset
+
+ is well-defined on cylinder sets, and given that 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is built out of 
+\begin_inset Formula $T_{\beta}$
+\end_inset
+
+, one can conclude that 
+\begin_inset Formula $\tau^{-1}$
+\end_inset
+
+ is also a map of cylinder sets.
+ That is, the map 
+\begin_inset Formula $\tau^{-1}:\mathcal{B\to\mathcal{B}}$
+\end_inset
+
+ is a map of the Borel algebra 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+, preserving all of the sigma-algebra properties of the product topology.
+ It will have an associated invariant measure, the Ruelle-Frobenius-Perron
+ measure, 
+\begin_inset Formula $\mu_{\beta}:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+.
+ It is invariant in that 
+\begin_inset Formula $\mu_{\beta}\circ\tau^{-1}\left(c\right)=\mu_{\beta}\left(c\right)$
+\end_inset
+
+ for all cylinders 
+\begin_inset Formula $c\in\mathcal{B}$
+\end_inset
+
+ having 
+\begin_inset Formula $\mu_{\beta}\left(c\right)>0$
+\end_inset
+
+.
+ This is just the standard defintion of a measure-preserving dynamical system.
+ With that out of the way, it is straight-forward and entirely safe to treat
+ numerical histogramming of the orbits of 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ as being approximations to the true measure 
+\begin_inset Formula $\mu_{\beta}$
+\end_inset
+
+.
+ By the usual abuse of notation, let 
+\begin_inset Formula $\mu_{\beta}\left(x\right)$
+\end_inset
+
+ denote the invariant measure as perceived on the real number line.
+ The computed measure 
+\begin_inset Formula $\mu_{\beta}\left(x\right)$
+\end_inset
+
+ for a few select values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Extended-Measures"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ A visualizatio of the measure over the entire range 
+\begin_inset Formula $1<\beta<2$
+\end_inset
+
+ is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Extended-measure-display"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Extended Measures
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Extended-Measures"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sido-meas-0.75.eps
+	width 45col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename sido-meas-0.85.eps
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+These figures show the Gelfond-Parry measure in purple, and the extended
+ measure, obtained by bin-counting, in green, for two example choices of
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ A total of 
+\begin_inset Formula $2^{10}=1024$
+\end_inset
+
+ distinct expansions were used to generate these images.
+ Sampling noise was minimized by choosing 206336 distinct random initial
+ values for 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The resulting trajectories 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ were histogrammed into 403 bins.
+ The jitteriness in the graphs is purely numerical sampling noise; the actual
+ distribution presumably consists of flat segments.
+ Note that 
+\begin_inset Formula $\tau_{n}\left(x\right)$
+\end_inset
+
+ wanders into regions greater than one: without the 
+\begin_inset Quotes eld
+\end_inset
+
+mod 1
+\begin_inset Quotes erd
+\end_inset
+
+ constraint, it is free to do so.
+ In order to obtain 1024 distinct expansions for each point, one must keep
+ well more than 
+\begin_inset Formula $s_{10}\left(\beta\right)$
+\end_inset
+
+ bits of precision.
+ In this case, 85 bits of precision were used.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with sido-meas.gplot after running sidorov-big.C appropriately configured.
+ In this case: for the left, its K=0.75, nbits=60, with 2^10 alternate expansions
+ and 512 random samples for each initial x.
+ On the right, K=0.85 and nbits=85.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Extended measure display
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Extended-measure-display"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sido-density.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This shows a visualization of 
+\begin_inset Formula $\mu_{\beta}\left(x\right)$
+\end_inset
+
+ over the rectangale 
+\begin_inset Formula $1<\beta<2$
+\end_inset
+
+ bottom to top, and 
+\begin_inset Formula $0\le x\le4/3$
+\end_inset
+
+ left to right.
+ Red indicated regions where 
+\begin_inset Formula $\mu_{\beta}\left(x\right)>2$
+\end_inset
+
+, green indicates regions where 
+\begin_inset Formula $\mu_{\beta}\left(x\right)\approx1$
+\end_inset
+
+ and blue shows regions with 
+\begin_inset Formula $\frac{1}{2}>\mu_{\beta}\left(x\right)$
+\end_inset
+
+.
+ The measure is vanishing in black regions.
+ The visible speckling ise due to the finite number of samples taken in
+ generating this figure; increased sampling removes the speckles.
+ The striations at the top are numerical effects, due to 
+\begin_inset Formula $\ell\left(\beta\right)$
+\end_inset
+
+ diverging as 
+\begin_inset Formula $\beta$
+\end_inset
+
+ approaches 2.
+ The measures shown in the previous figure are a pair of horizontal slices
+ through this figure.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with ./sidorov-density sido-dense-800x400-60 800 400 60 0.5 0.75 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Relations
+\end_layout
+
+\begin_layout Standard
+The distance 
+\begin_inset Formula $\ell$
+\end_inset
+
+ is directly related to likelihood of encountering a one followed by 
+\begin_inset Formula $m$
+\end_inset
+
+ zero's in a given string.
+ This liklihood is directly accessible to computation.
+ Starting with any number 
+\begin_inset Formula $x$
+\end_inset
+
+, a one will occur in the expansion if 
+\begin_inset Formula $\frac{1}{2}\le T_{\beta}(x)\le1$
+\end_inset
+
+.
+ A string of 
+\begin_inset Formula $m$
+\end_inset
+
+ zeros follow if 
+\begin_inset Formula $0\le T_{\beta}^{j}(x)<\frac{1}{2}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1<j\le m+1$
+\end_inset
+
+.
+ The first condition is satisfied if 
+\begin_inset Formula 
+\[
+\frac{1}{2\beta}\le x\le\frac{1}{\beta}\quad\mbox{ or }\quad\frac{1}{2}+\frac{1}{2\beta}\le x\le\frac{1}{2}+\frac{1}{\beta}\quad\mbox{or }\quad1+\frac{1}{2\beta}\le x\le1+\frac{1}{\beta}
+\]
+
+\end_inset
+
+There are three pre-images, as the measure 
+\begin_inset Formula $\mu_{\beta}\left(x\right)$
+\end_inset
+
+ is non-zero for values 
+\begin_inset Formula $1<x$
+\end_inset
+
+.
+ The second condition is satisfied if 
+\begin_inset Formula $0\le\beta^{m}\left(T_{\beta}\left(x\right)-\frac{1}{2}\right)<\frac{1}{2}$
+\end_inset
+
+; that is 
+\begin_inset Formula 
+\[
+\frac{1}{2}\le T_{\beta}\left(x\right)<\frac{1}{2}\left(1+\frac{1}{\beta^{m}}\right)
+\]
+
+\end_inset
+
+The intersection of these three intervals is
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{2\beta}\le x\le\frac{1}{2\beta}\left(1+\frac{1}{\beta^{m}}\right) & \quad\mbox{ or }\\
+\frac{1}{2}+\frac{1}{2\beta}\le x\le\frac{1}{2}+\frac{1}{2\beta}\left(1+\frac{1}{\beta^{m}}\right) & \quad\mbox{ or }\\
+1+\frac{1}{2\beta}\le x\le1+\frac{1}{2\beta}\left(1+\frac{1}{\beta^{m}}\right)
+\end{align*}
+
+\end_inset
+
+The corresponding cylinders are to be sampled out of the measure 
+\begin_inset Formula $\mu_{\beta}$
+\end_inset
+
+, That is, the probability 
+\begin_inset Formula $p\left(\beta\right)$
+\end_inset
+
+ of encountering such an 
+\begin_inset Formula $x$
+\end_inset
+
+ corresponds to
+\begin_inset Formula 
+\[
+p\left(\beta\right)=\int_{a}^{b}d\mu_{\beta}+\int_{c}^{d}d\mu_{\beta}+\int_{e}^{f}d\mu_{\beta}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left[a,b\right]$
+\end_inset
+
+, 
+\begin_inset Formula $\left[c,d\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[e,f\right]$
+\end_inset
+
+ are the three pre-images above.
+ This gives the expectation value for the distance between such cylinders:
+ 
+\begin_inset Formula 
+\[
+\int_{0}^{4/3}\ell\left(\beta\right)d\mu_{\beta}=\frac{1}{p\left(\beta\right)}
+\]
+
+\end_inset
+
+As in an earlier section, 
+\begin_inset Formula $\ell\left(\beta\right)=\lim_{n\to\infty}\ell_{n}\left(\beta\right)$
+\end_inset
+
+ has an a priori 
+\begin_inset Formula $x$
+\end_inset
+
+-dependence, and so, when considering the distance between cylinders in
+ a thrermalized orbit, one must use the corresponding thermalized measure
+ for sampling.
+ In this sense, this expression is a 
+\begin_inset Quotes eld
+\end_inset
+
+more correct
+\begin_inset Quotes erd
+\end_inset
+
+ definition of the average distance between branch points, as opposed to
+ the one explored earlier, namely 
+\begin_inset Formula $\hat{\ell}\left(\beta\right)=\int_{0}^{1}\ell\left(\beta\right)dx$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+What, exactly, is the point of
+\end_layout
+
+\begin_layout Section
+Bibliography
+\end_layout
+
+\begin_layout Standard
+The references below provide a bibliography that attempts to touch on all
+ the different ways in which the beta transform and beta expansions have
+ been studied.
+ Search engines exist to help you find the things you don't know, and want
+ to find out more about.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "solvit"
+options "tufte"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
