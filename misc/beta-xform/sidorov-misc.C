@@ -111,7 +111,7 @@ int main (int argc, char* argv[])
 				tracklensq[ibin] += last * last;
 				if (trackmax[ibin] < longest) trackmax[ibin] = longest;
 
-#define SCALE 1.3
+#define SCALE (4.0/3.0)
 				size_t nb = branch_points.size();
 				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
 				if (orbit.size() <= norb) norb = orbit.size() -1;
@@ -206,7 +206,33 @@ int main (int argc, char* argv[])
 
 #define HISTO_INTEGRAL
 #ifdef HISTO_INTEGRAL
-#endif
+	// Normalize
+	double cnt = 0.0;
+	for (int i=0; i<NBINS; i++)
+	{
+		cnt += histo[i];
+	}
+	fprintf(stderr, "# histogram counts=%g\n", cnt);
+	for (int i=0; i<NBINS; i++)
+	{
+		histo[i] *= NBINS/cnt;
+	}
+
+	double dbeta = mpf_get_d(beta.get_mpf_t());
+	double xlo = (1.0+dbeta) / (2.0*dbeta);
+	double xhi = (1.0+pow(dbeta, em)) / (2.0*dbeta);
+	printf("# Low=%g high=%g\n", xlo, xhi);
+
+	double acc = 0.0;
+	for (int i=0; i<NBINS; i++)
+	{
+		double x = (((double) i) + 0.5)/ ((double) NBINS);
+		x *= SCALE;
+		if (xlo <= x and x <= xhi) acc += histo[i];
+	}
+	printf("integral=%g one-over=%g\n", acc, 1.0/acc);
+
+#endif // HISTO_INTEGRAL
 
 // #define PRINT_LENGTH_DISTRIBUTION
 #ifdef PRINT_LENGTH_DISTRIBUTION
