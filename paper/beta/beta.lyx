@@ -2340,6 +2340,633 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
+Dynamical Systems
+\end_layout
+
+\begin_layout Standard
+A brief review of dynamical systems is in order, as it provides a coherent
+ language with which to talk about and think about the beta-shift.
+ Understanding this avoids the need for weasel-words and imprecise hand-waving
+ when making claims and statements; common phrases can be given a precise
+ meaning.
+ This section reviews textbook-standard material; it is included here only
+ to allow this text to be self-contained.
+ Later parts of this text will appeal to ideas presented here.
+\end_layout
+
+\begin_layout Standard
+The Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ can be given a topology, the product topology.
+ The open sets of this topology are called 
+\begin_inset Quotes eld
+\end_inset
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset
+
+.
+ These are strings in three symbols: a finite number of 0 and 1 symbols,
+ and an infinite number of * symbols, the latter meaning 
+\begin_inset Quotes eld
+\end_inset
+
+don't care
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Set union is defined location-by-location, with 
+\begin_inset Formula $0\cup*=1\cup*=*$
+\end_inset
+
+ and set intersection as 
+\begin_inset Formula $0\cap*=0$
+\end_inset
+
+ and 
+\begin_inset Formula $1\cap*=1$
+\end_inset
+
+.
+ Set complement exchanges 0 and 1 and leaves * alone: 
+\begin_inset Formula $\overline{0}=1$
+\end_inset
+
+, 
+\begin_inset Formula $\overline{1}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{*}=*$
+\end_inset
+
+.
+ The topology is then the collection of all cylinder sets.
+ Note that the intersection of any finite number of cylinder sets is still
+ a cylinder set, as is the union of an infinite number of them.
+ The product topology does 
+\emph on
+not
+\emph default
+ contain any 
+\begin_inset Quotes eld
+\end_inset
+
+points
+\begin_inset Quotes erd
+\end_inset
+
+: strings consisting solely of just 0 and 1 are 
+\emph on
+not
+\emph default
+ allowed in the topology.
+ By definition, topologies only allow finite intersections, and thus don't
+ provide any way of constructing 
+\begin_inset Quotes eld
+\end_inset
+
+points
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Of course, points can always be added 
+\begin_inset Quotes eld
+\end_inset
+
+by hand
+\begin_inset Quotes erd
+\end_inset
+
+, but doing so tends to generate a topology that is 
+\begin_inset Quotes eld
+\end_inset
+
+too fine
+\begin_inset Quotes erd
+\end_inset
+
+; in particular, the common-sense notions of a continuous function are ruined
+ by fine topologies.
+ The product topology is 
+\begin_inset Quotes eld
+\end_inset
+
+coarse
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Borel algebra, or sigma-algebra, takes the topology and also allows
+ set complement.
+ This effectively changes nothing, as the open sets are still the cylinder
+ sets, although now they are 
+\begin_inset Quotes eld
+\end_inset
+
+clopen
+\begin_inset Quotes erd
+\end_inset
+
+, as they are both closed and open.
+\end_layout
+
+\begin_layout Standard
+Denote the Borel algebra by 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+.
+ A shift is now a map 
+\begin_inset Formula $T:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+ that lops off the leading symbol of a given cylinder set.
+ This is provides the strong theoretical advantages over working with 
+\begin_inset Quotes eld
+\end_inset
+
+point dynamics
+\begin_inset Quotes erd
+\end_inset
+
+: confusions about counting points and orbits and defining densities go
+ away.
+ This is done by recasting discussion in terms of functions 
+\begin_inset Formula $f:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+ from Borel sets to the reals (or the complex numbers 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ or other fields, when this is interesting).
+ An important class of such functions are the measures.
+ These are functions 
+\begin_inset Formula $\mu:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+ that are positive, and are 
+\begin_inset Quotes eld
+\end_inset
+
+compatible
+\begin_inset Quotes erd
+\end_inset
+
+ with the sigma algebra, in that 
+\begin_inset Formula $\mu\left(A\cup B\right)=\mu\left(A\right)+\mu\left(B\right)$
+\end_inset
+
+ whenever 
+\begin_inset Formula $A\cap B=\varnothing$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\left(A\cap B\right)=\mu\left(A\right)\mu\left(B\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $A,B\in\mathcal{B}$
+\end_inset
+
+.
+ For the total space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ (here, 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is the Cantor space), one case 
+\begin_inset Formula $\mu\left(\Omega\right)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The prototypical example of a measure is the Bernoulli measure, which assigns
+ probability 
+\begin_inset Formula $p$
+\end_inset
+
+ to any string containing a single 0 and the rest all *'s.
+ By complement, a string containing a single 1 and the rest all *'s has
+ probability 
+\begin_inset Formula $1-p$
+\end_inset
+
+.
+ The rest follows from the sigma algebra: a cylinder set consisting of 
+\begin_inset Formula $m$
+\end_inset
+
+ zeros and 
+\begin_inset Formula $n$
+\end_inset
+
+ ones has measure 
+\begin_inset Formula $p^{m}\left(1-p\right)^{n}$
+\end_inset
+
+.
+ It is usually convenient to take 
+\begin_inset Formula $p=1/2$
+\end_inset
+
+, the 
+\begin_inset Quotes eld
+\end_inset
+
+fair coin
+\begin_inset Quotes erd
+\end_inset
+
+; the Bernoulli process is a sequence of coin tosses.
+\end_layout
+
+\begin_layout Standard
+The map given in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is a homomorphism from the Cantor space to the unit interval.
+ It extends naturally to a map from the Borel algebra 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ to the algebra of intervals on the unit interval.
+ It is not an isomorphism: cylinder sets are both open and closed, whereas
+ intervals on the real number line are either open, or closed (or half-open).
+ It is convenient to take the map as a map to closed intervals, so that
+ it's a surjection onto the reals, although usually, this detail does not
+ matter.
+ What does matter is of one takes 
+\begin_inset Formula $p=1/2$
+\end_inset
+
+, then the Bernoulli measure is preserved: it is mapped onto the conventional
+ measure on the real-number line.
+ Thus, the cylinder set 
+\begin_inset Formula $0***\cdots$
+\end_inset
+
+ is mapped to the interval 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $1***\cdots$
+\end_inset
+
+ is mapped to 
+\begin_inset Formula $\left[1/2,1\right]$
+\end_inset
+
+ and both have a measure of 
+\begin_inset Formula $1/2$
+\end_inset
+
+ and this extends likewise to all intersections and unions.
+ Points have a measure of zero.
+\end_layout
+
+\begin_layout Standard
+Although the map of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is not an isomorphism, it is more-or-less safe form most practical purposes
+ to treat it as such.
+ For any closed interval, there is a unique corresponding cylinder set.
+ The only trouble arises at points: all dyadic rationals have two expansions
+ not one, and so there, the map is not invertable.
+ However, the points all have a measure of zero in both cases, and there
+ are only a countable number of such points, and the mapping always takes
+ points to points.
+ Thus, the inverse exists for almost all members of the algebra and is unique
+ whenever an interval has positive measure.
+\end_layout
+
+\begin_layout Standard
+Much of what is said above still holds for subshifts.
+ Recall, a subshift 
+\begin_inset Formula $S$
+\end_inset
+
+ is a subspace 
+\begin_inset Formula $S\subset\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ that is invariant under the shift 
+\begin_inset Formula $T$
+\end_inset
+
+, so that 
+\begin_inset Formula $TS=S$
+\end_inset
+
+.
+ The space 
+\begin_inset Formula $S$
+\end_inset
+
+ inherits a topology from 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+, this is the subspace topology.
+ The Borel algebra 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is similarly defined, as are measures.
+ One can now (finally!) give a precise definition for an invariant measure:
+ it is a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mu\circ T^{-1}=\mu$
+\end_inset
+
+, or more precisely, for which 
+\begin_inset Formula $\mu\left(T^{-1}\left(\sigma\right)\right)=\mu\left(\sigma\right)$
+\end_inset
+
+ for almost all cylinder sets 
+\begin_inset Formula $\sigma\in\mathcal{B}$
+\end_inset
+
+.
+ This is what shift invariance looks like.
+ Note carefully that 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ and not 
+\begin_inset Formula $T$
+\end_inset
+
+ is used in the definition.
+ This is because 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is a surjection while 
+\begin_inset Formula $T$
+\end_inset
+
+ is not: every cylinder set 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ in the subshift 
+\begin_inset Quotes eld
+\end_inset
+
+came from somewhere
+\begin_inset Quotes erd
+\end_inset
+
+; we want to define invariance for all 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and not just for some of them.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is technically called a 
+\begin_inset Quotes eld
+\end_inset
+
+pushforward
+\begin_inset Quotes erd
+\end_inset
+
+, and it defines a linear operator 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ on the space 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ of all functions 
+\begin_inset Formula $f:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+.
+ It is defined as 
+\begin_inset Formula $\mathcal{L}_{T}:\mathcal{F\to\mathcal{F}}$
+\end_inset
+
+by setting 
+\begin_inset Formula $\mathcal{L}_{T}:f\mapsto f\circ T^{-1}$
+\end_inset
+
+.
+ It is obviously linear, in that 
+\begin_inset Formula $\mathcal{L}_{T}\left(af+bg\right)=a\mathcal{L}_{T}\left(f\right)+b\mathcal{L}_{T}\left(g\right)$
+\end_inset
+
+.
+ This pushforward is canonically called the 
+\begin_inset Quotes eld
+\end_inset
+
+transfer operator
+\begin_inset Quotes erd
+\end_inset
+
+ or the 
+\begin_inset Quotes eld
+\end_inset
+
+Ruelle-Frobenius-Perron operator
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Like any linear operator, it has a spectrum.
+ The precise spectrum depends on the space 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The canonical example is again the Bernoulli shift.
+ For this, we invoke the inverse of the mapping of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ so that 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ is a function defined on the unit interval, instead of 
+\begin_inset Formula $f:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+.
+ When 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is the space of real-analytic functions on the unit interval, that is,
+ the space all power series in 
+\begin_inset Formula $x\in\left[0,1\right]$
+\end_inset
+
+, then the spectrum of 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ is discrete.
+ It consists of the Bernoulli polynomials 
+\begin_inset Formula $B_{n}\left(x\right)$
+\end_inset
+
+ and have a corresponding eigenvalue of 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+.
+ That is,
+\begin_inset Formula $\mathcal{L}_{T}B_{n}=2^{-n}B_{n}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $B_{0}\left(x\right)=1$
+\end_inset
+
+ is the invariant measure on the full shift.
+ For the space of square-integrable functions 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+, the spectrum of 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ is continuous, and consists of the unit disk in the complex plane; the
+ corresponding eigenfunctions are fractal.
+ Even more interesting constructions are possible; the Minkowski question
+ mark function provides an example of a measure on 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ that is invariant under the shift defined by the Gauss map 
+\begin_inset Formula $h\left(x\right)\mapsto\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset
+
+.
+ That is, as a measure, it solves 
+\begin_inset Formula $\mathcal{L}_{T}?^{\prime}=?^{\prime}$
+\end_inset
+
+ with 
+\begin_inset Formula $?$
+\end_inset
+
+ the Minkowski question mark function, and 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ it's derivative; note that the derivative is 
+\begin_inset Quotes eld
+\end_inset
+
+continuous nowhere
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This rather confusing idea can be completely dispelled by observing that
+ it is well-defined on all cylinder sets in 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ and is finite on all of them – not only finite, but less than one, as any
+ good measure must obey.
+\end_layout
+
+\begin_layout Standard
+These last examples are mentioned so as to reinforce the idea working with
+ 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ instead of the unit interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ really does offer some strong conceptual advantages.
+ They also reinforce the idea that the Bernoulli shift is not the only 
+\begin_inset Quotes eld
+\end_inset
+
+full shift
+\begin_inset Quotes erd
+\end_inset
+
+ (besides the question-mark function, there is also the 
+\begin_inset Quotes eld
+\end_inset
+
+odometer
+\begin_inset Quotes erd
+\end_inset
+
+).
+ In the following text, we will be working with subshifts, primarily the
+ beta-shift, but will draw on ideas from the above so as to make rigorous
+ statements about measureability and invariance, without having to descend
+ into either 
+\emph on
+ad hoc
+\emph default
+ hand-waving or provide painfully difficult (and confusing) reasoning about
+ subsets of the real-number line.
+\end_layout
+
+\begin_layout Subsection
 Beta Transformation Literature Review and References
 \end_layout
 
