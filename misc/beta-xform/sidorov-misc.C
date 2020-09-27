@@ -204,7 +204,11 @@ int main (int argc, char* argv[])
 	}
 #endif // PRINT_HISTOGRAM
 
-#define PRINT_LENGTH_DISTRIBUTION
+#define HISTO_INTEGRAL
+#ifdef HISTO_INTEGRAL
+#endif
+
+// #define PRINT_LENGTH_DISTRIBUTION
 #ifdef PRINT_LENGTH_DISTRIBUTION
 	// This generates distances between branch points as a function of x.
 	// (holding beta fixed.) Results is that the length seem distributed
