@@ -11,6 +11,12 @@
 #define HISTOGRAM_ORBITS
 #include "sidorov-big.C"
 
+double tee(double x, double beta)
+{
+	if (x<0.5) return beta*x;
+	return beta*(x-0.5);
+}
+
 
 #ifdef HISTOGRAM_ORBITS
 int main (int argc, char* argv[])
@@ -75,7 +81,7 @@ int main (int argc, char* argv[])
 
 	for (int ibin=0; ibin<NBINS; ibin++)
 	{
-		if (ibin%10 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 
@@ -219,18 +225,27 @@ int main (int argc, char* argv[])
 	}
 
 	double dbeta = mpf_get_d(beta.get_mpf_t());
-	double xlo = (1.0+dbeta) / (2.0*dbeta);
-	double xhi = (1.0+pow(dbeta, em)) / (2.0*dbeta);
-	printf("# Low=%g high=%g\n", xlo, xhi);
+	printf("# dbeta=%g em=%d\n", dbeta, em);
+
+	double zerolo = 1.0 / (2.0*dbeta);
+	double zerohi = (1.0+pow(dbeta, -em)) / (2.0*dbeta);
+	printf("# zerolow=%g zerohigh=%g teelo/hi=%g %g\n", zerolo, zerohi,
+		tee(zerolo, dbeta), tee(zerohi, dbeta));
+
+	double onelo = (1.0+dbeta) / (2.0*dbeta);
+	double onehi = (2.0+pow(dbeta, -em)) / (2.0*dbeta);
+	printf("# onelow=%g onehigh=%g\n", onelo, onehi);
 
 	double acc = 0.0;
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
 		x *= SCALE;
-		if (xlo <= x and x <= xhi) acc += histo[i];
+		if (zerolo <= x and x <= zerohi) acc += histo[i];
+		if (onelo <= x and x <= onehi) acc += histo[i];
 	}
-	printf("integral=%g one-over=%g\n", acc, 1.0/acc);
+	acc /= NBINS;
+	printf("integral=%g one-over-minus=%g tracklen=%g\n", acc, 1.0/acc, avg_tracklen);
 
 #endif // HISTO_INTEGRAL
 
