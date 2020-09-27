@@ -1826,6 +1826,29 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+Although the map of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is not an isomorphism, it is more-or-less safe form most practical purposes
+ to treat it as such.
+ For any closed interval, there is a unique corresponding cylinder set.
+ The only trouble arises at points: all dyadic rationals have two expansions
+ not one, and so there, the map is not invertable.
+ However, the points all have a measure of zero in both cases, and there
+ are only a countable number of such points, and the mapping always takes
+ points to points.
+ Thus, the inverse exists for almost all members of the algebra and is unique
+ whenever an interval has postive measure.
+\end_layout
+
+\begin_layout Standard
 Much of what is said above still holds for subshifts.
  Recall, a subshift 
 \begin_inset Formula $S$
@@ -1980,19 +2003,145 @@ Ruelle-Frobenius-Perron operator
 
 \begin_layout Standard
 The canonical example is again the Bernoulli shift.
+ For this, we invoke the inverse of the mapping of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ so that 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ is a function defined on the unit interval, instead of 
+\begin_inset Formula $f:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+.
  When 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- is the space of real-analytic functions, that is, the space all polynomials
+ is the space of real-analytic functions on the unit interval, that is,
+ the space all power series in 
+\begin_inset Formula $x\in\left[0,1\right]$
+\end_inset
+
+, then the spectrum of 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ is discrete.
+ It consists of the Bernoulli polynomials 
+\begin_inset Formula $B_{n}\left(x\right)$
+\end_inset
+
+ and have a corresponding eigenvalue of 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+.
+ That is,
+\begin_inset Formula $\mathcal{L}_{T}B_{n}=2^{-n}B_{n}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $B_{0}\left(x\right)=1$
+\end_inset
+
+ is the invariant measure on the full shift.
+ For the space of square-integrable functions 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+, the spectrum of 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ is continuous, and consists of the unit disk in the complex plane; the
+ corresponding eigenfunctions are fractal.
+ Even more interesting constructions are possible; the Minkowski question
+ mark function provides an example of a measure on 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ that is invariant under the shift defined by the Gauss map 
+\begin_inset Formula $h\left(x\right)\mapsto\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset
+
+.
+ That is, as a measure, it solves 
+\begin_inset Formula $\mathcal{L}_{T}?^{\prime}=?^{\prime}$
+\end_inset
+
+ with 
+\begin_inset Formula $?$
+\end_inset
+
+ the Minkowski question mark function, and 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ it's derivative; note that the derivative is 
+\begin_inset Quotes eld
+\end_inset
+
+continuous nowhere
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This rather confusing idea can be completely dispelled by observing that
+ it is well-defined on all cylinder sets in 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ and is finite on all of them – not only finite, but less than one, as any
+ good measure must obey.
 \end_layout
 
 \begin_layout Standard
-f
-\end_layout
+These last examples are mentioned so as to reinforce the idea working with
+ 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
 
-\begin_layout Standard
-real-analytic
+ instead of the unit interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ really does offer some strong conceptual advantages.
+ They also reinforce the idea that the Bernoulli shift is not the only 
+\begin_inset Quotes eld
+\end_inset
+
+full shift
+\begin_inset Quotes erd
+\end_inset
+
+ (besides the question-mark function, there is also the 
+\begin_inset Quotes eld
+\end_inset
+
+odometer
+\begin_inset Quotes erd
+\end_inset
+
+).
+ In the following text, we will be working with subshifts, primarily the
+ beta-shift, but will draw on ideas from the above so as to make rigorous
+ statements about measureability and invariance, without having to descend
+ into either 
+\emph on
+ad hoc
+\emph default
+ handwaving or provide painfully difficult (and confusing) reasoning about
+ subsets of the real-number line.
 \end_layout
 
 \begin_layout Subsection
