@@ -363,8 +363,12 @@ Bernoulli shift
 \end_layout
 
 \begin_layout Standard
-The Bernoulli shift (aka the bit-shift map) is an iterated map on the unit
- interval, given by iteration of the function
+The Bernoulli shift (
+\emph on
+aka
+\emph default
+ the bit-shift map, the dyadic transform or the full shift) is an iterated
+ map on the unit interval, given by iteration of the function
 \begin_inset Formula 
 \begin{equation}
 b(x)=\begin{cases}
@@ -412,7 +416,18 @@ b_{n}\left(x\right)=\begin{cases}
 
 \end_inset
 
-Of course, the symbolic dynamics recreates the initial real number:
+(Attention: 
+\begin_inset Formula $n$
+\end_inset
+
+ is a subscript on the left, and a superscript on the right! The left is
+ a sequence, the right is an iteration.
+ Using the letter 
+\begin_inset Formula $b$
+\end_inset
+
+ one both sides is a convenient abuse of notation.) Of course, the symbolic
+ dynamics recreates the initial real number:
 \begin_inset Formula 
 \begin{equation}
 x=\sum_{n=0}^{\infty}b_{n}\left(x\right)2^{-n-1}\label{eq:homomorphism}
@@ -442,52 +457,23 @@ x=0.b_{0}b_{1}b_{2}\cdots
 \end_layout
 
 \begin_layout Standard
-The Bernoulli shift has many interesting properties.
- Most prominently, eqn.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:homomorphism"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- is an embedding of the Cantor space 
-\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
-\end_inset
-
- into the unit interval in 
-\begin_inset Formula $\mathbb{R}$
-\end_inset
-
-.
- The Cantor space has a natural topology, the product topology, that can
- be extended to a sigma algebra.
- The mapping 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:homomorphism"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- becomes a homomorphism of sigma algebras, mapping finite functions on the
- Cantor space to Lebesgue-integrable functions on the unit interval.
- Almost all properties of the Bernoulli shift follow from the properties
- of the Cantor space.
- This includes not only the transfer operator, but also any number of self-simil
-ar period-doubling fractals (such as the de Rham curves) which poses the
- symmetries of the Cantor space.
+The Bernoulli shift has many interesting properties, connecting it to the
+ Cantor set and a large class of self-similar fractals.
+ It is also connected to the modular group and elliptic functions (thence
+ to number theory).
+ It is also the primary example of an ergodic system, and, in a sense, has
+ far-reaching implications for ergodic systems via Ornstein theory.
+ These various connections are far too numerous to review here, beyond these
+ breif mentions.
 \end_layout
 
 \begin_layout Standard
 The current task is to attempt to see how many of these properties still
- hold for the slightly more complex beta transform, whether any of the tools
- used to analyze and solve the Bernoulli shift can be applied.
+ hold in the more general case of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation.
 \end_layout
 
 \begin_layout Subsection
@@ -521,7 +507,10 @@ shift space
 \end_inset
 
 .
- For the Bernoulli shift, one is typically interested in the set of all
+ For the Bernoulli shift, one is typically interested in the set of 
+\emph on
+all
+\emph default
  possible infinite sequences: this is the 
 \begin_inset Quotes eld
 \end_inset
@@ -634,10 +623,14 @@ symbolic dynamics
 \end_inset
 
  also deserve some mention: given one specific sequence 
-\begin_inset Formula $x$
+\begin_inset Formula $x\in S$
 \end_inset
 
- out of the shift space, one can ponder 
+ out of the shift space 
+\begin_inset Formula $S$
+\end_inset
+
+, one can ponder 
 \begin_inset Quotes eld
 \end_inset
 
@@ -675,7 +668,7 @@ orbit
 \begin_inset Formula $\left\{ T^{m}x\,|\,\mbox{integer }m\ge0\right\} $
 \end_inset
 
-– that is, the set of all places that 
+ – that is, the set of all places that 
 \begin_inset Formula $x$
 \end_inset
 
@@ -703,12 +696,38 @@ orbit
 \end_inset
 
 ; this is a periodic orbit.
- Most importantly, there are usually uncountably many non-periodic sequences
- or orbits.
- That is, the number of periodic orbits is always countable: one merely
- arranges them in lexicographic order, and one is done.
- This cannot be done for the non-periodic orbits: they are uncountable.
- 
+ Most importantly, when there are non-periodic orbits, then there are uncountaly
+ many of them.
+ That is, the number of periodic orbits is always countable: ther are at
+ most 
+\begin_inset Formula $N$
+\end_inset
+
+ starting points for an orbit, and they are of at most length 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ This includes the 
+\begin_inset Quotes eld
+\end_inset
+
+eventually periodic
+\begin_inset Quotes erd
+\end_inset
+
+ orbits: those that begin with some finite intial sequence of 
+\begin_inset Quotes eld
+\end_inset
+
+random
+\begin_inset Quotes erd
+\end_inset
+
+ moves, eventually settling into a periodic recurrance.
+ This cannot be done for the non-periodic orbits: they cannot be placed
+ in lexicographic order; as the Cantor slash argument applies.
+ The non-periodic orbits are always uncountable.
 \end_layout
 
 \begin_layout Standard
