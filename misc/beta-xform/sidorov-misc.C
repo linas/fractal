@@ -119,8 +119,6 @@ int main (int argc, char* argv[])
 				tot_tracklensq += last * last;
 				if (longest < last) longest = last;
 
-printf("wtf j=%d  %d %d %d %d -- len=%d %d\n", j, branch_points[0], branch_points[1],
-branch_points[2], branch_points[3], branch_points.size(), last);
 				at0_tracklen += branch_points[0];
 				at1_tracklen += branch_points[1];
 				at2_tracklen += branch_points[2];
@@ -168,11 +166,12 @@ branch_points[2], branch_points[3], branch_points.size(), last);
 	double sk2_tracklen = avg_tracklen - ((double) at2_tracklen) / tot_tracks;
 	double sk3_tracklen = avg_tracklen - ((double) at3_tracklen) / tot_tracks;
 
-	avg_tracklen *= log(2.0) / log(avg_tracks);
-	sk0_tracklen *= log(2.0) / (log(avg_tracks) - 1.0);
-	sk1_tracklen *= log(2.0) / (log(avg_tracks) - 2.0);
-	sk2_tracklen *= log(2.0) / (log(avg_tracks) - 3.0);
-	sk3_tracklen *= log(2.0) / (log(avg_tracks) - 4.0);
+	double steps = log(avg_tracks) / log(2.0);
+	avg_tracklen /= steps;
+	sk0_tracklen /= steps - 1.0;
+	sk1_tracklen /= steps - 2.0;
+	sk2_tracklen /= steps - 3.0;
+	sk3_tracklen /= steps - 4.0;
 
 	double ms_tracklen = ((double) tot_tracklensq) / tot_tracks;
 	ms_tracklen *= log(2.0) / log(avg_tracks);
