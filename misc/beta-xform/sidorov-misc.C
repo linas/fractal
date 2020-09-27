@@ -9,7 +9,7 @@
  */
 
 #define HISTOGRAM_ORBITS
-#define NBINS 2003
+#define NBINS (2003*12)
 #include "sidorov-big.C"
 
 double tee(double x, double beta)
@@ -34,7 +34,8 @@ int main (int argc, char* argv[])
 	do_init(nbits);
 
 	mpf_class beta;
-	make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
+	// make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
+	beta = 2.0*Kay;
 
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
@@ -75,14 +76,18 @@ int main (int argc, char* argv[])
 	size_t tot_tracklen = 0;
 	size_t tot_tracklensq = 0;
 	size_t tot_tracks_longest = 0;
+	size_t at0_tracklen = 0;
+	size_t at1_tracklen = 0;
+	size_t at2_tracklen = 0;
+	size_t at3_tracklen = 0;
 	mpf_class ex;
 
-#define NSAMP 3
+#define NSAMP 1
 	printf("# Sampled unit interval %d times\n#\n", NSAMP);
 
 	for (int ibin=0; ibin<NBINS; ibin++)
 	{
-		if (ibin%100 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
+		if (ibin%1000 ==0) fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		// fprintf(stderr, "# orbits done %d of %d\n", ibin, NBINS);
 		double x = (((double) ibin) + 0.5)/ ((double) NBINS);
 
@@ -113,6 +118,13 @@ int main (int argc, char* argv[])
 				tot_tracklen += last;
 				tot_tracklensq += last * last;
 				if (longest < last) longest = last;
+
+printf("wtf j=%d  %d %d %d %d -- len=%d %d\n", j, branch_points[0], branch_points[1],
+branch_points[2], branch_points[3], branch_points.size(), last);
+				at0_tracklen += branch_points[0];
+				at1_tracklen += branch_points[1];
+				at2_tracklen += branch_points[2];
+				at3_tracklen += branch_points[3];
 
 				tracklen[ibin] += last;
 				tracklensq[ibin] += last * last;
@@ -150,7 +162,17 @@ int main (int argc, char* argv[])
 	}
 	double avg_tracks = ((double) tot_tracks) / (NBINS * NSAMP);
 	double avg_tracklen = ((double) tot_tracklen) / tot_tracks;
+
+	double sk0_tracklen = avg_tracklen - ((double) at0_tracklen) / tot_tracks;
+	double sk1_tracklen = avg_tracklen - ((double) at1_tracklen) / tot_tracks;
+	double sk2_tracklen = avg_tracklen - ((double) at2_tracklen) / tot_tracks;
+	double sk3_tracklen = avg_tracklen - ((double) at3_tracklen) / tot_tracks;
+
 	avg_tracklen *= log(2.0) / log(avg_tracks);
+	sk0_tracklen *= log(2.0) / (log(avg_tracks) - 1.0);
+	sk1_tracklen *= log(2.0) / (log(avg_tracks) - 2.0);
+	sk2_tracklen *= log(2.0) / (log(avg_tracks) - 3.0);
+	sk3_tracklen *= log(2.0) / (log(avg_tracks) - 4.0);
 
 	double ms_tracklen = ((double) tot_tracklensq) / tot_tracks;
 	ms_tracklen *= log(2.0) / log(avg_tracks);
@@ -233,9 +255,13 @@ int main (int argc, char* argv[])
 	printf("# zerolow=%g zerohigh=%g teelo/hi=%g %g\n", zerolo, zerohi,
 		tee(zerolo, dbeta), tee(zerohi, dbeta));
 
-	double onelo = (1.0+dbeta) / (2.0*dbeta);
-	double onehi = (2.0+pow(dbeta, -em)) / (2.0*dbeta);
+	double onelo = 0.5 + zerolo;
+	double onehi = 0.5 + zerohi;
 	printf("# onelow=%g onehigh=%g\n", onelo, onehi);
+
+	double twolo = 1.0 + zerolo;
+	double twohi = 1.0 + zerohi;
+	printf("# twolow=%g twohigh=%g\n", twolo, twohi);
 
 	double acc = 0.0;
 	for (int i=0; i<NBINS; i++)
@@ -244,9 +270,11 @@ int main (int argc, char* argv[])
 		x *= SCALE;
 		if (zerolo <= x and x <= zerohi) acc += histo[i];
 		if (onelo <= x and x <= onehi) acc += histo[i];
+		if (twolo <= x and x <= twohi) acc += histo[i];
 	}
 	acc /= NBINS;
 	printf("integral=%g one-over=%g tracklen=%g\n", acc, 1.0/acc, avg_tracklen);
+	printf("skip intro: %g %g %g %g\n", sk0_tracklen, sk1_tracklen, sk2_tracklen, sk3_tracklen);
 
 #endif // HISTO_INTEGRAL
 
