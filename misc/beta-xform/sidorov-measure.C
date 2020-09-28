@@ -36,12 +36,14 @@ int main (int argc, char* argv[])
 
 	int ntracks = bitset.size();
 
-#define NBINS 102
+#define NBINS 403
 	double meas[NBINS];
 
+#define SCALE (4.0/3.0)
 	for (int i=0; i< NBINS; i++)
 	{
 		double y = (((double) i) + 0.5) / ((double) NBINS);
+		y *= SCALE;
 		double acc = 0.0;
 		double bpn = 1.0;
 
@@ -71,12 +73,12 @@ int main (int argc, char* argv[])
 		norm += meas[i];
 
 	for (int i=0; i< NBINS; i++)
-		meas[i] /= norm;
+		meas[i] *= NBINS/norm;
 
 	for (int i=0; i< NBINS; i++)
 	{
 		double y = (((double) i) + 0.5) / ((double) NBINS);
-		printf("%d	%g	%g\n", i, y, meas[i]);
+		printf("%d	%g	%g\n", i, y*SCALE, meas[i]);
 	}
 }
 
