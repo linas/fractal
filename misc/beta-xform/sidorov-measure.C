@@ -28,24 +28,35 @@ int main (int argc, char* argv[])
 	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
 
 #define MAXDEPTH maxdepth
-	mpf_class ex = 1;
 
 	std::vector<std::vector<mpf_class>> orbit_set;
 	std::vector<std::vector<bool>> bitset;
 	std::vector<std::vector<int>> branch_set;
-	beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
+	mpf_class one = 1;
+	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
 
 	int ntracks = bitset.size();
-	for (int j=0; j<ntracks; j++)
-	{
-		std::vector<mpf_class> orbit = orbit_set[j];
-		std::vector<int> branch_points = branch_set[j];
 
-		size_t nb = branch_points.size();
-		size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
-		if (orbit.size() <= norb) norb = orbit.size() -1;
-		for (size_t k=1; k<=norb; k++)
+#define NBINS 402
+	double meas[NBINS];
+
+	for (int i=0; i< NBINS; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NBINS);
+		double acc = 0.0;
+
+	for (int k=0; k<20; k++)
+	{
+		for (int j=0; j<ntracks; j++)
 		{
+			std::vector<mpf_class> orbit = orbit_set[j];
+			std::vector<int> branch_points = branch_set[j];
+
+			size_t nb = branch_points.size();
+			size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
+			if (orbit.size() <= norb) norb = orbit.size() -1;
+			if ((int) norb < k) continue;
+
 			double x = mpf_get_d(orbit[k].get_mpf_t());
 		}
 	}
