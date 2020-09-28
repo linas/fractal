@@ -30,7 +30,7 @@ int main (int argc, char* argv[])
 	std::vector<std::vector<mpf_class>> orbit_set;
 	std::vector<std::vector<bool>> bitset;
 	std::vector<std::vector<int>> branch_set;
-	mpf_class one = 1;
+	mpf_class one = Kay;
 	mpf_class beta = dbeta;
 	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
 
