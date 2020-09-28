@@ -59,10 +59,12 @@ int main (int argc, char* argv[])
 				if (orbit.size() <= norb) norb = orbit.size() -1;
 				if ((int) norb < k) continue;
 
+/*
 				bool branch = false;
 				for (int b = 0; b<nb; b++)
 					if (k == branch_points[nb]) branch = true;
 				if (branch) continue;
+*/
 
 				double x = mpf_get_d(orbit[k].get_mpf_t());
 				if (y < x) acc += bpn;

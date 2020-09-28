@@ -5431,6 +5431,80 @@ Computed in three places: rexfer.c reigen.c and complex.c
 \end_layout
 
 \begin_layout Subsection
+(No) Real-analytic solutions
+\end_layout
+
+\begin_layout Standard
+What happens if we start with the assumption that there might be a real-analytic
+ solution to the eigen-equation? It is reasonable to expect that this hope
+ is doomed, but the process is instructive anyway.
+ Start by positing 
+\begin_inset Formula 
+\[
+f\left(y\right)=\sum_{n=0}^{\infty}a_{n}y^{n}
+\]
+
+\end_inset
+
+Plugging this into the above gives 
+\begin_inset Formula 
+\[
+\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]=\sum_{m=0}^{\infty}\frac{y^{m}}{\beta^{m+1}}\left[a_{m}+\sum_{j=0}^{\infty}\left({m+j\atop m}\right)2^{-j}a_{m+j}\right]
+\]
+
+\end_inset
+
+Matching, term by term, this gives the eigenequation 
+\begin_inset Formula $\lambda a_{m}=\sum_{k}L_{mk}a_{k}$
+\end_inset
+
+ with 
+\begin_inset Formula $L_{mk}$
+\end_inset
+
+ an upper-triangular matrix, having matrix entries 
+\begin_inset Formula 
+\[
+L_{mk}=\frac{1}{\beta^{m+1}}\left[1+\frac{1}{2^{k-m}}\left({k\atop m}\right)\right]
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $k\ge m$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{mk}=0$
+\end_inset
+
+ otherwise.
+ Although this is upper-triangular, and thus solvable, we omitted one 
+\begin_inset Quotes eld
+\end_inset
+
+minor
+\begin_inset Quotes erd
+\end_inset
+
+ little detail: the eigenfunction has to vanish for 
+\begin_inset Formula $y>\beta/2$
+\end_inset
+
+ and there is no way to do this with a real-analytic function.
+ Inserting a step function into the mix ruins the term-by-term comparison.
+ That is, positing 
+\begin_inset Formula 
+\[
+f\left(y\right)=\Theta\left(\frac{\beta}{2}-y\right)\sum_{n=0}^{\infty}a_{n}y^{n}
+\]
+
+\end_inset
+
+prevents the term-by-term comparison from passing through.
+\end_layout
+
+\begin_layout Subsection
 A note on complex eigenvalues
 \end_layout
 
