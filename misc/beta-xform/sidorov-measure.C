@@ -20,9 +20,7 @@ int main (int argc, char* argv[])
 
 	do_init(nbits);
 
-	mpf_class beta;
-	// make_random_bitsequence(beta, 2.0*Kay, nbits, NBINS);
-	beta = 2.0*Kay;
+	double dbeta = 2.0*Kay;
 
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
@@ -33,32 +31,52 @@ int main (int argc, char* argv[])
 	std::vector<std::vector<bool>> bitset;
 	std::vector<std::vector<int>> branch_set;
 	mpf_class one = 1;
+	mpf_class beta = dbeta;
 	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
 
 	int ntracks = bitset.size();
 
-#define NBINS 402
+#define NBINS 102
 	double meas[NBINS];
 
 	for (int i=0; i< NBINS; i++)
 	{
-		double x = (((double) i) + 0.5) / ((double) NBINS);
+		double y = (((double) i) + 0.5) / ((double) NBINS);
 		double acc = 0.0;
+		double bpn = 1.0;
 
-	for (int k=0; k<20; k++)
-	{
-		for (int j=0; j<ntracks; j++)
+		for (int k=0; k<20; k++)
 		{
-			std::vector<mpf_class> orbit = orbit_set[j];
-			std::vector<int> branch_points = branch_set[j];
+			for (int j=0; j<ntracks; j++)
+			{
+				std::vector<mpf_class> orbit = orbit_set[j];
+				std::vector<int> branch_points = branch_set[j];
 
-			size_t nb = branch_points.size();
-			size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
-			if (orbit.size() <= norb) norb = orbit.size() -1;
-			if ((int) norb < k) continue;
+				size_t nb = branch_points.size();
+				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
+				if (orbit.size() <= norb) norb = orbit.size() -1;
+				if ((int) norb < k) continue;
 
-			double x = mpf_get_d(orbit[k].get_mpf_t());
+				double x = mpf_get_d(orbit[k].get_mpf_t());
+				if (y < x) acc += bpn;
+			}
+
+			bpn /= dbeta;
 		}
+		meas[i] = acc;
+	}
+
+	double norm = 0.0;
+	for (int i=0; i< NBINS; i++)
+		norm += meas[i];
+
+	for (int i=0; i< NBINS; i++)
+		meas[i] /= norm;
+
+	for (int i=0; i< NBINS; i++)
+	{
+		double y = (((double) i) + 0.5) / ((double) NBINS);
+		printf("%d	%g	%g\n", i, y, meas[i]);
 	}
 }
 
