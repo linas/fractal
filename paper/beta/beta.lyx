@@ -4760,67 +4760,6 @@ Computed in three places: rexfer.c reigen.c and complex.c
 \end_layout
 
 \begin_layout Subsection
-A note on complex eigenvalues
-\end_layout
-
-\begin_layout Standard
-Since the operator 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- is purely real, then if it has a complex spectrum, the eigenvalues and
- eigenfunctions must come in complex-conjugate pairs.
- This can make numerical searches and numerical convergence behave in unexpected
- ways, so some brief commentary is in order.
- 
-\end_layout
-
-\begin_layout Standard
-Assume that there exists some complex-valued eigenfunction 
-\begin_inset Formula $\rho_{\lambda}\left(x\right)$
-\end_inset
-
- for fixed, complex eigenvalue 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
- Write it's real and complex components as
-\begin_inset Formula 
-\[
-\rho_{\lambda}\left(x\right)=\sigma\left(x\right)+i\tau\left(x\right)
-\]
-
-\end_inset
-
-while also writing 
-\begin_inset Formula $\lambda=a+ib$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\sigma\right]\left(x\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\bar{\rho}_{\lambda}\right)\right]\left(x\right)\\
-= & \frac{1}{2}\left(\lambda\rho_{\lambda}\left(x\right)+\bar{\lambda}\bar{\rho}_{\lambda}\left(x\right)\right)\\
-= & a\sigma\left(x\right)-b\tau\left(x\right)
-\end{align*}
-
-\end_inset
-
-Both left and right sides of the above are real.
- If one had somehow stumbled upon 
-\begin_inset Formula $\sigma\left(x\right)$
-\end_inset
-
- numerically, as an eigenvector-candidate, then the above admixing of the
- imaginary component would quickly throw one off the hunt.
- Thus, a numeric search for complex-valued eigenfunctions must necessarily
- take into account eigenfunction pairs, with real and imaginary components
- that mix together as above.
-\end_layout
-
-\begin_layout Subsection
 Rotated Renyi-Parry function
 \begin_inset CommandInset label
 LatexCommand label
@@ -5462,7 +5401,7 @@ This section ends with a deep mystery: why is
 \end_inset
 
  coordinate? How should it be explained? How can it be put to good use?
- Might there be more of such identities? Or is there only this one? 
+ Might there be more of such identities? Or is there only this one?
 \end_layout
 
 \begin_layout Subsection
