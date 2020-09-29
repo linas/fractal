@@ -6417,24 +6417,19 @@ with
 \end_layout
 
 \begin_layout Standard
-A different class of almost-solutions starts with the Gelfond-Parry invariant
- measure defined in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:invariant measure"
+The eigenfunction for 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
 
+ is the same, up to rescaling of 
+\begin_inset Formula $y\mapsto\beta x/2$
 \end_inset
 
 .
- Using this, one may define a 
-\begin_inset Quotes eld
-\end_inset
+ Recycling notation slightly, write
+\end_layout
 
-rotated
-\begin_inset Quotes erd
-\end_inset
-
- function
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 v_{\beta;z}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}z^{n}\label{eq:coherent-first-order}
@@ -6442,16 +6437,16 @@ v_{\beta;z}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n
 
 \end_inset
 
-where 
-\begin_inset Formula $d_{n}\left(x\right)=\varepsilon_{n}\left(2x/\beta\right)$
+where the 
+\begin_inset Formula $d_{n}\left(x\right)$
 \end_inset
 
- are the same digits as defined by Gelfond and Parry, just rescaled for
- the beta shift convention being used here.
+ are exactly the same digits as defined by Parry, just rescaled for the
+ beta-shift.
  That is, 
 \begin_inset Formula 
 \[
-d_{n}\left(x\right)=\begin{cases}
+d_{n}\left(x\right)=\varepsilon_{n}\left(\frac{2x}{\beta}\right)=\Theta\left(\frac{\beta}{2}t_{n}-x\right)=\Theta\left(T^{n}\left(\frac{\beta}{2}\right)-x\right)=\begin{cases}
 1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
 0 & \mbox{otherwise}
 \end{cases}
@@ -6459,20 +6454,44 @@ d_{n}\left(x\right)=\begin{cases}
 
 \end_inset
 
-and 
+where 
 \begin_inset Formula $T$
 \end_inset
 
- the beta shift map of eqn 
+ the beta-shift map of eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:downshift"
 
 \end_inset
 
-.
- The summation is clearly convergent (and holomorphic) for complex numbers
- 
+ and eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xform-shift equivalence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is used.
+\end_layout
+
+\begin_layout Standard
+Holding both 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ fixed, the summation is clearly convergent (and holomorphic in 
+\begin_inset Formula $z$
+\end_inset
+
+) for complex numbers 
 \begin_inset Formula $z$
 \end_inset
 
@@ -6481,10 +6500,10 @@ reference "eq:downshift"
 \end_inset
 
 .
+ The eigenequation has the same form:
 \end_layout
 
 \begin_layout Standard
-Exploring this numerically, one finds that 
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(x\right)=\frac{1}{z}v_{\beta;z}\left(x\right)+C\left(\beta;z\right)
@@ -6500,45 +6519,16 @@ where
 \begin_inset Formula $x$
 \end_inset
 
- (or rather, a constant for 
-\begin_inset Formula $x<\beta/2$
-\end_inset
-
- and zero otherwise).
- The fact that 
+.
+ Numeric verification reveals we were a bit glib: 
 \begin_inset Formula $C\left(\beta;z\right)$
 \end_inset
 
- is a constant independent of 
-\begin_inset Formula $x$
+ is a constant for 
+\begin_inset Formula $x<\beta/2$
 \end_inset
 
- can be taken either as a humdrum fact, typical of the territory, or as
- a big unexplained surprise! I prefer the later.
- The sequence of digits 
-\begin_inset Formula $d_{n}\left(x\right)$
-\end_inset
-
- depend strongly on 
-\begin_inset Formula $x$
-\end_inset
-
-.
- The function 
-\begin_inset Formula $v_{\beta;z}\left(x\right)$
-\end_inset
-
- depends strongly on 
-\begin_inset Formula $x$
-\end_inset
-
-.
- The digits 
-\begin_inset Formula $d_{n}\left(x\right)$
-\end_inset
-
- are entangled in an analytic series, in very highly non-trivial form.
- This is worth pursuing to great extent.
+ and is zero otherwise! 
 \end_layout
 
 \begin_layout Standard
