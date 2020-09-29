@@ -5431,7 +5431,7 @@ Computed in three places: rexfer.c reigen.c and complex.c
 \end_layout
 
 \begin_layout Subsection
-(No) Real-analytic solutions
+Real-analytic solutions
 \end_layout
 
 \begin_layout Standard
@@ -5502,17 +5502,53 @@ f\left(y\right)=\Theta\left(\frac{\beta}{2}-y\right)\sum_{n=0}^{\infty}a_{n}y^{n
 \end_inset
 
 prevents the term-by-term comparison from passing through.
- Even ignoring this, there's another 
-\begin_inset Quotes eld
+\end_layout
+
+\begin_layout Standard
+Perhaps working with the beta-shift here is a bad idea.
+ Let's try again with the beta-transform.
+ The transfer operator avoids the annoying step function.
+ It is
+\begin_inset Formula 
+\[
+\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\right]
+\]
+
 \end_inset
 
-little
-\begin_inset Quotes erd
+Then plugging in one gets as before:
+\begin_inset Formula 
+\[
+\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{\beta}\right)\right]=\sum_{m=0}^{\infty}\frac{y^{m}}{\beta^{m+1}}\left[a_{m}+\sum_{j=0}^{\infty}\left({m+j\atop m}\right)\beta^{-j}a_{m+j}\right]
+\]
+
 \end_inset
 
- problem: all of the diagonal entries are larger than one.
- Such solutions would describe not the decaying eigenfunctions, but the
- exploding ones.
+Again, as before, this gives the eigenequation 
+\begin_inset Formula $\lambda a_{m}=\sum_{k}M_{mk}a_{k}$
+\end_inset
+
+ with 
+\begin_inset Formula $M_{mk}$
+\end_inset
+
+ an upper-triangular matrix, having matrix entries 
+\begin_inset Formula 
+\[
+M_{mk}=\frac{1}{\beta^{m+1}}\left[1+\frac{1}{\beta^{k-m}}\left({k\atop m}\right)\right]
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $k\ge m$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{mk}=0$
+\end_inset
+
+ otherwise.
 \end_layout
 
 \begin_layout Subsection
@@ -5876,6 +5912,20 @@ Both left and right sides of the above are real.
  Thus, a numeric search for complex-valued eigenfunctions must necessarily
  take into account eigenfunction pairs, with real and imaginary components
  that mix together as above.
+\end_layout
+
+\begin_layout Standard
+Consistency requires that
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\tau\right]\left(w\right)= & \frac{1}{2i}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}-\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
+= & \frac{1}{2i}\left(\lambda\rho_{\lambda}\left(w\right)-\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
+= & a\tau\left(w\right)+b\sigma\left(w\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
