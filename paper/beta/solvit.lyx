@@ -6021,6 +6021,81 @@ Presumably, there are special values of
 \end_layout
 
 \begin_layout Subsection
+Complex eigenvalues
+\end_layout
+
+\begin_layout Standard
+Since the operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ is purely real, then if it has a complex spectrum, the eigenvalues and
+ eigenfunctions must come in complex-conjugate pairs.
+ This can make numerical searches and numerical convergence behave in unexpected
+ ways, so some brief commentary is in order.
+ 
+\end_layout
+
+\begin_layout Standard
+Assume that there exists some complex-valued eigenfunction 
+\begin_inset Formula $\rho_{\lambda}\left(w\right)$
+\end_inset
+
+ for fixed, complex eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Write it's real and complex components as
+\begin_inset Formula 
+\[
+\rho_{\lambda}\left(w\right)=\sigma\left(w\right)+i\tau\left(w\right)
+\]
+
+\end_inset
+
+while also writing 
+\begin_inset Formula $\lambda=a+ib$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\sigma\right]\left(w\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
+= & \frac{1}{2}\left(\lambda\rho_{\lambda}\left(w\right)+\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
+= & a\sigma\left(w\right)-b\tau\left(w\right)
+\end{align*}
+
+\end_inset
+
+Both left and right sides of the above are real.
+ If one had somehow stumbled upon 
+\begin_inset Formula $\sigma\left(w\right)$
+\end_inset
+
+ numerically, as an eigenvector-candidate, then the above admixing of the
+ imaginary component would quickly throw one off the hunt.
+ Thus, a numeric search for complex-valued eigenfunctions must necessarily
+ take into account eigenfunction pairs, with real and imaginary components
+ that mix together as above.
+\end_layout
+
+\begin_layout Standard
+Consistency requires that
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\tau\right]\left(w\right)= & \frac{1}{2i}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}-\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
+= & \frac{1}{2i}\left(\lambda\rho_{\lambda}\left(w\right)-\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
+= & a\tau\left(w\right)+b\sigma\left(w\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 The Gelfond-Parry measure
 \end_layout
 
@@ -6320,81 +6395,6 @@ almost eigenfunction
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsection
-Complex eigenvalues
-\end_layout
-
-\begin_layout Standard
-Since the operator 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- is purely real, then if it has a complex spectrum, the eigenvalues and
- eigenfunctions must come in complex-conjugate pairs.
- This can make numerical searches and numerical convergence behave in unexpected
- ways, so some brief commentary is in order.
- 
-\end_layout
-
-\begin_layout Standard
-Assume that there exists some complex-valued eigenfunction 
-\begin_inset Formula $\rho_{\lambda}\left(w\right)$
-\end_inset
-
- for fixed, complex eigenvalue 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
- Write it's real and complex components as
-\begin_inset Formula 
-\[
-\rho_{\lambda}\left(w\right)=\sigma\left(w\right)+i\tau\left(w\right)
-\]
-
-\end_inset
-
-while also writing 
-\begin_inset Formula $\lambda=a+ib$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\sigma\right]\left(w\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
-= & \frac{1}{2}\left(\lambda\rho_{\lambda}\left(w\right)+\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
-= & a\sigma\left(w\right)-b\tau\left(w\right)
-\end{align*}
-
-\end_inset
-
-Both left and right sides of the above are real.
- If one had somehow stumbled upon 
-\begin_inset Formula $\sigma\left(w\right)$
-\end_inset
-
- numerically, as an eigenvector-candidate, then the above admixing of the
- imaginary component would quickly throw one off the hunt.
- Thus, a numeric search for complex-valued eigenfunctions must necessarily
- take into account eigenfunction pairs, with real and imaginary components
- that mix together as above.
-\end_layout
-
-\begin_layout Standard
-Consistency requires that
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\tau\right]\left(w\right)= & \frac{1}{2i}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}-\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
-= & \frac{1}{2i}\left(\lambda\rho_{\lambda}\left(w\right)-\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
-= & a\tau\left(w\right)+b\sigma\left(w\right)
-\end{align*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -7036,44 +7036,6 @@ This section ends with a deep mystery: why is
 
  coordinate? How should it be explained? How can it be put to good use?
  Might there be more of such identities? Or is there only this one? 
-\end_layout
-
-\begin_layout Subsection
-Analytic Ergodics
-\end_layout
-
-\begin_layout Standard
-Why is 
-\begin_inset Formula $C\left(\beta;z\right)$
-\end_inset
-
- independent of the 
-\begin_inset Formula $y$
-\end_inset
-
- coordinate? And is this surprising, or not surprising?
-\end_layout
-
-\begin_layout Standard
-Perhaps it should not be surprising.
- The full shift (the Bernoulli shift) has an absolutely flat, uniform distributi
-on.
- This is not a surprise: real numbers are uniformly distributed on the real
- number line.
- Pick almost any real number: the binary digits are uniformly distributed.
- The FP eigenfunction of the transfer operator for the Bernoulli shift is
- a constant.
- This is not a surprise; the uniformity of the reals demands this.
-\end_layout
-
-\begin_layout Standard
-But the digit sequences are wildly and ergodically different, yet none-the-less
- manage to 
-\emph on
-sum to exactly the same value
-\emph default
-, when summed in an analytic series! Why should crazy-different, crazy-chaotic
- sequences yeild identical summations? 
 \end_layout
 
 \begin_layout Subsection
