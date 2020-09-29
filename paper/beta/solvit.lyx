@@ -5640,383 +5640,6 @@ d the real-analytic solutions to the Bernoulli process; indeed, the term-by-term
 \end_layout
 
 \begin_layout Subsection
-The Gelfond-Parry measure
-\end_layout
-
-\begin_layout Standard
-This measure is given by eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:invariant measure"
-
-\end_inset
-
- and is given by Gelfond
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Gelfond59"
-literal "false"
-
-\end_inset
-
- and by Parry
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Parry60"
-literal "false"
-
-\end_inset
-
-.
- Unfortunately, I find the Russian original of Gelfond's article unreadable,
- and Parry's work, stemming from his PhD thesis, is not available online.
- Therefore, it is of some interest to provide a proof suitable for the current
- text.
-\end_layout
-
-\begin_layout Standard
-The easiest route seems to be direct verification that eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:invariant measure"
-
-\end_inset
-
- is correct, as opposed to a derivation of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:invariant measure"
-
-\end_inset
-
- from first principles.
- This is done below, explicitly showing all steps in laborious detail.
- It's not at all difficult; just a bit hard on the eyes.
- As before, let 
-\begin_inset Formula $t\left(x\right)\equiv t_{\beta}\left(x\right)=\beta x\mod1$
-\end_inset
-
- be the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transformation of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:beta transform"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, and 
-\begin_inset Formula $t^{n}\left(x\right)$
-\end_inset
-
- the iterated transformation.
- Let 
-\begin_inset Formula $\Theta(x)$
-\end_inset
-
- be the Heaviside step function as always, and to keep notation breif, let
- 
-\begin_inset Formula $t_{n}\equiv t^{n}\left(1\right)$
-\end_inset
-
-.
- The Gelfond-Parry measure is then 
-\begin_inset Formula 
-\[
-\nu\left(y\right)=\sum_{n=0}^{\infty}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
-\]
-
-\end_inset
-
-where it is more convenient to write 
-\begin_inset Formula $\varepsilon_{n}\left(y\right)=\Theta\left(t_{n}-y\right)$
-\end_inset
-
-.
- The transfer operator 
-\begin_inset Formula $\mathcal{M}$
-\end_inset
-
- for the beta-transformation is slightly more convenient to work with than
- 
-\begin_inset Formula $\mathcal{L}$
-\end_inset
-
- for this particular case.
- It is given by 
-\begin_inset Formula 
-\[
-\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\right]
-\]
-
-\end_inset
-
-and we wish to verify that 
-\begin_inset Formula $\mathcal{M}\nu=\nu$
-\end_inset
-
-.
- Plugging in directly,
-\begin_inset Formula 
-\begin{align*}
-P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right) & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n}-\frac{y}{\beta}\right)+\Theta\left(t_{n}-\frac{y+1}{\beta}\right)\right)\\
- & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1-y\right)\right)
-\end{align*}
-
-\end_inset
-
-since 
-\begin_inset Formula $\Theta\left(ax\right)=\Theta\left(x\right)$
-\end_inset
-
- for all constants 
-\begin_inset Formula $a$
-\end_inset
-
-.
- These terms simplify, depending on whether 
-\begin_inset Formula $t_{n}$
-\end_inset
-
- is small or large.
- Explicitly, one has 
-\begin_inset Formula 
-\begin{align*}
-\Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
-\Theta\left(\beta t_{n}-y\right)=1 & \mbox{ if }\beta t_{n}-1>0
-\end{align*}
-
-\end_inset
-
-and so
-\begin_inset Formula 
-\[
-P=\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(\beta t_{n}-1-y\right)\right)\right)
-\]
-
-\end_inset
-
-These can be collapsed by noting that 
-\begin_inset Formula 
-\begin{align*}
-\beta t_{n}=t_{n+1} & \mbox{ if }\beta t_{n}-1<0\\
-\beta t_{n}-1=t_{n+1} & \mbox{ if }\beta t_{n}-1>0
-\end{align*}
-
-\end_inset
-
-and so
-\begin_inset Formula 
-\begin{align*}
-P & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(t_{n+1}-y\right)\right)\right)\\
- & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)\left[\Theta\left(1-\beta t_{n}\right)+\Theta\left(\beta t_{n}-1\right)\right]+\Theta\left(\beta t_{n}-1\right)\right)\\
- & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\right)\\
- & =\beta\nu\left(y\right)-\beta+\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n}}
-\end{align*}
-
-\end_inset
-
-The sum on the right is just the 
-\begin_inset Formula $\beta$
-\end_inset
-
--expansion for 1.
- That is, the 
-\begin_inset Formula $\beta$
-\end_inset
-
--expansion of 
-\begin_inset Formula $x$
-\end_inset
-
- is
-\begin_inset Formula 
-\[
-x=\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t^{n}\left(x\right)-1\right)}{\beta^{n+1}}
-\]
-
-\end_inset
-
-This is just eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:shift series"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- written in a different way (making use of the equivalence 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:xform-shift equivalence"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- Thus 
-\begin_inset Formula $P=\beta\nu\left(y\right)$
-\end_inset
-
- and so 
-\begin_inset Formula $\mathcal{M}\nu=\nu$
-\end_inset
-
- as claimed.
-\end_layout
-
-\begin_layout Subsection
-The rotated Gelfond-Parry function
-\end_layout
-
-\begin_layout Standard
-The steps performed above can be repeated verbatim for the 
-\begin_inset Quotes eld
-\end_inset
-
-rotated
-\begin_inset Quotes erd
-\end_inset
-
- or 
-\begin_inset Quotes eld
-\end_inset
-
-complexified
-\begin_inset Quotes erd
-\end_inset
-
- function
-\begin_inset Formula 
-\[
-\nu_{\beta;z}\left(y\right)=\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
-\]
-
-\end_inset
-
-for some complex-valued 
-\begin_inset Formula $z$
-\end_inset
-
-.
- No changes are required, and the result can be read off directly:
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{M}\nu_{\beta;z}\right]\left(y\right) & =\frac{\nu_{\beta;z}\left(y\right)}{z}-\frac{1}{z}+\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n+1}}\\
- & =\frac{\nu_{\beta;z}\left(y\right)}{z}+C\left(\beta;z\right)
-\end{align*}
-
-\end_inset
-
-with 
-\begin_inset Formula $C\left(\beta;z\right)$
-\end_inset
-
- being a constant independent of 
-\begin_inset Formula $y$
-\end_inset
-
-.
- This, one could say, is an 
-\begin_inset Quotes eld
-\end_inset
-
-almost eigenfunction
-\begin_inset Quotes erd
-\end_inset
-
- of 
-\begin_inset Formula $\mathcal{M}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
-Complex eigenvalues
-\end_layout
-
-\begin_layout Standard
-Since the operator 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- is purely real, then if it has a complex spectrum, the eigenvalues and
- eigenfunctions must come in complex-conjugate pairs.
- This can make numerical searches and numerical convergence behave in unexpected
- ways, so some brief commentary is in order.
- 
-\end_layout
-
-\begin_layout Standard
-Assume that there exists some complex-valued eigenfunction 
-\begin_inset Formula $\rho_{\lambda}\left(w\right)$
-\end_inset
-
- for fixed, complex eigenvalue 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
- Write it's real and complex components as
-\begin_inset Formula 
-\[
-\rho_{\lambda}\left(w\right)=\sigma\left(w\right)+i\tau\left(w\right)
-\]
-
-\end_inset
-
-while also writing 
-\begin_inset Formula $\lambda=a+ib$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\sigma\right]\left(w\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
-= & \frac{1}{2}\left(\lambda\rho_{\lambda}\left(w\right)+\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
-= & a\sigma\left(w\right)-b\tau\left(w\right)
-\end{align*}
-
-\end_inset
-
-Both left and right sides of the above are real.
- If one had somehow stumbled upon 
-\begin_inset Formula $\sigma\left(w\right)$
-\end_inset
-
- numerically, as an eigenvector-candidate, then the above admixing of the
- imaginary component would quickly throw one off the hunt.
- Thus, a numeric search for complex-valued eigenfunctions must necessarily
- take into account eigenfunction pairs, with real and imaginary components
- that mix together as above.
-\end_layout
-
-\begin_layout Standard
-Consistency requires that
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\tau\right]\left(w\right)= & \frac{1}{2i}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}-\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
-= & \frac{1}{2i}\left(\lambda\rho_{\lambda}\left(w\right)-\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
-= & a\tau\left(w\right)+b\sigma\left(w\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
 Almost-solutions
 \end_layout
 
@@ -6395,6 +6018,383 @@ Presumably, there are special values of
 
  is wholly unclear; however, the examination of the periodic orbits of the
  beta shift, undertaken in a later chapter, will provide a strong clue.
+\end_layout
+
+\begin_layout Subsection
+The Gelfond-Parry measure
+\end_layout
+
+\begin_layout Standard
+This measure is given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+ and is given by Gelfond
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gelfond59"
+literal "false"
+
+\end_inset
+
+ and by Parry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+literal "false"
+
+\end_inset
+
+.
+ Unfortunately, I find the Russian original of Gelfond's article unreadable,
+ and Parry's work, stemming from his PhD thesis, is not available online.
+ Therefore, it is of some interest to provide a proof suitable for the current
+ text.
+\end_layout
+
+\begin_layout Standard
+The easiest route seems to be direct verification that eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+ is correct, as opposed to a derivation of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+ from first principles.
+ This is done below, explicitly showing all steps in laborious detail.
+ It's not at all difficult; just a bit hard on the eyes.
+ As before, let 
+\begin_inset Formula $t\left(x\right)\equiv t_{\beta}\left(x\right)=\beta x\mod1$
+\end_inset
+
+ be the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta transform"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and 
+\begin_inset Formula $t^{n}\left(x\right)$
+\end_inset
+
+ the iterated transformation.
+ Let 
+\begin_inset Formula $\Theta(x)$
+\end_inset
+
+ be the Heaviside step function as always, and to keep notation breif, let
+ 
+\begin_inset Formula $t_{n}\equiv t^{n}\left(1\right)$
+\end_inset
+
+.
+ The Gelfond-Parry measure is then 
+\begin_inset Formula 
+\[
+\nu\left(y\right)=\sum_{n=0}^{\infty}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+where it is more convenient to write 
+\begin_inset Formula $\varepsilon_{n}\left(y\right)=\Theta\left(t_{n}-y\right)$
+\end_inset
+
+.
+ The transfer operator 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ for the beta-transformation is slightly more convenient to work with than
+ 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ for this particular case.
+ It is given by 
+\begin_inset Formula 
+\[
+\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\right]
+\]
+
+\end_inset
+
+and we wish to verify that 
+\begin_inset Formula $\mathcal{M}\nu=\nu$
+\end_inset
+
+.
+ Plugging in directly,
+\begin_inset Formula 
+\begin{align*}
+P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right) & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n}-\frac{y}{\beta}\right)+\Theta\left(t_{n}-\frac{y+1}{\beta}\right)\right)\\
+ & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1-y\right)\right)
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $\Theta\left(ax\right)=\Theta\left(x\right)$
+\end_inset
+
+ for all constants 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ These terms simplify, depending on whether 
+\begin_inset Formula $t_{n}$
+\end_inset
+
+ is small or large.
+ Explicitly, one has 
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
+\Theta\left(\beta t_{n}-y\right)=1 & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+P=\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(\beta t_{n}-1-y\right)\right)\right)
+\]
+
+\end_inset
+
+These can be collapsed by noting that 
+\begin_inset Formula 
+\begin{align*}
+\beta t_{n}=t_{n+1} & \mbox{ if }\beta t_{n}-1<0\\
+\beta t_{n}-1=t_{n+1} & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+P & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(t_{n+1}-y\right)\right)\right)\\
+ & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)\left[\Theta\left(1-\beta t_{n}\right)+\Theta\left(\beta t_{n}-1\right)\right]+\Theta\left(\beta t_{n}-1\right)\right)\\
+ & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\right)\\
+ & =\beta\nu\left(y\right)-\beta+\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n}}
+\end{align*}
+
+\end_inset
+
+The sum on the right is just the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion for 1.
+ That is, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion of 
+\begin_inset Formula $x$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+x=\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t^{n}\left(x\right)-1\right)}{\beta^{n+1}}
+\]
+
+\end_inset
+
+This is just eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ written in a different way (making use of the equivalence 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xform-shift equivalence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Thus 
+\begin_inset Formula $P=\beta\nu\left(y\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $\mathcal{M}\nu=\nu$
+\end_inset
+
+ as claimed.
+\end_layout
+
+\begin_layout Subsection
+The rotated Gelfond-Parry function
+\end_layout
+
+\begin_layout Standard
+The steps performed above can be repeated verbatim for the 
+\begin_inset Quotes eld
+\end_inset
+
+rotated
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+complexified
+\begin_inset Quotes erd
+\end_inset
+
+ function
+\begin_inset Formula 
+\[
+\nu_{\beta;z}\left(y\right)=\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+for some complex-valued 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ No changes are required, and the result can be read off directly:
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{M}\nu_{\beta;z}\right]\left(y\right) & =\frac{\nu_{\beta;z}\left(y\right)}{z}-\frac{1}{z}+\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n+1}}\\
+ & =\frac{\nu_{\beta;z}\left(y\right)}{z}+C\left(\beta;z\right)
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $C\left(\beta;z\right)$
+\end_inset
+
+ being a constant independent of 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ This, one could say, is an 
+\begin_inset Quotes eld
+\end_inset
+
+almost eigenfunction
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Complex eigenvalues
+\end_layout
+
+\begin_layout Standard
+Since the operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ is purely real, then if it has a complex spectrum, the eigenvalues and
+ eigenfunctions must come in complex-conjugate pairs.
+ This can make numerical searches and numerical convergence behave in unexpected
+ ways, so some brief commentary is in order.
+ 
+\end_layout
+
+\begin_layout Standard
+Assume that there exists some complex-valued eigenfunction 
+\begin_inset Formula $\rho_{\lambda}\left(w\right)$
+\end_inset
+
+ for fixed, complex eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Write it's real and complex components as
+\begin_inset Formula 
+\[
+\rho_{\lambda}\left(w\right)=\sigma\left(w\right)+i\tau\left(w\right)
+\]
+
+\end_inset
+
+while also writing 
+\begin_inset Formula $\lambda=a+ib$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\sigma\right]\left(w\right)= & \frac{1}{2}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}+\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
+= & \frac{1}{2}\left(\lambda\rho_{\lambda}\left(w\right)+\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
+= & a\sigma\left(w\right)-b\tau\left(w\right)
+\end{align*}
+
+\end_inset
+
+Both left and right sides of the above are real.
+ If one had somehow stumbled upon 
+\begin_inset Formula $\sigma\left(w\right)$
+\end_inset
+
+ numerically, as an eigenvector-candidate, then the above admixing of the
+ imaginary component would quickly throw one off the hunt.
+ Thus, a numeric search for complex-valued eigenfunctions must necessarily
+ take into account eigenfunction pairs, with real and imaginary components
+ that mix together as above.
+\end_layout
+
+\begin_layout Standard
+Consistency requires that
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\tau\right]\left(w\right)= & \frac{1}{2i}\left[\mathcal{L}_{\beta}\left(\rho_{\lambda}-\bar{\rho}_{\lambda}\right)\right]\left(w\right)\\
+= & \frac{1}{2i}\left(\lambda\rho_{\lambda}\left(w\right)-\bar{\lambda}\bar{\rho}_{\lambda}\left(w\right)\right)\\
+= & a\tau\left(w\right)+b\sigma\left(w\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
