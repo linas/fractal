@@ -6207,7 +6207,7 @@ where it is more convenient to write
  It is given by 
 \begin_inset Formula 
 \[
-\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\right]
+\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(\beta-1-y\right)\right]
 \]
 
 \end_inset
@@ -6220,7 +6220,7 @@ and we wish to verify that
  Plugging in directly,
 \begin_inset Formula 
 \begin{align*}
-P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right) & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n}-\frac{y}{\beta}\right)+\Theta\left(t_{n}-\frac{y+1}{\beta}\right)\right)\\
+P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right)\Theta\left(\beta-1-y\right) & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n}-\frac{y}{\beta}\right)+\Theta\left(t_{n}-\frac{y+1}{\beta}\right)\Theta\left(\beta-1-y\right)\right)\\
  & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1-y\right)\right)
 \end{align*}
 
@@ -6232,6 +6232,14 @@ since
 
  for all constants 
 \begin_inset Formula $a$
+\end_inset
+
+, and since 
+\begin_inset Formula $t_{n}\le1$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
 \end_inset
 
 .
@@ -6331,7 +6339,14 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsection
-The rotated Gelfond-Parry function
+Rotated Gelfond-Parry function
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Rotated-Parry-function"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6382,30 +6397,23 @@ with
 \end_inset
 
 .
- This, one could say, is an 
-\begin_inset Quotes eld
+ If there are values of 
+\begin_inset Formula $\beta$
 \end_inset
 
-almost eigenfunction
-\begin_inset Quotes erd
+ and/or 
+\begin_inset Formula $z$
 \end_inset
 
- of 
+ at which 
+\begin_inset Formula $C\left(\beta;z\right)=0$
+\end_inset
+
+, then this becomes the eigenequation for 
 \begin_inset Formula $\mathcal{M}$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsection
-Rotated Gelfond-Parry function
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Rotated-Renyi-Parry-function"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
