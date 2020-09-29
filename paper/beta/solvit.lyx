@@ -2417,6 +2417,13 @@ height "1pt"
 
 \begin_layout Subsection
 Dynamical Systems
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Dynamical-Systems"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5115,6 +5122,22 @@ benius-Perron operator.
  The invariant measure is an eigenstate of this operator; indeed, it provides
  a formal definition for what it means to be invariant under the action
  of the map.
+ The general theory for this was reviewed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Dynamical-Systems"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ We recap the defintion of the transfer operator in it's more limited sense,
+ as a linear operator acting in a point-wise fashion, on the space of functions
+ on the unit interval of the real number line.
+ In the general setting, it is a pushforward.
+ In the more limited setting, this pushforward nature of the map is a bit
+ obscured.
 \end_layout
 
 \begin_layout Standard
@@ -5159,11 +5182,24 @@ The
 \begin_inset Formula $\beta$
 \end_inset
 
--transform Transfer Operator
+-shift Transfer Operators
 \end_layout
 
 \begin_layout Standard
-The transfer operator for the beta shift map 
+The transfer operator for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift and the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform are only superficially different.
+ We'll give both of them here, as it is sometimes useful to reference one
+ or the other, depending on the situation.
+ Superficially, they seem to have a different form, but are in the end just
+ scaled versions of one-another.
+ The transfer operator the beta-shift map 
 \begin_inset Formula $T_{\beta}(x)$
 \end_inset
 
@@ -5191,7 +5227,23 @@ where
 \end_inset
 
  is the Heaviside step function.
- The density distributions graphed in figure 
+ The transfer operator for the beta-transform map 
+\begin_inset Formula $t_{\beta}(x)$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\left[\mathcal{M}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{\beta}\right)\Theta\left(\beta-1-y\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The density distributions graphed in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Density-Distribution"
@@ -5218,10 +5270,41 @@ That is, the
 
 \end_inset
 
-This is generally referred to as the Ruelle-Frobenius-Perron (RFP) eigenfunction
-, as it corresponds to the largest eigenvalue of the transfer operator,
- and specifically, the eigenvalue 1.
- 
+Likewise, the Gelfond-Parry measure of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ satisfies
+\begin_inset Formula 
+\[
+\left[\mathcal{M}_{\beta}\nu_{\beta}\right]\left(y\right)=\nu_{\beta}\left(y\right)
+\]
+
+\end_inset
+
+Recall that 
+\begin_inset Formula $\rho\left(y\right)=\frac{2}{\beta}\nu_{\beta}\left(\frac{2y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)$
+\end_inset
+
+; the two invariant measures are just scaled copies of one-another.
+ Both are normalized so that 
+\begin_inset Formula $\int_{0}^{1}\rho\left(y\right)dy=\int_{0}^{1}\nu_{\beta}\left(y\right)dy=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Both of these invariant measures are the Ruelle-Frobenius-Perron (RFP) eigenfunc
+tions of the corresponding operators, as they correspond to the largest
+ eigenvalues of the transfer operators, in each case being the eigenvalue
+ one.
 \end_layout
 
 \begin_layout Standard
@@ -5409,8 +5492,17 @@ reference "fig:Undershift-Density-Distribution"
 
  approaches 1.
  The resulting density may be called the Ruelle-Frobenius-Perron eigenstate;
- because it can be quickly computed, it provides an alternative view of
- figure 
+ because it can be quickly compuEven ignoring this, there's another 
+\begin_inset Quotes eld
+\end_inset
+
+little
+\begin_inset Quotes erd
+\end_inset
+
+ problem: all of the diagonal entries are larger than one.
+ Such solutions would describe not the decaying eigenfunctions, but the
+ exploding ones.ted, it provides an alternative view of figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Density-Distribution"
@@ -5431,7 +5523,7 @@ Computed in three places: rexfer.c reigen.c and complex.c
 \end_layout
 
 \begin_layout Subsection
-Real-analytic solutions
+(No) Real-analytic solutions
 \end_layout
 
 \begin_layout Standard
@@ -5446,7 +5538,8 @@ f\left(y\right)=\sum_{n=0}^{\infty}a_{n}y^{n}
 
 \end_inset
 
-Plugging this into the above gives 
+Ignoring, for a moment, the step function, and plugging this into the above
+ gives 
 \begin_inset Formula 
 \[
 \frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]=\sum_{m=0}^{\infty}\frac{y^{m}}{\beta^{m+1}}\left[a_{m}+\sum_{j=0}^{\infty}\left({m+j\atop m}\right)2^{-j}a_{m+j}\right]
@@ -5479,15 +5572,8 @@ for
 \end_inset
 
  otherwise.
- Although this is upper-triangular, and thus solvable, we omitted one 
-\begin_inset Quotes eld
-\end_inset
-
-minor
-\begin_inset Quotes erd
-\end_inset
-
- little detail: the eigenfunction has to vanish for 
+ Although this is upper-triangular, and thus solvable, the omission of the
+ step function was critical: the eigenfunction has to vanish for 
 \begin_inset Formula $y>\beta/2$
 \end_inset
 
@@ -5507,24 +5593,17 @@ prevents the term-by-term comparison from passing through.
 \begin_layout Standard
 Perhaps working with the beta-shift here is a bad idea.
  Let's try again with the beta-transform.
- The transfer operator avoids the annoying step function.
- It is
+ Without ignoring the step function, and plugging through as before gives:
 \begin_inset Formula 
 \[
-\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\right]
+\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{\beta}\right)\Theta\left(\beta-1-y\right)\right]=\sum_{m=0}^{\infty}\frac{y^{m}}{\beta^{m+1}}\left[a_{m}+\sum_{j=0}^{\infty}\left({m+j\atop m}\right)\beta^{-j}a_{m+j}\Theta\left(\beta-1-y\right)\right]
 \]
 
 \end_inset
 
-Then plugging in one gets as before:
-\begin_inset Formula 
-\[
-\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{\beta}\right)\right]=\sum_{m=0}^{\infty}\frac{y^{m}}{\beta^{m+1}}\left[a_{m}+\sum_{j=0}^{\infty}\left({m+j\atop m}\right)\beta^{-j}a_{m+j}\right]
-\]
-
-\end_inset
-
-Again, as before, this gives the eigenequation 
+The step function prevents term-by-term comparison.
+ If it is conveniently ignored or forgotten, then a pseudo-solution is easy:
+ the trm-by-term solution gives the eigenequation 
 \begin_inset Formula $\lambda a_{m}=\sum_{k}M_{mk}a_{k}$
 \end_inset
 
@@ -5549,6 +5628,15 @@ for
 \end_inset
 
  otherwise.
+ This matrix is solvable.
+ Its solutions are effectively the Bernoulli polymonials.
+ By ignoring the step function, all that has happened is that we've re-discovere
+d the real-analytic solutions to the Bernoulli process; indeed, the term-by-term
+ comparison does work for the special cse of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, when the step feunction really does disappear.
 \end_layout
 
 \begin_layout Subsection
