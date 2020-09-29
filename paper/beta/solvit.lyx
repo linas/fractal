@@ -2871,7 +2871,7 @@ pushforward
 \begin_inset Formula $\mathcal{L}_{T}:\mathcal{F\to\mathcal{F}}$
 \end_inset
 
-by setting 
+ by setting 
 \begin_inset Formula $\mathcal{L}_{T}:f\mapsto f\circ T^{-1}$
 \end_inset
 
@@ -7001,7 +7001,7 @@ noprefix "false"
 \begin_inset Formula 
 \begin{align*}
 C\left(\beta;z\right)= & \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(y\right)-\frac{v_{\beta;z}\left(y\right)}{z}\\
-= & \sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\left[\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-\frac{1}{z}d_{n}\left(y\right)\right]
+= & \sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\left[\frac{1}{\beta}\left[d_{n}\left(\frac{y}{\beta}\right)+d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)-\frac{1}{z}d_{n}\left(y\right)\right]
 \end{align*}
 
 \end_inset
@@ -7018,7 +7018,7 @@ Replacing
 \begin_inset Formula 
 \begin{align*}
 D\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
-= & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]
+= & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta\left[d_{n}\left(\frac{y}{\beta}\right)+d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)-d_{n}\left(y\right)\right]
 \end{align*}
 
 \end_inset
@@ -7076,7 +7076,38 @@ Staring at the right-hand side of the sum above, it is hardly obvious that
 \end_inset
 
 .
- That it is seems somehow terribly important.
+ In a certain sense, this is not 
+\begin_inset Quotes eld
+\end_inset
+
+one equation
+\begin_inset Quotes erd
+\end_inset
+
+, this holds for a continuum of 
+\begin_inset Formula $y$
+\end_inset
+
+, for all 
+\begin_inset Formula $0\le y\le1$
+\end_inset
+
+.
+ It is an analytic equation tying together the entire subshift.
+ For each distinct 
+\begin_inset Formula $y$
+\end_inset
+
+, it singles out three completely different bit-sequences out of the subshift,
+ and ties them together.
+ It is a form of mixing.
+ Alternately, a form of interaction: the bit-sequences are not independent
+ of one-another; they interact.
+ This section attempts to make these notions more precise.
+\end_layout
+
+\begin_layout Standard
+That it is seems somehow terribly important.
  It is tempting to give this some silly name, such as the 
 \begin_inset Quotes eld
 \end_inset
@@ -7086,6 +7117,206 @@ fundamental theorem of analytic ergodics
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Let's be exceptionally clear about the meaning: equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ defined a map, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift.
+ Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ defined a bit-sequence, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion of a real number 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+, where equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is the defintion of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion.
+ The set of all such bit-sequences defines the shift.
+ To emphasize the point, its best to compare side-by-side.
+ Copying equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we had 
+\begin_inset Formula 
+\[
+k_{n}\left(x\right)=\begin{cases}
+0 & \mbox{ if }0\le T_{\beta}^{n}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}(x)\le1
+\end{cases}
+\]
+
+\end_inset
+
+ while
+\begin_inset Formula 
+\[
+d_{n}\left(x\right)=\begin{cases}
+1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+The iterations are running in opposite directions; this is as appropriate,
+ since the the transfer operator was a push-forward.
+\end_layout
+
+\begin_layout Standard
+It is useful here to return to the language of cylinder sets, as opposed
+ to point dynamics.
+ Recall that the Borel algebra 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ was defined as the sigma algebra, the collection of all cylinder sets in
+ theproduct topology of 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+.
+ A shift is a map 
+\begin_inset Formula $T:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+ that lops off the leading symbol of a given cylinder set.
+ The inverted map 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is a pushforward, in that it defines the transfer operator, a linear operator
+ 
+\begin_inset Formula $\mathcal{L}_{T}:\mathcal{F\to\mathcal{F}}$
+\end_inset
+
+ on the space 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ of all functions 
+\begin_inset Formula $f:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+; explicitly, it is given by 
+\begin_inset Formula $\mathcal{L}_{T}:f\mapsto f\circ T^{-1}$
+\end_inset
+
+.
+ Insofar as the 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ arose in the exploration of the transfer operator, it is not surprising
+ that the shift is acting 
+\begin_inset Quotes eld
+\end_inset
+
+backwards
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The problem with point dynamics is that one cannot meaningfully write 
+\begin_inset Formula $T^{-n}\left(x\right)$
+\end_inset
+
+ for a real number, a point 
+\begin_inset Formula $x$
+\end_inset
+
+, at least, not without sever contortions that lead back to the Borel algebra.
+ Not for lack of trying; the 
+\begin_inset Formula $T^{-n}\left(x\right)$
+\end_inset
+
+ is called the 
+\begin_inset Quotes eld
+\end_inset
+
+Julia set
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+: it is the preimage, the set of all points that, when iterated, converge
+ onto 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Using the language of Julia sets, the point dynamics is then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d_{n}\left(x\right)=\begin{cases}
+1 & \mbox{if }T^{-n}\left(x\right)\cap\left[0,\frac{\beta}{2}\right]\ne\varnothing\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+which doesn't seem particularly exiciting.
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Subsection
