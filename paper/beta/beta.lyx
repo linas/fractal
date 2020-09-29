@@ -5074,16 +5074,7 @@ name "subsec:Rotated-Renyi-Parry-function"
 \end_layout
 
 \begin_layout Standard
-A different class of almost-solutions starts with the Renyi-Parry invariant
- measure defined in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:invariant measure"
-
-\end_inset
-
-.
- Using this, one may define a 
+The steps performed above can be repeated verbatim for the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5091,7 +5082,78 @@ rotated
 \begin_inset Quotes erd
 \end_inset
 
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+complexified
+\begin_inset Quotes erd
+\end_inset
+
  function
+\begin_inset Formula 
+\[
+\nu_{\beta;z}\left(y\right)=\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+for some complex-valued 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ No changes are required, and the result can be read off directly:
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{M}\nu_{\beta;z}\right]\left(y\right) & =\frac{\nu_{\beta;z}\left(y\right)}{z}-\frac{1}{z}+\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n+1}}\\
+ & =\frac{\nu_{\beta;z}\left(y\right)}{z}+C\left(\beta;z\right)
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $C\left(\beta;z\right)$
+\end_inset
+
+ being a constant independent of 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ If there are values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and/or 
+\begin_inset Formula $z$
+\end_inset
+
+ at which 
+\begin_inset Formula $C\left(\beta;z\right)=0$
+\end_inset
+
+, then this becomes the eigenequation for 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The eigenfunction for 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is the same, up to rescaling of 
+\begin_inset Formula $y\mapsto\beta x/2$
+\end_inset
+
+.
+ Recycling notation slightly, write
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 v_{\beta;z}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n}}z^{n}\label{eq:coherent-first-order}
@@ -5099,16 +5161,16 @@ v_{\beta;z}\left(x\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(x\right)}{\beta^{n
 
 \end_inset
 
-where 
-\begin_inset Formula $d_{n}\left(x\right)=\varepsilon_{n}\left(2x/\beta\right)$
+where the 
+\begin_inset Formula $d_{n}\left(x\right)$
 \end_inset
 
- are the same digits as defined by Renyi and Parry, just rescaled for the
- beta shift convention being used here.
+ are exactly the same digits as defined by Parry, just rescaled for the
+ beta-shift.
  That is, 
 \begin_inset Formula 
 \[
-d_{n}\left(x\right)=\begin{cases}
+d_{n}\left(x\right)=\varepsilon_{n}\left(\frac{2x}{\beta}\right)=\Theta\left(\frac{\beta}{2}t_{n}-x\right)=\Theta\left(T^{n}\left(\frac{\beta}{2}\right)-x\right)=\begin{cases}
 1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
 0 & \mbox{otherwise}
 \end{cases}
@@ -5116,20 +5178,53 @@ d_{n}\left(x\right)=\begin{cases}
 
 \end_inset
 
-and 
+where 
 \begin_inset Formula $T$
 \end_inset
 
- the beta shift map of eqn 
+ the beta-shift map of eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:downshift"
 
 \end_inset
 
-.
- The summation is clearly convergent (and holomorphic) for complex numbers
- 
+ and eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xform-shift equivalence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is used.
+ The iterated end-point becomes the iterated midpoint:
+\begin_inset Formula 
+\[
+t^{n}\left(1\right)=\frac{2}{\beta}T^{n}\left(\frac{\beta}{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Holding both 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ fixed, the summation is clearly convergent (and holomorphic in 
+\begin_inset Formula $z$
+\end_inset
+
+) for complex numbers 
 \begin_inset Formula $z$
 \end_inset
 
@@ -5138,10 +5233,10 @@ reference "eq:downshift"
 \end_inset
 
 .
+ The eigenequation has the same form:
 \end_layout
 
 \begin_layout Standard
-Exploring this numerically, one finds that 
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(x\right)=\frac{1}{z}v_{\beta;z}\left(x\right)+C\left(\beta;z\right)
@@ -5157,127 +5252,43 @@ where
 \begin_inset Formula $x$
 \end_inset
 
- (or rather, a constant for 
-\begin_inset Formula $x<\beta/2$
-\end_inset
-
- and zero otherwise).
- The fact that 
+.
+ Numeric verification reveals we were a bit glib: 
 \begin_inset Formula $C\left(\beta;z\right)$
 \end_inset
 
- is a constant independent of 
-\begin_inset Formula $x$
+ is a constant for 
+\begin_inset Formula $x<\beta/2$
 \end_inset
 
- can be taken either as a humdrum fact, typical of the territory, or as
- a big unexplained surprise! I prefer the later.
- The sequence of digits 
-\begin_inset Formula $d_{n}\left(x\right)$
-\end_inset
-
- depend strongly on 
-\begin_inset Formula $x$
-\end_inset
-
-.
- The function 
-\begin_inset Formula $v_{\beta;z}\left(x\right)$
-\end_inset
-
- depends strongly on 
-\begin_inset Formula $x$
-\end_inset
-
-.
- The digits 
-\begin_inset Formula $d_{n}\left(x\right)$
-\end_inset
-
- are entangled in an analytic series, in very highly non-trivial form.
- This is worth pursuing to great extent.
+ and is zero otherwise!
 \end_layout
 
 \begin_layout Standard
-First, some baby-steps.
- Combining the above expressions, one can write
-\begin_inset Formula 
-\begin{align*}
-C\left(\beta;z\right)= & \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(y\right)-\frac{v_{\beta;z}\left(y\right)}{z}\\
-= & \sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\left[\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-\frac{1}{z}d_{n}\left(y\right)\right]
-\end{align*}
-
-\end_inset
-
-Again: this is a constant, independent of 
-\begin_inset Formula $y$
-\end_inset
-
- for 
-\begin_inset Formula $0\le y<\beta/2$
-\end_inset
-
-, and zero for 
-\begin_inset Formula $y\ge\beta/2$
-\end_inset
-
-.
- This only holds for the sum; individual terms are not independent of 
-\begin_inset Formula $y$
-\end_inset
-
-.
- The interesting limit is where 
+The interesting limit is where 
 \begin_inset Formula $\left|z\right|\to\beta$
 \end_inset
 
- and so its convenient to define
-\begin_inset Formula 
-\begin{align*}
-D\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
-= & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]
-\end{align*}
-
+ and so its convenient to re-express 
+\begin_inset Formula $C$
 \end_inset
 
-This is holomorphic on the unit disk 
-\begin_inset Formula $\left|\zeta\right|<1$
-\end_inset
-
-, as each individual 
-\begin_inset Formula $d_{n}$
-\end_inset
-
- is either zero or one; there won't be any poles inside the unit disk.
- Again, this is independent of 
-\begin_inset Formula $y$
+ in terms of 
+\begin_inset Formula $\zeta=z/\beta$
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-The equation is readily simplified.
- Set 
-\begin_inset Formula $y=0$
-\end_inset
-
-, to obtain 
-\begin_inset Formula $d_{n}\left(0\right)=1$
-\end_inset
-
-.
- Cancelling terms, one obtains
+ With some rearrangements, one obtains
 \begin_inset Formula 
 \begin{equation}
-D\left(\beta;\zeta\right)=-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)\label{eq:holomorphic-disk}
+D\left(\beta;\zeta\right)\equiv\zeta\beta C\left(\beta;\zeta\beta\right)=-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)\label{eq:holomorphic-disk}
 \end{equation}
 
 \end_inset
 
-This is straight-forward to examine numerically; the disk is readily plotted,
- and reveals what looks like a countable number of zeros in the disk 
+This is a straight-forward sum to examine numerically; the disk is readily
+ plotted, and reveals what looks like a countable number of zeros in the
+ disk 
 \begin_inset Formula $\left|\zeta\right|<1$
 \end_inset
 
