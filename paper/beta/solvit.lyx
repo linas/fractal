@@ -3938,6 +3938,10 @@ The two functions are adjoint; specifically, one has that
 \begin_inset Formula $\mbox{pdr}_{\beta}\left(\mbox{cpr}_{\beta}\left(y\right)\right)=y$
 \end_inset
 
+ for almost all 
+\begin_inset Formula $y$
+\end_inset
+
  but that 
 \begin_inset Formula $\mbox{cpr}_{\beta}\left(\mbox{pdr}_{\beta}\left(y\right)\right)\ne y$
 \end_inset
@@ -7322,73 +7326,66 @@ Julia set
 \end_inset
 
 .
- Using the language of Julia sets, the point dynamics is then
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-d_{n}\left(x\right)=\begin{cases}
-1 & \mbox{if }T^{-n}\left(x\right)\cap\left[0,\frac{\beta}{2}\right]\ne\varnothing\\
-0 & \mbox{otherwise}
-\end{cases}
-\]
-
-\end_inset
-
-which doesn't seem particularly exiciting.
- XXX THIS IS WRONG
 \end_layout
 
 \begin_layout Standard
 Can the analytic relation be restated in terms of cylinder sets? Yes, but
  with some labor.
- Let 
-\begin_inset Formula $\left[0,1/2\right]\mapsto h=0***\cdots$
+ The first step is to extend 
+\begin_inset Formula $d_{n}$
 \end_inset
 
- be the cylinder set that corresponds to the interval 
-\begin_inset Formula $\left[0,1/2\right]$
-\end_inset
-
- (in the conventional, equal-probability mapping).
- Then 
-\begin_inset Formula $\left[0,\beta/2\right]\mapsto T^{-1}\left(h\right)$
+ to a map 
+\begin_inset Formula $d_{n}:\mathcal{B}\to\left\{ 0,1\right\} $
 \end_inset
 
 .
- Define 
-\begin_inset Formula $d_{n}:\mathcal{B}\to\mathcal{B}$
+ Using the Bernoulli mapping 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- on the Borel algebra 
-\begin_inset Formula $\mathcal{B}$
+, the interval 
+\begin_inset Formula $\left[0,T^{n}\left(\beta/2\right)\right]$
 \end_inset
 
- as
+ maps to some cylinder; call it 
+\begin_inset Formula $\Delta_{n}$
+\end_inset
+
+.
+ Then, given some cylinder 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+, define
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-d_{n}\left(\sigma\right)=\begin{cases}
-1 & \mbox{if }T^{-n}\left(\sigma\right)\cap T\left(h\right)\ne\varnothing\\
+d_{n}\left(A\right)=\begin{cases}
+1 & \mbox{if }A\subseteq\Delta_{n}\\
 0 & \mbox{otherwise}
 \end{cases}
 \]
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Extend 
-\begin_inset Formula $d_{n}$
+This definition guarantees that 
+\begin_inset Formula $x\in A$
 \end_inset
 
- to the entire Borel algebra as 
-\begin_inset Formula $d_{n}:\mathcal{B}\to\mathcal{B}$
+ if and only if 
+\begin_inset Formula $d_{n}\left(x\right)=d_{n}\left(A\right)$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
