@@ -4488,11 +4488,24 @@ The
 \begin_inset Formula $\beta$
 \end_inset
 
--transform Transfer Operator
+-shift Transfer Operator
 \end_layout
 
 \begin_layout Standard
-The transfer operator for the beta shift map 
+The transfer operator for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift and the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform are only superficially different.
+ We'll give both of them here, as it is sometimes useful to reference one
+ or the other, depending on the situation.
+ Superficially, they seem to have a different form, but are in the end just
+ scaled versions of one-another.
+ The transfer operator the beta-shift map 
 \begin_inset Formula $T_{\beta}(x)$
 \end_inset
 
@@ -4520,7 +4533,23 @@ where
 \end_inset
 
  is the Heaviside step function.
- The density distributions graphed in figure 
+ The transfer operator for the beta-transform map 
+\begin_inset Formula $t_{\beta}(x)$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\left[\mathcal{M}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{\beta}\right)\Theta\left(\beta-1-y\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The density distributions graphed in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Density-Distribution"
@@ -4547,10 +4576,41 @@ That is, the
 
 \end_inset
 
-This is generally referred to as the Ruelle-Frobenius-Perron (RFP) eigenfunction
-, as it corresponds to the largest eigenvalue of the transfer operator,
- and specifically, the eigenvalue 1.
- 
+Likewise, the Gelfond-Parry measure of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ satisfies
+\begin_inset Formula 
+\[
+\left[\mathcal{M}_{\beta}\nu_{\beta}\right]\left(y\right)=\nu_{\beta}\left(y\right)
+\]
+
+\end_inset
+
+Recall that 
+\begin_inset Formula $\rho\left(y\right)=\frac{2}{\beta}\nu_{\beta}\left(\frac{2y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)$
+\end_inset
+
+; the two invariant measures are just scaled copies of one-another.
+ Both are normalized so that 
+\begin_inset Formula $\int_{0}^{1}\rho\left(y\right)dy=\int_{0}^{1}\nu_{\beta}\left(y\right)dy=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Both of these invariant measures are the Ruelle-Frobenius-Perron (RFP) eigenfunc
+tions of the corresponding operators, as they correspond to the largest
+ eigenvalues of the transfer operators, in each case being the eigenvalue
+ one.
 \end_layout
 
 \begin_layout Standard
