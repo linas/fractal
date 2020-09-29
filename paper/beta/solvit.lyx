@@ -5569,7 +5569,7 @@ reference "eq:invariant measure"
  This is done below, explicitly showing all steps in laborious detail.
  It's not at all difficult; just a bit hard on the eyes.
  As before, let 
-\begin_inset Formula $t_{\beta}\left(x\right)=t\left(x\right)=\beta x\mod1$
+\begin_inset Formula $t\left(x\right)\equiv t_{\beta}\left(x\right)=\beta x\mod1$
 \end_inset
 
  be the 
@@ -5597,7 +5597,7 @@ noprefix "false"
 
  be the Heaviside step function as always, and to keep notation breif, let
  
-\begin_inset Formula $t_{n}=t^{n}\left(1\right)$
+\begin_inset Formula $t_{n}\equiv t^{n}\left(1\right)$
 \end_inset
 
 .
@@ -5609,7 +5609,12 @@ noprefix "false"
 
 \end_inset
 
-The transfer operator 
+where it is more convenient to write 
+\begin_inset Formula $\varepsilon_{n}\left(y\right)=\Theta\left(t_{n}-y\right)$
+\end_inset
+
+.
+ The transfer operator 
 \begin_inset Formula $\mathcal{M}$
 \end_inset
 
@@ -5743,6 +5748,74 @@ noprefix "false"
 \end_inset
 
  as claimed.
+\end_layout
+
+\begin_layout Subsection
+The rotated Gelfond-Parry function
+\end_layout
+
+\begin_layout Standard
+The steps performed above can be repeated verbatim for the 
+\begin_inset Quotes eld
+\end_inset
+
+rotated
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+complexified
+\begin_inset Quotes erd
+\end_inset
+
+ function
+\begin_inset Formula 
+\[
+\nu_{\beta;z}\left(y\right)=\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+for some complex-valued 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ No changes are required, and the result can be read off directly:
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{M}\nu_{\beta;z}\right]\left(y\right) & =\frac{\nu_{\beta;z}\left(y\right)}{z}-\frac{1}{z}+\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n+1}}\\
+ & =\frac{\nu_{\beta;z}\left(y\right)}{z}+C\left(\beta;z\right)
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $C\left(\beta;z\right)$
+\end_inset
+
+ being a constant independent of 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ This, one could say, is an 
+\begin_inset Quotes eld
+\end_inset
+
+almost eigenfunction
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+ This is returned to in a later section.
 \end_layout
 
 \begin_layout Subsection
