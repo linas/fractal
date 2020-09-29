@@ -7032,7 +7032,35 @@ This is holomorphic on the unit disk
 \end_inset
 
  is either zero or one; there won't be any poles inside the unit disk.
- The bottom equation holds without assuming that 
+ Note that 
+\begin_inset Formula $d_{n}\left(y\right)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y>\beta/2$
+\end_inset
+
+, and so one may pull out the step function to write 
+\begin_inset Formula 
+\[
+D\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]\Theta\left(\frac{\beta}{2}-y\right)
+\]
+
+\end_inset
+
+confirming the earlier numerical observation that 
+\begin_inset Formula $D\left(\beta;\zeta\right)$
+\end_inset
+
+ vanishes for all 
+\begin_inset Formula $y>\beta/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The bottom equation holds without assuming that 
 \begin_inset Formula $D\left(\beta;\zeta\right)$
 \end_inset
 
@@ -7195,7 +7223,7 @@ k_{n}\left(x\right)=\begin{cases}
 \begin_inset Formula 
 \[
 d_{n}\left(x\right)=\begin{cases}
-1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
+1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)=T^{n+1}\left(\frac{1}{2}\right)\\
 0 & \mbox{otherwise}
 \end{cases}
 \]
@@ -7309,6 +7337,58 @@ d_{n}\left(x\right)=\begin{cases}
 \end_inset
 
 which doesn't seem particularly exiciting.
+ XXX THIS IS WRONG
+\end_layout
+
+\begin_layout Standard
+Can the analytic relation be restated in terms of cylinder sets? Yes, but
+ with some labor.
+ Let 
+\begin_inset Formula $\left[0,1/2\right]\mapsto h=0***\cdots$
+\end_inset
+
+ be the cylinder set that corresponds to the interval 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+ (in the conventional, equal-probability mapping).
+ Then 
+\begin_inset Formula $\left[0,\beta/2\right]\mapsto T^{-1}\left(h\right)$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $d_{n}:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+ on the Borel algebra 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+d_{n}\left(\sigma\right)=\begin{cases}
+1 & \mbox{if }T^{-n}\left(\sigma\right)\cap T\left(h\right)\ne\varnothing\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Extend 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ to the entire Borel algebra as 
+\begin_inset Formula $d_{n}:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
