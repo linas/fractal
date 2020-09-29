@@ -2029,9 +2029,9 @@ reference "eq:downshift"
 
 :
 \begin_inset Formula 
-\[
-T_{\beta}^{n}\left(x\right)=\frac{\beta}{2}t_{\beta}^{n}\left(\frac{2x}{\beta}\right)
-\]
+\begin{equation}
+T_{\beta}^{n}\left(x\right)=\frac{\beta}{2}t_{\beta}^{n}\left(\frac{2x}{\beta}\right)\label{eq:xform-shift equivalence}
+\end{equation}
 
 \end_inset
 
@@ -5548,6 +5548,201 @@ literal "false"
  and Parry's work, stemming from his PhD thesis, is not available online.
  Therefore, it is of some interest to provide a proof suitable for the current
  text.
+\end_layout
+
+\begin_layout Standard
+The easiest route seems to be direct verification that eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+ is correct, as opposed to a derivation of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+
+\end_inset
+
+ from first principles.
+ This is done below, explicitly showing all steps in laborious detail.
+ It's not at all difficult; just a bit hard on the eyes.
+ As before, let 
+\begin_inset Formula $t_{\beta}\left(x\right)=t\left(x\right)=\beta x\mod1$
+\end_inset
+
+ be the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta transform"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and 
+\begin_inset Formula $t^{n}\left(x\right)$
+\end_inset
+
+ the iterated transformation.
+ Let 
+\begin_inset Formula $\Theta(x)$
+\end_inset
+
+ be the Heaviside step function as always, and to keep notation breif, let
+ 
+\begin_inset Formula $t_{n}=t^{n}\left(1\right)$
+\end_inset
+
+.
+ The Gelfond-Parry measure is then 
+\begin_inset Formula 
+\[
+\nu\left(y\right)=\sum_{n=0}^{\infty}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+The transfer operator 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ for the beta-transformation is slightly more convenient to work with than
+ 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ for this particular case.
+ It is given by 
+\begin_inset Formula 
+\[
+\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\right]
+\]
+
+\end_inset
+
+and we wish to verify that 
+\begin_inset Formula $\mathcal{M}\nu=\nu$
+\end_inset
+
+.
+ Plugging in directly,
+\begin_inset Formula 
+\begin{align*}
+P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right) & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n}-\frac{y}{\beta}\right)+\Theta\left(t_{n}-\frac{y+1}{\beta}\right)\right)\\
+ & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1-y\right)\right)
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $\Theta\left(ax\right)=\Theta\left(x\right)$
+\end_inset
+
+ for all constants 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ These terms simplify, depending on whether 
+\begin_inset Formula $t_{n}$
+\end_inset
+
+ is small or large.
+ Explicitly, one has 
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
+\Theta\left(\beta t_{n}-y\right)=1 & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+P=\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(\beta t_{n}-1-y\right)\right)\right)
+\]
+
+\end_inset
+
+These can be collapsed by noting that 
+\begin_inset Formula 
+\begin{align*}
+\beta t_{n}=t_{n+1} & \mbox{ if }\beta t_{n}-1<0\\
+\beta t_{n}-1=t_{n+1} & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+P & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(t_{n+1}-y\right)\right)\right)\\
+ & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)\left[\Theta\left(1-\beta t_{n}\right)+\Theta\left(\beta t_{n}-1\right)\right]+\Theta\left(\beta t_{n}-1\right)\right)\\
+ & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\right)\\
+ & =\beta\nu\left(y\right)-\beta+\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n}}
+\end{align*}
+
+\end_inset
+
+The sum on the right is just the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion for 1.
+ That is, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion of 
+\begin_inset Formula $x$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+x=\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t^{n}\left(x\right)-1\right)}{\beta^{n+1}}
+\]
+
+\end_inset
+
+This is just eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ written in a different way (making use of the equivalence 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xform-shift equivalence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Thus 
+\begin_inset Formula $P=\beta\nu\left(y\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $\mathcal{M}\nu=\nu$
+\end_inset
+
+ as claimed.
 \end_layout
 
 \begin_layout Subsection
