@@ -6476,6 +6476,15 @@ noprefix "false"
 \end_inset
 
  is used.
+ The iterated end-point becomes the iterated midpoint:
+\begin_inset Formula 
+\[
+t^{n}\left(1\right)=\frac{2}{\beta}T^{n}\left(\frac{\beta}{2}\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6528,89 +6537,34 @@ where
 \begin_inset Formula $x<\beta/2$
 \end_inset
 
- and is zero otherwise! 
+ and is zero otherwise!
 \end_layout
 
 \begin_layout Standard
-First, some baby-steps.
- Combining the above expressions, one can write
-\begin_inset Formula 
-\begin{align*}
-C\left(\beta;z\right)= & \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(y\right)-\frac{v_{\beta;z}\left(y\right)}{z}\\
-= & \sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\left[\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-\frac{1}{z}d_{n}\left(y\right)\right]
-\end{align*}
-
-\end_inset
-
-Again: this is a constant, independent of 
-\begin_inset Formula $y$
-\end_inset
-
- for 
-\begin_inset Formula $0\le y<\beta/2$
-\end_inset
-
-, and zero for 
-\begin_inset Formula $y\ge\beta/2$
-\end_inset
-
-.
- This only holds for the sum; individual terms are not independent of 
-\begin_inset Formula $y$
-\end_inset
-
-.
- The interesting limit is where 
+The interesting limit is where 
 \begin_inset Formula $\left|z\right|\to\beta$
 \end_inset
 
- and so its convenient to define
-\begin_inset Formula 
-\begin{align*}
-D\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
-= & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]
-\end{align*}
-
+ and so its convenient to re-express 
+\begin_inset Formula $C$
 \end_inset
 
-This is holomorphic on the unit disk 
-\begin_inset Formula $\left|\zeta\right|<1$
-\end_inset
-
-, as each individual 
-\begin_inset Formula $d_{n}$
-\end_inset
-
- is either zero or one; there won't be any poles inside the unit disk.
- Again, this is independent of 
-\begin_inset Formula $y$
+ in terms of 
+\begin_inset Formula $\zeta=z/\beta$
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-The equation is readily simplified.
- Set 
-\begin_inset Formula $y=0$
-\end_inset
-
-, to obtain 
-\begin_inset Formula $d_{n}\left(0\right)=1$
-\end_inset
-
-.
- Cancelling terms, one obtains
+ With some rearrangements, one obtains
 \begin_inset Formula 
 \begin{equation}
-D\left(\beta;\zeta\right)=-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)\label{eq:holomorphic-disk}
+D\left(\beta;\zeta\right)\equiv\zeta\beta C\left(\beta;\zeta\beta\right)=-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)\label{eq:holomorphic-disk}
 \end{equation}
 
 \end_inset
 
-This is straight-forward to examine numerically; the disk is readily plotted,
- and reveals what looks like a countable number of zeros in the disk 
+This is a straight-forward sum to examine numerically; the disk is readily
+ plotted, and reveals what looks like a countable number of zeros in the
+ disk 
 \begin_inset Formula $\left|\zeta\right|<1$
 \end_inset
 
@@ -7017,23 +6971,10 @@ reference "eq:holomorphic-disk"
 
 \end_inset
 
- will reappear in a later chapter, where it is found to describe periodic
+ will reappear later in this text, where it is found to describe periodic
  orbits of the beta shift.
  It will serve to tie together the transfer operator with the behavior of
  orbits.
-\end_layout
-
-\begin_layout Standard
-This section ends with a deep mystery: why is 
-\begin_inset Formula $C\left(\beta;z\right)$
-\end_inset
-
- independent of the 
-\begin_inset Formula $y$
-\end_inset
-
- coordinate? How should it be explained? How can it be put to good use?
- Might there be more of such identities? Or is there only this one? 
 \end_layout
 
 \begin_layout Subsection
