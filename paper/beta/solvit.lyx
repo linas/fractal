@@ -7340,10 +7340,15 @@ Can the analytic relation be restated in terms of cylinder sets? Yes, but
 \end_inset
 
  to a map 
-\begin_inset Formula $d_{n}:\mathcal{B}\to\left\{ 0,1\right\} $
+\begin_inset Formula $d_{n}:\mathcal{B}\to\left[0,1\right]$
 \end_inset
 
 .
+ Let 
+\begin_inset Formula $\mu:\mathcal{B}\to\left[0,1\right]$
+\end_inset
+
+ be the Bernoulli meaure.
  Using the Bernoulli mapping 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7373,29 +7378,25 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-d_{n}\left(A\right)=\begin{cases}
-1 & \mbox{if }A\subseteq\Delta_{n}\\
-0 & \mbox{otherwise}
-\end{cases}
+d_{n}\left(A\right)=\mu\left(A\cap\Delta_{n}\right)
 \]
 
 \end_inset
 
-This definition guarantees that 
-\begin_inset Formula $x\in A$
+The Parry measure is extended likewise: 
+\begin_inset Formula 
+\[
+\nu\left(A\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(A\right)}{\beta^{n}}
+\]
+
 \end_inset
 
- if and only if 
-\begin_inset Formula $d_{n}\left(x\right)=d_{n}\left(A\right)$
-\end_inset
-
-.
- Next, consider the map 
+This should be invariant under the action of 
 \begin_inset Formula $T^{-1}:\mathcal{B}\to\mathcal{B}$
 \end_inset
 
-.
- Then for every 
+, but one should check.
+ Recall that for every 
 \begin_inset Formula $A\in\mathcal{B}$
 \end_inset
 
@@ -7407,13 +7408,65 @@ This definition guarantees that
 \begin_inset Formula $x/\beta\in T^{-1}\left(A\right)$
 \end_inset
 
- and also 
+ and, whenever 
+\begin_inset Formula $x/\beta+1/2\le1$
+\end_inset
+
+ that also 
 \begin_inset Formula $x/\beta+1/2\in T^{-1}\left(A\right)$
 \end_inset
 
 .
- The pushdforward...
- invariant...
+ The converse holds as well, in that 
+\begin_inset Formula $T\circ T^{-1}$
+\end_inset
+
+ is the identity.
+ The Parry measure is invariant if 
+\begin_inset Formula $\nu\circ T^{-1}=\nu$
+\end_inset
+
+.
+ Let's check:
+\begin_inset Formula 
+\begin{align*}
+\nu\left(T^{-1}\left(A\right)\right)= & \sum_{n=0}^{\infty}\frac{\mu\left(\Delta_{n}\cap T^{-1}\left(A\right)\right)}{\beta^{n}}\\
+= & \sum_{n=0}^{\infty}\frac{\mu\left(\Delta_{n}\cap A\cap T^{-1}\left(A\right)\right)+\mu\left(\Delta_{n}\cap\overline{A}\cap T^{-1}\left(A\right)\right)}{\beta^{n}}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\overline{A}$
+\end_inset
+
+ is the set complement, and, of course, 
+\begin_inset Formula $\mu\left(A\right)+\mu\left(\overline{A}\right)=1$
+\end_inset
+
+.
+ The remainder of the proof proceeds as before.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $T^{-1}\left(A\right)\subseteq A$
+\end_inset
+
+ then clearly, we are done, as 
+\begin_inset Formula $\nu\left(T^{-1}\left(A\right)\right)=\nu\left(A\right)$
+\end_inset
+
+ in this case.
+ But his never happens.
+\end_layout
+
+\begin_layout Standard
+a
 \end_layout
 
 \begin_layout Standard
@@ -7421,7 +7474,12 @@ xxxx
 \end_layout
 
 \begin_layout Standard
-xxx
+if they came from two locations, then ony one is in D_n and its measure
+ is 1/beta
+\end_layout
+
+\begin_layout Standard
+if they came from one location then T-1 is in Dn and mu(T-1Dn)=mu(ADn)/beta
 \end_layout
 
 \begin_layout Standard
@@ -7429,72 +7487,12 @@ xxx
 \end_layout
 
 \begin_layout Standard
-Consider a set 
-\begin_inset Formula $A$
-\end_inset
-
- such that 
-\begin_inset Formula $d_{n}\left(A\right)=1$
-\end_inset
-
- then for all 
-\begin_inset Formula $x\in A$
-\end_inset
-
-, 
-\begin_inset Formula $d_{n}\left(x\right)=d_{n}\left(A\right)$
-\end_inset
-
-.
- But also 
-\begin_inset Formula $x/\beta\in T^{-1}\left(A\right)$
-\end_inset
-
- and so 
-\begin_inset Formula $d_{n}\left(x/\beta\right)=d_{n}\left(T^{-1}\left(A\right)\right)$
-\end_inset
-
-.
- And also 
-\begin_inset Formula $d_{n}\left(x/\beta+1/2\right)=d_{n}\left(T^{-1}\left(A\right)\right)$
-\end_inset
-
- and if not then not....
-\end_layout
-
-\begin_layout Standard
-is then
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-D\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[2\zeta d_{n}\left(T^{-1}\left(A\right)\right)-d_{n}\left(A\right)\right]
-\]
-
-\end_inset
-
-holds for all 
-\begin_inset Formula $A\in\mathcal{B}$
-\end_inset
-
- right or did I screw it up again?
+xxx
 \end_layout
 
 \begin_layout Standard
 pushforward.
- This is given by 
-\begin_inset Formula 
-\[
-d_{n}\left(T^{-1}\left(A\right)\right)=\begin{cases}
-1 & \mbox{if }T^{-1}\left(A\right)\subseteq\Delta_{n}\\
-0 & \mbox{otherwise}
-\end{cases}
-\]
-
-\end_inset
-
-which states that or let 
+ This is given by which states that or let 
 \begin_inset Formula $y=\beta w$
 \end_inset
 
