@@ -2572,7 +2572,8 @@ Denote the Borel algebra by
 \begin_inset Formula $T:\mathcal{B}\to\mathcal{B}$
 \end_inset
 
- that lops off the leading symbol of a given cylinder set.
+ that lops off the leading symbol of a given cylinder set (XXX fixme lop-off
+ only for full shift!).
  This is provides the strong theoretical advantages over working with 
 \begin_inset Quotes eld
 \end_inset
@@ -6289,7 +6290,7 @@ P & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right
 
 \end_inset
 
-The sum on the right is just the 
+The last sum on the right is just the 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -7417,12 +7418,27 @@ This should be invariant under the action of
 \end_inset
 
 .
- The converse holds as well, in that 
-\begin_inset Formula $T\circ T^{-1}$
+ Thus, 
+\begin_inset Formula $T^{-1}\left(A\right)$
 \end_inset
 
- is the identity.
- The Parry measure is invariant if 
+ naturally splits into two parts: the cylinder that maps to 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+, call it 
+\begin_inset Formula $D=\Delta_{-1}$
+\end_inset
+
+ and the complement 
+\begin_inset Formula $\overline{D}=\overline{\Delta}_{-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Parry measure is invariant if 
 \begin_inset Formula $\nu\circ T^{-1}=\nu$
 \end_inset
 
@@ -7431,21 +7447,43 @@ This should be invariant under the action of
 \begin_inset Formula 
 \begin{align*}
 \nu\left(T^{-1}\left(A\right)\right)= & \sum_{n=0}^{\infty}\frac{\mu\left(\Delta_{n}\cap T^{-1}\left(A\right)\right)}{\beta^{n}}\\
-= & \sum_{n=0}^{\infty}\frac{\mu\left(\Delta_{n}\cap A\cap T^{-1}\left(A\right)\right)+\mu\left(\Delta_{n}\cap\overline{A}\cap T^{-1}\left(A\right)\right)}{\beta^{n}}
+= & \sum_{n=0}^{\infty}\frac{\mu\left(\Delta_{n}\cap D\cap T^{-1}\left(A\right)\right)+\mu\left(\Delta_{n}\cap\overline{D}\cap T^{-1}\left(A\right)\right)}{\beta^{n}}
 \end{align*}
 
 \end_inset
 
-where 
-\begin_inset Formula $\overline{A}$
+The remainder of the proof proceeds as before.
+ Two distinct cases emerge.
+ When 
+\begin_inset Formula $T^{n}\left(\beta/2\right)<1/2$
 \end_inset
 
- is the set complement, and, of course, 
-\begin_inset Formula $\mu\left(A\right)+\mu\left(\overline{A}\right)=1$
+ then one has that 
+\begin_inset Formula $\Delta_{n}\cap\overline{D}=\varnothing$
+\end_inset
+
+; and when 
+\begin_inset Formula $T^{n}\left(\beta/2\right)>1/2$
+\end_inset
+
+, then 
+\begin_inset Formula $D\subset\Delta_{n}$
+\end_inset
+
+ so that 
+\begin_inset Formula $D\cap\Delta_{n}=D$
 \end_inset
 
 .
- The remainder of the proof proceeds as before.
+ Thus
+\begin_inset Formula 
+\[
+\nu\left(T^{-1}\left(A\right)\right)=\sum_{n=0}^{\infty}\frac{\mu\left(D\cap T^{-1}\left(A\right)\right)\Theta\left(\right)+\mu\left(\Delta_{n}\cap\overline{D}\cap T^{-1}\left(A\right)\right)\Theta\left(\frac{1}{2}-T^{n}\left(\frac{\beta}{2}\right)\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7453,37 +7491,95 @@ xxx
 \end_layout
 
 \begin_layout Standard
-If 
-\begin_inset Formula $T^{-1}\left(A\right)\subseteq A$
+Similarly, for all 
+\begin_inset Formula $n$
 \end_inset
 
- then clearly, we are done, as 
-\begin_inset Formula $\nu\left(T^{-1}\left(A\right)\right)=\nu\left(A\right)$
+, one always has 
+\begin_inset Formula $\Delta_{n}\cap D\ne\varnothing$
 \end_inset
 
- in this case.
- But his never happens.
-\end_layout
-
-\begin_layout Standard
-a
-\end_layout
-
-\begin_layout Standard
-xxxx
-\end_layout
-
-\begin_layout Standard
-if they came from two locations, then ony one is in D_n and its measure
- is 1/beta
-\end_layout
-
-\begin_layout Standard
-if they came from one location then T-1 is in Dn and mu(T-1Dn)=mu(ADn)/beta
+.
 \end_layout
 
 \begin_layout Standard
 xxx
+\end_layout
+
+\begin_layout Standard
+xxx is this tue statements needed?
+\end_layout
+
+\begin_layout Standard
+Note that for all 
+\begin_inset Formula $A$
+\end_inset
+
+ that 
+\begin_inset Formula $D\cap T^{-1}\left(A\right)\ne\varnothing$
+\end_inset
+
+ whereas, sometimes one has that 
+\begin_inset Formula $\overline{D}\cap T^{-1}\left(A\right)=\varnothing$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+if 
+\begin_inset Formula $T^{-1}\left(A\right)\subseteq\Delta_{n}$
+\end_inset
+
+ the (came from one location) and 
+\begin_inset Formula $\mu\left(\Delta_{n}\cap T^{-1}\left(A\right)\right)=\mu\left(\Delta_{n}\cap A\right)/\beta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+if (came from two locations) then 
+\begin_inset Formula $\mu\left(\Delta_{n}\cap D\cap T^{-1}\left(A\right)\right)=\mu\left(\Delta_{n}\cap A\right)/\beta$
+\end_inset
+
+ that is, if also 
+\begin_inset Formula $\Delta_{n}\cap\overline{D}\cap T^{-1}\left(A\right)=\varnothing$
+\end_inset
+
+ ...
+\end_layout
+
+\begin_layout Standard
+The bit-of-both case:
+\end_layout
+
+\begin_layout Standard
+Problem:
+\end_layout
+
+\begin_layout Standard
+this gives 
+\begin_inset Formula $\nu\circ T^{-1}=\nu/\beta$
+\end_inset
+
+ so we blew it with defintions because 
+\begin_inset Formula $\mu\left(T^{-1}\left(A\right)\right)=\mu\left(A\right)/\beta$
+\end_inset
+
+ uh no only when wandering...
+\end_layout
+
+\begin_layout Standard
+where does the constant go?
 \end_layout
 
 \begin_layout Standard
