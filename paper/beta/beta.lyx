@@ -10915,7 +10915,7 @@ The characteristic equation of
 \end_inset
 
  is 
-\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\begin_inset Formula $\det\left(B-\lambda I\right)=p_{n}\left(\lambda\right)=0$
 \end_inset
 
 ; the Frobenius-Perron eigenvalue 
@@ -10944,7 +10944,7 @@ The characteristic equation of
 
 .
  We may as well take the transpose as well, so that 
-\begin_inset Formula $\mathcal{B}_{\beta}=B^{T}/\beta$
+\begin_inset Formula $\mathcal{H}_{\beta}=B^{T}/\beta$
 \end_inset
 
  is in upper-Hessenberg form.
@@ -10963,14 +10963,14 @@ The characteristic equation of
 \end_inset
 
 , the operator
-\begin_inset Formula $\mathcal{B}_{\beta}$
+\begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
  has the matrix elements
 \begin_inset Formula 
 \begin{align*}
-\left\langle 0\left|\mathcal{B}_{\beta}\right|j\right\rangle  & =\frac{b_{j}}{\beta}\\
-\left\langle j+1\left|\mathcal{B}_{\beta}\right|j\right\rangle  & =\frac{1}{\beta}
+\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle  & =\frac{b_{j}}{\beta}\\
+\left\langle j+1\left|\mathcal{H}_{\beta}\right|j\right\rangle  & =\frac{1}{\beta}
 \end{align*}
 
 \end_inset
@@ -10981,54 +10981,15 @@ with all other entries being zero.
 \end_layout
 
 \begin_layout Standard
-Comparing to the upper-Hessenberg form of 
-\begin_inset Formula $\mathcal{L}_{\beta}$
+The invariant measure is then the Frobenius-Perron eigenvector 
+\begin_inset Formula $\sigma$
 \end_inset
 
- of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:hessen-matrix-elts"
-
+ solving 
+\begin_inset Formula $\mathcal{H}_{\beta}\sigma=\sigma$
 \end_inset
 
-, and the numerical results on it's eigenvalues, it seems clear that 
-\begin_inset Formula $\mathcal{B}_{\beta}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- must surely be similar.
- That is, there must be an operator 
-\begin_inset Formula $S$
-\end_inset
-
- such that 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\mathcal{L}_{\beta}=S^{-1}\mathcal{B}_{\beta}S
-\]
-
-\end_inset
-
-The invariant measure 
-\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho$
-\end_inset
-
- is mapped to 
-\begin_inset Formula $\sigma=S\rho$
-\end_inset
-
-, where 
-\begin_inset Formula $\mathcal{B}_{\beta}\sigma=\sigma$
-\end_inset
-
- is the FP-eigenvector.
+.
  It is easy to write down 
 \begin_inset Formula $\sigma$
 \end_inset
@@ -11043,7 +11004,7 @@ The invariant measure
 
 .
  This is obviously so: the subdiagonal entries of 
-\begin_inset Formula $\mathcal{B}_{\beta}$
+\begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
  act as a shift on 
@@ -11053,7 +11014,7 @@ The invariant measure
  and the top row is just
 \begin_inset Formula 
 \[
-1=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{B}_{\beta}\right|j\right\rangle \sigma_{j}=\sum_{j=0}^{\infty}b_{j}\beta^{-j-1}=1-q^{\left\{ b\right\} }\left(\frac{1}{\beta}\right)=1
+1=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle \sigma_{j}=\sum_{j=0}^{\infty}b_{j}\beta^{-j-1}=1-q^{\left\{ b\right\} }\left(\frac{1}{\beta}\right)=1
 \]
 
 \end_inset
@@ -11063,14 +11024,18 @@ The invariant measure
 
 \begin_layout Standard
 Although 
-\begin_inset Formula $\mathcal{B}_{\beta}$
+\begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
- is no more solvable than 
-\begin_inset Formula $\mathcal{L}_{\beta}$
+ is not triangular, (and thus not 
+\begin_inset Quotes eld
 \end_inset
 
- in the wavelet basis is, it is certainly much, much easier to work with.
+solvable
+\begin_inset Quotes erd
+\end_inset
+
+), it does have a dramatically simple form.
  It also re-affirms the ansatz 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -11078,13 +11043,13 @@ reference "eq:coherent-first-order"
 
 \end_inset
 
- for eigenfunctions.
+ for the eigenfunctions.
  To be explicit: if 
 \begin_inset Formula $v$
 \end_inset
 
  is a vector satisfying 
-\begin_inset Formula $\mathcal{B}_{\beta}v=\lambda v$
+\begin_inset Formula $\mathcal{H}_{\beta}v=\lambda v$
 \end_inset
 
 , with vector elements 
@@ -11099,7 +11064,7 @@ v\left(x\right)=\sum_{j=0}^{\infty}d_{j}\left(x\right)v_{j}
 
 \end_inset
 
- is an eigenfunction of the transfoer operator: that is, 
+ is an eigenfunction of the transfer operator: that is, 
 \begin_inset Formula $\left[\mathcal{L}_{\beta}v\right]\left(x\right)=\lambda v\left(x\right)$
 \end_inset
 
@@ -11144,7 +11109,7 @@ reference "eq:coherent-first-order"
 only
 \emph default
  solutions to 
-\begin_inset Formula $\mathcal{B}_{\beta}v=\lambda v$
+\begin_inset Formula $\mathcal{H}_{\beta}v=\lambda v$
 \end_inset
 
  are necessarily of the form 
@@ -11153,13 +11118,13 @@ only
 
 , because the subdiagonal forces this shift.
  To satisfy the the top row of 
-\begin_inset Formula $\mathcal{B}_{\beta}$
+\begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
 , one must have that 
 \begin_inset Formula 
 \[
-\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{B}_{\beta}\right|j\right\rangle v_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
+\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle v_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
 \]
 
 \end_inset
@@ -11177,30 +11142,46 @@ and so the eigenvalue
 \end_inset
 
 .
+ This effectively concludes a proof: the solutions to this series are the
+ only eigenvalues of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transfer operator; there are no others.
 \end_layout
 
 \begin_layout Standard
-This falls short of being a full proof; this line of argumentation only
- affirms the ansatz 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:coherent-first-order"
-
-\end_inset
-
-.
- To recap: periodic orbits have an associated shift matrix 
+To recap: periodic orbits have an associated shift matrix 
 \begin_inset Formula $B$
 \end_inset
 
 ; this extends naturally to a shift operator 
-\begin_inset Formula $\mathcal{B}_{\beta}$
+\begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
  for non-periodic orbits.
  The shift operator has a sufficiently simple form that it's eigenvectors
  can be explicitly written down in closed form; they are necessarily coherent
- states.
+ states
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The term 
+\begin_inset Quotes eld
+\end_inset
+
+coherent states
+\begin_inset Quotes erd
+\end_inset
+
+ comes from quantum optics: a state that can be written as an analytic series
+ over states/vecctors expressed in a different basis.
+\end_layout
+
+\end_inset
+
+.
  The top row of the shift operator defines a holomorphic function 
 \begin_inset Formula $q^{\left\{ b\right\} }$
 \end_inset
@@ -11243,20 +11224,35 @@ any
 \begin_inset Formula $\lambda$
 \end_inset
 
-); it is no enough to show that it holds for any 
+).
+ It was previously proven that the vanishing of 
+\begin_inset Formula $q^{\left\{ b\right\} }$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $x$
+\end_inset
+
+, 
+\emph on
+i.e.
+
+\emph default
+ that eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fundamental-shift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ holds for any 
 \begin_inset Formula $x$
 \end_inset
 
 .
- For the full proof, one needs the 
-\begin_inset Quotes eld
-\end_inset
-
-fundamental theorem of analytic ergodics
-\begin_inset Quotes erd
-\end_inset
-
-, which I don't have here.
 \end_layout
 
 \begin_layout Subsection
