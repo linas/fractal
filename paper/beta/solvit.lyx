@@ -7384,86 +7384,178 @@ d_{n}\left(A\right)=\mu\left(A\cap\Delta_{n}\right)
 
 \end_inset
 
-The Parry measure is extended likewise: 
+The rotated (pre-)measure is extended likewise: 
 \begin_inset Formula 
 \[
-\nu\left(A\right)=\sum_{n=0}^{\infty}\frac{d_{n}\left(A\right)}{\beta^{n}}
+\nu\left(A\right)=\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(A\right)
 \]
 
 \end_inset
 
-This should be invariant under the action of 
-\begin_inset Formula $T^{-1}:\mathcal{B}\to\mathcal{B}$
+with 
+\begin_inset Formula $\zeta=z/\beta$
 \end_inset
 
-, but one should check.
- Recall that for every 
-\begin_inset Formula $A\in\mathcal{B}$
-\end_inset
-
- and every 
-\begin_inset Formula $x\in A$
-\end_inset
-
-, one will find that 
-\begin_inset Formula $x/\beta\in T^{-1}\left(A\right)$
-\end_inset
-
- and, whenever 
-\begin_inset Formula $x/\beta+1/2\le1$
-\end_inset
-
- that also 
-\begin_inset Formula $x/\beta+1/2\in T^{-1}\left(A\right)$
+ as before, recoviering the Parry measure by setting 
+\begin_inset Formula $z=1$
 \end_inset
 
 .
- Thus, 
-\begin_inset Formula $T^{-1}\left(A\right)$
+ The Parry measure should be invariant under the action of 
+\begin_inset Formula $T^{-1}:\mathcal{B}\to\mathcal{B}$
 \end_inset
 
- naturally splits into two parts: the cylinder that maps to 
-\begin_inset Formula $\left[0,1/2\right]$
-\end_inset
+, and otherwise yeild eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-disk"
+plural "false"
+caps "false"
+noprefix "false"
 
-, call it 
-\begin_inset Formula $D=\Delta_{-1}$
-\end_inset
-
- and the complement 
-\begin_inset Formula $\overline{D}=\overline{\Delta}_{-1}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-The Parry measure is invariant if 
-\begin_inset Formula $\nu\circ T^{-1}=\nu$
+Let's check.
+ The proof will mirror the one of the previous section.
+ Here, it is convenient to use the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform 
+\begin_inset Formula $t$
+\end_inset
+
+ instead of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift 
+\begin_inset Formula $T$
 \end_inset
 
 .
- Let's check:
+ This is because 
+\begin_inset Formula $T$
+\end_inset
+
+ is dissipative: a portion of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ wanders away, and thus 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is not defined on all of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+; it is only defined on the subshift.
+ By contrast 
+\begin_inset Formula $t^{-1}$
+\end_inset
+
+ is defined on all of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+; this simplifies the proof.
+ Otherwise, the same notation is used, but rescaled, so that 
+\begin_inset Formula $\Delta_{n}$
+\end_inset
+
+ is the cylinder corresponding to the interval 
+\begin_inset Formula $\left[0,t^{n}\left(1\right)\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Recall that for every 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+ and every 
+\begin_inset Formula $y\in A$
+\end_inset
+
+, one will find that 
+\begin_inset Formula $y/\beta\in t^{-1}\left(A\right)$
+\end_inset
+
+ and, whenever 
+\begin_inset Formula $y\le\beta-1$
+\end_inset
+
+ that also 
+\begin_inset Formula $\left(y+1\right)/\beta\in t^{-1}\left(A\right)$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $t^{-1}\left(A\right)$
+\end_inset
+
+ naturally splits into two parts: the cylinder that maps to 
+\begin_inset Formula $\left[0,1/\beta\right]$
+\end_inset
+
+, call it 
+\begin_inset Formula $D$
+\end_inset
+
+ and the complement 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The pushfoward action is then 
 \begin_inset Formula 
 \begin{align*}
-\nu\left(T^{-1}\left(A\right)\right)= & \sum_{n=0}^{\infty}\frac{\mu\left(\Delta_{n}\cap T^{-1}\left(A\right)\right)}{\beta^{n}}\\
-= & \sum_{n=0}^{\infty}\frac{\mu\left(\Delta_{n}\cap D\cap T^{-1}\left(A\right)\right)+\mu\left(\Delta_{n}\cap\overline{D}\cap T^{-1}\left(A\right)\right)}{\beta^{n}}
+\nu\left(t^{-1}\left(A\right)\right)= & \sum_{n=0}^{\infty}\zeta^{n}\mu\left(\Delta_{n}\cap t^{-1}\left(A\right)\right)\\
+= & \sum_{n=0}^{\infty}\zeta^{n}\left[\mu\left(\Delta_{n}\cap D\cap t^{-1}\left(A\right)\right)+\mu\left(\Delta_{n}\cap\overline{D}\cap t^{-1}\left(A\right)\right)\right]
 \end{align*}
 
 \end_inset
 
-The remainder of the proof proceeds as before.
- Two distinct cases emerge.
+Two distinct cases emerge.
  When 
-\begin_inset Formula $T^{n}\left(\beta/2\right)<1/2$
+\begin_inset Formula $t^{n}\left(1\right)<1/\beta$
 \end_inset
 
  then one has that 
 \begin_inset Formula $\Delta_{n}\cap\overline{D}=\varnothing$
 \end_inset
 
-; and when 
-\begin_inset Formula $T^{n}\left(\beta/2\right)>1/2$
+.
+ Thus, the second term can be written as 
+\begin_inset Formula 
+\begin{align*}
+\mu\left(\Delta_{n}\cap\overline{D}\cap t^{-1}\left(A\right)\right) & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\mu\left(\Delta_{n}\cap\overline{D}\cap t^{-1}\left(A\right)\right)\\
+ & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\frac{1}{\beta}\mu\left(\Delta_{n+1}\cap A\right)
+\end{align*}
+
+\end_inset
+
+where the second line follows from the first by linearity, and that 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+ selected out one of the two branches of 
+\begin_inset Formula $t^{-1}\left(A\right)$
+\end_inset
+
+.
+ Meanwhile, when 
+\begin_inset Formula $t^{n}\left(1\right)>1/\beta$
 \end_inset
 
 , then 
@@ -7475,10 +7567,41 @@ The remainder of the proof proceeds as before.
 \end_inset
 
 .
- Thus
+ Thus, the first term splits into two: 
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(t_{n}-\frac{1}{\beta}\right)\mu\left(\Delta_{n}\cap D\cap t^{-1}\left(A\right)\right) & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\mu\left(D\cap t^{-1}\left(A\right)\right)\\
+ & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\frac{1}{\beta}\mu\left(A\right)
+\end{align*}
+
+\end_inset
+
+while
 \begin_inset Formula 
 \[
-\nu\left(T^{-1}\left(A\right)\right)=\sum_{n=0}^{\infty}\frac{\mu\left(D\cap T^{-1}\left(A\right)\right)\Theta\left(\right)+\mu\left(\Delta_{n}\cap\overline{D}\cap T^{-1}\left(A\right)\right)\Theta\left(\frac{1}{2}-T^{n}\left(\frac{\beta}{2}\right)\right)}{\beta^{n}}
+\Theta\left(\frac{1}{\beta}-t_{n}\right)\mu\left(\Delta_{n}\cap D\cap t^{-1}\left(A\right)\right)=\Theta\left(\frac{1}{\beta}-t_{n}\right)\frac{1}{\beta}\mu\left(\Delta_{n+1}\cap A\right)
+\]
+
+\end_inset
+
+Reassembling these pieces and making use of 
+\begin_inset Formula $\Delta_{0}\cap A=A$
+\end_inset
+
+ one gets
+\begin_inset Formula 
+\begin{align*}
+\nu\left(t^{-1}\left(A\right)\right) & =\sum_{n=0}^{\infty}\frac{\zeta^{n}}{\beta}\left[\mu\left(A\right)\Theta\left(t_{n}-\frac{1}{\beta}\right)+\mu\left(\Delta_{n+1}\cap A\right)\right]\\
+ & =\frac{1}{z}\nu\left(A\right)-\frac{\mu\left(A\right)}{\beta}+\mu\left(A\right)\sum_{n=0}^{\infty}\frac{\zeta^{n}}{\beta}\Theta\left(t_{n}-\frac{1}{\beta}\right)\\
+ & =\frac{1}{z}\nu\left(A\right)+\frac{\mu\left(A\right)}{\beta}C\left(\beta;z\right)
+\end{align*}
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+C\left(\beta;z\right)=-1+\sum_{n=0}^{\infty}\zeta^{n}\Theta\left(t_{n}-\frac{1}{\beta}\right)
 \]
 
 \end_inset
@@ -7487,128 +7610,7 @@ The remainder of the proof proceeds as before.
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-Similarly, for all 
-\begin_inset Formula $n$
-\end_inset
-
-, one always has 
-\begin_inset Formula $\Delta_{n}\cap D\ne\varnothing$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx is this tue statements needed?
-\end_layout
-
-\begin_layout Standard
-Note that for all 
-\begin_inset Formula $A$
-\end_inset
-
- that 
-\begin_inset Formula $D\cap T^{-1}\left(A\right)\ne\varnothing$
-\end_inset
-
- whereas, sometimes one has that 
-\begin_inset Formula $\overline{D}\cap T^{-1}\left(A\right)=\varnothing$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-if 
-\begin_inset Formula $T^{-1}\left(A\right)\subseteq\Delta_{n}$
-\end_inset
-
- the (came from one location) and 
-\begin_inset Formula $\mu\left(\Delta_{n}\cap T^{-1}\left(A\right)\right)=\mu\left(\Delta_{n}\cap A\right)/\beta$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-if (came from two locations) then 
-\begin_inset Formula $\mu\left(\Delta_{n}\cap D\cap T^{-1}\left(A\right)\right)=\mu\left(\Delta_{n}\cap A\right)/\beta$
-\end_inset
-
- that is, if also 
-\begin_inset Formula $\Delta_{n}\cap\overline{D}\cap T^{-1}\left(A\right)=\varnothing$
-\end_inset
-
- ...
-\end_layout
-
-\begin_layout Standard
-The bit-of-both case:
-\end_layout
-
-\begin_layout Standard
-Problem:
-\end_layout
-
-\begin_layout Standard
-this gives 
-\begin_inset Formula $\nu\circ T^{-1}=\nu/\beta$
-\end_inset
-
- so we blew it with defintions because 
-\begin_inset Formula $\mu\left(T^{-1}\left(A\right)\right)=\mu\left(A\right)/\beta$
-\end_inset
-
- uh no only when wandering...
-\end_layout
-
-\begin_layout Standard
-where does the constant go?
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-pushforward.
- This is given by which states that or let 
-\begin_inset Formula $y=\beta w$
-\end_inset
-
- for 
-\begin_inset Formula $w\in\left[0,1/2\right]$
-\end_inset
-
- so then 
-\begin_inset Formula $y=T\left(w\right)$
-\end_inset
-
- and
-\begin_inset Formula 
-\[
-D\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(w\right)+\zeta d_{n}\left(w+\frac{1}{2}\right)-d_{n}\left(T\left(w\right)\right)\right]\Theta\left(\frac{1}{2}-w\right)
-\]
-
-\end_inset
-
-
+xxxx
 \end_layout
 
 \begin_layout Standard
