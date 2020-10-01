@@ -11921,6 +11921,32 @@ circular word
  representative of the conjugacy class of the orbit.
 \end_layout
 
+\begin_layout Standard
+Apparently, the isomorphism problem for OEIS A001037 is a generic issue:
+ the number of irreducible polynomials over 
+\begin_inset Formula $\mathbb{F}_{p}$
+\end_inset
+
+, for 
+\begin_inset Formula $p$
+\end_inset
+
+ prime, is the same as the number of necklaces, and yet, there is no known
+ bijection between these irreducible polynomials and the Lyndon words!
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glen12"
+literal "true"
+
+\end_inset
+
+ Thus, a closer study of the polynomials 
+\begin_inset Formula $p_{n}\left(\beta\right)$
+\end_inset
+
+ seems to be called for.
+\end_layout
+
 \begin_layout Subsection
 \begin_inset Formula $\beta$
 \end_inset
@@ -11937,7 +11963,7 @@ trouble spots
 \begin_inset Quotes erd
 \end_inset
 
- whenever the 
+ occur whenever the 
 \begin_inset Formula $k$
 \end_inset
 
@@ -11964,16 +11990,12 @@ trouble spots
 \end_inset
 
 , and of the form 
-\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{1}\beta^{k-2}-b_{2}\beta^{k-3}-\cdots-1$
+\begin_inset Formula $p_{k}\left(\beta\right)$
 \end_inset
 
- for some binary digits 
-\begin_inset Formula $b_{i}$
-\end_inset
-
- being zero or one.
+.
  These must be arranged in the manner such that 
-\begin_inset Formula $\beta^{k}-\beta^{k-1}-b_{1}\beta^{k-2}-b_{2}\beta^{k-3}-\cdots-1=0$
+\begin_inset Formula $p_{k}\left(\beta\right)=0$
 \end_inset
 
  at each discontinuity, as illustrated in figure 
@@ -11994,34 +12016,6 @@ s
 \end_layout
 
 \begin_layout Standard
-Although the count of these polynomials is the same as that for the irreducible
- polynomials over 
-\begin_inset Formula $\mathbb{F}_{2}$
-\end_inset
-
-, the relationship is completely opaque (to me).
- Apparently, this is a generic issue: the number of irreducible polynomials
- over 
-\begin_inset Formula $\mathbb{F}_{p}$
-\end_inset
-
-, for 
-\begin_inset Formula $p$
-\end_inset
-
- prime, is the same as the number of necklaces, and yet, there is no known
- bijection between these irreducible polynomials and the Lyndon words!
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Glen12"
-literal "true"
-
-\end_inset
-
- Thus, a compilation seems to be called for.
-\end_layout
-
-\begin_layout Standard
 The table below explicitly shows the polynomials for the first few orders.
  A polynomial is included in the table if it is an iterate of a previous
  polynomial, and if it's real root is bracketed by the roots of the earlier
@@ -12030,24 +12024,22 @@ The table below explicitly shows the polynomials for the first few orders.
 \begin_inset Formula $\ensuremath{p_{n}\left(\beta\right)}$
 \end_inset
 
-must have the form 
-\begin_inset Formula $\ensuremath{\beta\left(p_{n/2}\left(\beta\right)+1\right)-1}$
+ must have the form
+\begin_inset Formula 
+\[
+p_{n}\left(\beta\right)=\begin{cases}
+\beta\left(p_{n/2}\left(\beta\right)+1\right)-1 & \mbox{ for \ensuremath{n} even }\\
+\beta p_{\left(n-1\right)/2}\left(\beta\right)-1 & \mbox{ for \ensuremath{n} odd }
+\end{cases}
+\]
+
 \end_inset
 
- when 
-\begin_inset Formula $n$
-\end_inset
 
- is even or 
-\begin_inset Formula $\ensuremath{\beta p_{\left(n-1\right)/2}\left(\beta\right)-1}$
-\end_inset
+\end_layout
 
- for 
-\begin_inset Formula $n$
-\end_inset
-
- odd.
- The roots must be bracketed by the roots of polynomials occurring earlier
+\begin_layout Standard
+The roots must be bracketed by the roots of polynomials occurring earlier
  in the sequence; if the root is not bracketed, then the corresponding polynomia
 l does not appear in the list.
 \end_layout
