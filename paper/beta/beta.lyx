@@ -7156,13 +7156,13 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
  
 \begin_inset Formula 
 \[
-p_{n}\left(\beta\right)=\beta^{n}-\beta^{n-1}-b_{1}\beta^{n-2}-b_{2}\beta^{n-3}-\cdots-1=0
+p_{\left\{ b_{k}\right\} }\left(\beta\right)=\beta^{n}-\beta^{n-1}-b_{1}\beta^{n-2}-b_{2}\beta^{n-3}-\cdots-1=0
 \]
 
 \end_inset
 
 with the 
-\begin_inset Formula $b_{k}$
+\begin_inset Formula $\left\{ b_{k}\right\} $
 \end_inset
 
  being certain binary bit sequences.
@@ -7174,31 +7174,16 @@ with the
 
  is disallowed if it has the same root as some lower-order polynomial.
  For example, 
-\begin_inset Formula $p_{4}\left(\beta\right)=\beta^{4}-\beta^{3}-\beta-1$
+\begin_inset Formula $\beta^{4}-\beta^{3}-\beta-1$
 \end_inset
 
  is disallowed; it has the same root as 
-\begin_inset Formula $p_{2}\left(\beta\right)=\beta^{2}-\beta-1$
+\begin_inset Formula $\beta^{2}-\beta-1$
 \end_inset
 
 .
- Equivalently, 
-\begin_inset Formula $p_{2}$
-\end_inset
-
- is a factor of 
-\begin_inset Formula $p_{4}$
-\end_inset
-
-, so 
-\begin_inset Formula $p_{4}$
-\end_inset
-
-is not relatively prime with respect to 
-\begin_inset Formula $p_{2}$
-\end_inset
-
-.
+ Equivalently, the quadratic is a factor of the quartic; the quartic is
+ not relatively prime with respect to the quadratic.
 \end_layout
 
 \begin_layout Standard
@@ -7349,11 +7334,7 @@ literal "true"
 
 \end_inset
 
- Thus, a closer study of the polynomials 
-\begin_inset Formula $p_{n}\left(\beta\right)$
-\end_inset
-
- seems to be called for.
+ Thus, a closer study of the polynomials seems to be called for.
 \end_layout
 
 \begin_layout Subsection
@@ -7399,12 +7380,12 @@ trouble spots
 \end_inset
 
 , and of the form 
-\begin_inset Formula $p_{k}\left(\beta\right)$
+\begin_inset Formula $p_{\left\{ b_{k}\right\} }\left(\beta\right)$
 \end_inset
 
 .
  These must be arranged in the manner such that 
-\begin_inset Formula $p_{k}\left(\beta\right)=0$
+\begin_inset Formula $p_{\left\{ b_{k}\right\} }\left(\beta\right)=0$
 \end_inset
 
  at each discontinuity, as illustrated in figure 
@@ -7417,11 +7398,10 @@ reference "fig:Location-of-Midpoints"
 .
  This limits the polynomials that can appear; it limits the possible coefficient
 s 
-\begin_inset Formula $b_{i}$
+\begin_inset Formula $\left\{ b_{k}\right\} $
 \end_inset
 
 ; not all bit-sequences appear.
- 
 \end_layout
 
 \begin_layout Standard
@@ -7429,7 +7409,7 @@ The table below explicitly shows the polynomials for the first few orders.
  A polynomial is included in the table if it is an iterate of a previous
  polynomial, and if it's real root is bracketed by the roots of the earlier
  iterates.
- That is, 
+ Adopting an ordinal numbering, 
 \begin_inset Formula $\ensuremath{p_{n}\left(\beta\right)}$
 \end_inset
 
@@ -7663,7 +7643,12 @@ The polynomial
 \end_inset
 
 .
- 
+ Note that 
+\begin_inset Formula $p_{9}$
+\end_inset
+
+ is relatively prime to the earlier polynomials, so irreducibility is not
+ a sufficient criterion.
 \end_layout
 
 \begin_layout Standard
@@ -8979,7 +8964,7 @@ This figure visualizes the inverse distance between golden means.
 .
  Increasing the number of roots essentially just rescales this graph, making
  it progressively more vertical.
- In essence, almost all of the roots accumulate near ( 
+ In essence, almost all of the roots accumulate near 
 \begin_inset Formula $\beta=2$
 \end_inset
 
@@ -9038,7 +9023,8 @@ Complex Roots
 \begin_layout Standard
 What are the complex roots? Numerical work clearly indicates that they seem
  to be approximately cyclotomic in some sense or another.
- They seem to be more-or-less uniformly distributed in a circle, always.
+ They seem to be more-or-less uniformly distributed in an approximate circle,
+ always.
  The modulus of most of the complex roots appear to be less than one.
  This is violated for the complex roots of 
 \begin_inset Formula $p_{2^{k}}\left(\beta\right)=\beta^{k+2}-\beta^{k+1}-1$
