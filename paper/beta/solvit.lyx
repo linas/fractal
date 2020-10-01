@@ -6562,7 +6562,7 @@ The interesting limit is where
  With some rearrangements, one obtains
 \begin_inset Formula 
 \begin{equation}
-D\left(\beta;\zeta\right)\equiv\zeta\beta C\left(\beta;\zeta\beta\right)=-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)\label{eq:holomorphic-disk}
+E\left(\beta;\zeta\right)\equiv\zeta\beta C\left(\beta;\zeta\beta\right)=-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)\label{eq:holomorphic-disk}
 \end{equation}
 
 \end_inset
@@ -7022,7 +7022,7 @@ Replacing
  gives
 \begin_inset Formula 
 \begin{align*}
-D\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
+E\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
 = & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta\left[d_{n}\left(\frac{y}{\beta}\right)+d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)-d_{n}\left(y\right)\right]
 \end{align*}
 
@@ -7048,7 +7048,7 @@ This is holomorphic on the unit disk
 , and so one may pull out the step function to write 
 \begin_inset Formula 
 \[
-D\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]\Theta\left(\frac{\beta}{2}-y\right)
+E\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]\Theta\left(\frac{\beta}{2}-y\right)
 \]
 
 \end_inset
@@ -7066,7 +7066,7 @@ confirming the earlier numerical observation that
 
 \begin_layout Standard
 The bottom equation holds without assuming that 
-\begin_inset Formula $D\left(\beta;\zeta\right)$
+\begin_inset Formula $E\left(\beta;\zeta\right)$
 \end_inset
 
  is independent of 
@@ -7592,29 +7592,62 @@ Reassembling these pieces and making use of
 \begin_inset Formula 
 \begin{align*}
 \nu\left(t^{-1}\left(A\right)\right) & =\sum_{n=0}^{\infty}\frac{\zeta^{n}}{\beta}\left[\mu\left(A\right)\Theta\left(t_{n}-\frac{1}{\beta}\right)+\mu\left(\Delta_{n+1}\cap A\right)\right]\\
- & =\frac{1}{z}\nu\left(A\right)-\frac{\mu\left(A\right)}{\beta}+\mu\left(A\right)\sum_{n=0}^{\infty}\frac{\zeta^{n}}{\beta}\Theta\left(t_{n}-\frac{1}{\beta}\right)\\
- & =\frac{1}{z}\nu\left(A\right)+\frac{\mu\left(A\right)}{\beta}C\left(\beta;z\right)
+ & =\frac{1}{z}\nu\left(A\right)-\frac{\mu\left(A\right)}{z}+\mu\left(A\right)\sum_{n=0}^{\infty}\frac{\zeta^{n}}{\beta}\Theta\left(t_{n}-\frac{1}{\beta}\right)\\
+ & =\frac{1}{z}\nu\left(A\right)+\frac{\mu\left(A\right)}{z}E\left(\beta;z\right)
 \end{align*}
 
 \end_inset
 
-with
-\begin_inset Formula 
-\[
-C\left(\beta;z\right)=-1+\sum_{n=0}^{\infty}\zeta^{n}\Theta\left(t_{n}-\frac{1}{\beta}\right)
-\]
+with the constant term as before, in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-disk"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
+:
+\begin_inset Formula 
+\begin{align*}
+E\left(\beta;z\right) & =-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}\Theta\left(t_{n}-\frac{1}{\beta}\right)\\
+ & =-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)
+\end{align*}
 
-\end_layout
+\end_inset
 
-\begin_layout Standard
-xxxx
-\end_layout
+As before, one has for 
+\begin_inset Formula $z=1$
+\end_inset
 
-\begin_layout Standard
-xxxx
+ that 
+\begin_inset Formula $E\left(\beta;1\right)=0$
+\end_inset
+
+ and so 
+\begin_inset Formula $\nu\circ t^{-1}=\nu$
+\end_inset
+
+ is indeed the measure invariant under 
+\begin_inset Formula $t^{-1}$
+\end_inset
+
+.
+ Other eigenvalues can be found for those values of 
+\begin_inset Formula $z$
+\end_inset
+
+ for which 
+\begin_inset Formula $E\left(\beta;z\right)=0$
+\end_inset
+
+.
+ The task at hand is then to characterize 
+\begin_inset Formula $E\left(\beta;z\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
