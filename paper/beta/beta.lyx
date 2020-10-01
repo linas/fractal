@@ -5730,7 +5730,7 @@ noprefix "false"
 \begin_inset Formula 
 \begin{align*}
 C\left(\beta;z\right)= & \left[\mathcal{L}_{\beta}v_{\beta;z}\right]\left(y\right)-\frac{v_{\beta;z}\left(y\right)}{z}\\
-= & \sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\left[\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-\frac{1}{z}d_{n}\left(y\right)\right]
+= & \sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\left[\frac{1}{\beta}\left[d_{n}\left(\frac{y}{\beta}\right)+d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)-\frac{1}{z}d_{n}\left(y\right)\right]
 \end{align*}
 
 \end_inset
@@ -5747,7 +5747,7 @@ Replacing
 \begin_inset Formula 
 \begin{align*}
 E\left(\beta;\zeta\right)= & \zeta\beta C\left(\beta;\zeta\beta\right)\\
-= & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]
+= & \sum_{n=0}^{\infty}\zeta^{n}\left[\zeta\left[d_{n}\left(\frac{y}{\beta}\right)+d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)-d_{n}\left(y\right)\right]
 \end{align*}
 
 \end_inset
@@ -5761,7 +5761,35 @@ This is holomorphic on the unit disk
 \end_inset
 
  is either zero or one; there won't be any poles inside the unit disk.
- The bottom equation holds without assuming that 
+ Note that 
+\begin_inset Formula $d_{n}\left(y\right)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y>\beta/2$
+\end_inset
+
+, and so one may pull out the step function to write 
+\begin_inset Formula 
+\[
+E\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\frac{y}{\beta}\right)+\zeta d_{n}\left(\frac{y}{\beta}+\frac{1}{2}\right)-d_{n}\left(y\right)\right]\Theta\left(\frac{\beta}{2}-y\right)
+\]
+
+\end_inset
+
+confirming the earlier numerical observation that 
+\begin_inset Formula $E\left(\beta;\zeta\right)$
+\end_inset
+
+ vanishes for all 
+\begin_inset Formula $y>\beta/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The bottom equation holds without assuming that 
 \begin_inset Formula $E\left(\beta;\zeta\right)$
 \end_inset
 
@@ -5805,7 +5833,38 @@ Staring at the right-hand side of the sum above, it is hardly obvious that
 \end_inset
 
 .
- That it is seems somehow terribly important.
+ In a certain sense, this is not 
+\begin_inset Quotes eld
+\end_inset
+
+one equation
+\begin_inset Quotes erd
+\end_inset
+
+, this holds for a continuum of 
+\begin_inset Formula $y$
+\end_inset
+
+, for all 
+\begin_inset Formula $0\le y\le1$
+\end_inset
+
+.
+ It is an analytic equation tying together the entire subshift.
+ For each distinct 
+\begin_inset Formula $y$
+\end_inset
+
+, it singles out three completely different bit-sequences out of the subshift,
+ and ties them together.
+ It is a form of mixing.
+ Alternately, a form of interaction: the bit-sequences are not independent
+ of one-another; they interact.
+ This section attempts to make these notions more precise.
+\end_layout
+
+\begin_layout Standard
+That it is seems somehow terribly important.
  It is tempting to give this some silly name, such as the 
 \begin_inset Quotes eld
 \end_inset
@@ -5817,115 +5876,502 @@ fundamental theorem of analytic ergodics
 .
 \end_layout
 
-\begin_layout Subsection
-Haar Basis Matrix Elements
-\end_layout
-
 \begin_layout Standard
-The symmetric Haar wavelets are built from the mother wavelet
+Let's be exceptionally clear about the meaning: equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ defined a map, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift.
+ Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ defined a bit-sequence, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion of a real number 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+, where equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is the defintion of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion.
+ The set of all such bit-sequences defines the shift.
+ To emphasize the point, its best to compare side-by-side.
+ Copying equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we had 
 \begin_inset Formula 
 \[
-h\left(x\right)=\begin{cases}
-1 & \mbox{for }0\le x<1/2\\
--1 & \mbox{for }1/2\le x<1
+k_{n}\left(x\right)=\begin{cases}
+0 & \mbox{ if }0\le T_{\beta}^{n}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}(x)\le1
 \end{cases}
 \]
 
 \end_inset
 
-and has individual wavelets given by 
+ while
 \begin_inset Formula 
 \[
-h_{nj}\left(x\right)=2^{n/2}h\left(2^{n}x-j\right)\;\mbox{ for }0\le j\le2^{n}-1
+d_{n}\left(x\right)=\begin{cases}
+1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)=T^{n+1}\left(\frac{1}{2}\right)\\
+0 & \mbox{otherwise}
+\end{cases}
 \]
 
 \end_inset
 
-The matrix elements of the transfer operator are
-\begin_inset Formula 
-\[
-\left\langle mi\left|{\cal L}_{\beta}\right|nj\right\rangle =\int_{0}^{1}h_{mi}\left(x\right)\left[\mathcal{L}_{\beta}h_{nj}\right]\left(x\right)dx
-\]
-
-\end_inset
-
-where the operator 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- is given by eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:xfer oper"
-
-\end_inset
-
-.
- Computing these by hand promptly pushes into a big mess.
- One can obtain explicit expressions, just that they are tedious to obtain.
- Some preliminary observations include that 
-\begin_inset Formula 
-\[
-\left\langle mi\left|{\cal L}_{\beta}\right|nj\right\rangle =0\;\mbox{ if }\beta\le i/2^{m-1}
-\]
-
-\end_inset
-
-because the transfer operator vanishes above 
-\begin_inset Formula $\beta/2$
-\end_inset
-
-.
- In the same vein, matrix elements vanish unless 
-\begin_inset Formula 
-\[
-\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{\beta j}{2^{n}},\frac{\beta\left(j+1\right)}{2^{n}}\right]\ne\emptyset
-\]
-
-\end_inset
-
-or if 
-\begin_inset Formula 
-\[
-\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\beta\left(\frac{j}{2^{n}}-\frac{1}{2}\right),\beta\left(\frac{j+1}{2^{n}}-\frac{1}{2}\right)\right]\ne\emptyset
-\]
-
-\end_inset
-
-In all other cases, the Haar wavelets completely fail to overlap, and thus
- the matrix elements are zero.
- In addition, only three pairs of wavelets overlap in a non-zero fashion.
- That is, for a fixed 
-\begin_inset Formula $m,n$
-\end_inset
-
- and 
-\begin_inset Formula $j$
-\end_inset
-
-, there are at most six different values of 
-\begin_inset Formula $i$
-\end_inset
-
- for which the matrix elements are non-vanishing: the first three of these
- are the values for which
-\begin_inset Formula 
-\[
-\frac{\beta j}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{\beta\left(j+\frac{1}{2}\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{\beta\left(j+1\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]
-\]
-
-\end_inset
-
-and likewise for three more.
- The observation is that the integral vanishes unless the first wavelet
- intersects an edge transition of the second wavelet.
+The iterations are running in opposite directions; this is as appropriate,
+ since the the transfer operator was a push-forward.
 \end_layout
 
 \begin_layout Standard
-The primary failure of this basis is that there is no obvious way to diagonalize
- the transfer operator in this basis.
- There is no obvious way of solving it, of finding it's eigenfunctions and
- eigenvalues, other than by brute-force numerical attack.
+It is useful here to return to the language of cylinder sets, as opposed
+ to point dynamics.
+ Recall that the Borel algebra 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ was defined as the sigma algebra, the collection of all cylinder sets in
+ theproduct topology of 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+.
+ A shift is a map 
+\begin_inset Formula $T:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+ that lops off the leading symbol of a given cylinder set.
+ The inverted map 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is a pushforward, in that it defines the transfer operator, a linear operator
+ 
+\begin_inset Formula $\mathcal{L}_{T}:\mathcal{F\to\mathcal{F}}$
+\end_inset
+
+ on the space 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ of all functions 
+\begin_inset Formula $f:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+; explicitly, it is given by 
+\begin_inset Formula $\mathcal{L}_{T}:f\mapsto f\circ T^{-1}$
+\end_inset
+
+.
+ Insofar as the 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ arose in the exploration of the transfer operator, it is not surprising
+ that the shift is acting 
+\begin_inset Quotes eld
+\end_inset
+
+backwards
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The problem with point dynamics is that one cannot meaningfully write 
+\begin_inset Formula $T^{-n}\left(x\right)$
+\end_inset
+
+ for a real number, a point 
+\begin_inset Formula $x$
+\end_inset
+
+, at least, not without sever contortions that lead back to the Borel algebra.
+ Not for lack of trying; the 
+\begin_inset Formula $T^{-n}\left(x\right)$
+\end_inset
+
+ is called the 
+\begin_inset Quotes eld
+\end_inset
+
+Julia set
+\begin_inset Quotes erd
+\end_inset
+
+ (to order 
+\begin_inset Formula $n$
+\end_inset
+
+) of 
+\begin_inset Formula $x$
+\end_inset
+
+: it is the preimage, the set of all points that, when iterated, converge
+ onto 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Can the analytic relation be restated in terms of cylinder sets? Yes, and
+ it follows in a fairly natural way.
+ The first step is to extend 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ to a map 
+\begin_inset Formula $d_{n}:\mathcal{B}\to\left[0,1\right]$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mu:\mathcal{B}\to\left[0,1\right]$
+\end_inset
+
+ be the Bernoulli meaure.
+ Using the Bernoulli mapping 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the interval 
+\begin_inset Formula $\left[0,T^{n}\left(\beta/2\right)\right]$
+\end_inset
+
+ maps to some cylinder; call it 
+\begin_inset Formula $\Delta_{n}$
+\end_inset
+
+.
+ Then, given some cylinder 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+, define
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d_{n}\left(A\right)=\mu\left(A\cap\Delta_{n}\right)
+\]
+
+\end_inset
+
+The rotated (pre-)measure is extended likewise: 
+\begin_inset Formula 
+\[
+\nu\left(A\right)=\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(A\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\zeta=z/\beta$
+\end_inset
+
+ as before, recovering the Parry measure by setting 
+\begin_inset Formula $z=1$
+\end_inset
+
+.
+ The Parry measure should be invariant under the action of 
+\begin_inset Formula $T^{-1}:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+, and otherwise yeild eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-disk"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let's check.
+ The proof will mirror the one of the previous section.
+ Here, it is convenient to use the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform 
+\begin_inset Formula $t$
+\end_inset
+
+ instead of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ This is because 
+\begin_inset Formula $T$
+\end_inset
+
+ is dissipative: a portion of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ wanders away, and thus 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+ is not defined on all of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+; it is only defined on the subshift.
+ By contrast 
+\begin_inset Formula $t^{-1}$
+\end_inset
+
+ is defined on all of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+; this simplifies the proof.
+ Otherwise, the same notation is used, but rescaled, so that 
+\begin_inset Formula $\Delta_{n}$
+\end_inset
+
+ is the cylinder corresponding to the interval 
+\begin_inset Formula $\left[0,t^{n}\left(1\right)\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Recall that for every 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+ and every 
+\begin_inset Formula $y\in A$
+\end_inset
+
+, one will find that 
+\begin_inset Formula $y/\beta\in t^{-1}\left(A\right)$
+\end_inset
+
+ and, whenever 
+\begin_inset Formula $y\le\beta-1$
+\end_inset
+
+ that also 
+\begin_inset Formula $\left(y+1\right)/\beta\in t^{-1}\left(A\right)$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $t^{-1}\left(A\right)$
+\end_inset
+
+ naturally splits into two parts: the cylinder that maps to 
+\begin_inset Formula $\left[0,1/\beta\right]$
+\end_inset
+
+, call it 
+\begin_inset Formula $D$
+\end_inset
+
+ and the complement 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The pushfoward action is then 
+\begin_inset Formula 
+\begin{align*}
+\nu\left(t^{-1}\left(A\right)\right)= & \sum_{n=0}^{\infty}\zeta^{n}\mu\left(\Delta_{n}\cap t^{-1}\left(A\right)\right)\\
+= & \sum_{n=0}^{\infty}\zeta^{n}\left[\mu\left(\Delta_{n}\cap D\cap t^{-1}\left(A\right)\right)+\mu\left(\Delta_{n}\cap\overline{D}\cap t^{-1}\left(A\right)\right)\right]
+\end{align*}
+
+\end_inset
+
+Two distinct cases emerge.
+ When 
+\begin_inset Formula $t^{n}\left(1\right)<1/\beta$
+\end_inset
+
+ then one has that 
+\begin_inset Formula $\Delta_{n}\cap\overline{D}=\varnothing$
+\end_inset
+
+.
+ Thus, the second term can be written as 
+\begin_inset Formula 
+\begin{align*}
+\mu\left(\Delta_{n}\cap\overline{D}\cap t^{-1}\left(A\right)\right) & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\mu\left(\Delta_{n}\cap\overline{D}\cap t^{-1}\left(A\right)\right)\\
+ & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\frac{1}{\beta}\mu\left(\Delta_{n+1}\cap A\right)
+\end{align*}
+
+\end_inset
+
+where the second line follows from the first by linearity, and that 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+ selected out one of the two branches of 
+\begin_inset Formula $t^{-1}\left(A\right)$
+\end_inset
+
+.
+ Meanwhile, when 
+\begin_inset Formula $t^{n}\left(1\right)>1/\beta$
+\end_inset
+
+, then 
+\begin_inset Formula $D\subset\Delta_{n}$
+\end_inset
+
+ so that 
+\begin_inset Formula $D\cap\Delta_{n}=D$
+\end_inset
+
+.
+ Thus, the first term splits into two: 
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(t_{n}-\frac{1}{\beta}\right)\mu\left(\Delta_{n}\cap D\cap t^{-1}\left(A\right)\right) & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\mu\left(D\cap t^{-1}\left(A\right)\right)\\
+ & =\Theta\left(t_{n}-\frac{1}{\beta}\right)\frac{1}{\beta}\mu\left(A\right)
+\end{align*}
+
+\end_inset
+
+while
+\begin_inset Formula 
+\[
+\Theta\left(\frac{1}{\beta}-t_{n}\right)\mu\left(\Delta_{n}\cap D\cap t^{-1}\left(A\right)\right)=\Theta\left(\frac{1}{\beta}-t_{n}\right)\frac{1}{\beta}\mu\left(\Delta_{n+1}\cap A\right)
+\]
+
+\end_inset
+
+Reassembling these pieces and making use of 
+\begin_inset Formula $\Delta_{0}\cap A=A$
+\end_inset
+
+ one gets
+\begin_inset Formula 
+\begin{align*}
+\nu\left(t^{-1}\left(A\right)\right) & =\sum_{n=0}^{\infty}\frac{\zeta^{n}}{\beta}\left[\mu\left(A\right)\Theta\left(t_{n}-\frac{1}{\beta}\right)+\mu\left(\Delta_{n+1}\cap A\right)\right]\\
+ & =\frac{1}{z}\nu\left(A\right)-\frac{\mu\left(A\right)}{z}+\mu\left(A\right)\sum_{n=0}^{\infty}\frac{\zeta^{n}}{\beta}\Theta\left(t_{n}-\frac{1}{\beta}\right)\\
+ & =\frac{1}{z}\nu\left(A\right)+\frac{\mu\left(A\right)}{z}E\left(\beta;z\right)
+\end{align*}
+
+\end_inset
+
+with the constant term as before, in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-disk"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+E\left(\beta;z\right) & =-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}\Theta\left(t_{n}-\frac{1}{\beta}\right)\\
+ & =-1+\zeta\sum_{n=0}^{\infty}\zeta^{n}d_{n}\left(\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+As before, one has for 
+\begin_inset Formula $z=1$
+\end_inset
+
+ that 
+\begin_inset Formula $E\left(\beta;1\right)=0$
+\end_inset
+
+ and so 
+\begin_inset Formula $\nu\circ t^{-1}=\nu$
+\end_inset
+
+ is indeed the measure invariant under 
+\begin_inset Formula $t^{-1}$
+\end_inset
+
+.
+ Other eigenvalues can be found for those values of 
+\begin_inset Formula $z$
+\end_inset
+
+ for which 
+\begin_inset Formula $E\left(\beta;z\right)=0$
+\end_inset
+
+.
+ The task at hand is then to characterize 
+\begin_inset Formula $E\left(\beta;z\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
