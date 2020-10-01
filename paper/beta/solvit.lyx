@@ -10974,12 +10974,32 @@ Periodic Orbits
 \end_layout
 
 \begin_layout Standard
-The iteration of the midpoint, used to construct the Hessenberg basis, works
- well, unless the midpoint iterates to hit the point 
+The iteration of the midpoint 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+, that is, the iterated series 
+\begin_inset Formula $m_{n}=T_{\beta}^{n}\left(\beta/2\right)$
+\end_inset
+
+ is ergodic in the unit interval, for almost all values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ However, for certain values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+, the midpoint iterates will hit the point 
 \begin_inset Formula $x=1/2$
 \end_inset
 
- where the map has a discontinuity.
+ where the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift map has a discontinuity.
  Here, iteration stops: at the next step, this point is defined to iterate
  to zero, in eqn 
 \begin_inset CommandInset ref
@@ -10990,15 +11010,6 @@ reference "eq:downshift"
 
 .
  Zero is a fixed point, and so there is nowhere further to go.
- This occurs for certain values of 
-\begin_inset Formula $\beta$
-\end_inset
-
-: after a finite number for steps, the midpoint 
-\begin_inset Formula $m_{0}=\beta/2$
-\end_inset
-
- iterates to 1/2.
  This section explores these special values of 
 \begin_inset Formula $\beta$
 \end_inset
@@ -11049,7 +11060,31 @@ T_{\beta}^{<}(x)=\begin{cases}
 \end_inset
 
 In this case, if the midpoint iterates to 1/2, it can be taken to simply
- have exited the domain of validity.
+ have wandered out of the domain of validity.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+wander
+\begin_inset Quotes erd
+\end_inset
+
+ is used here in the technical sense: The map 
+\begin_inset Formula $T_{\beta}\left(x\right)$
+\end_inset
+
+ is dissipative in two different senses: first, in the obvious sense, the
+ points 
+\begin_inset Formula $\beta/2<x$
+\end_inset
+
+ wander away after exactly one iteration; secondly, the mid-point iterates
+ wander down to zero, never to return, unless they are made explicitly periodic
+ with 
+\begin_inset Formula $T_{\beta}^{\le}\left(x\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -11092,7 +11127,7 @@ The
 \end_layout
 
 \begin_layout Standard
-The above wavelet basis seems to be well-behaved, except when 
+The first periodic orbit can be found when 
 \begin_inset Formula $\beta=\varphi=\left(1+\sqrt{5}\right)/2$
 \end_inset
 
@@ -11120,12 +11155,19 @@ The above wavelet basis seems to be well-behaved, except when
 \end_inset
 
 .
- In the former case, iteration simply stops; in the later case, it repeats,
- again, without generating new midpoints that can provide a workable basis.
+ For lack of a better term, this can be called a 
+\begin_inset Quotes eld
+\end_inset
+
+trouble spot
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Working backwards, this issue re-appears whenever the 
+Trouble spots occur whenever the 
 \begin_inset Formula $p$
 \end_inset
 
@@ -11146,7 +11188,7 @@ Working backwards, this issue re-appears whenever the
 \begin_inset Formula $p=3$
 \end_inset
 
-, there are two trouble spots, which occur when either 
+, there are two such trouble spots, which occur when either 
 \begin_inset Formula $\beta^{3}-\beta^{2}-1=0$
 \end_inset
 
@@ -11167,7 +11209,7 @@ Working backwards, this issue re-appears whenever the
 \end_layout
 
 \begin_layout Standard
-Where are the trouble spots located? Consider, for example, 
+Where else are such spots located? Consider, for example, 
 \begin_inset Formula $m_{4}=T_{\beta}^{4}\left(m_{0}\right)$
 \end_inset
 
@@ -11192,7 +11234,7 @@ reference "fig:Location-of-Midpoints"
 \end_inset
 
 .
- As made clear in the image, three new trouble spots appear.
+ As made clear in the image, three new degenerate points appear.
  These are located at 
 \begin_inset Formula $\beta=1.380327757\cdots$
 \end_inset
@@ -11306,9 +11348,11 @@ trouble spots
 \end_inset
 
  has three new trouble-spots.
- 
+ That is, trouble spots arise on a pruned binary tree: one generally expects
+ new spots to occur on the left and right of the immediate predecessor,
+ unless they're already been encountered before.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 generated with psimid.c and psimid.gplot
