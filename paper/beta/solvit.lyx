@@ -24612,35 +24612,55 @@ A uniting theme between this, and the other text that I have written on
 \end_layout
 
 \begin_layout Standard
-What, exactly, do the words 
+The idea of analytic combinatorics takes on a whole new meaning in the computati
+onal age.
+ Historically, the ability to provide an 
 \begin_inset Quotes eld
 \end_inset
 
-exactly solvable
+exact solution
 \begin_inset Quotes erd
 \end_inset
 
- really mean? So, for example, equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:not de Rham curve"
+ in the form of an analytic series has been highly prized; the ultimate
+ acheivement in many cases.
+ Being able to expression a solution in terms of the addition and multiplication
+ of real numbers is very comforting.
+ Every school student eventually comes to feel that arithmetic on the real
+ numbers is very natural and normal.
+ Its's more than that: Cartesian space is smooth and uniform, and all of
+ differential geometry and topology are founded on notions of smoothness.
+\end_layout
 
+\begin_layout Standard
+The inner workings of computers expose (or hide!) a different truth.
+ The most efficient algorithm for computing 
+\begin_inset Formula $sine(x)$
 \end_inset
 
- involves summation and multiplication, which has this aura of comfortable
- preciseness that an iterated function somehow does not.
- Where does this sensation come from? When performing arbitrary-precision
- numerical computations, it should be clear that neither addition nor multiplica
-tion are simple or easy: they both require fairly complex algorithms to
- implement, and have not-insignificant run-times.
- To be more precise: the algorithms are non-trivial because one is using
- a binary digit expansion to provide a model for a real number.
- Different representations of the real numbers potentially offer different
+ is not to sum the analytic series.
+ Arbitrary precision numerical libraries open the rift further: neither
+ addition nor multiplication are simple or easy.
+ Both operations have a variety of different algorithms that have different
+ run-times, different amounts of memory usage.
+ In the effort to minimize space and time usage, some of these algorithms
+ have grown quite complex.
+ The root cause of the complexity is bewildering: it is the use of the binary
+ digit expansion to represent a real number.
+ Computers use the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ or at least a subset thereof, under the covers.
+\end_layout
+
+\begin_layout Standard
+Different representations of the real numbers potentially offer different
  algorithms and performance profiles.
- One could represent reals by rationals, but then two issues arise.
+ One could represent reals by rationals, but then several other issues arise.
  One is that the rationals are not evenly distributed across the real number
- line: rationals with small denominators cluster about in a fractal fashion,
- studied deeply in number theory.
+ line: rationals with small denominators cluster about in a fractal fashion.
+ This is easily exhibited by considering continued fractions.
  As a result, one promptly gets stuck in a quagmire of trying to understand
  what a 
 \begin_inset Quotes eld
@@ -24666,42 +24686,115 @@ obviously
  which only takes us back to where we started.
  There is no computational oracle that automatically knows the sum or product
  of integers: it has to be computed.
- The analysis being done in this text is a kind of a game, where not only
- is one algebraic arrangement of symbols is being compared to another, but
- also one computational algorithm is being compared for another.
- Unfortunately, this latter comparison is very nearly opaque and hidden.
- If only it could be made visible in some simple fashion.
+\end_layout
+
+\begin_layout Standard
+Compare this situation to that of iterated functions and fractals.
+ At first impression, these seem pathological in almost every respect: different
+iable nowhere, unbounded and non-uniform: somehow they feel like the quintessent
+ial opposite of the analtyic series, of the smoothness of Cartesian space,
+ of the smoothness of additon and multiplication.
+ The place where these two worlds come together is that both are attempts
+ to approach countable infinity, and both are attempts to harness the first
+ uncountable infinity.
+ The real number number is an infinite string of binary digits.
+ The analytic series is an infinite sum.
+ The iterated function is recursively infinite.
+ The historic labor of finding 
+\begin_inset Quotes eld
+\end_inset
+
+exact solutions
+\begin_inset Quotes erd
+\end_inset
+
+ to problems can perhaps be better views as the discovery of correspondances
+ between finite structures (
+\begin_inset Quotes eld
+\end_inset
+
+the problem to be solved
+\begin_inset Quotes erd
+\end_inset
+
+) and infinite structures (
+\begin_inset Quotes eld
+\end_inset
+
+the solution
+\begin_inset Quotes erd
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
 The situation here is more easily illustrated in a different domain.
- The hyper-geometric series was presented and studied by Gauss; then Kummer,
+ The hypergeometric series was presented and studied by Gauss; then Kummer,
  Pfaff and Euler observed various identities yoking together different series.
  By the 1950's, thousands of relations were known, along with some algorithms
  that can enumerate infinite series of relations.
- The curious situation is that there is no known algorithm that can enumerate
+ The current situation is that there is no known algorithm that can enumerate
  all such relations; there is no systematic way to classify them.
- The situation does seem to make clear that there is an interplay between
- infinite series and algorithmic relationships between them.
- Stated a different way: hyper-geometric series are self-similar, and the
- identities relating them are expressions of that self-similarity.
+ There is an interplay between infinite series and algorithmic relationships
+ between them.
+ Stated a different way: hypergeometric series have a class of self-similarities
+, and the identities relating them are expressions of that self-similarity.
+ What is that class of self-similarities? For the hypergeometric series,
+ it remains unknown.
 \end_layout
 
 \begin_layout Standard
-To further sharpen this idea: the dyadic monoid is the generator of self-symmetr
-y in many common fractals; this is 
+For Cantor space, that place where we represent real numbers, the situation
+ is much better.
+ The Cantor space itself has the structure of an infinite binary tree; the
+ tree and it's subtrees are obviously self-similar; the class of similarities
+ is described by the dyadic monoid.
+ The dyadic monoid embeds naturally into the modular group; this in turn
+ is a gateway to vast tracts of modern mathematics.
+ The recursive aspects, the shadow that the Cantor space seems to leave
+ behind everywhere appears to be 
 \begin_inset Quotes eld
 \end_inset
 
-well-known
+explained
 \begin_inset Quotes erd
 \end_inset
 
-, and I have explored this in other texts.
- A more general setting for fractal self-similarities is given by tilings
- of the hyperbolic surface: to each tiling, there are corresponding fractals,
- the self-similarity of which are given by the tiling.
- The figures 
+ by Ornstein theory.
+\end_layout
+
+\begin_layout Standard
+Yet, the picture remains incomplete.
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform provides a simple, silly model for multiplying two real numbers
+ together: 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+extra complication
+\begin_inset Quotes erd
+\end_inset
+
+ of taking mod 1 after multiplication just reveals how complex multiplication
+ really is.
+ After all, mod 1 is just the subtraction of 1; how hard can that be? Moving
+ in one direction: the fastest, most efficient-possible algorithm for multiplyin
+g two numbers is not known.
+ Moving in another direction, the simple iterated maps, shown in figures
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Bifurcation-Diagram"
@@ -24722,29 +24815,18 @@ reference "fig:Logistic-Map-Bifurcation"
 
 \end_inset
 
- are clearly self-similar in some obscure way: it is visually clear, but
- providing a simple algebraic expression describing the similarity is difficult;
- I have not been successful in this.
- None-the-less, it seems self-evident that it will be the dyadic monoid
- that is somehow responsible for the symmetries, underlying them (unless,
- of course, there is some other, as yet undiscovered structure).
- 
+ are obviously not only self-similar, but also are surely topologically
+ conjugate to one-another, and in all cases are presumably described by
+ the dyadic monoid; likewise the Mandelbrot set and it's exterior.
+ Yet the details remain obscure.
 \end_layout
 
 \begin_layout Standard
 The meta-question is: what is the correct framework by which one can best
- understand the interplay between symmetries, infinite series and algorithms?
- The current tool-set seems impoverished: it does not 
-\begin_inset Quotes eld
-\end_inset
-
-solve
-\begin_inset Quotes erd
-\end_inset
-
- the systems in this text.
- Worse, current mathematical practice reifies addition and multiplication
- into oracular operations that magically obtain 
+ understand the interplay between symmetries, infinite series, infinite
+ recursion and algorithms? Until modern times, mathematical practice has
+ reified addition and multiplication into oracular operations that magically
+ obtain 
 \begin_inset Quotes eld
 \end_inset
 
@@ -24752,11 +24834,12 @@ the right answer
 \begin_inset Quotes erd
 \end_inset
 
-, when it is clear from numerical methods that addition and multiplication
- are necessarily algorithmic operations performed on finite truncations
- of infinite series.
- It would be nice to place these operations on equal footings, so as to
- expose the true nature of this beast.
+.
+ Modern computers have put a lie to this: the theory of numerical methods
+ has made clear that addition and multiplication are necessarily algorithmic
+ operations performed on finite truncations of infinite series.
+ What other aglorithms are hiding nearby, and what is thier relationship
+ to analytic series?
 \end_layout
 
 \begin_layout Section
