@@ -226,14 +226,27 @@ static void qpoly (float *array,
 		x -= x_center;
 		x *= x_width;
 
-#if 1
+#define EDGE_COORDS
+#ifdef EDGE_COORDS
+		// simple-minded radial coords
+		// x == theta/pi, r = y + 1/beta so that y=0 is the circle of
+		// convergence and netgative y just don't converge.
+		COMPLEX lambda = (1.0/beta + y) * cexp(I*x*M_PI);
+		COMPLEX zee = 1.0 / lambda;
+
+		COMPLEX zeta = zee / beta;
+#endif
+
+#ifdef LAMBDA_DISK_COORDS
 		// lambda is the eigenvalue.
 		// lambda = 1/z
 		COMPLEX lambda(x,y);
 		COMPLEX zee = 1.0 / lambda;
 
 		COMPLEX zeta = zee / beta;
-#else
+#endif
+
+#ifdef ZETA_DISK_COORDS
 		COMPLEX zeta(x,y);
 #endif
 
