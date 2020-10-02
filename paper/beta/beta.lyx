@@ -3861,6 +3861,7 @@ literal "false"
  and Parry's work, stemming from his PhD thesis, is not available online.
  Therefore, it is of some interest to provide a proof suitable for the current
  text.
+ A generalization of this proof is used to construct general eigenfunctions.
 \end_layout
 
 \begin_layout Standard
@@ -4013,7 +4014,8 @@ and so
 P & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(t_{n+1}-y\right)\right)\right)\\
  & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)\left[\Theta\left(1-\beta t_{n}\right)+\Theta\left(\beta t_{n}-1\right)\right]+\Theta\left(\beta t_{n}-1\right)\right)\\
  & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\right)\\
- & =\beta\nu\left(y\right)-\beta+\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n}}
+ & =\beta\nu\left(y\right)-\beta+\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n}}\\
+ & =\beta\nu\left(y\right)
 \end{align*}
 
 \end_inset
@@ -4072,7 +4074,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsection
-Rotated Renyi-Parry function
+Analytic Gelfond-Parry function
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Rotated-Renyi-Parry-function"
@@ -4083,7 +4085,7 @@ name "subsec:Rotated-Renyi-Parry-function"
 \end_layout
 
 \begin_layout Standard
-The steps performed above can be repeated verbatim for the 
+The steps performed above can be repeated verbatim for a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4095,7 +4097,7 @@ rotated
 \begin_inset Quotes eld
 \end_inset
 
-complexified
+coherent
 \begin_inset Quotes erd
 \end_inset
 
@@ -4868,7 +4870,8 @@ one equation
 \end_layout
 
 \begin_layout Standard
-That it is seems somehow terribly important.
+The tying-together of seemingly unrelated sequences seems somehow terribly
+ important.
  It is tempting to give this some silly name, such as the 
 \begin_inset Quotes eld
 \end_inset
@@ -4975,16 +4978,25 @@ It is useful here to return to the language of cylinder sets, as opposed
 \end_inset
 
  was defined as the sigma algebra, the collection of all cylinder sets in
- theproduct topology of 
+ the product topology of 
 \begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
 \end_inset
 
 .
- A shift is a map 
-\begin_inset Formula $T:\mathcal{B}\to\mathcal{B}$
+ A subshift is a subset 
+\begin_inset Formula $\mathcal{S}\subset\mathcal{B}$
 \end_inset
 
- that lops off the leading symbol of a given cylinder set.
+ together with a map 
+\begin_inset Formula $T:\mathcal{S}\to\mathcal{S}$
+\end_inset
+
+ that lops off the leading symbol of a given cylinder set but otherwise
+ preserves the subshift: 
+\begin_inset Formula $T\mathcal{S}=\mathcal{S}$
+\end_inset
+
+.
  The inverted map 
 \begin_inset Formula $T^{-1}$
 \end_inset
@@ -4999,7 +5011,7 @@ It is useful here to return to the language of cylinder sets, as opposed
 \end_inset
 
  of all functions 
-\begin_inset Formula $f:\mathcal{B}\to\mathbb{R}$
+\begin_inset Formula $f:\mathcal{S}\to\mathbb{R}$
 \end_inset
 
 ; explicitly, it is given by 
@@ -5069,7 +5081,7 @@ Can the analytic relation be restated in terms of cylinder sets? Yes, and
 \end_inset
 
  to a map 
-\begin_inset Formula $d_{n}:\mathcal{B}\to\left[0,1\right]$
+\begin_inset Formula $d_{n}:\mathcal{S}\to\left[0,1\right]$
 \end_inset
 
 .
@@ -5098,7 +5110,7 @@ noprefix "false"
 
 .
  Then, given some cylinder 
-\begin_inset Formula $A\in\mathcal{B}$
+\begin_inset Formula $A\in\mathcal{S}$
 \end_inset
 
 , define
@@ -5130,7 +5142,7 @@ with
 
 .
  The Parry measure should be invariant under the action of 
-\begin_inset Formula $T^{-1}:\mathcal{B}\to\mathcal{B}$
+\begin_inset Formula $T^{-1}:\mathcal{S}\to\mathcal{S}$
 \end_inset
 
 , and otherwise yeild eqn 
@@ -5166,32 +5178,8 @@ Let's check.
 \end_inset
 
 .
- This is because 
-\begin_inset Formula $T$
-\end_inset
-
- is dissipative: a portion of 
-\begin_inset Formula $\mathcal{B}$
-\end_inset
-
- wanders away, and thus 
-\begin_inset Formula $T^{-1}$
-\end_inset
-
- is not defined on all of 
-\begin_inset Formula $\mathcal{B}$
-\end_inset
-
-; it is only defined on the subshift.
- By contrast 
-\begin_inset Formula $t^{-1}$
-\end_inset
-
- is defined on all of 
-\begin_inset Formula $\mathcal{B}$
-\end_inset
-
-; this simplifies the proof.
+ This is primarily a conceptual convenience; the subshift is more easily
+ visualized in terms of the mod 1 map.
  Otherwise, the same notation is used, but rescaled, so that 
 \begin_inset Formula $\Delta_{n}$
 \end_inset
@@ -5205,7 +5193,7 @@ Let's check.
 
 \begin_layout Standard
 Recall that for every 
-\begin_inset Formula $A\in\mathcal{B}$
+\begin_inset Formula $A\in\mathcal{S}$
 \end_inset
 
  and every 
