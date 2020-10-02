@@ -153,16 +153,16 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 
 int main(int argc, char* argv[])
 {
-	if (argc < 2)
+	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s K\n", argv[0]);
+		fprintf(stderr, "Usage: %s K theta\n", argv[0]);
 		exit(1);
 	}
 
 	double K = atof(argv[1]);
 	double beta = 2.0*K;
 
-	double theta = 0.1;
+	double theta = atof(argv[2]);
 	COMPLEX phase = cexp(I*theta*M_PI);
 
 	int label = 0;
@@ -173,6 +173,7 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NPTS; j++)
 	{
 		double r = ((double) j + 0.5) / ((double) NPTS);
+		r *= 2.0;
 		r += 1.0;
 
 		COMPLEX zeta = r* phase;
