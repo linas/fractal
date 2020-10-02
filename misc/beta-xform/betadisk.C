@@ -156,6 +156,65 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 	return que;
 }
 
+// Build the analytically-continued q-function.
+// This is minus E(beta; zeta) where
+// E(beta; zeta) = -1 + zeta * sum_n=0 zeta^n d_n(1/2)
+COMPLEX qfunc_continue(lodouble_t beta, COMPLEX zeta)
+{
+	// #define SEQLEN 820
+	#define SEQLEN 50
+	static bool is_init = false;
+	static int bit[SEQLEN+1];
+	if (not is_init)
+	{
+		is_init = true;
+
+#define REGULAR_FLOAT_POINT
+#ifdef REGULAR_FLOAT_POINT
+		// This computes the bit sequence d_n(1/2)
+		// AKA the bit-sequence Theta(T^n(beta/2) - 1/2)
+		// This ... works ... but bignum does a sanity check.
+		lodouble_t K = 0.5*beta;
+		lodouble_t mid = K;
+		for (int i=0; i<SEQLEN; i++)
+		{
+			bit[i] = 0;
+			if (0.5 < mid) bit[i] = 1;
+			mid = downshift(mid, K);
+		}
+#endif
+
+// #define BIGNUM_MIDPOINTS
+#ifdef BIGNUM_MIDPOINTS
+		double K = 0.5*beta;
+		midpoint_seq(K, SEQLEN+50, 0x0, bit, SEQLEN+1);
+
+		// Above generates a sequence starting with zero;
+		// below uses sequence starting with one...
+		for (int i=0; i<SEQLEN; i++)
+		{
+			bit[i] = bit[i+1];
+		}
+#endif
+	}
+
+	COMPLEX zetan = zeta;
+
+	// accumulated sum
+	COMPLEX que = 1.0 - zeta / (1.0-zeta);
+
+	for (int i=0; i<SEQLEN; i++)
+	{
+		// sign reverse...
+		if (0==bit[i]) que += zetan;
+
+		// compute z^n;
+		zetan *= zeta;
+	}
+
+	return que;
+}
+
 // Build the exponential q-function.
 // This fails to show anything interesting. OK, so it's got
 // zero's splattered everywhere on the complex plane, but they're
@@ -226,7 +285,7 @@ static void qpoly (float *array,
 		x -= x_center;
 		x *= x_width;
 
-#define EDGE_COORDS
+// #define EDGE_COORDS
 #ifdef EDGE_COORDS
 		// simple-minded radial coords
 		// x == theta/pi, r = y + 1/beta so that y=0 is the circle of
@@ -237,6 +296,7 @@ static void qpoly (float *array,
 		COMPLEX zeta = zee / beta;
 #endif
 
+// #define LAMBDA_DISK_COORDS
 #ifdef LAMBDA_DISK_COORDS
 		// lambda is the eigenvalue.
 		// lambda = 1/z
@@ -246,6 +306,7 @@ static void qpoly (float *array,
 		COMPLEX zeta = zee / beta;
 #endif
 
+#define ZETA_DISK_COORDS
 #ifdef ZETA_DISK_COORDS
 		COMPLEX zeta(x,y);
 #endif
@@ -254,11 +315,13 @@ static void qpoly (float *array,
 		double zx = real(zeta);
 		double zy = imag(zeta);
 		double r = zx*zx + zy*zy;
-		if (1.0 < r) continue;
+		// if (1.0 < r) continue;
 
 #define QFUNC
 #ifdef QFUNC
-		COMPLEX sum = qfunc(beta, zeta, itermax);
+		// COMPLEX sum = qfunc(beta, zeta, itermax);
+		COMPLEX sum = qfunc_continue(beta, zeta);
+
 		// Take minus the sum, to get what alldisk.C is showing.
 		// well, minus also to get E(beta; zeta)
 		sum = -sum;
@@ -266,6 +329,8 @@ static void qpoly (float *array,
 		double im = imag(sum);
 		double pha = atan2(im, re)/M_PI;
 		array[j] = 0.5 + 0.5 * pha;
+
+		array[j] = sqrt(re*re + im*im);
 
 		if (1.0 < r and r <= 1.02) array[j] = 1;
 #endif
@@ -276,7 +341,7 @@ static void qpoly (float *array,
 		array[j] = abs(sum);
 #endif
 
-#if 0
+#if 1
 		// Print possible zeros and mark them up.
 		double mag = abs(sum);
 		if (mag < 0.015) {
