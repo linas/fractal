@@ -226,14 +226,22 @@ static void qpoly (float *array,
 		x -= x_center;
 		x *= x_width;
 
+#if 1
+		// lambda is the eigenvalue.
+		// lambda = 1/z
+		COMPLEX lambda(x,y);
+		COMPLEX zee = 1.0 / lambda;
 
+		COMPLEX zeta = zee / beta;
+#else
 		COMPLEX zeta(x,y);
+#endif
 
 		// The qfunc cannot converge for |zeta| >1 so punt
-		x = real(zeta);
-		y = imag(zeta);
-		double r = x*x + y*y;
-		if (1.0 < r) return;
+		double zx = real(zeta);
+		double zy = imag(zeta);
+		double r = zx*zx + zy*zy;
+		if (1.0 < r) continue;
 
 #define QFUNC
 #ifdef QFUNC
@@ -255,7 +263,7 @@ static void qpoly (float *array,
 		array[j] = abs(sum);
 #endif
 
-#if 1
+#if 0
 		// Print possible zeros and mark them up.
 		double mag = abs(sum);
 		if (mag < 0.015) {
