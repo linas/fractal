@@ -225,32 +225,64 @@ iterated on the real unit interval
 \end_inset
 
 , this is the Bernoulli process, the ergodic process of random coin flips.
- This case is solvable, in that it is very well-explored, as a canonical
- model of ergodic behavior.
+ This case is solvable in more ways than one; it is very well-explored,
+ and is a canonical model of ergodic behavior.
  The beta transformation is less-well studied; a full review of results
- is presented after this introduction.
+ is presented at the end of this introduction.
 \end_layout
 
 \begin_layout Standard
-The periodic orbits of the beta transform can be characterized by quasi-cyclotom
-ic polynomials; these are polynomials of the form 
-\begin_inset Formula $p_{n}\left(z\right)=z^{k+1}-b_{0}z^{k}-b_{1}z^{k-1}-\cdots-b_{k-1}z-1$
+There are two common ways to study iterated functions: in terms of point
+ dynamics and orbits (
+\begin_inset Quotes eld
 \end_inset
 
- for the 
-\begin_inset Formula $b_{j}$
+where does the point 
+\begin_inset Formula $x$
 \end_inset
 
- being binary bits (zero or one).
- However, as always, the periodic orbits are a set of measure zero, and
- a fuller picture is obtained by studying the action of the map on distributions
- on the unit interval.
- Informally, this is given by the pushforward of the beta transform, acting
- on a distribution 
+ go, when iterated?
+\begin_inset Quotes erd
+\end_inset
+
+) and in terms of distributions (
+\begin_inset Quotes eld
+\end_inset
+
+how does a scattered dust of points evolve over iteration?
+\begin_inset Quotes erd
+\end_inset
+
+).
+ The approach via distributions is arguably more powerful and constraining,
+ as the 
+\begin_inset Quotes eld
+\end_inset
+
+dust
+\begin_inset Quotes erd
+\end_inset
+
+ is a continuum, a measurable set, rather than a handful of points 
+\begin_inset Quotes eld
+\end_inset
+
+of measure zero
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The action of an iterated map on a distribution is described in terms of
+ the pushforward of the map.
+ Informally, in the present case, the pushforward of the beta transform,
+ acting on a distribution 
 \begin_inset Formula $\rho:[0,1]\to\mathbb{R}$
 \end_inset
 
- as
+ can be written as
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}\rho\right]\left(x\right)=\sum_{y\in t^{-1}\left(x\right)}\frac{\rho\left(y\right)}{\left|df/dx\right|_{y}}
@@ -259,7 +291,7 @@ ic polynomials; these are polynomials of the form
 \end_inset
 
 where the denominator is understood as the Jacobian determinant.
- Note that 
+ The operator 
 \begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
@@ -273,8 +305,8 @@ where the denominator is understood as the Jacobian determinant.
 \end_inset
 
 ; commonly explored are the polynomials, and the square-integrable functions,
- although in certain special cases, the analysis can be extended to highly
- singular, continuous-nowhere functions.
+ and, in certain special cases, the analysis can be extended to highly singular,
+ continuous-nowhere functions.
  The pushforward operator is generically called the 
 \begin_inset Quotes eld
 \end_inset
@@ -296,7 +328,8 @@ Ruelle–Frobenius–Perron operator
 
 \begin_layout Standard
 The largest eigenvalue is conventionally called the Frobenius–Perron eigenvalue;
- it is usually equal to one.
+ for the beta transform, as for many other iterated maps, it is equal to
+ one.
  Solutions to 
 \begin_inset Formula $\mathcal{L}_{\beta}\mu=\mu$
 \end_inset
@@ -334,15 +367,27 @@ The largest eigenvalue is conventionally called the Frobenius–Perron eigenvalu
 \begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho\circ t_{\beta}^{-1}$
 \end_inset
 
- and one is interested in the eigenfunctions 
+.
+ One is generally interested the spectrum of 
+\begin_inset Formula $\mathcal{L_{\beta}}$
+\end_inset
+
+.
+ In the current case, the specturm is simple enough that it can be described
+ by eigenfunctions 
 \begin_inset Formula $\mathcal{L_{\beta}\rho=\lambda\rho}$
 \end_inset
 
- of this operator, where the mapping 
+ of this operator.
+ In general, the precise spectrum depends on how the class of mappings 
 \begin_inset Formula $\rho:\mathcal{B}\to\mathbb{C}$
 \end_inset
 
- is restricted in various ways, 
+ or 
+\begin_inset Formula $\rho:\mathcal{B}\to\mathbb{R}$
+\end_inset
+
+ might be restricted: 
 \emph on
 e.g.
 
@@ -360,9 +405,33 @@ etc.
 \end_layout
 
 \begin_layout Standard
-The remainder of this section provides a very basic review of some elementary
- properties of the beta transform, starting with the full shift, aka the
- Bernoulli shift.
+This text will present a complete description of the spectrum in terms of
+ finite, bounded functions on the unit interval.
+ It is described by the zeros of a certain analytic function.
+ For special values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ corresponding to the generalized Fibonacci numbers, the analytic function
+ becomes a polynomial of the form 
+\begin_inset Formula $p_{n}\left(z\right)=z^{k+1}-b_{0}z^{k}-b_{1}z^{k-1}-\cdots-b_{k-1}z-1$
+\end_inset
+
+ for the 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ being binary bits (zero or one).
+ These are quasi-cyclotomic, in that thier roots are approximately evenely
+ distributed in an approximately curcular fashion on the complex plane.
+ This class of polynomials has numerous interesting properties, but seems
+ to never have been studied before.
+\end_layout
+
+\begin_layout Standard
+But first, the remainder of this introduction: it provides a very basic
+ review of some elementary properties of the beta transform, starting with
+ the full shift, aka the Bernoulli shift.
  The section is completed with a survey of other research results.
 \end_layout
 
