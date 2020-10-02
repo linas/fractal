@@ -1,10 +1,11 @@
 /*
  * betadisk.C
  * Visualization of the (holomorphic) q-polynomial
- * This is exactly equal to minus alldisk.C ! Horay! It's starting to make sense!
+ * This is exactly equal to minus alldisk.C !
+ * Horay! It's starting to make sense!
  *
  * .. except that the reported zeros inside the disk are probably numeric
- * artifacts! Yuck .. port to GMP
+ * artifacts!? Yuck .. port to GMP
  *
  * December 2018
  *
@@ -55,18 +56,23 @@ lodouble_t T_n(int n, lodouble_t beta)
 }
 
 // Build the q-function.
+// This is minus E(beta; zeta) where
+// E(beta; zeta) = -1 + zeta * sum_n=0 zeta^n d_n(1/2)
 COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 {
-	#define SEQLEN 820
+	// #define SEQLEN 820
+	#define SEQLEN 50
 	static bool is_init = false;
 	static int bit[SEQLEN+1];
 	if (not is_init)
 	{
 		is_init = true;
 
-// #define REGULAR_FLOAT_POINT
+#define REGULAR_FLOAT_POINT
 #ifdef REGULAR_FLOAT_POINT
-		// This .. works ... but bignum does a sanity check.
+		// This computes the bit sequence d_n(1/2)
+		// AKA the bit-sequence Theta(T^n(beta/2) - 1/2)
+		// This ... works ... but bignum does a sanity check.
 		lodouble_t K = 0.5*beta;
 		lodouble_t mid = K;
 		for (int i=0; i<SEQLEN; i++)
@@ -77,7 +83,7 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 		}
 #endif
 
-#define POLYNOMIAL_BITSTRINGS
+// #define POLYNOMIAL_BITSTRINGS
 #ifdef POLYNOMIAL_BITSTRINGS
 		// Some hand-built infinite bit-strings, as an example:
 		// bit[i] = 1 - i%2; // golden ratio n=1
@@ -155,6 +161,7 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 // zero's splattered everywhere on the complex plane, but they're
 // highly random, highly dependent on beta, hopping around all over
 // the place as beta changes.
+// In other words -- a wild gues that doesn't work out.
 COMPLEX exp_qfunc(lodouble_t beta, COMPLEX zeta)
 {
 	#undef SEQLEN
@@ -228,6 +235,7 @@ static void qpoly (float *array,
 #ifdef QFUNC
 			COMPLEX sum = qfunc(beta, zeta, itermax);
 			// Take minus the sum, to get what alldisk.C is showing.
+			// well, minus also to get E(beta; zeta)
 			sum = -sum;
 			double re = real(sum);
 			double im = imag(sum);
@@ -238,7 +246,7 @@ static void qpoly (float *array,
 #endif
 
 #ifdef EXPO_GEN_FUNC_GAME
-			// A goofy game.
+			// A goofy game. Didn't work out.
 			COMPLEX sum = exp_qfunc(beta, zeta);
 			array[j] = abs(sum);
 #endif
@@ -249,7 +257,7 @@ static void qpoly (float *array,
 				COMPLEX z = beta*zeta;
 				// COMPLEX z = zeta;
 z = 1.0/z;
-				printf("maybe zero near z=%g +i %g = %g exp(i pi %g)\n",
+				printf("maybe zero near 1/z=%g +i %g = %g exp(i pi %g)\n",
 					real(z), imag(z), abs(z), atan2(y,x)/M_PI);
 array[j] = 0.5;
 for (int k=0; k<30; k++) array[j-k]=0.25 * (k%4);

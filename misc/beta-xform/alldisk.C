@@ -48,6 +48,7 @@ double T_n(int n, double beta)
 // Build the "constant" function.
 // This appears to be independent of the value of x.
 // Which is surprising.
+// Well, not, because we now have a proof of this.
 COMPLEX dcnst(double x, double beta, COMPLEX zeta)
 {
 	if (0.5*beta < x) return 0.0;
