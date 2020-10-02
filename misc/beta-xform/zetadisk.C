@@ -173,6 +173,7 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NPTS; j++)
 	{
 		double r = ((double) j + 0.5) / ((double) NPTS);
+		r += 1.0;
 
 		COMPLEX zeta = r* phase;
 

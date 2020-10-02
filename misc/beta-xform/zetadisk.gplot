@@ -1,0 +1,9 @@
+
+set term png size 1024,768
+set out 'zetadisk.png'
+
+set logscale x
+set logscale y
+
+plot "zetadisk.dat" using 2:3 with lines linewidth 2 title "f", \
+     x**46 with lines linewidth 2 title "fit"
