@@ -247,9 +247,16 @@ Not as much is known for the case of
  Corresponding to this invariance is an invariant measure, first demonstrated
  by Renyi, and given explicit form by Gelfond and Parry.
  As an invariant measure, it is the eigenvalue-one (the Frobenius-Perron
- eigenvalue) of the transfer operator.
+ eigenvalue) eigenfunction of the transfer operator.
  The remaining spectrum of the transfer operator is poorly understood, but
  is explored by this author in a different text.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Spect20"
+literal "false"
+
+\end_inset
+
  Understanding the dissipative spectrum is important, as it explicitly describes
  the rate of convergence of numerical explorations.
 \end_layout
@@ -313,9 +320,9 @@ the situation changes: rather than there being only two (in-)equivalent
 The remainder of the introduction introduces all of the various basic ideas
  and notations pertinent to this system, followed by a short literature
  review.
- The introduction is written at a very basic mathematical level, and presumes
- almost no prior acquaintance with dynamical systems; this text is meant
- to be approachable by casual mathematical enthusiasts.
+ The introduction is written at a very low level of mathematical sophistication,
+ and presumes almost no prior acquaintance with dynamical systems; this
+ text is meant to be approachable by casual mathematical enthusiasts.
  After the introduction, the main results of this paper are presented; they
  are almost entirely grounded in a numerical exploration, as obtaining formal
  results is quite daunting.
@@ -334,7 +341,7 @@ gaps
  points in the tree can be explicitly specified; the distance between branch-poi
 nts can be explicitly stated.
  The specification of the branch-points induces a dynamical system; it has
- an invariant measure (not the Gelfond-Parry measure).
+ an invariant measure (which is not the Gelfond-Parry measure).
  The distances between branch-points can be directly related to this measure.
  The text terminates with a short conclusion and some speculations.
 \end_layout
@@ -441,7 +448,7 @@ x=0.b_{0}b_{1}b_{2}\cdots
 The Bernoulli shift has many interesting properties, connecting it to the
  Cantor set and a large class of self-similar fractals.
  It is also connected to the modular group and elliptic functions (thence
- to number theory).
+ to number theory and Riemann surfaces).
  It is also the primary example of an ergodic system, and, in a sense, has
  far-reaching implications for ergodic systems via Ornstein theory.
  These various connections are far too numerous to review here, beyond these
@@ -462,16 +469,7 @@ Shift space
 \end_layout
 
 \begin_layout Standard
-The use of the word 
-\begin_inset Quotes eld
-\end_inset
-
-shift
-\begin_inset Quotes erd
-\end_inset
-
- here deserves a small bit of formality.
- A 
+A 
 \begin_inset Quotes eld
 \end_inset
 
@@ -479,7 +477,7 @@ shift space
 \begin_inset Quotes erd
 \end_inset
 
- can be formally defined to be a set of infinite sequences of a set of 
+ is formally defined to be a set of infinite sequences of a set of 
 \begin_inset Formula $N$
 \end_inset
 
@@ -547,7 +545,7 @@ In general, a shift space does not have to include every possible sequence
 \end_inset
 
  again.
- In formulas, a shift space 
+ That is, a shift space 
 \begin_inset Formula $S$
 \end_inset
 
@@ -776,7 +774,7 @@ T_{\beta}(x)=\begin{cases}
 
 \end_inset
 
- Just as the Bernoulli shift generates a sequence of digits, so does the
+Just as the Bernoulli shift generates a sequence of digits, so does the
  beta shift: write
 \begin_inset Formula 
 \begin{equation}
@@ -863,8 +861,7 @@ reference "eq:bernoulli-bits"
 
 \end_inset
 
- gives the Bernoulli shift.
- Explicitly, one has 
+ gives the Bernoulli shift: 
 \begin_inset Formula $T_{2}\left(x\right)=b\left(x\right)$
 \end_inset
 
@@ -915,9 +912,9 @@ bifurcation diagram
 .
  Scare quotes are used, as these are imprecise terms; greater precision
  will be provided shortly.
- The bifurcation diagram was made famous by the Feigenbaum map, and so the
- same idea is applied here: track orbits over long periods of time, and
- see where they go.
+ The idea of a bifurcation diagram was made famous by the Feigenbaum map,
+ and so the same idea is applied here: track orbits over long periods of
+ time, and see where they go.
  This forms a density, which can be numerically explored by histogramming.
  This is shown in figure 
 \begin_inset CommandInset ref
@@ -1234,7 +1231,7 @@ iterated midpoints
 \begin_inset Formula $p$
 \end_inset
 
-; these are ergodicly distributed, 
+; these are ergodically distributed, 
 \emph on
 i.e.
 
@@ -1468,8 +1465,15 @@ This can be written more compactly as
 \end_inset
 
 .
- In this form, the function is known as the beta-transform, and is often
- called the 
+ In this form, the function is named 
+\begin_inset Quotes eld
+\end_inset
+
+the beta-transform
+\begin_inset Quotes erd
+\end_inset
+
+, written as the 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -1628,7 +1632,15 @@ by hand
 \begin_inset Quotes erd
 \end_inset
 
-, but doing so tends to generate a topology that is 
+, but doing so tends to generate a topology (the 
+\begin_inset Quotes eld
+\end_inset
+
+box topology
+\begin_inset Quotes erd
+\end_inset
+
+) that is 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1846,8 +1858,8 @@ noprefix "false"
  is not an isomorphism, it is more-or-less safe form most practical purposes
  to treat it as such.
  For any closed interval, there is a unique corresponding cylinder set.
- The only trouble arises at points: all dyadic rationals have two expansions
- not one, and so there, the map is not invertable.
+ The only trouble arises at a countable number of points: all dyadic rationals
+ have two expansions not one, and so there, the map is not invertable.
  However, the points all have a measure of zero in both cases, and there
  are only a countable number of such points, and the mapping always takes
  points to points.
@@ -1902,7 +1914,7 @@ Much of what is said above still holds for subshifts.
 \end_inset
 
  for almost all cylinder sets 
-\begin_inset Formula $\sigma\in\mathcal{B}$
+\begin_inset Formula $\sigma\in S$
 \end_inset
 
 .
@@ -1973,7 +1985,7 @@ pushforward
 \begin_inset Formula $\mathcal{L}_{T}:\mathcal{F\to\mathcal{F}}$
 \end_inset
 
-by setting 
+ by setting 
 \begin_inset Formula $\mathcal{L}_{T}:f\mapsto f\circ T^{-1}$
 \end_inset
 
@@ -2047,7 +2059,7 @@ noprefix "false"
 \begin_inset Formula $B_{n}\left(x\right)$
 \end_inset
 
- and have a corresponding eigenvalue of 
+ corresponding to an eigenvalue of 
 \begin_inset Formula $2^{-n}$
 \end_inset
 
@@ -2103,8 +2115,12 @@ continuous nowhere
 \end_inset
 
 .
- This rather confusing idea can be completely dispelled by observing that
- it is well-defined on all cylinder sets in 
+ This rather confusing idea (of something being continuous nowhere
+\begin_inset Quotes erd
+\end_inset
+
+) can be completely dispelled by observing that it is well-defined on all
+ cylinder sets in 
 \begin_inset Formula $\mathcal{B}$
 \end_inset
 
@@ -2113,8 +2129,8 @@ continuous nowhere
 \end_layout
 
 \begin_layout Standard
-These last examples are mentioned so as to reinforce the idea working with
- 
+These last examples are mentioned so as to reinforce the idea that working
+ with 
 \begin_inset Formula $\mathcal{B}$
 \end_inset
 
@@ -2131,15 +2147,7 @@ full shift
 \begin_inset Quotes erd
 \end_inset
 
- (besides the question-mark function, there is also the 
-\begin_inset Quotes eld
-\end_inset
-
-odometer
-\begin_inset Quotes erd
-\end_inset
-
-).
+.
  In the following text, we will be working with subshifts, primarily the
  beta-shift, but will draw on ideas from the above so as to make rigorous
  statements about measureability and invariance, without having to descend
@@ -2161,7 +2169,7 @@ The
 \end_inset
 
 -transformation, in the form of 
-\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\,\mod1$
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\mod1$
 \end_inset
 
  has been well-studied over the decades.
@@ -2247,7 +2255,7 @@ and
 \end_layout
 
 \begin_layout Standard
-In the same way that a dyadic rational 
+Similar to the way in which a dyadic rational 
 \begin_inset Formula $p/2^{n}$
 \end_inset
 
