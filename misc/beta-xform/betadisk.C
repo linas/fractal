@@ -4,11 +4,7 @@
  * This is exactly equal to minus alldisk.C !
  * Horay! It's starting to make sense!
  *
- * .. except that the reported zeros inside the disk are probably numeric
- * artifacts!? Yuck .. port to GMP
- *
  * December 2018
- *
  */
 #include <gmp.h>
 #include <math.h>
@@ -299,12 +295,6 @@ static void qpoly (float *array,
 		COMPLEX zeta(x,y);
 #endif
 
-		// The qfunc cannot converge for |zeta| >1 so punt
-		double zx = real(zeta);
-		double zy = imag(zeta);
-		double r = zx*zx + zy*zy;
-		// if (1.0 < r) continue;
-
 #define QFUNC
 #ifdef QFUNC
 		COMPLEX sum = qfunc(beta, zeta, itermax);
@@ -318,9 +308,16 @@ static void qpoly (float *array,
 		double pha = atan2(im, re)/M_PI;
 		array[j] = 0.5 + 0.5 * pha;
 
-		// array[j] = sqrt(re*re + im*im);
+		double zx = real(zeta);
+		double zy = imag(zeta);
+		double abs_zeta = sqrt(zx*zx + zy*zy);
 
-		if (1.0 < r and r <= 1.02) array[j] = 1;
+		double mag = abs(sum);
+		// double mag = sqrt(re*re + im*im);
+		mag *= exp(-20.0*sqrt(abs_zeta));
+		array[j] = mag;
+
+		if (1.0 < abs_zeta and abs_zeta <= 1.01) array[j] = 1;
 #endif
 
 #ifdef EXPO_GEN_FUNC_GAME
@@ -329,9 +326,8 @@ static void qpoly (float *array,
 		array[j] = abs(sum);
 #endif
 
-#if 1
+#if 0
 		// Print possible zeros and mark them up.
-		double mag = abs(sum);
 		if (mag < 0.015) {
 			COMPLEX z = beta*zeta;
 			// COMPLEX z = zeta;
