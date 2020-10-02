@@ -280,7 +280,7 @@ static void qpoly (float *array,
 		COMPLEX zeta = zee / beta;
 #endif
 
-#define LAMBDA_DISK_COORDS
+// #define LAMBDA_DISK_COORDS
 #ifdef LAMBDA_DISK_COORDS
 		// lambda is the eigenvalue.
 		// lambda = 1/z
@@ -290,7 +290,7 @@ static void qpoly (float *array,
 		COMPLEX zeta = zee / beta;
 #endif
 
-// #define ZETA_DISK_COORDS
+#define ZETA_DISK_COORDS
 #ifdef ZETA_DISK_COORDS
 		COMPLEX zeta(x,y);
 #endif
@@ -305,19 +305,24 @@ static void qpoly (float *array,
 		sum = -sum;
 		double re = real(sum);
 		double im = imag(sum);
-		double pha = atan2(im, re)/M_PI;
+		double pha = atan2(im, re) / M_PI;
 		array[j] = 0.5 + 0.5 * pha;
+
+		double mag = abs(sum);
+		array[j] = 0.5 * mag;
 
 		double zx = real(zeta);
 		double zy = imag(zeta);
 		double abs_zeta = sqrt(zx*zx + zy*zy);
 
-		double mag = abs(sum);
-		// double mag = sqrt(re*re + im*im);
-		mag *= exp(-20.0*sqrt(abs_zeta));
-		array[j] = mag;
-
-		if (1.0 < abs_zeta and abs_zeta <= 1.01) array[j] = 1;
+		double delta = 0.003;
+		if (1.0-delta < abs_zeta and abs_zeta <= 1.0+delta)
+		{
+			// array[j] = 0.5;
+			double zp = atan2(zy, zx) / M_PI;
+			int dit = 200 * (0.5 + 0.5 * zp);
+			if (0 == dit%2) array[j] = 0.0;
+		}
 #endif
 
 #ifdef EXPO_GEN_FUNC_GAME

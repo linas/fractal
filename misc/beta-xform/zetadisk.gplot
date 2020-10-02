@@ -2,8 +2,13 @@
 set term png size 1024,768
 set out 'zetadisk.png'
 
-set logscale x
-set logscale y
+# set logscale x
+# set logscale y
+#
+# plot "zetadisk.dat" using 2:3 with lines linewidth 2 title "f", \
+#      x**48 with lines linewidth 2 title "fit"
 
-plot "zetadisk.dat" using 2:3 with lines linewidth 2 title "f", \
-     x**48 with lines linewidth 2 title "fit"
+plot "zetadisk.dat" using 2:3 with lines linewidth 2 title "0.0", \
+     "zetadisk.dat" using 2:4 with lines linewidth 2 title "0.1", \
+     "zetadisk.dat" using 2:5 with lines linewidth 2 title "0.2", \
+     "zetadisk.dat" using 2:6 with lines linewidth 2 title "0.3", \

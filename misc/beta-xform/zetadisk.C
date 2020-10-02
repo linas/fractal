@@ -59,7 +59,7 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 	static int bit[SEQLEN+1];
 	if (not is_init)
 	{
-		is_init = true;
+		// is_init = true;
 
 #define REGULAR_FLOAT_POINT
 #ifdef REGULAR_FLOAT_POINT
@@ -153,6 +153,8 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 
 int main(int argc, char* argv[])
 {
+// #define RADIAL_SLICE
+#ifdef RADIAL_SLICE
 	if (argc < 3)
 	{
 		fprintf(stderr, "Usage: %s K theta\n", argv[0]);
@@ -165,38 +167,46 @@ int main(int argc, char* argv[])
 	double theta = atof(argv[2]);
 	COMPLEX phase = cexp(I*theta*M_PI);
 
-	int label = 0;
-
 	printf("#\n# K=%g beta=%g theta=%g\n#\n", K, beta, theta);
+#endif
+
+	int label = 0;
 
 #define NPTS 800
 	for (int j=0; j<NPTS; j++)
 	{
-		double r = ((double) j + 0.5) / ((double) NPTS);
-		r *= 2.0;
-		r += 1.0;
+		double x = ((double) j + 0.5) / ((double) NPTS);
+
+#ifdef RADIAL_SLICE
+		double r = 2.0*x + 1.0;
 
 		COMPLEX zeta = r* phase;
 
 		COMPLEX sum = qfunc(beta, zeta, label);
-
-		// Take minus the sum, to get what alldisk.C is showing.
-		// well, minus also to get E(beta; zeta)
-		sum = -sum;
-
-#if 0
-		double re = real(sum);
-		double im = imag(sum);
-		double pha = atan2(im, re)/M_PI;
-
-		double zx = real(zeta);
-		double zy = imag(zeta);
-		double abs_zeta = sqrt(zx*zx + zy*zy);
-#endif
-
 		double mag = abs(sum);
 		// double mag = sqrt(re*re + im*im);
 
 		printf("%d	%g	%g\n", j, r, mag);
+#endif
+
+#define BETA_SLICE
+#ifdef BETA_SLICE
+		double beta = x + 1.0;
+		double r = 3.0;
+		double logr = log(r);
+
+		printf("%d	%g", j, beta);
+
+		for (double the=0.0; the< 1.0; the+=0.1)
+		{
+			COMPLEX phase = cexp(I*the*M_PI);
+			COMPLEX zeta = r* phase;
+			COMPLEX sum = qfunc(beta, zeta, label);
+			double mag = abs(sum);
+			double ponent = log(mag) / logr;
+			printf("	%g", ponent);
+		}
+		printf("\n");
+#endif
 	}
 }
