@@ -155,6 +155,7 @@ int main(int argc, char* argv[])
 {
 // #define RADIAL_SLICE
 #ifdef RADIAL_SLICE
+	// The radial slize looks at E(beta;z) along a radial line of zeta.
 	if (argc < 3)
 	{
 		fprintf(stderr, "Usage: %s K theta\n", argv[0]);
@@ -189,8 +190,11 @@ int main(int argc, char* argv[])
 		printf("%d	%g	%g\n", j, r, mag);
 #endif
 
-#define BETA_SLICE
+// #define BETA_SLICE
 #ifdef BETA_SLICE
+		// The beta slice fixes r=3 and looks at the magnitude
+		// of E(beta;z) as beta is varied. The magnitude is huge.
+		// it is always an integer power of r. (!)
 		double beta = x + 1.0;
 		double r = 3.0;
 		double logr = log(r);
@@ -207,6 +211,41 @@ int main(int argc, char* argv[])
 			printf("	%g", ponent);
 		}
 		printf("\n");
+#endif
+
+#define ZERO_COUNT
+#ifdef ZERO_COUNT
+		// The zero count fixes r=3 and looks for phase continuities
+		// to count the number of zeros.
+		double beta = x + 1.0;
+		double r = 3.0;
+
+		int num_zeros = 0;
+		COMPLEX zeta = r;
+		COMPLEX sum = qfunc(beta, zeta, label);
+		double ere = real(sum);
+		double eim = imag(sum);
+		// ph ranges from -pi to +pi.
+		double phprev = atan2(eim, ere);
+
+#define NSTEPS 5000
+		for (int a=0; a<=NSTEPS; a++)
+		{
+			double the = ((double) a + 1) / ((double) NSTEPS);
+			COMPLEX phase = cexp(I*the*M_PI);
+			COMPLEX zeta = r* phase;
+			COMPLEX sum = qfunc(beta, zeta, label);
+			double ere = real(sum);
+			double eim = imag(sum);
+
+			// ph ranges from -pi to +pi.
+			double ph = atan2(eim, ere);
+
+			// This double-counts, but that's OK.
+			if (ph*phprev < 0.0) num_zeros ++;
+			phprev = ph;
+		}
+		printf("%d	%g	%d\n", j, beta, num_zeros);
 #endif
 	}
 }
