@@ -226,44 +226,48 @@ static void qpoly (float *array,
 		x -= x_center;
 		x *= x_width;
 
+
+		COMPLEX zeta(x,y);
+
+		// The qfunc cannot converge for |zeta| >1 so punt
+		x = real(zeta);
+		y = imag(zeta);
 		double r = x*x + y*y;
-		// if (r <= 4.0)
-		if (r <= 1.0)
-		{
-			COMPLEX zeta(x,y);
+		if (1.0 < r) return;
+
 #define QFUNC
 #ifdef QFUNC
-			COMPLEX sum = qfunc(beta, zeta, itermax);
-			// Take minus the sum, to get what alldisk.C is showing.
-			// well, minus also to get E(beta; zeta)
-			sum = -sum;
-			double re = real(sum);
-			double im = imag(sum);
-			double pha = atan2(im, re)/M_PI;
-			array[j] = 0.5 + 0.5 * pha;
+		COMPLEX sum = qfunc(beta, zeta, itermax);
+		// Take minus the sum, to get what alldisk.C is showing.
+		// well, minus also to get E(beta; zeta)
+		sum = -sum;
+		double re = real(sum);
+		double im = imag(sum);
+		double pha = atan2(im, re)/M_PI;
+		array[j] = 0.5 + 0.5 * pha;
 
-			if (1.0 < r and r <= 1.02) array[j] = 1;
+		if (1.0 < r and r <= 1.02) array[j] = 1;
 #endif
 
 #ifdef EXPO_GEN_FUNC_GAME
-			// A goofy game. Didn't work out.
-			COMPLEX sum = exp_qfunc(beta, zeta);
-			array[j] = abs(sum);
+		// A goofy game. Didn't work out.
+		COMPLEX sum = exp_qfunc(beta, zeta);
+		array[j] = abs(sum);
 #endif
 
 #if 1
-			double mag = abs(sum);
-			if (mag < 0.015) {
-				COMPLEX z = beta*zeta;
-				// COMPLEX z = zeta;
+		// Print possible zeros and mark them up.
+		double mag = abs(sum);
+		if (mag < 0.015) {
+			COMPLEX z = beta*zeta;
+			// COMPLEX z = zeta;
 z = 1.0/z;
-				printf("maybe zero near 1/z=%g +i %g = %g exp(i pi %g)\n",
-					real(z), imag(z), abs(z), atan2(y,x)/M_PI);
+			printf("maybe zero near 1/z=%g +i %g = %g exp(i pi %g)\n",
+				real(z), imag(z), abs(z), atan2(y,x)/M_PI);
 array[j] = 0.5;
 for (int k=0; k<30; k++) array[j-k]=0.25 * (k%4);
-			}
-#endif
 		}
+#endif
 	}
 }
 
