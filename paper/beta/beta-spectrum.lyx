@@ -4988,171 +4988,53 @@ Exploring
 
 \begin_layout Standard
 The function is easily explored numerically.
- It appears to be convergent everywhere in the complex 
-\begin_inset Formula $\zeta$
+ It is clearly convergent in the unit disk 
+\begin_inset Formula $\left|\zeta\right|<1$
 \end_inset
 
--plane.
- That is, it seems to have no poles or cuts, only zeros, for all values
- of 
+ and has no poles in the disk.
+ For almost all 
 \begin_inset Formula $\beta$
 \end_inset
 
-.
- The zeros appear to be arranged roughly uniformly near the circle 
-\begin_inset Formula $\left|\zeta\right|=1$
-\end_inset
-
-; this is shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Zeros-of"
-plural "false"
-caps "false"
-noprefix "false"
-
+, there seem to be a countable number of zeros within the disk, accumulating
+ uniformly on the boundary as 
+\begin_inset Formula $\left|\zeta\right|\to1$
 \end_inset
 
 .
-\end_layout
+ The notion of 
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
+uniformly
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Plain Layout
+ will be made slightly more precise in the next section, where it is observed
+ that, for certain special values of 
+\begin_inset Formula $\beta$
+\end_inset
 
-\end_layout
+, the bit-sequence 
+\begin_inset Formula $d_{n}\left(\frac{1}{2}\right)$
+\end_inset
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Zeros of 
+ is periodic, and thus 
 \begin_inset Formula $E\left(\beta;z\right)$
 \end_inset
 
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Zeros-of"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename betadisk-0.6.png
-	lyxscale 20
-	width 22col%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename betadisk-0.7.png
-	lyxscale 20
-	width 22col%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename betadisk-0.8.png
-	lyxscale 20
-	width 22col%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename betadisk-0.9.png
-	lyxscale 20
-	width 22col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Plots of the magnitude 
-\begin_inset Formula $\left|E\left(\beta;z\right)\right|$
-\end_inset
-
- for 
-\begin_inset Formula $\beta$
-\end_inset
-
-=1.2, 1.4, 1.6 and 1.8, left to right.
- The color scheme is such that green corresponds to a magnitude of 1.0; red
- are higher magnitudes, blue is lower, and the zeros are black.
- The dashed ring corresponds to 
+ is a polynomial.
+ When it is polynomial, there are a finite number of zeros (obviously; the
+ degree of the polynomial), which are distributed approximately uniformly
+ near the circle 
 \begin_inset Formula $\left|\zeta\right|=1$
 \end_inset
 
 .
- The largest, most prominent zero on the right of each image corresponds
- to the Frobenius Perron eigenvalue 
-\begin_inset Formula $\lambda=1$
-\end_inset
-
- which occurs at 
-\begin_inset Formula $\zeta=1/\beta$
-\end_inset
-
-.
- It's quite clear that the zeros are always not very far from the 
-\begin_inset Formula $\left|\zeta\right|=1$
-\end_inset
-
- circle, and are more-or-less uniformly distributed.
- The same technique can be used to plot the phase instead of the magnitude;
- doing so clearly reveals that there are a finite number of zeros (
-\emph on
-i.e.
-
-\emph default
- that none are so small as to be hiding in this image) and that there are
- no poles hidden in the red regions.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Generated with betadisk.C
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+ As the degree of the polynomial increases, so do the number of zeros; but
+ they remain distributed approximately evenly.
+ In this sense, the limit of infinite degree seems to continue to hold.
 \end_layout
 
 \begin_layout Standard
@@ -5471,24 +5353,7 @@ A handful of selected zeros are listed in the table below.
 \begin_layout Standard
 These are not particularly meaningful numbers; they just give a flavor for
  some locations of eigenvalues.
- Greater insight into the location of these zeros is developed in the next
- section, where it is observed that, for certain special values of 
-\begin_inset Formula $\beta$
-\end_inset
-
-, the bit-sequence 
-\begin_inset Formula $d_{n}\left(\frac{1}{2}\right)$
-\end_inset
-
- is periodic, and thus 
-\begin_inset Formula $E\left(\beta;z\right)$
-\end_inset
-
- is a polynomial.
-\end_layout
-
-\begin_layout Standard
-Given a zero, the corresponding eigenfunction is also very easily computed.
+ Given a zero, the corresponding eigenfunction is also very easily computed.
  A typical eigenfunction is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5506,6 +5371,8 @@ reference "fig:Undershift-Density-Distribution"
 
 , in that it is not strictly decreasing, it does have the same general plateau-l
 ike regions.
+ Note that all such eigenfunctions are bounded and generally, differentiable-now
+here.
 \end_layout
 
 \begin_layout Standard
@@ -5550,12 +5417,71 @@ name "fig:Typical-Eigenfunction"
 \end_layout
 
 \begin_layout Standard
-In order for a holomorphic function to have only zeros, there must be an
- essential singularity at infinity.
-\end_layout
+As the zeros accumulate onto the circle 
+\begin_inset Formula $\left|\zeta\right|\to1$
+\end_inset
 
-\begin_layout Standard
- 
+, there appears to be no way to holomorphicly continue the function 
+\begin_inset Formula $E\left(\beta;z\right)$
+\end_inset
+
+ outside of the unit circle.
+ This indicates that there is a lower bound on the possible eigenvalues
+ that can be reached via the eigenfunctions of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The lower bound is 
+\begin_inset Formula $\lambda=1/\beta$
+\end_inset
+
+; if there are eigenfunctions with smaller eigenvalue, they cannot be written
+ in the form of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is possible that these exist: certainly, that is the suggestion from
+ the special case of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, where there is a discrete spectrum 
+\begin_inset Formula $\lambda=2^{-n}$
+\end_inset
+
+ of real-analytic eigenfunctions, given by the Bernoulli polynomials, and
+ a continuos spectrum filling the unit disk, consisting of square-integrable
+ eigenfunctions.
+ The 
+\begin_inset Formula $\beta\to2$
+\end_inset
+
+ limit of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ does not approach either of these cases.
+ The description seems incomplete.
 \end_layout
 
 \begin_layout Section

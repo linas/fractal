@@ -1,8 +1,12 @@
 /*
  * betadisk.C
+ *
  * Visualization of the (holomorphic) q-polynomial
  * This is exactly equal to minus alldisk.C !
  * Horay! It's starting to make sense!
+ *
+ * For general beta that are no polynomial, there is a countable
+ * infinity of zeros accumulating on the edge of the disk.
  *
  * December 2018
  */
@@ -56,15 +60,15 @@ lodouble_t T_n(int n, lodouble_t beta)
 // E(beta; zeta) = -1 + zeta * sum_n=0 zeta^n d_n(1/2)
 COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 {
-	// #define SEQLEN 820
-	#define SEQLEN 50
+	#define SEQLEN 820
+	// #define SEQLEN 50
 	static bool is_init = false;
 	static int bit[SEQLEN+1];
 	if (not is_init)
 	{
 		is_init = true;
 
-#define REGULAR_FLOAT_POINT
+// #define REGULAR_FLOAT_POINT
 #ifdef REGULAR_FLOAT_POINT
 		// This computes the bit sequence d_n(1/2)
 		// AKA the bit-sequence Theta(T^n(beta/2) - 1/2)
@@ -122,7 +126,7 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 #endif // POLYNOMIAL_BITSTRINGS
 
 
-// #define BIGNUM_MIDPOINTS
+#define BIGNUM_MIDPOINTS
 #ifdef BIGNUM_MIDPOINTS
 		double K = 0.5*beta;
 		midpoint_seq(K, SEQLEN+50, 0x0, bit, SEQLEN+1);
@@ -159,7 +163,6 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 // E(beta; zeta) = -1 + zeta * sum_n=0 zeta^n d_n(1/2)
 COMPLEX qfunc_continue(lodouble_t beta, COMPLEX zeta)
 {
-	#define SEQLEN 50
 	static bool is_init = false;
 	static int bit[SEQLEN+1];
 	if (not is_init)
@@ -308,8 +311,8 @@ static void qpoly (float *array,
 		double pha = atan2(im, re) / M_PI;
 		array[j] = 0.5 + 0.5 * pha;
 
-		double mag = abs(sum);
-		array[j] = 0.5 * mag;
+		// double mag = abs(sum);
+		// array[j] = 0.5 * mag;
 
 		double zx = real(zeta);
 		double zy = imag(zeta);

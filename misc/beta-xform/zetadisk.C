@@ -1,5 +1,10 @@
 /*
  * zetadisk.C
+ * Utter fail.
+ * This just explores **obvious** properties of polynomials,
+ * and for some reason I failed to realize this for hours. Stupid me.
+ * The code works, but the meaning of the code is valueless.
+ *
  * Radial slice through the (holomorphic) q-polynomial
  * This is a copy of betadisk.C but one-diemnsional.
  *
@@ -54,7 +59,7 @@ lodouble_t T_n(int n, lodouble_t beta)
 COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 {
 	// #define SEQLEN 820
-	#define SEQLEN 50
+	#define SEQLEN 40
 	static bool is_init = false;
 	static int bit[SEQLEN+1];
 	if (not is_init)
@@ -221,6 +226,8 @@ int main(int argc, char* argv[])
 		double r = 3.0;
 
 		int num_zeros = 0;
+		int num_up = 0;
+		int num_down = 0;
 		COMPLEX zeta = r;
 		COMPLEX sum = qfunc(beta, zeta, label);
 		double ere = real(sum);
@@ -229,10 +236,10 @@ int main(int argc, char* argv[])
 		double phprev = atan2(eim, ere);
 
 #define NSTEPS 5000
-		for (int a=0; a<=NSTEPS; a++)
+		for (int a=0; a<NSTEPS; a++)
 		{
 			double the = ((double) a + 1) / ((double) NSTEPS);
-			COMPLEX phase = cexp(I*the*M_PI);
+			COMPLEX phase = cexp(I*the*2.0*M_PI);
 			COMPLEX zeta = r* phase;
 			COMPLEX sum = qfunc(beta, zeta, label);
 			double ere = real(sum);
@@ -242,10 +249,21 @@ int main(int argc, char* argv[])
 			double ph = atan2(eim, ere);
 
 			// This double-counts, but that's OK.
-			if (ph*phprev < 0.0) num_zeros ++;
+			if (ph*phprev < 0.0)
+			{
+				num_zeros ++;
+				if (0.0 < ph) num_up ++;
+				else num_down ++;
+// printf("duude a=%d the=%g up=%d dn=%d phprev=%g  ph=%g\n", a, the, num_up, num_down, ph, phprev);
+			}
 			phprev = ph;
 		}
-		printf("%d	%g	%d\n", j, beta, num_zeros);
+		printf("%d	%g	%d	%d	%d\n", j, beta, num_zeros, num_up, num_down);
+		if (0 != num_zeros % 2)
+		{
+			fprintf(stderr, "FAIL!!!!\n");
+			exit(1);
+		}
 #endif
 	}
 }
