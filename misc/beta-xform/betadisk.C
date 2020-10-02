@@ -157,11 +157,12 @@ COMPLEX qfunc(lodouble_t beta, COMPLEX zeta, int label)
 }
 
 // Build the analytically-continued q-function.
+// This is silly, because there is no pole,
+// and no continuation is needed! What was I thinking?
 // This is minus E(beta; zeta) where
 // E(beta; zeta) = -1 + zeta * sum_n=0 zeta^n d_n(1/2)
 COMPLEX qfunc_continue(lodouble_t beta, COMPLEX zeta)
 {
-	// #define SEQLEN 820
 	#define SEQLEN 50
 	static bool is_init = false;
 	static int bit[SEQLEN+1];
@@ -181,19 +182,6 @@ COMPLEX qfunc_continue(lodouble_t beta, COMPLEX zeta)
 			bit[i] = 0;
 			if (0.5 < mid) bit[i] = 1;
 			mid = downshift(mid, K);
-		}
-#endif
-
-// #define BIGNUM_MIDPOINTS
-#ifdef BIGNUM_MIDPOINTS
-		double K = 0.5*beta;
-		midpoint_seq(K, SEQLEN+50, 0x0, bit, SEQLEN+1);
-
-		// Above generates a sequence starting with zero;
-		// below uses sequence starting with one...
-		for (int i=0; i<SEQLEN; i++)
-		{
-			bit[i] = bit[i+1];
 		}
 #endif
 	}
@@ -296,7 +284,7 @@ static void qpoly (float *array,
 		COMPLEX zeta = zee / beta;
 #endif
 
-// #define LAMBDA_DISK_COORDS
+#define LAMBDA_DISK_COORDS
 #ifdef LAMBDA_DISK_COORDS
 		// lambda is the eigenvalue.
 		// lambda = 1/z
@@ -306,7 +294,7 @@ static void qpoly (float *array,
 		COMPLEX zeta = zee / beta;
 #endif
 
-#define ZETA_DISK_COORDS
+// #define ZETA_DISK_COORDS
 #ifdef ZETA_DISK_COORDS
 		COMPLEX zeta(x,y);
 #endif
@@ -319,8 +307,8 @@ static void qpoly (float *array,
 
 #define QFUNC
 #ifdef QFUNC
-		// COMPLEX sum = qfunc(beta, zeta, itermax);
-		COMPLEX sum = qfunc_continue(beta, zeta);
+		COMPLEX sum = qfunc(beta, zeta, itermax);
+		// COMPLEX sum = qfunc_continue(beta, zeta);
 
 		// Take minus the sum, to get what alldisk.C is showing.
 		// well, minus also to get E(beta; zeta)
@@ -330,7 +318,7 @@ static void qpoly (float *array,
 		double pha = atan2(im, re)/M_PI;
 		array[j] = 0.5 + 0.5 * pha;
 
-		array[j] = sqrt(re*re + im*im);
+		// array[j] = sqrt(re*re + im*im);
 
 		if (1.0 < r and r <= 1.02) array[j] = 1;
 #endif
