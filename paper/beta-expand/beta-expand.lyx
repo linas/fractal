@@ -2866,13 +2866,13 @@ where
 
  by setting 
 \begin_inset Formula 
-\[
+\begin{equation}
 k_{n}^{\prime}=\begin{cases}
 k_{n} & \mbox{ for }n\le n_{j}\\
 0 & \mbox{ for }n=n_{j}+1\\
 \kappa_{n} & \mbox{ for }n_{j}+1<n
-\end{cases}
-\]
+\end{cases}\label{eq:expanded bits}
+\end{equation}
 
 \end_inset
 
@@ -4341,7 +4341,7 @@ dense in the tree
 \end_inset
 
 .
- Intuitively, having dense branch-points, suggests that the corresponding
+ Intuitively, having dense branch-points suggests that the corresponding
  map should have a positive measure on the real number line.
  In this case, one then expects the out-of-bounds measure to be roughly
  proportional to 
@@ -4363,8 +4363,8 @@ Each alternative expansion arises from an alternative orbit.
 \end_inset
 
  is a specific path down the binary tree.
- it is a sequence of left-right moves down the tree.
- Denote these as 
+ It is a sequence of left-right moves down the tree.
+ Denote these moves as 
 \begin_inset Formula $\gamma=\left(\gamma_{0},\gamma_{1},\gamma_{2},\cdots\right)$
 \end_inset
 
@@ -4386,7 +4386,15 @@ Each alternative expansion arises from an alternative orbit.
 \end_inset
 
 -expansion along that particular path.
- The alternative orbit is then given by
+ Given a walk 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ down the infinite tree, the alternative orbit for 
+\begin_inset Formula $x$
+\end_inset
+
+ is then given by
 \end_layout
 
 \begin_layout Standard
@@ -4405,7 +4413,7 @@ Each alternative expansion arises from an alternative orbit.
 \color none
 \begin_inset Formula 
 \[
-\tau_{n}\left(x\right)=\begin{cases}
+\tau_{n}\left(x;\gamma\right)=\begin{cases}
 T_{\beta}^{n}\left(x\right) & \mbox{ for }n<p_{0}\\
 \left(1-\gamma_{0}\right)\beta T_{\beta}^{p_{0}-1}\left(x\right)+\gamma_{0}T_{\beta}^{p_{0}}\left(x\right) & \mbox{ for }n=p_{0}\\
 T_{\beta}^{n-p_{0}}\left(\tau_{p_{0}}\left(x\right)\right) & \mbox{ for }p_{0}<n<p_{1}\\
@@ -4418,10 +4426,10 @@ T_{\beta}^{n-p_{k}}\left(\tau_{p_{k}}\left(x\right)\right) & \mbox{ for }p_{k}<n
 
 \end_inset
 
-This sequence has a corresponding bit string expansion
+This orbit has a corresponding bit string expansion
 \begin_inset Formula 
 \[
-\kappa_{n}\left(x\right)=\begin{cases}
+\kappa_{n}\left(x;\gamma\right)=\begin{cases}
 0 & \mbox{ if }0\le\tau_{n}(x)<\frac{1}{2}\mbox{ and n\ensuremath{\ne p_{k}}}\\
 1 & \mbox{ if }\frac{1}{2}\le\tau_{n}(x)\le1\mbox{ and n\ensuremath{\ne p_{k}}}\\
 \gamma_{k} & \mbox{ if }n=p_{k}
@@ -4447,7 +4455,7 @@ By construction, one has that each of these bit strings provide an inequivalent
  that
 \begin_inset Formula 
 \[
-x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x\right)}{\beta^{n}}
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x;\gamma\right)}{\beta^{n}}
 \]
 
 \end_inset
@@ -4456,9 +4464,12 @@ by construction.
 \end_layout
 
 \begin_layout Standard
-As there are an uncountable number of paths down the binary tree, the collection
- of such orbits 
-\begin_inset Formula $\tau_{n}\left(x\right)$
+As there are an uncountable number of paths 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ down the binary tree, the collection of such orbits 
+\begin_inset Formula $\tau_{n}\left(x;\gamma\right)$
 \end_inset
 
  is also uncountable.
@@ -4486,7 +4497,7 @@ non-zero measure
 \end_inset
 
  endowed with the product topology.
- The topology is extedned to a sigma-algebra in the conventional way; denote
+ The topology is extended to a sigma-algebra in the conventional way; denote
  this Borel algebra by 
 \begin_inset Formula $\mathcal{B}$
 \end_inset
@@ -4498,12 +4509,57 @@ non-zero measure
 \begin_inset Formula $\beta$
 \end_inset
 
--expansion, always results in an interval of finite measure.
- The action of 
+-expansion, the cylinder always results in an interval of finite measure.
+ Let 
+\begin_inset Formula $\mathcal{S}\subset\mathcal{B}$
+\end_inset
+
+ be the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ subshift: that is, the collection of all bit-strings given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathcal{S}^{\prime}\subset\mathcal{B}$
+\end_inset
+
+ be the expanded subshift, that is, 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ plus all the bit-strings given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expanded bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The action of 
 \begin_inset Formula $T_{\beta}^{-1}$
 \end_inset
 
- is well-defined on cylinder sets, and given that 
+ is well-defined on cylinder sets in 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+, and given that 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -4515,19 +4571,23 @@ non-zero measure
 \begin_inset Formula $\tau^{-1}$
 \end_inset
 
- is also a map of cylinder sets.
+ is also a map of cylinder sets, defined on 
+\begin_inset Formula $\mathcal{S}^{\prime}$
+\end_inset
+
+.
  That is, the map 
-\begin_inset Formula $\tau^{-1}:\mathcal{B\to\mathcal{B}}$
+\begin_inset Formula $\tau^{-1}:\mathcal{S^{\prime}\to\mathcal{S}^{\prime}}$
 \end_inset
 
- is a map of the Borel algebra 
-\begin_inset Formula $\mathcal{B}$
+ is a map of the Borel (sub-)algebra 
+\begin_inset Formula $\mathcal{S^{\prime}}$
 \end_inset
 
-, preserving all of the sigma-algebra properties of the product topology.
+, preserving all of the sigma-algebra properties of the subspace topology.
  It will have an associated invariant measure, the Ruelle-Frobenius-Perron
  measure, 
-\begin_inset Formula $\mu_{\beta}:\mathcal{B}\to\mathbb{R}$
+\begin_inset Formula $\mu_{\beta}:\mathcal{S^{\prime}}\to\mathbb{R}$
 \end_inset
 
 .
@@ -4536,7 +4596,7 @@ non-zero measure
 \end_inset
 
  for all cylinders 
-\begin_inset Formula $c\in\mathcal{B}$
+\begin_inset Formula $c\in\mathcal{S^{\prime}}$
 \end_inset
 
  having 
@@ -4579,7 +4639,7 @@ noprefix "false"
 \end_inset
 
 .
- A visualizatio of the measure over the entire range 
+ A visualization of the measure over the entire range 
 \begin_inset Formula $1<\beta<2$
 \end_inset
 
