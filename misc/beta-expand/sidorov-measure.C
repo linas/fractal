@@ -51,6 +51,7 @@ int main (int argc, char* argv[])
 		{
 			for (int j=0; j<ntracks; j++)
 			{
+				std::vector<bool> bits = bitset[j];
 				std::vector<mpf_class> orbit = orbit_set[j];
 				std::vector<int> branch_points = branch_set[j];
 
@@ -59,15 +60,26 @@ int main (int argc, char* argv[])
 				if (orbit.size() <= norb) norb = orbit.size() -1;
 				if ((int) norb < k) continue;
 
-/*
+
+#define BRANCH_HACKERY
+#ifdef BRANCH_HACKERY
+				double scale = 1.0;
 				bool branch = false;
-				for (int b = 0; b<nb; b++)
-					if (k == branch_points[nb]) branch = true;
-				if (branch) continue;
-*/
+				int len = 0;
+				for (int b = 0; b<(int)nb; b++)
+					if (k == branch_points[b]) { branch = true; len=b; break; }
+				if (branch) scale = -0.5/dbeta;
+#endif
 
 				double x = mpf_get_d(orbit[k].get_mpf_t());
-				if (y < x) acc += bpn;
+				// if (y < x) acc += bpn;
+				// if (scale * y < scale * x) acc += bpn;
+				if (not branch and y < x) acc += bpn;
+				if (branch)
+				{
+					if (bits[k] and y < x) acc += bpn;
+					if (not bits[k] and dbeta*y < x) acc -= dbeta*bpn;
+				}
 			}
 
 			bpn /= dbeta;
