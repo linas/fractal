@@ -1,5 +1,5 @@
 /*
- * sidorov-density.C
+ * sidorov-bifur.C
  * Graph fake bifurcation diagrams.
  * Great hopes for this fizzled. There are trees, but not visually dramatic.
  *

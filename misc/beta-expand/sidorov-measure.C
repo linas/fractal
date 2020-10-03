@@ -1,6 +1,6 @@
 /*
  * sidorov-measure.C
- * Take a stab at the a-priori measure.
+ * Try to guess what the extended measure is.
  *
  * Linas Vepstas Sept 2020
  */
