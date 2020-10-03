@@ -28,21 +28,37 @@ plot "sido-len-80-16.dat" using (2*$1):4 lw 2 title "2^4 expansions", \
      (0.75/((x-1)*(2-x))) title "3/4({/Symbol b}-1)(2-{/Symbol b})"
 
 
-set term postscript eps color enhanced
-set out 'sido-length.eps'
-
-plot "sido-len-80-16.dat" using (2*$1):4 lw 2 title "2^4 expansions", \
-     "sido-len-100-128.dat" using (2*$1):4 lw 2 title "2^7 expansions", \
-     "sido-len-160-4096.dat" using (2*$1):4  lw 2 title "2^{12} expansions", \
-     (0.75/((x-1)*(2-x))) title "3/4({/Symbol b}-1)(2-{/Symbol b})"
-
-# set out 'sido-length-rms.png'
-# set title "Max and RMS distance between branch points"
-# plot "sido-len-1600-3x67-128-rms.dat" using (2*$1):5 lw 2 title "Longest", \
-#      "sido-len-1600-3x67-128-rms.dat" using (2*$1):6 lw 2 title "RMS length", \
-#      "sido-len-1600-3x67-128-rms.dat" using (2*$1):4 lw 2 title "Average length"
-
 # Try to fit the extreme end
 #set out 'sido-delta.png'
 #plot "sido-len-1600-3x67-128-rms.dat" using (2*$1):($4) lw 2 title "2^7 raw", \
 #     "sido-len-1600-3x67-128-rms.dat" using (2*$1):($4 - 0.25/((2*$1-1)*(2-2*$1)*(2-2*$1))) lw 2 title "2^7 delta"
+
+##############################################################################
+# The version used in the paper.
+#
+# set term postscript eps color enhanced
+# set out 'sido-length.eps'
+#
+# plot "sido-len-80-16.dat" using (2*$1):4 lw 2 title "2^4 expansions", \
+#      "sido-len-100-128.dat" using (2*$1):4 lw 2 title "2^7 expansions", \
+#      "sido-len-160-4096.dat" using (2*$1):4  lw 2 title "2^{12} expansions", \
+#      (0.75/((x-1)*(2-x))) title "3/4({/Symbol b}-1)(2-{/Symbol b})"
+#
+##############################################################################
+# 
+# Heh. I was gonna use this in the paper, but its a boring graph...
+# The curves are exact multiples.
+#
+set term png size 900,600
+set out 'sido-length-rms.png'
+# set term postscript eps color enhanced
+# set out 'sido-length-rms.eps'
+set title "Max and RMS distance between branch points"
+plot "sido-len-160-4096.dat" using (2*$1):($5 * (1+2*$1)/(12*(2-4*$1))) lw 2 title "Longest", \
+     "sido-len-1600-3x67-128-rms.dat" using (2*$1):($5 * (1+2*$1)/(7 *(2-4*$1))) lw 2 title "Longest 7", \
+     "sido-len-1600-3x67-128-rms.dat" using (2*$1):($6/sqrt(7)) lw 2 title "RMS 7", \
+     "sido-len-160-4096.dat" using (2*$1):($6/sqrt(12)) lw 2 title "RMS length", \
+     "sido-len-160-4096.dat" using (2*$1):4 lw 2 title "Average length"
+
+# As above but up to s^7 only
+###############################################################################

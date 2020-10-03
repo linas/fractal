@@ -3929,7 +3929,7 @@ This shows the numerically estimated distance
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Created with sido-length.gplot
@@ -4265,20 +4265,62 @@ length of the branching cylinder changes.
 
 \begin_layout Standard
 The distribution of the distances seems to be well-behaved.
- Figure xx shows the root-mean-square of the distances, as well as the longest
- distance.
- It appears that 
-\begin_inset Formula $\mbox{rms}\hat{\ell}\left(\beta\right)\approx2.5\hat{\ell}\left(\beta\right)$
+ Define the variation as 
+\begin_inset Formula 
+\[
+\mbox{var}s_{n}\left(\beta\right)=\frac{1}{2^{n}}\sum_{\gamma:\mbox{len}\gamma=n}p^{2}\left(\gamma\right)
+\]
+
 \end_inset
 
- comes close to holding exactly, in that the shapes of the curves are nearly
- identical.
- The maximum length curve is not.
- Although the scale is approximately 
-\begin_inset Formula $\mbox{max}\hat{\ell}\left(\beta\right)\approx10\hat{\ell}\left(\beta\right)$
+so that the root-mean-square varation becomes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mbox{rms}\hat{\ell}\left(\beta\right)=\lim_{n\to\infty}\sqrt{\frac{\int_{0}^{1}\mbox{var}s_{n}\left(\beta\right)dx-\hat{\ell}_{n}^{2}\left(\beta\right)}{n}}
+\]
+
 \end_inset
 
-, the shape of the curve is distinctly different.
+The numeric evidence suggests that the limit exists, and that 
+\begin_inset Formula $\hat{\ell}\left(\beta\right)=\mbox{rms}\hat{\ell}\left(\beta\right)$
+\end_inset
+
+ holds exactly.
+ Likewise, define the longest distance btween two branch-points at a given
+ level as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\max s_{n}\left(\beta\right)=\max_{\gamma:\mbox{len}\gamma=n}p\left(\gamma\right)
+\]
+
+\end_inset
+
+and similarly, the same quantity averaged over all starting points 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+ in the unit interval:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\max\hat{\ell}\left(\beta\right)=\lim_{n\to\infty}\frac{\int_{0}^{1}\max s_{n}dx}{n}
+\]
+
+\end_inset
+
+The numeric evidence suggests that this limit exists and that 
+\begin_inset Formula $\max\hat{\ell}\left(\beta\right)=\left(\left(2-\beta\right)/\left(1+\beta\right)\right)\hat{\ell}\left(\beta\right)$
+\end_inset
+
+ holds exactly.
 \end_layout
 
 \begin_layout Subsection
