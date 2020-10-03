@@ -3607,17 +3607,18 @@ This appears to be well-defined, as the results from Sidorov state that
 
 , and certainly the numerics show nothing amiss.
  This definition will soon be replaced by a more appropriate one, in the
- next section.
- This a suitable 
+ next section, which integrates over a certain invariant measure.
+ However, as that measure has not yet been specified, the above will serve
+ as a suitable interim definition.
+ It's a 
 \begin_inset Quotes eld
 \end_inset
 
-interim
+reasonable
 \begin_inset Quotes erd
 \end_inset
 
- definition for the current discussion of the average distance between branch
- points.
+ definition of the average distance between branch points.
 \end_layout
 
 \begin_layout Standard
@@ -4324,7 +4325,7 @@ The numeric evidence suggests that this limit exists and that
 \end_layout
 
 \begin_layout Subsection
-Orbits and measures
+Orbits, subshifts and measures
 \end_layout
 
 \begin_layout Standard
@@ -4467,7 +4468,15 @@ noprefix "false"
 \begin_inset Formula $\gamma$
 \end_inset
 
- that
+ (and almost all 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+) that
 \begin_inset Formula 
 \[
 x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x;\gamma\right)}{\beta^{n}}
@@ -4476,6 +4485,196 @@ x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x;\gamma\right)}{\beta^{
 \end_inset
 
 by construction.
+\end_layout
+
+\begin_layout Standard
+For each distinct 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, one has a distinct set of orbits, and a distinct set of bit-strings.
+ For the special case of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ being all right-moves (all ones), the set of bitstrings is the usual beta
+ subshift, and the orbits are the usual beta-transform orbits, with the
+ usual Gelfond–Parry measure.
+ By construction, something similar must happen for every choice of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ By the work of Sidorov
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sidorov03"
+literal "false"
+
+\end_inset
+
+, we know that the tree is fully populated.
+ That is, fix some finite-length intial run of bits in 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, and consider the iteration of the unit interval to just that point.
+ This leaves a distribution which still has a non-vanishing measure everywhere.
+ Applying Sidorov's arguments, almost every 
+\begin_inset Formula $x$
+\end_inset
+
+ has an infinite number of distinct beta expansions: that is, the tree is
+ at least partly populated below the initial run.
+ But this holds for every finite initial run; one concludes that the tree
+ is fully populated.
+\end_layout
+
+\begin_layout Standard
+Holding 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ fixed, define the subshift 
+\begin_inset Formula $S_{\gamma}$
+\end_inset
+
+ as the set
+\begin_inset Formula 
+\[
+S_{\gamma}=\left\{ \kappa_{n}\left(x;\gamma\right):0\le x\le1\right\} 
+\]
+
+\end_inset
+
+By the above arguments, this has an uncountable number of points in it.
+ It's clearly a subshift, as it is a beta expansion; the shift map is 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ As such, it inherits a subspace topology 
+\begin_inset Formula $\mathcal{S}_{\gamma}\subset\mathcal{B}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is the sigma algebra on the Cantor space 
+\begin_inset Formula $\{0,1\}^{\omega}$
+\end_inset
+
+.
+ (Care has been taken to write the calligraphic 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ for the topology, to distinguish from the italic 
+\begin_inset Formula $S$
+\end_inset
+
+ that is the set of orbits.) Recall that the elements of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ are cylinder sets; every such cylinder set has a finite Bernoulli measure
+ (which is equal to the corresponding measure on the unit intrval of the
+ reals).
+ The same holds for 
+\begin_inset Formula $\mathcal{S}_{\gamma}$
+\end_inset
+
+.
+ The shift map 
+\begin_inset Formula $\tau$
+\end_inset
+
+ then induces a map of cylinder sets: 
+\begin_inset Formula $\tau^{-1}:\mathcal{S}_{\gamma}\to\mathcal{S}_{\gamma}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ be some set of functions on 
+\begin_inset Formula $\mathcal{S}_{\gamma}$
+\end_inset
+
+, so that 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ is a map 
+\begin_inset Formula $f:\mathcal{S}_{\gamma}\to\mathbb{R}$
+\end_inset
+
+.
+ The shift map then induces a linear operator on 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+, the pushforward 
+\begin_inset Formula $\mathcal{L}_{\gamma}:\mathcal{F}\to\mathcal{F}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\mathcal{L}_{\gamma}f=f\circ\tau^{-1}$
+\end_inset
+
+.
+ As a linear operator acting on some space of functions, it has a spectrum.
+ As this is obtained from a shift, it is the Frobenius–Perron operator.
+ The largest member of the spectrum is the Frobenius–Perron eigenfunction,
+ given by 
+\begin_inset Formula $\mathcal{L}_{\gamma}\mu=\mu\circ\tau^{-1}=\mu$
+\end_inset
+
+; this is just the invariant measure on 
+\begin_inset Formula $\mathcal{S}_{\gamma}$
+\end_inset
+
+.
+ To summarize: each and every distinct 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ (and there are an uncountable number of these!) has a corresponding subshift
+ 
+\begin_inset Formula $\mathcal{S}_{\gamma}$
+\end_inset
+
+ with a shift map 
+\begin_inset Formula $\tau_{\gamma}$
+\end_inset
+
+, a transfer operator 
+\begin_inset Formula $\mathcal{L}_{\gamma}$
+\end_inset
+
+ having some spectrum, an an invariant measure 
+\begin_inset Formula $\mu_{\gamma}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{S}_{\gamma}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Consider now what happens
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
