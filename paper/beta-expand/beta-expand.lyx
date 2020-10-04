@@ -4794,20 +4794,63 @@ One may now consider some space of functions
 \end_inset
 
 .
- That this is not the Renyi–Gelfond–Parry measure follows from the fact
- that 
-\begin_inset Formula $\mathcal{S}\subset\mathcal{S}^{\prime}$
+ This measure can be taken to be the restriction of the Bernoulli measure
+ 
+\begin_inset Formula $\mu$
 \end_inset
 
- is a proper subset: 
-\begin_inset Formula $\mathcal{S}$
+ to the subalgebra 
+\begin_inset Formula $\mathcal{S}^{\prime}$
 \end_inset
 
- did not contain the alternative 
+.
+ That is, 
+\begin_inset Formula $\mu_{\beta}$
+\end_inset
+
+ does not actually depend on 
 \begin_inset Formula $\beta$
 \end_inset
 
--expansions.
+, only the subalgebra 
+\begin_inset Formula $\mathcal{S}^{\prime}=\mathcal{S}_{\beta}^{\prime}$
+\end_inset
+
+ depends on 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ This holds likewise for the Renyi–Gelfond–Parry measure: it is just the
+ usual Bernoulli measure restricted to 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+.
+ It looks unusual when mapped to the unit interval, but that is entirely
+ because the mapping of 
+\begin_inset Formula $S$
+\end_inset
+
+ to the unit interval is 
+\begin_inset Quotes eld
+\end_inset
+
+unusual
+\begin_inset Quotes erd
+\end_inset
+
+.
+ I beleive that this is effectively an application of Ornstein theory to
+ the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform.
+ Ornstein theory basically just says that there is a large range of disparate
+ phenomena, but that the underlying dynamics is that of the Bernoulli process;
+ the phenomena look different only because they are obscured by different
+ mappings from the Bernoulli process to the system in question.
 \end_layout
 
 \begin_layout Standard
@@ -4855,35 +4898,63 @@ noprefix "false"
 
 \end_inset
 
-; these are in one-to-one correspondence.
-\end_layout
+; these are in one-to-one correspondence between bitstrings and orbits.
+ The observation that the underlying measure 
+\begin_inset Formula $\mu:\mathcal{S}^{\prime}\to\mathbb{R}$
+\end_inset
 
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-With that out of the way, it is straight-forward and entirely safe to treat
- numerical histogramming of the orbits of 
+ is just the Bernoulli measure implies that each and every point can be
+ given an equal weighting.
+ For numerical purposes, this states that the histogramming of the orbits
+ of 
 \begin_inset Formula $\tau_{n}\left(x\right)$
 \end_inset
 
- as being approximations to the true measure 
-\begin_inset Formula $\mu_{\beta}$
+, giving each one equal weight as it is assigned to a bin, is an accurate
+ technique to approximate to the true measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ that arises from the one-to-one mapping of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expand-path-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expand-orbits"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
- By the usual abuse of notation, let 
-\begin_inset Formula $\mu_{\beta}\left(x\right)$
-\end_inset
+\end_layout
 
- denote the invariant measure as perceived on the real number line.
- The computed measure 
-\begin_inset Formula $\mu_{\beta}\left(x\right)$
-\end_inset
-
- for a few select values of 
+\begin_layout Standard
+With that out of the way, visualizations of the measure can now be given.
+ It's notationally convenient to re-insert the subscript 
 \begin_inset Formula $\beta$
+\end_inset
+
+ as the mapping itself does depend on 
+\begin_inset Formula $\beta$
+\end_inset
+
+; thus write 
+\begin_inset Formula $\mu_{\beta}\left(x\right)$
+\end_inset
+
+ for the mapped measure.
+ This 
+\begin_inset Formula $\mu_{\beta}\left(x\right)$
 \end_inset
 
  is shown in figure 
@@ -4894,6 +4965,10 @@ plural "false"
 caps "false"
 noprefix "false"
 
+\end_inset
+
+ for a few select values of 
+\begin_inset Formula $\beta$
 \end_inset
 
 .
