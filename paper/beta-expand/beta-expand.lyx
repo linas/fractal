@@ -4434,7 +4434,7 @@ Each alternative expansion arises from an alternative orbit.
 \noun off
 \color none
 \begin_inset Formula 
-\[
+\begin{equation}
 \tau_{n}\left(x;\gamma\right)=\begin{cases}
 T_{\beta}^{n}\left(x\right) & \mbox{ for }n<p_{0}\\
 \left(1-\gamma_{0}\right)\beta T_{\beta}^{p_{0}-1}\left(x\right)+\gamma_{0}T_{\beta}^{p_{0}}\left(x\right) & \mbox{ for }n=p_{0}\\
@@ -4443,8 +4443,8 @@ T_{\beta}^{n-p_{0}}\left(\tau_{p_{0}}\left(x\right)\right) & \mbox{ for }p_{0}<n
 \left(1-\gamma_{k}\right)\beta\tau_{n-1}\left(x\right)+\gamma_{k}T\left(\tau_{n-1}\left(x\right)\right) & \mbox{ for }n=p_{k}\\
 T_{\beta}^{n-p_{k}}\left(\tau_{p_{k}}\left(x\right)\right) & \mbox{ for }p_{k}<n<p_{k+1}\\
 \cdots & \cdots
-\end{cases}
-\]
+\end{cases}\label{eq:expand-orbits}
+\end{equation}
 
 \end_inset
 
@@ -4731,89 +4731,139 @@ noprefix "false"
 \end_inset
 
  is an injection follows essentially from the properties of a sigma-algebra:
- if there were two different cylinder sets 
+ 
+\begin_inset Formula $\mathcal{T}$
+\end_inset
+
+ preserves unions and intersections, so that if there were two different
+ cylinder sets 
 \begin_inset Formula $\sigma,\sigma^{\prime}\in\mathcal{S}^{\prime}$
 \end_inset
 
- such that 
+ with 
 \begin_inset Formula $\mathcal{T}\sigma=\mathcal{T}\sigma^{\prime}$
 \end_inset
 
 , then 
-\end_layout
-
-\begin_layout Standard
-Consider the likewise construction of 
-\begin_inset Formula $S^{\prime}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $\mathcal{S}\subset\mathcal{B}$
-\end_inset
-
-,
-\end_layout
-
-\begin_layout Standard
-The action of 
-\begin_inset Formula $T_{\beta}^{-1}$
-\end_inset
-
- is well-defined on cylinder sets in 
-\begin_inset Formula $\mathcal{S}$
-\end_inset
-
-, and given that 
-\begin_inset Formula $\tau$
-\end_inset
-
- is built out of 
-\begin_inset Formula $T_{\beta}$
-\end_inset
-
-, one can conclude that 
-\begin_inset Formula $\tau^{-1}$
-\end_inset
-
- is also a map of cylinder sets, defined on 
-\begin_inset Formula $\mathcal{S}^{\prime}$
+\begin_inset Formula $\sigma\backslash\sigma^{\prime}=\varnothing$
 \end_inset
 
 .
- That is, the map 
-\begin_inset Formula $\tau^{-1}:\mathcal{S^{\prime}\to\mathcal{S}^{\prime}}$
+ That is, 
+\begin_inset Formula $\mathcal{T}^{-1}:\mathcal{S^{\prime}\to\mathcal{S}^{\prime}}$
 \end_inset
 
- is a map of the Borel (sub-)algebra 
-\begin_inset Formula $\mathcal{S^{\prime}}$
+ is well-defined.
+\end_layout
+
+\begin_layout Standard
+One may now consider some space of functions 
+\begin_inset Formula $\mathcal{F}$
 \end_inset
 
-, preserving all of the sigma-algebra properties of the subspace topology.
- It will have an associated invariant measure, the Ruelle-Frobenius-Perron
- measure, 
+ with elements 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ are maps 
+\begin_inset Formula $f:\mathcal{S^{\prime}}\to\mathbb{R}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{T}^{-1}$
+\end_inset
+
+ acts as a pushforward, defining a linear operator 
+\begin_inset Formula $\mathcal{L}_{T}:\mathcal{F}\to\mathcal{F}$
+\end_inset
+
+ by composition 
+\begin_inset Formula $\mathcal{L}_{T}f=f\circ\mathcal{T}^{-1}$
+\end_inset
+
+.
+ As a linear operator, this has a spectrum.
+ As it corresponds to a shift, the Frobenius-Perron theorem applies.
+ The largest eigenvalue is some invariant measure 
 \begin_inset Formula $\mu_{\beta}:\mathcal{S^{\prime}}\to\mathbb{R}$
 \end_inset
 
-.
- It is invariant in that 
-\begin_inset Formula $\mu_{\beta}\circ\tau^{-1}\left(c\right)=\mu_{\beta}\left(c\right)$
-\end_inset
-
- for all cylinders 
-\begin_inset Formula $c\in\mathcal{S^{\prime}}$
-\end_inset
-
- having 
-\begin_inset Formula $\mu_{\beta}\left(c\right)>0$
+ with 
+\begin_inset Formula $\mathcal{L}_{T}\mu_{\beta}=\mu_{\beta}$
 \end_inset
 
 .
- This is just the standard defintion of a measure-preserving dynamical system.
- With that out of the way, it is straight-forward and entirely safe to treat
+ That this is not the Renyi–Gelfond–Parry measure follows from the fact
+ that 
+\begin_inset Formula $\mathcal{S}\subset\mathcal{S}^{\prime}$
+\end_inset
+
+ is a proper subset: 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ did not contain the alternative 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions.
+\end_layout
+
+\begin_layout Standard
+All this is a round-about way of saying that we really want to do is to
+ visualize the orbits of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expand-orbits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and to put this visualization on a firm footing.
+ For every 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ and path 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ there is a bit-string 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expand-path-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and an orbit 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expand-orbits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+; these are in one-to-one correspondence.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+With that out of the way, it is straight-forward and entirely safe to treat
  numerical histogramming of the orbits of 
 \begin_inset Formula $\tau_{n}\left(x\right)$
 \end_inset
