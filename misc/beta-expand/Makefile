@@ -12,8 +12,8 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/gcc/x86_64-linux-gnu/6/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
-all: sidorov sidorov-misc sidorov-density \
-	sidorov-bifur sidorov-length sidorov-measure
+all: sidorov sidorov-misc sidorov-density sidorov-bifur \
+     sidorov-length sidorov-measure extended-length
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -26,8 +26,9 @@ all: sidorov sidorov-misc sidorov-density \
 
 sidorov.o: sidorov.C
 sidorov-misc.o: sidorov-misc.C sidorov-big.C
-sidorov-density.o: sidorov-density.C sidorov-big.C
+sidorov-density.o: sidorov-density.C extended-density.C sidorov-big.C
 sidorov-bifur.o: sidorov-bifur.C sidorov-big.C
+extended-length.o: extended-length.C extended-density.C sidorov-big.C
 
 sidorov: sidorov.o # $(BRAT)
 

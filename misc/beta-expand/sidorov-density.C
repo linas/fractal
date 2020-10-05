@@ -5,7 +5,6 @@
  * Linas Vepstas Sept 2020
  */
 
-#include <pthread.h>
 #include "brat.h"
 
 #include "extended-density.C"
