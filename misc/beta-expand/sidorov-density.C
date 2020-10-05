@@ -21,8 +21,11 @@ static void ext_measure (float *array,
 
 	fprintf(stderr, "Working K=%g nbits=%d\n",  Kay, nbits);
 
+#define MAXDEPTH 6
+#define NSAMP 32
+
 	double arr[array_size];
-	extended_measure(2.0*Kay, arr, array_size, nbits);
+	extended_measure(2.0*Kay, MAXDEPTH, NSAMP, arr, array_size, nbits);
 
 	for (int j=0; j<array_size; j++) array[j] = arr[j];
 }

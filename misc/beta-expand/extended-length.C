@@ -19,9 +19,12 @@ int main (int argc, char* argv[])
 	int nbits = atoi(argv[2]);
 	// int maxdepth = atoi(argv[3]);
 
-#define NBINS 1000
+#define NSAMP 1
+#define DEPTH 6
+
+#define NBINS 4000
 	double histo[NBINS];
-	extended_measure(2.0*Kay, histo, NBINS, nbits);
+	extended_measure(2.0*Kay, DEPTH, NSAMP, histo, NBINS, nbits);
 
 	int em = emrun(Kay);
 	double beta = 2.0 * Kay;
