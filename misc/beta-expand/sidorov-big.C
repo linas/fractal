@@ -6,7 +6,7 @@
  * of any given number x, as described by N Sidorov.
  * Contains only the core recursive code.
  *
- * Linas Vepstas Dec 2017; Sept 2020
+ * Linas Vepstas Sept 2020
  */
 
 #include <vector>

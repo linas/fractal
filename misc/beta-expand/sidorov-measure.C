@@ -1,6 +1,7 @@
 /*
  * sidorov-measure.C
  * Try to guess what the extended measure is.
+ * So far, the attempts to guess all fail, but they come close...
  *
  * Linas Vepstas Sept 2020
  */
