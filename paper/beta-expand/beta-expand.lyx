@@ -3628,7 +3628,7 @@ This appears to be well-defined, as the results from Sidorov state that
 
 , and certainly the numerics show nothing amiss.
  This definition will soon be replaced by a more appropriate one, in the
- next section, which integrates over a certain invariant measure.
+ next section, which integrates over an appropriate invariant measure.
  However, as that measure has not yet been specified, the above will serve
  as a suitable interim definition.
  It's a 
@@ -4594,11 +4594,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Let 
-\begin_inset Formula $S^{\prime}$
-\end_inset
-
- be the set of all strings given by 
+Le be the set of all strings given by 
 \family roman
 \series medium
 \shape up
@@ -4649,11 +4645,7 @@ the subshift
 \end_inset
 
  likewise.
- That 
-\begin_inset Formula $\mathcal{S}^{\prime}$
-\end_inset
-
- is a subshift follows in a relatively straight-forward fashion.
+ That is a subshift follows in a relatively straight-forward fashion.
  Let 
 \begin_inset Formula $T$
 \end_inset
@@ -4993,7 +4985,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -5227,17 +5219,55 @@ The distance
 \begin_inset Formula $\ell$
 \end_inset
 
- is directly related to likelihood of encountering a one followed by 
+ between branching points is directly related to likelihood of encountering
+ a one followed by 
 \begin_inset Formula $m$
 \end_inset
 
  zero's in a given string.
- This liklihood is directly accessible to computation.
+ In a previous section, an average value of 
+\begin_inset Formula $\ell$
+\end_inset
+
+ was defined, but this was not quite correct, as the average was taken over
+ a measure that was not shift-invariant.
+ The measure 
+\begin_inset Formula $\mu_{\beta}$
+\end_inset
+
+ visualized in the last section is the appropriate measure.
+ This follows, as the set 
+\begin_inset Formula $S^{\prime}$
+\end_inset
+
+ contained only the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion strings, and the algebra of cylinders 
+\begin_inset Formula $\mathcal{S}^{\prime}$
+\end_inset
+
+ inherited a shift-invariant weighting from the Bernoulli measure.
+ Thus, each string in 
+\begin_inset Formula $S^{\prime}$
+\end_inset
+
+ can now be counted uniformly, which allows averages of properties of strings
+ in 
+\begin_inset Formula $S^{\prime}$
+\end_inset
+
+ to be properly taken.
+\end_layout
+
+\begin_layout Standard
+Distances are accessible via some simple considerations.
  Starting with any number 
 \begin_inset Formula $x$
 \end_inset
 
-, a one will occur in the expansion if 
+, the first digit in the expansion will be a one if 
 \begin_inset Formula $\frac{1}{2}\le T_{\beta}(x)\le1$
 \end_inset
 
@@ -5284,7 +5314,7 @@ There are three pre-images, as the measure
 
 \end_inset
 
-The intersection of these three intervals is
+The intersection with the three intervals is
 \begin_inset Formula 
 \begin{align*}
 \frac{1}{2\beta}\le x\le\frac{1}{2\beta}\left(1+\frac{1}{\beta^{m}}\right) & \quad\mbox{ or }\\
@@ -5298,7 +5328,8 @@ The corresponding cylinders are to be sampled out of the measure
 \begin_inset Formula $\mu_{\beta}$
 \end_inset
 
-, That is, the probability 
+.
+ That is, the probability 
 \begin_inset Formula $p\left(\beta\right)$
 \end_inset
 
@@ -5336,6 +5367,31 @@ where
 
 \end_inset
 
+(Here, the 
+\begin_inset Formula $4/3$
+\end_inset
+
+ is taken as an 
+\emph on
+ad hoc
+\emph default
+ value above which the measure always vanishes; more precisely, the upper
+ bound is 
+\begin_inset Formula $\left(\varphi+1\right)/2$
+\end_inset
+
+ given by the 
+\begin_inset Formula $m=2$
+\end_inset
+
+ transition; the actual upper bound depends on 
+\begin_inset Formula $\beta$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
 As in an earlier section, 
 \begin_inset Formula $\ell\left(\beta\right)=\lim_{n\to\infty}\ell_{n}\left(\beta\right)$
 \end_inset
@@ -5345,7 +5401,7 @@ As in an earlier section,
 \end_inset
 
 -dependence, and so, when considering the distance between cylinders in
- a thrermalized orbit, one must use the corresponding thermalized measure
+ a thermalized orbit, one must use the corresponding thermalized measure
  for sampling.
  In this sense, this expression is a 
 \begin_inset Quotes eld
