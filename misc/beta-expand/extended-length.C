@@ -15,23 +15,25 @@ int main (int argc, char* argv[])
 		fprintf(stderr, "Usage: %s maxdepth nsamples\n", argv[0]);
 		exit (1);
 	}
-	int nbits = 63;
+	int nbits = 65;
 	int maxdepth = atoi(argv[1]);
 	int nsamples = atoi(argv[2]);
 
+#define NBINS 3000
 	printf("#\n# Extended slice\n");
-	printf("#\n# maxdepth=%d nsamples=%d\n#\n", maxdepth, nsamples);
+	printf("#\n# nbits=%d nbins=%d\n", nbits, NBINS);
+	printf("# maxdepth=%d nsamples=%d\n#\n", maxdepth, nsamples);
+	printf("# Columns:\n# j beta prob length fraction\n");
 	fflush(stdout);
 
-#define NPTS 50
+#define NPTS 200
 	for (int j=0; j<NPTS; j++)
 	{
 		double y = (((double) j) + 0.5)/ ((double) NPTS);
 		double beta = 1.0 + y;
-beta = 1.5 + 0.5*y;
+beta = 1.5 - 0.5*y;
 		double Kay = 0.5*beta;
 
-#define NBINS 10000
 		double histo[NBINS];
 		extended_measure(beta, maxdepth, nsamples, histo, NBINS, nbits);
 
@@ -55,7 +57,7 @@ beta = 1.5 + 0.5*y;
 			if (lower < x-1.0 and x-1.0 <= upper) { prob += histo[i]; bcnt++; }
 		}
 		prob /= NBINS;
-		double frac = bcnt / NBINS;
+		double frac = ((double) bcnt) / NBINS;
 		printf("%d	%g	%g	%g	%g\n", j, beta, prob, 1.0/prob, frac);
 		fflush(stdout);
 	}
