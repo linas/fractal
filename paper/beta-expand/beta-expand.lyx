@@ -380,17 +380,11 @@ nts can be explicitly stated.
 \end_layout
 
 \begin_layout Subsection
-Beta shift
+Beta Shift
 \end_layout
 
 \begin_layout Standard
-The beta shift is similar to the Bernoulli shift, replacing the number 2
- by a constant real-number value 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
-.
- It can be defined as 
+The beta shift is the iterated function
 \end_layout
 
 \begin_layout Standard
@@ -404,8 +398,31 @@ T_{\beta}(x)=\begin{cases}
 
 \end_inset
 
-Just as the Bernoulli shift generates a sequence of digits, so does the
- beta shift: write
+where, by convention, one takes 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+.
+ Given a real number 
+\begin_inset Formula $x$
+\end_inset
+
+ in the unit interval 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+, the orbit 
+\begin_inset Formula $T_{\beta}^{n}(x)$
+\end_inset
+
+ of the point 
+\begin_inset Formula $x$
+\end_inset
+
+ under the iterated shift generates a sequence of digits
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 k_{n}=\begin{cases}
@@ -416,12 +433,26 @@ k_{n}=\begin{cases}
 
 \end_inset
 
-Given the symbolic dynamics, one can reconstruct the original value whenever
- 
+This bit-sequence is sometimes refered to as the 
+\begin_inset Quotes eld
+\end_inset
+
+symbolic dynamics
+\begin_inset Quotes erd
+\end_inset
+
+ of the orbit.
+ The symbolic dynamics can be inverted to reconstruct the original value
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ whenever 
 \begin_inset Formula $1<\beta$
 \end_inset
 
- as
+.
+ This is explicitly given by 
 \begin_inset Formula 
 \[
 x=\frac{k_{0}}{2}+\frac{1}{\beta}\left(\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
@@ -441,20 +472,16 @@ T_{\beta}(x)=\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta
 
 \end_inset
 
-In this sense, this shift is 
-\begin_inset Quotes eld
+That is, the shift 
+\begin_inset Formula $T_{\beta}$
 \end_inset
 
-exactly solvable
-\begin_inset Quotes erd
+ lops off the leading digit from the sequence 
+\begin_inset Formula $k_{0},k_{1},k_{2},\cdots$
 \end_inset
 
-: the above provides a closed-form solution for iterating and un-iterating
- the sequence.
-\end_layout
-
-\begin_layout Standard
-Multiplying out the above sequence, one obtains the so-called 
+.
+ Multiplying out the above sequence, one obtains the so-called 
 \begin_inset Quotes eld
 \end_inset
 
@@ -478,8 +505,50 @@ x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\beta^{n}}\label{eq:shift series}
 
 \end_inset
 
-That is, the bit-sequence that was extracted by iteration can be used to
- reconstruct the original real number.
+This map from (a subspace of) the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ to the unit interval can be taken as a homomorphism of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift.
+ That is, we can take the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift as acting in the space of bit-strings, or, equivalently, acting on
+ the unit interval.
+\end_layout
+
+\begin_layout Standard
+Not every possible bit-sequence occurs in this system.
+ Let 
+\begin_inset Formula $S_{\beta}\subset\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ denote the set of all bit-strings given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ For 
+\begin_inset Formula $\beta\ne2$
+\end_inset
+
+ it is a proper subset, and by construction, the shift is an injection:
+ 
+\begin_inset Formula $T_{\beta}S_{\beta}\subseteq S_{\beta}$
+\end_inset
+
+.
  Setting 
 \begin_inset Formula $\beta=2$
 \end_inset
@@ -494,34 +563,22 @@ noprefix "false"
 
 \end_inset
 
- gives the Bernoulli shift: 
-\begin_inset Formula $T_{2}\left(x\right)=b\left(x\right)$
+ gives the Bernoulli shift.
+ This is a very special case; the Bernoulli shift is the full shift, in
+ that 
+\begin_inset Formula $S_{2}=\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{2}S_{2}=S_{2}$
 \end_inset
 
 .
+ The homomorphism deserves explit mention, as it plays a distinctive role
+ as the canonical map from the Cantor space to the unit interval:
 \end_layout
 
 \begin_layout Standard
-Unlike the Bernoulli shift, not every possible bit-sequence occurs in this
- system.
- It is a subshift of the full shift: it is a subset of 
-\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
-\end_inset
-
- that is invariant under the action of 
-\begin_inset Formula $T_{\beta}$
-\end_inset
-
-.
- This is explored in greater detail in a later section.
-\end_layout
-
-\begin_layout Standard
-XXX
-\end_layout
-
-\begin_layout Standard
-Blah blah blah,
 \begin_inset Formula 
 \begin{equation}
 x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{b_{n}}{2^{n}}\label{eq:homomorphism}
@@ -529,7 +586,15 @@ x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{b_{n}}{2^{n}}\label{eq:homomorphism}
 
 \end_inset
 
+where the 
+\begin_inset Formula $b_{n}$
+\end_inset
 
+ are meant to be the bit-sequences obtained from iterating 
+\begin_inset Formula $b\left(x\right)=T_{2}\left(x\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -628,11 +693,11 @@ tic, as it flouts the more common convention of working with the
 \end_inset
 
 -transformation.
- The primary reason for doing this is to retain contact with the 
+ The primary reason for doing this is that the 
 \begin_inset Formula $\beta$
 \end_inset
 
--shift being a subshift of the full shift.
+-shift retains better contact the idea of being a subshift of the full shift.
 \end_layout
 
 \begin_layout Subsection
