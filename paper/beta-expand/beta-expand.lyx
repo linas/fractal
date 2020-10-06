@@ -209,10 +209,13 @@ completely solvable
 \end_inset
 
 : this is the shift that lops off one bit from an infinite bit-string.
- The shift can be expressed as a dynamical system; the dissipative part
- of the dynamical system is described by a transfer operator (the Ruelle-Frobeni
-us-Perron operator) acting on the Borel algebra (sigma algebra) associated
- to the Cantor space.
+ The shift can be expressed as a dynamical system; the function field on
+ the dynamical system is described by the transfer operator (the Ruelle-Frobeniu
+s-Perron operator).
+ The natural setting for the function field is on the Borel algebra (the
+ sigma algebra) associated to the Cantor space.
+ It splits naturally into two parts: an invariant measure (the Bernoulli
+ measure), and a dissipative part.
  The spectrum of the transfer operator is discrete, when limited to the
  real-analytic functions; the spectrum is continuous when acting on square-integ
 rable functions.
@@ -244,8 +247,38 @@ Not as much is known for the case of
 \end_inset
 
 -transform.
- Corresponding to this invariance is an invariant measure, first demonstrated
- by Renyi, and given explicit form by Gelfond and Parry.
+ The Bernoulli measure, when restricted to this subshift, and then mapped
+ to the unit interval in the conventional way, becomes the invariant measure
+ of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform.
+ The existance of an invariant measure was first demonstrated by Renyi,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Renyi57"
+literal "false"
+
+\end_inset
+
+ and given explicit form by Gelfond
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gelfond59"
+literal "false"
+
+\end_inset
+
+ and Parry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Parry60"
+literal "false"
+
+\end_inset
+
+.
  As an invariant measure, it is the eigenvalue-one (the Frobenius-Perron
  eigenvalue) eigenfunction of the transfer operator.
  The remaining spectrum of the transfer operator is poorly understood, but
@@ -344,291 +377,6 @@ nts can be explicitly stated.
  an invariant measure (which is not the Gelfond-Parry measure).
  The distances between branch-points can be directly related to this measure.
  The text terminates with a short conclusion and some speculations.
-\end_layout
-
-\begin_layout Subsection
-Shift space
-\end_layout
-
-\begin_layout Standard
-A 
-\begin_inset Quotes eld
-\end_inset
-
-shift space
-\begin_inset Quotes erd
-\end_inset
-
- is formally defined to be a set of infinite sequences of a set of 
-\begin_inset Formula $N$
-\end_inset
-
- letters (or symbols), together with a shift operator 
-\begin_inset Formula $T$
-\end_inset
-
- that takes each sequence, and lops off the left-most symbol.
- For the Bernoulli shift, there are 
-\begin_inset Formula $N=2$
-\end_inset
-
- letters, taken from the set 
-\begin_inset Formula $\left\{ 0,1\right\} $
-\end_inset
-
-.
- For the Bernoulli shift, one is typically interested in the set of 
-\emph on
-all
-\emph default
- possible infinite sequences: this is the 
-\begin_inset Quotes eld
-\end_inset
-
-full shift
-\begin_inset Quotes erd
-\end_inset
-
-.
- One writes 
-\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
-\end_inset
-
- for this shift space, 
-\begin_inset Formula $\omega$
-\end_inset
-
- denoting countable infinity.
- For the Bernoulli shift, the map 
-\begin_inset Formula $b\left(x\right)$
-\end_inset
-
- is the shift operator: it just lops of the left-most symbol.
-\end_layout
-
-\begin_layout Standard
-In general, a shift space does not have to include every possible sequence
- of symbols; it does, however, by definition, have to be shift-invariant.
- That is, given some set 
-\begin_inset Formula $S$
-\end_inset
-
- of infinite sequences of 
-\begin_inset Formula $N$
-\end_inset
-
- symbols, the set 
-\begin_inset Formula $S$
-\end_inset
-
- is a shift space if and only if, by loping off the leading symbol of each
- string, one regains 
-\begin_inset Formula $S$
-\end_inset
-
- again.
- That is, a shift space 
-\begin_inset Formula $S$
-\end_inset
-
- must obey 
-\begin_inset Formula 
-\[
-TS=S
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-For example, 
-\begin_inset Formula $S=\left\{ 000\cdots,111\cdots\right\} $
-\end_inset
-
- contains only two elements: the string of all zeros, and the string of
- all ones; loping off the leading digit just returns 
-\begin_inset Formula $S$
-\end_inset
-
- again.
- In general, shift spaces may contain a finite, or a countable, or an uncountabl
-e number of elements.
- In general, one defines the 
-\begin_inset Quotes eld
-\end_inset
-
-full shift
-\begin_inset Quotes erd
-\end_inset
-
- as the space 
-\begin_inset Formula $N^{\omega}$
-\end_inset
-
- of all possible strings of 
-\begin_inset Formula $N$
-\end_inset
-
- symbols.
- Subsets that are shift spaces are called 
-\begin_inset Quotes eld
-\end_inset
-
-subshifts
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The words 
-\begin_inset Quotes eld
-\end_inset
-
-symbolic dynamics
-\begin_inset Quotes erd
-\end_inset
-
- also deserve some mention: given one specific sequence 
-\begin_inset Formula $x\in S$
-\end_inset
-
- out of the shift space 
-\begin_inset Formula $S$
-\end_inset
-
-, one can ponder 
-\begin_inset Quotes eld
-\end_inset
-
-where it goes to
-\begin_inset Quotes erd
-\end_inset
-
-, as one lops off a symbol at a time.
- This gives the 
-\begin_inset Quotes eld
-\end_inset
-
-symbolic dynamics
-\begin_inset Quotes erd
-\end_inset
-
- or the 
-\begin_inset Quotes eld
-\end_inset
-
-point dynamics
-\begin_inset Quotes erd
-\end_inset
-
- of the sequence.
- The 
-\begin_inset Quotes eld
-\end_inset
-
-orbit
-\begin_inset Quotes erd
-\end_inset
-
- is defined as the set 
-\begin_inset Formula $\left\{ T^{m}x\,|\,\mbox{integer }m\ge0\right\} $
-\end_inset
-
- – that is, the set of all places that 
-\begin_inset Formula $x$
-\end_inset
-
- goes to.
- There are several possibilities: one is that 
-\begin_inset Formula $x$
-\end_inset
-
- is a fixed point, so that 
-\begin_inset Formula $Tx=x$
-\end_inset
-
-.
- Another is that 
-\begin_inset Formula $x$
-\end_inset
-
- is a repeating sequence of symbols, in which case iteration repeats as
- well: 
-\begin_inset Formula $T^{m}x=x$
-\end_inset
-
- holds whenever the repeat length is 
-\begin_inset Formula $m$
-\end_inset
-
-; this is a periodic orbit.
-\end_layout
-
-\begin_layout Standard
-Most importantly, when there are non-periodic orbits, then there are uncountably
- many of them.
- That is, the number of periodic orbits is always countable: there are at
- most 
-\begin_inset Formula $N$
-\end_inset
-
- starting points for an orbit, and they are of at most length 
-\begin_inset Formula $m$
-\end_inset
-
-.
- This includes the 
-\begin_inset Quotes eld
-\end_inset
-
-eventually periodic
-\begin_inset Quotes erd
-\end_inset
-
- orbits: those that begin with some finite initial sequence of 
-\begin_inset Quotes eld
-\end_inset
-
-random
-\begin_inset Quotes erd
-\end_inset
-
- moves, eventually settling into a periodic recurrence.
- This cannot be done for the non-periodic orbits: they cannot be placed
- in lexicographic order; as the Cantor slash argument applies.
- The non-periodic orbits are always uncountable.
- In this sense, the non-periodic orbits are 
-\begin_inset Quotes eld
-\end_inset
-
-more important
-\begin_inset Quotes erd
-\end_inset
-
-, in that the make up the bulk of all orbits.
- There are situations in which the periodic orbits can be said to 
-\begin_inset Quotes eld
-\end_inset
-
-govern
-\begin_inset Quotes erd
-\end_inset
-
- the dynamics of the aperiodic ones; this is termed 
-\begin_inset Quotes eld
-\end_inset
-
-coherent structure
-\begin_inset Quotes erd
-\end_inset
-
-.
- However such concepts are advanced, and are not obviously applicable to
- the current situation.
 \end_layout
 
 \begin_layout Subsection
