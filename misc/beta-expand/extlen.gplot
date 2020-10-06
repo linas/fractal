@@ -14,8 +14,9 @@ set yrange [2:300]
 
 set logscale y
 plot "sido-len-160-4096.dat" using (2*$1):4 title "Average length",\
-     "extlen-10-1.dat" using 2:4 title "Invaraint (via measure)", \
+     "extlen-10-1.dat" using 2:4 title "Invariant length", \
      "extlen-10-1-flip-fast.dat" using 2:4 title "", \
+     "extlen-10-1-fine.dat" using 2:4 title "", \
      "extlen-12-4.dat" using 2:4 title "", \
      "extlen-12-4-flip.dat" using 2:4 title "", \
      (2/(3*(x-1)*(2-x))) title "2/3({/Symbol b}-1)(2-{/Symbol b})"
