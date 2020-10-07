@@ -35,41 +35,38 @@ double maybe(double x, double beta)
 	long int r = random();
 	if (r < RAND_MAX/2)
 	{
-printf(" went low\n");
+		// printf(" went low\n");
 		bits.push_back(0);
 		return beta*x;
 	}
 
-printf(" went high\n");
+	// printf(" went high\n");
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
 
 	fprintf(stderr, "------------fool x=%g\n", x);
-	// exit(1);
+	exit(1);
 	bits.push_back(1);
 	return beta*(x-1.0);
 }
 
-bool ok_to_expand = true;
+int em = 0;
+int bits_to_do = 0;
 
 double tau(double x, double beta, double a, double b)
 {
-printf("x= %g cyl=%d\n", x, a < x and x < b);
-	if (a < x and x < b and ok_to_expand)
+	// printf("x= %g cyl=%d bits=%d\n", x, a < x and x < b, bits_to_do);
+	if (a < x and x < b and 0 == bits_to_do)
 	{
-		ok_to_expand = false;
+		bits_to_do = 0; // em;
 		return maybe(x, beta);
 	}
 
-	ok_to_expand = true;
+	if (0 < bits_to_do) bits_to_do--;
 
 	if (x<0.5) { bits.push_back(0); return beta*x; }
-	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
-
-	fprintf(stderr, "============fail x=%g bits=%lu a=%g b=%g\n",
-		x, bits.size(), a, b);
 	bits.push_back(1);
-	return beta*(x-1.0);
+	return beta*(x-0.5);
 }
 
 int main (int argc, char* argv[])
@@ -82,29 +79,27 @@ int main (int argc, char* argv[])
 	double Kay = atof(argv[1]);
 	double beta = 2.0*Kay;
 
-	int em = emrun(Kay);
+	em = emrun(Kay);
 	double a = 0.5;
 	double b = a * (1.0 + pow(beta, -em));
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
-	// int nbits = -log(1e-16) / log(beta);
-	int nbits = -log(1e-12) / log(beta);
+#define EPS 1e-16
+	int nbits = -log(EPS) / log(beta);
 
-#define NSAMP 1
+#define NSAMP 1000000
 	for (int i=0; i<NSAMP; i++)
 	{
 		long int r = random();
 		double x = ((double) r) / ((double) RAND_MAX);
 
 		bits.clear();
-		ok_to_expand = true;
+		bits_to_do = 0;
 		double z = x;
 		for (int j=0; j<nbits; j++)
 		{
 			z = tau(z, beta, a, b);
 		}
-
-		prt_bits();
 
 		double y = 0.0;
 		double ob = 0.5;
@@ -113,8 +108,12 @@ int main (int argc, char* argv[])
 			y += bits[j] * ob;
 			ob /= beta;
 		}
-		printf("x= %g  expand= %g diff= %g\n", x, y, y-x);
-		printf("\n");
+		if (6.0*EPS < fabs(y-x))
+		{
+			prt_bits();
+			printf("i=%d x= %g  expand= %g diff= %g\n", i, x, y, y-x);
+			printf("\n");
+		}
 	}
 }
 
