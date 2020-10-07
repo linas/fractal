@@ -78,8 +78,13 @@ int main (int argc, char* argv[])
 				if (not branch and y < x) acc += bpn;
 				if (branch)
 				{
-					if (y < x) acc += bpn;
-					if (not bits[k] and dbeta*y < x) acc -= dbeta*bpn;
+					if (bits[k] and y < x) acc += bpn;
+					if (not bits[k])
+					{
+						// bpn /= dbeta;
+						if (y < x) acc += bpn/dbeta;
+						if (dbeta*y < x) acc -= bpn;
+					}
 				}
 			}
 
