@@ -35,10 +35,12 @@ double maybe(double x, double beta)
 	long int r = random();
 	if (r < RAND_MAX/2)
 	{
+printf(" went low\n");
 		bits.push_back(0);
 		return beta*x;
 	}
 
+printf(" went high\n");
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
 
@@ -48,11 +50,18 @@ double maybe(double x, double beta)
 	return beta*(x-1.0);
 }
 
+bool ok_to_expand = true;
+
 double tau(double x, double beta, double a, double b)
 {
-	if (a < x and x < b) return maybe(x, beta);
-	if (a+0.5 < x and x < b+0.5) return maybe(x, beta);
-	// if (a+1.0 < x and x < b+1.0) return maybe(x, beta);
+printf("x= %g cyl=%d\n", x, a < x and x < b);
+	if (a < x and x < b and ok_to_expand)
+	{
+		ok_to_expand = false;
+		return maybe(x, beta);
+	}
+
+	ok_to_expand = true;
 
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
@@ -74,20 +83,21 @@ int main (int argc, char* argv[])
 	double beta = 2.0*Kay;
 
 	int em = emrun(Kay);
-	double a = 0.5/beta;
+	double a = 0.5;
 	double b = a * (1.0 + pow(beta, -em));
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
 	// int nbits = -log(1e-16) / log(beta);
 	int nbits = -log(1e-12) / log(beta);
 
-#define NSAMP 3
+#define NSAMP 1
 	for (int i=0; i<NSAMP; i++)
 	{
 		long int r = random();
 		double x = ((double) r) / ((double) RAND_MAX);
 
 		bits.clear();
+		ok_to_expand = true;
 		double z = x;
 		for (int j=0; j<nbits; j++)
 		{
