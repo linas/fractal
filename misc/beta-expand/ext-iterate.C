@@ -30,7 +30,7 @@ double tau(double x, double beta, double a, double b)
 {
 	if (a < x and x < b) return maybe(x, beta);
 	if (a+0.5 < x and x < b+0.5) return maybe(x, beta);
-	if (a+1.0 < x and x < b+1.0) return maybe(x, beta);
+	// if (a+1.0 < x and x < b+1.0) return maybe(x, beta);
 
 	return tee(x, beta);
 }

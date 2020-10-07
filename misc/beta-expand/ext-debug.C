@@ -52,12 +52,13 @@ double tau(double x, double beta, double a, double b)
 {
 	if (a < x and x < b) return maybe(x, beta);
 	if (a+0.5 < x and x < b+0.5) return maybe(x, beta);
-	if (a+1.0 < x and x < b+1.0) return maybe(x, beta);
+	// if (a+1.0 < x and x < b+1.0) return maybe(x, beta);
 
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
 
-	fprintf(stderr, "============fail x=%g\n", x);
+	fprintf(stderr, "============fail x=%g bits=%lu a=%g b=%g\n",
+		x, bits.size(), a, b);
 	bits.push_back(1);
 	return beta*(x-1.0);
 }
@@ -80,7 +81,7 @@ int main (int argc, char* argv[])
 	// int nbits = -log(1e-16) / log(beta);
 	int nbits = -log(1e-12) / log(beta);
 
-#define NSAMP 48
+#define NSAMP 3
 	for (int i=0; i<NSAMP; i++)
 	{
 		long int r = random();
