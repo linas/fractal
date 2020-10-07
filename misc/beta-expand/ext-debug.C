@@ -77,7 +77,7 @@ int main (int argc, char* argv[])
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
 
-#define NSAMP 1
+#define NSAMP 8
 	for (int i=0; i<NSAMP; i++)
 	{
 		long int r = random();
@@ -93,7 +93,7 @@ int main (int argc, char* argv[])
 		prt_bits();
 
 		double y = 0.0;
-		double ob = 0.5 / beta;
+		double ob = 0.5;
 		for (int j=0; j<50; j++)
 		{
 			y += bits[j] * ob;
