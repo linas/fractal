@@ -15,6 +15,8 @@ double tee(double x, double beta)
 {
 	if (x<0.5) return beta*x;
 	if (x<1.0) return beta*(x-0.5);
+fprintf(stderr, "duuude fail \n");
+exit(1);
 	return beta*(x-1.0);
 }
 
