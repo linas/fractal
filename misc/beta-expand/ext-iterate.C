@@ -18,15 +18,21 @@ double tee(double x, double beta)
 	return beta*(x-1.0);
 }
 
+double maybe(double x, double beta)
+{
+	long int r = random();
+	if (r < RAND_MAX/2)
+		return beta*x;
+	return tee(x, beta);
+}
+
 double tau(double x, double beta, double a, double b)
 {
-	if (a < x and x < b) return beta*x;
-	if (a+0.5 < x and x < b+0.5) return beta*x;
-	if (a+1.0 < x and x < b+1.0) return beta*x;
-	if (x < 0.5) return beta*x;
+	if (a < x and x < b) return maybe(x, beta);
+	if (a+0.5 < x and x < b+0.5) return maybe(x, beta);
+	if (a+1.0 < x and x < b+1.0) return maybe(x, beta);
 
-	if (x < 1.0) return beta*(x-0.5);
-	return beta*(x-1.0);
+	return tee(x, beta);
 }
 
 #define NBINS 503
@@ -63,11 +69,7 @@ int main (int argc, char* argv[])
 			int ibin = xb;
 			histo[ibin] += 1.0;
 
-			r = random();
-			if (r < RAND_MAX/2)
-				x = tau(x, beta, a, b);
-			else
-				x = tee(x, beta);
+			x = tau(x, beta, a, b);
 		}
 	}
 
