@@ -32,14 +32,19 @@ double tee(double x, double beta)
 
 double maybe(double x, double beta)
 {
+/*
 	long int r = random();
 	if (r < RAND_MAX/2)
 	{
 		bits.push_back(0);
 		return beta*x;
 	}
-	bits.push_back(1);
-	return tee(x, beta);
+*/
+	if (x<0.5) { bits.push_back(0); return beta*x; }
+	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
+
+	fprintf(stderr, "fool x=%g\n", x);
+	exit(1);
 }
 
 double tau(double x, double beta, double a, double b)
@@ -51,8 +56,8 @@ double tau(double x, double beta, double a, double b)
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
 
-	// fprintf(stderr, "fail x=%g\n", x);
-	// exit(1);
+	fprintf(stderr, "fail x=%g\n", x);
+	exit(1);
 	return beta*(x-1.0);
 }
 
@@ -72,22 +77,23 @@ int main (int argc, char* argv[])
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
 
-#define NSAMP 8
+#define NSAMP 1
 	for (int i=0; i<NSAMP; i++)
 	{
 		long int r = random();
 		double x = ((double) r) / ((double) RAND_MAX);
 
 		bits.clear();
+		double z = x;
 		for (int j=0; j<50; j++)
 		{
-			x = tau(x, beta, a, b);
+			z = tau(z, beta, a, b);
 		}
 
 		prt_bits();
 
 		double y = 0.0;
-		double ob = 1.0 / beta;
+		double ob = 0.5 / beta;
 		for (int j=0; j<50; j++)
 		{
 			y += bits[j] * ob;
