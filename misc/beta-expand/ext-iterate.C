@@ -14,7 +14,8 @@
 double tee(double x, double beta)
 {
 	if (x<0.5) return beta*x;
-	return beta*(x-0.5);
+	if (x<1.0) return beta*(x-0.5);
+	return beta*(x-1.0);
 }
 
 double tau(double x, double beta, double a, double b)
@@ -50,7 +51,7 @@ int main (int argc, char* argv[])
 		histo[i] = 0.0;
 
 #define SCALE 1.333333
-#define NSAMP 10000
+#define NSAMP 5000
 	for (int i=0; i<NBINS*NSAMP; i++)
 	{
 		long int r = random();
@@ -59,7 +60,11 @@ int main (int argc, char* argv[])
 
 		for (int j=0; j<50; j++)
 		{
-			x = tau(x, beta, a, b);
+			r = random();
+			if (r < RAND_MAX/2)
+				x = tau(x, beta, a, b);
+			else
+				x = tee(x, beta);
 
 			double xb = NBINS * x / SCALE;
 			int ibin = xb;
