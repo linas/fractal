@@ -8,18 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 
-// See sidorov-bug.C for explanation of emrun
-int emrun(double K)
-{
-   double beta = 2.0*K;
-   double gold = 0.5 * (1.0 + sqrt(5));
-   if (beta <= gold) return 1;
-
-   double loga = (beta - 1.0) / (2.0-beta);
-   loga = log(loga) / log(beta);
-   loga = floor(loga) + 1.0;
-   return (int) loga;
-}
+#include "emrun.C"
 
 double tee(double x, double beta)
 {
