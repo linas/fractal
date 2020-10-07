@@ -32,14 +32,14 @@ double tee(double x, double beta)
 
 double maybe(double x, double beta)
 {
-/*
 	long int r = random();
+r=0;
 	if (r < RAND_MAX/2)
 	{
 		bits.push_back(0);
 		return beta*x;
 	}
-*/
+
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
 
@@ -56,8 +56,8 @@ double tau(double x, double beta, double a, double b)
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
 
-	fprintf(stderr, "fail x=%g\n", x);
-	exit(1);
+//	fprintf(stderr, "fail x=%g\n", x);
+//	exit(1);
 	return beta*(x-1.0);
 }
 
@@ -76,6 +76,7 @@ int main (int argc, char* argv[])
 	double b = a * (1.0 + pow(beta, -em));
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
+	int nbits = -log(1e-16) / log(beta);
 
 #define NSAMP 8
 	for (int i=0; i<NSAMP; i++)
@@ -85,7 +86,7 @@ int main (int argc, char* argv[])
 
 		bits.clear();
 		double z = x;
-		for (int j=0; j<50; j++)
+		for (int j=0; j<nbits; j++)
 		{
 			z = tau(z, beta, a, b);
 		}
@@ -94,12 +95,12 @@ int main (int argc, char* argv[])
 
 		double y = 0.0;
 		double ob = 0.5;
-		for (int j=0; j<50; j++)
+		for (int j=0; j<nbits; j++)
 		{
 			y += bits[j] * ob;
 			ob /= beta;
 		}
-		printf("%g	%g\n", x, y);
+		printf("x=%g  expand=%g diff=%g\n", x, y, y-x);
 	}
 }
 
