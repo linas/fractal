@@ -29,10 +29,9 @@ double maybe(double x, double beta)
 double tau(double x, double beta, double a, double b)
 {
 	if (a < x and x < b) return maybe(x, beta);
-	if (a+0.5 < x and x < b+0.5) return maybe(x, beta);
-	// if (a+1.0 < x and x < b+1.0) return maybe(x, beta);
 
-	return tee(x, beta);
+	if (0.5 < x) x -= 0.5;
+	return beta*x;
 }
 
 #define NBINS 503
@@ -49,7 +48,7 @@ int main (int argc, char* argv[])
 	double beta = 2.0*Kay;
 
 	int em = emrun(Kay);
-	double a = 0.5/beta;
+	double a = 0.5;
 	double b = a * (1.0 + pow(beta, -em));
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
