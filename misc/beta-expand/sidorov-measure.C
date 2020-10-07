@@ -81,9 +81,8 @@ int main (int argc, char* argv[])
 					if (bits[k] and y < x) acc += bpn;
 					if (not bits[k])
 					{
-						// bpn /= dbeta;
 						if (y < x) acc += bpn/dbeta;
-						if (dbeta*y < x) acc -= bpn;
+						if (dbeta*y < x) acc -= dbeta*bpn;
 					}
 				}
 			}
