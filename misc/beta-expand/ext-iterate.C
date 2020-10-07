@@ -7,6 +7,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "emrun.C"
 
@@ -49,17 +50,20 @@ int main (int argc, char* argv[])
 		histo[i] = 0.0;
 
 #define SCALE 1.333333
-	for (int i=0; i<NBINS; i++)
+#define NSAMP 10000
+	for (int i=0; i<NBINS*NSAMP; i++)
 	{
-		double x = (((double) i) + 0.5)/ ((double) NBINS);
+		long int r = random();
+		double x = ((double) r) / ((double) RAND_MAX);
 		x *= SCALE;
 
-		for (int j=0; j<52; j++)
+		for (int j=0; j<50; j++)
 		{
+			x = tau(x, beta, a, b);
+
 			double xb = NBINS * x / SCALE;
 			int ibin = xb;
 			histo[ibin] += 1.0;
-			x = tau(x, beta, a, b);
 		}
 	}
 
@@ -68,7 +72,7 @@ int main (int argc, char* argv[])
 		acc += histo[i];
 
 	for (int i=0; i<NBINS; i++)
-		histo[i] /= acc;
+		histo[i] *= NBINS/acc;
 
 	for (int i=0; i<NBINS; i++)
 	{
