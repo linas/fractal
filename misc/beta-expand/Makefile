@@ -14,7 +14,7 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
 
 all: sidorov sidorov-misc sidorov-density sidorov-bifur \
      sidorov-length sidorov-measure extended-length extended-measure \
-     ext-misc ext-iterate
+     ext-misc ext-iterate ext-debug
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -33,6 +33,7 @@ extended-length.o: extended-length.C extended-density.C sidorov-big.C
 extended-measure.o: extended-measure.C extended-density.C sidorov-big.C
 ext-misc.o: ext-misc.C
 ext-iterate.o: ext-iterate.C
+ext-debug.o: ext-debug.C
 
 sidorov: sidorov.o # $(BRAT)
 
