@@ -1,6 +1,8 @@
 /*
  * ext-debug.C
+ *
  * Verify that the extended map is creating valid beta-expansions...
+ * and now that we bug-fixed everything ... it is! Hooray!
  *
  * Linas Vepstas Oct 2020
  */
@@ -50,19 +52,13 @@ double maybe(double x, double beta)
 	return beta*(x-1.0);
 }
 
-int em = 0;
-int bits_to_do = 0;
-
 double tau(double x, double beta, double a, double b)
 {
-	// printf("x= %g cyl=%d bits=%d\n", x, a < x and x < b, bits_to_do);
-	if (a < x and x < b and 0 == bits_to_do)
+	// printf("x= %g cyl=%d\n", x, a < x and x < b);
+	if (a < x and x < b)
 	{
-		bits_to_do = 0; // em;
 		return maybe(x, beta);
 	}
-
-	if (0 < bits_to_do) bits_to_do--;
 
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	bits.push_back(1);
@@ -79,7 +75,7 @@ int main (int argc, char* argv[])
 	double Kay = atof(argv[1]);
 	double beta = 2.0*Kay;
 
-	em = emrun(Kay);
+	int em = emrun(Kay);
 	double a = 0.5;
 	double b = a * (1.0 + pow(beta, -em));
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
@@ -94,7 +90,6 @@ int main (int argc, char* argv[])
 		double x = ((double) r) / ((double) RAND_MAX);
 
 		bits.clear();
-		bits_to_do = 0;
 		double z = x;
 		for (int j=0; j<nbits; j++)
 		{
@@ -108,7 +103,7 @@ int main (int argc, char* argv[])
 			y += bits[j] * ob;
 			ob /= beta;
 		}
-		if (6.0*EPS < fabs(y-x))
+		if (9.0*EPS < fabs(y-x))
 		{
 			prt_bits();
 			printf("i=%d x= %g  expand= %g diff= %g\n", i, x, y, y-x);
