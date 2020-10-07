@@ -23,7 +23,7 @@ double tau(double x, double beta, double a, double b)
 	if (a < x and x < b) return beta*x;
 	if (a+0.5 < x and x < b+0.5) return beta*x;
 	if (a+1.0 < x and x < b+1.0) return beta*x;
-	if (x<0.5) return beta*x;
+	if (x < 0.5) return beta*x;
 
 	if (x < 1.0) return beta*(x-0.5);
 	return beta*(x-1.0);
@@ -56,19 +56,18 @@ int main (int argc, char* argv[])
 	{
 		long int r = random();
 		double x = ((double) r) / ((double) RAND_MAX);
-		x *= SCALE;
 
 		for (int j=0; j<50; j++)
 		{
+			double xb = NBINS * x / SCALE;
+			int ibin = xb;
+			histo[ibin] += 1.0;
+
 			r = random();
 			if (r < RAND_MAX/2)
 				x = tau(x, beta, a, b);
 			else
 				x = tee(x, beta);
-
-			double xb = NBINS * x / SCALE;
-			int ibin = xb;
-			histo[ibin] += 1.0;
 		}
 	}
 
