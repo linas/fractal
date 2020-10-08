@@ -2083,11 +2083,11 @@ where
 \begin_inset Formula $n_{1},n_{2},\cdots$
 \end_inset
 
- be the locations of the bits leading up to 
+ be the locations of the first bit of 
 \begin_inset Formula $c_{m}$
 \end_inset
 
-.
+ (the location of the 1-bit).
  Picking one of these locations, say 
 \begin_inset Formula $n_{j}$
 \end_inset
@@ -2100,9 +2100,9 @@ where
 \begin_inset Formula 
 \begin{equation}
 k_{n}^{\prime}=\begin{cases}
-k_{n} & \mbox{ for }n\le n_{j}\\
-0 & \mbox{ for }n=n_{j}+1\\
-\kappa_{n} & \mbox{ for }n_{j}+1<n
+k_{n} & \mbox{ for }n<n_{j}\\
+0 & \mbox{ for }n=n_{j}\\
+\kappa_{n} & \mbox{ for }n_{j}<n
 \end{cases}\label{eq:expanded bits}
 \end{equation}
 
@@ -2126,7 +2126,7 @@ noprefix "false"
  That is, 
 \begin_inset Formula 
 \[
-\kappa_{n_{j}+2+p}=k_{p}\left(\beta T_{\beta}^{n_{j}+1}(x)\right)
+\kappa_{n_{j}+1+p}=k_{p}\left(\beta T_{\beta}^{n_{j}}(x)\right)
 \]
 
 \end_inset
