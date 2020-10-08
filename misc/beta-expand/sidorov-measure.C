@@ -75,7 +75,7 @@ int main (int argc, char* argv[])
 		for (int k=0; k<20; k++)
 		{
 			double x = mpf_get_d(parry_orbit[k].get_mpf_t());
-			if (parry_bits[k] and y < x) pacc += bpn;
+			if (y < x) pacc += bpn;
 
 			for (int j=0; j<ntracks; j++)
 			{
