@@ -16,12 +16,13 @@
 #include "emrun.C"
 
 std::vector<bool> bits;
+std::vector<bool> gamm;
 
-void prt_bits()
+void prt_bits(std::vector<bool> stuff)
 {
-	printf("len=%lu ", bits.size());
-	for (size_t j=0; j<bits.size(); j++)
-		printf("%d", (int) bits[j]);
+	printf("len=%lu ", stuff.size());
+	for (size_t j=0; j<stuff.size(); j++)
+		printf("%d", (int) stuff[j]);
 	printf("\n");
 }
 
@@ -38,10 +39,12 @@ double maybe(double x, double beta)
 	if (r < RAND_MAX/2)
 	{
 		// printf(" went low\n");
+		gamm.push_back(0);
 		bits.push_back(0);
 		return beta*x;
 	}
 
+	gamm.push_back(1);
 	// printf(" went high\n");
 	if (x<0.5) { bits.push_back(0); return beta*x; }
 	if (x<1.0) { bits.push_back(1); return beta*(x-0.5); }
@@ -80,7 +83,7 @@ int main (int argc, char* argv[])
 	double b = a * (1.0 + pow(beta, -em));
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
-#define EPS 1e-16
+#define EPS 1e-12
 	int nbits = -log(EPS) / log(beta);
 
 // #define NSAMP 1000000
@@ -106,7 +109,9 @@ int main (int argc, char* argv[])
 		}
 		//if (9.0*EPS < fabs(y-x))
 		{
-			prt_bits();
+			printf("gamma= ");
+			prt_bits(gamm);
+			prt_bits(bits);
 			printf("i=%d x= %g  expand= %g diff= %g\n", i, x, y, y-x);
 			printf("\n");
 		}

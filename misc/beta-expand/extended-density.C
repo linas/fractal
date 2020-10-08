@@ -43,7 +43,9 @@ void extended_measure(double dbeta,
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
 			std::vector<std::vector<int>> branch_set;
-			beta_expand(ex, beta, em, maxdepth, orbit_set, bitset, branch_set, nbits);
+			std::vector<std::vector<bool>> gamma_set;
+			beta_expand(ex, beta, em, maxdepth,
+			            orbit_set, bitset, branch_set, gamma_set, nbits);
 
 			// Compute a histogram of the orbits. But do it
 			// by summing only up to the last branch-point.

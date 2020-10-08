@@ -88,23 +88,29 @@ void greedy_expand(mpf_class y, mpf_class beta, int nstart, int nbits,
 // `K` is beta/2
 // `em` is the number of zero bits to look for.
 // `start` is where to start looking
-// `gap` is the set to which the beta exapnsion is appended.
+// `greedy` is the bit expansion
+// `orbit` is the collection of tee values
+// `branch_points` locates where the branches are
+// `gamm` is the left-right branching decisions
 static
 void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
                      std::vector<mpf_class> orbit,
                      std::vector<bool> greedy,
                      std::vector<int> branch_points,
+                     std::vector<bool> gamm,
                      int depth,
                      int maxdepth,
                      std::vector<std::vector<mpf_class>>& orbit_set,
                      std::vector<std::vector<bool>>& gap,
-                     std::vector<std::vector<int>>& branch_set)
+                     std::vector<std::vector<int>>& branch_set,
+                     std::vector<std::vector<bool>>& gamma_set)
 {
 	if (maxdepth <= depth)
 	{
 		orbit_set.push_back(orbit);
 		gap.push_back(greedy);
 		branch_set.push_back(branch_points);
+		gamma_set.push_back(gamm);
 		return;
 	}
 
@@ -127,6 +133,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 
 				// Set to zero, and resume expansion.
 				gapper[i] = 0;
+// XXX This seems incorrect! But is is giving valid beta expansions
 				y = beta * orbit[i];
 				lorbit[i] = y;
 
@@ -136,11 +143,19 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 				// Get the alternate expansion.
 				greedy_expand(y, beta, i+1, nbits, lorbit, gapper);
 
+				std::vector<bool> logam = gamm;
+				gamm.push_back(1);
+				logam.push_back(0);
+
 				// Recurse
 				beta_expand_rec(y, beta, em, i+1, nbits, orbit, greedy,
-				                branch_points, depth+1, maxdepth, orbit_set, gap, branch_set);
+				                branch_points, gamm,
+				                depth+1, maxdepth, orbit_set,
+				                gap, branch_set, gamma_set);
 				beta_expand_rec(y, beta, em, i+1, nbits, lorbit, gapper,
-				                lobran, depth+1, maxdepth, orbit_set, gap, branch_set);
+				                lobran, logam,
+				                depth+1, maxdepth, orbit_set,
+				                gap, branch_set, gamma_set);
 				return;
 			}
 		}
@@ -160,11 +175,13 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
                  std::vector<std::vector<mpf_class>>& orbit_set,
                  std::vector<std::vector<bool>>& gap,
                  std::vector<std::vector<int>>& branch_set,
+                 std::vector<std::vector<bool>>& gamma_set,
                  int nbits)
 {
 	std::vector<bool> bitseq;
 	std::vector<mpf_class> orbit;
 	std::vector<int> branch_points;
+	std::vector<bool> gamm;
 	bitseq.resize(nbits);
 	orbit.resize(nbits);
 
@@ -177,8 +194,10 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
 	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
 
 	// And now recursively get the rest.
-	beta_expand_rec(y, beta, em, 0, nbits, orbit, bitseq, branch_points,
-	                0 /* depth*/, maxdepth, orbit_set, gap, branch_set);
+	beta_expand_rec(y, beta, em, 0, nbits,
+	                orbit, bitseq, branch_points, gamm,
+	                0 /* depth*/, maxdepth,
+	                orbit_set, gap, branch_set, gamma_set);
 
 #if 0 // DEBUG
 	// Debug print

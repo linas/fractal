@@ -53,9 +53,11 @@ int main (int argc, char* argv[])
 		std::vector<std::vector<mpf_class>> orbit_set;
 		std::vector<std::vector<bool>> bitset;
 		std::vector<std::vector<int>> branch_set;
-		beta_expand(ex, ebeta, em, maxdepth, orbit_set, bitset, branch_set, nbits);
+		std::vector<std::vector<bool>> gamma_set;
+		beta_expand(ex, ebeta, em, maxdepth,
+		            orbit_set, bitset, branch_set, gamma_set, nbits);
 
-		printf("initial %g ex=%g\n", x, mpf_get_d(ex.get_mpf_t()));
+		printf("initial %g\n", x);
 
 		int ntracks = bitset.size();
 		printf("totoal of %d tracks\n", ntracks);
@@ -64,6 +66,7 @@ int main (int argc, char* argv[])
 			std::vector<mpf_class> orbit = orbit_set[j];
 			std::vector<int> branch_points = branch_set[j];
 			std::vector<bool> bits = bitset[j];
+			std::vector<bool> gamm = gamma_set[j];
 
 			double y = 0.0;
 			double ob = 0.5;
@@ -74,6 +77,8 @@ int main (int argc, char* argv[])
 			}
 			// if (9.0*EPS < fabs(y-x))
 			{
+				printf("gamma= ");
+				print_bits(gamm);
 				print_bits(bits);
 				printf("j=%d x= %g  expand= %g diff= %g\n", j, x, y, y-x);
 				printf("\n");

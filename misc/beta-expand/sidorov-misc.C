@@ -100,7 +100,9 @@ int main (int argc, char* argv[])
 			std::vector<std::vector<mpf_class>> orbit_set;
 			std::vector<std::vector<bool>> bitset;
 			std::vector<std::vector<int>> branch_set;
-			beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
+			std::vector<std::vector<bool>> gamma_set;
+			beta_expand(ex, beta, em, MAXDEPTH,
+			            orbit_set, bitset, branch_set, gamma_set, nbits);
 
 			tracknum[ibin] += bitset.size();
 			tot_tracks += bitset.size();

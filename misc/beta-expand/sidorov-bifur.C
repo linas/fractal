@@ -51,6 +51,7 @@ static void fake_bifur (float *array,
 	static std::vector<std::vector<mpf_class>> orbit_set;
 	static std::vector<std::vector<bool>> bitset;
 	static std::vector<std::vector<int>> branch_set;
+	static std::vector<std::vector<bool>> gamma_set;
 
 // #define MAXDEPTH 16
 #define MAXDEPTH 7
@@ -71,7 +72,8 @@ double x=param;
 		mpf_class ex;
 		make_random_bitsequence(ex, x, nbits, 1e9);
 
-		beta_expand(ex, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
+		beta_expand(ex, beta, em, MAXDEPTH,
+		            orbit_set, bitset, branch_set, gamma_set, nbits);
 
 #ifdef PRINT_BITS
 		int npaths = bitset.size();
