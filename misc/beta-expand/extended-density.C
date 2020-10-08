@@ -63,7 +63,7 @@ void extended_measure(double dbeta,
 				for (size_t k=1; k<=norb; k++)
 				{
 					double x = mpf_get_d(orbit[k].get_mpf_t());
-					if (1.4 < x) {
+					if (1.66 < x) {
 						fprintf(stderr, "fail x= %g\n", x);
 						exit(1);
 					}
