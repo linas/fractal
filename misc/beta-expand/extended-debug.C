@@ -82,6 +82,9 @@ int main (int argc, char* argv[])
 				print_branches(branch_points);
 				print_bits(bits);
 				printf("j=%d x= %g  expand= %g diff= %g\n", j, x, y, y-x);
+
+				for (int k=0; k<50; k++)
+					printf("%d orbit=%g\n", k, mpf_get_d(orbit[k].get_mpf_t()));
 				printf("\n");
 			}
 		}

@@ -133,9 +133,7 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 
 				// Set to zero, and resume expansion.
 				gapper[i] = 0;
-// XXX This seems incorrect! But is is giving valid beta expansions
 				y = beta * orbit[i];
-				lorbit[i] = y;
 
 				branch_points.push_back(i);
 				std::vector<int> lobran = branch_points;
