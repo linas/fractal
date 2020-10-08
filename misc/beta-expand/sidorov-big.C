@@ -216,8 +216,8 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
 
 // Just the ordinary greedy beta expansion.
 void beta_sequence(mpf_class y, mpf_class beta, int em,
-                   std::vector<mpf_class> orbit,
-                   std::vector<bool> bitseq,
+                   std::vector<mpf_class>& orbit,
+                   std::vector<bool>& bitseq,
                    int nbits)
 {
 	bitseq.resize(nbits);
