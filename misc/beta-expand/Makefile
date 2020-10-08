@@ -29,6 +29,7 @@ sidorov.o: sidorov.C
 sidorov-misc.o: sidorov-misc.C sidorov-big.C
 sidorov-density.o: sidorov-density.C extended-density.C sidorov-big.C
 sidorov-bifur.o: sidorov-bifur.C sidorov-big.C
+sidorov-measure.o: extended-density.C sidorov-big.C emrun.C
 extended-length.o: extended-length.C extended-density.C sidorov-big.C
 extended-measure.o: extended-measure.C extended-density.C sidorov-big.C
 ext-misc.o: ext-misc.C emrun.C
@@ -38,7 +39,6 @@ extended-debug.o: extended-debug.C emrun.C sidorov-big.C
 
 sidorov: sidorov.o # $(BRAT)
 
-sidorov-measure: sidorov-measure.o
 sidorov-misc: sidorov-misc.o
 sidorov-length: sidorov-length.o
 	$(CC) -o $@ $^ -lgmpxx -lgmp -lm -lstdc++

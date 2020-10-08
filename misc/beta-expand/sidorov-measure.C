@@ -28,12 +28,25 @@ int main (int argc, char* argv[])
 
 #define MAXDEPTH maxdepth
 
+	// Orbits of 1.0 aka orbits of beta/2
+	// That is, we do the first iteration by hand.
 	std::vector<std::vector<mpf_class>> orbit_set;
 	std::vector<std::vector<bool>> bitset;
 	std::vector<std::vector<int>> branch_set;
+	std::vector<std::vector<bool>> gamma_set;
 	mpf_class one = Kay;
 	mpf_class beta = dbeta;
-	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, nbits);
+	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, gamma_set, nbits);
+
+	// Orbits of the upper bound, 0.5 (1+\beta^-m)
+	// Do the first iteration by hand.
+	std::vector<std::vector<mpf_class>> erbit_set;
+	std::vector<std::vector<bool>> ebitset;
+	std::vector<std::vector<int>> ebr_set;
+	std::vector<std::vector<bool>> egam_set;
+
+	mpf_class edge = Kay * pow(dbeta, -em);
+	beta_expand(edge, beta, em, MAXDEPTH, erbit_set, ebitset, ebr_set, egam_set, nbits);
 
 	int ntracks = bitset.size();
 
@@ -61,7 +74,14 @@ int main (int argc, char* argv[])
 				if (orbit.size() <= norb) norb = orbit.size() -1;
 				if ((int) norb < k) continue;
 
+				std::vector<mpf_class> erbit = erbit_set[j];
 
+				double x = mpf_get_d(orbit[k].get_mpf_t());
+				double xu = mpf_get_d(erbit[k].get_mpf_t());
+
+				if (bits[k] and y < x) acc += bpn;
+
+#ifdef ALMOST_WORKS_BUT_DOESNT
 #define BRANCH_HACKERY
 #ifdef BRANCH_HACKERY
 				double scale = 1.0;
@@ -82,9 +102,12 @@ int main (int argc, char* argv[])
 					if (not bits[k])
 					{
 						if (y < x) acc += bpn/dbeta;
+						// if (y < x) acc += bpn;
 						if (dbeta*y < x) acc -= dbeta*bpn;
 					}
 				}
+#endif // ALMOST_WORKS_BUT_DOESNT
+
 			}
 
 			bpn /= dbeta;

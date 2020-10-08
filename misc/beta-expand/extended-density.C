@@ -120,7 +120,7 @@ void parry_measure(double dbeta,
 			beta_sequence(ex, beta, em, orbit, bitseq, nbits);
 
 			// Stick the orbit into bins.
-			for (int i=1; i< nbits; i++)
+			for (int i=1; i< (int) orbit.size(); i++)
 			{
 				double x = mpf_get_d(orbit[i].get_mpf_t());
 				int bin = x * NBINS;

@@ -4420,7 +4420,7 @@ g this figure; increased sampling removes the speckles.
  through this figure.
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Created with ./sidorov-density sido-dense-800x400-60 800 400 60 0.5 0.75 1
@@ -4482,7 +4482,7 @@ Starting with any number
 ; that is 
 \begin_inset Formula 
 \[
-\frac{1}{2}\le x<\frac{1}{2}\left(1+\frac{1}{\beta^{m}}\right)
+\frac{1}{2}\le x<\frac{1}{2}\left(1+\beta^{-m}\right)
 \]
 
 \end_inset
@@ -4490,14 +4490,18 @@ Starting with any number
 The corresponding expanded shift can be written as
 \begin_inset Formula 
 \[
-\tau_{\beta}\left(x\right)=\begin{cases}
-\beta x & \mbox{ for }x\in U\\
+\tau_{\beta}\left(x;g\right)=\begin{cases}
+\left(1-g\right)\beta x+gT_{\beta}\left(x\right) & \mbox{ for }\frac{1}{2}\le x<\frac{1}{2}\left(1+\beta^{-m}\right)\\
 T_{\beta}\left(x\right) & \mbox{ otherwise}
 \end{cases}
 \]
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 The piece-wise nature of this function is not immediate obvious; it is graphed
  for several values of 
 \begin_inset Formula $\beta$
@@ -4590,68 +4594,7 @@ The argument can also be rephrased in the language of physics.
 
 \begin_layout Standard
 Distances are accessible via some simple considerations.
- Starting with any number 
-\begin_inset Formula $x$
-\end_inset
-
-, the first digit in the expansion will be a one if 
-\begin_inset Formula $\frac{1}{2}\le T_{\beta}(x)\le1$
-\end_inset
-
-.
- A string of 
-\begin_inset Formula $m$
-\end_inset
-
- zeros follow if 
-\begin_inset Formula $0\le T_{\beta}^{j}(x)<\frac{1}{2}$
-\end_inset
-
- for each 
-\begin_inset Formula $1<j\le m+1$
-\end_inset
-
-.
- The first condition is satisfied if XXX this is of course wrong now.
-\begin_inset Formula 
-\[
-\frac{1}{2\beta}\le x\le\frac{1}{\beta}\quad\mbox{ or }\quad\frac{1}{2}+\frac{1}{2\beta}\le x\le\frac{1}{2}+\frac{1}{\beta}\quad\mbox{or }\quad1+\frac{1}{2\beta}\le x\le1+\frac{1}{\beta}
-\]
-
-\end_inset
-
-There are three pre-images, as the measure 
-\begin_inset Formula $\mu_{\beta}\left(x\right)$
-\end_inset
-
- is non-zero for values 
-\begin_inset Formula $1<x$
-\end_inset
-
-.
- The second condition is satisfied if 
-\begin_inset Formula $0\le\beta^{m}\left(T_{\beta}\left(x\right)-\frac{1}{2}\right)<\frac{1}{2}$
-\end_inset
-
-; that is 
-\begin_inset Formula 
-\[
-\frac{1}{2}\le T_{\beta}\left(x\right)<\frac{1}{2}\left(1+\frac{1}{\beta^{m}}\right)
-\]
-
-\end_inset
-
-The intersection with the three intervals is
-\begin_inset Formula 
-\begin{align*}
-\frac{1}{2\beta}\le x\le\frac{1}{2\beta}\left(1+\frac{1}{\beta^{m}}\right) & \quad\mbox{ or }\\
-\frac{1}{2}+\frac{1}{2\beta}\le x\le\frac{1}{2}+\frac{1}{2\beta}\left(1+\frac{1}{\beta^{m}}\right) & \quad\mbox{ or }\\
-1+\frac{1}{2\beta}\le x\le1+\frac{1}{2\beta}\left(1+\frac{1}{\beta^{m}}\right)
-\end{align*}
-
-\end_inset
-
-The corresponding cylinders are to be sampled out of the measure 
+ The corresponding cylinders are to be sampled out of the measure 
 \begin_inset Formula $\mu_{\beta}$
 \end_inset
 
@@ -4667,55 +4610,21 @@ The corresponding cylinders are to be sampled out of the measure
  corresponds to
 \begin_inset Formula 
 \[
-p\left(\beta\right)=\int_{a}^{b}d\mu_{\beta}+\int_{c}^{d}d\mu_{\beta}+\int_{e}^{f}d\mu_{\beta}
+p\left(\beta\right)=\int_{1/2}^{\left(1+\beta^{-m}\right)/2}d\mu_{\beta}
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $\left[a,b\right]$
-\end_inset
-
-, 
-\begin_inset Formula $\left[c,d\right]$
-\end_inset
-
- and 
-\begin_inset Formula $\left[e,f\right]$
-\end_inset
-
- are the three pre-images above.
- This gives the expectation value for the distance between such cylinders:
+This gives the expectation value for the distance between such cylinders:
  
 \begin_inset Formula 
 \[
-\int_{0}^{4/3}\ell\left(\beta\right)d\mu_{\beta}=\frac{1}{p\left(\beta\right)}
+\int\ell\left(\beta\right)d\mu_{\beta}=\frac{1}{p\left(\beta\right)}
 \]
 
 \end_inset
 
-(Here, the 
-\begin_inset Formula $4/3$
-\end_inset
-
- is taken as an 
-\emph on
-ad hoc
-\emph default
- value above which the measure always vanishes; more precisely, the upper
- bound is 
-\begin_inset Formula $\left(\varphi+1\right)/2$
-\end_inset
-
- given by the 
-\begin_inset Formula $m=2$
-\end_inset
-
- transition; the actual upper bound depends on 
-\begin_inset Formula $\beta$
-\end_inset
-
-).
+where the integral is understood to run over the entire range.
 \end_layout
 
 \begin_layout Section
