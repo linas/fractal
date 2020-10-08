@@ -148,6 +148,10 @@ int main (int argc, char* argv[])
 		mepa[i] *= NBINS/porm;
 		mext[i] *= NBINS/xorm;
 		mexu[i] *= NBINS/uorm;
+
+		mepa[i] /= SCALE;
+		mext[i] /= SCALE;
+		mexu[i] /= SCALE;
 	}
 
 	for (int i=0; i< NBINS; i++)
