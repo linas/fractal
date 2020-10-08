@@ -45,24 +45,38 @@ int main (int argc, char* argv[])
 	std::vector<std::vector<int>> ebr_set;
 	std::vector<std::vector<bool>> egam_set;
 
+	// XXX FIXME I'm confused why is MAXDEPTH off by one?
 	mpf_class edge = Kay * pow(dbeta, -em);
-	beta_expand(edge, beta, em, MAXDEPTH, erbit_set, ebitset, ebr_set, egam_set, nbits);
+	beta_expand(edge, beta, em, MAXDEPTH+1, erbit_set, ebitset, ebr_set, egam_set, nbits);
 
 	int ntracks = bitset.size();
+	int etracks = ebitset.size();
+	printf("# ntracks=%d etrack=%d\n", ntracks, etracks);
+
+	std::vector<mpf_class> parry_orbit;
+	std::vector<bool> parry_bits;
+	beta_sequence(one, beta, em, parry_orbit, parry_bits, nbits);
 
 #define NBINS 403
-	double meas[NBINS];
+	double mepa[NBINS];
+	double mext[NBINS];
+	double mexu[NBINS];
 
 #define SCALE (4.0/3.0)
 	for (int i=0; i< NBINS; i++)
 	{
 		double y = (((double) i) + 0.5) / ((double) NBINS);
 		y *= SCALE;
-		double acc = 0.0;
+		double pacc = 0.0;
+		double xacc = 0.0;
+		double uacc = 0.0;
 		double bpn = 1.0;
 
 		for (int k=0; k<20; k++)
 		{
+			double x = mpf_get_d(parry_orbit[k].get_mpf_t());
+			if (parry_bits[k] and y < x) pacc += bpn;
+
 			for (int j=0; j<ntracks; j++)
 			{
 				std::vector<bool> bits = bitset[j];
@@ -74,12 +88,14 @@ int main (int argc, char* argv[])
 				if (orbit.size() <= norb) norb = orbit.size() -1;
 				if ((int) norb < k) continue;
 
+				std::vector<bool> ebits = ebitset[j];
 				std::vector<mpf_class> erbit = erbit_set[j];
 
 				double x = mpf_get_d(orbit[k].get_mpf_t());
 				double xu = mpf_get_d(erbit[k].get_mpf_t());
 
-				if (bits[k] and y < x) acc += bpn;
+				if (bits[k] and y < x) xacc += bpn;
+				if (ebits[k] and y < xu) uacc += bpn;
 
 #ifdef ALMOST_WORKS_BUT_DOESNT
 #define BRANCH_HACKERY
@@ -112,20 +128,32 @@ int main (int argc, char* argv[])
 
 			bpn /= dbeta;
 		}
-		meas[i] = acc;
+		mepa[i] = pacc;
+		mext[i] = xacc;
+		mexu[i] = uacc;
 	}
 
-	double norm = 0.0;
+	double porm = 0.0;
+	double xorm = 0.0;
+	double uorm = 0.0;
 	for (int i=0; i< NBINS; i++)
-		norm += meas[i];
+	{
+		porm += mepa[i];
+		xorm += mext[i];
+		uorm += mexu[i];
+	}
 
 	for (int i=0; i< NBINS; i++)
-		meas[i] *= NBINS/norm;
+	{
+		mepa[i] *= NBINS/porm;
+		mext[i] *= NBINS/xorm;
+		mexu[i] *= NBINS/uorm;
+	}
 
 	for (int i=0; i< NBINS; i++)
 	{
 		double y = (((double) i) + 0.5) / ((double) NBINS);
-		printf("%d	%g	%g\n", i, y*SCALE, meas[i]);
+		printf("%d	%g	%g	%g	%g\n", i, y*SCALE, mepa[i], mext[i], mexu[i]);
 	}
 }
 
