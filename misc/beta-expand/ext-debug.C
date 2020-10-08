@@ -17,6 +17,7 @@
 
 std::vector<bool> bits;
 std::vector<bool> gamm;
+int lvl = 0;
 
 void prt_bits(std::vector<bool> stuff)
 {
@@ -57,7 +58,8 @@ double maybe(double x, double beta)
 
 double tau(double x, double beta, double a, double b)
 {
-	// printf("x= %g cyl=%d\n", x, a < x and x < b);
+	printf("x= %g cyl=%d lvl=%d\n", x, a < x and x < b, lvl);
+	lvl++;
 	if (a < x and x < b)
 	{
 		return maybe(x, beta);

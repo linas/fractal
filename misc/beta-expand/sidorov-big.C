@@ -170,6 +170,14 @@ void print_bits(const std::vector<bool>& bits)
    printf("\n");
 }
 
+void print_branches(const std::vector<int>& branches)
+{
+   printf("branch points len=%lu>> ", branches.size());
+   for (size_t j=0; j<branches.size(); j++)
+      printf("%d ", (int) branches[j]);
+   printf("\n");
+}
+
 void beta_expand(mpf_class y, mpf_class beta, int em,
                  int maxdepth,
                  std::vector<std::vector<mpf_class>>& orbit_set,

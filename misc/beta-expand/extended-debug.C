@@ -79,6 +79,7 @@ int main (int argc, char* argv[])
 			{
 				printf("gamma= ");
 				print_bits(gamm);
+				print_branches(branch_points);
 				print_bits(bits);
 				printf("j=%d x= %g  expand= %g diff= %g\n", j, x, y, y-x);
 				printf("\n");
