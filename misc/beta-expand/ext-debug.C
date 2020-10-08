@@ -83,7 +83,8 @@ int main (int argc, char* argv[])
 #define EPS 1e-16
 	int nbits = -log(EPS) / log(beta);
 
-#define NSAMP 1000000
+// #define NSAMP 1000000
+#define NSAMP 1
 	for (int i=0; i<NSAMP; i++)
 	{
 		long int r = random();
@@ -103,7 +104,7 @@ int main (int argc, char* argv[])
 			y += bits[j] * ob;
 			ob /= beta;
 		}
-		if (9.0*EPS < fabs(y-x))
+		//if (9.0*EPS < fabs(y-x))
 		{
 			prt_bits();
 			printf("i=%d x= %g  expand= %g diff= %g\n", i, x, y, y-x);

@@ -147,6 +147,14 @@ void beta_expand_rec(mpf_class y, mpf_class beta, int em, int start, int nbits,
 	}
 }
 
+void print_bits(const std::vector<bool>& bits)
+{
+   printf("len=%lu ", bits.size());
+   for (size_t j=0; j<bits.size(); j++)
+      printf("%d", (int) bits[j]);
+   printf("\n");
+}
+
 void beta_expand(mpf_class y, mpf_class beta, int em,
                  int maxdepth,
                  std::vector<std::vector<mpf_class>>& orbit_set,

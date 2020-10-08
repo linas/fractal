@@ -74,7 +74,7 @@ int main (int argc, char* argv[])
 			}
 			// if (9.0*EPS < fabs(y-x))
 			{
-				// prt_bits();
+				print_bits(bits);
 				printf("j=%d x= %g  expand= %g diff= %g\n", j, x, y, y-x);
 				printf("\n");
 			}
