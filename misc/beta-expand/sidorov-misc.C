@@ -8,8 +8,6 @@
  * Linas Vepstas Dec 2017; Sept 2020
  */
 
-#define HISTOGRAM_ORBITS
-#define NBINS (2003*12)
 #include "sidorov-big.C"
 
 double tee(double x, double beta)
@@ -18,7 +16,7 @@ double tee(double x, double beta)
 	return beta*(x-0.5);
 }
 
-
+#define HISTOGRAM_ORBITS
 #ifdef HISTOGRAM_ORBITS
 int main (int argc, char* argv[])
 {
@@ -40,6 +38,7 @@ int main (int argc, char* argv[])
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
 
+#define NBINS (2003*12)
 	// Where are the extended orbits going?
 	// Draw a histogram
 	double histo[NBINS];
@@ -52,7 +51,6 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NBINS; i++)
 	{
 		histo[i] = 0.0;
-		histbase[i] = 0.0;
 
 		xmean[i] = 0.0;
 		tracknum[i] = 0.0;
@@ -187,52 +185,6 @@ int main (int argc, char* argv[])
 	fprintf(stderr, "# Avg tracks/orbit: %g expect 2^%d=%d avg tracklen: %g\n",
 	       avg_tracks, MAXDEPTH, 1<<MAXDEPTH, avg_tracklen);
 
-// #define PRINT_HISTORGRAM
-#ifdef PRINT_HISTORGRAM
-
-	// Obtain a comparable number of counts for the baseline
-	for (int i=0; i<NBINS; i++)
-	{
-		if (i%100 ==0) fprintf(stderr, "# baseline done %d of %d\n", i, NBINS);
-		double x = (((double) i) + 0.5)/ ((double) NBINS);
-
-#define BASE_SAMP 13000
-// #define BASE_SAMP 100
-		// 13000 seems to give a nice result...
-		for (int j=0; j<BASE_SAMP; j++)
-		{
-			make_random_bitsequence(ex, x, nbits, NBINS);
-			beta_sequence(ex, beta, em, nbits);
-		}
-	}
-
-	// Normalize
-	double cnt = 0.0;
-	double bnt = 0.0;
-	for (int i=0; i<NBINS; i++)
-	{
-		cnt += histo[i];
-		bnt += histbase[i];
-	}
-	fprintf(stderr, "# histogram counts=%g baseline=%g\n", cnt, bnt);
-	for (int i=0; i<NBINS; i++)
-	{
-		histo[i] *= NBINS/cnt;
-		histbase[i] *= NBINS/bnt;
-	}
-
-	// Print the histogram
-	double sum = 0.0;
-	double bsu = 0.0;
-	for (int i=0; i<NBINS; i++)
-	{
-		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		sum += histo[i] / NBINS;
-		bsu += histbase[i] / NBINS;
-		printf("%d	%g	%g %g	%g	%g %g	%g\n",
-		       i, x*SCALE, histo[i], histbase[i], x, sum, bsu, tracklen[i]);
-	}
-#endif // PRINT_HISTOGRAM
 
 #define HISTO_INTEGRAL
 #ifdef HISTO_INTEGRAL

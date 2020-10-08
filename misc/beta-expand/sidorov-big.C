@@ -52,11 +52,6 @@ void make_random_bitsequence(mpf_class& val, double x, int nbits, int nbins)
 	val += tail;
 }
 
-// #define HISTOGRAM_ORBITS
-#ifdef HISTOGRAM_ORBITS
-	double histbase[NBINS];
-#endif
-
 // ================================================================
 
 // Generate the beta expansion in a greedy fashion.
@@ -219,33 +214,20 @@ void beta_expand(mpf_class y, mpf_class beta, int em,
 #endif
 }
 
-std::vector<bool> beta_sequence(mpf_class y, mpf_class beta,
-                                int em, int nbits)
+// Just the ordinary greedy beta expansion.
+void beta_sequence(mpf_class y, mpf_class beta, int em,
+                   std::vector<mpf_class> orbit,
+                   std::vector<bool> bitseq,
+                   int nbits)
 {
-	std::vector<bool> bitseq;
-	std::vector<mpf_class> orbit;
 	bitseq.resize(nbits);
 	orbit.resize(nbits);
 
 	for (int i=0; i< nbits; i++)
-	{
 		orbit[i] = 0;
-	}
 
 	// Get the baseline (greedy) orbit.
 	greedy_expand(y, beta, 0, nbits, orbit, bitseq);
-
-#ifdef HISTOGRAM_ORBITS
-	for (int i=1; i< nbits; i++)
-	{
-		double x = mpf_get_d(orbit[i].get_mpf_t());
-		int bin = x * NBINS;
-		if (NBINS <= bin) bin=NBINS-1;
-		histbase[bin] += 1.0;
-	}
-#endif // HISTOGRAM_ORBITS
-
-	return bitseq;
 }
 
 // ================================================================

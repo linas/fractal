@@ -30,14 +30,17 @@ int main (int argc, char* argv[])
 	double histo[NBINS];
 	extended_measure(2.0*Kay, maxdepth, nsamples, histo, NBINS, nbits);
 
+	double histbase[NBINS];
+	parry_measure(2.0*Kay, nsamples*(1<<maxdepth), histbase, NBINS, nbits);
+
 #define PHI (0.5 * (sqrt(5.0) + 1.0))
 #define SCALE (0.5 * (PHI + 1.0))
 
 	for (int i=0; i<NBINS; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NBINS);
-		x *= SCALE;
-		printf("%d	%g	%g\n", i, x, histo[i]);
+		double y = x * SCALE;
+		printf("%d	%g	%g	%g	%g\n", i, y, histo[i], x, histbase[i]);
 	}
 }
 
