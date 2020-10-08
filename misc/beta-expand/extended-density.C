@@ -63,9 +63,9 @@ void extended_measure(double dbeta,
 				for (size_t k=1; k<=norb; k++)
 				{
 					double x = mpf_get_d(orbit[k].get_mpf_t());
-					if (3.5 < x) {
+					if (1.4 < x) {
 						fprintf(stderr, "fail x= %g\n", x);
-						// exit(1);
+						exit(1);
 					}
 					int bin = x * NBINS / SCALE;
 					if (NBINS <= bin) bin=NBINS-1;

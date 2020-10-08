@@ -25,6 +25,7 @@ int main (int argc, char* argv[])
 	printf("#\n# Extended measure\n");
 	printf("#\n# K=%g beta=%g depth=%d nsamp=%d bits=%d\n#\n", Kay, 2.0*Kay,
 	       maxdepth, nsamples, nbits);
+	fflush(stdout);
 
 	double histo[NBINS];
 	extended_measure(2.0*Kay, maxdepth, nsamples, histo, NBINS, nbits);
