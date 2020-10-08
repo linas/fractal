@@ -3,6 +3,7 @@
  *
  * Verify that the extended map is creating valid beta-expansions...
  * and now that we bug-fixed everything ... it is! Hooray!
+ * This is a unit test.  It should pass.
  *
  * Linas Vepstas Oct 2020
  */
@@ -58,7 +59,7 @@ double maybe(double x, double beta)
 
 double tau(double x, double beta, double a, double b)
 {
-	printf("x= %g cyl=%d lvl=%d\n", x, a < x and x < b, lvl);
+	// printf("x= %g cyl=%d lvl=%d\n", x, a < x and x < b, lvl);
 	lvl++;
 	if (a < x and x < b)
 	{
@@ -85,11 +86,10 @@ int main (int argc, char* argv[])
 	double b = a * (1.0 + pow(beta, -em));
 	printf("#\n# K=%g m=%d\n#\n", Kay, em);
 
-#define EPS 1e-12
+#define EPS 1e-14
 	int nbits = -log(EPS) / log(beta);
 
-// #define NSAMP 1000000
-#define NSAMP 1
+#define NSAMP 1000000
 	for (int i=0; i<NSAMP; i++)
 	{
 		long int r = random();
@@ -109,7 +109,7 @@ int main (int argc, char* argv[])
 			y += bits[j] * ob;
 			ob /= beta;
 		}
-		//if (9.0*EPS < fabs(y-x))
+		if (9.0*EPS < fabs(y-x))
 		{
 			printf("gamma= ");
 			prt_bits(gamm);
@@ -118,6 +118,8 @@ int main (int argc, char* argv[])
 			printf("\n");
 		}
 	}
+
+	printf("Complete running %d samples\n", NSAMP);
 }
 
 // ================================================================
