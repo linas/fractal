@@ -13,16 +13,11 @@ set yrange [2:300]
 
 set ytics add (2,300)
 
-# Data produced via extended-length.C
-#     "extlen-10-1-flip-fast.dat" using 2:4 title "", \
+# Data graphed here is produced by extended-length.C
 
 plot "sido-len-160-4096.dat" using (2*$1):4 title "Average length",\
-     "extlen-10-1.dat" using 2:4 lt rgb "sea-green" title "Invariant length", \
-     "extlen-10-1-flip.dat" using 2:4 lt rgb "sea-green" title "", \
-     "extlen-10-1-fine.dat" using 2:4 lt rgb "sea-green" title "", \
-     "extlen-12-6-fine.dat" using 2:4 lt rgb "black" title "", \
-     "extlen-12-4.dat" using 2:4 lt rgb "black" title "", \
-     "extlen-12-4-flip.dat" using 2:4 lt rgb "black" title "", \
-     (5/(8*(x-1)*(2-x))) title "5/8({/Symbol b}-1)(2-{/Symbol b})"
+     "extlen-6-16.dat" using 2:4 lt rgb "sea-green" title "Invariant length 6-16", \
+     "extlen-10-6.dat" using 2:4 lt rgb "red" title "Invariant length 10-6", \
+     (3/(4*(x-1)*(2-x))) title "3/4({/Symbol b}-1)(2-{/Symbol b})"
 
 #######
