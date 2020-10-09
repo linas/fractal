@@ -4430,6 +4430,24 @@ g this figure; increased sampling removes the speckles.
  jumps).
  The measures shown in the previous figure are a pair of horizontal slices
  through this figure.
+ Perhaps less than obvious due to the color scheme, the rightmost-edge of
+ the bottom-most plateau is a straight line, from 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+, 
+\begin_inset Formula $x=\left(1+\varphi\right)/2$
+\end_inset
+
+ at the plaeau tip, to 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+, 
+\begin_inset Formula $x=1$
+\end_inset
+
+ at the very bottom; the density fades to black making this hard to see.
  
 \begin_inset Note Note
 status collapsed
@@ -4466,7 +4484,7 @@ Branching Transform and Measure
 
 \begin_layout Standard
 Rather than working with individual point orbits, some small amount of insight
- is gained by working with directly with densities on the real nuber line.
+ is gained by working with directly with densities on the real number line.
 \end_layout
 
 \begin_layout Standard
@@ -4508,11 +4526,16 @@ Starting with any number
 
 \end_inset
 
-The corresponding branching shift can be written as
+Write the upper bound as 
+\begin_inset Formula $\alpha=\left(1+\beta^{-m}\right)/2$
+\end_inset
+
+.
+ The corresponding branching shift can be written as
 \begin_inset Formula 
 \[
 \tau_{\beta}\left(x;G\right)=\begin{cases}
-\left(1-G\right)\beta x+GT_{\beta}\left(x\right) & \mbox{ for }\frac{1}{2}\le x<\frac{1}{2}\left(1+\beta^{-m}\right)\\
+\left(1-G\right)\beta x+GT_{\beta}\left(x\right) & \mbox{ for }\frac{1}{2}\le x<\alpha\\
 T_{\beta}\left(x\right) & \mbox{ otherwise}
 \end{cases}
 \]
@@ -4539,6 +4562,33 @@ noprefix "false"
 \end_inset
 
  is undersood to be one specific draw from the process.
+ Rearranging terms, this simplifies to 
+\begin_inset Formula 
+\[
+\tau_{\beta}\left(x;G\right)=T_{\beta}\left(x\right)+\left(1-G\right)\frac{\beta}{2}\Theta\left(\frac{1}{2}-x\right)\Theta\left(x-\alpha\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ is the Heaviside step function, indicating that the alternate term is valid
+ only for 
+\begin_inset Formula $1/2\le x<\alpha$
+\end_inset
+
+.
+ Thus, for the greedy process 
+\begin_inset Formula $G=1$
+\end_inset
+
+, the original 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift is regained.
 \end_layout
 
 \begin_layout Standard
@@ -4572,13 +4622,7 @@ with
 \end_layout
 
 \begin_layout Standard
-The branching pushforward is more difficult to write.
- Let 
-\begin_inset Formula $\alpha=\left(1+\beta^{-m}\right)/2$
-\end_inset
-
-.
- The branching shift has three pre-images, defined on the intervals 
+The branching shift has three pre-images, defined on the intervals 
 \begin_inset Formula $\left[0,1/2\right]$
 \end_inset
 
@@ -4591,7 +4635,7 @@ The branching pushforward is more difficult to write.
 \end_inset
 
 .
- The action of the shift on these three consists of the maps
+ The corresponding pushfoward on these three consists of the maps
 \begin_inset Formula 
 \[
 \mathcal{M}_{\left[0,1/2\right]}f:y\mapsto\begin{cases}
@@ -4628,7 +4672,7 @@ Combining these together,
 \begin_inset Formula $\mathcal{M}=\mathcal{M}_{\left[0,1/2\right]}+\mathcal{M}_{\left[1/2,\alpha\right]}+\mathcal{M}_{\left[\alpha,1\right]}$
 \end_inset
 
-, which after re-arrangement can be written in the form
+, which, after re-arrangement, can be written in the form
 \end_layout
 
 \begin_layout Standard
@@ -4654,6 +4698,20 @@ Thus, the usual
 \begin_layout Standard
 The invariant measure can be constructed in the same way that the Parry
  measure is constructed, via recursive iteration.
+ Consider the iteratation of 
+\begin_inset Formula $\Theta\left(x\right)\Theta\left(1-x\right)$
+\end_inset
+
+, the uniform density on the unit interval.
+ After one step, one obtains 
+\begin_inset Formula 
+\[
+xxx
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
