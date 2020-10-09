@@ -57,8 +57,24 @@ int main (int argc, char* argv[])
 	std::vector<bool> parry_bits;
 	beta_sequence(one, beta, em, parry_orbit, parry_bits, nbits);
 
+	std::vector<mpf_class> pand_orbit;
+	std::vector<bool> pand_bits;
+	beta_sequence(one, edge, em, pand_orbit, pand_bits, nbits);
+
+	// Integral of the Parry measure.
+	double pgral = 0.0;
+	double bpn = 0.5 * dbeta;
+	for (int k=0; k< (int) parry_orbit.size(); k++)
+	{
+		double x = mpf_get_d(parry_orbit[k].get_mpf_t());
+		pgral += x*bpn;
+		bpn /= dbeta;
+	}
+	printf("# Parry measure integral=%g\n", pgral);
+
 #define NBINS 403
 	double mepa[NBINS];
+	double meda[NBINS];
 	double mext[NBINS];
 	double mexu[NBINS];
 
@@ -68,6 +84,7 @@ int main (int argc, char* argv[])
 		double y = (((double) i) + 0.5) / ((double) NBINS);
 		y *= SCALE;
 		double pacc = 0.0;
+		double dacc = 0.0;
 		double xacc = 0.0;
 		double uacc = 0.0;
 		double bpn = 1.0;
@@ -76,6 +93,9 @@ int main (int argc, char* argv[])
 		{
 			double x = mpf_get_d(parry_orbit[k].get_mpf_t());
 			if (y < x) pacc += bpn;
+
+			x = mpf_get_d(pand_orbit[k].get_mpf_t());
+			if (y < x) dacc += bpn;
 
 			for (int j=0; j<ntracks; j++)
 			{
@@ -127,16 +147,19 @@ int main (int argc, char* argv[])
 			bpn /= dbeta;
 		}
 		mepa[i] = pacc;
+		meda[i] = dacc;
 		mext[i] = xacc;
 		mexu[i] = uacc;
 	}
 
 	double porm = 0.0;
+	double dorm = 0.0;
 	double xorm = 0.0;
 	double uorm = 0.0;
 	for (int i=0; i< NBINS; i++)
 	{
 		porm += mepa[i];
+		dorm += meda[i];
 		xorm += mext[i];
 		uorm += mexu[i];
 	}
@@ -144,18 +167,22 @@ int main (int argc, char* argv[])
 	for (int i=0; i< NBINS; i++)
 	{
 		mepa[i] *= NBINS/porm;
+		meda[i] *= NBINS/dorm;
 		mext[i] *= NBINS/xorm;
 		mexu[i] *= NBINS/uorm;
 
 		mepa[i] /= SCALE;
+		meda[i] /= SCALE;
 		mext[i] /= SCALE;
 		mexu[i] /= SCALE;
 	}
 
+	printf("# Parry meas norm=%g\n", porm/NBINS);
+
 	for (int i=0; i< NBINS; i++)
 	{
 		double y = (((double) i) + 0.5) / ((double) NBINS);
-		printf("%d	%g	%g	%g	%g\n", i, y*SCALE, mepa[i], mext[i], mexu[i]);
+		printf("%d	%g	%g	%g	%g	%g\n", i, y*SCALE, mepa[i], meda[i], mext[i], mexu[i]);
 	}
 }
 

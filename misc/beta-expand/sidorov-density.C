@@ -21,8 +21,14 @@ static void ext_measure (float *array,
 
 	fprintf(stderr, "Working K=%g nbits=%d\n",  Kay, nbits);
 
+/*
+ * Use this for quicker results.
 #define MAXDEPTH 6
 #define NSAMP 32
+ */
+
+#define MAXDEPTH 7
+#define NSAMP 64
 
 	double arr[array_size];
 	extended_measure(2.0*Kay, MAXDEPTH, NSAMP, arr, array_size, nbits);

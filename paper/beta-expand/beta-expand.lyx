@@ -1462,7 +1462,19 @@ and
 \end_inset
 
  is a normalization constant.
- 
+ By integrating 
+\begin_inset Formula $\varepsilon_{n}\left(y\right)$
+\end_inset
+
+ under the sum, the normalization is given by
+\begin_inset Formula 
+\[
+F=\sum_{n=0}^{\infty}\frac{t_{\beta}^{n}\left(1\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4155,7 +4167,7 @@ With that out of the way, visualizations of the measure can now be given.
  is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Extended-Measures"
+reference "fig:Branching-Measures"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4194,10 +4206,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Extended Measures
+Branching Measures
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Extended-Measures"
+name "fig:Branching-Measures"
 
 \end_inset
 
@@ -4228,7 +4240,7 @@ name "fig:Extended-Measures"
 \end_layout
 
 \begin_layout Plain Layout
-These figures show the Gelfond–Parry measure in purple, and the extended
+These figures show the Gelfond–Parry measure in purple, and the branching
  measure, obtained by bin-counting, in green, for two example choices of
  
 \begin_inset Formula $\beta$
@@ -4318,7 +4330,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Extended measure display
+Branching diagram
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Extended-measure-display"
@@ -4349,7 +4361,7 @@ Above, the Parry-Gelfond measure
 \begin_inset Formula $\nu_{\beta}\left(x\right)$
 \end_inset
 
-; below the extended measure 
+; below the branching measure 
 \begin_inset Formula $\mu_{\beta}\left(x\right)$
 \end_inset
 
@@ -4395,7 +4407,7 @@ Both rectangles run
 
 .
  The measure is vanishing in black regions.
- The top bar is green, as there, the measure extends only over 
+ The top bar is green, as there, the measure is supported only on 
 \begin_inset Formula $0\le x\le1$
 \end_inset
 
@@ -4449,7 +4461,12 @@ height "1pt"
 \end_layout
 
 \begin_layout Subsection
-Transform
+Branching Transform and Measure
+\end_layout
+
+\begin_layout Standard
+Rather than working with individual point orbits, some small amount of insight
+ is gained by working with directly with densities on the real nuber line.
 \end_layout
 
 \begin_layout Standard
@@ -4457,7 +4474,11 @@ Starting with any number
 \begin_inset Formula $0\le x\le1$
 \end_inset
 
-, the first digit in the expansion will be a one if 
+, the first digit in it's 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+-expansion expansion will be a one if 
 \begin_inset Formula $\frac{1}{2}\le x\le1$
 \end_inset
 
@@ -4487,27 +4508,41 @@ Starting with any number
 
 \end_inset
 
-The corresponding expanded shift can be written as
+The corresponding branching shift can be written as
 \begin_inset Formula 
 \[
-\tau_{\beta}\left(x;g\right)=\begin{cases}
-\left(1-g\right)\beta x+gT_{\beta}\left(x\right) & \mbox{ for }\frac{1}{2}\le x<\frac{1}{2}\left(1+\beta^{-m}\right)\\
+\tau_{\beta}\left(x;G\right)=\begin{cases}
+\left(1-G\right)\beta x+GT_{\beta}\left(x\right) & \mbox{ for }\frac{1}{2}\le x<\frac{1}{2}\left(1+\beta^{-m}\right)\\
 T_{\beta}\left(x\right) & \mbox{ otherwise}
 \end{cases}
 \]
 
 \end_inset
 
+where 
+\begin_inset Formula $G$
+\end_inset
 
+ is a random Bernoulli process.
+ Iterating this generates the sequence in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expand-orbits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, where 
+\begin_inset Formula $\gamma\in G$
+\end_inset
+
+ is undersood to be one specific draw from the process.
 \end_layout
 
 \begin_layout Standard
-The piece-wise nature of this function is not immediate obvious; it is graphed
- for several values of 
-\begin_inset Formula $\beta$
-\end_inset
-
- in figure XXX.
+The invariant measure can be constructed in the same way that
 \end_layout
 
 \begin_layout Subsection
