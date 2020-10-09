@@ -92,34 +92,32 @@ int main (int argc, char* argv[])
 				std::vector<mpf_class> erbit = erbit_set[j];
 
 				double x = mpf_get_d(orbit[k].get_mpf_t());
-				double xu = mpf_get_d(erbit[k].get_mpf_t());
+				//double xu = mpf_get_d(erbit[k].get_mpf_t());
 
 				if (bits[k] and y < x) xacc += bpn;
-				if (ebits[k] and y < xu) uacc += bpn;
+				//if (ebits[k] and y < xu) uacc += bpn;
 
+#define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
-#define BRANCH_HACKERY
-#ifdef BRANCH_HACKERY
-				double scale = 1.0;
-				bool branch = false;
-				int len = 0;
-				for (int b = 0; b<(int)nb; b++)
-					if (k == branch_points[b]) { branch = true; len=b; break; }
-				if (branch) scale = -0.5/dbeta;
-#endif
 
-				double x = mpf_get_d(orbit[k].get_mpf_t());
+				// double scale = 1.0;
+				bool branch = false;
+				// int len = 0;
+				for (int b = 0; b<(int)nb; b++)
+					if (k == branch_points[b]) { branch = true; /*len=b;*/ break; }
+				// if (branch) scale = -0.5/dbeta;
+
 				// if (y < x) acc += bpn;
 				// if (scale * y < scale * x) acc += bpn;
-				if (not branch and y < x) acc += bpn;
+				if (not branch and y < x) uacc += bpn;
 				if (branch)
 				{
-					if (bits[k] and y < x) acc += bpn;
+					if (bits[k] and y < x) uacc += bpn;
 					if (not bits[k])
 					{
-						if (y < x) acc += bpn/dbeta;
-						// if (y < x) acc += bpn;
-						if (dbeta*y < x) acc -= dbeta*bpn;
+						// if (y < x) uacc += bpn/dbeta;
+						if (y < x) uacc += bpn;
+						if (dbeta*y < x) uacc -= dbeta*bpn;
 					}
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
