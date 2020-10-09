@@ -4542,9 +4542,38 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The invariant measure can be constructed in the same way that the Parry
- measure is constructed, via recursive iteration on the transfr operator.
- Define 
+For the push-forward, write 
+\begin_inset Formula $\mathcal{L}f=f\circ T^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{M}f=f\circ\tau^{-1}$
+\end_inset
+
+.
+ The first transfer operator is straight-forward; it is
+\begin_inset Formula 
+\[
+\left[\mathcal{L}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)\Theta\left(y\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ the Heaviside step function, indicating that the expression is valid only
+ for 
+\begin_inset Formula $0\le y\le\beta/2$
+\end_inset
+
+ and is zero otherwise.
+\end_layout
+
+\begin_layout Standard
+The branching pushforward is more difficult to write.
+ Let 
 \begin_inset Formula $\alpha=\left(1+\beta^{-m}\right)/2$
 \end_inset
 
@@ -4565,7 +4594,7 @@ The invariant measure can be constructed in the same way that the Parry
  The action of the shift on these three consists of the maps
 \begin_inset Formula 
 \[
-\mathcal{L}_{\left[0,1/2\right]}f:y\mapsto\begin{cases}
+\mathcal{M}_{\left[0,1/2\right]}f:y\mapsto\begin{cases}
 \frac{1}{\beta}f\left(\frac{y}{\beta}\right) & \mbox{for }0\le y\le\beta/2\\
 0 & \mbox{otherwise}
 \end{cases}
@@ -4576,7 +4605,7 @@ The invariant measure can be constructed in the same way that the Parry
 and
 \begin_inset Formula 
 \[
-\mathcal{L}_{\left[1/2,\alpha\right]}f:y\mapsto\begin{cases}
+\mathcal{M}_{\left[1/2,\alpha\right]}f:y\mapsto\begin{cases}
 \frac{1}{\beta}\left(1-G\right)f\left(\frac{y}{\beta}\right) & \mbox{for }\beta/2\le y\le\beta\alpha\\
 \frac{1}{\beta}Gf\left(\frac{y}{\beta}+\frac{1}{2}\right) & \mbox{for }0\le y\le1/2\beta^{m-1}
 \end{cases}
@@ -4587,7 +4616,7 @@ and
 and
 \begin_inset Formula 
 \[
-\mathcal{L}_{\left[\alpha,1\right]}f:y\mapsto\begin{cases}
+\mathcal{M}_{\left[\alpha,1\right]}f:y\mapsto\begin{cases}
 \frac{1}{\beta}f\left(\frac{y}{\beta}+\frac{1}{2}\right) & \mbox{for }1/2\beta^{m-1}\le y\\
 0 & \mbox{otherwise}
 \end{cases}
@@ -4595,23 +4624,36 @@ and
 
 \end_inset
 
-The transfer operator is then the sum of these three segments
+Combining these together, 
+\begin_inset Formula $\mathcal{M}=\mathcal{M}_{\left[0,1/2\right]}+\mathcal{M}_{\left[1/2,\alpha\right]}+\mathcal{M}_{\left[\alpha,1\right]}$
+\end_inset
+
+, which after re-arrangement can be written in the form
 \end_layout
 
 \begin_layout Standard
-Acting on some function 
-\begin_inset Formula $f$
-\end_inset
-
-, the transfer operator is then
 \begin_inset Formula 
 \[
-\left[\mathcal{L}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+Gf\left(\frac{y}{\beta}+\frac{1}{2}\right)+\left(1-G\right)f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
+\left[\mathcal{M}f\right]\left(y\right)=\left[\mathcal{L}f\right]\left(y\right)+\frac{1-G}{\beta}\Theta\left(y-\frac{\beta}{2}\right)\left[f\left(\frac{y}{\beta}\right)\Theta\left(\beta\alpha-y\right)-f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
 \]
 
 \end_inset
 
+Thus, the usual 
+\begin_inset Formula $\beta$
+\end_inset
 
+-transfer operator is obtained when the binary process is greedy, i.e.
+ when 
+\begin_inset Formula $G=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The invariant measure can be constructed in the same way that the Parry
+ measure is constructed, via recursive iteration.
 \end_layout
 
 \begin_layout Subsection
