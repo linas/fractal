@@ -94,8 +94,8 @@ int main (int argc, char* argv[])
 			double x = mpf_get_d(parry_orbit[k].get_mpf_t());
 			if (y < x) pacc += bpn;
 
-			x = mpf_get_d(pand_orbit[k].get_mpf_t());
-			if (y < x) dacc += bpn;
+			// x = mpf_get_d(pand_orbit[k].get_mpf_t());
+			// if (y < x) dacc += bpn;
 
 			for (int j=0; j<ntracks; j++)
 			{
@@ -112,7 +112,7 @@ int main (int argc, char* argv[])
 				std::vector<mpf_class> erbit = erbit_set[j];
 
 				double x = mpf_get_d(orbit[k].get_mpf_t());
-				//double xu = mpf_get_d(erbit[k].get_mpf_t());
+				double xu = mpf_get_d(erbit[k].get_mpf_t());
 
 				if (bits[k] and y < x) xacc += bpn;
 				//if (ebits[k] and y < xu) uacc += bpn;
@@ -129,16 +129,21 @@ int main (int argc, char* argv[])
 
 				// if (y < x) acc += bpn;
 				// if (scale * y < scale * x) acc += bpn;
-				if (not branch and y < x) uacc += bpn;
+				if (y < x) uacc += bpn;
+				if (y < x) dacc += bpn;
 				if (branch)
 				{
-					if (bits[k] and y < x) uacc += bpn;
 					if (not bits[k])
 					{
-						// if (y < x) uacc += bpn/dbeta;
-						if (y < x) uacc += bpn;
 					}
-					if (dbeta*y < x) uacc -= dbeta*bpn;
+					// if (dbeta*y < x ) uacc -= bpn; // almost
+					// if (dbeta*y < x) uacc -= bpn / dbeta; // almost
+
+					// if (x < y) uacc -= bpn / dbeta;
+					// if (x < y and y < dbeta*xu) uacc += bpn;
+
+					if (dbeta*y < x) dacc -= bpn / dbeta; // almost
+					if (x < y and dbeta*y < x) uacc -= bpn / dbeta; // almost
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
 
