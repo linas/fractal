@@ -1,6 +1,6 @@
 /*
- * sidorov-measure.C
- * Try to guess what the extended measure is.
+ * branching-measure.C
+ * Try to guess what the branching measure is.
  * So far, the attempts to guess all fail, but they come close...
  *
  * Linas Vepstas Sept 2020
@@ -137,8 +137,8 @@ int main (int argc, char* argv[])
 					{
 						// if (y < x) uacc += bpn/dbeta;
 						if (y < x) uacc += bpn;
-						if (dbeta*y < x) uacc -= dbeta*bpn;
 					}
+					if (dbeta*y < x) uacc -= dbeta*bpn;
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
 
