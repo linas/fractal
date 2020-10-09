@@ -4200,7 +4200,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4252,7 +4252,7 @@ These figures show the Gelfond–Parry measure in purple, and the branching
 \end_inset
 
  distinct expansions were used to generate these images.
- Sampling noise was minimized by choosing 206336 distinct random initial
+ Sampling noise was minimized by choosing 201500 distinct random initial
  values for 
 \begin_inset Formula $x$
 \end_inset
@@ -4264,7 +4264,7 @@ These figures show the Gelfond–Parry measure in purple, and the branching
 
  were histogrammed into 403 bins.
  The jitteriness in the graphs is purely numerical sampling noise; the actual
- distribution presumably consists of nearly-flat segments.
+ distribution consists of nearly-flat segments.
  Note that 
 \begin_inset Formula $\tau_{n}\left(x\right)$
 \end_inset
@@ -4286,16 +4286,16 @@ mod 1
  bits of precision.
  In this case, 85 bits of precision were used.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Created with sido-meas.gplot after running extended-measure.C (was previously
  sidorov-misc.C appropriately configured).
  In this case: for the left, its K=0.75, nbits=60, with 2^10 alternate expansions
- and 512 random samples for each initial x.
+ and 500 random samples for each initial x.
  On the right, K=0.85 and nbits=85.
- This takes two hours cpu: ./extended-measure 0.75 60 10 512 > sido-meas-0.75-60-10
--512.dat
+ This takes two hours cpu: ./extended-measure 0.75 60 10 500 > sido-meas-0.75-60-10
+-500.dat
 \end_layout
 
 \end_inset
@@ -4542,7 +4542,51 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The invariant measure can be constructed in the same way that
+The invariant measure can be constructed in the same way that the Parry
+ measure is constructed, via recursive iteration on the transfr operator.
+ Define 
+\begin_inset Formula $\alpha=\left(1+\beta^{-m}\right)/2$
+\end_inset
+
+.
+ The branching shift has three pre-images, defined on the intervals 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+, 
+\begin_inset Formula $\left[1/2,\alpha\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[\alpha,1\right]$
+\end_inset
+
+.
+ The action of the shift on these three consists of the maps
+\begin_inset Formula 
+\[
+\mathcal{L}f:\left[0,\beta/2\right]\mapsto\frac{1}{\beta}f\left(\frac{\left[0,\beta/2\right]}{\beta}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Acting on some function 
+\begin_inset Formula $f$
+\end_inset
+
+, the transfer operator is then
+\begin_inset Formula 
+\[
+\left[\mathcal{L}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+Gf\left(\frac{y+\frac{1}{2}}{\beta}\right)+\left(1-G\right)f\left(\frac{y}{\beta}\right)+f\left(\frac{y+\frac{1}{2}}{\beta}\right)\right]
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
