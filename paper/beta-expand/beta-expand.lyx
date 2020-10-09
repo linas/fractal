@@ -4200,7 +4200,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4565,12 +4565,39 @@ The invariant measure can be constructed in the same way that the Parry
  The action of the shift on these three consists of the maps
 \begin_inset Formula 
 \[
-\mathcal{L}f:\left[0,\beta/2\right]\mapsto\frac{1}{\beta}f\left(\frac{\left[0,\beta/2\right]}{\beta}\right)
+\mathcal{L}_{\left[0,1/2\right]}f:y\mapsto\begin{cases}
+\frac{1}{\beta}f\left(\frac{y}{\beta}\right) & \mbox{for }0\le y\le\beta/2\\
+0 & \mbox{otherwise}
+\end{cases}
 \]
 
 \end_inset
 
+and
+\begin_inset Formula 
+\[
+\mathcal{L}_{\left[1/2,\alpha\right]}f:y\mapsto\begin{cases}
+\frac{1}{\beta}\left[Gf\left(\frac{y}{\beta}+\frac{1}{2}\right)+\left(1-G\right)f\left(\frac{y}{\beta}\right)\right] & \mbox{for }\beta/2\le y\le\left(1+\alpha\right)\beta/2\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
 
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\mathcal{L}_{\left[\alpha,1\right]}f:y\mapsto\begin{cases}
+\frac{1}{\beta}f\left(\frac{y}{\beta}+\frac{1}{2}\right) & \mbox{for }0\le y\le\beta/2\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+XXX This is wrong.
+ WTF.
+ Why doesn't my brain work any more?
 \end_layout
 
 \begin_layout Standard
@@ -4581,7 +4608,7 @@ Acting on some function
 , the transfer operator is then
 \begin_inset Formula 
 \[
-\left[\mathcal{L}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+Gf\left(\frac{y+\frac{1}{2}}{\beta}\right)+\left(1-G\right)f\left(\frac{y}{\beta}\right)+f\left(\frac{y+\frac{1}{2}}{\beta}\right)\right]
+\left[\mathcal{L}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+Gf\left(\frac{y}{\beta}+\frac{1}{2}\right)+\left(1-G\right)f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
 \]
 
 \end_inset
