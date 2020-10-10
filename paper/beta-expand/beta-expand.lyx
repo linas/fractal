@@ -3164,9 +3164,14 @@ This shows the numerically estimated distance
 \end_inset
 
 .
+ Considerations in a later section suggests a sharper lower bound of 
+\begin_inset Formula $\varphi\left(\beta-1\right)\left(2-\beta\right)/2$
+\end_inset
+
+ holds in the limit, although it would be broken by the graphs here.
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Created with sido-length.gplot The datafiles are created with sidorov-length.C
@@ -4724,7 +4729,7 @@ Thus, the usual
 \end_layout
 
 \begin_layout Standard
-The invariant measure reuires a fair bit of trickery.
+The invariant measure requires a fair bit of trickery.
  A starting point is to write the beta-expansion eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4775,11 +4780,11 @@ The distance
 
  was defined, but this was not quite correct, as the average was taken over
  a measure that was not shift-invariant.
- The measure 
+ The branching measure 
 \begin_inset Formula $\mu_{\beta}$
 \end_inset
 
- visualized in the last section is the appropriate measure.
+ is the appropriate measure for this average.
  This follows, as the set 
 \begin_inset Formula $S^{\prime}$
 \end_inset
@@ -4854,7 +4859,7 @@ Distances are accessible via some simple considerations.
  corresponds to
 \begin_inset Formula 
 \[
-p\left(\beta\right)=\int_{1/2}^{\left(1+\beta^{-m}\right)/2}d\mu_{\beta}
+p\left(\beta\right)=\int_{1/2}^{\alpha}d\mu_{\beta}
 \]
 
 \end_inset
@@ -4863,12 +4868,47 @@ This gives the expectation value for the distance between such cylinders:
  
 \begin_inset Formula 
 \[
-\int\ell\left(\beta\right)d\mu_{\beta}=\frac{1}{p\left(\beta\right)}
+\left\langle \ell\right\rangle =\int\ell\left(\beta\right)d\mu_{\beta}=\frac{1}{p\left(\beta\right)}
 \]
 
 \end_inset
 
 where the integral is understood to run over the entire range.
+ These arguments can be readily verified numerically, and one finds (surprisingl
+y!?) that 
+\begin_inset Formula $\left\langle \ell\right\rangle =\hat{\ell}$
+\end_inset
+
+ to within numerical uncertainty.
+ That is, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-dependence is exactly as that shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Average-distance-between"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The numerics do suggest a slightly tigher bound it appears that 
+\begin_inset Formula $\varphi\left(\beta-1\right)\left(2-\beta\right)/2\le\left\langle \ell\right\rangle $
+\end_inset
+
+ for all 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ This bound is the most strict near 
+\begin_inset Formula $\beta\approx1.5$
+\end_inset
+
+; everywhere else it is easily met.
 \end_layout
 
 \begin_layout Section
