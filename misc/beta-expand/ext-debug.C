@@ -89,6 +89,30 @@ double tau_binary(double x, double beta, double a, double b,
 	return y;
 }
 
+std::vector<bool> alt_bitseq(double x, double beta, double a, double b,
+                             std::vector<bool> gammy, int nbits)
+{
+	std::vector<bool> abits;
+	std::vector<bool> yammy = gammy;
+
+	for (int j=0; j<nbits; j++)
+	{
+		if (a < x and x < b)
+		{
+			abits.push_back(gammy.front());
+			gammy.erase(gammy.begin());
+		}
+		else
+		{
+			bool bit = (0.5 < x);
+			abits.push_back(bit);
+		}
+
+		x = tau_binary(x, beta, a, b, yammy);
+	}
+	return abits;
+}
+
 int main (int argc, char* argv[])
 {
 	if (argc < 2)
@@ -141,6 +165,23 @@ int main (int argc, char* argv[])
 		}
 		// printf("\n");
 
+		z = x;
+		gammy = gamm;
+		std::vector<bool> abits = alt_bitseq(z, beta, a, b, gammy, nbits);
+
+		// There will be bit-miscompares eventually...
+		// for (int j=0; j<nbits; j++)
+		for (int j=0; j<40; j++)
+		{
+			if (bits[j] != abits[j])
+			{
+				printf("Bit miscompare! %d %d %d\n",
+				       j, (int) bits[j], (int) abits[j]);
+				break;
+			}
+		}
+
+		// Verify that it is a beta expansion
 		double y = 0.0;
 		double ob = 0.5;
 		for (int j=0; j<nbits; j++)
