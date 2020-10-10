@@ -39,7 +39,6 @@ int main (int argc, char* argv[])
 	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, gamma_set, nbits);
 
 	// Orbits of the upper bound, alpha*beta = beta/2 (1+\beta^-m)
-	// Do the first iteration by hand.
 	std::vector<std::vector<mpf_class>> erbit_set;
 	std::vector<std::vector<bool>> ebitset;
 	std::vector<std::vector<int>> ebr_set;
@@ -129,20 +128,27 @@ int main (int argc, char* argv[])
 				if (y < x) dacc += bpn;
 				if (branch)
 				{
+					// if (y < x) dacc -= bpn;
+
 					if (not bits[k])
 					{
-					}
-					// if (dbeta*y < x ) uacc -= bpn; // almost
-					// if (dbeta*y < x) uacc -= bpn / dbeta; // almost
-
-					// if (x < y) uacc -= bpn / dbeta;
-					// if (x < y and y < dbeta*xu) uacc += bpn;
-
 					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost
-					// if (x < y and dbeta*y < x) uacc -= bpn / dbeta; // almost
 
-					if (x<y and y < xu) dacc += bpn;
-					// if (x<y and y < xu) dacc -= bpn / dbeta;
+					// if (x < y) dacc -= bpn / dbeta; // Nooo
+					// if (x < y and y < dbeta*xu) dacc += bpn; // Noo
+
+					// if (x<y and y < xu) dacc += bpn;
+					// if (y < xu) dacc += bpn /dbeta;
+					// if (y < x) dacc -= bpn;  // Nooo
+					// if (y < xu) dacc -= bpn /dbeta; // too negative
+
+					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost; but that step
+					// if (Kay*y < x) dacc -= bpn; // No, whack.
+					// if (y < xu) dacc += bpn /dbeta;
+
+					// if (y < xu) dacc += bpn*dbeta;
+					// if (Kay*y < xu) dacc -= bpn / dbeta; // almost; but that step
+					}
 
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
