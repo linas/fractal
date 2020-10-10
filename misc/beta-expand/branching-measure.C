@@ -148,17 +148,31 @@ int main (int argc, char* argv[])
 					// if (Kay*y < x) dacc -= bpn; // ok but No, whack.
 					// if (y < xu) dacc += bpn /dbeta;
 
+					// These almost work because they shift big step from
+					// 0.75 to 0.5 (when beta=1.5) but then there's to much fiddle
+					// and for beta=0.85 it just steps wrong...
 					//if (dbeta*y < x) dacc -= bpn ;// dbeta; // almost; but that step
-					//if (y < xu) dacc += bpn ;//dbeta;
+					// if (y < x/dbeta) dacc -= bpn;
 
-					if (y < 0.5) dacc -= bpn *dbeta;
-					}
+					// This is almost perfect for beta=1.5
+					// Like above, the right place for the step, and without grunge!
+}
+					if (y < 0.5) dacc -= bpn ;
+
+					//if (y < xu) dacc += bpn ;//dbeta;  // sometimes OK adjust
+
+
+					// strangely, this is wrong under the branch...
+					// which is weird given later ones work for beta=1.7
+					// if (y < x/dbeta) dacc -= bpn ; //*dbeta;
+//					}
 
 					// this fails for beta=1.5 but needed for beta=1.7
+					// also fine details are wrong; below is better.
 					// if (y < 0.5*x) dacc -= bpn *dbeta;
 
 					// this fails for beta=1.5 but needed for beta=1.7
-					// if (y < 0.5/dbeta) dacc -= bpn * dbeta;
+					if (y < 0.5/dbeta) dacc -= bpn * dbeta;
 
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
