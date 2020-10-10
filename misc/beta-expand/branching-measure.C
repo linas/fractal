@@ -126,6 +126,7 @@ int main (int argc, char* argv[])
 				}
 
 				if (y < x) dacc += bpn;
+				if (y < xu) dacc += bpn;
 
 				if (branch)
 				{
@@ -147,8 +148,9 @@ int main (int argc, char* argv[])
 					// if (Kay*y < x) dacc -= bpn; // ok but No, whack.
 					// if (y < xu) dacc += bpn /dbeta;
 
-					if (dbeta*y < x) dacc -= bpn ;// dbeta; // almost; but that step
-					if (y < xu) dacc += bpn ;//dbeta;
+					//if (dbeta*y < x) dacc -= bpn ;// dbeta; // almost; but that step
+					//if (y < xu) dacc += bpn ;//dbeta;
+					if (y < 0.5) dacc -= bpn *dbeta;
 					}
 
 				}
