@@ -128,11 +128,11 @@ int main (int argc, char* argv[])
 				if (y < x) dacc += bpn;
 				if (y < xu) dacc += bpn;
 
-				if (branch)
+				//if (branch)
 				{
 					// if (y < x) dacc -= bpn;
 
-					if (not bits[k])
+					//if (not bits[k])
 					{
 					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost
 
@@ -156,25 +156,31 @@ int main (int argc, char* argv[])
 
 					// This is almost perfect for beta=1.5
 					// Like above, the right place for the step, and without grunge!
-}
-					if (y < 0.5) dacc -= bpn ;
+					// if (y < 0.5) dacc -= bpn /dbeta ;
 
-					//if (y < xu) dacc += bpn ;//dbeta;  // sometimes OK adjust
+					// if (y < xu) dacc += bpn ;//dbeta;  // sometimes OK adjust
 
 
 					// strangely, this is wrong under the branch...
 					// which is weird given later ones work for beta=1.7
 					// if (y < x/dbeta) dacc -= bpn ; //*dbeta;
-//					}
+					}
+// else
 
 					// this fails for beta=1.5 but needed for beta=1.7
 					// also fine details are wrong; below is better.
 					// if (y < 0.5*x) dacc -= bpn *dbeta;
 
 					// this fails for beta=1.5 but needed for beta=1.7
-					if (y < 0.5/dbeta) dacc -= bpn * dbeta;
-
+					// if (y < 0.5/dbeta) dacc -= bpn * dbeta;
+					// if (y < 0.5/dbeta) dacc -= bpn /dbeta;
 				}
+
+				// Almost perfect for beta=1.5 when taken outside of the if's
+				if (y < 0.5) dacc -= bpn /dbeta/dbeta/dbeta ;
+
+				// This plus above is almost perfect for beta=1.7
+				//if (y < 0.5/dbeta) dacc -= bpn /dbeta/dbeta;
 #endif // ALMOST_WORKS_BUT_DOESNT
 
 			}
@@ -205,6 +211,8 @@ int main (int argc, char* argv[])
 		meda[i] *= NBINS/dorm;
 		mext[i] *= NBINS/xorm;
 		mexu[i] *= NBINS/uorm;
+
+mepa[i] /= dbeta;
 	}
 
 	printf("# Parry meas norm=%g\n", porm/NBINS);
