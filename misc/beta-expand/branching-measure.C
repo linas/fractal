@@ -130,6 +130,7 @@ int main (int argc, char* argv[])
 
 				if (y < x) dacc += bpn;
 				if (y < xu) dacc += bpn;
+				// if (y < xu) dacc += cpn;
 
 				if (branch)
 				{
@@ -176,10 +177,20 @@ int main (int argc, char* argv[])
 						// This is almost identical to above, but not quite.
 						// if (y < 0.5) dacc -= dbeta*cpn;
 
-						// These two combined give a perfect fit for beta=1.7
+						// These two combined give a nearly perfect fit for beta=1.7
 						// for y greater than 0.5 and come close for the rest.
 						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 						// if (y < 0.5/dbeta) dacc -= apn/dbeta ;
+
+						// These three combined give an OK fit for beta=1.76
+						// So there is an m=3 effect at work, here.
+						if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+						if (y < 0.5/dbeta) dacc -= apn/dbeta ;
+						if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
+
+						// Meh.
+						//if (y < 0.5) dacc -= dbeta*cpn;
+						//if (y < 0.5/dbeta) dacc -= dalpha*dbeta*cpn ;
 					}
 
 					// this fails for beta=1.5 but needed for beta=1.7
