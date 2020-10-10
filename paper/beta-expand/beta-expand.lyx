@@ -4594,9 +4594,10 @@ where
 \begin_layout Standard
 The corresponding bit-sequence can then be written as 
 \begin_inset Formula 
-\[
-\kappa_{n}\left(x;G\right)=\Theta\left(\tau^{n}\left(x;G\right)-\frac{1}{2}\right)\left(1-\varDelta\left(x\right)\right)+G\varDelta\left(x\right)
-\]
+\begin{align*}
+\kappa_{n}\left(x;G\right) & =\Theta\left(\tau^{n}\left(x;G\right)-\frac{1}{2}\right)\left(1-\varDelta\left(\tau^{n}\left(x;G\right)\right)\right)+G\varDelta\left(\tau^{n}\left(x;G\right)\right)\\
+ & =\Theta\left(\tau^{n}\left(x;G\right)-\frac{1}{2}\right)+\left(G-1\right)\varDelta\left(\tau^{n}\left(x;G\right)\right)
+\end{align*}
 
 \end_inset
 
@@ -4616,25 +4617,6 @@ noprefix "false"
 \end_inset
 
 .
- The beta-expansion eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:beta expansion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- can be written as an identity
-\begin_inset Formula 
-\[
-0=x-\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x;G\right)}{\beta^{n}}
-\]
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4742,22 +4724,34 @@ Thus, the usual
 \end_layout
 
 \begin_layout Standard
-The invariant measure can be constructed in the same way that the Parry
- measure is constructed, via recursive iteration.
- Consider the iteratation of 
-\begin_inset Formula $\Theta\left(x\right)\Theta\left(1-x\right)$
+The invariant measure reuires a fair bit of trickery.
+ A starting point is to write the beta-expansion eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta expansion"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-, the uniform density on the unit interval.
- After one step, one obtains 
+ as an identity
 \begin_inset Formula 
 \[
-xxx
+0=x-\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{\kappa_{n}\left(x;G\right)}{\beta^{n}}
 \]
 
 \end_inset
 
+that holds for all 
+\begin_inset Formula $x$
+\end_inset
 
+ and is independent of the process 
+\begin_inset Formula $G$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
