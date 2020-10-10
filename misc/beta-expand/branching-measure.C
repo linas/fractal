@@ -67,7 +67,7 @@ int main (int argc, char* argv[])
 	}
 	printf("# Parry measure integral=%g\n", pgral);
 
-#define NBINS 403
+#define NBINS 803
 	double mepa[NBINS];
 	double meda[NBINS];
 	double mext[NBINS];
@@ -86,44 +86,46 @@ int main (int argc, char* argv[])
 
 		for (int k=0; k<20; k++)
 		{
-			double x = mpf_get_d(parry_orbit[k].get_mpf_t());
-			if (y < x) pacc += bpn;
+			double t = mpf_get_d(parry_orbit[k].get_mpf_t());
+			if (y < t) pacc += bpn;
 
 			for (int j=0; j<ntracks; j++)
 			{
-				std::vector<bool> bits = bitset[j];
-				std::vector<mpf_class> orbit = orbit_set[j];
-				std::vector<int> branch_points = branch_set[j];
+				std::vector<bool>& bits = bitset[j];
+				std::vector<mpf_class>& orbit = orbit_set[j];
+				std::vector<int>& branch_points = branch_set[j];
 
 				size_t nb = branch_points.size();
 				size_t norb = 2*branch_points[nb-1] - branch_points[nb-2];
 				if (orbit.size() <= norb) norb = orbit.size() -1;
 				if ((int) norb < k) continue;
 
-				std::vector<bool> ebits = ebitset[j];
-				std::vector<mpf_class> erbit = erbit_set[j];
+				// std::vector<bool>& ebits = ebitset[j];
+				std::vector<mpf_class>& erbit = erbit_set[j];
+				std::vector<int>& ebranches = branch_set[j];
 
 				double x = mpf_get_d(orbit[k].get_mpf_t());
 				double xu = mpf_get_d(erbit[k].get_mpf_t());
 
-				// if (bits[k] and y < x) xacc += bpn;
-				// if (ebits[k] and y < xu) uacc += bpn;
 				if (y < x) xacc += bpn;
 				if (y < xu) uacc += bpn;
 
 #define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
 
-				// double scale = 1.0;
 				bool branch = false;
-				// int len = 0;
-				for (int b = 0; b<(int)nb; b++)
-					if (k == branch_points[b]) { branch = true; /*len=b;*/ break; }
-				// if (branch) scale = -0.5/dbeta;
+				int b;
+				for (b = 0; b<(int)nb; b++)
+					if (k == branch_points[b]) { branch = true; break; }
 
-				// if (y < x) acc += bpn;
-				// if (scale * y < scale * x) acc += bpn;
-				// if (y < x) uacc += bpn;
+				// We expect branch points to e in the same locations
+				// for upper and lower iterates, and that does seem to hold.
+				if (branch and k != ebranches[b])
+				{
+					printf("branch fail! \n");
+					exit(1);
+				}
+
 				if (y < x) dacc += bpn;
 				if (branch)
 				{
@@ -136,8 +138,12 @@ int main (int argc, char* argv[])
 					// if (x < y) uacc -= bpn / dbeta;
 					// if (x < y and y < dbeta*xu) uacc += bpn;
 
-					if (dbeta*y < x) dacc -= bpn / dbeta; // almost
+					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost
 					// if (x < y and dbeta*y < x) uacc -= bpn / dbeta; // almost
+
+					if (x<y and y < xu) dacc += bpn;
+					// if (x<y and y < xu) dacc -= bpn / dbeta;
+
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
 
