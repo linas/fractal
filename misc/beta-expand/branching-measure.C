@@ -66,7 +66,7 @@ int main (int argc, char* argv[])
 	}
 	printf("# Parry measure integral=%g\n", pgral);
 
-#define NBINS 803
+#define NBINS 1803
 	double mepa[NBINS];
 	double meda[NBINS];
 	double mext[NBINS];
@@ -126,6 +126,7 @@ int main (int argc, char* argv[])
 				}
 
 				if (y < x) dacc += bpn;
+
 				if (branch)
 				{
 					// if (y < x) dacc -= bpn;
@@ -143,11 +144,11 @@ int main (int argc, char* argv[])
 					// if (y < xu) dacc -= bpn /dbeta; // too negative
 
 					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost; but that step
-					// if (Kay*y < x) dacc -= bpn; // No, whack.
+					// if (Kay*y < x) dacc -= bpn; // ok but No, whack.
 					// if (y < xu) dacc += bpn /dbeta;
 
-					// if (y < xu) dacc += bpn*dbeta;
-					// if (Kay*y < xu) dacc -= bpn / dbeta; // almost; but that step
+					if (dbeta*y < x) dacc -= bpn * dbeta; // almost; but that step
+					if (y < xu) dacc += bpn *dbeta;
 					}
 
 				}
@@ -181,11 +182,6 @@ int main (int argc, char* argv[])
 		meda[i] *= NBINS/dorm;
 		mext[i] *= NBINS/xorm;
 		mexu[i] *= NBINS/uorm;
-
-		mepa[i] /= SCALE;
-		meda[i] /= SCALE;
-		mext[i] /= SCALE;
-		mexu[i] /= SCALE;
 	}
 
 	printf("# Parry meas norm=%g\n", porm/NBINS);
