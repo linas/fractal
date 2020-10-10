@@ -150,8 +150,15 @@ int main (int argc, char* argv[])
 
 					//if (dbeta*y < x) dacc -= bpn ;// dbeta; // almost; but that step
 					//if (y < xu) dacc += bpn ;//dbeta;
+
 					if (y < 0.5) dacc -= bpn *dbeta;
 					}
+
+					// this fails for beta=1.5 but needed for beta=1.7
+					// if (y < 0.5*x) dacc -= bpn *dbeta;
+
+					// this fails for beta=1.5 but needed for beta=1.7
+					// if (y < 0.5/dbeta) dacc -= bpn * dbeta;
 
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
