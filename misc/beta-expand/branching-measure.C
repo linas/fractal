@@ -22,6 +22,7 @@ int main (int argc, char* argv[])
 	do_init(nbits);
 
 	double dbeta = 2.0*Kay;
+	mpf_class beta = dbeta;
 
 	int em = emrun(Kay);
 	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
@@ -34,8 +35,7 @@ int main (int argc, char* argv[])
 	std::vector<std::vector<bool>> bitset;
 	std::vector<std::vector<int>> branch_set;
 	std::vector<std::vector<bool>> gamma_set;
-	mpf_class one = Kay;
-	mpf_class beta = dbeta;
+	mpf_class one = dbeta * 0.5;
 	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, gamma_set, nbits);
 
 	// Orbits of the upper bound, alpha*beta = beta/2 (1+\beta^-m)
@@ -44,7 +44,8 @@ int main (int argc, char* argv[])
 	std::vector<std::vector<int>> ebr_set;
 	std::vector<std::vector<bool>> egam_set;
 
-	mpf_class alpha = Kay * (1.0 + pow(dbeta, -em));
+	double dalpha = 0.5 * (1.0 + pow(dbeta, -em));
+	mpf_class alpha = dbeta * dalpha;
 	beta_expand(alpha, beta, em, MAXDEPTH, erbit_set, ebitset, ebr_set, egam_set, nbits);
 
 	int ntracks = bitset.size();
@@ -82,6 +83,8 @@ int main (int argc, char* argv[])
 		double xacc = 0.0;
 		double uacc = 0.0;
 		double bpn = 1.0;
+		double apn = 1.0;
+		double cpn = 1.0;
 
 		for (int k=0; k<20; k++)
 		{
@@ -128,64 +131,87 @@ int main (int argc, char* argv[])
 				if (y < x) dacc += bpn;
 				if (y < xu) dacc += bpn;
 
-				//if (branch)
+				if (branch)
 				{
 					// if (y < x) dacc -= bpn;
 
-					//if (not bits[k])
+					if (not bits[k])
 					{
-					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost
+						// if (dbeta*y < x) dacc -= bpn / dbeta; // almost
 
-					// if (x < y) dacc -= bpn / dbeta; // Nooo
-					// if (x < y and y < dbeta*xu) dacc += bpn; // Noo
+						// if (x < y) dacc -= bpn / dbeta; // Nooo
+						// if (x < y and y < dbeta*xu) dacc += bpn; // Noo
 
-					// if (x<y and y < xu) dacc += bpn;
-					// if (y < xu) dacc += bpn /dbeta;
-					// if (y < x) dacc -= bpn;  // Nooo
-					// if (y < xu) dacc -= bpn /dbeta; // too negative
+						// if (x<y and y < xu) dacc += bpn;
+						// if (y < xu) dacc += bpn /dbeta;
+						// if (y < x) dacc -= bpn;  // Nooo
+						// if (y < xu) dacc -= bpn /dbeta; // too negative
 
-					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost; but that step
-					// if (Kay*y < x) dacc -= bpn; // ok but No, whack.
-					// if (y < xu) dacc += bpn /dbeta;
+						// if (dbeta*y < x) dacc -= bpn / dbeta; // almost; but that step
+						// if (Kay*y < x) dacc -= bpn; // ok but No, whack.
+						// if (y < xu) dacc += bpn /dbeta;
 
-					// These almost work because they shift big step from
-					// 0.75 to 0.5 (when beta=1.5) but then there's to much fiddle
-					// and for beta=0.85 it just steps wrong...
-					//if (dbeta*y < x) dacc -= bpn ;// dbeta; // almost; but that step
-					// if (y < x/dbeta) dacc -= bpn;
+						// These almost work because they shift big step from
+						// 0.75 to 0.5 (when beta=1.5) but then there's to much fiddle
+						// and for beta=0.85 it just steps wrong...
+						//if (dbeta*y < x) dacc -= bpn ;// dbeta; // almost; but that step
+						// if (y < x/dbeta) dacc -= bpn;
 
-					// This is almost perfect for beta=1.5
-					// Like above, the right place for the step, and without grunge!
-					// if (y < 0.5) dacc -= bpn /dbeta ;
+						// This is almost perfect for beta=1.5
+						// Like above, the right place for the step, and without grunge!
+						// if (y < 0.5) dacc -= bpn /dbeta ;
 
-					// if (y < xu) dacc += bpn ;//dbeta;  // sometimes OK adjust
+						// if (y < xu) dacc += bpn ;//dbeta;  // sometimes OK adjust
+
+						// strangely, this is wrong under the branch...
+						// which is weird given later ones work for beta=1.7
+						// if (y < x/dbeta) dacc -= bpn ; //*dbeta;
+						// ---------------------
 
 
-					// strangely, this is wrong under the branch...
-					// which is weird given later ones work for beta=1.7
-					// if (y < x/dbeta) dacc -= bpn ; //*dbeta;
+						// This alone gives a perfect for for beta=1.5
+						// for 0 < y < 0.75 and comes close for the rest.
+						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+
+						// This is almost identical to above, but not quite.
+						// if (y < 0.5) dacc -= dbeta*cpn;
+
+						// These two combined give a perfect fit for beta=1.7
+						// for y greater than 0.5 and come close for the rest.
+						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+						// if (y < 0.5/dbeta) dacc -= apn/dbeta ;
 					}
-// else
 
 					// this fails for beta=1.5 but needed for beta=1.7
 					// also fine details are wrong; below is better.
 					// if (y < 0.5*x) dacc -= bpn *dbeta;
 
 					// this fails for beta=1.5 but needed for beta=1.7
+					// This suggests that its actual length that matters.
 					// if (y < 0.5/dbeta) dacc -= bpn * dbeta;
 					// if (y < 0.5/dbeta) dacc -= bpn /dbeta;
+
+
+					// if (y < 0.5) dacc -=  bpn /(dbeta*dalpha) ;
+					// if (y < 0.5) dacc -=  apn/dbeta;
 				}
 
 				// Almost perfect for beta=1.5 when taken outside of the if's
-				if (y < 0.5) dacc -= bpn /dbeta/dbeta/dbeta ;
+				// The fact that three divides are required hints that
+				// its actually the length at play, cause length=3.27 at beta=1.5
+				// and since its the length, it must need the branch.
+				// if (y < 0.5) dacc -= bpn /dbeta/dbeta/dbeta ;
 
 				// This plus above is almost perfect for beta=1.7
+				// Again this hints at length, due to length change here...
 				//if (y < 0.5/dbeta) dacc -= bpn /dbeta/dbeta;
 #endif // ALMOST_WORKS_BUT_DOESNT
 
 			}
 
 			bpn /= dbeta;
+			apn /= dbeta*dalpha;
+			cpn /= 2.0*dbeta*dalpha;
 		}
 		mepa[i] = pacc;
 		meda[i] = dacc;
