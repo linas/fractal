@@ -38,7 +38,7 @@ int main (int argc, char* argv[])
 	mpf_class beta = dbeta;
 	beta_expand(one, beta, em, MAXDEPTH, orbit_set, bitset, branch_set, gamma_set, nbits);
 
-	// Orbits of the upper bound, 0.5 (1+\beta^-m)
+	// Orbits of the upper bound, alpha = 0.5 (1+\beta^-m)
 	// Do the first iteration by hand.
 	std::vector<std::vector<mpf_class>> erbit_set;
 	std::vector<std::vector<bool>> ebitset;
@@ -46,8 +46,8 @@ int main (int argc, char* argv[])
 	std::vector<std::vector<bool>> egam_set;
 
 	// XXX FIXME I'm confused why is MAXDEPTH off by one?
-	mpf_class edge = Kay * pow(dbeta, -em);
-	beta_expand(edge, beta, em, MAXDEPTH+1, erbit_set, ebitset, ebr_set, egam_set, nbits);
+	mpf_class alpha = Kay * pow(dbeta, -em);
+	beta_expand(alpha, beta, em, MAXDEPTH+1, erbit_set, ebitset, ebr_set, egam_set, nbits);
 
 	int ntracks = bitset.size();
 	int etracks = ebitset.size();
@@ -57,9 +57,9 @@ int main (int argc, char* argv[])
 	std::vector<bool> parry_bits;
 	beta_sequence(one, beta, em, parry_orbit, parry_bits, nbits);
 
-	std::vector<mpf_class> pand_orbit;
-	std::vector<bool> pand_bits;
-	beta_sequence(one, edge, em, pand_orbit, pand_bits, nbits);
+	std::vector<mpf_class> alpha_orbit;
+	std::vector<bool> alpha_bits;
+	beta_sequence(alpha, beta, em, alpha_orbit, alpha_bits, nbits);
 
 	// Integral of the Parry measure.
 	double pgral = 0.0;
@@ -94,8 +94,8 @@ int main (int argc, char* argv[])
 			double x = mpf_get_d(parry_orbit[k].get_mpf_t());
 			if (y < x) pacc += bpn;
 
-			// x = mpf_get_d(pand_orbit[k].get_mpf_t());
-			// if (y < x) dacc += bpn;
+			x = mpf_get_d(alpha_orbit[k].get_mpf_t());
+			if (y < x) dacc += bpn;
 
 			for (int j=0; j<ntracks; j++)
 			{
@@ -130,7 +130,7 @@ int main (int argc, char* argv[])
 				// if (y < x) acc += bpn;
 				// if (scale * y < scale * x) acc += bpn;
 				if (y < x) uacc += bpn;
-				if (y < x) dacc += bpn;
+				// if (y < x) dacc += bpn;
 				if (branch)
 				{
 					if (not bits[k])
@@ -142,7 +142,7 @@ int main (int argc, char* argv[])
 					// if (x < y) uacc -= bpn / dbeta;
 					// if (x < y and y < dbeta*xu) uacc += bpn;
 
-					if (dbeta*y < x) dacc -= bpn / dbeta; // almost
+					// if (dbeta*y < x) dacc -= bpn / dbeta; // almost
 					if (x < y and dbeta*y < x) uacc -= bpn / dbeta; // almost
 				}
 #endif // ALMOST_WORKS_BUT_DOESNT
