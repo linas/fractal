@@ -106,8 +106,10 @@ int main (int argc, char* argv[])
 				double x = mpf_get_d(orbit[k].get_mpf_t());
 				double xu = mpf_get_d(erbit[k].get_mpf_t());
 
-				if (bits[k] and y < x) xacc += bpn;
-				if (ebits[k] and y < xu) uacc += bpn;
+				// if (bits[k] and y < x) xacc += bpn;
+				// if (ebits[k] and y < xu) uacc += bpn;
+				if (y < x) xacc += bpn;
+				if (y < xu) uacc += bpn;
 
 #define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
