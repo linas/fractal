@@ -31,8 +31,9 @@ void prt_bits(std::vector<bool> stuff)
 double tee(double x, double beta)
 {
 	if (x<0.5) return beta*x;
-	if (x<1.0) return beta*(x-0.5);
-	return beta*(x-1.0);
+	return beta*(x-0.5);
+	// if (x<1.0) return beta*(x-0.5);
+	// return beta*(x-1.0);
 }
 
 double maybe(double x, double beta)
@@ -71,6 +72,23 @@ double tau(double x, double beta, double a, double b)
 	return beta*(x-0.5);
 }
 
+// Given branch points gamma, recreate tau.
+// This is the one-liner formula in the paper.
+// It works.
+double tau_binary(double x, double beta, double a, double b,
+                  std::vector<bool>& gammy)
+{
+	double y = tee(x, beta);
+	if (a < x and x < b)
+	{
+		bool g = gammy.front();
+		gammy.erase(gammy.begin());
+		if (not g) y += 0.5*beta;
+		// printf("bing %d %lu\n", g, gammy.size());
+	}
+	return y;
+}
+
 int main (int argc, char* argv[])
 {
 	if (argc < 2)
@@ -95,12 +113,33 @@ int main (int argc, char* argv[])
 		long int r = random();
 		double x = ((double) r) / ((double) RAND_MAX);
 
+		// Record an orbit
 		bits.clear();
+		gamm.clear();
 		double z = x;
+		std::vector<double> orbit;
 		for (int j=0; j<nbits; j++)
 		{
+			orbit.push_back(z);
 			z = tau(z, beta, a, b);
 		}
+
+		// Verify alternate orbit ... the single-line reconstructed orbit.
+		z = x;
+		std::vector<bool> gammy = gamm;
+		for (int j=0; j<nbits; j++)
+		{
+			if (EPS < fabs(z-orbit[j]))
+			{
+				// Rounding errors will accumulate ... ignore those.
+				if (10*EPS < fabs(z-orbit[j]))
+					printf("failed reconstruction at %d %g %g %g\n",
+					        j, z, orbit[j], z-orbit[j]);
+				break;
+			}
+			z = tau_binary(z, beta, a, b, gammy);
+		}
+		// printf("\n");
 
 		double y = 0.0;
 		double ob = 0.5;
