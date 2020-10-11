@@ -112,6 +112,7 @@ int main (int argc, char* argv[])
 				if (y < x) xacc += bpn;
 				if (y < xu) uacc += bpn;    // works best for beta> 1.5
 				// if (y < xu/dbeta) uacc += apn;  // works best for beta<1.5
+				// if (y < xu and not bits[k]) uacc += bpn; // works best for beta<1.5
 
 #define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
@@ -130,7 +131,8 @@ int main (int argc, char* argv[])
 				}
 
 				if (y < x) dacc += bpn;
-				if (y < xu) dacc += bpn;
+				// if (y < xu) dacc += bpn;
+				if (y < xu and not bits[k]) dacc += bpn;
 				// if (y < xu/dbeta) dacc += apn;
 				// if (y < xu) dacc += bpn * (4*(dbeta-1.0)*(2.0-dbeta));
 
@@ -181,6 +183,7 @@ int main (int argc, char* argv[])
 						// xxx if (y < 0.5) dacc -= bpn/(2*dbeta);
 
 						// This is almost identical to above, but not quite.
+						// This is better for small beta, but still overkill
 						// if (y < 0.5) dacc -= dbeta*cpn;
 
 						// These two combined give a nearly perfect fit for beta=1.7
@@ -196,10 +199,10 @@ int main (int argc, char* argv[])
 
 						// These four combined give an OK fit for beta=1.87
 						// So there is an m=4 effect at work, here.
-						if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
-						if (y < 0.5/dbeta) dacc -= apn/dbeta ;
-						if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
-						if (y < 0.5/(dbeta*dbeta*dbeta)) dacc -= apn ; // ???
+						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+						// if (y < 0.5/dbeta) dacc -= apn/dbeta ;
+						// if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
+						// if (y < 0.5/(dbeta*dbeta*dbeta)) dacc -= apn ; // ???
 
 						// Meh.
 						//if (y < 0.5) dacc -= dbeta*cpn;
