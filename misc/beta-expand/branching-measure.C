@@ -175,7 +175,7 @@ int main (int argc, char* argv[])
 						// This alone gives a nearly perfect fit for for beta=1.5
 						// for 0 < y < 0.75 and comes close for the rest.
 						// It's overkill for beta=1.3
-						if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 
 						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 						// xxx if (y < 0.5) dacc -= bpn/(2*dbeta);
@@ -193,6 +193,13 @@ int main (int argc, char* argv[])
 						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 						// if (y < 0.5/dbeta) dacc -= apn/dbeta ;
 						// if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
+
+						// These four combined give an OK fit for beta=1.87
+						// So there is an m=4 effect at work, here.
+						if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+						if (y < 0.5/dbeta) dacc -= apn/dbeta ;
+						if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
+						if (y < 0.5/(dbeta*dbeta*dbeta)) dacc -= apn ; // ???
 
 						// Meh.
 						//if (y < 0.5) dacc -= dbeta*cpn;
