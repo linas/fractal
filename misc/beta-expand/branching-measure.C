@@ -68,36 +68,13 @@ int main (int argc, char* argv[])
 	}
 	printf("# Parry measure integral=%g\n", pgral);
 
-#define NBINS 11803
+#define NBINS 1803
 	double mepa[NBINS];
 	double meda[NBINS];
 	double mext[NBINS];
 	double mexu[NBINS];
 
 #define SCALE (4.0/3.0)
-
-	for (int i=0; i< NBINS; i++)
-	{
-		double y = (((double) i) + 0.5) / ((double) NBINS);
-		y *= SCALE;
-		double pacc = 0.0;
-		double bpn = 1.0;
-
-		for (int k=0; k<20; k++)
-		{
-			double t = mpf_get_d(parry_orbit[k].get_mpf_t());
-			if (y < t) pacc += bpn;
-			bpn /= dbeta;
-		}
-		mepa[i] = pacc;
-	}
-
-	double orm = 0.0;
-	for (int i=0; i< NBINS; i++)
-		orm += mepa[i];
-
-	printf("# Parry meas short norm=%g\n", orm/NBINS);
-
 
 	for (int i=0; i< NBINS; i++)
 	{
@@ -283,17 +260,18 @@ int main (int argc, char* argv[])
 		uorm += mexu[i];
 	}
 
+	double ow = NBINS/SCALE;
 	for (int i=0; i< NBINS; i++)
 	{
-		mepa[i] *= NBINS/porm;
-		meda[i] *= NBINS/dorm;
-		mext[i] *= NBINS/xorm;
-		mexu[i] *= NBINS/uorm;
+		mepa[i] *= ow/porm;
+		meda[i] *= ow/dorm;
+		mext[i] *= ow/xorm;
+		mexu[i] *= ow/uorm;
 
 mepa[i] /= dbeta;
 	}
 
-	printf("# Parry meas norm=%g\n", porm/NBINS);
+	printf("# Parry meas norm=%g\n", porm/ow);
 
 	for (int i=0; i< NBINS; i++)
 	{
