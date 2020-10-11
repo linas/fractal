@@ -116,8 +116,20 @@ int main (int argc, char* argv[])
 				// if (y < xu/dbeta) uacc += apn;  // works best for beta<1.5
 				// if (y < xu and not bits[k]) uacc += bpn; // works best for beta<1.5
 
-#define ALMOST_WORKS_BUT_DOESNT
+				if (y < x) dacc += bpn;
+				if (y < xu) dacc += bpn;
+				// if (y < xu and not bits[k]) dacc += bpn;
+				// if (y < xu/dbeta) dacc += apn;
+				// if (y < xu) dacc += bpn * (4*(dbeta-1.0)*(2.0-dbeta));
+
+// #define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
+
+// Should be titled: "almost works but can't".  The clue is given
+// at Kay=0.94 (beta=1.88) where the first branch occurs at k=47
+// and there are no earlier branches, and so the code below is effectively
+// never entered. Yet, clearly, the density has whack steps. So the
+// fact that the below "almost" worked really is accidental.
 
 				bool branch = false;
 				int b;
@@ -131,12 +143,6 @@ int main (int argc, char* argv[])
 					printf("branch fail! \n");
 					exit(1);
 				}
-
-				if (y < x) dacc += bpn;
-				if (y < xu) dacc += bpn;
-				// if (y < xu and not bits[k]) dacc += bpn;
-				// if (y < xu/dbeta) dacc += apn;
-				// if (y < xu) dacc += bpn * (4*(dbeta-1.0)*(2.0-dbeta));
 
 				if (branch)
 				{
@@ -201,6 +207,7 @@ int main (int argc, char* argv[])
 
 						// These four combined give an OK fit for beta=1.87 to 1.93
 						// So there is an m=4 effect at work, here.
+						// XXX FAIL!
 						if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 						if (y < 0.5/dbeta) dacc -= apn/dbeta ;
 						if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
