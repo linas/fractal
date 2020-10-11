@@ -22,4 +22,14 @@ plot "sido-len-160-4096.dat" using (2*$1):4 title "Average length",\
      (3/(4*(x-1)*(2-x))) title "3/4({/Symbol b}-1)(2-{/Symbol b})", \
      (0.809017/((x-1)*(2-x))) title "φ/2({/Symbol b}-1)(2-{/Symbol b})"
 
+set out 'extlen-diff.png'
+
+unset logscale y
+set yrange [0:100]
+plot "extlen-6-16.dat" using 2:($4 - (0.809017/(($2-1)*(2-$2)))) title "Invng 6-16", \
+     0 title "foo"
+
+
+#     (0.809017/((x-1)*(2-x)) -3) title "foo"
+
 #######

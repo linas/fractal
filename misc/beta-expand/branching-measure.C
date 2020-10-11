@@ -171,7 +171,7 @@ int main (int argc, char* argv[])
 						// ---------------------
 
 
-						// This alone gives a perfect for for beta=1.5
+						// This alone gives a nearly perfect fit for for beta=1.5
 						// for 0 < y < 0.75 and comes close for the rest.
 						// It's overkill for beta=1.3
 						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
