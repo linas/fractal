@@ -81,7 +81,7 @@ void extended_measure(double dbeta,
 	for (int j=0; j<NBINS; j++)
 		nobs += histo[j];
 	for (int j=0; j<NBINS; j++)
-		histo[j] *= NBINS/nobs;
+		histo[j] *= (NBINS/SCALE)/nobs;
 }
 
 // The baseline Parry-Gelfon-Renyi measure.
