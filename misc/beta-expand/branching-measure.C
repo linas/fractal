@@ -120,7 +120,7 @@ int main (int argc, char* argv[])
 				// fails
 				// if (y < xu) dacc += 2*(bits[k]-0.5) * bpn; // fail
 
-				if (y < x) dacc += bpn;
+				// if (y < x) dacc += bpn;
 				// if (y < xu) dacc += bpn;
 				// if (y < xu) dacc += (dbeta-1.0)*bpn;
 				// if (y < xu) dacc += (1.0-dalpha)*bpn;
@@ -133,9 +133,10 @@ int main (int argc, char* argv[])
 				// Wow! This is even better! ... but still off
 				// if (y < xu - x) dacc -= bpn /  (2.0*dalpha);
 
+				// And mostly still better...
 				// if (y < xu - x) dacc -= bpn * (0.5 * dbeta) / (2.0*dalpha);
 
-				if (y < xu - x) dacc -= bpn * 0.25* (0.5 * dbeta) / (2.0*dalpha);
+				if (y < xu - x) dacc -= bpn;
 
 #ifdef CLOSE_AT_BETA_12
 				// The pure if (y < x) dacc += bpn; fits great at x<0.25
@@ -143,7 +144,7 @@ int main (int argc, char* argv[])
 				// The if (y < xu - x) is needed for the bump.
 				// the assembly of them all .. meh.
 				if (y < x) dacc += bpn;
-				if (y < xu - x) dacc -= bpn * 0.25* (0.5 * dbeta) / (2.0*dalpha);
+				if (y < xu - x) dacc -= bpn * 0.25 * (0.5 * dbeta) / (2.0*dalpha);
 #endif // CLOSE_AT_BETA_12
 
 #ifdef MORE_OR_LESS_PERFECT_AT_BETA_188
@@ -290,6 +291,9 @@ int main (int argc, char* argv[])
 		meda[i] = dacc;
 		mext[i] = xacc;
 		mexu[i] = uacc;
+
+// meda[i] = sqrt(xacc*uacc);
+meda[i] = xacc + (dbeta-1.0)*(1.0-dalpha)*uacc;
 	}
 
 	double porm = 0.0;
