@@ -110,7 +110,8 @@ int main (int argc, char* argv[])
 				double xu = mpf_get_d(erbit[k].get_mpf_t());
 
 				if (y < x) xacc += bpn;
-				if (y < xu) uacc += bpn;
+				if (y < xu) uacc += bpn;    // works best for beta> 1.5
+				// if (y < xu/dbeta) uacc += apn;  // works best for beta<1.5
 
 #define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
@@ -130,8 +131,8 @@ int main (int argc, char* argv[])
 
 				if (y < x) dacc += bpn;
 				if (y < xu) dacc += bpn;
+				// if (y < xu/dbeta) dacc += apn;
 				// if (y < xu) dacc += bpn * (4*(dbeta-1.0)*(2.0-dbeta));
-				// if (y < xu) dacc += cpn;
 
 				if (branch)
 				{
@@ -174,7 +175,7 @@ int main (int argc, char* argv[])
 						// This alone gives a nearly perfect fit for for beta=1.5
 						// for 0 < y < 0.75 and comes close for the rest.
 						// It's overkill for beta=1.3
-						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+						if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 
 						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 						// xxx if (y < 0.5) dacc -= bpn/(2*dbeta);
