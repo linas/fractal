@@ -58,22 +58,47 @@ int main (int argc, char* argv[])
 
 	// Integral of the Parry measure.
 	double pgral = 0.0;
-	double bpn = 0.5 * dbeta;
+	double bpn = 1.0;
 	for (int k=0; k< (int) parry_orbit.size(); k++)
 	{
 		double x = mpf_get_d(parry_orbit[k].get_mpf_t());
 		pgral += x*bpn;
+// printf("# %d %g %g %g\n", k, x, bpn, pgral);
 		bpn /= dbeta;
 	}
 	printf("# Parry measure integral=%g\n", pgral);
 
-#define NBINS 1803
+#define NBINS 11803
 	double mepa[NBINS];
 	double meda[NBINS];
 	double mext[NBINS];
 	double mexu[NBINS];
 
 #define SCALE (4.0/3.0)
+
+	for (int i=0; i< NBINS; i++)
+	{
+		double y = (((double) i) + 0.5) / ((double) NBINS);
+		y *= SCALE;
+		double pacc = 0.0;
+		double bpn = 1.0;
+
+		for (int k=0; k<20; k++)
+		{
+			double t = mpf_get_d(parry_orbit[k].get_mpf_t());
+			if (y < t) pacc += bpn;
+			bpn /= dbeta;
+		}
+		mepa[i] = pacc;
+	}
+
+	double orm = 0.0;
+	for (int i=0; i< NBINS; i++)
+		orm += mepa[i];
+
+	printf("# Parry meas short norm=%g\n", orm/NBINS);
+
+
 	for (int i=0; i< NBINS; i++)
 	{
 		double y = (((double) i) + 0.5) / ((double) NBINS);
@@ -131,8 +156,8 @@ int main (int argc, char* argv[])
 				}
 
 				if (y < x) dacc += bpn;
-				// if (y < xu) dacc += bpn;
-				if (y < xu and not bits[k]) dacc += bpn;
+				if (y < xu) dacc += bpn;
+				// if (y < xu and not bits[k]) dacc += bpn;
 				// if (y < xu/dbeta) dacc += apn;
 				// if (y < xu) dacc += bpn * (4*(dbeta-1.0)*(2.0-dbeta));
 
@@ -191,18 +216,18 @@ int main (int argc, char* argv[])
 						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 						// if (y < 0.5/dbeta) dacc -= apn/dbeta ;
 
-						// These three combined give an OK fit for beta=1.76
+						// These three combined give an OK fit for beta=1.76 to 1.86
 						// So there is an m=3 effect at work, here.
 						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
 						// if (y < 0.5/dbeta) dacc -= apn/dbeta ;
 						// if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
 
-						// These four combined give an OK fit for beta=1.87
+						// These four combined give an OK fit for beta=1.87 to 1.93
 						// So there is an m=4 effect at work, here.
-						// if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
-						// if (y < 0.5/dbeta) dacc -= apn/dbeta ;
-						// if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
-						// if (y < 0.5/(dbeta*dbeta*dbeta)) dacc -= apn ; // ???
+						if (y < 0.5) dacc -=  apn/(dbeta*dalpha);
+						if (y < 0.5/dbeta) dacc -= apn/dbeta ;
+						if (y < 0.5/(dbeta*dbeta)) dacc -= apn ;
+						if (y < 0.5/(dbeta*dbeta*dbeta)) dacc -= apn ; // ???
 
 						// Meh.
 						//if (y < 0.5) dacc -= dbeta*cpn;
