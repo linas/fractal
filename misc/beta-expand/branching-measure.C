@@ -21,13 +21,15 @@ int main (int argc, char* argv[])
 
 	do_init(nbits);
 
-	double dbeta = 2.0*Kay;
-	mpf_class beta = dbeta;
-
 	int em = emrun(Kay);
-	printf("#\n# K=%g m=%d nbits=%d\n#\n", Kay, em, nbits);
+	double dbeta = 2.0*Kay;
+	double dalpha = 0.5 * (1.0 + pow(dbeta, -em));
+
+	printf("#\n# K=%g beta=%g alpha=%g m=%d nbits=%d\n#\n", Kay, dbeta, dalpha, em, nbits);
 
 #define MAXDEPTH maxdepth
+
+	mpf_class beta = dbeta;
 
 	// Orbits of 1.0 aka orbits of "lower bound" beta/2
 	// That is, we do the first iteration by hand.
@@ -44,7 +46,6 @@ int main (int argc, char* argv[])
 	std::vector<std::vector<int>> ebr_set;
 	std::vector<std::vector<bool>> egam_set;
 
-	double dalpha = 0.5 * (1.0 + pow(dbeta, -em));
 	mpf_class alpha = dbeta * dalpha;
 	beta_expand(alpha, beta, em, MAXDEPTH, erbit_set, ebitset, ebr_set, egam_set, nbits);
 
@@ -95,7 +96,7 @@ int main (int argc, char* argv[])
 
 			for (int j=0; j<ntracks; j++)
 			{
-				std::vector<bool>& bits = bitset[j];
+				// std::vector<bool>& bits = bitset[j];
 				std::vector<mpf_class>& orbit = orbit_set[j];
 				std::vector<int>& branch_points = branch_set[j];
 
@@ -106,7 +107,7 @@ int main (int argc, char* argv[])
 
 				// std::vector<bool>& ebits = ebitset[j];
 				std::vector<mpf_class>& erbit = erbit_set[j];
-				std::vector<int>& ebranches = branch_set[j];
+				// std::vector<int>& ebranches = branch_set[j];
 
 				double x = mpf_get_d(orbit[k].get_mpf_t());
 				double xu = mpf_get_d(erbit[k].get_mpf_t());
@@ -116,11 +117,20 @@ int main (int argc, char* argv[])
 				// if (y < xu/dbeta) uacc += apn;  // works best for beta<1.5
 				// if (y < xu and not bits[k]) uacc += bpn; // works best for beta<1.5
 
+				// fails
+				// if (y < xu) dacc += 2*(bits[k]-0.5) * bpn; // fail
+
 				if (y < x) dacc += bpn;
 				if (y < xu) dacc += bpn;
-				// if (y < xu and not bits[k]) dacc += bpn;
-				// if (y < xu/dbeta) dacc += apn;
-				// if (y < xu) dacc += bpn * (4*(dbeta-1.0)*(2.0-dbeta));
+
+				// if (y < xu - 0.5*dbeta) dacc -= bpn;
+
+				// Wow, this one is almost perfect!
+				// if (y < xu - x) dacc -= bpn;
+
+				// Wow! This is even better! ... but still off
+				if (y < xu - x) dacc -= bpn /  (2.0*dalpha);
+
 
 // #define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
@@ -131,6 +141,8 @@ int main (int argc, char* argv[])
 // never entered. Yet, clearly, the density has whack steps. So the
 // fact that the below "almost" worked really is accidental.
 
+// Note that x < xu until after the first branch point
+// so that is kind-of another way of detecting branch points.
 				bool branch = false;
 				int b;
 				for (b = 0; b<(int)nb; b++)
