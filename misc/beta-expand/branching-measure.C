@@ -121,7 +121,8 @@ int main (int argc, char* argv[])
 				// if (y < xu) dacc += 2*(bits[k]-0.5) * bpn; // fail
 
 				if (y < x) dacc += bpn;
-				if (y < xu) dacc += bpn;
+				// if (y < xu) dacc += bpn;
+				if (y < xu) dacc += (dbeta-1.0)*bpn;
 
 				// if (y < xu - 0.5*dbeta) dacc -= bpn;
 
@@ -129,7 +130,18 @@ int main (int argc, char* argv[])
 				// if (y < xu - x) dacc -= bpn;
 
 				// Wow! This is even better! ... but still off
-				if (y < xu - x) dacc -= bpn /  (2.0*dalpha);
+				// if (y < xu - x) dacc -= bpn /  (2.0*dalpha);
+
+				if (y < xu - x) dacc -= bpn * dbeta / (4.0*dalpha);
+
+#ifdef MORE_OR_LESS_PERFECT_AT_BETA_188
+				// This seems to give a more-or-less perfect fit
+				// at beta=1.88 with maybe imperfection above x>0.94 ??
+				if (y < x) dacc += bpn;
+				if (y < xu) dacc += (dbeta-1.0)*bpn;
+				if (y < xu - x) dacc -= bpn * (0.5 * dbeta ) / (2.0*dalpha);
+#endif // MORE_OR_LESS_PERFECT_AT_BETA_1.88
+
 
 
 // #define ALMOST_WORKS_BUT_DOESNT
