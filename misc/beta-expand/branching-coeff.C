@@ -15,7 +15,7 @@ int main (int argc, char* argv[])
 		fprintf(stderr, "Usage: %s y nbits depth\n", argv[0]);
 		exit (1);
 	}
-	double why = atoi(argv[1]);
+	double why = atof(argv[1]);
 	int base_nbits = atoi(argv[2]);
 	int maxdepth = atoi(argv[3]);
 #define MAXDEPTH maxdepth
