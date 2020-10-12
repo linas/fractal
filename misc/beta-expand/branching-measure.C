@@ -157,6 +157,8 @@ int main (int argc, char* argv[])
 #endif // MORE_OR_LESS_PERFECT_AT_BETA_1.88
 
 
+				// if (0 < xu-x-0.5) printf("heyyyy k=%d xu=%g x=%g xu-x-0.5=%g\n", k, xu, x, xu-x-0.5);
+
 
 // #define ALMOST_WORKS_BUT_DOESNT
 #ifdef ALMOST_WORKS_BUT_DOESNT
@@ -292,10 +294,21 @@ int main (int argc, char* argv[])
 		mext[i] = xacc;
 		mexu[i] = uacc;
 
-meda[i] = xacc + 2*(dbeta-1.0)*(1.0-dalpha)*uacc;
-meda[i] /= (1+2*(dbeta-1.0)*(1.0-dalpha));
+#if GREAT_AT_094
+meda[i] = 0.5*dbeta*xacc + 2*(dbeta-1.0)*(1.0-dalpha)*uacc;
+meda[i] += 0.84*dacc;
+#endif
+
+#if GOOD_AT_065
+meda[i] = 0.5*dbeta*xacc + 2*(dbeta-1.0)*(1.0-dalpha)*uacc;
+meda[i] += 0.1*dacc;
+#endif
+
+meda[i] = 0.5*dbeta*xacc + 2*(dbeta-1.0)*(1.0-dalpha)*uacc;
+// meda[i] /= (1+2*(dbeta-1.0)*(1.0-dalpha));
 // meda[i] += 0.83*dacc; // works for k=0.94 without normalization
-meda[i] += 0.48*dacc; // works for k=0.94 with normalization
+// meda[i] += 0.48*dacc; // works for k=0.94 with normalization
+meda[i] += 0.115*dacc;
 // meda[i] += 0.15*dacc;
 	}
 	printf("# (beta-1)(1-alpha) = %g\n", (dbeta-1.0)*(1.0-dalpha));
