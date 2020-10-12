@@ -28,6 +28,7 @@ int main (int argc, char* argv[])
 	printf("# column labels\n"
 	       "# beta, em, theta(beta/2-y), theta(alpha-y), theta(alpha-beta/2-y),\n"
 	       "# integrals for each of the three above.\n#\n");
+	fflush(stdout);
 
 	for (int i=0; i< NBINS; i++)
 	{
@@ -125,6 +126,7 @@ int main (int argc, char* argv[])
 		Smacc /= ntracks;
 		printf("%g	%d	%g	%g	%g	%g	%g	%g\n",
 		       dbeta, em, xacc, uacc, macc, Sxacc, Suacc, Smacc);
+		fflush(stdout);
 	}
 }
 
