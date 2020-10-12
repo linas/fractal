@@ -306,9 +306,9 @@ meda[i] += 0.1*dacc;
 
 meda[i] = 0.5*dbeta*xacc + 2*(dbeta-1.0)*(1.0-dalpha)*uacc;
 // meda[i] /= (1+2*(dbeta-1.0)*(1.0-dalpha));
-// meda[i] += 0.83*dacc; // works for k=0.94 without normalization
-// meda[i] += 0.48*dacc; // works for k=0.94 with normalization
-meda[i] += 0.115*dacc;
+// meda[i] += 0.83*dacc; // works for k=0.94 
+meda[i] += 0.46*dacc;
+// meda[i] += (1-dalpha)*dacc;
 // meda[i] += 0.15*dacc;
 	}
 	printf("# (beta-1)(1-alpha) = %g\n", (dbeta-1.0)*(1.0-dalpha));
