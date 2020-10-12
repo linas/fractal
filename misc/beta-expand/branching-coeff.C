@@ -19,7 +19,7 @@ int main (int argc, char* argv[])
 	int maxdepth = atoi(argv[2]);
 #define MAXDEPTH maxdepth
 
-#define NBINS 53
+#define NBINS 503
 
 	for (int i=0; i< NBINS; i++)
 	{
@@ -63,14 +63,16 @@ int main (int argc, char* argv[])
 
 		for (int is=0; is<4; is++)
 		{
-			double y = 0.4*is + 1e-2;
+			double y = 0.4*is + 1e-3;
 
 			double xacc = 0.0;
 			double uacc = 0.0;
 			double macc = 0.0;
 			double bpn = 1.0;
 
-			for (int k=0; k<30; k++)
+int kmax=-log(1e-6)/log(dbeta);
+if (bitset[0].size() < kmax) kmax=bitset[0].size() -1;
+			for (int k=0; k<kmax; k++)
 			{
 				for (int j=0; j<ntracks; j++)
 				{
