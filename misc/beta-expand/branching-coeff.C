@@ -20,16 +20,12 @@ int main (int argc, char* argv[])
 #define MAXDEPTH maxdepth
 
 
-
-	int ntracks = bitset.size();
-	int etracks = ebitset.size();
-	printf("# ntracks=%d etrack=%d\n", ntracks, etracks);
-
-#define NBINS 53
+#define NBINS 13
 
 	for (int i=0; i< NBINS; i++)
 	{
 		double Kay = (((double) i) + 0.5) / ((double) NBINS);
+		Kay = 0.5* (Kay+1.0);
 		int em = emrun(Kay);
 		double dbeta = 2.0*Kay;
 		double dalpha = 0.5 * (1.0 + pow(dbeta, -em));
@@ -38,6 +34,8 @@ int main (int argc, char* argv[])
 		do_init(nbits);
 
 		printf("# K=%g beta=%g alpha=%g m=%d nbits=%d\n", Kay, dbeta, dalpha, em, nbits);
+		printf("# (beta-1)(1-alpha) = %g\n", (dbeta-1.0)*(1.0-dalpha));
+		printf("# 2(beta-1)(1-alpha) = %g\n", 2*(dbeta-1.0)*(1.0-dalpha));
 
 		mpf_class beta = dbeta;
 
@@ -58,16 +56,20 @@ int main (int argc, char* argv[])
 
 		mpf_class alpha = dbeta * dalpha;
 		beta_expand(alpha, beta, em, MAXDEPTH, erbit_set, ebitset, ebr_set, egam_set, nbits);
-		for (int is=0; is<6; is++)
+		int ntracks = bitset.size();
+		int etracks = ebitset.size();
+		printf("# ntracks=%d etrack=%d\n", ntracks, etracks);
+
+		for (int is=0; is<3; is++)
 		{
-			double y = 0.2*is + 1e-2;
+			double y = 0.4*is + 1e-2;
 
 			double xacc = 0.0;
 			double uacc = 0.0;
 			double macc = 0.0;
 			double bpn = 1.0;
 
-			for (int k=0; k<20; k++)
+			for (int k=0; k<30; k++)
 			{
 				for (int j=0; j<ntracks; j++)
 				{
@@ -93,12 +95,13 @@ int main (int argc, char* argv[])
 				}
 				bpn /= dbeta;
 			}
+			xacc /= ntracks;
+			uacc /= ntracks;
+			macc /= ntracks;
+			printf("%g	%g	%g	%g", y, xacc, uacc, macc);
 		}
+		printf("\n");
 	}
-	printf("# (beta-1)(1-alpha) = %g\n", (dbeta-1.0)*(1.0-dalpha));
-	printf("# 2(beta-1)(1-alpha) = %g\n", 2*(dbeta-1.0)*(1.0-dalpha));
-	printf("# 1+2(beta-1)(1-alpha) = %g\n", 1+2*(dbeta-1.0)*(1.0-dalpha));
-	printf("# 1/ (1+2(beta-1)(1-alpha)) = %g\n", 1.0/(1+2*(dbeta-1.0)*(1.0-dalpha)));
 
 }
 
