@@ -19,8 +19,7 @@ int main (int argc, char* argv[])
 	int maxdepth = atoi(argv[2]);
 #define MAXDEPTH maxdepth
 
-
-#define NBINS 13
+#define NBINS 53
 
 	for (int i=0; i< NBINS; i++)
 	{
@@ -32,10 +31,6 @@ int main (int argc, char* argv[])
 
 		int nbits = base_nbits / (4*(2-dbeta)*(dbeta-1));
 		do_init(nbits);
-
-		printf("# K=%g beta=%g alpha=%g m=%d nbits=%d\n", Kay, dbeta, dalpha, em, nbits);
-		printf("# (beta-1)(1-alpha) = %g\n", (dbeta-1.0)*(1.0-dalpha));
-		printf("# 2(beta-1)(1-alpha) = %g\n", 2*(dbeta-1.0)*(1.0-dalpha));
 
 		mpf_class beta = dbeta;
 
@@ -58,9 +53,15 @@ int main (int argc, char* argv[])
 		beta_expand(alpha, beta, em, MAXDEPTH, erbit_set, ebitset, ebr_set, egam_set, nbits);
 		int ntracks = bitset.size();
 		int etracks = ebitset.size();
-		printf("# ntracks=%d etrack=%d\n", ntracks, etracks);
+		// printf("# ntracks=%d etrack=%d\n", ntracks, etracks);
+		if (ntracks < (1<<MAXDEPTH) or etracks < (1<<MAXDEPTH)) continue;
 
-		for (int is=0; is<3; is++)
+		// printf("# K=%g beta=%g alpha=%g m=%d nbits=%d\n", Kay, dbeta, dalpha, em, nbits);
+		// printf("# (beta-1)(1-alpha) = %g\n", (dbeta-1.0)*(1.0-dalpha));
+		// printf("# 2(beta-1)(1-alpha) = %g\n", 2*(dbeta-1.0)*(1.0-dalpha));
+		printf("%g	%d", dbeta, em);
+
+		for (int is=0; is<4; is++)
 		{
 			double y = 0.4*is + 1e-2;
 
@@ -98,7 +99,7 @@ int main (int argc, char* argv[])
 			xacc /= ntracks;
 			uacc /= ntracks;
 			macc /= ntracks;
-			printf("%g	%g	%g	%g", y, xacc, uacc, macc);
+			printf("	%g	%g	%g	%g", y, xacc, uacc, macc);
 		}
 		printf("\n");
 	}
