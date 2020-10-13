@@ -4,13 +4,14 @@
  * Find integer sequence for the golden polynomials.
  * ... and then 2D plot
  *
- * February 2018
+ * February 2018, October 2020
  */
 
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 
 /* Return the n'th golden polynomial. It can be constructed from
  * the bit string of (2n+1).
@@ -112,16 +113,17 @@ double find_gold(int n)
 
 int main(int argc, char* argv[])
 {
-	// int nmax = (1<<28) + 3;
-	// int nmax = (1<<18) + 3;
-	// int nmax = (1<<20) + 3;
-	// int nmax = (1<<8) + 3;
 	int nmax = (1<<12) + 1;
 
 	setup_gold(nmax);
 
 	int cnt = 0;
+	int allcnt = 0;
+	int nsum = 0;
 	int plen = 0;
+
+	int tord = 1<<plen;
+
 	for (int n=0; n<nmax; n ++)
 	{
 		double gold = find_gold(n);
@@ -131,18 +133,21 @@ int main(int argc, char* argv[])
 		{
 			printf("# total for len=%d is %d\n", plen, cnt);
 			plen = len(n);
+			tord = 1<<plen;
+			tord /= 2;
 			cnt = 0;
 		}
-		if (0.5 < gold) { cnt++; }
-
-		// if (n < 128)
-		if (n < 540)
+		if (0.5 < gold)
 		{
-			if (0.5 < gold)
-			{
-				printf("%d	%d	%20.18g\n", n, len(n), gold);
-			}
+			cnt ++;
+			allcnt ++;
+			nsum += n;
+
+			// always the case that tord/2 <= n < tord
+			double frac = ((double) n) / ((double) tord);
+			frac = 2.0*(frac - 0.5); // rescale to run 0 to 1.
+
+			printf("%d	%d %d %d %g %d	%20.18g\n", allcnt, cnt, n, tord, frac, nsum, gold);
 		}
 	}
-
 }
