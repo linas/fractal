@@ -4175,9 +4175,9 @@ coherent
 
  function
 \begin_inset Formula 
-\[
-\nu_{\beta;z}\left(y\right)=\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
-\]
+\begin{equation}
+\nu_{\beta;z}\left(y\right)=\sum_{n=0}^{\infty}z^{n}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}\label{eq:generalized-eigenfunction}
+\end{equation}
 
 \end_inset
 
@@ -7734,6 +7734,7 @@ The next table lists the acceptable polynomials for order 5, 6 and 7.
 \end_inset
 
  in the sequence.
+ This sequence is not currently known to OEIS.
 \end_layout
 
 \begin_layout Standard
@@ -7881,6 +7882,160 @@ Distribution of
 \end_inset
 
 -Golden Roots
+\end_layout
+
+\begin_layout Standard
+The location and distribution of the roots can be visualized in several
+ ways.
+ One direct technique is via the normalization of the Parry-Gelfond measure.
+ The function in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ or more generally 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:generalized-eigenfunction"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be integrated in a straight-forward manner.
+ One has
+\begin_inset Formula 
+\[
+I\left(\beta;z\right)=\int_{0}^{1}\nu_{\beta;z}\left(x\right)dx=\sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}\int_{0}^{1}d_{n}\left(x\right)dx=\sum_{n=0}^{\infty}\frac{z^{n}}{\beta^{n}}T^{n}\left(\frac{\beta}{2}\right)
+\]
+
+\end_inset
+
+The result is a sawtooh, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalization-Integral"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Each disonctinuity corresponds to the real root of one of the polynomials.
+ The first few are labelled by the integer labels from the previous table.
+ The labels follow an obvious doubling sequence.
+ Each doubling sequence has a leader.
+ The leaders appear to form a sequence 1,3,7,10,13,15,25,29,31,...
+ The leaders are easily obtained: they are what's left of the earlier polynomial
+-labelling sequence, after knocking out power-of-two sequences.
+ This sequence is not currently known to OEIS.
+ The leaders above 1 follow a simple pattern: they are awalys at 
+\begin_inset Formula $2n+1$
+\end_inset
+
+ of the previous dominant spike.
+ So, for example, the first leader above 6 is 13.
+ The leaders below 1 are given by 
+\begin_inset Formula $n\left(2n+1\right)$
+\end_inset
+
+, so for example, the leader above 16 is 
+\begin_inset Formula $16\times33=528$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Normalization Integral
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Normalization-Integral"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename normie-labelled.eps
+	lyxscale 50
+	width 90cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the integral 
+\begin_inset Formula $I\left(\beta\right)=\sum_{n=0}^{\infty}\beta^{-n}T^{n}\left(\frac{\beta}{2}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ running along the horizontal axis.
+ Each discontinuity corresponds to the location of a real root of one of
+ the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Golden polynomials.
+ Some of these are manually labelled by integers, corresponding to the polynomia
+l labels from the previous polynomial table.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with normie.C and normie.gplot and then manually annotated.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

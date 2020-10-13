@@ -24,7 +24,7 @@ double beta(unsigned long n, double x)
 		xn *= x;
 		bitstr >>= 1;
 	}
-printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
+// printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
 	return xn - acc;
 }
 
@@ -201,10 +201,11 @@ int main(int argc, char* argv[])
 
 	setup_gold(nmax);
 
-find_gold(16);
-printf("---------\ngold=%g\n", zero[16]);
-exit(0);
+// find_gold(16);
+// printf("---------\ngold=%20.16g\n", zero[16]);
+// exit(0);
 
+#define PRINT_STUFF
 #ifdef PRINT_STUFF
 	int cnt = 0;
 	int plen = 0;
@@ -221,11 +222,12 @@ exit(0);
 		}
 		if (0.5 < gold) { cnt++; }
 
-		if (n < 128)
+		// if (n < 128)
+		if (n < 540)
 		{
-#if 0
-			printf("%d ok=%d l=%d %d %20.18g\n",
-				n, ork, len(n), cnt, gold);
+#if 1
+			printf("%d l=%d %d %20.18g\n",
+				n, len(n), cnt, gold);
 #endif
 			if (0.5 < gold)
 			{
@@ -236,6 +238,9 @@ exit(0);
 	}
 #endif
 
+
+#ifdef SORTED
+	printf("#\n# Columns: idx, gold, ratio, ratio-bump\n#\n");
 	int cnt = bubble_sort(nmax);
 	for (int n=0; n<cnt-1; n ++)
 	{
@@ -244,4 +249,5 @@ exit(0);
 		double bump = 1.0 / (ratio - 1.0);
 		printf("%d	%g %g	%g\n", n, gold, ratio, bump);
 	}
+#endif
 }
