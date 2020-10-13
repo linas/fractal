@@ -51,7 +51,7 @@ lodouble_t T_n(int n, lodouble_t beta)
 //  sum_n=0 zeta^n T^n(beta/2)
 COMPLEX normie(lodouble_t beta, COMPLEX zeta)
 {
-	#define SEQLEN 40
+	int nterms = -log(1.0e-7) / log(beta);
 
 	// This computes the sum T^n(beta/2)
 	COMPLEX sum = 0;
@@ -59,7 +59,7 @@ COMPLEX normie(lodouble_t beta, COMPLEX zeta)
 
 	lodouble_t K = 0.5*beta;
 	lodouble_t mid = K;
-	for (int i=0; i<SEQLEN; i++)
+	for (int i=0; i<nterms; i++)
 	{
 		sum += mid * zetan;
 		mid = downshift(mid, K);
