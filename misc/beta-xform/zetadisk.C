@@ -6,7 +6,7 @@
  * The code works, but the meaning of the code is valueless.
  *
  * Radial slice through the (holomorphic) q-polynomial
- * This is a copy of betadisk.C but one-diemnsional.
+ * This is a copy of betadisk.C but one-dimensional.
  *
  * October 2020
  */
