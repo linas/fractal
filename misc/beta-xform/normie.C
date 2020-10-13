@@ -55,7 +55,7 @@ COMPLEX normie(lodouble_t beta, COMPLEX zeta)
 
 	// This computes the sum T^n(beta/2)
 	COMPLEX sum = 0;
-	COMPEX zetan = 1;
+	COMPLEX zetan = 1;
 
 	lodouble_t K = 0.5*beta;
 	lodouble_t mid = K;
@@ -92,13 +92,16 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NPTS; j++)
 	{
 		double x = ((double) j + 0.5) / ((double) NPTS);
+		double beta = x + 1.0;
 
-		COMPLEX sum = qfunc(beta, zeta, label);
+		COMPLEX zeta = zee / beta;
+
+		COMPLEX sum = normie(beta, zeta);
 		double mag = abs(sum);
 		// double mag = sqrt(re*re + im*im);
+		double arg = atan2(imag(sum), real(sum));
 
-		printf("%d	%g	%g\n", j, r, mag);
+		printf("%d	%g	%g	%g\n", j, beta, mag, arg);
 
-		}
 	}
 }

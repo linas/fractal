@@ -18,7 +18,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
-	alldisk betadisk momenta zetadisk
+	alldisk betadisk momenta zetadisk normie
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -78,6 +78,7 @@ beta.o: beta.c
 witt.o: witt.c
 betadisk.o: betadisk.C psibig.c
 zetadisk.o: zetadisk.C psibig.c
+normie.o: normie.C psibig.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
