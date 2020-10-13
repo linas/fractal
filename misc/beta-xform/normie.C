@@ -71,6 +71,32 @@ COMPLEX normie(lodouble_t beta, COMPLEX zeta)
 	return sum;
 }
 
+// Build the normalization integral function.
+//  sum_n=0 zeta^n T^n(beta/2)
+// same as above, high-precision
+COMPLEX big_normie(lodouble_t beta, COMPLEX zeta)
+{
+	int nterms = -log(1.0e-7) / log(beta);
+
+	double midpoints[nterms];
+
+	big_midpoints(0.5*beta, nterms+20, midpoints, nterms);
+
+	// This computes the sum T^n(beta/2)
+	COMPLEX sum = 0;
+	COMPLEX zetan = 1;
+
+	for (int i=0; i<nterms; i++)
+	{
+		sum += zetan * midpoints[i+1];
+
+		// compute z^n;
+		zetan *= zeta;
+	}
+
+	return sum;
+}
+
 // ================================================================
 
 int main(int argc, char* argv[])
@@ -88,7 +114,7 @@ int main(int argc, char* argv[])
 
 	printf("#\n# mod(z)=%g arg(z)=%g\n#\n", absz, theta);
 
-#define NPTS 503
+#define NPTS 2503
 	for (int j=0; j<NPTS; j++)
 	{
 		double x = ((double) j + 0.5) / ((double) NPTS);
@@ -96,12 +122,13 @@ int main(int argc, char* argv[])
 
 		COMPLEX zeta = zee / beta;
 
-		COMPLEX sum = normie(beta, zeta);
+		// COMPLEX sum = normie(beta, zeta);
+		COMPLEX sum = big_normie(beta, zeta);
 		double mag = abs(sum);
 		// double mag = sqrt(re*re + im*im);
 		double arg = atan2(imag(sum), real(sum));
 
 		printf("%d	%g	%g	%g\n", j, beta, mag, arg);
-
+		fflush(stdout);
 	}
 }
