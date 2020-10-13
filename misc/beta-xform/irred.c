@@ -69,6 +69,7 @@ double* zero = NULL;
 void setup_gold(int nmax)
 {
 	zero = (double*) malloc(nmax*sizeof(double));
+	for (int k=0; k< nmax; k++) zero[k] = -1.0;
 }
 
 /**
@@ -197,7 +198,8 @@ int main(int argc, char* argv[])
 	// int nmax = (1<<18) + 3;
 	// int nmax = (1<<20) + 3;
 	// int nmax = (1<<8) + 3;
-	int nmax = (1<<12) + 1;
+	// int nmax = (1<<12) + 1;
+	int nmax = (1<<20) + 1;
 
 	setup_gold(nmax);
 
@@ -208,6 +210,7 @@ int main(int argc, char* argv[])
 #define PRINT_STUFF
 #ifdef PRINT_STUFF
 	int cnt = 0;
+	int lyn = 1;
 	int plen = 0;
 	for (int n=0; n<nmax; n ++)
 	{
@@ -216,16 +219,19 @@ int main(int argc, char* argv[])
 		// printf("---------\ngold=%g\n", gold);
 		if (plen != len(n))
 		{
-			printf("# total for len=%d is %d\n", plen, cnt);
+			double rat = ((double) cnt) / ((double) lyn);
+			printf("# total for len=%d is %d	ratio=%g\n", plen, cnt, rat);
 			plen = len(n);
+			lyn = cnt;
 			cnt = 0;
 		}
 		if (0.5 < gold) { cnt++; }
 
-		// if (n < 128)
-		if (n < 540)
+		if (n < 128)
+		// if (n < 540)
+		// if (0)
 		{
-#if 1
+#if 0
 			printf("%d l=%d %d %20.18g\n",
 				n, len(n), cnt, gold);
 #endif

@@ -2,7 +2,7 @@
  * irred-viz.c
  *
  * Find integer sequence for the golden polynomials.
- * ... and then 2D plot
+ * See irred.c for additional utilities.
  *
  * February 2018, October 2020
  */
@@ -52,47 +52,18 @@ int len(unsigned long n)
 	return len;
 }
 
-void print_bitstr(int len, double gold)
-{
-	double mid = 0.5*gold;
-	while (1 < len)
-	{
-		if (mid < 0.5) printf(" 0");
-		else printf (" 1");
-
-		if (0.5 <= mid) mid -= 0.5;
-		mid *= gold;
-		len --;
-	}
-	printf("\n");
-}
-
 /** Helper array, needed for finding gold midpoints */
 double* zero = NULL;
 void setup_gold(int nmax)
 {
 	zero = (double*) malloc(nmax*sizeof(double));
+	for (int i=0; i< nmax; i++) zero[i] = -1.0;
 }
 
-/**
- * Find the single, unique real zero of the n'th golden polynomial.
- * If the value of `n` does not really correspond to a golden
- * polynomial, return zero.
- */
-double find_gold(int n)
+// Return true if this is a valid polynomial
+bool zero_is_bracketed(int n, double gold)
 {
-	double gold = find_zero(n, 1.0, 2.0);
-	zero[n] = gold;
-
-#if 0
-	bool aok = true;
-	for (int j=0; j< n; j++)
-	{
-		double z = beta(n, zero[j]);
-		if (fabs(z) < 4.0e-14) { aok = false; break; }
-	}
-#endif
-
+	// Its valid only if it is in the middle.
 #define EPS 2.0e-15
 	// printf("---------\ngold=%g\n", gold);
 	bool ork = true;
@@ -107,13 +78,29 @@ double find_gold(int n)
 		nh >>= 1;
 	}
 
-	if (ork) return gold;
+	return ork;
+}
+/**
+ * Find the single, unique real zero of the n'th golden polynomial.
+ * If the value of `n` does not really correspond to a golden
+ * polynomial, return zero.
+ */
+double find_gold(int n)
+{
+	double gold = zero[n];
+	if (gold < -0.5)
+	{
+		gold = find_zero(n, 1.0, 2.0);
+		zero[n] = gold;
+	}
+
+	if (zero_is_bracketed(n, gold)) return gold;
 	return 0.0;
 }
 
 int main(int argc, char* argv[])
 {
-	int nmax = (1<<12) + 1;
+	int nmax = (1<<21) + 1;
 
 	setup_gold(nmax);
 
@@ -121,6 +108,7 @@ int main(int argc, char* argv[])
 	int allcnt = 0;
 	int nsum = 0;
 	int plen = 0;
+	int lyn = 1;
 
 	int tord = 1<<plen;
 
@@ -135,7 +123,18 @@ int main(int argc, char* argv[])
 			plen = len(n);
 			tord = 1<<plen;
 			tord /= 2;
+			lyn = cnt;
 			cnt = 0;
+
+			// advance and count lyndon number
+			lyn = 0;
+			for (int k=n+1; k<nmax; k++)
+			{
+				double g = find_gold(k);
+				if (0.5 < g) lyn++;
+				if (len(k) != plen) break;
+			}
+			printf("# next lyndon is %d\n", lyn);
 		}
 		if (0.5 < gold)
 		{
@@ -147,7 +146,11 @@ int main(int argc, char* argv[])
 			double frac = ((double) n) / ((double) tord);
 			frac = 2.0*(frac - 0.5); // rescale to run 0 to 1.
 
-			printf("%d	%d %d %d %g %d	%20.18g\n", allcnt, cnt, n, tord, frac, nsum, gold);
+			// OK, this should work.
+			double seqfrac = ((double) cnt) / ((double) lyn);
+
+			printf("%d	%d %d %d %g %g	%d	%20.18g\n",
+				allcnt, cnt, n, tord, seqfrac, frac, nsum, gold);
 		}
 	}
 }
