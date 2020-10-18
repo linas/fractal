@@ -118,6 +118,7 @@ long sequence_from_cf(int cfrac[], int len)
 	return follower;
 }
 
+#define SZ 10
 /*
  * Iterate on the continued fraction.
  * i.e. generate sequences
@@ -127,15 +128,41 @@ long sequence_from_cf(int cfrac[], int len)
  */
 void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 {
+	long seq = sequence_from_cf(cfrac, len);
+	if (seq >= maxn) return;
+	double gold = find_gold(seq);
+	printf("seq = %ld gold=%g [", seq, gold);
+	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
+	printf("]\n");
+
+	if (len < maxlength)
+	{
+		int bfrac[SZ];
+		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
+		bfrac[len] = 0;
+		iterate_cf(bfrac, len+1, maxdepth, maxlength, maxn);
+	}
+
+	if (cfrac[len-1] < maxdepth)
+	{
+		int bfrac[SZ];
+		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
+		bfrac[len-1] ++;
+		iterate_cf(bfrac, len, maxdepth, maxlength, maxn);
+	}
 }
 
 int main(int argc, char* argv[])
 {
-	int nmax = (1<<21) + 1;
+	int nmax = (1<<10) + 1;
 
 	setup_gold(nmax);
 
 	for (int n=0; n<nmax; n ++)
 		find_gold(n);
 
+	int cfrac[SZ];
+	cfrac[0] = 0;
+
+	iterate_cf(cfrac, 1, 5, 2, nmax);
 }
