@@ -89,6 +89,8 @@ bool zero_is_bracketed(int n, double gold)
  */
 double find_gold(int n)
 {
+	if (-1 == n) return 2.0;
+
 	double gold = zero[n];
 	if (gold < -0.5)
 	{
@@ -106,7 +108,11 @@ double find_gold(int n)
  */
 long sequence_from_cf(int cfrac[], int len)
 {
-	if (1 == len) return 1 << cfrac[0];
+	if (1 == len)
+	{
+		if (-1 == cfrac[0]) return -1;
+		return 1 << cfrac[0];
+	}
 
 	if (3 < len) return -1; // unknown.
 
@@ -118,11 +124,11 @@ long sequence_from_cf(int cfrac[], int len)
 	return follower;
 }
 
-void print_seq(int cfrac[], int len)
+void print_seq(int cfrac[], int len, char* head, char* tail)
 {
-	printf("[");
+	printf("%s [", head);
 	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
-	printf("]");
+	printf("]%s", tail);
 }
 
 #define SZ 10
@@ -139,23 +145,22 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 	if (seq >= maxn) return;
 	double gold = find_gold(seq);
 	printf("seq = %ld gold=%g ", seq, gold);
-	print_seq(cfrac, len);
-	printf("\n");
+	print_seq(cfrac, len, "", "");
 
 	// Validate bracketing.
 	if (1 < len)
 	{
+		print_seq(cfrac, len-1, " left=", "");
+
 		long left = sequence_from_cf(cfrac, len-1);
 
 		// Right bracket is tricky.
 		int rfrac[SZ];
 		for (int i=0; i<len; i++) rfrac[i] = cfrac[i];
+		rfrac[len-2]--;
+		print_seq(rfrac, len-1, " right=", "");
 
-		int rlen = len-1;
-		if (0 < rfrac[rlen]) rfrac[rlen]--;
-		else {rlen ++; rfrac[len] = 0; }
-
-		long right = sequence_from_cf(rfrac, rlen);
+		long right = sequence_from_cf(rfrac, len-1);
 
 		if (left <= right)
 			printf("FAIL bracket order! left=%ld right=%ld\n", left, right);
@@ -163,15 +168,17 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 		if (seq <= left)
 			printf("FAIL left bracket! left=%ld seq=%ld\n", left, seq);
 
-		if (right <= seq)
-			printf("FAIL right bracket! seq=%ld right=%ld\n", seq, right);
+		if (seq <= right)
+			printf("FAIL right bracket! right=%ld seq=%ld\n", right, seq);
 
-		double lg = sequence_from_cf(cfrac, len-1);
-		double rg = sequence_from_cf(rfrac, len-1);
+		double lg = find_gold(left);
+		double rg = find_gold(right);
 
 		if (gold < lg) printf("fail left gold! left=%g gold=%g\n", lg, gold);
 		if (rg < gold) printf("fail right gold! gold=%g right=%g\n", gold, rg);
 	}
+
+	printf("\n");
 
 	// Iterate length-wise first
 	if (len < maxlength)
@@ -204,5 +211,5 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 5, 2, nmax);
+	iterate_cf(cfrac, 1, 2, 2, nmax);
 }
