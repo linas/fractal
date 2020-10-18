@@ -157,8 +157,11 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 		// Right bracket is tricky.
 		int rfrac[SZ];
 		for (int i=0; i<len; i++) rfrac[i] = cfrac[i];
-		rfrac[len-2]--;
-		print_seq(rfrac, len-1, " right=", "");
+		int rlen = len;
+		if (0 == rfrac[rlen-1]) rlen--;
+
+		rfrac[rlen-1]--;
+		print_seq(rfrac, rlen, " right=", "");
 
 		long right = sequence_from_cf(rfrac, len-1);
 
