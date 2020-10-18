@@ -12179,8 +12179,9 @@ circular word
 \end_layout
 
 \begin_layout Standard
-Apparently, the isomorphism problem for OEIS A001037 is a generic issue:
- the number of irreducible polynomials over 
+The isomorphism of different systems described by necklace polynomials is
+ a subject that gets some fair amount of attention.
+ Golumb gives an isomorphism between the irreducible polynomials over 
 \begin_inset Formula $\mathbb{F}_{p}$
 \end_inset
 
@@ -12188,16 +12189,24 @@ Apparently, the isomorphism problem for OEIS A001037 is a generic issue:
 \begin_inset Formula $p$
 \end_inset
 
- prime, is the same as the number of necklaces, and yet, there is no known
- bijection between these irreducible polynomials and the Lyndon words!
+ prime and necklaces built from Lyndon words.
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Glen12"
-literal "true"
+key "Golomb69"
+literal "false"
 
 \end_inset
 
- Thus, a closer study of the polynomials seems to be called for.
+ A number of other results exist, including 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Duzhin13,Cattell00"
+literal "false"
+
+\end_inset
+
+.
+ At any rate, a closer study of the polynomials seems to be called for.
 \end_layout
 
 \begin_layout Subsection
@@ -14676,8 +14685,7 @@ The leader of the left subsequence can then be denoted as
 
 \end_inset
 
-.
- Comparing against the figure, one has 
+Comparing against the figure, one has 
 \begin_inset Formula $\left[1,0\right]=10$
 \end_inset
 
@@ -14700,7 +14708,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The leader of teh right sequence is 
+The leader of the right sequence is 
 \begin_inset Formula $3=\left[0,0\right]$
 \end_inset
 
@@ -14710,6 +14718,19 @@ The leader of teh right sequence is
 
  and generally 
 \begin_inset Formula $3\cdot2^{m}=\left[0,m\right]$
+\end_inset
+
+.
+ The bracketing in play is 
+\begin_inset Formula $\left[0\right]\Mapsto\left[0,m\right]\Mapsfrom\left[-1\right]$
+\end_inset
+
+ and so the right most point of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ can be identified with 
+\begin_inset Formula $\left[-1\right]$
 \end_inset
 
 .
@@ -14730,19 +14751,53 @@ Consider the subseries lead by
 \end_inset
 
  having the numeric value of 
-\begin_inset Formula $n=\left[1,0,p\right]=2^{p+1}\left(2\left[1,0\right]+1\right)$
+\begin_inset Formula $n=\left[1,0,p\right]=2^{p+1}\left(2\left[1,0\right]+1\right)=2^{p}\cdot42$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-Up to three levels, we can deduce that the numbering goes as 
+Up to three levels, the required bracketing reads as 
+\begin_inset Formula 
+\begin{align*}
+\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }m\ge1\\
+\left[k,0\right]\Mapsto\left[k,0,p\right]\Mapsfrom\left[k-1\right] & \mbox{ when }k\ge1\\
+\left[0,0\right]\Mapsto\left[0,0,p\right]\Mapsfrom\left[0,0,0\right]
+\end{align*}
+
+\end_inset
+
+As a short-hand, write 
+\begin_inset Formula $\left[k,-1\right]=\left[k-1\right]$
+\end_inset
+
+ when 
+\begin_inset Formula $k\ge1$
+\end_inset
+
+ but otherwise 
+\begin_inset Formula $\left[0,-1\right]=\left[0,0,0\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we can deduce that the numbering goes as 
 \begin_inset Formula 
 \[
 \left[k,m,p\right]=2^{k+p}\left(2\left[k,m\right]+1\right)=2^{k+p}\left(\left[k,m+1\right]+1\right)
 \]
 
+\end_inset
+
+At four levels, we have 
+\begin_inset Formula $\left[0,0,0,0\right]=2\left[0,0,0\right]+1$
+\end_inset
+
+ and generally 
+\begin_inset Formula $\left[0,0,0,q\right]=2^{q}\left(2\left[0,0,0\right]+1\right)$
 \end_inset
 
 
@@ -14752,7 +14807,7 @@ Up to three levels, we can deduce that the numbering goes as
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -14834,6 +14889,20 @@ height "1pt"
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Some identities are apparent: 
+\begin_inset Formula 
+\begin{align*}
+\left[0,0,0,\cdots\right] & =\left[-1\right]\\
+\left[1,0,0,\cdots\right] & =\left[0\right]\\
+\left[k,0,0,\cdots\right] & =\left[k-1\right]
+\end{align*}
 
 \end_inset
 
