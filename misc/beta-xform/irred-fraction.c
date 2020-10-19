@@ -286,5 +286,6 @@ int main(int argc, char* argv[])
 	int maxlen = 9;
 	printf("#\n# Max order of polynomials = %d num=2^order = %d\n", norder, nmax);
 	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
+	fflush (stdout);
 	iterate_cf(cfrac, 1, maxdepth, maxlen, nmax);
 }
