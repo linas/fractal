@@ -258,5 +258,5 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 3, 8, nmax);
+	iterate_cf(cfrac, 1, 10, 10, nmax);
 }

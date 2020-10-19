@@ -14054,6 +14054,10 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Subsection
+Order and Continued Fractions
+\end_layout
+
 \begin_layout Standard
 Examining figure 
 \begin_inset CommandInset ref
@@ -14708,106 +14712,10 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The leader of the right sequence is 
-\begin_inset Formula $3=\left[0,0\right]$
-\end_inset
-
- and the rest of that sequence is 
-\begin_inset Formula $6=\left[0,1\right]$
-\end_inset
-
- and generally 
-\begin_inset Formula $3\cdot2^{m}=\left[0,m\right]$
-\end_inset
-
-.
- The bracketing in play is 
-\begin_inset Formula $\left[0\right]\Mapsto\left[0,m\right]\Mapsfrom\left[-1\right]$
-\end_inset
-
- and so the right most point of 
-\begin_inset Formula $\beta=2$
-\end_inset
-
- can be identified with 
-\begin_inset Formula $\left[-1\right]$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Consider the subseries lead by 
-\begin_inset Formula $\left[1,0\right]\Mapsto f\Mapsfrom\left[0\right]$
-\end_inset
-
-.
- One has 
-\begin_inset Formula $f=42=2\left(2\left[1,0\right]+1\right)=[1,0,0].$
-\end_inset
-
- The bracketing in general is then 
-\begin_inset Formula $\left[1,0\right]\Mapsto\left[1,0,p\right]\Mapsfrom\left[0\right]$
-\end_inset
-
- having the numeric value of 
-\begin_inset Formula $n=\left[1,0,p\right]=2^{p+1}\left(2\left[1,0\right]+1\right)=2^{p}\cdot42$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Up to three levels, the required bracketing reads as 
-\begin_inset Formula 
-\begin{align*}
-\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }m\ge1\\
-\left[k,0\right]\Mapsto\left[k,0,p\right]\Mapsfrom\left[k-1\right] & \mbox{ when }k\ge1\\
-\left[0,0\right]\Mapsto\left[0,0,p\right]\Mapsfrom\left[0,0,0\right]
-\end{align*}
-
-\end_inset
-
-As a short-hand, write 
-\begin_inset Formula $\left[k,-1\right]=\left[k-1\right]$
-\end_inset
-
- when 
-\begin_inset Formula $k\ge1$
-\end_inset
-
- but otherwise 
-\begin_inset Formula $\left[0,-1\right]=\left[0,0,0\right]$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-We can deduce that the numbering goes as 
-\begin_inset Formula 
-\[
-\left[k,m,p\right]=2^{k+p}\left(2\left[k,m\right]+1\right)=2^{k+p}\left(\left[k,m+1\right]+1\right)
-\]
-
-\end_inset
-
-At four levels, we have 
-\begin_inset Formula $\left[0,0,0,0\right]=2\left[0,0,0\right]+1$
-\end_inset
-
- and generally 
-\begin_inset Formula $\left[0,0,0,q\right]=2^{q}\left(2\left[0,0,0\right]+1\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -14893,6 +14801,274 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The leader of the right sequence is 
+\begin_inset Formula $3=\left[0,0\right]$
+\end_inset
+
+ and the rest of that sequence is 
+\begin_inset Formula $6=\left[0,1\right]$
+\end_inset
+
+ and generally 
+\begin_inset Formula $3\cdot2^{m}=\left[0,m\right]$
+\end_inset
+
+.
+ The bracketing in play is 
+\begin_inset Formula $\left[0\right]\Mapsto\left[0,m\right]\Mapsfrom\left[-1\right]$
+\end_inset
+
+ and so the right most point of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ can be identified with 
+\begin_inset Formula $\left[-1\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Consider the subseries lead by 
+\begin_inset Formula $\left[1,0\right]\Mapsto f\Mapsfrom\left[0\right]$
+\end_inset
+
+.
+ One has 
+\begin_inset Formula $f=42=2\left(2\left[1,0\right]+1\right)=[1,0,0].$
+\end_inset
+
+ The bracketing in general is then 
+\begin_inset Formula $\left[1,0\right]\Mapsto\left[1,0,p\right]\Mapsfrom\left[0\right]$
+\end_inset
+
+ having the numeric value of 
+\begin_inset Formula $n=\left[1,0,p\right]=2^{p+1}\left(2\left[1,0\right]+1\right)=2^{p}\cdot42$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Up to three levels, the required bracketing reads as 
+\begin_inset Formula 
+\begin{align*}
+\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }m\ge1\\
+\left[k,0\right]\Mapsto\left[k,0,p\right]\Mapsfrom\left[k-1\right] & \mbox{ when }k\ge1\\
+\left[0,0\right]\Mapsto\left[0,0,p\right]\Mapsfrom\left[0,0,0\right]
+\end{align*}
+
+\end_inset
+
+As a short-hand, write 
+\begin_inset Formula $\left[k,-1\right]=\left[k-1\right]$
+\end_inset
+
+ when 
+\begin_inset Formula $k\ge1$
+\end_inset
+
+ but otherwise 
+\begin_inset Formula $\left[0,-1\right]=\left[0,0,0\right]$
+\end_inset
+
+.
+ We can deduce that the numbering goes as 
+\begin_inset Formula 
+\[
+\left[k,m,p\right]=2^{k+p}\left(2\left[k,m\right]+1\right)=2^{k+p}\left(\left[k,m+1\right]+1\right)
+\]
+
+\end_inset
+
+At four levels, we have 
+\begin_inset Formula $\left[0,0,0,0\right]=2\left[0,0,0\right]+1$
+\end_inset
+
+ and generally 
+\begin_inset Formula $\left[0,0,0,q\right]=2^{q}\left(2\left[0,0,0\right]+1\right)$
+\end_inset
+
+.
+ The full expression is 
+\begin_inset Formula 
+\[
+\left[k,m,p,q\right]=2^{k+m+q}\left(2\left[k,m,p\right]+1\right)
+\]
+
+\end_inset
+
+That's enough to spot the pattern; it is recursively given by
+\begin_inset Formula 
+\begin{equation}
+\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)\label{eq:cont-frac-values}
+\end{equation}
+
+\end_inset
+
+These can be placed into correct order via a recursive algorithm:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+//
+\end_layout
+
+\begin_layout Plain Layout
+
+// Print polynomials in descending beta order
+\end_layout
+
+\begin_layout Plain Layout
+
+// The 
+\begin_inset Quotes eld
+\end_inset
+
+sequence
+\begin_inset Quotes erd
+\end_inset
+
+ is the list [m_1, m_2, ...
+ ,  m_k]
+\end_layout
+
+\begin_layout Plain Layout
+
+// The maxlength parameter limits recursion to short sequences
+\end_layout
+
+\begin_layout Plain Layout
+
+// The maxdepth paramter limits the largest value of each m_j
+\end_layout
+
+\begin_layout Plain Layout
+
+define iterate (sequence, maxlength, maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	// First, iterate to maximum length,
+\end_layout
+
+\begin_layout Plain Layout
+
+	// appending a zero to the end of the sequence
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (length(sequence) < maxlength)
+\end_layout
+
+\begin_layout Plain Layout
+
+		iterate (append (sequence, 0), maxlength, maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	// Output the resulting sequence
+\end_layout
+
+\begin_layout Plain Layout
+
+	print(sequence)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	// Next, increment the tail element of the sequence
+\end_layout
+
+\begin_layout Plain Layout
+
+	// and recurse
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (tail(seqeunce) < maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+		tail(seqeunce) += 1
+\end_layout
+
+\begin_layout Plain Layout
+
+		iteratate (sequence, maxlength, maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+The above algorithm will generate polynomials in 
+\begin_inset Formula $\beta$
+\end_inset
+
+-order, that is, in an order such that the the one real root of each polynomial
+ is less than the previous one.
+ Printing starts at 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ and descends from there.
+ The starting point is evident, as one has the identity
+\begin_inset Formula 
+\[
+\left[0,0,0,\cdots\right]=\left[-1\right]
+\]
+
+\end_inset
+
+which is associated with 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now we have to prove that the above statements are actually correct.
+ Specifically: that the recursive formula 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cont-frac-values"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ generates only valid polynomials, and that the recursive algorithm generates
+ polynomials in an order such that the real roots appear in proper order.
+ As a side effect, the number of polynomials at each order should be correct:
+ that is, they should be described by the necklace counting function.
 \end_layout
 
 \begin_layout Standard
