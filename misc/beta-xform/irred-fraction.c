@@ -115,6 +115,7 @@ long sequence_from_cf(int cfrac[], int len)
 	}
 
 	long leader = sequence_from_cf(cfrac, len-1);
+	if (-1 == leader) return -1; // avoid overflow
 
 	long follower = 2*leader + 1;
 
@@ -126,7 +127,12 @@ long sequence_from_cf(int cfrac[], int len)
 	for (int j=0; j<= bump; j++)
 		shift += cfrac[j];
 
-	if (50 < shift) return -1;
+	// More careful overflow check
+	int nbits = 0;
+	long fo = follower;
+	while (fo >>= 1) ++nbits;
+
+	if (60 < nbits+shift) return -1;
 
 	follower *= 1 << shift;
 
