@@ -167,10 +167,11 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 
 		// They ascend on either side of phi
 		if (0 == cfrac[0] && right <= left && -1 != right)
-			printf("FAIL bracket order! left=%ld right=%ld\n", left, right);
+			printf("FAIL hi bracket order! left=%ld right=%ld\n", left, right);
 
-		if (0 != cfrac[0] && left <= right)
-			printf("FAIL bracket order! left=%ld right=%ld\n", left, right);
+		// This check passes.... but is it correct?
+		if (len > rlen && left <= right)
+			printf("FAIL lo bracket order! left=%ld right=%ld\n", left, right);
 
 		if (seq <= left)
 			printf("FAIL left bracket! left=%ld seq=%ld\n", left, seq);
