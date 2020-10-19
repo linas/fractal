@@ -158,7 +158,7 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 		int rfrac[SZ];
 		for (int i=0; i<len; i++) rfrac[i] = cfrac[i];
 		int rlen = len;
-		if (0 == rfrac[rlen-1]) rlen--;
+		while (1 < rlen && 0 == rfrac[rlen-1]) rlen--;
 
 		rfrac[rlen-1]--;
 		print_seq(rfrac, rlen, " right=", "");
@@ -219,5 +219,5 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 4, 2, nmax);
+	iterate_cf(cfrac, 1, 4, 3, nmax);
 }
