@@ -118,13 +118,17 @@ long sequence_from_cf(int cfrac[], int len)
 
 	long follower = 2*leader + 1;
 
-	follower *= 1 << cfrac[len-1];
-
 	// This appears to be correct .... for now ...  !?
+	int shift = cfrac[len-1];
+
 	int bump = len-3;
 	if (bump < 0) bump = 0;
 	for (int j=0; j<= bump; j++)
-		follower *= 1 << cfrac[j];
+		shift += cfrac[j];
+
+	if (50 < shift) return -1;
+
+	follower *= 1 << shift;
 
 	return follower;
 }
@@ -148,6 +152,7 @@ void validate_cf(int cfrac[], int len, long maxn)
 
 	long seq = sequence_from_cf(cfrac, len);
 	if (seq >= maxn) return;
+	if (-1 == seq) return;
 	double gold = find_gold(seq);
 	printf("seq = %ld gold=%g ", seq, gold);
 	print_seq(cfrac, len, "", "");
@@ -247,5 +252,5 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 3, 6, nmax);
+	iterate_cf(cfrac, 1, 3, 8, nmax);
 }
