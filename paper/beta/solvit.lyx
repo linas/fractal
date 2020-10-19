@@ -15086,13 +15086,151 @@ Some identities are apparent:
 \begin_inset Formula 
 \begin{align*}
 \left[0,0,0,\cdots\right] & =\left[-1\right]\\
-\left[1,0,0,\cdots\right] & =\left[0\right]\\
-\left[k,0,0,\cdots\right] & =\left[k-1\right]
+\left[1,0,0,\cdots\right] & =\left[0\right]=\left[1,-1\right]\\
+\left[k,0,0,\cdots\right] & =\left[k-1\right]=\left[k,-1\right]\\
+\left[m_{1},m_{2},\cdots,m_{k},0,0,\cdots\right] & =\left[m_{1},m_{2},\cdots,m_{k}-1\right]=\left[m_{1},m_{2},\cdots,m_{k},-1\right]
 \end{align*}
 
 \end_inset
 
+These identities can be interpreted as alternative 
+\begin_inset Formula $\beta$
+\end_inset
 
+-expansions for the periodic orbits.
+ For example, the orbit for 
+\begin_inset Formula $\left[0\right]$
+\end_inset
+
+, corresponding to 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+ can be written as
+\begin_inset Formula 
+\[
+\varphi=1+\frac{1}{1+\frac{1}{1+\ddots}}
+\]
+
+\end_inset
+
+Hmm m incomplete thought ...
+ need to reform this
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $\beta$
+\end_inset
+
+-Odometer
+\end_layout
+
+\begin_layout Standard
+The continued fraction expansion can be seen to be an odometer that is of
+ characteristic zero.
+ This is unusual, as odometers are conventionally described in characteristic
+ 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ A quick review is in order.
+\end_layout
+
+\begin_layout Standard
+An odometer of characteristic 
+\begin_inset Formula $p$
+\end_inset
+
+ is defined as the set of all infinite-length integer sequences 
+\begin_inset Formula $\left(a_{0},a_{1},\cdots\right)$
+\end_inset
+
+ with each 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ drawn from the cyclic group 
+\begin_inset Formula $\mathbb{Z}/p\mathbb{Z}$
+\end_inset
+
+.
+ This set is endowed with a transition function 
+\begin_inset Formula $T$
+\end_inset
+
+ that is the map 
+\begin_inset Formula 
+\[
+T\left(a_{0},a_{1},\cdots\right)\mapsto\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right)\mbox{ if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
+\]
+
+\end_inset
+
+That is, it increments 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ by one, and if that rolls over, then a carry bit is propagated to the next
+ term, and so on.
+ This is just 
+\begin_inset Formula $p$
+\end_inset
+
+-adic addition, treated as a dynamical system.
+\end_layout
+
+\begin_layout Standard
+For the present case, an odometer-like roll-over can be seen at the juncture
+ of 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+ One observes the sequence 
+\begin_inset Formula 
+\begin{align*}
+\left[0,1\right] & =\beta=1.75488\cdots\\
+\left[0,2\right] & =\beta=1.70490\cdots\\
+ & \vdots\\
+\left[0,16\right] & =\beta=1.61816\cdots\\
+\left[0,N\right] & =\beta>\varphi\mbox{ for }N\to\infty\\
+\left[0\right]=\left[1,-1\right]=\left[1,0,0,\cdots\right] & =\beta=\varphi\\
+\left[1,0,0,\cdots,1,\cdots\right] & =\beta<\varphi
+\end{align*}
+
+\end_inset
+
+That is, the sequence 
+\begin_inset Formula $\left[0,N\right]$
+\end_inset
+
+ for 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ rolls over to 
+\begin_inset Formula $\left[1,0,0,\cdots\right]$
+\end_inset
+
+.
+ Unlike the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic case, there is no way to increment the odometer by one unit.
+ The best one can do is to write out the exansion for 
+\begin_inset Formula $\beta$
+\end_inset
+
+, decrement by some arbitarily small 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and notice that the expansion for 
+\begin_inset Formula $\beta-\varepsilon$
+\end_inset
+
+ has rolled over at some location.
 \end_layout
 
 \begin_layout Subsection
@@ -16499,7 +16637,6 @@ The compressor function
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Subsubsection
@@ -16532,6 +16669,40 @@ If the orbit is periodic, then there exists a polynomial
  is in one-to-one correspondence with the bit sequence, and with the value
  of 
 \begin_inset Formula $\beta$
+\end_inset
+
+.
+ The integer is explicitly given by 
+\begin_inset Formula $2n+1=\sum_{j=0}^{k}2^{j}b_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Odometer
+\end_layout
+
+\begin_layout Standard
+If the orbit is periodic, then there exists a finite-length integer sequence
+ 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ whose value 
+\begin_inset Formula 
+\[
+n=\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
+\]
+
+\end_inset
+
+corresponds to the bit sequence 
+\begin_inset Formula $\left\{ b\right\} =b_{0},b_{1},\cdots,b_{k}$
+\end_inset
+
+ via the integer 
+\begin_inset Formula $2n+1=\sum_{j=0}^{k}2^{j}b_{j}$
 \end_inset
 
 .
