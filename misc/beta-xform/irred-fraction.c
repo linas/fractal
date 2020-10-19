@@ -102,6 +102,20 @@ double find_gold(int n)
 	return 0.0;
 }
 
+// Return the real value of the corresponding continued fraction.
+// This is 1/(1+m0+ 1/(1+m1+ 1/(1+m2+ ... 1/(1+mk))))
+// where we have to add one because the sequence has zeros in it.
+double cf_to_real(int cfrac[], int len)
+{
+	double ex = 0.0;
+	for (int i=len-1; i >=0; i--)
+	{
+		ex += cfrac[i] + 1.0;
+		ex = 1.0 / ex;
+	}
+	return ex;
+}
+
 /*
  * Given the continue-fraction representation, return the
  * corresponding sequence number.
@@ -146,7 +160,7 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 	printf("]%s", tail);
 }
 
-#define SZ 10
+#define SZ 20
 /*
  * Validate the bounds on the continued fraction.
  * ... and print it out.
@@ -160,7 +174,10 @@ void validate_cf(int cfrac[], int len, long maxn)
 	if (seq >= maxn) return;
 	if (-1 == seq) return;
 	double gold = find_gold(seq);
-	printf("seq = %ld gold=%g ", seq, gold);
+	// printf("seq = %ld gold=%g ", seq, gold);
+
+	double ex = cf_to_real(cfrac, len);
+	printf("%ld	%g	%g	#", seq, gold, ex);
 	print_seq(cfrac, len, "", "");
 
 	if (gold >= prevgold)
@@ -248,6 +265,7 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 
 int main(int argc, char* argv[])
 {
+	// This taks about 50 seconds to setup gold.
 	int nmax = (1<<24) + 1;
 
 	setup_gold(nmax);
@@ -258,5 +276,9 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 10, 10, nmax);
+	// Iterating to length 10, depth ten takes half an hour,
+	// mostly due to large numbers of overflow failures.
+	// iterate_cf(cfrac, 1, 10, 10, nmax);
+
+	iterate_cf(cfrac, 1, 5, 8, nmax);
 }
