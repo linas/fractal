@@ -165,11 +165,14 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 
 		long right = sequence_from_cf(rfrac, rlen);
 
-		// They ascend on either side of phi
-		if (0 == cfrac[0] && right <= left && -1 != right)
+		// When bracketed by leader peers, left must be greater than right.
+		if (len-1 == rlen && left <= right)
+			printf("FAIL peer bracket order! left=%ld right=%ld\n", left, right);
+
+		if (len <= rlen && 0 == rfrac[rlen-1] && right <= left && -1 != right)
 			printf("FAIL hi bracket order! left=%ld right=%ld\n", left, right);
 
-		// This check passes.... but is it correct?
+		// This check passes.... I think it's correct ...
 		if (len > rlen && left <= right)
 			printf("FAIL lo bracket order! left=%ld right=%ld\n", left, right);
 
