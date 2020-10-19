@@ -139,11 +139,17 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
  */
 void validate_cf(int cfrac[], int len, long maxn)
 {
+	static double prevgold = 2.0;
+
 	long seq = sequence_from_cf(cfrac, len);
 	if (seq >= maxn) return;
 	double gold = find_gold(seq);
 	printf("seq = %ld gold=%g ", seq, gold);
 	print_seq(cfrac, len, "", "");
+
+	if (gold >= prevgold)
+		printf("FAIL total order!\n");
+	prevgold = gold;
 
 	// Validate bracketing.
 	if (1 < len)
