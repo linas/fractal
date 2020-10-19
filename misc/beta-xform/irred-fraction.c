@@ -163,9 +163,13 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 		rfrac[rlen-1]--;
 		print_seq(rfrac, rlen, " right=", "");
 
-		long right = sequence_from_cf(rfrac, len-1);
+		long right = sequence_from_cf(rfrac, rlen);
 
-		if (left <= right)
+		// They ascend on either side of phi
+		if (0 == cfrac[0] && right <= left && -1 != right)
+			printf("FAIL bracket order! left=%ld right=%ld\n", left, right);
+
+		if (0 != cfrac[0] && left <= right)
 			printf("FAIL bracket order! left=%ld right=%ld\n", left, right);
 
 		if (seq <= left)
@@ -214,5 +218,5 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 2, 2, nmax);
+	iterate_cf(cfrac, 1, 4, 2, nmax);
 }
