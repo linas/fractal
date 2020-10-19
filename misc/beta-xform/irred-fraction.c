@@ -141,6 +141,25 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
  */
 void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 {
+	// Iterate length-wise first
+	if (len < maxlength)
+	{
+		int bfrac[SZ];
+		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
+		bfrac[len] = 0;
+		iterate_cf(bfrac, len+1, maxdepth, maxlength, maxn);
+	}
+
+	// Iterate depthwise second.
+	if (cfrac[len-1] < maxdepth)
+	{
+		int bfrac[SZ];
+		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
+		bfrac[len-1] ++;
+		iterate_cf(bfrac, len, maxdepth, maxlength, maxn);
+	}
+
+	// OK go
 	long seq = sequence_from_cf(cfrac, len);
 	if (seq >= maxn) return;
 	double gold = find_gold(seq);
@@ -190,29 +209,11 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 	}
 
 	printf("\n");
-
-	// Iterate length-wise first
-	if (len < maxlength)
-	{
-		int bfrac[SZ];
-		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
-		bfrac[len] = 0;
-		iterate_cf(bfrac, len+1, maxdepth, maxlength, maxn);
-	}
-
-	// Iterate depthwise second.
-	if (cfrac[len-1] < maxdepth)
-	{
-		int bfrac[SZ];
-		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
-		bfrac[len-1] ++;
-		iterate_cf(bfrac, len, maxdepth, maxlength, maxn);
-	}
 }
 
 int main(int argc, char* argv[])
 {
-	int nmax = (1<<10) + 1;
+	int nmax = (1<<18) + 1;
 
 	setup_gold(nmax);
 
