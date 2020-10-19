@@ -199,7 +199,8 @@ void validate_cf(int cfrac[], int len, long maxn)
  */
 void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 {
-	// Iterate length-wise first
+
+	// Iterate to max length, first.
 	if (len < maxlength)
 	{
 		int bfrac[SZ];
@@ -208,25 +209,17 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 		iterate_cf(bfrac, len+1, maxdepth, maxlength, maxn);
 	}
 
+	validate_cf(cfrac, len, maxn);
+
 	// Iterate depthwise second.
-	if (0 == cfrac[len-1])
+	if (cfrac[len-1] < maxdepth)
 	{
+
 		int afrac[SZ];
 		for (int i=0; i<len; i++) afrac[i] = cfrac[i];
-		afrac[len-1] = maxdepth;
+		afrac[len-1] ++;
 		iterate_cf(afrac, len, maxdepth, maxlength, maxn);
 	}
-
-	if (0 < cfrac[len-1])
-	{
-		int bfrac[SZ];
-		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
-		bfrac[len-1] --;
-		if (0 != bfrac[len-1])
-			iterate_cf(bfrac, len, maxdepth, maxlength, maxn);
-	}
-
-	validate_cf(cfrac, len, maxn);
 }
 
 int main(int argc, char* argv[])
