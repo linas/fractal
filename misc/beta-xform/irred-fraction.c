@@ -114,8 +114,6 @@ long sequence_from_cf(int cfrac[], int len)
 		return 1 << cfrac[0];
 	}
 
-	if (5 < len) return -1; // unknown.
-
 	long leader = sequence_from_cf(cfrac, len-1);
 
 	long follower = 2*leader + 1;
@@ -202,6 +200,7 @@ void validate_cf(int cfrac[], int len, long maxn)
 	}
 
 	printf("\n");
+	fflush(stdout);
 }
 
 /*
@@ -238,7 +237,7 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 
 int main(int argc, char* argv[])
 {
-	int nmax = (1<<18) + 1;
+	int nmax = (1<<24) + 1;
 
 	setup_gold(nmax);
 
@@ -248,5 +247,5 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 4, 4, nmax);
+	iterate_cf(cfrac, 1, 3, 6, nmax);
 }
