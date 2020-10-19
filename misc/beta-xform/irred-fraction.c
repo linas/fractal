@@ -266,7 +266,7 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 int main(int argc, char* argv[])
 {
 	// Using 1<<24 takes about 50 seconds to setup gold.
-	int norder = 22;
+	int norder = 26;
 	int nmax = (1<<norder) + 1;
 
 	setup_gold(nmax);
@@ -283,7 +283,7 @@ int main(int argc, char* argv[])
 
 	// Need to go to high depth to avoid big gap at golden mean.
 	int maxdepth = 16;
-	int maxlen = 6;
+	int maxlen = 9;
 	printf("#\n# Max order of polynomials = %d num=2^order = %d\n", norder, nmax);
 	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
 	iterate_cf(cfrac, 1, maxdepth, maxlen, nmax);
