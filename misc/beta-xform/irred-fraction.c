@@ -133,33 +133,12 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 
 #define SZ 10
 /*
- * Iterate on the continued fraction.
- * i.e. generate sequences
- * maxdepth == number of doubling steps
- * maxlength == max length of fraction.
- * maxn == cutoff fir highest known n
+ * Validate the bounds on the continued fraction.
+ * ... and print it out.
+ * maxn == cutoff for highest known n; this avoid overflow.
  */
-void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
+void validate_cf(int cfrac[], int len, long maxn)
 {
-	// Iterate length-wise first
-	if (len < maxlength)
-	{
-		int bfrac[SZ];
-		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
-		bfrac[len] = 0;
-		iterate_cf(bfrac, len+1, maxdepth, maxlength, maxn);
-	}
-
-	// Iterate depthwise second.
-	if (cfrac[len-1] < maxdepth)
-	{
-		int bfrac[SZ];
-		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
-		bfrac[len-1] ++;
-		iterate_cf(bfrac, len, maxdepth, maxlength, maxn);
-	}
-
-	// OK go
 	long seq = sequence_from_cf(cfrac, len);
 	if (seq >= maxn) return;
 	double gold = find_gold(seq);
@@ -209,6 +188,45 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 	}
 
 	printf("\n");
+}
+
+/*
+ * Iterate on the continued fraction.
+ * i.e. generate sequences
+ * maxdepth == number of doubling steps
+ * maxlength == max length of fraction.
+ * maxn == cutoff fir highest known n
+ */
+void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
+{
+	// Iterate length-wise first
+	if (len < maxlength)
+	{
+		int bfrac[SZ];
+		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
+		bfrac[len] = 0;
+		iterate_cf(bfrac, len+1, maxdepth, maxlength, maxn);
+	}
+
+	// Iterate depthwise second.
+	if (0 == cfrac[len-1])
+	{
+		int afrac[SZ];
+		for (int i=0; i<len; i++) afrac[i] = cfrac[i];
+		afrac[len-1] = maxdepth;
+		iterate_cf(afrac, len, maxdepth, maxlength, maxn);
+	}
+
+	if (0 < cfrac[len-1])
+	{
+		int bfrac[SZ];
+		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
+		bfrac[len-1] --;
+		if (0 != bfrac[len-1])
+			iterate_cf(bfrac, len, maxdepth, maxlength, maxn);
+	}
+
+	validate_cf(cfrac, len, maxn);
 }
 
 int main(int argc, char* argv[])
