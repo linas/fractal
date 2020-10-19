@@ -276,9 +276,12 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	// Iterating to length 10, depth ten takes half an hour,
+	// Iterating to length 10, depth 10 takes more than an hour,
 	// mostly due to large numbers of overflow failures.
 	// iterate_cf(cfrac, 1, 10, 10, nmax);
 
-	iterate_cf(cfrac, 1, 5, 8, nmax);
+	int maxdepth = 8;
+	int maxlen = 6;
+	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
+	iterate_cf(cfrac, 1, maxdepth, maxlen, nmax);
 }
