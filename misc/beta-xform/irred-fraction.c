@@ -87,7 +87,7 @@ bool zero_is_bracketed(int n, double gold)
  * If the value of `n` does not really correspond to a golden
  * polynomial, return zero.
  */
-double find_gold(int n)
+double find_gold(long n)
 {
 	if (-1 == n) return 2.0;
 
@@ -125,7 +125,7 @@ long sequence_from_cf(int cfrac[], int len)
 	if (1 == len)
 	{
 		if (-1 == cfrac[0]) return -1;
-		return 1 << cfrac[0];
+		return 1UL << cfrac[0];
 	}
 
 	long leader = sequence_from_cf(cfrac, len-1);
@@ -148,7 +148,7 @@ long sequence_from_cf(int cfrac[], int len)
 
 	if (60 < nbits+shift) return -1;
 
-	follower *= 1 << shift;
+	follower *= 1UL << shift;
 
 	return follower;
 }
