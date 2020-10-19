@@ -114,12 +114,19 @@ long sequence_from_cf(int cfrac[], int len)
 		return 1 << cfrac[0];
 	}
 
-	if (3 < len) return -1; // unknown.
+	if (5 < len) return -1; // unknown.
 
 	long leader = sequence_from_cf(cfrac, len-1);
 
 	long follower = 2*leader + 1;
-	follower *= 1 << (cfrac[0] + cfrac[len-1]);
+
+	follower *= 1 << cfrac[len-1];
+
+	// This appears to be correct .... for now ...  !?
+	int bump = len-3;
+	if (bump < 0) bump = 0;
+	for (int j=0; j<= bump; j++)
+		follower *= 1 << cfrac[j];
 
 	return follower;
 }
@@ -149,7 +156,8 @@ void validate_cf(int cfrac[], int len, long maxn)
 
 	if (gold >= prevgold)
 		printf("FAIL total order!\n");
-	prevgold = gold;
+	else
+		prevgold = gold;
 
 	// Validate bracketing.
 	if (1 < len)
@@ -240,5 +248,5 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 	cfrac[0] = 0;
 
-	iterate_cf(cfrac, 1, 4, 3, nmax);
+	iterate_cf(cfrac, 1, 4, 4, nmax);
 }
