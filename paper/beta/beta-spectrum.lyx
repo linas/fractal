@@ -13005,7 +13005,320 @@ beta odometer
 \begin_inset Quotes erd
 \end_inset
 
- and is illustrated in figure xx
+ and is illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-odometer"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beta odometer
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beta-odometer"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename irred-frac.eps
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This visualizes the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-odometer in terms of continued fractions.
+ Any given sequence 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ has an associated 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value; this is graphed on the horizontal axis.
+ It also can be interpreted as a continued fraction, this is shown on the
+ vertical axis.
+ It is clearly self-similar.
+ Some of the vertical joins are drawn not quite vertical; this is due to
+ insufficient convergence during graph generation.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with irred-frac.c and irred-frac.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The use of the word 
+\begin_inset Quotes eld
+\end_inset
+
+odometer
+\begin_inset Quotes erd
+\end_inset
+
+ is perhaps a bit cryptic; a quick review is in order.
+ An odometer of characteristic 
+\begin_inset Formula $p$
+\end_inset
+
+ is defined as the set of all infinite-length integer sequences 
+\begin_inset Formula $\left(a_{0},a_{1},\cdots\right)$
+\end_inset
+
+ with each 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ drawn from the cyclic group 
+\begin_inset Formula $\mathbb{Z}/p\mathbb{Z}$
+\end_inset
+
+.
+ This set is endowed with a transition function 
+\begin_inset Formula $T$
+\end_inset
+
+ given by the map 
+\begin_inset Formula 
+\[
+T\left(a_{0},a_{1},\cdots\right)\mapsto\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right)\mbox{ if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
+\]
+
+\end_inset
+
+That is, it increments 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ by one, and if that rolls over, then a carry bit is propagated to the next
+ term, and so on.
+ This is just 
+\begin_inset Formula $p$
+\end_inset
+
+-adic addition, treated as a dynamical system.
+ It can also be interpreted as a map of the unit interval, to itself, when
+ the sequence 
+\begin_inset Formula $\left(a_{0},a_{1},\cdots\right)$
+\end_inset
+
+ is interpreted as 
+\begin_inset Formula $x=\sum_{n}a_{n}p^{-n-1}$
+\end_inset
+
+.
+ As a map of the unit interval, it permutes a countable sequence of intervals
+ of decreasing size.
+ Odometers are bijections of the unit interval into itself.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-odometer can be taken to be an odometer of characteristic zero.
+ The rationale for this opaque claim can be clarified by looking at how
+ it 
+\begin_inset Quotes eld
+\end_inset
+
+rolls over
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The prototypical roll-over occurs at the juncture of 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+.
+ One observes the sequence 
+\begin_inset Formula 
+\begin{align*}
+\left[0,1\right] & =\beta=1.75488\cdots\\
+\left[0,2\right] & =\beta=1.70490\cdots\\
+ & \vdots\\
+\left[0,16\right] & =\beta=1.61816\cdots\\
+\left[0,N\right] & =\beta>\varphi\mbox{ for }N\to\infty\\
+\left[0\right]=\left[1,-1\right]=\left[1,0,0,\cdots\right] & =\beta=\varphi\\
+\left[1,0,0,\cdots,1,\cdots\right] & =\beta<\varphi
+\end{align*}
+
+\end_inset
+
+That is, the sequence 
+\begin_inset Formula $\left[0,N\right]$
+\end_inset
+
+ for 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ rolls over to 
+\begin_inset Formula $\left[1,0,0,\cdots\right]$
+\end_inset
+
+.
+ It is this peculiar behavior that merits the name 
+\begin_inset Quotes eld
+\end_inset
+
+odometer
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Unlike the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic case, there is no way to increment the odometer by one unit.
+ The best one can do is to write out the expansion for 
+\begin_inset Formula $\beta$
+\end_inset
+
+, decrement by some arbitrarily small 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and notice that the expansion for 
+\begin_inset Formula $\beta-\varepsilon$
+\end_inset
+
+ has rolled over at some location.
+ The increment is, formally speaking, an infinitessimal.
+\end_layout
+
+\begin_layout Standard
+This can be compared to how continued fractions roll over.
+ Using our off-by-one notation, write 
+\begin_inset Formula 
+\[
+\left[1,N\right]=\frac{1}{2+\frac{1}{N+1}}=0.5-\varepsilon
+\]
+
+\end_inset
+
+which rolls over to 
+\begin_inset Formula 
+\[
+\left[0,0,0,\cdots,1,\cdots\right]=\frac{1}{1+\frac{1}{1+\frac{1}{1+\cdots}}}=0.5+\varepsilon
+\]
+
+\end_inset
+
+which is, in a sense, backwards: the sequence 
+\begin_inset Formula $\left[1,N\right]$
+\end_inset
+
+ for 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ does not roll over to 
+\begin_inset Formula $\left[2,0,0,\cdots\right]$
+\end_inset
+
+ as one might hope or guess or expect, but instead to 
+\begin_inset Formula $\left[0,0,0,\cdots\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $p$
+\end_inset
+
+-adic odometers are interval maps; they re-arrange countable sequences of
+ subintervals of the unit interval.
+ Here, likewise, the beta odometer rearranges intervals, at least in the
+ sense that rearrangements are disjoint.
+ So, the interval 
+\begin_inset Formula $\left(\varphi,2\right)$
+\end_inset
+
+ is mapped to 
+\begin_inset Formula $\left(\frac{1}{2},1\right)$
+\end_inset
+
+ albeit in a fractal manner, and likewise each subinterval bounded by the
+ descending series of roots to 
+\begin_inset Formula $\beta^{n}-\beta^{n-1}-1=0$
+\end_inset
+
+ is mapped to the interval 
+\begin_inset Formula $\left(\frac{1}{n},\frac{1}{n-1}\right)$
+\end_inset
+
+.
+ By self-symmetry, the sub-intervals will re-arrange as well.
+ A precise expression for the symmetry is not immediately obvious, but clearly
+ it must be governed by the dyadic monoid.
 \end_layout
 
 \begin_layout Section
