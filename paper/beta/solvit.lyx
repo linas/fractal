@@ -14910,7 +14910,32 @@ That's enough to spot the pattern; it is recursively given by
 
 \end_inset
 
-These can be placed into correct order via a recursive algorithm: 
+The bracketing relationship is 
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{p}-1\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the largest integer 
+\begin_inset Formula $1<p\le k-1$
+\end_inset
+
+ for which 
+\begin_inset Formula $m_{p}\ne0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The resulting sequences can be placed into descending order via a recursive
+ algorithm: 
 \begin_inset Note Note
 status collapsed
 
@@ -15093,29 +15118,30 @@ Some identities are apparent:
 
 \end_inset
 
-These identities can be interpreted as alternative 
-\begin_inset Formula $\beta$
+These identities are meant to be interpreted as the values of limiting sequences.
+ For example, for the second identity, on has that, for a 1 followed by
+ 
+\begin_inset Formula $n$
 \end_inset
 
--expansions for the periodic orbits.
- For example, the orbit for 
-\begin_inset Formula $\left[0\right]$
-\end_inset
-
-, corresponding to 
-\begin_inset Formula $\beta=\varphi=1.618\cdots$
-\end_inset
-
- can be written as
+ zeros, that 
 \begin_inset Formula 
-\[
-\varphi=1+\frac{1}{1+\frac{1}{1+\ddots}}
-\]
+\begin{align*}
+\left[1,0,\cdots,0\right]\to & \beta^{2n+3}-\beta^{2n+2}-\beta^{2n}-\cdots-1\\
+= & \frac{\left(\beta^{2}-\beta-1\right)\beta^{2n+3}+1}{\beta^{2}-1}
+\end{align*}
 
 \end_inset
 
-Hmm m incomplete thought ...
- need to reform this
+and so in the limit of large 
+\begin_inset Formula $n$
+\end_inset
+
+, the root of this polynomial approaches 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -15134,7 +15160,7 @@ The continued fraction expansion can be seen to be an odometer that is of
 \end_inset
 
 .
- A quick review is in order.
+ A quick review of the concept of an odomoter is in order.
 \end_layout
 
 \begin_layout Standard
@@ -15159,7 +15185,7 @@ An odometer of characteristic
 \begin_inset Formula $T$
 \end_inset
 
- that is the map 
+ given by the map 
 \begin_inset Formula 
 \[
 T\left(a_{0},a_{1},\cdots\right)\mapsto\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right)\mbox{ if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
@@ -15178,6 +15204,18 @@ That is, it increments
 \end_inset
 
 -adic addition, treated as a dynamical system.
+ It can also be interpreted as a map of the unit interval, to itself, when
+ the sequence 
+\begin_inset Formula $\left(a_{0},a_{1},\cdots\right)$
+\end_inset
+
+ is interpreted as 
+\begin_inset Formula $x=\sum_{n}a_{n}p^{-n-1}$
+\end_inset
+
+.
+ As a map of the unit interval, it permutes a countable sequence of intervals
+ of decreasing size.
 \end_layout
 
 \begin_layout Standard
@@ -15186,6 +15224,7 @@ For the present case, an odometer-like roll-over can be seen at the juncture
 \begin_inset Formula $\beta=\varphi=1.618\cdots$
 \end_inset
 
+.
  One observes the sequence 
 \begin_inset Formula 
 \begin{align*}
@@ -15231,6 +15270,189 @@ That is, the sequence
 \end_inset
 
  has rolled over at some location.
+\end_layout
+
+\begin_layout Standard
+This can be compared to how continued fractions roll over.
+ Using a non-standard notation, where the continued fraction is off-by-one,
+ one writes 
+\begin_inset Formula 
+\[
+\left[1,N,\cdots\right]=\frac{1}{2+\frac{1}{N+1+\frac{1}{\cdots}}}=0.5-\varepsilon
+\]
+
+\end_inset
+
+which rolls over to 
+\begin_inset Formula 
+\[
+\left[0,0,0,\cdots\right]=\frac{1}{1+\frac{1}{1+\frac{1}{1+\ddots}}}=0.5+\varepsilon
+\]
+
+\end_inset
+
+which is, in a sense, backwards: the sequence 
+\begin_inset Formula $\left[1,N\right]$
+\end_inset
+
+ for 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ does not roll over to 
+\begin_inset Formula $\left[2,0,0,\cdots\right]$
+\end_inset
+
+ as one might hope or guess or expect, but instead to 
+\begin_inset Formula $\left[0,0,0,\cdots\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A general property of 
+\begin_inset Formula $p$
+\end_inset
+
+-adic odometers is that they are interval maps; they shuffle around a countable
+ sequence of sub-intervals of the unit interval.
+ Here, the shuffle is of an uncountable number of intervals; it is visualized
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-odometer"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beta odometer
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beta-odometer"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename irred-frac.eps
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This visualizes the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-odometer in terms of continued fractions.
+ Any given sequence 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ has an associated 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value; this is graphed on the horizontal axis.
+ However, such a sequence can also be interpreted as the continued fraction
+ 
+\begin_inset Formula 
+\[
+\frac{1}{m_{1}+1+\frac{1}{m_{2}+1+\frac{1}{m_{3}+1+\ddots}}}
+\]
+
+\end_inset
+
+where the off-by-one is required, since the 
+\begin_inset Formula $m_{j}$
+\end_inset
+
+ are allowed to be zero.
+ This value is shown on the vertical axis.
+ This is clearly self-similar, and appears to be a bijection.
+ Some of the vertical joins are drawn not quite vertical; this is due to
+ insufficient convergence during graph generation.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with irred-frac.c and irred-frac.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is an interval map, in that the interval 
+\begin_inset Formula $\left(\varphi,2\right)$
+\end_inset
+
+ is mapped to 
+\begin_inset Formula $\left(\frac{1}{2},1\right)$
+\end_inset
+
+ albeit in a fractal manner, and likewise each subinterval bounded by the
+ descending series of root to 
+\begin_inset Formula $\beta^{n}-\beta^{n-1}-1=0$
+\end_inset
+
+ is mapped to the interval 
+\begin_inset Formula $\left(\frac{1}{n},\frac{1}{n-1}\right)$
+\end_inset
+
+.
+ By self-symmetry, the sub-intervals will shuffle as well.
+ The precise symmetry is not immediately obvious.
 \end_layout
 
 \begin_layout Subsection
