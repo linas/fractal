@@ -14912,9 +14912,9 @@ That's enough to spot the pattern; it is recursively given by
 
 The bracketing relationship is 
 \begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{p}-1\right]
-\]
+\begin{equation}
+\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{p}-1\right]\label{eq:bracketing relation}
+\end{equation}
 
 \end_inset
 
@@ -14931,6 +14931,39 @@ where
 \end_inset
 
 .
+ The bracketing relationship is vitaly important for constructing infinite
+ sequences, and proving thier convergence.
+ That is, let 
+\begin_inset Formula $\beta=\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
+\end_inset
+
+ be the root of the polynomial determined by 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+.
+ This root can be directly computed as the convergent of a 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci sequence, as will be demonstrated in an upcoming section.
+ The relevant point here is that, as numerical values, one has that 
+\begin_inset Formula 
+\[
+\beta\left(\left[m_{1},m_{2},\cdots,m_{k-1}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{p}-1\right]\right)
+\]
+
+\end_inset
+
+The inequalities are strict.
+ Thus, any given finite-length sequence is bounded above and below by two
+ convergents.
+ This allows infinite-length sequences 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
+\end_inset
+
+ to be defined without ambiguity: they are always bounded above and below,
+ by increasingly tight bounds, and so have have a unique convergent.
 \end_layout
 
 \begin_layout Standard
@@ -14947,13 +14980,9 @@ Its actaually in beta-xform/irred-fraction.c
 
 
 \begin_inset listings
+lstparams "basicstyle={\small},tabsize=3"
 inline false
 status open
-
-\begin_layout Plain Layout
-
-//
-\end_layout
 
 \begin_layout Plain Layout
 
@@ -15219,123 +15248,10 @@ That is, it increments
 \end_layout
 
 \begin_layout Standard
-For the present case, an odometer-like roll-over can be seen at the juncture
- of 
-\begin_inset Formula $\beta=\varphi=1.618\cdots$
-\end_inset
-
-.
- One observes the sequence 
-\begin_inset Formula 
-\begin{align*}
-\left[0,1\right] & =\beta=1.75488\cdots\\
-\left[0,2\right] & =\beta=1.70490\cdots\\
- & \vdots\\
-\left[0,16\right] & =\beta=1.61816\cdots\\
-\left[0,N\right] & =\beta>\varphi\mbox{ for }N\to\infty\\
-\left[0\right]=\left[1,-1\right]=\left[1,0,0,\cdots\right] & =\beta=\varphi\\
-\left[1,0,0,\cdots,1,\cdots\right] & =\beta<\varphi
-\end{align*}
-
-\end_inset
-
-That is, the sequence 
-\begin_inset Formula $\left[0,N\right]$
-\end_inset
-
- for 
-\begin_inset Formula $N\to\infty$
-\end_inset
-
- rolls over to 
-\begin_inset Formula $\left[1,0,0,\cdots\right]$
-\end_inset
-
-.
- Unlike the 
-\begin_inset Formula $p$
-\end_inset
-
--adic case, there is no way to increment the odometer by one unit.
- The best one can do is to write out the exansion for 
-\begin_inset Formula $\beta$
-\end_inset
-
-, decrement by some arbitarily small 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
- and notice that the expansion for 
-\begin_inset Formula $\beta-\varepsilon$
-\end_inset
-
- has rolled over at some location.
-\end_layout
-
-\begin_layout Standard
-This can be compared to how continued fractions roll over.
- Using a non-standard notation, where the continued fraction is off-by-one,
- one writes 
-\begin_inset Formula 
-\[
-\left[1,N,\cdots\right]=\frac{1}{2+\frac{1}{N+1+\frac{1}{\cdots}}}=0.5-\varepsilon
-\]
-
-\end_inset
-
-which rolls over to 
-\begin_inset Formula 
-\[
-\left[0,0,0,\cdots\right]=\frac{1}{1+\frac{1}{1+\frac{1}{1+\ddots}}}=0.5+\varepsilon
-\]
-
-\end_inset
-
-which is, in a sense, backwards: the sequence 
-\begin_inset Formula $\left[1,N\right]$
-\end_inset
-
- for 
-\begin_inset Formula $N\to\infty$
-\end_inset
-
- does not roll over to 
-\begin_inset Formula $\left[2,0,0,\cdots\right]$
-\end_inset
-
- as one might hope or guess or expect, but instead to 
-\begin_inset Formula $\left[0,0,0,\cdots\right]$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-A general property of 
-\begin_inset Formula $p$
-\end_inset
-
--adic odometers is that they are interval maps; they shuffle around a countable
- sequence of sub-intervals of the unit interval.
- Here, the shuffle is of an uncountable number of intervals; it is visualized
- in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beta-odometer"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -15382,22 +15298,9 @@ This visualizes the
 \end_inset
 
  value; this is graphed on the horizontal axis.
- However, such a sequence can also be interpreted as the continued fraction
- 
-\begin_inset Formula 
-\[
-\frac{1}{m_{1}+1+\frac{1}{m_{2}+1+\frac{1}{m_{3}+1+\ddots}}}
-\]
-
-\end_inset
-
-where the off-by-one is required, since the 
-\begin_inset Formula $m_{j}$
-\end_inset
-
- are allowed to be zero.
- This value is shown on the vertical axis.
- This is clearly self-similar, and appears to be a bijection.
+ It also can be interpreted as a continued fraction, this is shown on the
+ vertical axis.
+ It is clearly self-similar.
  Some of the vertical joins are drawn not quite vertical; this is due to
  insufficient convergence during graph generation.
 \end_layout
@@ -15433,7 +15336,251 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-This is an interval map, in that the interval 
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-odometer is defined as the bijection that arises by interpreting a sequence
+ 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ either as specifying a 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value or a continued fraction.
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value is of course, the root of the corresponding polynomial; this root
+ can be computed directly, as a convergent of a 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci series, as shown in a later section.
+ The corresponding continued fraction is
+\begin_inset Formula 
+\[
+\frac{1}{m_{1}+1+\frac{1}{m_{2}+1+\frac{1}{\cdots}}}
+\]
+
+\end_inset
+
+where this differs from the conventional defintion, being off-by-one, because
+ the 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+ can be zero.
+ It is visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-odometer"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+That the mapping is a bijection is not hard to demonstrate.
+ Certainly, for finite-length sequences, continued fractions are rationals;
+ each such sequence determines a unique rational, and thus the peridoic
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ orbits are mapped to the rationals in this way (thus, the map is an injection).
+ Most orbits of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform are not periodic, however; these map to infinitely long sequences
+ of bits in the bit expansion.
+ The bracketing relation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bracketing relation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ guarantees that an infinitely sequence is bounded above and below by pairs
+ of finite sequences.
+ The bound applies not only to the sequences, but also to the corresponding
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values.
+ The bounds are increasingly tight as the sequence lengthens; by standard
+ epsilon-delta arguments, the convergent is unique for infinite-length series.
+ That is, each distinct non-periodic value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ corresponds to a single, unique infinite sequence 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
+\end_inset
+
+.
+ It is not hard to see that all possible such sequences occur.
+ Likewise, every irrational number correspnds to a unique infinite-length
+ continued fraction; again, every possible sequence occurs.
+ Thus, the odometer provides a bijection between irrationals and non-periodic
+ orbits.
+ The only difficulty is presented by the rationals: any given rational number
+ has several inequivalent continued fraction expansions, and is thus not
+ strictly invertible.
+ This difficulty is easily swept away by adopting an expansion convention:
+ 
+\emph on
+e.g.
+
+\emph default
+ by taking the shortest possible continued fraction repesentation for any
+ given rational.
+ In this way, one sees that the odometer is a bijection.
+\end_layout
+
+\begin_layout Standard
+The use of the word 
+\begin_inset Quotes eld
+\end_inset
+
+odometer
+\begin_inset Quotes erd
+\end_inset
+
+ is perhaps a bit cryptic.
+ The rational for this can be clarified by looking at how it 
+\begin_inset Quotes eld
+\end_inset
+
+rolls over
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The prototypical odometer roll-over occurs at the juncture of 
+\begin_inset Formula $\beta=\varphi=1.618\cdots$
+\end_inset
+
+.
+ One observes the sequence 
+\begin_inset Formula 
+\begin{align*}
+\left[0,1\right] & =\beta=1.75488\cdots\\
+\left[0,2\right] & =\beta=1.70490\cdots\\
+ & \vdots\\
+\left[0,16\right] & =\beta=1.61816\cdots\\
+\left[0,N\right] & =\beta>\varphi\mbox{ for }N\to\infty\\
+\left[0\right]=\left[1,-1\right]=\left[1,0,0,\cdots\right] & =\beta=\varphi\\
+\left[1,0,0,\cdots,1,\cdots\right] & =\beta<\varphi
+\end{align*}
+
+\end_inset
+
+That is, the sequence 
+\begin_inset Formula $\left[0,N\right]$
+\end_inset
+
+ for 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ rolls over to 
+\begin_inset Formula $\left[1,0,0,\cdots\right]$
+\end_inset
+
+.
+ It is this peculiar behavior that merits the name 
+\begin_inset Quotes eld
+\end_inset
+
+odometer
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Unlike the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic case, there is no way to increment the odometer by one unit.
+ The best one can do is to write out the exansion for 
+\begin_inset Formula $\beta$
+\end_inset
+
+, decrement by some arbitarily small 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and notice that the expansion for 
+\begin_inset Formula $\beta-\varepsilon$
+\end_inset
+
+ has rolled over at some location.
+\end_layout
+
+\begin_layout Standard
+This can be compared to how continued fractions roll over.
+ Using our non-standard notation, where the continued fraction is off-by-one,
+ one writes 
+\begin_inset Formula 
+\[
+\left[1,N\right]=\frac{1}{2+\frac{1}{N+1}}=0.5-\varepsilon
+\]
+
+\end_inset
+
+which rolls over to 
+\begin_inset Formula 
+\[
+\left[0,0,0,\cdots,1,\cdots\right]=\frac{1}{1+\frac{1}{1+\frac{1}{1+\cdots}}}=0.5+\varepsilon
+\]
+
+\end_inset
+
+which is, in a sense, backwards: the sequence 
+\begin_inset Formula $\left[1,N\right]$
+\end_inset
+
+ for 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ does not roll over to 
+\begin_inset Formula $\left[2,0,0,\cdots\right]$
+\end_inset
+
+ as one might hope or guess or expect, but instead to 
+\begin_inset Formula $\left[0,0,0,\cdots\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $p$
+\end_inset
+
+-adic odometers are interval maps; they re-arrange countable sequences of
+ subintervals of the unit interval.
+ Here, likewise, the beta odometer rarranges intervals, at least in the
+ sense that rearrangements are disjoint.
+ So, the interval 
 \begin_inset Formula $\left(\varphi,2\right)$
 \end_inset
 
@@ -15442,7 +15589,7 @@ This is an interval map, in that the interval
 \end_inset
 
  albeit in a fractal manner, and likewise each subinterval bounded by the
- descending series of root to 
+ descending series of roots to 
 \begin_inset Formula $\beta^{n}-\beta^{n-1}-1=0$
 \end_inset
 
@@ -15451,8 +15598,9 @@ This is an interval map, in that the interval
 \end_inset
 
 .
- By self-symmetry, the sub-intervals will shuffle as well.
- The precise symmetry is not immediately obvious.
+ By self-symmetry, the sub-intervals will re-arrange as well.
+ A precise expression for the symmetry is not immediately obvious, but clearly
+ it must be governed by the dyadic monoid.
 \end_layout
 
 \begin_layout Subsection
