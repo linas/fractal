@@ -14088,7 +14088,7 @@ primary
 \end_inset
 
 , which is the largest discontinuity appearing in the figure, followed by
- it's doubling sequence, which always appears to the left of the leaer.
+ it's doubling sequence, which always appears to the left of the leader.
  The leader and it's doubling sequence is always bracketed by previous left
  and right leaders.
  This, the primary is identified by it's bracket: its the largest discontinuity
@@ -14137,7 +14137,7 @@ Let
 
 .
  It is convenient to provide two tables; the first characterizes the sequences
- to the right of 1, and the second tabe for those to the left.
+ to the right of 1, and the second table for those to the left.
  This helps avoid some confusion.
 \end_layout
 
@@ -14402,7 +14402,7 @@ right sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-2nd right subsequence
+2nd right sub-sequence
 \end_layout
 
 \end_inset
@@ -14598,7 +14598,7 @@ main sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-left subsequence
+left sub-sequence
 \end_layout
 
 \end_inset
@@ -14613,7 +14613,7 @@ left subsequence
 
 \begin_layout Standard
 The tables are confusing to read, because the left and right brackets are
- not arbitrary, but must consist of previous leaders or points in thier
+ not arbitrary, but must consist of previous leaders or points in their
  sequences.
  To provide order for this purpose, continued fraction notation, in the
  form of 
@@ -14663,11 +14663,11 @@ The tables are confusing to read, because the left and right brackets are
 \end_layout
 
 \begin_layout Standard
-The leader of the left subsequence can then be denoted as 
+The leader of the left sub-sequence can then be denoted as 
 \begin_inset Formula $\left[k,0\right]$
 \end_inset
 
- and the rest of the subsequence as 
+ and the rest of the sub-sequence as 
 \begin_inset Formula $\left[k,m\right]$
 \end_inset
 
@@ -14764,7 +14764,7 @@ This figure shows the integral
 \end_inset
 
 -Golden polynomials.
- Prominent discontinuities are labelled with a 
+ Prominent discontinuities are labeled with a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -14931,8 +14931,8 @@ where
 \end_inset
 
 .
- The bracketing relationship is vitaly important for constructing infinite
- sequences, and proving thier convergence.
+ The bracketing relationship is vitally important for constructing infinite
+ sequences, and proving their convergence.
  That is, let 
 \begin_inset Formula $\beta=\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
 \end_inset
@@ -14973,7 +14973,7 @@ The resulting sequences can be placed into descending order via a recursive
 status collapsed
 
 \begin_layout Plain Layout
-Its actaually in beta-xform/irred-fraction.c
+Its actually in beta-xform/irred-fraction.c
 \end_layout
 
 \end_inset
@@ -14986,31 +14986,23 @@ status open
 
 \begin_layout Plain Layout
 
-// Print polynomials in descending beta order
+# Print sequences in descending beta order
 \end_layout
 
 \begin_layout Plain Layout
 
-// The 
-\begin_inset Quotes eld
-\end_inset
-
-sequence
-\begin_inset Quotes erd
-\end_inset
-
- is the list [m_1, m_2, ...
+# The `sequence` is the list [m_1, m_2, ...
  ,  m_k]
 \end_layout
 
 \begin_layout Plain Layout
 
-// The maxlength parameter limits recursion to short sequences
+# The `maxlength` parameter limits recursion to short sequences (max k)
 \end_layout
 
 \begin_layout Plain Layout
 
-// The maxdepth paramter limits the largest value of each m_j
+# The `maxdepth` parameter limits the largest value of each m_j
 \end_layout
 
 \begin_layout Plain Layout
@@ -15024,12 +15016,12 @@ define iterate (sequence, maxlength, maxdepth)
 
 \begin_layout Plain Layout
 
-	// First, iterate to maximum length,
+	# First, iterate to maximum length,
 \end_layout
 
 \begin_layout Plain Layout
 
-	// appending a zero to the end of the sequence
+	# appending a zero to the end of the sequence.
 \end_layout
 
 \begin_layout Plain Layout
@@ -15048,7 +15040,7 @@ define iterate (sequence, maxlength, maxdepth)
 
 \begin_layout Plain Layout
 
-	// Output the resulting sequence
+	# Output the resulting sequence.
 \end_layout
 
 \begin_layout Plain Layout
@@ -15062,22 +15054,22 @@ define iterate (sequence, maxlength, maxdepth)
 
 \begin_layout Plain Layout
 
-	// Next, increment the tail element of the sequence
+	# Next, increment the tail element of the sequence
 \end_layout
 
 \begin_layout Plain Layout
 
-	// and recurse
+	# and recurse.
 \end_layout
 
 \begin_layout Plain Layout
 
-	if (tail(seqeunce) < maxdepth)
+	if (tail(sequence) < maxdepth)
 \end_layout
 
 \begin_layout Plain Layout
 
-		tail(seqeunce) += 1
+		tail(sequence) += 1
 \end_layout
 
 \begin_layout Plain Layout
@@ -15095,7 +15087,7 @@ The above algorithm will generate polynomials in
 \begin_inset Formula $\beta$
 \end_inset
 
--order, that is, in an order such that the the one real root of each polynomial
+-order, that is, in an order such that the one real root of each polynomial
  is less than the previous one.
  Printing starts at 
 \begin_inset Formula $\beta=2$
@@ -15174,7 +15166,7 @@ and so in the limit of large
 \end_layout
 
 \begin_layout Standard
-The encoding can almot be read off directly from the bit sequence.
+The encoding can almost be read off directly from the bit sequence.
  But not quite ...
  see the table below.
 \end_layout
@@ -16224,7 +16216,7 @@ The continued fraction expansion can be seen to be an odometer that is of
 \end_inset
 
 .
- A quick review of the concept of an odomoter is in order.
+ A quick review of the concept of an odometer is in order.
 \end_layout
 
 \begin_layout Standard
@@ -16403,7 +16395,7 @@ The
 
 \end_inset
 
-where this differs from the conventional defintion, being off-by-one, because
+where this differs from the conventional definition, being off-by-one, because
  the 
 \begin_inset Formula $m_{k}$
 \end_inset
@@ -16425,7 +16417,7 @@ noprefix "false"
 \begin_layout Standard
 That the mapping is a bijection is not hard to demonstrate.
  Certainly, for finite-length sequences, continued fractions are rationals;
- each such sequence determines a unique rational, and thus the peridoic
+ each such sequence determines a unique rational, and thus the periodic
  
 \begin_inset Formula $\beta$
 \end_inset
@@ -16467,20 +16459,20 @@ noprefix "false"
 
 .
  It is not hard to see that all possible such sequences occur.
- Likewise, every irrational number correspnds to a unique infinite-length
+ Likewise, every irrational number corresponds to a unique infinite-length
  continued fraction; again, every possible sequence occurs.
  Thus, the odometer provides a bijection between irrationals and non-periodic
  orbits.
  The only difficulty is presented by the rationals: any given rational number
  has several inequivalent continued fraction expansions, and is thus not
- strictly invertible.
+ strictly invertable.
  This difficulty is easily swept away by adopting an expansion convention:
  
 \emph on
 e.g.
 
 \emph default
- by taking the shortest possible continued fraction repesentation for any
+ by taking the shortest possible continued fraction representation for any
  given rational.
  In this way, one sees that the odometer is a bijection.
 \end_layout
@@ -16553,11 +16545,11 @@ Unlike the
 \end_inset
 
 -adic case, there is no way to increment the odometer by one unit.
- The best one can do is to write out the exansion for 
+ The best one can do is to write out the expansion for 
 \begin_inset Formula $\beta$
 \end_inset
 
-, decrement by some arbitarily small 
+, decrement by some arbitrarily small 
 \begin_inset Formula $\varepsilon$
 \end_inset
 
@@ -16613,7 +16605,7 @@ The
 
 -adic odometers are interval maps; they re-arrange countable sequences of
  subintervals of the unit interval.
- Here, likewise, the beta odometer rarranges intervals, at least in the
+ Here, likewise, the beta odometer rearranges intervals, at least in the
  sense that rearrangements are disjoint.
  So, the interval 
 \begin_inset Formula $\left(\varphi,2\right)$
@@ -16878,8 +16870,8 @@ These sequences are generic: they indicate how many different ways one can
 .
  From such partitions, it appears that one can build partitions of the positive
  integers that are disjoint, and whose union is the positive integers.
- This suggests a question: can these partititions be expressed as Beatty
- sequences?
+ This suggests a question: can these partitions be expressed as Beatty sequences
+?
 \end_layout
 
 \begin_layout Standard

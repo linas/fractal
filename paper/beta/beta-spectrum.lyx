@@ -12539,6 +12539,10 @@ noprefix "false"
 \end_inset
 
 .
+ The goal of the label is to provide a unique identifier for each discontinuity
+ on the graph; yet one that is easy to read off by visual examination.
+ Recall that each discontinuity corresponds to a periodic orbit, and so
+ these labels apply to the periodic orbits.
 \end_layout
 
 \begin_layout Standard
@@ -12634,7 +12638,374 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-This labelling is immediately useful,
+This labelling scheme is hopefully apparent.
+ The largest discontinuity is given a label of 
+\begin_inset Formula $\left[0\right]$
+\end_inset
+
+.
+ It is the leader of a period-doubling sequence, given labels 
+\begin_inset Formula $\left[1\right]$
+\end_inset
+
+, 
+\begin_inset Formula $\left[2\right]$
+\end_inset
+
+, and so on.
+ The largest discontinuity between 
+\begin_inset Formula $\left[n\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[n-1\right]$
+\end_inset
+
+ is given the label 
+\begin_inset Formula $\left[n,0\right]$
+\end_inset
+
+ and it leads a sequence 
+\begin_inset Formula $\left[n,1\right]$
+\end_inset
+
+, 
+\begin_inset Formula $\left[n,2\right]$
+\end_inset
+
+, and so on.
+ At the right-most end of the graph, at 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, the appropriate label appears to be 
+\begin_inset Formula $\left[-1\right]$
+\end_inset
+
+.
+ With this observation, the labelling is completely regular.
+ Each interval brackets a sequence of discontinuities, ad infinitum.
+\end_layout
+
+\begin_layout Standard
+The bracketing relationship can be writted as 
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{p}-1\right]
+\]
+
+\end_inset
+
+with where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the largest integer 
+\begin_inset Formula $1<p\le k-1$
+\end_inset
+
+ for which 
+\begin_inset Formula $m_{p}\ne0$
+\end_inset
+
+.
+ The notation here is that each label is brackets by a pair of shorter labels,
+ on the left, and on the right.
+ Each label corresponds to a specific 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value; write 
+\begin_inset Formula $\beta=\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
+\end_inset
+
+ for this value.
+ The bracketing relationship states that
+\begin_inset Formula 
+\[
+\beta\left(\left[m_{1},m_{2},\cdots,m_{k-1}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{p}-1\right]\right)
+\]
+
+\end_inset
+
+with the inequalities being strict.
+ Each interval is of decreasing size, limiting to zero.
+ One can thus conclude that infinite sequences 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
+\end_inset
+
+ are unique, and correspond one-to-one with the bracketed 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value.
+ That is, there is a bijection between the non-periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and the infinite length labels.
+\end_layout
+
+\begin_layout Standard
+There is a slight ambiguity for the labelling of the periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values.
+ Apparently, one can ake the identification 
+\begin_inset Formula 
+\[
+\left[-1\right]=\left[0,0,\cdots\right]
+\]
+
+\end_inset
+
+in that 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ appears as the limit of ever-lengthening sequences 
+\begin_inset Formula $\left[0,0,\cdots,0\right]$
+\end_inset
+
+.
+ Closer examination reveals that each discontinuity can be labelled this
+ way.
+ That is, each finite-length label has a corresponding infinte-length label:
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
+\]
+
+\end_inset
+
+From this, we can easily conclude that there is a bijection between each
+ inifinite length of strings of (non-negative) integers, and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values; they are in one-to-one correspondance.
+ (It is not hard to see that every possible sequence occurs once and only
+ once.)
+\end_layout
+
+\begin_layout Standard
+As each such 
+\begin_inset Formula $\beta$
+\end_inset
+
+ corresponds to a periodic orbit, it is the one real root of one of the
+ beta polynomials 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ for some 
+\begin_inset Formula $n$
+\end_inset
+
+; equivalently, it is the convergent of one of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci sequences, for that same 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ That value is given by a recursive formula:
+\begin_inset Formula 
+\[
+n=\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
+\]
+
+\end_inset
+
+which is anchored by 
+\begin_inset Formula $\left[m\right]=2^{m}$
+\end_inset
+
+.
+ These are the integer labels appears on figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalization-Integral"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The sequences can be generated in proper order via a simple recusrive algorithm,
+ given here.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Its actually in beta-xform/irred-fraction.c
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small},tabsize=3"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# Print sequences in descending beta order
+\end_layout
+
+\begin_layout Plain Layout
+
+# The `sequence` is the list [m_1, m_2, ...
+ ,  m_k]
+\end_layout
+
+\begin_layout Plain Layout
+
+# The `maxlength` parameter limits recursion to short sequences (max k)
+\end_layout
+
+\begin_layout Plain Layout
+
+# The `maxdepth` parameter limits the largest value of each m_j
+\end_layout
+
+\begin_layout Plain Layout
+
+define iterate (sequence, maxlength, maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	# First, iterate to maximum length,
+\end_layout
+
+\begin_layout Plain Layout
+
+	# appending a zero to the end of the sequence.
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (length(sequence) < maxlength)
+\end_layout
+
+\begin_layout Plain Layout
+
+		iterate (append (sequence, 0), maxlength, maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Output the resulting sequence.
+\end_layout
+
+\begin_layout Plain Layout
+
+	print(sequence)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	# Next, increment the tail element of the sequence
+\end_layout
+
+\begin_layout Plain Layout
+
+	# and recurse.
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (tail(sequence) < maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+		tail(sequence) += 1
+\end_layout
+
+\begin_layout Plain Layout
+
+		iteratate (sequence, maxlength, maxdepth)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+The above algorithm will generate polynomials in descending 
+\begin_inset Formula $\beta$
+\end_inset
+
+-order, that is, in an order such that the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ of each sequence is less than the previous one.
+\end_layout
+
+\begin_layout Standard
+The sequences 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
+\end_inset
+
+ can be re-interpreted as continued fractions, albeit off-by-one.
+ That is, for each such sequence, there is a real number 
+\begin_inset Formula 
+\[
+x=x\left(\left[m_{1},m_{2},\cdots\right]\right)=\frac{1}{m_{1}+1+\frac{1}{m_{2}+1+\frac{1}{\cdots}}}
+\]
+
+\end_inset
+
+With some care, one can construct a bijection between real numbers and onctinued
+ fractions.
+ There is no particular difficulty for non-terminating sequences: these
+ correspond to irrationals, and the correspondance is unique; again a bijection.
+ Difficulties show only for the rationals, where any given rational has
+ several inequivalent continued fraction expansions.
+ The ambiguity can be avoided by fiat: one could, for example, take the
+ shortest possible continued fraction expansion.
+\end_layout
+
+\begin_layout Standard
+Combining these two interpretations gives a bijection from the unit interval
+ back to itself.
+ This is terms the 
+\begin_inset Quotes eld
+\end_inset
+
+beta odometer
+\begin_inset Quotes erd
+\end_inset
+
+ and is illustrated in figure xx
 \end_layout
 
 \begin_layout Section
