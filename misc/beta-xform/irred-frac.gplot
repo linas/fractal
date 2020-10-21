@@ -13,13 +13,38 @@ set title "{/Symbol b}-Odometer"
 # Total fail... but of course, it cannot be a linear fractional transfomation!
 set xrange [0:1]
 set yrange [0:0.5]
-a=1
-c=-0.618
-c=-0.53
+
+# a=1
+# c=-0.618
+# c=-0.53
 # plot "irred-frac.dat" using ($2-1):($3/(1+$3)) with lines linewidth 2 title "main", \
 #     "irred-frac.dat" using (a*a*($2-1) / (a*c*($2-1)+1)):3 with lines linewidth 2 title "blowup"
 
-plot "irred-frac.dat" using (($2-1)/(0.7+($2-1))):($3/(1+$3)) with lines linewidth 2 title "main", \
+# Hmm well, this comes close....
+# plot "irred-frac.dat" using (($2-1)**1/(1+0.0625*($2-1)**2 + 0.5*($2-1))):($3/(1+$3)) with lines linewidth 2 title "main", \
+#     "irred-frac.dat" using ($2-1):3 with lines linewidth 2 title "blowup"
+# 
+
+# Wow! this one comes really close!, especially for the samll betas!
+# plot "irred-frac.dat" using (($2-1)/(1+0.5*0.618034*($2-1)**2 + 0.5*0.618034*($2-1))):($3/(1+$3)) with lines linewidth 2 title "main", \
+
+# OK, so this is even closer!
+# plot "irred-frac.dat" using (($2-1)/(1 + 0.25*0.618034*($2-1)**3 + 0.5*0.618034*($2-1)**2 + 0.5*0.618034*($2-1))):($3/(1+$3)) with lines linewidth 2 title "main", \
+
+# And this one tooo
+# plot "irred-frac.dat" using (($2-1)/(1 + 0.125*0.618034*($2-1)**3 + 0.5*0.618034*($2-1)**2 + 0.5*0.618034*($2-1))):($3/(1+$3)) with lines linewidth 2 title "main", \
+
+# And this one too
+# plot "irred-frac.dat" using (($2-1) * (1 - 0.618*0.618*($2-1))):($3/(1+$3)) with lines linewidth 2 title "main", \
+
+# This one isn't bad, because 0.39915268 = (* p (- 1 (* p (- q 1))))
+# where p = phi and q=1.465571231876768 is the next root.
+# plot "irred-frac.dat" using (($2-1) * (1 - 0.39915268 * ($2-1)) ):($3/(1+$3)) with lines linewidth 2 title "main", \
+
+p = 1.618033988749895
+op = 0.618033988749895
+
+plot "irred-frac.dat" using (($2-1) * (1 - op*op*($2-1))):($3/(1+$3)) with lines linewidth 2 title "main", \
      "irred-frac.dat" using ($2-1):3 with lines linewidth 2 title "blowup"
 #
 #####################################################
