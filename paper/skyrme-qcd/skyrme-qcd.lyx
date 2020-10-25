@@ -178,7 +178,7 @@ Skyrme Effective Lagrangian
 From Wikipedia:
 \begin_inset Formula 
 \[
-\mathcal{L}=\frac{-f_{\pi}^{2}}{16}\mbox{ tr}L_{\mu}L^{\mu}+\frac{1}{32g^{2}}\mbox{ tr}\left[L_{\mu},L_{\nu}\right]^{2}-\frac{f_{\pi}^{2}m_{\pi}^{2}}{8}\mbox{tr}\left(1-U\right)
+\mathcal{L}=\frac{-f_{\pi}^{2}}{4}\mbox{ tr}L_{\mu}L^{\mu}+\frac{1}{32e^{2}}\mbox{ tr}\left[L_{\mu},L_{\nu}\right]^{2}-\frac{f_{\pi}^{2}m_{\pi}^{2}}{2}\mbox{tr}\left(1-U\right)
 \]
 
 \end_inset
@@ -222,6 +222,60 @@ where
 This is the Lagrangian describing the non-linear sigma model with a quartic
  term in Minkowski space.
  Its got a soliton, the Skyrmion.
+\end_layout
+
+\begin_layout Standard
+To avoid confusion about the dimensionful constants, here they are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{\pi}=93\mbox{ MeV}\qquad g_{A}=1.29\qquad m_{\pi}=137\mbox{ MeV }\qquad M_{N}=939\mbox{ MeV}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\phi$
+\end_inset
+
+ be the conventional pseudoscalar meson field; the normalization is such
+ that 
+\begin_inset Formula $U=\exp i\phi\sqrt{2}/f_{\pi}$
+\end_inset
+
+where 
+\begin_inset Formula $f_{\pi}$
+\end_inset
+
+ is the pion decay constant, 
+\begin_inset Formula $g_{A}$
+\end_inset
+
+ is the axial coupling, i.e.
+ the coupling of the axial current to the nucleon, and 
+\begin_inset Formula $m_{\pi}$
+\end_inset
+
+ the pion mass, and 
+\begin_inset Formula $M_{N}$
+\end_inset
+
+ the nucleon mass.
+ From phenomenology, one should have 
+\begin_inset Formula $e\approx5$
+\end_inset
+
+.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Schechter99"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -333,22 +387,39 @@ y visible? And the last step, with spinors, why would that be anything other
  than a morass? This whole program feels,stupid, unpromising...
 \end_layout
 
+\begin_layout Standard
+How this compares to other things:
+\end_layout
+
+\begin_layout Itemize
+'t Hooft shows that in the large 
+\begin_inset Formula $N_{C}$
+\end_inset
+
+ expansion i.e.
+ 
+\begin_inset Formula $N_{C}\to\infty$
+\end_inset
+
+ that the QCD Lagriangian looks like a weakly interacting meson lagrangian.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "tHooft74,tHooft75"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Conventions
 \end_layout
 
 \begin_layout Standard
 Some numbers that are irrelevant to the current problem, but handy to have
- at fingertips, just in case!?
-\begin_inset Formula 
-\[
-f_{\pi}=185\mbox{ MeV}\qquad g_{A}=1.29\qquad m_{\pi}=137\mbox{ MeV }\qquad M_{N}=2016\mbox{ MeV}
-\]
-
-\end_inset
-
-We'll descend to SU(2) flavor symmetry very quickly, but lets try to stay
- generic whenever possible.
+ at fingertips, just in case!?We'll descend to SU(2) flavor symmetry very
+ quickly, but lets try to stay generic whenever possible.
 \end_layout
 
 \begin_layout Standard
@@ -401,12 +472,6 @@ Let
 \end_inset
 
 .
- This function 
-\begin_inset Formula $p$
-\end_inset
-
- will be later be used as a parity operator, or a symmetrizer, and will
- be used to define the vector and axial vector fields.
  The fixed points 
 \begin_inset Formula $h\in G$
 \end_inset
@@ -432,6 +497,17 @@ Let
 \end_layout
 
 \begin_layout Standard
+This function 
+\begin_inset Formula $p$
+\end_inset
+
+ will be later be used as a kind of parity operator, or a symmetrizer, and
+ will be used to define the vector and axial vector built from chiral fields.
+ For now, there is no need to appeal to this, so we will proceed in a general
+ setting for as long as possible.
+\end_layout
+
+\begin_layout Standard
 Let 
 \begin_inset Formula $\mathfrak{g}$
 \end_inset
@@ -449,11 +525,11 @@ Let
 \begin_inset Formula $\mathfrak{g}$
 \end_inset
 
- and 
+ and since 
 \begin_inset Formula $p^{2}=1$
 \end_inset
 
- and so it's eigenvalues are 
+ the identity, it's eigenvalues are 
 \begin_inset Formula $\pm1$
 \end_inset
 
@@ -462,19 +538,19 @@ Let
 \begin_inset Formula $\mathfrak{g}$
 \end_inset
 
- into 
+ into odd and even subspaces 
 \begin_inset Formula $\mathfrak{g}=\mathfrak{m}\oplus\mathfrak{h}$
 \end_inset
 
- where 
+ The odd-parity subspace 
 \begin_inset Formula $\mathfrak{m}$
 \end_inset
 
- is the tangent space of 
+ can be identified as the tangent space of 
 \begin_inset Formula $G/H$
 \end_inset
 
- at the identity and 
+ at the identity and the even-parity subspace 
 \begin_inset Formula $\mathfrak{h}$
 \end_inset
 
@@ -566,7 +642,7 @@ p\left(\gamma^{-1}\partial_{t}\gamma\right)=p\left(\gamma^{-1}\right)\partial_{t
 \end_layout
 
 \begin_layout Subsection
-Vector and Axial-Gauge fields
+Vector and Gauge fields
 \end_layout
 
 \begin_layout Standard
@@ -583,12 +659,20 @@ Let
 \begin_inset Formula $g:M\to G$
 \end_inset
 
- a section of the principle bundle and let 
+ a section of the principle bundle of 
+\begin_inset Formula $G$
+\end_inset
+
+ ovre 
+\begin_inset Formula $M$
+\end_inset
+
+ and let 
 \begin_inset Formula $h:M\to H$
 \end_inset
 
  be a gauge transformation.
- The even and odd parity vector and axial vector fields are 
+ Define the even and odd parity vector and axial vector fields as 
 \begin_inset Formula 
 \[
 L_{\mu}=\pi_{\mathfrak{m}}\circ\left(g^{-1}\partial_{\mu}g\right)\quad\mbox{ and }\quad A_{\mu}=\pi_{\mathfrak{h}}\circ\left(g^{-1}\partial_{\mu}g\right)
@@ -673,12 +757,28 @@ Note that
 \end_layout
 
 \begin_layout Subsection
-Vector and axial vector fields
+Chiral vector fields
 \end_layout
 
 \begin_layout Standard
-The vector and axial-vector spaces arise as the diagonal and modulo spaces
- of a product.
+The standard chiral interpretation is to take the vector and axial-vector
+ spaces as the diagonal and modulo spaces of a product of the 
+\begin_inset Quotes eld
+\end_inset
+
+left
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+right
+\begin_inset Quotes erd
+\end_inset
+
+ chiral fields.
  Write
 \end_layout
 
@@ -690,14 +790,15 @@ G=H\times H
 
 \end_inset
 
-and 
+Then 
 \begin_inset Formula $p\left(h_{L},h_{R}\right)=\left(h_{R},h_{L}\right)$
 \end_inset
 
- be the permutation of the two elements, i.e.
- exchangeing them.
- It acts as a symmetrizer picking out the diagonal in the middle.
- We mod out by this diagonal.
+ the permutation of the two elements satisfies 
+\begin_inset Formula $p^{2}=1$
+\end_inset
+
+ and thus can be used as a symmetrizer to split out the diagonal.
  The fixed points are 
 \begin_inset Formula $p\left(h,h\right)=\left(h,h\right)$
 \end_inset
@@ -719,8 +820,8 @@ and
 
 \end_inset
 
-All compact connected Lie groups work like this – the diagonal is a symmetric
- space diffeomorphic to the group itself.
+All products of compact connected Lie groups work like this – the diagonal
+ is a symmetric space diffeomorphic to the group itself.
 \end_layout
 
 \begin_layout Standard
@@ -756,6 +857,12 @@ Given bases vectors
  These two are the axial-vector and the vector subspaces.
 \end_layout
 
+\begin_layout Standard
+The historical basis for this chiral split is anchored in beta decay; the
+ weak interactions distinguish left from right.
+ This implied that the flavor symmetries must also have chiral components.
+\end_layout
+
 \begin_layout Subsection
 Next steps
 \end_layout
@@ -763,6 +870,30 @@ Next steps
 \begin_layout Standard
 I think the plan of attack needs to sktech all this stuff using broken notation,
  and maybe fix it later...
+\end_layout
+
+\begin_layout Standard
+To fourth order in the pion field 
+\begin_inset Formula $\vec{\theta}$
+\end_inset
+
+, we should get this:
+\begin_inset Formula 
+\[
+\mathcal{L}=\frac{1}{2}\partial_{\mu}\vec{\theta}\cdot\partial^{\mu}\vec{\theta}+\frac{1}{6f_{\pi}^{2}}\left\{ \left(\vec{\theta\cdot}\partial_{\mu}\vec{\theta}\right)^{2}-\left|\vec{\theta}\right|^{2}\partial_{\mu}\vec{\theta}\cdot\partial^{\mu}\vec{\theta}\right\} +\mathcal{O}\left(\left|\vec{\theta}\right|^{6}\right)
+\]
+
+\end_inset
+
+From phenomenology, 
+\begin_inset Formula $f_{\pi}\sim\sqrt{N_{C}}$
+\end_inset
+
+ and 
+\begin_inset Formula $e=1/\sqrt{N_{C}}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
