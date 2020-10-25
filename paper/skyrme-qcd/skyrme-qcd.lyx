@@ -170,7 +170,7 @@ Skyrme Effective Lagrangian
 From Wikipedia:
 \begin_inset Formula 
 \[
-\mathcal{L}=\frac{-f_{\pi}^{2}}{4}\int d^{4}x\mbox{ tr}L_{\mu}L^{\mu}+\frac{1}{32g^{2}}\mbox{ tr}\left[L_{\mu},L_{\nu}\right]^{2}
+\mathcal{L}=\frac{-f_{\pi}^{2}}{16}\mbox{ tr}L_{\mu}L^{\mu}+\frac{1}{32g^{2}}\mbox{ tr}\left[L_{\mu},L_{\nu}\right]^{2}-\frac{f_{\pi}^{2}m_{\pi}^{2}}{8}\mbox{tr}\left(1-U\right)
 \]
 
 \end_inset
@@ -291,15 +291,32 @@ Some numbers that are irrelevant to the current problem, but handy to have
  at fingertips, just in case!?
 \begin_inset Formula 
 \[
-f_{\pi}=185\mbox{ MeV}\quad g_{A}=1.29\quad m_{\pi}=137\mbox{ MeV }\quad M_{N}=2016\mbox{ MeV}
+f_{\pi}=185\mbox{ MeV}\qquad g_{A}=1.29\qquad m_{\pi}=137\mbox{ MeV }\qquad M_{N}=2016\mbox{ MeV}
 \]
 
 \end_inset
 
 We'll descend to SU(2) flavor symmetry very quickly, but lets try to stay
  generic whenever possible.
- The first step is to set up the vector and axial-vector spaces.
- We follow the usual convention here.
+\end_layout
+
+\begin_layout Standard
+For N-dimensional flavor symmetry, take the symmetry group as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=SU(N)\times SU(N)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Symmetric spaces
 \end_layout
 
 \begin_layout Standard
@@ -309,20 +326,26 @@ Let
 
  be a compact connected Lie group.
  Let 
-\begin_inset Formula $\sigma:G\to G$
+\begin_inset Formula $p:G\to G$
 \end_inset
 
  satisfy 
-\begin_inset Formula $\sigma\left(gg^{\prime}\right)=\sigma\left(g\right)\sigma\left(g^{\prime}\right)$
+\begin_inset Formula $p\left(gg^{\prime}\right)=p\left(g\right)p\left(g^{\prime}\right)$
 \end_inset
 
  and also 
-\begin_inset Formula $\left(\sigma\circ\sigma\right)\left(g\right)=g$
+\begin_inset Formula $p^{2}\left(g\right)=p\left(p\left(g\right)\right)=g$
 \end_inset
 
 .
+ This function 
+\begin_inset Formula $p$
+\end_inset
+
+ will be later be used as a parity operator, or a symmetrizer, and will
+ be used to define the vector and axial vector fields.
  The fixed points of 
-\begin_inset Formula $\sigma$
+\begin_inset Formula $p$
 \end_inset
 
  define a subgroup 
@@ -347,7 +370,7 @@ Let
 
 .
  Then 
-\begin_inset Formula $\sigma$
+\begin_inset Formula $p$
 \end_inset
 
  descends to 
@@ -355,7 +378,7 @@ Let
 \end_inset
 
  and 
-\begin_inset Formula $\sigma^{2}=1$
+\begin_inset Formula $p^{2}=1$
 \end_inset
 
  and so it's eigenvalues are 
@@ -399,6 +422,89 @@ Let
 the last relaton holding because ...
 \end_layout
 
+\begin_layout Subsection
+Vector and Axial-Gauge fields
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a spin manifold.
+ Let 
+\begin_inset Formula $\phi:M\to G/H$
+\end_inset
+
+ the physical field, with 
+\begin_inset Formula $g:M\to G$
+\end_inset
+
+ a section of the principle bundle and let 
+\begin_inset Formula $h:M\to H$
+\end_inset
+
+ be a gauge transformation.
+ The even and odd parity vector and axial vector fields are 
+\begin_inset Formula 
+\[
+L_{\mu}=\pi_{\mathfrak{m}}\circ\left(g^{-1}\partial_{\mu}g\right)\quad\mbox{ and }\quad A_{\mu}=\pi_{\mathfrak{h}}\circ\left(g^{-1}\partial_{\mu}g\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\pi_{\mathfrak{h}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{\mathfrak{m}}$
+\end_inset
+
+ are the projections 
+\begin_inset Formula $\pi_{\mathfrak{h}}:\mathfrak{g}\to\mathfrak{h}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{\mathfrak{m}}:\mathfrak{g}\to\mathfrak{m}$
+\end_inset
+
+.
+ Under gauge transformations 
+\begin_inset Formula $g\to gh$
+\end_inset
+
+, these transform as 
+\begin_inset Formula 
+\[
+L_{\mu}\mapsto h^{-1}L_{\mu}h\quad\mbox{ and }\quad A_{\mu}\mapsto h^{-1}A_{\mu}h+h^{-1}\partial_{\mu}h
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $L_{\mu}$
+\end_inset
+
+ transforms as a differential 1-form, while 
+\begin_inset Formula $A_{\mu}$
+\end_inset
+
+ transforms as a gauge field, that is, 
+\begin_inset Formula $A_{\mu}$
+\end_inset
+
+ is the affine connection (on the tangent bundle of 
+\begin_inset Formula $G/H$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Vector and axial vector fields
+\end_layout
+
 \begin_layout Standard
 The vector and axial-vector spaces arise as the diagonal and modulo spaces
  of a product.
@@ -414,15 +520,15 @@ G=H\times H
 \end_inset
 
 and 
-\begin_inset Formula $\sigma\left(h_{L},h_{R}\right)=\left(h_{R},h_{L}\right)$
+\begin_inset Formula $p\left(h_{L},h_{R}\right)=\left(h_{R},h_{L}\right)$
 \end_inset
 
  be the permutation of the two elements, i.e.
- swapping them.
+ exchangeing them.
  It acts as a symmetrizer picking out the diagonal in the middle.
  We mod out by this diagonal.
  The fixed points are 
-\begin_inset Formula $\sigma\left(h,h\right)=\left(h,h\right)$
+\begin_inset Formula $p\left(h,h\right)=\left(h,h\right)$
 \end_inset
 
 .
@@ -464,7 +570,7 @@ Given bases vectors
 \end_inset
 
  which corresponds to the 
-\begin_inset Formula $\sigma=-1$
+\begin_inset Formula $p=-1$
 \end_inset
 
  eigenspace, and 
@@ -472,26 +578,11 @@ Given bases vectors
 \end_inset
 
  as the basis for the 
-\begin_inset Formula $\sigma=+1$
+\begin_inset Formula $p=+1$
 \end_inset
 
  eigenspace.
  These two are the axial-vector and the vector subspaces.
-\end_layout
-
-\begin_layout Standard
-For N-dimensional flavor symmetry, take
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-G=SU(N)\times SU(N)
-\]
-
-\end_inset
-
-
 \end_layout
 
 \end_body
