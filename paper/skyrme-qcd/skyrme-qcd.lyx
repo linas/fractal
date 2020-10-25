@@ -140,9 +140,26 @@ As usual, In diving into this unlettered, unread.
 \end_layout
 
 \begin_layout Standard
-Other notes: There is no quantum in here; this is a series of manipulations
- applied to purely classical fields.
- 
+Other notes:
+\end_layout
+
+\begin_layout Itemize
+There is no quantum in here; this is a series of manipulations applied to
+ purely classical fields.
+\end_layout
+
+\begin_layout Itemize
+The fermions will be Weyl fermions, and will not be presumed to have any
+ dynamics of thier own; they inherit from whatever the Skyrme effective
+ lagrangian forces upon them.
+ If they happen to self-organize into a Dirac form, that would be great,
+ but it is not assumed a priori.
+\end_layout
+
+\begin_layout Itemize
+The free/bound factorization requires recoding eveything into a Hamiltonian
+ form, with conjugate variables, and thence into ladder operators.
+ This follows the broad outlines set forth in the XXX paper.
 \end_layout
 
 \begin_layout Section
@@ -150,10 +167,10 @@ Skyrme Effective Lagrangian
 \end_layout
 
 \begin_layout Standard
-From memory, so this may be wrong:
+From Wikipedia:
 \begin_inset Formula 
 \[
-\mathcal{L}=\frac{1}{4}\int d^{4}x\mbox{ tr}L_{\mu}L^{\mu}+\frac{f_{\pi}^{2}}{16\pi^{2}}\mbox{ tr}\left[L_{\mu},L_{\nu}\right]^{2}
+\mathcal{L}=\frac{-f_{\pi}^{2}}{4}\int d^{4}x\mbox{ tr}L_{\mu}L^{\mu}+\frac{1}{32g^{2}}\mbox{ tr}\left[L_{\mu},L_{\nu}\right]^{2}
 \]
 
 \end_inset
@@ -162,7 +179,11 @@ where
 \begin_inset Formula $f_{\pi}$
 \end_inset
 
- is the pion-nuclean coupling strengh, and 
+ is the pion-nuclean coupling strengh, 
+\begin_inset Formula $g$
+\end_inset
+
+ is the vector-pion coupling (rho meson) and 
 \begin_inset Formula 
 \[
 L_{\mu}=U^{\dagger}\partial_{\mu}U
@@ -173,7 +194,7 @@ L_{\mu}=U^{\dagger}\partial_{\mu}U
 and 
 \begin_inset Formula 
 \[
-U=\exp i\vec{\tau}\cdot\vec{\sigma}
+U=\exp i\vec{\tau}\cdot\vec{\theta}
 \]
 
 \end_inset
@@ -183,7 +204,7 @@ where
 \end_inset
 
  are the Pauli matrices, and 
-\begin_inset Formula $\vec{\sigma}$
+\begin_inset Formula $\vec{\theta}$
 \end_inset
 
  is the non-linear sigma field.
@@ -250,8 +271,227 @@ This should probably be done twice: once with pions, and once with fermions.
 \end_layout
 
 \begin_layout Standard
-Questions: (1) how can the algebra be double-checked? (2) What algebra package
- can be used to expediate the calculations?
+Questions:
+\end_layout
+
+\begin_layout Enumerate
+How can the algebra be double-checked?
+\end_layout
+
+\begin_layout Enumerate
+What algebra package can be used to expediate the calculations?
+\end_layout
+
+\begin_layout Subsection
+Conventions
+\end_layout
+
+\begin_layout Standard
+Some numbers that are irrelevant to the current problem, but handy to have
+ at fingertips, just in case!?
+\begin_inset Formula 
+\[
+f_{\pi}=185\mbox{ MeV}\quad g_{A}=1.29\quad m_{\pi}=137\mbox{ MeV }\quad M_{N}=2016\mbox{ MeV}
+\]
+
+\end_inset
+
+We'll descend to SU(2) flavor symmetry very quickly, but lets try to stay
+ generic whenever possible.
+ The first step is to set up the vector and axial-vector spaces.
+ We follow the usual convention here.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a compact connected Lie group.
+ Let 
+\begin_inset Formula $\sigma:G\to G$
+\end_inset
+
+ satisfy 
+\begin_inset Formula $\sigma\left(gg^{\prime}\right)=\sigma\left(g\right)\sigma\left(g^{\prime}\right)$
+\end_inset
+
+ and also 
+\begin_inset Formula $\left(\sigma\circ\sigma\right)\left(g\right)=g$
+\end_inset
+
+.
+ The fixed points of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ define a subgroup 
+\begin_inset Formula $H\subset G$
+\end_inset
+
+ and the quotient space 
+\begin_inset Formula $G/H$
+\end_inset
+
+ is a symmetric space.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+ be the correspoding Lie algbera of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ descends to 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma^{2}=1$
+\end_inset
+
+ and so it's eigenvalues are 
+\begin_inset Formula $\pm1$
+\end_inset
+
+.
+ It splits 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+ into 
+\begin_inset Formula $\mathfrak{g}=\mathfrak{m}\oplus\mathfrak{h}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ is the tangent space of 
+\begin_inset Formula $G/H$
+\end_inset
+
+ at the identity and 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ is the Lie algebra of 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\[
+\left[\mathfrak{m},\mathfrak{h}\right]\subset\mathfrak{m}\quad\mbox{ and }\quad\left[\mathfrak{m},\mathfrak{m}\right]\subset\mathfrak{h}
+\]
+
+\end_inset
+
+the last relaton holding because ...
+\end_layout
+
+\begin_layout Standard
+The vector and axial-vector spaces arise as the diagonal and modulo spaces
+ of a product.
+ Write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=H\times H
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\sigma\left(h_{L},h_{R}\right)=\left(h_{R},h_{L}\right)$
+\end_inset
+
+ be the permutation of the two elements, i.e.
+ swapping them.
+ It acts as a symmetrizer picking out the diagonal in the middle.
+ We mod out by this diagonal.
+ The fixed points are 
+\begin_inset Formula $\sigma\left(h,h\right)=\left(h,h\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G/H=\left(H\times H\right)/H$
+\end_inset
+
+ is diffeomorphic to 
+\begin_inset Formula $H$
+\end_inset
+
+, the explicit diffeomorphism is 
+\begin_inset Formula 
+\[
+\left(h_{L},h_{R}\right)\mapsto U=h_{L}^{-1}h_{R}
+\]
+
+\end_inset
+
+All compact connected Lie groups work like this – the diagonal is a symmetric
+ space diffeomorphic to the group itself.
+\end_layout
+
+\begin_layout Standard
+Given bases vectors 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ we can write an explicit basis for 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ as 
+\begin_inset Formula $\left(e_{i},-e_{i}\right)$
+\end_inset
+
+ which corresponds to the 
+\begin_inset Formula $\sigma=-1$
+\end_inset
+
+ eigenspace, and 
+\begin_inset Formula $\left(e_{i},e_{i}\right)$
+\end_inset
+
+ as the basis for the 
+\begin_inset Formula $\sigma=+1$
+\end_inset
+
+ eigenspace.
+ These two are the axial-vector and the vector subspaces.
+\end_layout
+
+\begin_layout Standard
+For N-dimensional flavor symmetry, take
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=SU(N)\times SU(N)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
