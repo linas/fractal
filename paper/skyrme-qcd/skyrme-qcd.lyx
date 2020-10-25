@@ -290,6 +290,49 @@ How can the algebra be double-checked?
 What algebra package can be used to expediate the calculations?
 \end_layout
 
+\begin_layout Standard
+Next steps.
+ We now want to:
+\end_layout
+
+\begin_layout Itemize
+Write does a Lagrangian (well, we did already...)
+\end_layout
+
+\begin_layout Itemize
+Write the equations of motion, I think we need these before we get to write
+ the Hamiltonian.
+\end_layout
+
+\begin_layout Itemize
+Write down a Hamiltonian.
+ That means writing down a pair of conjugate fields.
+\end_layout
+
+\begin_layout Itemize
+Write the ladder operators
+\end_layout
+
+\begin_layout Itemize
+Linearize
+\end_layout
+
+\begin_layout Itemize
+Perform canonical transformations.
+\end_layout
+
+\begin_layout Itemize
+Factor into spinors.
+ Oof dah.
+\end_layout
+
+\begin_layout Standard
+But, why, exactly, am I expecting any of this to lead to anything useful,
+ whatsoever? What would the first 5-6 steps yield, that aren't already implicitl
+y visible? And the last step, with spinors, why would that be anything other
+ than a morass? This whole program feels,stupid, unpromising...
+\end_layout
+
 \begin_layout Subsection
 Conventions
 \end_layout
@@ -434,12 +477,42 @@ Let
  Note that
 \begin_inset Formula 
 \[
-\left[\mathfrak{m},\mathfrak{h}\right]\subset\mathfrak{m}\quad\mbox{ and }\quad\left[\mathfrak{m},\mathfrak{m}\right]\subset\mathfrak{h}
+\left[\mathfrak{h},\mathfrak{h}\right]\subseteq\mathfrak{h}\quad\mbox{ and }\quad\left[\mathfrak{m},\mathfrak{h}\right]\subseteq\mathfrak{m}\quad\mbox{ and }\quad\left[\mathfrak{m},\mathfrak{m}\right]\mathfrak{\subseteq h}
 \]
 
 \end_inset
 
-the last relaton holding because ...
+The easiest way to see this is to note that 
+\begin_inset Formula $p\left[X,Y\right]=\left[p\left(X\right),p\left(Y\right)\right]$
+\end_inset
+
+ for all 
+\begin_inset Formula $X,Y\in\mathfrak{g}$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $X=X_{\mathfrak{m}}\oplus X_{\mathfrak{h}}$
+\end_inset
+
+ and note the 
+\begin_inset Formula $p\left(X_{\mathfrak{m}}\oplus X_{\mathfrak{h}}\right)=\left(-X_{\mathfrak{m}}\right)\oplus X_{\mathfrak{h}}$
+\end_inset
+
+.
+ Then clearly the parity of 
+\begin_inset Formula $\left[X_{\mathfrak{m}}\oplus0,0\oplus Y_{\mathfrak{h}}\right]$
+\end_inset
+
+ is negative, while the parity of 
+\begin_inset Formula $\left[0\oplus X_{\mathfrak{h}},0\oplus Y_{\mathfrak{h}}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[X_{\mathfrak{m}}\oplus0,Y_{\mathfrak{m}}\oplus0\right]$
+\end_inset
+
+ is positive.
 \end_layout
 
 \begin_layout Subsection
@@ -502,6 +575,10 @@ L_{\mu}\mapsto h^{-1}L_{\mu}h\quad\mbox{ and }\quad A_{\mu}\mapsto h^{-1}A_{\mu}
 
 \end_inset
 
+What is the easiest way to see this?
+\end_layout
+
+\begin_layout Standard
 Note that 
 \begin_inset Formula $L_{\mu}$
 \end_inset
@@ -563,7 +640,7 @@ and
 , the explicit diffeomorphism is 
 \begin_inset Formula 
 \[
-\left(h_{L},h_{R}\right)\mapsto U=h_{L}^{-1}h_{R}
+\left(h_{L},h_{R}\right)\mapsto U=h_{L}h_{R}^{-1}
 \]
 
 \end_inset
@@ -607,41 +684,6 @@ Given bases vectors
 
 \begin_layout Subsection
 Next steps
-\end_layout
-
-\begin_layout Standard
-We now want to:
-\end_layout
-
-\begin_layout Itemize
-Write does a Lagrangian (well, we did already...)
-\end_layout
-
-\begin_layout Itemize
-Write the equations of motion, I think we need these before we get to write
- the Hamiltonian.
-\end_layout
-
-\begin_layout Itemize
-Write down a Hamiltonian.
- That means writing down a pair of conjugate fields.
-\end_layout
-
-\begin_layout Itemize
-Write the ladder operators
-\end_layout
-
-\begin_layout Itemize
-Linearize
-\end_layout
-
-\begin_layout Itemize
-Perform canonical transformations.
-\end_layout
-
-\begin_layout Itemize
-Factor into spinors.
- Oof dah.
 \end_layout
 
 \begin_layout Standard
