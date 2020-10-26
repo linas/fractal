@@ -555,6 +555,7 @@ Let
 \begin_inset Formula $\mathfrak{g}=\mathfrak{m}\oplus\mathfrak{h}$
 \end_inset
 
+.
  The odd-parity subspace 
 \begin_inset Formula $\mathfrak{m}$
 \end_inset
@@ -616,7 +617,7 @@ The easiest way to see this is to note that
 \begin_layout Standard
 Two more identities are useful.
  The adjoint action 
-\begin_inset Formula $\mbox{Ad}_{g}X$
+\begin_inset Formula $\mbox{Ad}_{g}X=gXg^{-1}$
 \end_inset
 
  of 
@@ -654,8 +655,66 @@ p\left(\gamma^{-1}\partial_{t}\gamma\right)=p\left(\gamma^{-1}\right)\partial_{t
 
 \end_layout
 
+\begin_layout Standard
+Let's belabor the obvious; this will be useful a bit later.
+ Since 
+\begin_inset Formula $G$
+\end_inset
+
+ is a Lie group, the tangent space 
+\begin_inset Formula $TG$
+\end_inset
+
+ has a natural coordinate system given by the adjoint map.
+ That is, given a point 
+\begin_inset Formula $g\in G$
+\end_inset
+
+ and a basis vector 
+\begin_inset Formula $e_{i}\in\mathfrak{g}$
+\end_inset
+
+, the corresponding basis at point 
+\begin_inset Formula $g$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mbox{Ad}_{g}e_{i}=ge_{i}g^{-1}$
+\end_inset
+
+.
+ This basis splits into two parts, given by lifting the projections the
+ projections 
+\begin_inset Formula $\pi_{\mathfrak{h}}:\mathfrak{g}\to\mathfrak{h}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{\mathfrak{m}}:\mathfrak{g}\to\mathfrak{m}$
+\end_inset
+
+ to all of 
+\begin_inset Formula $TG$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Vector and Gauge fields
+\end_layout
+
+\begin_layout Standard
+The goal of this section is to set up the basic ingredients for the sigma
+ model as the dynamics of a field 
+\begin_inset Formula $\phi$
+\end_inset
+
+ valued in the symmetric space 
+\begin_inset Formula $G/H$
+\end_inset
+
+.
+ I'll try to do this carefully, to avoid later confusion due to glibness.
 \end_layout
 
 \begin_layout Standard
@@ -663,24 +722,65 @@ Let
 \begin_inset Formula $M$
 \end_inset
 
- be a spin manifold.
+ be the base manifold; its presumably some pseudo-Riemannian manifold, e.g.
+ Minkowski spacetime; anything will do for now.
  Let 
 \begin_inset Formula $\phi:M\to G/H$
 \end_inset
 
- the physical field, with 
-\begin_inset Formula $g:M\to G$
+ the physical field of the sigma model, the sigma-field.
+ Because 
+\begin_inset Formula $G/H$
 \end_inset
 
- a section of the principle bundle of 
-\begin_inset Formula $G$
+ is a symmetric space, we can take the chiral field 
+\begin_inset Formula $\phi$
 \end_inset
 
- ovre 
-\begin_inset Formula $M$
+ as being a section through a principle fiber bundle with group 
+\begin_inset Formula $H$
 \end_inset
 
- and let 
+.
+ A gauge transformation is given by 
+\begin_inset Formula $h:M\to H$
+\end_inset
+
+ and the physical field transforms as 
+\begin_inset Formula $\phi\mapsto\phi h$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This basis splits into a vertical and a horizontal part, given by the projection
+s 
+\begin_inset Formula $\pi_{\mathfrak{h}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{\mathfrak{m}}$
+\end_inset
+
+ are the projections 
+\begin_inset Formula $\pi_{\mathfrak{h}}:\mathfrak{g}\to\mathfrak{h}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{\mathfrak{m}}:\mathfrak{g}\to\mathfrak{m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let's try to do this properly, instead of winging it.
+ We've got
+\end_layout
+
+\begin_layout Standard
+Let let 
 \begin_inset Formula $h:M\to H$
 \end_inset
 
@@ -933,10 +1033,14 @@ d\mathcal{L}=\frac{\partial\mathcal{L}}{\partial\vec{\theta}}\cdot d\vec{\theta}
 
 \end_inset
 
-and so, for the generalized momenta, write
+and so, for the generalized momenta 
+\begin_inset Formula $\vec{\eta}$
+\end_inset
+
+, write
 \begin_inset Formula 
 \[
-\vec{\eta}=\frac{\partial\mathcal{L}}{\partial\dot{\vec{\theta}}}\cdot d\dot{\vec{\theta}}
+\vec{\eta}=\frac{\partial\mathcal{L}}{\partial\dot{\vec{\theta}}}
 \]
 
 \end_inset
@@ -949,7 +1053,181 @@ so that per the usual
 
 \end_inset
 
+It seems easiest to take the metric signature +++- and to write 
+\begin_inset Formula $\partial_{\mu}=\left(\partial_{x},\partial_{t}\right)$
+\end_inset
 
+ with the understanding that 
+\begin_inset Formula $\partial_{x}$
+\end_inset
+
+ runs over all of the spatial dimensions of the base manifold.
+ Starting from 
+\begin_inset Formula 
+\[
+\mathcal{L}=\frac{-f_{\pi}^{2}}{4}\mbox{ tr}L_{\mu}L^{\mu}+\frac{1}{32e^{2}}\mbox{ tr}\left[L_{\mu},L_{\nu}\right]^{2}+\frac{f_{\pi}^{2}m_{\pi}^{2}}{4}\mbox{tr}\left(U+U^{\dagger}-2\right)
+\]
+
+\end_inset
+
+we have 
+\begin_inset Formula 
+\[
+\mbox{ tr}L_{\mu}L^{\mu}=\mbox{ tr}L_{x}L_{x}-\mbox{ tr}L_{t}L_{t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $L_{\mu}=\pi_{\mathfrak{m}}\circ\left(g^{-1}\partial_{\mu}g\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let's try to do this properly, instead of winging it.
+ We've got four manifolds to deal with.
+ There is the base space 
+\begin_inset Formula $M$
+\end_inset
+
+ which we just split into space-like and time-like parts.
+ The global structure of 
+\begin_inset Formula $M$
+\end_inset
+
+ is uninteresting (for now), so may as well take it to be flat.
+ Then there's 
+\begin_inset Formula $G$
+\end_inset
+
+ as a manifold, 
+\begin_inset Formula $G/H$
+\end_inset
+
+ as a manifold, and the fiber 
+\begin_inset Formula $H$
+\end_inset
+
+ taken as a manifold.
+ The first step is to establish
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $g\in G$
+\end_inset
+
+ be a point on the group manifold 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Given a basis 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ for the Lie algebra 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+, it is extended to the tangent field 
+\begin_inset Formula 
+\[
+\partial_{i}=\frac{d}{dt}g^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are two ways to approach this; one is to write 
+\begin_inset Formula $\gamma:\mathbb{R}\to G$
+\end_inset
+
+ be a curve that passes through the identity at 
+\begin_inset Formula $t=0$
+\end_inset
+
+, and then take ...
+ I forget ...
+ 
+\begin_inset Formula $g^{-1}\gamma g$
+\end_inset
+
+? The tangent vector is then 
+\begin_inset Formula $\dot{\gamma}(0)=\dot{\vec{\theta}}$
+\end_inset
+
+ at time 
+\begin_inset Formula $t=0$
+\end_inset
+
+ and so 
+\begin_inset Formula $L_{t}=\pi_{\mathfrak{m}}\circ\left(g^{-1}\dot{\vec{\theta}}g\right)$
+\end_inset
+
+ ...
+\end_layout
+
+\begin_layout Standard
+The other way is to use the BCH formula and infinitessimal variations.
+ Write the group element 
+\begin_inset Formula $g\in G$
+\end_inset
+
+ as 
+\begin_inset Formula $g=\exp\vec{e}\cdot\vec{\theta}$
+\end_inset
+
+ where 
+\begin_inset Formula $\vec{e}_{i}\in\mathfrak{g}$
+\end_inset
+
+ are a set of basis vectors for the Lie algebra 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+.
+ Write the tangent as 
+\begin_inset Formula $\vec{\theta}\mapsto\vec{\theta}+\delta\theta$
+\end_inset
+
+ so that 
+\begin_inset Formula 
+\[
+g^{-1}\partial_{t}g=\exp-\vec{e}\cdot\vec{\theta}\;\exp\vec{e}\cdot\left(\vec{\theta}+\delta\theta\right)=\exp\left(\vec{e}\cdot\delta\theta-\frac{1}{2}\left[\vec{e}\cdot\vec{\theta},\vec{e}\cdot\delta\theta\right]\right)
+\]
+
+\end_inset
+
+Err, try again.
+ Let 
+\begin_inset Formula $\gamma:\mathbb{R}\to G$
+\end_inset
+
+ be a curve that passes through the identity at 
+\begin_inset Formula $t=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Weyl Spinors
+\end_layout
+
+\begin_layout Standard
+Lets recall how spinors are constructed.
+ Given a vector space 
+\begin_inset Formula $V$
+\end_inset
+
+ and a bilinear product ...
+ write ....
 \end_layout
 
 \begin_layout Standard
