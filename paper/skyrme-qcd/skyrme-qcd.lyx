@@ -488,6 +488,7 @@ Let
 \end_inset
 
 .
+ This is the definition of an involution.
  The fixed points 
 \begin_inset Formula $h\in G$
 \end_inset
@@ -509,7 +510,8 @@ Let
 \begin_inset Formula $G/H$
 \end_inset
 
- is a symmetric space.
+ is a symmetric space – by defintion, symmetric spaces are quotients of
+ a group by it's involution-invariant subgroup.
  It's assumed that 
 \begin_inset Formula $\alpha$
 \end_inset
@@ -552,9 +554,35 @@ parts
 \end_inset
 
  is then the diagonal of a product of these two parts.
- Later on, thesee will be identified as the left and right chiral pieces
+ Later on, these will be identified as the left and right chiral pieces
  of the sigma model; there is no need to do this, yet, and so the following
  proceeds in a generic fashion.
+ (There are actually three possibilities: 
+\begin_inset Formula $G$
+\end_inset
+
+ is a real simple Lie group, or 
+\begin_inset Formula $G$
+\end_inset
+
+ is the product of two compact simple Lie groups (this is the conventional
+ sigma model) or 
+\begin_inset Formula $G$
+\end_inset
+
+ is the complexification of a compact simple Lie group, in which case 
+\begin_inset Formula $G/H$
+\end_inset
+
+ is non-compact, and 
+\begin_inset Formula $H$
+\end_inset
+
+ is the maximal compact subgroup of 
+\begin_inset Formula $G$
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
@@ -974,16 +1002,23 @@ pure gauge
 \begin_inset Formula $F=G/H$
 \end_inset
 
- as the space of the sigma field, the first component is to be re-interpreted
- as a 1-form valued in the tangent space 
+ as the space of the sigma field, the component 
+\begin_inset Formula $\pi_{\mathfrak{m}}\left(g^{-1}dg\right)$
+\end_inset
+
+ is to be re-interpreted as a 1-form valued in the tangent space 
 \begin_inset Formula $T_{f}\left(F\right)$
 \end_inset
 
  where 
-\begin_inset Formula $f\in\pi^{-1}\left(g\right)$
+\begin_inset Formula $f=\pi\left(g\right)$
 \end_inset
 
+ and 
+\begin_inset Formula $\pi:G\to F$
+\end_inset
 
+ is the projection.
 \end_layout
 
 \begin_layout Standard
@@ -1143,41 +1178,11 @@ xxx—xxx
 \end_layout
 
 \begin_layout Standard
-xxx—xxx
-\end_layout
-
-\begin_layout Standard
-On the other hand, the function 
+The function 
 \begin_inset Formula $\phi:M\to G/H$
 \end_inset
 
  is to be interpreted as the physical field of the sigma model, the sigma-field.
-\end_layout
-
-\begin_layout Standard
-This basis splits into a vertical and a horizontal part, given by the projection
-s 
-\begin_inset Formula $\pi_{\mathfrak{h}}$
-\end_inset
-
- and 
-\begin_inset Formula $\pi_{\mathfrak{m}}$
-\end_inset
-
- are the projections 
-\begin_inset Formula $\pi_{\mathfrak{h}}:\mathfrak{g}\to\mathfrak{h}$
-\end_inset
-
- and 
-\begin_inset Formula $\pi_{\mathfrak{m}}:\mathfrak{g}\to\mathfrak{m}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Let's try to do this properly, instead of winging it.
- We've got
 \end_layout
 
 \begin_layout Standard
@@ -1244,6 +1249,13 @@ Note that
 \end_inset
 
 ).
+\end_layout
+
+\begin_layout Standard
+TODO: Fix the notational awkwardness here.
+ Earlier notation was phrased in terms of 1-forms, while the above uses
+ the notation conventional to physics.
+ I find this irksome.
 \end_layout
 
 \begin_layout Subsection
@@ -1400,8 +1412,12 @@ Hamiltons equations
 
 \begin_layout Standard
 Lets stupidly plow ahead.
- We need a spin manifold that is pseudo-Riemannian so that we can split
- out a time component.
+ We need a manifold that is Lorentzian, i.e.
+ pseudo-Riemannian with signature 
+\begin_inset Formula $(n-1,1)$
+\end_inset
+
+ so that we can (unambiguously) split out a time component.
  The total differential is
 \begin_inset Formula 
 \[
