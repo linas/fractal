@@ -717,7 +717,7 @@ The goal of this section is to set up the basic ingredients for the sigma
 \end_inset
 
 .
- This is not the conventional construction.
+ This is not the conventional construction but close to it.
  The end goal of the construction is to define 
 \begin_inset Formula 
 \[
@@ -731,8 +731,8 @@ where
 \end_inset
 
  is the projection above, and then use this in the Skyrme Lagrangian.
- This is well and fine.
- Unfortunately, practical calculations require the idea to be articulated.
+ This is well and fine, but practical calculations require the idea to be
+ articulated.
  I'll try to do this carefully, to avoid later confusion due to glibness.
  This necessitates a dive back to first principles and basic (textbook)
  definitions (The textbook being Bleecker).
@@ -819,6 +819,150 @@ This is a different
 \end_inset
 
  for this right-action.
+\end_layout
+
+\begin_layout Standard
+Given a subset 
+\begin_inset Formula $U\subset M$
+\end_inset
+
+, a connection is a 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+-valued 1-form 
+\begin_inset Formula $\omega$
+\end_inset
+
+ on 
+\begin_inset Formula $U$
+\end_inset
+
+ that is covariant under gauge transformations.
+ For the present purposes, a gauge transformation is a map 
+\begin_inset Formula $g:U\to G$
+\end_inset
+
+ and the connection transforms as 
+\begin_inset Formula 
+\[
+\omega\mapsto g^{-1}\omega g+g^{-1}dg
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Earlier, 
+\begin_inset Formula $G$
+\end_inset
+
+ was split into 
+\begin_inset Formula $G/H\times H$
+\end_inset
+
+ and correspondingly, 
+\begin_inset Formula $\mathfrak{g}=\mathfrak{m}\oplus\mathfrak{h}$
+\end_inset
+
+ and this split can be applied to the connection.
+ Since 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+-valued, write 
+\begin_inset Formula $\omega=\pi_{\mathfrak{m}}\left(\omega\right)\oplus\pi_{\mathfrak{h}}\left(\omega\right)=\omega_{\mathfrak{m}}\oplus\omega_{\mathfrak{h}}$
+\end_inset
+
+.
+ Under gauge transformations 
+\begin_inset Formula $h\in H$
+\end_inset
+
+, one has that 
+\begin_inset Formula 
+\[
+\pi_{\mathfrak{m}}\left(\omega\right)\mapsto\pi_{\mathfrak{m}}\left(h^{-1}\omega h+h^{-1}dh\right)=h^{-1}\pi_{\mathfrak{m}}\left(\omega\right)h
+\]
+
+\end_inset
+
+because 
+\begin_inset Formula $h^{-1}dh$
+\end_inset
+
+ is an 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+-valued 1-form, and thus projected out.
+ The other projection picks up this term: 
+\begin_inset Formula 
+\[
+\pi_{\mathfrak{h}}\left(\omega\right)\mapsto\pi_{\mathfrak{h}}\left(h^{-1}\omega h+h^{-1}dh\right)=h^{-1}\pi_{\mathfrak{h}}\left(\omega\right)h+h^{-1}dh
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The ingredients to the sigma model are obtained by setting the connection
+ 
+\begin_inset Formula $\omega$
+\end_inset
+
+ to zero globally; that is, 
+\begin_inset Formula $\omega=0$
+\end_inset
+
+ which in turn implies that 
+\begin_inset Formula $P$
+\end_inset
+
+ is globally trivial: 
+\begin_inset Formula $P=M\times G$
+\end_inset
+
+.
+ We can still perform gauge transformations.
+ These are
+\begin_inset Formula 
+\[
+\omega=0\mapsto g^{-1}dg
+\]
+
+\end_inset
+
+so that the connection is 
+\begin_inset Quotes eld
+\end_inset
+
+pure gauge
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The component 
+\begin_inset Formula $\pi_{\mathfrak{m}}\left(g^{-1}dg\right)$
+\end_inset
+
+ is non-zero, as is 
+\begin_inset Formula $\pi_{\mathfrak{h}}\left(g^{-1}dg\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+xxxx—xxx
 \end_layout
 
 \begin_layout Standard
@@ -970,118 +1114,7 @@ too big
 \end_layout
 
 \begin_layout Standard
-A connection on 
-\begin_inset Formula $P$
-\end_inset
-
- splits the tangent space 
-\begin_inset Formula $T_{p}P$
-\end_inset
-
- at 
-\begin_inset Formula $p\in P$
-\end_inset
-
- into horizontal and vertical spaces: 
-\begin_inset Formula $T_{p}P=K_{p}P\oplus V_{p}P$
-\end_inset
-
- with the vertical space 
-\begin_inset Formula $V_{p}P$
-\end_inset
-
- isomorphic to the Lie algebra 
-\begin_inset Formula $\mathfrak{g}$
-\end_inset
-
-
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Bleeker, section 1.2.1 page 29.
-\end_layout
-
-\end_inset
-
-.
- The horizontal space 
-\begin_inset Formula $K_{p}P$
-\end_inset
-
- is isomorphic to 
-\begin_inset Formula $T_{\pi\left(p\right)}M$
-\end_inset
-
- and obeys 
-\begin_inset Formula $R_{g*}\left(K_{p}\right)=K_{pg}$
-\end_inset
-
- where 
-\begin_inset Formula $R_{g*}$
-\end_inset
-
- is the differential of 
-\begin_inset Formula $R_{g}$
-\end_inset
-
-
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Given a map 
-\begin_inset Formula $f:M\to N$
-\end_inset
-
- and 
-\begin_inset Formula $x\in M$
-\end_inset
-
-, the differential is the linear map 
-\begin_inset Formula $f_{*}:T_{x}M\to T_{f(x)}N$
-\end_inset
-
- given by 
-\begin_inset Formula $f_{*}\left(\gamma^{\prime}\left(0\right)\right)=\left(f\circ\gamma\right)^{\prime}\left(0\right)$
-\end_inset
-
- for a curve 
-\begin_inset Formula $\gamma$
-\end_inset
-
- passing through 
-\begin_inset Formula $x$
-\end_inset
-
-.
- That is 
-\begin_inset Formula $\gamma:\mathbb{R}\to M$
-\end_inset
-
- with 
-\begin_inset Formula $\gamma\left(0\right)=x$
-\end_inset
-
-.
- See Bleeker section 0.2.5 page 8.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Earlier, we split 
-\begin_inset Formula $\mathfrak{g}=\mathfrak{m}\oplus\mathfrak{h}$
-\end_inset
-
- and do so again here, so that 
-\begin_inset Formula $V_{q}P=\pi_{\mathfrak{m}}\left(V_{q}P\right)\oplus\pi_{\mathfrak{h}}\left(V_{q}P\right)$
-\end_inset
-
-.
+xxx—xxx
 \end_layout
 
 \begin_layout Standard
@@ -1094,62 +1127,6 @@ On the other hand, the function
 \end_inset
 
  is to be interpreted as the physical field of the sigma model, the sigma-field.
-\end_layout
-
-\begin_layout Standard
-The tangent space 
-\begin_inset Formula $T_{\phi}\Phi$
-\end_inset
-
- at 
-\begin_inset Formula $\phi$
-\end_inset
-
- splits into horizontal 
-\begin_inset Formula $K_{\phi}\Phi$
-\end_inset
-
- and vertical 
-\begin_inset Formula $V_{\phi}\Phi$
-\end_inset
-
- components, i.e.
- 
-\begin_inset Formula $T_{\phi}\Phi=K_{\phi}\Phi\oplus V_{\phi}\Phi$
-\end_inset
-
- where 
-\begin_inset Formula $V_{\phi}\Phi$
-\end_inset
-
- is the space tangent to the fiber, 
-\emph on
-i.e.
-
-\emph default
- 
-\begin_inset Formula $V_{\phi}\Phi=T_{\phi}\left(\Phi_{x}\right)$
-\end_inset
-
- where 
-\begin_inset Formula $\Phi_{x}=\Phi_{\pi\left(\phi\right)}$
-\end_inset
-
- is the fiber that contains 
-\begin_inset Formula $\phi$
-\end_inset
-
-.
- Clearly, the vertical subspace is isomorphic to 
-\begin_inset Formula $\mathfrak{h}$
-\end_inset
-
-.
- The choice of 
-\begin_inset Formula $K_{\phi}\Phi$
-\end_inset
-
- corresponds to the specification of a connection.
 \end_layout
 
 \begin_layout Standard
