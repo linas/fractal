@@ -717,6 +717,7 @@ The goal of this section is to set up the basic ingredients for the sigma
 \end_inset
 
 .
+ This is not the conventional construction.
  The end goal of the construction is to define 
 \begin_inset Formula 
 \[
@@ -735,10 +736,6 @@ where
  I'll try to do this carefully, to avoid later confusion due to glibness.
  This necessitates a dive back to first principles and basic (textbook)
  definitions (The textbook being Bleecker).
-\end_layout
-
-\begin_layout Standard
-The
 \end_layout
 
 \begin_layout Standard
@@ -790,6 +787,11 @@ Let
 \end_inset
 
 .
+ Write 
+\begin_inset Formula $R_{g}:P\to P$
+\end_inset
+
+ for this right-action.
 \end_layout
 
 \begin_layout Standard
@@ -835,11 +837,8 @@ P\times_{G}F\to M
 
 \end_inset
 
-The space of all sections of this bundle is isomorphic to the space 
-\begin_inset Formula $C\left(P,F\right)$
-\end_inset
-
- defined as the space of all maps 
+The space of all sections of this bundle is isomorphic to the space of all
+ maps 
 \begin_inset Formula $\phi:P\to F$
 \end_inset
 
@@ -904,7 +903,7 @@ Conventionally, a (bosonic) particle field corresponds to an
 \begin_inset Formula $G$
 \end_inset
 
- acting on it by means of a representation in 
+ being a guage group, acting on it by means of a representation in 
 \begin_inset Formula $GL(V)$
 \end_inset
 
@@ -914,62 +913,144 @@ Conventionally, a (bosonic) particle field corresponds to an
 \begin_inset Formula $F=G/H$
 \end_inset
 
- – which brings us to the next point.
- The conventional construction of the sigma model does not use a symmetric
- space for the field, but uses a group manifold directly to represent the
- sigma field.
- The construction here is not the conventional one.
-\end_layout
-
-\begin_layout Standard
-The other reason is that
-\end_layout
-
-\begin_layout Standard
-What's more, the field value is meant to be invariant under a change of
- gauge, in that for 
-\begin_inset Formula $f\in F$
-\end_inset
-
- and 
-\begin_inset Formula $h\in H$
-\end_inset
-
- the gauge transformation is 
-\begin_inset Formula $f\mapsto hf=f$
-\end_inset
-
 .
- This is as it should be – the sigma model fields are meant to lie in the
- diagonal of the left and right flavor symmetries.
-\end_layout
+ Another difference is that the group 
+\begin_inset Formula $G$
+\end_inset
 
-\begin_layout Standard
-There's one 
+ is 
 \begin_inset Quotes eld
 \end_inset
 
-minor detail
+too big
 \begin_inset Quotes erd
 \end_inset
 
- to be addressed: the kinetic term of the Lagrangian will be build from
- differential forms, and if 
-\begin_inset Formula $h:M\to H$
+; the field 
+\begin_inset Formula $F$
 \end_inset
 
- is a gauge transformation, then the differential forms, naively construed,
- won't be gauge covariant.
- So we go through some pains to construct a connection.
- The goal of the construction will be to use the projection 
-\begin_inset Formula $\pi_{\mathfrak{h}}:\mathfrak{g}\to\mathfrak{h}$
+ is invariant under 
+\begin_inset Formula $H$
 \end_inset
 
- to project onto the gauge degrees of freedom, and 
-\begin_inset Formula $\pi_{\mathfrak{m}}:\mathfrak{g}\to\mathfrak{m}$
+ and not 
+\begin_inset Formula $G$
 \end_inset
 
- to project into the tangent space of the sigma field.
+.
+ Thus, some factorization is required.
+\end_layout
+
+\begin_layout Standard
+A connection on 
+\begin_inset Formula $P$
+\end_inset
+
+ splits the tangent space 
+\begin_inset Formula $T_{q}P$
+\end_inset
+
+ at 
+\begin_inset Formula $q\in P$
+\end_inset
+
+ into horizontal and vertical spaces: 
+\begin_inset Formula $T_{q}P=K_{q}P\oplus V_{q}P$
+\end_inset
+
+ with the vertical space 
+\begin_inset Formula $V_{q}P$
+\end_inset
+
+ isomorphic to the Lie algebra 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Bleeker, section 1.2.1 page 29.
+\end_layout
+
+\end_inset
+
+.
+ The horizontal space 
+\begin_inset Formula $K_{q}P$
+\end_inset
+
+ obeys 
+\begin_inset Formula $R_{g*}\left(K_{q}\right)=K_{qg}$
+\end_inset
+
+ where 
+\begin_inset Formula $R_{g*}$
+\end_inset
+
+ is the differential of 
+\begin_inset Formula $R_{g}$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Given a map 
+\begin_inset Formula $f:M\to N$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in M$
+\end_inset
+
+, the differential is the linear map 
+\begin_inset Formula $f_{*}:T_{x}M\to T_{f(x)}N$
+\end_inset
+
+ given by 
+\begin_inset Formula $f_{*}\left(\gamma^{\prime}\left(0\right)\right)=\left(f\circ\gamma\right)^{\prime}\left(0\right)$
+\end_inset
+
+ for a curve 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ passing through 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ That is 
+\begin_inset Formula $\gamma:\mathbb{R}\to M$
+\end_inset
+
+ with 
+\begin_inset Formula $\gamma\left(0\right)=x$
+\end_inset
+
+.
+ See Bleeker section 0.2.5 page 8.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Earlier, we split 
+\begin_inset Formula $\mathfrak{g}=\mathfrak{m}\oplus\mathfrak{h}$
+\end_inset
+
+ and do so again here, so that 
+\begin_inset Formula $V_{q}P=\pi_{\mathfrak{m}}\left(V_{q}P\right)\oplus\pi_{\mathfrak{h}}\left(V_{q}P\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -982,44 +1063,6 @@ On the other hand, the function
 \end_inset
 
  is to be interpreted as the physical field of the sigma model, the sigma-field.
- Because 
-\begin_inset Formula $G/H$
-\end_inset
-
- is a symmetric space, we can take the chiral field 
-\begin_inset Formula $\phi$
-\end_inset
-
- as being a section through a fiber bundle with group 
-\begin_inset Formula $H$
-\end_inset
-
-.
- A gauge transformation is given by 
-\begin_inset Formula $h:M\to H$
-\end_inset
-
- and the physical field transforms as 
-\begin_inset Formula $\phi\mapsto\phi h$
-\end_inset
-
-.
- There's a bit of slight-of-hand, in the above: on the one hand, the defintion
- of PFBs requires that the fibers of a PFB are diffeomorphic to the structure
- group.
- On the other hand, we want 
-\begin_inset Formula $G/H$
-\end_inset
-
- to be the fiber.
- Thus, to define a consistent sigma model, we have to have 
-\begin_inset Formula $G/H\cong H$
-\end_inset
-
- a diffeomorphism.
- This is a constraint imposed by the desire to build a sigma model.
- Whether it is posible to loosen this constraint is outside of the current
- concerns.
 \end_layout
 
 \begin_layout Standard
