@@ -455,7 +455,8 @@ Symmetric spaces
 \end_layout
 
 \begin_layout Standard
-This and the next two sections shamelessly stolen from 
+This and the next two sections flesh out the details of an idea presented
+ by Harland
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Harland16"
@@ -715,11 +716,13 @@ The goal of this section is to set up the basic ingredients for the sigma
 
 .
  I'll try to do this carefully, to avoid later confusion due to glibness.
+ This necessitates a dive back to first principles and basic (textbook)
+ definitions (The textbook being Bleecker).
 \end_layout
 
 \begin_layout Standard
 Let 
-\begin_inset Formula $\pi:\Phi\to M$
+\begin_inset Formula $\pi:P\to M$
 \end_inset
 
  be a smooth principal fiber bundle (PFB) over a smooth manifold 
@@ -727,29 +730,25 @@ Let
 \end_inset
 
  with structure group 
-\begin_inset Formula $H$
+\begin_inset Formula $G$
 \end_inset
 
 .
  Let 
-\begin_inset Formula $\phi\in\Phi$
+\begin_inset Formula $q\in P$
 \end_inset
 
  be a point above 
-\begin_inset Formula $\pi\left(\phi\right)=x$
+\begin_inset Formula $\pi\left(q\right)=x$
 \end_inset
 
 .
- For the sigma model, we want 
-\begin_inset Formula $H$
-\end_inset
-
- to be the structure group, so that 
-\begin_inset Formula $\Phi_{x}$
+ By definition, 
+\begin_inset Formula $P_{x}$
 \end_inset
 
  is diffeomorphic to 
-\begin_inset Formula $H$
+\begin_inset Formula $G$
 \end_inset
 
  for all 
@@ -758,18 +757,108 @@ Let
 
 .
  Given 
-\begin_inset Formula $\phi\in\Phi$
+\begin_inset Formula $q\in P$
 \end_inset
 
 , we have 
-\begin_inset Formula $H$
+\begin_inset Formula $G$
 \end_inset
 
  acting on the right, so that 
-\begin_inset Formula $\phi\mapsto\phi h$
+\begin_inset Formula $q\mapsto qg$
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $F$
+\end_inset
+
+ be some manifold, such that 
+\begin_inset Formula $G$
+\end_inset
+
+ acts on 
+\begin_inset Formula $F$
+\end_inset
+
+ on the left, 
+\emph on
+i.e.
+
+\emph default
+ so that for 
+\begin_inset Formula $f\in F$
+\end_inset
+
+ we have 
+\begin_inset Formula $f\mapsto gf$
+\end_inset
+
+.
+ The associated fiber bundle is
+\begin_inset Formula 
+\[
+P\times_{G}F\to M
+\]
+
+\end_inset
+
+The space of all sections of this bundle is isomorphic to the space 
+\begin_inset Formula $C\left(P,F\right)$
+\end_inset
+
+ defined as the space of all maps 
+\begin_inset Formula $\tau:P\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\tau\left(qg\right)=g^{-1}\tau\left(q\right)$
+\end_inset
+
+.
+ A specific choice of 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is a 
+\begin_inset Quotes eld
+\end_inset
+
+particle field
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Conventionally, a (bosonic) particle field corresponds to an 
+\begin_inset Formula $F$
+\end_inset
+
+ being a vector space 
+\begin_inset Formula $V$
+\end_inset
+
+, and 
+\begin_inset Formula $G$
+\end_inset
+
+ acting on it by means of a representation in 
+\begin_inset Formula $GL(V)$
+\end_inset
+
+.
+ This won't be done here, because the goal is to construct the sigma model
+ so that 
+\begin_inset Formula $F=G/H$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
@@ -816,10 +905,6 @@ On the other hand, the function
  This is a constraint imposed by the desire to build a sigma model.
  Whether it is posible to loosen this constraint is outside of the current
  concerns.
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \begin_layout Standard
