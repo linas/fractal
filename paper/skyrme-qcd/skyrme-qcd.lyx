@@ -170,6 +170,27 @@ literal "false"
 , a la Zakharov.
 \end_layout
 
+\begin_layout Subsection
+Review
+\end_layout
+
+\begin_layout Standard
+Apparently, I am rediscovering old ground.
+ A bit of work shows that the sigma model can be generically formulated
+ on symmtric spaces, see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yilmaz07"
+literal "false"
+
+\end_inset
+
+ which then promptly gives eight references to sigma models as symmetric
+ spaces.
+ Yikes!
+\end_layout
+
 \begin_layout Section
 Skyrme Effective Lagrangian
 \end_layout
@@ -1370,8 +1391,41 @@ Hamiltonian
 \end_layout
 
 \begin_layout Standard
-I think the plan of attack needs to sktech all this stuff using broken notation,
- and maybe fix it later...
+The goal of this section is to re-write the Lagrangian as a Hamiltonian,
+ and obtain an explicit expression for the conjugate momentum.
+ If this is possible, the next step is to write the ladder operators in
+ terms of the conjugate pair.
+ With these in hand, one can/should be able to find canonical transformations
+ that split the space into 
+\begin_inset Quotes eld
+\end_inset
+
+free
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+bound
+\begin_inset Quotes erd
+\end_inset
+
+ sectors.
+ The intent is to emulate what is being done by Janssen in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Janssen09"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Some random notes:
 \end_layout
 
 \begin_layout Standard
@@ -1411,14 +1465,27 @@ Hamiltons equations
 \end_layout
 
 \begin_layout Standard
+The proer formulation would be to write the Lagrangian in terms of 1-jets,
+ as is done in section 3.3.1 page 50 of Bleeker.
+ Doing so just right now is too confusing, so I will punt on this.
+\end_layout
+
+\begin_layout Standard
 Lets stupidly plow ahead.
- We need a manifold that is Lorentzian, i.e.
+ We need a base manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ that is Lorentzian, i.e.
  pseudo-Riemannian with signature 
 \begin_inset Formula $(n-1,1)$
 \end_inset
 
- so that we can (unambiguously) split out a time component.
- The total differential is
+, so that we can (unambiguously) split out a time component.
+\end_layout
+
+\begin_layout Standard
+The total differential is
 \begin_inset Formula 
 \[
 d\mathcal{L}=\frac{\partial\mathcal{L}}{\partial\vec{\theta}}\cdot d\vec{\theta}+\frac{\partial\mathcal{L}}{\partial\dot{\vec{\theta}}}\cdot d\dot{\vec{\theta}}+\frac{\partial\mathcal{L}}{\partial t}dt
