@@ -430,13 +430,8 @@ Conventions
 \end_layout
 
 \begin_layout Standard
-Some numbers that are irrelevant to the current problem, but handy to have
- at fingertips, just in case!?We'll descend to SU(2) flavor symmetry very
- quickly, but lets try to stay generic whenever possible.
-\end_layout
-
-\begin_layout Standard
-For N-dimensional flavor symmetry, take the symmetry group as
+The following sections will reconstruct the Skyrme model with N-dimensional
+ flavor symmetry, where the symmetry group is
 \end_layout
 
 \begin_layout Standard
@@ -447,7 +442,14 @@ G=SU(N)\times SU(N)
 
 \end_inset
 
+However, almost all of the development will not require this specific form;
+ it will be conducted in a generic fashion.
+ When in doubt, the above can be used as a touchstone, especially so by
+ setting 
+\begin_inset Formula $N=2$
+\end_inset
 
+.
 \end_layout
 
 \begin_layout Subsection
@@ -715,9 +717,28 @@ The goal of this section is to set up the basic ingredients for the sigma
 \end_inset
 
 .
+ The end goal of the construction is to define 
+\begin_inset Formula 
+\[
+L_{\mu}=\pi_{\mathfrak{m}}\circ\left(g^{-1}\partial_{\mu}g\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\pi_{\mathfrak{m}}:\mathfrak{g}\to\mathfrak{m}$
+\end_inset
+
+ is the projection above, and then use this in the Skyrme Lagrangian.
+ This is well and fine.
+ Unfortunately, practical calculations require the idea to be articulated.
  I'll try to do this carefully, to avoid later confusion due to glibness.
  This necessitates a dive back to first principles and basic (textbook)
  definitions (The textbook being Bleecker).
+\end_layout
+
+\begin_layout Standard
+The
 \end_layout
 
 \begin_layout Standard
@@ -776,7 +797,15 @@ Let
 \begin_inset Formula $F$
 \end_inset
 
- be some manifold, such that 
+ be some manifold (the 
+\begin_inset Quotes eld
+\end_inset
+
+field
+\begin_inset Quotes erd
+\end_inset
+
+ manifold), such that 
 \begin_inset Formula $G$
 \end_inset
 
@@ -811,16 +840,16 @@ The space of all sections of this bundle is isomorphic to the space
 \end_inset
 
  defined as the space of all maps 
-\begin_inset Formula $\tau:P\to F$
+\begin_inset Formula $\phi:P\to F$
 \end_inset
 
  such that 
-\begin_inset Formula $\tau\left(qg\right)=g^{-1}\tau\left(q\right)$
+\begin_inset Formula $\phi\left(qg\right)=g^{-1}\phi\left(q\right)$
 \end_inset
 
 .
  A specific choice of 
-\begin_inset Formula $\tau$
+\begin_inset Formula $\phi$
 \end_inset
 
  is a 
@@ -832,7 +861,38 @@ particle field
 \end_inset
 
 .
- Conventionally, a (bosonic) particle field corresponds to an 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Bleeker, section 3.1.1, page 43.
+\end_layout
+
+\end_inset
+
+ That this terminology is correct and appropriate can be most easily inuited
+ by considering a flat bundle 
+\begin_inset Formula $P=M\times G$
+\end_inset
+
+ and then considering a section (that is, ignoring 
+\begin_inset Formula $G)$
+\end_inset
+
+ to get a map 
+\begin_inset Formula $M\to F$
+\end_inset
+
+.
+ That map to be extended back over all of 
+\begin_inset Formula $P$
+\end_inset
+
+ with the desired properties.
+\end_layout
+
+\begin_layout Standard
+Conventionally, a (bosonic) particle field corresponds to an 
 \begin_inset Formula $F$
 \end_inset
 
@@ -854,11 +914,66 @@ particle field
 \begin_inset Formula $F=G/H$
 \end_inset
 
-.
+ – which brings us to the next point.
+ The conventional construction of the sigma model does not use a symmetric
+ space for the field, but uses a group manifold directly to represent the
+ sigma field.
+ The construction here is not the conventional one.
 \end_layout
 
 \begin_layout Standard
-xxx
+The other reason is that
+\end_layout
+
+\begin_layout Standard
+What's more, the field value is meant to be invariant under a change of
+ gauge, in that for 
+\begin_inset Formula $f\in F$
+\end_inset
+
+ and 
+\begin_inset Formula $h\in H$
+\end_inset
+
+ the gauge transformation is 
+\begin_inset Formula $f\mapsto hf=f$
+\end_inset
+
+.
+ This is as it should be – the sigma model fields are meant to lie in the
+ diagonal of the left and right flavor symmetries.
+\end_layout
+
+\begin_layout Standard
+There's one 
+\begin_inset Quotes eld
+\end_inset
+
+minor detail
+\begin_inset Quotes erd
+\end_inset
+
+ to be addressed: the kinetic term of the Lagrangian will be build from
+ differential forms, and if 
+\begin_inset Formula $h:M\to H$
+\end_inset
+
+ is a gauge transformation, then the differential forms, naively construed,
+ won't be gauge covariant.
+ So we go through some pains to construct a connection.
+ The goal of the construction will be to use the projection 
+\begin_inset Formula $\pi_{\mathfrak{h}}:\mathfrak{g}\to\mathfrak{h}$
+\end_inset
+
+ to project onto the gauge degrees of freedom, and 
+\begin_inset Formula $\pi_{\mathfrak{m}}:\mathfrak{g}\to\mathfrak{m}$
+\end_inset
+
+ to project into the tangent space of the sigma field.
+\end_layout
+
+\begin_layout Standard
+xxx—xxx
 \end_layout
 
 \begin_layout Standard
@@ -1424,6 +1539,11 @@ Err, try again.
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Yuck, this is a confusing mess.
+ We have to backtrack and fix things up above.
 \end_layout
 
 \begin_layout Section
