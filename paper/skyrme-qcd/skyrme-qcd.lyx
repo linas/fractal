@@ -476,15 +476,15 @@ Let
 
  be a compact connected Lie group.
  Let 
-\begin_inset Formula $p:G\to G$
+\begin_inset Formula $\alpha:G\to G$
 \end_inset
 
  satisfy 
-\begin_inset Formula $p\left(gg^{\prime}\right)=p\left(g\right)p\left(g^{\prime}\right)$
+\begin_inset Formula $\alpha\left(gg^{\prime}\right)=\alpha\left(g\right)\alpha\left(g^{\prime}\right)$
 \end_inset
 
  and also 
-\begin_inset Formula $p^{2}\left(g\right)=p\left(p\left(g\right)\right)=g$
+\begin_inset Formula $\alpha^{2}\left(g\right)=\alpha\left(\alpha\left(g\right)\right)=g$
 \end_inset
 
 .
@@ -493,11 +493,11 @@ Let
 \end_inset
 
  of 
-\begin_inset Formula $p$
+\begin_inset Formula $\alpha$
 \end_inset
 
  are by definition 
-\begin_inset Formula $p\left(h\right)=h$
+\begin_inset Formula $\alpha\left(h\right)=h$
 \end_inset
 
 .
@@ -510,17 +510,51 @@ Let
 \end_inset
 
  is a symmetric space.
+ It's assumed that 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is non-trivial, 
+\emph on
+i.e.
+
+\emph default
+ that 
+\begin_inset Formula $H$
+\end_inset
+
+ is a proper subgroup that 
+\begin_inset Formula $H$
+\end_inset
+
+ is not the trivial subgroup.
 \end_layout
 
 \begin_layout Standard
 This function 
-\begin_inset Formula $p$
+\begin_inset Formula $\alpha$
 \end_inset
 
- will be later be used as a kind of parity operator, or a symmetrizer, and
- will be used to define the vector and axial vector built from chiral fields.
- For now, there is no need to appeal to this, so we will proceed in a general
- setting for as long as possible.
+ can be interpreted as a permutation of two 
+\begin_inset Quotes eld
+\end_inset
+
+parts
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $G$
+\end_inset
+
+; the subgroup 
+\begin_inset Formula $H$
+\end_inset
+
+ is then the diagonal of a product of these two parts.
+ Later on, thesee will be identified as the left and right chiral pieces
+ of the sigma model; there is no need to do this, yet, and so the following
+ proceeds in a generic fashion.
 \end_layout
 
 \begin_layout Standard
@@ -528,7 +562,7 @@ Let
 \begin_inset Formula $\mathfrak{g}$
 \end_inset
 
- be the correspoding Lie algbera of 
+ be the corresponding Lie algbera of 
 \begin_inset Formula $G$
 \end_inset
 
@@ -542,7 +576,7 @@ Let
 \end_inset
 
  and since 
-\begin_inset Formula $p^{2}=1$
+\begin_inset Formula $\alpha^{2}=1$
 \end_inset
 
  the identity, it's eigenvalues are 
@@ -585,7 +619,7 @@ Let
 \end_inset
 
 The easiest way to see this is to note that 
-\begin_inset Formula $p\left[X,Y\right]=\left[p\left(X\right),p\left(Y\right)\right]$
+\begin_inset Formula $\alpha\left[X,Y\right]=\left[\alpha\left(X\right),\alpha\left(Y\right)\right]$
 \end_inset
 
  for all 
@@ -598,7 +632,7 @@ The easiest way to see this is to note that
 \end_inset
 
  and note the 
-\begin_inset Formula $p\left(X_{\mathfrak{m}}\oplus X_{\mathfrak{h}}\right)=\left(-X_{\mathfrak{m}}\right)\oplus X_{\mathfrak{h}}$
+\begin_inset Formula $\alpha\left(X_{\mathfrak{m}}\oplus X_{\mathfrak{h}}\right)=\left(-X_{\mathfrak{m}}\right)\oplus X_{\mathfrak{h}}$
 \end_inset
 
 .
@@ -618,7 +652,7 @@ The easiest way to see this is to note that
 \end_layout
 
 \begin_layout Standard
-Two more identities are useful.
+Two more identities will be useful.
  The adjoint action 
 \begin_inset Formula $\mbox{Ad}_{g}X=gXg^{-1}$
 \end_inset
@@ -634,7 +668,7 @@ Two more identities are useful.
  behaves as
 \begin_inset Formula 
 \[
-p\left(\mbox{Ad}_{g}X\right)=p\left(gXg^{-1}\right)=p\left(g\right)p\left(X\right)p\left(g^{-1}\right)=\mbox{Ad}_{p\left(g\right)}p\left(X\right)
+\alpha\left(\mbox{Ad}_{g}X\right)=\alpha\left(gXg^{-1}\right)=\alpha\left(g\right)\alpha\left(X\right)\alpha\left(g^{-1}\right)=\mbox{Ad}_{\alpha\left(g\right)}\alpha\left(X\right)
 \]
 
 \end_inset
@@ -650,7 +684,7 @@ Given a curve
  to the curve transforms as
 \begin_inset Formula 
 \[
-p\left(\gamma^{-1}\partial_{t}\gamma\right)=p\left(\gamma^{-1}\right)\partial_{t}p\left(\gamma\right)
+\alpha\left(\gamma^{-1}\partial_{t}\gamma\right)=\alpha\left(\gamma^{-1}\right)\partial_{t}\alpha\left(\gamma\right)
 \]
 
 \end_inset
@@ -740,7 +774,7 @@ where
 
 \begin_layout Standard
 Let 
-\begin_inset Formula $\pi:P\to M$
+\begin_inset Formula $P\to M$
 \end_inset
 
  be a smooth principal fiber bundle (PFB) over a smooth manifold 
@@ -752,42 +786,15 @@ Let
 \end_inset
 
 .
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-This is a diffferent 
-\begin_inset Formula $\pi$
-\end_inset
-
- than the previous one; which is which will hopefully be clear from context.
-\end_layout
-
-\end_inset
-
  Let 
 \begin_inset Formula $p\in P$
 \end_inset
 
  be a point above 
-\begin_inset Formula $\pi\left(p\right)=x$
+\begin_inset Formula $x$
 \end_inset
 
 .
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-This is a different 
-\begin_inset Formula $p$
-\end_inset
-
- than the previous one.
- Which is which will hopefully be clear from context.
-\end_layout
-
-\end_inset
-
  By definition, 
 \begin_inset Formula $P_{x}$
 \end_inset
@@ -901,7 +908,11 @@ because
 \begin_inset Formula $\mathfrak{h}$
 \end_inset
 
--valued 1-form, and thus projected out.
+-valued 1-form, and thus projected out (that is, 
+\begin_inset Formula $\pi_{\mathfrak{m}}\left(\mathfrak{h}\right)=0$
+\end_inset
+
+).
  The other projection picks up this term: 
 \begin_inset Formula 
 \[
@@ -956,6 +967,20 @@ pure gauge
 
  is non-zero, as is 
 \begin_inset Formula $\pi_{\mathfrak{h}}\left(g^{-1}dg\right)$
+\end_inset
+
+.
+ Writing 
+\begin_inset Formula $F=G/H$
+\end_inset
+
+ as the space of the sigma field, the first component is to be re-interpreted
+ as a 1-form valued in the tangent space 
+\begin_inset Formula $T_{f}\left(F\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $f\in\pi^{-1}\left(g\right)$
 \end_inset
 
 
@@ -1198,31 +1223,7 @@ L_{\mu}\mapsto h^{-1}L_{\mu}h\quad\mbox{ and }\quad A_{\mu}\mapsto h^{-1}A_{\mu}
 
 \end_inset
 
-The easiest way to see this is to explicitly write 
-\begin_inset Formula $g^{-1}\partial_{\mu}g=X_{\mu}$
-\end_inset
 
- so that 
-\begin_inset Formula 
-\[
-X_{\mu}\mapsto h^{-1}X_{\mu}h+h^{-1}\partial_{\mu}h
-\]
-
-\end_inset
-
-By definition, one has that 
-\begin_inset Formula $h^{-1}\partial_{\mu}h\in\mathfrak{h}$
-\end_inset
-
- and likewise by defintion that 
-\begin_inset Formula $\pi_{\mathfrak{m}}\left(\mathfrak{h}\right)=0$
-\end_inset
-
- and so in performing the projection 
-\begin_inset Formula $X=X_{\mathfrak{m}}\oplus X_{\mathfrak{h}}=\pi_{\mathfrak{m}}\left(X\right)\oplus\pi_{\mathfrak{h}}\left(X\right)$
-\end_inset
-
- the above forms necessarily follow.
 \end_layout
 
 \begin_layout Standard
