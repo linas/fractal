@@ -528,7 +528,102 @@ literal "false"
 
 \end_inset
 
- quotes a matrix identity which seems very useful:
+ quotes a matrix identity which seems very useful: given a matrix 
+\begin_inset Formula $C$
+\end_inset
+
+ one has 
+\begin_inset Formula 
+\[
+de^{C}e^{-C}=dC+\frac{1}{2!}\left[C,dC\right]+\frac{1}{3!}\left[C,\left[C,dC\right]\right]+\cdots
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+e^{-C}de^{C}=dC-\frac{1}{2!}\left[C,dC\right]+\frac{1}{3!}\left[C,\left[C,dC\right]\right]-\cdots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which I guess follows from the Baker-Campbell-Hausdorf formula in some less-than
+-obvious way, to me.
+ Writing 
+\begin_inset Formula $C=\phi^{i}T_{i}$
+\end_inset
+
+ for Lie-algebra-valued 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ obeying 
+\begin_inset Formula $\left[T_{i},T_{j}\right]=f_{ij}^{\;\,k}T_{k}$
+\end_inset
+
+ one then obtains 
+\begin_inset Formula 
+\begin{align*}
+de^{\theta^{i}T_{i}}e^{-\phi^{i}T_{i}} & =d\phi^{i}T_{i}+\frac{1}{2!}\phi^{i}d\phi^{j}f_{ij}^{\;\,k}T_{k}+\frac{1}{3!}\phi^{i}\phi^{j}d\phi^{k}f_{jk}^{\;\,l}f_{il}^{\;m}T_{m}+\cdots\\
+ & =T_{i}\Delta_{ij}d\phi^{j}
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+\Delta=\sum_{n=0}^{\infty}\frac{M^{n}}{\left(n+1\right)!}=\left(e^{M}-I\right)M^{-1}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $M_{j}^{\,k}=\phi^{i}f_{ij}^{\;\,k}$
+\end_inset
+
+.
+ Likewise,
+\begin_inset Formula 
+\begin{align*}
+e^{-\phi^{i}T_{i}}de^{\phi^{i}T_{i}} & =d\phi^{i}T_{i}-\frac{1}{2!}\phi^{i}d\phi^{j}f_{ij}^{\;\,k}T_{k}+\frac{1}{3!}\phi^{i}\phi^{j}d\phi^{k}f_{jk}^{\;\,l}f_{il}^{\;m}T_{m}-\cdots\\
+ & =T_{i}W_{ij}d\phi^{j}
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+W=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}M^{n}}{\left(n+1\right)!}=\left(I-e^{-M}\right)M^{-1}
+\]
+
+\end_inset
+
+These are apparently the vielbeins, because these can be plugged directly
+ into the sigma model Lagrangian.
+ That is, let 
+\begin_inset Formula $L_{\mu}=U^{\dagger}\partial_{\mu}U$
+\end_inset
+
+ and 
+\begin_inset Formula $U=\exp i\vec{T}\cdot\vec{\theta}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mbox{tr}L
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
