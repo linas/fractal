@@ -188,7 +188,8 @@ literal "false"
 
  which then promptly gives eight references to sigma models as symmetric
  spaces.
- Yikes!
+ Yikes! However, all eight references are to supergravity theories; it is
+ no wonder that I've been ignorant of these.
 \end_layout
 
 \begin_layout Section
@@ -471,6 +472,63 @@ However, almost all of the development will not require this specific form;
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsubsection
+Sigma model
+\end_layout
+
+\begin_layout Standard
+From Wikipedia, the sigma model Lagrangain can be written as
+\begin_inset Formula 
+\[
+\mathcal{L}\left(\phi_{1},\cdots,\phi_{n}\right)=\frac{1}{2}\sum_{ij}g_{ij}d\phi^{i}\wedge*d\phi^{j}-V\left(\phi\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $g_{ij}$
+\end_inset
+
+ is a Riemannian metric on the field space 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+ Equivalently, 
+\begin_inset Formula 
+\[
+\mathcal{L}=\frac{1}{2}g_{ij}\left(\phi\right)\left(\partial^{\mu}\phi^{i}\right)\left(\partial_{\mu}\phi^{j}\right)-V\left(\phi\right)
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\partial_{\mu}\phi$
+\end_inset
+
+ is a section of the jet bundle of 
+\begin_inset Formula $M\times\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Matrix identities
+\end_layout
+
+\begin_layout Standard
+Yilmaz
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yilmaz07"
+literal "false"
+
+\end_inset
+
+ quotes a matrix identity which seems very useful:
 \end_layout
 
 \begin_layout Subsection
@@ -785,6 +843,125 @@ Let's belabor the obvious; this will be useful a bit later.
 .
 \end_layout
 
+\begin_layout Subsubsection
+Maurer-Cartan form
+\end_layout
+
+\begin_layout Standard
+The Cartan form 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is a one-form on 
+\begin_inset Formula $G$
+\end_inset
+
+ given by the differential 
+\begin_inset Formula $L_{g^{-1}}$
+\end_inset
+
+ and specifically, 
+\begin_inset Formula $\omega_{g}=L_{g^{-1}*}$
+\end_inset
+
+ The definition of the differential is given in Bleeker section 0.2.5 page
+ 8.
+ If 
+\begin_inset Formula $G$
+\end_inset
+
+ is embeded in 
+\begin_inset Formula $GL(n)$
+\end_inset
+
+ then 
+\begin_inset Formula $\omega_{g}=g^{-1}dg$
+\end_inset
+
+ 
+\emph on
+i.e.
+
+\emph default
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+left logarithmic derivative of the identity map of 
+\begin_inset Formula $G$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Taking 
+\begin_inset Formula $G$
+\end_inset
+
+ to be a principle bundle over a single point, 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is the principle connection on that bundle.
+\end_layout
+
+\begin_layout Standard
+Given a homogenous space 
+\begin_inset Formula $G/H$
+\end_inset
+
+ and a section 
+\begin_inset Formula $s:G/H\to G$
+\end_inset
+
+ then the pullback 
+\begin_inset Formula $\theta=s^{*}\omega$
+\end_inset
+
+ transforms in the appropriate gauge-like way, and has a vanishing curvature.
+ See Wikipedia 
+\begin_inset Quotes eld
+\end_inset
+
+Maurer–Cartan form
+\begin_inset Quotes erd
+\end_inset
+
+ for more.
+\end_layout
+
+\begin_layout Standard
+This pullback can be decomposed as 
+\begin_inset Formula $\theta=\pi_{\mathfrak{m}}\left(\theta\right)\oplus\pi_{\mathfrak{h}}\left(\theta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There is apparently an equivalent characterization where a metric is provided
+ on 
+\begin_inset Formula $G/H$
+\end_inset
+
+, which is then decomposed into vielbeins
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yilmaz07"
+literal "false"
+
+\end_inset
+
+.
+ The rest of that article appears to deal with the case where 
+\begin_inset Formula $G$
+\end_inset
+
+ is non-compact, which appears to be the case of interest for supergravity.
+\end_layout
+
 \begin_layout Subsection
 Vector and Gauge fields
 \end_layout
@@ -1042,8 +1219,8 @@ pure gauge
  is the projection.
 \end_layout
 
-\begin_layout Standard
-xxxx—xxx
+\begin_layout Subsubsection
+Associated bundle
 \end_layout
 
 \begin_layout Standard
@@ -1195,7 +1372,12 @@ too big
 \end_layout
 
 \begin_layout Standard
-xxx—xxx
+TODO: Why is saying any of this interesting? I was hoping it would make
+ it easier to describe the 1-jet, but no luck so far.
+\end_layout
+
+\begin_layout Subsubsection
+Physics notation
 \end_layout
 
 \begin_layout Standard
@@ -1273,10 +1455,76 @@ Note that
 \end_layout
 
 \begin_layout Standard
-TODO: Fix the notational awkwardness here.
- Earlier notation was phrased in terms of 1-forms, while the above uses
- the notation conventional to physics.
- I find this irksome.
+TODO: The above uses physics notation.
+ It's 
+\begin_inset Quotes eld
+\end_inset
+
+obviously the same
+\begin_inset Quotes erd
+\end_inset
+
+ as the earlier presentation phrased in terms of 1-forms, but its different.
+ The lack of a bridge between the notations is irksome.
+\end_layout
+
+\begin_layout Subsubsection
+Darboux derivative
+\end_layout
+
+\begin_layout Standard
+According to the Wikipedia article 
+\begin_inset Quotes eld
+\end_inset
+
+Darboux derivative
+\begin_inset Quotes erd
+\end_inset
+
+, if one has a map 
+\begin_inset Formula $f:M\to G$
+\end_inset
+
+, then the 
+\begin_inset Quotes eld
+\end_inset
+
+most natural
+\begin_inset Quotes erd
+\end_inset
+
+ way to write the derivative of 
+\begin_inset Formula $f$
+\end_inset
+
+ is to write it as the Darboux derivative, which is done by using the Maurer–Car
+tan form on 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ It seems like 
+\begin_inset Formula $L_{\mu}$
+\end_inset
+
+ is the same thing as the Darboux derivative, right? Or not? If not, then
+ what is the Darboux derivative?
+\end_layout
+
+\begin_layout Standard
+I think this just means that the Maurer-Cartan form can be written as 
+\begin_inset Formula $g^{-1}dg$
+\end_inset
+
+ and that the pullback of it, by 
+\begin_inset Formula $f$
+\end_inset
+
+, gives 
+\begin_inset Formula $L_{\mu}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
