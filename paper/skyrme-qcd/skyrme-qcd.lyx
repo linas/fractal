@@ -636,16 +636,25 @@ which is a fairly slick trick.
  appearing in the sigma model lagrangian is being written as 
 \begin_inset Formula 
 \[
-g_{ij}=W_{i}^{\,m}W_{j}^{\,n}\gamma_{mn}
+g_{ij}=W_{i}^{\,m}W_{j}^{\,n}\kappa_{mn}
 \]
 
 \end_inset
 
- where 
-\begin_inset Formula $\gamma_{mn}=\mbox{tr}T_{m}T_{n}$
+where 
+\begin_inset Formula $\kappa_{mn}=\mbox{tr}T_{m}T_{n}$
 \end_inset
 
- is the 
+ is the Killing form, which can be explicitly written in terms of the structure
+ constants as 
+\begin_inset Formula 
+\[
+\kappa_{mn}=f_{im}^{\;\,j}f_{jn}^{\;\,i}
+\]
+
+\end_inset
+
+The Killing form can be taken as the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -653,8 +662,12 @@ flat
 \begin_inset Quotes erd
 \end_inset
 
- metric.
- Whenever a curved matric can be written in trms of a 
+ metric on 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+.
+ Whenever a curved matric can be written in terms of a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2072,7 +2085,7 @@ Hamiltons equations
 \end_layout
 
 \begin_layout Standard
-The proer formulation would be to write the Lagrangian in terms of 1-jets,
+The proper formulation would be to write the Lagrangian in terms of 1-jets,
  as is done in section 3.3.1 page 50 of Bleeker.
  Doing so just right now is too confusing, so I will punt on this.
 \end_layout
@@ -2089,6 +2102,77 @@ Lets stupidly plow ahead.
 \end_inset
 
 , so that we can (unambiguously) split out a time component.
+\end_layout
+
+\begin_layout Standard
+To convert a Lagrangian into a Hamiltonian, we need to pick a coordinate
+ 
+\begin_inset Formula $q$
+\end_inset
+
+ and define the generalized momeum as 
+\begin_inset Formula $p=\partial\mathcal{L}/\partial\dot{q}$
+\end_inset
+
+ and then finally define the tautolgical 1-form 
+\begin_inset Formula $\dot{q}p$
+\end_inset
+
+ and then write 
+\begin_inset Formula $\mathcal{H}=\dot{q}p-\mathcal{L}$
+\end_inset
+
+.
+ What should we pick as 
+\begin_inset Formula $q$
+\end_inset
+
+? Should it be the field 
+\begin_inset Formula $\phi\in G/H$
+\end_inset
+
+ or should it be the paramterized field 
+\begin_inset Formula $\vec{\theta}$
+\end_inset
+
+ which comes from writing 
+\begin_inset Formula $\phi=\exp\vec{\theta}\cdot\vec{m}$
+\end_inset
+
+ where the 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ are the Lie algebra vectors spanning the subspace 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+? The later are nice, because they feel 
+\begin_inset Quotes eld
+\end_inset
+
+flat
+\begin_inset Quotes erd
+\end_inset
+
+, in that we have an explicit expression for the vielbeins and can work
+ with the Killing form as the flat metric.
+ We know how to perform computations with them.
+ On the other hand, why not use 
+\begin_inset Formula $\phi$
+\end_inset
+
+ directly as the coordinate, and insert the metric tensor everywhere, as
+ needed? Perhaps try both?
+\end_layout
+
+\begin_layout Standard
+It seems we also have several choices for notation: index notation, or a
+ more abstract notation in terms of forms and pullbacks.
+ Or both.
+ Probably both, because looking at one style can rescue the other when the
+ expressions get muddled.
+ OK, so that's a plan.
 \end_layout
 
 \begin_layout Standard
@@ -2202,7 +2286,7 @@ Let
 , it is extended to the tangent field 
 \begin_inset Formula 
 \[
-\partial_{i}=\frac{d}{dt}g^{-1}
+\partial_{i}=xxxwtf\frac{d}{dt}g^{-1}
 \]
 
 \end_inset
