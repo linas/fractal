@@ -548,14 +548,10 @@ e^{-C}de^{C}=dC-\frac{1}{2!}\left[C,dC\right]+\frac{1}{3!}\left[C,\left[C,dC\rig
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-which I guess follows from the Baker-Campbell-Hausdorf formula in some less-than
--obvious way, to me.
+which I guess follows from the Baker-Campbell-Hausdorff formula in some
+ less-than-obvious way, to me.
  Writing 
-\begin_inset Formula $C=\phi^{i}T_{i}$
+\begin_inset Formula $C=\theta^{i}T_{i}$
 \end_inset
 
  for Lie-algebra-valued 
@@ -569,8 +565,8 @@ which I guess follows from the Baker-Campbell-Hausdorf formula in some less-than
  one then obtains 
 \begin_inset Formula 
 \begin{align*}
-de^{\theta^{i}T_{i}}e^{-\phi^{i}T_{i}} & =d\phi^{i}T_{i}+\frac{1}{2!}\phi^{i}d\phi^{j}f_{ij}^{\;\,k}T_{k}+\frac{1}{3!}\phi^{i}\phi^{j}d\phi^{k}f_{jk}^{\;\,l}f_{il}^{\;m}T_{m}+\cdots\\
- & =T_{i}\Delta_{ij}d\phi^{j}
+de^{\theta^{i}T_{i}}e^{-\theta^{i}T_{i}} & =d\theta^{i}T_{i}+\frac{1}{2!}\theta^{i}d\theta^{j}f_{ij}^{\;\,k}T_{k}+\frac{1}{3!}\theta^{i}\theta^{j}d\theta^{k}f_{jk}^{\;\,l}f_{il}^{\;m}T_{m}+\cdots\\
+ & =T_{i}\Delta_{ij}d\theta^{j}
 \end{align*}
 
 \end_inset
@@ -584,15 +580,15 @@ with
 \end_inset
 
 and 
-\begin_inset Formula $M_{j}^{\,k}=\phi^{i}f_{ij}^{\;\,k}$
+\begin_inset Formula $M_{j}^{\,k}=\theta^{i}f_{ij}^{\;\,k}$
 \end_inset
 
 .
  Likewise,
 \begin_inset Formula 
 \begin{align*}
-e^{-\phi^{i}T_{i}}de^{\phi^{i}T_{i}} & =d\phi^{i}T_{i}-\frac{1}{2!}\phi^{i}d\phi^{j}f_{ij}^{\;\,k}T_{k}+\frac{1}{3!}\phi^{i}\phi^{j}d\phi^{k}f_{jk}^{\;\,l}f_{il}^{\;m}T_{m}-\cdots\\
- & =T_{i}W_{ij}d\phi^{j}
+e^{-\theta^{i}T_{i}}de^{\theta^{i}T_{i}} & =d\theta^{i}T_{i}-\frac{1}{2!}\theta^{i}d\theta^{j}f_{ij}^{\;\,k}T_{k}+\frac{1}{3!}\theta^{i}\theta^{j}d\theta^{k}f_{jk}^{\;\,l}f_{il}^{\;m}T_{m}-\cdots\\
+ & =T_{i}W_{ij}d\theta^{j}
 \end{align*}
 
 \end_inset
@@ -608,22 +604,37 @@ W=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}M^{n}}{\left(n+1\right)!}=\left(I-
 These are apparently the vielbeins, because these can be plugged directly
  into the sigma model Lagrangian.
  That is, let 
-\begin_inset Formula $L_{\mu}=U^{\dagger}\partial_{\mu}U$
+\begin_inset Formula $L=U^{\dagger}dU$
 \end_inset
 
  and 
-\begin_inset Formula $U=\exp i\vec{T}\cdot\vec{\theta}$
+\begin_inset Formula $U=\exp\vec{T}\cdot\vec{\theta}$
 \end_inset
 
 
 \begin_inset Formula 
 \[
-\mbox{tr}L
+\mbox{tr}L\wedge*L=W_{i}^{\,m}W_{j}^{\,n}\;d\theta^{i}\wedge*d\theta^{j}\mbox{ tr}T_{m}T_{n}
 \]
 
 \end_inset
 
+which is a fairly slick trick.
+ I have not double-checked, but for the special case of SU(2) I think this
+ boils down to the old tried-and-true identities 
+\begin_inset Formula 
+\[
+e^{i\vec{\tau}\cdot\vec{\theta}}=\cos\left|\theta\right|+i\vec{\tau}\cdot\vec{\theta}\frac{\sin\left|\theta\right|}{\left|\theta\right|}
+\]
 
+\end_inset
+
+and the usual 
+\begin_inset Formula $L_{\mu}$
+\end_inset
+
+ follows from that.
+ Huh.
 \end_layout
 
 \begin_layout Subsection
@@ -1657,16 +1668,16 @@ G=H\times H
 \end_inset
 
 Then 
-\begin_inset Formula $p\left(h_{L},h_{R}\right)=\left(h_{R},h_{L}\right)$
+\begin_inset Formula $\alpha\left(h_{L},h_{R}\right)=\left(h_{R},h_{L}\right)$
 \end_inset
 
  the permutation of the two elements satisfies 
-\begin_inset Formula $p^{2}=1$
+\begin_inset Formula $\alpha^{2}=1$
 \end_inset
 
  and thus can be used as a symmetrizer to split out the diagonal.
  The fixed points are 
-\begin_inset Formula $p\left(h,h\right)=\left(h,h\right)$
+\begin_inset Formula $\alpha\left(h,h\right)=\left(h,h\right)$
 \end_inset
 
 .
@@ -1708,7 +1719,7 @@ Given bases vectors
 \end_inset
 
  which corresponds to the 
-\begin_inset Formula $p=-1$
+\begin_inset Formula $\alpha=-1$
 \end_inset
 
  eigenspace, and 
@@ -1716,7 +1727,7 @@ Given bases vectors
 \end_inset
 
  as the basis for the 
-\begin_inset Formula $p=+1$
+\begin_inset Formula $\alpha=+1$
 \end_inset
 
  eigenspace.
