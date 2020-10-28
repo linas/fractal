@@ -515,6 +515,11 @@ where
 .
 \end_layout
 
+\begin_layout Standard
+TODO: articulate the jet-bundle construction; show the equivalence of these
+ two.
+\end_layout
+
 \begin_layout Subsubsection
 Matrix identities
 \end_layout
@@ -550,7 +555,11 @@ e^{-C}de^{C}=dC-\frac{1}{2!}\left[C,dC\right]+\frac{1}{3!}\left[C,\left[C,dC\rig
 
 which I guess follows from the Baker-Campbell-Hausdorff formula in some
  less-than-obvious way, to me.
- Writing 
+ TODO: find a second authoritative more widely-known source for the above.
+\end_layout
+
+\begin_layout Standard
+Writing 
 \begin_inset Formula $C=\theta^{i}T_{i}$
 \end_inset
 
@@ -620,7 +629,49 @@ These are apparently the vielbeins, because these can be plugged directly
 \end_inset
 
 which is a fairly slick trick.
- I have not double-checked, but for the special case of SU(2) I think this
+ To be clear: the Riemannian metric 
+\begin_inset Formula $g_{ij}$
+\end_inset
+
+ appearing in the sigma model lagrangian is being written as 
+\begin_inset Formula 
+\[
+g_{ij}=W_{i}^{\,m}W_{j}^{\,n}\gamma_{mn}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\gamma_{mn}=\mbox{tr}T_{m}T_{n}$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+flat
+\begin_inset Quotes erd
+\end_inset
+
+ metric.
+ Whenever a curved matric can be written in trms of a 
+\begin_inset Quotes eld
+\end_inset
+
+flat
+\begin_inset Quotes erd
+\end_inset
+
+ metric in this way, the factors 
+\begin_inset Formula $W_{i}^{\,m}$
+\end_inset
+
+ are called the vielbeins.
+ Cool!
+\end_layout
+
+\begin_layout Standard
+I have not double-checked, but for the special case of SU(2) I think this
  boils down to the old tried-and-true identities 
 \begin_inset Formula 
 \[
@@ -635,6 +686,187 @@ and the usual
 
  follows from that.
  Huh.
+ TODO:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+L_{\mu}=...
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sigma model redux
+\end_layout
+
+\begin_layout Standard
+From what I can tell, Yilmaz is saying that the above can even work for
+ the symmetric space, in that one can split, with some care, the basis 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+ into those that are in 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathfrak{g}=\mathfrak{m\oplus\mathfrak{h}}$
+\end_inset
+
+.
+ That is, one can write a parameterization for 
+\begin_inset Formula $G/H$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\phi=e^{\theta^{i}m_{i}}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ the basis vectors of 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $\#$
+\end_inset
+
+ as the 
+\begin_inset Quotes eld
+\end_inset
+
+generalized transpose
+\begin_inset Quotes erd
+\end_inset
+
+ , induced by the Cartan involution 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ as 
+\begin_inset Formula $X^{\#}=-\alpha\left(X\right)$
+\end_inset
+
+ for any 
+\begin_inset Formula $X\in\mathfrak{g}$
+\end_inset
+
+.
+ Depending on 
+\begin_inset Formula $\mathfrak{g}$
+\end_inset
+
+, this generalized transpose is either the the conjugate transpose, or the
+ ordinary matrix transpose, depending on whether the algebra is complex,
+ or not, has a real representation or not, etc.
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $\mathcal{M}=\phi^{\#}\phi$
+\end_inset
+
+, where we are using 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ because this is the 
+\begin_inset Quotes eld
+\end_inset
+
+internal metric
+\begin_inset Quotes erd
+\end_inset
+
+ on the sigma space.
+ The sigma model Lagrangian is then (up to a constant 
+\begin_inset Formula $c$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\mathcal{L}=-\frac{c}{4}\mbox{tr}\left(d\mathcal{M}\wedge*d\mathcal{M}^{-1}\right)
+\]
+
+\end_inset
+
+which can be written as
+\begin_inset Formula 
+\[
+\mathcal{L}=\frac{c}{2}\mbox{tr}\left(\left(\mathcal{G}+\mathcal{G}^{\#}\right)\wedge*\mathcal{G}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{G}=\phi^{-1}d\phi$
+\end_inset
+
+ is the pullback of the Maurer-Cartan form.
+ Yilmaz provides an explicit derivation of the above, its not hard.
+\end_layout
+
+\begin_layout Subsubsection
+Other terms in the Lagrangian
+\end_layout
+
+\begin_layout Standard
+Apparently, in the supergravity world, it is not uncommon
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yilmaz07"
+literal "false"
+
+\end_inset
+
+ to add an additional term 
+\begin_inset Formula 
+\[
+\mathcal{L}=\frac{c_{2}}{2}\mathcal{M}_{ij}F^{i}\wedge*F^{j}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $F^{i}=dA^{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $A^{i}$
+\end_inset
+
+ and and 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ some constant.
+ I guess the whole thing is somehow gauge invariant again, although some
+ work would be needed to show this.
 \end_layout
 
 \begin_layout Subsection
@@ -673,7 +905,15 @@ Let
 \end_inset
 
 .
- This is the definition of an involution.
+ This is the definition of an involution; it is called 
+\begin_inset Quotes eld
+\end_inset
+
+the Cartan involution
+\begin_inset Quotes erd
+\end_inset
+
+.
  The fixed points 
 \begin_inset Formula $h\in G$
 \end_inset
@@ -1323,6 +1563,19 @@ pure gauge
 \end_inset
 
  is the projection.
+\end_layout
+
+\begin_layout Standard
+What happens if we do 
+\emph on
+not
+\emph default
+ set 
+\begin_inset Formula $\omega$
+\end_inset
+
+ to zero? Then I guess that, if we add the dynamical term Yilmaz mentions,
+ then we get a new gauge-invariant Lagrangian.
 \end_layout
 
 \begin_layout Subsubsection
