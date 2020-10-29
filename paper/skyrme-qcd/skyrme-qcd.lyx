@@ -504,7 +504,7 @@ where
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $\partial_{\mu}\phi$
 \end_inset
 
@@ -589,7 +589,7 @@ The
  is a vielbein, in that
 \begin_inset Formula 
 \[
-g_{ij}=W_{i}^{\,m}W_{j}^{\,n}\kappa_{mn}
+g_{ij}=W_{i}^{\,m}W_{\;j}^{n}\kappa_{mn}
 \]
 
 \end_inset
@@ -637,7 +637,7 @@ flat
 \end_inset
 
  are called the vielbeins.
- Cool!
+ Cool! Note the second vielbein is a transpose!
 \end_layout
 
 \begin_layout Standard
@@ -651,25 +651,55 @@ This can be plugged directly into the sigma model Lagrangian.
 \end_inset
 
  and write the Killing form as 
-\begin_inset Formula $\kappa_{mn}=\mbox{tr}T_{m}T_{n}$
+\begin_inset Formula $\kappa_{mn}=c\,\mbox{tr}T_{m}T_{n}$
 \end_inset
 
-.
+ for appropriate constant 
+\begin_inset Formula $c$
+\end_inset
+
+ which depends on the algebra.
  Then 
 \begin_inset Formula 
 \[
-\mbox{tr}L\wedge*L=g_{ij}d\theta^{i}\wedge*d\theta^{j}=W_{i}^{\,m}W_{j}^{\,n}\;d\theta^{i}\wedge*d\theta^{j}\mbox{ tr}T_{m}T_{n}
+c\,\mbox{tr}L\wedge*L=g_{ij}d\theta^{i}\wedge*d\theta^{j}=W_{i}^{\,m}W_{\;j}^{n}\;d\theta^{i}\wedge*d\theta^{j}\;c\,\mbox{tr}T_{m}T_{n}
 \]
 
 \end_inset
 
 which is a fairly slick trick.
- 
+ Note the second 
+\begin_inset Formula $W$
+\end_inset
+
+ is a transpose of the first.
 \end_layout
 
 \begin_layout Standard
-I have not double-checked, but for the special case of SU(2) I think this
- boils down to the old tried-and-true identities 
+For the special case of SU(2), this boils down to the old tried-and-true
+ identities.
+ Start with 
+\begin_inset Formula $\vec{\tau}$
+\end_inset
+
+ the Pauli matrices normalized so that 
+\begin_inset Formula $\tau_{k}^{2}=I$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $T_{k}=i\tau_{k}$
+\end_inset
+
+ so that 
+\begin_inset Formula $f_{ijk}=-2e_{ijk}$
+\end_inset
+
+ and the Killing form is 
+\begin_inset Formula $\kappa_{mn}=-4\delta_{mn}$
+\end_inset
+
+
 \begin_inset Formula 
 \[
 e^{i\vec{\tau}\cdot\vec{\theta}}=\cos\left|\theta\right|+i\vec{\tau}\cdot\vec{\theta}\frac{\sin\left|\theta\right|}{\left|\theta\right|}
@@ -677,7 +707,37 @@ e^{i\vec{\tau}\cdot\vec{\theta}}=\cos\left|\theta\right|+i\vec{\tau}\cdot\vec{\t
 
 \end_inset
 
-and the usual 
+The vielbeins are then 
+\begin_inset Formula 
+\[
+W_{jk}=\delta_{jk}-\epsilon_{jkm}\theta^{m}\frac{1-\cos2\theta}{2\theta^{2}}+\left(\delta_{jk}\theta^{2}-\theta^{j}\theta^{k}\right)\frac{2\theta-\sin2\theta}{2\theta^{3}}
+\]
+
+\end_inset
+
+(I double checked but was still sloppy-ish)
+\end_layout
+
+\begin_layout Standard
+The metric is (assuming I did everything correctly) (note the transpose
+ of 
+\begin_inset Formula $W$
+\end_inset
+
+ is being used, otherwise the antisymetric terms don't cancel)
+\begin_inset Formula 
+\[
+g_{ij}=-4W_{ik}W_{jk}=-4\delta_{ij}+2\left(\delta_{ij}\theta^{2}-\theta^{i}\theta^{j}\right)\frac{2\theta^{2}-1+2\cos2\theta}{\theta^{4}}
+\]
+
+\end_inset
+
+OK, Hmm, might have an error, here.
+ Sigh, algebra is so tedious ...
+\end_layout
+
+\begin_layout Standard
+The usual 
 \begin_inset Formula $L_{\mu}$
 \end_inset
 
@@ -1281,28 +1341,6 @@ This pullback can be decomposed as
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-There is apparently an equivalent characterization where a metric is provided
- on 
-\begin_inset Formula $G/H$
-\end_inset
-
-, which is then decomposed into vielbeins
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Yilmaz07"
-literal "false"
-
-\end_inset
-
-.
- The rest of that article appears to deal with the case where 
-\begin_inset Formula $G$
-\end_inset
-
- is non-compact, which appears to be the case of interest for supergravity.
 \end_layout
 
 \begin_layout Subsection
