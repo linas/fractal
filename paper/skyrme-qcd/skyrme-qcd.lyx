@@ -700,9 +700,12 @@ which is a fairly slick trick.
  is a transpose of the first.
 \end_layout
 
+\begin_layout Subsubsection
+Case of SU(2)
+\end_layout
+
 \begin_layout Standard
-For the special case of SU(2), this boils down to the old tried-and-true
- identities.
+Lets look at how this works for SU(2).
  Start with 
 \begin_inset Formula $\vec{\tau}$
 \end_inset
@@ -712,31 +715,64 @@ For the special case of SU(2), this boils down to the old tried-and-true
 \end_inset
 
 .
- Write 
-\begin_inset Formula $T_{k}=i\tau_{k}$
-\end_inset
-
- so that 
-\begin_inset Formula $f_{ijk}=-2e_{ijk}$
-\end_inset
-
- and the Killing form is 
-\begin_inset Formula $\kappa_{mn}=-4\delta_{mn}$
+ There are two possibilities for 
+\begin_inset Formula $T_{k}$
 \end_inset
 
 .
- Then
+ One is to write 
+\begin_inset Formula $T_{k}=-i\tau_{k}/2$
+\end_inset
+
+.
+ so that 
+\begin_inset Formula $f_{ijk}=e_{ijk}$
+\end_inset
+
+ and the Killing form is 
+\begin_inset Formula $\kappa_{mn}=-\delta_{mn}$
+\end_inset
+
+.
+ Another possibility is to take 
+\begin_inset Formula $T_{1}=+i\tau_{1}/2$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{2}=-i\tau_{2}/2$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{3}=+i\tau_{3}/2$
+\end_inset
+
+.
+ This also gives 
+\begin_inset Formula $f_{ijk}=e_{ijk}$
+\end_inset
+
+, and has the advantage of making the ladder operators H,X,Y look prettier.
+ At the moment, either choice will do.
+\end_layout
+
+\begin_layout Standard
+Then
 \begin_inset Formula 
 \[
-U=\exp\vec{T}\cdot\vec{\theta}=e^{i\vec{\tau}\cdot\vec{\theta}}=\cos\left|\theta\right|+i\vec{\tau}\cdot\vec{\theta}\frac{\sin\left|\theta\right|}{\left|\theta\right|}
+U=\exp\vec{T}\cdot\vec{\theta}=e^{-i\vec{\tau}\cdot\vec{\theta}/2}=\cos\left|\frac{\theta}{2}\right|+i\vec{\tau}\cdot\vec{\theta}\frac{\sin\left|\frac{\theta}{2}\right|}{\left|\theta\right|}which
 \]
 
 \end_inset
 
-The vielbeins are then 
+is slightly annoying due to the factor of 
+\begin_inset Formula $1/2$
+\end_inset
+
+.
+ The vielbeins are prettier, thought 
 \begin_inset Formula 
 \[
-W_{jk}=\delta_{jk}-\epsilon_{jkm}\theta^{m}\frac{1-\cos2\theta}{2\theta^{2}}+\left(\delta_{jk}\theta^{2}-\theta^{j}\theta^{k}\right)\frac{2\theta-\sin2\theta}{2\theta^{3}}
+W_{jk}=\delta_{jk}-\epsilon_{jkm}\theta^{m}\frac{1-\cos\theta}{\theta^{2}}+\left(\delta_{jk}\theta^{2}-\theta^{j}\theta^{k}\right)\frac{\theta-\sin\theta}{\theta^{3}}
 \]
 
 \end_inset
@@ -754,7 +790,7 @@ The metric is (assuming I did everything correctly) (note the transpose
  is being used, otherwise the antisymetric terms don't cancel)
 \begin_inset Formula 
 \[
-g_{ij}=-4W_{ik}W_{jk}=-4\delta_{ij}+2\left(\delta_{ij}\theta^{2}-\theta^{i}\theta^{j}\right)\frac{2\theta^{2}-1+2\cos2\theta}{\theta^{4}}
+g_{ij}=-W_{ik}W_{jk}=-\delta_{ij}+\left(\delta_{ij}\theta^{2}-\theta^{i}\theta^{j}\right)\frac{\theta^{2}-2+4\cos\theta}{\theta^{4}}
 \]
 
 \end_inset
