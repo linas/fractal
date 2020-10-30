@@ -701,126 +701,6 @@ which is a fairly slick trick.
 \end_layout
 
 \begin_layout Subsubsection
-Case of SU(2)
-\end_layout
-
-\begin_layout Standard
-Lets look at how this works for SU(2).
- Start with 
-\begin_inset Formula $\vec{\tau}$
-\end_inset
-
- the Pauli matrices normalized so that 
-\begin_inset Formula $\tau_{k}^{2}=I$
-\end_inset
-
-.
- There are two possibilities for 
-\begin_inset Formula $T_{k}$
-\end_inset
-
-.
- One is to write 
-\begin_inset Formula $T_{k}=-i\tau_{k}/2$
-\end_inset
-
-.
- so that 
-\begin_inset Formula $f_{ijk}=e_{ijk}$
-\end_inset
-
- and the Killing form is 
-\begin_inset Formula $\kappa_{mn}=-\delta_{mn}$
-\end_inset
-
-.
- Another possibility is to take 
-\begin_inset Formula $T_{1}=+i\tau_{1}/2$
-\end_inset
-
- and 
-\begin_inset Formula $T_{2}=-i\tau_{2}/2$
-\end_inset
-
- and 
-\begin_inset Formula $T_{3}=+i\tau_{3}/2$
-\end_inset
-
-.
- This also gives 
-\begin_inset Formula $f_{ijk}=e_{ijk}$
-\end_inset
-
-, and has the advantage of making the ladder operators H,X,Y look prettier.
- At the moment, either choice will do.
-\end_layout
-
-\begin_layout Standard
-Then
-\begin_inset Formula 
-\[
-U=\exp\vec{T}\cdot\vec{\theta}=e^{-i\vec{\tau}\cdot\vec{\theta}/2}=\cos\left|\frac{\theta}{2}\right|+i\vec{\tau}\cdot\vec{\theta}\frac{\sin\left|\frac{\theta}{2}\right|}{\left|\theta\right|}which
-\]
-
-\end_inset
-
-is slightly annoying due to the factor of 
-\begin_inset Formula $1/2$
-\end_inset
-
-.
- The vielbeins are prettier, thought 
-\begin_inset Formula 
-\[
-W_{jk}=\delta_{jk}-\epsilon_{jkm}\theta^{m}\frac{1-\cos\theta}{\theta^{2}}+\left(\delta_{jk}\theta^{2}-\theta^{j}\theta^{k}\right)\frac{\theta-\sin\theta}{\theta^{3}}
-\]
-
-\end_inset
-
-(I think this is right; I double checked but was still sloppy-ish.
- Haste makes waste.)
-\end_layout
-
-\begin_layout Standard
-The metric is (assuming I did everything correctly) (note the transpose
- of 
-\begin_inset Formula $W$
-\end_inset
-
- is being used, otherwise the antisymetric terms don't cancel)
-\begin_inset Formula 
-\[
-g_{ij}=-W_{ik}W_{jk}=-\delta_{ij}+\left(\delta_{ij}\theta^{2}-\theta^{i}\theta^{j}\right)\frac{\theta^{2}-2+4\cos\theta}{\theta^{4}}
-\]
-
-\end_inset
-
-OK, Hmm, the above seems weird, it might have an error, here.
- Sigh, algebra is so tedious ...
-\end_layout
-
-\begin_layout Standard
-The usual 
-\begin_inset Formula $L_{\mu}$
-\end_inset
-
- follows from that.
- Huh.
- TODO:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-L_{\mu}=...
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
 Sigma model redux
 \end_layout
 
@@ -1032,6 +912,135 @@ where
 
  above is what's guage invariant.
  Strange but interesting ...
+\end_layout
+
+\begin_layout Subsubsection
+Case of SU(2)
+\end_layout
+
+\begin_layout Standard
+Lets look at how this works for SU(2).
+ Start with 
+\begin_inset Formula $\vec{\tau}$
+\end_inset
+
+ the Pauli matrices normalized so that 
+\begin_inset Formula $\tau_{k}^{2}=I$
+\end_inset
+
+.
+ There are two possibilities for 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+.
+ One is to write 
+\begin_inset Formula $T_{k}=-i\tau_{k}/2$
+\end_inset
+
+.
+ so that 
+\begin_inset Formula $f_{ijk}=e_{ijk}$
+\end_inset
+
+ and the Killing form is 
+\begin_inset Formula $\kappa_{mn}=-\delta_{mn}$
+\end_inset
+
+.
+ Another possibility is to take 
+\begin_inset Formula $T_{1}=+i\tau_{1}/2$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{2}=-i\tau_{2}/2$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{3}=+i\tau_{3}/2$
+\end_inset
+
+.
+ This also gives 
+\begin_inset Formula $f_{ijk}=e_{ijk}$
+\end_inset
+
+, and has the advantage of making the ladder operators H,X,Y look prettier.
+ At the moment, either choice will do.
+ (I guess these differ by an 
+\begin_inset Quotes eld
+\end_inset
+
+inner automorphism
+\begin_inset Quotes erd
+\end_inset
+
+, right?)
+\end_layout
+
+\begin_layout Standard
+Then
+\begin_inset Formula 
+\[
+U=\exp\vec{T}\cdot\vec{\theta}=e^{-i\vec{\tau}\cdot\vec{\theta}/2}=\cos\left|\frac{\theta}{2}\right|+\vec{T}\cdot\vec{\theta}\frac{\sin\left|\theta/2\right|}{\left|\theta/2\right|}
+\]
+
+\end_inset
+
+which is slightly annoying due to the factor of 
+\begin_inset Formula $1/2$
+\end_inset
+
+.
+ The vielbeins are prettier, though 
+\begin_inset Formula 
+\[
+W_{jk}=\delta_{jk}-\epsilon_{jkm}\theta^{m}\frac{1-\cos\theta}{\theta^{2}}+\left(\delta_{jk}\theta^{2}-\theta^{j}\theta^{k}\right)\frac{\theta-\sin\theta}{\theta^{3}}
+\]
+
+\end_inset
+
+(I think this is right; I double checked but was still sloppy-ish.
+ Haste makes waste.)
+\end_layout
+
+\begin_layout Standard
+The metric is (assuming I did everything correctly) (note the transpose
+ of 
+\begin_inset Formula $W$
+\end_inset
+
+ is being used, otherwise the antisymetric terms don't cancel)
+\begin_inset Formula 
+\[
+g_{ij}=-W_{ik}W_{jk}=-\delta_{ij}+\left(\delta_{ij}\theta^{2}-\theta^{i}\theta^{j}\right)\frac{\theta^{2}-2+4\cos\theta}{\theta^{4}}
+\]
+
+\end_inset
+
+OK, Hmm, the above seems weird, it might have an error, here.
+ Sigh, algebra is so tedious ...
+\end_layout
+
+\begin_layout Standard
+The usual 
+\begin_inset Formula $L_{\mu}$
+\end_inset
+
+ follows from that.
+ Huh.
+ TODO:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+L_{\mu}=...
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1267,6 +1276,26 @@ The easiest way to see this is to note that
 \end_inset
 
  is positive.
+\end_layout
+
+\begin_layout Standard
+Some factoids: The Killing form is negative-defintie on 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ and positive-definite on 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ (according to wikipedia, 
+\begin_inset Quotes eld
+\end_inset
+
+Cartan decompostition
+\begin_inset Quotes erd
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
