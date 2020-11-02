@@ -475,6 +475,273 @@ However, almost all of the development will not require this specific form;
 \end_layout
 
 \begin_layout Subsubsection
+Riemannian manifolds
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ be a Riemannian manifold (it will be the fiber) and let 
+\begin_inset Formula $T^{*}\Phi$
+\end_inset
+
+ be the cotangent manifold.
+ When supplied with coordinate charts, it can be locally trivialized as
+\begin_inset Formula 
+\[
+\left.T^{*}\Phi\right|_{U}\cong U\times\mathbb{R}^{n}
+\]
+
+\end_inset
+
+and given canonical coordinates 
+\begin_inset Formula $\left(q^{1},\cdots,q^{n},p_{1},\cdots p_{n}\right)$
+\end_inset
+
+ Then given a metric tensor 
+\begin_inset Formula $g_{ij}$
+\end_inset
+
+ on 
+\begin_inset Formula $\Phi$
+\end_inset
+
+, the Hamiltonian function 
+\begin_inset Formula 
+\[
+H\left(q,p\right)=\frac{1}{2}g^{ij}\left(q\right)p_{i}p_{j}
+\]
+
+\end_inset
+
+provides the geodesic flow via the Hamilton-Jacobi equations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\dot{q}^{i}=\frac{\partial H}{\partial p_{i}}\quad\mbox{ and }\quad\dot{p}_{i}=-\frac{\partial H}{\partial q^{i}}
+\]
+
+\end_inset
+
+Its a Hamiltonian flow, and 
+\begin_inset Formula $dH/dt=0$
+\end_inset
+
+ on integral curves (geodesics).
+ Riemannian manifolds are always geodesically complete.
+ Also, cotangent bundles are always symplectic manifolds, so come a tautological
+ one-form and a symplectic form.
+\end_layout
+
+\begin_layout Subsubsection
+Pushforwards
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\phi:M\to\Phi$
+\end_inset
+
+ be a section.
+ Fixing 
+\begin_inset Formula $x\in M$
+\end_inset
+
+ the pushforward 
+\begin_inset Formula $d\phi_{x}:T_{x}M\to T_{\phi\left(x\right)}\Phi$
+\end_inset
+
+ is a map of tangent spaces, taking 
+\begin_inset Formula 
+\[
+\partial_{\mu}\mapsto\frac{\partial\phi^{i}}{\partial x^{\mu}}\partial_{i}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\partial_{\mu}=\partial/\partial x^{\mu}$
+\end_inset
+
+ is a vector field in 
+\begin_inset Formula $TM$
+\end_inset
+
+ and 
+\begin_inset Formula $\partial_{i}=\partial/\partial q_{i}$
+\end_inset
+
+ is vector field in 
+\begin_inset Formula $T\Phi$
+\end_inset
+
+.
+ The matrix components are 
+\begin_inset Formula 
+\[
+\left(d\phi\right)_{\mu}^{i}=\frac{\partial\phi^{i}}{\partial x^{\mu}}=\partial_{\mu}\phi^{i}
+\]
+
+\end_inset
+
+Its a diferential form, in that 
+\begin_inset Formula 
+\[
+d\phi_{x}\left(\partial_{\mu}\right)=\left(\partial_{\mu}\phi^{i}\right)\partial_{i}
+\]
+
+\end_inset
+
+and so that 
+\begin_inset Formula $d\phi_{x}\in T_{x}^{*}M$
+\end_inset
+
+.
+ We can explicitly write 
+\begin_inset Formula $d\phi=\left(\partial_{\mu}\phi^{i}\right)\partial_{i}dx^{\mu}$
+\end_inset
+
+ where 
+\begin_inset Formula $dx^{\mu}\left(\partial_{\nu}\right)=\delta_{\nu}^{\mu}$
+\end_inset
+
+ as always.
+\end_layout
+
+\begin_layout Subsubsection
+Metrics
+\end_layout
+
+\begin_layout Standard
+Each distinct section 
+\begin_inset Formula $\phi:M\to\Phi$
+\end_inset
+
+ induces a metric on 
+\begin_inset Formula $M$
+\end_inset
+
+ via it's pushforward.
+ It is given by
+\begin_inset Formula 
+\[
+G_{\mu\nu}\left(\phi\right)=g_{ij}\partial_{\mu}\phi^{i}\partial_{\nu}\phi^{j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Harmonic forms
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\alpha,\beta\in\Omega^{p}\left(M\right)$
+\end_inset
+
+ be 
+\begin_inset Formula $p$
+\end_inset
+
+-forms with compact support.
+ Define the point-wise inner product as
+\begin_inset Formula 
+\[
+\left\langle \alpha,\beta\right\rangle =*\left(\alpha\wedge*\beta\right)
+\]
+
+\end_inset
+
+and the manifold-wise product 
+\begin_inset Formula 
+\[
+\left(\alpha,\beta\right)=\int_{M}\left\langle \alpha,\beta\right\rangle *\left(1\right)=\int_{M}\alpha\wedge*\beta
+\]
+
+\end_inset
+
+be thier 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ product on Sobolev space.
+ Note that 
+\begin_inset Formula 
+\[
+\left(d\alpha,\beta\right)=\left(\alpha,\delta\beta\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\delta=\left(-1\right)^{n\left(p+1\right)+1}*d*$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\Delta=\delta d+d\delta$
+\end_inset
+
+ is the Laplace-deRham operator.
+ Then 
+\begin_inset Formula 
+\[
+\left(\Delta\alpha,\beta\right)=\left(\alpha,\Delta\beta\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $f,g$
+\end_inset
+
+ are functions, not forms, then 
+\begin_inset Formula $\delta f=\delta g=0$
+\end_inset
+
+ and one has
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(df,dg\right)=\left(f,\Delta g\right)
+\]
+
+\end_inset
+
+The sigma model is of course
+\begin_inset Formula 
+\[
+\mathcal{S}\left(\phi\right)=\frac{1}{2}\int_{M}d\phi\wedge*d\phi=\left(d\phi,d\phi\right)
+\]
+
+\end_inset
+
+where from the point of view of 
+\begin_inset Formula $M$
+\end_inset
+
+, the 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is a scalar function.
+ 
+\end_layout
+
+\begin_layout Subsubsection
 Sigma model
 \end_layout
 
@@ -517,61 +784,6 @@ where
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-So 
-\begin_inset Formula $\phi:M\to\Phi$
-\end_inset
-
- and fixing 
-\begin_inset Formula $x\in M$
-\end_inset
-
- we have 
-\begin_inset Formula $d\phi_{x}:T_{x}M\to T_{\phi\left(x\right)}\Phi$
-\end_inset
-
-.
- In matrix components, 
-\begin_inset Formula 
-\[
-\left(d\phi\right)_{\mu}^{i}=\frac{\partial\phi^{i}}{\partial x^{\mu}}=\partial_{\mu}\phi^{i}
-\]
-
-\end_inset
-
-which pushes a tangent vector in 
-\begin_inset Formula $T_{x}M$
-\end_inset
-
- to a tangent vector in 
-\begin_inset Formula $T_{\phi\left(x\right)}\Phi$
-\end_inset
-
-.
- Its a diferential form, in that 
-\begin_inset Formula 
-\[
-d\phi_{x}\left(\partial_{\mu}\right)=\left(\partial_{\mu}\phi^{i}\right)\partial_{i}
-\]
-
-\end_inset
-
-so that 
-\begin_inset Formula $d\phi_{x}\in T_{x}^{*}M$
-\end_inset
-
-.
- We can explicitly write 
-\begin_inset Formula $d\phi=\left(\partial_{\mu}\phi^{i}\right)\partial_{i}dx^{\mu}$
-\end_inset
-
- where 
-\begin_inset Formula $dx^{\mu}\left(\partial_{\nu}\right)=\delta_{\nu}^{\mu}$
-\end_inset
-
- as always.
 \end_layout
 
 \begin_layout Standard
