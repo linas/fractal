@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -24,6 +24,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -62,6 +64,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -70,7 +73,10 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -1582,6 +1588,7 @@ Is there any relationship between the form of Bose-Einstein statistics and
 LatexCommand href
 name "Physics Overflow -Baker-Campbell-Hausdorf - Jordan Algebra"
 target "http://www.physicsoverflow.org/37203/baker-campbell-haudorff-fermions"
+literal "false"
 
 \end_inset
 
@@ -1594,6 +1601,7 @@ Possibly-useful references for this work: Alice Rogers,
 LatexCommand href
 name "Supermanifolds"
 target "ftp://nozdr.ru/biblio/kolxo3/P/PQft/Rogers%20A.%20Supermanifolds..%20theory%20and%20applications%20(WS,%202007)(ISBN%209810212283)(262s)_PQft_.pdf "
+literal "false"
 
 \end_inset
 
@@ -1623,6 +1631,7 @@ V.A.
 LatexCommand href
 name "Baker-Campbell-Hausdorff relations for the superPoincare group"
 target "http://cds.cern.ch/record/169881/files/198608011.pdf"
+literal "false"
 
 \end_inset
 
@@ -1644,6 +1653,7 @@ Cook, James Steven.
 LatexCommand href
 name "Foundations of Supermathematics with Applications to N=1 Supersymmetric Field Theory"
 target "https://repository.lib.ncsu.edu/bitstream/handle/1840.16/5690/etd.pdf "
+literal "false"
 
 \end_inset
 
@@ -1767,6 +1777,7 @@ What is spin?
 LatexCommand href
 name "Ohanian-What is Spin?"
 target "https://www.physics.mcmaster.ca/phys3mm3/notes/whatisspin.pdf"
+literal "false"
 
 \end_inset
 
@@ -1775,6 +1786,7 @@ target "https://www.physics.mcmaster.ca/phys3mm3/notes/whatisspin.pdf"
 LatexCommand href
 name "Gsponer - What is spin?"
 target "https://arxiv.org/abs/physics/0308027"
+literal "false"
 
 \end_inset
 
@@ -1783,6 +1795,7 @@ target "https://arxiv.org/abs/physics/0308027"
 LatexCommand href
 name "Extraordinary momentum and spin in evanescent waves"
 target "http://www.nature.com/articles/ncomms4300"
+literal "false"
 
 \end_inset
 
@@ -1968,6 +1981,357 @@ its the problem of wave-function collapse, you dummy
 \end_inset
 
 , and specifically, the interpretation of the squared amplitude as a probability.
+\end_layout
+
+\begin_layout Subsection
+Many-worlds, Measurement, Wave-fuction Collapse
+\end_layout
+
+\begin_layout Standard
+Some basic formulations and framework.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be the spacetime manifold (a Riemannian manifold) and also 
+\begin_inset Formula $\Phi$
+\end_inset
+
+, the field space.
+ Consider a map 
+\begin_inset Formula $\phi:M\to\Phi$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $\Phi=\mathbb{CP}^{1}$
+\end_inset
+
+ one gets the interpretation that 
+\begin_inset Formula $\phi=\psi(x)$
+\end_inset
+
+ is a QM wave-function, in that 
+\begin_inset Formula $\left|\psi\right|^{2}=1$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+Take 
+\begin_inset Formula $M$
+\end_inset
+
+ to be flat, and let 
+\begin_inset Formula $\nabla^{2}$
+\end_inset
+
+ be the conventional notation for Laplacian in flat space, the grand-total
+ kinetic energy of a wavve function is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{H}\left(\psi\right)=\tfrac{1}{2}\int_{M}\psi^{\dagger}\left(x\right)\nabla^{2}\psi\left(x\right)dx^{m}=\left\langle \psi\left|\nabla^{2}\right|\psi\right\rangle 
+\]
+
+\end_inset
+
+This is obviously the total kinetic energy of the wave-function 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This is also the Lagrangian for the sigma model! (See wikipedia, which I
+ wrote.) It can be re-written as
+\begin_inset Formula 
+\[
+\mathcal{H}\left(\psi\right)=\tfrac{1}{2}\int_{M}\left(\nabla\psi^{\dagger}\left(x\right)\right)\left(\nabla\psi\left(x\right)\right)dx^{m}=\tfrac{1}{2}\int_{M}d\phi\wedge*d\phi
+\]
+
+\end_inset
+
+and the 
+\begin_inset Formula $\nabla\psi\left(x\right)=d\phi$
+\end_inset
+
+ is both a vielbein and also a solder form; it solders together the cotangent
+ space 
+\begin_inset Formula $T^{*}M$
+\end_inset
+
+ to 
+\begin_inset Formula $T^{*}\Phi$
+\end_inset
+
+, keeping in mind that the cotangent spaces are where the momenta live that
+ define the geodesic flows on the manifolds.
+ I mention this because it seems significant...
+\end_layout
+
+\begin_layout Standard
+For the 
+\begin_inset Formula $n$
+\end_inset
+
+-particle system, it is not enough to set 
+\begin_inset Formula $\Phi=\mathbb{CP}^{n}$
+\end_inset
+
+ as that results in all particles having the same location.
+ Thus, the n-particle sigma model requires using 
+\begin_inset Formula $\phi:M\times\cdots\times M\to\mathbb{CP}^{n}$
+\end_inset
+
+ in order to get 
+\begin_inset Formula $\psi\left(x_{1},x_{2},\cdots,x_{n}\right)$
+\end_inset
+
+ as the wave-function.
+ Presumably, the multiple 
+\begin_inset Formula $M$
+\end_inset
+
+'s can be interpreted as the 
+\begin_inset Quotes eld
+\end_inset
+
+many worlds
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This can be sharpened.
+ Set 
+\begin_inset Formula $n=2$
+\end_inset
+
+ and prepare 
+\begin_inset Formula $\phi$
+\end_inset
+
+ to be a singlet state.
+ A measurement is then a pair of projections 
+\begin_inset Formula $\pi_{1}\oplus\pi_{2}:\mathbb{CP}^{2}\to\mathbb{CP}^{1}\oplus\mathbb{CP}^{1}$
+\end_inset
+
+, with all of the usual algebra for vector-singlets decomposed into half-spin
+ doublets.
+ Of course, the projections 
+\begin_inset Formula $\pi_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{2}$
+\end_inset
+
+ depend on the local qubit (Bloch sphere) coordinates chosen by experimentors
+ at locations 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+.
+ From the point of view of the total bundle 
+\begin_inset Formula $\phi:M\times M\to\mathbb{CP}^{2}$
+\end_inset
+
+, the 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is still entangled; there was no 
+\begin_inset Quotes eld
+\end_inset
+
+wave function collapse
+\begin_inset Quotes erd
+\end_inset
+
+.
+ From the point of view of experimenter in one of the two spaces 
+\begin_inset Formula $M$
+\end_inset
+
+, a collapse did happen.
+ That is, the experimenter in 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ applied 
+\begin_inset Formula $\pi_{1}$
+\end_inset
+
+ to get 
+\begin_inset Formula $\pi_{1}\left(\phi\right)$
+\end_inset
+
+ which is 
+\begin_inset Quotes eld
+\end_inset
+
+collapsed
+\begin_inset Quotes erd
+\end_inset
+
+ from his point of view.
+\end_layout
+
+\begin_layout Standard
+After this 
+\begin_inset Quotes eld
+\end_inset
+
+measurement
+\begin_inset Quotes erd
+\end_inset
+
+ in the 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ world, the wave function needs to continue to evolve in its 
+\begin_inset Quotes eld
+\end_inset
+
+collapsed
+\begin_inset Quotes erd
+\end_inset
+
+ form 
+\begin_inset Formula $\pi_{1}\left(\phi\right)$
+\end_inset
+
+ even though in 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ nothing has changed at all.
+ This is a hypothesis (unproved theorem): we need to demonstrate that the
+ dynamics of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is consistent with the dynamics of 
+\begin_inset Formula $\pi_{1}\left(\phi\right)$
+\end_inset
+
+ ...
+ that is we need to prove the theorem that 
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+\phi & {time\atop \longrightarrow} & \phi^{\prime}\\
+\downarrow &  & \downarrow\\
+\pi_{i}\left(\phi\right) & {time\atop \longrightarrow} & \pi_{i}\left(\phi^{\prime}\right)=\left(\pi_{i}\left(\phi\right)\right)^{\prime}
+\end{array}
+\]
+
+\end_inset
+
+is actually a commuting diagram; it is not obvious that it is, however much
+ I would hope it is...
+ If this can be proven, then there 
+\begin_inset Quotes eld
+\end_inset
+
+is no wave-function collapse.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The problem is, of course, there is also a diffferent world 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ where the 
+\begin_inset Formula $\pi_{2}$
+\end_inset
+
+ measurement was made.
+\end_layout
+
+\begin_layout Standard
+TODO: write down, explicitly, the extended 
+\begin_inset Formula $\pi_{i}$
+\end_inset
+
+ as a projection of 
+\begin_inset Formula $M\times M$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+TODO: Introduce time.
+ Is time the geodesic flow on 
+\begin_inset Formula $M$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+TODO: Introduce spinors i.e.
+ make 
+\begin_inset Formula $M$
+\end_inset
+
+ into a spin manifold.
+\end_layout
+
+\begin_layout Standard
+Note 
+\begin_inset Formula $\Phi=\mathbb{CP}^{2}$
+\end_inset
+
+ is the complex projective plane, its non-trivial, (unlike 
+\begin_inset Formula $\mathbb{CP}^{1}\cong S^{2}$
+\end_inset
+
+) and there's a K2-surface in there, etc.
+\end_layout
+
+\begin_layout Standard
+TODO: I don't believe in many-worlds.
+ So then, how do we get back to just one 
+\begin_inset Formula $M$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+This is kind of a 
+\begin_inset Quotes eld
+\end_inset
+
+replica trick
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The replica trick was originally used in spin glass theory, but was eventually
+ replaced by something else...
+ how does that work?
 \end_layout
 
 \begin_layout Subsection
@@ -2353,6 +2717,7 @@ One suggestive argument comes from Mikhail Gromov, in
 LatexCommand href
 name "In a Search for a Structure, Part 1: On Entropy."
 target "http://www.ihes.fr/~gromov/PDF/structre-serch-entropy-july5-2012.pdf"
+literal "false"
 
 \end_inset
 
@@ -2365,6 +2730,7 @@ target "http://www.ihes.fr/~gromov/PDF/structre-serch-entropy-july5-2012.pdf"
 LatexCommand href
 name "Fisher information metric"
 target "https://en.wikipedia.org/wiki/Fisher_information_metric"
+literal "false"
 
 \end_inset
 
