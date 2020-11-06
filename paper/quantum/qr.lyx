@@ -2085,18 +2085,226 @@ Cool, but incomplete.
 \begin_inset Formula $\psi:M\to\mathbb{C}$
 \end_inset
 
- has no geometry, but by the time we are done, we have that 
+ has no geometry, it is a scalar field.
+ By convention, we set 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+ and so 
+\begin_inset Formula $\left|\psi\right\rangle \in U(1)$
+\end_inset
+
+.
+ This is acceptable, but is kind-of misleading.
+ First, there are no true scalars in nature.
+ Second, it isn't obvious that if there were, that there woulldn't be anything
+ that is preventing the time evolution 
+\begin_inset Formula $\left|\psi\right\rangle \to0$
+\end_inset
+
+ (
+\emph on
+i.e.
+
+\emph default
+ to have evolution of 
+\begin_inset Formula $\left\langle x|\psi\right\rangle =\psi\left(x\right)\to0$
+\end_inset
+
+ everywhere, 
+\emph on
+i.e.
+
+\emph default
+ for all 
+\begin_inset Formula $x$
+\end_inset
+
+).
+ There's no reason for a scalar wave function not to be homotopic to zero,
+ because 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is contractible and homotopic to a point, but 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ is not.
+\end_layout
+
+\begin_layout Standard
+How, exactly, did we sneak in something non-contractable into something
+ that is contractable? For scalar fields, this seems to be a fiat, 
+\emph on
+ad hoc
+\emph default
+ assumption.
+ Can we do better for spinors? We know that lepton number is conserved.
+ What I don't have is any description of a spinor as a topological soliton.
+ I believe that such a description exists; I've never seen one in a textbook.
+ One of the goals here is to provide this description explicitly.
+ If it is a topological solition, then there is an argument that one can
+ have time evoltion that 
+\begin_inset Formula $\psi\left(x\right)\to0$
+\end_inset
+
+ locally, for some 
+\begin_inset Formula $x$
+\end_inset
+
+ but not for all 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For a spinor, we can set 
+\begin_inset Formula $\Phi=\mathbb{C}\times\mathbb{CP}^{1}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ encodes the spin direction, and 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ encodes the overall magnitude, and the phase-slop for the spin pointing
+ in the 
+\begin_inset Formula $z$
+\end_inset
+
+ direction.
+ What is 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+? Should we write 
 \begin_inset Formula $\left|\psi\right\rangle \in\mathbb{CP}^{1}$
 \end_inset
 
-...
- How does that happen? What is the formal mathematical formalism for saying
- this? This feels like some kind of homology, something that is saying that
- 
-\begin_inset Formula $H_{something}\left(\psi:M\to\mathbb{C}\right)=\mathbb{CP}^{1}$
+ or should we write 
+\begin_inset Formula $\left|\psi\right\rangle \in U(1)\times\mathbb{CP}^{1}$
 \end_inset
 
- is the homology-like thingy, after integrating 
+? This is again a bit subtle.
+ The 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ is enough to account for the spin direction, but we still need to have
+ an extra phase if we are going to write a normal two-component Weyl spinor.
+ This extra phase 
+\begin_inset Quotes eld
+\end_inset
+
+doesn't matter
+\begin_inset Quotes erd
+\end_inset
+
+ in the sense that 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+ so it is easy to just 
+\begin_inset Quotes eld
+\end_inset
+
+throw it away
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But the Aharonov-Bohm effect, and also the neutron interferometer in gravity
+ both require the holonomy of the circle bundle for the proper explanation,
+ so we can't just throw the phase away.
+\end_layout
+
+\begin_layout Standard
+Neither 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ nor 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ are homotopically contractible to a point.
+ If the spinor is a soliton, is it a solition in just 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ or do we need it to be a solition in 
+\begin_inset Formula $U(1)\times\mathbb{CP}^{1}$
+\end_inset
+
+? Which BTW, has the same number of dimensions as 
+\begin_inset Formula $S^{3}\cong SU(2)$
+\end_inset
+
+ so maybe that means something...
+\end_layout
+
+\begin_layout Standard
+XXX TODO.
+ We need an appendix that provides explict maps between all the various
+ different notations e.g.
+ how to write a two-component spinor from a coordinate chart on 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ and so on.
+\end_layout
+
+\begin_layout Standard
+What is the formal mathematical formalism for saying this? I guess that
+ if we do this corectly, then we have some homology-like statement.
+ We need two, actually, one that says that 
+\begin_inset Formula $H_{something}\left(\psi:M\to\mathbb{C}\times\mathbb{CP}^{1}\right)=U(1)\times\mathbb{CP}^{1}$
+\end_inset
+
+ because somehow, the fiber of the fiber bundle gets the origin removed,
+ and another that says 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $H_{other}\left(\psi:M\to\mathbb{C}\times\mathbb{CP}^{1}\right)=\mathbb{Z}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ because its the topological winding number (the lepton number, where the
+ generator of 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ is a single spinor).
+ That's what we need to get after integrating 
 \begin_inset Formula $\psi:M\to\mathbb{C}$
 \end_inset
 
@@ -2113,15 +2321,41 @@ Cool, but incomplete.
 \begin_layout Standard
 In other words, the wave function on spacetime is actually a section of
  a fiber bundle with a non-trivial topology, and 
-\begin_inset Formula $\mathbb{CP}^{1}$
+\begin_inset Formula $U(1)\times\mathbb{CP}^{1}$
 \end_inset
 
  is the invariant of that bundle.
- For scalar fields, this is tough to imagine, but for spinors, it seems
- reasonable.
- A spinor is then some manifold invariant of the global bundle.
+ (For scalar fields, we drop the 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+.) A spinor is then some manifold invariant of the global bundle.
  What is this invariant? How to articulate this formally? Do we need to
  use spin manifolds to do this?
+\end_layout
+
+\begin_layout Standard
+What about scalars? What is the correct way to get 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+ automatically, instead of declaring it to be the case, by fiat? I mean,
+ is it not the case that any fiber bundle 
+\begin_inset Formula $E\to M$
+\end_inset
+
+ with fiber 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is always contractible to a point? Or is that not the case? If it's contractibl
+e, then how do we get 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+? If it's not contractible, then why isn't this in introductory textbooks,
+ e.g.
+ in Bott&Tu? Some key ingredient is missing...
 \end_layout
 
 \begin_layout Standard
@@ -2193,6 +2427,8 @@ Set
 \end_inset
 
 .
+ XXX TODO this all needs to go into an appendix.
+ This will help clarify reasoning.
 \end_layout
 
 \begin_layout Standard
