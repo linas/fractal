@@ -92,8 +92,9 @@ double Kbar = Kba + (t-0.5)/801.0;
  * Compute the poincare recurrance time for the circle map
  */
 
+#define EPSILON 0.0005
 // #define EPSILON 0.001
-#define EPSILON 0.003
+// #define EPSILON 0.003
 #define SETTLE_TIME 291
 #define RSAMP 3400
 
@@ -114,10 +115,11 @@ recurrance_time (double omeg, double Kba, int itermax,
 		t /= RAND_MAX;
 
 // 800 x 800 pixels -- add some jitter.
-// Except it needs to be correctly normalized, basd on magnification..!
+// Except it needs to be correctly normalized, based on magnification..!
 // which we don't have available here.
 // #define JITTER ((double) (800*2*2))
-#define JITTER ((double) (800))
+// #define JITTER ((double) (800))
+#define JITTER ((double) (1920))
 double omega = omeg + (t-0.5)/JITTER;
 		t = rand();
 		t /= RAND_MAX;
@@ -179,9 +181,9 @@ static double circle_gram(double omega, double Kbar, int itermax, double param)
 	// return winding_number(omega, Kbar, itermax, circle_map);
 	// return winding_number(omega, Kbar, itermax, triangle_map);
 	// return winding_number(omega, Kbar, itermax, sawtooth_map);
-	// return recurrance_time(omega, Kbar, itermax, circle_map);
+	return recurrance_time(omega, Kbar, itermax, circle_map);
 	// return recurrance_time(omega, Kbar, itermax, triangle_map);
-	return recurrance_time(omega, Kbar, itermax, sawtooth_map);
+	// return recurrance_time(omega, Kbar, itermax, sawtooth_map);
 	// return recurrance_conform(omega, Kbar, itermax, sawtooth_map);
 }
 
