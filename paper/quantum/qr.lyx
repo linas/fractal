@@ -2060,6 +2060,609 @@ its the problem of wave-function collapse, you dummy
 \end_layout
 
 \begin_layout Subsection
+Complex numbers in QM
+\end_layout
+
+\begin_layout Standard
+Why do complex numbers show up in QM? Why aren't wave functions purely real?
+ Why can't they be purely real? Where does the complex phase come from?
+ Various arguments are given below.
+\end_layout
+
+\begin_layout Standard
+There is a completely different, but related question: Why is the probability
+ the square of a complex-valued wave function? The arguments below do not
+ seem to shed any light on that.
+\end_layout
+
+\begin_layout Paragraph*
+A1: Spin algebra?
+\end_layout
+
+\begin_layout Standard
+A conservative argument says that it comes from fermions, and specifically,
+ the spin algebra.
+ The spin algebra is built from a real Clifford algebra 
+\begin_inset Formula $V$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+V\otimes\mathbb{C}=W\oplus\overline{W}
+\]
+
+\end_inset
+
+(see e.g.
+ Jurgen Jost, 
+\begin_inset Quotes eld
+\end_inset
+
+Riemannian Geometry and Geometry Analysis, page 69) where 
+\begin_inset Formula $V$
+\end_inset
+
+ is a real Clifford algebra (itself built from a tensor algebra!) and is
+ generated from 
+\begin_inset Formula $2n$
+\end_inset
+
+ components in order to describe 
+\begin_inset Formula $n$
+\end_inset
+
+ Weyl spinors and 
+\begin_inset Formula $n$
+\end_inset
+
+ conjugate spinors.
+ One cannot get the required spin structure without using 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ in this construction.
+ This argument makes sense because most 
+\begin_inset Quotes eld
+\end_inset
+
+physical
+\begin_inset Quotes erd
+\end_inset
+
+ things in nature are fermions.
+\end_layout
+
+\begin_layout Standard
+Note that, in order for fermions to exist, a bundle must be a spin structure.
+ i.e.
+ is a lift of a frame bundle to a double-covering of SO(N) by Spin(N).
+ The usual remarks apply.
+ But this works only for neutral fermions.
+ For charged fermions, the bundle must have a Spinc structure, where as
+ per usual notation, its a twisted product 
+\begin_inset Formula 
+\[
+\mbox{Spin}^{\mathbb{C}}(n)=\mbox{Spin}(n)\times_{\mathbb{Z}_{2}}\mbox{U}(1)
+\]
+
+\end_inset
+
+i.e.
+ the U(1) carries the electromagnetism.
+ This paragraph is non-controversial, its the orthodox interpretation.
+ The next question asks: is there another way? Or is it just a very basic
+ confusion about the proliferation of complex numbers all shot-through QM
+ and Clifford/spin algebra?
+\end_layout
+
+\begin_layout Paragraph*
+A2: Electromagnetism? 
+\end_layout
+
+\begin_layout Standard
+Wild guess: Perhaps the complex phase is actually a hidden side-effect of
+ electromagnetism? There are two chains of though that lead to this: First,
+ that the Aharonov-Bohn effect is most easily, most geometrically understood
+ in a 
+\begin_inset Quotes eld
+\end_inset
+
+pre-quantum
+\begin_inset Quotes erd
+\end_inset
+
+ fashion, as a holonomy of the U(1) fiber bundle.
+ Thus, even before we perform any quantization, and just stick to 
+\begin_inset Quotes eld
+\end_inset
+
+pre-quantization
+\begin_inset Quotes erd
+\end_inset
+
+, we already get a complex phase that arises naturally, but only due to
+ the electromagnetic structure on the fibre bundle.
+\end_layout
+
+\begin_layout Standard
+The classifying space for U(1) bundles is 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+ and the thing about 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+ is that it is exactly the same things as a Hilbert space on which QM is
+ naturally formulated.
+ It is complex, because wave-functions are complex-valued, its projective,
+ because only normalized wave functions matter.
+ We can identify the Hilbert space with the occupation states of the simple
+ harmonic oscillator.
+\end_layout
+
+\begin_layout Paragraph*
+Cell structure
+\end_layout
+
+\begin_layout Standard
+Some minor insight might be gleaned by reviewing the structure of 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+.
+ The cellular structure (cell complex) of 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+consists of all even dimensional cells (See 
+\begin_inset Quotes eld
+\end_inset
+
+Algebraic Topology
+\begin_inset Quotes erd
+\end_inset
+
+, Allen Hatcher, chapter 0 page 7) (See S.P.
+ Novikov, 
+\begin_inset Quotes eld
+\end_inset
+
+Topology I: General Survey
+\begin_inset Quotes erd
+\end_inset
+
+ eqn 3.15 page 62).
+ That is, one writes 
+\begin_inset Formula 
+\[
+\mathbb{CP}^{\infty}=\kappa^{0}\cup\kappa^{2}\cup\kappa^{4}\cup\cdots
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+\kappa^{2n}=\mathbb{CP}^{n}\backslash\mathbb{CP}^{n-1}=\left\{ \left.\left(z_{0}:\cdots:z_{n}\right)\right|:z_{j}\ne0\;\forall\,j\right\} \simeq D^{2n}
+\]
+
+\end_inset
+
+where by abuse of notation, the above makes the mistake of writing a cell,
+ which is actually a map of a disk, with the disk itself.
+ Oh well.
+ This is just a mnemonic reminder, that's all.
+ 
+\end_layout
+
+\begin_layout Standard
+The point is that a single qubit is 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+, i.e.
+ is the Bloch sphere, i.e.
+ is the 2-sphere i.e.
+ is the 2-disk with the edge of the disk identified to a point.
+ Then 
+\begin_inset Formula $n$
+\end_inset
+
+ qubits are 
+\begin_inset Formula $\mathbb{CP}^{n}$
+\end_inset
+
+, etc.
+ The reason that qubits are projective is because only the relative phases
+ of wave-functions matter, and the amplitude of a wave function is always
+ normalized to one.
+ Specifically, a single qubit is 
+\begin_inset Formula 
+\[
+\mathbb{CP}^{1}=\left\{ z_{0}\left|\uparrow\right\rangle +z_{1}\left|\downarrow\right\rangle \left|\left|z_{0}\right|^{2}+\left|z_{1}\right|^{2}=1,\;z_{0}/z_{1}\mbox{ real}\right.\right\} \simeq S^{2}
+\]
+
+\end_inset
+
+ and the gluing together of these things requires only the even-dimensional
+ cells...
+\end_layout
+
+\begin_layout Standard
+To summarize – is it possible that the complex-valued wave function of textbook
+ QM secretly a side-effect of electromagnetism and U(1) bundles? Or is this
+ a red herring?
+\end_layout
+
+\begin_layout Paragraph*
+A3: Spherical harmonics counter-argument
+\end_layout
+
+\begin_layout Standard
+We can view 3D space as a homogeneous space of the rotation group.
+ Recall that homogeneous spaces are defined as quotients of Lie groups.
+ In this case, the 
+\begin_inset Formula $Y_{lm}$
+\end_inset
+
+ spherical wave functions needed to represent the spherical harmonics are
+ naturally complex-valued, and this natural-complex-valued-ness has nothing
+ at all to do with electromagnetism.
+ (Unless, of course, the 3-dimensionality of space was a side-effect of
+ electromagnetism...)
+\end_layout
+
+\begin_layout Paragraph*
+A4: Counter-counter-argument
+\end_layout
+
+\begin_layout Standard
+Now that we've invoked the rotation group, the inevitable is in store.
+ Namely, vectors belong to the adjoint rep of the rotation group.
+ Maxwell equations are exactly the same thing as a statement about the transform
+ation properties of these vectors under the action of the Poincaré group.
+ That is, the electric and magnetic fields are vectors in the Lorentz algebra,
+ i.e.
+ live in the 
+\begin_inset Quotes eld
+\end_inset
+
+vertical
+\begin_inset Quotes erd
+\end_inset
+
+ fibers, the fibers being in the associated bundle of the Lorentz group.
+ The actual transformation properties of these vectors, under 
+\begin_inset Quotes eld
+\end_inset
+
+horizontal
+\begin_inset Quotes erd
+\end_inset
+
+ translations in Minkowski space, are given by the Poincaré algebra.
+ These are exactly equal to the Maxwell equations.
+\end_layout
+
+\begin_layout Standard
+The fact that the electric and magnetic fields satisfy the wave equation
+ is due to the fact that the wave equation is just the quadratic Casimir
+ operator of the Poincaré algebra.
+ (A worthy exercise is to write down the details to support these claims).
+\end_layout
+
+\begin_layout Standard
+Opaque in the above construction is how U(1) arises.
+ The Poincaré algebra gave us a differential structure.
+ To get the A field from the E,B fields requires the notion of differential
+ topology, i.e.
+ the notion of closed forms for the E-field, and exact forms for the B-field.
+ These last two statements follows from the fact that electric charges exist,
+ magnetic ones don't (except in the form of a holonomy).
+ So why should electric charges exist, but magnetic ones not? This is partly
+ answered by looking at the representation theory of the Poincaré group:
+ it has massive particles in it.
+ These can have an electric charge, because 
+\begin_inset Quotes eld
+\end_inset
+
+mass
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+electric charge
+\begin_inset Quotes erd
+\end_inset
+
+ both point in the same direction: i.e.
+ in the time-like direction.
+ By contrast, magnetic monopoles could only be consistent with imaginary
+ mass, i.e.
+ tachyonic degrees of freedom.
+ So the Poincaré algebra is really a kind of no-go for magnetic monopoles.
+ This last sentence is highly textbook non-standard, and so needs to be
+ fully fleshed out in detail, as it is non-obvious.
+ 
+\end_layout
+
+\begin_layout Standard
+Once one deduces that the Poincaré algebra effectively prohibits magnetic
+ monopoles (except in the form of a holonomy) then the standard machinery
+ of differential topology allows one to deduce U(1) from the A field.
+ 
+\end_layout
+
+\begin_layout Standard
+Side note: as soon as one invokes the rotation group, it necessarily follows
+ that one must discuss the fundamental rep, not just the adjoint rep.
+ The fundamental rep leads invariably to the spin algebra, mentioned up
+ top.
+\end_layout
+
+\begin_layout Standard
+In sum, this is a rather long argument.
+ It raises the question: why is space 3+1 dimensional? Because, as soon
+ as we know its 3+1 dimensional, the above purports to show that (a) electromagn
+etism is inevitable, as a rep of the Poincaré algebra (b) The U(1) structure
+ is inevitable, (c) spin structures are inevitable (d) complex-valued wave-funct
+ions are inevitable.
+\end_layout
+
+\begin_layout Standard
+What it does not yet show is why the square of the wave-function can be
+ interpreted as a probability, and why wave-functions must collapse.
+\end_layout
+
+\begin_layout Subsection
+Probability and wave functions
+\end_layout
+
+\begin_layout Standard
+Why does the square of the wave function yield a probability? Where do the
+ complex numbers come in, and why?
+\end_layout
+
+\begin_layout Paragraph*
+A1: Maybe its entropy
+\end_layout
+
+\begin_layout Standard
+One suggestive argument comes from Mikhail Gromov, in 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "In a Search for a Structure, Part 1: On Entropy."
+target "http://www.ihes.fr/~gromov/PDF/structre-serch-entropy-july5-2012.pdf"
+literal "false"
+
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+ Relevant aspects are summarized in the wikipedia article 
+\begin_inset CommandInset href
+LatexCommand href
+name "Fisher information metric"
+target "https://en.wikipedia.org/wiki/Fisher_information_metric"
+literal "false"
+
+\end_inset
+
+.
+ To repeat them here: consider the finite-dimensional simplex of probabilities
+ summing to one: 
+\begin_inset Formula $\sum_{i}p_{i}=1$
+\end_inset
+
+.
+ Consider the change of variable 
+\begin_inset Formula $p_{i}=y_{i}^{2}$
+\end_inset
+
+ so that the simplex is mapped to a quadrant of a sphere: 
+\begin_inset Formula $\sum_{i}y_{i}^{2}=1$
+\end_inset
+
+.
+ Consider the the flat metric in the Euclidean space 
+\begin_inset Formula $y=(y_{1},\cdots,y_{n})$
+\end_inset
+
+ This flat metric induces a metric on the sphere.
+ Converting coordinates back to the 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ one finds that the flat Euclidean metric has become the Fisher information
+ metric! That is, if we want to consider how close two different probability
+ distributions are, we use the Fisher information metric; alternately, we
+ can take the square root of the probability, and use the Euclidean metric.
+ 
+\end_layout
+
+\begin_layout Standard
+The above 
+\begin_inset Quotes eld
+\end_inset
+
+just works
+\begin_inset Quotes erd
+\end_inset
+
+, Gromov adds a category-theoretic argument, that the manipulations pass
+ through for the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, provided the various measures are square integrable; basically, it's just
+ fine if the point 
+\begin_inset Formula $y$
+\end_inset
+
+ is taken to belong to a Hilbert space.
+ 
+\end_layout
+
+\begin_layout Standard
+This conception of the metric passes over to the Fubini-Study metric, as
+ mentioned in that article, when one takes the 
+\begin_inset Formula $y$
+\end_inset
+
+ to be complex-valued: What this says is that basically, the Fubini-Study
+ metric on 
+\begin_inset Formula $\mathbb{CP}^{n}$
+\end_inset
+
+ is essentially the same thing as the flat Euclidean metric.
+ That is, to compute the distance between two complex-valued wave functions,
+ one simply takes their difference.
+ 
+\end_layout
+
+\begin_layout Standard
+Put another way: the difference in the information between two wave functions
+ is just their difference, but constrained to the fact that they live in
+ complex projective space, and not in Euclidean space.
+ Precisely, this is the Burres metric, with lots of details glossed over.
+ The projective nature of it all makes the formulas look complicated, obscuring
+ the underlying phenomenon.
+\end_layout
+
+\begin_layout Subsection
+Wave function collapse
+\end_layout
+
+\begin_layout Standard
+Other assorted ideas about wave-function collapse.
+\end_layout
+
+\begin_layout Subsubsection
+Wave function collapse is comultiplication
+\end_layout
+
+\begin_layout Standard
+The spin algebra that describes Weyl spinors is constructed from a Clifford
+ algebra, as mentioned above.
+ The Clifford algebra is in turn constructed from the tensor algebra.
+ The part that is of interest here is that the tensor algebra posses a Hopf
+ algebra structure, and I believe (should double-check) that this Hopf structure
+ survives all the way to to the spin algebra.
+\end_layout
+
+\begin_layout Standard
+One may then ask the question: what corresponds to comultiplication in the
+ Hopf algebra? One seemingly plausible answer is that it corresponds to
+ wave-function collapse.
+ That is, if one has a single fermion (single Weyl spinor) 
+\begin_inset Formula $v$
+\end_inset
+
+, under comultiplication, it passes over to 
+\begin_inset Formula 
+\[
+\Delta(v)=1\boxtimes v+v\boxtimes1
+\]
+
+\end_inset
+
+where I used 
+\begin_inset Formula $\boxtimes$
+\end_inset
+
+ to perversely note the tensor product of two tensor algebras, so as not
+ to confuse it with the tensor product that is internal to the tensor algebra
+ itself (which is a fatal mistake).
+ (I steal this idea from the Wikipedia article on the topic, which is OK,
+ since I wrote that Wikipedia article! Catch-22) That is 
+\begin_inset Formula $\Delta(c)\in TV\boxtimes TV$
+\end_inset
+
+.
+ What does this mean? How can one interpret this? Well, if 
+\begin_inset Formula $TV$
+\end_inset
+
+, or more precisely, the spin algebra constructed from 
+\begin_inset Formula $TV$
+\end_inset
+
+ describes the configuration of some number of number of spinors in the
+ universe, (including the fact that they obey the Grassmann algebra, i.e.
+ Pauli exclusion), then one must conclude that 
+\begin_inset Formula $TV\boxtimes TV$
+\end_inset
+
+ describes two universes, i.e.
+ two worlds of the many-worlds hypothesis.
+ The comultiplication above is stating that these two universes are in superposi
+tion (the box 
+\begin_inset Formula $\boxtimes$
+\end_inset
+
+ is still a tensor product; its bilinear; so the superposition is captured
+ by this expression).
+ However, it is also stating that the fermion that is NOT at a particular
+ location in one universe, is in that location in a different universe.
+ i.e.
+ the collapse proceeded so that, in each universe, the fermion ends up in
+ a different position (and that all of these collapsed states are still
+ coherent).
+\end_layout
+
+\begin_layout Standard
+Hmm.
+ This needs more work.
+ We want to say that the fermion collapsed to different locations/momenta
+ in different universes, and the above does not make that clear.
+ I think this is a notational deficiency...
+ Hmm.
+ Needs more work.
+\end_layout
+
+\begin_layout Standard
+Follows from the Hopf algebra structure on tensor algebras.
+\end_layout
+
+\begin_layout Subsubsection
+Wave function collapse is entropy
+\end_layout
+
+\begin_layout Standard
+Arbitrarily small deformations of certain compact 3D manifolds can preserve
+ the volume but increase the metric entropy and the topological entropy.
+ (metric entropy w.r.t.
+ the Liouville measure).
+ Livio Flamino, Local entropy rigidity for hyperbolic manifolds Comm.
+ Anal.
+ Geom., 3 (1995), 555–596.
+\end_layout
+
+\begin_layout Standard
+So, gravity at the plank-mass level, 
+\begin_inset Quotes eld
+\end_inset
+
+flea's egg
+\begin_inset Quotes erd
+\end_inset
+
+ level, tweaks the spacetime manifold in such a way that entropy increases,
+ geodesic flows separate or dettach, leading to wave-function collapse.
+\end_layout
+
+\begin_layout Subsection
 Many-worlds, Measurement, Wave-fuction Collapse
 \end_layout
 
@@ -2973,609 +3576,6 @@ replica trick
 \end_layout
 
 \begin_layout Subsection
-Complex numbers in QM
-\end_layout
-
-\begin_layout Standard
-Why do complex numbers show up in QM? Why aren't wave functions purely real?
- Why can't they be purely real? Where does the complex phase come from?
- Various arguments are given below.
-\end_layout
-
-\begin_layout Standard
-There is a completely different, but related question: Why is the probability
- the square of a complex-valued wave function? The arguments below do not
- seem to shed any light on that.
-\end_layout
-
-\begin_layout Paragraph*
-A1: Spin algebra?
-\end_layout
-
-\begin_layout Standard
-A conservative argument says that it comes from fermions, and specifically,
- the spin algebra.
- The spin algebra is built from a real Clifford algebra 
-\begin_inset Formula $V$
-\end_inset
-
- as 
-\begin_inset Formula 
-\[
-V\otimes\mathbb{C}=W\oplus\overline{W}
-\]
-
-\end_inset
-
-(see e.g.
- Jurgen Jost, 
-\begin_inset Quotes eld
-\end_inset
-
-Riemannian Geometry and Geometry Analysis, page 69) where 
-\begin_inset Formula $V$
-\end_inset
-
- is a real Clifford algebra (itself built from a tensor algebra!) and is
- generated from 
-\begin_inset Formula $2n$
-\end_inset
-
- components in order to describe 
-\begin_inset Formula $n$
-\end_inset
-
- Weyl spinors and 
-\begin_inset Formula $n$
-\end_inset
-
- conjugate spinors.
- One cannot get the required spin structure without using 
-\begin_inset Formula $\mathbb{C}$
-\end_inset
-
- in this construction.
- This argument makes sense because most 
-\begin_inset Quotes eld
-\end_inset
-
-physical
-\begin_inset Quotes erd
-\end_inset
-
- things in nature are fermions.
-\end_layout
-
-\begin_layout Standard
-Note that, in order for fermions to exist, a bundle must be a spin structure.
- i.e.
- is a lift of a frame bundle to a double-covering of SO(N) by Spin(N).
- The usual remarks apply.
- But this works only for neutral fermions.
- For charged fermions, the bundle must have a Spinc structure, where as
- per usual notation, its a twisted product 
-\begin_inset Formula 
-\[
-\mbox{Spin}^{\mathbb{C}}(n)=\mbox{Spin}(n)\times_{\mathbb{Z}_{2}}\mbox{U}(1)
-\]
-
-\end_inset
-
-i.e.
- the U(1) carries the electromagnetism.
- This paragraph is non-controversial, its the orthodox interpretation.
- The next question asks: is there another way? Or is it just a very basic
- confusion about the proliferation of complex numbers all shot-through QM
- and Clifford/spin algebra?
-\end_layout
-
-\begin_layout Paragraph*
-A2: Electromagnetism? 
-\end_layout
-
-\begin_layout Standard
-Wild guess: Perhaps the complex phase is actually a hidden side-effect of
- electromagnetism? There are two chains of though that lead to this: First,
- that the Aharonov-Bohn effect is most easily, most geometrically understood
- in a 
-\begin_inset Quotes eld
-\end_inset
-
-pre-quantum
-\begin_inset Quotes erd
-\end_inset
-
- fashion, as a holonomy of the U(1) fiber bundle.
- Thus, even before we perform any quantization, and just stick to 
-\begin_inset Quotes eld
-\end_inset
-
-pre-quantization
-\begin_inset Quotes erd
-\end_inset
-
-, we already get a complex phase that arises naturally, but only due to
- the electromagnetic structure on the fibre bundle.
-\end_layout
-
-\begin_layout Standard
-The classifying space for U(1) bundles is 
-\begin_inset Formula $\mathbb{CP}^{\infty}$
-\end_inset
-
- and the thing about 
-\begin_inset Formula $\mathbb{CP}^{\infty}$
-\end_inset
-
- is that it is exactly the same things as a Hilbert space on which QM is
- naturally formulated.
- It is complex, because wave-functions are complex-valued, its projective,
- because only normalized wave functions matter.
- We can identify the Hilbert space with the occupation states of the simple
- harmonic oscillator.
-\end_layout
-
-\begin_layout Paragraph*
-Cell structure
-\end_layout
-
-\begin_layout Standard
-Some minor insight might be gleaned by reviewing the structure of 
-\begin_inset Formula $\mathbb{CP}^{\infty}$
-\end_inset
-
-.
- The cellular structure (cell complex) of 
-\begin_inset Formula $\mathbb{CP}^{\infty}$
-\end_inset
-
-consists of all even dimensional cells (See 
-\begin_inset Quotes eld
-\end_inset
-
-Algebraic Topology
-\begin_inset Quotes erd
-\end_inset
-
-, Allen Hatcher, chapter 0 page 7) (See S.P.
- Novikov, 
-\begin_inset Quotes eld
-\end_inset
-
-Topology I: General Survey
-\begin_inset Quotes erd
-\end_inset
-
- eqn 3.15 page 62).
- That is, one writes 
-\begin_inset Formula 
-\[
-\mathbb{CP}^{\infty}=\kappa^{0}\cup\kappa^{2}\cup\kappa^{4}\cup\cdots
-\]
-
-\end_inset
-
-with
-\begin_inset Formula 
-\[
-\kappa^{2n}=\mathbb{CP}^{n}\backslash\mathbb{CP}^{n-1}=\left\{ \left.\left(z_{0}:\cdots:z_{n}\right)\right|:z_{j}\ne0\;\forall\,j\right\} \simeq D^{2n}
-\]
-
-\end_inset
-
-where by abuse of notation, the above makes the mistake of writing a cell,
- which is actually a map of a disk, with the disk itself.
- Oh well.
- This is just a mnemonic reminder, that's all.
- 
-\end_layout
-
-\begin_layout Standard
-The point is that a single qubit is 
-\begin_inset Formula $\mathbb{CP}^{1}$
-\end_inset
-
-, i.e.
- is the Bloch sphere, i.e.
- is the 2-sphere i.e.
- is the 2-disk with the edge of the disk identified to a point.
- Then 
-\begin_inset Formula $n$
-\end_inset
-
- qubits are 
-\begin_inset Formula $\mathbb{CP}^{n}$
-\end_inset
-
-, etc.
- The reason that qubits are projective is because only the relative phases
- of wave-functions matter, and the amplitude of a wave function is always
- normalized to one.
- Specifically, a single qubit is 
-\begin_inset Formula 
-\[
-\mathbb{CP}^{1}=\left\{ z_{0}\left|\uparrow\right\rangle +z_{1}\left|\downarrow\right\rangle \left|\left|z_{0}\right|^{2}+\left|z_{1}\right|^{2}=1,\;z_{0}/z_{1}\mbox{ real}\right.\right\} \simeq S^{2}
-\]
-
-\end_inset
-
- and the gluing together of these things requires only the even-dimensional
- cells...
-\end_layout
-
-\begin_layout Standard
-To summarize – is it possible that the complex-valued wave function of textbook
- QM secretly a side-effect of electromagnetism and U(1) bundles? Or is this
- a red herring?
-\end_layout
-
-\begin_layout Paragraph*
-A3: Spherical harmonics counter-argument
-\end_layout
-
-\begin_layout Standard
-We can view 3D space as a homogeneous space of the rotation group.
- Recall that homogeneous spaces are defined as quotients of Lie groups.
- In this case, the 
-\begin_inset Formula $Y_{lm}$
-\end_inset
-
- spherical wave functions needed to represent the spherical harmonics are
- naturally complex-valued, and this natural-complex-valued-ness has nothing
- at all to do with electromagnetism.
- (Unless, of course, the 3-dimensionality of space was a side-effect of
- electromagnetism...)
-\end_layout
-
-\begin_layout Paragraph*
-A4: Counter-counter-argument
-\end_layout
-
-\begin_layout Standard
-Now that we've invoked the rotation group, the inevitable is in store.
- Namely, vectors belong to the adjoint rep of the rotation group.
- Maxwell equations are exactly the same thing as a statement about the transform
-ation properties of these vectors under the action of the Poincaré group.
- That is, the electric and magnetic fields are vectors in the Lorentz algebra,
- i.e.
- live in the 
-\begin_inset Quotes eld
-\end_inset
-
-vertical
-\begin_inset Quotes erd
-\end_inset
-
- fibers, the fibers being in the associated bundle of the Lorentz group.
- The actual transformation properties of these vectors, under 
-\begin_inset Quotes eld
-\end_inset
-
-horizontal
-\begin_inset Quotes erd
-\end_inset
-
- translations in Minkowski space, are given by the Poincaré algebra.
- These are exactly equal to the Maxwell equations.
-\end_layout
-
-\begin_layout Standard
-The fact that the electric and magnetic fields satisfy the wave equation
- is due to the fact that the wave equation is just the quadratic Casimir
- operator of the Poincaré algebra.
- (A worthy exercise is to write down the details to support these claims).
-\end_layout
-
-\begin_layout Standard
-Opaque in the above construction is how U(1) arises.
- The Poincaré algebra gave us a differential structure.
- To get the A field from the E,B fields requires the notion of differential
- topology, i.e.
- the notion of closed forms for the E-field, and exact forms for the B-field.
- These last two statements follows from the fact that electric charges exist,
- magnetic ones don't (except in the form of a holonomy).
- So why should electric charges exist, but magnetic ones not? This is partly
- answered by looking at the representation theory of the Poincaré group:
- it has massive particles in it.
- These can have an electric charge, because 
-\begin_inset Quotes eld
-\end_inset
-
-mass
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-electric charge
-\begin_inset Quotes erd
-\end_inset
-
- both point in the same direction: i.e.
- in the time-like direction.
- By contrast, magnetic monopoles could only be consistent with imaginary
- mass, i.e.
- tachyonic degrees of freedom.
- So the Poincaré algebra is really a kind of no-go for magnetic monopoles.
- This last sentence is highly textbook non-standard, and so needs to be
- fully fleshed out in detail, as it is non-obvious.
- 
-\end_layout
-
-\begin_layout Standard
-Once one deduces that the Poincaré algebra effectively prohibits magnetic
- monopoles (except in the form of a holonomy) then the standard machinery
- of differential topology allows one to deduce U(1) from the A field.
- 
-\end_layout
-
-\begin_layout Standard
-Side note: as soon as one invokes the rotation group, it necessarily follows
- that one must discuss the fundamental rep, not just the adjoint rep.
- The fundamental rep leads invariably to the spin algebra, mentioned up
- top.
-\end_layout
-
-\begin_layout Standard
-In sum, this is a rather long argument.
- It raises the question: why is space 3+1 dimensional? Because, as soon
- as we know its 3+1 dimensional, the above purports to show that (a) electromagn
-etism is inevitable, as a rep of the Poincaré algebra (b) The U(1) structure
- is inevitable, (c) spin structures are inevitable (d) complex-valued wave-funct
-ions are inevitable.
-\end_layout
-
-\begin_layout Standard
-What it does not yet show is why the square of the wave-function can be
- interpreted as a probability, and why wave-functions must collapse.
-\end_layout
-
-\begin_layout Subsection
-Probability and wave functions
-\end_layout
-
-\begin_layout Standard
-Why does the square of the wave function yield a probability? Where do the
- complex numbers come in, and why?
-\end_layout
-
-\begin_layout Paragraph*
-A1: Maybe its entropy
-\end_layout
-
-\begin_layout Standard
-One suggestive argument comes from Mikhail Gromov, in 
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset CommandInset href
-LatexCommand href
-name "In a Search for a Structure, Part 1: On Entropy."
-target "http://www.ihes.fr/~gromov/PDF/structre-serch-entropy-july5-2012.pdf"
-literal "false"
-
-\end_inset
-
-
-\begin_inset Quotes eld
-\end_inset
-
- Relevant aspects are summarized in the wikipedia article 
-\begin_inset CommandInset href
-LatexCommand href
-name "Fisher information metric"
-target "https://en.wikipedia.org/wiki/Fisher_information_metric"
-literal "false"
-
-\end_inset
-
-.
- To repeat them here: consider the finite-dimensional simplex of probabilities
- summing to one: 
-\begin_inset Formula $\sum_{i}p_{i}=1$
-\end_inset
-
-.
- Consider the change of variable 
-\begin_inset Formula $p_{i}=y_{i}^{2}$
-\end_inset
-
- so that the simplex is mapped to a quadrant of a sphere: 
-\begin_inset Formula $\sum_{i}y_{i}^{2}=1$
-\end_inset
-
-.
- Consider the the flat metric in the Euclidean space 
-\begin_inset Formula $y=(y_{1},\cdots,y_{n})$
-\end_inset
-
- This flat metric induces a metric on the sphere.
- Converting coordinates back to the 
-\begin_inset Formula $p_{i}$
-\end_inset
-
- one finds that the flat Euclidean metric has become the Fisher information
- metric! That is, if we want to consider how close two different probability
- distributions are, we use the Fisher information metric; alternately, we
- can take the square root of the probability, and use the Euclidean metric.
- 
-\end_layout
-
-\begin_layout Standard
-The above 
-\begin_inset Quotes eld
-\end_inset
-
-just works
-\begin_inset Quotes erd
-\end_inset
-
-, Gromov adds a category-theoretic argument, that the manipulations pass
- through for the limit 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-, provided the various measures are square integrable; basically, it's just
- fine if the point 
-\begin_inset Formula $y$
-\end_inset
-
- is taken to belong to a Hilbert space.
- 
-\end_layout
-
-\begin_layout Standard
-This conception of the metric passes over to the Fubini-Study metric, as
- mentioned in that article, when one takes the 
-\begin_inset Formula $y$
-\end_inset
-
- to be complex-valued: What this says is that basically, the Fubini-Study
- metric on 
-\begin_inset Formula $\mathbb{CP}^{n}$
-\end_inset
-
- is essentially the same thing as the flat Euclidean metric.
- That is, to compute the distance between two complex-valued wave functions,
- one simply takes their difference.
- 
-\end_layout
-
-\begin_layout Standard
-Put another way: the difference in the information between two wave functions
- is just their difference, but constrained to the fact that they live in
- complex projective space, and not in Euclidean space.
- Precisely, this is the Burres metric, with lots of details glossed over.
- The projective nature of it all makes the formulas look complicated, obscuring
- the underlying phenomenon.
-\end_layout
-
-\begin_layout Subsection
-Wave function collapse
-\end_layout
-
-\begin_layout Standard
-Other assorted ideas about wave-function collapse.
-\end_layout
-
-\begin_layout Subsubsection
-Wave function collapse is comultiplication
-\end_layout
-
-\begin_layout Standard
-The spin algebra that describes Weyl spinors is constructed from a Clifford
- algebra, as mentioned above.
- The Clifford algebra is in turn constructed from the tensor algebra.
- The part that is of interest here is that the tensor algebra posses a Hopf
- algebra structure, and I believe (should double-check) that this Hopf structure
- survives all the way to to the spin algebra.
-\end_layout
-
-\begin_layout Standard
-One may then ask the question: what corresponds to comultiplication in the
- Hopf algebra? One seemingly plausible answer is that it corresponds to
- wave-function collapse.
- That is, if one has a single fermion (single Weyl spinor) 
-\begin_inset Formula $v$
-\end_inset
-
-, under comultiplication, it passes over to 
-\begin_inset Formula 
-\[
-\Delta(v)=1\boxtimes v+v\boxtimes1
-\]
-
-\end_inset
-
-where I used 
-\begin_inset Formula $\boxtimes$
-\end_inset
-
- to perversely note the tensor product of two tensor algebras, so as not
- to confuse it with the tensor product that is internal to the tensor algebra
- itself (which is a fatal mistake).
- (I steal this idea from the Wikipedia article on the topic, which is OK,
- since I wrote that Wikipedia article! Catch-22) That is 
-\begin_inset Formula $\Delta(c)\in TV\boxtimes TV$
-\end_inset
-
-.
- What does this mean? How can one interpret this? Well, if 
-\begin_inset Formula $TV$
-\end_inset
-
-, or more precisely, the spin algebra constructed from 
-\begin_inset Formula $TV$
-\end_inset
-
- describes the configuration of some number of number of spinors in the
- universe, (including the fact that they obey the Grassmann algebra, i.e.
- Pauli exclusion), then one must conclude that 
-\begin_inset Formula $TV\boxtimes TV$
-\end_inset
-
- describes two universes, i.e.
- two worlds of the many-worlds hypothesis.
- The comultiplication above is stating that these two universes are in superposi
-tion (the box 
-\begin_inset Formula $\boxtimes$
-\end_inset
-
- is still a tensor product; its bilinear; so the superposition is captured
- by this expression).
- However, it is also stating that the fermion that is NOT at a particular
- location in one universe, is in that location in a different universe.
- i.e.
- the collapse proceeded so that, in each universe, the fermion ends up in
- a different position (and that all of these collapsed states are still
- coherent).
-\end_layout
-
-\begin_layout Standard
-Hmm.
- This needs more work.
- We want to say that the fermion collapsed to different locations/momenta
- in different universes, and the above does not make that clear.
- I think this is a notational deficiency...
- Hmm.
- Needs more work.
-\end_layout
-
-\begin_layout Standard
-Follows from the Hopf algebra structure on tensor algebras.
-\end_layout
-
-\begin_layout Subsubsection
-Wave function collapse is entropy
-\end_layout
-
-\begin_layout Standard
-Arbitrarily small deformations of certain compact 3D manifolds can preserve
- the volume but increase the metric entropy and the topological entropy.
- (metric entropy w.r.t.
- the Liouville measure).
- Livio Flamino, Local entropy rigidity for hyperbolic manifolds Comm.
- Anal.
- Geom., 3 (1995), 555–596.
-\end_layout
-
-\begin_layout Standard
-So, gravity at the plank-mass level, 
-\begin_inset Quotes eld
-\end_inset
-
-flea's egg
-\begin_inset Quotes erd
-\end_inset
-
- level, tweaks the spacetime manifold in such a way that entropy increases,
- geodesic flows separate or dettach, leading to wave-function collapse.
-\end_layout
-
-\begin_layout Subsection
 Laplacians and Energy
 \end_layout
 
@@ -3929,6 +3929,24 @@ The two-sphere has three Killing vector fields.
 \end_inset
 
  is the stabilizer subalgebra.
+\end_layout
+
+\begin_layout Standard
+A pure state is meant to be represented by a single point on the Bloch sphere.
+ The manipulation of a pure state, e.g.
+ by rotating it via some device, move the point on the Bloch sphere.
+ The phase is interpreted as residing in the 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ part, so one expects holonomy effects to arise if the spin is moved about
+ a closed path.
+ TODO: provide explcit expressinos for the holonomy.
+\end_layout
+
+\begin_layout Standard
+This pure state is to be understood to be (part of) a single fiber of some
+ fiber-bundle; it's just marking a spin direction for one point in spacetime.
 \end_layout
 
 \end_body
