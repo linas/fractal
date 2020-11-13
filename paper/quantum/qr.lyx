@@ -3902,6 +3902,84 @@ Recurring theme
 \end_layout
 
 \begin_layout Standard
+The goal here is to interpret 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+ as a pure state, and specifically, a point on a single fiber of some fiber
+ bundle.
+ That is, it is just marking a spin direction for one point in spacetime.
+ Given a spacetime point 
+\begin_inset Formula $x$
+\end_inset
+
+, the fiber above 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $\psi\left(x\right)=\left\langle x|\psi\right\rangle $
+\end_inset
+
+ which has a real magnitude 
+\begin_inset Formula $p\left(x\right)=\left\Vert \psi\left(x\right)\right\Vert ^{2}=\left|\psi^{*}\left(x\right)\psi\left(x\right)\right|<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+At this time, no physical assumptions about mixed states are being made;
+ in particular, the density matrix is NOT assumed! This is because I want
+ to leave open the door to a more general concept of mixed states as arbitrary
+ probability distributions on the surface of the Bloch sphere, rather than
+ as points in it's interior, as standard QM density matrix formalism requires.
+\end_layout
+
+\begin_layout Standard
+Per Wikipedia, lets use modified Hopf coordinates: 
+\begin_inset Formula 
+\[
+\alpha=e^{i\varphi}\cos\eta\quad\mbox{and \ensuremath{\quad\beta=e^{i\varphi}e^{i\xi}}\ensuremath{\sin\eta}}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $0\le\eta\le\pi/2$
+\end_inset
+
+: attention, this is NOT the usual sphere coord, its off by a factor of
+ two! So 
+\begin_inset Formula $\eta=0$
+\end_inset
+
+ corresponds to 
+\begin_inset Formula $\left|\uparrow\right\rangle $
+\end_inset
+
+ and 
+\begin_inset Formula $\eta=\pi/2$
+\end_inset
+
+ corresponds to 
+\begin_inset Formula $\left|\downarrow\right\rangle $
+\end_inset
+
+.
+ The longitude is 
+\begin_inset Formula $0\le\xi\le2\pi$
+\end_inset
+
+.
+ The phase is 
+\begin_inset Formula $e^{i\varphi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The two-sphere has three Killing vector fields.
  So, basicaly, treat 
 \begin_inset Formula $S^{2}$
@@ -3932,6 +4010,11 @@ The two-sphere has three Killing vector fields.
 \end_layout
 
 \begin_layout Standard
+I assume that this is equivalent to the Hopf fibration, but this needs to
+ be double-checked, with explicit expressions given.
+\end_layout
+
+\begin_layout Standard
 A pure state is meant to be represented by a single point on the Bloch sphere.
  The manipulation of a pure state, e.g.
  by rotating it via some device, move the point on the Bloch sphere.
@@ -3939,14 +4022,48 @@ A pure state is meant to be represented by a single point on the Bloch sphere.
 \begin_inset Formula $\mathfrak{h}$
 \end_inset
 
- part, so one expects holonomy effects to arise if the spin is moved about
+ part, That is, 
+\begin_inset Formula $\varphi\in\mathfrak{h}$
+\end_inset
+
+ where 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is the 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ from above, so that 
+\begin_inset Formula $e^{i\varphi}\in U\left(1\right)\cong S^{1}$
+\end_inset
+
+ is the overall phase.
+ Thus, one expects holonomy effects to arise if the spin is moved about
  a closed path.
- TODO: provide explcit expressinos for the holonomy.
+ TODO: provide explcit expressions for the holonomy.
+\end_layout
+
+\begin_layout Subsection
+The two-spin system
 \end_layout
 
 \begin_layout Standard
-This pure state is to be understood to be (part of) a single fiber of some
- fiber-bundle; it's just marking a spin direction for one point in spacetime.
+The goal here is to represent an entangled state of two qubits.
+ Naively, this is an element in 
+\begin_inset Formula $\mathbb{C}^{4}$
+\end_inset
+
+, which we will decompose into spinors, and apply normalization constraints.
+\end_layout
+
+\begin_layout Standard
+Here's the tricky part: should this be a field in space, or should it live
+ outside of space? That is, if we entangle two spinors, we can measure the
+ local amplitude of the spinors, individually; we do NOT meaure the entangled
+ state (except as an entanglement of the individual spinors.) Thus, we have
+ the usual algebra, but we must must associated two spatial positions to
+ it, not one.
 \end_layout
 
 \end_body
