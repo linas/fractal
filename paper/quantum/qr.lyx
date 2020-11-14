@@ -3906,8 +3906,15 @@ The goal here is to interpret
 \begin_inset Formula $\left|\psi\right\rangle $
 \end_inset
 
- as a pure state, and specifically, a point on a single fiber of some fiber
- bundle.
+ as a pure state, and specifically, a 
+\begin_inset Quotes eld
+\end_inset
+
+point
+\begin_inset Quotes erd
+\end_inset
+
+ on a single fiber of some fiber bundle.
  That is, it is just marking a spin direction for one point in spacetime.
  Given a spacetime point 
 \begin_inset Formula $x$
@@ -3929,6 +3936,33 @@ The goal here is to interpret
 \end_layout
 
 \begin_layout Standard
+The word 
+\begin_inset Quotes eld
+\end_inset
+
+point
+\begin_inset Quotes erd
+\end_inset
+
+ here is ambiguous.
+ There are several possible interpretations.
+ The classical interpretation is to associate 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+ as a single point on the Bloch sphere.
+ (I think this is the mental model most physicists use).
+ Another interpretation is to associate 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+ with Killing fields on the Bloch sphere.
+ We'll be using the second interpretation; this is required to overcome
+ technical problems relating to Clebsh–Gordan coeficients for the two-particle
+ state.
+\end_layout
+
+\begin_layout Standard
 At this time, no physical assumptions about mixed states are being made;
  in particular, the density matrix is NOT assumed! This is because I want
  to leave open the door to a more general concept of mixed states as arbitrary
@@ -3937,7 +3971,11 @@ At this time, no physical assumptions about mixed states are being made;
 \end_layout
 
 \begin_layout Standard
-Per Wikipedia, lets use modified Hopf coordinates: 
+Per Wikipedia, a single point on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ can be paramterized by Hopf coordinates: 
 \begin_inset Formula 
 \[
 \alpha=e^{i\varphi}\cos\eta\quad\mbox{and \ensuremath{\quad\beta=e^{i\varphi}e^{i\xi}}\ensuremath{\sin\eta}}
@@ -4015,6 +4053,66 @@ I assume that this is equivalent to the Hopf fibration, but this needs to
 \end_layout
 
 \begin_layout Standard
+Per the 
+\begin_inset Quotes eld
+\end_inset
+
+hairy ball theorem
+\begin_inset Quotes erd
+\end_inset
+
+, vector fields on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ cannot be combed, which is why the stabilizer 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ is not vacant.
+ Picking a single point on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ corresponds to picking a Killing field that is vanishing at that point.
+ The other two are not, they are tangent to 
+\begin_inset Formula $T_{p}S^{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $p=\left|\psi\right\rangle $
+\end_inset
+
+ is the point on the Bloch sphere.
+\end_layout
+
+\begin_layout Standard
+The biggest problem with using Killing fields to represent a point is that
+ there will also be a second spot somewhere on the sphere where a given
+ Killing field must vanish.
+ This problem can be avoided by noting that a given fixed Killing field
+ is just one representative out of an infinite set of such fields.
+ Infinite set because, at each point on the spehre, we are free to choose
+ any coordinate frame we like; the Killing fields can be any wild, crazy
+ combing of hair, as long as we recognize thier algebra is the algebra of
+ the isometries, i.e.
+ 
+\begin_inset Formula $\mathfrak{su}\left(2\right)$
+\end_inset
+
+.
+ That is, let 
+\begin_inset Formula $p=\left|\psi\right\rangle $
+\end_inset
+
+ correspond to the coset of all Killing fields that vanish at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 A pure state is meant to be represented by a single point on the Bloch sphere.
  The manipulation of a pure state, e.g.
  by rotating it via some device, move the point on the Bloch sphere.
@@ -4071,23 +4169,94 @@ Here's the tricky part: this is not a fiber over a single spacetime; it
 \end_inset
 
 .
- It has two spatial postions.
+ It has two spatial positions.
 \end_layout
 
 \begin_layout Standard
-...Bell states.
- Conventional notation:
+So the general two-particle state will be 
 \begin_inset Formula 
-\begin{align*}
-\left|\Phi^{+}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|00\right\rangle +\left|11\right\rangle \right)\\
-\left|\Phi^{-}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|00\right\rangle -\left|11\right\rangle \right)\\
-\left|\Psi^{+}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|01\right\rangle +\left|10\right\rangle \right)\\
-\left|\Psi^{-}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|01\right\rangle -\left|10\right\rangle \right)
-\end{align*}
+\[
+\left|\psi_{A}\right\rangle \otimes\left|\psi_{B}\right\rangle =\left(\alpha_{A}\left|\uparrow_{A}\right\rangle +\beta_{A}\left|\downarrow_{A}\right\rangle \right)\otimes\left(\alpha_{B}\left|\uparrow_{B}\right\rangle +\beta_{B}\left|\downarrow_{B}\right\rangle \right)
+\]
+
+\end_inset
+
+Note the tensor product makes it bilinear.
+ Expanding this gives
+\begin_inset Formula 
+\[
+\left|\psi_{A}\right\rangle \otimes\left|\psi_{B}\right\rangle =\alpha_{A}\alpha_{B}\left|\uparrow_{A}\uparrow_{B}\right\rangle +\alpha_{A}\beta_{B}\left|\uparrow_{A}\downarrow_{B}\right\rangle +\beta_{A}\alpha_{B}\left|\downarrow_{A}\uparrow_{B}\right\rangle +\beta_{A}\beta_{B}\left|\downarrow_{A}\downarrow_{B}\right\rangle 
+\]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The primary issue with the above expression is that a two-particle state
+ cannot be determined by a pair of points on the Bloch sphere.
+ For example, Bell states are the maximally entangled states.
+ These are, in conventional notation:
+\begin_inset Formula 
+\begin{align*}
+\left|\Phi^{+}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\uparrow\right\rangle +\left|\downarrow\downarrow\right\rangle \right)\\
+\left|\Phi^{-}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\uparrow\right\rangle -\left|\downarrow\downarrow\right\rangle \right)\\
+\left|\Psi^{+}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\downarrow\right\rangle +\left|\downarrow\uparrow\right\rangle \right)\\
+\left|\Psi^{-}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\downarrow\right\rangle -\left|\downarrow\uparrow\right\rangle \right)
+\end{align*}
+
+\end_inset
+
+and there is no choice of 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+ that can express the above just a single pair of spin-1/2 states.
+\end_layout
+
+\begin_layout Standard
+This is not enough.
+ That is, we need to work with states 
+\begin_inset Formula $\left|j\,m\right\rangle $
+\end_inset
+
+ with 
+\begin_inset Formula $j=1$
+\end_inset
+
+ and 
+\begin_inset Formula $m=-1,0,+1$
+\end_inset
+
+ and thus a generic two-particle state is 
+\begin_inset Formula 
+\[
+\left|\psi_{AB}\right\rangle =\zeta\left|j=1\;m=-1\right\rangle +\eta\left|j=1\;m=0\right\rangle +\theta\left|j=1\;m=+1\right\rangle 
+\]
+
+\end_inset
+
+requires three complex numbers 
+\begin_inset Formula $\zeta,\eta,\theta$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{C}^{6}$
+\end_inset
+
+.
+ (Requiring normaliztion knocks this down, etc.) The point here is that a
+ generic 
+\begin_inset Formula $\left|\psi_{AB}\right\rangle $
+\end_inset
+
+ cannot be written as a pair of points on the Bloch sphere.
+ At least two pairs of points are needed!
+\end_layout
+
+\begin_layout Standard
+...
 \end_layout
 
 \end_body
