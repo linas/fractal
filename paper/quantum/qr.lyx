@@ -4448,20 +4448,29 @@ Charge conjugation
 \end_layout
 
 \begin_layout Standard
-While attempting to understand ELKO, I'm realizing there may be two different
- things that are called 
-\begin_inset Quotes eld
-\end_inset
+While attempting to understand ELKO, I wrote the Wikipedia article on charge
+ conjugation.
+\end_layout
 
-charge conjugation
-\begin_inset Quotes erd
-\end_inset
+\begin_layout Standard
+What I've learned:
+\end_layout
 
-.
- So, some notes.
- Anyway, 98% of the stuff written on ELKO is confusing bullshit.
- Hoever, J.A.
- Nieto spells it out precisely and exacly, see below.
+\begin_layout Itemize
+J.A.
+ Nieto spells ELKO in an understandable fashion.
+\end_layout
+
+\begin_layout Itemize
+Charge conjugation in spinors is really just complex conjugation, but it
+ is tangled into there in a non-obvious way.
+ The textbooks do not give it full justice.
+\end_layout
+
+\begin_layout Itemize
+Charge conjugation exchanges left and right-handed Weyl spinors, which makes
+ sense, because this is how Weyl spinors are defined.
+ So this extends to Riemannian geometry, in general.
 \end_layout
 
 \begin_layout Subsection
@@ -4519,6 +4528,11 @@ Let
 \end_inset
 
 .
+ This means 
+\begin_inset Formula $\left\langle e_{j},e_{k}\right\rangle =\delta_{jk}$
+\end_inset
+
+.
  Assume 
 \begin_inset Formula $V$
 \end_inset
@@ -4570,11 +4584,76 @@ for
 \begin_inset Formula $W$
 \end_inset
 
- and the coplex conjugate spinors span 
+ and the complex conjugate spinors span 
 \begin_inset Formula $\overline{W}$
 \end_inset
 
 .
+ The
+\end_layout
+
+\begin_layout Subsubsection
+Weyl spinors special case d=1
+\end_layout
+
+\begin_layout Standard
+Then we've got
+\begin_inset Formula 
+\[
+\eta=\frac{e_{1}-ie_{2}}{\sqrt{2}}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\eta^{2}=0=\overline{\eta}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta\overline{\eta}=-1+ie_{1}e_{2}$
+\end_inset
+
+ after recalling that 
+\begin_inset Formula $e_{1}^{2}=e_{2}^{2}=-1$
+\end_inset
+
+.
+ Compare to the inner product: 
+\begin_inset Formula $\left\langle \eta,\eta\right\rangle =0=\left\langle \overline{\eta},\overline{\eta}\right\rangle $
+\end_inset
+
+ while 
+\begin_inset Formula $\left\langle \eta,\overline{\eta}\right\rangle =1$
+\end_inset
+
+ after recalling that 
+\begin_inset Formula $\left\langle e_{1},e_{1}\right\rangle =\left\langle e_{2},e_{2}\right\rangle =1$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\langle e_{1},e_{2}\right\rangle =0$
+\end_inset
+
+.
+ Written as explicit vectors,
+\begin_inset Formula 
+\[
+\eta=\frac{1}{\sqrt{2}}\left(\begin{array}{c}
+1\\
+-i
+\end{array}\right)\qquad\overline{\eta}=\frac{1}{\sqrt{2}}\left(\begin{array}{c}
+1\\
+i
+\end{array}\right)
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $\left\langle \eta,\overline{\eta}\right\rangle =\eta^{T}\cdot\overline{\eta}$
+\end_inset
+
+ as vector notation, but this notation is problematic so don't use it.
 \end_layout
 
 \begin_layout Subsection
@@ -5089,12 +5168,17 @@ C\gamma_{\mu}C^{-1}=-\left(\gamma_{\mu}\right)^{T}
 \end_inset
 
 for all representations.
- Note the index is down low, this introduces the needed minus signs, coming
- from the metric.
- (fwiw, the above is from Itzykson& Zuber, and also Bjorken&Drell, volume
- 2, page 115.
- However, B&D Volume 1 seems to have it wrong, writing the index up instead
- of down, page 67
+ In all four bases (Dirac, Majorana, two chiral forms), 
+\begin_inset Formula $C^{-1}=C^{\dagger}=C^{T}=-C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The above is from Itzykson& Zuber, and also Bjorken&Drell, volume 2, page
+ 115.
+ B&D Volume 1, page 67
 \end_layout
 
 \begin_layout Standard
@@ -5106,12 +5190,24 @@ C=-i\gamma^{0}
 
 \end_inset
 
+which obeys 
+\begin_inset Formula $C^{-1}=-C=C^{\dagger}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 This works in the Majorana basis.
 \end_layout
 
 \begin_layout Standard
 In the Dirac basis, 
 \begin_inset Formula $C=i\gamma^{2}\gamma^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $C^{-1}=-C$
 \end_inset
 
 
@@ -5193,6 +5289,174 @@ with
 \end_inset
 
  so this is an eight-component spinor.
+\end_layout
+
+\begin_layout Section
+Majorana
+\end_layout
+
+\begin_layout Standard
+Trying to untangle Majorana for wikipedia what an effing mess.
+ Some notes:
+\end_layout
+
+\begin_layout Itemize
+One charged DIrac can be built from two netural majorana, ref: Andreas Aste
+ 
+\begin_inset Quotes eld
+\end_inset
+
+A Direct Road to Majorana Fields
+\begin_inset Quotes erd
+\end_inset
+
+ Symmetry 2010, 2, 1776-1809; doi:10.3390/sym2041776
+\end_layout
+
+\begin_layout Subsection
+Symplectic form
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula 
+\[
+\epsilon=i\sigma_{2}=\left(\begin{array}{cc}
+0 & 1\\
+-1 & 0
+\end{array}\right)
+\]
+
+\end_inset
+
+which defines a symplectic bilinear form 
+\begin_inset Formula 
+\[
+\left\langle u,v\right\rangle =-\left\langle v,u\right\rangle =u_{1}v_{2}-u_{2}v_{1}=\left(\begin{array}{cc}
+u_{1} & u_{2}\end{array}\right)\left(\begin{array}{cc}
+0 & 1\\
+-1 & 0
+\end{array}\right)\left(\begin{array}{c}
+v_{1}\\
+v_{2}
+\end{array}\right)=u^{T}\epsilon v
+\]
+
+\end_inset
+
+This is invariant under 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ since for 
+\begin_inset Formula $S\in SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ one gets 
+\begin_inset Formula $\left\langle Su,Sv\right\rangle =\left\langle u,v\right\rangle $
+\end_inset
+
+.
+ And so 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)\cong Sp\left(2,\mathbb{C}\right)$
+\end_inset
+
+ is an isomorphism.
+ By definition, 
+\begin_inset Formula 
+\[
+Sp\left(2,\mathbb{C}\right)=\left\{ S\in GL\left(2,\mathbb{C}\right)|S^{T}\epsilon S=\epsilon\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Weyl equation
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $\sigma_{\mu}=\left(1,\vec{\sigma}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ the usual Pauli matrices.
+ The Weyl eqn is 
+\begin_inset Formula 
+\[
+\sigma_{\mu}\partial^{\mu}\psi\left(x\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Lorentz invariance
+\end_layout
+
+\begin_layout Standard
+Want to check 
+\begin_inset Formula $\psi\left(x\right)\mapsto\psi^{\prime}\left(x^{\prime}\right)=S\psi\left(x\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $x^{\prime}=\Lambda x$
+\end_inset
+
+ and 
+\begin_inset Formula $x=\Lambda^{-1}x^{\prime}$
+\end_inset
+
+.
+ So
+\begin_inset Formula 
+\[
+0=\sigma_{\mu}\frac{\partial}{\partial x_{\mu}^{\prime}}\psi\left(x^{\prime}\right)=\sigma_{\mu}\frac{\partial x_{\nu}}{\partial x_{\mu}^{\prime}}\frac{\partial}{\partial x_{\nu}}S\psi\left(x\right)
+\]
+
+\end_inset
+
+ but 
+\begin_inset Formula 
+\[
+\frac{\partial x_{\nu}}{\partial x_{\mu}^{\prime}}=\left(\Lambda^{-1}\right)_{\;\,\nu}^{\mu}
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+0=\sigma_{\mu}\left(\Lambda^{-1}\right)_{\;\,\nu}^{\mu}\partial^{\nu}S\psi\left(x\right)
+\]
+
+\end_inset
+
+which will be invariant provided that 
+\begin_inset Formula 
+\[
+\sigma_{\mu}\left(\Lambda^{-1}\right)_{\;\,\nu}^{\mu}=S\sigma_{\nu}S^{-1}
+\]
+
+\end_inset
+
+This is the double-covering of orthochronous Lorentz group by 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ahhh 
 \end_layout
 
 \begin_layout Section
