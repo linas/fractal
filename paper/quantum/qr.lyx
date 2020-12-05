@@ -5301,7 +5301,7 @@ Trying to untangle Majorana for wikipedia what an effing mess.
 \end_layout
 
 \begin_layout Itemize
-One charged Dirac can be built from two netural majorana, ref: Andreas Aste
+One charged Dirac can be built from two neutral majorana, ref: Andreas Aste
  
 \begin_inset Quotes eld
 \end_inset
@@ -5319,7 +5319,7 @@ Lorentz group
 
 \begin_layout Standard
 Write 
-\begin_inset Formula $\sigma_{\mu}=\left(1,\vec{\sigma}\right)$
+\begin_inset Formula $\sigma^{\mu}=\left(1,\vec{\sigma}\right)$
 \end_inset
 
  for 
@@ -5327,8 +5327,19 @@ Write
 \end_inset
 
  the usual Pauli matrices.
+ This will provide the right-handed Weyl spinors.
  Write 
 \begin_inset Formula $g_{\mu\nu}=+---$
+\end_inset
+
+.
+ Then we have also 
+\begin_inset Formula $\overline{\sigma}^{\mu}=\left(1,-\vec{\sigma}\right)$
+\end_inset
+
+ which provides the left-handed spinors.
+ Note the mind-numbing relations 
+\begin_inset Formula $\overline{\sigma}^{\mu}=\sigma_{\mu}$
 \end_inset
 
 .
@@ -5342,7 +5353,7 @@ The standard double-covering of orthochronous Lorentz group by
  is 
 \begin_inset Formula 
 \[
-\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=S\sigma_{\nu}S^{\dagger}
+\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}=S\overline{\sigma}_{\nu}S^{\dagger}
 \]
 
 \end_inset
@@ -5355,7 +5366,7 @@ This works because it preserves the Minkowski metric:
  That is
 \begin_inset Formula 
 \[
-x^{\prime\mu}\sigma_{\mu}=x^{\nu}\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=Sx^{\nu}\sigma_{\nu}S^{\dagger}
+x^{\prime\mu}\overline{\sigma}_{\mu}=x^{\nu}\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}=Sx^{\nu}\overline{\sigma}_{\nu}S^{\dagger}
 \]
 
 \end_inset
@@ -5369,6 +5380,20 @@ the Weyl representation
 \end_inset
 
  (of a point in Minkowski space).
+ But also
+\begin_inset Formula 
+\[
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=S^{\dagger}\sigma_{\nu}S
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Chirality is Lorentz invariant, but is not a constant of motion for massive
+ particles.
 \end_layout
 
 \begin_layout Subsection
@@ -5550,7 +5575,7 @@ u_{2}
 Then 
 \begin_inset Formula 
 \[
-\epsilon=J=\Omega=i\sigma_{2}=\left(\begin{array}{cc}
+\epsilon=\omega=\Omega=i\sigma_{2}=\left(\begin{array}{cc}
 0 & 1\\
 -1 & 0
 \end{array}\right)
@@ -5558,7 +5583,7 @@ Then
 
 \end_inset
 
-defines a symplectic bilinear form on 
+This defines a symplectic bilinear form on 
 \begin_inset Formula $\mathbb{C}^{2}$
 \end_inset
 
@@ -5648,6 +5673,151 @@ Note how this resembles the defintion
 .
 \end_layout
 
+\begin_layout Subsubsection
+Almost complex structure
+\end_layout
+
+\begin_layout Standard
+Do not confuse 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ with 
+\begin_inset Formula $J$
+\end_inset
+
+ which is the almost-complex structure.
+ The differents is this: 
+\begin_inset Formula $J^{2}=-1$
+\end_inset
+
+ in every basis, whereas 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is skew symmetric in every basis.
+ In a different basis, 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ might not square to -1, and 
+\begin_inset Formula $J$
+\end_inset
+
+ might not be skew-symmetric.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $g$
+\end_inset
+
+ a metric, 
+\begin_inset Formula $\omega_{ab}=-g_{ac}J_{\;\,b}^{c}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Clifford algebra
+\end_layout
+
+\begin_layout Standard
+If instead we build a Clifford algebra, using the Eucliden norm, the spinors
+ would anti-commute.
+ But all the matrices are c-numbers, so nothing changes, other than that
+ the symplectic norm stays positive: 
+\begin_inset Formula $\left\langle u,v\right\rangle =+\left\langle v,u\right\rangle $
+\end_inset
+
+ and so 
+\begin_inset Formula $\left\langle v,v\right\rangle =2v_{1}v_{2}$
+\end_inset
+
+ is 
+\emph on
+not
+\emph default
+ a scalar but ...
+\end_layout
+
+\begin_layout Standard
+Hang on.
+ This is complexified, so has four real dimensions.
+ Given four real basis vectors 
+\begin_inset Formula $\left\{ e_{1},e_{2},e_{3},e_{4}\right\} $
+\end_inset
+
+ define two complex vectors 
+\begin_inset Formula 
+\[
+\eta_{j}=\frac{1}{\sqrt{2}}\left(e_{2j-1}-ie_{2j}\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $\mathbb{R}^{4}\otimes\mathbb{C}=W\oplus\overline{W}$
+\end_inset
+
+.
+ A spinor is then
+\begin_inset Formula 
+\[
+w=\left(\begin{array}{c}
+\alpha_{1}\eta_{1}\\
+\alpha_{2}\eta_{2}
+\end{array}\right)
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $\alpha_{j}\in\mathbb{C}$
+\end_inset
+
+ just ordinary complex numbers...
+ Neither symplectic norm 
+\begin_inset Formula $\left\langle w,w\right\rangle $
+\end_inset
+
+ nor 
+\begin_inset Formula $\left\langle \overline{w},w\right\rangle $
+\end_inset
+
+ seem to be particularly interesting or enlightening...
+\end_layout
+
+\begin_layout Standard
+To build the Clifford algebra, we have a choice of two norms: the Euclidean
+ norm, and the Minkowski norm ...
+ The Euclidean norm makes the most sense for 
+\begin_inset Quotes eld
+\end_inset
+
+ordinary spinors
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The Minkowski norm only makes sense if we want to interpret 
+\begin_inset Formula $\left\{ e_{1},e_{2},e_{3},e_{4}\right\} $
+\end_inset
+
+ as gamma matrices.
+ Which we do 
+\emph on
+not
+\emph default
+ want to do.
+ So Euclidean norm it is ...
+\end_layout
+
+\begin_layout Subsubsection
+Physical interpretation
+\end_layout
+
 \begin_layout Standard
 So 
 \begin_inset Formula $\epsilon$
@@ -5667,24 +5837,54 @@ So
 \end_layout
 
 \begin_layout Subsection
-Symplectic complement
+Complex vector bundles
 \end_layout
 
 \begin_layout Standard
-Define the symplectic complement as
-\begin_inset Formula 
-\[
-W^{\perp}=\left\{ v|\left\langle v,w\right\rangle =0\;\forall w\right\} 
-\]
-
+So if we put 
+\begin_inset Formula $\mathbb{C}^{2}$
 \end_inset
 
+ over spacetime 
+\begin_inset Formula $M$
+\end_inset
 
+ we get a complex vector bundle 
+\begin_inset Formula $E$
+\end_inset
+
+.
+ A hermitian metric on this is a smoothly-varying positive-definite Hermitian
+ form on each fiber.
+ At each point 
+\begin_inset Formula $p\in M$
+\end_inset
+
+, and 
+\begin_inset Formula $\zeta,\eta\in E_{p}$
+\end_inset
+
+ one has 
+\begin_inset Formula $h_{p}\left(\zeta,\overline{\zeta}\right)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{p}\left(\zeta,\overline{\eta}\right)=\overline{h_{p}\left(\eta,\overline{\zeta}\right)}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Hang on, this is for reals ....
- Hmmm
+For 
+\begin_inset Formula $\mathbb{C}^{2}$
+\end_inset
+
+ the standard Hermitian form is 
+\begin_inset Formula $\left\langle w,z\right\rangle =\overline{w}_{1}z_{1}+\overline{w}_{2}z_{2}$
+\end_inset
+
+ (and so on for n-dimensions) Don't confuse this with the above.
 \end_layout
 
 \begin_layout Subsection
@@ -5785,7 +5985,15 @@ Weyl equation
 The Weyl eqn is 
 \begin_inset Formula 
 \[
-\sigma_{\mu}\partial^{\mu}\psi\left(x\right)=0
+\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)=0
+\]
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)=0
 \]
 
 \end_inset
@@ -5798,8 +6006,12 @@ Lorentz invariance
 \end_layout
 
 \begin_layout Standard
-Want to check 
-\begin_inset Formula $\psi\left(x\right)\mapsto\psi^{\prime}\left(x^{\prime}\right)=R\psi\left(x\right)$
+Want to check that the Weyl eqns are invariant under 
+\begin_inset Formula $\psi_{R}\left(x\right)\mapsto\psi_{R}^{\prime}\left(x^{\prime}\right)=R\psi_{R}\left(x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{L}\left(x\right)\mapsto\psi_{L}^{\prime}\left(x^{\prime}\right)=L\psi_{L}\left(x\right)$
 \end_inset
 
  where 
@@ -5811,18 +6023,45 @@ Want to check
 \end_inset
 
 .
- So
+ Written more provocatively,
 \begin_inset Formula 
 \[
-0=\sigma_{\mu}\frac{\partial}{\partial x_{\mu}^{\prime}}\psi\left(x^{\prime}\right)=\sigma_{\mu}\frac{\partial x_{\nu}}{\partial x_{\mu}^{\prime}}\frac{\partial}{\partial x_{\nu}}S\psi\left(x\right)
+\psi_{L}^{\prime}\left(x^{\prime}\right)=L\psi_{L}\left(\Lambda^{-1}x^{\prime}\right)
 \]
 
 \end_inset
 
- but 
+Lets start with
 \begin_inset Formula 
 \[
-\frac{\partial x_{\nu}}{\partial x_{\mu}^{\prime}}=\left(\Lambda^{-1}\right)_{\;\,\nu}^{\mu}
+\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)=0
+\]
+
+\end_inset
+
+So lets have a go
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+0=\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)=\overline{\sigma}^{\mu}\frac{\partial x^{\nu}}{\partial x^{\prime\mu}}\frac{\partial}{\partial x^{\nu}}L\psi_{L}\left(x\right)
+\]
+
+\end_inset
+
+From
+\begin_inset Formula 
+\[
+x^{\nu}=\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}x^{\prime\mu}
+\]
+
+\end_inset
+
+it follows (trying to get all the indexes exactly right)
+\begin_inset Formula 
+\[
+\frac{\partial x^{\nu}}{\partial x^{\prime\mu}}=\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}
 \]
 
 \end_inset
@@ -5830,15 +6069,42 @@ Want to check
 so
 \begin_inset Formula 
 \[
-0=\sigma_{\mu}\left(\Lambda^{-1}\right)_{\;\,\nu}^{\mu}\partial^{\nu}R\psi\left(x\right)
+0=\overline{\sigma}^{\mu}\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}\partial_{\nu}L\psi_{L}\left(x\right)
 \]
 
 \end_inset
 
-Plug in the double-covering 
+Here's the tricky part that I keep messing up:
 \begin_inset Formula 
 \[
-\sigma_{\mu}\left(\Lambda^{-1}\right)_{\;\,\nu}^{\mu}=S^{-1}\sigma_{\nu}S^{\dagger-1}
+\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}=\left(\left(\Lambda^{-1}\right)^{T}\right)_{\mu}^{\;\,\nu}
+\]
+
+\end_inset
+
+and then we have to also make use of the identity
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\eta\Lambda^{T}\eta=\Lambda^{-1}
+\]
+
+\end_inset
+
+to write
+\begin_inset Formula 
+\[
+\overline{\sigma}^{\mu}\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}\partial_{\nu}L\psi_{L}\left(x\right)=\overline{\sigma}^{\mu}\left(\Lambda^{-1T}\right)_{\mu}^{\;\,\nu}\partial_{\nu}L\psi_{L}\left(x\right)=\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}\partial^{\nu}L\psi\left(x\right)
+\]
+
+\end_inset
+
+Only now can we plug in the double-covering 
+\begin_inset Formula 
+\[
+\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}=S\sigma_{\nu}S^{\dagger}
 \]
 
 \end_inset
@@ -5846,20 +6112,49 @@ Plug in the double-covering
 To get
 \begin_inset Formula 
 \[
-0=S^{-1}\sigma_{\mu}\partial^{\mu}S^{\dagger-1}R\psi\left(x\right)
+0=S\overline{\sigma}_{\mu}\partial^{\mu}S^{\dagger}L\psi_{L}\left(x\right)
 \]
 
 \end_inset
 
 which will be the original Weyl eqn provided that 
-\begin_inset Formula $S^{\dagger-1}R=1$
+\begin_inset Formula $S^{\dagger}L=1$
 \end_inset
 
  or that 
-\begin_inset Formula $R=S^{\dagger}$
+\begin_inset Formula $L=\left(S^{\dagger}\right)^{-1}$
 \end_inset
 
 .
+ Phew.
+ That's a pain in the neck.
+ Raising and lowering indexes on Lorentz transforms is tricky.
+ After this untangling, this is 100% compatible with the notation and results
+ of Andres Aste op cit.
+\end_layout
+
+\begin_layout Standard
+Repeating this calculation for
+\begin_inset Formula 
+\[
+\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)=0
+\]
+
+\end_inset
+
+should give 
+\begin_inset Formula $SR=1$
+\end_inset
+
+ or 
+\begin_inset Formula $R=S^{-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Surfaces of transitivity
 \end_layout
 
 \begin_layout Section
