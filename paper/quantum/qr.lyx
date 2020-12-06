@@ -5380,15 +5380,24 @@ the Weyl representation
 \end_inset
 
  (of a point in Minkowski space).
- But also
+ It is tempting to just write 
 \begin_inset Formula 
 \[
-\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=S^{\dagger}\sigma_{\nu}S
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=S^{\dagger}\sigma_{\nu}S\quad\mbox{but this is wrong!}
 \]
 
 \end_inset
 
+but this is wrong.
+ The correct result, derived below:
+\begin_inset Formula 
+\[
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}^{T}\left(S^{-1}\right)
+\]
 
+\end_inset
+
+The above is what is needed to maintain the symplectic form.
 \end_layout
 
 \begin_layout Standard
@@ -5645,12 +5654,36 @@ c & d
 \end{array}\right)\epsilon^{-1}=\left(\begin{array}{cc}
 d & -c\\
 -b & a
+\end{array}\right)
+\]
+
+\end_inset
+
+Holds as a matrix identity, for any matrix 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Now if 
+\begin_inset Formula $S\in SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\left(\begin{array}{cc}
+d & -c\\
+-b & a
 \end{array}\right)=\left(S^{-1}\right)^{T}
 \]
 
 \end_inset
 
-or more conventionally 
+So, more conventionally, for 
+\begin_inset Formula $S\in SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ one has
 \begin_inset Formula 
 \[
 \epsilon S^{T}\epsilon^{-1}=S^{-1}
@@ -5671,6 +5704,65 @@ Note how this resembles the defintion
 \end_inset
 
 .
+ So 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is an inner automorphism of 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ (when combined with the transpose).
+\end_layout
+
+\begin_layout Standard
+The Pauli matrices do 
+\emph on
+not
+\emph default
+ belong to 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ so one must take more care.
+ Instead, one gets
+\begin_inset Formula 
+\[
+\epsilon\sigma^{k}\epsilon^{-1}=-\sigma^{Tk}
+\]
+
+\end_inset
+
+Note the transpose aka complex conjugate! So we identify 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ with parity plus transpose, for the spinors.
+ This implies
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma_{\mu}^{T}\Lambda_{\;\,\nu}^{\mu}=\epsilon\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}\epsilon^{-1}=\epsilon S\overline{\sigma}_{\nu}S^{\dagger}\epsilon^{-1}=\left(S^{-1}\right)^{T}\sigma_{\nu}^{T}\left(S^{-1}\right)^{*}
+\]
+
+\end_inset
+
+which is 
+\emph on
+not
+\emph default
+ what one would naively guess.
+ Take one more transpose to get
+\begin_inset Formula 
+\[
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}S^{-1}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -5812,28 +5904,6 @@ not
 \emph default
  want to do.
  So Euclidean norm it is ...
-\end_layout
-
-\begin_layout Subsubsection
-Physical interpretation
-\end_layout
-
-\begin_layout Standard
-So 
-\begin_inset Formula $\epsilon$
-\end_inset
-
- is an inner automorphism of 
-\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
-\end_inset
-
- ...
- when it is combned with transpose ...
- what is the name for 
-\begin_inset Formula $\epsilon$
-\end_inset
-
- in physics?
 \end_layout
 
 \begin_layout Subsection
@@ -6131,6 +6201,7 @@ which will be the original Weyl eqn provided that
  Raising and lowering indexes on Lorentz transforms is tricky.
  After this untangling, this is 100% compatible with the notation and results
  of Andres Aste op cit.
+ Above is identical to eqn 52.
 \end_layout
 
 \begin_layout Standard
@@ -6142,12 +6213,16 @@ Repeating this calculation for
 
 \end_inset
 
-should give 
-\begin_inset Formula $SR=1$
+Then, using 
+\begin_inset Formula 
+\[
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{T}\sigma_{\nu}\left(S^{-1}\right)^{*}
+\]
+
 \end_inset
 
- or 
-\begin_inset Formula $R=S^{-1}$
+one concludes that 
+\begin_inset Formula $R=S^{*}=$
 \end_inset
 
 .
