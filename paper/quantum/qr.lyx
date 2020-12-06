@@ -5380,24 +5380,28 @@ the Weyl representation
 \end_inset
 
  (of a point in Minkowski space).
- It is tempting to just write 
+ The conjugate version is
 \begin_inset Formula 
 \[
-\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=S^{\dagger}\sigma_{\nu}S\quad\mbox{but this is wrong!}
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}\left(S^{-1}\right)
 \]
 
 \end_inset
 
-but this is wrong.
- The correct result, derived below:
+It is easier to just ditch the index notation: write 
 \begin_inset Formula 
 \[
-\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}^{T}\left(S^{-1}\right)
+\overline{X}=\overline{\sigma}_{\mu}x^{\mu}=t+\vec{x}\cdot\vec{\sigma}\quad\quad X=\sigma_{\mu}x^{\mu}=t-\vec{x}\cdot\vec{\sigma}
 \]
 
 \end_inset
 
-The above is what is needed to maintain the symplectic form.
+The product 
+\begin_inset Formula $\overline{X}X$
+\end_inset
+
+ is a Lorentz scalar, therefore the above is how things must transform.
+ An alternate proof of this, using index notation, is given below.
 \end_layout
 
 \begin_layout Standard
@@ -5749,12 +5753,7 @@ Note the transpose aka complex conjugate! So we identify
 
 \end_inset
 
-which is 
-\emph on
-not
-\emph default
- what one would naively guess.
- Take one more transpose to get
+Take one more transpose to get
 \begin_inset Formula 
 \[
 \sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}S^{-1}
@@ -5762,7 +5761,7 @@ not
 
 \end_inset
 
-
+This is consistent with the earlier form, thus validating the indexed notation.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6216,13 +6215,13 @@ Repeating this calculation for
 Then, using 
 \begin_inset Formula 
 \[
-\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{T}\sigma_{\nu}\left(S^{-1}\right)^{*}
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}S^{-1}
 \]
 
 \end_inset
 
 one concludes that 
-\begin_inset Formula $R=S^{*}=$
+\begin_inset Formula $R=S$
 \end_inset
 
 .
