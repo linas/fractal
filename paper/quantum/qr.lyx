@@ -6280,24 +6280,94 @@ transforms as if it is right-handed.
 
 \end_inset
 
-Ading these together, one gets
+Adding these together, one gets
 \begin_inset Formula 
 \[
-i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)\pm m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}_{\mu}\partial^{\mu}\psi_{L}\left(x\right)\pm m\epsilon\psi_{L}\left(x\right)\right)
+i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)\pm m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}_{\mu}\partial^{\mu}\psi_{L}\left(x\right)\pm m\epsilon\psi_{L}^{*}\left(x\right)\right)
 \]
 
 \end_inset
 
-Likewise,
+Note that the RHS transforms like a right-handed spinor.
+ Likewise,
 \begin_inset Formula 
 \[
-i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)\pm m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma_{\mu}\partial^{\mu}\psi_{R}\left(x\right)\pm m\epsilon\psi_{R}\left(x\right)\right)
+i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)\pm m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma_{\mu}\partial^{\mu}\psi_{R}\left(x\right)\pm m\epsilon\psi_{R}^{*}\left(x\right)\right)
 \]
 
 \end_inset
 
 is Lorentz covariant.
- Similarly
+ Because the RHS's transform like Majorana, we are free to apply the operator
+ on them again.
+ Should get the Klein–Gordon.
+ Let's do that for giggles.
+ So let 
+\begin_inset Formula $K$
+\end_inset
+
+ stand for charge conjugation, and label the two 
+\begin_inset Formula $\pm$
+\end_inset
+
+ signs:
+\begin_inset Formula 
+\[
+\left(i\sigma_{\mu}\partial^{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}+\pm_{L}\pm_{R}m^{2}+im\left(\pm_{R}\epsilon K\overline{\partial}\pm_{L}\partial\epsilon K\right)\right)\psi_{L}
+\]
+
+\end_inset
+
+And
+\begin_inset Formula 
+\[
+\partial\overline{\partial}=\partial_{t}^{2}-\vec{\nabla}\cdot\vec{\nabla}=\square
+\]
+
+\end_inset
+
+To get the conventional Klein-Gordon equation 
+\begin_inset Formula $\left(\square+m^{2}\right)\psi=0$
+\end_inset
+
+ rather than imaginary mass, we must take 
+\begin_inset Formula $\pm_{L}=-\pm_{R}$
+\end_inset
+
+ so that 
+\begin_inset Formula 
+\[
+\left(i\sigma_{\mu}\partial^{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\left(\square+m^{2}\right)\pm_{L}im\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)\right)\psi_{L}
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula $\partial=\sigma_{\mu}\partial^{\mu}=\partial_{t}-\vec{\sigma}\cdot\vec{\nabla}$
+\end_inset
+
+ so
+\begin_inset Formula 
+\[
+\partial\epsilon K-\epsilon K\overline{\partial}=-\left(\vec{\sigma}\epsilon+\epsilon\vec{\sigma}^{*}\right)\cdot\vec{\nabla}K
+\]
+
+\end_inset
+
+while from before, we had 
+\begin_inset Formula 
+\[
+\epsilon\sigma^{k}\epsilon^{-1}=-\sigma^{Tk}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula $\epsilon\vec{\sigma}=-\vec{\sigma}^{T}\epsilon=-K\vec{\sigma}^{\dagger}\epsilon=-K\vec{\sigma}\epsilon=-\vec{\sigma}^{*}\epsilon$
+\end_inset
+
+ so the skew term vanishes.
+ Hooray!
 \end_layout
 
 \begin_layout Section
