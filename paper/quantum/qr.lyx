@@ -6306,19 +6306,38 @@ is Lorentz covariant.
 \begin_inset Formula $K$
 \end_inset
 
- stand for charge conjugation, and label the two 
+ stand for charge conjugation.
+ Oh, allow mass to be a complex number, so that 
+\begin_inset Formula $K$
+\end_inset
+
+ does not commute with 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ And label the two 
 \begin_inset Formula $\pm$
 \end_inset
 
- signs:
+ signs (which isn't needed, if 
+\begin_inset Formula $m$
+\end_inset
+
+ is complex, but whatever...)
 \begin_inset Formula 
 \[
-\left(i\sigma_{\mu}\partial^{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}+\pm_{L}\pm_{R}m^{2}+im\left(\pm_{R}\epsilon K\overline{\partial}\pm_{L}\partial\epsilon K\right)\right)\psi_{L}
+\left(i\sigma_{\mu}\partial^{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}-\pm_{L}\pm_{R}\left|m\right|^{2}+im\left(\mp_{R}\epsilon K\overline{\partial}\pm_{L}\partial\epsilon K\right)\right)\psi_{L}
 \]
 
 \end_inset
 
-And
+Where 
+\begin_inset Formula $\epsilon^{2}=-1$
+\end_inset
+
+ was used.
+ Then 
 \begin_inset Formula 
 \[
 \partial\overline{\partial}=\partial_{t}^{2}-\vec{\nabla}\cdot\vec{\nabla}=\square
@@ -6331,13 +6350,13 @@ To get the conventional Klein-Gordon equation
 \end_inset
 
  rather than imaginary mass, we must take 
-\begin_inset Formula $\pm_{L}=-\pm_{R}$
+\begin_inset Formula $\pm_{L}=\pm_{R}=\pm$
 \end_inset
 
  so that 
 \begin_inset Formula 
 \[
-\left(i\sigma_{\mu}\partial^{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\left(\square+m^{2}\right)\pm_{L}im\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)\right)\psi_{L}
+\left(i\sigma_{\mu}\partial^{\mu}\pm m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm m\epsilon K\right)\psi_{L}=\left(-\left(\square+m^{2}\right)\pm im\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)\right)\psi_{L}
 \]
 
 \end_inset
@@ -6368,6 +6387,86 @@ or
 
  so the skew term vanishes.
  Hooray!
+\end_layout
+
+\begin_layout Standard
+Reasonable shorthand for this seems to be
+\begin_inset Formula 
+\[
+D_{R}=i\sigma_{\mu}\partial^{\mu}\pm m\epsilon K
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D_{L}=i\overline{\sigma}_{\mu}\partial^{\mu}\pm m\epsilon K
+\]
+
+\end_inset
+
+so that Majorana is 
+\begin_inset Formula $D_{L}\psi_{L}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $D_{R}\psi_{R}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Plane wave solutions
+\end_layout
+
+\begin_layout Standard
+So per usual.
+ Write 
+\begin_inset Formula 
+\[
+\psi\left(x\right)=\chi e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $x^{\mu}=\left(t,\vec{k}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+i\partial_{\mu}e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}=i\left(\partial_{t},\vec{\nabla}\right)e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}=i\left(i\omega,-i\vec{k}\right)e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}=\left(-\omega,\vec{k}\right)e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Thus
+\begin_inset Formula 
+\begin{align*}
+D_{R}\psi_{R}= & \left(i\sigma^{\mu}\partial_{\mu}\pm m\epsilon K\right)\psi_{R}\\
+= & \left(i\partial_{t}+i\vec{\sigma}\cdot\vec{\nabla}\pm m\epsilon K\right)\psi_{R}\\
+= & \left(-\omega I+\vec{\sigma}\cdot\vec{k}\right)\chi_{R}e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}\mp m\epsilon\chi_{R}^{*}e^{-i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}
+\end{align*}
+
+\end_inset
+
+which is WTF infuriating due to the sign flip on the mass term.
 \end_layout
 
 \begin_layout Section
