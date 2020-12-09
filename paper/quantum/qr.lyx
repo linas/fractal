@@ -6380,7 +6380,8 @@ To get the conventional Klein-Gordon equation
 
 \end_inset
 
-But 
+Now, to deal with the skew term.
+ So 
 \begin_inset Formula $\partial=\sigma^{\mu}\partial_{\mu}=\partial_{t}+\vec{\sigma}\cdot\vec{\nabla}$
 \end_inset
 
@@ -6436,6 +6437,17 @@ so that Majorana is
 .
 \end_layout
 
+\begin_layout Standard
+Why is this Majorana, and not Dirac? Well, for starters, not enough components:
+ 
+\begin_inset Formula $\psi_{L}$
+\end_inset
+
+ has four real components, but one is removed as an overall normalization,
+ and one is removed, an overall arbitrary phase, leaving only two components:
+ spin up and down.
+\end_layout
+
 \begin_layout Subsection
 Four-component Majorana
 \end_layout
@@ -6459,7 +6471,7 @@ I & 0\\
 \end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
 -\sigma^{i} & 0\\
 0 & \sigma^{i}
-\end{array}\right]\nabla_{i}\pm m\left[\begin{array}{cc}
+\end{array}\right]\nabla_{i}+\eta m\left[\begin{array}{cc}
 \epsilon K & 0\\
 0 & \epsilon K
 \end{array}\right]
@@ -6467,7 +6479,7 @@ I & 0\\
 
 \end_inset
 
-Multiply by (this is minus the 
+Multiply on the left by (this is minus the 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -6488,10 +6500,10 @@ to get the gamma matrices in the chiral rep.
 \beta\left(D_{L}\oplus D_{R}\right)=i\beta\partial_{t}+i\left[\begin{array}{cc}
 0 & \sigma^{i}\\
 -\sigma^{i} & 0
-\end{array}\right]\nabla_{i}\pm m\left[\begin{array}{cc}
+\end{array}\right]\nabla_{i}+\eta m\left[\begin{array}{cc}
 0 & \epsilon K\\
 \epsilon K & 0
-\end{array}\right]=i\gamma^{\mu}\partial_{\mu}\pm m\left[\begin{array}{cc}
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+\eta m\left[\begin{array}{cc}
 0 & \epsilon K\\
 \epsilon K & 0
 \end{array}\right]
@@ -6505,7 +6517,7 @@ Then
 0=i\gamma^{\mu}\partial_{\mu}\left(\begin{array}{c}
 \psi_{L}\\
 \psi_{R}
-\end{array}\right)\pm m\left(\begin{array}{c}
+\end{array}\right)+\eta m\left(\begin{array}{c}
 \epsilon\psi_{R}^{*}\\
 \epsilon\psi_{L}^{*}
 \end{array}\right)
@@ -6540,7 +6552,7 @@ and the charge-conjugate spinor as
 \psi_{c}=\left(\begin{array}{c}
 \psi_{L}^{c}\\
 \psi_{R}^{c}
-\end{array}\right)=C\overline{\psi}^{T}=\left[\begin{array}{cc}
+\end{array}\right)=C\overline{\psi}^{T}=C\beta\psi^{*}=\left[\begin{array}{cc}
 0 & -\epsilon\\
 \epsilon & 0
 \end{array}\right]\psi^{*}=\left(\begin{array}{c}
@@ -6554,13 +6566,196 @@ and the charge-conjugate spinor as
 the final four-component eqn is
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\psi\pm m\gamma^{5}\psi_{c}
+0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\gamma^{5}\psi_{c}
 \]
 
 \end_inset
 
 Looks weird.
  Does it work? Not really...
+ wtf.
+\end_layout
+
+\begin_layout Standard
+This was supposed to be
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}
+\]
+
+\end_inset
+
+which is also problematic.
+\end_layout
+
+\begin_layout Subsection
+Charge conjugation
+\end_layout
+
+\begin_layout Standard
+Lets see...
+ working in any rep, 
+\begin_inset Formula $\psi_{c}=C\beta\psi^{*}$
+\end_inset
+
+ so if we define the charge conjugation operator 
+\begin_inset Formula $\mathsf{C}\psi=\psi_{c}$
+\end_inset
+
+ then we write 
+\begin_inset Formula $\mathsf{C}=C\beta K$
+\end_inset
+
+ where as before 
+\begin_inset Formula $K$
+\end_inset
+
+is a reminder to take the complex conjugate.
+\end_layout
+
+\begin_layout Standard
+In any rep, we have 
+\begin_inset Formula 
+\[
+C^{2}=-I
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $C^{*}=C$
+\end_inset
+
+ and 
+\begin_inset Formula $C^{\dagger}=C^{T}=C^{-1}=-C$
+\end_inset
+
+.
+ Next,
+\begin_inset Formula 
+\[
+\gamma^{0}\gamma^{\mu}\gamma^{0}=\gamma^{\mu\dagger}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+C\gamma^{\mu}C^{-1}=-\gamma^{\mu T}
+\]
+
+\end_inset
+
+We want to have 
+\begin_inset Formula $\mathsf{C}^{2}=1$
+\end_inset
+
+ which requires that 
+\begin_inset Formula $\left(C\beta K\right)^{2}=I$
+\end_inset
+
+ ...
+ can we verify this?
+\begin_inset Formula 
+\begin{align*}
+C\beta KC\beta K= & C\beta CK\beta K\\
+= & \beta^{T}K\beta K\\
+= & \beta^{T}\beta^{*}\\
+= & \left(\beta^{\dagger}\beta\right)^{*}\\
+= & 1
+\end{align*}
+
+\end_inset
+
+because in all three reps, 
+\begin_inset Formula $\beta^{\dagger}=\beta$
+\end_inset
+
+.
+ So far so good.
+\end_layout
+
+\begin_layout Standard
+Next compute
+\begin_inset Formula 
+\begin{align*}
+\mathsf{C}\gamma^{\mu}\mathsf{C}= & C\beta K\gamma^{\mu}C\beta K\\
+= & C\beta\gamma^{\mu*}C^{*}\beta^{*}\\
+= & C\beta C^{-1}C\gamma^{\mu*}C^{*}\beta^{*}\\
+= & -\beta^{T}C\gamma^{\mu*}C\beta^{*}\\
+= & \beta^{T}C\gamma^{\mu*}C^{-1}\beta^{*}\\
+= & -\beta^{T}\gamma^{\mu\dagger}\beta^{*}\\
+= & -\beta^{*}\gamma^{\mu\dagger}\beta^{*}\\
+= & -\beta\gamma^{\mu\dagger}\beta\\
+= & -\gamma^{\mu}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Conjugate eqn
+\end_layout
+
+\begin_layout Standard
+Lets assume that this holds: 
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}
+\]
+
+\end_inset
+
+Then by above,
+\begin_inset Formula 
+\begin{align*}
+0= & \mathsf{C}i\gamma^{\mu}\partial_{\mu}\mathsf{CC}\psi+\mathsf{C}\eta m\psi_{c}\\
+= & i\gamma^{\mu}\partial_{\mu}\psi_{c}+\eta^{*}m\psi
+\end{align*}
+
+\end_inset
+
+Lets subtract these.
+ 
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi-\psi_{c}\right)+m\left(\eta\psi_{c}-\eta^{*}\psi\right)
+\]
+
+\end_inset
+
+so if 
+\begin_inset Formula $\psi=\psi_{c}$
+\end_inset
+
+ then this makes sense only if 
+\begin_inset Formula $\eta=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Lets add these.
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi+\psi_{c}\right)+m\left(\eta\psi_{c}+\eta^{*}\psi\right)
+\]
+
+\end_inset
+
+so if 
+\begin_inset Formula $\psi=-\psi_{c}$
+\end_inset
+
+ then this makes sense only if 
+\begin_inset Formula $\eta=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
