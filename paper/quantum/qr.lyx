@@ -6249,7 +6249,7 @@ Two-component Majorana
 \end_layout
 
 \begin_layout Standard
-Rephrasing Ase section 3 in my notation.
+Rephrasing Aste section 3 in my notation.
  So: 
 \begin_inset Formula $\psi_{L}\left(x\right)\mapsto\psi_{L}^{\prime}\left(x^{\prime}\right)=\left(S^{\dagger}\right)^{-1}\psi_{L}\left(x\right)$
 \end_inset
@@ -6300,10 +6300,14 @@ Combine the left-handed variant with the earlier result:
 
 \end_inset
 
-Adding these together, one gets
+Adding these together, with an arbitrary phase factor 
+\begin_inset Formula $\eta$
+\end_inset
+
+, one gets
 \begin_inset Formula 
 \[
-i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)\pm m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)\pm m\epsilon\psi_{L}^{*}\left(x\right)\right)
+i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)+\eta m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)+\eta m\epsilon\psi_{L}^{*}\left(x\right)\right)
 \]
 
 \end_inset
@@ -6312,12 +6316,16 @@ Note that the RHS transforms like a right-handed spinor.
  Likewise,
 \begin_inset Formula 
 \[
-i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)\pm m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)\pm m\epsilon\psi_{R}^{*}\left(x\right)\right)
+i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)+\zeta m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)+\zeta m\epsilon\psi_{R}^{*}\left(x\right)\right)
 \]
 
 \end_inset
 
-is Lorentz covariant.
+is Lorentz covariant; and 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ is an arbitrary phase factor.
  Because the RHS's transform like Majorana, we are free to apply the operator
  on them again.
  Should get the Klein–Gordon.
@@ -6327,27 +6335,10 @@ is Lorentz covariant.
 \end_inset
 
  stand for charge conjugation.
- Oh, allow mass to be a complex number, so that 
-\begin_inset Formula $K$
-\end_inset
-
- does not commute with 
-\begin_inset Formula $m$
-\end_inset
-
-.
- And label the two 
-\begin_inset Formula $\pm$
-\end_inset
-
- signs (which isn't needed, if 
-\begin_inset Formula $m$
-\end_inset
-
- is complex, but whatever...)
+ And 
 \begin_inset Formula 
 \[
-\left(i\sigma^{\mu}\partial_{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}-\pm_{L}\pm_{R}\left|m\right|^{2}+im\left(\mp_{R}\epsilon K\overline{\partial}\pm_{L}\partial\epsilon K\right)\right)\psi_{L}
+\left(i\sigma^{\mu}\partial_{\mu}+\zeta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}-\zeta\eta^{*}m^{2}+im\left(\eta\partial\epsilon K-\zeta\epsilon K\overline{\partial}\right)\right)\psi_{L}
 \]
 
 \end_inset
@@ -6356,8 +6347,8 @@ Where
 \begin_inset Formula $\epsilon^{2}=-1$
 \end_inset
 
- was used, and 
-\begin_inset Formula $Km=m^{*}$
+ was used, as well as that 
+\begin_inset Formula $Ki=-iK$
 \end_inset
 
 .
@@ -6374,25 +6365,29 @@ To get the conventional Klein-Gordon equation
 \end_inset
 
  we must take 
-\begin_inset Formula $\pm_{L}=\pm_{R}=\pm$
+\begin_inset Formula $\zeta\eta^{*}=1$
+\end_inset
+
+ That is, 
+\begin_inset Formula $\zeta=\eta$
 \end_inset
 
  so that 
 \begin_inset Formula 
 \[
-\left(i\sigma_{\mu}\partial^{\mu}\pm m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm m\epsilon K\right)\psi_{L}=\left(-\left(\square+m^{2}\right)\pm im\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)\right)\psi_{L}
+\left(i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\psi_{L}=\left(-\left(\square+m^{2}\right)+i\eta m\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)\right)\psi_{L}
 \]
 
 \end_inset
 
 But 
-\begin_inset Formula $\partial=\sigma_{\mu}\partial^{\mu}=\partial_{t}-\vec{\sigma}\cdot\vec{\nabla}$
+\begin_inset Formula $\partial=\sigma^{\mu}\partial_{\mu}=\partial_{t}+\vec{\sigma}\cdot\vec{\nabla}$
 \end_inset
 
  so
 \begin_inset Formula 
 \[
-\partial\epsilon K-\epsilon K\overline{\partial}=-\left(\vec{\sigma}\epsilon+\epsilon\vec{\sigma}^{*}\right)\cdot\vec{\nabla}K
+\partial\epsilon K-\epsilon K\overline{\partial}=\left(\vec{\sigma}\epsilon+\epsilon\vec{\sigma}^{*}\right)\cdot\vec{\nabla}K
 \]
 
 \end_inset
@@ -6406,7 +6401,7 @@ while from before, we had
 \end_inset
 
 or 
-\begin_inset Formula $\epsilon\vec{\sigma}=-\vec{\sigma}^{T}\epsilon=-K\vec{\sigma}^{\dagger}\epsilon=-K\vec{\sigma}\epsilon=-\vec{\sigma}^{*}\epsilon$
+\begin_inset Formula $\vec{\sigma}\epsilon=-\epsilon\vec{\sigma}^{T}=-K\epsilon\vec{\sigma}^{\dagger}=-K\epsilon\vec{\sigma}=-\epsilon\vec{\sigma}^{*}$
 \end_inset
 
  so the skew term vanishes.
@@ -6417,7 +6412,7 @@ or
 Reasonable shorthand for this seems to be
 \begin_inset Formula 
 \[
-D_{R}=i\sigma^{\mu}\partial_{\mu}\pm m\epsilon K
+D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
 \]
 
 \end_inset
@@ -6425,7 +6420,7 @@ D_{R}=i\sigma^{\mu}\partial_{\mu}\pm m\epsilon K
 and
 \begin_inset Formula 
 \[
-D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}\pm m\epsilon K
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
 \]
 
 \end_inset
