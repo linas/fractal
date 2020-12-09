@@ -6215,6 +6215,23 @@ which will be the original Weyl eqn provided that
  After this untangling, this is 100% compatible with the notation and results
  of Andres Aste op cit.
  Above is identical to eqn 52.
+ (Aste's 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is my 
+\begin_inset Formula $\psi_{L}$
+\end_inset
+
+ and his 
+\begin_inset Formula $\tilde{\psi}$
+\end_inset
+
+ is my 
+\begin_inset Formula $\psi_{R}$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -6307,16 +6324,40 @@ Adding these together, with an arbitrary phase factor
 , one gets
 \begin_inset Formula 
 \[
-i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)+\eta m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)+\eta m\epsilon\psi_{L}^{*}\left(x\right)\right)
+i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)+\eta m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)+\zeta m\epsilon\psi_{L}^{*}\left(x\right)\right)
 \]
 
 \end_inset
 
 Note that the RHS transforms like a right-handed spinor.
- Likewise,
+ That is, define 
 \begin_inset Formula 
 \[
-i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)+\zeta m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)+\zeta m\epsilon\psi_{R}^{*}\left(x\right)\right)
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\zeta m\epsilon K
+\]
+
+\end_inset
+
+Then, under Lorentz, 
+\begin_inset Formula 
+\[
+\psi_{L}\mapsto\psi_{L}^{\prime}=\left(S^{\dagger}\right)^{-1}\psi_{L}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D_{L}\mapsto D_{L}^{\prime}=SD_{L}S^{\dagger}
+\]
+
+\end_inset
+
+Likewise,
+\begin_inset Formula 
+\[
+i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)+\eta m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)+\eta m\epsilon\psi_{R}^{*}\left(x\right)\right)
 \]
 
 \end_inset
@@ -6326,8 +6367,39 @@ is Lorentz covariant; and
 \end_inset
 
  is an arbitrary phase factor.
- Because the RHS's transform like Majorana, we are free to apply the operator
- on them again.
+ Define 
+\begin_inset Formula 
+\[
+D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+Then, under Lorentz, 
+\begin_inset Formula 
+\[
+\psi_{R}\mapsto\psi_{R}^{\prime}=S\psi_{R}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D_{R}\mapsto D_{R}^{\prime}=\left(S^{\dagger}\right)^{-1}D_{R}S^{-1}
+\]
+
+\end_inset
+
+Therefore, both 
+\begin_inset Formula $D_{L}D_{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $D_{R}D_{L}$
+\end_inset
+
+ transform covariantly.
  Should get the Klein–Gordon.
  Let's do that for giggles.
  So let 
@@ -6338,7 +6410,7 @@ is Lorentz covariant; and
  And 
 \begin_inset Formula 
 \[
-\left(i\sigma^{\mu}\partial_{\mu}+\zeta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}-\zeta\eta^{*}m^{2}+im\left(\eta\partial\epsilon K-\zeta\epsilon K\overline{\partial}\right)\right)\psi_{L}
+D_{R}D_{L}=\left(i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\zeta m\epsilon K\right)=-\partial\overline{\partial}-\eta\zeta^{*}m^{2}+im\left(\zeta\partial\epsilon K-\eta\epsilon K\overline{\partial}\right)
 \]
 
 \end_inset
@@ -6365,7 +6437,7 @@ To get the conventional Klein-Gordon equation
 \end_inset
 
  we must take 
-\begin_inset Formula $\zeta\eta^{*}=1$
+\begin_inset Formula $\eta\zeta^{*}=1$
 \end_inset
 
  That is, 
@@ -6375,7 +6447,7 @@ To get the conventional Klein-Gordon equation
  so that 
 \begin_inset Formula 
 \[
-\left(i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\psi_{L}=\left(-\left(\square+m^{2}\right)+i\eta m\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)\right)\psi_{L}
+\left(i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)=-\left(\square+m^{2}\right)+i\eta m\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)
 \]
 
 \end_inset
@@ -6449,7 +6521,7 @@ Why is this Majorana, and not Dirac? Well, for starters, not enough components:
 \end_layout
 
 \begin_layout Subsection
-Four-component Majorana
+Four-component Majorana (Failed derivation)
 \end_layout
 
 \begin_layout Standard
@@ -6563,7 +6635,12 @@ and the charge-conjugate spinor as
 
 \end_inset
 
-the final four-component eqn is
+The above has some extra minus signs compared to Aste eqn 108, 110, 111,
+ 112 but this makes no material differences.
+\end_layout
+
+\begin_layout Standard
+The final four-component eqn is
 \begin_inset Formula 
 \[
 0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\gamma^{5}\psi_{c}
@@ -6586,8 +6663,41 @@ This was supposed to be
 
 \end_inset
 
-which is also problematic.
- Or not, see next section.
+So where is the error? Here's what I got, vs.
+ Aste:
+\end_layout
+
+\begin_layout Itemize
+We agree up to eqn 67.
+\end_layout
+
+\begin_layout Itemize
+Aste 
+\begin_inset Quotes eld
+\end_inset
+
+chooses
+\begin_inset Quotes erd
+\end_inset
+
+ a sign for eqn 69 that corresponds to my 
+\begin_inset Formula $\zeta=-\eta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Aste eqn 73 does NOT follow from eqn 71 – For 73, he flips the mass term
+ back to 
+\begin_inset Formula $\zeta=+\eta$
+\end_inset
+
+ for this one time only.
+\end_layout
+
+\begin_layout Itemize
+Then of course he gets the Klein–Gordon 74 to work out.
 \end_layout
 
 \begin_layout Subsection
