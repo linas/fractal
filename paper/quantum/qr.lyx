@@ -6245,7 +6245,7 @@ one concludes that
 \end_layout
 
 \begin_layout Subsection
-Majorana
+Two-component Majorana
 \end_layout
 
 \begin_layout Standard
@@ -6272,10 +6272,30 @@ m\epsilon\psi_{L}^{*}\left(x\right)\mapsto m\epsilon\psi_{L}^{\prime*}\left(x^{\
 \end_inset
 
 transforms as if it is right-handed.
- Combine this with the earlier result:
+ The right-handed variant is 
+\begin_inset Formula $\psi_{R}\left(x\right)\mapsto\psi_{R}^{\prime}\left(x^{\prime}\right)=S\psi_{R}\left(x\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $\psi_{R}^{*}\left(x\right)\mapsto\psi_{R}^{\prime*}\left(x^{\prime}\right)=S^{*}\psi_{R}^{*}\left(x\right)$
+\end_inset
+
+ but 
+\begin_inset Formula $\epsilon S^{*}=\left(S^{\dagger}\right)^{-1}\epsilon$
+\end_inset
+
+
 \begin_inset Formula 
 \[
-\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)=S\overline{\sigma}_{\mu}\partial^{\mu}\psi_{L}\left(x\right)
+m\epsilon\psi_{R}\left(x\right)\mapsto m\epsilon\psi_{R}^{\prime*}\left(x^{\prime}\right)=\left(S^{\dagger}\right)^{-1}m\epsilon\psi_{R}^{*}\left(x\right)
+\]
+
+\end_inset
+
+Combine the left-handed variant with the earlier result:
+\begin_inset Formula 
+\[
+\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)=S\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)
 \]
 
 \end_inset
@@ -6283,7 +6303,7 @@ transforms as if it is right-handed.
 Adding these together, one gets
 \begin_inset Formula 
 \[
-i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)\pm m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}_{\mu}\partial^{\mu}\psi_{L}\left(x\right)\pm m\epsilon\psi_{L}^{*}\left(x\right)\right)
+i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)\pm m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)\pm m\epsilon\psi_{L}^{*}\left(x\right)\right)
 \]
 
 \end_inset
@@ -6292,7 +6312,7 @@ Note that the RHS transforms like a right-handed spinor.
  Likewise,
 \begin_inset Formula 
 \[
-i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)\pm m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma_{\mu}\partial^{\mu}\psi_{R}\left(x\right)\pm m\epsilon\psi_{R}^{*}\left(x\right)\right)
+i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)\pm m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)\pm m\epsilon\psi_{R}^{*}\left(x\right)\right)
 \]
 
 \end_inset
@@ -6327,7 +6347,7 @@ is Lorentz covariant.
  is complex, but whatever...)
 \begin_inset Formula 
 \[
-\left(i\sigma_{\mu}\partial^{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}_{\mu}\partial^{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}-\pm_{L}\pm_{R}\left|m\right|^{2}+im\left(\mp_{R}\epsilon K\overline{\partial}\pm_{L}\partial\epsilon K\right)\right)\psi_{L}
+\left(i\sigma^{\mu}\partial_{\mu}\pm_{R}m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}\pm_{L}m\epsilon K\right)\psi_{L}=\left(-\partial\overline{\partial}-\pm_{L}\pm_{R}\left|m\right|^{2}+im\left(\mp_{R}\epsilon K\overline{\partial}\pm_{L}\partial\epsilon K\right)\right)\psi_{L}
 \]
 
 \end_inset
@@ -6336,7 +6356,11 @@ Where
 \begin_inset Formula $\epsilon^{2}=-1$
 \end_inset
 
- was used.
+ was used, and 
+\begin_inset Formula $Km=m^{*}$
+\end_inset
+
+.
  Then 
 \begin_inset Formula 
 \[
@@ -6349,7 +6373,7 @@ To get the conventional Klein-Gordon equation
 \begin_inset Formula $\left(\square+m^{2}\right)\psi=0$
 \end_inset
 
- rather than imaginary mass, we must take 
+ we must take 
 \begin_inset Formula $\pm_{L}=\pm_{R}=\pm$
 \end_inset
 
@@ -6393,7 +6417,7 @@ or
 Reasonable shorthand for this seems to be
 \begin_inset Formula 
 \[
-D_{R}=i\sigma_{\mu}\partial^{\mu}\pm m\epsilon K
+D_{R}=i\sigma^{\mu}\partial_{\mu}\pm m\epsilon K
 \]
 
 \end_inset
@@ -6401,7 +6425,7 @@ D_{R}=i\sigma_{\mu}\partial^{\mu}\pm m\epsilon K
 and
 \begin_inset Formula 
 \[
-D_{L}=i\overline{\sigma}_{\mu}\partial^{\mu}\pm m\epsilon K
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}\pm m\epsilon K
 \]
 
 \end_inset
@@ -6415,6 +6439,133 @@ so that Majorana is
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection
+Four-component Majorana
+\end_layout
+
+\begin_layout Standard
+Should be able to re-arrange the above into a four-component Majorana.
+ Start by writing
+\begin_inset Formula 
+\[
+\left(D_{L}\oplus D_{R}\right)\left(\psi_{L}\oplus\psi_{R}\right)=0
+\]
+
+\end_inset
+
+which is
+\begin_inset Formula 
+\[
+D_{L}\oplus D_{R}=i\left[\begin{array}{cc}
+I & 0\\
+0 & I
+\end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
+-\sigma^{i} & 0\\
+0 & \sigma^{i}
+\end{array}\right]\nabla_{i}\pm m\left[\begin{array}{cc}
+\epsilon K & 0\\
+0 & \epsilon K
+\end{array}\right]
+\]
+
+\end_inset
+
+Multiply by (this is minus the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ in the chiral rep of Itzykson & Zuber)
+\begin_inset Formula 
+\[
+\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+to get the gamma matrices in the chiral rep.
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus D_{R}\right)=i\beta\partial_{t}+i\left[\begin{array}{cc}
+0 & \sigma^{i}\\
+-\sigma^{i} & 0
+\end{array}\right]\nabla_{i}\pm m\left[\begin{array}{cc}
+0 & \epsilon K\\
+\epsilon K & 0
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}\pm m\left[\begin{array}{cc}
+0 & \epsilon K\\
+\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\begin{array}{c}
+\psi_{L}\\
+\psi_{R}
+\end{array}\right)\pm m\left(\begin{array}{c}
+\epsilon\psi_{R}^{*}\\
+\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+Then writing (this is minus the chiral rep 
+\begin_inset Formula $\gamma^{5}$
+\end_inset
+
+ of Itzykson & Zuber)
+\begin_inset Formula 
+\[
+C=\left[\begin{array}{cc}
+-i\sigma^{2} & 0\\
+0 & i\sigma^{2}
+\end{array}\right]=\left[\begin{array}{cc}
+-\epsilon & 0\\
+0 & \epsilon
+\end{array}\right]\qquad\gamma^{5}=\left[\begin{array}{cc}
+-1 & 0\\
+0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+and the charge-conjugate spinor as
+\begin_inset Formula 
+\[
+\psi_{c}=\left(\begin{array}{c}
+\psi_{L}^{c}\\
+\psi_{R}^{c}
+\end{array}\right)=C\overline{\psi}^{T}=\left[\begin{array}{cc}
+0 & -\epsilon\\
+\epsilon & 0
+\end{array}\right]\psi^{*}=\left(\begin{array}{c}
+-\epsilon\psi_{R}^{*}\\
+\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+the final four-component eqn is
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi\pm m\gamma^{5}\psi_{c}
+\]
+
+\end_inset
+
+Looks weird.
+ Does it work? Not really...
 \end_layout
 
 \begin_layout Subsection
@@ -6467,6 +6618,8 @@ D_{R}\psi_{R}= & \left(i\sigma^{\mu}\partial_{\mu}\pm m\epsilon K\right)\psi_{R}
 \end_inset
 
 which is WTF infuriating due to the sign flip on the mass term.
+ Solving this directly is impractical; seems easier to boost the stationary
+ solutions.
 \end_layout
 
 \begin_layout Section
