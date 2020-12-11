@@ -1414,7 +1414,15 @@ Note the transpose aka complex conjugate! So we identify
 \begin_inset Formula $\epsilon$
 \end_inset
 
- with parity plus transpose, for the spinors.
+ with the 
+\begin_inset Quotes eld
+\end_inset
+
+square root
+\begin_inset Quotes erd
+\end_inset
+
+ of parity plus transpose, for the spinors.
  This implies
 \end_layout
 
@@ -1868,7 +1876,7 @@ Only now can we plug in the double-covering
 To get
 \begin_inset Formula 
 \[
-0=S\overline{\sigma}_{\mu}\partial^{\mu}S^{\dagger}L\psi_{L}\left(x\right)
+0=S\overline{\sigma}^{\mu}\partial_{\mu}S^{\dagger}L\psi_{L}\left(x\right)
 \]
 
 \end_inset
@@ -2316,7 +2324,7 @@ Foutain of confusion
 \begin_layout Standard
 The above provides a pair of linearly independent two-compoent equations.
  They can be harnessed together in a misleading and confusing way.
- Hree's the recipie for creating confusion.
+ Here's the recipie for creating confusion.
 \end_layout
 
 \begin_layout Standard
@@ -2623,12 +2631,12 @@ D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
 Define 
 \begin_inset Formula 
 \[
-\chi_{R}=\eta\epsilon\psi_{L}^{*}
+\chi_{R}=-\eta\epsilon\psi_{L}^{*}
 \]
 
 \end_inset
 
-Well, what's the equations for that? Claim it is
+Well, what's the equation for that? Lets make the ansatz that it is
 \begin_inset Formula 
 \[
 \left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}=0
@@ -2636,7 +2644,8 @@ Well, what's the equations for that? Claim it is
 
 \end_inset
 
-which is distinct from
+and see if we can prove it.
+ This ansatz (for the moment) is distinct from 
 \begin_inset Formula 
 \[
 D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
@@ -2653,7 +2662,7 @@ and
 \begin_inset Formula 
 \begin{align*}
 \left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}= & i\sigma^{\mu}\partial_{\mu}\chi_{R}-\zeta m\epsilon\chi_{R}^{*}\\
-= & i\sigma^{\mu}\partial_{\mu}\eta\epsilon\psi_{L}^{*}+\zeta\eta m\psi_{L}
+=- & i\sigma^{\mu}\partial_{\mu}\eta\epsilon\psi_{L}^{*}-\zeta\eta^{*}m\psi_{L}
 \end{align*}
 
 \end_inset
@@ -2666,22 +2675,22 @@ where
  Take the complex conjugate
 \begin_inset Formula 
 \begin{align*}
-\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & -i\sigma^{*\mu}\partial_{\mu}\eta^{*}\epsilon\psi_{L}+\zeta^{*}\eta^{*}m\psi_{L}^{*}\\
-= & \eta^{*}\left(-i\sigma^{*\mu}\partial_{\mu}\epsilon\psi_{L}+\zeta^{*}m\psi_{L}^{*}\right)
+\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & i\sigma^{*\mu}\partial_{\mu}\eta^{*}\epsilon\psi_{L}-\zeta^{*}\eta m\psi_{L}^{*}
 \end{align*}
 
 \end_inset
 
- so multiply by 
+Multiply by 
 \begin_inset Formula $\eta\epsilon$
 \end_inset
 
  to get
 \begin_inset Formula 
 \begin{align*}
-\eta\epsilon\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & -i\epsilon\sigma^{*\mu}\epsilon\partial_{\mu}\psi_{L}+\zeta^{*}m\epsilon\psi_{L}^{*}\\
-= & i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}+\zeta^{*}m\epsilon\psi_{L}^{*}\\
-= & i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}+\eta m\epsilon\psi_{L}^{*}
+\eta\epsilon\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & i\epsilon\sigma^{*\mu}\epsilon\partial_{\mu}\psi_{L}-\zeta^{*}\eta^{2}m\epsilon\psi_{L}^{*}\\
+= & -i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}-\zeta^{*}\eta^{2}m\epsilon\psi_{L}^{*}\\
+= & -i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}-\eta m\epsilon\psi_{L}^{*}\\
+= & -D_{L}\psi_{L}
 \end{align*}
 
 \end_inset
@@ -2691,13 +2700,17 @@ Where above used
 \end_inset
 
  and also that 
-\begin_inset Formula $\zeta^{*}=\eta$
+\begin_inset Formula $\zeta^{*}\eta=1$
+\end_inset
+
+ or 
+\begin_inset Formula $\zeta=\eta$
 \end_inset
 
  and so 
 \begin_inset Formula 
 \[
-\left(i\sigma^{\mu}\partial_{\mu}-\eta^{*}m\epsilon K\right)\chi_{R}=0
+\left(i\sigma^{\mu}\partial_{\mu}-\eta m\epsilon K\right)\chi_{R}=0
 \]
 
 \end_inset
@@ -2705,13 +2718,13 @@ Where above used
 Write 
 \begin_inset Formula 
 \[
-\delta_{R}=i\sigma^{\mu}\partial_{\mu}-\eta^{*}m\epsilon K
+\delta_{R}=i\sigma^{\mu}\partial_{\mu}-\eta m\epsilon K
 \]
 
 \end_inset
 
  so that 
-\begin_inset Formula $D_{L}\psi_{L}=\eta\epsilon\left(\delta_{R}\chi_{R}\right)^{*}$
+\begin_inset Formula $D_{L}\psi_{L}=-\eta\epsilon\left(\delta_{R}\chi_{R}\right)^{*}$
 \end_inset
 
  The four-component Majorana is now
@@ -2725,7 +2738,10 @@ Write
 which is
 \begin_inset Formula 
 \[
-D_{L}\oplus\delta_{R}=i\left[\begin{array}{cc}
+D_{L}\oplus\delta_{R}=\left[\begin{array}{cc}
+D_{L} & 0\\
+0 & \delta_{R}
+\end{array}\right]=i\left[\begin{array}{cc}
 I & 0\\
 0 & I
 \end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
@@ -2733,7 +2749,7 @@ I & 0\\
 0 & \sigma^{i}
 \end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
 \eta\epsilon K & 0\\
-0 & -\eta^{*}\epsilon K
+0 & -\eta\epsilon K
 \end{array}\right]
 \]
 
@@ -2757,38 +2773,59 @@ I & 0
 to get the gamma matrices in the chiral rep.
 \begin_inset Formula 
 \[
-\beta\left(D_{L}\oplus\delta_{R}\right)=i\beta\partial_{t}+i\left[\begin{array}{cc}
+\beta\left(D_{L}\oplus\delta_{R}\right)=\left[\begin{array}{cc}
+0 & \delta_{R}\\
+D_{L} & 0
+\end{array}\right]=i\beta\partial_{t}+i\left[\begin{array}{cc}
 0 & \sigma^{i}\\
 -\sigma^{i} & 0
 \end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
-0 & -\eta^{*}\epsilon K\\
+0 & -\eta\epsilon K\\
 \eta\epsilon K & 0
-\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+m\left[\begin{array}{cc}
-0 & -\eta^{*}\epsilon K\\
-\eta\epsilon K & 0
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}-m\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
 \end{array}\right]
 \]
 
 \end_inset
 
-Then
+The last term is charge conjugation (almost) and 
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\left(\begin{array}{c}
+\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]\left(\begin{array}{c}
 \psi_{L}\\
 \chi_{R}
-\end{array}\right)+m\left(\begin{array}{c}
+\end{array}\right)=\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]\left(\begin{array}{c}
 \psi_{L}\\
-\eta\epsilon\psi_{L}^{*}
+-\eta\epsilon\psi_{L}^{*}
+\end{array}\right)=\left(\begin{array}{c}
+\psi_{L}\\
+-\eta\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+0=\left(i\gamma^{\mu}\partial_{\mu}-m\right)\left(\begin{array}{c}
+\psi_{L}\\
+\chi_{R}
 \end{array}\right)
 \]
 
 \end_inset
 
 Ta dah.
- Paradox resolved! Wow.
- That was brain-melting.
- Glad that is over with.
+ Paradox resolved!
 \end_layout
 
 \begin_layout Subsection
@@ -2813,7 +2850,7 @@ Lets see...
 \begin_inset Formula $K$
 \end_inset
 
-is a reminder to take the complex conjugate.
+ is a reminder to take the complex conjugate.
 \end_layout
 
 \begin_layout Standard
