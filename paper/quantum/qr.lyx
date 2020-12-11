@@ -6671,12 +6671,17 @@ So even in the Weyl rep, this does not split cleanly into left and right
 \end_layout
 
 \begin_layout Subsection
-Four-component Majorana
+Foutain of confusion
 \end_layout
 
 \begin_layout Standard
-Should be able to re-arrange the above into a four-component Majorana.
- Start by writing
+The above provides a pair of linearly independent two-compoent equations.
+ They can be harnessed together in a misleading and confusing way.
+ Hree's the recipie for creating confusion.
+\end_layout
+
+\begin_layout Standard
+Start by writing
 \begin_inset Formula 
 \[
 \left(D_{L}\oplus D_{R}\right)\left(\psi_{L}\oplus\psi_{R}\right)=0
@@ -6810,50 +6815,14 @@ so here is the confusion: Visually comparing these, we want
 \end_inset
 
 So the sign is coming out wrong on the bottom.
- So this is wtf in yet another way.
- I must be missing something obvious....
+ The answer is that the two Weyl eqns for left and right are linearly independen
+t, completely uncoupled.
+ The Dirac eqn is coupled.
+ They are not comparable.
 \end_layout
 
 \begin_layout Standard
-Thought pattern:
-\end_layout
-
-\begin_layout Itemize
-The two Weyl eqns for left and right are linearly independent, completely
- uncoupled.
-\end_layout
-
-\begin_layout Itemize
-We can throw in a coupling by throwing in an extra minus sign.
- (??? really ???)
-\end_layout
-
-\begin_layout Itemize
-But then squaring doesn't give the Klien Gordon
-\end_layout
-
-\begin_layout Itemize
-Except that squaring Dirac does give Klein-Gordon (What does it mean 
-\begin_inset Quotes eld
-\end_inset
-
-to square
-\begin_inset Quotes erd
-\end_inset
-
-? There are minus signs floating in there as well...)
-\end_layout
-
-\begin_layout Itemize
-So there must be an inconsistency, but where?
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-Then writing (this is minus the chiral rep 
+Anyway, writing (this is minus the chiral rep 
 \begin_inset Formula $\gamma^{5}$
 \end_inset
 
@@ -6905,13 +6874,7 @@ The final four-component eqn is
 \end_inset
 
 Looks weird.
- Does it work? Not really...
- wtf.
- What went wrong?
-\end_layout
-
-\begin_layout Standard
-This was supposed to be
+ This was supposed to be
 \begin_inset Formula 
 \[
 0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}
@@ -6919,7 +6882,19 @@ This was supposed to be
 
 \end_inset
 
-So where is the error? Here's what I got, vs.
+This seems either paradoxial or its hiding a sign error.
+ Answer: its not a sign error, its a clever trick that sows confusion.
+ The first eqn is a pair of linearly independent eqns written in a tangled
+ form.
+ The second is the four-component Majorana eqn, which is 
+\emph on
+not
+\emph default
+ a pair of independent equations, but are coupled.
+\end_layout
+
+\begin_layout Standard
+Some notes: Here's what I got, vs.
  Aste:
 \end_layout
 
@@ -6940,7 +6915,18 @@ chooses
 \begin_inset Formula $\zeta=-\eta$
 \end_inset
 
+.
+ This is a misprepresentation; he should have said that he is coupling the
+ eqqns together.
+ This 
+\begin_inset Quotes eld
+\end_inset
 
+choice
+\begin_inset Quotes erd
+\end_inset
+
+ couples them together.
 \end_layout
 
 \begin_layout Itemize
@@ -6957,16 +6943,213 @@ Then of course he gets the Klein–Gordon 74 to work out.
 \end_layout
 
 \begin_layout Itemize
-Conclude, his sign-choice for eqn 69 and 71 was wrong...
-\end_layout
+However, the 
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Itemize
-However, that bad sign choice is needed to get 
+sign choice
+\begin_inset Quotes erd
+\end_inset
+
+ is needed to get 
 \begin_inset Formula $0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}$
 \end_inset
 
  in eqn.
- 118-123 so wtf.
+ 118-123
+\end_layout
+
+\begin_layout Standard
+Next section: lets restate clearly what is happening.
+\end_layout
+
+\begin_layout Subsection
+Four-component Majorana
+\end_layout
+
+\begin_layout Standard
+So where is the error? Here's the deal.
+ Start with 
+\begin_inset Formula $D_{L}\psi_{L}=0$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+Define 
+\begin_inset Formula 
+\[
+\chi_{R}=\eta\epsilon\psi_{L}^{*}
+\]
+
+\end_inset
+
+Well, what's the equations for that? Claim it is
+\begin_inset Formula 
+\[
+\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}=0
+\]
+
+\end_inset
+
+which is distinct from
+\begin_inset Formula 
+\[
+D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $D_{R}\psi_{R}=0$
+\end_inset
+
+.
+ Let's check
+\begin_inset Formula 
+\begin{align*}
+\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}= & i\sigma^{\mu}\partial_{\mu}\chi_{R}-\zeta m\epsilon\chi_{R}^{*}\\
+= & i\sigma^{\mu}\partial_{\mu}\eta\epsilon\psi_{L}^{*}+\zeta\eta m\psi_{L}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon^{2}=-1$
+\end_inset
+
+ was used.
+ Take the complex conjugate
+\begin_inset Formula 
+\begin{align*}
+\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & -i\sigma^{*\mu}\partial_{\mu}\eta^{*}\epsilon\psi_{L}+\zeta^{*}\eta^{*}m\psi_{L}^{*}\\
+= & \eta^{*}\left(-i\sigma^{*\mu}\partial_{\mu}\epsilon\psi_{L}+\zeta^{*}m\psi_{L}^{*}\right)
+\end{align*}
+
+\end_inset
+
+ so multiply by 
+\begin_inset Formula $\eta\epsilon$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{align*}
+\eta\epsilon\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & -i\epsilon\sigma^{*\mu}\epsilon\partial_{\mu}\psi_{L}+\zeta^{*}m\epsilon\psi_{L}^{*}\\
+= & i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}+\zeta^{*}m\epsilon\psi_{L}^{*}\\
+= & i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}+\eta m\epsilon\psi_{L}^{*}
+\end{align*}
+
+\end_inset
+
+Where above used 
+\begin_inset Formula $\epsilon\sigma^{*\mu}\epsilon=-\overline{\sigma}^{\mu}$
+\end_inset
+
+ and also that 
+\begin_inset Formula $\zeta^{*}=\eta$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\left(i\sigma^{\mu}\partial_{\mu}-\eta^{*}m\epsilon K\right)\chi_{R}=0
+\]
+
+\end_inset
+
+Write 
+\begin_inset Formula 
+\[
+\delta_{R}=i\sigma^{\mu}\partial_{\mu}-\eta^{*}m\epsilon K
+\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula $D_{L}\psi_{L}=\eta\epsilon\left(\delta_{R}\chi_{R}\right)^{*}$
+\end_inset
+
+ The four-component Majorana is now
+\begin_inset Formula 
+\[
+\left(D_{L}\oplus\delta_{R}\right)\left(\psi_{L}\oplus\chi_{R}\right)=0
+\]
+
+\end_inset
+
+which is
+\begin_inset Formula 
+\[
+D_{L}\oplus\delta_{R}=i\left[\begin{array}{cc}
+I & 0\\
+0 & I
+\end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
+-\sigma^{i} & 0\\
+0 & \sigma^{i}
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+\eta\epsilon K & 0\\
+0 & -\eta^{*}\epsilon K
+\end{array}\right]
+\]
+
+\end_inset
+
+Multiply on the left by (this is minus the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ in the chiral rep of Itzykson & Zuber)
+\begin_inset Formula 
+\[
+\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+to get the gamma matrices in the chiral rep.
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus\delta_{R}\right)=i\beta\partial_{t}+i\left[\begin{array}{cc}
+0 & \sigma^{i}\\
+-\sigma^{i} & 0
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+0 & -\eta^{*}\epsilon K\\
+\eta\epsilon K & 0
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+m\left[\begin{array}{cc}
+0 & -\eta^{*}\epsilon K\\
+\eta\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\begin{array}{c}
+\psi_{L}\\
+\chi_{R}
+\end{array}\right)+m\left(\begin{array}{c}
+\psi_{L}\\
+\eta\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+Ta dah.
+ Paradox resolved! Wow.
+ That was brain-melting.
+ Glad that is over with.
 \end_layout
 
 \begin_layout Subsection
