@@ -1,0 +1,7401 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{url} 
+\usepackage{slashed}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "courier" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+The Origins of Quantum Mechanics
+\end_layout
+
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Date
+4 May 2016 updated 29 Sept 2016 updated 12 July 2017 
+\end_layout
+
+\begin_layout Date
+updated 10 March 2018 updated 3 Nov 2020
+\end_layout
+
+\begin_layout Abstract
+A variety of speculations about the nature of quantum mechanics and wave-functio
+n collapse.
+ A number of 
+\begin_inset Quotes eld
+\end_inset
+
+key principles
+\begin_inset Quotes erd
+\end_inset
+
+ are set down; these must surely hold true.
+ Holding onto these, a variety of mathematical effects are explored, to
+ see if or how they might be appropriate for describing QM, and its relationship
+ to space and time.
+\end_layout
+
+\begin_layout Abstract
+Although this appeals to a variety of mathematical ideas, this is an attempt
+ to do physics, i.e.
+ to argue with words, instead of writing down formulas.
+ No formulas, just some postulates of things that seem like they are true
+ or should be true.
+ Fairly random and disorganized thoughts.
+\end_layout
+
+\begin_layout Abstract
+Many of these here are bad ideas, wrong somehow.
+ The ideas near the end are probably much better than the ideas at the beginning
+, since they are sharper, more pointed.
+ Its edited in a hap-hazard way; I change my mind as I go along.
+\end_layout
+
+\begin_layout Section
+Intro
+\end_layout
+
+\begin_layout Standard
+So, this is an attempt to unify quantum mechanics with gravitation.
+ Its primarily a discussion of principles that seem like they should guide
+ such a unification.
+ This means few or no equations.
+ Some of these principles may be controversial, and surely some readers
+ will think they're (not even) wrong.
+ They might be, but its the groundwork for my thinking.
+\end_layout
+
+\begin_layout Standard
+This also begins by (almost) completely ignoring the work of others on quantum
+ gravity and strings and Penrose and ER=EPR and AdS/CFT and Schrieber's
+ SuperPoint and so-on.
+ I want to state what seem to be 
+\begin_inset Quotes eld
+\end_inset
+
+first principles
+\begin_inset Quotes erd
+\end_inset
+
+, whereas these existing theories have already made many explicit or implicit
+ assumptions about first principles that are (possibly?) in contradiction
+ with what I'm pondering.
+ This does not mean that I reject these theories; I partially understand
+ many of them, and kind-of like them (they are interesting, fun, elegant,
+ and worth getting lost in).
+ But rather, if we start with them, then we are forced into arcana almost
+ immediately.
+ I want to start with a clean slate.
+\end_layout
+
+\begin_layout Standard
+Argument from authority: I have a PhD in theoretical particle physics, and
+ have studied gravitation (Riemannian geometry), affine Lie algebras (string
+ theory), and also the various places where these things take you: algebraic
+ topology, category theory, sheaves and many other topics in math.
+ This is a kind of 
+\begin_inset Quotes eld
+\end_inset
+
+appeal to authority
+\begin_inset Quotes erd
+\end_inset
+
+ (argumentum ad verecundiam) - more accurately, a request to the reader
+ to not immediately dismiss this text as quackery.
+\end_layout
+
+\begin_layout Standard
+To conclude: this is trying to be an informed discussion about mathematics
+ that does not use formulas.
+ At times, this might make it sound simplistic.
+ I am trying to write in the most simplistic way that I can do so.
+ This is intentional.
+ Do not be fooled.
+\end_layout
+
+\begin_layout Section
+Statement of Principles
+\end_layout
+
+\begin_layout Standard
+We take these to be self-evident facts.
+ Or something thereabouts.
+\end_layout
+
+\begin_layout Paragraph*
+Principle: Quantum post facto
+\end_layout
+
+\begin_layout Standard
+The concept of quantum mechanics should come out of the unification of QM
+ and gravity, rather than being one of the ingredients going into it.
+ In particular, the Feynman functional integral should be something that
+ comes out of the theory, as an unavoidable result, rather than going into
+ it.
+\end_layout
+
+\begin_layout Paragraph*
+Principle: Quantum is primarily microscopic
+\end_layout
+
+\begin_layout Standard
+This is a rejection of the Schroedinger-Cat paradox.
+ I'm not sure, it may be equivalent to a rejection of Many-Worlds.
+ Its a statement about wave-function collapse.
+ The idea is that any quantum effect (e.g.
+ quantum measurement) that causes sufficiently large perturbations in its
+ surroundings causes a 
+\begin_inset Quotes eld
+\end_inset
+
+wave-function collapse
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The cut-off point seems to be the Planck mass.
+ That is, when the decaying nucleus that kills the cat fires off, it is
+ in a superposition, but only to the point that about one Planck-mass of
+ detector atoms are involved.
+ After that, alternative histories either converge or spontaneously evaporate.
+ So, for example, although there are and continue to be 
+\begin_inset Quotes eld
+\end_inset
+
+many worlds
+\begin_inset Quotes erd
+\end_inset
+
+ at the quantum scale, once some of these interact with the macroscopic
+ scale, the probabilities of the alternative worlds shrink exponentially
+ to zero.
+\end_layout
+
+\begin_layout Standard
+The argument is that gravitation is too weak to have any significant effect
+ on the microscopic scale, and the fact that an electron might be in many
+ places at once has vanishing gravitational effect, up to the point that
+ the electron has disturbed about 
+\begin_inset Formula $10^{18}$
+\end_inset
+
+ atoms, at which point, gravitational effects can no longer be ignored.
+ That is, gravitation remains classical, and there is a single unique space-time
+ geometry at the macroscopic scale.
+ Put another way: if Schrödinger cat is alive, space-time curves one way,
+ and if the cat is dead, then space-time curves another way.
+ There is no superposition of different space-time curvatures.
+ There are not many-worlds of parallel space-times.
+\end_layout
+
+\begin_layout Standard
+This is an idea brazenly stolen from Roger Penrose, who surely states it
+ in some more eloquent fashion than I can muster.
+\end_layout
+
+\begin_layout Standard
+Supporting argument: See 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Practical:-Macroscopic-states"
+
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+Macroscopic states have no phase
+\begin_inset Quotes erd
+\end_inset
+
+, below.
+\end_layout
+
+\begin_layout Paragraph*
+Objection: Bose-Einstein states
+\end_layout
+
+\begin_layout Standard
+If wave-function collapse occurs at the 
+\begin_inset Formula $10^{18}$
+\end_inset
+
+ atom scale, then how does one explain superfluidity, which involves more
+ than that many atoms? Conditional answer: because 
+\begin_inset Quotes eld
+\end_inset
+
+true collapse
+\begin_inset Quotes erd
+\end_inset
+
+ involves only fermions...
+ See comments about spinc group, below.
+\end_layout
+
+\begin_layout Paragraph*
+Speculation: Entanglement has something to do with the spin group.
+\end_layout
+
+\begin_layout Standard
+The spin group (see below) is constructed from the unit-length of a Clifford
+ algebra, and naturally factorizes into Weyl spinors and anti-spinors (which,
+ by the way, anti-commute correctly).
+ A single point on the spin group seems to describe 
+\begin_inset Formula $N$
+\end_inset
+
+ fermions, and a change of basis implies that these fermions are entangled.
+ Note that these spinors are described without any reference whatsoever
+ to any ambient space-time.
+\end_layout
+
+\begin_layout Standard
+This is perhaps an absurd and premature speculation, since one can get wave-func
+tion entanglement simply by considering any complex projective space; the
+ spin group is not at all required for this.
+ Later on, some support for this speculation is provided.
+\end_layout
+
+\begin_layout Paragraph*
+Speculation: Wave-function collapse is like spontaneous symmetry breaking!
+ 
+\end_layout
+
+\begin_layout Standard
+The standard formulation of relativistic quantum field theory formulated
+ on flat Minkowski space connects up several distinct things: First, the
+ spin group is constructed, and the various half-spin and spin representations
+ are noted.
+ Next, a frame bundle is build, not just any frame bundle, but a spin structure.
+ This is used to build a spin manifold.
+ These are fancy words, given that the background is flat Minkowski space
+ – but it gets the point across.
+ Next, the observation is made that the whole construction is invariant
+ under the Poincaré algebra.
+ This allows an identification of spin representations as the same thing
+ as the angular momentum.
+ 
+\end_layout
+
+\begin_layout Standard
+Textbooks always handle Poincaré invariance on the tangent spaces of these
+ bundles.
+ There is an interesting paper by Ohanian (see later, below) that performs
+ the same identification, but on the bundle itself, rather than on the tangent
+ space.
+ Which is an interesting confirmation that we've correctly integrated on
+ the tangent space (i.e.
+ that we've correctly taken the Lie derivatives into the corresponding exp
+ maps).
+\end_layout
+
+\begin_layout Standard
+The observation is that, at the Planck-mass scale, and larger, the assumption
+ of global Poincaré invariance fails.
+ This can trigger collapse in two ways: one way is that its is not energetically
+ favorable to have multiple trajectories, multiple histories any more; the
+ other way is that the integrability conditions on the spinor bundle get
+ screwed up in some way.
+ That is, the tangent vector (spinor) fields are no longer integrable, or
+ that the integral curves converge into one.
+ Perhaps some topological obstruction – some Stiefel-Whitney type cohomology
+ cycle pops up.
+ Perhaps its both...
+\end_layout
+
+\begin_layout Paragraph*
+Speculation: Wave-function collapse is like QCD confinement! 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Collapse-is-confinement"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The speculation here is that wave-function collapse, driven by gravitation,
+ is essentially driven by the same mechanism as QCD confinement, except
+ that the characteristic scale is completely different: systems with more
+ than 
+\begin_inset Formula $10^{18}$
+\end_inset
+
+ atoms break up into domains where classical physics dominates, whereas
+ smaller systems can have QM superposition effects run freely inside of
+ them.
+ 
+\end_layout
+
+\begin_layout Standard
+The argument here is that QCD confinement occurs for 
+\emph on
+any
+\emph default
+ Yang-Mills theory for which the structure group is more complicated than
+ U(1).
+ This certainly should then apply to a spin-2 gauge particle (graviton)
+ with a Yang-Mills type self-coupling in the field-strength term in the
+ action, viz.
+ with structure group SO(3,1) or Spin(4).
+ However, since gravitation is so weak, the scale of the confined region
+ is much much larger, in proportion to the inverse of the coupling.
+\end_layout
+
+\begin_layout Standard
+We seem to kill two birds with one stone: this provides both the mechanism
+ of the collapse, and also to characteristic scale for it.
+ Gravitation provides a scale factor of the appropriate size, confinement
+ provides the mechanism.
+\end_layout
+
+\begin_layout Standard
+Note that QCD confinement remains a Millennium-prize problem.
+\end_layout
+
+\begin_layout Paragraph*
+Speculation: Entanglement is like superconductivity
+\end_layout
+
+\begin_layout Standard
+Specifically, that the entangled state of two qubits is like the entangled
+ state of BCS pairs.
+ Long-range order.
+\end_layout
+
+\begin_layout Standard
+There is not one, but two plausibility arguments for this.
+ First, we know from RHIC experiments that the QCD plasma behaves like a
+ superfluid.
+ By analogy, if wave-function collapse is like QCD confinement, then the
+ entangled-state needs to be superfluid-like.
+\end_layout
+
+\begin_layout Standard
+A second plausibility argument is the recent work on treating the surface
+ of black holes as a superfluid; this was in pop press, need to track down
+ the reference.
+\end_layout
+
+\begin_layout Standard
+What is the order parameter? The phenomenology of the 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Pheonom:-Two-state-vector-formalism"
+
+\end_inset
+
+ two-state vector formalism suggests that the order parameter is some ratio
+ of qubits to classical bits.
+ See, for example, SIC-POVM (symmetric, informationally complete, positive
+ operator valued measure).
+\end_layout
+
+\begin_layout Paragraph*
+Practical: Entanglement is conserved
+\end_layout
+
+\begin_layout Standard
+Entanglement is in some sense quasi-conserved, up to the point where its
+ broken.
+\end_layout
+
+\begin_layout Standard
+Is there an 
+\begin_inset Quotes eld
+\end_inset
+
+entanglement current
+\begin_inset Quotes erd
+\end_inset
+
+? i.e.
+ what if entanglement is like a conserved charge, is there a corresponding
+ current, where the entanglement 
+\begin_inset Quotes eld
+\end_inset
+
+leaked away
+\begin_inset Quotes erd
+\end_inset
+
+ during a measurement? 
+\end_layout
+
+\begin_layout Standard
+Is there an index-theorem for entanglement? Some generalized Atiyah-Singer-ish
+ thingy? 
+\end_layout
+
+\begin_layout Standard
+See above, paragraph 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Collapse-is-confinement"
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+Collapse is Confinement
+\begin_inset Quotes erd
+\end_inset
+
+: Entanglement is 
+\begin_inset Quotes eld
+\end_inset
+
+conserved
+\begin_inset Quotes erd
+\end_inset
+
+ just like superconductivity is 
+\begin_inset Quotes eld
+\end_inset
+
+conserved
+\begin_inset Quotes erd
+\end_inset
+
+ inside of the region of space where the temperature is low enough.
+ In this case, entanglement 
+\begin_inset Quotes eld
+\end_inset
+
+flows freely
+\begin_inset Quotes erd
+\end_inset
+
+ in regions of 
+\begin_inset Formula $10^{18}$
+\end_inset
+
+ or fewer atoms, and is broken for larger regions.
+\end_layout
+
+\begin_layout Standard
+The analogy suggests that, just like superfluids are a mixture of 
+\begin_inset Quotes eld
+\end_inset
+
+normal
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+superfluid
+\begin_inset Quotes erd
+\end_inset
+
+ states, then perhaps quantum states can be mixtures of classical and quantum
+ states.
+ Entanglement is the 
+\begin_inset Quotes eld
+\end_inset
+
+superfluid
+\begin_inset Quotes erd
+\end_inset
+
+ state.
+\end_layout
+
+\begin_layout Paragraph*
+Principle: Space-time is emergent 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Space-time-is-emergent"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is kind of a reversal of Verlinde's ideas.
+ The concept of Lorentz invariance isn't possible, until one is working
+ at a scale where space-time exists.
+ The core issue here is that all of our clocks and rulers are microscopic
+ and quantum mechanical: we measure time by vibrations of some quantum device.
+ We measure space by counting wavelengths.
+ The redefinition of mass (via Planck's constant) in the SI system makes
+ it quantum based.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Speculation: Relativity requires that space-time is a sheaf 
+\end_layout
+
+\begin_layout Standard
+The mathematicians already know that space-time is a sheaf; no surprise
+ there.
+ The speculation here is that the gluing axioms of a sheaf are exactly where
+ the quantum effects live.
+ So: the issue here is what do do about special relativity with respect
+ to quantum mechanics.
+ If we envision that the present is like an advancing wave-front, where
+ everything in the past is frozen and fixed, while everything in the future
+ is unknown and fluid, then the present is like a wave of freezing or of
+ crystallization sweeping through space-time.
+ The problem is that such a surface is manifestly not covariant; one cannot
+ time-order points outside the light-cone.
+ The solution to this seems to be to treat space-time as a sheaf, but to
+ allow the gluing axioms of a sheaf (that convert a pre-sheaf into a sheaf)
+ – allow those gluing axioms to only hold within the past-lightcone.
+ That is, the past becomes frozen precisely because this is where the sections
+ of a pre-sheaf are finally glued together into an actual sheaf, and become
+ correlated and firm.
+ Quantum mechanics exists exactly where things are not yet glued together.
+ Quantum measurement is (very roughly, misleadingly) the act of gluing.
+ More precisely, space-like separated measurements of entangled states (Bell
+ states, etc.) are in a fluid state until the results of those measurements
+ are brought back to a common location, thus placing both measurements in
+ a common past-lightcone.
+ It is here where the many-worlds 
+\begin_inset Quotes eld
+\end_inset
+
+sections
+\begin_inset Quotes erd
+\end_inset
+
+ get glued together in such a way that there are no violations of QM.
+ Thus, in a sense, QM in space-like separated regions behaves like a pre-sheaf;
+ the sections of the presheaf glue together along the edges of past light-cones.
+\end_layout
+
+\begin_layout Standard
+To put this more precisely: the different histories from a many-worlds scenario
+ encounter one-another on the surface of a light cone.
+ It is there that the histories sort themselves out, kind-of-like the gluing
+ of the gluing axioms joining different sections together.
+ The actual gluing is actually dynamic, given by amplitudes - e.g.
+ zero amplitude means 
+\begin_inset Quotes eld
+\end_inset
+
+can't glue
+\begin_inset Quotes erd
+\end_inset
+
+ - so in normal physics textbooks, you never see sheaves or gluing, you
+ just see amplitudes and propagators.
+ But those amplitudes are just stating what can be glued to what, and what
+ cannot be.
+ Insofar are propagators are light-like, that's where the gluing actually
+ happens.
+ They hyopthesis is that by the time you get to the planck mass (per Penrose),
+ the requirement of 
+\begin_inset Quotes eld
+\end_inset
+
+consistent histories
+\begin_inset Quotes erd
+\end_inset
+
+ of a so-called 
+\begin_inset Quotes eld
+\end_inset
+
+wave function collapse
+\begin_inset Quotes erd
+\end_inset
+
+ means that most pre-sheaf sections have been glued together in a consistent
+ way, and the number of possible 
+\begin_inset Quotes eld
+\end_inset
+
+many worlds
+\begin_inset Quotes erd
+\end_inset
+
+ has decreased in number: the only ones left are the one that have consistent
+ histories in the past light-cone.
+\end_layout
+
+\begin_layout Standard
+How many world are there in the MW interpretation? If the above hypothesis
+ holds, then the naive answer would be 
+\begin_inset Quotes eld
+\end_inset
+
+one per point in a space-like surface
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Unlike the Everrett hypothesis, here, the number of possible worlds is
+ not increasing at some exponential rate, but is holding steady (at some
+ small uncountable cardinal, presumably at the cardinal of the continuum).
+ 
+\end_layout
+
+\begin_layout Standard
+More precisely, there is one world of many-worlds per 3-D plank volume.
+ By poincare duality, there is one world per planck mass.
+ The total number of worlds in many-worlds is then the mass of the universe,
+ measured in planck-mass units.
+ So its not an uncountable cardinal; its much much smaller (
+\emph on
+viz.
+
+\emph default
+ finite) and its holding steady.
+\end_layout
+
+\begin_layout Standard
+This speculation is in naive conflict with the Feynman path integral; there,
+ the action is obtained from Lagrangian over all space-time (and not over
+ the past light-cone) and the functional integral is over all of the many-worlds
+ (and not over just the yet-to-be-glued-together ones).
+ There might be a way of making the above speculation fit with this standard-iss
+ue QFT, but it requires some subtlety.
+\end_layout
+
+\begin_layout Standard
+This speculation also seems to be at odds with the Hawking result that entropy
+ is proportional to area (one-fourth the area).
+ The area in turn goes as the mass-squared.
+ By adscft this implies that the number of worlds should go as mass-squared
+ of the universe not as the mass.
+ So something is being mis-counted.
+ Is it possible that there is a square-root in here? Viz: entropy is about
+ thermodynamics and bits; many worlds is about qubits; in some sense perhaps
+ this sneaks in the needed square-root to go from counting thermodynamics
+ bits, to counting the number of many worlds? Something like this, perhaps?
+ 
+\begin_inset Quotes eld
+\end_inset
+
+for 
+\begin_inset Formula $N$
+\end_inset
+
+ large, 
+\begin_inset Formula $N$
+\end_inset
+
+ qubits can be approximate by 
+\begin_inset Formula $N^{2}$
+\end_inset
+
+ classical bits.
+\begin_inset Quotes erd
+\end_inset
+
+ Well, except that is exactly the number of (classical) bits needed to quantum-t
+elelport 
+\begin_inset Formula $N$
+\end_inset
+
+ qubits.
+ So in fact, the Bekenstein-Hawking bound is in perfect agreement with the
+ estimate of the number of qubits.
+\end_layout
+
+\begin_layout Paragraph*
+Phenomenology: Two-state vector formalism 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Pheonom:-Two-state-vector-formalism"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The work on weak measurements suggests that the two-state vector formalism
+ (TSVF) seems to be the correct formalism for describing quantum mechanics.
+ The explicit dependence on the future seems to be consistent with the 
+\begin_inset Quotes eld
+\end_inset
+
+transactional interpretation of quantum mechanics
+\begin_inset Quotes erd
+\end_inset
+
+, where a measurement at the current time seems to reach back in time, to
+ twiddle and reconcile qubits in the past.
+\end_layout
+
+\begin_layout Standard
+From what I can tell, the correctness of the TVSF is embraced in the quantum-com
+puting world, where the positive-operator valued measure (POVM) is the 
+\emph on
+defacto
+\emph default
+ technique by which quantum computing is formulated.
+\end_layout
+
+\begin_layout Standard
+This is meant to provide support for the 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Space-time-is-emergent"
+
+\end_inset
+
+ principle that space-time is emergent.
+ That is, quantum phenomena are not localized in either space, nor in time.
+ The former, we've gotten used to, the latter, specifically, the acausal-like
+ nature of wave-function collapse, still grates on many, but we have to
+ accept it; we even have to accept a 
+\begin_inset Quotes eld
+\end_inset
+
+strong
+\begin_inset Quotes erd
+\end_inset
+
+ version of it: the future alters the past.
+ However, this 
+\begin_inset Quotes eld
+\end_inset
+
+acausality
+\begin_inset Quotes erd
+\end_inset
+
+ is limited explicitly to qubits only.
+ Future measurements alter qubits in the past, but cannot alter classical
+ bits, which still flow in a causal, time-like fashion.
+\end_layout
+
+\begin_layout Paragraph*
+Phenomenology: there are no electrically charged bosons
+\end_layout
+
+\begin_layout Standard
+Well, there are: W+/-, but that's beside the point, the point being that
+ electrons have spin half and that the spin is the ultimate source for the
+ quantum effects, when coupled to the electric field.
+ Viz spin is a twisting up of space.
+ Rather than treating spin as a representation of the rotational symmetry
+ of space, we should treat spin as a certain tangling up of multiple paths
+ (e.g.
+ paths in the sense of functional integral, or in the sense of Hamilton-Jacobi
+ variational principle) so that we should envision these paths as a kind-of-like
+ Hopf fibration – the paths are the fibers, the resulting fibration is an
+ object that belongs to the 2 representation of SU(2).
+ 
+\end_layout
+
+\begin_layout Standard
+That is, we treat quantum paths as if they were fibers, and then ask: how
+ can we tangle them up, so that the grand-total holonomy behaves as if it
+ were a spin-1/2 object? I suspect that such a tangling is impossible, without
+ also pairing the object with a second one, i.e.
+ in the sense of 
+\begin_inset Quotes eld
+\end_inset
+
+quantum entanglement
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+What does electric charge have to do with this? The idea here is that the
+ electric charge at large distances looks like central-force attractive/repulsiv
+e, and so one can ask about the geodesics of the free-falling electrically-charg
+ed observer.
+ The free-falling observer does fine, until he gets within a Compton-length
+ of the electron, in which case there's a fibration of multiple paths that
+ become possible.
+ 
+\end_layout
+
+\begin_layout Standard
+That is, the point-like nature of the observer/geodesic becomes replaced
+ by a spray(??) so that instead of saying 
+\begin_inset Quotes eld
+\end_inset
+
+a single thing is in multiple locations
+\begin_inset Quotes erd
+\end_inset
+
+ (as is normally done in QM), we should instead say 
+\begin_inset Quotes eld
+\end_inset
+
+there are multiple locations associated with a single thing
+\begin_inset Quotes erd
+\end_inset
+
+ (which seems to be the same sentence, but is not): i.e.
+ that space-time no longer has a simple structure at the microscopic level.
+ The concept of 
+\begin_inset Quotes eld
+\end_inset
+
+location
+\begin_inset Quotes erd
+\end_inset
+
+ becomes flawed in some certain way.
+\end_layout
+
+\begin_layout Standard
+Nonetheless, Minkowski space seems to provide a valid description between
+ the merely microscopic, and the Planck length, which is truly minuscule.
+ Why?
+\end_layout
+
+\begin_layout Paragraph*
+Phenomenology: Macroscopic states have no phase
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Practical:-Macroscopic-states"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is a persistent confusion about the Schrödinger Cat state, which can
+ be resolved by observing that there is no practical way of changing the
+ phase of macroscopic states.
+ There is no device that can do this.
+\end_layout
+
+\begin_layout Standard
+That is, it is commonly suggested that the Schrödinger cat state can be
+ written as 
+\begin_inset Formula 
+\[
+\left|Z\right\rangle =\frac{1}{\sqrt{2}}\left(\left|\psi_{\mbox{dead}}\right\rangle +\left|\psi_{\mbox{alive}}\right\rangle \right)
+\]
+
+\end_inset
+
+but the problem/fallacy of the above expression is that there is no practical
+ way of rotating the phase of either 
+\begin_inset Quotes eld
+\end_inset
+
+wave-function
+\begin_inset Quotes erd
+\end_inset
+
+, e.g.
+ by applying some quantum gate.
+ This implies that there is no way to construct the states 
+\begin_inset Formula 
+\[
+\left|X\right\rangle =\frac{1}{\sqrt{2}}\left(\left|\psi_{\mbox{dead}}\right\rangle -\left|\psi_{\mbox{alive}}\right\rangle \right)
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+\left|Y\right\rangle =\frac{1}{\sqrt{2}}\left(\left|\psi_{\mbox{dead}}\right\rangle +i\left|\psi_{\mbox{alive}}\right\rangle \right)
+\]
+
+\end_inset
+
+which thus prevents measurements along any other qubit axes than the Z axis.
+ This suggests that the Schrödinger cat 
+\begin_inset Quotes eld
+\end_inset
+
+state
+\begin_inset Quotes erd
+\end_inset
+
+ is not really a quantum state at all.
+ If one cannot manipulate it as a true qubit, then, by what abstraction
+ are we allowed to pretend that its an actual qubit?
+\end_layout
+
+\begin_layout Paragraph*
+Phenomenology: The nature of a measurement
+\end_layout
+
+\begin_layout Standard
+There seems to be a lot of confusion about the nature of a measurement.
+ The quantum eraser seems to highlight that confusion most clearly.
+ The point is this: taking a quantum state, and sending it to two different
+ physical locations, based on projections of its state, is not a 
+\begin_inset Quotes eld
+\end_inset
+
+measurement
+\begin_inset Quotes erd
+\end_inset
+
+; it is merely the creation of entangled pairs with spatial separation.
+ So: sending a photon through a birefringent crystal does not constitute
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+measurement
+\begin_inset Quotes erd
+\end_inset
+
+; rather, its a just a variation of a two-slit experiment; phase coherence
+ is not destroyed, and the two arms can be treated as the arms of an interferome
+ter; the beams recombined.
+ Similar remarks apply to the Stern-Gerlach magnets: in principle, if the
+ magnetic fields and beam direction were precisely controlled, the phases
+ would not be randomized, and the spin-1/2 beams in a Stern-Gerlach magnet
+ could be recombined in a coherent fashion, forming an interferometer.
+ These remarks apply, in particular, to the quarter-wave plates and polarizers
+ of the quantum eraser: they are marking, not measuring.
+ 
+\end_layout
+
+\begin_layout Standard
+The measurement occurs when the particle interacts with the detector; it
+ is at this point that phase coherence is destroyed, and the situation turns
+ into a Schrödinger-cat situation: there are no devices, no quantum-gates
+ that can rotate a detection+non-detection state into some other orthogonal
+ direction.
+\end_layout
+
+\begin_layout Paragraph*
+Phenomenology: most wave-function collapses do not matter
+\end_layout
+
+\begin_layout Standard
+Consider a photon striking a photographic plate.
+ Suppose that photon came from a single narrow slit, so that its QM description
+ would be the typical QM wave illuminating the photographic plate.
+ The wave function collapse here is when some-or-another grain of silver
+ iodide absorbs the photon.
+ The classical description of this event is to say that the photographic
+ plate is now in a superposition of many states: any one of millions of
+ silver-iodide crystals might have absorbed that photon, and so that plate
+ is in a (macroscopic) superposition of millions of states.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider now the future time evolution of that superposition.
+ The plate might be shattered before it is developed, or maybe after.
+ It might be discarded into a trash-heap before the experimenter looks at
+ it.
+ It might be discarded into a trash-heap after the experimenter looks at
+ it, but considers the results so unimportant and uninteresting that they
+ are promptly forgotten.
+ Possibly the plate records something very important; the experimenter publishes
+ a paper on what that plate recored.
+ Did it matter if the important discovery in the plate was in the center,
+ or shifted over a few centimeters one way or another?
+\end_layout
+
+\begin_layout Standard
+The point here is that, in almost all photographic-plate superpositions,
+ there are almost no long-time-period effects that are not thermalized.
+ If the plate is broken before being developed, it is essentially thermalized
+ immediately: all future timelines of the superposed plate are essentially
+ equivalent.
+ There is no 
+\begin_inset Quotes eld
+\end_inset
+
+for want of a nail, the shoe was lost
+\begin_inset Quotes erd
+\end_inset
+
+ effect.
+ Thus, in this sense, (almost) all superpositions of the plate belong to
+ the same equivalence class.
+ One can pick a single representative from the equivalence class (
+\emph on
+viz
+\emph default
+, the photon explicitly hit this one crystal over here), and that single
+ representative is sufficient to represent the forward time-like evolution
+ of the universe.
+ A different representative (
+\emph on
+viz
+\emph default
+, the photon explicitly hit this other crystal over there) gives the same
+ result.
+ 
+\end_layout
+
+\begin_layout Standard
+This implies a certain duality: either a wave-function collapse did occur,
+ but it thermalized and did not matter, or a wave-function collapse did
+ not occur, and there is a thermalized superposition of shards of film-plate
+ moving forward in time.
+ Either ontological beleif (the collapse did occur; it did not occur) appears
+ to describe essentially the same outcome.
+\end_layout
+
+\begin_layout Standard
+How long must one wait until thermalization? If the universe was described
+ by infinite-precision real numbers, one might imagine after-shocks that
+ continue a very long time.
+ Insofar as the universe halts at the planck scale, that's where equivalence
+ classes of superposed states become indistinguishable from any one member
+ of that equivalence class.
+\end_layout
+
+\begin_layout Standard
+The upshot: things thermalize in finite time, not infinite time.
+ After a finite time, which specific, actual wave-function collapse occured
+ no longer matters; any other collapse has the same effect on the future
+ universe.
+ All the different many-world possibilities are erased, and consolidated
+ into one.
+\end_layout
+
+\begin_layout Standard
+Objection: the ultimate thermalizer would be an event horizon.
+ We know that classical bits continue to live on the event horizon; where
+ did the qubits go, when they crossed? Are the classical bits on an event
+ horizon exacly what is neeed to quantum-teleport qubits fom the other side?
+ 
+\emph on
+Viz
+\emph default
+, one needs 
+\begin_inset Formula $N^{2}$
+\end_inset
+
+ classical bits to quantum-teleport 
+\begin_inset Formula $N$
+\end_inset
+
+ qubits; the mass of the black hole is proportional to the 
+\begin_inset Formula $N$
+\end_inset
+
+ qubits; the area of the event horizon is propotional to the mass-squared,
+ and thus is equal to the number of classical bits needed to teleport those
+ qubits to the other side.
+ Can we conclude: event horizons do not destroy qubits? Equivalently, mass
+ and qubits are the same thing.
+\end_layout
+
+\begin_layout Standard
+To what extent can this be taken literally? Classical dynamical system evolve
+ 
+\begin_inset Quotes eld
+\end_inset
+
+on mass shell
+\begin_inset Quotes erd
+\end_inset
+
+, conserving energy.
+ Semi-classical methods expand in orders of 
+\begin_inset Formula $\hbar$
+\end_inset
+
+ around the mass shell.
+ Hmmm...
+\end_layout
+
+\begin_layout Paragraph*
+Phenomenology: classical approximations of the qubit
+\end_layout
+
+\begin_layout Standard
+The use of entangled particles in a quantum eraser setup allows one to at
+ least partly 
+\begin_inset Quotes eld
+\end_inset
+
+fake it
+\begin_inset Quotes erd
+\end_inset
+
+: given enough measurements, one can use the record of the measurements,
+ recorded as classical bits, to reconstruct interference patterns, or not,
+ by selectively ignoring certain measurements (i.e.
+ by ignoring certain bit-streams, those bit-streams of classical bits that
+ recorded certain detections corresponding to certain placements of polarizers
+ and quarter-wave places).
+ However, this reconstruction and erasure of interference patterns from
+ classical bits can only be done at certain phase angles: the collected
+ data is not enough to alter the phase, post-facto, to any arbitrary value.
+ That is, the quantum eraser setup (with an entangled pair) is enough to
+ classically emulate 
+\begin_inset Formula $\left|0\right\rangle +\left|1\right\rangle $
+\end_inset
+
+ but is not enough to emulate 
+\begin_inset Formula $\left|0\right\rangle +e^{i\phi}\left|1\right\rangle $
+\end_inset
+
+ for any arbitrary phase 
+\begin_inset Formula $\phi$
+\end_inset
+
+, post-facto (after the measurement).
+\end_layout
+
+\begin_layout Standard
+This does suggest that a tripartite entanglement, e.g.
+ a GHZ state, used in a quantum-eraser setup, might allow one to build a
+ better approximation of a qubit by multiple classical measurements, e.g.
+ at phases at multiples of 
+\begin_inset Formula $2\pi/3$
+\end_inset
+
+.
+ Continuing in this direction, an entangled state of 
+\begin_inset Formula $N$
+\end_inset
+
+ particles can be used to approximate a (single) qubit at phase angles of
+ 
+\begin_inset Formula $2\pi/N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Continuing in this train of thought, the large-
+\begin_inset Formula $N$
+\end_inset
+
+ limit of entanglement perhaps resembles a very highly mixed black hole.
+ This suggests that a series of quantum-eraser-style measurements against
+ such a black hole allows one to model the full Bloch sphere (or a single
+ qubit) with the classical bits recording the results of measurements: in
+ a sense, a single black hole, being the large-
+\begin_inset Formula $N$
+\end_inset
+
+ limit, could be taken to represent (or 
+\begin_inset Quotes eld
+\end_inset
+
+be
+\begin_inset Quotes erd
+\end_inset
+
+) a single qubit, thus supporting the ER=EPR conjecture.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Speculative framework: fibration
+\end_layout
+
+\begin_layout Standard
+Taking the idea that a wave function is a 
+\begin_inset Quotes eld
+\end_inset
+
+particle in multiple places at once
+\begin_inset Quotes erd
+\end_inset
+
+, consider then a fibration where points on the fibers are the different
+ space-time locations for the particle.
+ The base space consists of particles, themselves.
+ Specifically, the base-space is some very high-dimensional representation
+ of a Lie algebra, and the 
+\begin_inset Quotes eld
+\end_inset
+
+particles
+\begin_inset Quotes erd
+\end_inset
+
+ are the decomposition of that rep into various irreducible reps.
+ Obvious stumbling blocks: in what sense can a rep be a 
+\begin_inset Quotes eld
+\end_inset
+
+space
+\begin_inset Quotes erd
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+For example, the base space of the fibration could be the spin group.
+ If the spin group is decomposed into spinors, then the fiber above the
+ spinor records the possible spatial locations that spinor could have.
+ A distribution on the fiber then corresponds to the wave function of that
+ particular spinor.
+ Since the decomposition of the spin group into Weyl spinors depends on
+ the choice of basis, then picking a different basis corresponds to (among
+ other things) the exchange of identical particles.
+ In that sense, we get the Pauli exclusion principle 
+\begin_inset Quotes eld
+\end_inset
+
+for free
+\begin_inset Quotes erd
+\end_inset
+
+; it is deduced from the starting point.
+\end_layout
+
+\begin_layout Standard
+Hmm.
+ Fibration is the wrong concept here.
+ Sheaves, sections, etales, topi are more appropriate.
+ Its not so much that a 
+\begin_inset Quotes eld
+\end_inset
+
+particle is in multiple places at once
+\begin_inset Quotes erd
+\end_inset
+
+; rather, a particle is in multiple sections of space-time at once.
+ The particle is fixed, it is being blasted into different parts of space-time
+ by the Yoneda lemma.
+ Space-time isn't single-valued, kind-of-like in the sense of a Grothendieck
+ topology: there are multiple parts to it, they are joined together in a
+ sheaf-like way.
+\end_layout
+
+\begin_layout Paragraph*
+Speculation: Cartan geometry
+\end_layout
+
+\begin_layout Standard
+Instead of asking 
+\begin_inset Quotes eld
+\end_inset
+
+how can a particle be in two places at once
+\begin_inset Quotes erd
+\end_inset
+
+, we ask 
+\begin_inset Quotes eld
+\end_inset
+
+how can there be two spaces at once for a single particle?
+\begin_inset Quotes erd
+\end_inset
+
+ An insight into this is provided by Urs Shreiber in his 
+\begin_inset Quotes eld
+\end_inset
+
+because Deligne
+\begin_inset Quotes erd
+\end_inset
+
+ blog post.
+ Start by observing that the Poincaré group (call it G) is the isometry
+ group of Minkowski space (it acts transitively).
+ The Lorentz group (call it H) is the subgroup that fixes points (its the
+ stabilizer).
+ Thus, we can take the quotient G/H to be Minkowski space itself: So G/H
+ is an example of a Klein geometry.
+ The tangent space is H, and if we promote it to a local symmetry i.e.
+ use it to define the vielbeins or frame fields, then one gets Cartan spaces
+ (or General Relativity in the case of Poincaré=Iso(3,1))
+\end_layout
+
+\begin_layout Standard
+The next step is to associate a massive particle with every possible connection
+ consistent with their being a massive particle.
+ That is, start with some fixed background geometry, satisfying the classical
+ Einstein equations.
+ Next, consider all possible perturbations to the background geometry, consisten
+t with the presence of a fixed small mass.
+ Call this space P.
+ For each such perturbation, there is a perturbation to the vierbeins (by
+ abuse of notation, call this P also).
+ Natural questions include: when are two such perturbations smoothly homotopic?
+ Can we define a 
+\begin_inset Quotes eld
+\end_inset
+
+particle
+\begin_inset Quotes erd
+\end_inset
+
+ to be the class of all homotopic perturbations? 
+\end_layout
+
+\begin_layout Standard
+The problem with this vision is that we don't yet have a measure for the
+ space P (although we know that it needs to be the Feynman path integral).
+ So: consider two 
+\begin_inset Quotes eld
+\end_inset
+
+nearby
+\begin_inset Quotes erd
+\end_inset
+
+ perturbations (two points in P).
+ The task at hand is to derive a scalar action (Klein-Gordon Lagrangian)
+ relating these two points, given a starting point of requiring only that
+ the perturbations are consistent with the Einstein eqns.
+ How might one do this?
+\end_layout
+
+\begin_layout Standard
+If one has just a single perturbation of this sort, and asks about its time-evol
+ution in the background geometry, one should get the classical eqns for
+ a (point) particle in a gravitational field.
+ 
+\end_layout
+
+\begin_layout Standard
+Note: another way of thinking about 
+\begin_inset Quotes eld
+\end_inset
+
+because Deligne
+\begin_inset Quotes erd
+\end_inset
+
+ is the speculation that gluing of pre-sheafs into sheaves happens along
+ the edges of the past-lightcone.
+ Very crudely, Deligne happens where past light-cones don't intersect.
+\end_layout
+
+\begin_layout Subsubsection*
+Speculation: Taming the Feynman integral
+\end_layout
+
+\begin_layout Standard
+The primary driver towards the many-worlds interpretation is the Feynman
+ integral 
+\begin_inset Formula 
+\[
+Z=\int\left[\mathcal{D}\psi\right]\exp i\hbar\int d^{4}x\mathcal{L}
+\]
+
+\end_inset
+
+where the integration takes place over all possible worlds.
+ One can regain a single macroscopic reality while retaining all quantum
+ predictions by limiting the integration to the 
+\begin_inset Quotes eld
+\end_inset
+
+microscopic
+\begin_inset Quotes erd
+\end_inset
+
+ domain, and specifically, only below the scale of the Penrose Planck mass.
+ But how might one go about doing this?
+\end_layout
+
+\begin_layout Standard
+Well, lets look at a typical interference experiment.
+ Here, one has wave-fuctions of the form 
+\begin_inset Formula $\left|a\right\rangle +e^{i\phi}\left|b\right\rangle $
+\end_inset
+
+ for two states 
+\begin_inset Formula $\left|a\right\rangle $
+\end_inset
+
+ and 
+\begin_inset Formula $\left|b\right\rangle $
+\end_inset
+
+ on the different arms of the interferometer.
+ The many-worlds integration to be performed is over the pahse angle 
+\begin_inset Formula $\phi$
+\end_inset
+
+ – and, to be precise, it really needs to be performed over the qubit Bloch
+ sphere 
+\begin_inset Formula $S_{2}$
+\end_inset
+
+ and it really needs to be performed over a mixed state, viz.
+ given a probabilistic weight for each pure state.
+ This kind of integral is doable and possible because its essentially a
+ two-particle integral, whereas the QFT path integral 
+\begin_inset Formula $Z$
+\end_inset
+
+ is over infinite particle states.
+\end_layout
+
+\begin_layout Standard
+The way to get from a two-particle state to an infinite-particle state is
+ to consider the tensor algebra, and specifically, the exterior algebra.
+ Thus, the Feynman integral looks like an integral over the symmetric algebra
+ (for bosons) and the exerior algebra (for fermions).
+ Except that, for fermions, we kind-of know that it has to be over the Clifford
+ algebra, instead.
+ As one's thoughts plotz down this corridor, its kind-of impossible to bump
+ into all the concepts that enrich string theory; so this speculation is
+ more of an 
+\begin_inset Quotes eld
+\end_inset
+
+OK go that way, but go sideways
+\begin_inset Quotes erd
+\end_inset
+
+...
+ the goal is to formalize the integral, so that its computable, and not
+ to re-invent string theory.
+ Again: to be able to write the integral so it has a planck-mass cutoff
+ in the 
+\begin_inset Formula $\mathcal{D\psi}$
+\end_inset
+
+ integration...
+\end_layout
+
+\begin_layout Section
+Other stuff
+\end_layout
+
+\begin_layout Standard
+Unsorted ideas that don't fit anywhere yet:
+\end_layout
+
+\begin_layout Subsection*
+Mass:
+\end_layout
+
+\begin_layout Standard
+Mass is an emergent property as well....
+\end_layout
+
+\begin_layout Subsection*
+Bose-Einstein statistics
+\end_layout
+
+\begin_layout Standard
+Is there any relationship between the form of Bose-Einstein statistics and
+ the Baker-Campbell-Hausdorff formula, which has the generating function
+ for the Bernoulli numbers in it: viz 
+\begin_inset Formula $x/(1-e^{-x})$
+\end_inset
+
+ ? It seems like there should be: Bose-Einstein applies to a Fock space
+ of identical particles, which can be described by the tensor algebra (is
+ the same thing as the tensor algebra) - However, because of identical particles
+, etc.
+ question posed here: 
+\begin_inset CommandInset href
+LatexCommand href
+name "Physics Overflow -Baker-Campbell-Hausdorf - Jordan Algebra"
+target "http://www.physicsoverflow.org/37203/baker-campbell-haudorff-fermions"
+literal "false"
+
+\end_inset
+
+ – this work should be completed.
+\end_layout
+
+\begin_layout Standard
+Possibly-useful references for this work: Alice Rogers, 
+\begin_inset CommandInset href
+LatexCommand href
+name "Supermanifolds"
+target "ftp://nozdr.ru/biblio/kolxo3/P/PQft/Rogers%20A.%20Supermanifolds..%20theory%20and%20applications%20(WS,%202007)(ISBN%209810212283)(262s)_PQft_.pdf "
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Work on Baker-Campbell-Hausdorff formula: 
+\end_layout
+
+\begin_layout Standard
+V.A.
+ Kostelecky, M.M.
+ Nieto, D.R.
+ Truax, Baker-Campbell-Hausdorff relations for the supergroups, J.
+ Math.
+ Phys.
+ 27 (5) (May 1986) 1419-1429.
+ 
+\end_layout
+
+\begin_layout Standard
+V.A.
+ Kostelecky, D.R.
+ Truax, 
+\begin_inset CommandInset href
+LatexCommand href
+name "Baker-Campbell-Hausdorff relations for the superPoincare group"
+target "http://cds.cern.ch/record/169881/files/198608011.pdf"
+literal "false"
+
+\end_inset
+
+, J.
+ Math.
+ Phys.
+ 28 (10) (October 1987) 2480-2487.
+ 
+\end_layout
+
+\begin_layout Standard
+See also the PhD thesis:
+\end_layout
+
+\begin_layout Standard
+Cook, James Steven.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Foundations of Supermathematics with Applications to N=1 Supersymmetric Field Theory"
+target "https://repository.lib.ncsu.edu/bitstream/handle/1840.16/5690/etd.pdf "
+literal "false"
+
+\end_inset
+
+, circa page 232.
+\end_layout
+
+\begin_layout Standard
+The flip side of this coin is: Can one state the analogous Poincaré–Birkhoff–Wit
+t theorem for exterior algebras instead of tensor algebras? That is, by
+ working with universal enveloping algebra and the (umm I guess its called
+ the Gerstenhaber algebra) does one a BCH-like formula, but with a generating
+ function of 
+\begin_inset Formula $1/(1+e^{-x})$
+\end_inset
+
+ - that is, the Fermi-Dirac statistics? It seems plausible that this should
+ work out.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Second Law of Thermodynamics
+\end_layout
+
+\begin_layout Standard
+The Second Law of Thermodynamics says that entropy is increasing, and Boltzmann'
+s constant says entropy is mass but this is 
+\begin_inset Quotes eld
+\end_inset
+
+upside down
+\begin_inset Quotes erd
+\end_inset
+
+ from hawking radiation/entropy.
+ So, there seem to be conflicting ideas: the mass of thermodynamic systems
+ goes up in proportion to the heat energy (see Planck, Max (1907), "Zur
+ Dynamik bewegter Systeme", Sitzungsberichte der Königlich-Preussischen
+ Akademie der Wissenschaften, Berlin, Erster Halbband (29): 542–570 English
+ Wikisource translation: On the Dynamics of Moving Systems) ...
+ so if you melt ice, the mass of the melt-water is greater than that of
+ the original ice.
+ Relatedly, there's a mass loss from binding energy.
+ However, the relation of binding energy to entropy is opaque: when a system
+ is bound, did the number of accessible states decrease? It would seem so:
+ the ionized state is not accessible to the system.
+ However, one does not normally associate an entropy with a QM system, but
+ the goal is to argue that the entropy of atomic hydrogen is less than that
+ of ionized hydrogen.
+\end_layout
+
+\begin_layout Subsection*
+Translation surfaces
+\end_layout
+
+\begin_layout Standard
+These are flat surfaces with non-trivial genus.
+ They look like Riemann surfaces, flattened out, so that all of the curvature
+ has been forced into a finite number of singularities.
+\end_layout
+
+\begin_layout Standard
+I am assuming that a similar construction is possible for dimension greater
+ than two.
+\end_layout
+
+\begin_layout Standard
+Can these singularities be interpreted as physical particles in flat space?
+\end_layout
+
+\begin_layout Standard
+What would the 
+\begin_inset Quotes eld
+\end_inset
+
+physics
+\begin_inset Quotes erd
+\end_inset
+
+ of such a space be? Obviously, it suggests that the geodesics would be
+ wildly out of control, so that seems to imply its surely unphysical...
+\end_layout
+
+\begin_layout Subsection*
+Metaplectic group, Metaplectic structure
+\end_layout
+
+\begin_layout Standard
+The metaplectic group is a double-cover of the symplectic group.
+ Via the Heisenberg group...
+ For each and every 
+\begin_inset Formula $\hbar$
+\end_inset
+
+ there is a distinct representation of the Heisenberg group acts on the
+ Hilbert space of square-integrable funs.
+ The action is to shift the position and the momentum, plus an addtional
+ phase ...
+ It's 
+\begin_inset Formula $\psi\left(x\right)\mapsto e^{i\hbar c}e^{ib\cdot x}\psi\left(x+\hbar a\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $b=\overrightarrow{b}$
+\end_inset
+
+ and 
+\begin_inset Formula $a=\overrightarrow{a}$
+\end_inset
+
+ vectors.
+ This is the Stone-von Neumann theorem.
+\end_layout
+
+\begin_layout Standard
+I'm confused...
+ if I follow a geodesic on a riemannian manifold, then is it not the case
+ that, if I stay on the same coordinate chart, then the the two points,
+ in the cotangent bundle, are given by a symplectic matrix? That seems true,
+ cause how could it not be?
+\end_layout
+
+\begin_layout Standard
+Symplectic manifolds are special cases of Poisson manifolds...
+ does the metaplectic structure also carry over to Poisson manifolds?
+\end_layout
+
+\begin_layout Subsection*
+Shift and Clock matrices
+\end_layout
+
+\begin_layout Standard
+See wikipedia https://en.wikipedia.org/wiki/Generalizations_of_Pauli_matrices
+ which describes a construction from Weyl: it builds 
+\begin_inset Formula $\Sigma_{1}$
+\end_inset
+
+ as a shift operator, and 
+\begin_inset Formula $\Sigma_{3}$
+\end_inset
+
+ as a clock operator and then the Sylvester matrix, as a basis for 
+\begin_inset Formula $\mathfrak{gl}\left(n,\mathbb{C}\right)$
+\end_inset
+
+ and then the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit as the algebra of Poission brackets (presumably a quantum group).
+\end_layout
+
+\begin_layout Standard
+So of course, the shift opeators are that thing you applied to a Bernoulli
+ process i.e.
+ to anything with a product topology that you want to shift.
+ By Ornstein siomorphism, everything is isomorphic to some Bernoulli scheme.
+ This is what we get via ergodic theory.
+\end_layout
+
+\begin_layout Standard
+So, what happens if we take a measure-preserving dynamical system, via a
+ totally standard defintion, and add a clock matrix to it? What does that
+ do? Yikes!
+\end_layout
+
+\begin_layout Subsection*
+Hauptvermutung
+\end_layout
+
+\begin_layout Standard
+The Hauptvermutung of geometric topology hypothesizes that any two triangulation
+s of space are equivalent.
+ It only holds in 2,3 dimensions, but is false in higher dimensions.
+ A necessary condition for it's failing is that the Reidmeister torsion
+ be non-zero for 
+\begin_inset Formula $H^{3}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The primary idea is that there are some 
+\begin_inset Quotes eld
+\end_inset
+
+wild spheres
+\begin_inset Quotes erd
+\end_inset
+
+ – fractal, hyperbolic spheres which have boundary-handles that are tangled
+ into knots about each-other.
+ (See the Edwards notes for a construction, see notes by Steve Ferry, chapter
+ 24 for another construction)
+\end_layout
+
+\begin_layout Standard
+If the nature of QCD confinement is that, to the quarks, space looks hyperbolic,
+ so that the surface of the proton appears to be infinitely far away, then
+ the question is, what is the geometry of that surface? Is it some wild
+ sphere? If wave-function collapse appears to be similar to confinement,
+ then the same question applies: are collapsed regions topologically wild?
+\end_layout
+
+\begin_layout Section
+Textbook Quantum Mechanics
+\end_layout
+
+\begin_layout Standard
+The sections below review connections between various more-or-less textbook
+ topics.
+ Some of these are a bit speculative in how they are worded; some merely
+ seem speculative, but can be found in standard textbooks.
+ Anyway, the material is a bit of a stretch from what would be acceptable
+ in a standard presentation, but not so far out that it should give professional
+s in the field conniptions.
+\end_layout
+
+\begin_layout Subsection
+What is spin? - Stern-Gerlach
+\end_layout
+
+\begin_layout Standard
+The Ohanian paper 
+\begin_inset Quotes eld
+\end_inset
+
+What is spin?
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Ohanian-What is Spin?"
+target "https://www.physics.mcmaster.ca/phys3mm3/notes/whatisspin.pdf"
+literal "false"
+
+\end_inset
+
+ and several updates 
+\begin_inset CommandInset href
+LatexCommand href
+name "Gsponer - What is spin?"
+target "https://arxiv.org/abs/physics/0308027"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset href
+LatexCommand href
+name "Extraordinary momentum and spin in evanescent waves"
+target "http://www.nature.com/articles/ncomms4300"
+literal "false"
+
+\end_inset
+
+ suggest (flat-out state) that spin is a purely classical (but non-local)
+ phenomenon of a wave.
+ This begs for a re-analysis of the Stern-Gerlach experiment in this light:
+ Stern-Gerlach is a textbook example of why quantization is needed, suggesting
+ there is no other explanation – whereas the Ohanian paper suggests that,
+ with the appropriate treatment, a classical wave packet of the Dirac field
+ will feel a classical force acting on it, consistent with experimental
+ results from Stern-Gerlach.
+\end_layout
+
+\begin_layout Standard
+The Gsponer article suggests that the Dirac field is more easily described,
+ intuited if written in a certain quaternion algebra.
+ Maybe worth follow-up.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+What is Ohanian really saying?
+\end_layout
+
+\begin_layout Standard
+What he is saying is that spin is angular momentum.
+ This feels like a tautology, so its worth clarifying the difference.
+ Spin is described by representations of the Lorentz group.
+ That is, a 
+\begin_inset Quotes eld
+\end_inset
+
+classical
+\begin_inset Quotes erd
+\end_inset
+
+ field can be understood as a (square-integrable) function from Minkowski
+ space to a given, fixed representation of the Lorentz group.
+ The representation defines the 
+\begin_inset Quotes eld
+\end_inset
+
+spin
+\begin_inset Quotes erd
+\end_inset
+
+ of the field.
+ One might say that a classical field is a section of an associated fiber
+ bundle over the base space of Minkowski space, with the principal bundle
+ having fibers that are the Lorentz group.
+ Thus, the associated bundle has fibers that transform under the Lorentz
+ group.
+ i.e.
+ transform as representations of the Lorentz group.
+ The label on the representation is the spin.
+ 
+\end_layout
+
+\begin_layout Standard
+However, the definition of angular momentum requires the Poincaré group,
+ because momentum is defined as the generator of translational symmetry,
+ and angular momentum is defined as the generator of rotational symmetry
+ of the base space.
+ That is, the Poincaré group acts on both the fiber and on the base space.
+ To have things actually be consistent, one wants to be able to identify
+ angular momentum with spin, so that eigenstates of the angular momentum
+ operator (which is defined only in the Poincaré algebra) correspond to
+ eigenstates of the spin operator in the Lorentz algebra.
+ 
+\end_layout
+
+\begin_layout Standard
+There are two ways to do this.
+ One way is to consider a single point in space-time, fix it, and then consider
+ the tangent space to that point: as a tangent space, it contains derivatives
+ of the field (derivatives in the space-time directions), and Lie derivatives
+ in the 
+\begin_inset Quotes eld
+\end_inset
+
+vertical
+\begin_inset Quotes erd
+\end_inset
+
+ space, along the fiber, i.e.
+ valued in the Lorentz algebra.
+ For a fixed spin representation, this is exactly the same thing as having
+ the space-time derivatives be labeled by the Lorentz-algebra spin labels
+ – this is why fields are always algebra-valued.
+ At this point, one notes that the momentum and angular momentum operators
+ of the Poincaré algebra act on that tangent space.
+ Turing the crank, one discovers that spin can be interpreted as angular
+ momentum.
+ This is how most textbooks demonstrate the equality.
+\end_layout
+
+\begin_layout Standard
+Another way to do this is to take a specific section of the fiber bundle,
+ a specific field configuration, and ask what happens there.
+ That is, instead of restricting to the algebra at a fixed point in space-time,
+ one wants to ask about the structure of the function space, the structure
+ of the Banach space of all functions defined on the base space.
+ To answer this, one needs to do what Ohanian does.
+ So, instead of working in the tangent space of a single point in space-time,
+ he chooses to work in the space of all (square-integrable) functions.
+ Yes, one expects to get the same answer, either way, but it is not entirely
+ a foregone conclusion that this would be the case: now that the distinction
+ being made above is explicit, one could certainly create insane configurations
+ where the spin is not equal to the angular momentum.
+ (this is kind-of what is happening with anyons!??)
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+What is quantum?
+\end_layout
+
+\begin_layout Standard
+If first-quantized fields are 
+\begin_inset Quotes eld
+\end_inset
+
+purely classical
+\begin_inset Quotes erd
+\end_inset
+
+, in the above sense, then where does quantum come up, really? The olde-fashione
+d way is to say 
+\begin_inset Quotes eld
+\end_inset
+
+quantum requires wave functions whose amplitude we square to get probability
+\begin_inset Quotes erd
+\end_inset
+
+, but a more modern view is to say 
+\begin_inset Quotes eld
+\end_inset
+
+fermions, which are grassman variables, are not observable alone, but do
+ become classically visible as pairs.
+\begin_inset Quotes erd
+\end_inset
+
+ – that is we need to take squares of amplitudes because we are working
+ with fermions, and not for other reasons.
+ (Actually, fermions are not grassmann numbers; they belong to the spin
+ space, which is constructed from real Clifford algebra times the complex
+ numbers, which is a grassmann algebra only if one ignores the anti-fermions.)
+ Looked at this way, the Schroedinger eqn for the hydrogen atom sure starts
+ to feel like a 
+\begin_inset Quotes eld
+\end_inset
+
+classical
+\begin_inset Quotes erd
+\end_inset
+
+ wave equation problem.
+ Its not really quantum, at all.
+ The confusion came from the fact that someone kept thinking of the planetary
+ model, which was wrong.
+\end_layout
+
+\begin_layout Standard
+This suggests a question: so if the Schroedinger-hydrogen solution is really
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+classical
+\begin_inset Quotes erd
+\end_inset
+
+ result, then what is quantum? And we get back the old echo: 
+\begin_inset Quotes eld
+\end_inset
+
+its the problem of wave-function collapse, you dummy
+\begin_inset Quotes erd
+\end_inset
+
+, and specifically, the interpretation of the squared amplitude as a probability.
+\end_layout
+
+\begin_layout Subsubsection*
+Lounesto spinor field classification
+\end_layout
+
+\begin_layout Standard
+If I am understanding this correctly, the Ohanian paper, in saying that
+ the Dirac field is carrying angular momentum, is actually saying that 
+\begin_inset Formula $\overline{\psi}\gamma_{u}\gamma_{\nu}\psi$
+\end_inset
+
+ is carrying angular momentum.
+ Apparently, this quantity vanishes for a Weyl spinor field; we conclude
+ that Weyl spinors on thier own cannot carry angular momentum! Huh! That
+ certainly isn't obvious!
+\end_layout
+
+\begin_layout Subsubsection*
+Mass
+\end_layout
+
+\begin_layout Standard
+If we square the Atiyah-Singer-Dirac operator on a spin manifold, we get
+ the Laplacian plus the scalar curvature.
+ So should we interpret mass as the square of the scalar curvature? But
+ mass is also the quadratic Casimir invariant of the Lorentz group.
+ Soooo...????
+\end_layout
+
+\begin_layout Standard
+Then, the Yamabe problem ...
+\end_layout
+
+\begin_layout Subsection
+Complex numbers in QM
+\end_layout
+
+\begin_layout Standard
+Why do complex numbers show up in QM? Why aren't wave functions purely real?
+ Why can't they be purely real? Where does the complex phase come from?
+ Various arguments are given below.
+\end_layout
+
+\begin_layout Standard
+There is a completely different, but related question: Why is the probability
+ the square of a complex-valued wave function? The arguments below do not
+ seem to shed any light on that.
+\end_layout
+
+\begin_layout Paragraph*
+A1: Spin algebra?
+\end_layout
+
+\begin_layout Standard
+A conservative argument says that it comes from fermions, and specifically,
+ the spin algebra.
+ The spin algebra is built from a real Clifford algebra 
+\begin_inset Formula $V$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+V\otimes\mathbb{C}=W\oplus\overline{W}
+\]
+
+\end_inset
+
+(see e.g.
+ Jurgen Jost, 
+\begin_inset Quotes eld
+\end_inset
+
+Riemannian Geometry and Geometry Analysis, page 69) where 
+\begin_inset Formula $V$
+\end_inset
+
+ is a real Clifford algebra (itself built from a tensor algebra!) and is
+ generated from 
+\begin_inset Formula $2n$
+\end_inset
+
+ components in order to describe 
+\begin_inset Formula $n$
+\end_inset
+
+ Weyl spinors and 
+\begin_inset Formula $n$
+\end_inset
+
+ conjugate spinors.
+ One cannot get the required spin structure without using 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ in this construction.
+ This argument makes sense because most 
+\begin_inset Quotes eld
+\end_inset
+
+physical
+\begin_inset Quotes erd
+\end_inset
+
+ things in nature are fermions.
+\end_layout
+
+\begin_layout Standard
+Note that, in order for fermions to exist, a bundle must be a spin structure.
+ i.e.
+ is a lift of a frame bundle to a double-covering of SO(N) by Spin(N).
+ The usual remarks apply.
+ But this works only for neutral fermions.
+ For charged fermions, the bundle must have a Spinc structure, where as
+ per usual notation, its a twisted product 
+\begin_inset Formula 
+\[
+\mbox{Spin}^{\mathbb{C}}(n)=\mbox{Spin}(n)\times_{\mathbb{Z}_{2}}\mbox{U}(1)
+\]
+
+\end_inset
+
+i.e.
+ the U(1) carries the electromagnetism.
+ This paragraph is non-controversial, its the orthodox interpretation.
+ The next question asks: is there another way? Or is it just a very basic
+ confusion about the proliferation of complex numbers all shot-through QM
+ and Clifford/spin algebra?
+\end_layout
+
+\begin_layout Paragraph*
+A2: Electromagnetism? 
+\end_layout
+
+\begin_layout Standard
+Wild guess: Perhaps the complex phase is actually a hidden side-effect of
+ electromagnetism? There are two chains of though that lead to this: First,
+ that the Aharonov-Bohn effect is most easily, most geometrically understood
+ in a 
+\begin_inset Quotes eld
+\end_inset
+
+pre-quantum
+\begin_inset Quotes erd
+\end_inset
+
+ fashion, as a holonomy of the U(1) fiber bundle.
+ Thus, even before we perform any quantization, and just stick to 
+\begin_inset Quotes eld
+\end_inset
+
+pre-quantization
+\begin_inset Quotes erd
+\end_inset
+
+, we already get a complex phase that arises naturally, but only due to
+ the electromagnetic structure on the fibre bundle.
+\end_layout
+
+\begin_layout Standard
+The classifying space for U(1) bundles is 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+ and the thing about 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+ is that it is exactly the same things as a Hilbert space on which QM is
+ naturally formulated.
+ It is complex, because wave-functions are complex-valued, its projective,
+ because only normalized wave functions matter.
+ We can identify the Hilbert space with the occupation states of the simple
+ harmonic oscillator.
+\end_layout
+
+\begin_layout Paragraph*
+Cell structure
+\end_layout
+
+\begin_layout Standard
+Some minor insight might be gleaned by reviewing the structure of 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+.
+ The cellular structure (cell complex) of 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+consists of all even dimensional cells (See 
+\begin_inset Quotes eld
+\end_inset
+
+Algebraic Topology
+\begin_inset Quotes erd
+\end_inset
+
+, Allen Hatcher, chapter 0 page 7) (See S.P.
+ Novikov, 
+\begin_inset Quotes eld
+\end_inset
+
+Topology I: General Survey
+\begin_inset Quotes erd
+\end_inset
+
+ eqn 3.15 page 62).
+ That is, one writes 
+\begin_inset Formula 
+\[
+\mathbb{CP}^{\infty}=\kappa^{0}\cup\kappa^{2}\cup\kappa^{4}\cup\cdots
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+\kappa^{2n}=\mathbb{CP}^{n}\backslash\mathbb{CP}^{n-1}=\left\{ \left.\left(z_{0}:\cdots:z_{n}\right)\right|:z_{j}\ne0\;\forall\,j\right\} \simeq D^{2n}
+\]
+
+\end_inset
+
+where by abuse of notation, the above makes the mistake of writing a cell,
+ which is actually a map of a disk, with the disk itself.
+ Oh well.
+ This is just a mnemonic reminder, that's all.
+ 
+\end_layout
+
+\begin_layout Standard
+The point is that a single qubit is 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+, i.e.
+ is the Bloch sphere, i.e.
+ is the 2-sphere i.e.
+ is the 2-disk with the edge of the disk identified to a point.
+ Then 
+\begin_inset Formula $n$
+\end_inset
+
+ qubits are 
+\begin_inset Formula $\mathbb{CP}^{n}$
+\end_inset
+
+, etc.
+ The reason that qubits are projective is because only the relative phases
+ of wave-functions matter, and the amplitude of a wave function is always
+ normalized to one.
+ Specifically, a single qubit is 
+\begin_inset Formula 
+\[
+\mathbb{CP}^{1}=\left\{ z_{0}\left|\uparrow\right\rangle +z_{1}\left|\downarrow\right\rangle \left|\left|z_{0}\right|^{2}+\left|z_{1}\right|^{2}=1,\;z_{0}/z_{1}\mbox{ real}\right.\right\} \simeq S^{2}
+\]
+
+\end_inset
+
+ and the gluing together of these things requires only the even-dimensional
+ cells...
+\end_layout
+
+\begin_layout Standard
+To summarize – is it possible that the complex-valued wave function of textbook
+ QM secretly a side-effect of electromagnetism and U(1) bundles? Or is this
+ a red herring?
+\end_layout
+
+\begin_layout Paragraph*
+A3: Spherical harmonics counter-argument
+\end_layout
+
+\begin_layout Standard
+We can view 3D space as a homogeneous space of the rotation group.
+ Recall that homogeneous spaces are defined as quotients of Lie groups.
+ In this case, the 
+\begin_inset Formula $Y_{lm}$
+\end_inset
+
+ spherical wave functions needed to represent the spherical harmonics are
+ naturally complex-valued, and this natural-complex-valued-ness has nothing
+ at all to do with electromagnetism.
+ (Unless, of course, the 3-dimensionality of space was a side-effect of
+ electromagnetism...)
+\end_layout
+
+\begin_layout Paragraph*
+A4: Counter-counter-argument
+\end_layout
+
+\begin_layout Standard
+Now that we've invoked the rotation group, the inevitable is in store.
+ Namely, vectors belong to the adjoint rep of the rotation group.
+ Maxwell equations are exactly the same thing as a statement about the transform
+ation properties of these vectors under the action of the Poincaré group.
+ That is, the electric and magnetic fields are vectors in the Lorentz algebra,
+ i.e.
+ live in the 
+\begin_inset Quotes eld
+\end_inset
+
+vertical
+\begin_inset Quotes erd
+\end_inset
+
+ fibers, the fibers being in the associated bundle of the Lorentz group.
+ The actual transformation properties of these vectors, under 
+\begin_inset Quotes eld
+\end_inset
+
+horizontal
+\begin_inset Quotes erd
+\end_inset
+
+ translations in Minkowski space, are given by the Poincaré algebra.
+ These are exactly equal to the Maxwell equations.
+\end_layout
+
+\begin_layout Standard
+The fact that the electric and magnetic fields satisfy the wave equation
+ is due to the fact that the wave equation is just the quadratic Casimir
+ operator of the Poincaré algebra.
+ (A worthy exercise is to write down the details to support these claims).
+\end_layout
+
+\begin_layout Standard
+Opaque in the above construction is how U(1) arises.
+ The Poincaré algebra gave us a differential structure.
+ To get the A field from the E,B fields requires the notion of differential
+ topology, i.e.
+ the notion of closed forms for the E-field, and exact forms for the B-field.
+ These last two statements follows from the fact that electric charges exist,
+ magnetic ones don't (except in the form of a holonomy).
+ So why should electric charges exist, but magnetic ones not? This is partly
+ answered by looking at the representation theory of the Poincaré group:
+ it has massive particles in it.
+ These can have an electric charge, because 
+\begin_inset Quotes eld
+\end_inset
+
+mass
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+electric charge
+\begin_inset Quotes erd
+\end_inset
+
+ both point in the same direction: i.e.
+ in the time-like direction.
+ By contrast, magnetic monopoles could only be consistent with imaginary
+ mass, i.e.
+ tachyonic degrees of freedom.
+ So the Poincaré algebra is really a kind of no-go for magnetic monopoles.
+ This last sentence is highly textbook non-standard, and so needs to be
+ fully fleshed out in detail, as it is non-obvious.
+ 
+\end_layout
+
+\begin_layout Standard
+Once one deduces that the Poincaré algebra effectively prohibits magnetic
+ monopoles (except in the form of a holonomy) then the standard machinery
+ of differential topology allows one to deduce U(1) from the A field.
+ 
+\end_layout
+
+\begin_layout Standard
+Side note: as soon as one invokes the rotation group, it necessarily follows
+ that one must discuss the fundamental rep, not just the adjoint rep.
+ The fundamental rep leads invariably to the spin algebra, mentioned up
+ top.
+\end_layout
+
+\begin_layout Standard
+In sum, this is a rather long argument.
+ It raises the question: why is space 3+1 dimensional? Because, as soon
+ as we know its 3+1 dimensional, the above purports to show that (a) electromagn
+etism is inevitable, as a rep of the Poincaré algebra (b) The U(1) structure
+ is inevitable, (c) spin structures are inevitable (d) complex-valued wave-funct
+ions are inevitable.
+\end_layout
+
+\begin_layout Standard
+What it does not yet show is why the square of the wave-function can be
+ interpreted as a probability, and why wave-functions must collapse.
+\end_layout
+
+\begin_layout Subsection
+Probability and wave functions
+\end_layout
+
+\begin_layout Standard
+Why does the square of the wave function yield a probability? Where do the
+ complex numbers come in, and why?
+\end_layout
+
+\begin_layout Paragraph*
+A1: Maybe its entropy
+\end_layout
+
+\begin_layout Standard
+One suggestive argument comes from Mikhail Gromov, in 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "In a Search for a Structure, Part 1: On Entropy."
+target "http://www.ihes.fr/~gromov/PDF/structre-serch-entropy-july5-2012.pdf"
+literal "false"
+
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+ Relevant aspects are summarized in the wikipedia article 
+\begin_inset CommandInset href
+LatexCommand href
+name "Fisher information metric"
+target "https://en.wikipedia.org/wiki/Fisher_information_metric"
+literal "false"
+
+\end_inset
+
+.
+ To repeat them here: consider the finite-dimensional simplex of probabilities
+ summing to one: 
+\begin_inset Formula $\sum_{i}p_{i}=1$
+\end_inset
+
+.
+ Consider the change of variable 
+\begin_inset Formula $p_{i}=y_{i}^{2}$
+\end_inset
+
+ so that the simplex is mapped to a quadrant of a sphere: 
+\begin_inset Formula $\sum_{i}y_{i}^{2}=1$
+\end_inset
+
+.
+ Consider the the flat metric in the Euclidean space 
+\begin_inset Formula $y=(y_{1},\cdots,y_{n})$
+\end_inset
+
+ This flat metric induces a metric on the sphere.
+ Converting coordinates back to the 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ one finds that the flat Euclidean metric has become the Fisher information
+ metric! That is, if we want to consider how close two different probability
+ distributions are, we use the Fisher information metric; alternately, we
+ can take the square root of the probability, and use the Euclidean metric.
+ 
+\end_layout
+
+\begin_layout Standard
+The above 
+\begin_inset Quotes eld
+\end_inset
+
+just works
+\begin_inset Quotes erd
+\end_inset
+
+, Gromov adds a category-theoretic argument, that the manipulations pass
+ through for the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, provided the various measures are square integrable; basically, it's just
+ fine if the point 
+\begin_inset Formula $y$
+\end_inset
+
+ is taken to belong to a Hilbert space.
+ 
+\end_layout
+
+\begin_layout Standard
+This conception of the metric passes over to the Fubini-Study metric, as
+ mentioned in that article, when one takes the 
+\begin_inset Formula $y$
+\end_inset
+
+ to be complex-valued: What this says is that basically, the Fubini-Study
+ metric on 
+\begin_inset Formula $\mathbb{CP}^{n}$
+\end_inset
+
+ is essentially the same thing as the flat Euclidean metric.
+ That is, to compute the distance between two complex-valued wave functions,
+ one simply takes their difference.
+ 
+\end_layout
+
+\begin_layout Standard
+Put another way: the difference in the information between two wave functions
+ is just their difference, but constrained to the fact that they live in
+ complex projective space, and not in Euclidean space.
+ Precisely, this is the Burres metric, with lots of details glossed over.
+ The projective nature of it all makes the formulas look complicated, obscuring
+ the underlying phenomenon.
+\end_layout
+
+\begin_layout Subsection
+Wave function collapse
+\end_layout
+
+\begin_layout Standard
+Other assorted ideas about wave-function collapse.
+\end_layout
+
+\begin_layout Subsubsection
+Wave function collapse is comultiplication
+\end_layout
+
+\begin_layout Standard
+The spin algebra that describes Weyl spinors is constructed from a Clifford
+ algebra, as mentioned above.
+ The Clifford algebra is in turn constructed from the tensor algebra.
+ The part that is of interest here is that the tensor algebra posses a Hopf
+ algebra structure, and I believe (should double-check) that this Hopf structure
+ survives all the way to to the spin algebra.
+\end_layout
+
+\begin_layout Standard
+One may then ask the question: what corresponds to comultiplication in the
+ Hopf algebra? One seemingly plausible answer is that it corresponds to
+ wave-function collapse.
+ That is, if one has a single fermion (single Weyl spinor) 
+\begin_inset Formula $v$
+\end_inset
+
+, under comultiplication, it passes over to 
+\begin_inset Formula 
+\[
+\Delta(v)=1\boxtimes v+v\boxtimes1
+\]
+
+\end_inset
+
+where I used 
+\begin_inset Formula $\boxtimes$
+\end_inset
+
+ to perversely note the tensor product of two tensor algebras, so as not
+ to confuse it with the tensor product that is internal to the tensor algebra
+ itself (which is a fatal mistake).
+ (I steal this idea from the Wikipedia article on the topic, which is OK,
+ since I wrote that Wikipedia article! Catch-22) That is 
+\begin_inset Formula $\Delta(c)\in TV\boxtimes TV$
+\end_inset
+
+.
+ What does this mean? How can one interpret this? Well, if 
+\begin_inset Formula $TV$
+\end_inset
+
+, or more precisely, the spin algebra constructed from 
+\begin_inset Formula $TV$
+\end_inset
+
+ describes the configuration of some number of number of spinors in the
+ universe, (including the fact that they obey the Grassmann algebra, i.e.
+ Pauli exclusion), then one must conclude that 
+\begin_inset Formula $TV\boxtimes TV$
+\end_inset
+
+ describes two universes, i.e.
+ two worlds of the many-worlds hypothesis.
+ The comultiplication above is stating that these two universes are in superposi
+tion (the box 
+\begin_inset Formula $\boxtimes$
+\end_inset
+
+ is still a tensor product; its bilinear; so the superposition is captured
+ by this expression).
+ However, it is also stating that the fermion that is NOT at a particular
+ location in one universe, is in that location in a different universe.
+ i.e.
+ the collapse proceeded so that, in each universe, the fermion ends up in
+ a different position (and that all of these collapsed states are still
+ coherent).
+\end_layout
+
+\begin_layout Standard
+Hmm.
+ This needs more work.
+ We want to say that the fermion collapsed to different locations/momenta
+ in different universes, and the above does not make that clear.
+ I think this is a notational deficiency...
+ Hmm.
+ Needs more work.
+\end_layout
+
+\begin_layout Standard
+Follows from the Hopf algebra structure on tensor algebras.
+\end_layout
+
+\begin_layout Subsubsection
+Wave function collapse is entropy
+\end_layout
+
+\begin_layout Standard
+Arbitrarily small deformations of certain compact 3D manifolds can preserve
+ the volume but increase the metric entropy and the topological entropy.
+ (metric entropy w.r.t.
+ the Liouville measure).
+ Livio Flamino, Local entropy rigidity for hyperbolic manifolds Comm.
+ Anal.
+ Geom., 3 (1995), 555–596.
+\end_layout
+
+\begin_layout Standard
+So, gravity at the plank-mass level, 
+\begin_inset Quotes eld
+\end_inset
+
+flea's egg
+\begin_inset Quotes erd
+\end_inset
+
+ level, tweaks the spacetime manifold in such a way that entropy increases,
+ geodesic flows separate or dettach, leading to wave-function collapse.
+\end_layout
+
+\begin_layout Subsection
+Many-worlds, Measurement, Wave-fuction Collapse
+\end_layout
+
+\begin_layout Standard
+Some basic formulations and framework.
+ Abandoned construction.
+ What is described below is interesting, but was ultimately founded on a
+ hidden misconception.
+ The intitial idea was that somehow, an entangled state could be decomposed
+ into a pair of spin-1/2 states in some non-local entanglement.
+ Then with enough geometric sophistication, ...
+ everything would ...
+ get resolved.
+ This fails due to a key misperception.
+ The maximally-entangled Bell states require not one, but two pairs of entangled
+ spinors.
+ For a while it feels like this can be avoideed, evaded, but not so.
+ So this attempt at a geometric attack fails, because the entangled system
+ cannot be described by a single dynamical, geometrical point.
+ Well, it can, but they are glued together in such a way that a measurement
+ singles out one of the two; this is the collapse, and the below fails to
+ elucidate how that singling-out-one-of-two prodcess works.
+ Still, its a ...
+ curious tour of geometry.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be the spacetime manifold (a Riemannian manifold) and also 
+\begin_inset Formula $\Phi$
+\end_inset
+
+, the field space.
+ Consider a map 
+\begin_inset Formula $\phi:M\to\Phi$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $\Phi=\mathbb{C}$
+\end_inset
+
+ one gets the interpretation that 
+\begin_inset Formula $\phi=\psi(x)$
+\end_inset
+
+ is a QM wave-function .
+\end_layout
+
+\begin_layout Standard
+Take 
+\begin_inset Formula $M$
+\end_inset
+
+ to be flat, and let 
+\begin_inset Formula $\nabla^{2}$
+\end_inset
+
+ be the conventional notation for Laplacian in flat space, the grand-total
+ kinetic energy of a wave function is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{H}\left(\psi\right)=\tfrac{1}{2}\int_{M}\psi^{\dagger}\left(x\right)\nabla^{2}\psi\left(x\right)dx^{m}=\left\langle \psi\left|\nabla^{2}\right|\psi\right\rangle 
+\]
+
+\end_inset
+
+This is obviously the total kinetic energy of the wave-function 
+\begin_inset Formula $\psi$
+\end_inset
+
+, up to a factor of 
+\begin_inset Formula $\hbar/m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This is also the Lagrangian for the sigma model! (See wikipedia article,
+ which I wrote.) It can be re-written as
+\begin_inset Formula 
+\[
+\mathcal{H}\left(\psi\right)=\tfrac{1}{2}\int_{M}\left(\nabla\psi^{\dagger}\left(x\right)\right)\left(\nabla\psi\left(x\right)\right)dx^{m}=\tfrac{1}{2}\int_{M}d\phi\wedge*d\phi
+\]
+
+\end_inset
+
+and the 
+\begin_inset Formula $\nabla\psi\left(x\right)=d\phi$
+\end_inset
+
+ is both a vielbein and also a solder form; it solders together the cotangent
+ space 
+\begin_inset Formula $T^{*}M$
+\end_inset
+
+ to 
+\begin_inset Formula $T^{*}\Phi$
+\end_inset
+
+, keeping in mind that the cotangent spaces are where the momenta live that
+ define the geodesic flows on the manifolds.
+ I mention this because it seems significant...
+\end_layout
+
+\begin_layout Standard
+Cool, but incomplete.
+ Several problems.
+ First, 
+\begin_inset Formula $\psi:M\to\mathbb{C}$
+\end_inset
+
+ has no geometry, it is a scalar field.
+ By convention, we set 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+ and so 
+\begin_inset Formula $\left|\psi\right\rangle \in U(1)$
+\end_inset
+
+.
+ This is acceptable, but is kind-of misleading.
+ First, there are no true scalars in nature.
+ Second, it isn't obvious that if there were, that there woulldn't be anything
+ that is preventing the time evolution 
+\begin_inset Formula $\left|\psi\right\rangle \to0$
+\end_inset
+
+ (
+\emph on
+i.e.
+
+\emph default
+ to have evolution of 
+\begin_inset Formula $\left\langle x|\psi\right\rangle =\psi\left(x\right)\to0$
+\end_inset
+
+ everywhere, 
+\emph on
+i.e.
+
+\emph default
+ for all 
+\begin_inset Formula $x$
+\end_inset
+
+).
+ There's no reason for a scalar wave function not to be homotopic to zero,
+ because 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is contractible and homotopic to a point, but 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ is not.
+\end_layout
+
+\begin_layout Standard
+How, exactly, did we sneak in something non-contractable into something
+ that is contractable? For scalar fields, this seems to be a fiat, 
+\emph on
+ad hoc
+\emph default
+ assumption.
+ Can we do better for spinors? We know that lepton number is conserved.
+ What I don't have is any description of a spinor as a topological soliton.
+ I believe that such a description exists; I've never seen one in a textbook.
+ One of the goals here is to provide this description explicitly.
+ If it is a topological solition, then there is an argument that one can
+ have time evoltion that 
+\begin_inset Formula $\psi\left(x\right)\to0$
+\end_inset
+
+ locally, for some 
+\begin_inset Formula $x$
+\end_inset
+
+ but not for all 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For a spinor, we can set 
+\begin_inset Formula $\Phi=\mathbb{C}\times\mathbb{CP}^{1}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ encodes the spin direction, and 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ encodes the overall magnitude, and the phase-slop for the spin pointing
+ in the 
+\begin_inset Formula $z$
+\end_inset
+
+ direction.
+ What is 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+? Should we write 
+\begin_inset Formula $\left|\psi\right\rangle \in\mathbb{CP}^{1}$
+\end_inset
+
+ or should we write 
+\begin_inset Formula $\left|\psi\right\rangle \in U(1)\times\mathbb{CP}^{1}$
+\end_inset
+
+? This is again a bit subtle.
+ The 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ is enough to account for the spin direction, but we still need to have
+ an extra phase if we are going to write a normal two-component Weyl spinor.
+ This extra phase 
+\begin_inset Quotes eld
+\end_inset
+
+doesn't matter
+\begin_inset Quotes erd
+\end_inset
+
+ in the sense that 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+ so it is easy to just 
+\begin_inset Quotes eld
+\end_inset
+
+throw it away
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But the Aharonov-Bohm effect, and also the neutron interferometer in gravity
+ both require the holonomy of the circle bundle for the proper explanation,
+ so we can't just throw the phase away.
+\end_layout
+
+\begin_layout Standard
+Neither 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ nor 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ are homotopically contractible to a point.
+ If the spinor is a soliton, is it a solition in just 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ or do we need it to be a solition in 
+\begin_inset Formula $U(1)\times\mathbb{CP}^{1}$
+\end_inset
+
+? Which BTW, has the same number of dimensions as 
+\begin_inset Formula $S^{3}\cong SU(2)$
+\end_inset
+
+ so maybe that means something...
+\end_layout
+
+\begin_layout Standard
+XXX TODO.
+ We need an appendix that provides explict maps between all the various
+ different notations e.g.
+ how to write a two-component spinor from a coordinate chart on 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+ and so on.
+\end_layout
+
+\begin_layout Standard
+What is the formal mathematical formalism for saying this? I guess that
+ if we do this corectly, then we have some homology-like statement.
+ We need two, actually, one that says that 
+\begin_inset Formula $H_{something}\left(\psi:M\to\mathbb{C}\times\mathbb{CP}^{1}\right)=U(1)\times\mathbb{CP}^{1}$
+\end_inset
+
+ because somehow, the fiber of the fiber bundle gets the origin removed,
+ and another that says 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $H_{other}\left(\psi:M\to\mathbb{C}\times\mathbb{CP}^{1}\right)=\mathbb{Z}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ because its the topological winding number (the lepton number, where the
+ generator of 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ is a single spinor).
+ That's what we need to get after integrating 
+\begin_inset Formula $\psi:M\to\mathbb{C}$
+\end_inset
+
+ over the manifold 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Despite reading about differential topology and algebraic topology, I have
+ not spotted this, yet...
+ am I being dumb?
+\end_layout
+
+\begin_layout Standard
+In other words, the wave function on spacetime is actually a section of
+ a fiber bundle with a non-trivial topology, and 
+\begin_inset Formula $U(1)\times\mathbb{CP}^{1}$
+\end_inset
+
+ is the invariant of that bundle.
+ (For scalar fields, we drop the 
+\begin_inset Formula $\mathbb{CP}^{1}$
+\end_inset
+
+.) A spinor is then some manifold invariant of the global bundle.
+ What is this invariant? How to articulate this formally? Do we need to
+ use spin manifolds to do this?
+\end_layout
+
+\begin_layout Standard
+What about scalars? What is the correct way to get 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+ automatically, instead of declaring it to be the case, by fiat? I mean,
+ is it not the case that any fiber bundle 
+\begin_inset Formula $E\to M$
+\end_inset
+
+ with fiber 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is always contractible to a point? Or is that not the case? If it's contractibl
+e, then how do we get 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+? If it's not contractible, then why isn't this in introductory textbooks,
+ e.g.
+ in Bott&Tu? Some key ingredient is missing...
+\end_layout
+
+\begin_layout Standard
+For the 
+\begin_inset Formula $n$
+\end_inset
+
+-particle system, it is not enough to set 
+\begin_inset Formula $\Phi=\mathbb{C}^{n}$
+\end_inset
+
+ as that results in all particles having the same location.
+ The n-particle model requires using 
+\begin_inset Formula $\phi:M\times\cdots\times M\to\mathbb{C}^{n}$
+\end_inset
+
+ in order to get 
+\begin_inset Formula $\psi\left(x_{1},x_{2},\cdots,x_{n}\right)$
+\end_inset
+
+ as the wave-function.
+ Can the multiple 
+\begin_inset Formula $M$
+\end_inset
+
+'s be interpreted as the 
+\begin_inset Quotes eld
+\end_inset
+
+many worlds
+\begin_inset Quotes erd
+\end_inset
+
+? Meh.
+ ...
+\end_layout
+
+\begin_layout Standard
+This is confusing.
+ The confusion can be heightened.
+\end_layout
+
+\begin_layout Standard
+Set 
+\begin_inset Formula $n=2$
+\end_inset
+
+ and prepare 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to be a singlet state.
+ Locally, (local section) this has the form of 
+\begin_inset Formula $\psi:M\times M\to\mathbb{C}^{2}$
+\end_inset
+
+ with 
+\begin_inset Formula $\left(x_{1},x_{2}\right)\mapsto\psi\left(x_{1},x_{2}\right)$
+\end_inset
+
+.
+ Globally, its a point in 
+\begin_inset Formula $\mathbb{CP}^{2}$
+\end_inset
+
+ ...
+ and we can use the four maxinmal Bell states as the basis for 
+\begin_inset Formula $\mathbb{CP}^{2}$
+\end_inset
+
+.
+ XXX TODO this all needs to go into an appendix.
+ This will help clarify reasoning.
+\end_layout
+
+\begin_layout Standard
+Consider a pair of projections 
+\begin_inset Formula $\pi_{1}\otimes\pi_{2}:\mathbb{CP}^{2}\to\mathbb{CP}^{1}\otimes\mathbb{CP}^{1}$
+\end_inset
+
+ that split up the entangled state 
+\begin_inset Formula $\phi=\psi\left(x_{1},x_{2}\right)$
+\end_inset
+
+ into a pair of states 
+\begin_inset Formula $\psi_{1}\left(x_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}\left(x_{2}\right)$
+\end_inset
+
+.
+ This projection is meant to obey all the usual algebra for an entangled
+ vector state decomposed into two half-spin doublets (The Bell basis, Wikipedia
+ [[Measurement in quantum mechanics]]).
+ Of course, the projections 
+\begin_inset Formula $\pi_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{2}$
+\end_inset
+
+ depend on the local qubit (Bloch sphere) coordinates chosen by experimentors
+ at locations 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+.
+ That is, in conventional QM notation, 
+\begin_inset Formula $\pi_{i}=\left|\uparrow iL\right\rangle \left\langle \uparrow iL\right|\oplus\left|\downarrow iL\right\rangle \left\langle \downarrow iL\right|$
+\end_inset
+
+ where each component 
+\begin_inset Formula $\left|\uparrow iL\right\rangle \left\langle \uparrow iL\right|$
+\end_inset
+
+ is with regard to some local coordinate frame 
+\begin_inset Formula $L$
+\end_inset
+
+ on the Bloch sphere at the point 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ for experimenter 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What we seem to be doing here is that we are not using a truly flat, locally
+ trivial basis for the charts of the atlas, but rather, we are using charts
+ with some kind of torsion in them.
+ The states 
+\begin_inset Formula $\left|\uparrow iL\right\rangle $
+\end_inset
+
+ are either torsion forms of some kind or they are vielbeins of some kind,
+ or maybe both...
+\end_layout
+
+\begin_layout Standard
+The projection 
+\begin_inset Formula $\pi_{i}$
+\end_inset
+
+ is neither a measurement, nor is it a measuring device...
+\end_layout
+
+\begin_layout Standard
+A single measurement is the application of the projection operator in such
+ a way that only 
+\emph on
+one
+\emph default
+ eigenstate results, and not a linear combination thereof.
+ That is, one gets either 
+\begin_inset Formula $\left|\uparrow iL\right\rangle $
+\end_inset
+
+ or one gets 
+\begin_inset Formula $\left|\downarrow iL\right\rangle $
+\end_inset
+
+ but never both; one never gets the phases; the phases are erased.
+ This is the 
+\begin_inset Quotes eld
+\end_inset
+
+collapse
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Put another way: if we take 
+\begin_inset Formula $\phi\left(x\right)$
+\end_inset
+
+ to be a single point in the fiber 
+\begin_inset Formula $\mathbb{CP}^{2}$
+\end_inset
+
+, the measurement does 
+\emph on
+not
+\emph default
+ map it to a single point, but to a random choice of one of two points.
+\end_layout
+
+\begin_layout Standard
+That is, the projection is not a map of points.
+ It can only be a map of densities.
+\end_layout
+
+\begin_layout Standard
+From the point of view of the total bundle 
+\begin_inset Formula $\phi:M\times M\to\mathbb{CP}^{2}$
+\end_inset
+
+, the 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is still entangled; there was no 
+\begin_inset Quotes eld
+\end_inset
+
+wave function collapse
+\begin_inset Quotes erd
+\end_inset
+
+.
+ From the point of view of experimenter in one of the two spaces 
+\begin_inset Formula $M$
+\end_inset
+
+, a collapse did happen.
+ That is, the experimenter in 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ applied 
+\begin_inset Formula $\pi_{1}$
+\end_inset
+
+ to get 
+\begin_inset Formula $\pi_{1}\left(\phi\right)$
+\end_inset
+
+ which is 
+\begin_inset Quotes eld
+\end_inset
+
+collapsed
+\begin_inset Quotes erd
+\end_inset
+
+ from his point of view.
+\end_layout
+
+\begin_layout Standard
+Hypothesis: The measurement drives the 
+\begin_inset Quotes eld
+\end_inset
+
+entangled
+\begin_inset Quotes erd
+\end_inset
+
+ point 
+\begin_inset Formula $\phi$
+\end_inset
+
+ to a specific location consistent with the measurement outcome.
+ This is not a violation of Bell's theorem, since it is a non-local (not-so-)
+\begin_inset Quotes erd
+\end_inset
+
+hidden
+\begin_inset Quotes erd
+\end_inset
+
+ variable.
+ The perceived randomness is entirely due to the ergodicity of orbits on
+ the manifold.
+\end_layout
+
+\begin_layout Standard
+Additional point of confusion: The sphere 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ viewed as a Bloch sphere, has a 3D Killing vector algebra.
+ I guess this is just a fancy way of saying 
+\begin_inset Formula $S^{2}\cong S^{3}/U(1)$
+\end_inset
+
+ the Hopf fibration.
+ So if a point in 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ is a spin direction, then what is the 
+\begin_inset Formula $U(1)$
+\end_inset
+
+? Is this the wave-function phase? Yes, that is the natural innterpretation
+ when writing spinor coordinates on the Bloch sphere.
+ It doesn't make sense for this to be 
+\begin_inset Quotes eld
+\end_inset
+
+some other 
+\begin_inset Formula $U(1)$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Is this the same 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ as electrognetism? It seems that this is necessary, since Aharonov-Bohm
+ shows that the phase is real, and its the holonomy, so we seem forced in
+ this situation to conclude that this extra phase is also electromagnetism.
+ The Hopf fibration is non-trivial ...
+ This is begging for a revisit to the sigma model.
+\end_layout
+
+\begin_layout Standard
+Interpreting the 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ as electromagnetism is problematic for neutrinos.
+ The crazy idea would be to double-down on the bet – namely, while gauging
+ 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ we get a vector field ...
+ can we interpret it as being a vector in some symmetric space, with an
+ algebra of Killing vectors greater than 4, so that some of the isometries
+ belong to a center, and that center is what 
+\begin_inset Quotes eld
+\end_inset
+
+interacts
+\begin_inset Quotes erd
+\end_inset
+
+ with the neutrino, while the remaining 4 isometries are the standard electromag
+netic potential? That would allow two spinors, both unified, one feeling
+ a guage force i.e.
+ electric charge, and one neutral...
+ Hmmm So ..
+ algebraically, what are the candidates for this symmetric space?
+\end_layout
+
+\begin_layout Standard
+After this 
+\begin_inset Quotes eld
+\end_inset
+
+measurement
+\begin_inset Quotes erd
+\end_inset
+
+ in the 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ world, the wave function needs to continue to evolve in its 
+\begin_inset Quotes eld
+\end_inset
+
+collapsed
+\begin_inset Quotes erd
+\end_inset
+
+ form 
+\begin_inset Formula $\pi_{1}\left(\phi\right)$
+\end_inset
+
+ even though in 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ nothing has changed at all.
+ This is a hypothesis (unproved theorem): we need to demonstrate that the
+ dynamics of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is consistent with the dynamics of 
+\begin_inset Formula $\pi_{1}\left(\phi\right)$
+\end_inset
+
+ ...
+ that is we need to prove the theorem that 
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+\phi & {time\atop \longrightarrow} & \phi^{\prime}\\
+\downarrow &  & \downarrow\\
+\pi_{i}\left(\phi\right) & {time\atop \longrightarrow} & \pi_{i}\left(\phi^{\prime}\right)=\left(\pi_{i}\left(\phi\right)\right)^{\prime}
+\end{array}
+\]
+
+\end_inset
+
+is actually a commuting diagram; it is not obvious that it is, however much
+ I would hope it is...
+ If this can be proven, then there 
+\begin_inset Quotes eld
+\end_inset
+
+is no wave-function collapse.
+\begin_inset Quotes erd
+\end_inset
+
+ (A proof of this suggest the Myers-Steenrod theorem: every isometry of
+ connected riemann manifolds is in fact smooth)
+\end_layout
+
+\begin_layout Standard
+Lets stick to the sigma model, so time evolution is just the kinetic term,
+ so non-interacting.
+ Lets interpret time as geodesic flow.
+ The geodesic flow is fiber-by-fiber, but since each fiber is identical
+ to all the others, they all evolve 
+\begin_inset Quotes eld
+\end_inset
+
+the same way
+\begin_inset Quotes erd
+\end_inset
+
+.
+ What is different is that the selected points are different.
+ So, for the top row, we have 
+\begin_inset Formula $\phi\left(x_{1},x_{2}\right)$
+\end_inset
+
+ is different for each different 
+\begin_inset Formula $x1,x2$
+\end_inset
+
+ and so is travelling along a different geodesic.
+ So we need ..
+ what? Jacobi fields for neighboring fibers.
+ How does this work? We need a connection, a horizontal bundle on each fiber.
+\end_layout
+
+\begin_layout Standard
+The only problem with this picture is that we don't have a tangent for 
+\begin_inset Formula $\phi$
+\end_inset
+
+ anywhere...
+ we don't know which geodesic 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is supposed to travel on.
+\end_layout
+
+\begin_layout Standard
+The problem is, of course, there is also a diffferent world 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ where the 
+\begin_inset Formula $\pi_{2}$
+\end_inset
+
+ measurement was made.
+\end_layout
+
+\begin_layout Standard
+Status: big fail.
+ See second appendix.
+ Above uses flawed perception in thinking that the the two particle-state
+ can be decomposed into a pair of particle states – it cannot.
+ The Bell states cannot be decomposed in this way; they require two pairs
+ of two-particle states to be written correctly.
+ And measurement isolates one of these two pairs.
+ This is the fundamental stumbling block ever since the first days of quantum.
+ The fancy language above does not impact it.
+\end_layout
+
+\begin_layout Standard
+TODO: write down, explicitly, the extended 
+\begin_inset Formula $\pi_{i}$
+\end_inset
+
+ as a projection of 
+\begin_inset Formula $M\times M$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+TODO: Introduce time.
+ Is time the geodesic flow on 
+\begin_inset Formula $M$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+TODO: Introduce spinors i.e.
+ make 
+\begin_inset Formula $M$
+\end_inset
+
+ into a spin manifold.
+\end_layout
+
+\begin_layout Standard
+Note 
+\begin_inset Formula $\Phi=\mathbb{CP}^{2}$
+\end_inset
+
+ is the complex projective plane, its non-trivial, (unlike 
+\begin_inset Formula $\mathbb{CP}^{1}\cong S^{2}$
+\end_inset
+
+) and there's a K2-surface in there, etc.
+\end_layout
+
+\begin_layout Standard
+TODO: I don't believe in many-worlds.
+ So then, how do we get back to just one 
+\begin_inset Formula $M$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+This is kind of a 
+\begin_inset Quotes eld
+\end_inset
+
+replica trick
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The replica trick was originally used in spin glass theory, but was eventually
+ replaced by something else...
+ how does that work?
+\end_layout
+
+\begin_layout Subsection
+Laplacians and Energy
+\end_layout
+
+\begin_layout Standard
+Where do Laplacians come from? Why is there a quadratic differential operator
+ everywhere? There are two clues I want to assemble here: the Berezin integral,
+ and Kirchoff's theorem for a graph.
+ The story goes as follows: Start with a Clifford algebra, and build the
+ spin group for even N for it.
+ Factor the spin group into Weyl spinors.
+ These naturally anti-commute, by construction.
+ Throw away the spin aspects of this construction, but keep the anti-commuting
+ aspects.
+ This leads to the Berezin integral:
+\begin_inset Formula 
+\[
+\det\,A=\int\exp\left[-\theta A\eta\right]d\eta d\theta
+\]
+
+\end_inset
+
+for Grassmann variables 
+\begin_inset Formula $\eta$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and an ordinary matrix A.
+ This is abridged standard textbook stuff.
+\end_layout
+
+\begin_layout Standard
+Next, Kirchoff's theorem for a graph states, more or less, that, when one
+ has a graph, and one constructs the Laplacian matrix of the graph (by taking
+ a difference of its adjacency matrix, and a diagonal degree matrix), then
+ the determinant of that matrix is given by a sum over all spanning trees
+ of the graph.
+ Inverting this argument: if you have a determinant, then, by change of
+ basis, try to turn it into the Laplacian of some graph.
+\end_layout
+
+\begin_layout Standard
+This seems to do two things: It tells you that, to first order, the interaction
+ of N particles really is a tree, has to be a tree, or rather, a sum of
+ trees.
+ Next, it tells you that, from the graph-theoretic point of view, it has
+ to be the Laplacian that accomplishes this.
+ But, from physics, we know that Laplacians are associated with kinetic
+ energy.
+\end_layout
+
+\begin_layout Standard
+Thus, it seems that, by merely assuming the Clifford algebra, (or assuming
+ the spin algebra), we are forced to conclude that the Laplacian, i.e.
+ kinetic energy, describes the situation.
+ This, to me is really remarkable.
+ I've never heard of this before.
+ To deduce the necessity of Laplacians from the existence of Clifford algebras?
+ Wow.
+\end_layout
+
+\begin_layout Standard
+There is another way to get to Laplacians.
+ One standard textbook approach is to assume the existence of a Riemannian
+ manifold, build the tangent space, then point out that the exp function
+ generates geodesics on the manifold (maps tangent vectors to geodesics),
+ and then observe that geodesics can be obtained by solving for the extremum
+ of either the length or the energy of smooth, differentiable paths on the
+ manifold.
+ The one and the other construction give a Lagrangian or a Hamiltonian point
+ of view, and both end up requiring a second-order differential operator
+ applied to the path.
+ Thus, geodesics on Riemannian manifold necessarily involve a second-order
+ differential operator.
+\end_layout
+
+\begin_layout Standard
+We can try to apply this argument in reverse: Assume a Clifford algebra,
+ deduce the existence of a Laplacian, and then deduce that a Riemannian
+ manifold is the necessary home for the resulting dynamics.
+ In other words, by assuming 
+\begin_inset Formula $N$
+\end_inset
+
+ indistinguishable fermions, we are forced to deduce Riemannian geometry.
+\end_layout
+
+\begin_layout Standard
+If we start with the spinc group instead of the spin group, is there some
+ way that this forces you to deduce pseudo-Riemannian geometry? The reason
+ I think this is a plausible question is because the extra 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ degree of freedom in the spinc group might force one into using a (massless)
+ gauge boson when one attempts to write the Berezin integral.
+ (I mean, that degree of freedom has to go somewhere ..
+ where else can it possibly go?) If that is the case, then it seems that
+ the Maxwell equations are forced on us, whether we like it or not, and
+ then the Maxwell equations necessarily imply special relativity, which
+ necessarily imply a pseudo-Riemannian manifold.
+\end_layout
+
+\begin_layout Standard
+The other things that this construction is doing is to force the use of
+ the partition function.
+ That is, the Berezin integral is forcing us to take a functional-integral
+ description of the situation.
+ And more strongly: not just any functional integral, but necessarily over
+ something that involves a second-order differential operator ...
+ one that is summed over.
+ Namely, the action.
+ And we already know that we can view quantum mechanics as the necessary
+ outcome or by-product of employing functional integrals over the action.
+\end_layout
+
+\begin_layout Standard
+A third interesting thing gets entangled here: why is space-time 3+1 dimensional
+? The hand-waving here is that spinors are necessarily objects that inhabit
+ 
+\begin_inset Formula $SL(2,\mathbb{C})$
+\end_inset
+
+ viz, the Lorentz group, and this leads to the adjoint rep being 3+1.
+ 
+\end_layout
+
+\begin_layout Standard
+If this can be made rigorous, then this is a direct path between what are
+ normally viewed as very distant topics.
+ We start with a rather weak assumption – Clifford algebras, and get a rainbow
+ of physics paraphernalia falling out, including *
+\emph on
+both
+\emph default
+* a pseudo-Riemannian geometry *
+\emph on
+and also
+\emph default
+* quantum mechanics! This is just too much, its ludicrous beyond belief!
+\end_layout
+
+\begin_layout Paragraph*
+The determinant: but why?
+\end_layout
+
+\begin_layout Standard
+The above started talking about the determinant out of thin air.
+ Why?
+\end_layout
+
+\begin_layout Paragraph*
+But why Laplacian, really?
+\end_layout
+
+\begin_layout Standard
+The determinant could have been written as a product of eigenvalues, so
+ why would one want to write the matrix perversely as a Laplacian? I presume
+ that it is something about the spin factorization that is forcing this.
+ More precisely, a graph Laplacian 
+\begin_inset Formula $L$
+\end_inset
+
+ can be factored as a pair of oriented edge incidence matrices: 
+\begin_inset Formula 
+\[
+L=EE^{T}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $E$
+\end_inset
+
+ has a +1 at the head of an arrow (oriented edge) and a -1 at the tail.
+ Presumably, it is something about the spinor factorization that causes
+ us to talk about edges (perhaps the edges connect the two components of
+ the spinor?) 
+\end_layout
+
+\begin_layout Standard
+I mean, in a certain sense, it does not make sense to work with Laplacians
+ if one does not have some ambient space-time; at the time we start talking
+ about it, the ambient space-time does not yet exist.
+\end_layout
+
+\begin_layout Paragraph*
+What about the Standard Model?
+\end_layout
+
+\begin_layout Standard
+We know that in the end, we need SU(3)
+\begin_inset Formula $\times$
+\end_inset
+
+SU(2)
+\begin_inset Formula $\times$
+\end_inset
+
+U(1) bit trying to for this at this point seems unnatural.
+ So lets not go there.
+\end_layout
+
+\begin_layout Paragraph*
+What about gravity?
+\end_layout
+
+\begin_layout Standard
+The goal was to discover something about gravity, but we've done no such
+ thing in this section.
+ ...
+ on the other hand, until we work out the details in the above, we also
+ have no clue whether the above forces a metric of any kind, i.e.
+ if space-time become rigid, or if it remains completely floppy and metric-less.
+\end_layout
+
+\begin_layout Subsection
+Indeterminate particle number
+\end_layout
+
+\begin_layout Standard
+In QFT, the number of particles is indeterminate – i.e.
+ there are virtual particle pairs.
+ Why? What does this have to do with the above discussions? The above constructi
+on started with a Clifford algebra over a fixed, finite-dimensional vector
+ space.
+ Does the limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ somehow make the particle count indeterminate? How?
+\end_layout
+
+\begin_layout Subsection
+Planck scale
+\end_layout
+
+\begin_layout Standard
+Quote: 
+\begin_inset Quotes eld
+\end_inset
+
+from the Planck-scale induced gravitational modifications of the wave particle
+ duality to the low energy realm of quantum mechanics where the de Broglie’s
+ wave particle duality holds to a great accuracy (Hackermueller et al., 2003).
+ For C 60 F 48 molecule, the experiment finds fringe visibility lower than
+ expected.
+ It may be indicative that the modification to the de Broglie wave particle
+ duality may become significant at a much lower energy.
+\begin_inset Quotes erd
+\end_inset
+
+ where Hackermueller et al., 2003 is ...???
+\end_layout
+
+\begin_layout Subsection
+Screech-halt
+\end_layout
+
+\begin_layout Standard
+The core problem with the above arguments is that they take little tippy-toe
+ steps into the territory of string theory, which is not where this was
+ supposed to go, but seems to be edging towards, none-the-less.
+ Its not at all the full-on orthodox string theory of 26-dimensional bosonic
+ strings, and its not the even quantum deformations and affine Lie algebras.
+ But its starting to wander willy-nilly in that general direction-ish.
+ Ugh.
+ Oh well.
+\end_layout
+
+\begin_layout Standard
+FWIW, the above also starts sounding a little bit like a super-duper toy
+ version of Urs Schreiber's superpoint.
+ I have no clue if there's anything to that.
+\end_layout
+
+\begin_layout Section
+TODO - Other work & References
+\end_layout
+
+\begin_layout Standard
+A to-do list for ruther reading and thought.
+\end_layout
+
+\begin_layout Subsection
+FQXi
+\end_layout
+
+\begin_layout Standard
+There is lots and lots of speculation of the above sort that is available
+ here: https://fqxi.org/community – the FQXi community website.
+ Most of it is more focused, more developed, and probably better argued.
+ Maybe.
+\end_layout
+
+\begin_layout Subsection
+Aharonov
+\end_layout
+
+\begin_layout Standard
+The latest & greatest from Aharonov:
+\end_layout
+
+\begin_layout Standard
+Yakir Aharonov and Daniel Rohrlich What is nonlocal in counterfactual quantum
+ communication?, Physical Review Letters, arxiv.org/abs/2011.11667 has a concept
+ of a 
+\begin_inset Quotes eld
+\end_inset
+
+modular angular momentum
+\begin_inset Quotes erd
+\end_inset
+
+ carried by a particle, but that it dettaches from the particle.
+ Its non-local.
+ Shades of de Broglie–Bohm theory.
+ Whoa.
+ So that is another plausible idea.
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+Appendix: Notation Conventions
+\end_layout
+
+\begin_layout Standard
+Some of the speculations above seem to actually require more precise notational
+ conventions.
+ Write these down, so as to avoid screwups.
+\end_layout
+
+\begin_layout Subsection
+The two sphere
+\end_layout
+
+\begin_layout Standard
+Recurring theme 
+\begin_inset Formula $S^{2}\cong\mathbb{CP}^{1}$
+\end_inset
+
+ is the Bloch sphere, consisting of linear combinations of 
+\begin_inset Formula $\left|\uparrow\right\rangle =\left|0\right\rangle $
+\end_inset
+
+ and 
+\begin_inset Formula $\left|\downarrow\right\rangle =\left|1\right\rangle $
+\end_inset
+
+ and so 
+\begin_inset Formula $\left|\psi\right\rangle =\alpha\left|\uparrow\right\rangle +\beta\left|\downarrow\right\rangle $
+\end_inset
+
+ for 
+\begin_inset Formula $\alpha,\beta\in\mathbb{C}$
+\end_inset
+
+, so that is a total of four real numbers.
+ Next 
+\begin_inset Formula $\left\langle \psi|\psi\right\rangle =1$
+\end_inset
+
+ so 
+\begin_inset Formula $\alpha^{*}\alpha+\beta^{*}\beta=1$
+\end_inset
+
+ leaves three real numbers.
+ Phase ambiguity implies only two real numbers to get a point on the Bloch
+ sphere.
+ The third number, the phase, is physically real, in that it shows up in
+ Bohm-Aharonov, and cannot be swept away; it also implies that it must be
+ the 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ of electromagnetism.
+\end_layout
+
+\begin_layout Standard
+The goal here is to interpret 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+ as a pure state, and specifically, a 
+\begin_inset Quotes eld
+\end_inset
+
+point
+\begin_inset Quotes erd
+\end_inset
+
+ on a single fiber of some fiber bundle.
+ That is, it is just marking a spin direction for one point in spacetime.
+ Given a spacetime point 
+\begin_inset Formula $x$
+\end_inset
+
+, the fiber above 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $\psi\left(x\right)=\left\langle x|\psi\right\rangle $
+\end_inset
+
+ which has a real magnitude 
+\begin_inset Formula $p\left(x\right)=\left\Vert \psi\left(x\right)\right\Vert ^{2}=\left|\psi^{*}\left(x\right)\psi\left(x\right)\right|<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The word 
+\begin_inset Quotes eld
+\end_inset
+
+point
+\begin_inset Quotes erd
+\end_inset
+
+ here is ambiguous.
+ There are several possible interpretations.
+ The classical interpretation is to associate 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+ as a single point on the Bloch sphere.
+ (I think this is the mental model most physicists use).
+ Another interpretation is to associate 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+ with Killing fields on the Bloch sphere.
+ We'll be using the second interpretation; this is required to overcome
+ technical problems relating to Clebsh–Gordan coeficients for the two-particle
+ state.
+\end_layout
+
+\begin_layout Standard
+At this time, no physical assumptions about mixed states are being made;
+ in particular, the density matrix is NOT assumed! This is because I want
+ to leave open the door to a more general concept of mixed states as arbitrary
+ probability distributions on the surface of the Bloch sphere, rather than
+ as points in it's interior, as standard QM density matrix formalism requires.
+\end_layout
+
+\begin_layout Standard
+Per Wikipedia, a single point on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ can be paramterized by Hopf coordinates: 
+\begin_inset Formula 
+\[
+\alpha=e^{i\varphi}\cos\eta\quad\mbox{and \ensuremath{\quad\beta=e^{i\varphi}e^{i\xi}}\ensuremath{\sin\eta}}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $0\le\eta\le\pi/2$
+\end_inset
+
+: attention, this is NOT the usual sphere coord, its off by a factor of
+ two! So 
+\begin_inset Formula $\eta=0$
+\end_inset
+
+ corresponds to 
+\begin_inset Formula $\left|\uparrow\right\rangle $
+\end_inset
+
+ and 
+\begin_inset Formula $\eta=\pi/2$
+\end_inset
+
+ corresponds to 
+\begin_inset Formula $\left|\downarrow\right\rangle $
+\end_inset
+
+.
+ The longitude is 
+\begin_inset Formula $0\le\xi\le2\pi$
+\end_inset
+
+.
+ The phase is 
+\begin_inset Formula $e^{i\varphi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The two-sphere has three Killing vector fields.
+ So, basicaly, treat 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ as a symmetric space.
+ The Killing field algebra 
+\begin_inset Formula $\mathfrak{g}\cong\mathfrak{su}\left(2\right)$
+\end_inset
+
+ splits into
+\begin_inset Formula 
+\[
+\mathfrak{g}=\mathfrak{m}\oplus\mathfrak{h}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\mathfrak{m}\cong TS^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{h}\cong\mathfrak{u}\left(1\right)$
+\end_inset
+
+ is the stabilizer subalgebra.
+\end_layout
+
+\begin_layout Standard
+I assume that this is equivalent to the Hopf fibration, but this needs to
+ be double-checked, with explicit expressions given.
+\end_layout
+
+\begin_layout Standard
+Per the 
+\begin_inset Quotes eld
+\end_inset
+
+hairy ball theorem
+\begin_inset Quotes erd
+\end_inset
+
+, vector fields on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ cannot be combed, which is why the stabilizer 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ is not vacant.
+ Picking a single point on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ corresponds to picking a Killing field that is vanishing at that point.
+ The other two are not, they are tangent to 
+\begin_inset Formula $T_{p}S^{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $p=\left|\psi\right\rangle $
+\end_inset
+
+ is the point on the Bloch sphere.
+\end_layout
+
+\begin_layout Standard
+The biggest problem with using Killing fields to represent a point is that
+ there will also be a second spot somewhere on the sphere where a given
+ Killing field must vanish.
+ This problem can be avoided by noting that a given fixed Killing field
+ is just one representative out of an infinite set of such fields.
+ Infinite set because, at each point on the spehre, we are free to choose
+ any coordinate frame we like; the Killing fields can be any wild, crazy
+ combing of hair, as long as we recognize thier algebra is the algebra of
+ the isometries, i.e.
+ 
+\begin_inset Formula $\mathfrak{su}\left(2\right)$
+\end_inset
+
+.
+ That is, let 
+\begin_inset Formula $p=\left|\psi\right\rangle $
+\end_inset
+
+ correspond to the coset of all Killing fields that vanish at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A pure state is meant to be represented by a single point on the Bloch sphere.
+ The manipulation of a pure state, e.g.
+ by rotating it via some device, move the point on the Bloch sphere.
+ The phase is interpreted as residing in the 
+\begin_inset Formula $\mathfrak{h}$
+\end_inset
+
+ part, That is, 
+\begin_inset Formula $\varphi\in\mathfrak{h}$
+\end_inset
+
+ where 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is the 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ from above, so that 
+\begin_inset Formula $e^{i\varphi}\in U\left(1\right)\cong S^{1}$
+\end_inset
+
+ is the overall phase.
+ Thus, one expects holonomy effects to arise if the spin is moved about
+ a closed path.
+ TODO: provide explcit expressions for the holonomy.
+\end_layout
+
+\begin_layout Subsection
+The two-spin system
+\end_layout
+
+\begin_layout Standard
+The goal here is to represent an entangled state of two qubits.
+ Naively, this is an element in 
+\begin_inset Formula $\mathbb{C}^{4}$
+\end_inset
+
+, which we will decompose into spinors, and apply normalization constraints.
+ This follows the usual algebra.
+\end_layout
+
+\begin_layout Standard
+Here's the tricky part: this is not a fiber over a single spacetime; it
+ has two spatial coordinates, one for each spinor.
+ So if 
+\begin_inset Formula $M$
+\end_inset
+
+ is the spacetime manifold, the two-spin system is a fiber over the base
+ 
+\begin_inset Formula $M\times M$
+\end_inset
+
+.
+ It has two spatial positions.
+\end_layout
+
+\begin_layout Standard
+So the general two-particle state will be 
+\begin_inset Formula 
+\[
+\left|\psi_{A}\right\rangle \otimes\left|\psi_{B}\right\rangle =\left(\alpha_{A}\left|\uparrow_{A}\right\rangle +\beta_{A}\left|\downarrow_{A}\right\rangle \right)\otimes\left(\alpha_{B}\left|\uparrow_{B}\right\rangle +\beta_{B}\left|\downarrow_{B}\right\rangle \right)
+\]
+
+\end_inset
+
+Note the tensor product makes it bilinear.
+ Expanding this gives
+\begin_inset Formula 
+\[
+\left|\psi_{A}\right\rangle \otimes\left|\psi_{B}\right\rangle =\alpha_{A}\alpha_{B}\left|\uparrow_{A}\uparrow_{B}\right\rangle +\alpha_{A}\beta_{B}\left|\uparrow_{A}\downarrow_{B}\right\rangle +\beta_{A}\alpha_{B}\left|\downarrow_{A}\uparrow_{B}\right\rangle +\beta_{A}\beta_{B}\left|\downarrow_{A}\downarrow_{B}\right\rangle 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The primary issue with the above expression is that a two-particle state
+ cannot be determined by a pair of points on the Bloch sphere.
+ For example, Bell states are the maximally entangled states.
+ These are, in conventional notation:
+\begin_inset Formula 
+\begin{align*}
+\left|\Phi^{+}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\uparrow\right\rangle +\left|\downarrow\downarrow\right\rangle \right)\\
+\left|\Phi^{-}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\uparrow\right\rangle -\left|\downarrow\downarrow\right\rangle \right)\\
+\left|\Psi^{+}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\downarrow\right\rangle +\left|\downarrow\uparrow\right\rangle \right)\\
+\left|\Psi^{-}\right\rangle  & =\frac{1}{\sqrt{2}}\left(\left|\uparrow\downarrow\right\rangle -\left|\downarrow\uparrow\right\rangle \right)
+\end{align*}
+
+\end_inset
+
+and there is no choice of 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+ that can express the above just a single pair of spin-1/2 states.
+ So for example, to get 
+\begin_inset Formula $\left|\Phi^{+}\right\rangle $
+\end_inset
+
+ set 
+\begin_inset Formula $\alpha_{A}=\alpha_{B}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta_{A}=-\beta_{B}=i$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{align*}
+\left|\psi\,1\,i\right\rangle  & =\left(\left|\uparrow_{A}\right\rangle +i\left|\downarrow_{A}\right\rangle \right)\otimes\left(\left|\uparrow_{B}\right\rangle -i\left|\downarrow_{B}\right\rangle \right)\\
+ & =\left|\uparrow\uparrow\right\rangle -i\left|\uparrow\downarrow\right\rangle +i\left|\downarrow\uparrow\right\rangle +\left|\downarrow\downarrow\right\rangle 
+\end{align*}
+
+\end_inset
+
+and also 
+\begin_inset Formula 
+\begin{align*}
+\left|\psi\,1\,-i\right\rangle  & =\left(\left|\uparrow_{A}\right\rangle -i\left|\downarrow_{A}\right\rangle \right)\otimes\left(\left|\uparrow_{B}\right\rangle +i\left|\downarrow_{B}\right\rangle \right)\\
+ & =\left|\uparrow\uparrow\right\rangle +i\left|\uparrow\downarrow\right\rangle -i\left|\downarrow\uparrow\right\rangle +\left|\downarrow\downarrow\right\rangle 
+\end{align*}
+
+\end_inset
+
+in order to get 
+\begin_inset Formula 
+\[
+\left|\Phi^{+}\right\rangle =\left|\psi\,1\,i\right\rangle +\left|\psi\,1\,-i\right\rangle 
+\]
+
+\end_inset
+
+up to normalization.
+ Thus, at least two pairs of points on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ are needed! One pair is not enough! This is the root cause of 
+\begin_inset Quotes eld
+\end_inset
+
+wave function collapse
+\begin_inset Quotes erd
+\end_inset
+
+; a measurement of a Bell state discards one of these two possibilities.
+\end_layout
+
+\begin_layout Standard
+OK, well, that was interesting ...
+ 
+\begin_inset Quotes eld
+\end_inset
+
+the precise meaning of an old proverb.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is, we need to work with states 
+\begin_inset Formula $\left|j\,m\right\rangle $
+\end_inset
+
+ with 
+\begin_inset Formula $j=1$
+\end_inset
+
+ and 
+\begin_inset Formula $m=-1,0,+1$
+\end_inset
+
+ and thus a generic two-particle state is 
+\begin_inset Formula 
+\[
+\left|\psi_{AB}\right\rangle =\zeta\left|j=1\;m=-1\right\rangle +\eta\left|j=1\;m=0\right\rangle +\theta\left|j=1\;m=+1\right\rangle 
+\]
+
+\end_inset
+
+requires three complex numbers 
+\begin_inset Formula $\zeta,\eta,\theta$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{C}^{6}$
+\end_inset
+
+.
+ (Requiring normaliztion knocks this down, etc.) The point here is that a
+ generic 
+\begin_inset Formula $\left|\psi_{AB}\right\rangle $
+\end_inset
+
+ cannot be written as a single pair of points on the Bloch sphere; it requires
+ two pairs of points.
+\end_layout
+
+\begin_layout Standard
+...
+\end_layout
+
+\begin_layout Section
+Charge conjugation
+\end_layout
+
+\begin_layout Standard
+While attempting to understand ELKO, I wrote the Wikipedia article on charge
+ conjugation.
+\end_layout
+
+\begin_layout Standard
+What I've learned:
+\end_layout
+
+\begin_layout Itemize
+J.A.
+ Nieto spells ELKO in an understandable fashion.
+\end_layout
+
+\begin_layout Itemize
+Charge conjugation in spinors is really just complex conjugation, but it
+ is tangled into there in a non-obvious way.
+ The textbooks do not give it full justice.
+\end_layout
+
+\begin_layout Itemize
+Charge conjugation exchanges left and right-handed Weyl spinors, which makes
+ sense, because this is how Weyl spinors are defined.
+ So this extends to Riemannian geometry, in general.
+\end_layout
+
+\begin_layout Subsection
+Clifford algebra
+\end_layout
+
+\begin_layout Standard
+Define the Clifford algebra as 
+\begin_inset Formula $\mbox{Cl}\left(V\right)=TV/\left(v\otimes v=q\left(v\right)\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $TV$
+\end_inset
+
+ the tensor algebra and 
+\begin_inset Formula $q\left(v\right)=\left\langle v,v\right\rangle $
+\end_inset
+
+ a quadratic form.
+ Then
+\begin_inset Formula 
+\[
+\mbox{Cl}^{2}=\mathfrak{spin}\left(V\right)=\mathfrak{spin}\left(V\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\mbox{Pin}\left(V\right)\subset\mbox{Cl}\left(V\right)$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\mbox{Pin}\left(V\right)=\left\{ v_{1}v_{2}\cdots v_{k}:v_{i}\in V,\;q\left(v_{i}\right)=1\right\} 
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\mbox{Spin}\left(V\right)=\mbox{Pin}\left(V\right)\cap\mbox{Cl}^{\mbox{even}}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\left\{ e_{i}\right\} $
+\end_inset
+
+ be an orthonormal basis for 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ This means 
+\begin_inset Formula $\left\langle e_{j},e_{k}\right\rangle =\delta_{jk}$
+\end_inset
+
+.
+ Assume 
+\begin_inset Formula $V$
+\end_inset
+
+ is real.
+ For the rest, assume 
+\begin_inset Formula $V$
+\end_inset
+
+ is even-dimensional, unless otherwise noted.
+\end_layout
+
+\begin_layout Subsection
+Weyl spinors
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be a real vector space of dimension 
+\begin_inset Formula $d=2m$
+\end_inset
+
+.
+ Then the complexification is 
+\begin_inset Formula 
+\[
+V\otimes\mathbb{C}=W\oplus\overline{W}
+\]
+
+\end_inset
+
+The Weyl spinors are 
+\begin_inset Formula 
+\[
+\eta_{k}=\frac{e_{2k-1}-ie_{2k}}{\sqrt{2}}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $1\le k\le m$
+\end_inset
+
+.
+ These span 
+\begin_inset Formula $W$
+\end_inset
+
+ and the complex conjugate spinors span 
+\begin_inset Formula $\overline{W}$
+\end_inset
+
+.
+ The
+\end_layout
+
+\begin_layout Subsubsection
+Weyl spinors special case d=1
+\end_layout
+
+\begin_layout Standard
+Then we've got
+\begin_inset Formula 
+\[
+\eta=\frac{e_{1}-ie_{2}}{\sqrt{2}}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\eta^{2}=0=\overline{\eta}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta\overline{\eta}=-1+ie_{1}e_{2}$
+\end_inset
+
+ after recalling that 
+\begin_inset Formula $e_{1}^{2}=e_{2}^{2}=-1$
+\end_inset
+
+.
+ Compare to the inner product: 
+\begin_inset Formula $\left\langle \eta,\eta\right\rangle =0=\left\langle \overline{\eta},\overline{\eta}\right\rangle $
+\end_inset
+
+ while 
+\begin_inset Formula $\left\langle \eta,\overline{\eta}\right\rangle =1$
+\end_inset
+
+ after recalling that 
+\begin_inset Formula $\left\langle e_{1},e_{1}\right\rangle =\left\langle e_{2},e_{2}\right\rangle =1$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\langle e_{1},e_{2}\right\rangle =0$
+\end_inset
+
+.
+ Written as explicit vectors,
+\begin_inset Formula 
+\[
+\eta=\frac{1}{\sqrt{2}}\left(\begin{array}{c}
+1\\
+-i
+\end{array}\right)\qquad\overline{\eta}=\frac{1}{\sqrt{2}}\left(\begin{array}{c}
+1\\
+i
+\end{array}\right)
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $\left\langle \eta,\overline{\eta}\right\rangle =\eta^{T}\cdot\overline{\eta}$
+\end_inset
+
+ as vector notation, but this notation is problematic so don't use it.
+\end_layout
+
+\begin_layout Subsection
+Charged fermions
+\end_layout
+
+\begin_layout Standard
+These are described by 
+\begin_inset Formula $\mbox{Spin}^{\mathbb{C}}\left(V\right)\subset\mbox{Cl}\left(V\right)\otimes\mathbb{C}$
+\end_inset
+
+ defined by 
+\begin_inset Formula 
+\[
+\mbox{Spin}^{\mathbb{C}}\left(V\right)=\left(\mbox{Spin}\left(V\right)\times S^{1}\right)/\sim
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\sim$
+\end_inset
+
+ is the identification 
+\begin_inset Formula $\left(a,u\right)\sim\left(-a,-u\right)$
+\end_inset
+
+.
+ The point is that the electric charge is added distinctly, as it's own
+ thing.
+\end_layout
+
+\begin_layout Subsection
+Gamma group
+\end_layout
+
+\begin_layout Standard
+Let the bilinear form have the signature 
+\begin_inset Formula $\left(q,p\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $q$
+\end_inset
+
+ positive entries, and 
+\begin_inset Formula $p$
+\end_inset
+
+ negative ones.
+\end_layout
+
+\begin_layout Standard
+The gamma group 
+\begin_inset Formula $\Gamma_{q,p}$
+\end_inset
+
+ is isomorphic to the multiplicative subgroup generated by the basis elements
+ of the Clifford algebra 
+\begin_inset Formula $\mathrm{Cl}^{\mathbb{C}}\left(q,p\right)$
+\end_inset
+
+, (that is, ignoring the additive aspect of the algebra.)
+\end_layout
+
+\begin_layout Standard
+It is generated by the following elements (ref 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Petitjean, Michel (2020).
+ "Chirality of Dirac spinors revisited".
+ Symmetry.
+ 12 (4): 616.
+ doi:10.3390/sym12040616)
+\end_layout
+
+\begin_layout Itemize
+A neutral element 
+\begin_inset Formula $I$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+An element 
+\begin_inset Formula $i$
+\end_inset
+
+ with 
+\begin_inset Formula $i^{4}=I$
+\end_inset
+
+ generating a subgroup 
+\begin_inset Formula $\mathbb{Z}_{4}$
+\end_inset
+
+ in the center of the gamma group.
+ This is 
+\emph on
+not
+\emph default
+ the complex number 
+\begin_inset Formula $i$
+\end_inset
+
+ but a stand-in for it.
+ (That it is a center is a theorem, not a requirement, see Petitjean Corrolary
+ 2)
+\end_layout
+
+\begin_layout Itemize
+Generators 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+ with index 
+\begin_inset Formula $1\le a\le q$
+\end_inset
+
+ with 
+\begin_inset Formula $\gamma_{a}^{2}=I$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Generators 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+ with index 
+\begin_inset Formula $q<a\le p+q$
+\end_inset
+
+ with 
+\begin_inset Formula $\gamma_{a}^{2}=i^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Anticommutator 
+\begin_inset Formula $\gamma_{a}\gamma_{b}=i^{2}\gamma_{b}\gamma_{a}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Rest of the group is generated by the above.
+\end_layout
+
+\begin_layout Standard
+Note that this is a group, not a ring or a field.
+ Note that 
+\begin_inset Formula $i$
+\end_inset
+
+ is not the complex 
+\begin_inset Formula $i$
+\end_inset
+
+, but just some group element.
+ Some lemma and theorems:
+\end_layout
+
+\begin_layout Itemize
+For 
+\begin_inset Formula $x\in\Gamma_{q,p}$
+\end_inset
+
+ one has 
+\begin_inset Formula $x^{4}=I$
+\end_inset
+
+ and 
+\begin_inset Formula $x^{3}=i^{2}x$
+\end_inset
+
+ (Petitjean Lemma 2)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\Gamma_{q,p}$
+\end_inset
+
+ is a finite group with at most 
+\begin_inset Formula $2^{q+p+2}$
+\end_inset
+
+ elements (Petitjean Theorem 2)
+\end_layout
+
+\begin_layout Standard
+This appears to be a subgroup of 
+\begin_inset Formula $\mathbb{Z}_{4}\times\mbox{Cl}_{q,p}\left(\mathbb{R}\right)$
+\end_inset
+
+ in that there is a homomorphism 
+\begin_inset Formula $\gamma_{a}\mapsto e_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $i^{2}\mapsto-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $d=q+p$
+\end_inset
+
+ and let 
+\begin_inset Formula $N=2^{\left\lfloor d/2\right\rfloor }$
+\end_inset
+
+.
+ The gamma group can be represented by complex 
+\begin_inset Formula $N\times N$
+\end_inset
+
+ matrices.
+\end_layout
+
+\begin_layout Standard
+Gamma group is a p-group, with p=2.
+ It is not a regular p-group.
+ It is not a powerful p-group.
+ The commutator subgroup 
+\begin_inset Formula $\left[\Gamma,\Gamma\right]=\left\{ I,i^{2}\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The element 
+\begin_inset Formula $i$
+\end_inset
+
+ is not realliy needed, but is convenient, e.g.
+ because the Pauli group is a representation of 
+\begin_inset Formula $\Gamma_{3,0}$
+\end_inset
+
+ and it has an additional identitity: the chiral element is 
+\begin_inset Formula $\sigma_{1}\sigma_{2}\sigma_{3}=i$
+\end_inset
+
+.
+ The gamma group is freer (its the free-est such!?)
+\end_layout
+
+\begin_layout Subsubsection
+Transpose (reversal)
+\end_layout
+
+\begin_layout Standard
+Define the transpose 
+\begin_inset Formula $\left(ab\right)^{t}=b^{t}a^{t}$
+\end_inset
+
+ for 
+\begin_inset Formula $a,b\in\Gamma_{q,p}$
+\end_inset
+
+.
+ Then for a product of 
+\begin_inset Formula $k$
+\end_inset
+
+ distinct generators 
+\begin_inset Formula 
+\[
+\left(\gamma_{a}\gamma_{b}\cdots\gamma_{c}\right)^{t}=\left(i^{2}\right)^{k\left(k-1\right)/2}\gamma_{a}\gamma_{b}\cdots\gamma_{c}
+\]
+
+\end_inset
+
+This is (Petitjean Theorem 1).
+\end_layout
+
+\begin_layout Subsubsection
+Hermitian conjugation
+\end_layout
+
+\begin_layout Standard
+What are all of the automorphisms of the gamma group? Dunno, but it seems
+ we can define a daggar operation 
+\begin_inset Formula $\dagger$
+\end_inset
+
+ that acts as 
+\begin_inset Formula 
+\[
+\gamma_{a}^{\dagger}=\begin{cases}
+\gamma_{a} & \mbox{for }1\le a\le q\\
+i^{2}\gamma_{a} & \mbox{for }q<a\le p+q
+\end{cases}
+\]
+
+\end_inset
+
+which is supplemented with 
+\begin_inset Formula $i^{\dagger}=i^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $I^{\dagger}=I$
+\end_inset
+
+.
+ To avoid confusion with the usual Hermition conjugate, we also define 
+\begin_inset Formula $\left(ab\right)^{\dagger}=b^{\dagger}a^{\dagger}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Charge conjugation
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\Gamma_{p,q}$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $\Gamma_{p,q}^{\dagger}$
+\end_inset
+
+ and to 
+\begin_inset Formula $i^{2}\Gamma_{p,q}$
+\end_inset
+
+ and to 
+\begin_inset Formula $i^{2}\Gamma_{p,q}^{\dagger}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+No inner automorphisms
+\end_layout
+
+\begin_layout Standard
+Transpose, charge conjugation and hermitian conjugation are not an inner
+ automorphisms of the gamma group, and thus cannot be represented with group
+ elements.
+\end_layout
+
+\begin_layout Subsection
+Weyl-Brauer Matrices
+\end_layout
+
+\begin_layout Standard
+These are defined for a Euclidean bilinear form.
+ Can they extend to the general case?
+\end_layout
+
+\begin_layout Subsection
+T-symmetry
+\end_layout
+
+\begin_layout Standard
+This is the transpose 
+\begin_inset Formula $\left(ab\right)^{t}=b^{t}a^{t}$
+\end_inset
+
+ for 
+\begin_inset Formula $a,b\in\mbox{Cl}\left(V\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\mbox{Spin}\left(V\right)=\left\{ a\in\mbox{Pin}\left(V\right):aa^{t}=1\right\} 
+\]
+
+\end_inset
+
+For charged fermions, we want to work with the complexified algebra 
+\begin_inset Formula $\mathrm{Cl}^{\mathbb{C}}\left(V\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+P-symmetry
+\end_layout
+
+\begin_layout Standard
+This is generated by 
+\begin_inset Formula $\alpha:e_{i}\mapsto-e_{i}$
+\end_inset
+
+ given a basis 
+\begin_inset Formula $\left\{ e_{i}\right\} $
+\end_inset
+
+ for 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ In Clifford algebras, this is called the 
+\begin_inset Quotes eld
+\end_inset
+
+main involution
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Chiral projections
+\end_layout
+
+\begin_layout Standard
+In 1+3 dimensions, 
+\begin_inset Formula $P_{L}=\left(1-\gamma^{5}\right)/2$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{R}=\left(1+\gamma^{5}\right)/2$
+\end_inset
+
+ and so in the Weyl basis 
+\begin_inset Formula 
+\[
+P_{L}=\left(\begin{array}{cc}
+I & 0\\
+0 & 0
+\end{array}\right)\quad\mbox{ and }\quad P_{R}=\left(\begin{array}{cc}
+0 & 0\\
+0 & I
+\end{array}\right)
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+\psi=\left(\begin{array}{c}
+\psi_{L}\\
+\psi_{R}
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+C-symmetry
+\end_layout
+
+\begin_layout Standard
+This is more complicated.
+ And confusing.
+ So, for 3+1 dimensions, for the Dirac basis, the chiral(Weyl) basis and
+ in the Majorana basis, we have 
+\begin_inset Formula $\gamma^{0}\gamma^{k}\gamma^{0}=-\gamma^{k}=\left(\gamma^{k}\right)^{\dagger}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 1+3 dimensions 
+\begin_inset Formula $\left(+---\right)$
+\end_inset
+
+, the charge operator is
+\begin_inset Formula 
+\[
+Q=\gamma^{0}
+\]
+
+\end_inset
+
+its eigenstates are of a fixed charge.
+ The charge conjugation matrix is defined as 
+\begin_inset Formula 
+\[
+C\gamma_{\mu}C^{-1}=-\left(\gamma_{\mu}\right)^{T}
+\]
+
+\end_inset
+
+for all representations.
+ In all four bases (Dirac, Majorana, two chiral forms), 
+\begin_inset Formula $C^{-1}=C^{\dagger}=C^{T}=-C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The above is from Itzykson& Zuber, and also Bjorken&Drell, volume 2, page
+ 115.
+ B&D Volume 1, page 67
+\end_layout
+
+\begin_layout Standard
+In the Majorana basis, it is given by 
+\begin_inset Formula 
+\[
+C=-i\gamma^{0}
+\]
+
+\end_inset
+
+which obeys 
+\begin_inset Formula $C^{-1}=-C=C^{\dagger}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This works in the Majorana basis.
+\end_layout
+
+\begin_layout Standard
+In the Dirac basis, 
+\begin_inset Formula $C=i\gamma^{2}\gamma^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $C^{-1}=-C$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Whoops, hang on, Charge conjugation is given by 
+\begin_inset Formula 
+\[
+\psi\mapsto-i\left(\overline{\psi}\gamma^{0}\gamma^{2}\right)^{T}
+\]
+
+\end_inset
+
+So..
+\end_layout
+
+\begin_layout Subsection
+Poincare symmetry
+\end_layout
+
+\begin_layout Standard
+OK, so all of the above is for a zero-dimensional space-time.
+ We now want to identify 
+\begin_inset Formula $V$
+\end_inset
+
+ with the tangent space 
+\begin_inset Formula $TM$
+\end_inset
+
+ of a pseudo-Riemannian manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ with metric 
+\begin_inset Formula $\left(p,q\right)$
+\end_inset
+
+.
+ The question is, how do spinors behave, and the Cliford algebra behave
+ under local (gauged) changes of coordinate frame? i.e.
+ under the action of 
+\begin_inset Formula $SO\left(p,q\right)$
+\end_inset
+
+? OK, we know how to answer that, its the spin structure.
+\end_layout
+
+\begin_layout Standard
+A hah! See J.A.
+ Nieto 
+\begin_inset Quotes eld
+\end_inset
+
+Generalized Elko Theory
+\begin_inset Quotes erd
+\end_inset
+
+ explains it clearly: eqn 1 in https://arxiv.org/pdf/1907.00740.pdf
+\begin_inset Formula 
+\[
+\left(\gamma_{ab}^{\mu}\partial_{\mu}\delta_{A}^{B}-m\delta_{ab}\varepsilon_{A}^{\;\,B}\right)\psi_{B}^{b}=0
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $a,b=0..3$
+\end_inset
+
+ the usual Dirac spinor indexes, and 
+\begin_inset Formula $\varepsilon^{AB}$
+\end_inset
+
+ totally anti-symmetric i.e.
+ 
+\begin_inset Formula $\varepsilon^{12}=-\varepsilon^{21}$
+\end_inset
+
+ so this is an eight-component spinor.
+\end_layout
+
+\begin_layout Section
+Majorana
+\end_layout
+
+\begin_layout Standard
+Trying to untangle Majorana for wikipedia what an effing mess.
+ Some notes:
+\end_layout
+
+\begin_layout Itemize
+One charged Dirac can be built from two neutral majorana, ref: Andreas Aste
+ 
+\begin_inset Quotes eld
+\end_inset
+
+A Direct Road to Majorana Fields
+\begin_inset Quotes erd
+\end_inset
+
+ Symmetry 2010, 2, 1776-1809; doi:10.3390/sym2041776
+\end_layout
+
+\begin_layout Subsection
+Lorentz group
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $\sigma^{\mu}=\left(1,\vec{\sigma}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $\vec{\sigma}$
+\end_inset
+
+ the usual Pauli matrices.
+ This will provide the right-handed Weyl spinors.
+ Write 
+\begin_inset Formula $g_{\mu\nu}=+---$
+\end_inset
+
+.
+ Then we have also 
+\begin_inset Formula $\overline{\sigma}^{\mu}=\left(1,-\vec{\sigma}\right)$
+\end_inset
+
+ which provides the left-handed spinors.
+ Note the mind-numbing relations 
+\begin_inset Formula $\overline{\sigma}^{\mu}=\sigma_{\mu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The standard double-covering of orthochronous Lorentz group by 
+\begin_inset Formula $S\in SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}=S\overline{\sigma}_{\nu}S^{\dagger}
+\]
+
+\end_inset
+
+This works because it preserves the Minkowski metric: 
+\begin_inset Formula $x^{\mu}\mapsto x^{\prime\mu}=\Lambda_{\;\,\nu}^{\mu}x^{\nu}$
+\end_inset
+
+.
+ That is
+\begin_inset Formula 
+\[
+x^{\prime\mu}\overline{\sigma}_{\mu}=x^{\nu}\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}=Sx^{\nu}\overline{\sigma}_{\nu}S^{\dagger}
+\]
+
+\end_inset
+
+The above is called 
+\begin_inset Quotes eld
+\end_inset
+
+the Weyl representation
+\begin_inset Quotes erd
+\end_inset
+
+ (of a point in Minkowski space).
+ The conjugate version is
+\begin_inset Formula 
+\[
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}\left(S^{-1}\right)
+\]
+
+\end_inset
+
+It is easier to just ditch the index notation: write 
+\begin_inset Formula 
+\[
+\overline{X}=\overline{\sigma}_{\mu}x^{\mu}=t+\vec{x}\cdot\vec{\sigma}\quad\quad X=\sigma_{\mu}x^{\mu}=t-\vec{x}\cdot\vec{\sigma}
+\]
+
+\end_inset
+
+The product 
+\begin_inset Formula $\overline{X}X$
+\end_inset
+
+ is a Lorentz scalar, therefore the above is how things must transform.
+ An alternate proof of this, using index notation, is given below.
+\end_layout
+
+\begin_layout Standard
+Chirality is Lorentz invariant, but is not a constant of motion for massive
+ particles.
+\end_layout
+
+\begin_layout Subsection
+Accidental isomorphims
+\end_layout
+
+\begin_layout Standard
+Time to be more careful.
+\end_layout
+
+\begin_layout Standard
+First: 
+\begin_inset Formula $O\left(p,q\right)$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+generalized orthogonal group
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It preserves the quadratic form 
+\begin_inset Formula $+---$
+\end_inset
+
+.
+ It has four connected components.
+ So 
+\begin_inset Formula $\pi_{0}\left(O\left(p,q\right)\right)=C_{2}\times C_{2}=\mathbb{Z}_{2}\times\mathbb{Z}_{2}$
+\end_inset
+
+ the Klein four-group.
+ Here 
+\begin_inset Formula $C_{n}=\mathbb{Z}_{n}$
+\end_inset
+
+ is the cyclic group.
+ The two factors flip the signs of the p,q basis vectors.
+\end_layout
+
+\begin_layout Standard
+Next: 
+\begin_inset Formula $SO\left(p,q\right)$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+special orthogonal group
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It's elements have unit determinant.
+ It has 2 connected components: 
+\begin_inset Formula $\pi_{0}\left(SO\left(p,q\right)\right)=\mathbb{Z}_{2}=\left\{ \left(1,1\right),\left(-1,-1\right)\right\} $
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $SO^{+}\left(p,q\right)$
+\end_inset
+
+ contains the identity.
+\end_layout
+
+\begin_layout Standard
+Next 
+\begin_inset Formula $U\left(n\right)=O\left(2n\right)\cap GL\left(n,\mathbb{C}\right)\cap Sp\left(2n,\mathbb{R}\right)$
+\end_inset
+
+.
+ Where symplectic means 
+\begin_inset Formula $A^{T}JA=J$
+\end_inset
+
+ and complex means 
+\begin_inset Formula $A^{-1}JA=J$
+\end_inset
+
+ and orthogonal means 
+\begin_inset Formula $A^{T}=A^{-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So 
+\begin_inset Formula $O\left(1,3\right)$
+\end_inset
+
+ has four connected components.
+ The one that contains the identity is, 
+\begin_inset Formula $SO^{+}\left(1,3\right)$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+restricted
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+orthochronous
+\begin_inset Quotes erd
+\end_inset
+
+ Lorentz group.
+ Note 
+\begin_inset Formula $SO^{+}\left(1,3\right)\cong PSL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ the Mobius group.
+ Note 
+\begin_inset Formula $PSL\left(2,\mathbb{C}\right)=SL\left(2,\mathbb{C}\right)/\left\{ \pm I\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+proper
+\begin_inset Quotes erd
+\end_inset
+
+ Lorentz group is 
+\begin_inset Formula $SO\left(1,3\right)$
+\end_inset
+
+, it has unit determinant.
+\end_layout
+
+\begin_layout Standard
+The double-cover of 
+\begin_inset Formula $SO^{+}\left(1,3\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathrm{Spin}\left(1,3\right)\cong SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Spinors and Symplectic form
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $u\in\mathbb{C}^{2}$
+\end_inset
+
+as 
+\begin_inset Formula 
+\[
+u=\left(\begin{array}{c}
+u_{1}\\
+u_{2}
+\end{array}\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+\epsilon=\omega=\Omega=i\sigma_{2}=\left(\begin{array}{cc}
+0 & 1\\
+-1 & 0
+\end{array}\right)
+\]
+
+\end_inset
+
+This defines a symplectic bilinear form on 
+\begin_inset Formula $\mathbb{C}^{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\left\langle u,v\right\rangle =-\left\langle v,u\right\rangle =u_{1}v_{2}-u_{2}v_{1}=\left(\begin{array}{cc}
+u_{1} & u_{2}\end{array}\right)\left(\begin{array}{cc}
+0 & 1\\
+-1 & 0
+\end{array}\right)\left(\begin{array}{c}
+v_{1}\\
+v_{2}
+\end{array}\right)=u^{T}\epsilon v
+\]
+
+\end_inset
+
+This is invariant under 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ since for 
+\begin_inset Formula $S\in SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ one gets 
+\begin_inset Formula $\left\langle Su,Sv\right\rangle =\left\langle u,v\right\rangle $
+\end_inset
+
+.
+ And so 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)\cong Sp\left(2,\mathbb{C}\right)$
+\end_inset
+
+ is an isomorphism.
+ By definition, 
+\begin_inset Formula 
+\[
+Sp\left(2,\mathbb{C}\right)=\left\{ S\in GL\left(2,\mathbb{C}\right)|S^{T}\epsilon S=\epsilon\right\} 
+\]
+
+\end_inset
+
+Some useful identities: 
+\begin_inset Formula 
+\[
+\epsilon^{-1}=\epsilon^{T}=\epsilon^{\dagger}=-\epsilon
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\epsilon S\epsilon^{-1}=\epsilon\left(\begin{array}{cc}
+a & b\\
+c & d
+\end{array}\right)\epsilon^{-1}=\left(\begin{array}{cc}
+d & -c\\
+-b & a
+\end{array}\right)
+\]
+
+\end_inset
+
+Holds as a matrix identity, for any matrix 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Now if 
+\begin_inset Formula $S\in SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\left(\begin{array}{cc}
+d & -c\\
+-b & a
+\end{array}\right)=\left(S^{-1}\right)^{T}
+\]
+
+\end_inset
+
+So, more conventionally, for 
+\begin_inset Formula $S\in SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ one has
+\begin_inset Formula 
+\[
+\epsilon S^{T}\epsilon^{-1}=S^{-1}
+\]
+
+\end_inset
+
+Note how this resembles the defintion 
+\begin_inset Formula $gA^{T}g^{-1}=A^{-1}$
+\end_inset
+
+ of 
+\begin_inset Formula $SO(p,q)$
+\end_inset
+
+ except that 
+\begin_inset Formula $g=+---$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is an inner automorphism of 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ (when combined with the transpose).
+\end_layout
+
+\begin_layout Standard
+The Pauli matrices do 
+\emph on
+not
+\emph default
+ belong to 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ so one must take more care.
+ Instead, one gets
+\begin_inset Formula 
+\[
+\epsilon\sigma^{k}\epsilon^{-1}=-\sigma^{Tk}
+\]
+
+\end_inset
+
+Note the transpose aka complex conjugate! So we identify 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ with parity plus transpose, for the spinors.
+ This implies
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma_{\mu}^{T}\Lambda_{\;\,\nu}^{\mu}=\epsilon\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}\epsilon^{-1}=\epsilon S\overline{\sigma}_{\nu}S^{\dagger}\epsilon^{-1}=\left(S^{-1}\right)^{T}\sigma_{\nu}^{T}\left(S^{-1}\right)^{*}
+\]
+
+\end_inset
+
+Take one more transpose to get
+\begin_inset Formula 
+\[
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}S^{-1}
+\]
+
+\end_inset
+
+This is consistent with the earlier form, thus validating the indexed notation.
+ This is consistent with Wikipedia [[Lorentz grou]] as of Dec 2020 and with
+ Aste.
+\end_layout
+
+\begin_layout Subsubsection
+Almost complex structure
+\end_layout
+
+\begin_layout Standard
+Do not confuse 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ with 
+\begin_inset Formula $J$
+\end_inset
+
+ which is the almost-complex structure.
+ The differents is this: 
+\begin_inset Formula $J^{2}=-1$
+\end_inset
+
+ in every basis, whereas 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is skew symmetric in every basis.
+ In a different basis, 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ might not square to -1, and 
+\begin_inset Formula $J$
+\end_inset
+
+ might not be skew-symmetric.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $g$
+\end_inset
+
+ a metric, 
+\begin_inset Formula $\omega_{ab}=-g_{ac}J_{\;\,b}^{c}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Clifford algebra
+\end_layout
+
+\begin_layout Standard
+If instead we build a Clifford algebra, using the Eucliden norm, the spinors
+ would anti-commute.
+ But all the matrices are c-numbers, so nothing changes, other than that
+ the symplectic norm stays positive: 
+\begin_inset Formula $\left\langle u,v\right\rangle =+\left\langle v,u\right\rangle $
+\end_inset
+
+ and so 
+\begin_inset Formula $\left\langle v,v\right\rangle =2v_{1}v_{2}$
+\end_inset
+
+ is 
+\emph on
+not
+\emph default
+ a scalar but ...
+\end_layout
+
+\begin_layout Standard
+Hang on.
+ This is complexified, so has four real dimensions.
+ Given four real basis vectors 
+\begin_inset Formula $\left\{ e_{1},e_{2},e_{3},e_{4}\right\} $
+\end_inset
+
+ define two complex vectors 
+\begin_inset Formula 
+\[
+\eta_{j}=\frac{1}{\sqrt{2}}\left(e_{2j-1}-ie_{2j}\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $\mathbb{R}^{4}\otimes\mathbb{C}=W\oplus\overline{W}$
+\end_inset
+
+.
+ A spinor is then
+\begin_inset Formula 
+\[
+w=\left(\begin{array}{c}
+\alpha_{1}\eta_{1}\\
+\alpha_{2}\eta_{2}
+\end{array}\right)
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $\alpha_{j}\in\mathbb{C}$
+\end_inset
+
+ just ordinary complex numbers...
+ Neither symplectic norm 
+\begin_inset Formula $\left\langle w,w\right\rangle $
+\end_inset
+
+ nor 
+\begin_inset Formula $\left\langle \overline{w},w\right\rangle $
+\end_inset
+
+ seem to be particularly interesting or enlightening...
+\end_layout
+
+\begin_layout Standard
+To build the Clifford algebra, we have a choice of two norms: the Euclidean
+ norm, and the Minkowski norm ...
+ The Euclidean norm makes the most sense for 
+\begin_inset Quotes eld
+\end_inset
+
+ordinary spinors
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The Minkowski norm only makes sense if we want to interpret 
+\begin_inset Formula $\left\{ e_{1},e_{2},e_{3},e_{4}\right\} $
+\end_inset
+
+ as gamma matrices.
+ Which we do 
+\emph on
+not
+\emph default
+ want to do.
+ So Euclidean norm it is ...
+\end_layout
+
+\begin_layout Subsection
+Complex vector bundles
+\end_layout
+
+\begin_layout Standard
+So if we put 
+\begin_inset Formula $\mathbb{C}^{2}$
+\end_inset
+
+ over spacetime 
+\begin_inset Formula $M$
+\end_inset
+
+ we get a complex vector bundle 
+\begin_inset Formula $E$
+\end_inset
+
+.
+ A hermitian metric on this is a smoothly-varying positive-definite Hermitian
+ form on each fiber.
+ At each point 
+\begin_inset Formula $p\in M$
+\end_inset
+
+, and 
+\begin_inset Formula $\zeta,\eta\in E_{p}$
+\end_inset
+
+ one has 
+\begin_inset Formula $h_{p}\left(\zeta,\overline{\zeta}\right)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{p}\left(\zeta,\overline{\eta}\right)=\overline{h_{p}\left(\eta,\overline{\zeta}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\mathbb{C}^{2}$
+\end_inset
+
+ the standard Hermitian form is 
+\begin_inset Formula $\left\langle w,z\right\rangle =\overline{w}_{1}z_{1}+\overline{w}_{2}z_{2}$
+\end_inset
+
+ (and so on for n-dimensions) Don't confuse this with the above.
+\end_layout
+
+\begin_layout Subsection
+Charge Conjugation
+\end_layout
+
+\begin_layout Standard
+Note that for 
+\begin_inset Formula $U\in SU(2)\subset SL\left(2,\mathbb{C}\right)$
+\end_inset
+
+ that one has
+\begin_inset Formula 
+\[
+U^{*}=\epsilon U\epsilon^{-1}
+\]
+
+\end_inset
+
+Follows from above if writing 
+\begin_inset Formula 
+\[
+U=\left(\begin{array}{cc}
+a & b\\
+-b^{*} & a^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+Therere should be some 
+\begin_inset Quotes eld
+\end_inset
+
+ah-ha
+\begin_inset Quotes erd
+\end_inset
+
+ moment here is that charge-conjugation is the same as complex conjugation.
+ That is, for 
+\begin_inset Formula $v\in\mathbb{C}^{2}$
+\end_inset
+
+ the transformation 
+\begin_inset Formula $v\mapsto v^{\prime}=Uv$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\[
+w^{\prime}=\epsilon v^{\prime}=\epsilon Uv=U^{*}\epsilon v=U^{*}w
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula $w\mapsto w^{\prime}=U^{*}w$
+\end_inset
+
+ which implies that there are not one but two types of spinors.
+ But these don't both live in the same 
+\begin_inset Formula $\mathbb{C}^{2}$
+\end_inset
+
+ we have to instead use 
+\begin_inset Formula $\mathbb{C}^{2}\oplus\mathbb{C}^{2}$
+\end_inset
+
+ and write 
+\begin_inset Formula $v\oplus w$
+\end_inset
+
+ for these.
+\end_layout
+
+\begin_layout Standard
+This is of course the well-known 
+\begin_inset Formula $SL\left(2,\mathbb{C}\right)\cong SU(2)\otimes\overline{SU(2)}$
+\end_inset
+
+.
+ It looks weird because we should have written it transposed
+\begin_inset Formula 
+\[
+w^{\prime T}=w^{T}U^{\dagger}
+\]
+
+\end_inset
+
+Hmmm...
+\end_layout
+
+\begin_layout Subsection
+Weyl equation
+\end_layout
+
+\begin_layout Standard
+The Weyl eqn is 
+\begin_inset Formula 
+\[
+\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)=0
+\]
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(This is Aste eqn 47; his unmarked 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is my 
+\begin_inset Formula $\psi_{L}$
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Subsection
+Lorentz invariance of Weyl equations
+\end_layout
+
+\begin_layout Standard
+Want to check that the Weyl eqns are invariant under 
+\begin_inset Formula $\psi_{R}\left(x\right)\mapsto\psi_{R}^{\prime}\left(x^{\prime}\right)=R\psi_{R}\left(x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{L}\left(x\right)\mapsto\psi_{L}^{\prime}\left(x^{\prime}\right)=L\psi_{L}\left(x\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $x^{\prime}=\Lambda x$
+\end_inset
+
+ and 
+\begin_inset Formula $x=\Lambda^{-1}x^{\prime}$
+\end_inset
+
+.
+ Written more provocatively,
+\begin_inset Formula 
+\[
+\psi_{L}^{\prime}\left(x^{\prime}\right)=L\psi_{L}\left(\Lambda^{-1}x^{\prime}\right)
+\]
+
+\end_inset
+
+Lets start with
+\begin_inset Formula 
+\[
+\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)=0
+\]
+
+\end_inset
+
+So lets have a go
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+0=\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)=\overline{\sigma}^{\mu}\frac{\partial x^{\nu}}{\partial x^{\prime\mu}}\frac{\partial}{\partial x^{\nu}}L\psi_{L}\left(x\right)
+\]
+
+\end_inset
+
+From
+\begin_inset Formula 
+\[
+x^{\nu}=\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}x^{\prime\mu}
+\]
+
+\end_inset
+
+it follows (trying to get all the indexes exactly right)
+\begin_inset Formula 
+\[
+\frac{\partial x^{\nu}}{\partial x^{\prime\mu}}=\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+0=\overline{\sigma}^{\mu}\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}\partial_{\nu}L\psi_{L}\left(x\right)
+\]
+
+\end_inset
+
+Here's the tricky part that I keep messing up:
+\begin_inset Formula 
+\[
+\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}=\left(\left(\Lambda^{-1}\right)^{T}\right)_{\mu}^{\;\,\nu}
+\]
+
+\end_inset
+
+and then we have to also make use of the identity
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\eta\Lambda^{T}\eta=\Lambda^{-1}
+\]
+
+\end_inset
+
+to write
+\begin_inset Formula 
+\[
+\overline{\sigma}^{\mu}\left(\Lambda^{-1}\right)_{\;\,\mu}^{\nu}\partial_{\nu}L\psi_{L}\left(x\right)=\overline{\sigma}^{\mu}\left(\Lambda^{-1T}\right)_{\mu}^{\;\,\nu}\partial_{\nu}L\psi_{L}\left(x\right)=\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}\partial^{\nu}L\psi\left(x\right)
+\]
+
+\end_inset
+
+Only now can we plug in the double-covering 
+\begin_inset Formula 
+\[
+\overline{\sigma}_{\mu}\Lambda_{\;\,\nu}^{\mu}=S\sigma_{\nu}S^{\dagger}
+\]
+
+\end_inset
+
+To get
+\begin_inset Formula 
+\[
+0=S\overline{\sigma}_{\mu}\partial^{\mu}S^{\dagger}L\psi_{L}\left(x\right)
+\]
+
+\end_inset
+
+which will be the original Weyl eqn provided that 
+\begin_inset Formula $S^{\dagger}L=1$
+\end_inset
+
+ or that 
+\begin_inset Formula $L=\left(S^{\dagger}\right)^{-1}$
+\end_inset
+
+.
+ Phew.
+ That's a pain in the neck.
+ Raising and lowering indexes on Lorentz transforms is tricky.
+ After this untangling, this is 100% compatible with the notation and results
+ of Andres Aste op cit.
+ Above is identical to eqn 52.
+ (Aste's 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is my 
+\begin_inset Formula $\psi_{L}$
+\end_inset
+
+ and his 
+\begin_inset Formula $\tilde{\psi}$
+\end_inset
+
+ is my 
+\begin_inset Formula $\psi_{R}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Repeating this calculation for
+\begin_inset Formula 
+\[
+\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)=0
+\]
+
+\end_inset
+
+Then, using 
+\begin_inset Formula 
+\[
+\sigma_{\mu}\Lambda_{\;\,\nu}^{\mu}=\left(S^{-1}\right)^{\dagger}\sigma_{\nu}S^{-1}
+\]
+
+\end_inset
+
+one concludes that 
+\begin_inset Formula $R=S$
+\end_inset
+
+.
+ Which is again consistent with Aste eqn 57.
+ All this is now also consistent with Wikipeda [[Weyl equation]] and with
+ [[Lorentz group]] as of December 2020.
+\end_layout
+
+\begin_layout Subsection
+Two-component Majorana
+\end_layout
+
+\begin_layout Standard
+Rephrasing Aste section 3 in my notation.
+ So: 
+\begin_inset Formula $\psi_{L}\left(x\right)\mapsto\psi_{L}^{\prime}\left(x^{\prime}\right)=\left(S^{\dagger}\right)^{-1}\psi_{L}\left(x\right)$
+\end_inset
+
+ therefore 
+\begin_inset Formula $\psi_{L}^{*}\left(x\right)\mapsto\psi_{L}^{\prime*}\left(x^{\prime}\right)=\left(S^{T}\right)^{-1}\psi_{L}^{*}\left(x\right)$
+\end_inset
+
+ is Aste eqn 61.
+ But 
+\begin_inset Formula $\left(S^{T}\right)^{-1}=\epsilon^{-1}S\epsilon$
+\end_inset
+
+ therefore
+\begin_inset Formula 
+\[
+m\epsilon\psi_{L}^{*}\left(x\right)\mapsto m\epsilon\psi_{L}^{\prime*}\left(x^{\prime}\right)=Sm\epsilon\psi_{L}^{*}\left(x\right)
+\]
+
+\end_inset
+
+transforms as if it is right-handed.
+ The right-handed variant is 
+\begin_inset Formula $\psi_{R}\left(x\right)\mapsto\psi_{R}^{\prime}\left(x^{\prime}\right)=S\psi_{R}\left(x\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $\psi_{R}^{*}\left(x\right)\mapsto\psi_{R}^{\prime*}\left(x^{\prime}\right)=S^{*}\psi_{R}^{*}\left(x\right)$
+\end_inset
+
+ but 
+\begin_inset Formula $\epsilon S^{*}=\left(S^{\dagger}\right)^{-1}\epsilon$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+m\epsilon\psi_{R}\left(x\right)\mapsto m\epsilon\psi_{R}^{\prime*}\left(x^{\prime}\right)=\left(S^{\dagger}\right)^{-1}m\epsilon\psi_{R}^{*}\left(x\right)
+\]
+
+\end_inset
+
+Combine the left-handed variant with the earlier result:
+\begin_inset Formula 
+\[
+\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)=S\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)
+\]
+
+\end_inset
+
+Adding these together, with an arbitrary phase factor 
+\begin_inset Formula $\eta$
+\end_inset
+
+, one gets
+\begin_inset Formula 
+\[
+i\overline{\sigma}^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{L}\left(x^{\prime}\right)+\eta m\epsilon\psi_{L}^{*}\left(x^{\prime}\right)=S\left(i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}\left(x\right)+\zeta m\epsilon\psi_{L}^{*}\left(x\right)\right)
+\]
+
+\end_inset
+
+Note that the RHS transforms like a right-handed spinor.
+ That is, define 
+\begin_inset Formula 
+\[
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\zeta m\epsilon K
+\]
+
+\end_inset
+
+Then, under Lorentz, 
+\begin_inset Formula 
+\[
+\psi_{L}\mapsto\psi_{L}^{\prime}=\left(S^{\dagger}\right)^{-1}\psi_{L}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D_{L}\mapsto D_{L}^{\prime}=SD_{L}S^{\dagger}
+\]
+
+\end_inset
+
+Likewise,
+\begin_inset Formula 
+\[
+i\sigma^{\mu}\frac{\partial}{\partial x^{\prime\mu}}\psi_{R}\left(x^{\prime}\right)+\eta m\epsilon\psi_{R}^{*}\left(x^{\prime}\right)=\left(S^{-1}\right)^{\dagger}\left(i\sigma^{\mu}\partial_{\mu}\psi_{R}\left(x\right)+\eta m\epsilon\psi_{R}^{*}\left(x\right)\right)
+\]
+
+\end_inset
+
+is Lorentz covariant; and 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ is an arbitrary phase factor.
+ Define 
+\begin_inset Formula 
+\[
+D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+Then, under Lorentz, 
+\begin_inset Formula 
+\[
+\psi_{R}\mapsto\psi_{R}^{\prime}=S\psi_{R}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D_{R}\mapsto D_{R}^{\prime}=\left(S^{\dagger}\right)^{-1}D_{R}S^{-1}
+\]
+
+\end_inset
+
+Therefore, both 
+\begin_inset Formula $D_{L}D_{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $D_{R}D_{L}$
+\end_inset
+
+ transform covariantly.
+ Should get the Klein–Gordon.
+ Let's do that for giggles.
+ So let 
+\begin_inset Formula $K$
+\end_inset
+
+ stand for charge conjugation.
+ And 
+\begin_inset Formula 
+\[
+D_{R}D_{L}=\left(i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\zeta m\epsilon K\right)=-\partial\overline{\partial}-\eta\zeta^{*}m^{2}+im\left(\zeta\partial\epsilon K-\eta\epsilon K\overline{\partial}\right)
+\]
+
+\end_inset
+
+Where 
+\begin_inset Formula $\epsilon^{2}=-1$
+\end_inset
+
+ was used, as well as that 
+\begin_inset Formula $Ki=-iK$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\partial\overline{\partial}=\partial_{t}^{2}-\vec{\nabla}\cdot\vec{\nabla}=\square
+\]
+
+\end_inset
+
+To get the conventional Klein-Gordon equation 
+\begin_inset Formula $\left(\square+m^{2}\right)\psi=0$
+\end_inset
+
+ we must take 
+\begin_inset Formula $\eta\zeta^{*}=1$
+\end_inset
+
+ That is, 
+\begin_inset Formula $\zeta=\eta$
+\end_inset
+
+ so that 
+\begin_inset Formula 
+\[
+\left(i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K\right)\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)=-\left(\square+m^{2}\right)+i\eta m\left(\partial\epsilon K-\epsilon K\overline{\partial}\right)
+\]
+
+\end_inset
+
+Now, to deal with the skew term.
+ So 
+\begin_inset Formula $\partial=\sigma^{\mu}\partial_{\mu}=\partial_{t}+\vec{\sigma}\cdot\vec{\nabla}$
+\end_inset
+
+ so
+\begin_inset Formula 
+\[
+\partial\epsilon K-\epsilon K\overline{\partial}=\left(\vec{\sigma}\epsilon+\epsilon\vec{\sigma}^{*}\right)\cdot\vec{\nabla}K
+\]
+
+\end_inset
+
+while from before, we had 
+\begin_inset Formula 
+\[
+\epsilon\sigma^{k}\epsilon^{-1}=-\sigma^{Tk}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula $\vec{\sigma}\epsilon=-\epsilon\vec{\sigma}^{T}=-K\epsilon\vec{\sigma}^{\dagger}=-K\epsilon\vec{\sigma}=-\epsilon\vec{\sigma}^{*}$
+\end_inset
+
+ so the skew term vanishes.
+ Hooray!
+\end_layout
+
+\begin_layout Standard
+Reasonable shorthand for this seems to be
+\begin_inset Formula 
+\[
+D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+so that Majorana is 
+\begin_inset Formula $D_{L}\psi_{L}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $D_{R}\psi_{R}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Why is this Majorana, and not Dirac? Well, for starters, not enough components:
+ 
+\begin_inset Formula $\psi_{L}$
+\end_inset
+
+ has four real components, but one is removed as an overall normalization,
+ and one is removed, an overall arbitrary phase, leaving only two components:
+ spin up and down.
+\end_layout
+
+\begin_layout Subsection
+Dirac equation
+\end_layout
+
+\begin_layout Standard
+Since the next section gets into trouble, lets review the Dirac eqn.
+ It is 
+\begin_inset Formula 
+\[
+0=\left(i\gamma^{\mu}\partial_{\mu}-m\right)\psi
+\]
+
+\end_inset
+
+Folowing Itzykson & Zuber, under Lorentz 
+\begin_inset Formula $x\mapsto x^{\prime}=\Lambda x$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\psi\left(x\right)\mapsto\psi^{\prime}\left(x^{\prime}\right)=S\psi\left(x\right)
+\]
+
+\end_inset
+
+and Dirac transforms as
+\begin_inset Formula 
+\[
+i\gamma^{\mu}\partial_{\mu}-m\mapsto\left(i\gamma^{\mu}\partial_{\mu}^{\prime}-m\right)=S\left(i\gamma^{\mu}\partial_{\mu}-m\right)S^{-1}
+\]
+
+\end_inset
+
+and so we conclude that this can be directly squared.
+\begin_inset Formula 
+\begin{align*}
+\left(i\gamma^{\mu}\partial_{\mu}-m\right)\left(i\gamma^{\nu}\partial_{\nu}-m\right)= & -\gamma^{\mu}\gamma^{\nu}\partial_{\mu}\partial_{\nu}+m^{2}-2im\gamma^{\mu}\partial_{\mu}\\
+= & -\eta^{\mu\nu}\partial_{\mu}\partial_{\nu}+m^{2}-2im\gamma^{\mu}\partial_{\mu}
+\end{align*}
+
+\end_inset
+
+So ...
+ ohhh nooo ...
+ doing this naively, this does NOT square correctly.
+ It only works out if we throw in a negative mass for the thing:
+\begin_inset Formula 
+\begin{align*}
+\left(i\gamma^{\mu}\partial_{\mu}+m\right)\left(i\gamma^{\nu}\partial_{\nu}-m\right)= & -\gamma^{\mu}\gamma^{\nu}\partial_{\mu}\partial_{\nu}-m^{2}\\
+= & -\left(\square+m^{2}\right)
+\end{align*}
+
+\end_inset
+
+which can be hand-waved, mostly because the mass term is a Lorentz scalar.
+ So how does this work in the Weyl basis, where 
+\begin_inset Formula 
+\[
+\gamma^{\mu}=\left[\begin{array}{cc}
+0 & \sigma^{\mu}\\
+\overline{\sigma}^{\mu} & 0
+\end{array}\right]\qquad\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\begin{align*}
+\left(i\gamma^{\mu}\partial_{\mu}+m\right)\left(i\gamma^{\nu}\partial_{\nu}-m\right)= & -\left(\square+m^{2}\right)\\
+= & \left(i\gamma^{\mu}\partial_{\mu}+m\right)\beta\beta\left(i\gamma^{\nu}\partial_{\nu}-m\right)\\
+= & \left(i\gamma^{\mu}\beta\partial_{\mu}+m\beta\right)\left(i\beta\gamma^{\nu}\partial_{\nu}-\beta m\right)\\
+= & \left(i\left[\begin{array}{cc}
+0 & \sigma^{\mu}\\
+\overline{\sigma}^{\mu} & 0
+\end{array}\right]\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]\partial_{\mu}+\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)\left(i\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]\left[\begin{array}{cc}
+0 & \sigma^{\mu}\\
+\overline{\sigma}^{\mu} & 0
+\end{array}\right]\partial_{\mu}-\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)\\
+= & \left(i\left[\begin{array}{cc}
+\sigma^{\mu} & 0\\
+0 & \overline{\sigma}^{\mu}
+\end{array}\right]\partial_{\mu}+\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)\left(i\left[\begin{array}{cc}
+\overline{\sigma}^{\mu} & 0\\
+0 & \sigma^{\mu}
+\end{array}\right]\partial_{\mu}-\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)
+\end{align*}
+
+\end_inset
+
+So even in the Weyl rep, this does not split cleanly into left and right
+ components.
+\end_layout
+
+\begin_layout Subsection
+Foutain of confusion
+\end_layout
+
+\begin_layout Standard
+The above provides a pair of linearly independent two-compoent equations.
+ They can be harnessed together in a misleading and confusing way.
+ Hree's the recipie for creating confusion.
+\end_layout
+
+\begin_layout Standard
+Start by writing
+\begin_inset Formula 
+\[
+\left(D_{L}\oplus D_{R}\right)\left(\psi_{L}\oplus\psi_{R}\right)=0
+\]
+
+\end_inset
+
+which is
+\begin_inset Formula 
+\[
+D_{L}\oplus D_{R}=i\left[\begin{array}{cc}
+I & 0\\
+0 & I
+\end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
+-\sigma^{i} & 0\\
+0 & \sigma^{i}
+\end{array}\right]\nabla_{i}+\eta m\left[\begin{array}{cc}
+\epsilon K & 0\\
+0 & \epsilon K
+\end{array}\right]
+\]
+
+\end_inset
+
+Multiply on the left by (this is minus the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ in the chiral rep of Itzykson & Zuber)
+\begin_inset Formula 
+\[
+\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+to get the gamma matrices in the chiral rep.
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus D_{R}\right)=i\beta\partial_{t}+i\left[\begin{array}{cc}
+0 & \sigma^{i}\\
+-\sigma^{i} & 0
+\end{array}\right]\nabla_{i}+\eta m\left[\begin{array}{cc}
+0 & \epsilon K\\
+\epsilon K & 0
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+\eta m\left[\begin{array}{cc}
+0 & \epsilon K\\
+\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\begin{array}{c}
+\psi_{L}\\
+\psi_{R}
+\end{array}\right)+\eta m\left(\begin{array}{c}
+\epsilon\psi_{R}^{*}\\
+\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+The above describes a pair of linearly indepent fields 
+\begin_inset Formula $\psi_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{R}$
+\end_inset
+
+ which are completely uncoupled from each other.
+ The choice of matrices makes them look coupled, but they are not.
+\end_layout
+
+\begin_layout Standard
+By comparison, the Dirac eqn is 
+\begin_inset Formula $0=\left(i\gamma^{\mu}\partial_{\mu}-m\right)\psi$
+\end_inset
+
+.
+ The gamma matrices in the Weyl rep are
+\begin_inset Formula 
+\[
+\gamma^{\mu}=\left[\begin{array}{cc}
+0 & \sigma^{\mu}\\
+\overline{\sigma}^{\mu} & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+In other words,
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\begin{array}{c}
+\psi_{L}\\
+\psi_{R}
+\end{array}\right)-m\left(\begin{array}{c}
+\psi_{L}\\
+\psi_{R}
+\end{array}\right)
+\]
+
+\end_inset
+
+so here is the confusion: Visually comparing these, we want 
+\begin_inset Formula $\psi_{L}=-\eta\epsilon\psi_{R}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{R}=-\eta\epsilon\psi_{L}^{*}$
+\end_inset
+
+ However there's a problem:
+\begin_inset Formula 
+\begin{align*}
+\psi_{L} & =-\eta\epsilon\psi_{R}^{*}\\
+\psi_{L}^{*} & =-\eta^{*}\epsilon\psi_{R}\\
+\eta\psi_{L}^{*} & =-\epsilon\psi_{R}\\
+\epsilon\eta\psi_{L}^{*} & =\psi_{R}
+\end{align*}
+
+\end_inset
+
+So the sign is coming out wrong on the bottom.
+ The answer is that the two Weyl eqns for left and right are linearly independen
+t, completely uncoupled.
+ The Dirac eqn is coupled.
+ They are not comparable.
+\end_layout
+
+\begin_layout Standard
+Anyway, writing (this is minus the chiral rep 
+\begin_inset Formula $\gamma^{5}$
+\end_inset
+
+ of Itzykson & Zuber)
+\begin_inset Formula 
+\[
+C=\left[\begin{array}{cc}
+-i\sigma^{2} & 0\\
+0 & i\sigma^{2}
+\end{array}\right]=\left[\begin{array}{cc}
+-\epsilon & 0\\
+0 & \epsilon
+\end{array}\right]\qquad\gamma^{5}=\left[\begin{array}{cc}
+-1 & 0\\
+0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+and the charge-conjugate spinor as
+\begin_inset Formula 
+\[
+\psi_{c}=\left(\begin{array}{c}
+\psi_{L}^{c}\\
+\psi_{R}^{c}
+\end{array}\right)=C\overline{\psi}^{T}=C\beta\psi^{*}=\left[\begin{array}{cc}
+0 & -\epsilon\\
+\epsilon & 0
+\end{array}\right]\psi^{*}=\left(\begin{array}{c}
+-\epsilon\psi_{R}^{*}\\
+\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+The above has some extra minus signs compared to Aste eqn 108, 110, 111,
+ 112 but this makes no material differences.
+\end_layout
+
+\begin_layout Standard
+The final four-component eqn is
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\gamma^{5}\psi_{c}
+\]
+
+\end_inset
+
+Looks weird.
+ This was supposed to be
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}
+\]
+
+\end_inset
+
+This seems either paradoxial or its hiding a sign error.
+ Answer: its not a sign error, its a clever trick that sows confusion.
+ The first eqn is a pair of linearly independent eqns written in a tangled
+ form.
+ The second is the four-component Majorana eqn, which is 
+\emph on
+not
+\emph default
+ a pair of independent equations, but are coupled.
+\end_layout
+
+\begin_layout Standard
+Some notes: Here's what I got, vs.
+ Aste:
+\end_layout
+
+\begin_layout Itemize
+We agree up to eqn 67.
+\end_layout
+
+\begin_layout Itemize
+Aste 
+\begin_inset Quotes eld
+\end_inset
+
+chooses
+\begin_inset Quotes erd
+\end_inset
+
+ a sign for eqn 69 that corresponds to my 
+\begin_inset Formula $\zeta=-\eta$
+\end_inset
+
+.
+ This is a misprepresentation; he should have said that he is coupling the
+ eqqns together.
+ This 
+\begin_inset Quotes eld
+\end_inset
+
+choice
+\begin_inset Quotes erd
+\end_inset
+
+ couples them together.
+\end_layout
+
+\begin_layout Itemize
+Aste eqn 73 does NOT follow from eqn 71 – For 73, he flips the mass term
+ back to 
+\begin_inset Formula $\zeta=+\eta$
+\end_inset
+
+ for this one time only.
+\end_layout
+
+\begin_layout Itemize
+Then of course he gets the Klein–Gordon 74 to work out.
+\end_layout
+
+\begin_layout Itemize
+However, the 
+\begin_inset Quotes eld
+\end_inset
+
+sign choice
+\begin_inset Quotes erd
+\end_inset
+
+ is needed to get 
+\begin_inset Formula $0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}$
+\end_inset
+
+ in eqn.
+ 118-123
+\end_layout
+
+\begin_layout Standard
+Next section: lets restate clearly what is happening.
+\end_layout
+
+\begin_layout Subsection
+Four-component Majorana
+\end_layout
+
+\begin_layout Standard
+So where is the error? Here's the deal.
+ Start with 
+\begin_inset Formula $D_{L}\psi_{L}=0$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+Define 
+\begin_inset Formula 
+\[
+\chi_{R}=\eta\epsilon\psi_{L}^{*}
+\]
+
+\end_inset
+
+Well, what's the equations for that? Claim it is
+\begin_inset Formula 
+\[
+\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}=0
+\]
+
+\end_inset
+
+which is distinct from
+\begin_inset Formula 
+\[
+D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $D_{R}\psi_{R}=0$
+\end_inset
+
+.
+ Let's check
+\begin_inset Formula 
+\begin{align*}
+\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}= & i\sigma^{\mu}\partial_{\mu}\chi_{R}-\zeta m\epsilon\chi_{R}^{*}\\
+= & i\sigma^{\mu}\partial_{\mu}\eta\epsilon\psi_{L}^{*}+\zeta\eta m\psi_{L}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon^{2}=-1$
+\end_inset
+
+ was used.
+ Take the complex conjugate
+\begin_inset Formula 
+\begin{align*}
+\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & -i\sigma^{*\mu}\partial_{\mu}\eta^{*}\epsilon\psi_{L}+\zeta^{*}\eta^{*}m\psi_{L}^{*}\\
+= & \eta^{*}\left(-i\sigma^{*\mu}\partial_{\mu}\epsilon\psi_{L}+\zeta^{*}m\psi_{L}^{*}\right)
+\end{align*}
+
+\end_inset
+
+ so multiply by 
+\begin_inset Formula $\eta\epsilon$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{align*}
+\eta\epsilon\left[\left(i\sigma^{\mu}\partial_{\mu}-\zeta m\epsilon K\right)\chi_{R}\right]^{*}= & -i\epsilon\sigma^{*\mu}\epsilon\partial_{\mu}\psi_{L}+\zeta^{*}m\epsilon\psi_{L}^{*}\\
+= & i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}+\zeta^{*}m\epsilon\psi_{L}^{*}\\
+= & i\overline{\sigma}^{\mu}\partial_{\mu}\psi_{L}+\eta m\epsilon\psi_{L}^{*}
+\end{align*}
+
+\end_inset
+
+Where above used 
+\begin_inset Formula $\epsilon\sigma^{*\mu}\epsilon=-\overline{\sigma}^{\mu}$
+\end_inset
+
+ and also that 
+\begin_inset Formula $\zeta^{*}=\eta$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\left(i\sigma^{\mu}\partial_{\mu}-\eta^{*}m\epsilon K\right)\chi_{R}=0
+\]
+
+\end_inset
+
+Write 
+\begin_inset Formula 
+\[
+\delta_{R}=i\sigma^{\mu}\partial_{\mu}-\eta^{*}m\epsilon K
+\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula $D_{L}\psi_{L}=\eta\epsilon\left(\delta_{R}\chi_{R}\right)^{*}$
+\end_inset
+
+ The four-component Majorana is now
+\begin_inset Formula 
+\[
+\left(D_{L}\oplus\delta_{R}\right)\left(\psi_{L}\oplus\chi_{R}\right)=0
+\]
+
+\end_inset
+
+which is
+\begin_inset Formula 
+\[
+D_{L}\oplus\delta_{R}=i\left[\begin{array}{cc}
+I & 0\\
+0 & I
+\end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
+-\sigma^{i} & 0\\
+0 & \sigma^{i}
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+\eta\epsilon K & 0\\
+0 & -\eta^{*}\epsilon K
+\end{array}\right]
+\]
+
+\end_inset
+
+Multiply on the left by (this is minus the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ in the chiral rep of Itzykson & Zuber)
+\begin_inset Formula 
+\[
+\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+to get the gamma matrices in the chiral rep.
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus\delta_{R}\right)=i\beta\partial_{t}+i\left[\begin{array}{cc}
+0 & \sigma^{i}\\
+-\sigma^{i} & 0
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+0 & -\eta^{*}\epsilon K\\
+\eta\epsilon K & 0
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+m\left[\begin{array}{cc}
+0 & -\eta^{*}\epsilon K\\
+\eta\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\begin{array}{c}
+\psi_{L}\\
+\chi_{R}
+\end{array}\right)+m\left(\begin{array}{c}
+\psi_{L}\\
+\eta\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+Ta dah.
+ Paradox resolved! Wow.
+ That was brain-melting.
+ Glad that is over with.
+\end_layout
+
+\begin_layout Subsection
+Charge conjugation
+\end_layout
+
+\begin_layout Standard
+Lets see...
+ working in any rep, 
+\begin_inset Formula $\psi_{c}=C\beta\psi^{*}$
+\end_inset
+
+ so if we define the charge conjugation operator 
+\begin_inset Formula $\mathsf{C}\psi=\psi_{c}$
+\end_inset
+
+ then we write 
+\begin_inset Formula $\mathsf{C}=C\beta K$
+\end_inset
+
+ where as before 
+\begin_inset Formula $K$
+\end_inset
+
+is a reminder to take the complex conjugate.
+\end_layout
+
+\begin_layout Standard
+In any rep, we have 
+\begin_inset Formula 
+\[
+C^{2}=-I
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $C^{*}=C$
+\end_inset
+
+ and 
+\begin_inset Formula $C^{\dagger}=C^{T}=C^{-1}=-C$
+\end_inset
+
+.
+ Next,
+\begin_inset Formula 
+\[
+\gamma^{0}\gamma^{\mu}\gamma^{0}=\gamma^{\mu\dagger}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+C\gamma^{\mu}C^{-1}=-\gamma^{\mu T}
+\]
+
+\end_inset
+
+We want to have 
+\begin_inset Formula $\mathsf{C}^{2}=1$
+\end_inset
+
+ which requires that 
+\begin_inset Formula $\left(C\beta K\right)^{2}=I$
+\end_inset
+
+ ...
+ can we verify this?
+\begin_inset Formula 
+\begin{align*}
+C\beta KC\beta K= & C\beta CK\beta K\\
+= & \beta^{T}K\beta K\\
+= & \beta^{T}\beta^{*}\\
+= & \left(\beta^{\dagger}\beta\right)^{*}\\
+= & 1
+\end{align*}
+
+\end_inset
+
+because in all three reps, 
+\begin_inset Formula $\beta^{\dagger}=\beta$
+\end_inset
+
+.
+ So far so good.
+\end_layout
+
+\begin_layout Standard
+Next compute
+\begin_inset Formula 
+\begin{align*}
+\mathsf{C}\gamma^{\mu}\mathsf{C}= & C\beta K\gamma^{\mu}C\beta K\\
+= & C\beta\gamma^{\mu*}C^{*}\beta^{*}\\
+= & C\beta C^{-1}C\gamma^{\mu*}C^{*}\beta^{*}\\
+= & -\beta^{T}C\gamma^{\mu*}C\beta^{*}\\
+= & \beta^{T}C\gamma^{\mu*}C^{-1}\beta^{*}\\
+= & -\beta^{T}\gamma^{\mu\dagger}\beta^{*}\\
+= & -\beta^{*}\gamma^{\mu\dagger}\beta^{*}\\
+= & -\beta\gamma^{\mu\dagger}\beta\\
+= & -\gamma^{\mu}
+\end{align*}
+
+\end_inset
+
+There is also an alternate proof of this.
+ In https://en.wikipedia.org/w/index.php?title=Majorana_equation&oldid=991932097
+ except that there is a false error with C* at second step from the end.
+\end_layout
+
+\begin_layout Subsection
+Conjugate eqn
+\end_layout
+
+\begin_layout Standard
+Lets assume that this holds: 
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}
+\]
+
+\end_inset
+
+Then by above,
+\begin_inset Formula 
+\begin{align*}
+0= & \mathsf{C}i\gamma^{\mu}\partial_{\mu}\mathsf{CC}\psi+\mathsf{C}\eta m\psi_{c}\\
+= & i\gamma^{\mu}\partial_{\mu}\psi_{c}+\eta^{*}m\psi
+\end{align*}
+
+\end_inset
+
+Lets subtract these.
+ 
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi-\psi_{c}\right)+m\left(\eta\psi_{c}-\eta^{*}\psi\right)
+\]
+
+\end_inset
+
+so if 
+\begin_inset Formula $\psi=\psi_{c}$
+\end_inset
+
+ then this makes sense only if 
+\begin_inset Formula $\eta=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Lets add these.
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi+\psi_{c}\right)+m\left(\eta\psi_{c}+\eta^{*}\psi\right)
+\]
+
+\end_inset
+
+so if 
+\begin_inset Formula $\psi=-\psi_{c}$
+\end_inset
+
+ then this makes sense only if 
+\begin_inset Formula $\eta=1$
+\end_inset
+
+.
+ ...
+ So this doesn't have the flaws of the original WP article.
+ But is it consistent with other publications?
+\end_layout
+
+\begin_layout Subsection
+Plane wave solutions
+\end_layout
+
+\begin_layout Standard
+So per usual.
+ Write 
+\begin_inset Formula 
+\[
+\psi\left(x\right)=\chi e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $x^{\mu}=\left(t,\vec{k}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+i\partial_{\mu}e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}=i\left(\partial_{t},\vec{\nabla}\right)e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}=i\left(i\omega,-i\vec{k}\right)e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}=\left(-\omega,\vec{k}\right)e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Thus
+\begin_inset Formula 
+\begin{align*}
+D_{R}\psi_{R}= & \left(i\sigma^{\mu}\partial_{\mu}\pm m\epsilon K\right)\psi_{R}\\
+= & \left(i\partial_{t}+i\vec{\sigma}\cdot\vec{\nabla}\pm m\epsilon K\right)\psi_{R}\\
+= & \left(-\omega I+\vec{\sigma}\cdot\vec{k}\right)\chi_{R}e^{i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}\mp m\epsilon\chi_{R}^{*}e^{-i\left(\omega t-\mathbf{k}\cdot\mathbf{r}\right)}
+\end{align*}
+
+\end_inset
+
+which is WTF infuriating due to the sign flip on the mass term.
+ Solving this directly is impractical; seems easier to boost the stationary
+ solutions.
+\end_layout
+
+\begin_layout Section
+Useful references
+\end_layout
+
+\begin_layout Standard
+Misc papers
+\end_layout
+
+\begin_layout Itemize
+This is excellent for gamma matricies: Petitjean, Michel (2020).
+ "Chirality of Dirac spinors revisited".
+ Symmetry.
+ 12 (4): 616.
+ doi:10.3390/sym12040616.
+\end_layout
+
+\end_body
+\end_document
