@@ -6555,6 +6555,122 @@ Why is this Majorana, and not Dirac? Well, for starters, not enough components:
 \end_layout
 
 \begin_layout Subsection
+Dirac equation
+\end_layout
+
+\begin_layout Standard
+Since the next section gets into trouble, lets review the Dirac eqn.
+ It is 
+\begin_inset Formula 
+\[
+0=\left(i\gamma^{\mu}\partial_{\mu}-m\right)\psi
+\]
+
+\end_inset
+
+Folowing Itzykson & Zuber, under Lorentz 
+\begin_inset Formula $x\mapsto x^{\prime}=\Lambda x$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\psi\left(x\right)\mapsto\psi^{\prime}\left(x^{\prime}\right)=S\psi\left(x\right)
+\]
+
+\end_inset
+
+and Dirac transforms as
+\begin_inset Formula 
+\[
+i\gamma^{\mu}\partial_{\mu}-m\mapsto\left(i\gamma^{\mu}\partial_{\mu}^{\prime}-m\right)=S\left(i\gamma^{\mu}\partial_{\mu}-m\right)S^{-1}
+\]
+
+\end_inset
+
+and so we conclude that this can be directly squared.
+\begin_inset Formula 
+\begin{align*}
+\left(i\gamma^{\mu}\partial_{\mu}-m\right)\left(i\gamma^{\nu}\partial_{\nu}-m\right)= & -\gamma^{\mu}\gamma^{\nu}\partial_{\mu}\partial_{\nu}+m^{2}-2im\gamma^{\mu}\partial_{\mu}\\
+= & -\eta^{\mu\nu}\partial_{\mu}\partial_{\nu}+m^{2}-2im\gamma^{\mu}\partial_{\mu}
+\end{align*}
+
+\end_inset
+
+So ...
+ ohhh nooo ...
+ doing this naively, this does NOT square correctly.
+ It only works out if we throw in a negative mass for the thing:
+\begin_inset Formula 
+\begin{align*}
+\left(i\gamma^{\mu}\partial_{\mu}+m\right)\left(i\gamma^{\nu}\partial_{\nu}-m\right)= & -\gamma^{\mu}\gamma^{\nu}\partial_{\mu}\partial_{\nu}-m^{2}\\
+= & -\left(\square+m^{2}\right)
+\end{align*}
+
+\end_inset
+
+which can be hand-waved, mostly because the mass term is a Lorentz scalar.
+ So how does this work in the Weyl basis, where 
+\begin_inset Formula 
+\[
+\gamma^{\mu}=\left[\begin{array}{cc}
+0 & \sigma^{\mu}\\
+\overline{\sigma}^{\mu} & 0
+\end{array}\right]\qquad\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\begin{align*}
+\left(i\gamma^{\mu}\partial_{\mu}+m\right)\left(i\gamma^{\nu}\partial_{\nu}-m\right)= & -\left(\square+m^{2}\right)\\
+= & \left(i\gamma^{\mu}\partial_{\mu}+m\right)\beta\beta\left(i\gamma^{\nu}\partial_{\nu}-m\right)\\
+= & \left(i\gamma^{\mu}\beta\partial_{\mu}+m\beta\right)\left(i\beta\gamma^{\nu}\partial_{\nu}-\beta m\right)\\
+= & \left(i\left[\begin{array}{cc}
+0 & \sigma^{\mu}\\
+\overline{\sigma}^{\mu} & 0
+\end{array}\right]\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]\partial_{\mu}+\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)\left(i\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]\left[\begin{array}{cc}
+0 & \sigma^{\mu}\\
+\overline{\sigma}^{\mu} & 0
+\end{array}\right]\partial_{\mu}-\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)\\
+= & \left(i\left[\begin{array}{cc}
+\sigma^{\mu} & 0\\
+0 & \overline{\sigma}^{\mu}
+\end{array}\right]\partial_{\mu}+\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)\left(i\left[\begin{array}{cc}
+\overline{\sigma}^{\mu} & 0\\
+0 & \sigma^{\mu}
+\end{array}\right]\partial_{\mu}-\left[\begin{array}{cc}
+0 & m\\
+m & 0
+\end{array}\right]\right)
+\end{align*}
+
+\end_inset
+
+So even in the Weyl rep, this does not split cleanly into left and right
+ components.
+\end_layout
+
+\begin_layout Subsection
 Four-component Majorana
 \end_layout
 
@@ -6631,6 +6747,19 @@ Then
 
 \end_inset
 
+The above describes a pair of linearly indepent fields 
+\begin_inset Formula $\psi_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{R}$
+\end_inset
+
+ which are completely uncoupled from each other.
+ The choice of matrices makes them look coupled, but they are not.
+\end_layout
+
+\begin_layout Standard
 By comparison, the Dirac eqn is 
 \begin_inset Formula $0=\left(i\gamma^{\mu}\partial_{\mu}-m\right)\psi$
 \end_inset
@@ -6683,7 +6812,40 @@ so here is the confusion: Visually comparing these, we want
 So the sign is coming out wrong on the bottom.
  So this is wtf in yet another way.
  I must be missing something obvious....
- or a dropped sign somewhere...
+\end_layout
+
+\begin_layout Standard
+Thought pattern:
+\end_layout
+
+\begin_layout Itemize
+The two Weyl eqns for left and right are linearly independent, completely
+ uncoupled.
+\end_layout
+
+\begin_layout Itemize
+We can throw in a coupling by throwing in an extra minus sign.
+ (??? really ???)
+\end_layout
+
+\begin_layout Itemize
+But then squaring doesn't give the Klien Gordon
+\end_layout
+
+\begin_layout Itemize
+Except that squaring Dirac does give Klein-Gordon (What does it mean 
+\begin_inset Quotes eld
+\end_inset
+
+to square
+\begin_inset Quotes erd
+\end_inset
+
+? There are minus signs floating in there as well...)
+\end_layout
+
+\begin_layout Itemize
+So there must be an inconsistency, but where?
 \end_layout
 
 \begin_layout Standard
@@ -6795,19 +6957,16 @@ Then of course he gets the Klein–Gordon 74 to work out.
 \end_layout
 
 \begin_layout Itemize
-But then he reversts to the 
-\begin_inset Quotes eld
-\end_inset
+Conclude, his sign-choice for eqn 69 and 71 was wrong...
+\end_layout
 
-wrong
-\begin_inset Quotes erd
-\end_inset
-
- sign, which allows him to conclude 
+\begin_layout Itemize
+However, that bad sign choice is needed to get 
 \begin_inset Formula $0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}$
 \end_inset
 
-
+ in eqn.
+ 118-123 so wtf.
 \end_layout
 
 \begin_layout Subsection
@@ -6916,6 +7075,8 @@ Next compute
 \end_inset
 
 There is also an alternate proof of this.
+ In https://en.wikipedia.org/w/index.php?title=Majorana_equation&oldid=991932097
+ except that there is a false error with C* at second step from the end.
 \end_layout
 
 \begin_layout Subsection
