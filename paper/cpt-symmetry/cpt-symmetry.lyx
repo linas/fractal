@@ -2907,14 +2907,45 @@ Well, OK, so in this basis,
 .
 \end_layout
 
+\begin_layout Standard
+Since 
+\begin_inset Formula $\mathsf{C}\psi=\psi_{c}$
+\end_inset
+
+ then comparing to above, conclude that 
+\begin_inset Formula $\eta=\eta_{c}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\mathsf{C}=-\eta\gamma^{0}CK=\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+and that
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus\delta_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Charge conjugation
+Charge conjugation part two
 \end_layout
 
 \begin_layout Standard
 Lets see...
  working in any rep, 
-\begin_inset Formula $\psi_{c}=C\beta\psi^{*}$
+\begin_inset Formula $\psi_{c}=-\eta\beta C\psi^{*}$
 \end_inset
 
  so if we define the charge conjugation operator 
@@ -2922,7 +2953,7 @@ Lets see...
 \end_inset
 
  then we write 
-\begin_inset Formula $\mathsf{C}=C\beta K$
+\begin_inset Formula $\mathsf{C}=-\eta\beta CK$
 \end_inset
 
  where as before 
@@ -2971,17 +3002,16 @@ We want to have
 \end_inset
 
  which requires that 
-\begin_inset Formula $\left(C\beta K\right)^{2}=I$
+\begin_inset Formula $\left(\eta\beta CK\right)^{2}=I$
 \end_inset
 
  ...
  can we verify this?
 \begin_inset Formula 
 \begin{align*}
-C\beta KC\beta K= & C\beta CK\beta K\\
-= & \beta^{T}K\beta K\\
-= & \beta^{T}\beta^{*}\\
-= & \left(\beta^{\dagger}\beta\right)^{*}\\
+\eta\beta CK\eta\beta CK= & \beta CK\beta CK\\
+= & \beta C\beta^{*}C\\
+= & \beta\beta^{\dagger}\\
 = & 1
 \end{align*}
 
@@ -2999,13 +3029,10 @@ because in all three reps,
 Next compute
 \begin_inset Formula 
 \begin{align*}
-\mathsf{C}\gamma^{\mu}\mathsf{C}= & C\beta K\gamma^{\mu}C\beta K\\
-= & C\beta\gamma^{\mu*}C^{*}\beta^{*}\\
-= & C\beta C^{-1}C\gamma^{\mu*}C^{*}\beta^{*}\\
-= & -\beta^{T}C\gamma^{\mu*}C\beta^{*}\\
-= & \beta^{T}C\gamma^{\mu*}C^{-1}\beta^{*}\\
-= & -\beta^{T}\gamma^{\mu\dagger}\beta^{*}\\
-= & -\beta^{*}\gamma^{\mu\dagger}\beta^{*}\\
+\mathsf{C}\gamma^{\mu}\mathsf{C}= & \eta\beta CK\gamma^{\mu}\eta\beta CK\\
+= & \beta C\gamma^{\mu*}\beta^{*}C^{*}\\
+= & \beta C\gamma^{\mu*}C^{-1}C\beta^{*}C\\
+= & -\beta\gamma^{\mu\dagger}\beta^{\dagger}\\
 = & -\beta\gamma^{\mu\dagger}\beta\\
 = & -\gamma^{\mu}
 \end{align*}
@@ -3023,7 +3050,7 @@ Conjugate eqn
 Lets assume that this holds: 
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\psi+\eta m\psi_{c}
+0=i\gamma^{\mu}\partial_{\mu}\psi+\zeta m\psi_{c}
 \]
 
 \end_inset
@@ -3031,8 +3058,8 @@ Lets assume that this holds:
 Then by above,
 \begin_inset Formula 
 \begin{align*}
-0= & \mathsf{C}i\gamma^{\mu}\partial_{\mu}\mathsf{CC}\psi+\mathsf{C}\eta m\psi_{c}\\
-= & i\gamma^{\mu}\partial_{\mu}\psi_{c}+\eta^{*}m\psi
+0= & \mathsf{C}i\gamma^{\mu}\partial_{\mu}\mathsf{CC}\psi+\mathsf{C}\zeta m\psi_{c}\\
+= & i\gamma^{\mu}\partial_{\mu}\psi_{c}+\zeta^{*}m\psi
 \end{align*}
 
 \end_inset
@@ -3041,7 +3068,7 @@ Lets subtract these.
  
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\left(\psi-\psi_{c}\right)+m\left(\eta\psi_{c}-\eta^{*}\psi\right)
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi-\psi_{c}\right)+m\left(\zeta\psi_{c}-\zeta^{*}\psi\right)
 \]
 
 \end_inset
@@ -3051,7 +3078,7 @@ so if
 \end_inset
 
  then this makes sense only if 
-\begin_inset Formula $\eta=1$
+\begin_inset Formula $\zeta=1$
 \end_inset
 
 .
@@ -3061,7 +3088,7 @@ so if
 Lets add these.
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\left(\psi+\psi_{c}\right)+m\left(\eta\psi_{c}+\eta^{*}\psi\right)
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi+\psi_{c}\right)+m\left(\zeta\psi_{c}+\zeta^{*}\psi\right)
 \]
 
 \end_inset
@@ -3071,13 +3098,273 @@ so if
 \end_inset
 
  then this makes sense only if 
-\begin_inset Formula $\eta=1$
+\begin_inset Formula $\zeta=1$
 \end_inset
 
 .
- ...
- So this doesn't have the flaws of the original WP article.
- But is it consistent with other publications?
+ This resolves the erlier fatal flaw in the original Wikipedia article.
+\end_layout
+
+\begin_layout Subsection
+Charge conjugation part three - ELKO part one
+\end_layout
+
+\begin_layout Standard
+So lets review solutions.
+ The majorana eqn is now
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)\psi=0
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus\delta_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\mathsf{C}=-\eta\gamma^{0}CK=\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+So ...
+ eigenstates.
+\begin_inset Formula 
+\[
+\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]\left(\begin{array}{c}
+\psi_{L}\\
+-\eta\epsilon\psi_{L}^{*}
+\end{array}\right)=\left(\begin{array}{c}
+\psi_{L}\\
+-\eta\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]\left(\begin{array}{c}
+\psi_{L}\\
+\eta\epsilon\psi_{L}^{*}
+\end{array}\right)=-\left(\begin{array}{c}
+\psi_{L}\\
+\eta\epsilon\psi_{L}^{*}
+\end{array}\right)
+\]
+
+\end_inset
+
+What about the right-handed?
+\end_layout
+
+\begin_layout Subsection
+Right handed variant
+\end_layout
+
+\begin_layout Standard
+Start with 
+\begin_inset Formula $D_{R}\psi_{R}=0$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+D_{R}=i\sigma^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+Write 
+\begin_inset Formula 
+\[
+\delta_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}-\eta m\epsilon K
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\chi_{L}=-\eta\epsilon\psi_{R}^{*}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $D_{R}\psi_{R}=-\eta\epsilon\left(\delta_{L}\chi_{L}\right)^{*}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\delta_{L}\chi_{L}=0$
+\end_inset
+
+ holds.
+ The four-component Majorana is now
+\begin_inset Formula 
+\[
+\left(\delta_{L}\oplus D_{R}\right)\left(\chi_{L}\oplus\psi_{R}\right)=0
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $L$
+\end_inset
+
+ always comes first, so that we use a consistent rep for the gamma matrices.
+ Everything is as before, except the mass term flips:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta\left(\delta_{L}\oplus D_{R}\right)=i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}
+\]
+
+\end_inset
+
+That's OK, because 
+\begin_inset Formula $\mathsf{C}\left(\chi_{L}\oplus\psi_{R}\right)=-\left(\chi_{L}\oplus\psi_{R}\right)$
+\end_inset
+
+ so it works out to the Dirac eqn.
+\end_layout
+
+\begin_layout Subsection
+Klein–Gordon redux
+\end_layout
+
+\begin_layout Standard
+Lets articulate Klein–Gordon for the four-spinor variation.
+ Just as before, 
+\begin_inset Formula $\delta_{L}\delta_{R}=-\left(\square+m^{2}\right)$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\left(D_{R}\oplus\delta_{L}\right)\left(D_{L}\oplus\delta_{R}\right)=-\left(\square+m^{2}\right)
+\]
+
+\end_inset
+
+But what about
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus\delta_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+So
+\begin_inset Formula 
+\[
+\beta\beta\left(D_{R}\oplus\delta_{L}\right)\beta\beta\left(D_{L}\oplus\delta_{R}\right)=\beta\left(\delta_{L}\oplus D_{R}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)
+\]
+
+\end_inset
+
+So lets write this out explicitly.
+\begin_inset Formula 
+\[
+\delta_{L}\oplus D_{R}=\left[\begin{array}{cc}
+\delta_{L} & 0\\
+0 & D_{R}
+\end{array}\right]=i\left[\begin{array}{cc}
+I & 0\\
+0 & I
+\end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
+-\sigma^{i} & 0\\
+0 & \sigma^{i}
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+-\eta\epsilon K & 0\\
+0 & +\eta\epsilon K
+\end{array}\right]
+\]
+
+\end_inset
+
+So in the chiral rep,
+\begin_inset Formula 
+\[
+\beta\left(\delta_{L}\oplus D_{R}\right)=\left[\begin{array}{cc}
+0 & D_{R}\\
+\delta_{L} & 0
+\end{array}\right]=i\beta\partial_{t}+i\left[\begin{array}{cc}
+0 & \sigma^{i}\\
+-\sigma^{i} & 0
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+0 & +\eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula 
+\begin{align*}
+\left(D_{R}\oplus\delta_{L}\right)\left(D_{L}\oplus\delta_{R}\right)= & -\left(\square+m^{2}\right)\\
+= & \left(i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)
+\end{align*}
+
+\end_inset
+
+So as before.
+ But we can also directly verify:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)=-\square-m^{2}-im\partial_{\mu}\left(\mathsf{C}\gamma^{\mu}+\gamma^{\mu}\mathsf{C}\right)
+\]
+
+\end_inset
+
+where we used 
+\begin_inset Formula $\mathsf{C}i=-i\mathsf{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathsf{C}\gamma^{\mu}=-\gamma^{\mu}\mathsf{C}$
+\end_inset
+
+.
+ OK, bravo.
 \end_layout
 
 \begin_layout Subsection
