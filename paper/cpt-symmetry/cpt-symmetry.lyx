@@ -3651,6 +3651,10 @@ so its diagonal, but the eigenvalues are imaginary.
  Try again...
 \end_layout
 
+\begin_layout Subsubsection
+Back to the drawing board
+\end_layout
+
 \begin_layout Standard
 Brute force.
  So 
@@ -3678,7 +3682,7 @@ These are both solutions of Majorana.
 
 \end_inset
 
- Both obey 
+Both obey 
 \begin_inset Formula $\mathsf{C}\nu_{L}^{\pm}=\nu_{L}^{\pm}$
 \end_inset
 
@@ -3695,13 +3699,32 @@ These are both solutions of Majorana.
 
 \end_inset
 
-and so these are four distinct electrically uncharged solutions to Majorana.
- Hang on, this can't be right, because Majorana has only two, not four solutions.
- So this is confusing.
+and so these are four distinct solutions to Majorana.
+ And they are also four distinct solutions to the Dirac eqn.
+ Hang on, that can't quite be right; two must be linear combos of the other
+ two.
+\end_layout
+
+\begin_layout Subsubsection
+Again, back to the drawing board
 \end_layout
 
 \begin_layout Standard
-We now want to couple them to 
+OK.
+ So there are four solutions to the Majorana eqn, these are 
+\begin_inset Formula $\psi_{L,R}^{\left(\pm\right)}$
+\end_inset
+
+ but only two are solutions to the Dirac eqn: 
+\begin_inset Formula $\psi_{L}^{\left(+\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{R}^{\left(-\right)}$
+\end_inset
+
+.
+ We now want to couple them to 
 \begin_inset Formula $U(1)$
 \end_inset
 
@@ -3725,24 +3748,60 @@ such that
 \end_layout
 
 \begin_layout Standard
-So uhhh ....
- The uhhh, 
-\begin_inset Formula $\psi^{\left(-\right)}$
+So 
+\begin_inset Formula 
+\[
+u^{\pm}=\psi_{L}^{\left(+\right)}\pm i\psi_{R}^{\left(-\right)}
+\]
+
 \end_inset
 
- spinors are the Dirac spinors, since charge conjugation bounces them over
- to thier negative-mass variants.
- But these are 
-\emph on
-not
-\emph default
- solutions to Majorana, unless we multiply by 
-\begin_inset Formula $i$
+fits the bill.
+ It solves
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}-m\right)u^{\pm}=0
+\]
+
 \end_inset
 
- in which case, uhhh they become uncharged.
- wtf.
- 
+Meanwhile 
+\begin_inset Formula 
+\[
+v^{\pm}=\psi_{L}^{\left(-\right)}\pm i\psi_{R}^{\left(+\right)}
+\]
+
+\end_inset
+
+solves
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}+m\right)v^{\pm}=0
+\]
+
+\end_inset
+
+Under charge conjugation, we get that 
+\begin_inset Formula $\mathsf{C}u_{L}^{\pm}=u_{L}^{\pm}$
+\end_inset
+
+ while 
+\begin_inset Formula $\mathsf{C}v_{L}^{\pm}=-v_{L}^{\pm}$
+\end_inset
+
+.
+ So, uhh...
+ bad notation.
+\end_layout
+
+\begin_layout Standard
+This will remain confusing until ALL four solutions to Majorana eqn are
+ written out, as plane waves.
+ Perhaps then it will be clear how to recombine them with a 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ coupling so that they solve Dirac ...
 \end_layout
 
 \begin_layout Subsection
