@@ -2318,11 +2318,11 @@ So even in the Weyl rep, this does not split cleanly into left and right
 \end_layout
 
 \begin_layout Subsection
-Foutain of confusion
+Fountain of Confusion
 \end_layout
 
 \begin_layout Standard
-The above provides a pair of linearly independent two-compoent equations.
+The above provides a pair of linearly independent two-component equations.
  They can be harnessed together in a misleading and confusing way.
  Here's the recipie for creating confusion.
 \end_layout
@@ -3384,11 +3384,12 @@ where we used
 \end_layout
 
 \begin_layout Subsection
-Charge conjugatiion part four
+Ball of Confusion
 \end_layout
 
 \begin_layout Standard
 Should be able to regain the Dirac spinor with appropriate linear combinations.
+ This section describes how NOT to do it.
  First, define 
 \begin_inset Formula 
 \[
@@ -3445,81 +3446,29 @@ Only the
 
  also solves the Majorana eqn.
  So the general solution to Majorana is 
-\begin_inset Formula $\psi^{\left(+\right)}+i\psi^{\left(-\right)}$
+\begin_inset Formula $a\psi^{\left(+\right)}+ib\psi^{\left(-\right)}$
+\end_inset
+
+ for real 
+\begin_inset Formula $a,b$
 \end_inset
 
 .
- Define 
-\begin_inset Formula 
-\[
-\psi_{1}=\frac{1}{\sqrt{2}}\left(\psi_{L}^{\left(+\right)}+\psi_{R}^{\left(+\right)}\right)
-\]
+\end_layout
 
-\end_inset
-
-and
-\begin_inset Formula 
-\[
-\psi_{2}=\frac{i}{\sqrt{2}}\left(\psi_{L}^{\left(-\right)}+\psi_{R}^{\left(-\right)}\right)
-\]
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\mathsf{C}\psi_{1}=\psi_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathsf{C}\psi_{2}=\psi_{2}$
-\end_inset
-
- so these are both electrically neutral.
- But 
-\begin_inset Formula 
-\begin{align*}
-\psi_{D}= & \frac{1}{\sqrt{2}}\left(\psi_{1}-i\psi_{2}\right)\\
-= & \frac{1}{2}\left(\psi_{L}^{\left(+\right)}+\psi_{R}^{\left(+\right)}+\psi_{L}^{\left(-\right)}+\psi_{R}^{\left(-\right)}\right)\\
-= & \frac{1}{2}\left(\left(\begin{array}{c}
-\psi_{L}\\
--\eta\epsilon\psi_{L}^{*}
-\end{array}\right)+\left(\begin{array}{c}
-\psi_{L}\\
-+\eta\epsilon\psi_{L}^{*}
-\end{array}\right)+\left(\begin{array}{c}
-+\eta\epsilon\psi_{R}^{*}\\
-\psi_{R}
-\end{array}\right)+\left(\begin{array}{c}
--\eta\epsilon\psi_{R}^{*}\\
-\psi_{R}
-\end{array}\right)\right)\\
-= & \left(\begin{array}{c}
-\psi_{L}\\
-\psi_{R}
-\end{array}\right)
-\end{align*}
-
-\end_inset
-
+\begin_layout Standard
 In the 
 \begin_inset Quotes eld
 \end_inset
 
-ball o confusion
+Fountain o Confusion
 \begin_inset Quotes erd
 \end_inset
 
- segement, we had 
+ segment, we had and that 
 \begin_inset Formula 
 \[
-\left(D_{L}\oplus D_{R}\right)\left(\psi_{L}\oplus\psi_{R}\right)=0
-\]
-
-\end_inset
-
-and that 
-\begin_inset Formula 
-\[
-\beta\left(D_{L}\oplus D_{R}\right)=i\gamma^{\mu}\partial_{\mu}-\eta m\gamma^{5}\mathsf{C}
+\beta\left(D_{L}\oplus D_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\gamma^{5}\mathsf{C}
 \]
 
 \end_inset
@@ -3527,12 +3476,273 @@ and that
 where
 \begin_inset Formula 
 \[
-\gamma^{5}\mathsf{C}=
+\gamma^{5}\mathsf{C}=-\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+\eta\epsilon K & 0
+\end{array}\right]
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Here's where the reasoning goes wrong.
+ One might hope that, quote, 
+\begin_inset Quotes eld
+\end_inset
+
+To find solutions of the Dirac eqn in terms of the Majorana fields, we are
+ looking for positive-eigenvalue eigenstates of 
+\begin_inset Formula $\gamma^{5}\mathsf{C}$
+\end_inset
+
+.
+ (The negative-eigenvalue solutions will be the anti-particles.)
+\begin_inset Quotes erd
+\end_inset
+
+ This is misleadingly confusing, since, as before, 
+\begin_inset Formula $D_{L}\oplus D_{R}$
+\end_inset
+
+ is completely linearly independent, and Dirac equation requires components
+ to be coupled.
+ Therefore,
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}-m\gamma^{5}\mathsf{C}\right)\psi=0
+\]
+
+\end_inset
+
+is NOT the Dirac eqn and could never be, no matter what linear combos of
+ Majorana that we take.
+ This is the wrong eqn to solve.
+ But lets have a go at it anyway.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\left(\gamma^{5}\mathsf{C}\right)^{2}=\left(i\gamma^{5}\mathsf{C}\right)^{2}=-1$
+\end_inset
+
+.
+ Anway, lets try it out.
+\begin_inset Formula 
+\[
+\gamma^{5}\mathsf{C}\psi_{L}^{\left(+\right)}=\gamma^{5}\psi_{L}^{\left(+\right)}=-\psi_{L}^{\left(-\right)}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\gamma^{5}\mathsf{C}\psi_{L}^{\left(-\right)}=\psi_{L}^{\left(+\right)}
+\]
+
+\end_inset
+
+and also
+\begin_inset Formula 
+\[
+\gamma^{5}\mathsf{C}\psi_{R}^{\left(+\right)}=\psi_{R}^{\left(-\right)}
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+\gamma^{5}\mathsf{C}\psi_{R}^{\left(-\right)}=-\psi_{R}^{\left(+\right)}
+\]
+
+\end_inset
+
+Be careful with the signs.
+ As a matrix eqn:
+\begin_inset Formula 
+\[
+\gamma^{5}\mathsf{C}\psi=\left[\begin{array}{cccc}
+0 & -1\\
+1 & 0\\
+ &  & 0 & 1\\
+ &  & -1 & 0
+\end{array}\right]\left[\begin{array}{c}
+\psi_{L}^{\left(+\right)}\\
+\psi_{L}^{\left(-\right)}\\
+\psi_{R}^{\left(+\right)}\\
+\psi_{R}^{\left(-\right)}
+\end{array}\right]=\left[\begin{array}{c}
+-\psi_{L}^{\left(-\right)}\\
+\psi_{L}^{\left(+\right)}\\
+\psi_{R}^{\left(-\right)}\\
+-\psi_{R}^{\left(+\right)}
+\end{array}\right]
+\]
+
+\end_inset
+
+so that is what we need to diagonalize.
+ Need to find 
+\begin_inset Formula $U$
+\end_inset
+
+ such that 
+\begin_inset Formula $U\gamma^{5}\mathsf{C}U^{-1}$
+\end_inset
+
+ is diagonal.
+ So firt of all, 
+\begin_inset Formula $U$
+\end_inset
+
+ cannot be block diagonal.
+ That means pain in the neck to just guess it.
+ Well OK, so
+\begin_inset Formula 
+\[
+U^{-1}=\frac{1}{\sqrt{2}}\left[\begin{array}{cccc}
+i & 0 & -i & 0\\
+1 & 0 & 1 & 0\\
+0 & -i & 0 & i\\
+0 & 1 & 0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+U=\frac{1}{\sqrt{2}}\left[\begin{array}{cccc}
+-i & 1 & 0 & 0\\
+0 & 0 & i & 1\\
+i & 1 & 0 & 0\\
+0 & 0 & -i & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+but this failes because 
+\begin_inset Formula 
+\[
+U\gamma^{5}\mathsf{C}U^{-1}=i\left[\begin{array}{cccc}
+1\\
+ & 1\\
+ &  & -1\\
+ &  &  & -1
+\end{array}\right]
+\]
+
+\end_inset
+
+so its diagonal, but the eigenvalues are imaginary.
+ Oh, well, but that's OK, because 
+\begin_inset Formula $\mathsf{C}$
+\end_inset
+
+ is funky.
+ So above looks exactly right, its the Dirac eqn mass term.
+ Except if fails.
+ Try again...
+\end_layout
+
+\begin_layout Standard
+Brute force.
+ So 
+\begin_inset Formula 
+\[
+\nu_{L}^{\pm}=\psi_{L}^{\left(+\right)}\pm i\psi_{L}^{\left(-\right)}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\nu_{R}^{\pm}=\psi_{R}^{\left(+\right)}\pm i\psi_{R}^{\left(-\right)}
+\]
+
+\end_inset
+
+These are both solutions of Majorana.
+ That is, 
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)\nu_{L,R}^{\pm}=0
+\]
+
+\end_inset
+
+ Both obey 
+\begin_inset Formula $\mathsf{C}\nu_{L}^{\pm}=\nu_{L}^{\pm}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathsf{C}\nu_{R}^{\pm}=\nu_{R}^{\pm}$
+\end_inset
+
+.
+ So it is true that 
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}-m\right)\nu_{L,R}^{\pm}=0
+\]
+
+\end_inset
+
+and so these are four distinct electrically uncharged solutions to Majorana.
+ Hang on, this can't be right, because Majorana has only two, not four solutions.
+ So this is confusing.
+\end_layout
+
+\begin_layout Standard
+We now want to couple them to 
+\begin_inset Formula $U(1)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We want:
+\end_layout
+
+\begin_layout Itemize
+mass eigenstates (positive or negative)
+\end_layout
+
+\begin_layout Itemize
+such that 
+\begin_inset Formula $\mathsf{C}$
+\end_inset
+
+ carries positive-mass eigenstates to negative mass eigenstates
+\end_layout
+
+\begin_layout Standard
+So uhhh ....
+ The uhhh, 
+\begin_inset Formula $\psi^{\left(-\right)}$
+\end_inset
+
+ spinors are the Dirac spinors, since charge conjugation bounces them over
+ to thier negative-mass variants.
+ But these are 
+\emph on
+not
+\emph default
+ solutions to Majorana, unless we multiply by 
+\begin_inset Formula $i$
+\end_inset
+
+ in which case, uhhh they become uncharged.
+ wtf.
+ 
 \end_layout
 
 \begin_layout Subsection
