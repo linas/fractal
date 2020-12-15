@@ -2202,6 +2202,34 @@ Why is this Majorana, and not Dirac? Well, for starters, not enough components:
 \end_layout
 
 \begin_layout Subsection
+Phase
+\end_layout
+
+\begin_layout Standard
+Note that under 
+\begin_inset Formula $\psi_{L}\mapsto\psi_{L}^{\prime}=\zeta\psi_{L}$
+\end_inset
+
+ that 
+\begin_inset Formula 
+\[
+D_{L}\mapsto D_{L}^{\prime}=\zeta D_{L}\zeta^{*}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta\zeta^{2}m\epsilon K
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula $\eta$
+\end_inset
+
+ can be scaled away with appropriate choice of 
+\begin_inset Formula $\zeta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
 Dirac equation
 \end_layout
 
@@ -2850,7 +2878,15 @@ positive gamma zero
 \begin_inset Quotes erd
 \end_inset
 
- Weyl rep, we have
+ Weyl rep, aka the 
+\begin_inset Quotes eld
+\end_inset
+
+left on top
+\begin_inset Quotes erd
+\end_inset
+
+ rep, we have
 \begin_inset Formula 
 \[
 \psi=\left(\begin{array}{c}
@@ -2947,6 +2983,14 @@ and that
 \begin_inset Formula 
 \[
 \beta\left(D_{L}\oplus\delta_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
+\]
+
+\end_inset
+
+The four-component Majorana eqn is then
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)\psi=0
 \]
 
 \end_inset
@@ -3093,7 +3137,7 @@ so if
 \begin_inset Formula $\psi=\psi_{c}$
 \end_inset
 
- then this makes sense only if 
+ then this forces 
 \begin_inset Formula $\zeta=1$
 \end_inset
 
@@ -3118,7 +3162,7 @@ so if
 \end_inset
 
 .
- This resolves the erlier fatal flaw in the original Wikipedia article.
+ This resolves the earlier fatal flaw in the original Wikipedia article.
 \end_layout
 
 \begin_layout Subsection
@@ -3234,6 +3278,11 @@ and
 \end_inset
 
  holds.
+ The algebra is exactly as before, with 
+\begin_inset Formula $\sigma^{\mu}\leftrightarrow\overline{\sigma}^{\mu}$
+\end_inset
+
+.
  The four-component Majorana is now
 \begin_inset Formula 
 \[
@@ -3263,6 +3312,330 @@ That's OK, because
 \end_inset
 
  so it works out to the Dirac eqn.
+\end_layout
+
+\begin_layout Subsection
+CPT Confusorama
+\end_layout
+
+\begin_layout Standard
+Lets double-check the symmetries.
+ From 
+\begin_inset Formula 
+\[
+\mathsf{C}\gamma^{\mu}\mathsf{C}=-\gamma^{\mu}
+\]
+
+\end_inset
+
+and from 
+\begin_inset Formula $\mathsf{C}i=-i\mathsf{C}$
+\end_inset
+
+ we conclude that 
+\begin_inset Formula 
+\begin{align*}
+\mathsf{C}\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)\mathsf{C}= & i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
+\end{align*}
+
+\end_inset
+
+And also
+\begin_inset Formula 
+\[
+\mathsf{C}\left(\beta\left(\delta_{L}\oplus D_{R}\right)\right)\mathsf{C}=\beta\left(D_{L}\oplus\delta_{R}\right)
+\]
+
+\end_inset
+
+Should work because 
+\begin_inset Formula $\epsilon\sigma^{*\mu}\epsilon=-\overline{\sigma}^{\mu}$
+\end_inset
+
+ or 
+\begin_inset Formula $\epsilon K\sigma^{\mu}\epsilon K=-\overline{\sigma}^{\mu}$
+\end_inset
+
+ or even 
+\begin_inset Formula $\eta\epsilon K\sigma^{\mu}\eta\epsilon K=-\overline{\sigma}^{\mu}$
+\end_inset
+
+ but double-checking the above does not seem to lead anywhere interesting.
+\end_layout
+
+\begin_layout Standard
+Under PT reversal, 
+\begin_inset Formula $\partial_{\mu}\mapsto-\partial_{\mu}$
+\end_inset
+
+ so ...
+ I'm confused.
+ Under 
+\begin_inset Formula $L\leftrightarrow R$
+\end_inset
+
+ which I thought was parity, the mass term flipped sign.
+ Am I double counting parity? If so, then what is 
+\begin_inset Formula $\mathsf{C}$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+Oh, hang on, under time reversal, 
+\begin_inset Formula $\psi\mapsto\psi^{\prime}=T\psi$
+\end_inset
+
+ where 
+\begin_inset Formula $T=\gamma^{stuff}$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $P$
+\end_inset
+
+ and we haven't derived from first principles what 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $T$
+\end_inset
+
+ should be for spinors...
+\end_layout
+
+\begin_layout Standard
+For Weyl spinors, 
+\begin_inset Formula 
+\[
+\mathsf{T}\psi\left(t,\vec{x}\right)=\epsilon\psi^{*}\left(-t,\vec{x}\right)
+\]
+
+\end_inset
+
+but I don't know how to derive teh above, and also
+\begin_inset Formula 
+\[
+\mathsf{P}\psi\left(t,\vec{x}\right)=i\psi\left(t,-\vec{x}\right)
+\]
+
+\end_inset
+
+and I don't know how to derive this either...
+ However, this is important, because from
+\begin_inset Formula 
+\[
+\mathsf{C}\psi^{\left(\pm\right)}=\pm\psi^{\left(\pm\right)}
+\]
+
+\end_inset
+
+we can deduce that
+\begin_inset Formula 
+\[
+\mathsf{C}i\psi^{\left(\pm\right)}=\mp i\psi^{\left(\pm\right)}
+\]
+
+\end_inset
+
+so that extra 
+\begin_inset Formula $i$
+\end_inset
+
+ flips the eigenstates of charge conjugation and so a CP-transformed field
+ is ...whtever.
+\end_layout
+
+\begin_layout Standard
+These combined are supposed to yeild
+\begin_inset Formula 
+\[
+\mathsf{CPT}\psi\left(t,\vec{x}\right)=\mp i\psi^{*}\left(-t,-\vec{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+T-Symmetry
+\end_layout
+
+\begin_layout Standard
+So generically, 
+\begin_inset Formula $\mathsf{T}^{2}=-1$
+\end_inset
+
+ for fermions (why?)
+\end_layout
+
+\begin_layout Standard
+From first principles, 
+\begin_inset Formula $\mathsf{T}\vec{x}\mathsf{T}^{-1}=\vec{x}$
+\end_inset
+
+ but since we define momentum to be a timer derivative, then must have 
+\begin_inset Formula $\mathsf{T}\vec{p}\mathsf{T}^{-1}=-\vec{p}$
+\end_inset
+
+ so canonical commutation is preserved only if 
+\begin_inset Formula $\mathsf{T}i\mathsf{T}^{-1}=-i$
+\end_inset
+
+.
+ Alternately, energy is always positive, so 
+\begin_inset Formula $\mathsf{T}E\mathsf{T}^{-1}=E$
+\end_inset
+
+ therefore 
+\begin_inset Formula $\mathsf{T}e^{-iEt}\mathsf{T}^{-1}=e^{-iEt}$
+\end_inset
+
+ is invariant.
+ Whatever.
+ This is confusing.
+\end_layout
+
+\begin_layout Standard
+The problem here is that we are calling 
+\begin_inset Formula $\mathsf{T}$
+\end_inset
+
+ an operator, without specifying what space it is acting on.
+ What we need to say instead is to just call it an involution.
+ Thus, for a product 
+\begin_inset Formula $\vec{x}f(\vec{x},t)$
+\end_inset
+
+ that
+\begin_inset Formula 
+\[
+\mathsf{T}\vec{x}f\left(\vec{x},t\right)=\vec{x}\mathsf{T}f\left(\vec{x},t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathsf{T}tf\left(\vec{x},t\right)=-t\mathsf{T}f\left(\vec{x},t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathsf{T}\frac{\partial}{\partial t}f\left(\vec{x},t\right)=-\frac{\partial}{\partial t}\mathsf{T}f\left(\vec{x},t\right)
+\]
+
+\end_inset
+
+so that, as long as 
+\begin_inset Formula $f$
+\end_inset
+
+ is analytic, we just propagate 
+\begin_inset Formula $\mathsf{T}$
+\end_inset
+
+ inwards.
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is not analytic, then there are conceptual problems, because 
+\begin_inset Formula $\mathsf{T}f\left(\vec{x},t\right)\ne f\left(\vec{x},-t\right)$
+\end_inset
+
+ as the spinor example illustrates.
+ For the non-analytic case (and also the analytic case) one has 
+\begin_inset Formula $\mathsf{T}f\left(t,\vec{x}\right)=f^{\prime}\left(t,\vec{x}\right)=Tf\left(-t,\vec{x}\right)$
+\end_inset
+
+ for some matrix 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $T$
+\end_inset
+
+ is a matrix, this is just an ordinary matrix equation with indeces suppresed.
+ It also tells us how to handle tensor quantities.
+\end_layout
+
+\begin_layout Standard
+For spin operator 
+\begin_inset Formula $J$
+\end_inset
+
+ must have 
+\begin_inset Formula $\mathsf{T}J\mathsf{T}^{-1}=-J$
+\end_inset
+
+ because for spin 1, at least, 
+\begin_inset Formula $J\sim\vec{x}\times\vec{p}$
+\end_inset
+
+.
+ By convention, one can choose a representation such that 
+\begin_inset Formula 
+\[
+T=e^{i\pi J_{y}}K
+\]
+
+\end_inset
+
+and for the present case, 
+\begin_inset Formula $J_{y}=\sigma_{2}/2$
+\end_inset
+
+ so 
+\begin_inset Formula $e^{i\pi J_{y}}=\epsilon$
+\end_inset
+
+ so 
+\begin_inset Formula $T=\epsilon K$
+\end_inset
+
+ and so 
+\begin_inset Formula $\mathsf{T}\psi\left(t,\vec{x}\right)=\psi^{\prime}\left(t,\vec{x}\right)=T\psi\left(-t,\vec{x}\right)$
+\end_inset
+
+ is how it works.
+\end_layout
+
+\begin_layout Subsubsection
+By fiat
+\end_layout
+
+\begin_layout Standard
+So we can instead say that we want to two-component Majorana to by T invariant,
+ by fiat, and the look at what this implies.
+ This is just like how we descovered Lorentz invariance above.
+ Start with
+\begin_inset Formula 
+\[
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+and postulate 
+\begin_inset Formula $\psi_{L}\left(t,\vec{x}\right)\mapsto\psi_{L}^{\prime}\left(t,\vec{x}\right)=T\psi_{L}\left(-t,\vec{x}\right)$
+\end_inset
+
+ for a to-be-determined 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Plug it in and try it.
 \end_layout
 
 \begin_layout Subsection
