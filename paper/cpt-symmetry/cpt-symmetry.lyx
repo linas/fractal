@@ -2202,34 +2202,6 @@ Why is this Majorana, and not Dirac? Well, for starters, not enough components:
 \end_layout
 
 \begin_layout Subsection
-Phase
-\end_layout
-
-\begin_layout Standard
-Note that under 
-\begin_inset Formula $\psi_{L}\mapsto\psi_{L}^{\prime}=\zeta\psi_{L}$
-\end_inset
-
- that 
-\begin_inset Formula 
-\[
-D_{L}\mapsto D_{L}^{\prime}=\zeta D_{L}\zeta^{*}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta\zeta^{2}m\epsilon K
-\]
-
-\end_inset
-
-so 
-\begin_inset Formula $\eta$
-\end_inset
-
- can be scaled away with appropriate choice of 
-\begin_inset Formula $\zeta$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
 Dirac equation
 \end_layout
 
@@ -2753,7 +2725,7 @@ Write
 \end_inset
 
  so that 
-\begin_inset Formula $D_{L}\psi_{L}=-\eta\epsilon\left(\delta_{R}\chi_{R}\right)^{*}$
+\begin_inset Formula $D_{L}\psi_{L}=-\eta\epsilon K\left(\delta_{R}\chi_{R}\right)$
 \end_inset
 
  The four-component Majorana is now
@@ -3315,6 +3287,173 @@ That's OK, because
 \end_layout
 
 \begin_layout Subsection
+Klein–Gordon redux
+\end_layout
+
+\begin_layout Standard
+Lets articulate Klein–Gordon for the four-spinor variation.
+ Just as before, 
+\begin_inset Formula $\delta_{L}\delta_{R}=-\left(\square+m^{2}\right)$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\left(D_{R}\oplus\delta_{L}\right)\left(D_{L}\oplus\delta_{R}\right)=-\left(\square+m^{2}\right)
+\]
+
+\end_inset
+
+But what about
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus\delta_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\beta=\left[\begin{array}{cc}
+0 & I\\
+I & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+So
+\begin_inset Formula 
+\[
+\beta\beta\left(D_{R}\oplus\delta_{L}\right)\beta\beta\left(D_{L}\oplus\delta_{R}\right)=\beta\left(\delta_{L}\oplus D_{R}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)
+\]
+
+\end_inset
+
+So lets write this out explicitly.
+\begin_inset Formula 
+\[
+\delta_{L}\oplus D_{R}=\left[\begin{array}{cc}
+\delta_{L} & 0\\
+0 & D_{R}
+\end{array}\right]=i\left[\begin{array}{cc}
+I & 0\\
+0 & I
+\end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
+-\sigma^{i} & 0\\
+0 & \sigma^{i}
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+-\eta\epsilon K & 0\\
+0 & +\eta\epsilon K
+\end{array}\right]
+\]
+
+\end_inset
+
+So in the chiral rep,
+\begin_inset Formula 
+\[
+\beta\left(\delta_{L}\oplus D_{R}\right)=\left[\begin{array}{cc}
+0 & D_{R}\\
+\delta_{L} & 0
+\end{array}\right]=i\beta\partial_{t}+i\left[\begin{array}{cc}
+0 & \sigma^{i}\\
+-\sigma^{i} & 0
+\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
+0 & +\eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula 
+\begin{align*}
+\left(D_{R}\oplus\delta_{L}\right)\left(D_{L}\oplus\delta_{R}\right)= & -\left(\square+m^{2}\right)\\
+= & \left(i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)
+\end{align*}
+
+\end_inset
+
+So as before.
+ But we can also directly verify:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)=-\square-m^{2}-im\partial_{\mu}\left(\mathsf{C}\gamma^{\mu}+\gamma^{\mu}\mathsf{C}\right)
+\]
+
+\end_inset
+
+where we used 
+\begin_inset Formula $\mathsf{C}i=-i\mathsf{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathsf{C}\gamma^{\mu}=-\gamma^{\mu}\mathsf{C}$
+\end_inset
+
+.
+ OK, bravo.
+\end_layout
+
+\begin_layout Subsection
+Phase
+\end_layout
+
+\begin_layout Standard
+Note that under 
+\begin_inset Formula $\psi_{L}\mapsto\psi_{L}^{\prime}=\zeta\psi_{L}$
+\end_inset
+
+ that 
+\begin_inset Formula 
+\[
+D_{L}\mapsto D_{L}^{\prime}=\zeta D_{L}\zeta^{*}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta\zeta^{2}m\epsilon K
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula $\eta$
+\end_inset
+
+ can be scaled away with appropriate choice of 
+\begin_inset Formula $\zeta$
+\end_inset
+
+.
+ But also: for 
+\begin_inset Formula $\zeta=\pm i$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+D_{L}\mapsto D_{L}^{\prime}=\zeta D_{L}\zeta^{*}=i\overline{\sigma}^{\mu}\partial_{\mu}-\eta m\epsilon K=\delta_{L}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+D_{R}\mapsto D_{R}^{\prime}=\zeta D_{R}\zeta^{*}=i\sigma^{\mu}\partial_{\mu}-\eta m\epsilon K=\delta_{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 CPT Confusorama
 \end_layout
 
@@ -3406,11 +3545,15 @@ Oh, hang on, under time reversal,
  should be for spinors...
 \end_layout
 
+\begin_layout Subsubsection
+Two-component spinors
+\end_layout
+
 \begin_layout Standard
 For Weyl spinors, 
 \begin_inset Formula 
 \[
-\mathsf{T}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(-t,\vec{x}\right)=\eta\epsilon\psi^{*}\left(t,\vec{x}\right)
+\mathsf{T}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(-t,\vec{x}\right)=\eta\epsilon K\psi\left(t,\vec{x}\right)
 \]
 
 \end_inset
@@ -3419,13 +3562,81 @@ with a derivation below.
  Also
 \begin_inset Formula 
 \[
-\mathsf{P}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(t,-\vec{x}\right)=i\psi\left(t,\vec{x}\right)
+\mathsf{P}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(t,-\vec{x}\right)=\pm i\eta\epsilon K\psi\left(t,\vec{x}\right)
 \]
 
 \end_inset
 
-and I don't know how to derive this, and it seems to be wrong ...
- However, this is important, because from
+with a derivation below.
+ So
+\begin_inset Formula 
+\[
+\mathsf{PT}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(-t,-\vec{x}\right)=\mp i\psi\left(t,\vec{x}\right)
+\]
+
+\end_inset
+
+So what is 
+\begin_inset Formula $\mathsf{C}$
+\end_inset
+
+? By CPT, are we to conclude that 
+\begin_inset Formula $\mathsf{C}=i$
+\end_inset
+
+ and that's it !? Well, if a Majorana is 
+\begin_inset Quotes eld
+\end_inset
+
+it's own anti-particle
+\begin_inset Quotes erd
+\end_inset
+
+, then this actually ...
+ is consistent with that claim...
+ How do we derive from first principles?
+\end_layout
+
+\begin_layout Subsubsection
+Four-component spinors
+\end_layout
+
+\begin_layout Standard
+How does this work for the four-compnent case? Well, we previously had
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta\left(D_{L}\oplus\delta_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
+\]
+
+\end_inset
+
+and some other tid-bits: 
+\begin_inset Formula $\mathsf{C}^{2}=1$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\mathsf{C}=-\eta\gamma^{0}CK=\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Stuff about four-compnent spinors
+\end_layout
+
+\begin_layout Standard
+However, this is important, because from
 \begin_inset Formula 
 \[
 \mathsf{C}\psi^{\left(\pm\right)}=\pm\psi^{\left(\pm\right)}
@@ -3450,7 +3661,7 @@ so that extra
 \end_layout
 
 \begin_layout Standard
-These combined are supposed to yeild
+Aste claims the below but I don't see how this can be correct.
 \begin_inset Formula 
 \[
 \mathsf{CPT}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(-t,-\vec{x}\right)=\mp i\psi^{*}\left(t,\vec{x}\right)
@@ -3612,13 +3823,13 @@ and for the present case,
 \end_layout
 
 \begin_layout Subsubsection
-By fiat
+Two-component spinor
 \end_layout
 
 \begin_layout Standard
 So we can instead say that we want to two-component Majorana to by T invariant,
- by fiat, and the look at what this implies.
- This is just like how we descovered Lorentz invariance above.
+ by fiat, and then look at what this implies.
+ This is just like how we discovered Lorentz invariance above.
  Start with
 \begin_inset Formula 
 \[
@@ -3671,7 +3882,8 @@ T^{2}=\eta\epsilon K\eta\epsilon K=-\eta\eta^{*}=-1
 
 \end_inset
 
-so this does square correctly.
+so this does square correctly (i.e.
+ consistently with conventional statements in the literature.).
  It's danged close to charge conjugation.
  Lets check the rest.
 \begin_inset Formula 
@@ -3726,7 +3938,12 @@ D_{L}^{\prime}=TD_{L}T^{-1}
 
 \end_inset
 
-so hurray! But this is a curious one that we note in passing: 
+so hurray! This does appear to be correct for 
+\begin_inset Formula $\mathsf{T}$
+\end_inset
+
+.
+ But this is a curious one that we note in passing: 
 \begin_inset Formula 
 \[
 D_{L}^{\prime}=TD_{L}T^{-1}=-\delta_{R}
@@ -3735,6 +3952,8 @@ D_{L}^{\prime}=TD_{L}T^{-1}=-\delta_{R}
 \end_inset
 
 Huh.
+ So this is parity-like.
+ Well, this is used below.
 \end_layout
 
 \begin_layout Subsection
@@ -3797,151 +4016,26 @@ for some
 \end_inset
 
  but that is wrong.
-\end_layout
+ However, 
+\begin_inset Formula $P=\pm iT=\pm i\eta\epsilon K$
+\end_inset
 
-\begin_layout Standard
-Lets check.
- xxx
+ does work.
+ Careful with the inverse: 
+\begin_inset Formula $P^{-1}=\mp T^{-1}i$
+\end_inset
+
+
 \begin_inset Formula 
 \begin{align*}
-P\left(\eta m\epsilon K\right)P^{-1}= & i\,\eta m\epsilon K\,\left(-i\right)\\
-= & -\eta mK
+PD_{L}P^{-1}= & -iTD_{L}T^{-1}i\\
+= & i\delta_{R}i\\
+= & -D_{R}
 \end{align*}
 
 \end_inset
 
-so 
-\begin_inset Formula 
-\begin{align*}
-PD_{L}P^{-1}= & P\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)P^{-1}\\
-= & i\overline{\sigma}^{\mu}\partial_{\mu}-\eta m\epsilon K\\
-= & \delta_{L}\\
-=
-\end{align*}
 
-\end_inset
-
-XXX so the ansatz is not working.
- Aste mislead me again.
- What am I missing?
-\end_layout
-
-\begin_layout Subsection
-Klein–Gordon redux
-\end_layout
-
-\begin_layout Standard
-Lets articulate Klein–Gordon for the four-spinor variation.
- Just as before, 
-\begin_inset Formula $\delta_{L}\delta_{R}=-\left(\square+m^{2}\right)$
-\end_inset
-
- and so
-\begin_inset Formula 
-\[
-\left(D_{R}\oplus\delta_{L}\right)\left(D_{L}\oplus\delta_{R}\right)=-\left(\square+m^{2}\right)
-\]
-
-\end_inset
-
-But what about
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\beta\left(D_{L}\oplus\delta_{R}\right)=i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}
-\]
-
-\end_inset
-
-where
-\begin_inset Formula 
-\[
-\beta=\left[\begin{array}{cc}
-0 & I\\
-I & 0
-\end{array}\right]
-\]
-
-\end_inset
-
-So
-\begin_inset Formula 
-\[
-\beta\beta\left(D_{R}\oplus\delta_{L}\right)\beta\beta\left(D_{L}\oplus\delta_{R}\right)=\beta\left(\delta_{L}\oplus D_{R}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)
-\]
-
-\end_inset
-
-So lets write this out explicitly.
-\begin_inset Formula 
-\[
-\delta_{L}\oplus D_{R}=\left[\begin{array}{cc}
-\delta_{L} & 0\\
-0 & D_{R}
-\end{array}\right]=i\left[\begin{array}{cc}
-I & 0\\
-0 & I
-\end{array}\right]\partial_{t}+i\left[\begin{array}{cc}
--\sigma^{i} & 0\\
-0 & \sigma^{i}
-\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
--\eta\epsilon K & 0\\
-0 & +\eta\epsilon K
-\end{array}\right]
-\]
-
-\end_inset
-
-So in the chiral rep,
-\begin_inset Formula 
-\[
-\beta\left(\delta_{L}\oplus D_{R}\right)=\left[\begin{array}{cc}
-0 & D_{R}\\
-\delta_{L} & 0
-\end{array}\right]=i\beta\partial_{t}+i\left[\begin{array}{cc}
-0 & \sigma^{i}\\
--\sigma^{i} & 0
-\end{array}\right]\nabla_{i}+m\left[\begin{array}{cc}
-0 & +\eta\epsilon K\\
--\eta\epsilon K & 0
-\end{array}\right]=i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}
-\]
-
-\end_inset
-
-so 
-\begin_inset Formula 
-\begin{align*}
-\left(D_{R}\oplus\delta_{L}\right)\left(D_{L}\oplus\delta_{R}\right)= & -\left(\square+m^{2}\right)\\
-= & \left(i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)
-\end{align*}
-
-\end_inset
-
-So as before.
- But we can also directly verify:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left(i\gamma^{\mu}\partial_{\mu}+m\mathsf{C}\right)\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)=-\square-m^{2}-im\partial_{\mu}\left(\mathsf{C}\gamma^{\mu}+\gamma^{\mu}\mathsf{C}\right)
-\]
-
-\end_inset
-
-where we used 
-\begin_inset Formula $\mathsf{C}i=-i\mathsf{C}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathsf{C}\gamma^{\mu}=-\gamma^{\mu}\mathsf{C}$
-\end_inset
-
-.
- OK, bravo.
 \end_layout
 
 \begin_layout Subsection
