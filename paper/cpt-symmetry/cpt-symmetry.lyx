@@ -3410,20 +3410,21 @@ Oh, hang on, under time reversal,
 For Weyl spinors, 
 \begin_inset Formula 
 \[
-\mathsf{T}\psi\left(t,\vec{x}\right)=\epsilon\psi^{*}\left(-t,\vec{x}\right)
+\mathsf{T}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(-t,\vec{x}\right)=\eta\epsilon\psi^{*}\left(t,\vec{x}\right)
 \]
 
 \end_inset
 
-but I don't know how to derive teh above, and also
+with a derivation below.
+ Also
 \begin_inset Formula 
 \[
-\mathsf{P}\psi\left(t,\vec{x}\right)=i\psi\left(t,-\vec{x}\right)
+\mathsf{P}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(t,-\vec{x}\right)=i\psi\left(t,\vec{x}\right)
 \]
 
 \end_inset
 
-and I don't know how to derive this either...
+and I don't know how to derive this, and it seems to be wrong ...
  However, this is important, because from
 \begin_inset Formula 
 \[
@@ -3445,14 +3446,14 @@ so that extra
 \end_inset
 
  flips the eigenstates of charge conjugation and so a CP-transformed field
- is ...whtever.
+ is ...whatever.
 \end_layout
 
 \begin_layout Standard
 These combined are supposed to yeild
 \begin_inset Formula 
 \[
-\mathsf{CPT}\psi\left(t,\vec{x}\right)=\mp i\psi^{*}\left(-t,-\vec{x}\right)
+\mathsf{CPT}\psi\left(t,\vec{x}\right)\mapsto\psi^{\prime}\left(-t,-\vec{x}\right)=\mp i\psi^{*}\left(t,\vec{x}\right)
 \]
 
 \end_inset
@@ -3477,7 +3478,7 @@ From first principles,
 \begin_inset Formula $\mathsf{T}\vec{x}\mathsf{T}^{-1}=\vec{x}$
 \end_inset
 
- but since we define momentum to be a timer derivative, then must have 
+ but since we define momentum to be a time derivative, then must have 
 \begin_inset Formula $\mathsf{T}\vec{p}\mathsf{T}^{-1}=-\vec{p}$
 \end_inset
 
@@ -3604,7 +3605,7 @@ and for the present case,
 \end_inset
 
  and so 
-\begin_inset Formula $\mathsf{T}\psi\left(t,\vec{x}\right)=\psi^{\prime}\left(t,\vec{x}\right)=T\psi\left(-t,\vec{x}\right)$
+\begin_inset Formula $\mathsf{T}\psi\left(t,\vec{x}\right)=\psi^{\prime}\left(-t,\vec{x}\right)=T\psi\left(t,\vec{x}\right)$
 \end_inset
 
  is how it works.
@@ -3627,7 +3628,7 @@ D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
 \end_inset
 
 and postulate 
-\begin_inset Formula $\psi_{L}\left(t,\vec{x}\right)\mapsto\psi_{L}^{\prime}\left(t,\vec{x}\right)=T\psi_{L}\left(-t,\vec{x}\right)$
+\begin_inset Formula $\psi_{L}\left(t,\vec{x}\right)\mapsto\psi_{L}^{\prime}\left(-t,\vec{x}\right)=T\psi_{L}\left(t,\vec{x}\right)$
 \end_inset
 
  for a to-be-determined 
@@ -3636,6 +3637,193 @@ and postulate
 
 .
  Plug it in and try it.
+\begin_inset Formula 
+\begin{align*}
+D_{L}\psi_{L}\left(t,\vec{x}\right) & \mapsto D_{L}^{\prime}\psi_{L}^{\prime}\left(-t,\vec{x}\right)=D_{L}^{\prime}T\psi_{L}\left(t,\vec{x}\right)\\
+= & \left(i\overline{\sigma}^{\mu}\partial_{\mu}^{\prime}+\eta m\epsilon K\right)T\psi_{L}\left(t,\vec{x}\right)\\
+= & \left(i\partial_{t}^{\prime}-i\vec{\sigma}\cdot\vec{\nabla}+\eta m\epsilon K\right)T\psi_{L}\left(t,\vec{x}\right)\\
+= & \left(-i\partial_{t}-i\vec{\sigma}\cdot\vec{\nabla}+\eta m\epsilon K\right)T\psi_{L}\left(t,\vec{x}\right)\\
+= & sTD_{L}T^{-1}T\psi_{L}\left(t,\vec{x}\right)\\
+= & sTD_{L}\psi_{L}\left(t,\vec{x}\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $s=\pm1$
+\end_inset
+
+ to be determined.
+ Aste suggests this Ansatz: 
+\begin_inset Formula $T=\eta\epsilon K$
+\end_inset
+
+ and so 
+\begin_inset Formula $T^{-1}=-\eta\epsilon K$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula 
+\[
+T^{2}=\eta\epsilon K\eta\epsilon K=-\eta\eta^{*}=-1
+\]
+
+\end_inset
+
+so this does square correctly.
+ It's danged close to charge conjugation.
+ Lets check the rest.
+\begin_inset Formula 
+\[
+T\left(-i\partial_{t}\right)T^{-1}=i\partial_{t}
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $\epsilon\sigma^{*\mu}\epsilon=-\overline{\sigma}^{\mu}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+T\left(-i\vec{\sigma}\cdot\vec{\nabla}\right)T^{-1}= & i\epsilon\vec{\sigma}^{*}\cdot\vec{\nabla}\epsilon^{-1}\\
+= & -i\vec{\sigma}\cdot\vec{\nabla}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+T\left(\eta m\epsilon K\right)T^{-1}= & -\eta\epsilon K\,\eta m\epsilon K\,\eta\epsilon K\\
+= & \eta\eta^{*}m\eta K\\
+= & \eta m\epsilon K
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula 
+\begin{align*}
+T\left(-i\partial_{t}-i\vec{\sigma}\cdot\vec{\nabla}+\eta m\epsilon K\right)T^{-1}= & i\partial_{t}-i\vec{\sigma}\cdot\vec{\nabla}+\eta m\epsilon K\\
+= & i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\\
+= & D_{L}
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula $s=+1$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+D_{L}^{\prime}=TD_{L}T^{-1}
+\]
+
+\end_inset
+
+so hurray! But this is a curious one that we note in passing: 
+\begin_inset Formula 
+\[
+D_{L}^{\prime}=TD_{L}T^{-1}=-\delta_{R}
+\]
+
+\end_inset
+
+Huh.
+\end_layout
+
+\begin_layout Subsection
+P-symmetry
+\end_layout
+
+\begin_layout Standard
+Do the above, again, for parity.
+ Start with
+\begin_inset Formula 
+\[
+D_{L}=i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K
+\]
+
+\end_inset
+
+and postulate 
+\begin_inset Formula $\psi_{L}\left(t,\vec{x}\right)\mapsto\psi_{L}^{\prime}\left(t,-\vec{x}\right)=P\psi_{L}\left(t,\vec{x}\right)$
+\end_inset
+
+ for a to-be-determined 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Plug it in and try it.
+\begin_inset Formula 
+\begin{align*}
+D_{L}\psi_{L}\left(t,\vec{x}\right) & \mapsto D_{L}^{\prime}\psi_{L}^{\prime}\left(t,-\vec{x}\right)=D_{L}^{\prime}P\psi_{L}\left(t,\vec{x}\right)\\
+= & \left(i\overline{\sigma}^{\mu}\partial_{\mu}^{\prime}+\eta m\epsilon K\right)P\psi_{L}\left(t,\vec{x}\right)\\
+= & \left(i\partial_{t}-i\vec{\sigma}\cdot\vec{\nabla}^{\prime}+\eta m\epsilon K\right)P\psi_{L}\left(t,\vec{x}\right)\\
+= & \left(i\partial_{t}+i\vec{\sigma}\cdot\vec{\nabla}+\eta m\epsilon K\right)P\psi_{L}\left(t,\vec{x}\right)\\
+= & D_{R}P\psi_{L}\left(t,\vec{x}\right)\\
+= & sPD_{L}P^{-1}P\psi_{L}\left(t,\vec{x}\right)\\
+= & sPD_{L}\psi_{L}\left(t,\vec{x}\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $s=\pm1$
+\end_inset
+
+ to be determined.
+ So we are looking to solve 
+\begin_inset Formula 
+\[
+D_{R}=sPD_{L}P^{-1}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Well, Aste suggests that ansatz: 
+\begin_inset Formula $P=i$
+\end_inset
+
+ but that is wrong.
+\end_layout
+
+\begin_layout Standard
+Lets check.
+ xxx
+\begin_inset Formula 
+\begin{align*}
+P\left(\eta m\epsilon K\right)P^{-1}= & i\,\eta m\epsilon K\,\left(-i\right)\\
+= & -\eta mK
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula 
+\begin{align*}
+PD_{L}P^{-1}= & P\left(i\overline{\sigma}^{\mu}\partial_{\mu}+\eta m\epsilon K\right)P^{-1}\\
+= & i\overline{\sigma}^{\mu}\partial_{\mu}-\eta m\epsilon K\\
+= & \delta_{L}\\
+=
+\end{align*}
+
+\end_inset
+
+XXX so the ansatz is not working.
+ Aste mislead me again.
+ What am I missing?
 \end_layout
 
 \begin_layout Subsection
