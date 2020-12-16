@@ -2613,6 +2613,13 @@ Next section provides the correct construction of the four-component Majorana
 
 \begin_layout Subsection
 Four-component Majorana
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Four-component-Majorana"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2831,6 +2838,13 @@ Ta dah.
 
 \begin_layout Subsection
 Charge conjugation part one
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Charge-conjugation-part"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3076,13 +3090,20 @@ There is also an alternate proof of this, in the article...
 
 \begin_layout Subsection
 Conjugate eqn
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Conjugate-eqn"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Lets assume that this holds: 
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\psi+\zeta m\psi_{c}
+0=i\gamma^{\mu}\partial_{\mu}\psi-\zeta m\psi_{c}
 \]
 
 \end_inset
@@ -3090,8 +3111,8 @@ Lets assume that this holds:
 Then by above,
 \begin_inset Formula 
 \begin{align*}
-0= & \mathsf{C}i\gamma^{\mu}\partial_{\mu}\mathsf{CC}\psi+\mathsf{C}\zeta m\psi_{c}\\
-= & i\gamma^{\mu}\partial_{\mu}\psi_{c}+\zeta^{*}m\psi
+0= & \mathsf{C}i\gamma^{\mu}\partial_{\mu}\mathsf{CC}\psi-\mathsf{C}\zeta m\psi_{c}\\
+= & i\gamma^{\mu}\partial_{\mu}\psi_{c}-\zeta^{*}m\psi
 \end{align*}
 
 \end_inset
@@ -3100,7 +3121,7 @@ Lets subtract these.
  
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\left(\psi-\psi_{c}\right)+m\left(\zeta\psi_{c}-\zeta^{*}\psi\right)
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi-\psi_{c}\right)-m\left(\zeta\psi_{c}-\zeta^{*}\psi\right)
 \]
 
 \end_inset
@@ -3120,7 +3141,7 @@ so if
 Lets add these.
 \begin_inset Formula 
 \[
-0=i\gamma^{\mu}\partial_{\mu}\left(\psi+\psi_{c}\right)+m\left(\zeta\psi_{c}+\zeta^{*}\psi\right)
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi+\psi_{c}\right)-m\left(\zeta\psi_{c}+\zeta^{*}\psi\right)
 \]
 
 \end_inset
@@ -3632,7 +3653,7 @@ and some other tid-bits:
 \end_layout
 
 \begin_layout Subsubsection
-Stuff about four-compnent spinors
+Stuff about four-component spinors
 \end_layout
 
 \begin_layout Standard
@@ -4045,7 +4066,13 @@ Ball of Confusion
 \begin_layout Standard
 Should be able to regain the Dirac spinor with appropriate linear combinations.
  This section describes how NOT to do it.
- First, define 
+ That is, a charged spinor should be a linear combination of two neutral
+ spinors, i.e.
+ a complexification of two neutral spinors.
+\end_layout
+
+\begin_layout Standard
+First, define 
 \begin_inset Formula 
 \[
 \mathsf{C}\psi^{\left(\pm\right)}=\pm\psi^{\left(\pm\right)}
@@ -4457,6 +4484,157 @@ This will remain confusing until ALL four solutions to Majorana eqn are
 \end_inset
 
  coupling so that they solve Dirac ...
+\end_layout
+
+\begin_layout Subsection
+ELKO
+\end_layout
+
+\begin_layout Standard
+Lets see if we can do ELKO correctly.
+ So, from section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Charge-conjugation-part"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ the Majoana eqn is this
+\begin_inset Formula 
+\[
+\left(i\gamma^{\mu}\partial_{\mu}-m\mathsf{C}\right)\psi=0
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\mathsf{C}=-\eta\gamma^{0}CK=\left[\begin{array}{cc}
+0 & \eta\epsilon K\\
+-\eta\epsilon K & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+Then writing 
+\begin_inset Formula $\mathsf{C}\psi=\psi_{c}$
+\end_inset
+
+ this is same as
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi-m\psi_{c}
+\]
+
+\end_inset
+
+From section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Conjugate-eqn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ we can derive that the conjugate is: 
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi_{c}-m\psi
+\]
+
+\end_inset
+
+and the Majorana eqn has solutions which are eigenstates of the conarge
+ conjugation operator.
+\end_layout
+
+\begin_layout Standard
+According to Nieto, the ELKO eqn is then supposed to be
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi^{1}-im\psi^{2}\quad\quad0=i\gamma^{\mu}\partial_{\mu}\psi^{2}+im\psi^{1}
+\]
+
+\end_inset
+
+that is
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\psi^{A}-\varepsilon_{\;B}^{A}im\psi^{B}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+\varepsilon_{\;2}^{1}=-\varepsilon_{\;1}^{2}=1
+\]
+
+\end_inset
+
+Does this make sense? Lets play the add-subtract trick.
+ Subtract.
+ Then
+\begin_inset Formula 
+\[
+0=i\gamma^{\mu}\partial_{\mu}\left(\psi^{1}-\psi^{2}\right)-im\left(\psi^{2}+\psi^{1}\right)
+\]
+
+\end_inset
+
+so if 
+\begin_inset Formula $\psi^{1}=\pm\psi^{2}$
+\end_inset
+
+ then the field is massless.
+ So this cannot be the case.
+\end_layout
+
+\begin_layout Standard
+In particular, this means that solutions to ELKO cannot be charge conjugation
+ eigenstates, because if we write 
+\begin_inset Formula $\psi^{2}=\mathsf{C}\psi^{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi^{1}$
+\end_inset
+
+ is an eigenstate, then trouble.
+ Lets try this:
+\begin_inset Formula 
+\[
+\psi^{1}=a\psi^{\left(+\right)}+b\psi^{\left(-\right)}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $a,b$
+\end_inset
+
+ real and 
+\begin_inset Formula $\psi^{2}=\mathsf{C}\psi^{1}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\psi^{2}=a\psi^{\left(+\right)}-b\psi^{\left(-\right)}
+\]
+
+\end_inset
+
+then...
+ what are we doing here?
 \end_layout
 
 \begin_layout Subsection
