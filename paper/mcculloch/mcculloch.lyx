@@ -613,7 +613,7 @@ E\left(\vec{n},m\right)=\left(r+\frac{1}{2}\right)\frac{hc}{2L}\sqrt{n_{1}^{2}+n
 
 \end_inset
 
-The probability of of a mode being occupied is 
+The probability of a mode being occupied is 
 \begin_inset Formula 
 \[
 P\left(\vec{n},r\right)=\frac{e^{-\beta E}}{Z\left(\vec{n},\beta\right)}
@@ -729,12 +729,148 @@ The value of
 This is where Renda appears to have made a mistake!? He (unintetnionally)
  dropped the zero-point term, and this alters the calculation of the partition
  function, and thus of the energy.
- He has a graph, and makes some deductions from that; it's not clear its
- correct.
+ He has a graph, and makes some deductions from that; it's not clear that
+ the graph is correct.
+\end_layout
+
+\begin_layout Section*
+Partition function for continuous spectrum
 \end_layout
 
 \begin_layout Standard
-T
+Lets double check.
+ We should have
+\begin_inset Formula 
+\begin{align*}
+Z\left(\beta\right)= & \sum_{n_{1}=0}^{\infty}\sum_{n_{2}=0}^{\infty}\sum_{n_{3}=0}^{\infty}Z\left(\vec{n},\beta\right)\\
+= & \int_{0}^{\infty}Z\left(\varepsilon,\beta\right)g\left(\varepsilon\right)d\varepsilon
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $g\left(\varepsilon\right)$
+\end_inset
+
+ is the denisty of states, and 
+\begin_inset Formula $\varepsilon=hc\left|\vec{n}\right|/2L$
+\end_inset
+
+ as before.
+ Per Wikipedia, integrating over an octant, with a factor of two for polarizatio
+n, the large-n limit is
+\begin_inset Formula 
+\[
+g\left(\varepsilon\right)d\varepsilon\approx\frac{8\pi L^{3}}{h^{3}c^{3}}\varepsilon^{2}d\varepsilon
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+Z\left(\beta\right)= & \frac{8\pi L^{3}}{h^{3}c^{3}}\int_{0}^{\infty}\frac{e^{-\beta\varepsilon/2}}{1-e^{-\beta\varepsilon}}\varepsilon^{2}d\varepsilon\\
+= & \frac{8\pi L^{3}}{h^{3}c^{3}}\cdot\frac{1}{\beta^{3}}\int_{0}^{\infty}\frac{e^{x/2}}{e^{x}-1}x^{2}dx
+\end{align*}
+
+\end_inset
+
+The integral is almost a polylogarithm, but not quite.
+ At any rate, it is a constant.
+ Call it 
+\begin_inset Formula $C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+And now I proceed to confuse myself.
+ The probability of any one given mode (with an indeterminate number of
+ photons in it) is then 
+\begin_inset Formula 
+\[
+P\left(\vec{n}\right)=\frac{e^{-\beta\varepsilon}}{Z\left(\beta\right)}
+\]
+
+\end_inset
+
+The average energy is then 
+\begin_inset Formula 
+\[
+\left\langle E\right\rangle =\sum_{\vec{n}}\varepsilon\left(\vec{n}\right)P\left(\vec{n}\right)=-\frac{d\log\left(Z\right)}{d\beta}=\frac{3}{\beta}
+\]
+
+\end_inset
+
+which is not enlightening; did I do something wrong? Why isn't this 
+\begin_inset Formula $\beta^{-4}$
+\end_inset
+
+? Answer: because I need to multiply by 
+\begin_inset Formula $Z$
+\end_inset
+
+ as it correctly provides the multiplicity.
+\end_layout
+
+\begin_layout Standard
+I conclude that 
+\begin_inset Formula $C=\pi^{4}/45$
+\end_inset
+
+ by indirect argumentation, i.e.
+ that it comes from the Stefan-Boltzmann law when integrated.
+ But how do I obtain this directly? Well, its the polygamma:
+\begin_inset Formula 
+\[
+\psi^{\left(n\right)}\left(z\right)=\left(-1\right)^{n+1}\int_{0}^{\infty}\frac{t^{n}e^{-zt}}{1-e^{-t}}dt
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\begin{align*}
+C= & \int_{0}^{\infty}\frac{e^{x/2}}{e^{x}-1}x^{2}dx\\
+= & -\psi^{\left(2\right)}\left(\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+but then 
+\begin_inset Formula 
+\[
+\psi^{\left(n\right)}\left(\frac{1}{2}\right)=\left(-1\right)^{n+1}n!\left(2^{n+1}-1\right)\zeta\left(n+1\right)
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+C=14\zeta\left(3\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\zeta\left(3\right)\approx1.20205\cdots$
+\end_inset
+
+ is Apery's constant.
+ So ...
+ the difference between the total, integrated Stefan-Boltzmann radiance,
+ and 
+\begin_inset Formula $Z\left\langle E\right\rangle $
+\end_inset
+
+ as computed above appears to differ by a factor of 
+\begin_inset Formula $90\cdot7\zeta\left(3\right)/\pi^{4}\approx7.77\cdots$
+\end_inset
+
+ which is about the size of the factor that Renda is fudging.
+ Of course, my derivation above might be totally wrong.
 \end_layout
 
 \begin_layout Section*
@@ -742,7 +878,7 @@ Inertial mass
 \end_layout
 
 \begin_layout Standard
-Per Renda, then
+Per Renda, (I guess this is from McCulloch, in the end?) then
 \begin_inset Formula 
 \[
 m_{I}\left(a\right)=\frac{B_{S}\left(T\right)}{B\left(T\right)}m_{g}
@@ -757,7 +893,7 @@ where:
 \begin_inset Formula $m_{I}\left(a\right)$
 \end_inset
 
- is the intertial mass at acceleration 
+ is the inertial mass at acceleration 
 \begin_inset Formula $a$
 \end_inset
 
