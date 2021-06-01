@@ -566,7 +566,17 @@ where
 \end_inset
 
  is the wavenumber.
- The modes are given by a wavevector 
+ The integers 
+\begin_inset Formula $n_{i}$
+\end_inset
+
+ are non-negative.
+ They may be zero, as these correspond to transverse-electric and/or transverse-
+magnetic modes.
+\end_layout
+
+\begin_layout Standard
+The modes are given by a wavevector 
 \begin_inset Formula $\vec{\kappa}$
 \end_inset
 
@@ -581,7 +591,7 @@ where
 with waves given by 
 \begin_inset Formula 
 \[
-\psi\left(\vec{r},t\right)=\psi_{0}\sin\left(\vec{\kappa}\cdot\vec{r}-\omega t\right)
+\psi\left(\vec{r},t\right)\sim\exp i\left(\vec{\kappa}\cdot\vec{x}-\omega t\right)
 \]
 
 \end_inset
@@ -598,7 +608,7 @@ Each mode has two polarizations (they're photons) and an occupation number
 The energy of a mode is
 \begin_inset Formula 
 \[
-E\left(\vec{n},r\right)=\left(r+\frac{1}{2}\right)\frac{hc}{2L}\sqrt{n_{1}^{2}+n_{2}^{2}+n_{3}^{2}}=\left(r+\frac{1}{2}\right)\varepsilon\left(\vec{n}\right)
+E\left(\vec{n},m\right)=\left(r+\frac{1}{2}\right)\frac{hc}{2L}\sqrt{n_{1}^{2}+n_{2}^{2}+n_{3}^{2}}=\left(r+\frac{1}{2}\right)\varepsilon\left(\vec{n}\right)
 \]
 
 \end_inset
@@ -628,7 +638,7 @@ The average energy in a mode is
 \end_inset
 
 Notation: Renda defines 
-\begin_inset Formula $p=\sqrt{n_{1}^{2}+n_{2}^{2}+n_{3}^{2}}$
+\begin_inset Formula $p=\left|\vec{n}\right|=\sqrt{n_{1}^{2}+n_{2}^{2}+n_{3}^{2}}$
 \end_inset
 
  and 
@@ -646,7 +656,33 @@ Notation: Renda defines
 \end_layout
 
 \begin_layout Standard
-Next, we want to know the value of 
+Next, we want to compute the sum
+\begin_inset Formula 
+\[
+Z\left(\beta\right)=\sum_{n_{1}=0}^{\infty}\sum_{n_{2}=0}^{\infty}\sum_{n_{3}=0}^{\infty}Z\left(\vec{n},\beta\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $Z$
+\end_inset
+
+ (and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+) depend only on 
+\begin_inset Formula $\left|\vec{n}\right|$
+\end_inset
+
+, two of the three sums can be replaced by a spherical summation front,
+ leaving a sum over the radius only.
+ For this, we need the function 
 \begin_inset Formula $S\left(p\right)$
 \end_inset
 
@@ -659,8 +695,19 @@ Next, we want to know the value of
 \begin_inset Formula $p$
 \end_inset
 
-, this is a stair-case function.
- The value of 
+, this is a stair-case function, having steps at integers 
+\begin_inset Formula $p=\sqrt{\ell}$
+\end_inset
+
+ for integer 
+\begin_inset Formula $\ell$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The value of 
 \begin_inset Formula $S\left(p\right)$
 \end_inset
 
@@ -674,7 +721,20 @@ Next, we want to know the value of
 \end_inset
 
  which is given by OEIS A002102 as identified by Renda.
- This is slightly confusing, since
+ There does not seem to be any easy way to deal with this, except for numerical
+ summation.
+\end_layout
+
+\begin_layout Standard
+This is where Renda appears to have made a mistake!? He (unintetnionally)
+ dropped the zero-point term, and this alters the calculation of the partition
+ function, and thus of the energy.
+ He has a graph, and makes some deductions from that; it's not clear its
+ correct.
+\end_layout
+
+\begin_layout Standard
+T
 \end_layout
 
 \begin_layout Section*
