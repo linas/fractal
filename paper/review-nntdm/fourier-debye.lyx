@@ -127,7 +127,107 @@ Consider the integral
 
 \end_inset
 
+or
+\begin_inset Formula 
+\[
+\int_{0}^{1}\frac{e^{2\pi ikt}}{e^{t}-1}dt=\sum_{n=0}^{\infty}B_{n}\left(2\pi ik\right)\frac{1}{n\cdot n!}
+\]
 
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+f\left(x\right)=\sum_{k}c_{k}e^{i2\pi kx}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+And so if we are careful, we can write 
+\begin_inset Formula $ $
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+c_{k}\sim\sum_{n=0}^{\infty}B_{n}\left(2\pi ik\right)\frac{1}{n\cdot n!}
+\]
+
+\end_inset
+
+up to factors so that
+\begin_inset Formula 
+\[
+\frac{1}{e^{t}-1}\sim\sum_{k}c_{k}e^{i2\pi kt}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Debye function
+\end_layout
+
+\begin_layout Standard
+Related is the Debye function
+\begin_inset Formula 
+\[
+\int_{0}^{x}\frac{t^{n}}{e^{t}-1}dt=x^{n}\left[\frac{1}{n}-\frac{x}{2\left(n+1\right)}+\sum_{k=1}^{\infty}\frac{B_{2k}x^{2k}}{\left(2k+n\right)\left(2k\right)!}\right]
+\]
+
+\end_inset
+
+which holds for 
+\begin_inset Formula $\left|x\right|<2\pi$
+\end_inset
+
+ and 
+\begin_inset Formula $n\ge1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Set 
+\begin_inset Formula $x=1$
+\end_inset
+
+ and use 
+\begin_inset Formula 
+\[
+e^{2\pi ikt}=\sum_{n=0}^{\infty}\frac{\left(2\pi ikt\right)^{n}}{n!}
+\]
+
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}\frac{e^{2\pi ikt}}{e^{t}-1}dt= & \sum_{n=0}^{\infty}\frac{\left(2\pi ik\right)^{n}}{n!}\int_{0}^{1}\frac{t^{n}}{e^{t}-1}dt\\
+= & \sum_{n=0}^{\infty}\frac{\left(2\pi ik\right)^{n}}{n!}\left[\frac{1}{n}-\frac{1}{2\left(n+1\right)}+\sum_{p=1}^{\infty}\frac{B_{2p}}{\left(2p+n\right)\left(2p\right)!}\right]
+\end{align*}
+
+\end_inset
+
+Whatever.
+ Can reverse above by noting
+\begin_inset Formula 
+\[
+B_{n}\left(x+h\right)=\sum_{k=0}^{n}{n \choose k}B_{k}\left(x\right)h^{n-k}
+\]
+
+\end_inset
+
+Whatever.
+ And then one can get lost in this maze of mirrors.
+ Heh.
 \end_layout
 
 \end_body
