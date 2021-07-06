@@ -238,5 +238,113 @@ Here, the left hand side is that of Lemma 2.2.
  The right hand side is clearly something different.
 \end_layout
 
+\begin_layout Standard
+Note that this holds only for 
+\begin_inset Formula $k<n$
+\end_inset
+
+.
+ It is not a well-conditioned sum otherwise, as, for 
+\begin_inset Formula $k>n$
+\end_inset
+
+, each term is becomes progressively larger.
+ To btain a convergent sum, one can play some games with analytic continuation,
+ but that is outside of the scope of the current effforts.
+\end_layout
+
+\begin_layout Subsubsection*
+Main theorem
+\end_layout
+
+\begin_layout Standard
+Sadly, this ruins the main theorem.
+ The expansion for the hyperbolic cotangent (Lemma 2.1) appears to be correct;
+ I verified this, but did not double-check.
+ Unfortunately, the revised identity holds only for 
+\begin_inset Formula $k<n$
+\end_inset
+
+ and therefore cannot be plugged in directly.
+ Despite this, it can sometimes be useful to play some games, and treat
+ the problem as a formal series, hoping that a re-arrangement of terms by
+ the end can rescue the situation.
+ So lets try this.
+ Started from the hyperbolic cotangent,
+\begin_inset Formula 
+\begin{align*}
+\sum_{k=1}^{\infty}\frac{\coth\pi k}{k^{4m-1}}= & \frac{1}{\pi}\left(\sum_{k=1}^{\infty}\frac{1}{k^{4m}}+2\sum_{k=1}^{\infty}\sum_{n=1}^{\infty}\frac{1}{k^{4m-2}n^{2}+k^{4m}}\right)\\
+= & \frac{1}{\pi}\left(\zeta\left(4m\right)+2\sum_{k=1}^{\infty}\frac{1}{k^{4m-2}}\sum_{n=1}^{\infty}\frac{1}{k^{2}+n^{2}}\right)\\
+= & \frac{1}{\pi}\left(\zeta\left(4m\right)+2\sum_{k=1}^{\infty}\frac{1}{k^{4m-2}}\sum_{n=1}^{\infty}\frac{1}{n^{2}}\sum_{p=0}^{\infty}\left(-1\right)^{p}\frac{k^{2p}}{n^{2p}}\right)\\
+= & \frac{1}{\pi}\left(\zeta\left(4m\right)+2\sum_{p=0}^{\infty}\left(-1\right)^{p}\sum_{k=1}^{\infty}\frac{1}{k^{4m-2-2p}}\sum_{n=1}^{\infty}\frac{1}{n^{2p+2}}\right)\\
+= & \frac{1}{\pi}\left(\zeta\left(4m\right)+2\sum_{p=0}^{\infty}\left(-1\right)^{p}\zeta\left(4m-2-2p\right)\zeta\left(2p+2\right)\right)
+\end{align*}
+
+\end_inset
+
+Well, this is certainly a peculiar kind of beast.
+ The middle bits rrequired working with a sum that is only formally defined,
+ but cannot converge numerically, because the 
+\begin_inset Formula $k<n$
+\end_inset
+
+ condition is violated.
+ Despite this, the final sum does appear to be convergent.
+ 
+\end_layout
+
+\begin_layout Standard
+To bring it closer to the form that Plouffe and Ramanujan provide, the hyperboli
+c cotangent should be substituted:
+\begin_inset Formula 
+\[
+\sum_{k=1}^{\infty}\frac{\coth\pi k}{k^{4m-1}}=\sum_{k=1}^{\infty}\frac{e^{2\pi k}+1}{k^{4m-1}\left(e^{2\pi k}-1\right)}
+\]
+
+\end_inset
+
+So, this is similar, but curiously different.
+ It lacks the rapid convergence properties, which is what Plouffe was interested
+ in: Ploufe has some arbitrary-precision software, and so he can (easily)
+ evaluate these sums to thousands of digits.
+ In this way, he was able to discover the indicated identites numerically,
+ but he had no proof that they held.
+ As it happened, a variant of them, in a non-obvious form, can be found
+ in Ramanujan's diaries.
+\end_layout
+
+\begin_layout Standard
+The above form lacks the rapid convergence poroperties, because of the factor
+ of 
+\begin_inset Formula $e^{2\pi k}$
+\end_inset
+
+ in the numerator.
+ The infinite sum over the double zeta is also numerically discouraging.
+\end_layout
+
+\begin_layout Standard
+However, the fact that this shows up as a kind of hidden or cryptic Fourier
+ transform is notable.
+ A revised paper with the above corrections seems publishable, I guess.
+ Explicitly strengthening and tying together that this is a 
+\begin_inset Quotes eld
+\end_inset
+
+secret
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+hidden
+\begin_inset Quotes erd
+\end_inset
+
+ Fourier transform can certainly make things more interesting.
+\end_layout
+
 \end_body
 \end_document
