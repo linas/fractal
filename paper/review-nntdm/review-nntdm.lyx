@@ -1,0 +1,242 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{url} 
+\usepackage{slashed}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "cmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Comments on NNTDM submission Paper id: 2021 / 269
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Lemma 2.2 is incorrect
+\end_layout
+
+\begin_layout Standard
+The lemma is not right.
+ I will provide to simple demonstrations of this, and a variant that is
+ perhaps desirable.
+\end_layout
+
+\begin_layout Subsubsection*
+Direct substitution in Lemma 2.2
+\end_layout
+
+\begin_layout Standard
+One way of quickly checking results is to try direct subsitution.
+ The lemma claims
+\begin_inset Formula 
+\[
+\frac{1}{k^{4m}+n^{2}k^{4m-2}}\quad{?\atop =}\quad\frac{1}{2}\sum_{s=1}^{2m-1}\frac{\left(-1\right)^{s+1}}{k^{4m-2s}n^{2s}}
+\]
+
+\end_inset
+
+If this is to hold for all 
+\begin_inset Formula $m$
+\end_inset
+
+ then it must hold for 
+\begin_inset Formula $m=1$
+\end_inset
+
+.
+ By direct substitution, one gets
+\begin_inset Formula 
+\[
+\frac{1}{k^{4}+n^{2}k^{2}}\quad{?\atop =}\quad\frac{1}{2}\sum_{s=1}^{1}\frac{\left(-1\right)^{s+1}}{k^{4-2s}n^{2s}}=\frac{1}{2}\frac{1}{k^{2}n^{2}}
+\]
+
+\end_inset
+
+which is clearly false.
+ Attempting 
+\begin_inset Formula $m=2$
+\end_inset
+
+ shows that it won't work there, either.
+\end_layout
+
+\begin_layout Subsubsection*
+Factorization
+\end_layout
+
+\begin_layout Standard
+A different way of seeing the result is to factorize terms more carefully.
+ That is, write
+\begin_inset Formula 
+\[
+\frac{1}{k^{4m}}\cdot\frac{1}{1+n^{2}k^{-2}}=\frac{1}{k^{4m}+n^{2}k^{4m-2}}\quad{?\atop =}\quad\frac{1}{2}\sum_{s=1}^{2m-1}\frac{\left(-1\right)^{s+1}}{k^{4m-2s}n^{2s}}=\frac{1}{2k^{4m}}\sum_{s=1}^{2m-1}\frac{\left(-1\right)^{s+1}}{k^{-2s}n^{2s}}
+\]
+
+\end_inset
+
+dropping the leading factor on both sides, one gets
+\begin_inset Formula 
+\[
+\frac{1}{1+n^{2}k^{-2}}\quad{?\atop =}\quad\frac{1}{2}\sum_{s=1}^{2m-1}\frac{\left(-1\right)^{s+1}}{k^{-2s}n^{2s}}
+\]
+
+\end_inset
+
+The left hand side does not involve 
+\begin_inset Formula $m$
+\end_inset
+
+ in any way.
+ The right hand side does – it is a sum of 
+\begin_inset Formula $m$
+\end_inset
+
+ terms.
+ None of these terms are zero, and the leading terms are always identical;
+ therefor this cannot possibly be right.
+\end_layout
+
+\begin_layout Subsubsection*
+Desired result
+\end_layout
+
+\begin_layout Standard
+Below follows a simple derivation of what perhaps might have been hoped
+ for.
+ Consider the expansion
+\begin_inset Formula 
+\[
+\frac{1}{1-x}=\sum_{p=0}^{\infty}x^{p}
+\]
+
+\end_inset
+
+This holds for all real 
+\begin_inset Formula $-1<x<1$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $x=-k^{2}/n^{2}$
+\end_inset
+
+ and requiring that 
+\begin_inset Formula $k<n$
+\end_inset
+
+, one gets
+\begin_inset Formula 
+\[
+\frac{1}{1+k^{2}/n^{2}}=\frac{n^{2}}{n^{2}+k^{2}}=\sum_{p=0}^{\infty}\left(-1\right)^{p}\frac{k^{2p}}{n^{2p}}
+\]
+
+\end_inset
+
+Multiplying both sides by 
+\begin_inset Formula $1/n^{2}k^{4m-2}$
+\end_inset
+
+ gives
+\begin_inset Formula 
+\[
+\frac{1}{k^{4m}+n^{2}k^{4m-2}}=\sum_{p=0}^{\infty}\left(-1\right)^{p}\frac{1}{k^{4m-2-2p}n^{2p+2}}
+\]
+
+\end_inset
+
+Here, the left hand side is that of Lemma 2.2.
+ The right hand side is clearly something different.
+\end_layout
+
+\end_body
+\end_document
