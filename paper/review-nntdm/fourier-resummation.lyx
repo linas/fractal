@@ -1,0 +1,197 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{url} 
+\usepackage{slashed}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "cmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Resummation Games
+\end_layout
+
+\begin_layout Section*
+Lemma 2.3 
+\end_layout
+
+\begin_layout Standard
+From the NNTDM paper.
+\end_layout
+
+\begin_layout Standard
+Famously, for integer 
+\begin_inset Formula $p$
+\end_inset
+
+, one has
+\begin_inset Formula 
+\begin{align*}
+\frac{\alpha^{p}-\beta^{p}}{\alpha-\beta}= & \alpha^{p-1}+\beta\alpha^{p-2}+\beta^{2}\alpha^{p-3}+\cdots+\beta^{p-1}\\
+= & \sum_{s=1}^{p}\alpha^{p-s}\beta^{s-1}\\
+= & \frac{\alpha^{p}}{\beta}\sum_{s=1}^{p}\left(\frac{\beta}{\alpha}\right)^{s}
+\end{align*}
+
+\end_inset
+
+Divide both sides by 
+\begin_inset Formula $1/\alpha^{p}\beta^{p}$
+\end_inset
+
+ to get 
+\begin_inset Formula 
+\[
+\frac{1}{\alpha-\beta}\left[\frac{1}{\beta^{p}}-\frac{1}{\alpha^{p}}\right]=\frac{1}{\beta^{p+1}}\sum_{s=1}^{p}\left(\frac{\beta}{\alpha}\right)^{s}
+\]
+
+\end_inset
+
+The NNTDM paper makes the substitution 
+\begin_inset Formula $\alpha=n^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=-k^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $p=2m-1$
+\end_inset
+
+.
+ This gives the important identity in the proof of Lemma 2.3
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{-1}{k^{4m}}\sum_{j=1}^{2m-1}\left(\frac{-k^{2}}{n^{2}}\right)^{j}=\frac{1}{n^{4m-2}\left(k^{2}+n^{2}\right)}+\frac{1}{k^{4m-2}\left(k^{2}+n^{2}\right)}
+\]
+
+\end_inset
+
+The rest of the proof of Lemma 2.3 follows.
+\end_layout
+
+\begin_layout Subsection*
+Zeta sums
+\end_layout
+
+\begin_layout Standard
+Instead, substitute 
+\begin_inset Formula $\alpha=n^{r}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=\pm k^{q}$
+\end_inset
+
+.
+ This gives 
+\begin_inset Formula 
+\[
+\frac{1}{n^{r}\mp k^{q}}\left[\frac{1}{n^{rp}}-\frac{1}{\left(\pm k^{q}\right)^{p}}\right]=\frac{-1}{\left(\pm k^{q}\right)^{p+1}}\sum_{j=1}^{p}\left(\frac{\pm k^{q}}{n^{r}}\right)^{j}
+\]
+
+\end_inset
+
+Slapping a 
+\begin_inset Formula $\sum_{n}\sum_{k}$
+\end_inset
+
+ in front simplifies the RHS:
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{-1}{\left(\pm k^{q}\right)^{p+1}}\sum_{s=1}^{p}\left(\frac{\pm k^{q}}{n^{r}}\right)^{s}=\sum_{j=1}^{p}\zeta\left(\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
