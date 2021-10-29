@@ -242,6 +242,48 @@ which then factored out into the Fourier expansion for coth, which provided
  TODO: For completeness, write these out.
 \end_layout
 
+\begin_layout Standard
+Start: from NNTDM we have
+\begin_inset Formula 
+\[
+\pi n\coth\pi n=1+2\sum_{k=1}^{\infty}\frac{1}{\left(k/n\right)^{2}+1}
+\]
+
+\end_inset
+
+and for poles on the real axis, we find this on Wikipedia: 
+\begin_inset Formula 
+\[
+\pi n\cot\pi n=1-2\sum_{k=1}^{\infty}\frac{1}{\left(k/n\right)^{2}-1}
+\]
+
+\end_inset
+
+We'll need this:
+\begin_inset Formula 
+\[
+\coth\pi n=\frac{e^{2\pi n}+1}{e^{2\pi n}-1}=1+\frac{2}{e^{2\pi n}-1}
+\]
+
+\end_inset
+
+I was expecting 
+\begin_inset Formula 
+\[
+\tanh\pi n=\frac{e^{2\pi n}-1}{e^{2\pi n}+1}=1-\frac{2}{e^{2\pi n}+1}
+\]
+
+\end_inset
+
+but apparently, this requires an alternating sign in the summations: We'd
+ need to have 
+\begin_inset Formula $\sum_{k}\left(-\right)^{k}...$
+\end_inset
+
+ to get tanh and tan.
+ So that adds generality and complexity.
+\end_layout
+
 \begin_layout Subsection*
 General LHS
 \end_layout
@@ -259,7 +301,74 @@ for general
 \begin_inset Formula $r,q$
 \end_inset
 
-? 
+? For inspiration, it's worth writing this closer to the Fourier form:
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(n^{r}\mp k^{q}\right)n^{rp}}=\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(1\mp k^{q}n^{-r}\right)n^{r\left(p+1\right)}}
+\]
+
+\end_inset
+
+Setting 
+\begin_inset Formula $q=r$
+\end_inset
+
+ allows a factorization
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(1\mp k^{r}n^{-r}\right)n^{r\left(p+1\right)}}=\sum_{n=1}^{\infty}\frac{f\left(n\right)}{n^{r\left(p+1\right)}}
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+f\left(n\right)=\sum_{k=1}^{\infty}\frac{1}{1\mp\left(k/n\right)^{r}}
+\]
+
+\end_inset
+
+Again, choosing 
+\begin_inset Formula $r=2$
+\end_inset
+
+ allows this to be easily related to 
+\begin_inset Formula $\coth\pi n$
+\end_inset
+
+ and 
+\begin_inset Formula $\cot\pi n$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $r=2$
+\end_inset
+
+ gives a function with evenly spaced poles along the real/imaginary axis.
+ Setting 
+\begin_inset Formula $r=3$
+\end_inset
+
+ gives a function with evenly-spaced poles running along three axes, and
+ so on.
+ What a curious function!
+\end_layout
+
+\begin_layout Standard
+Well, but hang on – we're really talking about roots of unity, and following
+ this path leads us down Dirichlet L-functions.
+\end_layout
+
+\begin_layout Standard
+Asked question on matexchange about the name of this function: See https://math.s
+tackexchange.com/questions/4291231/common-name-of-sum-n-1-xp-np
+\end_layout
+
+\begin_layout Standard
+Clearly, a rich set of identities involving cyclotomic polynomials, Dirichlet
+ characters and so on are possible...
 \end_layout
 
 \end_body
