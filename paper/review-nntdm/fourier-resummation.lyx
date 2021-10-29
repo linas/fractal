@@ -185,12 +185,81 @@ Slapping a
  in front simplifies the RHS:
 \begin_inset Formula 
 \[
-\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{-1}{\left(\pm k^{q}\right)^{p+1}}\sum_{s=1}^{p}\left(\frac{\pm k^{q}}{n^{r}}\right)^{s}=\sum_{j=1}^{p}\zeta\left(\right)
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{-1}{\left(\pm k^{q}\right)^{p+1}}\sum_{j=1}^{p}\left(\frac{\pm k^{q}}{n^{r}}\right)^{j}=\left(\mp\right)^{p+1}\sum_{j=1}^{p}\left(\pm\right)^{j}\zeta\left(q\left(p-j+1\right)\right)\zeta\left(rj\right)
 \]
 
 \end_inset
 
+Setting 
+\begin_inset Formula $q=r=2$
+\end_inset
 
+ and picking the minus sign and picking 
+\begin_inset Formula $p=2m-1$
+\end_inset
+
+ reproduces the paper.
+ At any rate, in the general case, this is a finite sum over even or odd
+ zeta functions.
+ When even, these are Bernoulli numbers.
+ When odd these are presumably transcendental.
+ Thus, we get relations over products of zetas, provided we can give a meaningfu
+l LHS.
+\end_layout
+
+\begin_layout Subsection*
+Fourier sums
+\end_layout
+
+\begin_layout Standard
+For the LHS above, setting 
+\begin_inset Formula $q=r=2$
+\end_inset
+
+ and picking the minus sign gave
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{n^{2}+k^{2}}\left[\frac{1}{n^{2p}}+\left(-\right)^{p+1}\frac{1}{k^{2p}}\right]
+\]
+
+\end_inset
+
+which then factored out into the Fourier expansion for coth, which provided
+ the denominator 
+\begin_inset Formula $1/\left(n^{2}+k^{2}\right)$
+\end_inset
+
+.
+ The coth then gave the denominator 
+\begin_inset Formula $1/\left(\exp\pi k-1\right)$
+\end_inset
+
+ and redoing with tanh would give 
+\begin_inset Formula $1/\left(\exp\pi k+1\right)$
+\end_inset
+
+ .
+ TODO: For completeness, write these out.
+\end_layout
+
+\begin_layout Subsection*
+General LHS
+\end_layout
+
+\begin_layout Standard
+The question is, of course, can we give a meaningful interpretation of 
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(n^{r}\mp k^{q}\right)n^{rp}}
+\]
+
+\end_inset
+
+for general 
+\begin_inset Formula $r,q$
+\end_inset
+
+? 
 \end_layout
 
 \end_body
