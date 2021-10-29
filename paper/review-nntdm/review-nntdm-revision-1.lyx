@@ -114,24 +114,107 @@ n is possible is unexpected.
 \begin_layout Standard
 There does appear to be a minor typo in section 3 that does not change any
  results.
- The proof of Lemma 2.3 seems opaque; the rest of this note provides an easier-to
--read presentatation of the same proof.
+ I found the first step of the proof of Lemma 2.3 to be opaque; the rest
+ of this note provides an easier-to-read presentatation of the first step.
  
 \end_layout
 
 \begin_layout Subsubsection*
-A simpler derivation of Lemma 2.2 
+A typographical error
 \end_layout
 
 \begin_layout Standard
-Stuff
+Top of page 4, first formula, right hand side currently reads
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{1}{k^{4m-2}n^{2}+n^{4m}}
+\]
+
+\end_inset
+
+It should read 
+\begin_inset Formula 
+\[
+\frac{1}{k^{4m-2}n^{2}+k^{4m}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+A simpler derivation of Lemma 2.3 
+\end_layout
+
+\begin_layout Standard
+I found the first step of the proof of Lemma 2.3 to be opaque and painful
+ to verify.
+ A more transparent derivation might go as follows.
+\end_layout
+
+\begin_layout Standard
+Famously, for integer 
+\begin_inset Formula $p$
+\end_inset
+
+, one has
+\begin_inset Formula 
+\begin{align*}
+\frac{\alpha^{p}-\beta^{p}}{\alpha-\beta}= & \alpha^{p-1}+\beta\alpha^{p-2}+\beta^{2}\alpha^{p-3}+\cdots+\beta^{p-1}\\
+= & \sum_{s=1}^{p}\alpha^{p-s}\beta^{s-1}\\
+= & \alpha^{p-1}\sum_{s=1}^{p}\alpha^{-s+1}\beta^{s-1}\\
+= & \alpha^{p-1}\sum_{s=1}^{p}\left(\frac{\beta}{\alpha}\right)^{s-1}\\
+= & \frac{\alpha^{p}}{\beta}\sum_{s=1}^{p}\left(\frac{\beta}{\alpha}\right)^{s}
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\alpha=n^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=-k^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $p=2m-1$
+\end_inset
+
 .
+ One can substitute straight away or perhaps first divide both sides by
+ 
+\begin_inset Formula $1/\alpha^{p}\beta^{p}$
+\end_inset
+
+ to get 
+\begin_inset Formula 
+\[
+\frac{1}{\alpha-\beta}\left[\frac{1}{\beta^{p}}-\frac{1}{\alpha^{p}}\right]=\frac{1}{\beta^{p+1}}\sum_{s=1}^{p}\left(\frac{\beta}{\alpha}\right)^{s}
+\]
+
+\end_inset
+
+Now, when one makes the proposed substitution, this gives the important
+ identity in the proof of Lemma 2.3
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{-1}{k^{4m}}\sum_{s=1}^{2m-1}\left(\frac{-k^{2}}{n^{2}}\right)^{s}=\frac{1}{n^{4m-2}\left(k^{2}+n^{2}\right)}+\frac{1}{k^{4m-2}\left(k^{2}+n^{2}\right)}
+\]
+
+\end_inset
+
+The rest of the proof of Lemma 2.3 follows.
+\end_layout
+
+\begin_layout Subsection*
 
 \end_layout
 
