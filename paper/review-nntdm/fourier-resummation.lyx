@@ -94,6 +94,10 @@
 Resummation Games
 \end_layout
 
+\begin_layout Date
+October 2021
+\end_layout
+
 \begin_layout Section*
 Lemma 2.3 
 \end_layout
@@ -316,7 +320,7 @@ Setting
  allows a factorization
 \begin_inset Formula 
 \[
-\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(1\mp k^{r}n^{-r}\right)n^{r\left(p+1\right)}}=\sum_{n=1}^{\infty}\frac{f\left(n\right)}{n^{r\left(p+1\right)}}
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(1\mp k^{r}n^{-r}\right)n^{r\left(p+1\right)}}=\sum_{n=1}^{\infty}\frac{f\left(r;n\right)}{n^{r\left(p+1\right)}}
 \]
 
 \end_inset
@@ -324,7 +328,7 @@ Setting
 where
 \begin_inset Formula 
 \[
-f\left(n\right)=\sum_{k=1}^{\infty}\frac{1}{1\mp\left(k/n\right)^{r}}
+f\left(r;n\right)=\sum_{k=1}^{\infty}\frac{1}{1\mp\left(k/n\right)^{r}}
 \]
 
 \end_inset
@@ -369,6 +373,230 @@ tackexchange.com/questions/4291231/common-name-of-sum-n-1-xp-np
 \begin_layout Standard
 Clearly, a rich set of identities involving cyclotomic polynomials, Dirichlet
  characters and so on are possible...
+\end_layout
+
+\begin_layout Subsection*
+Hurwitz Zeta
+\end_layout
+
+\begin_layout Standard
+The stackexchange question gives an answer:
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{1}{n^{p}+z^{p}}=\lim_{s\to1}\sum_{k=0}^{p-1}e^{2\pi ik/p}\zeta\left(s,e^{2\pi ik/p}z\right)
+\]
+
+\end_inset
+
+ (double check this, I don't think I slipped a sign, but still) Write
+\begin_inset Formula 
+\[
+g\left(p;z\right)=\sum_{n=1}^{\infty}\frac{1}{n^{p}+z^{p}}
+\]
+
+\end_inset
+
+ then we have that 
+\begin_inset Formula 
+\[
+f\left(r;n\right)=n^{r}g\left(r;n\right)
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(1+k^{r}n^{-r}\right)n^{r\left(p+1\right)}}=\sum_{n=1}^{\infty}\frac{g\left(r;n\right)}{n^{rp}}
+\]
+
+\end_inset
+
+So earlier we had that
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{n^{r}\mp k^{q}}\left[\frac{1}{n^{rp}}-\frac{1}{\left(\pm k^{q}\right)^{p}}\right]=\left(\mp\right)^{p+1}\sum_{j=1}^{p}\left(\pm\right)^{j}\zeta\left(q\left(p-j+1\right)\right)\zeta\left(rj\right)
+\]
+
+\end_inset
+
+Set 
+\begin_inset Formula $q=r$
+\end_inset
+
+ and for 
+\begin_inset Formula $p$
+\end_inset
+
+ odd, pick the lower sign to get
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{n^{r}+k^{r}}\left[\frac{1}{n^{rp}}-\frac{1}{\left(-k^{r}\right)^{p}}\right]=2\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{\left(n^{r}+k^{r}\right)n^{rp}}
+\]
+
+\end_inset
+
+while for 
+\begin_inset Formula $p$
+\end_inset
+
+ even, this vanishes.
+ So, if I didn't make any mistakes, one has that
+\begin_inset Formula 
+\[
+2\sum_{n=1}^{\infty}\frac{g\left(r;n\right)}{n^{rp}}=\sum_{j=1}^{p}\left(-\right)^{j}\zeta\left(r\left(p-j+1\right)\right)\zeta\left(rj\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $g$
+\end_inset
+
+ is that Hurwitz-sum over roots of unity.
+ Again, coth is the special case of 
+\begin_inset Formula $r=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Is this an inteesting result? It seems ..
+ trivial-ish.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $p$
+\end_inset
+
+ even, we seem to have a proof that the double-zeta sum vanishes!? Is this
+ an interesting result? 
+\end_layout
+
+\begin_layout Standard
+Lets hand plug in and check: for 
+\begin_inset Formula $p=2$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+\sum_{j=1}^{p}\left(-\right)^{j}\zeta\left(r\left(p-j+1\right)\right)\zeta\left(rj\right)=\zeta\left(r\right)\zeta\left(2r\right)-\zeta\left(2r\right)\zeta\left(r\right)=0
+\]
+
+\end_inset
+
+Well, dooh.
+ That too is trivial.
+ So for 
+\begin_inset Formula $p$
+\end_inset
+
+ even, the sum vanishes trivially, term by term.
+ Let's try some odd 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $p=1$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\sum_{j=1}^{p}\left(-\right)^{j}\zeta\left(r\left(p-j+1\right)\right)\zeta\left(rj\right)=-\zeta\left(r\right)\zeta\left(r\right)
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $p=3$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\sum_{j=1}^{p}\left(-\right)^{j}\zeta\left(r\left(p-j+1\right)\right)\zeta\left(rj\right)=-2\zeta\left(3r\right)\zeta\left(r\right)+\zeta\left(2r\right)\zeta\left(2r\right)
+\]
+
+\end_inset
+
+and so for odd 
+\begin_inset Formula $p$
+\end_inset
+
+ we conclude we can start the sum in the middle, and then collect terms
+ around the middle.
+ 
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $p$
+\end_inset
+
+ is odd (else we have no results), we may as well set 
+\begin_inset Formula $p=2m-1$
+\end_inset
+
+ which maybe improves readability???
+\begin_inset Formula 
+\[
+2\sum_{n=1}^{\infty}\frac{g\left(r;n\right)}{n^{r\left(2m-1\right)}}=\sum_{j=1}^{2m-1}\left(-\right)^{j}\zeta\left(r\left(2m-j\right)\right)\zeta\left(rj\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, is this a notable result? For 
+\begin_inset Formula $r$
+\end_inset
+
+even, the RHS is solvable, in that it is entirely made of Bernoulli numbers.
+ For 
+\begin_inset Formula $r$
+\end_inset
+
+ odd, that is no longer the case.
+\end_layout
+
+\begin_layout Standard
+Some special cases: for 
+\begin_inset Formula $r=1$
+\end_inset
+
+ this reduces to 
+\begin_inset Formula 
+\begin{align*}
+2\sum_{n=1}^{\infty}\frac{g\left(1;n\right)}{n^{2m-1}}= & \sum_{j=1}^{2m-1}\left(-\right)^{j}\zeta\left(2m-j\right)\zeta\left(j\right)\\
+= & 2\sum_{n=1}^{\infty}\frac{1}{n^{2m-1}}\sum_{k}\frac{1}{n+k}
+\end{align*}
+
+\end_inset
+
+which is non-convergent or conditionally convergent or something; is there
+ a mistake? As it needs to be finite.
+ For 
+\begin_inset Formula $r=2$
+\end_inset
+
+ it is again the coth case.
+ For Mr=3, its the cube-root-of-unity thing:
+\begin_inset Formula 
+\[
+2\sum_{n=1}^{\infty}\frac{g\left(3;n\right)}{n^{3\left(2m-1\right)}}=\sum_{n=1}^{\infty}\frac{1}{n^{3\left(2m-1\right)}}\sum_{k=1}^{\infty}\frac{1}{n^{3}+k^{3}}
+\]
+
+\end_inset
+
+and I'm having a hard time getting excited about that, even if I pull the
+ Hurwitz summation out.
 \end_layout
 
 \end_body
