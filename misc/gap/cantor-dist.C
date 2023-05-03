@@ -110,7 +110,7 @@ bincount (int nbins, int pmax, long double z)
 	}
 }
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	int i;
 
@@ -124,5 +124,6 @@ main(int argc, char *argv[])
 	long double z = atof (argv[3]);
 
 	bincount (nbins, max, z);
-}
 
+	return 0;
+}

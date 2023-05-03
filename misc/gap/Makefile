@@ -30,6 +30,8 @@ dist:
 	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lgmpxx -lgmp -lm -lstdc++
 #	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++
 
+cantor-dist: cantor-dist.o
+	$(CC) -o $@ $< -lm -lstdc++
 
 c-takagi.o:	c-takagi.c
 takagi-n.o:	takagi-n.C
