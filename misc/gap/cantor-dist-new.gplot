@@ -4,16 +4,21 @@ set term png small
 set out 'cantor-dist-log.png'
 
 # set data style linespoints
-set data style lines
+set style data lines
 set key right
 
-set title "Distribution of Cantor Dust for z=0.618 (1401 bins)"
+set title "Distribution of Cantor Dust"
 set xlabel "x"
 set ylabel "Probability (Normalized Bin Count)"
 
+set logscale y
+
 # set yrange [0:]
 
-plot "cantor-dist.dat" using 2:3 title ""
+sigma=0.1
+
+plot "cantor-dist-new.dat" using 2:3 title "data", \
+	(1 / (sigma * sqrt(2*3.14159))) * exp(-(x-0.5)**2 / (2*sigma**2)) title "parabola"
 
 # pause 100
 
