@@ -19,7 +19,7 @@ bincount (int nbins, int pmax, long double z)
 	int i;
 
 	printf ("#\n# bincount of projection of Cantor polynomial\n#\n");
-	printf ("#\n# nbins=%d   pow=%d	z=%Lg\n#\n",nbins,pmax, z);
+	printf ("#\n# nbins=%d   pow-max=%d	z=%Lg\n#\n", nbins, pmax, z);
 
 #define BINSZ 45720
 	long double bin[BINSZ];
@@ -37,7 +37,7 @@ bincount (int nbins, int pmax, long double z)
 		int id;
 		// We are going to loop over all dyadic rationals with
 		// denominator less than 2^pmax.
-		// work out the binary digit expansion of d / pmax
+		// Work out the binary digit expansion of d / pmax
 		long long unsigned int mask = 1ULL<<(pmax-1);
 		long double clo = 0.0;
 		long double chi = 0.0;
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 
 	if (argc <3)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <pow> <z>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <pow-max> <z>\n", argv[0]);
 		exit (1);
 	}
 	int nbins = atoi (argv[1]);

@@ -1,0 +1,19 @@
+
+# set term png small color
+set term png small
+set out 'cantor-dist-log.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Distribution of Cantor Dust for z=0.618 (1401 bins)"
+set xlabel "x"
+set ylabel "Probability (Normalized Bin Count)"
+
+# set yrange [0:]
+
+plot "cantor-dist.dat" using 2:3 title ""
+
+# pause 100
+
