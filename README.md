@@ -69,7 +69,8 @@ In alphabetical order:
   `brat.C`, which will fill in a pixmap with floating-point numbers,
   given a range of parameters and a function implementing the dynamical
   system.  The shell script `cvt` will then assign colors to the floats
-  and create an RGB image.
+  and create an RGB image. The oldest code, for generating various
+  explorations related to the Mandelbrot set, is in here.
 
 - [**generate/samples**](generate/samples) -- A variety of images that
   were created with the above. Most of these are test runs, and are
