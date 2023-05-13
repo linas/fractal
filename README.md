@@ -59,7 +59,7 @@ code. I will accept bug reports and pull requests to fix what's broken.
 
 In alphabetical order:
 
-- [[**generate**]](generate) -- code for filling in 2D pixmaps of a
+- [**generate**](generate) -- Code for filling in 2D pixmaps of a
   broad assortment of dynamical systems. This includes code for making
   short animated movies of the same. The "main" workhorse/driver is
   `brat.C`, which will fill in a pixmap with floating-point numbers,
@@ -67,7 +67,30 @@ In alphabetical order:
   system.  The shell script `cvt` will then assign colors to the floats
   and create an RGB image.
 
-- [[**generate/samples**]](generate/samples) -- a variety of images that
+- [**generate/samples**](generate/samples) -- A variety of images that
   were created with the above. Most of these are test runs, and are
   incomplete or damaged in some way. You will find final versions of
   these in the art gallery.
+
+- [**image**](image) -- A single utility for converting `flo` files to
+  `mtv` files. A `flo` file contains one floating point number per
+  pixel. An `mtv` file contains one 24-bit RGB per pixel. Both formats
+  include the pixmap width and height, and no other metadata.
+
+- [**lang**](lang) -- Some very simple natural-language and AI
+  experiments from 1997. This is perhaps my earliest work on AI.
+  The [diary.txt](lang/diary.txt) file writes up my thoughts from
+  that era.
+
+- [**misc**](misc) -- This is a ***HUGE*** directory, containing various
+  experiments in various subdirectories. See the README file there, for
+  a summary.
+
+- [**paper**](paper) -- Another ***HUGE*** directory, containing LyX
+  source for all of the papers that I've published, and a bunch of
+  others that I have not published. Please keep in mind that using this
+  stuff is plagiarism. I've been plagiarized before. If you think that
+  you can just grab this stuff, and publish it under your own name,
+  well, that would be wrong. You will get caught, sooner or later.
+  The stuff here is a historical record, and is here for your
+  entertainment. It's not here for theft.
