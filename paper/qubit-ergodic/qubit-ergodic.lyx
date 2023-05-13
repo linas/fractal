@@ -212,22 +212,113 @@ Sketch
 \end_layout
 
 \begin_layout Standard
-Well, consider the quantum finite automaton.
- There's some initial state 
-\backslash
-left|
-\backslash
-psi_{0}
-\backslash
-right
-\backslash
-rangle and to this is applied a sequence of unitary transformations U_{1},U_{2},
-\backslash
-cdots where (for the QFA) each U_{k} is picked from a finite set specified
- by the QFA.
- The index set, the subscripts on these unitary transforms provide the symbolic
- dynamics! It is quite easy to pick some collection of U_{k} such that the
- resulting mixed state is space-filling.
+Here's a short sketch of the idea.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider some quantum system in the initial pure state 
+\begin_inset Formula $\left|\psi_{0}\right\rangle $
+\end_inset
+
+.
+ An experimenter (a grad student sitting in the lab) applies a sequence
+ of unitary transformations 
+\begin_inset Formula $U_{1},U_{2},\cdots$
+\end_inset
+
+ where each 
+\begin_inset Formula $U_{k}$
+\end_inset
+
+ is picked from a finite set.
+ The study of systems where one makes choices, deterministically or randomly,
+ from a finite set, is called 
+\begin_inset Quotes eld
+\end_inset
+
+symbolic dynamics
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+There is a vast assortment of dynamical systems which generate a sequence
+ of symbols.
+ At the very simplest, one has coinflips, the so-called Bernoulli process.
+ More complex are shifts and 
+\begin_inset Quotes eld
+\end_inset
+
+subshifts of finite type
+\begin_inset Quotes erd
+\end_inset
+
+: these can be thought of as (random) walks on a directed, cyclic graph.
+ Certainly, deterministic finite automata generate sequences of symbols.
+ Any of these can be used to generate a sequence of symbols; these symbols
+ can be interpreted as picking one of a set of unitary transformations 
+\begin_inset Formula $U_{k}$
+\end_inset
+
+ to be applied to the curent state 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+.
+ If we write 
+\begin_inset Formula 
+\[
+\left|\psi_{k+1}\right\rangle =U_{k}\left|\psi_{k}\right\rangle 
+\]
+
+\end_inset
+
+then the process 
+\begin_inset Quotes eld
+\end_inset
+
+feels
+\begin_inset Quotes erd
+\end_inset
+
+ distinctly Markovian.
+ 
+\end_layout
+
+\begin_layout Standard
+The simplest and most direct example worth exploring is the case where 
+\begin_inset Formula $\left|\psi\right\rangle $
+\end_inset
+
+ is a single qubit: that is, a single vector living on the surface of the
+ sphere 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+, the Bloch sphere.
+ Equivalently, one has that 
+\begin_inset Formula $S^{2}=\mathbb{CP}^{1}$
+\end_inset
+
+, the complex projective line.
+\end_layout
+
+\begin_layout Standard
+Well, this is misleading beaucse there is a holonomy and this is erased
+ if one is not careful!
+\end_layout
+
+\begin_layout Standard
+free group in two generators.
+\end_layout
+
+\begin_layout Standard
+It is quite easy to pick some collection of U_{k} such that the resulting
+ mixed state is space-filling.
  That is, each specific state 
 \backslash
 left|
@@ -244,11 +335,7 @@ rangle is just a pure state, a single point, but the mixed state, of all
 \end_layout
 
 \begin_layout Standard
-But where does the selection of U_{k} come from? Ah, well, here, I imagine
- the system in a thermal bath, and each interaction with a thermal photon
- is a U_{k} ...
- well, there's some infinite regress here.
- So lets consider a simplified model.
+QFA and state machines
 \end_layout
 
 \begin_layout Standard
@@ -284,6 +371,10 @@ Extensions
 
 \begin_layout Standard
 Some obvious generalizations:
+\end_layout
+
+\begin_layout Itemize
+Mixed state instead of pure state.
 \end_layout
 
 \begin_layout Itemize
