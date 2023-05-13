@@ -94,3 +94,16 @@ In alphabetical order:
   well, that would be wrong. You will get caught, sooner or later.
   The stuff here is a historical record, and is here for your
   entertainment. It's not here for theft.
+
+- [**tools**](tools) -- A collection of numeric libraries to support the
+  various experiments. Includes implementations of various
+  number-theorietic functions, such as computing divisors, finding
+  primes, working with continued fractions. Also includes some basic
+  image manipulation code. Much of this code was written in the 1990's
+  and 2000's, long before python existed, long before math libraries
+  were available, and long before you could just download code to do
+  image processing. Forget finding number-theory functions. Some or
+  much of what is here can now be found in standard libraries (but
+  with a different API). The code in the experiments directory makes
+  very heavy use of the code here.
+
