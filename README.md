@@ -59,8 +59,15 @@ code. I will accept bug reports and pull requests to fix what's broken.
 
 In alphabetical order:
 
-- **generate** -- code for filling in 2D pixmaps of a broad assortment
-  of dynamical systems. This includes code for making short animated
-  movies of the same. The "main" workhorse/driver is `brat.C` which
-  will fill in a pixmap with colors, given a range of paramaters and a
-  function implementing the dynamical system.
+- [[**generate**]](generate) -- code for filling in 2D pixmaps of a
+  broad assortment of dynamical systems. This includes code for making
+  short animated movies of the same. The "main" workhorse/driver is
+  `brat.C`, which will fill in a pixmap with floating-point numbers,
+  given a range of parameters and a function implementing the dynamical
+  system.  The shell script `cvt` will then assign colors to the floats
+  and create an RGB image.
+
+- [[**generate/samples**]](generate/samples) -- a variety of images that
+  were created with the above. Most of these are test runs, and are
+  incomplete or damaged in some way. You will find final versions of
+  these in the art gallery.
