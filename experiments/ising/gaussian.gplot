@@ -1,0 +1,26 @@
+#! /usr/bin/gnuplot
+
+# set term png small
+set term png giant size 800,600
+set out 'gaussian.png'
+
+set style line 3
+
+# set data style linespoints
+# set data style lines
+set style data line 
+set key right
+
+
+set trange [-3.1416/2:3.1416/2]
+# set yrange [-1:1]
+
+set title "Gaussian projection"
+set xlabel "theta"
+set ylabel "distance"
+
+f(x) = exp(-tan(x)*tan(x))*(1+tan(x)*tan(x))
+e(x) = exp(-tan(x)*tan(x))
+set polar
+plot f(t)
+

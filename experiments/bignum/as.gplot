@@ -1,0 +1,37 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'as.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# set xrange [-1:1]
+# set yrange [-1:1]
+
+set xrange [-1:1]
+
+set title "b(s) on Imaginary Axis"
+set xlabel "s"
+set ylabel "b(s)"
+
+# f(x) = exp (-sqrt(4*3.14159*abs(x))) / (x*x+1)
+f(x) = exp (-sqrt(4*3.14159*abs(x))) / sqrt(x*x+1)
+# f(x) = exp (-sqrt(4*3.14159*abs(x))) / sqrt(sqrt(abs(x)))
+# f(x) = exp (-4*sqrt(abs(x)))
+
+
+plot "bs-imag.txt" using 3:($4*f($3)) title "re", \
+     "bs-imag.txt" using 3:($5*f($3)) title "im"
+
+# plot "bs-imag.txt" using ($4*f($3)):($5*f($3)) title ""
+# plot "bs-imag.txt" using 4:5  title ""
+
+
+
+# pause 100
+

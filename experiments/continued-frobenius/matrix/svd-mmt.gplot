@@ -1,0 +1,28 @@
+
+
+# set term png small color
+set term png small 
+set out 'svd-mmt.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Right-Eigenvectors of SVD of Bernoulli operator"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+plot "svd-mmt.dat" using 1:2 title "zeroth",\
+     "svd-mmt.dat" using 1:3 title "first",\
+     "svd-mmt.dat" using 1:4 title "second",\
+     "svd-mmt.dat" using 1:5 title "third",\
+     "svd-mmt.dat" using 1:6 title "fourth",\
+     "svd-mmt.dat" using 1:7 title "fifth",\
+     "svd-mmt.dat" using 1:8 title "sixth",\
+     "svd-mmt.dat" using 1:9 title "seventh"
+
+
+# pause 100
+

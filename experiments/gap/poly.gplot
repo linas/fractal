@@ -1,0 +1,29 @@
+#
+# graph some of the takagi-related polynomials
+#
+# set term x11
+# set term gif size 640,480
+
+# set term png small color
+set term png small
+set out 'poly.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Polynomials"
+set xlabel "x"
+set ylabel "p(x)"
+
+# set yrange [0:]
+set samples 200
+
+plot [0:1] 2*x-4*x*x  title "grg", \
+     2*x+4*x*x-8*x*x*x  title "ggrg", \
+     2*x+4*x*x+8*x*x*x-16*x*x*x*x  title "gggrg", \
+     2*x-4*x*x+8*x*x*x  title "grgrg", \
+     2*x-4*x*x+8*x*x*x-16*x*x*x*x  title "grgrgrg"
+
+# pause 100
+

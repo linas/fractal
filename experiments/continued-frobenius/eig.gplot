@@ -1,0 +1,22 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'eig.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "log of eigenvalues of Continued Fraction Frobenius-Perron Operator"
+set xlabel "n"
+set ylabel "log lambda"
+
+# set yrange [0:]
+
+plot "eig.dat" using 1:(log($2) + $1) title "eig"
+
+# pause 100
+

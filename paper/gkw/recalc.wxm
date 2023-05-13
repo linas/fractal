@@ -1,0 +1,69 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+
+/* [wxMaxima: input   start ] */
+l(a,b):=log(a)+b/a - b^2/(2*a^2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+g(a,b):=(a+b)*l(a,b) -a-b-l(a,b)/2+log(2*%pi)/2+1/(12*(a+b));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+zet(x) := -(n*(x+k)+2)*log(2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+sn(x):=-i*%pi*n*x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+gr(x):=g(n*(x+k),2) - g(n*x,2) -g(n*x,1)-g(n*(1-x),1)+zet(x)-sn(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+expand(g(n*x+k*n,2)-g(n-n*x,1)-g(n*x,2)-g(n*x,1)+zet(x)-sn(x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lp(x,y):=log(x)+log(y);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n*x*lp(n,x+k)+k*n*lp(n,x+k)+3*lp(n,x+k)/2+n*x*lp(n,1-x)-n*lp(n,1-x)-lp(n,1-x)/2-2*n*x*lp(n,x)
+ -2*lp(n,x)+i*%pi*n*x-log(2)*n*x-log(2)*k*n-k*n+n-log(2*%pi)-2*log(2)-1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+expand(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratsimp(expand(g(n*x+k*n,2)-g(n-n*x,1)-g(n*x,2)-g(n*x,1)+zet(x)-sn(x)););
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratsimp(%o6);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+radcan(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+radcan(%o6);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+trigreduce(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([%o6], [x,-5,5]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

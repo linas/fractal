@@ -1,0 +1,28 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'eg-zero.png'
+
+# set data style linespoints
+set data style lines
+set key right
+set xzeroaxis
+
+set title "zero"
+set xlabel "rank"
+set ylabel "v"
+
+# set yrange [0:]
+
+plot \
+	"egzero-1.dat" using (1/$1):2 title "eigen 1" , \
+ 	"egzero-1.dat" using (1/$1):(-0.3037+5400/($1*$1*$1*$1*$1*$1*$1)) title "fit curve" 
+
+
+
+
+# pause 100
+

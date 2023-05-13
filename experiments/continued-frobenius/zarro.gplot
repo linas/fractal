@@ -1,0 +1,25 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'zarro.png'
+
+# set data style linespoints
+set data style lines
+set key right
+set xzeroaxis
+
+set title "Location of zero"
+set xlabel "lambda"
+set ylabel "v"
+
+# set yrange [0:]
+
+plot \
+	"zarro.dat" using (log(1.0-$1)):2 title "log"
+
+
+# pause 100
+

@@ -1,0 +1,68 @@
+#! /usr/bin/gnuplot
+
+
+set term png giant size 800,600
+set out 'bogus-config-energy.png'
+
+set style line 3
+
+# set data style linespoints
+# set data style lines
+set style data line 
+set key right
+
+
+# set xrange [-1:1]
+# set yrange [-1:1]
+
+set title "xxx Tent Model Configuration Energy"
+set xlabel "State Number"
+set ylabel "Energy"
+
+plot "bogus.dat" using 2:4 title "Interaction potential", \
+     "bogus.dat" using 2:5 title "Configuration energy"
+
+# ---------------------------------------------------------------
+set term png giant size 800,600
+set out 'bogus-partition.png'
+set title "Weighted Tent Model Partition Probability"
+# set xlabel "Weighted State Number"
+set xlabel "State Number"
+set ylabel "Partition Probability"
+
+plot "bogus.dat" using 2:5 title ""
+
+# ---------------------------------------------------------------
+set term png giant size 800,600
+set out 'bogus-integral.png'
+set title "Ising Model Cumulative Distribution"
+# set xlabel "Weighted State Number"
+set xlabel "State Number"
+set ylabel "Cumulative Probability"
+
+# plot "bogus.dat" using 3:($6/8.10612)  title "Ising", \
+#     "bogus.dat" using 3:3 title "question"
+
+# plot "bogus.dat" using 2:($6/0.179542)  title "tent 18", \
+#      "bogus.dat" using 2:3 title "question"
+
+# plot "bogus.dat" using 2:($6/0.080374)  title "tent 26", \
+#     "bogus.dat" using 2:3 title "question"
+
+# plot "bogus.dat" using 2:($6/0.280786)  title "kac 0.6-0.3-14", \
+#      "bogus.dat" using 2:3 title "question"
+
+# set key left
+# plot "bogus.dat" using 2:($6/0.404907)  title "Kac model partition", \
+#      "bogus.dat" using 2:3 title "Question mark function"
+
+set key left
+plot "bogus.dat" using 2:($6/8.4)  title "Ising model", \
+     "bogus.dat" using 2:3 title "Question mark function"
+
+
+# plot "bogus.dat" using 3:($6/0.234395)  title "tent 14q"
+
+
+# pause 100
+

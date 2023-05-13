@@ -1,0 +1,68 @@
+
+set term png small
+set out 'p.png'
+
+# set data style linespoints
+set data style lines
+set key left
+
+set xrange [0:1]
+
+set title "Simator"
+set xlabel "x"
+set ylabel "x)"
+
+n=12
+s=5
+yo = 0.23561058253
+no = yo*(1-yo)*log(yo)
+no = 0.260345491
+
+# plot (x**n * (1-x)**n) title "poly" linewidth 3, \
+#      (exp(-4*n*(x-0.5)*(x-0.5))/4**n) title "gaussian" linewidth 3
+
+# plot ((x**n * (1-x)**n) / (exp(-4*n*(x-0.5)*(x-0.5))/4**n) -1 )  title "delta" linewidth 3
+
+# XXX failure
+# plot (x**n * (1-x)**n * abs(log(x))**s) title "poly" linewidth 3, \
+#      (exp(-4*n*(x-0.5+1/log(s))**2)/4**n) title "gaussian" linewidth 3
+
+
+# Wrong still --- 
+# plot ((x * (1-x) * abs(log(x)))**n) title "bound" linewidth 3, \
+#     ((x * (1-x))**n * abs(log(x))**s) title "poly" linewidth 3
+
+# Another important case
+# s=0.5
+# n=1
+# plot ((x * (1-x) * abs(log(x)))**n) title "bound" linewidth 3, \
+#      ((x * (1-x))**n * abs(log(x))**s) title "poly" linewidth 3
+
+# set xrange [0.23561058252:0.23561058254]
+# plot ((1-2*x)*log(x) +1-x) title "zero" linewidth 3
+
+# plot (((x * (1-x) * abs(log(x)))/no)**s) title "poly" linewidth 3
+
+# plot (((x * (1-x) * abs(log(x)))/no)**s) title "poly" linewidth 3, \
+#      (exp(-0.5*s*(x-yo)*(x-yo)/(yo*(1-2*yo)))) title "exp" linewidth 3
+
+s = -0.5
+
+f(x) = ((x * (1-x) * abs(log(x)))/no)**s
+fb(x) = exp(-0.5*s*(x-yo)*(x-yo)/(yo*(1-2*yo)))
+
+g(x) = ((x * (1-x) * 4)** (n-s))
+gb(x) = exp(-4*(n-s)*(x-0.5)*(x-0.5))
+
+# plot (f(x)*g(x)) title "poly" linewidth 3, \
+#     (fb(x)*gb(x)) title "bound" linewidth 3
+
+# plot (f(x)) title "poly" linewidth 3, \
+#      (fb(x)) title "bound" linewidth 3
+
+
+# plot ((1-x)/abs(log(x))) title "r" linewidth 3
+# plot (x*abs(log(x))) title "r" linewidth 3
+
+set xrange [0.2:2]
+plot (exp(-(1-2*yo)**2*(x-1)/x)) title "r" linewidth 3

@@ -1,0 +1,19 @@
+
+set term postscript eps color enhanced
+set out 'fpcoef.eps'
+
+set title "Perron-Frobenius Eigenvector Coefficients"
+set style data lines
+set yrange [1e-3:1]
+set xlabel "{/Symbol b}"
+set logscale y
+set format y "10^{%4T}"
+
+set style line 2 lt 1 lc rgb '#0072bd' # blue
+
+plot "fpcoef-best.dat" using 3:($5/$4) lw 2 title "v_1", \
+     "fpcoef-best.dat" using 3:($6/$4) lw 2 title "v_2", \
+     "fpcoef-best.dat" using 3:($7/$4) lw 2 title "v_3", \
+     "fpcoef-best.dat" using 3:($8/$4) lw 2 title "v_4", \
+     "fpcoef-best.dat" using 3:($9/$4) lw 2 title "v_5"
+

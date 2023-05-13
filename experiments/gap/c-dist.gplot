@@ -1,0 +1,23 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'c-dist.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "gap"
+set xlabel "x = p/q"
+set ylabel "(x)"
+
+# set yrange [0:]
+
+plot "c-dist.dat" using 1:2 title ""
+
+# pause 100
+

@@ -1,0 +1,23 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'conj.png'
+
+set data style lines
+# set data style points
+set key right
+
+set title "l"
+set xlabel "xn"
+set ylabel "y"
+
+# set yrange [0:1.5]
+
+plot "conj.dat" using 2:4 title "my", \
+     "conj.dat" using 2:5 title "tent"
+
+# pause 100
+

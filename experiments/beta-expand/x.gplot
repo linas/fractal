@@ -1,0 +1,27 @@
+
+set title "Average distance between branch points"
+set style data lines
+set xlabel "{/Symbol b}"
+set ylabel "Distance"
+
+set logscale y
+set xrange [1.0:2.0]
+
+set key bottom left
+
+##############################################################################
+# The version used in the paper.
+#
+set term postscript eps color enhanced font "Helvetica,28"
+set out 'sido-length.eps'
+
+set key top left spacing 1.25
+set yrange [2:300]
+set ytics add (2, 300)
+
+plot "sido-len-80-16.dat" using (2*$1):4 lw 2 title "2^4 expansions", \
+     "sido-len-100-128.dat" using (2*$1):4 lw 2 title "2^7 expansions", \
+     "sido-len-160-4096.dat" using (2*$1):4  lw 2 title "2^{12} expansions", \
+     (0.75/((x-1)*(2-x))) title "3/4({/Symbol b}-1)(2-{/Symbol b})"
+#
+##############################################################################

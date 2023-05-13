@@ -1,0 +1,27 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'x.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Ising Curve"
+set xlabel "x"
+set ylabel "F(x)"
+
+set xrange [0:1]
+
+plot (-x*log(x))
+# plot (-(x*log(x) + (1-x)*log (1-x))), log(2)*4*x*(1-x)
+
+
+
+
+
+# pause 100
+

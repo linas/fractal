@@ -1,0 +1,23 @@
+
+set term png size 1024, 768
+set out 'om.png'
+
+set style data linespoints
+# set style data lines
+set key right
+
+set title "the om"
+set xlabel "om"
+set ylabel "fourier"
+
+# set yrange [-5:5]
+
+# Frequency is 2.8952 when range is 0-100 and 3.3 sqrt(k)
+# but the peak is not sharp
+plot "om.dat" using 1:2 title "0", \
+     "om.dat" using 1:3 title "1", \
+     "om.dat" using 1:4 title "2", \
+     "om.dat" using 1:5 title "3", \
+     "om.dat" using 1:6 title "4", \
+     "om.dat" using 1:7 title "5", \
+     "om.dat" using 1:8 title "6"

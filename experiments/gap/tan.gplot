@@ -1,0 +1,32 @@
+#
+# graph some of the takagi-related tannomials
+#
+# set term x11
+# set term gif size 640,480
+
+# set term png small color
+set term png small
+set out 'tan.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Pls"
+set xlabel "x"
+set ylabel "p(x)"
+
+# set yrange [0:]
+set samples 200
+
+# plot [1.1:8] (tan(2.0*atan(x)-3.1416)) title "pluts"
+# plot [0:1] (sqrt(x)**3+sqrt(1-x)**3) title "pluts" , \
+#     ((1.0-0.707107)*4*(x-0.5)*(x-0.5)+0.707107) title "parab"
+# plot [0:1] (sqrt(x)**3) title "pluts" , (x*x) title "para"
+# plot [0:0.5] (acos(2*cos(3.1416*x)-1)/3.1416) title "cos"
+# plot [0:1] (0.5-0.5*sqrt(1-x)) title "gp"
+# plot [0:1] (0.5-0.5*sqrt(0.5+0.5*sqrt(1-x))) title "g2p"
+plot [0.25:1] (4*(1-sqrt(x))*(1-sqrt(x))) title "p"
+
+# pause 100
+
