@@ -116,10 +116,12 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-The abstract says it all; if you can easily envision a qubit, and one of
- two unitary transformations being determined by a coinfip, then you will
- learn little or nothing by reading this! But if you've never thought about
- this before, then one can get some minor amount of entertainment from it.
+The abstract says it all; if you can easily envision a qubit, and the applicatio
+n of either one of two unitary transformations being determined by a coinfip,
+ then you will learn little or nothing by reading this! But if you've never
+ thought about this before, then perhaps you can get some minor amount of
+ entertainment from it.
+ I did.
  The content is ideal for physics undergrads, as it provides an excuse to
  review Bernoulli porcesses, ergodicity and unitary transformations on qubits.
  However, I am not writing for undergrads, but for myself, and so there
@@ -136,8 +138,9 @@ toy model
 \begin_inset Quotes erd
 \end_inset
 
-, as the sequence of unitary transforms can be imagined to come from some
- external thermal bath.
+, as it can be used to imagine the thermalization of a qubit.
+ The sequence of unitary transforms can be imagined to come from some external
+ thermal bath.
  The effect on the qubit is to 
 \begin_inset Quotes eld
 \end_inset
@@ -146,7 +149,8 @@ thermalize it
 \begin_inset Quotes erd
 \end_inset
 
-; yet, there are no 
+.
+ This is acheived without any 
 \begin_inset Quotes eld
 \end_inset
 
@@ -154,8 +158,17 @@ measurements
 \begin_inset Quotes erd
 \end_inset
 
- that are made, and all time evolution (from the point of view of the qubit)
- is unitary.
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+wave function collapse
+\begin_inset Quotes erd
+\end_inset
+
+.
+ From the point of view of the qubit, it's time evolution is given by a
+ time-dependent but always unitary matrix.
  None-the-less, external 
 \begin_inset Quotes eld
 \end_inset
@@ -188,8 +201,113 @@ I just thought of this idea a week or two ago.
  I have no clue if its been persented before.
  It is sufficiently trivial that I fully expect that it has been taught
  or explained in classes, maybe even appearing in textbooks, decades earlier.
+ I imagine that everyone working in quantum computing is intimately acquanited
+ with this model.
  I have no clue if this is the case.
  If you know, let me know.
+\end_layout
+
+\begin_layout Section*
+Sketch
+\end_layout
+
+\begin_layout Standard
+Well, consider the quantum finite automaton.
+ There's some initial state 
+\backslash
+left|
+\backslash
+psi_{0}
+\backslash
+right
+\backslash
+rangle and to this is applied a sequence of unitary transformations U_{1},U_{2},
+\backslash
+cdots where (for the QFA) each U_{k} is picked from a finite set specified
+ by the QFA.
+ The index set, the subscripts on these unitary transforms provide the symbolic
+ dynamics! It is quite easy to pick some collection of U_{k} such that the
+ resulting mixed state is space-filling.
+ That is, each specific state 
+\backslash
+left|
+\backslash
+psi_{n}
+\backslash
+right
+\backslash
+rangle is just a pure state, a single point, but the mixed state, of all
+ of these different states corresponmding to the different sequences of
+ the U_{k} generate pure states that are splattered everywhere over all
+ of the possible state space (and necessarily fractal, since the index set
+ is necessarily Cantorian.)
+\end_layout
+
+\begin_layout Standard
+But where does the selection of U_{k} come from? Ah, well, here, I imagine
+ the system in a thermal bath, and each interaction with a thermal photon
+ is a U_{k} ...
+ well, there's some infinite regress here.
+ So lets consider a simplified model.
+\end_layout
+
+\begin_layout Standard
+Consider a single qubit in a pure state.
+ Such a pure state is a single vector pointing in some specific, precise
+ direction on the Bloch sphere.
+ A point.
+ Consider two unitary transforms A and B, which rotate this qubit by pi/5
+ along the x axis and the y axis.
+ These correspond to the A and B rotations of Banach-Tarski.
+ Let a grad student in the lab flip a coin, and apply either A or B to the
+ system.
+ After any amount of finite time, the qubit remains in a pure state, since
+ both A and B were unitary.
+ However, if we look at the set of all possible coin-flips, it is a Bernoulli
+ process, isomorphic to the Cantor set.
+ The coin-flips form an ergodic sequence, the resulting pure state of the
+ qubit takes an ergodic walk over the Bloch sphere.
+\end_layout
+
+\begin_layout Standard
+When a classical point state takes an ergodic walk, we say its in a thermally
+ equilibrated microstate.
+ Here, we seem to have constructed a pure quantum state, evolving via unitary
+ transforms, under control of the coin-flipping grad student.
+ The quantum system is taking a random walk, and is ergodic, thanks to the
+ coin flips, but remains in a pure-state always.
+\end_layout
+
+\begin_layout Section*
+Extensions
+\end_layout
+
+\begin_layout Standard
+Some obvious generalizations:
+\end_layout
+
+\begin_layout Itemize
+The Bernoulli process can be any finite N, and not just N=2, and can have
+ arbitary weighting.
+ Recall that Bernoulii processes are classified by their entropy.
+\end_layout
+
+\begin_layout Itemize
+The time evolution can be continuous, instead of discrete.
+ That is, we can imagine a continuous ergodic flow on the surface of the
+ Bloch sphere.
+ In this case, the discrete jumps are understood to be a Poincare section
+ of the continuous process.
+ In particular, any ergodic flow will do!
+\end_layout
+
+\begin_layout Itemize
+For the continous case, the appropriate description is by means of the tangent
+ vector.
+\end_layout
+
+\begin_layout Itemize
+How to think about energy and Hamiltonian.
 \end_layout
 
 \end_body
