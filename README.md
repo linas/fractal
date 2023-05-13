@@ -59,6 +59,10 @@ code. I will accept bug reports and pull requests to fix what's broken.
 
 In alphabetical order:
 
+- [**experiments**](experiments) -- This is a ***HUGE*** directory,
+  containing various experiments in various subdirectories. See the
+  README file there, for an overview.
+
 - [**generate**](generate) -- Code for filling in 2D pixmaps of a
   broad assortment of dynamical systems. This includes code for making
   short animated movies of the same. The "main" workhorse/driver is
@@ -81,10 +85,6 @@ In alphabetical order:
   experiments from 1997. This is perhaps my earliest work on AI.
   The [diary.txt](lang/diary.txt) file writes up my thoughts from
   that era.
-
-- [**misc**](misc) -- This is a ***HUGE*** directory, containing various
-  experiments in various subdirectories. See the README file there, for
-  a summary.
 
 - [**paper**](paper) -- Another ***HUGE*** directory, containing LyX
   source for all of the papers that I've published, and a bunch of
