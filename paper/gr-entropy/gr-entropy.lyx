@@ -492,6 +492,18 @@ Well, whatever.
  Lets go.
 \end_layout
 
+\begin_layout Subsection*
+Non-holonomic coords
+\end_layout
+
+\begin_layout Standard
+The next section writes down the vierbeins for the Schwarzschild metric.
+ But these coordinates are non-holonomic, i.e.
+ thier Lie bracket is non-vanishing.
+ Is this the degree of freedom I am looking for? I'm confused.
+ I have to think about this more.
+\end_layout
+
 \begin_layout Section*
 Vierbeins
 \end_layout
@@ -535,10 +547,34 @@ ds^{2}=g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}
 \end_layout
 
 \begin_layout Standard
-Vierbeins:
+For the vierbeins, follow the Wikipedia convetion for 
+\begin_inset CommandInset href
+LatexCommand href
+name "Tetrad formalism"
+target "https://en.wikipedia.org/wiki/Tetrad_formalism"
+literal "false"
+
+\end_inset
+
+.
+ I revised that article years ago, so I know its OK.
+ But I repeat it here, in case soomeone screws with it.
+ XXX TODO copy that stuff here.
 \begin_inset Formula 
 \[
-g_{\mu\nu}=\gamma_{\mu}^{a}\gamma_{\nu}^{b}g_{ab}
+g_{\mu\nu}=e_{\mu}^{a}e_{\nu}^{b}g_{ab}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The conventions are:
+\begin_inset Formula 
+\[
+e_{a}=e_{a}^{\mu}
 \]
 
 \end_inset
@@ -550,22 +586,17 @@ g_{\mu\nu}=\gamma_{\mu}^{a}\gamma_{\nu}^{b}g_{ab}
 Equivalently:
 \begin_inset Formula 
 \begin{align*}
-dx_{\mu} & =\gamma_{\mu}^{a}e_{a}\\
-dx^{\mu} & =g^{\mu\nu}\gamma_{\nu}^{a}e_{a}
+dx_{\mu} & =e_{\mu}^{a}e_{a}\\
+dx^{\mu} & =g^{\mu\nu}e_{\nu}^{a}e_{a}
 \end{align*}
 
 \end_inset
 
-where 
-\begin_inset Formula $e_{a}$
-\end_inset
 
- is the Euclidean unit vector in the 
-\begin_inset Formula $a$
-\end_inset
+\end_layout
 
- direction.
- 
+\begin_layout Standard
+The Euclidean unit vector is
 \end_layout
 
 \begin_layout Standard
