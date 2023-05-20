@@ -505,28 +505,163 @@ The next section writes down the vierbeins for the Schwarzschild metric.
 \end_layout
 
 \begin_layout Section*
-Vierbeins
+Appendix A: Vierbeins
 \end_layout
 
 \begin_layout Standard
-So here's a bunch of formulas and conventions ...
+This appendix recaps the notation and some of the conventions found in 
+\begin_inset CommandInset href
+LatexCommand href
+name "Tetrad formalism"
+target "https://en.wikipedia.org/wiki/Tetrad_formalism"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset href
+LatexCommand href
+name "Frame fields in general relativity"
+target "https://en.wikipedia.org/wiki/Frame_fields_in_general_relativity"
+literal "false"
+
+\end_inset
+
+.
+ XXX TODO copy that stuff here.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Coordinate charts
 \end_layout
 
 \begin_layout Standard
-Metric signature: 
-\begin_inset Formula $+---$
+A generic coordinate chart for a manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\begin_inset Formula $\varphi:M\to\mathbb{R}^{n}$
+\end_inset
+
+ with 
+\begin_inset Formula $\varphi=\left(\varphi^{1},\varphi^{2},\cdots,\varphi^{n}\right)$
+\end_inset
+
+.
+ We'll eventually set 
+\begin_inset Formula $n=4$
+\end_inset
+
+ and works with conventional 1+3 spacetime, but it's OK to leave this open
+ for now.
+\end_layout
+
+\begin_layout Standard
+Gradients of a scalar field on 
+\begin_inset Formula $M$
+\end_inset
+
+ provide the coordinate basis for a vector field.
+ That is, given 
+\begin_inset Formula $f:M\to\mathbb{R}$
+\end_inset
+
+ introduce the notation 
+\begin_inset Formula 
+\[
+\partial_{\mu}f\equiv\frac{\partial\left(f\circ\varphi^{-1}\right)}{\partial x^{\mu}}
+\]
+
+\end_inset
+
+The conventional abuse of notation is to forget about 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and write 
+\begin_inset Formula $x^{\mu}=\varphi^{\mu}$
+\end_inset
+
+, so that
+\begin_inset Formula 
+\[
+\partial_{\mu}=\frac{\partial}{\partial x^{\mu}}
+\]
+
+\end_inset
+
+This provides a coordinate basis for vector fields:
+\begin_inset Formula 
+\[
+\vec{X}=X^{\mu}\partial_{\mu}=X^{\mu}\frac{\partial}{\partial x^{\mu}}
+\]
+
+\end_inset
+
+The same abuse of notation is used to write 1-forms as 
+\begin_inset Formula $dx^{\mu}=d\varphi^{\mu}$
+\end_inset
+
+.
+ A greek-letter index is used here; roman letter indexes are reserved for
+ the vielbeins (later).
+\end_layout
+
+\begin_layout Subsubsection*
+Metric
+\end_layout
+
+\begin_layout Standard
+Use boldface for the metric tensor:
+\begin_inset Formula 
+\[
+\mathbf{g}=g_{\mu\nu}dx^{\mu}dx^{\nu}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $dx^{\mu}dx^{\nu}=dx^{\mu}\otimes dx^{\nu}$
+\end_inset
+
+ and sometimes we'll explicitly write the tensor product symbol 
+\begin_inset Formula $\otimes$
+\end_inset
+
+ and sometimes not.
+ The tensor components are then 
+\begin_inset Formula 
+\[
+g_{\mu\nu}=\mathbf{g}\left(\partial_{\mu},\partial_{\nu}\right)
+\]
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection*
+Spacetime
+\end_layout
+
+\begin_layout Standard
+Use the metric signature 
+\begin_inset Formula $+---$
+\end_inset
+
+ because we want to have an unobstructed view of past and future.
+ There's nothing in particular that we need from the space coordinates.
 \end_layout
 
 \begin_layout Standard
 Minkowski metric with roman letters:
 \begin_inset Formula 
 \begin{align*}
-g_{ab} & =2\delta_{a0}\delta_{b0}-\delta_{ab}\\
-g^{ab} & =g_{ab}\\
-g_{b}^{a} & =\delta_{b}^{a}
+\eta_{ab} & =2\delta_{a0}\delta_{b0}-\delta_{ab}\\
+\eta^{ab} & =\eta_{ab}\\
+\eta_{b}^{a} & =\delta_{b}^{a}
 \end{align*}
 
 \end_inset
@@ -547,19 +682,7 @@ ds^{2}=g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}
 \end_layout
 
 \begin_layout Standard
-For the vierbeins, follow the Wikipedia convetion for 
-\begin_inset CommandInset href
-LatexCommand href
-name "Tetrad formalism"
-target "https://en.wikipedia.org/wiki/Tetrad_formalism"
-literal "false"
-
-\end_inset
-
-.
- I revised that article years ago, so I know its OK.
- But I repeat it here, in case soomeone screws with it.
- XXX TODO copy that stuff here.
+So 
 \begin_inset Formula 
 \[
 g_{\mu\nu}=e_{\mu}^{a}e_{\nu}^{b}g_{ab}
@@ -603,7 +726,7 @@ The Euclidean unit vector is
 Schwarschild metric in Schwarschild coordinates:
 \begin_inset Formula 
 \[
-ds^{2}=\left(1-\frac{2GM}{r}\right)dt^{2}-\left(1-\frac{2GM}{r}\right)^{-1}\,dr^{2}-r^{2}d^{2}\Omega
+ds^{2}=\left(1-\frac{2m}{r}\right)dt^{2}-\left(1-\frac{2m}{r}\right)^{-1}\,dr^{2}-r^{2}d^{2}\Omega
 \]
 
 \end_inset
@@ -621,6 +744,19 @@ d^{2}\Omega=d\theta^{2}+\sin^{2}\theta d\phi^{2}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $m=GM/c^{2}$
+\end_inset
+
+ is the mass.
+ The Schwarschild radius is 
+\begin_inset Formula $r_{s}=2m$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
