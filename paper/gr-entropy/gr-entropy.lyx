@@ -586,7 +586,19 @@ literal "false"
 \end_inset
 
 .
- XXX TODO copy that stuff here.
+ As a general reference for why we do this, see Jost.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jost2002geom"
+literal "false"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+XXX TODO copy that stuff here.
  
 \end_layout
 
@@ -697,7 +709,125 @@ g_{\mu\nu}=\mathbf{g}\left(\partial_{\mu},\partial_{\nu}\right)
 
 \end_inset
 
+The use of coordinate charts in this way (eventually) implies that the connectio
+n is torsion-free.
+ This allows one to safely assume that the metric tensor is symmetric: 
+\begin_inset Formula $g_{\mu\nu}=g_{\nu\mu}$
+\end_inset
 
+.
+\end_layout
+
+\begin_layout Standard
+This is both good and bad.
+ The good news is that a symmetric metric and a torsion-free connection
+ makes all manipulations simple and safe.
+ The bad news is that it prevents us from exploring the relationship between
+ torsion and spin.
+ Which, I think, is interesting to explore.
+ Some other day.
+ The easiest route to exploring torsion is to abandon the use of a metric,
+ and instead to start with a frame bundle, and then work with generic connection
+s, which may have torsion.
+\end_layout
+
+\begin_layout Subsubsection*
+Vielbeins
+\end_layout
+
+\begin_layout Standard
+The frame field that we wish to work with is the one that is flat and orthonorma
+l at each point on the manifold.
+ That is, at each point, we want 
+\begin_inset Formula $n$
+\end_inset
+
+ basis vectors 
+\begin_inset Formula $\vec{e}_{a}$
+\end_inset
+
+ with 
+\begin_inset Formula $a\in\left\{ 1,2,\cdots,n\right\} $
+\end_inset
+
+.
+ Orthonormal just means that 
+\begin_inset Formula 
+\[
+\vec{e}_{a}\cdot\vec{e}_{b}=\eta_{ab}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\eta_{ab}$
+\end_inset
+
+ is the flat metric.
+ When specializing to spacetime, this will be the Minkowski metric.
+\end_layout
+
+\begin_layout Standard
+Following the notation 
+\begin_inset Formula $\vec{X}=X^{\mu}\partial_{\mu}$
+\end_inset
+
+ for vector fields with respect to the local coordinate chart 
+\begin_inset Formula $\varphi$
+\end_inset
+
+, one write the frame fields as 
+\begin_inset Formula 
+\[
+\vec{e}_{a}=e_{a}^{\;\mu}\partial_{\mu}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That's kind of 
+\begin_inset Quotes eld
+\end_inset
+
+all there is
+\begin_inset Quotes erd
+\end_inset
+
+ to this, but some gymnastics is kind of fun, because the resulting algebraic
+ expressions are suggestive, even if they do not carry any additional meaning
+ beyond the above.
+ And so, here we go.
+ 
+\begin_inset Formula 
+\[
+\eta_{ab}=\vec{e}_{a}\cdot\vec{e}_{b}=e_{a}^{\;\mu}e_{b}^{\;\nu}\mathbf{g}\left(\partial_{\mu},\partial_{\nu}\right)=e_{a}^{\;\mu}e_{b}^{\;\nu}g_{\mu\nu}
+\]
+
+\end_inset
+
+Raising and lowering of indexes proceeds as usual, so 
+\begin_inset Formula 
+\[
+e_{\;\mu}^{a}=g_{\mu\nu}\eta^{ab}e_{b}^{\;\nu}
+\]
+
+\end_inset
+
+from which we deduce
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g_{\mu\nu}=\eta_{ab}e_{\;\mu}^{a}e_{\;\nu}^{b}
+\]
+
+\end_inset
+
+ and so...
 \end_layout
 
 \begin_layout Subsubsection*
@@ -741,14 +871,6 @@ ds^{2}=g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}
 
 \begin_layout Standard
 So 
-\begin_inset Formula 
-\[
-g_{\mu\nu}=e_{\mu}^{a}e_{\nu}^{b}g_{ab}
-\]
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
