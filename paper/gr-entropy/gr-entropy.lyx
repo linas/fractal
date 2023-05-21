@@ -562,6 +562,45 @@ I'm confused.
  I have to think about this more.
 \end_layout
 
+\begin_layout Subsection*
+Suitable coordinate frames
+\end_layout
+
+\begin_layout Standard
+The choice of Schwarschild coordinates is ugly for the present problem.
+ For one, its an accelerated coordinate frame.
+ This means we have to hand-wave about Unruh radiation in accelerated frames,
+ and that will ruin lots of other hand-waving that we might want to do.
+\end_layout
+
+\begin_layout Standard
+Lemaitre coordinates provide a non-accelerated frame, describing infalling
+ particles that have a velocity of zero at infinity.
+ They provide a global synchronous time cooordinate, which is the proper
+ time (for the infalling particle).
+ 
+\end_layout
+
+\begin_layout Standard
+Perhaps there are other plausible choices.
+ I'm thinking this will be determined by the 
+\begin_inset Quotes eld
+\end_inset
+
+easiest
+\begin_inset Quotes erd
+\end_inset
+
+ format for writing GW's at the event horizon.
+ And so, what is that?
+\end_layout
+
+\begin_layout Standard
+What, exactly, do we want to have here? Are we expecting a precise argument
+ about entropy at the horizon, or only far away from it? Hmm.
+ I'm confused some more.
+\end_layout
+
 \begin_layout Section*
 Appendix A: Vierbeins
 \end_layout
@@ -936,46 +975,15 @@ Schwarzschild metric
 \end_layout
 
 \begin_layout Standard
-Non-flat metric with greek letters: 
+The Schwarschild metric in Schwarschild coordinates, using the coordinate
+ cobasis:
 \begin_inset Formula 
 \[
-ds^{2}=g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}
+\mathbf{g}=\left(1-\frac{2m}{r}\right)dt\otimes dt-\left(1-\frac{2m}{r}\right)^{-1}\,dr\otimes dr-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
 \]
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-So 
-\end_layout
-
-\begin_layout Standard
-Schwarschild metric in Schwarschild coordinates:
-\begin_inset Formula 
-\[
-ds^{2}=\left(1-\frac{2m}{r}\right)dt^{2}-\left(1-\frac{2m}{r}\right)^{-1}\,dr^{2}-r^{2}d^{2}\Omega
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Sphere:
-\begin_inset Formula 
-\[
-d^{2}\Omega=d\theta^{2}+\sin^{2}\theta d\phi^{2}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 where 
 \begin_inset Formula $m=GM/c^{2}$
 \end_inset
@@ -986,46 +994,65 @@ where
 \end_inset
 
 .
-\end_layout
+ The expression is valid only for 
+\begin_inset Formula $r_{s}<r$
+\end_inset
 
-\begin_layout Standard
-Vierbiens:
+.
+ Comparing this to 
 \begin_inset Formula 
 \[
-\gamma_{\mu}^{a}=\sqrt{1-\frac{2GM}{r}}\delta_{\mu0}^{a0}+etc
+\mathbf{g}=\eta_{ab}\sigma^{a}\otimes\sigma^{b}=\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}-\sigma^{2}\otimes\sigma^{2}-\sigma^{3}\otimes\sigma^{3}
 \]
 
 \end_inset
 
-But the choice of Schwarschild coordinates is ugle for the present problem.
- Plausible alternatives include 
-\begin_inset Quotes eld
+we immediately read off coframe as
+\begin_inset Formula 
+\begin{align*}
+\sigma^{0} & =\sqrt{1-\frac{2m}{r}}dt\\
+\sigma^{1} & =\frac{dr}{\sqrt{1-\frac{2m}{r}}}\\
+\sigma^{2} & =rd\theta\\
+\sigma^{3} & =r\sin\theta\,d\phi
+\end{align*}
+
 \end_inset
 
-isotropic coordinates
-\begin_inset Quotes erd
+From this, we deduce the frame field
+\begin_inset Formula 
+\begin{align*}
+\vec{e}_{0} & =\frac{1}{\sqrt{1-\frac{2m}{r}}}\partial_{t}\\
+\vec{e}_{1} & =\sqrt{1-\frac{2m}{r}}\partial_{r}\\
+\vec{e}_{2} & =\frac{1}{r}\partial_{\theta}\\
+\vec{e}_{3} & =\frac{1}{r\sin\theta}\partial_{\phi}
+\end{align*}
+
 \end_inset
 
- which have isotropic lightcones on constant time slices.
- Perhaps there are other plausible choices.
- I'm thinking this will be determined by the 
-\begin_inset Quotes eld
-\end_inset
 
-easiest
-\begin_inset Quotes erd
-\end_inset
-
- format for writing GW's at the event horizon.
- And so, what is that?
-\end_layout
-
-\begin_layout Subsection*
-Waves
 \end_layout
 
 \begin_layout Standard
-So the GW's ...
+This coordinate system models 
+\begin_inset Quotes eld
+\end_inset
+
+static observers
+\begin_inset Quotes erd
+\end_inset
+
+, held in place w/ rocket engines.
+ That is, these are accelerated frames, not free-falling frames.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Lie brackets
+\end_layout
+
+\begin_layout Standard
+There are, uhh...
+ wtf.
 \end_layout
 
 \begin_layout Standard
