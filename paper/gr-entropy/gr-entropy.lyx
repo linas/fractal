@@ -586,7 +586,7 @@ literal "false"
 \end_inset
 
 .
- As a general reference for why we do this, see Jost.
+ A much more precise reference is chapter one of Jost,
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Jost2002geom"
@@ -594,12 +594,17 @@ literal "false"
 
 \end_inset
 
- 
+ which we'll make heavy use of because it is clean, precise, well-defined
+ and free of errors.
+ The technical precision is needed, as the rest of this paper wanders into
+ some hallucinatory territory, and so we need to be careful to remain grounded.
 \end_layout
 
 \begin_layout Standard
-XXX TODO copy that stuff here.
- 
+Basically, this appendix is a recap of conventional textbook material, reproduce
+d here so I can avoid making mistakes later on.
+ This appendix is not meant to be educational; the reader is expected to
+ already know this stuff.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -612,20 +617,25 @@ A generic coordinate chart for a manifold
 \end_inset
 
  is 
-\begin_inset Formula $\varphi:M\to\mathbb{R}^{n}$
+\begin_inset Formula $\varphi:U\to\mathbb{R}^{n}$
 \end_inset
 
  with 
 \begin_inset Formula $\varphi=\left(\varphi^{1},\varphi^{2},\cdots,\varphi^{n}\right)$
 \end_inset
 
-.
+ and 
+\begin_inset Formula $U\subset M$
+\end_inset
+
+ an open set.
  We'll eventually set 
 \begin_inset Formula $n=4$
 \end_inset
 
  and works with conventional 1+3 spacetime, but it's OK to leave this open
  for now.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -651,6 +661,10 @@ The conventional abuse of notation is to forget about
 \end_inset
 
  and write 
+\begin_inset Formula $x=\varphi$
+\end_inset
+
+ and 
 \begin_inset Formula $x^{\mu}=\varphi^{\mu}$
 \end_inset
 
@@ -672,6 +686,10 @@ This provides a coordinate basis for vector fields:
 
 The same abuse of notation is used to write 1-forms as 
 \begin_inset Formula $dx^{\mu}=d\varphi^{\mu}$
+\end_inset
+
+ with 
+\begin_inset Formula $dx^{\mu}\left(\partial_{\nu}\right)=\delta_{\nu}^{\mu}$
 \end_inset
 
 .
@@ -700,7 +718,7 @@ where
 \begin_inset Formula $\otimes$
 \end_inset
 
- and sometimes not.
+ to and sometimes not.
  The tensor components are then 
 \begin_inset Formula 
 \[
@@ -754,7 +772,7 @@ l at each point on the manifold.
  Orthonormal just means that 
 \begin_inset Formula 
 \[
-\vec{e}_{a}\cdot\vec{e}_{b}=\eta_{ab}
+\vec{e}_{a}\cdot\vec{e}_{b}=\left\langle \vec{e}_{a},\vec{e}_{b}\right\rangle =\eta_{ab}
 \]
 
 \end_inset
@@ -803,12 +821,14 @@ all there is
  
 \begin_inset Formula 
 \[
-\eta_{ab}=\vec{e}_{a}\cdot\vec{e}_{b}=e_{a}^{\;\mu}e_{b}^{\;\nu}\mathbf{g}\left(\partial_{\mu},\partial_{\nu}\right)=e_{a}^{\;\mu}e_{b}^{\;\nu}g_{\mu\nu}
+\eta_{ab}=\vec{e}_{a}\cdot\vec{e}_{b}=\left\langle \vec{e}_{a},\vec{e}_{b}\right\rangle =e_{a}^{\;\mu}e_{b}^{\;\nu}\left\langle \partial_{\mu},\partial_{\nu}\right\rangle =e_{a}^{\;\mu}e_{b}^{\;\nu}\mathbf{g}\left(\partial_{\mu},\partial_{\nu}\right)=e_{a}^{\;\mu}e_{b}^{\;\nu}g_{\mu\nu}
 \]
 
 \end_inset
 
-Raising and lowering of indexes proceeds as usual, so 
+I'm going to skip all the tangent/cotanget gymnastics, which boils down
+ to the statement that raising and lowering of indexes proceeds as usual.
+ That is, the matrix inverse is 
 \begin_inset Formula 
 \[
 e_{\;\mu}^{a}=g_{\mu\nu}\eta^{ab}e_{b}^{\;\nu}
@@ -816,7 +836,7 @@ e_{\;\mu}^{a}=g_{\mu\nu}\eta^{ab}e_{b}^{\;\nu}
 
 \end_inset
 
-from which we deduce
+Other expected identies follow, such as
 \end_layout
 
 \begin_layout Standard
@@ -827,24 +847,78 @@ g_{\mu\nu}=\eta_{ab}e_{\;\mu}^{a}e_{\;\nu}^{b}
 
 \end_inset
 
- and so...
+Well, I'm bored.
 \end_layout
 
 \begin_layout Subsubsection*
-Spacetime
+Coframe vielbeins
 \end_layout
 
 \begin_layout Standard
-Use the metric signature 
+Returning to the metric,
+\begin_inset Formula 
+\[
+\mathbf{g}=g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}
+\]
+
+\end_inset
+
+and plugging in for 
+\begin_inset Formula $g_{\mu\nu}$
+\end_inset
+
+ one gets
+\begin_inset Formula 
+\[
+\mathbf{g}=\eta_{ab}\left(e_{\;\mu}^{a}dx^{\mu}\right)\otimes\left(e_{\;\nu}^{b}dx^{\nu}\right)=\eta_{ab}\sigma^{a}\otimes\sigma^{b}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $\sigma^{a}=e_{\;\mu}^{a}dx^{\mu}$
+\end_inset
+
+ is an orthonormal one-form in the cotangent space.
+ In particular, 
+\begin_inset Formula 
+\[
+\sigma^{a}\left(\vec{e}_{b}\right)=\delta_{b}^{a}
+\]
+
+\end_inset
+
+follows from 
+\begin_inset Formula $dx^{\mu}\left(\partial_{\nu}\right)=\delta_{\nu}^{\mu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
+Appendix B: Spacetime
+\end_layout
+
+\begin_layout Standard
+Specialize the above to 1+3-dimensional spacetime.
+\end_layout
+
+\begin_layout Subsubsection*
+Minkowski metric
+\end_layout
+
+\begin_layout Standard
+We'll use the metric signature 
 \begin_inset Formula $+---$
 \end_inset
 
  because we want to have an unobstructed view of past and future.
- There's nothing in particular that we need from the space coordinates.
+ There's nothing in particular that we need from the space coordinates,
+ so its OK to let those go negative.
 \end_layout
 
 \begin_layout Standard
-Minkowski metric with roman letters:
+The Minkowski metric with roman letters:
 \begin_inset Formula 
 \begin{align*}
 \eta_{ab} & =2\delta_{a0}\delta_{b0}-\delta_{ab}\\
@@ -855,6 +929,10 @@ Minkowski metric with roman letters:
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection*
+Schwarzschild metric
 \end_layout
 
 \begin_layout Standard
@@ -871,35 +949,6 @@ ds^{2}=g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}
 
 \begin_layout Standard
 So 
-\end_layout
-
-\begin_layout Standard
-The conventions are:
-\begin_inset Formula 
-\[
-e_{a}=e_{a}^{\mu}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Equivalently:
-\begin_inset Formula 
-\begin{align*}
-dx_{\mu} & =e_{\mu}^{a}e_{a}\\
-dx^{\mu} & =g^{\mu\nu}e_{\nu}^{a}e_{a}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The Euclidean unit vector is
 \end_layout
 
 \begin_layout Standard
