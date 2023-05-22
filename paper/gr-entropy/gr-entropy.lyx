@@ -504,6 +504,10 @@ Non-holonomic coords
 What is the correct way to write down the Dirac eqn in curved spacetime?
  Well, this would seem to have a simple and direct answer: the way that
  it's done in textbooks.
+ If I recall correctly, this is done by finding a free-falling, non-rotating
+ coordinate frame (vielbeins) and writing the Dirac eqn in that frame.
+ The coordinate will always be non-holonomic, expect in trivial cases (flat
+ spacetime).
 \end_layout
 
 \begin_layout Standard
@@ -519,10 +523,10 @@ classical
  To write down QFT, we need to be able to do a sum over paths.
  How is this done in an ambient curved spacetime? Again, the conventional
  answer is to consult standard texts.
- Rouhgly speaking, this instructs one to think about paths in the manifold
+ Roughly speaking, this instructs one to think about paths in the manifold
  itself, with path-lengths defined by the metric, and perform sums over
  those.
- The measure over path space is derived from the metric, as well.
+ The measure over path space is also derived from the metric.
 \end_layout
 
 \begin_layout Standard
@@ -531,30 +535,49 @@ So that's all very cut-n-dried.
 \end_layout
 
 \begin_layout Standard
-If we work with non-holonomic (vielbein) coords, then the Dirac eqn at every
- point looks 
+Two distinct issues ome to mind.
+ One is Unruh-related, another is holonomic-related.
+ Lets think a bit about each, in turn.
+ 
+\end_layout
+
+\begin_layout Standard
+The sum-over-paths includes paths that are instantaneously accelerated.
+ This includes the sum over paths even in flat spacetime: only the classical
+ path is inertial (because its geodesic).
+ All the neighboring paths are necessarily non-inertial.
+ Somehow, this can be 
 \begin_inset Quotes eld
 \end_inset
 
-flat
+safely ignored
 \begin_inset Quotes erd
 \end_inset
 
-, at the cost of having an extra structure term from the Lie bracket of
- the vielbein coordinates.
- Can this be used to argue for the degree of freedom that we are looking
- for? That is, is it possible to imagine that the spinors 
+, except for obvious divergences in QFT.
+ In curved spacetime, this only gets worse.
+ For example, in a one-loop diagram, the emitted photon is necessarily in
+ a different, accelerated coordinate frame than where it's absorbed.
+ This example also evokes Bohm-Aharonov-inspired ideas: is there some spontaneou
+s holonomy due to falling through accelerated frames? For example, how does
+ a free-falling neutron interferometer work? If its freely falling in flat
+ spacetime, then, of course, 
 \begin_inset Quotes eld
 \end_inset
 
-jump the tracks
+nothing happens
 \begin_inset Quotes erd
 \end_inset
 
-, jump out of the ambient spacetime manifold, propelled by the structure
- term? Can this be done, while still keeping the classical bundle covariant?
- I know this is hetrodox and will likely end in failure, but it's one of
- the few ways that suggests a way to break out.
+.
+ But what if its in curved spacetime? Is there some holonomic correction
+ due to curvature? How does that work? What are the actual equations for
+ that?
+\end_layout
+
+\begin_layout Standard
+What are the tools that we have for sum-over-paths? Let's very quickly review
+ these.
 \end_layout
 
 \begin_layout Standard
@@ -1041,7 +1064,7 @@ static observers
 \begin_inset Quotes erd
 \end_inset
 
-, held in place w/ rocket engines.
+, held in place w/rocket engines.
  That is, these are accelerated frames, not free-falling frames.
  
 \end_layout
@@ -1147,8 +1170,9 @@ move radially inwards, then move forward one second
  The direction is inwards, not outwards, because the friggin minus sign
  on the metric, right? (I'm confused about the direction.) The second and
  third commutators are just saying that radial movements coompress the scales,
- but don't actually change sphere directions; the sphere directions are
- non-rotating.
+ but don't actually change sphere directions; there's a tidal compression
+ in the mapping.
+ Also, the sphere directions are non-rotating.
  All this is as it should be; nothing we didn't already know.
  
 \end_layout
