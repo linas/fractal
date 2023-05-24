@@ -1457,7 +1457,8 @@ Toy example for strings.
 \end_layout
 
 \begin_layout Standard
-Einstein-Hilbert action
+But first, lets provide the background motivation.
+ The traditional, conventional Einstein-Hilbert action in 4D is
 \begin_inset Formula 
 \[
 L=\frac{1}{16\pi}\int d^{4}x\sqrt{g}\left(R+\Lambda\right)
@@ -1477,7 +1478,7 @@ with
 \end_layout
 
 \begin_layout Standard
-Quantum gravity parition function
+Quantum gravity partition function
 \begin_inset Formula 
 \[
 Z=\int\left[dg\right]\exp\left(-L\right)
@@ -1485,12 +1486,19 @@ Z=\int\left[dg\right]\exp\left(-L\right)
 
 \end_inset
 
+The measure 
+\begin_inset Formula $\left[dg\right]$
+\end_inset
 
+ is supposed to be over all spacetimes, up to diffeomorphism.
+ That is, average over all spacetime geometries.
+ 
 \end_layout
 
 \begin_layout Standard
-1-D quantum gravity.
- Example from Ed Witten.
+The above is exactly solvable for 1-D spacetime, i.e.
+ for 1-D quantum gravity.
+ Toy example from Ed Witten.
 \end_layout
 
 \begin_layout Standard
@@ -1498,7 +1506,7 @@ Two possible spacetimes: closed loop, open curve.
 \end_layout
 
 \begin_layout Standard
-Metric tensor has 
+Metric tensor 
 \begin_inset Formula $g=g_{tt}$
 \end_inset
 
@@ -1507,7 +1515,20 @@ Metric tensor has
 \end_inset
 
  metric tensor.
- Action is
+\end_layout
+
+\begin_layout Standard
+There's no Riemann curvature tensor, so the Ricci scalar 
+\begin_inset Formula $R=0$
+\end_inset
+
+.
+ So it gets boring, unless we introduce matter fields.
+ Do this.
+\end_layout
+
+\begin_layout Standard
+Action is
 \begin_inset Formula 
 \[
 L=\int dt\sqrt{g}\left(\frac{g_{tt}}{2}\sum_{i=1}^{N}\left(\frac{dX_{i}}{dt}\right)^{2}-\frac{m^{2}}{2}\right)
@@ -1528,18 +1549,14 @@ for scalar fields
 \end_inset
 
 .
- The Ricci scalar 
-\begin_inset Formula $R=0$
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Standard
 Canonical momentum:
 \begin_inset Formula 
 \[
-P_{i}=\frac{dX_{i}}{dt}
+P_{i}=\dot{X_{i}}=\frac{dX_{i}}{dt}
 \]
 
 \end_inset
@@ -1556,7 +1573,14 @@ Einstein field eqn
 \begin_inset Quotes erd
 \end_inset
 
+ is obtained by taking the variation of the action w.r.t.
+ the metric tensor, i.e.
+ by taking 
+\begin_inset Formula $\delta L/\delta g=0$
+\end_inset
 
+.
+ This gives
 \begin_inset Formula 
 \[
 \sum_{i}P_{i}^{2}+m^{2}=0
@@ -1622,7 +1646,18 @@ Partition function requires integrating over all metrics on the 1-D manifold,
 
 \begin_layout Standard
 Do this in two steps.
- 
+\end_layout
+
+\begin_layout Standard
+First step is from Feynmann & Hibbs (1965) 
+\begin_inset Quotes eld
+\end_inset
+
+Quantum Mechanics and Path Integrals
+\begin_inset Quotes erd
+\end_inset
+
+ (must-read book.)
 \end_layout
 
 \begin_layout Standard
@@ -1635,7 +1670,7 @@ Write down the QM Feynman path integral for the Hamiltonian is
 \end_inset
 
 .
- This is going to be the Fourier x-form of the matrix eelements of 
+ This is going to be the Fourier x-form of the matrix elements of 
 \begin_inset Formula $\exp\left(-\tau H\right)$
 \end_inset
 
@@ -1695,7 +1730,48 @@ G\left(x,y\right)=\int_{0}^{\infty}d\tau G\left(x,y;\tau\right)=\int\frac{d^{N}p
 
 \end_inset
 
+where 
+\begin_inset Formula $G\left(x,y\right)=Z\left[J\right]$
+\end_inset
 
+ and the 
+\begin_inset Formula $x,y$
+\end_inset
+
+ are the currents 
+\begin_inset Formula $J$
+\end_inset
+
+ that we need to differentiate by, to obtain interactions.
+\end_layout
+
+\begin_layout Standard
+So what does this 
+\begin_inset Quotes eld
+\end_inset
+
+actually say
+\begin_inset Quotes erd
+\end_inset
+
+? It says that the conventional relativistic Klien-Gordon eqn in 4 dimensions
+ (or in N dimensions) is the same thing as quantum gravity in 1 dimension.
+ We can then build up conventional QFT from here, by adding interaction
+ terms to the Klien-Gordon eqn.
+\end_layout
+
+\begin_layout Standard
+String theory just says several additional things:
+\end_layout
+
+\begin_layout Itemize
+Replace 1D spacetime by 2D spacetime.
+ This gets rid of the ultraviolet divergences in the 1-loop Feynman diagrams
+ of the interacting theory.
+\end_layout
+
+\begin_layout Itemize
+Use fermionic strings, so as to build vector reps from spinor reps.
 \end_layout
 
 \begin_layout Standard
