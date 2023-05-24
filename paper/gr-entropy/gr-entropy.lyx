@@ -1446,6 +1446,258 @@ literal "false"
  article, and we don't reproduce this here.
 \end_layout
 
+\begin_layout Section*
+Appendix C: Toy String Example
+\end_layout
+
+\begin_layout Standard
+Toy example for strings.
+ Except its not strings, because spacetime is taken to be 1D instead of
+ 2D.
+\end_layout
+
+\begin_layout Standard
+Einstein-Hilbert action
+\begin_inset Formula 
+\[
+L=\frac{1}{16\pi}\int d^{4}x\sqrt{g}\left(R+\Lambda\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $R$
+\end_inset
+
+ the Ricci scalar and 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ the cosmological constant.
+\end_layout
+
+\begin_layout Standard
+Quantum gravity parition function
+\begin_inset Formula 
+\[
+Z=\int\left[dg\right]\exp\left(-L\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1-D quantum gravity.
+ Example from Ed Witten.
+\end_layout
+
+\begin_layout Standard
+Two possible spacetimes: closed loop, open curve.
+\end_layout
+
+\begin_layout Standard
+Metric tensor has 
+\begin_inset Formula $g=g_{tt}$
+\end_inset
+
+ is the 
+\begin_inset Formula $1\times1$
+\end_inset
+
+ metric tensor.
+ Action is
+\begin_inset Formula 
+\[
+L=\int dt\sqrt{g}\left(\frac{g_{tt}}{2}\sum_{i=1}^{N}\left(\frac{dX_{i}}{dt}\right)^{2}-\frac{m^{2}}{2}\right)
+\]
+
+\end_inset
+
+for scalar fields 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=1,\cdots,N$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda=m^{2}/2$
+\end_inset
+
+.
+ The Ricci scalar 
+\begin_inset Formula $R=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Canonical momentum:
+\begin_inset Formula 
+\[
+P_{i}=\frac{dX_{i}}{dt}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1-D 
+\begin_inset Quotes eld
+\end_inset
+
+Einstein field eqn
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sum_{i}P_{i}^{2}+m^{2}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quantize to get wave function
+\begin_inset Formula 
+\[
+\left(-\sum_{i}\frac{\partial^{2}}{\partial X_{i}^{2}}+m^{2}\right)\psi\left(X\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is interpreted as an exactly solvable theory of quantum gravity in
+ one dimension, which describes a spin-0 particle of mass 
+\begin_inset Formula $m$
+\end_inset
+
+ propagating in 
+\begin_inset Formula $N$
+\end_inset
+
+-dimensional spacetime.
+\end_layout
+
+\begin_layout Standard
+Minor generalizations include using a non-Euclidean metric 
+\begin_inset Formula $G_{ij}$
+\end_inset
+
+ for the scalar fields, plus adding gauge fields, so that the wave eqn is
+ 
+\begin_inset Formula 
+\[
+\left(-G_{ij}\frac{D}{DX_{i}}\frac{D}{DX_{j}}+m^{2}\right)\psi\left(X\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Partition function requires integrating over all metrics on the 1-D manifold,
+ modulo diffeomorphisms.
+ However, the 1-D manifold has only one invariant (up to diffeomorphism)
+ and that is the total length 
+\begin_inset Formula $\tau$
+\end_inset
+
+, which is taken as the elapsed proper time.
+\end_layout
+
+\begin_layout Standard
+Do this in two steps.
+ 
+\end_layout
+
+\begin_layout Standard
+Write down the QM Feynman path integral for the Hamiltonian is 
+\begin_inset Formula $H=P^{2}+m^{2}$
+\end_inset
+
+, using the shorthand 
+\begin_inset Formula $P^{2}=G_{ij}P^{i}P^{j}$
+\end_inset
+
+.
+ This is going to be the Fourier x-form of the matrix eelements of 
+\begin_inset Formula $\exp\left(-\tau H\right)$
+\end_inset
+
+.
+ This gives the QM propagator
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G\left(x,y;\tau\right)=\int\frac{d^{N}p}{\left(2\pi\right)^{N}}e^{ip\cdot\left(x-y\right)}\exp\left(-\tau\left(p^{2}+m^{2}\right)\right)
+\]
+
+\end_inset
+
+The above is interpreted as the Feynmann path integral, an integral over
+ all possible paths 
+\begin_inset Formula $X\left(t\right)$
+\end_inset
+
+ that start at 
+\begin_inset Formula $x$
+\end_inset
+
+ at time 
+\begin_inset Formula $t=0$
+\end_inset
+
+ and end at 
+\begin_inset Formula $y$
+\end_inset
+
+ at time 
+\begin_inset Formula $t=\tau$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Next, integrate over all possible metrics 
+\begin_inset Formula $g_{tt}\left(t\right)$
+\end_inset
+
+, up to diffeomorphisms.
+ Since there is only one invariant, this integral is just an integral over
+ all possible spacetimes 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+\begin_inset Formula 
+\[
+G\left(x,y\right)=\int_{0}^{\infty}d\tau G\left(x,y;\tau\right)=\int\frac{d^{N}p}{\left(2\pi\right)^{N}}e^{ip\cdot\left(x-y\right)}\frac{1}{p^{2}+m^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
