@@ -835,8 +835,206 @@ Sum over paths
 \end_layout
 
 \begin_layout Standard
-The Feynman sum over paths, as sketched in Appendix C, can be interpreted
- as follows.
+The Feynman sum over paths, as sketched in Appendix C, provide an orthodox,
+ canonical description of physics.
+ (Actually Appendix C includes some extra, non-standard twists from Witten;
+ we leave thos in the background, for now.) This section attempts to interpret
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+meaning
+\begin_inset Quotes erd
+\end_inset
+
+ of that appendix.
+ 
+\end_layout
+
+\begin_layout Standard
+Imagine that one has a collection of unit intervals, a set of them; more
+ precisely, an uncountable set of them.
+ To make this precise, write it as
+\begin_inset Formula 
+\[
+\left[0,1\right]\times C
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $C$
+\end_inset
+
+ is the Cantor set.
+ We use the Cantor set, because we want to assume a disconnected topology:
+ a collection of discrete points, rather than something that is connected.
+ That is, the above is supposed to look vaguely homotopical, except that
+ 
+\begin_inset Formula $C$
+\end_inset
+
+ has no smooth structure.
+\end_layout
+
+\begin_layout Standard
+Next, pick some ambient space 
+\begin_inset Formula $M$
+\end_inset
+
+, for example, 
+\begin_inset Formula $M$
+\end_inset
+
+ might be Minkowski space, or some manifold in general.
+ We'll eventually want to work with (psuedo-)Riemannian manifolds, but not
+ yet.
+ Consider a function
+\begin_inset Formula 
+\[
+\varphi:\left[0,1\right]\times C\to M
+\]
+
+\end_inset
+
+This can be interpreted as a mapping of uncountable many paths from the
+ unit interval into 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ The intended topology (for now) is the product topology, so that 
+\begin_inset Formula $\varphi\left(t,b\right)$
+\end_inset
+
+ has 
+\begin_inset Formula $t\in\left[0,1\right]\subset\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in C=\left\{ 0,1\right\} ^{\omega}=2^{\omega}$
+\end_inset
+
+.
+ That is, each 
+\begin_inset Formula $b$
+\end_inset
+
+ is an infinite string of bits (a Bernoulli process).
+ For now, we give 
+\begin_inset Formula $C$
+\end_inset
+
+ the strong topology, because that is what is required by the product topology;
+ maybe later, we might be able to work with the weak topology.
+ I don't know yet.
+\end_layout
+
+\begin_layout Standard
+Now comes the hard part.
+ What is 
+\begin_inset Formula $\varphi$
+\end_inset
+
+? Can we explicitly construct it? Do we merely argue that it exists? What
+ should it look like? The intent is that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is space-filling, in that it comes arbitrarily close to all points of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ A different way to say this is that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is ergodic (although we have not yet stated the axioms of ergodicity.
+ Soon...) Each individual 
+\begin_inset Formula $\varphi$
+\end_inset
+
+, holding 
+\begin_inset Formula $b$
+\end_inset
+
+ fixed, is meant to be differentiable w.r.t.
+ 
+\begin_inset Formula $t$
+\end_inset
+
+ so that 
+\begin_inset Formula 
+\[
+\left.\frac{d\varphi\left(t,b\right)}{dt}\right|_{b=\mbox{const}}
+\]
+
+\end_inset
+
+is well-defined.
+ We need this to be well-defined, so that it can be used to form a Hamiltonian,
+ which is then used as a weighting in the Feynman path integral.
+\end_layout
+
+\begin_layout Standard
+So we have three tasks in front of us.
+ one is to write down the measure
+\begin_inset Formula 
+\[
+\int\left[d\varphi\right]\exp-\beta H
+\]
+
+\end_inset
+
+where the weighting 
+\begin_inset Formula $\exp-\beta H$
+\end_inset
+
+ is the Feynman weighting (and 
+\begin_inset Formula $H$
+\end_inset
+
+ is the Hamiltonian or the Action or whatever is appripriate for the cicumstance
+s) and 
+\begin_inset Formula $\int\left[d\varphi\right]$
+\end_inset
+
+ is understood to be a sum over the Cantor set 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ The primary issue here is that this is not the ordinary (Riemann) integral.
+ The Riemann integral is generally understood to be a sum over a countable
+ set of infinitessimal slices 
+\begin_inset Formula $dx$
+\end_inset
+
+; here, we have a sum over an uncountable set.
+ Anyway, the first task is to come up with machinery that can deal with
+ 
+\begin_inset Formula $\int\left[d\varphi\right]$
+\end_inset
+
+ running over an uncountable set of infinitessimal set of slices.
+\end_layout
+
+\begin_layout Standard
+The second task is to write down 
+\begin_inset Formula $\exp-\beta H$
+\end_inset
+
+ explicitly; but this should be easy, it is (in a sense) already done in
+ appendix C.
+\end_layout
+
+\begin_layout Standard
+The third task is to construct a plausible version of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ that has the desirable set of ergodic, space-filling properties.
 \end_layout
 
 \begin_layout Subsection*
