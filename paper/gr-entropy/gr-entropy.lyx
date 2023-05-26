@@ -852,189 +852,257 @@ meaning
 \end_layout
 
 \begin_layout Standard
-Imagine that one has a collection of unit intervals, a set of them; more
- precisely, an uncountable set of them.
- To make this precise, write it as
+The starting point is to take, in a literal sense, the word 
+\begin_inset Quotes eld
+\end_inset
+
+path
+\begin_inset Quotes erd
+\end_inset
+
+, and to take it to specifically be a path in coordinate space, a change
+ of position over time.
+ This poses a challenge: how to write down a collection of paths, in such
+ a way that they cover some manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ in some space-filling or maybe some ergodic way.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+ergodic
+\begin_inset Quotes erd
+\end_inset
+
+ has a specific, narrow definition, so we must be carefull with it's use.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+space-filling
+\begin_inset Quotes erd
+\end_inset
+
+ implies that the collection of paths will come arbitrarily close to every
+ point in the manifold 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $M$
+\end_inset
+
+ might be Minkowski space, or it might be some manifold in general, or some
+ subset of a (psuedo-)Riemannian manifold.
+ Thus, in formulas, we are looking for a function
 \begin_inset Formula 
 \[
-\left[0,1\right]\times C
+\varphi:\left[0,1\right]\times S\to M
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $C$
+for some set 
+\begin_inset Formula $S$
 \end_inset
 
- is the Cantor set.
- We use the Cantor set, because we want to assume a disconnected topology:
- a collection of discrete points, rather than something that is connected.
- That is, the above is supposed to look vaguely homotopical, except that
+, such that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is dense in 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ More precisely, 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ has to be dense in 
+\begin_inset Formula $TM$
+\end_inset
+
+, the tangent manifold.
+ That is, not only must 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ come close to every point in 
+\begin_inset Formula $M$
+\end_inset
+
+, but the derivative
+\begin_inset Formula 
+\[
+\dot{\varphi}\left(t,s\right)=\left.\frac{d\varphi\left(t,s\right)}{dt}\right|_{s=\mbox{const}}
+\]
+
+\end_inset
+
+has to come close to every tangent vector in 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ for every point 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ There is also a third condition: the 
+\begin_inset Formula $\dot{\varphi}$
+\end_inset
+
+ will be appearing as the kinetic terms in some Lagrangian, and, in general,
+ the action will need to be finite.
+ Thus, one needs that
+\begin_inset Formula 
+\[
+\int dt\left\Vert \dot{\varphi}\left(t,s\right)\right\Vert ^{2}<\infty
+\]
+
+\end_inset
+
+for some suitable metric 
+\begin_inset Formula $\left\Vert \cdot\right\Vert $
+\end_inset
+
+.
  
-\begin_inset Formula $C$
-\end_inset
-
- has no smooth structure.
 \end_layout
 
 \begin_layout Standard
-Next, pick some ambient space 
+What is the set 
+\begin_inset Formula $S$
+\end_inset
+
+? Well, for starters, 
+\begin_inset Formula $S$
+\end_inset
+
+ cannot be a finite set.
+ A single space-filling curve could cover all of 
 \begin_inset Formula $M$
 \end_inset
 
-, for example, 
-\begin_inset Formula $M$
+ and, with some work, could also cover all of 
+\begin_inset Formula $TM$
 \end_inset
 
- might be Minkowski space, or some manifold in general.
- We'll eventually want to work with (psuedo-)Riemannian manifolds, but not
- yet.
- Consider a function
+ but, in that case, it would fail to have a finite kinetic term.
+ (This is presumably obvious.) Thus, the set 
+\begin_inset Formula $S$
+\end_inset
+
+ has to be at least countable.
+ Can it be uncountable? Well, not really, because we have a fourth condition
+ to satisfy: we are trying to write down a measure of the form
 \begin_inset Formula 
 \[
-\varphi:\left[0,1\right]\times C\to M
+\int\left[d\varphi\right]\exp-\beta A
 \]
 
 \end_inset
 
-This can be interpreted as a mapping of uncountable many paths from the
- unit interval into 
-\begin_inset Formula $M$
+for some action 
+\begin_inset Formula $A$
 \end_inset
 
 .
- The intended topology (for now) is the product topology, so that 
-\begin_inset Formula $\varphi\left(t,b\right)$
-\end_inset
-
- has 
-\begin_inset Formula $t\in\left[0,1\right]\subset\mathbb{R}$
-\end_inset
-
- and 
-\begin_inset Formula $b\in C=\left\{ 0,1\right\} ^{\omega}=2^{\omega}$
-\end_inset
-
-.
- That is, each 
-\begin_inset Formula $b$
-\end_inset
-
- is an infinite string of bits (a Bernoulli process).
- For now, we give 
-\begin_inset Formula $C$
-\end_inset
-
- the strong topology, because that is what is required by the product topology;
- maybe later, we might be able to work with the weak topology.
- I don't know yet.
-\end_layout
-
-\begin_layout Standard
-Now comes the hard part.
- What is 
-\begin_inset Formula $\varphi$
-\end_inset
-
-? Can we explicitly construct it? Do we merely argue that it exists? What
- should it look like? The intent is that 
-\begin_inset Formula $\varphi$
-\end_inset
-
- is space-filling, in that it comes arbitrarily close to all points of 
-\begin_inset Formula $M$
-\end_inset
-
-.
- A different way to say this is that 
-\begin_inset Formula $\varphi$
-\end_inset
-
- is ergodic (although we have not yet stated the axioms of ergodicity.
- Soon...) Each individual 
-\begin_inset Formula $\varphi$
-\end_inset
-
-, holding 
-\begin_inset Formula $b$
-\end_inset
-
- fixed, is meant to be differentiable w.r.t.
- 
-\begin_inset Formula $t$
-\end_inset
-
- so that 
-\begin_inset Formula 
-\[
-\left.\frac{d\varphi\left(t,b\right)}{dt}\right|_{b=\mbox{const}}
-\]
-
-\end_inset
-
-is well-defined.
- We need this to be well-defined, so that it can be used to form a Hamiltonian,
- which is then used as a weighting in the Feynman path integral.
-\end_layout
-
-\begin_layout Standard
-So we have three tasks in front of us.
- one is to write down the measure
-\begin_inset Formula 
-\[
-\int\left[d\varphi\right]\exp-\beta H
-\]
-
-\end_inset
-
-where the weighting 
-\begin_inset Formula $\exp-\beta H$
-\end_inset
-
- is the Feynman weighting (and 
-\begin_inset Formula $H$
-\end_inset
-
- is the Hamiltonian or the Action or whatever is appripriate for the cicumstance
-s) and 
+ The integral part 
 \begin_inset Formula $\int\left[d\varphi\right]$
 \end_inset
 
- is understood to be a sum over the Cantor set 
-\begin_inset Formula $C$
+ is understood to be a sum over all paths parameterized by the set 
+\begin_inset Formula $S$
 \end_inset
 
-.
- The primary issue here is that this is not the ordinary (Riemann) integral.
- The Riemann integral is generally understood to be a sum over a countable
- set of infinitessimal slices 
-\begin_inset Formula $dx$
+ and if 
+\begin_inset Formula $S$
 \end_inset
 
-; here, we have a sum over an uncountable set.
- Anyway, the first task is to come up with machinery that can deal with
- 
+ is uncountable, then we have formal difficulties with defining the integral.
+ Our imagination allows us to imagine 
 \begin_inset Formula $\int\left[d\varphi\right]$
 \end_inset
 
- running over an uncountable set of infinitessimal set of slices.
+ as a countable sum over infinitessimals; it does not stretch so far as
+ to be an uncountable sum over infinitessimals.
 \end_layout
 
 \begin_layout Standard
-The second task is to write down 
-\begin_inset Formula $\exp-\beta H$
-\end_inset
-
- explicitly; but this should be easy, it is (in a sense) already done in
- appendix C.
-\end_layout
-
-\begin_layout Standard
-The third task is to construct a plausible version of 
+But this is all very abstract; perhaps too abstract.
+ There four distinct tasks in front of us.
+ One is to write down a plausible version of 
 \begin_inset Formula $\varphi$
 \end_inset
 
- that has the desirable set of ergodic, space-filling properties.
+ that is dense in 
+\begin_inset Formula $TM$
+\end_inset
+
+.
+ Another is to write down 
+\begin_inset Formula $S$
+\end_inset
+
+ so that it is a convenient parameter.
+ We've already concluded that 
+\begin_inset Formula $S$
+\end_inset
+
+ has to be countable, so we could just use the natural numbers, but this
+ might not be entirely 
+\begin_inset Quotes eld
+\end_inset
+
+convenient
+\begin_inset Quotes erd
+\end_inset
+
+.
+ More in just a moment.
+ Third, we have to write down some explicit expression for 
+\begin_inset Formula $\int\left[d\varphi\right]$
+\end_inset
+
+ that is tractable, and, fourth, to write down the measure
+\begin_inset Formula 
+\[
+\mu=\left[d\varphi\right]\exp-\beta A
+\]
+
+\end_inset
+
+so that it is also tractable.
+ Note the above does not have the integral symbol 
+\begin_inset Formula $\int$
+\end_inset
+
+ in it, and we wrote 
+\begin_inset Formula $\mu$
+\end_inset
+
+ instead of 
+\begin_inset Formula $d\mu$
+\end_inset
+
+ for the measure.
+\end_layout
+
+\begin_layout Subsection*
+Parameterizing paths
+\end_layout
+
+\begin_layout Standard
+Lets now try to construct some plausible 
+\begin_inset Formula $\varphi$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
