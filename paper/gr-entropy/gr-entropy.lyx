@@ -141,7 +141,7 @@ nt that does not involve strings.
  
 \end_layout
 
-\begin_layout Section*
+\begin_layout Section
 Introduction
 \end_layout
 
@@ -303,7 +303,7 @@ Recap Hawkings original arguments.
 Write down Dirac eqn at the Swarzschild event horizon
 \end_layout
 
-\begin_layout Section*
+\begin_layout Section
 Problem formulation
 \end_layout
 
@@ -556,120 +556,8 @@ classical
  itself, with path-lengths defined by the metric, and perform sums over
  those.
  The measure over path space is also derived from the metric.
-\end_layout
-
-\begin_layout Standard
-So that's all very cut-n-dried.
- Is there another way to do it?
-\end_layout
-
-\begin_layout Standard
-Two distinct issues come to mind.
- One is Unruh-related, another is holonomic-related.
- Lets think a bit about each, in turn.
- 
-\end_layout
-
-\begin_layout Standard
-The sum-over-paths includes paths that are instantaneously accelerated.
- This includes the sum over paths even in flat spacetime: only the classical
- path is inertial (because its geodesic).
- All the neighboring paths are necessarily non-inertial.
- Somehow, this can be 
-\begin_inset Quotes eld
-\end_inset
-
-safely ignored
-\begin_inset Quotes erd
-\end_inset
-
-, except for obvious divergences in QFT.
- In curved spacetime, this only gets worse.
- For example, in a one-loop diagram, the emitted photon is necessarily in
- a different, accelerated coordinate frame than where it's absorbed.
- This example also evokes Bohm-Aharonov-inspired ideas: is there some spontaneou
-s holonomy due to falling through accelerated frames? For example, how does
- a free-falling neutron interferometer work? If its freely falling in flat
- spacetime, then, of course, 
-\begin_inset Quotes eld
-\end_inset
-
-nothing happens
-\begin_inset Quotes erd
-\end_inset
-
-.
- But what if its in curved spacetime? Is there some holonomic correction
- due to curvature? How does that work? What are the actual equations for
- that?
-\end_layout
-
-\begin_layout Standard
-What are the tools that we have for sum-over-paths? Let's very quickly review
- these.
-\end_layout
-
-\begin_layout Itemize
-Conventional partition function; that is, 
-\begin_inset Formula $Z=\int\left[d\psi\right]\exp-\left(i/\hbar\right)S\left(\psi\right)$
-\end_inset
-
- The problem with this formalism is it does not tell me what the measure
- 
-\begin_inset Formula $\left[d\psi\right]$
-\end_inset
-
- should be.
- Well, it almost does, e.g.
- for Grassman variables, but this remains ...
- awkward and imprecise.
-\end_layout
-
-\begin_layout Itemize
-I can imagine some sort of literal sum over paths.
- Do I need to study Jacobi fields to do this properly? I've never ever seen
- a formal treatment for this.
-\end_layout
-
-\begin_layout Itemize
-A handful of special-cases, all of which are interferometers of some kind,
- e.g.
- the neutron interferometer, or the Bohm-Aharonov interferometer.
- All of these interferometer expriments consider only the classical paths.
- That is, both arms in the interferometer follow geodesics, i.e.
- extrema of the action.
- These are not really 
-\begin_inset Quotes eld
-\end_inset
-
-quantum
-\begin_inset Quotes erd
-\end_inset
-
- devices.
- 
-\end_layout
-
-\begin_layout Itemize
-The conventional QFT framework, consisting of conventional one-loop, two-loop,
- etc.
- diagrams integrated over momentum space.
- This is famously broken by curvature.
-\end_layout
-
-\begin_layout Itemize
-The ergodic theory of transfer operators and thier eigenfunctions.
- The shift here is to stop thinking of specific trajectories of specific
- particles, and instead work in terms of a dust of particles.
- The invariant measure is the Frobenius-Perron eigenvalue of the transfer
- operator.
- I've never seen a formal treament that re-interprets the partition function
- in terms of transfer operators.
-\end_layout
-
-\begin_layout Standard
-None of these are useful in the present case.
- They're just suggestive guidelines.
+ Hold this thought; it is picked up and worked in greater detail, next major
+ section.
 \end_layout
 
 \begin_layout Standard
@@ -776,14 +664,136 @@ amount of time
  very confusing, also.
 \end_layout
 
-\begin_layout Section*
+\begin_layout Section
 Path integrals
 \end_layout
 
 \begin_layout Standard
 OK, so the above musings are not providing any actionable work items that
  seem likely to produce anything worth-while.
- Lets try a different path, the path of path inttegrals.
+ Lets try a different path, the path of path integrals.
+\end_layout
+
+\begin_layout Standard
+Two distinct issues come to mind.
+ One is Unruh-related, another is holonomy-related.
+ Lets think a bit about each, in turn.
+ 
+\end_layout
+
+\begin_layout Standard
+The sum-over-paths includes paths that are instantaneously accelerated.
+ This includes the sum over paths even in flat spacetime: only the classical
+ path is inertial (because its geodesic).
+ All the neighboring paths are necessarily non-inertial.
+ Somehow, this can be 
+\begin_inset Quotes eld
+\end_inset
+
+safely ignored
+\begin_inset Quotes erd
+\end_inset
+
+, except for obvious divergences in QFT.
+ In curved spacetime, this only gets worse.
+ For example, in a one-loop diagram, the emitted photon is necessarily in
+ a different, accelerated coordinate frame than where it's absorbed.
+ This example also evokes Bohm-Aharonov-inspired ideas: is there some spontaneou
+s holonomy due to falling through accelerated frames? For example, how does
+ a free-falling neutron interferometer work? If its freely falling in flat
+ spacetime, then, of course, 
+\begin_inset Quotes eld
+\end_inset
+
+nothing happens
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But what if its in curved spacetime? Is there some holonomic correction
+ due to curvature? How does that work? What are the actual equations for
+ that?
+\end_layout
+
+\begin_layout Standard
+What are the tools that we have for sum-over-paths? Let's very quickly review
+ these.
+\end_layout
+
+\begin_layout Itemize
+Conventional partition function; that is, 
+\begin_inset Formula $Z=\int\left[d\psi\right]\exp-\left(i/\hbar\right)S\left(\psi\right)$
+\end_inset
+
+ The problem with this formalism is it does not tell me what the measure
+ 
+\begin_inset Formula $\left[d\psi\right]$
+\end_inset
+
+ should be.
+ Well, it almost does, 
+\emph on
+e.g.
+
+\emph default
+ for Grassman variables (the watchmacallit determinant), but this remains
+ ...
+ awkward and imprecise.
+\end_layout
+
+\begin_layout Itemize
+I can imagine some sort of literal sum over paths.
+ Do I need to study Jacobi fields to do this properly? I've never ever seen
+ a formal treatment for this.
+\end_layout
+
+\begin_layout Itemize
+A handful of special-cases, all of which are interferometers of some kind,
+ e.g.
+ the neutron interferometer, or the Bohm-Aharonov interferometer.
+ All of these interferometer expriments consider only the classical paths.
+ That is, both arms in the interferometer follow geodesics, i.e.
+ extrema of the action.
+ These are not really 
+\begin_inset Quotes eld
+\end_inset
+
+quantum
+\begin_inset Quotes erd
+\end_inset
+
+ devices.
+ 
+\end_layout
+
+\begin_layout Itemize
+The conventional QFT framework, consisting of conventional one-loop, two-loop,
+ etc.
+ diagrams integrated over momentum space.
+ This is famously broken by curvature.
+\end_layout
+
+\begin_layout Itemize
+The ergodic theory of transfer operators and thier eigenfunctions.
+ The shift here is to stop thinking of specific trajectories of specific
+ particles, and instead work in terms of a dust of particles.
+ The invariant measure is the Frobenius-Perron eigenvalue of the transfer
+ operator.
+ I've never seen a formal treament that re-interprets the partition function
+ in terms of transfer operators.
+\end_layout
+
+\begin_layout Standard
+None of these are useful in the present case.
+ They're just suggestive guidelines.
+ There's not enough there, to perform actual caluculations.
+\end_layout
+
+\begin_layout Standard
+Open TODO item: write down the eqns describing a freely falling neutron
+ interferometer in a curved spacetime.
+ I assume someone has already published these somewhere.
+ So find this and review.
 \end_layout
 
 \begin_layout Subsection*
@@ -800,6 +810,7 @@ trajectories
 \end_inset
 
 .
+ Paths in coordinate space of some manifold.
  Let's consider a path that is near a geodesic.
  The word 
 \begin_inset Quotes eld
@@ -1504,8 +1515,8 @@ The problem here is that conventional QFT asks us to solve the Klien-Gordon
  I want to see explicit expressions, showing how this is done.
 \end_layout
 
-\begin_layout Subsection*
-Tools
+\begin_layout Section*
+Appendix 0: Notes and Tools
 \end_layout
 
 \begin_layout Standard
@@ -1514,7 +1525,7 @@ Dray–t’ Hooft–Redmount (DTR) relation for linear approximation of Einstein
 \end_layout
 
 \begin_layout Standard
-Totally off-topic, but the mass of massi inflation is called the 
+Totally off-topic, but the mass of mass inflation is called the 
 \begin_inset Quotes eld
 \end_inset
 
