@@ -2059,6 +2059,156 @@ Use fermionic strings, so as to build vector reps i.e.
  3+1 from spinor reps.
 \end_layout
 
+\begin_layout Section*
+Appendix D: Wavelet paths
+\end_layout
+
+\begin_layout Standard
+This appendix develops the idea of a wavelet basis for paths through a manifold.
+\end_layout
+
+\begin_layout Subsection*
+Haar wavelets
+\end_layout
+
+\begin_layout Standard
+This section describes Haar basis wavelets.
+ 
+\end_layout
+
+\begin_layout Standard
+This is given by a function 
+\begin_inset Formula $w:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+, the 
+\begin_inset Quotes eld
+\end_inset
+
+mother wavelet
+\begin_inset Quotes erd
+\end_inset
+
+, that has some desirable properties: Typically, that it is differntiable,
+ that it is zero on the boundaries, ideally with derivative zero at the
+ boundaries, and non-zero in the middle.
+ Then, given a finite-length bit-string 
+\begin_inset Formula $\left\{ b_{k};k=1,\cdots,n\right\} $
+\end_inset
+
+ define the wavelet 
+\begin_inset Formula $w_{\left\{ b\right\} }:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+w_{\left\{ b\right\} }\left(t\right)=w\left(t;\left\{ b_{k}\right\} \right)=\begin{cases}
+w\left(2^{n}t-c_{\left\{ b\right\} }\right) & \frac{c_{\left\{ b\right\} }}{2^{n}}\le t\le\frac{c_{\left\{ b\right\} }+1}{2^{n}}\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+c_{\left\{ b\right\} }=\sum_{k=1}^{n}b_{k}2^{k}
+\]
+
+\end_inset
+
+Each set 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+ corresponds one-to-one to a dyadic rational 
+\begin_inset Formula $c_{\left\{ b\right\} }/2^{n}$
+\end_inset
+
+ and thus the wavelets form a countable basis for the unit interval.
+\end_layout
+
+\begin_layout Standard
+Arbitrary functions 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ can be approximated in the wavelet basis with a sequence of constants 
+\begin_inset Formula $a_{\left\{ b\right\} }$
+\end_inset
+
+ so that 
+\begin_inset Formula 
+\[
+f\left(x\right)\approx\sum_{\left\{ b\right\} }a_{\left\{ b\right\} }w_{\left\{ b\right\} }\left(t\right)
+\]
+
+\end_inset
+
+The above is not quite correct, because we've arranged the 
+\begin_inset Formula $w_{\left\{ b\right\} }$
+\end_inset
+
+ to vanish at the dyadic rationals.
+ I need to crack open a book on wavelets to get a more precise definition,
+ and also a proof that the above forms a complete basis, and that it converges
+ uniformly.
+ I beleive such a basis is possible, in general.
+\end_layout
+
+\begin_layout Subsection*
+Jacobi fields
+\end_layout
+
+\begin_layout Standard
+Consider next a geodesic 
+\begin_inset Formula $\gamma\left(t\right)$
+\end_inset
+
+ through some fixed (non-dynamical) Riemannian (or pseudo-Reimannian) manifold
+ of 
+\begin_inset Formula $N$
+\end_inset
+
+ dimensions.
+ Alongside this are a collection of Jacobi fields, which we use to define
+ nearby paths.
+\end_layout
+
+\begin_layout Standard
+Well, or we can use the vielbeins, instead.
+ That is, given a set of vielbeins along a path 
+\begin_inset Formula $\gamma\left(t\right)$
+\end_inset
+
+ (that is not necessarily freely-falling, i.e.
+ is not necessarily a geodesic), we use the wavelet basis to define nearby
+ paths.
+ More precisely, given 
+\begin_inset Formula $N$
+\end_inset
+
+ different constants 
+\begin_inset Formula $a_{\left\{ b\right\} }$
+\end_inset
+
+, we want to use these to define a 
+\begin_inset Quotes eld
+\end_inset
+
+nearby path
+\begin_inset Quotes erd
+\end_inset
+
+.
+ To be usable as a path, we must have some mechanism for defining the path
+ length on it, i.e.
+ of providing a unit velocity on it.
+ Ugh.
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
