@@ -1102,7 +1102,299 @@ Lets now try to construct some plausible
 \begin_inset Formula $\varphi$
 \end_inset
 
+.
+ We'll do this in several steps.
+ First, fix some smooth curve 
+\begin_inset Formula 
+\[
+\gamma:\left[0,1\right]\to M
+\]
 
+\end_inset
+
+This can be any curve, but the intent is that it will probably be a geodesic,
+ at the end.
+ Next, select a path 
+\begin_inset Formula 
+\[
+\psi:\left[0,1\right]\to\mathbb{R}^{n}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the dimension of the tangent bundle.
+ That is, 
+\begin_inset Formula $T_{p}M\approx\mathbb{R}^{n}$
+\end_inset
+
+ at each point 
+\begin_inset Formula $p$
+\end_inset
+
+, and we are using the atlas to reinterpret, by abuse of notation,
+\begin_inset Formula 
+\[
+\psi:\left[0,1\right]\to TM
+\]
+
+\end_inset
+
+such that 
+\begin_inset Formula 
+\[
+\psi\left(t\right)\in T_{\gamma\left(t\right)}M
+\]
+
+\end_inset
+
+Having picked such a 
+\begin_inset Formula $\psi$
+\end_inset
+
+, we then use the exp map to create the final curve 
+\begin_inset Formula 
+\[
+\varphi\left(t\right)=\gamma\left(t\right)\exp\psi\left(t\right)
+\]
+
+\end_inset
+
+This is to be read as saying 
+\begin_inset Quotes eld
+\end_inset
+
+starting at point 
+\begin_inset Formula $p=\gamma\left(t\right)$
+\end_inset
+
+, use polar coordinates to travel in a direction 
+\begin_inset Formula $\psi\left(t\right)$
+\end_inset
+
+, for a distance 
+\begin_inset Formula $\left|\psi\left(t\right)\right|$
+\end_inset
+
+, to arrive at a new point 
+\begin_inset Formula $p^{\prime}=\varphi\left(t\right)$
+\end_inset
+
+.
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Holding 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ fixed, it should be apparent that all we really need is a family of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ that is dense in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ in order to arrive at a family of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ that is dense in 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ What is not yet obvious is that this construction is dense in 
+\begin_inset Formula $TM$
+\end_inset
+
+.
+ To get dense in 
+\begin_inset Formula $TM$
+\end_inset
+
+, we need to consider all diffeomorphisms in the paramter 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Well, one thing at a time.
+\end_layout
+
+\begin_layout Standard
+How should we parameterize a collection of 
+\begin_inset Formula $\psi$
+\end_inset
+
+? Well, the traditional, conventional choice in QM textbooks is to use some
+ family of orthonormal functions on the unit interval.
+ In order to get a reasonable parameterization, this family must exhibit
+ uniform convergence on the unit interval.
+ In Appendix D, we consider a wavelet basis, as opposed to some more convetional
+ orthoganl polynomials or even a discrete fourier basis.
+ Why wavelets? Because they are 
+\begin_inset Quotes eld
+\end_inset
+
+local
+\begin_inset Quotes erd
+\end_inset
+
+: they allow one to consider a variation 
+\begin_inset Formula $\delta$
+\end_inset
+
+ that is localized to some small region of 
+\begin_inset Formula $t$
+\end_inset
+
+; this localized variation corresponds to a specific, local subset of the
+ wavelets.
+ By contrast, a discrte sine & cosine basis requires tweaking all of the
+ expansion coefficients, not just some of them, when considering a small
+ variation in the path.
+ This makes writing delta-epsilon changes harder, and showing uniform convergenc
+e harder.
+ I think.
+ It seems like the localized properties of wavelets should be appealing
+ when working with explicit paths that are explicitly in coordinate space.
+\end_layout
+
+\begin_layout Standard
+It does, however, raise a problem.
+ Conventional Feynman path integrals are done in momentum space, and not
+ in coordinate space.
+ This is because of an Ansatz: one moves from position to momentum via Fourier
+ transforms.
+ Well, this works great in flat space (including Minkowski space) but gets
+ awkward in curved spacetime.
+ I've done my share of reading of texbooks in differential geometry, and
+ am aware that, in principle, there's Poincare duality and all sorts of
+ related ideas that can be used to argue that, whatever we do in position
+ space, we can do in momentum space.
+ However, I have not seen, anywhere, any explicit expressions that show
+ how to do Fourier transforms near a black hole, never mind at the event
+ horizon.
+ Perhaps such expressions exist, and I just have not read widely enough
+ to have seen them...
+ (Should I ask ChatGPT?)
+\end_layout
+
+\begin_layout Standard
+This leads us into a tedious situation: lots of calculations need to be
+ done.
+ Ugh.
+ I hate long calculations.
+ Anyway, here's the sketch:
+\end_layout
+
+\begin_layout Itemize
+Formalize the wavelet basis enough to be usable.
+\end_layout
+
+\begin_layout Itemize
+Formalize the construction of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ given above to be usable.
+ In particular, this requires taking 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ to be a freely falling particle, with an attached vielbein giving us a
+ coordinate frame, in which the exp map has an explicit form.
+\end_layout
+
+\begin_layout Itemize
+To cover all of 
+\begin_inset Formula $TM$
+\end_inset
+
+, we need to also work with all diffeomorphisms of the unit interval.
+\end_layout
+
+\begin_layout Itemize
+We need to compute the action for each path 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and we need to weight it, and finally obtain a measure.
+\end_layout
+
+\begin_layout Itemize
+Then we need to ...
+ umm ...
+ Why were we doing all this, again? The original goal was to get either
+ some kind of explict model of ergodicity on the event horizon, or to obtain
+ some sort of quantum theory near the horizon.
+\end_layout
+
+\begin_layout Standard
+Well, the first four bullets seem to be within reach.
+ Perhaps a bit of a grind, to write it all out, but doable, as a general
+ program.
+\end_layout
+
+\begin_layout Standard
+The fifth bullet is a challenge.
+ Now, in one certain sense, it is 
+\begin_inset Quotes eld
+\end_inset
+
+easy
+\begin_inset Quotes erd
+\end_inset
+
+ to write down QFT in curved spacetime.
+ One just writes D instead of d and throws in the Christoffel symbols in
+ all of the approriate places and voila, done! Small, compact expressions
+ that can be found in numerous texts.
+ But these expressions do not give us an adequate 
+\begin_inset Quotes eld
+\end_inset
+
+physical
+\begin_inset Quotes erd
+\end_inset
+
+ model of what is happening at the event horizon.
+ This shortcoming is illustrated by the so-called firewall paradox, if nothing
+ else.
+ There are missing details.
+ 
+\end_layout
+
+\begin_layout Standard
+So, the daydream here is that the wavelet basis should help us write down
+ a QFT at the event horizon.
+ If that's the goal, then the fifth bullet point is:
+\end_layout
+
+\begin_layout Itemize
+How does one write down wave functions, and entangled wave functions, using
+ a coordinate-space path integral? Specifically, how do I entangle a wave
+ function on one side of the even horizon with a wave function on the other
+ side? Or should I be talking about quantized fields, not wave functions?
+ Huh?
+\end_layout
+
+\begin_layout Standard
+The problem here is that conventional QFT asks us to solve the Klien-Gordon
+ eqn, then to write down ladder operators for it, and finally, do this near
+ the horizon, and then to imagine some kind of complex vacuum, some bubbling
+ Dirac sea of particle-hole pairs near the horizon.
+ My imagination breaks down there.
+ I cannot imagine this vacuum.
+ I want to see explicit expressions, showing how this is done.
 \end_layout
 
 \begin_layout Subsection*
