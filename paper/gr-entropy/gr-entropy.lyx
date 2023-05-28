@@ -1398,6 +1398,8 @@ e harder.
  I think.
  It seems like the localized properties of wavelets should be appealing
  when working with explicit paths that are explicitly in coordinate space.
+ Except maybe not.
+ See next section.
 \end_layout
 
 \begin_layout Standard
@@ -1526,6 +1528,138 @@ The problem here is that conventional QFT asks us to solve the Klein-Gordon
  My imagination breaks down there.
  I cannot imagine this vacuum.
  I want to see explicit expressions, showing how this is done.
+\end_layout
+
+\begin_layout Subsection*
+Coordinate path basis
+\end_layout
+
+\begin_layout Standard
+The above section discusses the possibility of explicitly performing sums
+ over coordinate paths, and idley suggests that a wavelet basis might be
+ better than a fourier basis.
+ But is this the case? Maybe not.
+\end_layout
+
+\begin_layout Standard
+The primary successs of the Fourier basis is due to Newton's 2nd Law in
+ flat space.
+ In a vacuum, in a non-interacting environment, in flat space, a moving
+ mass moves at constant momentum.
+ The momentum distribution is 
+\begin_inset Formula $\delta\left(p-p_{0}\right)$
+\end_inset
+
+ and the corresponding wave is a plane wave 
+\begin_inset Formula $e^{ikx}$
+\end_inset
+
+.
+ This is the philosophical reason why plane waves provide the prefered basis
+ for QFT in Minkowski space.
+ There's also a second reason: conservation of energy.
+ The kinetic term 
+\begin_inset Formula $\left(d\varphi/dt\right)^{2}$
+\end_inset
+
+ is translation-invariant.
+ For 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ a plane-wave, the kinetic terms is trivially 
+\begin_inset Formula $k^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For a wavelet in flat space, it's a bit silly.
+ So, in a wavelet basis
+\begin_inset Formula 
+\[
+\varphi\left(t\right)=\sum_{n,0\le m\le2^{n}}a_{n,m}f\left(2^{n}t-m\right)
+\]
+
+\end_inset
+
+for a mother wavelet 
+\begin_inset Formula $f\left(t\right)$
+\end_inset
+
+, the kinetic term just becomes
+\begin_inset Formula 
+\[
+\left(\sum_{n}2^{n}\sum_{0\le m\le2^{n}}a_{n,m}\right)^{2}
+\]
+
+\end_inset
+
+with the second sum illustrating the 
+\begin_inset Quotes eld
+\end_inset
+
+silliness
+\begin_inset Quotes erd
+\end_inset
+
+ of the wavelet basis: the wavelet basis was not translation-invariant (by
+ construction), but the kinetic term is translation-invariant, and so the
+ second sum is just a sum over all translated versions of the wavelet.
+ In flat space, this is quite pointless and silly.
+\end_layout
+
+\begin_layout Standard
+Thus, we arrive at an impass.
+ We're interested in writing down an orthonormal basis in curved space.
+ The fourier transform is problematic: the need to integrate over the entire
+ real line, the implicit conservation of momentum implied by plane waves.
+ These two properties make it ideal for flat space, but problematic for
+ curved space with either coordinate singularities or real singularities.
+\end_layout
+
+\begin_layout Standard
+The wavelet basis is hardly any better.
+ The wavelets are localized, but even then, there's a built-in assumption
+ of flatness at the local scale.
+\end_layout
+
+\begin_layout Standard
+What is the correct, best basis for arbitrary paths in curved spacetime?
+ I don't know.
+\end_layout
+
+\begin_layout Subsection*
+Proper time
+\end_layout
+
+\begin_layout Standard
+When one writes down some arbitrary path through spacetime, there arises
+ the problem of assigning a numeric value to the integral of the kinetic
+ term 
+\begin_inset Formula $\int_{0}^{T}dt\left(d\varphi/dt\right)^{2}$
+\end_inset
+
+ for that path.
+ What is the correct metric for the time, along that curve? There are several
+ possibilities(!!)
+\end_layout
+
+\begin_layout Standard
+The issue is that any diffeomorphic rescaling of the time coordinate along
+ the curve gives the 
+\begin_inset Quotes eld
+\end_inset
+
+same curve
+\begin_inset Quotes erd
+\end_inset
+
+ in coordinates, but assigns a different energy to it.
+ Thus, the sum over paths cannot be just a sum over spatially distinct paths,
+ but also a sum over diffeomorphic rescalings of the time coordinate.
 \end_layout
 
 \begin_layout Subsection*
