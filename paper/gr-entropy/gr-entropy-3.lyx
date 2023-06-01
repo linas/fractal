@@ -848,12 +848,11 @@ with
 \end_layout
 
 \begin_layout Subsection*
-Geodesics
+Poynting vector
 \end_layout
 
 \begin_layout Standard
-We have several distinct types of geodesics that we'll need to work with.
- 
+TBD, I think this will be useful, later.
 \end_layout
 
 \begin_layout Section
@@ -1243,7 +1242,7 @@ The distribution of the cloud is such that
 \end_layout
 
 \begin_layout Subsection*
-Flashlight geodesics
+Flashlight geodesics (in the Schwarzschild chart)
 \end_layout
 
 \begin_layout Standard
@@ -1322,7 +1321,11 @@ At time
 \begin_inset Formula $t=t_{0}$
 \end_inset
 
- we have 
+ and at 
+\begin_inset Formula $r=r_{0}\gg2m$
+\end_inset
+
+, we have 
 \begin_inset Formula $dt/d\tau\approx1$
 \end_inset
 
@@ -1330,7 +1333,7 @@ At time
  This gives 
 \begin_inset Formula 
 \[
-E\approx m\left(1-\frac{2m}{r_{0}}\right)
+E\approx m\left(1-\frac{2m}{r_{0}}\right)\approx m
 \]
 
 \end_inset
@@ -1344,6 +1347,26 @@ t\left(p,\tau\right)=\frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{r\left(p,s\right)}{r
 \end_inset
 
 Yuck.
+ Ugly.
+ For the radial equation, if I did my algebra correctly, I get
+\begin_inset Formula 
+\[
+0=\frac{d^{2}r}{d\tau^{2}}-\frac{m}{r^{2}}\left[\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}\left(1-\frac{2m}{r}\right)}\right]
+\]
+
+\end_inset
+
+which is also sinfully ugly.
+ Brute-forcing this is not the easy way to victory.
+ For that, We'll need to use the Lemaitre coordinates.
+\end_layout
+
+\begin_layout Subsection*
+Flashlight coordinates (in the Lemaitre chart)
+\end_layout
+
+\begin_layout Standard
+Should be much easier.
 \end_layout
 
 \begin_layout Subsection*
