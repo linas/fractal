@@ -1267,9 +1267,19 @@ so that for a given flashlight
 
 , it is located at the above Schwarzschild coordinates.
  Each individual flashlight is meant to free-fall radially inwards.
- We could brute-force our way through the geodesic equations.
- Or we could copy what we need from existing texts, which is good enough
- for present purposes.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Geodesic equations
+\end_layout
+
+\begin_layout Standard
+This section attempts to brute-force our way through the geodesic equations.
+ This proves to be a mistake, which comes as no surprise.
+ But lets make that mistake, anyway.
+ Lets take some shortcuts, and copy what we need from existing texts, which
+ is good enough for present purposes.
  We assume Wikipedia is correct(!), and can work with the Wikipedia article
  
 \begin_inset CommandInset href
@@ -1351,14 +1361,155 @@ Yuck.
  For the radial equation, if I did my algebra correctly, I get
 \begin_inset Formula 
 \[
-0=\frac{d^{2}r}{d\tau^{2}}-\frac{m}{r^{2}}\left[\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}\left(1-\frac{2m}{r}\right)}\right]
+0=\frac{d^{2}r}{d\tau^{2}}-\frac{m}{r^{2}}\left[\left(1-\frac{2m}{r}\right)\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}\left(1-\frac{2m}{r}\right)}\right]
 \]
 
 \end_inset
 
-which is also sinfully ugly.
+Rearranging, this gives
+\begin_inset Formula 
+\[
+r^{2}\frac{d^{2}r}{d\tau^{2}}\left(1-\frac{2m}{r}\right)=m\left[\left(1-\frac{2m}{r}\right)^{2}\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}}\right]
+\]
+
+\end_inset
+
+which is sinfully ugly.
  Brute-forcing this is not the easy way to victory.
- For that, We'll need to use the Lemaitre coordinates.
+ The Lemaitre chart should make this easier.
+ But first, an alternate approach.
+\end_layout
+
+\begin_layout Subsection*
+Flashlight coordinates (Lagrangian method)
+\end_layout
+
+\begin_layout Standard
+The Lagrangian for a massive particle following a time-like trajectory is
+ 
+\begin_inset Formula 
+\[
+L=\frac{1}{2}g_{\mu\nu}\dot{x}^{\mu}\dot{x}^{\nu}
+\]
+
+\end_inset
+
+where the shorthand 
+\begin_inset Formula 
+\[
+\dot{x}^{\mu}=\frac{x^{\mu}}{d\tau}
+\]
+
+\end_inset
+
+is used.
+ For the Schwarzschild chart, it is
+\begin_inset Formula 
+\[
+L=\frac{1}{2}\left(\left(1-\frac{2m}{r}\right)\dot{t}^{2}-\frac{\dot{r}^{2}}{1-\frac{2m}{r}}-r^{2}\dot{\theta}^{2}-r^{2}\sin^{2}\theta\dot{\phi}^{2}\right)
+\]
+
+\end_inset
+
+For radial infall, set 
+\begin_inset Formula $\dot{\theta}=\dot{\phi}=0$
+\end_inset
+
+.
+ The Euler-Lagrange equations are
+\begin_inset Formula 
+\[
+\frac{d}{d\tau}\frac{\partial L}{\partial\dot{x}^{\mu}}-\frac{\partial L}{\partial x^{\mu}}=0
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $\mu=t$
+\end_inset
+
+one obviously has 
+\begin_inset Formula $\partial L/\partial t=0$
+\end_inset
+
+ and so the energy is a constant of motion:
+\begin_inset Formula 
+\[
+E=\frac{\partial L}{\partial\dot{t}}
+\]
+
+\end_inset
+
+Working this out explicitly, 
+\begin_inset Formula 
+\[
+E=\frac{\partial L}{\partial\dot{t}}=\left(1-\frac{2m}{r}\right)\dot{t}
+\]
+
+\end_inset
+
+This is the same as the previous section.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\mu=r$
+\end_inset
+
+, the radial equation is brute-forced:
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial r}=\frac{m}{r^{2}}\dot{t}^{2}+\frac{\dot{r}^{2}}{\left(1-\frac{2m}{r}\right)^{2}}\frac{m}{r^{2}}
+\]
+
+\end_inset
+
+Plugging in for the energy,
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial r}=\frac{m}{\left(r-2m\right)^{2}}\left(\dot{r}^{2}+E^{2}\right)
+\]
+
+\end_inset
+
+The rest is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial\dot{r}}=-\frac{\dot{r}}{1-\frac{2m}{r}}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}=-\frac{\ddot{r}}{1-\frac{2m}{r}}+\frac{\dot{r}^{2}}{\left(1-\frac{2m}{r}\right)^{2}}\frac{2m}{r^{2}}
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial\dot{r}}=-\frac{\ddot{r}}{1-\frac{2m}{r}}+\frac{1}{r^{2}\left(1-\frac{2m}{r}\right)^{2}}\left(m\dot{r}^{2}-2E^{2}\right)
+\]
+
+\end_inset
+
+Rearranging, 
+\begin_inset Formula 
+\[
+r^{2}\ddot{r}\left(1-\frac{2m}{r}\right)=m\dot{r}^{2}-2E^{2}
+\]
+
+\end_inset
+
+which is almost the same as the earlier eqn, but different, so somewhere
+ there is a mistake.
+ Arghhh!
 \end_layout
 
 \begin_layout Subsection*
