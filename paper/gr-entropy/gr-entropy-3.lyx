@@ -857,64 +857,59 @@ We have several distinct types of geodesics that we'll need to work with.
 \end_layout
 
 \begin_layout Section
-The spherical shell
+Flashlight geodesics
 \end_layout
 
 \begin_layout Standard
-The experiment proposes a spherical shell of infalling flashlights.
- This section sets up the notation needed for that.
- Since each flashlight falls in a radial direction, this would seem to be
- 
+The introduction proposes a priviledged point, the astronaut, surrounded
+ by a spherical shell of infalling flashlights.
+ For practical calculations, it is more convenient to visualize the astronaut
+ as being surrounded by a cloud, a uniformly distributed dust of flashlights.
+ The goal of this section is to describe the infalling geodesics of the
+ astronaut and these flashlights.
+ Since these are meant to be radially infalling, this should be easy.
+ To make the notation unambiguous, some preliminaries need to be cleared
+ up.
+\end_layout
+
+\begin_layout Standard
+This dust of flashlights should be thought of as a 
 \begin_inset Quotes eld
 \end_inset
 
-easy
+smart dust
 \begin_inset Quotes erd
 \end_inset
 
-; they only tricky part is that there are several additional details that
- must be kept track of: 
+, so that each flashlight is a computer, capable of carrying a universally
+ unique id (UUID) that identifies it.
+ When each flashlight broadcasts, it should be thought of as a GPS transmitter,
+ so that the transmission encodes the UUID number.
+ This does not alter the mathematical description of the geodesics in any
+ way; instead, the goal here is that each geodesic can be given a unique,
+ unambiguous label, about which there can be no confusion.
 \end_layout
 
-\begin_layout Itemize
-Define what we mean by 
-\begin_inset Quotes eld
-\end_inset
-
-spherical
-\begin_inset Quotes erd
-\end_inset
-
-.
- Perhaps it was spherical at infinity; is it still spherical as it falls?
-\end_layout
-
-\begin_layout Itemize
-Each flashlight can be assumed to be a 
-\begin_inset Quotes eld
-\end_inset
-
-smart flashlight
-\begin_inset Quotes erd
-\end_inset
-
-, so that it transmits a signal that encodes it's own proper time and it's
- identification number.
- Thus, we need angular coordinates.
-\end_layout
-
-\begin_layout Itemize
-Each flashlight can transmit differrent codes in differrent directions,
- and so each null geodesic departing from the flashlight can be labelled
- not only with the proper time when it was emitted, but also with the angular
- information of the flashlight coordinate frame.
-\end_layout
-
-\begin_layout Itemize
-Each flashlight can transmit polarized light.
- Thus, we need not only the geodesics of the infalling flashlights, but
- also the full inertial coordinate frame (which by which the polarization
- is set.) That is, the Euler coordinates.
+\begin_layout Standard
+Furthermore, when a flashlight broadcasts, it can also encode the direction
+ in which it is broadcasting the signal.
+ That is, each flashlight carries an intertial frame (say, by gyroscopes
+ built into it), and when the flashlight transmits a narrow beam in some
+ given direction, it can encode that direction into the beam itself.
+ Recall the engineering of this: it can be done with pseudorandom bit sequences.
+ The flashlight modulates the transmission with this directional information
+ (using AM, FM, SSB, PCM, quadrature; any conventional radio technique will
+ work.) Again, this changes nothing, other than reinforcing the idea that
+ each null geodesic emanating from the flashlight can be uniquely identified
+ with the initial direction in which it was emitted.
+ The flashlight can also carry a clock, measuring the proper time for that
+ flashlight, and this time can also be encoded into the transmission.
+ Thus, for each null geodesic, it can be accurately labelled with a timestamp
+ indicating the proper time when it was emitted.
+ Note finally that each radio transmission can also be polarized, thus indicatin
+g the remaining degree of freedom in the positioning of the transmitter.
+ That is, radio waves can completely encode information about the transmitter
+ at the time of the transmission.
 \end_layout
 
 \begin_layout Standard
@@ -926,33 +921,49 @@ flashlight
 \begin_inset Quotes erd
 \end_inset
 
- is used, implying photons, these flashlights could equally be machine rifles,
- shooting bullets.
- In this case, the bullets themselves could be smart bullets, carrying a
- computer attached to a clock and maintaining an inertial frame (say, with
- gyroscopes).
- Thus, when the astronaut at the center of the sphere 
+ is used, implying light or radio emissions propagating along null geodesics,
+ these flashlights could equally be machine rifles, shooting 
 \begin_inset Quotes eld
 \end_inset
 
-receives
+smart bullets
 \begin_inset Quotes erd
 \end_inset
 
- a bullet, they can determine (by querying the computer) when it was launched.
- This idea of each bullet being a computer changes nothing at all, with
- respect to the mathematics of the geodesics.
- However, it does reinforce the idea that the inertial frames are 
+.
+ In this case, each bullet could be a computer.
+ This computer can carry information about which gun it was shot from, and
+ when, and what direction (so, the same as the radio transmissions), but
+ also the velocity.
+ Each bullet can be equipped with a clock, and with gyroscopes, so that,
+ again, there is no doubt whatsoever is to it's inertial frame.
+ Each bullet is also capable of acting as a radio receiver, and recording
+ a history of those receptions; bullets have 
 \begin_inset Quotes eld
 \end_inset
 
-real
+memory of the past
 \begin_inset Quotes erd
 \end_inset
 
-, and not coordinate system artifacts.
- Each bullet can know where it is, when it is, and remember its own history.
- It can convey this information to the receiver, upon contact.
+.
+ Upon reception of the bullet by the observer (the falling astronaut), this
+ information can be queried and analyzed by the astronaut.
+ Again, this does not change any of the algebra used to describe the geodesics;
+ it does, however, sharpen the the kind of information that can be attached
+ to the timelike geodesics emitted by the flashlight-guns.
+ Also worth keeping in mind that the null geodesics cannot carry this kind
+ of information.
+ The null geodesic cannot 
+\begin_inset Quotes eld
+\end_inset
+
+remember
+\begin_inset Quotes erd
+\end_inset
+
+ what it saw along the way; the null geodesic has no proper time, no recording
+ mechanism, no memory, no subjective, experienced history.
 \end_layout
 
 \begin_layout Standard
@@ -976,10 +987,10 @@ at infinity
 
 \begin_layout Itemize
 Let 
-\begin_inset Formula $Q$
+\begin_inset Formula $R$
 \end_inset
 
- be the initial radius of that shell.
+ be the radius of that shell.
 \end_layout
 
 \begin_layout Itemize
@@ -1007,7 +1018,8 @@ Let
 \begin_inset Formula $-\pi\le\beta\le\pi$
 \end_inset
 
- be angular coordinates on that shell, the altitude and azimuth, respectively.
+ be angular (polar) coordinates on that shell, the altitude and azimuth,
+ respectively.
  The convention is that 
 \begin_inset Formula $\alpha=0$
 \end_inset
@@ -1051,11 +1063,24 @@ Let
  be reserved for the third Euler angle, which will be needed to determine
  the flashlight polarization.
  It will be defined later.
+ 
+\end_layout
+
+\begin_layout Itemize
+These angular coordinates are meant to be valid only at time 
+\begin_inset Formula $t=t_{0}$
+\end_inset
+
+ and are meant only to uniquely identify each flashlight.
+ They can be thought of as the universally unique id number (UUID) of the
+ flashlight.
+ This UUID number does not change over time.
+ 
 \end_layout
 
 \begin_layout Itemize
 Let 
-\begin_inset Formula $x,y,z,t$
+\begin_inset Formula $x,y,z$
 \end_inset
 
  be orthonormal coordinates for the lab frame (body frame) of the sphere.
@@ -1088,20 +1113,28 @@ Let
 \end_inset
 
 .
- Let 
-\begin_inset Formula $t=t_{0}$
-\end_inset
-
- when 
-\begin_inset Formula $r=r_{0}$
-\end_inset
-
-.
+ As above, these are meant to be UUID's, providing unique labels for the
+ falling flashlights.
+ These coordinates are (by definition) time-independent, and serve to label
+ the flashlight.
 \end_layout
 
 \begin_layout Standard
 With the above notation, let us then describe the geodesic of each flashlight,
  together with the lab frame center.
+ Let each flashlight be denoted by a point 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ We wish to relate the lab-frame coordinates (in the lab fierbein) to the
+ Painleve/Lemaitre coordinates in the Schwarzschild spacetime manifold.
+ Furthermore, we want to track each flashlight individually, as it falls.
+ Thus, we solve the geodesic equation for radially infalling flashlights.
+\end_layout
+
+\begin_layout Standard
+At 
 \end_layout
 
 \end_body
