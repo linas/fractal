@@ -872,6 +872,10 @@ The introduction proposes a priviledged point, the astronaut, surrounded
  up.
 \end_layout
 
+\begin_layout Subsection*
+Conceptual framework
+\end_layout
+
 \begin_layout Standard
 This dust of flashlights should be thought of as a 
 \begin_inset Quotes eld
@@ -964,6 +968,10 @@ remember
 
  what it saw along the way; the null geodesic has no proper time, no recording
  mechanism, no memory, no subjective, experienced history.
+\end_layout
+
+\begin_layout Subsection*
+Flashlight labels
 \end_layout
 
 \begin_layout Standard
@@ -1085,7 +1093,7 @@ Let the polar coordinates of a flashlight be denoted by
 \begin_inset Formula $\beta=0$
 \end_inset
 
- correspionds to 
+ corresponds to 
 \begin_inset Formula $\phi=0$
 \end_inset
 
@@ -1166,7 +1174,10 @@ Positive
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Subsection*
+Initial flashlight positions
 \end_layout
 
 \begin_layout Standard
@@ -1177,14 +1188,171 @@ With the above notation, let us then describe the geodesic of each flashlight,
 \end_inset
 
 .
- We wish to relate the lab-frame coordinates to the Painleve/Lemaitre coordinate
-s in the Schwarzschild spacetime manifold.
+ This 
+\begin_inset Formula $p$
+\end_inset
+
+ is understood to be the UUID of the flashlight.
+ We wish to relate the lab-frame coordinates to the Schwarzschild coordinate
+ chart in the Schwarzschild spacetime manifold.
  Furthermore, we want to track each flashlight individually, as it falls.
  Thus, we solve the geodesic equation for radially infalling flashlights.
 \end_layout
 
 \begin_layout Standard
-At 
+At time 
+\begin_inset Formula $t=t_{0}$
+\end_inset
+
+, we have that 
+\begin_inset Formula $p\left(x,y,z\right)$
+\end_inset
+
+ is located at the Schwarschild location 
+\begin_inset Formula $\left(r,\theta,\phi\right)$
+\end_inset
+
+ given by inverting the relations
+\begin_inset Formula 
+\begin{align*}
+x & =r\sin\theta\cos\phi\\
+y & =r\sin\theta\sin\phi\\
+z & =r\cos\theta-r_{0}
+\end{align*}
+
+\end_inset
+
+The distribution of the cloud is such that 
+\begin_inset Formula $\theta\ll1$
+\end_inset
+
+.
+ The center of the cloud is at 
+\begin_inset Formula $x=y=z=0$
+\end_inset
+
+, and so at 
+\begin_inset Formula $r=r_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta=\phi=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Flashlight geodesics
+\end_layout
+
+\begin_layout Standard
+At later times, we wish to write 
+\begin_inset Formula 
+\begin{align*}
+r & =r\left(p,\tau\right)\\
+\theta & =\theta\left(p,\tau\right)\\
+\phi & =\phi\left(p,\tau\right)\\
+t & =t\left(p,\tau\right)
+\end{align*}
+
+\end_inset
+
+so that for a given flashlight 
+\begin_inset Formula $p$
+\end_inset
+
+ and a given proper time 
+\begin_inset Formula $\tau$
+\end_inset
+
+, it is located at the above Schwarzschild coordinates.
+ Each individual flashlight is meant to free-fall radially inwards.
+ We could brute-force our way through the geodesic equations.
+ Or we could copy what we need from existing texts, which is good enough
+ for present purposes.
+ We assume Wikipedia is correct(!), and can work with the Wikipedia article
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Schwarzschild geodesics"
+target "https://en.whttps://en.wikipedia.org/wiki/Schwarzschild_geodesicsikipedia.org/wiki/Schwarzschild_geodesics"
+literal "false"
+
+\end_inset
+
+.
+ This states
+\begin_inset Formula 
+\begin{align*}
+0 & =\frac{d\phi}{d\tau}\\
+0 & =\frac{d\theta}{d\tau}\\
+0 & =\frac{d^{2}t}{d\tau^{2}}+\frac{1}{w}\frac{dw}{dr}\frac{dt}{d\tau}\frac{dr}{d\tau}\\
+0 & =\frac{d^{2}r}{d\tau^{2}}+\frac{1}{2v}\left(\frac{dv}{dr}\left(\frac{dr}{d\tau}\right)^{2}+\frac{dw}{dr}\left(\frac{dt}{d\tau}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $w\left(r\right)=1-2m/r$
+\end_inset
+
+ and 
+\begin_inset Formula $v\left(r\right)=1/w$
+\end_inset
+
+.
+ The third equation corresponds to a constant of motion 
+\begin_inset Formula 
+\[
+\frac{d}{d\tau}\left[\left(1-\frac{2m}{r}\right)\frac{dt}{d\tau}\right]=0
+\]
+
+\end_inset
+
+which is given by the energy
+\begin_inset Formula 
+\[
+E=m\left(1-\frac{2m}{r}\right)\frac{dt}{d\tau}
+\]
+
+\end_inset
+
+At time 
+\begin_inset Formula $t=t_{0}$
+\end_inset
+
+ we have 
+\begin_inset Formula $dt/d\tau\approx1$
+\end_inset
+
+ because we are far away.
+ This gives 
+\begin_inset Formula 
+\[
+E\approx m\left(1-\frac{2m}{r_{0}}\right)
+\]
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+t\left(p,\tau\right)=\frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{r\left(p,s\right)}{r\left(p,s\right)-2m}ds
+\]
+
+\end_inset
+
+Yuck.
+\end_layout
+
+\begin_layout Subsection*
+Flashlight fierbeins
+\end_layout
+
+\begin_layout Standard
+For each flashlight, we also need an expression for its local inertial coordinat
+e frame.
 \end_layout
 
 \end_body
