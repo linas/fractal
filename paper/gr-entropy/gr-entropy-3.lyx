@@ -967,7 +967,8 @@ remember
 \end_layout
 
 \begin_layout Standard
-Starting at a location 
+We now proceed to label the flashlights.
+ Starting at a location 
 \begin_inset Quotes eld
 \end_inset
 
@@ -980,21 +981,38 @@ at infinity
 \begin_inset Formula $r\gg2m$
 \end_inset
 
-, assume that there is no technical problem with arranging the flashlights
- in an intertial spherical shell.
- The following coordinates are used:
-\end_layout
-
-\begin_layout Itemize
-Let 
-\begin_inset Formula $R$
+, where spacetime is approximately flat, we establish an inertial frame.
+ This frame can be labelled with either orthonormal coordinates 
+\begin_inset Formula $x,y,z$
 \end_inset
 
- be the radius of that shell.
+ or with polar coordinates.
+ The labelling is done at time 
+\begin_inset Formula $t=t_{0}$
+\end_inset
+
+, and we set the proper time to 
+\begin_inset Formula $\tau=\tau_{0}$
+\end_inset
+
+ for all flashlights.
+ There is no engineering or mathematical challenge to arranging this.
+ Its all standard lab technique.
+ Place the astronaut at the origin, the privileged point 
+\begin_inset Formula $x=y=z=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For polar coordinates, the following notation is used: 
 \end_layout
 
 \begin_layout Itemize
-Let the center of that shell be located at 
+With respect to the Schwarschild coordinates, the astronaut is initially
+ located at at 
 \begin_inset Formula $r=r_{0}\gg2m$
 \end_inset
 
@@ -1006,11 +1024,44 @@ Let the center of that shell be located at
 \begin_inset Formula $\phi=0$
 \end_inset
 
- in the Lemaitre/Painleve frame.
+ in the Schwarschild chart.
+ 
 \end_layout
 
 \begin_layout Itemize
 Let 
+\begin_inset Formula $R=\sqrt{x^{2}+y^{2}+z^{2}}$
+\end_inset
+
+ be the radial location of a flashlight with respect to the astronaut.
+ This number should be thought of as a UUID, a constant that never changes.
+ It is stored in the flashlight computer memory itself, and does not change.
+\end_layout
+
+\begin_layout Itemize
+In general, we'll wish to keep the cloud of flashlights relatively small,
+ so that 
+\begin_inset Formula $R\ll r_{0}$
+\end_inset
+
+ is a valid assumption.
+ It seems like this could be a useful simplifying assumption, at some point.
+\end_layout
+
+\begin_layout Itemize
+The flashlights are meant to be uniformly distributed, so that we can meaningful
+ly talk about a Euclidean measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ describing the local density of the flashlights.
+ We will want to track the time evolution of this measure, although this
+ might prove to be a challenging task.
+ 
+\end_layout
+
+\begin_layout Itemize
+Let the polar coordinates of a flashlight be denoted by 
 \begin_inset Formula $0\le\alpha\le\pi$
 \end_inset
 
@@ -1018,8 +1069,8 @@ Let
 \begin_inset Formula $-\pi\le\beta\le\pi$
 \end_inset
 
- be angular (polar) coordinates on that shell, the altitude and azimuth,
- respectively.
+.
+ These are the altitude and azimuth, respectively.
  The convention is that 
 \begin_inset Formula $\alpha=0$
 \end_inset
@@ -1067,31 +1118,33 @@ Let
 \end_layout
 
 \begin_layout Itemize
-These angular coordinates are meant to be valid only at time 
-\begin_inset Formula $t=t_{0}$
-\end_inset
-
- and are meant only to uniquely identify each flashlight.
- They can be thought of as the universally unique id number (UUID) of the
- flashlight.
+These angular coordinates are meant only to uniquely identify each flashlight.
+ Again, they are a UUID assigned to each flashlight.
  This UUID number does not change over time.
  
 \end_layout
 
-\begin_layout Itemize
-Let 
+\begin_layout Standard
+The orthonormal coordinates 
 \begin_inset Formula $x,y,z$
 \end_inset
 
- be orthonormal coordinates for the lab frame (body frame) of the sphere.
- All flashlights and the sphere center share this frame.
- The conventional sphereical coordinate frame is used, as follows.
- Positive 
+ for the lab frame (body frame) are related in the standard way:
+\begin_inset Formula 
+\begin{align*}
+x & =R\sin\alpha\cos\beta\\
+y & =R\sin\alpha\sin\beta\\
+z & =R\cos\alpha
+\end{align*}
+
+\end_inset
+
+Positive 
 \begin_inset Formula $z$
 \end_inset
 
- points towards the black hole (it corresponds to 
-\begin_inset Formula $\alpha=0)$
+ points towards the black hole, it corresponds to 
+\begin_inset Formula $\alpha=0$
 \end_inset
 
 .
@@ -1104,7 +1157,7 @@ Let
 \end_inset
 
 .
- The coordinates are right-handed, so that postive 
+ The coordinates are right-handed, so that positive 
 \begin_inset Formula $y$
 \end_inset
 
@@ -1113,10 +1166,7 @@ Let
 \end_inset
 
 .
- As above, these are meant to be UUID's, providing unique labels for the
- falling flashlights.
- These coordinates are (by definition) time-independent, and serve to label
- the flashlight.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1127,8 +1177,8 @@ With the above notation, let us then describe the geodesic of each flashlight,
 \end_inset
 
 .
- We wish to relate the lab-frame coordinates (in the lab fierbein) to the
- Painleve/Lemaitre coordinates in the Schwarzschild spacetime manifold.
+ We wish to relate the lab-frame coordinates to the Painleve/Lemaitre coordinate
+s in the Schwarzschild spacetime manifold.
  Furthermore, we want to track each flashlight individually, as it falls.
  Thus, we solve the geodesic equation for radially infalling flashlights.
 \end_layout
