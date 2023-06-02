@@ -1256,6 +1256,21 @@ Flashlight geodesics (Lagrangian method)
 \end_layout
 
 \begin_layout Standard
+This sectin is mostly a recapitulation of the presentation provided in the
+ course notes 
+\begin_inset CommandInset href
+LatexCommand href
+name "Radial Infall Lecture 31 Physics 411 Classical Mechanics II 14 November 2007 Reed College"
+target "https://www.reed.edu/physics/courses/Physics411/html/411/page2/files/Lecture.31.pdf"
+literal "false"
+
+\end_inset
+
+.
+ Its slightly more verbose in some places, and more compact in others.
+\end_layout
+
+\begin_layout Standard
 The Lagrangian for a massive particle following a time-like trajectory is
  
 \begin_inset Formula 
@@ -1460,114 +1475,81 @@ to deduce
 
 \end_inset
 
-Then use the Ansatz
-\begin_inset Formula 
-\[
-r\left(\tau\right)=B\left(\tau-T\right)^{2/3}+C
-\]
-
-\end_inset
-
-for constants 
-\begin_inset Formula $B,C,T$
-\end_inset
-
-.
- This gives
-\begin_inset Formula 
-\[
-\dot{r}=\frac{2B}{3}\frac{1}{\left(\tau-T\right)^{1/3}}
-\]
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\[
-\dot{r}^{2}=\frac{4B^{2}}{9}\frac{1}{\left(\tau-T\right)^{2/3}}=\frac{4B^{3}}{9}\frac{1}{r-C}
-\]
-
-\end_inset
-
-Matching up, deduce that 
-\begin_inset Formula $C=0$
-\end_inset
-
- and 
-\begin_inset Formula $A=0$
-\end_inset
-
- and 
-\begin_inset Formula 
-\[
-\frac{4B^{3}}{9}=2m
-\]
-
-\end_inset
-
-so that 
-\begin_inset Formula 
-\[
-B=\pm\left(\frac{9m}{2}\right)^{1/3}
-\]
-
-\end_inset
-
-The negative sign is chosen, so that the radial coordinate decreases with
- increasing proper time.
- Thus, XXX wrong
-\begin_inset Formula 
-\[
-r\left(\tau\right)=-\left(\frac{9m}{2}\right)^{1/3}\left(\tau-T\right)^{2/3}
-\]
-
-\end_inset
-
-At time 
-\begin_inset Formula $\tau=\tau_{0}$
-\end_inset
-
- the location should be
-\begin_inset Formula 
-\[
-r\left(p,\tau_{0}\right)=-\left(\frac{9m}{2}\right)^{1/3}\left(\tau_{0}-T\right)^{2/3}
-\]
-
-\end_inset
-
-Solving for the constant 
-\begin_inset Formula $T$
-\end_inset
-
- gives
-\begin_inset Formula 
-\[
-T=\tau_{0}-\frac{2}{3}\frac{1}{\sqrt{2m}}r\left(p,\tau_{0}\right)^{3/2}
-\]
-
-\end_inset
-
-It is convenient to invert the solution, to obtain 
+The simplest way to solve this is to solve for 
 \begin_inset Formula $\tau\left(r\right)$
 \end_inset
 
+ and then invert, instead of trying to get to 
+\begin_inset Formula $r\left(\tau\right)$
+\end_inset
+
+ directly.
+ This is done by integrating 
+\begin_inset Formula 
+\[
+\frac{d\tau}{dr}=\pm\sqrt{\frac{r}{2m+Ar}}
+\]
+
+\end_inset
+
+For now, set 
+\begin_inset Formula $A=0$
+\end_inset
+
+; the case for 
+\begin_inset Formula $A\ne0$
+\end_inset
+
+ is considered later.
+ Integrating this directly gives
+\begin_inset Formula 
+\[
+\tau=\tau\left(r\right)=\tau_{0}\pm\frac{2}{3}\frac{1}{\sqrt{2m}}\left(r^{3/2}-r_{0}^{3/2}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{0}=r\left(p,\tau_{0}\right)$
+\end_inset
+
+ is the initial position of flashlight 
+\begin_inset Formula $p$
+\end_inset
+
+ at initial time 
+\begin_inset Formula $\tau_{0}$
+\end_inset
+
 .
- This can be obtained by direct inversion, or by solving 
+ The infalling geodesic corresponds to the choice of the minus sign, so
+ that 
+\begin_inset Formula $r<r_{0}$
+\end_inset
+
+ results in increasing proper time 
+\begin_inset Formula $\tau>\tau_{0}$
+\end_inset
+
+.
+ Inverting this gives the rather busy expression
 \begin_inset Formula 
 \[
-\frac{d\tau}{dr}=\pm\sqrt{\frac{r}{2m}}
+r\left(\tau\right)=\left[r_{0}^{3/2}-\frac{3\sqrt{2m}}{2}\left(\tau-\tau_{0}\right)\right]^{2/3}
 \]
 
 \end_inset
 
-Integrating this directly gives
-\begin_inset Formula 
-\[
-\tau\left(r\right)=\tau_{0}\pm\frac{2}{3}\frac{1}{\sqrt{2m}}\left(r^{3/2}-r\left(p,\tau_{0}\right)^{3/2}\right)
-\]
-
+Curiously, this expression is not singular at 
+\begin_inset Formula $r=2m$
 \end_inset
 
+.
+ However, the integral providing the coordinate 
+\begin_inset Formula $t$
+\end_inset
+
+ does exhibit a pole at that point.
  
 \end_layout
 
