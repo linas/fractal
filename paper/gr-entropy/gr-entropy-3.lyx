@@ -1386,12 +1386,32 @@ which is the same as the earlier eqn.
 \end_layout
 
 \begin_layout Subsection*
-Newtonian limit
+Constants of motion
 \end_layout
 
 \begin_layout Standard
-I'm paranoid, lets check the Newtonian limit.
- For this, we should have gotten 
+We can plug in for 
+\begin_inset Formula $\dot{t}$
+\end_inset
+
+ in the Lagrangian to get
+\begin_inset Formula 
+\[
+L=\frac{1}{2}\frac{1}{1-\frac{2m}{r}}\left(\frac{E^{2}}{m^{2}}-\dot{r}^{2}\right)
+\]
+
+\end_inset
+
+Inserting this into the geodesic equation gives
+\begin_inset Formula 
+\[
+r^{2}\ddot{r}=-2mL
+\]
+
+\end_inset
+
+This can be diectly compared to the Newtonian limit.
+ This would be
 \begin_inset Formula 
 \[
 \ddot{r}=-\frac{Gm}{r^{2}}
@@ -1399,48 +1419,193 @@ I'm paranoid, lets check the Newtonian limit.
 
 \end_inset
 
-recall 
+where 
+\begin_inset Formula $G$
+\end_inset
+
+ was inserted explicitly, just to jog the memory.
+ Of course, 
 \begin_inset Formula $G=1$
 \end_inset
 
  in our units.
+ From this, one may conclude that 
+\begin_inset Formula $L=1/2$
+\end_inset
+
+.
  
 \end_layout
 
+\begin_layout Subsection*
+Conventional solution
+\end_layout
+
 \begin_layout Standard
-In this case, 
-\begin_inset Formula $2m/r\to0$
+The conventional solution is to write
+\begin_inset Formula 
+\begin{align*}
+\dot{r}\ddot{r}= & \frac{1}{2}\frac{d}{d\tau}\dot{r}^{2}\\
+= & -\frac{m\dot{r}}{r^{2}}\\
+= & \frac{d}{d\tau}\frac{m}{r}
+\end{align*}
+
+\end_inset
+
+to deduce 
+\begin_inset Formula 
+\[
+\dot{r}^{2}=\frac{2m}{r}+A
+\]
+
+\end_inset
+
+Then use the Ansatz
+\begin_inset Formula 
+\[
+r\left(\tau\right)=B\left(\tau-T\right)^{2/3}+C
+\]
+
+\end_inset
+
+for constants 
+\begin_inset Formula $B,C,T$
+\end_inset
+
+.
+ This gives
+\begin_inset Formula 
+\[
+\dot{r}=\frac{2B}{3}\frac{1}{\left(\tau-T\right)^{1/3}}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\dot{r}^{2}=\frac{4B^{2}}{9}\frac{1}{\left(\tau-T\right)^{2/3}}=\frac{4B^{3}}{9}\frac{1}{r-C}
+\]
+
+\end_inset
+
+Matching up, deduce that 
+\begin_inset Formula $C=0$
 \end_inset
 
  and 
-\begin_inset Formula $E=m$
+\begin_inset Formula $A=0$
 \end_inset
 
- Well, that's all wrong.
- What t.f.
- did we do wrong? Why is this easy stuff so hard? Arghh....
+ and 
+\begin_inset Formula 
+\[
+\frac{4B^{3}}{9}=2m
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+B=\pm\left(\frac{9m}{2}\right)^{1/3}
+\]
+
+\end_inset
+
+The negative sign is chosen, so that the radial coordinate decreases with
+ increasing proper time.
+ Thus, XXX wrong
+\begin_inset Formula 
+\[
+r\left(\tau\right)=-\left(\frac{9m}{2}\right)^{1/3}\left(\tau-T\right)^{2/3}
+\]
+
+\end_inset
+
+At time 
+\begin_inset Formula $\tau=\tau_{0}$
+\end_inset
+
+ the location should be
+\begin_inset Formula 
+\[
+r\left(p,\tau_{0}\right)=-\left(\frac{9m}{2}\right)^{1/3}\left(\tau_{0}-T\right)^{2/3}
+\]
+
+\end_inset
+
+Solving for the constant 
+\begin_inset Formula $T$
+\end_inset
+
+ gives
+\begin_inset Formula 
+\[
+T=\tau_{0}-\frac{2}{3}\frac{1}{\sqrt{2m}}r\left(p,\tau_{0}\right)^{3/2}
+\]
+
+\end_inset
+
+It is convenient to invert the solution, to obtain 
+\begin_inset Formula $\tau\left(r\right)$
+\end_inset
+
+.
+ This can be obtained by direct inversion, or by solving 
+\begin_inset Formula 
+\[
+\frac{d\tau}{dr}=\pm\sqrt{\frac{r}{2m}}
+\]
+
+\end_inset
+
+Integrating this directly gives
+\begin_inset Formula 
+\[
+\tau\left(r\right)=\tau_{0}\pm\frac{2}{3}\frac{1}{\sqrt{2m}}\left(r^{3/2}-r\left(p,\tau_{0}\right)^{3/2}\right)
+\]
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Subsection*
-Explicit solution
+Alternate solution
 \end_layout
 
 \begin_layout Standard
-But how to solve this? Well, I can start guessing.
- Set 
-\begin_inset Formula $\dot{r}=-E/m=\mbox{const.}$
+Besides the above, one can also go back to the earlier form 
+\begin_inset Formula 
+\[
+r^{2}\ddot{r}\left(1-\frac{2m}{r}\right)=m\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)
+\]
+
 \end_inset
 
- from which follows 
+and observe that 
+\begin_inset Formula $\dot{r}=\pm E/m=\mbox{const.}$
+\end_inset
+
+ appears to be a valid solution.
+ That is, 
 \begin_inset Formula $\ddot{r}=0$
 \end_inset
 
- and the above eqn is satisfied.
- Is this the only solution, or are there others?
+ and both the left and right hand sides vanish.
+ How peculiar! The radial coordinate increases/decreases linearly as a function
+ of the proper time! WTF ??? I don't understand this.
+ Is this supposed to be the solution for the interior 
+\begin_inset Formula $r<2m$
+\end_inset
+
+? Beats me.
+ I've never studied this stuff carefully before.
 \end_layout
 
 \begin_layout Standard
-Integrating this gives
+Treating this as a valid solution for the exterior, then integration gives
 \begin_inset Formula 
 \[
 r\left(p,\tau\right)=r\left(p,\tau_{0}\right)-\frac{E}{m}\left(\tau-\tau_{0}\right)
