@@ -1280,8 +1280,8 @@ This section attempts to brute-force our way through the geodesic equations.
  But lets make that mistake, anyway.
  Lets take some shortcuts, and copy what we need from existing texts, which
  is good enough for present purposes.
- We assume Wikipedia is correct(!), and can work with the Wikipedia article
- 
+ We would like to assume Wikipedia is correct (!but its not!), and work
+ with the Wikipedia article 
 \begin_inset CommandInset href
 LatexCommand href
 name "Schwarzschild geodesics"
@@ -1297,7 +1297,7 @@ literal "false"
 0 & =\frac{d\phi}{d\tau}\\
 0 & =\frac{d\theta}{d\tau}\\
 0 & =\frac{d^{2}t}{d\tau^{2}}+\frac{1}{w}\frac{dw}{dr}\frac{dt}{d\tau}\frac{dr}{d\tau}\\
-0 & =\frac{d^{2}r}{d\tau^{2}}+\frac{1}{2v}\left(\frac{dv}{dr}\left(\frac{dr}{d\tau}\right)^{2}+\frac{dw}{dr}\left(\frac{dt}{d\tau}\right)^{2}\right)
+0 & =\frac{d^{2}r}{d\tau^{2}}-\frac{1}{v}\frac{dv}{dr}\left(\frac{dr}{d\tau}\right)^{2}+\frac{1}{2v}\frac{dw}{dr}\left(\frac{dt}{d\tau}\right)^{2}
 \end{align*}
 
 \end_inset
@@ -1311,7 +1311,8 @@ where
 \end_inset
 
 .
- The third equation corresponds to a constant of motion 
+ (The fourth equation appears to be incorrect.) The third equation corresponds
+ to a constant of motion 
 \begin_inset Formula 
 \[
 \frac{d}{d\tau}\left[\left(1-\frac{2m}{r}\right)\frac{dt}{d\tau}\right]=0
@@ -1358,18 +1359,18 @@ t\left(p,\tau\right)=\frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{r\left(p,s\right)}{r
 
 Yuck.
  Ugly.
- For the radial equation, if I did my algebra correctly, I get
+ For the (incorrect) radial equation, I get
 \begin_inset Formula 
 \[
-0=\frac{d^{2}r}{d\tau^{2}}-\frac{m}{r^{2}}\left[\left(1-\frac{2m}{r}\right)\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}\left(1-\frac{2m}{r}\right)}\right]
+0=\frac{d^{2}r}{d\tau^{2}}+\frac{m}{r^{2}}\left[2\left(1-\frac{2m}{r}\right)\left(\frac{dr}{d\tau}\right)^{2}+\frac{E^{2}}{m^{2}\left(1-\frac{2m}{r}\right)}\right]
 \]
 
 \end_inset
 
-Rearranging, this gives
+Rearranging, this gives the (incorrect) eqn
 \begin_inset Formula 
 \[
-r^{2}\frac{d^{2}r}{d\tau^{2}}\left(1-\frac{2m}{r}\right)=m\left[\left(1-\frac{2m}{r}\right)^{2}\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}}\right]
+r^{2}\frac{d^{2}r}{d\tau^{2}}\left(1-\frac{2m}{r}\right)=m\left[2\left(1-\frac{2m}{r}\right)^{2}\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}}\right]
 \]
 
 \end_inset
@@ -1435,7 +1436,7 @@ one obviously has
  and so the energy is a constant of motion:
 \begin_inset Formula 
 \[
-E=\frac{\partial L}{\partial\dot{t}}
+\mbox{const}=\frac{\partial L}{\partial\dot{t}}
 \]
 
 \end_inset
@@ -1443,12 +1444,14 @@ E=\frac{\partial L}{\partial\dot{t}}
 Working this out explicitly, 
 \begin_inset Formula 
 \[
-E=\frac{\partial L}{\partial\dot{t}}=\left(1-\frac{2m}{r}\right)\dot{t}
+\mbox{const}=\frac{E}{m}=\frac{\partial L}{\partial\dot{t}}=\left(1-\frac{2m}{r}\right)\dot{t}
 \]
 
 \end_inset
 
-This is the same as the previous section.
+This is writen so that the constant is dimensionless, and the energy has
+ the same scale as the mass.
+ This eqn is the same as the previous section.
 \end_layout
 
 \begin_layout Standard
@@ -1467,7 +1470,7 @@ For
 Plugging in for the energy,
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial r}=\frac{m}{\left(r-2m\right)^{2}}\left(\dot{r}^{2}+E^{2}\right)
+\frac{\partial L}{\partial r}=\frac{m}{r^{2}\left(1-\frac{2m}{r}\right)^{2}}\left(\dot{r}^{2}+\frac{E^{2}}{m^{2}}\right)
 \]
 
 \end_inset
@@ -1494,7 +1497,7 @@ and
 and so
 \begin_inset Formula 
 \[
-0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial\dot{r}}=-\frac{\ddot{r}}{1-\frac{2m}{r}}+\frac{1}{r^{2}\left(1-\frac{2m}{r}\right)^{2}}\left(m\dot{r}^{2}-2E^{2}\right)
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-\frac{\ddot{r}}{1-\frac{2m}{r}}+\frac{m}{r^{2}\left(1-\frac{2m}{r}\right)^{2}}\left(\dot{r}^{2}-2\frac{E^{2}}{m^{2}}\right)
 \]
 
 \end_inset
@@ -1502,7 +1505,7 @@ and so
 Rearranging, 
 \begin_inset Formula 
 \[
-r^{2}\ddot{r}\left(1-\frac{2m}{r}\right)=m\dot{r}^{2}-2E^{2}
+r^{2}\ddot{r}\left(1-\frac{2m}{r}\right)=m\left(\dot{r}^{2}-2\frac{E^{2}}{m^{2}}\right)
 \]
 
 \end_inset
