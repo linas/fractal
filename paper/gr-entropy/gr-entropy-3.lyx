@@ -1280,8 +1280,8 @@ This section attempts to brute-force our way through the geodesic equations.
  But lets make that mistake, anyway.
  Lets take some shortcuts, and copy what we need from existing texts, which
  is good enough for present purposes.
- We would like to assume Wikipedia is correct (!but its not!), and work
- with the Wikipedia article 
+ We assume Wikipedia is correct (it wasn't, but I just now fixed it), and
+ work with the Wikipedia article 
 \begin_inset CommandInset href
 LatexCommand href
 name "Schwarzschild geodesics"
@@ -1297,7 +1297,7 @@ literal "false"
 0 & =\frac{d\phi}{d\tau}\\
 0 & =\frac{d\theta}{d\tau}\\
 0 & =\frac{d^{2}t}{d\tau^{2}}+\frac{1}{w}\frac{dw}{dr}\frac{dt}{d\tau}\frac{dr}{d\tau}\\
-0 & =\frac{d^{2}r}{d\tau^{2}}-\frac{1}{v}\frac{dv}{dr}\left(\frac{dr}{d\tau}\right)^{2}+\frac{1}{2v}\frac{dw}{dr}\left(\frac{dt}{d\tau}\right)^{2}
+0 & =\frac{d^{2}r}{d\tau^{2}}-\frac{1}{v}\frac{dv}{dr}\left(\frac{dr}{d\tau}\right)^{2}-\frac{1}{2v}\frac{dw}{dr}\left(\frac{dt}{d\tau}\right)^{2}
 \end{align*}
 
 \end_inset
@@ -1359,18 +1359,18 @@ t\left(p,\tau\right)=\frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{r\left(p,s\right)}{r
 
 Yuck.
  Ugly.
- For the (incorrect) radial equation, I get
+ For the radial equation, I get
 \begin_inset Formula 
 \[
-0=\frac{d^{2}r}{d\tau^{2}}+\frac{m}{r^{2}}\left[2\left(1-\frac{2m}{r}\right)\left(\frac{dr}{d\tau}\right)^{2}+\frac{E^{2}}{m^{2}\left(1-\frac{2m}{r}\right)}\right]
+0=\frac{d^{2}r}{d\tau^{2}}-\frac{m}{r^{2}}\frac{1}{\left(1-\frac{2m}{r}\right)}\left[\left(\frac{dr}{d\tau}\right)^{2}+\frac{E^{2}}{m^{2}}\right]
 \]
 
 \end_inset
 
-Rearranging, this gives the (incorrect) eqn
+Rearranging, this gives the eqn
 \begin_inset Formula 
 \[
-r^{2}\frac{d^{2}r}{d\tau^{2}}\left(1-\frac{2m}{r}\right)=m\left[2\left(1-\frac{2m}{r}\right)^{2}\left(\frac{dr}{d\tau}\right)^{2}-\frac{E^{2}}{m^{2}}\right]
+r^{2}\frac{d^{2}r}{d\tau^{2}}\left(1-\frac{2m}{r}\right)=m\left[\left(\frac{dr}{d\tau}\right)^{2}+\frac{E^{2}}{m^{2}}\right]
 \]
 
 \end_inset
@@ -1497,7 +1497,7 @@ and
 and so
 \begin_inset Formula 
 \[
-0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-\frac{\ddot{r}}{1-\frac{2m}{r}}+\frac{m}{r^{2}\left(1-\frac{2m}{r}\right)^{2}}\left(\dot{r}^{2}-2\frac{E^{2}}{m^{2}}\right)
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-\frac{\ddot{r}}{1-\frac{2m}{r}}+\frac{m}{r^{2}\left(1-\frac{2m}{r}\right)^{2}}\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)
 \]
 
 \end_inset
@@ -1505,7 +1505,7 @@ and so
 Rearranging, 
 \begin_inset Formula 
 \[
-r^{2}\ddot{r}\left(1-\frac{2m}{r}\right)=m\left(\dot{r}^{2}-2\frac{E^{2}}{m^{2}}\right)
+r^{2}\ddot{r}\left(1-\frac{2m}{r}\right)=m\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)
 \]
 
 \end_inset
@@ -1552,6 +1552,10 @@ literal "false"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section*
+Appendix A
 \end_layout
 
 \begin_layout Standard
