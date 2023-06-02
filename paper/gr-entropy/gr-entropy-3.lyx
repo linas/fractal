@@ -1377,13 +1377,12 @@ r^{2}\frac{d^{2}r}{d\tau^{2}}\left(1-\frac{2m}{r}\right)=m\left[\left(\frac{dr}{
 \end_inset
 
 which is sinfully ugly.
- Brute-forcing this is not the easy way to victory.
- The Lemaitre chart should make this easier.
- But first, an alternate approach.
+ Brute-forcing this seems difficult; see however, below.
+ 
 \end_layout
 
 \begin_layout Subsection*
-Flashlight coordinates (Lagrangian method)
+Flashlight geodesics (Lagrangian method)
 \end_layout
 
 \begin_layout Standard
@@ -1514,7 +1513,108 @@ r^{2}\ddot{r}\left(1-\frac{2m}{r}\right)=m\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\
 which is the same as the earlier eqn.
  So we got the same equation two different ways.
  Hurrah! I think it's correct.
- But how to solve it?
+\end_layout
+
+\begin_layout Subsection*
+Newtonian limit
+\end_layout
+
+\begin_layout Standard
+I'm paranoid, lets check the Newtonian limit.
+ For this, we should have gotten 
+\begin_inset Formula 
+\[
+\ddot{r}=-\frac{Gm}{r^{2}}
+\]
+
+\end_inset
+
+recall 
+\begin_inset Formula $G=1$
+\end_inset
+
+ in our units.
+ 
+\end_layout
+
+\begin_layout Standard
+In this case, 
+\begin_inset Formula $2m/r\to0$
+\end_inset
+
+ and 
+\begin_inset Formula $E=m$
+\end_inset
+
+ Well, thats all wrong.
+ What t.f.
+ did we do wrong?
+\end_layout
+
+\begin_layout Subsection*
+Explicit solution
+\end_layout
+
+\begin_layout Standard
+But how to solve this? Well, I can start guessing.
+ Set 
+\begin_inset Formula $\dot{r}=-E/m=\mbox{const.}$
+\end_inset
+
+ from which follows 
+\begin_inset Formula $\ddot{r}=0$
+\end_inset
+
+ and the above eqn is satisfied.
+ Is this the only solution, or are there others?
+\end_layout
+
+\begin_layout Standard
+Integrating this gives
+\begin_inset Formula 
+\[
+r\left(p,\tau\right)=r\left(p,\tau_{0}\right)-\frac{E}{m}\left(\tau-\tau_{0}\right)
+\]
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+t\left(p,\tau\right)= & \frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{r\left(p,s\right)}{r\left(p,s\right)-2m}ds\\
+= & \frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{r\left(p,\tau_{0}\right)-\frac{E}{m}\left(s-\tau_{0}\right)}{r\left(p,\tau_{0}\right)-\frac{E}{m}\left(s-\tau_{0}\right)-2m}ds\\
+= & \left(r\left(p,\tau_{0}\right)+\frac{E\tau_{0}}{m}\right)\int_{\tau_{0}}^{\tau}\frac{ds}{K-s}-\frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{sds}{K-s}
+\end{align*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+K=\frac{m}{E}r\left(p,\tau_{0}\right)+\tau_{0}-\frac{2m^{2}}{E}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $s-K=u$
+\end_inset
+
+ and 
+\begin_inset Formula $ds=du$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+t\left(p,\tau\right)= & -\left(r\left(p,\tau_{0}\right)+\frac{E\tau_{0}}{m}\right)\int_{\tau_{0}-K}^{\tau-K}\frac{du}{u}-\frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{sds}{K-s}\\
+= & -\left(r\left(p,\tau_{0}\right)+\frac{E\tau_{0}}{m}\right)\int_{\tau_{0}-K}^{\tau-K}\frac{du}{u}+\frac{E}{m}K\int_{\tau_{0}-K}^{\tau-K}\frac{du}{u}+\frac{E}{m}\int_{\tau_{0}-K}^{\tau-K}du\\
+= & -\frac{2m^{2}}{E}\log\frac{\tau-K}{\tau_{0}-K}+\frac{E}{m}\left(\tau-\tau_{0}\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
