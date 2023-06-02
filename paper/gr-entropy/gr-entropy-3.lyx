@@ -1141,7 +1141,7 @@ so that for a given flashlight
 \end_layout
 
 \begin_layout Subsection*
-Geodesic equations
+Geodesic equations via Christoffel symbols
 \end_layout
 
 \begin_layout Standard
@@ -1256,12 +1256,11 @@ r^{2}\frac{d^{2}r}{d\tau^{2}}\left(1-\frac{2m}{r}\right)=m\left[\left(\frac{dr}{
 \end_inset
 
 which is sinfully ugly.
- Brute-forcing this seems difficult; see however, below.
- 
+ Solutions can be brute-forced; these are given below.
 \end_layout
 
 \begin_layout Subsection*
-Flashlight geodesics (Lagrangian method)
+Geodesic equations via Lagrangian
 \end_layout
 
 \begin_layout Standard
@@ -1298,7 +1297,24 @@ where the shorthand
 \end_inset
 
 is used.
- For the Schwarzschild chart, it is
+ It's also handy to recall the Legendre transform.
+ Defining the conjugate momentum as
+\begin_inset Formula 
+\[
+p_{\mu}=\frac{\partial L}{\partial\dot{x}^{\mu}}
+\]
+
+\end_inset
+
+the Hamiltonian is then 
+\begin_inset Formula $H=p_{\mu}\dot{x}^{\mu}-L$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the Schwarzschild chart, it is
 \begin_inset Formula 
 \[
 L=\frac{1}{2}\left(\left(1-\frac{2m}{r}\right)\dot{t}^{2}-\frac{\dot{r}^{2}}{1-\frac{2m}{r}}-r^{2}\dot{\theta}^{2}-r^{2}\sin^{2}\theta\dot{\phi}^{2}\right)
@@ -1327,7 +1343,7 @@ For
 \begin_inset Formula $\partial L/\partial t=0$
 \end_inset
 
- and so the energy is a constant of motion:
+ and so one has a constant of motion:
 \begin_inset Formula 
 \[
 \mbox{const}=\frac{\partial L}{\partial\dot{t}}
@@ -1335,7 +1351,16 @@ For
 
 \end_inset
 
-Working this out explicitly, 
+Call this the 
+\begin_inset Quotes eld
+\end_inset
+
+energy
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Working this out explicitly, 
 \begin_inset Formula 
 \[
 \mbox{const}=\frac{E}{m}=\frac{\partial L}{\partial\dot{t}}=\left(1-\frac{2m}{r}\right)\dot{t}
@@ -1372,13 +1397,13 @@ Plugging in for the energy,
 
 \end_inset
 
-The rest is
+The momentum is
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial\dot{r}}=-\frac{\dot{r}}{1-\frac{2m}{r}}
+p_{r}=\frac{\partial L}{\partial\dot{r}}=-\frac{\dot{r}}{1-\frac{2m}{r}}
 \]
 
 \end_inset
@@ -1413,7 +1438,7 @@ which is the same as the earlier eqn.
 \end_layout
 
 \begin_layout Subsection*
-Constants of motion
+Newtonian limit
 \end_layout
 
 \begin_layout Standard
@@ -1461,15 +1486,37 @@ where
 \end_inset
 
  for massive particles falling in the radial direction.
- 
-\end_layout
-
-\begin_layout Subsection*
-Conventional solution
 \end_layout
 
 \begin_layout Standard
-The conventional solution is to write
+There's a second case, obtained by noting that 
+\begin_inset Formula 
+\[
+\dot{r}=\pm\frac{E}{m}
+\]
+
+\end_inset
+
+solves the geodesic equation, with 
+\begin_inset Formula $\ddot{r}=0$
+\end_inset
+
+.
+ Plugging through, one finds that 
+\begin_inset Formula $L=0$
+\end_inset
+
+.
+ Since the Lagrangian was explicitly constructed from the metric, one concludes
+ that these are null geodesics.
+\end_layout
+
+\begin_layout Subsection*
+Timelike radial geodesics
+\end_layout
+
+\begin_layout Standard
+A solution for the radial geodesic equation can be found with the Ansatz
 \begin_inset Formula 
 \begin{align*}
 \dot{r}\ddot{r}= & \frac{1}{2}\frac{d}{d\tau}\dot{r}^{2}\\
@@ -1479,7 +1526,7 @@ The conventional solution is to write
 
 \end_inset
 
-to deduce 
+Integrating this gives 
 \begin_inset Formula 
 \[
 \dot{r}^{2}=\frac{2m}{r}+A
@@ -1487,7 +1534,12 @@ to deduce
 
 \end_inset
 
-The simplest way to solve this is to solve for 
+with a constant of integration 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The simplest way to solve this is to solve for 
 \begin_inset Formula $\tau\left(r\right)$
 \end_inset
 
@@ -1565,8 +1617,19 @@ Curiously, this expression is not singular at
  
 \end_layout
 
+\begin_layout Standard
+At the moment, there's no need for an equation for 
+\begin_inset Formula $t\left(\tau\right)$
+\end_inset
+
+ and being lazy, it's omitted.
+ The Reed College notes, op.
+ cit.
+ provide this.
+\end_layout
+
 \begin_layout Subsection*
-Alternate solution
+Null radially geodesics
 \end_layout
 
 \begin_layout Standard
@@ -1588,14 +1651,7 @@ and observe that
 \end_inset
 
  and both the left and right hand sides vanish.
- How peculiar! The radial coordinate increases/decreases linearly as a function
- of the proper time! WTF ??? I don't understand this.
- Is this supposed to be the solution for the interior 
-\begin_inset Formula $r<2m$
-\end_inset
-
-? Beats me.
- I've never studied this stuff carefully before.
+ This provides the solution for null geodesics.
 \end_layout
 
 \begin_layout Standard
