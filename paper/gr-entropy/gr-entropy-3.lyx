@@ -1146,12 +1146,21 @@ Geodesic equations
 
 \begin_layout Standard
 This section attempts to brute-force our way through the geodesic equations.
- This proves to be a mistake, which comes as no surprise.
- But lets make that mistake, anyway.
- Lets take some shortcuts, and copy what we need from existing texts, which
- is good enough for present purposes.
- We assume Wikipedia is correct (it wasn't, but I just now fixed it), and
- work with the Wikipedia article 
+ This is more or less always a mistake, as it is painful both to obtain
+ the Christoffel symbols, and to then integrate the geodesics.
+ A different reason that this is a mistake is that it almost always obscures
+ the geometric properties of the system.
+ However, for this section, we choose to make this mistake, mostly because
+ Schwarschild should not be all that hard, and it also provides a good alternati
+ve route.
+ Even so, lets take some shortcuts, and copy what we need from existing
+ texts, which is good enough for present purposes.
+\end_layout
+
+\begin_layout Standard
+We assume Wikipedia is correct (it wasn't, but I just now fixed it, after
+ enduring some calculational pain), and work with the Wikipedia article
+ 
 \begin_inset CommandInset href
 LatexCommand href
 name "Schwarzschild geodesics"
@@ -1256,8 +1265,8 @@ Flashlight geodesics (Lagrangian method)
 \end_layout
 
 \begin_layout Standard
-This sectin is mostly a recapitulation of the presentation provided in the
- course notes 
+This section is mostly a recapitulation of the presentation provided in
+ the course notes 
 \begin_inset CommandInset href
 LatexCommand href
 name "Radial Infall Lecture 31 Physics 411 Classical Mechanics II 14 November 2007 Reed College"
@@ -1283,7 +1292,7 @@ L=\frac{1}{2}g_{\mu\nu}\dot{x}^{\mu}\dot{x}^{\nu}
 where the shorthand 
 \begin_inset Formula 
 \[
-\dot{x}^{\mu}=\frac{x^{\mu}}{d\tau}
+\dot{x}^{\mu}=\frac{dx^{\mu}}{d\tau}
 \]
 
 \end_inset
@@ -1311,10 +1320,10 @@ For radial infall, set
 \end_inset
 
 For 
-\begin_inset Formula $\mu=t$
+\begin_inset Formula $x^{\mu}=t$
 \end_inset
 
-one obviously has 
+ one obviously has 
 \begin_inset Formula $\partial L/\partial t=0$
 \end_inset
 
@@ -1334,14 +1343,17 @@ Working this out explicitly,
 
 \end_inset
 
-This is writen so that the constant is dimensionless, and the energy has
- the same scale as the mass.
+This is writen so that the constant is dimensionless, and the energy 
+\begin_inset Formula $E$
+\end_inset
+
+ has the same units as the mass.
  This eqn is the same as the previous section.
 \end_layout
 
 \begin_layout Standard
 For 
-\begin_inset Formula $\mu=r$
+\begin_inset Formula $x^{\mu}=r$
 \end_inset
 
 , the radial equation is brute-forced:
@@ -1425,7 +1437,7 @@ r^{2}\ddot{r}=-2mL
 
 \end_inset
 
-This can be diectly compared to the Newtonian limit.
+This can be directly compared to the Newtonian limit.
  This would be
 \begin_inset Formula 
 \[
@@ -1448,7 +1460,7 @@ where
 \begin_inset Formula $L=1/2$
 \end_inset
 
-.
+ for massive particles falling in the radial direction.
  
 \end_layout
 
@@ -1479,7 +1491,7 @@ The simplest way to solve this is to solve for
 \begin_inset Formula $\tau\left(r\right)$
 \end_inset
 
- and then invert, instead of trying to get to 
+ and then invert, rather than trying to get to 
 \begin_inset Formula $r\left(\tau\right)$
 \end_inset
 
