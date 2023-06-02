@@ -1512,11 +1512,308 @@ solves the geodesic equation, with
 \end_layout
 
 \begin_layout Subsection*
+Physical interpretation
+\end_layout
+
+\begin_layout Standard
+Why can 
+\begin_inset Formula $L$
+\end_inset
+
+ be taken to be a constant along geodesics? Well, geodesics minimize arc
+ length; this is the same as minimizing the energy, or minimizing the action.
+ Note that 
+\begin_inset Formula $H=L$
+\end_inset
+
+ for the Schwarschild metric, where 
+\begin_inset Formula $H$
+\end_inset
+
+ is the Hamiltonian obtained from the Legendre transform above.
+ Writing the total (square of the) arc length as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int Ld\tau
+\]
+
+\end_inset
+
+it is clear that 
+\begin_inset Formula $L=\mbox{const}$
+\end_inset
+
+ minimizes this.
+ The shortest line between two points is a straight line; this remains the
+ case, if one thinks of 
+\begin_inset Formula $L\left(\tau\right)$
+\end_inset
+
+ as a plain-old ordinary real function of a single real parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ There's nothing more to it.
+ A more precise and convincing formulation is given in Jost
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jost2002geom"
+literal "false"
+
+\end_inset
+
+, although Jost covers only the case for Riemannian manifolds.
+ Close enough.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $L=1/2$
+\end_inset
+
+ corresponds to a line element of unit length.
+ That is, all time-like tangent vectors always have unit length.
+ This is merely a formality.
+ The parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is simply a real number that paramterizes distinct points along some arc
+ (including, but not limited to geodesics.) As a parameter, one is free to
+ reparmeterize 
+\begin_inset Formula $\tau\to c\tau+\tau_{0}$
+\end_inset
+
+ for some constant 
+\begin_inset Formula $c\ne1$
+\end_inset
+
+ and constant 
+\begin_inset Formula $\tau_{0}$
+\end_inset
+
+ Such reparametrization does not change the arc itself.
+ Thus, taking 
+\begin_inset Formula $c=1$
+\end_inset
+
+ does not alter the arc itself.
+ The constant 
+\begin_inset Formula $c$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+speed
+\begin_inset Quotes erd
+\end_inset
+
+ along the arc; for spacetime, we call it the 
+\begin_inset Quotes eld
+\end_inset
+
+speed of light
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The paramter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is called the 
+\begin_inset Quotes eld
+\end_inset
+
+proper time
+\begin_inset Quotes erd
+\end_inset
+
+ in the physics literature, because 
+\begin_inset Formula $\tau=t$
+\end_inset
+
+ in the free-falling frames.
+ Thus, the parameterization of time-like geodesics to unit speed is merely
+ an algebraic convenience, nothing more.
+ Taking the Newtonian limit, as above, allows these arbitrary constants
+ to be identified and given physical meaning.
+ 
+\end_layout
+
+\begin_layout Standard
+For null geodesics, there's a common confusion abut the 
+\begin_inset Quotes eld
+\end_inset
+
+proper time
+\begin_inset Quotes erd
+\end_inset
+
+ that should be noted.
+ The radial geodesics with 
+\begin_inset Formula $L=0$
+\end_inset
+
+ correspond to tangent vectors of zero length, according to the metric.
+ This does not mean that that such tangent vectors cannot be integrated
+ to obtain an arc.
+ The paramter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is still a valid parameter for locating points along the arc.
+ Indeed, the radial coordinate is given by 
+\begin_inset Formula $r=\dot{r}\tau$
+\end_inset
+
+ for the null geodesics.
+ The only difficulty or confusion arises when the paramter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is conflated with the 
+\begin_inset Quotes eld
+\end_inset
+
+time
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is not, nor is it measuring the arc length of null geodesics (the arc
+ length is zero!).
+ Thus, we should call 
+\begin_inset Formula $\tau$
+\end_inset
+
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+arc parameter
+\begin_inset Quotes erd
+\end_inset
+
+ instead of the 
+\begin_inset Quotes eld
+\end_inset
+
+proper time
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, fighting tradition is hard, and this is not the battle for the
+ moment.
+\end_layout
+
+\begin_layout Standard
+More generally, one can reparameterize 
+\begin_inset Formula $\tau\to f\left(\tau\right)$
+\end_inset
+
+ for some diffeomorphism 
+\begin_inset Formula $f:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+.
+ Such a reparameterization does not change the location of arcs on a fixed
+ manifold.
+ If one beleives that physics is described only by the location of such
+ arcs, then one considers the space of all arcs, modulo all diffeomorphisms
+ of arc paramterizations.
+ Working in this quotient space is the standard convention in (psuedo-)Riemannia
+n geometry, as doing otherwise seems to lead only to more complicated situations
+ that offer no particular insight into the geometry.
+ 
+\end_layout
+
+\begin_layout Standard
+Another point to keep in mind is that the quantum formulation requires consideri
+ng all arcs, and not just the geodesics.
+ The Lagrangian is no longer a constant, and one performs path integrals
+ (
+\begin_inset Quotes eld
+\end_inset
+
+Feynmann integrals
+\begin_inset Quotes erd
+\end_inset
+
+) over all arcs, to obtain the partition function 
+\begin_inset Formula $Z$
+\end_inset
+
+.
+ These arcs also have 
+\begin_inset Formula $\tau$
+\end_inset
+
+ as an arc parameter.
+ This time, diffeomorphic reparameterizations 
+\begin_inset Formula $\tau\to f\left(\tau\right)$
+\end_inset
+
+ cause the Lagrangian to change as 
+\begin_inset Formula $L\to L\dot{f}^{2}$
+\end_inset
+
+.
+ For conventional QFT in curved spacetimes, I beleive that the intent is
+ to use a measure for the path integrals that is invariant under such reparamete
+rizations.
+ I beleive that the intent of string theory is to allow such reparamterizations,
+ and to give them dynamics.
+ That is, string theory is not so much about little itty-bitty strings having
+ some spatial extent, but rather, even for a fixed arc on a fixed manifold,
+ one must consider such reparameterizations.
+ That is, sometimes the two endpoints of an open string correspond to the
+ same point on the arc, and sometimes to different points on the same arc,
+ and sometimes to different points on different arcs.
+ At least, I think that is the 
+\begin_inset Quotes eld
+\end_inset
+
+intended
+\begin_inset Quotes erd
+\end_inset
+
+ interpretation of string theory, although I am quite sure there are thousands
+ of people out there willing to shout at me about how wrong I am.
+ Sigh.
+ So it goes.
+\end_layout
+
+\begin_layout Subsection*
 Timelike radial geodesics
 \end_layout
 
 \begin_layout Standard
-A solution for the radial geodesic equation can be found with the Ansatz
+Presuming that 
+\begin_inset Formula $L=1/2$
+\end_inset
+
+ is a constant, the radial geodesic equation becomes 
+\begin_inset Formula $r^{2}\ddot{r}=-m$
+\end_inset
+
+.
+ Reinserting this into the earlier form gives
+\begin_inset Formula 
+\[
+\dot{r}^{2}=\frac{2m}{r}+\frac{E^{2}}{m^{2}}-1
+\]
+
+\end_inset
+
+The same form can be found with the Ansatz
 \begin_inset Formula 
 \begin{align*}
 \dot{r}\ddot{r}= & \frac{1}{2}\frac{d}{d\tau}\dot{r}^{2}\\
@@ -1535,11 +1832,15 @@ Integrating this gives
 \end_inset
 
 with a constant of integration 
-\begin_inset Formula $A$
+\begin_inset Formula $A=E^{2}/m^{2}-1$
 \end_inset
 
 .
- The simplest way to solve this is to solve for 
+ 
+\end_layout
+
+\begin_layout Standard
+The simplest way to solve this is to solve for 
 \begin_inset Formula $\tau\left(r\right)$
 \end_inset
 
@@ -1564,7 +1865,7 @@ For now, set
 \begin_inset Formula $A\ne0$
 \end_inset
 
- is considered later.
+ isn't currently examined.
  Integrating this directly gives
 \begin_inset Formula 
 \[
@@ -1673,6 +1974,7 @@ Thus, consider a signal transmitted at coordinate
 \end_inset
 
  denoting the astronaut.
+ 
 \end_layout
 
 \begin_layout Subsection*
