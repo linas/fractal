@@ -1966,14 +1966,69 @@ Curiously, this expression is not singular at
 \end_layout
 
 \begin_layout Standard
-At the moment, there's no need for an equation for 
+An expression for 
 \begin_inset Formula $t\left(\tau\right)$
 \end_inset
 
- and being lazy, it's omitted.
- The Reed College notes, op.
- cit.
- provide this.
+ can be obtained by direct integration.
+ Starting from
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{E}{m}=\left(1-\frac{2m}{r}\right)\dot{t}
+\]
+
+\end_inset
+
+the time coordinate is
+\begin_inset Formula 
+\begin{align*}
+t\left(\tau\right)= & \frac{E}{m}\int_{\tau_{0}}^{\tau}\frac{r\left(s\right)}{r\left(s\right)-2m}ds\\
+= & \frac{E}{m}\left[\int_{\tau_{0}}^{\tau}ds+2m\int_{\tau_{0}}^{\tau}\frac{ds}{r\left(s\right)-2m}\right]
+\end{align*}
+
+\end_inset
+
+Hmm.
+ We can try to brute-force the second integral, but that seems tedious.
+ A change of variable seems to be easier.
+ Write
+\begin_inset Formula 
+\[
+\frac{d\tau}{dr}=\frac{dt}{dr}\frac{d\tau}{dt}=-\sqrt{\frac{r}{2m}}
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+\frac{dt}{dr}=-\dot{t}\sqrt{\frac{r}{2m}}=-\frac{r}{r-2m}\sqrt{\frac{r}{2m}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $E=m$
+\end_inset
+
+ is taken because that was already assumed for the expression for 
+\begin_inset Formula $\dot{r}$
+\end_inset
+
+ up above.
+ Integrating, 
+\begin_inset Formula 
+\begin{align*}
+t\left(r\right)= & -\frac{1}{\sqrt{2m}}\int_{r_{0}}^{r}\frac{r^{3/2}}{r-2m}dr\\
+=
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
@@ -2060,14 +2115,21 @@ Since both the flashlights and the astronaut start falling at the same time,
 
 ? This can be computed by incrementing the proper time on the astronaut
  until the distance between flashlight and astronaut is zero.
- In particular, there does not appear to be any explicit need to compute
- the null geodesic, as long as we can clearly demonstrate that it is a null
- geodesic.
- Furthermore, if we can do this (by using geodesic variation) then there's
- no particular reason to limit ourselves to null radial geodesics.
- Perhaps the formulation will be sufficient to handle the full distribution
- of nearby flashloghts.
- Let's see if we can do this.
+ That is, we solve for the intersection point between the null geodesic
+ 
+\begin_inset Formula $\left(t_{n},r_{n}\right)$
+\end_inset
+
+ and the astronaut 
+\begin_inset Formula $\left(t_{a},r_{a}\right)$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\left(t_{n},r_{n}\right)=\left(t_{a},r_{a}\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection*
