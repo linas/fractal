@@ -2005,7 +2005,7 @@ Hmm.
 so
 \begin_inset Formula 
 \[
-\frac{dt}{dr}=-\dot{t}\sqrt{\frac{r}{2m}}=-\frac{r}{r-2m}\sqrt{\frac{r}{2m}}
+\frac{dt}{dr}=-\dot{t}\sqrt{\frac{r}{2m}}=-\frac{1}{1-\frac{2m}{r}}\sqrt{\frac{r}{2m}}
 \]
 
 \end_inset
@@ -2021,14 +2021,62 @@ where
  up above.
  Integrating, 
 \begin_inset Formula 
+\[
+t\left(r\right)=-\int_{r_{0}}^{r}\sqrt{\frac{r}{2m}}\frac{1}{1-\frac{2m}{r}}dr
+\]
+
+\end_inset
+
+Yuck.
+ Change of variable, 
+\begin_inset Formula $x=\sqrt{2m/r}$
+\end_inset
+
+ so 
+\begin_inset Formula $r=2m/x^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $dr=-4mdx/x^{3}$
+\end_inset
+
+ so
+\begin_inset Formula 
 \begin{align*}
-t\left(r\right)= & -\frac{1}{\sqrt{2m}}\int_{r_{0}}^{r}\frac{r^{3/2}}{r-2m}dr\\
-=
+-\int\sqrt{\frac{r}{2m}}\frac{1}{1-\frac{2m}{r}}dr= & 4m\int\frac{dx}{x^{4}\left(1-x^{2}\right)}\\
+= & 4m\left[\int\frac{dx}{x^{4}}+\int\frac{dx}{x^{2}\left(1-x^{2}\right)}\right]\\
+= & 4m\left[\int\frac{dx}{x^{4}}+\int\frac{dx}{x^{2}}+\int\frac{dx}{1-x^{2}}\right]\\
+= & 4m\left[-\frac{1}{3x^{3}}-\frac{1}{x}-\frac{1}{2}\log\left|\frac{1-x}{1+x}\right|\right]\\
+= & -4m\left[\frac{r}{6m}\sqrt{\frac{r}{2m}}+\sqrt{\frac{r}{2m}}+\frac{1}{2}\log\left|\frac{1-\sqrt{2m/r}}{1+\sqrt{2m/r}}\right|\right]\\
+= & -\frac{2}{3}\left(r+6m\right)\sqrt{\frac{r}{2m}}-2m\log\left|\frac{1-\sqrt{2m/r}}{1+\sqrt{2m/r}}\right|
 \end{align*}
 
 \end_inset
 
+which is a bit tedious.
+ Concluding, one has
+\begin_inset Formula 
+\[
+t\left(r\right)=\left.\frac{2}{3}\left(r+6m\right)\sqrt{\frac{r}{2m}}+2m\log\left|\frac{1-\sqrt{2m/r}}{1+\sqrt{2m/r}}\right|\right|_{r}^{r_{0}}
+\]
 
+\end_inset
+
+where we've gotten rid of the minus sign by exchanging the limits of the
+ evaluation.
+ This works, because 
+\begin_inset Formula $r_{0}>r$
+\end_inset
+
+ and so the 
+\begin_inset Formula $t$
+\end_inset
+
+ coordinate is increasing as 
+\begin_inset Formula $r$
+\end_inset
+
+ decreases.
 \end_layout
 
 \begin_layout Subsection*
