@@ -42,7 +42,7 @@ rscale = 1.5 * math.sqrt(2.0*mass)
 # Return the radial coord in the Schwarzschild chart of a radially
 # infalling massive object, initially located at `rzero`, at proper
 # time `prop`.
-def sch_rp_coord(rzero, prop):
+def schw_rp_coord(rzero, prop):
 	robj = math.pow(rzero, 1.5) - rscale * prop
 	if robj < 0:
 		return robj
@@ -52,7 +52,7 @@ def sch_rp_coord(rzero, prop):
 # Return the "time" coord in the Schwarzschild chart of a radially
 # infalling massive object, currrently located at the radial
 # coordinate `rcoord`.
-def sch_tp_coord(rcoord):
+def schw_tp_coord(rcoord):
 	squ = math.sqrt(0.5*rcoord/mass)
 	la = (squ - 1.0) / (squ + 1)
 	if la < 0.0:
@@ -62,12 +62,26 @@ def sch_tp_coord(rcoord):
 	time = 2.0 * (rcoord + 6.0*mass) * squ / 3.0 + lg
 	return time
 
+# Return the "time" coord in the Schwarzschild chart of a radially
+# upward-moving null geodesic, currrently located at the radial
+# coordinate `rcoord`.
+def schw_tnull_coord(rcoord):
+	met = rcoord / (2 * mass) -1
+	if met < 0:
+		return rcoord - 2 * mass * math.log(-met)
+	else:
+		return rcoord + 2 * mass * math.log(met)
+
 # Compute the difference in the time coordinate between the
 # upward-moving null geodesic and the downward-moving astronaut.
 # When this is zero, the two intersect.
-def recv_null(rcoord):
-
-	diff = rcoord-1;
+# The goal is to solve for `rcoord` by using a root-finding algo.
+# The second argument, rflash, is the location of the flashlight
+# when it emits the signal.
+def recv_null(rcoord, rflash):
+	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rcoord)
+	tnull = schw_tnull_coord(rcoord) - schw_tnull_coord(rflash)
+	diff = tnull - tastro
 	return diff
 
 
@@ -75,15 +89,15 @@ tau = 0.0
 while True:
 
 	# flashlight radial coordinate
-	rflash = sch_rp_coord(rfnaught, tau)
+	rflash = schw_rp_coord(rfnaught, tau)
 	if rflash < 0.0:
 		break
 
 	# flashlight time coord
-	tflash = sch_tp_coord(rfnaught) - sch_tp_coord(rflash)
+	tflash = schw_tp_coord(rfnaught) - schw_tp_coord(rflash)
 
 	# astronaut radial coord, when astronaut receives the flash.
-	rastro = scipy.optimize.brentq(recv_null, 0, 100)
+	rastro = scipy.optimize.brentq(recv_null, 0, 100, args=rflash)
 
 	print( \
 		"{:10.4f}".format(tau), \
