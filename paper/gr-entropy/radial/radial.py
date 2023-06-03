@@ -21,9 +21,15 @@ deltar = -0.1
 taustep = 0.5
 
 print("#\n# Radial infall simulation")
-print("# Mass=", mass)
-print("# r_0=", rnaught)
-print("# delta r_0=", deltar)
+print("# Mass =", mass)
+print("# r_0 =", rnaught)
+print("# delta r_0 =", deltar)
+print("#")
+print("# Columns, in order:")
+print("# proper time")
+print("# flashlight r")
+print("# flashlight t")
+print("#")
 
 # Initial flashlight radial coordinate
 rfnaught = rnaught + deltar
