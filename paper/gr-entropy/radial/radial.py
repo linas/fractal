@@ -7,6 +7,8 @@
 #
 
 import math
+import scipy
+import scipy.optimize
 
 # Schwarschild scaled mass
 mass = 1
@@ -60,6 +62,14 @@ def sch_tp_coord(rcoord):
 	time = 2.0 * (rcoord + 6.0*mass) * squ / 3.0 + lg
 	return time
 
+# Compute the difference in the time coordinate between the
+# upward-moving null geodesic and the downward-moving astronaut.
+# When this is zero, the two intersect.
+def recv_null(rcoord):
+
+	diff = rcoord-1;
+	return diff
+
 
 tau = 0.0
 while True:
@@ -72,9 +82,13 @@ while True:
 	# flashlight time coord
 	tflash = sch_tp_coord(rfnaught) - sch_tp_coord(rflash)
 
-	print("duuude", \
+	# astronaut radial coord, when astronaut receives the flash.
+	rastro = scipy.optimize.brentq(recv_null, 0, 100)
+
+	print( \
 		"{:10.4f}".format(tau), \
 		"{:10.4f}".format(rflash), \
-		"{:10.4f}".format(tflash) \
+		"{:10.4f}".format(tflash), \
+		"{:10.4f}".format(rastro) \
 		)
 	tau += taustep
