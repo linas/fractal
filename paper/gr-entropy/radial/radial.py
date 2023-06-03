@@ -27,13 +27,13 @@ print("# delta r_0=", deltar)
 
 # Initial flashlight radial coordinate
 rfnaught = rnaught + deltar
-rfncube = math.pow(rfnaught, 1.5)
 
 # Timelike object radial proper time scale
 rscale = 1.5 * math.sqrt(2.0*mass)
 
-# Return the radial coord in the Schwarzschild chart of an infalling
-# massive object, initially located at `rzero`, at proper time `prop`.
+# Return the radial coord in the Schwarzschild chart of a radially
+# infalling massive object, initially located at `rzero`, at proper
+# time `prop`.
 def sch_rp_coord(rzero, prop):
 	robj = math.pow(rzero, 1.5) - rscale * prop
 	if robj < 0:
@@ -41,17 +41,34 @@ def sch_rp_coord(rzero, prop):
 	robj = math.pow(robj, 2.0/3.0)
 	return robj
 
+# Return the "time" coord in the Schwarzschild chart of a radially
+# infalling massive object, currrently located at the radial
+# coordinate `rcoord`.
+def sch_tp_coord(rcoord):
+	squ = math.sqrt(0.5*rcoord/mass)
+	la = (squ - 1.0) / (squ + 1)
+	if la < 0.0:
+		la = -la
+	lg = 2.0*mass* math.log(la)
+
+	time = 2.0 * (rcoord + 6.0*mass) * squ / 3.0 + lg
+	return time
+
 
 tau = 0.0
 while True:
 
-	rflash = rfncube - rscale * tau
-	if rflash < 0:
-		break;
-	rflash = math.pow(rflash, 2.0/3.0)
+	# flashlight radial coordinate
+	rflash = sch_rp_coord(rfnaught, tau)
+	if rflash < 0.0:
+		break
+
+	# flashlight time coord
+	tflash = sch_tp_coord(rfnaught) - sch_tp_coord(rflash)
 
 	print("duuude", \
 		"{:10.4f}".format(tau), \
-		"{:10.4f}".format(rflash) \
+		"{:10.4f}".format(rflash), \
+		"{:10.4f}".format(tflash) \
 		)
 	tau += taustep
