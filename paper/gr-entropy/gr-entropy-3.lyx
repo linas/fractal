@@ -2100,6 +2100,131 @@ As noted earlier,
 \end_inset
 
  without any loss of generality.
+ Integrating, one has
+\begin_inset Formula 
+\[
+r\left(\tau\right)=r_{f}\pm\left(\tau-\tau_{f}\right)
+\]
+
+\end_inset
+
+for the radial coordinate.
+ The pair 
+\begin_inset Formula $\left(t_{f},r_{f}\right)$
+\end_inset
+
+ are the flashlight coordinates, at the time that a flashlight emits it's
+ signal.
+ The proper time 
+\begin_inset Formula $\tau_{f}$
+\end_inset
+
+ is the proper time of the flashlight (and is encoded in the flashlight
+ transmission).
+ With this offset, the arc parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ continues to measure from 
+\begin_inset Formula $\tau_{0}$
+\end_inset
+
+ when the flashlight was dropped.
+\end_layout
+
+\begin_layout Standard
+For the time coordinate, proceed much as before, by flipping over the coordinate
+s
+\begin_inset Formula 
+\[
+\frac{d\tau}{dr}=\frac{dt}{dr}\frac{d\tau}{dt}=\pm1
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+\frac{dt}{dr}=\pm\dot{t}=\pm\frac{1}{1-\frac{2m}{r}}
+\]
+
+\end_inset
+
+The integration proceeds as before, i.e.
+ tediously:
+\begin_inset Formula 
+\[
+t\left(r\right)=\pm\int_{r_{f}}^{r}\frac{dr}{1-2m/r}
+\]
+
+\end_inset
+
+Performing a change of variable 
+\begin_inset Formula $y=2m/r$
+\end_inset
+
+ or 
+\begin_inset Formula $r=2m/y$
+\end_inset
+
+ so that 
+\begin_inset Formula $dr=-2mdy/y^{2}$
+\end_inset
+
+ gives 
+\begin_inset Formula 
+\begin{align*}
+\int\frac{dr}{1-2m/r}= & -2m\int\frac{dy}{y^{2}\left(1-y\right)}\\
+= & -2m\left[\int\frac{dy}{y^{2}}+\int\frac{dy}{y}+\int\frac{dy}{1-y}\right]\\
+= & -2m\left[-\frac{1}{y}+\log y\mp_{EH}\log\left|1-y\right|\right]\\
+= & 2m\left[\frac{r}{2m}+\log\frac{r}{2m}\pm_{EH}\log\left|1-\frac{2m}{r}\right|\right]\\
+= & r\pm_{EH}2m\log\left|\frac{r}{2m}-1\right|
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\pm_{EH}$
+\end_inset
+
+ is a horizon-dependent sign: take the upper sign when 
+\begin_inset Formula $2m<r$
+\end_inset
+
+ and the lower when 
+\begin_inset Formula $2m>r$
+\end_inset
+
+.
+ This is basically a cheap hack to allow us to continue working with interior
+ solutions without having to go over to other coordinate systems (yet; we'll
+ do this eventually).
+ 
+\end_layout
+
+\begin_layout Standard
+In conclusion, the 
+\begin_inset Formula $t$
+\end_inset
+
+ coordinate for null geodesics is given by
+\begin_inset Formula 
+\[
+t\left(r\right)=\pm\left.r\pm_{EH}2m\log\left|\frac{r}{2m}-1\right|\right|_{r_{f}}^{r}
+\]
+
+\end_inset
+
+The first 
+\begin_inset Formula $\pm$
+\end_inset
+
+ uses the upper sign for outgoing geodesics, and the lower sign for infalling
+ geodesics.
+\end_layout
+
+\begin_layout Subsection*
+Thought experiment
 \end_layout
 
 \begin_layout Standard
@@ -2180,12 +2305,22 @@ Since both the flashlights and the astronaut start falling at the same time,
 .
 \end_layout
 
+\begin_layout Standard
+Let's try to put this all together.
+ Although it's quite the mess.
+\end_layout
+
 \begin_layout Subsection*
 Flashlight coordinates (in the Lemaitre chart)
 \end_layout
 
 \begin_layout Standard
 Should be much easier.
+ The general idea is the use the Lemaitre chart, hoping that the free-fall
+ frames are easier to deal with.
+ But then, to perform the null geodesic calculations, we should swtich to
+ a different coordinate chart, to keep that easy.
+ Can we get away with this plan?
 \end_layout
 
 \begin_layout Subsection*
