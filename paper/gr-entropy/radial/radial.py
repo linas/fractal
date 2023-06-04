@@ -31,6 +31,8 @@ print("# Columns, in order:")
 print("# proper time")
 print("# flashlight r")
 print("# flashlight t")
+print("# astronaut r")
+print("# astronaut t")
 print("#")
 
 # Initial flashlight radial coordinate
@@ -86,6 +88,8 @@ def recv_null(rcoord, rflash):
 
 
 tau = 0.0
+tau = 38.0
+taustep = 0.05
 while True:
 
 	# flashlight radial coordinate
@@ -99,10 +103,14 @@ while True:
 	# astronaut radial coord, when astronaut receives the flash.
 	rastro = scipy.optimize.brentq(recv_null, 0, 100, args=rflash)
 
+	# astronaut time coord
+	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rastro)
+
 	print( \
 		"{:10.4f}".format(tau), \
 		"{:10.4f}".format(rflash), \
 		"{:10.4f}".format(tflash), \
-		"{:10.4f}".format(rastro) \
+		"{:10.4f}".format(rastro), \
+		"{:10.4f}".format(tastro) \
 		)
 	tau += taustep
