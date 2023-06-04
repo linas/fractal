@@ -35,8 +35,8 @@ mass = 5e-6
 rnaught = 500
 
 tau = 0.0
-# tau = 2.35e6
-taustep = 1000
+tau = 2.35e6
+taustep = 100
 
 print("#\n# Radial infall simulation")
 print("# Mass =", mass)
@@ -96,9 +96,9 @@ def schw_tnull_coord(rcoord):
 # The goal is to solve for `rcoord` by using a root-finding algo.
 # The second argument, rflash, is the location of the flashlight
 # when it emits the signal.
-def recv_null(rcoord, rflash):
+def recv_null(rcoord, rflash, tflash):
 	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rcoord)
-	tnull = schw_tnull_coord(rcoord) - schw_tnull_coord(rflash)
+	tnull = tflash + schw_tnull_coord(rcoord) - schw_tnull_coord(rflash)
 	diff = tnull - tastro
 	return diff
 
@@ -120,7 +120,7 @@ while True:
 	tflash = schw_tp_coord(rfnaught) - schw_tp_coord(rflash)
 
 	# astronaut radial coord, when astronaut receives the flash.
-	rastro = scipy.optimize.brentq(recv_null, 0, 1000, args=rflash)
+	rastro = scipy.optimize.brentq(recv_null, 0, 1000, args=(rflash, tflash))
 
 	# astronaut time coord
 	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rastro)
