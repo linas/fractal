@@ -90,12 +90,19 @@ def recv_null(rcoord, rflash):
 tau = 0.0
 tau = 38.0
 taustep = 0.05
+
+cross = False
 while True:
 
 	# flashlight radial coordinate
 	rflash = schw_rp_coord(rfnaught, tau)
 	if rflash < 0.0:
 		break
+
+	# Print a break when event horizon is crossed
+	if cross == False and rflash < 2 * mass:
+		cross = True
+		print("# ------------------------------------------------")
 
 	# flashlight time coord
 	tflash = schw_tp_coord(rfnaught) - schw_tp_coord(rflash)
