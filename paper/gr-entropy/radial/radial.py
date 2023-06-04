@@ -29,15 +29,48 @@ tau = 0.0
 tau = 12.0      # when rnaught = 10
 taustep = 0.01
 
+# ------------------
 # Solar mass, measured in seconds
 mass = 5e-6
 # Distance to Earth, measured in seconds
 rnaught = 500
 
+# Falling radially, from Earth to Sun, takes 27 days! (= 2.35e6 seconds)
 tau = 0.0
 tau = 2.35e6
 taustep = 100
+tau = 2356300.0
+taustep = 0.1
+tau = 2356315.0
+taustep = 0.001
 
+# ------------------
+# Mass of Sgr A*, measured in seconds
+mass = 20.5
+# Distance to Earth, measured in seconds
+rnaught = 500
+
+tau = 0.0
+taustep = 10
+tau = 1110.0
+taustep = 0.1
+tau = 1135.0
+taustep = 0.001
+
+# ------------------
+# Mass of M87, measured in seconds
+mass = 35000
+rnaught = 100 * mass
+
+tau = 0.0
+taustep = 1000
+tau = 16450000.0
+taustep = 10
+tau = 16452400.0
+taustep = 1
+
+
+# ------------------
 print("#\n# Radial infall simulation")
 print("# Mass =", mass)
 print("# r_0 =", rnaught)
@@ -49,6 +82,8 @@ print("# flashlight r")
 print("# flashlight t")
 print("# astronaut r")
 print("# astronaut t")
+print("# astronaut r minus flashlight r")
+print("# astronaut t minus flashlight t")
 print("#")
 
 # Initial flashlight radial coordinate
@@ -120,7 +155,9 @@ while True:
 	tflash = schw_tp_coord(rfnaught) - schw_tp_coord(rflash)
 
 	# astronaut radial coord, when astronaut receives the flash.
-	rastro = scipy.optimize.brentq(recv_null, 0, 1000, args=(rflash, tflash))
+	rmin = rflash
+	rmax = rflash+100
+	rastro = scipy.optimize.brentq(recv_null, rmin, rmax, args=(rflash, tflash))
 
 	# astronaut time coord
 	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rastro)
@@ -130,6 +167,8 @@ while True:
 		"{:10.4f}".format(rflash), \
 		"{:10.4f}".format(tflash), \
 		"{:10.4f}".format(rastro), \
-		"{:10.4f}".format(tastro) \
+		"{:10.4f}".format(tastro), \
+		"{:10.4f}".format(rastro-rflash), \
+		"{:10.4f}".format(tastro-tflash) \
 		)
 	tau += taustep
