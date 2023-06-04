@@ -14,13 +14,29 @@ import scipy.optimize
 mass = 1
 
 # Initial location of lab frame
-rnaught = 20
+rnaught = 10
 
 # Initial location of flashlight
 deltar = -0.1
 
 # Proper time step size
 taustep = 0.5
+
+tau = 0.0
+#tau = 39.0     # when rnaught = 20
+#taustep = 0.02
+
+tau = 12.0      # when rnaught = 10
+taustep = 0.01
+
+# Solar mass, measured in seconds
+mass = 5e-6
+# Distance to Earth, measured in seconds
+rnaught = 500
+
+tau = 0.0
+# tau = 2.35e6
+taustep = 1000
 
 print("#\n# Radial infall simulation")
 print("# Mass =", mass)
@@ -86,11 +102,6 @@ def recv_null(rcoord, rflash):
 	diff = tnull - tastro
 	return diff
 
-
-tau = 0.0
-tau = 38.0
-taustep = 0.05
-
 cross = False
 while True:
 
@@ -102,13 +113,14 @@ while True:
 	# Print a break when event horizon is crossed
 	if cross == False and rflash < 2 * mass:
 		cross = True
-		print("# ------------------------------------------------")
+		print("# ----------------------------------------------------")
+		break
 
 	# flashlight time coord
 	tflash = schw_tp_coord(rfnaught) - schw_tp_coord(rflash)
 
 	# astronaut radial coord, when astronaut receives the flash.
-	rastro = scipy.optimize.brentq(recv_null, 0, 100, args=rflash)
+	rastro = scipy.optimize.brentq(recv_null, 0, 1000, args=rflash)
 
 	# astronaut time coord
 	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rastro)
