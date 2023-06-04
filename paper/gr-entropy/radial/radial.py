@@ -11,6 +11,7 @@ import scipy
 import scipy.optimize
 
 # Schwarschild scaled mass
+# Note mass=1 corresponds to about 2e5 solar masses. 201900 to be exact.
 mass = 1
 
 # Initial location of lab frame
@@ -47,7 +48,8 @@ tau = 2356315.53
 taustep = 1e-5
 
 # Result: flashlight (located 0.1 in front) falls through EH at 2356315.5325
-# and observer is still r=t=2.2 seconds away when this happens.
+# and observer is still r=t=2.2 seconds away when this happens. (But this is
+# a numerical artifact. See below.)
 
 # If the infall is started at rnaught=1 and flashlight is 0.01 closer
 # then flashlight falls in at 207.664145 while observer is still r=t=0.06 away.
@@ -55,8 +57,10 @@ taustep = 1e-5
 # Curious: at this mass scale, there is both a separation in r and t
 # from the EH, while, for the large masses, below, that r separation goes away.
 # This hold true even if the flashlight is given a *huge* lead for the
-# large masses. I'm kind of surprised, but I guess this is coordinate
-# flim-flammery. We need to switch to other coordinates.
+# large masses.
+#
+# Answer: It is a numeric artifact. Both cross at the same r(=2m) but at
+# different t coords. This is as it should be.
 
 # ------------------
 # Mass of Sgr A*, measured in seconds
@@ -94,18 +98,24 @@ taustep = 1
 
 # ------------------
 
-mass = 20.5
-rnaught = 500
-deltar = -100
+mass = 1
+rnaught = 50
+deltar = -25
 
 tau = 0.0
 taustep = 1
-tau = 805
-taustep = 1e-2
-tau = 805.59
+tau = 57
+taustep = 0.01
+tau = 57.59
 taustep = 1e-4
-tau = 805.5933
+tau = 57.5922
 taustep = 1e-6
+tau = 57.592231
+taustep = 1e-8
+tau = 57.59223176
+taustep = 1e-10
+tau = 57.59223176
+taustep = 1e-12
 
 # ------------------
 print("#\n# Radial infall simulation")
@@ -193,14 +203,14 @@ while True:
 
 	# astronaut radial coord, when astronaut receives the flash.
 	rmin = rflash
-	rmax = rflash+100
+	rmax = rflash - 10*deltar
 	rastro = scipy.optimize.brentq(recv_null, rmin, rmax, args=(rflash, tflash))
 
 	# astronaut time coord
 	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rastro)
 
 	print( \
-		"{:10.6f}".format(tau), \
+		"{:10.12f}".format(tau), \
 		"{:10.6f}".format(rflash), \
 		"{:10.6f}".format(tflash), \
 		"{:10.6f}".format(rastro), \
