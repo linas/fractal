@@ -43,6 +43,20 @@ tau = 2356300.0
 taustep = 0.1
 tau = 2356315.0
 taustep = 0.001
+tau = 2356315.53
+taustep = 1e-5
+
+# Result: flashlight (located 0.1 in front) falls through EH at 2356315.5325
+# and observer is still r=t=2.2 seconds away when this happens.
+
+# If the infall is started at rnaught=1 and flashlight is 0.01 closer
+# then flashlight falls in at 207.664145 while observer is still r=t=0.06 away.
+
+# Curious: at this mass scale, there is both a separation in r and t
+# from the EH, while, for the large masses, below, that r separation goes away.
+# This hold true even if the flashlight is given a *huge* lead for the
+# large masses. I'm kind of surprised, but I guess this is coordinate
+# flim-flammery. We need to switch to other coordinates.
 
 # ------------------
 # Mass of Sgr A*, measured in seconds
@@ -57,6 +71,15 @@ taustep = 0.1
 tau = 1135.0
 taustep = 0.001
 
+# Result: flashlight (located at 0.1 in front) falls through EH at 1136.3670
+# Observer is r=0, t=0.19 seconds behind when this happens.
+#
+# But if flashlight is 1.0 in front, it falls in at 1133.2260
+# Observer is r=0, t=1.9 seconds behind.
+#
+# But if flashlight is 10 in front, it falls in at 1101.97
+# Observer is r=0, t=18.9 seconds behind.
+
 # ------------------
 # Mass of M87, measured in seconds
 mass = 35000
@@ -69,6 +92,20 @@ taustep = 10
 tau = 16452400.0
 taustep = 1
 
+# ------------------
+
+mass = 20.5
+rnaught = 500
+deltar = -100
+
+tau = 0.0
+taustep = 1
+tau = 805
+taustep = 1e-2
+tau = 805.59
+taustep = 1e-4
+tau = 805.5933
+taustep = 1e-6
 
 # ------------------
 print("#\n# Radial infall simulation")
@@ -163,12 +200,12 @@ while True:
 	tastro = schw_tp_coord(rnaught) - schw_tp_coord(rastro)
 
 	print( \
-		"{:10.4f}".format(tau), \
-		"{:10.4f}".format(rflash), \
-		"{:10.4f}".format(tflash), \
-		"{:10.4f}".format(rastro), \
-		"{:10.4f}".format(tastro), \
-		"{:10.4f}".format(rastro-rflash), \
-		"{:10.4f}".format(tastro-tflash) \
+		"{:10.6f}".format(tau), \
+		"{:10.6f}".format(rflash), \
+		"{:10.6f}".format(tflash), \
+		"{:10.6f}".format(rastro), \
+		"{:10.6f}".format(tastro), \
+		"{:10.6f}".format(rastro-rflash), \
+		"{:10.6f}".format(tastro-tflash) \
 		)
 	tau += taustep
