@@ -122,7 +122,8 @@ The general discussion can be found in Part Three; I'll just recap here.
 \end_layout
 
 \begin_layout Standard
-A traditional caculation demonstrates what the 
+A traditional analysis of the Schwarzschild solution involves a calculation
+ that demonstrates what the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -133,12 +134,13 @@ fixed stars
  look like to a freely-falling, infalling observer.
  The current project is to update this, and consider the case of flashlights
  that are also freely falling.
- What does the observer see then? 
+ What does the observer see, as he and the flashlights cross the event horizon?
+ 
 \end_layout
 
 \begin_layout Standard
-The project is made intersting by considering the flashlight to be a smart
- radio device that can communicate flashlight state encoded in a radio signal.
+The flashlight is taken to be a smart radio device that can communicate
+ the flashlight state and encode it in a radio signal.
  It's 
 \begin_inset Quotes eld
 \end_inset
@@ -147,10 +149,11 @@ smart
 \begin_inset Quotes erd
 \end_inset
 
-, in that it's a computer, able to track it's own position in a given coordinate
- chart.
- It can then encode this info in a transmitted radio signal, which travels
- along a null geodesic, until it intersects with the observer.
+, in that it's a computer, able to track it's own position and orientation
+ in a given coordinate chart (using dead reckoning).
+ This info is continuously broadcast, encoded in a radio signal.
+ Being electromagnetic, it travels along a null geodesic, until it intersects
+ with the observer (is received by the observer.)
 \end_layout
 
 \begin_layout Standard
@@ -163,7 +166,6 @@ The proper time, as perceived by the flashlight.
 
 \begin_layout Itemize
 The coordinates of the flashlight, at the time that it emitted the signal.
- They encode the coordinates of the flashlight at the time of signal emission.
  These coordinates are expressed in whatever convenient coordinate system
  we'll use.
  Currently, Gullstrand–Painlevé coordinates seem like a good choice; see
@@ -175,15 +177,22 @@ The 4-velocity of the flashlight, at the time of the signal emission.
 \end_layout
 
 \begin_layout Itemize
-The direction the flashlight was facing, in full: all three Euler coords
- (or whatever coord system is being employed.)
+The direction the flashlight was facing, plus it's roll: all three Euler
+ angles (or whatever coord system is being employed.) The flashlight should
+ transmit vertically-polarized light; this provides the roll reference frame
+ directly, to the receiver.
+\end_layout
+
+\begin_layout Itemize
+A UUID number, uniquely identifying that flashlight, so we do not confuse
+ it with others radiating along the same null geodesic.
 \end_layout
 
 \begin_layout Itemize
 The initial location and velocity of the flashlight.
  That is, the flashlight is assumed to start falling freely only after it
  has been boosted into some particular trajectory.
- The starting point can be anywhere outside tthe event horizon.
+ The starting point can be anywhere outside the event horizon.
 \end_layout
 
 \begin_layout Standard
@@ -200,20 +209,29 @@ The direction from which the flashlight signal came from.
 
 \begin_layout Itemize
 The polarization of the flashlight signal.
+ This measures any twisting in the of the reference frame as the null geodesic
+ propagates.
+ 
 \end_layout
 
 \begin_layout Itemize
-The redshift of the flashlight signal.
+The brightness of the flashlight.
+ That is, given that a flashlight radiates uniformly in all directions,
+ how many of these rays fall onto the receiver of a small, fixed solid angle?
+\end_layout
+
+\begin_layout Itemize
+The redshift of the flashlight signal; the dispersion.
 \end_layout
 
 \begin_layout Standard
 Both the flashlight and the observer fall with time-like geodesics.
- The flashlight signal is, of course, follows a null geodesic.
+ The flashlight signal follows a null geodesic, of course.
 \end_layout
 
 \begin_layout Standard
-More precisely, we imagine a single observer embeded in a cloud of freely-fallin
-g 
+It is more convenient to imagine a single observer embeded in a cloud of
+ freely-falling 
 \begin_inset Quotes eld
 \end_inset
 
@@ -223,7 +241,18 @@ smart dust
 
 : a distribution of such flashlights, flying every-which way.
  We wish to observe and analyze the plethora of incomging signals: to make
- a movie of what the observer sees, in the observers proper time.
+ a movie of what the observer sees, in the observer's proper time.
+\end_layout
+
+\begin_layout Standard
+The introduction of a dust adds several more observables to the problem:
+ for a given distribution of the dust, what is the distribution that the
+ observer sees? This question about distribution can be asked of brightness,
+ polarization and redshift.
+ In particular, it's been noted that the event horizon weakly traps null
+ geodesics, emited in the distant past, but neither infalling nor outgoing.
+ This suggests that a bright caustic forms at the event horizon.
+ How bright is it? Can we provide closed-form solutions for it?
 \end_layout
 
 \begin_layout Subsection
@@ -333,14 +362,75 @@ its electromagnetic forces between the atoms
  This is, I presume, the origin of the firewall idea.
  But it seems entirely at odds with the idea that the lab frame falls unharmed
  through the EH.
+ So which is it? Studying the infall of smart dust seems to be the way to
+ do it.
+ We want a complete picture of signal propagation as a signaling network
+ falls through the event horizon.
 \end_layout
 
 \begin_layout Standard
-So which is it? Studying the infall of smart dust seems to be the way to
- do it.
- There are several levels of questions here.
- First, and most direct: given any two points on the manifold, does there
- exist a null ge
+Before moving forwards, I wish to pause and pose a few more questions and
+ speculations.
+ The above has been posed purely in terms of particle dynamics.
+ Is there a corresponding wave picture? There is a handful of differential
+ equations that are relativisitcally invariant: the Klien-Gordon eqn, the
+ Dirac eqn, the Majorona and Weyl equations.
+ Solutions to these equations are 
+\begin_inset Quotes eld
+\end_inset
+
+classical
+\begin_inset Quotes erd
+\end_inset
+
+; no quantum mechanics is involved in writing down their solutions.
+ What do these look like in the visinity of the event horizon? It would
+ seem that there's a tension between the 
+\begin_inset Quotes eld
+\end_inset
+
+nothing happens because tangent planes are flat
+\begin_inset Quotes erd
+\end_inset
+
+ viewpoint, and the 
+\begin_inset Quotes eld
+\end_inset
+
+space-like surfaces have rotated to become timelike, and thus shred everything
+\begin_inset Quotes erd
+\end_inset
+
+ viewpoint.
+ I find this deeply confusing.
+\end_layout
+
+\begin_layout Standard
+A second point is about the nature of quantum mechanics near the event horizon.
+ 
+\end_layout
+
+\begin_layout Standard
+speculate on a few more matters.
+ One is about the nature of quantum mechanics near the event horizon.
+ If this shredding occurs, does it apply 
+\end_layout
+
+\begin_layout Standard
+is that it's been noted that the event horizon weakly traps null geodesics,
+ and so infalling matter will get bombarded by an accumulation of null geodesics
+ from the distant past, and possibily be fried
+\end_layout
+
+\begin_layout Standard
+dispersion
+\end_layout
+
+\begin_layout Standard
+There are several levels of questions here.
+ First, and most direct: given a point on the manifold (the observer), and
+ a time-like geodesic, does there exist a null geodesic that connects the
+ point
 \end_layout
 
 \begin_layout Standard
