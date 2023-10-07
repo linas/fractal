@@ -449,7 +449,7 @@ robot dust
 \end_layout
 
 \begin_layout Subsection
-Detailed questions
+Problem Setup
 \end_layout
 
 \begin_layout Standard
@@ -531,7 +531,7 @@ dynamic horizon
  infinite redshifts.
  The hand-waving argument for this is continuity: Everything about this
  geometry is continuous (differentiable, even smooth) so in order to get
- from visible to invisible, one must push both redshift to infiinity and
+ from visible to invisible, one must push both redshift to infinity and
  brightness to zero.
  Exact expressions for redshift and brightness are desirable, but will presumabl
 y be too difficult to obtain analytically, and so will require numeric work.
@@ -539,36 +539,45 @@ y be too difficult to obtain analytically, and so will require numeric work.
 \end_layout
 
 \begin_layout Standard
-we
-\end_layout
-
-\begin_layout Section
-Maps
-\end_layout
-
-\begin_layout Standard
-The general problem can be thought of as follows: given any massive particles
- having any given location and instantaneous velocity on the manifold, describe
- the null geodesic that connects them.
- Specifically, provide the length of that geodesic, and describe the red-shift
- experienced by that geodesic.
+To answer the question in the very first bullet, it seems easiest to instead
+ describe the past lightcone of the observer.
+ This is a manifold, the past null manifold.
+ Then, for each point on this past null manifold, we ask for the time-like
+ tangents to it.
+ These are the flashlights instantaneously passing through that point.
+ 
 \end_layout
 
 \begin_layout Standard
-Since the infalling flashlights form a 
+At the observer's location, there is a time-like tangent plane.
+ This is the collection of all possible velocities that the observer can
+ have.
+ For each pair of (observer velocity, flashlight velocity), we ask for the
+ redshift.
+ If the redshift is infinite, or has changed sign, we say that this flashlight
+ tangent vector is beyond the current dynamic horizon of the given observer
+ tangent vector.
+\end_layout
+
+\begin_layout Standard
+To obtain the past light-cone of the observer, we start with the null tangent
+ plane of the observer.
+ This is the 
 \begin_inset Quotes eld
 \end_inset
 
-dust
+movie screen
 \begin_inset Quotes erd
 \end_inset
 
-, they have some density distribution.
- This leads to a density distribution of the null geodesics that the observer
- sees.
- We want an expression for that, too.
- Well, all this presumably needs a numeric solution.
- But anyway...
+ on which the observations of the past plays out.
+ It is two-dimensional, characterized by sphere coords.
+ We get the full past light cone by integrating along each direction.
+\end_layout
+
+\begin_layout Standard
+Well, I guess that's the complete problem setup, then.
+ Time to roll up the sleeves and get to work.
 \end_layout
 
 \begin_layout Subsection
@@ -576,9 +585,9 @@ Coordinate Charts
 \end_layout
 
 \begin_layout Standard
-The background space-time is that of the Schwarszschild solution.
- We need to select coordinates that are geodesically complete on the future
- horizon, and are easy to work with.
+The background space-time manifold is that of the Schwarzschild solution.
+ We need to select coordinates that are geodesically complete past the future
+ Schwarzschild event horizon, and are easy to work with.
 \end_layout
 
 \begin_layout Standard
@@ -649,7 +658,27 @@ Kruskal–Szekeres coordinates.
 \end_layout
 
 \begin_layout Standard
-So...
+It currently seems like Gullstrand–Painlevé seems easiest, so lets try that.
+ See how it goes.
+\end_layout
+
+\begin_layout Section
+Coordinates and Tangent Spaces
+\end_layout
+
+\begin_layout Standard
+We pick up the notational conventions from the Gullstrand–Painlevé article
+ on Wikipedia, but drop the subscript 'r' because we will not be making
+ comparisons the the Schwarzschild metric.
+ The metric is
+\begin_inset Formula 
+\[
+g=\left(1-\frac{2M}{r}\right)\,dt_{r}^{2}-2\sqrt{\frac{2M}{r}}dt_{r}dr-dr^{2}-r^{2}\,d\theta^{2}-r^{2}\sin^{2}\theta\,d\phi^{2}
+\]
+
+\end_inset
+
+ So...
 \end_layout
 
 \end_body
