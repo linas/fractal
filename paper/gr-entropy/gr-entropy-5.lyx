@@ -222,13 +222,133 @@ smart dust
 \end_inset
 
 : a distribution of such flashlights, flying every-which way.
- We wish to observe and analyze the plethora of incomging signals: to take
- a photograph of what we see, over time.
- More precisely, a movie.
+ We wish to observe and analyze the plethora of incomging signals: to make
+ a movie of what the observer sees, in the observers proper time.
+\end_layout
+
+\begin_layout Subsection
+Plan
 \end_layout
 
 \begin_layout Standard
-The phenomenon we wish to study is the appearance of dynamic horizons: some
+So far, this is all very easy to say, in words.
+ There are four or five hard parts, here.
+ These are:
+\end_layout
+
+\begin_layout Itemize
+Restate the above in terms of generic statements about maps of tangent spaces
+ on the tangent manifold of the Schwarzschild solution.
+\end_layout
+
+\begin_layout Itemize
+Write down the needed encodings in appropriate coords.
+ Several choices of coords are possible: Lemaître coordinates, Eddington–Finkels
+tein coordinates 
+\end_layout
+
+\begin_layout Itemize
+Solve the null geodesics.
+ This will almost surely require numeric integration; the earlier by-hand
+ efforts proved to be difficult even in the very simplest case, of radial
+ infall.
+ This means writing code.
+ Yuck.
+\end_layout
+
+\begin_layout Itemize
+Convert all of this info into a movie.
+\end_layout
+
+\begin_layout Section
+Motivation
+\end_layout
+
+\begin_layout Standard
+The goal is to get some insight into the firewall problem.
+ Lets recap this, in the most naive way possible.
+ Some(?) classic GR texts ask 
+\begin_inset Quotes eld
+\end_inset
+
+what happens when an astronaut falls through the event horizon?
+\begin_inset Quotes erd
+\end_inset
+
+ and then provide an answer: not much, for a galactic-sized black hole.
+ This argument rests on the idea that tidal forces are small/un-noticable,
+ and that the lab frame is approximately flat, ergo nothing happens.
+ This argument seems entirely self-consistent.
+ Mathematically, we imagine some tangent plane (that defines the lab frame)
+ falling across the horizon, and all is fine.
+\end_layout
+
+\begin_layout Standard
+This is contradicted by another thought experiment.
+ Suppose the astronaut is carrying a head-lamp, that illuminates his hands
+ and feet, so he can 
+\begin_inset Quotes eld
+\end_inset
+
+see what he's doing
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Perhaps wearing a glow-in-the-dark suit.
+ Suppose he dives, hands first, so that the hands cross the EH before the
+ eyes.
+ Can he see his hands? Well, he should not be able to, as they are on the
+ other side of the EH.
+ There aren't any null outgoing geodesics.
+ Once his head crosses the EH, can he see his hands again? Is there a breif
+ flash, and then he can see normally again? I think not; I think they remain
+ dark.
+ They have fallen into the future, and stay there.
+\end_layout
+
+\begin_layout Standard
+This second picture is deeply disturbing for survivability.
+ Lets replace the astronaut by a robot, so we can talk aout a mechanical,
+ say, steel arm, that gets it's rigidity from atomic forces.
+ Rigid motion propagates at the speed of sound, which is determined by the
+ Young's modulus for steel, and we can hand wave 
+\begin_inset Quotes eld
+\end_inset
+
+its electromagnetic forces between the atoms
+\begin_inset Quotes erd
+\end_inset
+
+, whatever that means.
+ It would appear that the robot's arms, having crossed the EH, must suffer
+ mechanical failure, as no stress signal can propagate back up the bar of
+ steel.
+ It surely gets shredded.
+ In terms of reference frames, I think it's correct to say that the arm
+ has rotated into the future, and causality is such that the future cannot
+ affect the past: the arm has dettached.
+ This reasoning goes down to the atomic scales: it seems the shredding happens
+ at the atomic scale.
+ This is, I presume, the origin of the firewall idea.
+ But it seems entirely at odds with the idea that the lab frame falls unharmed
+ through the EH.
+\end_layout
+
+\begin_layout Standard
+So which is it? Studying the infall of smart dust seems to be the way to
+ do it.
+ There are several levels of questions here.
+ First, and most direct: given any two points on the manifold, does there
+ exist a null ge
+\end_layout
+
+\begin_layout Standard
+wearing a glow-in-the-dark suit
+\end_layout
+
+\begin_layout Standard
+phenomenon we wish to study is the appearance of dynamic horizons: some
  of the dust will move beyond a horizon, in that there will not be any null
  geodesics that connect those flashlights to the observer.
  We want to study the shape of that horizon.
@@ -283,36 +403,6 @@ solve
  I'm tangled and confused here.
  So, understanding the dynamic horizons seems like the appropriate first
  step.
-\end_layout
-
-\begin_layout Standard
-So far, this is all very easy to say, in words.
- There are four or five hard parts, here.
- These are:
-\end_layout
-
-\begin_layout Itemize
-Restate the above in terms of generic statements about maps of tangent spaces
- on the tangent manifold of the Schwarzschild solution.
-\end_layout
-
-\begin_layout Itemize
-Write down the needed encodings in appropriate coords.
- Several choices of coords are possible: Lemaître coordinates, Eddington–Finkels
-tein coordinates 
-\end_layout
-
-\begin_layout Itemize
-Solve the null geodesics.
- This will almost surely require numeric integration; the earlier by-hand
- efforts proved to be difficult even in the very simplest case, of radial
- infall.
- This means writing code.
- Yuck.
-\end_layout
-
-\begin_layout Itemize
-Convert all of this info into a movie.
 \end_layout
 
 \begin_layout Section
