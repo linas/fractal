@@ -122,11 +122,39 @@ The general discussion can be found in Part Three; I'll just recap here.
 \end_layout
 
 \begin_layout Standard
-Consider the case of a freely falling observer, with a flashlight also freely
- falling, close-by.
- The flashlight should be considered to be a smart radio device, one that
- emits a radio signal that carries information about the flashlight.
- Specifically, the encoded info includes:
+A traditional caculation demonstrates what the 
+\begin_inset Quotes eld
+\end_inset
+
+fixed stars
+\begin_inset Quotes erd
+\end_inset
+
+ look like to a freely-falling, infalling observer.
+ The current project is to update this, and consider the case of flashlights
+ that are also freely falling.
+ What does the observer see then? 
+\end_layout
+
+\begin_layout Standard
+The project is made intersting by considering the flashlight to be a smart
+ radio device that can communicate flashlight state encoded in a radio signal.
+ It's 
+\begin_inset Quotes eld
+\end_inset
+
+smart
+\begin_inset Quotes erd
+\end_inset
+
+, in that it's a computer, able to track it's own position in a given coordinate
+ chart.
+ It can then encode this info in a transmitted radio signal, which travels
+ along a null geodesic, until it intersects with the observer.
+\end_layout
+
+\begin_layout Standard
+Encoded information should include:
 \end_layout
 
 \begin_layout Itemize
@@ -135,17 +163,11 @@ The proper time, as perceived by the flashlight.
 
 \begin_layout Itemize
 The coordinates of the flashlight, at the time that it emitted the signal.
- They encode where the flashlight 
-\begin_inset Quotes eld
-\end_inset
-
-thinks it is
-\begin_inset Quotes erd
-\end_inset
-
- at the time of signal emission.
+ They encode the coordinates of the flashlight at the time of signal emission.
  These coordinates are expressed in whatever convenient coordinate system
  we'll use.
+ Currently, Gullstrand–Painlevé coordinates seem like a good choice; see
+ below.
 \end_layout
 
 \begin_layout Itemize
@@ -218,6 +240,8 @@ Restate the above in terms of generic statements about maps of tangent spaces
 
 \begin_layout Itemize
 Write down the needed encodings in appropriate coords.
+ Several choices of coords are possible: Lemaître coordinates, Eddington–Finkels
+tein coordinates 
 \end_layout
 
 \begin_layout Itemize
@@ -231,6 +255,102 @@ Solve the null geodesics.
 
 \begin_layout Itemize
 Convert all of this info into a movie.
+\end_layout
+
+\begin_layout Section
+Maps
+\end_layout
+
+\begin_layout Standard
+The general problem can be thought of as follows: given any massive particles
+ having any given location and instantaneous velocity on the manifold, describe
+ the null geodesic that connects them.
+ Specifically, provide the length of that geodesic, and describe the red-shift
+ experienced by that geodesic.
+\end_layout
+
+\begin_layout Subsection
+Coordinate Charts
+\end_layout
+
+\begin_layout Standard
+Choice of coordinates.
+ We have several.
+ Some Pros and cons:
+\end_layout
+
+\begin_layout Itemize
+Schwarzschild coordinates.
+ Unacceptable, due ot the coordinate singularity at the even horizon.
+\end_layout
+
+\begin_layout Itemize
+Lemaître coordinates.
+ Minor modification to Schwarzschild.
+ Disadvantage: square roots and cube roots appear.
+ Not geodesically complete.
+\end_layout
+
+\begin_layout Itemize
+Eddington–Finkelstein coordinates.
+ These are a coordinate frame defined by radially infalling null geodesics.
+ Advantage: the metric is independent of 
+\begin_inset Quotes eld
+\end_inset
+
+time
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Disadvantage: Note geodesically complete.
+ Spciefically, doesn't cover the white-hole part of the extended Schwarschild
+ spacetime.
+ But that's OK, because we're not interested in that part of the solution
+ ...
+ at the moment.
+ Disatvantage: the constant-
+\begin_inset Quotes erd
+\end_inset
+
+time
+\begin_inset Quotes erd
+\end_inset
+
+ hypersurfaces are null surfaces.
+ I fear this will lead to confusion?
+\end_layout
+
+\begin_layout Itemize
+Gullstrand–Painlevé coordinates.
+ Advantage: the metric is independent of 
+\begin_inset Quotes eld
+\end_inset
+
+time
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Another advantage: constant-time hypersurfaces are flat.
+ Time coordinate is the proper time of a radially free-falling observer,
+ starting w/ zero velocity at infinity.
+ This seems like a good choice of coordinates, at this stage, in part because
+ these preserve some of the intuition we have about space.
+ More abstractly, the space-like part of the tangent planes have a simple
+ form.
+ 
+\end_layout
+
+\begin_layout Itemize
+Kruskal–Szekeres coordinates.
+ Metric depends on both space and time, but is complete over the extended
+ Schwarschild spacetime.
+ Contains exponentials, sinh and cosh functions.
+\end_layout
+
+\begin_layout Standard
+So...
 \end_layout
 
 \end_body
