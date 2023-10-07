@@ -228,6 +228,64 @@ smart dust
 \end_layout
 
 \begin_layout Standard
+The phenomenon we wish to study is the appearance of dynamic horizons: some
+ of the dust will move beyond a horizon, in that there will not be any null
+ geodesics that connect those flashlights to the observer.
+ We want to study the shape of that horizon.
+ In particular, we want to study the shape of this horizon as the observer
+ nears and falls through the Schwarschild radius.
+\end_layout
+
+\begin_layout Standard
+Why is this interesting? Well, the smart dust can be thought of as forming
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+virtual robot
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Rather than being mechanical, its a cloud.
+ What happens to that cloud? It seems clear that as parts of it fall beyond
+ the dynamic horizon, it becomes 
+\begin_inset Quotes eld
+\end_inset
+
+shreaded
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Next, imagine that this dust implements a virtual, smart differential-equation
+ solver.
+ Each dust particle comminucates with it's nearest neighbors, using null
+ geodesics, to 
+\begin_inset Quotes eld
+\end_inset
+
+solve
+\begin_inset Quotes erd
+\end_inset
+
+ some diffeq.
+ The dynamic horizons will shred this fabric.
+ How? I'm not sure this idea of a diff-eq is well-founded: the conventinoal
+ idea is that there's some lab frame that is approx flat in some small-enough
+ region, and we can always just solve normal diffeqs where its flat.
+ Yet, somehow, atoms are electromagnetic; mechanical forces propagate at
+ the speed of sound, and the shredding of the dynamic horizon is ...
+ well.
+ I'm tangled and confused here.
+ So, understanding the dynamic horizons seems like the appropriate first
+ step.
+\end_layout
+
+\begin_layout Standard
 So far, this is all very easy to say, in words.
  There are four or five hard parts, here.
  These are:
@@ -269,19 +327,41 @@ The general problem can be thought of as follows: given any massive particles
  experienced by that geodesic.
 \end_layout
 
+\begin_layout Standard
+Since the infalling flashlights form a 
+\begin_inset Quotes eld
+\end_inset
+
+dust
+\begin_inset Quotes erd
+\end_inset
+
+, they have some density distribution.
+ This leads to a density distribution of the null geodesics that the observer
+ sees.
+ We want an expression for that, too.
+ Well, all this presumably needs a numeric solution.
+ But anyway...
+\end_layout
+
 \begin_layout Subsection
 Coordinate Charts
 \end_layout
 
 \begin_layout Standard
-Choice of coordinates.
- We have several.
- Some Pros and cons:
+The background space-time is that of the Schwarszschild solution.
+ We need to select coordinates that are geodesically complete on the future
+ horizon, and are easy to work with.
+\end_layout
+
+\begin_layout Standard
+We have several choices.
+ Listing these, with the pros and cons:
 \end_layout
 
 \begin_layout Itemize
 Schwarzschild coordinates.
- Unacceptable, due ot the coordinate singularity at the even horizon.
+ Unacceptable, due ot the coordinate singularity at the (future) event horizon.
 \end_layout
 
 \begin_layout Itemize
@@ -303,21 +383,13 @@ time
 \end_inset
 
 .
- Disadvantage: Note geodesically complete.
- Spciefically, doesn't cover the white-hole part of the extended Schwarschild
- spacetime.
+ Disadvantage: Not geodesically complete.
+ Specifically, doesn't cover the past horizon (white-hole) part of the extended
+ Schwarschild spacetime.
  But that's OK, because we're not interested in that part of the solution
  ...
  at the moment.
- Disatvantage: the constant-
-\begin_inset Quotes erd
-\end_inset
-
-time
-\begin_inset Quotes erd
-\end_inset
-
- hypersurfaces are null surfaces.
+ Disatvantage: the constant-time hypersurfaces are null surfaces.
  I fear this will lead to confusion?
 \end_layout
 
@@ -333,8 +405,8 @@ time
 
 .
  Another advantage: constant-time hypersurfaces are flat.
- Time coordinate is the proper time of a radially free-falling observer,
- starting w/ zero velocity at infinity.
+ The global time coordinate is the proper time of a radially free-falling
+ observer, starting w/ zero velocity at infinity.
  This seems like a good choice of coordinates, at this stage, in part because
  these preserve some of the intuition we have about space.
  More abstractly, the space-like part of the tangent planes have a simple
