@@ -129,6 +129,14 @@ Appendix B: Flat Spacetime
 Appendix C: Schwarzschild Metric
 \end_layout
 
+\begin_layout Itemize
+Appendix D: Lemaître observers
+\end_layout
+
+\begin_layout Itemize
+Appendix E: Gullstrand–Painlevé coordinates
+\end_layout
+
 \begin_layout Section*
 Appendix A: Vierbeins
 \end_layout
@@ -200,7 +208,7 @@ A generic coordinate chart for a manifold
 \begin_inset Formula $n=4$
 \end_inset
 
- and works with conventional 1+3 spacetime, but it's OK to leave this open
+ and work with conventional 1+3 spacetime, but it's OK to leave this generic
  for now.
  
 \end_layout
@@ -505,7 +513,7 @@ Appendix C: Schwarzschild Metric
 \begin_layout Standard
 The Schwarzschild spacetime has several different metrics that can be used.
  The Schwarzschild metric is the simplest, but it is geodesically incomplete,
- and has a coordinate singularity at the future horizon.
+ and has a coordinate singularity at the event horizon.
 \end_layout
 
 \begin_layout Subsection*
@@ -571,7 +579,7 @@ From this, we deduce the frame field
 \end_layout
 
 \begin_layout Standard
-This coordinate system models 
+This coordinate system provides a model for 
 \begin_inset Quotes eld
 \end_inset
 
@@ -692,13 +700,13 @@ move radially inwards, then move forward one second
  
 \end_layout
 
-\begin_layout Subsection*
-Lemaitre Observers
+\begin_layout Section*
+Appendix D: Lemaître Observers
 \end_layout
 
 \begin_layout Standard
-Easiest to look these up.
- Frame fields are given in the Wikiepdia 
+Easiest to just look these up, rather than copying here.
+ Frame fields are given in the Wikipedia 
 \begin_inset CommandInset href
 LatexCommand href
 name "frame fields in general relativity"
@@ -710,12 +718,28 @@ literal "false"
  article, and we don't reproduce this here.
 \end_layout
 
+\begin_layout Standard
+Why? Because the frame fields in the Lemaître coordinate system have a singulari
+ty at the EH, thus making them useless for analyzing the null geodesics
+ that propagate in the EH.
+ Being able to deal with such geodesics seems important for this project.
+ FYI, the Gullstrand–Painlevé coordinates suffer from the same problem.
+ Other fun facts:
+\end_layout
+
+\begin_layout Itemize
+The coordinates provide radially-inward free-falling frames.
+ That is, the covariant derivative of the frame fields w.r.t.
+ time vanishes.
+ The frames areinertial non-spinning frames.
+\end_layout
+
 \begin_layout Section*
-Appendix C: Gullstrand–Painlevé coordinates
+Appendix E: Gullstrand–Painlevé coordinates
 \end_layout
 
 \begin_layout Standard
-The Gullstrand–Painlevé metric for the Schwarzschild spacetime consists
+The Gullstrand–Painlevé coordinates for the Schwarzschild spacetime consists
  of two charts, one that can handle the future both interior and exterior
  of the future event horizon, and a second chart for the past event horizon.
 \end_layout
@@ -729,6 +753,10 @@ We pick up the notational conventions from the Gullstrand–Painlevé article
 
 \begin_layout Standard
 Some useful factoids about this metric:
+\end_layout
+
+\begin_layout Itemize
+The metric is not singular on the event horizon.
 \end_layout
 
 \begin_layout Itemize
@@ -753,6 +781,7 @@ The determinant of the metric is
 \end_inset
 
 .
+ (Eh?)
 \end_layout
 
 \begin_layout Itemize
@@ -760,6 +789,27 @@ The metric is not geodesically complete; it fails to extend into the past
  (white-hole) horizon.
  Changing the sign of the cross-term gives a coordinate chart that does
  extend across the past horizon.
+\end_layout
+
+\begin_layout Itemize
+As demonstrated below, the frame and coframe fields are singular on the
+ event horizon.
+ This is a coordinate singularity (I presume) which makes this coordinate
+ system somewhat useless for understanding null geodesics that are trapped
+ in the EH.
+\end_layout
+
+\begin_layout Itemize
+The frame and coframe fields do demonstrate the common dictum that, inside
+ the event horizon, 
+\begin_inset Quotes eld
+\end_inset
+
+time becomes space-like and space becomes timelike
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection*
@@ -801,8 +851,12 @@ where
  chart.
 \end_layout
 
+\begin_layout Subsection*
+Exterior Frame and Coframe
+\end_layout
+
 \begin_layout Standard
-Comparing this to 
+Comparing the above to 
 \begin_inset Formula 
 \[
 \mathbf{g}=\eta_{ab}\sigma^{a}\otimes\sigma^{b}=\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}-\sigma^{2}\otimes\sigma^{2}-\sigma^{3}\otimes\sigma^{3}
@@ -826,15 +880,15 @@ Unfortunately, this coframe is valid only for
 \end_inset
 
  and is singular inside the EH.
- This can be resolved by swapping the coordinates 
-\begin_inset Formula $r$
+ This can be resolved by swapping (with a twist) the coframes 
+\begin_inset Formula $\sigma^{0}$
 \end_inset
 
  and 
-\begin_inset Formula $t$
+\begin_inset Formula $\sigma^{1}$
 \end_inset
 
- inside the event horizon
+ inside the event horizon; see the next section.
 \end_layout
 
 \begin_layout Standard
@@ -865,7 +919,7 @@ and note that
 \end_inset
 
 .
- This allows the corame to be written as 
+ This allows the coframe to be written as 
 \begin_inset Formula 
 \begin{align*}
 \sigma^{0} & =Cdt-\frac{S}{C}dr\\
@@ -897,6 +951,108 @@ There's a problem here: the definition for
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection*
+Interior Frame and Coframe
+\end_layout
+
+\begin_layout Standard
+The coframe field, written in terms of the Painleve coordinates, is is singular
+ on the EH.
+ I beleive this is a coordinate singularity.
+ It does indicate that maybe the Painleve coords are not quite what we want
+ to work with.
+ At any rate, looking at the original metric, we see that the 
+\begin_inset Formula $dt\otimes dt$
+\end_inset
+
+ term becomes space-like inside the EH.
+ The cross-term is confusing, but we can certainly fix things up for the
+ frame fields, by swapping (with a twist) 
+\begin_inset Formula $\sigma^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma^{1}$
+\end_inset
+
+ inside the EH.
+ That is, write
+\begin_inset Formula 
+\begin{align*}
+\sigma_{\mbox{inside}}^{0} & =\frac{1}{C_{\mbox{in}}}dr\\
+\sigma_{\mbox{inside}}^{1} & =C_{\mbox{in}}dt+\frac{S}{C_{\mbox{in}}}dr
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+C_{\mbox{in}}=\sqrt{\frac{2m}{r}-1}
+\]
+
+\end_inset
+
+which allows a real, non-imaginary 
+\begin_inset Formula $C_{\mbox{in}}>0$
+\end_inset
+
+ for the interior.
+ This time, one has 
+\begin_inset Formula $S^{2}-C_{\mbox{in}}^{2}=1$
+\end_inset
+
+.
+ (Note that cosh and sinh are reversed, as one has 
+\begin_inset Formula $\cosh^{2}-\sinh^{2}=1$
+\end_inset
+
+.) Note the plus sign in 
+\begin_inset Formula $\sigma_{\mbox{inside}}^{1}$
+\end_inset
+
+: this is the 
+\begin_inset Quotes eld
+\end_inset
+
+twist
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This coframe field preserves the Minkowski signature 
+\begin_inset Formula $+---$
+\end_inset
+
+ so that the Minkowski metric on the coframe stands as before.
+ Anyway, this switcheroo is the origin of the common expression that 
+\begin_inset Quotes eld
+\end_inset
+
+time becomes spacelike and space becomes time-like
+\begin_inset Quotes erd
+\end_inset
+
+ inside the EH.
+\end_layout
+
+\begin_layout Standard
+The corresponding frame field is then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{e}_{0}^{\mbox{inside}} & =-\frac{S}{C_{\mbox{in}}}\partial_{t}+C_{\mbox{in}}\partial_{r}\\
+\vec{e}_{1}^{\mbox{inside}} & =\frac{1}{C_{\mbox{in}}}\partial_{t}
+\end{align*}
+
+\end_inset
+
+and so again, the frame field looks swapped with a twist, as compared to
+ the exterior frame field.
 \end_layout
 
 \begin_layout Standard
