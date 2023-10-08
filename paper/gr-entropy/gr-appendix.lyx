@@ -122,7 +122,11 @@ Appendix A: Vierbeins
 \end_layout
 
 \begin_layout Itemize
-Appendix B: Spacetime
+Appendix B: Flat Spacetime
+\end_layout
+
+\begin_layout Itemize
+Appendix C: Schwarzschild Metric
 \end_layout
 
 \begin_layout Section*
@@ -459,7 +463,7 @@ follows from
 \end_layout
 
 \begin_layout Section*
-Appendix B: Spacetime
+Appendix B: Flat Spacetime
 \end_layout
 
 \begin_layout Standard
@@ -492,6 +496,16 @@ The Minkowski metric with roman letters:
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section*
+Appendix C: Schwarzschild Metric
+\end_layout
+
+\begin_layout Standard
+The Schwarzschild spacetime has several different metrics that can be used.
+ The Schwarzschild metric is the simplest, but it is geodesically incomplete,
+ and has a coordinate singularity at the future horizon.
 \end_layout
 
 \begin_layout Subsection*
@@ -576,7 +590,7 @@ Lie brackets
 
 \begin_layout Standard
 There are ten Lie brackets for the frame field.
- Its a homework problem to compute them.
+ It's a homework problem to compute them.
  I'm not sure this will teach anything, but lets try anyway.
  First, lets get rid of the trivial ones:
 \begin_inset Formula 
@@ -697,11 +711,128 @@ literal "false"
 \end_layout
 
 \begin_layout Section*
-Appendix C: Stuff
+Appendix C: Gullstrand–Painlevé coordinates
 \end_layout
 
 \begin_layout Standard
-Things
+The Gullstrand–Painlevé metric for the Schwarzschild spacetime consists
+ of two charts, one that can handle the future both interior and exterior
+ of the future event horizon, and a second chart for the past event horizon.
+\end_layout
+
+\begin_layout Standard
+We pick up the notational conventions from the Gullstrand–Painlevé article
+ on Wikipedia, but drop the subscript 'r' because we will not be making
+ comparisons the the Schwarzschild metric.
+ 
+\end_layout
+
+\begin_layout Standard
+Some useful factoids about this metric:
+\end_layout
+
+\begin_layout Itemize
+The metric is flat on surfaces of 
+\begin_inset Formula $t=\mbox{const.}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The Schwarzschild horizon is located at 
+\begin_inset Formula $r=2M$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The determinant of the metric is 
+\begin_inset Formula $-r^{4}\sin^{2}\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The metric is not geodesically complete; it fails to extend into the past
+ (white-hole) horizon.
+ Changing the sign of the cross-term gives a coordinate chart that does
+ extend across the past horizon.
+\end_layout
+
+\begin_layout Subsection*
+Gullstrand–Painlevé metric
+\end_layout
+
+\begin_layout Standard
+The Gullstrand–Painlevé metric, using the coordinate cobasis:
+\begin_inset Formula 
+\[
+\mathbf{g}=\left(1-\frac{2m}{r}\right)dt\otimes dt-\sqrt{\frac{2m}{r}}\left(dt\otimes dr+dr\otimes dt\right)-dr\otimes dr-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $m=GM/c^{2}$
+\end_inset
+
+ is the mass.
+ The Schwarschild radius is 
+\begin_inset Formula $r_{s}=2m$
+\end_inset
+
+.
+ The expression is valid for all 
+\begin_inset Formula $0<r$
+\end_inset
+
+, but only for the future (which I think is 
+\begin_inset Formula $0<t$
+\end_inset
+
+, right?) Reversing the sign for the cross-term gives the other coordinate
+ chart.
+\end_layout
+
+\begin_layout Standard
+Comparing this to 
+\begin_inset Formula 
+\[
+\mathbf{g}=\eta_{ab}\sigma^{a}\otimes\sigma^{b}=\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}-\sigma^{2}\otimes\sigma^{2}-\sigma^{3}\otimes\sigma^{3}
+\]
+
+\end_inset
+
+we can verify that the coframe is
+\begin_inset Formula 
+\begin{align*}
+\sigma^{0} & =\sqrt{1-\frac{2m}{r}}dt-\frac{1}{\sqrt{1-\frac{2m}{r}}}\sqrt{\frac{2m}{r}}dr\\
+\sigma^{1} & =\frac{1}{\sqrt{1-\frac{2m}{r}}}dr\\
+\sigma^{2} & =rd\theta\\
+\sigma^{3} & =r\sin\theta\,d\phi
+\end{align*}
+
+\end_inset
+
+From this, we deduce the frame field
+\begin_inset Formula 
+\begin{align*}
+\vec{e}_{0} & =xx\frac{1}{\sqrt{1-\frac{2m}{r}}}\partial_{t}\\
+\vec{e}_{1} & =xx\sqrt{1-\frac{2m}{r}}\partial_{r}\\
+\vec{e}_{2} & =\frac{1}{r}\partial_{\theta}\\
+\vec{e}_{3} & =\frac{1}{r\sin\theta}\partial_{\phi}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
