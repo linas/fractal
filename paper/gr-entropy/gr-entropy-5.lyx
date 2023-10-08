@@ -708,7 +708,8 @@ Coordinates and Tangent Spaces
 \end_layout
 
 \begin_layout Standard
-See the Appendix.
+We'll use Gullstrand–Painlevé coordinates, for the remainder.
+ See the Appendix for a general reference.
 \end_layout
 
 \begin_layout Standard
@@ -735,12 +736,8 @@ Use the subscript
  for a flashlight.
 \end_layout
 
-\begin_layout Itemize
-Use 
-\begin_inset Formula $\partial$
-\end_inset
-
- to denote tangent vectors.
+\begin_layout Subsection*
+Tangent vectors
 \end_layout
 
 \begin_layout Standard
@@ -752,7 +749,196 @@ Fixing a point
 \begin_inset Formula $g=0$
 \end_inset
 
+; the timelike tangents are those with 
+\begin_inset Formula $g=1$
+\end_inset
+
 .
+ More precisely, we are looking for vectors 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ sugh that 
+\begin_inset Formula $\mathbf{g}\left(\vec{v},\vec{v}\right)=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathbf{g}\left(\vec{v},\vec{v}\right)=1$
+\end_inset
+
+, where
+\begin_inset Formula 
+\[
+\vec{v}=v_{t}\partial_{t}+v_{r}\partial_{r}+v_{\theta}\partial_{\theta}+v_{\phi}\partial_{\phi}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\mathbf{g}=\left(1-\frac{2m}{r}\right)dt\otimes dt-\sqrt{\frac{2m}{r}}\left(dt\otimes dr+dr\otimes dt\right)-dr\otimes dr-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\]
+
+\end_inset
+
+so obviously (duhh)
+\begin_inset Formula 
+\[
+\mathbf{g}\left(\vec{v},\vec{v}\right)=\left(1-\frac{2m}{r}\right)v_{t}^{2}-2\sqrt{\frac{2m}{r}}v_{t}v_{r}-v_{r}^{2}-r^{2}\left(v_{\theta}^{2}+\sin^{2}\theta\,v_{\phi}^{2}\right)
+\]
+
+\end_inset
+
+Brute-forcing this by hand seems unpleasant, but I don't know of a better
+ way just right now.
+\end_layout
+
+\begin_layout Standard
+The first trick is to factor the above using the vielbein frames.
+ Write 
+\begin_inset Formula 
+\[
+\mathbf{g}\left(\vec{v},\vec{v}\right)=w_{0}^{2}-w_{1}^{2}-w_{2}^{2}-w_{3}^{2}
+\]
+
+\end_inset
+
+with
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{0} & =Cv_{t}-\frac{S}{C}v_{r}\\
+w_{1} & =\frac{1}{C}v_{r}\\
+w_{2} & =rv_{\theta}\\
+w_{3} & =r\sin\theta\,v_{\phi}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+S & \equiv\sqrt{\frac{2m}{r}}\\
+C & \equiv\sqrt{1-\frac{2m}{r}}
+\end{align*}
+
+\end_inset
+
+are defined for 
+\begin_inset Formula $2m<r$
+\end_inset
+
+ and a similar but different set of coords are used inside the EH; the the
+ Appendix.
+ Then 
+\begin_inset Formula $\mathbf{g}\left(\vec{v},\vec{v}\right)=1$
+\end_inset
+
+ is a one-sheeted hyperboliod outside of the EH, two-sheeted inside the
+ EH.
+ We can parametrize the hyperboloid with sinh and cosh, as is convetional.
+\end_layout
+
+\begin_layout Standard
+Lets try some special cases.
+\end_layout
+
+\begin_layout Subsection*
+Radial tangent vectors
+\end_layout
+
+\begin_layout Standard
+Radial tangents will have 
+\begin_inset Formula $v_{\theta}=v_{\phi}=0$
+\end_inset
+
+ and the null tangents solve 
+\begin_inset Formula $0=w_{0}^{2}-w_{1}^{2}$
+\end_inset
+
+.
+ This is given by 
+\begin_inset Formula $w_{0}=\pm w_{1}$
+\end_inset
+
+.
+ Fixing 
+\begin_inset Formula $v_{r}$
+\end_inset
+
+ gives 
+\begin_inset Formula 
+\[
+v_{t}=\frac{1}{C^{2}}\left[S\pm1\right]v_{r}
+\]
+
+\end_inset
+
+for the radial null tangents.
+ The time-like tangents solve 
+\begin_inset Formula $1=w_{0}^{2}-w_{1}^{2}$
+\end_inset
+
+, which gives 
+\begin_inset Formula $w_{0}=\pm\sqrt{1+w_{1}^{2}}$
+\end_inset
+
+.
+ Plugging through gives 
+\begin_inset Formula 
+\[
+v_{t}=\frac{Sv_{r}\pm\sqrt{S^{2}+v_{r}^{2}+1}}{C}
+\]
+
+\end_inset
+
+(if I did things correctly.) Quite unenlightening.
+ Clearly, the plus-sign is forward time.
+ Setting 
+\begin_inset Formula $v_{r}=0$
+\end_inset
+
+ seems to tell us that the 
+\begin_inset Formula $t$
+\end_inset
+
+ direction is not the proper time, but must be rescaled by 
+\begin_inset Formula $C$
+\end_inset
+
+ to get the proper time.
+ We're going nowhere fast.
+\end_layout
+
+\begin_layout Subsection*
+Geodesics
+\end_layout
+
+\begin_layout Standard
+The simplest approach to the geodesics seems to be the Lagrangian approach;
+ which we mimic from the earlier Part Three of this diary.
+ The nicest thing about it is that it gives us a constant of motion, for
+ free.
+ We've also already done the work in one coord system; we just repeat the
+ genral logic in another.
+ Should be easy, right?
+\end_layout
+
+\begin_layout Standard
+This time, since we've already factored the metric into vilebeins, we'll
+ just use the vielbein coframe.
+ So
+\begin_inset Formula 
+\[
+L=\frac{1}{2}\eta^{ab}w_{a}w_{b}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
