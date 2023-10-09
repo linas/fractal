@@ -865,6 +865,19 @@ where
  chart.
 \end_layout
 
+\begin_layout Standard
+Note that, for 
+\begin_inset Formula $r<2m$
+\end_inset
+
+, all of the diagonal terms become negative, thus misleadingly suggesting
+ that the metric is somehow space-like everywhere inside the EH.
+ This is not actually the case: the cross-term guarantees that there will
+ be tangent directions that are time-like (and also null).
+ It's just that inside the EH, none of the coordinates, on thier own, align
+ with a canonical timelike direction.
+\end_layout
+
 \begin_layout Subsection*
 Frame and Coframe
 \end_layout
@@ -1290,7 +1303,7 @@ The freedom to pick
 \end_layout
 
 \begin_layout Subsection*
-Cross-spacelike Interior
+Coordinate choices
 \end_layout
 
 \begin_layout Standard
@@ -1318,7 +1331,7 @@ On crossing the EH, one can arrange for
 \begin_inset Formula $\gamma$
 \end_inset
 
- to not change sign, thus leaving all terms in the line element negative.
+ to eithre change sign, or not.
  For example, 
 \begin_inset Formula $\beta=2m/r$
 \end_inset
@@ -1327,13 +1340,42 @@ On crossing the EH, one can arrange for
 \begin_inset Formula $\gamma=1+2m/r$
 \end_inset
 
- does this.
- Since all terms in the metric are negative, one is tempted to conclude
- that this metric is pure-space-like on the interior.
- This is but an illusion: there will still be tangent directions that render
- the cross-term positive.
- Thus, there are still time-like directions, its just that they are not
- associated with a specific coordinate label.
+ which does not change sign, and thus, inside the EH, the diagonal terms
+ of the metric are all negative.
+ This is similar to what happens for the Gullstrand–Painlevé coordinates.
+\end_layout
+
+\begin_layout Standard
+A different choice is given by 
+\begin_inset Formula 
+\[
+\beta=\frac{4m}{r}\left(1-\frac{m}{r}\right)
+\]
+
+\end_inset
+
+which gives 
+\begin_inset Formula $\gamma=\alpha$
+\end_inset
+
+.
+ In this metric, the space and time coordinates exchange places as the EH
+ is crossed.
+ It's just elegant enough that we'll write it out so that it hits you over
+ the head:
+\begin_inset Formula 
+\[
+\mathbf{g}=\alpha\,\left(dt\otimes dt-dr\otimes dr\right)-\frac{4m}{r}\left(1-\frac{m}{r}\right)\,\left(dt\otimes dr+dr\otimes dt\right)-r^{2}d^{2}\Omega
+\]
+
+\end_inset
+
+The cross-term vanishes at 
+\begin_inset Formula $m=r$
+\end_inset
+
+.
+ The significance of this, if any, is unclear.
 \end_layout
 
 \begin_layout Subsection*
@@ -1363,7 +1405,7 @@ and
 Then
 \begin_inset Formula 
 \[
-\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(a^{2}-c^{2}\right)dt\otimes dt+\left(ad-bc\right)\left(dt\otimes dr+dr\otimes dt\right)-\left(b^{2}-d^{2}\right)dr\otimes dr
+\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(a^{2}-c^{2}\right)dt\otimes dt-\left(bc-ad\right)\left(dt\otimes dr+dr\otimes dt\right)-\left(b^{2}-d^{2}\right)dr\otimes dr
 \]
 
 \end_inset
@@ -1379,8 +1421,7 @@ from which we read off that
 \end_inset
 
 which gives us three equations for four unknowns.
- Hopefuly, we can use this to resolve the coordinate singularity at the
- EH!?
+ We have one degree of freedom in choosing the coframes.
 \end_layout
 
 \begin_layout Standard
@@ -1396,8 +1437,33 @@ Setting
 \begin_inset Formula $a=\sqrt{1-2m/r}$
 \end_inset
 
- so clearly we must keep 
+ which has an undesirable coordinate singularity at the EH.
+ To avoid this, we must keep 
 \begin_inset Formula $c\ne0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Setting 
+\begin_inset Formula $d=0$
+\end_inset
+
+ results in the (
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+) Gullstrand–Painlevé frame, given previously: 
+\begin_inset Formula $a=b=1$
+\end_inset
+
+ and 
+\begin_inset Formula $c=\sqrt{2m/r}$
 \end_inset
 
 .
