@@ -914,7 +914,7 @@ v_{t}=\frac{Sv_{r}\pm\sqrt{S^{2}+v_{r}^{2}+1}}{C}
 \end_layout
 
 \begin_layout Subsection*
-Geodesics
+Geodesic Equations
 \end_layout
 
 \begin_layout Standard
@@ -1118,20 +1118,46 @@ which resembles the Schwarzshild expression, except that it comes in with
  Perhaps some simplification is possible by noting that
 \begin_inset Formula 
 \[
-\frac{\dot{r}}{r}=-\frac{2\dot{S}}{S}=\frac{2C\dot{C}}{S^{2}}
+\frac{\dot{r}}{r}=-\frac{2\dot{S}}{S}=\frac{2C\dot{C}}{S^{2}}\qquad\qquad\dot{r}=-4m\frac{\dot{S}}{S^{3}}
 \]
 
 \end_inset
 
-which allows
+
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial r}=
+\ddot{r}=-\frac{4m}{S^{4}}\left[S\ddot{S}-3\dot{S}^{2}\right]
 \]
 
 \end_inset
 
+which allows replacing all 
+\begin_inset Formula $r$
+\end_inset
 
+ and 
+\begin_inset Formula $\dot{r}$
+\end_inset
+
+ by 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $\dot{S}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial r}=\frac{1}{C^{4}}\left(\left(\frac{2\dot{S}}{S}\right)^{2}-\frac{S^{4}}{4m}\frac{E^{2}}{m^{2}}\right)-\frac{2m}{S^{2}}\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\]
+
+\end_inset
+
+I dunno.
+ This isn't any simpler.
+ Oh well.
 \end_layout
 
 \begin_layout Standard
@@ -1141,7 +1167,7 @@ The momentum is
 \begin_layout Standard
 \begin_inset Formula 
 \[
-p_{r}=\frac{\partial L}{\partial\dot{r}}=-\left(S\dot{t}+\dot{r}\right)
+p_{r}=\frac{\partial L}{\partial\dot{r}}=-\left(S\dot{t}+\dot{r}\right)=S\left(\frac{4m\dot{S}}{S^{4}}-\dot{t}\right)
 \]
 
 \end_inset
@@ -1158,8 +1184,9 @@ which is just
  Next 
 \begin_inset Formula 
 \begin{align*}
-\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}= & -S\ddot{t}-\ddot{r}-\dot{t}\frac{dS}{d\tau}\\
-= & -S\ddot{t}-\ddot{r}+\dot{t}\dot{r}\frac{S}{2r}
+\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}= & -S\ddot{t}-\dot{t}\frac{dS}{d\tau}-\ddot{r}\\
+= & -S\ddot{t}+\dot{t}\dot{r}\frac{S}{2r}-\ddot{r}\\
+= & -S\ddot{t}-\dot{t}\dot{S}+\frac{4m}{S^{4}}\left[S\ddot{S}-3\dot{S}^{2}\right]
 \end{align*}
 
 \end_inset
@@ -1167,12 +1194,60 @@ which is just
 and so
 \begin_inset Formula 
 \[
-0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-S\ddot{t}-\ddot{r}+\dot{t}\dot{r}\frac{S}{2r}-\frac{S^{2}}{2rC^{4}}\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)+r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-S\ddot{t}-\ddot{r}-\dot{t}\dot{S}-\frac{S^{2}}{2rC^{4}}\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)+r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
 \]
 
 \end_inset
 
+and the same expression in terms of 
+\begin_inset Formula $\dot{S}$
+\end_inset
 
+ isn't any simpler.
+ We can certainly try to integrate this numerically, but no easy by-hand
+ work seems to pop up.
+ 
+\end_layout
+
+\begin_layout Standard
+Although it's tedious, we should do the same for the angular coords.
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L}{\partial\theta} & =-2r\sin\theta\cos\theta\,\dot{\phi^{2}}\\
+\frac{\partial L}{\partial\dot{\theta}} & =-2r\dot{\theta}
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{\theta}}-\frac{\partial L}{\partial\theta}=-r\ddot{\theta}-\dot{r}\dot{\theta}+r\sin\theta\cos\theta\,\dot{\phi^{2}}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L}{\partial\phi} & =0\\
+\frac{\partial L}{\partial\dot{\phi}} & =-2r\sin^{2}\theta\,\dot{\phi}
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{\phi}}-\frac{\partial L}{\partial\phi}=\ddot{\phi}\,r+\dot{r}\dot{\phi}+2\dot{\phi}\dot{\theta}r\frac{\cos\theta}{\sin\theta}
+\]
+
+\end_inset
+
+Bleh.
+ Coding this up into a solver won't be fun.
+ Are there any open-source packages that do this, already? Surely there
+ must be!
 \end_layout
 
 \begin_layout Section
