@@ -928,12 +928,246 @@ The simplest approach to the geodesics seems to be the Lagrangian approach;
 \end_layout
 
 \begin_layout Standard
-This time, since we've already factored the metric into vilebeins, we'll
- just use the vielbein coframe.
- So
+The Lagrangian is
 \begin_inset Formula 
 \[
-L=\frac{1}{2}\eta^{ab}w_{a}w_{b}
+L=\frac{1}{2}g_{\mu\nu}\dot{x}^{\mu}\dot{x}^{\nu}
+\]
+
+\end_inset
+
+where the shorthand 
+\begin_inset Formula 
+\[
+\dot{x}^{\mu}=\frac{dx^{\mu}}{d\tau}
+\]
+
+\end_inset
+
+is used.
+ It's also handy to recall the Legendre transform.
+ Defining the conjugate momentum as
+\begin_inset Formula 
+\[
+p_{\mu}=\frac{\partial L}{\partial\dot{x}^{\mu}}
+\]
+
+\end_inset
+
+the Hamiltonian is then 
+\begin_inset Formula $H=p_{\mu}\dot{x}^{\mu}-L$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the Gullstrand–Painlevé chart, it is as always a cut-n-paste job
+\begin_inset Formula 
+\[
+L=\frac{1}{2}\left(\left(1-\frac{2m}{r}\right)\dot{t}^{2}-2\sqrt{\frac{2m}{r}}\dot{t}\dot{r}-\dot{r}^{2}-r^{2}\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)\right)
+\]
+
+\end_inset
+
+The Euler-Lagrange equations are
+\begin_inset Formula 
+\[
+\frac{d}{d\tau}\frac{\partial L}{\partial\dot{x}^{\mu}}-\frac{\partial L}{\partial x^{\mu}}=0
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $x^{\mu}=t$
+\end_inset
+
+ one obviously has 
+\begin_inset Formula $\partial L/\partial t=0$
+\end_inset
+
+ and so one has a constant of motion:
+\begin_inset Formula 
+\[
+\mbox{const}=\frac{\partial L}{\partial\dot{t}}
+\]
+
+\end_inset
+
+Call this the 
+\begin_inset Quotes eld
+\end_inset
+
+energy
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Working this out explicitly, 
+\begin_inset Formula 
+\[
+\mbox{const}=\frac{E}{m}=\frac{\partial L}{\partial\dot{t}}=\left(1-\frac{2m}{r}\right)\dot{t}-\sqrt{\frac{2m}{r}}\dot{r}
+\]
+
+\end_inset
+
+This is written so that the constant is dimensionless, and the energy 
+\begin_inset Formula $E$
+\end_inset
+
+ has the same units as the mass.
+ Note that this is a rescaling, by 
+\begin_inset Formula $C=\sqrt{1-2m/r}$
+\end_inset
+
+, of the timelike coframe.
+ That is, 
+\begin_inset Formula $E/m=Cw_{0}$
+\end_inset
+
+ from the earlier notation.
+ We've already noted that its a rescaling of 
+\begin_inset Formula $\dot{t}$
+\end_inset
+
+ by 
+\begin_inset Formula $C$
+\end_inset
+
+ to get the proper time (in the section above, where we set 
+\begin_inset Formula $\dot{r}=0$
+\end_inset
+
+.) So everything looks good, so far.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $x^{\mu}=r$
+\end_inset
+
+, the radial equation is brute-forced:
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial r}=\frac{m}{r^{2}}\dot{t}^{2}+\frac{1}{2}\sqrt{\frac{2m}{r^{3}}}\dot{t}\dot{r}-r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\]
+
+\end_inset
+
+We would like to simplify the above, by plugging in the energy, but that
+ gives us a mess.
+ Perhaps it is easier to work in the vielbein notation:
+\begin_inset Formula 
+\[
+L=\frac{1}{2}\left[w_{0}^{2}-w_{1}^{2}-w_{2}^{2}-w_{3}^{2}\right]
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial r}=w_{0}\frac{\partial w_{0}}{\partial r}-w_{1}\frac{\partial w_{1}}{\partial r}-w_{2}\frac{\partial w_{2}}{\partial r}-w_{3}\frac{\partial w_{3}}{\partial r}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial S}{\partial r} & =-\frac{S}{2r}\\
+\frac{\partial C}{\partial r} & =\frac{m}{Cr^{2}}=\frac{S^{2}}{2rC}
+\end{align*}
+
+\end_inset
+
+and dear reader, I'll show the work although it is tedious reading,
+\begin_inset Formula 
+\[
+0=\frac{\partial}{\partial r}\frac{E}{m}=w_{0}\frac{\partial C}{\partial r}+C\frac{\partial w_{0}}{\partial r}
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial w_{0}}{\partial r} & =-\frac{w_{0}}{C}\frac{S^{2}}{2rC}=-\frac{E}{m}\frac{S^{2}}{2rC^{3}}\\
+w_{0}\frac{\partial w_{0}}{\partial r} & =-\frac{E^{2}}{m^{2}}\frac{S^{2}}{2rC^{4}}\\
+\frac{\partial w_{1}}{\partial r} & =\frac{\partial}{\partial r}\frac{\dot{r}}{C}=-\frac{\dot{r}S^{2}}{2rC^{3}}\\
+w_{1}\frac{\partial w_{1}}{\partial r} & =-\frac{\dot{r}^{2}S^{2}}{2rC^{4}}\\
+w_{2}\frac{\partial w_{2}}{\partial r}+w_{3}\frac{\partial w_{3}}{\partial r} & =r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\end{align*}
+
+\end_inset
+
+and so, in terms of the energy,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial r}=\frac{S^{2}}{2rC^{4}}\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)-r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\]
+
+\end_inset
+
+which resembles the Schwarzshild expression, except that it comes in with
+ the opposite sign for the energy.
+ I hope that is not a mistake.
+ Perhaps some simplification is possible by noting that
+\begin_inset Formula 
+\[
+\frac{\dot{r}}{r}=-\frac{2\dot{S}}{S}=\frac{2C\dot{C}}{S^{2}}
+\]
+
+\end_inset
+
+which allows
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial r}=
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The momentum is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{r}=\frac{\partial L}{\partial\dot{r}}=-\left(S\dot{t}+\dot{r}\right)
+\]
+
+\end_inset
+
+which is just 
+\begin_inset Formula $C$
+\end_inset
+
+ times the frame vector 
+\begin_inset Formula $\vec{e}_{1}$
+\end_inset
+
+(see Appendix).
+ Next 
+\begin_inset Formula 
+\begin{align*}
+\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}= & -S\ddot{t}-\ddot{r}-\dot{t}\frac{dS}{d\tau}\\
+= & -S\ddot{t}-\ddot{r}+\dot{t}\dot{r}\frac{S}{2r}
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-S\ddot{t}-\ddot{r}+\dot{t}\dot{r}\frac{S}{2r}-\frac{S^{2}}{2rC^{4}}\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)+r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
 \]
 
 \end_inset
