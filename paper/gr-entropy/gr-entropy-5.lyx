@@ -1319,7 +1319,11 @@ Resources
 \end_layout
 
 \begin_layout Standard
-Everything on github: 
+Everything on github:
+\end_layout
+
+\begin_layout Itemize
+The github Schwarzschild topic: 
 \begin_inset CommandInset href
 LatexCommand href
 name "Github Schwarzschild topic"
@@ -1329,7 +1333,78 @@ literal "false"
 \end_inset
 
  Amazingly, none of the existing projects look useful.
- It's a balck hole, out there.
+ It's a black hole, out there.
+\end_layout
+
+\begin_layout Itemize
+The github geodesics-equation topic: 
+\begin_inset CommandInset href
+LatexCommand href
+name "Github Geodesics-equation topic"
+target "https://github.com/topics/geodesics-equation"
+literal "false"
+
+\end_inset
+
+.
+ No winners here, either.
+\end_layout
+
+\begin_layout Itemize
+The 
+\begin_inset CommandInset href
+LatexCommand href
+name "Einstein.py"
+target "https://github.com/einsteinpy/einsteinpy-geodesics"
+literal "false"
+
+\end_inset
+
+ geodesic solver.
+ Seems to be nice; uses existing Julia diffeq solvers.
+ The Julia appears to integrate Hamiltonians.
+ I guess that's one easy way to do it...
+ will it work across the event horizon?
+\end_layout
+
+\begin_layout Standard
+Conclusion: Strikeout! No one is even coming close to doing what I want
+ to do.
+ Well, that's interesting.
+ And unexpected.
+\end_layout
+
+\begin_layout Standard
+What people seem to be doing:
+\end_layout
+
+\begin_layout Itemize
+One of the solvers (mentioned above) just brute-forces solutions to Hamiltonian
+ systems.
+ This is nice, but it is not clear that these make use of the angular momentum
+ as a constant of motion.
+ Also, we still need to parameterize the assorted tangent vectors.
+\end_layout
+
+\begin_layout Itemize
+Another solver (running on CUDA) just brute-forces the metric.
+ You give it the metric, you say 
+\begin_inset Quotes eld
+\end_inset
+
+use runge-kutta
+\begin_inset Quotes erd
+\end_inset
+
+, and go.
+ Simple, but does not make use of any constants of motion to help with stability.
+\end_layout
+
+\begin_layout Standard
+Conclusions: I'll have to go it alone.
+ Unclear if I should code in python (so any damn fool can plink on the code)
+ or in C++ (since the solver will be slow, and I'll want to control performance
+ and parallelization.) Sigh.
 \end_layout
 
 \begin_layout Section
