@@ -788,7 +788,7 @@ Fixing a point
 \begin_inset Formula $\vec{v}$
 \end_inset
 
- sugh that 
+ such that 
 \begin_inset Formula $\mathbf{g}\left(\vec{v},\vec{v}\right)=0$
 \end_inset
 
@@ -840,30 +840,23 @@ with
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-w_{0} & =Cv_{t}-\frac{S}{C}v_{r}\\
-w_{1} & =\frac{1}{C}v_{r}\\
+w_{0} & =v_{t}\\
+w_{1} & =v_{r}+v_{t}\sqrt{\frac{2m}{r}}\\
 w_{2} & =rv_{\theta}\\
 w_{3} & =r\sin\theta\,v_{\phi}
 \end{align*}
 
 \end_inset
 
-where 
+Sometimes, we'll use the abbreviation 
 \begin_inset Formula 
 \begin{align*}
-S & \equiv\sqrt{\frac{2m}{r}}\\
-C & \equiv\sqrt{1-\frac{2m}{r}}
+S & \equiv\sqrt{\frac{2m}{r}}
 \end{align*}
 
 \end_inset
 
-are defined for 
-\begin_inset Formula $2m<r$
-\end_inset
-
- and a similar but different set of coords are used inside the EH; the the
- Appendix.
- Then 
+Note that 
 \begin_inset Formula $\mathbf{g}\left(\vec{v},\vec{v}\right)=1$
 \end_inset
 
@@ -902,7 +895,7 @@ Radial tangents will have
  gives 
 \begin_inset Formula 
 \[
-v_{t}=\frac{1}{C^{2}}\left[S\pm1\right]v_{r}
+v_{t}=\pm\left(v_{r}+Sv_{t}\right)
 \]
 
 \end_inset
@@ -920,7 +913,7 @@ for the radial null tangents.
  Plugging through gives 
 \begin_inset Formula 
 \[
-v_{t}=\frac{Sv_{r}\pm\sqrt{S^{2}+v_{r}^{2}+1}}{C}
+v_{t}=\frac{Sv_{r}\pm\sqrt{v_{r}^{2}+1-S^{2}}}{1-S^{2}}
 \]
 
 \end_inset
@@ -936,7 +929,7 @@ v_{t}=\frac{Sv_{r}\pm\sqrt{S^{2}+v_{r}^{2}+1}}{C}
 \end_inset
 
  direction is not the proper time, but must be rescaled by 
-\begin_inset Formula $C$
+\begin_inset Formula $\sqrt{1-2m/r}$
 \end_inset
 
  to get the proper time.
@@ -1046,29 +1039,16 @@ This is written so that the constant is dimensionless, and the energy
 \end_inset
 
  has the same units as the mass.
- Note that this is a rescaling, by 
-\begin_inset Formula $C=\sqrt{1-2m/r}$
+ For null geodesics, one has a conformal time; just use 
+\begin_inset Formula $E$
 \end_inset
 
-, of the timelike coframe.
- That is, 
-\begin_inset Formula $E/m=Cw_{0}$
+ and ignore the 
+\begin_inset Formula $m$
 \end_inset
 
- from the earlier notation.
- We've already noted that its a rescaling of 
-\begin_inset Formula $\dot{t}$
-\end_inset
-
- by 
-\begin_inset Formula $C$
-\end_inset
-
- to get the proper time (in the section above, where we set 
-\begin_inset Formula $\dot{r}=0$
-\end_inset
-
-.) So everything looks good, so far.
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1105,33 +1085,79 @@ so
 and 
 \begin_inset Formula 
 \begin{align*}
-\frac{\partial S}{\partial r} & =-\frac{S}{2r}\\
-\frac{\partial C}{\partial r} & =\frac{m}{Cr^{2}}=\frac{S^{2}}{2rC}
+\frac{\partial S}{\partial r} & =-\frac{S}{2r}
 \end{align*}
 
 \end_inset
 
-and dear reader, I'll show the work although it is tedious reading,
+A useful identity we'll apply shortly is 
 \begin_inset Formula 
 \[
-0=\frac{\partial}{\partial r}\frac{E}{m}=w_{0}\frac{\partial C}{\partial r}+C\frac{\partial w_{0}}{\partial r}
+Sw_{1}=\dot{t}-\frac{E}{m}
 \]
 
 \end_inset
 
-and so
+Since the RHS is independent of 
+\begin_inset Formula $r$
+\end_inset
+
+, we get 
+\begin_inset Formula 
+\[
+0=S\frac{\partial w_{1}}{\partial r}+w_{1}\frac{\partial S}{\partial r}
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\frac{\partial w_{1}}{\partial r}=\frac{w_{1}}{2r}
+\]
+
+\end_inset
+
+Hang on, did I make a mistake? Explicit differention gives
+\begin_inset Formula 
+\[
+\frac{\partial w_{1}}{\partial r}=\dot{t}\frac{\partial S}{\partial r}=-\frac{\dot{t}S}{2r}
+\]
+
+\end_inset
+
+and comparing to the above, we conclude that 
+\begin_inset Formula 
+\[
+0=\dot{r}+2S\dot{t}
+\]
+
+\end_inset
+
+on surfaces of constant energy?! Unexpected by plausible, I guess.
+ I'm still confused.
+ Lets plow onwards.
+ 
+\end_layout
+
+\begin_layout Standard
+Dear reader, I'll show the work although it is tedious reading.
+ Bang away.
 \begin_inset Formula 
 \begin{align*}
-\frac{\partial w_{0}}{\partial r} & =-\frac{w_{0}}{C}\frac{S^{2}}{2rC}=-\frac{E}{m}\frac{S^{2}}{2rC^{3}}\\
-w_{0}\frac{\partial w_{0}}{\partial r} & =-\frac{E^{2}}{m^{2}}\frac{S^{2}}{2rC^{4}}\\
-\frac{\partial w_{1}}{\partial r} & =\frac{\partial}{\partial r}\frac{\dot{r}}{C}=-\frac{\dot{r}S^{2}}{2rC^{3}}\\
-w_{1}\frac{\partial w_{1}}{\partial r} & =-\frac{\dot{r}^{2}S^{2}}{2rC^{4}}\\
+\frac{\partial w_{0}}{\partial r} & =0\\
+w_{1}\frac{\partial w_{1}}{\partial r} & =\frac{S^{2}\dot{t}^{2}}{2r}\\
 w_{2}\frac{\partial w_{2}}{\partial r}+w_{3}\frac{\partial w_{3}}{\partial r} & =r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
 \end{align*}
 
 \end_inset
 
-and so, in terms of the energy,
+Note that
+\end_layout
+
+\begin_layout Standard
+and so, in terms of the energy, xxx everything below is wrong from the old
+ draft.
 \end_layout
 
 \begin_layout Standard
@@ -1148,7 +1174,7 @@ which resembles the Schwarzshild expression, except that it comes in with
  Perhaps some simplification is possible by noting that
 \begin_inset Formula 
 \[
-\frac{\dot{r}}{r}=-\frac{2\dot{S}}{S}=\frac{2C\dot{C}}{S^{2}}\qquad\qquad\dot{r}=-4m\frac{\dot{S}}{S^{3}}
+\frac{\dot{r}}{r}=-\frac{2\dot{S}}{S}\qquad\qquad\dot{r}=-4m\frac{\dot{S}}{S^{3}}
 \]
 
 \end_inset
@@ -1178,16 +1204,6 @@ which allows replacing all
 \end_inset
 
 : 
-\begin_inset Formula 
-\[
-\frac{\partial L}{\partial r}=\frac{1}{C^{4}}\left(\left(\frac{2\dot{S}}{S}\right)^{2}-\frac{S^{4}}{4m}\frac{E^{2}}{m^{2}}\right)-\frac{2m}{S^{2}}\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
-\]
-
-\end_inset
-
-I dunno.
- This isn't any simpler.
- Oh well.
 \end_layout
 
 \begin_layout Standard
