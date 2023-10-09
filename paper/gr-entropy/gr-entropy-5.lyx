@@ -1048,6 +1048,64 @@ This is written so that the constant is dimensionless, and the energy
 \end_inset
 
 .
+ The above can be rwritten in the beguiling form 
+\begin_inset Formula 
+\[
+Sw_{1}=\dot{t}-\frac{E}{m}
+\]
+
+\end_inset
+
+This allows a remarkable (and confusing) calculation (did I make a mistake??)
+ Since the RHS is independent of 
+\begin_inset Formula $r$
+\end_inset
+
+, the partial vanishes:
+\begin_inset Formula 
+\[
+0=S\frac{\partial w_{1}}{\partial r}+w_{1}\frac{\partial S}{\partial r}
+\]
+
+\end_inset
+
+Then, plugging in
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial S}{\partial r} & =-\frac{S}{2r}
+\end{align*}
+
+\end_inset
+
+results in
+\begin_inset Formula 
+\[
+\frac{\partial w_{1}}{\partial r}=\frac{w_{1}}{2r}
+\]
+
+\end_inset
+
+which is wacky and wild, since explicit differention gives
+\begin_inset Formula 
+\[
+\frac{\partial w_{1}}{\partial r}=\dot{t}\frac{\partial S}{\partial r}=-\frac{\dot{t}S}{2r}
+\]
+
+\end_inset
+
+Equating these two gives 
+\begin_inset Formula 
+\[
+0=\dot{r}+2S\dot{t}
+\]
+
+\end_inset
+
+which is surprising.
+ We have to be careful: this would only hold on surfaces of constant energy?!
+ Unexpected but plausible, I guess.
+ I'm confused and suspicious.
+ Something seems wrong, but I can't see the mistake.
  
 \end_layout
 
@@ -1059,105 +1117,22 @@ For
 , the radial equation is brute-forced:
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial r}=\frac{m}{r^{2}}\dot{t}^{2}+\frac{1}{2}\sqrt{\frac{2m}{r^{3}}}\dot{t}\dot{r}-r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\frac{\partial L}{\partial r}=\frac{m}{r^{2}}\dot{t}^{2}+\frac{1}{2r}S\dot{t}\dot{r}-r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
 \]
 
 \end_inset
 
 We would like to simplify the above, by plugging in the energy, but that
  gives us a mess.
- Perhaps it is easier to work in the vielbein notation:
-\begin_inset Formula 
-\[
-L=\frac{1}{2}\left[w_{0}^{2}-w_{1}^{2}-w_{2}^{2}-w_{3}^{2}\right]
-\]
-
-\end_inset
-
-so
-\begin_inset Formula 
-\[
-\frac{\partial L}{\partial r}=w_{0}\frac{\partial w_{0}}{\partial r}-w_{1}\frac{\partial w_{1}}{\partial r}-w_{2}\frac{\partial w_{2}}{\partial r}-w_{3}\frac{\partial w_{3}}{\partial r}
-\]
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial S}{\partial r} & =-\frac{S}{2r}
-\end{align*}
-
-\end_inset
-
-A useful identity we'll apply shortly is 
-\begin_inset Formula 
-\[
-Sw_{1}=\dot{t}-\frac{E}{m}
-\]
-
-\end_inset
-
-Since the RHS is independent of 
-\begin_inset Formula $r$
-\end_inset
-
-, we get 
-\begin_inset Formula 
-\[
-0=S\frac{\partial w_{1}}{\partial r}+w_{1}\frac{\partial S}{\partial r}
-\]
-
-\end_inset
-
-or
-\begin_inset Formula 
-\[
-\frac{\partial w_{1}}{\partial r}=\frac{w_{1}}{2r}
-\]
-
-\end_inset
-
-Hang on, did I make a mistake? Explicit differention gives
-\begin_inset Formula 
-\[
-\frac{\partial w_{1}}{\partial r}=\dot{t}\frac{\partial S}{\partial r}=-\frac{\dot{t}S}{2r}
-\]
-
-\end_inset
-
-and comparing to the above, we conclude that 
-\begin_inset Formula 
-\[
-0=\dot{r}+2S\dot{t}
-\]
-
-\end_inset
-
-on surfaces of constant energy?! Unexpected by plausible, I guess.
- I'm still confused.
- Lets plow onwards.
- 
+ Note that
 \end_layout
 
 \begin_layout Standard
-Dear reader, I'll show the work although it is tedious reading.
- Bang away.
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial w_{0}}{\partial r} & =0\\
-w_{1}\frac{\partial w_{1}}{\partial r} & =\frac{S^{2}\dot{t}^{2}}{2r}\\
-w_{2}\frac{\partial w_{2}}{\partial r}+w_{3}\frac{\partial w_{3}}{\partial r} & =r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
-\end{align*}
-
-\end_inset
-
-Note that
+and so, in terms of the energy, 
 \end_layout
 
 \begin_layout Standard
-and so, in terms of the energy, xxx everything below is wrong from the old
- draft.
+xxx everything below is wrong from the old draft.
 \end_layout
 
 \begin_layout Standard
