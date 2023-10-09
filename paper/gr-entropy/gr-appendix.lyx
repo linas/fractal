@@ -829,14 +829,14 @@ The metric is not geodesically complete; it fails to extend into the past
 \begin_layout Itemize
 As demonstrated below, the frame and coframe fields are singular on the
  event horizon.
- This is a coordinate singularity (I presume) which makes this coordinate
- system somewhat useless for understanding null geodesics that are trapped
- in the EH.
+ This is a coordinate singularity, which makes this coordinate system somewhat
+ useless for understanding null geodesics that are trapped in the EH.
+ The Francis–Kosowsky coordinates (next section) resolve this issue.
 \end_layout
 
 \begin_layout Itemize
-The frame and coframe fields do demonstrate the common dictum that, inside
- the event horizon, 
+The frame and coframe fields do demonstrate the commonly heard dictum that,
+ inside the event horizon, 
 \begin_inset Quotes eld
 \end_inset
 
@@ -985,7 +985,20 @@ There's a problem here: the definition for
 \begin_inset Formula $2m<r$
 \end_inset
 
+.
+ 
+\end_layout
 
+\begin_layout Standard
+The root cause of this problem appears to be the idea that, for fixed 
+\begin_inset Formula $t$
+\end_inset
+
+, the space-like slices are flat.
+ At the EH, it is no longer possible to maintain this conception of flatness;
+ something's got to give.
+ On crossing the EH, the space-like and time-like coordinates suddenly swap
+ positions, leading to a step-function coordinate discontinuity at the EH.
 \end_layout
 
 \begin_layout Subsection*
@@ -1131,7 +1144,7 @@ The notation used below is kept consistent with the other appendixes here,
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\mathbf{g}=\alpha\,dt\otimes dt-\beta\,\left(dt\otimes dr+dr\otimes dt\right)-\frac{1-\beta^{2}}{\alpha}dr\otimes dr-r^{2}d^{2}\Omega
+\mathbf{g}=\alpha\,dt\otimes dt-\beta\,\left(dt\otimes dr+dr\otimes dt\right)-\gamma\,dr\otimes dr-r^{2}d^{2}\Omega
 \]
 
 \end_inset
@@ -1140,6 +1153,14 @@ where
 \begin_inset Formula 
 \[
 \alpha\equiv\alpha\left(r\right)=1-\frac{2m}{r}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\gamma\equiv\gamma\left(r\right)=\frac{1-\beta^{2}}{\alpha}
 \]
 
 \end_inset
@@ -1153,8 +1174,8 @@ and
 \end_inset
 
 is an arbitrary function that can be freely chosen.
- Appearently, it's form is not constrained by the field equations! Under
- a re-parameterization of the time coordinate
+ Appearently, it's form is not constrained by the (Einstein vaccum) field
+ equations! Under a re-parameterization of the time coordinate
 \begin_inset Formula 
 \[
 t\to t+f\left(r\right)
@@ -1184,6 +1205,18 @@ with
 \end_layout
 
 \begin_layout Standard
+It is convenient to sometimes write 
+\begin_inset Formula 
+\[
+\gamma=\frac{1-\beta^{2}}{\alpha}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Clearly, The Schwarzschild metric has 
 \begin_inset Formula $\beta=0$
 \end_inset
@@ -1197,6 +1230,65 @@ Clearly, The Schwarzschild metric has
 
 \begin_layout Subsection*
 Vierbeins
+\end_layout
+
+\begin_layout Standard
+The vierbeins have an additional freedom that was not readily apparent in
+ the earlier metrics.
+ Write
+\begin_inset Formula 
+\begin{align*}
+\sigma^{0} & =adt+ddr\\
+\sigma^{1} & =cdt+bdr
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\sigma^{2},\sigma^{3}$
+\end_inset
+
+ being the sphere parts, as before.
+\end_layout
+
+\begin_layout Standard
+Then
+\begin_inset Formula 
+\[
+\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(a^{2}-c^{2}\right)dt\otimes dt-\left(ad-bc\right)\left(dt\otimes dr+dr\otimes dt\right)-\left(b^{2}-d^{2}\right)dr\otimes dr
+\]
+
+\end_inset
+
+from which we read off that
+\begin_inset Formula 
+\begin{align*}
+\alpha & =a^{2}-c^{2}\\
+\beta & =ad-bc\\
+\gamma & =b^{2}-d^{2}
+\end{align*}
+
+\end_inset
+
+which gives us three equations for four unknowns.
+ Hopefuly, we can use this to resolve the coordinate singularity at the
+ EH!?
+\end_layout
+
+\begin_layout Standard
+Setting 
+\begin_inset Formula $c=0$
+\end_inset
+
+ forces 
+\begin_inset Formula $a=\sqrt{1-2m/r}$
+\end_inset
+
+ so clearly we must keep 
+\begin_inset Formula $c\ne0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section*
