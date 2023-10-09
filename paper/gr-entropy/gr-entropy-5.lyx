@@ -698,6 +698,36 @@ Kruskal–Szekeres coordinates.
  Contains exponentials, sinh and cosh functions.
 \end_layout
 
+\begin_layout Itemize
+Carter–Penrose coordinates.
+ AKA 
+\begin_inset Quotes eld
+\end_inset
+
+conformal coordinates
+\begin_inset Quotes erd
+\end_inset
+
+.
+ These take the arctan of the Kruskal–Szekeres coordinates, so that the
+ Penrose diagram aka conformal diagram can be easily drawn.
+ This might be useful for visualization, but might introduce numerical instabili
+ties? I dunno.
+\end_layout
+
+\begin_layout Itemize
+Generalized approach.
+ After a quick skim, it would seem that Francis and Kosowsky
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Francis2004"
+literal "false"
+
+\end_inset
+
+ provide the best framework for setting up a numerical simulation.
+\end_layout
+
 \begin_layout Standard
 It currently seems like Gullstrand–Painlevé seems easiest, so lets try that.
  See how it goes.
@@ -1211,10 +1241,43 @@ and the same expression in terms of
 
 \begin_layout Standard
 Although it's tedious, we should do the same for the angular coords.
+ Below, we brute-force it; but we should really employ the angular momentum
+ as a constant of motion.
+ So, for example,
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial\phi}=0
+\]
+
+\end_inset
+
+and thus we deduce 
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial\dot{\phi}}=-2r\sin^{2}\theta\,\dot{\phi}=-2J=\mbox{const}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $J$
+\end_inset
+
+ the angular momentum.
+ Differentiating explcitly, we get, up to a constant
+\begin_inset Formula 
+\[
+0=\dot{J}=\sin^{2}\theta\left(\ddot{\phi}\,r+\dot{r}\dot{\phi}+2\dot{\phi}\dot{\theta}r\frac{\cos\theta}{\sin\theta}\right)
+\]
+
+\end_inset
+
+The other coordinate gives
 \begin_inset Formula 
 \begin{align*}
-\frac{\partial L}{\partial\theta} & =-2r\sin\theta\cos\theta\,\dot{\phi^{2}}\\
-\frac{\partial L}{\partial\dot{\theta}} & =-2r\dot{\theta}
+\frac{\partial L}{\partial\theta}= & -2r\sin\theta\cos\theta\,\dot{\phi^{2}}\\
+= & -\frac{2\cos\theta}{r\sin\theta}J^{2}\\
+\frac{\partial L}{\partial\dot{\theta}}= & -2r\dot{\theta}
 \end{align*}
 
 \end_inset
@@ -1222,32 +1285,51 @@ Although it's tedious, we should do the same for the angular coords.
 and so 
 \begin_inset Formula 
 \[
-0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{\theta}}-\frac{\partial L}{\partial\theta}=-r\ddot{\theta}-\dot{r}\dot{\theta}+r\sin\theta\cos\theta\,\dot{\phi^{2}}
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{\theta}}-\frac{\partial L}{\partial\theta}=r^{2}\ddot{\theta}+r\dot{r}\dot{\theta}-\frac{\cos\theta}{\sin\theta}J^{2}
 \]
 
 \end_inset
 
-and 
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial L}{\partial\phi} & =0\\
-\frac{\partial L}{\partial\dot{\phi}} & =-2r\sin^{2}\theta\,\dot{\phi}
-\end{align*}
-
+and Bleh.
+ The correct approach is probably to just transform to cordinates in which
+ 
+\begin_inset Formula $\theta=\pi/2$
 \end_inset
 
-and 
-\begin_inset Formula 
-\[
-0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{\phi}}-\frac{\partial L}{\partial\phi}=\ddot{\phi}\,r+\dot{r}\dot{\phi}+2\dot{\phi}\dot{\theta}r\frac{\cos\theta}{\sin\theta}
-\]
-
+ and 
+\begin_inset Formula $\dot{\theta}=0$
 \end_inset
 
-Bleh.
- Coding this up into a solver won't be fun.
+, solve for constant angular momentum, which becomes 
+\begin_inset Formula $J=r\dot{\phi}$
+\end_inset
+
+ and then rotate back to wherever we needed to be.
+ Yuck.
+\end_layout
+
+\begin_layout Standard
+Coding this up into a solver won't be fun.
  Are there any open-source packages that do this, already? Surely there
  must be!
+\end_layout
+
+\begin_layout Subsection*
+Resources
+\end_layout
+
+\begin_layout Standard
+Everything on github: 
+\begin_inset CommandInset href
+LatexCommand href
+name "Github Schwarzschild topic"
+target "https://github.com/topics/schwarzschild"
+literal "false"
+
+\end_inset
+
+ Amazingly, none of the existing projects look useful.
+ It's a balck hole, out there.
 \end_layout
 
 \begin_layout Section
@@ -1256,6 +1338,18 @@ The End
 
 \begin_layout Standard
 End-of-file marker.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "/home/linas/src/fractal/paper/gr"
+options "tufte"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
