@@ -137,6 +137,10 @@ Appendix D: Lemaître observers
 Appendix E: Gullstrand–Painlevé coordinates
 \end_layout
 
+\begin_layout Itemize
+Appendix F: Francis–Kosowsky coordinates
+\end_layout
+
 \begin_layout Section*
 Appendix A: Vierbeins
 \end_layout
@@ -503,7 +507,26 @@ The Minkowski metric with roman letters:
 
 \end_inset
 
+In tensor form:
+\begin_inset Formula 
+\[
+\mathbf{g}=dt\otimes dt-dr\otimes dr-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\]
 
+\end_inset
+
+where it is convenient to abbreviate the angular line element:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d^{2}\Omega=d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi
+\]
+
+\end_inset
+
+Sometimes we use this abbreviation, and sometimes not.
 \end_layout
 
 \begin_layout Section*
@@ -514,6 +537,15 @@ Appendix C: Schwarzschild Metric
 The Schwarzschild spacetime has several different metrics that can be used.
  The Schwarzschild metric is the simplest, but it is geodesically incomplete,
  and has a coordinate singularity at the event horizon.
+ Assorted factoids:
+\end_layout
+
+\begin_layout Itemize
+The radial coordinate 
+\begin_inset Formula $r$
+\end_inset
+
+ measures the proper distance if a massive particle falling radially.
 \end_layout
 
 \begin_layout Subsection*
@@ -764,12 +796,12 @@ The metric is flat on surfaces of
 \begin_inset Formula $t=\mbox{const.}$
 \end_inset
 
-
+ That is, it measures the proper distance on such surfaces.
 \end_layout
 
 \begin_layout Itemize
 The Schwarzschild horizon is located at 
-\begin_inset Formula $r=2M$
+\begin_inset Formula $r=2m$
 \end_inset
 
 .
@@ -777,11 +809,14 @@ The Schwarzschild horizon is located at
 
 \begin_layout Itemize
 The determinant of the metric is 
-\begin_inset Formula $-r^{4}\sin^{2}\theta$
+\begin_inset Formula $\det g=-r^{4}\sin^{2}\theta$
+\end_inset
+
+ and so 
+\begin_inset Formula $\det\sqrt{-g}=r^{2}\sin\theta$
 \end_inset
 
 .
- (Eh?)
 \end_layout
 
 \begin_layout Itemize
@@ -1053,6 +1088,119 @@ The corresponding frame field is then
 
 and so again, the frame field looks swapped with a twist, as compared to
  the exterior frame field.
+\end_layout
+
+\begin_layout Section*
+Appendix F: Francis–Kosowsky coordinates
+\end_layout
+
+\begin_layout Standard
+This section recaps the generalized coordinate chart for the Schwarszchild
+ vacuum solution proposed by Francis and Kosowsky.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Francis2004"
+literal "false"
+
+\end_inset
+
+ Some factoids:
+\end_layout
+
+\begin_layout Itemize
+All the other Schwarzschild charts are a special case of this one.
+\end_layout
+
+\begin_layout Itemize
+The radial coordinate 
+\begin_inset Formula $r$
+\end_inset
+
+ measures the proper distance for a radially infalling massive particle.
+\end_layout
+
+\begin_layout Subsection*
+Metric
+\end_layout
+
+\begin_layout Standard
+The notation used below is kept consistent with the other appendixes here,
+ and differs from that used in the Francis–Kosowsky paper.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{g}=\alpha\,dt\otimes dt-\beta\,\left(dt\otimes dr+dr\otimes dt\right)-\frac{1-\beta^{2}}{\alpha}dr\otimes dr-r^{2}d^{2}\Omega
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\alpha\equiv\alpha\left(r\right)=1-\frac{2m}{r}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\beta\equiv\beta\left(r\right)
+\]
+
+\end_inset
+
+is an arbitrary function that can be freely chosen.
+ Appearently, it's form is not constrained by the field equations! Under
+ a re-parameterization of the time coordinate
+\begin_inset Formula 
+\[
+t\to t+f\left(r\right)
+\]
+
+\end_inset
+
+one has that 
+\begin_inset Formula 
+\[
+\beta\to\beta-\alpha f^{\prime}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $f^{\prime}=df/dr$
+\end_inset
+
+ the derivative.
+ (I think this is correct, should be checked.
+ It's true if we start with 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Standard
+Clearly, The Schwarzschild metric has 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+ and the Gullstrand–Painlevé metric results from 
+\begin_inset Formula $\beta=\sqrt{2m/r}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Vierbeins
+\end_layout
+
+\begin_layout Section*
+The End
 \end_layout
 
 \begin_layout Standard
