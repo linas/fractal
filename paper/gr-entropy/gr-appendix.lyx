@@ -826,27 +826,6 @@ The metric is not geodesically complete; it fails to extend into the past
  extend across the past horizon.
 \end_layout
 
-\begin_layout Itemize
-As demonstrated below, the frame and coframe fields are singular on the
- event horizon.
- This is a coordinate singularity, which makes this coordinate system somewhat
- useless for understanding null geodesics that are trapped in the EH.
- The Francis–Kosowsky coordinates (next section) resolve this issue.
-\end_layout
-
-\begin_layout Itemize
-The frame and coframe fields do demonstrate the commonly heard dictum that,
- inside the event horizon, 
-\begin_inset Quotes eld
-\end_inset
-
-time becomes space-like and space becomes timelike
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Subsection*
 Gullstrand–Painlevé metric
 \end_layout
@@ -887,7 +866,7 @@ where
 \end_layout
 
 \begin_layout Subsection*
-Exterior Frame and Coframe
+Frame and Coframe
 \end_layout
 
 \begin_layout Standard
@@ -899,17 +878,70 @@ Comparing the above to
 
 \end_inset
 
-we can verify that the coframe is
+we can verify that (one possible) coframe is
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\sigma^{0} & =\sqrt{1-\frac{2m}{r}}dt-\frac{1}{\sqrt{1-\frac{2m}{r}}}\sqrt{\frac{2m}{r}}dr\\
-\sigma^{1} & =\frac{1}{\sqrt{1-\frac{2m}{r}}}dr\\
+\sigma^{0} & =dt\\
+\sigma^{1} & =\sqrt{\frac{2m}{r}}dt+dr\\
 \sigma^{2} & =rd\theta\\
 \sigma^{3} & =r\sin\theta\,d\phi
 \end{align*}
 
 \end_inset
 
+Note that the above coframe field behaves nicely, even on the EH.
+ There are no coordinate singularities.
+ The corresponding frame field is
+\begin_inset Formula 
+\begin{align*}
+\vec{e}_{0} & =\partial_{t}-\sqrt{\frac{2m}{r}}\partial_{r}\\
+\vec{e}_{1} & =\partial_{r}\\
+\vec{e}_{2} & =\frac{1}{r}\partial_{\theta}\\
+\vec{e}_{3} & =\frac{1}{r\sin\theta}\partial_{\phi}
+\end{align*}
+
+\end_inset
+
+There are also other possible frame and coframe choices, consistent with
+ the metric.
+ A bad choice is given next (for demo purposes only).
+\end_layout
+
+\begin_layout Subsection*
+Crappy Exterior Frame and Coframe
+\end_layout
+
+\begin_layout Standard
+This subsection proposes a frame choice that turns out to be a bad choice,
+ having a coordinate singularity in it.
+ It's here as a historical reference, as I tripped over it first.
+\end_layout
+
+\begin_layout Standard
+Starting with the coframe:
+\begin_inset Formula 
+\begin{align*}
+\sigma^{0} & =\sqrt{1-\frac{2m}{r}}dt-\frac{1}{\sqrt{1-\frac{2m}{r}}}\sqrt{\frac{2m}{r}}dr\\
+\sigma^{1} & =\frac{1}{\sqrt{1-\frac{2m}{r}}}dr
+\end{align*}
+
+\end_inset
+
+and plugging through, one gets 
+\begin_inset Formula 
+\[
+\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(1-\frac{2m}{r}\right)dt\otimes dt-\sqrt{\frac{2m}{r}}\left(dt\otimes dr+dr\otimes dt\right)-dr\otimes dr
+\]
+
+\end_inset
+
+which is the desired form.
+\end_layout
+
+\begin_layout Standard
 Unfortunately, this coframe is valid only for 
 \begin_inset Formula $2m<r$
 \end_inset
@@ -989,29 +1021,20 @@ There's a problem here: the definition for
  
 \end_layout
 
-\begin_layout Standard
-The root cause of this problem appears to be the idea that, for fixed 
-\begin_inset Formula $t$
-\end_inset
-
-, the space-like slices are flat.
- At the EH, it is no longer possible to maintain this conception of flatness;
- something's got to give.
- On crossing the EH, the space-like and time-like coordinates suddenly swap
- positions, leading to a step-function coordinate discontinuity at the EH.
+\begin_layout Subsection*
+Crappy Interior Frame and Coframe
 \end_layout
 
-\begin_layout Subsection*
-Interior Frame and Coframe
+\begin_layout Standard
+Following through with the above crappy frame choice, we try to fix it by
+ making a crappy choice for the interior, as well.
+ Again, this is left here only as a historical record of a failed attempt.
 \end_layout
 
 \begin_layout Standard
 The coframe field, written in terms of the Painleve coordinates, is is singular
  on the EH.
- I beleive this is a coordinate singularity.
- It does indicate that maybe the Painleve coords are not quite what we want
- to work with.
- At any rate, looking at the original metric, we see that the 
+ Looking at the original metric, we see that the 
 \begin_inset Formula $dt\otimes dt$
 \end_inset
 
@@ -1075,7 +1098,7 @@ twist
 \end_inset
 
  so that the Minkowski metric on the coframe stands as before.
- Anyway, this switcheroo is the origin of the common expression that 
+ Anyway, this switcheroo reinforces the common expression that 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1340,7 +1363,7 @@ and
 Then
 \begin_inset Formula 
 \[
-\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(a^{2}-c^{2}\right)dt\otimes dt-\left(ad-bc\right)\left(dt\otimes dr+dr\otimes dt\right)-\left(b^{2}-d^{2}\right)dr\otimes dr
+\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(a^{2}-c^{2}\right)dt\otimes dt+\left(ad-bc\right)\left(dt\otimes dr+dr\otimes dt\right)-\left(b^{2}-d^{2}\right)dr\otimes dr
 \]
 
 \end_inset
@@ -1349,7 +1372,7 @@ from which we read off that
 \begin_inset Formula 
 \begin{align*}
 \alpha & =a^{2}-c^{2}\\
-\beta & =ad-bc\\
+\beta & =bc-ad\\
 \gamma & =b^{2}-d^{2}
 \end{align*}
 
