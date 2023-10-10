@@ -133,7 +133,15 @@ fixed stars
 
  look like to a freely-falling, infalling observer.
  The current project is to update this, and consider the case of flashlights
- that are also freely falling.
+ that are also freely falling, 
+\begin_inset Quotes eld
+\end_inset
+
+near to
+\begin_inset Quotes erd
+\end_inset
+
+ the observer.
  What does the observer see, as he and the flashlights cross the event horizon?
  
 \end_layout
@@ -166,8 +174,7 @@ The proper time, as perceived by the flashlight.
 
 \begin_layout Itemize
 The coordinates of the flashlight, at the time that it emitted the signal.
- These coordinates are expressed in whatever convenient coordinate system
- we'll use.
+ These coordinates are expressed in whatever coordinate system is convenient.
  Currently, Gullstrand–Painlevé coordinates seem like a good choice; see
  below.
 \end_layout
@@ -178,9 +185,9 @@ The 4-velocity of the flashlight, at the time of the signal emission.
 
 \begin_layout Itemize
 The direction the flashlight was facing, plus it's roll: all three Euler
- angles (or whatever coord system is being employed.) The flashlight should
- transmit vertically-polarized light; this provides the roll reference frame
- directly, to the receiver.
+ angles (pitch-yaw-roll, or whatever coord system is being employed.) The
+ flashlight should transmit vertically-polarized light; this provides the
+ roll reference frame directly, to the receiver.
 \end_layout
 
 \begin_layout Itemize
@@ -189,7 +196,7 @@ A UUID number, uniquely identifying that flashlight, so we do not confuse
 \end_layout
 
 \begin_layout Itemize
-The initial location and velocity of the flashlight.
+Optionally, the initial location and velocity of the flashlight.
  That is, the flashlight is assumed to start falling freely only after it
  has been boosted into some particular trajectory.
  The starting point can be anywhere outside the event horizon.
@@ -230,8 +237,8 @@ Both the flashlight and the observer fall with time-like geodesics.
 \end_layout
 
 \begin_layout Standard
-It is more convenient to imagine a single observer embeded in a cloud of
- freely-falling 
+This scenario can be generalized to one of an boserver falling together
+ with a cloud of freely-falling 
 \begin_inset Quotes eld
 \end_inset
 
@@ -247,8 +254,8 @@ smart dust
 \begin_layout Standard
 The introduction of a dust adds several more observables to the problem:
  for a given distribution of the dust, what is the distribution that the
- observer sees? This question about distribution can be asked of brightness,
- polarization and redshift.
+ observer sees? This question about the distribution density can also be
+ asked of brightness, polarization and redshift.
  In particular, it's been noted that the event horizon weakly traps null
  geodesics, emited in the distant past, but neither infalling nor outgoing.
  This suggests that a bright caustic forms at the event horizon.
@@ -261,7 +268,7 @@ Plan
 
 \begin_layout Standard
 So far, this is all very easy to say, in words.
- There are four or five hard parts, here.
+ There are several hard parts, here.
  These are:
 \end_layout
 
@@ -273,7 +280,7 @@ Restate the above in terms of generic statements about maps of tangent spaces
 \begin_layout Itemize
 Write down the needed encodings in appropriate coords.
  Several choices of coords are possible: Lemaître coordinates, Eddington–Finkels
-tein coordinates 
+tein coordinates, etc.
 \end_layout
 
 \begin_layout Itemize
@@ -286,7 +293,20 @@ Solve the null geodesics.
 \end_layout
 
 \begin_layout Itemize
-Convert all of this info into a movie.
+Convert all of this info into a ray-traced movie that can be watched.
+\end_layout
+
+\begin_layout Standard
+Then, there is a meta-question: is the above effort worth it? Given the
+ difficulty of doing it, what do we learn that we might not already guess
+ from general, well-known properties of the Schwarzschild spacetime?
+\end_layout
+
+\begin_layout Standard
+This meta-question is posed because this text is more of a diary than a
+ publication, and I'm wondering if I'm wasting my time, and should work
+ on something else...
+ and yet...
 \end_layout
 
 \begin_layout Section
@@ -331,15 +351,18 @@ see what he's doing
  other side of the EH.
  There aren't any null outgoing geodesics.
  Once his head crosses the EH, can he see his hands again? Is there a breif
- flash, and then he can see normally again? I think not; I think they remain
- dark.
- They have fallen into the future, and stay there.
+ blink, after which he can see normally again? I think not; I think they
+ remain dark.
+ From what I can tell, null geodesics cannot come back up towards the EH;
+ they have fallen into the future, and stay there.
+ 
 \end_layout
 
 \begin_layout Standard
 This second picture is deeply disturbing for survivability.
- Lets replace the astronaut by a robot, so we can talk aout a mechanical,
- say, steel arm, that gets it's rigidity from atomic forces.
+ Lets replace the astronaut by a robot, so we can talk about mechanical
+ properties.
+ Consider a steel arm, that gets it's rigidity from atomic forces.
  Rigid motion propagates at the speed of sound, which is determined by the
  Young's modulus for steel, and we can hand wave 
 \begin_inset Quotes eld
@@ -359,12 +382,40 @@ Consider a pair of robot arms, forming a clamp, pushing against one-another.
  It would appear that the robot's arms, having crossed the EH, must suffer
  mechanical failure, as no stress signal can propagate back up the bar of
  steel.
- It surely gets shredded.
- In terms of reference frames, I think it's correct to say that the arm
- has rotated into the future, and causality is such that the future cannot
- affect the past: the arm has dettached.
- This reasoning goes down to the atomic scales: it seems the shredding happens
- at the atomic scale.
+ The EH would appear to erase all shear forces; it seems to be a perfectly
+ frictionless surface slicing everything that goes through it.
+ The steel gets foliated, the foliations do not have any shear forces between
+ them, and must necessarily displace to alleviate shear stress.
+ So, somewhat like a fluid, except its a foliation.
+ Tensile stresses also cannot propagate across the EH.
+ Between these two effects, any 
+\begin_inset Quotes eld
+\end_inset
+
+real material
+\begin_inset Quotes erd
+\end_inset
+
+ would get shredded (ignoring QM effects.) 
+\end_layout
+
+\begin_layout Standard
+In terms of reference frames, I think it's correct to say that the arm has
+ rotated into the future, and causality is such that the future cannot affect
+ the past.
+ That is, each foliation cannot see the foliation in front of it, because
+ there are no null geodesics that can travel from it, to the folations further
+ back.
+ This is the same as what happens in flat space: objects in the future cannot
+ send signals to the past; there are no forward-travelling null geodesics
+ from the future to the past.
+ As this is what is happening inside the EH, we conclude that the forward
+ slices are in the future from the ones behind them.
+\end_layout
+
+\begin_layout Standard
+This reasoning goes down to the atomic scales: it seems the foliation–shredding
+ happens at the atomic scale.
  This is, I presume, the origin of the firewall idea.
  But it seems entirely at odds with the idea that the lab frame falls unharmed
  through the EH.
@@ -374,11 +425,15 @@ Consider a pair of robot arms, forming a clamp, pushing against one-another.
  falls through the event horizon.
 \end_layout
 
+\begin_layout Subsection
+Fields
+\end_layout
+
 \begin_layout Standard
 Before moving forwards, I wish to pause and pose a few more questions and
  speculations.
  The above has been posed purely in terms of particle dynamics.
- Is there a corresponding wave picture? There is a handful of differential
+ Is there a corresponding wave picture? There are a handful of differential
  equations that are relativisitcally invariant: the Laplace eqn (for light),
  the Klien-Gordon eqn, the Dirac eqn, the Majorona and Weyl equations.
  Solutions to these equations are 
@@ -390,7 +445,7 @@ classical
 \end_inset
 
 ; no quantum mechanics is involved in writing down their solutions.
- What do these look like in the visinity of the event horizon? It would
+ What do these look like in the vicinity of the event horizon? It would
  seem that there's a tension between the 
 \begin_inset Quotes eld
 \end_inset
@@ -412,15 +467,123 @@ space-like surfaces have rotated to become timelike, and thus shred everything
 \end_layout
 
 \begin_layout Standard
-A second point is about the nature of quantum mechanics near the event horizon.
- I'm not sure how to graps this, but a good question might be: what happens
- when a two-slit interferometer falls through the event horizon? Or, more
- generally, any kind of modern interferometer? It's a starting point, perhaps.
+Of course, there is a pat answer for this: pretend the spacetime is a fixed
+ manifold; write down the equations on such a curved manifold, and just
+ solve them, over the entire spacetime.
+ In this view the solutions are static: they don't change with time; they
+ are everywhere on the manifold; they are just fields, stuck like paint,
+ to the manifold.
+ There is no 
+\begin_inset Quotes eld
+\end_inset
+
+time
+\begin_inset Quotes erd
+\end_inset
+
+, there's no causality; there's just some coordinate charts, and some time-like
+ geodesics going every-which way.
+ There's no paradox, here, no confusion, in this view.
+ The solutions are eternal, everything is pre-destined, there is no free
+ will.
+ There's just an arrangement of fields.
+\end_layout
+
+\begin_layout Subsection
+QM
 \end_layout
 
 \begin_layout Standard
-A third point involves speculation about the caustic of null geodesics at
- the event horizon.
+The issue raised above is that we need to somehow convert the concept of
+ these solutions of well-know relativistically-covariant equations into
+ statements about atomic forces, of actual molecules with covalent bonds,
+ able to propagate shear stress, compression and tension along those molecular
+ bonds.
+ What does molecular chemistry look like, at the EH? How was the EH able
+ to provide a frictionless surface that erases shear stress and tension?
+ (Does it still propagate compression? Into the future, from the past?)
+\end_layout
+
+\begin_layout Standard
+How should one think of the hydrogen atom falling through the EH? Naively,
+ one can pick the rest frame of the free-falling nucleus, and work with
+ the Schroedinger equation in that frame.
+ The nucleus follows a time-like geodesic; this geodesic can be labelled
+ with a proper time, and it defines sequence of unique space-like tangent
+ planes (which are flat, by definition).
+ For a galactic-sized BH, we can approximate space-like foliations by these
+ tangent planes.
+ The Schroedinger equation has two forms: one time-dependent and one static,
+ time-independent.
+ One converts from the first to the second by promtly discarding an 
+\begin_inset Formula $\exp-i\omega t$
+\end_inset
+
+ term, and then demonstrates solutions for the static eqn.
+ In the free-falling frame, it would seem nothing happens to the hydrogen
+ atom; it continues as normal.
+\end_layout
+
+\begin_layout Standard
+What about a benzene ring? It has shear forces locked up in the bonds.
+ In the free-falling frame, what happens? Nothing at all, because we are
+ working with static solutions in a nice flat foliation? In what way are
+ photons involved in the storage of of those shear forces?
+\end_layout
+
+\begin_layout Standard
+What are the vibrational modes of a water molecule as it crosses the EH?
+ As it vibrates, it can emit a microwave photon.
+ When is this photon emitted? Where does it go?
+\end_layout
+
+\begin_layout Standard
+These thought experiments suggest that the solutions to the Laplace equation
+ (which describe 
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+ photon fields) might resemble those of quantum tunneling: that there is
+ some tail, that pokes out of the EH.
+ Perhaps that tunneling tail can couple to things outside the EH; is this
+ how the microsocpic form of Hawking radiation arises? Surely I am not the
+ first to ask such questions; it will take some work to find the answers,
+ though.
+\end_layout
+
+\begin_layout Subsection
+Two-slit experiment
+\end_layout
+
+\begin_layout Standard
+What happens if we drop a macorsopic-sized double-slit interfermoeter through
+ the EH? Hmm.
+ This might not be that hard ...
+ If we drop source-first, the slits will red-shift away at the horizon,
+ and the diffraction pattern will become redder.
+ But what about the waves coming up from those slits, just before it crossed
+ the EH? As they redshift, the wavelengths get longer, and so the interference
+ pattern spreads out.
+ The wave might have been quite blue as it passed the slits, but it must
+ red-shift as it travels up.
+\end_layout
+
+\begin_layout Standard
+So, this is again a question of what solutins to the Laplace eqns look like,
+ just uphill of the EH.
+ Again, I assume someone has asked and answered this question before?
+\end_layout
+
+\begin_layout Subsection
+Caustics
+\end_layout
+
+\begin_layout Standard
+Some speculation about the caustic of null geodesics at the event horizon.
  Can this mechanism be used to provide quantum entanglement? That is, to
  resolve the big-boy-physics problem of the firewall, do these null geodesics
  provide the needed basis for entanglement, so that the radiated quantum
@@ -428,8 +591,12 @@ A third point involves speculation about the caustic of null geodesics at
  question, yet.
 \end_layout
 
+\begin_layout Subsection
+Mechanical engineering
+\end_layout
+
 \begin_layout Standard
-One can also used this 
+The 
 \begin_inset Quotes eld
 \end_inset
 
@@ -437,18 +604,20 @@ robot dust
 \begin_inset Quotes erd
 \end_inset
 
- model to explore mechanical engineering at the event horizon.
+ model can be used to explore certain questions of mechanical engineering
+ at the event horizon.
  Suppose each dust particle can communicate with it's neighbors (using light
  signals) and has a small thruster that can accelerate in arbitrary directions.
  How is this communicatins network disrupted, as it falls through the event
  horizon? What sort of maneuvability problems are encountered? Specifically,
  this robot dust could be programmed to mimic a bar of steel, or a structure
  under tension or compression.
- This mimicry helps avoid the difficult questions surrounding the behavior
- of actual mechanical materials.
+ This mimicry helps disconnect questions about the bulk modulus of solids
+ (where stresses propagate at the speed of sound) from the detailed quantum
+ mechanics of molecular forces in molecular bonds.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Problem Setup
 \end_layout
 
