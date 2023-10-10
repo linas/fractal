@@ -1106,7 +1106,16 @@ which is surprising.
  Unexpected but plausible, I guess.
  I'm confused and suspicious.
  Something seems wrong, but I can't see the mistake.
- 
+ Plugging this around gives 
+\begin_inset Formula $w_{1}=-S\dot{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\dot{w_{1}}=-S\ddot{t}-\dot{t}\dot{S}=-S\ddot{t}+S\dot{t}\dot{r}/2r$
+\end_inset
+
+ and so Hmmm.
+ I'm floundering, I'm missing something, here.
 \end_layout
 
 \begin_layout Standard
@@ -1122,63 +1131,15 @@ For
 
 \end_inset
 
-We would like to simplify the above, by plugging in the energy, but that
- gives us a mess.
- Note that
-\end_layout
-
-\begin_layout Standard
-and so, in terms of the energy, 
-\end_layout
-
-\begin_layout Standard
-xxx everything below is wrong from the old draft.
-\end_layout
-
-\begin_layout Standard
+Plugging in the energy simplifies this slightly, to
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial r}=\frac{S^{2}}{2rC^{4}}\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)-r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\frac{\partial L}{\partial r}=\frac{\dot{t}}{2r}\left(1-\frac{E}{m}\right)-r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
 \]
 
 \end_inset
 
-which resembles the Schwarzshild expression, except that it comes in with
- the opposite sign for the energy.
- I hope that is not a mistake.
- Perhaps some simplification is possible by noting that
-\begin_inset Formula 
-\[
-\frac{\dot{r}}{r}=-\frac{2\dot{S}}{S}\qquad\qquad\dot{r}=-4m\frac{\dot{S}}{S^{3}}
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\ddot{r}=-\frac{4m}{S^{4}}\left[S\ddot{S}-3\dot{S}^{2}\right]
-\]
-
-\end_inset
-
-which allows replacing all 
-\begin_inset Formula $r$
-\end_inset
-
- and 
-\begin_inset Formula $\dot{r}$
-\end_inset
-
- by 
-\begin_inset Formula $S$
-\end_inset
-
- and 
-\begin_inset Formula $\dot{S}$
-\end_inset
-
-: 
+And I guess other forms are possible ...
 \end_layout
 
 \begin_layout Standard
@@ -1188,44 +1149,53 @@ The momentum is
 \begin_layout Standard
 \begin_inset Formula 
 \[
-p_{r}=\frac{\partial L}{\partial\dot{r}}=-\left(S\dot{t}+\dot{r}\right)=S\left(\frac{4m\dot{S}}{S^{4}}-\dot{t}\right)
+p_{r}=\frac{\partial L}{\partial\dot{r}}=-\left(\dot{r}+S\dot{t}\right)=-w_{1}
 \]
 
 \end_inset
 
-which is just 
-\begin_inset Formula $C$
-\end_inset
-
- times the frame vector 
-\begin_inset Formula $\vec{e}_{1}$
-\end_inset
-
-(see Appendix).
- Next 
+Brute force gives
 \begin_inset Formula 
 \begin{align*}
 \frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}= & -S\ddot{t}-\dot{t}\frac{dS}{d\tau}-\ddot{r}\\
-= & -S\ddot{t}+\dot{t}\dot{r}\frac{S}{2r}-\ddot{r}\\
-= & -S\ddot{t}-\dot{t}\dot{S}+\frac{4m}{S^{4}}\left[S\ddot{S}-3\dot{S}^{2}\right]
+= & -S\ddot{t}+\dot{t}\dot{r}\frac{S}{2r}-\ddot{r}
 \end{align*}
 
 \end_inset
 
-and so
+but we can also differentiate the energy condition to get 
+\begin_inset Formula $\ddot{t}=\dot{S}w_{1}+S\dot{w_{1}}$
+\end_inset
+
+ and use 
+\begin_inset Formula $\dot{S}=-S\dot{r}/2r$
+\end_inset
+
+ to get
 \begin_inset Formula 
 \[
-0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-S\ddot{t}-\ddot{r}-\dot{t}\dot{S}-\frac{S^{2}}{2rC^{4}}\left(\dot{r}^{2}-\frac{E^{2}}{m^{2}}\right)+r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\dot{w_{1}}=\frac{\ddot{t}}{S}+\frac{\dot{r}}{2r}w_{1}
 \]
 
 \end_inset
 
-and the same expression in terms of 
-\begin_inset Formula $\dot{S}$
+which is clearly simpler.
+ 
+\end_layout
+
+\begin_layout Standard
+Combining these simpler forms gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+0=\frac{d}{d\tau}\frac{\partial L}{\partial\dot{r}}-\frac{\partial L}{\partial r}=-\frac{\ddot{t}}{S}-\frac{\dot{r}}{2r}w_{1}-\frac{\dot{t}}{2r}\left(1-\frac{E}{m}\right)+r\left(\dot{\theta}^{2}+\sin^{2}\theta\dot{\phi}^{2}\right)
+\]
+
 \end_inset
 
- isn't any simpler.
- We can certainly try to integrate this numerically, but no easy by-hand
+We can certainly try to integrate this numerically, but no easy by-hand
  work seems to pop up.
  
 \end_layout
