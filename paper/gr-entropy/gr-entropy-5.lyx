@@ -644,21 +644,37 @@ It would seem that the Schwazschild horizon disrupts such null geodesics;
  caustic, i.e.
  the result of multiple horizons accumulating in one place? Perhaps such
  a caustic might occur if the observer is looking sideways as he falls;
- are there a bunch of horizons that condense at the sides?
+ are there a bunch of horizons that condense at the sides? For example,
+ looking sideways, there will be photon orbits, as null geodesics wind around.
+ Do they pile up into a caustic?
 \end_layout
 
 \begin_layout Itemize
-If we can answer the first question in the affirmative, then we have two
- points on the manifold: one for the observer, one for the flashlight, connected
- by a null geodesic.
+If there is a (retarded) null geodesic between the flahlight geo and the
+ observer, then this gives us two points on the manifold: one for the observer,
+ one for the flashlight, connected by the null geodesic.
  This implies that any other flashlight geodesic that passes through the
  second point is also perceivable by the observer.
  That is, we have full access to the time-like tangent plane located at
  the second point.
+ The 
+\emph on
+entire
+\emph default
+ tangent plane can be mapped to the observer.
 \end_layout
 
 \begin_layout Itemize
-How does the null relation evolve over time? The is, as the observer steps
+Let us say that these two points are 
+\begin_inset Quotes eld
+\end_inset
+
+null related
+\begin_inset Quotes erd
+\end_inset
+
+.
+ How does the null relation evolve over time? The is, as the observer steps
  forward in proper time by 
 \begin_inset Formula $\Delta\tau$
 \end_inset
@@ -675,8 +691,17 @@ How does the null relation evolve over time? The is, as the observer steps
 The above question should be phrased for the entire time-like tangent plane:
  There's a flashlight for each tangent vector, travelling in a different
  direction, with a different velocity.
- Each of these forms a geodesic; are each of these visible to the observer?
- If not, then we have a 
+ Each of these forms a geodesic; although they are all visibile at time
+ 
+\begin_inset Formula $\tau=0$
+\end_inset
+
+ (by definition), what fraction will still be visible at time 
+\begin_inset Formula $\Delta\tau$
+\end_inset
+
+? Some of the flashlights might have dived into the EH, by then.
+ Those tangent directions that disappear form a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -684,8 +709,11 @@ dynamic horizon
 \begin_inset Quotes erd
 \end_inset
 
- that has cut off visibility.
- For the remaining, still-visible tangnet geodesics, we want to obtain the
+ that partitions the tangent plane.
+\end_layout
+
+\begin_layout Itemize
+For the remaining, still-visible tangnet geodesics, we want to obtain the
  corresponding 
 \begin_inset Formula $\Delta t$
 \end_inset
@@ -794,8 +822,8 @@ Coordinate Charts
 
 \begin_layout Standard
 The background space-time manifold is that of the Schwarzschild solution.
- We need to select coordinates that are geodesically complete past the future
- Schwarzschild event horizon, and are easy to work with.
+ We need to select coordinates that are geodesically complete beyond the
+ future Schwarzschild event horizon, and are easy to work with.
 \end_layout
 
 \begin_layout Standard
@@ -852,9 +880,9 @@ time
 .
  Another advantage: constant-time hypersurfaces are flat.
  The global time coordinate is the proper time of a radially free-falling
- observer, starting w/ zero velocity at infinity.
- This seems like a good choice of coordinates, at this stage, in part because
- these preserve some of the intuition we have about space.
+ observer.
+ This seems like a good choice of coordinates, in part because these preserve
+ some of the intuition we have about space.
  More abstractly, the space-like part of the tangent planes have a simple
  form.
  
@@ -865,6 +893,7 @@ Kruskal–Szekeres coordinates.
  Metric depends on both space and time, but is complete over the extended
  Schwarschild spacetime.
  Contains exponentials, sinh and cosh functions.
+ Seems to be more complicated, both algebraically and numerically.
 \end_layout
 
 \begin_layout Itemize
@@ -886,7 +915,7 @@ ties? I dunno.
 
 \begin_layout Itemize
 Generalized approach.
- After a quick skim, it would seem that Francis and Kosowsky
+ The Francis and Kosowsky
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Francis2004"
@@ -894,7 +923,11 @@ literal "false"
 
 \end_inset
 
- provide the best framework for setting up a numerical simulation.
+ coordinate system provides a nice theoretical overview for a family of
+ coordinate systems.
+ It does help in clarifying and understanding how the other coord systems
+ are related.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1047,6 +1080,10 @@ Radial tangents will have
 \begin_inset Formula $v_{\theta}=v_{\phi}=0$
 \end_inset
 
+ (and so 
+\begin_inset Formula $w_{2}=w_{3}=0)$
+\end_inset
+
  and the null tangents solve 
 \begin_inset Formula $0=w_{0}^{2}-w_{1}^{2}$
 \end_inset
@@ -1088,21 +1125,57 @@ v_{t}=\frac{Sv_{r}\pm\sqrt{v_{r}^{2}+1-S^{2}}}{1-S^{2}}
 \end_inset
 
 (if I did things correctly.) Quite unenlightening.
- Clearly, the plus-sign is forward time.
- Setting 
+ 
+\end_layout
+
+\begin_layout Standard
+The correct solution is to start the massive particle at rest, and infinity.
+ That is, at 
+\begin_inset Formula $r\to\infty$
+\end_inset
+
+, one sets 
 \begin_inset Formula $v_{r}=0$
 \end_inset
 
- seems to tell us that the 
+ and 
+\begin_inset Formula $v_{t}=1$
+\end_inset
+
+.
+ The correspons to 
+\begin_inset Formula $w_{1}=0$
+\end_inset
+
+.
+ Radial infall is then done by holding 
+\begin_inset Formula $w_{1}=0$
+\end_inset
+
+ all the way in.
+ The coordinate 
 \begin_inset Formula $t$
 \end_inset
 
- direction is not the proper time, but must be rescaled by 
-\begin_inset Formula $\sqrt{1-2m/r}$
+ measures the proper time on this geodesic, and we get points on it by solving
+ 
+\begin_inset Formula $w_{1}=0$
 \end_inset
 
- to get the proper time.
- We're going nowhere fast.
+.
+ I'm hand-waving a bit here; solving for the radially-infalling geodesic
+ is standard homework problem, and assorted class-note PDF's online show
+ exactly how to do this.
+ I'm not going to repeat just right now.
+ But more or less, they go like this:
+\begin_inset Formula 
+\[
+t=\int dt=\int\frac{dt}{dr}dr=\int\frac{dr}{v_{r}}=-\frac{1}{\sqrt{2m}}\int\sqrt{r}dr=-\frac{2}{3}\frac{r^{3/2}}{\sqrt{2m}}
+\]
+
+\end_inset
+
+and then plug in the integration limits.
 \end_layout
 
 \begin_layout Subsection*
@@ -1285,6 +1358,8 @@ which is surprising.
 
  and so Hmmm.
  I'm floundering, I'm missing something, here.
+ I beleive that there's some elegant way to talk about this, but I don't
+ know what it is.
 \end_layout
 
 \begin_layout Subsection*
