@@ -53,9 +53,10 @@ the public. This is my private workshop, and not my showroom. I am
 publishing this in response to requests that I make certain parts
 available. Well, here's all of it.
 
-FYI, some of the code is very old, and might not actually compile.
-Some of the libraries and dependencies have moved, breaking this old
-code. I will accept bug reports and pull requests to fix what's broken.
+FYI, some of the code is very old (dating to 1995), and might not
+actually compile.  Some of the libraries and dependencies have moved,
+breaking this old code. I will accept bug reports and pull requests
+to fix what's broken.
 
 In alphabetical order:
 
@@ -107,4 +108,3 @@ In alphabetical order:
   much of what is here can now be found in standard libraries (but
   with a different API). The code in the experiments directory makes
   very heavy use of the code here.
-
