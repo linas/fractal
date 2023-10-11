@@ -27,8 +27,63 @@ hyperconverge: 11 October 2001
    -- simple hyperconvergent series -- Euler's series
       (exponential integral) abramowitz & stegun eqn 5.1.51
 
+billiards: November 2001
+   -- Ray tracing of Sinai's Billiards. Traces both classical-mechanics
+      rays, and also path integral, for exploring diffraction.
+
+      mfp: 18 March 2002 Mean free path in the billiards
+
+chiral-bag: 4 July 2003
+   -- Chiral Bag eigenfunctions. From my PhD thesis.
+      Originally written in FORTRAN in 1983. Ported to C in July 2003.
+
 queue: 3 Sept 2003
    -- The classic 3n+1 if odd else n/2 if even problem.
+
+continued-frobenius: Dec 2003 to 2010
+   -- Frobenius Peron operator for continued fractions.
+      This is the Frobenius-Perron operator that Driebe taught me about,
+      but now applied to continued fractions, instead of the Bernoulli shift.
+
+      integ.c: Dec 5 2003
+      diverge.c: Dec 7 2003
+      cubic.c: Dec 8 2003
+      valuate.c: Dec 14 2003
+      gsl-diag.c: Dec 18 2003
+      mathcheck.c: Dec 23 2003
+      bern.c: Dec 28 2003
+      riemann.c: Dec 28 2003
+      sin.c: Dec 29 2003
+      zero.c: Dec 29 2003
+      tryall.c: Jan 6 2004
+      gsl-eigen.c: Jan 6 2004
+      det.c: Jan 6 2004
+      frobenius.c: Jan 10 2004
+      eicheck.c: Jan 11 2004
+      eig.c: Jan 12 2004
+      stieltjes.c: Sep 24 2004
+      beta.c: Nov 27 2004
+      bern_h.c: Dec 2 2004
+      alpha.c: Dec 8 2004
+      zeta-sum.c: Dec 16 2004
+      zeta-zero.c: Dec 18 2004
+      zyx.c: Dec 18 2004
+      character.c: Dec 24 2004
+      zeta-takagi.c: Jan 27 2005
+      sum.c: Feb 13 2005
+      eta.c: Feb 13 2005
+      swap.c: Feb 26 2005
+      binom-graph.c: Jun 29 2005
+      harmonic.c: Aug 28 2005
+      zetafn.c: Dec 18 2005
+      stirling.c: May 29 2006
+      ache.c: Jul 3 2007
+      asubn.c: Jul 3 2007
+      rational-sum.c: Jun 1 2008
+      eigen.c: Jan 11 2010
+      diagon.c: Jan 11 2010
+      normal.c: Jan 11 2010
+      quest.c: Feb 18 2010
 
 farey: February 2004-2007
    -- Farey fractions. Haven't yet realized connection between Farey
@@ -211,6 +266,12 @@ norlund-rice: 19 Feb 2006
    -- dsubn-analytic.c: 13 Nov 2006 Analytic fit to d_n
    -- zeta-imag.c: 19 Feb 2006 Graph of Riemann zeta on the critical line
 
+bignum: 2006-2015
+   -- Gnu GMP bignum (arbitrary precistion) implementation of a large
+      variety of assorted number-theoretic and analytic-combinatoric
+      functions. This is eventually cleaned up and nicely organized as
+      the Anant library.
+
 plouffe: 13 May 2006
    -- Explore some of the sums given by Simon Plouffe.
       Specifically, the modular-like sums involving 1/1+exp(2pi n)
@@ -324,10 +385,14 @@ divisor: 30 November 2014
 free-group: 24 December 2004
    -- Freely generated Group games
 
-calkin-wilf: Sept 2015
+calkin-wilf: 19 Sept 2015
    -- A recursive function that gives the denominator of the
       Stern-Brocot tree. Graphing it, its reminiscent of Minkowski
       measure.
+      The fusc function gives the denominators of the stern-brocot tree.
+      Graphing the denominators-only gives a blanc-mange-like function.
+      The relation to the question mark function, if any, remains a
+      mystery.
 
 frontal: 7 Sept 2015
    -- Explore the analytic continuation described in frontal.lyx
@@ -349,6 +414,11 @@ lattice: 27 September 2015
    -- Graph every line of the form (ax+b)/(cx+d) for SL(2,Z)
       The resulting pictures are beautiful!
 
+clifford: 28 April 2016
+   -- Basis of Clifford algebra has a non-canonical mapping to binary tree.
+      Multiplication in the Clifford algebra induces multiplication of
+      such trees. What does this look like (when mapped to bit-strings?)
+
 similar: 29 Sept 2016
    -- When is a Mobius xform  (ax+b)/(cx+d) similar to 1/x ?
 
@@ -366,8 +436,9 @@ snake: 27 Nov 2017
    -- Look at the pseudo-arc as defined by WAYNE LEWIS AND PIOTR MINC
       DRAWING THE PSEUDO-ARC  Very little done here.
 
-circle: Dec 2017
+circle: 4 Dec 2017
    -- Recreate some of the old circle-map stuff. Add in simplifications.
+      Lots of very pretty images!
 
 beta-xform: Dec 2017
    -- Look at simplifications of Bernoulli map. Look at the Beta
@@ -376,8 +447,9 @@ beta-xform: Dec 2017
 adammaj1: Dec 2017
    -- code from Adam Majewski which he wanted me to look at & fix.
 
-borel-mink: Feb 2018
-   -- Look a the Borel transform of the Minkowski fn.
+borel-mink: 31 January 2018
+   -- Look at the Borel transform of the Minkowski fn.
+      Also the Riesz–Herglotz transform.
 
 mobexpic: 17 January 2019
    -- Like arithmexpic, but a deeper look into Mobius and iterated units.
@@ -402,19 +474,9 @@ TODO:
 Undocumented directories:
 ------------------------
 alternate
-anant-bzr
-anant-git
 arithmexpic
 beta-expand
 beta-xform
-bignum
-billiards
-borel-mink
-calkin-wilf
-chiral-bag
-circle
-clifford
-continued-frobenius
 fibonacci-farey.pl
 junk.pl
 prime-bit.pl
