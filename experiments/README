@@ -23,17 +23,17 @@ modular: 4 November 2004
    -- orbit of vector under 3D representation of modular group.
 
 gap: late 2004, early 2005
-	-- Extensive exploration of continued fractions, Takagi curve,
-		orbits, p-adic numbers, hyperbolic rotations, Bernoulli operator,
-		Levy dragons.
+   -- Extensive exploration of continued fractions, Takagi curve,
+      orbits, p-adic numbers, hyperbolic rotations, Bernoulli operator,
+      Levy dragons.
 
       This is where I slowly come to realize that the symmetries of
-		assorted dyadic fractals, continued fractions, binary trees, etc.
-		are the symmetries of SL(2,Z) the modular group, or rather, the
-		modular monoid. So the source code does not yet call it that,
-		because I hadn't yet made that realization.
+      assorted dyadic fractals, continued fractions, binary trees, etc.
+      are the symmetries of SL(2,Z) the modular group, or rather, the
+      modular monoid. So the source code does not yet call it that,
+      because I hadn't yet made that realization.
 
-		c-takagi.c: October 2004 Takagi curve for complex-valued w
+      c-takagi.c: October 2004 Takagi curve for complex-valued w
       gappy.C: October 2004 Games with Gaps
       sway.C: October 2004 swaying of the continued fraction expansion
       feigen.C: October 2004 Bernoulli-map eigenfns concated with Minkowski map
@@ -43,12 +43,12 @@ gap: late 2004, early 2005
                               the Minkowski symmetery group
       entropy.C: October 2004 Shannon entropy of continued fractions
       takagi.C: October 2004 Draw the Takagi curve
-		sum.c: 25 October 2004 junk
+      sum.c: 25 October 2004 junk
       dyadic.C: November 2004 Polynomials generated from binary expansion.
       orbit.C: November 2004 Orbits of vectors under the dyadic representation
                              of the modular group.
-		conj.c: 9 Dec 2004 Conjugate map explorer of the tent map
-		measure.c: 25 October 2008 *discontinuous* eigenfunctions of the
+      conj.c: 9 Dec 2004 Conjugate map explorer of the tent map
+      measure.c: 25 October 2008 *discontinuous* eigenfunctions of the
                                  Bernoulli operator. product topology.
 
       cantor-dist.C: Oct 2004 fractal measure of Cantor polynomial function
@@ -77,6 +77,37 @@ gap: late 2004, early 2005
       quest.C: Oct 9 2005 Draw the Question mark
       takagi-n.C: December 2005 Non-dyadic variant of the Takagi curve.
       vanish.C: Feb 18 2007 Functions that vanish on binary numbers.
+
+fdist: late 2004-2010
+   -- Distribution of the Farey Numbers on the unit interval.
+      At this point, I had not yet realized the connection between the
+      Farey numbers and the Minkowski Questin Mark, so am discovering it
+      here.
+
+      rdist.C: October 2004 Distribution of rationals. GnuGMP version.
+      fdist.C: October 2004 Distribution of the Farey Numbers
+      jdist.C: October 2004 variation on above.
+      fourier.C: October 2004 Fourier transform of Distribution of the
+                              Farey Numbers
+      fanal.C, janal.C: October 2004 varations on above.
+      f-wavelet.C: October 2004 Binary coefficieints of Distribution of
+                                the Farey Numbers. Wavelet style.
+      hardy.C: October 2004 Poison integral of the Minkowski measure
+                            ("singular inner function" in the theory
+                            of Hardy spaces.)
+      ftag.C: 4 September 2008 Farey dist as a Cantor set, using log of
+                               Takagi. Use a Stupa energy potential,
+                               compare Kac potential.
+      shift.C: 4 September 2008 Binary shift of continued fractions.
+      takagi-dist.C: October 2008 Takagi-style distribution.
+      akk.C: 3 Oct 2008 Utility to graph the a_k
+      mink-meas.C: 8 October 2008 Minkowski Measure explicit construction.
+      two-d.C: 14 March 2010 Two-dimensional rep of dyadic group.
+                             Verify eigenvalues of dyadic GKW.
+      qdiff.C: 15 March 2010 Experimental diffs
+      decomp.C: 23 March 2010 Linear decomposition of continuous &
+                              differentiable eigenvalues into fractals.
+      taulim.C: 23 March 2010 Limiting behaviour of the GKW eigenfuncs at zero.
 
 ising: late 2004-2006
    -- Explore modular relationship of 1D Ising and Kac models.
@@ -176,6 +207,22 @@ presentation: 16 March 2007
       regarding the polylogarithm, which were eventually published in
       the polylog paper.
 
+fourier-question: 20 June 2008
+   -- Eigenvalues & eigenvectors of Fourier of Minkowski-question operator
+      eigen.c: Sept 2004 Eigenvalue and eigenvector finding w/LAPACK
+      eigen-extrap.c: 20 June 2008 eigenvalues of the Fourier of
+                                   Minkowski-question operator
+      gral-explore.c: 20 June 2008 matrix elements of fourier of
+                                   minkowski question mark
+      gral-matrix.c: 19 June 2008 brute force matrix elements
+      gral-simple.c: 20 June 2008 brute force matrix elements
+      counting.c: 12 Feb 2010 quick-n-dirty prime-couting attempt.
+                              Fantiastic results!
+
+fredholm: 2 September 2008
+   -- Green functions, propagators, etc. for articifically constructed
+      things from the Riemnann zeta. Seems to be a failure, no insight gained.
+
 zipf: 15 March 2009
    -- Experiments with random strings
 
@@ -213,6 +260,11 @@ geodesic: 30 August 2012
       by ray-tracing.  Arbitrary-precision version.
       Explore Ornstein isomorphism theorem and the Cantor set.
 
+fractions: 20 March 2013
+   -- Accumulating fractions into bins by bin-counting.
+      A regular fractal pattern emerges, similar to many others.
+      Never got around to relating it to earlier results.
+
 holomorphic-sho: 30 November 2013
    -- Some failed attempt at holomorphic simple harmonic oscillator.
 
@@ -230,10 +282,16 @@ graph: 23 November 2014
                               Focus on number-theoretic potentials.
       eigenzee.cc: 27 Nov 2014 Graph of eigenvalues of disvisor function
 
+free-group: 24 December 2004
+   -- Freely generated Group games
+
 calkin-wilf: Sept 2015
    -- A recursive function that gives the denominator of the
       Stern-Brocot tree. Graphing it, its reminiscent of Minkowski
       measure.
+
+frontal: 7 Sept 2015
+   -- Explore the analytic continuation described in frontal.lyx
 
 pompeiu: 19 Sept 2015
    -- Graph of one very specific Pompieu function, just for grins.
@@ -242,7 +300,7 @@ measure: 21 September 2015
    -- (exact) approximation and bound for the Minkowski measure,
       inclusing scaling of the thing.
 
-ffbasis: Dec 2014
+ffbasis: 25 December 2014
    -- Falling factorial basis for divisor/multiplicative functions
 
 sum: 29 August 2015
@@ -325,14 +383,7 @@ driebe
 dynamical-zeta
 entropy
 farey
-fdist
-ffbasis
 fibonacci-farey.pl
-fourier-question
-fractions
-fredholm
-free-group
-frontal
 junk.pl
 prime-bit.pl
 prime.pl
