@@ -52,6 +52,9 @@ surface: 12 Jun 2005
 weyl: 14 July 2005
    -- Weyl group functions hack
 
+gap: 2004-2006
+	-- Extensive exploration of continued fractions
+
 ising: 2004-2006
    -- Explore modular relationship of 1D Ising and Kac models.
       takagi-gral.c: October 2004 integrals of the Takagi curve
@@ -60,6 +63,12 @@ ising: 2004-2006
       kac.c: 25 Sept 2005 Kac model with cylinder-set topology
       lr-tree.c: 16 Sept 2006 Encode binary LR trees as dyadic fractions
       partition.c: 18 Sept 2006 the q-series-like partition function
+
+green: 18 Dec 2005
+   -- Green functions for the Bernoulli process
+      polynomial.c: 16 December 2005 Semi-Symbolic polynomial handling
+      green.c: 18 Dec 2005 Green functions for the Bernoulli process
+      sho.c: November 2006 hyperbolic simple harmonic oscillator eigenvalues
 
 wavelet: 3 January 2006
    -- matrix elements of the transfer operator (composition operator)
@@ -94,6 +103,15 @@ plouffe: 13 May 2006
    -- Explore some of the sums given by Simon Plouffe.
       Specifically, the modular-like sums involving 1/1+exp(2pi n)
 
+hurwitz: October 2006
+   -- Hurwitz zeta function for arbitrary complex argument.
+      Polylogarithm for arbitrary complex argument.
+      This is part of a complete study of the polylog, that resulted
+      in the publication of the polylog paper.
+      hurwitz.c: October 2006  Hurwitz zeta function for complex argument
+      polylog.c: November 2006 Borwein-style polylogarithm.
+      check.cc: 30 Nov 2014 Quick double-check
+
 polyhedra: 28 February 2007
    -- Map a binary tree onto a polyhedron.
       More or less equivalent to a Markov chain.
@@ -101,7 +119,9 @@ polyhedra: 28 February 2007
 presentation: 16 March 2007
    -- Brute force search for group presentations. Includes braid group.
       Heisenberg group, various polylog groups. Used to verify the
-      monodromy of the polylogarithm.
+      monodromy of the polylogarithm. This was used to confirm ideas
+      regarding the polylogarithm, which were eventually published in
+      the polylog paper.
 
 zipf: 15 March 2009
    -- Experiments with random strings
@@ -112,6 +132,14 @@ walsh: July 2009
       Derivative of minkowski-question-mark, integrated with
       the Walsh functions
       Fractal eigenfunctions of GKW. (Jan 2016)
+
+gkw: 10 January 2010
+   -- Newer Gauss-Kuzmin-Wirsing stuff
+      Oroginal, older GKW stuff is in the continued-frobenius directory
+      hurwitz.c: 10 January 2010 graph of hurwitz zeta
+      asymptote.c: 21 Jan 2010 Find saddle point of asymptotic expansion
+      diag.c: 23 Jan 2010 check saddle point
+      similar.c: 21 Feb 2010 similarity -conjugacy
 
 synthetic: Nov 2010
    -- Some intractable sum over Riemann zeta. Dead end.
@@ -126,6 +154,29 @@ julia: 27 December 2011
    -- Julia set explorer for the Mandelbrot bulb.
       asign a string of L,R values to each point in the Julia set
 
+geodesic: 30 August 2012
+   -- Explores the symbol dynamics of the SL(2,Z) fundamental domain.
+      Explore geodesics on the fundamental domain of the modular group
+      by ray-tracing.  Arbitrary-precision version.
+      Explore Ornstein isomorphism theorem and the Cantor set.
+
+holomorphic-sho: 30 November 2013
+   -- Some failed attempt at holomorphic simple harmonic oscillator.
+
+graph: 23 November 2014
+   -- Schroedinger wave function for Number-Theoretic functions
+      Solves 1D Schroedinger eqn on a lattice, where the potential
+      is given by assorted number-theoretic functions.
+
+      bessy.cc: 23 Nov 2014 Schroedinger eqn in a 1D lattice.
+                            Graph the bessel-function-like solutions.
+      eigenwave.cc: 23 Nov 2014 Schroedinger eqn in a 1D lattice.
+                                Plot the wave function itself.
+      potential.cc: 23 Nov 2014 Sanity check some numer-theoretic functions
+      schroed.cc: 23 Nov 2014 Schroedinger eqn in a 1D lattice.
+                              Focus on number-theoretic potentials.
+      eigenzee.cc: 27 Nov 2014 Graph of eigenvalues of disvisor function
+
 calkin-wilf: Sept 2015
    -- A recursive function that gives the denominator of the
       Stern-Brocot tree. Graphing it, its reminiscent of Minkowski
@@ -133,12 +184,6 @@ calkin-wilf: Sept 2015
 
 pompeiu: 19 Sept 2015
    -- Graph of one very specific Pompieu function, just for grins.
-
-graph:
-   -- Schroedinger eqn on a 1D lattice
-
-geodesic:
-   -- Explores the symbol dynamics of the SL(2,Z) fundamental domain.
 
 measure: 21 September 2015
    -- (exact) approximation and bound for the Minkowski measure,
@@ -235,14 +280,6 @@ fractions
 fredholm
 free-group
 frontal
-gap
-geodesic
-gkw
-gpf
-graph
-green
-holomorphic-sho
-hurwitz
 junk.pl
 prime-bit.pl
 prime.pl
