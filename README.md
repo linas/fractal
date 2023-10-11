@@ -40,7 +40,7 @@ of "the same thing": the Cantor set. There's so much here, mostly
 because the Cantor set is a very rich system.
 
 There's also some unrelated content in here, having to do with either
-linguistics, or with quantum mechanics.
+linguistics, with quantum mechanics, or with general relativity.
 
 Table of Contents
 -----------------
