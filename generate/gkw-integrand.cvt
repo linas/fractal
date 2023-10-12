@@ -1,0 +1,23 @@
+#! /bin/sh
+PATH=$PATH:.
+
+
+# takelog gkw-integrand-30-50x50 g
+# takelog gkw-integrand-50-100x100 g
+# renorm g j2 0.01 70
+
+# not many pixels in this
+# takelog gkw-integrand-30-200x200 g
+# renorm g j2 0.003 210
+
+# 600 x 400 pixels
+# takelog gkw-integrand-18-10-30x30 g
+# renorm g j2 0.015 35
+
+# takelog gkw-integrand-10-10-20x20 g
+# renorm g j2 0.025 30
+# takelog gkw-integrand-10-10-20x20-offset g
+takelog gkw-integrand-10-10-20x20-bigoff g
+renorm g j2 0.030 25
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+

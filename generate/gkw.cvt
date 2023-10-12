@@ -1,0 +1,10 @@
+#! /bin/sh
+PATH=$PATH:.
+
+
+# renorm j k 1 0
+takelog gkw g
+# This works great for the picture for 100 x 100:
+# renorm g j2 0.012 90
+renorm g j2 0.007 60
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png

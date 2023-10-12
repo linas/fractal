@@ -1,0 +1,7 @@
+#! /bin/sh
+PATH=$PATH:.
+
+# renorm j k 1 0
+takelog j g
+renorm g j2 0.3 0
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
