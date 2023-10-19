@@ -139,15 +139,223 @@ The "model of the system" is a theory of the "external world" which captures
 \end_layout
 
 \begin_layout Standard
-At risk of premature formalization, some symbols: 
+At risk of premature formalization, some symbols.
+ I am inventing this stuff from thin air as I write, and I am finding it
+ difficult to avoid circular definitions.
+ This is a sketch.
 \end_layout
 
 \begin_layout Itemize
-W ::= external world, which is inaccessible except through sensors 
+W ::= external world, which is inaccessible except through sensors.
+ (Example: a temperature sensor provides temperature data about this world,
+ but, like all sensors, the observation can never be omniscient.)
 \end_layout
 
 \begin_layout Itemize
-T ::= a theory of the external world
+B ::= a database (
+\begin_inset Quotes eld
+\end_inset
+
+inside
+\begin_inset Quotes erd
+\end_inset
+
+ the agent) that holds state information about the external world.
+ (Example: it is capable of holding a single integer, which will be the
+ most recently sensed temperature.
+ It could be a time-sequence of temperatures.
+ It could be a collection of Bayesian priors about what the external temperature
+ might be.)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $H$
+\end_inset
+
+ ::= a collection of hypotheses about the external world.
+ For example, 
+\begin_inset Formula $h_{1}$
+\end_inset
+
+ is the hypothesis 
+\begin_inset Quotes eld
+\end_inset
+
+the temperature is 63 degrees F
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Formula $h_{2}$
+\end_inset
+
+ is the hypothesis 
+\begin_inset Quotes eld
+\end_inset
+
+the temperature is 67 degrees F
+\begin_inset Quotes erd
+\end_inset
+
+.
+ A direct sum symbol 
+\begin_inset Formula $\oplus$
+\end_inset
+
+ is used to enumerate the elements in the collection, so 
+\begin_inset Formula $H=h_{1}\oplus h_{2}\oplus\cdots$
+\end_inset
+
+.
+ The direct sum symbol is used because the hypotheses are intended to be
+ mutually exclusive: it can be 63 degrees or 67 degress but not both.
+ It is fun to call 
+\begin_inset Formula $H$
+\end_inset
+
+ the space of 
+\begin_inset Quotes eld
+\end_inset
+
+many worlds
+\begin_inset Quotes erd
+\end_inset
+
+, precisely because these worlds are mutually exclusive.
+ It is intellectually risky to call 
+\begin_inset Formula $H$
+\end_inset
+
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+set
+\begin_inset Quotes erd
+\end_inset
+
+, and it is misleading to write 
+\begin_inset Formula $H=\left\{ h_{1},h_{2},\cdots\right\} $
+\end_inset
+
+.
+ Doing so risks miscommunication and confusion.
+ However, I will sometimes call 
+\begin_inset Formula $H$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+a set
+\begin_inset Quotes erd
+\end_inset
+
+, because I want to use membership: 
+\begin_inset Formula $h\in H$
+\end_inset
+
+ is a 
+\begin_inset Quotes eld
+\end_inset
+
+possible world
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A 
+\begin_inset Quotes eld
+\end_inset
+
+Bayesian prior
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\mu:H\to\mathbb{R}$
+\end_inset
+
+ that assignes a real number to each 
+\begin_inset Formula $h\in H$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+(Stupid digression, skip on first reading.) A 
+\begin_inset Quotes eld
+\end_inset
+
+Bayesian prior
+\begin_inset Quotes erd
+\end_inset
+
+ asigns a real number 
+\begin_inset Formula $\mu\left(h\right)$
+\end_inset
+
+ to a 
+\begin_inset Quotes eld
+\end_inset
+
+hypothesis
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ A 
+\begin_inset Quotes eld
+\end_inset
+
+hypothesis
+\begin_inset Quotes erd
+\end_inset
+
+ is one 
+\begin_inset Quotes eld
+\end_inset
+
+possible world
+\begin_inset Quotes erd
+\end_inset
+
+ taken from a collection of 
+\begin_inset Quotes eld
+\end_inset
+
+many worlds
+\begin_inset Quotes erd
+\end_inset
+
+.
+ A direct sum 
+\begin_inset Formula $\oplus$
+\end_inset
+
+ is used to enumerate the elements in the collection of 
+\begin_inset Quotes eld
+\end_inset
+
+many worlds
+\begin_inset Quotes erd
+\end_inset
+
+.
+ For example, A Bayesian prior a )
+\end_layout
+
+\begin_layout Itemize
+T ::= a theory of the external world.
 \end_layout
 
 \end_body
