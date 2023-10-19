@@ -540,6 +540,10 @@ categories of Acts
  Lets continue on ...
 \end_layout
 
+\begin_layout Subsubsection*
+Pause: An example
+\end_layout
+
 \begin_layout Standard
 Lets pause and look at a few examples, before continuing.
  An olde-fashioned, 1950's thermostat consisted of a temperature sensor
@@ -723,6 +727,10 @@ the device acts upon the (external) world.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection*
+Philosophical digression
 \end_layout
 
 \begin_layout Standard
@@ -1038,12 +1046,360 @@ blah blah blah, Bostrom's simulation argument
  Anyway ...
 \end_layout
 
+\begin_layout Subsubsection*
+Recap of example
+\end_layout
+
 \begin_layout Standard
-Upon 
+The 1950's single-bit thermostat 
+\begin_inset Formula $R$
+\end_inset
+
+ consists of:
 \end_layout
 
 \begin_layout Itemize
-T ::= a theory of the external world.
+A temperature sensor 
+\begin_inset Formula $S:W\to I$
+\end_inset
+
+ (giving a numeric temperature)
+\end_layout
+
+\begin_layout Itemize
+A working-memory update function 
+\begin_inset Formula $f:I\times B\to B$
+\end_inset
+
+ (updating working memory to be either 
+\begin_inset Quotes eld
+\end_inset
+
+too hot
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+too cold
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+An actuator device 
+\begin_inset Formula $A:B\to D$
+\end_inset
+
+ which selects states 
+\begin_inset Formula $d_{s}\in D$
+\end_inset
+
+ which all have the form 
+\begin_inset Formula $d_{s}:W\to W$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $s$
+\end_inset
+
+ is on or off, and 
+\begin_inset Formula $d_{s}$
+\end_inset
+
+ is the heater that is on or off.
+\end_layout
+
+\begin_layout Standard
+That is, the regulator 
+\begin_inset Formula $R$
+\end_inset
+
+ is the tuple 
+\begin_inset Formula $R=\left(I,B,D;S,f,A\right)$
+\end_inset
+
+ and for better or for worse, I left out 
+\begin_inset Formula $W$
+\end_inset
+
+ from this tuple, because of the philosophical observations above.
+ Perhaps this is a mistake, and 
+\begin_inset Formula $W$
+\end_inset
+
+ should be a part of this tuple.
+ Onwards through the fog.
+\end_layout
+
+\begin_layout Standard
+I claim that the regulator 
+\begin_inset Formula $R$
+\end_inset
+
+ satisfies the 
+\begin_inset Quotes eld
+\end_inset
+
+good regulator theorem
+\begin_inset Quotes erd
+\end_inset
+
+.
+ From what I can tell, this theorem is not an actual mathematical theorem.
+ But perhaps I am mistaken.
+ Let me continue less rigorously: 
+\begin_inset Formula $R$
+\end_inset
+
+ satisfies the 
+\begin_inset Quotes eld
+\end_inset
+
+good regulator theorem
+\begin_inset Quotes erd
+\end_inset
+
+ because it contains a single-bit model of the universe: 
+\begin_inset Quotes eld
+\end_inset
+
+too hot
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+too cold
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But also 
+\begin_inset Formula $R$
+\end_inset
+
+ has an implicit meta-theory: the universe has a temerpature that can be
+ sensed, and this temp can be altered with heaters.
+ This meta-theory exists in the engineer's head, and is used to drive engineerin
+g decisions.
+\end_layout
+
+\begin_layout Subsubsection*
+Models of the World
+\end_layout
+
+\begin_layout Standard
+Finally, I am able to arrive at an informal but important concept:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $T$
+\end_inset
+
+ ::= a theory of the external world.
+ This is a meta-theory, in the above sense.
+\end_layout
+
+\begin_layout Standard
+I wish to be able to say that 
+\begin_inset Formula $R\in T$
+\end_inset
+
+ or something similar.
+ But I am confused.
+ Is 
+\begin_inset Formula $T$
+\end_inset
+
+ the space of all piossible thermostats? Because modern engineers can build
+ thermostats with day/night/weekend settings.
+ Thermostats that can record time-series of temperatures into databases
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ having sizes of kilobytes or megabytes.
+ They might contain algorithms to perform diurnal analysis so that the heater
+ comes on, on cold days, half an hour before you wake up.
+ Some thermostats disable air-conditioning for the entire heating season
+ of many months.
+ A genius thermostat might attempt to predict temperatures for the next
+ one-hundred years, although most human engineers would call such a home
+ thermostat 
+\begin_inset Quotes eld
+\end_inset
+
+insane
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is not 
+\begin_inset Quotes eld
+\end_inset
+
+insane
+\begin_inset Quotes erd
+\end_inset
+
+ per the earlier definitions of sanity, but because the living room that
+ the thermostat is controlling might not exist in 100 years, and so contemplatin
+g temperatures that far in the future seems pointless and futile to mid-wit
+ intelligences.
+ A normie engineer will not build a consumer-grade home thermostat that
+ remembers and ponders temperature unto eternity.
+\end_layout
+
+\begin_layout Standard
+All of this verbal spillage is to drive home the idea that 
+\begin_inset Formula $B$
+\end_inset
+
+ alone is not the model of the world.
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ was working memory, a scratch pad.
+ The database 
+\begin_inset Formula $B$
+\end_inset
+
+ might be organized to contain Bayesian priors, and it might be organized
+ to perform Bayesian updates.
+ That is, the update function 
+\begin_inset Formula $f:I\times B\to B$
+\end_inset
+
+ might involve a Bayesian update.
+ The update function might involve a quantum computer.
+ The database 
+\begin_inset Formula $B$
+\end_inset
+
+ might be digital, storing bits, or it might store qubits.
+ The database 
+\begin_inset Formula $B$
+\end_inset
+
+ may be 
+\begin_inset Quotes eld
+\end_inset
+
+uncountably large
+\begin_inset Quotes erd
+\end_inset
+
+, in that it might be some distribution on a homogenous space; it might
+ be some Hilbert space of functions on top of a homogenous space.
+ The objects of 
+\begin_inset Formula $B$
+\end_inset
+
+ might be loops and suspensions or Leray spectral sequences or other concepts
+ from algebraic topology.
+ The point here is that these, umm, things, umm, objects are only 
+\begin_inset Quotes eld
+\end_inset
+
+models of the world
+\begin_inset Quotes erd
+\end_inset
+
+ in the small sense (of being a stored temperature) but not in the big sense
+ (of being a thermostat/heater).
+\end_layout
+
+\begin_layout Standard
+Some people call 
+\begin_inset Formula $B$
+\end_inset
+
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+model of the world
+\begin_inset Quotes erd
+\end_inset
+
+ and some people call 
+\begin_inset Formula $T$
+\end_inset
+
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+model of the world
+\begin_inset Quotes erd
+\end_inset
+
+, and the failure to clearly distinguish these two is a failure mode for
+ professional communications.
+\end_layout
+
+\begin_layout Standard
+The distinction between 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $T$
+\end_inset
+
+ seems to be important for defining what 
+\begin_inset Quotes eld
+\end_inset
+
+learning
+\begin_inset Quotes erd
+\end_inset
+
+ is.
+\end_layout
+
+\begin_layout Standard
+More or less everything I have written above is conventional knowledge or
+ standard knowledge that is well-known to practitioners versed in the state
+ of the art.
+ Nothing of what I've written so far should be controversial, and all of
+ it should be findable in some text or another.
+ I now leave this realm, and will start to 
+\begin_inset Quotes eld
+\end_inset
+
+make shit up
+\begin_inset Quotes erd
+\end_inset
+
+, and the result might be 
+\begin_inset Quotes eld
+\end_inset
+
+shit
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Learning
+\end_layout
+
+\begin_layout Standard
+I will now attempt to define what learning is.
+ I may fail.
 \end_layout
 
 \end_body
