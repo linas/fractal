@@ -146,13 +146,19 @@ At risk of premature formalization, some symbols.
 \end_layout
 
 \begin_layout Itemize
-W ::= external world, which is inaccessible except through sensors.
+\begin_inset Formula $W$
+\end_inset
+
+ ::= external world, which is inaccessible except through sensors.
  (Example: a temperature sensor provides temperature data about this world,
  but, like all sensors, the observation can never be omniscient.)
 \end_layout
 
 \begin_layout Itemize
-B ::= a database (
+\begin_inset Formula $B$
+\end_inset
+
+ ::= a database (
 \begin_inset Quotes eld
 \end_inset
 
@@ -165,7 +171,41 @@ inside
  most recently sensed temperature.
  It could be a time-sequence of temperatures.
  It could be a collection of Bayesian priors about what the external temperature
- might be.)
+ might be.) Standard AI texts give this the name of 
+\begin_inset Quotes eld
+\end_inset
+
+working memory
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is a scratch-pad, a place where important time-varying results are kept.
+ In addition to this, there are other 
+\begin_inset Quotes eld
+\end_inset
+
+places
+\begin_inset Quotes erd
+\end_inset
+
+ where 
+\begin_inset Quotes eld
+\end_inset
+
+knowledge
+\begin_inset Quotes erd
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+kept
+\begin_inset Quotes erd
+\end_inset
+
+, to be elucidated later.
 \end_layout
 
 \begin_layout Itemize
@@ -498,6 +538,508 @@ categories of Acts
  implicit if not explicit.
  But all this is just a digression, and it might not be a useful digression.
  Lets continue on ...
+\end_layout
+
+\begin_layout Standard
+Lets pause and look at a few examples, before continuing.
+ An olde-fashioned, 1950's thermostat consisted of a temperature sensor
+ 
+\begin_inset Formula $S$
+\end_inset
+
+ generating temperature readings 
+\begin_inset Formula $i\in I$
+\end_inset
+
+ from a set 
+\begin_inset Formula $I$
+\end_inset
+
+ of all possible temperature readings.
+ (Perhaps 
+\begin_inset Formula $I$
+\end_inset
+
+ is the same as 
+\begin_inset Formula $H$
+\end_inset
+
+ above? I don't know, I am confused.) Perhaps I should use a time-label subscript
+ 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ to denote the temperature reading at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ However, 1950's thermostats do not include time as a part of their world-model.
+ The progression of time is an idea in the mind of the engineer creating
+ this particular type of thermostat.
+ Modern thermostats do include a notion of time.
+ 
+\end_layout
+
+\begin_layout Standard
+I will (provisionally?) write 
+\begin_inset Formula $S:W\to I$
+\end_inset
+
+ so that the sensor 
+\begin_inset Formula $S$
+\end_inset
+
+ observes the external world 
+\begin_inset Formula $W$
+\end_inset
+
+ and generates a reading 
+\begin_inset Formula $i\in I$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The reading 
+\begin_inset Formula $i\in I$
+\end_inset
+
+ is placed in to the database 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ I cannot think of any good notation for 
+\begin_inset Quotes eld
+\end_inset
+
+place value into database
+\begin_inset Quotes erd
+\end_inset
+
+.
+ (Any suggestions?) There might be computation involved here, so there is
+ some function 
+\begin_inset Formula $f:I\times B\to B$
+\end_inset
+
+ with 
+\begin_inset Formula $f:\left(i,b\right)\mapsto b^{\prime}$
+\end_inset
+
+ that takes the pair 
+\begin_inset Formula $\left(i,b\right)$
+\end_inset
+
+ and performs a computation 
+\begin_inset Formula $f$
+\end_inset
+
+ to obtain 
+\begin_inset Formula $b^{\prime}$
+\end_inset
+
+.
+ So I guess perhaps 
+\begin_inset Formula $f$
+\end_inset
+
+ is a state transition function? I don't yet know if this is a good way
+ of thinking/talking about it.
+ This is all provisional.
+ At any rate, the idea here is that new sensory input causes the working
+ memory 
+\begin_inset Formula $B$
+\end_inset
+
+ to be updated.
+\end_layout
+
+\begin_layout Standard
+For the 1950's thermstat, the database 
+\begin_inset Formula $B$
+\end_inset
+
+ can hold only two values: 
+\begin_inset Quotes eld
+\end_inset
+
+too hot
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+too cold
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is a single bit.
+\end_layout
+
+\begin_layout Standard
+Next, there is an actuator 
+\begin_inset Formula $A:B\to D$
+\end_inset
+
+ where 
+\begin_inset Formula $D$
+\end_inset
+
+ is a device that acts upon the world.
+ For example, 
+\begin_inset Formula $D$
+\end_inset
+
+ is a heater; it is the thing that the thermostat is controlling.
+ Here, 
+\begin_inset Formula $D=\left\{ \mbox{on},\mbox{off}\right\} =\left\{ d_{s}|s=\mbox{device state}\right\} =\left\{ d_{\mbox{on}},d_{\mbox{off}}\right\} $
+\end_inset
+
+.
+ For each device state 
+\begin_inset Formula $s$
+\end_inset
+
+, we have that 
+\begin_inset Formula $d_{s}:W\to W$
+\end_inset
+
+ with 
+\begin_inset Formula $d_{s}:w\mapsto w^{\prime}$
+\end_inset
+
+ and this is what we mean by 
+\begin_inset Quotes eld
+\end_inset
+
+the device acts upon the (external) world.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, we bump heads with philosophy.
+ From the point of view of 
+\begin_inset Quotes eld
+\end_inset
+
+the good regulator
+\begin_inset Quotes erd
+\end_inset
+
+, the external world 
+\begin_inset Formula $W$
+\end_inset
+
+ is unknown, unknowable, ineffable, except by means of the temerpature sensor
+ 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+external world
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+exists
+\begin_inset Quotes erd
+\end_inset
+
+ only in the mind of the engineer (you and I), who imagine (hallucinate)
+ that there is such a place.
+ The reality is that we sit behind eyeballs and ears, and have no direct
+ access to 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ We cannot 
+\begin_inset Quotes eld
+\end_inset
+
+prove
+\begin_inset Quotes erd
+\end_inset
+
+ it exists, which is why solipsism is an admissible philosophical position.
+ It is also acceptable to 
+\begin_inset Quotes eld
+\end_inset
+
+beleive
+\begin_inset Quotes erd
+\end_inset
+
+ that the 
+\begin_inset Quotes eld
+\end_inset
+
+external world
+\begin_inset Quotes erd
+\end_inset
+
+ exists.
+ 
+\end_layout
+
+\begin_layout Standard
+I raised this philosphical issue for a reason: We do not know, we cannot
+ know, whether our heater is actually making an impact upon the external
+ world.
+ For starters, the heater might be broken: we turn it on and off (we beleive
+ it to be on and off), but nothing happens.
+ How do we know nothing happens? Well, the temperature sensor is always
+ giving us a temperature reading.
+ This reading has both a random and a diurnal (24-hour) variation.
+ Perhaps my heater is weak and slow.
+ Perhaps someone opened a window.
+ Perhaps I know the heater is broken, because the temperature no long changes
+ the way it used to change, last week.
+ However, a 1950's thermostat does not know how the temperature changed
+ last week.
+ It's working memory 
+\begin_inset Formula $B$
+\end_inset
+
+ holds only a single bit of information.
+\end_layout
+
+\begin_layout Standard
+The sensory device may also be broken: it may be 
+\begin_inset Quotes eld
+\end_inset
+
+hallucinating
+\begin_inset Quotes erd
+\end_inset
+
+ the temperature.
+ A time-series of temperature measurements might be generated, but these
+ might be independent of the 
+\begin_inset Quotes eld
+\end_inset
+
+actual
+\begin_inset Quotes erd
+\end_inset
+
+ temperature of 
+\begin_inset Formula $W$
+\end_inset
+
+ (whatever the heck that is?) The sensor 
+\begin_inset Formula $S$
+\end_inset
+
+ is taking 
+\begin_inset Quotes eld
+\end_inset
+
+some reading
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $W$
+\end_inset
+
+, but what that might be is only known to the engineer who designed the
+ thermostat.
+ It is fundamentally unknowable to the thermostat itself.
+\end_layout
+
+\begin_layout Standard
+All of this whinging is to say that we don't really know what 
+\begin_inset Formula $W$
+\end_inset
+
+ is, we don't really know quite what it is we are perceiving, if it matches
+ 
+\begin_inset Quotes eld
+\end_inset
+
+reality
+\begin_inset Quotes erd
+\end_inset
+
+, or if the sensors are 
+\begin_inset Quotes eld
+\end_inset
+
+hallucinating
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Our actuator might be broken, and might not be having any 
+\begin_inset Quotes eld
+\end_inset
+
+actual
+\begin_inset Quotes erd
+\end_inset
+
+ effect upon the external universe.
+ And we might be 
+\begin_inset Quotes eld
+\end_inset
+
+crazy
+\begin_inset Quotes erd
+\end_inset
+
+, in that we beleive that our actions are having an effect that they do
+ not actually have.
+ That is, our 
+\begin_inset Quotes eld
+\end_inset
+
+world model
+\begin_inset Quotes erd
+\end_inset
+
+ is incorrect, incoherent, insane, inconsistent, in addition to merely being
+ incomplete.
+\end_layout
+
+\begin_layout Standard
+The philosophical problem here is that the external world 
+\begin_inset Formula $W$
+\end_inset
+
+ is, in a certain way 
+\begin_inset Quotes eld
+\end_inset
+
+ineffable
+\begin_inset Quotes erd
+\end_inset
+
+.
+ I am rasing this as an issue, because, mathematically, symbolically, I
+ am using a symbol 
+\begin_inset Formula $W$
+\end_inset
+
+ and I am using other symbols 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $D$
+\end_inset
+
+ that are functions involving 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ Such symbols allow me to state an algebra, and perform logical reasoning
+ about this symbolic system.
+ However, the foundations are shaky, because it is unclear to what extent
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+actually exists
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Perhaps we can settle on a operational defintion.
+ In the mind of the engineer who is designing the thermostat, there does
+ exist a room having a temperature, and there does exist a sensor and a
+ heater, and these range over a set of possible values, and we can use mathemati
+cal notation to denote (
+\begin_inset Quotes eld
+\end_inset
+
+denotational semantics
+\begin_inset Quotes erd
+\end_inset
+
+) these sets and functions.
+ Insofar as all engineers are humans, there is no particular problem with
+ partitioning 
+\begin_inset Formula $W$
+\end_inset
+
+ in this way, as 
+\begin_inset Quotes eld
+\end_inset
+
+that thing which exists inside the engineer's head
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, there is a philosophical problem, because this 
+\begin_inset Formula $W$
+\end_inset
+
+ is that which only exists inside of my head (and also yours, since I beleive
+ that you exist, and I hope you read this, and I hope you understand what
+ I meant to say.) However, I might be crazy: you might not actually exist.
+ My output device might be broken: the stuff I write might fail to have
+ the desired effect upon the universe.
+ My input device might be broken, and I am dreaming.
+ 
+\end_layout
+
+\begin_layout Standard
+Perhaps these last six paragraphs were silly, since obviously, every sane
+ mathematician and engineer knows these things and take them for granted.
+ However, in my experience of the world, I witness varying degrees of sanity,
+ and so I felt compelled to state the obvious.
+ I should also ahnd-wave 
+\begin_inset Quotes eld
+\end_inset
+
+blah blah blah AGI
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+blah blah blah, Bostrom's simulation argument
+\begin_inset Quotes erd
+\end_inset
+
+ just to drive the point home.
+ Anyway ...
+\end_layout
+
+\begin_layout Standard
+Upon 
 \end_layout
 
 \begin_layout Itemize
