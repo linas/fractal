@@ -1384,6 +1384,19 @@ learning
 More or less everything I have written above is conventional knowledge or
  standard knowledge that is well-known to practitioners versed in the state
  of the art.
+ The design and analysis of regulators 
+\begin_inset Formula $R$
+\end_inset
+
+ is called 
+\begin_inset Quotes eld
+\end_inset
+
+control theory
+\begin_inset Quotes erd
+\end_inset
+
+ and there are hundreds of texbooks written about control theory.
  Nothing of what I've written so far should be controversial, and all of
  it should be findable in some text or another.
  I now leave this realm, and will start to 
@@ -1413,6 +1426,397 @@ Learning
 \begin_layout Standard
 I will now attempt to define what learning is.
  I may fail.
+ The following might contain errors, infelicities, and misleading remarks.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Quotes eld
+\end_inset
+
+learning system
+\begin_inset Quotes erd
+\end_inset
+
+ is a system that creates a sequence of update functions 
+\begin_inset Formula $f_{k}:I\times B\to B$
+\end_inset
+
+ with 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+ and also actuators 
+\begin_inset Formula $A_{k}:B\to D$
+\end_inset
+
+ such that each of these is somehow 
+\begin_inset Quotes eld
+\end_inset
+
+better
+\begin_inset Quotes erd
+\end_inset
+
+ than the one before.
+ This might reuire a sequence of 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ to be generated.
+ It will often be the case that 
+\begin_inset Formula $B_{k}\subseteq B_{k+1}$
+\end_inset
+
+ but not always: learning might involve the discovery of a shorter 
+\begin_inset Quotes eld
+\end_inset
+
+description length
+\begin_inset Quotes erd
+\end_inset
+
+, which is often taken to be a 
+\begin_inset Quotes eld
+\end_inset
+
+better model of the world
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The words 
+\begin_inset Quotes eld
+\end_inset
+
+description length
+\begin_inset Quotes erd
+\end_inset
+
+ usually mean 
+\begin_inset Quotes eld
+\end_inset
+
+the size of 
+\begin_inset Formula $B$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ or perhaps 
+\begin_inset Quotes eld
+\end_inset
+
+the size of 
+\begin_inset Formula $b\in B$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ and so the 
+\begin_inset Quotes eld
+\end_inset
+
+minimum description length
+\begin_inset Quotes erd
+\end_inset
+
+ is commonly understood to be 
+\begin_inset Quotes eld
+\end_inset
+
+the smallest possible size for 
+\begin_inset Formula $b\in B$
+\end_inset
+
+ that still accurately represents the external phenomenon in 
+\begin_inset Formula $W$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For example, a temporal sequence of temperature readings might be that 
+\begin_inset Quotes eld
+\end_inset
+
+external phenomenon in 
+\begin_inset Formula $W$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The flaw is now obvious: the temperture readings are from the sensor 
+\begin_inset Formula $S$
+\end_inset
+
+ and we make a category error in assuming they 
+\begin_inset Quotes eld
+\end_inset
+
+exist
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ Some philosophers of AI fail to make this distinction during drunken conversati
+ons.
+\end_layout
+
+\begin_layout Standard
+I am going to point out, and then ignore the possibility that there might
+ be a sequence of 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+ and of 
+\begin_inset Formula $D_{k}$
+\end_inset
+
+.
+ A learner might be able to build a better sensor (e.g.
+ a human might build a microscope or telescope, to make observations the
+ naked eye cannot make, alone.) A learner might build a better control device
+ (e.g.
+ a human might build a motor, a steam engine, that far exceeds the strength
+ of human muscles.) Talking about the learning of improved sensors and motors
+ would seem to complicate the discussion, so I set it aside.
+\end_layout
+
+\begin_layout Subsubsection*
+Utility functions
+\end_layout
+
+\begin_layout Standard
+What do we mean by 
+\begin_inset Quotes eld
+\end_inset
+
+better
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+improved
+\begin_inset Quotes erd
+\end_inset
+
+? Conventional machine-learning texts offer two distinctions: 
+\begin_inset Quotes eld
+\end_inset
+
+supervised learning
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+unsupervised learning
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In supervised learning, there is an explicit 
+\begin_inset Quotes eld
+\end_inset
+
+scoring function
+\begin_inset Quotes erd
+\end_inset
+
+ aka 
+\begin_inset Quotes eld
+\end_inset
+
+utility function
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $U$
+\end_inset
+
+ that tells you how well you are doing.
+ The higher the score, the better.
+ Learning algos can then do 
+\begin_inset Quotes eld
+\end_inset
+
+hill climbing
+\begin_inset Quotes erd
+\end_inset
+
+ to improve the score.
+ For differentiable utility functions, one can take the gradient and do
+ 
+\begin_inset Quotes eld
+\end_inset
+
+gradient descent
+\begin_inset Quotes erd
+\end_inset
+
+ (after a minus sign).
+ There's an immense zoo of algos that can be applied to any given, fixed
+ domain.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Quotes eld
+\end_inset
+
+fixed domain
+\begin_inset Quotes erd
+\end_inset
+
+ fixes the utility function 
+\begin_inset Formula $U$
+\end_inset
+
+ and also fixes the input alphabet 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ It is often (usually) the case that learning is restricted to 
+\begin_inset Formula $D=\varnothing$
+\end_inset
+
+ the empty set.
+ That is, the learning system is NOT an agent, and has no effect upon the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+external world
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Things like GPT fall into this class, insofar as the training of GPT is
+ done on some fixed texts.
+ The external world 
+\begin_inset Formula $W$
+\end_inset
+
+ on which GPT trains is the collection of training texts.
+ These are static, unalterable.
+ They are held on a disk drive, they are not dynamic.
+ Training is not interactive, and the part where humans 
+\begin_inset Quotes eld
+\end_inset
+
+talk to
+\begin_inset Quotes erd
+\end_inset
+
+ GPT is outside of the learning iterator.
+\end_layout
+
+\begin_layout Standard
+Lets try to formalize supervised learning.
+ It is a utility function 
+\begin_inset Formula $U:I\times B\to\mathbb{R}$
+\end_inset
+
+ which is able to directly access the entire 
+\begin_inset Quotes eld
+\end_inset
+
+training corpus
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $I$
+\end_inset
+
+ as well as access the entire 
+\begin_inset Quotes eld
+\end_inset
+
+database of knowledge
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ and assign a numeric score 
+\begin_inset Formula $u\in\mathbb{R}$
+\end_inset
+
+.
+ Here, I talk about 
+\begin_inset Formula $I$
+\end_inset
+
+ instead of the sensor 
+\begin_inset Formula $S:W\to I$
+\end_inset
+
+ so that I can avoid talking about sensors.
+ This is convenient and makes sense when 
+\begin_inset Formula $D=\varnothing$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An example.
+ For GPT, someone digitized telephone conversations and printed books and
+ created a text file of UTF-8 text that consists of words and sentences.
+ Perhaps they've segmented into blank-delimited words and punctuation-delimited
+ sentences.
+ This is all 
+\begin_inset Formula $I$
+\end_inset
+
+ because it is post-sensory for audio and video.
+ Here, 
+\begin_inset Formula $I$
+\end_inset
+
+ is called the 
+\begin_inset Quotes eld
+\end_inset
+
+text corpus
+\begin_inset Quotes erd
+\end_inset
+
+ because that is what linguists call it.
+ Its non-dynamic, non-interactive, fixed.
+ 
+\end_layout
+
+\begin_layout Standard
+One can also do supervised learning with agents.
+ 
 \end_layout
 
 \end_body
