@@ -280,78 +280,224 @@ Bayesian prior
 \begin_inset Formula $\mu:H\to\mathbb{R}$
 \end_inset
 
- that assignes a real number to each 
+ that assigns a real number to each 
 \begin_inset Formula $h\in H$
 \end_inset
 
+.
+ Notation: 
+\begin_inset Formula $\mu:h\mapsto x$
+\end_inset
 
+ where 
+\begin_inset Formula $x=\mu\left(h\right)$
+\end_inset
+
+.
+ I use the symbol 
+\begin_inset Formula $\mu$
+\end_inset
+
+ because it is suggestive of 
+\begin_inset Quotes eld
+\end_inset
+
+measure
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Now, 
+\begin_inset Quotes eld
+\end_inset
+
+measure
+\begin_inset Quotes erd
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+the same thing
+\begin_inset Quotes erd
+\end_inset
+
+ as 
+\begin_inset Quotes eld
+\end_inset
+
+probability
+\begin_inset Quotes erd
+\end_inset
+
+, but if one uses the symbol p for every freakin probability that shows
+ up, the proliferation of p's is confusing.
+ I will reserve p for posteriors or other probabilities, and reserve 
+\begin_inset Formula $\mu$
+\end_inset
+
+ for priors.
+ I strongly wish 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to be interpreted as a measure upon some sigma algebra.
+ So, for example: 
+\begin_inset Formula $\mu\left(h_{1}\cup h_{2}\right)=\mu\left(h_{1}\right)+\mu\left(h_{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\left(h_{1}\cap h_{2}\right)=0$
+\end_inset
+
+ because 
+\begin_inset Formula $h_{1}\cap h_{2}=\varnothing$
+\end_inset
+
+ because 
+\begin_inset Formula $h_{1},h_{2}$
+\end_inset
+
+ were defined to be mutually exclusive, above.
+ However, there is wiggle room here for more different kinds of games.
 \end_layout
 
 \begin_layout Itemize
-(Stupid digression, skip on first reading.) A 
+The notion of Bayesian priors is optional, I think.
+ I am defining it because I think I will need this later.
+ Other games include 
+\begin_inset Formula $\psi:H\to\mathbb{C}$
+\end_inset
+
+ and so we call 
+\begin_inset Formula $\psi$
+\end_inset
+
+ a 
 \begin_inset Quotes eld
 \end_inset
 
-Bayesian prior
-\begin_inset Quotes erd
-\end_inset
-
- asigns a real number 
-\begin_inset Formula $\mu\left(h\right)$
-\end_inset
-
- to a 
-\begin_inset Quotes eld
-\end_inset
-
-hypothesis
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset Formula $h$
-\end_inset
-
-.
- A 
-\begin_inset Quotes eld
-\end_inset
-
-hypothesis
-\begin_inset Quotes erd
-\end_inset
-
- is one 
-\begin_inset Quotes eld
-\end_inset
-
-possible world
-\begin_inset Quotes erd
-\end_inset
-
- taken from a collection of 
-\begin_inset Quotes eld
-\end_inset
-
-many worlds
+wave function
 \begin_inset Quotes erd
 \end_inset
 
 .
- A direct sum 
-\begin_inset Formula $\oplus$
+ For 
+\begin_inset Formula $n$
 \end_inset
 
- is used to enumerate the elements in the collection of 
+ qubits, one could have 
+\begin_inset Formula $\psi:H\to\mathbb{CP}^{n}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbb{CP}^{n}$
+\end_inset
+
+ is complex projective space.
+ I beleive this captures the entirety of the so-called 
 \begin_inset Quotes eld
 \end_inset
 
-many worlds
+quantum computing
 \begin_inset Quotes erd
 \end_inset
 
+ game (if I'm wrong, tell me how.).
+ The geometric computing guys write 
+\begin_inset Formula $\psi:H\to X$
+\end_inset
+
+ where 
+\begin_inset Formula $X$
+\end_inset
+
+ is a homogeneous space (a topological space that is a quotient of Lie groups)
+ and state transitions are given by the transitive actions of some (Lie)
+ group 
+\begin_inset Formula $G$
+\end_inset
+
 .
- For example, A Bayesian prior a )
+ As far as I can tell, 
+\begin_inset Quotes eld
+\end_inset
+
+quantum computing
+\begin_inset Quotes erd
+\end_inset
+
+ is a special case where 
+\begin_inset Formula $X=\mathbb{CP}^{n}$
+\end_inset
+
+ (and the halting states are 
+\begin_inset Quotes eld
+\end_inset
+
+measurements
+\begin_inset Quotes erd
+\end_inset
+
+ i.e.
+ projections to the orthogonal basis.) As far as I can tell, a 
+\begin_inset Quotes eld
+\end_inset
+
+probabilistic state machine
+\begin_inset Quotes erd
+\end_inset
+
+ is the special case where 
+\begin_inset Formula $X=\mathbb{P}\left(n\right)=\mathbf{2}^{n}$
+\end_inset
+
+ the power set of 
+\begin_inset Formula $n$
+\end_inset
+
+ states (states of a finite machine).
+ Likewise, a 
+\begin_inset Quotes eld
+\end_inset
+
+deterministic finite automaton
+\begin_inset Quotes erd
+\end_inset
+
+ has 
+\begin_inset Formula $X=\mathbf{n}$
+\end_inset
+
+ (the set of 
+\begin_inset Formula $n$
+\end_inset
+
+ states).
+ I have read texts which stated my last four sentences explicitly.
+ I have not read texts which explictly formulated 
+\begin_inset Quotes eld
+\end_inset
+
+state transition systems
+\begin_inset Quotes erd
+\end_inset
+
+ in terms of such actions of groups on homogenous spaces, although this
+ is implicit when one speaks of 
+\begin_inset Quotes eld
+\end_inset
+
+categories of Acts
+\begin_inset Quotes erd
+\end_inset
+
+, etc.
+ I have not read about pi calculus, but I assume that these notions are
+ implicit if not explicit.
+ But all this is just a digression, and it might not be a useful digression.
+ Lets continue on ...
 \end_layout
 
 \begin_layout Itemize
