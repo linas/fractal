@@ -1420,6 +1420,144 @@ shit
 \end_layout
 
 \begin_layout Subsubsection*
+Agents
+\end_layout
+
+\begin_layout Standard
+In the above, I developed a notion of a regulator 
+\begin_inset Formula $R$
+\end_inset
+
+ being the tuple 
+\begin_inset Formula $R=\left(I,B,D;S,f,A\right)$
+\end_inset
+
+.
+ As I have not yet read or pondered the rho-calculus papers, I do not know
+ how to convert this into rho language.
+ I don't think it should be hard, and that exercise should reveal how to
+ generalize my definitions.
+\end_layout
+
+\begin_layout Standard
+And yet, I'm already confused.
+ Take, for example, the sensor function 
+\begin_inset Formula $S:W\to I$
+\end_inset
+
+.
+ In the rho calculus, the elements of 
+\begin_inset Formula $I$
+\end_inset
+
+ are agents (since the rho calculus is recursive in this way) and 
+\begin_inset Formula $S$
+\end_inset
+
+ seems to be a message passing of sorts.
+ I wrote 
+\begin_inset Quotes eld
+\end_inset
+
+of sorts
+\begin_inset Quotes erd
+\end_inset
+
+ because it is not obvious to me that one can treat 
+\begin_inset Formula $W$
+\end_inset
+
+ as a collection of 
+\begin_inset Quotes eld
+\end_inset
+
+external agents
+\begin_inset Quotes erd
+\end_inset
+
+, which can be selected from and passed to the 
+\begin_inset Quotes eld
+\end_inset
+
+primary agent
+\begin_inset Quotes erd
+\end_inset
+
+ of which we talk about.
+ As discussed before, the 
+\begin_inset Quotes eld
+\end_inset
+
+external world
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ is in some sense unknowable, ineffable and inalterable except through the
+ sensor 
+\begin_inset Formula $S$
+\end_inset
+
+ and the motor 
+\begin_inset Formula $A$
+\end_inset
+
+, and these may be hallucinating or broken.
+\end_layout
+
+\begin_layout Standard
+I don't know how the rho calculus deals with this.
+ Perhaps it doesn't.
+ This is OK if you are an engineer, and it is indeed very useful to pretend
+ that there is a 
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ out there that can be measured and acted upon.
+ Perhaps we are even forced to be engineers, and, in the short term, can
+ only build AGI according to the assumption that 
+\begin_inset Formula $W$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But one can get 
+\begin_inset Quotes eld
+\end_inset
+
+really out there
+\begin_inset Quotes erd
+\end_inset
+
+ in physics, by hand-waving mumbo-jumbo about QM, planck length, ER=EPR
+ and whatnot.
+ Assuming a Cartesian existance for 
+\begin_inset Formula $W$
+\end_inset
+
+ is perhaps unavoidable at this stage of the game, but I think it would
+ be better to avoid a dependence on such an assumption.
+\end_layout
+
+\begin_layout Subsubsection*
 Learning
 \end_layout
 
@@ -1739,9 +1877,17 @@ talk to
  GPT is outside of the learning iterator.
 \end_layout
 
+\begin_layout Subsubsection*
+Supervised learning
+\end_layout
+
 \begin_layout Standard
 Lets try to formalize supervised learning.
- It is a utility function 
+ It requires (
+\emph on
+ad hoc
+\emph default
+) a utility function 
 \begin_inset Formula $U:I\times B\to\mathbb{R}$
 \end_inset
 
@@ -1774,7 +1920,7 @@ database of knowledge
 \end_inset
 
 .
- Here, I talk about 
+ Here, we talk about 
 \begin_inset Formula $I$
 \end_inset
 
@@ -1782,7 +1928,7 @@ database of knowledge
 \begin_inset Formula $S:W\to I$
 \end_inset
 
- so that I can avoid talking about sensors.
+ so that we can avoid talking about sensors.
  This is convenient and makes sense when 
 \begin_inset Formula $D=\varnothing$
 \end_inset
@@ -2035,6 +2181,42 @@ In case you (or any other reader of this text) think that a one-bit utility
  of times that you loose.
  That is, risk-averse algorithms: one does not wish to train self-driving
  autonomous car systems with algorithms that frequently kill humans.
+\end_layout
+
+\begin_layout Standard
+Since I have not yet read or pondered the rho calculus papers, I am now
+ at an impass of what to write down next.
+ Recall we started with a regulator 
+\begin_inset Formula $R$
+\end_inset
+
+ being the tuple 
+\begin_inset Formula $R=\left(I,B,D;S,f,A\right)$
+\end_inset
+
+ and we replace this with a sequence of regulators 
+\begin_inset Formula $R_{k}=\left(I,B_{k},D;S,f_{k},A\right)$
+\end_inset
+
+.
+ A 
+\begin_inset Quotes eld
+\end_inset
+
+learning algorithm
+\begin_inset Quotes erd
+\end_inset
+
+ is a function 
+\begin_inset Formula $L:R_{k}\mapsto R_{k+1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $U\left(R_{k+1}\right)>U\left(R_{k}\right)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsubsection*
