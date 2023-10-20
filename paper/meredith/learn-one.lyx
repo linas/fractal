@@ -1592,11 +1592,15 @@ I am going to point out, and then ignore the possibility that there might
 .
  A learner might be able to build a better sensor (e.g.
  a human might build a microscope or telescope, to make observations the
- naked eye cannot make, alone.) A learner might build a better control device
- (e.g.
+ naked eye cannot make, by itself.) A learner might build a better control
+ device (
+\emph on
+e.g.
+
+\emph default
  a human might build a motor, a steam engine, that far exceeds the strength
- of human muscles.) Talking about the learning of improved sensors and motors
- would seem to complicate the discussion, so I set it aside.
+ and power of human muscles.) Talking about the learning of improved sensors
+ and motors would seem to complicate the discussion, so I set it aside.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1816,6 +1820,246 @@ text corpus
 
 \begin_layout Standard
 One can also do supervised learning with agents.
+ Best explained by example.
+ One has a grid, 2D or 3D, say, in Minecraft.
+ This provides the 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ One has a robot agent that can perform position measurements: thus, 
+\begin_inset Formula $S:W\to I$
+\end_inset
+
+.
+ The agent has a motor selector 
+\begin_inset Formula $A:B\to D$
+\end_inset
+
+ with each motor setting 
+\begin_inset Formula $d_{s}\in D$
+\end_inset
+
+ giving a 
+\begin_inset Formula $d_{s}:W\to W$
+\end_inset
+
+ that alters the position of the robot in 
+\begin_inset Quotes eld
+\end_inset
+
+the real worled
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ (ooof.) The update function 
+\begin_inset Formula $f:I\times B\to B$
+\end_inset
+
+ will typically record numbers representing it's position in the real world.
+ More accurately, it records 
+\begin_inset Quotes eld
+\end_inset
+
+where it thinks it might be in 
+\begin_inset Formula $W$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Update algos include 
+\begin_inset Quotes eld
+\end_inset
+
+dead reckoning
+\begin_inset Quotes erd
+\end_inset
+
+, which is the integration of the differential equations of motion, using
+ e.g.
+ alpha-beta filters, or Kalman filters.
+ Update of location might also use GPS radios to obtain position info from
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ (which is then merged into the dead-reckoning integral.) The motor function
+ is obvious: say it is a quad-copter.
+ It flies, according to 
+\begin_inset Formula $d_{s}:W\to W$
+\end_inset
+
+.
+ The reward function is then 
+\begin_inset Formula $U:B\times D\to\mathbb{R}$
+\end_inset
+
+ although it might not be all of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ but just a single bit of success/fail.
+ Learning of single-bit reward functions is, of course, difficult.
+\end_layout
+
+\begin_layout Standard
+To make this less abstract, consider the case of a quadcopter carrying a
+ grenade in Ukraine.
+ It's task is to kill russians, and so the reward function is 
+\begin_inset Quotes eld
+\end_inset
+
+dead russian is better than live russian
+\begin_inset Quotes erd
+\end_inset
+
+.
+ (One can add 
+\begin_inset Quotes eld
+\end_inset
+
+surrendered russian
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+fleeing russian
+\begin_inset Quotes erd
+\end_inset
+
+, but now we quibble.) The evaluation of dead vs.
+ alive is performed via 
+\begin_inset Formula $S:W\to I$
+\end_inset
+
+ where 
+\begin_inset Formula $S$
+\end_inset
+
+ is some camera spewing pixels, perhaps a radar, perhaps a temerature sensor.
+ Of course, 
+\begin_inset Formula $S:W\to I$
+\end_inset
+
+ must also include sensors needed for normal operation, such as air-speed
+ and weather and ground proximity.
+ It also includes sensors for 
+\begin_inset Quotes eld
+\end_inset
+
+internal robot state
+\begin_inset Quotes erd
+\end_inset
+
+ such as battery charge or rotor RPM.
+ The contents of 
+\begin_inset Formula $B$
+\end_inset
+
+ includes a terrain map, a weather forecast, a collection of Bayesian priors
+ for the current position of the quadcopter, a record of flight data.
+ So far, I've described only what's needeed for normaly flying & bombing
+ operation.
+ It becomes a learning problem only when one has the opportunity to repeatedly
+ kill russians.
+ Only then can one try to find optimal flight-path and bomb-launch solutions.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+learning
+\begin_inset Quotes erd
+\end_inset
+
+ I am trying to describe here is meant to be 
+\begin_inset Quotes eld
+\end_inset
+
+autonomous learning
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The optimal solutions for control problems has a huge literature, dating
+ back almost 100 years, published under the title of 
+\begin_inset Quotes eld
+\end_inset
+
+operations research
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, when an engineer looks up some optimal algorithm in a book and
+ codes this up in software, this is NOT a part of learning.
+ Thus, we conclude that there is a factorization of 
+\begin_inset Formula $f_{k}:I\times B\to B$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{k}=f^{\left(e\right)}\otimes f_{k}^{\left(l\right)}$
+\end_inset
+
+ where 
+\begin_inset Formula $f^{\left(e\right)}$
+\end_inset
+
+ is some optimal control algorithm provided by the engineer (and is, by
+ definition, immutable over time), and 
+\begin_inset Formula $f_{k}^{\left(l\right)}$
+\end_inset
+
+ is the sequence of update functions that are being learned by the (supervised)
+ learning system.
+\end_layout
+
+\begin_layout Standard
+In case you (or any other reader of this text) think that a one-bit utility
+ function is too difficult to learn, let me remind that DeepMind (and other
+ systems) are able to learn how to play video games with one-bit reward
+ functions (you won/lost the game).
+ State-of-the-art research includes how to learn, minimizing the number
+ of times that you loose.
+ That is, risk-averse algorithms: one does not wish to train self-driving
+ autonomous car systems with algorithms that frequently kill humans.
+\end_layout
+
+\begin_layout Subsubsection*
+Unsupervised Learning
+\end_layout
+
+\begin_layout Standard
+Sooo
+\end_layout
+
+\begin_layout Standard
+—– XXX
+\end_layout
+
+\begin_layout Standard
+As to battlefield learning: I was once hired to create a learning system
+ that could figure out coordinated platoon movements from radar data.
+ The radar data included moving animals (coyotes, cows), vehicles (tractors,
+ cars, on and off the road), brightness (an ambulating farmer has less of
+ a radar reflection than a combatant carrying a metal gun or other radar-reflect
+ing metal items.) The goal of learning was to determine if the movements
+ were coordinated (e.g.
+ by radio-telephone) and what the movement was (are they gathering together,
+ spreading apart, reconoitering, retreating in dissarry, running for the
+ hail-mary 80 yard pass five seconds before the end of teh fourth quarter.)
  
 \end_layout
 
