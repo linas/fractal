@@ -2282,6 +2282,153 @@ unsupervised
 ad hoc
 \emph default
 , and is more of a conventional usage, rather than a precise definition.
+ Let me present the conventional distinction.
+\end_layout
+
+\begin_layout Standard
+Older, conventional learning was posed as a task applied to a table of rows
+ and columns, of which one column was labelled as 
+\begin_inset Quotes eld
+\end_inset
+
+output
+\begin_inset Quotes erd
+\end_inset
+
+ and the remaining columns labelled as 
+\begin_inset Quotes eld
+\end_inset
+
+input
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Each row was a 
+\begin_inset Quotes eld
+\end_inset
+
+datapoint
+\begin_inset Quotes erd
+\end_inset
+
+ and the learning task is to find a compact but accurate function that predicts
+ output based on the input.
+ The utility function is one that maximizes correctness, and usually includes
+ a term for complexity penalty.
+ That is, given two predictors of the output, the one with the smaller complexit
+y is more highly valued.
+ Some notion of Kolmogorov complexity is usually used.
+ It's not hard to write it down.
+ The final accuracy or 
+\begin_inset Quotes eld
+\end_inset
+
+fitness
+\begin_inset Quotes erd
+\end_inset
+
+ of the learned function can be evaluated on a subset of rows that were
+ held out during training.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+accuracy
+\begin_inset Quotes erd
+\end_inset
+
+ can refer to a minimization of false-positives, or false-negatives, or
+ a maximization of the F1-score, or a maximal area under the ROC curve,
+ whatever.
+ In this context, 
+\begin_inset Quotes eld
+\end_inset
+
+unsupervised training
+\begin_inset Quotes erd
+\end_inset
+
+ is what you did when you did not have such a tabular form.
+\end_layout
+
+\begin_layout Standard
+However, for most of these non-tabular 
+\begin_inset Quotes eld
+\end_inset
+
+unsupervised
+\begin_inset Quotes erd
+\end_inset
+
+ cases, there is still some sort of utility score.
+ So, for the automated learning of video-game playing, in the end, one has
+ a feedback signal that 
+\begin_inset Quotes eld
+\end_inset
+
+you won/lost the game
+\begin_inset Quotes erd
+\end_inset
+
+ that can be used during training.
+ For LLM's, such as GPT, these are generally accepted to belong to the 
+\begin_inset Quotes eld
+\end_inset
+
+unsupervised
+\begin_inset Quotes erd
+\end_inset
+
+ class, and the scoring function is given by how well you predicted word
+ 
+\begin_inset Formula $w_{n}$
+\end_inset
+
+ given the prior sequence of 
+\begin_inset Formula $\left(w_{1},w_{2},\cdots,w_{n-1}\right)$
+\end_inset
+
+.
+ A different variant requies the prediction of 
+\begin_inset Formula $w_{n}$
+\end_inset
+
+ given 
+\begin_inset Formula $\left(\cdots,w_{n-1},w_{n+1},\cdots\right)$
+\end_inset
+
+.
+ One can always evaluate the final accuracy by holding out some subset of
+ the training corpus, and evaluating your model on this hold-out set.
+ The main point here is that, even in the conventionally 
+\begin_inset Quotes eld
+\end_inset
+
+unsupervised
+\begin_inset Quotes erd
+\end_inset
+
+ situation, one still has some global 
+\begin_inset Quotes eld
+\end_inset
+
+utility function
+\begin_inset Quotes erd
+\end_inset
+
+ that one wishes to maximize.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Utility functions redux
+\end_layout
+
+\begin_layout Standard
+This is one reason why the folks at MIRI seem to be so obsessed with utility
+ functions: it is something they can hold onto, grasp, and work with.
+ 
 \end_layout
 
 \end_body
