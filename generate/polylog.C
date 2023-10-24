@@ -20,6 +20,7 @@
 static cpx_t zeta, ess, zee,z2, ph;
 static int prec;
 
+// initialize ess so that ims is the imaginary coord.
 static void psi_init (int cmd_prec, double ims)
 {
 	/* the decimal precison (number of decimal places) */
@@ -32,8 +33,8 @@ static void psi_init (int cmd_prec, double ims)
 	prec = 20;
 	// prec= ims;
 
-	/* compute number of binary bits this corresponds to. */
-	double v = ((double) prec) *log(10.0) / log(2.0);
+	/* Compute number of binary bits this corresponds to. */
+	double v = ((double) prec) * log(10.0) / log(2.0);
 	
 	/* the variable-precision calculations are touchy about this */
 	int bits = (int) (v + 30 + 3.14*ims);
@@ -60,20 +61,20 @@ static void psi_init (int cmd_prec, double ims)
 static double plogger (double re_q, double im_q, int itermax, double param)
 {
 	static int init = 0;
-	if (!init) {psi_init(itermax, param); init=1; }
+	if (!init) { psi_init(itermax, param); init=1; }
 		  
-	//printf ("duude compute %g  %g \n", re_q, im_q);
+	// printf ("duude compute %g  %g\n", re_q, im_q);
 
 #ifdef S_PLANE
 	cpx_set_d (ess, re_q, im_q);
 	cpx_polylog (zeta, ess, zee, prec);
 #endif
 
-#define TRIPLICATION
 #ifdef TRIPLICATION
 	cpx_set_d (zee, re_q, im_q);
 	cpx_polylog (zeta, ess, zee, prec);
 
+	// sqrt(3) = 0.866025404 so this is at 120 degrees
 	cpx_set_d (ph, -0.5, 0.866025404);
 	cpx_mul (zee,zee,ph);
 	cpx_polylog (z2, ess, zee, prec);
@@ -148,8 +149,16 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	// cpx_sub(zeta, zeta, z2);
 #endif
 
-	double frea = mpf_get_d (zeta[0].re);
-	double fima = mpf_get_d (zeta[0].im);
+#define ZEE_PLANE
+#ifdef ZEE_PLANE
+	// This is the ordinary, generic polylog on the z plane, used
+	// for the critical line movie.
+	cpx_set_d (zee, re_q, im_q);
+	cpx_polylog (zeta, ess, zee, prec);
+#endif
+
+	double frea = cpx_get_re(zeta);
+	double fima = cpx_get_im(zeta);
 
 	// double fmag = sqrt(frea*frea + fima*fima);
 	//	return fmag;
