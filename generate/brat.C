@@ -2468,9 +2468,7 @@ MakeBifurWrap (
 
 /*-------------------------------------------------------------------*/
 
-extern "C" {
-   extern FILE *Fopen(char *name, char *ext);
-};
+#include "util.h"
 
 int num_names = 0;
 MakeHeightCB* callbacks[MAX_NUM_NAMES];
