@@ -1,6 +1,6 @@
 ############### Symbol Definitions ######################
 
-INCLUDES =	-I../tools/inc -I../misc/anant-git/src
+INCLUDES =	-I../tools/inc -I../experiments/anant-git/src
 LIBS =		/usr/lib
 
 CC = cc -std=gnu++11 -Wall -g -O2 $(INCLUDES)
@@ -88,7 +88,7 @@ totient.o: totient.C brat.h
 zeta.o: zeta.C brat.h
 
 FUNC=../tools/lib/libfunc.a -lpthread
-MP=../misc/anant-git/src/libanant.a -ldb -lpthread
+MP=../experiments/anant-git/src/libanant.a -ldb -lpthread
 GMP=-lgmp
 GSL=-lgsl -lgslcblas
 
