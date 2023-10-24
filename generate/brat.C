@@ -38,20 +38,20 @@ void mandelbrot_out (
    double	height,
    int		itermax)
 {
-   int		i,j, globlen, itermax_orig;
+   int		i,j, globlen;
    double	re_start, im_start, deltax, deltay;
    double	re_position, im_position;
    double	re_c, im_c;
    double	re, im, tmp;
    int		loop;
-   double modulus=0.0, frac, mu;
+   double modulus=0.0, frac;
    double escape_radius = 3.1;
-   double ren, tl;
+   double tl;
    // double r, phi;
 
-   ren = log( log (escape_radius)) / log(2.0);
+   // double ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
-   itermax_orig = itermax;
+   // int itermax_orig = itermax;
 
 
    deltax = width / (double) sizex;
@@ -146,7 +146,7 @@ void mandelbrot_out (
 
          modulus = sqrt (modulus);
          frac = log (log (modulus)) *tl;
-         mu = ((double) (loop+1)) - frac;
+         // double mu = ((double) (loop+1)) - frac;
 
          /* frac =  Re (c/z*z) */
 /*
@@ -271,19 +271,17 @@ void mandelbrot_out_regulated (
    int		itermax,
 	double regulator)
 {
-   int		i,j, globlen, itermax_orig;
+   int		i,j, globlen;
    double	re_start, im_start, deltax, deltay;
    double	re_position, im_position;
    double	re_c, im_c;
    double	re, im, tmp;
    int		loop;
-   double modulus=0.0, frac, mu;
+   double modulus=0.0, frac;
    double escape_radius = 3.1, esq;
-   double ren, tl;
 
-   ren = log( log (escape_radius)) / log(2.0);
-   tl = 1.0/ log(2.0);
-   itermax_orig = itermax;
+   // double ren = log( log (escape_radius)) / log(2.0);
+   double tl = 1.0/ log(2.0);
 
 	regulator = exp (- regulator);
 
@@ -319,7 +317,7 @@ void mandelbrot_out_regulated (
 
          modulus = sqrt (modulus);
          frac = log (log (modulus)) *tl;
-         mu = ((double) (loop+1)) - frac;
+         // double mu = ((double) (loop+1)) - frac;
 
          glob [i*sizex +j] = frac;
          if (loop<itermax) {
@@ -350,7 +348,7 @@ void mandelbrot_wind (
    double	height,
    int		itermax)
 {
-   int		i,j,k,ii,  il, globlen, itermax_orig;
+   int		i,j,k,ii,  il, globlen;
    double	re_start, im_start, deltax, deltay;
    double	re_position, im_position;
    double	re_c, im_c;
@@ -359,8 +357,7 @@ void mandelbrot_wind (
    double 	dmu_re, dmu_im;
    int		loop;
    int		*bits;
-   double modulus=0.0, frac, mu;
-   double ren, otl;
+   double modulus=0.0;
    double phi=0.0, tphi;
 
    /* the qualty of the results depends on using as large an
@@ -368,11 +365,10 @@ void mandelbrot_wind (
     */
    double escape_radius = 1.131e46;
 
-   ren = log( log (escape_radius)) / log(2.0);
-   otl = 1.0/ log(2.0);
+   // double ren = log( log (escape_radius)) / log(2.0);
+   // double otl = 1.0/ log(2.0);
 
    itermax --;
-   itermax_orig = itermax;
 
    /* allocate storage for binary tree */
    bits = (int *) malloc ((itermax+50) * sizeof (int));
@@ -406,8 +402,8 @@ void mandelbrot_wind (
             /* compute fractional iteration */
             modulus = (re*re + im*im);
             modulus = sqrt (modulus);
-            frac = log (log (modulus)) *otl;
-            mu = ((double) (loop+1)) - frac;
+            // double frac = log (log (modulus)) *otl;
+            // double mu = ((double) (loop+1)) - frac;
 
             /* compute the derivative */
             dmu_re = re*dre + im*dim;
@@ -440,23 +436,19 @@ void mandelbrot_wind (
                tphi = -1000.0;
                for (ii=0; ii<1; ii++)
                {
-                  double gmu, gphi;
-                  double dt_re, dt_im;
-                  int lp;
-
                   /* ok, now try it */
-                  lp = k-1;
+                  int lp = k-1;
                   iterate (re_c, im_c, DMAX*escape_radius,
                        re, im, dre, dim, lp);
 
                   /* compute fractional iteration */
                   modulus = (re*re + im*im);
                   modulus = sqrt (modulus);
-                  frac = log (log (modulus)) *otl;
-                  gmu = ((double) (lp+1)) +1.0 - frac;
+                  // double frac = log (log (modulus)) *otl;
+                  // double gmu = ((double) (lp+1)) +1.0 - frac;
 
                   /* guesstimate angle */
-                  gphi = atan2(im, re);
+                  double gphi = atan2(im, re);
                   if (0.0>gphi) gphi+= 2.0*M_PI;
 
                   if (-100.0>tphi) {
@@ -470,8 +462,8 @@ void mandelbrot_wind (
                   modulus = (re*re + im*im);
                   dmu_re *= 1.0 / modulus;
                   dmu_im *= 1.0 / modulus;
-                  dt_re = -dmu_im;
-                  dt_im = dmu_re;
+                  // double dt_re = -dmu_im;
+                  // double dt_im = dmu_re;
                   modulus = - 1.0 / log(sqrt (modulus));
                   dmu_re *= modulus;
                   dmu_im *= modulus;
@@ -540,25 +532,21 @@ void mandelbrot_windsimple (
    double	ppp,
    double 	qqq)
 {
-   int		i,j,k, globlen, itermax_orig;
+   int		i,j,k, globlen;
    double	re_start, im_start, deltax, deltay;
    double	re_position, im_position;
    double	re_c, im_c;
    double	re, im, tmp;
-	double   re_prev, im_prev;
-	double   re_preprev, im_preprev;
    int		loop;
    double modulus=0.0;
    double escape_radius = 1131.1;
-   double ren, otl;
-   double phi=0.0, phi_last, phi_c, h_phi_c;
+   double phi=0.0, phi_last, phi_c;
    int wind =0;
 
-   ren = log( log (escape_radius)) / log(2.0);
-   otl = 1.0/ log(2.0);
+   // double ren = log( log (escape_radius)) / log(2.0);
+   // double otl = 1.0/ log(2.0);
 
    itermax --;
-   itermax_orig = itermax;
 
    deltax = width / (double) sizex;
    deltay = height / (double) sizey;
@@ -577,20 +565,20 @@ void mandelbrot_windsimple (
 
          phi_c = atan2 (im_c, re_c);
          if (0.0 > phi_c) phi_c += 2.0*M_PI;
-         h_phi_c = 0.5*phi_c;
+         // double h_phi_c = 0.5*phi_c;
 
          re = 0.0;
          im = 0.0;
-         re_prev = 0.0;
-			im_prev = 0.0;
+         // double re_prev = 0.0;
+			// double im_prev = 0.0;
          phi_last = -0.01;
          wind = 0;
 // printf ("\n phi_c= %12.8g   c=(%g %g)\n", phi_c, re_c, im_c);
          for (loop=1; loop <itermax; loop++) {
-				re_preprev = re_prev;
-				im_preprev = im_prev;
-				re_prev = re;
-				im_prev = im;
+				// double re_preprev = re_prev;
+				// double im_preprev = im_prev;
+				// re_prev = re;
+				// im_prev = im;
             tmp = re*re - im*im + re_c;
             im = 2.0*re*im + im_c;
             re = tmp;
@@ -1688,7 +1676,6 @@ mandelbrot_migrate (
    int		horiz_pix, vert_pix;
    double	xs, ys;
    float	*count;
-   double 	logdelta;
    float 	*vecx, *vecy;
 
 
@@ -1702,7 +1689,7 @@ mandelbrot_migrate (
    y_off = y_slope * im_start;
 
    delta = 0.1 * width / ((double) sizex);
-   logdelta = log (2.0 * delta);
+   // double logdelta = log (2.0 * delta);
 
 
    globlen = sizex*sizey;
