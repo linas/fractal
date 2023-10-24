@@ -3,7 +3,8 @@
 INCLUDES =	-I../tools/inc -I../experiments/anant-git/src
 LIBS =		/usr/lib
 
-CC = cc -std=gnu++11 -Wall -g -O2 $(INCLUDES)
+CC = cc -Wall -g -O2 $(INCLUDES)
+CXX = cc -std=gnu++11 -Wall -g -O2 $(INCLUDES)
 
 OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
@@ -38,7 +39,7 @@ realclean:
 	$(CC) -c $<
 
 .C.o:
-	$(CC) -c $<
+	$(CXX) -c $<
 
 .o:
 	$(CC) -o $@ $^ -lpthread -lm -lstdc++

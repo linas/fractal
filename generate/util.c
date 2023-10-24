@@ -20,7 +20,7 @@
  */
 
 int
-Open(char *name, char *ext)
+Open(const char *name, const char *ext)
 {
     int fd;
 
@@ -53,7 +53,7 @@ Open(char *name, char *ext)
  * name==0 => stdin
  */
 
-FILE *Fopen(char *name, char *ext)
+FILE *Fopen(const char *name, const char *ext)
 {
     FILE *fyle;
 
@@ -85,7 +85,7 @@ FILE *Fopen(char *name, char *ext)
  * name==0 => stdin
  */
 
-FILE *Fopenr(char *name, char *ext)
+FILE *Fopenr(const char *name, const char *ext)
 {
     FILE *fyle;
 
@@ -118,7 +118,7 @@ FILE *Fopenr(char *name, char *ext)
  */
 
 void
-Size(int *width, int * height, char * name, int fd, int bpp)
+Size(int *width, int * height, const char * name, int fd, int bpp)
 {
     if (*width==0 || *height==0) {
         char buf[100];
@@ -140,9 +140,10 @@ Size(int *width, int * height, char * name, int fd, int bpp)
             fprintf(stderr, "guessing size is %dx%d\n", *width, *height);
         }
     }
-    if (*width==0)
-        fprintf(stderr, "please specify size");
+    if (*width==0) {
+        fprintf(stderr, "Fatal Error: Please specify size");
         exit (1);
+    }
     if (*height==0)
         *height = *width;
 }

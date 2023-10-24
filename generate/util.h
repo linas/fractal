@@ -9,10 +9,10 @@
 extern "C" {
 #endif
 
-int Open(char *name, char *ext);
-FILE *Fopen(char *name, char *ext);
-FILE *Fopenr(char *name, char *ext);
-void Size(int *width, int * height, char * name, int fd, int bpp);
+int Open(const char *name, const char *ext);
+FILE *Fopen(const char *name, const char *ext);
+FILE *Fopenr(const char *name, const char *ext);
+void Size(int *width, int * height, const char * name, int fd, int bpp);
 int Read(int fd, char *buf, int n);
 
 #ifdef  __cplusplus
