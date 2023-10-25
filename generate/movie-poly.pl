@@ -1,0 +1,17 @@
+#! /usr/bin/env perl
+#
+# Perl script to generate frames of the polylog movie
+#
+
+$fps = 30;
+$taumax = 300;  // max tau value but also running time in secs
+$nframes = $taumax * $fps; // $taumax seconds at 30 fps
+$tau = 0;
+$taudelta = $taumax / $nframes;
+for ($i=0; $i<$nframes; $i++)
+{
+	$tau = $i * $taudelta;
+	system ("./polylog-0.3 /home2/linas/tmp/polylog-0.3-$i-$tau 300 300 1 0 0 7.0 $tau &");
+	system ("./polylog-0.5 /home2/linas/tmp/polylog-0.5-$i-$tau 300 300 1 0 0 7.0 $tau &");
+	system ("./polylog-0.7 /home2/linas/tmp/polylog-0.7-$i-$tau 300 300 1 0 0 7.0 $tau");
+}
