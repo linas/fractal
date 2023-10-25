@@ -4,7 +4,7 @@
 # Bulk montage multiple polylog movie PNG frames.
 #
 # After this is done, run this:
-# ffmpeg -i polylog-0.3-%04d.png -framerate 30 polylog-0.3.mp4
+# ffmpeg -i polylog-montage-%04d.png -framerate 30 polylog-montage.mp4
 #
 # Paste images side by side (from Imagemagick):
 # montage a.png b.png c.png -tile 3x1 -geometry +0+0 out.png

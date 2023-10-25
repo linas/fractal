@@ -45,7 +45,7 @@ sub cvt_range($imin, $imax, $deci, $sigma, $fpref) {
 
 			system ("ls $fpref$i-*.flo ");
 			system ("cat $fpref$i-$itau.flo | /home/linas/src/fractal/image/flo2mtv |mtvtoppm | pnmtopng > tmp.png");
-			system ("convert tmp.png -fill black -draw 'rectangle 5,365,183,393' -pointsize 24 -fill white -gravity SouthWest  -annotate +0+5 ' s = $sigma +i $itau.$t1$t2 ' $fpref$deci$i.png");
+			system ("convert tmp.png -fill black -draw 'rectangle 5,365,197,393' -pointsize 24 -fill white -gravity SouthWest  -annotate +9+5 ' s = $sigma +i $itau.$t1$t2 ' $fpref$deci$i.png");
 		}
 	}
 }
