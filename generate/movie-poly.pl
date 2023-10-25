@@ -4,7 +4,7 @@
 #
 
 
-$fps = 30;
+$fps = 30;  # frames per second
 $taumax = 300;  # max tau value but also running time in secs
 $nframes = $taumax * $fps; # $taumax seconds at 30 fps
 $tau = 0;
