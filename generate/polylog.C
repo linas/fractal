@@ -55,6 +55,9 @@ static void psi_init (int cmd_prec, double ims)
 	cpx_set_d (ess, 0.5, ims);
 
 	cpx_set_d (zee, 0.0, 0.1);
+
+	// cpx_polylog_sheet_g0_action returns -exp(-2pi is)
+	// which we use multiplicatively to go around the branch at zero
 	cpx_polylog_sheet_g0_action (ph, ess, 1, prec);
 }
 
@@ -156,8 +159,19 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	cpx_set_d (zee, re_q, im_q);
 	cpx_polylog (zeta, ess, zee, prec);
 
-	// wind around the z=+1 cut in the left-hand direction
+	// Wind around the z=+1 cut in the left-hand direction
 	// cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+	// cpx_sub(zeta, zeta, z2);
+
+	// Wind around the z=+1 cut in the right-hand direction
+	cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
+	cpx_sub(zeta, zeta, z2);
+
+	// Wind around the z=+1 cut in the left-hand direction
+	// Next, around the z=0 cut in the right-hand direction.
+	// This is janky, but seems to be correct.
+	// mpf_neg(zee[0].im, zee[0].im);
+	// cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -2, prec);
 	// cpx_sub(zeta, zeta, z2);
 #endif
 
