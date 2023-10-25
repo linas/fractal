@@ -21,25 +21,16 @@ for ($i=0; $i<$nframes; )
 	system ("./polylog-0.3-g1m /home2/linas/tmp/polylog-0.3-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
 	system ("./polylog-0.5-g1m /home2/linas/tmp/polylog-0.5-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
 	system ("./polylog-0.7-g1m /home2/linas/tmp/polylog-0.7-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
-	$i++
+	$i++;
 
 	$tau = $i * $taudelta;
 	print ("Start work on $i tau=$tau\n");
 	system ("./polylog-0.3 /home2/linas/tmp/polylog-0.3-$i-$tau 300 300 1 0 0 7.0 $tau &");
 	system ("./polylog-0.5 /home2/linas/tmp/polylog-0.5-$i-$tau 300 300 1 0 0 7.0 $tau &");
 	system ("./polylog-0.7 /home2/linas/tmp/polylog-0.7-$i-$tau 300 300 1 0 0 7.0 $tau &");
-	system ("./polylog-0.3-g1m /home2/linas/tmp/polylog-0.3-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
-	system ("./polylog-0.5-g1m /home2/linas/tmp/polylog-0.5-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
-	system ("./polylog-0.7-g1m /home2/linas/tmp/polylog-0.7-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
-	$i++
 
-	$tau = $i * $taudelta;
-	print ("Start work on $i tau=$tau\n");
-	system ("./polylog-0.3 /home2/linas/tmp/polylog-0.3-$i-$tau 300 300 1 0 0 7.0 $tau &");
-	system ("./polylog-0.5 /home2/linas/tmp/polylog-0.5-$i-$tau 300 300 1 0 0 7.0 $tau &");
-	system ("./polylog-0.7 /home2/linas/tmp/polylog-0.7-$i-$tau 300 300 1 0 0 7.0 $tau &");
 	system ("./polylog-0.3-g1m /home2/linas/tmp/polylog-0.3-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
 	system ("./polylog-0.5-g1m /home2/linas/tmp/polylog-0.5-g1m-$i-$tau 300 300 1 0 0 7.0 $tau &");
 	system ("./polylog-0.7-g1m /home2/linas/tmp/polylog-0.7-g1m-$i-$tau 300 300 1 0 0 7.0 $tau");
-	$i++
+	$i++;
 }
