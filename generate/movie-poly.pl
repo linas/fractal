@@ -2,7 +2,7 @@
 #
 # Perl script to generate frames of the polylog movie
 #
-
+$SIG{'INT'} = sub { print "bye-bye\n";  die "the end"; };
 
 $fps = 30;  # frames per second
 $taumax = 300;  # max tau value but also running time in secs

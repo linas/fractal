@@ -1,16 +1,16 @@
 #! /usr/bin/env perl
 #
-# Run processes to bulk convert polylog movie data files to PNG files.
+# movie-poly-cvt.pl
+# Bulk convert polylog movie data files to PNG files.
 #
-# After this is done, run this:
+# After this is done, make a movie by saying:
 # ffmpeg -i polylog-0.3-%04d.png -framerate 30 polylog-0.3.mp4
 #
-# Paste images side by side (from Imagemagick):
-# montage a.png b.png c.png -tile 3x1 -geometry +0+0 out.png
-# montage a.png b.png c.png d.png -tile 2x2 -geometry +0+0 out.png
-
+# Alternately, create the montage w/ movie-poly-mobntage.pl
+#
 
 use feature 'signatures';
+$SIG{'INT'} = sub { print "bye-bye\n";  die "the end"; };
 
 # fps == frames per second
 # Must match setting for script that initiall generated the frames.
@@ -58,8 +58,8 @@ sub cvt($sigma, $fpref) {
 }
 
 cvt("0.3", "polylog-0.3-");
-# cvt("0.5", "polylog-0.5-");
-# cvt("0.7", "polylog-0.7-");
-# cvt("0.3", "polylog-0.3-g1m-");
-# cvt("0.5", "polylog-0.5-g1m-");
-# cvt("0.7", "polylog-0.7-g1m-");
+cvt("0.5", "polylog-0.5-");
+cvt("0.7", "polylog-0.7-");
+cvt("0.3", "polylog-0.3-g1m-");
+cvt("0.5", "polylog-0.5-g1m-");
+cvt("0.7", "polylog-0.7-g1m-");

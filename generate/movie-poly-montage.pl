@@ -12,13 +12,7 @@
 
 use feature 'signatures';
 
-# fps == frames per second
-# Must match setting for script that initiall generated the frames.
-$fps = 30;
-$step = 1/ $fps;
-
-$taumax = 300;  # max tau value but also running time in secs
-$nframes = $taumax * $fps; # $taumax seconds at 30 fps
+$SIG{'INT'} = sub { print "bye-bye\n";  die "the end"; };
 
 # $deci == decimal prefix for output.
 sub monte_range($imin, $imax, $deci) {
@@ -32,19 +26,14 @@ sub monte_range($imin, $imax, $deci) {
 
 	for (my $i=$imin; $i<$imax; $i++)
 	{
-		$tau = $step * $i;
-		$itau = int ($tau);
-
-		$a = "$ap$i-$itau.png";
-		$b = "$bp$i-$itau.png";
-		$c = "$cp$i-$itau.png";
-		$d = "$dp$i-$itau.png";
-		$e = "$ep$i-$itau.png";
-		$f = "$fp$i-$itau.png";
+		$a = "$ap$deci$i.png";
+		$b = "$bp$deci$i.png";
+		$c = "$cp$deci$i.png";
+		$d = "$dp$deci$i.png";
+		$e = "$ep$deci$i.png";
+		$f = "$fp$deci$i.png";
 
 		$fout = "polylog-montage-$deci$i.png";
-
-		printf "yoooo $a\n";
 
 		# If we had the full filename, we could have said
 		# if (-f $filename) but we don't have that.
@@ -54,16 +43,16 @@ sub monte_range($imin, $imax, $deci) {
 		if (-f $a) {
 
 			system ("ls $a");
-			# system ("montage $a $b $c $d $e $f -tile 3x2 -geometry +0+0 $fout");
+			system ("montage $a $b $c $d $e $f -tile 3x2 -geometry +0+0 $fout");
 		}
 	}
 }
 
 sub monte() {
 	monte_range(1, 10, "000");
-	# monte_range(10, 100, "00");
-	# monte_range(100, 1000, "0");
-	# monte_range(1000, 10000, "");
+	monte_range(10, 100, "00");
+	monte_range(100, 1000, "0");
+	monte_range(1000, 10000, "");
 }
 
 monte();
