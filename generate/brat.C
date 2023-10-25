@@ -2387,7 +2387,7 @@ MakeHeightWrap (
    int globlen = sizex*sizey;
    for (int i=0; i<globlen; i++) glob [i] = 0.0;
 
-#define USE_THREADS
+// #define USE_THREADS
 #ifdef USE_THREADS
    double im_position = im_start;
 	int nthreads = std::thread::hardware_concurrency();

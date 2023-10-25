@@ -17,7 +17,7 @@
 
 /* ============================================================================= */
 
-static cpx_t zeta, ess, zee,z2, ph;
+static cpx_t zeta, ess, zee, z2, ph;
 static int prec;
 
 // initialize ess so that ims is the imaginary coord.
@@ -155,6 +155,10 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	// for the critical line movie.
 	cpx_set_d (zee, re_q, im_q);
 	cpx_polylog (zeta, ess, zee, prec);
+
+	// wind around the z=+1 cut in the left-hand direction
+	// cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+	// cpx_sub(zeta, zeta, z2);
 #endif
 
 	double frea = cpx_get_re(zeta);
