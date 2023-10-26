@@ -1,21 +1,8 @@
 
-
-#ifdef AIX221
-#ifndef _C_func
-#define _C_func
-#endif
 #define EXIT_SUCESS 0
 #define EXIT_FAILURE 1
-#endif
 
-#ifdef AIX315
-#define ANSI_C
-#endif
-
-#ifdef ANSI_C
 #include <stdlib.h>
-#endif
-
 #include <string.h>
 #include <stdio.h>
 
@@ -25,13 +12,7 @@
  * Linas Vepstas January 1993
  */
 
-#ifdef ANSI_C
-main (int argc, char **argv)
-#else
-main (argc, argv)
-int argc;
-char **argv;
-#endif
+int main (int argc, char **argv)
 {
    FILE *fi;
    char *file_name;
