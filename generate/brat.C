@@ -2536,7 +2536,7 @@ main (int argc, char *argv[])
    renorm = 1.0;
    if (9 == argc) renorm = atof (argv[8]);
 
-   if (9 < argc) {
+   if (11 == argc) {
       nray = atoi (argv[8]);
       p = atof (argv[9]);
       q = atof (argv[10]);
