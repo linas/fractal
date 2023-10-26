@@ -6,6 +6,7 @@ all:
 	mkdir -p bin;
 	mkdir -p inc;
 	mkdir -p lib;
+	cd $(REALTOP)/src/libs/farey; make TOP=$(REALTOP)
 	cd $(REALTOP)/src/libs/file; make TOP=$(REALTOP)
 	cd $(REALTOP)/src/libs/stoch; make TOP=$(REALTOP)
 	cd $(REALTOP)/src/libs/spectra; make TOP=$(REALTOP)
