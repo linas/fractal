@@ -1,5 +1,6 @@
 
 REALTOP = .
+REALTOP = $(shell pwd)
 
 all: 
 	mkdir lib;
