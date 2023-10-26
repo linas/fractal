@@ -30,7 +30,11 @@ static void psi_init (int cmd_prec, double ims)
 	// prec = 45;
 	// prec = 35;
 	// prec = 25;
+
+	// prec=20 generates nice images, up to about
+	// s = 0.5 +i 27 and after that, there are artifacts on the g1 sheet.
 	prec = 20;
+	prec = 45;
 	// prec= ims;
 
 	/* Compute number of binary bits this corresponds to. */
