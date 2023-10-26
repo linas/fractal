@@ -91,7 +91,7 @@ zeta.o: zeta.C brat.h
 
 FUNC=../tools/lib/libfunc.a -lpthread
 # MP=../experiments/anant-git/src/libanant.a -ldb -lpthread
-MP=-L/usr/local/lib -lanant -ldb -lpthread
+MP=-lanant -ldb -lpthread
 GMP=-lgmp
 GSL=-lgsl -lgslcblas
 
