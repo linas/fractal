@@ -42,23 +42,25 @@ static void psi_init ()
 		branch = atoi(param_argv[2]);
 
 	/* The decimal precison (number of decimal places).
-	 * prec=30 generates nice images. Some caution needed;
+	 * prec=20 generates nice images. Some caution needed;
 	 * if set too low, artifacts show up.   For example,
-	 * setting prec=45 causes visible artifacts on the g1
+	 * setting prec=20 causes visible artifacts on the g1
 	 * sheet at s = 0.5 +i 27 and above.
-	 * The correct solution seems to be to add two units
+	 * The correct solution seems to be to add half a unit
 	 * of decimal precision for each additional bump in tau.
 	 * The routines seem quite touchy about this.
 	 */
-	prec = 30 + (int) (2.0*tau);
+	prec = 30 + (int) (0.5 * tau);
 
 	// Precision passed as parameter. Over-rides default guess above.
 	if (3 < param_argc)
 		prec = atoi(param_argv[3]);
 
 	/* Compute number of binary bits this corresponds to. */
-	int bits = (int) (((double) prec) * log(10.0) / log(2.0));
-	
+	/* log(10.0) / log(2.0) == 3.322 */
+	double v = 3.322 * ((double) prec);
+	int bits = (int) (v + 30 + 3.322*tau);
+
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
