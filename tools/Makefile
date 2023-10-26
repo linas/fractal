@@ -2,6 +2,8 @@
 REALTOP = .
 
 all: 
+	mkdir lib;
+	mkdir inc;
 	cd $(REALTOP)/src/libs/file; make TOP=$(REALTOP)
 	cd $(REALTOP)/src/libs/stoch; make TOP=$(REALTOP)
 	cd $(REALTOP)/src/libs/spectra; make TOP=$(REALTOP)
