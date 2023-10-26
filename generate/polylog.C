@@ -22,30 +22,42 @@ static int prec;
 static int branch = 0;
 
 // Additional paramters are:
-// tau (float, imaginary part of s)
 // sigma (float, real part of s)
-// prec (integer, decimal precision)
+// tau (float, imaginary part of s)
 // branch (integer, 0 = main, see code for details)
+// prec (integer, decimal precision)
 
-// Initialize ess so that ims is the imaginary coord.
-static void psi_init (int cmd_prec, double ims)
+static void psi_init ()
 {
-	/* the decimal precison (number of decimal places) */
-	prec = 90;
+	// Sigma passed as parameter
+	double sigma = 0.5;
+	if (0 < param_argc)
+		sigma = atof(param_argv[0]);
+	double tau = 14;
+	if (1 < param_argc)
+		tau = atof(param_argv[1]);
 
-	// prec=20 generates nice images, up to about
-	// s = 0.5 +i 27 and after that, there are artifacts on the g1 sheet.
-	prec = 20;
-
-	// precision passed as parameter
+	// branch to explore
 	if (2 < param_argc)
-		prec = atoi(param_argv[2]);
+		branch = atoi(param_argv[2]);
+
+	/* The decimal precison (number of decimal places).
+	 * prec=30 generates nice images. Some caution needed;
+	 * if set too low, artifacts show up.   For example,
+	 * setting prec=45 causes visible artifacts on the g1
+	 * sheet at s = 0.5 +i 27 and above.
+	 * The correct solution seems to be to add two units
+	 * of decimal precision for each additional bump in tau.
+	 * The routines seem quite touchy about this.
+	 */
+	prec = 30 + (int) (2.0*tau);
+
+	// Precision passed as parameter. Over-rides default guess above.
+	if (3 < param_argc)
+		prec = atoi(param_argv[3]);
 
 	/* Compute number of binary bits this corresponds to. */
-	double v = ((double) prec) * log(10.0) / log(2.0);
-	
-	/* the variable-precision calculations are touchy about this */
-	int bits = (int) (v + 30 + 3.14*ims);
+	int bits = (int) (((double) prec) * log(10.0) / log(2.0));
 	
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
@@ -60,18 +72,10 @@ static void psi_init (int cmd_prec, double ims)
 	// cpx_set_d (ess, 0.5, 21.022039638771);
 	// cpx_set_d (ess, 0.5, 37.5861781588256712);
 	// cpx_set_d (ess, 0.5, 240.0);
-	cpx_set_d (ess, 0.5, ims);
 
-	// Sigma passed as parameter
-	double sigma = 0.5;
-	if (1 < param_argc)
-		sigma = atof(param_argv[1]);
-	cpx_set_d (ess, sigma, ims);
+	cpx_set_d (ess, sigma, tau);
 
-	// branch to explore
-	if (3 < param_argc)
-		branch = atoi(param_argv[3]);
-
+	printf("sigma=%g tau=%g prec=%d branch=%d\n", sigma, tau, prec, branch);
 	cpx_set_d (zee, 0.0, 0.1);
 
 	// cpx_polylog_sheet_g0_action returns -exp(-2pi is)
@@ -82,7 +86,7 @@ static void psi_init (int cmd_prec, double ims)
 static double plogger (double re_q, double im_q, int itermax, double param)
 {
 	static int init = 0;
-	if (!init) { psi_init(itermax, param); init=1; }
+	if (!init) { psi_init(); init=1; }
 
 	// printf ("duude compute %g  %g\n", re_q, im_q);
 
