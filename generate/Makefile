@@ -1,6 +1,7 @@
 ############### Symbol Definitions ######################
 
-INCLUDES =	-I../tools/inc -I../experiments/anant-git/src
+INCLUDES = -I../tools/inc -I../experiments/anant-git/src \
+           -I /usr/local/include/anant
 LIBS =		/usr/lib
 
 CC = cc -Wall -g -O2 $(INCLUDES)
