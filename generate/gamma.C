@@ -14,7 +14,7 @@
 
 #include "brat.h"
 #include "coord-xforms.h"
-#include "../misc/bignum/zmp.h"
+#include "../experiments/bignum/zmp.h"
 
 /* ======================================================================= */
 

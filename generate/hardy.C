@@ -6,7 +6,7 @@
  * The Poisson ingtegral takes the form of a so-called 
  * "singular inner function" in the theory of Hardy spaces.
  *
- * See directory fractal/misc/fdist for more details.
+ * See directory fractal/experiments/fdist for more details.
  *
  * Linas October 2004
  * Linas October 2008
