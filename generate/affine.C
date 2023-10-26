@@ -180,18 +180,19 @@ static double affine_iteration (double re_q, double im_q, int itermax, double pa
 
 	int i1 = interior (ax, ay, d,e,f,g);
 	int i2 = interior (ax, ay, d,e+4.0/600.0,f,g);
-	if (i1 & !i2) dist = 1e30;
-	if (!i1 & i2) dist = 1e30;
+	if (i1 && !i2) dist = 1e30;
+	if (!i1 && i2) dist = 1e30;
 	
 	i1 = interior (ax, ay, d,e,f,g);
 	i2 = interior (ax, ay, d,e, f+4.0/600.0,g);
-	if (i1 & !i2) dist = 1e30;
-	if (!i1 & i2) dist = 1e30;
+	if (i1 && !i2) dist = 1e30;
+	if (!i1 && i2) dist = 1e30;
 
 	return dist;
 }
 
 
+#if UNUSED
 static double affine_bound (double re_q, double im_q, int itermax, double param)
 {
 	double ax, ay, d,e,f,g;
@@ -211,6 +212,7 @@ static double affine_bound (double re_q, double im_q, int itermax, double param)
 
 	return p;
 }
+#endif
 
 DECL_MAKE_HEIGHT(affine_iteration);
 // DECL_MAKE_HEIGHT(affine_bound);
