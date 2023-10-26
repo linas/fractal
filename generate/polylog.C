@@ -19,6 +19,7 @@
 
 static cpx_t zeta, ess, zee, z2, ph;
 static int prec;
+static int branch = 0;
 
 // Additional paramters are:
 // sigma (float, real part of s)
@@ -30,17 +31,14 @@ static void psi_init (int cmd_prec, double ims)
 {
 	/* the decimal precison (number of decimal places) */
 	prec = 90;
-	// prec = 60;
-	// prec = 55;
-	// prec = 45;
-	// prec = 35;
-	// prec = 25;
 
 	// prec=20 generates nice images, up to about
 	// s = 0.5 +i 27 and after that, there are artifacts on the g1 sheet.
 	prec = 20;
-	prec = 45;
-	// prec= ims;
+
+	// precision passed as parameter
+	if (1 < param_argc)
+		prec = atoi(param_argv[1]);
 
 	/* Compute number of binary bits this corresponds to. */
 	double v = ((double) prec) * log(10.0) / log(2.0);
@@ -62,6 +60,16 @@ static void psi_init (int cmd_prec, double ims)
 	// cpx_set_d (ess, 0.5, 37.5861781588256712);
 	// cpx_set_d (ess, 0.5, 240.0);
 	cpx_set_d (ess, 0.5, ims);
+
+	// Sigma passed as parameter
+	double sigma = 0.5;
+	if (0 < param_argc)
+		sigma = atof(param_argv[0]);
+	cpx_set_d (ess, sigma, ims);
+
+	// branch to explore
+	if (2 < param_argc)
+		branch = atoi(param_argv[2]);
 
 	cpx_set_d (zee, 0.0, 0.1);
 
@@ -169,19 +177,28 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	cpx_polylog (zeta, ess, zee, prec);
 
 	// Wind around the z=+1 cut in the left-hand direction
-	// cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
-	// cpx_sub(zeta, zeta, z2);
+	if (-1 == branch)
+	{
+		cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+		cpx_sub(zeta, zeta, z2);
+	}
 
 	// Wind around the z=+1 cut in the right-hand direction
-	cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
-	cpx_sub(zeta, zeta, z2);
+	if (1 == branch)
+	{
+		cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
+		cpx_sub(zeta, zeta, z2);
+	}
 
 	// Wind around the z=+1 cut in the left-hand direction
 	// Next, around the z=0 cut in the right-hand direction.
 	// This is janky, but seems to be correct.
-	// mpf_neg(zee[0].im, zee[0].im);
-	// cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -2, prec);
-	// cpx_sub(zeta, zeta, z2);
+	if (2 == branch)
+	{
+		mpf_neg(zee[0].im, zee[0].im);
+		cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -2, prec);
+		cpx_sub(zeta, zeta, z2);
+	}
 #endif
 
 	double frea = cpx_get_re(zeta);
