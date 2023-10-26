@@ -1,7 +1,7 @@
 /*
  * polylog.C
  *
- * High-precison Polylogarithm function, using the 
+ * High-precison Polylogarithm function, using the
  * Gnu Multiple-precision library.
  *
  * Linas Vepstas December 2006
@@ -15,12 +15,17 @@
 #include "brat.h"
 #include "zmp.h"
 
-/* ============================================================================= */
+/* =================================================================== */
 
 static cpx_t zeta, ess, zee, z2, ph;
 static int prec;
 
-// initialize ess so that ims is the imaginary coord.
+// Additional paramters are:
+// sigma (float, real part of s)
+// prec (integer, decimal precision)
+// branch (integer, 0 = main, see code for details)
+
+// Initialize ess so that ims is the imaginary coord.
 static void psi_init (int cmd_prec, double ims)
 {
 	/* the decimal precison (number of decimal places) */
@@ -69,7 +74,7 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 {
 	static int init = 0;
 	if (!init) { psi_init(itermax, param); init=1; }
-		  
+
 	// printf ("duude compute %g  %g\n", re_q, im_q);
 
 #ifdef S_PLANE

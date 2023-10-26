@@ -15,6 +15,10 @@
 
 #include <string.h>
 
+// Addtional parameters
+extern int param_argc;
+extern char ** param_argv;
+
 /**
  * MakeHisto -- callback for making a generic scatterplot.
  *

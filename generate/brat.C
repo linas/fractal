@@ -2482,6 +2482,8 @@ void decl_height(const char* name, MakeHeightCB* cb)
 	num_names ++;
 }
 
+int param_argc = 0;
+char ** param_argv = nullptr;
 
 int
 main (int argc, char *argv[])
@@ -2525,6 +2527,9 @@ main (int argc, char *argv[])
       re_center = atof (argv[5]);
       im_center = atof (argv[6]);
       width = atof (argv[7]);
+
+		param_argc = argc-8;
+		param_argv = &(argv[8]);
    }
    height = width * ((double) data_height) / ((double) data_width);
 
