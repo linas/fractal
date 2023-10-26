@@ -8,6 +8,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 struct rgb {
@@ -56,9 +57,8 @@ void make_cmap (void) {
 
 /* ------------------------------------------------------------ */
 
-main (argc, argv)
-int argc;
-char *argv[];
+int
+main (int argc, char* argv[])
 {
    FILE *fil;
    int i, j, width, height;
