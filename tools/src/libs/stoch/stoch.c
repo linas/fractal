@@ -11,6 +11,11 @@
 #include <math.h>
 #include "stoch.h"
 
+#ifndef TRUE
+#define TRUE 1
+#define FALSE 0
+#endif
+
 #define BOX_MULLER
 
 
@@ -70,7 +75,7 @@ int n;
    CurrStochContext -> niter = n;
    /* this scale factor guarentees normal (unit std dev) distribution */
    CurrStochContext -> gauss_scale = sqrt (12.0 /((double) n));
-#endif CENTRAL_LIMIT
+#endif // CENTRAL_LIMIT
 }
 
 /* ====================================================== */
