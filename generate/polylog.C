@@ -75,7 +75,9 @@ static void psi_init ()
 
 	cpx_set_d (ess, sigma, tau);
 
-	printf("sigma=%g tau=%g prec=%d branch=%d\n", sigma, tau, prec, branch);
+	printf("sigma=%g tau=%g branch=%d prec=%d bits=%d\n",
+		sigma, tau, branch, prec, bits);
+
 	cpx_set_d (zee, 0.0, 0.1);
 
 	// cpx_polylog_sheet_g0_action returns -exp(-2pi is)
