@@ -22,6 +22,7 @@ static int prec;
 static int branch = 0;
 
 // Additional paramters are:
+// tau (float, imaginary part of s)
 // sigma (float, real part of s)
 // prec (integer, decimal precision)
 // branch (integer, 0 = main, see code for details)
@@ -37,8 +38,8 @@ static void psi_init (int cmd_prec, double ims)
 	prec = 20;
 
 	// precision passed as parameter
-	if (1 < param_argc)
-		prec = atoi(param_argv[1]);
+	if (2 < param_argc)
+		prec = atoi(param_argv[2]);
 
 	/* Compute number of binary bits this corresponds to. */
 	double v = ((double) prec) * log(10.0) / log(2.0);
@@ -63,13 +64,13 @@ static void psi_init (int cmd_prec, double ims)
 
 	// Sigma passed as parameter
 	double sigma = 0.5;
-	if (0 < param_argc)
-		sigma = atof(param_argv[0]);
+	if (1 < param_argc)
+		sigma = atof(param_argv[1]);
 	cpx_set_d (ess, sigma, ims);
 
 	// branch to explore
-	if (2 < param_argc)
-		branch = atoi(param_argv[2]);
+	if (3 < param_argc)
+		branch = atoi(param_argv[3]);
 
 	cpx_set_d (zee, 0.0, 0.1);
 
