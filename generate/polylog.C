@@ -46,11 +46,12 @@ static void psi_init ()
 	 * if set too low, artifacts show up.   For example,
 	 * setting prec=20 causes visible artifacts on the g1
 	 * sheet at s = 0.5 +i 27 and above.
-	 * The correct solution seems to be to add half a unit
+	 * The correct solution seems to be to add 1/4 a unit
 	 * of decimal precision for each additional bump in tau.
 	 * The routines seem quite touchy about this.
+	 * Hand-tuned; seems that this gives OK performance.
 	 */
-	prec = 30 + (int) (0.5 * tau);
+	prec = 20 + (int) (0.25 * tau);
 
 	// Precision passed as parameter. Over-rides default guess above.
 	if (3 < param_argc)
