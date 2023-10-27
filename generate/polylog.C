@@ -210,6 +210,23 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 		cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -2, prec);
 		cpx_sub(zeta, zeta, z2);
 	}
+
+	// Wind around the z=+1 cut in the left-hand direction
+	// Place the cut from z=0 so it's aimed to the left, not
+	// the right. This gives a nice view of the double-cut.
+	if (3 == branch)
+	{
+		if (mpf_cmp_ui(zee[0].im, 0) <= 0)
+		{
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+		}
+		else
+		{
+			mpf_neg(zee[0].im, zee[0].im);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -2, prec);
+		}
+		cpx_sub(zeta, zeta, z2);
+	}
 #endif
 
 	double frea = cpx_get_re(zeta);

@@ -5,6 +5,9 @@
 #
 # After this is done, run this:
 # ffmpeg -i polylog-montage-%04d.png -framerate 30 polylog-montage.mp4
+# For the web, we also need:
+#    -vcodec h264 -movflags +faststart -pix_fmt yuv420p
+# The -pix_fmt yuv420p is mandatory for firefox, else it fails.
 #
 # Paste images side by side (from Imagemagick):
 # montage a.png b.png c.png -tile 3x1 -geometry +0+0 out.png
