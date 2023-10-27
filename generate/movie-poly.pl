@@ -11,7 +11,7 @@ $tau = 0;
 $taudelta = $taumax / $nframes;
 
 # Width, in the complex plane. Since it's centered, this
-# will go from -3.5 to +3.5 obn the real axis.
+# will go from -3.5 to +3.5 on the real axis.
 $width = 7.0;
 # $width = 3.0;
 
