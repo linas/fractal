@@ -51,8 +51,12 @@ static void psi_init ()
 	 * The routines seem quite touchy about this.
 	 * Hand-tuned; seems that this gives OK performance w/o
 	 * loss of picture quality.
+	 *
+	 * prec=25 causes causes visible artifacts on the g1
+	 * sheet at s = 0.5 +i 68 and above.
 	 */
 	prec = 25 + (int) (0.33 * tau);
+	prec = 25 + (int) (0.5 * tau);
 
 	// Precision passed as parameter. Over-rides default guess above.
 	if (3 < param_argc)
