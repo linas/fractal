@@ -158,12 +158,13 @@ where both
 
 \end_inset
 
-it would seem entirely obvious (but entirely incorrect) that 
+a naive (but entirely incorrect) algebraic manipulation suggests that 
 \begin_inset Formula $\zeta\left(s\right)=\mbox{Li}_{s}\left(1\right)$
 \end_inset
 
 .
- The problem here is that the polylogarithm has a branch point at 
+ But this is false.
+ The problem is that the polylogarithm has a branch point at 
 \begin_inset Formula $z=1$
 \end_inset
 
@@ -172,30 +173,65 @@ it would seem entirely obvious (but entirely incorrect) that
 \end_inset
 
 .
- As one performs analytic continuation, and moves to other sheets, one discovers
- that there is also a second branch point at 
-\begin_inset Formula $z=0$
-\end_inset
-
-.
- Obviously, this second branch point is missing on the principle sheet;
- one only has a simple zero, there.
- The collection of moves available, as one crosses the branch cuts, this
- is called the monodromy, and is presented in a later section.
+ The naive identity cannot hold.
 \end_layout
 
 \begin_layout Standard
-Although one does not have any simple relationship between the Riemann zeta
- and the polylogarithm, one does have a simple and beautiful relationship
- between the zeros of the polylogarithm, and the non-trivial zeros of the
- Riemann zeta.
- This relationship is best exposed by creating an animation of the polylog
+Although one does not have this simple relationship between the Riemann
+ zeta and the polylogarithm, one still has a behavior that makes it 
+\begin_inset Quotes eld
+\end_inset
+
+almost true
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Zeros of the polylogarithm 
+\begin_inset Quotes eld
+\end_inset
+
+hit
+\begin_inset Quotes erd
+\end_inset
+
+ the branch point exactly when 
+\begin_inset Formula $s$
+\end_inset
+
+ corresponds to a non-trivial Riemann zero.
+ The relation is deeper: it seems that the zeros of the polylogarithm, when
+ viewed on the critical line 
+\begin_inset Formula $s=1/2+i\tau$
+\end_inset
+
+, are in exact correspondance with the non-trivial zeros of the Riemann
+ zeta.
+\end_layout
+
+\begin_layout Standard
+The relationship is best exposed by creating an animation of the polylog
  along the critical line 
 \begin_inset Formula $s=1/2+i\tau$
 \end_inset
 
+, varying 
+\begin_inset Formula $\tau$
+\end_inset
+
+ over time.
+ The animations can be found at 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://linas.org/art-gallery/polylog/polylog.html"
+target "https://linas.org/art-gallery/polylog/polylog.html"
+literal "false"
+
+\end_inset
+
 .
- As an example, the figure below shows the phase of 
+ To understand them, lets first start with a still.
+ The figure below shows the phase of 
 \begin_inset Formula $\mbox{Li}_{0.5+i14}\left(z\right)$
 \end_inset
 
@@ -203,7 +239,7 @@ Although one does not have any simple relationship between the Riemann zeta
 \begin_inset Formula $z$
 \end_inset
 
- plane:
+ plane.
 \end_layout
 
 \begin_layout Standard
@@ -284,6 +320,16 @@ literal "false"
 
  that paper provides both algorithms for high-precision computation, as
  well as discussions of the monodromy.
+ In particular, there is a second branch point, at 
+\begin_inset Formula $z=0$
+\end_inset
+
+, which appears on other sheets.
+ Thus, continuous paths on the complex 
+\begin_inset Formula $z$
+\end_inset
+
+ plane can wind around either of these two branch points.
 \end_layout
 
 \begin_layout Standard
@@ -292,8 +338,8 @@ The above image shows a sequence of zeros, located near the circle
 \end_inset
 
 .
- That they are only near, and not exactly on, becomes evident by watching
- the movies on the web page 
+ That they are only near the circle, but not exactly on, becomes evident
+ by watching the movies on the web page 
 \begin_inset CommandInset href
 LatexCommand href
 name "https://linas.org/art-gallery/polylog/polylog.html"
@@ -303,12 +349,37 @@ literal "false"
 \end_inset
 
 .
- The sequence of zeros accumulates onto the branch point at 
+ The sequence of zeros on the upper-half-plane accumulates onto the branch
+ point at 
 \begin_inset Formula $z=1$
 \end_inset
 
 .
- 
+ The precise form of the accumulation is given in the next section.
+ It is logarithmic in the distance to the branch-point.
+\end_layout
+
+\begin_layout Standard
+Just underneath the branch cut, in the lower half-plane, a lone zero is
+ visible.
+ It is the one terminating the red-black edge, just underneath the branch
+ point.
+ This zero is a zero of the polylogarithm.
+ As 
+\begin_inset Formula $s$
+\end_inset
+
+ is slowly increased from 
+\begin_inset Formula $s=1/2+i14$
+\end_inset
+
+ to 
+\begin_inset Formula $s=1/2+i14.134725$
+\end_inset
+
+, this polylog zero will smack into the branch point.
+ This is clearly visible in the movies (watch the movies now, if you have
+ not watched them yet.)
 \end_layout
 
 \begin_layout Standard
@@ -347,16 +418,6 @@ That is, examine the structure of
 
 \begin_layout Standard
 This animation (and more) are provided at 
-\end_layout
-
-\begin_layout Section*
-Monodromy
-\end_layout
-
-\begin_layout Standard
-The two branch points gives the polylog a richer analytic structure than
- what is conventionally explored in complex analysis.
- Given the two branch
 \end_layout
 
 \begin_layout Section*
