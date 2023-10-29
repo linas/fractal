@@ -141,7 +141,16 @@ The polylog function has the series expansion
 
 \end_inset
 
-where both 
+This converges for 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset
+
+ and 
+\begin_inset Formula $\Re s>1$
+\end_inset
+
+.
+ Analytic continuation can be used to extend this to other values of 
 \begin_inset Formula $s$
 \end_inset
 
@@ -149,8 +158,8 @@ where both
 \begin_inset Formula $z$
 \end_inset
 
- can take on arbitrary complex values.
- Comparing this to the series representation for the Riemann zeta
+.
+ Comparing the above to the series representation for the Riemann zeta
 \begin_inset Formula 
 \[
 \zeta\left(s\right)=\sum_{n=1}^{\infty}\frac{1}{n^{s}}
@@ -158,17 +167,19 @@ where both
 
 \end_inset
 
-a naive (but entirely incorrect) algebraic manipulation suggests that 
+one is tempted to make a naive (but entirely incorrect) algebraic manipulation
+ that suggests 
 \begin_inset Formula $\zeta\left(s\right)=\mbox{Li}_{s}\left(1\right)$
 \end_inset
 
 .
  But this is false.
- The problem is that the polylogarithm has a branch point at 
+ The problem is that the polylogarithm has a branch point (essential singularity
+) at 
 \begin_inset Formula $z=1$
 \end_inset
 
-; the polylog consists of many sheets, wrapped as a helix around 
+; the polylog has many sheets, wrapped as a helix around 
 \begin_inset Formula $z=1$
 \end_inset
 
@@ -230,7 +241,7 @@ literal "false"
 \end_inset
 
 .
- To understand them, lets first start with a still.
+ The animations can be explained by starting with a still.
  The figure below shows the phase of 
 \begin_inset Formula $\mbox{Li}_{0.5+i14}\left(z\right)$
 \end_inset
@@ -259,13 +270,59 @@ The point
 \begin_inset Formula $z=0$
 \end_inset
 
- is in the center of the figure; the domain of the figure is over the intervals
+ is at the center of the figure; the domain of the figure is over the intervals
  
 \begin_inset Formula $-2.5\le\Re z,\Im z\le2.5$
 \end_inset
 
 .
- The phase is color-coded so that black corresponds to 
+ The phase
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The word 
+\begin_inset Quotes eld
+\end_inset
+
+phase
+\begin_inset Quotes erd
+\end_inset
+
+ is just the conventional defintion.
+ Write 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)=a+ib=M\left(s;z\right)\exp i\phi\left(s;z\right)$
+\end_inset
+
+ with both 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ being real functions.
+ Then 
+\begin_inset Formula $M=\sqrt{a^{2}+b^{2}}$
+\end_inset
+
+ is the magnitude, and 
+\begin_inset Formula $\phi=\arctan b/a$
+\end_inset
+
+ is the phase.
+ As always, the phase is ambiguous up to a multiple of 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+ is color-coded so that black corresponds to 
 \begin_inset Formula $-\pi$
 \end_inset
 
@@ -293,7 +350,38 @@ The point
 
 , where the phases wrap around a point: this is the content of Cauchy's
  theorem.
- Prominently, at the center of the image, we see that 
+ Prominently, at the center of the image,
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For 
+\begin_inset Formula $z\ll1$
+\end_inset
+
+ small, the first term of the series dominates: 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)\approx z=\left|z\right|e^{i\phi}$
+\end_inset
+
+ and so 
+\begin_inset Formula $\phi\approx0$
+\end_inset
+
+ to the right, along the positive real axis (and thus, green), and 
+\begin_inset Formula $\phi\approx-\pi/2$
+\end_inset
+
+ along the negative imaginary axis (and thus blue), etc.
+ The red/black edge is just the 
+\begin_inset Formula $\phi\approx\pm\pi$
+\end_inset
+
+ along the negative real axis.
+\end_layout
+
+\end_inset
+
+ we see that 
 \begin_inset Formula $\mbox{Li}_{s}\left(0\right)=0$
 \end_inset
 
@@ -645,7 +733,46 @@ Commentary
 \end_layout
 
 \begin_layout Standard
-Sooo
+Lets recap some salient facts.
+ First, as 
+\begin_inset Formula $s$
+\end_inset
+
+ is varied by small amounts, the zeros of 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset
+
+ move about smoothly.
+ There can be no other way: 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset
+
+ is analytic in 
+\begin_inset Formula $s$
+\end_inset
+
+; a small change in 
+\begin_inset Formula $s$
+\end_inset
+
+ just shifts the zeros smoothly (and analytically).
+ In particular, the zeros are 
+\begin_inset Quotes eld
+\end_inset
+
+conserved
+\begin_inset Quotes erd
+\end_inset
+
+: they cannot pop into and out of existance as 
+\begin_inset Formula $s$
+\end_inset
+
+ is changed.
+ With one exception: they can pop out of branch points, or disappear into
+ them.
+ At all other locations, they move about smoothly.
+ (This is basic complex analysis and won't be belabored here.)
 \end_layout
 
 \begin_layout Standard
