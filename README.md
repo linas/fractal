@@ -53,7 +53,7 @@ the public. This is my private workshop, and not my showroom. I am
 publishing this in response to requests that I make certain parts
 available. Well, here's all of it.
 
-FYI, some of the code is very old (dating to 1995), and might not
+FYI, some of the code is very old (dating to 1987), and might not
 actually compile.  Some of the libraries and dependencies have moved,
 breaking this old code. I will accept bug reports and pull requests
 to fix what's broken.
@@ -99,7 +99,7 @@ In alphabetical order:
 
 - [**tools**](tools) -- A collection of numeric libraries to support the
   various experiments. Includes implementations of various
-  number-theorietic functions, such as computing divisors, finding
+  number-theoretic functions, such as computing divisors, finding
   primes, working with continued fractions. Also includes some basic
   image manipulation code. Much of this code was written in the 1990's
   and 2000's, long before python existed, long before math libraries
