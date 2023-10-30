@@ -643,7 +643,7 @@ The accumulation of zeros near the branch point can be explored by working
 \begin_inset Quotes eld
 \end_inset
 
-periodic zera function
+periodic zeta function
 \begin_inset Quotes erd
 \end_inset
 
@@ -728,6 +728,11 @@ and so, as
  remains.
 \end_layout
 
+\begin_layout Standard
+Note that the zeros, as they peel off from the branch point, can be uniquely
+ numbered.
+\end_layout
+
 \begin_layout Section*
 Commentary
 \end_layout
@@ -773,6 +778,200 @@ conserved
  them.
  At all other locations, they move about smoothly.
  (This is basic complex analysis and won't be belabored here.)
+\end_layout
+
+\begin_layout Standard
+Although the intro noted that 
+\begin_inset Formula $\zeta\left(s\right)\ne\mbox{Li}_{s}\left(1\right)$
+\end_inset
+
+, a glance at the image above indicates that the 
+\begin_inset Formula $z\to1$
+\end_inset
+
+ limit is path dependent.
+ The periodic zeta shows how to do it: take 
+\begin_inset Formula $q\to1$
+\end_inset
+
+ instead of 
+\begin_inset Formula $q\to0$
+\end_inset
+
+, where the sum is singular.
+ Actually, any 
+\begin_inset Formula $q\to N$
+\end_inset
+
+ for any integer 
+\begin_inset Formula $N>0$
+\end_inset
+
+ should work.
+ Explicitly,
+\begin_inset Formula 
+\[
+\lim_{q\to N}\sum_{n=1}^{\infty}\frac{e^{2\pi iq}}{n^{s}}=\zeta\left(s\right)
+\]
+
+\end_inset
+
+and this time, the direction of approach should not matter.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+I hate being pedantic, but I know I have readers who get upset when I'm
+ not.
+ So, idependent of approach means that one writes 
+\begin_inset Formula $q=N+\varepsilon\exp i\phi$
+\end_inset
+
+ wih both 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ being real.
+ One takes the limit 
+\begin_inset Formula $\varepsilon\to0$
+\end_inset
+
+ and demonstrates uniform convergence: for all 
+\begin_inset Formula $\phi$
+\end_inset
+
+ there exists an upper bound, and convergence is better than this upper
+ bound.
+ For 
+\begin_inset Formula $N>0$
+\end_inset
+
+ this is always possible.
+ Well, that, and 
+\begin_inset Formula $\Re s>1$
+\end_inset
+
+, else analytically continue to remove pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+, etc.
+ which does complicate the eqns but is entirely tractable.
+ Again, see my polylog paper.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Poly07"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These two ingredients are sufficient to explain the behavior of the polylog
+ zeros as 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is varied on the critical line, i.e.
+ on 
+\begin_inset Formula $s=1/2+i\tau$
+\end_inset
+
+.
+ That is to say, as 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is increased (as in the movies), each of the polylog zeros rotate around,
+ counter-clockwise, and hit 
+\begin_inset Formula $q=1$
+\end_inset
+
+ exactly when 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is a non-trivial Riemann zero.
+ There are now several questions that arise:
+\end_layout
+
+\begin_layout Enumerate
+Do any of the polylog zeros fail to hit 
+\begin_inset Formula $q=1$
+\end_inset
+
+? That is, as they rotate around, do they ever pass to the left or right
+ of the branch-point?
+\end_layout
+
+\begin_layout Enumerate
+If one performs the same animations along 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset
+
+ with 
+\begin_inset Formula $\sigma\ne1/2$
+\end_inset
+
+, do any of the zeros hit 
+\begin_inset Formula $q=1$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+Observe that the second question is identical to the Riemann Hypothesis
+ (RH): If the answer is 
+\begin_inset Quotes eld
+\end_inset
+
+yes
+\begin_inset Quotes erd
+\end_inset
+
+, then there exists a polylog zero 
+\begin_inset Formula $s$
+\end_inset
+
+ such that 
+\begin_inset Formula $\zeta\left(s\right)=0$
+\end_inset
+
+ but 
+\begin_inset Formula $\sigma\ne1/2$
+\end_inset
+
+.
+ Conversely, if the answer is 
+\begin_inset Quotes eld
+\end_inset
+
+no
+\begin_inset Quotes erd
+\end_inset
+
+, then the RH is satsified (all non-trvial zeros lie on the critical line.)
+\end_layout
+
+\begin_layout Standard
+The second question can now be refined.
+ Write 
+\begin_inset Formula $\sigma=1/2+\varepsilon$
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard

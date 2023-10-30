@@ -57,6 +57,7 @@ static void psi_init ()
 	 */
 	prec = 25 + (int) (0.33 * tau);
 	prec = 25 + (int) (0.5 * tau);
+	prec = 35 + (int) (0.5 * tau);
 
 	// Precision passed as parameter. Over-rides default guess above.
 	if (3 < param_argc)
