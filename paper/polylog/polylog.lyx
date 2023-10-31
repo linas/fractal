@@ -238,7 +238,7 @@ The relationship is best exposed by creating an animation of the polylog
 \end_inset
 
  over time.
- The animations can be found at 
+ Several animations can be found at 
 \begin_inset CommandInset href
 LatexCommand href
 name "https://linas.org/art-gallery/polylog/polylog.html"
@@ -250,14 +250,18 @@ literal "false"
 .
  The animations can be explained by starting with a still.
  The figure below shows the phase of 
-\begin_inset Formula $\mbox{Li}_{0.5+i14}\left(z\right)$
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
 \end_inset
 
  on the complex-
 \begin_inset Formula $z$
 \end_inset
 
- plane.
+ plane, for fixed 
+\begin_inset Formula $s=0.5+i14$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -346,7 +350,7 @@ phase
 \end_inset
 
 .
- Thus, each sharp red-black transition encodes a change of phase by 
+ Thus, each sharp red–black transition encodes a change of phase by 
 \begin_inset Formula $2\pi$
 \end_inset
 
@@ -451,13 +455,13 @@ literal "false"
 
 .
  The precise form of the accumulation is given in the next section.
- It is logarithmic in the distance to the branch-point.
+ It is exponential in the distance to the branch-point.
 \end_layout
 
 \begin_layout Standard
 Just underneath the branch cut, in the lower half-plane, a lone zero is
  visible.
- It is the one terminating the red-black edge, just underneath the branch
+ It is the one terminating the red–black edge, just underneath the branch
  point.
  This zero is a zero of the polylogarithm.
  As 
@@ -487,7 +491,7 @@ What does this mean? The locations of the polylog zeros vary smoothly as
 \begin_inset Formula $s$
 \end_inset
 
-.) As on moves along the critical line 
+.) As one moves along the critical line 
 \begin_inset Formula $s=1/2+i\tau$
 \end_inset
 
@@ -638,6 +642,8 @@ obvious
  I don't know of any easy way of proving theorems about the zeros of the
  polylog.
  Nonetheless, a number of interesting statements can be made.
+ Most interesting perhaps is that RH can be refined into a strong and a
+ weak version, only one of which may hold.
 \end_layout
 
 \begin_layout Section*
@@ -829,7 +835,11 @@ for some constant
 \begin_inset Formula $q=re^{i\phi}$
 \end_inset
 
- this expands to
+ and assuming 
+\begin_inset Formula $r\ll1$
+\end_inset
+
+, this expands to
 \begin_inset Formula 
 \[
 \zeta\left(s,q\right)=r^{\phi\tau-\sigma}e^{-i\left(\phi\sigma+\tau\log r\right)}+C+\mathcal{O}\left(r\right)
@@ -844,7 +854,7 @@ Combining the above, we deduce that
 \begin_inset Formula 
 \begin{align*}
 F\left(q;s\right)= & K\left(C+q^{s-1}\right)+\mathcal{O}\left(q\right)\\
-\approx & K\left(r^{1+\sigma-\phi\tau}e^{i\left(\phi\sigma+\tau\log r\right)}+C\right)+\mathcal{O}\left(r\right)
+= & K\left(r^{1+\sigma-\phi\tau}e^{i\left(\phi\sigma+\tau\log r\right)}+C\right)+\mathcal{O}\left(r\right)
 \end{align*}
 
 \end_inset
@@ -884,10 +894,10 @@ Thus, one finds
 \begin_inset Formula $\phi\sigma\approx0$
 \end_inset
 
- yields 
+ yields a sequence of zeros, located at
 \begin_inset Formula 
 \[
-r\approx e^{\mbox{const.}/\tau}\times e^{-2\pi n/\tau}
+r_{n}\approx e^{\mbox{const.}/\tau}\times e^{-2\pi n/\tau}
 \]
 
 \end_inset
@@ -1015,15 +1025,15 @@ Although the intro noted that
 \end_inset
 
  limit is path dependent.
- The periodic zeta shows how to do it: take 
-\begin_inset Formula $q\to1$
-\end_inset
-
- instead of 
+ The periodic zeta shows how to do it: avoid the singularity at 
 \begin_inset Formula $q\to0$
 \end_inset
 
-, where the sum is singular.
+ by taking 
+\begin_inset Formula $q\to1$
+\end_inset
+
+ instead.
  Actually, any 
 \begin_inset Formula $q\to N$
 \end_inset
@@ -1138,7 +1148,11 @@ These two ingredients are sufficient to explain the behavior of the polylog
 
  increases, it appears that the polylog zeros rotate (circulate) around
  the origin.
- Does this circulation hold indefinitely? 
+ Does this circulation hold indefinitely, as 
+\begin_inset Formula $\tau$
+\end_inset
+
+ grows? 
 \end_layout
 
 \begin_layout Enumerate
@@ -1167,7 +1181,7 @@ These two ingredients are sufficient to explain the behavior of the polylog
 \begin_inset Formula $q=1$
 \end_inset
 
-?
+? If they did, this would be a violation of RH.
 \end_layout
 
 \begin_layout Enumerate
@@ -1185,7 +1199,7 @@ These two ingredients are sufficient to explain the behavior of the polylog
 \begin_inset Formula $1/2<\sigma$
 \end_inset
 
-, it seems that every polylog zero crosses to the left of 
+, it seems that every polylog zero crosses to the right of 
 \begin_inset Formula $z=1$
 \end_inset
 
@@ -1244,11 +1258,7 @@ playing a game of Flying Dutchman
 \end_inset
 
 ) and becoming a Riemann zero again, a second, third, forth ...
- time as well
-\begin_inset Formula $\zeta\left(1/2+\varepsilon+i\tau\right)=0$
-\end_inset
-
-.
+ time as well.
  Even as new zeros are sprouted from the branch point, the old ones get
  recycled.
  Overall, it would seem that the number of circulating zeros becomes more
@@ -1257,6 +1267,10 @@ playing a game of Flying Dutchman
 
 \begin_layout Standard
 It would presumably be quite interesting to know the interleaving sequence.
+ It seems reasonable to think that perhaps this interleaving sequence correspond
+s to the orbit of some geodesic on some peculiar Riemann surface.
+ This seems to be a recurring theme in the industry, but is a bit out-of-scope
+ for the current paper.
 \end_layout
 
 \begin_layout Section*
@@ -1298,9 +1312,13 @@ no
 \end_layout
 
 \begin_layout Standard
-Assuming the circulation hypothesis (given above, at the end of the last
- section) each polylog zero will eventually loop about, and cross the real
- line.
+Consider the case of a movie with 
+\begin_inset Formula $\sigma\ne1/2$
+\end_inset
+
+.
+ Assuming the circulation hypothesis (given above,) each polylog zero will
+ eventually loop about, and cross the real line.
  That is, 
 \begin_inset Formula $z$
 \end_inset
@@ -1405,7 +1423,7 @@ Assuming RH, we then have that, for each
 \end_inset
 
 , then RH is true.
- So, if and only if.
+ So, this holds if and only if.
 \end_layout
 
 \begin_layout Standard
@@ -1488,6 +1506,15 @@ weak RH
 \end_inset
 
  says that RH is true, but just barely, flirting with disaster.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+weak
+\begin_inset Quotes erd
+\end_inset
+
+ is a fun choice; it is reminiscent of weak convergence in Hilbert spaces.
 \end_layout
 
 \begin_layout Standard
@@ -1579,7 +1606,7 @@ If RH is violated, then the bracketing hypothesis is also violated (since
 \begin_inset Formula $z_{m}\left(\alpha\right)$
 \end_inset
 
- is a smooth curve (and also continuous).
+ is a smooth curve (and therefore continuous).
  Thus, when 
 \begin_inset Formula $\alpha=0,$
 \end_inset
@@ -1614,9 +1641,9 @@ the corresponding
 \begin_inset Formula $z_{m}$
 \end_inset
 
- is associated not just with a pair of mirrored RH zeros, but also a third
- zero that is on the critical line.
- There could also be five, seven or any number of odd zeros associated with
+ is associated not just with a pair of mirrored RH zeros, but also with
+ a third zero that is on the critical line.
+ There could also be five, seven or any odd number of zeros associated with
  
 \begin_inset Formula $z_{m}$
 \end_inset
