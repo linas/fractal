@@ -56,8 +56,8 @@ static void psi_init ()
 	 * sheet at s = 0.5 +i 68 and above.
 	 */
 	prec = 25 + (int) (0.33 * tau);
-	prec = 25 + (int) (0.5 * tau);
-	prec = 35 + (int) (0.5 * tau);
+	//prec = 25 + (int) (0.5 * tau);
+	//prec = 35 + (int) (0.5 * tau);
 
 	// Precision passed as parameter. Over-rides default guess above.
 	if (3 < param_argc)
@@ -221,7 +221,8 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	// the right. This gives a nice view of the double-cut.
 	if (3 == branch)
 	{
-		if (mpf_cmp_ui(zee[0].im, 0) <= 0)
+		// if (mpf_cmp_ui(zee[0].im, 0) <= 0)
+		if (mpf_sgn(zee[0].im) <= 0)
 		{
 			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
 		}
@@ -238,7 +239,8 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	double fima = cpx_get_im(zeta);
 
 	// double fmag = sqrt(frea*frea + fima*fima);
-	//	return fmag;
+	// fmag = log(1.0+fmag);
+	// return fmag;
 
 	double phase = atan2 (fima, frea);
 	phase += M_PI;
