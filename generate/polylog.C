@@ -195,25 +195,25 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	// Wind around the z=+1 cut in the left-hand direction
 	if (-1 == branch)
 	{
-		cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
-		cpx_sub(zeta, zeta, z2);
+		cpx_polylog_g1_action(z2, ess, zee, -1, prec);
+		cpx_add(zeta, zeta, z2);
 	}
 
 	// Wind around the z=+1 cut in the right-hand direction
 	if (1 == branch)
 	{
-		cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
-		cpx_sub(zeta, zeta, z2);
+		cpx_polylog_g1_action(z2, ess, zee, 1, prec);
+		cpx_add(zeta, zeta, z2);
 	}
 
 	// Wind around the z=+1 cut in the left-hand direction
 	// Next, around the z=0 cut in the right-hand direction.
-	// This is janky, but seems to be correct.
+	// This is janky, because it takes complex conjugate.
 	if (2 == branch)
 	{
 		mpf_neg(zee[0].im, zee[0].im);
-		cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -2, prec);
-		cpx_sub(zeta, zeta, z2);
+		cpx_polylog_g1_action(z2, ess, zee, -2, prec);
+		cpx_add(zeta, zeta, z2);
 	}
 
 	// Wind around the z=+1 cut in the left-hand direction
@@ -221,26 +221,42 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	// the right. This gives a nice view of the double-cut.
 	if (3 == branch)
 	{
-		// if (mpf_cmp_ui(zee[0].im, 0) <= 0)
 		if (mpf_sgn(zee[0].im) <= 0)
 		{
-			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+			cpx_polylog_g1_action(z2, ess, zee, -1, prec);
 		}
 		else
 		{
+			// XXX complex conjugate, this is wrong
 			mpf_neg(zee[0].im, zee[0].im);
-			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -2, prec);
+			cpx_polylog_g1_action(z2, ess, zee, -2, prec);
 		}
-		cpx_sub(zeta, zeta, z2);
+		cpx_add(zeta, zeta, z2);
+	}
+
+	// Verify continuity by stapling the principal sheet in upper
+	// half plane to lower half. This places the z=1 cut to the
+	// left.
+	if (4 == branch)
+	{
+		if (mpf_sgn(zee[0].im) < 0)
+		{
+			cpx_polylog_g1_action(z2, ess, zee, -1, prec);
+			cpx_add(zeta, zeta, z2);
+		}
 	}
 #endif
 
 	double frea = cpx_get_re(zeta);
 	double fima = cpx_get_im(zeta);
 
-	// double fmag = sqrt(frea*frea + fima*fima);
-	// fmag = log(1.0+fmag);
-	// return fmag;
+#if 0
+	double fmag = sqrt(frea*frea + fima*fima);
+	// double lfmag = log(1.0+fmag);
+	double lfmag = log1p(fmag);
+	// printf("z=%0.4f + i%.4f  fmag=%g  logmag=%g\n", cpx_get_re(zee), cpx_get_im(zee), fmag, lfmag);
+	return lfmag;
+#endif
 
 	double phase = atan2 (fima, frea);
 	phase += M_PI;
