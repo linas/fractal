@@ -89,9 +89,9 @@ static void psi_init ()
 
 	cpx_set_d (zee, 0.0, 0.1);
 
-	// cpx_polylog_sheet_g0_action returns -exp(-2pi is)
+	// cpx_polylog_g0_action returns -exp(-2pi is)
 	// which we use multiplicatively to go around the branch at zero
-	cpx_polylog_sheet_g0_action (ph, ess, 1, prec);
+	cpx_polylog_g0_action (ph, ess, 1, prec);
 }
 
 static double plogger (double re_q, double im_q, int itermax, double param)
