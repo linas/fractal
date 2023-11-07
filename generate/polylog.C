@@ -206,31 +206,9 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 		cpx_add(zeta, zeta, z2);
 	}
 
-	// Wind around the z=+1 cut in the left-hand direction
-	// Next, around the z=0 cut in the right-hand direction.
-	// This is janky, because it takes complex conjugate.
 	if (2 == branch)
 	{
-		mpf_neg(zee[0].im, zee[0].im);
-		cpx_polylog_g1_action(z2, ess, zee, -2, prec);
-		cpx_add(zeta, zeta, z2);
-	}
-
-	// Wind around the z=+1 cut in the left-hand direction
-	// Place the cut from z=0 so it's aimed to the left, not
-	// the right. This gives a nice view of the double-cut.
-	if (3 == branch)
-	{
-		if (mpf_sgn(zee[0].im) <= 0)
-		{
-			cpx_polylog_g1_action(z2, ess, zee, -1, prec);
-		}
-		else
-		{
-			// XXX complex conjugate, this is wrong
-			mpf_neg(zee[0].im, zee[0].im);
-			cpx_polylog_g1_action(z2, ess, zee, -2, prec);
-		}
+		cpx_polylog_g1_action(z2, ess, zee, 2, prec);
 		cpx_add(zeta, zeta, z2);
 	}
 
@@ -242,6 +220,18 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 		if (mpf_sgn(zee[0].im) < 0)
 		{
 			cpx_polylog_g1_action(z2, ess, zee, -1, prec);
+			cpx_add(zeta, zeta, z2);
+		}
+	}
+
+	// Verify continuity by stapling the principal sheet in lower
+	// half plane to upper half. This places the z=1 cut to the
+	// left.
+	if (5 == branch)
+	{
+		if (mpf_sgn(zee[0].im) > 0)
+		{
+			cpx_polylog_g1_action(z2, ess, zee, 1, prec);
 			cpx_add(zeta, zeta, z2);
 		}
 	}
