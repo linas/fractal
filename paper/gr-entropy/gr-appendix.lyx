@@ -141,6 +141,10 @@ Appendix E: Gullstrand–Painlevé coordinates
 Appendix F: Francis–Kosowsky coordinates
 \end_layout
 
+\begin_layout Itemize
+Appendix G: Fields
+\end_layout
+
 \begin_layout Section*
 Appendix A: Vierbeins
 \end_layout
@@ -931,6 +935,7 @@ Crappy Exterior Frame and Coframe
 This subsection proposes a frame choice that turns out to be a bad choice,
  having a coordinate singularity in it.
  It's here as a historical reference, as I tripped over it first.
+ It's a reminder-to-self to not do it this way, next time.
 \end_layout
 
 \begin_layout Standard
@@ -1211,7 +1216,7 @@ and
 \end_inset
 
 is an arbitrary function that can be freely chosen.
- Appearently, it's form is not constrained by the (Einstein vaccum) field
+ Apparently, it's form is not constrained by the (Einstein vaccum) field
  equations! Under a re-parameterization of the time coordinate
 \begin_inset Formula 
 \[
@@ -1468,6 +1473,179 @@ good
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section*
+Appendix G: Fields
+\end_layout
+
+\begin_layout Standard
+Assort factoids about fields.
+ For now, we adopt notation that
+\begin_inset Formula 
+\[
+\alpha\equiv\alpha\left(r\right)=1-\frac{2m}{r}
+\]
+
+\end_inset
+
+and perhaps we can go more general for Reissner-Nordström, which still have
+ sphere symmetry.
+ This is consistent with the previous section.
+ Apparently, some of the stuff here will also hold in de Sitter spacetime,
+ as a general rule.
+\end_layout
+
+\begin_layout Subsection*
+Scalar field
+\end_layout
+
+\begin_layout Standard
+This section cribed from class lecture notes by Lim.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lim2019"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Generic Klien-Gordon solutions decompose as
+\begin_inset Formula 
+\[
+\Phi=\sum_{lm}\frac{\psi_{\omega lm}\left(r\right)}{r}Y_{lm}e^{-i\omega t}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\omega$
+\end_inset
+
+ being complex, in general.
+ Plugging through gives something that looks like the Shreodinger eqn:
+\begin_inset Formula 
+\[
+\frac{d^{2}\psi}{dy^{2}}+\left(\omega^{2}-V_{l}\right)\psi=0
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $dy=\alpha dr$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+V_{l}=\alpha\left(\frac{l\left(l+1\right)}{r^{2}}-\frac{\alpha^{\prime}}{r}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Quasi-Normal Modes
+\end_layout
+
+\begin_layout Standard
+Quasi-normal modes obey boundary conditions that they are free wave solutions
+ as 
+\begin_inset Formula $r\to+\infty$
+\end_inset
+
+, because 
+\begin_inset Formula $V_{l}\to0$
+\end_inset
+
+ in this limit.
+ So
+\begin_inset Formula 
+\[
+\Phi\sim e^{-i\omega\left(t-y\right)}\quad\mbox{ for }y\to+\infty
+\]
+
+\end_inset
+
+The sign is chosen so that the waves are pure outgoing.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\alpha\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $r\to2m$
+\end_inset
+
+ and so, again 
+\begin_inset Formula $V_{l}\to0$
+\end_inset
+
+ in this limit, and 
+\begin_inset Formula $y\to-\infty$
+\end_inset
+
+ and so similarly: 
+\begin_inset Formula 
+\[
+\Phi\sim e^{-i\omega\left(t+y\right)}\quad\mbox{ for }y\to-\infty
+\]
+
+\end_inset
+
+and so the wave appear to be free and pure ingoing near the EH.
+\end_layout
+
+\begin_layout Standard
+These are quasi-normal modes; they do not form a complete set.
+\end_layout
+
+\begin_layout Subsection*
+Electromagnetic field
+\end_layout
+
+\begin_layout Standard
+The Lagrangian density for electromagnetic field in the Schwarzschild background
+, in the (modified?) Feynmann gauge, is
+\begin_inset Formula 
+\[
+\mathcal{L}=-\sqrt{-g}\left[\frac{1}{4}F_{\mu\nu}F^{\mu\nu}+\frac{1}{2}H^{2}\right]
+\]
+
+\end_inset
+
+where the guage-fixing term is
+\begin_inset Formula 
+\[
+H=\nabla^{\mu}A_{\mu}+K^{\mu}A_{\mu}
+\]
+
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+K^{\mu}=\delta^{1\mu}\frac{d\alpha}{dr}
+\]
+
+\end_inset
+
+The corresponding Euler-Lagrange eqns are
+\begin_inset Formula 
+\[
+\nabla_{\nu}F^{\mu\nu}+\nabla^{\mu}H+K^{\mu}H=0
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
