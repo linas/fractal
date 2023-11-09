@@ -550,8 +550,8 @@ is a vector in the tangent bundle (for each fixed index
 \end_inset
 
 ).
- By construction, these vectors were chosen to be orthonormal; they provide
- a vector basis on the tangent bundle.
+ By construction, these vectors were chosen to be orthonormal; the collection
+ of them provide a vector basis on the tangent bundle.
 \end_layout
 
 \begin_layout Standard
@@ -588,7 +588,7 @@ Strange but true.
 
  because the centerdot is undefined for the naked vectors; it can only be
  defined after the vielbein frame has been given.
- Once we have the vielbein frame, the centderdot is defined, and one can
+ Once we have the vielbein frame, the centerdot is defined, and one can
  write 
 \begin_inset Formula $\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}$
 \end_inset
@@ -614,18 +614,14 @@ The solder form seems to be
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Vector fields, for example, 
+Vector fields 
 \begin_inset Formula $\vec{X}=X^{\mu}\partial_{\mu}$
 \end_inset
 
  are written in the tetrad frame as 
 \begin_inset Formula 
 \[
-\vec{X}=X^{\mu}\partial_{\mu}=\Xi^{a}e_{a}^{\;\mu}\partial_{\mu}=\Xi^{a}\gamma_{a}
+\vec{X}=X^{\mu}\partial_{\mu}=\Xi^{a}e_{a}^{\;\mu}\partial_{\mu}=\Xi^{a}\gamma_{a}=X^{a}\gamma_{a}
 \]
 
 \end_inset
@@ -634,7 +630,7 @@ where
 \begin_inset Formula $\Xi=X$
 \end_inset
 
- is spruriously introduced to avoid abuse of notation.
+ is spuriously introduced to avoid abuse of notation.
  Its still the same vector.
  The abuse of notation is to write 
 \begin_inset Formula $\Xi^{a}=X^{a}$
@@ -642,7 +638,11 @@ where
 
  which is fine as long as we remember that roman indexes are always with
  respect to the vielbein frame.
- 
+ Explicitly, 
+\begin_inset Formula $X^{\mu}=X^{a}e_{a}^{\;\mu}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1902,7 +1902,37 @@ Let
 \end_inset
 
  denote a tetrad frame (using the notation reviewed in Appendix A).
- Then one has 
+ Recall that 
+\begin_inset Formula $\mathbf{g}_{\mu}=\partial_{\mu}$
+\end_inset
+
+ is just a coordinate tangent vector.
+ The notation is that 
+\begin_inset Formula $\partial_{\mu}$
+\end_inset
+
+ is a bare-naked tangent vector, obtained as a gradient of a scalar field,
+ w.r.t.
+ a given fixed coordinate chart.
+ By contrast, 
+\begin_inset Formula $\mathbf{g}_{\mu}$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+the same thing
+\begin_inset Quotes erd
+\end_inset
+
+, but now has implicit vielein coordinates attached to it.
+ It's just the inverse of the vielbein coords.
+ 
+\end_layout
+
+\begin_layout Standard
+For Gullstrand–Painlevé in Cartesian form,  one has 
 \begin_inset Formula 
 \begin{align*}
 \gamma_{0} & =\mathbf{g}_{0}+\beta^{i}\mathbf{g}_{i}\\
