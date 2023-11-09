@@ -777,7 +777,16 @@ Appendix E: Gullstrand–Painlevé coordinates
 \begin_layout Standard
 The Gullstrand–Painlevé coordinates for the Schwarzschild spacetime consists
  of two charts, one that can handle the future both interior and exterior
- of the future event horizon, and a second chart for the past event horizon.
+ of the future event horizon, and a second chart for the past event horizon
+ (
+\begin_inset Quotes eld
+\end_inset
+
+white hole
+\begin_inset Quotes erd
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -880,26 +889,6 @@ Note that, for
  be tangent directions that are time-like (and also null).
  It's just that inside the EH, none of the coordinates, on thier own, align
  with a canonical timelike direction.
-\end_layout
-
-\begin_layout Standard
-Alternate factorization:
-\begin_inset Formula 
-\[
-\mathbf{g}=dt\otimes dt-\left(dr+\sqrt{\frac{2m}{r}}dt\right)\otimes\left(dr+\sqrt{\frac{2m}{r}}dt\right)-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
-\]
-
-\end_inset
-
-which is the 
-\begin_inset Quotes eld
-\end_inset
-
-obvious
-\begin_inset Quotes erd
-\end_inset
-
- coframe form.
 \end_layout
 
 \begin_layout Subsection*
@@ -1164,6 +1153,81 @@ and so again, the frame field looks swapped with a twist, as compared to
  the exterior frame field.
 \end_layout
 
+\begin_layout Subsection*
+Physical Interpretation
+\end_layout
+
+\begin_layout Standard
+As convenient shorthand, write 
+\begin_inset Formula 
+\[
+\alpha\left(r\right)=1-\frac{2m}{r}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\beta\left(r\right)=\sqrt{\frac{2m}{r}}
+\]
+
+\end_inset
+
+The coframe above is then:
+\begin_inset Formula 
+\[
+\mathbf{g}=dt\otimes dt-\left(dr+\beta dt\right)\otimes\left(dr+\beta dt\right)-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\]
+
+\end_inset
+
+which allows 
+\begin_inset Formula $\beta$
+\end_inset
+
+ to be interpreted as the instantaneous infall velocity of a free-falling
+ test mass.
+ Horizons occur when 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the speed of light: 
+\begin_inset Formula $\beta\pm1$
+\end_inset
+
+ with 
+\begin_inset Formula $\beta=-1$
+\end_inset
+
+ the white-hole horizon.
+\end_layout
+
+\begin_layout Standard
+Other conclusions (The following needs double-checking.
+ I'm not sure it's all correct.)
+\end_layout
+
+\begin_layout Itemize
+The proper distance travelled by a free-falling particle is just 
+\begin_inset Formula $r$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The proper time for the infall is
+\begin_inset Formula 
+\[
+\tau=t-\int_{r}^{\infty}\frac{\beta}{\alpha}dr
+\]
+
+\end_inset
+
+This needs double-checking.
+\end_layout
+
 \begin_layout Section*
 Appendix F: Francis–Kosowsky coordinates
 \end_layout
@@ -1178,7 +1242,20 @@ literal "false"
 
 \end_inset
 
- Some factoids:
+ It might be the case that much of, most of what is below was 
+\begin_inset Quotes eld
+\end_inset
+
+well-known
+\begin_inset Quotes erd
+\end_inset
+
+ before F–K.
+ Unclear.
+\end_layout
+
+\begin_layout Standard
+Some factoids:
 \end_layout
 
 \begin_layout Itemize
@@ -1186,12 +1263,9 @@ All the other Schwarzschild charts are a special case of this one.
 \end_layout
 
 \begin_layout Itemize
-The radial coordinate 
-\begin_inset Formula $r$
-\end_inset
-
- measures the proper distance for a radially infalling massive particle.
- (Eh? That's what F–K claim but that does not seem right.)
+I think that what F–K say generalizes to arbitrary Misner–Thorne mass, and
+ so will work for arbitrary sphere-symmetric metric, including Reissner–Nordströ
+m.
 \end_layout
 
 \begin_layout Subsection*
@@ -1326,6 +1400,36 @@ The freedom to pick
 \end_inset
 
  in the limit.
+\end_layout
+
+\begin_layout Standard
+The most(?) general sphere symmetric metric replaces the constant 
+\begin_inset Formula $m$
+\end_inset
+
+ by 
+\begin_inset Formula $m\left(r\right)$
+\end_inset
+
+, called the Misner–Sharp mass.
+ This is the total mass inside radius 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ A special case is the Reissner–Nordström metric with 
+\begin_inset Formula 
+\[
+m\left(r\right)=M-\frac{Q^{2}}{2r}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $Q$
+\end_inset
+
+ the electric charge.
 \end_layout
 
 \begin_layout Subsection*
@@ -1509,7 +1613,7 @@ Assort factoids about fields.
 
 \end_inset
 
-and perhaps we can go more general for Reissner-Nordström, which still have
+and perhaps we can go more general for Reissner–Nordström, which still have
  sphere symmetry.
  This is consistent with the previous section.
  Apparently, some of the stuff here will also hold in de Sitter spacetime,
