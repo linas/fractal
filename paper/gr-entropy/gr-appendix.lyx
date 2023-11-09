@@ -218,13 +218,12 @@ A generic coordinate chart for a manifold
 \end_inset
 
  an open set.
- We'll eventually set 
+ We'll eventually settle on 
 \begin_inset Formula $n=4$
 \end_inset
 
  and work with conventional 1+3 spacetime, but it's OK to leave this generic
  for now.
- 
 \end_layout
 
 \begin_layout Standard
@@ -535,19 +534,134 @@ This notation is fun, because this is (almost) the algebra of the Dirac
 \end_layout
 
 \begin_layout Standard
-This allows writing a vector 
-\begin_inset Formula $\mathbf{p}$
-\end_inset
-
- in a coordinate-independent way, so that the coordinate expressions are
+The notation is confusing, as it left behind the idea of the coordinate
+ chart atlas, and the tangent bundle as the place where vector fields live.
+ Lets go back to that.
+ The tetrad frame 
 \begin_inset Formula 
 \[
-\mathbf{p}=p^{a}\gamma_{a}=p^{\mu}\mathbf{g}_{\mu}
+\gamma_{a}=\vec{e}_{a}=e_{a}^{\;\mu}\partial_{\mu}
+\]
+
+\end_inset
+
+is a vector in the tangent bundle (for each fixed index 
+\begin_inset Formula $a$
+\end_inset
+
+).
+ By construction, these vectors were chosen to be orthonormal; they provide
+ a vector basis on the tangent bundle.
+\end_layout
+
+\begin_layout Standard
+Heres the remarkable (confusing) part: the boldface vectors 
+\begin_inset Formula $\mathbf{g}_{\mu}$
+\end_inset
+
+ are just 
+\begin_inset Formula $\partial_{\mu}$
+\end_inset
+
+ expressed in the vielbein frame.
+ That is, 
+\begin_inset Formula $\mathbf{g}_{\mu}=\partial_{\mu}$
+\end_inset
+
+ which follows from 
+\begin_inset Formula 
+\[
+\partial_{\mu}=\delta_{\mu}^{\nu}\partial_{\nu}=e_{\;\mu}^{a}e_{a}^{\;\nu}\partial_{\nu}=\mathbf{g}_{\mu}^{a}e_{a}^{\;\nu}\partial_{\nu}=\mathbf{g}_{\mu}^{a}\gamma_{a}=\mathbf{g}_{\mu}
+\]
+
+\end_inset
+
+Strange but true.
+ On the LHS, we have a bare-naked vector, arising from a gradient of a scalar
+ feild on the manifold, the gradient take with respect to the coordinate
+ charts.
+ On the RHS, we have the same vector, but it is written in such a that it
+ carries the implicit frame of the chosen vielbein.
+ The cleverness here is that we are not allowed to write 
+\begin_inset Formula $\partial_{\mu}\cdot\partial_{\nu}$
+\end_inset
+
+ because the centerdot is undefined for the naked vectors; it can only be
+ defined after the vielbein frame has been given.
+ Once we have the vielbein frame, the centderdot is defined, and one can
+ write 
+\begin_inset Formula $\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}$
+\end_inset
+
+ without ambiguity.
+\end_layout
+
+\begin_layout Standard
+Some other identities are noteworthy.
+ The cotangent one-forms, in the vielbein frame, are 
+\begin_inset Formula 
+\[
+\left(\mathbf{g}_{\mu}dx^{\mu}\right)^{a}=\mathbf{g}_{\mu}^{a}dx^{\mu}=\sigma^{a}
+\]
+
+\end_inset
+
+The solder form seems to be
+\begin_inset Formula 
+\[
+\gamma_{a}\sigma^{a}=\gamma_{a}\mathbf{g}_{\mu}^{a}dx^{\mu}=\mathbf{g}_{\mu}dx^{\mu}=\partial_{\mu}dx^{\mu}
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Vector fields, for example, 
+\begin_inset Formula $\vec{X}=X^{\mu}\partial_{\mu}$
+\end_inset
+
+ are written in the tetrad frame as 
+\begin_inset Formula 
+\[
+\vec{X}=X^{\mu}\partial_{\mu}=\Xi^{a}e_{a}^{\;\mu}\partial_{\mu}=\Xi^{a}\gamma_{a}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Xi=X$
+\end_inset
+
+ is spruriously introduced to avoid abuse of notation.
+ Its still the same vector.
+ The abuse of notation is to write 
+\begin_inset Formula $\Xi^{a}=X^{a}$
+\end_inset
+
+ which is fine as long as we remember that roman indexes are always with
+ respect to the vielbein frame.
+ 
+\end_layout
+
+\begin_layout Standard
+A general vector 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+ is then a coordinate-free object.
+ The coordinate expressions are
+\begin_inset Formula 
+\[
+\mathbf{v}=v^{a}\gamma_{a}=v^{\mu}\mathbf{g}_{\mu}=v^{\mu}\partial_{\mu}
+\]
+
+\end_inset
+
+The algebra all works out.
+ The intuitive interpretations flows from the coordinate charts and the
+ tangent/cotanget bundles.
 \end_layout
 
 \begin_layout Section*
