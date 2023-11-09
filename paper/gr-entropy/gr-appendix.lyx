@@ -107,6 +107,8 @@ Supplementary material/appendix providing notation and basic formulas.
  Currently covers notation for metric tensor, in general, frame fields (vierbein
 s), in general, and the Schwarzschild spacetime, in several different coordinate
  charts.
+ This provides a handy-dandy reference/cheat-sheet for notation in the style
+ that I like.
 \end_layout
 
 \begin_layout Section
@@ -142,7 +144,11 @@ Appendix F: Francis–Kosowsky coordinates
 \end_layout
 
 \begin_layout Itemize
-Appendix G: Fields
+Appendix G: River coordinates
+\end_layout
+
+\begin_layout Itemize
+Appendix H: Fields
 \end_layout
 
 \begin_layout Section*
@@ -529,28 +535,19 @@ This notation is fun, because this is (almost) the algebra of the Dirac
 \end_layout
 
 \begin_layout Standard
-Along this line, another popular notation is 
-\begin_inset Formula $\xi^{a}$
+This allows writing a vector 
+\begin_inset Formula $\mathbf{p}$
 \end_inset
 
- with 
+ in a coordinate-independent way, so that the coordinate expressions are
 \begin_inset Formula 
 \[
-\xi^{a}=\mathbf{g}^{a}
+\mathbf{p}=p^{a}\gamma_{a}=p^{\mu}\mathbf{g}_{\mu}
 \]
 
 \end_inset
 
-being given the name of 
-\begin_inset Quotes eld
-\end_inset
 
-locally inertial orthonormal frames
-\begin_inset Quotes erd
-\end_inset
-
- aka tetrads.
- 
 \end_layout
 
 \begin_layout Section*
@@ -1292,7 +1289,7 @@ The proper distance travelled by a free-falling particle is just
 \end_layout
 
 \begin_layout Itemize
-The proper time for the infall is
+The elapsed proper time for the infall is
 \begin_inset Formula 
 \[
 \tau=t-\int_{r}^{\infty}\frac{\beta}{\alpha}dr
@@ -1717,7 +1714,188 @@ good
 \end_layout
 
 \begin_layout Section*
-Appendix G: Fields
+Appendix G: River Coordinates
+\end_layout
+
+\begin_layout Standard
+This section recaps the general ideas from the 
+\begin_inset Quotes eld
+\end_inset
+
+river model of black holes
+\begin_inset Quotes erd
+\end_inset
+
+ paper.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hamilton2006"
+literal "false"
+
+\end_inset
+
+ Everything here uses the Gullstrand–Painlevé metric, although the river
+ coords can also be used for rotating BHs.
+\end_layout
+
+\begin_layout Standard
+The starting point is the Cartesian form of the Gullstrand–Painlevé metric,
+ given above.
+ Repeating this, the metric is
+\begin_inset Formula 
+\[
+\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dt\right)\otimes\left(dx^{b}-\beta^{b}dt\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $dt=dx^{0}$
+\end_inset
+
+ is shorthand for readability, and where 
+\begin_inset Formula $\beta^{a}$
+\end_inset
+
+ is the radial 
+\begin_inset Quotes eld
+\end_inset
+
+river velocity
+\begin_inset Quotes erd
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\beta^{0} & =0\\
+\beta^{i} & =-\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
+\end{align*}
+
+\end_inset
+
+Note the minus signs arranged so that the river velocity is infalling.
+ 
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbf{g}_{\mu}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+ denote a tetrad frame (using the notation reviewed in Appendix A).
+ Then one has 
+\begin_inset Formula 
+\begin{align*}
+\gamma_{0} & =\mathbf{g}_{0}+\beta^{i}\mathbf{g}_{i}\\
+\gamma_{i} & =\mathbf{g}_{i}
+\end{align*}
+
+\end_inset
+
+for 
+\begin_inset Formula $i=1,2,3$
+\end_inset
+
+.
+ The 'magic
+\begin_inset Quotes erd
+\end_inset
+
+ is that these eqns have the form of a Galilean transformation, which shifts
+ the time axis by a velocity 
+\begin_inset Formula $\vec{\beta}$
+\end_inset
+
+ along the direction of motion, but leaves the time component (of the time
+ axis) itself unchanged.
+ The spatial axes are unchanged.
+ 
+\end_layout
+
+\begin_layout Standard
+The free-fall velocity of a massive particle, falling in arbitrary direction,
+ is given by 
+\begin_inset Formula 
+\[
+v^{\mu}=\frac{dx^{\mu}}{d\tau}
+\]
+
+\end_inset
+
+For radial infall, 
+\begin_inset Formula $v^{0}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $v^{i}=\beta^{i}$
+\end_inset
+
+ or, pictorially, 
+\begin_inset Formula $v^{\mu}=\left(1,\beta^{1},\beta^{2},\beta^{3}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In the tetrad frame, the free-fall velocity 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+u^{a}\gamma_{a}=v^{\mu}\mathbf{g}_{\mu}
+\]
+
+\end_inset
+
+which works out to
+\begin_inset Formula 
+\begin{align*}
+u^{0} & =v^{0}\\
+u^{i} & =v^{i}-\beta^{i}v^{0}
+\end{align*}
+
+\end_inset
+
+For radial infall, this is just 
+\begin_inset Formula $u^{a}=\left(1,0,0,0\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The physical interpretation of 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ is that it is 
+\begin_inset Quotes eld
+\end_inset
+
+4-velocity of the particle, relative to the inflowing river of space
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Proper time is a property of the particle (the geodesic) and not of the
+ river (spacetime).
+ Particles in the rever move according to the rules of special relativity.
+ The river itself flows in a Galilean fashion, through a flat Galilean backgroun
+d.
+\end_layout
+
+\begin_layout Section*
+Appendix H: Fields
 \end_layout
 
 \begin_layout Standard
