@@ -138,10 +138,10 @@ thermal
 
 \begin_layout Abstract
 Part of the goal here is to scratch around for any kind of theoretical developme
-nt that does not involve strings.
- So far, this to the negative.
- Of course, I am starting from square zero, so almost everything contained
- in this text is very naive.
+nt that does not require a deep dive into conventional quantum-gravity &
+ string thought patterns.
+ I am starting from square zero; so almost everything in this text is very
+ naive, silly, and perhaps sometimes wrong.
 \end_layout
 
 \begin_layout Abstract
@@ -419,6 +419,25 @@ A secondary goal is to avoid talking about spinors, directly.
 \begin_layout Standard
 More interesting is the Kerr metric.
  This may, however, be too much, so we punt on that, for now.
+ However, the so-called 
+\begin_inset Quotes eld
+\end_inset
+
+river model of black holes
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hamilton2004"
+literal "false"
+
+\end_inset
+
+ offers hope for a more tractable approach.
+ It provides vierbeins that have explicit twisting components that look
+ like they could couple to spinors.
 \end_layout
 
 \begin_layout Standard
@@ -453,18 +472,81 @@ Look at local solutions.
 
 \begin_layout Itemize
 Look at extended solutions, over regions where curvature is non-trivial.
- This is difficult, and I don't see what this can teach us.
+ This is difficult.
+ One looks for non-linearities that exhibit resonance coupling between different
+ modes.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See Wikipedia, 
+\begin_inset CommandInset href
+LatexCommand href
+name "Resonant interaction"
+target "https://en.wikipedia.org/wiki/Resonant_interaction"
+literal "false"
+
+\end_inset
+
+.
+ In short, one looks for wave solutions for 
+\begin_inset Formula $n$
+\end_inset
+
+ distinct modes, such that the sum of momenta & energy total zero, thus
+ allowing the modes to mix.
+ The case of 
+\begin_inset Formula $n=0$
+\end_inset
+
+ corresponds to the vacuum, and 
+\begin_inset Formula $n=1$
+\end_inset
+
+ corresponds to Unruh radiation.
+ The 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case corresponds to scattering and/or pair creation.
+ The 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case corresponds to the 
+\begin_inset CommandInset href
+LatexCommand href
+name "three-wave equation"
+target "https://en.wikipedia.org/wiki/Three-wave_equation"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ This would include phenomena like superluminance, as well as a purely classical
+ form of Unruh radiation (i.e.
+ a classical n-wave resonant coupling, for n=1.)
 \end_layout
 
 \begin_layout Itemize
 Look at global solutions.
  These presumably have topological structure, reminiscent of differential
  geometry of Laplacian on a punctured plane, etc.
+ Are there enough of these available to form an ensemble? Can their radiative
+ form at infinity be traced back to large instabilities at the EH?
 \end_layout
 
 \begin_layout Itemize
 Look at topology only, somehow avoiding discussion of solutions, and try
  to make inferences that way.
+\end_layout
+
+\begin_layout Standard
+Lets review these options.
 \end_layout
 
 \begin_layout Standard
@@ -500,27 +582,71 @@ cross section
 \end_layout
 
 \begin_layout Standard
-Reference: Numerical solutions obtained for cross section of scalar plane
- waves and vector waves (E&M), of various wavelengths, impinging on BH.
- StackExchange: https://physics.stackexchange.com/questions/475903/how-much-of-a-w
-ave-function-must-reside-inside-event-horizon-for-it-to-be-consum quotes
- Crispino et al.
- 2007 Phys Rev D 75, 104012 PDF: https://repositorio.unesp.br/bitstream/handle/114
-49/23100/WOS000246891400035.pdf?sequence=1 Intro states that prior research
- gives the cross-section for spin-0, spin-1/2, spin-1 fields in the limit
- of large and small wavelength.
- This paper does a numerical solution for cross-sections in the intermediate
+There's a StackExhange question 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "How much of a wave function must reside inside event horizonfor ti to be consumed?"
+target "https://physics.stackexchange.com/questions/475903/how-much-of-a-wave-function-must-reside-inside-event-horizon-for-it-to-be-consum"
+literal "false"
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ that deals with this.
+ It references a paper by Crispino et al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Crispino2007"
+literal "false"
+
+\end_inset
+
+ From the abstract/intro: Numerical solutions are obtained for cross section
+ of scalar plane waves and vector waves (E&M), of various wavelengths, impinging
+ on BH.
+ Prior research gives the cross-section for spin-0, spin-1/2, spin-1 fields
+ in the limit of large and small wavelength.
+ This paper provides a numerical solution for cross-sections in the intermediate
  wavelengths.
- Apparently, the gauge freedom for E&M causes some confusion?? 
+ Apparently, the gauge freedom for E&M causes some confusion? 
 \end_layout
 
 \begin_layout Standard
-Breaks down wave equation into sphere coords, so Lengendre polys for angular
- parts, and a radial part for the Schwarzschild part.
+The method of solution is to break down wave equation into sphere coords,
+ so Lengendre polys for angular parts, and a radial part for the Schwarzschild
+ part.
  Modes are orthonormal! Different sphere modes have different absorbtion,
  total cross-section is sum over modes.
  Intro paragraph gives references for the Dirac eqn as well.
- 
+ I guess that there needs to be a claim that a complete set of orthonormal
+ modes are provided.
+ This is not clear on first reading.
+\end_layout
+
+\begin_layout Standard
+A (classical, non-quantum) resonant interaction between modes seems to be
+ the most interesting case that could be pursued.
+ This would be the case where 
+\begin_inset Formula $n$
+\end_inset
+
+ distinct wave-modes have wave-vectors that sum to zero.
+ This allows for the mixing and exchange of energy between modes.
+ Off-hand, I see no reason why there might not be resonant interactions
+ available in the eigenmodes of purely classical solutions to the wave equation
+ in curved spacetime.
+ If there is such mixing, and some of the resulting modes are absorbed by
+ the BH, while others propagate to infinity, this would provide a purely
+ classical (non-quantum) description of Hawking radiation.
+ Perhaps less clear and a bit dicier is whether this would work for Unruh
+ radiation, as well.
 \end_layout
 
 \begin_layout Subsection*
@@ -593,7 +719,7 @@ bleeding
 \begin_inset Quotes erd
 \end_inset
 
- across the light cone, when cruvature is introduced? Seems like there should
+ across the light cone, when curvature is introduced? Seems like there should
  not be, because one can always go to a smaller and smaller scale, where
  things are flat.
  Differential eqns are always at the infinitessimal scale, are always posed
@@ -647,7 +773,7 @@ For example, here's something that won't work.
 \begin_inset Formula $N$
 \end_inset
 
- distinct spin connections at the even horizon, (with 
+ distinct spin connections at the event horizon, (with 
 \begin_inset Formula $S=\log N$
 \end_inset
 
@@ -781,8 +907,8 @@ Lemaitre coordinates provide a non-accelerated frame, describing infalling
  time (for the infalling particle).
  The default Lemaitre coords still have a coordinate singularity at the
  event horizon.
- The Painleve chart cures this.
- In the Painleve chart, the spatial frame fields are Euclidean.
+ The Painlevé chart cures this.
+ In the Painlevé chart, the spatial frame fields are Euclidean.
  And more: for a fixed time coordinate, the spacial slices are (locally)
  isometric to 3D Eucliden space.
 \end_layout
@@ -823,13 +949,18 @@ What happens if we take a classical spinor, either Dirac of Weyl, and drop
  How does this couple/decouple?
 \end_layout
 
+\begin_layout Subsection*
+Dynamics of the EH
+\end_layout
+
 \begin_layout Standard
-On a related note: are there any algebraic solutions for a classical, spin-zero
- point mass falling in, radially, into a Schwarschild BH? (Say, in the linearize
-d approximation of infinitessimal mass.) How does ring-down work in such
- a case? What is the charateristic timescale for ringdown? Is ringdown approxima
-tely exponential? How long does it take? I assume it takes no longer than
- the proper time for the point mass to hit the singularity!?
+Are there any algebraic (exact) solutions for a classical, spin-zero point
+ mass falling in, radially, into a Schwarschild BH, causing the mass of
+ the BH to change? (Say, in the linearized approximation of infinitessimal
+ mass.) How does ring-down work in such a case? What is the charateristic
+ timescale for ringdown? Is ringdown approximately exponential? How long
+ does it take? I assume it takes no longer than the proper time for the
+ point mass to hit the singularity!?
 \end_layout
 
 \begin_layout Standard
@@ -861,11 +992,35 @@ amount of time
 \end_layout
 
 \begin_layout Standard
-FWIW, The Crispino et al.
- paper from above does not consider the case of finite energy delivered
- into the BH.
- Not even an infinitessimal amount.
- That is, the spacetime is held static, the BH mass is held strictly static.
+The Gullstrand–Painlevé metric can be written in a general way, with a term
+ 
+\begin_inset Formula $M\left(r\right)$
+\end_inset
+
+ that represents the total mass within radius 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ This is called the Misner–Sharp mass.
+ A special case of this is the Reissner–Nordström metric, where the energy
+ of the electric field (within radius 
+\begin_inset Formula $r)$
+\end_inset
+
+ contributes to the total mass.
+ Can this be used to obtain solutions that involve infalling spherically
+ symmetric shells or dust? I suppose so...
+ Is this what the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Belinski–Zakharov transform"
+target "https://en.wikipedia.org/wiki/Belinski%E2%80%93Zakharov_transform"
+literal "false"
+
+\end_inset
+
+ is meant to be used for?
 \end_layout
 
 \begin_layout Subsection*
