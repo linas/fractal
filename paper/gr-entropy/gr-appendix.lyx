@@ -771,7 +771,56 @@ where
 \end_inset
 
 .
- Comparing this to 
+ It is convenient to adopt the notation
+\begin_inset Formula 
+\[
+\alpha\equiv\alpha\left(r\right)=1-\frac{2m}{r}
+\]
+
+\end_inset
+
+and write 
+\begin_inset Formula 
+\[
+\mathbf{g}=\alpha\,dt\otimes dt-\frac{1}{\alpha}\,dr\otimes dr-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\]
+
+\end_inset
+
+The mass 
+\begin_inset Formula $m$
+\end_inset
+
+ is taken to be a constant, the mass of the black hole at infinity.
+ It turns out that, in general, one can be replace the constant 
+\begin_inset Formula $m$
+\end_inset
+
+ by a function 
+\begin_inset Formula $m\left(r\right)$
+\end_inset
+
+ of the radial coordinate and still get a valid metric.
+ The varying mass 
+\begin_inset Formula $m\left(r\right)$
+\end_inset
+
+ is called the Misner–Sharp mass; it is the total mass seen within radius
+ 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ The Reissner–Nordström metric provides an example of this; the mass includes
+ a term for the energy of the electric field within radius 
+\begin_inset Formula $r$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Comparing the above to 
 \begin_inset Formula 
 \[
 \mathbf{g}=\eta_{ab}\sigma^{a}\otimes\sigma^{b}=\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}-\sigma^{2}\otimes\sigma^{2}-\sigma^{3}\otimes\sigma^{3}
@@ -782,8 +831,8 @@ where
 we immediately read off coframe as
 \begin_inset Formula 
 \begin{align*}
-\sigma^{0} & =\sqrt{1-\frac{2m}{r}}dt\\
-\sigma^{1} & =\frac{dr}{\sqrt{1-\frac{2m}{r}}}\\
+\sigma^{0} & =\sqrt{\alpha}dt\\
+\sigma^{1} & =\frac{dr}{\sqrt{\alpha}}\\
 \sigma^{2} & =rd\theta\\
 \sigma^{3} & =r\sin\theta\,d\phi
 \end{align*}
@@ -793,8 +842,8 @@ we immediately read off coframe as
 From this, we deduce the frame field
 \begin_inset Formula 
 \begin{align*}
-\vec{e}_{0} & =\frac{1}{\sqrt{1-\frac{2m}{r}}}\partial_{t}\\
-\vec{e}_{1} & =\sqrt{1-\frac{2m}{r}}\partial_{r}\\
+\vec{e}_{0} & =\frac{1}{\sqrt{\alpha}}\partial_{t}\\
+\vec{e}_{1} & =\sqrt{\alpha}\partial_{r}\\
 \vec{e}_{2} & =\frac{1}{r}\partial_{\theta}\\
 \vec{e}_{3} & =\frac{1}{r\sin\theta}\partial_{\phi}
 \end{align*}
@@ -845,7 +894,7 @@ interesting
  cases.
 \begin_inset Formula 
 \[
-\left[\vec{e}_{0},\vec{e}_{1}\right]=\frac{m}{r^{2}\left(1-\frac{2m}{r}\right)}\partial_{t}=\frac{m}{r^{2}\sqrt{1-\frac{2m}{r}}}\vec{e}_{0}
+\left[\vec{e}_{0},\vec{e}_{1}\right]=\frac{m}{\alpha r^{2}}\partial_{t}=\frac{m}{r^{2}\sqrt{\alpha}}\vec{e}_{0}
 \]
 
 \end_inset
@@ -853,7 +902,7 @@ interesting
 and
 \begin_inset Formula 
 \[
-\left[\vec{e}_{1},\vec{e}_{2}\right]=\frac{-\sqrt{1-\frac{2m}{r}}}{r^{2}}\partial_{\theta}=\frac{-\sqrt{1-\frac{2m}{r}}}{r}\vec{e}_{2}
+\left[\vec{e}_{1},\vec{e}_{2}\right]=\frac{-\sqrt{\alpha}}{r^{2}}\partial_{\theta}=\frac{-\sqrt{\alpha}}{r}\vec{e}_{2}
 \]
 
 \end_inset
@@ -861,7 +910,7 @@ and
 and
 \begin_inset Formula 
 \[
-\left[\vec{e}_{1},\vec{e}_{3}\right]=\frac{-\sqrt{1-\frac{2m}{r}}}{r^{2}\sin\theta}\partial_{\phi}=\frac{-\sqrt{1-\frac{2m}{r}}}{r}\vec{e}_{3}
+\left[\vec{e}_{1},\vec{e}_{3}\right]=\frac{-\sqrt{\alpha}}{r^{2}\sin\theta}\partial_{\phi}=\frac{-\sqrt{\alpha}}{r}\vec{e}_{3}
 \]
 
 \end_inset
@@ -931,8 +980,17 @@ Appendix D: Lemaître Observers
 \end_layout
 
 \begin_layout Standard
-Easiest to just look these up, rather than copying here.
- Frame fields are given in the Wikipedia 
+This coordinate chart is provided by canonical references, e.g.
+ Wikipedia 
+\begin_inset CommandInset href
+LatexCommand href
+name "Lemaître coordinates"
+target "https://en.wikipedia.org/wiki/Lema%C3%AEtre_coordinates"
+literal "false"
+
+\end_inset
+
+ and 
 \begin_inset CommandInset href
 LatexCommand href
 name "frame fields in general relativity"
@@ -941,23 +999,141 @@ literal "false"
 
 \end_inset
 
- article, and we don't reproduce this here.
+, and is easy to look up.
+ Still, we give a super-quick review here.
 \end_layout
 
 \begin_layout Standard
-Why? Because the frame fields in the Lemaître coordinate system have a singulari
-ty at the EH, thus making them useless for analyzing the null geodesics
- that propagate in the EH.
- Being able to deal with such geodesics seems important for this project.
- FYI, the Gullstrand–Painlevé coordinates suffer from the same problem.
- Other fun facts:
+Assorted factoids:
+\end_layout
+
+\begin_layout Itemize
+The metric is not singular at the EH.
+\end_layout
+
+\begin_layout Itemize
+The frame fields in the Lemaître coordinate system have a coordinate singularity
+ at the EH, thus making them useless for analyzing the null geodesics that
+ propagate into/across the EH.
+ 
 \end_layout
 
 \begin_layout Itemize
 The coordinates provide radially-inward free-falling frames.
  That is, the covariant derivative of the frame fields w.r.t.
  time vanishes.
- The frames areinertial non-spinning frames.
+ The frames are inertial non-spinning frames.
+\end_layout
+
+\begin_layout Itemize
+The time coordinate is the proper time of all co-moving observers; thus,
+ the Lemaître coordinates are called 
+\begin_inset Quotes eld
+\end_inset
+
+synchronous
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Metric
+\end_layout
+
+\begin_layout Standard
+The metric is given by 
+\begin_inset Formula 
+\[
+\mathbf{g}=d\tau\otimes d\tau-\frac{2m}{r}\,d\rho\otimes d\rho-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\]
+
+\end_inset
+
+where the coordinates 
+\begin_inset Formula $\tau$
+\end_inset
+
+, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ are related to the Schwarschoild coords as 
+\begin_inset Formula 
+\begin{align*}
+d\tau & =dt+\frac{\beta}{\alpha}dr\\
+d\rho & =dt+\frac{1}{\alpha\beta}dr
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\beta\equiv\beta\left(r\right)=\sqrt{\frac{2m}{r}}
+\]
+
+\end_inset
+
+The remaining 
+\begin_inset Formula $r$
+\end_inset
+
+ in the metric is short-hand for 
+\begin_inset Formula 
+\[
+r=\left[\frac{3}{2}\left(\rho-\tau\right)\right]^{2/3}\left(2m\right)^{1/3}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Properties
+\end_layout
+
+\begin_layout Standard
+The trajectories with constant 
+\begin_inset Formula $\rho$
+\end_inset
+
+ are timelike geodesics with 
+\begin_inset Formula $\tau$
+\end_inset
+
+ the proper time along the geodesic.
+ This is easily seen by setting 
+\begin_inset Formula $d\rho=d\theta=d\phi=0$
+\end_inset
+
+ in the metric; more formally, by coosing a vector field 
+\begin_inset Formula $\vec{X}=X^{\mu}\partial_{\mu}$
+\end_inset
+
+ for which 
+\begin_inset Formula $d\rho\left(\vec{X}\right)=d\theta\left(\vec{X}\right)=d\phi\left(\vec{X}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The EH is located at 
+\begin_inset Formula 
+\[
+2m=\frac{3}{2}\left(\rho-\tau\right)
+\]
+
+\end_inset
+
+The gravitational singularity is located at 
+\begin_inset Formula $\rho-\tau=0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section*
