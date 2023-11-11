@@ -1438,7 +1438,42 @@ which allows
 \end_layout
 
 \begin_layout Standard
-The relationship between 
+Plugging in 
+\begin_inset Formula 
+\[
+dṱ=dt+\frac{\beta}{\alpha}dr
+\]
+
+\end_inset
+
+immediately gives the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Schwarzschild metric.
+ This can be directly integrated, giving
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ the relationship between 
 \family roman
 \series medium
 \shape up
@@ -1455,7 +1490,7 @@ The relationship between
 \begin_inset Formula $t$
 \end_inset
 
- is given by 
+ as 
 \family default
 \series default
 \shape default
@@ -1471,13 +1506,13 @@ The relationship between
 
 \begin_inset Formula 
 \[
-ṱ=t+\int_{r}^{\infty}\frac{\beta}{\alpha}dr
+ṱ=t-\int_{r}^{\infty}\frac{\beta}{\alpha}dr
 \]
 
 \end_inset
 
 This holds everywhere on the chart, and not just for some geodesics.
- This can be verified by brute force; see Wikipedia 
+ This can also be verified by brute force; see Wikipedia 
 \begin_inset CommandInset href
 LatexCommand href
 name "Gullstrand–Painlevé coordinates"
@@ -1539,15 +1574,17 @@ coordinate ṱ
 \end_layout
 
 \begin_layout Standard
-Radial infal for massive observers is given by 
-\begin_inset Formula $0=dr+\beta dṱ$
+Radial infall for massive observers is given by vector fields for which
+ 
+\begin_inset Formula $0=d\phi=d\theta=dr+\beta dṱ$
 \end_inset
 
+ leaving only the 
+\begin_inset Formula $dṱ$
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
-For radially infalling geodesics, the coordinate
+ term in the metric.
+ This makes it immediately clear that the coordinate
 \family roman
 \series medium
 \shape up
@@ -1577,14 +1614,43 @@ For radially infalling geodesics, the coordinate
 \begin_inset Formula $\tau$
 \end_inset
 
-.
- If we only want the observer position as a function of proper time, the
- Lemaître formulas are much easier to work with.
+ for radially infalling geodesics.
+ Combining 
+\begin_inset Formula $0=dr+\beta dṱ$
+\end_inset
+
+ with 
+\begin_inset Formula $dṱ=dt+\frac{\beta}{\alpha}dr$
+\end_inset
+
+ gives 
+\begin_inset Formula $dr/dt=-\beta\alpha$
+\end_inset
+
+ as the raindrop velocity in 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Schwarzschild coords.
 \end_layout
 
 \begin_layout Standard
 Other conclusions (The following needs double-checking.
  I'm not sure it's all correct.)
+\end_layout
+
+\begin_layout Itemize
+If we only want the observer position as a function of proper time, the
+ Lemaître formulas are much easier to work with.
 \end_layout
 
 \begin_layout Itemize
@@ -1669,7 +1735,7 @@ Assorted factoids:
 \end_layout
 
 \begin_layout Itemize
-The time coordinate is the proper time.
+The time coordinate is the same as that used for Gullstrand–Painlevé coords.
 \end_layout
 
 \begin_layout Itemize
@@ -1717,23 +1783,23 @@ Metric
 The metric is given by 
 \begin_inset Formula 
 \[
-\mathbf{g}=d\tau\otimes d\tau-\frac{2m}{r}\,d\rho\otimes d\rho-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\mathbf{g}=dṱ\otimes dṱ-\frac{2m}{r}\,d\rho\otimes d\rho-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
 \]
 
 \end_inset
 
 where the coordinates 
-\begin_inset Formula $\tau$
+\begin_inset Formula $ṱ,\rho$
 \end_inset
 
-, 
-\begin_inset Formula $\rho$
+ are related to the Schwarschild 
+\begin_inset Formula $t,r$
 \end_inset
 
- are related to the Schwarschild coords as 
+ coords as 
 \begin_inset Formula 
 \begin{align*}
-d\tau & =dt+\frac{\beta}{\alpha}dr\\
+dṱ & =dt+\frac{\beta}{\alpha}dr\\
 d\rho & =dt+\frac{1}{\alpha\beta}dr
 \end{align*}
 
@@ -1754,12 +1820,44 @@ The remaining
  in the metric is short-hand for 
 \begin_inset Formula 
 \[
-r=\left[\frac{3}{2}\left(\rho-\tau\right)\right]^{2/3}\left(2m\right)^{1/3}
+r=\left[\frac{3}{2}\left(\rho-ṱ\right)\right]^{2/3}\left(2m\right)^{1/3}
 \]
 
 \end_inset
 
+Note that the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ṱ coordinate is identical to the
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Gullstrand–Painlevé coordinate; thus we use the same symbol.
+ Note that the 
+\begin_inset Formula $\rho$
+\end_inset
 
+ coordinate was explicitly constructed such that it is constant on radially-infa
+lling time-like geodesics.
 \end_layout
 
 \begin_layout Subsection*
@@ -1772,7 +1870,7 @@ The trajectories with constant
 \end_inset
 
  are timelike geodesics with 
-\begin_inset Formula $\tau$
+\begin_inset Formula $ṱ$
 \end_inset
 
  the proper time along the geodesic.
@@ -1797,7 +1895,7 @@ The trajectories with constant
 Radial null geodesics are given by
 \begin_inset Formula 
 \[
-d\tau=\pm\beta d\rho
+dṱ=\pm\beta d\rho
 \]
 
 \end_inset
@@ -1805,7 +1903,7 @@ d\tau=\pm\beta d\rho
 Plugging through, this is equivalent to 
 \begin_inset Formula 
 \[
-dr=\left(\pm1-\beta\right)d\tau
+dr=\left(\pm1-\beta\right)dṱ
 \]
 
 \end_inset
@@ -1813,7 +1911,7 @@ dr=\left(\pm1-\beta\right)d\tau
 which is easily integrated:
 \begin_inset Formula 
 \[
-\tau=\int\frac{dr}{\pm1-\beta}=8m\int\frac{s^{5}ds}{\pm s^{2}+1}
+ṱ=\int\frac{dr}{\pm1-\beta}=8m\int\frac{s^{5}ds}{\pm s^{2}+1}
 \]
 
 \end_inset
@@ -1832,13 +1930,13 @@ after substituting
 The EH is located at 
 \begin_inset Formula 
 \[
-2m=\frac{3}{2}\left(\rho-\tau\right)
+2m=\frac{3}{2}\left(\rho-ṱ\right)
 \]
 
 \end_inset
 
 The gravitational singularity is located at 
-\begin_inset Formula $\rho-\tau=0$
+\begin_inset Formula $\rho-ṱ=0$
 \end_inset
 
 .
@@ -1863,7 +1961,7 @@ the simplest coframe is
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\sigma^{0} & =d\tau\\
+\sigma^{0} & =dṱ\\
 \sigma^{1} & =\beta d\rho\\
 \sigma^{2} & =rd\theta\\
 \sigma^{3} & =r\sin\theta\,d\phi
