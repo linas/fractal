@@ -1244,13 +1244,6 @@ white hole
 \end_layout
 
 \begin_layout Standard
-We pick up the notational conventions from the Gullstrand–Painlevé article
- on Wikipedia, but drop the subscript 'r' because we will not be making
- comparisons the the Schwarzschild metric.
- 
-\end_layout
-
-\begin_layout Standard
 Some useful factoids about this metric:
 \end_layout
 
@@ -1259,15 +1252,25 @@ The metric is not singular on the event horizon.
 \end_layout
 
 \begin_layout Itemize
+The metric is obtained from the Schwarzschild coordinates by replacing the
+ Schwarzschild time 
+\begin_inset Formula $t$
+\end_inset
+
+ by a related coordinate ṱ.
+ The other cooordinates are left alone.
+\end_layout
+
+\begin_layout Itemize
 The metric is flat on surfaces of 
-\begin_inset Formula $t=\mbox{const.}$
+\begin_inset Formula $ṱ=\mbox{const.}$
 \end_inset
 
  That is, it measures the proper distance on such surfaces.
 \end_layout
 
 \begin_layout Itemize
-The time coordinate measures the proper time of radially infalling observers.
+The time coordinate ṱ measures the proper time of radially infalling observers.
 \end_layout
 
 \begin_layout Itemize
@@ -1305,7 +1308,7 @@ Gullstrand–Painlevé metric
 The Gullstrand–Painlevé metric, using the coordinate cobasis:
 \begin_inset Formula 
 \[
-\mathbf{g}=\left(1-\frac{2m}{r}\right)dt\otimes dt-\sqrt{\frac{2m}{r}}\left(dt\otimes dr+dr\otimes dt\right)-dr\otimes dr-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\mathbf{g}=\left(1-\frac{2m}{r}\right)dṱ\otimes dṱ-\sqrt{\frac{2m}{r}}\left(dṱ\otimes dr+dr\otimes dṱ\right)-dr\otimes dr-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
 \]
 
 \end_inset
@@ -1325,11 +1328,37 @@ where
 \end_inset
 
 , but only for the future (which I think is 
-\begin_inset Formula $0<t$
+\begin_inset Formula $0<ṱ$
 \end_inset
 
 , right?) Reversing the sign for the cross-term gives the other coordinate
  chart.
+\end_layout
+
+\begin_layout Standard
+The time coordinate uses the screwy notation ṱ instead of 
+\begin_inset Formula $t_{r}$
+\end_inset
+
+ or 
+\begin_inset Formula $t_{\mbox{ff}}$
+\end_inset
+
+, mostly because I don't want to use subscripts.
+ The oddball letter makes expressions compact.
+ The symbol 
+\begin_inset Formula $t$
+\end_inset
+
+ is reserved for the time coordinate of the observer at infinity i.e.
+ the coordinate in the standard Schwarzschild chart.
+ This way, we can compare the Schwarzschild coordinates to the Gullstrand–Painle
+vé coordinates whenever we please.
+ This helps with the double-checking of results.
+ The symbol ṱ is UFT-8 hex 0xE1B9B1 U+1E71 'LATIN SMALL LETTER T WITH CIRCUMFLEX
+ BELOW'.
+ It seems like a lot of fionts support this letter, so I'm running with
+ it.
 \end_layout
 
 \begin_layout Standard
@@ -1364,8 +1393,8 @@ we can verify that (one possible) coframe is
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\sigma^{0} & =dt\\
-\sigma^{1} & =dr+\sqrt{\frac{2m}{r}}dt\\
+\sigma^{0} & =dṱ\\
+\sigma^{1} & =dr+\sqrt{\frac{2m}{r}}dṱ\\
 \sigma^{2} & =rd\theta\\
 \sigma^{3} & =r\sin\theta\,d\phi
 \end{align*}
@@ -1377,7 +1406,7 @@ Note that the above coframe field behaves nicely, even on the EH.
  The corresponding frame field is
 \begin_inset Formula 
 \begin{align*}
-\vec{e}_{0} & =\partial_{t}-\sqrt{\frac{2m}{r}}\partial_{r}\\
+\vec{e}_{0} & =\partial_{ṱ}-\sqrt{\frac{2m}{r}}\partial_{r}\\
 \vec{e}_{1} & =\partial_{r}\\
 \vec{e}_{2} & =\frac{1}{r}\partial_{\theta}\\
 \vec{e}_{3} & =\frac{1}{r\sin\theta}\partial_{\phi}
@@ -1405,7 +1434,7 @@ This subsection proposes a frame choice that turns out to be a bad choice,
 Starting with the coframe:
 \begin_inset Formula 
 \begin{align*}
-\sigma^{0} & =\sqrt{1-\frac{2m}{r}}dt-\frac{1}{\sqrt{1-\frac{2m}{r}}}\sqrt{\frac{2m}{r}}dr\\
+\sigma^{0} & =\sqrt{1-\frac{2m}{r}}dṱ-\frac{1}{\sqrt{1-\frac{2m}{r}}}\sqrt{\frac{2m}{r}}dr\\
 \sigma^{1} & =\frac{1}{\sqrt{1-\frac{2m}{r}}}dr
 \end{align*}
 
@@ -1414,7 +1443,7 @@ Starting with the coframe:
 and plugging through, one gets 
 \begin_inset Formula 
 \[
-\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(1-\frac{2m}{r}\right)dt\otimes dt-\sqrt{\frac{2m}{r}}\left(dt\otimes dr+dr\otimes dt\right)-dr\otimes dr
+\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}=\left(1-\frac{2m}{r}\right)dṱ\otimes dṱ-\sqrt{\frac{2m}{r}}\left(dṱ\otimes dr+dr\otimes dṱ\right)-dr\otimes dr
 \]
 
 \end_inset
@@ -1470,7 +1499,7 @@ and note that
  This allows the coframe to be written as 
 \begin_inset Formula 
 \begin{align*}
-\sigma^{0} & =Cdt-\frac{S}{C}dr\\
+\sigma^{0} & =Cdṱ-\frac{S}{C}dr\\
 \sigma^{1} & =\frac{1}{C}dr
 \end{align*}
 
@@ -1482,8 +1511,8 @@ This shorthand allows the frame field to be written compactly as
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{e}_{0} & =\frac{1}{C}\partial_{t}\\
-\vec{e}_{1} & =\frac{S}{C}\partial_{t}+C\partial_{r}\\
+\vec{e}_{0} & =\frac{1}{C}\partial_{ṱ}\\
+\vec{e}_{1} & =\frac{S}{C}\partial_{ṱ}+C\partial_{r}\\
 \vec{e}_{2} & =\frac{1}{r}\partial_{\theta}\\
 \vec{e}_{3} & =\frac{1}{r\sin\theta}\partial_{\phi}
 \end{align*}
@@ -1516,7 +1545,7 @@ Following through with the above crappy frame choice, we try to fix it by
 The coframe field, written in terms of the Painleve coordinates, is is singular
  on the EH.
  Looking at the original metric, we see that the 
-\begin_inset Formula $dt\otimes dt$
+\begin_inset Formula $dṱ\otimes dṱ$
 \end_inset
 
  term becomes space-like inside the EH.
@@ -1534,7 +1563,7 @@ The coframe field, written in terms of the Painleve coordinates, is is singular
 \begin_inset Formula 
 \begin{align*}
 \sigma_{\mbox{inside}}^{0} & =\frac{1}{C_{\mbox{in}}}dr\\
-\sigma_{\mbox{inside}}^{1} & =C_{\mbox{in}}dt+\frac{S}{C_{\mbox{in}}}dr
+\sigma_{\mbox{inside}}^{1} & =C_{\mbox{in}}dṱ+\frac{S}{C_{\mbox{in}}}dr
 \end{align*}
 
 \end_inset
@@ -1597,8 +1626,8 @@ The corresponding frame field is then
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{e}_{0}^{\mbox{inside}} & =-\frac{S}{C_{\mbox{in}}}\partial_{t}+C_{\mbox{in}}\partial_{r}\\
-\vec{e}_{1}^{\mbox{inside}} & =\frac{1}{C_{\mbox{in}}}\partial_{t}
+\vec{e}_{0}^{\mbox{inside}} & =-\frac{S}{C_{\mbox{in}}}\partial_{ṱ}+C_{\mbox{in}}\partial_{r}\\
+\vec{e}_{1}^{\mbox{inside}} & =\frac{1}{C_{\mbox{in}}}\partial_{ṱ}
 \end{align*}
 
 \end_inset
@@ -1631,7 +1660,7 @@ and
 The coframe above is then:
 \begin_inset Formula 
 \[
-\mathbf{g}=dt\otimes dt-\left(dr+\beta dt\right)\otimes\left(dr+\beta dt\right)-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\mathbf{g}=dṱ\otimes dṱ-\left(dr+\beta dṱ\right)\otimes\left(dr+\beta dṱ\right)-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
 \]
 
 \end_inset
@@ -1674,17 +1703,17 @@ The proper distance travelled by a free-falling particle is just
 The elapsed proper time for the infall is
 \begin_inset Formula 
 \[
-\tau=t-\int_{r}^{\infty}\frac{\beta}{\alpha}dr
+\tau=ṱ-\int_{r}^{\infty}\frac{\beta}{\alpha}dr
 \]
 
 \end_inset
 
 This is widely quoted, but I don't see how to derive it off the top of my
  head.
-  Plugging in and cranking gives
+ Plugging in and cranking gives
 \begin_inset Formula 
 \[
-\tau=t+\frac{4m}{\beta}+2m\log\frac{1-\beta}{1+\beta}
+\tau=ṱ+\frac{4m}{\beta}+2m\log\frac{1-\beta}{1+\beta}
 \]
 
 \end_inset
@@ -1721,7 +1750,7 @@ Cartesian coordinates
 In Cartesian coordinates, the metric is
 \begin_inset Formula 
 \[
-\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dt\right)\otimes\left(dx^{b}-\beta^{b}dt\right)
+\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dṱ\right)\otimes\left(dx^{b}-\beta^{b}dṱ\right)
 \]
 
 \end_inset
@@ -1802,6 +1831,47 @@ Metric
 \begin_layout Standard
 The notation used below is kept consistent with the other appendixes here,
  and differs from that used in the Francis–Kosowsky paper.
+ However, I'm abandoning the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ṱ and just using plain t.
+ In the below, t is not the Schwarzschild t, its the Painlev
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+é
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ ṱ.
 \end_layout
 
 \begin_layout Standard
@@ -2205,7 +2275,62 @@ river velocity
 \end_inset
 
 Note the minus signs arranged so that the river velocity is infalling.
- 
+ Again, I abandon the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ṱ symbol, and so all of the 
+\begin_inset Formula $t$
+\end_inset
+
+ are actually the
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Gullstrand–Painlevé
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ ṱ aka 
+\begin_inset Formula $t_{\mbox{ff}}$
+\end_inset
+
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+free-fall time coordinate
+\begin_inset Quotes erd
+\end_inset
+
+ (which is equal to the proper time for radially infalling observers.)
 \end_layout
 
 \begin_layout Standard
