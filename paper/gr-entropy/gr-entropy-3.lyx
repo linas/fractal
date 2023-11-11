@@ -935,7 +935,8 @@ literal "false"
 \end_inset
 
 .
- Its slightly more verbose in some places, and more compact in others.
+ My notes below are slightly more verbose in some places, and more compact
+ in others.
 \end_layout
 
 \begin_layout Standard
@@ -1622,7 +1623,11 @@ Curiously, this expression is not singular at
 \end_inset
 
  does exhibit a pole at that point.
- 
+\end_layout
+
+\begin_layout Standard
+The correctness of these expressions can be confirmed by comparing them
+ to the Lemaître chart (see Appendix) which gives these expressions trivially.
 \end_layout
 
 \begin_layout Standard
@@ -2422,16 +2427,18 @@ This can be summarized with just one remark:
 \end_layout
 
 \begin_layout Subsection*
-Flashlight coordinates (in the Lemaitre chart)
+Flashlight coordinates (in the Lemaître chart)
 \end_layout
 
 \begin_layout Standard
 Should be much easier.
- The general idea is the use the Lemaitre chart, hoping that the free-fall
+ The general idea is the use the Lemaître chart, hoping that the free-fall
  frames are easier to deal with.
  But then, to perform the null geodesic calculations, we should swtich to
  a different coordinate chart, to keep that easy.
- Can we get away with this plan?
+ Can we get away with this plan? How much of this should we strive for,
+ algebraically, and how much should be done by numerical integration? What's
+ the trade-off? What, exactly, are we trying to get insight to?
 \end_layout
 
 \begin_layout Subsection*
@@ -2466,128 +2473,7 @@ literal "false"
 \end_layout
 
 \begin_layout Section*
-Appendix A
-\end_layout
-
-\begin_layout Standard
-Stuff we don't need yet.
- Eventually we'll need it.
- Stuff copied from assorted places.
- 
-\end_layout
-
-\begin_layout Subsection*
-Lemaître frame
-\end_layout
-
-\begin_layout Standard
-First, the Lemaître frame for Schwarszchild.
- This frame is for a freely-falling, non-spinning point particle.
-\begin_inset Formula 
-\begin{align*}
-\vec{f}_{0} & =\partial_{T}-\sqrt{\frac{2m}{r}}\partial_{r}\\
-\vec{f}_{1} & =\partial_{r}\\
-\vec{f}_{2} & =\frac{1}{r}\partial_{\theta}\\
-\vec{f}_{3} & =\frac{1}{r\sin\theta}\partial_{\phi}
-\end{align*}
-
-\end_inset
-
-where 
-\begin_inset Formula 
-\[
-ds^{2}=dT^{2}-\left(dr+\sqrt{\frac{2m}{r}}dT\right)^{2}-r^{2}\left(d\theta^{2}+\sin^{2}\theta\,d\phi^{2}\right)
-\]
-
-\end_inset
-
-Note that for constant 
-\begin_inset Formula $T$
-\end_inset
-
- (by abuse of notation, 
-\begin_inset Formula $dT=0$
-\end_inset
-
-) the spatial part of the metric is the flat-space metric.
-\end_layout
-
-\begin_layout Standard
-The free-fall frame is given by 
-\begin_inset Formula $dr+\sqrt{\frac{2m}{r}}dT=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Factoids: 
-\begin_inset Formula $T$
-\end_inset
-
- is the proper time 
-\begin_inset Formula $\tau$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Except this is not the Lemaitre frame, this is the Painleve frame, almost
- the same, but ...
- clarify.
-\end_layout
-
-\begin_layout Subsection*
-Relation to Schwarschild coords
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $t$
-\end_inset
-
- be the 
-\begin_inset Quotes eld
-\end_inset
-
-time at infinity
-\begin_inset Quotes erd
-\end_inset
-
-, i.e.
- the Schwarschild time.
- The relation between 
-\begin_inset Formula $T$
-\end_inset
-
- and 
-\begin_inset Formula $t$
-\end_inset
-
- is the Gullstrand–Painlevé chart is
-\begin_inset Formula 
-\begin{align*}
-t\left(T,r\right) & =T+\int\frac{\sqrt{2m/r}}{1-2m/r}dr\\
- & =T-2m\left(2y-\log\left(\frac{y-1}{y+1}\right)\right)
-\end{align*}
-
-\end_inset
-
-with 
-\begin_inset Formula $y=\sqrt{r/2m}$
-\end_inset
-
- and 
-\begin_inset Formula $0<r<\infty$
-\end_inset
-
-.
- The log hits the branch point at 
-\begin_inset Formula $r=2m$
-\end_inset
-
-; this is the coordinate singularity in the Schwarschild chart.
+The End.
 \end_layout
 
 \begin_layout Standard
