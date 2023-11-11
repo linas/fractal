@@ -1011,7 +1011,7 @@ The metric is obtained from the Schwarzschild coordinates by replacing the
 \end_inset
 
  by a related coordinate ṱ.
- The other cooordinates are left alone.
+ The other cooordinates are unchanged.
 \end_layout
 
 \begin_layout Itemize
@@ -1697,6 +1697,8 @@ At a fixed instant in the
 
 .
  Surprising but true, I guess.
+ Caution: thinking about proper distance in this way is dangerous, and can
+ lead to paradoxes.
 \end_layout
 
 \begin_layout Subsection*
@@ -1738,6 +1740,7 @@ river velocity
 \end_inset
 
 Note the minus signs arranged so that the river velocity is infalling.
+ See Appendix G below for physical interpretation.
 \end_layout
 
 \begin_layout Section*
@@ -2475,23 +2478,27 @@ literal "false"
 
 \end_inset
 
- Everything here uses the Gullstrand–Painlevé metric, although the river
- coords can also be used for rotating BHs.
+ It's a shortened version of that paper.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Non-rotating spacetime
 \end_layout
 
 \begin_layout Standard
 The starting point is the Cartesian form of the Gullstrand–Painlevé metric,
- given above.
+ given in an earlier appendix.
  Repeating this, the metric is
 \begin_inset Formula 
 \[
-\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dt\right)\otimes\left(dx^{b}-\beta^{b}dt\right)
+\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dṱ\right)\otimes\left(dx^{b}-\beta^{b}dṱ\right)
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $dt=dx^{0}$
+\begin_inset Formula $dṱ=dx^{0}$
 \end_inset
 
  is shorthand for readability, and where 
@@ -2516,7 +2523,7 @@ river velocity
 \end_inset
 
 Note the minus signs arranged so that the river velocity is infalling.
- Again, I abandon the 
+ The 
 \family roman
 \series medium
 \shape up
@@ -2529,11 +2536,7 @@ Note the minus signs arranged so that the river velocity is infalling.
 \uwave off
 \noun off
 \color none
-ṱ symbol, and so all of the 
-\begin_inset Formula $t$
-\end_inset
-
- are actually the
+ṱ symbol is used as a reminder that this is the
 \family default
 \series default
 \shape default
@@ -2563,7 +2566,7 @@ Note the minus signs arranged so that the river velocity is infalling.
 \begin_inset Formula $t_{\mbox{ff}}$
 \end_inset
 
- the 
+ 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2571,7 +2574,9 @@ free-fall time coordinate
 \begin_inset Quotes erd
 \end_inset
 
- (which is equal to the proper time for radially infalling observers.)
+.
+ It is equal to the proper time for radially infalling observers.
+ It is not the Schwarzschild time coordinate.
 \end_layout
 
 \begin_layout Standard
@@ -2608,7 +2613,7 @@ the same thing
 \begin_inset Quotes erd
 \end_inset
 
-, but now has implicit vielein coordinates attached to it.
+, but now has implicit vielbein coordinates attached to it.
  It's just the inverse of the vielbein coords.
  
 \end_layout
@@ -2640,7 +2645,6 @@ for
  along the direction of motion, but leaves the time component (of the time
  axis) itself unchanged.
  The spatial axes are unchanged.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2721,11 +2725,149 @@ d.
 \end_layout
 
 \begin_layout Subsection*
-Tidal boosts
+Inertial Laboratory Frames
 \end_layout
 
 \begin_layout Standard
-The Hamilton paper goes on to obtain eqns of motion for arbitrary free-falling
+The practical question behind all this is how to understand what is happening
+ in a free-falling inertial laboratory frame.
+ There are multiple issues that need to be resolved.
+ Primary is how to measure space-like distances.
+ Physical (e.g.
+ wooden, steel) meter-sticks present a problem: they experience tidal forces
+ that must be resisted by atomic bonds.
+ Elasticity, etc.
+ The two ends of the ruller are not in free-fall: the atoms in between push
+ away.
+ There's also a different problem: what are the locations (world-lines)
+ of the atoms in the ruler? The molecular bonds between atoms are generally
+ analyzed for a fixed space-like surface, but what is that surface? What
+ is meant by 
+\begin_inset Quotes eld
+\end_inset
+
+simultaneity
+\begin_inset Quotes erd
+\end_inset
+
+? How do we disentangle the effect of spacetime itself from the compressive
+ forces of tidal variation? I think (I'm not sure) that this is the whole
+ point of the 
+\begin_inset Quotes eld
+\end_inset
+
+river model
+\begin_inset Quotes erd
+\end_inset
+
+, to help resolve these questions.
+\end_layout
+
+\begin_layout Standard
+To avoid questions about the behavior of elastic materials, one can instead
+ attempt to measure distances using light rays.
+ This simplifies matters dramatically.
+ Some postulates:
+\end_layout
+
+\begin_layout Itemize
+Clocks can be made arbitrarily small, and so there is no ambiguity ast to
+ the time they measure.
+ If they are in free-fall, they measure proper time.
+\end_layout
+
+\begin_layout Itemize
+Distances can be measured by bouncing light rays off a mirror, and measuring
+ travel time.
+ This requires two subsidiary assumptions, as follows.
+\end_layout
+
+\begin_layout Itemize
+Pulses of light can be made arbitrarily short, so that there is no ambiguity
+ as to the pulse location.
+ They can be made point-like.
+\end_layout
+
+\begin_layout Itemize
+Mirrors can be made arbitrarily small, so that there is no ambiguity as
+ to the location of a mirror.
+\end_layout
+
+\begin_layout Itemize
+It is useful to encode additional information, and so go over to the full
+ smart-dust model: the 
+\begin_inset Quotes eld
+\end_inset
+
+mirror
+\begin_inset Quotes erd
+\end_inset
+
+ can be active, and can encode info on the return pulse, immediately.
+ 
+\end_layout
+
+\begin_layout Standard
+In this way, we can go over into the general 
+\begin_inset Quotes eld
+\end_inset
+
+smart dust
+\begin_inset Quotes erd
+\end_inset
+
+ model: a collection of free-falling clocks, infinitessimal in size, able
+ to deliver complex messages in infinitessimal packets, with those packets
+ travelling either along null geodesics, or as bullets, along time-like
+ geodesics.
+\end_layout
+
+\begin_layout Standard
+This avoids having to struggle with the idea that clocks in different parts
+ of the laboratory run at different rates, and with having to triangulate
+ mirror locations, or to build and analyze the behavior of interferometers.
+ Fully smart dust enables for 
+\begin_inset Quotes eld
+\end_inset
+
+smart classical interferometers
+\begin_inset Quotes erd
+\end_inset
+
+ to be built.
+ Classical, because we no longer have to worry about quantum optics.
+ It gives a framework in which to analyze quantum optics.
+ In short, free-falling smart dust provides a suitable reference for all
+ points in the laboratory.
+ The claim would seem to then be that the 
+\begin_inset Quotes eld
+\end_inset
+
+river model
+\begin_inset Quotes erd
+\end_inset
+
+ is exactly the model that describes the free-falling smart dust, and that
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+tidal
+\begin_inset Quotes erd
+\end_inset
+
+ differences between neighboring time-like geodesics can be most easily
+ analyzed and understood in the local vierbein frame of a given bit of dust
+ (aka the observer, using older terminology.) 
+\end_layout
+
+\begin_layout Standard
+Lets get to it.
+ Lets try to make this happen.
+\end_layout
+
+\begin_layout Standard
+Hamilton paper goes on to obtain eqns of motion for arbitrary free-falling
  4-vectors in the 
 \begin_inset Quotes eld
 \end_inset
