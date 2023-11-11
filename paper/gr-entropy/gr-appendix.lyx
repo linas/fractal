@@ -132,11 +132,11 @@ Appendix C: Schwarzschild Metric
 \end_layout
 
 \begin_layout Itemize
-Appendix D: Lemaître observers
+Appendix D: Gullstrand–Painlevé coordinates
 \end_layout
 
 \begin_layout Itemize
-Appendix E: Gullstrand–Painlevé coordinates
+Appendix E: Lemaître observers
 \end_layout
 
 \begin_layout Itemize
@@ -976,256 +976,7 @@ move radially inwards, then move forward one second
 \end_layout
 
 \begin_layout Section*
-Appendix D: Lemaître Observers
-\end_layout
-
-\begin_layout Standard
-This coordinate chart is provided by canonical references, e.g.
- Wikipedia 
-\begin_inset CommandInset href
-LatexCommand href
-name "Lemaître coordinates"
-target "https://en.wikipedia.org/wiki/Lema%C3%AEtre_coordinates"
-literal "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset href
-LatexCommand href
-name "frame fields in general relativity"
-target "https://en.wikipedia.org/wiki/Frame_fields_in_general_relativity"
-literal "false"
-
-\end_inset
-
-, and is easy to look up.
- Still, we give a super-quick review here.
-\end_layout
-
-\begin_layout Standard
-Assorted factoids:
-\end_layout
-
-\begin_layout Itemize
-The time coordinate is the proper time.
-\end_layout
-
-\begin_layout Itemize
-The metric is not singular at the EH.
-\end_layout
-
-\begin_layout Itemize
-The frame fields in the Lemaître coordinate system have a coordinate singularity
- at the EH, thus making them useless for analyzing the null geodesics that
- propagate into/across the EH.
- (Right? I cribbed this from Wikipedia; I assume its a correct statement.)
- 
-\end_layout
-
-\begin_layout Itemize
-The coordinates provide radially-inward free-falling frames.
- That is, the covariant derivative of the frame fields w.r.t.
- time vanishes.
- The frames are inertial non-spinning frames.
-\end_layout
-
-\begin_layout Itemize
-The time coordinate is the proper time of all co-moving observers; thus,
- the Lemaître coordinates are called 
-\begin_inset Quotes eld
-\end_inset
-
-synchronous
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-The expression for free-falling radially-inward radial position w.r.t.
- proper time is very simple.
-\end_layout
-
-\begin_layout Subsection*
-Metric
-\end_layout
-
-\begin_layout Standard
-The metric is given by 
-\begin_inset Formula 
-\[
-\mathbf{g}=d\tau\otimes d\tau-\frac{2m}{r}\,d\rho\otimes d\rho-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
-\]
-
-\end_inset
-
-where the coordinates 
-\begin_inset Formula $\tau$
-\end_inset
-
-, 
-\begin_inset Formula $\rho$
-\end_inset
-
- are related to the Schwarschild coords as 
-\begin_inset Formula 
-\begin{align*}
-d\tau & =dt+\frac{\beta}{\alpha}dr\\
-d\rho & =dt+\frac{1}{\alpha\beta}dr
-\end{align*}
-
-\end_inset
-
-where 
-\begin_inset Formula 
-\[
-\beta\equiv\beta\left(r\right)=\sqrt{\frac{2m}{r}}
-\]
-
-\end_inset
-
-The remaining 
-\begin_inset Formula $r$
-\end_inset
-
- in the metric is short-hand for 
-\begin_inset Formula 
-\[
-r=\left[\frac{3}{2}\left(\rho-\tau\right)\right]^{2/3}\left(2m\right)^{1/3}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Properties
-\end_layout
-
-\begin_layout Standard
-The trajectories with constant 
-\begin_inset Formula $\rho$
-\end_inset
-
- are timelike geodesics with 
-\begin_inset Formula $\tau$
-\end_inset
-
- the proper time along the geodesic.
- This is easily seen by setting 
-\begin_inset Formula $d\rho=d\theta=d\phi=0$
-\end_inset
-
- in the metric; more formally, by coosing a vector field 
-\begin_inset Formula $\vec{X}=X^{\mu}\partial_{\mu}$
-\end_inset
-
- for which 
-\begin_inset Formula $d\rho\left(\vec{X}\right)=d\theta\left(\vec{X}\right)=d\phi\left(\vec{X}\right)=0$
-\end_inset
-
-.
- Thus, the radial position as a function of proper time is as given above,
- and its pretty stinkin' simple.
-\end_layout
-
-\begin_layout Standard
-Radial null geodesics are given by
-\begin_inset Formula 
-\[
-d\tau=\pm\beta d\rho
-\]
-
-\end_inset
-
-Plugging through, this is equivalent to 
-\begin_inset Formula 
-\[
-dr=\left(\pm1-\beta\right)d\tau
-\]
-
-\end_inset
-
-which is easily integrated:
-\begin_inset Formula 
-\[
-\tau=\int\frac{dr}{\pm1-\beta}=8m\int\frac{s^{5}ds}{\pm s^{2}+1}
-\]
-
-\end_inset
-
-after substituting 
-\begin_inset Formula $r=2ms^{4}$
-\end_inset
-
-.
- The RHS then integrates into some mess of logs and arctans using basic
- analysis.
- 
-\end_layout
-
-\begin_layout Standard
-The EH is located at 
-\begin_inset Formula 
-\[
-2m=\frac{3}{2}\left(\rho-\tau\right)
-\]
-
-\end_inset
-
-The gravitational singularity is located at 
-\begin_inset Formula $\rho-\tau=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection*
-Frame and Coframe
-\end_layout
-
-\begin_layout Standard
-Comparing the above to 
-\begin_inset Formula 
-\[
-\mathbf{g}=\eta_{ab}\sigma^{a}\otimes\sigma^{b}=\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}-\sigma^{2}\otimes\sigma^{2}-\sigma^{3}\otimes\sigma^{3}
-\]
-
-\end_inset
-
-the simplest coframe is
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\sigma^{0} & =d\tau\\
-\sigma^{1} & =\beta d\rho\\
-\sigma^{2} & =rd\theta\\
-\sigma^{3} & =r\sin\theta\,d\phi
-\end{align*}
-
-\end_inset
-
-The corresponding frame field looks to be a mess to solve for, so I will
- punt for now.
- The Wikipedia entry for this, located in the article 
-\begin_inset CommandInset href
-LatexCommand href
-name "frame fields in general relativity"
-target "https://en.wikipedia.org/wiki/Frame_fields_in_general_relativity"
-literal "false"
-
-\end_inset
-
- does not appear to be corret.
-\end_layout
-
-\begin_layout Section*
-Appendix E: Gullstrand–Painlevé coordinates
+Appendix D: Gullstrand–Painlevé coordinates
 \end_layout
 
 \begin_layout Standard
@@ -1657,7 +1408,7 @@ and
 
 \end_inset
 
-The coframe above is then:
+The metric tensor is then:
 \begin_inset Formula 
 \[
 \mathbf{g}=dṱ\otimes dṱ-\left(dr+\beta dṱ\right)\otimes\left(dr+\beta dṱ\right)-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
@@ -1687,6 +1438,151 @@ which allows
 \end_layout
 
 \begin_layout Standard
+The relationship between 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ṱ and the Schwarzschild 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\[
+ṱ=t+\int_{r}^{\infty}\frac{\beta}{\alpha}dr
+\]
+
+\end_inset
+
+This holds everywhere on the chart, and not just for some geodesics.
+ This can be verified by brute force; see Wikipedia 
+\begin_inset CommandInset href
+LatexCommand href
+name "Gullstrand–Painlevé coordinates"
+target "https://en.wikipedia.org/wiki/Gullstrand%E2%80%93Painlev%C3%A9_coordinates"
+literal "false"
+
+\end_inset
+
+ for details.
+ Integration gives 
+\begin_inset Formula 
+\[
+ṱ=t-\frac{4m}{\beta}-2m\log\frac{1-\beta}{1+\beta}
+\]
+
+\end_inset
+
+This relates three different things: the time 
+\begin_inset Formula $t$
+\end_inset
+
+ experienced by the observer at infinity, the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+coordinate ṱ
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ and the radial position, given by 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Note that the log hits the branch point at 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+.
+ This is the EH.
+\end_layout
+
+\begin_layout Standard
+Radial infal for massive observers is given by 
+\begin_inset Formula $0=dr+\beta dṱ$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For radially infalling geodesics, the coordinate
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ ṱ
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is the proper time 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ If we only want the observer position as a function of proper time, the
+ Lemaître formulas are much easier to work with.
+\end_layout
+
+\begin_layout Standard
 Other conclusions (The following needs double-checking.
  I'm not sure it's all correct.)
 \end_layout
@@ -1697,49 +1593,6 @@ The proper distance travelled by a free-falling particle is just
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Itemize
-The elapsed proper time for the infall is
-\begin_inset Formula 
-\[
-\tau=ṱ-\int_{r}^{\infty}\frac{\beta}{\alpha}dr
-\]
-
-\end_inset
-
-This is widely quoted, but I don't see how to derive it off the top of my
- head.
- Plugging in and cranking gives
-\begin_inset Formula 
-\[
-\tau=ṱ+\frac{4m}{\beta}+2m\log\frac{1-\beta}{1+\beta}
-\]
-
-\end_inset
-
-This relates three different things: the time 
-\begin_inset Formula $t$
-\end_inset
-
- experienced by the observer at infinity, the proper time 
-\begin_inset Formula $\tau$
-\end_inset
-
- experienced by the infalling observer, and the radial position, given by
- 
-\begin_inset Formula $\beta$
-\end_inset
-
-.
- If we only want the observer position as a function of proper time, the
- Lemaître formulas are much easier to work with.
- Note that the log hits the branch point at 
-\begin_inset Formula $\beta=1$
-\end_inset
-
-.
- This is the EH.
 \end_layout
 
 \begin_layout Subsection*
@@ -1781,7 +1634,255 @@ river velocity
 \end_inset
 
 Note the minus signs arranged so that the river velocity is infalling.
+\end_layout
+
+\begin_layout Section*
+Appendix E: Lemaître Observers
+\end_layout
+
+\begin_layout Standard
+This coordinate chart is provided by canonical references, e.g.
+ Wikipedia 
+\begin_inset CommandInset href
+LatexCommand href
+name "Lemaître coordinates"
+target "https://en.wikipedia.org/wiki/Lema%C3%AEtre_coordinates"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset href
+LatexCommand href
+name "frame fields in general relativity"
+target "https://en.wikipedia.org/wiki/Frame_fields_in_general_relativity"
+literal "false"
+
+\end_inset
+
+, and is easy to look up.
+ Still, we give a super-quick review here.
+\end_layout
+
+\begin_layout Standard
+Assorted factoids:
+\end_layout
+
+\begin_layout Itemize
+The time coordinate is the proper time.
+\end_layout
+
+\begin_layout Itemize
+The metric is not singular at the EH.
+\end_layout
+
+\begin_layout Itemize
+The frame fields in the Lemaître coordinate system have a coordinate singularity
+ at the EH, thus making them useless for analyzing the null geodesics that
+ propagate into/across the EH.
+ (Right? I cribbed this from Wikipedia; I assume its a correct statement.)
  
+\end_layout
+
+\begin_layout Itemize
+The coordinates provide radially-inward free-falling frames.
+ That is, the covariant derivative of the frame fields w.r.t.
+ time vanishes.
+ The frames are inertial non-spinning frames.
+\end_layout
+
+\begin_layout Itemize
+The time coordinate is the proper time of all co-moving observers; thus,
+ the Lemaître coordinates are called 
+\begin_inset Quotes eld
+\end_inset
+
+synchronous
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The expression for free-falling radially-inward radial position w.r.t.
+ proper time is very simple.
+\end_layout
+
+\begin_layout Subsection*
+Metric
+\end_layout
+
+\begin_layout Standard
+The metric is given by 
+\begin_inset Formula 
+\[
+\mathbf{g}=d\tau\otimes d\tau-\frac{2m}{r}\,d\rho\otimes d\rho-r^{2}\left(d\theta\otimes d\theta+\sin^{2}\theta\,d\phi\otimes d\phi\right)
+\]
+
+\end_inset
+
+where the coordinates 
+\begin_inset Formula $\tau$
+\end_inset
+
+, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ are related to the Schwarschild coords as 
+\begin_inset Formula 
+\begin{align*}
+d\tau & =dt+\frac{\beta}{\alpha}dr\\
+d\rho & =dt+\frac{1}{\alpha\beta}dr
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\beta\equiv\beta\left(r\right)=\sqrt{\frac{2m}{r}}
+\]
+
+\end_inset
+
+The remaining 
+\begin_inset Formula $r$
+\end_inset
+
+ in the metric is short-hand for 
+\begin_inset Formula 
+\[
+r=\left[\frac{3}{2}\left(\rho-\tau\right)\right]^{2/3}\left(2m\right)^{1/3}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Properties
+\end_layout
+
+\begin_layout Standard
+The trajectories with constant 
+\begin_inset Formula $\rho$
+\end_inset
+
+ are timelike geodesics with 
+\begin_inset Formula $\tau$
+\end_inset
+
+ the proper time along the geodesic.
+ This is easily seen by setting 
+\begin_inset Formula $d\rho=d\theta=d\phi=0$
+\end_inset
+
+ in the metric; more formally, by coosing a vector field 
+\begin_inset Formula $\vec{X}=X^{\mu}\partial_{\mu}$
+\end_inset
+
+ for which 
+\begin_inset Formula $d\rho\left(\vec{X}\right)=d\theta\left(\vec{X}\right)=d\phi\left(\vec{X}\right)=0$
+\end_inset
+
+.
+ Thus, the radial position as a function of proper time is as given above,
+ and its pretty stinkin' simple.
+\end_layout
+
+\begin_layout Standard
+Radial null geodesics are given by
+\begin_inset Formula 
+\[
+d\tau=\pm\beta d\rho
+\]
+
+\end_inset
+
+Plugging through, this is equivalent to 
+\begin_inset Formula 
+\[
+dr=\left(\pm1-\beta\right)d\tau
+\]
+
+\end_inset
+
+which is easily integrated:
+\begin_inset Formula 
+\[
+\tau=\int\frac{dr}{\pm1-\beta}=8m\int\frac{s^{5}ds}{\pm s^{2}+1}
+\]
+
+\end_inset
+
+after substituting 
+\begin_inset Formula $r=2ms^{4}$
+\end_inset
+
+.
+ The RHS then integrates into some mess of logs and arctans using basic
+ analysis.
+ 
+\end_layout
+
+\begin_layout Standard
+The EH is located at 
+\begin_inset Formula 
+\[
+2m=\frac{3}{2}\left(\rho-\tau\right)
+\]
+
+\end_inset
+
+The gravitational singularity is located at 
+\begin_inset Formula $\rho-\tau=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Frame and Coframe
+\end_layout
+
+\begin_layout Standard
+Comparing the above to 
+\begin_inset Formula 
+\[
+\mathbf{g}=\eta_{ab}\sigma^{a}\otimes\sigma^{b}=\sigma^{0}\otimes\sigma^{0}-\sigma^{1}\otimes\sigma^{1}-\sigma^{2}\otimes\sigma^{2}-\sigma^{3}\otimes\sigma^{3}
+\]
+
+\end_inset
+
+the simplest coframe is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\sigma^{0} & =d\tau\\
+\sigma^{1} & =\beta d\rho\\
+\sigma^{2} & =rd\theta\\
+\sigma^{3} & =r\sin\theta\,d\phi
+\end{align*}
+
+\end_inset
+
+The corresponding frame field looks to be a mess to solve for, so I will
+ punt for now.
+ The Wikipedia entry for this, located in the article 
+\begin_inset CommandInset href
+LatexCommand href
+name "frame fields in general relativity"
+target "https://en.wikipedia.org/wiki/Frame_fields_in_general_relativity"
+literal "false"
+
+\end_inset
+
+ does not appear to be corret.
 \end_layout
 
 \begin_layout Section*
