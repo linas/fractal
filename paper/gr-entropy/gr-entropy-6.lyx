@@ -234,16 +234,12 @@ The starting point is the Cartesian form of the Gullstrand–Painlevé metric,
  Repeating this, the metric is
 \begin_inset Formula 
 \begin{align*}
-\mathbf{g}= & \eta_{\mu\nu}\left(dx^{\mu}-\beta^{\mu}dṱ\right)\otimes\left(dx^{\nu}-\beta^{\nu}dṱ\right)
+\mathbf{g}= & \eta_{\mu\nu}\left(dx^{\mu}+\beta^{\mu}dx^{0}\right)\otimes\left(dx^{\nu}+\beta^{\nu}dx^{0}\right)
 \end{align*}
 
 \end_inset
 
-where 
-\begin_inset Formula $dṱ=dx^{0}$
-\end_inset
-
- is shorthand for readability, and where 
+The 
 \begin_inset Formula $\beta^{\mu}$
 \end_inset
 
@@ -259,80 +255,32 @@ river velocity
 \begin_inset Formula 
 \begin{align*}
 \beta^{0} & =0\\
-\beta^{i} & =-\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
+\beta^{i} & =\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
 \end{align*}
 
 \end_inset
 
-Note the minus signs arranged so that the river velocity is infalling.
- The 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-ṱ symbol is used as a reminder that this is the
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- Gullstrand–Painlevé
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
- ṱ aka 
-\begin_inset Formula $t_{\mbox{ff}}$
-\end_inset
-
- 
-\begin_inset Quotes eld
-\end_inset
-
-free-fall time coordinate
-\begin_inset Quotes erd
-\end_inset
-
-.
- It is equal to the proper time for radially infalling observers.
- It is not the Schwarzschild time coordinate.
-\end_layout
-
-\begin_layout Standard
-Note the above has the same form for both 
+The sign are such that this metric is consistent with the sphere-coordinate
+ metric, given earlier.
+ Despite all the plus signs above, the river velocity is infalling.
+ This follows from the metric signature 
 \begin_inset Formula $\eta_{\mu\nu}=\left(+---\right)$
 \end_inset
 
- and for 
-\begin_inset Formula $\eta_{\mu\nu}=\left(-+++\right)$
+, which implies that 
+\begin_inset Formula $\beta_{i}=-\beta^{i}$
 \end_inset
 
-.
- This diary works with the former.
- It usually doesn't matter.
+ and the lower index reminds that 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+ is a vector in the tangent space.
+ Positive vectors point outwards; thus 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+ with these convetions points inwards.
 \end_layout
 
 \begin_layout Standard
@@ -416,14 +364,15 @@ Metric and frame fields in components
 \end_layout
 
 \begin_layout Standard
-Reproduce the above, except this time in voluminous detail, with all indexes
- on everything.
- This is much more verbose.
+The above is a bit too telegraphic, so reproduce the above, except this
+ time in voluminous detail, with all indexes on everything.
+ This is much more verbose; on the paionful side, since the information
+ content is low.
  Again, the metric is
 \begin_inset Formula 
 \begin{align*}
 \mathbf{g}= & g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}\\
-= & \eta_{\mu\nu}\left(dx^{\mu}-\beta^{\mu}dx^{0}\right)\otimes\left(dx^{\nu}-\beta^{\nu}dx^{0}\right)\\
+= & \eta_{\mu\nu}\left(dx^{\mu}+\beta^{\mu}dx^{0}\right)\otimes\left(dx^{\nu}+\beta^{\nu}dx^{0}\right)\\
 = & \eta_{ab}\sigma^{a}\otimes\sigma^{b}
 \end{align*}
 
@@ -445,7 +394,7 @@ river velocity
 \begin_inset Formula 
 \begin{align*}
 \beta^{0} & =0\\
-\beta^{i} & =-\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
+\beta^{i} & =\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
 \end{align*}
 
 \end_inset
@@ -481,7 +430,7 @@ The
 \begin_inset Formula 
 \begin{align*}
 \sigma^{0} & =dx^{0}\\
-\sigma^{i} & =dx^{i}-\beta^{i}dx^{0}
+\sigma^{i} & =dx^{i}+\beta^{i}dx^{0}
 \end{align*}
 
 \end_inset
@@ -547,20 +496,47 @@ Writing this explicitly,
 
 \end_inset
 
-The coordinate metric is then
+The coordinate metric is then quite the mess.
+ We learn nothing from this, other than that everything can be made very
+ explicit.
 \begin_inset Formula 
 \begin{align*}
 g_{\mu\nu} & =\eta_{ab}\mathbf{g}_{\mu}^{a}\mathbf{g}_{\nu}^{b}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}\\
- & =\eta_{ab}\left(\delta_{\mu}^{a}-\beta^{a}\delta_{\mu}^{0}\right)\left(\delta_{\nu}^{b}-\beta^{b}\delta_{\nu}^{0}\right)\\
- & =\eta_{\mu\nu}-\beta_{\nu}\delta_{\mu}^{0}-\beta_{\mu}\delta_{\nu}^{0}+\beta^{2}\,\delta_{\mu}^{0}\delta_{\nu}^{0}
+ & =\eta_{ab}\left(\delta_{\mu}^{a}+\beta^{a}\delta_{\mu}^{0}\right)\left(\delta_{\nu}^{b}+\beta^{b}\delta_{\nu}^{0}\right)\\
+ & =\eta_{\mu\nu}-\beta_{\nu}\delta_{\mu}^{0}-\beta_{\mu}\delta_{\nu}^{0}-\frac{2m}{r}\,\delta_{\mu}^{0}\delta_{\nu}^{0}\\
+ & =\left(2\delta_{\mu}^{0}\delta_{\nu}^{0}-\delta_{\mu\nu}\right)-\beta_{\nu}\delta_{\mu}^{0}-\beta_{\mu}\delta_{\nu}^{0}-\frac{2m}{r}\,\delta_{\mu}^{0}\delta_{\nu}^{0}\\
+ & =\left(1-\frac{2m}{r}\right)\delta_{\mu}^{0}\delta_{\nu}^{0}-\beta_{\nu}\delta_{\mu}^{0}-\beta_{\mu}\delta_{\nu}^{0}-\left(\delta_{\mu\nu}-\delta_{\mu}^{0}\delta_{\nu}^{0}\right)
 \end{align*}
 
 \end_inset
 
 where 
-\begin_inset Formula $\beta^{2}=2m/r$
+\begin_inset Formula $\left|\beta\left(r\right)\right|^{2}=2m/r$
 \end_inset
 
+ and 
+\begin_inset Formula $\delta_{\mu\nu}$
+\end_inset
+
+ is just the Euclidean metric 
+\begin_inset Formula $\left(++++\right)$
+\end_inset
+
+.
+ The Minkowski metric is then 
+\begin_inset Formula $\eta_{\mu\nu}=\left(+---\right)=2\delta_{\mu}^{0}\delta_{\nu}^{0}-\delta_{\mu\nu}$
+\end_inset
+
+; observe the factor of two.
+ The screwy construction 
+\begin_inset Formula $\left(\delta_{\mu\nu}-\delta_{\mu}^{0}\delta_{\nu}^{0}\right)$
+\end_inset
+
+ just knocks out the time coordinate, so that its 
+\begin_inset Formula $\left(0+++\right)$
+\end_inset
+
+.
  
 \end_layout
 
