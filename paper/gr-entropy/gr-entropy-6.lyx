@@ -107,7 +107,26 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Abstract
-Stuff.
+The free-falling 
+\begin_inset Quotes eld
+\end_inset
+
+smart dust
+\begin_inset Quotes erd
+\end_inset
+
+ model proposed in Chapter Three and developed in Chapter Five promises
+ a nice way to think about the physical properties about spacetime.
+ This chapter develops the idea further, this time, using the 
+\begin_inset Quotes eld
+\end_inset
+
+river model
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
@@ -115,7 +134,501 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Stuff
+The free-falling smart-dust model offers a promising way of thinking about
+ the physical properties of spacetime.
+ In most ways, it is identical to the 120 year-old concept of 
+\begin_inset Quotes eld
+\end_inset
+
+observers
+\begin_inset Quotes erd
+\end_inset
+
+ located in spacetime.
+ What's new is that it abstracts the core properties of what observers can
+ actually do: they can measure time, they can send and receive messages,
+ and they can perform computations.
+ They can be shrunk to microscopic dimensions, thus avoiding ambiguities
+ associated with spatially-extended objects (such as rulers, which are elastic
+ at the macro level, and are composed of quantum objects at the micro level.)
+ The smart dust is assumed to be entirely classical (non-quantum).
+ Since the smart dust can perform computations, it can be used to simukate
+ Huygens sums and/or other quantum concepts.
+\end_layout
+
+\begin_layout Standard
+The first atempt at working with smart dust, in Chapter Three, falters on
+ the use of Schwarzschild coordinates.
+ The second attempt, in Chapter Five, does better, by selecting the Gullstrand–P
+ainlevé chart.
+ It still falters, for two reasons.
+ First, by working in spherical coordinates, sphere symmetry is actually
+ hidden.
+ This is because the transformations between coordinates 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ , to another location 
+\begin_inset Formula $\theta^{\prime}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi^{\prime}$
+\end_inset
+
+, while conceptually simple, are horrible tangled in practice.
+ Euler angles are nasty.
+ Pauli matrices (which are rectilinear) are nice.
+ The second mistake is that of working in coordinate space directly, instead
+ of working with vierbeins (frame fields).
+ This second mistake results in the entanglement of coordinate transformation
+ effects with laboratory frame measurements.
+ Fierbeins disentangle global coordinatte choices from local laboratory
+ measurements.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+river model of black holes
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hamilton2004"
+literal "false"
+
+\end_inset
+
+ demonstrates how to overcome both of these mistakes.
+ First, it gives the Gullstrand–Painlevé chart in Cartesian coordinates,
+ where it is particularly simple.
+ Second, it shows how to work with vierbeins.
+ This chapter is mostly a recap of the Hamilton paper, but then it goes
+ on excursions to clarify what is actually happening to the smart dust.
+\end_layout
+
+\begin_layout Subsection*
+Non-rotating spacetime
+\end_layout
+
+\begin_layout Standard
+The starting point is the Cartesian form of the Gullstrand–Painlevé metric,
+ given in an earlier appendix.
+ Repeating this, the metric is
+\begin_inset Formula 
+\[
+\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dṱ\right)\otimes\left(dx^{b}-\beta^{b}dṱ\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $dṱ=dx^{0}$
+\end_inset
+
+ is shorthand for readability, and where 
+\begin_inset Formula $\beta^{a}$
+\end_inset
+
+ is the radial 
+\begin_inset Quotes eld
+\end_inset
+
+river velocity
+\begin_inset Quotes erd
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\beta^{0} & =0\\
+\beta^{i} & =-\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
+\end{align*}
+
+\end_inset
+
+Note the minus signs arranged so that the river velocity is infalling.
+ The 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ṱ symbol is used as a reminder that this is the
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Gullstrand–Painlevé
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ ṱ aka 
+\begin_inset Formula $t_{\mbox{ff}}$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+free-fall time coordinate
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is equal to the proper time for radially infalling observers.
+ It is not the Schwarzschild time coordinate.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbf{g}_{\mu}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+ denote a tetrad frame (using the notation reviewed in Appendix A).
+ Recall that 
+\begin_inset Formula $\mathbf{g}_{\mu}=\partial_{\mu}$
+\end_inset
+
+ is just a coordinate tangent vector.
+ The notation is that 
+\begin_inset Formula $\partial_{\mu}$
+\end_inset
+
+ is a bare-naked tangent vector, obtained as a gradient of a scalar field,
+ w.r.t.
+ a given fixed coordinate chart.
+ By contrast, 
+\begin_inset Formula $\mathbf{g}_{\mu}$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+the same thing
+\begin_inset Quotes erd
+\end_inset
+
+, but now has implicit vielbein coordinates attached to it.
+ It's just the inverse of the vielbein coords.
+ 
+\end_layout
+
+\begin_layout Standard
+For Gullstrand–Painlevé in Cartesian form, one has 
+\begin_inset Formula 
+\begin{align*}
+\gamma_{0} & =\mathbf{g}_{0}+\beta^{i}\mathbf{g}_{i}\\
+\gamma_{i} & =\mathbf{g}_{i}
+\end{align*}
+
+\end_inset
+
+for 
+\begin_inset Formula $i=1,2,3$
+\end_inset
+
+.
+ The 'magic
+\begin_inset Quotes erd
+\end_inset
+
+ is that these eqns have the form of a Galilean transformation, which shifts
+ the time axis by a velocity 
+\begin_inset Formula $\vec{\beta}$
+\end_inset
+
+ along the direction of motion, but leaves the time component (of the time
+ axis) itself unchanged.
+ The spatial axes are unchanged.
+\end_layout
+
+\begin_layout Standard
+The free-fall velocity of a massive particle, falling in arbitrary direction,
+ is given by 
+\begin_inset Formula 
+\[
+v^{\mu}=\frac{dx^{\mu}}{d\tau}
+\]
+
+\end_inset
+
+For radial infall, 
+\begin_inset Formula $v^{0}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $v^{i}=\beta^{i}$
+\end_inset
+
+ or, pictorially, 
+\begin_inset Formula $v^{\mu}=\left(1,\beta^{1},\beta^{2},\beta^{3}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In the tetrad frame, the free-fall velocity 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+u^{a}\gamma_{a}=v^{\mu}\mathbf{g}_{\mu}
+\]
+
+\end_inset
+
+which works out to
+\begin_inset Formula 
+\begin{align*}
+u^{0} & =v^{0}\\
+u^{i} & =v^{i}-\beta^{i}v^{0}
+\end{align*}
+
+\end_inset
+
+For radial infall, this is just 
+\begin_inset Formula $u^{a}=\left(1,0,0,0\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The physical interpretation of 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ is that it is 
+\begin_inset Quotes eld
+\end_inset
+
+4-velocity of the particle, relative to the inflowing river of space
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Proper time is a property of the particle (the geodesic) and not of the
+ river (spacetime).
+ Particles in the rever move according to the rules of special relativity.
+ The river itself flows in a Galilean fashion, through a flat Galilean backgroun
+d.
+\end_layout
+
+\begin_layout Subsection*
+Inertial Laboratory Frames
+\end_layout
+
+\begin_layout Standard
+The practical question behind all this is how to understand what is happening
+ in a free-falling inertial laboratory frame.
+ There are multiple issues that need to be resolved.
+ Primary is how to measure space-like distances.
+ Physical (e.g.
+ wooden, steel) meter-sticks present a problem: they experience tidal forces
+ that must be resisted by atomic bonds.
+ Elasticity, etc.
+ The two ends of the ruller are not in free-fall: the atoms in between push
+ away.
+ There's also a different problem: what are the locations (world-lines)
+ of the atoms in the ruler? The molecular bonds between atoms are generally
+ analyzed for a fixed space-like surface, but what is that surface? What
+ is meant by 
+\begin_inset Quotes eld
+\end_inset
+
+simultaneity
+\begin_inset Quotes erd
+\end_inset
+
+? How do we disentangle the effect of spacetime itself from the compressive
+ forces of tidal variation? I think (I'm not sure) that this is the whole
+ point of the 
+\begin_inset Quotes eld
+\end_inset
+
+river model
+\begin_inset Quotes erd
+\end_inset
+
+, to help resolve these questions.
+\end_layout
+
+\begin_layout Standard
+To avoid questions about the behavior of elastic materials, one can instead
+ attempt to measure distances using light rays.
+ This simplifies matters dramatically.
+ Some postulates:
+\end_layout
+
+\begin_layout Itemize
+Clocks can be made arbitrarily small, and so there is no ambiguity ast to
+ the time they measure.
+ If they are in free-fall, they measure proper time.
+\end_layout
+
+\begin_layout Itemize
+Distances can be measured by bouncing light rays off a mirror, and measuring
+ travel time.
+ This requires two subsidiary assumptions, as follows.
+\end_layout
+
+\begin_layout Itemize
+Pulses of light can be made arbitrarily short, so that there is no ambiguity
+ as to the pulse location.
+ They can be made point-like.
+\end_layout
+
+\begin_layout Itemize
+Mirrors can be made arbitrarily small, so that there is no ambiguity as
+ to the location of a mirror.
+\end_layout
+
+\begin_layout Itemize
+It is useful to encode additional information, and so go over to the full
+ smart-dust model: the 
+\begin_inset Quotes eld
+\end_inset
+
+mirror
+\begin_inset Quotes erd
+\end_inset
+
+ can be active, and can encode info on the return pulse, immediately.
+ 
+\end_layout
+
+\begin_layout Standard
+In this way, we can go over into the general 
+\begin_inset Quotes eld
+\end_inset
+
+smart dust
+\begin_inset Quotes erd
+\end_inset
+
+ model: a collection of free-falling clocks, infinitessimal in size, able
+ to deliver complex messages in infinitessimal packets, with those packets
+ travelling either along null geodesics, or as bullets, along time-like
+ geodesics.
+\end_layout
+
+\begin_layout Standard
+This avoids having to struggle with the idea that clocks in different parts
+ of the laboratory run at different rates, and with having to triangulate
+ mirror locations, or to build and analyze the behavior of interferometers.
+ Fully smart dust enables for 
+\begin_inset Quotes eld
+\end_inset
+
+smart classical interferometers
+\begin_inset Quotes erd
+\end_inset
+
+ to be built.
+ Classical, because we no longer have to worry about quantum optics.
+ It gives a framework in which to analyze quantum optics.
+ In short, free-falling smart dust provides a suitable reference for all
+ points in the laboratory.
+ The claim would seem to then be that the 
+\begin_inset Quotes eld
+\end_inset
+
+river model
+\begin_inset Quotes erd
+\end_inset
+
+ is exactly the model that describes the free-falling smart dust, and that
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+tidal
+\begin_inset Quotes erd
+\end_inset
+
+ differences between neighboring time-like geodesics can be most easily
+ analyzed and understood in the local vierbein frame of a given bit of dust
+ (aka the observer, using older terminology.) 
+\end_layout
+
+\begin_layout Standard
+Lets get to it.
+ Lets try to make this happen.
+\end_layout
+
+\begin_layout Standard
+Hamilton paper goes on to obtain eqns of motion for arbitrary free-falling
+ 4-vectors in the 
+\begin_inset Quotes eld
+\end_inset
+
+river frame
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The notable result is that, in this frame, the vectors get a Lorentz boost
+ along the direction of 
+\begin_inset Formula $\beta^{i}$
+\end_inset
+
+, which is interpreted as a tidal change.
+ That is, the 4-vector is carried by the river, to a new location, and it
+ is boosted slightly, as it is carried.
+ It's 
+\begin_inset Quotes eld
+\end_inset
+
+tidal
+\begin_inset Quotes erd
+\end_inset
+
+ as it excludes the boost associated with the river itself.
+ See paper for details.
 \end_layout
 
 \end_body
