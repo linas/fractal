@@ -302,19 +302,18 @@ although, in general, slightly more general
 \end_layout
 
 \begin_layout Standard
-Following Hamilton&Lisle, the metric is factored into flat tetrad frame
- fields 
+The metric is factored into flat tetrad frame fields 
 \begin_inset Formula $\gamma_{a}$
 \end_inset
 
  and 
-\begin_inset Formula $\mathbf{g}_{\mu}$
+\begin_inset Formula $\mathbf{g}_{\mu}=\partial_{\mu}$
 \end_inset
 
  as 
 \begin_inset Formula 
 \[
-g_{\mu\nu}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}
+g_{\mu\nu}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}=\mathbf{g}_{\mu}^{a}\mathbf{g}_{\nu}^{b}\eta_{ab}
 \]
 
 \end_inset
@@ -322,17 +321,20 @@ g_{\mu\nu}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}
 and 
 \begin_inset Formula 
 \[
-\eta_{ab}=\gamma_{a}\cdot\gamma_{b}
+\eta_{ab}=\gamma_{a}\cdot\gamma_{b}=\gamma_{a}^{\mu}\gamma_{b}^{\nu}g_{\mu\nu}
 \]
 
 \end_inset
 
+Hamilton&Lisle
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hamilton2004"
+literal "false"
 
-\end_layout
+\end_inset
 
-\begin_layout Standard
-Hamilton&Lisle argue that, for Gullstrand–Painlevé in Cartesian form, one
- has 
+ argue that, for Gullstrand–Painlevé in Cartesian form, one has 
 \begin_inset Formula 
 \begin{align*}
 \gamma_{0} & =\mathbf{g}_{0}-\beta^{i}\mathbf{g}_{i}\\
@@ -350,7 +352,11 @@ for
 \end_layout
 
 \begin_layout Standard
-The 'magic
+The 
+\begin_inset Quotes eld
+\end_inset
+
+magic
 \begin_inset Quotes erd
 \end_inset
 
@@ -362,13 +368,7 @@ The 'magic
  along the direction of motion, but leaves the time component (of the time
  axis) itself unchanged.
  The spatial axes are unchanged.
- They never quite give explicit expression to the 
-\begin_inset Formula $\mathbf{g}_{\mu}$
-\end_inset
-
- even though its highly suggestive from the metric form.
- In any case, these are vectors of vectors, and so the notation is confusing.
- Thus, a more painful approach, below.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -376,9 +376,9 @@ Metric and frame fields in components
 \end_layout
 
 \begin_layout Standard
-The above is a bit too telegraphic, so reproduce the above, except this
- time in voluminous detail, with all indexes on everything.
- This is much more verbose; on the paionful side, since the information
+The above is a bit too telegraphic, so this section reproduces the above,
+ except this time in voluminous detail, with all indexes on everything.
+ This is much more verbose; even on the painful side, since the information
  content is low.
  Again, the metric is
 \begin_inset Formula 
@@ -493,7 +493,7 @@ The change of coordinates into the tetrad frame is denoted by
 \end_inset
 
 .
- Explicitly, these are given by 
+ Explicitly, this transform is defined as 
 \end_layout
 
 \begin_layout Standard
@@ -504,7 +504,7 @@ The change of coordinates into the tetrad frame is denoted by
 
 \end_inset
 
-Writing this explicitly,
+Comparing to above gives this explicitly,
 \begin_inset Formula 
 \[
 \mathbf{g}_{\mu}^{a}=\delta_{\mu}^{a}+\beta^{a}\delta_{\mu}^{0}
@@ -512,9 +512,16 @@ Writing this explicitly,
 
 \end_inset
 
-The coordinate metric is then quite the mess.
+
+\end_layout
+
+\begin_layout Standard
+Just for grins, write out the metric in component form.
+ It is not needed for anything; this is purely for entertainment.
+ It is quite the mess.
  We learn nothing from this, other than that everything can be made very
  explicit.
+ My apologies.
 \begin_inset Formula 
 \begin{align*}
 g_{\mu\nu} & =\eta_{ab}\mathbf{g}_{\mu}^{a}\mathbf{g}_{\nu}^{b}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}\\
@@ -552,7 +559,7 @@ where
 \begin_inset Formula $\left(0+++\right)$
 \end_inset
 
-.
+, which is the 3D flat Cartesian metric.
  
 \end_layout
 
@@ -576,7 +583,7 @@ where
  (See Appendix A for details.) The inverse is defined as
 \begin_inset Formula 
 \[
-\mathbf{g}_{\mu}^{a}\gamma_{a}=\partial_{\mu}
+\mathbf{g}_{\mu}^{a}\gamma_{a}=\mathbf{g}_{\mu}=\partial_{\mu}
 \]
 
 \end_inset
@@ -620,15 +627,35 @@ which, after identifying
 
 which is exactly the Hamilton&Lisle vector form (up to a sign, due to metric
  signature).
+ In matrix form, this is
+\begin_inset Formula 
+\[
+\left[\begin{array}{c}
+\gamma_{0}\\
+\gamma_{1}\\
+\gamma_{2}\\
+\gamma_{3}
+\end{array}\right]=\left[\begin{array}{cccc}
+1 & -\beta^{1} & -\beta^{2} & -\beta^{3}\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]\left[\begin{array}{c}
+\mathbf{g}_{0}\\
+\mathbf{g}_{1}\\
+\mathbf{g}_{2}\\
+\mathbf{g}_{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+So, just a linear transform.
 \end_layout
 
 \begin_layout Subsection
-Velocity XXX
-\end_layout
-
-\begin_layout Standard
-FIXME the roman-greek index thing is killing me.
- The below is correct but misleading.
+Inertial Laboratory Frames vs.
+ River Model
 \end_layout
 
 \begin_layout Standard
@@ -650,7 +677,7 @@ For radial infall,
 \end_inset
 
  or, pictorially, 
-\begin_inset Formula $v^{\mu}=\left(1,-\beta^{1},-\beta^{2},-\beta^{3}\right)$
+\begin_inset Formula $v_{\mbox{radial}}^{\mu}=\left(1,-\beta^{1},-\beta^{2},-\beta^{3}\right)$
 \end_inset
 
 .
@@ -680,15 +707,55 @@ u^{i} & =v^{i}-\beta^{i}v^{0}
 \end_inset
 
 For radial infall, this is just 
-\begin_inset Formula $u^{a}=\left(1,0,0,0\right)$
+\begin_inset Formula $u_{\mbox{radial}}^{a}=\left(1,0,0,0\right)$
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
-The physical interpretation of 
+Of course, this is obviously the velocity of the particle in the co-moving
+ lab frame.
+ It is generally understood that the 
+\begin_inset Quotes eld
+\end_inset
+
+lab frame
+\begin_inset Quotes erd
+\end_inset
+
+ is a stand-in for the coordinates of the tangent plane 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ for point 
+\begin_inset Formula $p\in M$
+\end_inset
+
+ in the spacetime manifold 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ This is all fine and well, except that this carries the mental baggage
+ of a physical laboratory with walls and a workbench made of atoms.
+ These are elastic, and subject to deformation by tidal stress.
+ Worse, in a real laboratory, particles at different ends of the room fall
+ in different directions.
+ The perfectly-rigid tangent plane does not allow such comparisons.
+\end_layout
+
+\begin_layout Standard
+To overcome this conceptual difficulty, Hamilton&Lisle propose the 
+\begin_inset Quotes eld
+\end_inset
+
+River Model of Spacetime
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Here, the physical interpretation of 
 \begin_inset Formula $u^{a}$
 \end_inset
 
@@ -701,15 +768,97 @@ The physical interpretation of
 \end_inset
 
 .
- Proper time is a property of the particle (the geodesic) and not of the
+ This allows Hamilton&Lisle to make the following additional statements:
+\end_layout
+
+\begin_layout Itemize
+Proper time is a property of the particle (the geodesic) and not of the
  river (spacetime).
- Particles in the rever move according to the rules of special relativity.
- The river itself flows in a Galilean fashion, through a flat Galilean backgroun
-d.
+ 
+\end_layout
+
+\begin_layout Itemize
+Particles in the river move from one part of the river to another according
+ to the rules of special relativity.
+ That is, when a particle is displaced in a direction 
+\begin_inset Formula $\delta x^{\mu}$
+\end_inset
+
+, it is Lorentz-boosted by some amount, depending on the river location.
+\end_layout
+
+\begin_layout Itemize
+For a rotating background (Kerr solution), displacements have both a boost
+ and a rotation (six degrees of freedom, an anti-symmetric tensor).
+\end_layout
+
+\begin_layout Itemize
+The river itself flows in a Galilean fashion, through a flat Galilean background.
+ I don't understand this comment.
+ Galilean transforms are affine transformations, having the form 
+\begin_inset Formula $x\to x^{\prime}=x+vt$
+\end_inset
+
+ with 
+\begin_inset Formula $vt$
+\end_inset
+
+ the affine displacement.
+ The relation between 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+ and the 
+\begin_inset Formula $\mathbf{g}_{\mu}$
+\end_inset
+
+ does not have this form.
+ I don't see what the flow is.
+ I don't see what's Galilean.
+\end_layout
+
+\begin_layout Standard
+It certainly is the case that the frame field 
+\begin_inset Formula $\gamma_{a}\in T_{p}M$
+\end_inset
+
+ at point 
+\begin_inset Formula $p\in M$
+\end_inset
+
+ is just a linear transformation 
+\begin_inset Formula $e_{a}^{\;\mu}$
+\end_inset
+
+ of the coordinate tangent space 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ obeying 
+\begin_inset Formula $\gamma_{a}=e_{a}^{\;\mu}\mathbf{g}_{\mu}$
+\end_inset
+
+ for the coordinate basis 
+\begin_inset Formula $\mathbf{g}_{\mu}\in T_{p}M$
+\end_inset
+
+.
+ What is fun here is that, from the GR viewpoint, the 
+\begin_inset Formula $e_{a}^{\;\mu}$
+\end_inset
+
+ can be taken as the dynamical object, instead of the metric, so that the
+ Einstein field equations are written in terms of the 
+\begin_inset Formula $e_{a}^{\;\mu}$
+\end_inset
+
+.
+ But this is out-of-scope for the current discussion.
 \end_layout
 
 \begin_layout Subsection
-Inertial Laboratory Frames
+River Model vs.
+ Smart Dust
 \end_layout
 
 \begin_layout Standard
