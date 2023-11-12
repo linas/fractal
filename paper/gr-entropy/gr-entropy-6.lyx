@@ -331,12 +331,11 @@ and
 \end_layout
 
 \begin_layout Standard
-Then there's a patch of trouble.
- Hamilton&Lisle argue that, for Gullstrand–Painlevé in Cartesian form, one
+Hamilton&Lisle argue that, for Gullstrand–Painlevé in Cartesian form, one
  has 
 \begin_inset Formula 
 \begin{align*}
-\gamma_{0} & =\mathbf{g}_{0}+\beta^{i}\mathbf{g}_{i}\\
+\gamma_{0} & =\mathbf{g}_{0}-\beta^{i}\mathbf{g}_{i}\\
 \gamma_{i} & =\mathbf{g}_{i}
 \end{align*}
 
@@ -347,7 +346,11 @@ for
 \end_inset
 
 .
- The 'magic
+ Note the sign is reversed from Hamilton&Lisle; this is obtained below.
+\end_layout
+
+\begin_layout Standard
+The 'magic
 \begin_inset Quotes erd
 \end_inset
 
@@ -364,7 +367,7 @@ for
 \end_inset
 
  even though its highly suggestive from the metric form.
- In any case, these are vectors of vectors, and so the notation is confuing.
+ In any case, these are vectors of vectors, and so the notation is confusing.
  Thus, a more painful approach, below.
 \end_layout
 
@@ -486,7 +489,7 @@ The change of coordinates into the tetrad frame is denoted by
 \noun default
 \color inherit
  
-\begin_inset Formula $\mathbf{g}_{\mu}=\mathbf{g}_{\mu}^{a}=e_{\;\mu}^{a}$
+\begin_inset Formula $\mathbf{g}_{\mu}^{a}=e_{\;\mu}^{a}$
 \end_inset
 
 .
@@ -557,7 +560,7 @@ where
 The tetrad frame is given by 
 \begin_inset Formula 
 \[
-\gamma_{a}=e_{a}^{\;\mu}\partial_{\mu}
+\gamma_{a}=\gamma_{a}^{\mu}\partial_{\mu}=e_{a}^{\;\mu}\partial_{\mu}
 \]
 
 \end_inset
@@ -573,6 +576,14 @@ where
  (See Appendix A for details.) The inverse is defined as
 \begin_inset Formula 
 \[
+\mathbf{g}_{\mu}^{a}\gamma_{a}=\partial_{\mu}
+\]
+
+\end_inset
+
+or, equivalently
+\begin_inset Formula 
+\[
 \sigma^{a}\left(\gamma_{b}\right)=\mathbf{g}_{\mu}^{a}\gamma_{b}^{\mu}=\delta_{b}^{a}
 \]
 
@@ -586,14 +597,38 @@ In index form, one finds
 
 \end_inset
 
-I don't see any particularly elegant way of rewriting these in the Hamilton&Lisl
-e vector form, without risking violence to the upper/lower roman/greek index
- confusion.
- So leave this as-is, and plow ahead.
+Puting back the coordinate vectors, 
+\begin_inset Formula 
+\[
+\gamma_{b}=\gamma_{b}^{\mu}\partial_{\mu}=\partial_{b}-\delta_{b}^{0}\beta^{\mu}\partial_{\mu}
+\]
+
+\end_inset
+
+which, after identifying 
+\begin_inset Formula $\partial_{\mu}=\mathbf{g}_{\mu}$
+\end_inset
+
+, works out to 
+\begin_inset Formula 
+\begin{align*}
+\gamma_{0} & =\mathbf{g}_{0}-\beta^{i}\mathbf{g}_{i}\\
+\gamma_{i} & =\mathbf{g}_{i}
+\end{align*}
+
+\end_inset
+
+which is exactly the Hamilton&Lisle vector form (up to a sign, due to metric
+ signature).
 \end_layout
 
 \begin_layout Subsection
 Velocity XXX
+\end_layout
+
+\begin_layout Standard
+FIXME the roman-greek index thing is killing me.
+ The below is correct but misleading.
 \end_layout
 
 \begin_layout Standard
@@ -611,11 +646,11 @@ For radial infall,
 \end_inset
 
  and 
-\begin_inset Formula $v^{i}=\beta^{i}$
+\begin_inset Formula $v^{i}=-\beta^{i}$
 \end_inset
 
  or, pictorially, 
-\begin_inset Formula $v^{\mu}=\left(1,\beta^{1},\beta^{2},\beta^{3}\right)$
+\begin_inset Formula $v^{\mu}=\left(1,-\beta^{1},-\beta^{2},-\beta^{3}\right)$
 \end_inset
 
 .
