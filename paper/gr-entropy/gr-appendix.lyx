@@ -128,23 +128,27 @@ Appendix B: Flat Spacetime
 \end_layout
 
 \begin_layout Itemize
-Appendix C: Schwarzschild Metric
+Appendix C: Geodesic Equations
 \end_layout
 
 \begin_layout Itemize
-Appendix D: Gullstrand–Painlevé coordinates
+Appendix D: Schwarzschild Metric
 \end_layout
 
 \begin_layout Itemize
-Appendix E: Lemaître observers
+Appendix E: Gullstrand–Painlevé coordinates
 \end_layout
 
 \begin_layout Itemize
-Appendix F: Francis–Kosowsky coordinates
+Appendix F: Lemaître observers
 \end_layout
 
 \begin_layout Itemize
-Appendix G: Fields
+Appendix G: Francis–Kosowsky coordinates
+\end_layout
+
+\begin_layout Itemize
+Appendix H: Fields
 \end_layout
 
 \begin_layout Section*
@@ -792,7 +796,312 @@ Sometimes we use this abbreviation, and sometimes not.
 \end_layout
 
 \begin_layout Section*
-Appendix C: Schwarzschild Metric
+Appendix C: Geodesic Equations
+\end_layout
+
+\begin_layout Standard
+This section reviews standard textbook development of geodesic motion.
+ It's repeated here, instead of pointing at a textbook, so that we can enjoy
+ consistent notation and make sure all the signs worked out for the chosen
+ metric signature.
+\end_layout
+
+\begin_layout Subsection*
+Lagrangian
+\end_layout
+
+\begin_layout Standard
+The Lagrangian for a particle following a null or time-like trajectory is
+ 
+\begin_inset Formula 
+\[
+L=\frac{1}{2}g_{\mu\nu}\dot{x}^{\mu}\dot{x}^{\nu}
+\]
+
+\end_inset
+
+where the shorthand 
+\begin_inset Formula 
+\[
+\dot{x}^{\mu}=\frac{dx^{\mu}}{d\tau}
+\]
+
+\end_inset
+
+is used.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Constants of motion
+\end_layout
+
+\begin_layout Standard
+Constants of motion are found whenever there is some coordinate expression
+ 
+\begin_inset Formula $t$
+\end_inset
+
+ for which 
+\begin_inset Formula $\partial L/\partial t=0$
+\end_inset
+
+.
+ This allows one to deduce a constant of motion:
+\begin_inset Formula 
+\[
+\mbox{const}=\frac{\partial L}{\partial\dot{t}}
+\]
+
+\end_inset
+
+Here, 
+\begin_inset Formula $t$
+\end_inset
+
+ is not the 
+\begin_inset Quotes eld
+\end_inset
+
+time
+\begin_inset Quotes erd
+\end_inset
+
+, its just any coordinate expression for which 
+\begin_inset Formula $\partial L/\partial t=0$
+\end_inset
+
+.
+ That's all.
+\end_layout
+
+\begin_layout Standard
+It's handy to recall the Legendre transform.
+ Defining the conjugate momentum as
+\begin_inset Formula 
+\[
+p_{\mu}=\frac{\partial L}{\partial\dot{x}^{\mu}}
+\]
+
+\end_inset
+
+the Hamiltonian is then 
+\begin_inset Formula $H=p_{\mu}\dot{x}^{\mu}-L$
+\end_inset
+
+.
+ This is useful to keep around, as the energy is a constant of motion along
+ geodesics.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Physical interpretation
+\end_layout
+
+\begin_layout Standard
+The Lagrangian 
+\begin_inset Formula $L$
+\end_inset
+
+ can be taken to be a constant along geodesics; but why? Well, geodesics
+ minimize arc length; this is the same as minimizing the energy, or minimizing
+ the action.
+ Writing the total (square of the) arc length as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int Ld\tau
+\]
+
+\end_inset
+
+it is clear that 
+\begin_inset Formula $L=\mbox{const}$
+\end_inset
+
+ minimizes this.
+ The shortest line between two points is a straight line; this remains the
+ case, if one thinks of 
+\begin_inset Formula $L\left(\tau\right)$
+\end_inset
+
+ as a plain-old ordinary real function of a single real parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ There's nothing more to it.
+ A more precise and convincing formulation is given in Jost
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jost2002geom"
+literal "false"
+
+\end_inset
+
+, although Jost covers only the case for Riemannian manifolds.
+ Close enough.
+\end_layout
+
+\begin_layout Standard
+For massive particles, 
+\begin_inset Formula $L=1/2$
+\end_inset
+
+ corresponds to a line element of unit length.
+ That is, all time-like tangent vectors always have unit length.
+ This is merely a formality.
+ The parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is simply a real number that paramterizes distinct points along some arc
+ (including, but not limited to geodesics.) As a parameter, one is free to
+ reparmeterize 
+\begin_inset Formula $\tau\to c\tau+\tau_{0}$
+\end_inset
+
+ for some constant 
+\begin_inset Formula $c\ne1$
+\end_inset
+
+ and constant 
+\begin_inset Formula $\tau_{0}$
+\end_inset
+
+ Such reparametrization does not change the arc itself.
+ Thus, taking 
+\begin_inset Formula $c=1$
+\end_inset
+
+ does not alter the arc itself.
+ The constant 
+\begin_inset Formula $c$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+speed
+\begin_inset Quotes erd
+\end_inset
+
+ along the arc; for spacetime, we call it the 
+\begin_inset Quotes eld
+\end_inset
+
+speed of light
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The paramter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is called the 
+\begin_inset Quotes eld
+\end_inset
+
+proper time
+\begin_inset Quotes erd
+\end_inset
+
+ in the physics literature, because 
+\begin_inset Formula $\tau=t$
+\end_inset
+
+ in the free-falling frames.
+ Thus, the parameterization of time-like geodesics to unit speed is merely
+ an algebraic convenience, nothing more.
+ Taking the Newtonian limit allows these arbitrary constants to be identified
+ and given physical meaning.
+ 
+\end_layout
+
+\begin_layout Standard
+For null geodesics, there's a common confusion about the 
+\begin_inset Quotes eld
+\end_inset
+
+proper time
+\begin_inset Quotes erd
+\end_inset
+
+ that should be noted.
+ Geodesics with 
+\begin_inset Formula $L=0$
+\end_inset
+
+ correspond to tangent vectors of zero length, according to the metric.
+ This does not mean that that such tangent vectors cannot be integrated
+ to obtain an arc.
+ The parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is still a valid parameter for locating points along the arc.
+ The only difficulty or confusion arises when the parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is conflated with the 
+\begin_inset Quotes eld
+\end_inset
+
+time
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is not, nor is it measuring the arc length of null geodesics (the arc
+ length is zero!).
+ Thus, we should call 
+\begin_inset Formula $\tau$
+\end_inset
+
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+arc parameter
+\begin_inset Quotes erd
+\end_inset
+
+ instead of the 
+\begin_inset Quotes eld
+\end_inset
+
+proper time
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, fighting tradition is hard, and this is not the hill to die on.
+\end_layout
+
+\begin_layout Subsection*
+Euler-Lagrange
+\end_layout
+
+\begin_layout Standard
+The Euler-Lagrange equations are
+\begin_inset Formula 
+\[
+\frac{d}{d\tau}\frac{\partial L}{\partial\dot{x}^{\mu}}-\frac{\partial L}{\partial x^{\mu}}=0
+\]
+
+\end_inset
+
+Plowing through in the conventional fashion,
+\end_layout
+
+\begin_layout Section*
+Appendix D: Schwarzschild Metric
 \end_layout
 
 \begin_layout Standard
@@ -1044,7 +1353,7 @@ move radially inwards, then move forward one second
 \end_layout
 
 \begin_layout Section*
-Appendix D: Gullstrand–Painlevé coordinates
+Appendix E: Gullstrand–Painlevé coordinates
 \end_layout
 
 \begin_layout Standard
@@ -1983,7 +2292,7 @@ See Chapter Six for further development and a physical interpretation.
 \end_layout
 
 \begin_layout Section*
-Appendix E: Lemaître Observers
+Appendix F: Lemaître Observers
 \end_layout
 
 \begin_layout Standard
@@ -2264,7 +2573,7 @@ literal "false"
 \end_layout
 
 \begin_layout Section*
-Appendix F: Francis–Kosowsky coordinates
+Appendix G: Francis–Kosowsky coordinates
 \end_layout
 
 \begin_layout Standard
@@ -2697,7 +3006,7 @@ good
 \end_layout
 
 \begin_layout Section*
-Appendix G: Fields
+Appendix H: Fields
 \end_layout
 
 \begin_layout Standard
