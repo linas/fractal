@@ -699,9 +699,25 @@ u^{a}\gamma_{a}=v^{\mu}\mathbf{g}_{\mu}
 
 which works out to
 \begin_inset Formula 
+\[
+u^{a}\gamma_{a}=u^{a}\left(\partial_{a}-\delta_{a}^{0}\beta^{\mu}\partial_{\mu}\right)=\left(u^{a}\delta_{a}^{\mu}-u^{0}\beta^{\mu}\right)\partial_{\mu}=v^{\mu}\partial_{\mu}
+\]
+
+\end_inset
+
+or, conversly, 
+\begin_inset Formula 
+\[
+v^{\mu}\mathbf{g}_{\mu}=v^{\mu}\mathbf{g}_{\mu}^{a}\gamma_{a}=v^{\mu}\left(\delta_{\mu}^{a}+\delta_{\mu}^{0}\beta^{a}\right)\gamma_{a}=u^{a}\gamma_{a}
+\]
+
+\end_inset
+
+which, in either case, shortens to
+\begin_inset Formula 
 \begin{align*}
 u^{0} & =v^{0}\\
-u^{i} & =v^{i}-\beta^{i}v^{0}
+u^{i} & =v^{i}+\beta^{i}v^{0}
 \end{align*}
 
 \end_inset
@@ -980,20 +996,40 @@ Parallel Transport
 \end_layout
 
 \begin_layout Standard
-The notation used here is both that of Hamilton,
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hamilton2004"
-literal "false"
-
+Lets continue with the analysis.
+ Given a point 
+\begin_inset Formula $p\in M$
 \end_inset
 
- and is descibed in detail in appendix A.
- A tangent vector 
+, a tangent vector 
 \begin_inset Formula $\mathbf{p}\in T_{p}M$
 \end_inset
 
- can be written as 
+ can be expressed either in terms of the coordinate tangent vector basis
+ 
+\begin_inset Formula $\partial_{\mu}$
+\end_inset
+
+ on 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+, or in the orthonormal frame field basis 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+ on 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+.
+ Either basis is equally valid.
+ Greek and roman indexes distinguish between the two.
+ Thus, the vector 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ is written as
 \begin_inset Formula 
 \[
 \mathbf{p}=p^{\mu}\partial_{\mu}=p^{\mu}\mathbf{g}_{\mu}=p^{a}\gamma_{a}
@@ -1001,60 +1037,16 @@ literal "false"
 
 \end_inset
 
-where 
-\begin_inset Formula $M$
+Given the Gullstrand–Painlevé chart, the two are related as
+\begin_inset Formula 
+\[
+p^{a}=\delta_{\mu}^{a}p^{\mu}+\beta^{a}p^{0}
+\]
+
 \end_inset
 
- is the spacetime manifold (taken to be Schwarschild spacetime) and 
-\begin_inset Formula $T_{p}M$
-\end_inset
-
- the tangent vector space at point 
-\begin_inset Formula $p\in M$
-\end_inset
-
-.
- The coordinate basis on 
-\begin_inset Formula $T_{p}M$
-\end_inset
-
- is 
-\begin_inset Formula $\partial_{\mu}$
-\end_inset
-
-.
- It's holonomic, in that 
-\begin_inset Formula $\left[\partial_{\mu},\partial_{\nu}\right]=0$
-\end_inset
-
-.
- A coframe field is chosen so that 
-\begin_inset Formula $\partial_{\mu}=\mathbf{g}_{\mu}$
-\end_inset
-
- and the main difference between these two is that the notation 
-\begin_inset Formula $\partial_{\mu}$
-\end_inset
-
- is 
-\begin_inset Quotes eld
-\end_inset
-
-frameless
-\begin_inset Quotes erd
-\end_inset
-
- (using the frame of the coordinate charts) while the notation 
-\begin_inset Formula $\mathbf{g}_{\mu}$
-\end_inset
-
- emphasises that a coframe and frame have been chosen.
- They're effectively the same thing.
- The 
-\begin_inset Formula $\gamma_{a}$
-\end_inset
-
- is the orthonormal frame field.
+Now for a bit of pain: deriving the geodesic equations in the tetrd frame
+ from the geodesic equations in the coordinate frame.
 \end_layout
 
 \begin_layout Section
