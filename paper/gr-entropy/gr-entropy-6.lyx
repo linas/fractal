@@ -216,18 +216,26 @@ literal "false"
  on excursions to clarify what is actually happening to the smart dust.
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section
 Non-rotating spacetime
 \end_layout
 
 \begin_layout Standard
+A recap and interpretation of the Hamilton paper.
+\end_layout
+
+\begin_layout Subsection
+Metric and frame fields, semi-index-free
+\end_layout
+
+\begin_layout Standard
 The starting point is the Cartesian form of the Gullstrand–Painlevé metric,
- given in an earlier appendix.
+ given in Appendix D.
  Repeating this, the metric is
 \begin_inset Formula 
-\[
-\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dṱ\right)\otimes\left(dx^{b}-\beta^{b}dṱ\right)
-\]
+\begin{align*}
+\mathbf{g}= & \eta_{\mu\nu}\left(dx^{\mu}-\beta^{\mu}dṱ\right)\otimes\left(dx^{\nu}-\beta^{\nu}dṱ\right)
+\end{align*}
 
 \end_inset
 
@@ -236,7 +244,7 @@ where
 \end_inset
 
  is shorthand for readability, and where 
-\begin_inset Formula $\beta^{a}$
+\begin_inset Formula $\beta^{\mu}$
 \end_inset
 
  is the radial 
@@ -314,42 +322,64 @@ free-fall time coordinate
 \end_layout
 
 \begin_layout Standard
-Let 
-\begin_inset Formula $\mathbf{g}_{\mu}$
+Note the above has the same form for both 
+\begin_inset Formula $\eta_{\mu\nu}=\left(+---\right)$
 \end_inset
 
- and 
+ and for 
+\begin_inset Formula $\eta_{\mu\nu}=\left(-+++\right)$
+\end_inset
+
+.
+ This diary works with the former.
+ It usually doesn't matter.
+\end_layout
+
+\begin_layout Standard
+For Gullstrand–Painlevé, 
+\begin_inset Formula 
+\[
+\beta\left(r\right)=\sqrt{\frac{2m}{r}}
+\]
+
+\end_inset
+
+although, in general, slightly more general 
+\begin_inset Formula $\beta\left(r\right)$
+\end_inset
+
+ are allowed, e.g.
+ for Reissner–Nordström, and even further still, if the Francis–Kosowsky
+ technique is followed (see the Appendix.)
+\end_layout
+
+\begin_layout Standard
+Following Hamilton, the metric is factored into flat tetrad frame fields
+ 
 \begin_inset Formula $\gamma_{a}$
 \end_inset
 
- denote a tetrad frame (using the notation reviewed in Appendix A).
- Recall that 
-\begin_inset Formula $\mathbf{g}_{\mu}=\partial_{\mu}$
-\end_inset
-
- is just a coordinate tangent vector.
- The notation is that 
-\begin_inset Formula $\partial_{\mu}$
-\end_inset
-
- is a bare-naked tangent vector, obtained as a gradient of a scalar field,
- w.r.t.
- a given fixed coordinate chart.
- By contrast, 
+ and 
 \begin_inset Formula $\mathbf{g}_{\mu}$
 \end_inset
 
- is 
-\begin_inset Quotes eld
+ as 
+\begin_inset Formula 
+\[
+g_{\mu\nu}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}
+\]
+
 \end_inset
 
-the same thing
-\begin_inset Quotes erd
+and 
+\begin_inset Formula 
+\[
+\eta_{ab}=\gamma_{a}\cdot\gamma_{b}
+\]
+
 \end_inset
 
-, but now has implicit vielbein coordinates attached to it.
- It's just the inverse of the vielbein coords.
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -379,6 +409,203 @@ for
  along the direction of motion, but leaves the time component (of the time
  axis) itself unchanged.
  The spatial axes are unchanged.
+\end_layout
+
+\begin_layout Subsection
+Metric and frame fields in components
+\end_layout
+
+\begin_layout Standard
+Reproduce the above, except this time in voluminous detail, with all indexes
+ on everything.
+ This is much more verbose.
+ Again, the metric is
+\begin_inset Formula 
+\begin{align*}
+\mathbf{g}= & g_{\mu\nu}dx^{\mu}\otimes dx^{\nu}\\
+= & \eta_{\mu\nu}\left(dx^{\mu}-\beta^{\mu}dx^{0}\right)\otimes\left(dx^{\nu}-\beta^{\nu}dx^{0}\right)\\
+= & \eta_{ab}\sigma^{a}\otimes\sigma^{b}
+\end{align*}
+
+\end_inset
+
+The 
+\begin_inset Formula $\beta^{\mu}$
+\end_inset
+
+ is the radial 
+\begin_inset Quotes eld
+\end_inset
+
+river velocity
+\begin_inset Quotes erd
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\beta^{0} & =0\\
+\beta^{i} & =-\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
+\end{align*}
+
+\end_inset
+
+The minus signs arranged so that the river velocity is infalling.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The 
+\begin_inset Formula $dx^{\mu}$
+\end_inset
+
+ are the coordinate one-forms, and the 
+\begin_inset Formula $\sigma^{a}$
+\end_inset
+
+ are the coframe one-forms.
+ Thus, 
+\begin_inset Formula 
+\begin{align*}
+\sigma^{0} & =dx^{0}\\
+\sigma^{i} & =dx^{i}-\beta^{i}dx^{0}
+\end{align*}
+
+\end_inset
+
+The coordinate one-forms are not orthonormal, as they are derived from the
+ coordinate chart.
+ The coframe one-forms are orthonormal, by construction (in that the Minkowski
+ metric 
+\begin_inset Formula $\eta_{ab}$
+\end_inset
+
+ determines orthonormality.) 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The change of coordinates into the tetrad frame is denoted by
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $\mathbf{g}_{\mu}=\mathbf{g}_{\mu}^{a}=e_{\;\mu}^{a}$
+\end_inset
+
+.
+ Explicitly, these are given by 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma^{a}=e_{\;\mu}^{a}dx^{\mu}=\mathbf{g}_{\mu}^{a}dx^{\mu}
+\]
+
+\end_inset
+
+Writing this explicitly,
+\begin_inset Formula 
+\[
+\mathbf{g}_{\mu}^{a}=\delta_{\mu}^{a}-\beta^{a}\delta_{\mu}^{0}
+\]
+
+\end_inset
+
+The coordinate metric is then
+\begin_inset Formula 
+\begin{align*}
+g_{\mu\nu} & =\eta_{ab}\mathbf{g}_{\mu}^{a}\mathbf{g}_{\nu}^{b}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}\\
+ & =\eta_{ab}\left(\delta_{\mu}^{a}-\beta^{a}\delta_{\mu}^{0}\right)\left(\delta_{\nu}^{b}-\beta^{b}\delta_{\nu}^{0}\right)\\
+ & =\eta_{\mu\nu}-\beta_{\nu}\delta_{\mu}^{0}-\beta_{\mu}\delta_{\nu}^{0}+\beta^{2}\,\delta_{\mu}^{0}\delta_{\nu}^{0}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\beta^{2}=2m/r$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The tetrad frame is given by 
+\begin_inset Formula 
+\[
+\gamma_{a}=e_{a}^{\;\mu}\partial_{\mu}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $e_{a}^{\;\mu}$
+\end_inset
+
+ is the inverse of 
+\begin_inset Formula $e_{\;\mu}^{a}$
+\end_inset
+
+ (See Appendix A for details.) The inverse is, explicitly,
+\begin_inset Formula 
+\[
+e_{b}^{\;\nu}=\eta_{ab}e_{\;\mu}^{a}g^{\mu\nu}
+\]
+
+\end_inset
+
+and likewise 
+\begin_inset Formula 
+\[
+e_{\;\mu}^{a}=g_{\mu\nu}\eta^{ab}e_{b}^{\;\nu}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Working explicitly from the above,
+\end_layout
+
+\begin_layout Subsection
+Velocity
 \end_layout
 
 \begin_layout Standard
@@ -458,7 +685,7 @@ The physical interpretation of
 d.
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 Inertial Laboratory Frames
 \end_layout
 
@@ -600,35 +827,102 @@ Lets get to it.
  Lets try to make this happen.
 \end_layout
 
+\begin_layout Subsection
+Parallel Transport
+\end_layout
+
 \begin_layout Standard
-Hamilton paper goes on to obtain eqns of motion for arbitrary free-falling
- 4-vectors in the 
-\begin_inset Quotes eld
+The notation used here is both that of Hamilton,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hamilton2004"
+literal "false"
+
 \end_inset
 
-river frame
-\begin_inset Quotes erd
+ and is descibed in detail in appendix A.
+ A tangent vector 
+\begin_inset Formula $\mathbf{p}\in T_{p}M$
+\end_inset
+
+ can be written as 
+\begin_inset Formula 
+\[
+\mathbf{p}=p^{\mu}\partial_{\mu}=p^{\mu}\mathbf{g}_{\mu}=p^{a}\gamma_{a}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $M$
+\end_inset
+
+ is the spacetime manifold (taken to be Schwarschild spacetime) and 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ the tangent vector space at point 
+\begin_inset Formula $p\in M$
 \end_inset
 
 .
- The notable result is that, in this frame, the vectors get a Lorentz boost
- along the direction of 
-\begin_inset Formula $\beta^{i}$
+ The coordinate basis on 
+\begin_inset Formula $T_{p}M$
 \end_inset
 
-, which is interpreted as a tidal change.
- That is, the 4-vector is carried by the river, to a new location, and it
- is boosted slightly, as it is carried.
- It's 
+ is 
+\begin_inset Formula $\partial_{\mu}$
+\end_inset
+
+.
+ It's holonomic, in that 
+\begin_inset Formula $\left[\partial_{\mu},\partial_{\nu}\right]=0$
+\end_inset
+
+.
+ A coframe field is chosen so that 
+\begin_inset Formula $\partial_{\mu}=\mathbf{g}_{\mu}$
+\end_inset
+
+ and the main difference between these two is that the notation 
+\begin_inset Formula $\partial_{\mu}$
+\end_inset
+
+ is 
 \begin_inset Quotes eld
 \end_inset
 
-tidal
+frameless
 \begin_inset Quotes erd
 \end_inset
 
- as it excludes the boost associated with the river itself.
- See paper for details.
+ (using the frame of the coordinate charts) while the notation 
+\begin_inset Formula $\mathbf{g}_{\mu}$
+\end_inset
+
+ emphasises that a coframe and frame have been chosen.
+ They're effectively the same thing.
+ The 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+ is the orthonormal frame field.
+\end_layout
+
+\begin_layout Section
+The End
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "/home/linas/src/fractal/paper/gr"
+options "tufte"
+
+\end_inset
+
+
 \end_layout
 
 \end_body

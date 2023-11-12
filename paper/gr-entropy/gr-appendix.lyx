@@ -283,6 +283,14 @@ The same abuse of notation is used to write 1-forms as
  the vielbeins (later).
 \end_layout
 
+\begin_layout Standard
+The coordinate basis is holonomic: 
+\begin_inset Formula $\left[\partial_{\mu},\partial_{\nu}\right]=0$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsubsection*
 Metric
 \end_layout
@@ -508,6 +516,14 @@ The centerdot is the flat-space metric, and not the Euclidean dot-product.
 
 \end_inset
 
+and so 
+\begin_inset Formula 
+\[
+g_{\mu\nu}=\eta_{ab}\mathbf{g}_{\mu}^{a}\mathbf{g}_{\nu}^{b}
+\]
+
+\end_inset
+
 Similarly, we can write tetrad vectors 
 \begin_inset Formula $\gamma_{a}$
 \end_inset
@@ -520,7 +536,20 @@ Similarly, we can write tetrad vectors
 
 \end_inset
 
-This notation is fun, because this is (almost) the algebra of the Dirac
+This time, the centerdot is understood as the coordinate metric, so that
+ 
+\begin_inset Formula 
+\[
+\eta_{ab}=\gamma_{a}\cdot\gamma_{b}=g_{\mu\nu}\gamma_{a}^{\mu}\gamma_{b}^{\nu}=e_{a}^{\;\mu}e_{b}^{\;\nu}g_{\mu\nu}
+\]
+
+\end_inset
+
+just as before, above.
+\end_layout
+
+\begin_layout Standard
+The gamma notation is fun, because this is (almost) the algebra of the Dirac
  gamma matrices.
  Comparing to previous notation, we have that 
 \begin_inset Formula $\gamma_{a}=\vec{e}_{a}$
@@ -532,14 +561,16 @@ This notation is fun, because this is (almost) the algebra of the Dirac
 \begin_inset Formula $e$
 \end_inset
 
- with raised and lowered indexes, and thus can lead to fewer mistakes.
+ and it's inverse, each carrying appropriate raised and lowered indexes.
+ By distinguishing between these two cases, hopefully one has fewer mistakes.
+ Strong typing, not duck typing.
 \end_layout
 
 \begin_layout Standard
-The notation is confusing, as it left behind the idea of the coordinate
- chart atlas, and the tangent bundle as the place where vector fields live.
- Lets go back to that.
- The tetrad frame 
+Just a bit more gymnastics, to clarify everything.
+ First, lets touch base with the coordinate atlas and the tangent bundle,
+ as this is the place where (coordinate) vector fields live.
+ The tetrad frame
 \begin_inset Formula 
 \[
 \gamma_{a}=\vec{e}_{a}=e_{a}^{\;\mu}\partial_{\mu}
@@ -1704,9 +1735,10 @@ Cartesian coordinates
 \begin_layout Standard
 In Cartesian coordinates, the metric is
 \begin_inset Formula 
-\[
-\mathbf{g}=\eta_{ab}\left(dx^{a}-\beta^{a}dṱ\right)\otimes\left(dx^{b}-\beta^{b}dṱ\right)
-\]
+\begin{align*}
+\mathbf{g} & =\eta_{\mu\nu}\left(dx^{\mu}-\beta^{\mu}dṱ\right)\otimes\left(dx^{\nu}-\beta^{\nu}dṱ\right)\\
+ & =\eta_{ab}\sigma^{a}\otimes\sigma^{b}
+\end{align*}
 
 \end_inset
 
@@ -1736,7 +1768,49 @@ river velocity
 \end_inset
 
 Note the minus signs arranged so that the river velocity is infalling.
- See Appendix G below for physical interpretation.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The 
+\begin_inset Formula $dx^{\mu}$
+\end_inset
+
+ are the coordinate one-forms, and the 
+\begin_inset Formula $\sigma^{a}$
+\end_inset
+
+ are the coframe one-forms.
+ Thus, 
+\begin_inset Formula 
+\begin{align*}
+\sigma^{0} & =dx^{0}\\
+\sigma^{i} & =dx^{i}-\beta^{i}dx^{0}
+\end{align*}
+
+\end_inset
+
+The coordinate one-forms are not orthonormal, as they are derived from the
+ coordinate chart.
+ The coframe one-forms are orthonormal, by construction (in that the Minkowski
+ metric 
+\begin_inset Formula $\eta_{ab}$
+\end_inset
+
+ determines orthonormality.)
+\end_layout
+
+\begin_layout Standard
+See Chapter Six for further development and a physical interpretation.
 \end_layout
 
 \begin_layout Section*
