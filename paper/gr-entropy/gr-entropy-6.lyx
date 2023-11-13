@@ -1077,12 +1077,24 @@ The immediate task is to write down the Cartesian form of Lemaître, and
 \end_layout
 
 \begin_layout Section
-Parallel Transport
+Motion
 \end_layout
 
 \begin_layout Standard
 Lets continue with the analysis.
- Given a point 
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
+Vectors in the coordinate and tetrad frames
+\end_layout
+
+\begin_layout Standard
+Given a point 
 \begin_inset Formula $p\in M$
 \end_inset
 
@@ -1130,8 +1142,105 @@ p^{a}=\delta_{\mu}^{a}p^{\mu}+\beta^{a}p^{0}
 
 \end_inset
 
+Next up: parallel transport this around town.
+\end_layout
+
+\begin_layout Subsection
+Parallel Transport
+\end_layout
+
+\begin_layout Standard
 Now for a bit of pain: deriving the geodesic equations in the tetrad frame
  from the geodesic equations in the coordinate frame.
+ We'll punt on that for now, and instead copy from Hamilton, and try to
+ guess the correct signs for everything.
+ XXX the gueses below might be wrong.
+ TODO: derive the geodesics eqns from scratch.
+ Someday later.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ be a free-falling observer, in the tetrade frame.
+ Let 
+\begin_inset Formula $p^{a}$
+\end_inset
+
+ be a tangent vector, freefalling with the observer.
+ Hamilton claims the equations of motion in the tetrad frame are 
+\begin_inset Formula 
+\[
+\frac{dp^{a}}{d\tau}+\Gamma_{bc}^{a}p^{b}u^{c}=0
+\]
+
+\end_inset
+
+This looks entirely reasonable, we take it as gospel.
+ The Christoffel symbols are (copied, guessing sign)
+\begin_inset Formula 
+\[
+\Gamma_{ij}^{0}=\Gamma_{0j}^{i}=-\frac{\partial\beta^{i}}{\partial x^{j}}\quad\mbox{for }i,j=1,2,3
+\]
+
+\end_inset
+
+This the equations of motion are (guessing sign)
+\begin_inset Formula 
+\begin{align*}
+\frac{dp^{0}}{d\tau} & =\frac{\partial\beta_{i}}{\partial x^{j}}p^{i}u^{j}\\
+\frac{dp^{i}}{d\tau} & =\frac{\partial\beta^{i}}{\partial x^{j}}p^{0}u^{j}\quad\mbox{for }i,j=1,2,3
+\end{align*}
+
+\end_inset
+
+Note 
+\begin_inset Formula $\beta_{i}=-\beta^{i}$
+\end_inset
+
+ for our signature 
+\begin_inset Formula $\left(+---\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For radial infall, 
+\begin_inset Formula $u^{j}=0$
+\end_inset
+
+ and only 
+\begin_inset Formula $u^{0}=1$
+\end_inset
+
+, and so 
+\begin_inset Formula $dp^{0}/d\tau=dp^{i}/d\tau=0$
+\end_inset
+
+ and so the frames really do fall fixed.
+ For non-radial infall, we need explicit expressions.
+ These are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\beta^{i}}{\partial x^{j}}= & \frac{\partial}{\partial x^{j}}\beta\left(r\right)\frac{x^{i}}{r}\\
+= & -\frac{1}{2}\frac{x^{i}}{r}\frac{\beta}{r}\frac{\partial}{\partial x^{j}}r+\beta\frac{\partial}{\partial x^{j}}\frac{x^{i}}{r}\\
+= & -\frac{\beta x^{i}x_{j}}{2r^{3}}+\beta\left(\frac{\delta_{j}^{i}}{r}-\frac{x^{i}x_{j}}{r^{3}}\right)\\
+= & \beta\frac{2\delta_{j}^{i}-3x^{i}x_{j}}{2r^{3}}
+\end{align*}
+
+\end_inset
+
+which looks typical for sphere-sym central-force Cartesian coords.
+ Not particularly enlightening.
+ In particular, the angular momentum should be a constant of motion, but
+ that is certainly not apparent by just looking.
 \end_layout
 
 \begin_layout Section
