@@ -658,54 +658,8 @@ which is exactly the Hamilton&Lisle vector form (up to a sign, due to metric
 So, just a linear transform.
 \end_layout
 
-\begin_layout Section
-River Model & Smart Dust
-\end_layout
-
-\begin_layout Standard
-The Hanmilton&Lisle text
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hamilton2004"
-literal "false"
-
-\end_inset
-
- proposes a River Model, so that the background motion of the 
-\begin_inset Quotes eld
-\end_inset
-
-river
-\begin_inset Quotes erd
-\end_inset
-
- can be distinguished from motion relative to the river.
- This section reviews that idea, and proposes replacing it with a 
-\begin_inset Quotes eld
-\end_inset
-
-smart dust
-\begin_inset Quotes erd
-\end_inset
-
- idea.
- The goal of 
-\begin_inset Quotes eld
-\end_inset
-
-smart dust
-\begin_inset Quotes erd
-\end_inset
-
- is to make it easier to query the background river flow so as to find out
- information about it.
- It also potentially allows the exploration of simulations carried out by
- the smart dust.
-\end_layout
-
 \begin_layout Subsection
-Inertial Laboratory Frames vs.
- River Model
+Free–falling observers
 \end_layout
 
 \begin_layout Standard
@@ -780,8 +734,75 @@ For radial infall, this is just
 \end_layout
 
 \begin_layout Standard
-Of course, this is obviously the velocity of the particle in the co-moving
- lab frame.
+The observer velocity is constrained to be of unit length, in all frames
+ (in both the coordinate and the tetrad frame.) That is, 
+\begin_inset Formula 
+\[
+1=u^{a}u^{b}\eta_{ab}=v^{\mu}v^{\nu}g_{\mu\nu}
+\]
+
+\end_inset
+
+This is a special case of the product of any two vectors being a scalar.
+ 
+\end_layout
+
+\begin_layout Section
+River Model & Smart Dust
+\end_layout
+
+\begin_layout Standard
+The Hanmilton&Lisle text
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hamilton2004"
+literal "false"
+
+\end_inset
+
+ proposes a River Model, so that the background motion of the 
+\begin_inset Quotes eld
+\end_inset
+
+river
+\begin_inset Quotes erd
+\end_inset
+
+ can be distinguished from motion relative to the river.
+ This section reviews that idea, and proposes replacing it with a 
+\begin_inset Quotes eld
+\end_inset
+
+smart dust
+\begin_inset Quotes erd
+\end_inset
+
+ idea.
+ The goal of 
+\begin_inset Quotes eld
+\end_inset
+
+smart dust
+\begin_inset Quotes erd
+\end_inset
+
+ is to make it easier to query the background river flow so as to find out
+ information about it.
+ It also potentially allows the exploration of simulations carried out by
+ the smart dust.
+\end_layout
+
+\begin_layout Subsection
+Inertial Laboratory Frames vs.
+ River Model
+\end_layout
+
+\begin_layout Standard
+The velocity 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ is the velocity of the particle with respect to the co-moving lab frame.
  It is generally understood that the 
 \begin_inset Quotes eld
 \end_inset
@@ -1142,7 +1163,7 @@ p^{a}=\delta_{\mu}^{a}p^{\mu}+\beta^{a}p^{0}
 
 \end_inset
 
-Next up: parallel transport this around town.
+This generalizes the result for velocity, given earlier.
 \end_layout
 
 \begin_layout Subsection
@@ -1154,9 +1175,10 @@ Now for a bit of pain: deriving the geodesic equations in the tetrad frame
  from the geodesic equations in the coordinate frame.
  We'll punt on that for now, and instead copy from Hamilton, and try to
  guess the correct signs for everything.
- XXX the gueses below might be wrong.
+ XXX Caution: the guesses below might be wrong.
  TODO: derive the geodesics eqns from scratch.
  Someday later.
+ It's not urgent; better to get a glimpse of the answer, first.
 \end_layout
 
 \begin_layout Standard
@@ -1205,7 +1227,51 @@ Note
 \end_inset
 
 .
- 
+ The structure here can be brought into painful clarity by fixing the observer
+ velocity 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ and defining a vector 
+\begin_inset Formula $w^{a}$
+\end_inset
+
+ (w for 
+\begin_inset Quotes erd
+\end_inset
+
+water
+\begin_inset Quotes erd
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align*}
+w^{0} & =0\\
+w^{i} & =\frac{\partial\beta^{i}}{\partial x^{j}}u^{j}
+\end{align*}
+
+\end_inset
+
+and being careful with the sign, so that 
+\begin_inset Formula $w_{i}=-w^{i}$
+\end_inset
+
+.
+ The equations of motion simplify to 
+\begin_inset Formula 
+\begin{align*}
+\frac{dp^{0}}{d\tau} & =w_{i}p^{i}\\
+\frac{dp^{i}}{d\tau} & =w^{i}p^{0}
+\end{align*}
+
+\end_inset
+
+Hamilton&Lisle write 
+\begin_inset Formula $w^{i}=\delta\beta^{i}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1232,15 +1298,49 @@ For radial infall,
 \frac{\partial\beta^{i}}{\partial x^{j}}= & \frac{\partial}{\partial x^{j}}\beta\left(r\right)\frac{x^{i}}{r}\\
 = & -\frac{1}{2}\frac{x^{i}}{r}\frac{\beta}{r}\frac{\partial}{\partial x^{j}}r+\beta\frac{\partial}{\partial x^{j}}\frac{x^{i}}{r}\\
 = & -\frac{\beta x^{i}x_{j}}{2r^{3}}+\beta\left(\frac{\delta_{j}^{i}}{r}-\frac{x^{i}x_{j}}{r^{3}}\right)\\
-= & \beta\frac{2\delta_{j}^{i}-3x^{i}x_{j}}{2r^{3}}
+= & \beta\frac{2r^{2}\delta_{j}^{i}-3x^{i}x_{j}}{2r^{3}}
 \end{align*}
 
 \end_inset
 
-which looks typical for sphere-sym central-force Cartesian coords.
+which looks typical for sphere-symmetrical central-force Cartesian coords.
  Not particularly enlightening.
  In particular, the angular momentum should be a constant of motion, but
- that is certainly not apparent by just looking.
+ that is certainly not apparent in this expression.
+\end_layout
+
+\begin_layout Standard
+Because there is sphere symmtery, we can take, without loss of generality,
+ 
+\begin_inset Formula $x^{1}=r,\;x^{2}=x^{3}=0$
+\end_inset
+
+.
+ This gives
+\begin_inset Formula 
+\[
+\frac{\partial\beta^{i}}{\partial x^{j}}=\delta_{j}^{i}\frac{\beta}{r}\left(1-\frac{3}{2}\delta_{1}^{i}\right)
+\]
+
+\end_inset
+
+which is purely diagonal, and distinguishes the radial axis from the two
+ transverse ones.
+ Remarkably, there is a sign change.
+ Not sure what that means.
+\end_layout
+
+\begin_layout Standard
+Likewise, we can constrain motion to the x–y plane, so that 
+\begin_inset Formula $u^{3}=0$
+\end_inset
+
+.
+ The unit velocity constraint 
+\begin_inset Formula $1=\eta_{ab}u^{a}u^{b}$
+\end_inset
+
+ is now a 3D hyperboloid constraint.
 \end_layout
 
 \begin_layout Section
