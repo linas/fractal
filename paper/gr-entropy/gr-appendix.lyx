@@ -2311,7 +2311,7 @@ t to the Hamilton&Lisle argument.
 Make use of
 \begin_inset Formula 
 \[
-g_{\mu\nu}=g_{\mu}^{a}g_{\nu}^{b}\eta_{ab}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}
+g_{\mu\nu}=\mathbf{g}_{\mu}^{a}\mathbf{g}_{\nu}^{b}\eta_{ab}=\mathbf{g}_{\mu}\cdot\mathbf{g}_{\nu}
 \]
 
 \end_inset
@@ -2327,7 +2327,7 @@ to write
 with
 \begin_inset Formula 
 \begin{align*}
-\mathbf{g}_{\mu}^{a} & =\delta_{\mu}^{a}-\beta^{a}\delta_{\mu}^{0}
+\mathbf{g}_{\mu}^{a} & =\delta_{\mu}^{a}+\beta^{a}\delta_{\mu}^{0}
 \end{align*}
 
 \end_inset
@@ -2350,6 +2350,42 @@ and
 
 \end_inset
 
+We will also need 
+\begin_inset Formula 
+\[
+g^{\mu\nu}=\mathbf{h}_{a}^{\mu}\mathbf{h}_{b}^{\nu}\eta^{ab}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\mathbf{h}_{a}^{\mu}=\delta_{a}^{\mu}-\delta_{a}^{0}\beta^{\mu}
+\]
+
+\end_inset
+
+obeys identities
+\begin_inset Formula 
+\[
+\mathbf{h}_{a}^{\mu}\mathbf{g}_{\nu}^{a}=\delta_{\nu}^{\mu}
+\]
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\mathbf{h}_{a}^{\mu}\mathbf{g}_{\mu}^{b}=\delta_{b}^{a}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Now for the fucked up part.
  We've commited ourself to the metric signature 
 \begin_inset Formula $\eta=\left(+---\right)$
@@ -2410,15 +2446,11 @@ and
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Putting it all together again:
 \begin_inset Formula 
 \begin{align*}
 \partial_{k}\beta^{i}= & \beta\partial_{k}\frac{x^{i}}{r}+\frac{x^{i}}{r}\partial_{k}\beta\\
-= & \beta\left(\frac{2r^{2}\delta_{k}^{i}-x^{i}x^{j}\delta_{jk}}{2r^{3}}\right)
+= & \beta\frac{2r^{2}\delta_{k}^{i}-x^{i}x^{j}\delta_{jk}}{2r^{3}}
 \end{align*}
 
 \end_inset
@@ -2454,8 +2486,39 @@ which is the above, after recalling
 \begin_inset Formula 
 \begin{align*}
 \mathbf{g}_{\nu}\cdot\frac{\partial\mathbf{g}_{\mu}}{\partial x^{\rho}}= & -\delta_{\mu}^{0}\eta_{ab}\left(\delta_{\nu}^{a}-\beta^{a}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{b}\\
-= & \delta_{\mu}^{0}\delta_{ik}\left(\delta_{\nu}^{i}-\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}
+= & \delta_{\mu}^{0}\delta_{ik}\left(\delta_{\nu}^{i}-\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}\\
+= & \delta_{\mu}^{0}\delta_{\nu k}\beta\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{2r^{3}}-\delta_{\mu}^{0}\delta_{\nu}^{0}\beta^{2}\frac{x^{i}\delta_{i\rho}}{2r}
 \end{align*}
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+and so the yuck begins.
+ Symmetrizing,
+\begin_inset Formula 
+\[
+\frac{\partial g_{\mu\nu}}{\partial x^{\rho}}=-\delta_{\mu}^{0}\delta_{\nu}^{0}\beta^{2}\frac{x^{i}\delta_{i\rho}}{r}+\left(\delta_{\mu}^{0}\delta_{\nu k}+\delta_{\nu}^{0}\delta_{\mu k}\right)\beta\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{2r^{3}}
+\]
+
+\end_inset
+
+and now
+\begin_inset Formula 
+\[
+\frac{\partial g_{\sigma\nu}}{\partial x^{\rho}}+\frac{\partial g_{\sigma\rho}}{\partial x^{\nu}}-\frac{\partial g_{\nu\rho}}{\partial x^{\sigma}}=
+\]
 
 \end_inset
 
