@@ -2324,6 +2324,141 @@ to write
 
 \end_inset
 
+with
+\begin_inset Formula 
+\begin{align*}
+\mathbf{g}_{\mu}^{a} & =\delta_{\mu}^{a}-\beta^{a}\delta_{\mu}^{0}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\beta^{0} & =0\\
+\beta^{i} & =\beta\left(r\right)\frac{x^{i}}{r}\quad\mbox{for }i=1,2,3
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\beta\left(r\right) & =\sqrt{\frac{2m}{r}}=\beta\\
+\beta^{\prime}\left(r\right) & =\frac{1}{2r}\beta\left(r\right)=\frac{\beta}{2r}=\beta^{\prime}
+\end{align*}
+
+\end_inset
+
+Now for the fucked up part.
+ We've commited ourself to the metric signature 
+\begin_inset Formula $\eta=\left(+---\right)$
+\end_inset
+
+ which throws in a spare minus sign into the spatial coordinates.
+ This will screw up everything, if we are not careful.
+ In particular, 
+\begin_inset Formula 
+\[
+r=\sqrt{-x_{k}x^{k}}=\sqrt{-x^{i}x^{j}\eta_{ij}}=\sqrt{x^{i}x^{j}\delta_{ij}}
+\]
+
+\end_inset
+
+We have two choices for what to do here.
+ On is to stick minus signs into assorted unappealing places.
+ The other is to use 
+\begin_inset Formula $\delta_{ij}$
+\end_inset
+
+ to raise and lower indexes as needed.
+ This allows 
+\begin_inset Formula $\delta_{ij}$
+\end_inset
+
+ to be thought of as an algebraic place-holder, broadcasting that 
+\begin_inset Quotes eld
+\end_inset
+
+a minus sign should have occured here
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Presumably, this will lead to fewer sign errors.
+ So, here we go:
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial x^{k}}r=\partial_{k}r=\frac{x^{i}\delta_{ik}}{r}
+\]
+
+\end_inset
+
+So
+\begin_inset Formula 
+\[
+\partial_{k}\frac{x^{i}}{r}=\frac{r^{2}\delta_{k}^{i}-x^{i}x^{j}\delta_{jk}}{r^{3}}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\partial_{k}\beta=\beta\frac{x^{i}\delta_{ik}}{2r^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Putting it all together again:
+\begin_inset Formula 
+\begin{align*}
+\partial_{k}\beta^{i}= & \beta\partial_{k}\frac{x^{i}}{r}+\frac{x^{i}}{r}\partial_{k}\beta\\
+= & \beta\left(\frac{2r^{2}\delta_{k}^{i}-x^{i}x^{j}\delta_{jk}}{2r^{3}}\right)
+\end{align*}
+
+\end_inset
+
+The contraction will be useful:
+\begin_inset Formula 
+\begin{align*}
+\delta_{ji}\beta^{j}\partial_{k}\beta^{i}= & \frac{\beta^{2}}{2r^{3}}r^{2}x^{i}\delta_{ik}\\
+= & \beta^{2}\frac{x^{i}\delta_{ik}}{2r}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\partial_{\rho}\mathbf{g}_{\mu}^{a}= & \partial_{\rho}\left(\delta_{\mu}^{a}-\beta^{a}\delta_{\mu}^{0}\right)\\
+= & -\delta_{\mu}^{0}\partial_{\rho}\beta^{a}
+\end{align*}
+
+\end_inset
+
+which is the above, after recalling 
+\begin_inset Formula $\beta^{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\partial_{0}\beta^{a}=0$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+\mathbf{g}_{\nu}\cdot\frac{\partial\mathbf{g}_{\mu}}{\partial x^{\rho}}= & -\delta_{\mu}^{0}\eta_{ab}\left(\delta_{\nu}^{a}-\beta^{a}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{b}\\
+= & \delta_{\mu}^{0}\delta_{ik}\left(\delta_{\nu}^{i}-\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
