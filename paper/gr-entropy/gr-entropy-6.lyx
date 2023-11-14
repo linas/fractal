@@ -1102,12 +1102,11 @@ Motion
 \end_layout
 
 \begin_layout Standard
-Lets continue with the analysis.
- 
-\end_layout
-
-\begin_layout Standard
-
+Hamilton&Lisle make an argument that the tetrad defines a kind of river
+ frame, which locally looks flat.
+ Observers moving in the tetrad frame experience a Lorentz boost.
+ What's odd is that the boost is not of the form that one would have in
+ flat space.
 \end_layout
 
 \begin_layout Subsection
@@ -1167,7 +1166,7 @@ This generalizes the result for velocity, given earlier.
 \end_layout
 
 \begin_layout Subsection
-Parallel Transport
+Equations of Motion in the Tetrad Frame
 \end_layout
 
 \begin_layout Standard
@@ -1186,7 +1185,7 @@ Let
 \begin_inset Formula $u^{a}$
 \end_inset
 
- be a free-falling observer, in the tetrade frame.
+ be a free-falling observer, in the tetrad frame.
  Let 
 \begin_inset Formula $p^{a}$
 \end_inset
@@ -1201,7 +1200,11 @@ Let
 \end_inset
 
 This looks entirely reasonable, we take it as gospel.
- The Christoffel symbols are (copied, guessing sign)
+ 
+\end_layout
+
+\begin_layout Standard
+The Christoffel symbols (copied, guessing sign) are
 \begin_inset Formula 
 \[
 \Gamma_{ij}^{0}=\Gamma_{0j}^{i}=-\frac{\partial\beta^{i}}{\partial x^{j}}\quad\mbox{for }i,j=1,2,3
@@ -1209,7 +1212,148 @@ This looks entirely reasonable, we take it as gospel.
 
 \end_inset
 
-This the equations of motion are (guessing sign)
+This also seems correct.
+\end_layout
+
+\begin_layout Subsection
+Relative Motion in the Tetrad Frame
+\end_layout
+
+\begin_layout Standard
+A fixed tetrad at a point 
+\begin_inset Formula $p\in M$
+\end_inset
+
+ defines a tangent space 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+.
+ It is useful to coordinatize this space, giving it coordinates 
+\begin_inset Formula $\xi^{a}$
+\end_inset
+
+.
+ That is, a point 
+\begin_inset Formula $x\in T_{p}M$
+\end_inset
+
+ has coordinates 
+\begin_inset Formula $x=\xi^{a}\gamma_{a}$
+\end_inset
+
+.
+ It is useful to call 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+laboratory frame
+\begin_inset Quotes erd
+\end_inset
+
+, ignoring the earlier screed about laboratory frames.
+ The reason this can be done is because a real, physical lab is a spatial
+ extent within 
+\begin_inset Formula $M$
+\end_inset
+
+ and is therefore subject to the curvature of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Here, we define 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ as a kind of virtual lab, having all the idealized properties that the
+ real lab could not have: namely, flatness.
+ Armed with this abstraction, its OK to talk about points 
+\begin_inset Formula $x\in T_{p}M$
+\end_inset
+
+ instead of always talking about vectors.
+ Yes, 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ has a priviledged point, the 
+\begin_inset Quotes eld
+\end_inset
+
+origin
+\begin_inset Quotes erd
+\end_inset
+
+, but we can forget that, and pretend its affine.
+ Nonetheless, we do want to coordinatize 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ and so may as well use that origin as the coordinate origin.
+ Again, points 
+\begin_inset Formula $x\in T_{p}M$
+\end_inset
+
+ have coordinates 
+\begin_inset Formula $\xi^{a}$
+\end_inset
+
+ with respect to the 
+\begin_inset Quotes eld
+\end_inset
+
+lab frame
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\gamma_{a}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In this lab, we can talk about the motion of a particle.
+ Let it's instantaneous velocity be given by 
+\begin_inset Formula $u^{a}=d\xi^{a}/d\tau$
+\end_inset
+
+.
+ Letting the particle be an observer, it too carries a coordinate frame
+ with it.
+ Let 
+\begin_inset Formula $p^{a}$
+\end_inset
+
+ be another location in the lab frame; or better yet, let 
+\begin_inset Formula $p^{a}$
+\end_inset
+
+ be a vector in the lab frame.
+ What does 
+\begin_inset Formula $p^{a}$
+\end_inset
+
+ look like from the moving observers point of view? Well, this is just the
+ eqns of motion given eearlier.
+ Repeating,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{dp^{a}}{d\tau}+\Gamma_{bc}^{a}p^{b}u^{c}=0
+\]
+
+\end_inset
+
+Plugging through for the Christoffel symbols, the equations of motion are
 \begin_inset Formula 
 \begin{align*}
 \frac{dp^{0}}{d\tau} & =\frac{\partial\beta_{i}}{\partial x^{j}}p^{i}u^{j}\\
@@ -1227,8 +1371,38 @@ Note
 \end_inset
 
 .
- The structure here can be brought into painful clarity by fixing the observer
- velocity 
+ 
+\end_layout
+
+\begin_layout Standard
+This passes the sniff test.
+ If 
+\begin_inset Formula $x$
+\end_inset
+
+ is not moving in the lab frame, then 
+\begin_inset Formula $u^{j}=0$
+\end_inset
+
+ while 
+\begin_inset Formula $u^{0}=1$
+\end_inset
+
+, and so 
+\begin_inset Formula $dp^{0}/d\tau=dp^{i}/d\tau=0$
+\end_inset
+
+ and so the lab vector is fixed in the lab frame.
+ All is well.
+\end_layout
+
+\begin_layout Standard
+But what if 
+\begin_inset Formula $x$
+\end_inset
+
+ is moving? Well, these equations have the structure of a Lorentz boost.
+ This is made painfully clear by fixing the observer velocity 
 \begin_inset Formula $u^{a}$
 \end_inset
 
@@ -1253,12 +1427,7 @@ w^{i} & =\frac{\partial\beta^{i}}{\partial x^{j}}u^{j}
 
 \end_inset
 
-and being careful with the sign, so that 
-\begin_inset Formula $w_{i}=-w^{i}$
-\end_inset
-
-.
- The equations of motion simplify to 
+The equations of motion simplify to 
 \begin_inset Formula 
 \begin{align*}
 \frac{dp^{0}}{d\tau} & =w_{i}p^{i}\\
@@ -1267,28 +1436,60 @@ and being careful with the sign, so that
 
 \end_inset
 
-Hamilton&Lisle write 
-\begin_inset Formula $w^{i}=\delta\beta^{i}$
+This has exactly the algebraic structure of a Lorentz boost, after being
+ careful to note the sign, viz.
+ 
+\begin_inset Formula $w_{i}=-w^{i}$
 \end_inset
 
-
+.
+ 
 \end_layout
 
 \begin_layout Standard
-For radial infall, 
-\begin_inset Formula $u^{j}=0$
+And yet, its odd.
+ In normal flat Minkowski space, an observer travelling with velocity 
+\begin_inset Formula $u^{a}$
 \end_inset
 
- and only 
-\begin_inset Formula $u^{0}=1$
+ would see a vector 
+\begin_inset Formula $p^{a}$
 \end_inset
 
-, and so 
-\begin_inset Formula $dp^{0}/d\tau=dp^{i}/d\tau=0$
+ transformed exactly as above, but with 
+\begin_inset Formula $u^{a}$
 \end_inset
 
- and so the frames really do fall fixed.
- For non-radial infall, we need explicit expressions.
+ in place of 
+\begin_inset Formula $w^{a}$
+\end_inset
+
+.
+ The above is not that; instead, 
+\begin_inset Formula $w^{a}=\Lambda_{\;b}^{a}u^{b}\ne u^{a}$
+\end_inset
+
+.
+ So our virtual lab is screwy.
+ Yes, relative motion is given by a boost; but that boost is not the one
+ of flat space.
+ It's messed up.
+ Everthing is still special relativity, but its a special kind of special
+ relativity.
+ That's because the lab frame is falling through curved space.
+\end_layout
+
+\begin_layout Standard
+Hamilton&Lisle say the same thing, but differently, presenting a variational
+ argument.
+\end_layout
+
+\begin_layout Subsection
+Stuff
+\end_layout
+
+\begin_layout Standard
+For non-radial infall, we need explicit expressions.
  These are
 \end_layout
 
