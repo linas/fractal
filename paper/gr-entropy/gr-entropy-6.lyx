@@ -1466,7 +1466,7 @@ And yet, its odd.
 
 .
  The above is not that; instead, 
-\begin_inset Formula $w^{a}=\Lambda_{\;b}^{a}u^{b}\ne u^{a}$
+\begin_inset Formula $w^{a}=M_{\;b}^{a}u^{b}\ne u^{a}$
 \end_inset
 
 .
@@ -1485,11 +1485,11 @@ Hamilton&Lisle say the same thing, but differently, presenting a variational
 \end_layout
 
 \begin_layout Subsection
-Stuff
+Explicit Tetrad expressions
 \end_layout
 
 \begin_layout Standard
-For non-radial infall, we need explicit expressions.
+For the general case, we need explicit expressions.
  These are
 \end_layout
 
@@ -1529,19 +1529,87 @@ which is purely diagonal, and distinguishes the radial axis from the two
  transverse ones.
  Remarkably, there is a sign change.
  Not sure what that means.
+ In matrix form,
+\begin_inset Formula 
+\[
+\frac{\partial\beta^{i}}{\partial x^{j}}=M_{\;j}^{i}=\frac{\beta}{r}\left[\begin{array}{ccc}
+-\frac{1}{2} & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Likewise, we can constrain motion to the x–y plane, so that 
-\begin_inset Formula $u^{3}=0$
+Recalling that 
+\begin_inset Formula $w^{0}=0,$
+\end_inset
+
+the rest of the boost is 
+\begin_inset Formula $w^{i}=M_{\;j}^{i}u^{j}$
+\end_inset
+
+ or, in matrix form
+\begin_inset Formula 
+\[
+w^{i}=\frac{\beta}{r}\left[\begin{array}{c}
+-u^{1}/2\\
+u^{2}\\
+u^{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+The equations 
+\begin_inset Formula 
+\begin{align*}
+\frac{dp^{0}}{d\tau} & =w_{i}p^{i}\\
+\frac{dp^{i}}{d\tau} & =w^{i}p^{0}
+\end{align*}
+
+\end_inset
+
+can be written in matrix form as
+\begin_inset Formula 
+\[
+\frac{dp^{a}}{d\tau}=\Lambda_{\;b}^{a}p^{b}
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+\Lambda_{\;b}^{a}=\left[\begin{array}{cccc}
+0 & u^{1}/2 & -u^{2} & -u^{3}\\
+-u^{1}/2 & 0 & 0 & 0\\
+u^{2} & 0 & 0 & 0\\
+u^{3} & 0 & 0 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+which is effed up because its not orthogonal, its not an elt of 
+\begin_inset Formula $O(1,3)$
 \end_inset
 
 .
- The unit velocity constraint 
-\begin_inset Formula $1=\eta_{ab}u^{a}u^{b}$
+ Recall, it is orthogonal iff 
+\begin_inset Formula $\eta=\Lambda^{T}\eta\Lambda$
 \end_inset
 
- is now a 3D hyperboloid constraint.
+ and this ain't that.
+ Something's wrong; I'm confused.
+ Doohh.
+ It's a generator of an infinitessimal boost.
+ That means half the stuff you wrote above is just lain wrong.
+ Try again.
 \end_layout
 
 \begin_layout Section
