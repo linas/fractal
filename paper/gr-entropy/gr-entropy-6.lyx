@@ -1312,7 +1312,8 @@ The Christoffel symbols (copied, guessing sign) are
 
 \end_inset
 
-This also seems correct.
+This seems correct; the minus signs are needed here to make the later sections,
+ below, work out.
 \end_layout
 
 \begin_layout Subsection
@@ -1620,13 +1621,24 @@ For the general case, we need explicit expressions.
 \begin{align*}
 \frac{\partial\beta^{i}}{\partial x^{j}}= & \frac{\partial}{\partial x^{j}}\beta\left(r\right)\frac{x^{i}}{r}\\
 = & -\frac{1}{2}\frac{x^{i}}{r}\frac{\beta}{r}\frac{\partial}{\partial x^{j}}r+\beta\frac{\partial}{\partial x^{j}}\frac{x^{i}}{r}\\
-= & -\frac{\beta x^{i}x_{j}}{2r^{3}}+\beta\left(\frac{\delta_{j}^{i}}{r}-\frac{x^{i}x_{j}}{r^{3}}\right)\\
-= & \beta\frac{2r^{2}\delta_{j}^{i}-3x^{i}x_{j}}{2r^{3}}
+= & -\beta\frac{x^{i}x^{k}\delta_{jk}}{2r^{3}}+\beta\left(\frac{\delta_{j}^{i}}{r}-\frac{x^{i}x^{k}\delta_{jk}}{r^{3}}\right)\\
+= & \beta\frac{2r^{2}\delta_{j}^{i}-3x^{i}x^{k}\delta_{jk}}{2r^{3}}
 \end{align*}
 
 \end_inset
 
-which looks typical for sphere-symmetrical central-force Cartesian coords.
+The 
+\begin_inset Formula $\delta_{jk}$
+\end_inset
+
+ is used to drop the index, so as to avoid confusion about signs.
+ That is, use 
+\begin_inset Formula $r=\sqrt{x^{i}x^{j}\delta_{ij}}$
+\end_inset
+
+.
+ The resulting expression looks typical for sphere-symmetrical central-force
+ Cartesian coords.
  Not particularly enlightening.
  In particular, the angular momentum should be a constant of motion, but
  that is certainly not apparent in this expression.
@@ -1638,11 +1650,15 @@ Because there is sphere symmtery, we can take, without loss of generality,
 \begin_inset Formula $x^{1}=r,\;x^{2}=x^{3}=0$
 \end_inset
 
+, so 
+\begin_inset Formula $x^{i}=r\delta_{1}^{i}$
+\end_inset
+
 .
- This gives
+ Plugging through, this gives
 \begin_inset Formula 
 \[
-\frac{\partial\beta^{i}}{\partial x^{j}}=\delta_{j}^{i}\frac{\beta}{r}\left(1-\frac{3}{2}\delta_{1}^{i}\right)
+\frac{\partial\beta^{i}}{\partial x^{j}}=\frac{\beta}{r}\left(\delta_{j}^{i}-\frac{3}{2}\delta_{1}^{i}\delta_{j}^{1}\right)
 \]
 
 \end_inset
@@ -1663,10 +1679,6 @@ which is purely diagonal, and distinguishes the radial axis from the two
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Recalling that 
 \begin_inset Formula $w^{0}=0,$
 \end_inset
