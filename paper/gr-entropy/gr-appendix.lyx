@@ -2481,8 +2481,8 @@ Putting it all together again:
 The contraction will be useful:
 \begin_inset Formula 
 \begin{align*}
-\delta_{ji}\beta^{j}\partial_{k}\beta^{i}= & \frac{\beta^{2}}{2r^{3}}r^{2}x^{i}\delta_{ik}\\
-= & \beta^{2}\frac{x^{i}\delta_{ik}}{2r}
+\delta_{ji}\beta^{j}\partial_{k}\beta^{i}= & \frac{\beta^{2}}{2r^{4}}r^{2}x^{i}\delta_{ik}\\
+= & \beta^{2}\frac{x^{i}\delta_{ik}}{2r^{2}}
 \end{align*}
 
 \end_inset
@@ -2574,13 +2574,33 @@ Rather than symmetrizing
 
 \end_inset
 
-Before continuing with this, lets try the other trm, first.
+Here's perhaps a better ploy:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{h}_{a}^{\mu}\eta^{ab}\mathbf{h}_{b}^{\sigma}\mathbf{g}_{\nu}\cdot\partial_{\rho}\mathbf{g}_{\sigma}= & -\left(\delta_{a}^{\mu}-\delta_{a}^{0}\beta^{\mu}\right)\eta^{ab}\delta_{b}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}\\
+= & -\left(\delta_{0}^{\mu}-\beta^{\mu}\right)\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}
+\end{align*}
+
+\end_inset
+
+Before continuing with this, lets try the other term, first.
 \begin_inset Formula 
 \begin{align*}
 \mathbf{h}_{b}^{\sigma}\mathbf{g}_{\nu}\cdot\partial_{\sigma}\mathbf{g}_{\rho}= & -\left(\delta_{b}^{\sigma}-\delta_{b}^{0}\beta^{\sigma}\right)\delta_{\rho}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\partial_{\sigma}\beta^{k}\\
 = & -\delta_{\rho}^{0}\left(\delta_{\nu}^{i}\delta_{ik}\partial_{b}\beta^{k}-\delta_{b}^{0}\delta_{ik}\delta_{\nu}^{i}\beta^{\sigma}\partial_{\sigma}\beta^{k}+\delta_{ik}\beta^{i}\delta_{\nu}^{0}\partial_{b}\beta^{k}-\delta_{b}^{0}\delta_{ik}\beta^{i}\delta_{\nu}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
 = & -\delta_{\rho}^{0}\left(\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\delta_{ik}\partial_{b}\beta^{k}-\delta_{b}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
 = & -\delta_{\rho}^{0}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\delta_{ik}\left(\partial_{b}\beta^{k}-\delta_{b}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\end{align*}
+
+\end_inset
+
+We finish the contraction, hoping for simplifiction:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{h}_{a}^{\mu}\eta^{ab}\mathbf{h}_{b}^{\sigma}\mathbf{g}_{\nu}\cdot\partial_{\sigma}\mathbf{g}_{\rho}= & -\delta_{\rho}^{0}\left(\delta_{a}^{\mu}-\delta_{a}^{0}\beta^{\mu}\right)\eta^{ab}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\delta_{ik}\left(\partial_{b}\beta^{k}-\delta_{b}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
+= & -\delta_{\rho}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\eta^{ab}\left(\delta_{a}^{\mu}-\delta_{a}^{0}\beta^{\mu}\right)\left(\partial_{b}\beta^{k}-\delta_{b}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
+= & -\delta_{\rho}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\eta^{ab}\delta_{a}^{\mu}\partial_{b}\beta^{k}-\delta_{0}^{\mu}\beta^{\sigma}\partial_{\sigma}\beta^{k}+\beta^{\mu}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
+= & -\delta_{\rho}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\eta^{\mu b}\partial_{b}\beta^{k}-\left(\delta_{0}^{\mu}-\beta^{\mu}\right)\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
 \end{align*}
 
 \end_inset
@@ -2594,7 +2614,200 @@ Well, this is a mess, and we need to symmetrize
 \end_inset
 
  here as well.
- 
+ But before we do that, lets try summing, first:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{h}_{a}^{\mu}\eta^{ab}\mathbf{h}_{b}^{\sigma} & \mathbf{g}_{\nu}\cdot\partial_{\rho}\mathbf{g}_{\sigma}-\mathbf{h}_{a}^{\mu}\eta^{ab}\mathbf{h}_{b}^{\sigma}\mathbf{g}_{\nu}\cdot\partial_{\sigma}\mathbf{g}_{\rho}\\
+= & -\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\left(\delta_{0}^{\mu}-\beta^{\mu}\right)\partial_{\rho}\beta^{k}+\delta_{\rho}^{0}\left(\eta^{\mu b}\partial_{b}\beta^{k}-\left(\delta_{0}^{\mu}-\beta^{\mu}\right)\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\right)\\
+= & -\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\delta_{\rho}^{0}\eta^{\mu b}\partial_{b}\beta^{k}+\left(\delta_{0}^{\mu}-\beta^{\mu}\right)\left(\partial_{\rho}\beta^{k}-\delta_{\rho}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\right)\\
+= & G_{\;\nu\rho}^{\mu}
+\end{align*}
+
+\end_inset
+
+One half of the above, after symmetrizing with 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ will give us the Christoffel symbol, finally.
+ That is,
+\begin_inset Formula 
+\[
+\Gamma_{\;\nu\rho}^{\mu}=\frac{1}{2}\left(G_{\;\nu\rho}^{\mu}+G_{\;\rho\nu}^{\mu}\right)
+\]
+
+\end_inset
+
+ Lets break this apart into space and time parts
+\begin_inset Formula 
+\[
+G_{\;\nu\rho}^{0}=-\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\partial_{\rho}\beta^{k}-\delta_{\rho}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\]
+
+\end_inset
+
+and then
+\begin_inset Formula 
+\[
+G_{\;0\rho}^{0}=-\delta_{ik}\beta^{i}\left(\partial_{\rho}\beta^{k}-\delta_{\rho}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+G_{\;\nu0}^{0}=\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\beta^{\sigma}\partial_{\sigma}\beta^{k}
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\begin{align*}
+G_{\;00}^{0}= & \delta_{ik}\beta^{i}\beta^{\sigma}\partial_{\sigma}\beta^{k}\\
+= & \Gamma_{\;00}^{0}
+\end{align*}
+
+\end_inset
+
+while
+\begin_inset Formula 
+\[
+G_{\;0j}^{0}=-\delta_{ik}\beta^{i}\partial_{j}\beta^{k}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+G_{\;j0}^{0}=\delta_{jk}\beta^{\sigma}\partial_{\sigma}\beta^{k}
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+\Gamma_{\;0j}^{0}=\Gamma_{\;j0}^{0}=\frac{1}{2}\left(\delta_{jk}\beta^{\sigma}\partial_{\sigma}\beta^{k}-\delta_{ik}\beta^{i}\partial_{j}\beta^{k}\right)
+\]
+
+\end_inset
+
+Now's a good time to plug through.
+ First:
+\begin_inset Formula 
+\begin{align*}
+\beta^{i}\partial_{i}\beta^{k}= & \beta\frac{x^{i}}{r}\beta\frac{2r^{2}\delta_{i}^{k}-x^{k}x^{j}\delta_{ij}}{2r^{3}}\\
+= & \frac{\beta^{2}}{2r^{4}}\left(2r^{2}x^{k}-r^{2}x^{k}\right)\\
+= & \frac{\beta^{2}}{2r^{2}}x^{k}
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+\Gamma_{\;00}^{0}=\frac{\beta^{3}}{2r}
+\]
+
+\end_inset
+
+while
+\begin_inset Formula 
+\begin{align*}
+\Gamma_{\;0j}^{0}=\Gamma_{\;j0}^{0}= & \frac{1}{2}\left(\delta_{jk}\frac{\beta^{2}}{2r^{2}}x^{k}-\beta^{2}\frac{x^{i}\delta_{ij}}{2r^{2}}\right)\\
+= & 0
+\end{align*}
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+That leaves
+\begin_inset Formula 
+\[
+G_{\;nm}^{0}=-\delta_{nk}\partial_{m}\beta^{k}
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+and then
+\begin_inset Formula 
+\begin{align*}
+\Gamma_{\;nm}^{0}=\Gamma_{\;mn}^{0}= & -\frac{1}{2}\left(\delta_{nk}\partial_{m}\beta^{k}+\delta_{mk}\partial_{n}\beta^{k}\right)\\
+= & -\frac{1}{2}\frac{\beta}{2r^{3}}\left(2r^{2}\delta_{nm}-x^{k}x^{j}\delta_{jm}\delta_{nk}+2r^{2}\delta_{mn}-x^{k}x^{j}\delta_{jn}\delta_{km}\right)\\
+= & -\frac{\beta}{2r^{3}}\left(2r^{2}\delta_{nm}-x^{k}x^{j}\delta_{jm}\delta_{nk}\right)\\
+= & \frac{\beta}{2r^{3}}\left(2r^{2}\eta_{nm}+x_{m}x_{n}\right)\quad\quad\mbox{for }m,n=1,2,3
+\end{align*}
+
+\end_inset
+
+Well, all this is tedius.
+ But the end is in sight.
+ Next
+\begin_inset Formula 
+\[
+G_{\;\nu\rho}^{j}=-\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\delta_{\rho}^{0}\eta^{jb}\partial_{b}\beta^{k}-\beta^{j}\left(\partial_{\rho}\beta^{k}-\delta_{\rho}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+and so
+\begin_inset Formula 
+\[
+\partial_{b}\beta^{k}-\delta_{b}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}=\beta\frac{2r^{2}\delta_{b}^{k}-x^{k}x^{j}\delta_{jb}}{2r^{3}}-\delta_{b}^{0}\frac{\beta^{2}}{2r^{2}}x^{k}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
