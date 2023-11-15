@@ -2297,10 +2297,19 @@ Christoffel Symbols in Cartesian coords
 
 \begin_layout Standard
 This is a brute-force calculation of the Christoffel symbols.
- It's kind of useless for most purposes, but is handy to serve as a counter-poin
-t to the Hamilton&Lisle argument.
- It's painful.
- Per standard texts:
+ It's tremendously long, and never quite reaches any usable conclusion.
+ It emphasizes the futility of working with Christoffel symbols in the coordinat
+e frame.
+ One just gets a long tumbledown of algebra, very little of it enlightening.
+ There's a few simplifications here and there, but, overall, not worth the
+ effort.
+ This is a lesson: Don't use Chirstoffel in coord frames.
+ This is what vierbeins were invented for.
+ They symmetrize away the long ugly calculations.
+\end_layout
+
+\begin_layout Standard
+Start with definition per standard texts:
 \begin_inset Formula 
 \[
 \Gamma_{\;\nu\rho}^{\mu}=\frac{1}{2}g^{\mu\sigma}\left(\frac{\partial g_{\sigma\nu}}{\partial x^{\rho}}+\frac{\partial g_{\sigma\rho}}{\partial x^{\nu}}-\frac{\partial g_{\nu\rho}}{\partial x^{\sigma}}\right)
@@ -2386,7 +2395,7 @@ obeys identities
 \end_layout
 
 \begin_layout Standard
-Lets plug this trhough first, so see how much we can simplify.
+Lets plug this through first, to see how much we can simplify.
 \begin_inset Formula 
 \begin{align*}
 \Gamma_{\;\nu\rho}^{\mu}= & \frac{1}{2}g^{\mu\sigma}\left(\frac{\partial g_{\sigma\nu}}{\partial x^{\rho}}+\frac{\partial g_{\sigma\rho}}{\partial x^{\nu}}-\frac{\partial g_{\nu\rho}}{\partial x^{\sigma}}\right)\\
@@ -2406,6 +2415,9 @@ where the curly brackets mean symmetrix (
 \end_inset
 
  sign).
+ Well, I dunno.
+ Not really simpler.
+ Maybe slightly compartmentalized as to needed calculations.
 \end_layout
 
 \begin_layout Standard
@@ -2425,7 +2437,7 @@ r=\sqrt{-x_{k}x^{k}}=\sqrt{-x^{i}x^{j}\eta_{ij}}=\sqrt{x^{i}x^{j}\delta_{ij}}
 \end_inset
 
 We have two choices for what to do here.
- On is to stick minus signs into assorted unappealing places.
+ One is to stick minus signs into assorted unappealing places.
  The other is to use 
 \begin_inset Formula $\delta_{ij}$
 \end_inset
@@ -2510,7 +2522,8 @@ which is the above, after recalling
 \begin{align*}
 \mathbf{g}_{\nu}\cdot\frac{\partial\mathbf{g}_{\mu}}{\partial x^{\rho}}= & \delta_{\mu}^{0}\eta_{ab}\left(\delta_{\nu}^{a}+\beta^{a}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{b}\\
 = & -\delta_{\mu}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}\\
-= & -\delta_{\mu}^{0}\frac{\beta}{2r}\left(\delta_{\nu k}\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{r^{2}}+\delta_{\nu}^{0}\beta x^{i}\delta_{i\rho}\right)
+= & -\delta_{\mu}^{0}\left(\delta_{\nu k}\partial_{\rho}\beta^{k}+\delta_{\nu}^{0}\delta_{ik}\beta^{i}\partial_{\rho}\beta^{k}\right)\\
+= & -\delta_{\mu}^{0}\frac{\beta}{2r}\left(\delta_{\nu k}\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{r^{2}}+\delta_{\nu}^{0}\beta\frac{x^{i}}{r}\delta_{i\rho}\right)
 \end{align*}
 
 \end_inset
@@ -2532,7 +2545,7 @@ and so the yuck begins.
  Symmetrizing,
 \begin_inset Formula 
 \[
-\frac{\partial g_{\mu\nu}}{\partial x^{\rho}}=-\delta_{\mu}^{0}\delta_{\nu}^{0}\beta^{2}\frac{x^{i}\delta_{i\rho}}{r}-\left(\delta_{\mu}^{0}\delta_{\nu k}+\delta_{\nu}^{0}\delta_{\mu k}\right)\beta\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{2r^{3}}
+\frac{\partial g_{\mu\nu}}{\partial x^{\rho}}=-\delta_{\mu}^{0}\delta_{\nu}^{0}\beta^{2}\frac{x^{i}\delta_{i\rho}}{r^{2}}-\left(\delta_{\mu}^{0}\delta_{\nu k}+\delta_{\nu}^{0}\delta_{\mu k}\right)\beta\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{2r^{3}}
 \]
 
 \end_inset
@@ -2552,7 +2565,7 @@ Well, hurrah! That works! Next,
 \begin{align*}
 \mathbf{h}_{b}^{\mu}\mathbf{g}_{\nu}\cdot\partial_{\rho}\mathbf{g}_{\mu}= & -\left(\delta_{b}^{\mu}-\delta_{b}^{0}\beta^{\mu}\right)\delta_{\mu}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}\\
 = & -\delta_{b}^{0}\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\partial_{\rho}\beta^{k}\\
-= & -\delta_{b}^{0}\frac{\beta}{2r}\left(\delta_{\nu k}\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{r^{2}}+\delta_{\nu}^{0}\beta x^{i}\delta_{i\rho}\right)
+= & -\delta_{b}^{0}\frac{\beta}{2r}\left(\delta_{\nu k}\frac{2r^{2}\delta_{\rho}^{k}-x^{k}x^{j}\delta_{j\rho}}{r^{2}}+\delta_{\nu}^{0}\beta\frac{x^{i}}{r}\delta_{i\rho}\right)
 \end{align*}
 
 \end_inset
@@ -2605,7 +2618,8 @@ We finish the contraction, hoping for simplifiction:
 
 \end_inset
 
-Well, this is a mess, and we need to symmetrize 
+Well, this is a mess, nothing simplified, and we still need to symmetrize
+ 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -2613,7 +2627,7 @@ Well, this is a mess, and we need to symmetrize
 \begin_inset Formula $\nu$
 \end_inset
 
- here as well.
+ at some point.
  But before we do that, lets try summing, first:
 \begin_inset Formula 
 \begin{align*}
@@ -2642,7 +2656,7 @@ One half of the above, after symmetrizing with
 
 \end_inset
 
- Lets break this apart into space and time parts
+Lets break this apart into space and time parts
 \begin_inset Formula 
 \[
 G_{\;\nu\rho}^{0}=-\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\partial_{\rho}\beta^{k}-\delta_{\rho}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
@@ -2772,7 +2786,7 @@ and then
 
 \end_inset
 
-Well, all this is tedius.
+Well, all this is tedious.
  But the end is in sight.
  Next
 \begin_inset Formula 
@@ -2782,32 +2796,114 @@ G_{\;\nu\rho}^{j}=-\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\r
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-and so
+so
 \begin_inset Formula 
 \[
-\partial_{b}\beta^{k}-\delta_{b}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}=\beta\frac{2r^{2}\delta_{b}^{k}-x^{k}x^{j}\delta_{jb}}{2r^{3}}-\delta_{b}^{0}\frac{\beta^{2}}{2r^{2}}x^{k}
+G_{\;0\rho}^{j}=-\delta_{ik}\beta^{i}\left(\delta_{\rho}^{0}\eta^{jb}\partial_{b}\beta^{k}-\beta^{j}\left(\partial_{\rho}\beta^{k}-\delta_{\rho}^{0}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\right)
 \]
 
 \end_inset
 
+and
+\begin_inset Formula 
+\[
+G_{\;00}^{j}=-\delta_{ik}\beta^{i}\left(\eta^{jb}\partial_{b}\beta^{k}+\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\]
 
+\end_inset
+
+Blechhh.
+ Lets brute force this anyway, just to see.
+\begin_inset Formula 
+\begin{align*}
+G_{\;00}^{j}= & -\delta_{ik}\beta^{i}\left(\eta^{jb}\beta\frac{2r^{2}\delta_{b}^{k}-x^{k}x^{m}\delta_{mb}}{2r^{3}}+\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
+= & -\delta_{ik}\beta^{i}\left(-\beta\frac{2r^{2}\delta^{jk}-x^{k}x^{j}}{2r^{3}}+\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
+= & -\delta_{ik}\beta^{i}\left(-\beta\frac{2r^{2}\delta^{jk}-x^{k}x^{j}}{2r^{3}}+\beta^{j}\frac{\beta^{2}}{2r^{2}}x^{k}\right)\\
+= & -\delta_{ik}\beta^{i}\left(-\beta\frac{2r^{2}\delta^{jk}-x^{k}x^{j}}{2r^{3}}+\beta\frac{\beta^{2}}{2r^{3}}x^{k}x^{j}\right)\\
+= & \delta_{ik}\beta^{i}\frac{\beta}{2r^{3}}\left(2r^{2}\delta^{jk}-\left(1+\beta^{2}\right)x^{k}x^{j}\right)\\
+= & \frac{\beta^{2}}{2r^{4}}\left(2r^{2}x^{j}-\left(1+\beta^{2}\right)r^{2}x^{j}\right)\\
+= & \frac{\beta^{2}}{2r^{2}}x^{j}\left(1-\beta^{2}\right)
+\end{align*}
+
+\end_inset
+
+and so at last, we have a showing of 
+\begin_inset Formula $1-\beta^{2}=1-2m/r$
+\end_inset
+
+ for the first time in the proceedings.
+ Woot! Piss-load of work to get to here.
+ Next
+\begin_inset Formula 
+\[
+G_{\;0m}^{j}=\delta_{ik}\beta^{i}\beta^{j}\partial_{m}\beta^{k}
+\]
+
+\end_inset
+
+while
+\begin_inset Formula 
+\[
+G_{\;\nu0}^{j}=-\delta_{ik}\left(\delta_{\nu}^{i}+\beta^{i}\delta_{\nu}^{0}\right)\left(\eta^{jb}\partial_{b}\beta^{k}+\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\]
+
+\end_inset
+
+so, again,
+\begin_inset Formula 
+\[
+G_{\;00}^{j}=-\delta_{ik}\beta^{i}\left(\eta^{jb}\partial_{b}\beta^{k}+\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\]
+
+\end_inset
+
+which is same as before; good.
+ Then
+\begin_inset Formula 
+\begin{align*}
+G_{\;m0}^{j}= & -\delta_{mk}\left(\eta^{jb}\partial_{b}\beta^{k}+\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)\\
+= & \delta_{mk}\left(\delta^{jb}\partial_{b}\beta^{k}-\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\end{align*}
+
+\end_inset
+
+so
+\begin_inset Formula 
+\begin{align*}
+\Gamma_{\;m0}^{j}=\Gamma_{\;0m}^{j}= & \frac{1}{2}\left(G_{\;m0}^{j}+G_{\;0m}^{j}\right)\\
+= & \frac{1}{2}\left(\delta_{ik}\beta^{i}\beta^{j}\partial_{m}\beta^{k}+\delta_{mk}\delta^{jb}\partial_{b}\beta^{k}-\delta_{mk}\beta^{j}\beta^{\sigma}\partial_{\sigma}\beta^{k}\right)
+\end{align*}
+
+\end_inset
+
+Lordy ugly.
+ It doesn't even look symmetrized.
+ Perhps it will boil down to zero? I give up.
+ Well, for completeness, lets write down:
+\begin_inset Formula 
+\[
+G_{\;nm}^{j}=\delta_{nk}\beta^{j}\partial_{m}\beta^{k}
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+\Gamma_{\;mn}^{j}=\Gamma_{\;nm}^{j}=\frac{1}{2}\beta^{j}\left(\delta_{nk}\partial_{m}\beta^{k}+\delta_{mk}\partial_{n}\beta^{k}\right)
+\]
+
+\end_inset
+
+which isn't sick but still pointless to expand further.
+\end_layout
+
+\begin_layout Standard
+This was a long and tedious exercise.
+ I think I didn't make any mistakes, but who knows.
+ The upshot is that its really stupid to try to do things this way.
+ This exactly why vierbeins are nice, and why one should always work with
+ veirbeins.
 \end_layout
 
 \begin_layout Section*
