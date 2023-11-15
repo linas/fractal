@@ -1787,6 +1787,234 @@ and so indeed the
  I guess the minus sign is the result of infalling.
 \end_layout
 
+\begin_layout Subsection
+Integration
+\end_layout
+
+\begin_layout Standard
+How can we go about integrating 
+\begin_inset Formula $\dot{p}^{a}=\lambda_{\;b}^{a}p^{b}$
+\end_inset
+
+? There are two ways to do this.
+ One way is to integrate using the general form of 
+\begin_inset Formula $\lambda_{\;b}^{a}$
+\end_inset
+
+ without the restriction to 
+\begin_inset Formula $x^{i}=r\delta_{1}^{i}$
+\end_inset
+
+.
+ The other is to restrict, then take a time-step 
+\begin_inset Formula $\Delta\tau$
+\end_inset
+
+, which takes us off of the 
+\begin_inset Formula $x^{1}$
+\end_inset
+
+ axis, and then apply an infiitessimal rotation to get back to the 
+\begin_inset Formula $x^{1}$
+\end_inset
+
+ axis.
+ The second step is possible, because we know, a priori, that the metric
+ has sphere symmetry.
+ Seems that the equation can be factored into two parts: a boost, followed
+ by a rotation.
+\end_layout
+
+\begin_layout Standard
+From first principles, we expect the angular momentum to be conserved.
+ So we can guess that the rotational speed will be 
+\begin_inset Quotes eld
+\end_inset
+
+constant
+\begin_inset Quotes erd
+\end_inset
+
+ in some appropriate way.
+ Lets try this, and see what happens.
+\end_layout
+
+\begin_layout Standard
+We need to solve two coupled equations.
+ One for 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+, which integrates out the be a geodesic 
+\begin_inset Formula $c\left(\tau\right)$
+\end_inset
+
+ in free-fall.
+ Thei is given by 
+\begin_inset Formula $\dot{u}^{a}=\lambda_{\;b}^{a}u^{b}$
+\end_inset
+
+.
+ The second, for arbitrary vectors 
+\begin_inset Formula $p^{a}\in T_{c\left(\tau\right)}M$
+\end_inset
+
+, is 
+\begin_inset Formula $\dot{p}^{a}=\lambda_{\;b}^{a}p^{b}$
+\end_inset
+
+.
+ Set the time step to be 
+\begin_inset Formula $\Delta\tau\ll1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+u^{a}\left(\tau+\Delta\tau\right) & =u^{a}\left(\tau\right)+\lambda_{\;b}^{a}u^{b}\Delta\tau\\
+p^{a}\left(\tau+\Delta\tau\right) & =p^{a}\left(\tau\right)+\lambda_{\;b}^{a}p^{b}\Delta\tau
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\lambda_{\;b}^{a}u^{b}=\frac{\beta}{r}\left[\begin{array}{cccc}
+0 & -u^{1}/2 & u^{2} & u^{3}\\
+-u^{1}/2 & 0 & 0 & 0\\
+u^{2} & 0 & 0 & 0\\
+u^{3} & 0 & 0 & 0
+\end{array}\right]\left[\begin{array}{c}
+u^{0}\\
+u^{1}\\
+u^{2}\\
+u^{3}
+\end{array}\right]=\frac{\beta}{r}\left[\begin{array}{c}
+-\frac{\left(u^{1}\right)^{2}}{2}+\left(u^{2}\right)^{2}+\left(u^{3}\right)^{2}\\
+-u^{1}u^{0}/2\\
+u^{2}u^{0}\\
+u^{3}u^{0}
+\end{array}\right]
+\]
+
+\end_inset
+
+Writing 
+\begin_inset Formula 
+\begin{align*}
+c\left(\tau+\Delta\tau\right)= & c\left(\tau\right)+\gamma_{a}\lambda_{\;b}^{a}u^{b}\Delta\tau\\
+= & c\left(\tau\right)+\mathbf{g}_{\mu}v^{\mu}\Delta\tau
+\end{align*}
+
+\end_inset
+
+And so we plotz along.
+ Using the identities 
+\begin_inset Formula $\gamma_{a}^{\nu}\mathbf{g}_{\mu}^{a}=\delta_{\mu}^{\nu}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{a}^{\mu}\mathbf{g}_{\mu}^{b}=\delta_{a}^{b}$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See appendix for details on these identities.
+\end_layout
+
+\end_inset
+
+ write
+\begin_inset Formula 
+\begin{align*}
+v^{\nu}= & \gamma_{\;a}^{\nu}\mathbf{g}_{\;\mu}^{a}v^{\mu}\\
+= & \gamma_{\;a}^{\nu}\lambda_{\;b}^{a}u^{b}
+\end{align*}
+
+\end_inset
+
+What's the matrix form for 
+\begin_inset Formula $\gamma_{\;a}^{\nu}$
+\end_inset
+
+? Using the convention that upper indexes are rows, lower indexes are columns,
+ one has 
+\begin_inset Formula 
+\[
+\mathbf{\gamma}_{\;a}^{\mu}=\left[\begin{array}{cccc}
+1 & \beta^{1} & \beta^{2} & \beta^{3}\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+which
+\end_layout
+
+\begin_layout Standard
+Use the relations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\gamma_{0} & =\mathbf{g}_{0}-\beta^{i}\mathbf{g}_{i}\\
+\gamma_{i} & =\mathbf{g}_{i}
+\end{align*}
+
+\end_inset
+
+or with the undertanding that 
+\end_layout
+
+\begin_layout Standard
+we deduce that
+\begin_inset Formula 
+\[
+\left[\begin{array}{c}
+\mathbf{g}_{0}\\
+\mathbf{g}_{1}\\
+\mathbf{g}_{2}\\
+\mathbf{g}_{3}
+\end{array}\right]=\left[\begin{array}{cccc}
+1 & \beta^{1} & \beta^{2} & \beta^{3}\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]\left[\begin{array}{c}
+\gamma_{0}\\
+\gamma_{1}\\
+\gamma_{2}\\
+\gamma_{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbf{g}_{\mu}^{a}=\left[\begin{array}{cccc}
+1 & -\beta^{1} & -\beta^{2} & -\beta^{3}\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 The End
 \end_layout
