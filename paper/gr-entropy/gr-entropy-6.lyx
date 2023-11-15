@@ -1305,9 +1305,10 @@ This looks entirely reasonable, we take it as gospel.
 \begin_layout Standard
 The Christoffel symbols (copied, guessing sign) are
 \begin_inset Formula 
-\[
-\Gamma_{ij}^{0}=\Gamma_{0j}^{i}=-\frac{\partial\beta^{i}}{\partial x^{j}}\quad\mbox{for }i,j=1,2,3
-\]
+\begin{align*}
+\Gamma_{0j}^{i} & =-\frac{\partial\beta^{i}}{\partial x^{j}}\\
+\Gamma_{ij}^{0} & =\frac{\partial\beta^{i}}{\partial x^{j}}\quad\mbox{for }i,j=1,2,3
+\end{align*}
 
 \end_inset
 
@@ -1422,7 +1423,7 @@ This can be treated as a differential equation, which, when integrated,
 Plugging through for the Christoffel symbols, the equations of motion are
 \begin_inset Formula 
 \begin{align*}
-\frac{dp^{0}}{d\tau} & =\frac{\partial\beta_{i}}{\partial x^{j}}p^{i}u^{j}\\
+\frac{dp^{0}}{d\tau} & =-\frac{\partial\beta_{i}}{\partial x^{j}}p^{i}u^{j}\\
 \frac{dp^{i}}{d\tau} & =\frac{\partial\beta^{i}}{\partial x^{j}}p^{0}u^{j}\quad\mbox{for }i,j=1,2,3
 \end{align*}
 
@@ -1493,7 +1494,7 @@ w^{i} & =\frac{\partial\beta^{i}}{\partial x^{j}}u^{j}
 The equations of motion simplify to 
 \begin_inset Formula 
 \begin{align*}
-\frac{dp^{0}}{d\tau} & =w_{i}p^{i}\\
+\frac{dp^{0}}{d\tau} & =-w_{i}p^{i}\\
 \frac{dp^{i}}{d\tau} & =w^{i}p^{0}
 \end{align*}
 
@@ -1509,13 +1510,21 @@ This has exactly the algebraic structure of an infinitessimal Lorentz boost,
  In matrix form
 \begin_inset Formula 
 \[
+\dot{p}^{a}=\lambda_{\;b}^{a}p^{b}
+\]
+
+\end_inset
+
+or written in component form,
+\begin_inset Formula 
+\[
 \left[\begin{array}{c}
 \dot{p}^{0}\\
 \dot{p}^{1}\\
 \dot{p}^{2}\\
 \dot{p}^{3}
 \end{array}\right]=\left[\begin{array}{cccc}
-0 & -w^{1} & -w^{2} & -w^{3}\\
+0 & w^{1} & w^{2} & w^{3}\\
 w^{1} & 0 & 0 & 0\\
 w^{2} & 0 & 0 & 0\\
 w^{3} & 0 & 0 & 0
@@ -1529,17 +1538,16 @@ p^{3}
 
 \end_inset
 
-with the matrix being 
+with the matrix 
 \begin_inset Formula $\lambda$
 \end_inset
 
- and we see the transpose is evidently 
-\begin_inset Formula $\lambda^{T}=-\lambda$
+ behaving properly under the transpose, with 
+\begin_inset Formula $\lambda^{T}=\lambda$
 \end_inset
 
- wtf...
- now I'm confused again.
- Why isn't everything trivial? 
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1561,12 +1569,30 @@ And yet, its odd.
 \end_inset
 
 .
- The above is not that; instead, 
+ That is, in flat space, 
+\begin_inset Formula $\Gamma_{\mu\nu}^{0}=-\Gamma_{0\nu}^{\mu}=\delta_{\mu\nu}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\lambda_{\;\nu}^{\mu}=-\delta_{0}^{\mu}u_{\nu}+u^{\mu}\delta_{\nu}^{0}$
+\end_inset
+
+ (extra minus sign because, again, 
+\begin_inset Formula $u_{\nu}=-u^{\nu}$
+\end_inset
+
+) and so the tangent vector 
+\begin_inset Formula $u^{a}$
+\end_inset
+
+ provides the infinitessimal Lorentz transform.
+ Here, it is twisted; instead, 
 \begin_inset Formula $w^{a}=M_{\;b}^{a}u^{b}\ne u^{a}$
 \end_inset
 
 .
- So our virtual lab is screwy.
+ So yes, the tetrad frame defines a free-falling virtual lab, but it is
+ screwy.
  Yes, relative motion is given by a boost; but that boost is not the one
  of flat space.
  It's messed up.
@@ -1664,7 +1690,7 @@ u^{3}
 The equations 
 \begin_inset Formula 
 \begin{align*}
-\frac{dp^{0}}{d\tau} & =w_{i}p^{i}\\
+\frac{dp^{0}}{d\tau} & =-w_{i}p^{i}\\
 \frac{dp^{i}}{d\tau} & =w^{i}p^{0}
 \end{align*}
 
@@ -1673,7 +1699,7 @@ The equations
 can be written in matrix form as
 \begin_inset Formula 
 \[
-\frac{dp^{a}}{d\tau}=\Lambda_{\;b}^{a}p^{b}
+\frac{dp^{a}}{d\tau}=\lambda_{\;b}^{a}p^{b}
 \]
 
 \end_inset
@@ -1681,8 +1707,8 @@ can be written in matrix form as
 with
 \begin_inset Formula 
 \[
-\Lambda_{\;b}^{a}=\left[\begin{array}{cccc}
-0 & u^{1}/2 & -u^{2} & -u^{3}\\
+\lambda_{\;b}^{a}=\left[\begin{array}{cccc}
+0 & -u^{1}/2 & u^{2} & u^{3}\\
 -u^{1}/2 & 0 & 0 & 0\\
 u^{2} & 0 & 0 & 0\\
 u^{3} & 0 & 0 & 0
@@ -1691,21 +1717,58 @@ u^{3} & 0 & 0 & 0
 
 \end_inset
 
-which is effed up because its not orthogonal, its not an elt of 
-\begin_inset Formula $O(1,3)$
+It's a generator of an infinitessimal boost.
+ The 
+\begin_inset Formula $u^{1}$
 \end_inset
 
-.
- Recall, it is orthogonal iff 
-\begin_inset Formula $\eta=\Lambda^{T}\eta\Lambda$
+ direction is the infalling direction; the 
+\begin_inset Formula $u^{2}$
 \end_inset
 
- and this ain't that.
- Something's wrong; I'm confused.
- Doohh.
- It's a generator of an infinitessimal boost.
- That means half the stuff you wrote above is just lain wrong.
- Try again.
+ and 
+\begin_inset Formula $u^{3}$
+\end_inset
+
+ directions are flat-space directions.
+ Recall, for flat space, we'd have 
+\begin_inset Formula $\lambda=\lambda_{\mbox{flat}}=\kappa=K_{i}u^{i}$
+\end_inset
+
+ with 
+\begin_inset Formula $K_{i}$
+\end_inset
+
+ the conventiona generators of boosts.
+ That is, in flat space, 
+\begin_inset Formula 
+\[
+\kappa_{\;b}^{a}=\left[\begin{array}{cccc}
+0 & u^{1} & u^{2} & u^{3}\\
+u^{1} & 0 & 0 & 0\\
+u^{2} & 0 & 0 & 0\\
+u^{3} & 0 & 0 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+and so indeed the 
+\begin_inset Formula $u^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $u^{3}$
+\end_inset
+
+ components are flat.
+ The 
+\begin_inset Formula $u^{1}$
+\end_inset
+
+ direction is both sign-reversed, and cut in half.
+ I'm not quite sure how to explain this.
+ I guess the minus sign is the result of infalling.
 \end_layout
 
 \begin_layout Section
