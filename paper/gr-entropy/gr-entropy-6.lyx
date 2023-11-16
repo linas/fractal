@@ -1840,6 +1840,15 @@ constant
 \end_layout
 
 \begin_layout Standard
+Hmm.
+ Based on what's happened below, this is a long and tedious calculation
+ (again) with much heat and little light.
+ All perspiration, no inspiration.
+ Working harder, not smarter.
+ Alas, life is a tragedy.
+\end_layout
+
+\begin_layout Standard
 We need to solve two coupled equations.
  One for 
 \begin_inset Formula $u^{a}$
@@ -1878,7 +1887,11 @@ p^{a}\left(\tau+\Delta\tau\right) & =p^{a}\left(\tau\right)+\lambda_{\;b}^{a}p^{
 
 \end_inset
 
-where 
+For variety, well do this section using matrix notation instead of index
+ notation.
+ I'm sick of index notation; maybe matrix notation will be more fun.
+ It does have it's own drawbacks, though...
+ 
 \begin_inset Formula 
 \[
 \lambda_{\;b}^{a}u^{b}=\frac{\beta}{r}\left[\begin{array}{cccc}
@@ -1947,72 +1960,375 @@ What's the matrix form for
 \begin_inset Formula 
 \[
 \mathbf{\gamma}_{\;a}^{\mu}=\left[\begin{array}{cccc}
-1 & \beta^{1} & \beta^{2} & \beta^{3}\\
-0 & 1 & 0 & 0\\
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1
+1 & 0 & 0 & 0\\
+-\beta^{1} & 1 & 0 & 0\\
+-\beta^{2} & 0 & 1 & 0\\
+-\beta^{3} & 0 & 0 & 1
 \end{array}\right]
 \]
 
 \end_inset
 
-which
-\end_layout
+which has the property that 
+\begin_inset Formula 
+\[
+v_{\mbox{radial}}^{\mu}=\left[\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+-\beta^{1} & 1 & 0 & 0\\
+-\beta^{2} & 0 & 1 & 0\\
+-\beta^{3} & 0 & 0 & 1
+\end{array}\right]\left[\begin{array}{c}
+1\\
+0\\
+0\\
+0
+\end{array}\right]=\left[\begin{array}{c}
+1\\
+-\beta^{1}\\
+-\beta^{2}\\
+-\beta^{3}
+\end{array}\right]
+\]
 
-\begin_layout Standard
-Use the relations
-\end_layout
+\end_inset
 
-\begin_layout Standard
+which mathces.
+ 
+\begin_inset Formula $v_{\mbox{radial}}^{\mu}=\left(1,-\beta^{1},-\beta^{2},-\beta^{3}\right)$
+\end_inset
+
+ from an earlier section.
+ This is all very belabored.
+ In the current frame, 
+\begin_inset Formula $\beta^{1}=\beta x^{1}/r=\beta$
+\end_inset
+
+ while 
+\begin_inset Formula $\beta^{2}=\beta^{3}=0$
+\end_inset
+
+ and so in this frame, 
 \begin_inset Formula 
 \begin{align*}
-\gamma_{0} & =\mathbf{g}_{0}-\beta^{i}\mathbf{g}_{i}\\
-\gamma_{i} & =\mathbf{g}_{i}
+\gamma_{\;a}^{\mu}\lambda_{\;b}^{a}= & \left[\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+-\beta & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{array}\right]\frac{\beta}{r}\left[\begin{array}{cccc}
+0 & -u^{1}/2 & u^{2} & u^{3}\\
+-u^{1}/2 & 0 & 0 & 0\\
+u^{2} & 0 & 0 & 0\\
+u^{3} & 0 & 0 & 0
+\end{array}\right]\\
+= & \frac{\beta}{r}\left[\begin{array}{cccc}
+0 & -u^{1}/2 & u^{2} & u^{3}\\
+-u^{1}/2 & \;\beta u^{1}/2 & -\beta u^{2} & -\beta u^{3}\\
+u^{2} & 0 & 0 & 0\\
+u^{3} & 0 & 0 & 0
+\end{array}\right]
 \end{align*}
 
 \end_inset
 
-or with the undertanding that 
+Bleech.
+ Next, we want 
+\begin_inset Formula $q^{\mu}=\gamma_{\;a}^{\mu}\lambda_{\;b}^{a}p^{b}$
+\end_inset
+
+ which gives
+\begin_inset Formula 
+\[
+q^{\mu}=\left[\begin{array}{c}
+q^{0}\\
+q^{1}\\
+q^{2}\\
+q^{3}
+\end{array}\right]=\frac{\beta}{r}\left[\begin{array}{cccc}
+0 & -u^{1}/2 & u^{2} & u^{3}\\
+-u^{1}/2 & \;\beta u^{1}/2 & -\beta u^{2} & -\beta u^{3}\\
+u^{2} & 0 & 0 & 0\\
+u^{3} & 0 & 0 & 0
+\end{array}\right]\left[\begin{array}{c}
+p^{0}\\
+p^{1}\\
+p^{2}\\
+p^{3}
+\end{array}\right]=\frac{\beta}{r}\left[\begin{array}{c}
+p^{2}u^{2}-p^{1}u^{1}/2\\
+\left(\beta p^{1}-p^{0}\right)u^{1}/2-\beta\left(u^{2}+u^{3}\right)\\
+p^{0}u^{2}\\
+p^{0}u^{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+Bleech.
+ Still ugly.
+ Next, 
+\begin_inset Formula $v^{\mu}=\gamma_{\;a}^{\mu}\lambda_{\;b}^{a}u^{b}$
+\end_inset
+
+ gives
+\begin_inset Formula 
+\[
+v^{\mu}=\left[\begin{array}{c}
+v^{0}\\
+v^{1}\\
+v^{2}\\
+v^{3}
+\end{array}\right]=\frac{\beta}{r}\left[\begin{array}{c}
+u^{2}u^{2}-u^{1}u^{1}/2\\
+\left(\beta u^{1}-u^{0}\right)u^{1}/2-\beta\left(u^{2}+u^{3}\right)\\
+u^{0}u^{2}\\
+u^{0}u^{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $v^{\mu}\Delta\tau$
+\end_inset
+
+ gives the coordinate change 
+\begin_inset Formula $c\left(\tau+\Delta\tau\right)-c\left(\tau\right)=\mathbf{g}_{\mu}v^{\mu}\Delta\tau$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-we deduce that
+We now wish to apply a rotation 
+\begin_inset Formula $R_{\;\mu}^{\nu}$
+\end_inset
+
+ to bring 
+\begin_inset Formula $c\left(\tau+\Delta\tau\right)$
+\end_inset
+
+ so that it has no components in the 2 and 3 directions.
+ That is, find 
+\begin_inset Formula $R_{\;\mu}^{\nu}$
+\end_inset
+
+ such that 
+\begin_inset Formula $c\left(\tau+\Delta\tau\right)=\mathbf{g}_{\mu}c^{\mu}\left(\tau+\Delta\tau\right)$
+\end_inset
+
+ has 
+\begin_inset Formula $c^{2}=c^{3}=0$
+\end_inset
+
+.
+ Belaboring the point some more,
 \begin_inset Formula 
 \[
-\left[\begin{array}{c}
-\mathbf{g}_{0}\\
-\mathbf{g}_{1}\\
-\mathbf{g}_{2}\\
-\mathbf{g}_{3}
+c^{\nu}\left(\tau+\Delta\tau\right)=R_{\;\mu}^{\nu}\left(c^{\mu}\left(\tau\right)+v^{\mu}\Delta\tau\right)
+\]
+
+\end_inset
+
+Bleech.
+ In matrix notation,
+\begin_inset Formula 
+\[
+c^{\mu}\left(\tau+\Delta\tau\right)=\left[\begin{array}{c}
+c^{0}\left(\tau+\Delta\tau\right)\\
+c^{1}\left(\tau+\Delta\tau\right)\\
+0\\
+0
 \end{array}\right]=\left[\begin{array}{cccc}
-1 & \beta^{1} & \beta^{2} & \beta^{3}\\
-0 & 1 & 0 & 0\\
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1
-\end{array}\right]\left[\begin{array}{c}
-\gamma_{0}\\
-\gamma_{1}\\
-\gamma_{2}\\
-\gamma_{3}
+1 & 0 & 0 & 0\\
+0\\
+0 &  & R\\
+0
+\end{array}\right]\frac{\beta}{r}\left[\begin{array}{c}
+\left(u^{2}u^{2}-u^{1}u^{1}/2\right)\Delta\tau+c^{0}\left(\tau\right)\\
+\left(\left(\beta u^{1}-u^{0}\right)u^{1}/2-\beta\left(u^{2}+u^{3}\right)\right)\Delta\tau+c^{1}\left(\tau\right)\\
+u^{0}u^{2}\Delta\tau\\
+u^{0}u^{3}\Delta\tau
 \end{array}\right]
 \]
 
 \end_inset
 
+with 
+\begin_inset Formula $R$
+\end_inset
 
+ a 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ orthogonal matrix 
+\begin_inset Formula $RR^{T}=I$
+\end_inset
+
+ and so with three free components and three eqns so lets gooo.
+ But first, the time coordinate is given by
+\begin_inset Formula 
+\begin{align*}
+c^{0}\left(\tau+\Delta\tau\right) & =c^{0}\left(\tau\right)+v^{0}\Delta\tau
+\end{align*}
+
+\end_inset
+
+To find 
+\begin_inset Formula $R$
+\end_inset
+
+ lets use 
+\begin_inset Formula $\Delta\tau\ll1$
+\end_inset
+
+ to observe that 
+\begin_inset Formula $v^{2}\Delta\tau\ll c^{1}\left(\tau\right)$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $v^{3}\Delta\tau\ll c^{1}\left(\tau\right)$
+\end_inset
+
+ so 
+\begin_inset Formula $R_{\;1}^{2}\ll1$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{\;1}^{3}\ll1$
+\end_inset
+
+.
+ Write
 \begin_inset Formula 
 \[
-\mathbf{g}_{\mu}^{a}=\left[\begin{array}{cccc}
-1 & -\beta^{1} & -\beta^{2} & -\beta^{3}\\
-0 & 1 & 0 & 0\\
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1
+R=\exp L_{k}\theta_{k}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\left[L_{i},L_{j}\right]=\epsilon_{ijk}L_{k}$
+\end_inset
+
+ are the generators of rotations and we don't bother with upper/lower indexes
+ to avoid sign mistakes; these will be just plain Euclidean.
+ The standard basis is
+\begin_inset Formula 
+\[
+L_{x}=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+0 & 0 & -1\\
+0 & 1 & 0
+\end{array}\right]\quad L_{y}=\left[\begin{array}{ccc}
+0 & 0 & 1\\
+0 & 0 & 0\\
+-1 & 0 & 0
+\end{array}\right]\quad L_{z}=\left[\begin{array}{ccc}
+0 & -1 & 0\\
+1 & 0 & 0\\
+0 & 0 & 0
 \end{array}\right]
 \]
 
 \end_inset
 
+Comparing, 
+\begin_inset Formula $R_{\;1}^{2}\ll1$
+\end_inset
 
+ is satisfied iff 
+\begin_inset Formula $\theta_{z}\ll1$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{\;1}^{3}\ll1$
+\end_inset
+
+ iff 
+\begin_inset Formula $\theta_{y}\ll1$
+\end_inset
+
+ so to first order in these two angles, 
+\begin_inset Formula 
+\begin{align*}
+R= & \left[\begin{array}{ccc}
+1 & -\theta_{y} & \theta_{z}\\
+\theta_{y} & 1 & 0\\
+-\theta_{z} & 0 & 1
+\end{array}\right]\left[\begin{array}{ccc}
+1 & 0 & 0\\
+0 & c & -s\\
+0 & s & c
+\end{array}\right]\\
+= & \left[\begin{array}{ccc}
+1 & s\theta_{z}-c\theta_{y} & s\theta_{y}+c\theta_{z}\\
+\theta_{y} & c & -s\\
+-\theta_{z} & s & c
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $s=\sin\theta_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $c=\cos\theta_{x}$
+\end_inset
+
+.
+ Plugging through, the bottom row gives
+\begin_inset Formula 
+\[
+0=-\theta_{z}\left(c^{1}\left(\tau\right)+v^{1}\Delta\tau\right)+\left(\sin\theta_{x}v^{2}+\cos\theta_{x}v^{3}\right)\Delta\tau
+\]
+
+\end_inset
+
+or, to first order, 
+\begin_inset Formula 
+\[
+\theta_{z}=\frac{\sin\theta_{x}v^{2}+\cos\theta_{x}v^{3}}{r\left(\tau\right)}\Delta\tau
+\]
+
+\end_inset
+
+Recall that, by construction, 
+\begin_inset Formula $c^{1}\left(\tau\right)=r\left(\tau\right)$
+\end_inset
+
+.
+ Similarly, the middle row provides
+\begin_inset Formula 
+\[
+\theta_{y}=-\frac{\cos\theta_{x}v^{2}-\sin\theta_{x}v^{3}}{r\left(\tau\right)}\Delta\tau
+\]
+
+\end_inset
+
+The top row requires
+\begin_inset Formula 
+\begin{align*}
+c^{1}\left(\tau+\Delta\tau\right)= & c^{1}\left(\tau\right)+\left(v^{1}+\left(\theta_{z}\sin\theta_{x}-\theta_{y}\cos\theta_{x}\right)v^{2}+\left(\theta_{y}\sin\theta_{x}+\theta_{z}\cos\theta_{x}\right)v^{3}\right)\Delta\tau
+\end{align*}
+
+\end_inset
+
+Fuuu except we dont know what 
+\begin_inset Formula $c^{1}\left(\tau+\Delta\tau\right)$
+\end_inset
+
+ is so we can't solve this for 
+\begin_inset Formula $\theta_{x}$
+\end_inset
+
+.
+ Yet clearly ...
+ what am I missing ...
 \end_layout
 
 \begin_layout Section
