@@ -2374,113 +2374,69 @@ Recall that, by construction,
 The top row requires
 \begin_inset Formula 
 \begin{align*}
-\xi^{1}\left(\tau+\Delta\tau\right)= & r\left(\tau\right)+\left(v^{1}+\left(\theta_{z}\sin\theta_{x}-\theta_{y}\cos\theta_{x}\right)v^{2}+\left(\theta_{y}\sin\theta_{x}+\theta_{z}\cos\theta_{x}\right)v^{3}\right)\Delta\tau
+\xi^{1}\left(\tau+\Delta\tau\right)= & r\left(\tau\right)+v^{1}\Delta\tau
 \end{align*}
 
 \end_inset
 
-Geez.
- This keeps getting worse and worse.
- We don't know what 
-\begin_inset Formula $\xi^{1}\left(\tau+\Delta\tau\right)$
-\end_inset
-
- is so we can't solve the above for 
+which does not contstrain 
 \begin_inset Formula $\theta_{x}$
 \end_inset
 
-, yet.
- To get it, we need the norm.
- Write 
-\begin_inset Formula $\left\Vert c\right\Vert ^{2}=c^{\mu}c_{\mu}=\left\Vert \xi\right\Vert ^{2}$
+ in any way.
+ The screw-up here is I think we can safely take 
+\begin_inset Formula $\theta_{x}=0$
 \end_inset
 
- since 
-\begin_inset Formula $c$
-\end_inset
-
- and 
-\begin_inset Formula $\xi$
-\end_inset
-
- differ by a 3–rotation, which won't change the norm.
- To first order in 
-\begin_inset Formula $\Delta\tau$
-\end_inset
-
-,
-\begin_inset Formula 
-\begin{align*}
-\left\Vert c\left(\tau+\Delta\tau\right)\right\Vert ^{2}= & \left\Vert c\left(\tau\right)\right\Vert ^{2}+2c_{\mu}\left(\tau\right)v^{\mu}\Delta\tau\\
-= & \left\Vert c\left(\tau\right)\right\Vert ^{2}+2\left(c^{0}v^{0}-c^{1}v^{1}\right)\Delta\tau\\
-= & c^{0}c^{0}-c^{1}c^{1}+2\left(c^{0}v^{0}-c^{1}v^{1}\right)\Delta\tau\\
-= & \left\Vert \xi\left(\tau+\Delta\tau\right)\right\Vert ^{2}\\
-= & \xi^{0}\xi^{0}-\xi^{1}\xi^{1}
-\end{align*}
-
-\end_inset
-
-where 
-\begin_inset Formula $c^{0}=c^{0}\left(\tau\right)$
-\end_inset
-
- is just some initial time coordinate on the starting point of the curve,
- and 
-\begin_inset Formula $c^{1}=c^{1}\left(\tau\right)=r\left(\tau\right)=r$
-\end_inset
-
- is the initial x-coordinate of the starting point of the curve.
- Meanwhile, 
+ which gives
 \begin_inset Formula 
 \[
-\xi^{0}=\xi^{0}\left(\tau+\Delta\tau\right)=c^{0}\left(\tau\right)+v^{0}\Delta\tau
+\theta_{z}=\frac{v^{3}}{r}\Delta\tau\qquad\theta_{y}=-\frac{v^{2}}{r}\Delta\tau
 \]
 
 \end_inset
 
-from before, and 
+so 
 \begin_inset Formula 
 \[
-\xi^{1}=\xi^{1}\left(\tau+\Delta\tau\right)
+R=\left[\begin{array}{ccc}
+1 & \frac{v^{2}}{r}\Delta\tau & \frac{v^{3}}{r}\Delta\tau\\
+-\frac{v^{2}}{r}\Delta\tau & 1 & 0\\
+-\frac{v^{3}}{r}\Delta\tau & 0 & 1
+\end{array}\right]
 \]
 
 \end_inset
 
-is the unknown to be solved for.
- To first order, 
-\begin_inset Formula $\xi^{0}\xi^{0}=c^{0}c^{0}+2c^{0}v^{0}\Delta\tau$
-\end_inset
-
- so plug in and rearrange terms to get
+where, again
 \begin_inset Formula 
 \[
-\xi^{1}\xi^{1}=c^{1}c^{1}+2c^{1}v^{1}\Delta\tau
+\xi^{i}\left(\tau+\Delta\tau\right)=\left[\begin{array}{c}
+\xi^{1}\left(\tau+\Delta\tau\right)\\
+0\\
+0
+\end{array}\right]=\left[\begin{array}{ccc}
+1 & \frac{v^{2}}{r}\Delta\tau & \frac{v^{3}}{r}\Delta\tau\\
+-\frac{v^{2}}{r}\Delta\tau & 1 & 0\\
+-\frac{v^{3}}{r}\Delta\tau & 0 & 1
+\end{array}\right]\left[\begin{array}{c}
+r+v^{1}\Delta\tau\\
+v^{2}\Delta\tau\\
+v^{3}\Delta\tau
+\end{array}\right]
 \]
 
 \end_inset
 
-Taking the square root, to first order
+and so finally, 
 \begin_inset Formula 
 \[
-\xi^{1}=r+2c^{1}v^{1}\Delta\tau
+\xi^{1}\left(\tau+\Delta\tau\right)=r+v^{1}\Delta\tau
 \]
 
 \end_inset
 
-and so finally we arrive at 
-\begin_inset Formula 
-\[
-2rv^{1}=v^{1}+\left(\theta_{z}\sin\theta_{x}-\theta_{y}\cos\theta_{x}\right)v^{2}+\left(\theta_{y}\sin\theta_{x}+\theta_{z}\cos\theta_{x}\right)v^{3}
-\]
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Fuuu I made a mistake.
- wrong order, second order 
+which OMG was a lot of pain for little gain.
 \end_layout
 
 \begin_layout Section
