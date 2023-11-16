@@ -2439,6 +2439,179 @@ and so finally,
 which OMG was a lot of pain for little gain.
 \end_layout
 
+\begin_layout Standard
+So lets take stock.
+ Where we at? We've got:
+\end_layout
+
+\begin_layout Itemize
+Given an initial velocity 
+\begin_inset Formula $u^{a}=u^{a}\left(\tau\right)$
+\end_inset
+
+ in the tetrad frame, a velocity 
+\begin_inset Formula $v^{\mu}$
+\end_inset
+
+ in the coordinate frame is obtained.
+\end_layout
+
+\begin_layout Itemize
+This can be used to obtain the next point 
+\begin_inset Formula $c\left(\tau+\Delta\tau\right)$
+\end_inset
+
+ on the curve.
+\end_layout
+
+\begin_layout Itemize
+We also get a 3D orthogonal rotation matrix that follows the curve; i.e.
+ it projects out the radial coordinate and supplies only the transverse
+ angular part of the trajectory.
+\end_layout
+
+\begin_layout Standard
+What we still need to do:
+\end_layout
+
+\begin_layout Itemize
+Compute 
+\begin_inset Formula $u^{a}\left(\tau+\Delta\tau\right)$
+\end_inset
+
+ by transforming the rotation to the tetrad frame.
+ This is required, because the the base assumption for the 
+\begin_inset Quotes eld
+\end_inset
+
+simplified
+\begin_inset Quotes erd
+\end_inset
+
+ form always places the current location on the positive 
+\begin_inset Formula $x^{1}$
+\end_inset
+
+–axis.
+\end_layout
+
+\begin_layout Itemize
+Explain why the heck we're doing this, anyway.
+ As a means of numerical integration, the above is terrible.
+ Actual computation would just use Runge-Kutta or whattever, obtained from
+ some existing package, and just plug in the raw tetrad-frame eqns.
+\end_layout
+
+\begin_layout Standard
+I'm not sure what I learned here, or what the point of any of this was.
+ I wanted to do something with this stuff, but what? I've forgotten.
+\end_layout
+
+\begin_layout Section
+Propagator
+\end_layout
+
+\begin_layout Standard
+There are still a few questions that are interesting, and I have no insight
+ into:
+\end_layout
+
+\begin_layout Itemize
+Let's fill the river with uniformly distributed dust.
+ What does 
+\begin_inset Quotes eld
+\end_inset
+
+uniformly distributed
+\begin_inset Quotes erd
+\end_inset
+
+ mean? Well, it has a clear meaning at 
+\begin_inset Formula $r\to\infty$
+\end_inset
+
+ so we can start there, and let it fall.
+\end_layout
+
+\begin_layout Itemize
+Consider an observer located at point 
+\begin_inset Formula $p$
+\end_inset
+
+ (at coordinate 
+\begin_inset Formula $r_{0}$
+\end_inset
+
+).
+ Suppose the observer emits a flash of light.
+ After elapsed proper time 
+\begin_inset Formula $\Delta\tau$
+\end_inset
+
+, what is the enclosed volume? That is, how much of the dust is in that
+ volume? Is it the usual 
+\begin_inset Formula $V=4\pi\Delta\tau^{3}/3$
+\end_inset
+
+ or is it something else?
+\end_layout
+
+\begin_layout Itemize
+If each particle of dust is emitting light, what is the brightness of the
+ sky, as observed by the observer located at coordinate 
+\begin_inset Formula $r_{0}$
+\end_inset
+
+? What is the brightnesss, shell-by-shell?
+\end_layout
+
+\begin_layout Itemize
+What is the redshift/blue-shift, seen in each direction? Shell-by-shell?
+\end_layout
+
+\begin_layout Standard
+These questions all seem relevant to the constructon of a propagator on
+ this space.
+ Or perhaps more accurately, what is the propagator? If the observer is
+ at point 
+\begin_inset Formula $p$
+\end_inset
+
+, what is the null (massless) scalar propagator from 
+\begin_inset Formula $p$
+\end_inset
+
+ to some other point 
+\begin_inset Formula $q$
+\end_inset
+
+? This would be the wave-equation propagator (massless Klein–Gordon).
+ What about massive Klien–Gordon? What about spinors? What about light?
+\end_layout
+
+\begin_layout Standard
+How does one obtain the propagator? Must one write down a complete set of
+ formal modes, in the good-olde-fashioned way? Some of these are absorbed
+ by the EH.
+ Why can't I just be real dumb about the propagator? i.e.
+ solve the the null geodesic between 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $q$
+\end_inset
+
+, compute the redshift on it, and then compute the local density of dust
+ at 
+\begin_inset Formula $q$
+\end_inset
+
+? This should work, sure-as-shootin, right? Or will I just end up doing
+ a whole bunch of ugly calculations that don't particularly go anywhere,
+ banging my head on a rock? Perhaps more reading is in order...
+\end_layout
+
 \begin_layout Section
 The End
 \end_layout
