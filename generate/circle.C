@@ -185,14 +185,17 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
  */
 
 #define LAP_SETTLE_TIME 	90
-#define LAP_RSAMP 200
+#define LAP_RSAMP 20
 
 double
-circle_laplacian (double omega, double K, int itermax)
+circle_laplacian (double omega, double K, int itermax, double param)
 
 {
-	double delta_K = 0.001;
-	double delta_omega = 0.001;
+	// Sample offsets. We want this to be the distance to the neighboring
+	// pixel, more or less. User-specified. A hard-coded 0.001 is not a
+	// bad place to start.
+	double delta_K = param; // 0.001;
+	double delta_omega = param; // 0.001;
 
 	// The four discrete Laplacian sample points.
 	double K_m = K - delta_K;
@@ -212,7 +215,7 @@ circle_laplacian (double omega, double K, int itermax)
 
 		/* First, we give a spin for 500 cycles, giving the non-chaotic
 		 * parts a chance to phase-lock */
-		for (iter=0; iter<LAP_SETTLE_TIME; iter++)
+		for (int iter=0; iter<LAP_SETTLE_TIME; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
 		}
@@ -222,7 +225,7 @@ circle_laplacian (double omega, double K, int itermax)
 		double xop = x;
 		double xkm = x;
 		double xkp = x;
-		for (iter=0; iter < RSAMP; iter++)
+		for (int iter=0; iter < LAP_RSAMP; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
 			xom += omega_m - K * sin (2.0 * M_PI * xom);
@@ -294,14 +297,15 @@ bifurcation_diagram
 
 static double circle_map (double omega, double K, int itermax, double param)
 {
-	// return winding_number (omega,K, itermax);
-	// return noisy_winding_number (omega,K, itermax, param);
-	return rms_winding_number (omega,K, itermax);
-	// return circle_poincare_recurrance_time (omega,K, itermax);
+	// return winding_number (omega, K, itermax);
+	// return noisy_winding_number (omega, K, itermax, param);
+	// return rms_winding_number (omega, K, itermax);
+	// return circle_poincare_recurrance_time (omega, K, itermax);
+	return circle_laplacian (omega, K, itermax, param);
 }
 
-// DECL_MAKE_HEIGHT (circle_map);
+DECL_MAKE_HEIGHT (circle_map);
 
-DECL_MAKE_BIFUR(bifurcation_diagram)
+// DECL_MAKE_BIFUR(bifurcation_diagram)
 
 /* --------------------------- END OF LIFE ------------------------- */
