@@ -119,7 +119,7 @@ static double rms_winding_number (double omega, double K, int itermax)
 
 #define EPSILON  	0.003
 #define SETTLE_TIME 	90
-#define RSAMP 200
+#define RSAMP 200            // Samples per pixel
 
 double
 circle_poincare_recurrance_time (double omega, double K, int itermax)
@@ -184,7 +184,10 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
  * and then just average this together over all n.
  */
 
-#define LAP_SETTLE_TIME 	90
+// #define LAP_SETTLE_TIME 	90
+#define LAP_SETTLE_TIME 	0
+
+// Samples per pixel
 #define LAP_RSAMP 20
 
 double
