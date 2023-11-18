@@ -45,7 +45,7 @@ static double winding_number (double omega, double K, int itermax)
 		}
 		end += x;
 	}
-	
+
 	x = (end-start) / ((double) cnt);
 	return x;
 }
@@ -72,7 +72,7 @@ static double noisy_winding_number (double omega, double K, int itermax, double 
 		// t -= 0.5;
 		x += noise*t;
   	}
-	
+
 	x /= ((double) cnt);
 	return x;
 }
@@ -105,7 +105,7 @@ static double rms_winding_number (double omega, double K, int itermax)
 		}
 		end += x;
 	}
-	
+
 	// x = sqrt (sq) / (end-start);
 	x = sqrt (sq) / ((double) cnt);
 	// if (K != 0.0) x /= K;
@@ -143,7 +143,7 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
 		}
-	
+
 		/* OK, now, we begin to measure the average amount of time to recur */
 		/* (note that we don't have todo += with iter, since its already a running sum). */
 		xpoint = x;
@@ -166,6 +166,78 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 	x = (double) time_recur / ((double)num_recurs);
 
 	return x;
+}
+
+/*-------------------------------------------------------------------*/
+/*
+ * Compute the laplacian of the orbit (the charge) for the circle map
+ * This computes the series average for the four-point discrete
+ * laplacian for neighboring orbits.
+ *
+ * That is, consider an orbit (a time series) at fixed (K, omega). Then
+ * consider the orbit for a nearby neighbor (K+deltaK, omega+deltaomega)
+ * In mode-locked regions, we expect these to move together. At the
+ * boundaries, we expect these to be uncorellated.
+ *
+ * At each point in the time-series, take the four-point Laplacian, viz:
+ * 4x_n(K, o) - x_n(K-dK, o) - x_n(K+dK, o) - x_n(K, o-do) - x_n(K, o+do)
+ * and then just average this together over all n.
+ */
+
+#define LAP_SETTLE_TIME 	90
+#define LAP_RSAMP 200
+
+double
+circle_laplacian (double omega, double K, int itermax)
+
+{
+	double delta_K = 0.001;
+	double delta_omega = 0.001;
+
+	// The four discrete Laplacian sample points.
+	double K_m = K - delta_K;
+	double K_p = K + delta_K;
+	double omega_m = omega - delta_omega;
+	double omega_p = omega + delta_omega;
+
+	// The time-summed laplacian
+	double lap = 0.0;
+	int nit = 0;
+
+	for (int j=0; j<itermax/LAP_RSAMP; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (iter=0; iter<LAP_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+		}
+
+		/* OK, now, we track five different points */
+		double xom = x;
+		double xop = x;
+		double xkm = x;
+		double xkp = x;
+		for (iter=0; iter < RSAMP; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			xom += omega_m - K * sin (2.0 * M_PI * xom);
+			xop += omega_p - K * sin (2.0 * M_PI * xop);
+			xkm += omega - K_m * sin (2.0 * M_PI * xkm);
+			xkp += omega - K_p * sin (2.0 * M_PI * xkp);
+
+			// The sampling pattern
+			lap += 4.0*x - xom - xop - xkm - xkp;
+			nit ++;
+		}
+	}
+
+	double lapavg = lap / ((double) nit);
+	return lapavg;
 }
 
 /*-------------------------------------------------------------------*/
@@ -211,7 +283,7 @@ bifurcation_diagram
 			cnt ++;
 		}
 	}
-	
+
 	for (j=0; j<array_size; j++)
 	{
 		array[j] /= cnt;
