@@ -192,7 +192,7 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 #define LAP_SETTLE_TIME 	0
 
 // Iteration depth
-#define LAP_ITER_DEPTH 500
+#define LAP_ITER_DEPTH 50
 
 double
 circle_laplacian (double omega, double K, int itermax, double param)
@@ -270,7 +270,7 @@ circle_laplacian (double omega, double K, int itermax, double param)
 #define MET_SETTLE_TIME 	0
 
 // Iteration depth
-#define MET_ITER_DEPTH 200
+#define MET_ITER_DEPTH 120
 
 // Neighborhood samples
 #define MET_SPOKES 7
@@ -325,13 +325,22 @@ circle_metric (double omega, double K, int itermax, double param)
 			for (int k=0; k<MET_SPOKES; k++)
 			{
 				xoff[k] += omoff[k] - Koff[k] * sin (2.0 * M_PI * xoff[k]);
+#ifdef L1_METRIC
 				dist += fabs(x-xoff[k]);
+#endif
+#define L2_METRIC 1
+#ifdef L2_METRIC
+				dist += (x-xoff[k]) * (x-xoff[k]);
+#endif
 				nit ++;
 			}
 		}
 	}
 
 	double met = dist / ((double) nit);
+#ifdef L2_METRIC
+	met = sqrt(met);
+#endif
 	return met;
 }
 
@@ -393,8 +402,8 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
-	return circle_laplacian (omega, K, itermax, param);
-	// return circle_metric (omega, K, itermax, param);
+	// return circle_laplacian (omega, K, itermax, param);
+	return circle_metric (omega, K, itermax, param);
 }
 
 DECL_MAKE_HEIGHT (circle_map);
