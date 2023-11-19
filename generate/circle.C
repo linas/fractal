@@ -30,8 +30,8 @@ static double winding_number (double omega, double K, int itermax)
 	int cnt=0;
 	double start=0.0, end=0.0;
 
-#define SAMP 150
-	for (j=0; j<SAMP; j++)
+#define SAMP 150  // Number of iteration steps.
+	for (j=0; j<itermax/SAMP; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -39,7 +39,7 @@ static double winding_number (double omega, double K, int itermax)
 		start += x;
 
 		/* OK, now start iterating the circle map */
-		for (iter=0; iter < itermax/SAMP; iter++) {
+		for (iter=0; iter < SAMP; iter++) {
 			x += omega - K * sin (2.0 * M_PI * x);
 			cnt ++;
 		}
@@ -89,7 +89,7 @@ static double rms_winding_number (double omega, double K, int itermax)
 	int cnt=0;
 	double start=0.0, end=0.0;
 
-	for (j=0; j<SAMP; j++)
+	for (j=0; j<itermax/SAMP; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -97,7 +97,7 @@ static double rms_winding_number (double omega, double K, int itermax)
 		start += x;
 
 		/* OK, now start iterating the circle map */
-		for (iter=0; iter < itermax/SAMP; iter++) {
+		for (iter=0; iter < SAMP; iter++) {
 			x += omega - K * sin (2.0 * M_PI * x);
 			sq += (x-t)*(x-t);
 			t = x;
@@ -119,7 +119,7 @@ static double rms_winding_number (double omega, double K, int itermax)
 
 #define EPSILON  	0.003
 #define SETTLE_TIME 	90
-#define RSAMP 200            // Samples per pixel
+#define RSAMP 500       // Iteration depth
 
 double
 circle_poincare_recurrance_time (double omega, double K, int itermax)
@@ -131,7 +131,7 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 	long		num_recurs, time_recur=0;
 
   	num_recurs = 0;
-	for (j=0; j<RSAMP; j++)
+	for (j=0; j<itermax/RSAMP; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -148,7 +148,7 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 		/* (note that we don't have todo += with iter, since its already a running sum). */
 		xpoint = x;
 		long ptime = 0;
-		for (iter=0; iter < itermax/RSAMP; iter++)
+		for (iter=0; iter < RSAMP; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
 			y = fabs (x-xpoint);
@@ -191,8 +191,8 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 // #define LAP_SETTLE_TIME 	90
 #define LAP_SETTLE_TIME 	0
 
-// Samples per pixel
-#define LAP_RSAMP 200
+// Iteration depth
+#define LAP_RSAMP 500
 
 double
 circle_laplacian (double omega, double K, int itermax, double param)
@@ -214,7 +214,7 @@ circle_laplacian (double omega, double K, int itermax, double param)
 	double lap = 0.0;
 	int nit = 0;
 
-	for (int j=0; j<LAP_RSAMP; j++)
+	for (int j=0; j<itermax/LAP_RSAMP; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -232,7 +232,7 @@ circle_laplacian (double omega, double K, int itermax, double param)
 		double xop = x;
 		double xkm = x;
 		double xkp = x;
-		for (int iter=0; iter < itermax/LAP_RSAMP; iter++)
+		for (int iter=0; iter < LAP_RSAMP; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
 			xom += omega_m - K * sin (2.0 * M_PI * xom);
@@ -269,11 +269,11 @@ circle_laplacian (double omega, double K, int itermax, double param)
 
 #define MET_SETTLE_TIME 	0
 
-// Samples per pixel
-#define MET_RSAMP 10
+// Iteration depth
+#define MET_RSAMP 200
 
 // Neighborhood samples
-#define MET_SPOKES 4
+#define MET_SPOKES 7
 
 double
 circle_metric (double omega, double K, int itermax, double param)
@@ -299,7 +299,7 @@ circle_metric (double omega, double K, int itermax, double param)
 	double dist = 0.0;
 	int nit = 0;
 
-	for (int j=0; j<MET_RSAMP; j++)
+	for (int j=0; j<itermax/MET_RSAMP; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -319,7 +319,7 @@ circle_metric (double omega, double K, int itermax, double param)
 			xoff[k] = x;
 		}
 
-		for (int iter=0; iter < itermax/MET_RSAMP; iter++)
+		for (int iter=0; iter < MET_RSAMP; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
 			for (int k=0; k<MET_SPOKES; k++)
@@ -359,7 +359,7 @@ bifurcation_diagram
 	}
 
 #define BSAMP 500
-	for (j=0; j<BSAMP; j++)
+	for (j=0; j<itermax/BSAMP; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -367,7 +367,7 @@ bifurcation_diagram
 		x = t;
 
 		/* OK, now start iterating the circle map */
-		for (iter=0; iter < itermax/BSAMP; iter++) {
+		for (iter=0; iter < BSAMP; iter++) {
 			x += omega - K * sin (2.0 * M_PI * x);
 
 			double en = array_size * (x-floor(x));
@@ -393,8 +393,8 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
-	// return circle_laplacian (omega, K, itermax, param);
-	return circle_metric (omega, K, itermax, param);
+	return circle_laplacian (omega, K, itermax, param);
+	// return circle_metric (omega, K, itermax, param);
 }
 
 DECL_MAKE_HEIGHT (circle_map);
