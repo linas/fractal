@@ -170,9 +170,9 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 
 /*-------------------------------------------------------------------*/
 /*
- * Compute the laplacian of the orbit (the charge) for the circle map
+ * Compute the Laplacian of the orbit (the charge) for the circle map.
  * This computes the series average for the four-point discrete
- * laplacian for neighboring orbits.
+ * Laplacian for neighboring orbits.
  *
  * That is, consider an orbit (a time series) at fixed (K, omega). Then
  * consider the orbit for a nearby neighbor (K+deltaK, omega+deltaomega)
@@ -182,13 +182,17 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
  * At each point in the time-series, take the four-point Laplacian, viz:
  * 4x_n(K, o) - x_n(K-dK, o) - x_n(K+dK, o) - x_n(K, o-do) - x_n(K, o+do)
  * and then just average this together over all n.
+ *
+ * Except this is a stupid idea; neighboring pixels tend to have
+ * opposite signs, when the are on opposite sides of an edge. Instead,
+ * use the metric variants, below.
  */
 
 // #define LAP_SETTLE_TIME 	90
 #define LAP_SETTLE_TIME 	0
 
 // Samples per pixel
-#define LAP_RSAMP 20
+#define LAP_RSAMP 200
 
 double
 circle_laplacian (double omega, double K, int itermax, double param)
@@ -244,6 +248,91 @@ circle_laplacian (double omega, double K, int itermax, double param)
 
 	double lapavg = lap / ((double) nit);
 	return lapavg;
+}
+
+/*-------------------------------------------------------------------*/
+/*
+ * Compute the metric distance between nearby orbits for the circle
+ * map. This computes the l_1 distance between the time series for
+ * two nearby points in the circle map.
+ *
+ * That is, consider an orbit (a time series) at fixed (K, omega). Then
+ * consider the orbit for a nearby neighbor (K+deltaK, omega+deltaomega)
+ * In mode-locked regions, we expect these to move together. At the
+ * boundaries, we expect these to be uncorellated.
+ *
+ * At each point in the time-series, take the absolute value of the
+ * distance between the series:
+ *   dist = (1/N) sum_n abs(x_n(K, o) - x_n(K+dK, o+do))
+ * This is the Banach l_1 distance aka Manhattan distance.
+ */
+
+#define MET_SETTLE_TIME 	0
+
+// Samples per pixel
+#define MET_RSAMP 10
+
+// Neighborhood samples
+#define MET_SPOKES 7
+
+double
+circle_metric (double omega, double K, int itermax, double param)
+
+{
+	// Sample offsets. We want this to be the distance to the neighboring
+	// pixel, more or less. User-specified. A hard-coded 0.001 is not a
+	// bad place to start.
+	double delta = param; // 0.001;
+
+	// The sampled regions.
+	double Koff[MET_SPOKES];
+	double omoff[MET_SPOKES];
+	double t = rand();
+	t /= RAND_MAX;
+	for (int k=0; k<MET_SPOKES; k++)
+	{
+		Koff[k] = K + cos(2.0 * M_PI * (k+t) / ((double) MET_SPOKES));
+		omoff[k] = omega + sin(2.0 * M_PI * (k+t) / ((double) MET_SPOKES));
+	}
+
+	// The time-summed distance
+	double dist = 0.0;
+	int nit = 0;
+
+	for (int j=0; j<itermax/MET_RSAMP; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (int iter=0; iter<LAP_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+		}
+
+		/* OK, now, we track MET_SPOKES+1 different points */
+		double xoff[MET_SPOKES];
+		for (int k=0; k<MET_SPOKES; k++)
+		{
+			xoff[k] = x;
+		}
+
+		for (int iter=0; iter < LAP_RSAMP; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			for (int k=0; k<MET_SPOKES; k++)
+			{
+				xoff[k] += omoff[k] - Koff[k] * sin (2.0 * M_PI * xoff[k]);
+				dist += abs(x-xoff[k]);
+				nit ++;
+			}
+		}
+	}
+
+	double met = dist / ((double) nit);
+	return met;
 }
 
 /*-------------------------------------------------------------------*/
@@ -304,7 +393,8 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
-	return circle_laplacian (omega, K, itermax, param);
+	// return circle_laplacian (omega, K, itermax, param);
+	return circle_metric (omega, K, itermax, param);
 }
 
 DECL_MAKE_HEIGHT (circle_map);
