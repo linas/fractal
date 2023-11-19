@@ -291,8 +291,8 @@ circle_metric (double omega, double K, int itermax, double param)
 	t /= RAND_MAX;
 	for (int k=0; k<MET_SPOKES; k++)
 	{
-		Koff[k] = K + cos(2.0 * M_PI * (k+t) / ((double) MET_SPOKES));
-		omoff[k] = omega + sin(2.0 * M_PI * (k+t) / ((double) MET_SPOKES));
+		Koff[k] = K + delta*cos(2.0 * M_PI * (k+t) / ((double) MET_SPOKES));
+		omoff[k] = omega + delta*sin(2.0 * M_PI * (k+t) / ((double) MET_SPOKES));
 	}
 
 	// The time-summed distance
