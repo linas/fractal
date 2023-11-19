@@ -270,10 +270,12 @@ circle_laplacian (double omega, double K, int itermax, double param)
 #define MET_SETTLE_TIME 	0
 
 // Iteration depth
-#define MET_ITER_DEPTH 120
+// #define MET_ITER_DEPTH 120
+// #define MET_ITER_DEPTH 480
+#define MET_ITER_DEPTH 1920
 
 // Neighborhood samples
-#define MET_SPOKES 7
+#define MET_SPOKES 11
 
 double
 circle_metric (double omega, double K, int itermax, double param)
@@ -325,10 +327,11 @@ circle_metric (double omega, double K, int itermax, double param)
 			for (int k=0; k<MET_SPOKES; k++)
 			{
 				xoff[k] += omoff[k] - Koff[k] * sin (2.0 * M_PI * xoff[k]);
+#define L1_METRIC 1
 #ifdef L1_METRIC
 				dist += fabs(x-xoff[k]);
 #endif
-#define L2_METRIC 1
+// #define L2_METRIC 1
 #ifdef L2_METRIC
 				dist += (x-xoff[k]) * (x-xoff[k]);
 #endif
