@@ -183,6 +183,58 @@ literal "false"
  The Moore plane was originally constructed as a counter-example in general
  topology: it is a particular kind of completely regular Hausdorff space
  that is not normal and not metrizable.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A space is 
+\begin_inset CommandInset href
+LatexCommand href
+name "Hausdorff"
+target "https://en.wikipedia.org/wiki/Hausdorff_space"
+literal "false"
+
+\end_inset
+
+ if every two (non-identical) points are separated by open neighborhoods.
+ A space is 
+\begin_inset CommandInset href
+LatexCommand href
+name "regular"
+target "https://en.wikipedia.org/wiki/Regular_space"
+literal "false"
+
+\end_inset
+
+ if every point and closed subset are separated by open neighborhoods.
+ A space is 
+\begin_inset CommandInset href
+LatexCommand href
+name "completely regular"
+target "https://en.wikipedia.org/wiki/Tychonoff_space"
+literal "false"
+
+\end_inset
+
+ if every point and closed subset can be separated by bounded, continuous
+ real-valued functions.
+ Note that spaces can be completely regular, and not be Hausdorff.
+ A space is normal, if every two closed sets are separated by open neighborhoods
+ (and thus, the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Tietze extension theorem"
+target "https://en.wikipedia.org/wiki/Tietze_extension_theorem"
+literal "false"
+
+\end_inset
+
+ applies; the Tietze extension theorem works only for normal spaces, but
+ not for regular spaces.)
+\end_layout
+
+\end_inset
+
  The basis for this inspiration is worth reviewing here, and, for that,
  the defintion of the Moore plane must be breifly sketched.
 \end_layout
@@ -308,15 +360,236 @@ The circle map is taken as the iterated equation
 \end_inset
 
  need to be considered.
+ Less obvoiusly so, but, by periodicity, the regions for 
+\begin_inset Formula $\omega+m$
+\end_inset
+
+ for integer 
+\begin_inset Formula $m$
+\end_inset
+
+ can be mapped into 
+\begin_inset Formula $0\le\omega\le1$
+\end_inset
+
+.
+ This mapping isn't obvious, but seems to hold.
+ We need a formal proof for it.
+ The mapping also seems to be symmetric about 
+\begin_inset Formula $\omega=1/2$
+\end_inset
+
+.
+ As a general rule we explore the region 
+\begin_inset Formula $0\le\omega\le1,K>0$
+\end_inset
+
+ only.
  
 \end_layout
 
 \begin_layout Standard
-In general, the parameters 
-\begin_inset Formula $\left(\omega,K\right)\in\mathbb{R}^{2}$
+Fixing parameters 
+\begin_inset Formula $\left(\omega,K\right)$
 \end_inset
 
- but the be
+, the goal is to explore orbits for 
+\begin_inset Formula $\left(\omega^{\prime},K^{\prime}\right)=\left(\omega+\delta\omega,K+\delta K\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $\delta\omega\ll1$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta K\ll1$
+\end_inset
+
+.
+ This effectively defines a tangent space 
+\begin_inset Formula $T_{\eta}$
+\end_inset
+
+ at point 
+\begin_inset Formula $\eta=\left(\omega,K\right)$
+\end_inset
+
+ and so, with this setup, it makes sense of talking of metrics on 
+\begin_inset Formula $T_{\eta}$
+\end_inset
+
+.
+ Writing the nearby sequence as 
+\begin_inset Formula $y_{n+1}=y_{n}-\left(K+\delta K\right)\sin2\pi\left(\omega+\delta\omega\right)y_{n}$
+\end_inset
+
+, one can then imagine applying the conventional Banach space sequence metric,
+ in the form of 
+\begin_inset Formula 
+\[
+\left\Vert x-y\right\Vert _{p}=\left(\sum_{n}\left|x_{n}-y_{n}\right|^{p}\right)^{1/p}
+\]
+
+\end_inset
+
+There are several problems with this naive aproach.
+ Foremost is that there is no reason to think that 
+\begin_inset Formula $\left\Vert x-y\right\Vert _{p}<\infty$
+\end_inset
+
+ anywhere.
+ In particular, it may be the case that 
+\begin_inset Formula $\lim_{n\to\infty}\left|x_{n}-y_{n}\right|=\epsilon$
+\end_inset
+
+ with 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+.
+ That is, the two orbits converge to something that has a fixed offset.
+ A minor variation of this might be that both 
+\begin_inset Formula $\left\{ x_{n}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ y_{n}\right\} $
+\end_inset
+
+ are eventually periodic, with the same period, and these two converge to
+ 
+\begin_inset Formula $\lim_{n\to\infty}\left|x_{kn+j}-y_{kn+j}\right|=\epsilon_{j}$
+\end_inset
+
+ for the limit period 
+\begin_inset Formula $k$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le j<k$
+\end_inset
+
+ being a point in the cycle.
+ 
+\end_layout
+
+\begin_layout Standard
+Another problem is that, in numerical explorations, the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ cannot be taken directly, and one must instead work with sums that are
+ explicitly finite, and make arguments about how they might extrapolate.
+ With this in mind, define an alternate metric, having the form
+\begin_inset Formula 
+\[
+d_{p;N}\left(x-y\right)=\left(\frac{1}{N}\sum_{n=0}^{N}\left|x_{n}-y_{n}\right|^{p}\right)^{1/p}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+d_{p}\left(x-y\right)=\lim_{N\to\infty}d_{p;N}\left(x-y\right)
+\]
+
+\end_inset
+
+Each orbit difference 
+\begin_inset Formula $x_{n}-y_{n}$
+\end_inset
+
+ resulted from a point 
+\begin_inset Formula $\eta=\left(\omega,K\right)$
+\end_inset
+
+ offset by 
+\begin_inset Formula $\delta\eta=\left(\delta\omega,\delta K\right)$
+\end_inset
+
+, and the interesting limit is that of 
+\begin_inset Formula $\delta\eta\to0$
+\end_inset
+
+ so that 
+\begin_inset Formula $d_{p}$
+\end_inset
+
+ becomes a linear metric on the tangent space 
+\begin_inset Formula $T_{\eta}$
+\end_inset
+
+.
+ (When it exists, it's linear by definition.
+ No surprises here.)
+\end_layout
+
+\begin_layout Standard
+The mathematical questions then become:
+\end_layout
+
+\begin_layout Itemize
+For which points 
+\begin_inset Formula $\eta=\left(\omega,K\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\left\Vert \delta\right\Vert _{p}<\infty$
+\end_inset
+
+? What is the nature of this set? Is it countable? Does it have a measure?
+\end_layout
+
+\begin_layout Itemize
+For which points 
+\begin_inset Formula $\eta=\left(\omega,K\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $d_{p}<\infty$
+\end_inset
+
+? What is the structure of these regions?
+\end_layout
+
+\begin_layout Itemize
+Such regions are presumably arc-connected, in that there are arcs connecting
+ nearby 
+\begin_inset Formula $\eta$
+\end_inset
+
+ each with 
+\begin_inset Formula $d_{p}<\infty$
+\end_inset
+
+.
+ What is the homotopy of such reagions? Are things simply conected? Multiply
+ connected? How? Where?
+\end_layout
+
+\begin_layout Standard
+These questions should now make the inspiration of the Moore plane a bit
+ more obvious: any point 
+\begin_inset Formula $\eta=\left(\omega,K\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $d_{p}=\infty$
+\end_inset
+
+ is metrically disconnected from it's neighbors.
+ One can use this to infer a topology, with that topology being discrete,
+ at such points.
+ But this is not all; other nearby topics suggest themselves.
+\end_layout
+
+\begin_layout Section
+So Lets Do It
+\end_layout
+
+\begin_layout Standard
+Where we at?
 \end_layout
 
 \begin_layout Subsection*
