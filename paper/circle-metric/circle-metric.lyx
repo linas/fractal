@@ -824,16 +824,272 @@ This figure shows the winding number
  This image is 800x800 pixels in size.
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-As a genera
+\end_inset
+
+
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
+Poincare recurrence time
+\end_layout
+
+\begin_layout Standard
+It is often the case that the sequence 
+\begin_inset Formula $\left\{ x_{n}\right\} $
+\end_inset
+
+ will settle down to asymptotically periodic orbits as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ At least, it does so, except when it doesn't: some orbits remain chaotic.
+ Much of the rest of this paper is an exploration as to how to correctly
+ eistinguish these two regimes.
+ One classic technique is to experimentally determine the Poincare recurrence
+ time.
+ This is defined as the smallest number of iterations 
+\begin_inset Formula $\tau$
+\end_inset
+
+ such that, for sufficiently large 
+\begin_inset Formula $n$
+\end_inset
+
+, one finds 
+\begin_inset Formula 
+\[
+\left|x_{n+\tau}-x_{n}\right|<\epsilon
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $\epsilon\ll1$
+\end_inset
+
+.
+ That is, a given orbit returns 
+\begin_inset Quotes eld
+\end_inset
+
+close enough
+\begin_inset Quotes erd
+\end_inset
+
+ to a point that was visited before.
+ This is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Poincare-recurrence-time"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The general appearance of the image does not depend on the specific value
+ of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, as long as it is 
+\begin_inset Quotes eld
+\end_inset
+
+not too small
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This is because it can take a long time for 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ to settle into a periodic orbit; thus, if one attempts to measure the recurrenc
+e time before the orbit has settled, one will have poor measurements.
+ 
+\end_layout
+
+\begin_layout Standard
+The measurement technique used in this figure was to pre-iterate 
+\begin_inset Formula $n=90$
+\end_inset
+
+ times, and then use 
+\begin_inset Formula $x_{n}=x_{90}$
+\end_inset
+
+ as the initial starting point.
+ Iteration continued for 
+\begin_inset Formula $\tau$
+\end_inset
+
+ more steps, until 
+\begin_inset Formula $\left|x_{90+\tau}-x_{90}\right|<\epsilon$
+\end_inset
+
+ was satisfied.
+ To get a better approximation, iteration continued for 500 more steps,
+ and an average of 
+\begin_inset Formula $\tau$
+\end_inset
+
+ was taken.
+ The figure shows no particularly visible dependence on the starting point
+ (the 
+\begin_inset Formula $n=90$
+\end_inset
+
+ point), on the extended number of iterations, or on the limit 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+ There is, presumably, some dependence, but this is not characterized.
+ There is a strong dependence on 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ and so, to get well-behaved values, the recurance time (for each pixel)
+ is averaged over hundreds of different randomly selected 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ values.
+ Close examination of the image reveals speckling; this speckling goes away
+ as more averages per pixel are taken.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Poincare recurrence time
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Poincare-recurrence-time"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename recur-circ.png
+	width 90text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the Poincare recurrence time 
+\begin_inset Formula $\tau$
+\end_inset
+
+ encoded in color.
+ The color of black corresponds to recurrence times of about 
+\begin_inset Formula $\tau\lesssim10$
+\end_inset
+
+, green to 
+\begin_inset Formula $\tau\approx125$
+\end_inset
+
+ and red for 
+\begin_inset Formula $\tau\gtrsim250$
+\end_inset
+
+.
+ A value of 
+\begin_inset Formula $\epsilon=0.003$
+\end_inset
+
+ was used in this image; this corresponds to binning the 
+\begin_inset Formula $\left\lfloor x_{n}\right\rfloor $
+\end_inset
+
+ into 333 histogram bins, and then measuring how many iterations pass, between
+ the first and second hit to a bin.
+ As a general rule, all of these images look more or less identical, as
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is varied (at least when 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is small enough.) The image itself is 800x800 pixels in size.
+ A higher resolution image, 1920x3840 can be found on the website.
+ It's quite something; one can fall into the fine details.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Laplacian
+\end_layout
+
+\begin_layout Standard
+The
+\end_layout
+
+\begin_layout Section*
 Bibilography
 \end_layout
 
