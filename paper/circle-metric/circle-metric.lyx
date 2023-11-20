@@ -637,7 +637,61 @@ These questions should now make the inspiration of the Moore plane a bit
 \end_layout
 
 \begin_layout Section
-Background
+Basic orientation
+\end_layout
+
+\begin_layout Standard
+The overall behavior of the iterated circle map can be shown in two figures:
+ the winding number, and the Poincare recurrance chart.
+\end_layout
+
+\begin_layout Subsection
+Computational remarks
+\end_layout
+
+\begin_layout Standard
+All figures in this text use pixel coordinates that place 
+\begin_inset Formula $0\le\omega\le1$
+\end_inset
+
+ along the x-axis, and 
+\begin_inset Formula $0\le K\le1$
+\end_inset
+
+ along the y-axis, unless otherwise noted.
+ As a general rule, each sequence 
+\begin_inset Formula $\left\{ x_{n}\right\} $
+\end_inset
+
+ depends on the initial starting point 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+.
+ However, as a general rule, we are interested in the structure of the asymptoti
+c sequence for large 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ To hide the dependency on 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+, each pixel shows an average over many sequences, each with a different
+ randomly sampled (with uniform distribution) initial value of 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+.
+ For most of these images, hundreds, thousands and sometimes tens of thousands
+ of different initial points are used.
+ A speckle pattern can be seen in many of the images: this speckling washes
+ out as more samples are taken.
+\end_layout
+
+\begin_layout Subsection
+Winding number
 \end_layout
 
 \begin_layout Standard
@@ -653,16 +707,99 @@ Associated to each sequence
 
 \end_inset
 
-This is illustrated in the image below.
- The coordinates place 
-\begin_inset Formula $0\le\omega\le1$
+This is illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Winding-number"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- along the x-axis, and 
-\begin_inset Formula $0\le K\le1$
+.
+ The winding number is, in general, well-defined, since, for all 
+\begin_inset Formula $n$
 \end_inset
 
- along the y-axis.
+, one has that 
+\begin_inset Formula $\left|x_{n+1}-x_{n}\right|\le\left|\omega\right|+\left|K\right|\le2$
+\end_inset
+
+, at least when limited to the region 
+\begin_inset Formula $0\le\omega,K\le1$
+\end_inset
+
+, as is usually the case for these images.
+ Thus, on first priciples, one has that 
+\begin_inset Formula 
+\[
+x_{n}\le\left|x_{n}\right|\le\sum_{k=0}^{n-1}\left|x_{n+1}-x_{n}\right|\le n\left(\left|\omega\right|+\left|K\right|\right)
+\]
+
+\end_inset
+
+from which one deduces
+\begin_inset Formula 
+\[
+0\le\Omega\le\left|\omega\right|+\left|K\right|
+\]
+
+\end_inset
+
+Experimentally, it appears that 
+\begin_inset Formula 
+\[
+0\le\Omega\le1
+\]
+
+\end_inset
+
+almost always.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Winding number
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Winding-number"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename wind-circ.png
+	width 90text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the winding number 
+\begin_inset Formula $\Omega=\lim_{n\to\infty}x_{n}/n$
+\end_inset
+
+ encoded in color.
  The color coding shows 
 \begin_inset Formula $\Omega\approx0$
 \end_inset
@@ -684,16 +821,16 @@ This is illustrated in the image below.
 \end_inset
 
  in red.
+ This image is 800x800 pixels in size.
 \end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename wind-circ.png
-	width 90text%
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+As a genera
 \end_layout
 
 \begin_layout Subsection*

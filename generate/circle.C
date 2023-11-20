@@ -346,6 +346,64 @@ circle_metric (double omega, double K, int itermax, double param)
 }
 
 /*-------------------------------------------------------------------*/
+/*
+ * Much like above, but we compare orbits for +K to -K.
+ */
+
+#define FLP_SETTLE_TIME 	0
+
+// Iteration depth
+#define FLP_ITER_DEPTH 120
+// #define FLP_ITER_DEPTH 480
+// #define FLP_ITER_DEPTH 1920
+
+double
+circle_flip (double omega, double K, int itermax, double param)
+
+{
+	// The time-summed distance
+	double dist = 0.0;
+	int nit = 0;
+
+	for (int j=0; j<itermax/FLP_ITER_DEPTH; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+		double y = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (int iter=0; iter<FLP_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			y += omega + K * sin (2.0 * M_PI * y);
+		}
+
+		for (int iter=0; iter < FLP_ITER_DEPTH; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			y += omega + K * sin (2.0 * M_PI * y);
+// #define FLP_L1_METRIC 1
+#ifdef FLP_L1_METRIC
+			dist += fabs(x-y);
+#endif
+#define FLP_L2_METRIC 1
+#ifdef FLP_L2_METRIC
+			dist += (x-y) * (x-y);
+#endif
+			nit ++;
+		}
+	}
+
+	double met = dist / ((double) nit);
+#ifdef FLP_L2_METRIC
+	met = sqrt(met);
+#endif
+	return met;
+}
+
+/*-------------------------------------------------------------------*/
 /* Bifurcation diagram callback, does one row at a time */
 
 static void
@@ -404,7 +462,8 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
-	return circle_metric (omega, K, itermax, param);
+	// return circle_metric (omega, K, itermax, param);
+	return circle_flip (omega, K, itermax, param);
 }
 
 DECL_MAKE_HEIGHT (circle_map);
