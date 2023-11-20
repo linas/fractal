@@ -25,29 +25,27 @@
  */
 static double winding_number (double omega, double K, int itermax)
 {
-	double	x=0.0;
-	int		iter,j;
 	int cnt=0;
 	double start=0.0, end=0.0;
 
 #define ITER_DEPTH 150  // Number of iteration steps.
-	for (j=0; j<itermax/ITER_DEPTH; j++)
+	for (int j=0; j<itermax/ITER_DEPTH; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
-		x = t;
+		double x = t;
 		start += x;
 
 		/* OK, now start iterating the circle map */
-		for (iter=0; iter < ITER_DEPTH; iter++) {
+		for (int iter=0; iter < ITER_DEPTH; iter++) {
 			x += omega - K * sin (2.0 * M_PI * x);
 			cnt ++;
 		}
 		end += x;
 	}
 
-	x = (end-start) / ((double) cnt);
-	return x;
+	double wind = (end-start) / ((double) cnt);
+	return wind;
 }
 
 /*-------------------------------------------------------------------*/
