@@ -1026,10 +1026,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1137,7 +1133,7 @@ It is easy to imagine that one way to explore neighboring values of
 The 5-point discrete Laplacian, at each iteration, can be defined as
 \begin_inset Formula 
 \[
-\nabla^{2}x_{n}\left(\omega,K\right)=4x_{n}\left(\omega,K\right)-x_{n}\left(\omega-\delta\omega,K\right)-x_{n}\left(\omega+\delta\omega,K\right)-x_{n}\left(\omega,K-\delta K\right)-x_{n}\left(\omega,K+\delta K\right)
+4\nabla^{2}x_{n}\left(\omega,K\right)=4x_{n}\left(\omega,K\right)-x_{n}\left(\omega-\delta\omega,K\right)-x_{n}\left(\omega+\delta\omega,K\right)-x_{n}\left(\omega,K-\delta K\right)-x_{n}\left(\omega,K+\delta K\right)
 \]
 
 \end_inset
@@ -1176,7 +1172,7 @@ noprefix "false"
 \end_inset
 
  show the result.
- Ths sounds like a good idea, until one realizes that 
+ This sounds like a good idea, until one realizes that 
 \begin_inset Formula $L_{N}\left(\omega,K\right)$
 \end_inset
 
@@ -1241,6 +1237,19 @@ noprefix "false"
  Dang.
  This kind of nasty behavior near edges makes the Laplacian less than ideal
  as an experimental tool.
+\end_layout
+
+\begin_layout Standard
+The values of 
+\begin_inset Formula $\delta\omega,\delta K=0.001$
+\end_inset
+
+ were used in generating these images.
+ This corresponds to the pixel-size, center to center.
+ Using smaller values would risk missing significant changes in between
+ pixels.
+ Using larger values has the effect of blurring out details.
+ Thus, this size appears to be more or less optimal.
 \end_layout
 
 \begin_layout Standard
@@ -1368,8 +1377,15 @@ This shows a color coding of
 
 .
  The standard color coding is used.
+ Because of the minus sign in front of the log, redder areas correspond
+ to exponentially smaller regions of 
+\begin_inset Formula $\left|L_{N}\left(\omega,K\right)\right|$
+\end_inset
+
+.
  This exposes new kinds of detail not seen in the winding number and the
  recurrence time figures.
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1390,14 +1406,49 @@ height "1pt"
 \end_layout
 
 \begin_layout Section
-\begin_inset Formula $\ell_{1}$
+Tangent space norms
+\end_layout
+
+\begin_layout Standard
+The issue of the Laplacian changing signs, depending on which side of an
+ edge one is sitting on, can be avoided by taking the absolute value, before
+ summming.
+ The five-point Laplacian can also be replaced by an 
+\begin_inset Formula $M+1$
 \end_inset
 
- norms
+-point version, that takes more samples in the angular direction.
+ This is defined as
+\begin_inset Formula 
+\[
+\nabla^{2}x_{n}\left(\omega,K\right)=\frac{1}{M}\sum_{m=0}^{M}x_{n}\left(\omega,K\right)-x_{n}\left(\omega+\delta\eta\cos\left(\frac{2\pi m}{M}\right),K+\delta\eta\sin\left(\frac{2\pi m}{M}\right)\right)
+\]
+
+\end_inset
+
+This reproduces the five-point formula when 
+\begin_inset Formula $M=4$
+\end_inset
+
+, so that the sine and cosine just sample to the left, right, above and
+ below.
+ Two norms are considered 
+\end_layout
+
+\begin_layout Standard
+alternating sign appearing at the edges
 \end_layout
 
 \begin_layout Standard
 So l1 norms.
+\begin_inset Formula 
+\[
+d_{p;N}\left(x-y\right)=\left(\frac{1}{N}\sum_{n=0}^{N}\left|x_{n}-y_{n}\right|^{p}\right)^{1/p}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

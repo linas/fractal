@@ -252,8 +252,8 @@ circle_laplacian (double omega, double K, int itermax, double param)
 /*-------------------------------------------------------------------*/
 /*
  * Compute the metric distance between nearby orbits for the circle
- * map. This computes the l_1 distance between the time series for
- * two nearby points in the circle map.
+ * map. This computes the l_1 or l_2 distance between the time series
+ * for Lapalcians of points in the circle map.
  *
  * That is, consider an orbit (a time series) at fixed (K, omega). Then
  * consider the orbit for a nearby neighbor (K+deltaK, omega+deltaomega)
@@ -262,19 +262,30 @@ circle_laplacian (double omega, double K, int itermax, double param)
  *
  * At each point in the time-series, take the absolute value of the
  * distance between the series:
- *   dist = (1/N) sum_n abs(x_n(K, o) - x_n(K+dK, o+do))
- * This is the Banach l_1 distance aka Manhattan distance.
+ *   dist = (1/N) sum_n abs(D_n(K, o))
+ * where
+ *   D_n(K, o) = x_n(K, o) - x_n(K+dK, o)
+ *             + x_n(K, o) - x_n(K-dK, o)
+ *             + x_n(K, o) - x_n(K, o+do)
+ *             + x_n(K, o) - x_n(K, o-do)
+ * The D_n above is the five-point Laplacian; more generally, the
+ * (M+1) point Laplacian is used, with M=MET_SPOKES below.
+ *
+ * The above dist is the Banach l_1 distance aka Manhattan distance.
+ * Alternately, the Euclidean (Hilbert) distance can be used:
+ *   dist = sqrt( (1/N) sum_n |D_n(K, o)|^2 )
+ * by compile-time adjustment; see below.
  */
 
 #define MET_SETTLE_TIME 	0
 
 // Iteration depth
-// #define MET_ITER_DEPTH 120
+#define MET_ITER_DEPTH 120
 // #define MET_ITER_DEPTH 480
-#define MET_ITER_DEPTH 1920
+// #define MET_ITER_DEPTH 1920
 
 // Neighborhood samples
-#define MET_SPOKES 11
+#define MET_SPOKES 4
 
 double
 circle_metric (double omega, double K, int itermax, double param)
@@ -323,15 +334,132 @@ circle_metric (double omega, double K, int itermax, double param)
 		for (int iter=0; iter < MET_ITER_DEPTH; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
+
+			// Lappy is the averaged Laplacian
+			double lappy = 0.0;
 			for (int k=0; k<MET_SPOKES; k++)
 			{
 				xoff[k] += omoff[k] - Koff[k] * sin (2.0 * M_PI * xoff[k]);
-#define L1_METRIC 1
-#ifdef L1_METRIC
+				lappy += x-xoff[k];
+			}
+			lappy /= MET_SPOKES;
+
+#define MET_L1_METRIC 1
+#ifdef MET_L1_METRIC
+			dist += fabs(lappy);
+#endif
+// #define MET_L2_METRIC 1
+#ifdef MET_L2_METRIC
+			dist += lappy*lappy;
+#endif
+			nit ++;
+		}
+	}
+
+	double met = dist / ((double) nit);
+#ifdef MET_L2_METRIC
+	met = sqrt(met);
+#endif
+	return met;
+}
+
+/*-------------------------------------------------------------------*/
+/*
+ * Compute an averaged gradient between nearby orbits for the circle
+ * map. This computes the l_1 or l_2 distance between the time series
+ * for two nearby points in the circle map.
+ *
+ * As above, but instead an averaged gradient is used.
+ *
+ * At each point in the time-series, take the gradient between two
+ * neighboring points in the series:
+ *   G_n(K, o) = x_n(K, o) - x_n(K+dK, o+do)
+ * To avoid sampling bias with respect to the direction, an average is
+ * taken:
+ *   GA_n(K, o) = (1/M) sum_{dK,do} |G_n(K, o)|
+ * for M different directions dK,do.  Note the abssolute value above:
+ * this becomes an averaged gradient, behaving like a first derivative;
+ * without the absolute value, this would behave like a second
+ * derivative, i.e. a Laplacian.
+ *
+ * The rest proceeds as before, so that
+ *   dist = (1/N) sum_n abs(GA_n(K, o))
+ * is the Banach l_1 distance, etc.
+ */
+
+#define GRD_SETTLE_TIME 	0
+
+// Iteration depth
+// #define GRD_ITER_DEPTH 120
+// #define GRD_ITER_DEPTH 480
+#define GRD_ITER_DEPTH 1920
+
+// Neighborhood samples
+#define GRD_SPOKES 11
+
+double
+circle_gradient (double omega, double K, int itermax, double param)
+
+{
+	// Sample offsets. We want this to be the distance to the neighboring
+	// pixel, more or less. User-specified. A hard-coded 0.001 is not a
+	// bad place to start.
+	double delta = param; // 0.001;
+
+	// The sampled regions.
+	double Koff[GRD_SPOKES];
+	double omoff[GRD_SPOKES];
+	double t = rand();
+	t /= RAND_MAX;
+	for (int k=0; k<GRD_SPOKES; k++)
+	{
+		Koff[k] = K + delta*cos(2.0 * M_PI * (k+t) / ((double) GRD_SPOKES));
+		omoff[k] = omega + delta*sin(2.0 * M_PI * (k+t) / ((double) GRD_SPOKES));
+	}
+
+	// The time-summed distance
+	double dist = 0.0;
+	int nit = 0;
+
+	for (int j=0; j<itermax/GRD_ITER_DEPTH; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (int iter=0; iter<GRD_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+		}
+
+		/* OK, now, we track GRD_SPOKES+1 different points */
+		double xoff[GRD_SPOKES];
+		for (int k=0; k<GRD_SPOKES; k++)
+		{
+			xoff[k] = x;
+		}
+
+		for (int iter=0; iter < GRD_ITER_DEPTH; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			for (int k=0; k<GRD_SPOKES; k++)
+			{
+				xoff[k] += omoff[k] - Koff[k] * sin (2.0 * M_PI * xoff[k]);
+#define GRD_L1_METRIC 1
+#ifdef GRD_L1_METRIC
+				// Lets average over the spokes, or sum?
+				// dist += fabs(x-xoff[k]) / GRD_SPOKES;
 				dist += fabs(x-xoff[k]);
 #endif
-// #define L2_METRIC 1
-#ifdef L2_METRIC
+// #define GRD_L2_METRIC 1
+#ifdef GRD_L2_METRIC
+				// Used the sum for the paper, but the average would have
+				// been better, because the average would be independent of
+				// the number of spokes. By linearity, the division could
+				// be done at the end.
+				// dist += (x-xoff[k]) * (x-xoff[k]) / GRD_SPOKES;
 				dist += (x-xoff[k]) * (x-xoff[k]);
 #endif
 				nit ++;
@@ -340,7 +468,7 @@ circle_metric (double omega, double K, int itermax, double param)
 	}
 
 	double met = dist / ((double) nit);
-#ifdef L2_METRIC
+#ifdef GRD_L2_METRIC
 	met = sqrt(met);
 #endif
 	return met;
@@ -462,8 +590,9 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
-	return circle_laplacian (omega, K, itermax, param);
-	// return circle_metric (omega, K, itermax, param);
+	// return circle_laplacian (omega, K, itermax, param);
+	// return circle_gradient (omega, K, itermax, param);
+	return circle_metric (omega, K, itermax, param);
 	// return circle_flip (omega, K, itermax, param);
 }
 
