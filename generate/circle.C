@@ -190,7 +190,8 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 #define LAP_SETTLE_TIME 	0
 
 // Iteration depth
-#define LAP_ITER_DEPTH 50
+// #define LAP_ITER_DEPTH 50 // Ugh.
+#define LAP_ITER_DEPTH 1000
 
 double
 circle_laplacian (double omega, double K, int itermax, double param)
@@ -461,9 +462,9 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
-	// return circle_laplacian (omega, K, itermax, param);
+	return circle_laplacian (omega, K, itermax, param);
 	// return circle_metric (omega, K, itermax, param);
-	return circle_flip (omega, K, itermax, param);
+	// return circle_flip (omega, K, itermax, param);
 }
 
 DECL_MAKE_HEIGHT (circle_map);

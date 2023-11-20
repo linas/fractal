@@ -266,5 +266,10 @@ PATH=$PATH:.
 # renorm jlo j2 0.22 0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
-renorm bar j2 0.25 0
+# renorm bar j2 0.25 0
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+abs circle-lap-50 j
+takelog j jlo
+renorm jlo j2 -0.06 0
 cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png

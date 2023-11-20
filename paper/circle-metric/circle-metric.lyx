@@ -690,6 +690,48 @@ c sequence for large
  out as more samples are taken.
 \end_layout
 
+\begin_layout Standard
+All pictures use a common color coding when illustrating form function 
+\begin_inset Formula $f=f\left(\left\{ x_{n}\right\} \right)$
+\end_inset
+
+.
+ This coding is that 
+\begin_inset Formula $f\lesssim0.05$
+\end_inset
+
+ in black, 
+\begin_inset Formula $f\approx0.25$
+\end_inset
+
+ in blue, 
+\begin_inset Formula $f\approx0.5$
+\end_inset
+
+ in green, 
+\begin_inset Formula $f\approx0.75$
+\end_inset
+
+ in yellow, and 
+\begin_inset Formula $f\gtrsim0.95$
+\end_inset
+
+ in red.
+ As a general rule, the reported quantities 
+\begin_inset Formula $f$
+\end_inset
+
+ are almost never negative, unless noted otherwise.
+ Values with 
+\begin_inset Formula $f>1$
+\end_inset
+
+ can occur in many of the images, these are coded in strictly red.
+ This color coding is used throughout, and is occasionally scaled by a constant
+ scale factor, as reported on a case-by-case basis.
+ Images are either 800x800 pixels, or 1000x1000 pixels.
+\end_layout
+
 \begin_layout Subsection
 Winding number
 \end_layout
@@ -1072,7 +1114,257 @@ height "1pt"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+False Start: Laplacian
+\end_layout
+
+\begin_layout Standard
+It is easy to imagine that one way to explore neighboring values of 
+\begin_inset Formula $\eta=\left(\omega,K\right)$
+\end_inset
+
+ is to take the point-wise Laplacian of the orbits.
+ This proves to be a not very good idea, as will be revealed shortly.
+ Nontheless, its just interesting enough to deserve a mention.
+\end_layout
+
+\begin_layout Standard
+The 5-point discrete Laplacian, at each iteration, can be defined as
+\begin_inset Formula 
+\[
+\nabla^{2}x_{n}\left(\omega,K\right)=4x_{n}\left(\omega,K\right)-x_{n}\left(\omega-\delta\omega,K\right)-x_{n}\left(\omega+\delta\omega,K\right)-x_{n}\left(\omega,K-\delta K\right)-x_{n}\left(\omega,K+\delta K\right)
+\]
+
+\end_inset
+
+for some suitably small 
+\begin_inset Formula $\delta\omega,\delta K\ll1$
+\end_inset
+
+.
+ One then considers the average Laplacian, over many iterations:
+\begin_inset Formula 
+\[
+L_{N}\left(\omega,K\right)=\frac{1}{N}\sum_{n=0}^{N-1}\nabla^{2}x_{n}\left(\omega,K\right)
+\]
+
+\end_inset
+
+Several figures below show the result.
+ Ths sounds like a good idea, until one realizes that 
+\begin_inset Formula $L_{N}\left(\omega,K\right)$
+\end_inset
+
+ changes sign, when one crosses a boundary.
+ Intuitively, one might say that taking a derivative to the left is minus
+ that of taking a derivative to the right.
+ The same for the discrete Laplacian.
+ As a kind of second derivative, one could think of it as being immune to
+ such awkward behavior.
+ This is not so, when it straddles a boundary.
+ This can be belabored in greater detail, if one wishes.
+ If not, then skip the next few sentences.
+ They don't say anything important.
+ So, for example, assume that one can find a region where 
+\begin_inset Formula $x_{n}\left(\omega,K\right)\approx x_{n}\left(\omega-\delta\omega,K\right)\approx x_{n}\left(\omega+\delta\omega,K\right)\approx x_{n}\left(\omega,K-\delta K\right)$
+\end_inset
+
+ but that 
+\begin_inset Formula $x_{n}\left(\omega,K\right)\ne x_{n}\left(\omega,K+\delta K\right)$
+\end_inset
+
+ in a strong way.
+ Then 
+\begin_inset Formula $\nabla^{2}x_{n}\left(\omega,K\right)\approx x_{n}\left(\omega,K\right)-x_{n}\left(\omega,K+\delta K\right)$
+\end_inset
+
+.
+ Consider shifting over to the next pixel, located at 
+\begin_inset Formula $\left(\omega,K+\delta K\right)$
+\end_inset
+
+.
+ At this pixel, one has that 
+\begin_inset Formula $\nabla^{2}x_{n}\left(\omega,K+\delta K\right)\approx-\nabla^{2}x_{n}\left(\omega,K\right)$
+\end_inset
+
+ and so likewise 
+\begin_inset Formula $L\left(\omega,K+\delta K\right)\approx-L\left(\omega,K\right)$
+\end_inset
+
+.
+ In more abstract terms, the first derivative of the Heaviside step function
+ 
+\begin_inset Formula $\Theta\left(x\right)$
+\end_inset
+
+ is the Dirac delta function 
+\begin_inset Formula $\delta\left(x\right)$
+\end_inset
+
+.
+ The second derivative is 
+\begin_inset Formula $\delta^{\prime}\left(x\right)$
+\end_inset
+
+ which is a pair of spikes, one going positive, one going negative, with
+ the property that 
+\begin_inset Formula $\delta^{\prime}\left(x\right)=-\delta^{\prime}\left(-x\right)$
+\end_inset
+
+: the sign flips.
+ Dang.
+ This kind of nasty behavior near edges makes the Laplacian less than ideal
+ as an experimental tool.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Absolute Value of Laplacian
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Laplapce-abs"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename laplace-abs-50.png
+	lyxscale 80
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This shows a color coding of 
+\begin_inset Formula $f=\left|L_{N}\left(\omega,K\right)\right|$
+\end_inset
+
+ for 
+\begin_inset Formula $N=50$
+\end_inset
+
+.
+ The standard color coding is used: blue has 
+\begin_inset Formula $f\approx0.25$
+\end_inset
+
+ and red for 
+\begin_inset Formula $f\gtrsim1$
+\end_inset
+
+.
+ Clearly, a lot of detail has washed out in black.
+ This is revealed in the next image.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Log of Laplacian
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Log-of-Laplacian"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename laplace-log-50.png
+	lyxscale 80
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This shows a color coding of 
+\begin_inset Formula $f=-0.06\log\left|L_{N}\left(\omega,K\right)\right|$
+\end_inset
+
+ for 
+\begin_inset Formula $N=50$
+\end_inset
+
+.
+ The standard color coding is used.
+ This exposes new kinds of detail not seen in the winding number and the
+ recurrence time figures.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
 
 \end_layout
 
@@ -1082,11 +1374,10 @@ height "1pt"
 \end_layout
 
 \begin_layout Section
-Laplacian
-\end_layout
+\begin_inset Formula $\ell_{1}$
+\end_inset
 
-\begin_layout Standard
-The
+ norms
 \end_layout
 
 \begin_layout Section*
