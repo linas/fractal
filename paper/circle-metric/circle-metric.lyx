@@ -1436,38 +1436,236 @@ The five-point formula is obtained when
 \end_inset
 
  to be understood as a first derivative, instead of a second derivative.
+ The infinitessimal form of this 
+\begin_inset Quotes eld
+\end_inset
+
+direction-averaged absolute gradient
+\begin_inset Quotes erd
+\end_inset
+
+ should be understood just the radial derivative; that is, as 
+\begin_inset Formula $\Delta f\mapsto\left|\partial f/\partial\eta\right|$
+\end_inset
+
+ with 
+\begin_inset Formula $\eta=\sqrt{\omega^{2}+K^{2}}$
+\end_inset
+
+.
+ I'm being sloppy, here.
+ Whatever.
 \end_layout
 
 \begin_layout Standard
-The infinitessimal form of the above can be obtained by considering
+As long was we are being creative, note that other forms of averaging are
+ possible: so
 \begin_inset Formula 
 \[
-\vec{\delta\eta}\cdot\vec{\nabla}f\left(\omega,K\right)=
+\Delta_{p}f\left(\omega,K\right)=\left(\frac{1}{M}\sum_{m=0}^{M}\left|f\left(\omega,K\right)-f\left(\omega+\delta\eta\cos\left(\frac{2\pi m}{M}\right),K+\delta\eta\sin\left(\frac{2\pi m}{M}\right)\right)\right|^{p}\right)^{1/p}
 \]
 
 \end_inset
 
+whose infinitessimal form should correspond to something similar to 
+\begin_inset Formula $\Delta_{p}f\mapsto\left|\partial\left|f\right|^{p}/\partial\eta\right|^{1/p}$
+\end_inset
 
+ or something similar; I'm too lazy to scratch out the details.
+ At any rate, this would be a weighted multiple of the basic form.
 \end_layout
 
 \begin_layout Standard
-wo norms are considered 
+The sum over series can be written as
 \end_layout
 
 \begin_layout Standard
-alternating sign appearing at the edges
-\end_layout
-
-\begin_layout Standard
-So l1 norms.
 \begin_inset Formula 
 \[
-d_{p;N}\left(x-y\right)=\left(\frac{1}{N}\sum_{n=0}^{N}\left|x_{n}-y_{n}\right|^{p}\right)^{1/p}
+D_{p;N}x\left(\omega,K\right)=\left(\frac{1}{N}\sum_{n=0}^{N}\left|\Delta x_{n}\left(\omega,K\right)\right|^{p}\right)^{1/p}
 \]
 
 \end_inset
 
+The results for 
+\begin_inset Formula $p=1$
+\end_inset
 
+ are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:gradient-l1-sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:gradient-l1-log"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ In the mode-locking regions, we expect that 
+\begin_inset Formula $\Delta x_{n}\left(\omega,K\right)\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ and so we should find 
+\begin_inset Formula $D_{p;N}x\left(\omega,K\right)\approx0$
+\end_inset
+
+ in these regions.
+ This is confirmed in both figures.
+ The edges of the mode-locking regions are also clearly visible; it appears
+ that, roughly speaking 
+\begin_inset Formula $D_{1;N}x\left(\omega,K\right)\approx1$
+\end_inset
+
+ in these regions, and sometimes much higher.
+ This is obtained by reading off the color code in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:gradient-l1-sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This makes sense: the unlocked regions should correspond to chaotic orbits,
+ in which the 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ visit the entire interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+.
+ Nearby 
+\begin_inset Formula $\left(\omega,K\right)$
+\end_inset
+
+ points should correspond to different and uncorrelated orbits; thus, one
+ should expect, on average, that 
+\begin_inset Formula $\Delta x_{n}\left(\omega,K\right)\approx1$
+\end_inset
+
+ for these orbits, which corresponds to 
+\begin_inset Formula $D_{1;N}x\left(\omega,K\right)\approx1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The bright red regions in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:gradient-l1-sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are therefore more interesting.
+ They suggest regions where the individual sum components 
+\begin_inset Formula $\Delta x_{n}\left(\omega,K\right)$
+\end_inset
+
+ have to be considerably larger than one.
+ Comparing the same to the winding number chart in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Winding-number"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, it appears that the winding number is quite tame.
+ That is, 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ always reverts to the mean, so that, on average, 
+\begin_inset Formula $x_{n}\approx n\Omega$
+\end_inset
+
+.
+ Thus, we conclude that, in the red regions, although the average behavior
+ is quite tame, the sequence makes large excusions from the average.
+\end_layout
+
+\begin_layout Standard
+Quite peculiar is the diamond in the center of the figure.
+ It is quite unlike any other region of the map (except, of course, those
+ regions where it reappears streched and squashed.) The most remarkable property
+ is how undifferentiated it is: there is no visible small-scale structure.
+ In this sense, perhaps, one should say tat the orbits in this region truly
+ are uncorrelated and random.
+ This is fundamentally different from the other colored regions, which suggest
+ the presence of structure.
+ Comparing to the winding number chart, it is seen again that the winding
+ number behaves quite tamely in this diamond.
+ As the lower part of the diamond is quite red, one concludes that the there
+ are large excursions there, as well.
+ However, comparing to the recurrence chart 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Poincare-recurrence-time"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the orbits in the diamond can be seen to have very low recurrence times.
+ They would seem to be periodic with very short periods.
+ This would seem to point at a contradiction or a paradox: from the winding
+ number chart, one concludes, as before, that 
+\begin_inset Formula $x_{n}\approx n\Omega$
+\end_inset
+
+ in this region.
+ From the recurrance chart, the periods appear to be all short, and so there
+ is not enough time for a large excursion to occur.
+ Perhaps te resolution to this paradox is that the recurrence time is being
+ measured in a misleading way? Or rather, that the recurrence time cannot
+ be taken as an accurate proxy for the period?
+\end_layout
+
+\begin_layout Standard
+Perhaps the latter: consider the sequence 
+\begin_inset Formula $0,1,0,-1,0,1,0,-1,0,\cdots$
+\end_inset
+
+ If one were so unlucky as to start measuring the recurrence time with the
+ first item in the sequence, one would conclude that the recurrence time
+ is two, and thus the period is 2.
+ On closer examination, the period is clearly four.
+ It could even be crazier: 
+\begin_inset Formula $0,1/5,0,-2/3,0,7/8,0,-1/4,0,\cdots$
+\end_inset
+
+ and a mis-interpretation gives a recurrence time of two, when the actual
+ period might be huge.
+ Thus, it would seem that a better way of measuring the true period of the
+ orbits in the diamond is needed.
 \end_layout
 
 \begin_layout Standard
@@ -1480,7 +1678,18 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-l1 norm pos
+Gradient 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+ sum
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:gradient-l1-sum"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1501,7 +1710,41 @@ l1 norm pos
 \end_layout
 
 \begin_layout Plain Layout
-This is positive for N=1920 
+This shows 
+\begin_inset Formula $0.35D_{1;N}x\left(\omega,K\right)$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+D_{1;N}x\left(\omega,K\right)=\frac{1}{N}\sum_{n=0}^{N}\left|\Delta x_{n}\left(\omega,K\right)\right|
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+and the series has been taken to 
+\begin_inset Formula $N=1920$
+\end_inset
+
+.
+ The usual colormap applies.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1519,7 +1762,18 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-l1 log
+Log of the 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+ gradient sum
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:gradient-l1-log"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1540,10 +1794,44 @@ l1 log
 \end_layout
 
 \begin_layout Plain Layout
-so minus log stuff
+This shows 
+\begin_inset Formula $-0.24\log D_{1;N}x\left(\omega,K\right)$
+\end_inset
+
+.
+ This has the effect of highlighting the regions where 
+\begin_inset Formula $D_{1;N}x\left(\omega,K\right)$
+\end_inset
+
+ is small.
+ The usual colormap applies; the minus sign reverses the sense, so that
+ red regions correspond to very small values of 
+\begin_inset Formula $D_{1;N}x\left(\omega,K\right)$
+\end_inset
+
+.
+ For this encoding, these are 
+\begin_inset Formula $D_{1;N}x\left(\omega,K\right)\approx0.015$
+\end_inset
+
+ in the orange-red regions.
+ The blue regions correspond to 
+\begin_inset Formula $D_{1;N}x\left(\omega,K\right)\approx0.3$
+\end_inset
+
+, getting increaingly larger as blue gets darker and goes into black.
+ 
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
 
 \end_layout
 
