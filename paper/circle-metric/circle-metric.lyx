@@ -1133,7 +1133,7 @@ It is easy to imagine that one way to explore neighboring values of
 The 5-point discrete Laplacian, at each iteration, can be defined as
 \begin_inset Formula 
 \[
-4\nabla^{2}x_{n}\left(\omega,K\right)=4x_{n}\left(\omega,K\right)-x_{n}\left(\omega-\delta\omega,K\right)-x_{n}\left(\omega+\delta\omega,K\right)-x_{n}\left(\omega,K-\delta K\right)-x_{n}\left(\omega,K+\delta K\right)
+\nabla^{2}x_{n}\left(\omega,K\right)=4x_{n}\left(\omega,K\right)-x_{n}\left(\omega-\delta\omega,K\right)-x_{n}\left(\omega+\delta\omega,K\right)-x_{n}\left(\omega,K-\delta K\right)-x_{n}\left(\omega,K+\delta K\right)
 \]
 
 \end_inset
@@ -1413,26 +1413,45 @@ Tangent space norms
 The issue of the Laplacian changing signs, depending on which side of an
  edge one is sitting on, can be avoided by taking the absolute value, before
  summming.
- The five-point Laplacian can also be replaced by an 
-\begin_inset Formula $M+1$
-\end_inset
+ This replaces the Laplacian by a kind of direction-averaged gradient.
+ This is direction-averaged absolute gradient is defined as
+\end_layout
 
--point version, that takes more samples in the angular direction.
- This is defined as
+\begin_layout Standard
 \begin_inset Formula 
 \[
-\nabla^{2}x_{n}\left(\omega,K\right)=\frac{1}{M}\sum_{m=0}^{M}x_{n}\left(\omega,K\right)-x_{n}\left(\omega+\delta\eta\cos\left(\frac{2\pi m}{M}\right),K+\delta\eta\sin\left(\frac{2\pi m}{M}\right)\right)
+\Delta x_{n}\left(\omega,K\right)=\frac{1}{M}\sum_{m=0}^{M}\left|x_{n}\left(\omega,K\right)-x_{n}\left(\omega+\delta\eta\cos\left(\frac{2\pi m}{M}\right),K+\delta\eta\sin\left(\frac{2\pi m}{M}\right)\right)\right|
 \]
 
 \end_inset
 
-This reproduces the five-point formula when 
+The five-point formula is obtained when 
 \begin_inset Formula $M=4$
 \end_inset
 
 , so that the sine and cosine just sample to the left, right, above and
- below.
- Two norms are considered 
+ below (of course, the Laplacian avoids the absolute value in the above.)
+ The absolute value above allows 
+\begin_inset Formula $\Delta x_{n}$
+\end_inset
+
+ to be understood as a first derivative, instead of a second derivative.
+\end_layout
+
+\begin_layout Standard
+The infinitessimal form of the above can be obtained by considering
+\begin_inset Formula 
+\[
+\vec{\delta\eta}\cdot\vec{\nabla}f\left(\omega,K\right)=
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+wo norms are considered 
 \end_layout
 
 \begin_layout Standard

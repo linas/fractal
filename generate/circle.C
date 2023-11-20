@@ -280,12 +280,12 @@ circle_laplacian (double omega, double K, int itermax, double param)
 #define MET_SETTLE_TIME 	0
 
 // Iteration depth
-#define MET_ITER_DEPTH 120
+// #define MET_ITER_DEPTH 120
 // #define MET_ITER_DEPTH 480
-// #define MET_ITER_DEPTH 1920
+#define MET_ITER_DEPTH 1920
 
 // Neighborhood samples
-#define MET_SPOKES 4
+#define MET_SPOKES 11
 
 double
 circle_metric (double omega, double K, int itermax, double param)
@@ -342,13 +342,13 @@ circle_metric (double omega, double K, int itermax, double param)
 				xoff[k] += omoff[k] - Koff[k] * sin (2.0 * M_PI * xoff[k]);
 				lappy += x-xoff[k];
 			}
-			lappy /= MET_SPOKES;
+			lappy /= (double) MET_SPOKES;
 
-#define MET_L1_METRIC 1
+// #define MET_L1_METRIC 1
 #ifdef MET_L1_METRIC
 			dist += fabs(lappy);
 #endif
-// #define MET_L2_METRIC 1
+#define MET_L2_METRIC 1
 #ifdef MET_L2_METRIC
 			dist += lappy*lappy;
 #endif
@@ -444,31 +444,36 @@ circle_gradient (double omega, double K, int itermax, double param)
 		for (int iter=0; iter < GRD_ITER_DEPTH; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
+			double grad = 0.0;
 			for (int k=0; k<GRD_SPOKES; k++)
 			{
 				xoff[k] += omoff[k] - Koff[k] * sin (2.0 * M_PI * xoff[k]);
 #define GRD_L1_METRIC 1
 #ifdef GRD_L1_METRIC
-				// Lets average over the spokes, or sum?
-				// dist += fabs(x-xoff[k]) / GRD_SPOKES;
-				dist += fabs(x-xoff[k]);
+				grad += fabs(x-xoff[k]);
 #endif
 // #define GRD_L2_METRIC 1
 #ifdef GRD_L2_METRIC
-				// Used the sum for the paper, but the average would have
-				// been better, because the average would be independent of
-				// the number of spokes. By linearity, the division could
-				// be done at the end.
-				// dist += (x-xoff[k]) * (x-xoff[k]) / GRD_SPOKES;
-				dist += (x-xoff[k]) * (x-xoff[k]);
+				grad += (x-xoff[k]) * (x-xoff[k]);
 #endif
-				nit ++;
 			}
+			grad /= (double) GRD_SPOKES;
+#ifdef GRD_L2_METRIC
+			grad = sqrt(grad);
+#endif
+			nit ++;
+#ifdef VEC_L1_METRIC
+			dist += grad;
+#endif
+#define VEC_L2_METRIC
+#ifdef VEC_L2_METRIC
+			dist += grad*grad;
+#endif
 		}
 	}
 
 	double met = dist / ((double) nit);
-#ifdef GRD_L2_METRIC
+#ifdef VEC_L2_METRIC
 	met = sqrt(met);
 #endif
 	return met;
@@ -591,8 +596,8 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
-	// return circle_gradient (omega, K, itermax, param);
-	return circle_metric (omega, K, itermax, param);
+	return circle_gradient (omega, K, itermax, param);
+	// return circle_metric (omega, K, itermax, param);
 	// return circle_flip (omega, K, itermax, param);
 }
 
