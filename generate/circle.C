@@ -223,7 +223,7 @@ circle_poincare_bincount (double omega, double K, int itermax)
 		for (int iter=0; iter < PNC_ITER_DEPTH; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
-			double yb = PNC_NBINS * floor (x);
+			double yb = PNC_NBINS * (x - floor (x));
 			int ib = (int) yb;
 			bins[ib]++;
 		}
