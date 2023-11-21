@@ -155,16 +155,84 @@ The circle map
 \begin_inset Formula $x_{n+1}=x_{n}+\omega-K\sin2\pi x_{n}$
 \end_inset
 
- is broadly explored in other texts, and no particular review is given here.
- A few preliminary remarks, though:
+ is broadly explored in other texts; a cursory review is given here.
+ A prominent feature of this map is that, for many regions of the parameter
+ space 
+\begin_inset Formula $\left(\omega,K\right)$
+\end_inset
+
+ the map exhibits 
+\begin_inset Quotes eld
+\end_inset
+
+mode locking
+\begin_inset Quotes erd
+\end_inset
+
+ behavior.
+ That is, the iterated sequence 
+\begin_inset Formula $\left\{ x_{n}\right\} $
+\end_inset
+
+ rapidly settles down to a periodic orbit that is very stable against small
+ perturbations of 
+\begin_inset Formula $\left(\omega,K\right)$
+\end_inset
+
+.
+ The mode-locking regions are called 
+\begin_inset Quotes eld
+\end_inset
+
+Arnold tongues
+\begin_inset Quotes erd
+\end_inset
+
+; these are explicitly visible in the images that follow.
+ Each such tongue has a vee shape, with the sharp tip located at 
+\begin_inset Formula $\left(\omega_{0},K=0\right)$
+\end_inset
+
+.
+ In the mode-locked regions, the period of the orbit is given by the numerator
+ of the Farey fraction that is nearest to the vee-tip frequency 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The mode-locking behavior provides a simplified model for both electronic
- phase-locked loops, and for orbital, tidal celestial mechanics, where planetary
- bodies and moons can orbit in phase-locked behavior.
+The mode-locking behavior is interesting for a variety of reasons.
+ One is that is has practical analogs: it provides a simplified model for
+ both electronic phase-locked loops, and for orbital, tidal celestial mechanics,
+ where planetary bodies and moons can orbit in phase-locked behavior.
  A general understanding of the behavior of this kind of system is interesting
  for both physics and engineering applications.
+\end_layout
+
+\begin_layout Standard
+In the general literature, it is said that the circle map provides a model
+ for weakly coupled rotators.
+ In this model, one imagines a strong electrical motor, capable of spinning
+ at a fixed frequency 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
+ It is directly attached to a disk, so that it spins with the motor.
+ On the circumfrence of this disk is a weak spring, the other end of which
+ is attached to the circumfrence of a second disk.
+ The second disk is placed so that it is in the same plane as the first
+ disk (so that the spring is only ever stretched, it is never torqued or
+ twisted.) The second disk is free to spin, in any direction, or any speed.
+ It is not hard to imagine that, at low speed, the second disk spins synchronoul
+y with the first.
+ 
+\end_layout
+
+\begin_layout Standard
+More formally, the circle map provides an analog for weakly coupled rotators
 \end_layout
 
 \begin_layout Standard
@@ -1288,10 +1356,69 @@ The measurement technique used in this figure was to pre-iterate
 \end_layout
 
 \begin_layout Standard
+The orbits 
+\begin_inset Formula $\left\{ u_{n}\right\} $
+\end_inset
+
+ decompose into roughly two kinds: the asymptotically periodic orbits, which
+ approach a periodic limit sequence, and the chaotic orbits, which visit
+ points on the unit interval, according to the invariant measure.
+ Of course, periodic orbits can be thought of as corresponding to an invariant
+ measure having a countable number of Dirac delta functions located at the
+ limit points.
+ Lets take some care with definitions.
+ A limit cycle of period 
+\begin_inset Formula $p$
+\end_inset
+
+ is a collection of 
+\begin_inset Formula $p$
+\end_inset
+
+ points 
+\begin_inset Formula $0\le v_{k}<1$
+\end_inset
+
+ for integer 
+\begin_inset Formula $0\le k<p$
+\end_inset
+
+.
+ It is a limit when, for each 
+\begin_inset Formula $k$
+\end_inset
+
+, one has
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}u_{np+k}=v_{k}
+\]
+
+\end_inset
+
+The limit is approached with varying speeds; the speed of the approach is
+ terms the 
+\begin_inset Quotes eld
+\end_inset
+
+Lyapunov exponent
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This will be explored elsewhere.
+ For many values of 
+\begin_inset Formula $\eta=\left(\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1395,7 +1522,16 @@ An alternative algorithm is to count the cycle length directly.
  sufficiently converged to it's limit sequence.
  Counting the number of non-empty bins (rejecting the low-count bins as
  noise) provides a direct measure of the period.
- Chaotic points will visit all of the bins; not uniformly, of course, as
+ 
+\end_layout
+
+\begin_layout Standard
+This idea works, but only up to a point.
+ Orbits in the circle-map 
+\end_layout
+
+\begin_layout Standard
+Chaotic points will visit many of the bins; not uniformly, of course, as
  the distribution follows the invariant measure for the chaotic sequence.
  At any rate, bincounting will fail to distinguish periodic orbits of period
  
