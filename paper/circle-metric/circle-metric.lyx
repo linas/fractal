@@ -1009,20 +1009,64 @@ Poincare recurrence time
 \end_layout
 
 \begin_layout Standard
-It is often the case that the sequence 
+The winding number property of 
 \begin_inset Formula $\left\{ x_{n}\right\} $
+\end_inset
+
+ means that the sequence is perenially increasing, and never returns to
+ the same value twice.
+ Yet, periodicity is forced by the perturbation term 
+\begin_inset Formula $K\sin2\pi x_{n}$
+\end_inset
+
+, which remaps each 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ to the unit interval.
+ This sequence, call it 
+\begin_inset Quotes eld
+\end_inset
+
+the associated reduced sequence
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $u_{n}=x_{n}-\left\lfloor x_{n}\right\rfloor $
+\end_inset
+
+, is recurrent.
+ (Think 
+\begin_inset Quotes eld
+\end_inset
+
+u
+\begin_inset Quotes erd
+\end_inset
+
+ for 
+\begin_inset Quotes eld
+\end_inset
+
+unit
+\begin_inset Quotes erd
+\end_inset
+
+.) It is typically recurent in one of two ways: either the sequence 
+\begin_inset Formula $\left\{ u_{n}\right\} $
 \end_inset
 
  will settle down to asymptotically periodic orbits as 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
-.
- At least, it does so, except when it doesn't: some orbits remain chaotic.
- Much of the rest of this paper is an exploration as to how to correctly
- eistinguish these two regimes.
- One classic technique is to experimentally determine the Poincare recurrence
- time.
+, or it will not, chaoticaly visiting most or all of the unit interval.
+\end_layout
+
+\begin_layout Standard
+One classic technique for studying recurrence is to experimentally determine
+ the Poincare recurrence time.
  This is defined as the smallest number of iterations 
 \begin_inset Formula $\tau$
 \end_inset
@@ -1034,7 +1078,7 @@ It is often the case that the sequence
 , one finds 
 \begin_inset Formula 
 \[
-\left|x_{n+\tau}-x_{n}\right|<\epsilon
+\left|u_{n+\tau}-u_{n}\right|<\epsilon
 \]
 
 \end_inset
@@ -1067,93 +1111,10 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The general appearance of the image does not depend on the specific value
- of 
-\begin_inset Formula $\epsilon$
-\end_inset
-
-, as long as it is 
-\begin_inset Quotes eld
-\end_inset
-
-not too small
-\begin_inset Quotes erd
-\end_inset
-
-.
- This is because it can take a long time for 
-\begin_inset Formula $x_{n}$
-\end_inset
-
- to settle into a periodic orbit; thus, if one attempts to measure the recurrenc
-e time before the orbit has settled, one will have poor measurements.
- 
-\end_layout
-
-\begin_layout Standard
-The measurement technique used in this figure was to pre-iterate 
-\begin_inset Formula $n=90$
-\end_inset
-
- times, and then use 
-\begin_inset Formula $x_{n}=x_{90}$
-\end_inset
-
- as the initial starting point.
- Iteration continued for 
-\begin_inset Formula $\tau$
-\end_inset
-
- more steps, until 
-\begin_inset Formula $\left|x_{90+\tau}-x_{90}\right|<\epsilon$
-\end_inset
-
- was satisfied.
- To get a better approximation, iteration continued for 500 more steps,
- and an average of 
-\begin_inset Formula $\tau$
-\end_inset
-
- was taken.
- The figure shows no particularly visible dependence on the starting point
- (the 
-\begin_inset Formula $n=90$
-\end_inset
-
- point), on the extended number of iterations, or on the limit 
-\begin_inset Formula $\epsilon$
-\end_inset
-
-.
- There is, presumably, some dependence, but this is not characterized.
- There is a strong dependence on 
-\begin_inset Formula $x_{0}$
-\end_inset
-
- and so, to get well-behaved values, the recurance time (for each pixel)
- is averaged over hundreds of different randomly selected 
-\begin_inset Formula $x_{0}$
-\end_inset
-
- values.
- Close examination of the image reveals speckling; this speckling goes away
- as more averages per pixel are taken.
-\end_layout
-
-\begin_layout Standard
-An alternative algorithm is to count the cycle length directly.
- This can be done by histogramming: as the map iterates, incremenet the
- bincount whenever the iterate maps to a bin.
- At the end, count the number of non-empy bins (rejecting low-count bins
- as noise), The total number of non-empty bins gives a direct measure of
- the period.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1253,10 +1214,221 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
+The general appearance of the image does not depend on the specific value
+ of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, as long as it is 
+\begin_inset Quotes eld
+\end_inset
+
+not too small
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This is because it can take a long time for 
+\begin_inset Formula $u_{n}$
+\end_inset
+
+ to settle into a periodic orbit; thus, if one attempts to measure the recurrenc
+e time before the orbit has settled, one will have poor measurements.
+ 
+\end_layout
+
+\begin_layout Standard
+The measurement technique used in this figure was to pre-iterate 
+\begin_inset Formula $n=90$
+\end_inset
+
+ times, and then use 
+\begin_inset Formula $u_{n}=u_{90}$
+\end_inset
+
+ as the initial starting point.
+ Iteration continued for 
+\begin_inset Formula $\tau$
+\end_inset
+
+ more steps, until 
+\begin_inset Formula $\left|u_{90+\tau}-u_{90}\right|<\epsilon$
+\end_inset
+
+ was satisfied.
+ To get a better approximation, iteration continued for 500 more steps,
+ and an average of 
+\begin_inset Formula $\tau$
+\end_inset
+
+ was taken.
+ The figure shows no particularly visible dependence on the starting point
+ (the 
+\begin_inset Formula $n=90$
+\end_inset
+
+ point), on the extended number of iterations, or on the limit 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+ There is, presumably, some dependence, but this is not characterized.
+ There is a strong dependence on 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ and so, to get well-behaved values, the recurance time (for each pixel)
+ is averaged over hundreds of different randomly selected 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ values.
+ Close examination of the image reveals speckling; this speckling goes away
+ as more averages per pixel are taken.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
 status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Orbit Lengths
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Orbit-Lengths"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename circle-bincount.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows orbit lengths, as determined by bin-counting.
+ The standard color encoding is used, after dividing the orbit length by
+ 400.
+ Thus, blue regions correspond to orbit lengths of about 100, green to 200,
+ yellow to 300 and red to 400 or more.
+ To obtain this image, a total of 400 bins were used.
+ Prior to tarting bincounting, 190 iterations were made (so bincounting
+ starts with 
+\begin_inset Formula $y_{190}$
+\end_inset
+
+.) Then the orbit was traced and bincounted for 1920 steps.
+ To avoid dependence on 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+, the counting was restarted for 400 different randomly chosen start points
+ 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ (with uniform distribution).
+ The reported orbit lengths are the average of these 400 start points.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An alternative algorithm is to count the cycle length directly.
+ This can be done by histogramming.
+ In detail: divide the unit interval into 
+\begin_inset Formula $M$
+\end_inset
+
+ bins; typically, several hundred, less than a thousand.
+ For each iterate 
+\begin_inset Formula $y_{n}$
+\end_inset
+
+, compute the bin number 
+\begin_inset Formula $m=\left\lfloor My_{n}\right\rfloor $
+\end_inset
+
+ and increment the bincount on that bin.
+ Orbits of period 
+\begin_inset Formula $p$
+\end_inset
+
+ will typically populate 
+\begin_inset Formula $p$
+\end_inset
+
+ bins, and possibly a few more neighboring bins, if the orbit has not yet
+ sufficiently converged to it's limit sequence.
+ Counting the number of non-empty bins (rejecting the low-count bins as
+ noise) provides a direct measure of the period.
+ Chaotic points will visit all of the bins; not uniformly, of course, as
+ the distribution follows the invariant measure for the chaotic sequence.
+ At any rate, bincounting will fail to distinguish periodic orbits of period
+ 
+\begin_inset Formula $p>M$
+\end_inset
+
+ from chaotic orbits.
+ The result is showin in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Orbit-Lengths"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ One might have anticipated that the Poincare recurrence time figure, and
+ the bincount figure look the same.
+ They almost do, but not quite.
+ Careful study, side by side, will reveal the differences.
+ Most surprisingly, perhaps, is that the bin-counting method reveals that
+ the phase-locked regions are much narrower than the recurrance-time figure
+ suggests.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
 
 \begin_layout Plain Layout
 

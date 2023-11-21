@@ -192,9 +192,11 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 // Make sure that ITER_DEPTH is at least 4x larger than nbins,
 // so that for chaotic orbits, each bin is hit maybe 4 times.
 // This will avoid issues with the thresholding, below.
-#define PNC_NBINS 400
+// #define PNC_NBINS 400
+#define PNC_NBINS 800
 #define PNC_SETTLE_TIME 190
-#define PNC_ITER_DEPTH 1920       // Iteration depth
+// #define PNC_ITER_DEPTH 1920       // Iteration depth
+#define PNC_ITER_DEPTH 8111
 
 double
 circle_poincare_bincount (double omega, double K, int itermax)
