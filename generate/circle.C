@@ -462,10 +462,11 @@ circle_gradient (double omega, double K, int itermax, double param)
 			grad = sqrt(grad);
 #endif
 			nit ++;
+#define VEC_L1_METRIC
 #ifdef VEC_L1_METRIC
 			dist += grad;
 #endif
-#define VEC_L2_METRIC
+// #define VEC_L2_METRIC
 #ifdef VEC_L2_METRIC
 			dist += grad*grad;
 #endif

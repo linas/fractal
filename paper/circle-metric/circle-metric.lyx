@@ -490,7 +490,41 @@ There are several problems with this naive aproach.
 \end_inset
 
  anywhere.
- In particular, it may be the case that 
+ In the worst case, the winding numbers differ, so that 
+\begin_inset Formula $\lim_{n\to\infty}x_{n}/n=\Omega_{x}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $\Omega_{y}\ne\Omega_{x}$
+\end_inset
+
+.
+ Then the difference 
+\begin_inset Formula $\left|x_{n}-y_{n}\right|$
+\end_inset
+
+ would be 
+\begin_inset Formula $O\left(n\left|\Omega_{x}-\Omega_{y}\right|\right)$
+\end_inset
+
+ and the sum diverges badly.
+ A less terrible case would be 
+\begin_inset Formula $\Omega_{y}=\Omega_{x}$
+\end_inset
+
+, whith one orbit chatoic, and the other periodic.
+ In this case, the difference 
+\begin_inset Formula $\left|x_{n}-y_{n}\right|$
+\end_inset
+
+ would then be at least 
+\begin_inset Formula $\mathcal{O}\left(1\right)$
+\end_inset
+
+ at each step.
+ This still leads to a divergent sum.
+ A fairly gentle case would be where the two orbits progress in lockstep;
+ this might lead to 
 \begin_inset Formula $\lim_{n\to\infty}\left|x_{n}-y_{n}\right|=\epsilon$
 \end_inset
 
@@ -500,33 +534,25 @@ There are several problems with this naive aproach.
 
 .
  That is, the two orbits converge to something that has a fixed offset.
- A minor variation of this might be that both 
-\begin_inset Formula $\left\{ x_{n}\right\} $
+ Again, the sum diverges.
+ A minor variation of this would be the case where 
+\begin_inset Formula $\epsilon$
 \end_inset
 
- and 
-\begin_inset Formula $\left\{ y_{n}\right\} $
+ is replaced with 
+\begin_inset Formula $\epsilon_{n}$
 \end_inset
 
- are eventually periodic, with the same period, and these two converge to
- 
-\begin_inset Formula $\lim_{n\to\infty}\left|x_{kn+j}-y_{kn+j}\right|=\epsilon_{j}$
-\end_inset
-
- for the limit period 
-\begin_inset Formula $k$
-\end_inset
-
- and 
-\begin_inset Formula $0\le j<k$
-\end_inset
-
- being a point in the cycle.
- 
+ having a periodic behavior.
+ The sum is still divergent.
+ The only case where there is hope is where both sequences converge to the
+ same orbit (periodic or chaotic).
+ It seems unlike that this would ever be the case, although it is perhaps
+ possible.
 \end_layout
 
 \begin_layout Standard
-Another problem is that, in numerical explorations, the limit 
+A different issue is that, in numerical explorations, the limit 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
@@ -548,6 +574,49 @@ d_{p}\left(x-y\right)=\lim_{N\to\infty}d_{p;N}\left(x-y\right)
 
 \end_inset
 
+Is this expression well-defined? Reviewing the same cases as above, its
+ clear that the 
+\begin_inset Formula $\Omega_{y}\ne\Omega_{x}$
+\end_inset
+
+ case still leads to a divergent sum.
+ The sum would be 
+\begin_inset Formula $O\left(N^{2}\left|\Omega_{x}-\Omega_{y}\right|\right)$
+\end_inset
+
+ and the 
+\begin_inset Formula $1/N$
+\end_inset
+
+ in front is not enough to restore order.
+ One concludes that 
+\begin_inset Formula $d_{p}=\infty$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\Omega_{y}\ne\Omega_{x}$
+\end_inset
+
+.
+ However, there should be other cases, where orbits with different periods
+ are being compared, but 
+\begin_inset Formula $\Omega_{y}=\Omega_{x}$
+\end_inset
+
+ holds.
+ Here, the sum should be well-behaved, and the limit 
+\begin_inset Formula $d_{p}\left(x-y\right)$
+\end_inset
+
+ should exist, and be finite.
+ It seems well-defined and finite, at least when comparing cases where 
+\begin_inset Formula $\Omega_{y}=\Omega_{x}$
+\end_inset
+
+ holds.
+\end_layout
+
+\begin_layout Standard
 Each orbit difference 
 \begin_inset Formula $x_{n}-y_{n}$
 \end_inset
@@ -560,25 +629,64 @@ Each orbit difference
 \begin_inset Formula $\delta\eta=\left(\delta\omega,\delta K\right)$
 \end_inset
 
-, and the interesting limit is that of 
+.
+ When is it possible to take the limit 
 \begin_inset Formula $\delta\eta\to0$
 \end_inset
 
- so that 
-\begin_inset Formula $d_{p}$
+ in a meaningful way? It seems that this limit should exist if 
+\begin_inset Formula $\left\{ x_{n}\right\} $
 \end_inset
 
- becomes a linear metric on the tangent space 
+ is periodic, and not at the edge of a chaotic transition.
+ Then all other nearby orbits 
+\begin_inset Formula $\left\{ y_{n}\right\} $
+\end_inset
+
+ should have the same period, and behave in the same way.
+ What's more, it seems reasonable to expect a linear behavior in 
+\begin_inset Formula $\delta\eta$
+\end_inset
+
+, so that 
+\begin_inset Formula $d_{p}\left(a\delta\eta\right)\approx ad_{p}\left(\delta\eta\right)$
+\end_inset
+
+, at least when 
+\begin_inset Formula $\delta\eta$
+\end_inset
+
+ is small enough.
+ However, if 
+\begin_inset Formula $\left\{ x_{n}\right\} $
+\end_inset
+
+ is chaotic, then it would be plausible to argue that the limit 
+\begin_inset Formula $\delta\eta\to0$
+\end_inset
+
+ does not exist, and that 
+\begin_inset Formula $d_{p}\left(\delta\eta\right)$
+\end_inset
+
+ might not be smooth or even continuous.
+ We conclude that when the limit 
+\begin_inset Formula $\delta\eta\to0$
+\end_inset
+
+ does exist, then a tangent plane 
 \begin_inset Formula $T_{\eta}$
 \end_inset
 
-.
- (When it exists, it's linear by definition.
- No surprises here.)
+ exists, and that 
+\begin_inset Formula $d_{p}$
+\end_inset
+
+ becomes a linear metric on that tangent plane.
 \end_layout
 
 \begin_layout Standard
-The mathematical questions then become:
+To summarize, the questions that seem to arise are:
 \end_layout
 
 \begin_layout Itemize
@@ -587,7 +695,7 @@ For which points
 \end_inset
 
  is 
-\begin_inset Formula $\left\Vert \delta\right\Vert _{p}<\infty$
+\begin_inset Formula $\left\Vert \delta\eta\right\Vert _{p}<\infty$
 \end_inset
 
 ? What is the nature of this set? Is it countable? Does it have a measure?
@@ -602,22 +710,35 @@ For which points
 \begin_inset Formula $d_{p}<\infty$
 \end_inset
 
-? What is the structure of these regions?
-\end_layout
-
-\begin_layout Itemize
-Such regions are presumably arc-connected, in that there are arcs connecting
- nearby 
+? We've concluded above that this should hold when the winding number is
+ locally unchanged; for example, when 
 \begin_inset Formula $\eta$
 \end_inset
 
- each with 
-\begin_inset Formula $d_{p}<\infty$
+ is in one of the Arnold tongues.
+ What is the structure of these regions? What is the correct way to talk
+ about this structure?
+\end_layout
+
+\begin_layout Itemize
+For which points 
+\begin_inset Formula $\eta=\left(\omega,K\right)$
 \end_inset
 
-.
- What is the homotopy of such reagions? Are things simply conected? Multiply
- connected? How? Where?
+ is 
+\begin_inset Formula $d_{p}$
+\end_inset
+
+ a smooth (approximately linear) function of 
+\begin_inset Formula $\delta\eta$
+\end_inset
+
+? We've concluded above that this should hold when 
+\begin_inset Formula $\eta$
+\end_inset
+
+ corresponds to a periodic orbit that is not on the cusp chaos, Can this
+ be demonstrated more carefully and clearly?
 \end_layout
 
 \begin_layout Standard
@@ -1647,25 +1768,6 @@ noprefix "false"
  Perhaps te resolution to this paradox is that the recurrence time is being
  measured in a misleading way? Or rather, that the recurrence time cannot
  be taken as an accurate proxy for the period?
-\end_layout
-
-\begin_layout Standard
-Perhaps the latter: consider the sequence 
-\begin_inset Formula $0,1,0,-1,0,1,0,-1,0,\cdots$
-\end_inset
-
- If one were so unlucky as to start measuring the recurrence time with the
- first item in the sequence, one would conclude that the recurrence time
- is two, and thus the period is 2.
- On closer examination, the period is clearly four.
- It could even be crazier: 
-\begin_inset Formula $0,1/5,0,-2/3,0,7/8,0,-1/4,0,\cdots$
-\end_inset
-
- and a mis-interpretation gives a recurrence time of two, when the actual
- period might be huge.
- Thus, it would seem that a better way of measuring the true period of the
- orbits in the diamond is needed.
 \end_layout
 
 \begin_layout Standard
