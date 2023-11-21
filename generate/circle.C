@@ -113,6 +113,18 @@ static double rms_winding_number (double omega, double K, int itermax)
 /*-------------------------------------------------------------------*/
 /*
  * Compute the poincare recurrance time for the circle map
+ * Simple, simplistic algo.
+ * -- Iterate freely for SETTLE_TIME.
+ * -- Record this as the starting point xpoint.
+ * -- Count how long it takes to come back to within EPSILON of this
+ *    starting point.
+ * -- Average over multiple random starts.
+ *
+ * Problems with this algo: A long orbit might accidentally come
+ * within epsilon of itself, and thus will be measured shorter than
+ * it actually is. Seems like this might be especially a problem near
+ * bifurcations and maybe at the transition to chaos?
+ * The bin-counting algo below is meant to cure this issue.
  */
 
 #define EPSILON  	0.003
@@ -123,33 +135,30 @@ double
 circle_poincare_recurrance_time (double omega, double K, int itermax)
 
 {
-	double	x, y;
-	double	xpoint;
-	int		j, iter;
-	long		num_recurs, time_recur=0;
+	long num_recurs = 0;
+	long time_recur=0;
 
-  	num_recurs = 0;
-	for (j=0; j<itermax/RITER_DEPTH; j++)
+	for (int j=0; j<itermax/RITER_DEPTH; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
-		x = t;
+		double x = t;
 
 		/* First, we give a spin for 500 cycles, giving the non-chaotic
 		 * parts a chance to phase-lock */
-		for (iter=0; iter<SETTLE_TIME; iter++)
+		for (int iter=0; iter<SETTLE_TIME; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
 		}
 
 		/* OK, now, we begin to measure the average amount of time to recur */
 		/* (note that we don't have todo += with iter, since its already a running sum). */
-		xpoint = x;
+		double xpoint = x;
 		long ptime = 0;
-		for (iter=0; iter < RITER_DEPTH; iter++)
+		for (int iter=0; iter < RITER_DEPTH; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
-			y = fabs (x-xpoint);
+			double y = fabs (x-xpoint);
 			y -= floor (y);
 			if (y < EPSILON)
 			{
@@ -160,10 +169,87 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 		time_recur += ptime;
 	}
 
-	/* x is the (normalized) number of cycles to reach recurrance */
-	x = (double) time_recur / ((double)num_recurs);
+	/* trec is the (normalized) number of cycles to reach recurrance */
+	double trec = ((double) time_recur) / ((double) num_recurs);
+	return trec;
+}
 
-	return x;
+/*-------------------------------------------------------------------*/
+/*
+ * Compute the poincare recurrance time for the circle map
+ * Fancy bin-counting version.
+ *
+ * Algo:
+ * -- iterate, placing into bins.
+ * -- count number of non-empty bins
+ * -- recount with min threshold
+ *
+ * Seems like it should be able to avoid some of the issues with
+ * the naive recurrence-time algo, above. Of course, it does have
+ * its own issues, e.g. with noise, jitter.
+ */
+
+#define PNC_NBINS 1020
+#define PNC_SETTLE_TIME 190
+#define PNC_ITER_DEPTH 500       // Iteration depth
+
+double
+circle_poincare_bincount (double omega, double K, int itermax)
+
+{
+	long period_len = 0;
+	long nmeasurements = 0;
+
+	for (int j=0; j<itermax/PNC_ITER_DEPTH; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (int iter=0; iter<PNC_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+		}
+
+		double bins[PNC_NBINS+1];
+		for (int ib=0; ib<=PNC_NBINS; ib++)
+			bins[ib] = 0;
+
+		// OK, now, bin-count as we move along.
+		// bin-counting is always modulo one, because that is
+		// all that sine cares about.
+		for (int iter=0; iter < PNC_ITER_DEPTH; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			double yb = PNC_NBINS * floor (x);
+			int ib = (int) yb;
+			bins[ib]++;
+		}
+
+		// Count number of non-empty bins.
+		int nhits = 0;
+		for (int ib=0; ib<=PNC_NBINS; ib++)
+			if (0 < bins[ib]) nhits++;
+
+		// Recount, using a threshold.
+		double binavg = ((double) PNC_ITER_DEPTH) / ((double) nhits);
+		int ibavg = (int) (0.5*binavg);
+
+		// Final count, rejecting mostly empty bins.
+		int cyclen = 0;
+		for (int ib=0; ib<=PNC_NBINS; ib++)
+			if (ibavg < bins[ib]) cyclen++;
+
+		// Tally up.
+		period_len += cyclen;
+		nmeasurements ++;
+	}
+
+	/* plen is the average length of the period cycle. */
+	double plen = ((double) period_len) / ((double) nmeasurements);
+	return plen;
 }
 
 /*-------------------------------------------------------------------*/
@@ -596,8 +682,9 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
+	return circle_poincare_bincount (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
-	return circle_gradient (omega, K, itermax, param);
+	// return circle_gradient (omega, K, itermax, param);
 	// return circle_metric (omega, K, itermax, param);
 	// return circle_flip (omega, K, itermax, param);
 }
