@@ -372,8 +372,6 @@ circle_poincare_measure(double omega, double K, int itermax)
 	for (int ib=0; ib<=MEA_NBINS; ib++)
 		bins[ib] = 0;
 
-	double xstart = 0.0;
-
 	for (int j=0; j<itermax/MEA_ITER_DEPTH; j++)
 	{
 		double t = rand();
@@ -397,7 +395,6 @@ circle_poincare_measure(double omega, double K, int itermax)
 			int ib = (int) yb;
 			bins[ib]++;
 		}
-		xstart = x;
 	}
 
 	// Count grand total
@@ -405,18 +402,42 @@ circle_poincare_measure(double omega, double K, int itermax)
 	for (int ib=0; ib<=MEA_NBINS; ib++)
 		totcnt += bins[ib];
 
-	// Pick a bin at random,
-	double yb = MEA_NBINS * (xstart - floor (xstart));
-	int ib = (int) yb;
-	double meas = bins[ib];
-	meas /= (double) totcnt;
-	meas *= (double) MEA_NBINS;
+	double totmeas = 0.0;
+	int nsamp = 0;
 
-	if (0 == bins[ib])
-		fprintf(stderr, "WTF something broken x=%f ib=%d\n", xstart, ib);
+	// Pick bins at random, with probability given by the measure.
+	for (int j=0; j<itermax/MEA_ITER_DEPTH; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
 
-	double rtime = 1.0 / meas;
+		// Thermalize
+		for (int iter=0; iter<MEA_SETTLE_TIME; iter++)
+			x += omega - K * sin (2.0 * M_PI * x);
 
+		// Report
+		for (int iter=0; iter < MEA_ITER_DEPTH; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			double yb = MEA_NBINS * (x - floor (x));
+			int ib = (int) yb;
+
+			if (0 < bins[ib])
+			{
+				double meas = bins[ib];
+				meas /= (double) totcnt;
+				meas *= (double) MEA_NBINS;
+				totmeas += meas;
+				nsamp ++;
+			}
+		}
+	}
+
+	double avgmeas = totmeas / ((double) nsamp);
+
+	// Recurrence time estimate
+	double rtime = 1.0 / avgmeas;
 	return rtime;
 }
 

@@ -1504,7 +1504,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2696,6 +2696,16 @@ literal "false"
 
 \end_inset
 
+ Other than the abstract formula above, I am not aware of any explicit expressio
+ns for the Frobenius–Peron operator 
+\begin_inset Formula $\mathcal{L}_{C}$
+\end_inset
+
+ for 
+\begin_inset Formula $C=C\left(\omega,K\right)$
+\end_inset
+
+ the circle map.
  
 \end_layout
 
@@ -2704,9 +2714,71 @@ Measures and Recurrence
 \end_layout
 
 \begin_layout Standard
-The measure and the recurrence time can be loosely related to oe-another.
- Roughly speaking, the relationship goes like so.
- After pre-iterating for a while, so that an orbit has been settled upon,
+The measure and the recurrence time can each be derived from the other.
+ More precisely, they are reciprocals of one another.
+ The relationship is stochastic, rather than dynamic or deterministic.
+ It can be derived as follows.
+\end_layout
+
+\begin_layout Standard
+Consider the steps to needed to obtain the recurrence time.
+ One selects a starting point 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+, with some 
+\begin_inset Formula $n\gg1$
+\end_inset
+
+ so that one is assured that any transients altering the orbit of 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ have decayed away.
+ The transients correspond to eigenvalues 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+ of the Frobenius–Perron operator; that is, the decaying eigenfunctions
+ 
+\begin_inset Formula $e_{\lambda}\left(x\right)$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mathcal{L}_{C}e_{\lambda}=\lambda e_{\lambda}$
+\end_inset
+
+.
+ The largest eigenvalue 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+ is the one that limits convergence the most.
+ To see this, expand any given density 
+\begin_inset Formula $\rho\left(x\right)$
+\end_inset
+
+ in terms of the eigenfun
+\end_layout
+
+\begin_layout Standard
+orbits have settled after 
+\begin_inset Formula $n\gg1/\left|\lambda\right|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+s begun to approach it's asymptotic li 
+\end_layout
+
+\begin_layout Standard
+To obtain the recurrence time
+\end_layout
+
+\begin_layout Standard
+After pre-iterating for a while, so that an orbit has been settled upon,
  one selects the current point 
 \begin_inset Formula $x_{n}$
 \end_inset
@@ -2764,18 +2836,7 @@ Inverting this, one concludes that, on average,
 \end_layout
 
 \begin_layout Standard
-The result is showin in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:measure-dominance"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- One might have anticipated that the Poincare recurrence time figure, and
+One might have anticipated that the Poincare recurrence time figure, and
  the bincount figure look the same.
  They almost do, but not quite.
  Careful study, side by side, will reveal the differences.
@@ -2784,92 +2845,8 @@ noprefix "false"
  suggests.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Dominance of the invariant measure
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:measure-dominance"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename circle-bincount.png
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-This figure summarizes the results of bin-counting.
- If an iterate 
-\begin_inset Formula $x_{n}$
-\end_inset
-
- lands in a bin, the bincount is incremented.
- iteration then increments each bin.
-\end_layout
-
-\begin_layout Plain Layout
-The standard color encoding is used, after dividing the orbit length by
- 400.
- Thus, blue regions correspond to orbit lengths of about 100, green to 200,
- yellow to 300 and red to 400 or more.
- To obtain this image, a total of 400 bins were used.
- Prior to tarting bincounting, 190 iterations were made (so bincounting
- starts with 
-\begin_inset Formula $y_{190}$
-\end_inset
-
-.) Then the orbit was traced and bincounted for 1920 steps.
- To avoid dependence on 
-\begin_inset Formula $x_{0}$
-\end_inset
-
-, the counting was restarted for 400 different randomly chosen start points
- 
-\begin_inset Formula $x_{0}$
-\end_inset
-
- (with uniform distribution).
- The reported orbit lengths are the average of these 400 start points.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+\begin_layout Subsection
+Lyapunov
 \end_layout
 
 \begin_layout Section
