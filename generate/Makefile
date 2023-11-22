@@ -16,11 +16,11 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         manvert cutoff brat draw dx image
 
 NEW_EXES = affine alpha baker chirikov \
-        circle circle-mom cutoff divisor elliptic \
+        circle-mom cutoff divisor elliptic \
         erdos euler-q fdist gamma gauss-red gkd gkw gkw-integrand \
         haar hardy hermite hurwitz ising \
         ising-moment mand-flow \
-        mp_zeta mobius plouffe polylog q-exp sho swap takagi totient zeta \
+        mp_zeta mobius plouffe q-exp sho swap takagi totient zeta \
         ray automatic radius
 
 TOOLS = renorm
@@ -60,7 +60,6 @@ brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
 chirikov.o: chirikov.C brat.h
-circle.o: circle.C brat.h
 circle-mom.o: circle-mom.C brat.h
 cutoff.o: cutoff.C
 divisor.o: divisor.C brat.h
@@ -81,7 +80,6 @@ ising.o: ising.C brat.h
 mobius.o: mobius.C brat.h
 mp_zeta.o: mp_zeta.C
 plouffe.o: plouffe.C brat.h
-polylog.o: polylog.C brat.h
 q-exp.o: q-exp.C brat.h
 swap.o: swap.C brat.h
 sho.o: sho.C brat.h coord-xforms.h
@@ -104,7 +102,6 @@ brat-beigen: brat.o brat-beigen.o util.o
 brat-gap-hair: brat.o brat-gap-hair.o util.o $(FUNC)
 brat-gapper: brat.o brat-gapper.o util.o $(FUNC)
 chirikov: brat.o chirikov.o util.o
-circle: brat.o circle.o util.o
 circle-mom: brat.o circle-mom.o util.o
 cutoff: brat.o cutoff.o coord-xforms.o util.o
 divisor: brat.o divisor.o util.o $(FUNC)
@@ -127,7 +124,6 @@ mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(FUNC)
 mp_zeta: brat.o mp_zeta.o util.o $(MP) $(GMP)
 plouffe: brat.o plouffe.o util.o
-polylog: brat.o polylog.o util.o $(MP) $(GMP)
 q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
 sho: brat.o sho.o util.o coord-xforms.o $(MP) $(GMP)
