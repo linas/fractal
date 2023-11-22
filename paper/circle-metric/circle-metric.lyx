@@ -1922,7 +1922,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2050,7 +2050,11 @@ Iteration of the circle map generally resembles that of the Feigenbaum map,
 \begin_inset Formula $M\to\infty$
 \end_inset
 
-.
+ (the width of each bin is 
+\begin_inset Formula $1/M$
+\end_inset
+
+).
  For finite 
 \begin_inset Formula $N$
 \end_inset
@@ -2061,7 +2065,7 @@ Iteration of the circle map generally resembles that of the Feigenbaum map,
 \end_inset
 
  gives the proper invariant measure 
-\begin_inset Formula $\mu\left(x\right)$
+\begin_inset Formula $\mu_{x}\to\mu\left(x\right)$
 \end_inset
 
 .
@@ -2083,6 +2087,12 @@ A reference is needed here.
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
+Informally, the measure can be understood as a single slice through the
+ Feigenbaum map.
+ In the periodic regions
 \end_layout
 
 \begin_layout Standard
@@ -2449,20 +2459,24 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-This idea works, but only up to a point.
- Orbits in the circle-map 
+The measure may be identically zero on parts of the unit interval; the support
+ of the measure is defined as that part of the interval where it is non-zero.
+ This was already noted and presented in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Support-measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The measure is also not uniformly distributed; 
 \end_layout
 
 \begin_layout Standard
-Chaotic points will visit many of the bins; not uniformly, of course, as
- the distribution follows the invariant measure for the chaotic sequence.
- At any rate, bincounting will fail to distinguish periodic orbits of period
- 
-\begin_inset Formula $p>M$
-\end_inset
-
- from chaotic orbits.
- The result is showin in figure 
+The result is showin in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:measure-dominance"
