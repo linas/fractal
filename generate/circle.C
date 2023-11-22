@@ -261,6 +261,81 @@ circle_poincare_bincount (double omega, double K, int itermax)
 
 /*-------------------------------------------------------------------*/
 /*
+ * Compute the support of the measure for the circle map. For
+ * periodic orbits, this provides a number that is more or less the
+ * same as the poincare recurrence time. For the chaotic orbits, it
+ * returns an approximation to the support of the invariant measure
+ * (times the number of bins).
+ *
+ * Algo:
+ * -- iterate, placing into bins.
+ * -- count number of non-empty bins
+ */
+
+// Make sure that ITER_DEPTH is at least 4x larger than nbins,
+// so that for chaotic orbits, each bin is hit maybe 4 times.
+// This will avoid issues with the thresholding, below.
+#define ISS_NBINS 1000
+#define ISS_SETTLE_TIME 190
+// #define ISS_ITER_DEPTH 1920       // Iteration depth
+// #define ISS_ITER_DEPTH 8111
+#define ISS_ITER_DEPTH 38111
+#define ISS_THRESH 0.05  // reject threshold for empty bins
+
+double
+circle_support (double omega, double K, int itermax)
+{
+	long non_empty_bins = 0;
+	long nmeasurements = 0;
+
+	for (int j=0; j<itermax/ISS_ITER_DEPTH; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (int iter=0; iter<ISS_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+		}
+
+		double bins[ISS_NBINS+1];
+		for (int ib=0; ib<=ISS_NBINS; ib++)
+			bins[ib] = 0;
+
+		// OK, now, bin-count as we move along.
+		// bin-counting is always modulo one, because that is
+		// all that sine cares about.
+		for (int iter=0; iter < ISS_ITER_DEPTH; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			double yb = ISS_NBINS * (x - floor (x));
+			int ib = (int) yb;
+			bins[ib]++;
+		}
+
+		// Count number of non-empty bins. Reject almost-empty bins.
+		double binavg = ((double) ISS_ITER_DEPTH) / ((double) ISS_NBINS);
+		int ithresh = (int) floor (ISS_THRESH*binavg);
+
+		// Count rejecting mostly empty bins.
+		int support = 0;
+		for (int ib=0; ib<=ISS_NBINS; ib++)
+			if (ithresh < bins[ib]) support++;
+
+		// Tally up.
+		non_empty_bins += support;
+		nmeasurements ++;
+	}
+
+	/* supp is the support of the measure. */
+	double supp = ((double) non_empty_bins) / ((double) nmeasurements);
+	return supp;
+}
+/*-------------------------------------------------------------------*/
+/*
  * Compute the Laplacian of the orbit (the charge) for the circle map.
  * This computes the series average for the four-point discrete
  * Laplacian for neighboring orbits.
@@ -688,8 +763,9 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return winding_number (omega, K, itermax);
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
-	return circle_poincare_recurrance_time (omega, K, itermax);
+	// return circle_poincare_recurrance_time (omega, K, itermax);
 	// return circle_poincare_bincount (omega, K, itermax);
+	return circle_support (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
 	// return circle_gradient (omega, K, itermax, param);
 	// return circle_metric (omega, K, itermax, param);

@@ -1658,6 +1658,10 @@ The measurement technique used in this figure was to pre-iterate
  as more averages per pixel are taken.
 \end_layout
 
+\begin_layout Subsection
+Periodic and chaotic orbits
+\end_layout
+
 \begin_layout Standard
 The orbits 
 \begin_inset Formula $\left\{ u_{n}\right\} $
@@ -1835,8 +1839,22 @@ Bin-counting and measures
 \end_layout
 
 \begin_layout Standard
-Further insight can be gained by the method of bin-counting or histogramming.
- This is done by dividing the unit interval into 
+A deeper and more sophisticated perspective is provided through the method
+ of bin-counting or histogramming.
+ This enables a simple numerical technique for determining the period of
+ an orbit, independently of using the Poincare recurrence time to obtain
+ it.
+ It also leads directly to the concept of invarient measures, a central
+ concept from ergodic theory.
+ Invariant measures consisting only of discrete points correspond to periodic
+ orbits; invariant measure that have continuous regions correspond to chaotic
+ orbits.
+ The correspondence is sketched below.
+\end_layout
+
+\begin_layout Standard
+The numerical approach provides a good place to launch from.
+ Divide the unit interval into 
 \begin_inset Formula $M$
 \end_inset
 
@@ -1870,6 +1888,123 @@ ng.
  Counting the number of non-empty bins (rejecting the low-count bins as
  noise) provides a direct measure of the period.
  A least, that is how it works, when orbits are properly periodic.
+ Understanding what happens with chaotic orbits requires the definition
+ of the concept of an 
+\begin_inset Quotes eld
+\end_inset
+
+invariant measure
+\begin_inset Quotes erd
+\end_inset
+
+; numerical bin counts then provide an approximation to the invariant measure.
+ 
+\end_layout
+
+\begin_layout Standard
+The result of measuring period lengths by means of bin-counting is shown
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:measure-support"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It looks quite similar to the Poincare reucrrence time figure, but there
+ are differences.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Support of the invariant measure
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:measure-support"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename circle-bincount.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure summarizes the results of bin-counting.
+ If an iterate 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ lands in a bin, the bincount is incremented.
+ iteration then increments each bin.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+The standard color encoding is used, after dividing the orbit length by
+ 400.
+ Thus, blue regions correspond to orbit lengths of about 100, green to 200,
+ yellow to 300 and red to 400 or more.
+ To obtain this image, a total of 400 bins were used.
+ Prior to tarting bincounting, 190 iterations were made (so bincounting
+ starts with 
+\begin_inset Formula $y_{190}$
+\end_inset
+
+.) Then the orbit was traced and bincounted for 1920 steps.
+ To avoid dependence on 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+, the counting was restarted for 400 different randomly chosen start points
+ 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ (with uniform distribution).
+ The reported orbit lengths are the average of these 400 start points.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2094,7 +2229,11 @@ measure
 \begin_inset Formula $f$
 \end_inset
 
- composed with itself.
+ composed 
+\begin_inset Formula $n$
+\end_inset
+
+ times with itself.
  Then, for any 
 \begin_inset Formula $x\in\left[0,1\right]$
 \end_inset
@@ -2127,7 +2266,7 @@ The precise form of the Frobenius–Peron operator
 
  defined to have a polynomial basis and forcing uniform convergence usually
  results in an operator with a discrete spectrum.
- Since all but the first eigenvalue is less than one, the eigenfunctions
+ Since all but the first eigenvalue are less than one, the eigenfunctions
  are termed 
 \begin_inset Quotes eld
 \end_inset
@@ -2232,85 +2371,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Orbit Lengths
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Orbit-Lengths"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename circle-bincount.png
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-This figure shows orbit lengths, as determined by bin-counting.
- The standard color encoding is used, after dividing the orbit length by
- 400.
- Thus, blue regions correspond to orbit lengths of about 100, green to 200,
- yellow to 300 and red to 400 or more.
- To obtain this image, a total of 400 bins were used.
- Prior to tarting bincounting, 190 iterations were made (so bincounting
- starts with 
-\begin_inset Formula $y_{190}$
-\end_inset
-
-.) Then the orbit was traced and bincounted for 1920 steps.
- To avoid dependence on 
-\begin_inset Formula $x_{0}$
-\end_inset
-
-, the counting was restarted for 400 different randomly chosen start points
- 
-\begin_inset Formula $x_{0}$
-\end_inset
-
- (with uniform distribution).
- The reported orbit lengths are the average of these 400 start points.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 This idea works, but only up to a point.
  Orbits in the circle-map 
 \end_layout
@@ -2327,7 +2387,7 @@ Chaotic points will visit many of the bins; not uniformly, of course, as
  The result is showin in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Orbit-Lengths"
+reference "fig:measure-support"
 plural "false"
 caps "false"
 noprefix "false"
