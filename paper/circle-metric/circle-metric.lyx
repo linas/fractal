@@ -2213,7 +2213,138 @@ A reference is needed here.
 \begin_layout Standard
 Informally, the measure can be understood as a single slice through the
  Feigenbaum map.
- In the periodic regions
+ In the periodic regions, it will be of the form 
+\begin_inset Formula $\mu\left(x\right)=\sum_{k}\delta\left(x-x_{k}\right)$
+\end_inset
+
+ where the sum ranges over the points 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+ in the cycle, and 
+\begin_inset Formula $\delta\left(x\right)$
+\end_inset
+
+ is the Dirac delta function.
+ In the chaotic regions, the measure will have measureable support, that
+ is, it will be (almost surely) non-zero on a collection of sub-intervals
+ of the unit interval.
+ This was already noted and presented in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Support-measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Three samples, obtained through bin-counting, are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Samples-of-Measures"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Samples of Measures
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Samples-of-Measures"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename measure-0.45-0.8.eps
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename measure-0.125-1.0.eps
+	width 80text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename measure-0.3-0.1.eps
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The measure, sampled at three different points on the 
+\begin_inset Formula $\left(\omega,K\right)$
+\end_inset
+
+ plane.
+ The first two are from fairly high up; they are generic for any of the
+ chaotic regions with 
+\begin_inset Formula $1/2\pi<K$
+\end_inset
+
+.
+ Note the vertical scale: the integral under the curve here is precisely
+ one.
+ The spikes forming the U-shaped regions are roughly of the form 
+\begin_inset Formula $1/\sin\left(ax+b\right)$
+\end_inset
+
+ for constants 
+\begin_inset Formula $a,b$
+\end_inset
+
+; the meaure as a whole consists of multiple such segments, coming from
+ a sum of inverse images.
+ In general, the sum is infinite, not finite; that is, there are a countable
+ number of discontinuous segments in the graphs above, although most of
+ the discontinuities are miniscule.
+ The third figure is from the region 
+\begin_inset Formula $1/2\pi>K$
+\end_inset
+
+ and is generic for that region.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2492,136 +2623,9 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Samples of Measures
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Samples-of-Measures"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename measure-0.45-0.8.eps
-	width 80text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename measure-0.125-1.0.eps
-	width 80text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename measure-0.3-0.1.eps
-	width 80text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-The measure, sampled at three different points on the 
-\begin_inset Formula $\left(\omega,K\right)$
-\end_inset
-
- plane.
- The first two are from fairly high up; they are generic for any of the
- chaotic regions with 
-\begin_inset Formula $1/2\pi<K$
-\end_inset
-
-.
- Note the vertical scale: the integral under the curve here is precisely
- one.
- The spikes forming the U-shaped regions are roughly of the form 
-\begin_inset Formula $1/\sin\left(ax+b\right)$
-\end_inset
-
- for constants 
-\begin_inset Formula $a,b$
-\end_inset
-
-; the meaure as a whole consists of multiple such segments, coming from
- a sum of inverse images.
- In general, the sum is infinite, not finite; that is, there are a countable
- number of discontinuous segments in the graphs above, although most of
- the discontinuities are miniscule.
- The third figure is from the region 
-\begin_inset Formula $1/2\pi>K$
-\end_inset
-
- and is generic for that region.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The measure may be identically zero on parts of the unit interval; the support
- of the measure is defined as that part of the interval where it is non-zero.
- This was already noted and presented in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Support-measure"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The measure is also not uniformly distributed; in general, it is discontinuous,
- and even discontinuous everywhere.
- Three samples are shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Samples-of-Measures"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- Invariant measures have notriously poor continuity properties; the samples
- shown might even be discontinuous everywhere, even though the last looks
- smooth.
- I'm not aware of any anlaytic expressions for the circle map measure.
+I'm not aware of any explicit expressions for the circle map measure.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 An explicit expression for invariant measure of the 
@@ -2695,10 +2699,68 @@ literal "false"
  
 \end_layout
 
+\begin_layout Subsection
+Measures and Recurrence
+\end_layout
+
 \begin_layout Standard
-Given that the measure is non-uniform, one might be tempted to ask if there
- is any interesting information to be found by computing it's moments.
- Given how spikey it is
+The measure and the recurrence time can be loosely related to oe-another.
+ Roughly speaking, the relationship goes like so.
+ After pre-iterating for a while, so that an orbit has been settled upon,
+ one selects the current point 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ as the starting point.
+ One then iterates further, looking for a time 
+\begin_inset Formula $\tau$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{n+\tau}\in\left[x_{n}-\epsilon,x_{n}+\epsilon\right]$
+\end_inset
+
+ for the chosen 
+\begin_inset Formula $\epsilon\ll1$
+\end_inset
+
+.
+ Even though iteration is a deterministic process, we can treat it as if
+ it were stochastic, and ask the question, when might the above membership
+ hold? The answer is given precisely by the measure.
+ A point 
+\begin_inset Formula $x$
+\end_inset
+
+ randomly selected from the unit interval will land within the interval
+ centered on point 
+\begin_inset Formula $y$
+\end_inset
+
+ with the probability
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p\left(x\in\left[y-\epsilon,y+\epsilon\right]\right)=\int_{y-\epsilon}^{y+\epsilon}\mu\left(s\right)ds
+\]
+
+\end_inset
+
+Inverting this, one concludes that, on average, 
+\begin_inset Formula $\tau=1/p\left(x\in\left[x_{n}-\epsilon,x_{n}+\epsilon\right]\right)$
+\end_inset
+
+ or, explicitly integrating,
+\begin_inset Formula 
+\[
+\tau=\frac{1}{\int_{x_{n}-\epsilon}^{x_{n}+\epsilon}\mu\left(s\right)ds}
+\]
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
