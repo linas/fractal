@@ -1879,34 +1879,36 @@ ng.
 \end_inset
 
  bins.
- Near period bifurcations, there might be some slop due to slow convergence,
- and so possibly the counts might spill over to a few neighboring bins.
+ Near period bifurcations (saddle points), the Lyapunov exponent will be
+ vanishing, and orbits will always engage in a slow walk, slowly converging
+ to the limit cycle.
+ Thus, for periodic orbits near period bifurcations, there will be some
+ slop, as counts spill over into bins neighboring the limit cycle.
  This can be mitigated by pre-iterating: counting does not start until some
  minimum number of iterations have been done.
- This allows the period orbits to settle down and converge to their limit
+ This allows the periodic orbits to settle down and converge to their limit
  cycles.
  Counting the number of non-empty bins (rejecting the low-count bins as
  noise) provides a direct measure of the period.
- A least, that is how it works, when orbits are properly periodic.
- Understanding what happens with chaotic orbits requires the definition
- of the concept of an 
-\begin_inset Quotes eld
-\end_inset
-
-invariant measure
-\begin_inset Quotes erd
-\end_inset
-
-; numerical bin counts then provide an approximation to the invariant measure.
- 
+ For a periodic orbit, each non-empty bin should be visited the same number
+ of times; any spill-over or deficit should be ascribed to iteration near
+ saddle points.
 \end_layout
 
 \begin_layout Standard
-The result of measuring period lengths by means of bin-counting is shown
- in figure 
+Chaotic orbits do not visit a finite set of distinct points, but instead
+ are ergodic over a measureable set.
+ The idea of the invariant measure is described more closely below; from
+ the bin-counting point of view, it means that a large fraction of the bins,
+ or possibly all of them are visited during iteration.
+ This holds true, even if the bins are made infinitessimally tiny.
+ The support of the measure is the fraction of the unit interval on which
+ the measure is non-vanishing; in bin-counting terms, it is the fraction
+ of all bins that are non-empty.
+ The support is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:measure-support"
+reference "fig:Support-measure"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1914,8 +1916,6 @@ noprefix "false"
 \end_inset
 
 .
- It looks quite similar to the Poincare reucrrence time figure, but there
- are differences.
 \end_layout
 
 \begin_layout Standard
@@ -1925,14 +1925,17 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-support
+Support of the Measure
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Support-measure"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1941,6 +1944,55 @@ support
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename support.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the fraction of non-empty bins obtained after bin-counting.
+ The standard color map is used: red indicates that all bins have been visited,
+ green indicates half, and black indicates few or none.
+ The non-empty bins correspond to intervals on which the measure is non-zero;
+ that is, where the measure has support.
+ The support is (effectively) independent of the number of bins used (after
+ ignoring periodic orbits).
+ This particular image was generated with 1000 bins; thus, blue corresponds
+ to roughly 250 occupied bins; deep blue extending down to perhaps 100.
+ This means that almost all parts of the map with periodic orbits appear
+ in the black regions; parts of the map that have period-doubled up into
+ orbit lengths of 100 are extremely thin, as noted in the previous figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Short-Periods"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Thus, here, black corresponds to the regions with periodic orbits; colored
+ regions hold chaotic orbits.
+ This figure does not vary with the number of bins, as long as one uses
+ a few hundred bins or more.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
 
 \end_layout
 
@@ -2312,16 +2364,16 @@ literal "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Support of the invariant measure
+Dominance of the invariant measure
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:measure-support"
+name "fig:measure-dominance"
 
 \end_inset
 
@@ -2413,7 +2465,7 @@ Chaotic points will visit many of the bins; not uniformly, of course, as
  The result is showin in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:measure-support"
+reference "fig:measure-dominance"
 plural "false"
 caps "false"
 noprefix "false"

@@ -128,8 +128,12 @@ static double rms_winding_number (double omega, double K, int itermax)
  */
 
 #define EPSILON  	0.002
-#define SETTLE_TIME 	1490
-#define RITER_DEPTH 18500       // Iteration depth
+// #define SETTLE_TIME 190
+#define SETTLE_TIME 390
+// #define SETTLE_TIME 1490
+// #define RITER_DEPTH 500       // Iteration depth
+#define RITER_DEPTH 3500
+// #define RITER_DEPTH 18500
 
 double
 circle_poincare_recurrance_time (double omega, double K, int itermax)
@@ -151,8 +155,9 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 			x += omega - K * sin (2.0 * M_PI * x);
 		}
 
-		/* OK, now, we begin to measure the average amount of time to recur */
-		/* (note that we don't have todo += with iter, since its already a running sum). */
+		/* OK, now, we begin to measure the average amount of time
+		 * to recur. Note that we don't have todo += with iter,
+		 * since its already a running sum. */
 		double xpoint = x;
 		long ptime = 0;
 		for (int iter=0; iter < RITER_DEPTH; iter++)
@@ -263,9 +268,9 @@ circle_poincare_bincount (double omega, double K, int itermax)
 /*
  * Compute the support of the measure for the circle map. For
  * periodic orbits, this provides a number that is more or less the
- * same as the poincare recurrence time. For the chaotic orbits, it
- * returns an approximation to the support of the invariant measure
- * (times the number of bins).
+ * same as the poincare recurrence time (divided by the number of bins).
+ * For the chaotic orbits, it returns an approximation to the support
+ * of the invariant measure, as a fraction running from zero to one.
  *
  * Algo:
  * -- iterate, placing into bins.
@@ -278,9 +283,10 @@ circle_poincare_bincount (double omega, double K, int itermax)
 #define ISS_NBINS 1000
 #define ISS_SETTLE_TIME 190
 // #define ISS_ITER_DEPTH 1920       // Iteration depth
-// #define ISS_ITER_DEPTH 8111
-#define ISS_ITER_DEPTH 38111
-#define ISS_THRESH 0.05  // reject threshold for empty bins
+#define ISS_ITER_DEPTH 8111
+// #define ISS_ITER_DEPTH 38111
+// #define ISS_THRESH 0.05  // reject threshold for empty bins
+#define ISS_THRESH 0.03
 
 double
 circle_support (double omega, double K, int itermax)
@@ -330,8 +336,12 @@ circle_support (double omega, double K, int itermax)
 		nmeasurements ++;
 	}
 
-	/* supp is the support of the measure. */
+	// supp is the average number of non-empty bins
 	double supp = ((double) non_empty_bins) / ((double) nmeasurements);
+
+	// Divide by the total number of bins, to get the support of the
+	// measure. The support goes from zero to one.
+	supp /= (double) ISS_NBINS;
 	return supp;
 }
 /*-------------------------------------------------------------------*/
@@ -758,14 +768,23 @@ bifurcation_diagram
 
 /*-------------------------------------------------------------------*/
 
-static double circle_map (double omega, double K, int itermax, double param)
+static double circle_map (double a, double b, int itermax, double param)
 {
+#if USUAL
+	double omega = a;
+	double K = b;
+#else
+	// Spin by 45 degrees.
+	double omega = a-b;
+	double K = a+b;
+#endif
+
 	// return winding_number (omega, K, itermax);
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
-	// return circle_poincare_recurrance_time (omega, K, itermax);
+	return circle_poincare_recurrance_time (omega, K, itermax);
 	// return circle_poincare_bincount (omega, K, itermax);
-	return circle_support (omega, K, itermax);
+	// return circle_support (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
 	// return circle_gradient (omega, K, itermax, param);
 	// return circle_metric (omega, K, itermax, param);
