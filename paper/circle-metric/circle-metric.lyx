@@ -1800,6 +1800,15 @@ height "1pt"
 \begin_layout Standard
 The periodic orbits follow the conventional form of bifurcation and period-doubl
 ing seen in the Feigenbaum map.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A reference is needed here.
+\end_layout
+
+\end_inset
+
  Each period-doubled region is increasingly thinner and smaller; after this
  come the chaotic orbits.
  The limit point, where 
@@ -1819,6 +1828,10 @@ noprefix "false"
 : the color coding is such that the periodic regions are in black, and the
  chaotic regions are in color.
  
+\end_layout
+
+\begin_layout Subsection
+Bin-counting and measures
 \end_layout
 
 \begin_layout Standard
@@ -1856,7 +1869,366 @@ ng.
  cycles.
  Counting the number of non-empty bins (rejecting the low-count bins as
  noise) provides a direct measure of the period.
+ A least, that is how it works, when orbits are properly periodic.
+\end_layout
+
+\begin_layout Standard
+Iteration of the circle map generally resembles that of the Feigenbaum map,
+ including the transition from the period-doubled to the chaotic region.
+ As the limit 
+\begin_inset Formula $p\to\infty$
+\end_inset
+
+ is reached, the visited points spread out into a non-discrete measure.
+ The bin-counts provide an approximation to that measure.
+ Suppose there are 
+\begin_inset Formula $M$
+\end_inset
+
+ bins, and one has iterated for 
+\begin_inset Formula $N$
+\end_inset
+
+ steps.
+ At the end of counting, let 
+\begin_inset Formula $c_{m}$
+\end_inset
+
+ be the count in bin 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Normalizing by the total count, one has a normalized bincount of 
+\begin_inset Formula $\nu_{m}=c_{m}/N$
+\end_inset
+
+, so that 
+\begin_inset Formula $\sum_{m}\nu_{m}=1$
+\end_inset
+
+.
+ The bin numbers can be likewise normalized: write 
+\begin_inset Formula $\mu_{x}=\nu_{m}$
+\end_inset
+
+ for 
+\begin_inset Formula $x=m/M$
+\end_inset
+
+.
+ The continuum limit is then taken as 
+\begin_inset Formula $M\to\infty$
+\end_inset
+
+.
+ For finite 
+\begin_inset Formula $N$
+\end_inset
+
+, this just gives a scattering of points on the unit interval.
+ The limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ gives the proper invariant measure 
+\begin_inset Formula $\mu\left(x\right)$
+\end_inset
+
+.
+ It is a measure in the sense that the integral 
+\begin_inset Formula $\int_{0}^{1}\mu\left(x\right)dx=1$
+\end_inset
+
+ can be taken to exist and be properly defined, for the standard topology
+ for the reals on the unit interval.
+ It is outside of the scope of this text to demonstrate this limit exists
+ and is well-defined.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A reference is needed here.
+\end_layout
+
+\end_inset
+
  
+\end_layout
+
+\begin_layout Standard
+The measure is termed 
+\begin_inset Quotes eld
+\end_inset
+
+invariant
+\begin_inset Quotes erd
+\end_inset
+
+, because it corresponds to the Frobenius-Perron eigenvalue of one, for
+ the corresponding transfer operator.
+ Wandering a bit off-topic, lets sketch this for completeness.
+ For any given iterated function 
+\begin_inset Formula $f:\left[0,1\right]\to\left[0,1\right]$
+\end_inset
+
+, define the transfer operator (alternately called the Frobenius–Peron operator)
+ 
+\begin_inset Formula $\mathcal{L}_{f}:\mathcal{F}\to\mathcal{F}$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{f}g\right]\left(y\right)=\sum_{x\in f^{-1}\left(y\right)}\frac{1}{\left|f^{\prime}\left(x\right)\right|}g\left(x\right)
+\]
+
+\end_inset
+
+This busy expression can be understood as follows.
+ Here, 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a 
+\begin_inset Quotes eld
+\end_inset
+
+suitable space
+\begin_inset Quotes erd
+\end_inset
+
+ of functions on the unit interval, and 
+\begin_inset Formula $g\in\mathcal{F}$
+\end_inset
+
+.
+ More on what is meant by 
+\begin_inset Quotes eld
+\end_inset
+
+suitable
+\begin_inset Quotes erd
+\end_inset
+
+, below.
+ In the meantime, one may take 
+\begin_inset Formula $g:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $f^{\prime}$
+\end_inset
+
+ denotes the derivative; the reciprocal can be recognized as the Jacobian.
+ The Frobenius–Peron operator 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ is an operator, in that it maps functions to functions.
+ As a operator, it has a spectrum: in general a spectrum with discrete parts,
+ as well as continuous parts; all of the usual considerations about the
+ spectra of operators apply, in general.
+ For suitably tame function spaces 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+, the largest eigenvalue of 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ will be one, corresponding to a unique eigenfunction 
+\begin_inset Formula $\mu$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathcal{L}_{f}\mu=\mu
+\]
+
+\end_inset
+
+This eigenfunction can be identified as the invariant measure of the iterated
+ map.
+ It is 
+\begin_inset Quotes eld
+\end_inset
+
+invariant
+\begin_inset Quotes erd
+\end_inset
+
+ because applying 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ doesn't change it.
+ It is a 
+\begin_inset Quotes eld
+\end_inset
+
+measure
+\begin_inset Quotes erd
+\end_inset
+
+, because the probability that the 
+\begin_inset Formula $n$
+\end_inset
+
+'th iterate of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ More precisely, write 
+\begin_inset Formula $f^{n}=f\circ f\circ\cdots\circ f$
+\end_inset
+
+ as the function 
+\begin_inset Formula $f$
+\end_inset
+
+ composed with itself.
+ Then, for any 
+\begin_inset Formula $x\in\left[0,1\right]$
+\end_inset
+
+, the probability that 
+\begin_inset Formula $a<f^{n}\left(x\right)<b$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\int_{a}^{b}\mu\left(x\right)dx$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The precise form of the Frobenius–Peron operator 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ and the structure of its spectrum depends strongly on the choice of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+.
+ Working with spaces 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ defined to have a polynomial basis and forcing uniform convergence usually
+ results in an operator with a discrete spectrum.
+ Since all but the first eigenvalue is less than one, the eigenfunctions
+ are termed 
+\begin_inset Quotes eld
+\end_inset
+
+decaying
+\begin_inset Quotes erd
+\end_inset
+
+.
+ They correspond to the 
+\begin_inset Quotes eld
+\end_inset
+
+wandering set
+\begin_inset Quotes erd
+\end_inset
+
+ of dynamical systems that are not conservative.
+ That is, one may start iteration with some initial 
+\begin_inset Formula $x_{0}\in\left[a,b\right]$
+\end_inset
+
+ and find that in the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, that 
+\begin_inset Formula $f^{n}\left(x_{0}\right)\notin\left[a,b\right]$
+\end_inset
+
+ almost certainly.
+ That is, 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+wandered away
+\begin_inset Quotes erd
+\end_inset
+
+ from 
+\begin_inset Formula $\left[a,b\right]$
+\end_inset
+
+, that 
+\begin_inset Formula $\int_{a}^{b}\mu\left(x\right)dx=0$
+\end_inset
+
+.
+ A 
+\begin_inset Quotes eld
+\end_inset
+
+conservative system
+\begin_inset Quotes erd
+\end_inset
+
+ results when one works with the subset of the unit interval where 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is non-vanishing.
+\end_layout
+
+\begin_layout Standard
+The situation is not always so simple.
+ Working with Hilbert spaces or Banach spaces for 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ can result in continuous, rather than discrete spectra.
+ Note that functions belonging to the Banach space 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ only need to be integrable: if 
+\begin_inset Formula $g\in L_{1}$
+\end_inset
+
+ then we only ask that 
+\begin_inset Formula $\int_{0}^{1}\left|g\left(x\right)\right|dx<\infty$
+\end_inset
+
+.
+ Such functions need not be smooth or even continuous.
+ They may even be everywhere-discontinuous: the Minkowski measure
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+literal "false"
+
+\end_inset
+
+ provides such an example.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Standard
@@ -2687,7 +3059,7 @@ Bibilography
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintCited"
-bibfiles "../gr"
+bibfiles "/home/linas/src/fractal/paper/fractal"
 options "tufte"
 
 \end_inset
