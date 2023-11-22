@@ -345,6 +345,81 @@ circle_support (double omega, double K, int itermax)
 	supp /= (double) ISS_NBINS;
 	return supp;
 }
+
+/*-------------------------------------------------------------------*/
+/*
+ * Perform an estimate of the recurrence time as the reciprocal of
+ * the measure in a given interval.
+ *
+ * Algo:
+ * -- iterate, approximating the measure via bin-count.
+ * -- return content of a specific bin.
+ */
+
+// Make sure that ITER_DEPTH is at least 4x larger than nbins,
+// so that for chaotic orbits, each bin is hit maybe 4 times.
+// This will avoid issues with the thresholding, below.
+#define MEA_NBINS 500
+#define MEA_SETTLE_TIME 190
+// #define MEA_ITER_DEPTH 1920       // Iteration depth
+#define MEA_ITER_DEPTH 8111
+// #define MEA_ITER_DEPTH 38111
+
+double
+circle_poincare_measure(double omega, double K, int itermax)
+{
+	double bins[MEA_NBINS+1];
+	for (int ib=0; ib<=MEA_NBINS; ib++)
+		bins[ib] = 0;
+
+	double xstart = 0.0;
+
+	for (int j=0; j<itermax/MEA_ITER_DEPTH; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (int iter=0; iter<MEA_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+		}
+
+		// OK, now, bin-count as we move along.
+		// bin-counting is always modulo one, because that is
+		// all that sine cares about.
+		for (int iter=0; iter < MEA_ITER_DEPTH; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+			double yb = MEA_NBINS * (x - floor (x));
+			int ib = (int) yb;
+			bins[ib]++;
+		}
+		xstart = x;
+	}
+
+	// Count grand total
+	long totcnt = 0;
+	for (int ib=0; ib<=MEA_NBINS; ib++)
+		totcnt += bins[ib];
+
+	// Pick a bin at random,
+	double yb = MEA_NBINS * (xstart - floor (xstart));
+	int ib = (int) yb;
+	double meas = bins[ib];
+	meas /= (double) totcnt;
+	meas *= (double) MEA_NBINS;
+
+	if (0 == bins[ib])
+		fprintf(stderr, "WTF something broken x=%f ib=%d\n", xstart, ib);
+
+	double rtime = 1.0 / meas;
+
+	return rtime;
+}
+
 /*-------------------------------------------------------------------*/
 /*
  * Compute the Laplacian of the orbit (the charge) for the circle map.
@@ -771,7 +846,8 @@ bifurcation_diagram
 
 static double circle_map (double a, double b, int itermax, double param)
 {
-#if USUAL
+#define USUAL 1
+#ifdef USUAL
 	double omega = a;
 	double K = b;
 #else
@@ -783,8 +859,9 @@ static double circle_map (double a, double b, int itermax, double param)
 	// return winding_number (omega, K, itermax);
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
-	return circle_poincare_recurrance_time (omega, K, itermax);
+	// return circle_poincare_recurrance_time (omega, K, itermax);
 	// return circle_poincare_bincount (omega, K, itermax);
+	return circle_poincare_measure (omega, K, itermax);
 	// return circle_support (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
 	// return circle_gradient (omega, K, itermax, param);
