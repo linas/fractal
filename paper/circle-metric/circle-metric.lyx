@@ -680,17 +680,22 @@ A characteristic of the circle map is that when two parameter sets
  is well-defined for the Euclidean plane; the tangent space is a vector
  space itself.
  The Euclidean metric can be given as a metric tensor on the tangent space.
- Can this idea be carried over to the 
+ Can this idea be carried over to the circle map, where distances are provided
+ by the similarity of sequences 
+\begin_inset Formula $x_{n}\left(\omega,K\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{n}\left(\omega^{\prime},K^{\prime}\right)$
+\end_inset
+
+? Is this even a coherent idea, given that some sequences are periodic,
+ while others are chaotic? It might not be, but let's at least try.
 \end_layout
 
 \begin_layout Standard
-This text is a numerical exploration of the metric on the tangent space
- to the parameter space.
- Some definitions and terminology for what this means.
-\end_layout
-
-\begin_layout Standard
-The circle map is taken as the iterated equation 
+First, a review of the symmetries of the map.
+ The circle map is taken as the iterated equation 
 \begin_inset Formula $x_{n+1}=x_{n}+\omega-K\sin2\pi x_{n}$
 \end_inset
 
@@ -764,7 +769,7 @@ The circle map is taken as the iterated equation
 \end_inset
 
 .
- This means that the interesting region is that of 
+ This means that the unique region is that of 
 \begin_inset Formula $0\le\omega\le1/2$
 \end_inset
 
@@ -775,15 +780,26 @@ The circle map is taken as the iterated equation
 \end_inset
 
  is depicted in the various pictures.
- Usually, exploration is limited to 
-\begin_inset Formula $0\le K$
+ The map is not symmetric about 
+\begin_inset Formula $K$
 \end_inset
 
- and quite often to 
+; the sequences for 
+\begin_inset Formula $\pm K$
+\end_inset
+
+ cannot be remapped into one-another.
+ Yet, remarkably, the general behavior is remarkably similar.
+ This is examined more closely below.
+ Most of this text will be focused on the square region 
 \begin_inset Formula $0\le K\le1$
 \end_inset
 
- except as otherwise noted.
+, 
+\begin_inset Formula $0\le\omega\le1$
+\end_inset
+
+, except as otherwise noted.
  
 \end_layout
 
@@ -842,15 +858,19 @@ There are several problems with this naive aproach.
 \end_inset
 
  and likewise for 
+\begin_inset Formula $\lim_{n\to\infty}y_{n}/n=\Omega_{y}$
+\end_inset
+
+ one has 
 \begin_inset Formula $\Omega_{y}\ne\Omega_{x}$
 \end_inset
 
 .
- Then the difference 
+ The difference 
 \begin_inset Formula $\left|x_{n}-y_{n}\right|$
 \end_inset
 
- would be 
+ would be of order 
 \begin_inset Formula $O\left(n\left|\Omega_{x}-\Omega_{y}\right|\right)$
 \end_inset
 
@@ -859,7 +879,7 @@ There are several problems with this naive aproach.
 \begin_inset Formula $\Omega_{y}=\Omega_{x}$
 \end_inset
 
-, whith one orbit chatoic, and the other periodic.
+, with one orbit chatoic, and the other periodic.
  In this case, the difference 
 \begin_inset Formula $\left|x_{n}-y_{n}\right|$
 \end_inset
@@ -1101,7 +1121,7 @@ These questions should now make the inspiration of the Moore plane a bit
  is metrically disconnected from it's neighbors.
  One can use this to infer a topology, with that topology being discrete,
  at such points.
- But this is not all; other nearby topics suggest themselves.
+ But this is not all; other nearby questions easily suggest themselves.
 \end_layout
 
 \begin_layout Section
@@ -1136,8 +1156,12 @@ All figures in this text use pixel coordinates that place
 \end_inset
 
 .
- However, as a general rule, we are interested in the structure of the asymptoti
-c sequence for large 
+ However, as a general rule, we are interested in the structure that remains
+ independent of 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+, the structure of the asymptotic sequence for large 
 \begin_inset Formula $n$
 \end_inset
 
@@ -1676,7 +1700,7 @@ The orbits
 \end_inset
 
 The limit is approached with varying speeds; the speed of the approach is
- terms the 
+ termed the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1686,11 +1710,153 @@ Lyapunov exponent
 
 .
  This will be explored elsewhere.
- For many values of 
-\begin_inset Formula $\eta=\left(\right)$
+ An illustration of the mode-locking regions was already given in the intro;
+ a fuller map is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Short-Periods"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Short Periods
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Short-Periods"
+
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename recur-lowcount.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This image repeats the orbit-length image, but with a color scheme chosen
+ to emphasize the short cycles.
+ Fxied points (i.e.
+ points of period one) are shown in dark blue.
+ Note the large X consists of fixed points.
+ Light blue are orbits of period two.
+ This includes the lower-central tongue, as well as the cap atop the fixed-point
+ X; the cap is period-doubled.
+ The dark grey-green color has a period of three; note the two tongues on
+ either side of the central tongue.
+ Bright green has a period of four: it is the color of the cap of the central
+ tongue, again showing that the cap is period-doubled.
+ The three mustard colors are periods 5,6, and 7.
+ All red regions are period 8 or larger.
+ Note the cap on the period-three toungue: it is period six.
+ Subsequent period doubled regions stack on top in a likewise fashion, although
+ they get exceedingly thin very quickly.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The periodic orbits follow the conventional form of bifurcation and period-doubl
+ing seen in the Feigenbaum map.
+ Each period-doubled region is increasingly thinner and smaller; after this
+ come the chaotic orbits.
+ The limit point, where 
+\begin_inset Formula $p\to\infty$
+\end_inset
+
+ can be seen in the recurrence-time figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Poincare-recurrence-time"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+: the color coding is such that the periodic regions are in black, and the
+ chaotic regions are in color.
+ 
+\end_layout
+
+\begin_layout Standard
+Further insight can be gained by the method of bin-counting or histogramming.
+ This is done by dividing the unit interval into 
+\begin_inset Formula $M$
+\end_inset
+
+ bins.
+ Several hundred to several thousand bins are enough to show something interesti
+ng.
+ For each iterate 
+\begin_inset Formula $y_{n}$
+\end_inset
+
+, compute the bin number 
+\begin_inset Formula $m=\left\lfloor My_{n}\right\rfloor $
+\end_inset
+
+ and increment the bincount on that bin.
+ Orbits of period 
+\begin_inset Formula $p$
+\end_inset
+
+ will typically populate 
+\begin_inset Formula $p$
+\end_inset
+
+ bins.
+ Near period bifurcations, there might be some slop due to slow convergence,
+ and so possibly the counts might spill over to a few neighboring bins.
+ This can be mitigated by pre-iterating: counting does not start until some
+ minimum number of iterations have been done.
+ This allows the period orbits to settle down and converge to their limit
+ cycles.
+ Counting the number of non-empty bins (rejecting the low-count bins as
+ noise) provides a direct measure of the period.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1773,38 +1939,6 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-An alternative algorithm is to count the cycle length directly.
- This can be done by histogramming.
- In detail: divide the unit interval into 
-\begin_inset Formula $M$
-\end_inset
-
- bins; typically, several hundred, less than a thousand.
- For each iterate 
-\begin_inset Formula $y_{n}$
-\end_inset
-
-, compute the bin number 
-\begin_inset Formula $m=\left\lfloor My_{n}\right\rfloor $
-\end_inset
-
- and increment the bincount on that bin.
- Orbits of period 
-\begin_inset Formula $p$
-\end_inset
-
- will typically populate 
-\begin_inset Formula $p$
-\end_inset
-
- bins, and possibly a few more neighboring bins, if the orbit has not yet
- sufficiently converged to it's limit sequence.
- Counting the number of non-empty bins (rejecting the low-count bins as
- noise) provides a direct measure of the period.
- 
-\end_layout
-
-\begin_layout Standard
 This idea works, but only up to a point.
  Orbits in the circle-map 
 \end_layout
@@ -1837,94 +1971,6 @@ noprefix "false"
  the phase-locked regions are much narrower than the recurrance-time figure
  suggests.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Period Lengths
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Period-Lengths"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename recur-lowcount.png
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-This selects a color scheme that directly exposes the short cycles.
- The color scheme is as follows: dark-blue, pariod of one (i.e.
- fixed point).
- Note the large X consists of fixed points.
- Light blue are orbits of period two.
- This includes the lower-central tongue, as well as the cap atop the fixed-point
- X; the cap is period-doubled.
- The dark grey-green color has a period of three; note the two tongues on
- either side of the central tongue.
- Bright green has a period of four: it is the color of the cap of the central
- tongue, again showing that the cap is period-doubled.
- The three mustard colors are periods 5,6, and 7.
- All red regions are period 8 or larger.
- Note the cap on the period-three toungue: it is period six.
- Note the locations of the period five tounges: one each, to left and right
- of center, the largest tounges in between the period two and three tongues.
- This resembles Farey fraction counting, in that 2+3=5.
- The other two period-five tounges are the larges ones between the period-four
- and the period-one tongues; so again, 1+4=5.
- As a general rule, selecting any two tongues of periods m and n, the largest
- tongue in between the two will have period m+n.
- (To be clear: stick to the left or the right side of this image, when selecting
- the pair.) This holds even for pairs consisting of a low and a high-period
- tongue; the counting is always Farey-fraction-like.
- Note also the salt-n-pepper effect in the central diamond.
- The diamond appears to host bifurcation vertexes: with only minor perturbations
- in parameters, the period changes wildly.
- All such stippled regions corespond to bifurcation points.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
