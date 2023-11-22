@@ -17,25 +17,18 @@
  *
  */
 
-// Make sure that ITER_DEPTH is at least 4x larger than nbins,
-// so that for chaotic orbits, each bin is hit maybe 4 times.
-// This will avoid issues with the thresholding, below.
-#define ISS_NBINS 1000
-#define ISS_SETTLE_TIME 190
-// #define ISS_ITER_DEPTH 1920       // Iteration depth
-#define ISS_ITER_DEPTH 8111
-// #define ISS_ITER_DEPTH 38111
+#define ISS_SETTLE_TIME 1190
 
 void
-circle_measure (double omega, double K, int itermax)
+circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 {
 	// Initialize empty bins
-	double bins[ISS_NBINS+1];
-	for (int ib=0; ib<=ISS_NBINS; ib++)
+	double bins[nbins+1];
+	for (int ib=0; ib<=nbins; ib++)
 		bins[ib] = 0;
 
 	// Iterate, with random starts.
-	for (int j=0; j<itermax/ISS_ITER_DEPTH; j++)
+	for (int j=0; j<nstarts; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -51,10 +44,10 @@ circle_measure (double omega, double K, int itermax)
 		// OK, now, bin-count as we move along.
 		// bin-counting is always modulo one, because that is
 		// all that sine cares about.
-		for (int iter=0; iter < ISS_ITER_DEPTH; iter++)
+		for (int iter=0; iter < depth; iter++)
 		{
 			x += omega - K * sin (2.0 * M_PI * x);
-			double yb = ISS_NBINS * (x - floor (x));
+			double yb = nbins * (x - floor (x));
 			int ib = (int) yb;
 			bins[ib]++;
 		}
@@ -62,28 +55,41 @@ circle_measure (double omega, double K, int itermax)
 
 	// Get the total bincount.
 	long totcnt = 0;
-	for (int ib=0; ib<=ISS_NBINS; ib++)
+	for (int ib=0; ib<nbins; ib++)
 		totcnt += bins[ib];
 
 	// Dump to stdout
 	printf("#\n# Cicle-map bincount, omega=%f K=%f\n", omega, K);
-	printf("# nbins=%d totcnt=%ld\n", ISS_NBINS, totcnt);
-	printf("# iter-depth=%d rand-start=%d itermax=%d\n#\n",
-	       ISS_ITER_DEPTH, itermax/ISS_ITER_DEPTH, itermax);
+	printf("# nbins=%d totcnt=%ld\n", nbins, totcnt);
+	printf("# iter-depth=%d rand-start=%d\n#\n", depth, nstarts);
 
-	for (int ib=0; ib<=ISS_NBINS; ib++)
+	for (int ib=0; ib<nbins; ib++)
 	{
 		double x = ib + 0.5;
-		x /= ISS_NBINS;
+		x /= (double) nbins;
 		double mu = bins[ib];
-		mu /= totcnt;
+		mu /= (double) totcnt;
+		mu *= (double) nbins;
 		printf("%d	%f	%f\n", ib, x, mu);
 	}
 }
 
 int main(int argc, char* argv[])
 {
-	circle_measure (0.1, 0.97, 10000);
+	if (6 > argc)
+	{
+		fprintf(stderr,
+			"Usage: %s <omega> <k> <nbins> <nstarts> <depth>\n", argv[0]);
+		exit(1);
+	}
+	double omega = atof(argv[1]);
+	double K = atof(argv[2]);
+	double nbins = atoi(argv[3]);
+	double starts = atoi(argv[4]);
+	double depth = atoi(argv[5]);
+
+	// circle_measure (0.1, 1.1, itermax);
+	circle_measure (omega, K, nbins, starts, depth);
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
