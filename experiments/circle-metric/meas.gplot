@@ -14,8 +14,9 @@ set xrange[0:1]
 # plot "meas-0.12155.dat" using 2:3 lw 2 title ""
 
 set out 'meas.png'
-set title "Measure at omega=1/8,  K=1"
-plot "meas-0.125.dat" using 2:3 lw 2 title ""
 
-# set out 'dyadic-odo-2.svg'
-# plot "dyadic-odo.dat" using 2:4 lw 3 title ""
+# Final version, used in the paper.
+set term postscript eps color enhanced fontscale 2 size 9,3
+set out 'measure-0.125.eps'
+set title "Measure at omega=1/8,  K=1"
+plot "meas-0.125.dat" using 2:3 lw 5 title ""
