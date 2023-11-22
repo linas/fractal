@@ -10,6 +10,7 @@
  * more stuff -- January 2000
  * more stuff -- October 2004
  * more stuff -- January 2006
+ * more stuff -- November 2023
  */
 
 #include <math.h>
