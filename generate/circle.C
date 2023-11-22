@@ -127,9 +127,9 @@ static double rms_winding_number (double omega, double K, int itermax)
  * The bin-counting algo below is meant to cure this issue.
  */
 
-#define EPSILON  	0.003
-#define SETTLE_TIME 	90
-#define RITER_DEPTH 500       // Iteration depth
+#define EPSILON  	0.002
+#define SETTLE_TIME 	1490
+#define RITER_DEPTH 18500       // Iteration depth
 
 double
 circle_poincare_recurrance_time (double omega, double K, int itermax)
@@ -688,8 +688,8 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return winding_number (omega, K, itermax);
 	// return noisy_winding_number (omega, K, itermax, param);
 	// return rms_winding_number (omega, K, itermax);
-	// return circle_poincare_recurrance_time (omega, K, itermax);
-	return circle_poincare_bincount (omega, K, itermax);
+	return circle_poincare_recurrance_time (omega, K, itermax);
+	// return circle_poincare_bincount (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
 	// return circle_gradient (omega, K, itermax, param);
 	// return circle_metric (omega, K, itermax, param);
