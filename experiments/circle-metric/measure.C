@@ -53,8 +53,8 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 			// "push" is the differential push contributing
 			// to the non-linear changes in the orbit. Take
 			// before iterating; use the bin after iterating.
-			// (so as not to just convolve w/measure ???)
-			double push = abs(cos (2.0 * M_PI * x));
+			// (So that it's correctly convolved w/measure.)
+			double push = abs(1.0 - 2.0 * M_PI * K * cos (2.0 * M_PI * x));
 
 			x += omega - K * sin (2.0 * M_PI * x);
 			double yb = nbins * (x - floor (x));
@@ -76,7 +76,6 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 	for (int ib=0; ib<nbins; ib++)
 	{
 		lyap[ib] /= bins[ib];
-		lyap[ib] *= 2.0 * M_PI * K;
 		avgpush += lyap[ib];
 		lyap[ib] = log(lyap[ib]);
 		avglya += lyap[ib];
