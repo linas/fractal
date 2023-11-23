@@ -480,7 +480,7 @@ circle_lyapunov (double omega, double K, int itermax)
 
 			xnought += LYA_DELTA;
 			xnought += omega - K * sin (2.0 * M_PI * xnought);
-			double change = xnought - x;
+			double change = abs(xnought - x);
 			double lya = log(change / LYA_DELTA);
 			totlya += lya;
 			nobs++;
