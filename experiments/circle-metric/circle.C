@@ -443,6 +443,57 @@ circle_poincare_measure(double omega, double K, int itermax)
 
 /*-------------------------------------------------------------------*/
 /*
+ * Compute the Lyapunov exponent for the circle map. Cheap and dirty.
+ */
+
+#define LYA_SETTLE_TIME 190
+#define LYA_ITER_DEPTH 1920       // Iteration depth
+// #define LYA_ITER_DEPTH 8111
+#define LYA_DELTA 1.0e-6   // Offset.
+
+double
+circle_lyapunov (double omega, double K, int itermax)
+{
+	double totlya = 0.0;
+	int nobs = 0;
+
+	for (int j=0; j<itermax/LYA_ITER_DEPTH; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		double x = t;
+
+		/* First, we give a spin for 500 cycles, giving the non-chaotic
+		 * parts a chance to phase-lock */
+		for (int iter=0; iter<LYA_SETTLE_TIME; iter++)
+		{
+			x += omega - K * sin (2.0 * M_PI * x);
+		}
+
+		// OK, now, bin-count as we move along.
+		// bin-counting is always modulo one, because that is
+		// all that sine cares about.
+		for (int iter=0; iter < LYA_ITER_DEPTH; iter++)
+		{
+			double xnought = x;
+			x += omega - K * sin (2.0 * M_PI * x);
+
+			xnought += LYA_DELTA;
+			xnought += omega - K * sin (2.0 * M_PI * xnought);
+			double change = xnought - x;
+			double lya = log(change / LYA_DELTA);
+			totlya += lya;
+			nobs++;
+		}
+
+	}
+
+	double avglya = totlya / nobs;
+	return avglya;
+}
+
+/*-------------------------------------------------------------------*/
+/*
  * Compute the Laplacian of the orbit (the charge) for the circle map.
  * This computes the series average for the four-point discrete
  * Laplacian for neighboring orbits.
@@ -882,8 +933,9 @@ static double circle_map (double a, double b, int itermax, double param)
 	// return rms_winding_number (omega, K, itermax);
 	// return circle_poincare_recurrance_time (omega, K, itermax);
 	// return circle_poincare_bincount (omega, K, itermax);
-	return circle_poincare_measure (omega, K, itermax);
+	// return circle_poincare_measure (omega, K, itermax);
 	// return circle_support (omega, K, itermax);
+	return circle_lyapunov (omega, K, itermax);
 	// return circle_laplacian (omega, K, itermax, param);
 	// return circle_gradient (omega, K, itermax, param);
 	// return circle_metric (omega, K, itermax, param);
