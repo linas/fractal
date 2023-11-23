@@ -497,6 +497,9 @@ circle_lyapunov (double omega, double K, int itermax)
 	// That's intersting. Lets divide by K
 	// if (0.0 < K) avglya /= K;
 
+	// Surprise!!!
+	// printf("du %f %f avlya=%f\n", omega, K, avglya);
+
 	return avglya;
 }
 

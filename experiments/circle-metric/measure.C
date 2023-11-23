@@ -27,11 +27,16 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 	// Initialize empty bins
 	double bins[nbins+1];
 	double lyap[nbins+1];
+	double lcnt[nbins+1];
 	for (int ib=0; ib<=nbins; ib++)
 	{
-		bins[ib] = 0;
-		lyap[ib] = 0;
+		bins[ib] = 0.0;
+		lyap[ib] = 0.0;
+		lcnt[ib] = 0.0;
 	}
+
+	double lyasum = 0.0;
+	double lyacnt = 0.0;
 
 	// Iterate, with random starts.
 	for (int j=0; j<nstarts; j++)
@@ -62,7 +67,13 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 			xnought += omega - K * sin (2.0 * M_PI * xnought);
 			double delta = fabs(x - xnought);
 			double expo = log(delta / LYA_DELTA);
-			lyap[ib] += expo;
+			if (-25.0 < expo)
+			{
+				lyap[ib] += expo;
+				lcnt[ib] ++;
+				lyasum += expo;
+				lyacnt ++;
+			}
 		}
 	}
 
@@ -73,12 +84,17 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 
 	// Get average lyapunov for this bin
 	for (int ib=0; ib<nbins; ib++)
-		lyap[ib] /= bins[ib];
+		lyap[ib] /= lcnt[ib];
+
+	// Averge Lyapunov over all bins
+	double avglya = lyasum / lyacnt;
 
 	// Dump to stdout
 	printf("#\n# Cicle-map bincount, omega=%f K=%f\n", omega, K);
 	printf("# nbins=%d totcnt=%ld\n", nbins, totcnt);
-	printf("# iter-depth=%d rand-start=%d\n#\n", depth, nstarts);
+	printf("# iter-depth=%d rand-start=%d\n", depth, nstarts);
+	printf("# Lyapunov avg=%g\n", avglya);
+	printf("#\n");
 
 	for (int ib=0; ib<nbins; ib++)
 	{
