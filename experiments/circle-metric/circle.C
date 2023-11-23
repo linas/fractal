@@ -446,10 +446,11 @@ circle_poincare_measure(double omega, double K, int itermax)
  * Compute the Lyapunov exponent for the circle map. Cheap and dirty.
  */
 
-#define LYA_SETTLE_TIME 190
+// #define LYA_SETTLE_TIME 3490  // A huge settle time is neeed for the tongues.
+#define LYA_SETTLE_TIME 90  // A huge settle time is neeed for the tongues.
 #define LYA_ITER_DEPTH 1920       // Iteration depth
-// #define LYA_ITER_DEPTH 8111
-#define LYA_DELTA 1.0e-6   // Offset.
+// #define LYA_ITER_DEPTH 19311
+#define LYA_DELTA 1.0e-5   // Offset.
 
 double
 circle_lyapunov (double omega, double K, int itermax)
@@ -489,6 +490,10 @@ circle_lyapunov (double omega, double K, int itermax)
 	}
 
 	double avglya = totlya / nobs;
+
+	// That's intersting. Lets divide by K
+	// if (0.0 < K) avglya /= K;
+
 	return avglya;
 }
 

@@ -17,15 +17,27 @@
  *
  */
 
-#define ISS_SETTLE_TIME 1190
+// #define ISS_SETTLE_TIME 1190
+
+// Points below K=1/2pi have a vanishing Lyapunov const, and need a huge
+// settle time. Laypunov const seems like its about 10e-4 ???
+// .. Except this does not seem to matter?
+// #define ISS_SETTLE_TIME 31190
+#define ISS_SETTLE_TIME 190
+
+#define LYA_DELTA 1e-5
 
 void
 circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 {
 	// Initialize empty bins
 	double bins[nbins+1];
+	double lyap[nbins+1];
 	for (int ib=0; ib<=nbins; ib++)
+	{
 		bins[ib] = 0;
+		lyap[ib] = 0;
+	}
 
 	// Iterate, with random starts.
 	for (int j=0; j<nstarts; j++)
@@ -46,10 +58,17 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 		// all that sine cares about.
 		for (int iter=0; iter < depth; iter++)
 		{
+			double xnought = x;
 			x += omega - K * sin (2.0 * M_PI * x);
 			double yb = nbins * (x - floor (x));
 			int ib = (int) yb;
 			bins[ib]++;
+
+			xnought += LYA_DELTA;
+			xnought += omega - K * sin (2.0 * M_PI * xnought);
+			double delta = fabs(x - xnought);
+			double expo = log(delta / LYA_DELTA);
+			lyap[ib] += expo;
 		}
 	}
 
@@ -57,6 +76,10 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 	long totcnt = 0;
 	for (int ib=0; ib<nbins; ib++)
 		totcnt += bins[ib];
+
+	// Get average lyapunov for this bin
+	for (int ib=0; ib<nbins; ib++)
+		lyap[ib] /= bins[ib];
 
 	// Dump to stdout
 	printf("#\n# Cicle-map bincount, omega=%f K=%f\n", omega, K);
@@ -70,7 +93,7 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 		double mu = bins[ib];
 		mu /= (double) totcnt;
 		mu *= (double) nbins;
-		printf("%d	%f	%f\n", ib, x, mu);
+		printf("%d	%f	%f	%f\n", ib, x, mu, lyap[ib]);
 	}
 }
 
