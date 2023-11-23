@@ -19,24 +19,17 @@
 
 #define ISS_SETTLE_TIME 190
 
-#define LYA_DELTA 1e-5
-
 void
 circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 {
 	// Initialize empty bins
 	double bins[nbins+1];
 	double lyap[nbins+1];
-	double lcnt[nbins+1];
 	for (int ib=0; ib<=nbins; ib++)
 	{
 		bins[ib] = 0.0;
 		lyap[ib] = 0.0;
-		lcnt[ib] = 0.0;
 	}
-
-	double lyasum = 0.0;
-	double lyacnt = 0.0;
 
 	// Iterate, with random starts.
 	for (int j=0; j<nstarts; j++)
@@ -57,23 +50,18 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 		// all that sine cares about.
 		for (int iter=0; iter < depth; iter++)
 		{
-			double xnought = x;
+			// "push" is the differential push contributing
+			// to the non-linear changes in the orbit. Take
+			// before iterating; use the bin after iterating.
+			// (so as not to just convolve w/measure ???)
+			double push = abs(cos (2.0 * M_PI * x));
+
 			x += omega - K * sin (2.0 * M_PI * x);
 			double yb = nbins * (x - floor (x));
 			int ib = (int) yb;
 			bins[ib]++;
 
-			xnought += LYA_DELTA;
-			xnought += omega - K * sin (2.0 * M_PI * xnought);
-			double delta = fabs(x - xnought);
-			double expo = log(delta / LYA_DELTA);
-			if (-25.0 < expo)
-			{
-				lyap[ib] += expo;
-				lcnt[ib] ++;
-				lyasum += expo;
-				lyacnt ++;
-			}
+			lyap[ib] += push;
 		}
 	}
 
@@ -83,17 +71,25 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 		totcnt += bins[ib];
 
 	// Get average lyapunov for this bin
+	double avgpush = 0.0;
+	double avglya = 0.0;
 	for (int ib=0; ib<nbins; ib++)
-		lyap[ib] /= lcnt[ib];
-
-	// Averge Lyapunov over all bins
-	double avglya = lyasum / lyacnt;
+	{
+		lyap[ib] /= bins[ib];
+		lyap[ib] *= 2.0 * M_PI * K;
+		avgpush += lyap[ib];
+		lyap[ib] = log(lyap[ib]);
+		avglya += lyap[ib];
+	}
+	avglya /= nbins;
+	avgpush /= nbins;
+	avgpush = log(avgpush);
 
 	// Dump to stdout
 	printf("#\n# Cicle-map bincount, omega=%f K=%f\n", omega, K);
 	printf("# nbins=%d totcnt=%ld\n", nbins, totcnt);
 	printf("# iter-depth=%d rand-start=%d\n", depth, nstarts);
-	printf("# Lyapunov avg=%g\n", avglya);
+	printf("# Lyapunov push=%g avg=%g\n", avgpush, avglya);
 	printf("#\n");
 
 	for (int ib=0; ib<nbins; ib++)
