@@ -17,12 +17,6 @@
  *
  */
 
-// #define ISS_SETTLE_TIME 1190
-
-// Points below K=1/2pi have a vanishing Lyapunov const, and need a huge
-// settle time. Laypunov const seems like its about 10e-4 ???
-// .. Except this does not seem to matter?
-// #define ISS_SETTLE_TIME 31190
 #define ISS_SETTLE_TIME 190
 
 #define LYA_DELTA 1e-5
