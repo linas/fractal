@@ -2735,6 +2735,8 @@ Consider the steps to needed to obtain the recurrence time.
 \end_inset
 
  have decayed away.
+ How large should this be? There is a formal way to estimate this; a sketch
+ follows.
  The transients correspond to eigenvalues 
 \begin_inset Formula $\left|\lambda\right|<1$
 \end_inset
@@ -2758,33 +2760,88 @@ Consider the steps to needed to obtain the recurrence time.
 \begin_inset Formula $\rho\left(x\right)$
 \end_inset
 
- in terms of the eigenfun
-\end_layout
+ in terms of the eigenfunctions, by writing 
+\begin_inset Formula $\rho\left(x\right)=\sum_{\lambda}a_{\lambda}e_{\lambda}\left(x\right)$
+\end_inset
 
-\begin_layout Standard
-orbits have settled after 
-\begin_inset Formula $n\gg1/\left|\lambda\right|$
+ for some constants 
+\begin_inset Formula $a_{\lambda}$
 \end_inset
 
 .
-\end_layout
+ After 
+\begin_inset Formula $n$
+\end_inset
 
-\begin_layout Standard
-s begun to approach it's asymptotic li 
-\end_layout
+ iterations of the transfer operator, one gets 
+\begin_inset Formula $\mathcal{L}_{C}^{n}\rho=\sum_{\lambda}a_{\lambda}\lambda^{n}e_{\lambda}=a_{0}\mu+\lambda_{1}^{n}a_{1}e_{1}+\mathcal{O}\left(\lambda_{2}^{n}\right)$
+\end_inset
 
-\begin_layout Standard
-To obtain the recurrence time
-\end_layout
+ where the eigenvalues were ordered such that 
+\begin_inset Formula $1>\left|\lambda_{1}\right|>\left|\lambda_{2}\right|>\cdots$
+\end_inset
 
-\begin_layout Standard
-After pre-iterating for a while, so that an orbit has been settled upon,
- one selects the current point 
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is the invariant measure, as before.
+ One then looks for a value of 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently large that 
+\begin_inset Formula $1\gg\left|\lambda_{1}\right|^{n}$
+\end_inset
+
+.
+ The log of the first eigenvalue is just the Lyapunov exponent; this is
+ clear by writing 
+\begin_inset Formula $\left|\lambda_{1}\right|^{n}=\exp n\log\left|\lambda_{1}\right|$
+\end_inset
+
+.
+ Such a value of 
+\begin_inset Formula $n$
+\end_inset
+
+ is sufficient to guarantee that the the transients in the orbit of 
 \begin_inset Formula $x_{n}$
 \end_inset
 
- as the starting point.
- One then iterates further, looking for a time 
+ have died away, to order 
+\begin_inset Formula $\mathcal{O}\left(\lambda_{1}^{n}\right)$
+\end_inset
+
+.
+ Keep in mind that, near saddle points, 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+ might be very close to one, and so 
+\begin_inset Formula $n$
+\end_inset
+
+ might need to be large, there (possibly hundreds or more, in numerical
+ practice.) In most other cases, taking 
+\begin_inset Formula $n$
+\end_inset
+
+ to be a few dozen is probably sufficient.
+ Equivalently, the Lyapunov exponent is very close to zero, near saddle
+ points.
+ For seat-of-the-pants calculations, all this theoretical concern can be
+ skipped; just take 
+\begin_inset Formula $n$
+\end_inset
+
+ for be a few hundred for generating pixmaps.
+ Computers are fast; this is not an issue.
+\end_layout
+
+\begin_layout Standard
+Having obtained such a starting point, one then iterates further, looking
+ for a time 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -2832,21 +2889,68 @@ Inverting this, one concludes that, on average,
 
 \end_inset
 
- 
+This is readily computed for any chosen 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ (and any seat-of-the-pants 
+\begin_inset Formula $n$
+\end_inset
+
+).
+ The resulting image looks a lot like figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Poincare-recurrence-time"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and is not sufficiently different to be worth showing here.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+It can be found in `reciprocal-measure.png` in the git directory, if you're
+ really curious.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-One might have anticipated that the Poincare recurrence time figure, and
- the bincount figure look the same.
- They almost do, but not quite.
- Careful study, side by side, will reveal the differences.
- Most surprisingly, perhaps, is that the bin-counting method reveals that
- the phase-locked regions are much narrower than the recurrance-time figure
- suggests.
+There is one difference, worth noting: the phase-locked regions are narrow,
+ and are identical in size to those of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Support-measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ These are much narrower than those in the recurrance-time figure.
+ The proper explanation for this is unclear; it is likely to be an artifact
+ of using 
+\begin_inset Formula $x_{90}$
+\end_inset
+
+ as the starting point for the recurrence time calculations, rather than
+ averaging over a large set of starting points.
 \end_layout
 
 \begin_layout Subsection
 Lyapunov
+\end_layout
+
+\begin_layout Standard
+Informal insight into the Lyapunov exponent can be gained by
 \end_layout
 
 \begin_layout Section
