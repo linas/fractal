@@ -450,7 +450,6 @@ circle_poincare_measure(double omega, double K, int itermax)
 // #define LYA_SETTLE_TIME 490  // settle time
 #define LYA_ITER_DEPTH 1920       // Iteration depth
 // #define LYA_ITER_DEPTH 19311
-#define LYA_DELTA 1.0e-5   // Offset.
 
 double
 circle_lyapunov (double omega, double K, int itermax)
@@ -471,34 +470,25 @@ circle_lyapunov (double omega, double K, int itermax)
 			x += omega - K * sin (2.0 * M_PI * x);
 		}
 
-		// OK, now, bin-count as we move along.
-		// bin-counting is always modulo one, because that is
-		// all that sine cares about.
 		for (int iter=0; iter < LYA_ITER_DEPTH; iter++)
 		{
-			double xnought = x;
 			x += omega - K * sin (2.0 * M_PI * x);
 
-			xnought += LYA_DELTA;
-			xnought += omega - K * sin (2.0 * M_PI * xnought);
-			double change = abs(xnought - x);
-			double lya = log(change / LYA_DELTA);
-			if (-25.0 < lya)
-			{
-				totlya += lya;
-				nobs++;
-			}
+			// "push" is the differential push contributing
+			// to the non-linear changes in the orbit. Take
+			// before iterating; use the bin after iterating.
+			// (So that it's correctly convolved w/measure.)
+			double push = abs(1.0 - 2.0 * M_PI * K * cos (2.0 * M_PI * x));
+			totlya += push;
+			nobs ++;
 		}
-
 	}
 
 	double avglya = totlya / nobs;
+	avglya = log(avglya);
 
 	// That's intersting. Lets divide by K
 	// if (0.0 < K) avglya /= K;
-
-	// Surprise!!!
-	// printf("du %f %f avlya=%f\n", omega, K, avglya);
 
 	return avglya;
 }
