@@ -93,7 +93,12 @@ double triter(double x, int n, double (*fun)(double, double, double),
 	return y;
 }
 
-// Compute average of of transfer operator applied to
+double unit(double x, double omega, double K)
+{
+	return 1.0;
+}
+
+// Compute average of the transfer operator applied to
 // fun one, two, three, ... times. The value returned turns out to
 // be equal to the invariant measure.
 double taverage(double x, int n, double (*fun)(double, double, double),
@@ -117,14 +122,36 @@ double taverage(double x, int n, double (*fun)(double, double, double),
 	return sum / n;
 }
 
-double foo(double x, double omega, double K)
+// Failed attempt to compute the shift. This won't work because it's not
+// actually a shift. Hmm. Let me think ...
+double tshift(double x, double shift, int n,
+              double omega, double K)
 {
-	return 1.0;
+	double ci = cinv(x, omega, K);
+	double jc = jaco(x, omega, K);
+	double rho = unit(ci, omega, K);
+	double y = rho / jc;
+	x = ci;
+	double sum = y;
+	double shn = shift;
+	double norm = 1.0;
+	for (int i=1; i<n; i++)
+	{
+		double ci = cinv(x, omega, K);
+		double jc = jaco(x, omega, K);
+		y = y / jc;
+		x = ci;
+
+		sum += shn * y;
+		norm += shn;
+		shn *= shift;
+	}
+	return sum / norm;
 }
 
 double f1(double x, double omega, double K)
 {
-	return transfer(x, foo, omega, K);
+	return transfer(x, unit, omega, K);
 }
 
 double f2(double x, double omega, double K)
@@ -142,15 +169,26 @@ double f4(double x, double omega, double K)
 	return transfer(x, f3, omega, K);
 }
 
-double rho(double x, double omega, double K)
+double mu(double x, double omega, double K)
 {
-	return taverage(x, 100, foo, omega, K);
+	return taverage(x, 100, unit, omega, K);
 }
 
-double lrho(double x, double omega, double K)
+double trans_mu(double x, double omega, double K)
 {
-	return transfer(x, rho, omega, K);
+	return transfer(x, mu, omega, K);
 }
+
+double half(double x, double omega, double K)
+{
+	return tshift(x, 30, 0.5, omega, K);
+}
+
+double trans_half(double x, double omega, double K)
+{
+	return transfer(x, half, omega, K);
+}
+
 
 void dump_transfer(double omega, double K, double (*fun)(double, double, double))
 {
@@ -159,24 +197,49 @@ void dump_transfer(double omega, double K, double (*fun)(double, double, double)
 	{
 		double y = (i+0.5) / TNPTS;
 		double jc = jaco(y, omega, K);
-#if 0
+
 		// Manual recursion
 		double t1 = f1(y, omega, K);
 		double t2 = f2(y, omega, K);
 		double t3 = f3(y, omega, K);
 		double t4 = f4(y, omega, K);
 
+#if 0
 		// Double-check loop recursion
 		double tr = f4(y, omega, K);
-		double tc = triter(y, 4, foo, omega, K);
+		double tc = triter(y, 4, unit, omega, K);
 		printf("yoo %g\n", tr-tc);
 #endif
-
-		double t1 = triter(y, 1, foo, omega, K);
-		double t2 = triter(y, 100, foo, omega, K);
-		double t3 = rho(y, omega, K);
-		double t4 = lrho(y, omega, K);
 		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
+	}
+}
+
+void dump_invariant(double omega, double K)
+{
+#define INPTS 500
+	for (int i=0; i< INPTS; i++)
+	{
+		double y = (i+0.5) / INPTS;
+		double jc = jaco(y, omega, K);
+
+		double t1 = triter(y, 1, unit, omega, K);
+		double t2 = triter(y, 100, unit, omega, K);
+		double t3 = mu(y, omega, K);
+		double t4 = trans_mu(y, omega, K);
+		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
+	}
+}
+
+void dump_shift(double omega, double K, double shift)
+{
+#define SNPTS 500
+	for (int i=0; i< SNPTS; i++)
+	{
+		double y = (i+0.5) / SNPTS;
+
+		double t1 = tshift(y, 30, 0.5, omega, K);
+		double t2 = trans_half(y, omega, K);
+		printf("%d	%f	%f	%f\n", i, y, t1, t2);
 	}
 }
 
@@ -186,5 +249,7 @@ int main(int argc, char* argv[])
 	double K = atof(argv[2]);
 
 	// dump_jaco(omega, K);
-	dump_transfer(omega, K, foo);
+	// dump_transfer(omega, K, unit);
+	// dump_invariant(omega, K);
+	dump_shift(omega, K, 0.5);
 }
