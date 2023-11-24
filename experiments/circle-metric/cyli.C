@@ -126,15 +126,22 @@ void dump_transfer(double omega, double K, double (*fun)(double, double, double)
 		double y = (i+0.5) / TNPTS;
 		double jc = jaco(y, omega, K);
 #if 0
+		// Manual recursion
 		double t1 = f1(y, omega, K);
 		double t2 = f2(y, omega, K);
 		double t3 = f3(y, omega, K);
 		double t4 = f4(y, omega, K);
+
+		// Double-check loop recursion
+		double tr = f4(y, omega, K);
+		double tc = triter(y, 4, foo, omega, K);
+		printf("yoo %g\n", tr-tc);
 #endif
+
 		double t1 = triter(y, 1, foo, omega, K);
-		double t2 = triter(y, 5, foo, omega, K);
-		double t3 = triter(y, 10, foo, omega, K);
-		double t4 = triter(y, 15, foo, omega, K);
+		double t2 = triter(y, 200, foo, omega, K);
+		double t3 = triter(y, 400, foo, omega, K);
+		double t4 = triter(y, 800, foo, omega, K);
 		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
 	}
 }
