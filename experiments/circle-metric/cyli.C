@@ -11,7 +11,7 @@
 // Perturbed diagonal
 double pert(double x, double K)
 {
-	return x - K * sin(2.0 * M_PI * x); 
+	return x - K * sin(2.0 * M_PI * x);
 }
 
 // Terrible stupid root finder; brute force subdivision
@@ -93,6 +93,30 @@ double triter(double x, int n, double (*fun)(double, double, double),
 	return y;
 }
 
+// Compute average of of transfer operator applied to
+// fun one, two, three, ... times. The value returned turns out to
+// be equal to the invariant measure.
+double taverage(double x, int n, double (*fun)(double, double, double),
+                double omega, double K)
+{
+	double ci = cinv(x, omega, K);
+	double jc = jaco(x, omega, K);
+	double rho = fun(ci, omega, K);
+	double y = rho / jc;
+	x = ci;
+	double sum = y;
+	for (int i=1; i<n; i++)
+	{
+		double ci = cinv(x, omega, K);
+		double jc = jaco(x, omega, K);
+		y = y / jc;
+		x = ci;
+
+		sum += y;
+	}
+	return sum / n;
+}
+
 double foo(double x, double omega, double K)
 {
 	return 1.0;
@@ -118,6 +142,16 @@ double f4(double x, double omega, double K)
 	return transfer(x, f3, omega, K);
 }
 
+double rho(double x, double omega, double K)
+{
+	return taverage(x, 100, foo, omega, K);
+}
+
+double lrho(double x, double omega, double K)
+{
+	return transfer(x, rho, omega, K);
+}
+
 void dump_transfer(double omega, double K, double (*fun)(double, double, double))
 {
 #define TNPTS 500
@@ -139,9 +173,9 @@ void dump_transfer(double omega, double K, double (*fun)(double, double, double)
 #endif
 
 		double t1 = triter(y, 1, foo, omega, K);
-		double t2 = triter(y, 200, foo, omega, K);
-		double t3 = triter(y, 400, foo, omega, K);
-		double t4 = triter(y, 800, foo, omega, K);
+		double t2 = triter(y, 100, foo, omega, K);
+		double t3 = rho(y, omega, K);
+		double t4 = lrho(y, omega, K);
 		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
 	}
 }
