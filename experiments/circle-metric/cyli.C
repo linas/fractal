@@ -34,7 +34,7 @@ double alpha(double y, double K)
 }
 
 // Inverse of standard curcle map.
-double cinv(double y, double K, double omega)
+double cinv(double y, double omega, double K)
 {
 	if (y < omega) return alpha(y-omega+1.0, K);
 	return alpha(y-omega, K);
@@ -47,9 +47,9 @@ double pprime(double x, double K)
 }
 
 // Jacobian of circle map.
-double jaco(double y, double K, double omega)
+double jaco(double y, double omega, double K)
 {
-	return pprime(cinv(y, K, omega), K);
+	return pprime(cinv(y, omega, K), K);
 }
 
 // print jacobian
@@ -59,8 +59,57 @@ void dump_jaco(double omega, double K)
 	for (int i=0; i< JNPTS; i++)
 	{
 		double y = (i+0.5) / JNPTS;
-		double jc = jaco(y, K, omega);
+		double jc = jaco(y, omega, K);
 		printf("%d	%f	%f\n", i, y, jc);
+	}
+}
+
+double transfer(double y, double (*fun)(double, double, double),
+                double omega, double K)
+{
+	double ci = cinv(y, omega, K);
+	double jc = jaco(y, omega, K);
+	double tr = fun(ci, omega, K) / jc;
+	return tr;
+}
+
+double foo(double x, double omega, double K)
+{
+	return 1.0;
+}
+
+double f1(double x, double omega, double K)
+{
+	return transfer(x, foo, omega, K);
+}
+
+double f2(double x, double omega, double K)
+{
+	return transfer(x, f1, omega, K);
+}
+
+double f3(double x, double omega, double K)
+{
+	return transfer(x, f2, omega, K);
+}
+
+double f4(double x, double omega, double K)
+{
+	return transfer(x, f3, omega, K);
+}
+
+void dump_transfer(double omega, double K, double (*fun)(double, double, double))
+{
+#define TNPTS 500
+	for (int i=0; i< TNPTS; i++)
+	{
+		double y = (i+0.5) / TNPTS;
+		double jc = jaco(y, omega, K);
+		double t1 = f1(y, omega, K);
+		double t2 = f2(y, omega, K);
+		double t3 = f3(y, omega, K);
+		double t4 = f4(y, omega, K);
+		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
 	}
 }
 
@@ -69,5 +118,6 @@ int main(int argc, char* argv[])
 	double omega = atof(argv[1]);
 	double K = atof(argv[2]);
 
-	dump_jaco(omega, K);
+	// dump_jaco(omega, K);
+	dump_transfer(omega, K, foo);
 }

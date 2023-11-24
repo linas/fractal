@@ -7,8 +7,14 @@ set style data lines
 set xrange[0:1]
 # set yrange[0:1]
 
-set title "Jacobian at omega=0.3 K=0.x"
-plot "cyli.dat" using 2:3 lw 2 title ""
+# set title "Jacobian at omega=0.3 K=0.x"
+# plot "cyli.dat" using 2:3 lw 2 title ""
+
+set title "iterates at omega=0.3 K=0.x"
+plot "cyli.dat" using 2:4 lw 2 title "t1", \
+     "cyli.dat" using 2:5 lw 2 title "t2", \
+     "cyli.dat" using 2:6 lw 2 title "t3", \
+     "cyli.dat" using 2:7 lw 2 title "t4"
 
 # #######################################################
 ## Final version, used in the paper.
