@@ -91,7 +91,7 @@
 \begin_body
 
 \begin_layout Title
-Metricity and the Circle Map
+Metricity and the Standard Circle Map
 \end_layout
 
 \begin_layout Author
@@ -103,7 +103,7 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Abstract
-Kolomogorov's(?) circle map 
+Arnold's standard circle map 
 \begin_inset Formula $x_{n+1}=x_{n}+\omega-K\sin2\pi x_{n}$
 \end_inset
 
@@ -151,7 +151,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-The circle map 
+Arnold's standard circle map 
 \begin_inset Formula $x_{n+1}=x_{n}+\omega-K\sin2\pi x_{n}$
 \end_inset
 
@@ -3670,7 +3670,7 @@ Transfer Operator Notes
 
 \begin_layout Standard
 Some random notes about transfer operators.
- 
+ Doesn't actually go anywhere, yet.
 \end_layout
 
 \begin_layout Subsection
@@ -4116,6 +4116,64 @@ With effort, precise formulas can be obtained for the integer
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection
+Inverse Map
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $K<1/2\pi$
+\end_inset
+
+ the circle map is monotonic increasing.
+ It's one-to-one and onto, thus an automorphism.
+ This makes things easy, so let's fiddle around with it.
+ Define the perturbed diagonal as 
+\begin_inset Formula $p\left(x\right)=x-K\sin2\pi x$
+\end_inset
+
+; this is again an automorphism, and thus is easily inverted as 
+\begin_inset Formula $\alpha\left(y\right)=p^{-1}\left(y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The standard map is just 
+\begin_inset Formula $C\left(x\right)=\left[p\left(x\right)+\omega\right]\mod1$
+\end_inset
+
+; this inverts as
+\begin_inset Formula 
+\[
+C^{-1}\left(y\right)=\begin{cases}
+\alpha\left(y-\omega+1\right) & \mbox{if }y<\omega\\
+\alpha\left(y-\omega\right) & \mbox{if }y>\omega
+\end{cases}
+\]
+
+\end_inset
+
+The transfer operator takes on a simple form
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{C}\rho\right]\left(y\right)=\frac{1}{\left|C^{\prime}\left(C^{-1}\left(y\right)\right)\right|}\rho\left(C^{-1}\left(y\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $C^{\prime}\left(x\right)=p^{\prime}\left(x\right)=1-2\pi K\cos2\pi x$
+\end_inset
+
+ and 
+\begin_inset Formula $C^{\prime}\left(C^{-1}\left(y\right)\right)$
+\end_inset
+
+ is the Jacobian.
 \end_layout
 
 \begin_layout Subsection
