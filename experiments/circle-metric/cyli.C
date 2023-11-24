@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 
+// Perturbed diagonal
 double pert(double x, double K)
 {
 	return x - K * sin(2.0 * M_PI * x); 
@@ -27,25 +28,40 @@ double root (double y, double K, double xlo, double ylo, double xhi, double yhi)
 }
 
 // Inverse of pert.
-double alpha (double y, double K)
+double alpha(double y, double K)
 {
 	return root(y, K, 0.0, 0.0, 1.0, 1.0);
 }
 
+// Inverse of standard curcle map.
 double cinv(double y, double K, double omega)
 {
 	if (y < omega) return alpha(y-omega+1.0, K);
 	return alpha(y-omega, K);
 }
 
+// First derivative of pert.
 double pprime(double x, double K)
 {
 	return 1.0 - 2.0 * M_PI * K * cos(2.0 * M_PI * x);
 }
 
+// Jacobian of circle map.
 double jaco(double y, double K, double omega)
 {
 	return pprime(cinv(y, K, omega), K);
+}
+
+// print jacobian
+void dump_jaco(double omega, double K)
+{
+#define JNPTS 500
+	for (int i=0; i< JNPTS; i++)
+	{
+		double y = (i+0.5) / JNPTS;
+		double jc = jaco(y, K, omega);
+		printf("%d	%f	%f\n", i, y, jc);
+	}
 }
 
 int main(int argc, char* argv[])
@@ -53,11 +69,5 @@ int main(int argc, char* argv[])
 	double omega = atof(argv[1]);
 	double K = atof(argv[2]);
 
-#define NPTS 500
-	for (int i=0; i< NPTS; i++)
-	{
-		double y = (i+0.5) / NPTS;
-		double jc = jaco(y, K, omega);
-		printf("%d	%f	%f\n", i, y, jc);
-	}
+	dump_jaco(omega, K);
 }
