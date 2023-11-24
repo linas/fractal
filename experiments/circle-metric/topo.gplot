@@ -1,0 +1,35 @@
+
+set encoding utf8
+set term png small enhanced
+set out 'topo.png'
+
+set style data lines
+set xrange[0:1]
+set yrange[0:1]
+set ytics (0,0.5,1)
+
+set title "Circle map at omega=0.12 K="
+plot "topo.dat" using 2:3 lw 2 title ""
+
+## #######################################################
+## Final version, used in the paper.
+set term postscript eps color enhanced fontscale 4 size 9,4
+# set term postscript eps color enhanced fontscale 2
+
+set out 'topo-0.3-0.1.eps'
+set title "Circle map at omega=0.3, K=0.1"
+plot "topo-0.3-0.1.dat" using 2:3 lw 5 title ""
+
+set out 'topo-0.3-0.4.eps'
+set title "Circle map at omega=0.3, K=0.4"
+plot "topo-0.3-0.4.dat" using 2:3 lw 5 title ""
+
+set out 'topo-0.3-0.6.eps'
+set title "Circle map at omega=0.3, K=0.6"
+plot "topo-0.3-0.6.dat" using 2:3 lw 5 title ""
+
+set out 'topo-0.3-1.6.eps'
+set title "Circle map at omega=0.3, K=1.6"
+plot "topo-0.3-1.6.dat" using 2:3 lw 5 title ""
+#
+# #######################################################

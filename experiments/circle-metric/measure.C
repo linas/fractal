@@ -54,7 +54,8 @@ circle_measure (double omega, double K, int nbins, int nstarts, int depth)
 			// to the non-linear changes in the orbit. Take
 			// before iterating; use the bin after iterating.
 			// (So that it's correctly convolved w/measure.)
-			double push = abs(1.0 - 2.0 * M_PI * K * cos (2.0 * M_PI * x));
+			// double push = abs(1.0 - 2.0 * M_PI * K * cos (2.0 * M_PI * x));
+			double push = abs(sin (2.0 * M_PI * x));
 
 			x += omega - K * sin (2.0 * M_PI * x);
 			double yb = nbins * (x - floor (x));

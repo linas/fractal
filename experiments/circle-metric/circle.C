@@ -488,7 +488,10 @@ circle_lyapunov (double omega, double K, int itermax)
 	avglya = log(avglya);
 
 	// That's intersting. Lets divide by K
-	// if (0.0 < K) avglya /= K;
+	if (0.0 != K) avglya /= K;
+	// if (0.0 != K) avglya /= pow(K, 1.5);
+	// if (0.0 != K) avglya /= log(1+K);
+	// if (0.0 != K) avglya -= 0.25*log(K);
 
 	return avglya;
 }
