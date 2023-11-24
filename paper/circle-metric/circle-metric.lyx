@@ -4119,7 +4119,7 @@ With effort, precise formulas can be obtained for the integer
 \end_layout
 
 \begin_layout Subsection
-Inverse Map
+Invariant Measure in the Tongue Region
 \end_layout
 
 \begin_layout Standard
@@ -4129,7 +4129,8 @@ For
 
  the circle map is monotonic increasing.
  It's one-to-one and onto, thus an automorphism.
- This makes things easy, so let's fiddle around with it.
+ This makes things quite easy; in particular, an explicit expression for
+ the invariant measure is easy to obtain.
  Define the perturbed diagonal as 
 \begin_inset Formula $p\left(x\right)=x-K\sin2\pi x$
 \end_inset
@@ -4197,7 +4198,7 @@ The task is to find eigenfunctions of
  Then define
 \begin_inset Formula 
 \[
-\mu=\lim_{N\to\infty}\frac{1}{N}\sum_{k=1}^{N}\mathcal{L}_{C}^{k}u
+\mu=\lim_{N\to\infty}\frac{1}{N}\sum_{k=0}^{N}\mathcal{L}_{C}^{k}u
 \]
 
 \end_inset
@@ -4225,6 +4226,108 @@ where
 \end_inset
 
 .
+ A fast and dirty sketch of the proof is as follows.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\mathcal{L}_{C}$
+\end_inset
+
+ was designed to leave integrals invariant; that is, it is just a change
+ of variable:
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left[\mathcal{L}_{C}f\right]\left(y\right)dy=\int_{0}^{1}f\left(x\right)dx
+\]
+
+\end_inset
+
+The change of variable sets 
+\begin_inset Formula $y=C\left(x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $dy=C^{\prime}\left(x\right)dx$
+\end_inset
+
+ and 
+\begin_inset Formula $x=C^{-1}\left(y\right)$
+\end_inset
+
+ and then, just to make everything painfully and obviously clear:
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}f\left(x\right)dx= & \int_{0}^{1}\frac{1}{C^{\prime}\left(x\right)}f\left(x\right)C^{\prime}\left(x\right)dx\\
+= & \int_{0}^{1}\frac{1}{C^{\prime}\left(C^{-1}\left(y\right)\right)}f\left(C^{-1}\left(y\right)\right)dy\\
+= & \int_{0}^{1}\left[\mathcal{L}_{C}f\right]\left(y\right)dy
+\end{align*}
+
+\end_inset
+
+The absolute value for the Jacobian wasn't needed since the maps are all
+ positive.
+ Next, note that 
+\begin_inset Formula $\int_{0}^{1}u=1$
+\end_inset
+
+ and from this, that 
+\begin_inset Formula $\int_{0}^{1}\mathcal{L}_{C}^{k}u=1$
+\end_inset
+
+.
+ Define
+\begin_inset Formula 
+\[
+\mu_{N}=\frac{1}{N}\sum_{k=0}^{N}\mathcal{L}_{C}^{k}u
+\]
+
+\end_inset
+
+Convergence is obtained by noting that 
+\begin_inset Formula 
+\[
+\mu_{N}-\mu_{N-1}=\frac{\mathcal{L}_{C}^{N}u}{N}
+\]
+
+\end_inset
+
+Then, provided that one can show that 
+\begin_inset Formula $\left|\mathcal{L}_{C}^{N}u\right|<K$
+\end_inset
+
+ for constant 
+\begin_inset Formula $K$
+\end_inset
+
+, this sequence converges and 
+\begin_inset Formula $\mu=\lim_{N\to\infty}\mu_{N}$
+\end_inset
+
+ is well-defined.
+ That it converges to the invariant measure can be see by noting that 
+\begin_inset Formula $\mathcal{L}_{C}$
+\end_inset
+
+ just shifts the sum, so that the difference
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mu_{N+1}-\mathcal{L}_{C}\mu_{N}=\frac{u}{N}=\frac{1}{N}
+\]
+
+\end_inset
+
+goes to zero as 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+.
+ That the resulting measure is correct is easily confirmed numerically,
+ by comparing the result of bin-counting to the above.
+ 
 \end_layout
 
 \begin_layout Subsection
