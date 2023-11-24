@@ -64,6 +64,7 @@ void dump_jaco(double omega, double K)
 	}
 }
 
+// Compute transfer operator applied to fun
 double transfer(double y, double (*fun)(double, double, double),
                 double omega, double K)
 {
@@ -71,6 +72,25 @@ double transfer(double y, double (*fun)(double, double, double),
 	double jc = jaco(y, omega, K);
 	double tr = fun(ci, omega, K) / jc;
 	return tr;
+}
+
+// Iterate transfer operator on fun n times.
+double triter(double x, int n, double (*fun)(double, double, double),
+              double omega, double K)
+{
+	double ci = cinv(x, omega, K);
+	double jc = jaco(x, omega, K);
+	double rho = fun(ci, omega, K);
+	double y = rho / jc;
+	x = ci;
+	for (int i=1; i<n; i++)
+	{
+		double ci = cinv(x, omega, K);
+		double jc = jaco(x, omega, K);
+		y = y / jc;
+		x = ci;
+	}
+	return y;
 }
 
 double foo(double x, double omega, double K)
@@ -105,10 +125,16 @@ void dump_transfer(double omega, double K, double (*fun)(double, double, double)
 	{
 		double y = (i+0.5) / TNPTS;
 		double jc = jaco(y, omega, K);
+#if 0
 		double t1 = f1(y, omega, K);
 		double t2 = f2(y, omega, K);
 		double t3 = f3(y, omega, K);
 		double t4 = f4(y, omega, K);
+#endif
+		double t1 = triter(y, 1, foo, omega, K);
+		double t2 = triter(y, 5, foo, omega, K);
+		double t3 = triter(y, 10, foo, omega, K);
+		double t4 = triter(y, 15, foo, omega, K);
 		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
 	}
 }
