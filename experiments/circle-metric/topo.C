@@ -11,12 +11,19 @@ int main (int argc, char* argv[])
 	double omega = atof(argv[1]);
 	double K = atof(argv[2]);
 
-#define NPTS 2500
+#define NPTS 25000
 	for (int i=0; i<NPTS; i++)
 	{
 		double x = (i+0.5) / NPTS;
-		double cx = x + omega - K * sin(2 * M_PI * x);
-		cx -= floor(cx);
-		printf("%d	%f	%f\n", i, x, cx);
+
+		printf("%d	%f", i, x);
+#define NIT 10
+		for (int n=1; n<NIT; n++)
+		{
+			x += omega - K * sin(2 * M_PI * x);
+			x -= floor(x);
+			printf("	%f", x);
+		}
+		printf("\n");
 	}
 }
