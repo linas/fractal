@@ -186,7 +186,7 @@ double f4(double x, double omega, double K)
 
 double mu(double x, double omega, double K)
 {
-#define NAVG 500
+#define NAVG 200
 	return taverage(x, NAVG, unit, omega, K);
 }
 
@@ -261,16 +261,16 @@ void dump_shift(double omega, double K, double shift)
 	{
 		double y = (i+0.5) / SNPTS;
 
+		double t1 = taverage(y, 20, slope, omega, K);
+		double t2 = taverage(y, 40, slope, omega, K);
+		double t3 = taverage(y, 80, slope, omega, K);
+		double t4 = taverage(y, 160, slope, omega, K);
 #if 0
-		double t1 = taverage(y, 10, slope, omega, K);
-		double t2 = taverage(y, 20, slope, omega, K);
-		double t3 = taverage(y, 30, slope, omega, K);
-		double t4 = taverage(y, 40, slope, omega, K);
-#endif
 		double t1 = tshift(y, 30, 0.5, slope, omega, K);
 		double t2 = trans_half(y, omega, K);
-		double t3 = taverage(y, 30, slope, omega, K);
+		double t3 = taverage(y, 130, slope, omega, K);
 		double t4 = transfer(y, avslope, omega, K);
+#endif
 		printf("%d	%f	%f	%f	%f	%f\n", i, y, t1, t2, t3, t4);
 	}
 }
@@ -282,6 +282,6 @@ int main(int argc, char* argv[])
 
 	// dump_jaco(omega, K);
 	// dump_transfer(omega, K, unit);
-	dump_invariant(omega, K);
-	// dump_shift(omega, K, 0.5);
+	// dump_invariant(omega, K);
+	dump_shift(omega, K, 0.5);
 }

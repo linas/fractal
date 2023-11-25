@@ -2356,7 +2356,7 @@ The upper strip image shows the bifurcation diagram holding
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2482,11 +2482,6 @@ The Perron–Frobenius Operator
 \end_layout
 
 \begin_layout Standard
-This section takes a short detour into some modest formalities.
- The goal is to present an overview that places everything into perspective.
-\end_layout
-
-\begin_layout Standard
 A measure is termed 
 \begin_inset Quotes eld
 \end_inset
@@ -2495,9 +2490,18 @@ invariant
 \begin_inset Quotes erd
 \end_inset
 
-, when it corresponds to the Frobenius-Perron eigenvalue of one, for the
- corresponding transfer operator.
- For any given iterated function 
+, when it corresponds to the Frobenius–Perron eigenvalue of one, for the
+ corresponding transfer operator of the iterated function.
+ This section takes a short detour into some modest formalities, to review
+ what this last sentence means.
+ There is a deep and broad literature on this topic; the goal is to present
+ enough of an overview, so that other results in this text can be placed
+ in perspective.
+ 
+\end_layout
+
+\begin_layout Standard
+For any given iterated function 
 \begin_inset Formula $f:\left[0,1\right]\to\left[0,1\right]$
 \end_inset
 
@@ -2545,29 +2549,144 @@ suitable
 \begin_inset Formula $g:\left[0,1\right]\to\mathbb{R}$
 \end_inset
 
+ to be 
+\begin_inset Quotes eld
+\end_inset
+
+just some function
+\begin_inset Quotes erd
+\end_inset
+
 .
  The 
 \begin_inset Formula $f^{\prime}$
 \end_inset
 
- denotes the derivative; the reciprocal can be recognized as the Jacobian.
+ denotes the derivative; the reciprocal can be recognized as the Jacobian
+ of a change-of-variable.
  The Frobenius–Peron operator 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
- is a linear operator, in that it maps functions to functions.
- As an operator, it has a spectrum: in general a spectrum with discrete
- parts, as well as continuous parts; all of the usual considerations about
- the spectra of operators apply, in general.
- For suitably tame function spaces 
+ is a linear operator, in that, for any functions 
+\begin_inset Formula $g,h\in\mathcal{F}$
+\end_inset
+
+ and constants 
+\begin_inset Formula $a,b$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\mathcal{L}_{f}\left(ag+bh\right)=a\mathcal{L}_{f}g+b\mathcal{L}_{f}h$
+\end_inset
+
+.
+ As a linear operator, it has a spectrum: in general, the spectrum may have
+ both discrete and continuous parts.
+ It may be singular, in that there might be functions 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathcal{L}_{f}k=0$
+\end_inset
+
+.
+ All of conventional operator theory and theorems about spectra apply.
+\end_layout
+
+\begin_layout Standard
+The definition of the transfer operator can be formulated more precisely
+ and more generally, by replacing the unit interval by a general space 
+\begin_inset Formula $X$
+\end_inset
+
+ endowed with a sigma-algebra of Borel sets.
+ The transfer operator can then be seen as the push-forward of the time-evolutio
+n operator of the dynamical system.
+ These details don't seem to be needed for the current text, and so we stick
+ to a slightly plainer language.
+\end_layout
+
+\begin_layout Standard
+It is convenient to take 
+\begin_inset Formula $\mathcal{F}=L_{1}\left[0,1\right]$
+\end_inset
+
+ the Banach space 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ of integrable functions.
+ By defintion, if 
+\begin_inset Formula $g\in L_{1}$
+\end_inset
+
+ then it's absolute value is integrable: 
+\begin_inset Formula $\int\left|g\right|<\infty$
+\end_inset
+
+.
+ Slightly more generally, 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
-, the largest eigenvalue of 
+ can be taken as the space of measuable functions, employing the standard
+ Lesbegue measure on the reals.
+ Working with this space, it can be seen that 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
- will be one, corresponding to a unique eigenfunction 
+ is measure-preserving: for any 
+\begin_inset Formula $g\in\mathcal{F}$
+\end_inset
+
+, the operator can be understood to be a change-of-variable, so that 
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left[\mathcal{L}_{f}g\right]\left(y\right)dy=\int_{0}^{1}g\left(x\right)dx
+\]
+
+\end_inset
+
+That is, 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ is a bounded operator that preserves vector space norms.
+ That is, defining 
+\begin_inset Formula $\left|g\right|=\int g$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\left|\mathcal{L}_{f}g\right|=\left|g\right|$
+\end_inset
+
+.
+ The operator norm 
+\begin_inset Formula $\left\Vert A\right\Vert $
+\end_inset
+
+ of operator 
+\begin_inset Formula $A$
+\end_inset
+
+ is conventionally defined as 
+\begin_inset Formula 
+\[
+\left\Vert A\right\Vert =\sup\left\{ c:\left|Ag\right|=c\left|g\right|\mbox{ for all \ensuremath{g\in\mathcal{F}}}\right\} 
+\]
+
+\end_inset
+
+and so, here, one has that 
+\begin_inset Formula $\left\Vert \mathcal{L}_{f}\right\Vert =1$
+\end_inset
+
+.
+ From spectral theory, this implies that largest eigenvalue in the spectrum
+ is the Frobenius–Perron eigenvalue, and it has a value of one.
+ This corresponds to a unique eigenfunction 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -2579,8 +2698,8 @@ suitable
 
 \end_inset
 
-This eigenfunction can be identified as the invariant measure of the iterated
- map.
+What makes this special here is that this eigenfunction can be identified
+ as the invariant measure of the iterated map.
  It is 
 \begin_inset Quotes eld
 \end_inset
@@ -2594,7 +2713,10 @@ invariant
 \end_inset
 
  doesn't change it.
- It is a 
+\end_layout
+
+\begin_layout Standard
+It is a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2602,88 +2724,128 @@ measure
 \begin_inset Quotes erd
 \end_inset
 
-, because the probability that the 
-\begin_inset Formula $n$
-\end_inset
-
-'th iterate of 
+, because it predicts the probability of the location of a point, iterated
+ with 
 \begin_inset Formula $f$
-\end_inset
-
- is 
-\begin_inset Formula $\mu$
 \end_inset
 
 .
- More precisely, write 
-\begin_inset Formula $f^{n}=f\circ f\circ\cdots\circ f$
+ Consider starting with the uniform distribution 
+\begin_inset Formula $u\left(x\right)=1$
 \end_inset
 
- as the function 
-\begin_inset Formula $f$
+, selecting values 
+\begin_inset Formula $x_{0}$
 \end_inset
 
- composed 
+ from this distribution, and iterating exactly once, to get 
+\begin_inset Formula $x_{1}=f\left(x_{0}\right)$
+\end_inset
+
+.
+ Then the probability that 
+\begin_inset Formula $x_{1}\in\left[a,b\right]$
+\end_inset
+
+ is given exactly by 
+\begin_inset Formula $\int_{a}^{b}\left[\mathcal{L}_{f}u\right]\left(x\right)dx$
+\end_inset
+
+.
+ This continues likewise: iterating 
 \begin_inset Formula $n$
 \end_inset
 
- times with itself.
- Then, for any 
-\begin_inset Formula $x\in\left[0,1\right]$
+ times to get 
+\begin_inset Formula $x_{n}$
 \end_inset
 
 , the probability that 
-\begin_inset Formula $a<f^{n}\left(x\right)<b$
+\begin_inset Formula $x_{n}\in\left[a,b\right]$
 \end_inset
 
- is given by 
+ is given exactly by 
+\begin_inset Formula $\int_{a}^{b}\left[\mathcal{L}_{f}^{n}u\right]\left(x\right)dx$
+\end_inset
+
+.
+ In the large-
+\begin_inset Formula $n$
+\end_inset
+
+ limit, one expects that the transients have died away, and 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ has settled into it's final periodic or chaotic orbit.
+ In this large-
+\begin_inset Formula $n$
+\end_inset
+
+ limit, 
+\begin_inset Formula $\mathcal{L}_{f}^{n}u\approx\mathcal{L}_{f}^{n+1}u\approx\mu$
+\end_inset
+
+, so that the probability that 
+\begin_inset Formula $x_{n}\in\left[a,b\right]$
+\end_inset
+
+ is given exactly by 
 \begin_inset Formula $\int_{a}^{b}\mu\left(x\right)dx$
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-The transformation giving 
+ This provides an intuitive explanation for what 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
- is measure-preserving, in that, for any 
-\begin_inset Formula $g\in\mathcal{F}$
+ does, and why 
+\begin_inset Formula $\mu$
 \end_inset
 
-, the operator was defined as a change-of-variable, so that 
-\begin_inset Formula 
-\[
-\int_{0}^{1}\left[\mathcal{L}_{f}g\right]\left(y\right)dy=\int_{0}^{1}g\left(x\right)dx
-\]
+ is a measure.
+\end_layout
 
-\end_inset
-
-From this, one concludes that if there are eigenfunctions 
+\begin_layout Standard
+Besides the principal eigenvalue, there may be more.
+ In general, one can conclude that there will be eigenfunctions 
 \begin_inset Formula $\mathcal{L}_{f}e_{\lambda}=\lambda e_{\lambda}$
 \end_inset
 
  with 
-\begin_inset Formula $\lambda\ne1$
-\end_inset
-
- then they must have 
-\begin_inset Formula $\int_{0}^{1}e_{\lambda}\left(x\right)dx=0$
-\end_inset
-
-.
- By the Perron–Frobenius theorem, the largest eigenvalue is 
-\begin_inset Formula $\lambda=1$
-\end_inset
-
-; all others have 
 \begin_inset Formula $\left|\lambda\right|<1$
 \end_inset
 
 .
- Such modes are 
+ Since 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ is vector-length-conserving, one must have that 
+\begin_inset Formula $\left|e_{\lambda}\right|=\int_{0}^{1}e_{\lambda}\left(x\right)dx=0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\lambda\ne1$
+\end_inset
+
+.
+ Such modes 
+\begin_inset Formula $e_{\lambda}$
+\end_inset
+
+ are 
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
 \begin_inset Quotes eld
 \end_inset
 
@@ -2725,7 +2887,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-As an example, consider the circle map with 
+As an example of a decaying mode, consider the circle map with 
 \begin_inset Formula $\left(\omega,K\right)$
 \end_inset
 
@@ -2834,7 +2996,6 @@ conservative system
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
