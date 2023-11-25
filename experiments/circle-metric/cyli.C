@@ -167,8 +167,11 @@ double tshift(double x, double shift, int n,
 
 double f1(double x, double omega, double K)
 {
+printf("really enter f1 with y=%f\n", x);
 	// return transfer(x, unit, omega, K);
-	return transfer(x, slope, omega, K);
+	double rv = transfer(x, slope, omega, K);
+printf("really exit f1\n");
+	return rv;
 }
 
 // Apply xfer operator exactly once to the previous result.
@@ -177,7 +180,10 @@ double f1(double x, double omega, double K)
 // So WTF am I doing wrong?
 double f2(double x, double omega, double K)
 {
-	return transfer(x, f1, omega, K);
+printf("really enter f2 with y=%f\n", x);
+	double rv = transfer(x, f1, omega, K);
+printf("really exit f2\n");
+	return rv;
 }
 
 double f3(double x, double omega, double K)
