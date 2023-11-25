@@ -72,7 +72,6 @@ double transfer(double y, double (*fun)(double, double, double),
 	double ci = cinv(y, omega, K);
 	double jc = jaco(y, omega, K);
 	double tr = fun(ci, omega, K) / jc;
-printf("enter trans with y=%f ci=%f jc=%f tr=%f\n", y, ci, jc, tr);
 	return tr;
 }
 
@@ -86,12 +85,11 @@ double triter(double x, int n, double (*fun)(double, double, double),
 		double ci = cinv(x, omega, K);
 		double jc = pprime(ci, K);
 		jacobian *= jc;
-printf("enter triter iter i=%d x=%f ci=%f jc=%f\n", i, x, ci, jc);
 		x = ci;
 	}
+	// Use the x coming out of the loop above. It's cinv iterated.
 	double rho = fun(x, omega, K);
 	double y = rho / jacobian;
-printf("exit triter y=%f jaco=%f\n", y, jacobian);
 	return y;
 }
 
@@ -165,22 +163,16 @@ double tshift(double x, double shift, int n,
 
 double f1(double x, double omega, double K)
 {
-printf("really enter f1 with y=%f\n", x);
-	// return transfer(x, unit, omega, K);
 	double rv = transfer(x, slope, omega, K);
-printf("really exit f1\n");
 	return rv;
 }
 
 // Apply xfer operator exactly once to the previous result.
-// For fun=unit, this is identical to triter(x, 2, fun, omega, K);
-// and likewise for f3 and f4. But for other funs it is not.
-// So WTF am I doing wrong?
+// This is identical to triter(x, 2, fun, omega, K);
+// and likewise for f3 and f4. Used only for testing.
 double f2(double x, double omega, double K)
 {
-printf("really enter f2 with y=%f\n", x);
 	double rv = transfer(x, f1, omega, K);
-printf("really exit f2\n");
 	return rv;
 }
 
@@ -332,13 +324,5 @@ int main(int argc, char* argv[])
 	// dump_invariant(omega, K);
 	// dump_shift(omega, K, 0.5);
 	// dump_debug(omega, K, unit);
-	// dump_debug(omega, K, slope);
-
-	double y = 0.555;
-printf("call f1-----\n");
-	f1(y, omega, K);
-printf("call f2------\n");
-	f2(y, omega, K);
-printf("call trit------\n");
-	triter(y, 2, slope, omega, K);
+	dump_debug(omega, K, slope);
 }
