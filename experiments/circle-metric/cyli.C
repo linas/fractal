@@ -134,7 +134,7 @@ double slope(double x, double omega, double K)
 
 // Failed attempt to compute the shift. This won't work because it's not
 // actually a shift. Hmm. Let me think ...
-double tshift(double x, double shift, int n,
+double tshift(double x, int n, double shift,
               double (*fun)(double, double, double),
               double omega, double K)
 {
@@ -206,7 +206,7 @@ double trans_half(double x, double omega, double K)
 
 double avslope(double x, double omega, double K)
 {
-	return taverage(x, 100, slope, omega, K);
+	return taverage(x, 30, slope, omega, K);
 }
 
 void dump_transfer(double omega, double K, double (*fun)(double, double, double))
