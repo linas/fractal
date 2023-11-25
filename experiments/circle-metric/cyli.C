@@ -223,7 +223,8 @@ void dump_invariant(double omega, double K)
 		double jc = jaco(y, omega, K);
 
 		double t1 = triter(y, 1, unit, omega, K);
-		double t2 = triter(y, 100, unit, omega, K);
+#define NAVG 600
+		double t2 = triter(y, NAVG, unit, omega, K);
 		double t3 = mu(y, omega, K);
 		double t4 = trans_mu(y, omega, K);
 		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
@@ -250,6 +251,6 @@ int main(int argc, char* argv[])
 
 	// dump_jaco(omega, K);
 	// dump_transfer(omega, K, unit);
-	// dump_invariant(omega, K);
-	dump_shift(omega, K, 0.5);
+	dump_invariant(omega, K);
+	// dump_shift(omega, K, 0.5);
 }
