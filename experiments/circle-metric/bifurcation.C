@@ -17,19 +17,19 @@
 /*-------------------------------------------------------------------*/
 /* Bifurcation diagram callback, does one row at a time */
 
-static void 
-bifurcation_diagram 
-(float *array, 
-	int array_size, 
+static void
+bifurcation_diagram
+(float *array,
+	int array_size,
 	double x_center,
 	double x_width,
-	double K, 
+	double K,
 	int itermax,
 	double omega)
 {
 	long cnt = 0;
 
-	/* clear out the row */   
+	/* clear out the row */
 	for (int j=0; j<array_size; j++)
 	{
 		array[j] = 0.0;
@@ -55,7 +55,7 @@ bifurcation_diagram
 			/* convert coordinate to integer, and historgram it. */
 			double y = x - floor(x);
 			double en = array_size * y;
-			int n = (int) en;
+			int n = (int) floor(en + 0.5);
 			if (0 > n) n = 0;
 			if (n >= array_size) n = array_size-1;
 			array[n] += 1.0;
@@ -66,7 +66,7 @@ bifurcation_diagram
 	// Renormalize
 	for (int j=0; j<array_size; j++)
 	{
-		array[j] /= cnt;
+		array[j] *= array_size / ((double) cnt);
 	}
 }
 

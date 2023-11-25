@@ -16,4 +16,4 @@ circle: circle.o $(BRAT)
 measure: measure.o
 topo: topo.o
 cyli: cyli.o
-bifurcation: bifurcation.o
+bifurcation: bifurcation.o $(BRAT)
