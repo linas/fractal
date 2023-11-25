@@ -64,7 +64,8 @@ void dump_jaco(double omega, double K)
 	}
 }
 
-// Compute transfer operator applied to fun
+// Compute transfer operator applied to fun.
+// It's applied eactly once.
 double transfer(double y, double (*fun)(double, double, double),
                 double omega, double K)
 {
@@ -99,8 +100,10 @@ double unit(double x, double omega, double K)
 }
 
 // Compute average of the transfer operator applied to
-// fun one, two, three, ... times. The value returned turns out to
-// be equal to the invariant measure.
+// fun one, two, three, ... times. Since the transfer operator
+// preserves the measure, then when it's applied to anything that
+// integrates to 1.0, the returned average will be the invariant
+// measure.
 double taverage(double x, int n, double (*fun)(double, double, double),
                 double omega, double K)
 {
@@ -122,6 +125,16 @@ double taverage(double x, int n, double (*fun)(double, double, double),
 	return sum / n;
 }
 
+// Integral of this is exactly zero.
+double slope(double x, double omega, double K)
+{
+	// return x-0.5;
+	// return (x>0.5) ? 2.0*(1.0-x) : - 2.0*x;
+	// return sin(2.0*M_PI*(x-omega));
+	// return sin(2.0*M_PI*(x+omega));
+	return cos(2.0*M_PI*(x-omega));
+}
+
 // Failed attempt to compute the shift. This won't work because it's not
 // actually a shift. Hmm. Let me think ...
 double tshift(double x, double shift, int n,
@@ -129,7 +142,7 @@ double tshift(double x, double shift, int n,
 {
 	double ci = cinv(x, omega, K);
 	double jc = jaco(x, omega, K);
-	double rho = unit(ci, omega, K);
+	double rho = slope(ci, omega, K);
 	double y = rho / jc;
 	x = ci;
 	double sum = y;
@@ -151,7 +164,8 @@ double tshift(double x, double shift, int n,
 
 double f1(double x, double omega, double K)
 {
-	return transfer(x, unit, omega, K);
+	// return transfer(x, unit, omega, K);
+	return transfer(x, slope, omega, K);
 }
 
 double f2(double x, double omega, double K)
@@ -189,6 +203,15 @@ double trans_half(double x, double omega, double K)
 	return transfer(x, half, omega, K);
 }
 
+double avslope(double x, double omega, double K)
+{
+	return taverage(x, 100, slope, omega, K);
+}
+
+double trans_slope(double x, double omega, double K)
+{
+	return transfer(x, avslope, omega, K);
+}
 
 void dump_transfer(double omega, double K, double (*fun)(double, double, double))
 {
@@ -231,6 +254,11 @@ void dump_invariant(double omega, double K)
 	}
 }
 
+double avslo(double x, double omega, double K)
+{
+	return taverage(x, 50, slope, omega, K);
+}
+
 void dump_shift(double omega, double K, double shift)
 {
 #define SNPTS 500
@@ -238,11 +266,50 @@ void dump_shift(double omega, double K, double shift)
 	{
 		double y = (i+0.5) / SNPTS;
 
+#if 0
 		double t1 = tshift(y, 30, 0.5, omega, K);
 		double t2 = trans_half(y, omega, K);
-		printf("%d	%f	%f	%f\n", i, y, t1, t2);
+		double t3 = taverage(y, 100, slope, omega, K);
+		double t4 = trans_slope(y, omega, K);
+#endif
+#if 0
+		double t1 = taverage(y, 10, slope, omega, K);
+		double t2 = taverage(y, 20, slope, omega, K);
+		double t3 = taverage(y, 30, slope, omega, K);
+		double t4 = taverage(y, 40, slope, omega, K);
+#endif
+		double t1 = taverage(y, 50, slope, omega, K);
+		double t2 = triter(y, 50, slope, omega, K);
+		double t3 = triter(y, 51, slope, omega, K);
+		double t4 = transfer(y, avslo, omega, K);
+		printf("%d	%f	%f	%f	%f	%f\n", i, y, t1, t2, t3, t4);
 	}
 }
+
+void dump_debug(double omega, double K, double (*fun)(double, double, double))
+{
+#define TNPTS 500
+	for (int i=0; i< TNPTS; i++)
+	{
+		double y = (i+0.5) / TNPTS;
+
+		// Manual recursion
+		double t1 = f1(y, omega, K);
+		double t2 = f2(y, omega, K);
+		double t3 = triter(y, 2, fun, omega, K);
+		// double t3 = f3(y, omega, K);
+		double t4 = triter(y, 3, fun, omega, K);
+
+#if 0
+		// Double-check loop recursion
+		double tr = f4(y, omega, K);
+		double tc = triter(y, 4, fun, omega, K);
+		printf("yoo %g\n", tr-tc);
+#endif
+		printf("%d	%f	%f	%f	%f	%f\n", i, y, t1, t2, t3, t4);
+	}
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -251,6 +318,8 @@ int main(int argc, char* argv[])
 
 	// dump_jaco(omega, K);
 	// dump_transfer(omega, K, unit);
-	dump_invariant(omega, K);
+	// dump_invariant(omega, K);
 	// dump_shift(omega, K, 0.5);
+	// dump_debug(omega, K, unit);
+	dump_debug(omega, K, slope);
 }
