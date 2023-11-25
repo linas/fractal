@@ -106,19 +106,17 @@ double unit(double x, double omega, double K)
 double taverage(double x, int n, double (*fun)(double, double, double),
                 double omega, double K)
 {
-	double ci = cinv(x, omega, K);
-	double jc = jaco(x, omega, K);
-	double rho = fun(ci, omega, K);
-	double y = rho / jc;
-	x = ci;
-	double sum = y;
-	for (int i=1; i<n; i++)
+	double sum = 0.0;
+	double jacobian = 1.0;
+	for (int i=0; i<n; i++)
 	{
 		double ci = cinv(x, omega, K);
-		double jc = jaco(x, omega, K);
-		y = y / jc;
+		double jc = pprime(ci, K);
+		jacobian *= jc;
 		x = ci;
 
+		double rho = fun(x, omega, K);
+		double y = rho / jacobian;
 		sum += y;
 	}
 	return sum / n;
@@ -163,8 +161,8 @@ double tshift(double x, double shift, int n,
 
 double f1(double x, double omega, double K)
 {
-	double rv = transfer(x, slope, omega, K);
-	return rv;
+	return transfer(x, unit, omega, K);
+	// return transfer(x, slope, omega, K);
 }
 
 // Apply xfer operator exactly once to the previous result.
@@ -289,31 +287,6 @@ void dump_shift(double omega, double K, double shift)
 	}
 }
 
-void dump_debug(double omega, double K, double (*fun)(double, double, double))
-{
-#define TNPTS 500
-	for (int i=0; i< TNPTS; i++)
-	{
-		double y = (i+0.5) / TNPTS;
-
-		// Manual recursion
-		double t1 = f1(y, omega, K);
-		double t2 = f2(y, omega, K);
-		double t3 = triter(y, 2, fun, omega, K);
-		// double t3 = f3(y, omega, K);
-		double t4 = triter(y, 3, fun, omega, K);
-
-#if 0
-		// Double-check loop recursion
-		double tr = f4(y, omega, K);
-		double tc = triter(y, 4, fun, omega, K);
-		printf("yoo %g\n", tr-tc);
-#endif
-		printf("%d	%f	%f	%f	%f	%f\n", i, y, t1, t2, t3, t4);
-	}
-}
-
-
 int main(int argc, char* argv[])
 {
 	double omega = atof(argv[1]);
@@ -322,7 +295,5 @@ int main(int argc, char* argv[])
 	// dump_jaco(omega, K);
 	// dump_transfer(omega, K, unit);
 	// dump_invariant(omega, K);
-	// dump_shift(omega, K, 0.5);
-	// dump_debug(omega, K, unit);
-	dump_debug(omega, K, slope);
+	dump_shift(omega, K, 0.5);
 }
