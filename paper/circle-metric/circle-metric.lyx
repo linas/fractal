@@ -2609,30 +2609,12 @@ n operator of the dynamical system.
 \end_layout
 
 \begin_layout Standard
-It is convenient to take 
-\begin_inset Formula $\mathcal{F}=L_{1}\left[0,1\right]$
-\end_inset
-
- the Banach space 
-\begin_inset Formula $L_{1}$
-\end_inset
-
- of integrable functions.
- By defintion, if 
-\begin_inset Formula $g\in L_{1}$
-\end_inset
-
- then it's absolute value is integrable: 
-\begin_inset Formula $\int\left|g\right|<\infty$
-\end_inset
-
-.
- Slightly more generally, 
+It is conventional to take 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- can be taken as the space of measuable functions, employing the standard
- Lesbegue measure on the reals.
+ as the space of integrable functions, employing the standard Lesbegue measure
+ on the reals.
  Working with this space, it can be seen that 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
@@ -2649,21 +2631,25 @@ It is convenient to take
 
 \end_inset
 
-That is, 
+In this space, 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
  is a bounded operator that preserves vector space norms.
- That is, defining 
+ Defining the norm as 
 \begin_inset Formula $\left|g\right|=\int g$
 \end_inset
 
-, one has that 
+, the above states that 
 \begin_inset Formula $\left|\mathcal{L}_{f}g\right|=\left|g\right|$
 \end_inset
 
+ for any 
+\begin_inset Formula $g\in\mathcal{F}$
+\end_inset
+
 .
- The operator norm 
+ Defining the operator norm 
 \begin_inset Formula $\left\Vert A\right\Vert $
 \end_inset
 
@@ -2671,7 +2657,7 @@ That is,
 \begin_inset Formula $A$
 \end_inset
 
- is conventionally defined as 
+ as per standard convetion, 
 \begin_inset Formula 
 \[
 \left\Vert A\right\Vert =\sup\left\{ c:\left|Ag\right|=c\left|g\right|\mbox{ for all \ensuremath{g\in\mathcal{F}}}\right\} 
@@ -2679,7 +2665,7 @@ That is,
 
 \end_inset
 
-and so, here, one has that 
+one has that 
 \begin_inset Formula $\left\Vert \mathcal{L}_{f}\right\Vert =1$
 \end_inset
 
@@ -2826,7 +2812,20 @@ Besides the principal eigenvalue, there may be more.
 \end_inset
 
  whenever 
-\begin_inset Formula $\lambda\ne1$
+\begin_inset Formula $\left|\lambda\right|\ne1$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\left|e_{\lambda}\right|=\left|\mathcal{L}_{f}e_{\lambda}\right|=\left|\lambda\right|\left|e_{\lambda}\right|$
+\end_inset
+
+, which can only be satsified if 
+\begin_inset Formula $\left|\lambda\right|=1$
+\end_inset
+
+ or if 
+\begin_inset Formula $\left|e_{\lambda}\right|=0$
 \end_inset
 
 .
@@ -2834,18 +2833,7 @@ Besides the principal eigenvalue, there may be more.
 \begin_inset Formula $e_{\lambda}$
 \end_inset
 
- are 
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
+ are termed 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2853,7 +2841,36 @@ decaying
 \begin_inset Quotes erd
 \end_inset
 
-; the decaying modes of a measure-preserving dynamical system describe the
+; they vanish exponentially with time, leaving only the invariant measure
+ after repeate applications.
+ Explicitly, after 
+\begin_inset Formula $n$
+\end_inset
+
+ iterations, one has 
+\begin_inset Formula $\mathcal{L}_{f}^{n}e_{\lambda}=\lambda^{n}e_{\lambda}$
+\end_inset
+
+.
+ Then, writing 
+\begin_inset Formula $\lambda^{n}=\exp n\log\lambda$
+\end_inset
+
+ and using 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+, the log is seen to be negative.
+ It is a decay constant, and 
+\begin_inset Formula $n$
+\end_inset
+
+ corresponds to the elapsed time.
+ 
+\end_layout
+
+\begin_layout Standard
+The decaying modes of a measure-preserving dynamical system describe the
  part of the space that 
 \begin_inset Quotes eld
 \end_inset
@@ -2863,6 +2880,7 @@ wanders away
 \end_inset
 
 , never to be returned to.
+ They correspond to the dissipative part of the system.
  The Hopf decomposition
 \begin_inset Foot
 status collapsed
@@ -2887,12 +2905,17 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-As an example of a decaying mode, consider the circle map with 
+A concrete example of a decaying mode can be found in the circle map.
+ Consider the map with 
 \begin_inset Formula $\left(\omega,K\right)$
 \end_inset
 
  allowing only periodic orbits of period 
 \begin_inset Formula $p$
+\end_inset
+
+, convering to an orbit set 
+\begin_inset Formula $\left\{ o_{k}\right\} $
 \end_inset
 
 .
@@ -2905,7 +2928,7 @@ As an example of a decaying mode, consider the circle map with
 \end_inset
 
  and iterating, the iterates converge onto a delta-function measure 
-\begin_inset Formula $\mu\left(x\right)=\frac{1}{p}\sum_{k}\delta\left(x-x_{k}\right)$
+\begin_inset Formula $\mu\left(x\right)=\frac{1}{p}\sum_{k}\delta\left(x-o_{k}\right)$
 \end_inset
 
 , the sum over 
@@ -2913,7 +2936,7 @@ As an example of a decaying mode, consider the circle map with
 \end_inset
 
  being over the periodic orbit.
- This is equivalent to saying that 
+ This is equivalent to saying that the uniform distribution 
 \begin_inset Formula $u\left(x\right)=1$
 \end_inset
 
@@ -2925,47 +2948,46 @@ u\left(x\right)=\mu\left(x\right)+\sum_{\lambda}a_{\lambda}e_{\lambda}\left(x\ri
 
 \end_inset
 
-Each iteration step corresponds to an application of 
-\begin_inset Formula $\mathcal{L}_{f}$
-\end_inset
-
-; after many iterations, all modes besides the ground state will have decayed
- exponentially.
- That is, 
-\begin_inset Formula $\mathcal{L}_{f}^{n}e_{\lambda}=\lambda^{n}e_{\lambda}$
-\end_inset
-
- and 
-\begin_inset Formula $\lambda^{n}=\exp n\log\lambda$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $\left|\lambda\right|<1$
-\end_inset
-
-, the log is negative; it is the decay constant, and 
+After 
 \begin_inset Formula $n$
 \end_inset
 
- corresponds to the elapsed time.
-\end_layout
+ iterations, the iterates 
+\begin_inset Formula $x_{n}$
+\end_inset
 
-\begin_layout Standard
-Put differently, consider starting the iteration with some initial 
+ with be distributed according to the probability distribution
+\begin_inset Formula 
+\[
+\mathcal{L}_{f}^{n}u=\mu+\sum_{\lambda}a_{\lambda}\lambda^{n}e_{\lambda}
+\]
+
+\end_inset
+
+with the second term rapidly vanishing.
+ Consider starting the iteration with some initial 
 \begin_inset Formula $x_{0}\in\left[a,b\right]$
 \end_inset
 
- and finding that in the limit 
+ where the interval 
+\begin_inset Formula $\left[a,b\right]$
+\end_inset
+
+ that does not contain any orbit point 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+.
+ In the limit 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
-, that 
+, the iterated point will be outside of this interval: 
 \begin_inset Formula $f^{n}\left(x_{0}\right)\notin\left[a,b\right]$
 \end_inset
 
  almost certainly.
- One can then say that 
+ For this case, 
 \begin_inset Formula $x_{0}$
 \end_inset
 
@@ -3008,37 +3030,29 @@ The precise form of the Frobenius–Perron operator
 \end_inset
 
 .
- Working with spaces 
+ One might restrict 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- defined to have a polynomial basis and forcing uniform convergence usually
- results in an operator with a discrete spectrum.
- 
-\end_layout
-
-\begin_layout Standard
-The situation is not always so simple.
- Working with Hilbert spaces or Banach spaces for 
-\begin_inset Formula $\mathcal{F}$
-\end_inset
-
- can result in continuous, rather than discrete spectra.
- Note that functions belonging to the Banach space 
+ to be the Banach space 
 \begin_inset Formula $L_{1}$
 \end_inset
 
- only need to be integrable: if 
-\begin_inset Formula $g\in L_{1}$
+, or perhaps the Hilbert space 
+\begin_inset Formula $L_{2}$
 \end_inset
 
- then we only ask that 
-\begin_inset Formula $\int_{0}^{1}\left|g\left(x\right)\right|dx<\infty$
+ of square-integrable functions, or even the space of polynomials of finite
+ order.
+ The tighter the restriction, the smaller the spectrum of 
+\begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
 .
- Such functions need not be smooth or even continuous.
- They may even be everywhere-discontinuous: the Minkowski measure
+ The larger spaces contain functions which may not be smooth or even continuous.
+ In the worst case, they may even be discontinous everywhere, such as the
+ Cantor function.
+ An interesting example is provided by the Minkowski measure
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Vep-mink2008"
@@ -3046,11 +3060,12 @@ literal "false"
 
 \end_inset
 
- provides such an example.
+, which arises from the iteration of continued fractions.
 \end_layout
 
 \begin_layout Standard
-I'm not aware of any explicit expressions for the circle map measure.
+I'm not aware of any explicit expressions for the invariant measure for
+ the standard circle map.
 \begin_inset Foot
 status collapsed
 
@@ -3132,8 +3147,8 @@ ns for the Frobenius–Peron operator
 \begin_inset Formula $C=C\left(\omega,K\right)$
 \end_inset
 
- the circle map.
- 
+ the standard circle map.
+ One expression is given in a later section, further below.
 \end_layout
 
 \begin_layout Subsection
