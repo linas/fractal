@@ -186,7 +186,8 @@ double f4(double x, double omega, double K)
 
 double mu(double x, double omega, double K)
 {
-	return taverage(x, 100, unit, omega, K);
+#define NAVG 500
+	return taverage(x, NAVG, unit, omega, K);
 }
 
 double trans_mu(double x, double omega, double K)
@@ -242,14 +243,17 @@ void dump_invariant(double omega, double K)
 		double jc = jaco(y, omega, K);
 
 		double t1 = triter(y, 1, unit, omega, K);
-#define NAVG 100
-		double t2 = triter(y, NAVG, unit, omega, K);
+#define NSTEP 100
+		double t2 = triter(y, NSTEP, unit, omega, K);
 		double t3 = mu(y, omega, K);
 		double t4 = trans_mu(y, omega, K);
 		printf("%d	%f	%f	%f	%f	%f	%f\n", i, y, jc, t1, t2, t3, t4);
 	}
 }
 
+// Well, this doesn't do what was vaguely hoped for:
+// build shift states that work. Because, well, they're
+// not built the right way.
 void dump_shift(double omega, double K, double shift)
 {
 #define SNPTS 500
@@ -278,6 +282,6 @@ int main(int argc, char* argv[])
 
 	// dump_jaco(omega, K);
 	// dump_transfer(omega, K, unit);
-	// dump_invariant(omega, K);
-	dump_shift(omega, K, 0.5);
+	dump_invariant(omega, K);
+	// dump_shift(omega, K, 0.5);
 }
