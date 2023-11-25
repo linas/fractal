@@ -125,32 +125,32 @@ double taverage(double x, int n, double (*fun)(double, double, double),
 // Integral of this is exactly zero.
 double slope(double x, double omega, double K)
 {
-	// return x-0.5;
+	return x-0.5;
 	// return (x>0.5) ? 2.0*(1.0-x) : - 2.0*x;
 	// return sin(2.0*M_PI*(x-omega));
 	// return sin(2.0*M_PI*(x+omega));
-	return cos(2.0*M_PI*(x-omega));
+	// return cos(2.0*M_PI*(x-omega));
 }
 
 // Failed attempt to compute the shift. This won't work because it's not
 // actually a shift. Hmm. Let me think ...
 double tshift(double x, double shift, int n,
+              double (*fun)(double, double, double),
               double omega, double K)
 {
-	double ci = cinv(x, omega, K);
-	double jc = jaco(x, omega, K);
-	double rho = slope(ci, omega, K);
-	double y = rho / jc;
-	x = ci;
-	double sum = y;
-	double shn = shift;
-	double norm = 1.0;
-	for (int i=1; i<n; i++)
+	double sum = 0.0;
+	double shn = 1.0;
+	double norm = 0.0;
+	double jacobian = 1.0;
+	for (int i=0; i<n; i++)
 	{
 		double ci = cinv(x, omega, K);
-		double jc = jaco(x, omega, K);
-		y = y / jc;
+		double jc = pprime(ci, K);
+		jacobian *= jc;
 		x = ci;
+
+		double rho = fun(x, omega, K);
+		double y = rho / jacobian;
 
 		sum += shn * y;
 		norm += shn;
@@ -196,7 +196,7 @@ double trans_mu(double x, double omega, double K)
 
 double half(double x, double omega, double K)
 {
-	return tshift(x, 30, 0.5, omega, K);
+	return tshift(x, 30, 0.5, slope, omega, K);
 }
 
 double trans_half(double x, double omega, double K)
@@ -207,11 +207,6 @@ double trans_half(double x, double omega, double K)
 double avslope(double x, double omega, double K)
 {
 	return taverage(x, 100, slope, omega, K);
-}
-
-double trans_slope(double x, double omega, double K)
-{
-	return transfer(x, avslope, omega, K);
 }
 
 void dump_transfer(double omega, double K, double (*fun)(double, double, double))
@@ -255,11 +250,6 @@ void dump_invariant(double omega, double K)
 	}
 }
 
-double avslo(double x, double omega, double K)
-{
-	return taverage(x, 50, slope, omega, K);
-}
-
 void dump_shift(double omega, double K, double shift)
 {
 #define SNPTS 500
@@ -268,21 +258,15 @@ void dump_shift(double omega, double K, double shift)
 		double y = (i+0.5) / SNPTS;
 
 #if 0
-		double t1 = tshift(y, 30, 0.5, omega, K);
-		double t2 = trans_half(y, omega, K);
-		double t3 = taverage(y, 100, slope, omega, K);
-		double t4 = trans_slope(y, omega, K);
-#endif
-#if 0
 		double t1 = taverage(y, 10, slope, omega, K);
 		double t2 = taverage(y, 20, slope, omega, K);
 		double t3 = taverage(y, 30, slope, omega, K);
 		double t4 = taverage(y, 40, slope, omega, K);
 #endif
-		double t1 = taverage(y, 50, slope, omega, K);
-		double t2 = triter(y, 50, slope, omega, K);
-		double t3 = triter(y, 51, slope, omega, K);
-		double t4 = transfer(y, avslo, omega, K);
+		double t1 = tshift(y, 30, 0.5, slope, omega, K);
+		double t2 = trans_half(y, omega, K);
+		double t3 = taverage(y, 30, slope, omega, K);
+		double t4 = transfer(y, avslope, omega, K);
 		printf("%d	%f	%f	%f	%f	%f\n", i, y, t1, t2, t3, t4);
 	}
 }
