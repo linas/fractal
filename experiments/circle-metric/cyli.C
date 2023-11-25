@@ -80,20 +80,18 @@ printf("enter trans with y=%f ci=%f jc=%f tr=%f\n", y, ci, jc, tr);
 double triter(double x, int n, double (*fun)(double, double, double),
               double omega, double K)
 {
-	double ci = cinv(x, omega, K);
-	double jc = jaco(x, omega, K);
-	double rho = fun(ci, omega, K);
-	double y = rho / jc;
-printf("enter triter first y=%f ci=%f jc=%f tr=%f\n", x, ci, jc, y);
-	x = ci;
-	for (int i=1; i<n; i++)
+	double jacobian = 1.0;
+	for (int i=0; i<n; i++)
 	{
 		double ci = cinv(x, omega, K);
-		double jc = jaco(x, omega, K);
-		y = y / jc;
-printf("enter triter next y=%f ci=%f jc=%f tr=%f\n", x, ci, jc, y);
+		double jc = pprime(ci, K);
+		jacobian *= jc;
+printf("enter triter iter i=%d x=%f ci=%f jc=%f\n", i, x, ci, jc);
 		x = ci;
 	}
+	double rho = fun(x, omega, K);
+	double y = rho / jacobian;
+printf("exit triter y=%f jaco=%f\n", y, jacobian);
 	return y;
 }
 
