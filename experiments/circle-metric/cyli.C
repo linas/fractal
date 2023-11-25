@@ -168,6 +168,10 @@ double f1(double x, double omega, double K)
 	return transfer(x, slope, omega, K);
 }
 
+// Apply xfer operator exactly once to the previous result.
+// For fun=unit, this is identical to triter(x, 2, fun, omega, K);
+// and likewise for f3 and f4. But for other funs it is not.
+// So WTF am I doing wrong?
 double f2(double x, double omega, double K)
 {
 	return transfer(x, f1, omega, K);
