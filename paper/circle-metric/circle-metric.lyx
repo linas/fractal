@@ -2203,14 +2203,18 @@ A reference is needed here.
 Informally, the measure can be understood as a single slice through the
  bifurcation diagram.
  In the periodic regions, it will be of the form 
-\begin_inset Formula $\mu\left(x\right)=\sum_{k}\delta\left(x-x_{k}\right)$
+\begin_inset Formula $\mu\left(x\right)=\frac{1}{p}\sum_{k}\delta\left(x-x_{k}\right)$
 \end_inset
 
  where the sum ranges over the points 
 \begin_inset Formula $x_{k}$
 \end_inset
 
- in the cycle, and 
+ in the cycle, which is of length 
+\begin_inset Formula $p$
+\end_inset
+
+, and 
 \begin_inset Formula $\delta\left(x\right)$
 \end_inset
 
@@ -2473,8 +2477,17 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Subsection
+The Perron–Frobenius Operator
+\end_layout
+
 \begin_layout Standard
-The measure is termed 
+This section takes a short detour into some modest formalities.
+ The goal is to present an overview that places everything into perspective.
+\end_layout
+
+\begin_layout Standard
+A measure is termed 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2482,9 +2495,8 @@ invariant
 \begin_inset Quotes erd
 \end_inset
 
-, because it corresponds to the Frobenius-Perron eigenvalue of one, for
- the corresponding transfer operator.
- Wandering a bit off-topic, lets sketch this for completeness.
+, when it corresponds to the Frobenius-Perron eigenvalue of one, for the
+ corresponding transfer operator.
  For any given iterated function 
 \begin_inset Formula $f:\left[0,1\right]\to\left[0,1\right]$
 \end_inset
@@ -2543,10 +2555,10 @@ suitable
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
- is an operator, in that it maps functions to functions.
- As a operator, it has a spectrum: in general a spectrum with discrete parts,
- as well as continuous parts; all of the usual considerations about the
- spectra of operators apply, in general.
+ is a linear operator, in that it maps functions to functions.
+ As an operator, it has a spectrum: in general a spectrum with discrete
+ parts, as well as continuous parts; all of the usual considerations about
+ the spectra of operators apply, in general.
  For suitably tame function spaces 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
@@ -2633,23 +2645,45 @@ measure
 \end_layout
 
 \begin_layout Standard
-The precise form of the Frobenius–Peron operator 
+The transformation giving 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
- and the structure of its spectrum depends strongly on the choice of 
-\begin_inset Formula $\mathcal{F}$
+ is measure-preserving, in that, for any 
+\begin_inset Formula $g\in\mathcal{F}$
+\end_inset
+
+, the operator was defined as a change-of-variable, so that 
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left[\mathcal{L}_{f}g\right]\left(y\right)dy=\int_{0}^{1}g\left(x\right)dx
+\]
+
+\end_inset
+
+From this, one concludes that if there are eigenfunctions 
+\begin_inset Formula $\mathcal{L}_{f}e_{\lambda}=\lambda e_{\lambda}$
+\end_inset
+
+ with 
+\begin_inset Formula $\lambda\ne1$
+\end_inset
+
+ then they must have 
+\begin_inset Formula $\int_{0}^{1}e_{\lambda}\left(x\right)dx=0$
 \end_inset
 
 .
- Working with spaces 
-\begin_inset Formula $\mathcal{F}$
+ By the Perron–Frobenius theorem, the largest eigenvalue is 
+\begin_inset Formula $\lambda=1$
 \end_inset
 
- defined to have a polynomial basis and forcing uniform convergence usually
- results in an operator with a discrete spectrum.
- Since all but the first eigenvalue are less than one, the eigenfunctions
- are termed 
+; all others have 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ Such modes are 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2657,21 +2691,110 @@ decaying
 \begin_inset Quotes erd
 \end_inset
 
-.
- They correspond to the 
+; the decaying modes of a measure-preserving dynamical system describe the
+ part of the space that 
 \begin_inset Quotes eld
 \end_inset
 
-wandering set
+wanders away
 \begin_inset Quotes erd
 \end_inset
 
- of dynamical systems that are not conservative.
- That is, one may start iteration with some initial 
+, never to be returned to.
+ The Hopf decomposition
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See Wikipedia, 
+\begin_inset CommandInset href
+LatexCommand href
+name "Hopf decomposition"
+target "https://en.wikipedia.org/wiki/Hopf_decomposition"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ states that every dynamical system can be decomposed into dissipative and
+ conservative parts.
+\end_layout
+
+\begin_layout Standard
+As an example, consider the circle map with 
+\begin_inset Formula $\left(\omega,K\right)$
+\end_inset
+
+ allowing only periodic orbits of period 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Selecting initial values 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ from a uniform distribution 
+\begin_inset Formula $u\left(x\right)=1$
+\end_inset
+
+ and iterating, the iterates converge onto a delta-function measure 
+\begin_inset Formula $\mu\left(x\right)=\frac{1}{p}\sum_{k}\delta\left(x-x_{k}\right)$
+\end_inset
+
+, the sum over 
+\begin_inset Formula $k$
+\end_inset
+
+ being over the periodic orbit.
+ This is equivalent to saying that 
+\begin_inset Formula $u\left(x\right)=1$
+\end_inset
+
+ has an eigenfunction decomposition
+\begin_inset Formula 
+\[
+u\left(x\right)=\mu\left(x\right)+\sum_{\lambda}a_{\lambda}e_{\lambda}\left(x\right)
+\]
+
+\end_inset
+
+Each iteration step corresponds to an application of 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+; after many iterations, all modes besides the ground state will have decayed
+ exponentially.
+ That is, 
+\begin_inset Formula $\mathcal{L}_{f}^{n}e_{\lambda}=\lambda^{n}e_{\lambda}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda^{n}=\exp n\log\lambda$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+, the log is negative; it is the decay constant, and 
+\begin_inset Formula $n$
+\end_inset
+
+ corresponds to the elapsed time.
+\end_layout
+
+\begin_layout Standard
+Put differently, consider starting the iteration with some initial 
 \begin_inset Formula $x_{0}\in\left[a,b\right]$
 \end_inset
 
- and find that in the limit 
+ and finding that in the limit 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
@@ -2680,7 +2803,7 @@ wandering set
 \end_inset
 
  almost certainly.
- That is, 
+ One can then say that 
 \begin_inset Formula $x_{0}$
 \end_inset
 
@@ -2696,12 +2819,13 @@ wandered away
 \begin_inset Formula $\left[a,b\right]$
 \end_inset
 
-, that 
+, and that 
 \begin_inset Formula $\int_{a}^{b}\mu\left(x\right)dx=0$
 \end_inset
 
 .
- A 
+ The interval corresponds to a dissipative part of the system; what is left
+ is a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2709,11 +2833,27 @@ conservative system
 \begin_inset Quotes erd
 \end_inset
 
- results when one works with the subset of the unit interval where 
-\begin_inset Formula $\mu$
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The precise form of the Frobenius–Perron operator 
+\begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
- is non-vanishing.
+ and the structure of its spectrum depends strongly on the choice of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+.
+ Working with spaces 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ defined to have a polynomial basis and forcing uniform convergence usually
+ results in an operator with a discrete spectrum.
+ 
 \end_layout
 
 \begin_layout Standard

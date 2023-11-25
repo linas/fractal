@@ -223,7 +223,7 @@ void dump_invariant(double omega, double K)
 		double jc = jaco(y, omega, K);
 
 		double t1 = triter(y, 1, unit, omega, K);
-#define NAVG 600
+#define NAVG 100
 		double t2 = triter(y, NAVG, unit, omega, K);
 		double t3 = mu(y, omega, K);
 		double t4 = trans_mu(y, omega, K);
