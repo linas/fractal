@@ -65,13 +65,14 @@ void dump_jaco(double omega, double K)
 }
 
 // Compute transfer operator applied to fun.
-// It's applied eactly once.
+// It's applied exactly once.
 double transfer(double y, double (*fun)(double, double, double),
                 double omega, double K)
 {
 	double ci = cinv(y, omega, K);
 	double jc = jaco(y, omega, K);
 	double tr = fun(ci, omega, K) / jc;
+printf("enter trans with y=%f ci=%f jc=%f tr=%f\n", y, ci, jc, tr);
 	return tr;
 }
 
@@ -83,12 +84,14 @@ double triter(double x, int n, double (*fun)(double, double, double),
 	double jc = jaco(x, omega, K);
 	double rho = fun(ci, omega, K);
 	double y = rho / jc;
+printf("enter triter first y=%f ci=%f jc=%f tr=%f\n", x, ci, jc, y);
 	x = ci;
 	for (int i=1; i<n; i++)
 	{
 		double ci = cinv(x, omega, K);
 		double jc = jaco(x, omega, K);
 		y = y / jc;
+printf("enter triter next y=%f ci=%f jc=%f tr=%f\n", x, ci, jc, y);
 		x = ci;
 	}
 	return y;
@@ -325,5 +328,13 @@ int main(int argc, char* argv[])
 	// dump_invariant(omega, K);
 	// dump_shift(omega, K, 0.5);
 	// dump_debug(omega, K, unit);
-	dump_debug(omega, K, slope);
+	// dump_debug(omega, K, slope);
+
+	double y = 0.555;
+printf("call f1-----\n");
+	f1(y, omega, K);
+printf("call f2------\n");
+	f2(y, omega, K);
+printf("call trit------\n");
+	triter(y, 2, slope, omega, K);
 }
