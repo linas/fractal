@@ -125,7 +125,10 @@ double taverage(double x, int n, double (*fun)(double, double, double),
 // Integral of this is exactly zero.
 double slope(double x, double omega, double K)
 {
-	return x-0.5;
+return -1.0;
+	// return (x>0.5) ? 2.0:0.0;
+	// return x-0.5;
+	// return (x>0.5) ? 1.0:-1.0;
 	// return (x>0.5) ? 2.0*(1.0-x) : - 2.0*x;
 	// return sin(2.0*M_PI*(x-omega));
 	// return sin(2.0*M_PI*(x+omega));
