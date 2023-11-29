@@ -5037,38 +5037,135 @@ and so all we've done is rediscover the old identity
 and why did we bother with this? ?? 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 The Vitali Set
 \end_layout
 
 \begin_layout Standard
-The construction of the Vitali set goes through the construction of a set
- 
+This section reviews the construction a certain class of quotient spaces
+ that can legimately be called Vitali sets.
+ They arise naturally as spaces of eventually-periodic sequences.
+ The prototypical example is the quotient space 
+\begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
+\end_inset
+
+ of the Cantor space 
+\begin_inset Formula $\Delta=2^{\omega}=\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ modulo the space of finite length strings 
+\begin_inset Formula $\mathbb{D}=2^{<\omega}$
+\end_inset
+
+.
+ The equivalence relation generates cosests that consist of infinite-length
+ binary strings that differ at a finite number of locations.
+\end_layout
+
+\begin_layout Standard
+The set 
 \begin_inset Formula $E_{0}$
 \end_inset
 
- that appears in a variety of other setings.
- The set 
-\begin_inset Formula $E_{0}$
-\end_inset
-
- is apparently gives 
+ can legitimately be called 
 \begin_inset Quotes eld
 \end_inset
 
-the smallest Borel equivalence relation (smallest, in the order of Borel
- reducibility) that does not admit a Borel function giving a real-valued
- complete invariant for the equivalence relation
+the Vitali set
 \begin_inset Quotes erd
 \end_inset
 
- (aka the Vitali set).
- At least, for the standard model of the reals.
- Presumably, the Vitali set can be given a measure of 
-\begin_inset Formula $\varepsilon$
+.
+ That this is an appropriate name can be sketched as follows.
+ Note that the cardinality of 
+\begin_inset Formula $\Delta$
 \end_inset
 
- in non-standard analysis, and this assignment remains consistent, right?
+ is 
+\begin_inset Formula $\aleph_{1}$
+\end_inset
+
+ while the cardinality of 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ is 
+\begin_inset Formula $\aleph_{0}$
+\end_inset
+
+ and so we conclude that 
+\begin_inset Formula $E_{0}$
+\end_inset
+
+ consists of 
+\begin_inset Formula $\aleph_{1}$
+\end_inset
+
+ cosets, each of which contains 
+\begin_inset Formula $\aleph_{0}$
+\end_inset
+
+ members.
+ One then defines a set of points 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ by choosing one representative from each coset.
+ Finally, one maps the points from 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ to the unit interval of the real numbers by applying the canonical binary
+ expansion mapping from 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ to the reals.
+ The image of 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ is then the conventional Vitali set.
+ The alert reader might notice that this set was constructed using the dyadic
+ rationals, whereas the usual Vital set is constructed using the rationals.
+ No matter: if this objection arises, then the inverse 
+\begin_inset Formula $?^{-1}$
+\end_inset
+
+ of the Minkowski question mark function 
+\begin_inset Formula $?$
+\end_inset
+
+ can be applied, to map the dyadics to the rationals.
+ At any rate, this sketch demonstrates four different objects that are isomorphi
+c to one-another, and thus can each be called 
+\begin_inset Quotes eld
+\end_inset
+
+the Vitali set
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Curiously, the definition of 
+\begin_inset Formula $E_{0}$
+\end_inset
+
+ does not seem to require the Axiom of Choice, at least, not superficially.
+ It is only the defintion of 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ that seems to require AC.
+ I don't understand if this is a phantom or not.
+\end_layout
+
+\begin_layout Standard
+The rest of teh subsections expand on the above.
+\end_layout
+
+\begin_layout Subsection
+Eventually periodic sequences of the Bernoulli shift
 \end_layout
 
 \begin_layout Standard
@@ -5092,7 +5189,7 @@ The simplifed construction proceeds as follows.
 \begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
 \end_inset
 
- where the cosets are given by all infinite-legnth binary strings that differ
+ where the cosets are given by all infinite-length binary strings that differ
  at a finite number of locations.
 \end_layout
 
@@ -5297,15 +5394,15 @@ One can then walk just a bit further down this path, and consider an equivalence
  relation where two ultimatly periodic sequences are equivalent, if the
  periods are of the same length, and one is a cylic permutation of the other.
  That is, 
-\begin_inset Formula $s\approx_{p}t$
+\begin_inset Formula $u\approx_{p}v$
 \end_inset
 
  iff 
-\begin_inset Formula $s\in\mathbb{D}_{p}$
+\begin_inset Formula $u\in\mathbb{D}_{p}$
 \end_inset
 
  and 
-\begin_inset Formula $t\in\mathbb{D}_{q}$
+\begin_inset Formula $v\in\mathbb{D}_{q}$
 \end_inset
 
  and 
@@ -5322,11 +5419,11 @@ One can then walk just a bit further down this path, and consider an equivalence
 
 .
  Under this definition, 
-\begin_inset Formula $s\approx_{p}t$
+\begin_inset Formula $u\approx_{p}v$
 \end_inset
 
  iff 
-\begin_inset Formula $s\approx_{q}t$
+\begin_inset Formula $u\approx_{q}v$
 \end_inset
 
 .
@@ -5386,16 +5483,304 @@ which is the set of finite-length binary strings that are not one-terminated.
  where the cosets consist of strings that are cyclic permuations of one-another.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 The Vitali set
 \end_layout
 
 \begin_layout Standard
-the ring 
-\begin_inset Formula $\mathbb{D}=\mathbb{Z}\left[1/2\right]=2^{<\omega}$
+A very short sketch of why I'm calling all this 
+\begin_inset Quotes eld
 \end_inset
 
+the Vitali set
+\begin_inset Quotes erd
+\end_inset
 
+.
+ 
+\end_layout
+
+\begin_layout Standard
+First, a review
+\emph on
+ ad nauseum
+\emph default
+.
+ The canonical mapping of the Cantor set 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ to the closed unit interval 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ of the reals 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+x=x\left(b\right)=\sum_{k=1}^{\infty}b_{k}2^{-k}
+\]
+
+\end_inset
+
+where an abuse of notation was used to write 
+\begin_inset Formula $x:\Delta\to\mathbb{R}$
+\end_inset
+
+ with 
+\begin_inset Formula $x:b\mapsto x\left(b\right)$
+\end_inset
+
+.
+ As usual, every dyadic rational 
+\begin_inset Formula $d=d\left(m,n\right)=\left(2m+1\right)/2^{n}$
+\end_inset
+
+ maps back to two binary different strings, one ending in all zeros, and
+ one ending in all ones.
+ Specifically, if 
+\begin_inset Formula $\left|b\right|=n$
+\end_inset
+
+ then 
+\begin_inset Formula $b=\left(b_{1},b_{2,}\cdots,b_{n-1},1,0,0,\cdots\right)$
+\end_inset
+
+ is paired with 
+\begin_inset Formula $\overline{b}=\left(b_{1},b_{2,}\cdots,b_{n-1},0,1,1,\cdots\right)$
+\end_inset
+
+ with the property that 
+\begin_inset Formula $x\left(b\right)=x\left(\overline{b}\right)=d\left(m,n\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $m=\sum_{k=1}^{n-1}b_{k}2^{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ be the image of 
+\begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
+\end_inset
+
+ under this mapping.
+\end_layout
+
+\begin_layout Standard
+under this mappingUnder this mapping
+\end_layout
+
+\begin_layout Subsection
+Formalities
+\end_layout
+
+\begin_layout Standard
+The set 
+\begin_inset Formula $E_{0}$
+\end_inset
+
+ is apparently gives 
+\begin_inset Quotes eld
+\end_inset
+
+the smallest Borel equivalence relation (smallest, in the order of Borel
+ reducibility) that does not admit a Borel function giving a real-valued
+ complete invariant for the equivalence relation
+\begin_inset Quotes erd
+\end_inset
+
+ (aka the Vitali set).
+ At least, for the standard model of the reals.
+ Presumably, the Vitali set can be given a measure of 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ in non-standard analysis, and this assignment remains consistent, right?
+\end_layout
+
+\begin_layout Subsection
+Baire space
+\end_layout
+
+\begin_layout Standard
+First, define the Baire space 
+\begin_inset Formula $\mathcal{N}=\omega^{\omega}$
+\end_inset
+
+ to be the space of infinite-length strings of the natural numbers, where
+ 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ is defined as positive integers (so zero is not included.) There is a canonical
+ run-length encoding that maps 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ to the Cantor space 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, given by the Minkowski question mark function.
+ Now, conventionally, the question mark is defined on the reals; for the
+ present, by abuse of notation, lets use the same name for the run-length
+ encoding.
+ Thus, given 
+\begin_inset Formula $a=\left[a_{1},a_{2},\cdots\right]\in\mathcal{N}$
+\end_inset
+
+ write 
+\begin_inset Formula $b=?\left(a\right)\in\Delta$
+\end_inset
+
+ as the binary string which consists of 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ zeros followed by 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+ ones, etc.
+ This is the run-length encoding.
+\end_layout
+
+\begin_layout Standard
+The canonical mapping of Baire space 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ into a subset of the unit interval is the continued fraction mapping 
+\begin_inset Formula 
+\[
+y=y\left(a\right)=y\left(\left[a_{1},a_{2},\cdots\right]\right)=\frac{1}{a_{1}+\dfrac{1}{a_{2}+\cdots}}
+\]
+
+\end_inset
+
+Note that this mapping misses every rational number, as long as we insist
+ that each 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ is a natural number, i.e.
+ that 
+\begin_inset Formula $a_{k}\ne0$
+\end_inset
+
+.
+ If we instead build the Baire set from the non-negative integers, so as
+ to allow 
+\begin_inset Formula $a_{k}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $y$
+\end_inset
+
+ will hit the rationals as well.
+ The cost here is that each rational has an uncountably infinite representation
+ as those strings having arbitrary digits after the first zero.
+\end_layout
+
+\begin_layout Standard
+Whatever, this is very pointlessly long winded.
+ 
+\end_layout
+
+\begin_layout Section
+Universal Fractal
+\end_layout
+
+\begin_layout Standard
+This comment does not belong in this essay, but will make it here, anyway.
+ The solution to Hilberts Tenth problem via the Matiyasevich/MRDP theorem
+ provides an equivalence between Diophantine sets, Diophantine equations
+ and Turing machines.
+ This allows a coding of a Universal Diophantine equation/set that is paired
+ to a universal Turing machine.
+ Its small; of degree 4 (possibly less) and with at most 36 variables (possible
+ just 11; I don't quite understand.)
+\end_layout
+
+\begin_layout Standard
+Wandering down the Borel hierarchy using techniques in this paper makes
+ me think that there are pairings of fractals, and of dynamical systems
+ to Turing machines, and so likewise, a 
+\begin_inset Quotes eld
+\end_inset
+
+universal fractal
+\begin_inset Quotes erd
+\end_inset
+
+ and a 
+\begin_inset Quotes eld
+\end_inset
+
+universal dynamical system
+\begin_inset Quotes erd
+\end_inset
+
+.
+ For now, I get lost in the details of the Borel hierarchy/arithmetic hierarchy,
+ and can't explicitly demonstrate this.
+ The conjecture is that this can be done.
+\end_layout
+
+\begin_layout Standard
+Note that the mechanism of Godel numbering assigns a unique integer to each
+ sentence of first order logic.
+ I'm wondering to what extent corresponding maps can be established to other
+ systems, viz fractals, dynamical systems.
+\end_layout
+
+\begin_layout Standard
+On a related note, there is the unversality of the critical strip of the
+ Riemann zeta, wherein any holomorphic function can be approximated arbitrarily
+ well.
+ I'm wondering if this completely different universality is can be related
+ to the former.
+\end_layout
+
+\begin_layout Section
+Geometric State Machines
+\end_layout
+
+\begin_layout Standard
+One can define a geometric state machine, analogous to a finite state machine,
+ but replacing the finite alphabet by a measure on a homogeneous space,
+ and replacing the state transition function by elements of a Lie group
+ acting on the homogeneous space.
+ The quantum computers are then, of course, just use complex projective
+ space 
+\begin_inset Formula $\mathbb{CP}^{n}$
+\end_inset
+
+ and unitary transformations from 
+\begin_inset Formula $U\left(n\right)$
+\end_inset
+
+ to act on the states.
+ The question is how, exactly, the measure behaves under this action (its
+ a dynamical system) and how the idea of the Borel hierachy can be used
+ to understand such systems.
+ Again, this is the wrong place to speculate; I'm just leaving this as a
+ TBD for later.
 \end_layout
 
 \begin_layout Section*
