@@ -5037,6 +5037,252 @@ and so all we've done is rediscover the old identity
 and why did we bother with this? ?? 
 \end_layout
 
+\begin_layout Subsection
+The Vitali Set
+\end_layout
+
+\begin_layout Standard
+The construction of the Vitali set goes through the construction of a set
+ 
+\begin_inset Formula $E_{0}$
+\end_inset
+
+ that appears in a variety of other setings.
+ The set 
+\begin_inset Formula $E_{0}$
+\end_inset
+
+ is apparently gives 
+\begin_inset Quotes eld
+\end_inset
+
+the smallest Borel equivalence relation (smallest, in the order of Borel
+ reducibility) that does not admit a Borel function giving a real-valued
+ complete invariant for the equivalence relation
+\begin_inset Quotes erd
+\end_inset
+
+ (aka the Vitali set).
+ At least, for the standard model of the reals.
+ Presumably, the Vitali set can be given a measure of 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ in non-standard analysis, and this assignment remains consistent, right?
+\end_layout
+
+\begin_layout Standard
+The simplifed construction proceeds as follows.
+ Let 
+\begin_inset Formula $\Delta=2^{\omega}=\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ be the Cantor space, represented as the space of all infinite-length binary
+ strings.
+ Let 
+\begin_inset Formula $\mathbb{D}=2^{<\omega}$
+\end_inset
+
+ be the space of all finite-legnth binary strings.
+ The space 
+\begin_inset Formula $E_{0}$
+\end_inset
+
+ is then defined as the quotient space 
+\begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
+\end_inset
+
+ where the cosets are given by all infinite-legnth binary strings that differ
+ at a finite number of locations.
+\end_layout
+
+\begin_layout Standard
+At the risk of boredom, let's elaborate.
+ Let 
+\begin_inset Formula $b=\left(b_{k}\right)_{k=1}^{\infty}\in\Delta$
+\end_inset
+
+ be an infinite-length string of binary digits 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+.
+ Define the length as 
+\begin_inset Formula $\mbox{len}\left(b\right)=\left|b\right|=k$
+\end_inset
+
+ where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the largest integer for which 
+\begin_inset Formula $b_{k}=1$
+\end_inset
+
+; write 
+\begin_inset Formula $\left|b\right|=\infty$
+\end_inset
+
+ if there is no such largest integer.
+ Informally, the finite-length strings are exactly the ones for which all
+ digits are zero after a certain point.
+ 
+\end_layout
+
+\begin_layout Standard
+The finite-length strings are then precisely 
+\begin_inset Formula $\mathbb{D}=\left\{ b\in\Delta:\mbox{len}\left(b\right)<\infty\right\} $
+\end_inset
+
+.
+ This defines 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ such that the subset relation 
+\begin_inset Formula $\mathbb{D}\subset\Delta$
+\end_inset
+
+ is made explicit.
+ The reason for making this explicit is because there are other conceptions
+ of length.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+one-based length
+\begin_inset Quotes erd
+\end_inset
+
+ is 
+\begin_inset Formula $\mbox{len}_{1}\left(b\right)=\left|b\right|_{1}=k$
+\end_inset
+
+ where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the largest integer for which 
+\begin_inset Formula $b_{k}=0$
+\end_inset
+
+; else 
+\begin_inset Formula $\left|b\right|_{1}=\infty$
+\end_inset
+
+.
+ Informally, these are the strings which have a finite-length prefix, after
+ which all digits are one.
+ 
+\end_layout
+
+\begin_layout Standard
+This leads to another set 
+\begin_inset Formula $\mathbb{D}_{1}$
+\end_inset
+
+ that can be seen to be isomorphic to 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+.
+ This conception of length generalizes to the periodic orbits; the length
+ is defined as the length of the initial prefix, after which the orbit settles
+ down to a periodic pattern.
+ If 
+\begin_inset Formula $p$
+\end_inset
+
+ is a finite-length binary string, then 
+\begin_inset Formula $\mathbb{D}_{p}$
+\end_inset
+
+ is the corresponding set of ultimately-periodic orbits.
+ The proper definition of this requires considering the cyclic permutations
+ of 
+\begin_inset Formula $p$
+\end_inset
+
+, which then leads us down the rabbit-hole of Hall words, which we avoid,
+ for now.
+ At any rate, 
+\begin_inset Formula $\mathbb{D}_{p}$
+\end_inset
+
+ has 
+\begin_inset Formula $\mbox{len}\left(p\right)$
+\end_inset
+
+ distinct isomorphisms into 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ that preserve the initial prefix.
+ Each zero in the terminating sequence of 
+\begin_inset Formula $b\in\mathbb{D}$
+\end_inset
+
+ is replaced by one of the cyclic permuations of 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The quotient space 
+\begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
+\end_inset
+
+ is then written in terms of an equivalence relation 
+\begin_inset Formula $\sim$
+\end_inset
+
+ such that 
+\begin_inset Formula $a\sim b$
+\end_inset
+
+ iff 
+\begin_inset Formula $a\oplus b\in\mathbb{D}$
+\end_inset
+
+ where 
+\begin_inset Formula $a\oplus b=\left(a_{k}\oplus b_{k}\right)_{k=1}^{\infty}$
+\end_inset
+
+ is the bit-wise compare (alternately, the xor, or the symmetric difference):
+ it's zero, if two bits are the same, else it is one.
+ Thus, by 
+\begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
+\end_inset
+
+ it is meant 
+\begin_inset Formula $E_{0}=\Delta/\sim$
+\end_inset
+
+ for this equivalence relation 
+\begin_inset Formula $\sim$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+The Vitali set
+\end_layout
+
+\begin_layout Standard
+Hall
+\end_layout
+
+\begin_layout Standard
+the ring 
+\begin_inset Formula $\mathbb{D}=\mathbb{Z}\left[1/2\right]=2^{<\omega}$
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Bibilography
 \end_layout
