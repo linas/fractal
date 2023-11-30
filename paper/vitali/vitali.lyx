@@ -457,7 +457,48 @@ Of course,
 If one is too lazy to work with an infinite number of digits, one can just
  drop the trailing repeated digits, and work with the finite prefixes.
  For this purpose, it is useful to define the set of finite-length prefixes
- as 
+ as
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This set is meant to include the empty string 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ For this purpose, the definition can be modified to read 
+\begin_inset Formula $\mathbb{P}_{0}=\{\cdots\}\cup\varepsilon$
+\end_inset
+
+, or alternately, when 
+\begin_inset Formula $N=0$
+\end_inset
+
+, the restriction 
+\begin_inset Formula $p_{N}=1$
+\end_inset
+
+ is not applied.
+ The goal of the empty string is to make sure that 
+\begin_inset Formula $\overline{0}\in\mathbb{D}_{0}$
+\end_inset
+
+ where 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ is the string of all zeros.
+ Similar remarks apply for the 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+ that follow.
+\end_layout
+
+\end_inset
+
+
 \begin_inset Formula 
 \[
 \mathbb{P}_{0}=\left\{ p|p=\left(p_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\mbox{ and }p_{N}=1\right\} 
@@ -739,6 +780,15 @@ This makes use of the string tail function
 \end_inset
 
 .
+ As before, this definition of 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+ is meant to include the zero-length empty string 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ among it's elements.
  This definition of 
 \begin_inset Formula $\mathbb{P}_{q}$
 \end_inset
@@ -1252,12 +1302,75 @@ limit point
 \end_layout
 
 \begin_layout Standard
-The total order inherited from 
+The primary issue is that the bit-wise-defined order on 
 \begin_inset Formula $\Delta$
 \end_inset
 
- is clearly not freindly to the present range of activities.
- Fortunately, the lexicographic order is available.
+ carries with it some implicit assumptions about distance and convergence.
+ Halting comparisons upon the first bit to mis-match makes the implicit
+ statement that all later bits do not matter.
+ Were they changed in arbitrary ways, one would still have, in some sense,
+ that 
+\begin_inset Formula $0<\left|a-b\right|$
+\end_inset
+
+, which implies the existence of some sort of metric 
+\begin_inset Formula $\left|a-b\right|$
+\end_inset
+
+.
+ It can be taken to be any decreasing function of of 
+\begin_inset Formula $N$
+\end_inset
+
+, as long as it says that bits later than 
+\begin_inset Formula $N$
+\end_inset
+
+ do not matter for order comparison, once the first mismatch 
+\begin_inset Formula $a_{N}\ne b_{N}$
+\end_inset
+
+ has been found.
+ This has the implicit side-effect of metrizing the space 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ It also has the implicit effect of defining convergence: some sequence
+ converges to a point whenever more and more bits in the sequence match.
+ This notion can be done without explicit appeal to a metric, yet it unavoidably
+ forces the implicit assumption of one, by saying that points are 
+\begin_inset Quotes eld
+\end_inset
+
+closer together
+\begin_inset Quotes erd
+\end_inset
+
+, the more bits match.
+ 
+\end_layout
+
+\begin_layout Standard
+Is there anything wrong with this? Well, in the conventional sense, no.
+ Writing 
+\begin_inset Formula $\left|a-b\right|=2^{-N}$
+\end_inset
+
+ just reduces (eventually) to the conventional metric on the reals, the
+ conventional open sets, and so forth, topologizing 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ with the weak topology.
+ Yet, the present discussion is attempting to talk about the Vitali set,
+ and so topologizing prematurely threatens to ruin the ability to perform
+ later inference.
+\end_layout
+
+\begin_layout Standard
+Fortunately, the lexicographic order is available.
  For this, recall that 
 \begin_inset Formula $\mbox{trunc}_{q}:\mathbb{D}_{q}\to\mathbb{P}_{q}$
 \end_inset
@@ -1374,6 +1487,148 @@ The total order inherited from
 .
 \end_layout
 
+\begin_layout Subsection
+Orders on the Vitali set
+\end_layout
+
+\begin_layout Standard
+Neither of the orders discussed above extend easily or naturally to either
+ 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+ or any of it's cosets.
+ Consider first the case of some coset 
+\begin_inset Formula $\gamma\in E_{q}$
+\end_inset
+
+.
+ It has a countable number of elements, but the bit-order 
+\begin_inset Formula $<^{\mbox{bit}}$
+\end_inset
+
+ cannot be used to find a least element, since the order may converge to
+ a limit point outside of the coset.
+ The lexicographic order 
+\begin_inset Formula $<_{q}^{\mbox{lex}}$
+\end_inset
+
+ cannot be applied, since all strings appear to be of intinite length to
+ 
+\begin_inset Formula $\mbox{len}_{q}$
+\end_inset
+
+.
+ From the point of view of 
+\begin_inset Formula $\mbox{len}_{q}$
+\end_inset
+
+, the strings in 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ seem to be 
+\begin_inset Quotes eld
+\end_inset
+
+encrypted
+\begin_inset Quotes erd
+\end_inset
+
+: they are elements of 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ that have been xor'ed with some unknown 
+\begin_inset Formula $u\in\gamma$
+\end_inset
+
+.
+ That is to say, if one were to select some specific 
+\begin_inset Formula $u\in\gamma$
+\end_inset
+
+ (thus applying the axiom of choice), then all other 
+\begin_inset Formula $v\in\gamma$
+\end_inset
+
+ could be 
+\begin_inset Quotes eld
+\end_inset
+
+decrypted
+\begin_inset Quotes erd
+\end_inset
+
+ by computing 
+\begin_inset Formula $u\oplus v\in\mathbb{D}_{q}$
+\end_inset
+
+.
+ Each selection of 
+\begin_inset Formula $u\in\gamma$
+\end_inset
+
+ provides a distinct mapping 
+\begin_inset Formula $u:\gamma\to\mathbb{D}_{q}$
+\end_inset
+
+ given by 
+\begin_inset Formula $u:v\mapsto u\oplus v$
+\end_inset
+
+.
+ There are a countable number of such mappings, they are clearly all inequivalen
+t; the points in the coset can be distinguished from one another, but they
+ cannot be labelled without selecting an order, and selecting an order requires
+ selecting a distinguished 
+\begin_inset Formula $u\in\gamma$
+\end_inset
+
+, bringing us back to th axiom of choice.
+\end_layout
+
+\begin_layout Standard
+There is another, distinct possiblity.
+ Suppose the quotient was being constructed 
+\begin_inset Quotes eld
+\end_inset
+
+alogorithmically
+\begin_inset Quotes erd
+\end_inset
+
+, one point at a time.
+ Then, perhaps, the very first point to be added to a coset could serve
+ as the distinguished label 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Later points do not even have to be added, since 
+\begin_inset Formula $\gamma=u\oplus\mathbb{D}_{q}$
+\end_inset
+
+ and so simply having one distinguised point in the coset is enough to define
+ the entire coset.
+ Is such an 
+\begin_inset Quotes eld
+\end_inset
+
+algorithm
+\begin_inset Quotes erd
+\end_inset
+
+ achievable? The goal of the algorithm is to enumerate the cosets; for that
+ to happen, it would seem that there needs to be a way of enumerating the
+ elements of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ first.
+ 
+\end_layout
+
 \begin_layout Standard
 xxxx
 \end_layout
@@ -1383,26 +1638,7 @@ What about
 \begin_inset Formula $E_{q}$
 \end_inset
 
-? Well, certainly for any one coset, there is no problem.
- Given some coset 
-\begin_inset Formula $c\in E_{q}$
-\end_inset
-
- and 
-\begin_inset Formula $a,b\in c$
-\end_inset
-
-, there is no difficulty in determining whether 
-\begin_inset Formula $a<b$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Iterate over elements of each coset ...
- how?
+? 
 \end_layout
 
 \begin_layout Standard
@@ -1410,11 +1646,11 @@ By selecting exactly one element from each coset, a countable collection
  of Vitali sets can be built.
  This also proceeds along conventional lines.
  For each coset 
-\begin_inset Formula $c_{q}\in E_{q}$
+\begin_inset Formula $\gamma\in E_{q}$
 \end_inset
 
  select one element 
-\begin_inset Formula $b\in c_{q}$
+\begin_inset Formula $u\in\gamma$
 \end_inset
 
 .
