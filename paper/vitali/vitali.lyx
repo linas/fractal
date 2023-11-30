@@ -318,7 +318,11 @@ Let
 
 \begin_layout Standard
 Use this to define the set of finite-length strings as 
-\begin_inset Formula $\mathbb{D}=\left\{ b\in\Delta:\mbox{len}\left(b\right)<\infty\right\} $
+\begin_inset Formula 
+\[
+\mathbb{D}=\left\{ b\in\Delta:\mbox{len}\left(b\right)<\infty\right\} 
+\]
+
 \end_inset
 
 .
@@ -337,7 +341,19 @@ Use this to define the set of finite-length strings as
 
  still have an infinite number of bits; just that almost all of them are
  zero.
- 
+ By construction, 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ is countable; the cardinality of 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ is 
+\begin_inset Formula $\aleph_{0}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -537,19 +553,322 @@ The above constructions generalize to periodic orbits; instead of appending
 \end_layout
 
 \begin_layout Standard
-conception of length generalizes to the periodic orbits; the length is defined
- as the length of the initial prefix, after which the orbit settles down
- to a periodic pattern.
- If 
-\begin_inset Formula $p\in\mathbb{P}$
+Write 
+\begin_inset Formula $\overline{0}$
 \end_inset
 
- is a finite-length binary string, then 
-\begin_inset Formula $\mathbb{D}_{p}$
+ for the the infinite string of zeros, so that 
+\begin_inset Formula $\overline{0}=\left(b_{k}\right)_{k=1}^{\infty}$
 \end_inset
 
- is defined as the corresponding set of ultimately-periodic orbits.
- The proper definition of this requires considering the cyclic permutations
+ with 
+\begin_inset Formula $b_{k}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\overline{1}$
+\end_inset
+
+ the infinite string of ones likewise.
+ 
+\end_layout
+
+\begin_layout Standard
+The periodic orbits will be chosen as elements taken out of the set of finite
+ strings 
+\begin_inset Formula 
+\[
+\mathbb{S}=\left\{ q\vert q=\left(q_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\right\} 
+\]
+
+\end_inset
+
+which can be either zero or one-terminated.
+ Clearly, 
+\begin_inset Formula $\mathbb{P}_{0}\subset\mathbb{S}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{P}_{1}\subset\mathbb{S}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{S}=\mathbb{P}_{0}\cup\mathbb{P}_{1}$
+\end_inset
+
+ so that the complementation involution 
+\begin_inset Formula $\neg$
+\end_inset
+
+ partitions 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ into two equal parts.
+\end_layout
+
+\begin_layout Standard
+For any 
+\begin_inset Formula $q\in\mathbb{S}$
+\end_inset
+
+, having length 
+\begin_inset Formula $n=\left|q\right|$
+\end_inset
+
+, one can define a periodic orbit 
+\begin_inset Formula $\overline{q}$
+\end_inset
+
+ as 
+\begin_inset Formula $\overline{q}=\left(b_{k}\right)_{k=1}^{\infty}$
+\end_inset
+
+ where each bit is 
+\begin_inset Formula $b_{k}=q_{k\mod n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This allows 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ to be defined as the set of ultimately-periodic orbits.
+ Formally, for each 
+\begin_inset Formula $q\in\mathbb{S}$
+\end_inset
+
+ one has an associated set of eventually-periodic orbits 
+\begin_inset Formula 
+\[
+\mathbb{D}_{q}=\left\{ p\overline{q}:p\in\mathbb{S}\right\} 
+\]
+
+\end_inset
+
+This does not quite preserve the definition of 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{D}_{1}$
+\end_inset
+
+ from before, although the result is isomorphic.
+ The technical issue is that the prefixes for 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{D}_{1}$
+\end_inset
+
+ were taken from 
+\begin_inset Formula $\mathbb{P}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{P}_{1}$
+\end_inset
+
+ and not 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+.
+ This issue creates difficulties for the definition of a prefix-length function
+ 
+\begin_inset Formula $\mbox{len}_{q}$
+\end_inset
+
+ which we would like to have.
+ Similar issues arise if the prefix 
+\begin_inset Formula $p$
+\end_inset
+
+ just happens to end with 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ This allows double-counting, as exactly the same sequence might appear
+ two or more times, with some of the bits being partitioned into the prefix,
+ and some to the cyclic part.
+ On the surface, this does not seem important, but can be a potential source
+ of confusion.
+ 
+\end_layout
+
+\begin_layout Standard
+To avoid this awkwardness, define the prefix set
+\begin_inset Formula 
+\[
+\mathbb{P}_{q}=\left\{ p|p=\left(p_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\mbox{ and }\mbox{tail}_{\left|q\right|}\left(p\right)\ne q\right\} 
+\]
+
+\end_inset
+
+This makes use of the string tail function 
+\begin_inset Formula $b=\left(b_{k}\right)_{k=1}^{n}\mapsto\mbox{tail}_{m}\left(b\right)=\left(b_{k}\right)_{k=n-m}^{n}$
+\end_inset
+
+ that removes the leading bits from 
+\begin_inset Formula $b$
+\end_inset
+
+, leaving only the final 
+\begin_inset Formula $m$
+\end_inset
+
+ bits.
+ Clearly, this is only defined if 
+\begin_inset Formula $\left|b\right|>m$
+\end_inset
+
+; otherwise, take the result to be the empty set 
+\begin_inset Formula $\varnothing$
+\end_inset
+
+.
+ This definition of 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+ does preserve the definition of 
+\begin_inset Formula $\mathbb{P}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{P}_{1}$
+\end_inset
+
+ from before; its the same definition.
+\end_layout
+
+\begin_layout Standard
+This allows a definition of 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ without double-counting: 
+\begin_inset Formula 
+\[
+\mathbb{D}_{q}=\left\{ p\overline{q}:p\in\mathbb{P}_{q}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As before, one can provide explicit isomorphisms 
+\begin_inset Formula $\mbox{ext}_{q}:\mathbb{P}_{q}\to\mathbb{D}_{q}$
+\end_inset
+
+.
+ It also allows an unambiguous definition of 
+\begin_inset Formula $\mbox{trunc}_{q}:\mathbb{D}_{q}\to\mathbb{P}_{q}$
+\end_inset
+
+ as the leading bits of of 
+\begin_inset Formula $b\in\mathbb{D}_{q}$
+\end_inset
+
+ that do not end with 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ Similarly,
+\begin_inset Formula $\mbox{len}_{q}:\mathbb{D}_{q}\to\mathbb{N}$
+\end_inset
+
+ is length of the leading bits, with all trailing instances of 
+\begin_inset Formula $q$
+\end_inset
+
+ removed.
+ 
+\end_layout
+
+\begin_layout Standard
+As before, the cardinality of 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ is 
+\begin_inset Formula $\aleph_{0}$
+\end_inset
+
+.
+ If the first bit of 
+\begin_inset Formula $q$
+\end_inset
+
+ is a zero, then we have an unambiguous isomorphism between 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+; likewise, if the first bit of 
+\begin_inset Formula $q$
+\end_inset
+
+ is a one, then we have an unambiguous isomorphism between 
+\begin_inset Formula $\mathbb{D}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+ These isomorphisms commute with 
+\begin_inset Formula $\mbox{trunc}_{q}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{P}_{0}$
+\end_inset
+
+ are isomorphic if the first bit of 
+\begin_inset Formula $q$
+\end_inset
+
+ is a zero, and likewise 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{P}_{1}$
+\end_inset
+
+ are isomorphic if the first bit of 
+\begin_inset Formula $q$
+\end_inset
+
+ is a one.
+\end_layout
+
+\begin_layout Standard
+The proper definition of this requires considering the cyclic permutations
  of 
 \begin_inset Formula $p$
 \end_inset
@@ -578,6 +897,31 @@ conception of length generalizes to the periodic orbits; the length is defined
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection
+Cyclic permutations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\bullet$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+.
+ Clearly 
+\begin_inset Formula $\mathbb{P}\subset\mathbb{S}$
+\end_inset
+
+.
+ The quotient space 
+\begin_inset Formula $\mathbb{O}=\mathbb{S}/\mathbb{P}$
+\end_inset
+
+ where the cosets consist of strings that are cyclic permuations of one-another.
 \end_layout
 
 \begin_layout Subsection
@@ -716,59 +1060,6 @@ One can then walk just a bit further down this path, and consider an equivalence
  
 \end_layout
 
-\begin_layout Standard
-Some more notational baggage, for future reference.
- Write the set of finite-length prefixes as 
-\begin_inset Formula 
-\[
-\mathbb{P}=\left\{ p|p=\left(p_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\mbox{ and }p_{N}=1\right\} 
-\]
-
-\end_inset
-
-which allows us to write 
-\begin_inset Formula $p\in\mathbb{P}$
-\end_inset
-
- in an unambiguous fashion.
- Clearly 
-\begin_inset Formula $\mathbb{P}$
-\end_inset
-
- is isomorphic to 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
-, as we can take any string 
-\begin_inset Formula $p\in\mathbb{P}$
-\end_inset
-
- and append zero bits to get a string in 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
-.
- Yet more useless baggage: write
-\begin_inset Formula 
-\[
-\mathbb{S}=\left\{ q\vert q=\left(q_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\right\} 
-\]
-
-\end_inset
-
-which is the set of finite-length binary strings that are not one-terminated.
- Clearly 
-\begin_inset Formula $\mathbb{P}\subset\mathbb{S}$
-\end_inset
-
-.
- The quotient space 
-\begin_inset Formula $\mathbb{O}=\mathbb{S}/\mathbb{P}$
-\end_inset
-
- where the cosets consist of strings that are cyclic permuations of one-another.
-\end_layout
-
 \begin_layout Subsection
 The Vitali set
 \end_layout
@@ -864,6 +1155,10 @@ Let
 
 \begin_layout Standard
 under this mappingUnder this mapping
+\end_layout
+
+\begin_layout Subsection
+The shift operator and ergodicity
 \end_layout
 
 \begin_layout Subsection
