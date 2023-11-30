@@ -867,80 +867,28 @@ As before, the cardinality of
  is a one.
 \end_layout
 
-\begin_layout Standard
-The proper definition of this requires considering the cyclic permutations
- of 
-\begin_inset Formula $p$
-\end_inset
-
-, which then leads us down the rabbit-hole of Hall words, which we avoid,
- for now.
- At any rate, 
-\begin_inset Formula $\mathbb{D}_{p}$
-\end_inset
-
- has 
-\begin_inset Formula $\mbox{len}\left(p\right)$
-\end_inset
-
- distinct isomorphisms into 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
- that preserve the initial prefix.
- Each zero in the terminating sequence of 
-\begin_inset Formula $b\in\mathbb{D}$
-\end_inset
-
- is replaced by one of the cyclic permuations of 
-\begin_inset Formula $p$
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Subsection
 Cyclic permutations
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\bullet$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-.
- Clearly 
-\begin_inset Formula $\mathbb{P}\subset\mathbb{S}$
-\end_inset
-
-.
- The quotient space 
-\begin_inset Formula $\mathbb{O}=\mathbb{S}/\mathbb{P}$
-\end_inset
-
- where the cosets consist of strings that are cyclic permuations of one-another.
+By convention, orbits do not have a unique starting place, and so a proper
+ enumeration of orbits would first organize finite binary strings into Lyndon
+ words, then define a collection of prefixes that exclude cyclic permutations
+ of Lyndon words in the tail, and only then define the set of ultimately-periodi
+c sequences for a given orbit.
+ This would mirror the above collection of definitions, maodifying them
+ as needed.
+ For now, there does not seem to be any point in writing this out in detail.
 \end_layout
 
 \begin_layout Subsection
-The quotient
+The Vitali quotient space
 \end_layout
 
 \begin_layout Standard
-The below expands on the sketch given in the introduction.
- Let 
-\begin_inset Formula $\Delta=2^{\omega}=\left\{ 0,1\right\} ^{\omega}$
-\end_inset
-
- be the Cantor space, represented as the space of all infinite-length binary
- strings.
- Let 
-\begin_inset Formula $\mathbb{D}=2^{<\omega}$
-\end_inset
-
- be the space of all finite-legnth binary strings.
+The above provides more than enough machinery to expand on the sketch of
+ the Vitali quotient space given in the introduction.
  The space 
 \begin_inset Formula $E_{0}$
 \end_inset
@@ -951,8 +899,8 @@ The below expands on the sketch given in the introduction.
 
 , where the cosets are given by all infinite-length binary strings that
  differ at a finite number of locations.
- Some more precise although very simple defintions and machinery are needed
- to make this idea fully coherent.
+ Just a few more very simple defintions are needed to make this idea fully
+ coherent.
  
 \end_layout
 
@@ -961,7 +909,7 @@ The quotient space
 \begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
 \end_inset
 
- is then written in terms of an equivalence relation 
+ is to be written with respect to an equivalence relation 
 \begin_inset Formula $\sim$
 \end_inset
 
@@ -1005,15 +953,15 @@ The quotient space
 \end_inset
 
 , and 
-\begin_inset Formula $E_{p}=\Delta/\mathbb{D}_{p}$
+\begin_inset Formula $E_{q}=\Delta/\mathbb{D}_{q}$
 \end_inset
 
  where 
-\begin_inset Formula $a\sim_{p}b$
+\begin_inset Formula $a\sim_{q}b$
 \end_inset
 
  iff 
-\begin_inset Formula $a\oplus b\in\mathbb{D}_{p}$
+\begin_inset Formula $a\oplus b\in\mathbb{D}_{q}$
 \end_inset
 
 .
@@ -1057,7 +1005,423 @@ One can then walk just a bit further down this path, and consider an equivalence
 \end_inset
 
 .
+ The wisdom of doing this, without carefully defining sets of cyclically-permute
+d orbits is somewhat questionable, as one does run the risk of double-counting
+ some of the sequences.
+\end_layout
+
+\begin_layout Standard
+An arugment that the 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+ can be validly called 
+\begin_inset Quotes eld
+\end_inset
+
+Vitali sets
+\begin_inset Quotes erd
+\end_inset
+
+ was already made in the introduction.
+ A minor expansion of this argument can be made by observing that the cardinalit
+y of 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+ is 
+\begin_inset Formula $\aleph_{1}$
+\end_inset
+
+ and the cardinality of each coset is 
+\begin_inset Formula $\aleph_{0}$
+\end_inset
+
+.
+ The latter is a trust-worthy conclusion, in part because of the care taken
+ to avoid double-counting in 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+ This establishes that the cosets are each strictly isomorphic to 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Total orders
+\end_layout
+
+\begin_layout Standard
+In order to have further meaningful conversations about 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+ and it's cosets, we would like to have some means of enumerating the elements
+ of 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+, ideally placing them into some order, and likewise, a way of enumerating
+ the elements of any given coset in 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+, again, ideally by placing them into some order.
+ To get to there, we have to step back and look at orders on 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ and on 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Cantor set is totally ordered.
+ That is, for any two 
+\begin_inset Formula $a,b\in\Delta$
+\end_inset
+
+ one can always determine if 
+\begin_inset Formula $a<b$
+\end_inset
+
+ by performing a bitwise comparison.
+ Define 
+\begin_inset Formula $a<b$
+\end_inset
+
+ as true, if there exists an integer 
+\begin_inset Formula $N$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{k}=b_{k}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k<N$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{N}=0$
+\end_inset
+
+ while 
+\begin_inset Formula $b_{N}=1$
+\end_inset
+
+.
+ If there is no such integer, then we say that 
+\begin_inset Formula $a\ge b$
+\end_inset
+
+.
+ There are several equivalent ways of saying this.
+ One is to say that the Cantor space is metrizable, with metric 
+\begin_inset Formula $g\left(a,b\right)=1/N$
+\end_inset
+
+ where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the smallest integer for which 
+\begin_inset Formula $a_{N}\ne b_{N}$
+\end_inset
+
+.
+ Equivalently, it is the length (plus one) of the initial run of zeros in
  
+\begin_inset Formula $a\oplus b$
+\end_inset
+
+.
+ We even know what the greatest and least elements of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ are: this is easy, they are 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The total order is inherited by the 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+, where, in some sense, it is 
+\begin_inset Quotes eld
+\end_inset
+
+even easier
+\begin_inset Quotes erd
+\end_inset
+
+, mostly because we know that the elements of 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ are of (effectively) finite length.
+ Yet, it is also 
+\begin_inset Quotes eld
+\end_inset
+
+more difficult
+\begin_inset Quotes erd
+\end_inset
+
+, because 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ does not contain a least element.
+ Write 
+\begin_inset Formula $0^{(n)}$
+\end_inset
+
+ for the string of 
+\begin_inset Formula $n$
+\end_inset
+
+ zeros.
+ Then 
+\begin_inset Formula $0^{(n)}1\overline{q}\in\mathbb{D}_{q}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ But the total order, as inherited from 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, implies that 
+\begin_inset Formula $0^{(n)}1\overline{q}<0^{(m)}1\overline{q}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $n>m$
+\end_inset
+
+.
+ Worse,
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ is not complete, as the limit point of the sequence 
+\begin_inset Formula $0^{(n)}1\overline{q}$
+\end_inset
+
+ would seem to be 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ but 
+\begin_inset Formula $\overline{0}\notin\mathbb{D}_{q}$
+\end_inset
+
+.
+ A different issue is that, in saying 
+\begin_inset Quotes eld
+\end_inset
+
+limit point
+\begin_inset Quotes erd
+\end_inset
+
+, we assumed that the conventional rules about the limits of sequences should
+ be applied, but we haven't yet firmly argued for this.
+ Conventional rules apply when things can be metrized, but we are staring
+ into the gapeing maw of a monster, and so will be a bit more careful.
+\end_layout
+
+\begin_layout Standard
+The total order inherited from 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ is clearly not freindly to the present range of activities.
+ Fortunately, the lexicographic order is available.
+ For this, recall that 
+\begin_inset Formula $\mbox{trunc}_{q}:\mathbb{D}_{q}\to\mathbb{P}_{q}$
+\end_inset
+
+ is an isomorphism, and the lexicographic order is entirely unproblematic
+ for 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+, as long as shorter prefixes preceed longer ones, and only then is the
+ bitwise compare performed.
+ Write this order as 
+\begin_inset Formula $<^{\mbox{lex}}$
+\end_inset
+
+.
+ Just to be tediously precise, 
+\begin_inset Formula $a<^{\mbox{lex}}b$
+\end_inset
+
+ iff 
+\begin_inset Formula $\left|a\right|<\left|b\right|$
+\end_inset
+
+ or if 
+\begin_inset Formula $\left|a\right|=\left|b\right|$
+\end_inset
+
+ and 
+\begin_inset Formula $a<^{\mbox{bit}}b$
+\end_inset
+
+ with 
+\begin_inset Formula $<^{\mbox{bit}}$
+\end_inset
+
+ being the earlier-defined bitwise ordering.
+ By isomorphism, 
+\begin_inset Formula $<^{\mbox{lex}}$
+\end_inset
+
+ is well-defined on both 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+ It is can be extended to all of 
+\begin_inset Formula $\Delta,$
+\end_inset
+
+ if the length function 
+\begin_inset Formula $\mbox{len}_{q}\left(b\right)=\left|b\right|_{q}$
+\end_inset
+
+ is used, so that the length is measured only after removing a trailing
+ 
+\begin_inset Formula $\overline{q}$
+\end_inset
+
+, if any.
+ There will only be a countable number of 
+\begin_inset Formula $b\in\Delta$
+\end_inset
+
+ with a trailing 
+\begin_inset Formula $\overline{q}$
+\end_inset
+
+, these are precisely the strings in 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+ For all the othr (uncountably many) infinite-length strings, use the bitwise
+ compare 
+\begin_inset Formula $<^{\mbox{bit}}$
+\end_inset
+
+ just as before.
+ This extends 
+\begin_inset Formula $<_{q}^{\mbox{lex}}$
+\end_inset
+
+ to all of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ The subscript 
+\begin_inset Formula $q$
+\end_inset
+
+ is used once again to remind us that 
+\begin_inset Formula $\mbox{len}_{q}$
+\end_inset
+
+ is to be used for measuring length for the lexicographic sorting.
+ The ordering 
+\begin_inset Formula $<_{q}^{\mbox{lex}}$
+\end_inset
+
+ has the interesting property that it places all of 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ before any string not in 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+What about 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+? Well, certainly for any one coset, there is no problem.
+ Given some coset 
+\begin_inset Formula $c\in E_{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $a,b\in c$
+\end_inset
+
+, there is no difficulty in determining whether 
+\begin_inset Formula $a<b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Iterate over elements of each coset ...
+ how?
+\end_layout
+
+\begin_layout Standard
+By selecting exactly one element from each coset, a countable collection
+ of Vitali sets can be built.
+ This also proceeds along conventional lines.
+ For each coset 
+\begin_inset Formula $c_{q}\in E_{q}$
+\end_inset
+
+ select one element 
+\begin_inset Formula $b\in c_{q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A
 \end_layout
 
 \begin_layout Subsection
@@ -1139,6 +1503,10 @@ where an abuse of notation was used to write
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+bug-eyed line, each dyadic rational is bug-eyed.
 \end_layout
 
 \begin_layout Standard
