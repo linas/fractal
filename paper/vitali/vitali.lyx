@@ -1619,18 +1619,205 @@ algorithm
 \begin_inset Quotes erd
 \end_inset
 
- achievable? The goal of the algorithm is to enumerate the cosets; for that
- to happen, it would seem that there needs to be a way of enumerating the
- elements of 
+ achievable? In the narrow sense, no, snce clearly conventional finite algorithm
+s cannot enumerate uncountable sets.
+ Let's ignore this minor inconvenience for a moment, and assume it was possible,
+ for some suitably defined uncountably-long runtime.
+ The goal of such an algorithm is to enumerate the cosets; for that to happen,
+ it would seem that there needs to be a way of enumerating the elements
+ of 
 \begin_inset Formula $\Delta$
 \end_inset
 
  first.
+ The total order provided by 
+\begin_inset Formula $<^{\mbox{bit}}$
+\end_inset
+
+ cannot be used.
+ The first element is the least element 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+, but what is the next element?
+\end_layout
+
+\begin_layout Standard
+A more interesting case is provided by using the ergodic properties of the
+ Bernoulli shift when applied to the Cantor set.
+ The Bernoulli shift is the shift operator 
+\begin_inset Formula $T:\Delta\to\Delta$
+\end_inset
+
+ acting on individual points as 
+\begin_inset Formula $T:\left(b_{k}\right)_{k=1}^{\infty}\mapsto\left(b_{k}\right)_{k=2}^{\infty}$
+\end_inset
+
+.
+ The shift is ergodic in all the conventional definitions of ergodicity.
+ For the present purposes, it can be employed as a generator of candidate
+ cosets.
+ Select a point 
+\begin_inset Formula $b\in\Delta$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+at random
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This has two issues: what do we mean by 
+\begin_inset Quotes eld
+\end_inset
+
+select
+\begin_inset Quotes erd
+\end_inset
+
+? The axiom of choice, certainly.
+ What do we mean by 
+\begin_inset Quotes eld
+\end_inset
+
+at random
+\begin_inset Quotes erd
+\end_inset
+
+? Chosen from the uniform distribution on 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ But defining such a distribution requires defining a measure on 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, which requires defining Borel sets on 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, which requires topologizing 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ sufficiently to define the open sets that will become elements of 
+\begin_inset Formula $\Sigma_{1}^{0}$
+\end_inset
+
+ of the Borel hierarchy.
+ All this can be done; the required topologization is provided by the bitwise
+ metric given by the first miscompare, when comparing two bit-strings.
+ This provides the conventional weak topology on 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, and the rest flows downhill.
  
 \end_layout
 
 \begin_layout Standard
-xxxx
+With these tools, one proceeds to generate sequences of candidate points.
+ The algorithm is as follows: select a point 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+ and then iterate to obtain other points 
+\begin_inset Formula $T^{k}p$
+\end_inset
+
+.
+ Then, if 
+\begin_inset Formula $\left(T^{k+1}p\right)\oplus\left(T^{k}p\right)\notin\mathbb{D}_{q}$
+\end_inset
+
+, write 
+\begin_inset Formula $u^{\left(k+1\right)}=T^{k+1}p$
+\end_inset
+
+ as the new, unique label for a coset 
+\begin_inset Formula $\gamma=\gamma^{\left(u\right)}$
+\end_inset
+
+.
+ Due to the nature of the uniform distribution on 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, it will almost certainly be the case that the randomly selected point
+ 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+ is ergodic.
+ In the present case, this means that it will almost certainly be the case
+ that 
+\begin_inset Formula $T^{m+n}p\oplus T^{n}p\notin\mathbb{D}_{q}$
+\end_inset
+
+ for all non-negative integers 
+\begin_inset Formula $m,n$
+\end_inset
+
+.
+ This is a slightly sronger statement than the conventional defintion of
+ ergodicity, so I suppose I should prove that it is true.
+ For now, I assume that it is true, and that proving it would be another
+ tedious exercise.
+ At any rate, running this loop once will generate at most a countable number
+ of cosets 
+\begin_inset Formula $u^{\left(k\right)}$
+\end_inset
+
+.
+ It still required the axiom of choice; only that the burden was shifted
+ from choosing base-points 
+\begin_inset Formula $u\in\gamma$
+\end_inset
+
+ for each poset 
+\begin_inset Formula $\gamma\in E_{q}$
+\end_inset
+
+, to chosing an initial random 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+.
+ No matter.
+ Only a countable number of cosets 
+\begin_inset Formula $u^{\left(k\right)}$
+\end_inset
+
+ were generated, and thus the loop has to be run again, starting with a
+ new randomly-chosen 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+, 
+\emph on
+ad infinitum
+\emph default
+, for an uncountable number of iterations of the outer loop.
+ This time, taking care to verify that each new coset is distinct from all
+ the previously generated ones.
+ Of course, this will be the case almost certainly.
+ The check can be avoided by instead verifing that 
+\begin_inset Formula $p\oplus p_{\alpha}\notin\mathbb{D}_{q}$
+\end_inset
+
+ for all previously selected points 
+\begin_inset Formula $p_{\alpha}$
+\end_inset
+
+.
+ At any rate, we've described a process that requires algorithms that somehow
+ run for uncountaly-long periods of time, and the algo still has not magically
+ evaded the axiom of choice.
+ This is a good time to just give up.
 \end_layout
 
 \begin_layout Standard
@@ -1638,26 +1825,39 @@ What about
 \begin_inset Formula $E_{q}$
 \end_inset
 
-? 
-\end_layout
-
-\begin_layout Standard
-By selecting exactly one element from each coset, a countable collection
- of Vitali sets can be built.
- This also proceeds along conventional lines.
- For each coset 
+? Given that each coset 
 \begin_inset Formula $\gamma\in E_{q}$
 \end_inset
 
- select one element 
-\begin_inset Formula $u\in\gamma$
+ carries a unique, distinguised label 
+\begin_inset Formula $u\in\gamma\subset\Delta$
+\end_inset
+
+, it should be clear that all of the cosets 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ can be totally ordered by suing the bitwise total order 
+\begin_inset Formula $<^{\mbox{bit}}$
+\end_inset
+
+ on the collection of 
+\begin_inset Formula $u$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-A
+Taking stock: the cosets of 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+ can be totally ordered, after selecting a label
+\end_layout
+
+\begin_layout Standard
+xxxx
 \end_layout
 
 \begin_layout Subsection
