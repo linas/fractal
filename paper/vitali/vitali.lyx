@@ -2193,7 +2193,253 @@ potential infinite
 \end_layout
 
 \begin_layout Standard
-Soo...
+The procedure is simple, to the point of silliness; the big word above are
+ used only to shock the reader into taking a more principaled approach.
+\end_layout
+
+\begin_layout Standard
+It works like so.
+ Asource of random binary digits was identified.
+ In the present case, a pseudo-random generator will do; it generates bits
+ of sufficient quality that they offer no impediment to numerical algorithms.
+ These are used to generate a sequence of values 
+\begin_inset Formula $u$
+\end_inset
+
+ that are interpreted as the indicator elements of the Vitali cosets.
+ That they are numerically distinct can be readily checked.
+ But what does this really mean? Suppose one has two random 32-bit integers
+ 
+\begin_inset Formula $u,v$
+\end_inset
+
+ Computing the xor 
+\begin_inset Formula $u\oplus v$
+\end_inset
+
+ is trivial: some other 32-bit integer results.
+ The theory insists that one must have 
+\begin_inset Formula $u\oplus v\notin\mathbb{D}_{0}$
+\end_inset
+
+.
+ where, for now, take 
+\begin_inset Formula $q=0$
+\end_inset
+
+ just to keep the discussion simple.
+ Clearly 
+\begin_inset Formula $u\oplus v$
+\end_inset
+
+ is just some 32-bit integer; it is clearly in 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ simply by rescaling by 
+\begin_inset Formula $2^{32}$
+\end_inset
+
+.
+ This would seem to violate the base requirement of the construction.
+ Well, not really.
+ Set 
+\begin_inset Formula $N=32$
+\end_inset
+
+ as the physical scale, but set 
+\begin_inset Formula $M<N$
+\end_inset
+
+ as the 
+\begin_inset Quotes eld
+\end_inset
+
+computational scale
+\begin_inset Quotes erd
+\end_inset
+
+.
+ For the present example, 
+\begin_inset Formula $M=22$
+\end_inset
+
+ seems like a reasonably adequate scale to work with.
+ Then, the requirement that 
+\begin_inset Formula $u\oplus v\notin\mathbb{D}_{0}$
+\end_inset
+
+ translates into the idea that bits 23-32 are not zero.
+ That is, all bits from 
+\begin_inset Formula $M$
+\end_inset
+
+ to 
+\begin_inset Formula $N$
+\end_inset
+
+ lie in the 
+\begin_inset Quotes eld
+\end_inset
+
+scaling continuum
+\begin_inset Quotes erd
+\end_inset
+
+.
+ If we have a number 
+\begin_inset Formula $x$
+\end_inset
+
+ and discover that bits 23-32 are all zero, we conclude that 
+\begin_inset Formula $x\in\mathbb{D}_{0}$
+\end_inset
+
+, else assume 
+\begin_inset Formula $x\notin\mathbb{D}_{0}$
+\end_inset
+
+.
+ Since there are 10 bits between 23 and 32, the chance that a random number
+ is dyadic becomes one in 
+\begin_inset Formula $2^{10}\approx10^{3}$
+\end_inset
+
+.
+ That is, the chance of being wrong, and of accidentally misclassifying
+ a real number as a dyadic rational is about 1 in a thousand.
+ The chance of mis-classyifying in the opposite direction is zero: any the
+ dyadic rational have bits 23-32 all zero, and there is no chance of accidentall
+y getting that wrong.
+\end_layout
+
+\begin_layout Standard
+Consider now the act of simulating the Vitali set.
+ With the above parameter choices, we are allowed a total of 
+\begin_inset Formula $2^{N}\approx4\times10^{9}$
+\end_inset
+
+ distinct real numbers, and so we conclude that 
+\begin_inset Formula $\omega=N=32$
+\end_inset
+
+ at this computational scale.
+ Not very large! If exactly the same representational system is used to
+ represent the dyadic rationals, then we can have 
+\begin_inset Formula $2^{M}\approx4\times10^{6}$
+\end_inset
+
+ distinct dyadics.
+ This follows only because dyadics smaller than 
+\begin_inset Formula $2^{-M}$
+\end_inset
+
+ cannot be distinguished from reals.
+ Put differently, the size of 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ is 
+\begin_inset Formula $2^{M}$
+\end_inset
+
+.
+ Since the size of 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ is supposed to be 
+\begin_inset Formula $\omega$
+\end_inset
+
+, we have a clashing estimate that 
+\begin_inset Formula $\omega=2^{M}\gg N$
+\end_inset
+
+.
+ What is the size of each Vitali set? By construction, it is of size 
+\begin_inset Formula $\epsilon=1/\left|\mathbb{D}_{0}\right|=2^{-M}$
+\end_inset
+
+.
+ From the nonstandard analysis, we concluded that 
+\begin_inset Formula $\omega\epsilon=1$
+\end_inset
+
+ and so again 
+\begin_inset Formula $\omega=2^{M}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The above considerations indicate that there are two independent scaling
+ factors: 
+\begin_inset Formula $\mathfrak{c}=2^{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega=2^{M}$
+\end_inset
+
+ and that it is a mistake to conflate 
+\begin_inset Formula $\log_{2}\mathfrak{c}$
+\end_inset
+
+ with 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
+ To have renormalization work correctly, these need to be tracked distinctly.
+ In the scaling limit, we want to arrive at 
+\begin_inset Formula $\mathfrak{c}=2^{\omega}$
+\end_inset
+
+ as the limit, and so, for 
+\begin_inset Formula $N=32$
+\end_inset
+
+, setting 
+\begin_inset Formula $M=5$
+\end_inset
+
+ would preserve the scaling.
+ For 
+\begin_inset Formula $N=64,$
+\end_inset
+
+one has 
+\begin_inset Formula $M=6$
+\end_inset
+
+ which really shows just how small a 
+\begin_inset Quotes eld
+\end_inset
+
+set of measure zero
+\begin_inset Quotes erd
+\end_inset
+
+ really is, in gut-sense terms.
+ For practical calculations, there is no particular reason to adhere to
+ the scaling limit; who wants to count up to only 32 or 64? It's OK to have
+ 
+\begin_inset Quotes eld
+\end_inset
+
+too many dyadics
+\begin_inset Quotes erd
+\end_inset
+
+ with respect to the real numbers, as long as one is aware of this, and
+ adjusts scales appropriately.
+\end_layout
+
+\begin_layout Standard
+So ...
+ 
 \end_layout
 
 \begin_layout Subsection
