@@ -2439,32 +2439,333 @@ too many dyadics
 
 \begin_layout Standard
 So ...
- 
 \end_layout
 
-\begin_layout Subsection
-The map to the reals.
-\end_layout
-
-\begin_layout Standard
-XXX
+\begin_layout Section
+Meta-commentary
 \end_layout
 
 \begin_layout Standard
-unfinished.
-\end_layout
-
-\begin_layout Standard
-A very short sketch of why I'm calling all this 
+The above struggles with deeper questions that are well-researched and 
 \begin_inset Quotes eld
 \end_inset
 
-the Vitali set
+well-known
 \begin_inset Quotes erd
 \end_inset
 
 .
+ A quick list:
+\end_layout
+
+\begin_layout Itemize
+The compactness properties of subsets of the Cantor space lead to understandings
+ of the ultrafilter lemma, equivalently the Boolean prime ideal theorem,
+ both of which provide a weaker form of the axiom of choice.
+\end_layout
+
+\begin_layout Itemize
+The sets 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+ can be understood as 
+\begin_inset Quotes eld
+\end_inset
+
+the smallest Borel equivalence relation (smallest, in the order of Borel
+ reducibility) that does not admit a Borel function giving a real-valued
+ complete invariant for the equivalence relation
+\begin_inset Quotes erd
+\end_inset
+
+ (aka the Vitali set).
+ Keywords here are the Glimm–Effros dichotomy, the Luzin–Novikov theorem
+ and the Feldman–Moore theorem
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+Some random related remarks that involve things well-known and quite conventiona
+l.
+ A review
+\emph on
+ ad nauseum
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+The Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ is the space in which the discrete points are infintely-long strings of
+ binary digits.
+ The Baire space 
+\begin_inset Formula $\mathcal{N}=\mathbb{N}^{\omega}=\omega^{\omega}$
+\end_inset
+
+ is the space of infinite-length strings of the natural numbers, where 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ is defined as positive integers (so zero is not included.) A key idea is
+ that these two spaces can be placed in one-to-one correspondence with each
+ other, using a run-length encoding.
+ This is the run-length encoding that corresponds to the Minkowski Question
+ Mark function.
+ Thus, most statements about one will apply to the other space, as well.
+\end_layout
+
+\begin_layout Standard
+This appendix collects a random collection of conventional factoids about
+ these spaces.
+\end_layout
+
+\begin_layout Subsection*
+The discrete topology
+\end_layout
+
+\begin_layout Standard
+Both spaces have a discrete topology, which is extremely fine.
+ This makes both of them into discrete spaces.
+ Some factoids:
+\end_layout
+
+\begin_layout Itemize
+The topological dimension of any discrete space is zero.
+\end_layout
+
+\begin_layout Itemize
+The discrete metric on any discrete space is 
+\begin_inset Formula $\rho\left(x,y\right)=1$
+\end_inset
+
+ if 
+\begin_inset Formula $x\ne y$
+\end_inset
+
+ else 
+\begin_inset Formula $\rho\left(x,y\right)=0$
+\end_inset
+
+ if 
+\begin_inset Formula $x=y$
+\end_inset
+
+.
+ This metric means the points are always isolated.
+\end_layout
+
+\begin_layout Itemize
+With the above metric, the space is uniformly discrete, in that it has a
+ packing radius of 
+\begin_inset Formula $1/2$
+\end_inset
+
+ and a covering radius of 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Spaces with a finite covering radius are said to be 
+\begin_inset Quotes eld
+\end_inset
+
+relatively dense
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The points of any discrete space are always clopen.
+\end_layout
+
+\begin_layout Itemize
+It is not compact, as there is no finite open cover.
+ More vaguely, it has no cluster points.
+\end_layout
+
+\begin_layout Itemize
+It is bounded.
+ It is complete.
+\end_layout
+
+\begin_layout Itemize
+The Baire and Cantor spaces are homeomorphic under the diiscrete topology,
+ which follows from the idea that any two discrete subspaces with the same
+ cardinality are homeomorphic.
+ This is not deep, though, as the open sets are just the points, and the
+ homeomorphism is just a one-to-one correspondence of the points.
+ The run-length encoding of the Minkowski question mark provides the desired
+ one-to-one correspondance.
+\end_layout
+
+\begin_layout Itemize
+Every discrete space is first-countable.
+ But this is a shallow statement: it follows from each point being open,
+ and thus being it's own neighborhood.
+ Alternately, every countable product of first-countable spaces is first-countab
+le.
+\end_layout
+
+\begin_layout Itemize
+Neither space is second-countable.
+ Neither space is seperable.
+\end_layout
+
+\begin_layout Standard
+More can be said, following from the properties of discrete spaces, but
+ this does not obviously lead to any interesting statements.
+\end_layout
+
+\begin_layout Subsection*
+The usual topology
+\end_layout
+
+\begin_layout Standard
+The usual topology on the Cantor and Baire spaces consists of clopen sets.
  
+\end_layout
+
+\begin_layout Standard
+Some factoids:
+\end_layout
+
+\begin_layout Itemize
+The base of topology is given by finite strings, followed by don't-care
+ markers.
+\end_layout
+
+\begin_layout Itemize
+Finite unions of finite strings are finite trees (binary trees, in the case
+ of Cantor space).
+\end_layout
+
+\begin_layout Itemize
+Countable unions of open sets are open.
+ There are some interesting examples worth pointing out.
+ Working with the Cantor space, consider the tree 
+\begin_inset Formula $Z=\bigcup_{k=0}^{\infty}0^{k}1$
+\end_inset
+
+ where 
+\begin_inset Formula $0^{k}$
+\end_inset
+
+ is a string of 
+\begin_inset Formula $k$
+\end_inset
+
+ zeros in a row.
+ Clearly, 
+\begin_inset Formula $Z\subset\mathbb{P}_{0}$
+\end_inset
+
+ with 
+\begin_inset Formula $\text{\ensuremath{\mathbb{P}_{0}}}$
+\end_inset
+
+ as defined earlier.
+ It corresponds to a union of open sets that converge to 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+; that is, a union of open neighborhoods of 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+.
+ More generally, for any 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+, one can define a sequence of open neighborhoods 
+\begin_inset Formula $P_{k}$
+\end_inset
+
+ that converge to 
+\begin_inset Formula $p.$
+\end_inset
+
+ These are built built from finite strings 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+, where 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ is defined as the first 
+\begin_inset Formula $k$
+\end_inset
+
+ letters in the infinite string 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ The corresponding tree is then 
+\begin_inset Formula $P=\bigcup_{k=0}^{\infty}\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+.
+ This corresponds to an open set; every point 
+\begin_inset Formula $p$
+\end_inset
+
+ corresponds to this kind of open set.
+ More generally, given any countable set of points, the countable union
+ of these is open.
+\end_layout
+
+\begin_layout Itemize
+The construction above is worth giving a name.
+ Define a function 
+\begin_inset Formula $\mathcal{P}:\Delta\to\mathcal{T}\left(\Delta\right)$
+\end_inset
+
+ mapping 
+\begin_inset Formula $\mathcal{P}:p\mapsto\bigcup_{k=0}^{\infty}\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ and analogoously for Baire space.
+ Here, 
+\begin_inset Formula $\mathcal{T}\left(\Delta\right)$
+\end_inset
+
+ is the topology of open sets that we are trying to describe in this section.
+\end_layout
+
+\begin_layout Itemize
+net filter The sequence of open
+\end_layout
+
+\begin_layout Itemize
+Both spaces are second-countable, meaning that they both have a topology
+ with a countable base.
+\end_layout
+
+\begin_layout Itemize
+Both have 
+\end_layout
+
+\begin_layout Itemize
+ultrafilters???
+\end_layout
+
+\begin_layout Subsection*
+The map to the reals.
 \end_layout
 
 \begin_layout Standard
@@ -2551,39 +2852,11 @@ Let
 under this mappingUnder this mapping
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 The shift operator and ergodicity
 \end_layout
 
-\begin_layout Subsection
-Formalities
-\end_layout
-
-\begin_layout Standard
-The set 
-\begin_inset Formula $E_{0}$
-\end_inset
-
- is apparently gives 
-\begin_inset Quotes eld
-\end_inset
-
-the smallest Borel equivalence relation (smallest, in the order of Borel
- reducibility) that does not admit a Borel function giving a real-valued
- complete invariant for the equivalence relation
-\begin_inset Quotes erd
-\end_inset
-
- (aka the Vitali set).
- At least, for the standard model of the reals.
- Presumably, the Vitali set can be given a measure of 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
- in non-standard analysis, and this assignment remains consistent, right?
-\end_layout
-
-\begin_layout Subsection
+\begin_layout Subsection*
 Baire space
 \end_layout
 
@@ -2677,7 +2950,7 @@ Whatever, this is very pointlessly long winded.
  
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection*
 Borel hierarchy
 \end_layout
 
