@@ -1487,6 +1487,62 @@ Fortunately, the lexicographic order is available.
 .
 \end_layout
 
+\begin_layout Standard
+The ordering 
+\begin_inset Formula $<_{q}^{\mbox{lex}}$
+\end_inset
+
+ is well-founded on 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+, in that the minimum element 
+\begin_inset Formula $\overline{q}\in\mathbb{D}_{q}$
+\end_inset
+
+ and all other elements in 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ are no more than a finite number of steps above 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+.
+ Specifically, they are all 
+\begin_inset Formula $\mbox{len}_{q}$
+\end_inset
+
+ steps away, and, of course 
+\begin_inset Formula $\mbox{len}_{q}\overline{q}=0$
+\end_inset
+
+.
+ By contrast, it is not well-founded on 
+\begin_inset Formula $\Delta$
+\end_inset
+
+; all elements in 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ but not in 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ are at least a countably infinite number of steps away, and usually more.
+ The bitwise order 
+\begin_inset Formula $<^{\mbox{bit}}$
+\end_inset
+
+ is not well-founded; in particular, it places an uncountably infinite number
+ of elements underneath 
+\begin_inset Formula $\overline{q}$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Orders on the Vitali set
 \end_layout
@@ -1859,7 +1915,7 @@ What about
 \begin_inset Formula $\gamma$
 \end_inset
 
- can be totally ordered by suing the bitwise total order 
+ can be totally ordered by using the bitwise total order 
 \begin_inset Formula $<^{\mbox{bit}}$
 \end_inset
 
@@ -1871,7 +1927,224 @@ What about
 \end_layout
 
 \begin_layout Subsection
-The Vitali set
+The Vitali set measureability paradox
+\end_layout
+
+\begin_layout Standard
+It is time to recap the core argument for the measureability of the Vitali
+ set.
+ One starts with the Cantor space 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ and assigns a total measure of one to it.
+ The quotient 
+\begin_inset Formula $E_{q}=\Delta/\mathbb{D}_{q}$
+\end_inset
+
+ shatters it into an uncountable number of cosets (cardinalty 
+\begin_inset Formula $\aleph_{1}$
+\end_inset
+
+), each labelled by a unique string 
+\begin_inset Formula $u\in\Delta$
+\end_inset
+
+.
+ The construction forces that each such label is distinct: for all label
+ pairs 
+\begin_inset Formula $u,v$
+\end_inset
+
+ one has that 
+\begin_inset Formula $u\oplus v\notin\mathbb{D}_{q}$
+\end_inset
+
+.
+ This allows an entire coset to be exhibited as 
+\begin_inset Formula $u\oplus\mathbb{D}_{q}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathbb{D}_{q}$
+\end_inset
+
+ is countable (i.e.
+ having cardinality 
+\begin_inset Formula $\aleph_{0})$
+\end_inset
+
+, it can be indexed with integers.
+ The indexing can be made explicit: for each 
+\begin_inset Formula $d\left(m,n\right)\in\mathbb{D}_{q}$
+\end_inset
+
+ just define 
+\begin_inset Formula $k=m+2^{n}$
+\end_inset
+
+.
+ Recall how these elements were defined: the length 
+\begin_inset Formula $\mbox{len}_{q}d\left(m,n\right)=n$
+\end_inset
+
+, and there are exactly 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ finite strings of length exactly 
+\begin_inset Formula $n$
+\end_inset
+
+; these are labelled with 
+\begin_inset Formula $0\le m<2^{n}$
+\end_inset
+
+.
+ These are in one-to-one correspondence with the dyadic rationals 
+\begin_inset Formula $\left(2m+1\right)/2^{n+1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each distinct label is assigned to a distinct Vitali set 
+\begin_inset Formula $V_{k}$
+\end_inset
+
+, so that 
+\begin_inset Formula 
+\[
+V_{q;k}=\bigcup_{u\in E_{q}}u\oplus d\left(m,n\right)
+\]
+
+\end_inset
+
+is a set of disjoint points.
+ Disjoint, simply because we've never created any topology, so disjoint
+ by default.
+ Each set is also pair-wise disjoint: 
+\begin_inset Formula $V_{q;j}\cap V_{q;k}=\varnothing$
+\end_inset
+
+ for each pair of integers 
+\begin_inset Formula $j\ne k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+.By construction 
+\begin_inset Formula 
+\[
+\Delta=\bigcup_{k=0}^{\infty}V_{q;k}
+\]
+
+\end_inset
+
+as the pointwise union.
+ Every point in 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ was carefully accounted for, in this construction.
+ More specificly, each and every possible infinite string of binary digits
+ 
+\begin_inset Formula $b\in\Delta$
+\end_inset
+
+ has been assigned to one and only one 
+\begin_inset Formula $V_{q;k}$
+\end_inset
+
+.
+ There are no extras, there are no duplicates or double-counting.
+\end_layout
+
+\begin_layout Standard
+The conventional argument proves the non-measurability of each 
+\begin_inset Formula $V_{q;k}$
+\end_inset
+
+ with an argument by contradiction.
+ Assume there exists a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mu\left(\Delta\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\left(V_{q;k}\right)=\epsilon_{k}>0$
+\end_inset
+
+.
+ Since all 
+\begin_inset Formula $V_{q;k}$
+\end_inset
+
+ are of the same size, being isomorphic to one-another, the measures must
+ all be equal: 
+\begin_inset Formula $\epsilon_{k}=\epsilon$
+\end_inset
+
+.
+ One then concludes that 
+\begin_inset Formula 
+\begin{align*}
+1= & \mu\left(\Delta\right)\\
+= & \mu\left(\bigcup_{k=0}^{\infty}V_{q;k}\right)\\
+= & \sum_{k=0}^{\infty}\mu\left(V_{q;k}\right)\\
+= & \sum_{k=0}^{\infty}\epsilon_{k}\\
+= & \omega\epsilon
+\end{align*}
+
+\end_inset
+
+Clearly, there is no real number 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ that can preserve this identity; thus, one concludes that each individual
+ Vitali set 
+\begin_inset Formula $V_{q;k}$
+\end_inset
+
+ is unmeasurable.
+\end_layout
+
+\begin_layout Standard
+Written in this way, it is also clear that non-standard analysis, using
+ hyperreal numbers, avoids this ugly fate: just set 
+\begin_inset Formula $\epsilon=1/\omega$
+\end_inset
+
+ as the infinitessimal, and the problem goes away.
+ Of course, this opens up a can of worms: what are the hyperreals, and what
+ are their properties? How do they behave? Is this a legitimate and valid
+ construction? As I have no desire to write a textbook on the hyperreals,
+ the short answer is, yes, everything is just fine.
+ Here, 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is just an infinitessimal; it behaves just like any other number, and doesn't
+ present any particular challenges.
+ One can go farther, and use the surreals as well, although this is not
+ strictly called for, at this point.
+ Again, there's no particular problem, here.
+\end_layout
+
+\begin_layout Standard
+There is also an alternative interpretation, given in the next section.
+\end_layout
+
+\begin_layout Subsection
+Scaling and the Renormalization Group
 \end_layout
 
 \begin_layout Standard
