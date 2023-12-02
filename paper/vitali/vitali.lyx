@@ -2630,11 +2630,12 @@ More can be said, following from the properties of discrete spaces, but
 \end_layout
 
 \begin_layout Subsection*
-The usual topology
+The standard topology
 \end_layout
 
 \begin_layout Standard
-The usual topology on the Cantor and Baire spaces consists of clopen sets.
+The standard topology on the Cantor and Baire spaces consists of clopen
+ sets.
  
 \end_layout
 
@@ -2680,18 +2681,23 @@ entourage
 \end_layout
 
 \begin_layout Subsection*
-Convergence to points
+Pointclass 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The section below constructs examples of infinite unions; these are examples
+This section reviews the base for the standard topology on the Cantor space.
+ It also constructs some examples of infinite unions; these are examples
  of elements belonging to the boldface level 
 \begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
 \end_inset
 
  of the Borel hierarchy.
- Its mostly hot air and notational defintions; it never says anything deep
- or difficult.
+ The content here is mostly hot air and notational definitions; it never
+ says anything deep or difficult.
  The articulation does give some 
 \begin_inset Quotes eld
 \end_inset
@@ -2715,6 +2721,10 @@ gut feel
  its the other.
  Well, that, and the canonical measure on Baire space is trickier.
  We stick to Cantor.
+\end_layout
+
+\begin_layout Subsubsection*
+The base for the topology
 \end_layout
 
 \begin_layout Standard
@@ -2793,6 +2803,10 @@ extends
 
 .
  
+\end_layout
+
+\begin_layout Subsubsection*
+Exclusion of zero
 \end_layout
 
 \begin_layout Standard
@@ -3005,6 +3019,10 @@ and so (of course)
  and almost nothing more.
 \end_layout
 
+\begin_layout Subsubsection*
+Exclusion of a general point
+\end_layout
+
 \begin_layout Standard
 The same construction can be generalized to any 
 \begin_inset Formula $p\in\Delta$
@@ -3114,6 +3132,10 @@ The same construction can be generalized to any
 .
 \end_layout
 
+\begin_layout Subsubsection*
+Complements of finite unions
+\end_layout
+
 \begin_layout Standard
 Several curious questions follow.
  Let 
@@ -3168,6 +3190,15 @@ Several curious questions follow.
 \end_inset
 
 .
+ This is resolved shortly below; yes, this difference is in 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Base neighborhood filter
 \end_layout
 
 \begin_layout Standard
@@ -3345,6 +3376,10 @@ The same argument extends recursively.
 .
 \end_layout
 
+\begin_layout Subsubsection*
+Complements of neighborhood filters
+\end_layout
+
 \begin_layout Standard
 It is not hard to see that 
 \begin_inset Formula $P_{k}\cap O_{k}=\varnothing$
@@ -3431,6 +3466,10 @@ Returning to
  How odd.
 \end_layout
 
+\begin_layout Subsubsection*
+Complements of the base
+\end_layout
+
 \begin_layout Standard
 One may continue down this path just a bit farther, for the sake of completeness.
  Following the earlier construction, one has 
@@ -3453,17 +3492,103 @@ One may continue down this path just a bit farther, for the sake of completeness
 .
 \end_layout
 
-\begin_layout Standard
-What was the point of this lengthly and tedious exposition?
+\begin_layout Subsubsection*
+Complements of a finite number of points
 \end_layout
 
 \begin_layout Standard
-The point here is that there was no need to use set intersection to build
- any of these sets.
+The above notational gymnastics provide just enough limberness to construct
+ an open set that includes all of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, except for a finite number of points.
+ Without loss of generality, the construction is done for two points.
+ A tweak of notation is required.
+ Given 
+\begin_inset Formula $a,b\in\Delta,a\ne b$
+\end_inset
+
+, let 
+\begin_inset Formula $\left\{ O_{i}^{a}:0\le i<\infty\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ O_{i}^{b}:0\le i<\infty\right\} $
+\end_inset
+
+ denote the basic neighborhhood filters for 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+; likewise, all other symbols defined earlier can be similarly superscripted.
+ As before, there is some integer 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{k}=\left\lfloor b\right\rfloor _{k}$
+\end_inset
+
+ but the 
+\begin_inset Formula $k$
+\end_inset
+
+'th digit does not match: 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{k+1}\ne\left\lfloor b\right\rfloor _{k+1}$
+\end_inset
+
+.
+ This implies that not only is 
+\begin_inset Formula $a\notin O_{n}^{b}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\ge k$
+\end_inset
+
+, but also that that 
+\begin_inset Formula $O_{n}^{a}\cap O_{n}^{b}=\varnothing$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-The construction appears to extend to any countable collection of points
+epsilon-net
+\end_layout
+
+\begin_layout Subsubsection*
+Summary
+\end_layout
+
+\begin_layout Standard
+What was the point of this lengthly and tedious exposition? Well, lets see:
+\end_layout
+
+\begin_layout Itemize
+The base for the topology was sufficient to build a neighborhood filter
+ for every point.
+\end_layout
+
+\begin_layout Itemize
+Many set differences are open sets.
+\end_layout
+
+\begin_layout Itemize
+Set intersection was not needed to build any of the examples.
+\end_layout
+
+\begin_layout Standard
+Can we generalize the construction of complements of single points to a
+ countable collection of points? Sure ...
+ details ...
+ the construction appears to extend to any countable collection of points
 \end_layout
 
 \begin_layout Standard
