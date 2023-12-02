@@ -2684,47 +2684,41 @@ Convergence to points
 \end_layout
 
 \begin_layout Standard
-The section below uses a lot of hot air to construct examples of infinite
- unions.
- These are examples of elements belonging to the boldface level 
+The section below constructs examples of infinite unions; these are examples
+ of elements belonging to the boldface level 
 \begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
 \end_inset
 
  of the Borel hierarchy.
+ Its mostly hot air and notational defintions; it never says anything deep
+ or difficult.
+ The articulation does give some 
+\begin_inset Quotes eld
+\end_inset
+
+gut feel
+\begin_inset Quotes erd
+\end_inset
+
+ for the shape of things, though.
+ All of the work is done with the Cantor space 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, but each of the constructions would seem to have an analogous form in
+ Baire space, from what I can tell.
+ The primary complication is that, given a single digits of a sequence in
+ Baire space, it's negation is the rest of the natural numbers, instead
+ of a singleton.
+ The nice thing about Cantor space is that each digit is 0 or 1, both singletons
+, so if its not one.
+ its the other.
+ Well, that, and the canonical measure on Baire space is trickier.
+ We stick to Cantor.
 \end_layout
 
 \begin_layout Standard
-Working with the Cantor space, consider the tree 
-\begin_inset Formula $Z=\bigcup_{k=0}^{\infty}0^{k}1$
-\end_inset
-
- where 
-\begin_inset Formula $0^{k}$
-\end_inset
-
- is a string of 
-\begin_inset Formula $k$
-\end_inset
-
- zeros in a row.
- Clearly, 
-\begin_inset Formula $Z\subset\mathbb{P}_{0}$
-\end_inset
-
- with 
-\begin_inset Formula $\text{\ensuremath{\mathbb{P}_{0}}}$
-\end_inset
-
- as defined earlier.
- It corresponds to a union of open sets, none of which contain 
-\begin_inset Formula $\overline{0}$
-\end_inset
-
- but do encroach upon it.
-\end_layout
-
-\begin_layout Standard
-As before, write the set of all finite strings as
+Write the set of all finite strings just as before, as
 \begin_inset Formula 
 \[
 \mathbb{S}=\left\{ q\vert q=\left(q_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\right\} \cup\varepsilon
@@ -2770,11 +2764,26 @@ extends
 \end_inset
 
  finite strings to open sets.
- With the convetional measure 
+ This provides the definition of the base of the topology: the base is given
+ precisely by 
+\begin_inset Formula $\mbox{ext}s=s\overline{*}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+.
+ The base is countable, since 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ is countable.
+ The convetional measure 
 \begin_inset Formula $\mu$
 \end_inset
 
- on the Cantor space, one has 
+ on the Cantor space can be defined as 
 \begin_inset Formula $\mu\left(\mbox{ext}s\right)=2^{-\mbox{len}s}$
 \end_inset
 
@@ -2787,8 +2796,54 @@ extends
 \end_layout
 
 \begin_layout Standard
+The first example constructs an open set that does not contain the point
+ 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ but does contain every other point in 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ This will be given by the tree 
+\begin_inset Formula $z=\bigcup_{k=0}^{\infty}0^{k}1$
+\end_inset
+
+ where 
+\begin_inset Formula $0^{k}$
+\end_inset
+
+ is a string of 
+\begin_inset Formula $k$
+\end_inset
+
+ zeros in a row.
+ Clearly, 
+\begin_inset Formula $z\subset\mathbb{P}_{0}$
+\end_inset
+
+ with 
+\begin_inset Formula $\text{\ensuremath{\mathbb{P}_{0}}}$
+\end_inset
+
+ as defined earlier.
+ The corresponding extension to the Cantor space is 
+\begin_inset Formula $Z=\mbox{ext}z\subset\Delta$
+\end_inset
+
+.
+ This is articulated in gory detail below; it corresponds to a union of
+ open sets, none of which contain 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ but which do encroach upon it.
+\end_layout
+
+\begin_layout Standard
 Define a sequence of open sets 
-\begin_inset Formula $o_{k}=0^{k}1\overline{*}$
+\begin_inset Formula $o_{k}=\mbox{ext}0^{k}1=0^{k}1\overline{*}$
 \end_inset
 
  that are each disjoint from 
@@ -2882,12 +2937,12 @@ Define a sequence of open sets
 \begin_inset Formula $p\in o_{k}$
 \end_inset
 
-.
+ (and the converse: if and only if).
  From this, conclude that 
 \begin_inset Formula $\Delta=Z\cup\overline{0}$
 \end_inset
 
- or equivalently, as set subtraction, 
+ or equivalently, written as set subtraction, 
 \begin_inset Formula $Z=\Delta\backslash\overline{0}$
 \end_inset
 
@@ -3103,6 +3158,28 @@ Several curious questions follow.
 \end_layout
 
 \begin_layout Standard
+Lets try a different approach.
+ Write 
+\begin_inset Formula $O_{k}=\mbox{ext}\left\lfloor p\right\rfloor _{k}=\left\lfloor p\right\rfloor _{k}\overline{*}$
+\end_inset
+
+.
+ Then clearly, 
+\begin_inset Formula $p\in O_{k}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Suppose instead that 
+\end_layout
+
+\begin_layout Standard
 Reasoning in the same way, 
 \begin_inset Formula $\Delta\backslash P_{k}=p\cup\check{P}_{k}$
 \end_inset
@@ -3118,11 +3195,6 @@ Reasoning in the same way,
 
 \begin_layout Standard
 The construction appears to extend to any countable collection of points
-\end_layout
-
-\begin_layout Standard
-The construction works exactly the same way for Baire space, giving the
- same results (except that the measure is done differently.)
 \end_layout
 
 \begin_layout Standard
