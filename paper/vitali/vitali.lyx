@@ -3025,7 +3025,7 @@ The same construction can be generalized to any
 
 .
  Each open set 
-\begin_inset Formula $P_{k}=\mbox{ext}\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}$
+\begin_inset Formula $P_{k}=\mbox{ext}\left(\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}\right)$
 \end_inset
 
  is defined to be disjoint from 
@@ -3046,7 +3046,16 @@ The same construction can be generalized to any
 \end_inset
 
 .
- The corresponding tree is then 
+ The set 
+\begin_inset Formula $P_{k}$
+\end_inset
+
+ belongs to the base of the topology, and so 
+\begin_inset Formula $P_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ The corresponding tree is 
 \begin_inset Formula $P=\bigcup_{k=0}^{\infty}P_{k}$
 \end_inset
 
@@ -3090,7 +3099,11 @@ The same construction can be generalized to any
 \end_inset
 
 .
- Thus, 
+ Since 
+\begin_inset Formula $P$
+\end_inset
+
+ is built from a countable union, 
 \begin_inset Formula $P\in\mathbf{\Sigma}_{1}^{0}$
 \end_inset
 
@@ -3160,7 +3173,7 @@ Several curious questions follow.
 \begin_layout Standard
 Lets try a different approach.
  Write 
-\begin_inset Formula $O_{k}=\mbox{ext}\left\lfloor p\right\rfloor _{k}=\left\lfloor p\right\rfloor _{k}\overline{*}$
+\begin_inset Formula $O_{k}=\mbox{ext}\left\lfloor p\right\rfloor _{k+1}=\left\lfloor p\right\rfloor _{k+1}\overline{*}$
 \end_inset
 
 .
@@ -3173,14 +3186,254 @@ Lets try a different approach.
 \end_inset
 
 .
+ The sequence of 
+\begin_inset Formula $O_{k}$
+\end_inset
+
+ is a filter of open neighborhoods of 
+\begin_inset Formula $p$
+\end_inset
+
+, converging to 
+\begin_inset Formula $p$
+\end_inset
+
+, each half the size of the once before.
+ That is, 
+\begin_inset Formula $O_{k+1}\subset O_{k}$
+\end_inset
+
+is a proper subset, and 
+\begin_inset Formula $\mu\left(O_{k}\right)=2^{-\left(k+1\right)}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $O_{k}$
+\end_inset
+
+ belongs to the base of the topology, 
+\begin_inset Formula $O_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-Suppose instead that 
+Convergence can be seen as follows.
+ Consider some point, any point 
+\begin_inset Formula $q\in\Delta$
+\end_inset
+
+.
+ If the first digit of 
+\begin_inset Formula $q$
+\end_inset
+
+ is the same as the first digit of 
+\begin_inset Formula $p,$
+\end_inset
+
+that is, if 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{1}=\left\lfloor p\right\rfloor _{1}=p_{1}$
+\end_inset
+
+, we conclude that 
+\begin_inset Formula $q\in O_{0}$
+\end_inset
+
+.
+ If the first digits are not the same, then 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{1}=\check{p}_{1}$
+\end_inset
+
+ and so 
+\begin_inset Formula $q\in P_{0}$
+\end_inset
+
+.
+ Appearently, one concludes that 
+\begin_inset Formula $P_{0}\cap O_{0}=\varnothing$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta=P_{0}\cup O_{0}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\Delta\backslash P_{0}=O_{0}$
+\end_inset
+
+ and vice versa.
 \end_layout
 
 \begin_layout Standard
-Reasoning in the same way, 
+The same argument extends recursively.
+ Assume that there exists some integer 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{k+1}\ne\left\lfloor p\right\rfloor _{k+1}$
+\end_inset
+
+; without loss of generality, let this be the least such integer.
+ If it does not exist, then 
+\begin_inset Formula $p=q$
+\end_inset
+
+ and 
+\begin_inset Formula $p\in O_{k}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Otherwise, 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{k}=\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ (because 
+\begin_inset Formula $k$
+\end_inset
+
+ was the least) and 
+\begin_inset Formula $p_{k+1}\ne q_{k+1}=\check{p}_{k+1}$
+\end_inset
+
+ since 
+\begin_inset Formula $q_{k+1}$
+\end_inset
+
+ can only be zero or one, duh.
+ Thus, 
+\begin_inset Formula $q\in\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}\overline{*}=\mbox{ext}\left(\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}\right)=P_{k}$
+\end_inset
+
+ and similarly, 
+\begin_inset Formula $q\notin O_{k}$
+\end_inset
+
+.
+ This concludes the proof of convergence; if 
+\begin_inset Formula $q\ne p$
+\end_inset
+
+ then there exists some integer 
+\begin_inset Formula $k$
+\end_inset
+
+ for which 
+\begin_inset Formula $q\notin O_{k}$
+\end_inset
+
+ and so the filter 
+\begin_inset Formula $\left\{ O_{k}\right\} $
+\end_inset
+
+ does not converge to 
+\begin_inset Formula $q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is not hard to see that 
+\begin_inset Formula $P_{k}\cap O_{k}=\varnothing$
+\end_inset
+
+, since, for any 
+\begin_inset Formula $x\in P_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $y\in O_{k}$
+\end_inset
+
+ one must have 
+\begin_inset Formula $x_{k+1}\ne y_{k+1}$
+\end_inset
+
+ by construction.
+ Similarly, the union 
+\begin_inset Formula $P_{k}\cup O_{k}$
+\end_inset
+
+ includes both possibilities, and so 
+\begin_inset Formula $P_{k}\cup O_{k}=O_{k-1}$
+\end_inset
+
+.
+ This allows fiddling with set subtraction 
+\emph on
+ad nauseum
+\emph default
+: 
+\begin_inset Formula $O_{k-1}\backslash O_{k}=P_{k}$
+\end_inset
+
+ and so on.
+\end_layout
+
+\begin_layout Standard
+Returning to 
+\begin_inset Formula $\mathcal{P}_{n}=\bigcup_{k=0}^{n}P_{k}$
+\end_inset
+
+, one concludes that, for any 
+\begin_inset Formula $q\in\Delta$
+\end_inset
+
+, either 
+\begin_inset Formula $q\in\mathcal{P}_{n}$
+\end_inset
+
+ or that 
+\begin_inset Formula $q\in O_{n}$
+\end_inset
+
+, but not both.
+ From this, 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup O_{n}$
+\end_inset
+
+ as well as 
+\begin_inset Formula $\mathcal{P}_{n}\cap O_{n}=\varnothing$
+\end_inset
+
+ so that 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}=O_{n}$
+\end_inset
+
+ and vice-versa.
+ Thus, 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Comparing to the earlier result, it seems that 
+\begin_inset Formula $O_{n}=\mathcal{Q}_{n}\cup p$
+\end_inset
+
+.
+ How odd.
+\end_layout
+
+\begin_layout Standard
+One may continue down this path just a bit farther, for the sake of completeness.
+ Following the earlier construction, one has 
 \begin_inset Formula $\Delta\backslash P_{k}=p\cup\check{P}_{k}$
 \end_inset
 
@@ -3189,7 +3442,23 @@ Reasoning in the same way,
 \end_inset
 
 .
- The point here is that there was no need to use set intersection to build
+ Absorbing that one single point, one has 
+\begin_inset Formula $\Delta\backslash P_{k}=p\cup\mathcal{P}_{k-1}\cup\mathcal{Q}_{k}=\mathcal{P}_{k-1}\cup O_{k}$
+\end_inset
+
+ and so again, 
+\begin_inset Formula $\Delta\backslash P_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What was the point of this lengthly and tedious exposition?
+\end_layout
+
+\begin_layout Standard
+The point here is that there was no need to use set intersection to build
  any of these sets.
 \end_layout
 
