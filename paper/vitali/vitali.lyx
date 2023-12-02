@@ -2654,8 +2654,39 @@ Finite unions of finite strings are finite trees (binary trees, in the case
 
 \begin_layout Itemize
 Countable unions of open sets are open.
- There are some interesting examples worth pointing out.
- Working with the Cantor space, consider the tree 
+ Some curious examples in a subsection below.
+ 
+\end_layout
+
+\begin_layout Itemize
+net filter The sequence of open
+\end_layout
+
+\begin_layout Itemize
+Both spaces are second-countable, meaning that they both have a topology
+ with a countable base.
+\end_layout
+
+\begin_layout Itemize
+Both have 
+\end_layout
+
+\begin_layout Itemize
+ultrafilters???
+\end_layout
+
+\begin_layout Subsection*
+Convergence to points
+\end_layout
+
+\begin_layout Standard
+The section below uses a lot of hot air to construct a perfectly trivial
+ example.
+ I'm not sure why I bothered.
+\end_layout
+
+\begin_layout Standard
+Working with the Cantor space, consider the tree 
 \begin_inset Formula $Z=\bigcup_{k=0}^{\infty}0^{k}1$
 \end_inset
 
@@ -2677,20 +2708,107 @@ Countable unions of open sets are open.
 \end_inset
 
  as defined earlier.
- It corresponds to a union of open sets that converge to 
+ It corresponds to a union of open sets, none of which contain 
 \begin_inset Formula $\overline{0}$
 \end_inset
 
-; that is, a union of open neighborhoods of 
-\begin_inset Formula $\overline{0}$
+ but do encroach upon it.
+\end_layout
+
+\begin_layout Standard
+As before, write the set of all finite strings as
+\begin_inset Formula 
+\[
+\mathbb{S}=\left\{ q\vert q=\left(q_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\right\} \cup\varepsilon
+\]
+
+\end_inset
+
+and define 
+\begin_inset Formula $\mbox{ext}:\mathbb{S}\to\Delta$
+\end_inset
+
+ as the extension of any finite string by 
+\begin_inset Formula $\overline{*}$
+\end_inset
+
+ with 
+\begin_inset Formula $*=\left\{ 0\right\} \cup\left\{ 1\right\} $
+\end_inset
+
+ being the 
+\begin_inset Quotes eld
+\end_inset
+
+don't care
+\begin_inset Quotes erd
+\end_inset
+
+ wildcard marker.
+ It maps finite strings to open sets.
+ With the convetional measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on the Cantor space, one has 
+\begin_inset Formula $\mu\left(\mbox{ext}s\right)=2^{-\mbox{len}s}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}$
 \end_inset
 
 .
- More generally, for any 
+ 
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $z_{k}=0^{k}1$
+\end_inset
+
+ so that 
+\begin_inset Formula $Z=\bigcup_{k=0}^{\infty}z_{k}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $z_{k}\cap z_{j}=\varnothing$
+\end_inset
+
+ whenver 
+\begin_inset Formula $j\ne k$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\mu\left(z_{k}\right)=2^{-\left(k+1\right)}$
+\end_inset
+
+.
+ Thus we conclude 
+\begin_inset Formula 
+\[
+\mu\left(Z\right)=\sum_{k=0}^{\infty}\mu\left(z_{k}\right)=\sum_{k=0}^{\infty}2^{-\left(k+1\right)}=1
+\]
+
+\end_inset
+
+Well, this identifies 
+\begin_inset Formula $Z=\Delta\backslash\overline{0}$
+\end_inset
+
+, that is, all of Cantor space, minus one point.
+ 
+\end_layout
+
+\begin_layout Standard
+The construction extends for any 
 \begin_inset Formula $p\in\Delta$
 \end_inset
 
-, one can define a sequence of open neighborhoods 
+.
+ Define a sequence of open neighborhoods 
 \begin_inset Formula $P_{k}$
 \end_inset
 
@@ -2716,52 +2834,15 @@ Countable unions of open sets are open.
 
 .
  The corresponding tree is then 
-\begin_inset Formula $P=\bigcup_{k=0}^{\infty}\left\lfloor p\right\rfloor _{k}$
+\begin_inset Formula $P=\bigcup_{k=0}^{\infty}\mbox{ext}\left\lfloor p\right\rfloor _{k}$
 \end_inset
 
 .
- This corresponds to an open set; every point 
-\begin_inset Formula $p$
+ As before, this gives us 
+\begin_inset Formula $P=\Delta\backslash p$
 \end_inset
 
- corresponds to this kind of open set.
- More generally, given any countable set of points, the countable union
- of these is open.
-\end_layout
-
-\begin_layout Itemize
-The construction above is worth giving a name.
- Define a function 
-\begin_inset Formula $\mathcal{P}:\Delta\to\mathcal{T}\left(\Delta\right)$
-\end_inset
-
- mapping 
-\begin_inset Formula $\mathcal{P}:p\mapsto\bigcup_{k=0}^{\infty}\left\lfloor p\right\rfloor _{k}$
-\end_inset
-
- and analogoously for Baire space.
- Here, 
-\begin_inset Formula $\mathcal{T}\left(\Delta\right)$
-\end_inset
-
- is the topology of open sets that we are trying to describe in this section.
-\end_layout
-
-\begin_layout Itemize
-net filter The sequence of open
-\end_layout
-
-\begin_layout Itemize
-Both spaces are second-countable, meaning that they both have a topology
- with a countable base.
-\end_layout
-
-\begin_layout Itemize
-Both have 
-\end_layout
-
-\begin_layout Itemize
-ultrafilters???
+.
 \end_layout
 
 \begin_layout Subsection*
