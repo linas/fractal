@@ -2675,14 +2675,22 @@ Both have
 ultrafilters???
 \end_layout
 
+\begin_layout Itemize
+entourage
+\end_layout
+
 \begin_layout Subsection*
 Convergence to points
 \end_layout
 
 \begin_layout Standard
-The section below uses a lot of hot air to construct a perfectly trivial
- example.
- I'm not sure why I bothered.
+The section below uses a lot of hot air to construct examples of infinite
+ unions.
+ These are examples of elements belonging to the boldface level 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ of the Borel hierarchy.
 \end_layout
 
 \begin_layout Standard
@@ -2728,7 +2736,15 @@ and define
 \begin_inset Formula $\mbox{ext}:\mathbb{S}\to\Delta$
 \end_inset
 
- as the extension of any finite string by 
+ with 
+\begin_inset Formula $\mbox{ext}:s\mapsto s\overline{*}$
+\end_inset
+
+ as the extension of any finite string 
+\begin_inset Formula $s$
+\end_inset
+
+ by 
 \begin_inset Formula $\overline{*}$
 \end_inset
 
@@ -2744,8 +2760,16 @@ don't care
 \begin_inset Quotes erd
 \end_inset
 
- wildcard marker.
- It maps finite strings to open sets.
+ wildcard bit marker.
+ The ext function 
+\begin_inset Quotes eld
+\end_inset
+
+extends
+\begin_inset Quotes erd
+\end_inset
+
+ finite strings to open sets.
  With the convetional measure 
 \begin_inset Formula $\mu$
 \end_inset
@@ -2763,17 +2787,30 @@ don't care
 \end_layout
 
 \begin_layout Standard
-Write 
-\begin_inset Formula $z_{k}=0^{k}1$
+Define a sequence of open sets 
+\begin_inset Formula $o_{k}=0^{k}1\overline{*}$
 \end_inset
 
- so that 
-\begin_inset Formula $Z=\bigcup_{k=0}^{\infty}z_{k}$
+ that are each disjoint from 
+\begin_inset Formula $\overline{0}$
 \end_inset
 
 .
- Note that 
-\begin_inset Formula $z_{k}\cap z_{j}=\varnothing$
+ It is clear that 
+\begin_inset Formula $o_{k}\cap\overline{0}=\varnothing$
+\end_inset
+
+ because the 
+\begin_inset Formula $\left(k+1\right)$
+\end_inset
+
+'th bit differs, for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ These are also pairwise disjoint, so that that 
+\begin_inset Formula $o_{k}\cap o_{j}=\varnothing$
 \end_inset
 
  whenver 
@@ -2781,60 +2818,181 @@ Write
 \end_inset
 
 .
- Note that 
-\begin_inset Formula $\mu\left(z_{k}\right)=2^{-\left(k+1\right)}$
+ Consider finally the infinite union of all of these sets, 
+\begin_inset Formula $Z=\bigcup_{k=0}^{\infty}o_{k}$
 \end_inset
 
 .
- Thus we conclude 
+ By construction, 
+\begin_inset Formula $Z\cap\overline{0}=\varnothing$
+\end_inset
+
+.
+ Also by construction, any other point 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+ with 
+\begin_inset Formula $p\ne\overline{0}$
+\end_inset
+
+ is also 
+\begin_inset Formula $p\in Z$
+\end_inset
+
+.
+ This is easily seen by looking at the first 
+\begin_inset Formula $k$
+\end_inset
+
+ letters 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $p.$
+\end_inset
+
+ If 
+\begin_inset Formula $p_{1}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $p\in o_{0}$
+\end_inset
+
+; otherwise, 
+\begin_inset Formula $p_{1}=0$
+\end_inset
+
+ and perhaps 
+\begin_inset Formula $p_{2}=1$
+\end_inset
+
+, which would place 
+\begin_inset Formula $p\in o_{1}$
+\end_inset
+
+.
+ Extending, if 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k+1}=0^{k}1$
+\end_inset
+
+ then 
+\begin_inset Formula $p\in o_{k}$
+\end_inset
+
+.
+ From this, conclude that 
+\begin_inset Formula $\Delta=Z\cup\overline{0}$
+\end_inset
+
+ or equivalently, as set subtraction, 
+\begin_inset Formula $Z=\Delta\backslash\overline{0}$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $Z$
+\end_inset
+
+ is open, being the countable union of open sets, and thus is of rank one
+ in the boldface Borel hierarchy: 
+\begin_inset Formula $Z\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ The complement of 
+\begin_inset Formula $Z$
+\end_inset
+
+ is 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ and so 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ is a closed set, belonging as 
+\begin_inset Formula $\overline{0}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This result can be confirmed by looking at the canonical measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ This gives that 
+\begin_inset Formula $\mu\left(o_{k}\right)=2^{-\left(k+1\right)}$
+\end_inset
+
+.
+ From this, 
 \begin_inset Formula 
 \[
-\mu\left(Z\right)=\sum_{k=0}^{\infty}\mu\left(z_{k}\right)=\sum_{k=0}^{\infty}2^{-\left(k+1\right)}=1
+\mu\left(Z\right)=\sum_{k=0}^{\infty}\mu\left(o_{k}\right)=\sum_{k=0}^{\infty}2^{-\left(k+1\right)}=1
 \]
 
 \end_inset
 
-Well, this identifies 
-\begin_inset Formula $Z=\Delta\backslash\overline{0}$
-\end_inset
-
-, that is, all of Cantor space, minus one point.
- 
-\end_layout
-
-\begin_layout Standard
-The construction extends for any 
-\begin_inset Formula $p\in\Delta$
+and so (of course) 
+\begin_inset Formula $\mu\left(\overline{0}\right)=0$
 \end_inset
 
 .
- Define a sequence of open neighborhoods 
+ No surprise; a lot of hot air to say something trivial.
+ The above is almost entirely an exercise in defining unambiguous notation,
+ and almost nothing more.
+\end_layout
+
+\begin_layout Standard
+The same construction can be generalized to any 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+ to obtain an open set 
+\begin_inset Formula $P=\Delta\backslash p$
+\end_inset
+
+.
+ This is built up as 
+\begin_inset Formula $P=\bigcup_{k=0}^{\infty}P_{k}$
+\end_inset
+
+ the infinite union of pair-wise disjoint open sets 
 \begin_inset Formula $P_{k}$
 \end_inset
 
- that converge to 
-\begin_inset Formula $p.$
+.
+ Each open set 
+\begin_inset Formula $P_{k}=\mbox{ext}\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}$
 \end_inset
 
- These are built built from finite strings 
-\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+ is defined to be disjoint from 
+\begin_inset Formula $p$
 \end_inset
 
-, where 
-\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+.
+ The notation here is that 
+\begin_inset Formula $\check{p}_{k}=\neg p_{k}$
 \end_inset
 
- is defined as the first 
+ is the negation of the 
 \begin_inset Formula $k$
 \end_inset
 
- letters in the infinite string 
+'th bit in the string 
 \begin_inset Formula $p$
 \end_inset
 
 .
  The corresponding tree is then 
-\begin_inset Formula $P=\bigcup_{k=0}^{\infty}\mbox{ext}\left\lfloor p\right\rfloor _{k}$
+\begin_inset Formula $P=\bigcup_{k=0}^{\infty}P_{k}$
 \end_inset
 
 .
@@ -2843,6 +3001,132 @@ The construction extends for any
 \end_inset
 
 .
+ Just as before, one can verify that 
+\begin_inset Formula $p\cap P_{k}=\varnothing$
+\end_inset
+
+, that 
+\begin_inset Formula $P_{k}\cap P_{j}=\varnothing$
+\end_inset
+
+ when 
+\begin_inset Formula $j\ne k$
+\end_inset
+
+, and that all other points 
+\begin_inset Formula $q\in\Delta,q\ne p$
+\end_inset
+
+ are 
+\begin_inset Formula $q\in P_{k}$
+\end_inset
+
+ for some 
+\begin_inset Formula $k$
+\end_inset
+
+, obtained by examining the prefixes of 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ The measure works likewise: 
+\begin_inset Formula $\mu\left(P_{k}\right)=2^{-\left(k+1\right)}$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $P\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $p\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Several curious questions follow.
+ Let 
+\begin_inset Formula $\mathcal{P}_{n}=\bigcup_{k=0}^{n}P_{k}$
+\end_inset
+
+ be an intersection of a finite number of open sets.
+ By defintion, 
+\begin_inset Formula $\mathcal{P}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Can we conclude that 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}$
+\end_inset
+
+ is closed, and thus an element of 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+? Lets give it a whirl.
+ Let 
+\begin_inset Formula $\mathcal{Q}_{n}=\bigcup_{k=n+1}^{\infty}P_{k}$
+\end_inset
+
+.
+ Its a countable union of open sets, so 
+\begin_inset Formula $\mathcal{Q}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ From before, so 
+\begin_inset Formula $P=\mathcal{P}_{n}\cup\mathcal{Q}_{n}$
+\end_inset
+
+.
+ One concludes that 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup\mathcal{Q}_{n}\cup p$
+\end_inset
+
+ and so 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}=\mathcal{Q}_{n}\cup p$
+\end_inset
+
+.
+ But 
+\begin_inset Formula $p\notin\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ which leaves open the status of 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Reasoning in the same way, 
+\begin_inset Formula $\Delta\backslash P_{k}=p\cup\check{P}_{k}$
+\end_inset
+
+, where 
+\begin_inset Formula $\check{P}_{k}=\mathcal{P}_{k-1}\cup\mathcal{Q}_{k}$
+\end_inset
+
+.
+ The point here is that there was no need to use set intersection to build
+ any of these sets.
+\end_layout
+
+\begin_layout Standard
+The construction appears to extend to any countable collection of points
+\end_layout
+
+\begin_layout Standard
+The construction works exactly the same way for Baire space, giving the
+ same results (except that the measure is done differently.)
+\end_layout
+
+\begin_layout Standard
+So its 
 \end_layout
 
 \begin_layout Subsection*
