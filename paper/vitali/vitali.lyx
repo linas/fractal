@@ -2644,8 +2644,17 @@ Some factoids:
 \end_layout
 
 \begin_layout Itemize
-The base of topology is given by finite strings, followed by don't-care
- markers.
+The base of the standard topology is given by finite strings, followed by
+ don't-care markers.
+ 
+\end_layout
+
+\begin_layout Itemize
+The base is countable, because the set of finite strings is countable.
+\end_layout
+
+\begin_layout Itemize
+Both spaces are second-countable, since they both have a countable base.
 \end_layout
 
 \begin_layout Itemize
@@ -2660,24 +2669,34 @@ Countable unions of open sets are open.
 \end_layout
 
 \begin_layout Itemize
-net filter The sequence of open
+Every point has a countable open filter.
+ That filter is an ultrafilter; it converges uniquely to that point.
 \end_layout
 
 \begin_layout Itemize
-Both spaces are second-countable, meaning that they both have a topology
- with a countable base.
+Entourage ...
 \end_layout
 
-\begin_layout Itemize
-Both have 
-\end_layout
+\begin_layout Standard
+The conventional standard topology of the Cantor space is described in the
+ next section.
+ Some examples of open sets belonging to the boldface Borel hierarchy pointclass
+ 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
 
-\begin_layout Itemize
-ultrafilters???
-\end_layout
+ are provided.
+ Many of the examples can be seen to be clopen.
+ Individual points 
+\begin_inset Formula $p\in2^{\omega}$
+\end_inset
 
-\begin_layout Itemize
-entourage
+ belong to boldface 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection*
@@ -2708,7 +2727,7 @@ gut feel
 
  for the shape of things, though.
  All of the work is done with the Cantor space 
-\begin_inset Formula $\Delta$
+\begin_inset Formula $\Delta=2^{\omega}$
 \end_inset
 
 , but each of the constructions would seem to have an analogous form in
@@ -2721,6 +2740,25 @@ gut feel
  its the other.
  Well, that, and the canonical measure on Baire space is trickier.
  We stick to Cantor.
+\end_layout
+
+\begin_layout Standard
+The choice of notation 
+\begin_inset Formula $\Delta=2^{\omega}$
+\end_inset
+
+ is perhaps unfortunate, as it risks confusion with the boldface pointclass
+ 
+\begin_inset Formula $\mathbf{\Delta}_{1}^{0}$
+\end_inset
+
+.
+ Fortunately, 
+\begin_inset Formula $\mathbf{\Delta}_{1}^{0}$
+\end_inset
+
+ is almost never mentioned.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3476,6 +3514,31 @@ Returning to
  How odd.
 \end_layout
 
+\begin_layout Standard
+At any rate, some of the lowest rank of the Borel hierarchy can be filled
+ in: 
+\begin_inset Formula $\mathcal{Q}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ while both 
+\begin_inset Formula $O_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{P}_{n}$
+\end_inset
+
+ are both in 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ and also in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+; they are clopen sets.
+\end_layout
+
 \begin_layout Subsubsection*
 Complements of the base
 \end_layout
@@ -3495,11 +3558,82 @@ One may continue down this path just a bit farther, for the sake of completeness
 \begin_inset Formula $\Delta\backslash P_{k}=p\cup\mathcal{P}_{k-1}\cup\mathcal{Q}_{k}=\mathcal{P}_{k-1}\cup O_{k}$
 \end_inset
 
- and so again, 
-\begin_inset Formula $\Delta\backslash P_{k}\in\mathbf{\Sigma}_{1}^{0}$
+.
+ Although this 
+\begin_inset Quotes eld
+\end_inset
+
+looks like
+\begin_inset Quotes erd
+\end_inset
+
+ a union with a closed set 
+\begin_inset Formula $p$
+\end_inset
+
+, it is not; the identity 
+\begin_inset Formula $O_{n}=\mathcal{Q}_{n}\cup p$
+\end_inset
+
+ was established above, without appeal to the closed nationer of 
+\begin_inset Formula $p$
 \end_inset
 
 .
+ So again, 
+\begin_inset Formula $\Delta\backslash P_{k}=\mathcal{P}_{k-1}\cup O_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+, as its a countable union.
+ But 
+\begin_inset Formula $P_{k}=\Delta\backslash\left(\mathcal{P}_{k-1}\cup O_{k}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $P_{k}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ It is clopen.
+\end_layout
+
+\begin_layout Standard
+This leads to a waterfall of conclusions: since 
+\begin_inset Formula $\mathcal{Q}_{n}$
+\end_inset
+
+ is a countable union of 
+\begin_inset Formula $P_{k}$
+\end_inset
+
+, this shows that 
+\begin_inset Formula $\mathcal{Q}_{n}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ as well.
+ Continuing in this vein, 
+\begin_inset Formula $P$
+\end_inset
+
+ was built as a countable union of 
+\begin_inset Formula $P_{k}$
+\end_inset
+
+ as well; thus 
+\begin_inset Formula $P\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ But then, 
+\begin_inset Formula $P=\Delta\backslash p$
+\end_inset
+
+ and so this forces 
+\begin_inset Formula $p\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Apparently, even points are clopen!
 \end_layout
 
 \begin_layout Subsubsection*
@@ -3737,6 +3871,7 @@ and so indeed,
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3802,27 +3937,170 @@ What was the point of this lengthly and tedious exposition? Well, lets see:
 \end_layout
 
 \begin_layout Itemize
-The base for the topology was sufficient to build a neighborhood filter
- for every point.
+The base for the topology was made explicit; it consists of the sets 
+\begin_inset Formula $\mbox{ext}s=s\overline{*}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+.
+ It is countable, because 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ is countable.
+ 
 \end_layout
 
 \begin_layout Itemize
-Many set differences are open sets.
+The base for the topology was sufficient to build a neighborhood filter
+ 
+\begin_inset Formula $\left\{ O_{k}^{a}\right\} $
+\end_inset
+
+ for every point 
+\begin_inset Formula $a\in\Delta$
+\end_inset
+
+.
+ The members of the filter are 
+\begin_inset Formula $O_{k}^{a}=\mbox{ext}\left\lfloor a\right\rfloor _{k+1}=\left\lfloor a\right\rfloor _{k+1}\overline{*}$
+\end_inset
+
+ and there is a countable number of them: every point has a countable base.
+\end_layout
+
+\begin_layout Itemize
+There are multiple examples of pairs of open sets 
+\begin_inset Formula $A,B$
+\end_inset
+
+ constructed so that they are complements, with 
+\begin_inset Formula $A\cap B=\varnothing$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cup B=\Delta$
+\end_inset
+
+, and both 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ were explicitly constructed as countable unions, so that 
+\begin_inset Formula $A\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $B\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Clearly, these are clopen sets.
+ 
 \end_layout
 
 \begin_layout Itemize
 Set intersection was not needed to build any of the examples.
 \end_layout
 
-\begin_layout Standard
-Can we generalize the construction of complements of single points to a
- countable collection of points? Sure ...
- details ...
- the construction appears to extend to any countable collection of points
+\begin_layout Itemize
+Individual points 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+ belong to the 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ pointclass.
+\end_layout
+
+\begin_layout Itemize
+There was no obvious opportunity to build anything larger than single points
+ that might belong to 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ However, the lack of such an opporuntiy is not a proof; there was no attempt
+ at exhausting all possible cases; writing the above was already exhausting.
+ 
 \end_layout
 
 \begin_layout Standard
-So its 
+Not much particularly intersing is learned here, other than many open sets
+ can be demonstrated in a very explicit fashion.
+\end_layout
+
+\begin_layout Subsection*
+Pointclass 
+\begin_inset Formula $\mathbf{\Sigma}_{2}^{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The pointclass 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ is defined with set complementation: 
+\begin_inset Formula $A\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $2^{\omega}\backslash A\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ The pointclass 
+\begin_inset Formula $\mathbf{\Sigma}_{2}^{0}$
+\end_inset
+
+ is expressed as consisting of countable unions of the members of 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ The explict examples given above were the individual points 
+\begin_inset Formula $a\in2^{\omega}$
+\end_inset
+
+, as well as 
+\begin_inset Formula $P_{n}^{a}$
+\end_inset
+
+, 
+\begin_inset Formula $O_{n}^{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{P}_{n}^{a}$
+\end_inset
+
+ for each 
+\begin_inset Formula $a\in2^{\omega}$
+\end_inset
+
+.
+ Another notable set includes 
+\begin_inset Formula $2^{\omega}\backslash\mathcal{Q}_{k}^{a}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What interesting things can we build from countable unions of these? Not
+ sure what I can say here.
 \end_layout
 
 \begin_layout Subsection*
