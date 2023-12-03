@@ -2723,6 +2723,16 @@ gut feel
  We stick to Cantor.
 \end_layout
 
+\begin_layout Standard
+Curiously, for a set of conclusions that were meant to be shallow and trite
+ (that are shallow and trite), the avalanche of algebra below is surprising.
+ Before I started writing, I assumed the section below would be one, maybe
+ two short paragraphs.
+ Yet, by trying to be clear and unambiguous, an explosion resulted.
+ Strange.
+ 
+\end_layout
+
 \begin_layout Subsubsection*
 The base for the topology
 \end_layout
@@ -2753,7 +2763,7 @@ and define
 \end_inset
 
  with 
-\begin_inset Formula $*=\left\{ 0\right\} \cup\left\{ 1\right\} $
+\begin_inset Formula $*=\left\{ 0\right\} \cup\left\{ 1\right\} =\left\{ 0,1\right\} $
 \end_inset
 
  being the 
@@ -3167,7 +3177,7 @@ Several curious questions follow.
 \end_inset
 
 .
- From before, so 
+ From before, deduce 
 \begin_inset Formula $P=\mathcal{P}_{n}\cup\mathcal{Q}_{n}$
 \end_inset
 
@@ -3185,12 +3195,12 @@ Several curious questions follow.
 \begin_inset Formula $p\notin\mathbf{\Sigma}_{1}^{0}$
 \end_inset
 
- which leaves open the status of 
+ which leaves the status of 
 \begin_inset Formula $\Delta\backslash\mathcal{P}_{n}$
 \end_inset
 
-.
- This is resolved shortly below; yes, this difference is in 
+ unclear.
+ This is resolved shortly below; yes, it will be in 
 \begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
 \end_inset
 
@@ -3527,32 +3537,97 @@ The above notational gymnastics provide just enough limberness to construct
 
 ; likewise, all other symbols defined earlier can be similarly superscripted.
  As before, there is some integer 
-\begin_inset Formula $k$
+\begin_inset Formula $n$
 \end_inset
 
  such that 
-\begin_inset Formula $\left\lfloor a\right\rfloor _{k}=\left\lfloor b\right\rfloor _{k}$
+\begin_inset Formula $\left\lfloor a\right\rfloor _{n}=\left\lfloor b\right\rfloor _{n}$
 \end_inset
 
  but the 
-\begin_inset Formula $k$
+\begin_inset Formula $\left(n+1\right)$
 \end_inset
 
 'th digit does not match: 
-\begin_inset Formula $\left\lfloor a\right\rfloor _{k+1}\ne\left\lfloor b\right\rfloor _{k+1}$
+\begin_inset Formula $\left\lfloor a\right\rfloor _{n+1}\ne\left\lfloor b\right\rfloor _{n+1}$
 \end_inset
 
 .
  This implies that not only is 
-\begin_inset Formula $a\notin O_{n}^{b}$
+\begin_inset Formula $a\notin O_{k}^{b}$
 \end_inset
 
  for all 
-\begin_inset Formula $n\ge k$
+\begin_inset Formula $k\ge n$
 \end_inset
 
 , but also that that 
+\begin_inset Formula $O_{k}^{a}\cap O_{k}^{b}=\varnothing$
+\end_inset
+
+.
+ As a special case, 
 \begin_inset Formula $O_{n}^{a}\cap O_{n}^{b}=\varnothing$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Consider next the set 
+\begin_inset Formula $P_{m}^{a}$
+\end_inset
+
+ for 
+\begin_inset Formula $m\le n$
+\end_inset
+
+.
+ By definition, 
+\begin_inset Formula $a\notin P_{m}^{a}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ share a common prefix for 
+\begin_inset Formula $m<n$
+\end_inset
+
+, one has that 
+\begin_inset Formula $P_{m}^{a}=P_{m}^{b}$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $b\notin P_{m}^{a}$
+\end_inset
+
+.
+ As before, 
+\begin_inset Formula $P_{m}^{a}\cap P_{j}^{a}$
+\end_inset
+
+ for any 
+\begin_inset Formula $j\ne m$
+\end_inset
+
+.
+ This breaks down at 
+\begin_inset Formula $n$
+\end_inset
+
+ so that 
+\begin_inset Formula $a\in P_{n}^{b}$
+\end_inset
+
+ and vice-versa, 
+\begin_inset Formula $b\in P_{n}^{a}$
 \end_inset
 
 .
@@ -3560,7 +3635,162 @@ The above notational gymnastics provide just enough limberness to construct
 \end_layout
 
 \begin_layout Standard
-epsilon-net
+Employing the notation from before, 
+\begin_inset Formula $\mathcal{P}_{n-1}^{a}=\mathcal{P}_{n-1}^{b}=\bigcup_{m=0}^{n-1}P_{m}^{a}$
+\end_inset
+
+ has the property that 
+\begin_inset Formula $a\notin\mathcal{P}_{n-1}^{a}$
+\end_inset
+
+ (obviously, as this is true by definition for any 
+\begin_inset Formula $n$
+\end_inset
+
+) but also that 
+\begin_inset Formula $b\notin\mathcal{P}_{n-1}^{a}$
+\end_inset
+
+, because 
+\begin_inset Formula $n$
+\end_inset
+
+ was chosen as the index beyond which the sequences diverge.
+\end_layout
+
+\begin_layout Standard
+After the point where the bit-sequences diverge, the open covers diverge
+ as well, and so 
+\begin_inset Formula $a\notin P_{k}^{b}$
+\end_inset
+
+ and 
+\begin_inset Formula $b\notin P_{k}^{a}$
+\end_inset
+
+ holds again, for all 
+\begin_inset Formula $k>n$
+\end_inset
+
+.
+ Working with the excluded regions is safe.
+ Reusing notation from before, 
+\begin_inset Formula $\mathcal{Q}_{n}^{a}=\bigcup_{k=n+1}^{\infty}P_{k}^{a}$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $\mathcal{Q}_{n}^{b}$
+\end_inset
+
+.
+ By definition, 
+\begin_inset Formula $a\notin\mathcal{Q}_{n}^{a}$
+\end_inset
+
+ (holds for any 
+\begin_inset Formula $n)$
+\end_inset
+
+ but also 
+\begin_inset Formula $b\notin\mathcal{Q}_{n}^{a}$
+\end_inset
+
+, since 
+\begin_inset Formula $n$
+\end_inset
+
+ was selected as the location after which the sequences diverge.
+ To conclude, the set 
+\begin_inset Formula $P^{a,b}=\mathcal{P}_{n-1}^{a}\cup\mathcal{Q}_{n}^{a}\cup\mathcal{Q}_{n}^{b}$
+\end_inset
+
+ has the property that 
+\begin_inset Formula $a\notin P^{a,b}$
+\end_inset
+
+ and also 
+\begin_inset Formula $b\notin P^{a,b}$
+\end_inset
+
+ but that 
+\begin_inset Formula 
+\begin{align*}
+a\cup b\cup P^{a,b}= & a\cup b\cup\mathcal{P}_{n-1}^{a}\cup\mathcal{Q}_{n}^{a}\cup\mathcal{Q}_{n}^{b}\\
+= & \mathcal{P}_{n-1}^{a}\cup O_{n}^{a}\cup O_{n}^{b}\\
+= & \mathcal{P}_{n-1}^{a}\cup O_{n-1}^{a}\\
+= & \Delta
+\end{align*}
+
+\end_inset
+
+and so indeed, 
+\begin_inset Formula $P^{a,b}=\Delta\backslash\left(a\cup b\right)$
+\end_inset
+
+ as desired.
+ Since 
+\begin_inset Formula $P^{a,b}$
+\end_inset
+
+ was formed entirely from countable unions of open sets, 
+\begin_inset Formula $P^{a,b}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The third line above made use of the identity 
+\begin_inset Formula $O_{n}^{a}\cup O_{n}^{b}=O_{n-1}^{a}=O_{n-1}^{b}$
+\end_inset
+
+.
+ This follows, as the two downard branches join at 
+\begin_inset Formula $n$
+\end_inset
+
+, so, as before 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{n}=\left\lfloor b\right\rfloor _{n}$
+\end_inset
+
+ while 
+\begin_inset Formula $a_{n+1}\ne b_{n+1}=\check{a}_{n+1}$
+\end_inset
+
+.
+ At this join, 
+\begin_inset Formula $a_{n+1}\cup\check{a}_{n+1}=\left\{ 0,1\right\} =*$
+\end_inset
+
+ and so the join is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+O_{n}^{a}\cup O_{n}^{b}= & \left(\left\lfloor a\right\rfloor _{n+1}\overline{*}\right)\cup\left(\left\lfloor b\right\rfloor _{n+1}\overline{*}\right)\\
+= & \left(\left\lfloor a\right\rfloor _{n}a_{n+1}\overline{*}\right)\cup\left(\left\lfloor b\right\rfloor _{n}b_{n+1}\overline{*}\right)\\
+= & \left(\left\lfloor a\right\rfloor _{n}a_{n+1}\overline{*}\right)\cup\left(\left\lfloor a\right\rfloor _{n}\check{a}_{n+1}\overline{*}\right)\\
+= & \left\lfloor a\right\rfloor _{n}\left(a_{n+1}\cup\check{a}_{n+1}\right)\overline{*}\\
+= & \left\lfloor a\right\rfloor _{n}\overline{*}\\
+= & O_{n-1}^{a}=O_{n-1}^{b}
+\end{align*}
+
+\end_inset
+
+Three or more points can be handled in a similar manner; one just has to
+ be careful to track the branch-points correctly.
+ For a finite number of points, the branching clearly terminates at some
+ point.
+ So, for a finite set 
+\begin_inset Formula $\left\{ r\right\} $
+\end_inset
+
+ of discrete points, 
+\begin_inset Formula $P^{\left\{ r\right\} }\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ while the status for a countably infinite number of points remains unclear.
 \end_layout
 
 \begin_layout Subsubsection*
