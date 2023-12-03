@@ -3506,12 +3506,57 @@ Returning to
 \end_inset
 
 .
- Comparing to the earlier result, it seems that 
-\begin_inset Formula $O_{n}=\mathcal{Q}_{n}\cup p$
+ 
+\end_layout
+
+\begin_layout Standard
+The previous section noted that 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup\mathcal{Q}_{n}\cup p$
+\end_inset
+
+ while now we have that 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup O_{n}$
 \end_inset
 
 .
- How odd.
+ Since both 
+\begin_inset Formula $\mathcal{P}_{n}\cap O_{n}=\varnothing$
+\end_inset
+
+ and also 
+\begin_inset Formula $\mathcal{P}_{n}\cap\mathcal{Q}_{n}=\varnothing$
+\end_inset
+
+, it seems safe to conclude that 
+\begin_inset Formula $O_{n}=\mathcal{Q}_{n}\cup p$
+\end_inset
+
+, and that this conclusion can be reached without having to take any actual
+ set intersections, without taking any differences, and without actually
+ computing the union of a point.
+ From what I can tell, this conclusion is reached entirely via countable
+ unions.
+ I suppose it all would have been clearer, if we were even more pedantic,
+ and clearly stated that the set difference symbol 
+\begin_inset Formula $\backslash$
+\end_inset
+
+ is used above as a notational device, as a short-hand symbol for some equivalen
+ce and membership relations, rather than as an actual, concrete difference.
+ Likewise, the intersection symbol 
+\begin_inset Formula $\cap$
+\end_inset
+
+ is also being used as a notational device for a (countable) collection
+ of predicates, rather than as an actual, concrete intersection operation.
+ Unfortunately, most of this is not very clear, as we've never actually
+ used predicate-logic expressions to construct any of these sets, nor have
+ we taken the effort to examine precisely which set-theory axioms were deployed
+ at each step.
+ So all this is quite cavalier with the constructions; this entire section
+ could be made far more verbose and daunting, by re-writing it to explicitly
+ track predicates from first-order logic and from set theory.
+ So it goes.
 \end_layout
 
 \begin_layout Standard
@@ -3537,6 +3582,35 @@ At any rate, some of the lowest rank of the Borel hierarchy can be filled
 \end_inset
 
 ; they are clopen sets.
+\end_layout
+
+\begin_layout Standard
+From this, deduce that every set in the base of the topology is in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ Specifically, let 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+ be a finite-length string, of length 
+\begin_inset Formula $k+1$
+\end_inset
+
+.
+ Then consider 
+\begin_inset Formula $O_{k}=\mbox{ext}s=s\overline{*}$
+\end_inset
+
+.
+ This is both clearly a member of the base of the topology, and also a member
+ of any neighborhood filter of points starting with the string 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsubsection*
@@ -3597,8 +3671,90 @@ looks like
  It is clopen.
 \end_layout
 
+\begin_layout Standard
+So far, it seems that perhaps 
+\begin_inset Formula $\mathcal{Q}_{k}\notin\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ Can this be proved? Yes.
+ From the above, we have 
+\begin_inset Formula $\Delta=p\cup\mathcal{P}_{k}\cup\mathcal{Q}_{k}$
+\end_inset
+
+ and so 
+\begin_inset Formula $\Delta\backslash\left(\mathcal{P}_{k}\cup\mathcal{Q}_{k}\right)=\left(\Delta\backslash\mathcal{P}_{k}\right)\cap\left(\Delta\backslash Q_{k}\right)=p$
+\end_inset
+
+.
+ Now, we've already seen that 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{k}=O_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Proof by contradiction: Assume 
+\begin_inset Formula $\mathcal{Q}_{k}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ This would imply that 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+, which would imply that 
+\begin_inset Formula $p\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ But that cannot be true; points are not unions of open sets, the assumption
+ was wrong, and 
+\begin_inset Formula $\mathcal{Q}_{k}\notin\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ From this, one can immediately conclude that 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\nsubseteq\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This is not an elegant proof, because it invokes intersection, for the first
+ time ever.
+ We haven't yet worked out what the properties of intersection are (we have
+ to assume it distributes over complementation; that's 
+\begin_inset Quotes eld
+\end_inset
+
+normal
+\begin_inset Quotes erd
+\end_inset
+
+, but weird in the current context.) Finally, we are requested to make an
+ awkward deduction from it.
+ So, an ugly proof, but adequate for present purposes.
+\end_layout
+
+\begin_layout Standard
+From the complement 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+, we can deduce that the 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}$
+\end_inset
+
+ are examples of closed sets having a finite measure.
+ They are the result of a one point compactification: 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}=p\cup\mathcal{P}_{k}$
+\end_inset
+
+.
+ 
+\end_layout
+
 \begin_layout Subsubsection*
-Complements of a finite number of points
+Complements of two points
 \end_layout
 
 \begin_layout Standard
@@ -3678,11 +3834,6 @@ Consider next the set
 \end_inset
 
 .
- By definition, 
-\begin_inset Formula $a\notin P_{m}^{a}$
-\end_inset
-
-.
  Since 
 \begin_inset Formula $a$
 \end_inset
@@ -3692,24 +3843,24 @@ Consider next the set
 \end_inset
 
  share a common prefix for 
-\begin_inset Formula $m<n$
+\begin_inset Formula $m\le n$
 \end_inset
 
 , one has that 
 \begin_inset Formula $P_{m}^{a}=P_{m}^{b}$
 \end_inset
 
- and likewise 
-\begin_inset Formula $b\notin P_{m}^{a}$
-\end_inset
-
 .
- As before, 
-\begin_inset Formula $P_{m}^{a}\cap P_{j}^{a}$
+ Restricting further to 
+\begin_inset Formula $m<n$
 \end_inset
 
- for any 
-\begin_inset Formula $j\ne m$
+, one has, by definition, 
+\begin_inset Formula $a\notin P_{m}^{a}$
+\end_inset
+
+, but also that 
+\begin_inset Formula $b\notin P_{m}^{a}$
 \end_inset
 
 .
@@ -3717,7 +3868,7 @@ Consider next the set
 \begin_inset Formula $n$
 \end_inset
 
- so that 
+, so that 
 \begin_inset Formula $a\in P_{n}^{b}$
 \end_inset
 
@@ -3874,19 +4025,272 @@ O_{n}^{a}\cup O_{n}^{b}= & \left(\left\lfloor a\right\rfloor _{n+1}\overline{*}\
 
 \end_inset
 
-Three or more points can be handled in a similar manner; one just has to
- be careful to track the branch-points correctly.
- For a finite number of points, the branching clearly terminates at some
- point.
- So, for a finite set 
-\begin_inset Formula $\left\{ r\right\} $
+
+\end_layout
+
+\begin_layout Standard
+In analogy to the earlier one point compactification result: 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}^{p}=p\cup\mathcal{P}_{k}^{p}\in\mathbf{\Pi}_{1}^{0}$
 \end_inset
 
- of discrete points, 
-\begin_inset Formula $P^{\left\{ r\right\} }\in\mathbf{\Sigma}_{1}^{0}$
+ (which hold for all 
+\begin_inset Formula $k$
 \end_inset
 
- while the status for a countably infinite number of points remains unclear.
+), one can construct sets that require two points to compactify.
+ In the present case, one has 
+\begin_inset Formula $\Delta\backslash\left(\mathcal{Q}_{k}^{a}\cup\mathcal{Q}_{k}^{b}\right)=a\cup b\cup\mathcal{P}_{k}^{a}\cup\mathcal{P}_{k}^{b}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\ge n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Complements of a countable number of points
+\end_layout
+
+\begin_layout Standard
+For the general case of three or more points, one needs to find and track
+ the branch-points.
+ This can be done by defining a common prefix function.
+ Given two points, define 
+\begin_inset Formula $\mbox{com}:\Delta\times\Delta\to\mathbb{N}$
+\end_inset
+
+ by 
+\begin_inset Formula $\mbox{com}:\left(a,b\right)\mapsto\max\left\{ n:\left\lfloor a\right\rfloor _{n}=\left\lfloor b\right\rfloor _{n}\right\} $
+\end_inset
+
+.
+ This extends naturally to finite products as 
+\begin_inset Formula $\mbox{com}:\Delta^{m}\to\mathbb{N}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\mbox{com}:\left(a_{1},\cdots,a_{m}\right)\mapsto\max\left\{ n:n=\mbox{com}\left(a_{i},a_{j}\right)\forall\,i,j\le m\right\} $
+\end_inset
+
+ and similarly to countable products 
+\begin_inset Formula $\mbox{com}:\Delta^{\omega}\to\mathbb{N}$
+\end_inset
+
+.
+ The function is pair-wise symmetric; the order of the arguments doesn't
+ matter.
+ Thus, it would be more corect to say that com is defined on any countable
+ unordered subset of points 
+\begin_inset Formula $L\subset\Delta$
+\end_inset
+
+, skipping over the mechanics of describing the subset function 
+\begin_inset Formula $\mbox{subset}:\Delta^{\omega}\to\mathcal{P}\left(\Delta\right)$
+\end_inset
+
+ that takes ordered sequences of points, and injectively maps them into
+ points in the powerset 
+\begin_inset Formula $\mathcal{P}\left(\Delta\right)$
+\end_inset
+
+.
+ Curious game.
+ Anyway ...
+ 
+\end_layout
+
+\begin_layout Standard
+Given a countable subset of points 
+\begin_inset Formula $L=\left\{ a_{i}\in\Delta\right\} \subset\Delta$
+\end_inset
+
+, then, if 
+\begin_inset Formula $n=\mbox{com}L<\infty$
+\end_inset
+
+, the construction proceeds along the lines of the two-point case.
+ It is always the case that 
+\begin_inset Formula $\mbox{com}L<\infty$
+\end_inset
+
+ if the set 
+\begin_inset Formula $L$
+\end_inset
+
+ is finite, and so the interesting case arises when 
+\begin_inset Formula $L$
+\end_inset
+
+ is countable.
+\end_layout
+
+\begin_layout Standard
+For this 
+\begin_inset Formula $n$
+\end_inset
+
+, for all 
+\begin_inset Formula $k,m\ge n$
+\end_inset
+
+ and all pairs 
+\begin_inset Formula $a_{i},a_{j}$
+\end_inset
+
+, the open neightborhoods around them are mutually disjoint 
+\begin_inset Formula $O_{k}^{a_{i}}\cap O_{m}^{a_{j}}=\varnothing$
+\end_inset
+
+.
+ The pair-wise disjointness implies the group disjointness 
+\begin_inset Formula 
+\[
+\bigcap_{b\in L}O_{n}^{b}=\varnothing
+\]
+
+\end_inset
+
+That is, the above provides a collection of neighborhoods of each point
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+ that are mutually disjoint.
+ Since 
+\begin_inset Formula $O_{k}^{b}\subset O_{n}^{b}$
+\end_inset
+
+ is a proper subset (of half the size) for all 
+\begin_inset Formula $k>n$
+\end_inset
+
+, the above provides the hard bound.
+\end_layout
+
+\begin_layout Standard
+Removing the basepoint, one concludes that 
+\begin_inset Formula $a\notin\mathcal{Q}_{n}^{b}$
+\end_inset
+
+ for all 
+\begin_inset Formula $a,b\in L$
+\end_inset
+
+.
+ Recalling that the identity 
+\begin_inset Formula $O_{m}^{b}=b\cup\mathcal{Q}_{m}^{b}$
+\end_inset
+
+ holds for all 
+\begin_inset Formula $b$
+\end_inset
+
+ and 
+\begin_inset Formula $m$
+\end_inset
+
+ and that this identity was proven using only a countable number of set
+ unions; no set intersections or differences were required.
+ Write 
+\begin_inset Formula 
+\[
+\mathcal{Q}_{n}^{L}=\bigcup_{b\in L}\mathcal{Q}_{n}^{b}
+\]
+
+\end_inset
+
+and note that we've now demonstrated that 
+\begin_inset Formula $\mathcal{Q}_{n}^{L}\cap L=\varnothing$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxxxxx
+\end_layout
+
+\begin_layout Standard
+Uh, we want to have
+\end_layout
+
+\begin_layout Standard
+Moving in the other direction, consider the exclusion sets 
+\begin_inset Formula $P_{m}^{b}$
+\end_inset
+
+.
+ Since any two points 
+\begin_inset Formula $a,b\in L$
+\end_inset
+
+ share a c
+\end_layout
+
+\begin_layout Standard
+As before, 
+\begin_inset Formula $P_{m}^{a}\cap P_{j}^{a}$
+\end_inset
+
+ for any 
+\begin_inset Formula $j\ne m$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Moving thSince 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ share a common prefix for 
+\begin_inset Formula $m\le n$
+\end_inset
+
+, one has that 
+\begin_inset Formula $P_{m}^{a}=P_{m}^{b}$
+\end_inset
+
+.
+ Restricting further to 
+\begin_inset Formula $m<n$
+\end_inset
+
+, one has, by definition, 
+\begin_inset Formula $a\notin P_{m}^{a}$
+\end_inset
+
+, but also that 
+\begin_inset Formula $b\notin P_{m}^{a}$
+\end_inset
+
+.
+ This breaks down at 
+\begin_inset Formula $n$
+\end_inset
+
+, so that 
+\begin_inset Formula $a\in P_{n}^{b}$
+\end_inset
+
+ and vice-versa, 
+\begin_inset Formula $b\in P_{n}^{a}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This construction fails if 
 \end_layout
 
 \begin_layout Subsubsection*
@@ -3903,7 +4307,7 @@ The base for the topology was made explicit; it consists of the sets
 \end_inset
 
  for all 
-\begin_inset Formula $s\in\mathbb{S}$
+\begin_inset Formula $s\in\mathbb{S}=2^{<\omega}$
 \end_inset
 
 .
@@ -3912,7 +4316,6 @@ The base for the topology was made explicit; it consists of the sets
 \end_inset
 
  is countable.
- 
 \end_layout
 
 \begin_layout Itemize
@@ -3976,32 +4379,82 @@ Set intersection was not needed to build any of the examples in
 \end_layout
 
 \begin_layout Itemize
+The examples all have a very short description length; starting from finite-leng
+th strings, one needs only a handful of additional operations to describe
+ the examples.
+\end_layout
+
+\begin_layout Itemize
 Individual points 
-\begin_inset Formula $p\in\Delta$
+\begin_inset Formula $a\in2^{\omega}$
 \end_inset
 
  belong to the 
 \begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
 \end_inset
 
- pointclass.
-\end_layout
+ pointclass, as do many open sets, including the base of the topology, and
+ the sets 
+\begin_inset Formula $P_{n}^{a}$
+\end_inset
 
-\begin_layout Itemize
-There was no obvious opportunity to build anything larger than single points
- that might belong to 
-\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+, 
+\begin_inset Formula $O_{n}^{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{P}_{n}^{a}$
+\end_inset
+
+ for each 
+\begin_inset Formula $a\in2^{\omega}$
 \end_inset
 
 .
- However, the lack of such an opporuntiy is not a proof; there was no attempt
- at exhausting all possible cases; writing the above was already exhausting.
+ 
+\end_layout
+
+\begin_layout Itemize
+Some of the open sets 
+\begin_inset Formula $\mathcal{Q}_{k}^{a}\notin\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\nsubseteq\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The sets 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}^{a}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ are examples of closed sets that are not points.
+\end_layout
+
+\begin_layout Standard
+Not much particularly intersing is learned here, except perhaps the last
+ two or three bullets.
  
 \end_layout
 
 \begin_layout Standard
-Not much particularly intersing is learned here, other than many open sets
- can be demonstrated in a very explicit fashion.
+The result that 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\nsubseteq\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ is a generic property of uncountable Polish sets.
+ For every ordinal 
+\begin_inset Formula $\alpha<\omega_{1}$
+\end_inset
+
+, it can be shown that 
+\begin_inset Formula $\mathbf{\Sigma}_{\alpha}^{0}\nsubseteq\mathbf{\Pi}_{\alpha}^{0}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection*
@@ -4034,7 +4487,7 @@ The pointclass
 \begin_inset Formula $a\in2^{\omega}$
 \end_inset
 
-, as well as 
+, and also 
 \begin_inset Formula $P_{n}^{a}$
 \end_inset
 
@@ -4051,12 +4504,19 @@ The pointclass
 \end_inset
 
 .
- 
+ Most importantly, the sets 
+\begin_inset Formula $s\overline{*}$
+\end_inset
+
+ from the base of the topology are in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Now comes the fun part.
- The pointclass 
+The pointclass 
 \begin_inset Formula $\mathbf{\Sigma}_{2}^{0}$
 \end_inset
 
@@ -4065,56 +4525,15 @@ Now comes the fun part.
 \end_inset
 
 .
- This leads to a waterfall of conclusions: since 
-\begin_inset Formula $\mathcal{Q}_{n}^{a}$
+ Since the base of the topology is in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
 \end_inset
 
- is a countable union of 
-\begin_inset Formula $P_{k}^{a}$
-\end_inset
-
-, this shows that 
-\begin_inset Formula $\mathcal{Q}_{n}^{a}\in\mathbf{\Sigma}_{2}^{0}$
-\end_inset
-
-.
- Continuing in this vein, 
-\begin_inset Formula $P^{a}$
-\end_inset
-
- was built as a countable union of 
-\begin_inset Formula $P_{k}^{a}$
-\end_inset
-
- as well; thus 
-\begin_inset Formula $P^{a}\in\mathbf{\Sigma}_{2}^{0}$
-\end_inset
-
-.
- Of course, it is trivial that 
-\begin_inset Formula $a\in\mathbf{\Sigma}_{2}^{0}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-What are we missing? We've not shown that 
+, one can immediately conclude that 
 \begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\subset\mathbf{\Sigma}_{2}^{0}$
 \end_inset
 
 .
- This would require showing that 
-\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}=\mathbf{\Pi}_{1}^{0}$
-\end_inset
-
- and although we have hints of this, we're missing a demo of 
-\begin_inset Formula $a\in\mathbf{\Sigma}_{1}^{0}$
-\end_inset
-
- for example.
- What to do? I'm confused.
- It's bedtime, anyway.
 \end_layout
 
 \begin_layout Standard
