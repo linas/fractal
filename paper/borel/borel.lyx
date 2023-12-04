@@ -1,0 +1,3172 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{url} 
+\usepackage{slashed}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "cmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Borel Hierarchy for the Cantor Set
+\end_layout
+
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Date
+1 December 2023
+\end_layout
+
+\begin_layout Abstract
+The Borel hierarchy splits up the creation of a Borel algebra into distinct
+ levels, with each level alternating in the number set unions and set complement
+s applied.
+ This text documents a home-made attempt to write down the lower reaches
+ of that hierarchy.
+ It fails in a most interesting way: it reveals the need to also take first-orde
+r seriously, and perhaps even set theory, when writing down the Borel hierarchy.
+ Originally, this text was meant to be a few short, casual paragraphs in
+ an appendix to the Vitali paper.
+ It exploded as I tried to make things more precise, until it finally collapsed
+ under the realization that even this level of precision is not enough.
+\end_layout
+
+\begin_layout Abstract
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+For many dynamical systems, the class of eventually-periodic orbits appear
+ to be isomorphic(?) / homeom tends to veer into the territory of over-explainin
+g the obvious.
+ My apologies.
+\end_layout
+
+\begin_layout Subsection
+Finite binary strings
+\end_layout
+
+\begin_layout Standard
+To provide a proper anchor for the discussion, a vast ocean of throughly
+ conventional and quite tedious notation will be provided.
+ The next few sections can be safely skimmed or skipped; they don't say
+ anything important, and could probably be moved to an appendix.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\Delta=2^{\omega}=\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ be the Cantor space, represented as the space of all infinite-length binary
+ strings.
+ The goal of this section is to more closely define the space 
+\begin_inset Formula $\mathbb{D}=2^{<\omega}$
+\end_inset
+
+ of all finite-length binary strings.
+ Although the idea is seemingly obvious, the additional notation is needed
+ to avoid later ambiguities.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $b=\left(b_{k}\right)_{k=1}^{\infty}\in\Delta$
+\end_inset
+
+ be an infinite-length string of binary digits 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+.
+ Define the length of such a string as 
+\begin_inset Formula $\mbox{len}\left(b\right)=\left|b\right|=k$
+\end_inset
+
+, where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the largest integer for which 
+\begin_inset Formula $b_{k}=1$
+\end_inset
+
+; write 
+\begin_inset Formula $\left|b\right|=\infty$
+\end_inset
+
+ if there is no such largest integer.
+ A string is finite-length if 
+\begin_inset Formula $k<\infty$
+\end_inset
+
+.
+ Informally, the finite-length strings are exactly the ones for which all
+ digits are zero after a certain point.
+ 
+\end_layout
+
+\begin_layout Standard
+Use this to define the set of finite-length strings as 
+\begin_inset Formula 
+\[
+\mathbb{D}=\left\{ b\in\Delta:\mbox{len}\left(b\right)<\infty\right\} 
+\]
+
+\end_inset
+
+.
+ This defines 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ such that the subset relation 
+\begin_inset Formula $\mathbb{D}\subset\Delta$
+\end_inset
+
+ is made explicit.
+ The strings in 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ still have an infinite number of bits; just that almost all of them are
+ zero.
+ By construction, 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ is countable; the cardinality of 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ is 
+\begin_inset Formula $\aleph_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There are other conceptions of length.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+one-based length
+\begin_inset Quotes erd
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mbox{len}_{1}\left(b\right)=\left|b\right|_{1}=k$
+\end_inset
+
+ where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the largest integer for which 
+\begin_inset Formula $b_{k}=0$
+\end_inset
+
+; else 
+\begin_inset Formula $\left|b\right|_{1}=\infty$
+\end_inset
+
+.
+ Informally, these are the strings which have a finite-length prefix, after
+ which all digits are one.
+ This leads to another set 
+\begin_inset Formula $\mathbb{D}_{1}$
+\end_inset
+
+ defined analogously, as 
+\begin_inset Formula $\mathbb{D}_{1}=\left\{ b\in\Delta:\mbox{len}_{1}\left(b\right)<\infty\right\} $
+\end_inset
+
+.
+ It is convenient to disambiguate all these by adding a subscript 
+\begin_inset Formula $0$
+\end_inset
+
+ to the earlier defintions, so as to write 
+\begin_inset Formula $\left|b\right|=\left|b\right|_{0}=\mbox{len}_{0}\left(b\right)$
+\end_inset
+
+ and also 
+\begin_inset Formula $\mathbb{D}=\mathbb{D}_{0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Of course, 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{D}_{1}$
+\end_inset
+
+ are isomorphic in the obvious, conventional sence.
+ Again, lets belabor this into absurdity.
+ The binary-not provides the conventional complementation map 
+\begin_inset Formula $\neg:\left\{ 0,1\right\} \to\left\{ 0,1\right\} $
+\end_inset
+
+ defined as 
+\begin_inset Formula $\neg:0\mapsto1$
+\end_inset
+
+ and 
+\begin_inset Formula $\neg:1\mapsto0$
+\end_inset
+
+.
+ This extends to an involution 
+\begin_inset Formula $\neg:\Delta\to\Delta$
+\end_inset
+
+ on the Cantor space, by bit-wise extension to the product space.
+ This is in the obvious, conventional manner, as the bit-wise complement:
+ 
+\begin_inset Formula $b\mapsto\neg b=\neg\left(b_{k}\right)_{k=1}^{\infty}=\left(\neg b_{k}\right)_{k=1}^{\infty}$
+\end_inset
+
+.
+ This provides the desired isomorphism 
+\begin_inset Formula $\neg:\mathbb{D}_{0}\to\mathbb{D}_{1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+If one is too lazy to work with an infinite number of digits, one can just
+ drop the trailing repeated digits, and work with the finite prefixes.
+ For this purpose, it is useful to define the set of finite-length prefixes
+ as
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This set is meant to include the empty string 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ For this purpose, the definition can be modified to read 
+\begin_inset Formula $\mathbb{P}_{0}=\{\cdots\}\cup\varepsilon$
+\end_inset
+
+, or alternately, when 
+\begin_inset Formula $N=0$
+\end_inset
+
+, the restriction 
+\begin_inset Formula $p_{N}=1$
+\end_inset
+
+ is not applied.
+ The goal of the empty string is to make sure that 
+\begin_inset Formula $\overline{0}\in\mathbb{D}_{0}$
+\end_inset
+
+ where 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ is the string of all zeros.
+ Similar remarks apply for the 
+\begin_inset Formula $\mathbb{P}_{q}$
+\end_inset
+
+ that follow.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}_{0}=\left\{ p|p=\left(p_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\mbox{ and }p_{N}=1\right\} 
+\]
+
+\end_inset
+
+and likewise 
+\begin_inset Formula $\mathbb{P}_{1}=\neg\mathbb{P}_{0}$
+\end_inset
+
+.
+ For ease of notation, the subscript can be dropped, to write 
+\begin_inset Formula $\mathbb{P}=\mathbb{P}_{0}$
+\end_inset
+
+.
+ These are the 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ finite length strings; one gets 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ from 
+\begin_inset Formula $\mathbb{P}_{0}$
+\end_inset
+
+ by appending an infinite string of zeros.
+ Clearly, 
+\begin_inset Formula $\mathbb{D}_{0}$
+\end_inset
+
+ are isomorphic 
+\begin_inset Formula $\mathbb{P}_{0}$
+\end_inset
+
+, as are 
+\begin_inset Formula $\mathbb{D}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{P}_{1}$
+\end_inset
+
+.
+ We may as well give these isomorphisms a name.
+ Let 
+\begin_inset Formula $\mbox{ext}_{0}:\mathbb{P}_{0}\to\mathbb{D}_{0}$
+\end_inset
+
+ be defined by appending the infinite string of zeros.
+ The inverse operation is 
+\begin_inset Formula $\mbox{trunc}_{0}:\mathbb{D}_{0}\to\mathbb{P}_{0}$
+\end_inset
+
+ which truncates the trailing zeros.
+ It is unambiguous, because 
+\begin_inset Formula $\mbox{len}_{0}$
+\end_inset
+
+ is unambiguous.
+ Likewise, 
+\begin_inset Formula $\mbox{ext}_{1}:\mathbb{P}_{1}\to\mathbb{D}_{1}$
+\end_inset
+
+, this time by appending all-ones, and similarly 
+\begin_inset Formula $\mbox{trunc}_{1}:\mathbb{D}_{1}\to\mathbb{P}_{1}$
+\end_inset
+
+ is defined using 
+\begin_inset Formula $\mbox{len}_{1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+W
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+Meta-commentary
+\end_layout
+
+\begin_layout Standard
+The above struggles with deeper questions that are well-researched and 
+\begin_inset Quotes eld
+\end_inset
+
+well-known
+\begin_inset Quotes erd
+\end_inset
+
+.
+ A quick list:
+\end_layout
+
+\begin_layout Itemize
+The compactness properties of subsets of the Cantor space lead to understandings
+ of the ultrafilter lemma, equivalently the Boolean prime ideal theorem,
+ both of which provide a weaker form of the axiom of choice.
+\end_layout
+
+\begin_layout Itemize
+The sets 
+\begin_inset Formula $E_{q}$
+\end_inset
+
+ can be understood as 
+\begin_inset Quotes eld
+\end_inset
+
+the smallest Borel equivalence relation (smallest, in the order of Borel
+ reducibility) that does not admit a Borel function giving a real-valued
+ complete invariant for the equivalence relation
+\begin_inset Quotes erd
+\end_inset
+
+ (aka the Vitali set).
+ Keywords here are the Glimm–Effros dichotomy, the Luzin–Novikov theorem
+ and the Feldman–Moore theorem
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+Some random related remarks that involve things well-known and quite conventiona
+l.
+ A review
+\emph on
+ ad nauseum
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+The Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ is the space in which the discrete points are infintely-long strings of
+ binary digits.
+ The Baire space 
+\begin_inset Formula $\mathcal{N}=\mathbb{N}^{\omega}=\omega^{\omega}$
+\end_inset
+
+ is the space of infinite-length strings of the natural numbers, where 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ is defined as positive integers (so zero is not included.) A key idea is
+ that these two spaces can be placed in one-to-one correspondence with each
+ other, using a run-length encoding.
+ This is the run-length encoding that corresponds to the Minkowski Question
+ Mark function.
+ Thus, most statements about one will apply to the other space, as well.
+\end_layout
+
+\begin_layout Standard
+This appendix collects a random collection of conventional factoids about
+ these spaces.
+\end_layout
+
+\begin_layout Subsection*
+The discrete topology
+\end_layout
+
+\begin_layout Standard
+Both spaces have a discrete topology, which is extremely fine.
+ This makes both of them into discrete spaces.
+ Some factoids:
+\end_layout
+
+\begin_layout Itemize
+The topological dimension of any discrete space is zero.
+\end_layout
+
+\begin_layout Itemize
+The discrete metric on any discrete space is 
+\begin_inset Formula $\rho\left(x,y\right)=1$
+\end_inset
+
+ if 
+\begin_inset Formula $x\ne y$
+\end_inset
+
+ else 
+\begin_inset Formula $\rho\left(x,y\right)=0$
+\end_inset
+
+ if 
+\begin_inset Formula $x=y$
+\end_inset
+
+.
+ This metric means the points are always isolated.
+\end_layout
+
+\begin_layout Itemize
+With the above metric, the space is uniformly discrete, in that it has a
+ packing radius of 
+\begin_inset Formula $1/2$
+\end_inset
+
+ and a covering radius of 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Spaces with a finite covering radius are said to be 
+\begin_inset Quotes eld
+\end_inset
+
+relatively dense
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The points of any discrete space are always clopen.
+\end_layout
+
+\begin_layout Itemize
+It is not compact, as there is no finite open cover.
+ More vaguely, it has no cluster points.
+\end_layout
+
+\begin_layout Itemize
+It is bounded.
+ It is complete.
+\end_layout
+
+\begin_layout Itemize
+The Baire and Cantor spaces are homeomorphic under the diiscrete topology,
+ which follows from the idea that any two discrete subspaces with the same
+ cardinality are homeomorphic.
+ This is not deep, though, as the open sets are just the points, and the
+ homeomorphism is just a one-to-one correspondence of the points.
+ The run-length encoding of the Minkowski question mark provides the desired
+ one-to-one correspondance.
+\end_layout
+
+\begin_layout Itemize
+Every discrete space is first-countable.
+ But this is a shallow statement: it follows from each point being open,
+ and thus being it's own neighborhood.
+ Alternately, every countable product of first-countable spaces is first-countab
+le.
+\end_layout
+
+\begin_layout Itemize
+Neither space is second-countable.
+ Neither space is seperable.
+\end_layout
+
+\begin_layout Standard
+More can be said, following from the properties of discrete spaces, but
+ this does not obviously lead to any interesting statements.
+\end_layout
+
+\begin_layout Subsection*
+The standard topology
+\end_layout
+
+\begin_layout Standard
+The standard topology on the Cantor and Baire spaces consists of clopen
+ sets.
+ 
+\end_layout
+
+\begin_layout Standard
+Some factoids:
+\end_layout
+
+\begin_layout Itemize
+The base of the standard topology is given by finite strings, followed by
+ don't-care markers.
+ 
+\end_layout
+
+\begin_layout Itemize
+The base is countable, because the set of finite strings is countable.
+\end_layout
+
+\begin_layout Itemize
+Both spaces are second-countable, since they both have a countable base.
+\end_layout
+
+\begin_layout Itemize
+Finite unions of finite strings are finite trees (binary trees, in the case
+ of Cantor space).
+\end_layout
+
+\begin_layout Itemize
+Countable unions of open sets are open.
+ Some curious examples in a subsection below.
+ 
+\end_layout
+
+\begin_layout Itemize
+Every point has a countable open filter.
+ That filter is an ultrafilter; it converges uniquely to that point.
+\end_layout
+
+\begin_layout Itemize
+Entourage ...
+\end_layout
+
+\begin_layout Standard
+The conventional standard topology of the Cantor space is described in the
+ next section.
+ Some examples of open sets belonging to the boldface Borel hierarchy pointclass
+ 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ are provided.
+ Many of the examples can be seen to be clopen.
+ Individual points 
+\begin_inset Formula $p\in2^{\omega}$
+\end_inset
+
+ belong to boldface 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Pointclass 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This section reviews the base for the standard topology on the Cantor space.
+ It also constructs some examples of infinite unions; these are examples
+ of elements belonging to the boldface level 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ of the Borel hierarchy.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Preliminary remarks about logic and set theory
+\end_layout
+
+\begin_layout Standard
+The style of the text below is casual but detailed; it seems to say nothing
+ difficult or important, but uses an awful lot of words to do this.
+ This came as a sruprise to the author, and some explanation is needed.
+ At first, this section was meant to be a few short paragraphs stating the
+ well-known and obvious.
+ A few shallow and trite properties.
+ Attempting to remain precise resulted in an avalanche of algebra.
+ This came as a surprise: it was unexpected and unwanted, and yet, it materializ
+ed.
+ It seemed strange that something so simple, almost trite, could be so wordy.
+ It accidentally, unintentionally revealed a deeper truth.
+\end_layout
+
+\begin_layout Standard
+The lesson of the avalanche is that this homework exercise should have been
+ done far more carefully.
+ Each verbal statement should be replaced by an expression of first-order
+ logic.
+ This would reveal the complexity of the statement.
+ Each such expression could, in turn, be checked against the axioms of set
+ theory, to pin down exactly which axioms are at play.
+ Doing so would change the nature of the below entirely, and make it far,
+ far longer and wordier still.
+\end_layout
+
+\begin_layout Standard
+For example, the text below was written, attempting to avoid set differences
+ and set intersections.
+ In this, it mostly succeeds.
+ Both the set difference symbol 
+\begin_inset Formula $\backslash$
+\end_inset
+
+, and the set-intersection symbol 
+\begin_inset Formula $\cap$
+\end_inset
+
+ do appear in the text, but they usually can be understood to be just labels,
+ simplified stand-ins for earlier statements about certian countale unions.
+ That is, both 
+\begin_inset Formula $\backslash$
+\end_inset
+
+ and 
+\begin_inset Formula $\cap$
+\end_inset
+
+ are to be interpeted as short-hand for wordier expressions, rather than
+ being literal, concrete operations on sets.
+ Unfortunately, this text is a bit vague and sloppy, and so this might not
+ always be clear.
+\end_layout
+
+\begin_layout Standard
+A different issue has to do with minimum description lengths, and hidden
+ axioms and assumptions disguised in verbal text.
+ By not using set intersections, the problem of accidentally using infinite
+ intersections seems to be avoided.
+ Yet, hidden computations lurk in the text.
+ Some of the English-language sentences, are they algorithms? If so, what
+ is their run-time? What is the complexity class? Perhaps the language of
+ effective set theory should have been used?
+\end_layout
+
+\begin_layout Standard
+All this only became clear in hindsight.
+ Thus, this text is unsatisfying: verbose, yet lacking precision and rigor.
+ Verbose, but explaining obvious and trite concepts.
+\end_layout
+
+\begin_layout Subsubsection*
+Cantor space vs.
+ Baire space
+\end_layout
+
+\begin_layout Standard
+All of the work is done with the Cantor space 
+\begin_inset Formula $\Delta=2^{\omega}$
+\end_inset
+
+, but each of the constructions would seem to have an analogous form in
+ Baire space, from what I can tell.
+ The primary complication is that, given a single digits of a sequence in
+ Baire space, it's negation is the rest of the natural numbers, instead
+ of a singleton.
+ The nice thing about Cantor space is that each digit is 0 or 1, both singletons
+, so if its not one.
+ its the other.
+ Well, that, and the canonical measure on Baire space is trickier.
+ We stick to Cantor.
+\end_layout
+
+\begin_layout Standard
+The choice of notation 
+\begin_inset Formula $\Delta=2^{\omega}$
+\end_inset
+
+ is perhaps unfortunate, as it risks confusion with the boldface pointclass
+ 
+\begin_inset Formula $\mathbf{\Delta}_{1}^{0}$
+\end_inset
+
+.
+ Fortunately, 
+\begin_inset Formula $\mathbf{\Delta}_{1}^{0}$
+\end_inset
+
+ is almost never mentioned.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+The base for the topology
+\end_layout
+
+\begin_layout Standard
+Write the set of all finite strings just as before, as
+\begin_inset Formula 
+\[
+\mathbb{S}=\left\{ q\vert q=\left(q_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\right\} \cup\varepsilon
+\]
+
+\end_inset
+
+and define 
+\begin_inset Formula $\mbox{ext}:\mathbb{S}\to\Delta$
+\end_inset
+
+ with 
+\begin_inset Formula $\mbox{ext}:s\mapsto s\overline{*}$
+\end_inset
+
+ as the extension of any finite string 
+\begin_inset Formula $s$
+\end_inset
+
+ by 
+\begin_inset Formula $\overline{*}$
+\end_inset
+
+ with 
+\begin_inset Formula $*=\left\{ 0\right\} \cup\left\{ 1\right\} =\left\{ 0,1\right\} $
+\end_inset
+
+ being the 
+\begin_inset Quotes eld
+\end_inset
+
+don't care
+\begin_inset Quotes erd
+\end_inset
+
+ wildcard bit marker.
+ The ext function 
+\begin_inset Quotes eld
+\end_inset
+
+extends
+\begin_inset Quotes erd
+\end_inset
+
+ finite strings to open sets.
+ This provides the definition of the base of the topology: the base is given
+ precisely by 
+\begin_inset Formula $\mbox{ext}s=s\overline{*}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+.
+ The base is countable, since 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ is countable.
+ The convetional measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on the Cantor space can be defined as 
+\begin_inset Formula $\mu\left(\mbox{ext}s\right)=2^{-\mbox{len}s}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Exclusion of zero
+\end_layout
+
+\begin_layout Standard
+The first example constructs an open set that does not contain the point
+ 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ but does contain every other point in 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ This will be given by the tree 
+\begin_inset Formula $z=\bigcup_{k=0}^{\infty}0^{k}1$
+\end_inset
+
+ where 
+\begin_inset Formula $0^{k}$
+\end_inset
+
+ is a string of 
+\begin_inset Formula $k$
+\end_inset
+
+ zeros in a row.
+ Clearly, 
+\begin_inset Formula $z\subset\mathbb{P}_{0}$
+\end_inset
+
+ with 
+\begin_inset Formula $\text{\ensuremath{\mathbb{P}_{0}}}$
+\end_inset
+
+ as defined earlier.
+ The corresponding extension to the Cantor space is 
+\begin_inset Formula $Z=\mbox{ext}z\subset\Delta$
+\end_inset
+
+.
+ This is articulated in gory detail below; it corresponds to a union of
+ open sets, none of which contain 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ but which do encroach upon it.
+\end_layout
+
+\begin_layout Standard
+Define a sequence of open sets 
+\begin_inset Formula $o_{k}=\mbox{ext}0^{k}1=0^{k}1\overline{*}$
+\end_inset
+
+ that are each disjoint from 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+.
+ It is clear that 
+\begin_inset Formula $o_{k}\cap\overline{0}=\varnothing$
+\end_inset
+
+ because the 
+\begin_inset Formula $\left(k+1\right)$
+\end_inset
+
+'th bit differs, for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ These are also pairwise disjoint, so that that 
+\begin_inset Formula $o_{k}\cap o_{j}=\varnothing$
+\end_inset
+
+ whenver 
+\begin_inset Formula $j\ne k$
+\end_inset
+
+.
+ Consider finally the infinite union of all of these sets, 
+\begin_inset Formula $Z=\bigcup_{k=0}^{\infty}o_{k}$
+\end_inset
+
+.
+ By construction, 
+\begin_inset Formula $Z\cap\overline{0}=\varnothing$
+\end_inset
+
+.
+ Also by construction, any other point 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+ with 
+\begin_inset Formula $p\ne\overline{0}$
+\end_inset
+
+ is also 
+\begin_inset Formula $p\in Z$
+\end_inset
+
+.
+ This is easily seen by looking at the first 
+\begin_inset Formula $k$
+\end_inset
+
+ letters 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $p.$
+\end_inset
+
+ If 
+\begin_inset Formula $p_{1}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $p\in o_{0}$
+\end_inset
+
+; otherwise, 
+\begin_inset Formula $p_{1}=0$
+\end_inset
+
+ and perhaps 
+\begin_inset Formula $p_{2}=1$
+\end_inset
+
+, which would place 
+\begin_inset Formula $p\in o_{1}$
+\end_inset
+
+.
+ Extending, if 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k+1}=0^{k}1$
+\end_inset
+
+ then 
+\begin_inset Formula $p\in o_{k}$
+\end_inset
+
+ (and the converse: if and only if).
+ From this, conclude that 
+\begin_inset Formula $\Delta=Z\cup\overline{0}$
+\end_inset
+
+ or equivalently, written as set subtraction, 
+\begin_inset Formula $Z=\Delta\backslash\overline{0}$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $Z$
+\end_inset
+
+ is open, being the countable union of open sets, and thus is of rank one
+ in the boldface Borel hierarchy: 
+\begin_inset Formula $Z\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ The complement of 
+\begin_inset Formula $Z$
+\end_inset
+
+ is 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ and so 
+\begin_inset Formula $\overline{0}$
+\end_inset
+
+ is a closed set, belonging as 
+\begin_inset Formula $\overline{0}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This result can be confirmed by looking at the canonical measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ This gives that 
+\begin_inset Formula $\mu\left(o_{k}\right)=2^{-\left(k+1\right)}$
+\end_inset
+
+.
+ From this, 
+\begin_inset Formula 
+\[
+\mu\left(Z\right)=\sum_{k=0}^{\infty}\mu\left(o_{k}\right)=\sum_{k=0}^{\infty}2^{-\left(k+1\right)}=1
+\]
+
+\end_inset
+
+and so (of course) 
+\begin_inset Formula $\mu\left(\overline{0}\right)=0$
+\end_inset
+
+.
+ No surprise; a lot of hot air to say something trivial.
+ The above is almost entirely an exercise in defining unambiguous notation,
+ and almost nothing more.
+\end_layout
+
+\begin_layout Subsubsection*
+Exclusion of a general point
+\end_layout
+
+\begin_layout Standard
+The same construction can be generalized to any 
+\begin_inset Formula $p\in\Delta$
+\end_inset
+
+ to obtain an open set 
+\begin_inset Formula $P=\Delta\backslash p$
+\end_inset
+
+.
+ This is built up as 
+\begin_inset Formula $P=\bigcup_{k=0}^{\infty}P_{k}$
+\end_inset
+
+ the infinite union of pair-wise disjoint open sets 
+\begin_inset Formula $P_{k}$
+\end_inset
+
+.
+ Each open set 
+\begin_inset Formula $P_{k}=\mbox{ext}\left(\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}\right)$
+\end_inset
+
+ is defined to be disjoint from 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ The notation here is that 
+\begin_inset Formula $\check{p}_{k}=\neg p_{k}$
+\end_inset
+
+ is the negation of the 
+\begin_inset Formula $k$
+\end_inset
+
+'th bit in the string 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $P_{k}$
+\end_inset
+
+ belongs to the base of the topology, and so 
+\begin_inset Formula $P_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ The corresponding tree is 
+\begin_inset Formula $P=\bigcup_{k=0}^{\infty}P_{k}$
+\end_inset
+
+.
+ As before, this gives us 
+\begin_inset Formula $P=\Delta\backslash p$
+\end_inset
+
+.
+ Just as before, one can verify that 
+\begin_inset Formula $p\cap P_{k}=\varnothing$
+\end_inset
+
+, that 
+\begin_inset Formula $P_{k}\cap P_{j}=\varnothing$
+\end_inset
+
+ when 
+\begin_inset Formula $j\ne k$
+\end_inset
+
+, and that all other points 
+\begin_inset Formula $q\in\Delta,q\ne p$
+\end_inset
+
+ are 
+\begin_inset Formula $q\in P_{k}$
+\end_inset
+
+ for some 
+\begin_inset Formula $k$
+\end_inset
+
+, obtained by examining the prefixes of 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ The measure works likewise: 
+\begin_inset Formula $\mu\left(P_{k}\right)=2^{-\left(k+1\right)}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $P$
+\end_inset
+
+ is built from a countable union, 
+\begin_inset Formula $P\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $p\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Sneaky set intesections
+\end_layout
+
+\begin_layout Standard
+A note of caution is in order.
+ The defintion of 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ as the first 
+\begin_inset Formula $k$
+\end_inset
+
+ letters of 
+\begin_inset Formula $p$
+\end_inset
+
+ appears to be totally innocuous.
+ In fact, it is a sneaky introduction of set intersection, since it could
+ also be wrtien out as 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}=p\cap*^{k}$
+\end_inset
+
+.
+ Thus, both above and below, we've carefully hidden a kind of an interestion
+ function in a kind of sneaky way.
+ Is it a set intersection? Well, yes, since 
+\begin_inset Formula $*=\left\{ 0,1\right\} $
+\end_inset
+
+ so 
+\begin_inset Formula $*^{k}=\left\{ 0,1\right\} \times\cdots\times\left\{ 0,1\right\} $
+\end_inset
+
+ is most definitely a set, with 
+\begin_inset Formula $2^{k}$
+\end_inset
+
+ distinct elements.
+ Oh dear.
+\end_layout
+
+\begin_layout Standard
+Likewise, 
+\begin_inset Formula $\check{p}_{k}=\neg p_{k}=\left\{ 0,1\right\} \backslash p_{k}$
+\end_inset
+
+ is a set subtraction, hidden in plain view.
+\end_layout
+
+\begin_layout Standard
+Thus, everything above, and what follows below, is claimed to only ever
+ use countable unions, and never any set intersections, is built on a foundation
+ of lies: the use of set intersection was hidden in the English language,
+ where it is not immediately visible.
+ Saying 
+\begin_inset Quotes eld
+\end_inset
+
+take the first 
+\begin_inset Formula $k$
+\end_inset
+
+ letters of 
+\begin_inset Formula $p$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ doesn't sound like something harmful.
+\end_layout
+
+\begin_layout Standard
+Thus, take everything above and below with a grain of salt.
+ Either there's a countably infinite number of set intersections sneakily
+ hidden away, or there are not.
+ Everything written above and below was written before this realization
+ of sneaky intersections.
+ Thus, everything that is said is true (I beleive all the algebra and argumentat
+ion is correct) but everything is suspect, because of this intesction.
+ Further commentary just before the concluding subsection.
+\end_layout
+
+\begin_layout Subsubsection*
+Complements of finite unions
+\end_layout
+
+\begin_layout Standard
+Several curious questions follow.
+ Let 
+\begin_inset Formula $\mathcal{P}_{n}=\bigcup_{k=0}^{n}P_{k}$
+\end_inset
+
+ be an intersection of a finite number of open sets.
+ By defintion, 
+\begin_inset Formula $\mathcal{P}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Can we conclude that 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}$
+\end_inset
+
+ is closed, and thus an element of 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+? Lets give it a whirl.
+ Let 
+\begin_inset Formula $\mathcal{Q}_{n}=\bigcup_{k=n+1}^{\infty}P_{k}$
+\end_inset
+
+.
+ Its a countable union of open sets, so 
+\begin_inset Formula $\mathcal{Q}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ From before, deduce 
+\begin_inset Formula $P=\mathcal{P}_{n}\cup\mathcal{Q}_{n}$
+\end_inset
+
+.
+ One concludes that 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup\mathcal{Q}_{n}\cup p$
+\end_inset
+
+ and so 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}=\mathcal{Q}_{n}\cup p$
+\end_inset
+
+.
+ But 
+\begin_inset Formula $p\notin\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ which leaves the status of 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}$
+\end_inset
+
+ unclear.
+ This is resolved shortly below; yes, it will be in 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Preparing a drawing of a binary tree, with a fixed-length string on it,
+ would make all of the above definitions much easier to understand and visualize.
+\end_layout
+
+\begin_layout Subsubsection*
+Base neighborhood filter
+\end_layout
+
+\begin_layout Standard
+Lets try a different approach.
+ Write 
+\begin_inset Formula $O_{k}=\mbox{ext}\left\lfloor p\right\rfloor _{k+1}=\left\lfloor p\right\rfloor _{k+1}\overline{*}$
+\end_inset
+
+.
+ Then clearly, 
+\begin_inset Formula $p\in O_{k}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ The sequence of 
+\begin_inset Formula $O_{k}$
+\end_inset
+
+ is a filter of open neighborhoods of 
+\begin_inset Formula $p$
+\end_inset
+
+, converging to 
+\begin_inset Formula $p$
+\end_inset
+
+, each half the size of the once before.
+ That is, 
+\begin_inset Formula $O_{k+1}\subset O_{k}$
+\end_inset
+
+is a proper subset, and 
+\begin_inset Formula $\mu\left(O_{k}\right)=2^{-\left(k+1\right)}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $O_{k}$
+\end_inset
+
+ belongs to the base of the topology, 
+\begin_inset Formula $O_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Convergence can be seen as follows.
+ Consider some point, any point 
+\begin_inset Formula $q\in\Delta$
+\end_inset
+
+.
+ If the first digit of 
+\begin_inset Formula $q$
+\end_inset
+
+ is the same as the first digit of 
+\begin_inset Formula $p,$
+\end_inset
+
+that is, if 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{1}=\left\lfloor p\right\rfloor _{1}=p_{1}$
+\end_inset
+
+, we conclude that 
+\begin_inset Formula $q\in O_{0}$
+\end_inset
+
+.
+ If the first digits are not the same, then 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{1}=\check{p}_{1}$
+\end_inset
+
+ and so 
+\begin_inset Formula $q\in P_{0}$
+\end_inset
+
+.
+ Appearently, one concludes that 
+\begin_inset Formula $P_{0}\cap O_{0}=\varnothing$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta=P_{0}\cup O_{0}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\Delta\backslash P_{0}=O_{0}$
+\end_inset
+
+ and vice versa.
+\end_layout
+
+\begin_layout Standard
+The same argument extends recursively.
+ Assume that there exists some integer 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{k+1}\ne\left\lfloor p\right\rfloor _{k+1}$
+\end_inset
+
+; without loss of generality, let this be the least such integer.
+ If it does not exist, then 
+\begin_inset Formula $p=q$
+\end_inset
+
+ and 
+\begin_inset Formula $p\in O_{k}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Otherwise, 
+\begin_inset Formula $\left\lfloor q\right\rfloor _{k}=\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ (because 
+\begin_inset Formula $k$
+\end_inset
+
+ was the least) and 
+\begin_inset Formula $p_{k+1}\ne q_{k+1}=\check{p}_{k+1}$
+\end_inset
+
+ since 
+\begin_inset Formula $q_{k+1}$
+\end_inset
+
+ can only be zero or one, duh.
+ Thus, 
+\begin_inset Formula $q\in\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}\overline{*}=\mbox{ext}\left(\left\lfloor p\right\rfloor _{k}\check{p}_{k+1}\right)=P_{k}$
+\end_inset
+
+ and similarly, 
+\begin_inset Formula $q\notin O_{k}$
+\end_inset
+
+.
+ This concludes the proof of convergence; if 
+\begin_inset Formula $q\ne p$
+\end_inset
+
+ then there exists some integer 
+\begin_inset Formula $k$
+\end_inset
+
+ for which 
+\begin_inset Formula $q\notin O_{k}$
+\end_inset
+
+ and so the filter 
+\begin_inset Formula $\left\{ O_{k}\right\} $
+\end_inset
+
+ does not converge to 
+\begin_inset Formula $q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Complements of neighborhood filters
+\end_layout
+
+\begin_layout Standard
+It is not hard to see that 
+\begin_inset Formula $P_{k}\cap O_{k}=\varnothing$
+\end_inset
+
+, since, for any 
+\begin_inset Formula $x\in P_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $y\in O_{k}$
+\end_inset
+
+ one must have 
+\begin_inset Formula $x_{k+1}\ne y_{k+1}$
+\end_inset
+
+ by construction.
+ Similarly, the union 
+\begin_inset Formula $P_{k}\cup O_{k}$
+\end_inset
+
+ includes both possibilities, and so 
+\begin_inset Formula $P_{k}\cup O_{k}=O_{k-1}$
+\end_inset
+
+.
+ This allows fiddling with set subtraction 
+\emph on
+ad nauseum
+\emph default
+: 
+\begin_inset Formula $O_{k-1}\backslash O_{k}=P_{k}$
+\end_inset
+
+ and so on.
+\end_layout
+
+\begin_layout Standard
+Returning to 
+\begin_inset Formula $\mathcal{P}_{n}=\bigcup_{k=0}^{n}P_{k}$
+\end_inset
+
+, one concludes that, for any 
+\begin_inset Formula $q\in\Delta$
+\end_inset
+
+, either 
+\begin_inset Formula $q\in\mathcal{P}_{n}$
+\end_inset
+
+ or that 
+\begin_inset Formula $q\in O_{n}$
+\end_inset
+
+, but not both.
+ From this, 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup O_{n}$
+\end_inset
+
+ as well as 
+\begin_inset Formula $\mathcal{P}_{n}\cap O_{n}=\varnothing$
+\end_inset
+
+ so that 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}=O_{n}$
+\end_inset
+
+ and vice-versa.
+ Thus, 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The previous section noted that 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup\mathcal{Q}_{n}\cup p$
+\end_inset
+
+ while now we have that 
+\begin_inset Formula $\Delta=\mathcal{P}_{n}\cup O_{n}$
+\end_inset
+
+.
+ Since both 
+\begin_inset Formula $\mathcal{P}_{n}\cap O_{n}=\varnothing$
+\end_inset
+
+ and also 
+\begin_inset Formula $\mathcal{P}_{n}\cap\mathcal{Q}_{n}=\varnothing$
+\end_inset
+
+, it seems safe to conclude that 
+\begin_inset Formula $O_{n}=\mathcal{Q}_{n}\cup p$
+\end_inset
+
+, and that this conclusion can be reached without having to take any actual
+ set intersections, without taking any differences, and without actually
+ computing the union of a point.
+ From what I can tell, this conclusion is reached entirely via countable
+ unions.
+ I suppose it all would have been clearer, if we were even more pedantic,
+ and clearly stated that the set difference symbol 
+\begin_inset Formula $\backslash$
+\end_inset
+
+ is used above as a notational device, as a short-hand symbol for some equivalen
+ce and membership relations, rather than as an actual, concrete difference.
+ Likewise, the intersection symbol 
+\begin_inset Formula $\cap$
+\end_inset
+
+ is also being used as a notational device for a (countable) collection
+ of predicates, rather than as an actual, concrete intersection operation.
+ Unfortunately, most of this is not very clear, as we've never actually
+ used predicate-logic expressions to construct any of these sets, nor have
+ we taken the effort to examine precisely which set-theory axioms were deployed
+ at each step.
+ So all this is quite cavalier with the constructions; this entire section
+ could be made far more verbose and daunting, by re-writing it to explicitly
+ track predicates from first-order logic and from set theory.
+ So it goes.
+\end_layout
+
+\begin_layout Standard
+At any rate, some of the lowest rank of the Borel hierarchy can be filled
+ in: 
+\begin_inset Formula $\mathcal{Q}_{n}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ while both 
+\begin_inset Formula $O_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{P}_{n}$
+\end_inset
+
+ are both in 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ and also in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+; they are clopen sets.
+\end_layout
+
+\begin_layout Standard
+From this, deduce that every set in the base of the topology is in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ Specifically, let 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+ be a finite-length string, of length 
+\begin_inset Formula $k+1$
+\end_inset
+
+.
+ Then consider 
+\begin_inset Formula $O_{k}=\mbox{ext}s=s\overline{*}$
+\end_inset
+
+.
+ This is both clearly a member of the base of the topology, and also a member
+ of any neighborhood filter of points starting with the string 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Complements of the base
+\end_layout
+
+\begin_layout Standard
+One may continue down this path just a bit farther, for the sake of completeness.
+ Following the earlier construction, one has 
+\begin_inset Formula $\Delta\backslash P_{k}=p\cup\check{P}_{k}$
+\end_inset
+
+, where 
+\begin_inset Formula $\check{P}_{k}=\mathcal{P}_{k-1}\cup\mathcal{Q}_{k}$
+\end_inset
+
+.
+ Absorbing that one single point, one has 
+\begin_inset Formula $\Delta\backslash P_{k}=p\cup\mathcal{P}_{k-1}\cup\mathcal{Q}_{k}=\mathcal{P}_{k-1}\cup O_{k}$
+\end_inset
+
+.
+ Although this 
+\begin_inset Quotes eld
+\end_inset
+
+looks like
+\begin_inset Quotes erd
+\end_inset
+
+ a union with a closed set 
+\begin_inset Formula $p$
+\end_inset
+
+, it is not; the identity 
+\begin_inset Formula $O_{n}=\mathcal{Q}_{n}\cup p$
+\end_inset
+
+ was established above, without appeal to the closed nationer of 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ So again, 
+\begin_inset Formula $\Delta\backslash P_{k}=\mathcal{P}_{k-1}\cup O_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+, as its a countable union.
+ But this can also be written as 
+\begin_inset Formula $P_{k}=\Delta\backslash\left(\mathcal{P}_{k-1}\cup O_{k}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $P_{k}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ It is clopen.
+\end_layout
+
+\begin_layout Standard
+So far, it seems that perhaps 
+\begin_inset Formula $\mathcal{Q}_{k}\notin\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ Can this be proved? Yes.
+ From the above, we have 
+\begin_inset Formula $\Delta=p\cup\mathcal{P}_{k}\cup\mathcal{Q}_{k}$
+\end_inset
+
+ and so 
+\begin_inset Formula $\Delta\backslash\left(\mathcal{P}_{k}\cup\mathcal{Q}_{k}\right)=\left(\Delta\backslash\mathcal{P}_{k}\right)\cap\left(\Delta\backslash Q_{k}\right)=p$
+\end_inset
+
+.
+ Now, we've already seen that 
+\begin_inset Formula $\Delta\backslash\mathcal{P}_{k}=O_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Proof by contradiction: Assume 
+\begin_inset Formula $\mathcal{Q}_{k}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ This would imply that 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+, which would imply that 
+\begin_inset Formula $p\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ But that cannot be true; points are not unions of open sets, the assumption
+ was wrong, and 
+\begin_inset Formula $\mathcal{Q}_{k}\notin\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ From this, one can immediately conclude that 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\nsubseteq\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This is not an elegant proof, because it invokes intersection, for the first
+ time ever.
+ We haven't yet worked out what the properties of intersection are (we have
+ to assume it distributes over complementation; that's 
+\begin_inset Quotes eld
+\end_inset
+
+normal
+\begin_inset Quotes erd
+\end_inset
+
+, but weird in the current context.) Finally, we are requested to make an
+ awkward deduction from it.
+ So, an ugly proof, but adequate for present purposes.
+\end_layout
+
+\begin_layout Standard
+From the complement 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+, we can deduce that the 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}$
+\end_inset
+
+ are examples of closed sets having a finite measure.
+ They are the result of a one point compactification: 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}=p\cup\mathcal{P}_{k}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Complements of two points
+\end_layout
+
+\begin_layout Standard
+The above notational gymnastics provide just enough limberness to construct
+ an open set that includes all of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, except for a finite number of points.
+ Without loss of generality, the construction is done for two points.
+ A tweak of notation is required.
+ Given 
+\begin_inset Formula $a,b\in\Delta,a\ne b$
+\end_inset
+
+, let 
+\begin_inset Formula $\left\{ O_{i}^{a}:0\le i<\infty\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ O_{i}^{b}:0\le i<\infty\right\} $
+\end_inset
+
+ denote the basic neighborhhood filters for 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+; likewise, all other symbols defined earlier can be similarly superscripted.
+ As before, there is some integer 
+\begin_inset Formula $n$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{n}=\left\lfloor b\right\rfloor _{n}$
+\end_inset
+
+ but the 
+\begin_inset Formula $\left(n+1\right)$
+\end_inset
+
+'th digit does not match: 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{n+1}\ne\left\lfloor b\right\rfloor _{n+1}$
+\end_inset
+
+.
+ This implies that not only is 
+\begin_inset Formula $a\notin O_{k}^{b}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\ge n$
+\end_inset
+
+, but also that that 
+\begin_inset Formula $O_{k}^{a}\cap O_{k}^{b}=\varnothing$
+\end_inset
+
+.
+ As a special case, 
+\begin_inset Formula $O_{n}^{a}\cap O_{n}^{b}=\varnothing$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Consider next the set 
+\begin_inset Formula $P_{m}^{a}$
+\end_inset
+
+ for 
+\begin_inset Formula $m\le n$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ share a common prefix for 
+\begin_inset Formula $m\le n$
+\end_inset
+
+, one has that 
+\begin_inset Formula $P_{m}^{a}=P_{m}^{b}$
+\end_inset
+
+.
+ Restricting further to 
+\begin_inset Formula $m<n$
+\end_inset
+
+, one has, by definition, 
+\begin_inset Formula $a\notin P_{m}^{a}$
+\end_inset
+
+, but also that 
+\begin_inset Formula $b\notin P_{m}^{a}$
+\end_inset
+
+.
+ This breaks down at 
+\begin_inset Formula $n$
+\end_inset
+
+, so that 
+\begin_inset Formula $a\in P_{n}^{b}$
+\end_inset
+
+ and vice-versa, 
+\begin_inset Formula $b\in P_{n}^{a}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Employing the notation from before, 
+\begin_inset Formula $\mathcal{P}_{n-1}^{a}=\mathcal{P}_{n-1}^{b}=\bigcup_{m=0}^{n-1}P_{m}^{a}$
+\end_inset
+
+ has the property that 
+\begin_inset Formula $a\notin\mathcal{P}_{n-1}^{a}$
+\end_inset
+
+ (obviously, as this is true by definition for any 
+\begin_inset Formula $n$
+\end_inset
+
+) but also that 
+\begin_inset Formula $b\notin\mathcal{P}_{n-1}^{a}$
+\end_inset
+
+, because 
+\begin_inset Formula $n$
+\end_inset
+
+ was chosen as the index beyond which the sequences diverge.
+\end_layout
+
+\begin_layout Standard
+After the point where the bit-sequences diverge, the open covers diverge
+ as well, and so 
+\begin_inset Formula $a\notin P_{k}^{b}$
+\end_inset
+
+ and 
+\begin_inset Formula $b\notin P_{k}^{a}$
+\end_inset
+
+ holds again, for all 
+\begin_inset Formula $k>n$
+\end_inset
+
+.
+ Working with the excluded regions is safe.
+ Reusing notation from before, 
+\begin_inset Formula $\mathcal{Q}_{n}^{a}=\bigcup_{k=n+1}^{\infty}P_{k}^{a}$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $\mathcal{Q}_{n}^{b}$
+\end_inset
+
+.
+ By definition, 
+\begin_inset Formula $a\notin\mathcal{Q}_{n}^{a}$
+\end_inset
+
+ (holds for any 
+\begin_inset Formula $n)$
+\end_inset
+
+ but also 
+\begin_inset Formula $b\notin\mathcal{Q}_{n}^{a}$
+\end_inset
+
+, since 
+\begin_inset Formula $n$
+\end_inset
+
+ was selected as the location after which the sequences diverge.
+ To conclude, the set 
+\begin_inset Formula $P^{a,b}=\mathcal{P}_{n-1}^{a}\cup\mathcal{Q}_{n}^{a}\cup\mathcal{Q}_{n}^{b}$
+\end_inset
+
+ has the property that 
+\begin_inset Formula $a\notin P^{a,b}$
+\end_inset
+
+ and also 
+\begin_inset Formula $b\notin P^{a,b}$
+\end_inset
+
+ but that 
+\begin_inset Formula 
+\begin{align*}
+a\cup b\cup P^{a,b}= & a\cup b\cup\mathcal{P}_{n-1}^{a}\cup\mathcal{Q}_{n}^{a}\cup\mathcal{Q}_{n}^{b}\\
+= & \mathcal{P}_{n-1}^{a}\cup O_{n}^{a}\cup O_{n}^{b}\\
+= & \mathcal{P}_{n-1}^{a}\cup O_{n-1}^{a}\\
+= & \Delta
+\end{align*}
+
+\end_inset
+
+and so indeed, 
+\begin_inset Formula $P^{a,b}=\Delta\backslash\left(a\cup b\right)$
+\end_inset
+
+ as desired.
+ Since 
+\begin_inset Formula $P^{a,b}$
+\end_inset
+
+ was formed entirely from countable unions of open sets, 
+\begin_inset Formula $P^{a,b}\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The third line above made use of the identity 
+\begin_inset Formula $O_{n}^{a}\cup O_{n}^{b}=O_{n-1}^{a}=O_{n-1}^{b}$
+\end_inset
+
+.
+ This follows, as the two downard branches join at 
+\begin_inset Formula $n$
+\end_inset
+
+, so, as before 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{n}=\left\lfloor b\right\rfloor _{n}$
+\end_inset
+
+ while 
+\begin_inset Formula $a_{n+1}\ne b_{n+1}=\check{a}_{n+1}$
+\end_inset
+
+.
+ At this join, 
+\begin_inset Formula $a_{n+1}\cup\check{a}_{n+1}=\left\{ 0,1\right\} =*$
+\end_inset
+
+ and so the join is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+O_{n}^{a}\cup O_{n}^{b}= & \left(\left\lfloor a\right\rfloor _{n+1}\overline{*}\right)\cup\left(\left\lfloor b\right\rfloor _{n+1}\overline{*}\right)\\
+= & \left(\left\lfloor a\right\rfloor _{n}a_{n+1}\overline{*}\right)\cup\left(\left\lfloor b\right\rfloor _{n}b_{n+1}\overline{*}\right)\\
+= & \left(\left\lfloor a\right\rfloor _{n}a_{n+1}\overline{*}\right)\cup\left(\left\lfloor a\right\rfloor _{n}\check{a}_{n+1}\overline{*}\right)\\
+= & \left\lfloor a\right\rfloor _{n}\left(a_{n+1}\cup\check{a}_{n+1}\right)\overline{*}\\
+= & \left\lfloor a\right\rfloor _{n}\overline{*}\\
+= & O_{n-1}^{a}=O_{n-1}^{b}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In analogy to the earlier one point compactification result: 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}^{p}=p\cup\mathcal{P}_{k}^{p}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ (which hold for all 
+\begin_inset Formula $k$
+\end_inset
+
+), one can construct sets that require two points to compactify.
+ In the present case, one has 
+\begin_inset Formula $\Delta\backslash\left(\mathcal{Q}_{k}^{a}\cup\mathcal{Q}_{k}^{b}\right)=a\cup b\cup\mathcal{P}_{k}^{a}\cup\mathcal{P}_{k}^{b}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\ge n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Complements of any number of points
+\end_layout
+
+\begin_layout Standard
+For the general case of three or more points, one needs to find and track
+ the branch-points.
+ The simplest description for how to do this seems to be algorithmic.
+ Define a branching function 
+\begin_inset Formula $\mbox{bra}:\mathbb{S}\times\mathcal{P}\left(\Delta\right)\to\left\{ 0,1\right\} $
+\end_inset
+
+ that determines whether all binary strings in a set 
+\begin_inset Formula $L\subset\Delta$
+\end_inset
+
+ that begin with a finite string 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+ have a common digit at location just past the end of the string 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula 
+\[
+\mbox{brn}:\left(s,L\right)\mapsto\max\left\{ a_{n}\oplus b_{n}:n=1+\mbox{len}s\,,\,a,b\in L\cap s\overline{*}\right\} 
+\]
+
+\end_inset
+
+In the above expression, 
+\begin_inset Formula $n=1+\mbox{len}s$
+\end_inset
+
+ identifies the bit position just past the end of the string 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $L\cap s\overline{*}$
+\end_inset
+
+ is the set of all points in 
+\begin_inset Formula $L$
+\end_inset
+
+ that have a prefix that is 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ This might be the empty set, in which case the function brn is undefined.
+ The 
+\begin_inset Formula $a_{n}\oplus b_{n}$
+\end_inset
+
+ is just the xor of the two bits at location 
+\begin_inset Formula $n$
+\end_inset
+
+; it is zero, if the two bits are the same, else it is one.
+\end_layout
+
+\begin_layout Standard
+This function 
+\begin_inset Quotes eld
+\end_inset
+
+sneaks in
+\begin_inset Quotes erd
+\end_inset
+
+ a concrete intersection operator 
+\begin_inset Formula $\cap$
+\end_inset
+
+, but it does so in a way that it does not seem to be directly implicated
+ in the rest of the construction.
+ Further comments on this sneakery in the next subsection.
+ 
+\end_layout
+
+\begin_layout Standard
+Imagined as an algorithm, this must loop over all pairs of points in 
+\begin_inset Formula $L\cap s\overline{*}$
+\end_inset
+
+, checking if bit location 
+\begin_inset Formula $n$
+\end_inset
+
+ differs.
+ If such a pair is found, then the function can return 1 immediately, else
+ it needs to keep looping, possible forever, if 
+\begin_inset Formula $L$
+\end_inset
+
+ is countable.
+ If 
+\begin_inset Formula $L$
+\end_inset
+
+ is uncountable, then this is even harder.
+ This function carries a lot of water.
+\end_layout
+
+\begin_layout Standard
+Define a set 
+\begin_inset Formula $B\subseteq\mathbb{S}$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+B=\left\{ s\in\mathbb{S}:0=\mbox{brn}\left(s,L\cap s\overline{*}\right)\right\} 
+\]
+
+\end_inset
+
+This set is countable, since 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ is countable.
+ For any given 
+\begin_inset Formula $s\in B$
+\end_inset
+
+, define the set 
+\begin_inset Formula 
+\[
+P_{s}^{L}=\bigcup_{a\in L\cap s\overline{*}}P_{\mbox{len}s}^{a}
+\]
+
+\end_inset
+
+where, as before, 
+\begin_inset Formula $P_{k}^{a}=\mbox{ext}\left(\left\lfloor a\right\rfloor _{k}\check{a}_{k+1}\right)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $L$
+\end_inset
+
+ is countable, then the union is countable.
+ In fact, the union is overkill, since 
+\begin_inset Formula $P_{\mbox{len}s}^{a}=P_{\mbox{len}s}^{b}$
+\end_inset
+
+ for all 
+\begin_inset Formula $a,b\in L\cap s\overline{*}$
+\end_inset
+
+.
+ The above at least avoids having to say 
+\begin_inset Quotes eld
+\end_inset
+
+pick a representative 
+\begin_inset Formula $a\in L\cap s\overline{*}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ By construction, 
+\begin_inset Formula $a\notin P_{s}^{L}$
+\end_inset
+
+ for all 
+\begin_inset Formula $a\in L$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+If the points 
+\begin_inset Formula $a\in L$
+\end_inset
+
+ are visualized as infinite paths through the infinite binary tree, then
+ 
+\begin_inset Formula $L\cap s\overline{*}$
+\end_inset
+
+ are all the points that took a common path along 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ Having reached the end of 
+\begin_inset Formula $s$
+\end_inset
+
+, there are two possibilities: either all of the paths take just one branch,
+ or some take one and some take another.
+ If only one branch is taken, then 
+\begin_inset Formula $P_{s}^{L}$
+\end_inset
+
+ is the branch not taken.
+ 
+\end_layout
+
+\begin_layout Standard
+The set that exludes all points in 
+\begin_inset Formula $L\subset\Delta$
+\end_inset
+
+ is then
+\begin_inset Formula 
+\[
+P^{L}=\bigcup_{s\in B}P_{s}^{L}
+\]
+
+\end_inset
+
+where, again, at most a countable number of unions is involved, even if
+ 
+\begin_inset Formula $L$
+\end_inset
+
+ was uncountable.
+\end_layout
+
+\begin_layout Standard
+The need to construct the branch function, and the set 
+\begin_inset Formula $B$
+\end_inset
+
+ can be avoided by using the concrete intersection operator.
+ Define 
+\begin_inset Formula 
+\[
+P_{s}^{L}=\bigcap_{a\in L\cap s\overline{*}}P_{\mbox{len}s}^{a}
+\]
+
+\end_inset
+
+which then has one of two possible values: the same 
+\begin_inset Formula $P_{s}^{L}$
+\end_inset
+
+ as before, when 
+\begin_inset Formula $s\in B$
+\end_inset
+
+, and otherwise the empty set.
+ The set that excludes 
+\begin_inset Formula $L$
+\end_inset
+
+ is then 
+\begin_inset Formula 
+\[
+P^{L}=\bigcup_{s\in\mathbb{S}}P_{s}^{L}
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $L$
+\end_inset
+
+ isn't finite, then this variant employs a countale (or more) number of
+ intersections.
+\end_layout
+
+\begin_layout Subsubsection*
+Commentary about the implicit use of set intersection
+\end_layout
+
+\begin_layout Standard
+The last section rests on sneakery of the use of intersection.
+ The earlier definition hid it in a function, where it seemed to be harmless.
+ In the second part, it is made overt.
+ And yet, it is used in a way that is incredibly weak: it is not used to
+ carve out, subtract parts of some set; it is instead used as an all-of-nothing
+ indicator function.
+ 
+\end_layout
+
+\begin_layout Standard
+It seems strange.
+ Everything in this section is about pruning; starting with the infinite
+ binary tree, we attempt to explicitly name all subtrees that have no paths
+ running through them, and then collect all of them up.
+ As there are only countably many of these, we can say 
+\begin_inset Quotes eld
+\end_inset
+
+a hah, just take a countable union of them to get the answer
+\begin_inset Quotes erd
+\end_inset
+
+.
+ And yet, it would seem that this is just cleverly disgused set subtraction.
+ The subtraction is done with English-language sentences, which say things
+ like 
+\begin_inset Quotes eld
+\end_inset
+
+consider everything that isn't this thing here
+\begin_inset Quotes erd
+\end_inset
+
+, which is plainly a subtraction when written this way.
+\end_layout
+
+\begin_layout Standard
+The very defintion of 
+\begin_inset Formula $P_{k}^{a}=\mbox{ext}\left(\left\lfloor a\right\rfloor _{k}\check{a}_{k+1}\right)$
+\end_inset
+
+ involves a carfully hidden set subtraction.
+ Instead of using the innocuous-looking defintion 
+\begin_inset Quotes eld
+\end_inset
+
+let 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{k}$
+\end_inset
+
+ be the first 
+\begin_inset Formula $k$
+\end_inset
+
+ bits of 
+\begin_inset Formula $a$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+, lets write it out:
+\begin_inset Formula 
+\[
+\left\lfloor a\right\rfloor _{k}=a\cap*^{k}
+\]
+
+\end_inset
+
+Whoops: a cleverly hidden intersection!.
+ The definition of 
+\begin_inset Formula $\check{a}_{k+1}$
+\end_inset
+
+ can also be seen as a clverly hidden set subtraction, a kind of 
+\begin_inset Quotes eld
+\end_inset
+
+take everything that is not this
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Recall the definition: 
+\begin_inset Formula $\check{a}_{k}=\neg a_{k}=\left\{ 0,1\right\} \backslash a_{k}$
+\end_inset
+
+ is a set subtraction, hidden in plain view.
+\end_layout
+
+\begin_layout Standard
+Apparently, using casual English allows very sneaky and subversive operations
+ to be performed, that violate the spirit of the Borel hierarachy as being
+ phrased entirely in terms of unions, with no set intersections.
+\end_layout
+
+\begin_layout Standard
+Just how pervasive is the damage? It seems that the defintion of the base
+ of the topology is safe: it just says that the base is given by 
+\begin_inset Formula $\mbox{ext}s=s\overline{*}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+However, the open neighborhood filter of a point is suspect.
+ Given a point 
+\begin_inset Formula $p$
+\end_inset
+
+, the filter was built from open sets 
+\begin_inset Formula $O_{k}^{p}=\mbox{ext}\left\lfloor p\right\rfloor _{k+1}=\left\lfloor p\right\rfloor _{k+1}\overline{*}$
+\end_inset
+
+.
+ Now, each one of these open sets is identical to some distinct set, selected
+ from the base topology.
+ It is a singleton.
+ The definition of 
+\begin_inset Formula $O_{k}^{p}$
+\end_inset
+
+ was intended to define how to choose, how to select basic sets, and nothing
+ more.
+ But such a definition is an intersection at a meta-level: write the base
+ as 
+\begin_inset Formula 
+\[
+\mathcal{B}=\left\{ s\overline{*}:s\in\mathbb{S}\right\} 
+\]
+
+\end_inset
+
+Then the neighborhood filter is
+\begin_inset Formula 
+\[
+O^{p}=\left\{ x\in\mathcal{B}:p\in x\right\} 
+\]
+
+\end_inset
+
+which is further stratified by size:
+\begin_inset Formula 
+\[
+O_{k}^{p}=\left\{ x\in O^{p}:\mu\left(x\right)=2^{-k}\right\} 
+\]
+
+\end_inset
+
+But there's some hidden intersection here.
+ Write instead
+\begin_inset Formula 
+\[
+\mathcal{B}_{k}=\left\{ x\in\mathcal{B}:\mu\left(x\right)=2^{-k}\right\} 
+\]
+
+\end_inset
+
+and then one has 
+\begin_inset Formula $O_{k}^{p}=O^{p}\cap\mathcal{B}_{k}$
+\end_inset
+
+.
+ Is this an intersection, or isn't it? It's not an intersection in the sense
+ of intersection sets in Cantor space; it happens at a meta-level, and is
+ carefully crafted so that we wouldn't need to actually intersect subsets
+ of the Cantor space.
+\end_layout
+
+\begin_layout Standard
+What a freakin mess.
+ The long and painful lesson here appears to be this: Discussion of the
+ Borel hierarchy is vacuous, unless it is founded on predicate calculus
+ and first-order logic.
+ Perhaps one can convince onself that one is being very careful, and make
+ persuasive arguments that all of ones claims are well-founded.
+ But this hardly seems obvious at this point.
+\end_layout
+
+\begin_layout Standard
+With these sentences, I close this text fortwith.
+ I'm disgusted.
+ I've learned something, but the lesson is that this whole collection of
+ ideas is deeper and more complex than one might naively imagine.
+\end_layout
+
+\begin_layout Subsubsection*
+Summary
+\end_layout
+
+\begin_layout Standard
+What was the point of this lengthly and tedious exposition? Well, lets see:
+\end_layout
+
+\begin_layout Itemize
+The base for the topology was made explicit; it consists of the sets 
+\begin_inset Formula $\mbox{ext}s=s\overline{*}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}=2^{<\omega}$
+\end_inset
+
+.
+ It is countable, because 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ is countable.
+\end_layout
+
+\begin_layout Itemize
+The base for the topology was sufficient to build a neighborhood filter
+ 
+\begin_inset Formula $\left\{ O_{k}^{a}\right\} $
+\end_inset
+
+ for every point 
+\begin_inset Formula $a\in\Delta$
+\end_inset
+
+.
+ The members of the filter are 
+\begin_inset Formula $O_{k}^{a}=\mbox{ext}\left\lfloor a\right\rfloor _{k+1}=\left\lfloor a\right\rfloor _{k+1}\overline{*}$
+\end_inset
+
+ and there is a countable number of them: every point has a countable base.
+\end_layout
+
+\begin_layout Itemize
+There are multiple examples of pairs of open sets 
+\begin_inset Formula $A,B$
+\end_inset
+
+ constructed so that they are complements, with 
+\begin_inset Formula $A\cap B=\varnothing$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cup B=\Delta$
+\end_inset
+
+, and both 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ were explicitly constructed as countable unions, so that 
+\begin_inset Formula $A\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $B\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Clearly, these are clopen sets.
+ 
+\end_layout
+
+\begin_layout Itemize
+Set intersection was not needed to build any of the examples in 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The examples all have a very short description length; starting from finite-leng
+th strings, one needs only a handful of additional operations to describe
+ the examples.
+\end_layout
+
+\begin_layout Itemize
+Individual points 
+\begin_inset Formula $a\in2^{\omega}$
+\end_inset
+
+ belong to the 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ pointclass, as do many open sets, including the base of the topology, and
+ the sets 
+\begin_inset Formula $P_{n}^{a}$
+\end_inset
+
+, 
+\begin_inset Formula $O_{n}^{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{P}_{n}^{a}$
+\end_inset
+
+ for each 
+\begin_inset Formula $a\in2^{\omega}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Some of the open sets 
+\begin_inset Formula $\mathcal{Q}_{k}^{a}\notin\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\nsubseteq\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The sets 
+\begin_inset Formula $\Delta\backslash\mathcal{Q}_{k}^{a}\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ are examples of closed sets that are not points.
+\end_layout
+
+\begin_layout Standard
+Not much particularly intersing is learned here, except perhaps the last
+ two or three bullets.
+ 
+\end_layout
+
+\begin_layout Standard
+The result that 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\nsubseteq\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ is a generic property of uncountable Polish sets.
+ For every ordinal 
+\begin_inset Formula $\alpha<\omega_{1}$
+\end_inset
+
+, it can be shown that 
+\begin_inset Formula $\mathbf{\Sigma}_{\alpha}^{0}\nsubseteq\mathbf{\Pi}_{\alpha}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Pointclass 
+\begin_inset Formula $\mathbf{\Sigma}_{2}^{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The pointclass 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ is defined with set complementation: 
+\begin_inset Formula $A\in\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $2^{\omega}\backslash A\in\mathbf{\Sigma}_{1}^{0}$
+\end_inset
+
+.
+ Explict examples of sets in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+ were given above; they were the individual points 
+\begin_inset Formula $a\in2^{\omega}$
+\end_inset
+
+, and also 
+\begin_inset Formula $P_{n}^{a}$
+\end_inset
+
+, 
+\begin_inset Formula $O_{n}^{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{P}_{n}^{a}$
+\end_inset
+
+ for each 
+\begin_inset Formula $a\in2^{\omega}$
+\end_inset
+
+.
+ Most importantly, the sets 
+\begin_inset Formula $s\overline{*}$
+\end_inset
+
+ from the base of the topology are in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The pointclass 
+\begin_inset Formula $\mathbf{\Sigma}_{2}^{0}$
+\end_inset
+
+ is expressed as consisting of countable unions of the members of 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+.
+ Since the base of the topology is in 
+\begin_inset Formula $\mathbf{\Pi}_{1}^{0}$
+\end_inset
+
+, one can immediately conclude that 
+\begin_inset Formula $\mathbf{\Sigma}_{1}^{0}\subset\mathbf{\Sigma}_{2}^{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What interesting things can we build from countable unions of these? Not
+ sure what I can say here.
+\end_layout
+
+\begin_layout Subsection*
+The map to the reals.
+\end_layout
+
+\begin_layout Standard
+First, a review
+\emph on
+ ad nauseum
+\emph default
+.
+ The canonical mapping of the Cantor set 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ to the closed unit interval 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ of the reals 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+x=x\left(b\right)=\sum_{k=1}^{\infty}b_{k}2^{-k}
+\]
+
+\end_inset
+
+where an abuse of notation was used to write 
+\begin_inset Formula $x:\Delta\to\mathbb{R}$
+\end_inset
+
+ with 
+\begin_inset Formula $x:b\mapsto x\left(b\right)$
+\end_inset
+
+.
+ As usual, every dyadic rational 
+\begin_inset Formula $d=d\left(m,n\right)=\left(2m+1\right)/2^{n}$
+\end_inset
+
+ maps back to two binary different strings, one ending in all zeros, and
+ one ending in all ones.
+ Specifically, if 
+\begin_inset Formula $\left|b\right|=n$
+\end_inset
+
+ then 
+\begin_inset Formula $b=\left(b_{1},b_{2,}\cdots,b_{n-1},1,0,0,\cdots\right)$
+\end_inset
+
+ is paired with 
+\begin_inset Formula $\overline{b}=\left(b_{1},b_{2,}\cdots,b_{n-1},0,1,1,\cdots\right)$
+\end_inset
+
+ with the property that 
+\begin_inset Formula $x\left(b\right)=x\left(\overline{b}\right)=d\left(m,n\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $m=\sum_{k=1}^{n-1}b_{k}2^{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+bug-eyed line, each dyadic rational is bug-eyed.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ be the image of 
+\begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
+\end_inset
+
+ under this mapping.
+\end_layout
+
+\begin_layout Standard
+under this mappingUnder this mapping
+\end_layout
+
+\begin_layout Subsection*
+The shift operator and ergodicity
+\end_layout
+
+\begin_layout Subsection*
+Baire space
+\end_layout
+
+\begin_layout Standard
+First, define the Baire space 
+\begin_inset Formula $\mathcal{N}=\omega^{\omega}$
+\end_inset
+
+ to be the space of infinite-length strings of the natural numbers, where
+ 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ is defined as positive integers (so zero is not included.) There is a canonical
+ run-length encoding that maps 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ to the Cantor space 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, given by the Minkowski question mark function.
+ Now, conventionally, the question mark is defined on the reals; for the
+ present, by abuse of notation, lets use the same name for the run-length
+ encoding.
+ Thus, given 
+\begin_inset Formula $a=\left[a_{1},a_{2},\cdots\right]\in\mathcal{N}$
+\end_inset
+
+ write 
+\begin_inset Formula $b=?\left(a\right)\in\Delta$
+\end_inset
+
+ as the binary string which consists of 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ zeros followed by 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+ ones, etc.
+ This is the run-length encoding.
+\end_layout
+
+\begin_layout Standard
+The canonical mapping of Baire space 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ into a subset of the unit interval is the continued fraction mapping 
+\begin_inset Formula 
+\[
+y=y\left(a\right)=y\left(\left[a_{1},a_{2},\cdots\right]\right)=\frac{1}{a_{1}+\dfrac{1}{a_{2}+\cdots}}
+\]
+
+\end_inset
+
+Note that this mapping misses every rational number, as long as we insist
+ that each 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ is a natural number, i.e.
+ that 
+\begin_inset Formula $a_{k}\ne0$
+\end_inset
+
+.
+ If we instead build the Baire set from the non-negative integers, so as
+ to allow 
+\begin_inset Formula $a_{k}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $y$
+\end_inset
+
+ will hit the rationals as well.
+ The cost here is that each rational has an uncountably infinite representation
+ as those strings having arbitrary digits after the first zero.
+\end_layout
+
+\begin_layout Standard
+Whatever, this is very pointlessly long winded.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Borel hierarchy
+\end_layout
+
+\begin_layout Standard
+Lets now look at the Borel hierarchy.
+ For this, we return to familiar ground.
+\end_layout
+
+\begin_layout Section*
+Bibilography
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "../fractal"
+options "tufte"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
