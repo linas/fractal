@@ -2770,7 +2770,7 @@ For example, the text below was written, attempting to avoid set differences
 \begin_inset Formula $\cap$
 \end_inset
 
- are to be interpeted as short-hand for wrodier expressions, rather than
+ are to be interpeted as short-hand for wordier expressions, rather than
  being literal, concrete operations on sets.
  Unfortunately, this text is a bit vague and sloppy, and so this might not
  always be clear.
@@ -3241,6 +3241,92 @@ The same construction can be generalized to any
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsubsection*
+Sneaky set intesections
+\end_layout
+
+\begin_layout Standard
+A note of caution is in order.
+ The defintion of 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}$
+\end_inset
+
+ as the first 
+\begin_inset Formula $k$
+\end_inset
+
+ letters of 
+\begin_inset Formula $p$
+\end_inset
+
+ appears to be totally innocuous.
+ In fact, it is a sneaky introduction of set intersection, since it could
+ also be wrtien out as 
+\begin_inset Formula $\left\lfloor p\right\rfloor _{k}=p\cap*^{k}$
+\end_inset
+
+.
+ Thus, both above and below, we've carefully hidden a kind of an interestion
+ function in a kind of sneaky way.
+ Is it a set intersection? Well, yes, since 
+\begin_inset Formula $*=\left\{ 0,1\right\} $
+\end_inset
+
+ so 
+\begin_inset Formula $*^{k}=\left\{ 0,1\right\} \times\cdots\times\left\{ 0,1\right\} $
+\end_inset
+
+ is most definitely a set, with 
+\begin_inset Formula $2^{k}$
+\end_inset
+
+ distinct elements.
+ Oh dear.
+\end_layout
+
+\begin_layout Standard
+Likewise, 
+\begin_inset Formula $\check{p}_{k}=\neg p_{k}=\left\{ 0,1\right\} \backslash p_{k}$
+\end_inset
+
+ is a set subtraction, hidden in plain view.
+\end_layout
+
+\begin_layout Standard
+Thus, everything above, and what follows below, is claimed to only ever
+ use countable unions, and never any set intersections, is built on a foundation
+ of lies: the use of set intersection was hidden in the English language,
+ where it is not immediately visible.
+ Saying 
+\begin_inset Quotes eld
+\end_inset
+
+take the first 
+\begin_inset Formula $k$
+\end_inset
+
+ letters of 
+\begin_inset Formula $p$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ doesn't sound like something harmful.
+\end_layout
+
+\begin_layout Standard
+Thus, take everything above and below with a grain of salt.
+ Either there's a countably infinite number of set intersections sneakily
+ hidden away, or there are not.
+ Everything written above and below was written before this realization
+ of sneaky intersections.
+ Thus, everything that is said is true (I beleive all the algebra and argumentat
+ion is correct) but everything is suspect, because of this intesction.
+ Further commentary just before the concluding subsection.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -4118,192 +4204,183 @@ In analogy to the earlier one point compactification result:
 \end_layout
 
 \begin_layout Subsubsection*
-Complements of a countable number of points
+Complements of any number of points
 \end_layout
 
 \begin_layout Standard
 For the general case of three or more points, one needs to find and track
  the branch-points.
- This can be done by defining a common prefix function.
- Given two points, define 
-\begin_inset Formula $\mbox{com}:\Delta\times\Delta\to\mathbb{N}$
+ The simplest description for how to do this seems to be algorithmic.
+ Define a branching function 
+\begin_inset Formula $\mbox{bra}:\mathbb{S}\times\mathcal{P}\left(\Delta\right)\to\left\{ 0,1\right\} $
 \end_inset
 
- by 
-\begin_inset Formula $\mbox{com}:\left(a,b\right)\mapsto\max\left\{ n:\left\lfloor a\right\rfloor _{n}=\left\lfloor b\right\rfloor _{n}\right\} $
-\end_inset
-
-.
- This extends naturally to finite products as 
-\begin_inset Formula $\mbox{com}:\Delta^{m}\to\mathbb{N}$
-\end_inset
-
- given by 
-\begin_inset Formula $\mbox{com}:\left(a_{1},\cdots,a_{m}\right)\mapsto\max\left\{ n:n=\mbox{com}\left(a_{i},a_{j}\right)\forall\,i,j\le m\right\} $
-\end_inset
-
- and similarly to countable products 
-\begin_inset Formula $\mbox{com}:\Delta^{\omega}\to\mathbb{N}$
-\end_inset
-
-.
- The function is pair-wise symmetric; the order of the arguments doesn't
- matter.
- Thus, it would be more corect to say that com is defined on any countable
- unordered subset of points 
+ that determines whether all binary strings in a set 
 \begin_inset Formula $L\subset\Delta$
 \end_inset
 
-, skipping over the mechanics of describing the subset function 
-\begin_inset Formula $\mbox{subset}:\Delta^{\omega}\to\mathcal{P}\left(\Delta\right)$
+ that begin with a finite string 
+\begin_inset Formula $s\in\mathbb{S}$
 \end_inset
 
- that takes ordered sequences of points, and injectively maps them into
- points in the powerset 
-\begin_inset Formula $\mathcal{P}\left(\Delta\right)$
+ have a common digit at location just past the end of the string 
+\begin_inset Formula $s$
 \end_inset
 
 .
- Curious game.
- Anyway ...
+ That is, 
+\begin_inset Formula 
+\[
+\mbox{brn}:\left(s,L\right)\mapsto\max\left\{ a_{n}\oplus b_{n}:n=1+\mbox{len}s\,,\,a,b\in L\cap s\overline{*}\right\} 
+\]
+
+\end_inset
+
+In the above expression, 
+\begin_inset Formula $n=1+\mbox{len}s$
+\end_inset
+
+ identifies the bit position just past the end of the string 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $L\cap s\overline{*}$
+\end_inset
+
+ is the set of all points in 
+\begin_inset Formula $L$
+\end_inset
+
+ that have a prefix that is 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ This might be the empty set, in which case the function brn is undefined.
+ The 
+\begin_inset Formula $a_{n}\oplus b_{n}$
+\end_inset
+
+ is just the xor of the two bits at location 
+\begin_inset Formula $n$
+\end_inset
+
+; it is zero, if the two bits are the same, else it is one.
+\end_layout
+
+\begin_layout Standard
+This function 
+\begin_inset Quotes eld
+\end_inset
+
+sneaks in
+\begin_inset Quotes erd
+\end_inset
+
+ a concrete intersection operator 
+\begin_inset Formula $\cap$
+\end_inset
+
+, but it does so in a way that it does not seem to be directly implicated
+ in the rest of the construction.
+ Further comments on this sneakery in the next subsection.
  
 \end_layout
 
 \begin_layout Standard
-Given a countable subset of points 
-\begin_inset Formula $L=\left\{ a_{i}\in\Delta\right\} \subset\Delta$
+Imagined as an algorithm, this must loop over all pairs of points in 
+\begin_inset Formula $L\cap s\overline{*}$
 \end_inset
 
-, then, if 
-\begin_inset Formula $n=\mbox{com}L<\infty$
+, checking if bit location 
+\begin_inset Formula $n$
 \end_inset
 
-, the construction proceeds along the lines of the two-point case.
- It is always the case that 
-\begin_inset Formula $\mbox{com}L<\infty$
-\end_inset
-
- if the set 
-\begin_inset Formula $L$
-\end_inset
-
- is finite, and so the interesting case arises when 
+ differs.
+ If such a pair is found, then the function can return 1 immediately, else
+ it needs to keep looping, possible forever, if 
 \begin_inset Formula $L$
 \end_inset
 
  is countable.
-\end_layout
-
-\begin_layout Standard
-For this 
-\begin_inset Formula $n$
-\end_inset
-
-, for all 
-\begin_inset Formula $k,m\ge n$
-\end_inset
-
- and all pairs 
-\begin_inset Formula $a_{i},a_{j}$
-\end_inset
-
-, the open neightborhoods around them are mutually disjoint 
-\begin_inset Formula $O_{k}^{a_{i}}\cap O_{m}^{a_{j}}=\varnothing$
-\end_inset
-
-.
- The pair-wise disjointness implies the group disjointness 
-\begin_inset Formula 
-\[
-\bigcap_{b\in L}O_{n}^{b}=\varnothing
-\]
-
-\end_inset
-
-That is, the above provides a collection of neighborhoods of each point
- in 
+ If 
 \begin_inset Formula $L$
 \end_inset
 
- that are mutually disjoint.
- Since 
-\begin_inset Formula $O_{k}^{b}\subset O_{n}^{b}$
-\end_inset
-
- is a proper subset (of half the size) for all 
-\begin_inset Formula $k>n$
-\end_inset
-
-, the above provides the hard bound.
+ is uncountable, then this is even harder.
+ This function carries a lot of water.
 \end_layout
 
 \begin_layout Standard
-Removing the basepoint, one concludes that 
-\begin_inset Formula $a\notin\mathcal{Q}_{n}^{b}$
+Define a set 
+\begin_inset Formula $B\subseteq\mathbb{S}$
 \end_inset
 
- for all 
-\begin_inset Formula $a,b\in L$
-\end_inset
-
-.
- Recalling that the identity 
-\begin_inset Formula $O_{m}^{b}=b\cup\mathcal{Q}_{m}^{b}$
-\end_inset
-
- holds for all 
-\begin_inset Formula $b$
-\end_inset
-
- and 
-\begin_inset Formula $m$
-\end_inset
-
- and that this identity was proven using only a countable number of set
- unions; no set intersections or differences were required.
- Write 
+ as 
 \begin_inset Formula 
 \[
-\mathcal{Q}_{n}^{L}=\bigcup_{b\in L}\mathcal{Q}_{n}^{b}
+B=\left\{ s\in\mathbb{S}:0=\mbox{brn}\left(s,L\cap s\overline{*}\right)\right\} 
 \]
 
 \end_inset
 
-and note that we've now demonstrated that 
-\begin_inset Formula $\mathcal{Q}_{n}^{L}\cap L=\varnothing$
+This set is countable, since 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ is countable.
+ For any given 
+\begin_inset Formula $s\in B$
+\end_inset
+
+, define the set 
+\begin_inset Formula 
+\[
+P_{s}^{L}=\bigcup_{a\in L\cap s\overline{*}}P_{\mbox{len}s}^{a}
+\]
+
+\end_inset
+
+where, as before, 
+\begin_inset Formula $P_{k}^{a}=\mbox{ext}\left(\left\lfloor a\right\rfloor _{k}\check{a}_{k+1}\right)$
 \end_inset
 
 .
-\end_layout
+ If 
+\begin_inset Formula $L$
+\end_inset
 
-\begin_layout Standard
-xxxxxx
-\end_layout
+ is countable, then the union is countable.
+ In fact, the union is overkill, since 
+\begin_inset Formula $P_{\mbox{len}s}^{a}=P_{\mbox{len}s}^{b}$
+\end_inset
 
-\begin_layout Standard
-Uh, we want to have
-\end_layout
-
-\begin_layout Standard
-Moving in the other direction, consider the exclusion sets 
-\begin_inset Formula $P_{m}^{b}$
+ for all 
+\begin_inset Formula $a,b\in L\cap s\overline{*}$
 \end_inset
 
 .
- Since any two points 
-\begin_inset Formula $a,b\in L$
+ The above at least avoids having to say 
+\begin_inset Quotes eld
 \end_inset
 
- share a c
-\end_layout
-
-\begin_layout Standard
-As before, 
-\begin_inset Formula $P_{m}^{a}\cap P_{j}^{a}$
+pick a representative 
+\begin_inset Formula $a\in L\cap s\overline{*}$
 \end_inset
 
- for any 
-\begin_inset Formula $j\ne m$
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ By construction, 
+\begin_inset Formula $a\notin P_{s}^{L}$
+\end_inset
+
+ for all 
+\begin_inset Formula $a\in L$
 \end_inset
 
 .
@@ -4311,54 +4388,293 @@ As before,
 \end_layout
 
 \begin_layout Standard
-Moving thSince 
+If the points 
+\begin_inset Formula $a\in L$
+\end_inset
+
+ are visualized as infinite paths through the infinite binary tree, then
+ 
+\begin_inset Formula $L\cap s\overline{*}$
+\end_inset
+
+ are all the points that took a common path along 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ Having reached the end of 
+\begin_inset Formula $s$
+\end_inset
+
+, there are two possibilities: either all of the paths take just one branch,
+ or some take one and some take another.
+ If only one branch is taken, then 
+\begin_inset Formula $P_{s}^{L}$
+\end_inset
+
+ is the branch not taken.
+ 
+\end_layout
+
+\begin_layout Standard
+The set that exludes all points in 
+\begin_inset Formula $L\subset\Delta$
+\end_inset
+
+ is then
+\begin_inset Formula 
+\[
+P^{L}=\bigcup_{s\in B}P_{s}^{L}
+\]
+
+\end_inset
+
+where, again, at most a countable number of unions is involved, even if
+ 
+\begin_inset Formula $L$
+\end_inset
+
+ was uncountable.
+\end_layout
+
+\begin_layout Standard
+The need to construct the branch function, and the set 
+\begin_inset Formula $B$
+\end_inset
+
+ can be avoided by using the concrete intersection operator.
+ Define 
+\begin_inset Formula 
+\[
+P_{s}^{L}=\bigcap_{a\in L\cap s\overline{*}}P_{\mbox{len}s}^{a}
+\]
+
+\end_inset
+
+which then has one of two possible values: the same 
+\begin_inset Formula $P_{s}^{L}$
+\end_inset
+
+ as before, when 
+\begin_inset Formula $s\in B$
+\end_inset
+
+, and otherwise the empty set.
+ The set that excludes 
+\begin_inset Formula $L$
+\end_inset
+
+ is then 
+\begin_inset Formula 
+\[
+P^{L}=\bigcup_{s\in\mathbb{S}}P_{s}^{L}
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $L$
+\end_inset
+
+ isn't finite, then this variant employs a countale (or more) number of
+ intersections.
+\end_layout
+
+\begin_layout Subsubsection*
+Commentary about the implicit use of set intersection
+\end_layout
+
+\begin_layout Standard
+The last section rests on sneakery of the use of intersection.
+ The earlier definition hid it in a function, where it seemed to be harmless.
+ In the second part, it is made overt.
+ And yet, it is used in a way that is incredibly weak: it is not used to
+ carve out, subtract parts of some set; it is instead used as an all-of-nothing
+ indicator function.
+ 
+\end_layout
+
+\begin_layout Standard
+It seems strange.
+ Everything in this section is about pruning; starting with the infinite
+ binary tree, we attempt to explicitly name all subtrees that have no paths
+ running through them, and then collect all of them up.
+ As there are only countably many of these, we can say 
+\begin_inset Quotes eld
+\end_inset
+
+a hah, just take a countable union of them to get the answer
+\begin_inset Quotes erd
+\end_inset
+
+.
+ And yet, it would seem that this is just cleverly disgused set subtraction.
+ The subtraction is done with English-language sentences, which say things
+ like 
+\begin_inset Quotes eld
+\end_inset
+
+consider everything that isn't this thing here
+\begin_inset Quotes erd
+\end_inset
+
+, which is plainly a subtraction when written this way.
+\end_layout
+
+\begin_layout Standard
+The very defintion of 
+\begin_inset Formula $P_{k}^{a}=\mbox{ext}\left(\left\lfloor a\right\rfloor _{k}\check{a}_{k+1}\right)$
+\end_inset
+
+ involves a carfully hidden set subtraction.
+ Instead of using the innocuous-looking defintion 
+\begin_inset Quotes eld
+\end_inset
+
+let 
+\begin_inset Formula $\left\lfloor a\right\rfloor _{k}$
+\end_inset
+
+ be the first 
+\begin_inset Formula $k$
+\end_inset
+
+ bits of 
 \begin_inset Formula $a$
 \end_inset
 
- and 
-\begin_inset Formula $b$
+
+\begin_inset Quotes erd
 \end_inset
 
- share a common prefix for 
-\begin_inset Formula $m\le n$
+, lets write it out:
+\begin_inset Formula 
+\[
+\left\lfloor a\right\rfloor _{k}=a\cap*^{k}
+\]
+
 \end_inset
 
-, one has that 
-\begin_inset Formula $P_{m}^{a}=P_{m}^{b}$
+Whoops: a cleverly hidden intersection!.
+ The definition of 
+\begin_inset Formula $\check{a}_{k+1}$
 \end_inset
 
-.
- Restricting further to 
-\begin_inset Formula $m<n$
+ can also be seen as a clverly hidden set subtraction, a kind of 
+\begin_inset Quotes eld
 \end_inset
 
-, one has, by definition, 
-\begin_inset Formula $a\notin P_{m}^{a}$
-\end_inset
-
-, but also that 
-\begin_inset Formula $b\notin P_{m}^{a}$
-\end_inset
-
-.
- This breaks down at 
-\begin_inset Formula $n$
-\end_inset
-
-, so that 
-\begin_inset Formula $a\in P_{n}^{b}$
-\end_inset
-
- and vice-versa, 
-\begin_inset Formula $b\in P_{n}^{a}$
+take everything that is not this
+\begin_inset Quotes erd
 \end_inset
 
 .
- 
+ Recall the definition: 
+\begin_inset Formula $\check{a}_{k}=\neg a_{k}=\left\{ 0,1\right\} \backslash a_{k}$
+\end_inset
+
+ is a set subtraction, hidden in plain view.
 \end_layout
 
 \begin_layout Standard
-This construction fails if 
+Apparently, using casual English allows very sneaky and subversive operations
+ to be performed, that violate the spirit of the Borel hierarachy as being
+ phrased entirely in terms of unions, with no set intersections.
+\end_layout
+
+\begin_layout Standard
+Just how pervasive is the damage? It seems that the defintion of the base
+ of the topology is safe: it just says that the base is given by 
+\begin_inset Formula $\mbox{ext}s=s\overline{*}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in\mathbb{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+However, the open neighborhood filter of a point is suspect.
+ Given a point 
+\begin_inset Formula $p$
+\end_inset
+
+, the filter was built from open sets 
+\begin_inset Formula $O_{k}^{p}=\mbox{ext}\left\lfloor p\right\rfloor _{k+1}=\left\lfloor p\right\rfloor _{k+1}\overline{*}$
+\end_inset
+
+.
+ Now, each one of these open sets is identical to some distinct set, selected
+ from the base topology.
+ It is a singleton.
+ The definition of 
+\begin_inset Formula $O_{k}^{p}$
+\end_inset
+
+ was intended to define how to choose, how to select basic sets, and nothing
+ more.
+ But such a definition is an intersection at a meta-level: write the base
+ as 
+\begin_inset Formula 
+\[
+\mathcal{B}=\left\{ s\overline{*}:s\in\mathbb{S}\right\} 
+\]
+
+\end_inset
+
+Then the neighborhood filter is
+\begin_inset Formula 
+\[
+O^{p}=\left\{ x\in\mathcal{B}:p\in x\right\} 
+\]
+
+\end_inset
+
+which is further stratified by size:
+\begin_inset Formula 
+\[
+O_{k}^{p}=\left\{ x\in O^{p}:\mu\left(x\right)=2^{-k}\right\} 
+\]
+
+\end_inset
+
+But there's some hidden intersection here.
+ Write instead
+\begin_inset Formula 
+\[
+\mathcal{B}_{k}=\left\{ x\in\mathcal{B}:\mu\left(x\right)=2^{-k}\right\} 
+\]
+
+\end_inset
+
+and then one has 
+\begin_inset Formula $O_{k}^{p}=O^{p}\cap\mathcal{B}_{k}$
+\end_inset
+
+.
+ Is this an intersection, or isn't it? It's not an intersection in the sense
+ of intersection sets in Cantor space; it happens at a meta-level, and is
+ carefully crafted so that we wouldn't need to actually intersect subsets
+ of the Cantor space.
+\end_layout
+
+\begin_layout Standard
+What a freakin mess.
+ The long and painful lesson here appears to be this: Discussion of the
+ Borel hierarchy is vacuous, unless it is founded on predicate calculus
+ and first-order logic.
+ Perhaps one can convince onself that one is being very careful, and make
+ persuasive arguments that all of ones claims are well-founded.
+ But this hardly seems obvious at this point.
+\end_layout
+
+\begin_layout Standard
+With these sentences, I close this text fortwith.
+ I'm disgusted.
+ I've learned something, but the lesson is that this whole collection of
+ ideas is deeper and more complex than one might naively imagine.
 \end_layout
 
 \begin_layout Subsubsection*
