@@ -832,8 +832,8 @@ Vitali sets inside the Cantor Space
 \end_layout
 
 \begin_layout Standard
-This text reviews the construction a certain class of quotient spaces that
- can legitimately be called Vitali sets.
+This section reviews the construction a certain class of quotient spaces
+ that can legitimately be called Vitali sets.
  The word 
 \begin_inset Quotes eld
 \end_inset
@@ -842,13 +842,18 @@ legitimately
 \begin_inset Quotes erd
 \end_inset
 
- is used, because the construction is not quite the introductory example
- construction, but is effectively isomorphic to it.
+ is used, because the construction does not proceed through the conventional
+ quotient of 
+\begin_inset Formula $\mathbb{R}/\mathbb{Q}$
+\end_inset
+
+.
+ The end result, however, is isomorphic to it.
 \end_layout
 
 \begin_layout Standard
-These quotient spaces arise naturally by equating all eventually-periodic
- sequences.
+The demonstration proceeds by creating quotient spaces, obtained by equating
+ all eventually-periodic sequences.
  The prototypical example is the quotient space 
 \begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
 \end_inset
@@ -934,8 +939,25 @@ the Vitali set
 \end_layout
 
 \begin_layout Standard
-The alert reader might notice that this set was constructed using the dyadic
- rationals, whereas the usual Vital set is constructed using the rationals.
+The rest of this text expands on the above.
+ It tends to veer into the territory of un-needed detailing and over-explaining
+ the obvious.
+ My apologies.
+ The details do seem to reveal the shape of some monster lurking in the
+ depths.
+\end_layout
+
+\begin_layout Subsection
+Prelude
+\end_layout
+
+\begin_layout Standard
+The alert reader might notice that 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ corresponds to the dyadic rationals, whereas the usual Vital set is constructed
+ using the rationals.
  No matter: if this objection arises, then the inverse 
 \begin_inset Formula $?^{-1}$
 \end_inset
@@ -945,33 +967,74 @@ The alert reader might notice that this set was constructed using the dyadic
 \end_inset
 
  can be applied, to map the dyadics to the rationals.
- At any rate, this sketch demonstrates four different objects that are isomorphi
-c to one-another, and thus can each be called 
-\begin_inset Quotes eld
+ A short side-trip to explain this remark is worth-while.
+ The set 
+\begin_inset Formula $\mathbb{D}$
 \end_inset
 
-the Vitali set
-\begin_inset Quotes erd
+, and all of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, can be mapped to the unit interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ of the reals, by writing 
+\begin_inset Formula $x=\sum_{n}b_{n}2^{-n}$
+\end_inset
+
+ for a string of binary digits 
+\begin_inset Formula $b_{n}$
 \end_inset
 
 .
- Curiously, the definition of 
-\begin_inset Formula $E_{0}$
+ The finite-length strings correspond to the dyadic rationals in this mapping.
+ There is also a different mapping, given by the run-length encoding of
+ the string 
+\begin_inset Formula $b_{n}$
 \end_inset
 
- does not seem to require the Axiom of Choice, at least, not superficially.
- It is only the defintion of 
-\begin_inset Formula $V_{0}$
+.
+ Write a sequence 
+\begin_inset Formula $a_{1},a_{2},\cdots$
 \end_inset
 
- that seems to require AC.
- I don't understand if this is a phantom or not.
-\end_layout
+ as the count of the number of sequential zeros appearing in the string
+ 
+\begin_inset Formula $b_{n}$
+\end_inset
 
-\begin_layout Standard
-The rest of this text expands on the above.
- It tends to veer into the territory of over-explaining the obvious.
- My apologies.
+, followed by the count of the sequential ones, then zeros again.
+ This provides a map from Cantor space to Baire space 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+.
+ Elements in Baire space can again be mapped to the unit interval; this
+ is the continued-fraction mapping 
+\begin_inset Formula 
+\[
+y=\dfrac{1}{a_{1}+\dfrac{1}{a_{2}+\cdots}}
+\]
+
+\end_inset
+
+When expressed as real numbers, these two maps are related as 
+\begin_inset Formula $x=?\left(y\right)$
+\end_inset
+
+ where ? is the Minkowski question mark function.
+ It has a property of mapping the rationals to the dyadic rationals.
+ It has a large variety of other intersting properties, such as mapping
+ the quadratic irrationals to the rationals (thus proving the quadratic
+ irrationals are countable).
+ But all of this is a grand distraction from the task at hand.
+ This mapping is mentioned only as a prelude, reminding the reader that
+ the Cantor space (or Baire space) can be mapped to the reals, and so the
+ Vitali set constructions below can be likewise mapped.
+ As we vowed not to work with the reals, further mentions will be avoided.
+ 
 \end_layout
 
 \begin_layout Subsection
