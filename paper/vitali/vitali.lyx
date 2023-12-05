@@ -139,15 +139,37 @@ The Vitali set is famous for being the first example of an unmeasureable
  The Vitali set is constructed with an equivalence relation; it is the same
  as the one that this text will describe, below, to construct the class
  of eventually-periodic orbits.
+ The Vitali set corresponds to the simplest Borel equivalence relation that
+ cannot be given an invariant measure.
+ 
+\end_layout
+
+\begin_layout Standard
+This last sentence contains a lot to unpack; this is done in the next section,
+ so as to set the project into context.
+\end_layout
+
+\begin_layout Section
+Dynamical systems
+\end_layout
+
+\begin_layout Standard
+This section is a lightning review of dynamical systems.
+ It's as precise as I could make it, given that it compresses book-length
+ topics into single paragraphs.
+\end_layout
+
+\begin_layout Subsubsection*
+Measureability
 \end_layout
 
 \begin_layout Standard
 Measureability is formulated on Borel sets: the subsets of a space that
  can be constructed with countably infinite unions of open sets, and their
  complements.
- The first part is the same as that for the defintion of a topology; the
- second part, complementation, allows for countably infinite intersections,
- something that is excluded for topologies.
+ The idea of infinite unions of open sets is the same as that for the defintion
+ of a topology; the second part, complementation, allows for countably infinite
+ intersections, something that is excluded for topologies.
  The entire collection of Borel sets form a sigma-algebra.
  A Borel measure assigns a real-valued number to each open set; the Lebesgue
  measure is the completion, assigning a real number to both the open and
@@ -155,6 +177,10 @@ Measureability is formulated on Borel sets: the subsets of a space that
  As such, Borel measures and Lebesgue measures provide a foundation for
  calculus and integration (the Lebesgue integral and the Lebesgue–Stieltjes
  integral).
+\end_layout
+
+\begin_layout Subsubsection*
+Dynamical systems
 \end_layout
 
 \begin_layout Standard
@@ -167,100 +193,142 @@ Central to calculus is the study of how integrals behave under (homeomorphic)
  The measure is an invariant of the map.
 \end_layout
 
-\begin_layout Standard
-Repeated applications of a map define orbits for the points of the space.
- The collection of orbits, in some sense, defines the dynamical system.
- All points in an orbit can be assigned to an equivalence class, and one
- can then ask about the structure of the original space, modulo the equivalence
- classes of orbits.
- Applying the mechanics of sigma algebras to this, one gets the notion of
- a Borel equivalence relation.
- Formally, for a space 
-\begin_inset Formula $X$
-\end_inset
-
-, one considers the product topology on 
-\begin_inset Formula $X\times X$
-\end_inset
-
-; a Borel equivalence relation 
-\begin_inset Formula $E$
-\end_inset
-
- is then a Borel subset of 
-\begin_inset Formula $X\times X$
-\end_inset
-
-.
- Informally, it is enough to examine a single time-step of a dynamical system
- 
-\begin_inset Formula $T:X\to X$
-\end_inset
-
-, and equate the points before and after.
- Repeatly iterating does not give anything new; the equivalence relation
- is implicitly the closure of (a countable number of) repeated iterations.
- Formally, this works only when 
-\begin_inset Formula $X$
-\end_inset
-
- is a Polish space; informally, that's ok, since the real numbers, seperable
- Banach spaces (including Hilbert spaces), the Cantor space and Baire space
- are all Polish spaces.
+\begin_layout Subsubsection*
+Point dynamics
 \end_layout
 
 \begin_layout Standard
-Ergodic theory explicitly examines iterated systems 
-\begin_inset Formula $T:X\to X$
-\end_inset
-
-, and studies convergence properties in the limit of a large number of iteration
-s 
-\begin_inset Formula $n$
-\end_inset
-
- taken to infinity: 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-.
- To oversimplify, this reduces to the study of the limit points of sequences
- of Borel sets in sigma algebras.
- Writing 
-\begin_inset Formula $\mathcal{B}\left(X\right)$
-\end_inset
-
- for the sigma algebra on 
+Given a space 
 \begin_inset Formula $X$
 \end_inset
 
-, the points of 
+ and a map 
+\begin_inset Formula $T:X\to X$
+\end_inset
+
+, there are in general two ways in which the dynamics can be studied.
+ One way is to track the orbits of single points 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ under the action of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Doing so unveils three classes: the periodic orbits, having a period 
+\begin_inset Formula $n$
+\end_inset
+
+ such that 
+\begin_inset Formula $T^{n}x=x$
+\end_inset
+
+, the ultimately-periodic orbits, those for which have a period 
+\begin_inset Formula $n$
+\end_inset
+
+ only after some initial (but finite, positive) time 
+\begin_inset Formula $m$
+\end_inset
+
+ lost in the woods: 
+\begin_inset Formula $T^{n+m}x=T^{m}x$
+\end_inset
+
+, and finally, the chaotic orbits, for which 
+\begin_inset Formula $T^{n+m}x\ne T^{m}x$
+\end_inset
+
+ for any integers 
+\begin_inset Formula $m,n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Ergodic theory
+\end_layout
+
+\begin_layout Standard
+The issue with point dynamics is that points have measure-zero, and yet
+ its clear that chaotic orbits lead to probability measures that are distributed
+ non-uniformly over the space 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Thus, a second approach is motivated: how does the map 
+\begin_inset Formula $T$
+\end_inset
+
+ act on the sigma algebra 
+\begin_inset Formula $\mathcal{B}\left(X\right)$
+\end_inset
+
+? This is the standard task of ergodic theory.
+\end_layout
+
+\begin_layout Standard
+A map 
+\begin_inset Formula $T$
+\end_inset
+
+ might not be one-to-one; there might be distinct points 
+\begin_inset Formula $x,y\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $Tx=Ty$
+\end_inset
+
+.
+ This suggests that, when working with sigma algebras, it is better to work
+ with the inverse 
+\begin_inset Formula $T^{-1}:\mathcal{B}\left(X\right)\to\mathcal{B}\left(X\right)$
+\end_inset
+
+.
+ The points of 
 \begin_inset Formula $\mathcal{B}\left(X\right)$
 \end_inset
 
  are Borel sets.
- For a given Borel set 
+ A point 
 \begin_inset Formula $A\in\mathcal{B}\left(X\right)$
 \end_inset
 
-, one examines the orbit 
-\begin_inset Formula $T^{-n}\left(A\right)$
+ is a subset 
+\begin_inset Formula $A\subset X$
 \end_inset
 
- and specifically examines the 
-\begin_inset Formula $n\to\infty$
+ meeting the definitions of a Borel set.
+ This defines a new dynamical system to study: the orbits 
+\begin_inset Formula $T^{-n}A$
 \end_inset
 
- limit.
+ of points 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ As before, these orbits may be periodic, ultimately periodic or chaotic.
+\end_layout
+
+\begin_layout Subsubsection*
+Measure-preserving dynamical systems
 \end_layout
 
 \begin_layout Standard
-Borel sets are measureable, meaning there is a real-valued function 
-\begin_inset Formula $\mu:\mathcal{B}\left(X\right)\to\mathbb{R}$
+Unlike the case of of point dynamics, the additional structure provided
+ by the sigma algebra allows a measure to be defined.
+ This is a real-valued function 
+\begin_inset Formula $\nu:\mathcal{B}\left(X\right)\to\mathbb{R}$
 \end_inset
 
  that assigns a real number 
-\begin_inset Formula $\mu\left(A\right)$
+\begin_inset Formula $\nu\left(A\right)$
 \end_inset
 
  to each set 
@@ -270,7 +338,79 @@ Borel sets are measureable, meaning there is a real-valued function
 .
  Some addtional constraints are imposed: the measure must be additive under
  the union of disjoint sets, and must be non-negative.
- Such a measure is termed 
+\end_layout
+
+\begin_layout Standard
+Measures simplify the study of Borel set dynamics, in several different
+ ways.
+ First, they define an equivalence relation on 
+\begin_inset Formula $\mathcal{B}\left(X\right)$
+\end_inset
+
+: one can write 
+\begin_inset Formula $A\sim B$
+\end_inset
+
+ for 
+\begin_inset Formula $A,B\in\mathcal{B}\left(X\right)$
+\end_inset
+
+ if 
+\begin_inset Formula $\nu\left(A\right)=\nu\left(B\right)$
+\end_inset
+
+.
+ The quotient space 
+\begin_inset Formula $\mathcal{B}\left(X\right)/\sim$
+\end_inset
+
+ is the space where the elements of a coset all have the same size.
+ Measure-preserving dynamical systems are then the ones that have a time-evoluti
+on operator that is constistent with the equivalence relation:
+\begin_inset Formula 
+\[
+\begin{array}{clc}
+X & \overset{f}{\rightarrow} & Z\\
+g\downarrow &  & \downarrow g'\\
+Y & \underset{f'}{\rightarrow} & W
+\end{array}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Invariant measure
+\end_layout
+
+\begin_layout Standard
+equiv
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+The map 
+\begin_inset Formula $T$
+\end_inset
+
+ is in general neither one-to-one nor onto.
+ Systems for which it is onto are called conservative; otherwise the system
+ is a dissipative dynamical system.
+ The ergodic decomposition theorem states that every dynamical system can
+ be factored into conservative and dissipative parts.
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+Such a measure is termed 
 \begin_inset Quotes eld
 \end_inset
 
@@ -301,6 +441,64 @@ backwards
 \end_inset
 
  onto the rest of the sigma algebra.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+Repeated applications of a map define orbits for the points of the space.
+ The collection of orbits, in some sense, defines the dynamical system.
+ All points in an orbit can be assigned to an equivalence class, and one
+ can then ask about the structure of the original space, modulo the equivalence
+ classes of orbits.
+ Applying the mechanics of sigma algebras to this, one gets the notion of
+ a Borel equivalence relation.
+ Formally, for a space 
+\begin_inset Formula $X$
+\end_inset
+
+, one considers the product topology on 
+\begin_inset Formula $X\times X$
+\end_inset
+
+; a Borel equivalence relation 
+\begin_inset Formula $E$
+\end_inset
+
+ is then a Borel subset of 
+\begin_inset Formula $X\times X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Informally, it is enough to examine a single time-step of a dynamical system
+ 
+\begin_inset Formula $T:X\to X$
+\end_inset
+
+, and equate the points before and after.
+ Repeatly iterating does not give anything new; the equivalence relation
+ is implicitly the closure of (a countable number of) repeated iterations.
+ Formally, this works only when 
+\begin_inset Formula $X$
+\end_inset
+
+ is a Polish space; informally, that's ok, since the real numbers, seperable
+ Banach spaces (including Hilbert spaces), the Cantor space and Baire space
+ are all Polish spaces.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+Self-similarity
 \end_layout
 
 \begin_layout Standard
@@ -386,6 +584,10 @@ that which will be used to construct the class of eventually-periodic orbits.
 
 \begin_layout Standard
 One way to explore dynamical systems is to compare the classes 
+\end_layout
+
+\begin_layout Section
+The Cantor Space
 \end_layout
 
 \begin_layout Standard
