@@ -146,11 +146,13 @@ The Vitali set is famous for being the first example of an unmeasureable
 \end_layout
 
 \begin_layout Standard
-A quick review of terminology follows.
+A quick review of terminology follows, concluding with a slightly more precise
+ statement of the unmeasureability of quotient spaces arising from certain
+ equivalence relations.
 \end_layout
 
 \begin_layout Subsubsection*
-Terminology
+Terminology and statement
 \end_layout
 
 \begin_layout Standard
@@ -250,11 +252,11 @@ The action of a monoid
 \end_inset
 
  the identity element in the monoid.
- The action is transitive if for every 
+ The action is transitive if, for every 
 \begin_inset Formula $A,B\in\mathcal{B}\left(X\right)$
 \end_inset
 
- there exists a 
+, there exists a 
 \begin_inset Formula $g\in G$
 \end_inset
 
@@ -350,7 +352,7 @@ Given some topological space
 
 \begin_layout Standard
 An equivalence relation 
-\begin_inset Formula $\sim$
+\begin_inset Formula $E$
 \end_inset
 
  on a space 
@@ -358,7 +360,7 @@ An equivalence relation
 \end_inset
 
  allows the definition of a quotient space 
-\begin_inset Formula $X/\sim$
+\begin_inset Formula $X/E$
 \end_inset
 
  consisting of cosets of equivalent elements.
@@ -366,19 +368,112 @@ An equivalence relation
 \begin_inset Formula $x\in X$
 \end_inset
 
-, the coset can be labelled as 
-\begin_inset Formula $\left[x\right]_{\sim}=\left\{ y\in X:x\sim y\right\} $
+, the coset 
+\begin_inset Formula $x_{E}\in X/E$
+\end_inset
+
+ is defined as 
+\begin_inset Formula $x_{E}=\left\{ y\in X:xEy\right\} $
 \end_inset
 
 .
- Given a free transitive action, one can show that each coset is isomorphic
- to all the others.
+ The quotient map is an exact sequence 
+\begin_inset Formula $0\to X\to X/E\to E\to0$
+\end_inset
+
+.
+ Cosets are pairwise disjoint, so that for 
+\begin_inset Formula $x_{E}\ne y_{E}$
+\end_inset
+
+ one has 
+\begin_inset Formula $x_{E}\cap y_{E}=\varnothing$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-An invariant meaure on the quotient space would then be, informally speaking,
- a measure that assigns the same size to each coset; this would be expected,
- as all cosets are isomorphic to one-another.
+The exact sequence states that all cosets are isomorphic to one-another,
+ and are isomorphic to 
+\begin_inset Formula $E$
+\end_inset
+
+.
+ If one were able to assign a 
+\begin_inset Quotes eld
+\end_inset
+
+size
+\begin_inset Quotes erd
+\end_inset
+
+ to each coset, that is, a real-valued invariant measure, then each coset
+ would have the same 
+\begin_inset Quotes eld
+\end_inset
+
+size
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The idea is that such a measure would need to respect the isomorphism.
+\end_layout
+
+\begin_layout Standard
+The inability to assign such a measure arises when 
+\begin_inset Formula $X/E$
+\end_inset
+
+ is countable; that is, when there are a countable number of cosets.
+ The cosets can then be labelled with natural numbers 
+\begin_inset Formula $n$
+\end_inset
+
+ so that there is one 
+\begin_inset Formula $x_{n}\in X/E$
+\end_inset
+
+ for each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ The problem arises in attempting to define an invariant 
+\begin_inset Formula $\mu\left(x_{n}\right)$
+\end_inset
+
+, since the idea of invariance implies that 
+\begin_inset Formula $\mu\left(x_{n}\right)=\mu\left(x_{m}\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $m,n$
+\end_inset
+
+.
+ By abuse of notation, 
+\begin_inset Formula $\mu\left(x_{n}\right)=\mu\left(E\right)$
+\end_inset
+
+.
+ Measures must be bounded, and yet, clearly the sum 
+\begin_inset Formula $\sum_{n}\mu\left(x_{n}\right)=\omega\mu\left(E\right)$
+\end_inset
+
+ demonstrates that 
+\begin_inset Formula $\mu\left(E\right)=0$
+\end_inset
+
+.
+ Perhaps, in non-standard analysis, it is possible to assign an infinitessimal
+ size to 
+\begin_inset Formula $E$
+\end_inset
+
+, but then, such a measure is no longer real-valued; it would be non-standard-re
+al-valued.
 \end_layout
 
 \begin_layout Subsubsection*
