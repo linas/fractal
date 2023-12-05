@@ -275,10 +275,24 @@ This text has two primary divisions.
  The result is a detailed concrete demonstrtion of the Vitali set.
  Much of the effort is expended on exposing exactly how and why the axiom
  of choice must appear in the demonstration.
+ A breif commentary follows about scaling limits.
 \end_layout
 
 \begin_layout Section
-Terminology and statement
+The general setting
+\end_layout
+
+\begin_layout Standard
+This section provides a lightning review of the vocabulary of measure theory
+ and dynamical systems.
+ The vocabulary is just barely sufficient to present the general idea of
+ a non-measrable Borel equivalence relation.
+ This is followed by a critique of just how this isn't rigrous enough to
+ be anything more than an illustration.
+\end_layout
+
+\begin_layout Subsection
+Definitions and sketch
 \end_layout
 
 \begin_layout Standard
@@ -319,7 +333,8 @@ A Borel measure is a function
 \end_inset
 
  that assigns a non-negative real number to each open set in the topology;
- as a measure, it also distributes additively over disjoint sets: 
+ as a sigma-additive measure, it also distributes additively over disjoint
+ sets: 
 \begin_inset Formula $\nu\left(A\cup B\right)=\nu\left(A\right)+\nu\left(B\right)$
 \end_inset
 
@@ -422,7 +437,7 @@ An invariant measure is a measure
 \end_inset
 
 .
- In physics, the collection of level sets are called 
+ In physics, this collection of level sets are called 
 \begin_inset Quotes eld
 \end_inset
 
@@ -431,7 +446,16 @@ the canonical ensemble
 \end_inset
 
 .
- If the monid is one-dimensional, then it's action is called a 
+ If the monoid is one-dimensional, then it's action can be interpreted as
+ 
+\begin_inset Quotes eld
+\end_inset
+
+the passage of time
+\begin_inset Quotes erd
+\end_inset
+
+, and the result is called a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -585,7 +609,7 @@ The inability to assign such a measure arises when
 
 .
  Measures must be bounded, and yet, clearly the sum 
-\begin_inset Formula $\sum_{n}\mu\left(x_{n}\right)=\omega\mu\left(E\right)$
+\begin_inset Formula $\sum_{n}\mu\left(x_{n}\right)=\aleph_{0}\mu\left(E\right)$
 \end_inset
 
  demonstrates that 
@@ -593,7 +617,33 @@ The inability to assign such a measure arises when
 \end_inset
 
 .
- Perhaps, in non-standard analysis, it is possible to assign an infinitessimal
+ To be explicit: this is in direct contradiction to the idea that the cosets
+ make up all of the space, so that 
+\begin_inset Formula $X=\bigcup_{n}x_{n}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mu\left(X\right)=1$
+\end_inset
+
+.
+ Since the cosets are disjoint, with 
+\begin_inset Formula $x_{n}\cap x_{m}=\varnothing$
+\end_inset
+
+ when 
+\begin_inset Formula $n\ne m$
+\end_inset
+
+, the sigma-additive property of the measure implies a contradiction: 
+\begin_inset Formula $1=\mu\left(X\right)=\mu\left(\bigcup_{n}x_{n}\right)=\sum_{n}\mu\left(x_{n}\right)=\aleph_{0}\mu\left(E\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Perhaps, in non-standard analysis, it is possible to assign an infinitessimal
  size to 
 \begin_inset Formula $E$
 \end_inset
@@ -602,7 +652,7 @@ The inability to assign such a measure arises when
 al-valued.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Critique
 \end_layout
 
@@ -641,7 +691,7 @@ This cannot and will not be done here.
  the Feldman–Moore theorem.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 A more concrete approach
 \end_layout
 
@@ -692,7 +742,7 @@ forced to select one at random
  The axiom of choice rears it's (ugly?) head whenever one has a set that
  one can show is non-empty, but one does not have any function capable of
  reliably, repeatedly selecting a specific element from that set.
- Abesnt such a function, one is forced to fall back to the axiom of choice,
+ Absent such a function, one is forced to fall back to the axiom of choice,
  to select 
 \begin_inset Quotes eld
 \end_inset
@@ -734,7 +784,7 @@ when does a category fail to have a unique morphism from the initial object
 \end_inset
 
 .
- Whenever a unique morphism fails to exist, the axiom oc choice must be
+ Whenever a unique morphism fails to exist, the axiom of choice must be
  invoked to select some arbitrary element from the known-to-be-nonempty
  category.
 \end_layout
@@ -751,17 +801,18 @@ Based on the work below, a necessary condition seems to be the lack of a
 
 \begin_layout Standard
 There are two possibilities to arrive at a more precise formulation.
- One is to rephrase the construction below, but this time using first-order
- logic explicitly, so that each step of the construction becomes a predicate.
+ One is to rephrase the construction below, but this time explicitly using
+ first-order logic, so that each step of the construction becomes a predicate.
  That predicate can then be examined to see which axioms of set theory were
  required to state it.
+ It can be assigned to a specific level in the Borel hierarchy.
  This is a large task, and would inflate this text to twice it's current
  size.
  
 \end_layout
 
 \begin_layout Standard
-Another alternative is to return to tthe literature.
+Another alternative is to return to the literature.
  The ultrafilter lemma and the Boolean prime ideal theorem are, in a sense,
  equivalent to each other.
  Compactness properties of subsets of the Cantor space provide insight into
