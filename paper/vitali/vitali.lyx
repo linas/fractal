@@ -105,12 +105,38 @@ Linas Vepstas
 
 \begin_layout Abstract
 The Vitali set is a canonical example of a non-measurable set.
- Apparently, the classes of eventually-periodic orbits of dynamical systems
- form a Vitali set.
- This text explores this relationship.
- The exploration reveals the tip of an iceberg.
- The iceberg is not explored here, but turns out to have been well-visited.
- The iceberg has a name: the Glimm–Effros dichotomy.
+ It's description requires the use of the Axiom of Choice.
+ The classical approach is to demonstrate a quotient of the reals by the
+ rationals.
+ A sophisticated approach is to employ the language of Borel sigma-algebras,
+ and demonstrate a quotient, a Borel equivalence relation, that does not
+ admit a measure.
+ A middle ground is to work with the Bernoulii shift on the Cantor space.
+ This provides a concrete, direct and easy-to-describe system to work with,
+ while retaining the essential properties of the abstract approach.
+ This approach indicates exactly why the Axiom of Choice is unavoidable:
+ the cosets of the quotient space are not well-founded and thus do not have
+ any unique, distinct element that can be described.
+ Lacking the ability to isolate a specific element, one is instead forced
+ to declare that surely, there must be some element and that it can be chosen.
+ (Heh.
+ It is tempting to joke 
+\begin_inset Quotes eld
+\end_inset
+
+almost surely
+\begin_inset Quotes erd
+\end_inset
+
+, but therein lies the rub: there is no 
+\begin_inset Quotes eld
+\end_inset
+
+almost
+\begin_inset Quotes erd
+\end_inset
+
+ without a measure.)
 \end_layout
 
 \begin_layout Section
@@ -120,7 +146,7 @@ Introduction
 \begin_layout Standard
 Dynamical systems generically have two classes of orbits: the periodic orbits,
  and the chaotic ones.
- In between lies the eventually-periodic orbits: the ones that eventually
+ In between lie the eventually-periodic orbits: the ones that eventually
  settle down to periodic behavior, but not before a preliminary bout of
  irregular motion.
 \end_layout
@@ -129,7 +155,11 @@ Dynamical systems generically have two classes of orbits: the periodic orbits,
 It came as a surprise to the author that, in an attempt to write down the
  class of eventually-periodic orbits, these were revealed to form the Vitali
  set.
- Perhaps this is well-known, but its new to me.
+ Perhaps this is well-known, but it is new to me.
+ In retrospect, it is both clear and painfully obvious, and should be well-known.
+ This text belabors the painfully obvious so as to make it perfectly clear.
+ As to well-known, this is left to the vissicitudes of internet readership.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -137,23 +167,117 @@ The Vitali set is famous for being the first example of an unmeasureable
  set, a set that cannot be assigned a size according to conventional measure
  theory.
  It has a more famous cousin, the Banach–Tarski paradox.
- The Vitali set is constructed with an equivalence relation; it is the same
- as the one that this text will describe, below, to construct the class
- of eventually-periodic orbits.
- The Vitali set corresponds to the simplest Borel equivalence relation that
- cannot be given an invariant measure.
- 
+ The classical Vitali set is demonstrated as a quotient space 
+\begin_inset Formula $\mathbb{R}/\mathbb{Q}$
+\end_inset
+
+ of the reals 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ by an equivalence relation 
+\begin_inset Formula $\sim$
+\end_inset
+
+ that assigns all of the rationals 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ to the same equivalence class.
+ Besides being unmeasurable, it requires the use of the Axiom of Choice
+ in order to talk about the cosets in the quotient.
+ These properties, of non-measureability and the need for the axiom of choice,
+ are shared by it's cousin the Banach–Tarski paradox.
 \end_layout
 
 \begin_layout Standard
-A quick review of terminology follows, concluding with a slightly more precise
- statement of the unmeasureability of quotient spaces arising from certain
- equivalence relations.
- This is followed by a critique, and finally, a motivation for exploring
- the Bernoulli shift on Cantor space.
+Two variants of the Vitali set construction are presented below.
+ The first is a sketch in the language of Borel sigma algebras; it is quite
+ general, and is sufficient to present the general idea.
+ But it is only a sketch, and lacks mathematical rigor.
+ The second is a detailed construction making use of the Bernoulli shift
+ on the Cantor space.
+ This has mutiple desirable properties: each step can be concretely and
+ precisely constructed, right up to the point where the axiom of choice
+ must be invoked.
+ The precise and exact nature of the axiom of choice can be exposed and
+ articulated, laying bare as to why it is unavoidable in the demonstration.
+ The Bernoulli shift is also appealing, because it is a simple prototype
+ for an ergodic measure-preserving dynamical system, and so is able to make
+ contact with the broader theory of dynamical systems.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Standard
+In this construction, the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ is taken as the space of all infinitely-long strings of binary digits.
+ The Bernoulli shift acts by lopping off one digit from the front, with
+ each iteration.
+ Thus, specific points 
+\begin_inset Formula $p\in2^{\omega}$
+\end_inset
+
+ orbit about the space.
+ Some orbits are periodic, some are eventually periodic, and some are chaotic,
+ or, more precisely speaking, ergodic.
+ The Cantor space has an invariant measure; it is uniform on the space.
+ The uniform measure maps to the reals with the canonical map 
+\begin_inset Formula $\sum_{n}b_{n}2^{-n}$
+\end_inset
+
+ for a string of binary digits 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+.
+ It also has a non-uniform measure, the Minkowski question mark measure,
+ that maps it as a run-length encoding into Baire space, and as a map that
+ takes the eventually-periodic orbits to the rationals.
+ Neither of these measures are directly relevant to this text; rather, they
+ illustrate how the Cantor space makes contact with other Polish spaces.
+\end_layout
+
+\begin_layout Standard
+The quotient construction demonstrated in this text is one that assigns
+ all eventually-periodic orbits to the same equivalence class.
+ This set is countable, and can be identified with the rationals, after
+ making use of the Minkowski question mark function.
+ Thus, one can argue that the construction presented here is absolutely
+ identical to classical Vitali set construction.
+ The difference, and I find this to be an edifying difference, is that,
+ by working explicitly with the Cantor space, once avoids assorted confusions
+ and pratfalls regarding the reals.
+ This includes such red-herrings as the half-open topology, or the need
+ to ponder how the rationals are dense in the reals.
+ One does not need to dive into the Hausdorff or 
+\begin_inset Formula $T_{1}$
+\end_inset
+
+ separation axioms, nor any of the other tropes of classical general topology.
+ One does not even need to define a Polish space.
+ The Cantor space is discrete and totally disconnected; one can mostly avoid
+ arcane topological issues, or, at least, push them off to a distance where
+ they don't hurt.
+\end_layout
+
+\begin_layout Standard
+This text has two primary divisions.
+ First, an extremely rapid and condensed review of sigma algebras, measure
+ theory and dynamical systems is presented.
+ This review serves only to establish just enough vocabulary so that the
+ idea of a Borel equivalence can be made concrete, follwed by a short sketch
+ as to why some might not admit a measure.
+ The sketch is only a sketch; it lacks rigor.
+ The second part repeats the general ideas, this time, setting them within
+ the context of the Bernoulli shift on the Cantor space.
+ The result is a detailed concrete demonstrtion of the Vitali set.
+ Much of the effort is expended on exposing exactly how and why the axiom
+ of choice must appear in the demonstration.
+\end_layout
+
+\begin_layout Section
 Terminology and statement
 \end_layout
 
