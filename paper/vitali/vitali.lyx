@@ -8,6 +8,7 @@
 \begin_preamble
 \usepackage{url} 
 \usepackage{slashed}
+\usepackage[all]{xy}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -365,24 +366,80 @@ Measures simplify the study of Borel set dynamics, in several different
 \end_inset
 
  is the space where the elements of a coset all have the same size.
- Measure-preserving dynamical systems are then the ones that have a time-evoluti
-on operator that is constistent with the equivalence relation:
+ Informally, this is the 
+\begin_inset Quotes eld
+\end_inset
+
+canonical ensemble
+\begin_inset Quotes erd
+\end_inset
+
+ of statistical mechanics.
+\end_layout
+
+\begin_layout Standard
+Measure-preserving dynamical systems are then the ones that have a measure
+ 
+\begin_inset Formula $\mu$
+\end_inset
+
+ that commutes with the time-evolution operator 
+\begin_inset Formula $T^{-1}$
+\end_inset
+
+, so that 
+\begin_inset Formula $\mu\left(T^{-1}A\right)=\mu\left(A\right)$
+\end_inset
+
+.
+ Such a measure is an invariant measure, in that it does not change over
+ time.
+\end_layout
+
+\begin_layout Standard
+A different way of thinking about this is to note that the orbits 
+\begin_inset Formula $T^{-n}A$
+\end_inset
+
+ of points 
+\begin_inset Formula $A$
+\end_inset
+
+ never leave a coset of the quotient space 
+\begin_inset Formula $\mathcal{B}\left(X\right)/\sim$
+\end_inset
+
+.
+ In this way, questions about the orbits 
+\begin_inset Formula $T^{-n}A$
+\end_inset
+
+ are erased: they all have the same measure, and so it does not much matter
+ if they are fixed points, periodic or chaotic.
+\end_layout
+
+\begin_layout Subsubsection*
+Invariant measures
+\end_layout
+
+\begin_layout Standard
+Invariant measures 
+\begin_inset Formula $\mu$
+\end_inset
+
+ can be constructed from a suitably uniform measure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ as a limit
 \begin_inset Formula 
 \[
-\begin{array}{clc}
-X & \overset{f}{\rightarrow} & Z\\
-g\downarrow &  & \downarrow g'\\
-Y & \underset{f'}{\rightarrow} & W
-\end{array}
+\mu\left(A\right)=\lim_{N\to+\infty}\frac{1}{N}\sum_{k=0}^{N-1}\nu\left(T^{-k}\left(A\right)\right)
 \]
 
 \end_inset
 
- 
-\end_layout
 
-\begin_layout Subsubsection*
-Invariant measure
 \end_layout
 
 \begin_layout Standard
@@ -532,44 +589,7 @@ Working with Borel equivalence relations collapses the notion of iteration.
 \end_layout
 
 \begin_layout Standard
-it is defined as 
-\begin_inset Formula $\mu=\lim_{n\to\infty}T^{-1}\left(A\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Alternately, the fixed point is an invariant of the 
-\end_layout
-
-\begin_layout Standard
-admitedly, some rather abstract space.
-\end_layout
-
-\begin_layout Standard
-asks for invariants of repeated applications of 
-\begin_inset Formula $T:X\to X$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-There are several avenues for studying dynamical systems in this framework.
- The first is ergodic theory, where one examines 
-\end_layout
-
-\begin_layout Standard
 Borel equivalences
-\end_layout
-
-\begin_layout Standard
-Ergodic theory provides one avenue
-\end_layout
-
-\begin_layout Standard
-The study of the behavior of 
 \end_layout
 
 \begin_layout Standard
