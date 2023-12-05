@@ -149,6 +149,8 @@ The Vitali set is famous for being the first example of an unmeasureable
 A quick review of terminology follows, concluding with a slightly more precise
  statement of the unmeasureability of quotient spaces arising from certain
  equivalence relations.
+ This is followed by a critique, and finally, a motivation for exploring
+ the Bernoulli shift on Cantor space.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -477,42 +479,181 @@ al-valued.
 \end_layout
 
 \begin_layout Subsubsection*
-Further reading and context
+Critique
 \end_layout
 
 \begin_layout Standard
-The text below invokes the axiom of choice, but only casually, insofar as
- it is a necessary ingredient in the construction of the Vitali set.
- No firm footing on the axioms of set theory is attempted.
+The above provides a fast-and-furious presentation of the issue with measureabil
+ity.
+ Unfortunately, it lacks rigor, and glosses over important details.
+ For example, many of the definitions above are coherent only when the space
+ 
+\begin_inset Formula $X$
+\end_inset
+
+ is a Polish space.
+ To some extent, this can be glossed over, since most of the usual spaces
+ encountered in analysis are Polish spaces; this includes the reals, including
+ 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+; seperable Banach spaces, including Hilbert space; and, of course, the
+ poster children of Cantor space and Baire space.
+ Precise proofs need to take this into account.
 \end_layout
 
 \begin_layout Standard
-Additional precision does open the door into new areas.
- Apparently, the compactness properties of subsets of the Cantor space provide
- insight into the ultrafilter lemma; alternately, the Boolean prime ideal
- theorem, either of which provide a weaker form of the axiom of choice.
+The jump from the defintion of a Borel equivalence relation to the construction
+ of quotient spaces was also a bit hand-wavey; the disjointness of cosets,
+ and their measurability properties should not be taken for granted, but
+ firmly rooted with appropriate theorems.
 \end_layout
 
 \begin_layout Standard
-Borel equivalence relations have gotten a fair amount of attention; relevant
- keywords are the Glimm–Effros dichotomy, the Luzin–Novikov theorem and
+This cannot and will not be done here.
+ The next steps in a more precise formulation are provided by some search-engine
+ keyword hits: the Glimm–Effros dichotomy, the Luzin–Novikov theorem and
  the Feldman–Moore theorem.
- None of these are further mentioned in this text.
 \end_layout
 
-\begin_layout Section
-The Cantor Space
+\begin_layout Subsubsection*
+A more concrete approach
 \end_layout
 
 \begin_layout Standard
-The remainder of this text limits itself to the iterated Bernoulli map on
- the Cantor space 
+The critique above can be avoided by focusing on a specific, concrete example.
+ The example used here will be the Bernoulli shift on the Cantor space 
 \begin_inset Formula $2^{\omega}$
 \end_inset
 
 .
- The primary appeal is that it is simple and easy (sort of(!)); it provides
- a simple model of more complex dynamical systems.
+ As aleady noted, the Cantor space is a Polish space.
+ The Bernoulli shift is concrete and well-understood: it is a prototypical
+ measure-preserving dynamical system; it is conservative, and it is ergodic,
+ demonstrating both periodic and chaotic orbits.
+ If it has a fault, it is that it is not mixing; but mixing does not seem
+ to be relevant to the present context.
+\end_layout
+
+\begin_layout Standard
+Working with the Bernoulli shift allows all of the above concepts to be
+ given in a concrete, precisely-defined form, through which, ideally, no
+ smuggler's truck can be driven through.
+ Alas, this ideal is not entirely met, either.
+ The problem lies with the surreptious appearance of the Axiom of Choice.
+\end_layout
+
+\begin_layout Standard
+The construction of the Vitali set necessarily requires the use of the axiom
+ of choice, so as to select a representative element from each coset.
+ A fair amount of effort is devoted below in illustrating exactly why this
+ is hard, and how this is a result of a fundamental ambiguity in labelling
+ the elements of the coset.
+ More precisely, the elements of a coset have no natural label; they cannot
+ be placed into a well-founded order relation that selects a single, unique
+ element in the coset.
+ Lacking the ability to clearly, completely and unambiguously identify a
+ specific element in the coset, one is forced to use the axiom of choice.
+ I almost wrote 
+\begin_inset Quotes eld
+\end_inset
+
+forced to select one at random
+\begin_inset Quotes erd
+\end_inset
+
+ but therein lies the rub: there's no conception of randomness that can
+ be applied, as there is no measure.
+ The axiom of choice rears it's (ugly?) head whenever one has a set that
+ one can show is non-empty, but one does not have any function capable of
+ reliably, repeatedly selecting a specific element from that set.
+ Abesnt such a function, one is forced to fall back to the axiom of choice,
+ to select 
+\begin_inset Quotes eld
+\end_inset
+
+any old member of the set, cause we know there must be one.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The meta-study would then need to be able to articulate certain questions:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+under what conditions is it impossible to have a function which selects
+ a unique member from a set?
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Equivalently, 
+\begin_inset Quotes eld
+\end_inset
+
+when does a set not admit a unique labelling of it's contents?
+\begin_inset Quotes erd
+\end_inset
+
+ Equivalently, 
+\begin_inset Quotes eld
+\end_inset
+
+when does a category fail to have a unique morphism from the initial object
+ to a specific object, thus uniquely selecting that object?
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Whenever a unique morphism fails to exist, the axiom oc choice must be
+ invoked to select some arbitrary element from the known-to-be-nonempty
+ category.
+\end_layout
+
+\begin_layout Standard
+Based on the work below, a necessary condition seems to be the lack of a
+ well-founded order on the set.
+ If one had an order, and if that order had a unique minimal element, then
+ that unique minimal element could be used as a label, from which the rest
+ of the set can be generated via a free, transitive action.
+ Is this a sufficient condition? What if one has a well-founded order, but
+ not a free, transittive action? The questions here spiral out of control.
+\end_layout
+
+\begin_layout Standard
+There are two possibilities to arrive at a more precise formulation.
+ One is to rephrase the construction below, but this time using first-order
+ logic explicitly, so that each step of the construction becomes a predicate.
+ That predicate can then be examined to see which axioms of set theory were
+ required to state it.
+ This is a large task, and would inflate this text to twice it's current
+ size.
+ 
+\end_layout
+
+\begin_layout Standard
+Another alternative is to return to tthe literature.
+ The ultrafilter lemma and the Boolean prime ideal theorem are, in a sense,
+ equivalent to each other.
+ Compactness properties of subsets of the Cantor space provide insight into
+ the structure of each.
+ Either can be used to provide a weaker form of the axiom of choice.
+ But, again, to deploy this, the construction below would need to be formalized
+ using first-order logic.
+\end_layout
+
+\begin_layout Standard
+With all these caveats and disclaimers out of the way, lets proceed and
+ see where we get.
+\end_layout
+
+\begin_layout Section
+Vitali sets inside the Cantor Space
 \end_layout
 
 \begin_layout Standard
@@ -2844,7 +2985,9 @@ too many dyadics
 \end_layout
 
 \begin_layout Standard
-So ...
+To complete the presentation above, it would be appropriate to describe
+ the actual group that carries sets from one scale to another.
+ This will not be done here.
 \end_layout
 
 \begin_layout Section
@@ -2852,7 +2995,8 @@ Conclusion
 \end_layout
 
 \begin_layout Standard
-TBD
+The construction of the Vitali set was articulated in two different ways.
+ The introduction provided a simple abstract but general construction.
 \end_layout
 
 \end_body
