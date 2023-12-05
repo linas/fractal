@@ -109,7 +109,7 @@ The Vitali set is a canonical example of a non-measurable set.
  form a Vitali set.
  This text explores this relationship.
  The exploration reveals the tip of an iceberg.
- This is not explored here, but turns out to have been well-visited.
+ The iceberg is not explored here, but turns out to have been well-visited.
  The iceberg has a name: the Glimm–Effros dichotomy.
 \end_layout
 
@@ -146,464 +146,133 @@ The Vitali set is famous for being the first example of an unmeasureable
 \end_layout
 
 \begin_layout Standard
-This last sentence contains a lot to unpack; this is done in the next section,
- so as to set the project into context.
-\end_layout
-
-\begin_layout Section
-Dynamical systems
-\end_layout
-
-\begin_layout Standard
-This section is a lightning review of dynamical systems.
- It's as precise as I could make it, given that it compresses book-length
- topics into single paragraphs.
+A quick review of terminology follows.
 \end_layout
 
 \begin_layout Subsubsection*
-Measureability
+Terminology
 \end_layout
 
 \begin_layout Standard
-Measureability is formulated on Borel sets: the subsets of a space that
- can be constructed with countably infinite unions of open sets, and their
- complements.
- The idea of infinite unions of open sets is the same as that for the defintion
- of a topology; the second part, complementation, allows for countably infinite
- intersections, something that is excluded for topologies.
- The entire collection of Borel sets form a sigma-algebra.
- A Borel measure assigns a real-valued number to each open set; the Lebesgue
- measure is the completion, assigning a real number to both the open and
- closed sets.
- As such, Borel measures and Lebesgue measures provide a foundation for
- calculus and integration (the Lebesgue integral and the Lebesgue–Stieltjes
- integral).
-\end_layout
-
-\begin_layout Subsubsection*
-Dynamical systems
-\end_layout
-
-\begin_layout Standard
-Central to calculus is the study of how integrals behave under (homeomorphic)
- maps from one space to another.
- If one looks at maps from a space to itself, selecting one single such
- map and iterating it defines a discrete-time dynamical system.
- If one further imposes the requirement that the map preserve the sizes
- of open sets, one gets a measure-preserving dynamical system.
- The measure is an invariant of the map.
-\end_layout
-
-\begin_layout Subsubsection*
-Point dynamics
-\end_layout
-
-\begin_layout Standard
-Given a space 
+A topological space 
 \begin_inset Formula $X$
 \end_inset
 
- and a map 
-\begin_inset Formula $T:X\to X$
+ is a collection 
+\begin_inset Formula $\mathcal{T}\left(X\right)$
 \end_inset
 
-, there are in general two ways in which the dynamics can be studied.
- One way is to track the orbits of single points 
-\begin_inset Formula $x\in X$
-\end_inset
-
- under the action of 
-\begin_inset Formula $T$
-\end_inset
-
-.
- Doing so unveils three classes: the periodic orbits, having a period 
-\begin_inset Formula $n$
-\end_inset
-
- such that 
-\begin_inset Formula $T^{n}x=x$
-\end_inset
-
-, the ultimately-periodic orbits, those for which have a period 
-\begin_inset Formula $n$
-\end_inset
-
- only after some initial (but finite, positive) time 
-\begin_inset Formula $m$
-\end_inset
-
- lost in the woods: 
-\begin_inset Formula $T^{n+m}x=T^{m}x$
-\end_inset
-
-, and finally, the chaotic orbits, for which 
-\begin_inset Formula $T^{n+m}x\ne T^{m}x$
-\end_inset
-
- for any integers 
-\begin_inset Formula $m,n$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection*
-Ergodic theory
-\end_layout
-
-\begin_layout Standard
-The issue with point dynamics is that points have measure-zero, and yet
- its clear that chaotic orbits lead to probability measures that are distributed
- non-uniformly over the space 
+ of open sets in 
 \begin_inset Formula $X$
 \end_inset
 
-.
- Thus, a second approach is motivated: how does the map 
-\begin_inset Formula $T$
-\end_inset
-
- act on the sigma algebra 
+ that is closed under the operation of countable unions.
+ A sigma algebra 
 \begin_inset Formula $\mathcal{B}\left(X\right)$
 \end_inset
 
-? This is the standard task of ergodic theory.
-\end_layout
-
-\begin_layout Standard
-A map 
-\begin_inset Formula $T$
+ is a collection of sets in 
+\begin_inset Formula $X$
 \end_inset
 
- might not be one-to-one; there might be distinct points 
-\begin_inset Formula $x,y\in X$
-\end_inset
-
- such that 
-\begin_inset Formula $Tx=Ty$
-\end_inset
-
-.
- This suggests that, when working with sigma algebras, it is better to work
- with the inverse 
-\begin_inset Formula $T^{-1}:\mathcal{B}\left(X\right)\to\mathcal{B}\left(X\right)$
-\end_inset
-
-.
- The points of 
-\begin_inset Formula $\mathcal{B}\left(X\right)$
-\end_inset
-
- are Borel sets.
- A point 
+ that is closed under the operation of countable unions and complementation.
+ The smallest (coarsest) sigma algebra compatible with the topology is called
+ the Borel sigma algebra.
+ Elements 
 \begin_inset Formula $A\in\mathcal{B}\left(X\right)$
 \end_inset
 
- is a subset 
-\begin_inset Formula $A\subset X$
-\end_inset
-
- meeting the definitions of a Borel set.
- This defines a new dynamical system to study: the orbits 
-\begin_inset Formula $T^{-n}A$
-\end_inset
-
- of points 
-\begin_inset Formula $A$
-\end_inset
-
-.
- As before, these orbits may be periodic, ultimately periodic or chaotic.
-\end_layout
-
-\begin_layout Subsubsection*
-Measure-preserving dynamical systems
+ are termed Borel sets.
 \end_layout
 
 \begin_layout Standard
-Unlike the case of of point dynamics, the additional structure provided
- by the sigma algebra allows a measure to be defined.
- This is a real-valued function 
-\begin_inset Formula $\nu:\mathcal{B}\left(X\right)\to\mathbb{R}$
+A Borel measure is a function 
+\begin_inset Formula $\nu:\mathcal{T}\left(X\right)\to\mathbb{R}$
 \end_inset
 
- that assigns a real number 
-\begin_inset Formula $\nu\left(A\right)$
+ that assigns a non-negative real number to each open set in the topology;
+ as a measure, it also distributes additively over disjoint sets: 
+\begin_inset Formula $\nu\left(A\cup B\right)=\nu\left(A\right)+\nu\left(B\right)$
 \end_inset
 
- to each set 
-\begin_inset Formula $A\in\mathcal{B}\left(X\right)$
-\end_inset
-
-.
- Some addtional constraints are imposed: the measure must be additive under
- the union of disjoint sets, and must be non-negative.
-\end_layout
-
-\begin_layout Standard
-Measures simplify the study of Borel set dynamics, in several different
- ways.
- First, they define an equivalence relation on 
-\begin_inset Formula $\mathcal{B}\left(X\right)$
-\end_inset
-
-: one can write 
-\begin_inset Formula $A\sim B$
-\end_inset
-
- for 
-\begin_inset Formula $A,B\in\mathcal{B}\left(X\right)$
-\end_inset
-
- if 
-\begin_inset Formula $\nu\left(A\right)=\nu\left(B\right)$
+ whenever 
+\begin_inset Formula $A\cap B=\varnothing$
 \end_inset
 
 .
- The quotient space 
-\begin_inset Formula $\mathcal{B}\left(X\right)/\sim$
-\end_inset
-
- is the space where the elements of a coset all have the same size.
- Informally, this is the 
-\begin_inset Quotes eld
-\end_inset
-
-canonical ensemble
-\begin_inset Quotes erd
-\end_inset
-
- of statistical mechanics.
-\end_layout
-
-\begin_layout Standard
-Measure-preserving dynamical systems are then the ones that have a measure
+ The Lebesgue measure extends this to closed sets, that is, to the whole
+ of the sigma algebra, and not just the topology.
  
-\begin_inset Formula $\mu$
+\end_layout
+
+\begin_layout Standard
+Note, however, the number of Lebesgue measurable sets is strictly greater
+ than the number of Borel sets; the number of Borel sets has the cardinality
+ of the continuum 
+\begin_inset Formula $\aleph_{1}=2^{\aleph_{0}}$
 \end_inset
 
- that commutes with the time-evolution operator 
-\begin_inset Formula $T^{-1}$
-\end_inset
-
-, so that 
-\begin_inset Formula $\mu\left(T^{-1}A\right)=\mu\left(A\right)$
+, while the number of Lebesgue measureable sets is 
+\begin_inset Formula $2^{\aleph_{1}}$
 \end_inset
 
 .
- Such a measure is an invariant measure, in that it does not change over
- time.
 \end_layout
 
 \begin_layout Standard
-A different way of thinking about this is to note that the orbits 
-\begin_inset Formula $T^{-n}A$
+The product topology on 
+\begin_inset Formula $X\times Y$
 \end_inset
 
- of points 
-\begin_inset Formula $A$
+ is the coarsest topology that allows the projection functions 
+\begin_inset Formula $\pi_{1}:X\times Y\to X$
 \end_inset
 
- never leave a coset of the quotient space 
-\begin_inset Formula $\mathcal{B}\left(X\right)/\sim$
+ and 
+\begin_inset Formula $\pi_{2}:X\times Y\to Y$
 \end_inset
 
-.
- In this way, questions about the orbits 
-\begin_inset Formula $T^{-n}A$
-\end_inset
-
- are erased: they all have the same measure, and so it does not much matter
- if they are fixed points, periodic or chaotic.
-\end_layout
-
-\begin_layout Subsubsection*
-Invariant measures
+ to be continuous.
 \end_layout
 
 \begin_layout Standard
-Invariant measures 
-\begin_inset Formula $\mu$
-\end_inset
-
- can be constructed from a suitably uniform measure 
-\begin_inset Formula $\nu$
-\end_inset
-
- as a limit
-\begin_inset Formula 
-\[
-\mu\left(A\right)=\lim_{N\to+\infty}\frac{1}{N}\sum_{k=0}^{N-1}\nu\left(T^{-k}\left(A\right)\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-equiv
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-The map 
-\begin_inset Formula $T$
-\end_inset
-
- is in general neither one-to-one nor onto.
- Systems for which it is onto are called conservative; otherwise the system
- is a dissipative dynamical system.
- The ergodic decomposition theorem states that every dynamical system can
- be factored into conservative and dissipative parts.
-\end_layout
-
-\begin_layout Standard
-xxxx
-\end_layout
-
-\begin_layout Standard
-Such a measure is termed 
-\begin_inset Quotes eld
-\end_inset
-
-invariant
-\begin_inset Quotes erd
-\end_inset
-
- when 
-\begin_inset Formula $\mu\left(A\right)=\lim_{n\to+\infty}\mu\left(T^{-n}\left(A\right)\right)$
-\end_inset
-
-.
- Informally, this is a two-fold statement: it is possible to discuss the
- closure of 
-\begin_inset Formula $\mathcal{B}\left(X\right)$
-\end_inset
-
- under repeated iteration 
-\begin_inset Formula $T^{-n}\left(A\right)$
-\end_inset
-
-, and a measure on the closure can be extended 
-\begin_inset Quotes eld
-\end_inset
-
-backwards
-\begin_inset Quotes erd
-\end_inset
-
- onto the rest of the sigma algebra.
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-Repeated applications of a map define orbits for the points of the space.
- The collection of orbits, in some sense, defines the dynamical system.
- All points in an orbit can be assigned to an equivalence class, and one
- can then ask about the structure of the original space, modulo the equivalence
- classes of orbits.
- Applying the mechanics of sigma algebras to this, one gets the notion of
- a Borel equivalence relation.
- Formally, for a space 
+Given some topological space 
 \begin_inset Formula $X$
 \end_inset
 
-, one considers the product topology on 
+, a Borel equivalence relation is a Borel set in 
 \begin_inset Formula $X\times X$
 \end_inset
 
-; a Borel equivalence relation 
-\begin_inset Formula $E$
-\end_inset
-
- is then a Borel subset of 
-\begin_inset Formula $X\times X$
-\end_inset
-
-.
- 
+, in the product topology.
 \end_layout
 
 \begin_layout Standard
-Informally, it is enough to examine a single time-step of a dynamical system
- 
-\begin_inset Formula $T:X\to X$
-\end_inset
+In this context, an invariant measure is ...
+\end_layout
 
-, and equate the points before and after.
- Repeatly iterating does not give anything new; the equivalence relation
- is implicitly the closure of (a countable number of) repeated iterations.
- Formally, this works only when 
-\begin_inset Formula $X$
-\end_inset
-
- is a Polish space; informally, that's ok, since the real numbers, seperable
- Banach spaces (including Hilbert spaces), the Cantor space and Baire space
- are all Polish spaces.
+\begin_layout Subsubsection*
+Further reading and context
 \end_layout
 
 \begin_layout Standard
-xxx
+The text below invokes the axiom of choice, but only casually, insofar as
+ it is a necessary ingredient in the construction of the Vitali set.
+ No firm footing on the axioms of set theory is attempted.
 \end_layout
 
 \begin_layout Standard
-Self-similarity
+Additional precision does open the door into new areas.
+ Apparently, the compactness properties of subsets of the Cantor space provide
+ insight into the ultrafilter lemma; alternately, the Boolean prime ideal
+ theorem, either of which provide a weaker form of the axiom of choice.
 \end_layout
 
 \begin_layout Standard
-the in essence, the limit points can be found
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-Much of ergodic theory is occupied with stating the properties of this limit;
- the ergodic theorem states the conditions under which it is defined.
-\end_layout
-
-\begin_layout Standard
-Working with Borel equivalence relations collapses the notion of iteration.
- Rather than examining the orbit 
-\begin_inset Formula $T^{-n}\left(A\right)$
-\end_inset
-
- of a Borel set 
-\begin_inset Formula $A\in\mathcal{B}\left(X\right)$
-\end_inset
-
- and exploring the 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Borel equivalences
-\end_layout
-
-\begin_layout Standard
-The quotient spces defined by Borel equivalences need not be measureable.
- The Vitali set is the smallest Borel equivalence relation that does not
- have a complete real-valued invariant.
-\end_layout
-
-\begin_layout Standard
-that which will be used to construct the class of eventually-periodic orbits.
-\end_layout
-
-\begin_layout Standard
-One way to explore dynamical systems is to compare the classes 
+Borel equivalence relations have gotten a fair amount of attention; relevant
+ keywords are the Glimm–Effros dichotomy, the Luzin–Novikov theorem and
+ the Feldman–Moore theorem.
+ None of these are further mentioned in this text.
 \end_layout
 
 \begin_layout Section
@@ -611,18 +280,34 @@ The Cantor Space
 \end_layout
 
 \begin_layout Standard
-For many dynamical systems, the class of eventually-periodic orbits appear
- to be isomorphic (homeomorphic) to the Vitali set.
- This is a rather broad claim, and so, for the most part, we'll stick to
- the simplest situation, the iterated Bernoulli map.
- Via the Ornstein isomorphism theorem, this is enough to handle the majority
- of cases, and so not much generality is lost.
+The remainder of this text limits itself to the iterated Bernoulli map on
+ the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+.
+ The primary appeal is that it is simple and easy (sort of(!)); it provides
+ a simple model of more complex dynamical systems.
 \end_layout
 
 \begin_layout Standard
 This text reviews the construction a certain class of quotient spaces that
- can legimately be called Vitali sets.
- They arise naturally as spaces of eventually-periodic sequences.
+ can legitimately be called Vitali sets.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+legitimately
+\begin_inset Quotes erd
+\end_inset
+
+ is used, because the construction is not quite the introductory example
+ construction, but is effectively isomorphic to it.
+\end_layout
+
+\begin_layout Standard
+These quotient spaces arise naturally by equating all eventually-periodic
+ sequences.
  The prototypical example is the quotient space 
 \begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
 \end_inset
@@ -2938,62 +2623,11 @@ So ...
 \end_layout
 
 \begin_layout Section
-Meta-commentary
+Conclusion
 \end_layout
 
 \begin_layout Standard
-The above struggles with deeper questions that are well-researched and 
-\begin_inset Quotes eld
-\end_inset
-
-well-known
-\begin_inset Quotes erd
-\end_inset
-
-.
- A quick list:
-\end_layout
-
-\begin_layout Itemize
-The compactness properties of subsets of the Cantor space lead to understandings
- of the ultrafilter lemma, equivalently the Boolean prime ideal theorem,
- both of which provide a weaker form of the axiom of choice.
-\end_layout
-
-\begin_layout Itemize
-The sets 
-\begin_inset Formula $E_{q}$
-\end_inset
-
- can be understood as 
-\begin_inset Quotes eld
-\end_inset
-
-the smallest Borel equivalence relation (smallest, in the order of Borel
- reducibility) that does not admit a Borel function giving a real-valued
- complete invariant for the equivalence relation
-\begin_inset Quotes erd
-\end_inset
-
- (aka the Vitali set).
- Keywords here are the Glimm–Effros dichotomy, the Luzin–Novikov theorem
- and the Feldman–Moore theorem.
-\end_layout
-
-\begin_layout Section*
-Bibilography
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-btprint "btPrintCited"
-bibfiles "../fractal"
-options "tufte"
-
-\end_inset
-
-
+TBD
 \end_layout
 
 \end_body
