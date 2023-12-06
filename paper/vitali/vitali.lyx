@@ -1044,8 +1044,7 @@ Finite binary strings
 \begin_layout Standard
 To provide a proper anchor for the discussion, a vast ocean of throughly
  conventional and quite tedious notation will be provided.
- The next few sections can be safely skimmed or skipped; they don't say
- anything important, and could probably be moved to an appendix.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1110,8 +1109,7 @@ Use this to define the set of finite-length strings as
 
 \end_inset
 
-.
- This defines 
+This defines 
 \begin_inset Formula $\mathbb{D}$
 \end_inset
 
@@ -1163,7 +1161,7 @@ one-based length
 \begin_inset Formula $b_{k}=0$
 \end_inset
 
-; else 
+; if there is no such largest integer, then 
 \begin_inset Formula $\left|b\right|_{1}=\infty$
 \end_inset
 
@@ -1204,8 +1202,8 @@ Of course,
 \begin_inset Formula $\mathbb{D}_{1}$
 \end_inset
 
- are isomorphic in the obvious, conventional sence.
- Again, lets belabor this into absurdity.
+ are isomorphic in the obvious, conventional sense.
+ Let's belabor this into absurdity.
  The binary-not provides the conventional complementation map 
 \begin_inset Formula $\neg:\left\{ 0,1\right\} \to\left\{ 0,1\right\} $
 \end_inset
@@ -1224,7 +1222,7 @@ Of course,
 \end_inset
 
  on the Cantor space, by bit-wise extension to the product space.
- This is in the obvious, conventional manner, as the bit-wise complement:
+ This is done in the obvious, conventional manner, as the bit-wise complement:
  
 \begin_inset Formula $b\mapsto\neg b=\neg\left(b_{k}\right)_{k=1}^{\infty}=\left(\neg b_{k}\right)_{k=1}^{\infty}$
 \end_inset
@@ -1251,7 +1249,8 @@ This set is meant to include the empty string
 \begin_inset Formula $\varepsilon$
 \end_inset
 
-.
+, but I'm too lazy to carry this throughout the text, and so only mention
+ it as a pedantic footnote.
  For this purpose, the definition can be modified to read 
 \begin_inset Formula $\mathbb{P}_{0}=\{\cdots\}\cup\varepsilon$
 \end_inset
@@ -1278,7 +1277,7 @@ This set is meant to include the empty string
 \begin_inset Formula $\mathbb{P}_{q}$
 \end_inset
 
- that follow.
+ that follow later.
 \end_layout
 
 \end_inset
@@ -1322,7 +1321,7 @@ true
 \begin_inset Formula $\mathbb{D}_{0}$
 \end_inset
 
- are isomorphic 
+ is isomorphic 
 \begin_inset Formula $\mathbb{P}_{0}$
 \end_inset
 
@@ -1400,7 +1399,7 @@ Write
 \begin_inset Formula $\overline{1}$
 \end_inset
 
- the infinite string of ones likewise.
+ likewise as the infinite string of ones.
  
 \end_layout
 
@@ -1409,7 +1408,7 @@ The periodic orbits will be chosen as elements taken out of the set of finite
  strings 
 \begin_inset Formula 
 \[
-\mathbb{S}=\left\{ q\vert q=\left(q_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\right\} 
+\mathbb{S}=2^{<\omega}=\left\{ q\vert q=\left(q_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\right\} 
 \]
 
 \end_inset
@@ -1427,7 +1426,11 @@ which can be either zero or one-terminated.
 \begin_inset Formula $\mathbb{S}=\mathbb{P}_{0}\cup\mathbb{P}_{1}$
 \end_inset
 
- so that the complementation involution 
+ and 
+\begin_inset Formula $\mathbb{P}_{0}\cap\mathbb{P}_{1}=\varnothing$
+\end_inset
+
+, so that the complementation involution 
 \begin_inset Formula $\neg$
 \end_inset
 
@@ -1712,8 +1715,8 @@ By convention, orbits do not have a unique starting place, and so a proper
  words, then define a collection of prefixes that exclude cyclic permutations
  of Lyndon words in the tail, and only then define the set of ultimately-periodi
 c sequences for a given orbit.
- This would mirror the above collection of definitions, maodifying them
- as needed.
+ This would mirror the above collection of definitions, modifying them as
+ needed.
  For now, there does not seem to be any point in writing this out in detail.
 \end_layout
 
@@ -1760,9 +1763,18 @@ The quotient space
 \begin_inset Formula $a\oplus b=\left(a_{k}\oplus b_{k}\right)_{k=1}^{\infty}$
 \end_inset
 
- is the bit-wise compare (alternately, the xor, or the symmetric difference):
- it's zero, if two bits are the same, else it is one.
- Thus, by 
+ is the bit-wise compare (alternately, the exclusive-or, xor, or the symmetric
+ difference).
+ That is, 
+\begin_inset Formula $a_{k}\oplus b_{k}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $a_{k}=b_{k}$
+\end_inset
+
+, else its one.
+ Thus, when writing 
 \begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
 \end_inset
 
@@ -1843,6 +1855,7 @@ One can then walk just a bit further down this path, and consider an equivalence
  The wisdom of doing this, without carefully defining sets of cyclically-permute
 d orbits is somewhat questionable, as one does run the risk of double-counting
  some of the sequences.
+ The utility of doing this, for the present text, seems to be absent.
 \end_layout
 
 \begin_layout Standard
@@ -1895,8 +1908,8 @@ In order to have further meaningful conversations about
 \begin_inset Formula $E_{q}$
 \end_inset
 
- and it's cosets, we would like to have some means of enumerating the elements
- of 
+ and it's cosets, we would like to have some means of enumerating all of
+ the elements of 
 \begin_inset Formula $E_{q}$
 \end_inset
 
@@ -2081,9 +2094,25 @@ limit point
 \end_inset
 
 , we assumed that the conventional rules about the limits of sequences should
- be applied, but we haven't yet firmly argued for this.
- Conventional rules apply when things can be metrized, but we are staring
- into the gapeing maw of a monster, and so will be a bit more careful.
+ be applied, but we haven't yet firmly stated what the word 
+\begin_inset Quotes eld
+\end_inset
+
+limit
+\begin_inset Quotes erd
+\end_inset
+
+ means, in the present context.
+ Conventional rules apply when things can be metrized, but absent a metric,
+ it's not clear how something can be close to something else.
+ There are, of course, other defintions of the limits of sequences.
+ Those defintions require the concept of an open set, and the neighborhood
+ of a point.
+ So far, we have not defined either open sets, or neighborhoods.
+ There's no topology.
+ This is not an accident; its intentional.
+ We are staring into the gapeing maw of a monster, and so will be a bit
+ more careful.
 \end_layout
 
 \begin_layout Standard
@@ -2148,7 +2177,7 @@ Is there anything wrong with this? Well, in the conventional sense, no.
 \begin_inset Formula $\Delta$
 \end_inset
 
- with the weak topology.
+ with the weak topology (the product topology).
  Yet, the present discussion is attempting to talk about the Vitali set,
  and so topologizing prematurely threatens to ruin the ability to perform
  later inference.
@@ -2165,8 +2194,8 @@ Fortunately, the lexicographic order is available.
 \begin_inset Formula $\mathbb{P}_{q}$
 \end_inset
 
-, as long as shorter prefixes preceed longer ones, and only then is the
- bitwise compare performed.
+, as long as shorter prefixes preceed longer ones, and that only then is
+ the bitwise compare performed.
  Write this order as 
 \begin_inset Formula $<^{\mbox{lex}}$
 \end_inset
@@ -2206,7 +2235,7 @@ Fortunately, the lexicographic order is available.
 \end_inset
 
 .
- It is can be extended to all of 
+ It can be extended to all of 
 \begin_inset Formula $\Delta,$
 \end_inset
 
@@ -2228,12 +2257,12 @@ Fortunately, the lexicographic order is available.
 \begin_inset Formula $\overline{q}$
 \end_inset
 
-, these are precisely the strings in 
+; these are precisely the strings in 
 \begin_inset Formula $\mathbb{D}_{q}$
 \end_inset
 
 .
- For all the othr (uncountably many) infinite-length strings, use the bitwise
+ For all the other (uncountably many) infinite-length strings, use the bitwise
  compare 
 \begin_inset Formula $<^{\mbox{bit}}$
 \end_inset
@@ -2303,7 +2332,7 @@ The ordering
 \end_inset
 
 .
- By contrast, it is not well-founded on 
+ By contrast, this ordering is not well-founded on 
 \begin_inset Formula $\Delta$
 \end_inset
 
@@ -2354,7 +2383,7 @@ Neither of the orders discussed above extend easily or naturally to either
 \begin_inset Formula $<_{q}^{\mbox{lex}}$
 \end_inset
 
- cannot be applied, since all strings appear to be of intinite length to
+ cannot be applied, since all strings appear to be of infinite length to
  
 \begin_inset Formula $\mbox{len}_{q}$
 \end_inset
@@ -2427,6 +2456,12 @@ t; the points in the coset can be distinguished from one another, but they
 \end_inset
 
 , bringing us back to th axiom of choice.
+ There doesn't seem to be any function, natural or unnatural, that provides
+ a distinguised element 
+\begin_inset Formula $u\in\gamma$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2435,7 +2470,7 @@ There is another, distinct possiblity.
 \begin_inset Quotes eld
 \end_inset
 
-alogorithmically
+algorithmically
 \begin_inset Quotes erd
 \end_inset
 
@@ -2480,12 +2515,13 @@ s cannot enumerate uncountable sets.
 \begin_inset Formula $\overline{0}$
 \end_inset
 
-, but what is the next element?
+, but what is the next element? Can we find some way of iterating to the
+ next element?
 \end_layout
 
 \begin_layout Standard
-A more interesting case is provided by using the ergodic properties of the
- Bernoulli shift when applied to the Cantor set.
+Perhaps this can be provided by using the ergodic properties of the Bernoulli
+ shift applied to the Cantor set.
  The Bernoulli shift is the shift operator 
 \begin_inset Formula $T:\Delta\to\Delta$
 \end_inset
@@ -2519,7 +2555,7 @@ select
 \begin_inset Quotes erd
 \end_inset
 
-? The axiom of choice, certainly.
+? The axiom of choice, I guess.
  What do we mean by 
 \begin_inset Quotes eld
 \end_inset
@@ -2528,7 +2564,7 @@ at random
 \begin_inset Quotes erd
 \end_inset
 
-? Chosen from the uniform distribution on 
+? Chosing from the uniform distribution on 
 \begin_inset Formula $\Delta$
 \end_inset
 
@@ -2846,7 +2882,8 @@ as the pointwise union.
 \end_inset
 
 .
- There are no extras, there are no duplicates or double-counting.
+ There are no extras, there are no duplicates or double-counting, and nothing
+ has been missed or forgotten.
 \end_layout
 
 \begin_layout Standard
@@ -2872,8 +2909,8 @@ The conventional argument proves the non-measurability of each
 \begin_inset Formula $V_{q;k}$
 \end_inset
 
- are of the same size, being isomorphic to one-another, the measures must
- all be equal: 
+ are isomorphic to one-another, they must all be of the same size: the measures
+ must all be equal: 
 \begin_inset Formula $\epsilon_{k}=\epsilon$
 \end_inset
 
@@ -2978,13 +3015,13 @@ potential infinite
 \end_layout
 
 \begin_layout Standard
-The procedure is simple, to the point of silliness; the big word above are
- used only to shock the reader into taking a more principaled approach.
+The procedure is simple, to the point of silliness; the big words above
+ are used only to shock the reader into taking a more principaled approach.
 \end_layout
 
 \begin_layout Standard
 It works like so.
- Asource of random binary digits was identified.
+ A source of random binary digits was identified.
  In the present case, a pseudo-random generator will do; it generates bits
  of sufficient quality that they offer no impediment to numerical algorithms.
  These are used to generate a sequence of values 
@@ -3002,13 +3039,12 @@ It works like so.
 \begin_inset Formula $u\oplus v$
 \end_inset
 
- is trivial: some other 32-bit integer results.
+ is trivial: the result is some other 32-bit integer.
  The theory insists that one must have 
 \begin_inset Formula $u\oplus v\notin\mathbb{D}_{0}$
 \end_inset
 
-.
- where, for now, take 
+, where, for now, take 
 \begin_inset Formula $q=0$
 \end_inset
 
@@ -3054,7 +3090,7 @@ computational scale
 \begin_inset Formula $u\oplus v\notin\mathbb{D}_{0}$
 \end_inset
 
- translates into the idea that bits 23-32 are not zero.
+ translates into the idea that the ten bits 23 to 32 are not zero.
  That is, all bits from 
 \begin_inset Formula $M$
 \end_inset
@@ -3094,8 +3130,8 @@ scaling continuum
  That is, the chance of being wrong, and of accidentally misclassifying
  a real number as a dyadic rational is about 1 in a thousand.
  The chance of mis-classyifying in the opposite direction is zero: any the
- dyadic rational have bits 23-32 all zero, and there is no chance of accidentall
-y getting that wrong.
+ dyadic rational will have bits 23-32 all zero, and there is no chance of
+ accidentally getting that wrong.
 \end_layout
 
 \begin_layout Standard
@@ -3225,6 +3261,9 @@ too many dyadics
 \begin_layout Standard
 To complete the presentation above, it would be appropriate to describe
  the actual group that carries sets from one scale to another.
+ This can be done either by working directly with the construction above,
+ or by attempting block renormalization on both the Vitali set, and the
+ Borel measure at the same time.
  This will not be done here.
 \end_layout
 
@@ -3246,7 +3285,8 @@ The construction of the Vitali set was articulated in two different ways.
  Several next steps are possible; an obvious one is to repeat the construction,
  this time taking the effort to found all statements within the language
  of effective descriptive set theory, so as to highlight all of the boundaries,
- and, in particular, where specific statements show up in the Borel hierarchy.
+ and, in particular, where each of the specific statements show up in the
+ Borel hierarchy.
  
 \end_layout
 
