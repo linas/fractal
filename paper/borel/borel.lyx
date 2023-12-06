@@ -125,398 +125,6 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-For many dynamical systems, the class of eventually-periodic orbits appear
- to be isomorphic(?) / homeom tends to veer into the territory of over-explainin
-g the obvious.
- My apologies.
-\end_layout
-
-\begin_layout Subsection
-Finite binary strings
-\end_layout
-
-\begin_layout Standard
-To provide a proper anchor for the discussion, a vast ocean of throughly
- conventional and quite tedious notation will be provided.
- The next few sections can be safely skimmed or skipped; they don't say
- anything important, and could probably be moved to an appendix.
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $\Delta=2^{\omega}=\left\{ 0,1\right\} ^{\omega}$
-\end_inset
-
- be the Cantor space, represented as the space of all infinite-length binary
- strings.
- The goal of this section is to more closely define the space 
-\begin_inset Formula $\mathbb{D}=2^{<\omega}$
-\end_inset
-
- of all finite-length binary strings.
- Although the idea is seemingly obvious, the additional notation is needed
- to avoid later ambiguities.
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $b=\left(b_{k}\right)_{k=1}^{\infty}\in\Delta$
-\end_inset
-
- be an infinite-length string of binary digits 
-\begin_inset Formula $b_{k}$
-\end_inset
-
-.
- Define the length of such a string as 
-\begin_inset Formula $\mbox{len}\left(b\right)=\left|b\right|=k$
-\end_inset
-
-, where 
-\begin_inset Formula $k$
-\end_inset
-
- is the largest integer for which 
-\begin_inset Formula $b_{k}=1$
-\end_inset
-
-; write 
-\begin_inset Formula $\left|b\right|=\infty$
-\end_inset
-
- if there is no such largest integer.
- A string is finite-length if 
-\begin_inset Formula $k<\infty$
-\end_inset
-
-.
- Informally, the finite-length strings are exactly the ones for which all
- digits are zero after a certain point.
- 
-\end_layout
-
-\begin_layout Standard
-Use this to define the set of finite-length strings as 
-\begin_inset Formula 
-\[
-\mathbb{D}=\left\{ b\in\Delta:\mbox{len}\left(b\right)<\infty\right\} 
-\]
-
-\end_inset
-
-.
- This defines 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
- such that the subset relation 
-\begin_inset Formula $\mathbb{D}\subset\Delta$
-\end_inset
-
- is made explicit.
- The strings in 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
- still have an infinite number of bits; just that almost all of them are
- zero.
- By construction, 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
- is countable; the cardinality of 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
- is 
-\begin_inset Formula $\aleph_{0}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-There are other conceptions of length.
- The 
-\begin_inset Quotes eld
-\end_inset
-
-one-based length
-\begin_inset Quotes erd
-\end_inset
-
- is given by 
-\begin_inset Formula $\mbox{len}_{1}\left(b\right)=\left|b\right|_{1}=k$
-\end_inset
-
- where 
-\begin_inset Formula $k$
-\end_inset
-
- is the largest integer for which 
-\begin_inset Formula $b_{k}=0$
-\end_inset
-
-; else 
-\begin_inset Formula $\left|b\right|_{1}=\infty$
-\end_inset
-
-.
- Informally, these are the strings which have a finite-length prefix, after
- which all digits are one.
- This leads to another set 
-\begin_inset Formula $\mathbb{D}_{1}$
-\end_inset
-
- defined analogously, as 
-\begin_inset Formula $\mathbb{D}_{1}=\left\{ b\in\Delta:\mbox{len}_{1}\left(b\right)<\infty\right\} $
-\end_inset
-
-.
- It is convenient to disambiguate all these by adding a subscript 
-\begin_inset Formula $0$
-\end_inset
-
- to the earlier defintions, so as to write 
-\begin_inset Formula $\left|b\right|=\left|b\right|_{0}=\mbox{len}_{0}\left(b\right)$
-\end_inset
-
- and also 
-\begin_inset Formula $\mathbb{D}=\mathbb{D}_{0}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Of course, 
-\begin_inset Formula $\mathbb{D}_{0}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbb{D}_{1}$
-\end_inset
-
- are isomorphic in the obvious, conventional sence.
- Again, lets belabor this into absurdity.
- The binary-not provides the conventional complementation map 
-\begin_inset Formula $\neg:\left\{ 0,1\right\} \to\left\{ 0,1\right\} $
-\end_inset
-
- defined as 
-\begin_inset Formula $\neg:0\mapsto1$
-\end_inset
-
- and 
-\begin_inset Formula $\neg:1\mapsto0$
-\end_inset
-
-.
- This extends to an involution 
-\begin_inset Formula $\neg:\Delta\to\Delta$
-\end_inset
-
- on the Cantor space, by bit-wise extension to the product space.
- This is in the obvious, conventional manner, as the bit-wise complement:
- 
-\begin_inset Formula $b\mapsto\neg b=\neg\left(b_{k}\right)_{k=1}^{\infty}=\left(\neg b_{k}\right)_{k=1}^{\infty}$
-\end_inset
-
-.
- This provides the desired isomorphism 
-\begin_inset Formula $\neg:\mathbb{D}_{0}\to\mathbb{D}_{1}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-If one is too lazy to work with an infinite number of digits, one can just
- drop the trailing repeated digits, and work with the finite prefixes.
- For this purpose, it is useful to define the set of finite-length prefixes
- as
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-This set is meant to include the empty string 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
-.
- For this purpose, the definition can be modified to read 
-\begin_inset Formula $\mathbb{P}_{0}=\{\cdots\}\cup\varepsilon$
-\end_inset
-
-, or alternately, when 
-\begin_inset Formula $N=0$
-\end_inset
-
-, the restriction 
-\begin_inset Formula $p_{N}=1$
-\end_inset
-
- is not applied.
- The goal of the empty string is to make sure that 
-\begin_inset Formula $\overline{0}\in\mathbb{D}_{0}$
-\end_inset
-
- where 
-\begin_inset Formula $\overline{0}$
-\end_inset
-
- is the string of all zeros.
- Similar remarks apply for the 
-\begin_inset Formula $\mathbb{P}_{q}$
-\end_inset
-
- that follow.
-\end_layout
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\mathbb{P}_{0}=\left\{ p|p=\left(p_{k}\right)_{k=1}^{N}\mbox{for }N<\infty\mbox{ and }p_{N}=1\right\} 
-\]
-
-\end_inset
-
-and likewise 
-\begin_inset Formula $\mathbb{P}_{1}=\neg\mathbb{P}_{0}$
-\end_inset
-
-.
- For ease of notation, the subscript can be dropped, to write 
-\begin_inset Formula $\mathbb{P}=\mathbb{P}_{0}$
-\end_inset
-
-.
- These are the 
-\begin_inset Quotes eld
-\end_inset
-
-true
-\begin_inset Quotes erd
-\end_inset
-
- finite length strings; one gets 
-\begin_inset Formula $\mathbb{D}_{0}$
-\end_inset
-
- from 
-\begin_inset Formula $\mathbb{P}_{0}$
-\end_inset
-
- by appending an infinite string of zeros.
- Clearly, 
-\begin_inset Formula $\mathbb{D}_{0}$
-\end_inset
-
- are isomorphic 
-\begin_inset Formula $\mathbb{P}_{0}$
-\end_inset
-
-, as are 
-\begin_inset Formula $\mathbb{D}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbb{P}_{1}$
-\end_inset
-
-.
- We may as well give these isomorphisms a name.
- Let 
-\begin_inset Formula $\mbox{ext}_{0}:\mathbb{P}_{0}\to\mathbb{D}_{0}$
-\end_inset
-
- be defined by appending the infinite string of zeros.
- The inverse operation is 
-\begin_inset Formula $\mbox{trunc}_{0}:\mathbb{D}_{0}\to\mathbb{P}_{0}$
-\end_inset
-
- which truncates the trailing zeros.
- It is unambiguous, because 
-\begin_inset Formula $\mbox{len}_{0}$
-\end_inset
-
- is unambiguous.
- Likewise, 
-\begin_inset Formula $\mbox{ext}_{1}:\mathbb{P}_{1}\to\mathbb{D}_{1}$
-\end_inset
-
-, this time by appending all-ones, and similarly 
-\begin_inset Formula $\mbox{trunc}_{1}:\mathbb{D}_{1}\to\mathbb{P}_{1}$
-\end_inset
-
- is defined using 
-\begin_inset Formula $\mbox{len}_{1}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
-W
-\end_layout
-
-\begin_layout Section
-Meta-commentary
-\end_layout
-
-\begin_layout Standard
-The above struggles with deeper questions that are well-researched and 
-\begin_inset Quotes eld
-\end_inset
-
-well-known
-\begin_inset Quotes erd
-\end_inset
-
-.
- A quick list:
-\end_layout
-
-\begin_layout Itemize
-The compactness properties of subsets of the Cantor space lead to understandings
- of the ultrafilter lemma, equivalently the Boolean prime ideal theorem,
- both of which provide a weaker form of the axiom of choice.
-\end_layout
-
-\begin_layout Itemize
-The sets 
-\begin_inset Formula $E_{q}$
-\end_inset
-
- can be understood as 
-\begin_inset Quotes eld
-\end_inset
-
-the smallest Borel equivalence relation (smallest, in the order of Borel
- reducibility) that does not admit a Borel function giving a real-valued
- complete invariant for the equivalence relation
-\begin_inset Quotes erd
-\end_inset
-
- (aka the Vitali set).
- Keywords here are the Glimm–Effros dichotomy, the Luzin–Novikov theorem
- and the Feldman–Moore theorem
-\end_layout
-
-\begin_layout Section*
-Appendix
-\end_layout
-
-\begin_layout Standard
 Some random related remarks that involve things well-known and quite conventiona
 l.
  A review
@@ -558,7 +166,7 @@ This appendix collects a random collection of conventional factoids about
  these spaces.
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 The discrete topology
 \end_layout
 
@@ -657,7 +265,7 @@ More can be said, following from the properties of discrete spaces, but
  this does not obviously lead to any interesting statements.
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 The standard topology
 \end_layout
 
@@ -727,7 +335,7 @@ The conventional standard topology of the Cantor space is described in the
  
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 Pointclass 
 \begin_inset Formula $\mathbf{\Sigma}_{1}^{0}$
 \end_inset
@@ -746,7 +354,7 @@ This section reviews the base for the standard topology on the Cantor space.
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Preliminary remarks about logic and set theory
 \end_layout
 
@@ -821,7 +429,7 @@ All this only became clear in hindsight.
  Verbose, but explaining obvious and trite concepts.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Cantor space vs.
  Baire space
 \end_layout
@@ -862,7 +470,7 @@ The choice of notation
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 The base for the topology
 \end_layout
 
@@ -944,7 +552,7 @@ extends
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Exclusion of zero
 \end_layout
 
@@ -1158,7 +766,7 @@ and so (of course)
  and almost nothing more.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Exclusion of a general point
 \end_layout
 
@@ -1271,7 +879,7 @@ The same construction can be generalized to any
 .
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Sneaky set intesections
 \end_layout
 
@@ -1357,7 +965,7 @@ ion is correct) but everything is suspect, because of this intesction.
  Further commentary just before the concluding subsection.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Complements of finite unions
 \end_layout
 
@@ -1427,7 +1035,7 @@ Preparing a drawing of a binary tree, with a fixed-length string on it,
  would make all of the above definitions much easier to understand and visualize.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Base neighborhood filter
 \end_layout
 
@@ -1606,7 +1214,7 @@ The same argument extends recursively.
 .
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Complements of neighborhood filters
 \end_layout
 
@@ -1795,7 +1403,7 @@ From this, deduce that every set in the base of the topology is in
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Complements of the base
 \end_layout
 
@@ -1935,7 +1543,7 @@ From the complement
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Complements of two points
 \end_layout
 
@@ -2231,7 +1839,7 @@ In analogy to the earlier one point compactification result:
 .
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Complements of any number of points
 \end_layout
 
@@ -2508,7 +2116,7 @@ If
  intersections.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Commentary about the implicit use of set intersection
 \end_layout
 
@@ -2705,7 +2313,7 @@ With these sentences, I close this text fortwith.
  ideas is deeper and more complex than one might naively imagine.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Summary
 \end_layout
 
@@ -2869,7 +2477,7 @@ The result that
 .
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 Pointclass 
 \begin_inset Formula $\mathbf{\Sigma}_{2}^{0}$
 \end_inset
@@ -2953,199 +2561,8 @@ What interesting things can we build from countable unions of these? Not
  sure what I can say here.
 \end_layout
 
-\begin_layout Subsection*
-The map to the reals.
-\end_layout
-
-\begin_layout Standard
-First, a review
-\emph on
- ad nauseum
-\emph default
-.
- The canonical mapping of the Cantor set 
-\begin_inset Formula $\Delta$
-\end_inset
-
- to the closed unit interval 
-\begin_inset Formula $0\le x\le1$
-\end_inset
-
- of the reals 
-\begin_inset Formula $x\in\mathbb{R}$
-\end_inset
-
- is given by
-\begin_inset Formula 
-\[
-x=x\left(b\right)=\sum_{k=1}^{\infty}b_{k}2^{-k}
-\]
-
-\end_inset
-
-where an abuse of notation was used to write 
-\begin_inset Formula $x:\Delta\to\mathbb{R}$
-\end_inset
-
- with 
-\begin_inset Formula $x:b\mapsto x\left(b\right)$
-\end_inset
-
-.
- As usual, every dyadic rational 
-\begin_inset Formula $d=d\left(m,n\right)=\left(2m+1\right)/2^{n}$
-\end_inset
-
- maps back to two binary different strings, one ending in all zeros, and
- one ending in all ones.
- Specifically, if 
-\begin_inset Formula $\left|b\right|=n$
-\end_inset
-
- then 
-\begin_inset Formula $b=\left(b_{1},b_{2,}\cdots,b_{n-1},1,0,0,\cdots\right)$
-\end_inset
-
- is paired with 
-\begin_inset Formula $\overline{b}=\left(b_{1},b_{2,}\cdots,b_{n-1},0,1,1,\cdots\right)$
-\end_inset
-
- with the property that 
-\begin_inset Formula $x\left(b\right)=x\left(\overline{b}\right)=d\left(m,n\right)$
-\end_inset
-
- with 
-\begin_inset Formula $m=\sum_{k=1}^{n-1}b_{k}2^{k}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-bug-eyed line, each dyadic rational is bug-eyed.
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $V_{0}$
-\end_inset
-
- be the image of 
-\begin_inset Formula $E_{0}=\Delta/\mathbb{D}$
-\end_inset
-
- under this mapping.
-\end_layout
-
-\begin_layout Standard
-under this mappingUnder this mapping
-\end_layout
-
-\begin_layout Subsection*
-The shift operator and ergodicity
-\end_layout
-
-\begin_layout Subsection*
-Baire space
-\end_layout
-
-\begin_layout Standard
-First, define the Baire space 
-\begin_inset Formula $\mathcal{N}=\omega^{\omega}$
-\end_inset
-
- to be the space of infinite-length strings of the natural numbers, where
- 
-\begin_inset Quotes eld
-\end_inset
-
-natural
-\begin_inset Quotes erd
-\end_inset
-
- is defined as positive integers (so zero is not included.) There is a canonical
- run-length encoding that maps 
-\begin_inset Formula $\mathcal{N}$
-\end_inset
-
- to the Cantor space 
-\begin_inset Formula $\Delta$
-\end_inset
-
-, given by the Minkowski question mark function.
- Now, conventionally, the question mark is defined on the reals; for the
- present, by abuse of notation, lets use the same name for the run-length
- encoding.
- Thus, given 
-\begin_inset Formula $a=\left[a_{1},a_{2},\cdots\right]\in\mathcal{N}$
-\end_inset
-
- write 
-\begin_inset Formula $b=?\left(a\right)\in\Delta$
-\end_inset
-
- as the binary string which consists of 
-\begin_inset Formula $a_{1}$
-\end_inset
-
- zeros followed by 
-\begin_inset Formula $a_{2}$
-\end_inset
-
- ones, etc.
- This is the run-length encoding.
-\end_layout
-
-\begin_layout Standard
-The canonical mapping of Baire space 
-\begin_inset Formula $\mathcal{N}$
-\end_inset
-
- into a subset of the unit interval is the continued fraction mapping 
-\begin_inset Formula 
-\[
-y=y\left(a\right)=y\left(\left[a_{1},a_{2},\cdots\right]\right)=\frac{1}{a_{1}+\dfrac{1}{a_{2}+\cdots}}
-\]
-
-\end_inset
-
-Note that this mapping misses every rational number, as long as we insist
- that each 
-\begin_inset Formula $a_{k}$
-\end_inset
-
- is a natural number, i.e.
- that 
-\begin_inset Formula $a_{k}\ne0$
-\end_inset
-
-.
- If we instead build the Baire set from the non-negative integers, so as
- to allow 
-\begin_inset Formula $a_{k}=0$
-\end_inset
-
-, then 
-\begin_inset Formula $y$
-\end_inset
-
- will hit the rationals as well.
- The cost here is that each rational has an uncountably infinite representation
- as those strings having arbitrary digits after the first zero.
-\end_layout
-
-\begin_layout Standard
-Whatever, this is very pointlessly long winded.
- 
-\end_layout
-
-\begin_layout Subsection*
-Borel hierarchy
-\end_layout
-
-\begin_layout Standard
-Lets now look at the Borel hierarchy.
- For this, we return to familiar ground.
+\begin_layout Section
+Conclusion
 \end_layout
 
 \begin_layout Section*
