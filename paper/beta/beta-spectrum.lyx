@@ -12995,7 +12995,7 @@ The sequences
  That is, for each such sequence, there is a real number 
 \begin_inset Formula 
 \[
-x=x\left(\left[m_{1},m_{2},\cdots\right]\right)=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
+c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
 \]
 
 \end_inset
@@ -13156,7 +13156,10 @@ odometer
  given by the map 
 \begin_inset Formula 
 \[
-T\left(a_{0},a_{1},\cdots\right)\mapsto\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right)\mbox{ if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
+T\left(a_{0},a_{1},\cdots\right)\mapsto\begin{cases}
+\left(a_{0}+1,a_{1},\cdots\right) & \mbox{if }a_{0}\ne p-1\\
+\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right) & \mbox{if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
+\end{cases}
 \]
 
 \end_inset
@@ -13273,7 +13276,7 @@ This can be compared to how continued fractions roll over.
  Using our off-by-one notation, write 
 \begin_inset Formula 
 \[
-\left[1,N\right]=\dfrac{1}{2+\dfrac{1}{N+1}}=0.5-\varepsilon
+c\left(\left[1,N\right]\right)=\dfrac{1}{2+\dfrac{1}{N+1}}=0.5-\varepsilon
 \]
 
 \end_inset
@@ -13281,7 +13284,7 @@ This can be compared to how continued fractions roll over.
 which rolls over to 
 \begin_inset Formula 
 \[
-\left[0,0,0,\cdots,1,\cdots\right]=\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{1+\cdots}}}=0.5+\varepsilon
+c\left(\left[0,0,N\right]\right)=\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{N+1}}}=0.5+\varepsilon
 \]
 
 \end_inset
@@ -13298,8 +13301,8 @@ which is, in a sense, backwards: the sequence
 \begin_inset Formula $\left[2,0,0,\cdots\right]$
 \end_inset
 
- as one might hope or guess or expect, but instead to 
-\begin_inset Formula $\left[0,0,0,\cdots\right]$
+ as a vaguely plausible kind of odometer behavior; instead, it went to 
+\begin_inset Formula $\left[0,0,N\right]$
 \end_inset
 
 .

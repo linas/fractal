@@ -18861,8 +18861,7 @@ left sub-sequence
 The tables are confusing to read, because the left and right brackets are
  not arbitrary, but must consist of previous leaders or points in their
  sequences.
- To provide order for this purpose, continued fraction notation, in the
- form of 
+ To provide order for this purpose, the sequence notation 
 \begin_inset Formula $\left[m_{1},m_{2},m_{3},\cdots\right]$
 \end_inset
 
@@ -20490,7 +20489,10 @@ An odometer of characteristic
  given by the map 
 \begin_inset Formula 
 \[
-T\left(a_{0},a_{1},\cdots\right)\mapsto\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right)\mbox{ if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
+T\left(a_{0},a_{1},\cdots\right)\mapsto\begin{cases}
+\left(a_{0}+1,a_{1},\cdots\right) & \mbox{if }a_{0}\ne p-1\\
+\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right) & \mbox{if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
+\end{cases}
 \]
 
 \end_inset
@@ -20812,7 +20814,7 @@ This can be compared to how continued fractions roll over.
  Using our off-by-one notation, write 
 \begin_inset Formula 
 \[
-\left[1,N\right]=\dfrac{1}{2+\dfrac{1}{N+1}}=0.5-\varepsilon
+c\left(\left[1,N\right]\right)=\dfrac{1}{2+\dfrac{1}{N+1}}=0.5-\varepsilon
 \]
 
 \end_inset
@@ -20820,7 +20822,7 @@ This can be compared to how continued fractions roll over.
 which rolls over to 
 \begin_inset Formula 
 \[
-\left[0,0,0,\cdots,1,\cdots\right]=\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{1+\cdots}}}=0.5+\varepsilon
+c\left(\left[0,0,N\right]\right)=\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{N+1}}}=0.5+\varepsilon
 \]
 
 \end_inset
@@ -20837,8 +20839,9 @@ which is, in a sense, backwards: the sequence
 \begin_inset Formula $\left[2,0,0,\cdots\right]$
 \end_inset
 
- as one might hope or guess or expect, but instead to 
-\begin_inset Formula $\left[0,0,0,\cdots\right]$
+ as one might expect some kind of plausible odometer to do, but instead
+ to 
+\begin_inset Formula $\left[0,0,N\right]$
 \end_inset
 
 .
@@ -20872,6 +20875,42 @@ The
 
 .
  By self-symmetry, the sub-intervals will re-arrange as well.
+\end_layout
+
+\begin_layout Subsection
+Some continued fraction identities
+\end_layout
+
+\begin_layout Standard
+A short aside to refresh our acquiantance with some continued fraction identitie
+s.
+ Finite
+\end_layout
+
+\begin_layout Subsection
+The involution Jimm
+\end_layout
+
+\begin_layout Standard
+The rollover of the odometer appears to be given by an involution given
+ the name of 
+\begin_inset Quotes eld
+\end_inset
+
+Jimm
+\begin_inset Quotes erd
+\end_inset
+
+ by Uludağ and Ayral.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uludag2015"
+literal "false"
+
+\end_inset
+
+ This is an involutive outer automorphism of the group PGL(2,Z) given by
+ Joan Dyer in 1978.
 \end_layout
 
 \begin_layout Subsection
@@ -21349,7 +21388,7 @@ I am not enlightened by staring at that.
 \end_layout
 
 \begin_layout Standard
-Its still an interesting problem: each row of the Vandermonde matrix is
+It's still an interesting problem: each row of the Vandermonde matrix is
  associated with the polynomial 
 \family roman
 \series medium
