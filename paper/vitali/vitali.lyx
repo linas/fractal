@@ -727,38 +727,22 @@ An equivalence relation
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The exact sequence states that all cosets are isomorphic to one-another,
+ The exact sequence states that all cosets are isomorphic to one-another,
  and are isomorphic to 
 \begin_inset Formula $E$
 \end_inset
 
 .
- If one were able to assign a 
-\begin_inset Quotes eld
-\end_inset
-
-size
-\begin_inset Quotes erd
-\end_inset
-
- to each coset, that is, a real-valued invariant measure, then each coset
- would have the same 
-\begin_inset Quotes eld
-\end_inset
-
-size
-\begin_inset Quotes erd
-\end_inset
-
-.
- The idea is that such a measure would need to respect the isomorphism.
+ If one is able to assign a size or measure to one coset, then, by the transitiv
+ity of isomorphism, one can assign the same size to all of them.
+ For this statement to hold, the measure needs to compatible with or respect
+ the isomorphism; more precisely, the measure needs to be compatible with
+ the quotient operation.
 \end_layout
 
 \begin_layout Standard
-The inability to assign such a measure arises when 
+Two distinct issues arise.
+ One issue appears when 
 \begin_inset Formula $X/E$
 \end_inset
 
@@ -826,16 +810,24 @@ The inability to assign such a measure arises when
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Perhaps, in nonstandard analysis, it is possible to assign an infinitesimal
+ Perhaps, in nonstandard analysis, it is possible to assign an infinitesimal
  size to 
 \begin_inset Formula $E$
 \end_inset
 
 , but then, such a measure is no longer real-valued; it would be nonstandard-rea
 l-valued.
+\end_layout
+
+\begin_layout Standard
+A second and more serious issue arises if the measure simply is not compatible
+ with the equivalence relation; this would result in the assignment of different
+ sizes to isomorphic cosets.
+ Properly speaking, it is inappropriate to talk about the sizes of individual
+ cosets; the whole point of measure theory is to not have to do this.
+ Is it possible to describe equivalence relations that do not admit any
+ compatible measure? The answer is yes, it is, but here, I draw up short,
+ and fail to provide an explicit example.
 \end_layout
 
 \begin_layout Subsection
@@ -864,14 +856,11 @@ ty.
 \end_layout
 
 \begin_layout Standard
-The jump from the definition of a Borel equivalence relation to the construction
- of quotient spaces was also a bit hand-wavey; the disjointness of cosets,
- and their measurability properties should not be taken for granted, but
- firmly rooted with appropriate theorems.
-\end_layout
-
-\begin_layout Standard
-This cannot and will not be done here.
+Far more serious is that the jump from the definition of a Borel equivalence
+ relation to the construction of quotient spaces is entirely hand-wavey.
+ A promise of an unmeasurable equivalence relation was made, but none delivered.
+ This cannot and will not be done here (but maybe in some future revision
+ to this paper? It could happen...).
  The next steps in a more precise formulation are provided by some search-engine
  keyword hits: the Glimm–Effros dichotomy, the Luzin–Novikov theorem and
  the Feldman–Moore theorem.
@@ -976,8 +965,40 @@ when does a category fail to have a unique morphism from the initial object
 \end_layout
 
 \begin_layout Standard
-Based on the work below, a necessary condition seems to be the lack of a
- well-founded order on the set.
+A subtle condition here is that the difficulties only arise when the axiom
+ of choice is applied an uncountably infinite number of times.
+ If one has a pre-existing uncountable set, say, the reals, or the Cantor
+ set, then one can often use this set to provide a label for some other
+ uncountable set.
+ The labelling is done with a map, a function.
+ Often, but not always, a continuous map or function, situated in some space
+ having some topology (that is, some description in terms of countable unions
+ of open sets.) This map or labelling allows the unambiguous marking of the
+ second uncountable set in terms of the first uncountale set.
+ When such a labelling is possible, there are no problems.
+ Roughly speaking, the sigma algebra on the first set can be imported into
+ the second set.
+ The map respects the open sets; it is compatible with the open sets.
+\end_layout
+
+\begin_layout Standard
+If the map is built from an uncountably infinite application of the axiom
+ of choice, then there is no way to respect the topological structure of
+ the domain into the codomain.
+ The notion of an open set is not respected; the map shatters all open sets.
+ This is what is done below.
+ Sets are built, but they are built by picking and choosing points, without
+ any consideration of what the neighborhoods of those points might be.
+ This works exquisitely for the Cantor set, since it can be defined without
+ any reference to a topology of open neighborhoods, other than to say, perhaps,
+ that it can be given the discrete topology: every point is unique and distinct
+ from all of the others.
+\end_layout
+
+\begin_layout Standard
+Based on the work below, a necessary condition for the inability to build
+ a topology-respecting map seems to be the lack of a well-founded order
+ on the set.
  If one had an order, and if that order had a unique minimal element, then
  that unique minimal element could be used as a label, from which the rest
  of the set can be generated via a free, transitive action.
@@ -986,7 +1007,7 @@ Based on the work below, a necessary condition seems to be the lack of a
 \end_layout
 
 \begin_layout Standard
-There are two possibilities to arrive at a more precise formulation.
+There are three possibilities to arrive at a more precise formulation.
  One is to rephrase the construction below, but this time explicitly using
  first-order logic, so that each step of the construction becomes a predicate.
  That predicate can then be examined to see which axioms of set theory were
@@ -1006,6 +1027,13 @@ Another alternative is to return to the literature.
  Either can be used to provide a weaker form of the axiom of choice.
  But, again, to deploy this, the construction below would need to be formalized
  using first-order logic.
+\end_layout
+
+\begin_layout Standard
+A third approach is to continue working withing the language equivalence
+ relations, and perform the construction in that language.
+ I do not currently understand how to do this.
+ I remain confused.
 \end_layout
 
 \begin_layout Standard
@@ -3468,7 +3496,8 @@ The construction of the Vitali set was articulated in two different ways.
  Bernoulli shift on the Cantor space.
  This allowed most of the notions to be made precise.
  In particular, it was useful for highlighting exactly why the axiom of
- choice is required to construct the Vitali set.
+ choice is required to construct the Vitali set, and also why it's use is
+ so particularly destructive.
  Several next steps are possible; an obvious one is to repeat the construction,
  this time taking the effort to found all statements within the language
  of effective descriptive set theory, so as to highlight all of the boundaries,
