@@ -319,18 +319,23 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 
 	// Attempted reverse listing.
-	int nmax = 16;
+	int nmax = 128;
 	for (int n=1; n<nmax; n ++)
 	{
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
 		int len = 1 + reverso(cfrac, n);
 		if (len < 0)
 		{
-			printf(">>>>> %d rejected\n", n);
+			// printf(">>>>> %d rejected\n", n);
 			continue;
 		}
+		int seqno = sequence_from_cf(cfrac, len);
+		if (n != seqno)
+		{
+			printf("Sequence numbering fail!! in=%d out=%d", n, seqno);
+		}
 		printf(">>>>> %d len=%d ", n, len);
-		print_seq(cfrac, len, "yoohoo ", "\n");
+		print_seq(cfrac, len, "sequence ", "\n");
 	}
 
 // #define SANITY_CHECK
