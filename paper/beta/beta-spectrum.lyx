@@ -98,9 +98,9 @@ Linas Vepštas
 \end_layout
 
 \begin_layout Date
-December 2017 (Current version: September 2020)
+December 2017 (Current version: December 2023)
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 This text is an extract of a diary of research notes, first published in
@@ -110,6 +110,8 @@ This text is an extract of a diary of research notes, first published in
  and the speculative parts, and prettifies the rest into a presentable format.
  MSC2020 Classification 37E05, 37G10.
  Submitted to Transactions of the AMS on 4 October 2020.
+ This version, from December 2023 corrects minor errors in the beta-odometer
+ section.
 \end_layout
 
 \end_inset
@@ -9610,7 +9612,11 @@ with
 \end_inset
 
 'th Fibonacci number, as usual.
- For the general case, one has that
+ For the general case, after 
+\begin_inset Formula $m\ge k-1$
+\end_inset
+
+ iterations, one gets the symmetric matrix
 \begin_inset Formula 
 \[
 B^{m}=\left[\begin{array}{cccccc}
@@ -12543,8 +12549,7 @@ Beta odometer
 \end_layout
 
 \begin_layout Standard
-The periodic orbits can be assigned a label, in the style of continued fractions
-, shown in figure 
+The periodic orbits can be assigned a label, shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Discontinuity-labels"
@@ -12614,15 +12619,8 @@ This figure shows the integral
 \end_inset
 
 -Golden polynomials.
- Prominent discontinuities are labeled with a 
-\begin_inset Quotes eld
-\end_inset
-
-continued-fraction
-\begin_inset Quotes erd
-\end_inset
-
--style labelling.
+ Prominent discontinuities are labeled with a finite sequence of non-negative
+ integers following a regular pattern.
  
 \begin_inset Note Note
 status collapsed
@@ -12654,7 +12652,7 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-This labeling scheme is hopefully apparent.
+The patterned regularity in this labeling scheme is hopefully apparent.
  The largest discontinuity is given a label of 
 \begin_inset Formula $\left[0\right]$
 \end_inset
@@ -12746,112 +12744,13 @@ with where
 
 with the inequalities being strict.
  Each interval is of decreasing size, limiting to zero.
- One can thus conclude that infinite sequences 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
-\end_inset
-
- are unique, and correspond one-to-one with the bracketed 
+ As the bounds are increasingly tight, they bracket a unique convergent.
+ This provides a mapping for most, but not all, sequences to 
 \begin_inset Formula $\beta$
 \end_inset
 
- value.
- That is, there is a bijection between the non-periodic 
-\begin_inset Formula $\beta$
-\end_inset
-
- and the infinite length labels.
-\end_layout
-
-\begin_layout Standard
-There is a slight ambiguity for the labeling of the periodic 
-\begin_inset Formula $\beta$
-\end_inset
-
- values.
- Apparently, one can make the identification 
-\begin_inset Formula 
-\[
-\left[-1\right]=\left[0,0,\cdots\right]
-\]
-
-\end_inset
-
-in that 
-\begin_inset Formula $\beta=2$
-\end_inset
-
- appears as the limit of ever-lengthening sequences 
-\begin_inset Formula $\left[0,0,\cdots,0\right]$
-\end_inset
-
-.
- Closer examination reveals that each discontinuity can be labeled this
- way.
- That is, each finite-length label has a corresponding infinite-length label:
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
-\]
-
-\end_inset
-
-From this, we can easily conclude that there is a bijection between each
- infinite length of strings of (non-negative) integers, and 
-\begin_inset Formula $\beta$
-\end_inset
-
- values; they are in one-to-one correspondence.
- (It is not hard to see that every possible sequence occurs once and only
- once.)
-\end_layout
-
-\begin_layout Standard
-As each such 
-\begin_inset Formula $\beta$
-\end_inset
-
- corresponds to a periodic orbit, it is the one real root of one of the
- beta polynomials 
-\begin_inset Formula $p_{n}$
-\end_inset
-
- for some 
-\begin_inset Formula $n$
-\end_inset
-
-; equivalently, it is the convergent of one of the 
-\begin_inset Formula $\beta$
-\end_inset
-
--Fibonacci sequences, for that same 
-\begin_inset Formula $n$
-\end_inset
-
-.
- That value is given by a recursive formula:
-\begin_inset Formula 
-\[
-n=\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
-\]
-
-\end_inset
-
-which is anchored by 
-\begin_inset Formula $\left[m\right]=2^{m}$
-\end_inset
-
-.
- These are the integer labels appears on figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Normalization-Integral"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+ values (and vice-versa; a bijection).
+ Excluded are certain sequences with intercalated zeros, discussed below.
 \end_layout
 
 \begin_layout Standard
@@ -12984,6 +12883,130 @@ The above algorithm will generate polynomials in descending
 \end_inset
 
  of each sequence is less than the previous one.
+ It provides a total order, possible only because infinite recursion is
+ prevented by the two recursion limits.
+\end_layout
+
+\begin_layout Standard
+The above will generate all sequences that do not have zeros in them.
+ It will also generate all sequences that have a finite run of initial zeros.
+ It will also generate sequences with an unbounded number of zeros at the
+ tail.
+ However, sequences with intercalated zeros are not generated: one cannot
+ have a sequence that contains a run of one or more zeros, surrounded by
+ non-zero digits on either side.
+\end_layout
+
+\begin_layout Standard
+Periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values correspond to finite sequences.
+ There is a way to convert finite sequences into equivalent infinite sequences.
+ The upper bound of all sequences is 
+\begin_inset Formula $\beta\left(\left[-1\right]\right)=2$
+\end_inset
+
+; it is larger than 
+\begin_inset Formula $\beta\left(\left[0,0,\cdots,0\right]\right)$
+\end_inset
+
+ for any finite run of zeros.
+ From this, it is reasonable to make the identification
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[-1\right]=\left[0,0,\cdots\right]
+\]
+
+\end_inset
+
+Closer examination reveals that each discontinuity can be labeled this way.
+ That is, each finite-length label has a corresponding infinite-length label:
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
+\]
+
+\end_inset
+
+It was already apparent that finite-length strings were in one-to-one correspond
+ence with periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ orbits.
+\end_layout
+
+\begin_layout Standard
+This extension of finite sequences into infinite ones provides a one-to-one
+ mapping (injection) of all real values 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ into Baire space 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
+\end_inset
+
+ are the non-negative integers.
+ The mapping is not onto (surjection), as sequences with intercalated zeros
+ are prohibited.
+\end_layout
+
+\begin_layout Standard
+As each such 
+\begin_inset Formula $\beta$
+\end_inset
+
+ corresponds to a periodic orbit, it is the one real root of one of the
+ beta polynomials 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ for some 
+\begin_inset Formula $n$
+\end_inset
+
+; equivalently, it is the convergent of one of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci sequences, for that same 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ That value is given by a recursive formula:
+\begin_inset Formula 
+\[
+n=\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
+\]
+
+\end_inset
+
+which is anchored by 
+\begin_inset Formula $\left[m\right]=2^{m}$
+\end_inset
+
+.
+ These are the integer labels appears on figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalization-Integral"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -12991,7 +13014,7 @@ The sequences
 \begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
 \end_inset
 
- can be re-interpreted as continued fractions, albeit off-by-one.
+ can be re-interpreted as continued fractions.
  That is, for each such sequence, there is a real number 
 \begin_inset Formula 
 \[
@@ -13000,14 +13023,25 @@ c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2
 
 \end_inset
 
+xxx
+\end_layout
+
+\begin_layout Standard
 With some care, one can construct a bijection between real numbers and continued
  fractions.
  There is no particular difficulty for non-terminating sequences: these
  correspond to irrationals, and the correspondence is unique; again a bijection.
  Difficulties show only for the rationals, where any given rational has
- several inequivalent continued fraction expansions.
- The ambiguity can be avoided by fiat: one could, for example, take the
- shortest possible continued fraction expansion.
+ two inequivalent finite-length continued fraction expansions: 
+\begin_inset Formula 
+\[
+c\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}+1\right]\right)
+\]
+
+\end_inset
+
+The ambiguity can be avoided by fiat: one could, for example, take the shortest
+ possible continued fraction expansion.
 \end_layout
 
 \begin_layout Standard
@@ -13269,43 +13303,6 @@ Unlike the
 
  has rolled over at some location.
  The increment is, formally speaking, an infinitesimal.
-\end_layout
-
-\begin_layout Standard
-This can be compared to how continued fractions roll over.
- Using our off-by-one notation, write 
-\begin_inset Formula 
-\[
-c\left(\left[1,N\right]\right)=\dfrac{1}{2+\dfrac{1}{N+1}}=0.5-\varepsilon
-\]
-
-\end_inset
-
-which rolls over to 
-\begin_inset Formula 
-\[
-c\left(\left[0,0,N\right]\right)=\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{N+1}}}=0.5+\varepsilon
-\]
-
-\end_inset
-
-which is, in a sense, backwards: the sequence 
-\begin_inset Formula $\left[1,N\right]$
-\end_inset
-
- for 
-\begin_inset Formula $N\to\infty$
-\end_inset
-
- does not roll over to 
-\begin_inset Formula $\left[2,0,0,\cdots\right]$
-\end_inset
-
- as a vaguely plausible kind of odometer behavior; instead, it went to 
-\begin_inset Formula $\left[0,0,N\right]$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard

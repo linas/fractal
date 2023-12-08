@@ -98,13 +98,15 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Date
-December 2017 (Current version: September 2020)
+December 2017 (Current version: December 2023)
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
 Diary started in December 2017, with major updates published in February
  2018 and December 2018.
+ Minor fixes and corrections in September 2020.
+ Corrections and minor expansion in December 2023.
 \end_layout
 
 \end_inset
@@ -15309,7 +15311,11 @@ with
 \end_inset
 
 'th Fibonacci number, as usual.
- For the general case, one has that
+ For the general case, after 
+\begin_inset Formula $m\ge k-1$
+\end_inset
+
+ iterations, one gets the symmetric matrix
 \begin_inset Formula 
 \[
 B^{m}=\left[\begin{array}{cccccc}
@@ -18960,7 +18966,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -19009,15 +19015,8 @@ This figure shows the integral
 \end_inset
 
 -Golden polynomials.
- Prominent discontinuities are labeled with a 
-\begin_inset Quotes eld
-\end_inset
-
-continued-fraction
-\begin_inset Quotes erd
-\end_inset
-
--style labelling.
+ Prominent discontinuities are labeled with a finite sequence of non-negative
+ integers following a regular pattern.
  
 \begin_inset Note Note
 status collapsed
@@ -19203,12 +19202,41 @@ where
 The inequalities are strict.
  Thus, any given finite-length sequence is bounded above and below by two
  convergents.
- This allows infinite-length sequences 
+ This allows (most; see immediately below) infinite-length sequences 
 \begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
 \end_inset
 
  to be defined without ambiguity: they are always bounded above and below,
  by increasingly tight bounds, and so have have a unique convergent.
+\end_layout
+
+\begin_layout Standard
+Not all infinite-length sequences 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
+\end_inset
+
+ sequences appear; some sequences containing zeros are illegal.
+ Lets list the legal sequences:
+\end_layout
+
+\begin_layout Enumerate
+All sequences that do not contain a zero are legal.
+\end_layout
+
+\begin_layout Enumerate
+All sequences containing a finite run of leading zeros, followed by any
+ sequence of non-zero digits are legal.
+\end_layout
+
+\begin_layout Enumerate
+All sequences containing a finite run of leading zeros, followed by a finite
+ sequences of non-zero digits, followed by an infinite sequence of zeros
+ are legal.
+\end_layout
+
+\begin_layout Standard
+What is not legal are general intercalated sequences of zero and non-zero
+ elements.
 \end_layout
 
 \begin_layout Standard
@@ -19408,6 +19436,25 @@ and so in the limit of large
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The extension of finite sequences into infinite ones provides a one-to-one
+ mapping (injection) of all real values 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ into Baire space 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
+\end_inset
+
+ are the non-negative integers.
+ The mapping is not onto (surjection), as sequences with intercalated zeros
+ are prohibited.
 \end_layout
 
 \begin_layout Standard
@@ -20814,20 +20861,24 @@ This can be compared to how continued fractions roll over.
  Using our off-by-one notation, write 
 \begin_inset Formula 
 \[
-c\left(\left[1,N\right]\right)=\dfrac{1}{2+\dfrac{1}{N+1}}=0.5-\varepsilon
-\]
-
-\end_inset
-
-which rolls over to 
-\begin_inset Formula 
-\[
 c\left(\left[0,0,N\right]\right)=\dfrac{1}{1+\dfrac{1}{1+\dfrac{1}{N+1}}}=0.5+\varepsilon
 \]
 
 \end_inset
 
-which is, in a sense, backwards: the sequence 
+As the limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ is taken, this rolls over to
+\begin_inset Formula 
+\[
+c\left(\left[1,M\right]\right)=\dfrac{1}{2+\dfrac{1}{M+1}}=0.5-\varepsilon
+\]
+
+\end_inset
+
+which rolls over to which is, in a sense, backwards: the sequence 
 \begin_inset Formula $\left[1,N\right]$
 \end_inset
 
@@ -20882,9 +20933,37 @@ Some continued fraction identities
 \end_layout
 
 \begin_layout Standard
-A short aside to refresh our acquiantance with some continued fraction identitie
+A short aside to refresh our acquaintance with some continued fraction identitie
 s.
- Finite
+ Rationals have two inequivalent finite continued-fraction expansions:
+\begin_inset Formula 
+\[
+c\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}+1\right]\right)
+\]
+
+\end_inset
+
+If one allows 
+\begin_inset Formula $\infty$
+\end_inset
+
+ in an expansion, then
+\begin_inset Formula 
+\[
+c\left(\left[m_{1},m_{2},\cdots,m_{k},\infty\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)
+\]
+
+\end_inset
+
+so that the rollover discussed above corresponds to 
+\begin_inset Formula 
+\[
+c\left(\left[m_{1},m_{2},\cdots,m_{k},0,\infty\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}+1\right]\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
