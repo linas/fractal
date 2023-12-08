@@ -117,10 +117,10 @@ double cf_to_real(int cfrac[], int len)
 }
 
 /*
- * Given the continued-fraction representation, return the
+ * Given a finite-lengtth Baire representation, return the
  * corresponding index number.
  */
-long index_from_cf(int cfrac[], int len)
+long index_from_fbaire(int cfrac[], int len)
 {
 	if (1 == len)
 	{
@@ -128,7 +128,7 @@ long index_from_cf(int cfrac[], int len)
 		return 1UL << cfrac[0];
 	}
 
-	long leader = index_from_cf(cfrac, len-1);
+	long leader = index_from_fbaire(cfrac, len-1);
 	if (-1 == leader) return -1; // avoid overflow
 
 	long follower = 2*leader + 1;
@@ -162,15 +162,15 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 
 #define SZ 20
 /*
- * Validate the bounds on the continued fraction.
+ * Validate the bounds on the finite-Baire sequence representation.
  * ... and print it out.
- * maxn == cutoff for highest known n; this avoid overflow.
+ * maxn == cutoff for highest known n; this avoids overflow.
  */
-void validate_cf(int cfrac[], int len, long maxn)
+void validate_fbaire(int cfrac[], int len, long maxn)
 {
 	static double prevgold = 2.0;
 
-	long seq = index_from_cf(cfrac, len);
+	long seq = index_from_fbaire(cfrac, len);
 	if (seq >= maxn) return;
 	if (-1 == seq) return;
 	double gold = find_gold(seq);
@@ -190,7 +190,7 @@ void validate_cf(int cfrac[], int len, long maxn)
 	{
 		print_seq(cfrac, len-1, " left=", "");
 
-		long left = index_from_cf(cfrac, len-1);
+		long left = index_from_fbaire(cfrac, len-1);
 
 		// Right bracket is tricky.
 		int rfrac[SZ];
@@ -201,7 +201,7 @@ void validate_cf(int cfrac[], int len, long maxn)
 		rfrac[rlen-1]--;
 		print_seq(rfrac, rlen, " right=", "");
 
-		long right = index_from_cf(rfrac, rlen);
+		long right = index_from_fbaire(rfrac, rlen);
 
 		// When bracketed by leader peers, left must be greater than right.
 		if (len-1 == rlen && left <= right)
@@ -232,15 +232,15 @@ void validate_cf(int cfrac[], int len, long maxn)
 }
 
 /*
- * Generate correctly-ordered sequences. The ordering is such that 
- * the corresponding golden number is strictly decreasing for the
- * generated cfrac sequences.
- * i.e. generate sequences
+ * Generate correctly-ordered finite-baire sequences. The ordering
+ * is such that the corresponding golden number is strictly decreasing
+ * for the generated cfrac sequences.
+ *
  * maxdepth == number of doubling steps
  * maxlength == max length of fraction.
  * maxn == cutoff for highest known n
  */
-void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
+void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 {
 
 	// Iterate to max length, first.
@@ -249,10 +249,10 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 		int bfrac[SZ];
 		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
 		bfrac[len] = 0;
-		iterate_cf(bfrac, len+1, maxdepth, maxlength, maxn);
+		iterate_fbaire(bfrac, len+1, maxdepth, maxlength, maxn);
 	}
 
-	validate_cf(cfrac, len, maxn);
+	validate_fbaire(cfrac, len, maxn);
 
 	// Iterate depthwise second.
 	if (cfrac[len-1] < maxdepth)
@@ -261,15 +261,15 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 		int afrac[SZ];
 		for (int i=0; i<len; i++) afrac[i] = cfrac[i];
 		afrac[len-1] ++;
-		iterate_cf(afrac, len, maxdepth, maxlength, maxn);
+		iterate_fbaire(afrac, len, maxdepth, maxlength, maxn);
 	}
 }
 
-// Generate cf expansions from integer index.
+// Generate finite-Baire sequence expansions from integer index.
 // Given an index, set "cfrac" to the matching sequence.
 // Return the length of the cfrac sequence.
-// This is the inverse of what index_from_cf
-int index_to_cf(int cfrac[], int nseq)
+// This is the inverse of what index_from_fbaire
+int index_to_fbaire(int cfrac[], int nseq)
 {
 	int msum = 0;
 	while (0 == nseq %2) { msum ++; nseq /=2; }
@@ -296,7 +296,7 @@ int index_to_cf(int cfrac[], int nseq)
 	}
 
 	// Recurse
-	int len = index_to_cf(cfrac, nseq);
+	int len = index_to_fbaire(cfrac, nseq);
 	if (len < 0) return len;
 
 	// Remove contributions from shorter sequences
@@ -318,23 +318,23 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 
 	// Verify reverse listing.
-	int nmax = 1<<16;
+	int nmax = 1<<26;
 	for (int n=1; n<nmax; n ++)
 	{
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
-		int len = index_to_cf(cfrac, n);
+		int len = index_to_fbaire(cfrac, n);
 		if (len < 0)
 		{
 			// printf(">>>>> %d rejected\n", n);
 			continue;
 		}
-		int seqno = index_from_cf(cfrac, len);
+		int seqno = index_from_fbaire(cfrac, len);
 		if (n != seqno)
 		{
 			printf("Sequence numbering fail!! in=%d out=%d", n, seqno);
 		}
 		// printf(">>>>> %d len=%d ", n, len);
-		print_seq(cfrac, len, "sequence ", "\n");
+		// print_seq(cfrac, len, "sequence ", "\n");
 	}
 
 // #define SANITY_CHECK
@@ -353,7 +353,7 @@ int main(int argc, char* argv[])
 
 	// Iterating to length 10, depth 10 takes more than an hour,
 	// mostly due to large numbers of overflow failures.
-	iterate_cf(cfrac, 1, 3, 8, nmax);
+	iterate_fbaire(cfrac, 1, 3, 8, nmax);
 #endif
 
 // #define BIG_GRAPH
@@ -372,7 +372,7 @@ int main(int argc, char* argv[])
 
 	// Iterating to length 10, depth 10 takes more than an hour,
 	// mostly due to large numbers of overflow failures.
-	// iterate_cf(cfrac, 1, 10, 10, nmax);
+	// iterate_fbaire(cfrac, 1, 10, 10, nmax);
 
 	// Need to go to high depth to avoid big gap at golden mean.
 	int maxdepth = 16;
@@ -380,6 +380,6 @@ int main(int argc, char* argv[])
 	printf("#\n# Max order of polynomials = %d num=2^order = %d\n", norder, nmax);
 	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
 	fflush (stdout);
-	iterate_cf(cfrac, 1, maxdepth, maxlen, nmax);
+	iterate_fbaire(cfrac, 1, maxdepth, maxlen, nmax);
 #endif
 }
