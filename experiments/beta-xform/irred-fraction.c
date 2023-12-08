@@ -273,7 +273,7 @@ int reverso(int cfrac[], int nseq)
 
 	printf("entry norig=%d msum=%d nseq=%d\n", norig, msum, nseq);
 
-	// terminate recursion
+	// Terminate recursion
 	if (1 == nseq)
 	{
 		printf("the end\n");
@@ -285,8 +285,21 @@ int reverso(int cfrac[], int nseq)
 	nseq -=1;
 	nseq /=2;
 
+	if (1 < nseq && 0 == msum)
+	{
+		int pure = nseq;
+		while (0 == pure %2) { pure /=2; }
+		if (1 == pure)
+		{
+			printf("ppppppppppure power!! orig=%d nseq=%d\n", norig, nseq);
+			return -666;
+		}
+	}
+
 	// Recurse
 	int loc = reverso(cfrac, nseq);
+	if (loc < 0) return loc;
+
 	for (int j=0; j<loc; j++)
 		msum -= cfrac[j];
 
@@ -302,7 +315,7 @@ int main(int argc, char* argv[])
 	int cfrac[SZ];
 
 	// Attempted reverse listing.
-	int nmax = 15;
+	int nmax = 16;
 	for (int n=1; n<nmax; n ++)
 	{
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
