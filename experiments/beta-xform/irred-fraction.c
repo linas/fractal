@@ -271,14 +271,14 @@ int reverso(int cfrac[], int nseq)
 	int msum = 0;
 	while (0 == nseq %2) { msum ++; nseq /=2; }
 
-	printf("duude norig=%d msum=%d nseq=%d\n", norig, msum, nseq);
+	printf("entry norig=%d msum=%d nseq=%d\n", norig, msum, nseq);
 
 	// terminate recursion
 	if (1 == nseq)
 	{
 		printf("the end\n");
-		cfrac[0] = 0;
-		return 1;
+		cfrac[0] = msum;
+		return 0;
 	}
 
 	// If we are here, nseq is odd; reduce it and try again.
@@ -286,9 +286,15 @@ int reverso(int cfrac[], int nseq)
 	nseq /=2;
 
 	// Recurse
-	reverso(cfrac, nseq);
+	int loc = reverso(cfrac, nseq);
+	for (int j=0; j<loc; j++)
+		msum -= cfrac[j];
 
-	return 1;
+	printf("post recur norig=%d nseq=%d loc=%d msum=%d\n",
+		norig, nseq, loc, msum);
+	cfrac[loc+1] = msum;
+
+	return loc+1;
 }
 
 int main(int argc, char* argv[])
@@ -301,6 +307,13 @@ int main(int argc, char* argv[])
 	{
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
 		reverso(cfrac, n);
+		int len = 0;
+		for (int i=0; i<SZ; i++)
+		{
+			if (-666 == cfrac[i]) { len = i; break; }
+		}
+		printf(">>>>> %d len=%d ", n, len);
+		print_seq(cfrac, 6, "yoohoo ", "\n");
 	}
 
 // #define SANITY_CHECK
