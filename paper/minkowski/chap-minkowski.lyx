@@ -1031,7 +1031,7 @@ reference "eq:recursive ? fun defn"
 
 \begin_layout Standard
 Let 
-\begin_inset Formula $x=[a_{1},a_{2},...]$
+\begin_inset Formula $x=[a_{1},a_{2},\cdots]$
 \end_inset
 
  be the continued fraction representation
@@ -1326,7 +1326,7 @@ Denjoy expansion
 ): 
 \begin_inset Formula 
 \begin{equation}
-?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k+1}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:direct ? fun defn}
+?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k+1}\;2^{-(a_{1}+a_{2}+\cdots+a_{k})}\label{eq:direct ? fun defn}
 \end{equation}
 
 \end_inset
@@ -1349,7 +1349,7 @@ where
 \begin_inset Formula 
 \[
 ?(x)=\begin{array}{ccccc}
-0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
+0.\underbrace{000..0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
 a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}
 \end{array}
 \]
@@ -2000,7 +2000,7 @@ The repeated application of the function
  Equivalently, for a continued fraction, 
 \begin_inset Formula 
 \[
-g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]
+g^{n}([a_{1},a_{2},\cdots])=[a_{1}+n,a_{2},\cdots]
 \]
 
 \end_inset
@@ -2131,22 +2131,26 @@ shows that
 
 \end_inset
 
-Applying the above process, it is relatively straightforward to see that,
- for 
-\begin_inset Formula $N>1$
+Applying the two commutation relations 
+\begin_inset Formula $?g=h?$
 \end_inset
 
-, 
+ and 
+\begin_inset Formula $r?=?r$
+\end_inset
+
+ repeatedly results in 
 \begin_inset Formula 
 \begin{align}
 (?\circ\gamma)(x)= & \left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)\label{eq:q-mark isomorph}\\
 = & \left(h^{a_{1}}rh^{a_{2}}r...rh^{a_{N}}\circ?\right)(x)\nonumber \\
-= & \frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\nonumber 
+= & \frac{1}{2^{a_{1}}}\left(1-\frac{1}{2^{a_{2}}}\left(1-\frac{1}{2^{a_{3}}}\left(\cdots\left(1-\frac{1}{2^{a_{N}}}?\left(x\right)\right)\right)\right)\right)\nonumber \\
+= & \frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-\cdots+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\nonumber 
 \end{align}
 
 \end_inset
 
-To see the other leg of the commutative diagram of the homomorphism, observe
+To see the other leg of the commutative diagram of this homomorphism, observe
  that 
 \begin_inset Formula $g^{n}(x)$
 \end_inset
