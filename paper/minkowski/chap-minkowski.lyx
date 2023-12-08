@@ -2182,7 +2182,7 @@ r(x)=\dfrac{1}{1+\dfrac{1}{-1+\dfrac{1}{x}}}=[1,-1,x]
 Continuing this exercise, one finds that
 \begin_inset Formula 
 \begin{equation}
-\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:gamma act on cf}
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r\cdots rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},\cdots,a_{N-1},a_{N}-1,x]\label{eq:gamma act on cf}
 \end{equation}
 
 \end_inset
@@ -2272,15 +2272,12 @@ Some curious combinations of these operators are tabulated here.
 \end_inset
 
  on a continued fraction is given by 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
-r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
-\;[1,a_{1}-1,a_{2},..] & \;\textrm{\;\ for \;} & a_{1}\neq1\\
-\;[a_{2}+1,a_{3},...] & \textrm{\;\;\ for \;} & a_{1}=1
-\end{array}\right.
+r\left([a_{1},a_{2},..]\right)=\begin{cases}
+[1,a_{1}-1,a_{2},\cdots] & \textrm{for }a_{1}\neq1\\{}
+[a_{2}+1,a_{3},\cdots] & \textrm{for }a_{1}=1
+\end{cases}
 \]
 
 \end_inset
@@ -2292,7 +2289,7 @@ Using the above, the operator to insert a digit
  at the front of the continued fraction expansion is 
 \begin_inset Formula 
 \[
-(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]
+(g^{n-1}rg)\left([a_{1},a_{2},\cdots]\right)=[n,a_{1},a_{2},\cdots]
 \]
 
 \end_inset
@@ -2320,7 +2317,7 @@ n-1\, & 1
 The repeated application of the insertion operator leads to 
 \begin_inset Formula 
 \[
-(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)\cdots(x)=(g^{j-1}rg^{k}rg^{m}rg\cdots)(x)=[j,k,m,\cdots,x]
 \]
 
 \end_inset
@@ -2339,7 +2336,7 @@ reference "eq:gamma act on cf"
 The append operator follows by combining 
 \begin_inset Formula 
 \[
-[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]
+[a_{1},a_{2},\cdots,a_{N},g^{k}(x)]=[a_{1},a_{2},\cdots,a_{N}+k,x]
 \]
 
 \end_inset
@@ -2347,7 +2344,7 @@ The append operator follows by combining
 and 
 \begin_inset Formula 
 \[
-[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]
+[a_{1},a_{2},\cdots,a_{N},r(x)]=[a_{1},a_{2},\cdots,a_{N}+1,-1,x]
 \]
 
 \end_inset
@@ -2367,25 +2364,26 @@ which, for
 , acts as 
 \begin_inset Formula 
 \[
-[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]
+[a_{1},a_{2},\cdots,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},\cdots,a_{N},k,x]
 \]
 
 \end_inset
 
- Continued fractions can be built up by appending at the back, starting
- from 
+Appending to the back, instead of the front, starting with 
 \begin_inset Formula $(g^{-1}rg)(x)=1/x=[x]$
 \end_inset
 
- as 
+ gives 
 \begin_inset Formula 
 \[
-(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})\cdots(x)=(g^{j-1}rg^{k}rg^{m}rg\cdots)(x)=[j,k,m,\cdots,x]
 \]
 
 \end_inset
 
-and so arriving at the same result as before.
+which has the same form as before.
+ One can append to the front or the back, and get the same results: the
+ operation is associative.
 \end_layout
 
 \begin_layout Subsection
@@ -2429,8 +2427,12 @@ representations
 , both of which represent the real number one.
  Thus, the dyadic representation is not even isomorphic to the reals; it
  is at best homomorphic.
- In a later section, we'll see the that the dyadics are isomorphic to the
- Cantor set.
+ 
+\end_layout
+
+\begin_layout Standard
+In a later section, we'll see the that the dyadic fractions are isomorphic
+ to the Cantor set.
  In this section, the relationship of these two representations is spelled
  out in greater detail and in more formal terms.
  
@@ -2482,7 +2484,7 @@ where
  such that 
 \begin_inset Formula 
 \[
-x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]
+x_{C}=a_{0}+\dfrac{1}{a_{1}+\dfrac{1}{a_{2}+\dfrac{1}{\cdots}}}=[a_{0};a_{1},a_{2},\cdots]
 \]
 
 \end_inset
@@ -2909,7 +2911,16 @@ To summarize, the continued fractions
 \end_layout
 
 \begin_layout Standard
-XXX TODO: careful throwing around the word 
+XXX FIXME TODO: This entire section needs to be rewritten.
+ Issues include:
+\end_layout
+
+\begin_layout Itemize
+The proper name for the set of infinite binary strings is Cantor space.
+\end_layout
+
+\begin_layout Itemize
+careful throwing around the word 
 \begin_inset Quotes eld
 \end_inset
 
