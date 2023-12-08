@@ -109,7 +109,7 @@ Linas Vepstas
 \begin_layout Date
 12 October 2004 (updated 22 August 2014)
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 December 2023: Fixes for various (mostly minor) errors.
@@ -806,13 +806,13 @@ ive real number line
  Matching up the nodes of the Farey tree to the nodes of the Stern-Brocot
  tree induces a function from the unit interval to the positive real numbers.
  This function is given by 
-\begin_inset Formula $h:[0,1]\to\mathbb{R}^{+}$
+\begin_inset Formula $f:[0,1]\to\mathbb{R}^{+}$
 \end_inset
 
  with 
 \begin_inset Formula 
 \begin{equation}
-h(x)=\frac{x}{1-x}\label{eq:Farey to Stern-Brocot}
+f\left(x\right)=\frac{x}{1-x}\label{eq:Farey to Stern-Brocot}
 \end{equation}
 
 \end_inset
@@ -1723,13 +1723,13 @@ The map from the Farey tree to the Stern-Brocot tree was given earlier,
  and is much simpler:
 \begin_inset Formula 
 \[
-h\left(x\right)=\frac{x}{1-x}
+f\left(x\right)=\frac{x}{1-x}
 \]
 
 \end_inset
 
 One can deduce that 
-\begin_inset Formula $h=?^{-1}\circ b\circ?$
+\begin_inset Formula $f=?^{-1}\circ b\circ?$
 \end_inset
 
  by lining up each of the trees.
@@ -1915,7 +1915,7 @@ Given a real number
 \end_inset
 
  has an explicit, concrete form: 
-\begin_inset Formula $g(x)=x/(1+x)$
+\begin_inset Formula $g(x)=x/(x+1)$
 \end_inset
 
 .
@@ -1944,7 +1944,7 @@ reference "eq:direct ? fun defn"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-(?\circ g)(x)=?(g(x))=?\left(\frac{x}{1+x}\right)=\frac{?(x)}{2}\label{eq:dyadic g}
+(?\circ g)(x)=?(g(x))=?\left(\frac{x}{x+1}\right)=\frac{?(x)}{2}\label{eq:dyadic g}
 \end{equation}
 
 \end_inset
@@ -1966,7 +1966,24 @@ reference "eq:direct ? fun defn"
 \end_inset
 
 .
- The repeated application of the function 
+ By defining 
+\begin_inset Formula $h(x)=x/2$
+\end_inset
+
+ the above identitiy can be written in the form of a commuting diagram:
+ 
+\begin_inset Formula $?\circ g=h\circ?$
+\end_inset
+
+ which holds for all 
+\begin_inset Formula $x$
+\end_inset
+
+ in the unit interval.
+\end_layout
+
+\begin_layout Standard
+The repeated application of the function 
 \begin_inset Formula $g$
 \end_inset
 
@@ -1976,7 +1993,7 @@ reference "eq:direct ? fun defn"
 \end_inset
 
 , one readily obtains 
-\begin_inset Formula $g^{n}(x)=x/(1+nx)$
+\begin_inset Formula $g^{n}(x)=x/(nx+1)$
 \end_inset
 
 .
@@ -1991,7 +2008,7 @@ g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]
 Iterating under the question mark gives 
 \begin_inset Formula 
 \[
-\left(?\circ g^{n}\right)(x)=?\left(\frac{x}{nx+1}\right)=\frac{?(x)}{2^{n}}
+\left(?\circ g^{n}\right)(x)=?\left(\frac{x}{nx+1}\right)=\frac{?(x)}{2^{n}}=\left(h^{n}\circ?\right)(x)
 \]
 
 \end_inset
@@ -2086,9 +2103,10 @@ reflection
 , generates more self-symmetries.
  Thus, for example, 
 \begin_inset Formula 
-\[
-\left(?rg^{n}\right)(x)=\left(r?g^{n}\right)(x)=r\left(\frac{?(x)}{2^{n}}\right)=1-\frac{?(x)}{2^{n}}=?\left(r\left(\frac{x}{nx+1}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)
-\]
+\begin{align*}
+\left(?rg^{n}\right)(x)= & \left(r?g^{n}\right)(x)=\left(rh^{n}?\right)(x)=1-\frac{?(x)}{2^{n}}\\
+= & ?\left(r\left(\frac{x}{nx+1}\right)\right)=?\left(\frac{(n-1)x+1}{nx+1}\right)
+\end{align*}
 
 \end_inset
 
@@ -2135,7 +2153,7 @@ To see the other leg of the commutative diagram of the homomorphism, observe
  may be itself written as a continued fraction: 
 \begin_inset Formula 
 \[
-g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,\frac{1}{x}]
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]
 \]
 
 \end_inset
@@ -2144,8 +2162,11 @@ In the same vein, one has
 \begin_inset Formula $(rg^{n})(x)=[1,n-1,x]$
 \end_inset
 
- and, with the slight abuse of allowing continued fractions with negative
- integers:
+ and, setting 
+\begin_inset Formula $n=0$
+\end_inset
+
+, with the slight abuse of allowing continued fractions with negative integers:
 \begin_inset Formula 
 \[
 r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]
@@ -2156,7 +2177,7 @@ r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]
 Continuing this exercise, one finds that
 \begin_inset Formula 
 \begin{equation}
-\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:gamma acting on cont frac}
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:gamma act on cf}
 \end{equation}
 
 \end_inset
@@ -2302,7 +2323,7 @@ The repeated application of the insertion operator leads to
 which provides a simple proof of equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:gamma acting on cont frac"
+reference "eq:gamma act on cf"
 
 \end_inset
 
