@@ -12977,6 +12977,7 @@ This extension of finite sequences into infinite ones provides the last
 \end_inset
 
 , with no duplications or couble-counting.
+ This is intersting and remarkable.
 \end_layout
 
 \begin_layout Standard
@@ -13037,24 +13038,12 @@ noprefix "false"
 \begin_layout Standard
 The recursion relation is a bijection; it works in both directions; the
  index can be obtained from a sequence, and vice-versa.
- In the inverted form, it reveals a more concise explanation for why some
- indexes do not appear.
- Recall from earlier chapters that indexes do not appear when polynomial
- roots aren't correctly bracketed; they aren't correctly bracketed when
- a given polynomial can be factored into one of lower order.
- This recursion relation gives a short description: indexes 
-\begin_inset Formula $n$
+ In the inverted form, rejected indexes have no sequence representation.
+ That is, the recursion formula fails to find sequences for 
+\begin_inset Formula $n=5,9,11,17,18,19,21,\cdots$
 \end_inset
 
- are prohibited when the final reverse iterate has the form 
-\begin_inset Formula $\left(2^{m}+1\right)$
-\end_inset
-
- for some integer 
-\begin_inset Formula $m>1$
-\end_inset
-
- xxxxxxxxxxxxxx
+ exactly as expected, as these correspond to the reducible beta polynomials.
 \end_layout
 
 \begin_layout Standard
@@ -13074,7 +13063,8 @@ c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2
 This provides an injection of Baire space (into) the reals (of the unit
  interval).
  It is not a surjection, as the rationals do not appear.
- Combining these two mappings gives an injection from the intervale 
+ Composing the the inverted beta-sequence mapping with the continued fraction
+ mapping gives an injection (one-to-one mapping) from the interval 
 \begin_inset Formula $1<\beta\le2$
 \end_inset
 
@@ -13098,6 +13088,19 @@ noprefix "false"
 \end_inset
 
 .
+ One can get a surjection, by first replacing each ultimately-zero beta
+ sequence by it's matching finite form.
+ This will map the periodic betas to the rationals.
+ Unfortunately, this map is not one-to-one.
+ Rationals have two distinct continue-fraction representations: 
+\begin_inset Formula $c\left(\left[m_{1},\cdots,m_{k},0\right]\right)=c\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
+\end_inset
+
+ but these are not same betas: 
+\begin_inset Formula $\beta\left(\left[m_{1},\cdots,m_{k},0\right]\right)\ne\beta\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

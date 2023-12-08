@@ -345,7 +345,7 @@ int main(int argc, char* argv[])
 	// Verify reverse listing.
 	// Takes 30 cpu-seconds to get to 1<<26
 	int nmax = 1<<26;
-// nmax=64;
+nmax=64;
 	for (int n=1; n<nmax; n ++)
 	{
 		int cfrac[SZ];
@@ -353,7 +353,7 @@ int main(int argc, char* argv[])
 		int len = index_to_fbaire(cfrac, n);
 		if (len < 0)
 		{
-// #define PRINT_SEQS
+#define PRINT_SEQS
 #ifdef PRINT_SEQS
 			printf(">>>>> %d rejected\n", n);
 #endif
