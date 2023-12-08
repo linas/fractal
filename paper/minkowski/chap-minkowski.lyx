@@ -804,12 +804,9 @@ ive real number line
 
 .
  Matching up the nodes of the Farey tree to the nodes of the Stern-Brocot
- tree induces a function from the unit interval to the positive real numbers.
- This function is given by 
-\begin_inset Formula $f:[0,1]\to\mathbb{R}^{+}$
-\end_inset
-
- with 
+ tree induces a function from the the rationals on the unit interval to
+ all positive rationals.
+ This function is given by
 \begin_inset Formula 
 \begin{equation}
 f\left(x\right)=\frac{x}{1-x}\label{eq:Farey to Stern-Brocot}
@@ -817,7 +814,68 @@ f\left(x\right)=\frac{x}{1-x}\label{eq:Farey to Stern-Brocot}
 
 \end_inset
 
-This function is clearly continuous.
+It is not hard to imagine that this function holds for real numbers as well:
+ that one can take not only an unbounded number of steps down the tree,
+ but that one can go infinitely far, arriving at the real numbers.
+ The reals can be imagined as those places that correspond to the gaps between
+ the branches in the tree.
+ That is, one can imagine that chasing a single branch all the way down
+ will still arrive at something that 
+\begin_inset Quotes eld
+\end_inset
+
+feels like
+\begin_inset Quotes erd
+\end_inset
+
+ a rational number.
+ The reals, somehow, live 
+\begin_inset Quotes eld
+\end_inset
+
+in between
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $x/\left(1-x\right)$
+\end_inset
+
+ does 
+\begin_inset Quotes eld
+\end_inset
+
+make sense
+\begin_inset Quotes erd
+\end_inset
+
+ for the reals as well as the rationals.
+ The limit seems to be well-defined, the function seems continuous.
+ 
+\end_layout
+
+\begin_layout Standard
+This will be almost the last time that the word 
+\begin_inset Quotes eld
+\end_inset
+
+continuous
+\begin_inset Quotes erd
+\end_inset
+
+ is mentioned in this text.
+ For two reasons.
+ First is that this is not really the topic that this text wants to talk
+ about.
+ Second is that it really can't: a proper, formal defintion of continuity
+ requires the defintion of open sets, and, more generally a topology.
+ This requires a lot of work, and if one is not careful to bound the discussion,
+ it can reach into the depths of general topology and descriptive set theory.
+ Entire books have been written on these topics, and more than a few.
+ There is no topology in this text.
+ Most of the discussion will be about single points, individual instances
+ of things: perhaps integers, perhaps strings of integers, perhaps rationals.
 \end_layout
 
 \begin_layout Subsection
@@ -2397,7 +2455,8 @@ Representations of Real Numbers
 \end_layout
 
 \begin_layout Standard
-The dyadic numbers and continued fractions are often taken as 
+In the above, the dyadic numbers and the continued fractions were casually
+ taken as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2405,7 +2464,70 @@ being the same thing
 \begin_inset Quotes erd
 \end_inset
 
- as the real numbers; more precisely, they are 
+ as the real numbers.
+ This section will attempt to be more precise.
+\end_layout
+
+\begin_layout Standard
+Some formalities are in order.
+ The set of all infinite strings of binary digits is called the Cantor space.
+ It can be written as 
+\begin_inset Formula $2^{\omega}=\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ where 
+\begin_inset Formula $2=\left\{ 0,1\right\} $
+\end_inset
+
+ is just the set containing two items (two letters, which happen to be 0
+ and 1 at present).
+ The symbol 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is the ordinal representing countable infinity.
+ Thus, 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ is a product 
+\begin_inset Formula $\left\{ 0,1\right\} \times\left\{ 0,1\right\} \times\cdots$
+\end_inset
+
+ of countably many copies of 
+\begin_inset Formula $2=\left\{ 0,1\right\} $
+\end_inset
+
+.
+ Likewise, write 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ for the natural numbers, the set of positive integers.
+ The countably infinite product 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+ is called Baire space.
+\end_layout
+
+\begin_layout Standard
+Both these spaces are well-known and carefully studied in mathematics; they
+ have a large number of peculiar and interesting properties.
+ None of this will be reviewed here: such a review would be longer than
+ this text.
+ For the present case, both will be treated as discrete spaces, just consisting
+ of infinite strings of letters, and nothing more sophisticated.
+ In particular, this section, and the rest of this text carefully avoids
+ any discussions related to ideas from topology
+\end_layout
+
+\begin_layout Standard
+there will 
+\end_layout
+
+\begin_layout Standard
+more precisely, they are 
 \emph on
 representations
 \emph default
@@ -2415,7 +2537,7 @@ representations
  themselves.
  In particular, they have some strange properties of their own, not shared
  by the reals in general.
- Thus, for example, in the dyadic representation, one has two different
+ Thus, for example, in the dyadic representation, there are two different
  representations, 
 \begin_inset Formula $1.000\cdots$
 \end_inset
@@ -2424,10 +2546,13 @@ representations
 \begin_inset Formula $0.111\cdots$
 \end_inset
 
-, both of which represent the real number one.
- Thus, the dyadic representation is not even isomorphic to the reals; it
- is at best homomorphic.
- 
+, both of which represent the real number 1.
+ Thus, the dyadic representation is not isomorphic to the reals; the map
+ it is a surjection 
+\end_layout
+
+\begin_layout Standard
+For finite-length continued fraction
 \end_layout
 
 \begin_layout Standard
