@@ -266,17 +266,17 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 // Attempt to generate sequence expansions from integer labels.
 int reverso(int cfrac[], int nseq)
 {
-	int norig = nseq;
+	// int norig = nseq;
 
 	int msum = 0;
 	while (0 == nseq %2) { msum ++; nseq /=2; }
 
-	printf("entry norig=%d msum=%d nseq=%d\n", norig, msum, nseq);
+	// printf("entry norig=%d msum=%d nseq=%d\n", norig, msum, nseq);
 
 	// Terminate recursion
 	if (1 == nseq)
 	{
-		printf("the end\n");
+		// printf("the end\n");
 		cfrac[0] = msum;
 		return 0;
 	}
@@ -285,13 +285,14 @@ int reverso(int cfrac[], int nseq)
 	nseq -=1;
 	nseq /=2;
 
+	// Reject pure powers of two, when they occur after an odd number.
 	if (1 < nseq && 0 == msum)
 	{
 		int pure = nseq;
 		while (0 == pure %2) { pure /=2; }
 		if (1 == pure)
 		{
-			printf("ppppppppppure power!! orig=%d nseq=%d\n", norig, nseq);
+			// printf("ppppppppppure power!! orig=%d nseq=%d\n", norig, nseq);
 			return -666;
 		}
 	}
@@ -300,11 +301,14 @@ int reverso(int cfrac[], int nseq)
 	int loc = reverso(cfrac, nseq);
 	if (loc < 0) return loc;
 
+	// Remove contributions from shorter sequences
 	for (int j=0; j<loc; j++)
 		msum -= cfrac[j];
 
-	printf("post recur norig=%d nseq=%d loc=%d msum=%d\n",
-		norig, nseq, loc, msum);
+	// Special-case the length=2 case.
+	if (0 == loc) msum -= cfrac[0];
+
+	// printf("post recur norig=%d nseq=%d loc=%d msum=%d\n", norig, nseq, loc, msum);
 	cfrac[loc+1] = msum;
 
 	return loc+1;
@@ -319,14 +323,14 @@ int main(int argc, char* argv[])
 	for (int n=1; n<nmax; n ++)
 	{
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
-		reverso(cfrac, n);
-		int len = 0;
-		for (int i=0; i<SZ; i++)
+		int len = 1 + reverso(cfrac, n);
+		if (len < 0)
 		{
-			if (-666 == cfrac[i]) { len = i; break; }
+			printf(">>>>> %d rejected\n", n);
+			continue;
 		}
 		printf(">>>>> %d len=%d ", n, len);
-		print_seq(cfrac, 6, "yoohoo ", "\n");
+		print_seq(cfrac, len, "yoohoo ", "\n");
 	}
 
 // #define SANITY_CHECK
