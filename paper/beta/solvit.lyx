@@ -20947,18 +20947,60 @@ If one allows
 \begin_inset Formula $\infty$
 \end_inset
 
- in an expansion, then
+ in an expansion, then one gets a sequence truncation:
 \begin_inset Formula 
 \[
-c\left(\left[m_{1},m_{2},\cdots,m_{k},\infty\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)
+c\left(\left[m_{1},m_{2},\cdots,m_{k},\infty,m_{k+2},\cdots\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)
 \]
 
 \end_inset
 
-so that the rollover discussed above corresponds to 
+The rollover discussed above corresponds to 
 \begin_inset Formula 
 \[
 c\left(\left[m_{1},m_{2},\cdots,m_{k},0,\infty\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}+1\right]\right)
+\]
+
+\end_inset
+
+Defining extended Baire space as 
+\begin_inset Formula $\left(\mathbb{N}\cup\infty\right)^{\omega}$
+\end_inset
+
+, then the continued fraction mapping will hit all of the rationals.
+ The mapping is not one-to-one, since the first occurence of 
+\begin_inset Formula $\infty$
+\end_inset
+
+ terminates the show, and all strings following this collapse onto the same
+ rational.
+\end_layout
+
+\begin_layout Standard
+Allowing 
+\begin_inset Formula $-1$
+\end_inset
+
+ into the mix provides some oddball identies, including a no-op:
+\begin_inset Formula 
+\[
+c\left(\left[-1,m_{1},m_{2},\cdots\right]\right)=c\left(\left[m_{1},m_{2},\cdots\right]\right)
+\]
+
+\end_inset
+
+and erasure of the last digit:
+\begin_inset Formula 
+\[
+c\left(\left[m_{1},m_{2},\cdots,m_{k},-1\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k-1}\right]\right)
+\]
+
+\end_inset
+
+In the middle of the string, one gets a drop:
+\begin_inset Formula 
+\[
+c\left(\left[m_{1},m_{2},\cdots,m_{k},-1,m_{k+2},\cdots\right]\right)=c\left(\left[m_{1},m_{2},\cdots,m_{k}+m_{k+2},\cdots\right]\right)
 \]
 
 \end_inset
