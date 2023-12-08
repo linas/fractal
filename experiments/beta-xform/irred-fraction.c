@@ -236,7 +236,7 @@ void validate_cf(int cfrac[], int len, long maxn)
  * i.e. generate sequences
  * maxdepth == number of doubling steps
  * maxlength == max length of fraction.
- * maxn == cutoff fir highest known n
+ * maxn == cutoff for highest known n
  */
 void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 {
@@ -263,9 +263,47 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 	}
 }
 
+// Attempt to generate sequence expansions from integer labels.
+int reverso(int cfrac[], int nseq)
+{
+	int norig = nseq;
+
+	int msum = 0;
+	while (0 == nseq %2) { msum ++; nseq /=2; }
+
+	printf("duude norig=%d msum=%d nseq=%d\n", norig, msum, nseq);
+
+	// terminate recursion
+	if (1 == nseq)
+	{
+		printf("the end\n");
+		cfrac[0] = 0;
+		return 1;
+	}
+
+	// If we are here, nseq is odd; reduce it and try again.
+	nseq -=1;
+	nseq /=2;
+
+	// Recurse
+	reverso(cfrac, nseq);
+
+	return 1;
+}
+
 int main(int argc, char* argv[])
 {
-#define SANITY_CHECK
+	int cfrac[SZ];
+
+	// Attempted reverse listing.
+	int nmax = 15;
+	for (int n=1; n<nmax; n ++)
+	{
+		for (int i=0; i<SZ; i++) cfrac[i] = -666;
+		reverso(cfrac, n);
+	}
+
+// #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Sanity check, only; short runtime.
 	int norder = 18;
