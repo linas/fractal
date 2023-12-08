@@ -153,118 +153,6 @@ long index_from_fbaire(int cfrac[], int len)
 	return follower;
 }
 
-void print_seq(int cfrac[], int len, char* head, char* tail)
-{
-	printf("%s [", head);
-	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
-	printf("]%s", tail);
-}
-
-#define SZ 20
-/*
- * Validate the bounds on the finite-Baire sequence representation.
- * ... and print it out.
- * maxn == cutoff for highest known n; this avoids overflow.
- */
-void validate_fbaire(int cfrac[], int len, long maxn)
-{
-	static double prevgold = 2.0;
-
-	long seq = index_from_fbaire(cfrac, len);
-	if (seq >= maxn) return;
-	if (-1 == seq) return;
-	double gold = find_gold(seq);
-	// printf("seq = %ld gold=%g ", seq, gold);
-
-	double ex = cf_to_real(cfrac, len);
-	printf("%ld	%g	%g	#", seq, gold, ex);
-	print_seq(cfrac, len, "", "");
-
-	if (gold >= prevgold)
-		printf("FAIL total order!\n");
-	else
-		prevgold = gold;
-
-	// Validate bracketing.
-	if (1 < len)
-	{
-		print_seq(cfrac, len-1, " left=", "");
-
-		long left = index_from_fbaire(cfrac, len-1);
-
-		// Right bracket is tricky.
-		int rfrac[SZ];
-		for (int i=0; i<len; i++) rfrac[i] = cfrac[i];
-		int rlen = len;
-		while (1 < rlen && 0 == rfrac[rlen-1]) rlen--;
-
-		rfrac[rlen-1]--;
-		print_seq(rfrac, rlen, " right=", "");
-
-		long right = index_from_fbaire(rfrac, rlen);
-
-		// When bracketed by leader peers, left must be greater than right.
-		if (len-1 == rlen && left <= right)
-			printf("FAIL peer bracket order! left=%ld right=%ld\n", left, right);
-
-		if (len <= rlen && 0 == rfrac[rlen-1] && right <= left && -1 != right)
-			printf("FAIL hi bracket order! left=%ld right=%ld\n", left, right);
-
-		// This check passes.... I think it's correct ...
-		if (len > rlen && left <= right)
-			printf("FAIL lo bracket order! left=%ld right=%ld\n", left, right);
-
-		if (seq <= left)
-			printf("FAIL left bracket! left=%ld seq=%ld\n", left, seq);
-
-		if (seq <= right)
-			printf("FAIL right bracket! right=%ld seq=%ld\n", right, seq);
-
-		double lg = find_gold(left);
-		double rg = find_gold(right);
-
-		if (gold < lg) printf("fail left gold! left=%g gold=%g\n", lg, gold);
-		if (rg < gold) printf("fail right gold! gold=%g right=%g\n", gold, rg);
-	}
-
-	printf("\n");
-	fflush(stdout);
-}
-
-/*
- * Generate correctly-ordered finite-baire sequences. The ordering
- * is such that the corresponding golden number is strictly decreasing
- * for the generated cfrac sequences.
- *
- * maxdepth == number of doubling steps
- * maxlength == max length of fraction.
- * maxn == cutoff for highest known n
- */
-void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
-{
-
-	// Iterate to max length, first.
-	if (len < maxlength)
-	{
-		int bfrac[SZ];
-		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
-		bfrac[len] = 0;
-		iterate_fbaire(bfrac, len+1, maxdepth, maxlength, maxn);
-	}
-
-	validate_fbaire(cfrac, len, maxn);
-
-	// Iterate depthwise second.
-	if (cfrac[len-1] < maxdepth)
-	{
-
-		int afrac[SZ];
-		for (int i=0; i<len; i++) afrac[i] = cfrac[i];
-		afrac[len-1] ++;
-		iterate_fbaire(afrac, len, maxdepth, maxlength, maxn);
-	}
-}
-
 // Generate finite-Baire sequence expansions from integer index.
 // Given an index, set "cfrac" to the matching sequence.
 // Return the length of the cfrac sequence.
@@ -313,14 +201,148 @@ int index_to_fbaire(int cfrac[], int nseq)
 	return len+1;
 }
 
+void print_seq(int cfrac[], int len, char* head, char* tail)
+{
+	printf("%s [", head);
+	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
+	printf("]%s", tail);
+}
+
+#define SZ 20
+/*
+ * Validate the bounds on the finite-Baire sequence representation.
+ * ... and print it out.
+ * maxn == cutoff for highest known n; this avoids overflow.
+ */
+void validate_fbaire(int cfrac[], int len, long maxn)
+{
+	static double prevgold = 2.0;
+
+	long seq = index_from_fbaire(cfrac, len);
+	if (seq >= maxn) return;
+	if (-1 == seq) return;
+	double gold = find_gold(seq);
+	// printf("seq = %ld gold=%g ", seq, gold);
+
+// #define PRINT_DATA_FOR_GRAPH
+#ifdef PRINT_DATA_FOR_GRAPH
+	double ex = cf_to_real(cfrac, len);
+	printf("%ld	%g	%g	#", seq, gold, ex);
+	print_seq(cfrac, len, "", "");
+#endif
+
+	if (gold >= prevgold)
+		printf("FAIL total order!\n");
+	else
+		prevgold = gold;
+
+	// Validate bracketing.
+	if (1 < len)
+	{
+#ifdef PRINT_DATA_FOR_GRAPH
+		print_seq(cfrac, len-1, " left=", "");
+#endif
+
+		long left = index_from_fbaire(cfrac, len-1);
+
+		// Right bracket is tricky.
+		int rfrac[SZ];
+		for (int i=0; i<len; i++) rfrac[i] = cfrac[i];
+		int rlen = len;
+		while (1 < rlen && 0 == rfrac[rlen-1]) rlen--;
+
+		rfrac[rlen-1]--;
+#ifdef PRINT_DATA_FOR_GRAPH
+		print_seq(rfrac, rlen, " right=", "");
+#endif
+
+		long right = index_from_fbaire(rfrac, rlen);
+
+		// When bracketed by leader peers, left must be greater than right.
+		if (len-1 == rlen && left <= right)
+			printf("FAIL peer bracket order! left=%ld right=%ld\n", left, right);
+
+		if (len <= rlen && 0 == rfrac[rlen-1] && right <= left && -1 != right)
+			printf("FAIL hi bracket order! left=%ld right=%ld\n", left, right);
+
+		// This check passes.... I think it's correct ...
+		if (len > rlen && left <= right)
+			printf("FAIL lo bracket order! left=%ld right=%ld\n", left, right);
+
+		if (seq <= left)
+			printf("FAIL left bracket! left=%ld seq=%ld\n", left, seq);
+
+		if (seq <= right)
+			printf("FAIL right bracket! right=%ld seq=%ld\n", right, seq);
+
+		double lg = find_gold(left);
+		double rg = find_gold(right);
+
+		if (gold < lg) printf("fail left gold! left=%g gold=%g\n", lg, gold);
+		if (rg < gold) printf("fail right gold! gold=%g right=%g\n", gold, rg);
+	}
+
+	int seqno = index_from_fbaire(cfrac, len);
+	int dfrac[SZ];
+	for (int i=0; i<SZ; i++) dfrac[i] = -666;
+	int dlen = index_to_fbaire(dfrac, seqno);
+	if (len != dlen)
+		printf("Error: length violation!\n");
+	for (int i=0; i<len; i++)
+	{
+		if (cfrac[i] != dfrac[i])
+			printf("Error: sequence violation!\n");
+	}
+
+#ifdef PRINT_DATA_FOR_GRAPH
+	printf("\n");
+	fflush(stdout);
+#endif
+}
+
+/*
+ * Generate correctly-ordered finite-baire sequences. The ordering
+ * is such that the corresponding golden number is strictly decreasing
+ * for the generated cfrac sequences.
+ *
+ * maxdepth == number of doubling steps
+ * maxlength == max length of fraction.
+ * maxn == cutoff for highest known n
+ */
+void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
+{
+	// Iterate to max length, first.
+	if (len < maxlength)
+	{
+		int bfrac[SZ];
+		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
+		bfrac[len] = 0;
+		iterate_fbaire(bfrac, len+1, maxdepth, maxlength, maxn);
+	}
+
+	validate_fbaire(cfrac, len, maxn);
+
+	// Iterate depthwise second.
+	if (cfrac[len-1] < maxdepth)
+	{
+		int afrac[SZ];
+		for (int i=0; i<len; i++) afrac[i] = cfrac[i];
+		afrac[len-1] ++;
+		iterate_fbaire(afrac, len, maxdepth, maxlength, maxn);
+	}
+}
+
 int main(int argc, char* argv[])
 {
-	int cfrac[SZ];
+// #define VERFIY_FBAIRE
+#ifdef VERFIY_FBAIRE
 
 	// Verify reverse listing.
+	// Takes 30 cpu-seconds to get to 1<<26
 	int nmax = 1<<26;
 	for (int n=1; n<nmax; n ++)
 	{
+		int cfrac[SZ];
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
 		int len = index_to_fbaire(cfrac, n);
 		if (len < 0)
@@ -336,10 +358,31 @@ int main(int argc, char* argv[])
 		// printf(">>>>> %d len=%d ", n, len);
 		// print_seq(cfrac, len, "sequence ", "\n");
 	}
+	printf("Verified everything up to nmax=%d\n", nmax);
+#endif
+
+#define REVERSE_VERIFY
+#ifdef REVERSE_VERIFY
+	// Verify that the reverse-indexing works.
+	int norder = 20;
+	int nmax = (1<<norder) + 1;
+
+	setup_gold(nmax);
+
+	for (int n=0; n<nmax; n ++)
+		find_gold(n);
+
+	int cfrac[SZ];
+	cfrac[0] = 0;
+
+	// Iterating to length 10, depth 10 takes more than an hour,
+	// mostly due to large numbers of overflow failures.
+	iterate_fbaire(cfrac, 1, 5, 8, nmax);
+#endif
 
 // #define SANITY_CHECK
 #ifdef SANITY_CHECK
-	// Sanity check, only; short runtime.
+	// Print the finite-Baire sequences. Sanity check, only; short runtime.
 	int norder = 18;
 	int nmax = (1<<norder) + 1;
 
