@@ -183,8 +183,10 @@ int index_to_fbaire(int cfrac[], int nseq)
 			return -666;
 	}
 
-	// Recurse
+	// Recurse.
 	int len = index_to_fbaire(cfrac, nseq);
+
+	// Pass rejection slips back up the chain.
 	if (len < 0) return len;
 
 	// Remove contributions from shorter sequences
@@ -193,6 +195,9 @@ int index_to_fbaire(int cfrac[], int nseq)
 
 	// Special-case the length=1 case.
 	if (1 == len) msum -= cfrac[0];
+
+	// If more powers of two removed than can exist, then reject.
+	if (msum < 0) return -555;
 
 	// What's left over is m_k
 	cfrac[len] = msum;
@@ -224,7 +229,7 @@ void validate_fbaire(int cfrac[], int len, long maxn)
 	double gold = find_gold(seq);
 	// printf("seq = %ld gold=%g ", seq, gold);
 
-// #define PRINT_DATA_FOR_GRAPH
+#define PRINT_DATA_FOR_GRAPH
 #ifdef PRINT_DATA_FOR_GRAPH
 	double ex = cf_to_real(cfrac, len);
 	printf("%ld	%g	%g	#", seq, gold, ex);
@@ -334,12 +339,13 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 
 int main(int argc, char* argv[])
 {
-// #define VERFIY_FBAIRE
+#define VERFIY_FBAIRE
 #ifdef VERFIY_FBAIRE
 
 	// Verify reverse listing.
 	// Takes 30 cpu-seconds to get to 1<<26
 	int nmax = 1<<26;
+// nmax=64;
 	for (int n=1; n<nmax; n ++)
 	{
 		int cfrac[SZ];
@@ -347,7 +353,10 @@ int main(int argc, char* argv[])
 		int len = index_to_fbaire(cfrac, n);
 		if (len < 0)
 		{
-			// printf(">>>>> %d rejected\n", n);
+// #define PRINT_SEQS
+#ifdef PRINT_SEQS
+			printf(">>>>> %d rejected\n", n);
+#endif
 			continue;
 		}
 		int seqno = index_from_fbaire(cfrac, len);
@@ -355,13 +364,15 @@ int main(int argc, char* argv[])
 		{
 			printf("Sequence numbering fail!! in=%d out=%d", n, seqno);
 		}
-		// printf(">>>>> %d len=%d ", n, len);
-		// print_seq(cfrac, len, "sequence ", "\n");
+#ifdef PRINT_SEQS
+		printf(">>>>> %d len=%d ", n, len);
+		print_seq(cfrac, len, "sequence ", "\n");
+#endif
 	}
 	printf("Verified everything up to nmax=%d\n", nmax);
 #endif
 
-#define REVERSE_VERIFY
+// #define REVERSE_VERIFY
 #ifdef REVERSE_VERIFY
 	// Verify that the reverse-indexing works.
 	int norder = 20;

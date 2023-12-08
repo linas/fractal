@@ -12743,13 +12743,38 @@ with where
 \end_inset
 
 with the inequalities being strict.
- Each interval is of decreasing size, limiting to zero.
+ Each interval is of decreasing size, limiting to zero, as the length of
+ the integer sequences expand.
  As the bounds are increasingly tight, they bracket a unique convergent.
+ 
 \end_layout
 
 \begin_layout Standard
-The sequences can be generated in proper order via a simple recursive algorithm,
- given here.
+As a consequence, the non-periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are placed in one-to-one correspondence with infinite length integer sequences.
+ That this is one-to-on and onto, a bijection, between all reals in the
+ interval 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ and Baire space 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
+\end_inset
+
+ are the non-negative integers, will be clarified shortly below, after a
+ treatment of the finite-length sequences.
+\end_layout
+
+\begin_layout Standard
+The finite-length integer sequences can be generated in proper order via
+ a simple recursive algorithm, given here.
  
 \begin_inset Note Note
 status collapsed
@@ -12882,22 +12907,13 @@ The above algorithm will generate polynomials in descending
 \end_layout
 
 \begin_layout Standard
-The above will generate all sequences that do not have zeros in them.
- It will also generate all sequences that have a finite run of initial zeros.
- It will also generate sequences with an unbounded number of zeros at the
- tail.
- However, sequences with intercalated zeros are not generated: one cannot
- have a sequence that contains a run of one or more zeros, surrounded by
- non-zero digits on either side.
-\end_layout
-
-\begin_layout Standard
 Periodic 
 \begin_inset Formula $\beta$
 \end_inset
 
  values correspond to finite sequences.
- There is a way to convert finite sequences into equivalent infinite sequences.
+ There is a way to convert these finite sequences into equivalent infinite
+ sequences.
  The upper bound of all sequences is 
 \begin_inset Formula $\beta\left(\left[-1\right]\right)=2$
 \end_inset
@@ -12918,7 +12934,19 @@ Periodic
 
 \end_inset
 
-Closer examination reveals that each discontinuity can be labeled this way.
+as a notational convenience.
+ Closer examination reveals that each discontinuity visible in the figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Discontinuity-labels"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be labeled this way.
  That is, each finite-length label has a corresponding infinite-length label:
 \begin_inset Formula 
 \[
@@ -12933,38 +12961,40 @@ ence with periodic
 \end_inset
 
  orbits.
+ This maps them cleanly, one-to-one, to infinite zero-terminated strings.
+ 
 \end_layout
 
 \begin_layout Standard
-This extension of finite sequences into infinite ones provides a one-to-one
- mapping (injection) of all real values 
+This extension of finite sequences into infinite ones provides the last
+ step needed to provide a one-to-one and onto mapping, a bijection, between
+ all real values 
 \begin_inset Formula $1<\beta\le2$
 \end_inset
 
- into Baire space 
+ and Baire space 
 \begin_inset Formula $\mathbb{N}^{\omega}$
 \end_inset
 
-, where 
-\begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
-\end_inset
-
- are the non-negative integers.
- The mapping is not onto (surjection), as sequences with intercalated zeros
- are prohibited.
+, with no duplications or couble-counting.
 \end_layout
 
 \begin_layout Standard
-As each such 
+The bijection can be explicitly exhibited as follows.
+ For the 
 \begin_inset Formula $\beta$
 \end_inset
 
- corresponds to a periodic orbit, it is the one real root of one of the
- beta polynomials 
+ that correspond to a periodic orbit, that 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value is the one real root of one of the corresponding beta polynomial
+ 
 \begin_inset Formula $p_{n}$
 \end_inset
 
- for some 
+ for some index 
 \begin_inset Formula $n$
 \end_inset
 
@@ -12972,12 +13002,12 @@ As each such
 \begin_inset Formula $\beta$
 \end_inset
 
--Fibonacci sequences, for that same 
+-Fibonacci sequences, for that same index 
 \begin_inset Formula $n$
 \end_inset
 
 .
- That value is given by a recursive formula:
+ The index is given by a recursive formula:
 \begin_inset Formula 
 \[
 n=\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
@@ -13001,6 +13031,30 @@ noprefix "false"
 \end_inset
 
 .
+ The recursion relation can be obtained from the bracketing relationship.
+\end_layout
+
+\begin_layout Standard
+The recursion relation is a bijection; it works in both directions; the
+ index can be obtained from a sequence, and vice-versa.
+ In the inverted form, it reveals a more concise explanation for why some
+ indexes do not appear.
+ Recall from earlier chapters that indexes do not appear when polynomial
+ roots aren't correctly bracketed; they aren't correctly bracketed when
+ a given polynomial can be factored into one of lower order.
+ This recursion relation gives a short description: indexes 
+\begin_inset Formula $n$
+\end_inset
+
+ are prohibited when the final reverse iterate has the form 
+\begin_inset Formula $\left(2^{m}+1\right)$
+\end_inset
+
+ for some integer 
+\begin_inset Formula $m>1$
+\end_inset
+
+ xxxxxxxxxxxxxx
 \end_layout
 
 \begin_layout Standard
