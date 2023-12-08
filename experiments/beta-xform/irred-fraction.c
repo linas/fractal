@@ -1,7 +1,7 @@
 /*
  * irred-fraction.c
  *
- * Find integer sequence for the golden polynomials.
+ * Find integer sequences for the golden polynomials.
  * Relate it to the continued-fraction representation.
  * See irred.c for additional utilities.
  *
@@ -118,9 +118,9 @@ double cf_to_real(int cfrac[], int len)
 
 /*
  * Given the continued-fraction representation, return the
- * corresponding sequence number.
+ * corresponding index number.
  */
-long sequence_from_cf(int cfrac[], int len)
+long index_from_cf(int cfrac[], int len)
 {
 	if (1 == len)
 	{
@@ -128,7 +128,7 @@ long sequence_from_cf(int cfrac[], int len)
 		return 1UL << cfrac[0];
 	}
 
-	long leader = sequence_from_cf(cfrac, len-1);
+	long leader = index_from_cf(cfrac, len-1);
 	if (-1 == leader) return -1; // avoid overflow
 
 	long follower = 2*leader + 1;
@@ -170,7 +170,7 @@ void validate_cf(int cfrac[], int len, long maxn)
 {
 	static double prevgold = 2.0;
 
-	long seq = sequence_from_cf(cfrac, len);
+	long seq = index_from_cf(cfrac, len);
 	if (seq >= maxn) return;
 	if (-1 == seq) return;
 	double gold = find_gold(seq);
@@ -190,7 +190,7 @@ void validate_cf(int cfrac[], int len, long maxn)
 	{
 		print_seq(cfrac, len-1, " left=", "");
 
-		long left = sequence_from_cf(cfrac, len-1);
+		long left = index_from_cf(cfrac, len-1);
 
 		// Right bracket is tricky.
 		int rfrac[SZ];
@@ -201,7 +201,7 @@ void validate_cf(int cfrac[], int len, long maxn)
 		rfrac[rlen-1]--;
 		print_seq(rfrac, rlen, " right=", "");
 
-		long right = sequence_from_cf(rfrac, rlen);
+		long right = index_from_cf(rfrac, rlen);
 
 		// When bracketed by leader peers, left must be greater than right.
 		if (len-1 == rlen && left <= right)
@@ -232,7 +232,9 @@ void validate_cf(int cfrac[], int len, long maxn)
 }
 
 /*
- * Iterate on the continued fraction.
+ * Generate correctly-ordered sequences. The ordering is such that 
+ * the corresponding golden number is strictly decreasing for the
+ * generated cfrac sequences.
  * i.e. generate sequences
  * maxdepth == number of doubling steps
  * maxlength == max length of fraction.
@@ -266,15 +268,11 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 // Generate cf expansions from integer index.
 // Given an index, set "cfrac" to the matching sequence.
 // Return the length of the cfrac sequence.
-// This is the inverse of what sequence_from_cf
-int reverso(int cfrac[], int nseq)
+// This is the inverse of what index_from_cf
+int index_to_cf(int cfrac[], int nseq)
 {
-	// int norig = nseq;
-
 	int msum = 0;
 	while (0 == nseq %2) { msum ++; nseq /=2; }
-
-	// printf("entry norig=%d msum=%d nseq=%d\n", norig, msum, nseq);
 
 	// Terminate recursion
 	if (1 == nseq)
@@ -294,14 +292,11 @@ int reverso(int cfrac[], int nseq)
 		int pure = nseq;
 		while (0 == pure %2) { pure /=2; }
 		if (1 == pure)
-		{
-			// printf("ppppppppppure power!! orig=%d nseq=%d\n", norig, nseq);
 			return -666;
-		}
 	}
 
 	// Recurse
-	int len = reverso(cfrac, nseq);
+	int len = index_to_cf(cfrac, nseq);
 	if (len < 0) return len;
 
 	// Remove contributions from shorter sequences
@@ -311,9 +306,10 @@ int reverso(int cfrac[], int nseq)
 	// Special-case the length=1 case.
 	if (1 == len) msum -= cfrac[0];
 
-	// printf("post recur norig=%d nseq=%d loc=%d msum=%d\n", norig, nseq, loc, msum);
+	// What's left over is m_k
 	cfrac[len] = msum;
 
+	// Return the length of the beast.
 	return len+1;
 }
 
@@ -321,23 +317,23 @@ int main(int argc, char* argv[])
 {
 	int cfrac[SZ];
 
-	// Attempted reverse listing.
-	int nmax = 128;
+	// Verify reverse listing.
+	int nmax = 1<<16;
 	for (int n=1; n<nmax; n ++)
 	{
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
-		int len = reverso(cfrac, n);
+		int len = index_to_cf(cfrac, n);
 		if (len < 0)
 		{
 			// printf(">>>>> %d rejected\n", n);
 			continue;
 		}
-		int seqno = sequence_from_cf(cfrac, len);
+		int seqno = index_from_cf(cfrac, len);
 		if (n != seqno)
 		{
 			printf("Sequence numbering fail!! in=%d out=%d", n, seqno);
 		}
-		printf(">>>>> %d len=%d ", n, len);
+		// printf(">>>>> %d len=%d ", n, len);
 		print_seq(cfrac, len, "sequence ", "\n");
 	}
 
