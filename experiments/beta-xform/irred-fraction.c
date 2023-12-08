@@ -263,7 +263,10 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 	}
 }
 
-// Attempt to generate sequence expansions from integer labels.
+// Generate cf expansions from integer index.
+// Given an index, set "cfrac" to the matching sequence.
+// Return the length of the cfrac sequence.
+// This is the inverse of what sequence_from_cf
 int reverso(int cfrac[], int nseq)
 {
 	// int norig = nseq;
@@ -278,7 +281,7 @@ int reverso(int cfrac[], int nseq)
 	{
 		// printf("the end\n");
 		cfrac[0] = msum;
-		return 0;
+		return 1;
 	}
 
 	// If we are here, nseq is odd; reduce it and try again.
@@ -298,20 +301,20 @@ int reverso(int cfrac[], int nseq)
 	}
 
 	// Recurse
-	int loc = reverso(cfrac, nseq);
-	if (loc < 0) return loc;
+	int len = reverso(cfrac, nseq);
+	if (len < 0) return len;
 
 	// Remove contributions from shorter sequences
-	for (int j=0; j<loc; j++)
+	for (int j=0; j<len-1; j++)
 		msum -= cfrac[j];
 
-	// Special-case the length=2 case.
-	if (0 == loc) msum -= cfrac[0];
+	// Special-case the length=1 case.
+	if (1 == len) msum -= cfrac[0];
 
 	// printf("post recur norig=%d nseq=%d loc=%d msum=%d\n", norig, nseq, loc, msum);
-	cfrac[loc+1] = msum;
+	cfrac[len] = msum;
 
-	return loc+1;
+	return len+1;
 }
 
 int main(int argc, char* argv[])
@@ -323,7 +326,7 @@ int main(int argc, char* argv[])
 	for (int n=1; n<nmax; n ++)
 	{
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
-		int len = 1 + reverso(cfrac, n);
+		int len = reverso(cfrac, n);
 		if (len < 0)
 		{
 			// printf(">>>>> %d rejected\n", n);
