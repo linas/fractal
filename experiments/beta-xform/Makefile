@@ -9,7 +9,7 @@ FUNC=../../tools/lib/libfunc.a
 LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/x86_64-linux-gnu/liblapack.a \
        /usr/lib/x86_64-linux-gnu/blas/libblas.a \
-       /usr/lib/gcc/x86_64-linux-gnu/6/libgfortran.a \
+       /usr/lib/gcc/x86_64-linux-gnu/12/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
 all: bernie bigbern remap unbernie reigen skew fp-diagram \

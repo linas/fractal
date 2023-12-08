@@ -117,7 +117,7 @@ double cf_to_real(int cfrac[], int len)
 }
 
 /*
- * Given the continue-fraction representation, return the
+ * Given the continued-fraction representation, return the
  * corresponding sequence number.
  */
 long sequence_from_cf(int cfrac[], int len)
@@ -265,6 +265,27 @@ void iterate_cf(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
 
 int main(int argc, char* argv[])
 {
+#define SANITY_CHECK
+#ifdef SANITY_CHECK
+	// Sanity check, only; short runtime.
+	int norder = 18;
+	int nmax = (1<<norder) + 1;
+
+	setup_gold(nmax);
+
+	for (int n=0; n<nmax; n ++)
+		find_gold(n);
+
+	int cfrac[SZ];
+	cfrac[0] = 0;
+
+	// Iterating to length 10, depth 10 takes more than an hour,
+	// mostly due to large numbers of overflow failures.
+	iterate_cf(cfrac, 1, 3, 8, nmax);
+#endif
+
+// #define BIG_GRAPH
+#ifdef BIG_GRAPH
 	// Using 1<<24 takes about 50 seconds to setup gold.
 	int norder = 26;
 	int nmax = (1<<norder) + 1;
@@ -288,4 +309,5 @@ int main(int argc, char* argv[])
 	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
 	fflush (stdout);
 	iterate_cf(cfrac, 1, maxdepth, maxlen, nmax);
+#endif
 }

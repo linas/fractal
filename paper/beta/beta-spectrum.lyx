@@ -12745,12 +12745,6 @@ with where
 with the inequalities being strict.
  Each interval is of decreasing size, limiting to zero.
  As the bounds are increasingly tight, they bracket a unique convergent.
- This provides a mapping for most, but not all, sequences to 
-\begin_inset Formula $\beta$
-\end_inset
-
- values (and vice-versa; a bijection).
- Excluded are certain sequences with intercalated zeros, discussed below.
 \end_layout
 
 \begin_layout Standard
@@ -13265,6 +13259,39 @@ odometer
 \end_inset
 
 .
+ Analogously, a rollover happens at every finite string.
+ The bracketing relation supplies a descending sequence leading up to the
+ rollover:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta\left(\left[m_{1},m_{2},\cdots,N\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,N-1\right]\right)
+\]
+
+\end_inset
+
+At the rollover point, the final digit is dropped:
+\begin_inset Formula 
+\[
+\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k},N\right]\right)
+\]
+
+\end_inset
+
+After the rollover, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta\left(\left[m_{1},m_{2},\cdots,m_{k}+1,0\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13272,7 +13299,27 @@ Unlike the
 \begin_inset Formula $p$
 \end_inset
 
--adic case, there is no way to increment the odometer by one unit.
+-adic case, there is no way to increment/decrement the odometer by one unit
+ so as to maintain the total order on 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Incrementing the first digit gives a sequence 
+\begin_inset Formula $\beta\left(\left[N\right]\right)$
+\end_inset
+
+ that approaches 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+ as 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+, but it has nowhere to rollover to.
+ There's no way to get to the last digit of an infinite string, to increment
+ that.
  The best one can do is to write out the expansion for 
 \begin_inset Formula $\beta$
 \end_inset
