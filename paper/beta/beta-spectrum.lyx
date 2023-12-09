@@ -12651,6 +12651,10 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Subsubsection
+The bracketing relationship
+\end_layout
+
 \begin_layout Standard
 The patterned regularity in this labeling scheme is hopefully apparent.
  The largest discontinuity is given a label of 
@@ -12746,7 +12750,10 @@ with the inequalities being strict.
  Each interval is of decreasing size, limiting to zero, as the length of
  the integer sequences expand.
  As the bounds are increasingly tight, they bracket a unique convergent.
- 
+\end_layout
+
+\begin_layout Subsubsection
+The beta map bijection
 \end_layout
 
 \begin_layout Standard
@@ -13046,12 +13053,16 @@ The recursion relation is a bijection; it works in both directions; the
  exactly as expected, as these correspond to the reducible beta polynomials.
 \end_layout
 
+\begin_layout Subsubsection
+A continued fraction interpretation
+\end_layout
+
 \begin_layout Standard
 The sequences 
 \begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
 \end_inset
 
- can be re-interpreted as continued fractions.
+ can also be interpreted as continued fractions.
  That is, for each such sequence, there is a real number 
 \begin_inset Formula 
 \[
@@ -13092,7 +13103,7 @@ noprefix "false"
  sequence by it's matching finite form.
  This will map the periodic betas to the rationals.
  Unfortunately, this map is not one-to-one.
- Rationals have two distinct continue-fraction representations: 
+ Rationals have two distinct continued-fraction representations: 
 \begin_inset Formula $c\left(\left[m_{1},\cdots,m_{k},0\right]\right)=c\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
 \end_inset
 
@@ -13189,6 +13200,10 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+The beta odometer
 \end_layout
 
 \begin_layout Standard
@@ -13388,70 +13403,107 @@ The
  By self-symmetry, the sub-intervals will re-arrange as well.
 \end_layout
 
-\begin_layout Standard
-A precise expression for the self-symmetry of continued fractions is easy
- to write in symbolic form.
- There are two, actually; one is a shift:
-\begin_inset Formula 
-\[
-g:\left[m_{1},m_{2},\cdots\right]\mapsto\left[m_{1}+1,m_{2},\cdots\right]
-\]
-
-\end_inset
-
-and the other is a reflection.
-\begin_inset Formula 
-\[
-r:\left[m_{1},m_{2},\cdots\right]\mapsto\left[0,-2,-m_{1},-m_{2},\cdots\right]
-\]
-
-\end_inset
-
-The abuse of negative entries is just a notational trick; when the sequences
- are interpreted as continued fractions, they have a ready expression:
-\begin_inset Formula 
-\[
-c\left(r\left(\left[m_{1},m_{2},\cdots\right]\right)\right)=c\left(\left[-1,-2,-m_{1},-m_{2},\cdots\right]\right)=1-c\left(\left[m_{1},m_{2},\cdots\right]\right)
-\]
-
-\end_inset
-
-that is, 
-\begin_inset Formula $r\left(x\right)=1-x$
-\end_inset
-
-; thus a reflection.
- The shift acting on the continued fractions is likewise a Möbius transformation
-: 
-\begin_inset Formula $g\left(x\right)=x/\left(x+1\right)$
-\end_inset
-
-.
- Together, these two generate the dyadic monoid.
- That is, a general expression 
-\begin_inset Formula $\gamma=g^{a}\circ r\circ g^{b}\circ\cdots$
-\end_inset
-
- is still a self-symmetry of the odometer.
- Such elements can be put in one-to-one correspondence with the infinite
- binary tree, i.e.
- the dyadic monoid.
+\begin_layout Subsubsection
+The dyadic monoid
 \end_layout
 
 \begin_layout Standard
-By contrast, there is no obvious simple expression for 
-\begin_inset Formula $g$
+The self-symmetry of continued fractions is described by the dyadic monoid.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-M04"
+literal "false"
+
+\end_inset
+
+ General elements of the monoid have the form 
+\begin_inset Formula $\gamma=g^{a_{1}}\circ r\circ g^{a_{2}}\circ\cdots\circ g^{a_{N}}$
+\end_inset
+
+ which act on an individual sequences 
+\begin_inset Formula $\left[x\right]$
+\end_inset
+
+ as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\gamma:\left[x\right]\mapsto\left[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x\right]
+\]
+
+\end_inset
+
+When the sequence 
+\begin_inset Formula $\left[x\right]$
+\end_inset
+
+ is understood as a continued fraction, i.e.
+ when applying 
+\begin_inset Formula $c:\left[x\right]\mapsto c\left(\left[x\right]\right)$
+\end_inset
+
+, then the two generators 
+\begin_inset Formula $g,r$
+\end_inset
+
+ can be understood as Möbius transformations acting on the unit real interval:
+ 
+\begin_inset Formula $g_{M}\left(x\right)=x/\left(x+1\right)$
+\end_inset
+
+ and the reflection 
+\begin_inset Formula $r_{M}\left(x\right)=1-x$
+\end_inset
+
+.
+ That is, there is a commuting diagram 
+\begin_inset Formula $c\circ g=g_{M}\circ c$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $c\circ r=r_{M}\circ c$
+\end_inset
+
+.
+ That is, one can go back and forth between the unit interval, and the sequence
+ notation by using the continued-fraction mapping.
+\end_layout
+
+\begin_layout Standard
+Of course, the beta odometer offers another interpretation of sequences
+ as real numbers.
+ Presumably, there are functions 
+\begin_inset Formula $g_{B}:\mathbb{R}\to\mathbb{R}$
 \end_inset
 
  and 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{B}:\mathbb{R}\to\mathbb{R}$
 \end_inset
 
- in terms of 
-\begin_inset Formula $\beta$
+ that commute with the beta map: that is, 
+\begin_inset Formula $\beta\circ g=g_{B}\circ\beta$
 \end_inset
 
- for the odometer.
+ and likewise 
+\begin_inset Formula $\beta\circ r=r_{B}\circ\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So far, I haven't isolated a simple expression for 
+\begin_inset Formula $g_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{B}$
+\end_inset
+
+.
+ TBD.
 \end_layout
 
 \begin_layout Section
