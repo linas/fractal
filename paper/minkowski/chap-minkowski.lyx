@@ -2933,7 +2933,9 @@ OK, OK, perhaps there's a hand-waving answer for that.
  stable and unstable manifolds.
  Perhaps the correct statement is to say that the Cantor set shows up at
  the extreme boundary of these manifolds.
- They're kind-of knotted up, there; a Contor knot at the boundary.
+ They're kind-of knotted up, there; a Cantor knot at the boundary (What,
+ exactly, is the knot theory of the Cantor set? Is it the Alexander horned
+ sphere? The Cantor tree surface? Oh, never mind.).
  That's why things look fractal.
  But wait...
  what is the set of smooth functions in three variables? Doesn't this require
@@ -3271,8 +3273,8 @@ reference "eq:general gr monoid elt"
  has the representation 
 \begin_inset Formula 
 \begin{eqnarray*}
-g_{D} & :\mathbb{R}_{D} & \,\longrightarrow\mathbb{R}_{D}\\
- & x & \longmapsto x/2
+h & :\mathbb{R}_{D} & \to\mathbb{R}_{D}\\
+ & x & \mapsto x/2
 \end{eqnarray*}
 
 \end_inset
@@ -3281,8 +3283,8 @@ when acting on the set of dyadic numbers, whereas as this same element has
  the representation 
 \begin_inset Formula 
 \begin{eqnarray*}
-g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
- & x & \longmapsto x/(x+1)
+g & :\mathbb{R}_{C} & \to\mathbb{R}_{C}\\
+ & x & \mapsto x/(x+1)
 \end{eqnarray*}
 
 \end_inset
@@ -3309,11 +3311,11 @@ M=\left\{ \gamma\,\vert\,\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\
 
 \end_inset
 
- That is, each 
+Here, each 
 \begin_inset Formula $a_{k}$
 \end_inset
 
- to be a positive integer, with the exception of 
+ is a positive integer, with the exception of 
 \begin_inset Formula $a_{1}$
 \end_inset
 
@@ -3375,8 +3377,8 @@ Monoids are sometimes called
 \emph on
 semigroups
 \emph default
-, although the term semigroup is usually reserved for the idea of a monoid,
- but without an identity element.
+, although the term semigroup is usually reserved for the idea of a monoid
+ that does not have an identity element.
  The definition of a monoid is similar to that for a group, with an important
  difference: a monoid does not, in general, contain inverses.
  For a given 
@@ -3392,7 +3394,7 @@ semigroups
 \end_inset
 
 .
- Because of this, 
+ For the present case, 
 \begin_inset Formula $M$
 \end_inset
 
@@ -3422,7 +3424,7 @@ The role of the question mark function in connecting these two representations
 \end_layout
 
 \begin_layout Theorem*
-The Minkowski question mark provides an homomorphism between 
+The Minkowski question mark provides a monoid homomorphism between 
 \begin_inset Formula $\mathbb{R}_{C}$
 \end_inset
 
@@ -3481,7 +3483,7 @@ such that
 \begin_inset Formula $x_{C}\in\mathbb{R}_{C}$
 \end_inset
 
- are both representations of the same 
+ are both representations of the same real number 
 \begin_inset Formula $x$
 \end_inset
 
@@ -3490,17 +3492,30 @@ such that
 \end_layout
 
 \begin_layout Proof
-The two representations of 
-\begin_inset Formula $\gamma$
+This will not actually be a prof, but yet more hand-waving.
+ It summarizes and condenses some of the material in the earlier sections.
+\end_layout
+
+\begin_layout Proof
+It was already noted, up above, that 
+\begin_inset Formula $?\circ g=h\circ?$
 \end_inset
 
- in the two spaces was given in the previous section above, but it will
- be repeated here just so to make this particularly clear.
- First, decompose the abstract group element 
+ and that 
+\begin_inset Formula $?\circ r=r\circ?$
+\end_inset
+
+ are homomorphisms on the rationals and dyadic rationals.
+ This was made apparent by visual inspection and comparison of the Farey
+ tree to the dyadic tree.
+\end_layout
+
+\begin_layout Proof
+An abstract group element 
 \begin_inset Formula $\gamma\in M$
 \end_inset
 
- in terms of the generators 
+ can be written in terms of the generators 
 \begin_inset Formula $g$
 \end_inset
 
@@ -3508,7 +3523,7 @@ The two representations of
 \begin_inset Formula $r$
 \end_inset
 
-: 
+ as: 
 \begin_inset Formula 
 \[
 \gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}
@@ -3516,15 +3531,30 @@ The two representations of
 
 \end_inset
 
- Then, this 
-\begin_inset Formula $\gamma$
+and clearly, 
+\begin_inset Formula $?\circ\gamma_{C}=\gamma_{D}\circ?$
 \end_inset
 
- has the representation 
+ is arrived at by the finite number of applications of the two basic homomorphis
+ms.
+ Here, 
+\begin_inset Formula $\gamma_{D}=h^{a_{1}}rh^{a_{2}}r...rh^{a_{N}}$
+\end_inset
+
+, of course.
+ 
+\end_layout
+
+\begin_layout Proof
+As before, the dyadic representation 
 \begin_inset Formula $\gamma_{D}$
 \end_inset
 
- (the dyadic representation), which is 
+, acting on dyadic rationals 
+\begin_inset Formula $x$
+\end_inset
+
+ has the explicit form 
 \begin_inset Formula 
 \begin{equation}
 \gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:dyadic gamma}
@@ -3532,11 +3562,11 @@ The two representations of
 
 \end_inset
 
- It also has the representation 
+The continued-fraction representation 
 \begin_inset Formula $\gamma_{C}$
 \end_inset
 
- (the continued-fraction representation), which is 
+ has the action 
 \begin_inset Formula 
 \begin{equation}
 \gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:modular gamma}
@@ -3544,7 +3574,15 @@ The two representations of
 
 \end_inset
 
- and so we need to prove that 
+which holds for ratinal numbers 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+The task is to prove that 
 \begin_inset Formula $?(\gamma_{C}(x))=\gamma_{D}(?(x))$
 \end_inset
 
@@ -3552,7 +3590,8 @@ The two representations of
 \end_layout
 
 \begin_layout Proof
-First, it is clear that if this equivalence holds for any given 
+The first part is silly-easy.
+ If this equivalence holds for any given 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -3573,63 +3612,77 @@ First, it is clear that if this equivalence holds for any given
 \end_inset
 
 ).
- Thus, induction on 
+ By induction on 
 \begin_inset Formula $\gamma$
 \end_inset
 
- may be applied to show it holds for all 
+, it holds for all 
 \begin_inset Formula $\gamma\in M$
 \end_inset
 
 .
- Next, we need to prove that this holds for all 
+ 
+\end_layout
+
+\begin_layout Proof
+The second part is harder: prove that this holds for all 
 \begin_inset Formula $x$
 \end_inset
 
+ in the unit interval of the 
+\emph on
+reals
+\emph default
 .
- The introductory discussions, up top, showed that the relation holds for
- 
-\begin_inset Formula $x=0$
+ This is the part where we throw our hands in the air, and give up.
+ There are several distinct issues.
+ One is that we haven't developed any notions of topology (of open sets),
+ and thus have no notions of continuity, and thus cannot take limits.
+ We can't show that some infinite sequence of rational numbers 
+\begin_inset Formula $x_{n}$
 \end_inset
 
- and 
-\begin_inset Formula $x=1$
+ converge to some limit 
+\begin_inset Formula $x_{n}\to x$
 \end_inset
 
- , and, by congruence of the dyadic and Farey trees, that it holds for any
- 
-\begin_inset Formula $x$
-\end_inset
+ because, without some metric on the reals, we can't even show that the
+ unit interval is bounded.
+ Alas.
+ Without boundedness and convergence, we've got no concept of continuity.
+\end_layout
 
- that is a rational number.
- To complete the proof, one must show that, in the usual topology for the
- reals, that the rationals are dense in the reals, and so the closure of
- the rationals gives the reals.
- Intuitively, this seems obvious just from a consideration of the limiting
- values at the 
-\begin_inset Quotes eld
-\end_inset
-
-leaves
-\begin_inset Quotes erd
-\end_inset
-
- of the infinite binary tree.
- However, care must be taken, as the dyadics have another closure (the 
+\begin_layout Proof
+Even closure is hard to discuss: the rationals have the reals as a closure,
+ but dyadics have another closure, the 
 \begin_inset Formula $p$
 \end_inset
 
--adics) besides the reals; and so the proof requires that 
-\begin_inset Formula $?(x)$
+-adics.
+ These are 
+\begin_inset Quotes eld
 \end_inset
 
- be taken to be a continuous function.
- All this requires a somewhat more subtle discussion that is beyond the
- scope of (the current draft of) this paper.
+non-Archimedian
+\begin_inset Quotes erd
+\end_inset
+
+ and have plenty of strange properties themselves.
+\end_layout
+
+\begin_layout Proof
+Thus, we offer a proof by assertion: the question mark function is continuous.
+ It is monotonically increasing, which means it makes sense to talk about
+ it's inverse, and to treat the inverse as well-defined.
+ In the grand scheme of things, the question mark is a continuous bijection
+ on the real unit interval.
+ Curiously, it is differentiable-nowhere; it is measureable, though.
+ 
 \end_layout
 
 \begin_layout Standard
-To summarize, the continued fractions 
+To summarize, we've made some progress, but not really.
+ Somehow, the continued fractions 
 \begin_inset Formula $\mathbb{R}_{C}$
 \end_inset
 
@@ -3641,7 +3694,17 @@ To summarize, the continued fractions
  both homomorphic to the abstract concept of the reals.
  These two representations are distinct, having different transformation
  properties under the action of the dyadic monoid.
- In fact, both 
+ Clearly, 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset
+
+ is homomorphic to the Cantor set, and 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset
+
+ is homomorphic to Baire space.
+ The Question Mark Function seems to have the general shape of something
+ that could be an isomorphism between 
 \begin_inset Formula $\mathbb{R}_{D}$
 \end_inset
 
@@ -3649,40 +3712,27 @@ To summarize, the continued fractions
 \begin_inset Formula $\mathbb{R}_{C}$
 \end_inset
 
- are isomorphic to the Cantor set, as will be discussed below, and so the
- Question Mark provides an isomorphism, not just a homomorphism, between
- 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-XXX FIXME TODO: This entire section needs to be rewritten.
- Issues include:
-\end_layout
-
-\begin_layout Itemize
-The proper name for the set of infinite binary strings is Cantor space.
-\end_layout
-
-\begin_layout Itemize
-careful throwing around the word 
+, both of which are isomorphic to the 
 \begin_inset Quotes eld
 \end_inset
 
-isomorphic
+true reals
 \begin_inset Quotes erd
 \end_inset
 
-, the topologies are not.
- The above needs to be reworded with greater care.
+ 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ in the abstract.
+ But we have none of the machinery needed to make this more precise.
+ Indeed, there is a large literature on the Question Mark that clarifies
+ and elucides all sorts of issues involving continuity, smoothness, dimension,
+ measureability, convergence, covering spaces and more.
+ It's out there.
+ For now, it is safe to just pretend, and continue onwards in a merry and
+ naive way, treating the Question Mark as just some function on the real
+ numbers (whatever those are).
 \end_layout
 
 \begin_layout Subsection
