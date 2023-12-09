@@ -18975,7 +18975,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -21018,61 +21018,106 @@ literal "false"
  Joan Dyer in 1978.
 \end_layout
 
+\begin_layout Standard
+This is another run-length encoding trick.
+\end_layout
+
 \begin_layout Subsection
 Odometer symmetry and the Vandermonde matrix
 \end_layout
 
 \begin_layout Standard
-A precise expression for the self-symmetry is easy to write in symbolic
- form.
- There are two, actually; one is a shift:
+From work on continued fractions and the Minkowski question mark, we learn
+ of the self-symmetry of integer sequences under the action of the dyadic
+ monoid.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-M04"
+literal "false"
+
+\end_inset
+
+ Adoping the notation from that work, write 
+\begin_inset Formula $\gamma=g^{a_{1}}\circ r\circ g^{a_{2}}\circ\cdots\circ g^{a_{N}}$
+\end_inset
+
+ and define the action on an individual sequence 
+\begin_inset Formula $\left[x\right]$
+\end_inset
+
+ as 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-g:\left[m_{1},m_{2},\cdots\right]\mapsto\left[m_{1}+1,m_{2},\cdots\right]
+\gamma:\left[x\right]\mapsto\left[a_{1},a_{2}-1,a_{3}-1,\cdots,a_{N-1}-1,a_{N}-2,x\right]
 \]
 
 \end_inset
 
-and the other is a reflection.
-\begin_inset Formula 
-\[
-r:\left[m_{1},m_{2},\cdots\right]\mapsto\left[1,m_{1},m_{2},\cdots\right]
-\]
 
+\end_layout
+
+\begin_layout Standard
+XXX Confusion abounds! Need more care and a possible redo!
+\end_layout
+
+\begin_layout Standard
+Write the commuting diagrams as 
+\begin_inset Formula $c\circ g=g_{M}\circ c$
 \end_inset
 
-When the sequences are interpreted as continued fractions, they have a ready
- expression:
-\begin_inset Formula 
-\[
-c\left(r\left(\left[m_{1},m_{2},\cdots\right]\right)\right)=c\left(\left[1,m_{1},m_{2},\cdots\right]\right)=1-c\left(\left[m_{1},m_{2},\cdots\right]\right)
-\]
-
-\end_inset
-
-that is, 
-\begin_inset Formula $r\left(x\right)=1-x$
-\end_inset
-
-; thus a reflection.
- The shift is likewise a Möbius transformation: 
-\begin_inset Formula $g\left(x\right)=x/\left(x+1\right)$
+ and likewise 
+\begin_inset Formula $c\circ r=r_{M}\circ c$
 \end_inset
 
 .
- Together, these two generate the dyadic monoid.
- That is, a general expression 
-\begin_inset Formula $\gamma=g^{a}\circ r\circ g^{b}\circ\cdots$
+ Then the two generators 
+\begin_inset Formula $g,r$
 \end_inset
 
- is still a self-symmetry, where 
-\begin_inset Formula $g^{n}\left(x\right)=x/\left(nx+1\right)$
+ can be understood as Möbius transformations acting on the unit real interval:
+ 
+\begin_inset Formula $g_{M}\left(x\right)=x/\left(x+1\right)$
+\end_inset
+
+ and the reflection 
+\begin_inset Formula $r_{M}\left(x\right)=1-x$
 \end_inset
 
 .
- Such elements can be put in one-to-one correspondence with the infinite
+ More generally, 
+\begin_inset Formula $g_{M}^{n}\left(x\right)=x/\left(nx+1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These elements can be put in one-to-one correspondence with the infinite
  binary tree, i.e.
  the dyadic monoid.
+ Of course, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ can also be written as a sequence itself, so the dyadic self-symmetry is
+ just an action of finite-length sequences on arbitrary-length sequences,
+ and they are more-or-less nothing more than the act of pre-pending a prefix
+ string.
+ All the confusion and etc.
+ is with avoiding making off-by-one errors during the prefixing operation,
+ and with making explicit identification with the matching Möbius transformation
+s, etc.
+ A non-even number of 
+\begin_inset Formula $r$
+\end_inset
+
+'s are also a pain in the neck.
+ XXX FIXME.
+ (and fix in the beta paper, too.
+ This is silly-muddled.)
 \end_layout
 
 \begin_layout Standard
