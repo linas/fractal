@@ -116,6 +116,21 @@ double cf_to_real(int cfrac[], int len)
 	return ex;
 }
 
+// Reverse order of digits in cfrac, left to right.
+void reverse_cf(int rfrac[], int cfrac[], int len)
+{
+	if (1 >= len) return;
+	for (int i=0; i<len; i++) rfrac[i] = cfrac[len-1-i];
+}
+
+// Reverse the digits first, then get the cf value
+double reverse_cf_to_real(int cfrac[], int len)
+{
+	int rfrac[len];
+	reverse_cf(rfrac, cfrac, len);
+	return cf_to_real(rfrac, len);
+}
+
 /*
  * Given a finite-lengtth Baire representation, return the
  * corresponding index number.
@@ -232,7 +247,8 @@ void validate_fbaire(int cfrac[], int len, long maxn)
 #define PRINT_DATA_FOR_GRAPH
 #ifdef PRINT_DATA_FOR_GRAPH
 	double ex = cf_to_real(cfrac, len);
-	printf("%ld	%g	%g	#", seq, gold, ex);
+	double rex = reverse_cf_to_real(cfrac, len);
+	printf("%ld	%g	%g	%g #", seq, gold, ex, rex);
 	print_seq(cfrac, len, "", "");
 #endif
 
@@ -339,13 +355,20 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 
 int main(int argc, char* argv[])
 {
-	int cfrac[SZ];
-
+// #define MANUAL_EXPLORER
+#ifdef MANUAL_EXPLORER
+	// Obtain one from command line. Print it's index.
+	if (1 == argc) {
+		fprintf(stderr, "Usage: %s <sequence>\n", argv[0]);
+		exit(1);
+	}
 	int len = argc-1;
+	int cfrac[SZ];
 	for (int i=0; i<len; i++) cfrac[i] = atoi(argv[i+1]);
 	int seqno = index_from_fbaire(cfrac, len);
 	printf("Index: %d len=%d", seqno, len);
 	print_seq(cfrac, len, " ", "\n");
+#endif
 
 // #define VERFIY_FBAIRE
 #ifdef VERFIY_FBAIRE
@@ -418,10 +441,11 @@ nmax=64;
 	iterate_fbaire(cfrac, 1, 3, 8, nmax);
 #endif
 
-// #define BIG_GRAPH
+#define BIG_GRAPH
 #ifdef BIG_GRAPH
-	// Using 1<<24 takes about 50 seconds to setup gold.
+	// Using 1<<24 takes about 50 seconds to find gold.
 	int norder = 26;
+norder = 16;
 	int nmax = (1<<norder) + 1;
 
 	setup_gold(nmax);
