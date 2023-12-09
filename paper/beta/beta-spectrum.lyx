@@ -13588,16 +13588,34 @@ Of course, the beta odometer offers another interpretation of sequences
 \end_layout
 
 \begin_layout Standard
-So far, I haven't isolated a simple expression for 
+It is not clear if there is an analytic form for 
 \begin_inset Formula $g_{B}$
 \end_inset
 
- and 
-\begin_inset Formula $r_{B}$
+.
+ Writing
+\begin_inset Formula 
+\[
+g_{B}\left(x\right)=\frac{h\left(x-1\right)}{1+h\left(x-1\right)}
+\]
+
 \end_inset
 
-.
- TBD.
+and experimentally hunting for 
+\begin_inset Formula $h$
+\end_inset
+
+ reveals an approximation that is good to one percent:
+\begin_inset Formula 
+\[
+h\left(x\right)\approx x\left(1-x/\varphi^{2}\right)
+\]
+
+\end_inset
+
+suggesting that an analytic series might be possible.
+ Pursing this requires the inversion of a Vandermonde matrix applied to
+ a shift sequence; this appears to be possibly ill-conditioned.
 \end_layout
 
 \begin_layout Section
