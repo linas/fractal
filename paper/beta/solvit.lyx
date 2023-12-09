@@ -19158,7 +19158,7 @@ At four levels, we have
 That's enough to spot the pattern; it is recursively given by
 \begin_inset Formula 
 \begin{equation}
-\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)\label{eq:cont-frac-values}
+\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)\label{eq:recursive-index}
 \end{equation}
 
 \end_inset
@@ -19371,7 +19371,7 @@ Now we have to prove that the above statements are actually correct.
  Specifically: that the recursive formula 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:cont-frac-values"
+reference "eq:recursive-index"
 plural "false"
 caps "false"
 noprefix "false"
@@ -20466,7 +20466,7 @@ new normal
  off eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:cont-frac-values"
+reference "eq:recursive-index"
 plural "false"
 caps "false"
 noprefix "false"
@@ -20474,6 +20474,321 @@ noprefix "false"
 \end_inset
 
 , but it seems to become too complicated for any easy visual prestidigitation.
+\end_layout
+
+\begin_layout Subsection
+Recursive index formula
+\end_layout
+
+\begin_layout Standard
+Lets take a closer look at the recursive index formula 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:recursive-index"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is reproduced below.
+ It has the form 
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
+\]
+
+\end_inset
+
+In the above notation, the ssquare brackets play a double-duty: they both
+ indicate the digit sequence, and they also can be interpreted as the numeric
+ integr index value corresponding to that sequeunce.
+ That's OK in the above section, where anything else would be clutter.
+ But not now; we need to avoid confusion.
+ 
+\end_layout
+
+\begin_layout Standard
+To avoid confusion, write 
+\begin_inset Formula $\eta$
+\end_inset
+
+ as the function that accepts sequences and returns the index in the tables
+ above.
+ So, for example, 
+\begin_inset Formula $\eta\left(\left[0\right]\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta\left(\left[0,1\right]\right)=6$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta\left(\left[0,2,0\right]\right)=25$
+\end_inset
+
+ and so on.
+ The recursion equation then has the form
+\begin_inset Formula 
+\[
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k-1}\right]\right)+1\right)
+\]
+
+\end_inset
+
+The leading factor is suggestive as being the product of more primitve operation
+s, each providing only a single factor.
+ Can we now work backwards to find those? The proposal is that these will
+ look like the dyadic 
+\begin_inset Formula $g$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+ so that 
+\begin_inset Formula $g$
+\end_inset
+
+ splits off one factor, and 
+\begin_inset Formula $r$
+\end_inset
+
+ is the comma-separtor function.
+ Can we find these? 
+\end_layout
+
+\begin_layout Standard
+Square zero is this:
+\begin_inset Formula 
+\[
+1=\eta\left(\left[0\right]\right)
+\]
+
+\end_inset
+
+Square one is this: 
+\begin_inset Formula 
+\[
+2^{k}=\eta\left(\left[k\right]\right)
+\]
+
+\end_inset
+
+There seems to be a promotion identity:
+\begin_inset Formula 
+\[
+2\eta\left(\left[k\right]\right)=\eta\left(\left[k+1\right]\right)
+\]
+
+\end_inset
+
+Hmm.
+ Converse to this is an all-in-one descent identity:
+\begin_inset Formula 
+\[
+\eta\left(\left[k\right]\right)=2^{k}\eta\left(\left[0\right]\right)
+\]
+
+\end_inset
+
+This is also mutiplicative, in that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\eta\left(\left[k\right]\right)\eta\left(\left[m\right]\right)=\eta\left(\left[k+m\right]\right)
+\]
+
+\end_inset
+
+and this multiplicative property is a source of confusion.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ A different source of confusion comes from adding or removing zeros to
+ the sequence: 
+\begin_inset Formula 
+\[
+\eta\left(\left[0,0,0,0\right]\right)=2\eta\left(\left[0,0,0\right]\right)+1
+\]
+
+\end_inset
+
+so that zeros can be added or removed to the sequence in this way.
+ Lets note in passing a superficial resemblance to the 3n+1 problem aka
+ the hailstone problem aka the Collatz conjecture.
+ I have no clue if this resemblance is superficial, or if it means something.
+ What would happen if we redid the beta-map with 
+\begin_inset Formula $2<\beta<3$
+\end_inset
+
+, would the resulting sequences be 3n+1 sequences, or am I imagining things?
+ Hmm.
+ Worth a look.
+ There's something to be found under every rock, it seems.
+ Anyway, there is also the an identity for appending a non-zero value to
+ a string of zeros: 
+\begin_inset Formula 
+\[
+\eta\left(\left[0,0,0,q\right]\right)=\eta\left(\left[q\right]\right)\left(2\eta\left(\left[0,0,0\right]\right)+1\right)
+\]
+
+\end_inset
+
+It's simple.
+ But we're off the track.
+ Lets get back on track.
+\end_layout
+
+\begin_layout Standard
+Appending a single zero is this
+\begin_inset Formula 
+\begin{align*}
+\eta\left(\left[k,0\right]\right) & =\eta\left(\left[k\right]\right)\left(2\eta\left(\left[k\right]\right)+1\right)\\
+ & =\eta\left(\left[k\right]\right)\left(\eta\left(\left[k+1\right]\right)+1\right)
+\end{align*}
+
+\end_inset
+
+Then the promotion ideintity shows up again:
+\begin_inset Formula 
+\[
+2\eta\left(\left[k,m\right]\right)=\eta\left(\left[k,m+1\right]\right)
+\]
+
+\end_inset
+
+which has exactly the same form as the earlier promotion identity.
+ There's the matching, all-in-one descent identity:
+\begin_inset Formula 
+\[
+\eta\left(\left[k,m\right]\right)=2^{m}\eta\left(\left[k,0\right]\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Appending a lone zero to the length-two list is
+\begin_inset Formula 
+\begin{align*}
+\eta\left(\left[k,m,0\right]\right) & =\eta\left(\left[k\right]\right)\left(2\eta\left(\left[k,m\right]\right)+1\right)\\
+ & =\eta\left(\left[k\right]\right)\left(\eta\left(\left[k,m+1\right]\right)+1\right)
+\end{align*}
+
+\end_inset
+
+which has the same form as before.
+ The pattern appears to continue, but lets write it out anyway, to make
+ sure we're not making mistakes.
+ The promotion ideintity still works:
+\begin_inset Formula 
+\[
+2\eta\left(\left[k,m,p\right]\right)=\eta\left(\left[k,m,p+1\right]\right)
+\]
+
+\end_inset
+
+The matching descent identity:
+\begin_inset Formula 
+\[
+\eta\left(\left[k,m,p\right]\right)=2^{p}\eta\left(\left[k,m,0\right]\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+And once more, for good luck: 
+\begin_inset Formula 
+\begin{align*}
+\eta\left(\left[k,m,p,0\right]\right) & =\eta\left(\left[k+m\right]\right)\left(2\eta\left(\left[k,m,p\right]\right)+1\right)\\
+ & =\eta\left(\left[k+m\right]\right)\left(\eta\left(\left[k,m,p+1\right]\right)+1\right)
+\end{align*}
+
+\end_inset
+
+Oh dear.
+ That doen't follow the pattern: it is sensitive to the first two digits.
+ Although it will be seen its actually all but the last two digits.
+ The good news is that it's multiplicative.
+\end_layout
+
+\begin_layout Standard
+The promotion identity still works:
+\begin_inset Formula 
+\[
+2\eta\left(\left[k,m,p,q\right]\right)=\eta\left(\left[k,m,p,q+1\right]\right)
+\]
+
+\end_inset
+
+and so does descent:
+\begin_inset Formula 
+\[
+\eta\left(\left[k,m,p,q\right]\right)=2^{q}\eta\left(\left[k,m,p,0\right]\right)
+\]
+
+\end_inset
+
+But we knew all this, it could have been deduced from the general form:
+\begin_inset Formula 
+\begin{align*}
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right) & =2^{m_{1}+m_{2}+\cdots+m_{k-1}}\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)+1\right)\\
+ & =2^{m_{1}+m_{2}+\cdots+m_{k-1}}\left(\eta\left(\left[m_{1},m_{2},\cdots,m_{k}+1\right]\right)+1\right)
+\end{align*}
+
+\end_inset
+
+Promotion:
+\begin_inset Formula 
+\[
+2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)=\eta\left(\left[m_{1},m_{2},\cdots,m_{k}+1\right]\right)
+\]
+
+\end_inset
+
+Descent:
+\begin_inset Formula 
+\[
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k-1},m_{k}\right]\right)=2^{m_{k}}\eta\left(\left[m_{1},m_{2},\cdots,m_{k-1},0\right]\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I think that's it.
 \end_layout
 
 \begin_layout Subsection
