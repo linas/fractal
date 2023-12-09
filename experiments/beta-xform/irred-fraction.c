@@ -357,7 +357,7 @@ int main(int argc, char* argv[])
 {
 // #define MANUAL_EXPLORER
 #ifdef MANUAL_EXPLORER
-	// Obtain one from command line. Print it's index.
+	// Obtain one sequence from command line. Print it's index.
 	if (1 == argc) {
 		fprintf(stderr, "Usage: %s <sequence>\n", argv[0]);
 		exit(1);
@@ -443,13 +443,27 @@ nmax=64;
 
 #define BIG_GRAPH
 #ifdef BIG_GRAPH
+	// Obtain order from command line.
+	if (4 != argc) {
+		fprintf(stderr, "Usage: %s <order> <maxdepth> <maxlen>\n", argv[0]);
+		exit(1);
+	}
 	// Using 1<<24 takes about 50 seconds to find gold.
-	int norder = 26;
-norder = 16;
+	// int norder = 26;
+	int norder = atoi(argv[1]);
+	if (24 < norder)
+		printf("Caution: large orders 24 < %d take a long time\n", norder);
 	int nmax = (1<<norder) + 1;
 
-	setup_gold(nmax);
+	// Depth is how large any given sequence value can go.
+	// Length is how long a sequence is.
+	// Need to go to high depth to avoid big gap at golden mean.
+	// int maxdepth = 16;
+	// int maxlen = 9;
+	int maxdepth = atoi(argv[2]);
+	int maxlen = atoi(argv[3]);
 
+	setup_gold(nmax);
 	for (int n=0; n<nmax; n ++)
 		find_gold(n);
 
@@ -460,9 +474,6 @@ norder = 16;
 	// mostly due to large numbers of overflow failures.
 	// iterate_fbaire(cfrac, 1, 10, 10, nmax);
 
-	// Need to go to high depth to avoid big gap at golden mean.
-	int maxdepth = 16;
-	int maxlen = 9;
 	printf("#\n# Max order of polynomials = %d num=2^order = %d\n", norder, nmax);
 	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
 	fflush (stdout);
