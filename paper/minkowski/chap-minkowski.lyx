@@ -2037,7 +2037,7 @@ reference "eq:direct ? fun defn"
 \begin_inset Formula $h(x)=x/2$
 \end_inset
 
- the above identitiy can be written in the form of a commuting diagram:
+, the above identitiy can be written in the form of a commuting diagram:
  
 \begin_inset Formula $?\circ g=h\circ?$
 \end_inset
@@ -2454,13 +2454,7 @@ which has the same form as before.
 \end_layout
 
 \begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Representations-of-Real"
-
-\end_inset
-
-Representations of Real Numbers
+What is a Real Number?
 \end_layout
 
 \begin_layout Standard
@@ -2528,20 +2522,449 @@ Both these spaces are well-known and carefully studied in mathematics; they
  For the present case, both will be treated as discrete spaces, just consisting
  of infinite strings of letters, and nothing more sophisticated.
  In particular, this section, and the rest of this text carefully avoids
- any discussions related to ideas from topology
+ any discussions related to ideas from general topology.
+ There will be no mention of open sets, nor of continuity.
+ All objects should be thought of as points.
 \end_layout
 
 \begin_layout Standard
-there will 
-\end_layout
-
-\begin_layout Standard
-more precisely, they are 
+Both the Cantor space and the Baire space provide 
 \emph on
 representations
 \emph default
- of the reals.
- That is, both systems offer a way of writing down, and computing with the
+ of the real numbers.
+ What this means is that they both provide a way of writing down specific
+ real numbers.
+ The generic, abstract concept of a real number as some point on the real
+ number line can be given a concrete and direct representation in terms
+ of strings of integers.
+ This enables a form of direct computation and manipulation that is not
+ normally available in other theories that talk about the real numbers in
+ their abstract setting.
+\end_layout
+
+\begin_layout Standard
+It is well-known that representations of mathematical objects sometimes
+ have additional properties that the 
+\begin_inset Quotes eld
+\end_inset
+
+abstract objects
+\begin_inset Quotes erd
+\end_inset
+
+ themselves do not have.
+ There is an entire branch of mathematics devoted to this: this is model
+ theory.
+ This brings us to the primary point of confusion for this text: the dyadic
+ monoid symmetries, already exhibited in the previous section, are these
+ actual properties of the real numbers? Or are they purely a symptom of
+ working with strings of symbols? Certainly, textbooks on pre-calculus,
+ calculus or real analysis never-ever mention the dyadic monoid.
+ Why is that?
+\end_layout
+
+\begin_layout Standard
+Answering this last question is fairly easy, and can be traced back to Newton,
+ calculus, and the development of analysis in the 17th, 18th and 19th centuries.
+ There are three distinct steps.
+ First is the recognition that there is a need for real numbers: there are
+ things that simply aren't rationals, like 
+\begin_inset Formula $\sqrt{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\pi$
+\end_inset
+
+ and 
+\begin_inset Formula $e$
+\end_inset
+
+.
+ So, 
+\begin_inset Quotes eld
+\end_inset
+
+real numbers exist
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Next, the field of analysis developed from the need to formulate and solve
+ differential equations.
+ Either one works with 
+\begin_inset Quotes eld
+\end_inset
+
+infinitessimals
+\begin_inset Quotes erd
+\end_inset
+
+ (codified into 
+\begin_inset Quotes eld
+\end_inset
+
+non-standard analysis
+\begin_inset Quotes erd
+\end_inset
+
+ in the 20th century) or one works with 
+\begin_inset Quotes eld
+\end_inset
+
+delta-epsilon proofs
+\begin_inset Quotes erd
+\end_inset
+
+, in order to avoid infinitessimals and some of their paradoxes by always
+ working with finite quantities.
+ To actually obtain a solution to a differential equation, it seems easiest
+ to work with analytic expansions.
+ Prototypically, this is the Taylor's series 
+\begin_inset Formula $f\left(x\right)=\sum_{n}a_{n}x^{n}$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $x$
+\end_inset
+
+ is already a real number, and no longer a fraction.
+ Differential equations can be solved by converting questions about derivatives
+ acting on 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ into questions about the (infinite) series.
+ This blooms into analysis, and eventually into the vast richness of modern
+ mathematics.
+\end_layout
+
+\begin_layout Standard
+The odd thing about analysis is that it (almost) never interacts with fractal
+ structure.
+ The real numbers of analysis are not fractals.
+ They are things you can add, subtract, multiply, divide.
+ They form a field.
+ The fractal structure buried in Newton's method for approximating square
+ roots was not appreciated until the 20th century.
+ Is that fractal structure a property of the real numbers themselves, or
+ is it 
+\begin_inset Quotes eld
+\end_inset
+
+just
+\begin_inset Quotes erd
+\end_inset
+
+ a property of Newton's algorithm? Perhaps it is just the algorithm, an
+ infinitely recursive algorithm.
+ Infinite recursion generically results in fractals.
+\end_layout
+
+\begin_layout Standard
+The late 20th century saw the bloom of 
+\begin_inset Quotes eld
+\end_inset
+
+chaos theory
+\begin_inset Quotes erd
+\end_inset
+
+, when it was realized that differential equations have chaotic solutions,
+ and that this chaos has something to do with fractals.
+ Perhaps the ommision of fractals from textbooks on real analysis is some
+ grand historical mistake? It's not so simple.
+ Lets review history.
+ Things that can be added and multiplied turns into the ginormous branch
+ of mathematics called 
+\begin_inset Quotes eld
+\end_inset
+
+algebra
+\begin_inset Quotes erd
+\end_inset
+
+, the field of real numbers occupies a distinguished spot.
+ Analysis continues to be analysis, and the prototypical Taylor's expansion
+ continues to smear out any fractal-like properties that might be posesses
+ by real numbers.
+ Cracks in the facade are explored with general topology, starting with
+ separation axioms, moving through open sets, and making strong statements
+ about metric spaces.
+ Nothing in general topology makes use of, needs or exploits any sort of
+ self-similarity properties.
+ The exploration of symmetry is not a part of general topology.
+ If reals have any sort of weird fractal property, general topology won't
+ reveal it.
+ How odd, given that general topology provides vast expanses of exotic,
+ pathological examples.
+\end_layout
+
+\begin_layout Standard
+One of the earliest explicit hints of the craziness of the real numbers
+ arises with the Vitali set: one takes a quotient of the reals by the rationals,
+ re-arranges the points, and gets s set with no size.
+ No appeal symmetry or self-similarity is required, other than to say 
+\begin_inset Quotes eld
+\end_inset
+
+all cosets are the same
+\begin_inset Quotes erd
+\end_inset
+
+ or perhaps 
+\begin_inset Quotes eld
+\end_inset
+
+all rationals are the same
+\begin_inset Quotes erd
+\end_inset
+
+, but saying that 
+\begin_inset Quotes eld
+\end_inset
+
+these things are all the same
+\begin_inset Quotes erd
+\end_inset
+
+ is just the feeblest venture into symmetry.
+ The Banach–Tarski paradox takes a larger stride into symmetry, by employing
+ the free group on two generators in it's statement.
+ But again, the symmetry properties of this group remain unexplored and
+ mostly unusued.
+\end_layout
+
+\begin_layout Standard
+There's a third direction in which history scoots off to.
+ This is the development of set theory, the Peano axioms for arithmetic,
+ ZF and ZFC, and the like.
+ This cuts a bit closer to the heart of 
+\begin_inset Quotes eld
+\end_inset
+
+what is a real number, really
+\begin_inset Quotes erd
+\end_inset
+
+? Apparently, some collections of axioms result in systems that do not have
+ uncountable infinities in them: there might have 
+\begin_inset Quotes eld
+\end_inset
+
+real numbers
+\begin_inset Quotes erd
+\end_inset
+
+, but they are a bit different than the 
+\begin_inset Quotes eld
+\end_inset
+
+standard
+\begin_inset Quotes erd
+\end_inset
+
+ ones of the 
+\begin_inset Quotes eld
+\end_inset
+
+standard model
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Work on set theory does reaveal collections of axioms that appear to be
+ sufficient to provide everything needed for conventional analysis, and
+ most of the rest of 
+\begin_inset Quotes eld
+\end_inset
+
+standard
+\begin_inset Quotes erd
+\end_inset
+
+ algebra and geometry.
+ These axioms do allow for 
+\begin_inset Quotes eld
+\end_inset
+
+real numbers
+\begin_inset Quotes erd
+\end_inset
+
+ that behave, well, in completely 
+\begin_inset Quotes eld
+\end_inset
+
+standard
+\begin_inset Quotes erd
+\end_inset
+
+ ways.
+ Yet, again, symmetry and self-similarity never show up for this party.
+ There are at best some faint shadows: the idea of 
+\begin_inset Quotes eld
+\end_inset
+
+well-foundedness
+\begin_inset Quotes erd
+\end_inset
+
+ does require recursing to 
+\begin_inset Quotes eld
+\end_inset
+
+the bttom of things
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The idea of a power set does require considering all symmetric possibilities.
+ Ultrafilters and ideals involve collections of 
+\begin_inset Quotes eld
+\end_inset
+
+things that are like other things
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But no appeal to any overt concepts of symmetry or self-similarity is needed
+ to develop set theory.
+ 
+\end_layout
+
+\begin_layout Standard
+Even descriptive 
+\begin_inset Quotes eld
+\end_inset
+
+effective
+\begin_inset Quotes erd
+\end_inset
+
+ set theory, which appeals to recursive algorithms as the foundation, never
+ makes use of symmetry.
+ Yes, recursive algorithms generically generate fractals.
+ No, computatibility theory does not explore symmetry or self-similarity,
+ for the most part.
+ 
+\end_layout
+
+\begin_layout Standard
+This long discourse leaves us a bit empty handed in finding the answer to
+ the question of 
+\begin_inset Quotes eld
+\end_inset
+
+what is a real number, anyway?
+\begin_inset Quotes erd
+\end_inset
+
+ The anlysists have one answer that they like; the set theorists have another.
+ The topologists are happy with where they've arrived at: they have the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Polish spaces
+\begin_inset Quotes erd
+\end_inset
+
+ and gaggles of theorems about and properties of Polish spaces.
+\end_layout
+
+\begin_layout Standard
+The only ones who are worried are the chaos theorists, and they appear to
+ be stumped.
+ They interact with all of the above branches of mathematics, pulling theorms
+ and formalisms as needed.
+ However, to this day, there does not seem to be any grand.
+ over-arching, deep or intuitive explanation for why the Lorenz attractor
+ is what it is.
+ There's something fractal in there, and it involves real numbers in some
+ way, but what, exactly, is it?
+\end_layout
+
+\begin_layout Standard
+With that, we leave the question of what is a real number unanswered, and
+ continue with an exploration of the symmetries of the Cantor space and
+ of Baire space, both of which provide a 
+\emph on
+representation
+\emph default
+ of something that could be called 
+\begin_inset Quotes eld
+\end_inset
+
+a real number
+\begin_inset Quotes erd
+\end_inset
+
+, whatever that is.
+ Whether these symmetries are actual properties of real numbers, or just
+ properties of Cantor and Baire space will remain in the fog.
+ 
+\end_layout
+
+\begin_layout Standard
+But still: a coda.
+ If you dear reader, decide that these fractal self-similarities are merely
+ properties of Cantor and Baire, and are not properties of 
+\begin_inset Quotes eld
+\end_inset
+
+true real numbers
+\begin_inset Quotes erd
+\end_inset
+
+, then ponder this: what explains the Lorenz attractor? Its a differential
+ equation.
+ It involves real numbers.
+ How did the fractal properties sneak in there?
+\end_layout
+
+\begin_layout Standard
+OK, OK, perhaps there's a hand-waving answer for that.
+ Perhaps the Lorenz attractor acts on the space of all possible smooth functions
+ in three variables, partitioning them into multiple pieces-parts, the so-called
+ stable and unstable manifolds.
+ Perhaps the correct statement is to say that the Cantor set shows up at
+ the extreme boundary of these manifolds.
+ They're kind-of knotted up, there; a Contor knot at the boundary.
+ That's why things look fractal.
+ But wait...
+ what is the set of smooth functions in three variables? Doesn't this require
+ real numbers, and real analysis, and topology, and more, to define the
+ concept of 
+\begin_inset Quotes eld
+\end_inset
+
+smoothness
+\begin_inset Quotes erd
+\end_inset
+
+? It all seems very circular, to me.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Representations-of-Real"
+
+\end_inset
+
+Representations of Real Numbers
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+That is, both systems offer a way of writing down, and computing with the
  real numbers; however, they are not quite the same thing as real numbers
  themselves.
  In particular, they have some strange properties of their own, not shared
