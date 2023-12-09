@@ -2960,102 +2960,298 @@ Representations of Real Numbers
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-That is, both systems offer a way of writing down, and computing with the
- real numbers; however, they are not quite the same thing as real numbers
- themselves.
- In particular, they have some strange properties of their own, not shared
- by the reals in general.
- Thus, for example, in the dyadic representation, there are two different
- representations, 
-\begin_inset Formula $1.000\cdots$
+Real numbers can be represented both with infinite strings of binary ones
+ and zeros (the dyadic representation) and with infinite strings of integers
+ (the continued fraction representation.) Neither representation is a bijection.
+ For example, in the two strings 
+\begin_inset Formula $1000\cdots$
 \end_inset
 
  and 
-\begin_inset Formula $0.111\cdots$
+\begin_inset Formula $0111\cdots$
 \end_inset
 
-, both of which represent the real number 1.
- Thus, the dyadic representation is not isomorphic to the reals; the map
- it is a surjection 
+ both represent the real number of 1/2.
+ Looking at the the dyadic tree in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Dyadic-Tree"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the first string corresponds to a move to the right branch, followed by
+ an infinite choice of left branches.
+ The second string corresponds to a move to the left branch, followed by
+ an infinite choice of right branches.
+ Perhaps ths becomes more clear if one writes 
+\begin_inset Formula $RLLL\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $LRRR\cdots$
+\end_inset
+
+ instead of 
+\begin_inset Formula $1000\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $0111\cdots$
+\end_inset
+
+.
+ But its the same thing: infinite strings of two symbols.
 \end_layout
 
 \begin_layout Standard
-For finite-length continued fraction
-\end_layout
-
-\begin_layout Standard
-In a later section, we'll see the that the dyadic fractions are isomorphic
- to the Cantor set.
- In this section, the relationship of these two representations is spelled
- out in greater detail and in more formal terms.
- 
-\end_layout
-
-\begin_layout Standard
-Denote by 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset
-
- the dyadic representation of the real numbers 
-\begin_inset Formula $\mathbb{R}$
-\end_inset
-
- in the dyadic expansions; that is, 
-\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{D}\in\mathbb{R}_{D}$
-\end_inset
-
- which represents the real number 
-\begin_inset Formula $x$
-\end_inset
-
- as the dyadic expansion 
-\begin_inset Formula $x_{D}$
-\end_inset
-
- with 
+Such dyadic strings have a canonical mapping to the reals, given by 
 \begin_inset Formula 
 \begin{equation}
-x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\label{eq:dyadic expansion}
+x=x_{D}=\sum_{k=1}^{\infty}b_{k}2^{-k}\label{eq:dyadic expansion}
 \end{equation}
 
 \end_inset
 
-where 
-\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} \;\forall k\in\mathbb{Z}$
+The meaning of the symbols is meant to be mostly obvious, but let's try
+ to be precies, anyway.
+ Each 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} $
+\end_inset
+
+ is a bit; one is provided for each 
+\begin_inset Formula $k\in\mathbb{N}$
 \end_inset
 
 .
- Let 
+ Here, 
+\begin_inset Formula $x$
+\end_inset
+
+ is a real number, but what is 
+\begin_inset Formula $x_{D}$
+\end_inset
+
+? It is meant to be a 
+\emph on
+representation
+\emph default
+ of a real number, in the dyadic representation.
+ A better notation can be provided by writing
+\begin_inset Formula 
+\begin{align*}
+x_{D}:2^{\omega}\to & \mathbb{R}\\
+b\mapsto & x=x_{D}\left(b\right)\\
+x_{D}\left(b\right)= & \sum_{k=1}^{\infty}b_{k}2^{-k}
+\end{align*}
+
+\end_inset
+
+so that 
+\begin_inset Formula $x_{D}$
+\end_inset
+
+ is a function, a map, from 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ It maps strings 
+\begin_inset Formula $b$
+\end_inset
+
+ to binary expansions.
+ The range of the map (the 
+\begin_inset Quotes eld
+\end_inset
+
+codomain
+\begin_inset Quotes erd
+\end_inset
+
+) is the unit interval of the reals, so 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+.
+ But since, until now, we haven't defined any kind of topology on the reals,
+ we haven't created any notion of open sets, it is not entirely appropriate
+ to talk about an 
+\begin_inset Quotes eld
+\end_inset
+
+interval
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In particular, we don't even know what 
+\begin_inset Quotes eld
+\end_inset
+
+less than
+\begin_inset Quotes erd
+\end_inset
+
+ means for the reals, because we haven't demonstrated any kind of total
+ order on them! Perhaps this all sounds vey silly, since even elementary-school
+ students have some intuitive feel for real numbers, and we're just being
+ overly nit-picky.
+ Whatever.
+ Lets just fake it till we make it.
+ Denote by 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset
+
+ the range of the map 
+\begin_inset Formula $x_{D}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that every dyadic rational has two inequivalent representations in
+ this map.
+ A dyadic rational corresponds to a finite string, for which the 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ are defined only for 
+\begin_inset Formula $1\le k\le N$
+\end_inset
+
+.
+ In this case, the dyadic rational is the number 
+\begin_inset Formula $m/2^{N}$
+\end_inset
+
+ for some integer 
+\begin_inset Formula $m$
+\end_inset
+
+ (well, ok, to be explicit, its for the integer 
+\begin_inset Formula $m=\sum_{k=1}^{N}b_{k}2^{k}$
+\end_inset
+
+).
+ Lets assume, without loss of generality, that 
+\begin_inset Formula $b_{k}=1$
+\end_inset
+
+; if it isn't, then just adjust 
+\begin_inset Formula $N$
+\end_inset
+
+ until it is.
+ There are two infinite strings that map to this, corresponding to the left
+ and right infinite branches on either side of the gap in the dyadic tree
+ that lies underneath that dyadic rational: 
+\begin_inset Formula 
+\begin{align*}
+b_{R}= & \left(b_{1},b_{2},\cdots,b_{k-1},1,0,0,\cdots\right)\\
+b_{L}= & \left(b_{1},b_{2},\cdots,b_{k-1},0,1,1,\cdots\right)
+\end{align*}
+
+\end_inset
+
+These have 
+\begin_inset Formula $x_{D}\left(b_{L}\right)=x_{D}\left(b_{R}\right)$
+\end_inset
+
+; they are the same real number.
+ The map 
+\begin_inset Formula $x_{D}$
+\end_inset
+
+ is onto 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset
+
+ but it is not one-to-one.
+\end_layout
+
+\begin_layout Standard
+There's also a canonical map from infinite strings of natural numbers, to
+ the reals.
+ This is the continued-fraction mapping.
+ As above, write
+\begin_inset Formula 
+\begin{align*}
+x_{C}:\mathbb{N}^{\omega}\to & \mathbb{R}\\
+a\mapsto & x=x_{C}\left(a\right)\\
+x_{C}\left(a\right)= & x_{C}\left([a_{1},a_{2},\cdots]\right)=\dfrac{1}{a_{1}+\dfrac{1}{a_{2}+\dfrac{1}{\cdots}}}
+\end{align*}
+
+\end_inset
+
+As before, let 
 \begin_inset Formula $\mathbb{R}_{C}$
 \end_inset
 
- denote the representation of the real numbers as continued fractions, that
- is, 
-\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{C}\in\mathbb{R}_{C}$
-\end_inset
-
- such that 
-\begin_inset Formula 
-\[
-x_{C}=a_{0}+\dfrac{1}{a_{1}+\dfrac{1}{a_{2}+\dfrac{1}{\cdots}}}=[a_{0};a_{1},a_{2},\cdots]
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $a_{k}\in\mathbb{N}\;\forall k\in\mathbb{N}$
-\end_inset
-
-, with the exception that 
-\begin_inset Formula $a_{0}\in\mathbb{Z}$
+ denote the range of this map.
+ Note that the rational numbers are not a part of this map.
+ A rational number corresponds to a finite-length string 
+\begin_inset Formula $[a_{1},a_{2},\cdots,a_{N}]$
 \end_inset
 
 .
- 
+ So it would seem that 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset
+
+ is contained in the unit interval, but is missing the rationals; it has
+ holes.
+ That is, 
+\begin_inset Formula $x_{C}$
+\end_inset
+
+ is injective (it is one-to-one) but it is not onto.
+ We could try to patch this up by allowing some of the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ to be zero.
+ This results in 
+\begin_inset Formula $\infty=1/0$
+\end_inset
+
+ in the continued fraction, terminating an infinite sring and giving a finite
+ one back, which is identified as a rational.
+ This works great, until one realizes that placing a zero in the sequence
+ causes all the later ones to not matter.
+ Yes, one gets a surjection, but there are infinitely many strings 
+\begin_inset Formula $[a_{1},a_{2},\cdots,a_{N},0,a_{N+2},\cdots]$
+\end_inset
+
+ that all map to the same rational.
+ Ugh.
+\end_layout
+
+\begin_layout Standard
+For completeness, it should be mentioned that there is a map between strings
+ in 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+ and the real unit interval that is a bijection, this is the beta map.
+ However, it is far more complex to describe, and proving the bijection
+ is not entirely easy.
+ Details can be found in my other text on the beta map.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-Beta2018"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
