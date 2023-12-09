@@ -3238,42 +3238,70 @@ As before, let
 
  is contained in the unit interval, but is missing the rationals; it has
  holes.
- That is, 
+ That is, the map 
 \begin_inset Formula $x_{C}$
 \end_inset
 
- is injective (it is one-to-one) but it is not onto.
- We could try to patch this up by allowing some of the 
-\begin_inset Formula $a_{k}$
-\end_inset
-
- to be zero.
- This results in 
-\begin_inset Formula $\infty=1/0$
-\end_inset
-
- in the continued fraction, terminating an infinite string and giving a
- finite one back, which is identified as a rational.
- This works great, until one realizes that placing a zero in the sequence
- causes all the later ones to not matter.
- Yes, one gets a surjection, but there are infinitely many strings 
-\begin_inset Formula $[a_{1},a_{2},\cdots,a_{N},0,a_{N+2},\cdots]$
-\end_inset
-
- that all map to the same rational.
- Ugh.
+ applied to Baire space is injective (it is one-to-one) but it is not onto.
+ 
 \end_layout
 
 \begin_layout Standard
-For completeness, it should be mentioned that there is a map between strings
- in 
+The easiest patch for this is to allow finite-length strings.
+ Thus, extend the domain of the 
+\begin_inset Formula $x_{C}$
+\end_inset
+
+ map to 
+\begin_inset Formula $\mathbb{N}^{<\omega}\cup\mathbb{N}^{\omega}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbb{N}^{<\omega}$
+\end_inset
+
+ denotes the set of all finite-length strings of positive integers.
+ This provides a bijection: one-to-one and onto.
+ There are, of course, other patches, such as allowing sequences with zeros
+ in them.
+ The first zero forces a termination (a 
+\begin_inset Quotes eld
+\end_inset
+
+zero-terminated string
+\begin_inset Quotes erd
+\end_inset
+
+); it presents a problem, in that the digits that come after the first zero
+ would be mapped to the same rational.
+ Of course, one can be imaginative, and suppose that these correspond to
+ infinitesimals; this moves the discussion to that of nonstandard models
+ of the reals.
+ This text is not prepared to enter into non-standard analysis.
+\end_layout
+
+\begin_layout Standard
+There is a map between strings in 
 \begin_inset Formula $\mathbb{N}^{\omega}$
 \end_inset
 
- and the real unit interval that is a bijection, this is the beta map.
- However, it is far more complex to describe, and proving the bijection
- is not entirely easy.
- Details can be found in my other text on the beta map.
+ and the real unit interval that is a bijection; i.e.
+ a map that does not require the finite-length strings for rationals.
+ This map is the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-map or 
+\begin_inset Quotes eld
+\end_inset
+
+beta odometer
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is far more complex to describe; details can be found my text that explores
+ the beta-transform.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ve-Beta2018"

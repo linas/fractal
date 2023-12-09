@@ -13015,20 +13015,13 @@ The bijection can be explicitly exhibited as follows.
 \end_inset
 
 .
- The index is given by a recursive formula:
-\begin_inset Formula 
-\[
-n=\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
-\]
-
-\end_inset
-
-which is anchored by 
-\begin_inset Formula $\left[m\right]=2^{m}$
+ Write the index label as 
+\begin_inset Formula $n=\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
 \end_inset
 
 .
- These are the integer labels appears on figure 
+ This index is the same, as that used in previous sections; it corresponds
+ to the labels in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Normalization-Integral"
@@ -13039,18 +13032,54 @@ noprefix "false"
 \end_inset
 
 .
- The recursion relation can be obtained from the bracketing relationship.
 \end_layout
 
 \begin_layout Standard
-The recursion relation is a bijection; it works in both directions; the
- index can be obtained from a sequence, and vice-versa.
- In the inverted form, rejected indexes have no sequence representation.
- That is, the recursion formula fails to find sequences for 
+The index can be deduced from the bracketing relationship; it provides a
+ recursion formula.
+ Starting from 
+\begin_inset Formula $\eta\left(\left[0\right]\right)=1$
+\end_inset
+
+, repeated increments of the last location in the sequence correspond to
+ multiplying by two:
+\begin_inset Formula 
+\[
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k},j\right]\right)=2^{j}\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)
+\]
+
+\end_inset
+
+A sequence can be lengthed by appending an extra zero digit:
+\begin_inset Formula 
+\[
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=2^{m_{1}+m_{2}+\cdots+m_{k-1}}\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)+1\right)
+\]
+
+\end_inset
+
+These two formulas can be combined into one, so that really, there is but
+ one recursion relation.
+ Leaving them distinct does make them easier to comprehend.
+\end_layout
+
+\begin_layout Standard
+The recursion relation is an injection (one-to-one map) into the positive
+ integers; each sequence corresponds to a unique index integer.
+ Perhaps the easiest way to see this is to observe that the append operation
+ generates an odd integer, and then tacks on enough powers of two to disambiguat
+e it from all other odd integers associated with shorter sequences that
+ have been observed so far.
+\end_layout
+
+\begin_layout Standard
+Not all positive integers have a sequence representation.
+ Missing from the index table are 
 \begin_inset Formula $n=5,9,11,17,18,19,21,\cdots$
 \end_inset
 
- exactly as expected, as these correspond to the reducible beta polynomials.
+; these are exactly the same indexes missing from tables given earlier:
+ they correspond to the reducible beta polynomials.
 \end_layout
 
 \begin_layout Subsubsection
