@@ -339,7 +339,15 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 
 int main(int argc, char* argv[])
 {
-#define VERFIY_FBAIRE
+	int cfrac[] = {3,0};
+	int seqno = index_from_fbaire(cfrac, 2);
+	printf("its %d\n", seqno);
+
+	//int cfrac[SZ];
+	//for (int i=0; i<SZ; i++) cfrac[i] = -666;
+	//int len = index_to_fbaire(cfrac, n);
+
+// #define VERFIY_FBAIRE
 #ifdef VERFIY_FBAIRE
 
 	// Verify reverse listing.
