@@ -53,7 +53,7 @@ int len(unsigned long n)
 	return len;
 }
 
-/** Helper array, needed for finding gold midpoints */
+/** Helper array, needed for finding gold midpoints. */
 double* zero = NULL;
 void setup_gold(int nmax)
 {
@@ -61,23 +61,34 @@ void setup_gold(int nmax)
 	for (int i=0; i< nmax; i++) zero[i] = -1.0;
 }
 
+/** Fill up array of zero candidates. Optionally needed. */
+void fill_gold(long n)
+{
+	for (int i=1; i<n; i++)
+	{
+		if (zero[i] < -0.5)
+			zero[i] = find_zero(i, 1.0, 2.0);
+	}
+}
+
 // Return true if this is a valid polynomial
 bool zero_is_bracketed(int n, double gold)
 {
 	// Its valid only if it is in the middle.
 #define EPS 2.0e-15
-	// printf("---------\ngold=%g\n", gold);
+	// printf("---------\ncheck bracketing for gold=%20.16g at n=%d\n", gold, n);
 	bool ork = true;
 	int nhl = n;
 	int nh = nhl >> 1;
 	while (nh)
 	{
-		// printf("duuude n=%d nhl=%d nh=%d znh=%g go=%g comp=%d bad=%d\n",
-		// n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
+		//printf("walk to n=%d nhl=%d nh=%d znh=%g go=%g comp=%d bad=%d\n",
+		//       n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
 		if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
 		nhl = nh;
 		nh >>= 1;
 	}
+	// printf("Bracket says ork=%d\n", ork);
 
 	return ork;
 }
@@ -100,6 +111,30 @@ double find_gold(long n)
 
 	if (zero_is_bracketed(n, gold)) return gold;
 	return 0.0;
+}
+
+// Perform standard iteration
+double tee(double beta, double x)
+{
+	if (x<=0.5) return beta*x;
+	return beta*(x-0.5);
+}
+
+// Compute the order of the iteration of the midpoint
+int iteration_order(double beta)
+{
+#define DELTA 1e-15
+#define EPSI  1e-13
+	int count = 0;
+	double midpoint = 0.5-DELTA;
+	do
+	{
+		count ++;
+		midpoint = tee(beta, midpoint);
+		// printf("%d  %g\n", count, midpoint);
+	}
+	while (fabs(midpoint-0.5)>EPSI && count < 100);
+	return count;
 }
 
 // Return the real value of the corresponding continued fraction.
@@ -132,7 +167,7 @@ double reverse_cf_to_real(int cfrac[], int len)
 }
 
 /*
- * Given a finite-lengtth Baire representation, return the
+ * Given a finite-length Baire representation, return the
  * corresponding index number.
  */
 long index_from_fbaire(int cfrac[], int len)
@@ -450,14 +485,35 @@ maxord=8;
 	iterate_fbaire(cfrac, 1, 5, 8, nmax);
 #endif
 
-#define SANITY_CHECK
+// #define CHECK_GOLD_IDX
+#ifdef CHECK_GOLD_IDX
+	int nmax = 64;
+	setup_gold(nmax);
+	for (int n=1; n<nmax; n ++)
+	{
+		double beta = find_gold(n);
+		if (0.5 < beta)
+		{
+			printf("Good %d %g\n", n, beta);
+		}
+		else
+		{
+		}
+	}
+#endif
+	setup_gold(64);
+	fill_gold(64);
+	double beta = find_gold(53);
+	int order = iteration_order(beta);
+	printf("got %d\n", order);
+
+// #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Print the finite-Baire sequences. Sanity check, only; short runtime.
 	int norder = 18;
 	int nmax = (1<<norder) + 1;
 
 	setup_gold(nmax);
-
 	for (int n=0; n<nmax; n ++)
 		find_gold(n);
 
