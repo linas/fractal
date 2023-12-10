@@ -201,7 +201,7 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	DBG(("red after odd to nseq=%ld msum=%d\n", nseq, msum));
 	// Reject pure powers of two, when they occur after an odd number.
 	// Long series must terminate with an odd number at the bottom.
-	if (1 < nseq ) // && 0 == msum)
+	if (1 < nseq && 0 == msum)
 	{
 		int pure = nseq;
 		while (0 == pure %2) { pure /=2; }
@@ -466,7 +466,8 @@ maxord=8;
 
 	// Iterating to length 10, depth 10 takes more than an hour,
 	// mostly due to large numbers of overflow failures.
-	iterate_fbaire(cfrac, 1, 3, 8, nmax);
+	// iterate_fbaire(cfrac, 1, 3, 8, nmax);
+	iterate_fbaire(cfrac, 1, 3, 4, nmax);
 #endif
 
 // #define BIG_GRAPH
