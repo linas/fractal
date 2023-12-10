@@ -54,13 +54,14 @@ void malloc_gold(int nmax)
 {
 	zero = (double*) malloc(nmax*sizeof(double));
 	for (int i=0; i< nmax; i++) zero[i] = -1.0;
+	zero[0] = 2.0;
 }
 
 /** Fill up array of zero candidates. Optionally needed. */
 void fill_gold(long n)
 {
 	// Go top down, assuming lower ranks already filled.
-	for (int i=n-1; 0<=i; i--)
+	for (int i=n; 0<i; i--)
 	{
 		if (zero[i] > -0.5) break;
 		zero[i] = find_zero(i, 1.0, 2.0);
@@ -311,22 +312,30 @@ void validate_bracket(long n)
 	// If its not a valid index, do nothing.
 	if (gold < 1.0) return;
 
-	printf("Validate bracket for %ld\n", n);
+	// printf("Validate bracket for %ld\n", n);
 	// Verify gold bracketing
-	if (0 == n%2)
-	{
-		// Verify that right beta value is a bracket.
-		double gright = find_gold(n/2);
-		if (gright < 0.5) printf("Error: no such right index %ld\n", n/2);
-		if (gright <= gold) printf("Error: bad right bracket at %ld\n", n);
-	}
-	else
-	{
-		// Verify that left beta value is a bracket.
-		double gleft = find_gold((n-1)/2);
-		if (gleft < 0.5) printf("Error: no such left index %ld\n", (n-1)/2);
-		if (gleft >= gold) printf("Error: bad left bracket at %ld\n", n);
-	}
+
+	// Verify the left bracket by ripping out powers of two until
+	// an odd number is reached.
+	long nleft = n;
+	while (0 == nleft%2) nleft /=2;
+	if (0 < nleft) nleft = (nleft-1) / 2;
+
+	double gleft = 1.0; // pure power terminates at beta=1
+	if (0 < nleft) gleft = find_gold(nleft);
+	if (gleft < 0.5) printf("Error: no such left index %ld\n", (n-1)/2);
+	if (gleft >= gold) printf("Error: bad left bracket at %ld\n", n);
+
+	// Verify right bracketing by knocking off only one power of two.
+	long nright = n;
+	nright /=2;
+	if (0 < nright) nright = (nright-1) / 2;
+
+	double gright = find_gold(nright);
+	if (gright < 0.5) printf("Error: no such right index %ld\n", (n-1)/2);
+	if (gright <= gold)
+		printf("Error: bad right bracket at %ld: nr=%ld gold=%g gright=%g\n",
+			n, nright, gold, gright);
 }
 
 // =================================================================
@@ -686,7 +695,7 @@ int main(int argc, char* argv[])
 		}
 	}
 #endif
-	malloc_gold(64);
+	malloc_gold(1024);
 	double beta = find_gold(53);
 	int order = iteration_order(beta);
 	printf("got %d\n", order);
@@ -696,17 +705,17 @@ int main(int argc, char* argv[])
 	for (int n=1; n<16; n++)
 	{
 		double beta = find_gold(n);
-		if (beta < 1.0) continue;
+		if (beta < 0.5) continue;
 
 		validate_bracket(n);
-		// printf("gold=%g ", beta);
-		// prt_bitstr(n, "bits", "");
+		printf("gold=%g ", beta);
+		prt_bitstr(n, "bits", "");
 
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
 		int len = index_to_fbaire(cfrac, n);
 		if (len < 0)
 			printf("\nError: missing representation for n=%d\n", n);
-		// print_seq(cfrac, len, "", "\n");
+		print_seq(cfrac, len, "", "\n");
 	}
 
 }
