@@ -496,18 +496,18 @@ nmax=64;
 	int totf = 0;
 
 	// Max order
-	int maxord = 16;
+	int maxord = 24;
 	for (int ord=1; ord < maxord; ord++)
 	{
-		double deno = (double) (1 << ord);
 		int nstart = 1 << (ord-1);
-		int nend = 1 << ord;
+		int nend = 2*nstart;
+		double deno = (double) nstart;
 		for (int n=nstart; n<nend; n ++)
 		{
 			int len = index_to_fbaire(cfrac, n);
 
 			// Bin-count indexes
-			double ex = ((double) n) / deno;
+			double ex = ((double) (n-nstart)) / deno;
 			ex *= NBINS;
 			int bin = floor(ex + 0.5);
 
