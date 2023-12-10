@@ -441,7 +441,7 @@ nmax=64;
 	iterate_fbaire(cfrac, 1, 3, 8, nmax);
 #endif
 
-#define BIG_GRAPH
+// #define BIG_GRAPH
 #ifdef BIG_GRAPH
 	// Obtain order from command line.
 	if (4 != argc) {
@@ -479,4 +479,58 @@ nmax=64;
 	fflush (stdout);
 	iterate_fbaire(cfrac, 1, maxdepth, maxlen, nmax);
 #endif
+
+#define BINCOUNT_INDEX
+#ifdef BINCOUNT_INDEX
+	#define NBINS 1037
+	int gcount[NBINS];
+	int fcount[NBINS];
+	for (int i=0; i<NBINS; i++)
+	{
+		gcount[i] = 0;
+		fcount[i] = 0;
+	}
+
+	int cfrac[SZ];
+	int totg = 0;
+	int totf = 0;
+
+	// Max order
+	int maxord = 16;
+	for (int ord=1; ord < maxord; ord++)
+	{
+		double deno = (double) (1 << ord);
+		int nstart = 1 << (ord-1);
+		int nend = 1 << ord;
+		for (int n=nstart; n<nend; n ++)
+		{
+			int len = index_to_fbaire(cfrac, n);
+
+			// Bin-count indexes
+			double ex = ((double) n) / deno;
+			ex *= NBINS;
+			int bin = floor(ex + 0.5);
+
+			// Reject the bad ones.
+			if (len < 0)
+			{
+				fcount[bin]++;
+				totf ++;
+				continue;
+			}
+			gcount[bin]++;
+			totg ++;
+		}
+	}
+
+	printf("#\n# Total bincount = %d %d\n#\n", totg, totf);
+	for (int i=0; i<NBINS; i++)
+	{
+		double ex = (((double) i) + 0.5) / ((double) NBINS);
+		double pg = NBINS * ((double) gcount[i]) / ((double) totg);
+		double pf = NBINS * ((double) fcount[i]) / ((double) totf);
+		printf("%d	%g	%g	%g\n", i, ex, pg, pf);
+	}
+#endif
+
 }
