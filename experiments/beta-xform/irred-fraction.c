@@ -213,9 +213,6 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	for (int j=0; j<len-1; j++)
 		msum -= cfrac[j];
 
-	// Special-case the length=1 case.
-	// if (1 == len) msum -= cfrac[0];
-
 	DBG(("post subtract for nseq=%ld msum=%d new len=%d\n", nseq, msum, len));
 	// If more powers of two removed than can exist, then reject.
 	if (msum < 0) return -555;
@@ -390,32 +387,44 @@ int main(int argc, char* argv[])
 
 	// Verify reverse listing.
 	// Takes 30 cpu-seconds to get to 1<<26
-	int nmax = 1<<26;
-nmax=64;
-	for (int n=1; n<nmax; n ++)
+	int maxord = 26;
+	int totgood = 0;
+	int toterr = 0;
+	for (int ord=2; ord < maxord; ord++)
 	{
-		int cfrac[SZ];
-		for (int i=0; i<SZ; i++) cfrac[i] = -666;
-		int len = index_to_fbaire(cfrac, n);
-		if (len < 0)
+		int gprev = totgood;
+		long nstart = 1UL << (ord-2);
+		long nend = 2*nstart;
+		for (long n=nstart; n<nend; n ++)
 		{
-#define PRINT_SEQS
+			int cfrac[SZ];
+			for (int i=0; i<SZ; i++) cfrac[i] = -666;
+			int len = index_to_fbaire(cfrac, n);
+			if (len < 0)
+			{
+// #define PRINT_SEQS
 #ifdef PRINT_SEQS
-			printf(">>>>> %d rejected\n", n);
+				printf(">>>>> %ld rejected\n", n);
 #endif
-			continue;
-		}
-		int seqno = index_from_fbaire(cfrac, len);
-		if (n != seqno)
-		{
-			printf("Sequence numbering fail!! in=%d out=%d", n, seqno);
-		}
+				continue;
+			}
+			long seqno = index_from_fbaire(cfrac, len);
+			if (n != seqno)
+			{
+				printf("Sequence numbering fail!! in=%ld out=%ld", n, seqno);
+				toterr ++;
+			}
 #ifdef PRINT_SEQS
-		printf(">>>>> %d len=%d ", n, len);
-		print_seq(cfrac, len, "sequence ", "\n");
+			printf(">>>>> %ld len=%d ", n, len);
+			print_seq(cfrac, len, "sequence ", "\n");
 #endif
+			totgood ++;
+		}
+		printf("Observed %d betas at order %d (tot=%d)\n",
+			totgood-gprev, ord, totgood);
 	}
-	printf("Verified everything up to nmax=%d\n", nmax);
+	long nend = 1UL << maxord;
+	printf("Verified up to order=%d n=%ld errors=%d\n", maxord, nend, toterr);
 #endif
 
 // #define REVERSE_VERIFY
