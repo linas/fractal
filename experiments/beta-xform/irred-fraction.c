@@ -174,24 +174,26 @@ long index_from_fbaire(int cfrac[], int len)
 // This is the inverse of what index_from_fbaire
 int index_to_fbaire(int cfrac[], unsigned long nseq)
 {
+	#define DBG(X) printf X
+	DBG(("enter nseq=%ld\n", nseq));
 	int msum = 0;
 	while (0 == nseq %2) { msum ++; nseq /=2; }
 
 	// Terminate recursion
 	if (1 == nseq)
 	{
-		// printf("the end\n");
+		DBG(("the end msum=%d\n", msum));
 		cfrac[0] = msum;
 		return 1;
 	}
 
 	// If we are here, nseq is odd; reduce it and try again.
-	nseq -=1;
-	nseq /=2;
+	nseq = (nseq-1)/2;
 
+	DBG(("red after odd to nseq=%ld msum=%d\n", nseq, msum));
 	// Reject pure powers of two, when they occur after an odd number.
 	// Long series must terminate with an odd number at the bottom.
-	if (1 < nseq && 0 == msum)
+	if (1 < nseq)
 	{
 		int pure = nseq;
 		while (0 == pure %2) { pure /=2; }
@@ -202,16 +204,18 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	// Recurse.
 	int len = index_to_fbaire(cfrac, nseq);
 
+	DBG(("post recursion for nseq=%ld msum=%d new len=%d\n", nseq, msum, len));
 	// Pass rejection slips back up the chain.
 	if (len < 0) return len;
 
 	// Remove contributions from shorter sequences
-	for (int j=0; j<len-1; j++)
+	for (int j=0; j<len-2; j++)
 		msum -= cfrac[j];
 
 	// Special-case the length=1 case.
 	if (1 == len) msum -= cfrac[0];
 
+	DBG(("post subtract for nseq=%ld msum=%d new len=%d\n", nseq, msum, len));
 	// If more powers of two removed than can exist, then reject.
 	if (msum < 0) return -555;
 
@@ -356,6 +360,15 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 
 int main(int argc, char* argv[])
 {
+#if 1
+	int cfrac[SZ];
+	for (int i=0; i<SZ; i++) cfrac[i] = -666;
+	int nind = 27;
+	int len = index_to_fbaire(cfrac, nind);
+	printf("Index: %d len=%d", nind, len);
+	print_seq(cfrac, len, " ", "\n");
+#endif
+
 // #define MANUAL_EXPLORER
 #ifdef MANUAL_EXPLORER
 	// Obtain one sequence from command line. Print it's index.
@@ -481,7 +494,7 @@ nmax=64;
 	iterate_fbaire(cfrac, 1, maxdepth, maxlen, nmax);
 #endif
 
-#define BINCOUNT_INDEX
+// #define BINCOUNT_INDEX
 #ifdef BINCOUNT_INDEX
 	#define NBINS 337
 	int gcount[NBINS];
@@ -524,6 +537,8 @@ nmax=64;
 			{
 				gcount[bin]++;
 				totg ++;
+printf("duude ord=%d n=%ld totg=%ld delta=%ld\n", ord+1, n, totg,
+totg-gprev);
 			}
 		}
 		printf("%d	%ld	%ld	%ld\n", ord+1, totg, totg-gprev, totf);
