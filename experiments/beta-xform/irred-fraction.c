@@ -172,7 +172,7 @@ long index_from_fbaire(int cfrac[], int len)
 // Given an index, set "cfrac" to the matching sequence.
 // Return the length of the cfrac sequence.
 // This is the inverse of what index_from_fbaire
-int index_to_fbaire(int cfrac[], int nseq)
+int index_to_fbaire(int cfrac[], unsigned long nseq)
 {
 	int msum = 0;
 	while (0 == nseq %2) { msum ++; nseq /=2; }
@@ -228,7 +228,7 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 	printf("]%s", tail);
 }
 
-#define SZ 20
+#define SZ 30
 /*
  * Validate the bounds on the finite-Baire sequence representation.
  * ... and print it out.
@@ -482,7 +482,7 @@ nmax=64;
 
 #define BINCOUNT_INDEX
 #ifdef BINCOUNT_INDEX
-	#define NBINS 1037
+	#define NBINS 337
 	int gcount[NBINS];
 	int fcount[NBINS];
 	for (int i=0; i<NBINS; i++)
@@ -492,17 +492,18 @@ nmax=64;
 	}
 
 	int cfrac[SZ];
-	int totg = 0;
-	int totf = 0;
+	long totg = 0;
+	long totf = 0;
 
-	// Max order
-	int maxord = 24;
+	// Max order 26 takes 6 seconds
+	// 28 takes 20 seconds
+	int maxord = 46;
 	for (int ord=1; ord < maxord; ord++)
 	{
-		int nstart = 1 << (ord-1);
-		int nend = 2*nstart;
+		long nstart = 1 << (ord-1);
+		long nend = 2*nstart;
 		double deno = (double) nstart;
-		for (int n=nstart; n<nend; n ++)
+		for (long n=nstart; n<nend; n ++)
 		{
 			int len = index_to_fbaire(cfrac, n);
 
@@ -516,13 +517,18 @@ nmax=64;
 			{
 				fcount[bin]++;
 				totf ++;
-				continue;
 			}
-			gcount[bin]++;
-			totg ++;
+			else
+			{
+				gcount[bin]++;
+				totg ++;
+			}
 		}
+		printf("%d	%ld	%ld\n", ord+1, totg, totf);
+		fflush (stdout);
 	}
 
+#if 0
 	printf("#\n# Total bincount = %d %d\n#\n", totg, totf);
 	for (int i=0; i<NBINS; i++)
 	{
@@ -531,6 +537,7 @@ nmax=64;
 		double pf = NBINS * ((double) fcount[i]) / ((double) totf);
 		printf("%d	%g	%g	%g\n", i, ex, pg, pf);
 	}
+#endif
 #endif
 
 }

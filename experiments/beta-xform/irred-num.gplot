@@ -1,0 +1,19 @@
+
+set out 'irred-num.png'
+set term png size 1024,768
+set term png size 640, 480
+
+# set xrange [0:1]
+# set yrange [0:1]
+set key left
+
+set xlabel "Order"
+set ylabel "Num prime"
+set title "Number of prime beta polynomials"
+
+set logscale y
+plot "irred-num.dat" using 1:2 with lines linewidth 2 title "prime", \
+     "irred-num.dat" using 1:((2.0/3.0) * 2**($1/3) * $1**1.5) with lines linewidth 2 title "fit"
+
+
+#####
