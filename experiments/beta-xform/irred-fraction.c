@@ -174,7 +174,8 @@ long index_from_fbaire(int cfrac[], int len)
 // This is the inverse of what index_from_fbaire
 int index_to_fbaire(int cfrac[], unsigned long nseq)
 {
-	#define DBG(X) printf X
+	// #define DBG(X) printf X
+	#define DBG(X)
 	DBG(("enter nseq=%ld\n", nseq));
 	int msum = 0;
 	while (0 == nseq %2) { msum ++; nseq /=2; }
@@ -209,11 +210,11 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	if (len < 0) return len;
 
 	// Remove contributions from shorter sequences
-	for (int j=0; j<len-2; j++)
+	for (int j=0; j<len-1; j++)
 		msum -= cfrac[j];
 
 	// Special-case the length=1 case.
-	if (1 == len) msum -= cfrac[0];
+	// if (1 == len) msum -= cfrac[0];
 
 	DBG(("post subtract for nseq=%ld msum=%d new len=%d\n", nseq, msum, len));
 	// If more powers of two removed than can exist, then reject.
@@ -360,10 +361,10 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 
 int main(int argc, char* argv[])
 {
-#if 1
+#if 0
 	int cfrac[SZ];
 	for (int i=0; i<SZ; i++) cfrac[i] = -666;
-	int nind = 27;
+	int nind = 26;
 	int len = index_to_fbaire(cfrac, nind);
 	printf("Index: %d len=%d", nind, len);
 	print_seq(cfrac, len, " ", "\n");
@@ -384,7 +385,7 @@ int main(int argc, char* argv[])
 	print_seq(cfrac, len, " ", "\n");
 #endif
 
-// #define VERFIY_FBAIRE
+#define VERFIY_FBAIRE
 #ifdef VERFIY_FBAIRE
 
 	// Verify reverse listing.
