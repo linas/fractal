@@ -168,6 +168,13 @@ long index_from_fbaire(int cfrac[], int len)
 	return follower;
 }
 
+void print_seq(int cfrac[], int len, char* head, char* tail)
+{
+	printf("%s [", head);
+	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
+	printf("]%s", tail);
+}
+
 // Generate finite-Baire sequence expansions from integer index.
 // Given an index, set "cfrac" to the matching sequence.
 // Return the length of the cfrac sequence.
@@ -194,7 +201,7 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	DBG(("red after odd to nseq=%ld msum=%d\n", nseq, msum));
 	// Reject pure powers of two, when they occur after an odd number.
 	// Long series must terminate with an odd number at the bottom.
-	if (1 < nseq)
+	if (1 < nseq ) // && 0 == msum)
 	{
 		int pure = nseq;
 		while (0 == pure %2) { pure /=2; }
@@ -213,7 +220,11 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	for (int j=0; j<len-1; j++)
 		msum -= cfrac[j];
 
+	// Special case the length=1 case.
+	if (1 == len) msum -= cfrac[0];
+
 	DBG(("post subtract for nseq=%ld msum=%d new len=%d\n", nseq, msum, len));
+	// print_seq(cfrac, len, "", "\n");
 	// If more powers of two removed than can exist, then reject.
 	if (msum < 0) return -555;
 
@@ -222,13 +233,6 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 
 	// Return the length of the beast.
 	return len+1;
-}
-
-void print_seq(int cfrac[], int len, char* head, char* tail)
-{
-	printf("%s [", head);
-	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
-	printf("]%s", tail);
 }
 
 #define SZ 60
@@ -361,7 +365,8 @@ int main(int argc, char* argv[])
 #if 0
 	int cfrac[SZ];
 	for (int i=0; i<SZ; i++) cfrac[i] = -666;
-	int nind = 26;
+	int nind = 53;
+	// nind = 27;
 	int len = index_to_fbaire(cfrac, nind);
 	printf("Index: %d len=%d", nind, len);
 	print_seq(cfrac, len, " ", "\n");
@@ -382,17 +387,17 @@ int main(int argc, char* argv[])
 	print_seq(cfrac, len, " ", "\n");
 #endif
 
-#define VERFIY_FBAIRE
+// #define VERFIY_FBAIRE
 #ifdef VERFIY_FBAIRE
 
 	// Verify reverse listing.
 	// Takes 30 cpu-seconds to get to 1<<26
 	int maxord = 26;
-	int totgood = 0;
+maxord=8;
 	int toterr = 0;
 	for (int ord=2; ord < maxord; ord++)
 	{
-		int gprev = totgood;
+		int totgood = 0;
 		long nstart = 1UL << (ord-2);
 		long nend = 2*nstart;
 		for (long n=nstart; n<nend; n ++)
@@ -402,7 +407,7 @@ int main(int argc, char* argv[])
 			int len = index_to_fbaire(cfrac, n);
 			if (len < 0)
 			{
-// #define PRINT_SEQS
+#define PRINT_SEQS
 #ifdef PRINT_SEQS
 				printf(">>>>> %ld rejected\n", n);
 #endif
@@ -420,8 +425,7 @@ int main(int argc, char* argv[])
 #endif
 			totgood ++;
 		}
-		printf("Observed %d betas at order %d (tot=%d)\n",
-			totgood-gprev, ord, totgood);
+		printf("Observed %d betas at order %d\n", totgood, ord);
 	}
 	long nend = 1UL << maxord;
 	printf("Verified up to order=%d n=%ld errors=%d\n", maxord, nend, toterr);
@@ -446,7 +450,7 @@ int main(int argc, char* argv[])
 	iterate_fbaire(cfrac, 1, 5, 8, nmax);
 #endif
 
-// #define SANITY_CHECK
+#define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Print the finite-Baire sequences. Sanity check, only; short runtime.
 	int norder = 18;
