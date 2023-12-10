@@ -311,16 +311,21 @@ void validate_bracket(long n)
 	// If its not a valid index, do nothing.
 	if (gold < 1.0) return;
 
-	// Verify that left beta value is a bracket.
+	printf("Validate bracket for %ld\n", n);
+	// Verify gold bracketing
 	if (0 == n%2)
 	{
-		double gleft = find_gold(n/2);
-		if (gleft < 1.0) printf("Error: no such index %ld\n", n/2);
-		if (gold <= gleft) printf("Error: bad bracket at %ld\n", n);
+		// Verify that right beta value is a bracket.
+		double gright = find_gold(n/2);
+		if (gright < 0.5) printf("Error: no such right index %ld\n", n/2);
+		if (gright <= gold) printf("Error: bad right bracket at %ld\n", n);
 	}
 	else
 	{
-printf("not done %ld\n", n);
+		// Verify that left beta value is a bracket.
+		double gleft = find_gold((n-1)/2);
+		if (gleft < 0.5) printf("Error: no such left index %ld\n", (n-1)/2);
+		if (gleft >= gold) printf("Error: bad left bracket at %ld\n", n);
 	}
 }
 
@@ -688,20 +693,20 @@ int main(int argc, char* argv[])
 	prt_bitstr(53, "bits", "\n");
 
 	int cfrac[SZ];
-	for (int n=1; n<64; n++)
+	for (int n=1; n<16; n++)
 	{
-		validate_bracket(n);
-
 		double beta = find_gold(n);
 		if (beta < 1.0) continue;
-		printf("gold=%g ", beta);
-		prt_bitstr(n, "bits", "");
+
+		validate_bracket(n);
+		// printf("gold=%g ", beta);
+		// prt_bitstr(n, "bits", "");
 
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
 		int len = index_to_fbaire(cfrac, n);
 		if (len < 0)
 			printf("\nError: missing representation for n=%d\n", n);
-		print_seq(cfrac, len, "", "\n");
+		// print_seq(cfrac, len, "", "\n");
 	}
 
 }
