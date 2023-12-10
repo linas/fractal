@@ -50,7 +50,7 @@ double find_zero(unsigned long n, double lo, double hi)
 
 /** Helper array, needed for finding gold midpoints. */
 double* zero = NULL;
-void setup_gold(int nmax)
+void malloc_gold(int nmax)
 {
 	zero = (double*) malloc(nmax*sizeof(double));
 	for (int i=0; i< nmax; i++) zero[i] = -1.0;
@@ -59,14 +59,16 @@ void setup_gold(int nmax)
 /** Fill up array of zero candidates. Optionally needed. */
 void fill_gold(long n)
 {
-	for (int i=1; i<n; i++)
+	// Go top down, assuming lower ranks already filled.
+	for (int i=n-1; 0<=i; i--)
 	{
-		if (zero[i] < -0.5)
-			zero[i] = find_zero(i, 1.0, 2.0);
+		if (zero[i] > -0.5) break;
+		zero[i] = find_zero(i, 1.0, 2.0);
 	}
 }
 
-// Return true if this is a valid polynomial
+// Return true if the polynomial root is properly bracketed for
+// the index specifying that polynomial.
 bool zero_is_bracketed(int n, double gold)
 {
 	// Its valid only if it is in the middle.
@@ -89,20 +91,16 @@ bool zero_is_bracketed(int n, double gold)
 }
 
 /**
- * Find the single, unique real zero of the n'th golden polynomial.
- * If the value of `n` does not really correspond to a golden
- * polynomial, return zero.
+ * Return the single, unique real zero of the n'th golden polynomial.
+ * If the value of `n` does not correspond to a golden polynomial,
+ * return zero.
  */
 double find_gold(long n)
 {
 	if (-1 == n) return 2.0;
 
+	fill_gold(n);
 	double gold = zero[n];
-	if (gold < -0.5)
-	{
-		gold = find_zero(n, 1.0, 2.0);
-		zero[n] = gold;
-	}
 
 	if (zero_is_bracketed(n, gold)) return gold;
 	return 0.0;
@@ -301,6 +299,32 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	return len+1;
 }
 
+// =================================================================
+/*
+ * Validate bracketing for betas and for the finite-Baire sequences.
+ * Similar to validate_fbaire() below, but takes a more principled
+ * approach.
+ */
+void validate_bracket(long n)
+{
+	double gold = find_gold(n);
+	// If its not a valid index, do nothing.
+	if (gold < 1.0) return;
+
+	// Verify that left beta value is a bracket.
+	if (0 == n%2)
+	{
+		double gleft = find_gold(n/2);
+		if (gleft < 1.0) printf("Error: no such index %ld\n", n/2);
+		if (gold <= gleft) printf("Error: bad bracket at %ld\n", n);
+	}
+	else
+	{
+printf("not done %ld\n", n);
+	}
+}
+
+// =================================================================
 #define SZ 60
 /*
  * Validate the bounds on the finite-Baire sequence representation.
@@ -426,32 +450,7 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 	}
 }
 
-int main(int argc, char* argv[])
-{
-#if 0
-	int cfrac[SZ];
-	for (int i=0; i<SZ; i++) cfrac[i] = -666;
-	int nind = 53;
-	// nind = 27;
-	int len = index_to_fbaire(cfrac, nind);
-	printf("Index: %d len=%d", nind, len);
-	print_seq(cfrac, len, " ", "\n");
-#endif
-
-// #define MANUAL_EXPLORER
-#ifdef MANUAL_EXPLORER
-	// Obtain one sequence from command line. Print it's index.
-	if (1 == argc) {
-		fprintf(stderr, "Usage: %s <sequence>\n", argv[0]);
-		exit(1);
-	}
-	int len = argc-1;
-	int cfrac[SZ];
-	for (int i=0; i<len; i++) cfrac[i] = atoi(argv[i+1]);
-	int seqno = index_from_fbaire(cfrac, len);
-	printf("Index: %d len=%d", seqno, len);
-	print_seq(cfrac, len, " ", "\n");
-#endif
+// =================================================================
 
 // #define VERFIY_FBAIRE
 #ifdef VERFIY_FBAIRE
@@ -503,7 +502,7 @@ maxord=8;
 	int norder = 20;
 	int nmax = (1<<norder) + 1;
 
-	setup_gold(nmax);
+	malloc_gold(nmax);
 
 	for (int n=0; n<nmax; n ++)
 		find_gold(n);
@@ -516,51 +515,13 @@ maxord=8;
 	iterate_fbaire(cfrac, 1, 5, 8, nmax);
 #endif
 
-// #define CHECK_GOLD_IDX
-#ifdef CHECK_GOLD_IDX
-	int nmax = 64;
-	setup_gold(nmax);
-	for (int n=1; n<nmax; n ++)
-	{
-		double beta = find_gold(n);
-		if (0.5 < beta)
-		{
-			printf("Good %d %g\n", n, beta);
-		}
-		else
-		{
-		}
-	}
-#endif
-	setup_gold(64);
-	fill_gold(64);
-	double beta = find_gold(53);
-	int order = iteration_order(beta);
-	printf("got %d\n", order);
-	prt_bitstr(53, "bits", "\n");
-
-	int cfrac[SZ];
-	for (int n=1; n<64; n++)
-	{
-		double beta = find_gold(n);
-		if (beta < 1.0) continue;
-		printf("gold=%g ", beta);
-		prt_bitstr(n, "bits", "");
-
-		for (int i=0; i<SZ; i++) cfrac[i] = -666;
-		int len = index_to_fbaire(cfrac, n);
-		if (len < 0)
-			printf("\nError: missing representation for n=%d\n", n);
-		print_seq(cfrac, len, "", "\n");
-	}
-
 // #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Print the finite-Baire sequences. Sanity check, only; short runtime.
 	int norder = 18;
 	int nmax = (1<<norder) + 1;
 
-	setup_gold(nmax);
+	malloc_gold(nmax);
 	for (int n=0; n<nmax; n ++)
 		find_gold(n);
 
@@ -595,7 +556,7 @@ maxord=8;
 	int maxdepth = atoi(argv[2]);
 	int maxlen = atoi(argv[3]);
 
-	setup_gold(nmax);
+	malloc_gold(nmax);
 	for (int n=0; n<nmax; n ++)
 		find_gold(n);
 
@@ -674,5 +635,73 @@ totg-gprev);
 	}
 #endif
 #endif
+
+// =================================================================
+
+int main(int argc, char* argv[])
+{
+#if 0
+	int cfrac[SZ];
+	for (int i=0; i<SZ; i++) cfrac[i] = -666;
+	int nind = 53;
+	// nind = 27;
+	int len = index_to_fbaire(cfrac, nind);
+	printf("Index: %d len=%d", nind, len);
+	print_seq(cfrac, len, " ", "\n");
+#endif
+
+// #define MANUAL_EXPLORER
+#ifdef MANUAL_EXPLORER
+	// Obtain one sequence from command line. Print it's index.
+	if (1 == argc) {
+		fprintf(stderr, "Usage: %s <sequence>\n", argv[0]);
+		exit(1);
+	}
+	int len = argc-1;
+	int cfrac[SZ];
+	for (int i=0; i<len; i++) cfrac[i] = atoi(argv[i+1]);
+	int seqno = index_from_fbaire(cfrac, len);
+	printf("Index: %d len=%d", seqno, len);
+	print_seq(cfrac, len, " ", "\n");
+#endif
+
+// #define PRINT_INDEX
+#ifdef PRINT_INDEX
+	int nmax = 64;
+	malloc_gold(nmax);
+	for (int n=1; n<nmax; n ++)
+	{
+		double beta = find_gold(n);
+		if (0.5 < beta)
+		{
+			printf("Good %d %g\n", n, beta);
+		}
+		else
+		{
+		}
+	}
+#endif
+	malloc_gold(64);
+	double beta = find_gold(53);
+	int order = iteration_order(beta);
+	printf("got %d\n", order);
+	prt_bitstr(53, "bits", "\n");
+
+	int cfrac[SZ];
+	for (int n=1; n<64; n++)
+	{
+		validate_bracket(n);
+
+		double beta = find_gold(n);
+		if (beta < 1.0) continue;
+		printf("gold=%g ", beta);
+		prt_bitstr(n, "bits", "");
+
+		for (int i=0; i<SZ; i++) cfrac[i] = -666;
+		int len = index_to_fbaire(cfrac, n);
+		if (len < 0)
+			printf("\nError: missing representation for n=%d\n", n);
+		print_seq(cfrac, len, "", "\n");
+	}
 
 }
