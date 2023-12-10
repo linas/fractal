@@ -190,6 +190,7 @@ int index_to_fbaire(int cfrac[], unsigned long nseq)
 	nseq /=2;
 
 	// Reject pure powers of two, when they occur after an odd number.
+	// Long series must terminate with an odd number at the bottom.
 	if (1 < nseq && 0 == msum)
 	{
 		int pure = nseq;
@@ -228,7 +229,7 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 	printf("]%s", tail);
 }
 
-#define SZ 30
+#define SZ 60
 /*
  * Validate the bounds on the finite-Baire sequence representation.
  * ... and print it out.
@@ -500,7 +501,8 @@ nmax=64;
 	int maxord = 46;
 	for (int ord=1; ord < maxord; ord++)
 	{
-		long nstart = 1 << (ord-1);
+		long gprev = totg;
+		long nstart = 1UL << (ord-1);
 		long nend = 2*nstart;
 		double deno = (double) nstart;
 		for (long n=nstart; n<nend; n ++)
@@ -524,7 +526,7 @@ nmax=64;
 				totg ++;
 			}
 		}
-		printf("%d	%ld	%ld\n", ord+1, totg, totf);
+		printf("%d	%ld	%ld	%ld\n", ord+1, totg, totg-gprev, totf);
 		fflush (stdout);
 	}
 
