@@ -137,13 +137,31 @@ int iteration_order(double beta)
 
 // =================================================================
 
-/* Return length of bitstr, length in bits */
-int len(unsigned long n)
+/** Return order of beta polynomial for index n.
+ * This is just the length of binary bitstring for 2n+1.
+ */
+int order(unsigned long n)
 {
 	int len=0;
 	unsigned long bitstr = 2*n+1;
 	while (bitstr) { len++; bitstr >>= 1; }
 	return len;
+}
+
+/**
+ * Print index as golden bitsequence.
+ * Actually print order, then index, then bitseq
+ */
+void prt_bitstr(unsigned long n, const char* pfx, const char* sfx)
+{
+	int ord = order(n);
+	printf("%s (%d)-%ld={", pfx, ord, n);
+	unsigned long bitstr = 2*n+1;
+	for (int i=0; i<ord; i++)
+	{
+		printf("%ld", 0x1 & bitstr>>(ord-i-1));
+	}
+	printf("} %s", sfx);
 }
 
 // Return the real value of the corresponding continued fraction.
@@ -517,6 +535,9 @@ maxord=8;
 	double beta = find_gold(53);
 	int order = iteration_order(beta);
 	printf("got %d\n", order);
+	prt_bitstr(53, "bits", "\n");
+
+for (int i=1; i<64; i++) { printf("%d ", i); prt_bitstr(i, "bits", "\n"); }
 
 // #define SANITY_CHECK
 #ifdef SANITY_CHECK
