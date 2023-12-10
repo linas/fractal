@@ -14,10 +14,14 @@
 #include <stdlib.h>
 
 
-/* Return the n'th golden polynomial. It can be constructed from
- * the bit string of (2n+1).
+/* Return the beta value corresponding to the n'th golden polynomial.
+ * It is be constructed from the bit string of (2n+1). Construction
+ * is the mid-point construction: repeated iteration of the midpoint
+ * 1/2 with this beta will (re-)generate the same bitstring, until
+ * returning to the midpoint. The bits are just whether the orbit went
+ * left or right of midpoint. The length of the orbit will be log_2(2n+1).
  */
-double beta(unsigned long n, double x)
+double gold(unsigned long n, double x)
 {
 	double acc = 0.0;
 	double xn = 1.0;
@@ -39,18 +43,9 @@ double find_zero(unsigned long n, double lo, double hi)
 {
 	double mid = 0.5 * (lo+hi);
 	if (1.0e-15 > hi-lo) return mid;
-	double fmid = beta(n, mid);
+	double fmid = gold(n, mid);
 	if (0.0 < fmid) return find_zero(n, lo, mid);
 	return find_zero(n, mid, hi);
-}
-
-/* Return length of bitstr, length in bits */
-int len(unsigned long n)
-{
-	int len=0;
-	unsigned long bitstr = 2*n+1;
-	while (bitstr) { len++; bitstr >>= 1; }
-	return len;
 }
 
 /** Helper array, needed for finding gold midpoints. */
@@ -113,6 +108,8 @@ double find_gold(long n)
 	return 0.0;
 }
 
+// =================================================================
+
 // Perform standard iteration
 double tee(double beta, double x)
 {
@@ -121,6 +118,7 @@ double tee(double beta, double x)
 }
 
 // Compute the order of the iteration of the midpoint
+// This is just sanity check; beta should "already be correct".
 int iteration_order(double beta)
 {
 #define DELTA 1e-15
@@ -137,6 +135,17 @@ int iteration_order(double beta)
 	return count;
 }
 
+// =================================================================
+
+/* Return length of bitstr, length in bits */
+int len(unsigned long n)
+{
+	int len=0;
+	unsigned long bitstr = 2*n+1;
+	while (bitstr) { len++; bitstr >>= 1; }
+	return len;
+}
+
 // Return the real value of the corresponding continued fraction.
 // This is 1/(1+m0+ 1/(1+m1+ 1/(1+m2+ ... 1/(1+mk))))
 // where we have to add one because the sequence has zeros in it.
@@ -150,6 +159,8 @@ double cf_to_real(int cfrac[], int len)
 	}
 	return ex;
 }
+
+// =================================================================
 
 // Reverse order of digits in cfrac, left to right.
 void reverse_cf(int rfrac[], int cfrac[], int len)
