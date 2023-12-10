@@ -164,6 +164,8 @@ void prt_bitstr(unsigned long n, const char* pfx, const char* sfx)
 	printf("} %s", sfx);
 }
 
+// =================================================================
+
 // Return the real value of the corresponding continued fraction.
 // This is 1/(1+m0+ 1/(1+m1+ 1/(1+m2+ ... 1/(1+mk))))
 // where we have to add one because the sequence has zeros in it.
@@ -177,8 +179,6 @@ double cf_to_real(int cfrac[], int len)
 	}
 	return ex;
 }
-
-// =================================================================
 
 // Reverse order of digits in cfrac, left to right.
 void reverse_cf(int rfrac[], int cfrac[], int len)
@@ -194,6 +194,8 @@ double reverse_cf_to_real(int cfrac[], int len)
 	reverse_cf(rfrac, cfrac, len);
 	return cf_to_real(rfrac, len);
 }
+
+// =================================================================
 
 /*
  * Given a finite-length Baire representation, return the
@@ -537,7 +539,20 @@ maxord=8;
 	printf("got %d\n", order);
 	prt_bitstr(53, "bits", "\n");
 
-for (int i=1; i<64; i++) { printf("%d ", i); prt_bitstr(i, "bits", "\n"); }
+	int cfrac[SZ];
+	for (int n=1; n<64; n++)
+	{
+		double beta = find_gold(n);
+		if (beta < 1.0) continue;
+		printf("gold=%g ", beta);
+		prt_bitstr(n, "bits", "");
+
+		for (int i=0; i<SZ; i++) cfrac[i] = -666;
+		int len = index_to_fbaire(cfrac, n);
+		if (len < 0)
+			printf("\nError: missing representation for n=%d\n", n);
+		print_seq(cfrac, len, "", "\n");
+	}
 
 // #define SANITY_CHECK
 #ifdef SANITY_CHECK

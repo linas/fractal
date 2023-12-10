@@ -12110,7 +12110,7 @@ ps to roots of unity, Lyndon words, and the number of orbits in the tent
  
 \begin_inset Formula 
 \[
-p_{\left\{ b_{k}\right\} }\left(\beta\right)=\beta^{n}-b_{1}\beta^{n-1}-b_{2}\beta^{n-2}-b_{3}\beta^{n-3}-\cdots-1=0
+p_{\left\{ b_{k}\right\} }\left(\beta\right)=\beta^{n}-\beta^{n-1}-b_{1}\beta^{n-2}-b_{2}\beta^{n-3}-\cdots-1=0
 \]
 
 \end_inset
@@ -12340,6 +12340,10 @@ trouble spots
 \begin_inset Formula $m_{k}=m_{0}$
 \end_inset
 
+; alternately, when 
+\begin_inset Formula $m_{k-1}=1/2$
+\end_inset
+
 .
  Because of the piece-wise linear form of 
 \begin_inset Formula $T_{\beta}$
@@ -12403,9 +12407,9 @@ p_{n}\left(\beta\right)=\begin{cases}
 \end_layout
 
 \begin_layout Standard
-The roots must be bracketed by the roots of polynomials occurring earlier
- in the sequence; if the root is not bracketed, then the corresponding polynomia
-l does not appear in the list.
+The roots must be bracketed (to the left and right) by the roots of polynomials
+ occurring earlier in the sequence; if the root is not bracketed, then the
+ corresponding polynomial does not appear in the list.
 \end_layout
 
 \begin_layout Standard
@@ -12415,7 +12419,7 @@ The bracketing relationship is rather awkwardly expressed in the following
 \begin_inset Formula $r_{n}$
 \end_inset
 
- is the root 
+ is the single real root 
 \begin_inset Formula $p_{n}\left(r_{n}\right)=0$
 \end_inset
 
@@ -12644,11 +12648,15 @@ There are other ways to start the table, and to index the polynomials.
 
  itself encodes the orbit of the midpoint.
  That is, writing 
-\begin_inset Formula $n=b_{0}b_{1}b_{2}\cdots b_{p}$
+\begin_inset Formula $2n+1=b_{0}b_{1}b_{2}\cdots b_{p}$
 \end_inset
 
  for binary digits 
 \begin_inset Formula $b_{k}$
+\end_inset
+
+, having order (period) 
+\begin_inset Formula $p$
 \end_inset
 
 , then 
@@ -12668,7 +12676,7 @@ There are other ways to start the table, and to index the polynomials.
 \begin_inset Formula $1/2<\beta/2$
 \end_inset
 
- always.
+, always.
  By convention, the last digit is always 1, also.
 \end_layout
 
@@ -13542,7 +13550,8 @@ root
 \end_layout
 
 \begin_layout Standard
-The next table lists the acceptable polynomials for order 5, 6 and 7.
+The next table lists the acceptable polynomial indexes for order 5, 6 and
+ 7.
  Again, the coefficients appearing in the polynomial are encoded by the
  binary value of 
 \begin_inset Formula $2n+1$
@@ -18432,7 +18441,7 @@ primary
  it's doubling sequence, which always appears to the left of the leader.
  The leader and it's doubling sequence is always bracketed by previous left
  and right leaders.
- This, the primary is identified by it's bracket: its the largest discontinuity
+ Thus, the primary is identified by it's bracket: its the largest discontinuity
  within the bracket.
  The left-most bracket will be taken as 
 \begin_inset Formula $\infty$
@@ -18478,7 +18487,11 @@ Let
 
 .
  It is convenient to provide two tables; the first characterizes the sequences
- to the right of 1, and the second table for those to the left.
+ to the right of 1, corresponding to 
+\begin_inset Formula $\varphi<\beta$
+\end_inset
+
+ and the second table for those to the left.
  This helps avoid some confusion.
 \end_layout
 
@@ -18658,7 +18671,7 @@ main sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-right sequence
+right sub-sequence
 \end_layout
 
 \end_inset
@@ -18758,6 +18771,11 @@ right sequence
 
 \begin_layout Standard
 The left sequences are in the table below.
+ These all have 
+\begin_inset Formula $\beta<\varphi$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -18965,7 +18983,7 @@ The tables are confusing to read, because the left and right brackets are
 \begin_inset Formula $\left[k\right]$
 \end_inset
 
- which has the numerical value of 
+ which corresponds to the index 
 \begin_inset Formula $n=2^{k}=\left[k\right]$
 \end_inset
 
@@ -18991,21 +19009,18 @@ The tables are confusing to read, because the left and right brackets are
 \end_inset
 
 .
- Additional confusion can be avoided by writing 
-\begin_inset Formula $\beta\left(\left[\cdots\right]\right)$
+ It will be convenient to write 
+\begin_inset Formula $\beta\left(\left[\cdots\right]\right)=\beta\left[\cdots\right]$
 \end_inset
 
  for the numerical 
 \begin_inset Formula $\beta$
 \end_inset
 
- value.
- Thus, bracketing also assured that 
-\begin_inset Formula $\beta\left(\ell\right)>\beta\left(f\right)<\beta\left(\rho\right)$
-\end_inset
-
-, although bracketing requires that 
-\begin_inset Formula $\beta\left(\ell\right)>\beta\left(\rho\right)$
+ value associated with the sequence.
+ The left and right bracketing has it's origins with the racketing of polynomial
+ roots as 
+\begin_inset Formula $\beta\left(\ell\right)<\beta\left(f\right)<\beta\left(\rho\right)$
 \end_inset
 
 .
@@ -19030,7 +19045,7 @@ The leader of the left sub-sequence can then be denoted as
 \begin_inset Formula $\left[k,0\right]=2^{k}\left(2^{k+1}+1\right)=\left[k\right]\left(2\left[k\right]+1\right)$
 \end_inset
 
- and thus 
+ and thus, the general notation for the left sub-sequence is 
 \begin_inset Formula 
 \[
 \left[k,m\right]=2^{k+m}\left(2^{k+1}+1\right)=2^{k+m}\left(2\left[k\right]+1\right)=\left[k+m\right]\left(\left[k+1\right]+1\right)
@@ -19038,7 +19053,16 @@ The leader of the left sub-sequence can then be denoted as
 
 \end_inset
 
-Comparing against the figure, one has 
+All length-two sequences with 
+\begin_inset Formula $k\ge1$
+\end_inset
+
+ therefore have 
+\begin_inset Formula $\beta\left[k,m\right]<\varphi$
+\end_inset
+
+.
+ Comparing against the figure, one has 
 \begin_inset Formula $\left[1,0\right]=10$
 \end_inset
 
@@ -19047,10 +19071,24 @@ Comparing against the figure, one has
 \end_inset
 
  and so on.
- The utility of these labels is shown in figure 
+ 
+\end_layout
+
+\begin_layout Standard
+These labels are shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Discontinuity-labels"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, which should be compared to 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalization-Integral"
 plural "false"
 caps "false"
 noprefix "false"
@@ -19090,7 +19128,7 @@ name "fig:Discontinuity-labels"
 \begin_inset Graphics
 	filename normie-f-labelled.eps
 	lyxscale 50
-	width 90col%
+	width 100col%
 
 \end_inset
 
@@ -19172,10 +19210,16 @@ The leader of the right sequence is
 \end_inset
 
 .
+ The numerical index formula for 
+\begin_inset Formula $\left[k,m\right]$
+\end_inset
+
+ works here, as well.
+ 
 \end_layout
 
 \begin_layout Standard
-Consider the subseries lead by 
+Consider the left subseries lead by 
 \begin_inset Formula $\left[1,0\right]\Mapsto f\Mapsfrom\left[0\right]$
 \end_inset
 
@@ -19188,11 +19232,79 @@ Consider the subseries lead by
 \begin_inset Formula $\left[1,0\right]\Mapsto\left[1,0,p\right]\Mapsfrom\left[0\right]$
 \end_inset
 
- having the numeric value of 
+ having the index 
 \begin_inset Formula $n=\left[1,0,p\right]=2^{p+1}\left(2\left[1,0\right]+1\right)=2^{p}\cdot42$
 \end_inset
 
 .
+ Continuing to the left, the appropriate sequence label is
+\begin_inset Formula 
+\begin{align*}
+\left[k,0\right]\Mapsto\left[k,0,p\right]\Mapsfrom\left[k-1\right] & \mbox{ when }k\ge1
+\end{align*}
+
+\end_inset
+
+and the numerical index value is 
+\begin_inset Formula $n=\left[k,0,p\right]=2^{p+k}\left(2\left[k,0\right]+1\right)$
+\end_inset
+
+.
+ This can be disentangled into two parts: a lengthening relation 
+\begin_inset Formula 
+\[
+\left[k,0,0\right]=2^{k}\left(2\left[k,0\right]+1\right)
+\]
+
+\end_inset
+
+and a distinct promotion relation
+\begin_inset Formula 
+\[
+\left[k,0,p\right]=2^{p}\left[k,0,0\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This provides leaders for the next series.
+ These are bracketed as
+\begin_inset Formula 
+\begin{align*}
+\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }k\ge1\mbox{and }m\ge1
+\end{align*}
+
+\end_inset
+
+The associated index value is given by 
+\begin_inset Formula 
+\[
+\left[k,m,p\right]=2^{p+k}\left(2\left[k,m\right]+1\right)
+\]
+
+\end_inset
+
+Curiously, 
+\begin_inset Formula $m$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+One the right are a two more subseries, worth stating explicitly.
+ These are 
+\begin_inset Formula $\left[0\right]\Mapsto f\Mapsfrom\left[0,0\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[0,0\right]\Mapsto f\Mapsfrom\left[-1\right]$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -19501,7 +19613,7 @@ These identities are meant to be interpreted as the values of limiting sequences
 \end_inset
 
 and so in the limit of large 
-\begin_inset Formula $n$
+\begin_inset Formula $n\to\infty$
 \end_inset
 
 , the root of this polynomial approaches 
@@ -20572,27 +20684,640 @@ Debug
 \begin_layout Standard
 There's some issue that shows up orbits of length 6.
  There should be 18 sequences.
- Broken up into two tables.
+ We'll be paying attention to 
+\begin_inset Formula $n=53$
+\end_inset
+
+ and 
+\begin_inset Formula $n=59$
+\end_inset
+
+ as special cases.
+ These are:
 \end_layout
 
 \begin_layout Standard
-The binary rule is: if it 
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 \begin_inset Formula $n$
 \end_inset
 
- was in an earlier table, with bitsequence 
-\begin_inset Formula $\left\{ b_{n}\right\} $
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
 \end_inset
 
- for 
-\begin_inset Formula $2n+1$
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1101011
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.80509
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1110111
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.92213
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
 \end_inset
 
-, then it might be the case that b 
+
 \end_layout
 
 \begin_layout Standard
-showed in the earlier table, then it will show again here, w
+The numeric bracketing works out:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bracket
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta_{lo}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta_{mid}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta_{hi}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta\left(26\right)<\beta\left(53\right)<\beta\left(13\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.78854
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.80509
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.8124
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta\left(14\right)<\beta\left(59\right)<\beta\left(29\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.88852
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.92213
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.91118
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The sequence bracketing is causing grief:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="8">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{lo}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lo-seq
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{mid}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mid-seq
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{hi}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+hi-seq
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[0,1,1]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[0,1,1,0] ??
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[0,1,0]
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[0,0,1]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+??
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[0,0,1,0]
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Based on earlier bracketing rules, we 
+\end_layout
+
+\begin_layout Standard
+Up to three levels, the required bracketing was 
+\begin_inset Formula 
+\begin{align*}
+\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }m\ge1\\
+\left[k,0\right]\Mapsto\left[k,0,p\right]\Mapsfrom\left[k-1\right] & \mbox{ when }k\ge1\\
+\left[0,0\right]\Mapsto\left[0,0,p\right]\Mapsfrom\left[0,0,0\right]
+\end{align*}
+
+\end_inset
+
+At four levels,
+\end_layout
+
+\begin_layout Standard
+Broken up into two tables.
 \end_layout
 
 \begin_layout Standard
@@ -20677,7 +21402,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[4]
+[5]
 \end_layout
 
 \end_inset
@@ -20715,7 +21440,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[1,1]
+[2,0]
 \end_layout
 
 \end_inset
@@ -20753,7 +21478,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,3]
+[1,2]
 \end_layout
 
 \end_inset
@@ -20782,7 +21507,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-110011
+1010101
 \end_layout
 
 \end_inset
@@ -20791,7 +21516,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,2,0]
+[0,4]
 \end_layout
 
 \end_inset
@@ -20820,7 +21545,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-110101
+1100001
 \end_layout
 
 \end_inset
@@ -20829,7 +21554,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,1,1]
+[0,3,0]
 \end_layout
 
 \end_inset
@@ -20858,7 +21583,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111001
+1100011
 \end_layout
 
 \end_inset
@@ -20867,7 +21592,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,2]
+[0,2,1]
 \end_layout
 
 \end_inset
@@ -20896,7 +21621,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111011
+1100101
 \end_layout
 
 \end_inset
@@ -20905,7 +21630,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,1,0]
+[0,2,1]
 \end_layout
 
 \end_inset
@@ -20934,7 +21659,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111101
+1101001
 \end_layout
 
 \end_inset
@@ -20943,7 +21668,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,0,1]
+[0,0,1,2]
 \end_layout
 
 \end_inset
@@ -20972,7 +21697,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111111
+1101011
 \end_layout
 
 \end_inset
@@ -20981,7 +21706,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,0,0,0]
+
 \end_layout
 
 \end_inset
@@ -21067,7 +21792,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-100001
+1101101
 \end_layout
 
 \end_inset
@@ -21076,7 +21801,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[4]
+[0,1,0,0]
 \end_layout
 
 \end_inset
@@ -21105,7 +21830,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-101001
+1110001
 \end_layout
 
 \end_inset
@@ -21114,7 +21839,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[1,1]
+[0,0,3]
 \end_layout
 
 \end_inset
@@ -21143,7 +21868,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-110001
+1110011
 \end_layout
 
 \end_inset
@@ -21152,7 +21877,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,3]
+[0,0,2,0]
 \end_layout
 
 \end_inset
@@ -21181,7 +21906,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-110011
+1110101
 \end_layout
 
 \end_inset
@@ -21190,7 +21915,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,2,0]
+[0,0,1,1]
 \end_layout
 
 \end_inset
@@ -21219,7 +21944,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-110101
+1110111
 \end_layout
 
 \end_inset
@@ -21228,7 +21953,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,1,1]
+
 \end_layout
 
 \end_inset
@@ -21257,7 +21982,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111001
+1111001
 \end_layout
 
 \end_inset
@@ -21266,7 +21991,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,2]
+[0,0,0,2]
 \end_layout
 
 \end_inset
@@ -21295,7 +22020,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111011
+1111011
 \end_layout
 
 \end_inset
@@ -21304,7 +22029,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,1,0]
+[0,0.0,1,0]
 \end_layout
 
 \end_inset
@@ -21333,7 +22058,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111101
+1111101
 \end_layout
 
 \end_inset
@@ -21342,7 +22067,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,0,1]
+[0,0,0,0,1]
 \end_layout
 
 \end_inset
@@ -21371,7 +22096,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-111111
+1111111
 \end_layout
 
 \end_inset
@@ -21380,7 +22105,7 @@ sequence
 \begin_inset Text
 
 \begin_layout Plain Layout
-[0,0,0,0,0]
+[0,0,0,0,0,0]
 \end_layout
 
 \end_inset
