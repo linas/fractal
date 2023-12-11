@@ -120,9 +120,9 @@ double tee(double beta, double x)
 	return beta*(x-0.5);
 }
 
-// Compute the order of the iteration of the midpoint
+// Compute the period (order) of the iteration of the midpoint
 // This is just sanity check; beta should "already be correct".
-int iteration_order(double beta)
+int iteration_period(double beta)
 {
 #define DELTA 1e-15
 #define EPSI  1e-13
@@ -255,8 +255,8 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 // This is the inverse of what index_from_fbaire() does.
 int index_to_fbaire(int cfrac[], unsigned long pidx)
 {
-	// #define DBG(X) printf X
-	#define DBG(X)
+	#define DBG(X) printf X
+	// #define DBG(X)
 	DBG(("enter index_to_fbaire pidx=%ld\n", pidx));
 
 	// Count leading powers of two.
@@ -286,7 +286,7 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 	// Pass rejection slips back up the chain.
 	if (len < 0) return len;
 
-	// print_seq(cfrac, len, "to fb ", "\n");
+	print_seq(cfrac, len, "pre-append ", "\n");
 
 	// What's left over is m_k
 	int ord = order(pidx) - 2;
@@ -296,6 +296,7 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 	cfrac[len] = msum;
 	cfrac[len+1] = -555; // Poison end-of-string marker
 
+	DBG(("-----\n"));
 	// Return the length of the beast.
 	return len+1;
 }
@@ -744,15 +745,17 @@ int main(int argc, char* argv[])
 
 	int cfrac[SZ];
 	malloc_gold(1024);
-#if 0
+#if 1
 	long ni = 53;
+	ni = 14;
 	double beta = find_gold(ni);
 	int len = index_to_fbaire(cfrac, ni);
 	print_seq(cfrac, len, "dbg", "\n");
 
-	int order = iteration_order(beta);
+	int order = iteration_period(beta);
 	printf("got %d\n", order);
 	prt_bitstr(ni, "bits", "\n");
+	exit(0);
 #endif
 
 	for (long n=1; n<64; n++)
