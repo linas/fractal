@@ -392,6 +392,16 @@ void validate_bracket(long n)
 	if (gright <= gold)
 		printf("Error: bad right bracket at %ld: nr=%ld gold=%g gright=%g\n",
 			n, nright, gold, gright);
+
+	// Validate conversion to and from Baire.
+	int cfrac[SZ];
+	int len = index_to_fbaire(cfrac, n);
+	long seqno = index_from_fbaire(cfrac, len);
+	if (n != seqno)
+	{
+		printf("Sequence numbering fail!! in=%ld out=%ld ", n, seqno);
+		print_seq(cfrac, len, "seq", "\n");
+	}
 }
 
 // =================================================================
