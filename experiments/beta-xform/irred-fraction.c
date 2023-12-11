@@ -701,7 +701,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define INDEX_EXLORER
+// #define INDEX_EXLORER
 #ifdef INDEX_EXLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
@@ -725,15 +725,20 @@ int main(int argc, char* argv[])
 // #define PRINT_INDEX
 #ifdef PRINT_INDEX
 	// Do nothing except print beta and indexes
-	int nmax = 64;
+	// Obtain max to print from command line.
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <max-index>\n", argv[0]);
+		exit(1);
+	}
+	long nmax = atol(argv[1]);
 	malloc_gold(nmax);
 	fill_gold(nmax);
-	for (int n=1; n<nmax; n ++)
+	for (long n=1; n<nmax; n ++)
 	{
 		double beta = find_gold(n);
 		if (0.5 < beta)
 		{
-			printf("Good %d %g\n", n, beta);
+			printf("Good %ld %g\n", n, beta);
 		}
 		else
 		{
@@ -741,11 +746,18 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#ifdef NEW_STUFF
-	int cfrac[SZ];
-
-	long nmax = 1UL<<16;
+#define VALIDATE_INDEX
+#ifdef VALIDATE_INDEX
+	// Validate indexes in sequential order.
+	// Obtain max index from command line.
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <max-index>\n", argv[0]);
+		exit(1);
+	}
+	long nmax = atol(argv[1]);
 	malloc_gold(nmax);
+
+	int cfrac[SZ];
 	for (long n=1; n<nmax; n++)
 	{
 		double beta = find_gold(n);
