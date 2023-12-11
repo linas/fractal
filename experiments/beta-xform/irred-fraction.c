@@ -224,6 +224,13 @@ long index_from_fbaire(int cfrac[], int len)
 {
 	// print_seq(cfrac, len, "enter index_from_fbaire", "\n");
 
+	if (0 > len)
+	{
+		printf("Mega failure len=%d\n", len);
+		return -666;
+		// *((int*) 0x42) = 33;
+	}
+
 	// zero length corresponds to beta=1 which has index infinity
 	// Which we report as -1;
 	if (0 == len) return -1;
@@ -236,7 +243,7 @@ long index_from_fbaire(int cfrac[], int len)
 	}
 
 	long leader = index_from_fbaire(cfrac, len-1);
-	if (-1 == leader) return -1; // avoid overflow
+	if (0 > leader) return -1; // avoid overflow
 
 	long follower = 2*leader + 1;
 	// printf("leader is %ld\n", follower);
@@ -275,6 +282,17 @@ int index_to_fbaire(int cfrac[], unsigned long pindex)
 	// #define DBG(X) printf X
 	#define DBG(X)
 	DBG(("enter index_to_fbaire pidx=%ld\n", pindex));
+
+	// Index of -1 maps to beta=1 and the empty sequence
+	if (-1 == pindex)
+		return 0;
+
+	// Index of zero maps to beta=2 so [-1] the infinite sequence of zeros.
+	if (0 == pindex)
+	{
+		cfrac[0] = -1;
+		return 1;
+	}
 
 	// Count leading powers of two.
 	long pidx = pindex;
@@ -377,6 +395,9 @@ long get_bracket_left(long n)
 	// printf("Enter get_left, n=%ld len=%d ", n, len);
 	// print_seq(cfrac, len, "seq", "\n");
 
+	// length of zero corresponds to beta=1 which is mapped to index -1
+	if (0 == len) return -1;
+
 	// Truncate the last digit.
 	int dig = len-1;
 	cfrac[dig] = -333;
@@ -407,8 +428,8 @@ bool validate_bracket(long n)
 	double gleft = find_gold(nleft);
 	if (gleft < 0.5)
 		{ printf("Error: no such left index %ld for %ld\n", nleft, n); ok = false; }
-	if (gleft >= gold)
-		{ printf("Error: bad left bracket at %ld: nr=%ld gold=%g gleft=%g\n",
+	if (gleft >= gold && -1 != n)
+		{ printf("Error: bad left bracket at %ld: nleft=%ld gold=%g gleft=%g\n",
 			n, nleft, gold, gleft); ok = false; }
 
 	// Verify right bracketing by knocking off only one power of two.
@@ -417,7 +438,7 @@ bool validate_bracket(long n)
 	if (gright < 0.5)
 		{ printf("Error: no such right index %ld for %ld\n", nright, n); ok = false; }
 	if (gright <= gold)
-		{ printf("Error: bad right bracket at %ld: nr=%ld gold=%g gright=%g\n",
+		{ printf("Error: bad right bracket at %ld: nright=%ld gold=%g gright=%g\n",
 			n, nright, gold, gright); ok = false; }
 
 	// Validate conversion to and from Baire.
@@ -735,7 +756,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define SANITY_CHECK
+#define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Run validation on the recursively-generated sequences.
 	// Same as the odometer graph below, but does not print data.
@@ -758,7 +779,7 @@ int main(int argc, char* argv[])
 	generate_fbaire(norder, maxdepth, maxlength, false);
 #endif
 
-#define ODOMETER_GRAPH
+// #define ODOMETER_GRAPH
 #ifdef ODOMETER_GRAPH
 	// Generate expansions in sequential order, then print the equivalent
 	// index, beta and continued-frac equivalent. Used to make the odometer
