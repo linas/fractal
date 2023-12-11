@@ -410,7 +410,6 @@ void validate_bracket(long n)
 		printf("Error: bad left bracket at %ld: nr=%ld gold=%g gleft=%g\n",
 			n, nleft, gold, gleft);
 
-#if 0
 	// Verify right bracketing by knocking off only one power of two.
 	long nright = get_bracket_right(n);
 	double gright = find_gold(nright);
@@ -418,7 +417,6 @@ void validate_bracket(long n)
 	if (gright <= gold)
 		printf("Error: bad right bracket at %ld: nr=%ld gold=%g gright=%g\n",
 			n, nright, gold, gright);
-#endif
 
 	// Validate conversion to and from Baire.
 	int cfrac[SZ];
@@ -434,7 +432,6 @@ void validate_bracket(long n)
 // =================================================================
 /*
  * Validate the bounds on the finite-Baire sequence representation.
- * ... and print it out.
  * maxn == cutoff for highest known n; this avoids overflow.
  */
 void validate_fbaire(int cfrac[], int len, long maxn)
@@ -447,14 +444,6 @@ void validate_fbaire(int cfrac[], int len, long maxn)
 	double gold = find_gold(seq);
 	// printf("seq = %ld gold=%g ", seq, gold);
 
-#define PRINT_DATA_FOR_GRAPH
-#ifdef PRINT_DATA_FOR_GRAPH
-	double ex = cf_to_real(cfrac, len);
-	double rex = reverse_cf_to_real(cfrac, len);
-	printf("%ld	%g	%g	%g #", seq, gold, ex, rex);
-	print_seq(cfrac, len, "", "");
-#endif
-
 	if (gold >= prevgold)
 		printf("FAIL total order!\n");
 	else
@@ -463,10 +452,6 @@ void validate_fbaire(int cfrac[], int len, long maxn)
 	// Validate bracketing.
 	if (1 < len)
 	{
-#ifdef PRINT_DATA_FOR_GRAPH
-		print_seq(cfrac, len-1, " left=", "");
-#endif
-
 		long left = index_from_fbaire(cfrac, len-1);
 
 		// Right bracket is tricky.
@@ -476,9 +461,6 @@ void validate_fbaire(int cfrac[], int len, long maxn)
 		while (1 < rlen && 0 == rfrac[rlen-1]) rlen--;
 
 		rfrac[rlen-1]--;
-#ifdef PRINT_DATA_FOR_GRAPH
-		print_seq(rfrac, rlen, " right=", "");
-#endif
 
 		long right = index_from_fbaire(rfrac, rlen);
 
@@ -517,11 +499,39 @@ void validate_fbaire(int cfrac[], int len, long maxn)
 		if (cfrac[i] != dfrac[i])
 			printf("Error: sequence violation!\n");
 	}
+}
 
-#ifdef PRINT_DATA_FOR_GRAPH
-	printf("\n");
+// =================================================================
+/*
+ * Given label sequence, print equivalent continued-fraction value.
+ * Used for producing odometer graph.
+ * maxn == cutoff for highest known n; this avoids overflow.
+ */
+void print_odo_graph(int cfrac[], int len, long maxn)
+{
+	long idx = index_from_fbaire(cfrac, len);
+	if (idx >= maxn) return;
+	double gold = find_gold(idx);
+
+	long nleft = get_bracket_left(idx);
+	double gleft = find_gold(nleft);
+
+	long nright = get_bracket_right(idx);
+	double gright = find_gold(nright);
+
+	double ex = cf_to_real(cfrac, len);
+	double rex = reverse_cf_to_real(cfrac, len);
+	printf("%ld	%g	%g	%g %ld	%g	%ld	%g #",
+		idx, gold, ex, rex, nleft, gleft, nright, gright);
+
+	int dfrac[SZ];
+	int dlen = index_to_fbaire(dfrac, nleft);
+	print_seq(dfrac, dlen, "", " |=> ");
+	print_seq(cfrac, len, "", "");
+
+	dlen = index_to_fbaire(dfrac, nright);
+	print_seq(dfrac, dlen, " <=| ", "\n");
 	fflush(stdout);
-#endif
 }
 
 /*
@@ -545,6 +555,9 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 	}
 
 	validate_fbaire(cfrac, len, maxn);
+
+	// Print equivalent continued fraction, for the odometer graph
+	print_odo_graph(cfrac, len, maxn);
 
 	// Iterate depthwise second.
 	if (cfrac[len-1] < maxdepth)
