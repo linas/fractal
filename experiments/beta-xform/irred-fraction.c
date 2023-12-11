@@ -667,8 +667,8 @@ totg-gprev);
 
 int main(int argc, char* argv[])
 {
-// #define MANUAL_EXPLORER
-#ifdef MANUAL_EXPLORER
+// #define SEQUENCE_EXPLORER
+#ifdef SEQUENCE_EXPLORER
 	// Obtain one sequence from command line. Print it's index.
 	if (1 == argc) {
 		fprintf(stderr, "Usage: %s <sequence>\n", argv[0]);
@@ -701,6 +701,27 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+#define INDEX_EXLORER
+#ifdef INDEX_EXLORER
+	// Obtain one index from command line. Print debug info for it.
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <index>\n", argv[0]);
+		exit(1);
+	}
+	long ni = atol(argv[1]);
+	malloc_gold(ni+1);
+	double beta = find_gold(ni);
+
+	int cfrac[SZ];
+	int len = index_to_fbaire(cfrac, ni);
+	print_seq(cfrac, len, "dbg", "\n");
+
+	int order = iteration_period(beta);
+	printf("got %d ", order);
+	prt_bitstr(ni, "bits", "\n");
+	exit(0);
+#endif
+
 // #define PRINT_INDEX
 #ifdef PRINT_INDEX
 	// Do nothing except print beta and indexes
@@ -722,18 +743,6 @@ int main(int argc, char* argv[])
 
 #ifdef NEW_STUFF
 	int cfrac[SZ];
-#if 0
-	malloc_gold(100);
-	long ni = 53;
-	double beta = find_gold(ni);
-	int len = index_to_fbaire(cfrac, ni);
-	print_seq(cfrac, len, "dbg", "\n");
-
-	int order = iteration_period(beta);
-	printf("got %d ", order);
-	prt_bitstr(ni, "bits", "\n");
-	exit(0);
-#endif
 
 	long nmax = 1UL<<16;
 	malloc_gold(nmax);
@@ -788,7 +797,7 @@ int main(int argc, char* argv[])
 	generate_fbaire(norder, maxdepth, maxlen, false);
 #endif
 
-#define ODOMETER_GRAPH
+// #define ODOMETER_GRAPH
 #ifdef ODOMETER_GRAPH
 	// Generate expansions in sequential order, then print the equivalent
 	// index, beta and continued-frac equivalent. Used to make the odometer
