@@ -52,8 +52,12 @@ double find_zero(unsigned long n, double lo, double hi)
 double* zero = NULL;
 void malloc_gold(int nmax)
 {
-	zero = (double*) malloc(nmax*sizeof(double));
-	for (int i=0; i< nmax; i++) zero[i] = -1.0;
+	zero = (double*) malloc((nmax+1)*sizeof(double));
+	for (int i=0; i<=nmax; i++) zero[i] = -1.0;
+
+	// Allow valid memref to zero[-1] denoting beta=1.0
+	zero++;
+	zero[-1] = 1.0;
 	zero[0] = 2.0;
 }
 
@@ -154,7 +158,7 @@ int order(unsigned long n)
 void prt_bitstr(unsigned long n, const char* pfx, const char* sfx)
 {
 	int ord = order(n);
-	printf("%s (%d)-%ld={", pfx, ord, n);
+	printf("%s o(%d) %ld={", pfx, ord, n);
 	unsigned long bitstr = 2*n+1;
 	for (int i=0; i<ord; i++)
 	{
@@ -202,6 +206,7 @@ double reverse_cf_to_real(int cfrac[], int len)
  */
 long index_from_fbaire(int cfrac[], int len)
 {
+	if (0 == len) return -1;
 	if (1 == len)
 	{
 		if (-1 == cfrac[0]) return -1;
@@ -273,9 +278,7 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 
 	// Recurse.
 	int len = index_to_fbaire(cfrac, pidx);
-
-	int ord = order(pidx);
-	DBG(("post recursion for pidx=%ld msum=%d ord=%d new len=%d\n", pidx, msum, ord, len));
+	DBG(("post recursion for pidx=%ld msum=%d new len=%d\n", pidx, msum, len));
 
 	// Pass rejection slips back up the chain.
 	if (len < 0) return len;
@@ -283,7 +286,10 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 	// print_seq(cfrac, len, "", "\n");
 
 	// What's left over is m_k
-	cfrac[len] = msum-ord;
+	int ord = order(pidx);
+	msum -= ord;
+	if (msum < 0) msum = 0;
+	cfrac[len] = msum;
 	cfrac[len+1] = -555; // Poison end-of-string marker
 
 	// Return the length of the beast.
@@ -299,15 +305,22 @@ long get_right(long n)
 	int len = index_to_fbaire(cfrac, n);
 	printf("Enter get_right, n=%ld len=%d ", n, len);
 	print_seq(cfrac, len, "seq", "\n");
+
+	// Get the last digit. If it's positive, demote.
 	int dig = len-1;
 	if (0 < cfrac[dig])
 		cfrac[dig]--;
 	else
 	{
-		len = dig;
-		cfrac[dig] = -444;
+		// If last digits is zero, demote. Keep on demoting,
+		// if its zero again.
+		do {
+			len = dig;
+			cfrac[dig] = -444;
+			dig --;
+		}
+		while (0 <= dig && 0 == cfrac[dig]);
 	}
-printf("yo\n");
 	long nright = index_from_fbaire(cfrac, len);
 	printf("right idx=%ld\n", nright);
 	return nright;
@@ -724,6 +737,7 @@ int main(int argc, char* argv[])
 		if (len < 0)
 			printf("\nError: missing representation for n=%d\n", n);
 		print_seq(cfrac, len, "", "\n");
+		printf("-------\n");
 	}
 
 }
