@@ -240,67 +240,79 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 	printf("]%s", tail);
 }
 
-// Generate finite-Baire sequence expansions from integer index.
-// Given an index, set "cfrac" to the matching sequence.
+// Generate finite-Baire sequence labels from a polynomial index.
+// Given a polynomial index, set "cfrac" to the matching sequence.
 // Return the length of the cfrac sequence.
-// This is the inverse of what index_from_fbaire
-int index_to_fbaire(int cfrac[], unsigned long nseq)
+// This is the inverse of what index_from_fbaire() does.
+int index_to_fbaire(int cfrac[], unsigned long pidx)
 {
 	// #define DBG(X) printf X
 	#define DBG(X)
-	DBG(("enter nseq=%ld\n", nseq));
-	int msum = 0;
-	while (0 == nseq %2) { msum ++; nseq /=2; }
+	DBG(("enter pidx=%ld\n", pidx));
 
-	// Terminate recursion
-	if (1 == nseq)
+	// Count leading powers of two.
+	int msum = 0;
+	while (0 == pidx %2) { msum ++; pidx /=2; }
+
+	// If it was a pure power, then terminate recursion.
+	// This can only correspond to a sequence of length one,
+	// the sequence labelled as [msum]. So set the digit
+	// and return;
+	if (1 == pidx)
 	{
 		DBG(("the end msum=%d\n", msum));
 		cfrac[0] = msum;
+		cfrac[1] = -777; // Terminator poison.
 		return 1;
 	}
 
-	// If we are here, nseq is odd; reduce it and try again.
-	nseq = (nseq-1)/2;
+	// If we are here, pidx is odd; truncate and try again.
+	pidx = (pidx-1)/2;
 
-	DBG(("red after odd to nseq=%ld msum=%d\n", nseq, msum));
-	// Reject pure powers of two, when they occur after an odd number.
-	// Long series must terminate with an odd number at the bottom.
-	if (1 < nseq && 0 == msum)
-	{
-		int pure = nseq;
-		while (0 == pure %2) { pure /=2; }
-		if (1 == pure)
-			return -666;
-	}
+	DBG(("red after odd to pidx=%ld msum=%d\n", pidx, msum));
 
 	// Recurse.
-	int len = index_to_fbaire(cfrac, nseq);
+	int len = index_to_fbaire(cfrac, pidx);
 
-	DBG(("post recursion for nseq=%ld msum=%d new len=%d\n", nseq, msum, len));
+	int ord = order(pidx);
+	DBG(("post recursion for pidx=%ld msum=%d ord=%d new len=%d\n", pidx, msum, ord, len));
+
 	// Pass rejection slips back up the chain.
 	if (len < 0) return len;
 
-	// Remove contributions from shorter sequences
-	for (int j=0; j<len-1; j++)
-		msum -= cfrac[j];
-
-	// Special case the length=1 case.
-	if (1 == len) msum -= cfrac[0];
-
-	DBG(("post subtract for nseq=%ld msum=%d new len=%d\n", nseq, msum, len));
 	// print_seq(cfrac, len, "", "\n");
-	// If more powers of two removed than can exist, then reject.
-	if (msum < 0) return -555;
 
 	// What's left over is m_k
-	cfrac[len] = msum;
+	cfrac[len] = msum-ord;
+	cfrac[len+1] = -555; // Poison end-of-string marker
 
 	// Return the length of the beast.
 	return len+1;
 }
 
 // =================================================================
+#define SZ 60
+
+long get_right(long n)
+{
+	int cfrac[SZ];
+	int len = index_to_fbaire(cfrac, n);
+	printf("Enter get_right, n=%ld len=%d ", n, len);
+	print_seq(cfrac, len, "seq", "\n");
+	int dig = len-1;
+	if (0 < cfrac[dig])
+		cfrac[dig]--;
+	else
+	{
+		len = dig;
+		cfrac[dig] = -444;
+	}
+printf("yo\n");
+	long nright = index_from_fbaire(cfrac, len);
+	printf("right idx=%ld\n", nright);
+	return nright;
+}
+
 /*
  * Validate bracketing for betas and for the finite-Baire sequences.
  * Similar to validate_fbaire() below, but takes a more principled
@@ -327,10 +339,7 @@ void validate_bracket(long n)
 	if (gleft >= gold) printf("Error: bad left bracket at %ld\n", n);
 
 	// Verify right bracketing by knocking off only one power of two.
-	long nright = n;
-	nright /=2;
-	if (0 < nright) nright = (nright-1) / 2;
-
+	long nright = get_right(n);
 	double gright = find_gold(nright);
 	if (gright < 0.5) printf("Error: no such right index %ld\n", (n-1)/2);
 	if (gright <= gold)
@@ -339,7 +348,6 @@ void validate_bracket(long n)
 }
 
 // =================================================================
-#define SZ 60
 /*
  * Validate the bounds on the finite-Baire sequence representation.
  * ... and print it out.
