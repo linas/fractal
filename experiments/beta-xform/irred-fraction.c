@@ -102,7 +102,7 @@ bool zero_is_bracketed(int n, double gold)
  */
 double find_gold(long n)
 {
-	if (-1 == n) return 2.0;
+	if (-1 == n) return 1.0;
 
 	fill_gold(n);
 	double gold = zero[n];
@@ -206,9 +206,13 @@ double reverse_cf_to_real(int cfrac[], int len)
  */
 long index_from_fbaire(int cfrac[], int len)
 {
-	if (0 == len) return 0;
+	// zero length corresponds to beta=1 which has index infinity
+	// Which we report as -1;
+	if (0 == len) return -1;
+
 	if (1 == len)
 	{
+		// Sequence of [-1] is index zero which is beta=2
 		if (-1 == cfrac[0]) return 0;
 		return 1UL << cfrac[0];
 	}
@@ -310,7 +314,7 @@ long get_bracket_right(long n)
 
 	int dig = len-1;
 
-	// If the last digit is zero, demote. Keep on demoting,
+	// If the last digit is zero, truncate. Keep on truncating,
 	// as long as we find zeros.
 	if (0 == cfrac[dig])
 	{
@@ -331,11 +335,22 @@ long get_bracket_right(long n)
 	return nright;
 }
 
+// Given polynomial index n, return the index defining the left
+// side of the bracket containing this index.
 long get_bracket_left(long n)
 {
-	long nleft = n;
-	while (0 == nleft%2) nleft /=2;
-	if (0 < nleft) nleft = (nleft-1) / 2;
+	int cfrac[SZ];
+	int len = index_to_fbaire(cfrac, n);
+	// printf("Enter get_left, n=%ld len=%d ", n, len);
+	// print_seq(cfrac, len, "seq", "\n");
+
+	// Truncate the last digit.
+	int dig = len-1;
+	cfrac[dig] = -333;
+	len = dig;
+
+	long nleft = index_from_fbaire(cfrac, len);
+	// printf("left idx=%ld\n", nleft);
 	return nleft;
 }
 
@@ -356,11 +371,11 @@ void validate_bracket(long n)
 	// Verify the left bracket by ripping out powers of two until
 	// an odd number is reached.
 	long nleft = get_bracket_left(n);
-
-	double gleft = 1.0; // pure power terminates at beta=1
-	if (0 < nleft) gleft = find_gold(nleft);
-	if (gleft < 0.5) printf("Error: no such left index %ld\n", (n-1)/2);
-	if (gleft >= gold) printf("Error: bad left bracket at %ld\n", n);
+	double gleft = find_gold(nleft);
+	if (gleft < 0.5) printf("Error: no such left index %ld\n", n);
+	if (gleft >= gold)
+		printf("Error: bad left bracket at %ld: nr=%ld gold=%g gleft=%g\n",
+			n, nleft, gold, gleft);
 
 	// Verify right bracketing by knocking off only one power of two.
 	long nright = get_bracket_right(n);
