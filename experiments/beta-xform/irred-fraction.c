@@ -206,10 +206,10 @@ double reverse_cf_to_real(int cfrac[], int len)
  */
 long index_from_fbaire(int cfrac[], int len)
 {
-	if (0 == len) return -1;
+	if (0 == len) return 0;
 	if (1 == len)
 	{
-		if (-1 == cfrac[0]) return -1;
+		if (-1 == cfrac[0]) return 0;
 		return 1UL << cfrac[0];
 	}
 
