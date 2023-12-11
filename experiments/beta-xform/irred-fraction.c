@@ -390,12 +390,13 @@ long get_bracket_left(long n)
 /*
  * Validate bracketing for betas and for the finite-Baire sequences.
  */
-void validate_bracket(long n)
+bool validate_bracket(long n)
 {
+	bool ok = true;
 	double gold = find_gold(n);
 
 	if (gold < 1.0)
-		printf("Error: invalid index %ld\n", n);
+		{ printf("Error: invalid index %ld\n", n); ok = false; }
 
 	// printf("Validate bracket for %ld\n", n);
 	// Verify gold bracketing
@@ -404,18 +405,20 @@ void validate_bracket(long n)
 	// an odd number is reached.
 	long nleft = get_bracket_left(n);
 	double gleft = find_gold(nleft);
-	if (gleft < 0.5) printf("Error: no such left index %ld\n", n);
+	if (gleft < 0.5)
+		{ printf("Error: no such left index %ld for %ld\n", nleft, n); ok = false; }
 	if (gleft >= gold)
-		printf("Error: bad left bracket at %ld: nr=%ld gold=%g gleft=%g\n",
-			n, nleft, gold, gleft);
+		{ printf("Error: bad left bracket at %ld: nr=%ld gold=%g gleft=%g\n",
+			n, nleft, gold, gleft); ok = false; }
 
 	// Verify right bracketing by knocking off only one power of two.
 	long nright = get_bracket_right(n);
 	double gright = find_gold(nright);
-	if (gright < 0.5) printf("Error: no such right index %ld\n", (n-1)/2);
+	if (gright < 0.5)
+		{ printf("Error: no such right index %ld for %ld\n", nright, n); ok = false; }
 	if (gright <= gold)
-		printf("Error: bad right bracket at %ld: nr=%ld gold=%g gright=%g\n",
-			n, nright, gold, gright);
+		{ printf("Error: bad right bracket at %ld: nr=%ld gold=%g gright=%g\n",
+			n, nright, gold, gright); ok = false; }
 
 	// Validate conversion to and from Baire.
 	int cfrac[SZ];
@@ -425,7 +428,11 @@ void validate_bracket(long n)
 	{
 		printf("Sequence numbering fail!! in=%ld out=%ld ", n, seqno);
 		print_seq(cfrac, len, "seq", "\n");
+		ok = false;
 	}
+	if (!ok) printf("-------\n");
+
+	return ok;
 }
 
 // =================================================================
@@ -728,7 +735,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define SANITY_CHECK
+// #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Run validation on the recursively-generated sequences.
 	// Same as the odometer graph below, but does not print data.
@@ -746,12 +753,12 @@ int main(int argc, char* argv[])
 		printf("Caution: large orders 24 < %d take a long time\n", norder);
 
 	if (10 < maxdepth)
-		printf("Caution: large depth 10 < %d take a long time\n", maxdepth);
+		printf("Caution: large depths 10 < %d take a long time\n", maxdepth);
 
 	generate_fbaire(norder, maxdepth, maxlength, false);
 #endif
 
-// #define ODOMETER_GRAPH
+#define ODOMETER_GRAPH
 #ifdef ODOMETER_GRAPH
 	// Generate expansions in sequential order, then print the equivalent
 	// index, beta and continued-frac equivalent. Used to make the odometer
@@ -773,7 +780,7 @@ int main(int argc, char* argv[])
 	int maxlen = atoi(argv[3]);
 
 	if (10 < maxdepth)
-		printf("Caution: large depth 10 < %d take a long time\n", maxdepth);
+		printf("Caution: large depths 10 < %d take a long time\n", maxdepth);
 
 	int nmax = (1<<norder) + 1;
 
