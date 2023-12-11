@@ -767,16 +767,20 @@ int main(int argc, char* argv[])
 
 	int norder = atoi(argv[1]);
 	int maxdepth = atoi(argv[2]);
-	int maxlength = atoi(argv[3]);
+	int maxlen = atoi(argv[3]);
 
 	// Using order==24 takes about 50 seconds to find gold.
 	if (24 < norder)
-		printf("Caution: large orders 24 < %d take a long time\n", norder);
+		printf("Caution: large orders 24 < %d take a long setup time\n", norder);
 
-	if (10 < maxdepth)
-		printf("Caution: large depths 10 < %d take a long time\n", maxdepth);
+	double niter = pow (maxdepth, maxlen);
+	if (1e9 < niter) {
+		printf("Caution: number of iterations %g is depth^length = %d ^ %d\n",
+			niter, maxdepth, maxlen);
+	}
+	if (1e12 < niter) exit(-1);
 
-	generate_fbaire(norder, maxdepth, maxlength, false);
+	generate_fbaire(norder, maxdepth, maxlen, false);
 #endif
 
 // #define ODOMETER_GRAPH
@@ -789,19 +793,23 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	// Using 1<<24 takes about 50 seconds to find gold.
-	int norder = atoi(argv[1]);
-	if (24 < norder)
-		printf("Caution: large orders 24 < %d take a long time\n", norder);
-
 	// Depth is how large any given sequence value can go.
 	// Length is how long a sequence is.
 	// Need to go to high depth to avoid big gap at golden mean.
 	int maxdepth = atoi(argv[2]);
 	int maxlen = atoi(argv[3]);
 
-	if (10 < maxdepth)
-		printf("Caution: large depths 10 < %d take a long time\n", maxdepth);
+	// Using 1<<24 takes about 50 seconds to find gold.
+	int norder = atoi(argv[1]);
+	if (24 < norder)
+		printf("Caution: large orders 24 < %d take a long setup time\n", norder);
+
+	double niter = pow (maxdepth, maxlen);
+	if (1e9 < niter) {
+		printf("Caution: number of iterations %g is depth^length = %d ^ %d\n",
+			niter, maxdepth, maxlen);
+	}
+	if (1e12 < niter) exit(-1);
 
 	int nmax = (1<<norder) + 1;
 
