@@ -389,14 +389,13 @@ long get_bracket_left(long n)
 
 /*
  * Validate bracketing for betas and for the finite-Baire sequences.
- * Similar to validate_fbaire() below, but takes a more principled
- * approach.
  */
 void validate_bracket(long n)
 {
 	double gold = find_gold(n);
-	// If its not a valid index, do nothing.
-	if (gold < 1.0) return;
+
+	if (gold < 1.0)
+		printf("Error: invalid index %ld\n", n);
 
 	// printf("Validate bracket for %ld\n", n);
 	// Verify gold bracketing
@@ -431,86 +430,12 @@ void validate_bracket(long n)
 
 // =================================================================
 /*
- * Validate the bounds on the finite-Baire sequence representation.
- * maxn == cutoff for highest known n; this avoids overflow.
- */
-void validate_fbaire(int cfrac[], int len, long maxn)
-{
-	static double prevgold = 2.0;
-
-	long seq = index_from_fbaire(cfrac, len);
-	if (seq >= maxn) return;
-	if (-1 == seq) return;
-	double gold = find_gold(seq);
-	// printf("seq = %ld gold=%g ", seq, gold);
-
-	if (gold >= prevgold)
-		printf("FAIL total order!\n");
-	else
-		prevgold = gold;
-
-	// Validate bracketing.
-	if (1 < len)
-	{
-		long left = index_from_fbaire(cfrac, len-1);
-
-		// Right bracket is tricky.
-		int rfrac[SZ];
-		for (int i=0; i<len; i++) rfrac[i] = cfrac[i];
-		int rlen = len;
-		while (1 < rlen && 0 == rfrac[rlen-1]) rlen--;
-
-		rfrac[rlen-1]--;
-
-		long right = index_from_fbaire(rfrac, rlen);
-
-		// When bracketed by leader peers, left must be greater than right.
-		if (len-1 == rlen && left <= right)
-			printf("FAIL peer bracket order! left=%ld right=%ld\n", left, right);
-
-		if (len <= rlen && 0 == rfrac[rlen-1] && right <= left && -1 != right)
-			printf("FAIL hi bracket order! left=%ld right=%ld\n", left, right);
-
-		// This check passes.... I think it's correct ...
-		if (len > rlen && left <= right)
-			printf("FAIL lo bracket order! left=%ld right=%ld\n", left, right);
-
-		if (seq <= left)
-			printf("FAIL left bracket! left=%ld seq=%ld\n", left, seq);
-
-		if (seq <= right)
-			printf("FAIL right bracket! right=%ld seq=%ld\n", right, seq);
-
-		double lg = find_gold(left);
-		double rg = find_gold(right);
-
-		if (gold < lg) printf("fail left gold! left=%g gold=%g\n", lg, gold);
-		if (rg < gold) printf("fail right gold! gold=%g right=%g\n", gold, rg);
-	}
-
-	int seqno = index_from_fbaire(cfrac, len);
-	int dfrac[SZ];
-	for (int i=0; i<SZ; i++) dfrac[i] = -666;
-	int dlen = index_to_fbaire(dfrac, seqno);
-	if (len != dlen)
-		printf("Error: length violation!\n");
-	for (int i=0; i<len; i++)
-	{
-		if (cfrac[i] != dfrac[i])
-			printf("Error: sequence violation!\n");
-	}
-}
-
-// =================================================================
-/*
  * Given label sequence, print equivalent continued-fraction value.
  * Used for producing odometer graph.
- * maxn == cutoff for highest known n; this avoids overflow.
  */
-void print_odo_graph(int cfrac[], int len, long maxn)
+void print_odo_graph(int cfrac[], int len)
 {
 	long idx = index_from_fbaire(cfrac, len);
-	if (idx >= maxn) return;
 	double gold = find_gold(idx);
 
 	long nleft = get_bracket_left(idx);
@@ -539,11 +464,14 @@ void print_odo_graph(int cfrac[], int len, long maxn)
  * is such that the corresponding golden number is strictly decreasing
  * for the generated cfrac sequences.
  *
- * maxdepth == number of doubling steps
- * maxlength == max length of fraction.
+ * maxdepth == max number of doubling steps.
+ * maxlength == max length of sequence.
  * maxn == cutoff for highest known n
+ * do_print == boolean, print the sequences
  */
-void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn)
+void recurse_fbaire(int cfrac[], int len,
+                    int maxdepth, int maxlength, long maxn,
+                    bool do_print)
 {
 	// Iterate to max length, first.
 	if (len < maxlength)
@@ -551,13 +479,15 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 		int bfrac[SZ];
 		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
 		bfrac[len] = 0;
-		iterate_fbaire(bfrac, len+1, maxdepth, maxlength, maxn);
+		recurse_fbaire(bfrac, len+1, maxdepth, maxlength, maxn, do_print);
 	}
 
-	validate_fbaire(cfrac, len, maxn);
+	long idx = index_from_fbaire(cfrac, len);
+	if (idx >= maxn) return; // why ??
+	validate_bracket(idx);
 
 	// Print equivalent continued fraction, for the odometer graph
-	print_odo_graph(cfrac, len, maxn);
+	if (do_print) print_odo_graph(cfrac, len);
 
 	// Iterate depthwise second.
 	if (cfrac[len-1] < maxdepth)
@@ -565,8 +495,30 @@ void iterate_fbaire(int cfrac[], int len, int maxdepth, int maxlength, long maxn
 		int afrac[SZ];
 		for (int i=0; i<len; i++) afrac[i] = cfrac[i];
 		afrac[len-1] ++;
-		iterate_fbaire(afrac, len, maxdepth, maxlength, maxn);
+		recurse_fbaire(afrac, len, maxdepth, maxlength, maxn, do_print);
 	}
+}
+
+/*
+ * Generate correctly-ordered finite-baire sequences. The ordering
+ * is such that the corresponding golden number is strictly decreasing
+ * for the generated cfrac sequences.
+ *
+ * norder == max polynomial order to go to (order == length of bitstring/orbit)
+ * maxdepth == max number of index doubling steps
+ * maxlength == max length of sequence.
+ * do_print == boolean, print the sequences
+ */
+void generate_fbaire(int norder, int depth, int length, bool do_print)
+{
+	int nmax = (1<<norder) + 1;
+
+	malloc_gold(nmax);
+	fill_gold(nmax);
+
+	int cfrac[SZ];
+	cfrac[0] = 0;
+	recurse_fbaire(cfrac, 1, depth, length, nmax, do_print);
 }
 
 // =================================================================
@@ -613,62 +565,6 @@ maxord=8;
 	}
 	long nend = 1UL << maxord;
 	printf("Verified up to order=%d n=%ld errors=%d\n", maxord, nend, toterr);
-#endif
-
-// #define SANITY_CHECK
-#ifdef SANITY_CHECK
-	// Print the finite-Baire sequences. Sanity check, only; short runtime.
-	int norder = 18;
-	int nmax = (1<<norder) + 1;
-
-	malloc_gold(nmax);
-	fill_gold(nmax);
-
-	int cfrac[SZ];
-	cfrac[0] = 0;
-
-	// Iterating to length 10, depth 10 takes more than an hour,
-	// mostly due to large numbers of overflow failures.
-	// iterate_fbaire(cfrac, 1, 3, 8, nmax);
-	iterate_fbaire(cfrac, 1, 3, 4, nmax);
-#endif
-
-// #define BIG_GRAPH
-#ifdef BIG_GRAPH
-	// Obtain order from command line.
-	if (4 != argc) {
-		fprintf(stderr, "Usage: %s <order> <maxdepth> <maxlen>\n", argv[0]);
-		exit(1);
-	}
-	// Using 1<<24 takes about 50 seconds to find gold.
-	// int norder = 26;
-	int norder = atoi(argv[1]);
-	if (24 < norder)
-		printf("Caution: large orders 24 < %d take a long time\n", norder);
-	int nmax = (1<<norder) + 1;
-
-	// Depth is how large any given sequence value can go.
-	// Length is how long a sequence is.
-	// Need to go to high depth to avoid big gap at golden mean.
-	// int maxdepth = 16;
-	// int maxlen = 9;
-	int maxdepth = atoi(argv[2]);
-	int maxlen = atoi(argv[3]);
-
-	malloc_gold(nmax);
-	fill_gold(nmax);
-
-	int cfrac[SZ];
-	cfrac[0] = 0;
-
-	// Iterating to length 10, depth 10 takes more than an hour,
-	// mostly due to large numbers of overflow failures.
-	// iterate_fbaire(cfrac, 1, 10, 10, nmax);
-
-	printf("#\n# Max order of polynomials = %d num=2^order = %d\n", norder, nmax);
-	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
-	fflush (stdout);
-	iterate_fbaire(cfrac, 1, maxdepth, maxlen, nmax);
 #endif
 
 // #define BINCOUNT_INDEX
@@ -738,7 +634,7 @@ totg-gprev);
 
 int main(int argc, char* argv[])
 {
-#define MANUAL_EXPLORER
+// #define MANUAL_EXPLORER
 #ifdef MANUAL_EXPLORER
 	// Obtain one sequence from command line. Print it's index.
 	if (1 == argc) {
@@ -831,4 +727,60 @@ int main(int argc, char* argv[])
 		}
 	}
 #endif
+
+#define SANITY_CHECK
+#ifdef SANITY_CHECK
+	// Run validation on the recursively-generated sequences.
+	// Same as the odometer graph below, but does not print data.
+	if (4 != argc) {
+		fprintf(stderr, "Usage: %s <order> <maxdepth> <maxlen>\n", argv[0]);
+		exit(1);
+	}
+
+	int norder = atoi(argv[1]);
+	int maxdepth = atoi(argv[2]);
+	int maxlength = atoi(argv[3]);
+
+	// Using order==24 takes about 50 seconds to find gold.
+	if (24 < norder)
+		printf("Caution: large orders 24 < %d take a long time\n", norder);
+
+	if (10 < maxdepth)
+		printf("Caution: large depth 10 < %d take a long time\n", maxdepth);
+
+	generate_fbaire(norder, maxdepth, maxlength, false);
+#endif
+
+// #define ODOMETER_GRAPH
+#ifdef ODOMETER_GRAPH
+	// Generate expansions in sequential order, then print the equivalent
+	// index, beta and continued-frac equivalent. Used to make the odometer
+	// graph for the paper.
+	if (4 != argc) {
+		fprintf(stderr, "Usage: %s <order> <maxdepth> <maxlen>\n", argv[0]);
+		exit(1);
+	}
+
+	// Using 1<<24 takes about 50 seconds to find gold.
+	int norder = atoi(argv[1]);
+	if (24 < norder)
+		printf("Caution: large orders 24 < %d take a long time\n", norder);
+
+	// Depth is how large any given sequence value can go.
+	// Length is how long a sequence is.
+	// Need to go to high depth to avoid big gap at golden mean.
+	int maxdepth = atoi(argv[2]);
+	int maxlen = atoi(argv[3]);
+
+	if (10 < maxdepth)
+		printf("Caution: large depth 10 < %d take a long time\n", maxdepth);
+
+	int nmax = (1<<norder) + 1;
+
+	printf("#\n# Max order of polynomials = %d num=2^order = %d\n", norder, nmax);
+	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
+	fflush (stdout);
+	generate_fbaire(norder, maxdepth, maxlen, true);
+#endif
+
 }
