@@ -686,6 +686,18 @@ void print_debug_info(long seqno)
 		printf("Invalid index; factors to %g = %ld = ", feta, factor);
 		print_seq(cfrac, slen, "", "\n");
 	}
+
+	long nleft = get_bracket_left(seqno);
+	double gleft = find_gold(nleft);
+	slen = index_to_fbaire(cfrac, nleft);
+	printf("Left limit: %ld = %g = ", nleft, gleft);
+	print_seq(cfrac, slen, "", "\n");
+
+	long nright = get_bracket_right(seqno);
+	double gright = find_gold(nright);
+	slen = index_to_fbaire(cfrac, nright);
+	printf("Right limit: %ld = %g = ", nright, gright);
+	print_seq(cfrac, slen, "", "\n");
 }
 
 // =================================================================
