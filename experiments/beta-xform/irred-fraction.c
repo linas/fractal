@@ -330,6 +330,14 @@ long get_bracket_right(long n)
 	if (0 <= dig && 0 < cfrac[dig])
 		cfrac[dig]--;
 
+	// Special case to convert empty sequence to [-1] denoting beta=2
+	if (0 == len)
+	{
+		cfrac[0] = -1;
+		len = 1;
+	}
+
+	// print_seq(cfrac, len, "right seq", "\n");
 	long nright = index_from_fbaire(cfrac, len);
 	// printf("right idx=%ld\n", nright);
 	return nright;
