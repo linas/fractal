@@ -575,25 +575,6 @@ maxord=8;
 	printf("Verified up to order=%d n=%ld errors=%d\n", maxord, nend, toterr);
 #endif
 
-// #define REVERSE_VERIFY
-#ifdef REVERSE_VERIFY
-	// Verify that the reverse-indexing works.
-	int norder = 20;
-	int nmax = (1<<norder) + 1;
-
-	malloc_gold(nmax);
-
-	for (int n=0; n<nmax; n ++)
-		find_gold(n);
-
-	int cfrac[SZ];
-	cfrac[0] = 0;
-
-	// Iterating to length 10, depth 10 takes more than an hour,
-	// mostly due to large numbers of overflow failures.
-	iterate_fbaire(cfrac, 1, 5, 8, nmax);
-#endif
-
 // #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Print the finite-Baire sequences. Sanity check, only; short runtime.
@@ -601,8 +582,7 @@ maxord=8;
 	int nmax = (1<<norder) + 1;
 
 	malloc_gold(nmax);
-	for (int n=0; n<nmax; n ++)
-		find_gold(n);
+	fill_gold(nmax);
 
 	int cfrac[SZ];
 	cfrac[0] = 0;
@@ -636,8 +616,7 @@ maxord=8;
 	int maxlen = atoi(argv[3]);
 
 	malloc_gold(nmax);
-	for (int n=0; n<nmax; n ++)
-		find_gold(n);
+	fill_gold(nmax);
 
 	int cfrac[SZ];
 	cfrac[0] = 0;
@@ -749,6 +728,7 @@ int main(int argc, char* argv[])
 	// Do nothing except print beta and indexes
 	int nmax = 64;
 	malloc_gold(nmax);
+	fill_gold(nmax);
 	for (int n=1; n<nmax; n ++)
 	{
 		double beta = find_gold(n);
@@ -775,7 +755,7 @@ int main(int argc, char* argv[])
 	prt_bitstr(ni, "bits", "\n");
 #endif
 
-	for (long n=1; n<16; n++)
+	for (long n=1; n<64; n++)
 	{
 		double beta = find_gold(n);
 		if (beta < 0.5) continue;
