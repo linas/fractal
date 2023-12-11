@@ -353,8 +353,8 @@ long get_bracket_right(long n)
 {
 	int cfrac[SZ];
 	int len = index_to_fbaire(cfrac, n);
-	// printf("Enter get_right, n=%ld len=%d ", n, len);
-	// print_seq(cfrac, len, "seq", "\n");
+	printf("Enter get_right, n=%ld len=%d ", n, len);
+	print_seq(cfrac, len, "seq", "\n");
 
 	int dig = len-1;
 
@@ -381,9 +381,9 @@ long get_bracket_right(long n)
 		len = 1;
 	}
 
-	// print_seq(cfrac, len, "right seq", "\n");
+	print_seq(cfrac, len, "right seq", "\n");
 	long nright = index_from_fbaire(cfrac, len);
-	// printf("right idx=%ld\n", nright);
+	printf("right idx=%ld\n", nright);
 	return nright;
 }
 
@@ -681,11 +681,13 @@ int main(int argc, char* argv[])
 	printf("Index: %d len=%d", seqno, len);
 	print_seq(cfrac, len, " provided ", "\n");
 
+	malloc_gold(seqno+1);
+	validate_bracket(seqno);
+
 	int slen = index_to_fbaire(cfrac, seqno);
 	printf("Index: %d len=%d", seqno, slen);
 	print_seq(cfrac, slen, " reconstruct ", "\n");
 
-	malloc_gold(seqno+1);
 	double beta = find_gold(seqno);
 
 	if (0.5 < beta) printf("beta = %g\n", beta);
@@ -701,8 +703,8 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define INDEX_EXLORER
-#ifdef INDEX_EXLORER
+#define INDEX_EXPLORER
+#ifdef INDEX_EXPLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <index>\n", argv[0]);
@@ -719,6 +721,8 @@ int main(int argc, char* argv[])
 	int order = iteration_period(beta);
 	printf("got %d ", order);
 	prt_bitstr(ni, "bits", "\n");
+
+	validate_bracket(ni);
 	exit(0);
 #endif
 
@@ -746,7 +750,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define VALIDATE_INDEX
+// #define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
