@@ -200,12 +200,21 @@ double reverse_cf_to_real(int cfrac[], int len)
 
 // =================================================================
 
+void print_seq(int cfrac[], int len, char* head, char* tail)
+{
+	printf("%s [", head);
+	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
+	printf("]%s", tail);
+}
+
 /*
  * Given a finite-length Baire representation, return the
  * corresponding index number.
  */
 long index_from_fbaire(int cfrac[], int len)
 {
+	print_seq(cfrac, len, "enter index_from_fbaire", "\n");
+
 	// zero length corresponds to beta=1 which has index infinity
 	// Which we report as -1;
 	if (0 == len) return -1;
@@ -221,6 +230,7 @@ long index_from_fbaire(int cfrac[], int len)
 	if (-1 == leader) return -1; // avoid overflow
 
 	long follower = 2*leader + 1;
+	printf("leader is %ld\n", follower);
 
 	// This appears to be correct .... for now ...  !?
 	int shift = cfrac[len-1];
@@ -230,23 +240,19 @@ long index_from_fbaire(int cfrac[], int len)
 	for (int j=0; j<= bump; j++)
 		shift += cfrac[j];
 
+printf("shit=%d\n", shift);
 	// More careful overflow check
 	int nbits = 0;
 	long fo = follower;
 	while (fo >>= 1) ++nbits;
+printf("nbits=%d\n", nbits);
 
 	if (60 < nbits+shift) return -1;
 
 	follower *= 1UL << shift;
 
+printf("ret from fomer follow=%ld\n...\n", follower);
 	return follower;
-}
-
-void print_seq(int cfrac[], int len, char* head, char* tail)
-{
-	printf("%s [", head);
-	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
-	printf("]%s", tail);
 }
 
 // Generate finite-Baire sequence labels from a polynomial index.
@@ -255,8 +261,8 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 // This is the inverse of what index_from_fbaire() does.
 int index_to_fbaire(int cfrac[], unsigned long pindex)
 {
-	// #define DBG(X) printf X
-	#define DBG(X)
+	#define DBG(X) printf X
+	// #define DBG(X)
 	DBG(("enter index_to_fbaire pidx=%ld\n", pindex));
 
 	// Count leading powers of two.
@@ -293,9 +299,10 @@ int index_to_fbaire(int cfrac[], unsigned long pindex)
 	// and 14, which is a follower of 7.
 	cfrac[len] = 0;
 	cfrac[len+1] = -555; // Poison end-of-string marker
-	// print_seq(cfrac, len+1, "baseline ", "\n");
+	print_seq(cfrac, len+1, "baseline ", "\n");
 	long base = index_from_fbaire(cfrac, len+1);
 	pidx = pindex / base;
+if (0 == pidx) pidx = 1; // fail
 
 	msum = 0;
 	while (0 == pidx %2) { msum ++; pidx /=2; }
@@ -751,9 +758,8 @@ int main(int argc, char* argv[])
 
 	int cfrac[SZ];
 	malloc_gold(1024);
-#if 0
+#if 1
 	long ni = 53;
-	ni = 14;
 	double beta = find_gold(ni);
 	int len = index_to_fbaire(cfrac, ni);
 	print_seq(cfrac, len, "dbg", "\n");

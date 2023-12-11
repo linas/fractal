@@ -19875,11 +19875,23 @@ Bracket
 
 \begin_layout Standard
 The numbering is more difficult, here.
- It is given by the appending relation 
+ It is given by the zero-digit-appending relation 
 \begin_inset Formula $\eta\left[k,0\right]=2^{k}\left(2^{k+1}+1\right)=2^{k}\left(2\eta\left[k\right]+1\right)$
 \end_inset
 
- There is one more table worth writing out explicitly:
+.
+ The product with an odd number provides a unique base index that is distinct
+ from other two-digit labels.
+ That is, the labelling needs to provide a unique factorization, so as to
+ identify each polynomial index uniquely.
+ This is the basic task to be solved with labeling.
+ 
+\end_layout
+
+\begin_layout Standard
+Powers of two of the above leaders can now be handled as before, by incrementing
+ the trailing digit for each power of two.
+ Once example is shown in the table below.
 \end_layout
 
 \begin_layout Standard
@@ -20177,6 +20189,15 @@ The index of the leader is described by the promotion
 \begin_inset Formula $\eta\left[k,m\right]=2^{m}\eta\left[k,0\right]$
 \end_inset
 
+> This is a good time to drop the 
+\begin_inset Formula $\eta$
+\end_inset
+
+ as it is clear from context.
+ So 
+\begin_inset Formula $\left[k,m\right]=2^{m}\left[k,0\right]$
+\end_inset
+
 .
  This and the previous relation can be combined into one recursion relation,
  but it will aid understanding to keep them distinct.
@@ -20185,7 +20206,9 @@ The index of the leader is described by the promotion
 \begin_layout Standard
 A general pattern has not yet emerged.
  We must go deeper.
- 
+ First, confirm an easy case: that index doubling can be handled by incrementing
+ the trailing digit.
+ An example is shown in the table below.
 \end_layout
 
 \begin_layout Standard
@@ -20480,7 +20503,7 @@ Bracket
 
 \begin_layout Standard
 It would appear that promotion of the trailng digit works as 
-\begin_inset Formula $\eta\left[0,0,p\right]=2^{p}\eta\left[0,0,0\right]$
+\begin_inset Formula $\left[0,0,p\right]=2^{p}\left[0,0,0\right]$
 \end_inset
 
 .
@@ -20493,7 +20516,7 @@ It would appear that promotion of the trailng digit works as
 \begin_layout Standard
 \begin_inset Formula 
 \[
-2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)=\eta\left(\left[m_{1},m_{2},\cdots,m_{k}+1\right]\right)
+2\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1\right]
 \]
 
 \end_inset
@@ -20501,144 +20524,1019 @@ It would appear that promotion of the trailng digit works as
 Alternately, counting from zero:
 \begin_inset Formula 
 \[
-\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)=2^{m_{k}}\eta\left(\left[m_{1},m_{2},\cdots,m_{k-1},0\right]\right)
+\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}}\left[m_{1},m_{2},\cdots,m_{k-1},0\right]
 \]
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 This encoding is unique, provided that act of appending a zero results in
- a sequence to be distinct from all shorter sequences.
-\end_layout
-
-\begin_layout Standard
-xxxxx
-\end_layout
-
-\begin_layout Standard
-xxxxxx
-\end_layout
-
-\begin_layout Standard
-Consider the left subseries lead by 
-\begin_inset Formula $\left[1,0\right]\Mapsto f\Mapsfrom\left[0\right]$
-\end_inset
-
-.
- One has 
-\begin_inset Formula $f=42=2\left(2\left[1,0\right]+1\right)=[1,0,0].$
-\end_inset
-
- The bracketing in general is then 
-\begin_inset Formula $\left[1,0\right]\Mapsto\left[1,0,p\right]\Mapsfrom\left[0\right]$
-\end_inset
-
- having the index 
-\begin_inset Formula $n=\left[1,0,p\right]=2^{p+1}\left(2\left[1,0\right]+1\right)=2^{p}\cdot42$
-\end_inset
-
-.
- Continuing to the left, the appropriate sequence label is
+ a sequence that is distinct from all shorter sequences.
+ It must somehow factorize uniquely.
+ The bracketing relationship is 
 \begin_inset Formula 
 \begin{align*}
-\left[k,0\right]\Mapsto\left[k,0,p\right]\Mapsfrom\left[k-1\right] & \mbox{ when }k\ge1
+\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{k}-1\right] & \mbox{ when }m_{k-1}\ge1\mbox{and }m_{k}\ge1
 \end{align*}
 
 \end_inset
 
-and the numerical index value is 
-\begin_inset Formula $n=\left[k,0,p\right]=2^{p+k}\left(2\left[k,0\right]+1\right)$
-\end_inset
-
-.
- This can be disentangled into two parts: a lengthening relation 
-\begin_inset Formula 
-\[
-\left[k,0,0\right]=2^{k}\left(2\left[k,0\right]+1\right)
-\]
-
-\end_inset
-
-and a distinct promotion relation
-\begin_inset Formula 
-\[
-\left[k,0,p\right]=2^{p}\left[k,0,0\right]
-\]
+Note the conditions on the last two digits being non-zero.
+ These require some extra care, detailed later, below.
+ The general rule will be to strop trailing zeros from the right-hand bound,
+ until a non-zero digit is reached.
+ This seems opaque, until one examines the graph 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Discontinuity-labels"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-This provides leaders for the next series.
- These are bracketed as
-\begin_inset Formula 
-\begin{align*}
-\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }k\ge1\mbox{and }m\ge1
-\end{align*}
-
-\end_inset
-
-The associated index value is given by 
-\begin_inset Formula 
-\[
-\left[k,m,p\right]=2^{p+k}\left(2\left[k,m\right]+1\right)
-\]
-
-\end_inset
-
-Curiously, 
-\begin_inset Formula $m$
-\end_inset
-
+ again.
+ The upper boundary corresponds to the largest discontinuity to the right,
+ which had been seen several stages earlier.
  
 \end_layout
 
 \begin_layout Standard
-One the right are a two more subseries, worth stating explicitly.
- These are 
-\begin_inset Formula $\left[0\right]\Mapsto f\Mapsfrom\left[0,0\right]$
-\end_inset
+This requires looking at more examples.
+\end_layout
 
- and 
-\begin_inset Formula $\left[0,0\right]\Mapsto f\Mapsfrom\left[-1\right]$
+\begin_layout Standard
+\begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Up to three levels, the required bracketing reads as 
-\begin_inset Formula 
-\begin{align*}
-\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }m\ge1\\
-\left[k,0\right]\Mapsto\left[k,0,p\right]\Mapsfrom\left[k-1\right] & \mbox{ when }k\ge1\\
-\left[0,0\right]\Mapsto\left[0,0,p\right]\Mapsfrom\left[0,0,0\right]
-\end{align*}
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{\ell}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bracket
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{f}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta_{f}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{r}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0,1\right]\Mapsto\left[0,1,0\right]\Mapsfrom\left[0,0\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0,2\right]\Mapsto\left[0,2,0\right]\Mapsfrom\left[0,1\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0,3\right]\Mapsto\left[0,3,0\right]\Mapsfrom\left[0,2\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+49
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+48
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0,4\right]\Mapsto\left[0,4,0\right]\Mapsfrom\left[0,3\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+97
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
 
 \end_inset
 
-We can deduce that the numbering goes as 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The appending relation in this table is 
+\begin_inset Formula $\eta\left[0,k,0\right]=\left(2\eta\left[0,k\right]+1\right)$
+\end_inset
+
+.
+ Since it is an odd number, it is unique.
+ What about leading digits? Repeating this exercise gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{\ell}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bracket
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{f}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta_{f}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{r}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[1,1\right]\Mapsto\left[1,1,0\right]\Mapsfrom\left[1,0\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+82
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[1,2\right]\Mapsto\left[1,2,0\right]\Mapsfrom\left[1,1\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+162
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[1,3\right]\Mapsto\left[1,3,0\right]\Mapsfrom\left[1,2\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+322
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+160
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[1,4\right]\Mapsto\left[1,4,0\right]\Mapsfrom\left[1,3\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+642
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The general appending relation to move from two digits to three appears
+ to be given by
 \begin_inset Formula 
 \[
-\left[k,m,p\right]=2^{k+p}\left(2\left[k,m\right]+1\right)=2^{k+p}\left(\left[k,m+1\right]+1\right)
+\left[k,m,0\right]=2^{k}\left(2\left[k,m\right]+1\right)
 \]
 
 \end_inset
 
-At four levels, we have 
-\begin_inset Formula $\left[0,0,0,0\right]=2\left[0,0,0\right]+1$
+The bracket relations at this level are
+\begin_inset Formula 
+\begin{align*}
+\left[k,m\right]\Mapsto\left[k,m,0\right]\Mapsfrom\left[k,m-1\right] & \mbox{ when }m\ge1
+\end{align*}
+
 \end_inset
 
- and generally 
-\begin_inset Formula $\left[0,0,0,q\right]=2^{q}\left(2\left[0,0,0\right]+1\right)$
+
+\begin_inset Formula 
+\begin{align*}
+\left[k,m\right]\Mapsto\left[k,m,p\right]\Mapsfrom\left[k,m,p-1\right] & \mbox{ when }p\ge1
+\end{align*}
+
+\end_inset
+
+The above hold only for 
+\begin_inset Formula $m\ge1$
 \end_inset
 
 .
- The full expression is 
+ There are relations for 
+\begin_inset Formula $m=0$
+\end_inset
+
+ but they take a slightly different form, as shown in the table before.
+ The first row repeats an eaerlie result.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{\ell}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bracket
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{f}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta_{f}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{r}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0,0\right]\Mapsto\left[0,0,0\right]\Mapsfrom\left[-1\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[1,0\right]\Mapsto\left[1,0,0\right]\Mapsfrom\left[0\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+42
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[2,0\right]\Mapsto\left[2,0,0\right]\Mapsfrom\left[1\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+292
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+136
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[3,0\right]\Mapsto\left[3,0,0\right]\Mapsfrom\left[2\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2184
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Apparently, the relation given before, 
+\begin_inset Formula $\left[k,m,0\right]=2^{k}\left(2\left[k,m\right]+1\right)$
+\end_inset
+
+ is valid even for 
+\begin_inset Formula $m=0$
+\end_inset
+
+.
+ What has changed is the first bracketing relationship: 
+\begin_inset Formula 
+\begin{align*}
+\left[k,0\right]\Mapsto\left[k,0,0\right]\Mapsfrom\left[k-1\right]
+\end{align*}
+
+\end_inset
+
+This can be unified with the earlier bracketing relations with a parlor
+ trick, which is to write 
+\begin_inset Formula $\left[k,-1\right]=\left[k-1\right]$
+\end_inset
+
+.
+ This will prove to be a generic trick: it provides for a way of reaching
+ the border wall of an earlier discontinuity.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+We can deduce that the numbering goes as 
+\end_layout
+
+\begin_layout Standard
+At four levels, the full expression is xxx but this may be wrong...
 \begin_inset Formula 
 \[
-\left[k,m,p,q\right]=2^{k+m+q}\left(2\left[k,m,p\right]+1\right)
+\left[k,m,p,0\right]=2^{k+m}\left(2\left[k,m,p\right]+1\right)
 \]
 
 \end_inset
