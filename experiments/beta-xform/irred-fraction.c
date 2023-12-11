@@ -354,7 +354,7 @@ long get_bracket_right(long n)
 	int cfrac[SZ];
 	int len = index_to_fbaire(cfrac, n);
 	printf("Enter get_right, n=%ld len=%d ", n, len);
-	print_seq(cfrac, len, "seq", "\n");
+	print_seq(cfrac, len, "seq ", "\n");
 
 	int dig = len-1;
 
@@ -381,9 +381,9 @@ long get_bracket_right(long n)
 		len = 1;
 	}
 
-	print_seq(cfrac, len, "right seq", "\n");
+	print_seq(cfrac, len, "computed right seq ", "\n");
 	long nright = index_from_fbaire(cfrac, len);
-	printf("right idx=%ld\n", nright);
+	printf("computed right idx=%ld\n", nright);
 	return nright;
 }
 
@@ -663,30 +663,15 @@ totg-gprev);
 #endif
 #endif
 
-// =================================================================
-
-int main(int argc, char* argv[])
+void print_debug_info(long seqno)
 {
-// #define SEQUENCE_EXPLORER
-#ifdef SEQUENCE_EXPLORER
-	// Obtain one sequence from command line. Print it's index.
-	if (1 == argc) {
-		fprintf(stderr, "Usage: %s <sequence>\n", argv[0]);
-		exit(1);
-	}
-	int len = argc-1;
-	int cfrac[SZ];
-	for (int i=0; i<len; i++) cfrac[i] = atoi(argv[i+1]);
-	int seqno = index_from_fbaire(cfrac, len);
-	printf("Index: %d len=%d", seqno, len);
-	print_seq(cfrac, len, " provided ", "\n");
-
 	malloc_gold(seqno+1);
 	validate_bracket(seqno);
 
+	int cfrac[SZ];
 	int slen = index_to_fbaire(cfrac, seqno);
-	printf("Index: %d len=%d", seqno, slen);
-	print_seq(cfrac, slen, " reconstruct ", "\n");
+	printf("Index: %ld len=%d", seqno, slen);
+	print_seq(cfrac, slen, " sequence ", "\n");
 
 	double beta = find_gold(seqno);
 
@@ -701,6 +686,28 @@ int main(int argc, char* argv[])
 		printf("Invalid index; factors to %g = %ld = ", feta, factor);
 		print_seq(cfrac, slen, "", "\n");
 	}
+}
+
+// =================================================================
+
+int main(int argc, char* argv[])
+{
+// #define SEQUENCE_EXPLORER
+#ifdef SEQUENCE_EXPLORER
+	// Obtain one sequence from command line. Print it's index.
+	if (1 == argc) {
+		fprintf(stderr, "Usage: %s <sequence>\n", argv[0]);
+		exit(1);
+	}
+	int len = argc-1;
+	int cfrac[SZ];
+	for (int i=0; i<len; i++) cfrac[i] = atoi(argv[i+1]);
+	long seqno = index_from_fbaire(cfrac, len);
+
+	printf("Index: %ld len=%d", seqno, len);
+	print_seq(cfrac, len, " provided ", "\n");
+
+	print_debug_info(seqno);
 #endif
 
 #define INDEX_EXPLORER
@@ -710,20 +717,8 @@ int main(int argc, char* argv[])
 		fprintf(stderr, "Usage: %s <index>\n", argv[0]);
 		exit(1);
 	}
-	long ni = atol(argv[1]);
-	malloc_gold(ni+1);
-	double beta = find_gold(ni);
-
-	int cfrac[SZ];
-	int len = index_to_fbaire(cfrac, ni);
-	print_seq(cfrac, len, "dbg", "\n");
-
-	int order = iteration_period(beta);
-	printf("got %d ", order);
-	prt_bitstr(ni, "bits", "\n");
-
-	validate_bracket(ni);
-	exit(0);
+	long nidx = atol(argv[1]);
+	print_debug_info(nidx);
 #endif
 
 // #define PRINT_INDEX
