@@ -253,13 +253,14 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
 // Given a polynomial index, set "cfrac" to the matching sequence.
 // Return the length of the cfrac sequence.
 // This is the inverse of what index_from_fbaire() does.
-int index_to_fbaire(int cfrac[], unsigned long pidx)
+int index_to_fbaire(int cfrac[], unsigned long pindex)
 {
-	#define DBG(X) printf X
-	// #define DBG(X)
-	DBG(("enter index_to_fbaire pidx=%ld\n", pidx));
+	// #define DBG(X) printf X
+	#define DBG(X)
+	DBG(("enter index_to_fbaire pidx=%ld\n", pindex));
 
 	// Count leading powers of two.
+	long pidx = pindex;
 	int msum = 0;
 	while (0 == pidx %2) { msum ++; pidx /=2; }
 
@@ -283,18 +284,23 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 	int len = index_to_fbaire(cfrac, pidx);
 	DBG(("post recursion for pidx=%ld msum=%d new len=%d\n", pidx, msum, len));
 
-	// Pass rejection slips back up the chain.
-	if (len < 0) return len;
-
-	print_seq(cfrac, len, "pre-append ", "\n");
-
-	// What's left over is m_k
-	int ord = order(pidx) - 2;
-	DBG(("pre ord for pidx=%ld msum=%d ord=%d\n", pidx, msum, ord));
-	msum -= ord;
-	if (msum < 0) msum = 0;
-	cfrac[len] = msum;
+	// After recursion, we always append a new digit.
+	// Start by appending a zero, then get what the resulting
+	// sequence encodes. The ratio of that, to the pindex should
+	// be an exact power of two. Get that, and that will be our
+	// trailing digit.  The need for this is to distinguish
+	// index 10 which is a leader, but is a muliple of (invalid) index 5
+	// and 14, which is a follower of 7.
+	cfrac[len] = 0;
 	cfrac[len+1] = -555; // Poison end-of-string marker
+	// print_seq(cfrac, len+1, "baseline ", "\n");
+	long base = index_from_fbaire(cfrac, len+1);
+	pidx = pindex / base;
+
+	msum = 0;
+	while (0 == pidx %2) { msum ++; pidx /=2; }
+	cfrac[len] = msum;
+	DBG(("post-base for pidx=%ld base=%ld msum=%d \n", pindex, base, msum));
 
 	DBG(("-----\n"));
 	// Return the length of the beast.
@@ -745,7 +751,7 @@ int main(int argc, char* argv[])
 
 	int cfrac[SZ];
 	malloc_gold(1024);
-#if 1
+#if 0
 	long ni = 53;
 	ni = 14;
 	double beta = find_gold(ni);
@@ -753,7 +759,7 @@ int main(int argc, char* argv[])
 	print_seq(cfrac, len, "dbg", "\n");
 
 	int order = iteration_period(beta);
-	printf("got %d\n", order);
+	printf("got %d ", order);
 	prt_bitstr(ni, "bits", "\n");
 	exit(0);
 #endif
