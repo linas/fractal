@@ -253,7 +253,7 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 {
 	// #define DBG(X) printf X
 	#define DBG(X)
-	DBG(("enter pidx=%ld\n", pidx));
+	DBG(("enter index_to_fbaire pidx=%ld\n", pidx));
 
 	// Count leading powers of two.
 	int msum = 0;
@@ -273,7 +273,6 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 
 	// If we are here, pidx is odd; truncate and try again.
 	pidx = (pidx-1)/2;
-
 	DBG(("red after odd to pidx=%ld msum=%d\n", pidx, msum));
 
 	// Recurse.
@@ -283,10 +282,11 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 	// Pass rejection slips back up the chain.
 	if (len < 0) return len;
 
-	// print_seq(cfrac, len, "", "\n");
+	// print_seq(cfrac, len, "to fb ", "\n");
 
 	// What's left over is m_k
-	int ord = order(pidx);
+	int ord = order(pidx) - 2;
+	DBG(("pre ord for pidx=%ld msum=%d ord=%d\n", pidx, msum, ord));
 	msum -= ord;
 	if (msum < 0) msum = 0;
 	cfrac[len] = msum;
@@ -299,21 +299,21 @@ int index_to_fbaire(int cfrac[], unsigned long pidx)
 // =================================================================
 #define SZ 60
 
-long get_right(long n)
+// Given polynomial index n, return the index defining the right
+// side of the bracket containing this index.
+long get_bracket_right(long n)
 {
 	int cfrac[SZ];
 	int len = index_to_fbaire(cfrac, n);
-	printf("Enter get_right, n=%ld len=%d ", n, len);
-	print_seq(cfrac, len, "seq", "\n");
+	// printf("Enter get_right, n=%ld len=%d ", n, len);
+	// print_seq(cfrac, len, "seq", "\n");
 
-	// Get the last digit. If it's positive, demote.
 	int dig = len-1;
-	if (0 < cfrac[dig])
-		cfrac[dig]--;
-	else
+
+	// If the last digit is zero, demote. Keep on demoting,
+	// as long as we find zeros.
+	if (0 == cfrac[dig])
 	{
-		// If last digits is zero, demote. Keep on demoting,
-		// if its zero again.
 		do {
 			len = dig;
 			cfrac[dig] = -444;
@@ -321,9 +321,22 @@ long get_right(long n)
 		}
 		while (0 <= dig && 0 == cfrac[dig]);
 	}
+
+	// Get the last digit. If it's positive, demote.
+	if (0 <= dig && 0 < cfrac[dig])
+		cfrac[dig]--;
+
 	long nright = index_from_fbaire(cfrac, len);
-	printf("right idx=%ld\n", nright);
+	// printf("right idx=%ld\n", nright);
 	return nright;
+}
+
+long get_bracket_left(long n)
+{
+	long nleft = n;
+	while (0 == nleft%2) nleft /=2;
+	if (0 < nleft) nleft = (nleft-1) / 2;
+	return nleft;
 }
 
 /*
@@ -342,9 +355,7 @@ void validate_bracket(long n)
 
 	// Verify the left bracket by ripping out powers of two until
 	// an odd number is reached.
-	long nleft = n;
-	while (0 == nleft%2) nleft /=2;
-	if (0 < nleft) nleft = (nleft-1) / 2;
+	long nleft = get_bracket_left(n);
 
 	double gleft = 1.0; // pure power terminates at beta=1
 	if (0 < nleft) gleft = find_gold(nleft);
@@ -352,7 +363,7 @@ void validate_bracket(long n)
 	if (gleft >= gold) printf("Error: bad left bracket at %ld\n", n);
 
 	// Verify right bracketing by knocking off only one power of two.
-	long nright = get_right(n);
+	long nright = get_bracket_right(n);
 	double gright = find_gold(nright);
 	if (gright < 0.5) printf("Error: no such right index %ld\n", (n-1)/2);
 	if (gright <= gold)
@@ -702,6 +713,7 @@ int main(int argc, char* argv[])
 
 // #define PRINT_INDEX
 #ifdef PRINT_INDEX
+	// Do nothing except print beta and indexes
 	int nmax = 64;
 	malloc_gold(nmax);
 	for (int n=1; n<nmax; n ++)
@@ -716,26 +728,36 @@ int main(int argc, char* argv[])
 		}
 	}
 #endif
-	malloc_gold(1024);
-	double beta = find_gold(53);
-	int order = iteration_order(beta);
-	printf("got %d\n", order);
-	prt_bitstr(53, "bits", "\n");
 
 	int cfrac[SZ];
-	for (int n=1; n<16; n++)
+	malloc_gold(1024);
+#if 0
+	long ni = 53;
+	double beta = find_gold(ni);
+	int len = index_to_fbaire(cfrac, ni);
+	print_seq(cfrac, len, "dbg", "\n");
+
+	int order = iteration_order(beta);
+	printf("got %d\n", order);
+	prt_bitstr(ni, "bits", "\n");
+#endif
+
+	for (long n=1; n<16; n++)
 	{
 		double beta = find_gold(n);
 		if (beta < 0.5) continue;
 
 		validate_bracket(n);
+		long nleft = get_bracket_left(n);
+		long nright = get_bracket_right(n);
+		printf("bracket (%ld |=> %ld <=| %ld) ", nleft, n, nright);
 		printf("gold=%g ", beta);
 		prt_bitstr(n, "bits", "");
 
 		for (int i=0; i<SZ; i++) cfrac[i] = -666;
 		int len = index_to_fbaire(cfrac, n);
 		if (len < 0)
-			printf("\nError: missing representation for n=%d\n", n);
+			printf("\nError: missing representation for n=%ld\n", n);
 		print_seq(cfrac, len, "", "\n");
 		printf("-------\n");
 	}
