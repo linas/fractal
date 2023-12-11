@@ -243,7 +243,7 @@ long index_from_fbaire(int cfrac[], int len)
 	}
 
 	long leader = index_from_fbaire(cfrac, len-1);
-	if (0 > leader) return -1; // avoid overflow
+	if (0 > leader) return leader; // report overflow
 
 	long follower = 2*leader + 1;
 	// printf("leader is %ld\n", follower);
@@ -262,11 +262,11 @@ long index_from_fbaire(int cfrac[], int len)
 printf("shift=%d\n", shift);
 #endif
 
-	// More careful overflow check
+	// Perform overflow check, to avoid, well, overflows.
 	int nbits = 0;
 	long fo = follower;
 	while (fo >>= 1) ++nbits;
-	if (60 < nbits+shift) return -1;
+	if (60 < nbits+shift) return -555;
 
 	follower *= 1UL << shift;
 
@@ -330,6 +330,7 @@ int index_to_fbaire(int cfrac[], unsigned long pindex)
 	cfrac[len+1] = -555; // Poison end-of-string marker
 	// print_seq(cfrac, len+1, "baseline ", "\n");
 	long base = index_from_fbaire(cfrac, len+1);
+if (0 > base) return base; // overflow condition
 	pidx = pindex / base;
 if (0 == pidx) pidx = 1; // fail
 
@@ -414,6 +415,10 @@ long get_bracket_left(long n)
 bool validate_bracket(long n)
 {
 	bool ok = true;
+
+	if (-1 > n)
+		{ printf("Error: overflow index %ld\n", n); return false; }
+
 	double gold = find_gold(n);
 
 	if (gold < 1.0)
@@ -539,7 +544,7 @@ void recurse_fbaire(int cfrac[], int len,
  */
 void generate_fbaire(int norder, int depth, int length, bool do_print)
 {
-	int nmax = (1<<norder) + 1;
+	long nmax = (1UL<<norder) + 1;
 
 	malloc_gold(nmax);
 	fill_gold(nmax);
@@ -730,9 +735,9 @@ int main(int argc, char* argv[])
 	exit(0);
 #endif
 
-	int nord = 1<<16;
-	malloc_gold(nord);
-	for (long n=1; n<nord; n++)
+	long nmax = 1UL<<16;
+	malloc_gold(nmax);
+	for (long n=1; n<nmax; n++)
 	{
 		double beta = find_gold(n);
 		if (beta < 0.5) continue;
@@ -756,7 +761,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define SANITY_CHECK
+// #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Run validation on the recursively-generated sequences.
 	// Same as the odometer graph below, but does not print data.
@@ -772,18 +777,18 @@ int main(int argc, char* argv[])
 	// Using order==24 takes about 50 seconds to find gold.
 	if (24 < norder)
 		printf("Caution: large orders 24 < %d take a long setup time\n", norder);
+	if (60 < norder) exit(-1);
 
-	double niter = pow (maxdepth, maxlen);
-	if (1e9 < niter) {
-		printf("Caution: number of iterations %g is depth^length = %d ^ %d\n",
-			niter, maxdepth, maxlen);
-	}
-	if (1e12 < niter) exit(-1);
+	double space = pow (maxdepth, maxlen);
+	long niter = (long) floor(space);
+	if ((1UL<<norder) < niter) niter = 1UL<<norder;
+	printf("Predict %ld iterations\n", niter);
+	if (1UL<<44 < niter) exit(-1);
 
 	generate_fbaire(norder, maxdepth, maxlen, false);
 #endif
 
-// #define ODOMETER_GRAPH
+#define ODOMETER_GRAPH
 #ifdef ODOMETER_GRAPH
 	// Generate expansions in sequential order, then print the equivalent
 	// index, beta and continued-frac equivalent. Used to make the odometer
@@ -803,18 +808,20 @@ int main(int argc, char* argv[])
 	int norder = atoi(argv[1]);
 	if (24 < norder)
 		printf("Caution: large orders 24 < %d take a long setup time\n", norder);
+	if (60 < norder) exit(-1);
 
-	double niter = pow (maxdepth, maxlen);
-	if (1e9 < niter) {
-		printf("Caution: number of iterations %g is depth^length = %d ^ %d\n",
-			niter, maxdepth, maxlen);
-	}
-	if (1e12 < niter) exit(-1);
+	double space = pow (maxdepth, maxlen);
+	long niter = (long) floor(space);
+	if ((1UL<<norder) < niter) niter = 1UL<<norder;
+	printf("Predict %ld iterations\n", niter);
+	if (1UL<<44 < niter) exit(-1);
 
-	int nmax = (1<<norder) + 1;
+	long nmax = (1UL<<norder) + 1;
 
-	printf("#\n# Max order of polynomials = %d num=2^order = %d\n", norder, nmax);
-	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n#\n", maxdepth, maxlen);
+	printf("#\n# Max order of polynomials = %d num=2^order = %ld\n", norder, nmax);
+	printf("#\n# Iterate to maxdepth=%d maxlen=%d\n", maxdepth, maxlen);
+	printf("# Predict %ld iterations\n", niter);
+	printf("#\n");
 	fflush (stdout);
 	generate_fbaire(norder, maxdepth, maxlen, true);
 #endif
