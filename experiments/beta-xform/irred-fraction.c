@@ -74,17 +74,17 @@ void fill_gold(long n)
 
 // Return true if the polynomial root is properly bracketed for
 // the index specifying that polynomial.
-bool zero_is_bracketed(int n, double gold)
+long zero_bracket_factor(long n, double gold)
 {
 	// Its valid only if it is in the middle.
 #define EPS 2.0e-15
 	// printf("---------\ncheck bracketing for gold=%20.16g at n=%d\n", gold, n);
 	bool ork = true;
-	int nhl = n;
-	int nh = nhl >> 1;
+	long nhl = n;
+	long nh = nhl >> 1;
 	while (nh)
 	{
-		//printf("walk to n=%d nhl=%d nh=%d znh=%g go=%g comp=%d bad=%d\n",
+		//printf("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n",
 		//       n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
 		if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
 		nhl = nh;
@@ -92,7 +92,18 @@ bool zero_is_bracketed(int n, double gold)
 	}
 	// printf("Bracket says ork=%d\n", ork);
 
-	return ork;
+	if (ork) return -1;
+	return nh;
+}
+
+/**
+ * Return the single, unique real zero of the n'th bitstring polynomial.
+ * Recall most values of `n` do NOT correspond to a golden polynomial.
+ */
+double find_poly_zero(long n)
+{
+	fill_gold(n);
+	return zero[n];
 }
 
 /**
@@ -103,11 +114,8 @@ bool zero_is_bracketed(int n, double gold)
 double find_gold(long n)
 {
 	if (-1 == n) return 1.0;
-
-	fill_gold(n);
-	double gold = zero[n];
-
-	if (zero_is_bracketed(n, gold)) return gold;
+	double gold = find_poly_zero(n);
+	if (-1 == zero_bracket_factor(n, gold)) return gold;
 	return 0.0;
 }
 
@@ -158,13 +166,13 @@ int order(unsigned long n)
 void prt_bitstr(unsigned long n, const char* pfx, const char* sfx)
 {
 	int ord = order(n);
-	printf("%s o(%d) %ld={", pfx, ord, n);
+	printf("%s|%d| %ld={", pfx, ord, n);
 	unsigned long bitstr = 2*n+1;
 	for (int i=0; i<ord; i++)
 	{
 		printf("%ld", 0x1 & bitstr>>(ord-i-1));
 	}
-	printf("} %s", sfx);
+	printf("}%s", sfx);
 }
 
 // =================================================================
@@ -202,8 +210,9 @@ double reverse_cf_to_real(int cfrac[], int len)
 
 void print_seq(int cfrac[], int len, char* head, char* tail)
 {
-	printf("%s [", head);
-	for (int i=0; i<len; i++) printf(" %d", cfrac[i]);
+	printf("%s[", head);
+	if (0 <= len) printf("%d", cfrac[0]);
+	for (int i=1; i<len; i++) printf(" %d", cfrac[i]);
 	printf("]%s", tail);
 }
 
@@ -728,11 +737,26 @@ int main(int argc, char* argv[])
 	for (int i=0; i<len; i++) cfrac[i] = atoi(argv[i+1]);
 	int seqno = index_from_fbaire(cfrac, len);
 	printf("Index: %d len=%d", seqno, len);
-	print_seq(cfrac, len, " input", "\n");
+	print_seq(cfrac, len, " provided ", "\n");
 
 	int slen = index_to_fbaire(cfrac, seqno);
 	printf("Index: %d len=%d", seqno, slen);
-	print_seq(cfrac, slen, " reconstruct", "\n");
+	print_seq(cfrac, slen, " reconstruct ", "\n");
+
+	malloc_gold(seqno+1);
+	double beta = find_gold(seqno);
+
+	if (0.5 < beta) printf("beta = %g\n", beta);
+
+	if (beta < 0.5)
+	{
+		beta = find_poly_zero(seqno);
+		long factor = zero_bracket_factor(seqno, beta);
+		double feta = find_poly_zero(factor);
+		slen = index_to_fbaire(cfrac, factor);
+		printf("Invalid index; factors to %g = %ld = ", feta, factor);
+		print_seq(cfrac, slen, "", "\n");
+	}
 #endif
 
 // #define PRINT_INDEX
