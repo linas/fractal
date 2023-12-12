@@ -21527,7 +21527,7 @@ This can be unified with the earlier bracketing relations with a parlor
 \begin_layout Standard
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="5">
+<lyxtabular version="3" rows="6" columns="5">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -21588,6 +21588,56 @@ Bracket
 \end_inset
 
 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0,0,0\right]\Mapsto\left[0,0,0,0\right]\Mapsfrom\left[-1\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
 \end_layout
 
 \end_inset
@@ -21848,7 +21898,7 @@ There are more cases to check.
 \begin_layout Standard
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="10" columns="5">
+<lyxtabular version="3" rows="11" columns="5">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -21909,6 +21959,56 @@ Bracket
 \end_inset
 
 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0,0,0\right]\Mapsto\left[0,0,0,0\right]\Mapsfrom\left[-1\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
 \end_layout
 
 \end_inset
@@ -22957,38 +23057,79 @@ Bracket
 \end_layout
 
 \begin_layout Standard
-so
+The bracketing relation is still
+\begin_inset Formula 
+\begin{align*}
+\left[k,m,p\right]\Mapsto\left[k,m,p,0\right]\Mapsfrom\left[k,m,p-1\right]
+\end{align*}
+
+\end_inset
+
+provided that several parlor tricks are applied.
+ These are 
+\begin_inset Formula $\left[k,0,-1\right]=\left[k,-1\right]=\left[k-1\right]$
+\end_inset
+
+ for several of the lines, and also 
+\begin_inset Formula $\left[k,m,-1\right]=\left[k,m-1\right]$
+\end_inset
+
+ for others.
+\end_layout
+
+\begin_layout Standard
+The appending relation is
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\left[k,m,p,0\right]=2^{k+m}\left(2\left[k,m,p\right]+1\right)
+\left[k,m,p,0\right]=2^{k+m}\left(2\left[k,m,p\right]+1\right)\;\mbox{ for }k>0
 \]
 
 \end_inset
 
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-At four levels, the full expression is xxx but this may be wrong...
+Lets copy the earlier ones over, and compare.
+ We also had
 \begin_inset Formula 
 \[
-\left[k,m,p,0\right]=2^{k+m}\left(2\left[k,m,p\right]+1\right)
+\left[0,m,p,0\right]=2\left[0,m,p\right]+1\;\mbox{ for }p>0
 \]
 
 \end_inset
 
-That's enough to spot the pattern; it is recursively given by
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[0,m,0,0\right]=2^{m}\left(2\left[0,m,0\right]+1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What's the generalization?
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+That's XXX the below is wrong
 \begin_inset Formula 
 \begin{equation}
 \left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)\label{eq:recursive-index}

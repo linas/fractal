@@ -3,7 +3,7 @@ set term png size 1024,768
 set out 'normi-dbg.png'
 
 set yrange [1:2]
-set xrange [1.50:2]
+set xrange [1.60:2]
 
 ## -------------------------
 ## Debug crazy orbit for index 53
@@ -190,16 +190,30 @@ set xrange [1.50:2]
 
 # -------------------------
 # Debug crazy orbit for index 2600
-#b162
-x=1.53416
+##b162
+#x=1.53416
+#set arrow from x,1 to x,2 nohead linecolor "red"
+#
+## beta 2600
+#x= 1.53701
+#set arrow from x,1 to x,2 nohead linecolor "green"
+#
+### b20
+#x=1.5385
+#set arrow from x,1 to x,2 nohead linecolor "blue"
+
+# -------------------------
+# Debug crazy orbit for index 15
+#b7
+x=1.92756
 set arrow from x,1 to x,2 nohead linecolor "red"
 
-# beta 2600
-x= 1.53701
+# beta 15
+x= 1.96595
 set arrow from x,1 to x,2 nohead linecolor "green"
 
-# b20
-x=1.5385
+# b0
+x=2
 set arrow from x,1 to x,2 nohead linecolor "blue"
 
 plot "normie.dat" using 2:3 with lines linewidth 2 title ""
