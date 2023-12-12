@@ -254,30 +254,52 @@ long index_from_fbaire(int cfrac[], int len)
 	// Trailing digit encodes index-doubling
 	int shift = cfrac[len-1];
 
-	// Special casing, depending onthe sequence length
+	// Special casing, depending on the sequence length
+	// Based on inferences documented in the diary.
 	if (2 == len || 3 == len)
 	{
 		shift += cfrac[0];
 	}
 	else if (4 == len)
 	{
+		// Yes this looks crazy, but it is correct.
 		if (0 < cfrac[0] || 0 == cfrac[2]) shift += cfrac[0] + cfrac[1];
 		// else no shift.
 	}
 	else if (4 < len)
 	{
+		if (0 < cfrac[0])
+		{
+			for (int j=0; j< len-2; j++)
+				shift += cfrac[j];
+		}
+#if FAIL_59
+		// Generalization of above.
+		// Fails for 59=[0 0 1 0 0] which should have no shift.
+		if (0 < cfrac[0] || 0 == cfrac[len-2])
+		{
+			for (int j=0; j< len-2; j++)
+				shift += cfrac[j];
+		}
+#endif
+#if FAIL
 		// This fails in complicated ways.
 		int bump = len-2;
 		if (bump < 0) bump = 0;
 		for (int j=0; j< bump; j++)
 			shift += cfrac[j];
 
+		// This if-statement is an attempt to cure some of the
+		// ills. It does indeed cure some of them; just not all
+		// of them. Can be seen easily enough via tests below.
+		// Alas ...
 		if (0 == cfrac[len-1])
 		{
 			double gold = find_gold(follower);
 			if (0.5 < gold) return follower;
 			// else follower *= 1UL << shift;
 		}
+#endif
 	}
 #endif
 
