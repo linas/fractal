@@ -348,8 +348,8 @@ long get_bracket_right(long n)
 {
 	int cfrac[SZ];
 	int len = index_to_fbaire(cfrac, n);
-	printf("Enter get_right, n=%ld len=%d ", n, len);
-	print_seq(cfrac, len, "seq ", "\n");
+	// printf("Enter get_right, n=%ld len=%d ", n, len);
+	// print_seq(cfrac, len, "seq ", "\n");
 
 	int dig = len-1;
 
@@ -376,9 +376,9 @@ long get_bracket_right(long n)
 		len = 1;
 	}
 
-	print_seq(cfrac, len, "computed right seq ", "\n");
+	// print_seq(cfrac, len, "computed right seq ", "\n");
 	long nright = index_from_fbaire(cfrac, len);
-	printf("computed right idx=%ld\n", nright);
+	// printf("computed right idx=%ld\n", nright);
 	return nright;
 }
 
@@ -789,9 +789,9 @@ int main(int argc, char* argv[])
 			long nright = get_bracket_right(n);
 			printf("bracket (%ld |=> %ld <=| %ld) ", nleft, n, nright);
 			printf("=%g=", beta);
-			prt_bitstr(n, "", "");
-			print_seq(cfrac, len, "", "\n");
-			printf("-------\n");
+			prt_bitstr(n, " ", "");
+			print_seq(cfrac, len, " ", "\n");
+			// printf("-------\n");
 		}
 	}
 #endif
