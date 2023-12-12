@@ -254,13 +254,24 @@ long index_from_fbaire(int cfrac[], int len)
 	// Trailing digit encodes index-doubling
 	int shift = cfrac[len-1];
 
-	// Leading digits provide unique coding for the 2[]+1 operation
-	int bump = len-2;
-	if (bump < 0) bump = 0;
-	for (int j=0; j< bump; j++)
-		shift += cfrac[j];
-
-	if (2 == len) shift += cfrac[0];
+	// Special casing, depending onthe sequence length
+	if (2 == len || 3 == len)
+	{
+		shift += cfrac[0];
+	}
+	else if (4 == len)
+	{
+		if (0 < cfrac[0] || 0 == cfrac[2]) shift += cfrac[0] + cfrac[1];
+		// else no shift.
+	}
+	else if (4 < len)
+	{
+		// This fails in complicated ways.
+		int bump = len-2;
+		if (bump < 0) bump = 0;
+		for (int j=0; j< bump; j++)
+			shift += cfrac[j];
+	}
 #endif
 
 #if DECODE_53_FAIL
@@ -785,7 +796,7 @@ int main(int argc, char* argv[])
 	print_debug_info(seqno);
 #endif
 
-#define INDEX_EXPLORER
+// #define INDEX_EXPLORER
 #ifdef INDEX_EXPLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
@@ -820,7 +831,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define VALIDATE_INDEX
+#define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
