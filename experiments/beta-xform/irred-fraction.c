@@ -248,14 +248,44 @@ long index_from_fbaire(int cfrac[], int len)
 	long follower = 2*leader + 1;
 	// printf("leader is %ld\n", follower);
 
+#if 1
 	// Trailing digit encodes index-doubling
 	int shift = cfrac[len-1];
 
 	// Leading digits provide unique coding for the 2[]+1 operation
+	int bump = len-3;
+	if (bump < 0) bump = 0;
+	for (int j=0; j< bump; j++)
+		shift += cfrac[j];
+
+	if (2 == len) shift += cfrac[0];
+#endif
+
+#ifdef DECODE_TEN_FAIL
+	// returns 5 instead of 10 for [1,0]
 	int bump = len-2;
 	if (bump < 0) bump = 0;
 	for (int j=0; j< bump; j++)
 		shift += cfrac[j];
+#endif
+
+#ifdef LUCKY_THIRTEEN
+	// fails on [0 1 0] which should get 13 but gets 26
+	// Basically, should hole punch like below but ...
+	int shift = 0;
+	for (int j=0; j< len; j++)
+		shift += cfrac[j];
+#endif
+
+#ifdef THREE_HOLE_PUNCH
+	// fails for 29 which is [0 0 1 0] but decodes to 58
+	int shift = 0;
+	for (int j=0; j< len; j++)
+		shift += cfrac[j];
+
+	// wtf hole bunch
+	if (3 == len) shift -= cfrac[1];
+#endif
 
 	// Perform overflow check, to avoid, well, overflows.
 	int nbits = 0;
@@ -265,6 +295,7 @@ long index_from_fbaire(int cfrac[], int len)
 
 	follower *= 1UL << shift;
 
+	// printf("follower is %ld after shift=%d\n", follower, shift);
 	return follower;
 }
 
@@ -327,7 +358,7 @@ int index_to_fbaire(int cfrac[], unsigned long pindex)
 	long base = index_from_fbaire(cfrac, len+1);
 if (0 > base) return base; // overflow condition
 	pidx = pindex / base;
-if (0 == pidx) pidx = 1; // fail
+if (0 == pidx) pidx = 1; // terrible algorithm fail
 
 	msum = 0;
 	while (0 == pidx %2) { msum ++; pidx /=2; }
@@ -669,7 +700,6 @@ totg-gprev);
 void print_debug_info(long seqno)
 {
 	malloc_gold(seqno+1);
-	validate_bracket(seqno);
 
 	int cfrac[SZ];
 	int slen = index_to_fbaire(cfrac, seqno);
@@ -690,6 +720,9 @@ void print_debug_info(long seqno)
 		print_seq(cfrac, slen, "", "\n");
 	}
 
+#if 1
+	validate_bracket(seqno);
+
 	long nleft = get_bracket_left(seqno);
 	double gleft = find_gold(nleft);
 	slen = index_to_fbaire(cfrac, nleft);
@@ -701,6 +734,7 @@ void print_debug_info(long seqno)
 	slen = index_to_fbaire(cfrac, nright);
 	printf("Right limit: %ld = %g = ", nright, gright);
 	print_seq(cfrac, slen, "", "\n");
+#endif
 }
 
 // =================================================================
@@ -725,7 +759,7 @@ int main(int argc, char* argv[])
 	print_debug_info(seqno);
 #endif
 
-#define INDEX_EXPLORER
+// #define INDEX_EXPLORER
 #ifdef INDEX_EXPLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
@@ -760,7 +794,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define VALIDATE_INDEX
+#define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
