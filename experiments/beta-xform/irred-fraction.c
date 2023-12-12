@@ -251,16 +251,11 @@ long index_from_fbaire(int cfrac[], int len)
 	// Trailing digit encodes index-doubling
 	int shift = cfrac[len-1];
 
-	// Leading digit provides unique coding for the 2[]+1 operation
-	if (1<len) shift += cfrac[0];
-
-#if 0
-	int bump = len-3;
+	// Leading digits provide unique coding for the 2[]+1 operation
+	int bump = len-2;
 	if (bump < 0) bump = 0;
-	for (int j=0; j<= bump; j++)
+	for (int j=0; j< bump; j++)
 		shift += cfrac[j];
-printf("shift=%d\n", shift);
-#endif
 
 	// Perform overflow check, to avoid, well, overflows.
 	int nbits = 0;
@@ -441,7 +436,15 @@ bool validate_bracket(long n)
 	long nright = get_bracket_right(n);
 	double gright = find_gold(nright);
 	if (gright < 0.5)
-		{ printf("Error: no such right index %ld for %ld\n", nright, n); ok = false; }
+	{
+		printf("Error: no such right index %ld for %ld\n", nright, n);
+		int cfrac[SZ];
+		int len = index_to_fbaire(cfrac, n);
+		print_seq(cfrac, len, "Index has seq ", "");
+		len = index_to_fbaire(cfrac, nright);
+		print_seq(cfrac, len, " <=| bad right seq ", "\n");
+		ok = false;
+	}
 	if (gright <= gold)
 		{ printf("Error: bad right bracket at %ld: nright=%ld gold=%g gright=%g\n",
 			n, nright, gold, gright); ok = false; }
@@ -453,7 +456,7 @@ bool validate_bracket(long n)
 	if (n != seqno)
 	{
 		printf("Sequence numbering fail!! in=%ld out=%ld ", n, seqno);
-		print_seq(cfrac, len, "seq", "\n");
+		print_seq(cfrac, len, "seq ", "\n");
 		ok = false;
 	}
 	if (!ok) printf("-------\n");
@@ -780,7 +783,7 @@ int main(int argc, char* argv[])
 		if (len < 0)
 			printf("\nError: missing representation for n=%ld\n", n);
 
-		if (4 == len && 0 == cfrac[3] && 0 != cfrac[0])
+		// if (4 == len && 0 == cfrac[3] && 0 != cfrac[0])
 		{
 			long nleft = get_bracket_left(n);
 			long nright = get_bracket_right(n);
