@@ -271,6 +271,13 @@ long index_from_fbaire(int cfrac[], int len)
 		if (bump < 0) bump = 0;
 		for (int j=0; j< bump; j++)
 			shift += cfrac[j];
+
+		if (0 == cfrac[len-1])
+		{
+			double gold = find_gold(follower);
+			if (0.5 < gold) return follower;
+			// else follower *= 1UL << shift;
+		}
 	}
 #endif
 
