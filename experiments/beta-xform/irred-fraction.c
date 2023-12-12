@@ -222,8 +222,8 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
  */
 long index_from_fbaire(int cfrac[], int len)
 {
-	// #define DST(X)
-	#define DST(X) X
+	#define DST(X)
+	// #define DST(X) X
 	DST(print_seq(cfrac, len, "enter index_from_fbaire", "\n"));
 
 	if (0 > len)
@@ -746,7 +746,7 @@ void print_debug_info(long seqno)
 		print_seq(cfrac, slen, "", "\n");
 	}
 
-#if 0
+#if 1
 	validate_bracket(seqno);
 
 	long nleft = get_bracket_left(seqno);
