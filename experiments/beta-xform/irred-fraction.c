@@ -222,7 +222,9 @@ void print_seq(int cfrac[], int len, char* head, char* tail)
  */
 long index_from_fbaire(int cfrac[], int len)
 {
-	// print_seq(cfrac, len, "enter index_from_fbaire", "\n");
+	// #define DST(X)
+	#define DST(X) X
+	DST(print_seq(cfrac, len, "enter index_from_fbaire", "\n"));
 
 	if (0 > len)
 	{
@@ -246,13 +248,37 @@ long index_from_fbaire(int cfrac[], int len)
 	if (0 > leader) return leader; // report overflow
 
 	long follower = 2*leader + 1;
-	// printf("leader is %ld\n", follower);
+	DST(printf("leader is %ld\n", follower));
 
 #if 1
 	// Trailing digit encodes index-doubling
 	int shift = cfrac[len-1];
 
 	// Leading digits provide unique coding for the 2[]+1 operation
+	int bump = len-2;
+	if (bump < 0) bump = 0;
+	for (int j=0; j< bump; j++)
+		shift += cfrac[j];
+
+	if (2 == len) shift += cfrac[0];
+#endif
+
+#if DECODE_53_FAIL
+	// decodes [0 1 1 0] as 106 should be 53
+	int shift = cfrac[len-1];
+
+	int bump = len-2;
+	if (bump < 0) bump = 0;
+	for (int j=0; j< bump; j++)
+		shift += cfrac[j];
+
+	if (2 == len) shift += cfrac[0];
+#endif
+
+#if DECODE_42_FAIL
+	// Decodes [1 0 0] as 21 should be 42
+	int shift = cfrac[len-1];
+
 	int bump = len-3;
 	if (bump < 0) bump = 0;
 	for (int j=0; j< bump; j++)
@@ -295,7 +321,7 @@ long index_from_fbaire(int cfrac[], int len)
 
 	follower *= 1UL << shift;
 
-	// printf("follower is %ld after shift=%d\n", follower, shift);
+	DST(printf("exit index_from_baire follower is %ld after shift=%d\n", follower, shift));
 	return follower;
 }
 
@@ -720,7 +746,7 @@ void print_debug_info(long seqno)
 		print_seq(cfrac, slen, "", "\n");
 	}
 
-#if 1
+#if 0
 	validate_bracket(seqno);
 
 	long nleft = get_bracket_left(seqno);
@@ -759,7 +785,7 @@ int main(int argc, char* argv[])
 	print_debug_info(seqno);
 #endif
 
-// #define INDEX_EXPLORER
+#define INDEX_EXPLORER
 #ifdef INDEX_EXPLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
@@ -794,7 +820,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define VALIDATE_INDEX
+// #define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
