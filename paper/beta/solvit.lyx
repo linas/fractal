@@ -22227,7 +22227,7 @@ provided that several parlor tricks are applied.
 \end_layout
 
 \begin_layout Standard
-The appending relation is
+The appending relation that describes the above table is
 \end_layout
 
 \begin_layout Standard
@@ -22238,6 +22238,15 @@ The appending relation is
 
 \end_inset
 
+But it is not always correct; it usually works, with various exceptions.
+ For example 
+\begin_inset Formula $\left[1,1,1,0\right]=2\left(2\left[1,1,1\right]+1\right)$
+\end_inset
+
+ and there seem to be others.
+\end_layout
+
+\begin_layout Standard
 Lets copy the earlier ones over, and compare.
  We also had
 \begin_inset Formula 
@@ -22258,20 +22267,13 @@ and
 
 \end_inset
 
-The first and third can be combined:
-\begin_inset Formula 
-\[
-\left[k,m,p,0\right]=2^{k+m}\left(2\left[k,m,p\right]+1\right)\;\mbox{ for }k>0\mbox{ or }p=0
-\]
-
-\end_inset
-
 
 \end_layout
 
 \begin_layout Standard
-What's the generalization? I currently can't find one.
- 
+What's the generalization? I just don't see one.
+ There are already unresolved issues.
+ Yuck.
 \end_layout
 
 \begin_layout Standard
@@ -22308,9 +22310,11 @@ Summary: after a very long and painstaking analysis, we were able to specify
 Despite having a sequence mapping that appears to be direct and obvious,
  there is no corresponding index numbering that it lines up with.
  The indexing for lengths one through four were obtained above.
- Lengths one through three are simple enough.
- Length four, given above, does not offer any clues for how length five
- should be treated.
+ Lengths one through three seem simple enough.
+ They seem to be fool-proof, but given the issues with lenggth four, even
+ these might be broken? Can't tell.
+ Length four, given above, but incompletely, does not offer any clues for
+ how length five should be treated.
 \end_layout
 
 \begin_layout Standard
@@ -22329,22 +22333,15 @@ It is almost enough to allow
 
 \end_inset
 
-However, on rare occasions, it should not be applied.
- One such is 
-\begin_inset Formula $658=\left[1,1,1,0\right]$
-\end_inset
-
-.
- There are 
+However, on relatively rare occasions, it should not be applied.
+ These are easily found.
+ There are no obvious fixes.
+ Even length four is an incomplete mess.
 \end_layout
 
 \begin_layout Standard
-first few levels are carefully extracted above.
- The indexe
-\end_layout
-
-\begin_layout Standard
-extract a bracketing
+Clearly, there's somthing sophisticated going on here, but I don't see the
+ relation to the equally chaotic results from earlier sections.
 \end_layout
 
 \begin_layout Subsection

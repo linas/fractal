@@ -264,7 +264,13 @@ long index_from_fbaire(int cfrac[], int len)
 	{
 		// Yes this looks crazy, but it is correct.
 		bool do_shift = (0 < cfrac[0] || 0 == cfrac[2]);
-		// if (1 == cfrac[0] && 1 == cfrac[1] && 1 == cfrac[2]) do_shift = false;
+
+		// Ouch. Handle one exception. There are many(?) more.
+		if (1 == cfrac[0] && 1 == cfrac[1] && 1 == cfrac[2])
+		{
+			do_shift = false;
+			shift = 1;
+		}
 		if (do_shift) shift += cfrac[0] + cfrac[1];
 	}
 	else if (4 < len)
@@ -437,7 +443,10 @@ int index_to_fbaire(int cfrac[], unsigned long pindex)
 	long base = index_from_fbaire(cfrac, len+1);
 if (0 > base) return base; // overflow condition
 	pidx = pindex / base;
-if (0 == pidx) pidx = 1; // terrible algorithm fail
+if (0 == pidx) {
+printf("FATAL algo error!\n");
+pidx = 1; // terrible algorithm fail
+}
 
 	msum = 0;
 	while (0 == pidx %2) { msum ++; pidx /=2; }
@@ -542,7 +551,7 @@ bool validate_bracket(long n)
 		{ printf("Error: bad left bracket at %ld: nleft=%ld gold=%g gleft=%g\n",
 			n, nleft, gold, gleft); ok = false; }
 
-#if 0
+#if 1
 	// Verify right bracketing by knocking off only one power of two.
 	long nright = get_bracket_right(n);
 	double gright = find_gold(nright);
