@@ -22266,20 +22266,12 @@ The first and third can be combined:
 
 \end_inset
 
-The 
+
 \end_layout
 
 \begin_layout Standard
 What's the generalization? I currently can't find one.
- The formula below is broken.
-\begin_inset Formula 
-\begin{equation}
-\left[m_{1},m_{2},\cdots,m_{k}\right]=XXXwrong2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)\label{eq:recursive-index}
-\end{equation}
-
-\end_inset
-
-
+ 
 \end_layout
 
 \begin_layout Standard
@@ -22319,6 +22311,31 @@ Despite having a sequence mapping that appears to be direct and obvious,
  Lengths one through three are simple enough.
  Length four, given above, does not offer any clues for how length five
  should be treated.
+\end_layout
+
+\begin_layout Standard
+It is almost enough to allow 
+\begin_inset Formula $0<m_{1}$
+\end_inset
+
+ to control things; the following rule almost works:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k},0\right]=2^{m_{1}+m_{2}+\cdots+m_{k-1}}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)
+\]
+
+\end_inset
+
+However, on rare occasions, it should not be applied.
+ One such is 
+\begin_inset Formula $658=\left[1,1,1,0\right]$
+\end_inset
+
+.
+ There are 
 \end_layout
 
 \begin_layout Standard
@@ -22593,20 +22610,29 @@ which is associated with
 
 \begin_layout Standard
 Now we have to prove that the above statements are actually correct.
- Specifically: that the recursive formula 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:recursive-index"
-plural "false"
-caps "false"
-noprefix "false"
+ 
+\end_layout
 
-\end_inset
+\begin_layout Itemize
+Show that the recursive formula indexing formula (which we are unable to
+ find) generates only valid polynomials.
+\end_layout
 
- generates only valid polynomials, and that the recursive algorithm generates
- polynomials in an order such that the real roots appear in proper order.
- As a side effect, the number of polynomials at each order should be correct:
- that is, they should be described by the necklace counting function.
+\begin_layout Itemize
+Show that the recursive algorithm generates sequences whose corresponding
+ polynomials have roots that are totally ordered.
+ Clearly, the reals are totally ordered; the indexing function, if correct,
+ would then totally order the indexes and the polynomials as well.
+\end_layout
+
+\begin_layout Itemize
+Show that the number of polynomials at each order is given by the Moreau
+ necklace counting function.
+\end_layout
+
+\begin_layout Standard
+Phew.
+ Well, that's not even off to a good start, yet ...
 \end_layout
 
 \begin_layout Subsection
@@ -22616,7 +22642,22 @@ Bit sequences from label sequences?
 \begin_layout Standard
 The encoding can almost be read off directly from the bit sequence.
  But not quite ...
- see the table below.
+ If it could be easily read off, then the above torture with the indexing
+ function would not be needed.
+ Below is more or less the same attempt, from a more naive approach.
+ It doesn't actually work out.
+\end_layout
+
+\begin_layout Standard
+The table below shows the 
+\begin_inset Quotes eld
+\end_inset
+
+almost
+\begin_inset Quotes erd
+\end_inset
+
+ aspect to it.
 \end_layout
 
 \begin_layout Standard
@@ -23632,18 +23673,9 @@ new normal
 
 .
  Alas.
- If we persist, I suppose we'll eventually invent a visual way of reading
- off eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:recursive-index"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, but it seems to become too complicated for any easy visual prestidigitation.
+ There does not seem to be any obvious way of getting sequence numberings
+ just by looking at the binary bit-patterns.
+ But what the heck, we alreay know this, from above!? Hoping to get lucky?
 \end_layout
 
 \begin_layout Standard

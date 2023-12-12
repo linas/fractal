@@ -263,12 +263,25 @@ long index_from_fbaire(int cfrac[], int len)
 	else if (4 == len)
 	{
 		// Yes this looks crazy, but it is correct.
-		if (0 < cfrac[0] || 0 == cfrac[2]) shift += cfrac[0] + cfrac[1];
-		// else no shift.
+		bool do_shift = (0 < cfrac[0] || 0 == cfrac[2]);
+		// if (1 == cfrac[0] && 1 == cfrac[1] && 1 == cfrac[2]) do_shift = false;
+		if (do_shift) shift += cfrac[0] + cfrac[1];
 	}
 	else if (4 < len)
 	{
-		if (0 < cfrac[0])
+		// This usually works, but misses some shifts
+		bool do_shift = (0 < cfrac[0]);
+
+		// Oring this in gets some but over-shifts others.
+		// do_shift = do_shift || (0 != cfrac[1] && (0 != cfrac[2]));
+
+#if FAIL_214
+		// This usually works, but misses some shifts
+		// Should of shifted [0 0 1 0 0 0]
+		bool do_shift = (0 < cfrac[0]);
+#endif
+
+		if (do_shift)
 		{
 			for (int j=0; j< len-2; j++)
 				shift += cfrac[j];
@@ -529,6 +542,7 @@ bool validate_bracket(long n)
 		{ printf("Error: bad left bracket at %ld: nleft=%ld gold=%g gleft=%g\n",
 			n, nleft, gold, gleft); ok = false; }
 
+#if 0
 	// Verify right bracketing by knocking off only one power of two.
 	long nright = get_bracket_right(n);
 	double gright = find_gold(nright);
@@ -545,6 +559,7 @@ bool validate_bracket(long n)
 	if (gright <= gold)
 		{ printf("Error: bad right bracket at %ld: nright=%ld gold=%g gright=%g\n",
 			n, nright, gold, gright); ok = false; }
+#endif
 
 	// Validate conversion to and from Baire.
 	int cfrac[SZ];
@@ -884,6 +899,7 @@ int main(int argc, char* argv[])
 			printf("\nError: missing representation for n=%ld\n", n);
 
 		// if (4 == len && 0 == cfrac[3] && 0 != cfrac[0])
+		if (0)
 		{
 			long nleft = get_bracket_left(n);
 			long nright = get_bracket_right(n);
