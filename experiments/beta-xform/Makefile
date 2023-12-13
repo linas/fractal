@@ -79,7 +79,7 @@ betadisk.o: betadisk.C psibig.c
 zetadisk.o: zetadisk.C psibig.c
 normie.o: normie.C psibig.c
 irred.o: irred.c irred-gold.c
-irred-viz.o: irred-viz.c
+irred-viz.o: irred-viz.c irred-gold.c
 irred-fraction.o: irred-fraction.c irred-gold.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
