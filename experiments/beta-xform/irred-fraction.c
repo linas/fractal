@@ -116,12 +116,10 @@ long index_from_fbaire(int cfrac[], int len)
 	// a valid golden polynomial. I can't guess what's valid or not,
 	// so go to the polynomial itself for ground truth.
 	int cnt = 0;
-	double gold = find_gold(follower);
-	while (gold < 0.5 && cnt < 60)
+	while (false == is_valid_gold(follower) && cnt < 60)
 	{
 		follower *= 2;
 		cnt ++;
-		gold = find_gold(follower);
 	}
 	if (60 < cnt + cfrac[len-1])
 	{

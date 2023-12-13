@@ -112,10 +112,22 @@ double find_poly_zero(long n)
  */
 double find_gold(long n)
 {
+	if (n < -1) return 0.0;
 	if (-1 == n) return 1.0;
 	double gold = find_poly_zero(n);
 	if (-1 == zero_bracket_factor(n, gold)) return gold;
 	return 0.0;
+}
+
+/**
+ * Return true if `n` corresponds to a golden polynomial, else false.
+ */
+bool is_valid_gold(long n)
+{
+	if (n < -1) return false;
+	if (-1 == n) return true;
+	double gold = find_poly_zero(n);
+	return (-1 == zero_bracket_factor(n, gold));
 }
 
 // =================================================================
