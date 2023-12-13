@@ -3,6 +3,10 @@
  *
  * Find and verify irreducible golden polynomials.
  * February 2018
+ *
+ * OBSOLETE! The code below has been copied to irred-fraction.c which
+ * cleans it up, adds many additional goodies and tools and functions.
+ * Don't work with this code.
  */
 
 #include <math.h>
