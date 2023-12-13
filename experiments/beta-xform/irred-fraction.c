@@ -109,7 +109,7 @@ long index_from_fbaire(int cfrac[], int len)
 	long leader = index_from_fbaire(cfrac, len-1);
 	if (0 > leader) return leader; // report overflow
 
-	long follower = 2*leader + 1;
+	long follower = 2UL * leader + 1UL;
 	DST(printf("leader is %ld\n", follower));
 
 	// Cannot issue a sequence number that does not correspond to
@@ -118,12 +118,12 @@ long index_from_fbaire(int cfrac[], int len)
 	int cnt = 0;
 	while (false == is_valid_gold(follower) && cnt < 60)
 	{
-		follower *= 2;
+		follower *= 2UL;
 		cnt ++;
 	}
 	if (60 < cnt + cfrac[len-1])
 	{
-		printf("Error: Overflow during sequence decode\n");
+		// printf("Error: Overflow during sequence decode\n");
 		return -444;
 	}
 
@@ -418,9 +418,9 @@ void recurse_fbaire(int cfrac[], int len,
  */
 void generate_fbaire(int norder, int depth, int length, bool do_print)
 {
-	long nmax = (1UL<<norder) + 1;
+	long nmax = (1UL<<norder);
 
-	malloc_gold(nmax);
+	malloc_gold(nmax+1);
 	fill_gold(nmax);
 
 	int cfrac[SZ];
@@ -634,7 +634,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define VALIDATE_INDEX
+// #define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
@@ -672,7 +672,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define SANITY_CHECK
+#define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Run validation on the recursively-generated sequences.
 	// Same as the odometer graph below, but does not print data.

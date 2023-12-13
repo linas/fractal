@@ -48,9 +48,16 @@ double find_zero(unsigned long n, double lo, double hi)
 }
 
 /** Helper array, needed for finding gold midpoints. */
-double* zero = NULL;
-void malloc_gold(int nmax)
+static double* zero = NULL;
+static long maxidx = -2;
+void malloc_gold(long nmax)
 {
+	if (-2 != maxidx)
+	{
+		printf("Errror: gold array already malloced\n");
+		return;
+	}
+	maxidx = nmax;
 	zero = (double*) malloc((nmax+1)*sizeof(double));
 	for (int i=0; i<=nmax; i++) zero[i] = -1.0;
 
@@ -91,7 +98,7 @@ long zero_bracket_factor(long n, double gold)
 	}
 	// printf("Bracket says ork=%d\n", ork);
 
-	if (ork) return -1;
+	if (ork) return -1L;
 	return nh;
 }
 
@@ -112,10 +119,13 @@ double find_poly_zero(long n)
  */
 double find_gold(long n)
 {
-	if (n < -1) return 0.0;
-	if (-1 == n) return 1.0;
+	// Allow silent out-of-bounds
+	if (maxidx <= n) return 0.0;
+	if (n < -1L) return 0.0;
+
+	if (-1L == n) return 1.0;
 	double gold = find_poly_zero(n);
-	if (-1 == zero_bracket_factor(n, gold)) return gold;
+	if (-1L == zero_bracket_factor(n, gold)) return gold;
 	return 0.0;
 }
 
@@ -124,8 +134,11 @@ double find_gold(long n)
  */
 bool is_valid_gold(long n)
 {
-	if (n < -1) return false;
-	if (-1 == n) return true;
+	// Allow silent out-of-bounds
+	if (maxidx <= n) return false;
+	if (n < -1L) return false;
+
+	if (-1L == n) return true;
 	double gold = find_poly_zero(n);
 	return (-1 == zero_bracket_factor(n, gold));
 }
