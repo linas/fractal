@@ -18,7 +18,8 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
-	alldisk betadisk momenta zetadisk normie irred-viz irred-fraction
+	alldisk betadisk momenta zetadisk normie irred-viz irred-fraction \
+	generate
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -81,6 +82,7 @@ normie.o: normie.C psibig.c
 irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c irred-gold.c
 irred-fraction.o: irred-fraction.c irred-gold.c
+generate.o: generate.c irred-gold.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
