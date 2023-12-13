@@ -158,19 +158,25 @@ static double beta_disk(double re_q, double im_q, int itermax, double param)
 	// COMPLEX og = COGF(allowed_cache, zee);
 	COMPLEX og = CEGF(allowed_cache, zee);
 
-#if 0
+#if 1
 	double faby = abs(og);
 	double abz = abs(zee);
 
 	// norm suitable for CEGF(mask, zee);
+	// also works for CEGF(gold, zee);
+	// The asymptotic form is given by the Moreau necklace counting function.
+	// The asymptotic bound for that actually involves golden mean...
 	// double norm_mask = abz * abz * exp(-abz);
-	double norm = abz * abz * exp(-abz);
+
+	// Norm suitable for CEGF(allowed_cache, zee);
+	// double norm = abz * exp(-abz);
+	double norm = abz * exp(-abz);
 	// printf("u %g %g %g %g \n", re_q, im_q, faby, norm);
 	faby *= norm;
 	return faby;
 #endif
 
-#if 1
+#if 0
 	double frea = real(og);
 	double fima = imag(og);
 	double phase = atan2 (fima, frea);
