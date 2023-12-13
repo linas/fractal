@@ -10,6 +10,7 @@
 #include "brat.h"
 #include "irred-gold.c"
 
+#include <iostream>
 #include <complex.h>
 #define COMPLEX std::complex<double>
 // #define COMPLEX double complex
@@ -27,6 +28,7 @@ double OGF(double (*fun)(long), double x)
 	return sum;
 }
 
+// coomplex-valued Ordinary generating function
 COMPLEX COGF(double (*fun)(long), COMPLEX x)
 {
 	COMPLEX sum=0.0;
@@ -37,6 +39,21 @@ COMPLEX COGF(double (*fun)(long), COMPLEX x)
 		xn *= x;
 		if (abs(xn) < 1.0e-14) break;
 	}
+	return sum;
+}
+
+// coomplex-valued Exponential generating function
+COMPLEX CEGF(double (*fun)(long), COMPLEX x)
+{
+	COMPLEX sum=0.0;
+	COMPLEX xn = 1.0;
+	for (int i=1; i<500; i++)
+	{
+		sum += fun(i) * xn;
+		xn *= x / ((double)(i+1));
+		if (abs(xn) < 1.0e-14) break;
+	}
+	// std::cout << "zee=" << x << " sum=" << sum << std::endl;
 	return sum;
 }
 
@@ -86,15 +103,33 @@ int main(int argc, char* argv[])
 
 static double beta_disk(double re_q, double im_q, int itermax, double param)
 {
-	COMPLEX zee = re_q + I * im_q;
-	COMPLEX og = COGF(mask, zee);
+	static bool init = false;
+	if (not init)
+	{
+		long nmax = 513;
+		malloc_gold(nmax);
+		init = true;
+	}
 
+	COMPLEX zee = re_q + I * im_q;
+	// COMPLEX og = COGF(mask, zee);
+	COMPLEX og = CEGF(mask, zee);
+
+	double faby = abs(og);
+	double abz = abs(zee);
+	double norm = abz * abz * exp(-abz);
+	// printf("u %g %g %g %g \n", re_q, im_q, faby, norm);
+	faby *= norm;
+	return faby;
+
+#if 0
 	double frea = real(og);
 	double fima = imag(og);
 	double phase = atan2 (fima, frea);
    phase += M_PI;
    phase /= 2.0*M_PI;
    return phase;
+#endif
 }
 
 DECL_MAKE_HEIGHT(beta_disk);
