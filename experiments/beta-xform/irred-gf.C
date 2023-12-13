@@ -7,9 +7,14 @@
  * December 2023
  */
 
+#include "brat.h"
 #include "irred-gold.c"
 
-// Ordinary generating function
+#include <complex.h>
+#define COMPLEX std::complex<double>
+// #define COMPLEX double complex
+
+// real-valued Ordinary generating function
 double OGF(double (*fun)(long), double x)
 {
 	double sum=0.0;
@@ -18,6 +23,19 @@ double OGF(double (*fun)(long), double x)
 	{
 		sum += fun(i) * xn;
 		xn *= x;
+	}
+	return sum;
+}
+
+COMPLEX COGF(double (*fun)(long), COMPLEX x)
+{
+	COMPLEX sum=0.0;
+	COMPLEX xn = 1.0;
+	for (int i=1; i<500; i++)
+	{
+		sum += fun(i) * xn;
+		xn *= x;
+		if (abs(xn) < 1.0e-14) break;
 	}
 	return sum;
 }
@@ -54,6 +72,7 @@ double allowed(long n)
 	return idx;
 }
 
+#if 0
 int main(int argc, char* argv[])
 {
 	long nmax = 513;
@@ -63,3 +82,21 @@ int main(int argc, char* argv[])
 	printf("Gold OGF at 1/2 = %20.16g\n", OGF(gold, 0.5));
 	printf("Allowed OGF at 1/2 = %20.16g\n", OGF(allowed, 0.5));
 }
+#endif
+
+static double beta_disk(double re_q, double im_q, int itermax, double param)
+{
+	COMPLEX zee = re_q + I * im_q;
+	COMPLEX og = COGF(mask, zee);
+
+	double frea = real(og);
+	double fima = imag(og);
+	double phase = atan2 (fima, frea);
+   phase += M_PI;
+   phase /= 2.0*M_PI;
+   return phase;
+}
+
+DECL_MAKE_HEIGHT(beta_disk);
+
+/* --------------------------- END OF LIFE ------------------------- */

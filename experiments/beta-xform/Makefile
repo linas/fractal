@@ -82,7 +82,7 @@ normie.o: normie.C psibig.c
 irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c irred-gold.c
 irred-fraction.o: irred-fraction.c irred-gold.c
-irred-gf.o: irred-gf.c irred-gold.c
+irred-gf.o: irred-gf.C irred-gold.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
@@ -138,3 +138,4 @@ alldisk: alldisk.o $(BRAT)
 betadisk: betadisk.o $(BRAT)
 zetadisk: zetadisk.o
 momenta: momenta.o $(BRAT)
+irred-gf: irred-gf.o $(BRAT)
