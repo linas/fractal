@@ -390,8 +390,12 @@ void recurse_fbaire(int cfrac[], int len,
 	}
 
 	long idx = index_from_fbaire(cfrac, len);
-	if (idx >= maxn) return; // why ??
-	validate_bracket(idx);
+
+	// Don't bother with validation if out of bounds
+	if (idx < maxn && -1UL < idx)
+	{
+		validate_bracket(idx);
+	}
 
 	// Print equivalent continued fraction, for the odometer graph
 	if (do_print) print_odo_graph(cfrac, len);
