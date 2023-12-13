@@ -112,10 +112,12 @@ long index_from_fbaire(int cfrac[], int len)
 	long follower = 2*leader + 1;
 	DST(printf("leader is %ld\n", follower));
 
-#if 1
+	// Cannot issue a sequence number that does not correspond to
+	// a valid golden polynomial. I can't guess what's valid or not,
+	// so go to the polynomial itself for ground truth.
 	int cnt = 0;
 	double gold = find_gold(follower);
-	while (gold < 0.5)
+	while (gold < 0.5 && cnt < 60)
 	{
 		follower *= 2;
 		cnt ++;
@@ -123,154 +125,15 @@ long index_from_fbaire(int cfrac[], int len)
 	}
 	if (60 < cnt + cfrac[len-1])
 	{
-		printf("Error: more overflow\n");
+		printf("Error: Overflow during sequence decode\n");
 		return -444;
 	}
+
+	// Trailing digit encodes index-doubling
 	follower *= 1UL << cfrac[len-1];
 
 	DST(printf("exit index_from_baire follower is %ld after shift=%d\n", follower, shift));
 	return follower;
-
-#endif
-
-#if GUESSING
-	// Trailing digit encodes index-doubling
-	int shift = cfrac[len-1];
-
-#if 1
-	// Special casing, depending on the sequence length
-	// Based on inferences documented in the diary.
-	if (2 == len || 3 == len)
-	{
-		shift += cfrac[0];
-	}
-	else if (4 == len)
-	{
-		// Yes this looks crazy, but it is correct.
-		bool do_shift = (0 < cfrac[0] || 0 == cfrac[2]);
-
-		// Ouch. Handle one exception. There are many(?) more.
-		if (1 == cfrac[0] && 1 == cfrac[1] && 1 == cfrac[2])
-		{
-			do_shift = false;
-			shift = 1;
-		}
-		if (do_shift) shift += cfrac[0] + cfrac[1];
-	}
-	else if (4 < len)
-	{
-		// This usually works, but misses some shifts
-		bool do_shift = (0 < cfrac[0]);
-
-		// Oring this in gets some but over-shifts others.
-		// do_shift = do_shift || (0 != cfrac[1] && (0 != cfrac[2]));
-
-#if FAIL_214
-		// This usually works, but misses some shifts
-		// Should of shifted [0 0 1 0 0 0]
-		bool do_shift = (0 < cfrac[0]);
-#endif
-
-		if (do_shift)
-		{
-			for (int j=0; j< len-2; j++)
-				shift += cfrac[j];
-		}
-#if FAIL_59
-		// Generalization of above.
-		// Fails for 59=[0 0 1 0 0] which should have no shift.
-		if (0 < cfrac[0] || 0 == cfrac[len-2])
-		{
-			for (int j=0; j< len-2; j++)
-				shift += cfrac[j];
-		}
-#endif
-#if FAIL
-		// This fails in complicated ways.
-		int bump = len-2;
-		if (bump < 0) bump = 0;
-		for (int j=0; j< bump; j++)
-			shift += cfrac[j];
-
-		// This if-statement is an attempt to cure some of the
-		// ills. It does indeed cure some of them; just not all
-		// of them. Can be seen easily enough via tests below.
-		// Alas ...
-		if (0 == cfrac[len-1])
-		{
-			double gold = find_gold(follower);
-			if (0.5 < gold) return follower;
-			// else follower *= 1UL << shift;
-		}
-#endif
-	}
-#endif
-
-#if DECODE_53_FAIL
-	// decodes [0 1 1 0] as 106 should be 53
-	int shift = cfrac[len-1];
-
-	int bump = len-2;
-	if (bump < 0) bump = 0;
-	for (int j=0; j< bump; j++)
-		shift += cfrac[j];
-
-	if (2 == len) shift += cfrac[0];
-#endif
-
-#if DECODE_42_FAIL
-	// Decodes [1 0 0] as 21 should be 42
-	int shift = cfrac[len-1];
-
-	int bump = len-3;
-	if (bump < 0) bump = 0;
-	for (int j=0; j< bump; j++)
-		shift += cfrac[j];
-
-	if (2 == len) shift += cfrac[0];
-#endif
-
-#ifdef DECODE_TEN_FAIL
-	// returns 5 instead of 10 for [1,0]
-	int bump = len-2;
-	if (bump < 0) bump = 0;
-	for (int j=0; j< bump; j++)
-		shift += cfrac[j];
-#endif
-
-#ifdef LUCKY_THIRTEEN
-	// fails on [0 1 0] which should get 13 but gets 26
-	// Basically, should hole punch like below but ...
-	int shift = 0;
-	for (int j=0; j< len; j++)
-		shift += cfrac[j];
-#endif
-
-#ifdef THREE_HOLE_PUNCH
-	// fails for 29 which is [0 0 1 0] but decodes to 58
-	int shift = 0;
-	for (int j=0; j< len; j++)
-		shift += cfrac[j];
-
-	// wtf hole bunch
-	if (3 == len) shift -= cfrac[1];
-#endif
-
-	// Perform overflow check, to avoid, well, overflows.
-	int nbits = 0;
-	long fo = follower;
-	while (fo >>= 1) ++nbits;
-	if (60 < nbits+shift)
-	{
-		printf("Error: shift overflow!!\n");
-		return -555;
-	}
-
-	follower *= 1UL << shift;
-
-	DST(printf("exit index_from_baire follower is %ld after shift=%d\n", follower, shift));
-	return follower;
-#endif
 }
 
 // Generate finite-Baire sequence labels from a polynomial index.
