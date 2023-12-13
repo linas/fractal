@@ -127,6 +127,22 @@ double tee(double beta, double x)
 	return beta*(x-0.5);
 }
 
+// print the bit-string that defines the orbit
+void print_orbit(int len, double gold)
+{
+	double mid = 0.5*gold;
+	while (1 < len)
+	{
+		if (mid < 0.5) printf(" 0");
+		else printf (" 1");
+
+		if (0.5 <= mid) mid -= 0.5;
+		mid *= gold;
+		len --;
+	}
+	printf("\n");
+}
+
 // =================================================================
 
 /** Return order of beta polynomial for index n.

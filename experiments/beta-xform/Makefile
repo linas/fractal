@@ -62,7 +62,6 @@ psimom.o: psimom.c psileft.c psi.c psibig.c
 psivec.o: psivec.c psileft.c psi.c psibig.c
 psimid.o: psimid.c psi.c psibig.c
 psimult.o: psimult.c psi.c psibig.c
-irred.o: irred.c
 zero.o: zero.C
 tribo.o: tribo.c
 midmap.o: midmap.c
@@ -79,6 +78,7 @@ witt.o: witt.c
 betadisk.o: betadisk.C psibig.c
 zetadisk.o: zetadisk.C psibig.c
 normie.o: normie.C psibig.c
+irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c
 irred-fraction.o: irred-fraction.c irred-gold.c
 
