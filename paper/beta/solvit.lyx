@@ -12141,31 +12141,53 @@ with the
 \end_layout
 
 \begin_layout Standard
-Although the digits 
-\begin_inset Formula $b_{k}$
+The reason for the appearence of the necklace-counting function is straight-forw
+ard: it is counting the number of distinct orbits of a given length.
+ An orbit of length 
+\begin_inset Formula $n$
 \end_inset
 
- must be zero or one, this definition of irreducibility, plus the counting,
- suggests some relationship to the irreducible polynomials over the field
- 
-\begin_inset Formula $\text{\mathbb{F}}_{2}$
+ is, by defintion, a point 
+\begin_inset Formula $x$
 \end_inset
 
-, as that is what the definition of OEIS A001037 counts.
- Yet the relationship, if any, is quite unclear.
-\begin_inset Foot
-status collapsed
+ such that 
+\begin_inset Formula $x=T_{\beta}^{n}\left(x\right)$
+\end_inset
 
-\begin_layout Plain Layout
-A hypothesis presented in a later section suggests that each orbit should
- be thought of as a Galois group, with the length of the orbit corresponding
- to the number of elements in the Galois group.
- It seems that this might explain much of the structure.
+.
+ Such an orbit generates a binary string, of length 
+\begin_inset Formula $n$
+\end_inset
+
+ corresponding to whether 
+\begin_inset Formula $T_{\beta}^{j}\left(x\right)<\beta/2$
+\end_inset
+
+ is true or not.
+ A cyclic permutation of such a string still corresponds to the same orbit;
+ a reversed permutation does not: thus, it is a necklace without reversal.
+ The necklace-counting function gives the number of distinct, unique orbits
+ of a given length that cannot be factored into shorter orbits.
+ The beta transformation has the property that every possible orbit does
+ occur; none are prohibited.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+A recurring point of confusion is that the bit-string defining the polynomial
+ is not a necklace; it cannot be rotated.
+ Each bit-string corresponds to a unique polynomial, having roots that differ
+ from those of other polynomials.
+ The polynomials also have a canonical order, fixed as the integer that
+ corresponds to the bit-string; they cannot be re-ordered.
+ Ideas such as Lyndon words apply to the orbits, but not to the defining
+ polynomials.
+ The ordering of the polynomials is 
+\emph on
+not
+\emph default
+ the lexicographic ordering of the Lyndon words, and cannot be brought into
+ this order.
 \end_layout
 
 \begin_layout Standard
@@ -13695,11 +13717,13 @@ Questions that present themselves include:
 \end_layout
 
 \begin_layout Itemize
-Is there a generating function for the squence of allowed values of 
+Any integer sequence has corresponding generating functions.
+ Do any of these have any particularly nice or simple form, for the above
+ sequence of allowed values of 
 \begin_inset Formula $n$
 \end_inset
 
-? What is it?
+? What might they be?
 \end_layout
 
 \begin_layout Itemize
