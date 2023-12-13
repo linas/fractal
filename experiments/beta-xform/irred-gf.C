@@ -28,12 +28,14 @@ double OGF(double (*fun)(long), double x)
 	return sum;
 }
 
+#define MAXSUM 500
+
 // coomplex-valued Ordinary generating function
 COMPLEX COGF(double (*fun)(long), COMPLEX x)
 {
 	COMPLEX sum=0.0;
 	COMPLEX xn = 1.0;
-	for (int i=1; i<500; i++)
+	for (int i=1; i<MAXSUM; i++)
 	{
 		sum += fun(i) * xn;
 		xn *= x;
@@ -47,7 +49,7 @@ COMPLEX CEGF(double (*fun)(long), COMPLEX x)
 {
 	COMPLEX sum=0.0;
 	COMPLEX xn = 1.0;
-	for (int i=1; i<500; i++)
+	for (int i=1; i<MAXSUM; i++)
 	{
 		sum += fun(i) * xn;
 		xn *= x / ((double)(i+1));
@@ -89,6 +91,43 @@ double allowed(long n)
 	return idx;
 }
 
+static int* akk = nullptr;
+int allow_cache_rec(long n)
+{
+	static bool init = false;
+	if (not init)
+	{
+#define NTERMS (MAXSUM+1)
+		akk = (int *) malloc(NTERMS * sizeof(int));
+		for (int i=0; i< NTERMS; i++) akk[i] = -1;
+		akk[0] = 1;
+		akk[1] = 1;
+		init = true;
+	}
+
+	if (akk[n] < 0)
+	{
+		long idx = allow_cache_rec(n-1) + 1;
+		int cnt = n-1;
+		while (cnt < n)
+		{
+			double beta = find_gold(idx);
+			if (0.5 < beta) cnt++;
+			idx++;
+		}
+		idx --;
+		akk[n] = idx;
+		// printf("allowed %ld is %ld\n", n, idx);
+	}
+
+	return akk[n];
+}
+
+double allowed_cache(long n)
+{
+	return allow_cache_rec(n);
+}
+
 #if 0
 int main(int argc, char* argv[])
 {
@@ -106,23 +145,32 @@ static double beta_disk(double re_q, double im_q, int itermax, double param)
 	static bool init = false;
 	if (not init)
 	{
-		long nmax = 513;
+		long nmax = 1UL << 20;
 		malloc_gold(nmax);
 		init = true;
 	}
 
 	COMPLEX zee = re_q + I * im_q;
 	// COMPLEX og = COGF(mask, zee);
-	COMPLEX og = CEGF(mask, zee);
+	// COMPLEX og = CEGF(mask, zee);
+	// COMPLEX og = COGF(gold, zee);
+	// COMPLEX og = CEGF(gold, zee);
+	// COMPLEX og = COGF(allowed_cache, zee);
+	COMPLEX og = CEGF(allowed_cache, zee);
 
+#if 0
 	double faby = abs(og);
 	double abz = abs(zee);
+
+	// norm suitable for CEGF(mask, zee);
+	// double norm_mask = abz * abz * exp(-abz);
 	double norm = abz * abz * exp(-abz);
 	// printf("u %g %g %g %g \n", re_q, im_q, faby, norm);
 	faby *= norm;
 	return faby;
+#endif
 
-#if 0
+#if 1
 	double frea = real(og);
 	double fima = imag(og);
 	double phase = atan2 (fima, frea);
