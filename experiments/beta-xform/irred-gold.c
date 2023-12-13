@@ -20,7 +20,7 @@
  * returning to the midpoint. The bits are just whether the orbit went
  * left or right of midpoint. The length of the orbit will be log_2(2n+1).
  */
-double gold(unsigned long n, double x)
+double golden_poly(unsigned long n, double x)
 {
 	double acc = 0.0;
 	double xn = 1.0;
@@ -42,7 +42,7 @@ double find_zero(unsigned long n, double lo, double hi)
 {
 	double mid = 0.5 * (lo+hi);
 	if (1.0e-15 > hi-lo) return mid;
-	double fmid = gold(n, mid);
+	double fmid = golden_poly(n, mid);
 	if (0.0 < fmid) return find_zero(n, lo, mid);
 	return find_zero(n, mid, hi);
 }

@@ -9,34 +9,49 @@
 
 #include "irred-gold.c"
 
-// Ordinary generating function of the mask-bits
-double mask_ogf(double x)
+// Ordinary generating function
+double OGF(double (*fun)(long), double x)
 {
 	double sum=0.0;
 	double xn = 1.0;
-	for (int i=0; i<50; i++)
+	for (int i=1; i<50; i++)
 	{
-		double beta = find_gold(i);
-		if (0.5 < beta) sum += xn;
-		// printf("%d beta=%g sum=%g\n", i, beta, sum);
+		sum += fun(i) * xn;
 		xn *= x;
 	}
 	return sum;
 }
 
-// Ordinary generating function of the gold values
-double gold_ogf(double x)
+// The mask-bits
+double mask(long n)
 {
-	double sum=0.0;
-	double xn = 1.0;
-	for (int i=0; i<50; i++)
+	double beta = find_gold(n);
+	if (0.5 < beta) return 1.0;
+	return 0.0;
+}
+
+// The golden values themselves, or zero.
+double gold(long n)
+{
+	double beta = find_gold(n);
+	if (0.5 < beta) return beta;
+	return 0.0;
+}
+
+// Allowed values
+double allowed(long n)
+{
+	long idx = 1;
+	int cnt = 0;
+	while (cnt < n)
 	{
-		double beta = find_gold(i);
-		if (0.5 < beta) sum += beta*xn;
-		printf("%d beta=%g sum=%g\n", i, beta, sum);
-		xn *= x;
+		double beta = find_gold(idx);
+		if (0.5 < beta) cnt++;
+		idx++;
 	}
-	return sum;
+	idx --;
+	// printf("counted %ld is %ld\n", n, idx);
+	return idx;
 }
 
 int main(int argc, char* argv[])
@@ -44,6 +59,7 @@ int main(int argc, char* argv[])
 	long nmax = 513;
 	malloc_gold(nmax);
 
-	printf("Mask OGF at 1/2 = %20.16g\n", mask_ogf(0.5));
-	printf("Gold OGF at 1/2 = %20.16g\n", gold_ogf(0.5));
+	printf("Mask OGF at 1/2 = %20.16g\n", OGF(mask, 0.5));
+	printf("Gold OGF at 1/2 = %20.16g\n", OGF(gold, 0.5));
+	printf("Allowed OGF at 1/2 = %20.16g\n", OGF(allowed, 0.5));
 }
