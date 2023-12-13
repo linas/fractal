@@ -113,9 +113,31 @@ long index_from_fbaire(int cfrac[], int len)
 	DST(printf("leader is %ld\n", follower));
 
 #if 1
+	int cnt = 0;
+	double gold = find_gold(follower);
+	while (gold < 0.5)
+	{
+		follower *= 2;
+		cnt ++;
+		gold = find_gold(follower);
+	}
+	if (60 < cnt + cfrac[len-1])
+	{
+		printf("Error: more overflow\n");
+		return -444;
+	}
+	follower *= 1UL << cfrac[len-1];
+
+	DST(printf("exit index_from_baire follower is %ld after shift=%d\n", follower, shift));
+	return follower;
+
+#endif
+
+#if GUESSING
 	// Trailing digit encodes index-doubling
 	int shift = cfrac[len-1];
 
+#if 1
 	// Special casing, depending on the sequence length
 	// Based on inferences documented in the diary.
 	if (2 == len || 3 == len)
@@ -238,12 +260,17 @@ long index_from_fbaire(int cfrac[], int len)
 	int nbits = 0;
 	long fo = follower;
 	while (fo >>= 1) ++nbits;
-	if (60 < nbits+shift) return -555;
+	if (60 < nbits+shift)
+	{
+		printf("Error: shift overflow!!\n");
+		return -555;
+	}
 
 	follower *= 1UL << shift;
 
 	DST(printf("exit index_from_baire follower is %ld after shift=%d\n", follower, shift));
 	return follower;
+#endif
 }
 
 // Generate finite-Baire sequence labels from a polynomial index.
@@ -751,10 +778,11 @@ int main(int argc, char* argv[])
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
 	if (2 != argc) {
-		fprintf(stderr, "Usage: %s <max-index>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <max-order>\n", argv[0]);
 		exit(1);
 	}
-	long nmax = atol(argv[1]);
+	int nord = atoi(argv[1]);
+	long nmax = 1UL << nord;
 	malloc_gold(nmax);
 
 	int cfrac[SZ];
