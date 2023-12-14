@@ -25,25 +25,29 @@ int main(int argc, char* argv[])
 
 	long maxidx = atol(argv[1]);
 
-	malloc_gold(maxidx);
-	malloc_index_cache(maxidx);
+	malloc_gold(4*maxidx);
+	malloc_index_cache(4*maxidx);
 
 	// This should always be silent.
-	for (long i = 0; i< maxidx/2; i++)
+	for (long i = 0; i< maxidx; i++)
 	{
 		bool valid = is_valid_index(i);
 
-#if 0
 		if (false == valid)
 		{
-			for (long j=1; j<maxidx/2; j+=2)
+			bool vodd = is_valid_index(2*i+1);
+			if (vodd)
+				printf("Bad odd i=%ld\n", i);
+			for (long j=1; ; j++)
 			{
-				bool vodd = is_valid_index(i*j);
-				if (vodd)
-					printf("huh i=%ld j=%ld\n", i, j);
+				long k = 1UL << j;
+				k *= 2*i+1;
+				if (maxidx <= k) break;
+				bool prod = is_valid_index(k);
+				if (prod)
+					printf("Huh prod odd i=%ld j=%ld\n", i,j);
 			}
 		}
-#endif
 
 		if (false == valid) continue;
 
