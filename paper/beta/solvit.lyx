@@ -12664,7 +12664,7 @@ noprefix "false"
 , always.
  By convention, the last digit is always 1, also.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Generated with irred.c, verified in irred-midpoint.c
@@ -13751,21 +13751,80 @@ For the remainder of this section, write
 
 .
  Several properties are apparent.
- One has that 
-\begin_inset Formula $\theta\left(2^{m}\right)=\theta\left(2^{m}-1\right)=1$
-\end_inset
+ 
+\end_layout
 
- for all 
+\begin_layout Itemize
+For all 
 \begin_inset Formula $m$
 \end_inset
 
+, 
+\begin_inset Formula $\theta\left(2^{m}\right)=\theta\left(2^{m}-1\right)=1$
+\end_inset
+
 .
- If 
+\end_layout
+
+\begin_layout Itemize
+If 
 \begin_inset Formula $\theta\left(m\right)=1$
 \end_inset
 
  then 
 \begin_inset Formula $\theta\left(2m\right)=1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $m$
+\end_inset
+
+ is odd, and 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ then 
+\begin_inset Formula $\theta\left(\left(m-1\right)/2\right)=1$
+\end_inset
+
+.
+ This is reminiscent of the Collatz conjecture.
+\end_layout
+
+\begin_layout Standard
+As noted earlier, the number of valid polynomials of each order are given
+ by the necklace counting function 
+\begin_inset Formula $M_{k}$
+\end_inset
+
+.
+ Therefore, one has, for all 
+\begin_inset Formula $m$
+\end_inset
+
+ that 
+\begin_inset Formula 
+\[
+\sum_{n=1}^{2^{m}-1}\theta\left(n\right)=\sum_{k=2}^{m+1}M_{k}\equiv S_{m}
+\]
+
+\end_inset
+
+Using the 
+\begin_inset Formula $S_{m}$
+\end_inset
+
+ defined immeiately above, one has 
+\begin_inset Formula $\psi\left(S_{m}\right)=2^{m}-1$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi\left(S_{m}+1\right)=2^{m}$
 \end_inset
 
 .

@@ -49,4 +49,31 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
+
+#if 0
+	for (int p=0; p<20; p++)
+	{
+		long b = 1L << p;
+		for (long w = 1; w< p; w++)
+		{
+			long d = b - (2*w-1);
+			bool vd = is_valid_index(d);
+			if (false == vd)
+			{
+				printf("fail at p=%d base=%ld w=%ld del=%ld d=%ld\n", p, b, w, 2*w-1, d);
+			}
+		}
+	}
+#endif
+
+	// Sum of Moreau
+	printf("yo %d is %ld\n", 1, valid_index_cache(1));
+	printf("yo %d is %ld\n", 3, valid_index_cache(3));
+	printf("yo %d is %ld\n", 6, valid_index_cache(6));
+	printf("yo %d is %ld\n", 12, valid_index_cache(12));
+	printf("yo %d is %ld\n", 21, valid_index_cache(21));
+	printf("yo %d is %ld\n", 39, valid_index_cache(39));
+	printf("yo %d is %ld\n", 69, valid_index_cache(69));
+	printf("yo %d is %ld\n", 125, valid_index_cache(125));
+
 }
