@@ -9,33 +9,36 @@
 
 #include "irred-gold.c"
 
+#define MAXORD 16
+
 // real-valued Ordinary generating function
-double OGF(double (*fun)(int, double), double w, double x)
+double tak(double w, double x)
 {
 	double sum=0.0;
 	double wn = 1.0;
-	for (int i=1; i<50; i++)
+	long idx = 0;
+	for (int i=0; i<MAXORD; i++)
 	{
-		sum += fun(i, x) * wn;
+		int bn = (x > 0.5);
+		if (bn)
+		{
+			idx |= 1;
+		}
+		int vn = is_valid_index(idx);
+
+		if (bn && vn) sum += wn;
 		wn *= w;
+
+		idx <<= 1;
+		x *= 2.0;
+		x -= floor(x);
 	}
 	return sum;
 }
 
-double tak(int n, double x)
-{
-	long tn = 1 << n;
-	double xn = x * ((double) tn);
-	double xm = xn - floor(xn);
-	int bn = (xm > 0.5);
-
-	if (false == is_valid_index(n)) return 0.0;
-	return bn;
-}
-
 int main(int argc, char* argv[])
 {
-	long nmax = 51;
+	long nmax = 1 << MAXORD;
 	malloc_gold(nmax);
 
 	double w = 0.6;
@@ -46,7 +49,7 @@ int main(int argc, char* argv[])
 	{
 		double x = (i+0.5) * delta;
 
-		double y = OGF(tak, w, x);
+		double y = tak(w, x);
 		printf("%d	%f	%f\n", i, x, y);
 	}
 }
