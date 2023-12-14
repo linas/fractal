@@ -13670,7 +13670,7 @@ valid indexes
 \end_layout
 
 \begin_layout Standard
-The properties of this sequence are brefily reviewd in the next section.
+The properties of this sequence are breifly reviewd in the next section.
 \end_layout
 
 \begin_layout Subsection
@@ -13819,7 +13819,7 @@ Using the
 \begin_inset Formula $S_{m}$
 \end_inset
 
- defined immeiately above, one has 
+ defined immediately above, one has 
 \begin_inset Formula $\psi\left(S_{m}\right)=2^{m}-1$
 \end_inset
 
@@ -13828,6 +13828,18 @@ Using the
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The representation of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ as a real number is 
+\begin_inset Formula $\theta=\sum_{n=1}^{\infty}\theta_{n}2^{-n}=0.93258880035365\cdots$
+\end_inset
+
+ At this time, this does not appear in OEIS.
 \end_layout
 
 \begin_layout Subsection
@@ -15705,7 +15717,7 @@ If the orbit is periodic, then there exists a polynomial
 \end_inset
 
  with 
-\begin_inset Formula $k=1+\left\lfloor \log_{2}n\right\rfloor $
+\begin_inset Formula $k=1+\left\lfloor \log_{2}\left(2n+1\right)\right\rfloor $
 \end_inset
 
  being the length of the orbit.
@@ -15748,7 +15760,7 @@ If the orbit is periodic, then there exists a finite-length integer sequence
  whose value 
 \begin_inset Formula 
 \[
-n=\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}+m_{1}+m_{2}+\cdots+m_{k-2}}\left(2\left[m_{1},m_{2},\cdots,m_{k-1}\right]+1\right)
+n=\eta\left[m_{1},m_{2},\cdots,m_{k}\right]
 \]
 
 \end_inset
@@ -18564,105 +18576,22 @@ The
 \begin_inset Formula $\beta$
 \end_inset
 
--integers can be defined as the sequence of integers 
-\begin_inset Formula $a_{n}$
+-polynomials can be defined via the mask bits 
+\begin_inset Formula $\theta_{n}$
 \end_inset
 
- corresponding to the allowed polynomials.
- That is, 
-\begin_inset Formula $\left(a_{n}\right)=\left(1,2,3,4,6,7,8,\cdots\right)$
-\end_inset
-
- with 5 missing, as the polynomial 
-\begin_inset Formula $p_{5}$
-\end_inset
-
- factors to a lower-order polynomial.
- This sequence is unknown to OEIS, but perhaps it can be transformed into
- something regconizable? There are many tricks to try out, just for grins.
- This includes the ordinary and the exponential generating functions and
- the Dirichlet generating function.
- The Lambert generating function suggests a convolution with divisor sequences.
- Would this yeild anything interesting? This opens a bottomless pit of additiona
-l topics to explore, in the hope of getting lucky in some way.
-\end_layout
-
-\begin_layout Standard
-Associated with the 
-\begin_inset Formula $\beta$
-\end_inset
-
--sequence is the 
-\begin_inset Formula $\beta$
-\end_inset
-
--bitstring 
-\begin_inset Formula $d_{k}$
-\end_inset
-
- defined as 
-\begin_inset Formula $d_{k}=1$
-\end_inset
-
- if 
-\begin_inset Formula $k\in\left\{ a_{n}\right\} $
-\end_inset
-
- else its zero.
- The 
-\begin_inset Formula $\beta$
-\end_inset
-
--bitstring is just the mask-bits of the 
-\begin_inset Formula $\beta$
-\end_inset
-
--sequence.
- It is perhaps more interesting to work with?
-\end_layout
-
-\begin_layout Standard
-Then, of course, there are the golden roots themselves, listed in sequenctial
- order.
- These will be denoted as 
-\begin_inset Formula $g_{n}$
-\end_inset
-
-, occuring as the unique, single real root of 
-\begin_inset Formula $p_{n}\left(g_{n}\right)=0$
+ or via the orbit summatory function 
+\begin_inset Formula $\psi_{n}$
 \end_inset
 
 .
- Numbering starts with 
-\begin_inset Formula $-1$
+ Corresponding to each is a unique positive real root 
+\begin_inset Formula $\beta_{n}=r_{n}$
 \end_inset
 
- so that 
-\begin_inset Formula $g_{-1}=1$
-\end_inset
-
- and 
-\begin_inset Formula $g_{0}=2$
-\end_inset
-
- and 
-\begin_inset Formula $g_{1}=\varphi$
-\end_inset
-
- the golden mean.
- Although there is a polynomial 
-\begin_inset Formula $p_{n}$
-\end_inset
-
- for every integer 
-\begin_inset Formula $n$
-\end_inset
-
-, we won't consider those for which 
-\begin_inset Formula $d_{n}=0$
-\end_inset
-
- as those are not relatively prime with respect to the earlier ones.
+.
+ This section takes a very short look at the generating functions for these
+ sequences.
  
 \end_layout
 
@@ -18695,7 +18624,7 @@ The exponential generating function is
 
 \begin_layout Standard
 Numerical results include 
-\begin_inset Formula $\mbox{OG}\left(d_{k};\frac{1}{2}\right)=1.93258880035365\cdots$
+\begin_inset Formula $\mbox{OG}\left(\theta_{k};\frac{1}{2}\right)=1.93258880035365\cdots$
 \end_inset
 
  This is not in OEIS.
@@ -18703,7 +18632,7 @@ Numerical results include
 
 \begin_layout Standard
 Next, 
-\begin_inset Formula $\mbox{OG}\left(g_{k};\frac{1}{2}\right)=3.0832181425255\cdots$
+\begin_inset Formula $\mbox{OG}\left(r_{k};\frac{1}{2}\right)=3.0832181425255\cdots$
 \end_inset
 
 .
@@ -18712,7 +18641,7 @@ Next,
 
 \begin_layout Standard
 Next, 
-\begin_inset Formula $\mbox{OG}\left(a_{k};\frac{1}{2}\right)=4.14955396300387\cdots$
+\begin_inset Formula $\mbox{OG}\left(\psi_{k};\frac{1}{2}\right)=4.14955396300387\cdots$
 \end_inset
 
 .
@@ -18723,11 +18652,11 @@ Next,
 Exploring these visually, on the complex plane, only the EGF is visually
  interesting.
  For both 
-\begin_inset Formula $d_{n}$
+\begin_inset Formula $\theta_{n}$
 \end_inset
 
  and 
-\begin_inset Formula $g_{n}$
+\begin_inset Formula $r_{n}$
 \end_inset
 
 , the EGF shows some randomly, uniformly distributed zeros, showing no particula
@@ -18741,7 +18670,7 @@ r structure.
 
 \begin_layout Standard
 The EGF for 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $\psi_{n}$
 \end_inset
 
  is much more interesting.
@@ -18766,7 +18695,7 @@ noprefix "false"
 
 .
  The rings are presumably due to 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $\psi_{n}$
 \end_inset
 
  being concentrated at powers of two, which would be reflected in ring radii

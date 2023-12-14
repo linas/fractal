@@ -112,10 +112,12 @@ static double beta_disk(double re_q, double im_q, int itermax, double param)
 	// COMPLEX og = CEGF(mask, zee);
 	// COMPLEX og = COGF(gold, zee);
 	// COMPLEX og = CEGF(gold, zee);
+	// COMPLEX og = COGF(find_poly_zero, zee);
+	// COMPLEX og = CEGF(find_poly_zero, zee);
 	// COMPLEX og = COGF(allowed, zee);
 	COMPLEX og = CEGF(allowed, zee);
 
-#if 1
+#if 0
 	double faby = abs(og);
 	double abz = abs(zee);
 
@@ -133,7 +135,7 @@ static double beta_disk(double re_q, double im_q, int itermax, double param)
 	return faby;
 #endif
 
-#if 0
+#if 1
 	double frea = real(og);
 	double fima = imag(og);
 	double phase = atan2 (fima, frea);

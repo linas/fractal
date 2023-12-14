@@ -88,16 +88,18 @@ static double beta_disk(double re_q, double im_q, int itermax, double param)
 
 	COMPLEX zee = re_q + I * im_q;
 	// COMPLEX og = COGF(cpx_golden_poly, zee);
-	// COMPLEX og = COGF(golden_recip, zee);
+	COMPLEX og = COGF(golden_recip, zee);
 	// COMPLEX og = CEGF(cpx_golden_poly, zee);
 	// COMPLEX og = CEGF(golden_recip, zee);
 
+#if ONE_POLY_ONLY
 	long idx = itermax;
 	COMPLEX og = cpx_golden_poly(idx, zee);
 
 	double abz = abs(zee);
 	if (fabs(abz-1.0) < 2e-3) og = 0.0;
 	if (fabs(abz-2.0) < 2e-3) og = 0.0;
+#endif
 
 #if 0
 	double faby = abs(og);
