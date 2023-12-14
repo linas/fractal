@@ -12161,7 +12161,7 @@ ard: it is counting the number of distinct orbits of a given length.
 \end_inset
 
  corresponding to whether 
-\begin_inset Formula $T_{\beta}^{j}\left(x\right)<\beta/2$
+\begin_inset Formula $T_{\beta}^{j}\left(x\right)<1/2$
 \end_inset
 
  is true or not.
@@ -12468,12 +12468,12 @@ The bracketing constraint can be represented by a recursive function
  is acceptable.
  It is
 \begin_inset Formula 
-\[
+\begin{equation}
 \theta_{n}\left(\rho\right)=\begin{cases}
 \Theta\left(r_{n/2}-\rho\right)\cdot\theta_{n/2}\left(\rho\right) & \mbox{ for \ensuremath{n} even }\\
 \theta_{\left\lfloor n/2\right\rfloor }\left(\rho\right) & \mbox{ for \ensuremath{n} odd }
-\end{cases}
-\]
+\end{cases}\label{eq:theta mask}
+\end{equation}
 
 \end_inset
 
@@ -12664,10 +12664,10 @@ noprefix "false"
 , always.
  By convention, the last digit is always 1, also.
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
-Generated with irred.c, verified in irred-allowed.c
+Generated with irred.c, verified in irred-midpoint.c
 \end_layout
 
 \end_inset
@@ -13589,7 +13589,7 @@ order
 \begin_inset Text
 
 \begin_layout Plain Layout
-sequence
+valid indexes
 \end_layout
 
 \end_inset
@@ -13670,12 +13670,105 @@ sequence
 \end_layout
 
 \begin_layout Standard
-Although there are as many of these polynomials as there are Lyndon words,
- it is notx
+The properties of this sequence are brefily reviewd in the next section.
+\end_layout
+
+\begin_layout Subsection
+Properties of the theta sequence
 \end_layout
 
 \begin_layout Standard
-xxxxxxxxxx
+Define the validity mask 
+\begin_inset Formula $\theta_{n}=\theta_{n}\left(r_{n}\right)$
+\end_inset
+
+ using acceptance function from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theta mask"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ the root of 
+\begin_inset Formula $p_{n}\left(\beta\right)$
+\end_inset
+
+.
+ This is a bitmask, equaling one if the polynomial is valid; else it is
+ zero.
+ Define 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\theta_{n}=1$
+\end_inset
+
+ if an only if 
+\begin_inset Formula $n=\psi_{m}$
+\end_inset
+
+ for some 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Start the sequence with 
+\begin_inset Formula $\psi_{0}=0$
+\end_inset
+
+.
+ Comparing to the table above, one has 
+\begin_inset Formula $\psi_{4}=4$
+\end_inset
+
+ but 
+\begin_inset Formula $\psi_{5}=6$
+\end_inset
+
+ because 
+\begin_inset Formula $\theta_{5}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the remainder of this section, write 
+\begin_inset Formula $\psi\left(n\right)=\psi_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta\left(n\right)=\theta_{n}$
+\end_inset
+
+.
+ Several properties are apparent.
+ One has that 
+\begin_inset Formula $\theta\left(2^{m}\right)=\theta\left(2^{m}-1\right)=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ then 
+\begin_inset Formula $\theta\left(2m\right)=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
