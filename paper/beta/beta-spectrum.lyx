@@ -6681,12 +6681,12 @@ trouble spots
 \begin_inset Formula $k$
 \end_inset
 
-, and of the form 
+, each of the form 
 \begin_inset Formula $p_{\left\{ b_{k}\right\} }\left(\beta\right)$
 \end_inset
 
 .
- These must be arranged in the manner such that 
+ These must be arranged such that 
 \begin_inset Formula $p_{\left\{ b_{k}\right\} }\left(\beta\right)=0$
 \end_inset
 
@@ -6704,6 +6704,7 @@ reference "fig:Location-of-Midpoints"
 \end_inset
 
 ; not all bit-sequences appear.
+ The sequences that do appear encode the orbit of the mid-point; see below.
 \end_layout
 
 \begin_layout Standard
@@ -6726,163 +6727,98 @@ p_{n}\left(\beta\right)=\begin{cases}
 
 \end_inset
 
+This recursion terminates at 
+\begin_inset Formula $p_{0}\left(\beta\right)=\beta-1$
+\end_inset
 
+.
 \end_layout
 
 \begin_layout Standard
-The roots must be bracketed (to the left and right) by the roots of polynomials
+The positive real root 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+ is unique; the other 
+\begin_inset Formula $n-1$
+\end_inset
+
+ roots are complex; they are arranged in a roughly evenly-spaced ring on
+ the complex plane, not far from the unit circle, reminiscent of roots of
+ unity.
+ There is always a postive real root, which satisfies 
+\begin_inset Formula $1\le r_{n}<2$
+\end_inset
+
+; the real roots and the polynomials are in one-to-one correspondence.
+ The roots must be bracketed (to the left and right) by the roots of polynomials
  occurring earlier in the sequence; if the root is not bracketed, then the
  corresponding polynomial does not appear in the list.
 \end_layout
 
 \begin_layout Standard
-The bracketing relationship is rather awkwardly expressed in the following
- pseudo-code.
- Here, 
-\begin_inset Formula $r_{n}$
+The bracketing constraint can be represented by a recursive function 
+\begin_inset Formula $\theta_{n}\left(\rho\right)$
 \end_inset
 
- is the single real root 
-\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+ returning a boolean true/false value, as to whether a given polynomial
+ is acceptable.
+ It is
+\begin_inset Formula 
+\begin{equation}
+\theta_{n}\left(\rho\right)=\begin{cases}
+\Theta\left(r_{n/2}-\rho\right)\cdot\theta_{n/2}\left(\rho\right) & \mbox{ for \ensuremath{n} even }\\
+\theta_{\left\lfloor n/2\right\rfloor }\left(\rho\right) & \mbox{ for \ensuremath{n} odd }
+\end{cases}\label{eq:theta mask}
+\end{equation}
+
+\end_inset
+
+This uses a definition for the Heaviside 
+\begin_inset Formula $\Theta\left(x\right)$
+\end_inset
+
+ is one only for strictly positive 
+\begin_inset Formula $x>0$
+\end_inset
+
+, and is zero otherwise.
+ In numerical work, the test should be bounded away from zero.
+ The recursion compares the candidate 
+\begin_inset Formula $\rho$
+\end_inset
+
+ to some root at each lower order.
+ The recursion terminates at 
+\begin_inset Formula $\theta_{0}\left(\rho\right)=1$
 \end_inset
 
 .
- The polynomial 
-\begin_inset Formula $p_{n}$
-\end_inset
-
- is included in the list if it is the case that this pseudo-code does not
- fail:
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Box Frameless
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "80col%"
-special "none"
-height "1in"
-height_special "totalheight"
-thickness "0.4pt"
-separation "3pt"
-shadowsize "4pt"
-framecolor "black"
-backgroundcolor "none"
-status open
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset Formula $m_{prev}$
-\end_inset
-
- := 
+ The index 
 \begin_inset Formula $n$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset Formula $m$
+ corresponds to a valid polynomial, and thus a valid root, if and only if
+ 
+\begin_inset Formula $\theta_{n}\left(r_{n}\right)=1$
 \end_inset
 
- := 
-\begin_inset Formula $\left\lfloor n/2\right\rfloor $
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-while (0 < 
-\begin_inset Formula $m$
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset Formula $m_{prev}$
-\end_inset
-
- is even and 
-\begin_inset Formula $r_{m}$
-\end_inset
-
- < 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- then fail
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset Formula $m_{prev}$
-\end_inset
-
- := 
-\begin_inset Formula $m$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset Formula $m$
-\end_inset
-
- := 
-\begin_inset Formula $\left\lfloor m/2\right\rfloor $
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The above is a rather awkward way of stating that roots must be bracketed
- by pairs of previous roots.
- It can perhaps be more easily understood by studying the location of the
- discontinuities in figure 
+.
+ Effectvely, this states that roots of higher-order polynomials must be
+ less than a certain sequence of lower-order roots.
+ This is visible in the location of the discontinuities in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Location-of-Midpoints"
 
 \end_inset
 
-: new discontinuities at higher orders must occur before earlier ones.
+: new discontinuities at higher orders must occur to the left of earlier
+ ones.
 \end_layout
 
 \begin_layout Standard
@@ -6940,7 +6876,7 @@ The polynomial
 \begin_inset Formula $r_{2}$
 \end_inset
 
-; the recursive algorithm does not compare to 
+; the recursive algorithm does not compare it to 
 \begin_inset Formula $r_{4}$
 \end_inset
 
@@ -6950,44 +6886,71 @@ The polynomial
 \end_inset
 
  is relatively prime to the earlier polynomials, so irreducibility is not
- a sufficient criterion.
+ a sufficient criterion; the root must also be less.
 \end_layout
 
 \begin_layout Standard
-There are other ways to start the table, and to index the polynomials.
- The given indexing has the property that 
+The indexing has the property that 
 \begin_inset Formula $2n+1$
 \end_inset
 
-, taken as binary, encodes the coefficients of the polynomial.
- The order of the polynomial is 
-\begin_inset Formula $\left\lceil \log_{2}\left(2n+1\right)\right\rceil $
+, taken as binary, encodes both the coefficients of the polynomial, and
+ also the orbit of the midpoint.
+ The degree 
+\begin_inset Formula $\pi$
+\end_inset
+
+ of the polynomial is identical to the period 
+\begin_inset Formula $\pi$
+\end_inset
+
+ of the orbit; it is 
+\begin_inset Formula $\pi=\left\lceil \log_{2}\left(2n+1\right)\right\rceil $
 \end_inset
 
 .
- The index 
-\begin_inset Formula $n$
+ The bits 
+\begin_inset Formula $b_{i}$
 \end_inset
 
- itself encodes the orbit of the midpoint.
- That is, writing 
-\begin_inset Formula $2n+1=b_{0}b_{1}b_{2}\cdots b_{p}$
+ of the bitstring 
+\begin_inset Formula $2n+1=b_{0}b_{1}b_{2}\cdots b_{\pi}$
 \end_inset
 
- for binary digits 
-\begin_inset Formula $b_{k}$
+ correspond to the orbit as 
+\begin_inset Formula 
+\[
+b_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{\beta}{2}\right)-\frac{1}{2}\right)=d_{i}\left(\frac{1}{2}\right)=k_{i}\left(\frac{\beta}{2}\right)
+\]
+
 \end_inset
 
-, of order (period) 
-\begin_inset Formula $p$
+where the 
+\begin_inset Formula $d_{i}$
 \end_inset
 
-, then 
-\begin_inset Formula $T_{\beta}^{k}\left(\beta/2\right)<1/2$
+ are as given before, in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rescaled-bitseq"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- if and only if 
-\begin_inset Formula $b_{k}=0$
+, and the 
+\begin_inset Formula $k_{i}$
+\end_inset
+
+ as in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
@@ -7001,14 +6964,11 @@ There are other ways to start the table, and to index the polynomials.
 
 , always.
  By convention, the last digit is always 1, also.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status collapsed
 
 \begin_layout Plain Layout
-Generated with irred.c
+Generated with irred.c, verified in irred-midpoint.c
 \end_layout
 
 \end_inset
@@ -7930,7 +7890,7 @@ order
 \begin_inset Text
 
 \begin_layout Plain Layout
-sequence
+valid indexes
 \end_layout
 
 \end_inset
@@ -8001,68 +7961,13 @@ sequence
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset VSpace defskip
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Although there are as many of these polynomials as there are Lyndon words,
- there is no obvious way to write a bijection between the two.
- It is almost possible to do so by writing 
-\begin_inset Formula $2n$
-\end_inset
-
- in binary, and then reversing the order of the bits, left-to-right.
- One almost gets the Lyndon words in the correct order, except 
-\begin_inset Quotes eld
-\end_inset
-
-in the middle
-\begin_inset Quotes erd
-\end_inset
-
-: so, for example, in the table above, one can get the Lyndon order by exchangin
-g 10 with 12, and 13 with 14.
- But the table above cannot be re-ordered: the given ordering encodes the
- orbit of the midpoint.
- Apparently, although a given orbit can be cyclically rotated to obtain
- a Lyndon word, the initial segment of the orbit is not a Lyndon word itself.
-\end_layout
-
-\begin_layout Standard
-Although the necklace polynomial also describes the number of elements of
- length 
-\begin_inset Formula $n$
-\end_inset
-
- in a Hall set, there is no obvious correspondence.
- That is, if one writes down the Hall set in two generators, one does not
- obtain the binary strings given in the table above.
-\end_layout
-
-\begin_layout Standard
-Questions that present themselves include:
-\end_layout
-
-\begin_layout Itemize
-Any integer sequence has corresponding generating functions.
- Do any of these have any particularly nice or simple form, for the above
- sequence of allowed values of 
-\begin_inset Formula $n$
-\end_inset
-
-? What might they be?
-\end_layout
-
-\begin_layout Itemize
-How long is the initial segment of each periodic orbit, before the orbit
- attains it's Lyndon word form? What are the values of 
-\begin_inset Formula $\beta$
-\end_inset
-
- where the initial orbits are not in Lyndon form?
 \end_layout
 
 \begin_layout Subsection
