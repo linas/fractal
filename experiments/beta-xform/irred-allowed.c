@@ -45,10 +45,10 @@ long midpoint_bitseq(double beta)
 	double midpoint = 0.5-DELTA;
 	do
 	{
-		midpoint = tee(beta, midpoint);
-		// printf("%d  %g\n", count, midpoint);
-		if (midpoint < 0.5) bitseq |= 1UL;
 		bitseq <<= 1;
+		midpoint = tee(beta, midpoint);
+		if (midpoint < 0.5) bitseq |= 1UL;
+		printf("%d  %7.5g lo=%d 0x%lx\n", count, midpoint, (midpoint < 0.5), bitseq);
 		count ++;
 	}
 	while (fabs(midpoint-0.5)>EPSI && count < 60);
@@ -68,14 +68,15 @@ int main(int argc, char* argv[])
 	long idx = atol(argv[1]);
 
 	malloc_gold(100);
-	double gold = find_gold(idx);
-	printf("Index: %ld gold=%g", idx, gold);
+	bool valid = is_valid_index(idx);
+	double pzero = find_poly_zero(idx);
+	printf("Index: %ld valid=%d pzero=%g\n", idx, valid, pzero);
 
-	int orbitp = midpoint_period(gold);
+	int orbitp = midpoint_period(pzero);
 	int ord = order(idx);
-	printf("midpoing period=%d order=%d\n", orbitp, ord);
+	printf("midpoint period=%d order=%d\n", orbitp, ord);
 
-	long bitseq = midpoint_bitseq(gold);
+	long bitseq = midpoint_bitseq(pzero);
 
 	prt_bitstr(bitseq, "bitseq ", "\n");
 }

@@ -12380,12 +12380,12 @@ trouble spots
 \begin_inset Formula $k$
 \end_inset
 
-, and of the form 
+, each of the form 
 \begin_inset Formula $p_{\left\{ b_{k}\right\} }\left(\beta\right)$
 \end_inset
 
 .
- These must be arranged in the manner such that 
+ These must be arranged such that 
 \begin_inset Formula $p_{\left\{ b_{k}\right\} }\left(\beta\right)=0$
 \end_inset
 
@@ -12425,11 +12425,15 @@ p_{n}\left(\beta\right)=\begin{cases}
 
 \end_inset
 
+This recursion terminates at 
+\begin_inset Formula $p_{0}\left(\beta\right)=\beta-1$
+\end_inset
 
+.
 \end_layout
 
 \begin_layout Standard
-The real root 
+The positive real root 
 \begin_inset Formula $r_{n}$
 \end_inset
 
@@ -12441,202 +12445,87 @@ The real root
 \begin_inset Formula $n-1$
 \end_inset
 
- roots are complex; they are arranged roughly as a ring on the complex plane,
- reminiscent of roots of unity.
- The real root satisfies 
+ roots are complex; they are arranged in a roughly evenly-spaced ring on
+ the complex plane, not far from the unit circle, reminiscent of roots of
+ unity.
+ There is always a postive real root, which satisfies 
 \begin_inset Formula $1\le r_{n}<2$
 \end_inset
 
 ; the real roots and the polynomials are in one-to-one correspondence.
- Each real root corresponds to an orbit of the 
-\end_layout
-
-\begin_layout Standard
-xxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-the bit sequence is given by
-\end_layout
-
-\begin_layout Standard
-The relative-prime means no shorter periods
-\end_layout
-
-\begin_layout Standard
-The roots must be bracketed (to the left and right) by the roots of polynomials
+ The roots must be bracketed (to the left and right) by the roots of polynomials
  occurring earlier in the sequence; if the root is not bracketed, then the
  corresponding polynomial does not appear in the list.
 \end_layout
 
 \begin_layout Standard
 The bracketing constraint can be represented by a recursive function 
-\begin_inset Formula $\theta_{n}$
+\begin_inset Formula $\theta_{n}\left(\rho\right)$
 \end_inset
 
  returning a boolean true/false value, as to whether a given polynomial
- is acceptable:
+ is acceptable.
+ It is
 \begin_inset Formula 
 \[
-\theta_{n}\left(r\right)=\begin{cases}
-\left(r_{n/2}\ge r\right)\cdot\theta_{n/2}\left(r\right) & \mbox{ for \ensuremath{n} even }\\
-\theta_{\left\lfloor n/2\right\rfloor }\left(r\right) & \mbox{ for \ensuremath{n} odd }
+\theta_{n}\left(\rho\right)=\begin{cases}
+\Theta\left(r_{n/2}-\rho\right)\cdot\theta_{n/2}\left(\rho\right) & \mbox{ for \ensuremath{n} even }\\
+\theta_{\left\lfloor n/2\right\rfloor }\left(\rho\right) & \mbox{ for \ensuremath{n} odd }
 \end{cases}
 \]
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-The bracketing relationship is rather awkwardly expressed in the following
- pseudo-code.
- Here, 
-\begin_inset Formula $r_{n}$
+This uses a definition for the Heaviside 
+\begin_inset Formula $\Theta\left(x\right)$
 \end_inset
 
- is the single real root 
-\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+ is one only for strictly positive 
+\begin_inset Formula $x>0$
+\end_inset
+
+, and is zero otherwise.
+ The recursion compares the candidate 
+\begin_inset Formula $\rho$
+\end_inset
+
+ to some root at each lower order.
+ The recursion terminates at 
+\begin_inset Formula $\theta_{0}\left(\rho\right)=1$
 \end_inset
 
 .
- The polynomial 
-\begin_inset Formula $p_{n}$
-\end_inset
-
- is included in the list if it is the case that this pseudo-code does not
- fail:
 \end_layout
 
 \begin_layout Standard
-\align center
-\begin_inset Box Frameless
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "80col%"
-special "none"
-height "1in"
-height_special "totalheight"
-thickness "0.4pt"
-separation "3pt"
-shadowsize "4pt"
-framecolor "black"
-backgroundcolor "none"
-status open
+xxxxxxx
+\end_layout
 
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset Formula $m_{prev}$
-\end_inset
-
- := 
+\begin_layout Standard
+The index 
 \begin_inset Formula $n$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset Formula $m$
+ corresponds to a valid polynomial, and thus a valid root, if and only if
+ 
+\begin_inset Formula $\theta_{n}\left(r_{n}\right)=1$
 \end_inset
 
- := 
-\begin_inset Formula $\left\lfloor n/2\right\rfloor $
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-while (0 < 
-\begin_inset Formula $m$
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset Formula $m_{prev}$
-\end_inset
-
- is even and 
-\begin_inset Formula $r_{m}$
-\end_inset
-
- < 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- then fail
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset Formula $m_{prev}$
-\end_inset
-
- := 
-\begin_inset Formula $m$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset Formula $m$
-\end_inset
-
- := 
-\begin_inset Formula $\left\lfloor m/2\right\rfloor $
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+.
 \end_layout
 
 \begin_layout Standard
-The above is a rather awkward way of stating that roots must be bracketed
+Effectvely, this states that roots of higher-order polynomials must be bracketed
  by pairs of previous roots.
- It can perhaps be more easily understood by studying the location of the
- discontinuities in figure 
+ This is visible in the location of the discontinuities in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Location-of-Midpoints"
 
 \end_inset
 
-: new discontinuities at higher orders must occur before earlier ones.
+: new discontinuities at higher orders must occur to the left of earlier
+ ones.
 \end_layout
 
 \begin_layout Standard
@@ -12863,7 +12752,7 @@ root
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+-1
 \end_layout
 
 \end_inset
