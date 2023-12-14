@@ -173,7 +173,7 @@ The beta bitsequence
 The beta shift generates a bitsequence, defined in eq:down-bits as
 \begin_inset Formula 
 \[
-k_{n}\left(\beta;x\right)=\begin{cases}
+k_{n}\left(x\right)=\begin{cases}
 0 & \mbox{ if }0\le T_{\beta}^{n}(x)<\frac{1}{2}\\
 1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}(x)\le1
 \end{cases}
@@ -213,7 +213,36 @@ The beta shift acts on this series as
 \end_layout
 
 \begin_layout Paragraph*
-The Gelfond–Parry digit sequence
+The midpoint/endpoint orbit
+\end_layout
+
+\begin_layout Standard
+The iterated endpoint of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is the same as the iterated mid-point of the beta shift.
+ It is 
+\begin_inset Formula 
+\[
+t_{n}\equiv t_{\beta}^{n}\left(1\right)=\frac{2}{\beta}T_{\beta}^{n}\left(\frac{\beta}{2}\right)
+\]
+
+\end_inset
+
+The iterated mid-point is written as 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{n}=T_{\beta}^{n}\left(\beta/2\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph*
+Gelfond–Parry digit sequence
 \end_layout
 
 \begin_layout Standard
@@ -236,20 +265,28 @@ Using the Heaviside step function, this can be written as
 \begin_inset Formula $\varepsilon_{n}\left(y\right)=\Theta\left(t_{n}-y\right)$
 \end_inset
 
- with 
-\begin_inset Formula $t_{n}\equiv t_{\beta}^{n}\left(1\right)$
-\end_inset
-
- being the iterated endpoint.
- Equivalently, the iterated midpoint is 
+.
+ This is rescaled to the beta shift in eq:rescaled-bitseq 
 \begin_inset Formula 
 \[
-t_{\beta}^{n}\left(1\right)=\frac{2}{\beta}T_{\beta}^{n}\left(\frac{\beta}{2}\right)
+d_{n}\left(x\right)=\varepsilon_{n}\left(\frac{2x}{\beta}\right)=\Theta\left(\frac{\beta}{2}t_{n}-x\right)=\Theta\left(T^{n}\left(\frac{\beta}{2}\right)-x\right)=\begin{cases}
+1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
+0 & \mbox{otherwise}
+\end{cases}
 \]
 
 \end_inset
 
+This digit sequence runs in the 
+\begin_inset Quotes eld
+\end_inset
 
+opposite direction
+\begin_inset Quotes erd
+\end_inset
+
+ from the beta bitsequence.
+ The transfer operator is a push-forward; the Koopman operator is a pull-back.
 \end_layout
 
 \end_body

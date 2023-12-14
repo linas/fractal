@@ -3186,12 +3186,12 @@ where
 
  is the digit sequence 
 \begin_inset Formula 
-\[
+\begin{equation}
 \varepsilon_{n}\left(y\right)=\begin{cases}
 0 & \mbox{ if }t_{\beta}^{n}\left(1\right)\le y\\
 1 & \mbox{ otherwise}
-\end{cases}
-\]
+\end{cases}\label{eq:Gelfond-Parry digits}
+\end{equation}
 
 \end_inset
 
@@ -6522,12 +6522,12 @@ where the
  beta-shift.
  That is, 
 \begin_inset Formula 
-\[
+\begin{equation}
 d_{n}\left(x\right)=\varepsilon_{n}\left(\frac{2x}{\beta}\right)=\Theta\left(\frac{\beta}{2}t_{n}-x\right)=\Theta\left(T^{n}\left(\frac{\beta}{2}\right)-x\right)=\begin{cases}
 1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
 0 & \mbox{otherwise}
-\end{cases}
-\]
+\end{cases}\label{eq:rescaled-bitseq}
+\end{equation}
 
 \end_inset
 
@@ -12397,8 +12397,8 @@ reference "fig:Location-of-Midpoints"
 \end_inset
 
 .
- This limits the polynomials that can appear; it limits the possible coefficient
-s 
+ This constrains the polynomials that can appear; it constrains the possible
+ coefficients 
 \begin_inset Formula $\left\{ b_{k}\right\} $
 \end_inset
 
@@ -12429,9 +12429,63 @@ p_{n}\left(\beta\right)=\begin{cases}
 \end_layout
 
 \begin_layout Standard
+The real root 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+ is unique; the other 
+\begin_inset Formula $n-1$
+\end_inset
+
+ roots are complex; they are arranged roughly as a ring on the complex plane.
+ The real root satisfies 
+\begin_inset Formula $1\le r_{n}<2$
+\end_inset
+
+; the real roots and the polynomials are in one-to-one correspondence.
+ Each real root corresponds to an orbit of the 
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+the bit sequence is given by
+\end_layout
+
+\begin_layout Standard
+The relative-prime means no shorter periods
+\end_layout
+
+\begin_layout Standard
 The roots must be bracketed (to the left and right) by the roots of polynomials
  occurring earlier in the sequence; if the root is not bracketed, then the
  corresponding polynomial does not appear in the list.
+\end_layout
+
+\begin_layout Standard
+The bracketing constraint can be represented by a recursive function 
+\begin_inset Formula $\theta_{n}$
+\end_inset
+
+ returning a boolean true/false value, as to whether a given polynomial
+ is acceptable:
+\begin_inset Formula 
+\[
+\theta_{n}\left(r\right)=\begin{cases}
+\left(r_{n/2}\ge r\right)\cdot\theta_{n/2}\left(r\right) & \mbox{ for \ensuremath{n} even }\\
+\theta_{\left\lfloor n/2\right\rfloor }\left(r\right) & \mbox{ for \ensuremath{n} odd }
+\end{cases}
+\]
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -12772,7 +12826,11 @@ binary
 \begin_inset Text
 
 \begin_layout Plain Layout
-root
+root 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
