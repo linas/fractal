@@ -116,7 +116,7 @@ long index_from_fbaire(int cfrac[], int len)
 	// a valid golden polynomial. I can't guess what's valid or not,
 	// so go to the polynomial itself for ground truth.
 	int cnt = 0;
-	while (false == is_valid_gold(follower) && cnt < 60)
+	while (false == is_valid_index(follower) && cnt < 60)
 	{
 		follower *= 2UL;
 		cnt ++;

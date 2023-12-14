@@ -62,8 +62,7 @@ COMPLEX CEGF(double (*fun)(long), COMPLEX x)
 // The mask-bits
 double mask(long n)
 {
-	double beta = find_gold(n);
-	if (0.5 < beta) return 1.0;
+	if (is_valid_index(n)) return 1.0;
 	return 0.0;
 }
 
@@ -75,57 +74,15 @@ double gold(long n)
 	return 0.0;
 }
 
-// Allowed values
 double allowed(long n)
-{
-	long idx = 1;
-	int cnt = 0;
-	while (cnt < n)
-	{
-		double beta = find_gold(idx);
-		if (0.5 < beta) cnt++;
-		idx++;
-	}
-	idx --;
-	// printf("counted %ld is %ld\n", n, idx);
-	return idx;
-}
-
-static int* akk = nullptr;
-int allow_cache_rec(long n)
 {
 	static bool init = false;
 	if (not init)
 	{
-#define NTERMS (MAXSUM+1)
-		akk = (int *) malloc(NTERMS * sizeof(int));
-		for (int i=0; i< NTERMS; i++) akk[i] = -1;
-		akk[0] = 1;
-		akk[1] = 1;
+		malloc_index_cache(MAXSUM+1);
 		init = true;
 	}
-
-	if (akk[n] < 0)
-	{
-		long idx = allow_cache_rec(n-1) + 1;
-		int cnt = n-1;
-		while (cnt < n)
-		{
-			double beta = find_gold(idx);
-			if (0.5 < beta) cnt++;
-			idx++;
-		}
-		idx --;
-		akk[n] = idx;
-		// printf("allowed %ld is %ld\n", n, idx);
-	}
-
-	return akk[n];
-}
-
-double allowed_cache(long n)
-{
-	return allow_cache_rec(n);
+	return valid_index_cache(n);
 }
 
 #if 0
@@ -155,8 +112,8 @@ static double beta_disk(double re_q, double im_q, int itermax, double param)
 	// COMPLEX og = CEGF(mask, zee);
 	// COMPLEX og = COGF(gold, zee);
 	// COMPLEX og = CEGF(gold, zee);
-	// COMPLEX og = COGF(allowed_cache, zee);
-	COMPLEX og = CEGF(allowed_cache, zee);
+	// COMPLEX og = COGF(allowed, zee);
+	COMPLEX og = CEGF(allowed, zee);
 
 #if 1
 	double faby = abs(og);

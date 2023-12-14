@@ -132,7 +132,7 @@ double find_gold(long n)
 /**
  * Return true if `n` corresponds to a golden polynomial, else false.
  */
-bool is_valid_gold(long n)
+bool is_valid_index(long n)
 {
 	// Allow silent out-of-bounds
 	if (maxidx <= n) return false;
@@ -141,6 +141,62 @@ bool is_valid_gold(long n)
 	if (-1L == n) return true;
 	double gold = find_poly_zero(n);
 	return (-1 == zero_bracket_factor(n, gold));
+}
+
+// =================================================================
+
+// Return the n'th element of the "valid index sequence".
+// This is the sequence 1,2,3,4,6,7,8,10,12,13,14,15,16,24...
+// The composition is_valid_index(valid_index(n)) always returns true.
+// All valid indexes are included in the list.
+//
+long valid_index(long n)
+{
+	long idx = 1;
+	long cnt = 0;
+	while (cnt < n)
+	{
+		if (is_valid_index(idx)) cnt++;
+		idx++;
+	}
+	idx --;
+	// printf("counted %ld is %ld\n", n, idx);
+	return idx;
+}
+
+static long* akk = NULL;
+void malloc_index_cache(long maxseq)
+{
+	akk = (long *) malloc(maxseq * sizeof(long));
+	for (long i=0; i< maxseq; i++) akk[i] = -1;
+	akk[0] = 1;
+	akk[1] = 1;
+}
+
+// Caching version of above, avoids recompuation.
+long valid_index_cache(long n)
+{
+	if (NULL == akk)
+	{
+		printf("Error: Failed to initialize index cache\n");
+		return -2;
+	}
+
+	if (akk[n] < 0)
+	{
+		long idx = valid_index_cache(n-1) + 1;
+		long cnt = n-1;
+		while (cnt < n)
+		{
+			if (is_valid_index(idx)) cnt++;
+			idx++;
+		}
+		idx --;
+		akk[n] = idx;
+		// printf("allowed %ld is %ld\n", n, idx);
+	}
+
+	return akk[n];
 }
 
 // =================================================================
