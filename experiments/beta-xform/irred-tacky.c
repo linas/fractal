@@ -25,8 +25,10 @@ double tak(double w, double x)
 			idx |= 1;
 		}
 		int vn = is_valid_index(idx);
+printf("yo %d %ld b=%d t=%d b&t=%d\n", i, idx, bn, vn, bn&&vn);
 
 		if (bn && vn) sum += wn;
+		// if (vn) sum += wn;
 		wn *= w;
 
 		idx <<= 1;
@@ -42,6 +44,10 @@ int main(int argc, char* argv[])
 	malloc_gold(nmax);
 
 	double w = 0.6;
+
+double foo = atof(argv[1]);
+tak(w, foo);
+exit(1);
 
 	int npts = 3*5*7*11;
 	double delta = 1.0 / ((double) npts);
