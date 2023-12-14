@@ -3,9 +3,8 @@
  *
  * Find integer sequences for the golden polynomials.
  * Relate it to the continued-fraction representation.
- * See irred.c for additional utilities.
  *
- * February 2018, October 2020
+ * February 2018, October 2020, December 2023
  */
 
 #include <math.h>
@@ -13,29 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 #include "irred-gold.c"
-
-
-// =================================================================
-
-// Compute the period (order) of the iteration of the midpoint
-// This is just sanity check; beta should "already be correct".
-int iteration_period(double beta)
-{
-#define DELTA 1e-15
-#define EPSI  1e-13
-	int count = 0;
-	double midpoint = 0.5-DELTA;
-	do
-	{
-		count ++;
-		midpoint = tee(beta, midpoint);
-		// printf("%d  %g\n", count, midpoint);
-	}
-	while (fabs(midpoint-0.5)>EPSI && count < 100);
-	return count;
-}
 
 // =================================================================
 
