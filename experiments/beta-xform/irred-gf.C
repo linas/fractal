@@ -30,7 +30,7 @@ double OGF(double (*fun)(long), double x)
 
 #define MAXSUM 500
 
-// coomplex-valued Ordinary generating function
+// complex-valued Ordinary generating function
 COMPLEX COGF(double (*fun)(long), COMPLEX x)
 {
 	COMPLEX sum=0.0;
@@ -44,7 +44,7 @@ COMPLEX COGF(double (*fun)(long), COMPLEX x)
 	return sum;
 }
 
-// coomplex-valued Exponential generating function
+// complex-valued Exponential generating function
 COMPLEX CEGF(double (*fun)(long), COMPLEX x)
 {
 	COMPLEX sum=0.0;

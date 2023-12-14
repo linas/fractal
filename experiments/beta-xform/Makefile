@@ -19,7 +19,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
 	alldisk betadisk momenta zetadisk normie irred-viz irred-fraction \
-	irred-gf
+	irred-gf irred-disk
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -83,6 +83,7 @@ irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c irred-gold.c
 irred-fraction.o: irred-fraction.c irred-gold.c
 irred-gf.o: irred-gf.C irred-gold.c
+irred-disk.o: irred-disk.C irred-gold.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
@@ -139,3 +140,4 @@ betadisk: betadisk.o $(BRAT)
 zetadisk: zetadisk.o
 momenta: momenta.o $(BRAT)
 irred-gf: irred-gf.o $(BRAT)
+irred-disk: irred-disk.o $(BRAT)
