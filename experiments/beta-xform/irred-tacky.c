@@ -28,6 +28,8 @@ double tak(int n, double x)
 	double xn = x * ((double) tn);
 	double xm = xn - floor(xn);
 	int bn = (xm > 0.5);
+
+	if (false == is_valid_index(n)) return 0.0;
 	return bn;
 }
 
