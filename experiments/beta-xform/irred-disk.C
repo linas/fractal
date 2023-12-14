@@ -1,8 +1,10 @@
 /*
  * irred-disk.c
  *
- * Exploration of generating functions convolved with
- * the beta polynomials.
+ * Exploration of Lambert-series-inspired generating functions
+ * I.E. generation with the the beta polynomials.
+ * The Lambert series placed a pole at each of the roots of unity.
+ * This does likewise, but for the roots of beta.
  *
  * December 2023
  */
@@ -36,6 +38,11 @@ COMPLEX cpx_golden_poly(long n, COMPLEX x)
 	}
 // printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
 	return xn - acc;
+}
+
+COMPLEX golden_recip(long n, COMPLEX x)
+{
+	return 1.0 / cpx_golden_poly(n, x);
 }
 
 #define MAXSUM 500
@@ -80,16 +87,19 @@ static double beta_disk(double re_q, double im_q, int itermax, double param)
 	}
 
 	COMPLEX zee = re_q + I * im_q;
-	COMPLEX og = COGF(cpx_golden_poly, zee);
-	// COMPLEX og = CEGF(allowed, zee);
+	// COMPLEX og = COGF(cpx_golden_poly, zee);
+	// COMPLEX og = COGF(golden_recip, zee);
+	// COMPLEX og = CEGF(cpx_golden_poly, zee);
+	COMPLEX og = CEGF(golden_recip, zee);
 
 #if 1
 	double faby = abs(og);
-	// double abz = abs(zee);
+	double abz = abs(zee);
 
-	// double norm = abz * exp(-abz);
+	// This norm is totally wrong.
+	double norm = abz * exp(-0.6666*abz);
 	// printf("u %g %g %g %g \n", re_q, im_q, faby, norm);
-	// faby *= norm;
+	faby *= norm;
 	return faby;
 #endif
 
