@@ -1,5 +1,5 @@
 /*
- * irred-disk.c
+ * irred-disk.C
  *
  * Exploration of Lambert-series-inspired generating functions
  * I.E. generation with the the beta polynomials.
