@@ -32,6 +32,19 @@ int main(int argc, char* argv[])
 	for (long i = 0; i< maxidx/2; i++)
 	{
 		bool valid = is_valid_index(i);
+
+#if 0
+		if (false == valid)
+		{
+			for (long j=1; j<maxidx/2; j+=2)
+			{
+				bool vodd = is_valid_index(i*j);
+				if (vodd)
+					printf("huh i=%ld j=%ld\n", i, j);
+			}
+		}
+#endif
+
 		if (false == valid) continue;
 
 		bool v2 = is_valid_index(2*i);
@@ -66,6 +79,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+#if 0
 	// Sum of Moreau
 	printf("yo %d is %ld\n", 1, valid_index_cache(1));
 	printf("yo %d is %ld\n", 3, valid_index_cache(3));
@@ -75,5 +89,5 @@ int main(int argc, char* argv[])
 	printf("yo %d is %ld\n", 39, valid_index_cache(39));
 	printf("yo %d is %ld\n", 69, valid_index_cache(69));
 	printf("yo %d is %ld\n", 125, valid_index_cache(125));
-
+#endif
 }
