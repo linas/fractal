@@ -84,19 +84,22 @@ long zero_bracket_factor(long n, double gold)
 {
 	// Its valid only if it is in the middle.
 #define EPS 2.0e-15
-	// printf("---------\ncheck bracketing for gold=%20.16g at n=%d\n", gold, n);
+
+// #define DBZ(X) printf X
+#define DBZ(X)
+	DBZ(("---------\ncheck bracketing for gold=%20.16g at n=%ld\n", gold, n));
 	bool ork = true;
 	long nhl = n;
 	long nh = nhl >> 1;
 	while (nh)
 	{
-		//printf("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n",
-		//       n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold);
+		DBZ(("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n", \
+		     n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold));
 		if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
 		nhl = nh;
 		nh >>= 1;
 	}
-	// printf("Bracket says ork=%d\n", ork);
+	DBZ(("Bracket says ork=%d\n", ork));
 
 	if (ork) return -1L;
 	return nh;
@@ -211,10 +214,11 @@ double tee(double beta, double x)
 // print the bit-string that defines the orbit
 void print_orbit(int len, double gold)
 {
+#define DEPS 1e-14
 	double mid = 0.5*gold;
 	while (1 < len)
 	{
-		if (mid < 0.5) printf(" 0");
+		if (mid < 0.5-DEPS) printf(" 0");
 		else printf (" 1");
 
 		if (0.5 <= mid) mid -= 0.5;

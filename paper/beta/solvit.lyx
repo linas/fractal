@@ -12403,6 +12403,8 @@ reference "fig:Location-of-Midpoints"
 \end_inset
 
 ; not all bit-sequences appear.
+ The sequences that do appear encode the orbit of the mid-point, as explained
+ below.
 \end_layout
 
 \begin_layout Standard
@@ -12485,6 +12487,7 @@ This uses a definition for the Heaviside
 \end_inset
 
 , and is zero otherwise.
+ In numerical work, the test should be bounded away from zero.
  The recursion compares the candidate 
 \begin_inset Formula $\rho$
 \end_inset
@@ -12495,14 +12498,7 @@ This uses a definition for the Heaviside
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-xxxxxxx
-\end_layout
-
-\begin_layout Standard
-The index 
+ The index 
 \begin_inset Formula $n$
 \end_inset
 
@@ -12512,11 +12508,8 @@ The index
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Effectvely, this states that roots of higher-order polynomials must be bracketed
- by pairs of previous roots.
+ Effectvely, this states that roots of higher-order polynomials must be
+ less than a certain sequence of lower-order roots.
  This is visible in the location of the discontinuities in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -12529,7 +12522,7 @@ reference "fig:Location-of-Midpoints"
 \end_layout
 
 \begin_layout Standard
-Thus, for example, the polynomial 
+For example, the polynomial 
 \begin_inset Formula $\beta^{3}-\beta-1$
 \end_inset
 
@@ -12583,7 +12576,7 @@ The polynomial
 \begin_inset Formula $r_{2}$
 \end_inset
 
-; the recursive algorithm does not compare to 
+; the recursive algorithm does not compare it to 
 \begin_inset Formula $r_{4}$
 \end_inset
 
@@ -12593,12 +12586,11 @@ The polynomial
 \end_inset
 
  is relatively prime to the earlier polynomials, so irreducibility is not
- a sufficient criterion.
+ a sufficient criterion; the root must also be less.
 \end_layout
 
 \begin_layout Standard
-There are other ways to start the table, and to index the polynomials.
- The given indexing has the property that 
+The indexing has the property that 
 \begin_inset Formula $2n+1$
 \end_inset
 
@@ -12752,7 +12744,7 @@ root
 \begin_inset Text
 
 \begin_layout Plain Layout
--1
+
 \end_layout
 
 \end_inset
