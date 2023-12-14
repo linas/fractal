@@ -1,5 +1,5 @@
 /*
- * irred-allowed.c
+ * irred-midpoint.c
  *
  * Verify the orbit exapanions and orbit labelling formulas.
  * Make sure everything works as claimed.
