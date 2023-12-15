@@ -19039,7 +19039,7 @@ noprefix "false"
 \end_inset
 
 .
- By definition, the only indexes get labels if and only if 
+ By definition, indexes get labels if and only if 
 \begin_inset Formula $1=\theta_{n}$
 \end_inset
 
@@ -19199,7 +19199,7 @@ holes
 \end_layout
 
 \begin_layout Subsection
-Labeling examples
+Label formula
 \end_layout
 
 \begin_layout Standard
@@ -19208,12 +19208,12 @@ The primary task is to exhibit the function
 \end_inset
 
  that maps finite-length strings to indexes.
- The primary issue is that this cannot be given in closed form, without
- appealing to the recursively-defined index mask 
+ This is given through a recursion relation that depends on the index mask
+ 
 \begin_inset Formula $\theta_{n}$
 \end_inset
 
- given in eqn 
+ given previously, in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:theta mask"
@@ -19224,8 +19224,9 @@ noprefix "false"
 \end_inset
 
 .
- The mask plays a central role.
- It seems easiest to exhibit this by example.
+ The mask plays a central role; it encodes information about the polynomials
+ and the mid-point orbits; it also encodes the bracketing and self-similarity
+ properties of the system.
 \end_layout
 
 \begin_layout Standard
@@ -19874,7 +19875,7 @@ The case where
 \begin_inset Formula $-1$
 \end_inset
 
- in the sequence, is handled with a 
+ in the sequence, is handled by means of a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -19882,7 +19883,60 @@ parlor trick
 \begin_inset Quotes erd
 \end_inset
 
-, to be demonstrated below.
+.
+ Sequences with a trailing 
+\begin_inset Formula $-1$
+\end_inset
+
+ shorten in length, so that 
+\begin_inset Formula $\left[\cdots,m,-1\right]=\left[\cdots,m-1\right]$
+\end_inset
+
+.
+ The final comma disappears, and the trailing digit is decremented by one.
+ This may seem like a peculiar rule, but is really just a short-hand to
+ simplify the notation for the intervals.
+ 
+\end_layout
+
+\begin_layout Standard
+This perhaps most easily understood by plotting actual 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values for interval endpoints.
+ One bracketing relationship is 
+\begin_inset Formula $\left[1,0,0\right]\Mapsto\left[1,0,0,0\right]\Mapsfrom\left[0\right]$
+\end_inset
+
+ which corresponds to 
+\begin_inset Formula $42\Mapsto170\Mapsfrom1$
+\end_inset
+
+.
+ The parlor trick just allows writing the right-hand side as 
+\begin_inset Formula $\left[1,0,-1\right]=\left[1,-1\right]=\left[0\right]$
+\end_inset
+
+.
+ That this is the correct right-hand-side is revelaed by plotting 
+\begin_inset Formula 
+\[
+\beta\left[1,0,0\right]=1.60135...<\beta\left[1,0,0,0\right]=1.61193...<\beta\left[0\right]=1.61803...
+\]
+
+\end_inset
+
+and observing that 
+\begin_inset Formula $\left[0\right]$
+\end_inset
+
+ is necessarily the right-hand limit for the interval, as there is no other
+ appropriate discontinuity for 
+\begin_inset Formula $\left[1,0,0,0\right]$
+\end_inset
+
+ to be bounded by.
 \end_layout
 
 \begin_layout Standard
@@ -20023,7 +20077,7 @@ It is not hard to find many examples for which
 \begin_inset Formula $\theta$
 \end_inset
 
- is chatoic as well.
+ is chaotic as well.
  However, thanks to the recursive defintion of the polynomials given in
  eqn 
 \begin_inset CommandInset ref
@@ -20054,7 +20108,7 @@ noprefix "false"
 \begin_inset Formula $p$
 \end_inset
 
-will be small.
+ will be small.
  The root will always lie in between the two endpoints of the bracketed
  interval, given by eqn 
 \begin_inset CommandInset ref
@@ -20071,6 +20125,15 @@ noprefix "false"
 
 \begin_layout Subsection
 More examples
+\end_layout
+
+\begin_layout Standard
+Below follow a large number of detailed examples.
+ Most of these are not really relevant to anything; they're a historical
+ artifact of an exercise that was needed to be done, to arrive at the correct
+ result.
+ If you are reading this, you can probably skip this section.
+ And so, here we go.
 \end_layout
 
 \begin_layout Standard
@@ -20337,10 +20400,6 @@ Bracket
 \begin_inset VSpace defskip
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 The numbering is more difficult, here.
  It is given by the zero-digit-appending relation 
 \begin_inset Formula $\eta\left[k,0\right]=2^{k}\left(2^{k+1}+1\right)=2^{k}\left(2\eta\left[k\right]+1\right)$
@@ -20566,10 +20625,6 @@ Bracket
 \begin_inset VSpace defskip
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 The index of the leader is described by the promotion 
 \begin_inset Formula $\eta\left[k,m\right]=2^{m}\eta\left[k,0\right]$
 \end_inset
@@ -20621,27 +20676,17 @@ Alternately, counting from zero:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 This encoding is unique, provided that act of appending a zero results in
  a sequence that is distinct from all shorter sequences.
 \end_layout
 
-\begin_layout Subsection
-More examples
-\end_layout
-
 \begin_layout Standard
-This section is a laborious, detailed hunt for a generalized pattern.
- It is both succeeds and fails in this task; the success is that the mask
- function must be explicitly used; the failure is that there is no closed-form
- expression for the mask.
-\end_layout
+A general pattern has not yet emerged (and it won't; it can't, because 
+\begin_inset Formula $\theta$
+\end_inset
 
-\begin_layout Standard
-A general pattern has not yet emerged.
+ is chaotic.
+ See the recursive defintion above).
  We must go deeper.
  First, confirm an easy case: that index doubling can be handled by incrementing
  the trailing digit.
@@ -21071,10 +21116,6 @@ Bracket
 \begin_inset VSpace defskip
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 The appending relation in this table is 
 \begin_inset Formula $\left[0,m,0\right]=2\left[0,m\right]+1$
 \end_inset
@@ -21236,10 +21277,6 @@ Bracket
 \begin_inset VSpace defskip
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 The general appending relation to move from two digits to three appears
  to be given by
 \begin_inset Formula 
@@ -22555,10 +22592,6 @@ Bracket
 \begin_inset VSpace defskip
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 which brackets as 
 \begin_inset Formula 
 \begin{align*}
@@ -23176,6 +23209,11 @@ But it is not always correct; it usually works, with various exceptions.
 \end_inset
 
  and there seem to be others.
+ (The generic recursion relation, involving 
+\begin_inset Formula $\theta$
+\end_inset
+
+, gives the right answer.)
 \end_layout
 
 \begin_layout Standard
@@ -23205,6 +23243,11 @@ and
 \begin_layout Standard
 What's the generalization? Proceeding naively, as above, results in a dead
  end.
+ The correct recursion relation requires using 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and there is no simple closed form for that.
 \end_layout
 
 \begin_layout Standard
@@ -23218,44 +23261,6 @@ Summary: after a very long and painstaking analysis, we were able to specify
  beta map.
  It handles both finite sequences, and the infinite ones (see below).
  The bracketing allows limits to be taken.
-\end_layout
-
-\begin_layout Standard
-Despite having a sequence mapping that appears to be direct and obvious,
- there is no corresponding index numbering that it lines up with.
- The indexing for lengths one through four were obtained above.
- Lengths one through three seem simple enough.
- They seem to be fool-proof, but given the issues with lenggth four, even
- these might be broken? Can't tell.
- Length four, given above, but incompletely, does not offer any clues for
- how length five should be treated.
-\end_layout
-
-\begin_layout Standard
-It is almost enough to allow 
-\begin_inset Formula $0<m_{1}$
-\end_inset
-
- to control things; the following rule almost works:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k},0\right]=2^{m_{1}+m_{2}+\cdots+m_{k-1}}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)
-\]
-
-\end_inset
-
-However, on relatively rare occasions, it should not be applied.
- These are easily found.
- There are no obvious fixes.
- Even length four is an incomplete mess.
-\end_layout
-
-\begin_layout Standard
-Clearly, there's somthing sophisticated going on here, but I don't see the
- relation to the equally chaotic results from earlier sections.
 \end_layout
 
 \begin_layout Subsection

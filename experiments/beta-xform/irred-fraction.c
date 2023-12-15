@@ -615,7 +615,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define VALIDATE_INDEX
+#define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
@@ -640,7 +640,7 @@ int main(int argc, char* argv[])
 			printf("\nError: missing representation for n=%ld\n", n);
 
 		// if (4 == len && 0 == cfrac[3] && 0 != cfrac[0])
-		if (0)
+		if (1)
 		{
 			long nleft = get_bracket_left(n);
 			long nright = get_bracket_right(n);
@@ -653,7 +653,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define SANITY_CHECK
+// #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Run validation on the recursively-generated sequences.
 	// Same as the odometer graph below, but does not print data.
