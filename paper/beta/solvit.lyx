@@ -12417,12 +12417,12 @@ The table below explicitly shows the polynomials for the first few orders.
 
  must have the form
 \begin_inset Formula 
-\[
+\begin{equation}
 p_{n}\left(\beta\right)=\begin{cases}
 \beta\left(p_{n/2}\left(\beta\right)+1\right)-1 & \mbox{ for \ensuremath{n} even }\\
 \beta p_{\left(n-1\right)/2}\left(\beta\right)-1 & \mbox{ for \ensuremath{n} odd }
-\end{cases}
-\]
+\end{cases}\label{eq:polynomial recursion}
+\end{equation}
 
 \end_inset
 
@@ -13670,7 +13670,7 @@ valid indexes
 \end_layout
 
 \begin_layout Standard
-The properties of this sequence are breifly reviewd in the next section.
+The properties of this sequence are breifly reviewed in the next section.
 \end_layout
 
 \begin_layout Subsection
@@ -19856,6 +19856,224 @@ From this table, it can be inferred that the recursive sequence index numbering
 \end_layout
 
 \begin_layout Standard
+This is sufficient to give a flavor of how bracketing works, and to expose
+ an example of index-doubling within a bracketed interval.
+ The general form of the bracketing relationship is 
+\begin_inset Formula 
+\begin{equation}
+\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{k}-1\right]\label{eq:bracketing relation}
+\end{equation}
+
+\end_inset
+
+The case where 
+\begin_inset Formula $m_{k}=0$
+\end_inset
+
+, resulting in a trailing 
+\begin_inset Formula $-1$
+\end_inset
+
+ in the sequence, is handled with a 
+\begin_inset Quotes eld
+\end_inset
+
+parlor trick
+\begin_inset Quotes erd
+\end_inset
+
+, to be demonstrated below.
+\end_layout
+
+\begin_layout Standard
+The trailing digit always encodes an index doubling.
+ This allows a general sequence to be reduced to one with a trailing zero.
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k},n\right]=2^{n}\left[m_{1},m_{2},\cdots,m_{k},0\right]
+\]
+
+\end_inset
+
+The 
+\begin_inset Formula $\eta$
+\end_inset
+
+ was dropped from the above expression, as it should be obvious from context:
+ each bracketed form is in one-to-one correspondence with it's integer index.
+\end_layout
+
+\begin_layout Standard
+Truncating the trailing zero is more difficult; this is where the index
+ mask 
+\begin_inset Formula $\theta$
+\end_inset
+
+ comes to the forefront.
+ The truncated sequence has the form
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k},0\right]=2^{p}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the smallest integer for which 
+\begin_inset Formula $\theta\left(2^{p}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)\right)=1$
+\end_inset
+
+.
+ Finding this value of 
+\begin_inset Formula $p$
+\end_inset
+
+ requires a recursive evaluation of the expression for 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Although 
+\begin_inset Formula $n=\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ is necessarily a valid index, by construction, it is not generally the
+ case that 
+\begin_inset Formula $2n+1$
+\end_inset
+
+ is valid.
+ The simplest example is 
+\begin_inset Formula $4=\eta\left[2\right]$
+\end_inset
+
+, for which one has 
+\begin_inset Formula $2\cdot4+1=9$
+\end_inset
+
+ but 
+\begin_inset Formula $\theta\left(9\right)=0$
+\end_inset
+
+.
+ A glance at the earlier table of valid sequences shows that 
+\begin_inset Formula $\theta\left(18\right)=0$
+\end_inset
+
+ but 
+\begin_inset Formula $\theta\left(36\right)=1$
+\end_inset
+
+ and so one has that 
+\begin_inset Formula $\left[2,0\right]=2^{2}\left(2\left[2\right]+1\right)$
+\end_inset
+
+.
+ As luck would have it, this rule generalizes, so that 
+\begin_inset Formula $\left[k,0\right]=2^{k}\left(2\left[k\right]+1\right)$
+\end_inset
+
+; however, such generalizations are not always possible.
+\end_layout
+
+\begin_layout Standard
+It is not hard to find many examples for which 
+\begin_inset Formula $p=0$
+\end_inset
+
+.
+ There are many other examples for which 
+\begin_inset Formula $p=m_{1}$
+\end_inset
+
+.
+ In yet other cases, one discovers that 
+\begin_inset Formula $p=\sum_{i}m_{i}$
+\end_inset
+
+ seems to hold.
+ However, none of these are general rules; there is no closed-form expression
+ for 
+\begin_inset Formula $p$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+.
+ This may seem frustrating, but in the end, should not be surprising.
+ The mask function 
+\begin_inset Formula $\theta$
+\end_inset
+
+ encodes the mid-point orbits; the mid-point orbits encode polynomials;
+ the real root of the polynomials equals the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value that is generating that orbit.
+ The orbits are in general chaotic, the progress of the mask 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is chatoic as well.
+ However, thanks to the recursive defintion of the polynomials given in
+ eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:polynomial recursion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Location-of-Midpoints"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, an appropriately bracketed root will eventually appear, at some finite
+ integer 
+\begin_inset Formula $p.$
+\end_inset
+
+ In general, but not always, 
+\begin_inset Formula $p$
+\end_inset
+
+will be small.
+ The root will always lie in between the two endpoints of the bracketed
+ interval, given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bracketing relation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+More examples
+\end_layout
+
+\begin_layout Standard
 In the same fashion, for the left-hand side, write 
 \begin_inset Formula $\left[1\right]\Mapsto\left[1,0\right]\Mapsfrom\left[0\right]$
 \end_inset
@@ -22987,67 +23205,6 @@ and
 \begin_layout Standard
 What's the generalization? Proceeding naively, as above, results in a dead
  end.
-\end_layout
-
-\begin_layout Standard
-The correct answer is a collection of recursive rules.
- These are
-\begin_inset Formula 
-\[
-\left[n\right]=2^{n}
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k},n\right]=2^{n}\left[m_{1},m_{2},\cdots,m_{k},0\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k},0\right]=2^{p}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where 
-\begin_inset Formula $p$
-\end_inset
-
- is the smallest integer for which 
-\begin_inset Formula $\theta\left(2^{p}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)\right)=1$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The generalization of the bracketing relationship seems easy enough.
- It is 
-\begin_inset Formula 
-\begin{equation}
-\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{k}-1\right]\label{eq:bracketing relation}
-\end{equation}
-
-\end_inset
-
-where the parlor trick is repeatedly applied whenever 
-\begin_inset Formula $m_{k}=0$
-\end_inset
-
-, proceeding until all the zero digits are eaten.
 \end_layout
 
 \begin_layout Standard
