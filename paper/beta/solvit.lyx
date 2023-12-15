@@ -13678,11 +13678,35 @@ Properties of the theta sequence
 \end_layout
 
 \begin_layout Standard
-Define the validity mask 
-\begin_inset Formula $\theta_{n}=\theta_{n}\left(r_{n}\right)$
+Define the the set of 
+\begin_inset Quotes eld
 \end_inset
 
- using acceptance function from eqn 
+valid
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+acceptable
+\begin_inset Quotes erd
+\end_inset
+
+ indexes as 
+\begin_inset Formula 
+\begin{equation}
+\mathcal{B}=\left\{ n\in\mathbb{N}:\theta_{n}\left(r_{n}\right)=1,p_{n}\left(r_{n}\right)=0\right\} \label{eq:valid index set}
+\end{equation}
+
+\end_inset
+
+, where 
+\begin_inset Formula $\theta_{n}$
+\end_inset
+
+ was the acceptance function from eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:theta mask"
@@ -13692,64 +13716,56 @@ noprefix "false"
 
 \end_inset
 
- and 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- the root of 
-\begin_inset Formula $p_{n}\left(\beta\right)$
-\end_inset
-
 .
- This is a bitmask, equaling one if the polynomial is valid; else it is
- zero.
- Define 
+ By abuse of notation, write 
+\begin_inset Formula $\theta_{n}=\mathds{1}_{\mathcal{B}}\left(n\right)=\theta\left(n\right)$
+\end_inset
+
+ for the membership indicator function for this set.
+\end_layout
+
+\begin_layout Standard
+Define 
 \begin_inset Formula $\psi_{m}$
 \end_inset
 
- so that 
-\begin_inset Formula $\theta_{n}=1$
+ as the pullback of the summatory function for this mask.
+ That is, let 
+\begin_inset Formula $\psi_{m}$
 \end_inset
 
- if an only if 
-\begin_inset Formula $n=\psi_{m}$
+ be the smallest integer for which the following holds:
+\begin_inset Formula 
+\[
+m=\sum_{n=1}^{\psi_{m}}\theta_{n}
+\]
+
 \end_inset
 
- for some 
-\begin_inset Formula $m$
+Thus, 
+\begin_inset Formula $\psi_{m}$
 \end_inset
 
-.
- Start the sequence with 
+ encodes the locations of one-bits in the bitmask 
+\begin_inset Formula $\theta$
+\end_inset
+
+, so that 
+\begin_inset Formula $\theta\left(\psi_{m}\right)=1$
+\end_inset
+
+ by defintion.
+ Equivalently, it counts the total number of one-bits below that location.
+ It is convenient to start the sequence at 
 \begin_inset Formula $\psi_{0}=0$
 \end_inset
 
 .
- Comparing to the table above, one has 
-\begin_inset Formula $\psi_{4}=4$
-\end_inset
-
- but 
-\begin_inset Formula $\psi_{5}=6$
-\end_inset
-
- because 
-\begin_inset Formula $\theta_{5}=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-For the remainder of this section, write 
+ Write 
 \begin_inset Formula $\psi\left(n\right)=\psi_{n}$
 \end_inset
 
- and 
-\begin_inset Formula $\theta\left(n\right)=\theta_{n}$
-\end_inset
-
-.
+ as equivalent notation.
  Several properties are apparent.
  
 \end_layout
@@ -13867,7 +13883,7 @@ The representation of
 \end_layout
 
 \begin_layout Subsection
-Distribution of 
+Location of 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -13875,9 +13891,8 @@ Distribution of
 \end_layout
 
 \begin_layout Standard
-The location and distribution of the roots can be visualized in several
- ways.
- One direct technique is via the normalization of the Parry-Gelfond measure.
+The location of the roots can be visualized by using the normalization of
+ the Parry-Gelfond measure.
  The function in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -13923,8 +13938,8 @@ noprefix "false"
  The labels follow an obvious doubling sequence.
  Each doubling sequence has a leader.
  The leaders appear to form a sequence 1,3,7,10,13,15,25,29,31,...
- The leaders are easily obtained: they are what's left of the earlier polynomial
--labelling sequence, after knocking out power-of-two sequences.
+ The leaders are easily obtained: they are what remains of the earlier polynomia
+l-labelling sequence, after knocking out power-of-two sequences.
  This sequence is not currently known to OEIS.
  The leaders above 1 follow a simple pattern: they are awalys at 
 \begin_inset Formula $2n+1$
@@ -13942,7 +13957,7 @@ noprefix "false"
 
 .
  A general recursive formula for obtaining the bracketing intervals, and
- the corresponding leaders, is given in a latr section.
+ the corresponding leaders, is given in a later section.
 \end_layout
 
 \begin_layout Standard
@@ -14030,9 +14045,34 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Subsection
+Distribution of 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Golden indices
+\end_layout
+
 \begin_layout Standard
-It seems natural to assume that the real roots have some distribution.
- This seems not to be the case.
+It seems natural to ask how the indices 
+\begin_inset Formula $n$
+\end_inset
+
+ are distributed with respect to the real roots 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ of 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+.
+ It appears that there is no such distribution, or rather, that it accumulates
+ entirely at 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -14062,17 +14102,11 @@ reference "fig:Distribution-of-Golden"
 \begin_inset Formula $p_{n}\left(\beta\right)$
 \end_inset
 
- have roots that approach 2.
- Although the roots appear to be dense in 
-\begin_inset Formula $1<\beta<2$
+ have roots 
+\begin_inset Formula $r_{n}$
 \end_inset
 
-, essentially all of the weight of that density is at 
-\begin_inset Formula $2$
-\end_inset
-
-.
- Since the roots are countable, the density clearly becomes very thin.
+ that approach 2.
 \end_layout
 
 \begin_layout Standard
@@ -14200,6 +14234,97 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This is a relative statement, as it is comparing an implicit measure on
+ the integers to the distribution of the roots.
+ Thus, there are several (ambiguous) ways to phrase the result.
+ One is to say that small integers (those 
+\begin_inset Formula $n<2^{k}$
+\end_inset
+
+ for any 
+\begin_inset Formula $k$
+\end_inset
+
+) describe roots that accumulate at 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+ The converse description is to say that for any fixed 
+\begin_inset Formula $\beta<2$
+\end_inset
+
+, the values of the indices 
+\begin_inset Formula $n$
+\end_inset
+
+ needed to label the roots 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ become unboundedly large.
+ 
+\end_layout
+
+\begin_layout Standard
+Put differently: the roots 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+ For an interval 
+\begin_inset Formula $\left(a,b\right)$
+\end_inset
+
+ defined by any two reals 
+\begin_inset Formula $1\le a<b\le2$
+\end_inset
+
+, there will be an infinite number of roots 
+\begin_inset Formula $r_{n}\in\left(a,b\right)$
+\end_inset
+
+.
+ The task is to describe the set 
+\begin_inset Formula 
+\[
+\mathcal{B}\left(a,b\right)=\left\{ n\in\mathbb{N}:r_{n}\in\left(a,b\right)\right\} 
+\]
+
+\end_inset
+
+or, equivalently, the indicator function 
+\begin_inset Formula $\mathds{1}_{\mathcal{B}\left(a,b\right)}\left(n\right)=\theta\left(a,b;n\right)$
+\end_inset
+
+.
+ This generalizes the earlier definition of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:valid index set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to arbitrary subintervals.
+ An exact expression will be given for this set in a later section.
+ It can be deduced from the bracketing relationship of the roots.
+ Every root is the leader of a bracketed interval.
+ The location of the end-points of the interval can be written down explicitly;
+ the intervals are disjoint (except for the endpoints); any interval 
+\begin_inset Formula $\left(a,b\right)$
+\end_inset
+
+ is the countable union of brackets.
 \end_layout
 
 \begin_layout Standard
