@@ -20372,6 +20372,57 @@ The index of the leader is described by the promotion
 \end_layout
 
 \begin_layout Standard
+This is sufficient to present a general relatiionship.
+ Intervals are brracketed such that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{k}-1\right] & \mbox{ when }m_{k-1}\ge1\mbox{and }m_{k}\ge1
+\end{align*}
+
+\end_inset
+
+The trailing digit encodes index doubling, so that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+2\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1\right]
+\]
+
+\end_inset
+
+Alternately, counting from zero:
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k}\right]=2^{m_{k}}\left[m_{1},m_{2},\cdots,m_{k-1},0\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This encoding is unique, provided that act of appending a zero results in
+ a sequence that is distinct from all shorter sequences.
+\end_layout
+
+\begin_layout Subsection
+More examples
+\end_layout
+
+\begin_layout Standard
+This section is a laborious, detailed hunt for a generalized pattern.
+ It is both succeeds and fails in this task; the success is that the mask
+ function must be explicitly used; the failure is that there is no closed-form
+ expression for the mask.
+\end_layout
+
+\begin_layout Standard
 A general pattern has not yet emerged.
  We must go deeper.
  First, confirm an easy case: that index doubling can be handled by incrementing
@@ -22934,9 +22985,52 @@ and
 \end_layout
 
 \begin_layout Standard
-What's the generalization? I just don't see one.
- There are already unresolved issues.
- Yuck.
+What's the generalization? Proceeding naively, as above, results in a dead
+ end.
+\end_layout
+
+\begin_layout Standard
+The correct answer is a collection of recursive rules.
+ These are
+\begin_inset Formula 
+\[
+\left[n\right]=2^{n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k},n\right]=2^{n}\left[m_{1},m_{2},\cdots,m_{k},0\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k},0\right]=2^{p}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the smallest integer for which 
+\begin_inset Formula $\theta\left(2^{p}\left(2\left[m_{1},m_{2},\cdots,m_{k}\right]+1\right)\right)=1$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
