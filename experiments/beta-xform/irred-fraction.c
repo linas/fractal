@@ -534,7 +534,7 @@ void print_debug_info(long seqno)
 	if (beta < 0.5)
 	{
 		beta = find_poly_zero(seqno);
-		long factor = zero_bracket_factor(seqno, beta);
+		long factor = theta_factor(seqno, beta);
 		double feta = find_poly_zero(factor);
 		slen = index_to_fbaire(cfrac, factor);
 		printf("Invalid index; factors to %g = %ld = ", feta, factor);

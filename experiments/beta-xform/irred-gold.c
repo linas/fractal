@@ -83,7 +83,7 @@ void fill_gold(long n)
 
 // Return true if the polynomial root is properly bracketed for
 // the index specifying that polynomial.
-long zero_bracket_factor(long n, double gold)
+long theta_factor(long n, double gold)
 {
 	// Its valid only if it is in the middle.
 #define EPS 2.0e-15
@@ -110,24 +110,29 @@ long zero_bracket_factor(long n, double gold)
 	return nh;
 }
 
+bool theta(long n, double gold)
+{
+	return -1L == theta_factor(n, gold);
+}
+
 // Same as above; but remember result from last time, so that
 // we don't compare to any non-golden roots!
 // Return true if the polynomial root is properly bracketed for
 // the index specifying that polynomial.
-long theta(long n, double gold)
+long stopit(long n, double gold)
 {
 	// Its valid only if it is in the middle.
 #define EPS 2.0e-15
 
-// #define DBZ(X) printf X
-// #define DBZ(X)
-	DBZ(("---------\ncheck theta for gold=%20.16g at n=%ld\n", gold, n));
+#define DBS(X) printf X
+// #define DBS(X)
+	DBS(("---------\ncheck stopid for gold=%20.16g at n=%ld\n", gold, n));
 	bool ork = true;
 	long nhl = n;
 	long nh = nhl >> 1;
 	while (nh)
 	{
-		DBZ(("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n", \
+		DBS(("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n", \
 		     n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold));
 
 		if (0 == nhl%2)
@@ -138,7 +143,7 @@ long theta(long n, double gold)
 		nhl = nh;
 		nh >>= 1;
 	}
-	DBZ(("Bracket says ork=%d\n", ork));
+	DBS(("Bracket says ork=%d\n", ork));
 
 	if (ork) return -1L;
 printf("duude %ld stopped by %ld stopper=%d\n", n, nh, stopper[nh]);
@@ -170,7 +175,7 @@ double find_gold(long n)
 
 	if (-1L == n) return 1.0;
 	double gold = find_poly_zero(n);
-	if (-1L == zero_bracket_factor(n, gold)) return gold;
+	if (-1L == theta_factor(n, gold)) return gold;
 	return 0.0;
 }
 
@@ -185,13 +190,13 @@ bool is_valid_index(long n)
 
 	if (-1L == n) return true;
 	double gold = find_poly_zero(n);
-	return (-1 == zero_bracket_factor(n, gold));
+	return (-1 == theta_factor(n, gold));
 }
 
 bool is_stopper(long n)
 {
 	double gold = find_poly_zero(n);
-	return -1L != theta(n, gold);
+	return -1L != stopit(n, gold);
 }
 
 void print_stoppers(long nmax)

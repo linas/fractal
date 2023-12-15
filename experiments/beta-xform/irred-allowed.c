@@ -26,8 +26,12 @@ int main(int argc, char* argv[])
 	long maxord = atol(argv[1]);
 	long maxidx = 1UL << maxord;
 
+maxidx=100;
 	malloc_gold(4*maxidx);
 	malloc_index_cache(4*maxidx);
+
+bool valid = is_stopper(maxord);
+exit(1);
 
 	// This should always be silent.
 	for (long i = 0; i< maxidx; i++)

@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 
 	if (false == valid)
 	{
-		long factor = zero_bracket_factor(idx, pzero);
+		long factor = theta_factor(idx, pzero);
 		printf("Invalid index, factors to %ld\n", factor);
 	}
 
