@@ -13702,7 +13702,7 @@ acceptable
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $\theta_{n}$
 \end_inset
 
@@ -13766,7 +13766,11 @@ Thus,
 \end_inset
 
  as equivalent notation.
- Several properties are apparent.
+ 
+\end_layout
+
+\begin_layout Standard
+Several properties are apparent.
  
 \end_layout
 
@@ -13808,11 +13812,11 @@ If
 \begin_inset Formula $m$
 \end_inset
 
- is odd, and 
+ is odd, and if 
 \begin_inset Formula $\theta\left(m\right)=1$
 \end_inset
 
- then 
+, then 
 \begin_inset Formula $\theta\left(\left(m-1\right)/2\right)=1$
 \end_inset
 
@@ -13879,7 +13883,127 @@ The representation of
 \begin_inset Formula $\theta=\sum_{n=1}^{\infty}\theta_{n}2^{-n}=0.93258880035365\cdots$
 \end_inset
 
+.
  At this time, this does not appear in OEIS.
+\end_layout
+
+\begin_layout Subsubsection
+Leaders
+\end_layout
+
+\begin_layout Standard
+An important subsequence consists of the leaders of the doubling sequences.
+ These can be defined in several equivalent ways.
+ One property of the bitmask is that if 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+, then 
+\begin_inset Formula $\theta\left(2^{n}m\right)=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ A leader 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the smallest such 
+\begin_inset Formula $m$
+\end_inset
+
+ at the front of such a doubling sequence: it is either an odd number 
+\begin_inset Formula $\lambda=\left(2k+1\right)$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\theta\left(\lambda\right)=1$
+\end_inset
+
+ or it is an even number of the form 
+\begin_inset Formula $\lambda=2^{h}\left(2k+1\right),h>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\theta\left(2^{h}\left(2k+1\right)\right)=1$
+\end_inset
+
+ but 
+\begin_inset Formula $\theta\left(2^{h-1}\left(2k+1\right)\right)=0$
+\end_inset
+
+.
+ The minimal power 
+\begin_inset Formula $h$
+\end_inset
+
+ defining the leader will be called the 
+\begin_inset Quotes eld
+\end_inset
+
+height of the leader
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The height will play an important role in later sections, and so it is
+ worth providing it with it's own symbol: given a leader 
+\begin_inset Formula $\lambda,$
+\end_inset
+
+ write 
+\begin_inset Formula $h\left(\lambda\right)=h$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Equivalently, the leaders can be defined as a subsequence of 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+ is odd, then 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+ is a leader.
+ If 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+ is even, then it is a leader if and only if 
+\begin_inset Formula $\theta\left(\psi_{m}/2\right)=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The start of the leader sequence is 1,3,7,10,13,15,25,29,31,...
+ This sequence is not currently known to OEIS.
+ It is handy to count from one, and to assign 
+\begin_inset Formula $\lambda_{0}=0$
+\end_inset
+
+, so that 
+\begin_inset Formula $\lambda_{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{2}=3$
+\end_inset
+
+ and so on.
 \end_layout
 
 \begin_layout Subsection
@@ -13935,36 +14059,14 @@ noprefix "false"
 .
  Each discontinuity corresponds to the real root of one of the polynomials.
  The first few are labelled by the integer labels from the previous table.
- The labels follow an obvious doubling sequence.
- Each doubling sequence has a leader.
- The leaders appear to form a sequence 1,3,7,10,13,15,25,29,31,...
- The leaders are easily obtained: they are what remains of the earlier polynomia
-l-labelling sequence, after knocking out power-of-two sequences.
- This sequence is not currently known to OEIS.
- The leaders above 1 follow a simple pattern: they are awalys at 
-\begin_inset Formula $2n+1$
-\end_inset
-
- of the previous dominant spike.
- So, for example, the first leader above 6 is 13.
- The leaders below 1 are given by 
-\begin_inset Formula $n\left(2n+1\right)$
-\end_inset
-
-, so for example, the leader above 16 is 
-\begin_inset Formula $16\times33=528$
-\end_inset
-
-.
- A general recursive formula for obtaining the bracketing intervals, and
- the corresponding leaders, is given in a later section.
+ The doubling sequences and their leaders are easy to identify.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -14043,6 +14145,101 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+That this figure is a self-similar fractal is presumably self-evident.
+ Thus, for example, the graph to to right of 
+\begin_inset Formula $r_{1}=\varphi=1.618...$
+\end_inset
+
+ repeats again between 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ and again between 
+\begin_inset Formula $r_{4}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+.
+ Each such bracketed interval contains a unique largest discontinuity; it
+ can be seen as being at the front of a doubling sequence.
+ Each discontinuity is in one-to-one correspondence with a bracketing interval;
+ the bracketing intervals are all self-similar to one-another.
+\end_layout
+
+\begin_layout Standard
+A notation for bracketed intervals will be needed later, and can be introduced
+ now.
+ Write 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ for the discontinuity 
+\begin_inset Formula $f$
+\end_inset
+
+ bracketed on the left and right by 
+\begin_inset Formula $\ell$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ Taking the liberty to write 
+\begin_inset Formula $r_{0}=\beta=2$
+\end_inset
+
+, the interval to the right of 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ is then 
+\begin_inset Formula $1\Mapsto3\Mapsfrom0$
+\end_inset
+
+.
+ The most prominent self-similar intervals are then 
+\begin_inset Formula $2\Mapsto10\Mapsfrom1$
+\end_inset
+
+ and 
+\begin_inset Formula $4\Mapsto36\Mapsfrom2$
+\end_inset
+
+ and 
+\begin_inset Formula $8\Mapsto136\Mapsfrom4$
+\end_inset
+
+.
+ In each of these examples, the front was also a leader, with leadership
+ as defined in the previous section.
+ This is not always the case: the brackets 
+\begin_inset Formula $1\Mapsto6\Mapsfrom3$
+\end_inset
+
+ and 
+\begin_inset Formula $1\Mapsto12\Mapsfrom6$
+\end_inset
+
+ and 
+\begin_inset Formula $1\Mapsto24\Mapsfrom12$
+\end_inset
+
+.
+ The intervals given here are hand-numbered; a general recursive formula
+ for obtaining the bracketing intervals, and the corresponding fronts, is
+ given in a later section.
 \end_layout
 
 \begin_layout Subsection
