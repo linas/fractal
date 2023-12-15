@@ -18948,8 +18948,12 @@ noprefix "false"
  has some self-similarity properties.
  This section attempts to describe that self-similarity, by identifying
  sequences of discontinuities, and the regions that they bracket.
- This allows a labelling system to be developed for each discontinuity.
- Recall that discontinuities correspond to 
+ This allows a labelling system to be developed for each discontinuity,
+ and a bracketing relationship to be given for each self-similar interval.
+\end_layout
+
+\begin_layout Standard
+As always, discontinuities correspond to 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -18959,15 +18963,39 @@ noprefix "false"
 \end_inset
 
  for which 
-\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\begin_inset Formula $\beta=r_{n}$
 \end_inset
 
- is the unique real root.
- Thus, each label can be associated with the polynomial index 
-\begin_inset Formula $n$
+ is the unique positive real root 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
 \end_inset
 
 .
+ Associated to each polynomial is a mask function 
+\begin_inset Formula $\theta_{n}=\theta_{n}\left(r_{n}\right)$
+\end_inset
+
+ given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theta mask"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Discontinuities are associated to indexes 
+\begin_inset Formula $n$
+\end_inset
+
+ only when 
+\begin_inset Formula $1=\theta_{n}$
+\end_inset
+
+; the mask function acts both to identify the periodic orbits and also the
+ endpoints of a self-similar intervals.
 \end_layout
 
 \begin_layout Standard
@@ -18976,6 +19004,27 @@ The labelling will be for the form of a sequence or string
 \end_inset
 
  of non-negative integers.
+ An example is shown in in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Discontinuity-labels"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, which can be compared to figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalization-Integral"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  The location 
 \begin_inset Formula $\beta$
 \end_inset
@@ -18984,12 +19033,17 @@ The labelling will be for the form of a sequence or string
 \begin_inset Formula $\beta\left(\left[\cdots\right]\right)=\beta\left[\cdots\right]$
 \end_inset
 
-, sometimes droping parenthesis if the meaning is clear frrom context.
+, sometimes droping parenthesis if the meaning is clear from context.
  Associated to each sequence is an integer index 
 \begin_inset Formula $n=\eta\left(\left[\cdots\right]\right)=\eta\left[\cdots\right]$
 \end_inset
 
 .
+ By definition, the only indexes get labels if and only if 
+\begin_inset Formula $1=\theta_{n}$
+\end_inset
+
+; the mask function is the final arbiter for the labels.
  By construction, the identity 
 \begin_inset Formula $p_{\eta\left(s\right)}\left(\beta\left(s\right)\right)=0$
 \end_inset
@@ -18999,25 +19053,23 @@ The labelling will be for the form of a sequence or string
 \end_inset
 
 .
- This will be extended to infinite-length strings, as well.
- Insofar as 
-\begin_inset Formula $s\in\mathbb{N}^{\omega}$
+ The task of this section is to expose and describe the bijection between
+ the strings 
+\begin_inset Formula $s$
 \end_inset
 
- is an element of Baire space, this provides a mapping between Baire space
- and the unit interval 
-\begin_inset Formula $1<\beta<2$
+ and the corresponding indexes 
+\begin_inset Formula $n=\eta\left(s\right)$
 \end_inset
 
 .
- It will be seen to be a bijection, so one-to-one and onto.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -19099,7 +19151,85 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-These label strings are shown in figure 
+The development can be extended to infinite-length strings, as well.
+ The roots 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+ The mapping of self-similar intervals provided by the bracketing relationship
+ guarantees that sequences of intervals converge to a point.
+ The labeling system guarantees that all labels within an interval share
+ a common prefix with the endpoints.
+ Thus, as the prefix gets longer, the bracketed interval gets smaller, convergin
+g to a unique limit.
+ This is reminiscent of the way in which finite-length continued fractions
+ converge to a unique limit.
+ However, unlike continued fractions, each finite-length 
+\begin_inset Formula $\beta$
+\end_inset
+
+ label can be unambiguously associated to one unique infinite-length string.
+ As a result, the mapping is a bijection between infinite-length strings
+ 
+\begin_inset Formula $s\in\mathbb{N}^{\omega}$
+\end_inset
+
+ in Baire space, and all of the reals in the interval 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+.
+ This is a true bijection, so one-to-one and onto.
+ This is very unlike the situation with continued fractions, which cannot
+ represent the rationals with infinite-length strings.
+ Continued-fraction mappings have 
+\begin_inset Quotes eld
+\end_inset
+
+holes
+\begin_inset Quotes erd
+\end_inset
+
+ at the rationals; the beta mapping has no holes.
+\end_layout
+
+\begin_layout Subsection
+Labeling examples
+\end_layout
+
+\begin_layout Standard
+The primary task is to exhibit the function 
+\begin_inset Formula $\eta:\mathbb{N}^{<\omega}\to\mathbb{N}$
+\end_inset
+
+ that maps finite-length strings to indexes.
+ The primary issue is that this cannot be given in closed form, without
+ appealing to the recursively-defined index mask 
+\begin_inset Formula $\theta_{n}$
+\end_inset
+
+ given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theta mask"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The mask plays a central role.
+ It seems easiest to exhibit this by example.
+\end_layout
+
+\begin_layout Standard
+Comparing figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Discontinuity-labels"
@@ -19109,7 +19239,7 @@ noprefix "false"
 
 \end_inset
 
-; these should be compared to 
+ to 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Normalization-Integral"
@@ -19119,8 +19249,7 @@ noprefix "false"
 
 \end_inset
 
-, which shows the corresponding indexes.
- The labeling begins with the main sequence of peaks, shown as 
+, the labeling begins with the main sequence of peaks, shown as 
 \begin_inset Formula $2^{k}$
 \end_inset
 
@@ -19183,17 +19312,8 @@ noprefix "false"
 \begin_inset Formula $\left[-1\right]$
 \end_inset
 
- can be understood as an infinite string of zeros; but, for now, treat it
- as funny special value.
- The order of the polynomial 
-\begin_inset Formula $p_{2^{k}}$
-\end_inset
-
- is 
-\begin_inset Formula $k+2$
-\end_inset
-
-, which is also the period of the iterated midpoint.
+ can be understood as an infinite string of zeros; but, for now, it can
+ be treated as a funny special value.
 \end_layout
 
 \begin_layout Standard
@@ -19271,7 +19391,7 @@ With this, several identities emerge: first, that
 \end_inset
 
  will hold, so that the bracketed leader will always have an index greater
- than either side.
+ than indexes on either side.
  With this notation, one has the following intervals
 \end_layout
 
@@ -19718,12 +19838,25 @@ Bracket
 \end_layout
 
 \begin_layout Standard
-From this table, the recursive sequence index numbering is given by 
+From this table, it can be inferred that the recursive sequence index numbering
+ is given by 
 \begin_inset Formula $\eta\left[0,m\right]=3\cdot2^{m}$
 \end_inset
 
 .
- In the same fashion, for the left-hand side, write 
+ This corresponds to the mask identity 
+\begin_inset Formula $1=\theta\left(3\cdot2^{m}\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the same fashion, for the left-hand side, write 
 \begin_inset Formula $\left[1\right]\Mapsto\left[1,0\right]\Mapsfrom\left[0\right]$
 \end_inset
 
@@ -19996,18 +20129,22 @@ The numbering is more difficult, here.
 \end_inset
 
 .
- The product with an odd number provides a unique base index that is distinct
- from other two-digit labels.
- That is, the labelling needs to provide a unique factorization, so as to
- identify each polynomial index uniquely.
- This is the basic task to be solved with labeling.
+ This extends to all 
+\begin_inset Formula $k$
+\end_inset
+
+, thanks to the mask identity 
+\begin_inset Formula $1=\theta\left(2^{k}\left(2^{k+1}+1\right)\right)$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
 Powers of two of the above leaders can now be handled as before, by incrementing
  the trailing digit for each power of two.
- Once example is shown in the table below.
+ One example is shown in the table below.
 \end_layout
 
 \begin_layout Standard
@@ -20447,7 +20584,7 @@ Bracket
 \end_layout
 
 \begin_layout Standard
-It would appear that promotion of the trailng digit works as 
+It would appear that promotion of the trailing digit works as 
 \begin_inset Formula $\left[0,0,p\right]=2^{p}\left[0,0,0\right]$
 \end_inset
 
