@@ -23,7 +23,8 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	long maxidx = atol(argv[1]);
+	long maxord = atol(argv[1]);
+	long maxidx = 1UL << maxord;
 
 	malloc_gold(4*maxidx);
 	malloc_index_cache(4*maxidx);
@@ -32,6 +33,9 @@ int main(int argc, char* argv[])
 	for (long i = 0; i< maxidx; i++)
 	{
 		bool valid = is_valid_index(i);
+		bool stop = is_stopper(i);
+		if (stop == valid)
+			printf("Error: bad stop at %ld valid=%d stop=%d\n", i, valid, stop);
 
 		if (false == valid)
 		{
@@ -66,6 +70,9 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
+
+	// print_stoppers(256);
+	print_stoppers(2048);
 
 #if 0
 	for (int p=0; p<20; p++)

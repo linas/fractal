@@ -49,6 +49,7 @@ double find_zero(unsigned long n, double lo, double hi)
 
 /** Helper array, needed for finding gold midpoints. */
 static double* zero = NULL;
+static int* stopper = NULL;
 static long maxidx = -2;
 void malloc_gold(long nmax)
 {
@@ -60,6 +61,8 @@ void malloc_gold(long nmax)
 	maxidx = nmax;
 	zero = (double*) malloc((nmax+1)*sizeof(double));
 	for (int i=0; i<=nmax; i++) zero[i] = -1.0;
+	stopper = (int*) malloc((nmax+1)*sizeof(int));
+	for (int i=0; i<=nmax; i++) stopper[i] = 0;
 
 	// Allow valid memref to zero[-1] denoting beta=1.0
 	zero++;
@@ -95,6 +98,8 @@ long zero_bracket_factor(long n, double gold)
 	{
 		DBZ(("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n", \
 		     n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold));
+
+		// if (0 == nhl%2 && zero[nh] < gold+EPS) stopper[nh] ++;
 		if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
 		nhl = nh;
 		nh >>= 1;
@@ -102,6 +107,43 @@ long zero_bracket_factor(long n, double gold)
 	DBZ(("Bracket says ork=%d\n", ork));
 
 	if (ork) return -1L;
+	return nh;
+}
+
+// Same as above; but remember result from last time, so that
+// we don't compare to any non-golden roots!
+// Return true if the polynomial root is properly bracketed for
+// the index specifying that polynomial.
+long theta(long n, double gold)
+{
+	// Its valid only if it is in the middle.
+#define EPS 2.0e-15
+
+// #define DBZ(X) printf X
+// #define DBZ(X)
+	DBZ(("---------\ncheck theta for gold=%20.16g at n=%ld\n", gold, n));
+	bool ork = true;
+	long nhl = n;
+	long nh = nhl >> 1;
+	while (nh)
+	{
+		DBZ(("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n", \
+		     n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold));
+
+		if (0 == nhl%2)
+		{
+			if (stopper[nh]) { ork = false; break; }
+			if (zero[nh] < gold+EPS) { ork = false; break; }
+		}
+		nhl = nh;
+		nh >>= 1;
+	}
+	DBZ(("Bracket says ork=%d\n", ork));
+
+	if (ork) return -1L;
+printf("duude %ld stopped by %ld stopper=%d\n", n, nh, stopper[nh]);
+	if (stopper[nh]) stopper[nh]++;
+	stopper[n]++;
 	return nh;
 }
 
@@ -144,6 +186,18 @@ bool is_valid_index(long n)
 	if (-1L == n) return true;
 	double gold = find_poly_zero(n);
 	return (-1 == zero_bracket_factor(n, gold));
+}
+
+bool is_stopper(long n)
+{
+	double gold = find_poly_zero(n);
+	return -1L != theta(n, gold);
+}
+
+void print_stoppers(long nmax)
+{
+	for (long n=0; n<nmax; n++)
+		printf("%ld	%d\n", n, stopper[n]);
 }
 
 // =================================================================
