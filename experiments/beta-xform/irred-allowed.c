@@ -26,20 +26,17 @@ int main(int argc, char* argv[])
 	long maxord = atol(argv[1]);
 	long maxidx = 1UL << maxord;
 
-maxidx=100;
 	malloc_gold(4*maxidx);
 	malloc_index_cache(4*maxidx);
-
-bool valid = is_stopper(maxord);
-exit(1);
 
 	// This should always be silent.
 	for (long i = 0; i< maxidx; i++)
 	{
+printf("========= work on %ld\n", i);
 		bool valid = is_valid_index(i);
-		bool stop = is_stopper(i);
-		if (stop == valid)
-			printf("Error: bad stop at %ld valid=%d stop=%d\n", i, valid, stop);
+		bool good = is_good_index(i);
+		if (good != valid)
+			printf("Error: bad stop at %ld valid=%d good=%d\n", i, valid, good);
 
 		if (false == valid)
 		{
