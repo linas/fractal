@@ -62,8 +62,7 @@ void malloc_gold(long nmax)
 	zero = (double*) malloc((nmax+1)*sizeof(double));
 	for (int i=0; i<=nmax; i++) zero[i] = -1.0;
 	stopper = (int*) malloc((nmax+1)*sizeof(int));
-	for (int i=0; i<=nmax; i++) stopper[i] = -3;
-	stopper[0] = 0;
+	for (int i=0; i<=nmax; i++) stopper[i] = 0;
 
 	// Allow valid memref to zero[-1] denoting beta=1.0
 	zero++;
@@ -100,6 +99,7 @@ long theta_factor(long n, double gold)
 		DBZ(("walk to n=%ld nhl=%ld nh=%ld znh=%g go=%g comp=%d bad=%d\n", \
 		     n, nhl, nh, zero[nh], gold, 0 == nhl%2, zero[nh] <= gold));
 
+		// if (0 == nhl%2 && zero[nh] < gold+EPS) stopper[nh]++;
 		if (0 == nhl%2 && zero[nh] < gold+EPS) {ork = false; break; }
 		nhl = nh;
 		nh >>= 1;
@@ -114,60 +114,6 @@ long theta_factor(long n, double gold)
 bool theta(long n, double gold)
 {
 	return -1L == theta_factor(n, gold);
-}
-
-bool is_good_index(long);
-
-// Same as above; but remember result from last time, so that
-// we don't compare to any non-golden roots!
-// Return true if the polynomial root is properly bracketed for
-// the index specifying that polynomial.
-bool isgood(long n, double gold)
-{
-	// Its valid only if it is in the middle.
-#define EPS 2.0e-15
-
-#define DBS(X) printf X
-// #define DBS(X)
-	DBS(("---------\nEnter isgood for gold=%20.16g at n=%ld\n", gold, n));
-
-	if (0 == n%2)
-	{
-		DBS(("Even stopper=%d\n", stopper[n/2]));
-		if (0 == stopper[n/2])
-		{
-			if (zero[n/2] < gold+EPS)
-			{
-				DBS(("good but bad bound at %ld\n", n));
-				stopper[n] = 1;
-				return false;
-			}
-			stopper[n] = 0;
-			return true;
-		}
-		bool good = is_good_index(n/2);
-		DBS(("half good=%d\n", good));
-		if (false == good)
-		{
-			stopper[n] = 1;
-			return false;
-		}
-
-		// If we are here, recursion says lower levels were OK.
-		if (zero[n/2] < gold+EPS)
-		{
-			DBS(("bad bound at %ld\n", n));
-			stopper[n] = 1;
-			return false;
-		}
-		stopper[n] = 0;
-		return true;
-	}
-
-	DBS(("odd recurs at %ld\n", n));
-	bool good = isgood((n-1)/2, gold);
-	if (good) stopper[n] = 0; else stopper[n] = 1;
-	return good;
 }
 
 /**
@@ -209,19 +155,6 @@ bool is_valid_index(long n)
 	if (-1L == n) return true;
 	double gold = find_poly_zero(n);
 	return (-1 == theta_factor(n, gold));
-}
-
-bool is_good_index(long n)
-{
-	// Allow silent out-of-bounds
-	if (maxidx <= n) return false;
-	if (n < -1L) return false;
-
-	if (0L == n) return true;
-	if (-1L == n) return true;
-
-	double gold = find_poly_zero(n);
-	return isgood(n, gold);
 }
 
 void print_stoppers(long nmax)
