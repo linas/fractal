@@ -29,6 +29,21 @@ int main(int argc, char* argv[])
 	malloc_gold(4*maxidx);
 	malloc_index_cache(4*maxidx);
 
+	long k = 1;
+	long mp = 10;
+	do
+	{
+		bool valid = is_valid_index(mp);
+		bool vh = is_valid_index(mp/2);
+		if (!valid || vh)
+			printf("oh nooooo %ld\n", k);
+		k++;
+		long p = 1UL << k;
+		mp = p * (2*p+1);
+	} while (mp < maxidx);
+	printf("done up to k=%ld\n", k);
+exit(0);
+
 	// This should always be silent.
 	for (long i = 0; i< maxidx; i++)
 	{
@@ -69,7 +84,7 @@ int main(int argc, char* argv[])
 	}
 
 	// print_stoppers(256);
-	print_stoppers(2048);
+	// print_stoppers(2048);
 
 #if 0
 	for (int p=0; p<20; p++)

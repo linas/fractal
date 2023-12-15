@@ -19199,7 +19199,7 @@ holes
 \end_layout
 
 \begin_layout Subsection
-Label formula
+The bracketing relation
 \end_layout
 
 \begin_layout Standard
@@ -19227,6 +19227,21 @@ noprefix "false"
  The mask plays a central role; it encodes information about the polynomials
  and the mid-point orbits; it also encodes the bracketing and self-similarity
  properties of the system.
+ All this implies that, in a certain sense, 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is chaotic and ergodic; it captures the complexities of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform in full.
+ In particular, this implies that there is no closed-form expression for
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+; it can only be defined only recursively, even in principle.
 \end_layout
 
 \begin_layout Standard
@@ -19940,21 +19955,27 @@ and observing that
 \end_layout
 
 \begin_layout Standard
-The trailing digit always encodes an index doubling.
+The formula for 
+\begin_inset Formula $\eta$
+\end_inset
+
+ is recursive.
+ The trailing digit of a sequence always encodes an index doubling.
  This allows a general sequence to be reduced to one with a trailing zero.
 \begin_inset Formula 
 \[
-\left[m_{1},m_{2},\cdots,m_{k},n\right]=2^{n}\left[m_{1},m_{2},\cdots,m_{k},0\right]
+\eta\left[m_{1},m_{2},\cdots,m_{k},n\right]=2^{n}\eta\left[m_{1},m_{2},\cdots,m_{k},0\right]
 \]
 
 \end_inset
 
-The 
+The above is written with an explicit 
 \begin_inset Formula $\eta$
 \end_inset
 
- was dropped from the above expression, as it should be obvious from context:
- each bracketed form is in one-to-one correspondence with it's integer index.
+, which will be dropped from subsequent expressions.
+ The context should be clear enough: each bracketed form is in one-to-one
+ correspondence with it's integer index.
 \end_layout
 
 \begin_layout Standard
@@ -19964,7 +19985,7 @@ Truncating the trailing zero is more difficult; this is where the index
 \end_inset
 
  comes to the forefront.
- The truncated sequence has the form
+ The recursion rule to truncate the trailing zero is
 \end_layout
 
 \begin_layout Standard
@@ -20025,7 +20046,7 @@ where
 \end_inset
 
  and so one has that 
-\begin_inset Formula $\left[2,0\right]=2^{2}\left(2\left[2\right]+1\right)$
+\begin_inset Formula $\left[2,0\right]=2^{2}\left(2\left[2\right]+1\right)=2^{2}\left(2^{3}+1\right)=36$
 \end_inset
 
 .
@@ -20034,6 +20055,11 @@ where
 \end_inset
 
 ; however, such generalizations are not always possible.
+ Recursion is controlled by 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -20063,7 +20089,12 @@ It is not hard to find many examples for which
 
 .
  This may seem frustrating, but in the end, should not be surprising.
- The mask function 
+ There is no closed-form expression for the mask function 
+\begin_inset Formula $\theta$
+\end_inset
+
+ that is not recursive.
+ The mask 
 \begin_inset Formula $\theta$
 \end_inset
 
@@ -20124,7 +20155,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsection
-More examples
+Lots and lots of examples
 \end_layout
 
 \begin_layout Standard
