@@ -8023,36 +8023,14 @@ noprefix "false"
 .
  Each discontinuity corresponds to the real root of one of the polynomials.
  The first few are labelled by the integer labels from the previous table.
- The labels follow an obvious doubling sequence.
- Each doubling sequence has a leader.
- The leaders appear to form a sequence 1,3,7,10,13,15,25,29,31,...
- The leaders are easily obtained: they are what's left of the earlier polynomial
--labelling sequence, after knocking out power-of-two sequences.
- This sequence is not currently known to OEIS.
- The leaders above 1 follow a simple pattern: they are awalys at 
-\begin_inset Formula $2n+1$
-\end_inset
-
- of the previous dominant spike.
- So, for example, the first leader above 6 is 13.
- The leaders below 1 are given by 
-\begin_inset Formula $n\left(2n+1\right)$
-\end_inset
-
-, so for example, the leader above 16 is 
-\begin_inset Formula $16\times33=528$
-\end_inset
-
-.
- A general recursive formula for obtaining the bracketing intervals, and
- the corresponding leaders, is given in a later section.
+ The doubling sequences and their leaders are easy to identify.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -8131,6 +8109,354 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Bracketing intervals
+\end_layout
+
+\begin_layout Standard
+That this figure is a self-similar fractal is presumably self-evident.
+ Thus, for example, the graph to to right of 
+\begin_inset Formula $r_{1}=\varphi=1.618...$
+\end_inset
+
+ repeats again between 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ and again between 
+\begin_inset Formula $r_{4}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+.
+ Each such bracketed interval contains a unique largest discontinuity; it
+ can be seen as being at the front of a doubling sequence.
+ Each discontinuity is in one-to-one correspondence with a bracketing interval;
+ the bracketing intervals are all self-similar to one-another.
+\end_layout
+
+\begin_layout Standard
+A notation for bracketed intervals will be needed later, and can be introduced
+ now.
+ Write 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ for the discontinuity 
+\begin_inset Formula $f$
+\end_inset
+
+ bracketed on the left and right by 
+\begin_inset Formula $\ell$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ By 
+\begin_inset Quotes eld
+\end_inset
+
+left
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+right
+\begin_inset Quotes erd
+\end_inset
+
+, it is literally meant that the three roots are in order, with 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ with the inequalities being strict.
+ Not all ascending sequences of three roots form a valid bracket; valid
+ brackets will be defined shortly.
+ But first, some examples.
+\end_layout
+
+\begin_layout Standard
+Taking the liberty to write 
+\begin_inset Formula $r_{0}=2$
+\end_inset
+
+, the interval to the right of 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ is then 
+\begin_inset Formula $1\Mapsto3\Mapsfrom0$
+\end_inset
+
+.
+ The most prominent self-similar intervals are then 
+\begin_inset Formula $2\Mapsto10\Mapsfrom1$
+\end_inset
+
+ and 
+\begin_inset Formula $4\Mapsto36\Mapsfrom2$
+\end_inset
+
+ and 
+\begin_inset Formula $8\Mapsto136\Mapsfrom4$
+\end_inset
+
+.
+ In each of these examples, the front was also a leader, with leadership
+ as defined in the previous section.
+ This is not always the case: the brackets 
+\begin_inset Formula $1\Mapsto6\Mapsfrom3$
+\end_inset
+
+ and 
+\begin_inset Formula $1\Mapsto12\Mapsfrom6$
+\end_inset
+
+ and 
+\begin_inset Formula $1\Mapsto24\Mapsfrom12$
+\end_inset
+
+ are clearly visible; they are a part of an index-doubling sequence.
+\end_layout
+
+\begin_layout Standard
+The extreme left side can be assigned the index of 
+\begin_inset Formula $\infty$
+\end_inset
+
+ so that 
+\begin_inset Formula $r_{\infty}=1$
+\end_inset
+
+.
+ Thus, the entire interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+ corresponds to the bracket 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Bracket tree
+\end_layout
+
+\begin_layout Standard
+The brackets can be arranged into a binary tree, recursively defined.
+ Any valid interval 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ can be split into two: the left side and the right side.
+ These two pieces are 
+\begin_inset Formula $\ell\Mapsto2f\Mapsfrom f$
+\end_inset
+
+ on the left, and 
+\begin_inset Formula $f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho$
+\end_inset
+
+ on the right, where 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is the leader function given in the previous section.
+ Recursion starts with 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+.
+ A bracketing relationship is valid if and only if it appears in this recursive
+ binary tree.
+\end_layout
+
+\begin_layout Standard
+The left and right moves 
+\begin_inset Formula $L,R$
+\end_inset
+
+ on the binary tree can then be written as 
+\begin_inset Formula $L:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $R:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)$
+\end_inset
+
+.
+ These correspond to a splitting of the interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ likewise.
+ The inequalities are strict, and the figure indicates tht the roots are
+ dense in the interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+, thus, interval subdivision always converges to a point.
+ A finite string of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves picks out a unique interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+.
+ An infinite string of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves corresponds to a point in the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+, and so it appears that the bracket tree provides a surjection onto the
+ reals.
+ It is a surjection, as both strings 
+\begin_inset Formula $LRRR\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $RLLL\cdots$
+\end_inset
+
+ appear to converge to 
+\begin_inset Formula $r_{1}=\varphi$
+\end_inset
+
+; the first from the left, the second from the right.
+ This resembles the behavior of the dyadic tree.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beta Bracket Map
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beta-Bracket-Map"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename bracket.eps
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the mapping from the dyadic rationals, interpreted as
+ strings of left-right moves, and the corresponding 
+\begin_inset Formula $\beta=r_{f}$
+\end_inset
+
+ root for the front (center) of the resulting bracket.
+ Thus, 1/2 maps to 
+\begin_inset Formula $r_{1}=\varphi=1.61803...$
+\end_inset
+
+ and 1/4 maps to 
+\begin_inset Formula $r_{2}=1.46557...$
+\end_inset
+
+ while 3/4 maps to 
+\begin_inset Formula $r_{3}=1.83929...$
+\end_inset
+
+ The curve is continuous, as the brackets provide a filter that converges
+ to a point.
+ The brackets are in one-to-one correpondence with dyadic intervals 
+\begin_inset Formula $m/2^{n}<\left(2m+1\right)/2^{n+1}<\left(m+1\right)/2^{n}$
+\end_inset
+
+.
+ The extremely sharp drop to 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+ on the left side of the chart is due to the brackets 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ being quite wide, as they approach 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The bracket tree and the dyadic tree are in one-to-one correspondence.
+ This is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The curve is continuous, precisely because the brackets form a total order
+ on their sub-brackets.
 \end_layout
 
 \begin_layout Subsection
