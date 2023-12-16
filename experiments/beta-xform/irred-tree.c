@@ -45,17 +45,45 @@ void print_bitseq(long bitseq, int len, char* pre, char* suf)
 	printf("%s", suf);
 }
 
-// Given an index, return the matching tree-walk to get to it.
-// Inverse of bitseq_to_idx
-long idx_to_bitseq(long idx, int* len)
+// Get the index is the left side of the bracket
+long get_left_idx(long idx)
 {
-	// while (0 == idx%2)
-	{
-	}
-	return 0;
+	while (0 == idx%2)
+		idx >>= 1;
+
+	// And once more
+	idx = (idx - 1L) / 2;
+	return idx;
 }
 
-// Do the minkowski run-length encoding trick
+// Given an index, return the matching tree-walk to get to it.
+// Inverse of bitseq_to_idx
+long idx_to_bitseq(long idx, int* leng)
+{
+	*leng = 0;
+	int len = 0;
+	long bitseq = 1;
+	printf("enter idx=%ld\n", idx);
+	while (0 < idx)
+	{
+		int hei = 0;
+		while (0 == idx%2 && is_valid_index(idx/2UL))
+		{
+			idx >>= 1;
+			hei++;
+		}
+		long left = get_left_idx(idx);
+		printf("%ld |=> leader idx=%ld hei=%d\n", left, idx, hei);
+idx = left;
+
+		len += hei;
+	}
+	*leng = len;
+	return bitseq;
+}
+
+// Do the minkowski run-length encoding trick.
+// Convert the bitseq to a continued fraction.
 double bitseq_to_cf(long bitseq, int len)
 {
 	// printf("Enter cf frac = %ld / %d\n", bitseq, 1<<len);
@@ -88,10 +116,17 @@ double bitseq_to_cf(long bitseq, int len)
 
 int main(int argc, char* argv[])
 {
+#if 1
 	int idx = atoi(argv[1]);
+	malloc_gold(idx+1);
 
 	int len = 0;
 	long bits = idx_to_bitseq(idx, &len);
+	print_bitseq(bits, len, " # bits=(", ")\n");
+
+	long ridx = bitseq_to_idx(bits, len);
+	printf("reconstruct %ld\n", ridx);
+#endif
 
 // #define PRINT_DYADIC_TO_BETA_MAP
 #ifdef PRINT_DYADIC_TO_BETA_MAP
