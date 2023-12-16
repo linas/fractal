@@ -83,19 +83,24 @@ long index_from_fbaire(int cfrac[], int len)
 		return 1UL << cfrac[0];
 	}
 
-	long leader = index_from_fbaire(cfrac, len-1);
+	long bracket = index_from_fbaire(cfrac, len-1);
+	if (0 > bracket) return bracket; // report overflow
+
+	long leader = find_leader(bracket);
+	DST(printf("leader is %ld\n", leader));
 	if (0 > leader) return leader; // report overflow
 
-	long follower = 2UL * leader + 1UL;
-	DST(printf("leader is %ld\n", follower));
+#if OLD_BRUTE_FORCE
+	long leader = 2UL * bracket + 1UL;
+	DST(printf("leader is %ld\n", leader));
 
 	// Cannot issue a sequence number that does not correspond to
 	// a valid golden polynomial. I can't guess what's valid or not,
 	// so go to the polynomial itself for ground truth.
 	int cnt = 0;
-	while (false == is_valid_index(follower) && cnt < 60)
+	while (false == is_valid_index(leader) && cnt < 60)
 	{
-		follower *= 2UL;
+		leader *= 2UL;
 		cnt ++;
 	}
 	if (60 < cnt + cfrac[len-1])
@@ -103,12 +108,13 @@ long index_from_fbaire(int cfrac[], int len)
 		// printf("Error: Overflow during sequence decode\n");
 		return -444;
 	}
+#endif
 
 	// Trailing digit encodes index-doubling
-	follower *= 1UL << cfrac[len-1];
+	leader *= 1UL << cfrac[len-1];
 
-	DST(printf("exit index_from_baire follower is %ld after shift=%d\n", follower, shift));
-	return follower;
+	DST(printf("exit index_from_baire leader is %ld after shift=%d\n", leader, shift));
+	return leader;
 }
 
 // Generate finite-Baire sequence labels from a polynomial index.
@@ -168,12 +174,13 @@ int index_to_fbaire(int cfrac[], unsigned long pindex)
 	cfrac[len+1] = -555; // Poison end-of-string marker
 	// print_seq(cfrac, len+1, "baseline ", "\n");
 	long base = index_from_fbaire(cfrac, len+1);
-if (0 > base) return base; // overflow condition
+	if (0 > base) return base; // overflow condition
+
 	pidx = pindex / base;
-if (0 == pidx) {
-printf("FATAL algo error!\n");
-pidx = 1; // terrible algorithm fail
-}
+	if (0 == pidx) {
+		printf("FATAL algo error!\n");
+		pidx = 1; // terrible algorithm fail
+	}
 
 	msum = 0;
 	while (0 == pidx %2) { msum ++; pidx /=2; }
@@ -330,7 +337,7 @@ void print_odo_graph(int cfrac[], int len)
 
 	double ex = cf_to_real(cfrac, len);
 	double rex = reverse_cf_to_real(cfrac, len);
-	printf("%ld	%g	%g	%g %ld	%g	%ld	%g #",
+	printf("%ld	%g	%g	%g %ld	%g	%ld	%g # ",
 		idx, gold, ex, rex, nleft, gleft, nright, gright);
 
 	int dfrac[SZ];
@@ -372,10 +379,10 @@ void recurse_fbaire(int cfrac[], int len,
 	if (idx < maxn && -1UL < idx)
 	{
 		validate_bracket(idx);
-	}
 
-	// Print equivalent continued fraction, for the odometer graph
-	if (do_print) print_odo_graph(cfrac, len);
+		// Print equivalent continued fraction, for the odometer graph
+		if (do_print) print_odo_graph(cfrac, len);
+	}
 
 	// Iterate depthwise second.
 	if (cfrac[len-1] < maxdepth)
@@ -411,52 +418,8 @@ void generate_fbaire(int norder, int depth, int length, bool do_print)
 
 // =================================================================
 
-// #define VERFIY_FBAIRE
-#ifdef VERFIY_FBAIRE
-
-	// Verify reverse listing.
-	// Takes 30 cpu-seconds to get to 1<<26
-	int maxord = 26;
-maxord=8;
-	int toterr = 0;
-	for (int ord=2; ord < maxord; ord++)
-	{
-		int totgood = 0;
-		long nstart = 1UL << (ord-2);
-		long nend = 2*nstart;
-		for (long n=nstart; n<nend; n ++)
-		{
-			int cfrac[SZ];
-			for (int i=0; i<SZ; i++) cfrac[i] = -666;
-			int len = index_to_fbaire(cfrac, n);
-			if (len < 0)
-			{
-#define PRINT_SEQS
-#ifdef PRINT_SEQS
-				printf(">>>>> %ld rejected\n", n);
-#endif
-				continue;
-			}
-			long seqno = index_from_fbaire(cfrac, len);
-			if (n != seqno)
-			{
-				printf("Sequence numbering fail!! in=%ld out=%ld", n, seqno);
-				toterr ++;
-			}
-#ifdef PRINT_SEQS
-			printf(">>>>> %ld len=%d ", n, len);
-			print_seq(cfrac, len, "sequence ", "\n");
-#endif
-			totgood ++;
-		}
-		printf("Observed %d betas at order %d\n", totgood, ord);
-	}
-	long nend = 1UL << maxord;
-	printf("Verified up to order=%d n=%ld errors=%d\n", maxord, nend, toterr);
-#endif
-
-// #define BINCOUNT_INDEX
-#ifdef BINCOUNT_INDEX
+void bincount_index()
+{
 	#define NBINS 337
 	int gcount[NBINS];
 	int fcount[NBINS];
@@ -516,7 +479,7 @@ totg-gprev);
 		printf("%d	%g	%g	%g\n", i, ex, pg, pf);
 	}
 #endif
-#endif
+}
 
 void print_debug_info(long seqno)
 {
@@ -562,6 +525,8 @@ void print_debug_info(long seqno)
 
 int main(int argc, char* argv[])
 {
+	// bincount_index();
+
 // #define SEQUENCE_EXPLORER
 #ifdef SEQUENCE_EXPLORER
 	// Obtain one sequence from command line. Print it's index.
@@ -615,7 +580,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define VALIDATE_INDEX
+// #define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
@@ -653,8 +618,8 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define SANITY_CHECK
-#ifdef SANITY_CHECK
+// #define RECURSIVE_CHECK
+#ifdef RECURSIVE_CHECK
 	// Run validation on the recursively-generated sequences.
 	// Same as the odometer graph below, but does not print data.
 	if (4 != argc) {
@@ -680,7 +645,7 @@ int main(int argc, char* argv[])
 	generate_fbaire(norder, maxdepth, maxlen, false);
 #endif
 
-// #define ODOMETER_GRAPH
+#define ODOMETER_GRAPH
 #ifdef ODOMETER_GRAPH
 	// Generate expansions in sequential order, then print the equivalent
 	// index, beta and continued-frac equivalent. Used to make the odometer

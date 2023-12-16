@@ -169,7 +169,7 @@ void print_stoppers(long nmax)
 // 2^h(2k+1) with the smallest height h that gives a valid index.
 long find_leader(long idx)
 {
-	idx = (2* idx + 1);
+	idx = (2UL * idx + 1UL);
 	while (false == is_valid_index(idx))
 	{
 		idx <<= 1;
