@@ -376,7 +376,7 @@ void recurse_fbaire(int cfrac[], int len,
 	long idx = index_from_fbaire(cfrac, len);
 
 	// Don't bother with validation if out of bounds
-	if (idx < maxn && -1UL < idx)
+	if (idx < maxn && -1L < idx)
 	{
 		validate_bracket(idx);
 
@@ -682,5 +682,4 @@ int main(int argc, char* argv[])
 	fflush (stdout);
 	generate_fbaire(norder, maxdepth, maxlen, true);
 #endif
-
 }
