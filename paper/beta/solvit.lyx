@@ -24192,33 +24192,6 @@ which is associated with
 .
 \end_layout
 
-\begin_layout Standard
-Now we have to prove that the above statements are actually correct.
- 
-\end_layout
-
-\begin_layout Itemize
-Show that the recursive formula indexing formula (which we are unable to
- find) generates only valid polynomials.
-\end_layout
-
-\begin_layout Itemize
-Show that the recursive algorithm generates sequences whose corresponding
- polynomials have roots that are totally ordered.
- Clearly, the reals are totally ordered; the indexing function, if correct,
- would then totally order the indexes and the polynomials as well.
-\end_layout
-
-\begin_layout Itemize
-Show that the number of polynomials at each order is given by the Moreau
- necklace counting function.
-\end_layout
-
-\begin_layout Standard
-Phew.
- Well, that's not even off to a good start, yet ...
-\end_layout
-
 \begin_layout Subsection
 Bit sequences from label sequences?
 \end_layout
@@ -24230,6 +24203,7 @@ The encoding can almost be read off directly from the bit sequence.
  function would not be needed.
  Below is more or less the same attempt, from a more naive approach.
  It doesn't actually work out.
+ There's nothing but junk in this section; skip reading.
 \end_layout
 
 \begin_layout Standard
@@ -30009,9 +29983,20 @@ Odometer symmetry and the Vandermonde matrix
 \end_layout
 
 \begin_layout Standard
-From work on continued fractions and the Minkowski question mark, we learn
- of the self-symmetry of integer sequences under the action of the dyadic
- monoid.
+This section is 98% junk.
+ The bracketing binary tree gives the appropriate symmetry for the betas.
+ This section tries to do the same thing, except using the sequence labels
+ instead.
+ There are two issues below: first, some off-by-one errors in the initial
+ writeup, and some general confusion, and issue two: what the heck are we
+ doing here, that isn't in the binary tree given earlier? The question mark
+ and the interval encodng are simplar, but don't really line up; seee irred-tree.
+c and irred-tree.gplot for details.
+ So this section is mostly junk.
+\end_layout
+
+\begin_layout Standard
+The self-symmetry of continued fractions is described by the dyadic monoid.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ve-M04"
@@ -30019,11 +30004,11 @@ literal "false"
 
 \end_inset
 
- Adoping the notation from that work, write 
+ General elements of the monoid have the form 
 \begin_inset Formula $\gamma=g^{a_{1}}\circ r\circ g^{a_{2}}\circ\cdots\circ g^{a_{N}}$
 \end_inset
 
- and define the action on an individual sequence 
+ which act on an individual sequences 
 \begin_inset Formula $\left[x\right]$
 \end_inset
 
@@ -30038,24 +30023,25 @@ literal "false"
 
 \end_inset
 
+All of the 
+\begin_inset Formula $a_{k}>0$
+\end_inset
 
+ are taken as positive integers, except possibly the first.
+ 
 \end_layout
 
 \begin_layout Standard
-XXX Confusion abounds! Need more care and a possible redo!
-\end_layout
-
-\begin_layout Standard
-Write the commuting diagrams as 
-\begin_inset Formula $c\circ g=g_{M}\circ c$
+When the sequence 
+\begin_inset Formula $\left[x\right]$
 \end_inset
 
- and likewise 
-\begin_inset Formula $c\circ r=r_{M}\circ c$
+ is understood as a continued fraction, i.e.
+ when applying 
+\begin_inset Formula $c:\left[x\right]\mapsto c\left(\left[x\right]\right)$
 \end_inset
 
-.
- Then the two generators 
+, then the two generators 
 \begin_inset Formula $g,r$
 \end_inset
 
@@ -30069,11 +30055,74 @@ Write the commuting diagrams as
 \end_inset
 
 .
- More generally, 
-\begin_inset Formula $g_{M}^{n}\left(x\right)=x/\left(nx+1\right)$
+ That is, there is a commuting diagram 
+\begin_inset Formula $c\circ g=g_{M}\circ c$
 \end_inset
 
+ and likewise 
+\begin_inset Formula $c\circ r=r_{M}\circ c$
+\end_inset
 
+.
+ That is, one can go back and forth between the unit interval, and the sequence
+ notation by using the continued-fraction mapping.
+\end_layout
+
+\begin_layout Standard
+Of course, the beta odometer offers another interpretation of sequences
+ as real numbers.
+ Presumably, there are functions 
+\begin_inset Formula $g_{B}:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{B}:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ that commute with the beta map: that is, 
+\begin_inset Formula $\beta\circ g=g_{B}\circ\beta$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $\beta\circ r=r_{B}\circ\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is not clear if there is an analytic form for 
+\begin_inset Formula $g_{B}$
+\end_inset
+
+.
+ Writing
+\begin_inset Formula 
+\[
+g_{B}\left(x\right)=\frac{h\left(x-1\right)}{1+h\left(x-1\right)}
+\]
+
+\end_inset
+
+and experimentally hunting for 
+\begin_inset Formula $h$
+\end_inset
+
+ reveals an approximation that is good to one percent:
+\begin_inset Formula 
+\[
+h\left(x\right)\approx x\left(1-x/\varphi^{2}\right)
+\]
+
+\end_inset
+
+suggesting that an analytic series might be possible.
+ Pursing this requires the inversion of a Vandermonde matrix applied to
+ a shift sequence; this appears to be possibly ill-conditioned.
+\end_layout
+
+\begin_layout Standard
+XXX Confusion abounds! Need more care and a possible redo!
 \end_layout
 
 \begin_layout Standard

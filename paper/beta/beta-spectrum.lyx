@@ -13195,10 +13195,11 @@ The index can be deduced from the bracketing relationship; it provides a
 
 \end_inset
 
-A sequence can be lengthed by appending an extra zero digit:
+A sequence can be lengthed by appending an extra zero digit: xxx this shold
+ use the leader funct.
 \begin_inset Formula 
 \[
-\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=2^{m_{1}+m_{2}+\cdots+m_{k-1}}\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)+1\right)
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=xxx\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)+1\right)
 \]
 
 \end_inset
@@ -13622,145 +13623,6 @@ The
 
 .
  By self-symmetry, the sub-intervals will re-arrange as well.
-\end_layout
-
-\begin_layout Subsubsection
-The dyadic monoid
-\end_layout
-
-\begin_layout Standard
-The self-symmetry of continued fractions is described by the dyadic monoid.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Ve-M04"
-literal "false"
-
-\end_inset
-
- General elements of the monoid have the form 
-\begin_inset Formula $\gamma=g^{a_{1}}\circ r\circ g^{a_{2}}\circ\cdots\circ g^{a_{N}}$
-\end_inset
-
- which act on an individual sequences 
-\begin_inset Formula $\left[x\right]$
-\end_inset
-
- as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\gamma:\left[x\right]\mapsto\left[a_{1},a_{2}-1,a_{3}-1,\cdots,a_{N-1}-1,a_{N}-2,x\right]
-\]
-
-\end_inset
-
-All of the 
-\begin_inset Formula $a_{k}>0$
-\end_inset
-
- are taken as positive integers, except possibly the first.
- In this context, the action of the dyadic monoid takes an almost trivial
- form: it consists of prepending a fixed-length prefix to any given finite
- or infinite sequence.
- This becomes interesting when it is understood as an action of rational
- numbers on continued fractions, that is, as an action of the modular group
- 
-\begin_inset Formula $PSL\left(2,\mathbb{Z}\right)$
-\end_inset
-
- acting as Möbius transformations on the unit interval.
-\end_layout
-
-\begin_layout Standard
-When the sequence 
-\begin_inset Formula $\left[x\right]$
-\end_inset
-
- is understood as a continued fraction, i.e.
- when applying 
-\begin_inset Formula $c:\left[x\right]\mapsto c\left(\left[x\right]\right)$
-\end_inset
-
-, then the two generators 
-\begin_inset Formula $g,r$
-\end_inset
-
- can be understood as Möbius transformations acting on the unit real interval:
- 
-\begin_inset Formula $g_{M}\left(x\right)=x/\left(x+1\right)$
-\end_inset
-
- and the reflection 
-\begin_inset Formula $r_{M}\left(x\right)=1-x$
-\end_inset
-
-.
- That is, there is a commuting diagram 
-\begin_inset Formula $c\circ g=g_{M}\circ c$
-\end_inset
-
- and likewise 
-\begin_inset Formula $c\circ r=r_{M}\circ c$
-\end_inset
-
-.
- That is, one can go back and forth between the unit interval, and the sequence
- notation by using the continued-fraction mapping.
-\end_layout
-
-\begin_layout Standard
-Of course, the beta odometer offers another interpretation of sequences
- as real numbers.
- Presumably, there are functions 
-\begin_inset Formula $g_{B}:\mathbb{R}\to\mathbb{R}$
-\end_inset
-
- and 
-\begin_inset Formula $r_{B}:\mathbb{R}\to\mathbb{R}$
-\end_inset
-
- that commute with the beta map: that is, 
-\begin_inset Formula $\beta\circ g=g_{B}\circ\beta$
-\end_inset
-
- and likewise 
-\begin_inset Formula $\beta\circ r=r_{B}\circ\beta$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-It is not clear if there is an analytic form for 
-\begin_inset Formula $g_{B}$
-\end_inset
-
-.
- Writing
-\begin_inset Formula 
-\[
-g_{B}\left(x\right)=\frac{h\left(x-1\right)}{1+h\left(x-1\right)}
-\]
-
-\end_inset
-
-and experimentally hunting for 
-\begin_inset Formula $h$
-\end_inset
-
- reveals an approximation that is good to one percent:
-\begin_inset Formula 
-\[
-h\left(x\right)\approx x\left(1-x/\varphi^{2}\right)
-\]
-
-\end_inset
-
-suggesting that an analytic series might be possible.
- Pursing this requires the inversion of a Vandermonde matrix applied to
- a shift sequence; this appears to be possibly ill-conditioned.
 \end_layout
 
 \begin_layout Section
