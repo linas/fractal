@@ -33,6 +33,37 @@ long bitseq_to_idx(long bitseq, int len)
 	return front;
 }
 
+// Do the minkowski run-length encoding trick
+double bitseq_to_cf(long bitseq, int len)
+{
+	// printf("Enter cf frac = %ld / %d\n", bitseq, 1<<len);
+
+	double frac = 0.0;
+
+	int tail = bitseq & 0x1L;
+	int bit = 0;
+	// printf("bit %d\n", tail);
+	int cnt = 1;
+	for (int i=1; i<len; i++)
+	{
+		bit = (bitseq >> i) & 0x1L;
+		// printf("bit %d\n", bit);
+		if (bit == tail) cnt++;
+		else
+		{
+			tail = bit;
+			frac = 1.0 / ((double) cnt + frac);
+			// printf("flip at bit %d frac = %g\n", i, frac);
+			cnt = 1;
+		}
+	}
+	frac = 1.0 / ((double) cnt+1 + frac);
+	if (bit) frac = 1.0 - frac;
+	// printf ("final frac = %g\n", frac);
+	// printf("------\n");
+	return frac;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc != 3)
@@ -67,7 +98,9 @@ int main(int argc, char* argv[])
 		if (nmax <= idx) { overflo++; continue; }
 
 		double gold = find_gold(idx);
-		printf("%d	%d	%d	%ld	%g	%g\n", i, bits, 1<<dlen, idx, x, gold);
+
+		double cf = bitseq_to_cf(bits, dlen);
+		printf("%d	%d	%d	%ld	%g	%g	%g\n", i, bits, 1<<dlen, idx, x, gold, cf);
 	}
 
 	printf("#\n# Num overflows = %d\n#\n", overflo);
