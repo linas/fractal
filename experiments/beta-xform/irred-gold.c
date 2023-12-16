@@ -165,6 +165,21 @@ void print_stoppers(long nmax)
 
 // =================================================================
 
+// Find the leader of a valid index.  That is, find the index of the form
+// 2^h(2k+1) with the smallest height h that gives a valid index.
+long find_leader(long idx)
+{
+	idx = (2* idx + 1);
+	while (false == is_valid_index(idx))
+	{
+		idx <<= 1;
+		if (maxidx <= idx) return -2; // overflow error
+	}
+	return idx;
+}
+
+// =================================================================
+
 // Return the n'th element of the "valid index sequence".
 // This is the sequence 1,2,3,4,6,7,8,10,12,13,14,15,16,24...
 // The composition is_valid_index(valid_index(n)) always returns true.

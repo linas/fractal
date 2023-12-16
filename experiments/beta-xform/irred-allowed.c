@@ -2,6 +2,8 @@
  * irred-allowed.c
  *
  * Verify the properties of the allowed sequence.
+ * Basically, this is a unit test for the code, making sure nothing
+ * crazy is going on, and that the valid index sequence works as intended.
  *
  * December 2023
  */
@@ -29,6 +31,7 @@ int main(int argc, char* argv[])
 	malloc_gold(4*maxidx);
 	malloc_index_cache(4*maxidx);
 
+#if 0
 	long k = 1;
 	long mp = 10;
 	do
@@ -42,9 +45,10 @@ int main(int argc, char* argv[])
 		mp = p * (2*p+1);
 	} while (mp < maxidx);
 	printf("done up to k=%ld\n", k);
-exit(0);
+#endif
 
-	// This should always be silent.
+	// Except for the printf, this should always be silent.
+	printf("Check self-consistency of the irred-gold.c codebase\n");
 	for (long i = 0; i< maxidx; i++)
 	{
 		bool valid = is_valid_index(i);

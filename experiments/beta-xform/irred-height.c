@@ -2,6 +2,7 @@
  * irred-height.c
  *
  * Exploration of the height of the leaders.
+ * Dumps heights into a data file that can be graphed.
  *
  * December 2023
  */

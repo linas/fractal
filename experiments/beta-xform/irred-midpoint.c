@@ -1,7 +1,9 @@
 /*
  * irred-midpoint.c
  *
- * Verify the orbit exapanions and orbit labelling formulas.
+ * Verify the orbit exapansions and orbit labeling formulas.
+ * The mid-point should orbit to the left and right exactly the same
+ * way as the bitsequence that defines the polynomial for that beta.
  * Make sure everything works as claimed.
  *
  * December 2023
