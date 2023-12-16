@@ -13949,16 +13949,6 @@ height of the leader
 \end_inset
 
 .
- The height will play an important role in later sections, and so it is
- worth providing it with it's own symbol: given a leader 
-\begin_inset Formula $\lambda,$
-\end_inset
-
- write 
-\begin_inset Formula $h\left(\lambda\right)=h$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -13967,7 +13957,12 @@ Equivalently, the leaders can be defined as a subsequence of
 \end_inset
 
 .
- If 
+ By definition, one has that 
+\begin_inset Formula $\theta\left(\psi_{m}\right)=1$
+\end_inset
+
+.
+ Thus, if 
 \begin_inset Formula $\psi_{m}$
 \end_inset
 
@@ -13985,11 +13980,42 @@ Equivalently, the leaders can be defined as a subsequence of
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
-The start of the leader sequence is 1,3,7,10,13,15,25,29,31,...
+Given a valid index 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+, it is useful to define a function 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ that provides the map 
+\begin_inset Formula $\Lambda\left(\psi_{m}\right)=2^{h}\left(2\psi_{m}+1\right)$
+\end_inset
+
+.
+ This map is not monotonic: 
+\begin_inset Formula $\Lambda\left(1\right)=3$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda\left(2\right)=10$
+\end_inset
+
+ but 
+\begin_inset Formula $\Lambda\left(3\right)=7$
+\end_inset
+
+.
+ It is, however, one-to-one, as leaders are always a product of an odd number
+ times some power of two.
+\end_layout
+
+\begin_layout Standard
+Sorting the leaders into ascending order, the start of the sequence is 1,3,7,10,
+13,15,25,29,31,...
  This sequence is not currently known to OEIS.
  It is handy to count from one, and to assign 
 \begin_inset Formula $\lambda_{0}=0$
@@ -14066,7 +14092,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -14147,6 +14173,10 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Subsubsection
+Bracketing intervals
+\end_layout
+
 \begin_layout Standard
 That this figure is a self-similar fractal is presumably self-evident.
  Thus, for example, the graph to to right of 
@@ -14196,8 +14226,35 @@ A notation for bracketed intervals will be needed later, and can be introduced
 \end_inset
 
 .
- Taking the liberty to write 
-\begin_inset Formula $r_{0}=\beta=2$
+ By 
+\begin_inset Quotes eld
+\end_inset
+
+left
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+right
+\begin_inset Quotes erd
+\end_inset
+
+, it is literally meant that the three roots are in order, with 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ with the inequalities being strict.
+ Not all ascending sequences of three roots form a valid bracket; valid
+ brackets will be defined shortly.
+ But first, some examples.
+\end_layout
+
+\begin_layout Standard
+Taking the liberty to write 
+\begin_inset Formula $r_{0}=2$
 \end_inset
 
 , the interval to the right of 
@@ -14236,10 +14293,131 @@ A notation for bracketed intervals will be needed later, and can be introduced
 \begin_inset Formula $1\Mapsto24\Mapsfrom12$
 \end_inset
 
+ are clearly visible; they are a part of an index-doubling sequence.
+\end_layout
+
+\begin_layout Standard
+The extreme left side can be assigned the index of 
+\begin_inset Formula $\infty$
+\end_inset
+
+ so that 
+\begin_inset Formula $r_{\infty}=1$
+\end_inset
+
 .
- The intervals given here are hand-numbered; a general recursive formula
- for obtaining the bracketing intervals, and the corresponding fronts, is
- given in a later section.
+ Thus, the entire interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+ corresponds to the bracket 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Bracket tree
+\end_layout
+
+\begin_layout Standard
+The brackets can be arranged into a binary tree, recursively defined.
+ Any valid interval 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ can be split into two: the left side and the right side.
+ These two pieces are 
+\begin_inset Formula $\ell\Mapsto2f\Mapsfrom f$
+\end_inset
+
+ on the left, and 
+\begin_inset Formula $f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho$
+\end_inset
+
+ on the right, where 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is the leader function given in the previous section.
+ Recursion starts with 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+.
+ A bracketing relationship is valid if and only if it appears in this recursive
+ binary tree.
+\end_layout
+
+\begin_layout Standard
+The left and right moves 
+\begin_inset Formula $L,R$
+\end_inset
+
+ on the binary tree can then be written as 
+\begin_inset Formula $L:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $R:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom f\right)$
+\end_inset
+
+.
+ These correspond to a splitting of the interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ likewise.
+ The inequalities are strict, and the figure indicates tht the roots are
+ dense in the interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+, thus, interval subdivision always converges to a point.
+ A finite string of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves picks out a unique interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+.
+ An infinite string of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves corresponds to a point in the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+, and so it appears that the bracket tree provides a surjection to the reals.
+ It is a surjection, as both strings 
+\begin_inset Formula $LRRR\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $RLLL\cdots$
+\end_inset
+
+ appear to converge to 
+\begin_inset Formula $r_{1}=\varphi$
+\end_inset
+
+; the first from the left, the second from the right.
+ This resembles the behavior of the dyadic tree.
+\end_layout
+
+\begin_layout Standard
+The bracket tree and the dyadic tree are in one-to-one correspondence.
+ This is shown in figure xx.
+ The curve is continuous, precisely because the brackets form a total order
+ on their sub-brackets.
+\end_layout
+
+\begin_layout Subsubsection
+Dense
 \end_layout
 
 \begin_layout Standard
@@ -14300,10 +14478,6 @@ noprefix "false"
 
 , taking care to select brackets that are disjoint, and then enumerating
  the roots inside each bracket.
-\end_layout
-
-\begin_layout Standard
-half-open topology
 \end_layout
 
 \begin_layout Subsection
