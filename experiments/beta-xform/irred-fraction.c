@@ -50,7 +50,8 @@ double reverse_cf_to_real(int cfrac[], int len)
 void print_seq(int cfrac[], int len, char* head, char* tail)
 {
 	printf("%s[", head);
-	if (0 <= len) printf("%d", cfrac[0]);
+	if (0 == len) printf("INF");
+	if (0 < len) printf("%d", cfrac[0]);
 	for (int i=1; i<len; i++) printf(" %d", cfrac[i]);
 	printf("]%s", tail);
 }
