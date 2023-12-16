@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 {
 	// Obtain index from command line.
 	if (1 == argc) {
-		fprintf(stderr, "Usage: %s <index>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <order>\n", argv[0]);
 		exit(1);
 	}
 
@@ -43,8 +43,22 @@ int main(int argc, char* argv[])
 		k++;
 		long p = 1UL << k;
 		mp = p * (2*p+1);
-	} while (mp < maxidx);
+	} while (mp < 4*maxidx);
 	printf("done up to k=%ld\n", k);
+	exit(0);
+#endif
+
+#if 0
+	// Handy dandy explorer for leaders of 2.
+	long ldr = 2;
+	long xpl = 2;
+	while (0 < ldr)
+	{
+		printf("ldr = %ld  %ld\n", ldr, xpl);
+		ldr = find_leader(ldr);
+		xpl = 2UL * (2UL * xpl + 1UL);
+	}
+	exit(0);
 #endif
 
 	// Except for the printf, this should always be silent.

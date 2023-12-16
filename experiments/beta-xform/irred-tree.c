@@ -33,6 +33,13 @@ long bitseq_to_idx(long bitseq, int len)
 	return front;
 }
 
+// Given an index, return the matching tree-walk to get to it.
+// Inverse of bitseq_to_idx
+long idx_to_bitseq(long idx, int* len)
+{
+	return 0;
+}
+
 // Do the minkowski run-length encoding trick
 double bitseq_to_cf(long bitseq, int len)
 {
