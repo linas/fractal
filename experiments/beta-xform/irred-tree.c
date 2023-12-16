@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
 	if (argc != 3)
 	{
 		fprintf(stderr, "Usage: %s <max-order> <dyad-base>\n", argv[0]);
+		exit(1);
 	}
 	int maxord = atoi(argv[1]);
 	int dyad = atoi(argv[2]);
@@ -44,18 +45,29 @@ int main(int argc, char* argv[])
 
 	printf("#\n# Bracket tree. max order = %d\n#\n", maxord);
 
+	int overflo = 0;
 	int maxdy = 1 << dyad;
-	for (int i=0; i<maxdy; i++)
+	for (int i=0; i<maxdy-1; i++)
 	{
 		double x = ((double) i + 0.5) / (double) maxdy;
 
-		long idx = bitseq_to_idx(i, dyad);
-		if (idx < 0) continue; // overflow
-		if (nmax <= idx) continue; // overflow
+		// Get the dyad
+		int dlen = dyad;
+		int bits = i+1;
+		while (0 == bits %2)
+		{
+			bits >>= 1;
+			dlen --;
+		}
+		long idx = bitseq_to_idx(bits, dlen);
+		if (idx < 0) { overflo++; continue; }
+		if (nmax <= idx) { overflo++; continue; }
 
 		double gold = find_gold(idx);
 		printf("%d	%ld	%g	%g\n", i, idx, x, gold);
 	}
+
+	printf("#\n# Num overflows = %d\n#\n", overflo);
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
