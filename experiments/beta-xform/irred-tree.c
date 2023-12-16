@@ -14,7 +14,7 @@
 long bitseq_to_idx(long bitseq, int len)
 {
 	long front = 1;
-	for (int i=0; i< len; i++)
+	for (int i=1; i< len; i++)
 	{
 		int move = (bitseq >> (len-i-1)) * 0x1L;
 		if (move)
@@ -47,13 +47,13 @@ int main(int argc, char* argv[])
 
 	int overflo = 0;
 	int maxdy = 1 << dyad;
-	for (int i=0; i<maxdy-1; i++)
+	for (int i=1; i<maxdy; i++)
 	{
-		double x = ((double) i + 0.5) / (double) maxdy;
+		double x = ((double) i - 0.5) / (double) maxdy;
 
 		// Get the dyad
 		int dlen = dyad;
-		int bits = i+1;
+		int bits = i;
 		while (0 == bits %2)
 		{
 			bits >>= 1;
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 		if (nmax <= idx) { overflo++; continue; }
 
 		double gold = find_gold(idx);
-		printf("%d	%ld	%g	%g\n", i, idx, x, gold);
+		printf("%d	%d	%d	%ld	%g	%g\n", i, bits, dlen, idx, x, gold);
 	}
 
 	printf("#\n# Num overflows = %d\n#\n", overflo);
