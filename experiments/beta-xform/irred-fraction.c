@@ -366,12 +366,14 @@ void recurse_fbaire(int cfrac[], int len,
                     bool do_print)
 {
 	// Iterate to max length, first.
+	// To avoid having everything bunch up near beta=2,
+	// also decrease the depth as length increases.
 	if (len < maxlength)
 	{
 		int bfrac[SZ];
 		for (int i=0; i<len; i++) bfrac[i] = cfrac[i];
 		bfrac[len] = 0;
-		recurse_fbaire(bfrac, len+1, maxdepth, maxlength, maxn, do_print);
+		recurse_fbaire(bfrac, len+1, maxdepth/2, maxlength, maxn, do_print);
 	}
 
 	long idx = index_from_fbaire(cfrac, len);
