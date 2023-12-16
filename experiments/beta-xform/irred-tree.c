@@ -62,21 +62,21 @@ long idx_to_bitseq(long idx, int* leng)
 {
 	*leng = 0;
 	int len = 0;
-	long bitseq = 1;
-	printf("enter idx=%ld\n", idx);
+	long bitseq = 0;
+	// printf("enter idx=%ld\n", idx);
 	while (0 < idx)
 	{
-		int hei = 0;
+		bitseq |= 1UL << len;
+		len++;
 		while (0 == idx%2 && is_valid_index(idx/2UL))
 		{
 			idx >>= 1;
-			hei++;
+			len++;
 		}
-		long left = get_left_idx(idx);
-		printf("%ld |=> leader idx=%ld hei=%d\n", left, idx, hei);
-idx = left;
 
-		len += hei;
+		long left = get_left_idx(idx);
+		// printf("%ld |=> leader idx=%ld len=%d\n", left, idx, len);
+		idx = left;
 	}
 	*leng = len;
 	return bitseq;
@@ -116,7 +116,7 @@ double bitseq_to_cf(long bitseq, int len)
 
 int main(int argc, char* argv[])
 {
-#if 1
+#ifdef SPOT_CHECK
 	int idx = atoi(argv[1]);
 	malloc_gold(idx+1);
 
@@ -126,6 +126,37 @@ int main(int argc, char* argv[])
 
 	long ridx = bitseq_to_idx(bits, len);
 	printf("reconstruct %ld\n", ridx);
+#endif
+
+#define VERIFY
+#ifdef VERIFY
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s <max-order>\n", argv[0]);
+		exit(1);
+	}
+	int maxord = atoi(argv[1]);
+	long nmax = 1UL << maxord;
+	malloc_gold(nmax);
+
+	printf("Verify correctness to max order = %d\n", maxord);
+	for (long idx=1; idx < nmax; idx++)
+	{
+		if (false == is_valid_index(idx)) continue;
+
+		int len = 0;
+		long bits = idx_to_bitseq(idx, &len);
+		// print_bitseq(bits, len, " # bits=(", ")\n");
+
+		long ridx = bitseq_to_idx(bits, len);
+		// printf("reconstruct %ld\n", ridx);
+
+		if (ridx != idx)
+		{
+			printf("Error: bad indexing at idx=%ld rec=%ld", idx, ridx);
+			print_bitseq(bits, len, " # bits=(", ")\n");
+		}
+	}
 #endif
 
 // #define PRINT_DYADIC_TO_BETA_MAP
