@@ -33,10 +33,25 @@ long bitseq_to_idx(long bitseq, int len)
 	return front;
 }
 
+void print_bitseq(long bitseq, int len, char* pre, char* suf)
+{
+	printf("%s", pre);
+	for (int i=0; i<len; i++)
+	{
+		int bit = (bitseq >> (len-i-1)) & 0x1L;
+		printf("%d", bit);
+	}
+	printf (" /%d", len);
+	printf("%s", suf);
+}
+
 // Given an index, return the matching tree-walk to get to it.
 // Inverse of bitseq_to_idx
 long idx_to_bitseq(long idx, int* len)
 {
+	// while (0 == idx%2)
+	{
+	}
 	return 0;
 }
 
@@ -73,6 +88,13 @@ double bitseq_to_cf(long bitseq, int len)
 
 int main(int argc, char* argv[])
 {
+	int idx = atoi(argv[1]);
+
+	int len = 0;
+	long bits = idx_to_bitseq(idx, &len);
+
+// #define PRINT_DYADIC_TO_BETA_MAP
+#ifdef PRINT_DYADIC_TO_BETA_MAP
 	if (argc != 3)
 	{
 		fprintf(stderr, "Usage: %s <max-order> <dyad-base>\n", argv[0]);
@@ -107,10 +129,12 @@ int main(int argc, char* argv[])
 		double gold = find_gold(idx);
 
 		double cf = bitseq_to_cf(bits, dlen);
-		printf("%d	%d	%d	%ld	%g	%g	%g\n", i, bits, 1<<dlen, idx, x, gold, cf);
+		printf("%d	%d	%d	%ld	%g	%g	%g", i, bits, 1<<dlen, idx, x, gold, cf);
+		print_bitseq(bits, dlen, " # bits=(", ")\n");
 	}
 
 	printf("#\n# Num overflows = %d\n#\n", overflo);
+#endif
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
