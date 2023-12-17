@@ -9174,9 +9174,9 @@ The bracketing relations have a simpler form, but otherwise work exactly
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k},m_{k+1}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{k}-1\right]
-\]
+\begin{equation}
+\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k},m_{k+1}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{k}-1\right]\label{eq:sequence bracket}
+\end{equation}
 
 \end_inset
 
@@ -9283,53 +9283,40 @@ The
 \begin_inset Formula $m=0$
 \end_inset
 
-, in which case, the rule is applied recursively ....xxxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-The case where 
-\begin_inset Formula $m_{k}=0$
-\end_inset
-
-, resulting in a trailing 
-\begin_inset Formula $-1$
-\end_inset
-
- in the sequence, is handled by means of a 
-\begin_inset Quotes eld
-\end_inset
-
-parlor trick
-\begin_inset Quotes erd
+, in which case, the rule is applied recursively, so that 
+\begin_inset Formula $\left[\cdots,k,0,-1\right]=\left[\cdots,k,-1\right]=\left[\cdots,k-1\right]$
 \end_inset
 
 .
- Sequences with a trailing 
-\begin_inset Formula $-1$
-\end_inset
-
- shorten in length, so that 
-\begin_inset Formula $\left[\cdots,m,-1\right]=\left[\cdots,m-1\right]$
-\end_inset
-
-.
- The final comma disappears, and the trailing digit is decremented by one.
- This may seem like a peculiar rule, but is really just a short-hand to
- simplify the notation for the intervals.
  
 \end_layout
 
 \begin_layout Standard
-This perhaps most easily understood by plotting actual 
-\begin_inset Formula $\beta$
+As an illustration, consider the case of 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k},m_{k+1}\right]=\left[1,0,0,0\right]$
 \end_inset
 
- values for interval endpoints.
- One bracketing relationship is 
+.
+ The bracketing relation as defined by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sequence bracket"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is then 
+\begin_inset Formula $\left[1,0,0\right]\Mapsto\left[1,0,0,0\right]\Mapsfrom\left[1,0,-1\right]$
+\end_inset
+
+.
+ The right hand side reduces as 
+\begin_inset Formula $\left[1,0,-1\right]=\left[1,-1\right]=\left[0\right]$
+\end_inset
+
+ so that the final form is 
 \begin_inset Formula $\left[1,0,0\right]\Mapsto\left[1,0,0,0\right]\Mapsfrom\left[0\right]$
 \end_inset
 
@@ -9338,12 +9325,7 @@ This perhaps most easily understood by plotting actual
 \end_inset
 
 .
- The parlor trick just allows writing the right-hand side as 
-\begin_inset Formula $\left[1,0,-1\right]=\left[1,-1\right]=\left[0\right]$
-\end_inset
-
-.
- That this is the correct right-hand-side is revealed by plotting 
+ The beta values are as expected 
 \begin_inset Formula 
 \[
 \beta\left[1,0,0\right]=1.60135...<\beta\left[1,0,0,0\right]=1.61193...<\beta\left[0\right]=1.61803...
@@ -9351,7 +9333,7 @@ This perhaps most easily understood by plotting actual
 
 \end_inset
 
-and observing that 
+and a visual confirmation shows that 
 \begin_inset Formula $\left[0\right]$
 \end_inset
 
@@ -9361,6 +9343,65 @@ and observing that
 \end_inset
 
  to be bounded by.
+\end_layout
+
+\begin_layout Standard
+This same parlor trick can be used to create infinite sequences out of finite
+ ones.
+ It was already noted that the upper bound of all sequences is 
+\begin_inset Formula $\beta\left[-1\right]=2$
+\end_inset
+
+.
+ In particular, it is larger than 
+\begin_inset Formula $\beta\left[0,0,\cdots,0\right]$
+\end_inset
+
+ for any finite run of zeros.
+ From this, it is reasonable to make the identification
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[-1\right]=\left[0,0,\cdots\right]
+\]
+
+\end_inset
+
+as a notational convenience.
+ Applying this trick to any finite-length label, one gets an infinite-length
+ label:
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
+\]
+
+\end_inset
+
+The bracketing relationship ensures that the beta value of any infinite-length
+ string will be bounded by a filter series sharing the same leading digits.
+ That is, 
+\begin_inset Formula 
+\[
+\beta\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]<\beta\left[m_{1},m_{2},\cdots,m_{k},\cdots\right]<\beta\left[m_{1},m_{2},\cdots,m_{k},0,0,\cdots\right]
+\]
+
+\end_inset
+
+is true for all 
+\begin_inset Formula $k$
+\end_inset
+
+ and for all sequences 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
+\end_inset
+
+.
+ That is, the sequences that describe ergodic orbits are bounded on the
+ left and right by periodic orbits that converge in the limit onto the ergodic
+ orbit.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -9382,86 +9423,20 @@ As a consequence, the non-periodic
 \begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
 \end_inset
 
- are the non-negative integers, will be clarified shortly below, after a
- treatment of the finite-length sequences.
-\end_layout
-
-\begin_layout Standard
-Periodic 
-\begin_inset Formula $\beta$
-\end_inset
-
- values correspond to finite sequences.
- There is a way to convert these finite sequences into equivalent infinite
- sequences.
- The upper bound of all sequences is 
-\begin_inset Formula $\beta\left(\left[-1\right]\right)=2$
-\end_inset
-
-; it is larger than 
-\begin_inset Formula $\beta\left(\left[0,0,\cdots,0\right]\right)$
-\end_inset
-
- for any finite run of zeros.
- From this, it is reasonable to make the identification
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left[-1\right]=\left[0,0,\cdots\right]
-\]
-
-\end_inset
-
-as a notational convenience.
- Closer examination reveals that each discontinuity visible in the figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Discontinuity-labels"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- can be labeled this way.
- That is, each finite-length label has a corresponding infinite-length label:
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
-\]
-
-\end_inset
-
-It was already apparent that finite-length strings were in one-to-one correspond
-ence with periodic 
-\begin_inset Formula $\beta$
-\end_inset
-
- orbits.
- This maps them cleanly, one-to-one, to infinite zero-terminated strings.
- 
-\end_layout
-
-\begin_layout Standard
-This extension of finite sequences into infinite ones provides the last
- step needed to provide a one-to-one and onto mapping, a bijection, between
- all real values 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
- and Baire space 
-\begin_inset Formula $\mathbb{N}^{\omega}$
-\end_inset
-
-, with no duplications or couble-counting.
- This is intersting and remarkable.
+ are the non-negative integers.
+ This is a true bijection, and not just an injection.
+ This makes the situation different from the better known mapping between
+ Baire space and continued fractions.
+ In that mapping, one has difficulty correctly representing rationals.
+ In short, rationals correspond to finite-length continued fractions, and
+ one has no particular way of patching things up to get rationals out of
+ that mapping.
+ In this sense, the beta Baire space map is better: it has no holes.
+ It's a true bijection.
 \end_layout
 
 \begin_layout Subsubsection
-A continued fraction interpretation
+The Beta odometer
 \end_layout
 
 \begin_layout Standard
