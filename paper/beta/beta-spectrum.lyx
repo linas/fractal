@@ -8388,7 +8388,7 @@ noprefix "false"
 
 .
  Each discontinuity corresponds to the real root of one of the polynomials.
- The first few are labelled by the integer labels from the previous table.
+ The first few are labeled by the integer labels from the previous table.
  The doubling sequences and their leaders are easy to identify.
 \end_layout
 
@@ -8683,7 +8683,7 @@ The left and right moves
 \end_inset
 
  likewise.
- The inequalities are strict, and the figure indicates tht the roots are
+ The inequalities are strict, and the figure indicates that the roots are
  dense in the interval 
 \begin_inset Formula $1\le\beta\le2$
 \end_inset
@@ -8716,7 +8716,7 @@ noprefix "false"
 
 .
  The curve is continuous, precisely because the brackets form a total order
- on their (left and right) sub-brackets, and ecause the brackets progressively
+ on their (left and right) sub-brackets, and because the brackets progressively
  narrow.
 \end_layout
 
@@ -8924,7 +8924,7 @@ Precisely the same bounding process applies to any finite-length prefix
 \begin_inset Formula $f$
 \end_inset
 
- on the right of the bracket, keeping it invarainet as 
+ on the right of the bracket, keeping it invariant as 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
@@ -9124,7 +9124,7 @@ noprefix "false"
 \end_inset
 
  in general.
- Itis convenient to write the right-most label at
+ It is convenient to write the right-most label at
 \family default
 \series default
 \shape default
@@ -9181,7 +9181,7 @@ The bracketing relations have a simpler form, but otherwise work exactly
 \end_inset
 
 The recursion relations also take on a simple form.
- Left-ward moves correspond to 
+ Leftward moves correspond to 
 \begin_inset Formula 
 \[
 \eta\left[m_{1},m_{2},\cdots,m_{k},j\right]=2\eta\left[m_{1},m_{2},\cdots,m_{k},j-1\right]
@@ -9220,6 +9220,7 @@ noprefix "false"
 
 \end_inset
 
+.
  These two recursion relations can be combined to obtain the polynomial
  index (and thus the midpoint orbit label) of any sequence.
  The sequence labels, the periodic orbits and the polynomial roots are all
@@ -9410,8 +9411,7 @@ As a consequence, the non-periodic
 \end_inset
 
  are placed in one-to-one correspondence with infinite length integer sequences.
- That this is one-to-on and onto, a bijection, between all reals in the
- interval 
+ This is a bijection between all reals in the interval 
 \begin_inset Formula $1<\beta\le2$
 \end_inset
 
@@ -9447,7 +9447,7 @@ The sequences
 \end_inset
 
  can also be interpreted as continued fractions.
- That is, for each such sequence, there is a real number 
+ This is given by 
 \begin_inset Formula 
 \[
 c\left[m_{1},m_{2},\cdots\right]=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
@@ -9455,8 +9455,7 @@ c\left[m_{1},m_{2},\cdots\right]=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\
 
 \end_inset
 
-This provides an injection of Baire space (into) the reals (of the unit
- interval).
+This is an injection of Baire space (into) the reals (of the unit interval).
  It is not a surjection, as the rationals do not appear.
  This can be remedied by including the finite-length strings, so that the
  domain of 
@@ -11016,6 +11015,8 @@ reference "eq:invariant measure"
 \end_inset
 
 .
+ Some orbits are periodic (thus, effectively of finite length), while others
+ are ergodic.
 \end_layout
 
 \begin_layout Subsubsection
@@ -11024,7 +11025,7 @@ Orbit encoding
 
 \begin_layout Standard
 The midpoint generates a unique sequence of bits 
-\begin_inset Formula $\left\{ b_{0},b_{1,},\cdots,b_{k},\cdots\right\} $
+\begin_inset Formula $\left\{ b\right\} =\left\{ b_{0},b_{1,},\cdots,b_{k},\cdots\right\} $
 \end_inset
 
  given by the left-right moves of the mid-point, as it is iterated.
@@ -11046,6 +11047,7 @@ The midpoint generates a unique sequence of bits
 \end_inset
 
 .
+ Periodic orbits have finite-length sequences.
 \end_layout
 
 \begin_layout Subsubsection
@@ -11087,12 +11089,25 @@ If the orbit is periodic, then there exists a polynomial
 \end_inset
 
  being the length of the orbit.
- The positive real root of 
-\begin_inset Formula $p_{n}\left(z\right)$
+ The positive real root 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ of 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
 \end_inset
 
  is 
-\begin_inset Formula $\beta$
+\begin_inset Formula $\beta=r_{n}$
+\end_inset
+
+.
+ That is, the iteratioin of 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ will generate the finite-length bit-sequence 
+\begin_inset Formula $\left\{ b\right\} =\left\{ b_{0},b_{1,},\cdots,b_{k}\right\} $
 \end_inset
 
 .
@@ -11111,6 +11126,49 @@ If the orbit is periodic, then there exists a polynomial
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+If the orbit is not periodic, there is a function 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)=1-\sum_{j=0}^{\infty}b_{j}\zeta^{j+1}$
+\end_inset
+
+ holomorphic on the unit disk, having one unique positive real zero 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(r_{\left\{ b\right\} }\right)=0$
+\end_inset
+
+ where this 
+\begin_inset Formula $r_{\left\{ b\right\} }=1/\beta$
+\end_inset
+
+ is the same 
+\begin_inset Formula $\beta$
+\end_inset
+
+ that generated the bit-sequence 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+.
+ Iterating 
+\begin_inset Formula $r_{\left\{ b\right\} }$
+\end_inset
+
+ generates 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+ is finite, then 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)=\zeta^{k+1}p_{n}\left(1/\zeta\right)$
+\end_inset
+
+, so these functions agree on finite-length sequences.
 \end_layout
 
 \begin_layout Subsubsection
@@ -11128,18 +11186,102 @@ If the orbit is periodic, then there exists a unique bracketing relationship
 \end_inset
 
  is the polynomial index.
- Each bracket has unique location in a full, unbounded binary tree, and
- so each node in the tree is specified as a sequence of left-right moves
- in the tree.
- These left-right moves are 
+ The left and right bounds 
+\begin_inset Formula $\ell,\rho$
+\end_inset
+
+ are strictly smaller indexes: 
+\begin_inset Formula $\ell<n$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho<n$
+\end_inset
+
+, and even more strongly, 
+\begin_inset Formula $2\ell\le n$
+\end_inset
+
+ and 
+\begin_inset Formula $2\rho\le n$
+\end_inset
+
+ that have the property of bounding the positive real roots of the corresponding
+ polynomials: 
+\begin_inset Formula $r_{\ell}<r_{n}<r_{\rho}$
+\end_inset
+
+, with 
+\begin_inset Formula $p_{\ell}\left(r_{\ell}\right)=p_{n}\left(r_{n}\right)=p_{\rho}\left(r_{\rho}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Binary tree
+\end_layout
+
+\begin_layout Standard
+Each bracket is in one-to-one correspondence with a node in the full, unbounded
+ binary tree.
+ Sub-brackets define left and right subintervals that are disjoint, and
+ whose union makes up the whole interval.
+ Every node in the full binary tree can be labelled with a unique sequence
+ of left-right moves to get to that node.
+ This places the brackets (and thus, the polynomials and the roots and the
+ mid-point orbits) in unique, one-to-one correspondences with finite-length
+ strings of L,R moves.
+ Such strings are, in turn, in one-to-one correspondence with the dyadic
+ rationals.
+ The L,R strings are in one-to-one correspondence with the orbits 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+ but they are 
 \emph on
 not
 \emph default
- the same as the binary bitstrings above; the tree is a full tree, and all
- left-right moves are allowed.
- This places the polynomials in one-to-one correspondence with the dyadic
- rationals.
- 
+ numerically the same! This are distinct sequences! In particular, all possible
+ L,R moves are allowed.
+ Only a limited number of orbits 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+ are possible, as limited by necklace-counting considerations.
+\end_layout
+
+\begin_layout Subsubsection
+Baire sequences
+\end_layout
+
+\begin_layout Standard
+If the orbit is periodic, then there exists a unique integer sequence 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ such that the index is given by 
+\begin_inset Formula $\eta\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+.
+ This is a bijection between all valid indexes and all possible finite-length
+ sequences.
+ Due to the bounding property of the brackets, limits of 
+\begin_inset Formula $k\to\infty$
+\end_inset
+
+ can be taken, and these limits are unique.
+ Thus, all 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values, including those with non-periodic orbits, can be placed in a one-to-one
+ bijection with infinite-length sequences 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]\in\mathbb{N}^{\omega}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -11158,6 +11300,11 @@ If the orbit is periodic, then there exists a sequence of integers
 
 , and with the value of 
 \begin_inset Formula $\beta$
+\end_inset
+
+.
+ There are also sequences for each infinite-length orbit 
+\begin_inset Formula $\left\{ b\right\} $
 \end_inset
 
 .
@@ -11192,7 +11339,11 @@ reference "eq:golden matrix"
 \end_inset
 
 .
- 
+ The limit of 
+\begin_inset Formula $k\to\infty$
+\end_inset
+
+ can be taken in a straight-forward manner.
 \end_layout
 
 \begin_layout Subsubsection
@@ -11208,8 +11359,8 @@ To summarize: any one of these: the integer
 \begin_inset Formula $p_{n}\left(x\right)$
 \end_inset
 
-, the bracket location in the binary tree, a dyadic rational, the integer
- sequence 
+, the bracket location in the binary tree, a dyadic rational, a point in
+ Baire space, the integer sequence 
 \begin_inset Formula $F_{m}^{\left\{ b\right\} }$
 \end_inset
 
@@ -11233,11 +11384,16 @@ To summarize: any one of these: the integer
 \begin_inset Formula $\beta$
 \end_inset
 
- itself can each be used as a stand-in for the others.
- Specifying one determines the others; they all uniquely map to one-another.
+ itself can each be used as a stand-in for the others, as they are all in
+ one-to-one correspondence.
+ Specifying one determines the others; all uniquely map to one-another.
+ The formulas that provide maps between each of these can all be given in
+ closed form, except for the handful of resursively-defined formulas.
+ The recursive formulas are all invertable; thus they are computerable (decidabl
+e).
  They are all equivalent labels.
  Fashionably abusing notation, 
-\begin_inset Formula $n\equiv p_{n}\left(x\right)\equiv\left\{ b\right\} \equiv F_{m}^{\left\{ b\right\} }\equiv m_{p}\equiv w\left(\beta\right)\equiv\beta\equiv B$
+\begin_inset Formula $n\equiv p_{n}\left(x\right)\equiv r_{n}\equiv\left\{ b\right\} \equiv F_{m}^{\left\{ b\right\} }\equiv m_{p}\equiv w\left(\beta\right)\equiv\beta\equiv B$
 \end_inset
 
 .
