@@ -50,6 +50,7 @@ double find_zero(unsigned long n, double lo, double hi)
 /** Helper array, needed for finding gold midpoints. */
 static double* zero = NULL;
 static int* stopper = NULL;
+static int* summatory = NULL;
 static long maxidx = -2;
 void malloc_gold(long nmax)
 {
@@ -63,6 +64,8 @@ void malloc_gold(long nmax)
 	for (int i=0; i<=nmax; i++) zero[i] = -1.0;
 	stopper = (int*) malloc((nmax+1)*sizeof(int));
 	for (int i=0; i<=nmax; i++) stopper[i] = 0;
+	summatory = (int*) malloc((nmax+1)*sizeof(int));
+	for (int i=0; i<=nmax; i++) summatory[i] = 0;
 
 	// Allow valid memref to zero[-1] denoting beta=1.0
 	zero++;
@@ -179,6 +182,28 @@ long find_leader(long idx)
 }
 
 // =================================================================
+
+// Theta mask summatory function.
+// For any integer n, return the total number of valid indexes
+// below n. i.e. the sum of the mask bits below n.
+long theta_sum(long n)
+{
+	if (maxidx <= n) return -3;
+	if (n < -1L) return -2;
+	if (0 < summatory[n]) return summatory[n];
+
+	long idx = 1;
+	while (0 < summatory[idx]) idx++;
+
+	long cnt = summatory[idx-1];
+	while (idx <= n)
+	{
+		if (is_valid_index(idx)) cnt++;
+		summatory[idx] = cnt;
+		idx++;
+	}
+	return summatory[n];
+}
 
 // Return the n'th element of the "valid index sequence".
 // This is the sequence 1,2,3,4,6,7,8,10,12,13,14,15,16,24...

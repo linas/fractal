@@ -4,10 +4,23 @@ set out 'irred-viz.png'
 
 set title "Summs"
 set style data lines
+set key left
 
+set xrange [0:1]
 set yrange [0:]
-plot "irred-viz.dat" using 5:6 title "sum"
+plot "irred-viz.dat" using 5:6 title "psi scaled"
 
+# psi rescaled to zero to one for each order.
+unset xrange
 set logscale x
-set logscale y
-# plot "irred-viz.dat" using 1:6 lw 2 title "sum"
+# plot "irred-viz.dat" using 1:6 lw 2 title "psi scaled"
+
+# psi as function of n is column 3
+#set logscale y
+#set yrange [1:]
+#plot "irred-viz.dat" using 1:3 lw 2 title "psi"
+
+unset logscale x
+unset logscale y
+unset yrange
+# plot "irred-viz.dat" using 1:7 lw 2 title "psi"

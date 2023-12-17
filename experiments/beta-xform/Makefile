@@ -20,7 +20,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
 	alldisk betadisk momenta zetadisk normie irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
-	irred-height irred-tree
+	irred-height irred-tree irred-seek
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -90,6 +90,7 @@ irred-allowed.o: irred-allowed.c irred-gold.c
 irred-tacky.o: irred-tacky.c irred-gold.c
 irred-height.o: irred-height.c irred-gold.c
 irred-tree.o: irred-tree.c irred-gold.c
+irred-seek.o: irred-seek.c irred-gold.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)

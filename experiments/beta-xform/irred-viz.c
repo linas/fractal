@@ -23,7 +23,6 @@ int main(int argc, char* argv[])
 
 	int cnt = 0;
 	int allcnt = 0;
-	long psisum = 0;
 	int plen = 0;
 	int necklace = 1;
 
@@ -57,17 +56,22 @@ int main(int argc, char* argv[])
 		{
 			cnt ++;
 			allcnt ++;
-			psisum += n;
 
 			// Always the case that tord/2 <= n < tord
-			double frac = ((double) n) / ((double) tord);
-			frac = 2.0*(frac - 0.5); // rescale to run 0 to 1.
+			// double frac = ((double) n) / ((double) tord);
+			// double frac = ((double) n) / ((double) (tord-1));
+			double frac = ((double) n-1) / ((double) (tord-2));
+			double ordfrac = 2.0*(frac - 0.5); // rescale to run 0 to 1.
 
-			// OK, this should work.
-			double seqfrac = ((double) cnt) / ((double) necklace);
+			// First one is always zero, last is always one.
+			// So e.g. necklace is 9, this will give eight steps
+			double seqfrac = ((double) cnt-1) / ((double) necklace-1);
+			// double seqfrac = ((double) cnt) / ((double) necklace);
 
-			printf("%d	%d %d %d %g %g	%ld	%20.18g\n",
-				allcnt, cnt, n, tord, seqfrac, frac, psisum, gold);
+			double ska = ((double) allcnt) /  ((double) tord);
+
+			printf("%d	%d %d %d %g %g	%g	%20.18g\n",
+				allcnt, cnt, n, tord, seqfrac, ordfrac, ska, gold);
 		}
 	}
 }
