@@ -11,9 +11,23 @@ set xlabel "Dyadic Rationals"
 set ylabel "Beta Bracket Fronts"
 
 #set xtics ("1/8" .125, "1/4" 0.25, "3/8" .375, "1/2" 0.5,"5/8" .625, "3/4" 0.75, "7/8" .875, "1" 1)
-plot "irr-tree.dat" using 5:6 with lines linewidth 2 title "main", \
-     "irr-tree.dat" using 5:8 with lines linewidth 2 title "left", \
-     "irr-tree.dat" using 5:9 with lines linewidth 2 title "right"
+#plot "irr-tree.dat" using 5:6 with lines linewidth 2 title "main", \
+#     "irr-tree.dat" using 5:8 with lines linewidth 2 title "left", \
+#     "irr-tree.dat" using 5:9 with lines linewidth 2 title "right"
+
+#set yrange [0:1]
+#plot "irr-tree.dat" using 5:($6-1) with lines linewidth 2 title "main", \
+#     "irr-tree.dat" using 5:($8-1) with lines linewidth 2 title "left", \
+#     "irr-tree.dat" using 5:($9-1.61803) with lines linewidth 2 title "right", \
+#     "irr-tree.dat" using 5:(($8-1)/($6-1)) with lines linewidth 2 title "l/m", \
+#     "irr-tree.dat" using 5:(1 - ($8-1)/($6-1)) with lines linewidth 2 title "1- l/m", \
+#     "irr-tree.dat" using 5:(($8-1) * 1.61803) with lines linewidth 2 title "l phi", \
+#     "irr-tree.dat" using 5:(($6-1) * (2 - 1.61803)) with lines linewidth 2 title "m kil", \
+
+
+unset yrange
+plot "irr-tree.dat" using 5:((1 - ($8-1)/($6-1)) - (($6-1) * (2 - 1.61803))) with lines linewidth 2 title "diff"
+
 
 ################################################
 #
