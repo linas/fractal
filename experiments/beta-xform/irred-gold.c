@@ -182,10 +182,11 @@ long find_leader(long idx)
 
 // Return the n'th element of the "valid index sequence".
 // This is the sequence 1,2,3,4,6,7,8,10,12,13,14,15,16,24...
-// The composition is_valid_index(valid_index(n)) always returns true.
+// The composition is_psi_index(psi_index(n)) always returns true.
 // All valid indexes are included in the list.
+// Also called psi in the paper.
 //
-long valid_index(long n)
+long psi_index(long n)
 {
 	long idx = 1;
 	long cnt = 0;
@@ -209,7 +210,7 @@ void malloc_index_cache(long maxseq)
 }
 
 // Caching version of above, avoids recompuation.
-long valid_index_cache(long n)
+long psi_index_cache(long n)
 {
 	if (NULL == akk)
 	{
@@ -219,7 +220,7 @@ long valid_index_cache(long n)
 
 	if (akk[n] < 0)
 	{
-		long idx = valid_index_cache(n-1) + 1;
+		long idx = psi_index_cache(n-1) + 1;
 		long cnt = n-1;
 		while (cnt < n)
 		{

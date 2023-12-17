@@ -82,7 +82,7 @@ double allowed(long n)
 		malloc_index_cache(MAXSUM+1);
 		init = true;
 	}
-	return valid_index_cache(n);
+	return psi_index_cache(n);
 }
 
 #if 0
