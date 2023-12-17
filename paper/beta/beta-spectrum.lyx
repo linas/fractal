@@ -9325,7 +9325,7 @@ noprefix "false"
 \end_inset
 
 .
- The beta values are as expected 
+ The beta values are as expected: 
 \begin_inset Formula 
 \[
 \beta\left[1,0,0\right]=1.60135...<\beta\left[1,0,0,0\right]=1.61193...<\beta\left[0\right]=1.61803...
@@ -9425,14 +9425,16 @@ As a consequence, the non-periodic
 
  are the non-negative integers.
  This is a true bijection, and not just an injection.
- This makes the situation different from the better known mapping between
- Baire space and continued fractions.
- In that mapping, one has difficulty correctly representing rationals.
- In short, rationals correspond to finite-length continued fractions, and
- one has no particular way of patching things up to get rationals out of
- that mapping.
- In this sense, the beta Baire space map is better: it has no holes.
- It's a true bijection.
+ Every sequence corresponds to a distinct 
+\begin_inset Formula $\beta$
+\end_inset
+
+, and every 
+\begin_inset Formula $\beta$
+\end_inset
+
+ has only one sequence representation.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -9448,7 +9450,7 @@ The sequences
  That is, for each such sequence, there is a real number 
 \begin_inset Formula 
 \[
-c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
+c\left[m_{1},m_{2},\cdots\right]=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
 \]
 
 \end_inset
@@ -9472,12 +9474,12 @@ This provides an injection of Baire space (into) the reals (of the unit
  denotes the set of finite-length strings.
  The primary issue with this extension is that the rationals have two distinct
  representations: 
-\begin_inset Formula $c\left(\left[m_{1},\cdots,m_{k},0\right]\right)=c\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
+\begin_inset Formula $c\left[m_{1},\cdots,m_{k},0\right]=c\left[m_{1},\cdots,m_{k}+1\right]$
 \end_inset
 
 .
- These are distinguished by the beta mapping , since 
-\begin_inset Formula $\beta\left(\left[m_{1},\cdots,m_{k},0\right]\right)\ne\beta\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
+ These are distinguished by the beta mapping, since 
+\begin_inset Formula $\beta\left[m_{1},\cdots,m_{k},0\right]\ne\beta\left[m_{1},\cdots,m_{k}+1\right]$
 \end_inset
 
 .
@@ -9529,7 +9531,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -9579,8 +9581,36 @@ This visualizes the
  It also can be interpreted as a continued fraction, this is shown on the
  vertical axis.
  It is clearly self-similar.
- Some of the vertical joins are drawn not quite vertical; this is due to
- insufficient convergence during graph generation.
+ All vertical joins are meant to be discontinuities, and so be perfectly
+ vertical.
+ They are not always drawn that way; this is due to insufficient convergence
+ during graph generation.
+ The two endpoints of each vertical line correspond to 
+\begin_inset Formula $c\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $c\left[m_{1},m_{2},\cdots,m_{k}+1,0,\cdots\right]$
+\end_inset
+
+, since 
+\begin_inset Formula $\beta\left[m_{1},m_{2},\cdots,m_{k}\right]=\beta\left[m_{1},m_{2},\cdots,m_{k}+1,0,\cdots\right]$
+\end_inset
+
+ but the two continued fractions are inequivalent.
+ Consider, for example, 
+\begin_inset Formula $\beta\left[0\right]=\beta\left[1,0,0,\cdots\right]=1.61803...$
+\end_inset
+
+ At this location, the two continued fractions are 
+\begin_inset Formula $c\left[0\right]=1$
+\end_inset
+
+ and 
+\begin_inset Formula $c\left[1,0,0,\cdots\right]=1/\left(1+\varphi\right)=0.381966...$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -9588,7 +9618,7 @@ This visualizes the
 status collapsed
 
 \begin_layout Plain Layout
-Generated with irred-frac.c and irred-frac.gplot
+Generated with irred-fraction.c and irred-frac.gplot
 \end_layout
 
 \end_inset
@@ -9614,27 +9644,6 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-It is clearly discontinuous at the beta-golden numbers that correspond to
- the finite-length polynomials; but this is a countable set.
- The map is an injection (one-to-one) by construction.
- The end-points of the discontinuities are mapped to the rationals.
- The two endpoints correspond to the continued-fraction mappings for 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
-\end_inset
-
- and 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]$
-\end_inset
-
- as these two are interpreted as equivalent for the beta mapping, but are
- clearly inequivalent continued fractions.
-\end_layout
-
-\begin_layout Subsubsection
-The beta odometer
-\end_layout
-
-\begin_layout Standard
 The use of the word 
 \begin_inset Quotes eld
 \end_inset
@@ -9643,7 +9652,14 @@ odometer
 \begin_inset Quotes erd
 \end_inset
 
- is perhaps a bit cryptic; a quick review is in order.
+ may feel perhaps a bit cryptic; it becomes clear on noticing that the continued
+ fraction mapping visits all reals (excluding the rationals).
+ Compare, for example, to the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic odometers that likewise visit all possibilities; this is the same
+ idea, but applied to Baire space.
  
 \end_layout
 
