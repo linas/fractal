@@ -8513,6 +8513,623 @@ noprefix "false"
  on their sub-brackets.
 \end_layout
 
+\begin_layout Subsubsection
+Beta odometer
+\end_layout
+
+\begin_layout Standard
+The periodic orbits can be assigned a label, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Discontinuity-labels"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The goal of the label is to provide a unique identifier for each discontinuity
+ on the graph; yet one that is easy to read off by visual examination.
+ Recall that each discontinuity corresponds to a periodic orbit, and so
+ these labels apply to the periodic orbits.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Discontinuity Labels
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Discontinuity-labels"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename normie-f-labelled.eps
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the integral 
+\begin_inset Formula $I\left(\beta\right)=\sum_{n=0}^{\infty}\beta^{-n}T^{n}\left(\frac{\beta}{2}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ running along the horizontal axis.
+ Each discontinuity corresponds to the location of a real root of one of
+ the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Golden polynomials.
+ Prominent discontinuities are labeled with a finite sequence of non-negative
+ integers following a regular pattern.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with normie.C and normie.gplot and then manually annotated.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+The bracketing relationship
+\end_layout
+
+\begin_layout Standard
+The patterned regularity in this labeling scheme is hopefully apparent.
+ The largest discontinuity is given a label of 
+\begin_inset Formula $\left[0\right]$
+\end_inset
+
+.
+ It is the leader of a period-doubling sequence, given labels 
+\begin_inset Formula $\left[1\right]$
+\end_inset
+
+, 
+\begin_inset Formula $\left[2\right]$
+\end_inset
+
+, and so on.
+ The largest discontinuity between 
+\begin_inset Formula $\left[n\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[n-1\right]$
+\end_inset
+
+ is given the label 
+\begin_inset Formula $\left[n,0\right]$
+\end_inset
+
+ and it leads a sequence 
+\begin_inset Formula $\left[n,1\right]$
+\end_inset
+
+, 
+\begin_inset Formula $\left[n,2\right]$
+\end_inset
+
+, and so on.
+ At the right-most end of the graph, at 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, the appropriate label appears to be 
+\begin_inset Formula $\left[-1\right]$
+\end_inset
+
+.
+ With this observation, the labeling is completely regular.
+ Each interval brackets a sequence of discontinuities, ad infinitum.
+\end_layout
+
+\begin_layout Standard
+The bracketing relationship can be written as 
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{p}-1\right]
+\]
+
+\end_inset
+
+with where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the largest integer 
+\begin_inset Formula $1<p\le k-1$
+\end_inset
+
+ for which 
+\begin_inset Formula $m_{p}\ne0$
+\end_inset
+
+.
+ The notation here is that each label is brackets by a pair of shorter labels,
+ on the left, and on the right.
+ Each label corresponds to a specific 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value; write 
+\begin_inset Formula $\beta=\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
+\end_inset
+
+ for this value.
+ The bracketing relationship states that
+\begin_inset Formula 
+\[
+\beta\left(\left[m_{1},m_{2},\cdots,m_{k-1}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{p}-1\right]\right)
+\]
+
+\end_inset
+
+with the inequalities being strict.
+ Each interval is of decreasing size, limiting to zero, as the length of
+ the integer sequences expand.
+ As the bounds are increasingly tight, they bracket a unique convergent.
+\end_layout
+
+\begin_layout Subsubsection
+The beta map bijection
+\end_layout
+
+\begin_layout Standard
+As a consequence, the non-periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are placed in one-to-one correspondence with infinite length integer sequences.
+ That this is one-to-on and onto, a bijection, between all reals in the
+ interval 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ and Baire space 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
+\end_inset
+
+ are the non-negative integers, will be clarified shortly below, after a
+ treatment of the finite-length sequences.
+\end_layout
+
+\begin_layout Standard
+Periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values correspond to finite sequences.
+ There is a way to convert these finite sequences into equivalent infinite
+ sequences.
+ The upper bound of all sequences is 
+\begin_inset Formula $\beta\left(\left[-1\right]\right)=2$
+\end_inset
+
+; it is larger than 
+\begin_inset Formula $\beta\left(\left[0,0,\cdots,0\right]\right)$
+\end_inset
+
+ for any finite run of zeros.
+ From this, it is reasonable to make the identification
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[-1\right]=\left[0,0,\cdots\right]
+\]
+
+\end_inset
+
+as a notational convenience.
+ Closer examination reveals that each discontinuity visible in the figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Discontinuity-labels"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be labeled this way.
+ That is, each finite-length label has a corresponding infinite-length label:
+\begin_inset Formula 
+\[
+\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
+\]
+
+\end_inset
+
+It was already apparent that finite-length strings were in one-to-one correspond
+ence with periodic 
+\begin_inset Formula $\beta$
+\end_inset
+
+ orbits.
+ This maps them cleanly, one-to-one, to infinite zero-terminated strings.
+ 
+\end_layout
+
+\begin_layout Standard
+This extension of finite sequences into infinite ones provides the last
+ step needed to provide a one-to-one and onto mapping, a bijection, between
+ all real values 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ and Baire space 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+, with no duplications or couble-counting.
+ This is intersting and remarkable.
+\end_layout
+
+\begin_layout Standard
+The bijection can be explicitly exhibited as follows.
+ For the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ that correspond to a periodic orbit, that 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value is the one real root of one of the corresponding beta polynomial
+ 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ for some index 
+\begin_inset Formula $n$
+\end_inset
+
+; equivalently, it is the convergent of one of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci sequences, for that same index 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Write the index label as 
+\begin_inset Formula $n=\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
+\end_inset
+
+.
+ This index is the same, as that used in previous sections; it corresponds
+ to the labels in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalization-Integral"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The index can be deduced from the bracketing relationship; it provides a
+ recursion formula.
+ Starting from 
+\begin_inset Formula $\eta\left(\left[0\right]\right)=1$
+\end_inset
+
+, repeated increments of the last location in the sequence correspond to
+ multiplying by two:
+\begin_inset Formula 
+\[
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k},j\right]\right)=2^{j}\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)
+\]
+
+\end_inset
+
+A sequence can be lengthed by appending an extra zero digit: xxx this shold
+ use the leader funct.
+\begin_inset Formula 
+\[
+\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=xxx\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)+1\right)
+\]
+
+\end_inset
+
+These two formulas can be combined into one, so that really, there is but
+ one recursion relation.
+ Leaving them distinct does make them easier to comprehend.
+\end_layout
+
+\begin_layout Standard
+The recursion relation is an injection (one-to-one map) into the positive
+ integers; each sequence corresponds to a unique index integer.
+ Perhaps the easiest way to see this is to observe that the append operation
+ generates an odd integer, and then tacks on enough powers of two to disambiguat
+e it from all other odd integers associated with shorter sequences that
+ have been observed so far.
+\end_layout
+
+\begin_layout Standard
+Not all positive integers have a sequence representation.
+ Missing from the index table are 
+\begin_inset Formula $n=5,9,11,17,18,19,21,\cdots$
+\end_inset
+
+; these are exactly the same indexes missing from tables given earlier:
+ they correspond to the reducible beta polynomials.
+\end_layout
+
+\begin_layout Subsubsection
+A continued fraction interpretation
+\end_layout
+
+\begin_layout Standard
+The sequences 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
+\end_inset
+
+ can also be interpreted as continued fractions.
+ That is, for each such sequence, there is a real number 
+\begin_inset Formula 
+\[
+c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=Theuseoftheword\text{“}odometer\text{”}isperhapsabitcryptic;aquickreviewisinorder.\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
+\]
+
+\end_inset
+
+This provides an injection of Baire space (into) the reals (of the unit
+ interval).
+ It is not a surjection, as the rationals do not appear.
+ This can be remedied by including the finite-length strings, so that the
+ domain of 
+\begin_inset Formula $c$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathbb{N}^{\omega}\cup\mathbb{N}^{<\omega}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbb{N}^{<\omega}$
+\end_inset
+
+ denotes the set of finite-length strings.
+ The primary issue with this extension is that the rationals have two distinct
+ representations: 
+\begin_inset Formula $c\left(\left[m_{1},\cdots,m_{k},0\right]\right)=c\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
+\end_inset
+
+.
+ These are distinguished by the beta mapping , since 
+\begin_inset Formula $\beta\left(\left[m_{1},\cdots,m_{k},0\right]\right)\ne\beta\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Since the map 
+\begin_inset Formula $\beta:\mathbb{N}^{\omega}\to\mathbb{R}$
+\end_inset
+
+ is a bijection on the unit interval, it can be unambiguously inverted.
+ Each real 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+ corresponds to a unique sequence in 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+; the continued fraction mapping will then map this sequence back into the
+ unit interval 
+\begin_inset Formula $0<c<1$
+\end_inset
+
+.
+ The composition of these two maps is termed the 
+\begin_inset Quotes eld
+\end_inset
+
+beta odometer
+\begin_inset Quotes erd
+\end_inset
+
+ and is illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-odometer"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beta odometer
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beta-odometer"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename irred-frac.eps
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This visualizes the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-odometer in terms of continued fractions.
+ Any given sequence 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ has an associated 
+\begin_inset Formula $\beta$
+\end_inset
+
+ value; this is graphed on the horizontal axis.
+ It also can be interpreted as a continued fraction, this is shown on the
+ vertical axis.
+ It is clearly self-similar.
+ Some of the vertical joins are drawn not quite vertical; this is due to
+ insufficient convergence during graph generation.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with irred-frac.c and irred-frac.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is clearly discontinuous at the beta-golden numbers that correspond to
+ the finite-length polynomials; but this is a countable set.
+ The map is an injection (one-to-one) by construction.
+ The end-points of the discontinuities are mapped to the rationals.
+ The two endpoints correspond to the continued-fraction mappings for 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]$
+\end_inset
+
+ as these two are interpreted as equivalent for the beta mapping, but are
+ clearly inequivalent continued fractions.
+\end_layout
+
+\begin_layout Subsubsection
+The beta odometer
+\end_layout
+
+\begin_layout Standard
+The use of the word 
+\begin_inset Quotes eld
+\end_inset
+
+odometer
+\begin_inset Quotes erd
+\end_inset
+
+ is perhaps a bit cryptic; a quick review is in order.
+ 
+\end_layout
+
 \begin_layout Subsection
 Complex Roots
 \end_layout
@@ -12741,942 +13358,6 @@ As may be seen, some of these constants are already notable for various
  partially-ordered set of intertwining polynomials.
  Exactly how to express that intertwining in any sort of elegant or insightful
  way is not obvious.
-\end_layout
-
-\begin_layout Subsection
-Beta odometer
-\end_layout
-
-\begin_layout Standard
-The periodic orbits can be assigned a label, shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Discontinuity-labels"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The goal of the label is to provide a unique identifier for each discontinuity
- on the graph; yet one that is easy to read off by visual examination.
- Recall that each discontinuity corresponds to a periodic orbit, and so
- these labels apply to the periodic orbits.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Discontinuity Labels
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Discontinuity-labels"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename normie-f-labelled.eps
-	lyxscale 50
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-This figure shows the integral 
-\begin_inset Formula $I\left(\beta\right)=\sum_{n=0}^{\infty}\beta^{-n}T^{n}\left(\frac{\beta}{2}\right)$
-\end_inset
-
- with 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
- running along the horizontal axis.
- Each discontinuity corresponds to the location of a real root of one of
- the 
-\begin_inset Formula $\beta$
-\end_inset
-
--Golden polynomials.
- Prominent discontinuities are labeled with a finite sequence of non-negative
- integers following a regular pattern.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Generated with normie.C and normie.gplot and then manually annotated.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-The bracketing relationship
-\end_layout
-
-\begin_layout Standard
-The patterned regularity in this labeling scheme is hopefully apparent.
- The largest discontinuity is given a label of 
-\begin_inset Formula $\left[0\right]$
-\end_inset
-
-.
- It is the leader of a period-doubling sequence, given labels 
-\begin_inset Formula $\left[1\right]$
-\end_inset
-
-, 
-\begin_inset Formula $\left[2\right]$
-\end_inset
-
-, and so on.
- The largest discontinuity between 
-\begin_inset Formula $\left[n\right]$
-\end_inset
-
- and 
-\begin_inset Formula $\left[n-1\right]$
-\end_inset
-
- is given the label 
-\begin_inset Formula $\left[n,0\right]$
-\end_inset
-
- and it leads a sequence 
-\begin_inset Formula $\left[n,1\right]$
-\end_inset
-
-, 
-\begin_inset Formula $\left[n,2\right]$
-\end_inset
-
-, and so on.
- At the right-most end of the graph, at 
-\begin_inset Formula $\beta=2$
-\end_inset
-
-, the appropriate label appears to be 
-\begin_inset Formula $\left[-1\right]$
-\end_inset
-
-.
- With this observation, the labeling is completely regular.
- Each interval brackets a sequence of discontinuities, ad infinitum.
-\end_layout
-
-\begin_layout Standard
-The bracketing relationship can be written as 
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k-1}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{p}-1\right]
-\]
-
-\end_inset
-
-with where 
-\begin_inset Formula $p$
-\end_inset
-
- is the largest integer 
-\begin_inset Formula $1<p\le k-1$
-\end_inset
-
- for which 
-\begin_inset Formula $m_{p}\ne0$
-\end_inset
-
-.
- The notation here is that each label is brackets by a pair of shorter labels,
- on the left, and on the right.
- Each label corresponds to a specific 
-\begin_inset Formula $\beta$
-\end_inset
-
- value; write 
-\begin_inset Formula $\beta=\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
-\end_inset
-
- for this value.
- The bracketing relationship states that
-\begin_inset Formula 
-\[
-\beta\left(\left[m_{1},m_{2},\cdots,m_{k-1}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{p}-1\right]\right)
-\]
-
-\end_inset
-
-with the inequalities being strict.
- Each interval is of decreasing size, limiting to zero, as the length of
- the integer sequences expand.
- As the bounds are increasingly tight, they bracket a unique convergent.
-\end_layout
-
-\begin_layout Subsubsection
-The beta map bijection
-\end_layout
-
-\begin_layout Standard
-As a consequence, the non-periodic 
-\begin_inset Formula $\beta$
-\end_inset
-
- are placed in one-to-one correspondence with infinite length integer sequences.
- That this is one-to-on and onto, a bijection, between all reals in the
- interval 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
- and Baire space 
-\begin_inset Formula $\mathbb{N}^{\omega}$
-\end_inset
-
-, where 
-\begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
-\end_inset
-
- are the non-negative integers, will be clarified shortly below, after a
- treatment of the finite-length sequences.
-\end_layout
-
-\begin_layout Standard
-The finite-length integer sequences can be generated in proper order via
- a simple recursive algorithm, given here.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Its actually in beta-xform/irred-fraction.c
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\small},tabsize=3"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-# Print sequences in descending beta order
-\end_layout
-
-\begin_layout Plain Layout
-
-# The `sequence` is the list [m_1, m_2, ...
- ,  m_k]
-\end_layout
-
-\begin_layout Plain Layout
-
-# The `maxlength` parameter limits recursion to short sequences (max k)
-\end_layout
-
-\begin_layout Plain Layout
-
-# The `maxdepth` parameter limits the largest value of each m_j
-\end_layout
-
-\begin_layout Plain Layout
-
-define iterate (sequence, maxlength, maxdepth)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	# First, iterate to maximum length,
-\end_layout
-
-\begin_layout Plain Layout
-
-	# appending a zero to the end of the sequence.
-\end_layout
-
-\begin_layout Plain Layout
-
-	if (length(sequence) < maxlength)
-\end_layout
-
-\begin_layout Plain Layout
-
-		iterate (append (sequence, 0), maxlength, maxdepth)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	# Output the resulting sequence.
-\end_layout
-
-\begin_layout Plain Layout
-
-	print(sequence)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	# Next, increment the tail element of the sequence
-\end_layout
-
-\begin_layout Plain Layout
-
-	# and recurse.
-\end_layout
-
-\begin_layout Plain Layout
-
-	if (tail(sequence) < maxdepth)
-\end_layout
-
-\begin_layout Plain Layout
-
-		tail(sequence) += 1
-\end_layout
-
-\begin_layout Plain Layout
-
-		iteratate (sequence, maxlength, maxdepth)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-The above algorithm will generate polynomials in descending 
-\begin_inset Formula $\beta$
-\end_inset
-
--order, that is, in an order such that the 
-\begin_inset Formula $\beta$
-\end_inset
-
- of each sequence is less than the previous one.
- It provides a total order, possible only because infinite recursion is
- prevented by the two recursion limits.
-\end_layout
-
-\begin_layout Standard
-Periodic 
-\begin_inset Formula $\beta$
-\end_inset
-
- values correspond to finite sequences.
- There is a way to convert these finite sequences into equivalent infinite
- sequences.
- The upper bound of all sequences is 
-\begin_inset Formula $\beta\left(\left[-1\right]\right)=2$
-\end_inset
-
-; it is larger than 
-\begin_inset Formula $\beta\left(\left[0,0,\cdots,0\right]\right)$
-\end_inset
-
- for any finite run of zeros.
- From this, it is reasonable to make the identification
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left[-1\right]=\left[0,0,\cdots\right]
-\]
-
-\end_inset
-
-as a notational convenience.
- Closer examination reveals that each discontinuity visible in the figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Discontinuity-labels"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- can be labeled this way.
- That is, each finite-length label has a corresponding infinite-length label:
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
-\]
-
-\end_inset
-
-It was already apparent that finite-length strings were in one-to-one correspond
-ence with periodic 
-\begin_inset Formula $\beta$
-\end_inset
-
- orbits.
- This maps them cleanly, one-to-one, to infinite zero-terminated strings.
- 
-\end_layout
-
-\begin_layout Standard
-This extension of finite sequences into infinite ones provides the last
- step needed to provide a one-to-one and onto mapping, a bijection, between
- all real values 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
- and Baire space 
-\begin_inset Formula $\mathbb{N}^{\omega}$
-\end_inset
-
-, with no duplications or couble-counting.
- This is intersting and remarkable.
-\end_layout
-
-\begin_layout Standard
-The bijection can be explicitly exhibited as follows.
- For the 
-\begin_inset Formula $\beta$
-\end_inset
-
- that correspond to a periodic orbit, that 
-\begin_inset Formula $\beta$
-\end_inset
-
- value is the one real root of one of the corresponding beta polynomial
- 
-\begin_inset Formula $p_{n}$
-\end_inset
-
- for some index 
-\begin_inset Formula $n$
-\end_inset
-
-; equivalently, it is the convergent of one of the 
-\begin_inset Formula $\beta$
-\end_inset
-
--Fibonacci sequences, for that same index 
-\begin_inset Formula $n$
-\end_inset
-
-.
- Write the index label as 
-\begin_inset Formula $n=\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)$
-\end_inset
-
-.
- This index is the same, as that used in previous sections; it corresponds
- to the labels in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Normalization-Integral"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The index can be deduced from the bracketing relationship; it provides a
- recursion formula.
- Starting from 
-\begin_inset Formula $\eta\left(\left[0\right]\right)=1$
-\end_inset
-
-, repeated increments of the last location in the sequence correspond to
- multiplying by two:
-\begin_inset Formula 
-\[
-\eta\left(\left[m_{1},m_{2},\cdots,m_{k},j\right]\right)=2^{j}\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)
-\]
-
-\end_inset
-
-A sequence can be lengthed by appending an extra zero digit: xxx this shold
- use the leader funct.
-\begin_inset Formula 
-\[
-\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=xxx\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)+1\right)
-\]
-
-\end_inset
-
-These two formulas can be combined into one, so that really, there is but
- one recursion relation.
- Leaving them distinct does make them easier to comprehend.
-\end_layout
-
-\begin_layout Standard
-The recursion relation is an injection (one-to-one map) into the positive
- integers; each sequence corresponds to a unique index integer.
- Perhaps the easiest way to see this is to observe that the append operation
- generates an odd integer, and then tacks on enough powers of two to disambiguat
-e it from all other odd integers associated with shorter sequences that
- have been observed so far.
-\end_layout
-
-\begin_layout Standard
-Not all positive integers have a sequence representation.
- Missing from the index table are 
-\begin_inset Formula $n=5,9,11,17,18,19,21,\cdots$
-\end_inset
-
-; these are exactly the same indexes missing from tables given earlier:
- they correspond to the reducible beta polynomials.
-\end_layout
-
-\begin_layout Subsubsection
-A continued fraction interpretation
-\end_layout
-
-\begin_layout Standard
-The sequences 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
-\end_inset
-
- can also be interpreted as continued fractions.
- That is, for each such sequence, there is a real number 
-\begin_inset Formula 
-\[
-c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
-\]
-
-\end_inset
-
-This provides an injection of Baire space (into) the reals (of the unit
- interval).
- It is not a surjection, as the rationals do not appear.
- This can be remedied by including the finite-length strings, so that the
- domain of 
-\begin_inset Formula $c$
-\end_inset
-
- is 
-\begin_inset Formula $\mathbb{N}^{\omega}\cup\mathbb{N}^{<\omega}$
-\end_inset
-
- where 
-\begin_inset Formula $\mathbb{N}^{<\omega}$
-\end_inset
-
- denotes the set of finite-length strings.
- The primary issue with this extension is that the rationals have two distinct
- representations: 
-\begin_inset Formula $c\left(\left[m_{1},\cdots,m_{k},0\right]\right)=c\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
-\end_inset
-
-.
- These are distinguished by the beta mapping , since 
-\begin_inset Formula $\beta\left(\left[m_{1},\cdots,m_{k},0\right]\right)\ne\beta\left(\left[m_{1},\cdots,m_{k}+1\right]\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Since the map 
-\begin_inset Formula $\beta:\mathbb{N}^{\omega}\to\mathbb{R}$
-\end_inset
-
- is a bijection on the unit interval, it can be unambiguously inverted.
- Each real 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
- corresponds to a unique sequence in 
-\begin_inset Formula $\mathbb{N}^{\omega}$
-\end_inset
-
-; the continued fraction mapping will then map this sequence back into the
- unit interval 
-\begin_inset Formula $0<c<1$
-\end_inset
-
-.
- The composition of these two maps is termed the 
-\begin_inset Quotes eld
-\end_inset
-
-beta odometer
-\begin_inset Quotes erd
-\end_inset
-
- and is illustrated in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beta-odometer"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Beta odometer
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Beta-odometer"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename irred-frac.eps
-	width 80col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-This visualizes the 
-\begin_inset Formula $\beta$
-\end_inset
-
--odometer in terms of continued fractions.
- Any given sequence 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
-\end_inset
-
- has an associated 
-\begin_inset Formula $\beta$
-\end_inset
-
- value; this is graphed on the horizontal axis.
- It also can be interpreted as a continued fraction, this is shown on the
- vertical axis.
- It is clearly self-similar.
- Some of the vertical joins are drawn not quite vertical; this is due to
- insufficient convergence during graph generation.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Generated with irred-frac.c and irred-frac.gplot
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-It is clearly discontinuous at the beta-golden numbers that correspond to
- the finite-length polynomials; but this is a countable set.
- The map is an injection (one-to-one) by construction.
- The end-points of the discontinuities are mapped to the rationals.
- The two endpoints correspond to the continued-fraction mappings for 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
-\end_inset
-
- and 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]$
-\end_inset
-
- as these two are interpreted as equivalent for the beta mapping, but are
- clearly inequivalent continued fractions.
-\end_layout
-
-\begin_layout Subsubsection
-The beta odometer
-\end_layout
-
-\begin_layout Standard
-The use of the word 
-\begin_inset Quotes eld
-\end_inset
-
-odometer
-\begin_inset Quotes erd
-\end_inset
-
- is perhaps a bit cryptic; a quick review is in order.
- An odometer of characteristic 
-\begin_inset Formula $p$
-\end_inset
-
- is defined as the set of all infinite-length integer sequences 
-\begin_inset Formula $\left(a_{0},a_{1},\cdots\right)$
-\end_inset
-
- with each 
-\begin_inset Formula $a_{k}$
-\end_inset
-
- drawn from the cyclic group 
-\begin_inset Formula $\mathbb{Z}/p\mathbb{Z}$
-\end_inset
-
-.
- This set is endowed with a transition function 
-\begin_inset Formula $T$
-\end_inset
-
- given by the map 
-\begin_inset Formula 
-\[
-T\left(a_{0},a_{1},\cdots\right)\mapsto\begin{cases}
-\left(a_{0}+1,a_{1},\cdots\right) & \mbox{if }a_{0}\ne p-1\\
-\left(0,\cdots,0,a_{k}+1,a_{k+1},\cdots\right) & \mbox{if }\left(a_{0},a_{1},\cdots\right)=\left(p-1,\cdots,p-1,a_{k},a_{k+1},\cdots\right)
-\end{cases}
-\]
-
-\end_inset
-
-That is, it increments 
-\begin_inset Formula $a_{0}$
-\end_inset
-
- by one, and if that rolls over, then a carry bit is propagated to the next
- term, and so on.
- This is just 
-\begin_inset Formula $p$
-\end_inset
-
--adic addition, treated as a dynamical system.
- It can also be interpreted as a map of the unit interval, to itself, when
- the sequence 
-\begin_inset Formula $\left(a_{0},a_{1},\cdots\right)$
-\end_inset
-
- is interpreted as 
-\begin_inset Formula $x=\sum_{n}a_{n}p^{-n-1}$
-\end_inset
-
-.
- As a map of the unit interval, it permutes a countable sequence of intervals
- of decreasing size.
- Odometers are bijections of the unit interval into itself.
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $\beta$
-\end_inset
-
--odometer can be taken to be an odometer of characteristic zero.
- The rationale for this opaque claim can be clarified by looking at how
- it 
-\begin_inset Quotes eld
-\end_inset
-
-rolls over
-\begin_inset Quotes erd
-\end_inset
-
-.
- The prototypical roll-over occurs at the juncture of 
-\begin_inset Formula $\beta=\varphi=1.618\cdots$
-\end_inset
-
-.
- One observes the sequence 
-\begin_inset Formula 
-\begin{align*}
-\beta\left[0,1\right] & =1.75488\cdots\\
-\beta\left[0,2\right] & =1.70490\cdots\\
- & \vdots\\
-\beta\left[0,16\right] & =1.61816\cdots\\
-\beta\left[0,N\right] & >\varphi\mbox{ for }N\to\infty\\
-\beta\left[0\right]=\beta\left[1,-1\right]=\beta\left[1,0,0,\cdots\right] & =\varphi\\
-\beta\left[1,0,0,\cdots,1,\cdots\right] & <\varphi
-\end{align*}
-
-\end_inset
-
-That is, the sequence 
-\begin_inset Formula $\left[0,N\right]$
-\end_inset
-
- for 
-\begin_inset Formula $N\to\infty$
-\end_inset
-
- rolls over to 
-\begin_inset Formula $\left[1,0,0,\cdots\right]$
-\end_inset
-
-.
- It is this peculiar behavior that merits the name 
-\begin_inset Quotes eld
-\end_inset
-
-odometer
-\begin_inset Quotes erd
-\end_inset
-
-.
- Analogously, a rollover happens at every finite string.
- The bracketing relation supplies a descending sequence leading up to the
- rollover:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\beta\left(\left[m_{1},m_{2},\cdots,N\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,N-1\right]\right)
-\]
-
-\end_inset
-
-At the rollover point, the final digit is dropped:
-\begin_inset Formula 
-\[
-\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k},N\right]\right)
-\]
-
-\end_inset
-
-After the rollover, the shortened sequence is incremented by one, and a
- new zero is appended to the end, to start the sequence again:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\beta\left(\left[m_{1},m_{2},\cdots,m_{k}+1,0\right]\right)<\beta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)
-\]
-
-\end_inset
-
-This is very diffferent from the 
-\begin_inset Formula $p$
-\end_inset
-
--adic case, where the odometer increment takes place on the first digit
- of an infinite sequence.
- Here, the rollover takes place in the last digit of a finite sequence.
- There is no way to increment infinite sequences.
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $p$
-\end_inset
-
--adic odometers are interval maps; they re-arrange countable sequences of
- subintervals of the unit interval.
- Here, likewise, the beta odometer rearranges intervals, at least in the
- sense that rearrangements are disjoint.
- So, the interval 
-\begin_inset Formula $\left(\varphi,2\right)$
-\end_inset
-
- is mapped to 
-\begin_inset Formula $\left(\frac{1}{2},1\right)$
-\end_inset
-
- albeit in a fractal manner, and likewise each subinterval bounded by the
- descending series of roots to 
-\begin_inset Formula $\beta^{n}-\beta^{n-1}-1=0$
-\end_inset
-
- is mapped to the interval 
-\begin_inset Formula $\left(\frac{1}{n},\frac{1}{n-1}\right)$
-\end_inset
-
-.
- By self-symmetry, the sub-intervals will re-arrange as well.
 \end_layout
 
 \begin_layout Section
