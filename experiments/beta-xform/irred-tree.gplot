@@ -1,35 +1,38 @@
 #
-#set out 'irr-tree.png'
-#set term png size 1024,768
-#set term png size 640, 480
-#
-##set xrange [0:1]
-#set yrange [1:2]
-#
-#set title "Bracket Map"
-#set xlabel "Dyadic Rationals"
-#set ylabel "Beta Bracket Fronts"
-#
-#set xtics ("1/8" .125, "1/4" 0.25, "3/8" .375, "1/2" 0.5,"5/8" .625, "3/4" 0.75, "7/8" .875, "1" 1)
-#plot "irr-tree.dat" using 5:6 with lines linewidth 2 title ""
-################################################
-
-set out 'irr-tree-rle.png'
+set out 'irr-tree.png'
 set term png size 1024,768
 set term png size 640, 480
 
 #set xrange [0:1]
-# set yrange [1:2]
+set yrange [1:2]
 
 set title "Bracket Map"
-set xlabel "Stern-Brocot Rationals"
+set xlabel "Dyadic Rationals"
 set ylabel "Beta Bracket Fronts"
 
-# plot "irr-tree.dat" using 7:6 with lines linewidth 2 title "" , \
-#      "irr-tree.dat" using 5:(2*$5+1) with lines linewidth 2 title ""
+#set xtics ("1/8" .125, "1/4" 0.25, "3/8" .375, "1/2" 0.5,"5/8" .625, "3/4" 0.75, "7/8" .875, "1" 1)
+plot "irr-tree.dat" using 5:6 with lines linewidth 2 title "main", \
+     "irr-tree.dat" using 5:8 with lines linewidth 2 title "left", \
+     "irr-tree.dat" using 5:9 with lines linewidth 2 title "right"
 
-plot "irr-tree.dat" using 7:(($6-1)/$7) with lines linewidth 2 title ""
-
+################################################
+#
+#set out 'irr-tree-rle.png'
+#set term png size 1024,768
+#set term png size 640, 480
+#
+##set xrange [0:1]
+## set yrange [1:2]
+#
+#set title "Bracket Map"
+#set xlabel "Stern-Brocot Rationals"
+#set ylabel "Beta Bracket Fronts"
+#
+## plot "irr-tree.dat" using 7:6 with lines linewidth 2 title "" , \
+##      "irr-tree.dat" using 5:(2*$5+1) with lines linewidth 2 title ""
+#
+#plot "irr-tree.dat" using 7:(($6-1)/$7) with lines linewidth 2 title ""
+#
 ###############################################
 #
 #set out 'irr-tree-idx.png'

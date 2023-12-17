@@ -128,7 +128,7 @@ int main(int argc, char* argv[])
 	printf("reconstruct %ld\n", ridx);
 #endif
 
-#define VERIFY
+// #define VERIFY
 #ifdef VERIFY
 	if (argc != 2)
 	{
@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define PRINT_DYADIC_TO_BETA_MAP
+#define PRINT_DYADIC_TO_BETA_MAP
 #ifdef PRINT_DYADIC_TO_BETA_MAP
 	if (argc != 3)
 	{
@@ -194,8 +194,22 @@ int main(int argc, char* argv[])
 
 		double gold = find_gold(idx);
 
+		// And now, a shifted version
+		int shbit = bits;
+		long loidx = bitseq_to_idx(shbit, dlen+1);
+		if (loidx < 0) { overflo++; continue; }
+		if (nmax <= loidx) { overflo++; continue; }
+		double logold = find_gold(loidx);
+
+		shbit = bits | 1<<dlen;
+		long hiidx = bitseq_to_idx(shbit, dlen+1);
+		double higold = find_gold(hiidx);
+
 		double cf = bitseq_to_cf(bits, dlen);
 		printf("%d	%d	%d	%ld	%g	%g	%g", i, bits, 1<<dlen, idx, x, gold, cf);
+		printf("	%g", logold);
+		printf("	%g", higold);
+
 		print_bitseq(bits, dlen, " # bits=(", ")\n");
 	}
 
