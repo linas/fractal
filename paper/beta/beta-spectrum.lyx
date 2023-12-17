@@ -8055,7 +8055,7 @@ Thus,
 \begin_inset Formula $\theta\left(\psi_{m}\right)=1$
 \end_inset
 
- by defintion.
+ by definition.
  Equivalently, it counts the total number of one-bits below that location.
  It is convenient to start the sequence at 
 \begin_inset Formula $\psi_{0}=0$
@@ -8293,11 +8293,14 @@ Given a valid index
 \end_inset
 
  that provides the map 
-\begin_inset Formula $\Lambda\left(\psi_{m}\right)=2^{h}\left(2\psi_{m}+1\right)$
+\begin_inset Formula 
+\begin{equation}
+\Lambda\left(\psi_{m}\right)=2^{h}\left(2\psi_{m}+1\right)\label{eq:Leadership function}
+\end{equation}
+
 \end_inset
 
-.
- This map is not monotonic: 
+This map is not monotonic: 
 \begin_inset Formula $\Lambda\left(1\right)=3$
 \end_inset
 
@@ -8641,7 +8644,17 @@ The brackets can be arranged into a binary tree, recursively defined.
 \begin_inset Formula $\Lambda$
 \end_inset
 
- is the leader function given in the previous section.
+ is the leader function given given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Leadership function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in the previous section.
  Recursion starts with 
 \begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
 \end_inset
@@ -8691,78 +8704,20 @@ The left and right moves
 .
  This places the periodic orbits in a one-to-one correspondence with the
  dyadic rationals.
-\end_layout
+ The correspondence is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
-An infinite string of 
-\begin_inset Formula $L,R$
-\end_inset
-
- moves corresponds to a point in the Cantor space 
-\begin_inset Formula $2^{\omega}$
-\end_inset
-
-, and so it appears that the bracket tree maps the ergodic (non-periodic)
- orbits to real numbers, and this appears to be an injection.
- The points of Cantor space that end with infinite strings of all 
-\begin_inset Formula $L$
-\end_inset
-
- or all 
-\begin_inset Formula $R$
-\end_inset
-
- are mapped to periodic beta orbits.
- This is much like the canonical dyadic tree mapping, where two such strings
- map to the same dyadic rational.
- For example, both strings 
-\begin_inset Formula $LRRR\cdots$
-\end_inset
-
- and 
-\begin_inset Formula $RLLL\cdots$
-\end_inset
-
- converge to 
-\begin_inset Formula $r_{1}=\varphi$
-\end_inset
-
-; the first from the left, the second from the right.
- The limit point is explicitly encoded in the the endpoints of the brackets.
- Explicitly, starting from the top bracket 
-\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
-\end_inset
-
-, the left branch is 
-\begin_inset Formula $L=\left(\infty\Mapsto2\Mapsfrom1\right)$
-\end_inset
-
- and on the right, 
-\begin_inset Formula $R=\left(1\Mapsto3\Mapsfrom0\right)$
 \end_inset
 
 .
- Subsequent left-moves give 
-\begin_inset Formula $RL^{n}=\left(1\Mapsto3\cdot2^{n}\Mapsfrom3\cdot2^{n-1}\right)$
-\end_inset
-
- which leave the left side of the bracket invariant, but tighten the interval
- from the right side.
- Similarly, from the other side, 
-\begin_inset Formula $LR^{n}=\left(\Lambda^{n-1}\left(2\right)\Mapsto\Lambda^{n}\left(2\right)\Mapsfrom1\right)$
-\end_inset
-
- leaves the right bound unchanged, while the left bound tightens in closer.
- The limit point 
-\begin_inset Formula $1$
-\end_inset
-
- is explicitly visible as the invariant endpoint in these two brackets.
- Both brackets converge to 
-\begin_inset Formula $r_{1}=\varphi$
-\end_inset
-
-.
+ The curve is continuous, precisely because the brackets form a total order
+ on their (left and right) sub-brackets, and ecause the brackets progressively
+ narrow.
 \end_layout
 
 \begin_layout Standard
@@ -8860,20 +8815,121 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-The bracket tree and the dyadic tree are in one-to-one correspondence.
- This is shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beta-Bracket-Map"
-plural "false"
-caps "false"
-noprefix "false"
+An infinite string of 
+\begin_inset Formula $L,R$
+\end_inset
 
+ moves corresponds to a point in the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+, and so it appears that the bracket tree maps the ergodic (non-periodic)
+ orbits to real numbers, and this appears to be an injection.
+ The points of Cantor space that end with infinite strings of all 
+\begin_inset Formula $L$
+\end_inset
+
+ or all 
+\begin_inset Formula $R$
+\end_inset
+
+ are mapped to periodic beta orbits.
+ This is much like the canonical dyadic tree mapping, where two such strings
+ map to the same dyadic rational.
+ For example, both strings 
+\begin_inset Formula $LRRR\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $RLLL\cdots$
+\end_inset
+
+ converge to 
+\begin_inset Formula $r_{1}=\varphi$
+\end_inset
+
+; the first from the left, the second from the right.
+ The limit point is explicitly encoded in the the endpoints of the brackets.
+ Explicitly, starting from the top bracket 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+, the left branch is 
+\begin_inset Formula $L=\left(\infty\Mapsto2\Mapsfrom1\right)$
+\end_inset
+
+ and on the right, 
+\begin_inset Formula $R=\left(1\Mapsto3\Mapsfrom0\right)$
 \end_inset
 
 .
- The curve is continuous, precisely because the brackets form a total order
- on their sub-brackets.
+ Subsequent left-moves give 
+\begin_inset Formula $RL^{n}=\left(1\Mapsto3\cdot2^{n}\Mapsfrom3\cdot2^{n-1}\right)$
+\end_inset
+
+ which leave the left side of the bracket invariant, but tighten the interval
+ from the right side.
+ Similarly, from the other side, 
+\begin_inset Formula $LR^{n}=\left(\Lambda^{n-1}\left(2\right)\Mapsto\Lambda^{n}\left(2\right)\Mapsfrom1\right)$
+\end_inset
+
+ leaves the right bound unchanged, while the left bound tightens in closer.
+ The limit point 
+\begin_inset Formula $1$
+\end_inset
+
+ is explicitly visible as the invariant endpoint in these two brackets.
+ Both brackets converge to 
+\begin_inset Formula $r_{1}=\varphi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Precisely the same bounding process applies to any finite-length prefix
+ of left and right moves.
+ That is, let 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ be the result of applying any arbitrary finite-length sequence of moves
+ 
+\begin_inset Formula $L^{a_{1}}R^{a_{2}}\cdots L^{a_{k}}$
+\end_inset
+
+ for any non-negative integers 
+\begin_inset Formula $a_{1},a_{2},\cdots,a_{k}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $RL^{n}:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto2^{n}\Lambda f\Mapsfrom2^{n-1}\Lambda f\right)$
+\end_inset
+
+ which places 
+\begin_inset Formula $f$
+\end_inset
+
+ on the left of the bracket, but otherwise keeps it invarainet as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ On the other side, 
+\begin_inset Formula $LR^{n}:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\Lambda^{n-1}\left(2f\right)\Mapsto\Lambda^{n}\left(2f\right)\Mapsfrom f\right)$
+\end_inset
+
+ places 
+\begin_inset Formula $f$
+\end_inset
+
+ on the right of the bracket, keeping it invarainet as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ Both converge to the same limit.
 \end_layout
 
 \begin_layout Subsubsection
@@ -9150,11 +9206,161 @@ Righward moves truncate the trailing zero at the end of the sequnce, so
 
 \end_inset
 
+with 
+\begin_inset Formula $\Lambda$
+\end_inset
 
+ the same leadership function as before, given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Leadership function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ These two recursion relations can be combined to obtain the polynomial
+ index (and thus the midpoint orbit label) of any sequence.
+ The sequence labels, the periodic orbits and the polynomial roots are all
+ in one-to-one correspondence with one-another; bijections pass between
+ all of them.
 \end_layout
 
 \begin_layout Subsubsection
-The beta map bijection
+Baire space
+\end_layout
+
+\begin_layout Standard
+The
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ right-most label at
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ was given as 
+\begin_inset Formula $\left[-1\right]$
+\end_inset
+
+.
+ This can be converted into a parlor trick, by introducing a rule allows
+ sequences to sometimes terminate with 
+\begin_inset Formula $-1$
+\end_inset
+
+ and that, when they do, this is a short-hand to shorten the sequence and
+ also decrement the previous digit.
+ Thus, one writes 
+\begin_inset Formula $\left[\cdots,m,-1\right]=\left[\cdots,m-1\right]$
+\end_inset
+
+.
+ The interesting case is when 
+\begin_inset Formula $m=0$
+\end_inset
+
+, in which case, the rule is applied recursively ....xxxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+The case where 
+\begin_inset Formula $m_{k}=0$
+\end_inset
+
+, resulting in a trailing 
+\begin_inset Formula $-1$
+\end_inset
+
+ in the sequence, is handled by means of a 
+\begin_inset Quotes eld
+\end_inset
+
+parlor trick
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Sequences with a trailing 
+\begin_inset Formula $-1$
+\end_inset
+
+ shorten in length, so that 
+\begin_inset Formula $\left[\cdots,m,-1\right]=\left[\cdots,m-1\right]$
+\end_inset
+
+.
+ The final comma disappears, and the trailing digit is decremented by one.
+ This may seem like a peculiar rule, but is really just a short-hand to
+ simplify the notation for the intervals.
+ 
+\end_layout
+
+\begin_layout Standard
+This perhaps most easily understood by plotting actual 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values for interval endpoints.
+ One bracketing relationship is 
+\begin_inset Formula $\left[1,0,0\right]\Mapsto\left[1,0,0,0\right]\Mapsfrom\left[0\right]$
+\end_inset
+
+ which corresponds to 
+\begin_inset Formula $42\Mapsto170\Mapsfrom1$
+\end_inset
+
+.
+ The parlor trick just allows writing the right-hand side as 
+\begin_inset Formula $\left[1,0,-1\right]=\left[1,-1\right]=\left[0\right]$
+\end_inset
+
+.
+ That this is the correct right-hand-side is revealed by plotting 
+\begin_inset Formula 
+\[
+\beta\left[1,0,0\right]=1.60135...<\beta\left[1,0,0,0\right]=1.61193...<\beta\left[0\right]=1.61803...
+\]
+
+\end_inset
+
+and observing that 
+\begin_inset Formula $\left[0\right]$
+\end_inset
+
+ is necessarily the right-hand limit for the interval, as there is no other
+ appropriate discontinuity for 
+\begin_inset Formula $\left[1,0,0,0\right]$
+\end_inset
+
+ to be bounded by.
 \end_layout
 
 \begin_layout Standard
@@ -9254,19 +9460,6 @@ This extension of finite sequences into infinite ones provides the last
  This is intersting and remarkable.
 \end_layout
 
-\begin_layout Standard
-A sequence can be lengthed by appending an extra zero digit: xxx this shold
- use the leader funct.
-\begin_inset Formula 
-\[
-\eta\left(\left[m_{1},m_{2},\cdots,m_{k},0\right]\right)=xxx\left(2\eta\left(\left[m_{1},m_{2},\cdots,m_{k}\right]\right)+1\right)
-\]
-
-\end_inset
-
-These two 
-\end_layout
-
 \begin_layout Subsubsection
 A continued fraction interpretation
 \end_layout
@@ -9280,7 +9473,7 @@ The sequences
  That is, for each such sequence, there is a real number 
 \begin_inset Formula 
 \[
-c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=Theuseoftheword\text{“}odometer\text{”}isperhapsabitcryptic;aquickreviewisinorder.\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
+c=c\left(\left[m_{1},m_{2},\cdots\right]\right)=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
 \]
 
 \end_inset
