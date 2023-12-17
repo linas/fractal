@@ -14,9 +14,11 @@ double interp(double x, int ord)
 	double frac = x * scale;
 	long ifrac = floor (frac);
 
-	long summit = theta_sum(ifrac);
-	double sum = summit;
-	sum /= scale;
+	long summit = theta_sum(scale-1);
+	long isum = theta_sum(ifrac);
+	double sum = isum;
+	// sum /= scale;
+	sum /= (double) summit;
 
 	return sum;
 }
@@ -28,7 +30,6 @@ int main(int argc, char* argv[])
 	malloc_gold(nmax);
 
 	int npts = 3*5*7*11;
-	npts = 11;
 	double delta = 1.0 / ((double) npts);
 	for (int i=0; i<npts; i++)
 	{
