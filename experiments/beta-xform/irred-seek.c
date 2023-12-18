@@ -35,8 +35,13 @@ int main(int argc, char* argv[])
 	{
 		double x = (i+0.5) * delta;
 
-		double y = interp(x, ord);
-		printf("%d	%f	%f\n", i, x, y);
+		double sx = 1.0 - x;
+		double y = interp(sx, ord);
+		y = 1.0 - y;
+
+		double z = y;
+
+		printf("%d	%f	%f	%f\n", i, x, y, z);
 	}
 }
 

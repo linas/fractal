@@ -495,7 +495,7 @@ void print_debug_info(long seqno)
 
 	double beta = find_gold(seqno);
 
-	if (0.5 < beta) printf("beta = %g\n", beta);
+	if (0.5 < beta) printf("beta = %20.16g\n", beta);
 
 	if (beta < 0.5)
 	{
@@ -548,7 +548,7 @@ int main(int argc, char* argv[])
 	print_debug_info(seqno);
 #endif
 
-// #define INDEX_EXPLORER
+#define INDEX_EXPLORER
 #ifdef INDEX_EXPLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
@@ -648,7 +648,7 @@ int main(int argc, char* argv[])
 	generate_fbaire(norder, maxdepth, maxlen, false);
 #endif
 
-#define ODOMETER_GRAPH
+// #define ODOMETER_GRAPH
 #ifdef ODOMETER_GRAPH
 	// Generate expansions in sequential order, then print the equivalent
 	// index, beta and continued-frac equivalent. Used to make the odometer

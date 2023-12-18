@@ -3,11 +3,18 @@ set out 'irr-seek.png'
 set term png size 1024,768
 set term png size 640, 480
 
+set key left
+
 set xrange [0:1]
-# set yrange [0:1]
+set yrange [0:1]
 
 set title "steps"
 
-plot "irr-seek.dat" using 2:3 with lines lw 2 title ""
+# plot "irr-seek.dat" using 2:3 with lines lw 2 title ""
+
+#plot "irr-seek.dat" using 2:3 with lines lw 2 title "main", \
+#     "irr-seek.dat" using ($2/2):($3/2) with lines lw 2 title "half", \
+#     "irr-seek.dat" using (0.5+$2/2):(0.5+$3/2) with lines lw 2 title "sechalf", \
+
 
 #####
