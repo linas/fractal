@@ -10,7 +10,17 @@ set yrange [0:1]
 
 set title "steps"
 
-# plot "irr-seek.dat" using 2:3 with lines lw 2 title ""
+#plot "irr-seek.dat" using 2:3 with lines lw 2 title "main", \
+#     "irr-seek.dat" using 2:4 with lines lw 2 title "main-4"
+
+unset yrange
+plot "irr-seek.dat" using 2:($3-$4) with lines lw 2 title "diff"
+
+#plot "irr-seek.dat" using 2:($3-$4) with lines lw 2 title "diff 1", \
+#     "irr-seek.dat" using 2:($3-$5) with lines lw 2 title "diff 2", \
+#     "irr-seek.dat" using 2:($3-$6) with lines lw 2 title "diff 3", \
+#     "irr-seek.dat" using 2:($3-$7) with lines lw 2 title "diff 4", \
+#     "irr-seek.dat" using 2:($3-$8) with lines lw 2 title "diff 5", \
 
 #plot "irr-seek.dat" using 2:3 with lines lw 2 title "main", \
 #     "irr-seek.dat" using ($2/2):($3/2) with lines lw 2 title "half", \

@@ -39,9 +39,14 @@ int main(int argc, char* argv[])
 		double y = interp(sx, ord);
 		y = 1.0 - y;
 
-		double z = y;
+		printf("%d	%f	%f", i, x, y);
 
-		printf("%d	%f	%f	%f\n", i, x, y, z);
+		for (int i=1; i<6; i++)
+		{
+			double z = 1.0 - interp(sx, ord-i);
+			printf("	%f", z);
+		}
+		printf("\n");
 	}
 }
 
