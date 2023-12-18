@@ -104,14 +104,14 @@ status open
 
 \begin_layout Plain Layout
 This text is an extract of a diary of research notes, first published in
- December 2017, with major updates published in February 2018 and December
- 2018.
+ December 2017, with major updates published in February 2018, December
+ 2018 and December 2023.
  The current version expunges all the unfinished parts and the boring parts
  and the speculative parts, and prettifies the rest into a presentable format.
  MSC2020 Classification 37E05, 37G10.
  Submitted to Transactions of the AMS on 4 October 2020.
- This version, from December 2023 corrects minor errors in the beta-odometer
- section.
+ This version, from December 2023 provides the correct relationship between
+ periodic orbits.
 \end_layout
 
 \end_inset
@@ -190,8 +190,15 @@ etc.
 \end_layout
 
 \begin_layout Abstract
-Periodic orbits of the beta transform appear to be in one-to-one correspondence
- with the 
+The periodic orbits are dense in the reals.
+ They can be placed in one-to-one correspondence with the rationals; an
+ explicit formula is provided.
+ The periodic orbits form a set of measure zero, and thus are normally invisible
+ in the graph of the ergodic invariant measure.
+ However, small perturbations introduce Arnold tongues, inflating each periodic
+ orbit into a region of finite size.
+ These can be seen to be in precise (one-to-one) correspondence with the
+ 
 \begin_inset Quotes eld
 \end_inset
 
@@ -200,18 +207,6 @@ islands of stability
 \end_inset
 
  of the Feigenbaum map.
- The beta transformation has no such 
-\begin_inset Quotes eld
-\end_inset
-
-islands
-\begin_inset Quotes erd
-\end_inset
-
-, but this is apparently because they are degenerate or collapsed down to
- a point.
- The Feigenbaum map opens up at exactly these points, making the islands
- manifest.
 \end_layout
 
 \begin_layout Abstract
@@ -228,19 +223,122 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-The beta transformation is the map 
+Given some real number 
+\begin_inset Formula $x$
+\end_inset
+
+, it can be written down in base-ten, decimal notation, as a string of digits
+ 0-9.
+ Each successive digit is given by an iterated formula.
+ Starting with 
+\begin_inset Formula $y_{0}=x$
+\end_inset
+
+, let
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-t_{\beta}(x)=\beta x\mod1
+y_{n+1}=\left(10y_{n}\right)\mod1
 \]
 
 \end_inset
 
-iterated on the real unit interval 
-\begin_inset Formula $[0,1]$
+The 
+\begin_inset Formula $n$
 \end_inset
 
- and 
+'th digit in the decimal expansion is 
+\begin_inset Formula $d_{n}=\left\lfloor y_{n}\right\rfloor $
+\end_inset
+
+.
+ Here, mod is the modulo (or remainder) function, so that 
+\begin_inset Formula $a\mod b$
+\end_inset
+
+ is the remainder of 
+\begin_inset Formula $a$
+\end_inset
+
+ after dividing by 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ The bracket 
+\begin_inset Formula $\left\lfloor z\right\rfloor $
+\end_inset
+
+ is the floor function, returning the largest integer less than 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ The decimal expansion of 
+\begin_inset Formula $x$
+\end_inset
+
+ is then 
+\begin_inset Formula $d_{0}.d_{1}d_{2}d_{3}\cdots$
+\end_inset
+
+ with all digits 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ (except for the first) running between 0 and 9.
+ The iteration has the form of a shift; it shifts over by one digit, and
+ repeats the process.
+ The shift is ergodic over the reals, in that any and every decimal expansion
+ will occur.
+\end_layout
+
+\begin_layout Standard
+The same idea can be applied by replacing ten by any number 
+\begin_inset Formula $\beta$
+\end_inset
+
+; this gives the base-
+\begin_inset Formula $\beta$
+\end_inset
+
+ expansion.
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+ does not need to be an integer; the rest of this text is focused on exploring
+ the expansions coming from 
+\begin_inset Formula $1<\beta\le2$
+\end_inset
+
+, so 
+\begin_inset Quotes eld
+\end_inset
+
+less than base two
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The beta transformation is the map 
+\begin_inset Formula 
+\[
+t_{\beta}\left(x\right)=\beta x\mod1
+\]
+
+\end_inset
+
+iterated on the unit interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ of the reals, and 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -252,8 +350,30 @@ iterated on the real unit interval
 , this is the Bernoulli process, the ergodic process of random coin flips.
  This case is solvable in more ways than one; it is very well-explored,
  and is a canonical model of ergodic behavior.
- The beta transformation is less-well studied; a full review of results
- is presented at the end of this introduction.
+ The beta transformation is less well-known and closely studied; a full
+ review of previous results is presented at the end of this introduction.
+ The goal of this text is two-fold: to expand the collection of known properties
+, and to present them in the simplest, most accessible fashion possible.
+\end_layout
+
+\begin_layout Standard
+The primary driver of interest in iterated functions is that they generate
+ fractals, and that they provide simple models of chaotic dynamics.
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform is the simplest possible map that exhibits all of the hallmarks
+ of chaotic dynamical systems: a non-trivial, non-uniform invariant measure,
+ with both periodic and non-periodic orbits.
+\end_layout
+
+\begin_layout Standard
+both 
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
