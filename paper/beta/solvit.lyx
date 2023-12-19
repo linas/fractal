@@ -23474,7 +23474,7 @@ noprefix "false"
  values defined by 
 \begin_inset Formula 
 \[
-\beta=\sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}
+\beta=\sum_{k=0}^{\infty}\frac{b_{k}}{\beta^{k}}
 \]
 
 \end_inset
@@ -23493,6 +23493,40 @@ is the characteristic bitsequence.
 \end_inset
 
  always.
+ The orbit is split into the prefix and the periodic parts such that 
+\begin_inset Formula $b_{k}=b_{k+N}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\ge L$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\beta= & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L+N}^{L+2N-1}\frac{b_{k}}{\beta^{k}}+\cdots\\
+= & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\frac{1}{1-\beta^{N}}\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}\\
+= & \frac{1}{\beta^{L}}\sum_{k=0}^{L-1}b_{k}\beta^{L-k}+\frac{1}{\beta^{L+N}\left(1-\beta^{N}\right)}\sum_{k=0}^{N-1}b_{k+L}\beta^{N-k}
+\end{align*}
+
+\end_inset
+
+or, multiplying through by the large denominator,
+\begin_inset Formula 
+\[
+\beta^{L+N+1}\left(1-\beta^{N}\right)=\beta^{N}\left(1-\beta^{N}\right)\sum_{k=0}^{L-1}b_{k}\beta^{L-k}+\sum_{k=0}^{N-1}b_{k+L}\beta^{N-k}
+\]
+
+\end_inset
+
+so yuck.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Subsection
