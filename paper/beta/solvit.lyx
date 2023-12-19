@@ -3517,6 +3517,23 @@ Glossary
 A collection of basic definitions.
  Almost none of these are actually needed or used in the text that follows.
  However, they do provide context for the overall project.
+ This are cribbed from multiple sources, including 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chandgotia2011"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Subshifts of finite type
+\end_layout
+
+\begin_layout Standard
+Basic defintions.
 \end_layout
 
 \begin_layout Itemize
@@ -3708,6 +3725,15 @@ finite block code
 \end_inset
 
 .
+ If 
+\begin_inset Formula $k=1$
+\end_inset
+
+, it is called a 
+\emph on
+1-block map
+\emph default
+.
 \end_layout
 
 \begin_layout Itemize
@@ -3781,6 +3807,15 @@ all
 \end_inset
 
 .
+ See 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chandgotia2011"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -3855,23 +3890,527 @@ topological Markov chain
 \end_layout
 
 \begin_layout Itemize
-A shift space is 
-\emph on
-irreducible
-\emph default
- if, for any 
-\begin_inset Formula $u,v\in B\left(\Lambda\right)$
+Let 
+\begin_inset Formula $G=\left(V,E\right)$
 \end_inset
 
-, there exists a 
-\begin_inset Formula $w\in\Sigma^{*}$
-\end_inset
-
- such that 
-\begin_inset Formula $uwv\in B\left(\Lambda\right)$
+ be an undirected graph.
+ Let 
+\begin_inset Formula $A\subset V$
 \end_inset
 
 .
+ The boundary of 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula $\partial A=\left\{ v\in V\backslash A:\left(a,v\right)\in E,a\in A\right\} $
+\end_inset
+
+.
+ For directed graphs, we have the incoming and outgoing boundaries.
+ Boundaries define nearest-neighbors, and are used to define interaction
+ potentials for constructing Gibbs measures.
+\end_layout
+
+\begin_layout Subsubsection
+Sofic systems
+\end_layout
+
+\begin_layout Standard
+Basic defintions
+\end_layout
+
+\begin_layout Itemize
+A sofic shift is a factor map of an SFT.
+ By recoding to a TMC, all sofic shifts are 1-block factor maps of TMC's.
+ The graph definition of TMC's above implicitly assumed each vertex label
+ was distinct.
+ A softic shift maps some of these labels in a way that they are no longer
+ distinct.
+\end_layout
+
+\begin_layout Itemize
+Sofic shifts correspond to regular languages.
+ This follows immediately from the definition in terms of a graph.
+\end_layout
+
+\begin_layout Itemize
+Given a word 
+\begin_inset Formula $w\in B\left(\Lambda\right)$
+\end_inset
+
+, the 
+\emph on
+follower set
+\emph default
+ of 
+\begin_inset Formula $w$
+\end_inset
+
+ is 
+\begin_inset Formula $F\left(w\right)=\left\{ u\in B\left(\Lambda\right):wu\in B\left(\Lambda\right)\right\} $
+\end_inset
+
+.
+ The set of follower sets is 
+\begin_inset Formula $F\left(\Lambda\right)=\left\{ F\left(w\right):w\in B\left(\Lambda\right)\right\} $
+\end_inset
+
+.
+ A shift space is sofic if and only if 
+\begin_inset Formula $F\left(\Lambda\right)$
+\end_inset
+
+ is finite.
+ The predecessor set 
+\begin_inset Formula $P\left(w\right)$
+\end_inset
+
+ is defined analogously; a shift space is sofic iff 
+\begin_inset Formula $P\left(\Lambda\right)$
+\end_inset
+
+ is finite.
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is sofic, then 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ has dense periodic points.
+ If 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ has dense periodic points, then 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is non-wandering.
+ See Chandgotia.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chandgotia2011"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Topological Markov fields
+\end_layout
+
+\begin_layout Standard
+Toopological Markov fields (TMF) are explored in Chandgotia.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chandgotia2011"
+literal "false"
+
+\end_inset
+
+ TMF's are interesting because they sit 
+\begin_inset Quotes eld
+\end_inset
+
+in between
+\begin_inset Quotes erd
+\end_inset
+
+ SFT's and sofic systems: every TMF is sofic; not all sofic systems are
+ TMF.
+ Also, there are TMF's that are not SFT's.
+\end_layout
+
+\begin_layout Itemize
+A 
+\emph on
+topological Markov field
+\emph default
+ (TMF) is a shift space 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ for which, given two letters 
+\begin_inset Formula $a,b\in\Sigma$
+\end_inset
+
+ and two words 
+\begin_inset Formula $u,v$
+\end_inset
+
+ of the same length 
+\begin_inset Formula $\left|u\right|=\left|v\right|$
+\end_inset
+
+, then for two strings 
+\begin_inset Formula $aub\in B\left(\Lambda\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $xavby\in B\left(\Lambda\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $xauby\in B\left(\Lambda\right)$
+\end_inset
+
+.
+ This is a 1-step TMF; a 
+\begin_inset Formula $k$
+\end_inset
+
+-step TMF replaces 
+\begin_inset Formula $a,b$
+\end_inset
+
+ by length-
+\begin_inset Formula $k$
+\end_inset
+
+ strings.
+\end_layout
+
+\begin_layout Itemize
+A shift space 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is a TMF if and only if, for all 
+\begin_inset Formula $x,y\in\Lambda$
+\end_inset
+
+ and all finite cylinders 
+\begin_inset Formula $C\subset\mathbb{Z}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x=y$
+\end_inset
+
+ on 
+\begin_inset Formula $\partial C$
+\end_inset
+
+, the point 
+\begin_inset Formula $z\in\Sigma^{\mathbb{Z}}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+z=\begin{cases}
+x & \mbox{on }C\cup\partial C\\
+y & \mbox{on }\left(C\cup\partial C\right)^{c}
+\end{cases}
+\]
+
+\end_inset
+
+is also 
+\begin_inset Formula $z\in\Lambda$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $\partial C$
+\end_inset
+
+ is the set of integers in 
+\begin_inset Formula $\mathbb{Z}\backslash C$
+\end_inset
+
+ that are immediately adjacent to elements of 
+\begin_inset Formula $C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Measures
+\end_layout
+
+\begin_layout Standard
+A measure is a function 
+\begin_inset Formula $\mu:\Lambda\to\mathbb{R}^{+}$
+\end_inset
+
+ satisfyingthe usual sigma-additivity axioms on the Borel set.
+ Some addtional defintions follow.
+\end_layout
+
+\begin_layout Itemize
+A
+\emph on
+ cylinder set
+\emph default
+ is a finite subset of the integers 
+\begin_inset Formula $C\subset\mathbb{Z}$
+\end_inset
+
+ and a map 
+\begin_inset Formula $c:C\to\Sigma$
+\end_inset
+
+.
+ The cylinder sets provide the the base of open sets for the topology; together
+ with complementation, this gives the Borel sets.
+\end_layout
+
+\begin_layout Itemize
+A measure is 
+\emph on
+stationary
+\emph default
+ if it is shift-invariant, i.e.
+ if 
+\begin_inset Formula $\mu\circ\tau^{-1}=\mu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A shift space 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is 
+\emph on
+non-wandering
+\emph default
+ if 
+\begin_inset Formula $\forall u\in B\left(\Lambda\right)\;\exists v\in B\left(\Lambda\right)\mbox{ s.t. }uvu\in B\left(\Lambda\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+support of a measure
+\emph default
+ is the (closed, compact) subspace of 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ from which all cylinder sets of zero measure have been removed.
+\end_layout
+
+\begin_layout Itemize
+The support of any stationary measure is non-wandering.
+\end_layout
+
+\begin_layout Subsubsection
+Markov measures
+\end_layout
+
+\begin_layout Standard
+Markov measures are stationary; general Markov random fields are not.
+ Again Chandgotia
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chandgotia2011"
+literal "false"
+
+\end_inset
+
+ provides gruesome details.
+ Stationary MRF's are Markov chains.
+ Markov chains are Gibbs measures, where Gibbs measures are given by nearest-nei
+ghbor interaction potentials.
+ The equivalence is more-or-less due to the boundary conditions, which are
+ nearest-neighbor conditions.
+\end_layout
+
+\begin_layout Itemize
+A 
+\emph on
+conditional measure
+\emph default
+ takes the form 
+\begin_inset Formula $\mu\left(C|D\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $C,D$
+\end_inset
+
+ are cylinder sets.
+ That is, the measure of 
+\begin_inset Formula $C$
+\end_inset
+
+ is conditionally dependent on 
+\begin_inset Formula $D$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A Markov chain is a conditional measure of the form 
+\begin_inset Formula $\mu\left(d_{1}d_{2}\cdots d_{n}|d_{0}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $d_{1}d_{2}\cdots d_{n}$
+\end_inset
+
+ are the digits of a continguous cylinder set.
+ That is, the measure for a Markov chain depends only on the previous digit
+ (and the cylinder that follows) (and there is no other dependency.)
+\end_layout
+
+\begin_layout Itemize
+The support of a Markov chain is exactly a TMC.
+\end_layout
+
+\begin_layout Itemize
+A Markov random field (MRF) is a conditional measure of the form 
+\begin_inset Formula $\mu\left(d_{1}d_{2}\cdots d_{n}|d_{0},d_{n+1}\right)$
+\end_inset
+
+ and so the measure depends on both the preceeding and the following digit.
+ A kind of two-sideed Markov chain.
+\end_layout
+
+\begin_layout Itemize
+The support of a stationary MRF is exactly a TMF.
+\end_layout
+
+\begin_layout Subsubsection
+Entropy
+\end_layout
+
+\begin_layout Standard
+Basic defintions.
+\end_layout
+
+\begin_layout Itemize
+A finite partition 
+\begin_inset Formula $\mathcal{P}=\left\{ P_{1},\cdots,P_{n}\right\} $
+\end_inset
+
+ of a space 
+\begin_inset Formula $X$
+\end_inset
+
+ is a collection of subsets 
+\begin_inset Formula $P_{k}\subset X$
+\end_inset
+
+ such that they are pair-wise disjoint, up to measure zero: 
+\begin_inset Formula $\mu\left(P_{i}\cap P_{j}\right)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\ne j$
+\end_inset
+
+, and that 
+\begin_inset Formula $X=\bigcup_{k}P_{k}\mod\mu$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\mu\left(\bigcup_{k}P_{k}\right)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The entropy of a partion 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is 
+\begin_inset Formula $H\left(\mathcal{P}\right)=-\sum_{k}\mu\left(P_{k}\right)\ln\mu\left(P_{k}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The measure-theoretic entropy 
+\begin_inset Formula $h_{\mu}\left(\tau,\mathcal{P}\right)$
+\end_inset
+
+ of a shift 
+\begin_inset Formula $\tau$
+\end_inset
+
+ w.r.t.
+ 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+h_{\mu}\left(\tau,\mathcal{P}\right)=\lim_{n\to\infty}\frac{1}{n}H\left(\mathcal{P}\vee\cdots\vee\tau^{-n+1}\mathcal{P}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{P}\vee\cdots\vee\tau^{-n+1}\mathcal{P}$
+\end_inset
+
+ is a partition of 
+\begin_inset Formula $X$
+\end_inset
+
+ generated by 
+\begin_inset Formula $\tau$
+\end_inset
+
+ by shifting 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The metric (or measure-theoretic) entropy 
+\begin_inset Formula $h_{\mu}\left(\tau\right)$
+\end_inset
+
+ of a shift 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is the supremum of 
+\begin_inset Formula $h_{\mu}\left(\tau,\mathcal{P}\right)$
+\end_inset
+
+ over all finite measureable partions 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Equilibria
+\end_layout
+
+\begin_layout Standard
+Equilibrium measures.
 \end_layout
 
 \begin_layout Itemize
@@ -3904,7 +4443,8 @@ equilibrium state
 \end_inset
 
 .
- (Is this is the Gibbs free energy? The sign seems wrong.) Here 
+ (Is this is the Gibbs free energy? The sign seems wrong.
+ The Gibbs measure?) Here 
 \begin_inset Formula $h_{\tau}\left(\mu\right)$
 \end_inset
 
@@ -3918,10 +4458,6 @@ equilibrium state
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Itemize
-A sofic system ...
 \end_layout
 
 \begin_layout Subsection
