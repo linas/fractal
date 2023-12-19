@@ -96,7 +96,7 @@ Appendix
 \end_layout
 
 \begin_layout Standard
-A lot of notation ha been introduced, and can be difficult to track.
+A lot of notation has been introduced, and can be difficult to track.
  This is an abbreviated listing of the defintions.
 \end_layout
 
@@ -174,9 +174,33 @@ The beta shift generates a bitsequence, defined in eq:down-bits as
 \begin_inset Formula 
 \[
 k_{n}\left(x\right)=\begin{cases}
-0 & \mbox{ if }0\le T_{\beta}^{n}(x)<\frac{1}{2}\\
-1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}(x)\le1
+0 & \mbox{ if }0\le T_{\beta}^{n}\left(x\right)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}\left(x\right)\le1
 \end{cases}
+\]
+
+\end_inset
+
+Equivalently, written with the Heaviside 
+\begin_inset Formula $\Theta$
+\end_inset
+
+, this is
+\begin_inset Formula 
+\[
+k_{n}\left(x\right)=\Theta\left(T_{\beta}^{n}\left(x\right)-\frac{1}{2}\right)
+\]
+
+\end_inset
+
+Substituting in the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation,
+\begin_inset Formula 
+\[
+k_{n}\left(x\right)=\Theta\left(\beta t_{\beta}^{n}\left(\frac{2x}{\beta}\right)-1\right)
 \]
 
 \end_inset
@@ -197,7 +221,7 @@ The bit-sequence defines a unique base-
 \begin_inset Formula $\beta$
 \end_inset
 
- expansion, given in eq:shift series as
+ expansion, given in (eq:shift series) as
 \begin_inset Formula 
 \[
 x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\beta^{n}}
@@ -290,11 +314,65 @@ opposite direction
 \end_layout
 
 \begin_layout Paragraph*
-Old stopping algo
+Characteristic bit-sequence
 \end_layout
 
 \begin_layout Standard
-It was this:
+Every value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ has a characteristic bit-sequence, obtained from iterating the mid-point
+ 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+b_{n}=\Theta\left(m_{n}-\frac{1}{2}\right)=\Theta\left(T_{\beta}^{n}\left(\frac{\beta}{2}\right)-\frac{1}{2}\right)=d_{n}\left(\frac{1}{2}\right)=k_{n}\left(\frac{\beta}{2}\right)=\varepsilon_{n}\left(\frac{1}{\beta}\right)
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $b_{0}=1$
+\end_inset
+
+ always.
+\end_layout
+
+\begin_layout Paragraph*
+Stopping algo
+\end_layout
+
+\begin_layout Standard
+The bracketing constraint given in (eq: theta mask) is a boolean function
+ (returning true/false)
+\begin_inset Formula 
+\[
+\theta_{n}\left(\rho\right)=\begin{cases}
+\Theta\left(r_{n/2}-\rho\right)\cdot\theta_{n/2}\left(\rho\right) & \mbox{ for \ensuremath{n} even }\\
+\theta_{\left\lfloor n/2\right\rfloor }\left(\rho\right) & \mbox{ for \ensuremath{n} odd }
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ is the positive real root 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+.
+ The above defintion is written in tail-recursive form, and so can be expressed
+ as a loop: 
 \end_layout
 
 \begin_layout Standard
@@ -368,7 +446,7 @@ while (0 <
 \end_inset
 
  < 
-\begin_inset Formula $r_{n}$
+\begin_inset Formula $\rho$
 \end_inset
 
  then fail
@@ -408,9 +486,19 @@ while (0 <
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\family typewriter
+if arrived here, then success
+\end_layout
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph*
+More stuffs...
 \end_layout
 
 \end_body

@@ -859,8 +859,8 @@ Just as the Bernoulli shift generates a sequence of digits, so does the
 \begin_inset Formula 
 \begin{equation}
 k_{n}=\begin{cases}
-0 & \mbox{ if }0\le T_{\beta}^{n}(x)<\frac{1}{2}\\
-1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}(x)\le1
+0 & \mbox{ if }0\le T_{\beta}^{n}\left(x\right)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}\left(x\right)\le1
 \end{cases}\label{eq:down-bits}
 \end{equation}
 
@@ -886,7 +886,7 @@ Written this way, the
  clearly acts as a shift on this sequence:
 \begin_inset Formula 
 \[
-T_{\beta}(x)=\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\frac{k_{4}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
+T_{\beta}\left(x\right)=\frac{k_{1}}{2}+\frac{1}{\beta}\left(\frac{k_{2}}{2}+\frac{1}{\beta}\left(\frac{k_{3}}{2}+\frac{1}{\beta}\left(\frac{k_{4}}{2}+\frac{1}{\beta}\left(\cdots\right)\right)\right)\right)
 \]
 
 \end_inset
@@ -23434,11 +23434,65 @@ What else can we do? Well, there's this: write
 \end_layout
 
 \begin_layout Section
-Periodic orbits
+Eventually-periodic orbits
 \end_layout
 
 \begin_layout Standard
-Sooo
+We were sloppy, up above, in distinguishing finite orbits, which can be
+ made periodic by fiat, from eventually-periodic orbits, which has a leading
+ chaotic prefix of length 
+\begin_inset Formula $L$
+\end_inset
+
+ followed by a periodic orbit of length 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ What are the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values associated with such orbits? Going back to eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and plugging in the mid-point 
+\begin_inset Formula $x=m_{0}=\beta/2$
+\end_inset
+
+, these are the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values defined by 
+\begin_inset Formula 
+\[
+\beta=\sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+b_{n}=\Theta\left(m_{n}-\frac{1}{2}\right)=\Theta\left(T_{\beta}^{n}\left(\frac{\beta}{2}\right)-\frac{1}{2}\right)=d_{n}\left(\frac{1}{2}\right)=k_{n}\left(\frac{\beta}{2}\right)=\varepsilon_{n}\left(\frac{1}{\beta}\right)
+\]
+
+\end_inset
+
+is the characteristic bitsequence.
+ Note that 
+\begin_inset Formula $b_{0}=1$
+\end_inset
+
+ always.
 \end_layout
 
 \begin_layout Subsection
