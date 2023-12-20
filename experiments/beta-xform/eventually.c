@@ -41,31 +41,51 @@ void get_coeffs(short *cof, long pfx, long cyc, int cyclen)
 		cof[cyclen+i] -= pfx >> (pfxlen-i-1) & 1UL;
 }
 
-#if 0
-/* Evaluate the m,n'th eventually-golden polynomial at point x.
- */
-double event_poly(unsigned long pfx, double x)
+void print_coeffs(short* cof)
 {
-// printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
-	return 0;
+	for (int i=0; -100 < cof[i]; i++)
+	{
+		printf("%d ", cof[i]);
+	}
+	printf("\n");
+}
+
+/*
+ * Evaluate the eventually-golden polynomial at point x.
+ * Polynomial coefficients already decoded in cof.
+ */
+double event_poly(short* cof, double x)
+{
+	int clen = 0;
+	for (int i=0; -100 < cof[i]; i++) clen++;
+
+	double f = 0.0;
+	double xn = 1.0;
+	for (int i=0; i<clen; i++)
+	{
+		f += cof[clen-i-1] * xn;
+		xn *= x;
+	}
+	f = xn - f;
+// printf("duuude x=%20.16g beta=\n", x, f);
+	return f;
 }
 
 /* Use midpoint bisection to find the single, unique
- * positive real zero of the n'th golden polynomial.
+ * positive real zero of the polynomial.
  */
-double find_zero(unsigned long n, double lo, double hi)
+double find_ezero(short* cof, double lo, double hi)
 {
 	double mid = 0.5 * (lo+hi);
 	if (1.0e-15 > hi-lo) return mid;
-	double fmid = golden_poly(n, mid);
-	if (0.0 < fmid) return find_zero(n, lo, mid);
-	return find_zero(n, mid, hi);
+	double fmid = event_poly(cof, mid);
+	if (0.0 < fmid) return find_ezero(cof, lo, mid);
+	return find_ezero(cof, mid, hi);
 }
-#endif
 
 int main(int argc, char* argv[])
 {
-	if (argc !=3)
+	if (argc != 4)
 	{
 		fprintf(stderr, "Usage: %s <pfx> <cyc> <cyclen>\n", argv[0]);
 		exit(1);
@@ -77,4 +97,8 @@ int main(int argc, char* argv[])
 
 	short cof[MAXCOF];
 	get_coeffs(cof, pfx, cyc, cyclen);
+	print_coeffs(cof);
+	double gold = find_ezero(cof, 1.0, 2.0);
+
+	printf("found %g\n", gold);
 }
