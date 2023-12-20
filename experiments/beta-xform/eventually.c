@@ -212,6 +212,13 @@ void print_debug_info(long pfx, long cyc, int cyclen)
 		printf("Error: bad orbit at %d\n", badbit);
 }
 
+int lesser(const void * px, const void * py)
+{
+	double x = *(double *) px;
+	double y = *(double *) py;
+	return x>y;
+}
+
 int main(int argc, char* argv[])
 {
 // #define MANUAL_EXPLORE
@@ -238,6 +245,9 @@ int main(int argc, char* argv[])
 	long maxpfx = atol(argv[1]);
 	int maxcyclen = atoi(argv[2]);
 
+#define NROOTS 1000
+	double roots[NROOTS];
+	int totfnd = 0;
 	for (int cyclen =2; cyclen <=maxcyclen; cyclen++)
 	{
 		long maxcyc = (1<<cyclen) - 1UL;
@@ -250,9 +260,21 @@ int main(int argc, char* argv[])
 
 				double gold = event_gold(pfx, cyc, cyclen);
 				printf("Found (%ld, %ld/%d) = %g\n", pfx, cyc, cyclen, gold);
+				roots[totfnd] = gold;
+				totfnd ++;
 			}
 			printf("------\n");
 		}
 		printf("=======\n");
+	}
+	printf("found %d\n", totfnd);
+
+	// Verify that the roots really are distinct
+	qsort(roots, totfnd, sizeof(double), lesser);
+	for (int i=0; i<totfnd-1; i++)
+	{
+		// printf("%d %g\n", i, roots[i]);
+		if (roots[i+1]-roots[i] < 1e-6)
+			printf("Error: oops %d %g\n", i, roots[i]);
 	}
 }
