@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
 	printf("Index %ld  beta=%20.16g\n", idx, gold);
 #endif
 
-// #define RATIONAL_EXPLORE
+#define RATIONAL_EXPLORE
 #ifdef RATIONAL_EXPLORE
 	if (argc != 4)
 	{
@@ -183,8 +183,10 @@ int main(int argc, char* argv[])
 	int q = atoi(argv[2]);
 	int len = atoi(argv[3]);
 
-	long maxidx = 1UL << (len+1);
+	long maxidx = 1UL << (len+2);
+	maxidx = 1UL << (len+6);
 	malloc_gold(maxidx);
+	printf("max alloced idx = %ld\n", maxidx);
 
 	long bits = rational_to_bitseq(p, q, len);
 	printf("rational = %d/%d len=%d", p, q, len);
@@ -200,14 +202,12 @@ int main(int argc, char* argv[])
 	double gold = find_gold(idx);
 	printf("Index %ld  beta=%20.16g\n", idx, gold);
 
-#if 1
 	printf("---\n");
 	long revbits = bitseq_reverse(bits, len);
 	print_bitseq(revbits, len, "reversed bits=(", ")\n");
 	long ridx = bitseq_to_idx(revbits, len);
 	double rgold = find_gold(ridx);
 	printf("Reversed Index %ld  beta=%20.16g\n", ridx, rgold);
-#endif
 #endif
 
 // #define VERIFY
