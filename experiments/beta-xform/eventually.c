@@ -164,8 +164,23 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 		return false;
 	}
 
-	// TODO: XXX
 	// If cyclen is a multiple of a prime, check for shorter lengths
+	// multiples of 2 and 3 are enough
+	if (3< cyclen && 0 == cyclen %2)
+	{
+		long a = cyc & ((1UL<< (cyclen/2)) -1UL);
+		long b = cyc >> (cyclen/2);
+		if (a==b) return false;
+	}
+
+	if (5< cyclen && 0 == cyclen %3)
+	{
+		long mask = (1UL<< (cyclen/3)) - 1UL;
+		long a = cyc & mask;
+		long b = (cyc >> (cyclen/3)) & mask;
+		long c = cyc >> (2*cyclen/3);
+		if (a==b && a==c) return false;
+	}
 
 	return true;
 }
