@@ -83,6 +83,48 @@ double find_ezero(short* cof, double lo, double hi)
 	return find_ezero(cof, mid, hi);
 }
 
+/* Make sure that midpoint iteration gives same bitstring
+ * as the encoding w/ pfx, cyc
+ */
+bool validate_orbit(double beta, long pfx, long cyc, int cyclen)
+{
+#define MAXBITS 60
+
+	int pfxlen = bitlen(pfx);
+
+	double mid = 0.5*beta;
+	for (int i=0; i < pfxlen; i++)
+	{
+		int bit = 0;
+		if (0.5 < mid) bit = 1;
+		if (0.5 < mid) mid -= 0.5;
+		mid *= beta;
+
+		int pfbit = pfx >> (pfxlen-i-1) & 1UL;
+		if (bit != pfbit)
+		{
+			printf("Error out at pfx %d %d %d\n", i, pfbit, bit);
+			return false;
+		}
+	}
+	for (int i=0; i < MAXBITS-pfxlen; i++)
+	{
+		int bit = 0;
+		if (0.5 < mid) bit = 1;
+		if (0.5 < mid) mid -= 0.5;
+		mid *= beta;
+
+		int j = i%cyclen;
+		int cybit = cyc >> (cyclen-j-1) & 1UL;
+		if (bit != cybit)
+		{
+			printf("Error out at cyclic %d %d %d\n", i, cybit, bit);
+			return false;
+		}
+	}
+	return true;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc != 4)
@@ -101,4 +143,5 @@ int main(int argc, char* argv[])
 	double gold = find_ezero(cof, 1.0, 2.0);
 
 	printf("found %g\n", gold);
+	validate_orbit(gold, pfx, cyc, cyclen);
 }
