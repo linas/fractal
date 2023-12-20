@@ -85,16 +85,17 @@ long idx_to_bitseq(long idx, int* leng)
 // Return the bit-sequence that approximates the rational p/q,
 // truncated to len bits. Rationals have infinite periodic bitseqs
 // so this just expands that bitseq, and then truncates it.
+//
+// Bit strings are read left-to-right. Bit strings interpreted as
+// dyadics in the conventional sense.
 long rational_to_bitseq(int p, int q, int len)
 {
-	long bitseq = 1;
-	for (int i=0; i<len-1; i++)
+	long bitseq = 0;
+	for (int i=0; i<len; i++)
 	{
 		bitseq <<= 1;
-		double x = ((double) p) / ((double) q);
-		if (0.5 < x) bitseq |= 1UL;
-
 		p <<= 1;
+		if (q <= p) bitseq |= 1UL;
 		if (q <= p) p -= q;
 	}
 	return bitseq;
@@ -147,25 +148,31 @@ double bitseq_to_cf(long bitseq, int len)
 
 int main(int argc, char* argv[])
 {
-//#define SPOT_CHECK
+// #define SPOT_CHECK
 #ifdef SPOT_CHECK
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s <index>\n", argv[0]);
 		exit(1);
 	}
-	int idx = atoi(argv[1]);
+	long idx = atol(argv[1]);
 	malloc_gold(idx+1);
 
 	int len = 0;
 	long bits = idx_to_bitseq(idx, &len);
-	print_bitseq(bits, len, " # bits=(", ")\n");
+	printf("Index=%ld ", idx);
+	print_bitseq(bits, len, "bitseq=(", ")\n");
 
 	long ridx = bitseq_to_idx(bits, len);
-	printf("reconstruct %ld\n", ridx);
+	printf("reconstructed index = %ld\n", ridx);
+	if (idx != ridx)
+		printf("Error: failed reconstruction!\n");
+
+	double gold = find_gold(idx);
+	printf("Index %ld  beta=%20.16g\n", idx, gold);
 #endif
 
-#define RATIONAL_EXPLORE
+// #define RATIONAL_EXPLORE
 #ifdef RATIONAL_EXPLORE
 	if (argc != 4)
 	{
@@ -176,23 +183,31 @@ int main(int argc, char* argv[])
 	int q = atoi(argv[2]);
 	int len = atoi(argv[3]);
 
-	long maxidx = 1UL << len;
+	long maxidx = 1UL << (len+1);
 	malloc_gold(maxidx);
 
 	long bits = rational_to_bitseq(p, q, len);
 	printf("rational = %d/%d len=%d", p, q, len);
 	print_bitseq(bits, len, " bits=(", ")\n");
 
+	// Orbits MUST start with a leading one-bit.
+	long orbits = bits;
+	orbits |= 1<<len;
+	orbits >>= 1;
+	print_bitseq(orbits, len, "leading-one bitseq=(", ")\n");
+
 	long idx = bitseq_to_idx(bits, len);
 	double gold = find_gold(idx);
 	printf("Index %ld  beta=%20.16g\n", idx, gold);
 
+#if 1
 	printf("---\n");
 	long revbits = bitseq_reverse(bits, len);
 	print_bitseq(revbits, len, "reversed bits=(", ")\n");
 	long ridx = bitseq_to_idx(revbits, len);
 	double rgold = find_gold(ridx);
 	printf("Reversed Index %ld  beta=%20.16g\n", ridx, rgold);
+#endif
 #endif
 
 // #define VERIFY
