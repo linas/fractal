@@ -259,7 +259,7 @@ int main(int argc, char* argv[])
 				if (false == is_orbit_ok(pfx, cyc, cyclen)) continue;
 
 				double gold = event_gold(pfx, cyc, cyclen);
-				printf("Found (%ld, %ld/%d) = %g\n", pfx, cyc, cyclen, gold);
+				printf("Found (%ld, %ld/%d) = %20.16g\n", pfx, cyc, cyclen, gold);
 				roots[totfnd] = gold;
 				totfnd ++;
 			}
