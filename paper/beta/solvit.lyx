@@ -23506,7 +23506,32 @@ is the characteristic bitsequence.
 \end_inset
 
 .
- To improve notation, it is convenient to define a length-
+ To improve notation, it is convenient to define a finite length-
+\begin_inset Formula $L$
+\end_inset
+
+ digit sequence 
+\begin_inset Formula $d_{k}=b_{k}$
+\end_inset
+
+ for 
+\begin_inset Formula $k<L$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{k}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\ge L$
+\end_inset
+
+ or 
+\begin_inset Formula $k<0$
+\end_inset
+
+.
+ Similarly, define a finite length-
 \begin_inset Formula $N$
 \end_inset
 
@@ -23522,9 +23547,26 @@ cyclic
 \begin_inset Formula $c_{k}=b_{k+L}$
 \end_inset
 
- so that the the eventually-periodic orbits can be described by two distinct
+ for 
+\begin_inset Formula $k<N$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{k}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\ge N$
+\end_inset
+
+ or 
+\begin_inset Formula $k<0$
+\end_inset
+
+.
+ This allows the eventually-periodic orbits to be described by two distinct
  finite sequences.
- Then 
+ Such orbits are given by solutions to 
 \end_layout
 
 \begin_layout Standard
@@ -23532,7 +23574,7 @@ cyclic
 \begin{align*}
 \beta= & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L+N}^{L+2N-1}\frac{b_{k}}{\beta^{k}}+\cdots\\
 = & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\frac{\beta^{N}}{\beta^{N}-1}\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}\\
-= & \frac{1}{\beta^{L-1}}\sum_{k=0}^{L-1}b_{k}\beta^{L-k-1}+\frac{1}{\beta^{L-1}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}
+= & \frac{1}{\beta^{L-1}}\sum_{k=0}^{L-1}d_{k}\beta^{L-k-1}+\frac{1}{\beta^{L-1}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}
 \end{align*}
 
 \end_inset
@@ -23541,7 +23583,7 @@ Multiplying through by the denominator, one obtains a finite polynomial
  for these orbits:
 \begin_inset Formula 
 \[
-\left(\beta^{N}-1\right)\left(\beta^{L}-\sum_{k=0}^{L-1}b_{k}\beta^{L-k-1}\right)-\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}=0
+\left(\beta^{N}-1\right)\left(\beta^{L}-\sum_{k=0}^{L-1}d_{k}\beta^{L-1-k}\right)-\sum_{k=0}^{N-1}c_{k}\beta^{N-1-k}=0
 \]
 
 \end_inset
@@ -23549,7 +23591,7 @@ Multiplying through by the denominator, one obtains a finite polynomial
 Making use of the earlier notation for polynomials,
 \begin_inset Formula 
 \[
-p^{\left\{ d_{0}\cdots d_{\nu-1}\right\} }\left(\beta\right)=\beta^{\nu}-\sum_{k=0}^{\nu-1}d_{k}\beta^{\nu-k-1}
+p^{\left\{ d_{0}\cdots d_{\nu-1}\right\} }\left(\beta\right)=\beta^{\nu}-\sum_{k=0}^{\nu-1}d_{k}\beta^{\nu-1-k}
 \]
 
 \end_inset
@@ -23557,7 +23599,7 @@ p^{\left\{ d_{0}\cdots d_{\nu-1}\right\} }\left(\beta\right)=\beta^{\nu}-\sum_{k
 the above has the form
 \begin_inset Formula 
 \[
-\left(\beta^{N}-1\right)p^{\left\{ b_{0}\cdots b_{L-1}\right\} }\left(\beta\right)+p^{\left\{ c_{0}\cdots c_{N-1}\right\} }\left(\beta\right)-\beta^{N}=0
+\left(\beta^{N}-1\right)p^{\left\{ d_{0}\cdots d_{L-1}\right\} }\left(\beta\right)+p^{\left\{ c_{0}\cdots c_{N-1}\right\} }\left(\beta\right)-\beta^{N}=0
 \]
 
 \end_inset
@@ -23576,7 +23618,781 @@ Finite-length orbits can be taken to have
 \end_inset
 
  which will be ignored.
- 
+ Collecting terms of the same order, write
+\begin_inset Formula 
+\[
+f\left(\beta\right)=\beta^{N+L}-\sum_{k=0}^{N+L-1}a_{k}\beta^{N+L-1-k}
+\]
+
+\end_inset
+
+The coefficients are then
+\begin_inset Formula 
+\[
+a_{k}=d_{k}+c_{k-L}+\delta_{k-N-1}^{0}-d_{k-N}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\delta$
+\end_inset
+
+ the Kronecker delta.
+ The only coefficients that can appear are in the set 
+\begin_inset Formula $a_{k}\in\left\{ -1,0,1,2\right\} $
+\end_inset
+
+, and at most one coefficient can be 2; it is specifically 
+\begin_inset Formula $a_{N-1}$
+\end_inset
+
+, which cn only ever be 1 or 2.
+ This can be best understood visually, lining up columns.
+ For 
+\begin_inset Formula $L>N$
+\end_inset
+
+, get 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ by summing the columns:
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="10">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $d_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $d_{L-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c_{N-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $d_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $d_{L-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a_{N+L-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+The top row shows the prefix string and the first run of the cyclic string.
+ The second row shows minus the prefix xtring, shifted all the way to the
+ right, establishing alignment at the right side.
+ Just before it is a lone 1, and then padded on the left with zeros.
+ The bottom row is just the sum of the two rows above it.
+ Clearly, the coefficient 
+\begin_inset Formula $a_{N-1}$
+\end_inset
+
+ can only ever be 1 or 2.
+ It is exactly the same for 
+\begin_inset Formula $L<N$
+\end_inset
+
+, with the bottom row being shorter: 
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="10">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $d_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $d_{L-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c_{N-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $d_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $d_{L-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a_{N+L-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+soo
 \end_layout
 
 \begin_layout Standard
