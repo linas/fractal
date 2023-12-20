@@ -56,8 +56,8 @@ long get_left_idx(long idx)
 	return idx;
 }
 
-// Given an index, return the matching tree-walk to get to it.
-// Inverse of bitseq_to_idx
+// Given an index, return the matching tree-walk (of left-right moves)
+// to get to that index. Inverse of bitseq_to_idx
 long idx_to_bitseq(long idx, int* leng)
 {
 	*leng = 0;
@@ -79,6 +79,24 @@ long idx_to_bitseq(long idx, int* leng)
 		idx = left;
 	}
 	*leng = len;
+	return bitseq;
+}
+
+// Return the bit-sequence that approximates the rational p/q,
+// truncated to len bits. Rationals have infinite periodic bitseqs
+// so this just expands that bitseq, and then truncates it.
+long rational_to_bitseq(int p, int q, int len)
+{
+	long bitseq = 0;
+	for (int i=0; i< len; i++)
+	{
+		bitseq <<= 1;
+		double x = ((double) p) / ((double) q);
+		if (0.5 < x) bitseq |= 1UL;
+
+		p <<= 1;
+		if (q <= p) p -= q;
+	}
 	return bitseq;
 }
 
@@ -116,7 +134,13 @@ double bitseq_to_cf(long bitseq, int len)
 
 int main(int argc, char* argv[])
 {
+//#define SPOT_CHECK
 #ifdef SPOT_CHECK
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s <index>\n", argv[0]);
+		exit(1);
+	}
 	int idx = atoi(argv[1]);
 	malloc_gold(idx+1);
 
@@ -126,6 +150,29 @@ int main(int argc, char* argv[])
 
 	long ridx = bitseq_to_idx(bits, len);
 	printf("reconstruct %ld\n", ridx);
+#endif
+
+#define RATIONAL_EXPLORE
+#ifdef RATIONAL_EXPLORE
+	if (argc != 4)
+	{
+		fprintf(stderr, "Usage: %s <p> <q> <max-len>\n", argv[0]);
+		exit(1);
+	}
+	int p = atoi(argv[1]);
+	int q = atoi(argv[2]);
+	int len = atoi(argv[3]);
+
+	long maxidx = 1UL << len;
+	malloc_gold(maxidx);
+
+	long bits = rational_to_bitseq(p, q, len);
+	printf("rational = %d/%d len=%d", p, q, len);
+	print_bitseq(bits, len, " bits=(", ")\n");
+
+	long idx = bitseq_to_idx(bits, len);
+	double gold = find_gold(idx);
+	printf("Index %ld  beta=%20.16g\n", idx, gold);
 #endif
 
 // #define VERIFY
@@ -159,7 +206,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define PRINT_DYADIC_TO_BETA_MAP
+// #define PRINT_DYADIC_TO_BETA_MAP
 #ifdef PRINT_DYADIC_TO_BETA_MAP
 	if (argc != 3)
 	{
