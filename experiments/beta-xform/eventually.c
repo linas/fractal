@@ -84,9 +84,10 @@ double find_ezero(short* cof, double lo, double hi)
 }
 
 /* Make sure that midpoint iteration gives same bitstring
- * as the encoding w/ pfx, cyc
+ * as the encoding w/ pfx, cyc.
+ * Return index of first disagreement.
  */
-bool validate_orbit(double beta, long pfx, long cyc, int cyclen)
+int validate_orbit(double beta, long pfx, long cyc, int cyclen, bool prt)
 {
 #define MAXBITS 60
 
@@ -103,8 +104,8 @@ bool validate_orbit(double beta, long pfx, long cyc, int cyclen)
 		int pfbit = pfx >> (pfxlen-i-1) & 1UL;
 		if (bit != pfbit)
 		{
-			printf("Error out at pfx %d %d %d\n", i, pfbit, bit);
-			return false;
+			if (prt) printf("Error out at pfx %d %d %d\n", i, pfbit, bit);
+			return i;
 		}
 	}
 	for (int i=0; i < MAXBITS-pfxlen; i++)
@@ -118,11 +119,11 @@ bool validate_orbit(double beta, long pfx, long cyc, int cyclen)
 		int cybit = cyc >> (cyclen-j-1) & 1UL;
 		if (bit != cybit)
 		{
-			printf("Error out at cyclic %d %d %d\n", i, cybit, bit);
-			return false;
+			if (prt) printf("Error out at cyclic %d %d %d\n", i, cybit, bit);
+			return i+pfxlen;
 		}
 	}
-	return true;
+	return 0;
 }
 
 int main(int argc, char* argv[])
@@ -142,6 +143,7 @@ int main(int argc, char* argv[])
 	print_coeffs(cof);
 	double gold = find_ezero(cof, 1.0, 2.0);
 
-	printf("found %g\n", gold);
-	validate_orbit(gold, pfx, cyc, cyclen);
+	printf("found %20.16g\n", gold);
+	int badbit = validate_orbit(gold, pfx, cyc, cyclen, true);
+	printf("badbit=%d\n", badbit);
 }
