@@ -87,8 +87,8 @@ long idx_to_bitseq(long idx, int* leng)
 // so this just expands that bitseq, and then truncates it.
 long rational_to_bitseq(int p, int q, int len)
 {
-	long bitseq = 0;
-	for (int i=0; i< len; i++)
+	long bitseq = 1;
+	for (int i=0; i<len-1; i++)
 	{
 		bitseq <<= 1;
 		double x = ((double) p) / ((double) q);
