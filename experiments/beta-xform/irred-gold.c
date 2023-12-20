@@ -14,7 +14,7 @@
 
 
 /* Return the beta value corresponding to the n'th golden polynomial.
- * It is be constructed from the bit string of (2n+1). Construction
+ * It is constructed from the bit string of (2n+1). Construction
  * is the mid-point construction: repeated iteration of the midpoint
  * 1/2 with this beta will (re-)generate the same bitstring, until
  * returning to the midpoint. The bits are just whether the orbit went
