@@ -126,8 +126,72 @@ int validate_orbit(double beta, long pfx, long cyc, int cyclen, bool prt)
 	return 0;
 }
 
+/* Check for prefixes that duplicate cyclic seqs
+ * return true if it looks OK, else return false.
+ * Bad hack.
+ */
+bool is_prefix_ok(long pfx, long cyc, int cyclen)
+{
+	if (0 == pfx) return true;
+
+	int pfxlen = bitlen(pfx);
+
+	// if prefix identical to cycle...
+	if (pfxlen == cyclen && pfx == cyc) return false;
+
+	// Check cyclic permutation = if last bit of prefix can be rotated
+	// into the cyclic sequence, then it's not maximally short.
+	if ((pfx & 1UL) == (cyc & 1UL)) return false;
+
+	short cof[MAXCOF];
+	get_coeffs(cof, pfx, cyc, cyclen);
+	int clen = 0;
+	for (int i=0; -100 < cof[i]; i++) clen++;
+	if (0 == cof[clen-1])
+	{
+		printf("Not minimal at (%ld, %ld/%d)\n", pfx, cyc, cyclen);
+		return false;
+	}
+
+	// TODO: XXX
+	// If cyclen is a multiple of a prime, check for shorter lengths
+
+	return true;
+}
+
+/* Return true if the beta generates the expected orbit */
+bool is_orbit_ok(long pfx, long cyc, int cyclen)
+{
+	short cof[MAXCOF];
+	get_coeffs(cof, pfx, cyc, cyclen);
+	double gold = find_ezero(cof, 1.0, 2.0);
+
+	int badbit = validate_orbit(gold, pfx, cyc, cyclen, false);
+	if (0 < badbit && badbit < 40) return false;
+	return true;
+}
+
+void print_debug_info(long pfx, long cyc, int cyclen)
+{
+	bool pok = is_prefix_ok(pfx, cyc, cyclen);
+	if (false == pok)
+		printf("Error: prefix is reducible\n");
+
+	short cof[MAXCOF];
+	get_coeffs(cof, pfx, cyc, cyclen);
+	print_coeffs(cof);
+	double gold = find_ezero(cof, 1.0, 2.0);
+
+	printf("found %20.16g\n", gold);
+	int badbit = validate_orbit(gold, pfx, cyc, cyclen, true);
+	if (0 < badbit && badbit < 40)
+		printf("Error: bad orbit at %d\n", badbit);
+}
+
 int main(int argc, char* argv[])
 {
+// #define MANUAL_EXPLORE
+#ifdef MANUAL_EXPLORE
 	if (argc != 4)
 	{
 		fprintf(stderr, "Usage: %s <pfx> <cyc> <cyclen>\n", argv[0]);
@@ -138,12 +202,29 @@ int main(int argc, char* argv[])
 	long cyc = atol(argv[2]);
 	int cyclen = atoi(argv[3]);
 
-	short cof[MAXCOF];
-	get_coeffs(cof, pfx, cyc, cyclen);
-	print_coeffs(cof);
-	double gold = find_ezero(cof, 1.0, 2.0);
+	print_debug_info(pfx, cyc, cyclen);
+#endif
 
-	printf("found %20.16g\n", gold);
-	int badbit = validate_orbit(gold, pfx, cyc, cyclen, true);
-	printf("badbit=%d\n", badbit);
+	if (argc != 3)
+	{
+		fprintf(stderr, "Usage: %s <maxpfx> <maxcyclen>\n", argv[0]);
+		exit(1);
+	}
+
+	long maxpfx = atol(argv[1]);
+	int maxcyclen = atoi(argv[2]);
+
+	for (int cyclen =2; cyclen <=maxcyclen; cyclen++)
+	{
+		long maxcyc = (1<<cyclen) - 1UL;
+		for (long cyc = 1; cyc <maxcyc; cyc++)
+		{
+			for (long pfx = 1; pfx <maxpfx; pfx++)
+			{
+				if (false == is_prefix_ok(pfx, cyc, cyclen)) continue;
+				if (false == is_orbit_ok(pfx, cyc, cyclen)) continue;
+				printf("Found (%ld, %ld/%d)\n", pfx, cyc, cyclen);
+			}
+		}
+	}
 }
