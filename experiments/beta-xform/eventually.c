@@ -83,6 +83,17 @@ double find_ezero(short* cof, double lo, double hi)
 	return find_ezero(cof, mid, hi);
 }
 
+/* Utility wrapper for above. Get the polynomial zero for the
+ * indicated prefix and cycle
+ */
+double event_gold(long pfx, long cyc, int cyclen)
+{
+	short cof[MAXCOF];
+	get_coeffs(cof, pfx, cyc, cyclen);
+	double gold = find_ezero(cof, 1.0, 2.0);
+	return gold;
+}
+
 /* Make sure that midpoint iteration gives same bitstring
  * as the encoding w/ pfx, cyc.
  * Return index of first disagreement.
@@ -162,9 +173,7 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 /* Return true if the beta generates the expected orbit */
 bool is_orbit_ok(long pfx, long cyc, int cyclen)
 {
-	short cof[MAXCOF];
-	get_coeffs(cof, pfx, cyc, cyclen);
-	double gold = find_ezero(cof, 1.0, 2.0);
+	double gold = event_gold(pfx, cyc, cyclen);
 
 	int badbit = validate_orbit(gold, pfx, cyc, cyclen, false);
 	if (0 < badbit && badbit < 40) return false;
@@ -223,8 +232,12 @@ int main(int argc, char* argv[])
 			{
 				if (false == is_prefix_ok(pfx, cyc, cyclen)) continue;
 				if (false == is_orbit_ok(pfx, cyc, cyclen)) continue;
-				printf("Found (%ld, %ld/%d)\n", pfx, cyc, cyclen);
+
+				double gold = event_gold(pfx, cyc, cyclen);
+				printf("Found (%ld, %ld/%d) = %g\n", pfx, cyc, cyclen, gold);
 			}
+			printf("------\n");
 		}
+		printf("=======\n");
 	}
 }
