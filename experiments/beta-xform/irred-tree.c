@@ -100,6 +100,19 @@ long rational_to_bitseq(int p, int q, int len)
 	return bitseq;
 }
 
+// Reverse the order of the bits in the bitseq
+long bitseq_reverse(long bits, int len)
+{
+	long rev = 0;
+	for (int i = 0; i<len; i++)
+	{
+		rev <<= 1;
+		rev |= bits & 1UL;
+		bits >>= 1;
+	}
+	return rev;
+}
+
 // Do the minkowski run-length encoding trick.
 // Convert the bitseq to a continued fraction.
 double bitseq_to_cf(long bitseq, int len)
@@ -173,6 +186,13 @@ int main(int argc, char* argv[])
 	long idx = bitseq_to_idx(bits, len);
 	double gold = find_gold(idx);
 	printf("Index %ld  beta=%20.16g\n", idx, gold);
+
+	printf("---\n");
+	long revbits = bitseq_reverse(bits, len);
+	print_bitseq(revbits, len, "reversed bits=(", ")\n");
+	long ridx = bitseq_to_idx(revbits, len);
+	double rgold = find_gold(ridx);
+	printf("Reversed Index %ld  beta=%20.16g\n", ridx, rgold);
 #endif
 
 // #define VERIFY
