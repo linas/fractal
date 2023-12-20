@@ -25,7 +25,7 @@
 
 ; Sloppy midpoint subdivision root finder
 (define (mroot f lo hi)
-	(define eps 1e-16)
+	(define eps 1e-15)
 	(define mid (* 0.5 (+ lo hi)))
 	(define fhi (f hi))
 	(define fmid (f mid))

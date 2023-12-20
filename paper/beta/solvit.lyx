@@ -23443,7 +23443,7 @@ Eventually-periodic orbits
 
 \begin_layout Standard
 We were sloppy, up above, in distinguishing finite orbits, which can be
- made periodic by fiat, from eventually-periodic orbits, which has a leading
+ made periodic by fiat, from eventually-periodic orbits, which have a leading
  chaotic prefix of length 
 \begin_inset Formula $L$
 \end_inset
@@ -23506,6 +23506,25 @@ is the characteristic bitsequence.
 \end_inset
 
 .
+ To improve notation, it is convenient to define a length-
+\begin_inset Formula $N$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+cyclic
+\begin_inset Quotes erd
+\end_inset
+
+ bit sequence 
+\begin_inset Formula $c_{k}=b_{k+L}$
+\end_inset
+
+ so that the the eventually-periodic orbits can be described by two distinct
+ finite sequences.
+ Then 
 \end_layout
 
 \begin_layout Standard
@@ -23513,27 +23532,58 @@ is the characteristic bitsequence.
 \begin{align*}
 \beta= & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L+N}^{L+2N-1}\frac{b_{k}}{\beta^{k}}+\cdots\\
 = & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\frac{\beta^{N}}{\beta^{N}-1}\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}\\
-= & \frac{1}{\beta^{L}}\sum_{k=0}^{L-1}b_{k}\beta^{L-k}+\frac{1}{\beta^{L}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}b_{k+L}\beta^{N-k}
+= & \frac{1}{\beta^{L-1}}\sum_{k=0}^{L-1}b_{k}\beta^{L-k-1}+\frac{1}{\beta^{L-1}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}
 \end{align*}
 
 \end_inset
 
-or, multiplying through by the large denominator,
+Multiplying through by the denominator, one obtains a finite polynomial
+ for these orbits:
 \begin_inset Formula 
 \[
-\left(\beta^{N}-1\right)\left(\beta^{L+1}-\sum_{k=0}^{L-1}b_{k}\beta^{L-k}\right)-\sum_{k=0}^{N-1}b_{k+L}\beta^{N-k}=0
+\left(\beta^{N}-1\right)\left(\beta^{L}-\sum_{k=0}^{L-1}b_{k}\beta^{L-k-1}\right)-\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}=0
 \]
 
 \end_inset
 
-or
+Making use of the earlier notation for polynomials,
 \begin_inset Formula 
 \[
-\beta^{N+L+1}-
+p^{\left\{ d_{0}\cdots d_{\nu-1}\right\} }\left(\beta\right)=\beta^{\nu}-\sum_{k=0}^{\nu-1}d_{k}\beta^{\nu-k-1}
 \]
 
 \end_inset
 
+the above has the form
+\begin_inset Formula 
+\[
+\left(\beta^{N}-1\right)p^{\left\{ b_{0}\cdots b_{L-1}\right\} }\left(\beta\right)+p^{\left\{ c_{0}\cdots c_{N-1}\right\} }\left(\beta\right)-\beta^{N}=0
+\]
+
+\end_inset
+
+Finite-length orbits can be taken to have 
+\begin_inset Formula $N=1$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{0}=0$
+\end_inset
+
+, so that the cyclic term vanishes, and one is left with the finite-length
+ polynomials, just as before, times an extra factor of 
+\begin_inset Formula $\beta-1$
+\end_inset
+
+ which will be ignored.
+ 
+\end_layout
+
+\begin_layout Standard
+w
+\end_layout
+
+\begin_layout Standard
 so yuck.
  A few worked examples helps clarify things.
 \end_layout
@@ -23950,7 +24000,7 @@ p
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2
 \end_layout
 
 \end_inset
@@ -23959,7 +24009,7 @@ p
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2
 \end_layout
 
 \end_inset
@@ -23968,6 +24018,9 @@ p
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\beta^{4}-\beta^{3}-2\beta^{2}+1=0$
+\end_inset
+
 
 \end_layout
 
@@ -23977,7 +24030,7 @@ p
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+1.905166167754018...
 \end_layout
 
 \end_inset
