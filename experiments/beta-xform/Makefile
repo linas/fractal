@@ -82,7 +82,7 @@ zetadisk.o: zetadisk.C psibig.c
 normie.o: normie.C psibig.c
 irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c irred-gold.c
-irred-fraction.o: irred-fraction.c irred-gold.c
+irred-fraction.o: irred-fraction.c irred-gold.c selfie.c
 irred-gf.o: irred-gf.C irred-gold.c
 irred-disk.o: irred-disk.C irred-gold.c
 irred-midpoint.o: irred-midpoint.c irred-gold.c

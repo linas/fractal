@@ -15,13 +15,6 @@
 /* Max allowed coeficients */
 #define MAXCOF 120
 
-int bitlen(unsigned long bitstr)
-{
-	int len=0;
-	while (bitstr) { len++; bitstr >>= 1; }
-	return len;
-}
-
 /* Convert (prefix,cyclic) coding pair to a list coefficients.
  * The bitseq for pfx must always start with one, so it's length is
  * unambiguous. The cyclic part is not bound by this constraint, so

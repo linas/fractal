@@ -522,6 +522,9 @@ void print_debug_info(long seqno)
 	printf("Right limit: %ld = %g = ", nright, gright);
 	print_seq(cfrac, slen, "", "\n");
 #endif
+
+	bool ok = valid_gold_index(seqno);
+	printf("Selfie valid=%d\n", ok);
 }
 
 // =================================================================

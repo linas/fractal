@@ -20,6 +20,13 @@
  * December 2023
  */
 
+int bitlen(unsigned long bitstr)
+{
+	int len=0;
+	while (bitstr) { len++; bitstr >>= 1; }
+	return len;
+}
+
 // Print bitstring, so that bit zero appears left-most.
 // Roughly speaking, this reverses the bit-order.
 void print_dyadic(unsigned long bitseq, int len, char* pre, char* suf)
@@ -30,7 +37,7 @@ void print_dyadic(unsigned long bitseq, int len, char* pre, char* suf)
 		printf("%ld", bitseq & 1UL);
 		bitseq >>= 1;
 	}
-	printf (" \\%d", len);
+	printf (" \\\\%d", len);
 	printf("%s", suf);
 }
 
@@ -66,11 +73,11 @@ unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
  * is the bit-shift construction: the lowest powers of x are given by
  * right-most bits; highest powers are the left-most bits.
  */
-double golden_poly(unsigned long n, double x)
+double golden_poly(unsigned long idx, double x)
 {
 	double acc = 0.0;
 	double xn = 1.0;
-	unsigned long bitstr = 2*n+1;
+	unsigned long bitstr = 2*idx+1;
 	while (bitstr)
 	{
 		if (bitstr%2 == 1) acc += xn;
@@ -84,21 +91,21 @@ double golden_poly(unsigned long n, double x)
 /* Use midpoint bisection to find the single, unique
  * positive real zero of the n'th golden polynomial.
  */
-static double find_zero(unsigned long n, double lo, double hi)
+static double find_zero(unsigned long idx, double lo, double hi)
 {
 	double mid = 0.5 * (lo+hi);
 	if (1.0e-15 > hi-lo) return mid;
-	double fmid = golden_poly(n, mid);
-	if (0.0 < fmid) return find_zero(n, lo, mid);
-	return find_zero(n, mid, hi);
+	double fmid = golden_poly(idx, mid);
+	if (0.0 < fmid) return find_zero(idx, lo, mid);
+	return find_zero(idx, mid, hi);
 }
 
 /* Return the beta value corresponding to the n'th golden polynomial.
  * Polynomial is constructed from the bit string of (2n+1).
  */
-double golden_beta(unsigned long n)
+double golden_beta(unsigned long idx)
 {
-	return find_zero(n, 1.0, 2.0);
+	return find_zero(idx, 1.0, 2.0);
 }
 
 /* ================================================================= */
@@ -121,7 +128,7 @@ unsigned long beta_to_dyadic(double beta)
 	double mid = 0.5*beta;
 	for (int i=0; i < 8*sizeof(unsigned long); i++)
 	{
-		if (0.5 < mid)
+		if (0.5 <= mid)
 		{
 			bitseq |= 1UL << i;
 			mid -= 0.5;
@@ -131,10 +138,28 @@ unsigned long beta_to_dyadic(double beta)
 	return bitseq;
 }
 
-/* Construction
- * is the mid-point construction: repeated iteration of the midpoint
- * 1/2 with this beta will (re-)generate the same bitstring, until
- * returning to the midpoint. The bits are just whether the orbit went
- * left or right of midpoint. The length of the orbit will be log_2(2n+1).
+/* Return true if `idx` is a self-describing index. This means that
+ * the root of the golden_beta polynomial, when iterated by mid-point
+ * iteration, reproduces the a dyadic bitstring, that, when bit-reversed,
+ * gives back the index.
+ * The length of the orbit will be log_2(2n+1).
  */
+bool valid_gold_index(unsigned long idx)
+{
+	double gold = golden_beta(idx);
+	unsigned long dyad = beta_to_dyadic(gold);
+	printf("Index=%ld gold=%20.16g\n", idx, gold);
+	print_dyadic(dyad, 40, "Dyadic orbit=", "\n");
+
+	unsigned long tno = 2*idx+1;
+	int len = bitlen(tno);
+printf("duuude len=%d\n", len);
+	for (int i=0; i< len; i++)
+	{
+		if ((tno &1UL) != ((dyad>>(len-i-1)) &1UL)) return false;
+		tno >>= 1;
+	}
+	return true;
+}
+
 /* --------------------------- END OF LIFE ------------------------- */
