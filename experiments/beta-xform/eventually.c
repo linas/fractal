@@ -206,21 +206,24 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 }
 
 /*
- * Rotate the cycle left, until the first bit of the cycle is a one.
+ * Rotate the cycle left, until the first bit of the cycle is equal to 'bit'.
+ * 'bit' can be zero or one.
  * The prefix is extended as the rotations is done.
  * Return true if changed.
  */
-bool rotate_left(long* pfxp, long* cycp, int cyclen)
+bool rotate_until_bit(long* pfxp, long* cycp, int cyclen, int bit)
 {
 	long pfx = *pfxp;
 	long cyc = *cycp;
 	long hibit = 1UL << (cyclen-1);
-	if (cyc & hibit) return false;
+	if (bit == (cyc & hibit)) return false;
 
-	while (0 == (cyc & hibit))
+	while (bit != (cyc & hibit))
 	{
 		pfx <<= 1;
+		if (0 == bit) pfx |= 1UL;
 		cyc <<= 1;
+		if (0 == bit) cyc |= 1UL;
 	}
 
 	*pfxp = pfx;
@@ -231,12 +234,35 @@ bool rotate_left(long* pfxp, long* cycp, int cyclen)
 /* Return true if the non-periodic version is valid. */
 bool is_valid_finite(long pfx, long cyc, int cyclen)
 {
-	rotate_left(&pfx, &cyc, cyclen);
+	rotate_until_bit(&pfx, &cyc, cyclen, 1);
 	cyc |= 1UL;
 	pfx <<= cyclen;
 	pfx |= cyc;
 	long idx = (pfx - 1UL) / 2;
 	return is_valid_index(idx);
+}
+
+/* Interpret the orbit as being a dyadic bitstring, and return
+ * the corresponding double-precision value. Result will be between
+ * zero and one.
+ */
+double orbit_to_double(long pfx, long cyc, int cyclen)
+{
+	// Brute force, no finesse.
+	int maxlen = 56;
+	if (62-cyclen < maxlen) maxlen = 62 - cyclen;
+
+	int len = bitlen(pfx);
+	while (len < 62-cyclen)
+	{
+		pfx <<= cyclen;
+		pfx |= cyc;
+		len += cyclen;
+	}
+	unsigned long deno = 1UL << len;
+	double dyd = ((double) pfx) / ((double) deno);
+	dyd = 2.0 * (dyd - 0.5);
+	return dyd;
 }
 
 // ---------------------------------------------------------------------
@@ -252,10 +278,15 @@ void print_debug_info(long pfx, long cyc, int cyclen)
 	print_coeffs(cof);
 	double gold = find_ezero(cof, 1.0, 2.0);
 
-	printf("found %20.16g\n", gold);
+	printf("Prefix = %ld cycle=%ld len=%d\n", pfx, cyc, cyclen);
+	double rat = orbit_to_double(pfx, cyc, cyclen);
+	printf("Orbit code=%20.16g\n", rat);
+
+	printf("Root %20.16g\n", gold);
 	int badbit = validate_orbit(gold, pfx, cyc, cyclen, true);
 	if (0 < badbit && badbit < 40)
 		printf("Error: bad orbit at %d\n", badbit);
+
 }
 
 int lesser(const void * px, const void * py)
@@ -267,7 +298,7 @@ int lesser(const void * px, const void * py)
 
 int main(int argc, char* argv[])
 {
-// #define MANUAL_EXPLORE
+#define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
 	if (argc != 4)
 	{
@@ -282,7 +313,7 @@ int main(int argc, char* argv[])
 	print_debug_info(pfx, cyc, cyclen);
 #endif
 
-#define BULK_LISTING
+// #define BULK_LISTING
 #ifdef BULK_LISTING
 	if (argc != 3)
 	{
