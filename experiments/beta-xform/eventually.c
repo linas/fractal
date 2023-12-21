@@ -52,7 +52,7 @@ void print_coeffs(short* cof)
 
 /*
  * Evaluate the eventually-golden polynomial at point x.
- * Polynomial coefficients already decoded in cof.
+ * Polynomial coefficients must be provided in cof.
  */
 double event_poly(short* cof, double x)
 {
@@ -94,6 +94,7 @@ double event_gold(long pfx, long cyc, int cyclen)
 	return gold;
 }
 
+// ---------------------------------------------------------------------
 /* Make sure that midpoint iteration gives same bitstring
  * as the encoding w/ pfx, cyc.
  * Return index of first disagreement.
@@ -137,9 +138,23 @@ int validate_orbit(double beta, long pfx, long cyc, int cyclen, bool prt)
 	return 0;
 }
 
-/* Check for prefixes that duplicate cyclic seqs
- * return true if it looks OK, else return false.
- * Bad hack.
+/* Return true if the beta generates the expected orbit */
+bool is_orbit_ok(long pfx, long cyc, int cyclen)
+{
+	double gold = event_gold(pfx, cyc, cyclen);
+
+	int badbit = validate_orbit(gold, pfx, cyc, cyclen, false);
+	if (0 < badbit && badbit < 40) return false;
+	return true;
+}
+
+// ---------------------------------------------------------------------
+/* Check for prefix+cycle combinations that are not minimal.
+ * Returns true if in minimal form, else return false.
+ *
+ * Checks several conditions:
+ * -- Does the prefx+cycle combo have the shortest possible prefix?
+ * -- Is the cycle minimal
  */
 bool is_prefix_ok(long pfx, long cyc, int cyclen)
 {
@@ -147,13 +162,15 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 
 	int pfxlen = bitlen(pfx);
 
-	// if prefix identical to cycle...
+	// If prefix identical to cycle... then prefix can be absorbed into
+	// the cycle to get a shorter expression.
 	if (pfxlen == cyclen && pfx == cyc) return false;
 
 	// Check cyclic permutation = if last bit of prefix can be rotated
-	// into the cyclic sequence, then it's not maximally short.
+	// into the cyclic sequence, then prefix is not maximally short.
 	if ((pfx & 1UL) == (cyc & 1UL)) return false;
 
+	// Unexpected thing
 	short cof[MAXCOF];
 	get_coeffs(cof, pfx, cyc, cyclen);
 	int clen = 0;
@@ -164,8 +181,9 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 		return false;
 	}
 
-	// If cyclen is a multiple of a prime, check for shorter lengths
-	// multiples of 2 and 3 are enough
+	// Make sure the cycle is minimal.
+	// If cyclen is a multiple of a prime, check for equivalent shorter lengths.
+	// Checking multiples of 2 and 3 are enough for our purposes.
 	if (3< cyclen && 0 == cyclen %2)
 	{
 		long a = cyc & ((1UL<< (cyclen/2)) -1UL);
@@ -185,15 +203,7 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 	return true;
 }
 
-/* Return true if the beta generates the expected orbit */
-bool is_orbit_ok(long pfx, long cyc, int cyclen)
-{
-	double gold = event_gold(pfx, cyc, cyclen);
-
-	int badbit = validate_orbit(gold, pfx, cyc, cyclen, false);
-	if (0 < badbit && badbit < 40) return false;
-	return true;
-}
+// ---------------------------------------------------------------------
 
 void print_debug_info(long pfx, long cyc, int cyclen)
 {
@@ -221,7 +231,7 @@ int lesser(const void * px, const void * py)
 
 int main(int argc, char* argv[])
 {
-#define MANUAL_EXPLORE
+// #define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
 	if (argc != 4)
 	{
@@ -236,6 +246,7 @@ int main(int argc, char* argv[])
 	print_debug_info(pfx, cyc, cyclen);
 #endif
 
+#define BULK_LISTING
 #if BULK_LISTING
 	if (argc != 3)
 	{
