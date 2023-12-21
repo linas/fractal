@@ -61,11 +61,13 @@ void malloc_gold(long nmax)
 	}
 	maxidx = nmax;
 	zero = (double*) malloc((nmax+1)*sizeof(double));
-	for (int i=0; i<=nmax; i++) zero[i] = -1.0;
+	if (NULL == zero)
+		printf("Failed to malloc %ld\n", nmax+1);
+	for (long i=0; i<=nmax; i++) zero[i] = -1.0;
 	stopper = (int*) malloc((nmax+1)*sizeof(int));
-	for (int i=0; i<=nmax; i++) stopper[i] = 0;
+	for (long i=0; i<=nmax; i++) stopper[i] = 0;
 	summatory = (int*) malloc((nmax+1)*sizeof(int));
-	for (int i=0; i<=nmax; i++) summatory[i] = 0;
+	for (long i=0; i<=nmax; i++) summatory[i] = 0;
 
 	// Allow valid memref to zero[-1] denoting beta=1.0
 	zero++;

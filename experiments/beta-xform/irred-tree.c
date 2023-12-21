@@ -83,12 +83,28 @@ long idx_to_bitseq(long idx, int* leng)
 }
 
 // Return the bit-sequence that approximates the rational p/q,
-// truncated to len bits. Rationals have infinite periodic bitseqs
+// truncated to len bits. Rationals have infinite periodic bitseqs,
 // so this just expands that bitseq, and then truncates it.
 //
+// Bit strings are read left-to-right, with decimal point at far
+// left. Bit strings interpreted as dyadics in the conventional sense.
+// For example, 1/4 len=2 -> 0.01 and
+long rational_to_bracket_bitseq(int p, int q, int len)
+{
+	long bitseq = 0;
+	for (int i=0; i<len; i++)
+	{
+		p <<= 1;
+		if (q <= p) bitseq |= 1UL << (len-1-i);
+		if (q <= p) p -= q;
+	}
+	return bitseq;
+}
+
+// Same as above, but the bits in flipped order.
 // Bit strings are read left-to-right. Bit strings interpreted as
 // dyadics in the conventional sense.
-long rational_to_bitseq(int p, int q, int len)
+long rational_to_orbit_bitseq(int p, int q, int len)
 {
 	long bitseq = 0;
 	for (int i=0; i<len; i++)
@@ -184,31 +200,32 @@ int main(int argc, char* argv[])
 	int len = atoi(argv[3]);
 
 	long maxidx = 1UL << (len+2);
-	maxidx = 1UL << (len+10);
 	maxidx = 1UL << (len+6);
+	// maxidx = 1UL << 33;
 	malloc_gold(maxidx);
-	printf("max alloced idx = %ld\n", maxidx);
+	printf("Max alloced idx = %ld\n", maxidx);
 
-	long bits = rational_to_bitseq(p, q, len);
-	printf("rational = %d/%d len=%d", p, q, len);
-	print_bitseq(bits, len, " bits=(", ")\n");
+	printf("rational = %d/%d len=%d\n", p, q, len);
 
-	// Orbits MUST start with a leading one-bit.
-	long orbits = bits;
-	orbits |= 1<<len;
-	orbits >>= 1;
-	print_bitseq(orbits, len, "leading-one bitseq=(", ")\n");
-
+	long bits = rational_to_bracket_bitseq(p, q, len);
+	print_bitseq(bits, len, "Bracketing bits=(", ")\n");
 	long idx = bitseq_to_idx(bits, len);
 	double gold = find_gold(idx);
-	printf("Index %ld  beta=%20.16g\n", idx, gold);
+	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
 
 	printf("---\n");
-	long revbits = bitseq_reverse(bits, len);
-	print_bitseq(revbits, len, "reversed bits=(", ")\n");
-	long ridx = bitseq_to_idx(revbits, len);
-	double rgold = find_gold(ridx);
-	printf("Reversed Index %ld  beta=%20.16g\n", ridx, rgold);
+	long orbits = rational_to_orbit_bitseq(p, q, len);
+	print_bitseq(orbits, len, "orbit bits=(", ")\n");
+
+	// Orbits MUST start with a leading one-bit.
+	long lorbits = orbits;
+	lorbits |= 1<<len;
+	lorbits >>= 1;
+	print_bitseq(lorbits, len, "leading-one bitseq=(", ")\n");
+
+	long oridx = bitseq_to_idx(orbits, len);
+	double orgold = find_gold(oridx);
+	printf("Orbit Index %ld  beta=%20.16g\n", oridx, orgold);
 #endif
 
 // #define VERIFY
