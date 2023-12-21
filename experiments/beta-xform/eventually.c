@@ -150,6 +150,22 @@ bool is_orbit_ok(long pfx, long cyc, int cyclen)
 	return true;
 }
 
+/* Iterate the midpoint and return the sequence */
+long orbit_to_bitseq(double beta)
+{
+#define MAXBITS 60
+	long bitseq = 0;
+	double mid = 0.5*beta;
+	for (int i=0; i < MAXBITS; i++)
+	{
+		bitseq <<= 1;
+		if (0.5 < mid) bitseq |= 1UL;
+		if (0.5 < mid) mid -= 0.5;
+		mid *= beta;
+	}
+	return bitseq;
+}
+
 // ---------------------------------------------------------------------
 /* Check for prefix+cycle combinations that are not minimal.
  * Returns true if in minimal form, else return false.
@@ -213,9 +229,12 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
  */
 bool rotate_until_bit(long* pfxp, long* cycp, int cyclen, int bit)
 {
+	// if (0 == cyclen) return false;
+	// if (0 == *cycp) return false;
 	long pfx = *pfxp;
 	long cyc = *cycp;
 	long hibit = 1UL << (cyclen-1);
+	bit <<= (cyclen-1);
 	if (bit == (cyc & hibit)) return false;
 
 	while (bit != (cyc & hibit))
@@ -246,7 +265,37 @@ bool is_valid_finite(long pfx, long cyc, int cyclen)
  * the corresponding double-precision value. Result will be between
  * zero and one.
  */
-double orbit_to_double(long pfx, long cyc, int cyclen)
+long event_to_bitseq(long pfx, long cyc, int cyclen)
+{
+	// Brute force, no finesse.
+	int maxlen = 56;
+	if (62-cyclen < maxlen) maxlen = 62 - cyclen;
+
+	int len = bitlen(pfx);
+	while (len < 62-cyclen)
+	{
+		pfx <<= cyclen;
+		pfx |= cyc;
+		len += cyclen;
+	}
+
+	// Use the same #define MAXBITS 60 as in orbit_to_bitseq
+	if (MAXBITS < len) pfx >>= len-MAXBITS;
+	if (MAXBITS > len) pfx <<= MAXBITS-len;
+
+	return pfx;
+}
+
+void print_bitseq(long bitseq, char* pre, char* suf)
+{
+	printf("%s", pre);
+	for (int i=0; i< MAXBITS; i++)
+		printf("%ld", (bitseq >> (MAXBITS-1-i)) & 1UL);
+
+	printf("%s", suf);
+}
+
+double event_to_double(long pfx, long cyc, int cyclen)
 {
 	// Brute force, no finesse.
 	int maxlen = 56;
@@ -265,6 +314,20 @@ double orbit_to_double(long pfx, long cyc, int cyclen)
 	return dyd;
 }
 
+/* Convert the finite verion of periodic orbit to double. */
+double finite_to_double(long pfx, long cyc, int cyclen)
+{
+	rotate_until_bit(&pfx, &cyc, cyclen, 1);
+	cyc |= 1UL;
+	pfx <<= cyclen;
+	pfx |= cyc;
+	int len = bitlen(pfx);
+	unsigned long deno = 1UL << len;
+	double dyd = ((double) pfx) / ((double) deno);
+	dyd = 2.0 * (dyd - 0.5);
+	return dyd;
+}
+
 // ---------------------------------------------------------------------
 
 void print_debug_info(long pfx, long cyc, int cyclen)
@@ -275,11 +338,12 @@ void print_debug_info(long pfx, long cyc, int cyclen)
 
 	short cof[MAXCOF];
 	get_coeffs(cof, pfx, cyc, cyclen);
+	printf("Coeffs are: ");
 	print_coeffs(cof);
 	double gold = find_ezero(cof, 1.0, 2.0);
 
 	printf("Prefix = %ld cycle=%ld len=%d\n", pfx, cyc, cyclen);
-	double rat = orbit_to_double(pfx, cyc, cyclen);
+	double rat = event_to_double(pfx, cyc, cyclen);
 	printf("Orbit code=%20.16g\n", rat);
 
 	printf("Root %20.16g\n", gold);
@@ -287,6 +351,10 @@ void print_debug_info(long pfx, long cyc, int cyclen)
 	if (0 < badbit && badbit < 40)
 		printf("Error: bad orbit at %d\n", badbit);
 
+	long orbits = orbit_to_bitseq(gold);
+	long events = event_to_bitseq(pfx, cyc, cyclen);
+	print_bitseq(orbits, "orbit= ", "\n");
+	print_bitseq(events, "event= ", "\n");
 }
 
 int lesser(const void * px, const void * py)
@@ -298,7 +366,7 @@ int lesser(const void * px, const void * py)
 
 int main(int argc, char* argv[])
 {
-// #define MANUAL_EXPLORE
+#define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
 	if (argc != 4)
 	{
@@ -378,7 +446,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define GRAPH_LISTING
+// #define GRAPH_LISTING
 #ifdef GRAPH_LISTING
 	if (argc != 3)
 	{
@@ -405,7 +473,8 @@ int main(int argc, char* argv[])
 				if (orbok) good = gold;
 				double bad = 0.0;
 				if (false==orbok) bad = gold;
-				printf("%ld	%ld	%d	%g	%g	%g\n", pfx, cyc, cyclen, rat, good, bad);
+				double fin = finite_to_double(pfx, cyc, cyclen);
+				printf("%ld	%ld	%d	%g	%g	%g	%g\n", pfx, cyc, cyclen, rat, good, bad, fin);
 			}
 		}
 	}

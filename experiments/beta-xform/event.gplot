@@ -1,7 +1,7 @@
 
 set out 'event.png'
 set term png size 1024,768
-set term png size 640, 480
+# set term png size 640, 480
 
 set xrange [0:1]
 set yrange [1:2]
@@ -9,11 +9,12 @@ set yrange [1:2]
 set key left
 set title "Event dist"
 
-x=0.33333
-set arrow from x,1 to x,2 nohead linecolor "blue"
+#x=0.33333
+#set arrow from x,1 to x,2 nohead linecolor "blue"
 
 plot "event.dat" using 4:5 with points pointtype 0 title "good", \
      "event.dat" using 4:6 with points pointtype 0 title "bad", \
      "irr-tree.dat" using 5:6 with lines linewidth 1 title "dyad map"
+
 
 #####
