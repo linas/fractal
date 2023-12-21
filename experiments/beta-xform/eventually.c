@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "irred-gold.c"
+
 /* Max allowed coeficients */
 #define MAXCOF 120
 
@@ -203,6 +205,40 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 	return true;
 }
 
+/*
+ * Rotate the cycle left, until the first bit of the cycle is a one.
+ * The prefix is extended as the rotations is done.
+ * Return true if changed.
+ */
+bool rotate_left(long* pfxp, long* cycp, int cyclen)
+{
+	long pfx = *pfxp;
+	long cyc = *cycp;
+	long hibit = 1UL << (cyclen-1);
+	if (cyc & hibit) return false;
+
+	while (0 == (cyc & hibit))
+	{
+		pfx <<= 1;
+		cyc <<= 1;
+	}
+
+	*pfxp = pfx;
+	*cycp = cyc;
+	return true;
+}
+
+/* Return true if the non-periodic version is valid. */
+bool is_valid_finite(long pfx, long cyc, int cyclen)
+{
+	rotate_left(&pfx, &cyc, cyclen);
+	cyc |= 1UL;
+	pfx <<= cyclen;
+	pfx |= cyc;
+	long idx = (pfx - 1UL) / 2;
+	return is_valid_index(idx);
+}
+
 // ---------------------------------------------------------------------
 
 void print_debug_info(long pfx, long cyc, int cyclen)
@@ -247,7 +283,7 @@ int main(int argc, char* argv[])
 #endif
 
 #define BULK_LISTING
-#if BULK_LISTING
+#ifdef BULK_LISTING
 	if (argc != 3)
 	{
 		fprintf(stderr, "Usage: %s <maxpfx> <maxcyclen>\n", argv[0]);
@@ -256,6 +292,10 @@ int main(int argc, char* argv[])
 
 	long maxpfx = atol(argv[1]);
 	int maxcyclen = atoi(argv[2]);
+
+	int maxord = bitlen(maxpfx) + maxcyclen;
+	long maxidx = 1UL << maxord;
+	malloc_gold(maxidx);
 
 #define NROOTS 1000
 	double roots[NROOTS];
@@ -268,6 +308,20 @@ int main(int argc, char* argv[])
 			for (long pfx = 1; pfx <maxpfx; pfx++)
 			{
 				if (false == is_prefix_ok(pfx, cyc, cyclen)) continue;
+
+#ifdef FAILED_HYPOTHESIS
+				// This did not work. Hope was that we could deduce stuff from
+				// the finite strings, but no such luck.
+				bool orbok = is_orbit_ok(pfx, cyc, cyclen);
+				if (false == is_valid_finite(pfx, cyc, cyclen))
+				{
+					if (orbok) printf ("Yoooooooooo bad finite but OK orbit\n");
+				}
+				else
+				{
+					if (!orbok) printf ("Gooodddd finite but bad orbit!\n");
+				}
+#endif
 				if (false == is_orbit_ok(pfx, cyc, cyclen)) continue;
 
 				double gold = event_gold(pfx, cyc, cyclen);
