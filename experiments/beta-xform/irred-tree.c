@@ -184,6 +184,7 @@ int main(int argc, char* argv[])
 	int len = atoi(argv[3]);
 
 	long maxidx = 1UL << (len+2);
+	maxidx = 1UL << (len+10);
 	maxidx = 1UL << (len+6);
 	malloc_gold(maxidx);
 	printf("max alloced idx = %ld\n", maxidx);
