@@ -355,6 +355,21 @@ void print_debug_info(long pfx, long cyc, int cyclen)
 	long events = event_to_bitseq(pfx, cyc, cyclen);
 	print_bitseq(orbits, "orbit= ", "\n");
 	print_bitseq(events, "event= ", "\n");
+
+#define ONE_SIXTH
+#ifdef ONE_SIXTH
+	long convbits = orbit_to_bitseq(1.438430227468187);
+	print_bitseq(convbits, "convb= ", "\n");
+	long convbit2 = orbit_to_bitseq(1.438385389665382);
+	print_bitseq(convbit2, "conv2= ", "\n");
+#endif
+
+#ifdef ONE_THIRD
+	long convbits = orbit_to_bitseq(1.558993131521904);
+	print_bitseq(convbits, "convb= ", "\n");
+	long convbit2 = orbit_to_bitseq(1.558956158884443);
+	print_bitseq(convbit2, "conv2= ", "\n");
+#endif
 }
 
 int lesser(const void * px, const void * py)

@@ -227,6 +227,7 @@ int main(int argc, char* argv[])
 	maxidx = 1UL << (len+6);
 	//maxidx = 1UL << 34;
 	//maxidx = 1UL << 30;
+	maxidx = 1UL << 24;
 	malloc_gold(maxidx);
 	printf("Max alloced idx = %ld\n", maxidx);
 
