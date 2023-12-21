@@ -101,6 +101,36 @@ double golden_beta(unsigned long n)
 	return find_zero(n, 1.0, 2.0);
 }
 
+/* ================================================================= */
+
+/*
+ * Return dyadic string corresponding to beta. This is obtained by
+ * midpoint iteration, storing the bits in dyadic order, so that
+ * first iteration is right-most bit. Note that right-most bit will
+ * always be one, since the mid-point is always greater than 1/2.
+ *
+ * Finite orbits will return a finite string. Chaotic orbits might
+ * use all 64 bits in the unsigned long.
+ *
+ * "Valid" integer betas will return the bitstring for (2n+1) but
+ * in reversed order.
+ */
+unsigned long beta_to_dyadic(double beta)
+{
+	unsigned long bitseq = 0;
+	double mid = 0.5*beta;
+	for (int i=0; i < 8*sizeof(unsigned long); i++)
+	{
+		if (0.5 < mid)
+		{
+			bitseq |= 1UL << i;
+			mid -= 0.5;
+		}
+		mid *= beta;
+	}
+	return bitseq;
+}
+
 /* Construction
  * is the mid-point construction: repeated iteration of the midpoint
  * 1/2 with this beta will (re-)generate the same bitstring, until
