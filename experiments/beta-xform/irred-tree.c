@@ -8,13 +8,37 @@
 
 #include "irred-gold.c"
 
-// Give a sequence of 'len' left-right moves encoded as bits in bitseq
-// return the corresponding beta index. Thus, bitseq is a dyadic rational
-// of bitseq/2^len
+// Given a position in a binary tree, encoded as bits in a bitsequence,
+// return the corresponding beta index.
+//
+// The binary tree is taken as the dyadic tree, with 1/2 at the root,
+// and 1/4 and 3/4 as the left and right leaves. These are encoded in binary,
+// in the "obvious way", but I spell it out cause getting it wrong results
+// in assorted off-by-one errors.
+//
+// root == 1/2 == binary 1 length=1
+// left move == L == 1/4 == binary 01 length = 2
+// right move == R == 3/4 == binary 11 length = 2
+//
+// Thus, binary strings must always end in one. The integer value is always odd.
+// The length must be explicitly specified, due to the leading zeros.
+// The final bit is "ignored" (because it is always one).
+// The L,R moves are applied left to right, so left-most bit is the first move, etc.
+// The dyadic fraction is int(biseq) / 2^len and since int(bitseq) is always
+// odd, the dyadic fraction is always in reduced form.
+//
 long bitseq_to_idx(long bitseq, int len)
 {
-	long front = 1;
+	if (0 == bitseq%2)
+	{
+		printf("Error: expecting bitseq to be one-terminated (odd number)\n");
+		return -2;
+	}
 	// printf("Enter frac = %ld / %d\n", bitseq, 1<<len);
+
+	long front = 1;
+	// Loop only goes to len-1 because the last bit is always ignored.
+	// As explained above, bitseq is a tree position.
 	for (int i=0; i<len-1; i++)
 	{
 		int move = (bitseq >> (len-i-1)) & 0x1L;
@@ -88,7 +112,7 @@ long idx_to_bitseq(long idx, int* leng)
 //
 // Bit strings are read left-to-right, with decimal point at far
 // left. Bit strings interpreted as dyadics in the conventional sense.
-// For example, 1/4 len=2 -> 0.01 and
+// For example, 1/4 len=2 -> 0.01 and  3/8 len=3 -> 0.011
 long rational_to_bracket_bitseq(int p, int q, int len)
 {
 	long bitseq = 0;
@@ -201,13 +225,16 @@ int main(int argc, char* argv[])
 
 	long maxidx = 1UL << (len+2);
 	maxidx = 1UL << (len+6);
-	// maxidx = 1UL << 33;
+	maxidx = 1UL << 33;
 	malloc_gold(maxidx);
 	printf("Max alloced idx = %ld\n", maxidx);
 
 	printf("rational = %d/%d len=%d\n", p, q, len);
 
 	long bits = rational_to_bracket_bitseq(p, q, len);
+
+	// Terminal bit must always end in 1, so that bits is odd.
+	bits |= 1UL;
 	print_bitseq(bits, len, "Bracketing bits=(", ")\n");
 	long idx = bitseq_to_idx(bits, len);
 	double gold = find_gold(idx);
