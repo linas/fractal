@@ -126,7 +126,7 @@ long rational_to_bracket_bitseq(int p, int q, int len)
 }
 
 // Same as above, but the bits in flipped order.
-// Bit strings are read left-to-right. Bit strings interpreted as
+// Bit strings are read right-to-left. Bit strings interpreted as
 // dyadics in the conventional sense.
 long rational_to_orbit_bitseq(int p, int q, int len)
 {
