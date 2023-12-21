@@ -298,7 +298,7 @@ int lesser(const void * px, const void * py)
 
 int main(int argc, char* argv[])
 {
-#define MANUAL_EXPLORE
+// #define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
 	if (argc != 4)
 	{
@@ -324,9 +324,11 @@ int main(int argc, char* argv[])
 	long maxpfx = atol(argv[1]);
 	int maxcyclen = atoi(argv[2]);
 
+#ifdef FAILED_HYPOTHESIS
 	int maxord = bitlen(maxpfx) + maxcyclen;
 	long maxidx = 1UL << maxord;
 	malloc_gold(maxidx);
+#endif
 
 #define NROOTS 1000
 	double roots[NROOTS];
@@ -373,6 +375,39 @@ int main(int argc, char* argv[])
 		// printf("%d %g\n", i, roots[i]);
 		if (roots[i+1]-roots[i] < 1e-6)
 			printf("Error: oops %d %g\n", i, roots[i]);
+	}
+#endif
+
+#define GRAPH_LISTING
+#ifdef GRAPH_LISTING
+	if (argc != 3)
+	{
+		fprintf(stderr, "Usage: %s <maxpfx> <maxcyclen>\n", argv[0]);
+		exit(1);
+	}
+
+	long maxpfx = atol(argv[1]);
+	int maxcyclen = atoi(argv[2]);
+
+	for (int cyclen =2; cyclen <=maxcyclen; cyclen++)
+	{
+		long maxcyc = (1<<cyclen) - 1UL;
+		for (long cyc = 1; cyc <maxcyc; cyc++)
+		{
+			for (long pfx = 1; pfx <maxpfx; pfx++)
+			{
+				if (false == is_prefix_ok(pfx, cyc, cyclen)) continue;
+				bool orbok = is_orbit_ok(pfx, cyc, cyclen);
+
+				double rat = orbit_to_double(pfx, cyc, cyclen);
+				double gold = event_gold(pfx, cyc, cyclen);
+				double good = 0.0;
+				if (orbok) good = gold;
+				double bad = 0.0;
+				if (false==orbok) bad = gold;
+				printf("%ld	%ld	%d	%g	%g	%g\n", pfx, cyc, cyclen, rat, good, bad);
+			}
+		}
 	}
 #endif
 }
