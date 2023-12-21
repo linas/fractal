@@ -221,7 +221,7 @@ int lesser(const void * px, const void * py)
 
 int main(int argc, char* argv[])
 {
-// #define MANUAL_EXPLORE
+#define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
 	if (argc != 4)
 	{
@@ -236,6 +236,7 @@ int main(int argc, char* argv[])
 	print_debug_info(pfx, cyc, cyclen);
 #endif
 
+#if BULK_LISTING
 	if (argc != 3)
 	{
 		fprintf(stderr, "Usage: %s <maxpfx> <maxcyclen>\n", argv[0]);
@@ -277,4 +278,5 @@ int main(int argc, char* argv[])
 		if (roots[i+1]-roots[i] < 1e-6)
 			printf("Error: oops %d %g\n", i, roots[i]);
 	}
+#endif
 }

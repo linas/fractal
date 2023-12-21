@@ -81,7 +81,7 @@ long get_left_idx(long idx)
 }
 
 // Given an index, return the matching tree-walk (of left-right moves)
-// to get to that index. Inverse of bitseq_to_idx
+// to get to that index. Inverse of bitseq_to_idx.
 long idx_to_bitseq(long idx, int* leng)
 {
 	*leng = 0;
@@ -225,7 +225,8 @@ int main(int argc, char* argv[])
 
 	long maxidx = 1UL << (len+2);
 	maxidx = 1UL << (len+6);
-	maxidx = 1UL << 33;
+	maxidx = 1UL << 34;
+	maxidx = 1UL << 30;
 	malloc_gold(maxidx);
 	printf("Max alloced idx = %ld\n", maxidx);
 
@@ -242,6 +243,7 @@ int main(int argc, char* argv[])
 
 	printf("---\n");
 	long orbits = rational_to_orbit_bitseq(p, q, len);
+	orbits |= 1UL;
 	print_bitseq(orbits, len, "orbit bits=(", ")\n");
 
 	// Orbits MUST start with a leading one-bit.
