@@ -58,4 +58,53 @@ unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
 	return bitseq;
 }
 
+/* ================================================================= */
+
+/* Implement the n'th golden polynomial. Return result from evaluating it.
+ *
+ * Polynomial is constructed from the bit string of (2n+1). Construction
+ * is the bit-shift construction: the lowest powers of x are given by
+ * right-most bits; highest powers are the left-most bits.
+ */
+double golden_poly(unsigned long n, double x)
+{
+	double acc = 0.0;
+	double xn = 1.0;
+	unsigned long bitstr = 2*n+1;
+	while (bitstr)
+	{
+		if (bitstr%2 == 1) acc += xn;
+		xn *= x;
+		bitstr >>= 1;
+	}
+// printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
+	return xn - acc;
+}
+
+/* Use midpoint bisection to find the single, unique
+ * positive real zero of the n'th golden polynomial.
+ */
+static double find_zero(unsigned long n, double lo, double hi)
+{
+	double mid = 0.5 * (lo+hi);
+	if (1.0e-15 > hi-lo) return mid;
+	double fmid = golden_poly(n, mid);
+	if (0.0 < fmid) return find_zero(n, lo, mid);
+	return find_zero(n, mid, hi);
+}
+
+/* Return the beta value corresponding to the n'th golden polynomial.
+ * Polynomial is constructed from the bit string of (2n+1).
+ */
+double golden_beta(unsigned long n)
+{
+	return find_zero(n, 1.0, 2.0);
+}
+
+/* Construction
+ * is the mid-point construction: repeated iteration of the midpoint
+ * 1/2 with this beta will (re-)generate the same bitstring, until
+ * returning to the midpoint. The bits are just whether the orbit went
+ * left or right of midpoint. The length of the orbit will be log_2(2n+1).
+ */
 /* --------------------------- END OF LIFE ------------------------- */

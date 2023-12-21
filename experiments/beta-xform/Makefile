@@ -89,7 +89,7 @@ irred-midpoint.o: irred-midpoint.c irred-gold.c
 irred-allowed.o: irred-allowed.c irred-gold.c
 irred-tacky.o: irred-tacky.c irred-gold.c
 irred-height.o: irred-height.c irred-gold.c
-irred-tree.o: irred-tree.c irred-gold.c
+irred-tree.o: irred-tree.c irred-gold.c selfie.c
 irred-seek.o: irred-seek.c irred-gold.c
 eventually.o: eventually.c irred-gold.c
 

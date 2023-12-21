@@ -2,7 +2,9 @@
  * irred-gold.c
  *
  * Given an integer index, return the corresponding "golden root" for
- * that matching beta polynomial.
+ * that matching beta polynomial. This uses a caching system that requires
+ * a declaration of large, potentially huge arrays, which doesn't really
+ * help with run-time, and interferes when large indexes are wanted.
  *
  * February 2018, October 2020, December 2023
  */
@@ -12,40 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-/* Return the beta value corresponding to the n'th golden polynomial.
- * It is constructed from the bit string of (2n+1). Construction
- * is the mid-point construction: repeated iteration of the midpoint
- * 1/2 with this beta will (re-)generate the same bitstring, until
- * returning to the midpoint. The bits are just whether the orbit went
- * left or right of midpoint. The length of the orbit will be log_2(2n+1).
- */
-double golden_poly(unsigned long n, double x)
-{
-	double acc = 0.0;
-	double xn = 1.0;
-	unsigned long bitstr = 2*n+1;
-	while (bitstr)
-	{
-		if (bitstr%2 == 1) acc += xn;
-		xn *= x;
-		bitstr >>= 1;
-	}
-// printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
-	return xn - acc;
-}
-
-/* Use midpoint bisection to find the single, unique
- * positive real zero of the n'th golden polynomial.
- */
-double find_zero(unsigned long n, double lo, double hi)
-{
-	double mid = 0.5 * (lo+hi);
-	if (1.0e-15 > hi-lo) return mid;
-	double fmid = golden_poly(n, mid);
-	if (0.0 < fmid) return find_zero(n, lo, mid);
-	return find_zero(n, mid, hi);
-}
+#include "selfie.c"
 
 /** Helper array, needed for finding gold midpoints. */
 static double* zero = NULL;
@@ -82,7 +51,7 @@ void fill_gold(long n)
 	for (int i=n; 0<i; i--)
 	{
 		if (zero[i] > -0.5) break;
-		zero[i] = find_zero(i, 1.0, 2.0);
+		zero[i] = golden_beta(i);
 	}
 }
 
