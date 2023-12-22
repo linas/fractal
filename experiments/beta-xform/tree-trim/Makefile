@@ -7,8 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: treefn treestep sampler julia julie \
-	moments midmap momenta
+all: treefn treestep julia julie
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -21,18 +20,10 @@ all: treefn treestep sampler julia julie \
 
 treefn.o: treefn.c
 treestep.o: treestep.C
-sampler.o: sampler.c
 julia.o: julia.c
 julie.o: julie.C
-moments.o: moments.c
-midmap.o: midmap.c
 
 treefn: treefn.o
 treestep: treestep.o  $(BRAT)
-sampler: sampler.o
 julia: julia.o
 julie: julie.o $(BRAT)
-moments: moments.o
-midmap: midmap.o
-
-momenta: momenta.o $(BRAT)

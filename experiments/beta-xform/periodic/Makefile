@@ -7,12 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: skew \
-	sampler \
-	nilpot \
-	moments \
-	irred zero tribo midmap \
-	momenta irred-viz irred-fraction \
+all: nilpot irred zero tribo midmap irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
 	irred-height irred-tree irred-seek eventually
 
@@ -25,10 +20,7 @@ all: skew \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-skew.o: skew.c
-sampler.o: sampler.c
 nilpot.o: nilpot.c
-moments.o: moments.c
 zero.o: zero.C
 tribo.o: tribo.c
 midmap.o: midmap.c
@@ -46,15 +38,11 @@ irred-tree.o: irred-tree.c irred-gold.c selfie.c
 irred-seek.o: irred-seek.c irred-gold.c
 eventually.o: eventually.c irred-gold.c
 
-skew: skew.o
-sampler: sampler.o
 nilpot: nilpot.o
-moments: moments.o
 irred: irred.o
 zero: zero.o $(BRAT)
 tribo: tribo.o
 midmap: midmap.o
 
-momenta: momenta.o $(BRAT)
 irred-gf: irred-gf.o $(BRAT)
 irred-disk: irred-disk.o $(BRAT)

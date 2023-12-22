@@ -12,12 +12,11 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/gcc/x86_64-linux-gnu/12/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
-all: sampler psi \
-	matrix psieigen psiblas psiunitary \
-	bergman psifp midpo psidist psidelt psileft moments psimom \
-	psivec psimid psimult midmap fiter expan \
+all: sampler psi matrix psieigen psiblas psiunitary \
+	bergman psifp midpo psidist psidelt psileft psimom \
+	psivec psimid psimult fiter expan \
 	orbit fpcoef almost deguess subdiag \
-	alldisk betadisk momenta normie
+	alldisk betadisk normie
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -40,12 +39,10 @@ midpo.o: midpo.c psi.c psibig.c
 psidist.o: psidist.c psi.c psibig.c
 psidelt.o: psidelt.C psi.c psibig.c
 psileft.o: psileft.c psi.c psibig.c
-moments.o: moments.c
 psimom.o: psimom.c psileft.c psi.c psibig.c
 psivec.o: psivec.c psileft.c psi.c psibig.c
 psimid.o: psimid.c psi.c psibig.c
 psimult.o: psimult.c psi.c psibig.c
-midmap.o: midmap.c
 fiter.o: fiter.c psi.c
 expan.o: expan.c psi.c psibig.c
 orbit.o: orbit.c psi.c psibig.c
@@ -69,12 +66,10 @@ psidist: psidist.o
 psidist: psidist.o
 psidelt: psidelt.o $(BRAT)
 psileft: psileft.o
-moments: moments.o
 psimom: psimom.o
 psivec: psivec.o
 psimid: psimid.o
 psimult: psimult.o
-midmap: midmap.o
 fiter: fiter.o
 expan: expan.o
 orbit: orbit.o
@@ -86,4 +81,3 @@ almost: almost.o
 alldisk: alldisk.o $(BRAT)
 betadisk: betadisk.o $(BRAT)
 subdiag: subdiag.o $(BRAT)
-momenta: momenta.o $(BRAT)

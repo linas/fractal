@@ -7,11 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: sampler \
-	moments \
-	midmap \
-	poincare \
-	momenta 
+all: poincare
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -22,15 +18,6 @@ all: sampler \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-sampler.o: sampler.c
-moments.o: moments.c
-midmap.o: midmap.c
-
 poincare.o: poincare.C
 
-sampler: sampler.o
-moments: moments.o
-midmap: midmap.o
-
 poincare: poincare.o $(BRAT)
-momenta: momenta.o $(BRAT)
