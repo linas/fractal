@@ -147,7 +147,11 @@ unsigned long beta_to_dyadic(double beta)
  * the root of the golden_beta polynomial, when iterated by mid-point
  * iteration, reproduces the a dyadic bitstring, that, when bit-reversed,
  * gives back the index.
+ *
  * The length of the orbit will be log_2(2n+1).
+ *
+ * This is returns exactly the same values as the theta() function,
+ * except that it does not use a recursive algo to do it's work.
  */
 bool valid_gold_index(unsigned long idx)
 {

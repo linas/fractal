@@ -13648,13 +13648,29 @@ The polynomial
 \end_layout
 
 \begin_layout Standard
-The indexing has the property that 
+The indexing has the property that, whenever 
+\begin_inset Formula $\theta_{n}\left(r_{n}\right)=1$
+\end_inset
+
+, the integer 
 \begin_inset Formula $2n+1$
 \end_inset
 
-, taken as binary, encodes both the coefficients of the polynomial, and
- also the orbit of the midpoint.
- The degree 
+, expressed as a binary bitstring, encodes both the coefficients of the
+ polynomial, and also the orbit of the midpoint.
+ This can be taken as an alternate, non-recursive defintion of 
+\begin_inset Formula $\theta_{n}$
+\end_inset
+
+: it is one if and only if the orbit of 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ encodes the bitsequence of 2n+1.
+\end_layout
+
+\begin_layout Standard
+The degree 
 \begin_inset Formula $\nu$
 \end_inset
 
@@ -13726,7 +13742,9 @@ noprefix "false"
 status collapsed
 
 \begin_layout Plain Layout
-Generated with irred.c, verified in irred-midpoint.c
+Generated with irred.c, verified in irred-midpoint.c.
+ Unit tests are in irred-fraction.c and the non-recursive definition of theta
+ is in selfie.c
 \end_layout
 
 \end_inset
