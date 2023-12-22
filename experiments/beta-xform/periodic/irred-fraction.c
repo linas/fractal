@@ -236,6 +236,20 @@ long get_bracket_right(long n)
 	return nright;
 }
 
+long cheap_bracket_right(long n)
+{
+	if (0 == n%2)
+	{
+		long rig = n >> 1;
+		if (valid_gold_index(rig)) return rig;
+		while (rig%2 == 0) rig >>= 1;
+		return cheap_bracket_right(rig);
+	}
+	long rig = (n-1)/2;
+	if (0 == n%2 && valid_gold_index(rig)) return rig;
+	return cheap_bracket_right(rig);
+}
+
 // Given polynomial index n, return the index defining the left
 // side of the bracket containing this index.
 long get_bracket_left(long n)
@@ -303,6 +317,9 @@ bool validate_bracket(long n)
 	if (gright <= gold)
 		{ printf("Error: bad right bracket at %ld: nright=%ld gold=%g gright=%g\n",
 			n, nright, gold, gright); ok = false; }
+
+	long cright = cheap_bracket_right(n);
+	if (cright != nright) printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx for %ld got %ld want %ld\n",n, cright, nright);
 #endif
 
 	// Validate conversion to and from Baire.
