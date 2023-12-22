@@ -177,9 +177,9 @@ unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
  * and the cycle length for the infinite ultimately-periodic dyadic
  * string that would result from the dyadic expansion of p/q.
  */
-void get_cycle (unsigned long p, unsigned long q,
-                unsigned long *pfxp, unsigned long *cycp,
-                int *cyclenp)
+void get_event_cycle (unsigned long p, unsigned long q,
+                      unsigned long *pfxp, unsigned long *cycp,
+                      int *cyclenp)
 {
 	unsigned long pfx = p;
 	while (pfx%2 == 0) pfx >>= 1;
@@ -188,6 +188,88 @@ void get_cycle (unsigned long p, unsigned long q,
 	*pfxp = pfx;
 	*cycp = cyc;
 	*cyclenp = cyclen;
+}
+
+/* Max allowed coeficients for the eventually-periodic array. */
+#define MAX_EVENT_COF 120
+
+/* Convert (prefix,cyclic) coding pair to a list coefficients.
+ * The bitseq for pfx must always start with one, so it's length is
+ * unambiguous. The cyclic part is not bound by this constraint, so
+ * it's length is explicitly specified.
+ */
+void get_event_coeffs(short *cof, long pfx, long cyc, int cyclen)
+{
+	int pfxlen = bitlen(pfx);
+	for (int i=0; i< pfxlen; i++)
+		cof[i] = pfx >> (pfxlen-i-1) & 1UL;
+
+	for (int i=0; i< cyclen; i++)
+		cof[i+pfxlen] = cyc >> (cyclen-i-1) & 1UL;
+
+	cof[pfxlen+cyclen] = -666; // end of string marker;
+
+	cof[cyclen-1] += 1;
+	for (int i=0; i< pfxlen; i++)
+		cof[cyclen+i] -= pfx >> (pfxlen-i-1) & 1UL;
+}
+
+void print_event_coeffs(short* cof)
+{
+	for (int i=0; -100 < cof[i]; i++)
+	{
+		printf("%d ", cof[i]);
+	}
+	printf("\n");
+}
+
+/*
+ * Evaluate the eventually-golden polynomial at point x.
+ * Polynomial coefficients must be provided in cof.
+ */
+double event_poly(short* cof, double x)
+{
+	int clen = 0;
+	for (int i=0; -100 < cof[i]; i++) clen++;
+
+	double f = 0.0;
+	double xn = 1.0;
+	for (int i=0; i<clen; i++)
+	{
+		f += cof[clen-i-1] * xn;
+		xn *= x;
+	}
+	f = xn - f;
+// printf("duuude x=%20.16g beta=\n", x, f);
+	return f;
+}
+
+/* Use midpoint bisection to find the single, unique
+ * positive real zero of the polynomial.
+ */
+static double find_event_zero(short* cof, double lo, double hi)
+{
+	double mid = 0.5 * (lo+hi);
+	if (1.0e-15 > hi-lo) return mid;
+	double fmid = event_poly(cof, mid);
+	if (0.0 < fmid) return find_event_zero(cof, lo, mid);
+	return find_event_zero(cof, mid, hi);
+}
+
+/* Utility wrapper for above. Get the polynomial zero for the
+ * indicated rational p/q
+ */
+double event_gold(unsigned long p, unsigned long q)
+{
+	unsigned long pfx;
+	unsigned long cyc;
+	int cyclen;
+
+	get_event_cycle (p, q, &pfx, &cyc, &cyclen);
+	short cof[MAX_EVENT_COF];
+	get_event_coeffs(cof, pfx, cyc, cyclen);
+	double gold = find_event_zero(cof, 1.0, 2.0);
+	return gold;
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
