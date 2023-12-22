@@ -12,9 +12,9 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/gcc/x86_64-linux-gnu/12/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
-all: remap reigen skew fp-diagram \
-	carry-sum rexfer treefn treestep sampler julia julie psi \
-	matrix psieigen psiblas nilpot bitshow complex psiunitary \
+all: remap skew \
+	sampler psi \
+	matrix psieigen psiblas nilpot psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult zero tribo midmap fiter expan \
 	orbit fpcoef poincare almost deguess subdiag \
@@ -30,23 +30,13 @@ all: remap reigen skew fp-diagram \
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
 remap.o: remap.c
-reigen.o: reigen.c
 skew.o: skew.c
-fp-diagram.o: fp-diagram.C
-carry-sum.o: carry-sum.C
-rexfer.o: rexfer.c
-treefn.o: treefn.c
-treestep.o: treestep.C
 sampler.o: sampler.c
-julia.o: julia.c
-julie.o: julie.C
 psi.o: psi.c
 matrix.o: matrix.C psi.c
 psieigen.o: psieigen.c psi.c psibig.c
 psiblas.o: psiblas.c psi.c psibig.c
 nilpot.o: nilpot.c
-bitshow.o: bitshow.c $(FUNCDIR)/bitops.h
-complex.o: complex.c
 psiunitary.o: psiunitary.c psi.c psibig.c psifp.c
 bergman.o: bergman.C psi.c psibig.c psifp.c
 psifp.o: psifp.c psi.c psibig.c
@@ -74,23 +64,13 @@ subdiag.o: subdiag.C psi.c psibig.c
 normie.o: normie.C psibig.c
 
 remap: remap.o
-reigen: reigen.o
 skew: skew.o
-fp-diagram: fp-diagram.o $(BRAT)
-carry-sum: carry-sum.o $(BRAT)
-rexfer: rexfer.o
-treefn: treefn.o
-treestep: treestep.o  $(BRAT)
 sampler: sampler.o
-julia: julia.o
-julie: julie.o $(BRAT)
 psi: psi.o
 matrix: matrix.o $(BRAT)
 psieigen: psieigen.o -lgsl -lgslcblas
 psiblas: psiblas.o $(LAPACK)
 nilpot: nilpot.o
-bitshow: bitshow.o $(FUNC)
-complex: complex.o
 psiunitary: psiunitary.o -lgsl -lgslcblas
 bergman: bergman.o -lgsl -lgslcblas # $(BRAT)
 psifp: psifp.o -lgsl -lgslcblas

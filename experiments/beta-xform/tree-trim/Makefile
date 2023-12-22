@@ -7,10 +7,13 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: remap reigen skew fp-diagram \
-	rexfer sampler \
-	nilpot complex moments zero tribo midmap \
-	fpcoef poincare beta witt momenta 
+all: remap skew \
+	treefn treestep sampler julia julie \
+	nilpot \
+	moments \
+	zero tribo midmap \
+	fpcoef poincare \
+	momenta
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -22,30 +25,28 @@ all: remap reigen skew fp-diagram \
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
 remap.o: remap.c
-reigen.o: reigen.c
 skew.o: skew.c
-fp-diagram.o: fp-diagram.C
-rexfer.o: rexfer.c
+treefn.o: treefn.c
+treestep.o: treestep.C
 sampler.o: sampler.c
+julia.o: julia.c
+julie.o: julie.C
 nilpot.o: nilpot.c
-complex.o: complex.c
 moments.o: moments.c
 zero.o: zero.C
 tribo.o: tribo.c
 midmap.o: midmap.c
 
 poincare.o: poincare.C
-beta.o: beta.c
-witt.o: witt.c
 
 remap: remap.o
-reigen: reigen.o
 skew: skew.o
-fp-diagram: fp-diagram.o $(BRAT)
-rexfer: rexfer.o
+treefn: treefn.o
+treestep: treestep.o  $(BRAT)
 sampler: sampler.o
+julia: julia.o
+julie: julie.o $(BRAT)
 nilpot: nilpot.o
-complex: complex.o
 moments: moments.o
 zero: zero.o $(BRAT)
 tribo: tribo.o
@@ -54,6 +55,4 @@ fpcoef: fpcoef.o
 	$(CC) -o $@ $^ -lgmp -lgomp -lm
 
 poincare: poincare.o $(BRAT)
-beta: beta.o
-witt: witt.o
 momenta: momenta.o $(BRAT)

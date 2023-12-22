@@ -8,7 +8,7 @@ FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
 all: remap skew \
-	treefn treestep sampler julia julie \
+	sampler \
 	nilpot \
 	moments \
 	irred zero tribo midmap \
@@ -28,11 +28,7 @@ all: remap skew \
 
 remap.o: remap.c
 skew.o: skew.c
-treefn.o: treefn.c
-treestep.o: treestep.C
 sampler.o: sampler.c
-julia.o: julia.c
-julie.o: julie.C
 nilpot.o: nilpot.c
 moments.o: moments.c
 zero.o: zero.C
@@ -55,11 +51,7 @@ eventually.o: eventually.c irred-gold.c
 
 remap: remap.o
 skew: skew.o
-treefn: treefn.o
-treestep: treestep.o  $(BRAT)
 sampler: sampler.o
-julia: julia.o
-julie: julie.o $(BRAT)
 nilpot: nilpot.o
 moments: moments.o
 irred: irred.o
