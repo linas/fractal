@@ -237,7 +237,7 @@ void get_event_cycle (unsigned long p, unsigned long q,
 	unsigned long red = a * hi / br;
 	// printf("reduce = %ld\n", red);
 
-	unsigned long cyc = 1UL;
+	unsigned long cyc = 0;
 	while (((red-cyc) % hi != 0) && cyc < hi) cyc++;
 
 	// printf("Cycle = cyc = %ld\n", cyc);
