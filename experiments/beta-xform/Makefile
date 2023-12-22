@@ -1,20 +1,10 @@
 
-CC = cc -Wall -g -O2 $(INCLUDES)
-
-GENDIR = ../../generate
-BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
-
-FUNCDIR = ../../tools/inc
-FUNC=../../tools/lib/libfunc.a
-
 all:
+	cd bifur; make
+	cd compress; make
+	cd haar-wavelet; make
+	cd hessenberg; make
+	cd invariant; make
+	cd mode-lock; make
 	cd periodic; make
-
-.C.o:
-	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
-
-.c.o:
-	$(CC) -c $< -I $(FUNCDIR)
-
-.o:
-	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
+	cd tree-trim; make

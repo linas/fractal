@@ -1,12 +1,6 @@
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-GENDIR = ../../generate
-BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
-
-FUNCDIR = ../../tools/inc
-FUNC=../../tools/lib/libfunc.a
-
 all: skew
 
 .C.o:

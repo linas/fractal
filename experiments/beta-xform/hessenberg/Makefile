@@ -1,11 +1,11 @@
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-GENDIR = ../../generate
+GENDIR = ../../../generate
 BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 
-FUNCDIR = ../../tools/inc
-FUNC=../../tools/lib/libfunc.a
+FUNCDIR = ../../../tools/inc
+FUNC=../../../tools/lib/libfunc.a
 LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/x86_64-linux-gnu/liblapack.a \
        /usr/lib/x86_64-linux-gnu/blas/libblas.a \

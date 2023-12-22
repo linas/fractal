@@ -1,13 +1,13 @@
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-GENDIR = ../../generate
+GENDIR = ../../../generate
 BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 
-FUNCDIR = ../../tools/inc
-FUNC=../../tools/lib/libfunc.a
+FUNCDIR = ../../../tools/inc
+FUNC=../../../tools/lib/libfunc.a
 
-all: remap skew
+all: remap
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -19,7 +19,5 @@ all: remap skew
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
 remap.o: remap.c
-skew.o: skew.c
 
 remap: remap.o
-skew: skew.o

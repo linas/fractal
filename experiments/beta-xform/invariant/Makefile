@@ -1,11 +1,11 @@
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-GENDIR = ../../generate
+GENDIR = ../../../generate
 BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 
-FUNCDIR = ../../tools/inc
-FUNC=../../tools/lib/libfunc.a
+FUNCDIR = ../../../tools/inc
+FUNC=../../../tools/lib/libfunc.a
 
 all: reigen fp-diagram rexfer complex moments beta witt
 
