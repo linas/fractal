@@ -268,6 +268,12 @@ int main(int argc, char* argv[])
 			// Work only with reduced rationals
 			if (1 < gcd(num, deno)) continue;
 
+			// Don't look at those with zero prefix length
+			unsigned long pfx, cyc;
+			int clen;
+			get_event_cycle(num, deno, &pfx, &cyc, &clen);
+			if (0 == pfx) continue;
+
 			if (false == is_event_ok(num, deno))
 			{
 				printf("fail at p/q = %ld/%ld\n", num, deno);
