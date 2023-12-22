@@ -204,7 +204,10 @@ void print_debug_info(unsigned long p, unsigned long q)
 
 	print_dyadic(dyad, 60, "midpoint orbi= ", "\n");
 	print_dyadic(drat, 60, "rational dyad= ", "\n");
-	printf("First miscompare at %d\n", badbit);
+	if (-1 < badbit)
+		printf("First miscompare at %d\n", badbit);
+	else
+		printf("Perfect compare!\n");
 
 // #define ONE_SIXTH
 #ifdef ONE_SIXTH
@@ -231,7 +234,7 @@ int lesser(const void * px, const void * py)
 
 int main(int argc, char* argv[])
 {
-#define MANUAL_EXPLORE
+// #define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
 	if (argc != 3)
 	{
@@ -245,58 +248,38 @@ int main(int argc, char* argv[])
 	print_debug_info(p, q);
 #endif
 
-// #define BULK_LISTING
+#define BULK_LISTING
 #ifdef BULK_LISTING
-	if (argc != 3)
+	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s <maxpfx> <maxcyclen>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <maxdeno>\n", argv[0]);
 		exit(1);
 	}
 
-	long maxpfx = atol(argv[1]);
-	int maxcyclen = atoi(argv[2]);
-
-#ifdef FAILED_HYPOTHESIS
-	int maxord = bitlen(maxpfx) + maxcyclen;
-	long maxidx = 1UL << maxord;
-	malloc_gold(maxidx);
-#endif
+	long maxdeno = atol(argv[1]);
 
 #define NROOTS 1000
 	double roots[NROOTS];
 	int totfnd = 0;
-	for (int cyclen =2; cyclen <=maxcyclen; cyclen++)
+	for (long deno = 2; deno <= maxdeno; deno++)
 	{
-		long maxcyc = (1<<cyclen) - 1UL;
-		for (long cyc = 1; cyc <maxcyc; cyc++)
+		for (long num = 1; num <deno; num++)
 		{
-			for (long pfx = 1; pfx <maxpfx; pfx++)
+			// Work only with reduced rationals
+			if (1 < gcd(num, deno)) continue;
+
+			if (false == is_event_ok(num, deno))
 			{
-				if (false == is_prefix_ok(pfx, cyc, cyclen)) continue;
-
-#ifdef FAILED_HYPOTHESIS
-				// This did not work. Hope was that we could deduce stuff from
-				// the finite strings, but no such luck.
-				bool orbok = is_orbit_ok(pfx, cyc, cyclen);
-				if (false == is_valid_finite(pfx, cyc, cyclen))
-				{
-					if (orbok) printf ("Yoooooooooo bad finite but OK orbit\n");
-				}
-				else
-				{
-					if (!orbok) printf ("Gooodddd finite but bad orbit!\n");
-				}
-#endif
-				if (false == is_orbit_ok(pfx, cyc, cyclen)) continue;
-
-				double gold = event_gold(pfx, cyc, cyclen);
-				printf("Found (%ld, %ld/%d) = %20.16g\n", pfx, cyc, cyclen, gold);
-				roots[totfnd] = gold;
-				totfnd ++;
+				printf("fail at p/q = %ld/%ld\n", num, deno);
+				print_debug_info(num, deno);
+				continue;
 			}
-			printf("------\n");
+
+			double gold = event_gold(num, deno);
+			roots[totfnd] = gold;
+			totfnd ++;
 		}
-		printf("=======\n");
+		printf("------ done with %ld\n", deno);
 	}
 	printf("found %d\n", totfnd);
 
