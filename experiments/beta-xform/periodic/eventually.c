@@ -275,17 +275,27 @@ int main(int argc, char* argv[])
 			get_event_cycle(num, deno, &pfx, &cyc, &clen);
 			if (0 == pfx) continue;
 
-			// Hypothesis
-			long red = deno;
-			while (red%2 == 0) red >>= 1;
+// #define TEST_HYPOTHESIS
+#ifdef TEST_HYPOTHESIS
+			// Hypothesis testing
+			bool hypo = (pfx%2 == 1);  // False, see 7/12 and 13/20
+			// bool hypo = (pfx != 2);    // true, never happens
+			// int ell = bitlen(pfx);
+			// bool hypo = (1==ell) || (pfx != (1UL<<(ell-1)));   // true.
+			// bool hypo = (0 == cyc) || (pfx != 5);  // False; see 9/28
+
 			bool evok = is_event_ok(num, deno);
-			if ((red != ((1UL<<clen) - 1)) && evok)
+			if (!hypo && evok)
 			{
-				printf("reject valid  at  p/q = %ld/%ld\n", num, deno);
+				printf(">>>> Reject valid  at  p/q = %ld/%ld\n", num, deno);
 				print_debug_info(num, deno);
 			}
-			if ((red == ((1UL<<clen) - 1)) && !evok)
-				printf("acceptt invalid  at  p/q = %ld/%ld\n", num, deno);
+			if (hypo && !evok)
+			{
+				// printf(">>>> Accept invalid  at  p/q = %ld/%ld\n", num, deno);
+				// print_debug_info(num, deno);
+			}
+#endif
 
 			if (false == is_event_ok(num, deno))
 			{
