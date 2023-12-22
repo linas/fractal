@@ -12,11 +12,10 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/gcc/x86_64-linux-gnu/12/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
-all: skew \
-	sampler psi \
+all: sampler psi \
 	matrix psieigen psiblas psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
-	psivec psimid psimult zero tribo midmap fiter expan \
+	psivec psimid psimult midmap fiter expan \
 	orbit fpcoef almost deguess subdiag \
 	alldisk betadisk momenta normie
 
@@ -29,7 +28,6 @@ all: skew \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-skew.o: skew.c
 sampler.o: sampler.c
 psi.o: psi.c
 matrix.o: matrix.C psi.c
@@ -47,8 +45,6 @@ psimom.o: psimom.c psileft.c psi.c psibig.c
 psivec.o: psivec.c psileft.c psi.c psibig.c
 psimid.o: psimid.c psi.c psibig.c
 psimult.o: psimult.c psi.c psibig.c
-zero.o: zero.C
-tribo.o: tribo.c
 midmap.o: midmap.c
 fiter.o: fiter.c psi.c
 expan.o: expan.c psi.c psibig.c
@@ -60,7 +56,6 @@ betadisk.o: betadisk.C psibig.c
 subdiag.o: subdiag.C psi.c psibig.c
 normie.o: normie.C psibig.c
 
-skew: skew.o
 sampler: sampler.o
 psi: psi.o
 matrix: matrix.o $(BRAT)
@@ -79,8 +74,6 @@ psimom: psimom.o
 psivec: psivec.o
 psimid: psimid.o
 psimult: psimult.o
-zero: zero.o $(BRAT)
-tribo: tribo.o
 midmap: midmap.o
 fiter: fiter.o
 expan: expan.o

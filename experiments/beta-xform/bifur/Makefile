@@ -9,7 +9,7 @@ FUNC=../../tools/lib/libfunc.a
 
 all: bernie bigbern unbernie skew fp-diagram \
 	carry-sum rexfer sampler \
-	bitshow complex moments zero tribo midmap \
+	bitshow complex moments midmap \
 	momenta
 
 .C.o:
@@ -32,8 +32,6 @@ sampler.o: sampler.c
 bitshow.o: bitshow.c $(FUNCDIR)/bitops.h
 complex.o: complex.c
 moments.o: moments.c
-zero.o: zero.C
-tribo.o: tribo.c
 midmap.o: midmap.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
@@ -47,8 +45,6 @@ sampler: sampler.o
 bitshow: bitshow.o $(FUNC)
 complex: complex.o
 moments: moments.o
-zero: zero.o $(BRAT)
-tribo: tribo.o
 midmap: midmap.o
 
 momenta: momenta.o $(BRAT)

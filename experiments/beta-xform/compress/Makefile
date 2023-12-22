@@ -10,7 +10,7 @@ FUNC=../../tools/lib/libfunc.a
 all: remap skew \
 	sampler \
 	moments \
-	zero tribo midmap \
+	midmap \
 	momenta
 
 .C.o:
@@ -26,16 +26,12 @@ remap.o: remap.c
 skew.o: skew.c
 sampler.o: sampler.c
 moments.o: moments.c
-zero.o: zero.C
-tribo.o: tribo.c
 midmap.o: midmap.c
 
 remap: remap.o
 skew: skew.o
 sampler: sampler.o
 moments: moments.o
-zero: zero.o $(BRAT)
-tribo: tribo.o
 midmap: midmap.o
 
 momenta: momenta.o $(BRAT)
