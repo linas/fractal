@@ -182,7 +182,7 @@ void get_cycle (unsigned long p, unsigned long q,
                 int *cyclenp)
 {
 	unsigned long pfx = p;
-	while (pfx%2 = 0) pfx >>= 1;
+	while (pfx%2 == 0) pfx >>= 1;
 	int cyclen = bitlen(q);
 	unsigned long cyc = (1UL << cyclen) - q;
 	*pfxp = pfx;

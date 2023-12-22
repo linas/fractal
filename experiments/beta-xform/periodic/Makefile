@@ -1,11 +1,11 @@
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-GENDIR = ../../generate
+GENDIR = ../../../generate
 BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 
-FUNCDIR = ../../tools/inc
-FUNC=../../tools/lib/libfunc.a
+FUNCDIR = ../../../tools/inc
+FUNC=../../../tools/lib/libfunc.a
 
 all: nilpot irred zero tribo midmap irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
