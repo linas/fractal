@@ -281,7 +281,7 @@ double event_gold(unsigned long p, unsigned long q)
 int compare_dyadics(unsigned long dya, unsigned long dyb)
 {
 	for (int i=0; i<WORDLEN; i++)
-		if (((dya>>1) & 1UL) != ((dyb>>1) & 1UL))
+		if (((dya>>i) & 1UL) != ((dyb>>i) & 1UL))
 			return i;
 
 	return -1;

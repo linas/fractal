@@ -171,15 +171,17 @@ double finite_to_double(long pfx, long cyc, int cyclen)
 
 void print_debug_info(unsigned long p, unsigned long q)
 {
-	bool pok = is_event_ok(p, q);
-	if (false == pok)
-		printf("Error: prefix is reducible\n");
-
 	unsigned long pfx;
 	unsigned long cyc;
 	int cyclen;
 	get_event_cycle (p, q, &pfx, &cyc, &cyclen);
 	printf("Prefix = %ld cycle=%ld len=%d\n", pfx, cyc, cyclen);
+
+	bool goodpf = is_prefix_ok(pfx, cyc, cyclen);
+	if (goodpf)
+		printf("Prefix looks good\n");
+	else
+		printf("Error: prefix is reducible!!!\n");
 
 	short cof[MAX_EVENT_COF];
 	get_event_coeffs(cof, pfx, cyc, cyclen);
@@ -187,6 +189,12 @@ void print_debug_info(unsigned long p, unsigned long q)
 
 	double gold = find_event_zero(cof, 1.0, 2.0);
 	printf("Root %20.16g\n", gold);
+
+	bool pok = is_event_ok(p, q);
+	if (pok)
+		printf("Seems to be a valid polynomial\n");
+	else
+		printf("Error: Rejected polynomial\n");
 
 	unsigned long dyad = beta_to_dyadic(gold);
 	unsigned long drat = rational_to_dyadic(p, q, WORDLEN);
