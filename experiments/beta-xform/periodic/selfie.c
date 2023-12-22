@@ -208,14 +208,16 @@ printf("enter %ld %ld\n", p,q);
 	unsigned long gcf = gcd(p+q, 2*q);
 	unsigned long a = (p+q) / gcf;
 	unsigned long b = (2*q) / gcf;
+printf("reduced %ld %ld\n", a,b);
 
 	int ell = 0;
 	unsigned long br = b;
 	while (br%2 == 0) { br >>= 1; ell++; }
 printf(" ell %d\n", ell);
+printf(" bredu %ld\n", br);
 
 	int en = 1;
-	while ((((1UL<<en) - 1) % br != 0) && en < WORDLEN) en++;
+	while ((((1UL<<en) - 1UL) % br != 0) && en < WORDLEN) en++;
 
 	if (WORDLEN == en)
 	{
@@ -227,17 +229,22 @@ printf(" cyclen %d\n", en);
 
 	unsigned long hi = (1UL<<en) - 1UL;
 printf(" hi %ld\n", hi);
-	unsigned long are = hi / br;
-	unsigned long mod = are * a;
-printf(" mod %ld\n", mod);
+
+	unsigned long red = a * hi / br;
+printf(" red %ld\n", red);
 
 	unsigned long cyc = 1UL;
-	while (((hi + cyc) % mod != 0) && cyc <= hi) cyc++;
-	if (hi < cyc) cyc -= hi;
+	while (((red-cyc) % hi != 0) && cyc < hi) cyc++;
 
 printf(" cyc %ld\n", cyc);
-	unsigned long pfx = (hi / br) * ((hi+cyc) / a);
+	unsigned long pfx = (red-cyc) / hi;
 
+	if ((1UL<<ell) <= pfx)
+	{
+		printf("Error: Internal error of some kind\n");
+		*pfxp = 0; *cycp = 0; *cyclenp = 0;
+		return;
+	}
 printf(" pfx %ld\n", pfx);
 	*pfxp = pfx;
 	*cycp = cyc;

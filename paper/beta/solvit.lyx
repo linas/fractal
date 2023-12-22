@@ -25956,10 +25956,10 @@ Task: Given
  This can be done as follows:
 \begin_inset Formula 
 \begin{align*}
-\frac{p+q}{2q} & =\frac{m}{2^{L}}\,\left(1+\frac{c}{2^{N}}+\frac{c}{2^{2N}}+\frac{c}{2^{3N}}+\cdots\right)\\
- & \frac{m}{2^{L}}\,\left(1+\frac{c}{2^{N}}\,\left(1+\frac{1}{2^{N}}+\frac{1}{2^{2N}}+\cdots\right)\right)\\
- & \frac{m}{2^{L}}\,\left(1+\frac{c}{2^{N}-1}\right)\\
- & =\frac{m}{2^{L}}\left(\frac{2^{N}-1+c}{2^{N}-1}\right)
+\frac{p+q}{2q} & =\frac{m}{2^{L}}+\frac{1}{2^{L}}\left(\frac{c}{2^{N}}+\frac{c}{2^{2N}}+\frac{c}{2^{3N}}+\cdots\right)\\
+ & \frac{1}{2^{L}}\left(m+\frac{c}{2^{N}}\left(1+\frac{1}{2^{N}}+\frac{1}{2^{2N}}+\cdots\right)\right)\\
+ & \frac{1}{2^{L}}\left(m+\frac{c}{2^{N}-1}\right)\\
+ & \frac{1}{2^{L}}\cdot\frac{m\left(2^{N}-1\right)+c}{2^{N}-1}
 \end{align*}
 
 \end_inset
@@ -26006,15 +26006,16 @@ Solve
 
 \begin_layout Enumerate
 Define 
-\begin_inset Formula $r=\left(2^{N}-1\right)/b^{\prime}$
+\begin_inset Formula $r=\left(2^{N}-1\right)a/b^{\prime}$
 \end_inset
 
- .
+.
+ 
 \end_layout
 
 \begin_layout Enumerate
 Solve 
-\begin_inset Formula $\left(2^{N}-1+c\right)\mod ra=0$
+\begin_inset Formula $\left(r-c\right)\mod\left(2^{N}-1\right)=0$
 \end_inset
 
  for the smallest 
@@ -26030,7 +26031,7 @@ Solve
 
 \begin_layout Enumerate
 Define 
-\begin_inset Formula $m=r\left(2^{N}-1+c\right)/a$
+\begin_inset Formula $m=\left(r-c\right)/\left(2^{N}-1\right)$
 \end_inset
 
 .
@@ -26046,6 +26047,14 @@ Verify that
 
 \begin_layout Standard
 This provides all four integers that define the cyclic expansion.
+\end_layout
+
+\begin_layout Standard
+XXX are valids always those with 
+\begin_inset Formula $b^{\prime}=2^{N}-1$
+\end_inset
+
+ ????
 \end_layout
 
 \begin_layout Subsection
