@@ -350,7 +350,7 @@ bool is_event_ok(unsigned long p, unsigned long q)
 {
 	double gold = event_gold(p, q);
 	unsigned long dyad = beta_to_dyadic(gold);
-	unsigned long drat = rational_to_dyadic(p, q, WORDLEN);
+	unsigned long drat = rational_to_dyadic(p+q, 2*q, WORDLEN);
 
 	int badbit = compare_dyadics(dyad, drat);
 

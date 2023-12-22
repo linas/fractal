@@ -204,6 +204,7 @@ void print_debug_info(unsigned long p, unsigned long q)
 
 	print_dyadic(dyad, 60, "midpoint orbi= ", "\n");
 	print_dyadic(drat, 60, "rational dyad= ", "\n");
+	printf("First miscompare at %d\n", badbit);
 
 // #define ONE_SIXTH
 #ifdef ONE_SIXTH
