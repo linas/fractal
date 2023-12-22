@@ -37,7 +37,7 @@ void print_dyadic(unsigned long bitseq, int len, char* pre, char* suf)
 		printf("%ld", bitseq & 1UL);
 		bitseq >>= 1;
 	}
-	printf (" \\\\%d", len);
+	printf (" \\\\ %d", len);
 	printf("%s", suf);
 }
 
@@ -131,7 +131,12 @@ unsigned long beta_to_dyadic(double beta)
 		if (0.5 <= mid)
 		{
 			bitseq |= 1UL << i;
-			mid -= 0.5;
+
+#define MIDEPSI 1.0e-15
+			// Apply rounding pressure, so as to favor finite iterates
+			// over periodic ones. MIDEPSI=1e-15 seems to work at low
+			// orders e.g. beta from index=6.
+			mid -= 0.5-MIDEPSI;
 		}
 		mid *= beta;
 	}
@@ -148,12 +153,11 @@ bool valid_gold_index(unsigned long idx)
 {
 	double gold = golden_beta(idx);
 	unsigned long dyad = beta_to_dyadic(gold);
-	printf("Index=%ld gold=%20.16g\n", idx, gold);
-	print_dyadic(dyad, 40, "Dyadic orbit=", "\n");
+	// printf("Index=%ld gold=%20.16g\n", idx, gold);
+	// print_dyadic(dyad, 40, "Dyadic orbit=", "\n");
 
 	unsigned long tno = 2*idx+1;
 	int len = bitlen(tno);
-printf("duuude len=%d\n", len);
 	for (int i=0; i< len; i++)
 	{
 		if ((tno &1UL) != ((dyad>>(len-i-1)) &1UL)) return false;

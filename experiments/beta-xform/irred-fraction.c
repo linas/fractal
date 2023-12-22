@@ -551,7 +551,7 @@ int main(int argc, char* argv[])
 	print_debug_info(seqno);
 #endif
 
-#define INDEX_EXPLORER
+// #define INDEX_EXPLORER
 #ifdef INDEX_EXPLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
@@ -586,7 +586,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define VALIDATE_INDEX
+#define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.
@@ -598,10 +598,17 @@ int main(int argc, char* argv[])
 	long nmax = 1UL << nord;
 	malloc_gold(nmax);
 
+	printf("Testing validity to order %d index %ld\n", nord, nmax);
+
 	int cfrac[SZ];
 	for (long n=1; n<nmax; n++)
 	{
 		double beta = find_gold(n);
+		bool valid = valid_gold_index(n);
+		if ((false == valid) && (0.5 < beta))
+			printf ("Error: not valid but good beta at %ld\n", n);
+		if (valid && (0.5 > beta))
+			printf ("Error: valid but bad beta at %ld\n", n);
 		if (beta < 0.5) continue;
 
 		validate_bracket(n);
@@ -611,7 +618,7 @@ int main(int argc, char* argv[])
 			printf("\nError: missing representation for n=%ld\n", n);
 
 		// if (4 == len && 0 == cfrac[3] && 0 != cfrac[0])
-		if (1)
+		if (0)
 		{
 			long nleft = get_bracket_left(n);
 			long nright = get_bracket_right(n);
