@@ -12,7 +12,6 @@ all: skew \
 	nilpot \
 	moments \
 	irred zero tribo midmap \
-	fpcoef poincare \
 	momenta irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
 	irred-height irred-tree irred-seek eventually
@@ -34,7 +33,6 @@ zero.o: zero.C
 tribo.o: tribo.c
 midmap.o: midmap.c
 
-poincare.o: poincare.C
 irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c irred-gold.c
 irred-fraction.o: irred-fraction.c irred-gold.c selfie.c
@@ -56,10 +54,7 @@ irred: irred.o
 zero: zero.o $(BRAT)
 tribo: tribo.o
 midmap: midmap.o
-fpcoef: fpcoef.o
-	$(CC) -o $@ $^ -lgmp -lgomp -lm
 
-poincare: poincare.o $(BRAT)
 momenta: momenta.o $(BRAT)
 irred-gf: irred-gf.o $(BRAT)
 irred-disk: irred-disk.o $(BRAT)

@@ -9,10 +9,8 @@ FUNC=../../tools/lib/libfunc.a
 
 all: remap skew \
 	sampler \
-	nilpot \
 	moments \
 	zero tribo midmap \
-	fpcoef poincare \
 	momenta
 
 .C.o:
@@ -27,22 +25,17 @@ all: remap skew \
 remap.o: remap.c
 skew.o: skew.c
 sampler.o: sampler.c
-nilpot.o: nilpot.c
 moments.o: moments.c
 zero.o: zero.C
 tribo.o: tribo.c
 midmap.o: midmap.c
 
-poincare.o: poincare.C
-
 remap: remap.o
 skew: skew.o
 sampler: sampler.o
-nilpot: nilpot.o
 moments: moments.o
 zero: zero.o $(BRAT)
 tribo: tribo.o
 midmap: midmap.o
 
-poincare: poincare.o $(BRAT)
 momenta: momenta.o $(BRAT)

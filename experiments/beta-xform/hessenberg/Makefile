@@ -14,10 +14,10 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
 
 all: skew \
 	sampler psi \
-	matrix psieigen psiblas nilpot psiunitary \
+	matrix psieigen psiblas psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult zero tribo midmap fiter expan \
-	orbit fpcoef poincare almost deguess subdiag \
+	orbit fpcoef almost deguess subdiag \
 	alldisk betadisk momenta normie
 
 .C.o:
@@ -35,7 +35,6 @@ psi.o: psi.c
 matrix.o: matrix.C psi.c
 psieigen.o: psieigen.c psi.c psibig.c
 psiblas.o: psiblas.c psi.c psibig.c
-nilpot.o: nilpot.c
 psiunitary.o: psiunitary.c psi.c psibig.c psifp.c
 bergman.o: bergman.C psi.c psibig.c psifp.c
 psifp.o: psifp.c psi.c psibig.c
@@ -57,7 +56,6 @@ orbit.o: orbit.c psi.c psibig.c
 fpcoef.o: fpcoef.c psi.c psibig.c expan.c
 	$(CC) -c $< -I $(FUNCDIR) -fopenmp
 
-poincare.o: poincare.C
 betadisk.o: betadisk.C psibig.c
 subdiag.o: subdiag.C psi.c psibig.c
 normie.o: normie.C psibig.c
@@ -68,7 +66,6 @@ psi: psi.o
 matrix: matrix.o $(BRAT)
 psieigen: psieigen.o -lgsl -lgslcblas
 psiblas: psiblas.o $(LAPACK)
-nilpot: nilpot.o
 psiunitary: psiunitary.o -lgsl -lgslcblas
 bergman: bergman.o -lgsl -lgslcblas # $(BRAT)
 psifp: psifp.o -lgsl -lgslcblas
@@ -91,7 +88,6 @@ orbit: orbit.o
 fpcoef: fpcoef.o
 	$(CC) -o $@ $^ -lgmp -lgomp -lm
 
-poincare: poincare.o $(BRAT)
 deguess: deguess.o
 almost: almost.o
 alldisk: alldisk.o $(BRAT)
