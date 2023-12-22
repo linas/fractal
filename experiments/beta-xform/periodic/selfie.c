@@ -146,14 +146,27 @@ bool valid_gold_index(unsigned long idx)
 	// printf("Index=%ld gold=%20.16g\n", idx, gold);
 	// print_dyadic(dyad, 40, "Dyadic orbit=", "\n");
 
-	unsigned long tno = 2*idx+1;
+	unsigned long tno = 2UL * idx + 1UL;
 	int len = bitlen(tno);
 	for (int i=0; i< len; i++)
 	{
-		if ((tno &1UL) != ((dyad>>(len-i-1)) &1UL)) return false;
+		if ((tno & 1UL) != ((dyad>>(len-i-1)) & 1UL)) return false;
 		tno >>= 1;
 	}
 	return true;
+}
+
+// Find the leader of a valid index.  That is, find the index of the form
+// 2^h(2k+1) with the smallest height h that gives a valid index.
+long gold_leader(unsigned long idx)
+{
+	idx = 2UL * idx + 1UL;
+	while (false == valid_gold_index(idx))
+	{
+		idx <<= 1;
+		if (0 == idx) return 0; // overflow error
+	}
+	return idx;
 }
 
 /* ================================================================= */
