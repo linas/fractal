@@ -12,15 +12,13 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/gcc/x86_64-linux-gnu/12/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
-all: bernie bigbern remap unbernie reigen skew fp-diagram \
+all: remap reigen skew fp-diagram \
 	carry-sum rexfer treefn treestep sampler julia julie psi \
 	matrix psieigen psiblas nilpot bitshow complex psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
-	psivec psimid psimult irred zero tribo midmap fiter expan \
+	psivec psimid psimult zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
-	alldisk betadisk momenta normie irred-viz irred-fraction \
-	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
-	irred-height irred-tree irred-seek eventually
+	alldisk betadisk momenta normie
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -31,12 +29,9 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-bernie.o: bernie.C $(FUNCDIR)/bitops.h
-bigbern.o: bigbern.C
 remap.o: remap.c
 reigen.o: reigen.c
 skew.o: skew.c
-unbernie.o: unbernie.C
 fp-diagram.o: fp-diagram.C
 carry-sum.o: carry-sum.C
 rexfer.o: rexfer.c
@@ -79,25 +74,10 @@ beta.o: beta.c
 witt.o: witt.c
 betadisk.o: betadisk.C psibig.c
 normie.o: normie.C psibig.c
-irred.o: irred.c irred-gold.c
-irred-viz.o: irred-viz.c irred-gold.c
-irred-fraction.o: irred-fraction.c irred-gold.c selfie.c
-irred-gf.o: irred-gf.C irred-gold.c
-irred-disk.o: irred-disk.C irred-gold.c
-irred-midpoint.o: irred-midpoint.c irred-gold.c
-irred-allowed.o: irred-allowed.c irred-gold.c
-irred-tacky.o: irred-tacky.c irred-gold.c
-irred-height.o: irred-height.c irred-gold.c
-irred-tree.o: irred-tree.c irred-gold.c selfie.c
-irred-seek.o: irred-seek.c irred-gold.c
-eventually.o: eventually.c irred-gold.c
 
-bernie: bernie.o $(BRAT) $(FUNC)
-bigbern: bigbern.o $(BRAT)
 remap: remap.o
 reigen: reigen.o
 skew: skew.o
-unbernie: unbernie.o $(BRAT)
 fp-diagram: fp-diagram.o $(BRAT)
 carry-sum: carry-sum.o $(BRAT)
 rexfer: rexfer.o
@@ -126,7 +106,6 @@ psimom: psimom.o
 psivec: psivec.o
 psimid: psimid.o
 psimult: psimult.o
-irred: irred.o
 zero: zero.o $(BRAT)
 tribo: tribo.o
 midmap: midmap.o
@@ -145,5 +124,3 @@ almost: almost.o
 alldisk: alldisk.o $(BRAT)
 betadisk: betadisk.o $(BRAT)
 momenta: momenta.o $(BRAT)
-irred-gf: irred-gf.o $(BRAT)
-irred-disk: irred-disk.o $(BRAT)

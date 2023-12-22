@@ -17,7 +17,7 @@ all: remap reigen skew fp-diagram \
 	matrix psieigen psiblas nilpot bitshow complex psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
-	orbit fpcoef poincare subdiag beta witt deguess almost \
+	orbit fpcoef poincare subdiag beta witt \
 	momenta normie irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
 	irred-height irred-tree irred-seek eventually
@@ -133,8 +133,6 @@ poincare: poincare.o $(BRAT)
 subdiag: subdiag.o $(BRAT)
 beta: beta.o
 witt: witt.o
-deguess: deguess.o
-almost: almost.o
 momenta: momenta.o $(BRAT)
 irred-gf: irred-gf.o $(BRAT)
 irred-disk: irred-disk.o $(BRAT)
