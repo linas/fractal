@@ -169,6 +169,27 @@ long gold_leader(unsigned long idx)
 	return idx;
 }
 
+// Given an index, return the right side of the bracket that contains
+// it.
+long bracket_gold_right(long n)
+{
+	if (0 == n%2)
+	{
+		// If its a multiple of two, just divide by two.
+		long brig = n >> 1;
+		if (valid_gold_index(brig)) return brig;
+
+		// Ooops. Must have been a leader. Recurse.
+		while (brig%2 == 0) brig >>= 1;
+		return bracket_gold_right(brig);
+	}
+
+	// Hop down own level. If it's not even or not good, recurse.
+	long brig = (n-1)/2;
+	if (0 == n%2 && valid_gold_index(brig)) return brig;
+	return bracket_gold_right(brig);
+}
+
 /* ================================================================= */
 // Return the dyadic that approximates the rational p/q,
 // truncated to len bits. Rationals have infinite periodic bitseqs,
