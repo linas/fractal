@@ -7,15 +7,13 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: remap skew \
-	carry-sum treefn treestep sampler julia julie \
-	nilpot bitshow \
+all: remap reigen skew fp-diagram \
+	carry-sum rexfer treefn treestep sampler julia julie \
+	nilpot bitshow complex \
 	moments \
-	irred zero tribo midmap \
-	fpcoef poincare \
-	momenta irred-viz irred-fraction \
-	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
-	irred-height irred-tree irred-seek eventually
+	zero tribo midmap \
+	fpcoef poincare beta witt \
+	momenta 
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -27,8 +25,11 @@ all: remap skew \
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
 remap.o: remap.c
+reigen.o: reigen.c
 skew.o: skew.c
+fp-diagram.o: fp-diagram.C
 carry-sum.o: carry-sum.C
+rexfer.o: rexfer.c
 treefn.o: treefn.c
 treestep.o: treestep.C
 sampler.o: sampler.c
@@ -36,28 +37,22 @@ julia.o: julia.c
 julie.o: julie.C
 nilpot.o: nilpot.c
 bitshow.o: bitshow.c $(FUNCDIR)/bitops.h
+complex.o: complex.c
 moments.o: moments.c
 zero.o: zero.C
 tribo.o: tribo.c
 midmap.o: midmap.c
 
 poincare.o: poincare.C
-irred.o: irred.c irred-gold.c
-irred-viz.o: irred-viz.c irred-gold.c
-irred-fraction.o: irred-fraction.c irred-gold.c selfie.c
-irred-gf.o: irred-gf.C irred-gold.c
-irred-disk.o: irred-disk.C irred-gold.c
-irred-midpoint.o: irred-midpoint.c irred-gold.c
-irred-allowed.o: irred-allowed.c irred-gold.c
-irred-tacky.o: irred-tacky.c irred-gold.c
-irred-height.o: irred-height.c irred-gold.c
-irred-tree.o: irred-tree.c irred-gold.c selfie.c
-irred-seek.o: irred-seek.c irred-gold.c
-eventually.o: eventually.c irred-gold.c
+beta.o: beta.c
+witt.o: witt.c
 
 remap: remap.o
+reigen: reigen.o
 skew: skew.o
+fp-diagram: fp-diagram.o $(BRAT)
 carry-sum: carry-sum.o $(BRAT)
+rexfer: rexfer.o
 treefn: treefn.o
 treestep: treestep.o  $(BRAT)
 sampler: sampler.o
@@ -65,8 +60,8 @@ julia: julia.o
 julie: julie.o $(BRAT)
 nilpot: nilpot.o
 bitshow: bitshow.o $(FUNC)
+complex: complex.o
 moments: moments.o
-irred: irred.o
 zero: zero.o $(BRAT)
 tribo: tribo.o
 midmap: midmap.o
@@ -74,6 +69,6 @@ fpcoef: fpcoef.o
 	$(CC) -o $@ $^ -lgmp -lgomp -lm
 
 poincare: poincare.o $(BRAT)
+beta: beta.o
+witt: witt.o
 momenta: momenta.o $(BRAT)
-irred-gf: irred-gf.o $(BRAT)
-irred-disk: irred-disk.o $(BRAT)

@@ -17,8 +17,8 @@ all: remap reigen skew fp-diagram \
 	matrix psieigen psiblas nilpot bitshow complex psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult zero tribo midmap fiter expan \
-	orbit fpcoef poincare subdiag beta witt \
-	momenta normie
+	orbit fpcoef poincare almost deguess subdiag \
+	alldisk betadisk momenta normie
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -69,9 +69,8 @@ fpcoef.o: fpcoef.c psi.c psibig.c expan.c
 	$(CC) -c $< -I $(FUNCDIR) -fopenmp
 
 poincare.o: poincare.C
+betadisk.o: betadisk.C psibig.c
 subdiag.o: subdiag.C psi.c psibig.c
-beta.o: beta.c
-witt.o: witt.c
 normie.o: normie.C psibig.c
 
 remap: remap.o
@@ -115,7 +114,9 @@ fpcoef: fpcoef.o
 	$(CC) -o $@ $^ -lgmp -lgomp -lm
 
 poincare: poincare.o $(BRAT)
+deguess: deguess.o
+almost: almost.o
+alldisk: alldisk.o $(BRAT)
+betadisk: betadisk.o $(BRAT)
 subdiag: subdiag.o $(BRAT)
-beta: beta.o
-witt: witt.o
 momenta: momenta.o $(BRAT)

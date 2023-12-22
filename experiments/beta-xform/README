@@ -10,17 +10,14 @@ remap.c: the expander and compressor from the paper
 
 skew.c: Skew Takagi map and skew Haar wavelet
 
-reigen.c: Recursve eigenfunctions for the undershift (fast algo)
+invariant/reigen.c: Recursve eigenfunctions for the undershift (fast algo)
     Computes only the invariant measure. See also complex.c
     rexfer.c is another early failed attempt at decaying eigenfunctions
 
-beta.c: sanity-check experiments against exact Parry-Gel'fond
+invariant/beta.c: sanity-check experiments against exact Parry-Gel'fond
     expression for invariant measure.
 
-irred.c, irred-viz.c irred-fraction.c: compute roots of the golden
-    polynomials, and find thier valid labels, and count how many of
-    them there are, and so on. irred-viz.c is a failed experiment.
-    irred-fraction.c works on the ontinued-fraction representation.
+invariant/fp-diagram.C: exact frobenius-perron eigenstate using reigen.c
 
 bifur/bernie.C: feignbaum-style diagrams of various maps, low precision.
 
@@ -30,20 +27,24 @@ bifur/unbernie.C: something else ... ??
 
 bifur/island: from bernie.C 
 
-fp-diagram.C: exact frobenius-perron eigenstate using reigen.c
-
 hessenberg/psi*c: the hessenberg eigenfunctions
 
-complex-roots/deguess.c: contorted sums over the invariant measure bits
+hessenberg/normie.C: normalization integral sum_n zeta^n T^n(beta/2)
+        code copied from zetadisk.C
 
-complex-roots/almost.c:
-complex-roots/alldisk.C:
-complex-roots/betadisk.C:   all explore the constant term E(beta;zeta)
+hessenberg/deguess.c: contorted sums over the invariant measure bits
+
+hessenberg/almost.c:
+hessenberg/alldisk.C:
+hessenberg/betadisk.C:   all explore the constant term E(beta;zeta)
       Sample run for K=beta/2=0.85
       ./betadisk betadisk 600 600 0 0.0 0.0 2.4 0.85
 
-complex-roots/zetadisk.C: like above, but just a radial slice.
+hessenberg/zetadisk.C: like above, but just a radial slice.
       Deleted; was marked as failure
 
-normie.C: normalization integral sum_n zeta^n T^n(beta/2)
-        code copied from zetadisk.C
+irred.c, irred-viz.c irred-fraction.c: compute roots of the golden
+    polynomials, and find thier valid labels, and count how many of
+    them there are, and so on. irred-viz.c is a failed experiment.
+    irred-fraction.c works on the ontinued-fraction representation.
+
