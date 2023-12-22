@@ -24508,7 +24508,7 @@ Table explorer is eventually.c which takes three arguments: leading bits
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f$
+\begin_inset Formula $\frac{p}{q}$
 \end_inset
 
 
@@ -24520,7 +24520,7 @@ Table explorer is eventually.c which takes three arguments: leading bits
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\frac{1+f}{2}$
+\begin_inset Formula $\frac{p+q}{2q}$
 \end_inset
 
 
@@ -24532,7 +24532,7 @@ Table explorer is eventually.c which takes three arguments: leading bits
 \begin_inset Text
 
 \begin_layout Plain Layout
-p,c
+m,c
 \end_layout
 
 \end_inset
@@ -25909,28 +25909,77 @@ The rationals have ultimately-periodic binary bitstrings; this was used
 \end_layout
 
 \begin_layout Standard
-The column labeled p,c shows the prefix p as an integer, and likewise the
+The column labeled m,c shows the prefix m as an integer, and likewise the
  cyclic bits.
  The prefix must always start with a 1, but the cycle might not, and so
  requires a cycle length, given in the N column.
  The bitstring can be interpreted as a rational number, shown in the column
  
-\begin_inset Formula $\left(1+f\right)/2$
+\begin_inset Formula $\left(p+q\right)/2q$
 \end_inset
 
 .
- Since these bitstrins always start with a one, it seems better to drop
+ Since these bitstrings always start with a one, it seems better to drop
  the one and rescale: this is shown in the column 
-\begin_inset Formula $f$
+\begin_inset Formula $p/q$
 \end_inset
 
 .
- Numerically, 
-\begin_inset Formula $\left(1+f\right)/2=p/2^{L}+...c$
+\end_layout
+
+\begin_layout Subsubsection
+Rational to periodic binary
+\end_layout
+
+\begin_layout Standard
+Task: Given 
+\begin_inset Formula $p/q$
 \end_inset
 
- argh c needs to be rotated ...
- 
+ find the binary prefix 
+\begin_inset Formula $m$
+\end_inset
+
+, it's length 
+\begin_inset Formula $L$
+\end_inset
+
+, and the cyclc part 
+\begin_inset Formula $c$
+\end_inset
+
+, and its length 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ This can be done as follows:
+\begin_inset Formula 
+\begin{align*}
+\frac{p}{q} & =\frac{m}{2^{L}}\left(1+\frac{c}{2^{N}}+\left(\frac{c}{2^{N}}\right)^{2}+\cdots\right)\\
+ & =\frac{m}{2^{L}}\frac{1}{1-c2^{-N}}\\
+ & =\frac{m\cdot2^{N-L}}{2^{N}-c}
+\end{align*}
+
+\end_inset
+
+From this form, deduce that 
+\begin_inset Formula $m$
+\end_inset
+
+ is odd, that 
+\begin_inset Formula $p=m\cdot2^{N-L}$
+\end_inset
+
+ and similarly, 
+\begin_inset Formula $N=\left\lceil \log_{2}q\right\rceil $
+\end_inset
+
+ so that 
+\begin_inset Formula $c=2^{N}-q$
+\end_inset
+
+ which provides all four parts of the cyclic expansion.
 \end_layout
 
 \begin_layout Subsection

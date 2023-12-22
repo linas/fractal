@@ -20,6 +20,7 @@
  * December 2023
  */
 
+/* Return length of bitstring. Same as ceil(log2(bitstr)). */
 int bitlen(unsigned long bitstr)
 {
 	int len=0;
@@ -39,30 +40,6 @@ void print_dyadic(unsigned long bitseq, int len, char* pre, char* suf)
 	}
 	printf (" \\\\ %d", len);
 	printf("%s", suf);
-}
-
-// Return the dyadic that approximates the rational p/q,
-// truncated to len bits. Rationals have infinite periodic bitseqs,
-// so this just expands that bitseq, and then truncates it.
-//
-// Bit strings are stored right-to-left, so that the decimal point at
-// far right. This is a 2-adic storage convention. For example, 1/2 and
-// 1/4 and 1/8 are all stored as 0x1 but have length 1,2,3.
-//
-unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
-{
-	unsigned long bitseq = 0;
-	for (int i=0; i<len; i++)
-	{
-		bitseq <<= 1;
-		p <<= 1;
-		if (q <= p)
-		{
-			bitseq |= 1UL;
-			p -= q;
-		}
-	}
-	return bitseq;
 }
 
 /* ================================================================= */
@@ -109,7 +86,6 @@ double golden_beta(unsigned long idx)
 }
 
 /* ================================================================= */
-
 /*
  * Return dyadic string corresponding to beta. This is obtained by
  * midpoint iteration, storing the bits in dyadic order, so that
@@ -168,6 +144,50 @@ bool valid_gold_index(unsigned long idx)
 		tno >>= 1;
 	}
 	return true;
+}
+
+/* ================================================================= */
+// Return the dyadic that approximates the rational p/q,
+// truncated to len bits. Rationals have infinite periodic bitseqs,
+// so this just expands that bitseq, and then truncates it.
+//
+// Bit strings are stored right-to-left, so that the decimal point at
+// far right. This is a 2-adic storage convention. For example, 1/2 and
+// 1/4 and 1/8 are all stored as 0x1 but have length 1,2,3.
+//
+unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
+{
+	unsigned long bitseq = 0;
+	for (int i=0; i<len; i++)
+	{
+		bitseq <<= 1;
+		p <<= 1;
+		if (q <= p)
+		{
+			bitseq |= 1UL;
+			p -= q;
+		}
+	}
+	return bitseq;
+}
+
+/* ================================================================= */
+/*
+ * Given a rational p/q, return the prefix-integer, the cycle integer,
+ * and the cycle length for the infinite ultimately-periodic dyadic
+ * string that would result from the dyadic expansion of p/q.
+ */
+void get_cycle (unsigned long p, unsigned long q,
+                unsigned long *pfxp, unsigned long *cycp,
+                int *cyclenp)
+{
+	unsigned long pfx = p;
+	while (pfx%2 = 0) pfx >>= 1;
+	int cyclen = bitlen(q);
+	unsigned long cyc = (1UL << cyclen) - q;
+	*pfxp = pfx;
+	*cycp = cyc;
+	*cyclenp = cyclen;
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
