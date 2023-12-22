@@ -269,15 +269,28 @@ int main(int argc, char* argv[])
 			if (1 < gcd(num, deno)) continue;
 
 			// Don't look at those with zero prefix length
+			// (These are the finite orbits)
 			unsigned long pfx, cyc;
 			int clen;
 			get_event_cycle(num, deno, &pfx, &cyc, &clen);
 			if (0 == pfx) continue;
 
+			// Hypothesis
+			long red = deno;
+			while (red%2 == 0) red >>= 1;
+			bool evok = is_event_ok(num, deno);
+			if ((red != ((1UL<<clen) - 1)) && evok)
+			{
+				printf("reject valid  at  p/q = %ld/%ld\n", num, deno);
+				print_debug_info(num, deno);
+			}
+			if ((red == ((1UL<<clen) - 1)) && !evok)
+				printf("acceptt invalid  at  p/q = %ld/%ld\n", num, deno);
+
 			if (false == is_event_ok(num, deno))
 			{
 				printf("fail at p/q = %ld/%ld\n", num, deno);
-				print_debug_info(num, deno);
+				// print_debug_info(num, deno);
 				continue;
 			}
 
