@@ -104,9 +104,10 @@ bool is_valid_finite(long pfx, long cyc, int cyclen)
 	pfx <<= cyclen;
 	pfx |= cyc;
 	long idx = (pfx - 1UL) / 2;
-	return is_valid_index(idx);
+	return valid_gold_index(idx);
 }
 
+#if LATER
 /* Interpret the orbit as being a dyadic bitstring, and return
  * the corresponding double-precision value. Result will be between
  * zero and one.
@@ -164,6 +165,7 @@ double finite_to_double(long pfx, long cyc, int cyclen)
 	dyd = 2.0 * (dyd - 0.5);
 	return dyd;
 }
+#endif
 
 // ---------------------------------------------------------------------
 
@@ -186,17 +188,14 @@ void print_debug_info(unsigned long p, unsigned long q)
 	double gold = find_event_zero(cof, 1.0, 2.0);
 	printf("Root %20.16g\n", gold);
 
-	double rat = event_to_double(pfx, cyc, cyclen);
-	printf("Orbit code=%20.16g\n", rat);
-
 	unsigned long dyad = beta_to_dyadic(gold);
 	unsigned long drat = rational_to_dyadic(p, q, WORDLEN);
 	int badbit = compare_dyadics(dyad, drat);
 	if (0 <= badbit && badbit < 40)
 		printf("Error: bad orbit at %d\n", badbit);
 
-	print_dyadic(dyad, "midpoint orbi= ", "\n");
-	print_dyadic(drat, "rational dyad= ", "\n");
+	print_dyadic(dyad, 60, "midpoint orbi= ", "\n");
+	print_dyadic(drat, 60, "rational dyad= ", "\n");
 
 // #define ONE_SIXTH
 #ifdef ONE_SIXTH
@@ -225,17 +224,16 @@ int main(int argc, char* argv[])
 {
 #define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
-	if (argc != 4)
+	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s <pfx> <cyc> <cyclen>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <p> <q>\n", argv[0]);
 		exit(1);
 	}
 
-	long pfx = atol(argv[1]);
-	long cyc = atol(argv[2]);
-	int cyclen = atoi(argv[3]);
+	long p = atol(argv[1]);
+	long q = atol(argv[2]);
 
-	print_debug_info(pfx, cyc, cyclen);
+	print_debug_info(p, q);
 #endif
 
 // #define BULK_LISTING
