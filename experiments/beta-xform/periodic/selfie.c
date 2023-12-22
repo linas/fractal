@@ -183,13 +183,47 @@ void get_event_cycle (unsigned long p, unsigned long q,
                       unsigned long *pfxp, unsigned long *cycp,
                       int *cyclenp)
 {
-	unsigned long pfx = p;
-	while (pfx%2 == 0) pfx >>= 1;
-	int cyclen = bitlen(q);
-	unsigned long cyc = (1UL << cyclen) - q;
+printf("enter %ld %ld\n", p,q);
+	if (0 == q)
+	{
+		printf("Error: can't handle zero\n");
+		*pfxp = 0; *cycp = 0; *cyclenp = 0;
+		return;
+	}
+
+	int ell = 0;
+	unsigned long qr = q;
+	while (qr%2 == 0) { qr >>= 1; ell++; }
+printf(" ell %d\n", ell);
+
+	int en = 1;
+	while ((((1UL<<en) - 1) % qr != 0) && en < WORDLEN) en++;
+
+	if (WORDLEN == en)
+	{
+		printf("Error: cycle length overflow\n");
+		*pfxp = 0; *cycp = 0; *cyclenp = 0;
+		return;
+	}
+printf(" cyclen %d\n", en);
+
+	unsigned long hi = (1UL<<en) - 1UL;
+printf(" hi %ld\n", hi);
+	unsigned long are = hi / qr;
+	unsigned long mod = are * (p+q);
+printf(" mod %ld\n", mod);
+
+	unsigned long cyc = 1UL;
+	while (((hi + cyc) % mod != 0) && cyc <= hi) cyc++;
+	if (hi < cyc) cyc -= hi;
+
+printf(" cyc %ld\n", cyc);
+	unsigned long pfx = (hi / qr) * ((hi+cyc) / p);
+
+printf(" pfx %ld\n", pfx);
 	*pfxp = pfx;
 	*cycp = cyc;
-	*cyclenp = cyclen;
+	*cyclenp = en;
 }
 
 /* Max allowed coeficients for the eventually-periodic array. */

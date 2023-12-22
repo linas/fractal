@@ -25956,30 +25956,96 @@ Task: Given
  This can be done as follows:
 \begin_inset Formula 
 \begin{align*}
-\frac{p}{q} & =\frac{m}{2^{L}}\left(1+\frac{c}{2^{N}}+\left(\frac{c}{2^{N}}\right)^{2}+\cdots\right)\\
- & =\frac{m}{2^{L}}\frac{1}{1-c2^{-N}}\\
- & =\frac{m\cdot2^{N-L}}{2^{N}-c}
+\frac{p+q}{2q} & =\frac{m}{2^{L}}\,\left(1+\frac{c}{2^{N}}+\frac{c}{2^{2N}}+\frac{c}{2^{3N}}+\cdots\right)\\
+ & \frac{m}{2^{L}}\,\left(1+\frac{c}{2^{N}}\,\left(1+\frac{1}{2^{N}}+\frac{1}{2^{2N}}+\cdots\right)\right)\\
+ & \frac{m}{2^{L}}\,\left(1+\frac{c}{2^{N}-1}\right)\\
+ & =\frac{m}{2^{L}}\left(\frac{2^{N}-1+c}{2^{N}-1}\right)
 \end{align*}
 
 \end_inset
 
-From this form, deduce that 
-\begin_inset Formula $m$
+In the last line, both numerator and denominator are integers.
+ This allows the following algorithm:
+\end_layout
+
+\begin_layout Enumerate
+Find 
+\begin_inset Formula $\gcd\left(p+q,2q\right)$
 \end_inset
 
- is odd, that 
-\begin_inset Formula $p=m\cdot2^{N-L}$
+ and so reduce to lowest terms 
+\begin_inset Formula $a/b=\left(p+q\right)/2q$
 \end_inset
 
- and similarly, 
-\begin_inset Formula $N=\left\lceil \log_{2}q\right\rceil $
+.
+\end_layout
+
+\begin_layout Enumerate
+Factor 
+\begin_inset Formula $b=2^{L}b^{\prime}$
 \end_inset
 
- so that 
-\begin_inset Formula $c=2^{N}-q$
+ to obtain 
+\begin_inset Formula $L\ge1$
 \end_inset
 
- which provides all four parts of the cyclic expansion.
+.
+\end_layout
+
+\begin_layout Enumerate
+Solve 
+\begin_inset Formula $\left(2^{N}-1\right)\mod b^{\prime}=0$
+\end_inset
+
+ for the smallest positive 
+\begin_inset Formula $N\ge1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Define 
+\begin_inset Formula $r=\left(2^{N}-1\right)/b^{\prime}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Enumerate
+Solve 
+\begin_inset Formula $\left(2^{N}-1+c\right)\mod ra=0$
+\end_inset
+
+ for the smallest 
+\begin_inset Formula $c$
+\end_inset
+
+ such that 
+\begin_inset Formula $0<c<2^{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Define 
+\begin_inset Formula $m=r\left(2^{N}-1+c\right)/a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Verify that 
+\begin_inset Formula $m<2^{L}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This provides all four integers that define the cyclic expansion.
 \end_layout
 
 \begin_layout Subsection
