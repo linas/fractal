@@ -18,7 +18,7 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
 	psivec psimid psimult irred zero tribo midmap fiter expan \
 	orbit fpcoef poincare subdiag beta witt deguess almost \
-	momenta normie irred-viz irred-fraction \
+	alldisk betadisk momenta normie irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
 	irred-height irred-tree irred-seek eventually
 
@@ -77,6 +77,7 @@ poincare.o: poincare.C
 subdiag.o: subdiag.C psi.c psibig.c
 beta.o: beta.c
 witt.o: witt.c
+betadisk.o: betadisk.C psibig.c
 normie.o: normie.C psibig.c
 irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c irred-gold.c
@@ -141,6 +142,8 @@ beta: beta.o
 witt: witt.o
 deguess: deguess.o
 almost: almost.o
+alldisk: alldisk.o $(BRAT)
+betadisk: betadisk.o $(BRAT)
 momenta: momenta.o $(BRAT)
 irred-gf: irred-gf.o $(BRAT)
 irred-disk: irred-disk.o $(BRAT)
