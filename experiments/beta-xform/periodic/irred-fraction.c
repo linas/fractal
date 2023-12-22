@@ -258,6 +258,15 @@ long get_bracket_left(long n)
 	return nleft;
 }
 
+long cheap_bracket_left(long n)
+{
+	long clef = n;
+	while (0 == clef%2 && 0 != clef) clef >>= 1;
+	clef = (clef-1)/2;
+	if (0 == clef) clef = -1;
+	return clef;
+}
+
 /*
  * Validate bracketing for betas and for the finite-Baire sequences.
  */
@@ -274,8 +283,8 @@ bool validate_bracket(long n)
 		{ printf("Error: invalid index %ld\n", n); ok = false; }
 
 	// printf("Validate bracket for %ld\n", n);
-	// Verify gold bracketing
 
+	// ----------------------
 	// Verify the left bracket by ripping out powers of two until
 	// an odd number is reached.
 	long nleft = get_bracket_left(n);
@@ -286,7 +295,13 @@ bool validate_bracket(long n)
 		{ printf("Error: bad left bracket at %ld: nleft=%ld gold=%g gleft=%g\n",
 			n, nleft, gold, gleft); ok = false; }
 
-#if 1
+	// long cleft = bracket_gold_left(n);
+	long cleft = cheap_bracket_left(n);
+	if (cleft != nleft)
+		{ printf("Error: inconsistent left bracket for %ld got %ld want %ld\n",
+			n, cleft, nleft); ok = false; }
+
+	// ----------------------
 	// Verify right bracketing by knocking off only one power of two.
 	long nright = get_bracket_right(n);
 	double gright = find_gold(nright);
@@ -308,8 +323,8 @@ bool validate_bracket(long n)
 	if (cright != nright)
 		{ printf("Error: inconsistent right bracket for %ld got %ld want %ld\n",
 			n, cright, nright); ok = false; }
-#endif
 
+	// ----------------------
 	// Validate conversion to and from Baire.
 	int cfrac[SZ];
 	int len = index_to_fbaire(cfrac, n);

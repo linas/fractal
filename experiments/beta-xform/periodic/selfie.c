@@ -171,12 +171,12 @@ long gold_leader(unsigned long idx)
 
 // Given an index, return the right side of the bracket that contains
 // it.
-long bracket_gold_right(long n)
+unsigned long bracket_gold_right(unsigned long n)
 {
 	if (0 == n%2)
 	{
 		// If its a multiple of two, just divide by two.
-		long brig = n >> 1;
+		unsigned long brig = n >> 1;
 		if (valid_gold_index(brig)) return brig;
 
 		// Ooops. Must have been a leader. Recurse.
@@ -185,7 +185,7 @@ long bracket_gold_right(long n)
 	}
 
 	// Hop down own level. If it's not even or not good, recurse.
-	long brig = (n-1)/2;
+	unsigned long brig = (n-1)/2;
 	if (0 == n%2 && valid_gold_index(brig)) return brig;
 	return bracket_gold_right(brig);
 }
