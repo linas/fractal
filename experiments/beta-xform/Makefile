@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: remap skew \
+all: skew \
 	sampler \
 	nilpot \
 	moments \
@@ -26,7 +26,6 @@ all: remap skew \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-remap.o: remap.c
 skew.o: skew.c
 sampler.o: sampler.c
 nilpot.o: nilpot.c
@@ -49,7 +48,6 @@ irred-tree.o: irred-tree.c irred-gold.c selfie.c
 irred-seek.o: irred-seek.c irred-gold.c
 eventually.o: eventually.c irred-gold.c
 
-remap: remap.o
 skew: skew.o
 sampler: sampler.o
 nilpot: nilpot.o

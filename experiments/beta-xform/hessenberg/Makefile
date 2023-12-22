@@ -12,7 +12,7 @@ LAPACK=/usr/lib/x86_64-linux-gnu/liblapacke.a \
        /usr/lib/gcc/x86_64-linux-gnu/12/libgfortran.a \
        /usr/lib/x86_64-linux-gnu/libquadmath.so.0
 
-all: remap skew \
+all: skew \
 	sampler psi \
 	matrix psieigen psiblas nilpot psiunitary \
 	bergman psifp midpo psidist psidelt psileft moments psimom \
@@ -29,7 +29,6 @@ all: remap skew \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-remap.o: remap.c
 skew.o: skew.c
 sampler.o: sampler.c
 psi.o: psi.c
@@ -63,7 +62,6 @@ betadisk.o: betadisk.C psibig.c
 subdiag.o: subdiag.C psi.c psibig.c
 normie.o: normie.C psibig.c
 
-remap: remap.o
 skew: skew.o
 sampler: sampler.o
 psi: psi.o

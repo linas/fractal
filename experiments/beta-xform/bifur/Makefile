@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: bernie bigbern remap unbernie skew fp-diagram \
+all: bernie bigbern unbernie skew fp-diagram \
 	carry-sum rexfer sampler \
 	nilpot bitshow complex moments zero tribo midmap \
 	poincare momenta
@@ -23,7 +23,6 @@ all: bernie bigbern remap unbernie skew fp-diagram \
 
 bernie.o: bernie.C $(FUNCDIR)/bitops.h
 bigbern.o: bigbern.C
-remap.o: remap.c
 skew.o: skew.c
 unbernie.o: unbernie.C
 fp-diagram.o: fp-diagram.C
@@ -42,7 +41,6 @@ poincare.o: poincare.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
-remap: remap.o
 skew: skew.o
 unbernie: unbernie.o $(BRAT)
 fp-diagram: fp-diagram.o $(BRAT)

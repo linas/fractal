@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: remap reigen skew fp-diagram \
+all: reigen skew fp-diagram \
 	rexfer sampler \
 	nilpot complex moments zero tribo midmap \
 	fpcoef poincare beta witt momenta 
@@ -21,7 +21,6 @@ all: remap reigen skew fp-diagram \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-remap.o: remap.c
 reigen.o: reigen.c
 skew.o: skew.c
 fp-diagram.o: fp-diagram.C
@@ -38,7 +37,6 @@ poincare.o: poincare.C
 beta.o: beta.c
 witt.o: witt.c
 
-remap: remap.o
 reigen: reigen.o
 skew: skew.o
 fp-diagram: fp-diagram.o $(BRAT)

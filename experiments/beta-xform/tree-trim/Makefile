@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: remap skew \
+all: skew \
 	treefn treestep sampler julia julie \
 	nilpot \
 	moments \
@@ -24,7 +24,6 @@ all: remap skew \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
-remap.o: remap.c
 skew.o: skew.c
 treefn.o: treefn.c
 treestep.o: treestep.C
@@ -39,7 +38,6 @@ midmap.o: midmap.c
 
 poincare.o: poincare.C
 
-remap: remap.o
 skew: skew.o
 treefn: treefn.o
 treestep: treestep.o  $(BRAT)
