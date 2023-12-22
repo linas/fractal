@@ -174,6 +174,20 @@ unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
 }
 
 /* ================================================================= */
+
+/* Return greatest common divisor of p and q */
+unsigned long gcd(unsigned long p, unsigned long q)
+{
+	/* Euclid's algorithm for obtaining the gcd */
+	while (0 != q)
+	{
+		unsigned long t = p % q;
+		p = q;
+		q = t;
+	}
+	return p;
+}
+
 /*
  * Given a rational p/q, return the prefix-integer, the cycle integer,
  * and the cycle length for the infinite ultimately-periodic dyadic
@@ -184,20 +198,24 @@ void get_event_cycle (unsigned long p, unsigned long q,
                       int *cyclenp)
 {
 printf("enter %ld %ld\n", p,q);
-	if (0 == q)
+	if (0 == p || 0 == q)
 	{
 		printf("Error: can't handle zero\n");
 		*pfxp = 0; *cycp = 0; *cyclenp = 0;
 		return;
 	}
 
+	unsigned long gcf = gcd(p+q, 2*q);
+	unsigned long a = (p+q) / gcf;
+	unsigned long b = (2*q) / gcf;
+
 	int ell = 0;
-	unsigned long qr = q;
-	while (qr%2 == 0) { qr >>= 1; ell++; }
+	unsigned long br = b;
+	while (br%2 == 0) { br >>= 1; ell++; }
 printf(" ell %d\n", ell);
 
 	int en = 1;
-	while ((((1UL<<en) - 1) % qr != 0) && en < WORDLEN) en++;
+	while ((((1UL<<en) - 1) % br != 0) && en < WORDLEN) en++;
 
 	if (WORDLEN == en)
 	{
@@ -209,8 +227,8 @@ printf(" cyclen %d\n", en);
 
 	unsigned long hi = (1UL<<en) - 1UL;
 printf(" hi %ld\n", hi);
-	unsigned long are = hi / qr;
-	unsigned long mod = are * (p+q);
+	unsigned long are = hi / br;
+	unsigned long mod = are * a;
 printf(" mod %ld\n", mod);
 
 	unsigned long cyc = 1UL;
@@ -218,7 +236,7 @@ printf(" mod %ld\n", mod);
 	if (hi < cyc) cyc -= hi;
 
 printf(" cyc %ld\n", cyc);
-	unsigned long pfx = (hi / qr) * ((hi+cyc) / p);
+	unsigned long pfx = (hi / br) * ((hi+cyc) / a);
 
 printf(" pfx %ld\n", pfx);
 	*pfxp = pfx;
