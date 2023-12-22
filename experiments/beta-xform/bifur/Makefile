@@ -7,10 +7,10 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: bernie bigbern remap unbernie reigen skew fp-diagram \
+all: bernie bigbern remap unbernie skew fp-diagram \
 	carry-sum rexfer treefn treestep sampler julia julie \
 	nilpot bitshow complex moments zero tribo midmap \
-	poincare beta witt deguess almost momenta
+	poincare momenta
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -24,7 +24,6 @@ all: bernie bigbern remap unbernie reigen skew fp-diagram \
 bernie.o: bernie.C $(FUNCDIR)/bitops.h
 bigbern.o: bigbern.C
 remap.o: remap.c
-reigen.o: reigen.c
 skew.o: skew.c
 unbernie.o: unbernie.C
 fp-diagram.o: fp-diagram.C
@@ -44,13 +43,10 @@ tribo.o: tribo.c
 midmap.o: midmap.c
 
 poincare.o: poincare.C
-beta.o: beta.c
-witt.o: witt.c
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
 remap: remap.o
-reigen: reigen.o
 skew: skew.o
 unbernie: unbernie.o $(BRAT)
 fp-diagram: fp-diagram.o $(BRAT)
@@ -70,8 +66,4 @@ tribo: tribo.o
 midmap: midmap.o
 
 poincare: poincare.o $(BRAT)
-beta: beta.o
-witt: witt.o
-deguess: deguess.o
-almost: almost.o
 momenta: momenta.o $(BRAT)

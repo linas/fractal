@@ -8,8 +8,8 @@ FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
 all: remap skew \
-	carry-sum treefn treestep sampler julia julie \
-	nilpot bitshow \
+	treefn treestep sampler julia julie \
+	nilpot \
 	moments \
 	irred zero tribo midmap \
 	fpcoef poincare \
@@ -28,14 +28,12 @@ all: remap skew \
 
 remap.o: remap.c
 skew.o: skew.c
-carry-sum.o: carry-sum.C
 treefn.o: treefn.c
 treestep.o: treestep.C
 sampler.o: sampler.c
 julia.o: julia.c
 julie.o: julie.C
 nilpot.o: nilpot.c
-bitshow.o: bitshow.c $(FUNCDIR)/bitops.h
 moments.o: moments.c
 zero.o: zero.C
 tribo.o: tribo.c
@@ -57,14 +55,12 @@ eventually.o: eventually.c irred-gold.c
 
 remap: remap.o
 skew: skew.o
-carry-sum: carry-sum.o $(BRAT)
 treefn: treefn.o
 treestep: treestep.o  $(BRAT)
 sampler: sampler.o
 julia: julia.o
 julie: julie.o $(BRAT)
 nilpot: nilpot.o
-bitshow: bitshow.o $(FUNC)
 moments: moments.o
 irred: irred.o
 zero: zero.o $(BRAT)
