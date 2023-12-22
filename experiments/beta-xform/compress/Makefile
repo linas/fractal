@@ -7,13 +7,13 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: skew \
+all: remap skew \
 	sampler \
 	nilpot \
 	moments \
 	zero tribo midmap \
 	fpcoef poincare \
-	momenta 
+	momenta
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -24,6 +24,7 @@ all: skew \
 .o:
 	$(CC) -o $@ $^ -lgmp -lpthread -lm -lstdc++
 
+remap.o: remap.c
 skew.o: skew.c
 sampler.o: sampler.c
 nilpot.o: nilpot.c
@@ -34,6 +35,7 @@ midmap.o: midmap.c
 
 poincare.o: poincare.C
 
+remap: remap.o
 skew: skew.o
 sampler: sampler.o
 nilpot: nilpot.o
@@ -41,8 +43,6 @@ moments: moments.o
 zero: zero.o $(BRAT)
 tribo: tribo.o
 midmap: midmap.o
-fpcoef: fpcoef.o
-	$(CC) -o $@ $^ -lgmp -lgomp -lm
 
 poincare: poincare.o $(BRAT)
 momenta: momenta.o $(BRAT)
