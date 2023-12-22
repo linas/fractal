@@ -105,11 +105,19 @@ double golden_poly(unsigned long idx, double x)
  */
 static double find_zero(unsigned long idx, double lo, double hi)
 {
-	double mid = 0.5 * (lo+hi);
-	if (1.0e-15 > hi-lo) return mid;
-	double fmid = golden_poly(idx, mid);
-	if (0.0 < fmid) return find_zero(idx, lo, mid);
-	return find_zero(idx, mid, hi);
+	int nextra = 0;
+	while (1)
+	{
+		double mid = 0.5 * (lo+hi);
+		if (1.0e-15 > hi-lo) nextra++;
+		if (3 < nextra) return mid; // run the loop three more times.
+		double fmid = golden_poly(idx, mid);
+		if (0.0 == fmid) return mid;
+		if (0.0 < fmid)
+			hi = mid;
+		else
+			lo = mid;
+	}
 }
 
 /* Return the beta value corresponding to the n'th golden polynomial.
@@ -307,11 +315,19 @@ double event_poly(short* cof, double x)
  */
 static double find_event_zero(short* cof, double lo, double hi)
 {
-	double mid = 0.5 * (lo+hi);
-	if (1.0e-15 > hi-lo) return mid;
-	double fmid = event_poly(cof, mid);
-	if (0.0 < fmid) return find_event_zero(cof, lo, mid);
-	return find_event_zero(cof, mid, hi);
+	int nextra = 0;
+	while (1)
+	{
+		double mid = 0.5 * (lo+hi);
+		if (1.0e-15 > hi-lo) nextra++;
+		if (3 < nextra) return mid; // run the loop three more times.
+		double fmid = event_poly(cof, mid);
+		if (0.0 == fmid) return mid;
+		if (0.0 < fmid)
+			hi = mid;
+		else
+			lo = mid;
+	}
 }
 
 /* Utility wrapper for above. Get the polynomial zero for the
