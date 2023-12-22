@@ -20,6 +20,8 @@
  * December 2023
  */
 
+#define WORDLEN 64
+
 /* Return length of bitstring. Same as ceil(log2(bitstr)). */
 int bitlen(unsigned long bitstr)
 {
@@ -40,6 +42,39 @@ void print_dyadic(unsigned long bitseq, int len, char* pre, char* suf)
 	}
 	printf (" \\\\ %d", len);
 	printf("%s", suf);
+}
+
+/*
+ * Return dyadic string corresponding to beta. This is obtained by
+ * midpoint iteration, storing the bits in dyadic order, so that
+ * first iteration is right-most bit. Note that right-most bit will
+ * always be one, since the mid-point is always greater than 1/2.
+ *
+ * Finite orbits will return a finite string. Chaotic orbits might
+ * use all 64 bits in the unsigned long.
+ *
+ * "Valid" integer betas will return the bitstring for (2n+1) but
+ * in reversed order.
+ */
+unsigned long beta_to_dyadic(double beta)
+{
+	unsigned long bitseq = 0;
+	double mid = 0.5*beta;
+	for (int i=0; i < WORDLEN; i++)
+	{
+		if (0.5 <= mid)
+		{
+			bitseq |= 1UL << i;
+
+#define MIDEPSI 1.0e-15
+			// Apply rounding pressure, so as to favor finite iterates
+			// over periodic ones. MIDEPSI=1e-15 seems to work at low
+			// orders e.g. beta from index=6.
+			mid -= 0.5-MIDEPSI;
+		}
+		mid *= beta;
+	}
+	return bitseq;
 }
 
 /* ================================================================= */
@@ -86,39 +121,6 @@ double golden_beta(unsigned long idx)
 }
 
 /* ================================================================= */
-/*
- * Return dyadic string corresponding to beta. This is obtained by
- * midpoint iteration, storing the bits in dyadic order, so that
- * first iteration is right-most bit. Note that right-most bit will
- * always be one, since the mid-point is always greater than 1/2.
- *
- * Finite orbits will return a finite string. Chaotic orbits might
- * use all 64 bits in the unsigned long.
- *
- * "Valid" integer betas will return the bitstring for (2n+1) but
- * in reversed order.
- */
-unsigned long beta_to_dyadic(double beta)
-{
-	unsigned long bitseq = 0;
-	double mid = 0.5*beta;
-	for (int i=0; i < 8*sizeof(unsigned long); i++)
-	{
-		if (0.5 <= mid)
-		{
-			bitseq |= 1UL << i;
-
-#define MIDEPSI 1.0e-15
-			// Apply rounding pressure, so as to favor finite iterates
-			// over periodic ones. MIDEPSI=1e-15 seems to work at low
-			// orders e.g. beta from index=6.
-			mid -= 0.5-MIDEPSI;
-		}
-		mid *= beta;
-	}
-	return bitseq;
-}
-
 /* Return true if `idx` is a self-describing index. This means that
  * the root of the golden_beta polynomial, when iterated by mid-point
  * iteration, reproduces the a dyadic bitstring, that, when bit-reversed,
@@ -214,13 +216,14 @@ void get_event_coeffs(short *cof, long pfx, long cyc, int cyclen)
 		cof[cyclen+i] -= pfx >> (pfxlen-i-1) & 1UL;
 }
 
-void print_event_coeffs(short* cof)
+void print_event_coeffs(const short* cof, const char* pre, const char* suf)
 {
+	printf("%s", pre);
 	for (int i=0; -100 < cof[i]; i++)
 	{
 		printf("%d ", cof[i]);
 	}
-	printf("\n");
+	printf("%s", suf);
 }
 
 /*
@@ -270,6 +273,35 @@ double event_gold(unsigned long p, unsigned long q)
 	get_event_coeffs(cof, pfx, cyc, cyclen);
 	double gold = find_event_zero(cof, 1.0, 2.0);
 	return gold;
+}
+
+// ---------------------------------------------------------------------
+
+/* Return index of the first miscompare. Return -1 if everything is OK. */
+int compare_dyadics(unsigned long dya, unsigned long dyb)
+{
+	for (int i=0; i<WORDLEN; i++)
+		if (((dya>>1) & 1UL) != ((dyb>>1) & 1UL))
+			return i;
+
+	return -1;
+}
+
+/*
+ * Return true if the polynomial for rational p/q has a zero that,
+ * when iterated, reproduces the bit-sequence for p/q (as a dyadic string).
+ */
+bool is_event_ok(unsigned long p, unsigned long q)
+{
+	double gold = event_gold(p, q);
+	unsigned long dyad = beta_to_dyadic(gold);
+	unsigned long drat = rational_to_dyadic(p, q, WORDLEN);
+
+	int badbit = compare_dyadics(dyad, drat);
+
+	// For now, 40 bits seems OK-ish for the accuracy we've got on hand.
+	if (0 <= badbit && badbit < 40) return false;
+	return true;
 }
 
 /* --------------------------- END OF LIFE ------------------------- */

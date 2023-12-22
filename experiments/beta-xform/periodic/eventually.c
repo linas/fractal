@@ -13,76 +13,6 @@
 #include "selfie.c"
 
 // ---------------------------------------------------------------------
-/* Make sure that midpoint iteration gives same bitstring
- * as the encoding w/ pfx, cyc.
- * Return index of first disagreement.
- */
-int validate_orbit(double beta, long pfx, long cyc, int cyclen, bool prt)
-{
-#define MAXBITS 60
-
-	int pfxlen = bitlen(pfx);
-
-	double mid = 0.5*beta;
-	for (int i=0; i < pfxlen; i++)
-	{
-		int bit = 0;
-		if (0.5 < mid) bit = 1;
-		if (0.5 < mid) mid -= 0.5;
-		mid *= beta;
-
-		int pfbit = pfx >> (pfxlen-i-1) & 1UL;
-		if (bit != pfbit)
-		{
-			if (prt) printf("Error out at pfx %d %d %d\n", i, pfbit, bit);
-			return i;
-		}
-	}
-	for (int i=0; i < MAXBITS-pfxlen; i++)
-	{
-		int bit = 0;
-		if (0.5 < mid) bit = 1;
-		if (0.5 < mid) mid -= 0.5;
-		mid *= beta;
-
-		int j = i%cyclen;
-		int cybit = cyc >> (cyclen-j-1) & 1UL;
-		if (bit != cybit)
-		{
-			if (prt) printf("Error out at cyclic %d %d %d\n", i, cybit, bit);
-			return i+pfxlen;
-		}
-	}
-	return 0;
-}
-
-/* Return true if the beta generates the expected orbit */
-bool is_orbit_ok(long pfx, long cyc, int cyclen)
-{
-	double gold = event_gold(pfx, cyc, cyclen);
-
-	int badbit = validate_orbit(gold, pfx, cyc, cyclen, false);
-	if (0 < badbit && badbit < 40) return false;
-	return true;
-}
-
-/* Iterate the midpoint and return the sequence */
-long orbit_to_bitseq(double beta)
-{
-#define MAXBITS 60
-	long bitseq = 0;
-	double mid = 0.5*beta;
-	for (int i=0; i < MAXBITS; i++)
-	{
-		bitseq <<= 1;
-		if (0.5 < mid) bitseq |= 1UL;
-		if (0.5 < mid) mid -= 0.5;
-		mid *= beta;
-	}
-	return bitseq;
-}
-
-// ---------------------------------------------------------------------
 /* Check for prefix+cycle combinations that are not minimal.
  * Returns true if in minimal form, else return false.
  *
@@ -105,8 +35,8 @@ bool is_prefix_ok(long pfx, long cyc, int cyclen)
 	if ((pfx & 1UL) == (cyc & 1UL)) return false;
 
 	// Unexpected thing
-	short cof[MAXCOF];
-	get_coeffs(cof, pfx, cyc, cyclen);
+	short cof[MAX_EVENT_COF];
+	get_event_coeffs(cof, pfx, cyc, cyclen);
 	int clen = 0;
 	for (int i=0; -100 < cof[i]; i++) clen++;
 	if (0 == cof[clen-1])
@@ -202,15 +132,6 @@ long event_to_bitseq(long pfx, long cyc, int cyclen)
 	return pfx;
 }
 
-void print_bitseq(long bitseq, char* pre, char* suf)
-{
-	printf("%s", pre);
-	for (int i=0; i< MAXBITS; i++)
-		printf("%ld", (bitseq >> (MAXBITS-1-i)) & 1UL);
-
-	printf("%s", suf);
-}
-
 double event_to_double(long pfx, long cyc, int cyclen)
 {
 	// Brute force, no finesse.
@@ -246,31 +167,36 @@ double finite_to_double(long pfx, long cyc, int cyclen)
 
 // ---------------------------------------------------------------------
 
-void print_debug_info(long pfx, long cyc, int cyclen)
+void print_debug_info(unsigned long p, unsigned long q)
 {
-	bool pok = is_prefix_ok(pfx, cyc, cyclen);
+	bool pok = is_event_ok(p, q);
 	if (false == pok)
 		printf("Error: prefix is reducible\n");
 
-	short cof[MAXCOF];
-	get_coeffs(cof, pfx, cyc, cyclen);
-	printf("Coeffs are: ");
-	print_coeffs(cof);
-	double gold = find_ezero(cof, 1.0, 2.0);
-
+	unsigned long pfx;
+	unsigned long cyc;
+	int cyclen;
+	get_event_cycle (p, q, &pfx, &cyc, &cyclen);
 	printf("Prefix = %ld cycle=%ld len=%d\n", pfx, cyc, cyclen);
+
+	short cof[MAX_EVENT_COF];
+	get_event_coeffs(cof, pfx, cyc, cyclen);
+	print_event_coeffs(cof, "Coeffs are: ", "\n");
+
+	double gold = find_event_zero(cof, 1.0, 2.0);
+	printf("Root %20.16g\n", gold);
+
 	double rat = event_to_double(pfx, cyc, cyclen);
 	printf("Orbit code=%20.16g\n", rat);
 
-	printf("Root %20.16g\n", gold);
-	int badbit = validate_orbit(gold, pfx, cyc, cyclen, true);
-	if (0 < badbit && badbit < 40)
+	unsigned long dyad = beta_to_dyadic(gold);
+	unsigned long drat = rational_to_dyadic(p, q, WORDLEN);
+	int badbit = compare_dyadics(dyad, drat);
+	if (0 <= badbit && badbit < 40)
 		printf("Error: bad orbit at %d\n", badbit);
 
-	long orbits = orbit_to_bitseq(gold);
-	long events = event_to_bitseq(pfx, cyc, cyclen);
-	print_bitseq(orbits, "orbit= ", "\n");
-	print_bitseq(events, "event= ", "\n");
+	print_dyadic(dyad, "midpoint orbi= ", "\n");
+	print_dyadic(drat, "rational dyad= ", "\n");
 
 // #define ONE_SIXTH
 #ifdef ONE_SIXTH
