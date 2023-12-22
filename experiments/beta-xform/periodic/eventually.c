@@ -197,7 +197,7 @@ void print_debug_info(unsigned long p, unsigned long q)
 		printf("Error: Rejected polynomial\n");
 
 	unsigned long dyad = beta_to_dyadic(gold);
-	unsigned long drat = rational_to_dyadic(p, q, WORDLEN);
+	unsigned long drat = rational_to_dyadic(p+q, 2*q, WORDLEN);
 	int badbit = compare_dyadics(dyad, drat);
 	if (0 <= badbit && badbit < 40)
 		printf("Error: bad orbit at %d\n", badbit);
