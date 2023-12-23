@@ -1,5 +1,5 @@
 
-set out 'bra-fin.png'
+#set out 'bra-fin.png'
 set term png size 1024,768
 # set term png size 640, 480
 
@@ -13,27 +13,31 @@ set yrange [-0.1:1.1]
 
 set title "Move map"
 
-plot "bra-fin.dat" using 1:3 with lines linewidth 1 title ""
-plot "bra-fin.dat" using 1:(1-$2) with lines linewidth 1 title "256-512", \
-     "bra-fin.dat" using ($1/2):(1-$2) with lines linewidth 1 title "512-1024",\
-     "bra-fin.dat" using ($1/4):(1-$2) with lines linewidth 1 title "1024-2048"
+# plot "bra-fin.dat" using 1:3 with lines linewidth 1 title ""
 
 # ######################################################################
-set out 'valid-index.png'
+# set out 'valid-index.png'
+set out 'valid-index.eps'
+# set term postscript eps color enhanced fontscale 1.4
+# set term postscript eps color enhanced font 'Helvetica,16'
+# set term postscript eps color enhanced size 8,5 fontscale 2.4
+set term postscript eps color enhanced fontscale 1.4
+set encoding utf8
 set logscale x
 set xrange [64:128]
-set yrange [-0.1:10]
+set yrange [-0.2:13]
 unset xtics
 unset ytics
 
 set title "Valid Index Indicator Function"
-set ylabel "theta indicator"
+set ylabel "θ Indicator"
 
 plot "bra-fin.dat" using 1:($2) with lines linewidth 2 title "64-128", \
      "bra-fin.dat" using ($1/2):($2+1.2) with lines linewidth 2 title "128-256", \
      "bra-fin.dat" using ($1/4):($2+2.4) with lines linewidth 2 title "256-512", \
      "bra-fin.dat" using ($1/8):($2+3.6) with lines linewidth 2 title "512-1024", \
      "bra-fin.dat" using ($1/16):($2+4.8) with lines linewidth 2 title "1024-2048",\
-     "bra-fin.dat" using ($1/256):($2+6.0) with lines linewidth 2 title "16384-32768"
+     "bra-fin.dat" using ($1/256):($2+6.0) with lines linewidth 2 title "16384-32768",\
+     "bra-fin.dat" using ($1/4096):($2+7.2) with lines linewidth 2 title "262K-524K"
 
 #####
