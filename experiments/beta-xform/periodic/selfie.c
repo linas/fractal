@@ -158,9 +158,12 @@ bool valid_gold_index(unsigned long idx)
 
 // Find the leader of a valid index.  That is, find the index of the form
 // 2^h(2k+1) with the smallest height h that gives a valid index.
-// The inverse of this function is bracket_gold_left()
+// This move can be undone with bracket_gold_left()
 unsigned long gold_leader(unsigned long idx)
 {
+	// Extreme left side is marked with -1. So jump to center, which is 1.
+	if (-1 == idx) return 1;
+
 	idx = 2UL * idx + 1UL;
 	while (false == valid_gold_index(idx))
 	{
@@ -171,21 +174,23 @@ unsigned long gold_leader(unsigned long idx)
 }
 
 // Same as above; make it clear it is a right-move.
-// The inverse of this function is bracket_gold_left()
+// This move can be undone with bracket_gold_left()
 unsigned long move_gold_right(unsigned long idx)
 {
 	return gold_leader(idx);
 }
 
 // Move left on the binary tree. This is easy!
-// The inverse of this function is bracket_gold_right()
+// This move can be undone with bracket_gold_right()
 unsigned long move_gold_left(unsigned long idx)
 {
+	// Extreme right side is zero. Move to 1 in the center.
+	if (0 == idx) return 1UL;
 	return idx << 1;
 }
 
 // Given an valid index, return the right side of the bracket that
-// contains that index. This is the inverse of move_gold_right().
+// contains that index. This undoes what move_gold_right() did.
 unsigned long bracket_gold_left(unsigned long idx)
 {
 	unsigned long clef = idx;
@@ -196,7 +201,7 @@ unsigned long bracket_gold_left(unsigned long idx)
 }
 
 // Given an valid index, return the right side of the bracket that
-// contains that index. This is the inverse of gold_leader().
+// contains that index. This undoes what move_gold_left() did.
 unsigned long bracket_gold_right(unsigned long idx)
 {
 	unsigned long brig = idx >> 1;

@@ -315,6 +315,20 @@ bool validate_bracket(long n)
 			n, cright, nright); ok = false; }
 
 	// ----------------------
+	// Validate dyadic moves.
+	long dleft = move_gold_left(n);
+	long rup = bracket_gold_right(dleft);
+	if (rup != n)
+		{ printf("Error: Failed return from left move for %ld went to %ld came back to %ld\n",
+			n, dleft, rup); ok = false; }
+
+	long dright = move_gold_right(n);
+	long lup = bracket_gold_left(dright);
+	if (lup != n)
+		{ printf("Error: Failed return from right move for %ld went to %ld came back to %ld\n",
+			n, dright, lup); ok = false; }
+
+	// ----------------------
 	// Validate conversion to and from Baire.
 	int cfrac[SZ];
 	int len = index_to_fbaire(cfrac, n);
