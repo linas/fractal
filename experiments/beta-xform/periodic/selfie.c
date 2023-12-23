@@ -225,6 +225,61 @@ unsigned long bracket_gold_right(unsigned long idx)
 }
 
 /* ================================================================= */
+/*
+ * Simple, basic unit-test for indexes.
+ */
+bool test_gold_index(unsigned long idx)
+{
+	if (-2 == idx)
+		{ printf("Error: overflow index %ld\n", idx); return false; }
+
+	bool ok = valid_gold_index(idx);
+	if (!ok)
+		printf("Error: Not a valid index: %ld\n", idx);
+
+	double beta = golden_beta(idx);
+
+	// ----------------------
+	long cleft = bracket_gold_left(idx);
+	bool leftok = valid_gold_index(cleft);
+	if (!leftok)
+		{ printf("Error: Left bracket not valid: %ld\n", idx); ok=false; }
+
+	double gleft = golden_beta(cleft);
+	if (gleft >= beta)
+		{ printf("Error: bad left bracket at %ld: nleft=%ld gold=%g gleft=%g\n",
+			idx, cleft, beta, gleft); ok = false; }
+
+	// ----------------------
+	long cright = bracket_gold_right(idx);
+	bool rightok = valid_gold_index(cright);
+	if (!rightok)
+		{ printf("Error: Left bracket not valid: %ld\n", idx); ok=false; }
+
+	double gright = golden_beta(cright);
+	if (gright >= beta)
+		{ printf("Error: bad right bracket at %ld: nright=%ld gold=%g gright=%g\n",
+			idx, cright, beta, gright); ok = false; }
+
+	// ----------------------
+	// Validate dyadic moves.
+	long dleft = move_gold_left(idx);
+	long rup = bracket_gold_right(dleft);
+	if (rup != idx)
+		{ printf("Error: Failed return from left move for %ld went to %ld came back to %ld\n",
+			idx, dleft, rup); ok = false; }
+
+	long dright = move_gold_right(idx);
+	long lup = bracket_gold_left(dright);
+	if (lup != idx)
+		{ printf("Error: Failed return from right move for %ld went to %ld came back to %ld\n",
+			idx, dright, lup); ok = false; }
+
+	if (!ok) printf("-------\n");
+	return ok;
+}
+
+/* ================================================================= */
 // Return the dyadic that approximates the rational p/q,
 // truncated to len bits. Rationals have infinite periodic bitseqs,
 // so this just expands that bitseq, and then truncates it.

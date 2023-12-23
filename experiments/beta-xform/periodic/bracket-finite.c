@@ -26,12 +26,14 @@ unsigned long move_gold_index(unsigned long moves, unsigned long idx)
 
 int main(int argc, char* argv[])
 {
-	if (2 != argc) {
+	if (3 != argc) {
 		fprintf(stderr, "Usage: %s <move> <idx>\n", argv[0]);
 		exit(1);
 	}
 	long moves = atol(argv[1]);
 	long idx = atol(argv[2]);
 
+	test_gold_index(idx);
 	long down = move_gold_index(moves, idx);
+	test_gold_index(down);
 }
