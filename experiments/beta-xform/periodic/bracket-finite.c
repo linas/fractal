@@ -53,9 +53,11 @@ int main(int argc, char* argv[])
 
 	for (long mov=0; mov< maxind; mov++)
 	{
-		if (false == valid_gold_index(mov)) continue;
+		bool ok = valid_gold_index(mov);
 		long idx = move_gold_index(mov);
-		if (idx != mov)
-			printf("Hey: moved to %ld which is not %ld\n", idx, mov);
+
+		printf("%ld	%d	%ld\n", mov, ok, idx);
+
+		// long lead = gold_leader(mov);
 	}
 }
