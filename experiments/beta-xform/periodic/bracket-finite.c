@@ -51,12 +51,20 @@ int main(int argc, char* argv[])
 	int maxord = atoi(argv[1]);
 	long maxind = 1UL << maxord;
 
-	for (long mov=0; mov< maxind; mov++)
+	long tsum = 0;
+	int ord = 1;
+	for (long mov=1; mov< maxind; mov++)
 	{
+		if (mov%ord == 0)
+		{
+			ord <<= 1;
+			tsum = 0;
+		}
 		bool ok = valid_gold_index(mov);
+		tsum += ok;
 		long idx = move_gold_index(mov);
 
-		printf("%ld	%d	%ld\n", mov, ok, idx);
+		printf("%ld	%d	%ld	%ld\n", mov, ok, tsum, idx);
 
 		// long lead = gold_leader(mov);
 	}
