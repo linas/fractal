@@ -8,32 +8,54 @@
 
 #include "selfie.c"
 
-unsigned long move_gold_index(unsigned long moves, unsigned long idx)
+/*
+ * Implement the result of making a sequence of left-right moves down
+ * the binary tree, starting from the root.
+ */
+unsigned long move_gold_index(unsigned long moves)
 {
+	unsigned long idx = 0;
 	int nmov = bitlen(moves);
-
 	for (int i=0; i< nmov; i++)
 	{
-		if (moves & 1UL)
+		if (moves & (1UL<<(nmov-1-i)))
 			idx = move_gold_right(idx);
 		else
 			idx = move_gold_left(idx);
-
-		moves >>= 1;
 	}
 	return idx;
 }
 
 int main(int argc, char* argv[])
 {
-	if (3 != argc) {
-		fprintf(stderr, "Usage: %s <move> <idx>\n", argv[0]);
+#ifdef MANUAL_EXPLORER
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <move>\n", argv[0]);
 		exit(1);
 	}
 	long moves = atol(argv[1]);
-	long idx = atol(argv[2]);
 
-	print_gold_info(idx);
-	long down = move_gold_index(moves, idx);
+	printf("Moves from index zero:\n");
+	long down = move_gold_index(moves);
 	print_gold_info(down);
+
+	printf("Just the index:\n");
+	print_gold_info(moves);
+#endif
+
+	// Unit test
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
+		exit(1);
+	}
+	int maxord = atoi(argv[1]);
+	long maxind = 1UL << maxord;
+
+	for (long mov=0; mov< maxind; mov++)
+	{
+		if (false == valid_gold_index(mov)) continue;
+		long idx = move_gold_index(mov);
+		if (idx != mov)
+			printf("Hey: moved to %ld which is not %ld\n", idx, mov);
+	}
 }
