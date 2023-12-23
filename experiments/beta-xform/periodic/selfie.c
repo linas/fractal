@@ -172,6 +172,9 @@ double golden_beta(unsigned long idx)
  */
 bool valid_gold_index(unsigned long idx)
 {
+	// Far left limit is beta=1 encoded as -1 and it is valid.
+	if (-1 == idx) return true;
+
 	double gold = golden_beta(idx);
 	unsigned long dyad = beta_to_dyadic(gold);
 	// printf("Index=%ld gold=%20.16g\n", idx, gold);
@@ -269,7 +272,7 @@ bool test_gold_index(unsigned long idx)
 	long cleft = bracket_gold_left(idx);
 	bool leftok = valid_gold_index(cleft);
 	if (!leftok)
-		{ printf("Error: Left bracket not valid: %ld\n", idx); ok=false; }
+		{ printf("Error: Left bracket %ld of %ld not valid\n", cleft, idx); ok=false; }
 
 	double gleft = golden_beta(cleft);
 	if (gleft >= beta)
