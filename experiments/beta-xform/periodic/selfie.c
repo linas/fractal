@@ -158,7 +158,8 @@ bool valid_gold_index(unsigned long idx)
 
 // Find the leader of a valid index.  That is, find the index of the form
 // 2^h(2k+1) with the smallest height h that gives a valid index.
-long gold_leader(unsigned long idx)
+// The inverse of this function is bracket_gold_left()
+unsigned long gold_leader(unsigned long idx)
 {
 	idx = 2UL * idx + 1UL;
 	while (false == valid_gold_index(idx))
@@ -169,25 +170,48 @@ long gold_leader(unsigned long idx)
 	return idx;
 }
 
-// Given an index, return the right side of the bracket that contains
-// it.
-unsigned long bracket_gold_right(unsigned long n)
+// Same as above; make it clear it is a right-move.
+// The inverse of this function is bracket_gold_left()
+unsigned long move_gold_right(unsigned long idx)
 {
-	if (0 == n%2)
-	{
-		// If its a multiple of two, just divide by two.
-		unsigned long brig = n >> 1;
-		if (valid_gold_index(brig)) return brig;
+	return gold_leader(idx);
+}
 
-		// Ooops. Must have been a leader. Recurse.
-		while (brig%2 == 0) brig >>= 1;
+// Move left on the binary tree. This is easy!
+// The inverse of this function is bracket_gold_right()
+unsigned long move_gold_left(unsigned long idx)
+{
+	return idx << 1;
+}
+
+// Given an valid index, return the right side of the bracket that
+// contains that index. This is the inverse of move_gold_right().
+unsigned long bracket_gold_left(unsigned long idx)
+{
+	unsigned long clef = idx;
+	while (0 == clef%2 && 0 != clef) clef >>= 1;
+	clef = (clef-1)/2;
+	if (0 == clef) clef = (unsigned long) -1L; // Yes really.
+	return clef;
+}
+
+// Given an valid index, return the right side of the bracket that
+// contains that index. This is the inverse of gold_leader().
+unsigned long bracket_gold_right(unsigned long idx)
+{
+	unsigned long brig = idx >> 1;
+
+	// If it's odd, recurse.
+	if (1 == idx%2)
 		return bracket_gold_right(brig);
-	}
 
-	// Hop down own level. If it's not even or not good, recurse.
-	unsigned long brig = (n-1)/2;
-	if (0 == n%2 && valid_gold_index(brig)) return brig;
+	// If its good, we are done.
+	if (valid_gold_index(brig)) return brig;
+
+	// Ooops. Must have been a leader. Recurse.
+	while (brig%2 == 0) brig >>= 1;
 	return bracket_gold_right(brig);
+
 }
 
 /* ================================================================= */
