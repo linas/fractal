@@ -20,6 +20,11 @@
  * December 2023
  */
 
+#include <math.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #define WORDLEN 64
 
 /* Return length of bitstring. Same as ceil(log2(bitstr)). */

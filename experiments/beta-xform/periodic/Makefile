@@ -9,7 +9,7 @@ FUNC=../../../tools/lib/libfunc.a
 
 all: nilpot irred zero tribo midmap irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
-	irred-height irred-tree irred-seek eventually
+	irred-height irred-tree irred-seek eventually bracket-finite
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -37,12 +37,9 @@ irred-height.o: irred-height.c irred-gold.c
 irred-tree.o: irred-tree.c irred-gold.c selfie.c
 irred-seek.o: irred-seek.c irred-gold.c
 eventually.o: eventually.c selfie.c
+bracket-finite.o: bracket-finite.c selfie.c
 
-nilpot: nilpot.o
-irred: irred.o
 zero: zero.o $(BRAT)
-tribo: tribo.o
-midmap: midmap.o
 
 irred-gf: irred-gf.o $(BRAT)
 irred-disk: irred-disk.o $(BRAT)
