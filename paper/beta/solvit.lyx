@@ -14661,7 +14661,11 @@ The next table lists the acceptable polynomial indexes for order 5, 6 and
 \begin_inset Text
 
 \begin_layout Plain Layout
-order
+order 
+\begin_inset Formula $\nu$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -14751,7 +14755,7 @@ valid indexes
 \end_layout
 
 \begin_layout Standard
-The properties of this sequence are breifly reviewed in the next section.
+The properties of this sequence are briefly reviewed in the next section.
 \end_layout
 
 \begin_layout Subsection
@@ -14759,35 +14763,32 @@ Properties of the theta sequence
 \end_layout
 
 \begin_layout Standard
-Define the the set of 
+Define the 
 \begin_inset Quotes eld
 \end_inset
 
-valid
+validity set
 \begin_inset Quotes erd
 \end_inset
 
- or 
-\begin_inset Quotes eld
-\end_inset
-
-acceptable
-\begin_inset Quotes erd
-\end_inset
-
- indexes as 
+ of valid or acceptable indexes as 
 \begin_inset Formula 
 \begin{equation}
-\mathcal{B}=\left\{ n\in\mathbb{N}:\theta_{n}\left(r_{n}\right)=1,p_{n}\left(r_{n}\right)=0\right\} \label{eq:valid index set}
+\Psi=\left\{ n\in\mathbb{N}:\theta_{n}\left(r_{n}\right)=1,p_{n}\left(r_{n}\right)=0\right\} \label{eq:valid index set}
 \end{equation}
 
 \end_inset
 
-where 
+This is just the list of indexes from the previous two tables; it is 
+\begin_inset Formula $\Psi$
+\end_inset
+
+={0,1, 2,3, 4,6,7, 8,10,12,13,14,15, 16,20,24,25,26,28,29,30,31, ...}.
+ The 
 \begin_inset Formula $\theta_{n}$
 \end_inset
 
- was the acceptance function from eqn 
+ is the acceptance function from eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:theta mask"
@@ -14803,6 +14804,18 @@ noprefix "false"
 \end_inset
 
  for the membership indicator function for this set.
+ This function is visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -14812,15 +14825,18 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Indicator function 
 \begin_inset Formula $\theta$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Theta-Indicator"
+
 \end_inset
 
 
@@ -14862,13 +14878,43 @@ noprefix "false"
 \end_inset
 
 .
- The function is approximately periodic on a log2 scale, as clearly seen
- in the above stacking of 7 ranges.
- At higher orders, some new allowed values appear on the left; many more
- are knocked out on the right.
- The function scales asymptotically as Moreau's necklace-counting function,
- and so gets progressively thinner.
- At the center are intervals that seem like they will always remain empty.
+ The function is approximately periodic as a function of the order 
+\begin_inset Formula $\nu=\left\lfloor \log_{2}n\right\rfloor +2$
+\end_inset
+
+ of the corresponding polynomial; the order is just the length of a finite
+ orbit.
+ This figure just stacks seven such ranges, for orders 
+\begin_inset Formula $\nu$
+\end_inset
+
+=6,7,8,9,10,14,18.
+ One can view each row as a comb; the number of teeth in the comb given
+ precisely by Moreau's necklace-counting function 
+\begin_inset Formula $M_{\nu}$
+\end_inset
+
+.
+ The width of the teeth go as 
+\begin_inset Formula $2^{-\nu}$
+\end_inset
+
+, but the number of teeth goes as 
+\begin_inset Formula $M_{\nu}\sim2^{\nu}/\nu$
+\end_inset
+
+.
+ In the limit 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, the teeth converge onto a set of measure zero.
+ This is just the set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+, taken with a real-valued index, rather than an integer index.
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -14889,24 +14935,34 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-Define 
-\begin_inset Formula $\psi_{m}$
+The elements of the validity set 
+\begin_inset Formula $\Psi$
 \end_inset
 
- as the pullback of the summatory function for this mask.
- That is, let 
-\begin_inset Formula $\psi_{m}$
+ are ordered; this is the validity sequence 
+\begin_inset Formula $\psi_{m}=\psi\left(m\right)$
 \end_inset
 
- be the smallest integer for which the following holds:
-\begin_inset Formula 
-\[
-m=\sum_{n=1}^{\psi_{m}}\theta_{n}
-\]
-
+.
+ It is convenient to start the sequence at 
+\begin_inset Formula $\psi_{0}=0$
 \end_inset
 
-Thus, 
+.
+ This corresponds to 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+; at the far left, for 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+, write 
+\begin_inset Formula $\psi_{-1}=\infty$
+\end_inset
+
+.
+ The function 
 \begin_inset Formula $\psi_{m}$
 \end_inset
 
@@ -14914,13 +14970,38 @@ Thus,
 \begin_inset Formula $\theta$
 \end_inset
 
-, so that 
+, and so 
 \begin_inset Formula $\theta\left(\psi_{m}\right)=1$
 \end_inset
 
- by definition.
- Equivalently, it counts the total number of one-bits below that location.
- It is convenient to start the sequence at 
+.
+ 
+\end_layout
+
+\begin_layout Standard
+xxxEquivalently, it counts the total number of one-bits below some location;
+ it is the pullback of the summatory function for the theta mask.
+ Thus 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+ is smallest integer for for which the sum below holds:
+\begin_inset Formula 
+\[
+m=\sum_{n=1}^{\psi_{m}}\theta_{n}
+\]
+
+\end_inset
+
+ It is a bijection, in that 
+\begin_inset Formula $\psi_{m}\in\mathcal{B}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is convenient to start the sequence at 
 \begin_inset Formula $\psi_{0}=0$
 \end_inset
 
@@ -14930,7 +15011,11 @@ Thus,
 \end_inset
 
  as equivalent notation.
- 
+ The validity sequence 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is the sequence already given 
 \end_layout
 
 \begin_layout Standard
@@ -15533,20 +15618,20 @@ The left and right moves
 \end_inset
 
  on the binary tree can then be written as 
-\begin_inset Formula $L:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)$
+\begin_inset Formula 
+\begin{align}
+L & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)\label{eq:Bracket recursion}\\
+R & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)\nonumber 
+\end{align}
+
 \end_inset
 
- and 
-\begin_inset Formula $R:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)$
-\end_inset
-
-.
- These correspond to a splitting of the interval 
+These split the interval 
 \begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
 \end_inset
 
- likewise.
- The inequalities are strict, and the figure indicates tht the roots are
+ into two pieces, likewise.
+ The inequalities are strict, and the figure indicates that the roots are
  dense in the interval 
 \begin_inset Formula $1\le\beta\le2$
 \end_inset
@@ -15709,7 +15794,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsubsection
-Dense
+Roots are dense in the reals
 \end_layout
 
 \begin_layout Standard
@@ -15736,6 +15821,32 @@ Another important property visible in this figure is that the roots
 
 .
  Expressed as a set, these are 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+f_{n}
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
 \begin_inset Formula 
 \[
 \mathcal{B}\left(a,b\right)=\left\{ n\in\mathbb{N}:r_{n}\in\left(a,b\right)\right\} 
@@ -15769,6 +15880,113 @@ noprefix "false"
 
 , taking care to select brackets that are disjoint, and then enumerating
  the roots inside each bracket.
+\end_layout
+
+\begin_layout Subsubsection
+The front sequence
+\end_layout
+
+\begin_layout Standard
+The center points or 
+\begin_inset Quotes eld
+\end_inset
+
+fronts
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ in each interval 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ are in one-to-one correspondence with the nodes in the binary tree.
+ The bracket recursion relations in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bracket recursion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be restated as a commuting diagram
+\begin_inset Formula 
+\begin{align*}
+L & :f_{n}\mapsto f_{2n}=2f_{n}\\
+R & :f_{n}\mapsto f_{2n+1}=\Lambda\left(f_{n}\right)
+\end{align*}
+
+\end_inset
+
+The sequence begins at 
+\begin_inset Formula $f_{1}=1$
+\end_inset
+
+.
+ This sequence contains the same integers as the validity sequence 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+, and so, for all 
+\begin_inset Formula $n$
+\end_inset
+
+, 
+\begin_inset Formula $\theta\left(f_{n}\right)=1$
+\end_inset
+
+.
+ It is a bijection, in that 
+\end_layout
+
+\begin_layout Standard
+It starts as 1,2,3,4, 
+\end_layout
+
+\begin_layout Standard
+beg
+\end_layout
+
+\begin_layout Standard
+Numbering each level in the tree sequentially gives a front sequence 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ that is a bijection between the integers and valid polynomial labels.
+ The front sequence 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ contains the same integers as the validity sequence 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+, and so, for all 
+\begin_inset Formula $n$
+\end_inset
+
+, 
+\begin_inset Formula $\theta\left(f_{n}\right)=1$
+\end_inset
+
+.
+ The validity sequence gave valid indexes in sorted order, so that 
+\begin_inset Formula $\psi_{m}>\psi_{k}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $m>k$
+\end_inset
+
+.
+ The front sequence is a pairing of left-right moves down the binary tree
+ to the index at that tree location.
+ Reprasing
 \end_layout
 
 \begin_layout Subsection
