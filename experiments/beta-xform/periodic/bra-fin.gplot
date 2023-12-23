@@ -1,8 +1,15 @@
 
-set out 'bra-fin.png'
-set term png size 1024,768
+#set out 'bra-fin-sum.png'
 # set term png size 640, 480
 
+#set title "Height sums"
+#set logscale x
+#set logscale y
+## set xrange [256:512]
+#plot "bra-fin.dat" using 1:5 with lines linewidth 2 title "su"
+
+set out 'bra-fin.png'
+set term png size 1024,768
 set title "Height injection"
 set logscale x
 set logscale y
@@ -12,6 +19,8 @@ plot "bra-fin.dat" using ($1*4):4 with lines linewidth 2 title "64-128", \
      "bra-fin.dat" using 1:4 with lines linewidth 2 title "256-512", \
      "bra-fin.dat" using ($1/4):4 with lines linewidth 2 title "2048-4096"
 
+# -------------------------------------------------------------------------------
+# Meh
 #set logscale x
 #set logscale y
 #set xrange [256:512]

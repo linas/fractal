@@ -51,6 +51,7 @@ int main(int argc, char* argv[])
 	int maxord = atoi(argv[1]);
 	long maxind = 1UL << maxord;
 
+	long idxsum = 0;
 	long tsum = 0;
 	int ord = 1;
 	for (long mov=1; mov< maxind; mov++)
@@ -63,8 +64,9 @@ int main(int argc, char* argv[])
 		bool ok = valid_gold_index(mov);
 		tsum += ok;
 		long idx = move_gold_index(mov);
+		idxsum += idx;
 
-		printf("%ld	%d	%ld	%ld\n", mov, ok, tsum, idx);
+		printf("%ld	%d	%ld	%ld	%ld\n", mov, ok, tsum, idx, idxsum);
 
 		// long lead = gold_leader(mov);
 	}
