@@ -279,6 +279,29 @@ bool test_gold_index(unsigned long idx)
 	return ok;
 }
 
+/* Print some information about this index */
+void print_gold_info(long seqno)
+{
+	double beta = golden_beta(seqno);
+	printf("Index %ld beta = %18.16g\n", seqno, beta);
+	unsigned long dyad = beta_to_dyadic(beta);
+	print_dyadic(dyad, 40, "midpo orbi= ", "\n");
+
+	test_gold_index(seqno);
+
+	long nleft = bracket_gold_left(seqno);
+	double gleft = golden_beta(nleft);
+	printf("Left limit: %ld = %g\n", nleft, gleft);
+	unsigned long ldyad = beta_to_dyadic(gleft);
+	print_dyadic(ldyad, 40, "left  orbi= ", "\n");
+
+	long nright = bracket_gold_right(seqno);
+	double gright = golden_beta(nright);
+	printf("Right limit: %ld = %g\n", nright, gright);
+	unsigned long rdyad = beta_to_dyadic(gright);
+	print_dyadic(rdyad, 40, "right orbi= ", "\n");
+	printf("-------\n");
+}
 /* ================================================================= */
 // Return the dyadic that approximates the rational p/q,
 // truncated to len bits. Rationals have infinite periodic bitseqs,

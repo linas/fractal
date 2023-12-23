@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 	long moves = atol(argv[1]);
 	long idx = atol(argv[2]);
 
-	test_gold_index(idx);
+	print_gold_info(idx);
 	long down = move_gold_index(moves, idx);
-	test_gold_index(down);
+	print_gold_info(down);
 }
