@@ -265,6 +265,8 @@ bool validate_bracket(long n)
 {
 	bool ok = true;
 
+	// printf("Validate bracket for %ld\n", n);
+
 	if (-1 > n)
 		{ printf("Error: overflow index %ld\n", n); return false; }
 
@@ -273,7 +275,10 @@ bool validate_bracket(long n)
 	if (gold < 1.0)
 		{ printf("Error: invalid index %ld\n", n); ok = false; }
 
-	// printf("Validate bracket for %ld\n", n);
+	double beta = golden_beta(n);
+	if (1.0e-15 < fabs(beta-gold))
+		{ printf("Error: beta and gold differ for %ld by %g \n", n, beta-gold); ok = false; }
+
 
 	// ----------------------
 	// Verify the left bracket by ripping out powers of two until

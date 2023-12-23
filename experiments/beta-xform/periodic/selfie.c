@@ -89,8 +89,10 @@ unsigned long beta_to_dyadic(double beta)
  * Polynomial is constructed from the bit string of (2n+1). Construction
  * is the bit-shift construction: the lowest powers of x are given by
  * right-most bits; highest powers are the left-most bits.
+ *
+ * Should return exactly the same values as the recursive version below.
  */
-double golden_poly(unsigned long idx, double x)
+double xgolden_poly(unsigned long idx, double x)
 {
 	double acc = 0.0;
 	double xn = 1.0;
@@ -103,6 +105,28 @@ double golden_poly(unsigned long idx, double x)
 	}
 	// printf("bisect n=%ld x=%18.16g beta=%g\n", idx, x, xn-acc);
 	return xn - acc;
+}
+
+/* Implement the n'th golden polynomial. Return result from evaluating it.
+ *
+ * Polynomial is constructed from the bit string of (2n+1). Construction
+ * is the recursive construction: recurse according to the 2-adic bit position.
+ * Should provide exactly the same results as above.
+ */
+double golden_poly(unsigned long idx, double x)
+{
+	double p_n = x-1.0;   // start with p_0(x)
+	unsigned long bitstr = idx;
+	int len = bitlen(bitstr);
+	for (int i=0; i< len; i++)
+	{
+		if (bitstr & (1UL<<(len-1-i)))
+			p_n = x * p_n - 1.0;
+		else
+			p_n = x * (p_n + 1.0) - 1.0;
+	}
+	// printf("bisect n=%ld x=%18.16g beta=%g\n", idx, x, p_n);
+	return p_n;
 }
 
 /* Use midpoint bisection to find the single, unique
