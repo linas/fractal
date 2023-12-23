@@ -101,7 +101,7 @@ double golden_poly(unsigned long idx, double x)
 		xn *= x;
 		bitstr >>= 1;
 	}
-// printf("duuude n=%d x=%20.16g beta=\n", n, x, xn-acc);
+	// printf("bisect n=%ld x=%18.16g beta=%g\n", idx, x, xn-acc);
 	return xn - acc;
 }
 
@@ -130,6 +130,8 @@ static double find_zero(unsigned long idx, double lo, double hi)
  */
 double golden_beta(unsigned long idx)
 {
+	if (-1 == idx) return 1.0;
+	if (0 == idx) return 2.0;
 	return find_zero(idx, 1.0, 2.0);
 }
 
@@ -257,7 +259,7 @@ bool test_gold_index(unsigned long idx)
 		{ printf("Error: Left bracket not valid: %ld\n", idx); ok=false; }
 
 	double gright = golden_beta(cright);
-	if (gright >= beta)
+	if (gright < beta)
 		{ printf("Error: bad right bracket at %ld: nright=%ld gold=%g gright=%g\n",
 			idx, cright, beta, gright); ok = false; }
 
