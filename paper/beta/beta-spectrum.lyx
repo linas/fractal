@@ -8125,35 +8125,32 @@ Properties of the theta sequence
 \end_layout
 
 \begin_layout Standard
-Define the the set of 
+Define the 
 \begin_inset Quotes eld
 \end_inset
 
-valid
+validity set
 \begin_inset Quotes erd
 \end_inset
 
- or 
-\begin_inset Quotes eld
-\end_inset
-
-acceptable
-\begin_inset Quotes erd
-\end_inset
-
- indexes as 
+ of valid or acceptable indexes as 
 \begin_inset Formula 
 \begin{equation}
-\mathcal{B}=\left\{ n\in\mathbb{N}:\theta_{n}\left(r_{n}\right)=1,p_{n}\left(r_{n}\right)=0\right\} \label{eq:valid index set}
+\Psi=\left\{ n\in\mathbb{N}:\theta_{n}\left(r_{n}\right)=1,p_{n}\left(r_{n}\right)=0\right\} \label{eq:valid index set}
 \end{equation}
 
 \end_inset
 
-where 
+This is just the list of indexes from the previous two tables; it is 
+\begin_inset Formula $\Psi$
+\end_inset
+
+={0,1, 2,3, 4,6,7, 8,10,12,13,14,15, 16,20,24,25,26,28,29,30,31, ...}.
+ The 
 \begin_inset Formula $\theta_{n}$
 \end_inset
 
- was the acceptance function from eqn 
+ is the acceptance function from eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:theta mask"
@@ -8169,6 +8166,18 @@ noprefix "false"
 \end_inset
 
  for the membership indicator function for this set.
+ This function is visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -8183,6 +8192,13 @@ status collapsed
 \begin_layout Plain Layout
 Indicator function 
 \begin_inset Formula $\theta$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Theta-Indicator"
+
 \end_inset
 
 
@@ -8224,13 +8240,42 @@ noprefix "false"
 \end_inset
 
 .
- The function is approximately periodic on a log2 scale, as clearly seen
- in the above stacking of 7 ranges.
- At higher orders, some new allowed values appear on the left; many more
- are knocked out on the right.
- The function scales asymptotically as Moreau's necklace-counting function,
- and so gets progressively thinner.
- At the center are intervals that seem like they will always remain empty.
+ The function is approximately periodic as a function of the order 
+\begin_inset Formula $\nu=\left\lfloor \log_{2}n\right\rfloor +2$
+\end_inset
+
+ of the corresponding polynomial; the order is just the length of a finite
+ orbit.
+ This figure just stacks seven such ranges, for orders 
+\begin_inset Formula $\nu$
+\end_inset
+
+=6,7,8,9,10,14,18.
+ One can view each row as a comb; the number of teeth in the comb given
+ precisely by Moreau's necklace-counting function 
+\begin_inset Formula $M_{\nu}$
+\end_inset
+
+.
+ The width of the teeth go as 
+\begin_inset Formula $2^{-\nu}$
+\end_inset
+
+, but the number of teeth goes as 
+\begin_inset Formula $M_{\nu}\sim2^{\nu}/\nu$
+\end_inset
+
+.
+ In the limit 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, the teeth converge onto a set of measure zero.
+ This is just the set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+, taken with a real-valued index, rather than an integer index.
 \end_layout
 
 \begin_layout Plain Layout
@@ -8251,24 +8296,34 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-Define the validity sequence 
-\begin_inset Formula $\psi_{m}$
+The elements of the validity set 
+\begin_inset Formula $\Psi$
 \end_inset
 
- as the pullback of the summatory function for this mask.
- That is, let 
-\begin_inset Formula $\psi_{m}$
+ are ordered; this is the validity sequence 
+\begin_inset Formula $\psi_{m}=\psi\left(m\right)$
 \end_inset
 
- be the smallest integer for which the following holds:
-\begin_inset Formula 
-\[
-m=\sum_{n=1}^{\psi_{m}}\theta_{n}
-\]
-
+.
+ It is convenient to start the sequence at 
+\begin_inset Formula $\psi_{0}=0$
 \end_inset
 
-Thus, 
+.
+ This corresponds to 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+; at the far left, for 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+, write 
+\begin_inset Formula $\psi_{-1}=\infty$
+\end_inset
+
+.
+ The function 
 \begin_inset Formula $\psi_{m}$
 \end_inset
 
@@ -8276,34 +8331,52 @@ Thus,
 \begin_inset Formula $\theta$
 \end_inset
 
-, so that 
+, and so 
 \begin_inset Formula $\theta\left(\psi_{m}\right)=1$
 \end_inset
 
- by definition.
- Equivalently, it counts the total number of one-bits below that location.
- It is convenient to start the sequence at 
-\begin_inset Formula $\psi_{0}=0$
-\end_inset
-
 .
- Write 
-\begin_inset Formula $\psi\left(n\right)=\psi_{n}$
-\end_inset
-
- as equivalent notation.
- The validity sequence 
-\begin_inset Formula $\psi$
-\end_inset
-
- is the sequence already given in the previous two tables; it is just the
- list of indexes 0,1, 2,3, 4,6,7, 8,10,12,13,14,15, 16,20,24,25,26,28,29,30,31,
- ...
+ 
 \end_layout
 
 \begin_layout Standard
-Several properties are apparent.
- 
+The summatory function of the indicator is 
+\begin_inset Formula $S\left(k\right)=\sum_{n=1}^{k}\theta_{n}$
+\end_inset
+
+.
+ It counts the total number of one-bits below the location 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ The validity sequence is the pullback of the summatory function.
+ Each 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+ is the smallest integer 
+\begin_inset Formula $k$
+\end_inset
+
+ for which 
+\begin_inset Formula $m=S\left(k\right)$
+\end_inset
+
+ holds true, and so one has 
+\begin_inset Formula $m=S\left(\psi_{m}\right)$
+\end_inset
+
+.
+ The pullback can be expressed as 
+\begin_inset Formula $\psi\left(m\right)=\psi\left(S\left(\psi\left(m\right)\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A few addtional properties may be noted:
 \end_layout
 
 \begin_layout Itemize
@@ -8373,50 +8446,89 @@ If
 \end_layout
 
 \begin_layout Standard
-As noted earlier, the number of valid polynomials of each order are given
- by the necklace counting function 
-\begin_inset Formula $M_{k}$
+Each of thse properties is visible in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
- Therefore, one has, for all 
-\begin_inset Formula $m$
-\end_inset
-
- that 
-\begin_inset Formula 
-\[
-\sum_{n=1}^{2^{m}-1}\theta\left(n\right)=\sum_{k=2}^{m+1}M_{k}\equiv S_{m}
-\]
-
-\end_inset
-
-Using the 
-\begin_inset Formula $S_{m}$
-\end_inset
-
- defined immediately above, one has 
-\begin_inset Formula $\psi\left(S_{m}\right)=2^{m}-1$
-\end_inset
-
- and 
-\begin_inset Formula $\psi\left(S_{m}+1\right)=2^{m}$
-\end_inset
-
-.
+ The second bullet accounts for the stability of the comb-teeth, once they
+ appear, while the last bullet accounts for the large spaces that open up,
+ and stay open, never filling in.
 \end_layout
 
 \begin_layout Standard
-The representation of 
-\begin_inset Formula $\theta$
+It is convenient to partition 
+\begin_inset Formula $\Psi$
 \end_inset
 
- as a real number is 
-\begin_inset Formula $\theta=\sum_{n=1}^{\infty}\theta_{n}2^{-n}=0.93258880035365\cdots$
+ into ranks 
+\begin_inset Formula $\nu$
+\end_inset
+
+ that correspond to the length of the orbits, or equivalently, the order
+ of the defining polynomial.
+ Examing the earlier tables, the rank of 
+\begin_inset Formula $n$
+\end_inset
+
+ is 
+\begin_inset Formula $\nu\left(n\right)=\left\lfloor \log_{2}n\right\rfloor +2$
 \end_inset
 
 .
- At this time, this does not appear in OEIS.
+ The partition is then 
+\begin_inset Formula $\Psi=\bigcup_{\nu=1}^{\infty}\Psi_{\nu}$
+\end_inset
+
+ with 
+\begin_inset Formula $\Psi_{\nu}=\left\{ n\in\Psi:\nu\left(n\right)=\nu\right\} $
+\end_inset
+
+.
+ As before, it is convenient to extend the partition so that it can deal
+ with the end-points 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+; this is a kind of (two-point) compactification of these and other various
+ sequences and sets.
+ The compactification here is to write 
+\begin_inset Formula $\nu\left(0\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu\left(-1\right)=\infty$
+\end_inset
+
+, which allows components 
+\begin_inset Formula $\Psi_{1}=\left\{ 0\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\Psi_{\infty}=\left\{ -1\right\} $
+\end_inset
+
+.
+ The size of each component is 
+\begin_inset Formula $\left|\Psi_{\nu}\right|=M_{\nu}$
+\end_inset
+
+ given by Moreau's necklace counting function 
+\begin_inset Formula $M_{\nu}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsubsection
