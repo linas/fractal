@@ -248,7 +248,7 @@ int main(int argc, char* argv[])
 	print_debug_info(p, q);
 #endif
 
-#define BULK_LISTING
+// #define BULK_LISTING
 #ifdef BULK_LISTING
 	if (argc != 2)
 	{
@@ -277,7 +277,7 @@ int main(int argc, char* argv[])
 
 // #define TEST_HYPOTHESIS
 #ifdef TEST_HYPOTHESIS
-			// Hypothesis testing
+			// Hypothesis testing. Set hypo see how it predicts.
 			bool hypo = (pfx%2 == 1);  // False, see 7/12 and 13/20
 			// bool hypo = (pfx != 2);    // true, never happens
 			// int ell = bitlen(pfx);
@@ -324,35 +324,73 @@ int main(int argc, char* argv[])
 
 // #define GRAPH_LISTING
 #ifdef GRAPH_LISTING
-	if (argc != 3)
+	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s <maxpfx> <maxcyclen>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <maxdeno>\n", argv[0]);
 		exit(1);
 	}
+	long maxdeno = atol(argv[1]);
 
-	long maxpfx = atol(argv[1]);
-	int maxcyclen = atoi(argv[2]);
-
-	for (int cyclen =2; cyclen <=maxcyclen; cyclen++)
+	for (long deno = 2; deno <= maxdeno; deno++)
 	{
-		long maxcyc = (1<<cyclen) - 1UL;
-		for (long cyc = 1; cyc <maxcyc; cyc++)
+		for (long num = 1; num <deno; num++)
 		{
-			for (long pfx = 1; pfx <maxpfx; pfx++)
-			{
-				if (false == is_prefix_ok(pfx, cyc, cyclen)) continue;
-				bool orbok = is_orbit_ok(pfx, cyc, cyclen);
+			// Work only with reduced rationals
+			if (1 < gcd(num, deno)) continue;
 
-				double rat = orbit_to_double(pfx, cyc, cyclen);
-				double gold = event_gold(pfx, cyc, cyclen);
-				double good = 0.0;
-				if (orbok) good = gold;
-				double bad = 0.0;
-				if (false==orbok) bad = gold;
-				double fin = finite_to_double(pfx, cyc, cyclen);
-				printf("%ld	%ld	%d	%g	%g	%g	%g\n", pfx, cyc, cyclen, rat, good, bad, fin);
-			}
+			// Don't look at those with zero prefix length
+			// (These are the finite orbits)
+			unsigned long pfx, cyc;
+			int clen;
+			get_event_cycle(num, deno, &pfx, &cyc, &clen);
+			if (0 == pfx) continue;
+
+			bool isok = is_event_ok(num, deno);
+			double gold = event_gold(num, deno);
+			double ex = ((double) num) / ((double) deno);
+
+			printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, isok, gold);
 		}
+		printf("\n");
+	}
+#endif
+
+#define COMB
+#ifdef COMB
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s <maxdeno>\n", argv[0]);
+		exit(1);
+	}
+	long maxdeno = atol(argv[1]);
+
+	for (long deno = 2; deno <= maxdeno; deno++)
+	{
+		printf("%ld	%ld	%g	%d	%g\n", 0L, deno, 0.0, 0, 0.0);
+		bool wasok = 0;
+		for (long num = 1; num <deno; num++)
+		{
+			// Work only with reduced rationals
+			if (1 < gcd(num, deno)) continue;
+
+			// Don't look at those with zero prefix length
+			// (These are the finite orbits)
+			unsigned long pfx, cyc;
+			int clen;
+			get_event_cycle(num, deno, &pfx, &cyc, &clen);
+			if (0 == pfx) continue;
+
+			bool isok = is_event_ok(num, deno);
+			double gold = event_gold(num, deno);
+			double ex = ((double) num) / ((double) deno);
+
+			if (isok && !wasok) printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, wasok, gold);
+			if (!isok && wasok) printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, wasok, gold);
+			printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, isok, gold);
+			wasok = isok;
+		}
+		printf("%ld	%ld	%g	%d	%g\n", deno, deno, 1.0, wasok, 0.0);
+		printf("\n");
 	}
 #endif
 }
