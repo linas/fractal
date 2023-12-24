@@ -1,15 +1,31 @@
 
-set out 'bra-gold.png'
-set term png size 640, 480
+# set out 'bra-uniform-left.png'
+set out 'bra-uniform-right.png'
+set term png size 1024,768
 
-set key left
-set title "Golden front"
-set logscale x
-set xrange [64:127]
-plot "bra-gold.dat" using 1:4 with lines linewidth 2 title "64-127", \
-     "bra-gold.dat" using ($1/4):4 with lines linewidth 2 title "256-511", \
-     "bra-gold.dat" using ($1/16):4 with lines linewidth 2 title "1024-2047"
+# set title "Uniform Left Bracket"
+set title "Uniform Right Bracket"
+set logscale y
+set xrange [0:1]
+#plot "bra-uniform-left.dat" using 2:($4-$5) with lines linewidth 2 title "d2", \
+#     "bra-uniform-left.dat" using 2:($3-$4) with lines linewidth 2 title "d1"
+plot "bra-uniform-right.dat" using 2:($5-$4) with lines linewidth 2 title "d2", \
+     "bra-uniform-right.dat" using 2:($4-$3) with lines linewidth 2 title "d1"
 
+
+# ---------------------------------------------------------------------
+# What do the gold values do? Well, duhh they converge to the beta map.
+#set out 'bra-gold.png'
+#set term png size 640, 480
+#
+#set key left
+#set title "Golden front"
+#set logscale x
+#set xrange [64:127]
+#plot "bra-gold.dat" using 1:4 with lines linewidth 2 title "64-127", \
+#     "bra-gold.dat" using ($1/4):4 with lines linewidth 2 title "256-511", \
+#     "bra-gold.dat" using ($1/16):4 with lines linewidth 2 title "1024-2047"
+#
 # ---------------------------------------------------------------------
 ## What's the larget fron that occurs?
 #set out 'bra-max.png'

@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#if 1
+#ifdef BETA_RANKS
 	// Dump the gold values for front values into a file.
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
@@ -106,6 +106,37 @@ int main(int argc, char* argv[])
 
 			printf("%ld	%d	%ld	%g\n", m, k, idx, gold);
 		}
+	}
+#endif
+
+#define UNIFORM_CONVERGENCE
+#ifdef UNIFORM_CONVERGENCE
+	// Look at how the gold sequence converges.
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
+		exit(1);
+	}
+	int maxord = atoi(argv[1]);
+
+	unsigned long start = 1UL << maxord;
+	unsigned long end = 1UL << (maxord+1);
+	double delta = end-start;
+	delta = 1.0 / delta;
+	for (unsigned long m=start; m<end; m++)
+	{
+		double x = (((double) m-start) +0.5) * delta;
+		unsigned long idx = front_sequence(m);
+		if (MAXIDX < idx) continue;
+		double gold = golden_beta(idx);
+		printf("%ld	%g	%16.14g", m, x, gold);
+		for (int k=1; k<8; k++)
+		{
+			// idx = bracket_gold_left(idx);
+			idx = bracket_gold_right(idx);
+			gold = golden_beta(idx);
+			printf("	%16.14g", gold);
+		}
+		printf("\n");
 	}
 #endif
 }
