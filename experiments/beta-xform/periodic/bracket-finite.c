@@ -27,6 +27,8 @@ int main(int argc, char* argv[])
 
 // #define GRAPH_FOR_PAPER
 #ifdef GRAPH_FOR_PAPER
+	// Dump the front values into a file, for graphing. Used for
+	// graphs in the paper.
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
 		exit(1);
@@ -53,6 +55,9 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+// #define FIND_BIGGEST_FRONT
+#ifdef FIND_BIGGEST_FRONT
+	// Find the largest value for the front in a given rank.
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
 		exit(1);
@@ -79,4 +84,28 @@ int main(int argc, char* argv[])
 		// printf("order = %d mov= %ld max= %ld\n", k, mov, maxlead);
 		printf("%d	%ld	%ld\n", k, mov, maxlead);
 	}
+#endif
+
+#if 1
+	// Dump the gold values for front values into a file.
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
+		exit(1);
+	}
+	int maxord = atoi(argv[1]);
+
+	for (int k=1; k<maxord; k++)
+	{
+		unsigned long start = 1UL << k;
+		unsigned long end = 1UL << (k+1);
+		for (unsigned long m=start; m<end; m++)
+		{
+			unsigned long idx = front_sequence(m);
+			if (MAXIDX < idx) continue;
+			double gold = golden_beta(idx);
+
+			printf("%ld	%d	%ld	%g\n", m, k, idx, gold);
+		}
+	}
+#endif
 }

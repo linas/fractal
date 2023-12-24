@@ -55,6 +55,7 @@
 #include <stdlib.h>
 
 #define WORDLEN 64
+#define MAXIDX (1UL<<(WORDLEN-1))
 
 /* Return length of bitstring. Same as ceil(log2(bitstr)). */
 int bitlen(unsigned long bitstr)
@@ -227,11 +228,14 @@ unsigned long gold_leader(unsigned long idx)
 	// Extreme left side is marked with -1. So jump to center, which is 1.
 	if (-1 == idx) return 1;
 
+	// Indicate overflow errors
+	if (MAXIDX <= idx) return -2L;
+
 	idx = 2UL * idx + 1UL;
 	while (false == valid_gold_index(idx))
 	{
 		idx <<= 1;
-		if (0 == idx) return 0; // overflow error
+		if (MAXIDX <= idx) return -2L;  // overflow error
 	}
 	return idx;
 }
@@ -249,6 +253,8 @@ unsigned long move_gold_left(unsigned long idx)
 {
 	// Extreme right side is zero. Move to 1 in the center.
 	if (0 == idx) return 1UL;
+
+	if (MAXIDX <= idx) return -2L;
 	return idx << 1;
 }
 
@@ -312,6 +318,8 @@ unsigned long front_sequence(unsigned long moves)
 			idx = move_gold_right(idx);
 		else
 			idx = move_gold_left(idx);
+
+		if (MAXIDX < idx) return -2;
 	}
 	return idx;
 }
