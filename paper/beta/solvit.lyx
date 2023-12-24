@@ -14920,9 +14920,19 @@ noprefix "false"
 \end_inset
 
 , taken with a real-valued index, rather than an integer index.
-\end_layout
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Plain Layout
+Generated with `periodic/bra-fin.gplot` from a data file generated with `periodic
+/bracket-finite.c`.
+ This is a wrapper for `valid_gold_index()` implemented in `selfie.c`.
+ It just loops over `valid_gold_index()` and prints ones and zeros.
+\end_layout
+
+\end_inset
+
+
 \begin_inset CommandInset line
 LatexCommand rule
 offset "0.5ex"
@@ -16186,6 +16196,36 @@ where the notation
  and ideals.
 \end_layout
 
+\begin_layout Standard
+Since 
+\begin_inset Formula $2^{\nu-2}\in\Psi_{\nu}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\nu$
+\end_inset
+
+, i.e.
+ the left-most branch is never trimmed, one easily concludes that 
+\begin_inset Formula $0\in\theta$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\left(2^{\nu-1}-1\right)\in\Psi_{\nu}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the right-most branch is never trimmed, and so one may conclude that 
+\begin_inset Formula $1\in\theta$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsubsection
 The front sequence
 \end_layout
@@ -16245,52 +16285,173 @@ The sequence begins at
 \end_inset
 
 .
- It is a bijection, in that 
-\end_layout
-
-\begin_layout Standard
-It starts as 1,2,3,4, 
-\end_layout
-
-\begin_layout Standard
-beg
-\end_layout
-
-\begin_layout Standard
-Numbering each level in the tree sequentially gives a front sequence 
-\begin_inset Formula $f_{n}$
-\end_inset
-
- that is a bijection between the integers and valid polynomial labels.
- The front sequence 
-\begin_inset Formula $f_{n}$
-\end_inset
-
- contains the same integers as the validity sequence 
+ Unlike 
 \begin_inset Formula $\psi_{m}$
 \end_inset
 
-, and so, for all 
-\begin_inset Formula $n$
+, it is not in sorted order.
+ The start of the sequence is (1), (2), (3,4), (10,6,7,8), (36,20,42,12,13,14,15
+,16), (136,...,32), ...
+ where the parenthesis is used to improve readability, by grouping a run
+ of length 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $f_{5}=10$
+\end_inset
+
+; this is an expression of the idea that 
+\begin_inset Formula $5\notin\Psi$
+\end_inset
+
+.
+ Thus, it is bumped by the leadership function to the next index that is
+ in 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $Rf_{2}=f_{5}=\Lambda\left(f_{2}\right)=10$
+\end_inset
+
+.
+ Likewise, 
+\begin_inset Formula $f_{9}=36$
+\end_inset
+
+; the height of the leadership function was four at this location.
+ 
+\begin_inset Formula $f_{10}=20$
+\end_inset
+
+ because ten was 
+\begin_inset Quotes eld
+\end_inset
+
+already taken
+\begin_inset Quotes erd
+\end_inset
+
+; but this is just a different way of thinking about 
+\begin_inset Formula $Lf_{5}=f_{10}=2f_{5}=20$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As always, the series is quasi-self-similar, with similarity intervals of
+ powers of two.
+ Values in the sequence increase super-exponentially.
+ It is visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Front-Sequence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Front Sequence
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Front-Sequence"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename bra-fronts.eps
+	lyxscale 150
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the front sequence 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ over three ranges: 
+\begin_inset Formula $64<n\le128$
+\end_inset
+
+ and 
+\begin_inset Formula $256<n\le512$
+\end_inset
+
+ and 
+\begin_inset Formula $2048<n\le4096$
+\end_inset
+
+.
+ The three ranges are rescaled, to run from left to right.
+ Note the labels on the y-axis: the maximum value of 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ in a given range increases super-exponentially.
+ For these three ranges, the maximum values occur at 
+\begin_inset Formula $f_{71}=34952$
 \end_inset
 
 , 
-\begin_inset Formula $\theta\left(f_{n}\right)=1$
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
 \end_inset
 
-.
- The validity sequence gave valid indexes in sorted order, so that 
-\begin_inset Formula $\psi_{m}>\psi_{k}$
+
+\end_layout
+
 \end_inset
 
- whenever 
-\begin_inset Formula $m>k$
-\end_inset
 
-.
- The front sequence is a pairing of left-right moves down the binary tree
- to the index at that tree location.
- Reprasing
+\end_layout
+
+\begin_layout Standard
+It is a bijection, in that 
 \end_layout
 
 \begin_layout Subsection

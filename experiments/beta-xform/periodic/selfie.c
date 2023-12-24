@@ -1,7 +1,13 @@
 /*
  * selfie.c
  *
- * Redesign of polynomial encoding and root finding.
+ * Redesign of polynomial encoding and root finding. The primary benefit
+ * of this redesign is that intermediate beta values are not cached, and
+ * so this does not consume RAM. Nor is it any slower for most tasks, so
+ * it's a win over-all.
+ *
+ * Includes code both for the finite orbits, and the ultimately-periodic
+ * orbits.
  *
  * Notes about bit-encodings.
  * Orbits and dyadic fractions will use a little-endian encoding.

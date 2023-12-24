@@ -8,9 +8,11 @@
 ## set xrange [256:512]
 #plot "bra-fin.dat" using 1:5 with lines linewidth 2 title "su"
 
-set out 'bra-fin.png'
-set term png size 1024,768
-set title "Height injection"
+#set out 'bra-fronts.png'
+#set term png size 1024,768
+set out 'bra-fronts.eps'
+set term postscript eps color enhanced fontscale 1.4
+set title "Front sequence"
 set logscale x
 set logscale y
 unset xtics
@@ -39,12 +41,13 @@ plot "bra-fin.dat" using ($1*4):4 with lines linewidth 2 title "64-128", \
 ##     "bra-fin.dat" using ($1/16):($3/1161) with lines linewidth 2 title "4096-8192", \
 ##     "bra-fin.dat" using ($1/64):($3/4080) with lines linewidth 2 title "16384-32768"
 #
+# -------------------------------------------------------------------------------
 ## ######################################################################
 ## Settings used to generate figure in the paper.
 ### set out 'valid-index.png'
 ##set out 'valid-index.eps'
-### set term postscript eps color enhanced font 'Helvetica,16'
-### set term postscript eps color enhanced size 8,5 fontscale 2.4
+##### set term postscript eps color enhanced font 'Helvetica,16'
+##### set term postscript eps color enhanced size 8,5 fontscale 2.4
 ##set term postscript eps color enhanced fontscale 1.4
 ##set encoding utf8
 ##set logscale x
