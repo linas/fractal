@@ -128,6 +128,13 @@ int main(int argc, char* argv[])
 		unsigned long idx = front_sequence(m);
 		if (MAXIDX < idx) continue;
 		double gold = golden_beta(idx);
+		unsigned long lidx = bracket_gold_left(idx);
+		unsigned long ridx = bracket_gold_right(idx);
+		double lgold = golden_beta(lidx);
+		double rgold = golden_beta(ridx);
+		double diff = rgold - lgold;
+		printf("%ld	%g	%g	%g\n", m, x, gold, diff);
+#ifdef TOO_COMPLICATED
 		printf("%ld	%g	%16.14g", m, x, gold);
 		for (int k=1; k<8; k++)
 		{
@@ -137,6 +144,7 @@ int main(int argc, char* argv[])
 			printf("	%16.14g", gold);
 		}
 		printf("\n");
+#endif
 	}
 #endif
 }

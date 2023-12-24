@@ -1,18 +1,26 @@
 
-# set out 'bra-uniform-left.png'
-set out 'bra-uniform-right.png'
+set out 'bra-uniform.png'
 set term png size 1024,768
 
-# set title "Uniform Left Bracket"
-set title "Uniform Right Bracket"
+set title "Uniform Symmetric Bracket"
 set logscale y
 set xrange [0:1]
-#plot "bra-uniform-left.dat" using 2:($4-$5) with lines linewidth 2 title "d2", \
-#     "bra-uniform-left.dat" using 2:($3-$4) with lines linewidth 2 title "d1"
-plot "bra-uniform-right.dat" using 2:($5-$4) with lines linewidth 2 title "d2", \
-     "bra-uniform-right.dat" using 2:($4-$3) with lines linewidth 2 title "d1"
+plot "bra-uniform.dat" using 2:4 with lines linewidth 2 title ""
 
-
+# ---------------------------------------------------------------------
+## set out 'bra-uniform-left.png'
+#set out 'bra-uniform-right.png'
+#set term png size 1024,768
+#
+## set title "Uniform Left Bracket"
+#set title "Uniform Right Bracket"
+#set logscale y
+#set xrange [0:1]
+##plot "bra-uniform-left.dat" using 2:($4-$5) with lines linewidth 2 title "d2", \
+##     "bra-uniform-left.dat" using 2:($3-$4) with lines linewidth 2 title "d1"
+##plot "bra-uniform-right.dat" using 2:($5-$4) with lines linewidth 2 title "d2", \
+##     "bra-uniform-right.dat" using 2:($4-$3) with lines linewidth 2 title "d1"
+#
 # ---------------------------------------------------------------------
 # What do the gold values do? Well, duhh they converge to the beta map.
 #set out 'bra-gold.png'
