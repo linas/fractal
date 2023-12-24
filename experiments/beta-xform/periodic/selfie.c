@@ -9,7 +9,10 @@
  * Includes code both for the finite orbits, and the ultimately-periodic
  * orbits.
  *
+ * This is a redesign and sometimes copy of code in irred-gold.c
+ *
  * Notes about bit-encodings.
+ * --------------------------
  * Orbits and dyadic fractions will use a little-endian encoding.
  * This is the same as 2-adic encoding, so that infinite strings
  * extend to the left.
@@ -21,7 +24,27 @@
  *   -- printing will be left-to-right, so only the storage of
  *      the string is 2-adic, but not the printouts.
  *
- * This is a redesign and sometimes copy of code in irred-gold.c
+ * Much of the code uses the exact opposite of the above, a big-endian
+ * encoding, always starting with a leading one, and then the rest of
+ * the bits, from left to right. Thus, infinite strings extend to the
+ * right.
+ *
+ * This is particularly convenient when the strings are NOT infinite,
+ * but are finite: this associates an unique integer with each finite-
+ * length string.
+ *
+ * Call this the leading-one scheme. Given an integer, the left-most
+ * bit of the binary rep is always a one. Thus, if we ignore that bit,
+ * everything that follows can encode any possible bit-sequence.  Thus,
+ * no explicit length specification is needed; the length is self-encoding.
+ *
+ * The two different encodings can cause some confusion. As a general
+ * rule: if the orbit is finite, use the leading-one scheme, and get an
+ * integer index for that orbit. If the orbit is periodic or infinite,
+ * use the 2-adic encoding, as it seems easier to deal with, although
+ * it does require passing around an explicit length, when a length is
+ * needed. Phew. Glad we got that straight. I was getting worried there,
+ * for a while.
  *
  * December 2023
  */
@@ -256,7 +279,41 @@ unsigned long bracket_gold_right(unsigned long idx)
 	// Ooops. Must have been a leader. Recurse.
 	while (brig%2 == 0) brig >>= 1;
 	return bracket_gold_right(brig);
+}
 
+/*
+ * Return the front-center index from the bracketing sequence. The
+ * bracketing sequence is a map of valid indexes to the binary tree.
+ * The encoding is with move_gold_left() and move_gold_right(), which
+ * respectively either double the index (moving left), or find the next
+ * leader (when moving right).
+ *
+ * The fronts can be understood to be encoded in the sequence number
+ * itself, taking that number as series of left-right moves down the
+ * tree. The moves are done by reading the bits in the binary rep of
+ * the number, from left to right. The left-most bit is necessarily
+ * a one, so the first move is necessarily R, and so we start with
+ * index=0, which is beta=1, which is the left feeder to the root.
+ * after that, we are at the root, and so everything afterwards is just
+ * an encoding of all-possible left-right moves.
+ *
+ * So this is a "one-leading string", which is the opposite of the
+ * dyadic encoding used in other parts of this file. The nice thing
+ * about the one-leading encoding is that an explicit length is not
+ * needed; just lop off the MSB bit, and the rest of the string follows.
+ */
+unsigned long front_sequence(unsigned long moves)
+{
+	unsigned long idx = 0;
+	int nmov = bitlen(moves);
+	for (int i=0; i< nmov; i++)
+	{
+		if (moves & (1UL<<(nmov-1-i)))
+			idx = move_gold_right(idx);
+		else
+			idx = move_gold_left(idx);
+	}
+	return idx;
 }
 
 /* ================================================================= */

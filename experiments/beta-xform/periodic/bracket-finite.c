@@ -8,24 +8,6 @@
 
 #include "selfie.c"
 
-/*
- * Implement the result of making a sequence of left-right moves down
- * the binary tree, starting from the root.
- */
-unsigned long move_gold_index(unsigned long moves)
-{
-	unsigned long idx = 0;
-	int nmov = bitlen(moves);
-	for (int i=0; i< nmov; i++)
-	{
-		if (moves & (1UL<<(nmov-1-i)))
-			idx = move_gold_right(idx);
-		else
-			idx = move_gold_left(idx);
-	}
-	return idx;
-}
-
 int main(int argc, char* argv[])
 {
 #ifdef MANUAL_EXPLORER
@@ -43,7 +25,8 @@ int main(int argc, char* argv[])
 	print_gold_info(moves);
 #endif
 
-	// Unit test
+#define GRAPH_FOR_PAPER
+#ifdef GRAPH_FOR_PAPER
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
 		exit(1);
@@ -67,7 +50,6 @@ int main(int argc, char* argv[])
 		idxsum += idx;
 
 		printf("%ld	%d	%ld	%ld	%ld\n", mov, ok, tsum, idx, idxsum);
-
-		// long lead = gold_leader(mov);
 	}
+#endif
 }

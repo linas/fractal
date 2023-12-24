@@ -8,19 +8,6 @@
 ## set xrange [256:512]
 #plot "bra-fin.dat" using 1:5 with lines linewidth 2 title "su"
 
-#set out 'bra-fronts.png'
-#set term png size 1024,768
-set out 'bra-fronts.eps'
-set term postscript eps color enhanced fontscale 1.4
-set title "Front sequence"
-set logscale x
-set logscale y
-unset xtics
-set xrange [256:512]
-plot "bra-fin.dat" using ($1*4):4 with lines linewidth 2 title "64-128", \
-     "bra-fin.dat" using 1:4 with lines linewidth 2 title "256-512", \
-     "bra-fin.dat" using ($1/4):4 with lines linewidth 2 title "2048-4096"
-
 # -------------------------------------------------------------------------------
 # Meh
 #set logscale x
@@ -44,6 +31,7 @@ plot "bra-fin.dat" using ($1*4):4 with lines linewidth 2 title "64-128", \
 # -------------------------------------------------------------------------------
 ## ######################################################################
 ## Settings used to generate figure in the paper.
+##
 ### set out 'valid-index.png'
 ##set out 'valid-index.eps'
 ##### set term postscript eps color enhanced font 'Helvetica,16'
@@ -68,3 +56,20 @@ plot "bra-fin.dat" using ($1*4):4 with lines linewidth 2 title "64-128", \
 ##     "bra-fin.dat" using ($1/4096):($2+7.2) with lines linewidth 2 title "262K-524K"
 ##
 #######
+#### ######################################################################
+#### Settings used to generate figure in the paper.
+##
+###set out 'bra-fronts.png'
+###set term png size 1024,768
+##set out 'bra-fronts.eps'
+##set term postscript eps color enhanced fontscale 1.4
+##set title "Front sequence"
+##set logscale x
+##set logscale y
+##unset xtics
+##set xrange [256:512]
+##plot "bra-fin.dat" using ($1*4):4 with lines linewidth 2 title "64-128", \
+##     "bra-fin.dat" using 1:4 with lines linewidth 2 title "256-512", \
+##     "bra-fin.dat" using ($1/4):4 with lines linewidth 2 title "2048-4096"
+##
+#########
