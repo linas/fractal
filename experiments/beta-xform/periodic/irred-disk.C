@@ -10,7 +10,7 @@
  */
 
 #include "brat.h"
-#include "irred-gold.c"
+#include "selfie.c"
 
 #include <iostream>
 #include <complex.h>
@@ -49,13 +49,13 @@ COMPLEX all_recip(long n, COMPLEX x)
 // Only do the valid golden indexes
 COMPLEX cpx_golden_poly(long n, COMPLEX x)
 {
-	if (false == is_valid_index(n)) return 0.0;
+	if (false == valid_gold_index(n)) return 0.0;
 	return all_poly(n, x);
 }
 
 COMPLEX golden_recip(long n, COMPLEX x)
 {
-	if (false == is_valid_index(n)) return 0.0;
+	if (false == valid_gold_index(n)) return 0.0;
 	return 1.0 / cpx_golden_poly(n, x);
 }
 
@@ -93,14 +93,6 @@ COMPLEX CEGF(COMPLEX (*fun)(long, COMPLEX), COMPLEX x)
 
 static double beta_disk(double re_q, double im_q, int itermax, double param)
 {
-	static bool init = false;
-	if (not init)
-	{
-		long nmax = 1UL << 20;
-		malloc_gold(nmax);
-		init = true;
-	}
-
 	COMPLEX zee = re_q + I * im_q;
 	// COMPLEX og = COGF(cpx_golden_poly, zee);
 

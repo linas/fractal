@@ -29,7 +29,7 @@ irred.o: irred.c irred-gold.c
 irred-viz.o: irred-viz.c irred-gold.c
 irred-fraction.o: irred-fraction.c irred-gold.c selfie.c
 irred-gf.o: irred-gf.C irred-gold.c
-irred-disk.o: irred-disk.C irred-gold.c
+irred-disk.o: irred-disk.C selfie.c
 irred-midpoint.o: irred-midpoint.c irred-gold.c
 irred-allowed.o: irred-allowed.c irred-gold.c
 irred-tacky.o: irred-tacky.c irred-gold.c

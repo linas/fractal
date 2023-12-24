@@ -56,6 +56,7 @@
 
 #define WORDLEN 64
 #define MAXIDX (1UL<<(WORDLEN-1))
+#define NEG_ONE ((unsigned long)(-1L))
 
 /* Return length of bitstring. Same as ceil(log2(bitstr)). */
 int bitlen(unsigned long bitstr)
@@ -67,7 +68,8 @@ int bitlen(unsigned long bitstr)
 
 // Print bitstring, so that bit zero appears left-most.
 // Roughly speaking, this reverses the bit-order.
-void print_dyadic(unsigned long bitseq, int len, char* pre, char* suf)
+void print_dyadic(unsigned long bitseq, int len,
+                  const char* pre, const char* suf)
 {
 	printf("%s", pre);
 	for (int i=0; i<len; i++)
@@ -184,7 +186,7 @@ static double find_zero(unsigned long idx, double lo, double hi)
  */
 double golden_beta(unsigned long idx)
 {
-	if (-1 == idx) return 1.0;
+	if (NEG_ONE == idx) return 1.0;
 	if (0 == idx) return 2.0;
 	return find_zero(idx, 1.0, 2.0);
 }
@@ -203,7 +205,7 @@ double golden_beta(unsigned long idx)
 bool valid_gold_index(unsigned long idx)
 {
 	// Far left limit is beta=1 encoded as -1 and it is valid.
-	if (-1 == idx) return true;
+	if (NEG_ONE == idx) return true;
 
 	double gold = golden_beta(idx);
 	unsigned long dyad = beta_to_dyadic(gold);
@@ -226,7 +228,7 @@ bool valid_gold_index(unsigned long idx)
 unsigned long gold_leader(unsigned long idx)
 {
 	// Extreme left side is marked with -1. So jump to center, which is 1.
-	if (-1 == idx) return 1;
+	if (NEG_ONE == idx) return 1;
 
 	// Indicate overflow errors
 	if (MAXIDX <= idx) return -2L;
@@ -330,7 +332,7 @@ unsigned long front_sequence(unsigned long moves)
  */
 bool test_gold_index(unsigned long idx)
 {
-	if (-2 == idx)
+	if (MAXIDX <= idx)
 		{ printf("Error: overflow index %ld\n", idx); return false; }
 
 	bool ok = valid_gold_index(idx);
@@ -363,14 +365,14 @@ bool test_gold_index(unsigned long idx)
 
 	// ----------------------
 	// Validate dyadic moves.
-	long dleft = move_gold_left(idx);
-	long rup = bracket_gold_right(dleft);
+	unsigned long dleft = move_gold_left(idx);
+	unsigned long rup = bracket_gold_right(dleft);
 	if (rup != idx)
 		{ printf("Error: Failed return from left move for %ld went to %ld came back to %ld\n",
 			idx, dleft, rup); ok = false; }
 
-	long dright = move_gold_right(idx);
-	long lup = bracket_gold_left(dright);
+	unsigned long dright = move_gold_right(idx);
+	unsigned long lup = bracket_gold_left(dright);
 	if (lup != idx)
 		{ printf("Error: Failed return from right move for %ld went to %ld came back to %ld\n",
 			idx, dright, lup); ok = false; }
