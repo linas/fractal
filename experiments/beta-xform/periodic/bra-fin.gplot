@@ -1,12 +1,24 @@
 
-set out 'bra-uniform.png'
+# Examine convergence at the worst-case location.
+# There is convergence; it is slow. Below is a pessimistic bound.
+set out 'bra-converge.png'
 set term png size 1024,768
 
-set title "Uniform Symmetric Bracket"
-set logscale y
-set xrange [0:1]
-plot "bra-uniform.dat" using 2:4 with lines linewidth 2 title ""
+set title "left converge"
+set yrange [1:1.4]
+plot "bra-converge.dat" using 1:2 with lines linewidth 2 title "data",\
+     "bra-converge.dat" using 1:(1+0.5/log($1))  with lines linewidth 2 title "fit"
 
+# ---------------------------------------------------------------------
+# Verify that the sequences converge uniformly to the beta map.
+#set out 'bra-uniform.png'
+#set term png size 1024,768
+#
+#set title "Uniform Symmetric Bracket"
+#set logscale y
+#set xrange [0:1]
+#plot "bra-uniform.dat" using 2:4 with lines linewidth 2 title ""
+#
 # ---------------------------------------------------------------------
 ## set out 'bra-uniform-left.png'
 #set out 'bra-uniform-right.png'

@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define UNIFORM_CONVERGENCE
+// #define UNIFORM_CONVERGENCE
 #ifdef UNIFORM_CONVERGENCE
 	// Look at how the gold sequence converges.
 	if (2 != argc) {
@@ -145,6 +145,27 @@ int main(int argc, char* argv[])
 		}
 		printf("\n");
 #endif
+	}
+#endif
+
+#define WORST_CONVERGENT
+#ifdef WORST_CONVERGENT
+	// Explore what is happening at beta=1
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
+		exit(1);
+	}
+	int maxord = atoi(argv[1]);
+
+	for (int k=1; k<maxord; k++)
+	{
+		unsigned long left = 1UL << k;
+		unsigned long idx = front_sequence(left);
+		double gold = golden_beta(idx);
+		unsigned long ridx = front_sequence(left+1);
+		double rgold = golden_beta(ridx);
+
+		printf("%d	%16.12g	%16.12g	%g\n", k, gold, rgold, rgold-gold);
 	}
 #endif
 }
