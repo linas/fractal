@@ -1,6 +1,19 @@
 
+set out 'bra-max.png'
+set term png size 640, 480
+
+set title "Max"
+# set logscale x
+# set logscale y
+set xrange [1:15]
+plot "bra-max.dat" using 1:(log($3)) with lines linewidth 2 title "data", \
+     "bra-max.dat" using 1:(1 -$1 + $1**1.5) with lines linewidth 2 title "fit", \
+     "bra-max.dat" using 1:(1 -$1 + $1**1.525) with lines linewidth 2 title "fit2"
+
+# ---------------------------------------------------------------------
 #set out 'bra-fin-sum.png'
 # set term png size 640, 480
+#set term png size 1024,768
 
 #set title "Height sums"
 #set logscale x
@@ -8,7 +21,7 @@
 ## set xrange [256:512]
 #plot "bra-fin.dat" using 1:5 with lines linewidth 2 title "su"
 
-# -------------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 # Meh
 #set logscale x
 #set logscale y
@@ -70,6 +83,6 @@
 ##set xrange [256:512]
 ##plot "bra-fin.dat" using ($1*4):4 with lines linewidth 2 title "64-128", \
 ##     "bra-fin.dat" using 1:4 with lines linewidth 2 title "256-512", \
-##     "bra-fin.dat" using ($1/4):4 with lines linewidth 2 title "2048-4096"
+##     "bra-fin.dat" using ($1/4):4 with lines linewidth 2 title "1024-2048"
 ##
 #########

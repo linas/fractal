@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 	print_gold_info(moves);
 #endif
 
-#define GRAPH_FOR_PAPER
+// #define GRAPH_FOR_PAPER
 #ifdef GRAPH_FOR_PAPER
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
@@ -46,10 +46,37 @@ int main(int argc, char* argv[])
 		}
 		bool ok = valid_gold_index(mov);
 		tsum += ok;
-		long idx = move_gold_index(mov);
+		long idx = front_sequence(mov);
 		idxsum += idx;
 
 		printf("%ld	%d	%ld	%ld	%ld\n", mov, ok, tsum, idx, idxsum);
 	}
 #endif
+
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
+		exit(1);
+	}
+	int maxord = atoi(argv[1]);
+
+	for (int k=1; k<maxord; k++)
+	{
+		unsigned long maxlead = 0;
+		unsigned long mov = 0;
+
+		unsigned long start = 1UL << k;
+		unsigned long end = 1UL << (k+1);
+		for (unsigned long m=start; m<end; m++)
+		{
+			unsigned long idx = front_sequence(m);
+			if (maxlead < idx)
+			{
+				mov = m;
+				maxlead = idx;
+			}
+		}
+
+		// printf("order = %d mov= %ld max= %ld\n", k, mov, maxlead);
+		printf("%d	%ld	%ld\n", k, mov, maxlead);
+	}
 }
