@@ -15520,8 +15520,7 @@ That this figure is a self-similar fractal is presumably self-evident.
 \end_layout
 
 \begin_layout Standard
-A notation for bracketed intervals will be needed later, and can be introduced
- now.
+A distinct notation for bracketed intervals is useful.
  Write 
 \begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
 \end_inset
@@ -15560,8 +15559,8 @@ right
 \end_inset
 
  with the inequalities being strict.
- Not all ascending sequences of three roots form a valid bracket; valid
- brackets will be defined shortly.
+ Not all ascending sequences of three roots form a valid bracket; the validity
+ relation for brackets will be defined shortly.
  But first, some examples.
 \end_layout
 
@@ -15631,7 +15630,7 @@ The extreme left side can be assigned the index of
 \end_layout
 
 \begin_layout Subsubsection
-Bracket tree
+The bracket tree
 \end_layout
 
 \begin_layout Standard
@@ -15675,62 +15674,183 @@ noprefix "false"
 
 \begin_layout Standard
 The left and right moves 
-\begin_inset Formula $L,R$
+\begin_inset Formula $L,\mathfrak{R}$
 \end_inset
 
  on the binary tree can then be written as 
 \begin_inset Formula 
 \begin{align}
 L & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)\label{eq:Bracket recursion}\\
-R & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)\nonumber 
+\mathfrak{R} & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)\nonumber 
 \end{align}
 
 \end_inset
 
-These split the interval 
-\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+The right-move is denoted with a fraktur 
+\begin_inset Formula $\mathfrak{R}$
 \end_inset
 
- into two pieces, likewise.
- The inequalities are strict, and the figure indicates that the roots are
- dense in the interval 
-\begin_inset Formula $1\le\beta\le2$
+ instead of a roman 
+\begin_inset Formula $R$
 \end_inset
 
-, thus, interval subdivision always converges to a point.
- A finite string of 
-\begin_inset Formula $L,R$
+ in order to distinguish between the action of the leader function, and
+ the conventional dyadic map 
+\begin_inset Formula 
+\begin{align*}
+L & :m\mapsto2m\\
+R & :m\mapsto2m+1
+\end{align*}
+
 \end_inset
 
- moves picks out a unique interval 
-\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+The issue is that not all dyadic 
+\begin_inset Formula $R$
+\end_inset
+
+ moves result in a valid index: having 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ does not generally imply that 
+\begin_inset Formula $\theta\left(2m+1\right)$
+\end_inset
+
+ is one.
+ However, the leader function does provide a successor that is always valid:
+ 
+\begin_inset Formula $\theta\left(\Lambda\left(m\right)\right)=1$
+\end_inset
+
+ is guaranteed by construction.
+\end_layout
+
+\begin_layout Standard
+Any sequence of 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves is guaranteed to produce a valid interval; every location in the
+ binary tree is mapped to a valid index by the bracket recursion moves.
+ A general location on the bracket tree is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=L^{a_{1}}\mathfrak{R}^{a_{2}}L^{a_{3}}\cdots\mathfrak{R}^{a_{k}}
+\]
+
+\end_inset
+
+and this has the property that if 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ then 
+\begin_inset Formula $\theta\left(G\left(m\right)\right)=1$
 \end_inset
 
 .
- An infinite string of 
-\begin_inset Formula $L,R$
+ Equivalently, if 
+\begin_inset Formula $m\in\Psi$
 \end_inset
 
- moves corresponds to a point in the Cantor space 
-\begin_inset Formula $2^{\omega}$
+ then 
+\begin_inset Formula $G\left(m\right)\in\Psi$
 \end_inset
 
-, and so it appears that the bracket tree provides a surjection onto the
- reals.
- It is a surjection, as both strings 
-\begin_inset Formula $LRRR\cdots$
+.
+ This implies that the bracket recursion relations generate all of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ Starting at 
+\begin_inset Formula $m=1$
+\end_inset
+
+, all left-right moves produce elements of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+; conversely, every element of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ can be expressed as some sequence of left-right moves applied to 
+\begin_inset Formula $m=1$
+\end_inset
+
+.
+ It is convenient to take 
+\begin_inset Formula $G$
+\end_inset
+
+ as the function that produces only the 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ indexes.
+ Thus
+\begin_inset Formula 
+\[
+G:L^{a_{1}}R^{a_{2}}L^{a_{3}}\cdots R^{a_{k}}\mapsto L^{a_{1}}\mathfrak{R}^{a_{2}}L^{a_{3}}\cdots\mathfrak{R}^{a_{k}}
+\]
+
+\end_inset
+
+Labelling the nodes of the binary tree with integers, one has a bijection
+ 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The bracket recursion relations split the interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ into left and right pieces, as well.
+ That is, each node of the binary tree is labelled by some (unique) 
+\begin_inset Formula $r_{f}$
+\end_inset
+
+, with the root 
+\begin_inset Formula $r_{\ell}$
 \end_inset
 
  and 
-\begin_inset Formula $RLLL\cdots$
+\begin_inset Formula $r_{\rho}$
 \end_inset
 
- appear to converge to 
-\begin_inset Formula $r_{1}=\varphi$
+ appearing as predecessors in the tree.
+ Of course, the binary tree can also be mapped to the dyadic rationals;
+ thus the bracketing recursion relations give a bijection between the dyadic
+ rationals and the finite-length orbits ot the 
+\begin_inset Formula $\beta$
 \end_inset
 
-; the first from the left, the second from the right.
- This resembles the behavior of the dyadic tree.
+-map.
+ The bracket tree and the dyadic tree are in one-to-one correspondence.
+ The correspondence is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -15840,19 +15960,126 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-The bracket tree and the dyadic tree are in one-to-one correspondence.
- This is shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beta-Bracket-Map"
-plural "false"
-caps "false"
-noprefix "false"
+xxx
+\end_layout
 
+\begin_layout Standard
+The profusion of bijections to the binary tree can be confusing, and so
+ it is worth giving each a formal description.
+ Let 
+\begin_inset Formula $r:\mathbb{Z}\to\left[1,2\right]$
+\end_inset
+
+ be the 
+\begin_inset Quotes eld
+\end_inset
+
+root map
+\begin_inset Quotes erd
+\end_inset
+
+ that associates to each 
+\begin_inset Formula $n$
+\end_inset
+
+ the (positive, real) root 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ of polynomial 
+\begin_inset Formula $p_{n}$
 \end_inset
 
 .
- The curve is continuous, precisely because the brackets form a total order
+ In general, these roots are not distinct; for example 
+\begin_inset Formula $r_{5}=r_{1}=\varphi$
+\end_inset
+
+ and so 
+\begin_inset Formula $5\notin\Psi.$
+\end_inset
+
+ However, for 
+\begin_inset Formula $m,n\in\Psi,m\ne n$
+\end_inset
+
+ the roots are distinct: 
+\begin_inset Formula $r_{m}\ne r_{n}$
+\end_inset
+
+ and so one can define the set of valid roots 
+\begin_inset Formula $\mathcal{R}=\left\{ r_{n}:n\in\Psi\right\} $
+\end_inset
+
+.
+ The root map 
+\begin_inset Formula $r:\Psi\to\mathcal{R}$
+\end_inset
+
+ is a bijection.
+ Composing with 
+\begin_inset Formula $G$
+\end_inset
+
+ one has a bijection 
+\begin_inset Formula $r\circ G:\mathbb{Z}\to\mathcal{R}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+The inequalities are strict, and the figure indicates that the roots are
+ dense in the interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+, thus, interval subdivision always converges to a point.
+ A finite string of 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves picks out a unique interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+.
+ An infinite string of 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves corresponds to a point in the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+, and so it appears that the bracket tree provides a surjection onto the
+ reals.
+ It is a surjection, as both strings 
+\begin_inset Formula $L\mathfrak{R\mathfrak{\mathfrak{R}R}}\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{R}LLL\cdots$
+\end_inset
+
+ appear to converge to 
+\begin_inset Formula $r_{1}=\varphi$
+\end_inset
+
+; the first from the left, the second from the right.
+ This resembles the behavior of the dyadic tree.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+The curve is continuous, precisely because the brackets form a total order
  on their sub-brackets.
 \end_layout
 
@@ -15955,7 +16182,7 @@ noprefix "false"
 \begin_inset Formula 
 \begin{align*}
 L & :\theta_{m}\mapsto\theta_{2m}\\
-R & :\theta_{m}\mapsto\theta_{2m+1}
+R\mathfrak{R} & :\theta_{m}\mapsto\theta_{2m+1}
 \end{align*}
 
 \end_inset
@@ -16514,7 +16741,10 @@ Every real number
 \end_inset
 
  in the comb corresponds to such a self-describing orbit.
- 
+\end_layout
+
+\begin_layout Standard
+This includes the periodic orbits ...
 \end_layout
 
 \begin_layout Subsubsection
@@ -22043,7 +22273,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard

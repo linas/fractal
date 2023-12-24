@@ -366,8 +366,6 @@ int main(int argc, char* argv[])
 
 	for (long deno = 2; deno <= maxdeno; deno++)
 	{
-		printf("%ld	%ld	%g	%d	%g\n", 0L, deno, 0.0, 0, 0.0);
-		bool wasok = 0;
 		for (long num = 1; num <deno; num++)
 		{
 			// Work only with reduced rationals
@@ -384,13 +382,14 @@ int main(int argc, char* argv[])
 			double gold = event_gold(num, deno);
 			double ex = ((double) num) / ((double) deno);
 
-			if (isok && !wasok) printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, wasok, gold);
-			if (!isok && wasok) printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, wasok, gold);
-			printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, isok, gold);
-			wasok = isok;
+			if (isok)
+			{
+				printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, 0, gold);
+				printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, 1, gold);
+				printf("\n");
+			}
 		}
-		printf("%ld	%ld	%g	%d	%g\n", deno, deno, 1.0, wasok, 0.0);
-		printf("\n");
+		fflush(stdout);
 	}
 #endif
 }
