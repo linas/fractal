@@ -16603,13 +16603,13 @@ For a given rank
  write 
 \begin_inset Formula 
 \[
-S_{\nu}\left(k\right)=\sum_{n=2^{\nu-1}}^{k}\theta_{n}=S\left(k\right)-S\left(2^{\nu-1}-1\right)
+S_{\nu}\left(k\right)=S\left(k\right)-S\left(2^{\nu-2}-1\right)
 \]
 
 \end_inset
 
 which makes sense in the range 
-\begin_inset Formula $2^{\nu-1}\le k<2^{\nu}$
+\begin_inset Formula $2^{\nu-2}\le k<2^{\nu-1}$
 \end_inset
 
  
@@ -16617,7 +16617,7 @@ which makes sense in the range
 
 \begin_layout Standard
 But hey we have 
-\begin_inset Formula $S_{\nu}\left(2^{\nu}-1\right)=M_{\nu}$
+\begin_inset Formula $S_{\nu}\left(2^{\nu-1}-1\right)=M_{\nu}$
 \end_inset
 
  with asymptotic 
@@ -16639,7 +16639,7 @@ Write
  define
 \begin_inset Formula 
 \[
-N_{\nu}\left(x\right)=\left[S_{\nu}\left(\left\lfloor 2^{\nu-1}+x2^{\nu}\right\rfloor \right)\right]^{y}
+N_{\nu}\left(x\right)=\left[\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+x\right)\right\rfloor \right)}{M_{\nu}}\right]^{y}
 \]
 
 \end_inset
@@ -16650,6 +16650,18 @@ so raised to power.
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $x=0$
+\end_inset
+
+ limit is 
+\begin_inset Formula $\lim_{\nu\to\infty}\left(M_{\nu}\right)^{-M_{\nu}2^{-\nu}}\approx0.5755$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection

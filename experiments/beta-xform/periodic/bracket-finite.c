@@ -35,45 +35,53 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	int maxord = atoi(argv[1]);
-	for (int k=1; k<maxord; k++)
+	// for (int k=0; k<maxord; k++)
+	for (int k=maxord-1; k<maxord; k++)
 	{
-		long tsum = 0;
+		long comb_sum = 0;
 		double idxsum = 0.0;
 
-		unsigned long start = 1UL << k;
-		unsigned long end = 1UL << (k+1);
+		unsigned long mstart = 1UL << k;
+		unsigned long mend = 1UL << (k+1);
 
 		// First loop, for normalization
-		for (unsigned long m=start; m<end; m++)
+		for (unsigned long m=mstart; m<mend; m++)
 		{
 			bool ok = valid_gold_index(m);
-			tsum += ok;
+			comb_sum += ok;
 			long idx = front_sequence(m);
 			idxsum += idx;
 		}
 
-		double tnorm = tsum;
+		// int nu = k+2
+		// Comb_norm is Moreau necklace at rank nu = (k+2)
+		// So k=0 |-> nu=2 |-> Moreau = 1
+		double comb_norm = comb_sum;
+		comb_sum = 0;
+
+		// Factor of four because we want 2^nu and mstart = 2^(nu-2)
+		double expo = comb_norm / (4.0*mstart);
+
 		double inorm = idxsum;
-		tsum = 0;
 		idxsum = 0.0;
 
-		double expo = tnorm / start;
-
-		for (unsigned long m=start; m<end; m++)
+		for (unsigned long m=mstart; m<mend; m++)
 		{
 			bool ok = valid_gold_index(m);
-			tsum += ok;
+			comb_sum += ok;
 			long idx = front_sequence(m);
 			idxsum += idx;
 
-			double tmeas = ((double) tsum) / tnorm;
+			double comb_meas = ((double) comb_sum) / comb_norm;
 			double imeas = idxsum / inorm;
 
-			double ska = pow(tmeas, expo);
+			double ska = pow(comb_meas, expo);
+			double ex = ((double) (m-mstart)) / ((double)(mend-mstart));
 
-			printf("%ld	%d	%ld	%ld	%g	%g	%g	%g\n",
-				m, ok, tsum, idx, idxsum, tmeas, ska, imeas);
+			printf("%ld	%d	%ld	%ld	%g	%g	%g	%g	%g\n",
+				m, ok, comb_sum, idx, idxsum, comb_meas, ska, ex, imeas);
 		}
+		printf("\n");
 		fflush(stdout);
 	}
 #endif

@@ -71,7 +71,7 @@
 #plot "bra-fin.dat" using 1:5 with lines linewidth 2 title "su"
 
 # ---------------------------------------------------------------------
-# Meh
+# Integral of comb
 set out 'bra-theta-sum.png'
 set term png size 1024,768
 set term png size 640, 480
@@ -116,11 +116,23 @@ set title "Sum of theta"
 #     "bra-fin-short.dat" using ($1/4):(log($7)) with lines linewidth 2 title "1024-2047", \
 #     "bra-fin-short.dat" using ($1/16):(log($7)) with lines linewidth 2 title "4096-8191"
 
-set logscale y
-plot "bra-fin-short.dat" using 1:7 with lines linewidth 2 title "256-511", \
-     "bra-fin-short.dat" using ($1/4):7 with lines linewidth 2 title "1024-2047", \
-     "bra-fin-short.dat" using ($1/16):7 with lines linewidth 2 title "4096-8191", \
-     "bra-fin-short.dat" using ($1/64):7 with lines linewidth 2 title "16384-32767"
+# set logscale y
+#set yrange [0.5:1]
+#plot "bra-fin-short.dat" using 1:7 with lines linewidth 2 title "256-511", \
+#     "bra-fin-short.dat" using ($1/4):7 with lines linewidth 2 title "1024-2047", \
+#     "bra-fin-short.dat" using ($1/16):7 with lines linewidth 2 title "4096-8191", \
+#     "bra-fin-short.dat" using ($1/64):7 with lines linewidth 2 title "16384-32767"
+
+# -------------------------------------------------------------------------------
+# Integral of comb
+set out 'bra-comb-sum.png'
+set term png size 1024,768
+set term png size 640, 480
+set title "Limit of Indicator Sum"
+set xrange [0:1]
+set yrange [0.5:1]
+plot "bra-comb.dat" using 8:7 with lines linewidth 2 title "1", \
+     "bra-comb2.dat" using 8:7 with lines linewidth 2 title "2"
 #
 # -------------------------------------------------------------------------------
 ## ######################################################################
