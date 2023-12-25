@@ -15559,8 +15559,9 @@ right
 \end_inset
 
  with the inequalities being strict.
- Not all ascending sequences of three roots form a valid bracket; the validity
- relation for brackets will be defined shortly.
+ Not all ascending sequences of three roots form a valid bracket; valid
+ brackets are obtained by recursive subdivision; this is given in the next
+ section.
  But first, some examples.
 \end_layout
 
@@ -15808,7 +15809,7 @@ Labelling the nodes of the binary tree with the natural numbers
 \begin_inset Formula $\mathbb{N}$
 \end_inset
 
-, one has a bijection 
+ provides a bijection 
 \begin_inset Formula $G:\mathbb{N}\to\Psi$
 \end_inset
 
@@ -16015,11 +16016,11 @@ noprefix "false"
 \end_inset
 
  is at the root of the tree.
- The left and right moves on the comb are
+ The dyadic left and right moves on the comb are
 \begin_inset Formula 
 \begin{align*}
 L & :\theta_{m}\mapsto\theta_{2m}\\
-R\mathfrak{R} & :\theta_{m}\mapsto\theta_{2m+1}
+R & :\theta_{m}\mapsto\theta_{2m+1}
 \end{align*}
 
 \end_inset
@@ -16190,9 +16191,18 @@ The comb bijection
 \end_layout
 
 \begin_layout Standard
-To make more precise statements about which branches remain, the leadership
- function must be used.
- Thus, if 
+The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ provides a mechanism to map the full binary tree into the trimmed tree,
+ so that every node in the trimmed tree is in one-to-one correspondence
+ with the full binary tree.
+\end_layout
+
+\begin_layout Standard
+The leadership function provides the desired mapping.
+ If 
 \begin_inset Formula $n\in\Psi_{\nu}$
 \end_inset
 
@@ -16209,7 +16219,7 @@ To make more precise statements about which branches remain, the leadership
 \begin_inset Formula $n$
 \end_inset
 
- does get 
+ gets 
 \begin_inset Quotes eld
 \end_inset
 
@@ -16222,63 +16232,25 @@ kicked upstairs
 \end_inset
 
 .
- Equivalently, the left and right moves should have been written as
-\begin_inset Formula 
-\begin{align*}
-L & :\theta_{m}\mapsto\theta_{2m}\\
-\Lambda & :\theta_{m}\mapsto\theta_{2^{h}\left(2m+1\right)}
-\end{align*}
-
+ This just corresponds to the bracket move 
+\begin_inset Formula $\mathfrak{R}:\theta_{m}\to\theta_{\Lambda\left(m\right)}$
 \end_inset
 
-in order to more directly match the bracketing recursion relations.
- The trimmed infinite binary tree is precisely 
-\begin_inset Formula $\Psi$
+ on the trimmed tree: given any location 
+\begin_inset Formula $\theta\left(m\right)=1$
 \end_inset
 
-, and 
-\begin_inset Formula $n\in\Psi$
+ in the trimmed tree, the bracket right move returns the next valid right
+ branch in the trimmed tree: 
+\begin_inset Formula $\mathfrak{R}\left(m\right)=\Lambda\left(m\right)$
 \end_inset
 
- if and only if
-\begin_inset Formula 
-\[
-n=L^{a_{1}}\Lambda^{a_{2}}L^{a_{3}}\cdots L^{a_{k}}\theta_{1}
-\]
-
+, since, by conostruction, 
+\begin_inset Formula $\theta\left(\Lambda\left(m\right)\right)=1$
 \end_inset
 
-for some sequence of (non-negative) integers 
-\begin_inset Formula $a_{1},a_{2},a_{3,}\cdots,a_{k}$
-\end_inset
-
-.
- Furthermore, every such sequence generates an 
-\begin_inset Formula $n\in\Psi$
-\end_inset
-
-.
- The mapping is onto.
- The mapping is also one-to-one, provided that one requires 
-\begin_inset Formula $a_{i}>0$
-\end_inset
-
- and only allows 
-\begin_inset Formula $a_{1}$
-\end_inset
-
- and/or 
-\begin_inset Formula $a_{k}$
-\end_inset
-
- to be zero.
- This mapping is a bijection, one-to-one and onto, between the set of finite
- strings 
-\begin_inset Formula $2^{<\omega}$
-\end_inset
-
- and the trimmed tree 
-\begin_inset Formula $\Psi$
+ whenever 
+\begin_inset Formula $\theta\left(m\right)=1$
 \end_inset
 
 .
