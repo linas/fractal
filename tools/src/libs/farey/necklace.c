@@ -14,7 +14,7 @@
 #include "cache.h"
 
 /* Moreaus necklace counting function. OEIS A001037 */
-long necklace_raw(long n)
+long necklace_raw(int n)
 {
 	if (62 < n)
 	{
@@ -28,18 +28,18 @@ long necklace_raw(long n)
 	{
 		if (0 == n%d) 
 		{
-			sum += (1<<d) * moebius_mu(n/d);
+			sum += (1UL<<d) * moebius_mu(n/d);
 		}
-		d += 1;
+		d += 1UL;
 	}
-	sum += (1<<n);
+	sum += (1UL<<n);
 
-	return sum /n;
+	return sum / n;
 }
 
 DECLARE_UL_CACHE (necklace_cache);
 
-long necklace(long n)
+long necklace(int n)
 {
 	if (ul_one_d_cache_check (&necklace_cache, n))
 		return ul_one_d_cache_fetch(&necklace_cache, n);
@@ -54,7 +54,7 @@ long necklace(long n)
 
 int main (int arc, char* argv[])
 {
-	for (int i=1; i< 29; i++)
+	for (int i=1; i< 62; i++)
 	{
 		printf("%d	%ld\n", i, necklace(i));
 	}
