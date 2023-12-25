@@ -10,7 +10,7 @@
 
 int main(int argc, char* argv[])
 {
-#define MANUAL_EXPLORER
+// #define MANUAL_EXPLORER
 #ifdef MANUAL_EXPLORER
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <move>\n", argv[0]);
@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 	print_gold_info(moves);
 #endif
 
-// #define INDICATOR_GRAPH
+#define INDICATOR_GRAPH
 #ifdef INDICATOR_GRAPH
 	// Print the indicator function, as well as the front values.
 	// This is used for graphs in the paper.
@@ -57,6 +57,8 @@ int main(int argc, char* argv[])
 		tsum = 0;
 		idxsum = 0.0;
 
+		double expo = tnorm / start;
+
 		for (unsigned long m=start; m<end; m++)
 		{
 			bool ok = valid_gold_index(m);
@@ -67,8 +69,10 @@ int main(int argc, char* argv[])
 			double tmeas = ((double) tsum) / tnorm;
 			double imeas = idxsum / inorm;
 
-			printf("%ld	%d	%ld	%ld	%g	%g	%g\n",
-				m, ok, tsum, idx, idxsum, tmeas, imeas);
+			double ska = pow(tmeas, expo);
+
+			printf("%ld	%d	%ld	%ld	%g	%g	%g	%g\n",
+				m, ok, tsum, idx, idxsum, tmeas, ska, imeas);
 		}
 		fflush(stdout);
 	}

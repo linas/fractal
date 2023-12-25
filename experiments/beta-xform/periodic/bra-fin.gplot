@@ -75,8 +75,8 @@
 set out 'bra-theta-sum.png'
 set term png size 1024,768
 set term png size 640, 480
-set logscale x
-set logscale y
+#set logscale x
+#set logscale y
 set xrange [256:511]
 # set yrange [0.001:]
 set key left
@@ -93,12 +93,34 @@ set title "Sum of theta"
 #      "bra-fin.dat" using ($1/16):($3/1161) with lines linewidth 2 title "4096-8192", \
 #      "bra-fin.dat" using ($1/64):($3/4080) with lines linewidth 2 title "16384-32768"
 
-plot "bra-fin.dat" using 1:6 with lines linewidth 2 title "256-511", \
-     "bra-fin.dat" using ($1/4):6 with lines linewidth 2 title "1024-2047", \
-     "bra-fin.dat" using ($1/16):6 with lines linewidth 2 title "4096-8191", \
-     "bra-fin.dat" using ($1/64):6 with lines linewidth 2 title "16384-32767", \
-     "bra-fin.dat" using ($1/256):6 with lines linewidth 2 title "64K-128K", \
-     "bra-fin.dat" using ($1/1024):6 with lines linewidth 2 title "256K-512K"
+#plot "bra-fin.dat" using 1:6 with lines linewidth 2 title "256-511", \
+#     "bra-fin.dat" using ($1/4):6 with lines linewidth 2 title "1024-2047", \
+#     "bra-fin.dat" using ($1/16):6 with lines linewidth 2 title "4096-8191", \
+#     "bra-fin.dat" using ($1/64):6 with lines linewidth 2 title "16384-32767", \
+#     "bra-fin.dat" using ($1/256):6 with lines linewidth 2 title "64K-128K", \
+#     "bra-fin.dat" using ($1/1024):6 with lines linewidth 2 title "256K-512K"
+
+# ... 56 99 186 335 630 1152(?) 2182 4080
+
+#plot "bra-fin-short.dat" using 1:(log($6)) with lines linewidth 2 title "256-511", \
+#     "bra-fin-short.dat" using ($1/4):(log($6)) with lines linewidth 2 title "1024-2047", \
+#     "bra-fin-short.dat" using ($1/16):(log($6)) with lines linewidth 2 title "4096-8191",\
+#     "bra-fin-short.dat" using ($1/4):(log($6)*(630.0/(4*186))) with lines linewidth 2 title "x1024-2047", \
+#     "bra-fin-short.dat" using ($1/16):(log($6)*(2182.0/(4*630))) with lines linewidth 2 title "x4096-8191"
+
+#plot "bra-fin-short.dat" using 1:(log($6)*99) with lines linewidth 2 title "256-511", \
+#     "bra-fin-short.dat" using ($1/4):(log($6)*335/4) with lines linewidth 2 title "1024-2047", \
+#     "bra-fin-short.dat" using ($1/16):(log($6)*1152/16) with lines linewidth 2 title "4096-8191"
+
+#plot "bra-fin-short.dat" using 1:(log($7)) with lines linewidth 2 title "256-511", \
+#     "bra-fin-short.dat" using ($1/4):(log($7)) with lines linewidth 2 title "1024-2047", \
+#     "bra-fin-short.dat" using ($1/16):(log($7)) with lines linewidth 2 title "4096-8191"
+
+set logscale y
+plot "bra-fin-short.dat" using 1:7 with lines linewidth 2 title "256-511", \
+     "bra-fin-short.dat" using ($1/4):7 with lines linewidth 2 title "1024-2047", \
+     "bra-fin-short.dat" using ($1/16):7 with lines linewidth 2 title "4096-8191", \
+     "bra-fin-short.dat" using ($1/64):7 with lines linewidth 2 title "16384-32767"
 #
 # -------------------------------------------------------------------------------
 ## ######################################################################
