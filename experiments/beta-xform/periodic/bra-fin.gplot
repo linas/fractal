@@ -1,14 +1,14 @@
 
-# Examine convergence at the worst-case location.
-# There is convergence; it is slow. Below is a pessimistic bound.
-set out 'bra-converge.png'
-set term png size 1024,768
-
-set title "left converge"
-set yrange [1:1.4]
-plot "bra-converge.dat" using 1:2 with lines linewidth 2 title "data",\
-     "bra-converge.dat" using 1:(1+0.5/log($1))  with lines linewidth 2 title "fit"
-
+## Examine convergence at the worst-case location.
+## There is convergence; it is slow. Below is a pessimistic bound.
+#set out 'bra-converge.png'
+#set term png size 1024,768
+#
+#set title "left converge"
+#set yrange [1:1.4]
+#plot "bra-converge.dat" using 1:2 with lines linewidth 2 title "data",\
+#     "bra-converge.dat" using 1:(1+0.5/log($1))  with lines linewidth 2 title "fit"
+#
 # ---------------------------------------------------------------------
 # Verify that the sequences converge uniformly to the beta map.
 #set out 'bra-uniform.png'
@@ -72,23 +72,33 @@ plot "bra-converge.dat" using 1:2 with lines linewidth 2 title "data",\
 
 # ---------------------------------------------------------------------
 # Meh
-#set logscale x
-#set logscale y
-#set xrange [256:512]
-## set yrange [0.001:]
-#set key left
-#
-#set title "Sum of theta"
-#
+set out 'bra-theta-sum.png'
+set term png size 1024,768
+set term png size 640, 480
+set logscale x
+set logscale y
+set xrange [256:511]
+# set yrange [0.001:]
+set key left
+
+set title "Sum of theta"
+
 ##plot "bra-fin.dat" using 1:(($3-1)/(99-1)) with lines linewidth 2 title "256-512", \
 ##     "bra-fin.dat" using ($1/4):(($3-1)/(335-1)) with lines linewidth 2 title "1024-2048", \
 ##     "bra-fin.dat" using ($1/16):(($3-1)/(1161-1)) with lines linewidth 2 title "4096-8192", \
 ##     "bra-fin.dat" using ($1/64):(($3-1)/(4080-1)) with lines linewidth 2 title "16384-32768"
 #
-##plot "bra-fin.dat" using 1:($3/99) with lines linewidth 2 title "256-512", \
-##     "bra-fin.dat" using ($1/4):($3/335) with lines linewidth 2 title "1024-2048", \
-##     "bra-fin.dat" using ($1/16):($3/1161) with lines linewidth 2 title "4096-8192", \
-##     "bra-fin.dat" using ($1/64):($3/4080) with lines linewidth 2 title "16384-32768"
+# plot "bra-fin.dat" using 1:($3/99) with lines linewidth 2 title "256-512", \
+#      "bra-fin.dat" using ($1/4):($3/335) with lines linewidth 2 title "1024-2048", \
+#      "bra-fin.dat" using ($1/16):($3/1161) with lines linewidth 2 title "4096-8192", \
+#      "bra-fin.dat" using ($1/64):($3/4080) with lines linewidth 2 title "16384-32768"
+
+plot "bra-fin.dat" using 1:6 with lines linewidth 2 title "256-511", \
+     "bra-fin.dat" using ($1/4):6 with lines linewidth 2 title "1024-2047", \
+     "bra-fin.dat" using ($1/16):6 with lines linewidth 2 title "4096-8191", \
+     "bra-fin.dat" using ($1/64):6 with lines linewidth 2 title "16384-32767", \
+     "bra-fin.dat" using ($1/256):6 with lines linewidth 2 title "64K-128K", \
+     "bra-fin.dat" using ($1/1024):6 with lines linewidth 2 title "256K-512K"
 #
 # -------------------------------------------------------------------------------
 ## ######################################################################

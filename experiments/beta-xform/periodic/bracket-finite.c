@@ -10,6 +10,7 @@
 
 int main(int argc, char* argv[])
 {
+#define MANUAL_EXPLORER
 #ifdef MANUAL_EXPLORER
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <move>\n", argv[0]);
@@ -18,40 +19,58 @@ int main(int argc, char* argv[])
 	long moves = atol(argv[1]);
 
 	printf("Moves from index zero:\n");
-	long down = move_gold_index(moves);
+	long down = front_sequence(moves);
 	print_gold_info(down);
 
 	printf("Just the index:\n");
 	print_gold_info(moves);
 #endif
 
-// #define GRAPH_FOR_PAPER
-#ifdef GRAPH_FOR_PAPER
-	// Dump the front values into a file, for graphing. Used for
-	// graphs in the paper.
+// #define INDICATOR_GRAPH
+#ifdef INDICATOR_GRAPH
+	// Print the indicator function, as well as the front values.
+	// This is used for graphs in the paper.
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
 		exit(1);
 	}
 	int maxord = atoi(argv[1]);
-	long maxind = 1UL << maxord;
-
-	long idxsum = 0;
-	long tsum = 0;
-	int ord = 1;
-	for (long mov=1; mov< maxind; mov++)
+	for (int k=1; k<maxord; k++)
 	{
-		if (mov%ord == 0)
-		{
-			ord <<= 1;
-			tsum = 0;
-		}
-		bool ok = valid_gold_index(mov);
-		tsum += ok;
-		long idx = front_sequence(mov);
-		idxsum += idx;
+		long tsum = 0;
+		double idxsum = 0.0;
 
-		printf("%ld	%d	%ld	%ld	%ld\n", mov, ok, tsum, idx, idxsum);
+		unsigned long start = 1UL << k;
+		unsigned long end = 1UL << (k+1);
+
+		// First loop, for normalization
+		for (unsigned long m=start; m<end; m++)
+		{
+			bool ok = valid_gold_index(m);
+			tsum += ok;
+			long idx = front_sequence(m);
+			idxsum += idx;
+		}
+
+		double tnorm = tsum;
+		double inorm = idxsum;
+		tsum = 0;
+		idxsum = 0.0;
+
+		for (unsigned long m=start; m<end; m++)
+		{
+			bool ok = valid_gold_index(m);
+			tsum += ok;
+			long idx = front_sequence(m);
+			idxsum += idx;
+
+			double tmeas = ((double) tsum) / tnorm;
+			double imeas = idxsum / inorm;
+
+			printf("%ld	%d	%ld	%ld	%g	%g	%g\n",
+				m, ok, tsum, idx, idxsum, tmeas, imeas);
+		}
+		fflush(stdout);
 	}
 #endif
 
@@ -148,7 +167,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define WORST_CONVERGENT
+// #define WORST_CONVERGENT
 #ifdef WORST_CONVERGENT
 	// Explore what is happening at beta=1
 	if (2 != argc) {
