@@ -15861,7 +15861,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -15928,6 +15928,7 @@ This figure shows the mapping from the dyadic rationals, interpreted as
 
 .
  It does get there, though.
+ An explicit derivation of this limit is given in a alter section.
 \begin_inset Note Note
 status collapsed
 
@@ -16314,9 +16315,9 @@ noprefix "false"
 .
  The limit set is then
 \begin_inset Formula 
-\[
-\theta=\bigcap_{\nu=2}^{\infty}I\left(\Psi_{\nu}\right)
-\]
+\begin{equation}
+\theta=\bigcap_{\nu=2}^{\infty}I\left(\Psi_{\nu}\right)\label{eq:infinite comb}
+\end{equation}
 
 \end_inset
 
@@ -16368,22 +16369,29 @@ Since
 \end_layout
 
 \begin_layout Standard
-The set 
+It should be clear that the set 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is isomorphic to the Cantor set.
+ The comb bijection show how to map points in 
+\begin_inset Formula $\theta$
+\end_inset
+
+ back into the untrimmed infinite tree; the full binary tree is isomorphic
+ to the Cantor set.
+ From this, one concludes that the set 
 \begin_inset Formula $\theta$
 \end_inset
 
  is uncountable, and can be placed in bijection with the reals.
- The good-index bijection 
-\begin_inset Formula $G:\mathbb{N}\to\Psi$
-\end_inset
-
- provides an explicit mapping of the (countable) set of dyadic rationals
- to 
+ This is explored in the next section.
+ A measure can be assigned to 
 \begin_inset Formula $\theta$
 \end_inset
 
 .
- This is explored in the next section.
+ This is given in the section after next.
 \end_layout
 
 \begin_layout Subsubsection
@@ -16584,7 +16592,7 @@ Every real number
 \end_layout
 
 \begin_layout Subsubsection
-The comb integral
+The comb measure
 \end_layout
 
 \begin_layout Standard
@@ -16815,6 +16823,312 @@ A\left(0\right)=\lim_{\nu\to\infty}\left(N_{\nu}\left(0\right)\right)^{M_{\nu}2^
 \end_inset
 
 The slow convergence is entirely due to the last limit, above.
+\end_layout
+
+\begin_layout Standard
+The offsets to the sums and limit above were defined above, so as to avoid
+ having to debate the meaning of 
+\begin_inset Formula $\lim_{\nu\to\infty}\sqrt[\nu]{0}$
+\end_inset
+
+.
+ Yet clearly, the intent is that 
+\begin_inset Formula $A\left(x\right)$
+\end_inset
+
+ should provide a measure for the infinite comb.
+ Should the infinite comb be thought of as having a large point-weight at
+ 
+\begin_inset Formula $x=0$
+\end_inset
+
+? Perhaps not; thus, perhaps a more suitable measure is 
+\begin_inset Formula $\mu_{\theta}\left(x\right)=2A\left(x\right)-1$
+\end_inset
+
+, which runs from zero to one over the unit interval.
+\end_layout
+
+\begin_layout Standard
+To summarize: The function 
+\begin_inset Formula $\mu_{\theta}\left(x\right)$
+\end_inset
+
+ provides a measure for the infinite comb given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The non-flat sections are where the infinite-length self-describing sequences
+ are accumulating.
+\end_layout
+
+\begin_layout Subsubsection
+The Beta measure
+\end_layout
+
+\begin_layout Standard
+The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ provides a mechanism to map the full binary tree into the trimmed tree,
+ so that every node in the trimmed tree is in one-to-one correspondence
+ with the full binary tree.
+ As it is a bijection, it can be used to pull back the trimmed tree to the
+ full tree.
+ Labeling the tree with dyadics, it allows the trimmed tree measure 
+\begin_inset Formula $\mu_{\theta}\left(x\right)$
+\end_inset
+
+ to be pulled back to a measure on the entire unit interval.
+ This effectively shrinks the stair-treads visible in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Indicator-Sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to be of zero width.
+ Equivalently, it shrinks the spaces between the comb teeth to be of zero
+ size; the comb teeth widen as a result, but without changing weight.
+ When this is done, the result is figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Images speak louder than words; the two images are superimposed on one-another
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The Beta Measure
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beta-measure"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename bracket-measure.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure superimposes the two figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Indicator-Sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ into one.
+ The indicator measure has been rescaled, so that the y-axis aligns with
+ the interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+, as that is the nominal topic of discussion.
+ The comb is also a map through 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values, but taken sideways, as it were.
+ This figure indicates visually what that correspondence is.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with bra-fin.gplot with comb data in bra-comb-21.dat and bracket
+ map data from irr-tree.dat.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above can be restated with only minor over-burdening of notation.
+ The infinite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ was defined to be a subset of the unit interval of the reals; it is a mapping
+ of the set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ of valid indexes, passing through the conventional mapping the binary tree
+ to dyadic fractions (using the convetional 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves on the tree.) The bracket map is also a mapping of the set set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ of valid indexes to the unit inverval, but using instead the 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves on the tree.
+ The good-index map 
+\begin_inset Formula $G$
+\end_inset
+
+ is a bijection between 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves and 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves.
+ In either case, it is the set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ being illustrated.
+\end_layout
+
+\begin_layout Standard
+The set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is itself in a bijection with the finite-length orbits of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-map, and the self-describing polynomials 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+, and their roots 
+\begin_inset Formula $1\le r_{n}\le2$
+\end_inset
+
+, being self-describing in that mid-point orbit for 
+\begin_inset Formula $\beta=r_{n}$
+\end_inset
+
+ gives the coefficients for the polynomial 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ and the good-index function 
+\begin_inset Formula $G$
+\end_inset
+
+ are just two more bridges between this rather large set of isomorphisms.
+\end_layout
+
+\begin_layout Standard
+The correspondence between 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ and the set of roots 
+\begin_inset Formula $\left\{ r_{n}\right\} $
+\end_inset
+
+ justifies labeling the y-axis as 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The interpretation of the infinite comb as nothing other than the Cantor
+ set justifies an assignment of a measure, the comb measure.
+ Shrinking the gaps in the comb to zero size gives the Beta measure; it
+ is just the bracket map, minus one (so that it runs from zero to one.) 
 \end_layout
 
 \begin_layout Subsubsection

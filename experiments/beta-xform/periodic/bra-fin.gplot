@@ -165,20 +165,34 @@ set title "Sum of theta"
 #     "bra-comb-17.dat" using 8:(0.5 + (0.75)*0.5*(1.61803-1)) with lines linewidth 2 title "phi/x", \
 #     "bra-comb-17.dat" using (2*$8):($7) with lines linewidth 2 title "17-2x", \
 
-#
 # -------------------------------------------------------------------------------
 ## ######################################################################
-## Settings used to generate figure of integral of comb for the paper.
+## Settings used to generate figure for the full measure for tha paper.
+###
+## set out 'bracket-measure.png'
+## set term png size 1024,768
+#set out 'bracket-measure.eps'
+#set term postscript eps color enhanced fontscale 1.4
+#set title "Bracket Map and Indicator Measure"
+#set xrange [0:1]
+#set yrange [1:2]
+#plot "bra-comb-21.dat" using 8:(2*$7) with lines linewidth 2 title "Indicator Measure", \
+#     "irr-tree.dat" using 5:6 with lines linewidth 2 title "Bracket Map"
 ##
-# set out 'bra-comb-sum.png'
-# set term png size 1024,768
-set out 'bra-comb-sum.eps'
-set term postscript eps color enhanced fontscale 1.4
-set title "Limit of Indicator Sum"
-set xrange [0:1]
-set yrange [0.5:1]
-plot "bra-comb-21.dat" using 8:7 with lines linewidth 2 title ""
-
+#######
+## ######################################################################
+## Settings used to generate figure of integral of comb for the paper.
+###
+## set out 'bra-comb-sum.png'
+## set term png size 1024,768
+#set out 'bra-comb-sum.eps'
+#set term postscript eps color enhanced fontscale 1.4
+#set title "Limit of Indicator Sum"
+#set xrange [0:1]
+#set yrange [0.5:1]
+#plot "bra-comb-21.dat" using 8:7 with lines linewidth 2 title ""
+#
+#######
 ## ######################################################################
 ## Settings used to generate figure in the paper.
 ##
