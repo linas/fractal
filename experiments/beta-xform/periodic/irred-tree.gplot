@@ -28,8 +28,8 @@ phi=(sqrt(5)+1)/2
 #     "irr-tree.dat" using 5:(($6-1) * (2 - phi)) with lines linewidth 2 title "m kil", \
 
 
-unset yrange
-plot "irr-tree.dat" using 5:((1 - ($8-1)/($6-1)) - (($6-1)*(2-phi))) with lines linewidth 2 title "1-l/m - m"
+#unset yrange
+# plot "irr-tree.dat" using 5:((1 - ($8-1)/($6-1)) - (($6-1)*(2-phi))) with lines linewidth 2 title "1-l/m - m"
 
 #plot "irr-tree.dat" using 5:($6-1) with lines linewidth 2 title "main", \
 #     "irr-tree.dat" using 5:(phi*($8-1)) with lines linewidth 2 title "left", \
@@ -38,6 +38,28 @@ plot "irr-tree.dat" using 5:((1 - ($8-1)/($6-1)) - (($6-1)*(2-phi))) with lines 
 #     "irr-tree.dat" using 5:(($9-phi)/(2-phi)) with lines linewidth 2 title "right", \
 #     "irr-tree.dat" using 5:(($9-phi)/(1 - ($8-1)/($6-1))) with lines linewidth 2 title "r/(1-l/m)", \
 #     "irr-tree.dat" using 5:((($6-1)/($8-1))-1+$9-phi) with lines linewidth 2 title "m/l -1+r", \
+
+# Assorted linar combos. Also, 4th and 5th lines are the L,R generators.
+# Note how L is close to x/(1-x) which is why it looks question-mark-y.
+set out 'irr-tree-lr.png'
+set term png size 1024,768
+unset yrange
+set xrange [0:1]
+sm(x) = x-1
+sl(x) = (x-1)*phi
+sr(x) = ((x-1)-phi+1)*phi*phi
+plot "irr-tree.dat" using 5:(sm($6)) with lines linewidth 2 title "m",\
+     "irr-tree.dat" using 5:(sl($8)) with lines linewidth 2 title "l",\
+     "irr-tree.dat" using 5:(sr($9)) with lines linewidth 2 title "r",\
+     "irr-tree.dat" using (sm($6)):(sl($8)) with lines linewidth 2 title "lim",\
+     "irr-tree.dat" using (sm($6)):(sr($9)) with lines linewidth 2 title "lir",\
+     "irr-tree.dat" using 5:5 with lines linewidth 2 title "1",\
+     "irr-tree.dat" using 5:(2*$5/(1+$5)) with lines linewidth 2 title "g",\
+     "irr-tree.dat" using 5:($5/(2-$5)) with lines linewidth 2 title "rgr",\
+     "irr-tree.dat" using 5:((phi-((sl($8))/sm($6)))*phi) with lines linewidth 2 title "l/m",\
+     "irr-tree.dat" using 5:(((sm($6)/sl($8))-phi+1)*phi*phi) with lines linewidth 2 title "m/l",\
+     "irr-tree.dat" using 5:(sr($9)/sm($6)) with lines linewidth 2 title "r/m",\
+     "irr-tree.dat" using 5:(sl($8)*sr($9)/sm($6)) with lines linewidth 2 title "lr/m",\
 
 ################################################
 #
