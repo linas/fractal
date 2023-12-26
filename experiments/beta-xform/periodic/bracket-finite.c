@@ -60,7 +60,9 @@ int main(int argc, char* argv[])
 		comb_sum = 0;
 
 		// Factor of four because we want 2^nu and mstart = 2^(nu-2)
+		// Note that expo goes to  1/nu for nu larger than about 15
 		double expo = comb_norm / (4.0*mstart);
+		// double expo = 1.0 / ((double) (k+2));
 
 		double inorm = idxsum;
 		idxsum = 0.0;
@@ -76,7 +78,7 @@ int main(int argc, char* argv[])
 			double imeas = idxsum / inorm;
 
 			double ska = pow(comb_meas, expo);
-			double ex = ((double) (m-mstart)) / ((double)(mend-mstart));
+			double ex = (((double) (m-mstart))+0.5) / ((double)(mend-mstart));
 
 			printf("%ld	%d	%ld	%ld	%g	%g	%g	%g	%g\n",
 				m, ok, comb_sum, idx, idxsum, comb_meas, ska, ex, imeas);

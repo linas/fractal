@@ -125,14 +125,53 @@ set title "Sum of theta"
 
 # -------------------------------------------------------------------------------
 # Integral of comb
+# set out 'bra-comb-sum.png'
+# set term png size 1024,768
+# # set term png size 640, 480
+# set title "Limit of Indicator Sum"
+# set xrange [0:1]
+# set yrange [0.5:1]
+# plot "bra-comb-6.dat" using 8:7 with lines linewidth 2 title "6", \
+#      "bra-comb-8.dat" using 8:7 with lines linewidth 2 title "8", \
+#      "bra-comb-10.dat" using 8:7 with lines linewidth 2 title "10", \
+#      "bra-comb-17.dat" using 8:7 with lines linewidth 2 title "17", \
+#      "bra-comb-21.dat" using 8:7 with lines linewidth 2 title "21"
+
 set out 'bra-comb-sum.png'
 set term png size 1024,768
-set term png size 640, 480
 set title "Limit of Indicator Sum"
 set xrange [0:1]
 set yrange [0.5:1]
-plot "bra-comb.dat" using 8:7 with lines linewidth 2 title "1", \
-     "bra-comb2.dat" using 8:7 with lines linewidth 2 title "2"
+x=0.5
+set arrow from x,0.5 to x,1 nohead linecolor "black"
+
+x=0.3333
+set arrow from x,0.5 to x,1 nohead linecolor "red"
+
+x=0.25
+set arrow from x,0.5 to x,1 nohead linecolor "blue"
+
+x=0.125 + 1.0/64
+set arrow from x,0.5 to x,1 nohead linecolor "green"
+
+x=0.125
+set arrow from x,0.5 to x,1 nohead linecolor "pink"
+
+x=0.0625
+set arrow from x,0.5 to x,1 nohead linecolor "purple"
+
+plot "bra-comb-17.dat" using 8:7 with lines linewidth 2 title "17", \
+     "bra-comb-17.dat" using 8:(0.5*1.61803) with lines linewidth 2 title "phi/2", \
+     "bra-comb-17.dat" using 8:(0.5 + (0.75)*0.5*(1.61803-1)) with lines linewidth 2 title "phi/x", \
+     "bra-comb-17.dat" using 8:(0.5 + (10/16.0)*0.5*(1.61803-1)) with lines linewidth 2 title "phi/y"
+
+#set out 'bra-comb-sum.png'
+#set term png size 1024,768
+#set title "Limit of Indicator Sum"
+#set xrange [0:1]
+#set yrange [0.5:1]
+#plot "bra-comb-21.dat" using 8:7 with lines linewidth 2 title ""
+
 #
 # -------------------------------------------------------------------------------
 ## ######################################################################
