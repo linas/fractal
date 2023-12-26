@@ -15861,7 +15861,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -16588,19 +16588,127 @@ The comb integral
 \end_layout
 
 \begin_layout Standard
-Write 
-\begin_inset Formula $S\left(k\right)=\sum_{n=1}^{k}\theta_{n}$
+A limit for the infinite comb was constructed above.
+ A measure for the infinite comb can be obtained as well.
+ This is depicted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Indicator-Sum"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- then 
+.
 \end_layout
 
 \begin_layout Standard
-For a given rank 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Limit of Indicator Sum
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Indicator-Sum"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename bra-comb-sum.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the limit of the indicator sum 
+\begin_inset Formula $A\left(x\right)=\lim_{\nu\to\infty}A_{\nu}\left(x\right)$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:indicator-sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ More precisely, it shows 
+\begin_inset Formula $A_{\nu}\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $\nu=20$
+\end_inset
+
+.
+ By this point, convergence is sufficient that any differences from the
+ limit are not visible to the naked eye.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Produced with bra-fin.gplot with data from bracket-finite.c.
+ Also, Moreau's necklace can be printed with ./periodic/comb-limit.c.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The sum over the indicator function 
+\begin_inset Formula $S\left(k\right)=\sum_{n=1}^{k}\theta_{n}$
+\end_inset
+
+ shows power-of-two periodicity, same as the comb.
+ Each rank 
 \begin_inset Formula $\nu$
 \end_inset
 
- write 
+ can be separated out as
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
 S_{\nu}\left(k\right)=S\left(k\right)-S\left(2^{\nu-2}-1\right)
@@ -16608,64 +16716,105 @@ S_{\nu}\left(k\right)=S\left(k\right)-S\left(2^{\nu-2}-1\right)
 
 \end_inset
 
-which makes sense in the range 
+which is intended to isolate the range 
 \begin_inset Formula $2^{\nu-2}\le k<2^{\nu-1}$
 \end_inset
 
+.
+ At the end of the range, the sum acheives Moreau's necklace-counting function:
  
-\end_layout
-
-\begin_layout Standard
-But hey we have 
 \begin_inset Formula $S_{\nu}\left(2^{\nu-1}-1\right)=M_{\nu}$
 \end_inset
 
- with asymptotic 
-\begin_inset Formula $M_{\nu}\sim2^{\nu}/\nu$
+.
+ Dividing by 
+\begin_inset Formula $M_{\nu}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Write 
-\begin_inset Formula $y=M_{\nu}2^{-\nu}\sim1/\nu$
-\end_inset
-
- Then of any real 
-\begin_inset Formula $0\le x\le1$
-\end_inset
-
- define
+ gives each rank the same verticl scale: zero to one.
+ It is also useful to rescale the horizontal range, to run zero-to-one as
+ well.
+ This gives a normalized version
 \begin_inset Formula 
 \[
-N_{\nu}\left(x\right)=\left[\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+x\right)\right\rfloor \right)}{M_{\nu}}\right]^{y}
+N_{\nu}\left(x\right)=\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+x\right)\right\rfloor \right)}{M_{\nu}}
 \]
 
 \end_inset
 
-so raised to power.
- This converges as 
+that runs from zero to one as 
+\begin_inset Formula $x$
+\end_inset
+
+ runs from zero to one.
+ This function does not have an interesting limit as 
 \begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, as it slowly drops to zero over the entire unit interval.
+ However, it does so at a fixed rate, and can be held constant with a radical.
+ The sequence of functions
+\begin_inset Formula 
+\begin{equation}
+A_{\nu}\left(x\right)=\exp\left(M_{\nu}2^{-\nu}\log N_{\nu}\left(x\right)\right)\label{eq:indicator-sum}
+\end{equation}
+
+\end_inset
+
+converge rapidly and more-or-less uniformly to a limit 
+\begin_inset Formula $A\left(x\right)=\lim_{\nu\to\infty}A_{\nu}\left(x\right)$
+\end_inset
+
+.
+ It appears to be well-defined on the unit real interval 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+.
+ This is the limit shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Indicator-Sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ It is perhaps useful to keep in mind the asymptotic limit of Moreau's function,
+ 
+\begin_inset Formula $M_{\nu}\sim2^{\nu}/\nu$
+\end_inset
+
+ and so the radical scales as 
+\begin_inset Formula $M_{\nu}2^{-\nu}\sim1/\nu$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-The 
+The convergence to the limit appears to be uniform and rapid, except at
+ 
+\begin_inset Formula $x=0$
+\end_inset
+
+, which proceeds slowly.
+ This is easily demonstrated.
+ The 
 \begin_inset Formula $x=0$
 \end_inset
 
  limit is 
 \begin_inset Formula 
 \[
-\lim_{\nu\to\infty}\left(M_{\nu}\right)^{-M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{2^{\nu}}{\nu}\right)^{-1/\nu}=\frac{1}{2}\lim_{\nu\to\infty}\nu^{1/\nu}=\frac{1}{2}
+A\left(0\right)=\lim_{\nu\to\infty}\left(N_{\nu}\left(0\right)\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{1}{M_{\nu}}\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{\nu}{2^{\nu}}\right)^{1/\nu}=\frac{1}{2}\lim_{\nu\to\infty}\nu^{1/\nu}=\frac{1}{2}
 \]
 
 \end_inset
 
-Note the relatively slow convergence.
+The slow convergence is entirely due to the last limit, above.
 \end_layout
 
 \begin_layout Subsubsection
