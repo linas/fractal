@@ -5,7 +5,9 @@
  * December 2023
  */
 
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /*
  * The standard gelfond-aprry measure.
@@ -26,17 +28,11 @@ double gp_measure(double x, double beta)
 		// Next, accumulate the normalization and iterate the midpoint
 		if (0.5 < midpoint)
 		{
-			norm += obn;
 			midpoint -= 0.5;
+			norm += obn;
 		}
+		else
 		midpoint *= beta;
-
-		// Also iterate x
-		if (0.5<x)
-		{
-			x -= 0.5;
-		}
-		x *= beta;
 
 		// Update 1/beta^n  for the next go-round
 		obn /= beta;
@@ -49,16 +45,18 @@ double gp_measure(double x, double beta)
 
 int main(int argc, char *argv[])
 {
+	double beta = atof(argv[1]);
 
 	// Conventional slice for fixed beta
-	double beta = 1.7;
 #define NPTS 551
+	double acc = 0.0;
 	for (int i=0; i<NPTS; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NPTS);
 
 		double mu = gp_measure(x, beta);
+		acc += mu / ((double) NPTS);
 
-		printf("%d	%g	%g\n", i, x, mu);
+		printf("%d	%g	%g	%g\n", i, x, mu, acc);
 	}
 }
