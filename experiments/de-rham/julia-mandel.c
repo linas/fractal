@@ -6,11 +6,14 @@
  */
 
 #include <complex.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #define COMPLEX double complex
 
+#ifdef JULIA
+// The two Julia-set roots for the Mandelbrot set.
 COMPLEX d0(COMPLEX zee, COMPLEX cee)
 {
 	return csqrt(zee-cee);
@@ -20,8 +23,24 @@ COMPLEX d1(COMPLEX zee, COMPLEX cee)
 {
 	return -csqrt(zee-cee);
 }
+#endif
 
-COMPLEX iterate(double ex, COMPLEX cee)
+#define KOCH_PEANO_ITERATE
+#ifdef KOCH_PEANO_ITERATE
+// The Koch-Peno curve iterators
+COMPLEX d0(COMPLEX zee, COMPLEX a)
+{
+	return a * conj(zee);
+}
+
+COMPLEX d1(COMPLEX zee, COMPLEX a)
+{
+	return a + (1-a) * conj(zee);
+}
+#endif
+
+// This iteration is backwards from the deRham defintion...
+COMPLEX reverse_iterate(double ex, COMPLEX cee)
 {
 	COMPLEX zee = 0.0;
 	for (int i=0; i<30; i++)
@@ -36,6 +55,26 @@ COMPLEX iterate(double ex, COMPLEX cee)
 		ex *= 2.0;
 	}
 
+	return zee;
+}
+
+COMPLEX iterate(double ex, COMPLEX cee)
+{
+	int digits = 30;
+	double bigx = ex * (1UL << digits);
+	long nx = floor(bigx);
+
+	COMPLEX zee = 0.0;
+	for (int i=0; i<digits; i++)
+	{
+		if (nx & 1UL)
+			zee = d1(zee, cee);
+		else
+			zee = d0(zee, cee);
+
+// printf("wtf %d %g %lx\n", i, ex, nx);
+		nx >>= 1;
+	}
 	return zee;
 }
 
@@ -54,6 +93,6 @@ int main(int argc, char *argv[])
 	{
 		double x = (((double) i) + 0.5) / ((double) npts);
 		COMPLEX zee = iterate(x, cee);
-		printf("%d	%g	%g\n", i, creal(zee), cimag(zee));
+		printf("%d	%g	%g	%g\n", i, creal(zee), cimag(zee), x);
 	}
 }
