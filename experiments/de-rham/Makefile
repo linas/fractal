@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC)
 
-EXES= affine curve de-rham julia-mandel
+EXES= affine curve de-rham julia-mandel beta
 
 all:  $(EXES)
 
@@ -32,3 +32,4 @@ affine.o:  affine.c
 curve.o:  curve.C
 de-rham.o:  de-rham.c
 julia-mandel.o: julia-mandel.c
+beta.o: beta.c
