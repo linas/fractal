@@ -12,7 +12,8 @@
 
 #define COMPLEX double complex
 
-#ifdef JULIA
+#define JULIA_SET
+#ifdef JULIA_SET
 // The two Julia-set roots for the Mandelbrot set.
 COMPLEX d0(COMPLEX zee, COMPLEX cee)
 {
@@ -25,7 +26,7 @@ COMPLEX d1(COMPLEX zee, COMPLEX cee)
 }
 #endif
 
-#define KOCH_PEANO_ITERATE
+// #define KOCH_PEANO_ITERATE
 #ifdef KOCH_PEANO_ITERATE
 // The Koch-Peno curve iterators
 COMPLEX d0(COMPLEX zee, COMPLEX a)
@@ -40,6 +41,7 @@ COMPLEX d1(COMPLEX zee, COMPLEX a)
 #endif
 
 // This iteration is backwards from the deRham defintion...
+// It reverses the order of function composition.
 COMPLEX reverse_iterate(double ex, COMPLEX cee)
 {
 	COMPLEX zee = 0.0;
@@ -58,6 +60,8 @@ COMPLEX reverse_iterate(double ex, COMPLEX cee)
 	return zee;
 }
 
+// This iteration gives a continuous curve, by iterating the
+// least-significant bits first.
 COMPLEX iterate(double ex, COMPLEX cee)
 {
 	int digits = 30;
@@ -72,7 +76,6 @@ COMPLEX iterate(double ex, COMPLEX cee)
 		else
 			zee = d0(zee, cee);
 
-// printf("wtf %d %g %lx\n", i, ex, nx);
 		nx >>= 1;
 	}
 	return zee;
