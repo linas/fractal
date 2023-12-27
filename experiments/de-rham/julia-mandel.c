@@ -41,9 +41,14 @@ COMPLEX iterate(double ex, COMPLEX cee)
 
 int main(int argc, char *argv[])
 {
+	if (argc != 4)
+	{
+		fprintf(stderr, "Usage: %s <re> <im> <npts>\n", argv[0]);
+		exit(1);
+	}
 	double re = atof(argv[1]);
 	double im = atof(argv[2]);
-	int npts = 2*3*5*7;
+	int npts = atoi(argv[3]);
 	COMPLEX cee = re + I*im;
 	for (int i=0; i< npts; i++)
 	{
