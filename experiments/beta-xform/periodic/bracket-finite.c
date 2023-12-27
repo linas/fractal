@@ -35,9 +35,11 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	int maxord = atoi(argv[1]);
-	// for (int k=0; k<maxord; k++)
-	for (int k=maxord-1; k<maxord; k++)
+	double fact = 1.0;
+	for (int k=0; k<maxord; k++)
+	// for (int k=maxord-1; k<maxord; k++)
 	{
+		fact *= k+1;
 		long comb_sum = 0;
 		double idxsum = 0.0;
 
@@ -52,7 +54,10 @@ int main(int argc, char* argv[])
 			long idx = front_sequence(m);
 			idxsum += idx;
 		}
+		// printf("# nu=%d mstart=%ld comb=%ld idxs=%ld\n", k+2, mstart, comb_sum, idxsum);
+		printf("%d	%ld	%g	%ld	%g\n", k+2, mstart, fact, comb_sum, idxsum);
 
+#if 0
 		// int nu = k+2
 		// Comb_norm is Moreau necklace at rank nu = (k+2)
 		// So k=0 |-> nu=2 |-> Moreau = 1
@@ -84,6 +89,7 @@ int main(int argc, char* argv[])
 				m, ok, comb_sum, idx, idxsum, comb_meas, ska, ex, imeas);
 		}
 		printf("\n");
+#endif
 		fflush(stdout);
 	}
 #endif

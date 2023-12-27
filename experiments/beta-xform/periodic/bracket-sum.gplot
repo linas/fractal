@@ -1,0 +1,15 @@
+
+set out 'bracket-sum.png'
+set term png size 1024,768
+set term png size 640, 480
+
+#set xrange [0:1]
+# set yrange [0:1]
+set logscale y
+
+set title "Sums"
+
+plot "bracket-sum.dat" using 1:($5/$3) with lines title "sum", \
+     "bracket-sum.dat" using 1:($2*$2) with lines title "2n"
+
+#####

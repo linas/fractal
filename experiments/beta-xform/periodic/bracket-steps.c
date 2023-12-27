@@ -18,11 +18,13 @@ int main(int argc, char* argv[])
 
 	unsigned long prev = 0;
 	double sklast = 0.0;
+	double fact = 1.0;
 
 	// int nu = k+2
 	int maxord = atoi(argv[1]);
 	for (int k=0; k<maxord; k++)
 	{
+		fact *= k+2;
 		unsigned long mstart = 1UL << k;
 		unsigned long mend = 1UL << (k+1);
 		for (unsigned long m=mstart; m<mend; m++)
@@ -30,7 +32,8 @@ int main(int argc, char* argv[])
 			double x = (((double) m-mstart) + 0.5) / ((double) mstart);
 			long idx = front_sequence(m);
 			double nrm = ((double) mstart);
-			nrm = nrm*nrm;
+			// nrm = nrm*nrm;
+			nrm  = fact;
 			double sk = ((double) idx) / nrm;
 
 			printf("%ld	%ld	%g	%ld	%g\n", m, m-mstart, x, prev, sklast);
@@ -40,6 +43,7 @@ int main(int argc, char* argv[])
 		}
 		printf("%ld	%ld	%g	%ld	%g\n", mend, mend-mstart, 1.0, prev, sklast);
 		printf("\n");
+		printf("%ld	%ld	%g	%ld	%g\n", mend, mend-mstart, 0.0, prev, sklast);
 		fflush(stdout);
 	}
 }
