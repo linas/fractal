@@ -15,7 +15,9 @@
 #if 1
 COMPLEX d0(COMPLEX zee, COMPLEX cee)
 {
-	return creal(cee) * zee;
+	// This generates minkowski question mark.
+	// return 1.0/(2.0-zee);
+	return 0.5 + creal(cee)* zee;
 }
 
 COMPLEX d1(COMPLEX zee, COMPLEX cee)
