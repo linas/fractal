@@ -1,6 +1,9 @@
 /*
  * julia-mandel.c
  * Julia set of Mandelbrot iterated eqn.
+ * Although this is generated as a map of Cantor space to the plane,
+ * this is NOT a de Rham curve, because the continuity relatin is utterly
+ * broken. Points in the Julia set are dyadic, they're just not de Rham.
  *
  * December 2023
  */
