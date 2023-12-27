@@ -12,7 +12,8 @@
 
 #define COMPLEX double complex
 
-#if 1
+#define STITCH
+#ifdef STITCH
 COMPLEX d0(COMPLEX zee, COMPLEX cee)
 {
 	// This generates minkowski question mark.
@@ -23,6 +24,18 @@ COMPLEX d0(COMPLEX zee, COMPLEX cee)
 COMPLEX d1(COMPLEX zee, COMPLEX cee)
 {
 	return cimag(cee) * zee / (1+zee);
+}
+#endif
+
+#ifdef RECU
+COMPLEX d0(COMPLEX zee, COMPLEX cee)
+{
+	return creal(cee)* zee - 1.0;
+}
+
+COMPLEX d1(COMPLEX zee, COMPLEX cee)
+{
+	return cimag(cee) * (zee + 1.0) - 1.0;
 }
 #endif
 

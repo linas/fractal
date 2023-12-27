@@ -15,12 +15,22 @@ set title "Event comb"
 
 # plot "event.dat" using 3:($2 + $4*0.8) with lines title ""
 
-plot "event.dat" using 3:(0.1 + 0.35*$4) with lines linewidth 2 title "rat", \
-     "bra-fin.dat" using (($1-4096)/4096):(0.5 + 0.35*$2) with lines linewidth 2 title "4096"
-
 # plot "event.dat" using 3:4 with points pointtype 0 title "good", \
 
-#     "irr-tree.dat" using 5:6 with lines linewidth 1 title "dyad map"
-
-
-#####
+#-----------------------------------------------------------------
+## Worthwhile results.
+## The roots of the periodic sequences occur exactly where the comb is.
+## So no surprise, here.
+#
+#set out 'event-comb.png'
+#set term png size 640, 480
+#set xrange [0:1]
+#set yrange [0:1]
+#
+#set key left
+#set title "Eventually-Periodic comb"
+#
+#plot "event.dat" using 3:(0.1 + 0.35*$4) with lines linewidth 2 title "valid rationals", \
+#     "bra-fin.dat" using (($1-4096)/4096):(0.5 + 0.35*$2) with lines linewidth 2 title "Finite comb at 4096"
+#
+######
