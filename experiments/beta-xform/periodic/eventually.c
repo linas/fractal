@@ -322,7 +322,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define GRAPH_LISTING
+#define GRAPH_LISTING
 #ifdef GRAPH_LISTING
 	if (argc != 2)
 	{
@@ -355,8 +355,10 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define COMB
+// #define COMB
 #ifdef COMB
+	// This draws vertical tick-marks at the location of the valid periodic
+	// sequences. This confirms the structure of the trimmed tree.
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s <maxdeno>\n", argv[0]);
@@ -382,6 +384,7 @@ int main(int argc, char* argv[])
 			double gold = event_gold(num, deno);
 			double ex = ((double) num) / ((double) deno);
 
+			// Draw tick-marks so we can see where they are.
 			if (isok)
 			{
 				printf("%ld	%ld	%g	%d	%g\n", num, deno, ex, 0, gold);

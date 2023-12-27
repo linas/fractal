@@ -10,7 +10,7 @@ FUNC=../../../tools/lib/libfunc.a
 all: nilpot irred zero tribo midmap irred-viz irred-fraction \
 	irred-gf irred-disk irred-midpoint irred-allowed irred-tacky \
 	irred-height irred-tree irred-seek eventually bracket-finite \
-	comb-limit slice
+	comb-limit slice bracket-steps
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -41,6 +41,7 @@ eventually.o: eventually.c selfie.c
 bracket-finite.o: bracket-finite.c selfie.c
 comb-limit.o: comb-limit.c
 slice.o: slice.c
+bracket-steps.o: bracket-steps.c selfie.c
 
 zero: zero.o $(BRAT)
 
