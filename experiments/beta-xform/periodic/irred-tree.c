@@ -13,29 +13,7 @@
 // Given a position in a binary tree, return the corresponding beta
 // index. This is the "good index" function, mapping the full binary
 // tree to the trimmed tree of good indexes.
-//
-// The position in the binary tree is encoded in the 2-adic
-// "little-endiain" encoding, described in selfie.c
-//
-// The binary tree is taken as the dyadic tree, with 1/2 at the root,
-// and 1/4 and 3/4 as the left and right leaves. These are encoded
-// using the 2-adic encoding described in selfie.c
-//
-// root == 1/2 == binary 1 length=1
-// left move == L == 1/4 == binary 01 length = 2
-// right move == R == 3/4 == binary 11 length = 2
-// LL == 1/8 == 001, length=3
-// LR == 3/8 == 011, length=3
-// RL == 5/8 == 101, length=3
-// RR == 7/8 == 111, length=3
-//
-// Binary strings must always end in one. The integer value is always odd.
-// The length must be explicitly specified, due to the leading zeros.
-// The final bit is "ignored" (because it is always one).
-// The L,R moves are applied left to right, so left-most bit is the first move.
-// The dyadic fraction is int(bitseq) / 2^len and since int(bitseq) is always
-// odd, the dyadic fraction is always in reduced form.
-//
+// Obsolete. Use good_index_map() in ndew code.
 long moves_to_idx(long bitseq, int len)
 {
 	if (0 == bitseq%2)
@@ -47,20 +25,6 @@ long moves_to_idx(long bitseq, int len)
 	bitseq >>= 1;
 	bitseq |= 1UL << len;
 	return good_index_map(bitseq);
-}
-
-// Print the moves.
-void print_moves(long bitseq, int len, char* pre, char* suf)
-{
-	printf("%s", pre);
-	for (int i=0; i<len; i++)
-	{
-		int bit = (bitseq >> (len-i-1)) & 0x1L;
-		if (bit) printf("L");
-		else printf("R");
-	}
-	printf (" /%d", len);
-	printf("%s", suf);
 }
 
 // Given an finite-orbit index, return the matching tree-walk (of left-
@@ -168,7 +132,7 @@ int main(int argc, char* argv[])
 	int len = 0;
 	long bits = idx_to_moves(idx, &len);
 	printf("Index=%ld ", idx);
-	print_moves(bits, len, "bitseq=(", ")\n");
+	print_moves(bits, "bitseq=(", ")\n");
 
 	long ridx = moves_to_idx(bits, len);
 	printf("reconstructed index = %ld\n", ridx);
@@ -203,7 +167,7 @@ int main(int argc, char* argv[])
 
 	// Terminal bit must always end in 1, so that bits is odd.
 	bits |= 1UL;
-	print_moves(bits, len, "Bracketing bits=(", ")\n");
+	print_moves(bits, "Bracketing bits=(", ")\n");
 	long idx = moves_to_idx(bits, len);
 	double gold = golden_beta(idx);
 	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
@@ -211,13 +175,13 @@ int main(int argc, char* argv[])
 	printf("---\n");
 	long orbits = rational_to_dyadic(p, q, len);
 	orbits |= 1UL;
-	print_moves(orbits, len, "orbit bits=(", ")\n");
+	print_moves(orbits, "orbit bits=(", ")\n");
 
 	// Orbits MUST start with a leading one-bit.
 	long lorbits = orbits;
 	lorbits |= 1<<len;
 	lorbits >>= 1;
-	print_moves(lorbits, len, "leading-one bitseq=(", ")\n");
+	print_moves(lorbits, "leading-one bitseq=(", ")\n");
 
 	long oridx = moves_to_idx(orbits, len);
 	double orgold = golden_beta(oridx);
@@ -242,7 +206,7 @@ int main(int argc, char* argv[])
 
 		int len = 0;
 		long bits = idx_to_moves(idx, &len);
-		// print_moves(bits, len, " # bits=(", ")\n");
+		// print_moves(bits, " # bits=(", ")\n");
 
 		long ridx = moves_to_idx(bits, len);
 		// printf("reconstruct %ld\n", ridx);
@@ -250,7 +214,7 @@ int main(int argc, char* argv[])
 		if (ridx != idx)
 		{
 			printf("Error: bad indexing at idx=%ld rec=%ld", idx, ridx);
-			print_moves(bits, len, " # bits=(", ")\n");
+			print_moves(bits, " # bits=(", ")\n");
 		}
 	}
 #endif
@@ -305,7 +269,7 @@ int main(int argc, char* argv[])
 		printf("	%g", logold);
 		printf("	%g", higold);
 
-		print_moves(bits, dlen, " # bits=(", ")\n");
+		print_moves(bits, " # bits=(", ")\n");
 	}
 
 	printf("#\n# Num overflows = %d\n#\n", overflo);

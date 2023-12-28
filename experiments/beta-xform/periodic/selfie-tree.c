@@ -66,4 +66,19 @@ unsigned long good_index_map(unsigned long moves)
 	return idx;
 }
 
+// Print moves on the full binary tree.
+void print_moves(unsigned long moves, char* pre, char* suf)
+{
+	int len = bitlen(moves);
+	printf("%s", pre);
+	for (int i=0; i<len; i++)
+	{
+		int bit = (moves >> (len-i-1)) & 0x1L;
+		if (bit) printf("R");
+		else printf("L");
+	}
+	printf (" /%d", len);
+	printf("%s", suf);
+}
+
 /* --------------------------- END OF LIFE ------------------------- */
