@@ -21,6 +21,8 @@
 // far right. This is a 2-adic storage convention. For example, 1/2 and
 // 1/4 and 1/8 are all stored as 0x1 but have length 1,2,3.
 //
+// XXX this is junk and maybe should be deleted ??
+//
 unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
 {
 	unsigned long bitseq = 0;

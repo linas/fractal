@@ -60,8 +60,11 @@ unsigned long rational_to_moves(unsigned long p, unsigned long q, int len)
 	{
 		bitseq <<= 1;
 		p <<= 1;
-		if (q <= p) bitseq |= 1UL;
-		if (q <= p) p -= q;
+		if (q <= p)
+		{
+			bitseq |= 1UL;
+			p -= q;
+		}
 	}
 	return bitseq;
 }
@@ -150,6 +153,7 @@ int main(int argc, char* argv[])
 	int p = atoi(argv[1]);
 	int q = atoi(argv[2]);
 	int len = atoi(argv[3]);
+	printf("\n");
 
 	double rat = ((double) p) / ((double) q);
 	printf("Input rational = %d/%d len=%d as float=%18.16g\n", p, q, len, rat);
@@ -166,20 +170,20 @@ int main(int argc, char* argv[])
 	double gold = golden_beta(idx);
 	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
 
-	printf("---\n");
-	long orbits = rational_to_dyadic(p, q, len);
-	orbits |= 1UL;
-	print_moves(orbits, "orbit bits=(", ")\n");
+	unsigned long oradic = beta_to_dyadic(gold);
+	print_dyadic(oradic, 30, "Actual orbit: ", "\n");
 
-	// Orbits MUST start with a leading one-bit.
-	long lorbits = orbits;
-	lorbits |= 1<<len;
-	lorbits >>= 1;
-	print_moves(lorbits, "leading-one bitseq=(", ")\n");
+	printf("\n");
+#if 0
+	printf("---\n");
+	// The below is backwards. Ignore it for now.
+	long orbits = rational_to_dyadic(p, q, len);
+	print_moves(orbits, "orbit bits=(", ")\n");
 
 	long oridx = moves_to_idx(orbits, len);
 	double orgold = golden_beta(oridx);
 	printf("Orbit Index %ld  beta=%20.16g\n", oridx, orgold);
+#endif
 #endif
 
 // #define VERIFY

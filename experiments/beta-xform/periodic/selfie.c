@@ -125,8 +125,8 @@ void print_dyadic(unsigned long bitseq, int len,
  * Finite orbits will return a finite string. Chaotic orbits might
  * use all 64 bits in the unsigned long.
  *
- * "Valid" integer betas will return the bitstring for (2n+1) but
- * in reversed order.
+ * The bitstring that is returned here is an the valid integer beta-
+ * index string for (2n+1) but in reversed order.
  */
 unsigned long beta_to_dyadic(double beta)
 {
