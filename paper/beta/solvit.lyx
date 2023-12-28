@@ -25418,7 +25418,10 @@ The previous section characterized the set of
  paths through the binary tree, and with locations on the comb function.
  They naturally extend the bracket mapping from the dyadic rationals to
  all rational numbers.
- Explicit expressions for all of these correspondances are given below.
+\end_layout
+
+\begin_layout Subsection
+Bit-sequence polynomials
 \end_layout
 
 \begin_layout Standard
@@ -25638,7 +25641,7 @@ Finite-length orbits can be converted to infinite-length periodic orbits
 Collecting terms of the same order, write
 \begin_inset Formula 
 \[
-f\left(\beta\right)=\beta^{N+L}-\sum_{k=0}^{N+L-1}a_{k}\beta^{N+L-1-k}
+0=\beta^{N+L}-\sum_{k=0}^{N+L-1}a_{k}\beta^{N+L-1-k}
 \]
 
 \end_inset
@@ -26420,32 +26423,29 @@ The top row shows the prefix string and the first run of the cyclic string.
 
 \end_layout
 
-\begin_layout Standard
-As in the case of finite orbits, not all orbits are valid.
- That is, many combinations of prefixes and periodic sequences will correspond
- to a polynomial whose root provides a beta that does not reproduce that
- orbit.
+\begin_layout Subsection
+Examples
 \end_layout
 
 \begin_layout Standard
-A few worked examples, shown in the table below, helps ground the thinking.
- An overline is drawn over the repeating digits.
- If there is one repeating digit, and it is zero, it is written as 
-\begin_inset Formula $\overline{\cdot}$
+Not all possible bit-sequences 
+\begin_inset Formula $\left\{ b_{k}\right\} $
 \end_inset
 
- which keeps things a bit more readable.
-\begin_inset Note Note
-status collapsed
+ are allowed.
+ They must be self-describing, so that the root of 
+\begin_inset Formula $\beta-S\left(\beta\right)=0$
+\end_inset
 
-\begin_layout Plain Layout
-Table explorer is eventually.c which takes three arguments: leading bits
- as odd integer, cyclic bits as integer plus cycle length.
+, when iterated, generates 
+\begin_inset Formula $\left\{ b_{k}\right\} $
+\end_inset
+
+.
+ For orientation, some examples are shown below.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
 \begin_inset VSpace defskip
 \end_inset
 
@@ -26494,7 +26494,10 @@ Table explorer is eventually.c which takes three arguments: leading bits
 \begin_inset Text
 
 \begin_layout Plain Layout
-m,c
+\begin_inset Formula $m,c$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -26503,7 +26506,10 @@ m,c
 \begin_inset Text
 
 \begin_layout Plain Layout
-bits
+\begin_inset Formula $b_{0}b_{1}\cdots$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -26512,7 +26518,10 @@ bits
 \begin_inset Text
 
 \begin_layout Plain Layout
-L
+\begin_inset Formula $L$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -26521,7 +26530,10 @@ L
 \begin_inset Text
 
 \begin_layout Plain Layout
-N
+\begin_inset Formula $N$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -26942,7 +26954,7 @@ above
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.801937735804838...
+1.80193773...
 \begin_inset Formula $=2\cos\frac{\pi}{7}$
 \end_inset
 
@@ -27764,6 +27776,65 @@ above
 \end_layout
 
 \begin_layout Standard
+The rationals in the first column are from the set 
+\begin_inset Formula $\frac{0}{1}\le\frac{p}{q}\le\frac{1}{1}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+ bit-sequences always have 
+\begin_inset Formula $b_{0}=1$
+\end_inset
+
+ and thus, the second column shows 
+\begin_inset Formula $S\left(2\right)=\left(p+q\right)/2q\ge1/2$
+\end_inset
+
+.
+ The third column m,c shows the prefix and the cyclic part as integers.
+ The fourth column shows the actual bitsequence.
+ An overline is drawn over the repeating digits.
+ If there is one repeating digit, and it is zero, it is written as 
+\begin_inset Formula $\overline{\cdot}$
+\end_inset
+
+ so as to keep things a bit more readable.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Table explorer is eventually.c which takes three arguments: leading bits
+ as odd integer, cyclic bits as integer plus cycle length.
+\end_layout
+
+\end_inset
+
+ The prefix must always start with a 1, and so the integer 
+\begin_inset Formula $m$
+\end_inset
+
+ is unique.
+ The length of the prefix is in the 
+\begin_inset Formula $L$
+\end_inset
+
+ column.
+ The cycle might have leading zeros, and so specifying 
+\begin_inset Formula $c$
+\end_inset
+
+ is not enough; a cycle length is required, given in the 
+\begin_inset Formula $N$
+\end_inset
+
+ column.
+ The corresponding polynomial and it's root are given in the last two columns.
+\end_layout
+
+\begin_layout Standard
 Notes:
 \end_layout
 
@@ -27802,7 +27873,7 @@ The sequence
 \end_inset
 
  gives 
-\begin_inset Formula $100\overline{10}\mapsto10011=19$
+\begin_inset Formula $100\overline{10}\mapsto10011=19,$
 \end_inset
 
  which wasn't allowed as a finite orbit.
@@ -27821,7 +27892,7 @@ The sequence
 \end_layout
 
 \begin_layout Itemize
-The last two observations are a coincidence, and does not hold in the general
+These last two observations are a coincidence, and do not hold in the general
  case.
  There are good periodic orbits that have disallowed finite versions, and
  vice-versa.
@@ -27850,51 +27921,91 @@ The sequence
 .
 \end_layout
 
-\begin_layout Standard
-Some general notes:
+\begin_layout Itemize
+Rationals with prefix 
+\begin_inset Formula $m=0$
+\end_inset
+
+ correspond to the finite orbits.
 \end_layout
 
 \begin_layout Itemize
-The prefix bitstring must start with a 1, because midpoint iterations always
- start such that the first bit is a one.
+It seems the prefix 
+\begin_inset Formula $m=2^{L-1}$
+\end_inset
+
+ never occurs, when 
+\begin_inset Formula $L>1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The prefix is often but not always odd.
+ Counterexamples include 
+\begin_inset Formula $7/12=110\overline{01}$
+\end_inset
+
+ and 
+\begin_inset Formula $13/20=110\overline{1001}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The first time that 
+\begin_inset Formula $m=5$
+\end_inset
+
+ occurs is for 
+\begin_inset Formula $9/28=101\overline{010}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Not all rationals give valid bit-sequences.
+ The set of valid rationals are exactly the ones that are in the set 
+\begin_inset Formula $\mathbb{Q}\cap\theta$
+\end_inset
+
+ where 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is the infinite comb, given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and depicted visually in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This is explored in the section after next.
 \end_layout
 
 \begin_layout Subsection
-Rational encoding
-\end_layout
-
-\begin_layout Standard
-The rationals have ultimately-periodic binary bitstrings; this was used
- to encode the orbits, in two different ways, in the left-most columns.
- Note how this mapping introduces discontinuities between a finite orbit,
- and it's corresponding periodic orbit.
-\end_layout
-
-\begin_layout Standard
-The column labeled m,c shows the prefix m as an integer, and likewise the
- cyclic bits.
- The prefix must always start with a 1, but the cycle might not, and so
- requires a cycle length, given in the N column.
- The bitstring can be interpreted as a rational number, shown in the column
- 
-\begin_inset Formula $\left(p+q\right)/2q$
-\end_inset
-
-.
- Since these bitstrings always start with a one, it seems better to drop
- the one and rescale: this is shown in the column 
-\begin_inset Formula $p/q$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
 Rational to periodic binary
 \end_layout
 
 \begin_layout Standard
-Task: Given 
+As a Task: Given 
 \begin_inset Formula $p/q$
 \end_inset
 
@@ -28005,59 +28116,6 @@ This provides all four integers
 \end_inset
 
  that define the cyclic expansion.
-\end_layout
-
-\begin_layout Subsubsection
-Notes
-\end_layout
-
-\begin_layout Standard
-The following was noticed:
-\end_layout
-
-\begin_layout Itemize
-Rationals with prefix 
-\begin_inset Formula $m=0$
-\end_inset
-
- correspond to the finite orbits.
-\end_layout
-
-\begin_layout Itemize
-It seems the prefix 
-\begin_inset Formula $m=2^{L-1}$
-\end_inset
-
- never occurs, when 
-\begin_inset Formula $L>1$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Prefix is often but not always odd.
- Counterexamples include: 
-\begin_inset Formula $7/12=110\overline{01}$
-\end_inset
-
- and 
-\begin_inset Formula $13/20=110\overline{1001}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-The first time that 
-\begin_inset Formula $m=5$
-\end_inset
-
- occurs is for 
-\begin_inset Formula $9/28=101\overline{010}$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Subsubsection
