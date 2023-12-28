@@ -532,6 +532,8 @@ void print_debug_info(long seqno)
 		if (idx != seqno)
 		{
 			printf("Error!! Reconstruction doesn't match!\n");
+			unsigned long oradic = beta_to_dyadic(beta);
+			print_dyadic(oradic, 63, "Actual orbit: ", "\n");
 			double rgold = golden_beta(idx);
 			printf("Reconstruected gold=%18.16g diff=%g\n", rgold, rgold-beta);
 		}

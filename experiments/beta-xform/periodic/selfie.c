@@ -139,23 +139,28 @@ unsigned long beta_to_dyadic(double beta)
 	{
 		if (0.5 <= mid)
 		{
+			numzero = 0;
 			bitseq |= 1UL << i;
 
 #define MIDEPSI 1.0e-15
 			// Apply rounding pressure, so as to favor finite iterates
 			// over periodic ones. Except this doesn't work as expected.
 			// MIDEPSI=1e-15 gets 3 to work, but then 6 doesn't. And other
-			// very mixed, unpredictable results. Bummer.
-			// mid -= 0.5-MIDEPSI;
-			mid -= 0.5;
+			// very mixed, unpredictable results. Bummer. However, this is
+			// delicate, and if we don't use MIDEPSI, then the self-description
+			// mechanism fails. So don't just tinker with this without running
+			// unit tests.
+			mid -= 0.5-MIDEPSI;
+			// mid -= 0.5;
 		}
 		else
 		{
 			numzero++;
 			// If we have a string of 50 zeros, assume a rounding error,
 			// and bail out. This avoids some of the reconstruction failures.
-			// For example, index 13.
-			if (WORDLEN-10 < numzero) break;
+			// For example, index 3 fails at bit 54
+			// index 13 fails at bit 61
+			if (WORDLEN-15 < numzero) break;
 		}
 		mid *= beta;
 	}
@@ -267,6 +272,11 @@ double golden_beta(unsigned long idx)
  * This is returns exactly the same values as the theta() function,
  * except that it does not use a recursive algo to do it's work.
  * Modernized version of is_valid_index().
+ *
+ * Caution: This is somewhat deleicate w.r.t. the midpoint iteration.
+ * rounding errors can result in a midpoint that fails to terminate
+ * within rounding errors, which results in nearby orbits that give the
+ * correct beta, but fail the exact bit-pattern match, below. Hmmm.
  */
 bool valid_gold_index(unsigned long idx)
 {
@@ -278,6 +288,8 @@ bool valid_gold_index(unsigned long idx)
 	// printf("Index=%ld gold=%20.16g\n", idx, gold);
 	// print_dyadic(dyad, 40, "Dyadic orbit=", "\n");
 
+	// Verify that the reconstructed bit-sequence reproduces the index
+	// we are given.
 	unsigned long tno = 2UL * idx + 1UL;
 	int len = bitlen(tno);
 	for (int i=0; i< len; i++)
