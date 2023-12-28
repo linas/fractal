@@ -171,11 +171,15 @@ int main(int argc, char* argv[])
 	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
 
 	unsigned long oradic = beta_to_dyadic(gold);
-	print_dyadic(oradic, 30, "Actual orbit: ", "\n");
+	print_dyadic(oradic, 63, "Actual orbit: ", "\n");
 
 	unsigned long oridx = beta_to_index(gold);
 	printf("Reconstructed index from orbit: %ld\n", oridx);
-	if (oridx != idx) printf("Warning: indexes don't match!\n");
+	if (oridx != idx)
+	{
+		double rgold = golden_beta(oridx);
+		printf("Warning: indexes don't match! diff=%g\n", gold-rgold);
+	}
 
 	printf("\n");
 #if 0

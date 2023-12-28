@@ -134,6 +134,7 @@ unsigned long beta_to_dyadic(double beta)
 {
 	unsigned long bitseq = 0;
 	double mid = 0.5*beta;
+	int numzero=0;
 	for (int i=0; i < WORDLEN; i++)
 	{
 		if (0.5 <= mid)
@@ -147,6 +148,14 @@ unsigned long beta_to_dyadic(double beta)
 			// very mixed, unpredictable results. Bummer.
 			// mid -= 0.5-MIDEPSI;
 			mid -= 0.5;
+		}
+		else
+		{
+			numzero++;
+			// If we have a string of 50 zeros, assume a rounding error,
+			// and bail out. This avoids some of the reconstruction failures.
+			// For example, index 13.
+			if (WORDLEN-10 < numzero) break;
 		}
 		mid *= beta;
 	}
