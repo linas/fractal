@@ -117,9 +117,10 @@ double bitseq_to_cf(long bitseq, int len)
 // cheap hack
 void low_guess(double rat, int* p, int* q)
 {
-	for (int i=1; i<8000; i+=2)
+	for (int i=2; i<16386; i++)
 	{
-		if (fmod(rat*i, 1.0) < 1e-10)
+		if ((fabs(fmod(rat*i, 1.0)) < 1e-6) ||
+		    (fabs(1.0-fmod(rat*i, 1.0)) < 1e-6))
 		{
 			*q = i;
 			*p = floor(rat*i);
