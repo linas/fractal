@@ -102,7 +102,6 @@ int main(int argc, char* argv[])
 	}
 	long idx = atol(argv[1]);
 
-	int len = 0;
 	long bits = idx_to_moves(idx);
 	printf("Index=%ld ", idx);
 	print_moves(bits, "Move sequence=(", ")\n");
@@ -112,7 +111,7 @@ int main(int argc, char* argv[])
 	moves_to_rational(bits, &p, &q);
 	printf("Matching rational = %ld / %ld\n", p, q);
 
-	long ridx = moves_to_idx(bits, len);
+	long ridx = good_index_map(bits);
 	printf("reconstructed index = %ld\n", ridx);
 	if (idx != ridx)
 		printf("Error: failed reconstruction!\n");
