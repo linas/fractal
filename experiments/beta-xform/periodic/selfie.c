@@ -339,10 +339,23 @@ unsigned long bracket_gold_right(unsigned long idx)
  * after that, we are at the root, and so everything afterwards is just
  * an encoding of all-possible left-right moves.
  *
+ * Thus:
+ * root == 1/2 == binary 1 length=1
+ * left move == L == 1/4 == binary 10 length = 2
+ * right move == R == 3/4 == binary 11 length = 2
+ * LL == 1/8 == 100, length=3
+ * LR == 3/8 == 101, length=3
+ * RL == 5/8 == 110, length=3
+ * RR == 7/8 == 111, length=3
+ *
  * So this is a "one-leading string", which is the opposite of the
  * dyadic encoding used in other parts of this file. The nice thing
  * about the one-leading encoding is that an explicit length is not
  * needed; just lop off the MSB bit, and the rest of the string follows.
+ *
+ * The matching dyadic fraction is obtained by trashing the leading
+ * bit, then (2n+1), then divide by 2^len, as follows:
+ *    (((moves & 1UL<<len) << 1) +1) / (1UL << len)
  */
 unsigned long good_index_map(unsigned long moves)
 {

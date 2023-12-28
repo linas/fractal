@@ -32,7 +32,7 @@
 // The length must be explicitly specified, due to the leading zeros.
 // The final bit is "ignored" (because it is always one).
 // The L,R moves are applied left to right, so left-most bit is the first move.
-// The dyadic fraction is int(biseq) / 2^len and since int(bitseq) is always
+// The dyadic fraction is int(bitseq) / 2^len and since int(bitseq) is always
 // odd, the dyadic fraction is always in reduced form.
 //
 long moves_to_idx(long bitseq, int len)
@@ -43,23 +43,9 @@ long moves_to_idx(long bitseq, int len)
 		return -2;
 	}
 	// printf("Enter frac = %ld / %d\n", bitseq, 1<<len);
-
-	long front = 1;
-	// Loop only goes to len-1 because the last bit is always ignored.
-	// As explained above, bitseq is a tree position.
-	for (int i=0; i<len-1; i++)
-	{
-		int move = (bitseq >> (len-i-1)) & 0x1L;
-		if (0 == move)
-			front = move_gold_left(front);
-		else
-			front = move_gold_right(front);
-
-		if (front < 0) return front;  // overflow
-		// printf("bit %d move=%d front=%ld\n", i, move, front);
-	}
-	// printf("------\n");
-	return front;
+	bitseq >>= 1;
+	bitseq |= 1UL << len;
+	return good_index_map(moves);
 }
 
 // Print the moves.
