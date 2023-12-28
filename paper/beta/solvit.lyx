@@ -22585,7 +22585,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -25399,9 +25399,31 @@ Eventually-periodic orbits
 \end_layout
 
 \begin_layout Standard
-We were sloppy, up above, in distinguishing finite orbits, which can be
- made periodic by fiat, from eventually-periodic orbits, which have a leading
- chaotic prefix of length 
+The previous section characterized the set of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values which have midpoint orbits of finite length.
+ Another interesting class is the set of eventually-periodic orbits: orbits
+ of infinite length, settling down to a stable, periodic cycle after an
+ initial bout of chaotic motion.
+ These 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values occur as the roots of a slightly different set of self-describing
+ polynomials, as a sum of two parts: one for the initial chaotic motion,
+ and a second polynomial for the cyclic motion.
+ These can be (monotonically) paired with the rational numbers, with infininte
+ paths through the binary tree, and with locations on the comb function.
+ They naturally extend the bracket mapping from the dyadic rationals to
+ all rational numbers.
+ Explicit expressions for all of these correspondances are given below.
+\end_layout
+
+\begin_layout Standard
+Consider the set of all eventually-periodic bit-sequences.
+ These consist of a leading chaotic prefix of length 
 \begin_inset Formula $L$
 \end_inset
 
@@ -25410,7 +25432,73 @@ We were sloppy, up above, in distinguishing finite orbits, which can be
 \end_inset
 
 .
- What are the 
+ Such sequences can be placed in one-to-one correspondence with the rationals,
+ in the conventional fashion.
+ Select such a sequence 
+\begin_inset Formula $\left\{ b_{k}\right\} $
+\end_inset
+
+.
+ The cyclic condition has that 
+\begin_inset Formula $b_{k}=b_{k+N}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\ge L$
+\end_inset
+
+.
+ Split this into two parts: a finite length-
+\begin_inset Formula $L$
+\end_inset
+
+ digit sequence 
+\begin_inset Formula $d_{k}=b_{k}$
+\end_inset
+
+ for 
+\begin_inset Formula $k<L$
+\end_inset
+
+ and a finite length-
+\begin_inset Formula $N$
+\end_inset
+
+ cyclic bit sequence 
+\begin_inset Formula $c_{k}=b_{k+L}$
+\end_inset
+
+ for 
+\begin_inset Formula $k<N$
+\end_inset
+
+.
+ Associated to this is rational number 
+\begin_inset Formula $x=\sum_{k=0}^{\infty}b_{k}2^{-k}$
+\end_inset
+
+.
+ To get it's value, write
+\begin_inset Formula 
+\begin{align*}
+S\left(\beta\right)= & \sum_{k=0}^{\infty}b_{k}\beta^{-k}\\
+= & \sum_{k=0}^{L-1}b_{k}\beta^{-k}+\sum_{k=L}^{L+N-1}b_{k}\beta^{-k}+\sum_{k=L+N}^{L+2N-1}b_{k}\beta^{-k}+\cdots\\
+= & \sum_{k=0}^{L-1}b_{k}\beta^{-k}+\frac{\beta^{N}}{\beta^{N}-1}\sum_{k=L}^{L+N-1}b_{k}\beta^{-k}\\
+= & \frac{1}{\beta^{L-1}}\sum_{k=0}^{L-1}d_{k}\beta^{L-k-1}+\frac{1}{\beta^{L-1}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}\\
+= & \frac{f_{\left\{ d_{k}\right\} }\left(\beta\right)}{\beta^{L-1}}+\frac{f_{\left\{ c_{k}\right\} }\left(\beta\right)}{\beta^{L-1}\left(\beta^{N}-1\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+What are the 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -25454,28 +25542,11 @@ is the characteristic bitsequence.
 \end_inset
 
  always.
- The orbit is split into the prefix and the periodic parts such that 
-\begin_inset Formula $b_{k}=b_{k+N}$
-\end_inset
+ 
+\end_layout
 
- for all 
-\begin_inset Formula $k\ge L$
-\end_inset
-
-.
- To improve notation, it is convenient to define a finite length-
-\begin_inset Formula $L$
-\end_inset
-
- digit sequence 
-\begin_inset Formula $d_{k}=b_{k}$
-\end_inset
-
- for 
-\begin_inset Formula $k<L$
-\end_inset
-
- and 
+\begin_layout Standard
+and 
 \begin_inset Formula $d_{k}=0$
 \end_inset
 
