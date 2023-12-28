@@ -207,16 +207,6 @@ int main(int argc, char* argv[])
 	printf("guess its orbit is %d/%d\n", po,qo);
 	printf("\n");
 
-#if 0
-	printf("---\n");
-	// The below is backwards. Ignore it for now.
-	long orbits = rational_to_dyadic(p, q, len);
-	print_moves(orbits, "orbit bits=(", ")\n");
-
-	long oridx = moves_to_idx(orbits, len);
-	double orgold = golden_beta(oridx);
-	printf("Orbit Index %ld  beta=%20.16g\n", oridx, orgold);
-#endif
 #endif
 
 // #define VERIFY

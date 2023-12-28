@@ -37,7 +37,7 @@ irred-tacky.o: irred-tacky.c irred-gold.c
 irred-height.o: irred-height.c irred-gold.c
 irred-tree.o: irred-tree.c selfie.c selfie-rational.c selfie-tree.c
 irred-seek.o: irred-seek.c irred-gold.c
-eventually.o: eventually.c selfie.c
+eventually.o: eventually.c selfie.c selfie-rational.c selfie-tree.c
 bracket-finite.o: bracket-finite.c selfie.c selfie-tree.c
 comb-limit.o: comb-limit.c
 slice.o: slice.c

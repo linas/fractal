@@ -49,6 +49,8 @@
  * The matching dyadic fraction is obtained by trashing the leading
  * bit, then (2n+1), then divide by 2^len, as follows:
  *    (((moves & 1UL<<len) << 1) +1) / (1UL << len)
+ *
+ * inverse given by idx_to_moves()
  */
 unsigned long good_index_map(unsigned long moves)
 {
@@ -74,7 +76,7 @@ unsigned long good_index_map(unsigned long moves)
 	return idx;
 }
 
-// Given a tree location encoded with canonical index, return the corresponding
+// Given a tree location encoded with canonical integer, return the corresponding
 // rational for that location. The root of the tree is 1/2, the fisrt row down
 // is 1/4 and 3/4, then next row is 1/8, 3/8, 5/8, 7/8, and so on.
 // This is the canonical dyadic binary tree.

@@ -12,6 +12,7 @@
 
 #include "selfie.c"
 #include "selfie-rational.c"
+#include "selfie-tree.c"
 
 // ---------------------------------------------------------------------
 /* Check for prefix+cycle combinations that are not minimal.
@@ -210,20 +211,15 @@ void print_debug_info(unsigned long p, unsigned long q)
 	else
 		printf("Perfect compare!\n");
 
-// #define ONE_SIXTH
-#ifdef ONE_SIXTH
-	long convbits = orbit_to_bitseq(1.438430227468187);
-	print_bitseq(convbits, "convb= ", "\n");
-	long convbit2 = orbit_to_bitseq(1.438385389665382);
-	print_bitseq(convbit2, "conv2= ", "\n");
-#endif
+	unsigned long idx = beta_to_index(gold);
+	printf("Index: %ld\n", idx);
+	unsigned long moves = idx_to_moves(idx);
+	print_moves(moves, "Tree moves: ", "\n");
 
-#ifdef ONE_THIRD
-	long convbits = orbit_to_bitseq(1.558993131521904);
-	print_bitseq(convbits, "convb= ", "\n");
-	long convbit2 = orbit_to_bitseq(1.558956158884443);
-	print_bitseq(convbit2, "conv2= ", "\n");
-#endif
+	unsigned long pm, qm;
+	moves_to_rational(moves, &pm, &qm);
+	double mrat = ((double) pm) / ((double) qm);
+	printf("Move rational =%ld/%ld  = %g\n", pm, qm, mrat);
 }
 
 int lesser(const void * px, const void * py)
@@ -235,7 +231,7 @@ int lesser(const void * px, const void * py)
 
 int main(int argc, char* argv[])
 {
-// #define MANUAL_EXPLORE
+#define MANUAL_EXPLORE
 #ifdef MANUAL_EXPLORE
 	if (argc != 3)
 	{
@@ -323,7 +319,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define GRAPH_LISTING
+// #define GRAPH_LISTING
 #ifdef GRAPH_LISTING
 	if (argc != 2)
 	{
