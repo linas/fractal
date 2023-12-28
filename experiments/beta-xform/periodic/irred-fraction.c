@@ -524,9 +524,19 @@ void print_debug_info(long seqno)
 
 	double beta = find_gold(seqno);
 
-	if (0.5 < beta) printf("beta = %20.16g\n", beta);
-
-	if (beta < 0.5)
+	if (0.5 < beta)
+	{
+		printf("beta = %18.16g\n", beta);
+		long idx = beta_to_index(beta);
+		printf("Reconstructed index=%ld vs actual=%ld\n", idx, seqno);
+		if (idx != seqno)
+		{
+			printf("Error!! Reconstruction doesn't match!\n");
+			double rgold = golden_beta(idx);
+			printf("Reconstruected gold=%18.16g diff=%g\n", rgold, rgold-beta);
+		}
+	}
+	else
 	{
 		beta = find_poly_zero(seqno);
 		long factor = theta_factor(seqno, beta);
@@ -580,7 +590,7 @@ int main(int argc, char* argv[])
 	print_debug_info(seqno);
 #endif
 
-// #define INDEX_EXPLORER
+#define INDEX_EXPLORER
 #ifdef INDEX_EXPLORER
 	// Obtain one index from command line. Print debug info for it.
 	if (2 != argc) {
@@ -615,7 +625,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define VALIDATE_INDEX
+// #define VALIDATE_INDEX
 #ifdef VALIDATE_INDEX
 	// Validate indexes in sequential order.
 	// Obtain max index from command line.

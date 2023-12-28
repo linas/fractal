@@ -173,6 +173,10 @@ int main(int argc, char* argv[])
 	unsigned long oradic = beta_to_dyadic(gold);
 	print_dyadic(oradic, 30, "Actual orbit: ", "\n");
 
+	unsigned long oridx = beta_to_index(gold);
+	printf("Reconstructed index from orbit: %ld\n", oridx);
+	if (oridx != idx) printf("Warning: indexes don't match!\n");
+
 	printf("\n");
 #if 0
 	printf("---\n");

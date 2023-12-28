@@ -107,12 +107,14 @@ void print_dyadic(unsigned long bitseq, int len,
                   const char* pre, const char* suf)
 {
 	printf("%s", pre);
-	for (int i=0; i<len; i++)
+	int i;
+	for (i=0; i<len; i++)
 	{
 		printf("%ld", bitseq & 1UL);
 		bitseq >>= 1;
+		if (0 == bitseq) break;
 	}
-	printf (" \\\\ %d", len);
+	printf (" \\\\ %d", i+1);
 	printf("%s", suf);
 }
 
@@ -140,13 +142,32 @@ unsigned long beta_to_dyadic(double beta)
 
 #define MIDEPSI 1.0e-15
 			// Apply rounding pressure, so as to favor finite iterates
-			// over periodic ones. MIDEPSI=1e-15 seems to work at low
-			// orders e.g. beta from index=6.
-			mid -= 0.5-MIDEPSI;
+			// over periodic ones. Except this doesn't work as expected.
+			// MIDEPSI=1e-15 gets 3 to work, but then 6 doesn't. And other
+			// very mixed, unpredictable results. Bummer.
+			// mid -= 0.5-MIDEPSI;
+			mid -= 0.5;
 		}
 		mid *= beta;
 	}
 	return bitseq;
+}
+
+// Just as above, but reversing the bit-sequence, and then
+// dividing by two to get the index.
+unsigned long beta_to_index(double beta)
+{
+	unsigned long orbit = beta_to_dyadic(beta);
+	unsigned long idx = 0UL;
+	for (int i=0; i<WORDLEN; i++)
+	{
+		idx <<= 1;
+		idx |= orbit & 1UL;
+		orbit >>= 1;
+		if (0 == orbit) break;
+	}
+	idx >>= 1;
+	return idx;
 }
 
 /* ================================================================= */
