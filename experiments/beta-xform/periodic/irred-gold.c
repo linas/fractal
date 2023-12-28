@@ -119,6 +119,7 @@ double find_gold(long n)
 
 /**
  * Return true if `n` corresponds to a golden polynomial, else false.
+ * This is the older, caching version of valid_gold_index()
  */
 bool is_valid_index(long n)
 {
@@ -141,6 +142,7 @@ void print_stoppers(long nmax)
 
 // Find the leader of a valid index.  That is, find the index of the form
 // 2^h(2k+1) with the smallest height h that gives a valid index.
+// This is the caching version of gold_leader()
 long find_leader(long idx)
 {
 	idx = (2UL * idx + 1UL);

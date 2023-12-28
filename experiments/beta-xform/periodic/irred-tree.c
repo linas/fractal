@@ -6,7 +6,7 @@
  * December 2023
  */
 
-#include "irred-gold.c"
+#include "selfie.c"
 
 // Given a position in a binary tree, encoded as bits in a bitsequence,
 // return the corresponding beta index.
@@ -48,7 +48,8 @@ long bitseq_to_idx(long bitseq, int len)
 		}
 		else
 		{
-			front = find_leader(front);
+			// front = find_leader(front);
+			front = gold_leader(front);
 			if (front < 0) return front;  // overflow
 		}
 		// printf("bit %d move=%d front=%ld\n", i, move, front);
@@ -69,17 +70,6 @@ void print_bitseq(long bitseq, int len, char* pre, char* suf)
 	printf("%s", suf);
 }
 
-// Get the index is the left side of the bracket
-long get_left_idx(long idx)
-{
-	while (0 == idx%2)
-		idx >>= 1;
-
-	// And once more
-	idx = (idx - 1L) / 2;
-	return idx;
-}
-
 // Given an index, return the matching tree-walk (of left-right moves)
 // to get to that index. Inverse of bitseq_to_idx.
 long idx_to_bitseq(long idx, int* leng)
@@ -92,13 +82,13 @@ long idx_to_bitseq(long idx, int* leng)
 	{
 		bitseq |= 1UL << len;
 		len++;
-		while (0 == idx%2 && is_valid_index(idx/2UL))
+		while (0 == idx%2 && valid_gold_index(idx/2UL))
 		{
 			idx >>= 1;
 			len++;
 		}
 
-		long left = get_left_idx(idx);
+		long left = bracket_gold_left(idx);
 		// printf("%ld |=> leader idx=%ld len=%d\n", left, idx, len);
 		idx = left;
 	}
@@ -212,8 +202,7 @@ int main(int argc, char* argv[])
 	//maxidx = 1UL << 34;
 	//maxidx = 1UL << 30;
 	maxidx = 1UL << 24;
-	malloc_gold(maxidx);
-	printf("Max alloced idx = %ld\n", maxidx);
+	printf("Max idx = %ld\n", maxidx);
 
 	printf("rational = %d/%d len=%d\n", p, q, len);
 
@@ -223,7 +212,7 @@ int main(int argc, char* argv[])
 	bits |= 1UL;
 	print_bitseq(bits, len, "Bracketing bits=(", ")\n");
 	long idx = bitseq_to_idx(bits, len);
-	double gold = find_gold(idx);
+	double gold = golden_beta(idx);
 	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
 
 	printf("---\n");
@@ -238,7 +227,7 @@ int main(int argc, char* argv[])
 	print_bitseq(lorbits, len, "leading-one bitseq=(", ")\n");
 
 	long oridx = bitseq_to_idx(orbits, len);
-	double orgold = find_gold(oridx);
+	double orgold = golden_beta(oridx);
 	printf("Orbit Index %ld  beta=%20.16g\n", oridx, orgold);
 #endif
 
@@ -256,7 +245,7 @@ int main(int argc, char* argv[])
 	printf("Verify correctness to max order = %d\n", maxord);
 	for (long idx=1; idx < nmax; idx++)
 	{
-		if (false == is_valid_index(idx)) continue;
+		if (false == valid_gold_index(idx)) continue;
 
 		int len = 0;
 		long bits = idx_to_bitseq(idx, &len);
@@ -284,7 +273,6 @@ int main(int argc, char* argv[])
 	int dyad = atoi(argv[2]);
 
 	long nmax = 1UL << maxord;
-	malloc_gold(nmax);
 
 	printf("#\n# Bracket tree. max order = %d\n#\n", maxord);
 
@@ -306,7 +294,7 @@ int main(int argc, char* argv[])
 		if (idx < 0) { overflo++; continue; }
 		if (nmax <= idx) { overflo++; continue; }
 
-		double gold = find_gold(idx);
+		double gold = golden_beta(idx);
 
 		// And now, a shifted version
 		int shbit = bits;

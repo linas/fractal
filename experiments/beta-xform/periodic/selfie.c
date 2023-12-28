@@ -201,6 +201,7 @@ double golden_beta(unsigned long idx)
  *
  * This is returns exactly the same values as the theta() function,
  * except that it does not use a recursive algo to do it's work.
+ * Modernized version of is_valid_index().
  */
 bool valid_gold_index(unsigned long idx)
 {
@@ -225,6 +226,7 @@ bool valid_gold_index(unsigned long idx)
 // Find the leader of a valid index.  That is, find the index of the form
 // 2^h(2k+1) with the smallest height h that gives a valid index.
 // This move can be undone with bracket_gold_left()
+// This is the modernized version of find_leader()
 unsigned long gold_leader(unsigned long idx)
 {
 	// Extreme left side is marked with -1. So jump to center, which is 1.
@@ -266,7 +268,7 @@ unsigned long bracket_gold_left(unsigned long idx)
 {
 	unsigned long clef = idx;
 	while (0 == clef%2 && 0 != clef) clef >>= 1;
-	clef = (clef-1)/2;
+	clef = (clef - 1UL) / 2UL;
 	if (0 == clef) clef = (unsigned long) -1L; // Yes really.
 	return clef;
 }
