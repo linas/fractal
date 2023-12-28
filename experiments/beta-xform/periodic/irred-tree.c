@@ -7,6 +7,7 @@
  */
 
 #include "selfie.c"
+#include "selfie-rational.c"
 
 // Given a position in a binary tree, encoded as bits in a bitsequence,
 // return the corresponding beta index.

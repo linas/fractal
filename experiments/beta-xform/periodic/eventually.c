@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include "selfie.c"
+#include "selfie-rational.c"
 
 // ---------------------------------------------------------------------
 /* Check for prefix+cycle combinations that are not minimal.
