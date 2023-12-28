@@ -76,7 +76,7 @@ unsigned long good_index_map(unsigned long moves)
 
 // Given a tree location encoded with canonical index, return the corresponding
 // rational for that location. The root of the tree is 1/2, the fisrt row down
-// is 1/4 and 3/4, then next row is 1/8. 3/8, 5/8, 7/8, and so on.
+// is 1/4 and 3/4, then next row is 1/8, 3/8, 5/8, 7/8, and so on.
 // This is the canonical dyadic binary tree.
 void moves_to_rational(unsigned long moves, unsigned long* p, unsigned long* q)
 {

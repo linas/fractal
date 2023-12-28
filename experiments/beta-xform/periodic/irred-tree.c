@@ -27,20 +27,40 @@ long moves_to_idx(long bitseq, int len)
 	return good_index_map(bitseq);
 }
 
+bool is_power_of_two(unsigned long q)
+{
+	if (1 == q) return true;
+	while (1 < q && 0 == q%2) q >>= 1;
+	return 1 == q;
+}
+
 // Return the bit-sequence that approximates the rational p/q,
 // truncated to len bits. Rationals have infinite periodic bitseqs,
 // so this just expands that bitseq, and then truncates it.
 //
-// Bit strings are read left-to-right, with decimal point at far
-// left. Bit strings interpreted as dyadics in the conventional sense.
-// For example, 1/4 len=2 -> 0.01 and  3/8 len=3 -> 0.011
-long rational_to_bracket_bitseq(int p, int q, int len)
+// Bit strings are read left-to-right, with leading one taking
+// indicating location of decimal point. This gives the canonical
+// mapping for dyadic rationals as integers.
+// For example, 1/2 len=1 -> 1
+// For example, 1/4 len=2 -> 10 and 3/4 = 11
+// and  3/8 len=3 -> 101
+unsigned long rational_to_moves(unsigned long p, unsigned long q, int len)
 {
-	long bitseq = 0;
+	unsigned long gcf = gcd(p, q);
+	p /= gcf;
+	q /= gcf;
+
+	if (is_power_of_two(q))
+		len = bitlen(q) - 2;
+	if (0 == len) return 1UL;
+	if (-1 == len) return 0UL;
+
+	unsigned long bitseq = 1UL;
 	for (int i=0; i<len; i++)
 	{
+		bitseq <<= 1;
 		p <<= 1;
-		if (q <= p) bitseq |= 1UL << (len-1-i);
+		if (q <= p) bitseq |= 1UL;
 		if (q <= p) p -= q;
 	}
 	return bitseq;
@@ -93,7 +113,7 @@ double bitseq_to_cf(long bitseq, int len)
 
 int main(int argc, char* argv[])
 {
-#define SPOT_CHECK
+// #define SPOT_CHECK
 #ifdef SPOT_CHECK
 	if (argc != 2)
 	{
@@ -120,7 +140,7 @@ int main(int argc, char* argv[])
 	printf("Index %ld  beta=%20.16g\n", idx, gold);
 #endif
 
-// #define RATIONAL_EXPLORE
+#define RATIONAL_EXPLORE
 #ifdef RATIONAL_EXPLORE
 	if (argc != 4)
 	{
@@ -131,21 +151,18 @@ int main(int argc, char* argv[])
 	int q = atoi(argv[2]);
 	int len = atoi(argv[3]);
 
-	long maxidx = 1UL << (len+2);
-	maxidx = 1UL << (len+6);
-	//maxidx = 1UL << 34;
-	//maxidx = 1UL << 30;
-	maxidx = 1UL << 24;
-	printf("Max idx = %ld\n", maxidx);
+	double rat = ((double) p) / ((double) q);
+	printf("Input rational = %d/%d len=%d as float=%18.16g\n", p, q, len, rat);
 
-	printf("rational = %d/%d len=%d\n", p, q, len);
+	long moves = rational_to_moves(p, q, len);
+	print_moves(moves, "Tree moves=(", ")\n");
 
-	long bits = rational_to_bracket_bitseq(p, q, len);
+	unsigned long pp, qq;
+	moves_to_rational(moves, &pp, &qq);
+	double rrat = ((double) pp) / ((double) qq);
+	printf("Reconstructed rational = %ld/%ld = %18.16g\n", pp, qq, rrat);
 
-	// Terminal bit must always end in 1, so that bits is odd.
-	bits |= 1UL;
-	print_moves(bits, "Bracketing bits=(", ")\n");
-	long idx = moves_to_idx(bits, len);
+	long idx = good_index_map(moves);
 	double gold = golden_beta(idx);
 	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
 
