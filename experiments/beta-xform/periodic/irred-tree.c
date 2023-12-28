@@ -27,32 +27,6 @@ long moves_to_idx(long bitseq, int len)
 	return good_index_map(bitseq);
 }
 
-// Given an finite-orbit index, return the matching tree-walk (of left-
-// right moves) to get to that index. Inverse of moves_to_idx()
-long idx_to_moves(long idx, int* leng)
-{
-	*leng = 0;
-	int len = 0;
-	long bitseq = 0;
-	// printf("enter idx=%ld\n", idx);
-	while (0 < idx)
-	{
-		bitseq |= 1UL << len;
-		len++;
-		while (0 == idx%2 && valid_gold_index(idx/2UL))
-		{
-			idx >>= 1;
-			len++;
-		}
-
-		long left = bracket_gold_left(idx);
-		// printf("%ld |=> leader idx=%ld len=%d\n", left, idx, len);
-		idx = left;
-	}
-	*leng = len;
-	return bitseq;
-}
-
 // Return the bit-sequence that approximates the rational p/q,
 // truncated to len bits. Rationals have infinite periodic bitseqs,
 // so this just expands that bitseq, and then truncates it.

@@ -66,6 +66,31 @@ unsigned long good_index_map(unsigned long moves)
 	return idx;
 }
 
+// Given a finite-orbit index, return the matching tree-walk (of left-
+// right moves) to get to that index. Inverse of good_index_map()
+unsigned long idx_to_moves(unsigned long idx)
+{
+	int len = 0;
+	long bitseq = 0;
+	// printf("enter idx=%ld\n", idx);
+	while (0 < idx)
+	{
+		bitseq |= 1UL << len;
+		len++;
+		while (0 == idx%2 && valid_gold_index(idx >>1))
+		{
+			idx >>= 1;
+			len++;
+		}
+
+		long left = bracket_gold_left(idx);
+		// printf("%ld |=> leader idx=%ld len=%d\n", left, idx, len);
+		idx = left;
+	}
+	bitseq |= 1UL << len;
+	return bitseq;
+}
+
 // Print moves on the full binary tree.
 void print_moves(unsigned long moves, char* pre, char* suf)
 {
