@@ -25484,25 +25484,48 @@ Consider the set of all eventually-periodic bit-sequences.
 S\left(\beta\right)= & \sum_{k=0}^{\infty}b_{k}\beta^{-k}\\
 = & \sum_{k=0}^{L-1}b_{k}\beta^{-k}+\sum_{k=L}^{L+N-1}b_{k}\beta^{-k}+\sum_{k=L+N}^{L+2N-1}b_{k}\beta^{-k}+\cdots\\
 = & \sum_{k=0}^{L-1}b_{k}\beta^{-k}+\frac{\beta^{N}}{\beta^{N}-1}\sum_{k=L}^{L+N-1}b_{k}\beta^{-k}\\
-= & \frac{1}{\beta^{L-1}}\sum_{k=0}^{L-1}d_{k}\beta^{L-k-1}+\frac{1}{\beta^{L-1}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}\\
-= & \frac{f_{\left\{ d_{k}\right\} }\left(\beta\right)}{\beta^{L-1}}+\frac{f_{\left\{ c_{k}\right\} }\left(\beta\right)}{\beta^{L-1}\left(\beta^{N}-1\right)}
+= & \frac{1}{\beta^{L-1}}\sum_{k=0}^{L-1}d_{k}\beta^{L-k-1}+\frac{1}{\beta^{L-1}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}
 \end{align*}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-xxxx
-\end_layout
-
-\begin_layout Standard
-What are the 
-\begin_inset Formula $\beta$
+Plugging in 
+\begin_inset Formula $\beta=2$
 \end_inset
 
- values associated with such orbits? Going back to eqn 
+ gives ratios of whole numbers: a rational that corresponds to this bit-sequence.
+ 
+\end_layout
+
+\begin_layout Standard
+Any given 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+ generates a mid-point orbit bit-sequence.
+ Sadly, we've introduced too many different but equivalent notations for
+ this.
+ Starting with the mid-point 
+\begin_inset Formula $x=m_{0}=\beta/2$
+\end_inset
+
+, the characteristic bit-sequence is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+b_{n}=\Theta\left(m_{n}-\frac{1}{2}\right)=\Theta\left(T_{\beta}^{n}\left(\frac{\beta}{2}\right)-\frac{1}{2}\right)=d_{n}\left(\frac{1}{2}\right)=k_{n}\left(\frac{\beta}{2}\right)=\varepsilon_{n}\left(\frac{1}{\beta}\right)
+\]
+
+\end_inset
+
+Such orbits have the self-describing property, that 
+\begin_inset Formula $\beta=S\left(\beta\right)$
+\end_inset
+
+.
+ This follows from eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:shift series"
@@ -25512,103 +25535,30 @@ noprefix "false"
 
 \end_inset
 
- and plugging in the mid-point 
-\begin_inset Formula $x=m_{0}=\beta/2$
+, as well as other identities.
+ For the eventually-periodic orbits, 
+\begin_inset Formula $S\left(\beta\right)$
 \end_inset
 
-, these are the 
-\begin_inset Formula $\beta$
+ is a ratio of polynomials.
+ It can clearly be placed in one-to-one correspondence with the rationals.
+ It is not hard to show that it has one unique real root 
+\begin_inset Formula $1<\beta\le2$
 \end_inset
 
- values defined by 
-\begin_inset Formula 
-\[
-\beta=\sum_{k=0}^{\infty}\frac{b_{k}}{\beta^{k}}
-\]
-
-\end_inset
-
-where
-\begin_inset Formula 
-\[
-b_{n}=\Theta\left(m_{n}-\frac{1}{2}\right)=\Theta\left(T_{\beta}^{n}\left(\frac{\beta}{2}\right)-\frac{1}{2}\right)=d_{n}\left(\frac{1}{2}\right)=k_{n}\left(\frac{\beta}{2}\right)=\varepsilon_{n}\left(\frac{1}{\beta}\right)
-\]
-
-\end_inset
-
-is the characteristic bitsequence.
- Note that 
-\begin_inset Formula $b_{0}=1$
-\end_inset
-
- always.
- 
+, and so these are in one-to-one correspondence as well.
 \end_layout
 
 \begin_layout Standard
-and 
-\begin_inset Formula $d_{k}=0$
+This can be related to earlier notation.
+ Writing 
+\begin_inset Formula $\beta-S\left(\beta\right)=0$
 \end_inset
 
- for 
-\begin_inset Formula $k\ge L$
-\end_inset
-
- or 
-\begin_inset Formula $k<0$
-\end_inset
-
-.
- Similarly, define a finite length-
-\begin_inset Formula $N$
-\end_inset
-
- 
-\begin_inset Quotes eld
-\end_inset
-
-cyclic
-\begin_inset Quotes erd
-\end_inset
-
- bit sequence 
-\begin_inset Formula $c_{k}=b_{k+L}$
-\end_inset
-
- for 
-\begin_inset Formula $k<N$
-\end_inset
-
- and 
-\begin_inset Formula $c_{k}=0$
-\end_inset
-
- for 
-\begin_inset Formula $k\ge N$
-\end_inset
-
- or 
-\begin_inset Formula $k<0$
-\end_inset
-
-.
- This allows the eventually-periodic orbits to be described by two distinct
- finite sequences.
- Such orbits are given by solutions to 
+ and then multiplying through by the denominator, 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\beta= & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}+\sum_{k=L+N}^{L+2N-1}\frac{b_{k}}{\beta^{k}}+\cdots\\
-= & \sum_{k=0}^{L-1}\frac{b_{k}}{\beta^{k}}+\frac{\beta^{N}}{\beta^{N}-1}\sum_{k=L}^{L+N-1}\frac{b_{k}}{\beta^{k}}\\
-= & \frac{1}{\beta^{L-1}}\sum_{k=0}^{L-1}d_{k}\beta^{L-k-1}+\frac{1}{\beta^{L-1}\left(\beta^{N}-1\right)}\sum_{k=0}^{N-1}c_{k}\beta^{N-k-1}
-\end{align*}
-
-\end_inset
-
-Multiplying through by the denominator, one obtains a finite polynomial
- for these orbits:
 \begin_inset Formula 
 \[
 \left(\beta^{N}-1\right)\left(\beta^{L}-\sum_{k=0}^{L-1}d_{k}\beta^{L-1-k}\right)-\sum_{k=0}^{N-1}c_{k}\beta^{N-1-k}=0
@@ -25616,7 +25566,8 @@ Multiplying through by the denominator, one obtains a finite polynomial
 
 \end_inset
 
-Making use of the earlier notation for polynomials,
+This touches the earlier notation for the polynomials describing finite
+ orbits:
 \begin_inset Formula 
 \[
 p^{\left\{ d_{0}\cdots d_{\nu-1}\right\} }\left(\beta\right)=\beta^{\nu}-\sum_{k=0}^{\nu-1}d_{k}\beta^{\nu-1-k}
@@ -25624,7 +25575,7 @@ p^{\left\{ d_{0}\cdots d_{\nu-1}\right\} }\left(\beta\right)=\beta^{\nu}-\sum_{k
 
 \end_inset
 
-the above has the form
+and so the eventually-periodic orbits are the roots of
 \begin_inset Formula 
 \[
 \left(\beta^{N}-1\right)p^{\left\{ d_{0}\cdots d_{L-1}\right\} }\left(\beta\right)+p^{\left\{ c_{0}\cdots c_{N-1}\right\} }\left(\beta\right)-\beta^{N}=0
@@ -25632,7 +25583,7 @@ the above has the form
 
 \end_inset
 
-Finite-length orbits can be taken to have 
+Finite-length orbits have 
 \begin_inset Formula $N=1$
 \end_inset
 
@@ -25640,18 +25591,19 @@ Finite-length orbits can be taken to have
 \begin_inset Formula $c_{0}=0$
 \end_inset
 
-, so that the cyclic term vanishes, and one is left with the finite-length
- polynomials, just as before, times an extra factor of 
+, so that the cyclic term vanishes, and the earlier form is recovered, after
+ ignoring an extra factor of 
 \begin_inset Formula $\beta-1$
 \end_inset
 
- which will be ignored.
+.
  
 \end_layout
 
 \begin_layout Standard
-Finite-length orbits can be converted to infinite-periodic orbits simply
- by setting the last bit to zero, and then repeating the bit sequence cyclically.
+Finite-length orbits can be converted to infinite-length periodic orbits
+ simply by setting the last bit to zero, and then repeating the bit sequence
+ cyclically.
  Recall, finite orbits always have the last bit equal to one, so this operation
  is always unambiguous.
  Restating this explicitly: if 
@@ -26007,6 +25959,9 @@ with
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
 
 \end_layout
 
@@ -26016,6 +25971,18 @@ with
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a_{N}$
+\end_inset
+
 
 \end_layout
 
@@ -26037,15 +26004,6 @@ with
 \begin_inset Formula $\cdots$
 \end_inset
 
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -26418,6 +26376,9 @@ The top row shows the prefix string and the first run of the cyclic string.
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $a_{N}$
+\end_inset
+
 
 \end_layout
 
@@ -26427,6 +26388,9 @@ The top row shows the prefix string and the first run of the cyclic string.
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\cdots$
+\end_inset
+
 
 \end_layout
 
