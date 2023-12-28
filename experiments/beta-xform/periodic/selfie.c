@@ -320,6 +320,10 @@ unsigned long bracket_gold_right(unsigned long idx)
 }
 
 /*
+ * The "good index map". Given a sequence of L,R moves on the full
+ * binary tree, return the corresponding valid finite index. This is
+ * the "G" function in the paper.
+ *
  * Return the front-center index from the bracketing sequence. The
  * bracketing sequence is a map of valid indexes to the binary tree.
  * The encoding is with move_gold_left() and move_gold_right(), which
@@ -340,7 +344,7 @@ unsigned long bracket_gold_right(unsigned long idx)
  * about the one-leading encoding is that an explicit length is not
  * needed; just lop off the MSB bit, and the rest of the string follows.
  */
-unsigned long front_sequence(unsigned long moves)
+unsigned long good_index_map(unsigned long moves)
 {
 	unsigned long idx = 0;
 	int nmov = bitlen(moves);

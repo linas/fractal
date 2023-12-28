@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 	long moves = atol(argv[1]);
 
 	printf("Moves from index zero:\n");
-	long down = front_sequence(moves);
+	long down = good_index_map(moves);
 	print_gold_info(down);
 
 	printf("Just the index:\n");
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 		{
 			bool ok = valid_gold_index(m);
 			comb_sum += ok;
-			long idx = front_sequence(m);
+			long idx = good_index_map(m);
 			idxsum += idx;
 		}
 		// printf("# nu=%d mstart=%ld comb=%ld idxs=%ld\n", k+2, mstart, comb_sum, idxsum);
@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 		{
 			bool ok = valid_gold_index(m);
 			comb_sum += ok;
-			long idx = front_sequence(m);
+			long idx = good_index_map(m);
 			idxsum += idx;
 
 			double comb_meas = ((double) comb_sum) / comb_norm;
@@ -112,7 +112,7 @@ int main(int argc, char* argv[])
 		unsigned long end = 1UL << (k+1);
 		for (unsigned long m=start; m<end; m++)
 		{
-			unsigned long idx = front_sequence(m);
+			unsigned long idx = good_index_map(m);
 			if (maxlead < idx)
 			{
 				mov = m;
@@ -139,7 +139,7 @@ int main(int argc, char* argv[])
 		unsigned long end = 1UL << (k+1);
 		for (unsigned long m=start; m<end; m++)
 		{
-			unsigned long idx = front_sequence(m);
+			unsigned long idx = good_index_map(m);
 			if (MAXIDX < idx) continue;
 			double gold = golden_beta(idx);
 
@@ -164,7 +164,7 @@ int main(int argc, char* argv[])
 	for (unsigned long m=start; m<end; m++)
 	{
 		double x = (((double) m-start) +0.5) * delta;
-		unsigned long idx = front_sequence(m);
+		unsigned long idx = good_index_map(m);
 		if (MAXIDX < idx) continue;
 		double gold = golden_beta(idx);
 		unsigned long lidx = bracket_gold_left(idx);
@@ -199,9 +199,9 @@ int main(int argc, char* argv[])
 	for (int k=1; k<maxord; k++)
 	{
 		unsigned long left = 1UL << k;
-		unsigned long idx = front_sequence(left);
+		unsigned long idx = good_index_map(left);
 		double gold = golden_beta(idx);
-		unsigned long ridx = front_sequence(left+1);
+		unsigned long ridx = good_index_map(left+1);
 		double rgold = golden_beta(ridx);
 
 		printf("%d	%16.12g	%16.12g	%g\n", k, gold, rgold, rgold-gold);

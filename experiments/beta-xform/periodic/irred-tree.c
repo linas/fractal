@@ -51,14 +51,11 @@ long moves_to_idx(long bitseq, int len)
 	{
 		int move = (bitseq >> (len-i-1)) & 0x1L;
 		if (0 == move)
-		{
-			front <<= 1;
-		}
+			front = move_gold_left(front);
 		else
-		{
-			front = gold_leader(front);
-			if (front < 0) return front;  // overflow
-		}
+			front = move_gold_right(front);
+
+		if (front < 0) return front;  // overflow
 		// printf("bit %d move=%d front=%ld\n", i, move, front);
 	}
 	// printf("------\n");
