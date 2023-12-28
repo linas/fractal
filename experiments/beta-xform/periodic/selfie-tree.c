@@ -52,7 +52,15 @@
  */
 unsigned long good_index_map(unsigned long moves)
 {
-	unsigned long idx = 0;
+	// Special-case the endpoints
+	// No moves is far left beta=1
+	// All-right moves is RRRR=-1 which overflows but should be beta=2
+	if (0UL == moves)
+		return NEG_ONE;
+	if (NEG_ONE == moves)
+		return 0UL;
+
+	unsigned long idx = 0UL;
 	int nmov = bitlen(moves);
 	for (int i=0; i< nmov; i++)
 	{
@@ -72,6 +80,14 @@ unsigned long good_index_map(unsigned long moves)
 // This is the canonical dyadic binary tree.
 void moves_to_rational(unsigned long moves, unsigned long* p, unsigned long* q)
 {
+	// No moves is far left, beta=1
+	if (0 == moves)
+	{
+		*p = 0;
+		*q = 1;
+		return;
+	}
+
 	int nmov = bitlen(moves);
 	unsigned long deno = 1UL << nmov;
 	unsigned long mask = deno - 1UL;
@@ -88,6 +104,12 @@ void moves_to_rational(unsigned long moves, unsigned long* p, unsigned long* q)
 // right moves) to get to that index. Inverse of good_index_map()
 unsigned long idx_to_moves(unsigned long idx)
 {
+	// Far left is beta=1 which is no moves at all, so zero.
+	// Far right is beta=2 which index 0, which is all right moves, which is -1
+	if (NEG_ONE == idx) return 0;
+	if (0 == idx) return -1;
+	if (MAXIDX < idx) return -2;
+
 	int len = 0;
 	long bitseq = 0;
 	// printf("idx-to-moves: --- Enter idx=%ld\n", idx);
