@@ -8,6 +8,7 @@
 
 #include "selfie.c"
 #include "selfie-rational.c"
+#include "selfie-tree.c"
 
 // Given a position in a binary tree, return the corresponding beta
 // index. This is the "good index" function, mapping the full binary
@@ -45,7 +46,7 @@ long moves_to_idx(long bitseq, int len)
 	// printf("Enter frac = %ld / %d\n", bitseq, 1<<len);
 	bitseq >>= 1;
 	bitseq |= 1UL << len;
-	return good_index_map(moves);
+	return good_index_map(bitseq);
 }
 
 // Print the moves.

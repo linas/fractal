@@ -35,10 +35,10 @@ irred-midpoint.o: irred-midpoint.c irred-gold.c
 irred-allowed.o: irred-allowed.c irred-gold.c
 irred-tacky.o: irred-tacky.c irred-gold.c
 irred-height.o: irred-height.c irred-gold.c
-irred-tree.o: irred-tree.c irred-gold.c selfie.c
+irred-tree.o: irred-tree.c selfie.c selfie-rational.c selfie-tree.c
 irred-seek.o: irred-seek.c irred-gold.c
 eventually.o: eventually.c selfie.c
-bracket-finite.o: bracket-finite.c selfie.c
+bracket-finite.o: bracket-finite.c selfie.c selfie-tree.c
 comb-limit.o: comb-limit.c
 slice.o: slice.c
 bracket-steps.o: bracket-steps.c selfie.c

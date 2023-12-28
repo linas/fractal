@@ -7,6 +7,7 @@
  */
 
 #include "selfie.c"
+#include "selfie-tree.c"
 
 int main(int argc, char* argv[])
 {
@@ -30,7 +31,7 @@ int main(int argc, char* argv[])
 		for (unsigned long m=mstart; m<mend; m++)
 		{
 			double x = (((double) m-mstart) + 0.5) / ((double) mstart);
-			long idx = front_sequence(m);
+			long idx = good_index_map(m);
 			double nrm = ((double) mstart);
 			// nrm = nrm*nrm;
 			nrm  = fact;

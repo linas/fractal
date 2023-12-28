@@ -7,6 +7,7 @@
  */
 
 #include "selfie.c"
+#include "selfie-tree.c"
 
 int main(int argc, char* argv[])
 {
