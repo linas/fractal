@@ -114,6 +114,21 @@ double bitseq_to_cf(long bitseq, int len)
 	return frac;
 }
 
+// cheap hack
+void low_guess(double rat, int* p, int* q)
+{
+	for (int i=1; i<8000; i+=2)
+	{
+		if (fmod(rat*i, 1.0) < 1e-10)
+		{
+			*q = i;
+			*p = floor(rat*i);
+			return;
+		}
+	}
+}
+
+
 int main(int argc, char* argv[])
 {
 // #define SPOT_CHECK
@@ -166,7 +181,7 @@ int main(int argc, char* argv[])
 	double rrat = ((double) pp) / ((double) qq);
 	printf("Reconstructed rational = %ld/%ld = %18.16g\n", pp, qq, rrat);
 
-	long idx = good_index_map(moves);
+	unsigned long idx = good_index_map(moves);
 	double gold = golden_beta(idx);
 	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
 
@@ -181,7 +196,16 @@ int main(int argc, char* argv[])
 		printf("Warning: indexes don't match! diff=%g\n", gold-rgold);
 	}
 
+	unsigned long tno = 2UL * idx + 1UL;
+	moves_to_rational(tno, &pp, &qq);
+	double orat = ((double) pp) / ((double) qq);
+	printf("Orbit rational = %ld/%ld = %18.16g\n", pp, qq, orat);
+
+	int po=0, qo=0;
+	low_guess(orat, &po, &qo);
+	printf("guess its orbit is %d/%d\n", po,qo);
 	printf("\n");
+
 #if 0
 	printf("---\n");
 	// The below is backwards. Ignore it for now.
