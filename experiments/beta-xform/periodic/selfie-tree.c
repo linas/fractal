@@ -48,7 +48,7 @@
  *
  * The matching dyadic fraction is obtained by trashing the leading
  * bit, then (2n+1), then divide by 2^len, as follows:
- *    (((moves & 1UL<<len) << 1) +1) / (1UL << len)
+ *    (((moves & 1UL<<len) << 1) +1) / (1UL << (len-1))
  */
 unsigned long good_index_map(unsigned long moves)
 {
@@ -66,6 +66,18 @@ unsigned long good_index_map(unsigned long moves)
 	return idx;
 }
 
+void moves_to_rational(unsigned long moves, unsigned long* p, unsigned long* q)
+{
+	int nmov = bitlen(moves);
+	unsigned long mask = 1UL << nmov;
+
+	moves &= mask;
+	moves <<= 1;
+	moves |= 1UL;
+	*p = moves;
+	*q = mask>>1;
+}
+
 // Given a finite-orbit index, return the matching tree-walk (of left-
 // right moves) to get to that index. Inverse of good_index_map()
 unsigned long idx_to_moves(unsigned long idx)
@@ -73,7 +85,7 @@ unsigned long idx_to_moves(unsigned long idx)
 	int len = 0;
 	long bitseq = 0;
 	// printf("enter idx=%ld\n", idx);
-	while (0 < idx)
+	while (NEG_ONE != idx)
 	{
 		bitseq |= 1UL << len;
 		len++;
@@ -84,7 +96,7 @@ unsigned long idx_to_moves(unsigned long idx)
 		}
 
 		long left = bracket_gold_left(idx);
-		// printf("%ld |=> leader idx=%ld len=%d\n", left, idx, len);
+		// printf("idx-to-moves: %ld |=> leader idx=%ld len=%d\n", left, idx, len);
 		idx = left;
 	}
 	bitseq |= 1UL << len;

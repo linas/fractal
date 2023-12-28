@@ -93,7 +93,7 @@ double bitseq_to_cf(long bitseq, int len)
 
 int main(int argc, char* argv[])
 {
-// #define SPOT_CHECK
+#define SPOT_CHECK
 #ifdef SPOT_CHECK
 	if (argc != 2)
 	{
@@ -101,23 +101,27 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	long idx = atol(argv[1]);
-	malloc_gold(idx+1);
 
 	int len = 0;
-	long bits = idx_to_moves(idx, &len);
+	long bits = idx_to_moves(idx);
 	printf("Index=%ld ", idx);
-	print_moves(bits, "bitseq=(", ")\n");
+	print_moves(bits, "Move sequence=(", ")\n");
+
+	unsigned long p;
+	unsigned long q;
+	moves_to_rational(bits, &p, &q);
+	printf("Matching rational = %ld / %ld\n", p, q);
 
 	long ridx = moves_to_idx(bits, len);
 	printf("reconstructed index = %ld\n", ridx);
 	if (idx != ridx)
 		printf("Error: failed reconstruction!\n");
 
-	double gold = find_gold(idx);
+	double gold = golden_beta(idx);
 	printf("Index %ld  beta=%20.16g\n", idx, gold);
 #endif
 
-#define RATIONAL_EXPLORE
+// #define RATIONAL_EXPLORE
 #ifdef RATIONAL_EXPLORE
 	if (argc != 4)
 	{
