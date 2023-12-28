@@ -169,6 +169,21 @@ double finite_to_double(long pfx, long cyc, int cyclen)
 }
 #endif
 
+// cheap hack
+void low_guess(double rat, int* p, int* q)
+{
+	for (int i=2; i<16386; i++)
+	{
+		if ((fabs(fmod(rat*i, 1.0)) < 1e-6) ||
+		    (fabs(1.0-fmod(rat*i, 1.0)) < 1e-6))
+		{
+			*q = i;
+			*p = floor(rat*i);
+			return;
+		}
+	}
+}
+
 // ---------------------------------------------------------------------
 
 void print_debug_info(unsigned long p, unsigned long q)
@@ -220,6 +235,10 @@ void print_debug_info(unsigned long p, unsigned long q)
 	moves_to_rational(moves, &pm, &qm);
 	double mrat = ((double) pm) / ((double) qm);
 	printf("Move rational =%ld/%ld  = %g\n", pm, qm, mrat);
+
+	int pg, qg;
+	low_guess(mrat, &pg, &qg);
+	printf("Reduced guess = %d/%d\n", pg, qg);
 }
 
 int lesser(const void * px, const void * py)
