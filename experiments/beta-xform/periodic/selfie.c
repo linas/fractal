@@ -13,30 +13,58 @@
  *
  * Notes about bit-encodings.
  * --------------------------
- * Orbits and dyadic fractions will use a little-endian encoding.
- * This is the same as 2-adic encoding, so that infinite strings
- * extend to the left.
+ * Four different bit-encodings are in use. They are:
  *
- * This means:
+ * -- "Index encoding". A long unsigned int.  Used for finite orbits.
+ *    Not all indexes are valid. Use valid_gold_index() to determine
+ *    if it is OK.
+ *
+ * -- "Leading-one scheme" aka "big-endian encoding", aka "finite orbit
+ *    encoding". Used for finite orbits. MSB is to far left, LSB is far
+ *    right, both MSB and LSB are one.  No length specifier needed. MSB
+ *    is always one, because first move of orbit is always one. LSB is
+ *    always one, because orbit always terminates. Equal to (2*idx+1).
+ *
+ * -- "Dyadic encoding" aka "2-adic encoding" aka "little-endian"
+ *    encoding. Used for unbounded orbits. MSB is far right, later
+ *    bits in orbit are to the left. Explicit length is needed.
+ *    Midpoint orbits always begin with a 1, so the right-most bit
+ *    is always a one. Bit-reversed version of big-endian encoding,
+ *    with length suaitably indicated.
+ *
+ * -- "Tree encoding", used to indicate location in a full binary tree.
+ *    First move is the right-most bit, and it must always be a one.
+ *    Later moves down the tree are bits to the left of that. Explicit
+ *    length is needed. This is more-or-less the same thing as the
+ *    2-adic encoding. Just a different interpretation.
+ *
+ * The big-endian encoding is used for finite-length orbits. It places
+ * the MSB to far-left. The left-most bit is always one. Usually, so is the
+ * right-most bit. Some comments call this the leading-one scheme.
+ *
+ * Advantages:
+ * -- No length specification is needed. The leading-one indicates the
+ *    start of the string.
+ * -- Can be interpreted as an integer: thus, finite orbits can be
+ *    associated with an explicit integer.
+ *
+ * Disadvantages:
+ * -- Long orbits have extremely large integers. Periodic orbits cannot
+ *    be represented at all.
+ * -- "nearby" orbits, sharing common leading bitstrings, have completely
+ *    different integer values.
+ *
+ * The little-endian encoding is used for dyadic fractions and for
+ * orbits of unbounded length. This is the 2-adic encoding; infinite
+ * strings extend to the left.  The MSB is to the far-right, so the
+ * MSB of the dyadic is the LSB of C/C++. (This is normal for p-adics.)
+ *
+ * The 2-adic encoding means:
  *   -- bit-zero is the right-most bit.
  *   -- bit-one is <<1 to the left of bit zero.
  *   -- finite-length strings need an explicit length.
  *   -- printing will be left-to-right, so only the storage of
  *      the string is 2-adic, but not the printouts.
- *
- * Much of the code uses the exact opposite of the above, a big-endian
- * encoding, always starting with a leading one, and then the rest of
- * the bits, from left to right. Thus, infinite strings extend to the
- * right.
- *
- * This is particularly convenient when the strings are NOT infinite,
- * but are finite: this associates an unique integer with each finite-
- * length string.
- *
- * Call this the leading-one scheme. Given an integer, the left-most
- * bit of the binary rep is always a one. Thus, if we ignore that bit,
- * everything that follows can encode any possible bit-sequence.  Thus,
- * no explicit length specification is needed; the length is self-encoding.
  *
  * The two different encodings can cause some confusion. As a general
  * rule: if the orbit is finite, use the leading-one scheme, and get an
