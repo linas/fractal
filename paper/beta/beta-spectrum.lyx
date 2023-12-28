@@ -5918,7 +5918,7 @@ reference "fig:Location-of-Midpoints"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -6492,13 +6492,13 @@ with the
 \end_layout
 
 \begin_layout Standard
-The reason for the appearence of the necklace-counting function is straight-forw
-ard: it is counting the number of distinct orbits of a given length.
+The reason for the appearance of the necklace-counting function is straightforwa
+rd: it is counting the number of distinct orbits of a given length.
  An orbit of length 
 \begin_inset Formula $n$
 \end_inset
 
- is, by defintion, a point 
+ is, by definition, a point 
 \begin_inset Formula $x$
 \end_inset
 
@@ -6530,7 +6530,7 @@ A recurring point of confusion is that the bit-string defining the polynomial
  Each bit-string corresponds to a unique polynomial, having roots that differ
  from those of other polynomials.
  The polynomials also have a canonical order, fixed as the integer that
- corresponds to the bit-string; they cannot be re-ordered.
+ corresponds to the bit-string; they cannot be reordered.
  Ideas such as Lyndon words apply to the orbits, but not to the defining
  polynomials.
  The ordering of the polynomials is 
@@ -6800,7 +6800,7 @@ The positive real root
  roots are complex; they are arranged in a roughly evenly-spaced ring on
  the complex plane, not far from the unit circle, reminiscent of roots of
  unity.
- There is always a postive real root, which satisfies 
+ There is always a positive real root, which satisfies 
 \begin_inset Formula $1\le r_{n}<2$
 \end_inset
 
@@ -6858,7 +6858,7 @@ This uses a definition for the Heaviside
 \end_inset
 
 .
- Effectvely, this states that roots of higher-order polynomials must be
+ Effectively, this states that roots of higher-order polynomials must be
  less than a certain sequence of lower-order roots.
  This is visible in the location of the discontinuities in figure 
 \begin_inset CommandInset ref
@@ -6950,7 +6950,7 @@ The indexing has the property that, whenever
 
 , expressed as a binary bitstring, encodes both the coefficients of the
  polynomial, and also the orbit of the midpoint.
- This can be taken as an alternate, non-recursive defintion of 
+ This can be taken as an alternate, non-recursive definition of 
 \begin_inset Formula $\theta_{n}$
 \end_inset
 
@@ -8212,9 +8212,19 @@ noprefix "false"
 \end_inset
 
 , taken with a real-valued index, rather than an integer index.
-\end_layout
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Plain Layout
+Generated with `periodic/bra-fin.gplot` from a data file generated with `periodic
+/bracket-finite.c`.
+ This is a wrapper for `valid_gold_index()` implemented in `selfie.c`.
+ It just loops over `valid_gold_index()` and prints ones and zeros.
+\end_layout
+
+\end_inset
+
+
 \begin_inset CommandInset line
 LatexCommand rule
 offset "0.5ex"
@@ -8312,7 +8322,7 @@ The summatory function of the indicator is
 \end_layout
 
 \begin_layout Standard
-A few addtional properties may be noted:
+A few additional properties may be noted:
 \end_layout
 
 \begin_layout Itemize
@@ -8409,7 +8419,7 @@ It is convenient to partition
 
  that correspond to the length of the orbits, or equivalently, the order
  of the defining polynomial.
- Examing the earlier tables, the rank of 
+ Examining the earlier tables, the rank of 
 \begin_inset Formula $n$
 \end_inset
 
@@ -8428,7 +8438,7 @@ It is convenient to partition
 
 .
  As before, it is convenient to extend the partition so that it can deal
- with the end-points 
+ with the endpoints 
 \begin_inset Formula $\beta=1$
 \end_inset
 
@@ -8637,7 +8647,7 @@ Location of
 
 \begin_layout Standard
 The location of the roots can be visualized by using the normalization of
- the Parry-Gelfond measure.
+ the Parry–Gelfond measure.
  The function in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -8658,7 +8668,7 @@ noprefix "false"
 
 \end_inset
 
- can be integrated in a straight-forward manner.
+ can be integrated in a straightforward manner.
  One has
 \begin_inset Formula 
 \[
@@ -8687,7 +8697,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -8736,8 +8746,8 @@ This figure shows the integral
 \end_inset
 
 -Golden polynomials.
- Some of these are manually labelled by integers, corresponding to the polynomia
-l labels from the previous polynomial table.
+ Some of these are manually labeled by integers, corresponding to the polynomial
+ labels from the previous polynomial table.
  
 \begin_inset Note Note
 status collapsed
@@ -8802,8 +8812,7 @@ That this figure is a self-similar fractal is presumably self-evident.
 \end_layout
 
 \begin_layout Standard
-A notation for bracketed intervals will be needed later, and can be introduced
- now.
+A distinct notation for bracketed intervals is useful.
  Write 
 \begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
 \end_inset
@@ -8843,7 +8852,8 @@ right
 
  with the inequalities being strict.
  Not all ascending sequences of three roots form a valid bracket; valid
- brackets will be defined shortly.
+ brackets are obtained by recursive subdivision; this is given in the next
+ section.
  But first, some examples.
 \end_layout
 
@@ -8913,7 +8923,7 @@ The extreme left side can be assigned the index of
 \end_layout
 
 \begin_layout Subsubsection
-Bracket tree
+The bracket tree
 \end_layout
 
 \begin_layout Standard
@@ -8935,7 +8945,7 @@ The brackets can be arranged into a binary tree, recursively defined.
 \begin_inset Formula $\Lambda$
 \end_inset
 
- is the leader function given given by eqn 
+ is the leader function given by eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:Leadership function"
@@ -8957,47 +8967,174 @@ noprefix "false"
 
 \begin_layout Standard
 The left and right moves 
-\begin_inset Formula $L,R$
+\begin_inset Formula $L,\mathfrak{R}$
 \end_inset
 
- on the binary tree can then be written as
-\end_layout
-
-\begin_layout Standard
+ on the binary tree can then be written as 
 \begin_inset Formula 
 \begin{align}
 L & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)\label{eq:Bracket recursion}\\
-R & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)\nonumber 
+\mathfrak{R} & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)\nonumber 
 \end{align}
 
 \end_inset
 
-These split the interval 
-\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+The right-move is denoted with a fraktur 
+\begin_inset Formula $\mathfrak{R}$
 \end_inset
 
- into two pieces, likewise.
- The inequalities are strict, and the figure indicates that the roots are
- dense in the interval 
-\begin_inset Formula $1\le\beta\le2$
+ instead of a roman 
+\begin_inset Formula $R$
 \end_inset
 
-, thus, interval subdivision always converges to a point.
- Starting from the bracket 
-\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+ in order to distinguish between the action of the leader function, and
+ the conventional dyadic map 
+\begin_inset Formula 
+\begin{align*}
+L & :m\mapsto2m\\
+R & :m\mapsto2m+1
+\end{align*}
+
 \end_inset
 
- that is the top of the tree, a finite string of 
-\begin_inset Formula $L,R$
+The issue is that not all dyadic 
+\begin_inset Formula $R$
 \end_inset
 
- moves will pick out a unique bracket, and thus a unique interval 
-\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+ moves result in a valid index: having 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ does not generally imply that 
+\begin_inset Formula $\theta\left(2m+1\right)$
+\end_inset
+
+ is one.
+ However, the leader function does provide a successor that is always valid:
+ 
+\begin_inset Formula $\theta\left(\Lambda\left(m\right)\right)=1$
+\end_inset
+
+ is guaranteed by construction.
+\end_layout
+
+\begin_layout Standard
+Any sequence of 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves is guaranteed to produce a valid interval; every location in the
+ binary tree is mapped to a valid index by the bracket recursion moves.
+ A general location on the bracket tree is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=L^{a_{1}}\mathfrak{R}^{a_{2}}L^{a_{3}}\cdots\mathfrak{R}^{a_{k}}
+\]
+
+\end_inset
+
+and this has the property that if 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ then 
+\begin_inset Formula $\theta\left(G\left(m\right)\right)=1$
 \end_inset
 
 .
- This places the finite orbits in a one-to-one correspondence with the dyadic
- rationals.
+ Equivalently, if 
+\begin_inset Formula $m\in\Psi$
+\end_inset
+
+ then 
+\begin_inset Formula $G\left(m\right)\in\Psi$
+\end_inset
+
+.
+ This implies that the bracket recursion relations generate all of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ Starting at 
+\begin_inset Formula $m=1$
+\end_inset
+
+, all left-right moves produce elements of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+; conversely, every element of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ can be expressed as some sequence of left-right moves applied to 
+\begin_inset Formula $m=1$
+\end_inset
+
+.
+ It is convenient to take 
+\begin_inset Formula $G$
+\end_inset
+
+ as the function that produces only the 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ indexes.
+ Thus
+\begin_inset Formula 
+\[
+G:L^{a_{1}}R^{a_{2}}L^{a_{3}}\cdots R^{a_{k}}\mapsto L^{a_{1}}\mathfrak{R}^{a_{2}}L^{a_{3}}\cdots\mathfrak{R}^{a_{k}}
+\]
+
+\end_inset
+
+Labeling the nodes of the binary tree with the natural numbers 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ provides a bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The bracket recursion relations split the interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ into left and right pieces, as well.
+ That is, each node of the binary tree is labeled by some (unique) 
+\begin_inset Formula $r_{f}$
+\end_inset
+
+, with the root 
+\begin_inset Formula $r_{\ell}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{\rho}$
+\end_inset
+
+ appearing as predecessors in the tree.
+ Of course, the binary tree can also be mapped to the dyadic rationals;
+ thus the bracketing recursion relations give a bijection between the dyadic
+ rationals and the finite-length orbits of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-map.
+ The bracket tree and the dyadic tree are in one-to-one correspondence.
  The correspondence is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9009,9 +9146,7 @@ noprefix "false"
 \end_inset
 
 .
- The curve is continuous, precisely because the brackets form a total order
- on their (left and right) sub-brackets, and because the brackets progressively
- narrow.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -9056,7 +9191,7 @@ This figure shows the mapping from the dyadic rationals, interpreted as
 \begin_inset Formula $\beta=r_{f}$
 \end_inset
 
- root for the front (center) of the resulting bracket.
+ root for the front (center) of the corresponding bracket.
  Thus, 1/2 maps to 
 \begin_inset Formula $r_{1}=\varphi=1.61803...$
 \end_inset
@@ -9069,13 +9204,7 @@ This figure shows the mapping from the dyadic rationals, interpreted as
 \begin_inset Formula $r_{3}=1.83929...$
 \end_inset
 
- The curve is continuous, as the brackets provide a filter that converges
- to a point.
- The brackets are in one-to-one correspondence with dyadic intervals 
-\begin_inset Formula $m/2^{n}<\left(2m+1\right)/2^{n+1}<\left(m+1\right)/2^{n}$
-\end_inset
-
-.
+ It would appear that the curve is continuous.
  The curve does drop to 
 \begin_inset Formula $\beta=1$
 \end_inset
@@ -9085,12 +9214,36 @@ This figure shows the mapping from the dyadic rationals, interpreted as
 \begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
 \end_inset
 
- remain quite wise, as the limit approaches 
+ remain quite wide, as the limit approaches 
 \begin_inset Formula $\beta=1$
 \end_inset
 
 .
  It does get there, though.
+ An explicit derivation of this limit is given in a later section.
+ The sharp takeoff at the left is reminiscent of the Minkowski question-mark
+ mapping.
+ The left generator for the bracket map is is quite close to left generator
+ 
+\begin_inset Formula $x/\left(1+x\right)$
+\end_inset
+
+ of the Minkowski fractal.
+ The Minowski fractal has 
+\begin_inset Formula $1/\left(2-x\right)$
+\end_inset
+
+ as the right generator.
+ Replacing this with 
+\begin_inset Formula $x+1/2$
+\end_inset
+
+ generates a curve similar to the bracket curve above, having Minkowski-like
+ behavior to the left, an linear-like behavior to the right.
+ The de Rham curve construction may be used to generate such curves, given
+ arbitrary L,R maps.
+ The L,R maps for the bracket curve are both fractal themselves, so finding
+ affine generators would be a surprise.
 \begin_inset Note Note
 status collapsed
 
@@ -9121,134 +9274,353 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-An infinite string of 
-\begin_inset Formula $L,R$
+Perhaps the most interesting aspect to the figure is that it appears to
+ be continuous.
+ That is, the roots 
+\begin_inset Formula $r_{n}$
 \end_inset
 
- moves corresponds to a point in the Cantor space 
-\begin_inset Formula $2^{\omega}$
-\end_inset
-
-, and so it appears that the bracket tree maps the non-finite orbits to
- real numbers, and this appears to be an injection.
- The points of Cantor space that end with infinite strings of all 
-\begin_inset Formula $L$
-\end_inset
-
- or all 
-\begin_inset Formula $R$
-\end_inset
-
- are mapped to finite beta orbits.
- This is much like the canonical dyadic tree mapping, where two such strings
- map to the same dyadic rational.
- For example, both strings 
-\begin_inset Formula $LRRR\cdots$
-\end_inset
-
- and 
-\begin_inset Formula $RLLL\cdots$
-\end_inset
-
- converge to 
-\begin_inset Formula $r_{1}=\varphi$
-\end_inset
-
-; the first from the left, the second from the right.
- The limit point is explicitly encoded in the the endpoints of the brackets.
- Explicitly, starting from the top bracket 
-\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
-\end_inset
-
-, the left branch is 
-\begin_inset Formula $L=\left(\infty\Mapsto2\Mapsfrom1\right)$
-\end_inset
-
- and on the right, 
-\begin_inset Formula $R=\left(1\Mapsto3\Mapsfrom0\right)$
+ appear to be dense in the interval 
+\begin_inset Formula $1\le\beta\le2$
 \end_inset
 
 .
- Subsequent left-moves give 
-\begin_inset Formula $RL^{n}=\left(1\Mapsto3\cdot2^{n}\Mapsfrom3\cdot2^{n-1}\right)$
+ Although the midpoints 
+\begin_inset Formula $r_{f}$
 \end_inset
 
- which leave the left side of the bracket invariant, but tighten the interval
- from the right side.
- Similarly, from the other side, 
-\begin_inset Formula $LR^{n}=\left(\Lambda^{n-1}\left(2\right)\Mapsto\Lambda^{n}\left(2\right)\Mapsfrom1\right)$
+ in an interval 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
 \end_inset
 
- leaves the right bound unchanged, while the left bound tightens in closer.
- The limit point 
-\begin_inset Formula $1$
-\end_inset
-
- is explicitly visible as the invariant endpoint in these two brackets.
- Both brackets converge to 
-\begin_inset Formula $r_{1}=\varphi$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Precisely the same bounding process applies to any finite-length prefix
- of left and right moves.
- That is, let 
-\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
-\end_inset
-
- be the result of applying any arbitrary finite-length sequence of moves
- 
-\begin_inset Formula $L^{a_{1}}R^{a_{2}}\cdots L^{a_{k}}$
-\end_inset
-
- for any non-negative integers 
-\begin_inset Formula $a_{1},a_{2},\cdots,a_{k}$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $RL^{n}:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto2^{n}\Lambda f\Mapsfrom2^{n-1}\Lambda f\right)$
-\end_inset
-
- which places 
-\begin_inset Formula $f$
-\end_inset
-
- on the left of the bracket, but otherwise keeps it invarainet as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-.
- On the other side, 
-\begin_inset Formula $LR^{n}:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\Lambda^{n-1}\left(2f\right)\Mapsto\Lambda^{n}\left(2f\right)\Mapsfrom f\right)$
-\end_inset
-
- places 
-\begin_inset Formula $f$
-\end_inset
-
- on the right of the bracket, keeping it invariant as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-.
- Both converge to the same limit.
+ are not evenly spaced, the midpoint always appears to be sufficiently far
+ away from either endpoint so that the convergents are dense in the reals,
+ which implies in turn that the map is continuous.
+ It would appear that the map to infinite-length sequences can be taken,
+ without pathologies.
 \end_layout
 
 \begin_layout Subsubsection
-Sequence labels
+The finite comb
 \end_layout
 
 \begin_layout Standard
-Rather than working directly with indexes, it is more convenient to label
- sequences of discontinuities directly, by counting.
- This is shown in 
+The figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Discontinuity-labels"
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows each indicator rank 
+\begin_inset Formula $\Psi_{\nu}$
+\end_inset
+
+ as a comb.
+ A better understanding is gained by mapping this to the infinite binary
+ tree.
+ Each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+ corresponds to a single horizontal row in the tree.
+ The numbering that has been adopted is that 
+\begin_inset Formula $\nu=2$
+\end_inset
+
+ is at the root of the tree.
+ The dyadic left and right moves on the comb are
+\begin_inset Formula 
+\begin{align*}
+L & :\theta_{m}\mapsto\theta_{2m}\\
+R & :\theta_{m}\mapsto\theta_{2m+1}
+\end{align*}
+
+\end_inset
+
+The indicator function marks each node in the tree with a zero or a one.
+\end_layout
+
+\begin_layout Standard
+One property of this marking is that when a node is marked with a zero,
+ all nodes in the right subtree are marked with a zero, as well: the presence
+ of a zero removes the entire right-hand branch under that point.
+ This follows from the property noted earlier, that if 
+\begin_inset Formula $\theta\left(m\right)=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\theta\left(2^{n}\left(2m+1\right)\right)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Restating in terms of moves, if 
+\begin_inset Formula $\theta_{m}=0$
+\end_inset
+
+ then, taking 
+\begin_inset Formula $n=0$
+\end_inset
+
+, one has 
+\begin_inset Formula $R\theta_{m}=\theta_{2m+1}=0$
+\end_inset
+
+.
+ Of course it, follows that 
+\begin_inset Formula $RR\theta_{m}=0$
+\end_inset
+
+.
+ Taking 
+\begin_inset Formula $n=1$
+\end_inset
+
+, one has that 
+\begin_inset Formula $LR\theta_{m}=0$
+\end_inset
+
+, and so both left and right sub-branches are gone.
+\end_layout
+
+\begin_layout Standard
+A converse marking is given by the property that, if 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ then 
+\begin_inset Formula $\theta\left(2m\right)=1$
+\end_inset
+
+.
+ On the tree, this means that left-branches of a node marked with a one
+ are never trimmed: if 
+\begin_inset Formula $\theta_{m}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $L\theta_{m}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $2^{<\omega}$
+\end_inset
+
+ for the collection of all finite strings in the letters 
+\begin_inset Formula $L,R$
+\end_inset
+
+ and 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ as the set of all infinite strings.
+ The indicator function is then a map 
+\begin_inset Formula $\theta:2^{<\omega}\to\left\{ 0,1\right\} $
+\end_inset
+
+ that indicates when a given finite, unbounded walk down the tree might
+ have more branches, or definitely does not.
+ This definitely-maybe marking defines a filter, and dually, an ideal.
+ The filter/ideal can be taken on the integers, or equivalently, on the
+ reals.
+ The second possibility is what the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is hinting at.
+\end_layout
+
+\begin_layout Standard
+The filter has the form that if 
+\begin_inset Formula $n\in\Psi_{\nu}$
+\end_inset
+
+ then 
+\begin_inset Formula $2n\in\Psi_{v+1}$
+\end_inset
+
+.
+ The converse is not true: 
+\begin_inset Formula $10\in\Psi_{5}$
+\end_inset
+
+ but 
+\begin_inset Formula $5\notin\Psi_{4}$
+\end_inset
+
+.
+ Written as a filter, this is 
+\begin_inset Formula $L\Psi_{\nu}\subset\Psi_{\nu+1}$
+\end_inset
+
+ and the subset relation is strict.
+ Written as and ideal, if 
+\begin_inset Formula $n\notin\Psi_{\nu}$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(2n+1\right)\notin\Psi_{v+1}$
+\end_inset
+
+.
+ This is more clearly stated with set complements at a given rank.
+ Define the unit interval 
+\begin_inset Formula $I_{\nu}=\left\{ n:2^{\nu-2}\le n<2^{\nu-1}\right\} $
+\end_inset
+
+ and the set complement 
+\begin_inset Formula $\overline{\Psi}_{\nu}=I_{\nu}\backslash\Psi_{\nu}$
+\end_inset
+
+.
+ The ideal is then 
+\begin_inset Formula $R\overline{\Psi}_{\nu}\subset\overline{\Psi}_{\nu+1}$
+\end_inset
+
+ together with 
+\begin_inset Formula $\left(LR\overline{\Psi}_{\nu}\cup RR\overline{\Psi}_{\nu}\right)\subset\overline{\Psi}_{\nu+2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+The comb bijection
+\end_layout
+
+\begin_layout Standard
+The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ provides a mechanism to map the full binary tree into the trimmed tree,
+ so that every node in the trimmed tree is in one-to-one correspondence
+ with the full binary tree.
+\end_layout
+
+\begin_layout Standard
+The leadership function provides the desired mapping.
+ If 
+\begin_inset Formula $n\in\Psi_{\nu}$
+\end_inset
+
+, then 
+\begin_inset Formula $\Lambda\left(n\right)\in\Psi_{\nu+1+h}$
+\end_inset
+
+ where 
+\begin_inset Formula $h$
+\end_inset
+
+ was the height of the leader.
+ Any valid index 
+\begin_inset Formula $n$
+\end_inset
+
+ gets 
+\begin_inset Quotes eld
+\end_inset
+
+kicked upstairs
+\begin_inset Quotes erd
+\end_inset
+
+ by the leadership function; one can write 
+\begin_inset Formula $\Lambda\Psi_{\nu}\subset\bigcup_{h=0}^{\infty}\Psi_{\nu+1+h}$
+\end_inset
+
+.
+ This just corresponds to the bracket move 
+\begin_inset Formula $\mathfrak{R}:\theta_{m}\to\theta_{\Lambda\left(m\right)}$
+\end_inset
+
+ on the trimmed tree: given any location 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+ in the trimmed tree, the bracket right move returns the next valid right
+ branch in the trimmed tree: 
+\begin_inset Formula $\mathfrak{R}\left(m\right)=\Lambda\left(m\right)$
+\end_inset
+
+, since, by construction, 
+\begin_inset Formula $\theta\left(\Lambda\left(m\right)\right)=1$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\theta\left(m\right)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+The infinite comb
+\end_layout
+
+\begin_layout Standard
+The comb is mapped to the reals by defining open subsets bounded by the
+ dyadic rationals.
+ Let 
+\begin_inset Formula $I\left(m,\nu\right)=\left\{ x\in\mathbb{R}:m<x2^{\nu-2}<\left(m+1\right);0\le m<2^{\nu-2}\right\} $
+\end_inset
+
+ so that 
+\begin_inset Formula $I\left(0,2\right)=\left\{ x\in\mathbb{R}:0<x<1\right\} $
+\end_inset
+
+.
+ The left and right moves are the obvious ones: 
+\begin_inset Formula $LI\left(m,\nu\right)=I\left(2m,\nu+1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $RI\left(m,\nu\right)=I\left(2m+1,\nu+1\right)$
+\end_inset
+
+.
+ These are interpreted as the left and right halves of the (fat) Cantor
+ set, on the reals; the fat Cantor set being taken as the reals with the
+ dyadic rationals removed.
+\end_layout
+
+\begin_layout Standard
+The filters on 
+\begin_inset Formula $\Psi_{\nu}$
+\end_inset
+
+ become filters on 
+\begin_inset Formula $I\left(m,\nu\right)$
+\end_inset
+
+ in the obvious way, by means of a commuting diagram.
+ Write 
+\begin_inset Formula $I\left(\Psi_{\nu}\right)=\bigcup_{m\in\Psi_{\nu}}I\left(m-2^{\nu-2},\nu\right)$
+\end_inset
+
+ as the union of intervals that cover the nonempty runs in the binary tree.
+ This is effectively what is being graphed in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9256,57 +9628,318 @@ noprefix "false"
 \end_inset
 
 .
- The primary index-doublig sequence is labeled starting with 
-\begin_inset Formula $\left[0\right]$
+ The limit set is then
+\begin_inset Formula 
+\begin{equation}
+\theta=\bigcap_{\nu=2}^{\infty}I\left(\Psi_{\nu}\right)\label{eq:infinite comb}
+\end{equation}
+
 \end_inset
 
- and moving on to 
-\begin_inset Formula $\left[1\right]$
+where the notation 
+\begin_inset Formula $\theta$
 \end_inset
 
-, 
-\begin_inset Formula $\left[2\right]$
+ is happily abused to denote the limit of the indicator function 
+\begin_inset Formula $\theta_{n}$
 \end_inset
 
-, and so on.
- Subsequences can also be labeled directly, in the same way.
- So, for example, the subsequence between 
-\begin_inset Formula $\left[n\right]$
+ as a subset of the reals.
+ This is possible precisely because 
+\begin_inset Formula $\theta_{n}$
+\end_inset
+
+ can be mapped to the binary tree, which can then be partitioned as filters
+ and ideals.
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $2^{\nu-2}\in\Psi_{\nu}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\nu$
+\end_inset
+
+, i.e.
+ the leftmost branch is never trimmed, one easily concludes that 
+\begin_inset Formula $0\in\theta$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\left(2^{\nu-1}-1\right)\in\Psi_{\nu}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the rightmost branch is never trimmed, and so one may conclude that 
+\begin_inset Formula $1\in\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It should be clear that the set 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is isomorphic to the Cantor set.
+ The comb bijection show how to map points in 
+\begin_inset Formula $\theta$
+\end_inset
+
+ back into the untrimmed infinite tree; the full binary tree is isomorphic
+ to the Cantor set.
+ From this, one concludes that the set 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is uncountable, and can be placed in bijection with the reals.
+ This is explored in the next section.
+ A measure can be assigned to 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ This is given in the section after next.
+\end_layout
+
+\begin_layout Subsubsection
+The comb as the set of self-describing orbits
+\end_layout
+
+\begin_layout Standard
+What is the meaning of the (infinite) comb? To understand this, recall the
+ definition of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ One has that 
+\begin_inset Formula $n\in\Psi$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $n$
+\end_inset
+
+ is a self-describing finite orbit.
+ That is, 
+\begin_inset Formula $n\in\Psi$
+\end_inset
+
+ if and only if the real root 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ of 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+ iterates under the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-map such that the iterate reproduces the bit-sequence of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $n\in\Psi$
+\end_inset
+
+ if and only if the bits 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ of the bitstring 
+\begin_inset Formula $2n+1=b_{0}b_{1}b_{2}\cdots b_{\nu}$
+\end_inset
+
+ are given by the (finite) orbit as 
+\begin_inset Formula 
+\[
+b_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r_{n}}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r_{n}}{2}\right)
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $n$
+\end_inset
+
+ does not have this property, then 
+\begin_inset Formula $n\notin\Psi$
+\end_inset
+
+.
+ At each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the elements of 
+\begin_inset Formula $\Psi_{v}$
+\end_inset
+
+ correspond to finite orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ In the limit of 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, one gets self-describing orbits of unbounded (infinite) length.
+\end_layout
+
+\begin_layout Standard
+By construction, if 
+\begin_inset Formula $n\in\Psi_{\nu}$
+\end_inset
+
+ then 
+\begin_inset Formula $Ln\in\Psi_{\nu+1}$
 \end_inset
 
  and 
-\begin_inset Formula $\left[n-1\right]$
+\begin_inset Formula $\Lambda n\in\Psi_{\nu+1+h}$
 \end_inset
 
- starts with 
-\begin_inset Formula $\left[n,0\right]$
+.
+ That is, if 
+\begin_inset Formula $n$
 \end_inset
 
- and proceeds to 
-\begin_inset Formula $\left[n,1\right]$
+ is a self-describing orbit, then it appears as the prefix of longer self-descri
+bing orbits.
+\end_layout
+
+\begin_layout Standard
+Polynomials of infinite order are holomorphic functions.
+ Given an infinite bitsequence 
+\begin_inset Formula $\left\{ b\right\} =b_{0}b_{1}\cdots$
 \end_inset
 
-, 
-\begin_inset Formula $\left[n,2\right]$
+, define a holomorphic function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+q^{\left\{ b\right\} }\left(\zeta\right)=1-\sum_{j=0}^{\infty}b_{j}\zeta^{j+1}
+\]
+
 \end_inset
 
-, and so on.
+If the bit-sequence is finite, in that all 
+\begin_inset Formula $b_{j}=0$
+\end_inset
+
+ when 
+\begin_inset Formula $j>k$
+\end_inset
+
+, then this is related to the polynomials as 
+\begin_inset Formula 
+\[
+\zeta^{k+1}p_{n}\left(\frac{1}{\zeta}\right)=1-b_{0}\zeta-b_{1}\zeta^{2}-\cdots-b_{k}\zeta^{k+1}
+\]
+
+\end_inset
+
+The single, unique real, positive root of 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+ is then a self-describing orbit.
+ That is, given a root 
+\begin_inset Formula $r$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(1/r\right)=0$
+\end_inset
+
+, one has that 
+\begin_inset Formula 
+\[
+b_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r}{2}\right)
+\]
+
+\end_inset
+
+Given such a self-describing finite or infinite sequence 
+\begin_inset Formula $\left\{ b\right\} =b_{0}b_{1}\cdots$
+\end_inset
+
+, the corresponding real number is in the comb:
+\begin_inset Formula 
+\[
+x=\sum_{j=0}^{\infty}\frac{b_{j}}{2^{j}}=2\left(1-q^{\left\{ b\right\} }\left(\frac{1}{2}\right)\right)\in\theta
+\]
+
+\end_inset
+
+Every real number 
+\begin_inset Formula $x\in\theta$
+\end_inset
+
+ in the comb corresponds to such a self-describing orbit.
+ This includes orbits that are eventually-periodic.
+ These are orbits that being with initial excursions, but then settle down
+ to a repeating, periodic sequence.
+ Such orbits correspond to the binary expansions of rationals: these have
+ ultimately-periodic bit-sequences.
+ The periodic part allows 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+ to be factored into two finite polynomials, on describing the initial segment,
+ and a second describing the periodic segment.
+ This is examined in a later section.
+\end_layout
+
+\begin_layout Subsubsection
+The comb measure
+\end_layout
+
+\begin_layout Standard
+A limit for the infinite comb was constructed above.
+ A measure for the infinite comb can be obtained as well.
+ This is depicted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Indicator-Sum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Discontinuity Labels
+Limit of Indicator Sum
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Discontinuity-labels"
+name "fig:Indicator-Sum"
 
 \end_inset
 
@@ -9319,10 +9952,8 @@ name "fig:Discontinuity-labels"
 \end_layout
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Graphics
-	filename normie-f-labelled.eps
-	lyxscale 50
+	filename bra-comb-sum.eps
 	width 100col%
 
 \end_inset
@@ -9331,29 +9962,38 @@ name "fig:Discontinuity-labels"
 \end_layout
 
 \begin_layout Plain Layout
-This figure shows the integral 
-\begin_inset Formula $I\left(\beta\right)=\sum_{n=0}^{\infty}\beta^{-n}T^{n}\left(\frac{\beta}{2}\right)$
+This figure shows the limit of the indicator sum 
+\begin_inset Formula $A\left(x\right)=\lim_{\nu\to\infty}A_{\nu}\left(x\right)$
 \end_inset
 
- with 
-\begin_inset Formula $1<\beta\le2$
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:indicator-sum"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- running along the horizontal axis.
- Each discontinuity corresponds to the location of a real root of one of
- the 
-\begin_inset Formula $\beta$
+.
+ More precisely, it shows 
+\begin_inset Formula $A_{\nu}\left(x\right)$
 \end_inset
 
--Golden polynomials.
- Prominent discontinuities are labeled with a finite sequence of non-negative
- integers following a regular pattern.
- 
+ for 
+\begin_inset Formula $\nu=20$
+\end_inset
+
+.
+ By this point, convergence is sufficient that any differences from the
+ limit are not visible to the naked eye.
 \begin_inset Note Note
 status collapsed
 
 \begin_layout Plain Layout
-Generated with normie.C and normie.gplot and then manually annotated.
+Produced with bra-fin.gplot with data from bracket-finite.c.
+ Also, Moreau's necklace can be printed with ./periodic/comb-limit.c.
 \end_layout
 
 \end_inset
@@ -9379,147 +10019,85 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-The general label has the form 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
+The sum over the indicator function 
+\begin_inset Formula $S\left(k\right)=\sum_{n=1}^{k}\theta_{n}$
 \end_inset
 
- for non-negative integers 
-\begin_inset Formula $m_{j}$
+ shows power-of-two periodicity, same as the comb.
+ Each rank 
+\begin_inset Formula $\nu$
 \end_inset
 
-.
- The labelling is unique: each finite orbit gets a distinct label.
- The corresponding integer index can be denoted as 
-\begin_inset Formula $\eta\left[m_{1},m_{2},\cdots,m_{k}\right]$
-\end_inset
-
-.
- Consulting figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Normalization-Integral"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, one has 
-\begin_inset Formula $\eta\left[0\right]=1$
-\end_inset
-
-, 
-\begin_inset Formula $\eta\left[1\right]=2$
-\end_inset
-
- and 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\eta\left[m\right]=2^{m}$
-\end_inset
-
- in general.
- It is convenient to write the right-most label at
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\begin_inset Formula $\beta=2$
-\end_inset
-
- as 
-\begin_inset Formula $\left[-1\right]$
-\end_inset
-
-, while the left-most label, at 
-\begin_inset Formula $\beta=1$
-\end_inset
-
- is clearly 
-\begin_inset Formula $\left[\infty\right]$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-The bracketing relations have a simpler form, but otherwise work exactly
- as before.
- The entire interval 
-\begin_inset Formula $1\le\beta\le2$
-\end_inset
-
- is given by 
-\begin_inset Formula $\left[\infty\right]\Mapsto\left[0\right]\Mapsfrom\left[-1\right]$
-\end_inset
-
-.
- A general bracketing relationship is given by
+ can be separated out as
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
+\[
+S_{\nu}\left(k\right)=S\left(k\right)-S\left(2^{\nu-2}-1\right)
+\]
+
+\end_inset
+
+which is intended to isolate the range 
+\begin_inset Formula $2^{\nu-2}\le k<2^{\nu-1}$
+\end_inset
+
+.
+ At the end of the range, the sum achieves Moreau's necklace-counting function:
+ 
+\begin_inset Formula $S_{\nu}\left(2^{\nu-1}-1\right)=M_{\nu}$
+\end_inset
+
+.
+ Dividing by 
+\begin_inset Formula $M_{\nu}$
+\end_inset
+
+ gives each rank the same vertical scale: zero to one.
+ It is also useful to rescale the horizontal range, to run zero-to-one as
+ well.
+ This gives a normalized version
+\begin_inset Formula 
+\[
+N_{\nu}\left(x\right)=\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+x\right)\right\rfloor \right)}{M_{\nu}}
+\]
+
+\end_inset
+
+that runs from zero to one as 
+\begin_inset Formula $x$
+\end_inset
+
+ runs from zero to one.
+ This function does not have an interesting limit as 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, as it slowly drops to zero over the entire unit interval.
+ However, it does so at a fixed rate, and can be held constant with a radical.
+ The sequence of functions
+\begin_inset Formula 
 \begin{equation}
-\left[m_{1},m_{2},\cdots,m_{k}\right]\Mapsto\left[m_{1},m_{2},\cdots,m_{k},m_{k+1}\right]\Mapsfrom\left[m_{1},m_{2},\cdots,m_{k}-1\right]\label{eq:sequence bracket}
+A_{\nu}\left(x\right)=\exp\left(M_{\nu}2^{-\nu}\log N_{\nu}\left(x\right)\right)\label{eq:indicator-sum}
 \end{equation}
 
 \end_inset
 
-The recursion relations also take on a simple form.
- Leftward moves correspond to 
-\begin_inset Formula 
-\[
-\eta\left[m_{1},m_{2},\cdots,m_{k},j\right]=2\eta\left[m_{1},m_{2},\cdots,m_{k},j-1\right]
-\]
-
+converge rapidly and more-or-less uniformly to a limit 
+\begin_inset Formula $A\left(x\right)=\lim_{\nu\to\infty}A_{\nu}\left(x\right)$
 \end_inset
 
-or, more directly,
-\begin_inset Formula 
-\[
-\eta\left[m_{1},m_{2},\cdots,m_{k},j\right]=2^{j}\eta\left[m_{1},m_{2},\cdots,m_{k},0\right]
-\]
-
+.
+ It appears to be well-defined on the unit real interval 
+\begin_inset Formula $0\le x\le1$
 \end_inset
 
-Righward moves truncate the trailing zero at the end of the sequnce, so
- that
-\begin_inset Formula 
-\[
-\eta\left[m_{1},m_{2},\cdots,m_{k},0\right]=\Lambda\left(\eta\left[m_{1},m_{2},\cdots,m_{k}\right]\right)
-\]
-
-\end_inset
-
-with 
-\begin_inset Formula $\Lambda$
-\end_inset
-
- the same leadership function as before, given by eqn 
+.
+ This is the limit shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:Leadership function"
+reference "fig:Indicator-Sum"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9527,300 +10105,121 @@ noprefix "false"
 \end_inset
 
 .
- These two recursion relations can be combined to obtain the polynomial
- index (and thus the midpoint orbit label) of any sequence.
- The sequence labels, the finite orbits and the polynomial roots are all
- in one-to-one correspondence with one-another; bijections pass between
- all of them.
+ It is perhaps useful to keep in mind the asymptotic limit of Moreau's function,
+ 
+\begin_inset Formula $M_{\nu}\sim2^{\nu}/\nu$
+\end_inset
+
+ and so the radical scales as 
+\begin_inset Formula $M_{\nu}2^{-\nu}\sim1/\nu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The convergence to the limit appears to be uniform and rapid, except at
+ 
+\begin_inset Formula $x=0$
+\end_inset
+
+, which proceeds slowly.
+ This is easily demonstrated.
+ The 
+\begin_inset Formula $x=0$
+\end_inset
+
+ limit is 
+\begin_inset Formula 
+\[
+A\left(0\right)=\lim_{\nu\to\infty}\left(N_{\nu}\left(0\right)\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{1}{M_{\nu}}\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{\nu}{2^{\nu}}\right)^{1/\nu}=\frac{1}{2}\lim_{\nu\to\infty}\nu^{1/\nu}=\frac{1}{2}
+\]
+
+\end_inset
+
+The slow convergence is entirely due to the last limit, above.
+\end_layout
+
+\begin_layout Standard
+The offsets to the sums and limit above were defined above, so as to avoid
+ having to debate the meaning of 
+\begin_inset Formula $\lim_{\nu\to\infty}\sqrt[\nu]{0}$
+\end_inset
+
+.
+ Yet clearly, the intent is that 
+\begin_inset Formula $A\left(x\right)$
+\end_inset
+
+ should provide a measure for the infinite comb.
+ Should the infinite comb be thought of as having a large point-weight at
+ 
+\begin_inset Formula $x=0$
+\end_inset
+
+? Perhaps not; thus, perhaps a more suitable measure is 
+\begin_inset Formula $\mu_{\theta}\left(x\right)=2A\left(x\right)-1$
+\end_inset
+
+, which runs from zero to one over the unit interval.
+\end_layout
+
+\begin_layout Standard
+To summarize: The function 
+\begin_inset Formula $\mu_{\theta}\left(x\right)$
+\end_inset
+
+ provides a measure for the infinite comb given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The non-flat sections are where the infinite-length self-describing sequences
+ are accumulating.
 \end_layout
 
 \begin_layout Subsubsection
-Baire space
+The Beta measure
 \end_layout
 
 \begin_layout Standard
-The
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
- right-most label at
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\begin_inset Formula $\beta=2$
+The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
 \end_inset
 
- was given as 
-\begin_inset Formula $\left[-1\right]$
+ provides a mechanism to map the full binary tree into the trimmed tree,
+ so that every node in the trimmed tree is in one-to-one correspondence
+ with the full binary tree.
+ As it is a bijection, it can be used to pull back the trimmed tree to the
+ full tree.
+ Labeling the tree with dyadics, it allows the trimmed tree measure 
+\begin_inset Formula $\mu_{\theta}\left(x\right)$
 \end_inset
 
-.
- This can be converted into a parlor trick, by introducing a rule allows
- sequences to sometimes terminate with 
-\begin_inset Formula $-1$
-\end_inset
-
- and that, when they do, this is a short-hand to shorten the sequence and
- also decrement the previous digit.
- Thus, one writes 
-\begin_inset Formula $\left[\cdots,m,-1\right]=\left[\cdots,m-1\right]$
-\end_inset
-
-.
- The interesting case is when 
-\begin_inset Formula $m=0$
-\end_inset
-
-, in which case, the rule is applied recursively, so that 
-\begin_inset Formula $\left[\cdots,k,0,-1\right]=\left[\cdots,k,-1\right]=\left[\cdots,k-1\right]$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-As an illustration, consider the case of 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k},m_{k+1}\right]=\left[1,0,0,0\right]$
-\end_inset
-
-.
- The bracketing relation as defined by eqn 
+ to be pulled back to a measure on the entire unit interval.
+ This effectively shrinks the stair-treads visible in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:sequence bracket"
+reference "fig:Indicator-Sum"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- is then 
-\begin_inset Formula $\left[1,0,0\right]\Mapsto\left[1,0,0,0\right]\Mapsfrom\left[1,0,-1\right]$
-\end_inset
-
-.
- The right hand side reduces as 
-\begin_inset Formula $\left[1,0,-1\right]=\left[1,-1\right]=\left[0\right]$
-\end_inset
-
- so that the final form is 
-\begin_inset Formula $\left[1,0,0\right]\Mapsto\left[1,0,0,0\right]\Mapsfrom\left[0\right]$
-\end_inset
-
- which corresponds to 
-\begin_inset Formula $42\Mapsto170\Mapsfrom1$
-\end_inset
-
-.
- The beta values are as expected: 
-\begin_inset Formula 
-\[
-\beta\left[1,0,0\right]=1.60135...<\beta\left[1,0,0,0\right]=1.61193...<\beta\left[0\right]=1.61803...
-\]
-
-\end_inset
-
-and a visual confirmation shows that 
-\begin_inset Formula $\left[0\right]$
-\end_inset
-
- is necessarily the right-hand limit for the interval, as there is no other
- appropriate discontinuity for 
-\begin_inset Formula $\left[1,0,0,0\right]$
-\end_inset
-
- to be bounded by.
-\end_layout
-
-\begin_layout Standard
-This same parlor trick can be used to create infinite sequences out of finite
- ones.
- It was already noted that the upper bound of all sequences is 
-\begin_inset Formula $\beta\left[-1\right]=2$
-\end_inset
-
-.
- In particular, it is larger than 
-\begin_inset Formula $\beta\left[0,0,\cdots,0\right]$
-\end_inset
-
- for any finite run of zeros.
- From this, it is reasonable to make the identification
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left[-1\right]=\left[0,0,\cdots\right]
-\]
-
-\end_inset
-
-as a notational convenience.
- Applying this trick to any finite-length label, one gets an infinite-length
- label:
-\begin_inset Formula 
-\[
-\left[m_{1},m_{2},\cdots,m_{k}\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,-1\right]=\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]
-\]
-
-\end_inset
-
-The bracketing relationship ensures that the beta value of any infinite-length
- string will be bounded by a filter series sharing the same leading digits.
- That is, 
-\begin_inset Formula 
-\[
-\beta\left[m_{1},m_{2},\cdots,m_{k}+1,0,0,\cdots\right]<\beta\left[m_{1},m_{2},\cdots,m_{k},\cdots\right]<\beta\left[m_{1},m_{2},\cdots,m_{k},0,0,\cdots\right]
-\]
-
-\end_inset
-
-is true for all 
-\begin_inset Formula $k$
-\end_inset
-
- and for all sequences 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
-\end_inset
-
-.
- That is, the sequences that describe ergodic orbits are bounded on the
- left and right by finite orbits that converge in the limit onto the infinite-le
-ngth orbit.
-\end_layout
-
-\begin_layout Standard
-As a consequence, the non-finite 
-\begin_inset Formula $\beta$
-\end_inset
-
- are placed in one-to-one correspondence with infinite length integer sequences.
- This is a bijection between all reals in the interval 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
- and Baire space 
-\begin_inset Formula $\mathbb{N}^{\omega}$
-\end_inset
-
-, where 
-\begin_inset Formula $\mathbb{N}=\mathbb{N}_{0}$
-\end_inset
-
- are the non-negative integers.
- This is a true bijection, and not just an injection.
- Every sequence corresponds to a distinct 
-\begin_inset Formula $\beta$
-\end_inset
-
-, and every 
-\begin_inset Formula $\beta$
-\end_inset
-
- has only one sequence representation.
- 
-\end_layout
-
-\begin_layout Subsubsection
-The Beta odometer
-\end_layout
-
-\begin_layout Standard
-The sequences 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots\right]$
-\end_inset
-
- can also be interpreted as continued fractions.
- This is given by 
-\begin_inset Formula 
-\[
-c\left[m_{1},m_{2},\cdots\right]=\dfrac{1}{m_{1}+1+\dfrac{1}{m_{2}+1+\dfrac{1}{\cdots}}}
-\]
-
-\end_inset
-
-This is an injection of Baire space (into) the reals (of the unit interval).
- It is not a surjection, as the rationals do not appear.
- This can be remedied by including the finite-length strings, so that the
- domain of 
-\begin_inset Formula $c$
-\end_inset
-
- is 
-\begin_inset Formula $\mathbb{N}^{\omega}\cup\mathbb{N}^{<\omega}$
-\end_inset
-
- where 
-\begin_inset Formula $\mathbb{N}^{<\omega}$
-\end_inset
-
- denotes the set of finite-length strings.
- The primary issue with this extension is that the rationals have two distinct
- representations: 
-\begin_inset Formula $c\left[m_{1},\cdots,m_{k},0\right]=c\left[m_{1},\cdots,m_{k}+1\right]$
-\end_inset
-
-.
- These are distinguished by the beta mapping, since 
-\begin_inset Formula $\beta\left[m_{1},\cdots,m_{k},0\right]\ne\beta\left[m_{1},\cdots,m_{k}+1\right]$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Since the map 
-\begin_inset Formula $\beta:\mathbb{N}^{\omega}\to\mathbb{R}$
-\end_inset
-
- is a bijection on the unit interval, it can be unambiguously inverted.
- Each real 
-\begin_inset Formula $1<\beta\le2$
-\end_inset
-
- corresponds to a unique sequence in 
-\begin_inset Formula $\mathbb{N}^{\omega}$
-\end_inset
-
-; the continued fraction mapping will then map this sequence back into the
- unit interval 
-\begin_inset Formula $0<c<1$
-\end_inset
-
-.
- The composition of these two maps is termed the 
-\begin_inset Quotes eld
-\end_inset
-
-beta odometer
-\begin_inset Quotes erd
-\end_inset
-
- and is illustrated in figure 
+ to be of zero width.
+ Equivalently, it shrinks the spaces between the comb teeth to be of zero
+ size; the comb teeth widen as a result, but without changing weight.
+ When this is done, the result is figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Beta-odometer"
+reference "fig:Beta-Bracket-Map"
 plural "false"
 caps "false"
 noprefix "false"
@@ -9828,7 +10227,18 @@ noprefix "false"
 \end_inset
 
 .
- 
+ Images speak louder than words; the two images are superimposed on one-another
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -9841,10 +10251,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beta odometer
+The Beta Measure
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Beta-odometer"
+name "fig:Beta-measure"
 
 \end_inset
 
@@ -9857,10 +10267,9 @@ name "fig:Beta-odometer"
 \end_layout
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Graphics
-	filename irred-frac.eps
-	width 80col%
+	filename bracket-measure.eps
+	width 100col%
 
 \end_inset
 
@@ -9868,61 +10277,45 @@ name "fig:Beta-odometer"
 \end_layout
 
 \begin_layout Plain Layout
-This visualizes the 
-\begin_inset Formula $\beta$
-\end_inset
+This figure superimposes the two figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
 
--odometer in terms of continued fractions.
- Any given sequence 
-\begin_inset Formula $\left[m_{1},m_{2},\cdots,m_{k}\right]$
-\end_inset
-
- has an associated 
-\begin_inset Formula $\beta$
-\end_inset
-
- value; this is graphed on the horizontal axis.
- It also can be interpreted as a continued fraction, this is shown on the
- vertical axis.
- It is clearly self-similar.
- All vertical joins are meant to be discontinuities, and so be perfectly
- vertical.
- They are not always drawn that way; this is due to insufficient convergence
- during graph generation.
- The two endpoints of each vertical line correspond to 
-\begin_inset Formula $c\left[m_{1},m_{2},\cdots,m_{k}\right]$
 \end_inset
 
  and 
-\begin_inset Formula $c\left[m_{1},m_{2},\cdots,m_{k}+1,0,\cdots\right]$
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Indicator-Sum"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-, since 
-\begin_inset Formula $\beta\left[m_{1},m_{2},\cdots,m_{k}\right]=\beta\left[m_{1},m_{2},\cdots,m_{k}+1,0,\cdots\right]$
+ into one.
+ The indicator measure has been rescaled, so that the y-axis aligns with
+ the interval 
+\begin_inset Formula $1\le\beta\le2$
 \end_inset
 
- but the two continued fractions are inequivalent.
- Consider, for example, 
-\begin_inset Formula $\beta\left[0\right]=\beta\left[1,0,0,\cdots\right]=1.61803...$
+, as that is the nominal topic of discussion.
+ The comb is also a map through 
+\begin_inset Formula $\beta$
 \end_inset
 
- At this location, the two continued fractions are 
-\begin_inset Formula $c\left[0\right]=1$
-\end_inset
-
- and 
-\begin_inset Formula $c\left[1,0,0,\cdots\right]=1/\left(1+\varphi\right)=0.381966...$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
+ values, but taken sideways, as it were.
+ This figure indicates visually what that correspondence is.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-Generated with irred-fraction.c and irred-frac.gplot
+Generated with bra-fin.gplot with comb data in bra-comb-21.dat and bracket
+ map data from irr-tree.dat.
 \end_layout
 
 \end_inset
@@ -9948,23 +10341,552 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-The use of the word 
+The above can be restated with only minor overburdening of notation.
+ The infinite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ was defined to be a subset of the unit interval of the reals; it is a mapping
+ of the set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ of valid indexes, passing through the conventional mapping the binary tree
+ to dyadic fractions (using the conventional 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves on the tree.) The bracket map is also a mapping of the set set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ of valid indexes to the unit interval, but using instead the 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves on the tree.
+ The good-index map 
+\begin_inset Formula $G$
+\end_inset
+
+ is a bijection between 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves and 
+\begin_inset Formula $L,\mathfrak{R}$
+\end_inset
+
+ moves.
+ In either case, it is the set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ being illustrated.
+\end_layout
+
+\begin_layout Standard
+The set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is itself in a bijection with the finite-length orbits of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-map, and the self-describing polynomials 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+, and their roots 
+\begin_inset Formula $1\le r_{n}\le2$
+\end_inset
+
+, being self-describing in that mid-point orbit for 
+\begin_inset Formula $\beta=r_{n}$
+\end_inset
+
+ gives the coefficients for the polynomial 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ and the good-index function 
+\begin_inset Formula $G$
+\end_inset
+
+ are just two more bridges between this rather large set of isomorphisms.
+\end_layout
+
+\begin_layout Standard
+The correspondence between 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ and the set of roots 
+\begin_inset Formula $\left\{ r_{n}\right\} $
+\end_inset
+
+ justifies labeling the y-axis as 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The interpretation of the infinite comb as nothing other than the Cantor
+ set justifies an assignment of a measure, the comb measure.
+ Shrinking the gaps in the comb to zero size gives the Beta measure; it
+ is just the bracket map, minus one (so that it runs from zero to one.)
+\end_layout
+
+\begin_layout Standard
+The bracket map has a passing superficial resemblance to the blancmange
+ curve.
+ The reason for this resemblance can now be given an informal explanation:
+ its the integral of the comb.
+ That is, the blancmange curve can be understood as the integral of a superposit
+ion of square-waves of increasing frequency.
+ The integral of each individual square wave is a triangle wave; thus, the
+ blancmange curve becomes a superposition of triangle waves.
+ The same effect is at play, here.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+The front sequence
+\end_layout
+
+\begin_layout Standard
+The validity map or 
 \begin_inset Quotes eld
 \end_inset
 
-odometer
+good index
 \begin_inset Quotes erd
 \end_inset
 
- may feel perhaps a bit cryptic; it becomes clear on noticing that the continued
- fraction mapping visits all reals (excluding the rationals).
- Compare, for example, to the 
-\begin_inset Formula $p$
+ map 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
 \end_inset
 
--adic odometers that likewise visit all possibilities; this is the same
- idea, but applied to Baire space.
+ provides a one-to-one correspondence between the natural numbers and the
+ valid indexes.
+ This can be interpreted as a one-to-one correspondence between nodes in
+ the binary tree, and the center points or 
+\begin_inset Quotes eld
+\end_inset
+
+fronts
+\begin_inset Quotes erd
+\end_inset
+
  
+\begin_inset Formula $f$
+\end_inset
+
+ of brackets 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+.
+ The bracket recursion relations in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bracket recursion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be restated as a commuting diagram
+\begin_inset Formula 
+\begin{align*}
+L & :f_{n}\mapsto f_{2n}=2f_{n}\\
+R & :f_{n}\mapsto f_{2n+1}=\mathfrak{R}\left(f_{n}\right)=\Lambda\left(f_{n}\right)
+\end{align*}
+
+\end_inset
+
+The sequence begins at 
+\begin_inset Formula $f_{1}=1$
+\end_inset
+
+.
+ This sequence contains the same integers as the validity sequence 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+, and so, for all 
+\begin_inset Formula $n$
+\end_inset
+
+, 
+\begin_inset Formula $\theta\left(f_{n}\right)=1$
+\end_inset
+
+.
+ Unlike 
+\begin_inset Formula $\psi_{m}$
+\end_inset
+
+, it is not in sorted order.
+ The start of the sequence is (1), (2), (3,4), (10,6,7,8), (36,20,42,12,13,14,15
+,16), (136,...,32), ...
+ where the parenthesis is used to improve readability, by grouping a run
+ of length 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Use `periodic/bracket-finite.c` to print the sequence.
+ It is a wrapper for `front_sequence()` implemented in `selfie.c`.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $f_{5}=10$
+\end_inset
+
+; this is an expression of the idea that 
+\begin_inset Formula $5\notin\Psi$
+\end_inset
+
+.
+ Thus, it is bumped by the leadership function to the next index that is
+ in 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $Rf_{2}=f_{5}=\Lambda\left(f_{2}\right)=10$
+\end_inset
+
+.
+ Likewise, 
+\begin_inset Formula $f_{9}=36$
+\end_inset
+
+; the height of the leadership function was four at this location.
+ 
+\begin_inset Formula $f_{10}=20$
+\end_inset
+
+ because ten was 
+\begin_inset Quotes eld
+\end_inset
+
+already taken
+\begin_inset Quotes erd
+\end_inset
+
+; but this is just a different way of thinking about 
+\begin_inset Formula $Lf_{5}=f_{10}=2f_{5}=20$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As always, the series is quasi-self-similar across rank sets of 
+\begin_inset Formula $I_{\nu}=\left\{ n:2^{\nu-2}\le n<2^{\nu-1}\right\} $
+\end_inset
+
+.
+ This is visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Front-Sequence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Front Sequence
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Front-Sequence"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename bra-fronts.eps
+	lyxscale 150
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the front sequence 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ over three rank ranges 
+\begin_inset Formula $\nu=8,10,12$
+\end_inset
+
+, for which 
+\begin_inset Formula $I_{8}=\left\{ 64\le n<128\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $I_{10}=\left\{ 256\le n<512\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $I_{12}=\left\{ 1024\le n<2048\right\} $
+\end_inset
+
+.
+ The three ranges are rescaled, to run from left to right.
+ Note the labels on the y-axis: the maximum value of 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ in a given range increases super-exponentially; super-factorially, even.
+ For these three ranges, the maximum values occur at 
+\begin_inset Formula $f_{71}=34952$
+\end_inset
+
+, 
+\begin_inset Formula $f_{271}=17318416$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{1055}=34905131040$
+\end_inset
+
+.
+ Super-exponential means that for rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the max observed at that rank is approximately 
+\begin_inset Formula $\exp\left(\nu^{1.525}\right)$
+\end_inset
+
+, which holds up to about 
+\begin_inset Formula $\nu=16$
+\end_inset
+
+, beyond which 64-bit numerics overflows.
+ The rate of increase seem to be faster than factorial.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with `periodic/bra-fin.gplot` from a data file generated with `periodic
+/bracket-finite.c`.
+ This is a wrapper for `front_sequence()` implemented in `selfie.c`; this
+ loops and makes left-right moves in the bracket tree.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+, one has a corresponding set of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values for that rank.
+ Denote these sets as 
+\begin_inset Formula $\beta_{\nu}=\left\{ r\left(f_{n}\right):n\in I_{\nu}\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $r\left(m\right)=r_{m}$
+\end_inset
+
+ is the positive real root of the polynomial 
+\begin_inset Formula $p_{m}$
+\end_inset
+
+, as always: 
+\begin_inset Formula $p_{m}\left(r_{m}\right)=0$
+\end_inset
+
+.
+ In the limit 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, these sets converge rapidly to the bracket map of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Not a surprise: this is, more or less, how that figure is generated.
+\end_layout
+
+\begin_layout Standard
+The convergence appears to be uniform! Uniform, in that a uniform bound
+ is enough to give a worst-case bound.
+ Convergence is slowest, just above a dyadic rational, and fastest, just
+ below it, varying by huge orders of magnitude.
+ By 
+\begin_inset Quotes eld
+\end_inset
+
+convergence
+\begin_inset Quotes erd
+\end_inset
+
+, it is meant how rapidly the brackets 
+\begin_inset Formula $\ell_{n}\Mapsto f_{n}\Mapsfrom\rho_{n}$
+\end_inset
+
+ shrink.
+ For 
+\begin_inset Formula $n\in I_{\nu}$
+\end_inset
+
+, the two endpoints belong to 
+\begin_inset Formula $I_{\nu-1}$
+\end_inset
+
+.
+ The corresponding roots are 
+\begin_inset Formula $r\left(\ell_{n}\right)<r\left(f_{n}\right)<r\left(\rho_{n}\right)$
+\end_inset
+
+ and so one is looking to see how the difference 
+\begin_inset Formula $\left|r\left(\rho_{n}\right)-r\left(\ell_{n}\right)\right|$
+\end_inset
+
+ decreases as 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+.
+ The limit to convergence is at 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+, where 
+\begin_inset Formula $n=2^{\nu-2}$
+\end_inset
+
+.
+ Although 
+\begin_inset Formula $f_{n}\to1$
+\end_inset
+
+ as 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, it does so very slowly.
+ At 
+\begin_inset Formula $\nu=30$
+\end_inset
+
+, one finds 
+\begin_inset Formula $r\left(f_{n}\right)\approx1.08$
+\end_inset
+
+ while at 
+\begin_inset Formula $\nu=60$
+\end_inset
+
+ one still has that 
+\begin_inset Formula $r\left(f_{n}\right)\approx1.05$
+\end_inset
+
+.
+ This slowness is directly visible on the left side of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, which visually has converged only to 
+\begin_inset Formula $r\left(f_{n}\right)\approx1.2$
+\end_inset
+
+ at 
+\begin_inset Formula $\nu=10$
+\end_inset
+
+.
+ A bound can be obtained numerically; it is 
+\begin_inset Formula $r\left(f_{n}\right)<1+0.5/\log\nu$
+\end_inset
+
+, which holds at this worst-case location.
+ This bound is pessimistic; its clear that better bounds exist.
 \end_layout
 
 \begin_layout Subsection
