@@ -12837,7 +12837,7 @@ As an example, consider
 \end_inset
 
 , which is close to the golden ratio, but not quite.
- It has an infinite non-periodic (non-recurring) bit-sequence 
+ It has an infinite non-periodic (nonrecurring) bit-sequence 
 \begin_inset Formula $\left\{ b\right\} =101010010100101000000100\cdots$
 \end_inset
 
@@ -12872,8 +12872,8 @@ The
 \emph on
 a priori
 \emph default
- mechanism to know if some orbit finite or not.
- This dual-representation of finite orbits is reminiscent of a property
+ mechanism to know if some orbit is finite or not.
+ This dual representation of finite orbits is reminiscent of a property
  commonly seen in Cantor space 
 \begin_inset Formula $2^{\omega}$
 \end_inset
@@ -12918,8 +12918,8 @@ a priori
 ad infinitum
 \emph default
 , obtaining an infinite periodic string.
- The difference between these two is simply the difference between a less-than-s
-ign, and a less-than-or-equal sign used in the generation of the orbit,
+ The difference between these two is simply the difference between a less-than
+ sign, and a less-than-or-equal sign used in the generation of the orbit,
  as noted at the very beginning of this chapter.
  We have proven: finite orbits are exactly the same as infinite periodic
  orbits, at least when represented by real numbers and by integer sequences.
@@ -13098,7 +13098,7 @@ The characteristic equation of
  is in upper-Hessenberg form.
  Rescaled in this way, it now seems safe to declare, by fiat, that the operator
  
-\begin_inset Formula $\mathcal{B}_{\beta}$
+\begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
  is the correct extension of the matrix 
@@ -13129,15 +13129,54 @@ with all other entries being zero.
 \end_layout
 
 \begin_layout Standard
-The invariant measure is then the Frobenius-Perron eigenvector 
-\begin_inset Formula $\sigma$
+Comparing to the upper-Hessenberg form of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
- solving 
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hessen-matrix-elts"
+
+\end_inset
+
+, and the numerical results on it's eigenvalues, it seems clear that 
+\begin_inset Formula $\mathcal{H}_{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ must surely be similar.
+ That is, there must be an operator 
+\begin_inset Formula $S$
+\end_inset
+
+ such that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{L}_{\beta}=S^{-1}\mathcal{H}_{\beta}S
+\]
+
+\end_inset
+
+The invariant measure 
+\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho$
+\end_inset
+
+ is mapped to 
+\begin_inset Formula $\sigma=S\rho$
+\end_inset
+
+, where 
 \begin_inset Formula $\mathcal{H}_{\beta}\sigma=\sigma$
 \end_inset
 
-.
+ is the FP-eigenvector.
  It is easy to write down 
 \begin_inset Formula $\sigma$
 \end_inset
@@ -13152,7 +13191,7 @@ The invariant measure is then the Frobenius-Perron eigenvector
 
 .
  This is obviously so: the subdiagonal entries of 
-\begin_inset Formula $\mathcal{H}_{\beta}$
+\begin_inset Formula $\mathcal{B}_{\beta}$
 \end_inset
 
  act as a shift on 
@@ -13175,23 +13214,19 @@ Although
 \begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
- is not triangular, (and thus not 
-\begin_inset Quotes eld
+ is no more solvable than 
+\begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
-solvable
-\begin_inset Quotes erd
-\end_inset
-
-), it does have a dramatically simple form.
- It also re-affirms the Ansatz 
+ in the wavelet basis is, it is certainly much, much easier to work with.
+ It also reaffirms the Ansatz 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:coherent-first-order"
 
 \end_inset
 
- for the eigenfunctions.
+ for eigenfunctions.
  To be explicit: if 
 \begin_inset Formula $v$
 \end_inset
@@ -13515,11 +13550,11 @@ The
 \begin_inset Formula $n=2$
 \end_inset
 
- case has the finite bit-string 
+ case has the finite bitstring 
 \begin_inset Formula $\left\{ b\right\} =101$
 \end_inset
 
- and the periodic bit-string 
+ and the periodic bitstring 
 \begin_inset Formula $\left\{ b\right\} =1001001\cdots$
 \end_inset
 
@@ -13577,11 +13612,11 @@ The
 \begin_inset Formula $n=3$
 \end_inset
 
- case has the finite bit-string 
+ case has the finite bitstring 
 \begin_inset Formula $\left\{ b\right\} =111$
 \end_inset
 
- and the periodic bit-string 
+ and the periodic bitstring 
 \begin_inset Formula $\left\{ b\right\} =1101101\cdots$
 \end_inset
 
@@ -13635,7 +13670,7 @@ The pattern gets repetitive.
 \end_inset
 
 , as this is not one of the allowed orbits.
- The bit-strings are those previously listed in tables; they are 
+ The bitstrings are those previously listed in tables; they are 
 \begin_inset Formula $\left\{ b\right\} =1001$
 \end_inset
 
@@ -13698,7 +13733,7 @@ The
 \end_inset
 
  polynomial is the first one to have complex zeros inside the unit disk.
- The finite bit-string is 
+ The finite bitstring is 
 \begin_inset Formula $\left\{ b\right\} =100001$
 \end_inset
 
@@ -13720,7 +13755,7 @@ The
 \begin_inset Formula $\zeta=0.965709509\cdots\exp\pm i\pi0.2740452363\cdots$
 \end_inset
 
- which corresponds to eigenvalues are 
+ which corresponds to the eigenvalues 
 \begin_inset Formula $\lambda=0.525107\cdots\pm i0.611100\cdots=0.805718\cdots\exp\pm i\pi0.274045\cdots$
 \end_inset
 
@@ -13826,7 +13861,7 @@ The invariant measure has
 \end_layout
 
 \begin_layout Itemize
-The left-most plateau (of the invariant measure) is at 
+The leftmost plateau (of the invariant measure) is at 
 \begin_inset Formula $\beta/\left(\beta-1\right)=\sum_{n=0}^{\infty}1/\beta^{n}$
 \end_inset
 
@@ -14177,7 +14212,7 @@ The coefficient of the
 \begin_layout Standard
 One may as well bring this detour to a close.
  There's nothing particularly magic in the above factorization, other than
- the combinatorial re-arrangement of the polynomial labels.
+ the combinatorial rearrangement of the polynomial labels.
  A generic polynomial factorization looks like the below, for comparison.
  If 
 \begin_inset Formula 
