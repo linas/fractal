@@ -38,6 +38,13 @@
  *    length is needed. This is more-or-less the same thing as the
  *    2-adic encoding. Just a different interpretation.
  *
+ *    This encoding provides the canonical index numbering for a tree.
+ *    For every non-negative integer, there is a unique tree location.
+ *    0 == before the root, to the left
+ *    1 == root node
+ *    2,3 == first row below the root, L and R
+ *    4,5,6,7 == next row down.
+ *
  * The big-endian encoding is used for finite-length orbits. It places
  * the MSB to far-left. The left-most bit is always one. Usually, so is the
  * right-most bit. Some comments call this the leading-one scheme.
