@@ -28005,11 +28005,12 @@ Rational to periodic binary
 \end_layout
 
 \begin_layout Standard
-As a Task: Given 
+As a practical matter, it is computationally useful to convert a given fraction
+ 
 \begin_inset Formula $p/q$
 \end_inset
 
- find the binary prefix 
+ into the binary prefix 
 \begin_inset Formula $m$
 \end_inset
 
@@ -28026,7 +28027,8 @@ As a Task: Given
 \end_inset
 
 .
- This can be done as follows:
+ This is not hard, but also not entirely easy, and so is presented here.
+ Write
 \begin_inset Formula 
 \begin{align*}
 \frac{p+q}{2q} & =\frac{m}{2^{L}}+\frac{1}{2^{L}}\left(\frac{c}{2^{N}}+\frac{c}{2^{2N}}+\frac{c}{2^{3N}}+\cdots\right)\\
@@ -28118,12 +28120,12 @@ This provides all four integers
  that define the cyclic expansion.
 \end_layout
 
-\begin_layout Subsubsection
-Rational Comb
+\begin_layout Subsection
+The Rational Comb
 \end_layout
 
 \begin_layout Standard
-The dyadic comb (of figure 
+The dyadic comb, of figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Theta-Indicator"
@@ -28133,15 +28135,195 @@ noprefix "false"
 
 \end_inset
 
-) shows where valid finite orbits can occur.
- This is also where the valid rational orbits can occur, as well.
+, shows where valid finite orbits can occur.
+ It's limit to infinite rank gives the infinite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The only valid rationals, that is, those giving self-describing orbits,
+ are those that belong to 
+\begin_inset Formula $\mathbb{Q}\cap\theta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This can be understood as a limiting procedure.
+ Every rational can be approximated by a dyadic rational; each set is dense
+ in the other.
+ The dyadic rationals are finite walks down the binary tree; the non-dyadic
+ rationals are infinite walks.
+ The infinite comb corresponds to the trimmed tree, described earlier.
+ The triming always maintains branches of unbounded length.
+ These have a limit; in the limit, some of these will correspond to rationals.
+ These are exactly the rationals that correspond to the ultimately-periodic
+ orbits.
+ The correspondence goes in both directions: given an infinite path down
+ the tree, it is sufficient to truncate it to be of finite length.
+ By construction, the truncated path corresponds to a valid dyadic rational.
+ To recap: going in one direction, there is a sequence of finite orbits
+ that converge, in the limit, onto an eventually-periodic orbit.
+ Conversely, given such an orbit, every truncated version thereof is valid.
+ 
+\end_layout
+
+\begin_layout Standard
+The above limiting procedure becomes interesting when used to extend the
+ good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ to the rationals.
+ This is entirely straight-forward; unfortunately, this requires a review
+ of the canonical mappings between the tree, the integers, and the dyadic
+ fractions.
+ The issue is that the rich selection of isomorphims can generate confusion,
+ and so a precise vocabulary is needed.
+ It is the conventional one, as far as notation allows.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ denote the finite but unbounded binary tree, and 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ be it's closure as the infinite tree.
+ The infinite tree is, of course, isomorphic to the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+; but there is more than one isomorphism, so care is taken.
+ Thus, let 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ the the graph of vertices and connecting edges 
+\begin_inset Formula $\mathbb{B}=\left\{ v_{i},e_{ij}:i\in\mathbb{N},j\in\left\{ 2i,2i+1\right\} \right\} $
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\zeta:\mathbb{N}\to\mathbb{B}$
+\end_inset
+
+ denote the canonical labelling of the binary tree by the positive integers,
+ so that the root of the tree is given the label 1, the first row is 2,3
+ and the next row is 4,5,6,7.
+ This is a bijection: every finite walk down the tree can be labelled with
+ a positive integer.
+ The walks are left and right moves, in the canonical sense: 
+\begin_inset Formula $L:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ with 
+\begin_inset Formula $L:m\mapsto2m$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ with 
+\begin_inset Formula $R:m\mapsto2m+1$
+\end_inset
+
+.
+ The push-forward of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ provide the cononical walks on the tree, as a commuting diagram, so that
+ 
+\begin_inset Formula $L\circ\zeta=\zeta\circ L$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R\circ\zeta=\zeta\circ R$
+\end_inset
+
+.
+ It is useful to adjoin the pre-root elements 
+\begin_inset Formula $\left\{ 0,\infty\right\} $
+\end_inset
+
+ so that 
+\begin_inset Formula $R:0\to1$
+\end_inset
+
+ and 
+\begin_inset Formula $L:\infty\to1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ be the dyadic rationals, with the canical bijection to the natural numbers
+ 
+\begin_inset Formula $\delta:\mathbb{D}\to\mathbb{N}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\delta:\left(2n+1\right)/2^{m}\mapsto2^{m-1}+n$
+\end_inset
+
+.
+ The labels the root of the tree with 1/2, and the first row under it as
+ 1/4 and 3/4.
+ The left and right moves are 
+\begin_inset Formula $L:\left(2n+1\right)/2^{m}\mapsto\left(4n+1\right)/2^{m+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:\left(2n+1\right)/2^{m}\mapsto\left(4n+3\right)/2^{m+1}$
+\end_inset
+
+.
+ This was set up so that 
+\begin_inset Formula $L\circ\delta=\delta\circ L$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R\circ\delta=\delta\circ R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+This is also where the valid rational orbits can occur, as well.
  This is as expected; the ultimately-periodic orbits will be infinite strands
  walking down the trimmed tree.
  From this, we can conclude that the naive rational encoding is not all
  that interesting: most rationals will land outside of the comb; a few will
  make it in.
  It seems that we want to use to good-index encoding 
-\begin_inset Formula $G:\mathbb{Z}\to\Psi$
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
 \end_inset
 
  so as to get a better sampling.
@@ -29260,7 +29442,7 @@ Based on this table, we conclude that
 
 \begin_layout Standard
 The good map 
-\begin_inset Formula $G:\mathbb{Z}\to\Psi$
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
 \end_inset
 
  sits in between the moves and the ultimately-periodic orbits, with moves
@@ -31928,7 +32110,7 @@ Conclusions:
 
 \begin_layout Itemize
 We need better notation to explain that 
-\begin_inset Formula $G:\mathbb{Z}\to\Psi$
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
 \end_inset
 
  extends to the infinite ultimately periodic orbits (how could it not? by
