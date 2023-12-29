@@ -16287,10 +16287,14 @@ The infinite comb
 The comb is mapped to the reals by defining open subsets bounded by the
  dyadic rationals.
  Let 
-\begin_inset Formula $I\left(m,\nu\right)=\left\{ x\in\mathbb{R}:m<x2^{\nu-2}<\left(m+1\right);0\le m<2^{\nu-2}\right\} $
+\begin_inset Formula 
+\begin{equation}
+I\left(m,\nu\right)=\left\{ x\in\mathbb{R}:m<x2^{\nu-2}<\left(m+1\right);0\le m<2^{\nu-2}\right\} \label{eq:topo-base}
+\end{equation}
+
 \end_inset
 
- so that 
+so that 
 \begin_inset Formula $I\left(0,2\right)=\left\{ x\in\mathbb{R}:0<x<1\right\} $
 \end_inset
 
@@ -28631,14 +28635,257 @@ The good-index function provided a bijection
 \end_inset
 
  between the trimmed and untrimed finite, unbounded trees.
- The claim is that ths can be extended to a bijection 
+ The claim is that this can be extended to a bijection 
 \begin_inset Formula $\overline{\mathfrak{B}}=\overline{G}\overline{\mathbb{B}}$
 \end_inset
 
 .
- This requires a detour to topology.
- The standard (weak) topology on Cantor space is the product topology; the
- open sets are cylinder sets, 
+ This requires a short detour into topology.
+ The standard (weak) topology on Cantor space is the product topology.
+ The base for the topology may be taken as the set of all finite strings,
+ followed by an infinite number of don't-care markers.
+ These are the open sets; the full topology is the finite intersection and
+ infinite union of the open sets in this base.
+\end_layout
+
+\begin_layout Standard
+Every set in the base of the topology is represented by a finite string.
+ The function 
+\begin_inset Formula $\zeta^{-1}$
+\end_inset
+
+ maps this to an integer.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined on all integers; it returns an integer, which is mapped by 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ to a finite string and thus an open set.
+ To conclude, 
+\begin_inset Formula $\zeta G\zeta^{-1}$
+\end_inset
+
+ maps open sets to open sets, and it is defined on 
+\emph on
+every
+\emph default
+ open set in the topology.
+ Thus, it is safe to write 
+\begin_inset Formula $\overline{G}=\zeta G\zeta^{-1}$
+\end_inset
+
+, as it is defined everywhere; all of 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ is in it's domain.
+ The range of 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ can be taken to be the definition of the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ This has several benefits: it avoids having to make funny arguments that
+ pass through the reals via the comb, and it also makes clear that 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ is a bijection.
+ Note 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ is not continuous, in the context that 
+\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+\end_inset
+
+, since 
+\begin_inset Formula $\overline{G}^{-1}$
+\end_inset
+
+ is defined almost nowhere on 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx TODO: rename zeta to eta everywhere up above.
+ 
+\end_layout
+
+\begin_layout Standard
+The points 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $\left[1,2\right]$
+\end_inset
+
+.
+ Within each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+ they are monotonically increasing.
+ The bracketing relation guarantees that, for all 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ in the subtree, these are all contained within the endpoints of the bracket,
+ and that they are always totally ordered, by the natural tree-ordering.
+ The notion of open sets is compatable.
+ Given a basic open set in 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+, the function 
+\begin_inset Formula $\varrho=r\circ G\circ\zeta^{-1}$
+\end_inset
+
+ maps it to an open set on the real number line.
+ It is continuous.
+ Since the 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $\left[1,2\right]$
+\end_inset
+
+, any open set 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+ can be written as a countable union of brackets.
+ The function 
+\begin_inset Formula $\varrho^{-1}$
+\end_inset
+
+ is defined on all brakcets, and by bracketing, it is defined on all 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+ and by bracketing 
+\begin_inset Formula $\varrho^{-1}U$
+\end_inset
+
+ is an open set in the product topology on 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The goal is to extend this reasoning to 
+\begin_inset Formula $\mathsf{G}=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
+\end_inset
+
+, so as to obtain a continuous, monotonic function on the unit interval.
+ And we are done, more or less.
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+The mapping 
+\begin_inset Formula $\chi$
+\end_inset
+
+ maps these sets to open subintervals of the unit interval; more precisely,
+ to subintervals with dyadics at each end.
+ These are precisely the sets 
+\begin_inset Formula $I\left(m,\nu\right)$
+\end_inset
+
+ defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:topo-base"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ They allowed the infinite comb to be built up from unbounded-length but
+ finite strings in 
+\begin_inset Formula $\mathfrak{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx 
+\end_layout
+
+\begin_layout Standard
+The base of the product topology was mapped to open intervals on the real-number
+ line; and so 
+\begin_inset Formula $G$
+\end_inset
+
+ is continuous on the reals.
+ This can also be seen in a different way.
+ The standard measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on the reals says that 
+\begin_inset Formula $\mu I\left(m,\nu\right)=2^{2-\nu}$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ is built from left and right moves.
+ The left moves bump the rank by one, and so always map to sets that are
+ exacly half the size on the real number line.
+ The right moves are given by the leadership function: 
+\begin_inset Formula $\Lambda\Psi_{\nu}\subset\bigcup_{h=0}^{\infty}\Psi_{\nu+1+h}$
+\end_inset
+
+ for each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ The resulting sets are (at a minimum) half the size, and possibly larger,
+ as the union of addtional small intervals.
+ This allows a conventional delta-epsilon proof of continuity to go forward:
+ for each epsilon, one can choose a rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+ where the basis sets 
+\begin_inset Formula $I\left(m,\nu\right)$
+\end_inset
+
+ are smaller than epsilon.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ maps them to other open sets that are strictly smaller.
+ Strictly, because the height of a leader is always a finite number; the
+ union is written as a union over all possible heights, but the union is
+ always finite.
+ 
 \end_layout
 
 \begin_layout Standard
