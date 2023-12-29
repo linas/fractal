@@ -27978,11 +27978,11 @@ The first time that
 \begin_layout Standard
 Not all rationals give valid bit-sequences.
  The set of valid rationals are exactly the ones that are in the set 
-\begin_inset Formula $\mathbb{Q}\cap\theta$
+\begin_inset Formula $\mathbb{Q}\cap\overline{\theta}$
 \end_inset
 
  where 
-\begin_inset Formula $\theta$
+\begin_inset Formula $\overline{\theta}$
 \end_inset
 
  is the infinite comb, given in eqn 
@@ -28006,7 +28006,35 @@ noprefix "false"
 \end_inset
 
 .
- This is explored in the section after next.
+ The comb is extremely fractal, and working directly with 
+\begin_inset Formula $\mathbb{Q}\cap\overline{\theta}$
+\end_inset
+
+ would be a chore.
+ Fortunately, the bracket map saves the day: it is a map of the entire unit
+ interval onto 
+\begin_inset Formula $\overline{\theta}$
+\end_inset
+
+.
+ The bracket map, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, maps rationals to rationals; it provides a map 
+\begin_inset Formula $\mathbb{Q}\cap\left[0,1\right]\to\mathbb{Q}\cap\overline{\theta}$
+\end_inset
+
+.
+ Thus, it provides a better, though more indirect way, of describing the
+ ultimately-periodic orbits.
+ Some examples are reviewed in the section after next.
 \end_layout
 
 \begin_layout Subsection
@@ -28130,800 +28158,7 @@ This provides all four integers
 \end_layout
 
 \begin_layout Subsection
-The Rational Comb
-\end_layout
-
-\begin_layout Standard
-The dyadic comb, of figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Theta-Indicator"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, shows where valid finite orbits can occur.
- It's limit to infinite rank gives the infinite comb 
-\begin_inset Formula $\theta$
-\end_inset
-
- of eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:infinite comb"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The only valid rationals, that is, those giving self-describing orbits,
- are those that belong to 
-\begin_inset Formula $\mathbb{Q}\cap\theta$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-This can be understood as a limiting procedure.
- Every rational can be approximated by a dyadic rational; each set is dense
- in the other.
- The dyadic rationals are finite walks down the binary tree; the non-dyadic
- rationals are infinite walks.
- The infinite comb corresponds to the trimmed tree, described earlier.
- The triming always maintains branches of unbounded length.
- These have a limit; in the limit, some of these will correspond to rationals.
- These are exactly the rationals that correspond to the ultimately-periodic
- orbits.
- The correspondence goes in both directions: given an infinite path down
- the tree, it is sufficient to truncate it to be of finite length.
- By construction, the truncated path corresponds to a valid dyadic rational.
- To recap: going in one direction, there is a sequence of finite orbits
- that converge, in the limit, onto an eventually-periodic orbit.
- Conversely, given such an orbit, every truncated version thereof is valid.
- 
-\end_layout
-
-\begin_layout Standard
-The above limiting procedure becomes interesting when used to extend the
- good-index bijection 
-\begin_inset Formula $G:\mathbb{N}\to\Psi$
-\end_inset
-
- to the rationals.
- This is entirely straight-forward; unfortunately, this requires a review
- of the canonical mappings between the tree, the integers, and the dyadic
- fractions.
- The issue is that the rich selection of isomorphims can generate confusion,
- and so a precise vocabulary is needed.
- It is the conventional one, as far as notation allows.
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $\mathbb{B}$
-\end_inset
-
- denote the finite but unbounded binary tree, and 
-\begin_inset Formula $\overline{\mathbb{B}}$
-\end_inset
-
- be it's closure as the infinite tree.
- The infinite tree is, of course, isomorphic to the Cantor space 
-\begin_inset Formula $2^{\omega}$
-\end_inset
-
-; but there is more than one isomorphism, so care is taken.
- Thus, let 
-\begin_inset Formula $\mathbb{B}$
-\end_inset
-
- the the graph of vertices and connecting edges 
-\begin_inset Formula $\mathbb{B}=\left\{ v_{i},e_{ij}:i\in\mathbb{N},j\in\left\{ 2i,2i+1\right\} \right\} $
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\zeta:\mathbb{N}\to\mathbb{B}$
-\end_inset
-
- denote the canonical labelling of the binary tree by the positive integers,
- so that the root of the tree is given the label 1, the first row is 2,3
- and the next row is 4,5,6,7.
- This is a bijection: every finite walk down the tree can be labelled with
- a positive integer.
- The walks are left and right moves, in the canonical sense: 
-\begin_inset Formula $L:\mathbb{N}\to\mathbb{N}$
-\end_inset
-
- with 
-\begin_inset Formula $L:m\mapsto2m$
-\end_inset
-
- and likewise 
-\begin_inset Formula $R:\mathbb{N}\to\mathbb{N}$
-\end_inset
-
- with 
-\begin_inset Formula $R:m\mapsto2m+1$
-\end_inset
-
-.
- The push-forward of 
-\begin_inset Formula $L,R$
-\end_inset
-
- provide the cononical walks on the tree, as a commuting diagram, so that
- 
-\begin_inset Formula $L\circ\zeta=\zeta\circ L$
-\end_inset
-
- and likewise 
-\begin_inset Formula $R\circ\zeta=\zeta\circ R$
-\end_inset
-
-.
- It is useful to adjoin the pre-root elements 
-\begin_inset Formula $\left\{ 0,\infty\right\} $
-\end_inset
-
- so that 
-\begin_inset Formula $R:0\to1$
-\end_inset
-
- and 
-\begin_inset Formula $L:\infty\to1$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $\mathbb{D}$
-\end_inset
-
- be the dyadic rationals, with the canical bijection to the natural numbers
- 
-\begin_inset Formula $\delta:\mathbb{D}\to\mathbb{N}$
-\end_inset
-
- given by 
-\begin_inset Formula $\delta:\left(2n+1\right)/2^{m}\mapsto2^{m-1}+n$
-\end_inset
-
-.
- The labels the root of the tree with 1/2, and the first row under it as
- 1/4 and 3/4.
- The left and right moves are 
-\begin_inset Formula $L:\left(2n+1\right)/2^{m}\mapsto\left(4n+1\right)/2^{m+1}$
-\end_inset
-
- and 
-\begin_inset Formula $R:\left(2n+1\right)/2^{m}\mapsto\left(4n+3\right)/2^{m+1}$
-\end_inset
-
-.
- This was set up so that 
-\begin_inset Formula $L\circ\delta=\delta\circ L$
-\end_inset
-
- and likewise 
-\begin_inset Formula $R\circ\delta=\delta\circ R$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-This allows the bracket tree and the good-index bijection to be specified
- more precisely.
- The validity set 
-\begin_inset Formula $\Psi\subset\mathbb{N}$
-\end_inset
-
- was defined in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:valid index set"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- as the collection of natural number indexes corresponding to polynomials
- with self-describing roots.
- This set came with two functions 
-\begin_inset Formula $L,\mathfrak{R}:\Psi\to\Psi$
-\end_inset
-
- given by index-doubling 
-\begin_inset Formula $L:m\mapsto2m$
-\end_inset
-
- and leadership (eqn
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Leadership function"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) 
-\begin_inset Formula $\mathfrak{R}:m\mapsto\Lambda\left(m\right)$
-\end_inset
-
-.
- The good-index bijection 
-\begin_inset Formula $G:\mathbb{N}\to\Psi$
-\end_inset
-
- was then defined as the pullback 
-\begin_inset Formula $L\circ G=G\circ L$
-\end_inset
-
- and 
-\begin_inset Formula $\mathfrak{R}\circ G=G\circ R$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-The root map 
-\begin_inset Formula $r:\Psi\to\left[1,2\right]$
-\end_inset
-
- takes valid integer indexes, and maps them to the roots of the corresponding
- (finite-orbit) polynomials, so that 
-\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
-\end_inset
-
-.
- The bracket map, depicted in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beta-Bracket-Map"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, can now be written more precisely as the function 
-\begin_inset Formula $\mathsf{G}=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
-\end_inset
-
-.
- It maps the dyadics to the 
-\begin_inset Formula $\beta$
-\end_inset
-
- values that have finite orbits.
- The goal of setting up this machinery is to explore the extension of 
-\begin_inset Formula $\mathsf{G}$
-\end_inset
-
- to the rationals, so that 
-\begin_inset Formula $\mathsf{G}:\mathbb{Q}\to\left[1,2\right]$
-\end_inset
-
-, and then, by closure, to the reals, so that 
-\begin_inset Formula $\mathsf{G}:\left[0,1\right]\to\left[1,2\right]$
-\end_inset
-
- is a monotonic increasing continuous bijection between the unit interval
- and 
-\begin_inset Formula $\beta$
-\end_inset
-
- values.
-\end_layout
-
-\begin_layout Standard
-The gymnastics for this seems to require passing through the trimmed tree
- and the comb.
- The trimmed tree 
-\begin_inset Formula $\mathfrak{B}\subset\mathbb{B}$
-\end_inset
-
- is the image of 
-\begin_inset Formula $\Psi$
-\end_inset
-
- under the mapping 
-\begin_inset Formula $\zeta$
-\end_inset
-
-, so that 
-\begin_inset Formula $\mathfrak{B}=\zeta\Psi$
-\end_inset
-
-.
- This consists of those nodes and edges in the finite binary tree that are
- labeled by integers from the validity set 
-\begin_inset Formula $\Psi$
-\end_inset
-
-.
- The good-index function 
-\begin_inset Formula $G$
-\end_inset
-
- places the trimmed tree and the finite tree in a bijection, so that 
-\begin_inset Formula $\mathfrak{B}=\zeta G\zeta^{-1}\mathbb{B}$
-\end_inset
-
-.
- The ultimately-periodic orbits live inside the closure 
-\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
-\end_inset
-
-.
- Write 
-\begin_inset Formula $\mathfrak{C}\subset\overline{\mathbb{B}}$
-\end_inset
-
- for the cyclic (ultimately periodic) orbits; these are infinite-length
- strings describing moves down the infinite binary tree.
- As already noted, 
-\begin_inset Formula $\mathfrak{C}\cap\mathbb{B}\subset\mathfrak{B}$
-\end_inset
-
-; that is, every infinite-length cyclic orbit, when truncated to finite
- length, is a valid finite orbit.
- The closure 
-\begin_inset Formula $\overline{\mathfrak{B}}$
-\end_inset
-
- consists of all self-describing bit-strings obtained as solutions to 
-\begin_inset Formula $\beta=S\left(\beta\right)$
-\end_inset
-
-.
- The cyclic orbits are just a special case: 
-\begin_inset Formula $\mathfrak{C}\subset\overline{\mathfrak{B}}$
-\end_inset
-
-.
- There are presumably many more, uncountably many chaotic orbits in 
-\begin_inset Formula $\overline{\mathfrak{B}}$
-\end_inset
-
-.
- To exhibit these, a closer look at the comb is required.
-\end_layout
-
-\begin_layout Standard
-The notation for the finite comb 
-\begin_inset Formula $\theta$
-\end_inset
-
- was abused in several ways.
- In eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:theta mask"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- it is used to indicate whether a given polynomial root has a self-describing
- orbit.
- It is then defined as the indicator function for set membership 
-\begin_inset Formula $\theta=\mathds{1}_{\Psi}:\Psi\to\left\{ T,F\right\} $
-\end_inset
-
- and finally as the finite comb 
-\begin_inset Formula $\theta\subset\mathbb{D}$
-\end_inset
-
-.
- The finite comb can be written more formally as 
-\begin_inset Formula $\theta=\delta^{-1}\Psi$
-\end_inset
-
-.
- The infinite comb 
-\begin_inset Formula $\overline{\theta}$
-\end_inset
-
- was the closure of the finite comb.
- The closure, defined in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:infinite comb"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, was constructed as the infinite intersection of open sets.
- The claim is that the closure 
-\begin_inset Formula $\overline{\mathfrak{B}}$
-\end_inset
-
- can be understood as the pullback of 
-\begin_inset Formula $\overline{\theta}$
-\end_inset
-
- to the infinite tree.
-\end_layout
-
-\begin_layout Standard
-Just a little bit more machinery is needed.
- Let 
-\begin_inset Formula $2^{\omega}$
-\end_inset
-
- be Cantor space, the space of infinitely-long binary strings.
- Let 
-\begin_inset Formula $\chi:2^{\omega}\to\left[0,1\right]$
-\end_inset
-
- be the canonical mapping of Cantor space to the unit interval: 
-\begin_inset Formula $\chi:\left(b_{0}b_{1}\cdots\right)\mapsto\sum_{k}b_{k}2^{-k-1}$
-\end_inset
-
-.
- Note that this mapping manages to miss all the dyadic rationals, as these
- correspond to finite strings, of which there aren't any in the Cantor space.
- Let 
-\begin_inset Formula $2^{<\omega}=2^{*}$
-\end_inset
-
- be the set of finite-length binary strings, and allow the symbol 
-\begin_inset Formula $\chi$
-\end_inset
-
- to perform double-duty, by writing 
-\begin_inset Formula $\chi:2^{*}\to\mathbb{D}$
-\end_inset
-
- to map finite strings to dyadics.
- These binary strings can also be interpreted as strings in the symbols
- 
-\begin_inset Formula $L,R$
-\end_inset
-
-, so that they are moves on the tree.
- Write 
-\begin_inset Formula $\iota:2^{*}\to\mathbb{B}$
-\end_inset
-
- that maps the empty string to the root of the tree, and likewise 
-\begin_inset Formula $\iota:2^{\omega}\to\overline{\mathbb{B}}$
-\end_inset
-
- that maps infinite strings to the leaves of the infinite tree.
-\end_layout
-
-\begin_layout Standard
-The comb was a subset of the unit interval: 
-\begin_inset Formula $\overline{\theta}\subset\left[0,1\right]$
-\end_inset
-
-.
- The claim is that 
-\begin_inset Formula $\overline{\theta}=\chi\iota\overline{\mathfrak{B}}$
-\end_inset
-
-.
- The mapping is onto, but not one-to-one: The finite orbits all have correspondi
-ng cyclic orbits, all of which are distinct elements in 
-\begin_inset Formula $\overline{\mathfrak{B}}$
-\end_inset
-
- but map to the (finite-orbit) polynomial, and thus the same root.
-\end_layout
-
-\begin_layout Standard
-The good-index function provided a bijection 
-\begin_inset Formula $\mathfrak{B}=\zeta G\zeta^{-1}\mathbb{B}$
-\end_inset
-
- between the trimmed and untrimed finite, unbounded trees.
- The claim is that this can be extended to a bijection 
-\begin_inset Formula $\overline{\mathfrak{B}}=\overline{G}\overline{\mathbb{B}}$
-\end_inset
-
-.
- This requires a short detour into topology.
- The standard (weak) topology on Cantor space is the product topology.
- The base for the topology may be taken as the set of all finite strings,
- followed by an infinite number of don't-care markers.
- These are the open sets; the full topology is the finite intersection and
- infinite union of the open sets in this base.
-\end_layout
-
-\begin_layout Standard
-Every set in the base of the topology is represented by a finite string.
- The function 
-\begin_inset Formula $\zeta^{-1}$
-\end_inset
-
- maps this to an integer.
- The function 
-\begin_inset Formula $G$
-\end_inset
-
- is defined on all integers; it returns an integer, which is mapped by 
-\begin_inset Formula $\zeta$
-\end_inset
-
- to a finite string and thus an open set.
- To conclude, 
-\begin_inset Formula $\zeta G\zeta^{-1}$
-\end_inset
-
- maps open sets to open sets, and it is defined on 
-\emph on
-every
-\emph default
- open set in the topology.
- Thus, it is safe to write 
-\begin_inset Formula $\overline{G}=\zeta G\zeta^{-1}$
-\end_inset
-
-, as it is defined everywhere; all of 
-\begin_inset Formula $\overline{\mathbb{B}}$
-\end_inset
-
- is in it's domain.
- The range of 
-\begin_inset Formula $\overline{G}$
-\end_inset
-
- can be taken to be the definition of the closure 
-\begin_inset Formula $\overline{\mathfrak{B}}$
-\end_inset
-
-.
- This has several benefits: it avoids having to make funny arguments that
- pass through the reals via the comb, and it also makes clear that 
-\begin_inset Formula $\overline{G}$
-\end_inset
-
- is a bijection.
- Note 
-\begin_inset Formula $\overline{G}$
-\end_inset
-
- is not continuous, in the context that 
-\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
-\end_inset
-
-, since 
-\begin_inset Formula $\overline{G}^{-1}$
-\end_inset
-
- is defined almost nowhere on 
-\begin_inset Formula $\overline{\mathbb{B}}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-xxx TODO: rename zeta to eta everywhere up above.
- 
-\end_layout
-
-\begin_layout Standard
-The points 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- are dense in the interval 
-\begin_inset Formula $\left[1,2\right]$
-\end_inset
-
-.
- Within each rank 
-\begin_inset Formula $\nu$
-\end_inset
-
- they are monotonically increasing.
- The bracketing relation guarantees that, for all 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- in the subtree, these are all contained within the endpoints of the bracket,
- and that they are always totally ordered, by the natural tree-ordering.
- The notion of open sets is compatable.
- Given a basic open set in 
-\begin_inset Formula $\overline{\mathbb{B}}$
-\end_inset
-
-, the function 
-\begin_inset Formula $\varrho=r\circ G\circ\zeta^{-1}$
-\end_inset
-
- maps it to an open set on the real number line.
- It is continuous.
- Since the 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- are dense in the interval 
-\begin_inset Formula $\left[1,2\right]$
-\end_inset
-
-, any open set 
-\begin_inset Formula $U\subset\left[1,2\right]$
-\end_inset
-
- can be written as a countable union of brackets.
- The function 
-\begin_inset Formula $\varrho^{-1}$
-\end_inset
-
- is defined on all brakcets, and by bracketing, it is defined on all 
-\begin_inset Formula $U\subset\left[1,2\right]$
-\end_inset
-
- and by bracketing 
-\begin_inset Formula $\varrho^{-1}U$
-\end_inset
-
- is an open set in the product topology on 
-\begin_inset Formula $\overline{\mathbb{B}}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The goal is to extend this reasoning to 
-\begin_inset Formula $\mathsf{G}=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
-\end_inset
-
-, so as to obtain a continuous, monotonic function on the unit interval.
- And we are done, more or less.
-\end_layout
-
-\begin_layout Standard
-xxxx
-\end_layout
-
-\begin_layout Standard
-The mapping 
-\begin_inset Formula $\chi$
-\end_inset
-
- maps these sets to open subintervals of the unit interval; more precisely,
- to subintervals with dyadics at each end.
- These are precisely the sets 
-\begin_inset Formula $I\left(m,\nu\right)$
-\end_inset
-
- defined in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:topo-base"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- They allowed the infinite comb to be built up from unbounded-length but
- finite strings in 
-\begin_inset Formula $\mathfrak{B}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-xxx 
-\end_layout
-
-\begin_layout Standard
-The base of the product topology was mapped to open intervals on the real-number
- line; and so 
-\begin_inset Formula $G$
-\end_inset
-
- is continuous on the reals.
- This can also be seen in a different way.
- The standard measure 
-\begin_inset Formula $\mu$
-\end_inset
-
- on the reals says that 
-\begin_inset Formula $\mu I\left(m,\nu\right)=2^{2-\nu}$
-\end_inset
-
-.
- The function 
-\begin_inset Formula $G$
-\end_inset
-
- is built from left and right moves.
- The left moves bump the rank by one, and so always map to sets that are
- exacly half the size on the real number line.
- The right moves are given by the leadership function: 
-\begin_inset Formula $\Lambda\Psi_{\nu}\subset\bigcup_{h=0}^{\infty}\Psi_{\nu+1+h}$
-\end_inset
-
- for each rank 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- The resulting sets are (at a minimum) half the size, and possibly larger,
- as the union of addtional small intervals.
- This allows a conventional delta-epsilon proof of continuity to go forward:
- for each epsilon, one can choose a rank 
-\begin_inset Formula $\nu$
-\end_inset
-
- where the basis sets 
-\begin_inset Formula $I\left(m,\nu\right)$
-\end_inset
-
- are smaller than epsilon.
- The function 
-\begin_inset Formula $G$
-\end_inset
-
- maps them to other open sets that are strictly smaller.
- Strictly, because the height of a leader is always a finite number; the
- union is written as a union over all possible heights, but the union is
- always finite.
- 
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-This is also where the valid rational orbits can occur, as well.
- This is as expected; the ultimately-periodic orbits will be infinite strands
- walking down the trimmed tree.
- From this, we can conclude that the naive rational encoding is not all
- that interesting: most rationals will land outside of the comb; a few will
- make it in.
- It seems that we want to use to good-index encoding 
-\begin_inset Formula $G:\mathbb{N}\to\Psi$
-\end_inset
-
- so as to get a better sampling.
- But this raises the question: what is the inverse image of 
-\begin_inset Formula $G$
-\end_inset
-
- for the ultimately-periodic orbits? As originally constructed, the points
- of 
-\begin_inset Formula $\Psi$
-\end_inset
-
- are integers, these give the finite orbits.
- We want to work with the completion.
- How, exactly?
-\end_layout
-
-\begin_layout Subsection
-Bracketing
+The Bracket Map
 \end_layout
 
 \begin_layout Standard
@@ -28937,7 +28172,7 @@ The left and right moves
 \begin_inset Formula $L,R$
 \end_inset
 
- on the binary tree were 
+ on the valid-index binary tree were 
 \begin_inset Formula $L:\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)$
 \end_inset
 
@@ -28946,7 +28181,16 @@ The left and right moves
 \end_inset
 
 .
- Consider starting at 
+ (The symbol 
+\begin_inset Formula $R$
+\end_inset
+
+ is used in place of 
+\begin_inset Formula $\mathfrak{R}$
+\end_inset
+
+ in this section, for ease of typography.
+ They are isomorphic.) Consider starting at 
 \begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
 \end_inset
 
@@ -29493,15 +28737,16 @@ move
 \begin_inset Formula $m$
 \end_inset
 
-, the corresponding position in they dyadic tree is 
+, the corresponding position in the dyadic tree is 
 \begin_inset Formula $\left(2m+1\right)/2^{n}$
 \end_inset
 
 .
- The bracket is likewise a position in the binary tree.
- The moves to get to that location are applied left-to-right.
- This is in reversed applicative order, as compared to the moves being taken
- as a function w/function composition.
+ The bracket is likewise a position in the valid-index binary tree.
+ The string of moves to get to that location are written in reverse applicative
+ order, so that the first letter in the string is the first move.
+ If the moves are treated as functions to be composed and applied, then
+ the string needs to be reversed to get the applicative order.
  The beta is the beta value at the center of that bracket.
  Based on the beta value, we conclude that 
 \begin_inset Formula $G:1/3\mapsto2/7$
@@ -29511,7 +28756,7 @@ move
 \end_layout
 
 \begin_layout Standard
-Below is another example.
+A second example helps cement the idea.
 \end_layout
 
 \begin_layout Standard
@@ -30014,49 +29259,65 @@ bracket
 \end_layout
 
 \begin_layout Standard
-Based on this table, we conclude that 
+Based on the convergent, we conclude that 
 \begin_inset Formula $G:1/6\mapsto2/15$
 \end_inset
 
 , deduced below.
-\end_layout
+ In this case, 
+\begin_inset Formula $1/6\notin\overline{\theta}$
+\end_inset
 
-\begin_layout Standard
-The good map 
+ and so the raw fraction 
+\begin_inset Formula $1/6$
+\end_inset
+
+ does not generate a self-decribing orbit.
+ But 
+\begin_inset Formula $2/15$
+\end_inset
+
+ is self-describing.
+ Of course, that is the entire intend of the bracket map.
+ Originally formulated as the good-index map 
 \begin_inset Formula $G:\mathbb{N}\to\Psi$
 \end_inset
 
- sits in between the moves and the ultimately-periodic orbits, with moves
- being preimages of the brackets.
- So really, we want to know what the pre-image of the ultimately-periodic
- orbits are.
- See next section.
-\end_layout
+ that maps natural numbers to brackets, the extension here is the 
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Subsubsection
-Bracketing
-\end_layout
+good rational
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Standard
-For every allowed orbit, there's a limit point in 
-\begin_inset Formula $\Psi$
+ map 
+\begin_inset Formula $\mathsf{G}:\mathbb{Q}\to\mathbb{Q}\cap\overline{\theta}$
+\end_inset
+
+, which maps rationals to those that are self-describing.
+ This is the same map as visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
- Lets find that limit point.
- Moves are read left-to-right, so first move down the tree is the left-most
- symbol, and then the rest of them.
- Unlike table above, we use a different convention, so that all moves must
- begin with an initial R to get to the top of the tree.
- This allows the far left to be represented as no move at all.
- This is just a coding convention.
- 
+\end_layout
+
+\begin_layout Subsection
+Bracketing Examples
 \end_layout
 
 \begin_layout Standard
-The table below is curated collection of some interesting cases.
- Some fit into patterns, some defy them.
- Handy for double-checking results.
+A curated collection of examples of rationals passed through the bracketing
+ function are given below.
+ It serves mostly to give a sense of the patterns that develop, as well
+ as counter-examples that defy simple patterns.
 \begin_inset Note Note
 status collapsed
 
@@ -30085,7 +29346,7 @@ Table obtained with irred-tree, which accepts the a/b column, generates
 \begin_layout Standard
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="29" columns="9">
+<lyxtabular version="3" rows="30" columns="9">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -30113,7 +29374,10 @@ Table obtained with irred-tree, which accepts the a/b column, generates
 \begin_inset Text
 
 \begin_layout Plain Layout
-Z
+\begin_inset Formula $\Psi$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -30131,7 +29395,7 @@ moves
 \begin_inset Text
 
 \begin_layout Plain Layout
-idx
+id
 \end_layout
 
 \end_inset
@@ -30205,24 +29469,6 @@ ok
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 -1
 \end_layout
 
@@ -30232,7 +29478,28 @@ ok
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
+\begin_inset Formula $\epsilon$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0/1
 \end_layout
 
 \end_inset
@@ -30380,7 +29647,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
--
+
 \end_layout
 
 \end_inset
@@ -30579,7 +29846,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
-2
+y
 \end_layout
 
 \end_inset
@@ -30736,7 +30003,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
--
+
 \end_layout
 
 \end_inset
@@ -31024,7 +30291,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
+y
 \end_layout
 
 \end_inset
@@ -31532,7 +30799,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
--
+
 \end_layout
 
 \end_inset
@@ -31777,6 +31044,95 @@ y
 
 \begin_layout Plain Layout
 y
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3/4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $RR$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3/4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7/8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $111\overline{\cdot}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.839286755
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -32596,10 +31952,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\infty$
-\end_inset
-
-
+0
 \end_layout
 
 \end_inset
@@ -32620,7 +31973,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
+y
 \end_layout
 
 \end_inset
@@ -32629,7 +31982,7 @@ y
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
+1/1
 \end_layout
 
 \end_inset
@@ -32686,6 +32039,20 @@ y
 \end_layout
 
 \begin_layout Standard
+For every allowed orbit, there's a limit point in 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ Lets find that limit point.
+ Unlike table above, we use a different convention, so that all moves must
+ begin with an initial R to get to the top of the tree.
+ This allows the far left to be represented as no move at all.
+ This is just a coding convention.
+ 
+\end_layout
+
+\begin_layout Standard
 Conclusions:
 \end_layout
 
@@ -32707,6 +32074,811 @@ Should be able to say something clever about how when prefixes of orbits
  are leaders with height greater than zero, then the fractions mapping gets
  garbled, too.
  
+\end_layout
+
+\begin_layout Section
+Formal
+\end_layout
+
+\begin_layout Subsection
+The Rational Comb
+\end_layout
+
+\begin_layout Standard
+The dyadic comb, of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, shows where valid finite orbits can occur.
+ It's limit to infinite rank gives the infinite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The only valid rationals, that is, those giving self-describing orbits,
+ are those that belong to 
+\begin_inset Formula $\mathbb{Q}\cap\theta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This can be understood as a limiting procedure.
+ Every rational can be approximated by a dyadic rational; each set is dense
+ in the other.
+ The dyadic rationals are finite walks down the binary tree; the non-dyadic
+ rationals are infinite walks.
+ The infinite comb corresponds to the trimmed tree, described earlier.
+ The triming always maintains branches of unbounded length.
+ These have a limit; in the limit, some of these will correspond to rationals.
+ These are exactly the rationals that correspond to the ultimately-periodic
+ orbits.
+ The correspondence goes in both directions: given an infinite path down
+ the tree, it is sufficient to truncate it to be of finite length.
+ By construction, the truncated path corresponds to a valid dyadic rational.
+ To recap: going in one direction, there is a sequence of finite orbits
+ that converge, in the limit, onto an eventually-periodic orbit.
+ Conversely, given such an orbit, every truncated version thereof is valid.
+ 
+\end_layout
+
+\begin_layout Standard
+The above limiting procedure becomes interesting when used to extend the
+ good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ to the rationals.
+ This is entirely straight-forward; unfortunately, this requires a review
+ of the canonical mappings between the tree, the integers, and the dyadic
+ fractions.
+ The issue is that the rich selection of isomorphims can generate confusion,
+ and so a precise vocabulary is needed.
+ It is the conventional one, as far as notation allows.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ denote the finite but unbounded binary tree, and 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ be it's closure as the infinite tree.
+ The infinite tree is, of course, isomorphic to the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+; but there is more than one isomorphism, so care is taken.
+ Thus, let 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ the the graph of vertices and connecting edges 
+\begin_inset Formula $\mathbb{B}=\left\{ v_{i},e_{ij}:i\in\mathbb{N},j\in\left\{ 2i,2i+1\right\} \right\} $
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\zeta:\mathbb{N}\to\mathbb{B}$
+\end_inset
+
+ denote the canonical labelling of the binary tree by the positive integers,
+ so that the root of the tree is given the label 1, the first row is 2,3
+ and the next row is 4,5,6,7.
+ This is a bijection: every finite walk down the tree can be labelled with
+ a positive integer.
+ The walks are left and right moves, in the canonical sense: 
+\begin_inset Formula $L:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ with 
+\begin_inset Formula $L:m\mapsto2m$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ with 
+\begin_inset Formula $R:m\mapsto2m+1$
+\end_inset
+
+.
+ The push-forward of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ provide the cononical walks on the tree, as a commuting diagram, so that
+ 
+\begin_inset Formula $L\circ\zeta=\zeta\circ L$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R\circ\zeta=\zeta\circ R$
+\end_inset
+
+.
+ It is useful to adjoin the pre-root elements 
+\begin_inset Formula $\left\{ 0,\infty\right\} $
+\end_inset
+
+ so that 
+\begin_inset Formula $R:0\to1$
+\end_inset
+
+ and 
+\begin_inset Formula $L:\infty\to1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ be the dyadic rationals, with the canical bijection to the natural numbers
+ 
+\begin_inset Formula $\delta:\mathbb{D}\to\mathbb{N}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\delta:\left(2n+1\right)/2^{m}\mapsto2^{m-1}+n$
+\end_inset
+
+.
+ The labels the root of the tree with 1/2, and the first row under it as
+ 1/4 and 3/4.
+ The left and right moves are 
+\begin_inset Formula $L:\left(2n+1\right)/2^{m}\mapsto\left(4n+1\right)/2^{m+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:\left(2n+1\right)/2^{m}\mapsto\left(4n+3\right)/2^{m+1}$
+\end_inset
+
+.
+ This was set up so that 
+\begin_inset Formula $L\circ\delta=\delta\circ L$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R\circ\delta=\delta\circ R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This allows the bracket tree and the good-index bijection to be specified
+ more precisely.
+ The validity set 
+\begin_inset Formula $\Psi\subset\mathbb{N}$
+\end_inset
+
+ was defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:valid index set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as the collection of natural number indexes corresponding to polynomials
+ with self-describing roots.
+ This set came with two functions 
+\begin_inset Formula $L,\mathfrak{R}:\Psi\to\Psi$
+\end_inset
+
+ given by index-doubling 
+\begin_inset Formula $L:m\mapsto2m$
+\end_inset
+
+ and leadership (eqn
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Leadership function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) 
+\begin_inset Formula $\mathfrak{R}:m\mapsto\Lambda\left(m\right)$
+\end_inset
+
+.
+ The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ was then defined as the pullback 
+\begin_inset Formula $L\circ G=G\circ L$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{R}\circ G=G\circ R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The root map 
+\begin_inset Formula $r:\Psi\to\left[1,2\right]$
+\end_inset
+
+ takes valid integer indexes, and maps them to the roots of the corresponding
+ (finite-orbit) polynomials, so that 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+.
+ The bracket map, depicted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, can now be written more precisely as the function 
+\begin_inset Formula $\mathsf{G}=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
+\end_inset
+
+.
+ It maps the dyadics to the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values that have finite orbits.
+ The goal of setting up this machinery is to explore the extension of 
+\begin_inset Formula $\mathsf{G}$
+\end_inset
+
+ to the rationals, so that 
+\begin_inset Formula $\mathsf{G}:\mathbb{Q}\to\left[1,2\right]$
+\end_inset
+
+, and then, by closure, to the reals, so that 
+\begin_inset Formula $\mathsf{G}:\left[0,1\right]\to\left[1,2\right]$
+\end_inset
+
+ is a monotonic increasing continuous bijection between the unit interval
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values.
+\end_layout
+
+\begin_layout Standard
+The gymnastics for this seems to require passing through the trimmed tree
+ and the comb.
+ The trimmed tree 
+\begin_inset Formula $\mathfrak{B}\subset\mathbb{B}$
+\end_inset
+
+ is the image of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ under the mapping 
+\begin_inset Formula $\zeta$
+\end_inset
+
+, so that 
+\begin_inset Formula $\mathfrak{B}=\zeta\Psi$
+\end_inset
+
+.
+ This consists of those nodes and edges in the finite binary tree that are
+ labeled by integers from the validity set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ The good-index function 
+\begin_inset Formula $G$
+\end_inset
+
+ places the trimmed tree and the finite tree in a bijection, so that 
+\begin_inset Formula $\mathfrak{B}=\zeta G\zeta^{-1}\mathbb{B}$
+\end_inset
+
+.
+ The ultimately-periodic orbits live inside the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $\mathfrak{C}\subset\overline{\mathbb{B}}$
+\end_inset
+
+ for the cyclic (ultimately periodic) orbits; these are infinite-length
+ strings describing moves down the infinite binary tree.
+ As already noted, 
+\begin_inset Formula $\mathfrak{C}\cap\mathbb{B}\subset\mathfrak{B}$
+\end_inset
+
+; that is, every infinite-length cyclic orbit, when truncated to finite
+ length, is a valid finite orbit.
+ The closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+ consists of all self-describing bit-strings obtained as solutions to 
+\begin_inset Formula $\beta=S\left(\beta\right)$
+\end_inset
+
+.
+ The cyclic orbits are just a special case: 
+\begin_inset Formula $\mathfrak{C}\subset\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ There are presumably many more, uncountably many chaotic orbits in 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ To exhibit these, a closer look at the comb is required.
+\end_layout
+
+\begin_layout Standard
+The notation for the finite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ was abused in several ways.
+ In eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theta mask"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ it is used to indicate whether a given polynomial root has a self-describing
+ orbit.
+ It is then defined as the indicator function for set membership 
+\begin_inset Formula $\theta=\mathds{1}_{\Psi}:\Psi\to\left\{ T,F\right\} $
+\end_inset
+
+ and finally as the finite comb 
+\begin_inset Formula $\theta\subset\mathbb{D}$
+\end_inset
+
+.
+ The finite comb can be written more formally as 
+\begin_inset Formula $\theta=\delta^{-1}\Psi$
+\end_inset
+
+.
+ The infinite comb 
+\begin_inset Formula $\overline{\theta}$
+\end_inset
+
+ was the closure of the finite comb.
+ The closure, defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, was constructed as the infinite intersection of open sets.
+ The claim is that the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+ can be understood as the pullback of 
+\begin_inset Formula $\overline{\theta}$
+\end_inset
+
+ to the infinite tree.
+\end_layout
+
+\begin_layout Standard
+Just a little bit more machinery is needed.
+ Let 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ be Cantor space, the space of infinitely-long binary strings.
+ Let 
+\begin_inset Formula $\chi:2^{\omega}\to\left[0,1\right]$
+\end_inset
+
+ be the canonical mapping of Cantor space to the unit interval: 
+\begin_inset Formula $\chi:\left(b_{0}b_{1}\cdots\right)\mapsto\sum_{k}b_{k}2^{-k-1}$
+\end_inset
+
+.
+ Note that this mapping manages to miss all the dyadic rationals, as these
+ correspond to finite strings, of which there aren't any in the Cantor space.
+ Let 
+\begin_inset Formula $2^{<\omega}=2^{*}$
+\end_inset
+
+ be the set of finite-length binary strings, and allow the symbol 
+\begin_inset Formula $\chi$
+\end_inset
+
+ to perform double-duty, by writing 
+\begin_inset Formula $\chi:2^{*}\to\mathbb{D}$
+\end_inset
+
+ to map finite strings to dyadics.
+ These binary strings can also be interpreted as strings in the symbols
+ 
+\begin_inset Formula $L,R$
+\end_inset
+
+, so that they are moves on the tree.
+ Write 
+\begin_inset Formula $\iota:2^{*}\to\mathbb{B}$
+\end_inset
+
+ that maps the empty string to the root of the tree, and likewise 
+\begin_inset Formula $\iota:2^{\omega}\to\overline{\mathbb{B}}$
+\end_inset
+
+ that maps infinite strings to the leaves of the infinite tree.
+\end_layout
+
+\begin_layout Standard
+The comb was a subset of the unit interval: 
+\begin_inset Formula $\overline{\theta}\subset\left[0,1\right]$
+\end_inset
+
+.
+ The claim is that 
+\begin_inset Formula $\overline{\theta}=\chi\iota\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ The mapping is onto, but not one-to-one: The finite orbits all have correspondi
+ng cyclic orbits, all of which are distinct elements in 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+ but map to the (finite-orbit) polynomial, and thus the same root.
+\end_layout
+
+\begin_layout Standard
+The good-index function provided a bijection 
+\begin_inset Formula $\mathfrak{B}=\zeta G\zeta^{-1}\mathbb{B}$
+\end_inset
+
+ between the trimmed and untrimed finite, unbounded trees.
+ The claim is that this can be extended to a bijection 
+\begin_inset Formula $\overline{\mathfrak{B}}=\overline{G}\overline{\mathbb{B}}$
+\end_inset
+
+.
+ This requires a short detour into topology.
+ The standard (weak) topology on Cantor space is the product topology.
+ The base for the topology may be taken as the set of all finite strings,
+ followed by an infinite number of don't-care markers.
+ These are the open sets; the full topology is the finite intersection and
+ infinite union of the open sets in this base.
+\end_layout
+
+\begin_layout Standard
+Every set in the base of the topology is represented by a finite string.
+ The function 
+\begin_inset Formula $\zeta^{-1}$
+\end_inset
+
+ maps this to an integer.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined on all integers; it returns an integer, which is mapped by 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ to a finite string and thus an open set.
+ To conclude, 
+\begin_inset Formula $\zeta G\zeta^{-1}$
+\end_inset
+
+ maps open sets to open sets, and it is defined on 
+\emph on
+every
+\emph default
+ open set in the topology.
+ Thus, it is safe to write 
+\begin_inset Formula $\overline{G}=\zeta G\zeta^{-1}$
+\end_inset
+
+, as it is defined everywhere; all of 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ is in it's domain.
+ The range of 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ can be taken to be the definition of the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ This has several benefits: it avoids having to make funny arguments that
+ pass through the reals via the comb, and it also makes clear that 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ is a bijection.
+ Note 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ is not continuous, in the context that 
+\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+\end_inset
+
+, since 
+\begin_inset Formula $\overline{G}^{-1}$
+\end_inset
+
+ is defined almost nowhere on 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx TODO: rename zeta to eta everywhere up above.
+ 
+\end_layout
+
+\begin_layout Standard
+The points 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $\left[1,2\right]$
+\end_inset
+
+.
+ Within each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+ they are monotonically increasing.
+ The bracketing relation guarantees that, for all 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ in the subtree, these are all contained within the endpoints of the bracket,
+ and that they are always totally ordered, by the natural tree-ordering.
+ The notion of open sets is compatable.
+ Given a basic open set in 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+, the function 
+\begin_inset Formula $\varrho=r\circ G\circ\zeta^{-1}$
+\end_inset
+
+ maps it to an open set on the real number line.
+ It is continuous.
+ Since the 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $\left[1,2\right]$
+\end_inset
+
+, any open set 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+ can be written as a countable union of brackets.
+ The function 
+\begin_inset Formula $\varrho^{-1}$
+\end_inset
+
+ is defined on all brakcets, and by bracketing, it is defined on all 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+ and by bracketing 
+\begin_inset Formula $\varrho^{-1}U$
+\end_inset
+
+ is an open set in the product topology on 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The goal is to extend this reasoning to 
+\begin_inset Formula $\mathsf{G}=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
+\end_inset
+
+, so as to obtain a continuous, monotonic function on the unit interval.
+ And we are done, more or less.
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+The mapping 
+\begin_inset Formula $\chi$
+\end_inset
+
+ maps these sets to open subintervals of the unit interval; more precisely,
+ to subintervals with dyadics at each end.
+ These are precisely the sets 
+\begin_inset Formula $I\left(m,\nu\right)$
+\end_inset
+
+ defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:topo-base"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ They allowed the infinite comb to be built up from unbounded-length but
+ finite strings in 
+\begin_inset Formula $\mathfrak{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx 
+\end_layout
+
+\begin_layout Standard
+The base of the product topology was mapped to open intervals on the real-number
+ line; and so 
+\begin_inset Formula $G$
+\end_inset
+
+ is continuous on the reals.
+ This can also be seen in a different way.
+ The standard measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on the reals says that 
+\begin_inset Formula $\mu I\left(m,\nu\right)=2^{2-\nu}$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ is built from left and right moves.
+ The left moves bump the rank by one, and so always map to sets that are
+ exacly half the size on the real number line.
+ The right moves are given by the leadership function: 
+\begin_inset Formula $\Lambda\Psi_{\nu}\subset\bigcup_{h=0}^{\infty}\Psi_{\nu+1+h}$
+\end_inset
+
+ for each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ The resulting sets are (at a minimum) half the size, and possibly larger,
+ as the union of addtional small intervals.
+ This allows a conventional delta-epsilon proof of continuity to go forward:
+ for each epsilon, one can choose a rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+ where the basis sets 
+\begin_inset Formula $I\left(m,\nu\right)$
+\end_inset
+
+ are smaller than epsilon.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ maps them to other open sets that are strictly smaller.
+ Strictly, because the height of a leader is always a finite number; the
+ union is written as a union over all possible heights, but the union is
+ always finite.
+ 
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+Things we don't have: a proof that the roots are dense.
+\end_layout
+
+\begin_layout Standard
+also why rationals to rationsls
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+This is also where the valid rational orbits can occur, as well.
+ This is as expected; the ultimately-periodic orbits will be infinite strands
+ walking down the trimmed tree.
+ From this, we can conclude that the naive rational encoding is not all
+ that interesting: most rationals will land outside of the comb; a few will
+ make it in.
+ It seems that we want to use to good-index encoding 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ so as to get a better sampling.
+ But this raises the question: what is the inverse image of 
+\begin_inset Formula $G$
+\end_inset
+
+ for the ultimately-periodic orbits? As originally constructed, the points
+ of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ are integers, these give the finite orbits.
+ We want to work with the completion.
+ How, exactly?
 \end_layout
 
 \begin_layout Section
