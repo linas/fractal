@@ -1,7 +1,8 @@
 /*
  * good-rational.c
  *
- * Create a graph of the bracket tree.
+ * Explore the good-rational mapping, which maps rationals to those
+ * with valid expansions.
  *
  * December 2023
  */
@@ -10,16 +11,18 @@
 #include "selfie-rational.c"
 #include "selfie-tree.c"
 
-// cheap hack
-void low_guess(double rat, int* p, int* q)
+// Try to guess a rational.
+void low_guess(double rat, int* p, int* q, int ndigits)
 {
-	for (int i=2; i<16386; i++)
+	int maxdeno = 1UL << ndigits;
+	double epsi = 1.0 / ((double) maxdeno);
+	for (int i=2; i<maxdeno; i++)
 	{
-		if ((fabs(fmod(rat*i, 1.0)) < 1e-6) ||
-		    (fabs(1.0-fmod(rat*i, 1.0)) < 1e-6))
+		if ((fabs(fmod(rat*i, 1.0)) < epsi) ||
+		    (fabs(1.0-fmod(rat*i, 1.0)) < epsi))
 		{
 			*q = i;
-			*p = floor(rat*i + 1e-5);
+			*p = floor(rat*i + 1.5*epsi);
 			return;
 		}
 	}
@@ -27,7 +30,7 @@ void low_guess(double rat, int* p, int* q)
 
 int main(int argc, char* argv[])
 {
-#define RATIONAL_EXPLORE
+// #define RATIONAL_EXPLORE
 #ifdef RATIONAL_EXPLORE
 	if (argc != 4)
 	{
@@ -71,10 +74,56 @@ int main(int argc, char* argv[])
 	printf("Orbit rational = %ld/%ld = %18.16g\n", pp, qq, orat);
 
 	int po=0, qo=0;
-	low_guess(orat, &po, &qo);
+	low_guess(orat, &po, &qo, 14);
 	printf("guess its orbit is %d/%d\n", po,qo);
 	printf("\n");
 
+#endif
+
+#define GOOD_GRAPH
+#ifdef GOOD_GRAPH
+	// Implement above explorer as a direct map
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s <npts>\n", argv[0]);
+		exit(1);
+	}
+	int npts = atoi(argv[1]);
+
+	for (int i=0; i<= npts; i++)
+	{
+		// Input rational
+		unsigned long gcf = gcd(i, npts);
+		int p = i / gcf;
+		int q = npts / gcf;
+
+		// Attempt to find a high-quality approximation.
+		int minlen = 16;
+		unsigned long idx = NEG_ONE;
+		for (int len=40; minlen < len; minlen -=3)
+		{
+			unsigned long moves = rational_to_moves(p, q, len);
+			unsigned long idx = good_index_map(moves);
+			if (idx < MAXIDX) break;
+		}
+		if (MAXIDX < idx) continue;
+
+		// Convert the approximant back to a rational
+		unsigned long tno = 2UL * idx + 1UL;
+		unsigned long pp, qq;
+		moves_to_rational(tno, &pp, &qq);
+		double orat = ((double) pp) / ((double) qq);
+
+		// Reduce the rational to lowest terms, given that
+		// the approximant was probably off by a few bits.
+		int po=0, qo=0;
+		low_guess(orat, &po, &qo, minlen);
+
+		if (0 == qo) continue;
+
+		double irat = ((double) p) / ((double) q);
+		printf("%d	%d	%g	%d	%d	%g\n", p, q, irat, po, qo, orat);
+	}
 #endif
 }
 
