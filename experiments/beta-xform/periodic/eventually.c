@@ -178,7 +178,7 @@ void low_guess(double rat, int* p, int* q)
 		    (fabs(1.0-fmod(rat*i, 1.0)) < 1e-6))
 		{
 			*q = i;
-			*p = floor(rat*i);
+			*p = floor(rat*i + 1e-5);
 			return;
 		}
 	}
