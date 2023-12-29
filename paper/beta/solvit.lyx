@@ -28460,25 +28460,43 @@ The gymnastics for this seems to require passing through the trimmed tree
 \end_inset
 
 .
- The
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-and likewise
-\end_layout
-
-\begin_layout Standard
-The goal of setting up this machinery is to explore the infinite closure
- 
+ The ultimately-periodic orbits live inside the closure 
 \begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
 \end_inset
 
 .
- But first, some more correspondences.
+ Write 
+\begin_inset Formula $\mathfrak{C}\subset\overline{\mathbb{B}}$
+\end_inset
+
+ for the cyclic (ultimately periodic) orbits; these are infinite-length
+ strings describing moves down the infinite binary tree.
+ As already noted, 
+\begin_inset Formula $\mathfrak{C}\cap\mathbb{B}\subset\mathfrak{B}$
+\end_inset
+
+; that is, every infinite-length cyclic orbit, when truncated to finite
+ length, is a valid finite orbit.
+ The closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+ consists of all self-describing bit-strings obtained as solutions to 
+\begin_inset Formula $\beta=S\left(\beta\right)$
+\end_inset
+
+.
+ The cyclic orbits are just a special case: 
+\begin_inset Formula $\mathfrak{C}\subset\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ There are presumably many more, uncountably many chaotic orbits in 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ To exhibit these, a closer look at the comb is required.
 \end_layout
 
 \begin_layout Standard
@@ -28529,39 +28547,40 @@ noprefix "false"
 \end_inset
 
 , was constructed as the infinite intersection of open sets.
- The task is to pull this back to the closure 
-\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+ The claim is that the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
 \end_inset
 
-, as the (finite, unbounded) trimmed tree 
-\begin_inset Formula $\mathfrak{B}$
+ can be understood as the pullback of 
+\begin_inset Formula $\overline{\theta}$
 \end_inset
 
- plus all of the limit paths.
- From here, 
+ to the infinite tree.
 \end_layout
 
 \begin_layout Standard
-Let 
-\begin_inset Formula $\mathbb{R}$
-\end_inset
-
- be the reals, or, more appropriately, the reals on the unit interval.
+Just a little bit more machinery is needed.
  Let 
 \begin_inset Formula $2^{\omega}$
 \end_inset
 
  be Cantor space, the space of infinitely-long binary strings.
  Let 
-\begin_inset Formula $\chi:2^{\omega}\to\mathbb{R}$
+\begin_inset Formula $\chi:2^{\omega}\to\left[0,1\right]$
 \end_inset
 
- be the canonical mapping to the reals: 
+ be the canonical mapping of Cantor space to the unit interval: 
 \begin_inset Formula $\chi:\left(b_{0}b_{1}\cdots\right)\mapsto\sum_{k}b_{k}2^{-k-1}$
 \end_inset
 
 .
- Allow the symbol 
+ Note that this mapping manages to miss all the dyadic rationals, as these
+ correspond to finite strings, of which there aren't any in the Cantor space.
+ Let 
+\begin_inset Formula $2^{<\omega}=2^{*}$
+\end_inset
+
+ be the set of finite-length binary strings, and allow the symbol 
 \begin_inset Formula $\chi$
 \end_inset
 
@@ -28569,68 +28588,61 @@ Let
 \begin_inset Formula $\chi:2^{*}\to\mathbb{D}$
 \end_inset
 
- mapping finite strings to dyadics.
-\end_layout
-
-\begin_layout Standard
-E resulting from the closure 
-\begin_inset Formula $\delta^{-1}\zeta^{-1}\mathfrak{B}$
-\end_inset
-
-continuity 
-\begin_inset Formula $\mathcal{G}$
-\end_inset
-
- 
-\begin_inset Formula $\mathscr{G}$
-\end_inset
-
-
-\begin_inset Formula $\mathfrak{G}$
-\end_inset
-
-
-\begin_inset Formula $\mathsf{G}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Finally, let 
-\begin_inset Formula $2^{<\omega}=2^{*}$
-\end_inset
-
- be the set of finite-length binary strings.
- For the present, these should be considered to be strings in the symbols
+ to map finite strings to dyadics.
+ These binary strings can also be interpreted as strings in the symbols
  
 \begin_inset Formula $L,R$
 \end_inset
 
-.
- This allows a general element 
-\begin_inset Formula $\gamma\in2^{*}$
+, so that they are moves on the tree.
+ Write 
+\begin_inset Formula $\iota:2^{*}\to\mathbb{B}$
 \end_inset
 
- to act on any of 
-\begin_inset Formula $\mathbb{B},\mathbb{N},\mathbb{D}$
+ that maps the empty string to the root of the tree, and likewise 
+\begin_inset Formula $\iota:2^{\omega}\to\overline{\mathbb{B}}$
 \end_inset
 
- but also to be in bijection with any of them, by mapping the empty string
- 
-\begin_inset Formula $\epsilon\in2^{*}$
-\end_inset
+ that maps infinite strings to the leaves of the infinite tree.
+\end_layout
 
- to the root of the binary tree, to the integer 
-\begin_inset Formula $1\in\mathbb{N}$
-\end_inset
-
- or to the dyadic 
-\begin_inset Formula $1/2\in\mathbb{D}$
+\begin_layout Standard
+The comb was a subset of the unit interval: 
+\begin_inset Formula $\overline{\theta}\subset\left[0,1\right]$
 \end_inset
 
 .
- 
+ The claim is that 
+\begin_inset Formula $\overline{\theta}=\chi\iota\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ The mapping is onto, but not one-to-one: The finite orbits all have correspondi
+ng cyclic orbits, all of which are distinct elements in 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+ but map to the (finite-orbit) polynomial, and thus the same root.
+\end_layout
+
+\begin_layout Standard
+The good-index function provided a bijection 
+\begin_inset Formula $\mathfrak{B}=\zeta G\zeta^{-1}\mathbb{B}$
+\end_inset
+
+ between the trimmed and untrimed finite, unbounded trees.
+ The claim is that ths can be extended to a bijection 
+\begin_inset Formula $\overline{\mathfrak{B}}=\overline{G}\overline{\mathbb{B}}$
+\end_inset
+
+.
+ This requires a detour to topology.
+ The standard (weak) topology on Cantor space is the product topology; the
+ open sets are cylinder sets, 
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
