@@ -76,32 +76,6 @@ unsigned long good_index_map(unsigned long moves)
 	return idx;
 }
 
-// Given a tree location encoded with canonical integer, return the corresponding
-// rational for that location. The root of the tree is 1/2, the fisrt row down
-// is 1/4 and 3/4, then next row is 1/8, 3/8, 5/8, 7/8, and so on.
-// This is the canonical dyadic binary tree.
-void moves_to_rational(unsigned long moves, unsigned long* p, unsigned long* q)
-{
-	// No moves is far left, beta=1
-	if (0 == moves)
-	{
-		*p = 0;
-		*q = 1;
-		return;
-	}
-
-	int nmov = bitlen(moves);
-	unsigned long deno = 1UL << nmov;
-	unsigned long mask = deno - 1UL;
-	mask >>= 1;
-
-	moves = moves & mask;
-	moves <<= 1;
-	moves |= 1UL;
-	*p = moves;
-	*q = deno;
-}
-
 // Given a finite-orbit index, return the matching tree-walk (of left-
 // right moves) to get to that index. Inverse of good_index_map()
 unsigned long idx_to_moves(unsigned long idx)
@@ -132,6 +106,8 @@ unsigned long idx_to_moves(unsigned long idx)
 	return bitseq;
 }
 
+/* ================================================================= */
+
 // Print moves on the full binary tree.
 void print_moves(unsigned long moves, char* pre, char* suf)
 {
@@ -145,6 +121,80 @@ void print_moves(unsigned long moves, char* pre, char* suf)
 	}
 	printf (" /%d", len);
 	printf("%s", suf);
+}
+
+/* ================================================================= */
+
+// Given a tree location encoded with canonical integer, return the corresponding
+// rational for that location. The root of the tree is 1/2, the fisrt row down
+// is 1/4 and 3/4, then next row is 1/8, 3/8, 5/8, 7/8, and so on.
+// This is the canonical dyadic binary tree.
+// The inverse function is rational_to_moves(), below.
+void moves_to_rational(unsigned long moves, unsigned long* p, unsigned long* q)
+{
+	// No moves is far left, beta=1
+	if (0 == moves)
+	{
+		*p = 0;
+		*q = 1;
+		return;
+	}
+
+	int nmov = bitlen(moves);
+	unsigned long deno = 1UL << nmov;
+	unsigned long mask = deno - 1UL;
+	mask >>= 1;
+
+	moves = moves & mask;
+	moves <<= 1;
+	moves |= 1UL;
+	*p = moves;
+	*q = deno;
+}
+
+// Return true, if q is a pure power of two.
+bool is_power_of_two(unsigned long q)
+{
+	if (1 == q) return true;
+	while (1 < q && 0 == q%2) q >>= 1;
+	return 1 == q;
+}
+
+// Return the bit-sequence that approximates the rational p/q,
+// truncated to len bits. Rationals have infinite periodic bitseqs,
+// so this just expands that bitseq, and then truncates it.
+//
+// Bit strings are read left-to-right, with leading one taking
+// indicating location of decimal point. This gives the canonical
+// mapping for dyadic rationals as integers.
+// For example, 1/2 len=1 -> 1
+// For example, 1/4 len=2 -> 10 and 3/4 = 11
+// and  3/8 len=3 -> 101
+//
+// This is the inverse of move_to_rational(), above.
+unsigned long rational_to_moves(unsigned long p, unsigned long q, int len)
+{
+	unsigned long gcf = gcd(p, q);
+	p /= gcf;
+	q /= gcf;
+
+	if (is_power_of_two(q))
+		len = bitlen(q) - 2;
+	if (0 == len) return 1UL;
+	if (-1 == len) return 0UL;
+
+	unsigned long bitseq = 1UL;
+	for (int i=0; i<len; i++)
+	{
+		bitseq <<= 1;
+		p <<= 1;
+		if (q <= p)
+		{
+			bitseq |= 1UL;
+			p -= q;
+		}
+	}
+	return bitseq;
 }
 
 /* --------------------------- END OF LIFE ------------------------- */

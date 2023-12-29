@@ -27,48 +27,6 @@ long moves_to_idx(long bitseq, int len)
 	return good_index_map(bitseq);
 }
 
-bool is_power_of_two(unsigned long q)
-{
-	if (1 == q) return true;
-	while (1 < q && 0 == q%2) q >>= 1;
-	return 1 == q;
-}
-
-// Return the bit-sequence that approximates the rational p/q,
-// truncated to len bits. Rationals have infinite periodic bitseqs,
-// so this just expands that bitseq, and then truncates it.
-//
-// Bit strings are read left-to-right, with leading one taking
-// indicating location of decimal point. This gives the canonical
-// mapping for dyadic rationals as integers.
-// For example, 1/2 len=1 -> 1
-// For example, 1/4 len=2 -> 10 and 3/4 = 11
-// and  3/8 len=3 -> 101
-unsigned long rational_to_moves(unsigned long p, unsigned long q, int len)
-{
-	unsigned long gcf = gcd(p, q);
-	p /= gcf;
-	q /= gcf;
-
-	if (is_power_of_two(q))
-		len = bitlen(q) - 2;
-	if (0 == len) return 1UL;
-	if (-1 == len) return 0UL;
-
-	unsigned long bitseq = 1UL;
-	for (int i=0; i<len; i++)
-	{
-		bitseq <<= 1;
-		p <<= 1;
-		if (q <= p)
-		{
-			bitseq |= 1UL;
-			p -= q;
-		}
-	}
-	return bitseq;
-}
-
 // Reverse the order of the bits in the bitseq
 long bitseq_reverse(long bits, int len)
 {
@@ -132,7 +90,7 @@ void low_guess(double rat, int* p, int* q)
 
 int main(int argc, char* argv[])
 {
-// #define SPOT_CHECK
+#define SPOT_CHECK
 #ifdef SPOT_CHECK
 	if (argc != 2)
 	{
@@ -157,56 +115,6 @@ int main(int argc, char* argv[])
 
 	double gold = golden_beta(idx);
 	printf("Index %ld  beta=%20.16g\n", idx, gold);
-#endif
-
-#define RATIONAL_EXPLORE
-#ifdef RATIONAL_EXPLORE
-	if (argc != 4)
-	{
-		fprintf(stderr, "Usage: %s <p> <q> <max-len>\n", argv[0]);
-		exit(1);
-	}
-	int p = atoi(argv[1]);
-	int q = atoi(argv[2]);
-	int len = atoi(argv[3]);
-	printf("\n");
-
-	double rat = ((double) p) / ((double) q);
-	printf("Input rational = %d/%d len=%d as float=%18.16g\n", p, q, len, rat);
-
-	long moves = rational_to_moves(p, q, len);
-	print_moves(moves, "Tree moves=(", ")\n");
-
-	unsigned long pp, qq;
-	moves_to_rational(moves, &pp, &qq);
-	double rrat = ((double) pp) / ((double) qq);
-	printf("Reconstructed rational = %ld/%ld = %18.16g\n", pp, qq, rrat);
-
-	unsigned long idx = good_index_map(moves);
-	double gold = golden_beta(idx);
-	printf("Bracket index %ld  beta=%20.16g\n", idx, gold);
-
-	unsigned long oradic = beta_to_dyadic(gold);
-	print_dyadic(oradic, 63, "Actual orbit: ", "\n");
-
-	unsigned long oridx = beta_to_index(gold);
-	printf("Reconstructed index from orbit: %ld\n", oridx);
-	if (oridx != idx)
-	{
-		double rgold = golden_beta(oridx);
-		printf("Warning: indexes don't match! diff=%g\n", gold-rgold);
-	}
-
-	unsigned long tno = 2UL * idx + 1UL;
-	moves_to_rational(tno, &pp, &qq);
-	double orat = ((double) pp) / ((double) qq);
-	printf("Orbit rational = %ld/%ld = %18.16g\n", pp, qq, orat);
-
-	int po=0, qo=0;
-	low_guess(orat, &po, &qo);
-	printf("guess its orbit is %d/%d\n", po,qo);
-	printf("\n");
-
 #endif
 
 // #define VERIFY
