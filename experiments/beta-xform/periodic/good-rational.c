@@ -100,10 +100,10 @@ int main(int argc, char* argv[])
 		// Attempt to find a high-quality approximation.
 		int minlen = 16;
 		unsigned long idx = NEG_ONE;
-		for (int len=40; minlen < len; minlen -=3)
+		for (int len=40; minlen < len; len -=3)
 		{
 			unsigned long moves = rational_to_moves(p, q, len);
-			unsigned long idx = good_index_map(moves);
+			idx = good_index_map(moves);
 			if (idx < MAXIDX) break;
 		}
 		if (MAXIDX < idx) continue;
@@ -117,12 +117,12 @@ int main(int argc, char* argv[])
 		// Reduce the rational to lowest terms, given that
 		// the approximant was probably off by a few bits.
 		int po=0, qo=0;
-		low_guess(orat, &po, &qo, minlen);
-
+		low_guess(orat, &po, &qo, minlen-2);
 		if (0 == qo) continue;
 
 		double irat = ((double) p) / ((double) q);
 		printf("%d	%d	%g	%d	%d	%g\n", p, q, irat, po, qo, orat);
+		fflush (stdout);
 	}
 #endif
 }
