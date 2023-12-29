@@ -104,7 +104,14 @@ int main(int argc, char* argv[])
 		{
 			unsigned long moves = rational_to_moves(p, q, len);
 			idx = good_index_map(moves);
-			if (idx < MAXIDX) break;
+
+			// Once more, for the win.
+			if (idx < MAXIDX)
+			{
+				moves = rational_to_moves(p, q, len-3);
+				idx = good_index_map(moves);
+				break;
+			}
 		}
 		if (MAXIDX < idx) continue;
 
