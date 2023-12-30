@@ -28,6 +28,72 @@ void low_guess(double rat, int* p, int* q, int ndigits)
 	}
 }
 
+// This implements the good-rational map, that accepts any rational as
+// input, and maps it to theta-bar, the set of acceptable rationals that
+// have valid self-describing periodic orbits.
+//
+// The implementation is via approximation: the input rational is
+// converted to a bit-string. This bitstring is interpreted as a
+// sequence of moves down the binary tree. The moves are taken, using
+// the leader function for the right-side moves. This is equivalent
+// to passing the input bitstring as a canonical integer to the
+// good-index map. If the good-index map overflows, then *quot=0
+// and this is a conversion failure.
+//
+// Otherwise, good_index_map() returns a very large integer that can
+// be interpreted as a sequence of moves down the trimmed tree. Taking
+// those moves gives us some dyadic rational, with some huge denominator,
+// that approximates the desired output. We now have to reconstruct
+// what the intended limit of the approximant was. I suppose that a
+// principled approach could be used, to take this limit. But we do
+// a quick cheap hack: just look for the nearest rational that has some
+// relatively small denominator. Yuck, but it works well-enough for
+// graphs.
+
+void good_rational_map(int pin, int qin, int* pout, int* qout)
+{
+	// Reduce to lowest terms
+	unsigned long gcf = gcd(pin, qin);
+	pin = pin / gcf;
+	qin = qin / gcf;
+
+	// Attempt to find a high-quality approximation.
+	int minlen = 16;
+	unsigned long idx = NEG_ONE;
+	for (int len=40; minlen < len; len -=3)
+	{
+		unsigned long moves = rational_to_moves(pin, qin, len);
+		idx = good_index_map(moves);
+
+		// Once more, for the win.
+		if (idx < MAXIDX)
+		{
+			moves = rational_to_moves(pin, qin, len-3);
+			idx = good_index_map(moves);
+			break;
+		}
+	}
+
+	// Approximation failure.
+	if (MAXIDX < idx)
+	{
+		*qout = 0;
+		return;
+	}
+
+	// Convert the approximant back to a rational
+	unsigned long tno = 2UL * idx + 1UL;
+	unsigned long pp, qq;
+	moves_to_rational(tno, &pp, &qq);
+	double orat = ((double) pp) / ((double) qq);
+
+	// Reduce the rational to lowest terms, given that
+	// the approximant was probably off by a few bits.
+	// It might be better to actually twiddle the approximant
+	// directly, but this will do, for now.
+	low_guess(orat, pout, qout, minlen-2);
+}
+
 int main(int argc, char* argv[])
 {
 // #define RATIONAL_EXPLORE
@@ -104,42 +170,18 @@ int main(int argc, char* argv[])
 	for (int i=0; i<= npts; i++)
 	{
 		// Input rational
-		unsigned long gcf = gcd(i, npts);
-		int p = i / gcf;
-		int q = npts / gcf;
+		int pi = i;
+		int qi = npts;
 
-		// Attempt to find a high-quality approximation.
-		int minlen = 16;
-		unsigned long idx = NEG_ONE;
-		for (int len=40; minlen < len; len -=3)
-		{
-			unsigned long moves = rational_to_moves(p, q, len);
-			idx = good_index_map(moves);
-
-			// Once more, for the win.
-			if (idx < MAXIDX)
-			{
-				moves = rational_to_moves(p, q, len-3);
-				idx = good_index_map(moves);
-				break;
-			}
-		}
-		if (MAXIDX < idx) continue;
-
-		// Convert the approximant back to a rational
-		unsigned long tno = 2UL * idx + 1UL;
-		unsigned long pp, qq;
-		moves_to_rational(tno, &pp, &qq);
-		double orat = ((double) pp) / ((double) qq);
-
-		// Reduce the rational to lowest terms, given that
-		// the approximant was probably off by a few bits.
+		// Output rational
 		int po=0, qo=0;
-		low_guess(orat, &po, &qo, minlen-2);
+		good_rational_map(pi, qi, &po, &qo);
+
 		if (0 == qo) continue;
 
-		double irat = ((double) p) / ((double) q);
-		printf("%d	%d	%g	%d	%d	%g\n", p, q, irat, po, qo, orat);
+		double irat = ((double) pi) / ((double) qi);
+		double orat = ((double) po) / ((double) qo);
+		printf("%d	%d	%g	%d	%d	%g\n", pi, qi, irat, po, qo, orat);
 		fflush (stdout);
 	}
 #endif
