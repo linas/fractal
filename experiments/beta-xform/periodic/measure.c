@@ -42,15 +42,22 @@ unsigned long comb_sum_order(unsigned long idx)
 	return sum;
 }
 
+// A_\nu from the paper
 double comb_sum_norm(unsigned long idx)
 {
-	int order = bitlen(idx);
 	unsigned long sum = comb_sum_order(idx);
-	long mn = necklace(order+1);
 
-	double renorm = ((double) sum) / ((double) mn);
-	return renorm;
+	int rank = bitlen(idx) + 1;
+	double moreau_nu = (double) necklace(rank);
+
+	double renorm = ((double) sum) / moreau_nu;
+
+	double scale = moreau_nu / ((double) (1UL << rank));
+	double rescale = pow (renorm, scale);
+
+	return rescale;
 }
+
 
 int main(int argc, char* argv[])
 {
