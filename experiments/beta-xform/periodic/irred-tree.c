@@ -143,6 +143,8 @@ int main(int argc, char* argv[])
 	int order = atoi(argv[1]);
 
 	printf("#\n# Bracket tree. Order = %d\n#\n", order);
+	printf("# Columns:\n");
+	printf("# i  p  q  canon-n good-idx p/q beta\n#\n");
 
 	int overflo = 0;
 	int maxdy = 1 << order;
@@ -150,25 +152,29 @@ int main(int argc, char* argv[])
 	{
 		double x = ((double) i) / (double) maxdy;
 
-		// Get the dyad
-		int dlen = order;
-		int bits = i;
-		while (0 == bits %2)
+		// Reduce fraction to lowest order. This will have
+		// the form p / 2^n where p is odd.
+		int n = order;
+		int p = i;
+		while (0 == p %2)
 		{
-			bits >>= 1;
-			dlen --;
+			p >>= 1;
+			n --;
 		}
-		int shbit = bits;
-		shbit >>= 1;
-		shbit |= 1UL << dlen;
-		unsigned long idx = good_index_map(shbit);
+
+		// Convert dyadic to canonical tree numbering.
+		// This is 1 at the root, 2,3 in first row, 4,5,6,7 in next row, etc.
+		// This is m + 2^(n-1)  where p = 2m+1
+		int mcanon = (p >> 1) + (1UL << (n-1));
+
+		unsigned long idx = good_index_map(mcanon);
 		if (MAXIDX < idx) { overflo++; continue; }
 
 		double gold = golden_beta(idx);
 
-		printf("%d	%d	%d	%ld	%g	%g", i, bits, 1<<dlen, idx, x, gold);
+		printf("%d	%d	%d	%d	%ld	%g	%g", i, p, 1<<n, mcanon, idx, x, gold);
 
-		print_moves(bits, " # bits=(", ")\n");
+		print_moves(mcanon, " # bits=(", ")\n");
 	}
 
 	printf("#\n# Num overflows = %d\n#\n", overflo);
@@ -194,7 +200,7 @@ int main(int argc, char* argv[])
 	{
 		double x = ((double) i) / (double) maxdy;
 
-		// Get the dyad
+		// Reduce fraction to lowest order.
 		int dlen = order;
 		int bits = i;
 		while (0 == bits %2)
