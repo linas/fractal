@@ -9718,6 +9718,243 @@ It should be clear that the set
  will be given in a later section on eventually-periodic orbits.
 \end_layout
 
+\begin_layout Subsubsection
+Self-describing orbits
+\end_layout
+
+\begin_layout Standard
+What is the meaning of the finite and infinite combs? The finite comb is
+ a mapping of of the valid-index set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ to the dyadics.
+ The infinite comb is the clusre of the finite comb in the reals.
+\end_layout
+
+\begin_layout Standard
+A polynomial index 
+\begin_inset Formula $n\in\Psi$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $n$
+\end_inset
+
+ encodes a self-describing finite orbit.
+ That is, 
+\begin_inset Formula $n\in\Psi$
+\end_inset
+
+ if and only if the real root 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ of 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+ iterates under the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-map such that the iterate reproduces the bit-sequence of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $n\in\Psi$
+\end_inset
+
+ if and only if the bits 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ of the bitstring 
+\begin_inset Formula $2n+1=b_{0}b_{1}b_{2}\cdots b_{\nu}$
+\end_inset
+
+ are given by the (finite) orbit as 
+\begin_inset Formula 
+\[
+b_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r_{n}}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r_{n}}{2}\right)
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $n$
+\end_inset
+
+ does not have this property, then 
+\begin_inset Formula $n\notin\Psi$
+\end_inset
+
+.
+ At each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the elements of 
+\begin_inset Formula $\Psi_{v}$
+\end_inset
+
+ correspond to finite orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ In the limit of 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+, one gets self-describing orbits of unbounded (infinite) length.
+\end_layout
+
+\begin_layout Standard
+By construction, if 
+\begin_inset Formula $n\in\Psi_{\nu}$
+\end_inset
+
+ then 
+\begin_inset Formula $Ln\in\Psi_{\nu+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda n\in\Psi_{\nu+1+h}$
+\end_inset
+
+.
+ That is, if 
+\begin_inset Formula $n$
+\end_inset
+
+ is a self-describing orbit, then it appears as the prefix of longer self-descri
+bing orbits.
+\end_layout
+
+\begin_layout Standard
+Polynomials of infinite order are holomorphic functions.
+ Given an infinite bitsequence 
+\begin_inset Formula $\left\{ b\right\} =b_{0}b_{1}\cdots$
+\end_inset
+
+, define a holomorphic function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+q^{\left\{ b\right\} }\left(\zeta\right)=1-\sum_{j=0}^{\infty}b_{j}\zeta^{j+1}
+\]
+
+\end_inset
+
+If the bit-sequence is finite, in that all 
+\begin_inset Formula $b_{j}=0$
+\end_inset
+
+ when 
+\begin_inset Formula $j>k$
+\end_inset
+
+, then this is related to the polynomials as 
+\begin_inset Formula 
+\[
+\zeta^{k+1}p_{n}\left(\frac{1}{\zeta}\right)=1-b_{0}\zeta-b_{1}\zeta^{2}-\cdots-b_{k}\zeta^{k+1}
+\]
+
+\end_inset
+
+Given any arbitrary sequence 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+, the holomorphic function 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+ will have a single, unique real, positive root.
+ To make contact with the polynomials, write this as the reciprocal, so
+ that the root 
+\begin_inset Formula $r$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(1/r\right)=0$
+\end_inset
+
+.
+ This root will have some orbit, given by
+\begin_inset Formula 
+\[
+a_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r}{2}\right)
+\]
+
+\end_inset
+
+Such an orbit is self-describing if and only if 
+\begin_inset Formula $\left\{ a\right\} =\left\{ b\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The claim being pursued here is that the infinite comb contains all self-describ
+ing sequences, and conversely, every element of the comb corresponds to
+ a self-describing bit-sequence.
+ That is, if
+\begin_inset Formula 
+\[
+x=\sum_{j=0}^{\infty}\frac{b_{j}}{2^{j}}\in\overline{\theta}
+\]
+
+\end_inset
+
+then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+x=2\left(1-q^{\left\{ b\right\} }\left(\frac{1}{2}\right)\right)
+\]
+
+\end_inset
+
+Every real number 
+\begin_inset Formula $x\in\overline{\theta}$
+\end_inset
+
+ in the comb corresponds to such a self-describing orbit.
+ A proof of these claims will be given in a later section, after the development
+ of some formal definitions.
+ 
+\end_layout
+
+\begin_layout Standard
+In the meanwhile, it can be noted that every rational number corresponds
+ to a bitsequence that is ultimately periodic.
+ After an initial unstable finite sequence, the bitstring settles down to
+ a cyclic orbit.
+ One task ahead is to examine the set 
+\begin_inset Formula $\mathbb{Q}\cap\overline{\theta}$
+\end_inset
+
+: this is the set of self-describing eventually-periodic infinite-length
+ orbits.
+ It turns out these can be readily described as root of a finite polynomial.
+ The holomorphic function 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+ to be factored into two finite polynomials, one describing the initial
+ aperiodic segment, and a second describing the cyclic segment.
+ Such orbits are examined in a later section.
+\end_layout
+
 \begin_layout Subsection
 Formal definitions
 \end_layout
@@ -10316,203 +10553,6 @@ height "1pt"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsubsection
-The comb as the set of self-describing orbits
-\end_layout
-
-\begin_layout Standard
-What is the meaning of the (infinite) comb? To understand this, recall the
- definition of 
-\begin_inset Formula $\Psi$
-\end_inset
-
-.
- One has that 
-\begin_inset Formula $n\in\Psi$
-\end_inset
-
- if and only if 
-\begin_inset Formula $n$
-\end_inset
-
- is a self-describing finite orbit.
- That is, 
-\begin_inset Formula $n\in\Psi$
-\end_inset
-
- if and only if the real root 
-\begin_inset Formula $r_{n}$
-\end_inset
-
- of 
-\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
-\end_inset
-
- iterates under the 
-\begin_inset Formula $\beta$
-\end_inset
-
--map such that the iterate reproduces the bit-sequence of 
-\begin_inset Formula $n$
-\end_inset
-
-.
- That is, 
-\begin_inset Formula $n\in\Psi$
-\end_inset
-
- if and only if the bits 
-\begin_inset Formula $b_{i}$
-\end_inset
-
- of the bitstring 
-\begin_inset Formula $2n+1=b_{0}b_{1}b_{2}\cdots b_{\nu}$
-\end_inset
-
- are given by the (finite) orbit as 
-\begin_inset Formula 
-\[
-b_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r_{n}}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r_{n}}{2}\right)
-\]
-
-\end_inset
-
-If 
-\begin_inset Formula $n$
-\end_inset
-
- does not have this property, then 
-\begin_inset Formula $n\notin\Psi$
-\end_inset
-
-.
- At each rank 
-\begin_inset Formula $\nu$
-\end_inset
-
-, the elements of 
-\begin_inset Formula $\Psi_{v}$
-\end_inset
-
- correspond to finite orbits of length 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- In the limit of 
-\begin_inset Formula $\nu\to\infty$
-\end_inset
-
-, one gets self-describing orbits of unbounded (infinite) length.
-\end_layout
-
-\begin_layout Standard
-By construction, if 
-\begin_inset Formula $n\in\Psi_{\nu}$
-\end_inset
-
- then 
-\begin_inset Formula $Ln\in\Psi_{\nu+1}$
-\end_inset
-
- and 
-\begin_inset Formula $\Lambda n\in\Psi_{\nu+1+h}$
-\end_inset
-
-.
- That is, if 
-\begin_inset Formula $n$
-\end_inset
-
- is a self-describing orbit, then it appears as the prefix of longer self-descri
-bing orbits.
-\end_layout
-
-\begin_layout Standard
-Polynomials of infinite order are holomorphic functions.
- Given an infinite bitsequence 
-\begin_inset Formula $\left\{ b\right\} =b_{0}b_{1}\cdots$
-\end_inset
-
-, define a holomorphic function
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-q^{\left\{ b\right\} }\left(\zeta\right)=1-\sum_{j=0}^{\infty}b_{j}\zeta^{j+1}
-\]
-
-\end_inset
-
-If the bit-sequence is finite, in that all 
-\begin_inset Formula $b_{j}=0$
-\end_inset
-
- when 
-\begin_inset Formula $j>k$
-\end_inset
-
-, then this is related to the polynomials as 
-\begin_inset Formula 
-\[
-\zeta^{k+1}p_{n}\left(\frac{1}{\zeta}\right)=1-b_{0}\zeta-b_{1}\zeta^{2}-\cdots-b_{k}\zeta^{k+1}
-\]
-
-\end_inset
-
-The single, unique real, positive root of 
-\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
-\end_inset
-
- is then a self-describing orbit.
- That is, given a root 
-\begin_inset Formula $r$
-\end_inset
-
- satisfying 
-\begin_inset Formula $q^{\left\{ b\right\} }\left(1/r\right)=0$
-\end_inset
-
-, one has that 
-\begin_inset Formula 
-\[
-b_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r}{2}\right)
-\]
-
-\end_inset
-
-Given such a self-describing finite or infinite sequence 
-\begin_inset Formula $\left\{ b\right\} =b_{0}b_{1}\cdots$
-\end_inset
-
-, the corresponding real number is in the comb:
-\begin_inset Formula 
-\[
-x=\sum_{j=0}^{\infty}\frac{b_{j}}{2^{j}}=2\left(1-q^{\left\{ b\right\} }\left(\frac{1}{2}\right)\right)\in\theta
-\]
-
-\end_inset
-
-Every real number 
-\begin_inset Formula $x\in\overline{\theta}$
-\end_inset
-
- in the comb corresponds to such a self-describing orbit.
- This includes orbits that are eventually-periodic.
- These are orbits that being with initial excursions, but then settle down
- to a repeating, periodic sequence.
- Such orbits correspond to the binary expansions of rationals: these have
- ultimately-periodic bit-sequences.
- The periodic part allows 
-\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
-\end_inset
-
- to be factored into two finite polynomials, on describing the initial segment,
- and a second describing the periodic segment.
- This is examined in a later section.
 \end_layout
 
 \begin_layout Subsubsection
