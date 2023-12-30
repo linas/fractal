@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 
 	printf("#\n# Bracket tree. Order = %d\n#\n", order);
 	printf("# Columns:\n");
-	printf("# i  p  q  canon-n good-idx p/q beta\n#\n");
+	printf("# i  p  q  canon-n good-idx gp  gq  p/q  gp/gq  beta\n#\n");
 
 	int overflo = 0;
 	int maxdy = 1 << order;
@@ -161,20 +161,31 @@ int main(int argc, char* argv[])
 			p >>= 1;
 			n --;
 		}
+		int q = 1UL << n;
 
 		// Convert dyadic to canonical tree numbering.
 		// This is 1 at the root, 2,3 in first row, 4,5,6,7 in next row, etc.
 		// This is m + 2^(n-1)  where p = 2m+1
-		int mcanon = (p >> 1) + (1UL << (n-1));
+		int mcanon = (p + q) >> 1;
 
 		unsigned long idx = good_index_map(mcanon);
 		if (MAXIDX < idx) { overflo++; continue; }
 
+		// Convert index back to dyadic of the form numo/deno
+		// with numo odd, and deno a power of two.
+		// Should exactly equal p/q above, whenever idx==mcanon
+		int len = bitlen(idx);
+		long deno = 1UL << len;
+		long em = idx - (deno>>1);
+		long numo = 2*em + 1UL;
+		double tbar = ((double) numo) / ((double) deno);
+
 		double gold = golden_beta(idx);
 
-		printf("%d	%d	%d	%d	%ld	%g	%g", i, p, 1<<n, mcanon, idx, x, gold);
+		printf("%d	%d	%d	%d	%ld	%ld	%ld %g	%g	%g",
+			i, p, q, mcanon, idx, numo, deno, x, tbar, gold);
 
-		print_moves(mcanon, " # bits=(", ")\n");
+		print_moves(mcanon, " # moves=(", ")\n");
 	}
 
 	printf("#\n# Num overflows = %d\n#\n", overflo);
