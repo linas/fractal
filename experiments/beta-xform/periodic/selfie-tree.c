@@ -171,6 +171,14 @@ bool is_power_of_two(unsigned long q)
 // For example, 1/4 len=2 -> 10 and 3/4 = 11
 // and  3/8 len=3 -> 101
 //
+// A note about dyadic ratinoals and length. If q is a power of two,
+// then the iteration will reach zero, and L moves will be appended
+// until `len` is reached. This may or may not be what you want. If
+// it is what you want, then fine. Otherwise, "don't do that". Specify
+// a length that is appropriate. The following will do:
+//
+//    if (is_power_of_two(q) len = bitlen(q) - 2;
+//
 // This is the inverse of move_to_rational(), above.
 unsigned long rational_to_moves(unsigned long p, unsigned long q, int len)
 {
@@ -178,8 +186,6 @@ unsigned long rational_to_moves(unsigned long p, unsigned long q, int len)
 	p /= gcf;
 	q /= gcf;
 
-	if (is_power_of_two(q))
-		len = bitlen(q) - 2;
 	if (0 == len) return 1UL;
 	if (-1 == len) return 0UL;
 

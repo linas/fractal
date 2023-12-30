@@ -45,6 +45,13 @@ int main(int argc, char* argv[])
 	double rat = ((double) p) / ((double) q);
 	printf("Input rational = %d/%d len=%d as float=%18.16g\n", p, q, len, rat);
 
+	// Truncate the dyadics.
+	unsigned long gcf = gcd(p, q);
+	p /= gcf;
+	q /= gcf;
+	if (is_power_of_two(q))
+		len = bitlen(q) - 2;
+
 	long moves = rational_to_moves(p, q, len);
 	print_moves(moves, "Tree moves=(", ")\n");
 
@@ -69,6 +76,10 @@ int main(int argc, char* argv[])
 	}
 
 	unsigned long tno = 2UL * idx + 1UL;
+
+	// The truncated expansion for dyadics hurts. So don't do that.
+	if (is_power_of_two(q)) tno = idx;
+
 	moves_to_rational(tno, &pp, &qq);
 	double orat = ((double) pp) / ((double) qq);
 	printf("Orbit rational = %ld/%ld = %18.16g\n", pp, qq, orat);
