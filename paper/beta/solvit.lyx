@@ -16426,25 +16426,21 @@ It should be clear that the set
 \end_layout
 
 \begin_layout Subsubsection
-The good map
+Self-describing orbits
 \end_layout
 
 \begin_layout Standard
-This figure
-\end_layout
-
-\begin_layout Subsubsection
-The comb as the set of self-describing orbits
-\end_layout
-
-\begin_layout Standard
-What is the meaning of the (infinite) comb? To understand this, recall the
- definition of 
+What is the meaning of the finite and infinite combs? The finite comb is
+ a mapping of of the valid-index set 
 \begin_inset Formula $\Psi$
 \end_inset
 
-.
- One has that 
+ to the dyadics.
+ The infinite comb is the clusre of the finite comb in the reals.
+\end_layout
+
+\begin_layout Standard
+A polynomial index 
 \begin_inset Formula $n\in\Psi$
 \end_inset
 
@@ -16452,7 +16448,7 @@ What is the meaning of the (infinite) comb? To understand this, recall the
 \begin_inset Formula $n$
 \end_inset
 
- is a self-describing finite orbit.
+ encodes a self-describing finite orbit.
  That is, 
 \begin_inset Formula $n\in\Psi$
 \end_inset
@@ -16578,35 +16574,59 @@ If the bit-sequence is finite, in that all
 
 \end_inset
 
-The single, unique real, positive root of 
+Given any arbitrary sequence 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+, the holomorphic function 
 \begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
 \end_inset
 
- is then a self-describing orbit.
- That is, given a root 
+ will have a single, unique real, positive root.
+ To make contact with the polynomials, write this as the reciprocal, so
+ that the root 
 \begin_inset Formula $r$
 \end_inset
 
- satisfying 
+ satisfies 
 \begin_inset Formula $q^{\left\{ b\right\} }\left(1/r\right)=0$
 \end_inset
 
-, one has that 
+.
+ This root will have some orbit, given by
 \begin_inset Formula 
 \[
-b_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r}{2}\right)
+a_{i}=\Theta\left(T_{\beta}^{i}\left(\frac{r}{2}\right)-\frac{1}{2}\right)=k_{i}\left(\frac{r}{2}\right)
 \]
 
 \end_inset
 
-Given such a self-describing finite or infinite sequence 
-\begin_inset Formula $\left\{ b\right\} =b_{0}b_{1}\cdots$
+Such an orbit is self-describing if and only if 
+\begin_inset Formula $\left\{ a\right\} =\left\{ b\right\} $
 \end_inset
 
-, the corresponding real number is in the comb:
+.
+\end_layout
+
+\begin_layout Standard
+The claim being pursued here is that the infinite comb contains all self-describ
+ing sequences, and conversely, every element of the comb corresponds to
+ a self-describing bit-sequence.
+ That is, if
 \begin_inset Formula 
 \[
-x=\sum_{j=0}^{\infty}\frac{b_{j}}{2^{j}}=2\left(1-q^{\left\{ b\right\} }\left(\frac{1}{2}\right)\right)\in\theta
+x=\sum_{j=0}^{\infty}\frac{b_{j}}{2^{j}}\in\overline{\theta}
+\]
+
+\end_inset
+
+then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+x=2\left(1-q^{\left\{ b\right\} }\left(\frac{1}{2}\right)\right)
 \]
 
 \end_inset
@@ -16616,18 +16636,30 @@ Every real number
 \end_inset
 
  in the comb corresponds to such a self-describing orbit.
- This includes orbits that are eventually-periodic.
- These are orbits that being with initial excursions, but then settle down
- to a repeating, periodic sequence.
- Such orbits correspond to the binary expansions of rationals: these have
- ultimately-periodic bit-sequences.
- The periodic part allows 
+ A proof of these claims will be given in a later section, after the development
+ of some formal definitions.
+ 
+\end_layout
+
+\begin_layout Standard
+In the meanwhile, it can be noted that every rational number corresponds
+ to a bitsequence that is ultimately periodic.
+ After an initial unstable finite sequence, the bitstring settles down to
+ a cyclic orbit.
+ One task ahead is to examine the set 
+\begin_inset Formula $\mathbb{Q}\cap\overline{\theta}$
+\end_inset
+
+: this is the set of self-describing eventually-periodic infinite-length
+ orbits.
+ It turns out these can be readily described as root of a finite polynomial.
+ The holomorphic function 
 \begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
 \end_inset
 
- to be factored into two finite polynomials, on describing the initial segment,
- and a second describing the periodic segment.
- This is examined in a later section.
+ to be factored into two finite polynomials, one describing the initial
+ aperiodic segment, and a second describing the cyclic segment.
+ Such orbits are examined in a later section.
 \end_layout
 
 \begin_layout Subsubsection
