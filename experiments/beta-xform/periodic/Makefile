@@ -35,14 +35,14 @@ irred-midpoint.o: irred-midpoint.c irred-gold.c
 irred-allowed.o: irred-allowed.c irred-gold.c
 irred-tacky.o: irred-tacky.c irred-gold.c
 irred-height.o: irred-height.c irred-gold.c
-irred-tree.o: irred-tree.c selfie.c selfie-rational.c selfie-tree.c
+irred-tree.o: irred-tree.c selfie.c selfie-util.c selfie-tree.c
 irred-seek.o: irred-seek.c irred-gold.c
-eventually.o: eventually.c selfie.c selfie-rational.c selfie-tree.c
-bracket-finite.o: bracket-finite.c selfie.c selfie-rational.c selfie-tree.c
+eventually.o: eventually.c selfie.c selfie-rational.c selfie-tree.c selfie-util.c
+bracket-finite.o: bracket-finite.c selfie.c selfie-rational.c selfie-tree.c selfie-util.c
 comb-limit.o: comb-limit.c
 slice.o: slice.c
 bracket-steps.o: bracket-steps.c selfie.c
-good-rational.o: good-rational.c selfie.c selfie-rational.c selfie-tree.c
+good-rational.o: good-rational.c selfie.c selfie-rational.c selfie-tree.c selfie-util.c
 
 zero: zero.o $(BRAT)
 

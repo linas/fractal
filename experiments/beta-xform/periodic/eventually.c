@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include "selfie.c"
+#include "selfie-util.c"
 #include "selfie-rational.c"
 #include "selfie-tree.c"
 

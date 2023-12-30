@@ -7,7 +7,7 @@
  */
 
 #include "selfie.c"
-#include "selfie-rational.c"
+#include "selfie-util.c"
 #include "selfie-tree.c"
 
 // Reverse the order of the bits in the bitseq
@@ -152,16 +152,15 @@ int main(int argc, char* argv[])
 	{
 		double x = ((double) i) / (double) maxdy;
 
-		// Reduce fraction to lowest order. This will have
-		// the form p / 2^n where p is odd.
-		int n = order;
 		int p = i;
+		int q = 1UL << order;
+
+		// Reduce to lowest order
 		while (0 == p %2)
 		{
 			p >>= 1;
-			n --;
+			q >>= 1;
 		}
-		int q = 1UL << n;
 
 		// Convert dyadic to canonical tree numbering.
 		// This is 1 at the root, 2,3 in first row, 4,5,6,7 in next row, etc.
@@ -174,12 +173,10 @@ int main(int argc, char* argv[])
 		// Convert index back to dyadic of the form numo/deno
 		// with numo odd, and deno a power of two.
 		// Should exactly equal p/q above, whenever idx==mcanon
-		int len = bitlen(idx);
-		long deno = 1UL << len;
-		long em = idx - (deno>>1);
-		long numo = 2*em + 1UL;
-		double tbar = ((double) numo) / ((double) deno);
+		unsigned long numo=0, deno=0;
+		tree_idx_to_dyafrac(idx, &numo, &deno);
 
+		double tbar = ((double) numo) / ((double) deno);
 		double gold = golden_beta(idx);
 
 		printf("%d	%d	%d	%d	%ld	%ld	%ld %g	%g	%g",

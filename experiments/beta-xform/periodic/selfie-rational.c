@@ -39,20 +39,6 @@ unsigned long rational_to_dyadic(unsigned long p, unsigned long q, int len)
 }
 
 /* ================================================================= */
-
-/* Return greatest common divisor of p and q */
-unsigned long gcd(unsigned long p, unsigned long q)
-{
-	/* Euclid's algorithm for obtaining the gcd */
-	while (0 != q)
-	{
-		unsigned long t = p % q;
-		p = q;
-		q = t;
-	}
-	return p;
-}
-
 /*
  * Given a rational p/q, return the prefix-integer, the cycle integer,
  * and the cycle length for the infinite ultimately-periodic dyadic
