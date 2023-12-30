@@ -10,23 +10,6 @@
 #include "selfie-rational.c"
 #include "selfie-tree.c"
 
-// Given a position in a binary tree, return the corresponding beta
-// index. This is the "good index" function, mapping the full binary
-// tree to the trimmed tree of good indexes.
-// Obsolete. Use good_index_map() in ndew code.
-long moves_to_idx(long bitseq, int len)
-{
-	if (0 == bitseq%2)
-	{
-		printf("Error: expecting bitseq to be one-terminated (odd number)\n");
-		return -2;
-	}
-	// printf("Enter frac = %ld / %d\n", bitseq, 1<<len);
-	bitseq >>= 1;
-	bitseq |= 1UL << len;
-	return good_index_map(bitseq);
-}
-
 // Reverse the order of the bits in the bitseq
 long bitseq_reverse(long bits, int len)
 {
@@ -90,7 +73,7 @@ void low_guess(double rat, int* p, int* q)
 
 int main(int argc, char* argv[])
 {
-#define SPOT_CHECK
+// #define SPOT_CHECK
 #ifdef SPOT_CHECK
 	if (argc != 2)
 	{
@@ -126,7 +109,6 @@ int main(int argc, char* argv[])
 	}
 	int maxord = atoi(argv[1]);
 	long nmax = 1UL << maxord;
-	malloc_gold(nmax);
 
 	printf("Verify correctness to max order = %d\n", maxord);
 	for (long idx=1; idx < nmax; idx++)
@@ -137,7 +119,9 @@ int main(int argc, char* argv[])
 		long bits = idx_to_moves(idx, &len);
 		// print_moves(bits, " # bits=(", ")\n");
 
-		long ridx = moves_to_idx(bits, len);
+		bits >>= 1;
+		bits |= 1UL << len;
+		long ridx = good_index_map(bits);
 		// printf("reconstruct %ld\n", ridx);
 
 		if (ridx != idx)
@@ -148,22 +132,19 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define PRINT_DYADIC_TO_BETA_MAP
+#define PRINT_DYADIC_TO_BETA_MAP
 #ifdef PRINT_DYADIC_TO_BETA_MAP
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s <max-order> <dyad-base>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <max-order>\n", argv[0]);
 		exit(1);
 	}
 	int maxord = atoi(argv[1]);
-	int dyad = atoi(argv[2]);
-
-	long nmax = 1UL << maxord;
 
 	printf("#\n# Bracket tree. max order = %d\n#\n", maxord);
 
 	int overflo = 0;
-	int maxdy = 1 << dyad;
+	int maxdy = 1 << maxord;
 	for (int i=1; i<maxdy; i++)
 	{
 		double x = ((double) i) / (double) maxdy;
@@ -176,22 +157,27 @@ int main(int argc, char* argv[])
 			bits >>= 1;
 			dlen --;
 		}
-		long idx = moves_to_idx(bits, dlen);
+		int shbit = bits;
+		shbit >>= 1;
+		shbit |= 1UL << dlen;
+		long idx = good_index_map(shbit);
 		if (idx < 0) { overflo++; continue; }
-		if (nmax <= idx) { overflo++; continue; }
 
 		double gold = golden_beta(idx);
 
 		// And now, a shifted version
-		int shbit = bits;
-		long loidx = moves_to_idx(shbit, dlen+1);
+		shbit = bits;
+		shbit >>= 1;
+		shbit |= 1UL << (dlen+1);
+		long loidx = good_index_map(bits);
 		if (loidx < 0) { overflo++; continue; }
-		if (nmax <= loidx) { overflo++; continue; }
-		double logold = find_gold(loidx);
+		double logold = golden_beta(loidx);
 
 		shbit = bits | 1<<dlen;
-		long hiidx = moves_to_idx(shbit, dlen+1);
-		double higold = find_gold(hiidx);
+		shbit >>= 1;
+		shbit |= 1UL << (dlen+1);
+		long hiidx = good_index_map(bits);
+		double higold = golden_beta(hiidx);
 
 		double cf = bitseq_to_cf(bits, dlen);
 		printf("%d	%d	%d	%ld	%g	%g	%g", i, bits, 1<<dlen, idx, x, gold, cf);
