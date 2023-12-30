@@ -32333,7 +32333,8 @@ Let
 \begin_inset Formula $2^{\omega}$
 \end_inset
 
-; but there is more than one isomorphism, so care is taken.
+; but this mechanism is not currently needed.
+ A more careful definition of the finite tree is needed.
  Thus, let 
 \begin_inset Formula $\mathbb{B}$
 \end_inset
@@ -32344,7 +32345,7 @@ Let
 
 .
  Let 
-\begin_inset Formula $\zeta:\mathbb{N}\to\mathbb{B}$
+\begin_inset Formula $\eta:\mathbb{N}\to\mathbb{B}$
 \end_inset
 
  denote the canonical labelling of the binary tree by the positive integers,
@@ -32373,13 +32374,13 @@ Let
 \begin_inset Formula $L,R$
 \end_inset
 
- provide the cononical walks on the tree, as a commuting diagram, so that
+ provide the canonical walks on the tree, as a commuting diagram, so that
  
-\begin_inset Formula $L\circ\zeta=\zeta\circ L$
+\begin_inset Formula $L\circ\eta=\eta\circ L$
 \end_inset
 
  and likewise 
-\begin_inset Formula $R\circ\zeta=\zeta\circ R$
+\begin_inset Formula $R\circ\eta=\eta\circ R$
 \end_inset
 
 .
@@ -32494,6 +32495,41 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+The trimmed tree 
+\begin_inset Formula $\mathfrak{B}\subset\mathbb{B}$
+\end_inset
+
+ is the image of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ under the mapping 
+\begin_inset Formula $\eta$
+\end_inset
+
+, so that 
+\begin_inset Formula $\mathfrak{B}=\eta\Psi$
+\end_inset
+
+.
+ This consists of those nodes and edges in the finite binary tree that are
+ labeled by integers from the validity set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ The good-index function 
+\begin_inset Formula $G$
+\end_inset
+
+ places the trimmed tree and the finite tree in a bijection, so that 
+\begin_inset Formula $\mathfrak{B}=\eta G\eta^{-1}\mathbb{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The root map 
 \begin_inset Formula $r:\Psi\to\left[1,2\right]$
 \end_inset
@@ -32515,7 +32551,7 @@ noprefix "false"
 \end_inset
 
 , can now be written more precisely as the function 
-\begin_inset Formula $\mathsf{G}=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
+\begin_inset Formula $\varrho=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
 \end_inset
 
 .
@@ -32524,7 +32560,143 @@ noprefix "false"
 \end_inset
 
  values that have finite orbits.
- The goal of setting up this machinery is to explore the extension of 
+\end_layout
+
+\begin_layout Standard
+The notation for the finite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is abused in several ways.
+ In eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theta mask"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ it is used to indicate whether a given polynomial root has a self-describing
+ orbit.
+ It is then defined as the indicator function for set membership 
+\begin_inset Formula $\theta=\mathds{1}_{\Psi}:\Psi\to\left\{ T,F\right\} $
+\end_inset
+
+ and finally as the finite comb 
+\begin_inset Formula $\theta\subset\mathbb{D}$
+\end_inset
+
+.
+ Formally, the finite comb can now be written as 
+\begin_inset Formula $\theta=\delta^{-1}\Psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ can be commuted with the dyadic bijection to obtain the 
+\begin_inset Quotes eld
+\end_inset
+
+good dyadic map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\mathsf{G}=\delta\circ G\circ\delta^{-1}:\mathbb{D}\to\theta$
+\end_inset
+
+.
+ Given any dyadic fraction, this map returns another dyadic that lies within
+ the finite comb.
+ As all the other maps discussed so far, it is a bijection.
+ It is depicted in figure xxx.
+\end_layout
+
+\begin_layout Standard
+The infinite comb 
+\begin_inset Formula $\overline{\theta}$
+\end_inset
+
+ was the closure of the finite comb, so that 
+\begin_inset Formula $\theta\subset\overline{\theta}$
+\end_inset
+
+.
+ The closure, defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, is constructed as the infinite intersection of open sets.
+ Corresponding to this is the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+\end_inset
+
+ of infinitely long paths in the trimmed tree.
+ It is taken as the limit of the finite but unbounded-length paths in 
+\begin_inset Formula $\mathfrak{B}$
+\end_inset
+
+.
+ The dyadics can be closed in several ways; one way is to the rationals
+ 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+, and then further to the reals 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ The rationals correspond to infinite length orbits that are ultimately
+ periodic; these will be examined in a later section.
+ 
+\end_layout
+
+\begin_layout Standard
+For this case, it will be interesting to construct the closure 
+\begin_inset Formula $\mathsf{G}:\mathbb{Q}\to\overline{\theta}$
+\end_inset
+
+ or even 
+\begin_inset Formula $\mathsf{G}:\mathbb{R}\to\overline{\theta}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The bracket map 
+\end_layout
+
+\begin_layout Standard
+This will require some theoretical machinery and lemmas that will be defered
+ to a later section.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+The goal of setting up this machinery is to explore the extension of 
 \begin_inset Formula $\mathsf{G}$
 \end_inset
 
@@ -32547,38 +32719,6 @@ noprefix "false"
 \begin_layout Standard
 The gymnastics for this seems to require passing through the trimmed tree
  and the comb.
- The trimmed tree 
-\begin_inset Formula $\mathfrak{B}\subset\mathbb{B}$
-\end_inset
-
- is the image of 
-\begin_inset Formula $\Psi$
-\end_inset
-
- under the mapping 
-\begin_inset Formula $\zeta$
-\end_inset
-
-, so that 
-\begin_inset Formula $\mathfrak{B}=\zeta\Psi$
-\end_inset
-
-.
- This consists of those nodes and edges in the finite binary tree that are
- labeled by integers from the validity set 
-\begin_inset Formula $\Psi$
-\end_inset
-
-.
- The good-index function 
-\begin_inset Formula $G$
-\end_inset
-
- places the trimmed tree and the finite tree in a bijection, so that 
-\begin_inset Formula $\mathfrak{B}=\zeta G\zeta^{-1}\mathbb{B}$
-\end_inset
-
-.
  The ultimately-periodic orbits live inside the closure 
 \begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
 \end_inset
@@ -32616,65 +32756,6 @@ The gymnastics for this seems to require passing through the trimmed tree
 
 .
  To exhibit these, a closer look at the comb is required.
-\end_layout
-
-\begin_layout Standard
-The notation for the finite comb 
-\begin_inset Formula $\theta$
-\end_inset
-
- was abused in several ways.
- In eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:theta mask"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- it is used to indicate whether a given polynomial root has a self-describing
- orbit.
- It is then defined as the indicator function for set membership 
-\begin_inset Formula $\theta=\mathds{1}_{\Psi}:\Psi\to\left\{ T,F\right\} $
-\end_inset
-
- and finally as the finite comb 
-\begin_inset Formula $\theta\subset\mathbb{D}$
-\end_inset
-
-.
- The finite comb can be written more formally as 
-\begin_inset Formula $\theta=\delta^{-1}\Psi$
-\end_inset
-
-.
- The infinite comb 
-\begin_inset Formula $\overline{\theta}$
-\end_inset
-
- was the closure of the finite comb.
- The closure, defined in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:infinite comb"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, was constructed as the infinite intersection of open sets.
- The claim is that the closure 
-\begin_inset Formula $\overline{\mathfrak{B}}$
-\end_inset
-
- can be understood as the pullback of 
-\begin_inset Formula $\overline{\theta}$
-\end_inset
-
- to the infinite tree.
 \end_layout
 
 \begin_layout Standard
@@ -32746,7 +32827,7 @@ ng cyclic orbits, all of which are distinct elements in
 
 \begin_layout Standard
 The good-index function provided a bijection 
-\begin_inset Formula $\mathfrak{B}=\zeta G\zeta^{-1}\mathbb{B}$
+\begin_inset Formula $\mathfrak{B}=\eta G\eta^{-1}\mathbb{B}$
 \end_inset
 
  between the trimmed and untrimed finite, unbounded trees.
@@ -32766,7 +32847,7 @@ The good-index function provided a bijection
 \begin_layout Standard
 Every set in the base of the topology is represented by a finite string.
  The function 
-\begin_inset Formula $\zeta^{-1}$
+\begin_inset Formula $\eta^{-1}$
 \end_inset
 
  maps this to an integer.
@@ -32775,12 +32856,12 @@ Every set in the base of the topology is represented by a finite string.
 \end_inset
 
  is defined on all integers; it returns an integer, which is mapped by 
-\begin_inset Formula $\zeta$
+\begin_inset Formula $\eta$
 \end_inset
 
  to a finite string and thus an open set.
  To conclude, 
-\begin_inset Formula $\zeta G\zeta^{-1}$
+\begin_inset Formula $\eta G\eta^{-1}$
 \end_inset
 
  maps open sets to open sets, and it is defined on 
@@ -32789,7 +32870,7 @@ every
 \emph default
  open set in the topology.
  Thus, it is safe to write 
-\begin_inset Formula $\overline{G}=\zeta G\zeta^{-1}$
+\begin_inset Formula $\overline{G}=\eta G\eta^{-1}$
 \end_inset
 
 , as it is defined everywhere; all of 
@@ -32832,8 +32913,7 @@ every
 \end_layout
 
 \begin_layout Standard
-xxx TODO: rename zeta to eta everywhere up above.
- 
+xxx 
 \end_layout
 
 \begin_layout Standard
@@ -32863,7 +32943,7 @@ The points
 \end_inset
 
 , the function 
-\begin_inset Formula $\varrho=r\circ G\circ\zeta^{-1}$
+\begin_inset Formula $\varrho=r\circ G\circ\eta^{-1}$
 \end_inset
 
  maps it to an open set on the real number line.
