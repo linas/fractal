@@ -2,11 +2,16 @@
  * bracket-steps.c
  *
  * Look at fronts as a sum over square waves.
+ * Sounded like a good idea, but isn't going to work cause of
+ * unpredictable leaders.
+ *
+ * Similar to front-dist.c
  *
  * December 2023
  */
 
 #include "selfie.c"
+#include "selfie-util.c"
 #include "selfie-tree.c"
 
 int main(int argc, char* argv[])

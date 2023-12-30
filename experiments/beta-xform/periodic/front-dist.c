@@ -3,6 +3,7 @@
  *
  * Explore what the fronts are doing.
  * A lot like bracket-finite.c but with dyadic fractions, instead.
+ * More like bracket-steps.c but with explicit dyadics.
  *
  * December 2023
  */
@@ -21,9 +22,12 @@ int main(int argc, char* argv[])
 	}
 	int order = atoi(argv[1]);
 
+	double idxsum = 0.0;
+
 	printf("#\n# Front dyadics. Order = %d\n#\n", order);
 	int maxdy = 1 << order;
-	for (int i=1; i<maxdy; i++)
+	// for (int i=1; i<maxdy; i++)
+	for (int i=maxdy-1; 0 < i; i--)
 	{
 		double x = ((double) i) / (double) maxdy;
 
@@ -39,9 +43,13 @@ int main(int argc, char* argv[])
 		unsigned long idx = good_index_map(mcanon);
 		if (MAXIDX < idx) continue;
 
+		idxsum += idx;
+		double hei = log2(idx);
+		double sei = log2(idxsum);
+
 		//unsigned long numo=0, deno=0;
 		//tree_idx_to_dyafrac(idx, &numo, &deno);
 
-		printf("%d	%g	%ld\n", i, x, idx);
+		printf("%d	%g	%ld	%g	%g\n", i, x, idx, hei, sei);
 	}
 }
