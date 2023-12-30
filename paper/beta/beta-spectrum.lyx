@@ -9245,7 +9245,7 @@ This figure shows the mapping from the dyadic rationals, interpreted as
  The L,R maps for the bracket curve are both fractal themselves, so finding
  affine generators would be a surprise.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Created with irred-tree.gplot with data from irred-tree.c
@@ -9718,6 +9718,423 @@ It should be clear that the set
  will be given in a later section on eventually-periodic orbits.
 \end_layout
 
+\begin_layout Subsection
+Formal definitions
+\end_layout
+
+\begin_layout Standard
+A sufficient number of distinct concepts have been introduced, that some
+ basic house-keeping is in order.
+ The definitions that follow are straight-forward and conventional.
+ The goal is to provide a workable vocabulary for further discussion.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ denote the finite but unbounded binary tree, and 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ be it's closure as the infinite tree.
+ The infinite tree is, of course, isomorphic to the Cantor space 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+; but this mechanism is not currently needed.
+ A more careful definition of the finite tree is needed.
+ Thus, let 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ the the graph of vertices and connecting edges 
+\begin_inset Formula $\mathbb{B}=\left\{ v_{i},e_{ij}:i\in\mathbb{N},j\in\left\{ 2i,2i+1\right\} \right\} $
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\eta:\mathbb{N}\to\mathbb{B}$
+\end_inset
+
+ denote the canonical labelling of the binary tree by the positive integers,
+ so that the root of the tree is given the label 1, the first row is 2,3
+ and the next row is 4,5,6,7.
+ This is a bijection: every finite walk down the tree can be labelled with
+ a positive integer.
+ The walks are left and right moves, in the canonical sense: 
+\begin_inset Formula $L:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ with 
+\begin_inset Formula $L:m\mapsto2m$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ with 
+\begin_inset Formula $R:m\mapsto2m+1$
+\end_inset
+
+.
+ The push-forward of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ provide the canonical walks on the tree, as a commuting diagram, so that
+ 
+\begin_inset Formula $L\circ\eta=\eta\circ L$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R\circ\eta=\eta\circ R$
+\end_inset
+
+.
+ It is useful to adjoin the pre-root elements 
+\begin_inset Formula $\left\{ 0,\infty\right\} $
+\end_inset
+
+ so that 
+\begin_inset Formula $R:0\to1$
+\end_inset
+
+ and 
+\begin_inset Formula $L:\infty\to1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ be the dyadic rationals, with the canical bijection to the natural numbers
+ 
+\begin_inset Formula $\delta:\mathbb{D}\to\mathbb{N}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\delta:\left(2n+1\right)/2^{m}\mapsto2^{m-1}+n$
+\end_inset
+
+.
+ The labels the root of the tree with 1/2, and the first row under it as
+ 1/4 and 3/4.
+ The left and right moves are 
+\begin_inset Formula $L:\left(2n+1\right)/2^{m}\mapsto\left(4n+1\right)/2^{m+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:\left(2n+1\right)/2^{m}\mapsto\left(4n+3\right)/2^{m+1}$
+\end_inset
+
+.
+ This was set up so that 
+\begin_inset Formula $L\circ\delta=\delta\circ L$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $R\circ\delta=\delta\circ R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This allows the bracket tree and the good-index bijection to be specified
+ more precisely.
+ The validity set 
+\begin_inset Formula $\Psi\subset\mathbb{N}$
+\end_inset
+
+ was defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:valid index set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as the collection of natural number indexes corresponding to polynomials
+ with self-describing roots.
+ This set came with two functions 
+\begin_inset Formula $L,\mathfrak{R}:\Psi\to\Psi$
+\end_inset
+
+ given by index-doubling 
+\begin_inset Formula $L:m\mapsto2m$
+\end_inset
+
+ and leadership (eqn
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Leadership function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) 
+\begin_inset Formula $\mathfrak{R}:m\mapsto\Lambda\left(m\right)$
+\end_inset
+
+.
+ The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ was then defined as the pullback 
+\begin_inset Formula $L\circ G=G\circ L$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{R}\circ G=G\circ R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The trimmed tree 
+\begin_inset Formula $\mathfrak{B}\subset\mathbb{B}$
+\end_inset
+
+ is the image of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ under the mapping 
+\begin_inset Formula $\eta$
+\end_inset
+
+, so that 
+\begin_inset Formula $\mathfrak{B}=\eta\Psi$
+\end_inset
+
+.
+ This consists of those nodes and edges in the finite binary tree that are
+ labeled by integers from the validity set 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ The good-index function 
+\begin_inset Formula $G$
+\end_inset
+
+ places the trimmed tree and the finite tree in a bijection, so that 
+\begin_inset Formula $\mathfrak{B}=\eta G\eta^{-1}\mathbb{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The root map 
+\begin_inset Formula $r:\Psi\to\left[1,2\right]$
+\end_inset
+
+ takes valid integer indexes, and maps them to the roots of the corresponding
+ (finite-orbit) polynomials, so that 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+.
+ The bracket map, depicted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, can now be written more precisely as the function 
+\begin_inset Formula $\varrho=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
+\end_inset
+
+.
+ It maps the dyadics to the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values that have finite orbits.
+\end_layout
+
+\begin_layout Standard
+The notation for the finite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is abused in several ways.
+ In eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:theta mask"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ it is used to indicate whether a given polynomial root has a self-describing
+ orbit.
+ It is then defined as the indicator function for set membership 
+\begin_inset Formula $\theta=\mathds{1}_{\Psi}:\Psi\to\left\{ T,F\right\} $
+\end_inset
+
+ and finally as the finite comb 
+\begin_inset Formula $\theta\subset\mathbb{D}$
+\end_inset
+
+.
+ Formally, the finite comb can now be written as 
+\begin_inset Formula $\theta=\delta^{-1}\Psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The good-index bijection 
+\begin_inset Formula $G:\mathbb{N}\to\Psi$
+\end_inset
+
+ can be commuted with the dyadic bijection to obtain the 
+\begin_inset Quotes eld
+\end_inset
+
+good dyadic map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\mathsf{G}=\delta\circ G\circ\delta^{-1}:\mathbb{D}\to\theta$
+\end_inset
+
+.
+ Given any dyadic fraction, this map returns another dyadic that lies within
+ the finite comb.
+ As all the other maps discussed so far, it is a bijection.
+ It is depicted in figure xxx.
+\end_layout
+
+\begin_layout Standard
+The infinite comb 
+\begin_inset Formula $\overline{\theta}$
+\end_inset
+
+ was the closure of the finite comb, so that 
+\begin_inset Formula $\theta\subset\overline{\theta}$
+\end_inset
+
+.
+ The closure, defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, is constructed as the infinite intersection of open sets.
+ Corresponding to this is the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+\end_inset
+
+ of infinitely long paths in the trimmed tree.
+ It is taken as the limit of the finite but unbounded-length paths in 
+\begin_inset Formula $\mathfrak{B}$
+\end_inset
+
+.
+ The dyadics can be closed in several ways; one way is to the rationals
+ 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+, and then further to the reals 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ In the present case, we restrict attention to the unit interval 
+\begin_inset Formula $I=\left[0,1\right]\subset\mathbb{R}$
+\end_inset
+
+ and to 
+\begin_inset Formula $\mathbb{Q}_{I}=\mathbb{Q}\cap\left[0,1\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The rationals correspond to infinite length orbits that are ultimately periodic;
+ these will be examined in a later section.
+ A closure to the root map to the rationals appears naturally; it can be
+ written as 
+\begin_inset Formula $\overline{r}:\overline{\theta}\to\left[1,2\right]$
+\end_inset
+
+.
+ Combined with the closure 
+\begin_inset Formula $\mathsf{G}:\mathbb{Q}_{I}\to\overline{\theta}$
+\end_inset
+
+ gives a closure of the bracket map 
+\begin_inset Formula $\overline{\varrho}=\overline{r}\circ\mathsf{G}:\mathbb{Q}_{I}\to\left[1,2\right]$
+\end_inset
+
+.
+ Closing to the reals gives 
+\begin_inset Formula $\mathsf{G}:\left[0,1\right]\to\overline{\theta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\varrho}=\overline{r}\circ\mathsf{G}:\left[0,1\right]\to\left[1,2\right]$
+\end_inset
+
+.
+ This is the primary acheivement of this section: the defintion of the bracket
+ map as a continuous monotonic ascending bijection between the reals in
+ the unit interval, and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values understood as self-describing orbits.
+ Proving continuity will require some theoretical machinery and lemmas;
+ these will be developed in a later section.
+ However, the net result can already be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+More stuffs
+\end_layout
+
 \begin_layout Subsubsection
 The good map
 \end_layout
@@ -9743,7 +10160,7 @@ noprefix "false"
 \end_inset
 
 .
- A sufficient number of distinct concept have been introduced, that perhaps
+ A sufficient number of distinct concepts have been introduced, that perhaps
  some basic house-keeping is in order.
 \end_layout
 
