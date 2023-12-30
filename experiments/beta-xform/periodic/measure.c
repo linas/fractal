@@ -11,6 +11,8 @@
 #include "selfie-util.c"
 #include "selfie-tree.c"
 
+#include "necklace.h"
+
 // Sum over theta, starting from one.
 // Very inefficient, but so what.
 unsigned long comb_sum(unsigned long idx)
@@ -22,6 +24,32 @@ unsigned long comb_sum(unsigned long idx)
 		sum += ok;
 	}
 	return sum;
+}
+
+// Reset sum to one at every order.
+// This is S_\nu from the paper, wiht \nu infered from the idx.
+unsigned long comb_sum_order(unsigned long idx)
+{
+	int order = bitlen(idx);
+	unsigned long nstart = 1UL << (order-1);
+
+	unsigned long sum = 0UL;
+	for (unsigned long n=nstart; n <= idx; n++)
+	{
+		bool ok = valid_gold_index(n);
+		sum += ok;
+	}
+	return sum;
+}
+
+double comb_sum_norm(unsigned long idx)
+{
+	int order = bitlen(idx);
+	unsigned long sum = comb_sum_order(idx);
+	long mn = necklace(order+1);
+
+	double renorm = ((double) sum) / ((double) mn);
+	return renorm;
 }
 
 int main(int argc, char* argv[])
@@ -48,14 +76,19 @@ int main(int argc, char* argv[])
 		// Convert dyadic to canonical tree numbering.
 		int mcanon = (p + q) >> 1;
 
-		unsigned long csum = comb_sum(mcanon);
+		// unsigned long csum = comb_sum(mcanon);
+		// unsigned long csum = comb_sum_order(mcanon);
+		double nsum = comb_sum_norm(mcanon);
 
 		//unsigned long idx = good_index_map(mcanon);
 		//if (MAXIDX < idx) continue;
 
-		//unsigned long numo=0, deno=0;
-		//tree_idx_to_dyafrac(idx, &numo, &deno);
+#if 0
+		unsigned long numo=0, deno=0;
+		tree_idx_to_dyafrac(csum, &numo, &deno);
+		double csum_dya = ((double) numo) / ((double) deno);
+#endif
 
-		printf("%d	%g	%ld\n", i, x, csum);
+		printf("%d	%g	%g\n", i, x, nsum);
 	}
 }
