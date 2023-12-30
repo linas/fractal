@@ -134,23 +134,24 @@ int main(int argc, char* argv[])
 
 #define PRINT_DYADIC_TO_BETA_MAP
 #ifdef PRINT_DYADIC_TO_BETA_MAP
-	if (argc != 3)
+	// Generate datafile for the bracket-tree graph, and the good-dyad map.
+	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s <max-order>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <order>\n", argv[0]);
 		exit(1);
 	}
-	int maxord = atoi(argv[1]);
+	int order = atoi(argv[1]);
 
-	printf("#\n# Bracket tree. max order = %d\n#\n", maxord);
+	printf("#\n# Bracket tree. Order = %d\n#\n", order);
 
 	int overflo = 0;
-	int maxdy = 1 << maxord;
+	int maxdy = 1 << order;
 	for (int i=1; i<maxdy; i++)
 	{
 		double x = ((double) i) / (double) maxdy;
 
 		// Get the dyad
-		int dlen = dyad;
+		int dlen = order;
 		int bits = i;
 		while (0 == bits %2)
 		{
@@ -160,8 +161,52 @@ int main(int argc, char* argv[])
 		int shbit = bits;
 		shbit >>= 1;
 		shbit |= 1UL << dlen;
-		long idx = good_index_map(shbit);
-		if (idx < 0) { overflo++; continue; }
+		unsigned long idx = good_index_map(shbit);
+		if (MAXIDX < idx) { overflo++; continue; }
+
+		double gold = golden_beta(idx);
+
+		printf("%d	%d	%d	%ld	%g	%g", i, bits, 1<<dlen, idx, x, gold);
+
+		print_moves(bits, " # bits=(", ")\n");
+	}
+
+	printf("#\n# Num overflows = %d\n#\n", overflo);
+#endif
+
+// #define EXPERIMENTAL_DYADIC_TO_BETA_MAP
+#ifdef EXPERIMENTAL_DYADIC_TO_BETA_MAP
+	// Old code to generate datafile for the original bracket-tree graph.
+	// Includes extra grunge for experiments. Don't use this; use the
+	// new improved version above.
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s <order>\n", argv[0]);
+		exit(1);
+	}
+	int order = atoi(argv[1]);
+
+	printf("#\n# Bracket tree. Order = %d\n#\n", order);
+
+	int overflo = 0;
+	int maxdy = 1 << order;
+	for (int i=1; i<maxdy; i++)
+	{
+		double x = ((double) i) / (double) maxdy;
+
+		// Get the dyad
+		int dlen = order;
+		int bits = i;
+		while (0 == bits %2)
+		{
+			bits >>= 1;
+			dlen --;
+		}
+		int shbit = bits;
+		shbit >>= 1;
+		shbit |= 1UL << dlen;
+		unsigned long idx = good_index_map(shbit);
+		if (MAXIDX < idx) { overflo++; continue; }
 
 		double gold = golden_beta(idx);
 
