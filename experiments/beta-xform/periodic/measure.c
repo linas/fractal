@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
 	printf("#\n# Front dyadics. Order = %d\n#\n", order);
 	int maxdy = 1 << order;
-	for (int i=1; i<maxdy; i++)
+	for (int i=1; i<maxdy; i += 2)
 	{
 		double x = ((double) i) / (double) maxdy;
 
@@ -85,10 +85,15 @@ int main(int argc, char* argv[])
 
 		// unsigned long csum = comb_sum(mcanon);
 		// unsigned long csum = comb_sum_order(mcanon);
-		double nsum = comb_sum_norm(mcanon);
+		// double nsum = comb_sum_norm(mcanon);
 
-		//unsigned long idx = good_index_map(mcanon);
-		//if (MAXIDX < idx) continue;
+		unsigned long idx = good_index_map(mcanon);
+		if (MAXIDX < idx) continue;
+
+		unsigned long SUMAC = 1UL << 19;
+		if (SUMAC < idx) continue;
+		double nsum = comb_sum_norm(idx);
+		nsum = 2.0*nsum - 1.0;
 
 #if 0
 		unsigned long numo=0, deno=0;

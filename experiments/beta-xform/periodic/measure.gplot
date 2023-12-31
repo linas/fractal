@@ -3,11 +3,15 @@ set out 'measure.png'
 set term png size 1024,768
 set term png size 640, 480
 
-#set xrange [0:1]
+set key left
+
+set yrange [0:1]
 #set logscale y
 
 set title "Measure"
 
-plot "measure.dat" using 2:3 with lines linewidth 1 title ""
+plot "measure.dat" using 2:3 with lines linewidth 1 title "meas", \
+     "irr-tree.dat" using 5:($6-1) with lines linewidth 1 title "irr"
+
 
 #####
