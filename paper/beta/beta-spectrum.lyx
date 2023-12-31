@@ -232,7 +232,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Given some real number 
+Given a real number 
 \begin_inset Formula $x$
 \end_inset
 
@@ -300,8 +300,8 @@ The
  (except for the first) running between 0 and 9.
  The iteration has the form of a shift; it shifts over by one digit, and
  repeats the process.
- The shift is ergodic over the reals, in that any and every decimal expansion
- will occur.
+ The shift is ergodic over the reals: any and every decimal expansion will
+ occur.
 \end_layout
 
 \begin_layout Standard
@@ -327,7 +327,7 @@ The same idea can be applied by replacing ten by any number
 \begin_inset Quotes eld
 \end_inset
 
-less than base two
+base two or less
 \begin_inset Quotes erd
 \end_inset
 
@@ -357,16 +357,16 @@ iterated on the unit interval
 \end_inset
 
 , this is the Bernoulli process, the ergodic process of random coin flips.
- This case is solvable in more ways than one; it is very well-explored,
- and is a canonical model of ergodic behavior.
- The beta transformation is less well-known and closely studied; a full
- review of previous results is presented at the end of this introduction.
+ The Bernoulli shift is solvable in more ways than one; it is well-understood,
+ and provides a canonical model of ergodic behavior.
+ The beta transformation is less well-known and less carefully scrutinized.
+ A full review of previous results is presented at the end of this introduction.
  The goal of this text is two-fold: to expand the collection of known properties
 , and to present them in the simplest, most accessible fashion possible.
 \end_layout
 
 \begin_layout Standard
-The primary driver of interest in iterated functions is that they generate
+One primary driver of interest in iterated functions is that they generate
  fractals, and that they provide simple models of chaotic dynamics.
  The 
 \begin_inset Formula $\beta$
@@ -375,19 +375,27 @@ The primary driver of interest in iterated functions is that they generate
 -transform is the simplest possible map that exhibits all of the hallmarks
  of chaotic dynamical systems: a non-trivial, non-uniform invariant measure,
  with both periodic and non-periodic orbits.
+ It is also 
+\begin_inset Quotes eld
+\end_inset
+
+generic
+\begin_inset Quotes erd
+\end_inset
+
+, in that any other piecewise-monotonic map of the unit interval is topologicall
+y conjugate to it.
+ If one can understand the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, one has gone a long ways towards understanding iterated maps
+ in general.
 \end_layout
 
 \begin_layout Standard
-both 
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-There are two common ways to study iterated functions: in terms of point
- dynamics and orbits (
+There are two broad aproaches for studying iterated functions.
+ One is to examine the point dynamics and orbits: 
 \begin_inset Quotes eld
 \end_inset
 
@@ -399,33 +407,84 @@ where does the point
 \begin_inset Quotes erd
 \end_inset
 
-) and in terms of distributions (
+.
+ The other is in terms of distributions: 
 \begin_inset Quotes eld
 \end_inset
 
-how does a scattered dust of points evolve over iteration?
-\begin_inset Quotes erd
-\end_inset
-
-).
- The approach via distributions is arguably more powerful and constraining,
- as the 
-\begin_inset Quotes eld
-\end_inset
-
-dust
-\begin_inset Quotes erd
-\end_inset
-
- is a continuum, a measurable set, rather than a handful of points 
-\begin_inset Quotes eld
-\end_inset
-
-of measure zero
+how does a scattered dust of points evolve over time?
 \begin_inset Quotes erd
 \end_inset
 
 .
+ Within the context of physics, these give two broad views of reality.
+ The first is of microscopic, time-reversible systems whose future is determinis
+tic and known with infinite precision.
+ The second is of macroscopic, time-irreversible thermodynamics, where time
+ can only go forward, and the future is unknown and unknowable.
+ Of these two approaches, the first is commonplace and inescapable; the
+ second remains obscure, poorly-recognized and opaque.
+ Thus, a large part of this text is devoted to this second approach.
+\end_layout
+
+\begin_layout Standard
+If iterating a map 
+\begin_inset Formula $x\mapsto f\left(x\right)\mapsto f\left(f\left(x\right)\right)\mapsto\cdots$
+\end_inset
+
+ pulls a point 
+\begin_inset Formula $x$
+\end_inset
+
+ through 
+\begin_inset Formula $f$
+\end_inset
+
+, through time, then the action of the map 
+\begin_inset Formula $f$
+\end_inset
+
+ on a distribution 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is a push-forward: 
+\begin_inset Formula 
+\[
+\rho\left(A\right)\mapsto\rho\left(f^{-1}\left(A\right)\right)\mapsto\rho\left(f^{-1}\left(f^{-1}\left(A\right)\right)\right)\mapsto\cdots
+\]
+
+\end_inset
+
+The proper defintion of a pushforward requires a significant development
+ of the concepts of measureable spaces and Borel sigma algebras, topics
+ that will be gently reviewed a bit further in this introductory section.
+ For the present, it is enough to take 
+\begin_inset Formula $\rho:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ to be some fuction defined on the unit interval.
+ In the above, 
+\begin_inset Formula $A\subset\left[0,1\right]$
+\end_inset
+
+ is a subset of the unit interval, so that 
+\begin_inset Formula $\rho\left(A\right)=\int_{A}\rho\left(x\right)dx$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+size
+\begin_inset Quotes erd
+\end_inset
+
+ of the set 
+\begin_inset Formula $A$
+\end_inset
+
+ with respect to the distribution.
 \end_layout
 
 \begin_layout Standard
