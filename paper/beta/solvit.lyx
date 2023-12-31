@@ -26200,7 +26200,7 @@ Consider the set of all eventually-periodic bit-sequences.
 
 .
  Associated to this is rational number 
-\begin_inset Formula $x=\sum_{k=0}^{\infty}b_{k}2^{-k}$
+\begin_inset Formula $x=\sum_{k=0}^{\infty}b_{k}2^{-k-1}$
 \end_inset
 
 .
@@ -33203,6 +33203,113 @@ Formal Work
 Theorems, lemmas, proofs.
 \end_layout
 
+\begin_layout Standard
+A number of observations, claims and assumptions have been made.
+ They seem 
+\begin_inset Quotes eld
+\end_inset
+
+obviously true
+\begin_inset Quotes erd
+\end_inset
+
+ from numerical work, but are lacking a formal proof.
+\end_layout
+
+\begin_layout Itemize
+Theorem: The finite orbits are dense in 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+ Proof: Provided by the bracketing relation, which states that betwen any
+ two endpoints, there's another orbit strictly in the middle.
+ We even have more: the estimate 
+\begin_inset Formula $\nu^{1/\nu}$
+\end_inset
+
+ from the limit diagram, showing how they don't want to accumulate near
+ beta=1.
+\end_layout
+
+\begin_layout Itemize
+Lemma: The bracketed roots are always in strict ascending order, with 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+.
+ A proof is attempted below, using polynomial recursion.
+ It's incomplete.
+\end_layout
+
+\begin_layout Itemize
+Lemma: The valid-index map G is a bijection.
+ Proof: Leadership function is monotonically increasing.
+\end_layout
+
+\begin_layout Itemize
+Theorem: The good map 
+\begin_inset Formula $\mathsf{G}$
+\end_inset
+
+ always maps rationals to rationals.
+ More precisely, those rationals are always inside of 
+\begin_inset Formula $\overline{\theta}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mathsf{G}:\mathbb{Q}_{I}\to\overline{\theta}\cap\mathbb{Q}$
+\end_inset
+
+ is a bijection, except at the dyadics, where we have a countable freedom
+ of finite orbits and one infinite-periodic orbit to choose from.
+ 
+\end_layout
+
+\begin_layout Itemize
+Theorem: 
+\begin_inset Formula $\mathsf{G}:\left[0,1\right]\to\overline{\theta}$
+\end_inset
+
+ is a bijection for all reals 
+\begin_inset Formula $\left[0,1\right]\subset\mathbb{R}$
+\end_inset
+
+.
+ That is, the closure to reals works as expected.
+ Seems that this should follow easily from the roots being dense.
+ 
+\end_layout
+
+\begin_layout Itemize
+Proper diligence requires distinguishing 
+\begin_inset Formula $\overline{\mathfrak{B}}_{\mathbb{Q}}$
+\end_inset
+
+ from 
+\begin_inset Formula $\overline{\mathfrak{B}}_{\mathbb{R}}$
+\end_inset
+
+ and also 
+\begin_inset Formula $\overline{\theta}_{\mathbb{Q}}$
+\end_inset
+
+ from 
+\begin_inset Formula $\overline{\theta}_{\mathbb{R}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The remainder of this section consists of fragments of proofs of the above
+ theorems and lemmas.
+ If these were stitched together properly, whole proofs should emerge.
+ As it is, its more an outline or sketch.
+ 
+\end_layout
+
 \begin_layout Subsection
 The Rational Comb
 \end_layout
@@ -33263,37 +33370,12 @@ This can be understood as a limiting procedure.
  
 \end_layout
 
-\begin_layout Standard
-The above limiting procedure becomes interesting when used to extend the
- good-index bijection 
-\begin_inset Formula $G:\mathbb{N}\to\Psi$
-\end_inset
-
- to the rationals.
- This is entirely straight-forward; unfortunately, this requires a review
- of the canonical mappings between the tree, the integers, and the dyadic
- fractions.
- The issue is that the rich selection of isomorphisms can generate confusion,
- and so a precise vocabulary is needed.
- It is the conventional one, as far as notation allows.
-\end_layout
-
 \begin_layout Subsection
 Closures
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-The gymnastics for this seems to require passing through the trimmed tree
- and the comb.
- The ultimately-periodic orbits live inside the closure 
+The ultimately-periodic orbits live inside the closure 
 \begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
 \end_inset
 
@@ -33318,6 +33400,10 @@ The gymnastics for this seems to require passing through the trimmed tree
 \begin_inset Formula $\beta=S\left(\beta\right)$
 \end_inset
 
+ where 
+\begin_inset Formula $S\left(\beta\right)=\sum_{k=0}^{\infty}b_{k}\beta^{-k}$
+\end_inset
+
 .
  The cyclic orbits are just a special case: 
 \begin_inset Formula $\mathfrak{C}\subset\overline{\mathfrak{B}}$
@@ -33329,7 +33415,7 @@ The gymnastics for this seems to require passing through the trimmed tree
 \end_inset
 
 .
- To exhibit these, a closer look at the comb is required.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -33520,8 +33606,17 @@ The points
 \begin_inset Formula $\varrho=r\circ G\circ\eta^{-1}$
 \end_inset
 
- maps it to an open set on the real number line.
- It is continuous.
+ maps it to an open set 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+.
+ Claim that the inverse map also maps open sets to open sets, and thus 
+\begin_inset Formula $\varrho$
+\end_inset
+
+ is continuous.
+ This is established as follows.
  Since the 
 \begin_inset Formula $r_{n}$
 \end_inset
@@ -33556,7 +33651,7 @@ The points
 
 \begin_layout Standard
 The goal is to extend this reasoning to 
-\begin_inset Formula $\mathsf{G}=r\circ G\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
+\begin_inset Formula $=\varrho\circ\eta\circ\delta^{-1}:\mathbb{D}\to\left[1,2\right]$
 \end_inset
 
 , so as to obtain a continuous, monotonic function on the unit interval.
@@ -33662,59 +33757,6 @@ xxx
 \end_layout
 
 \begin_layout Standard
-Things we don't have: 
-\end_layout
-
-\begin_layout Itemize
-a proof that the roots are dense.
- But we know how to do this, we already have the needed estimate 
-\begin_inset Formula $\nu^{1/\nu}$
-\end_inset
-
- from the limit diagram.
-\end_layout
-
-\begin_layout Itemize
-a proof that G really is a bijection.
- But this is easy.
-\end_layout
-
-\begin_layout Itemize
-A lemma that bracketing is really ascending order.
- This is easy when working with the tree.
-\end_layout
-
-\begin_layout Itemize
-A proof why rationals are mapped to rationals
-\end_layout
-
-\begin_layout Itemize
-A proof that the closure to reals works as expected, but this should be
- easy once we have the dense root lemma.
-\end_layout
-
-\begin_layout Itemize
-Proper diligence requires distinguishing 
-\begin_inset Formula $\overline{\mathfrak{B}}_{\mathbb{Q}}$
-\end_inset
-
- from 
-\begin_inset Formula $\overline{\mathfrak{B}}_{\mathbb{R}}$
-\end_inset
-
- and also 
-\begin_inset Formula $\overline{\theta}_{\mathbb{Q}}$
-\end_inset
-
- from 
-\begin_inset Formula $\overline{\theta}_{\mathbb{R}}$
-\end_inset
-
-.
- This is deferred to a later section.
-\end_layout
-
-\begin_layout Standard
 xxx
 \end_layout
 
@@ -33742,6 +33784,145 @@ This is also where the valid rational orbits can occur, as well.
  are integers, these give the finite orbits.
  We want to work with the completion.
  How, exactly?
+\end_layout
+
+\begin_layout Subsection
+Proof that roots are correctly bounded
+\end_layout
+
+\begin_layout Standard
+Theorem: The bracket relationship gives roots with 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ being sttrict inequalities.
+\end_layout
+
+\begin_layout Standard
+Proof: Recursion starts with 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+.
+ The bracket moves are 
+\begin_inset Formula 
+\begin{align*}
+L & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)\\
+\mathfrak{R} & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $p_{1}=\beta^{2}-\beta-1$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{\infty}=p_{1/0}=\beta-1$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{1/\infty}=\beta-2$
+\end_inset
+
+.
+ Must show that bracket bounds are respected in all four cases.
+ The proofs depend on having 
+\begin_inset Formula $p_{n}^{\prime}\left(\beta\right)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Case 1: Show that 
+\begin_inset Formula $r_{2f}<r_{f}$
+\end_inset
+
+.
+ Proof: The L move gives 
+\begin_inset Formula $p_{2f}=\beta\left(p_{f}+1\right)-1$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $1=r_{2f}\left(p_{f}\left(r_{2f}\right)+1\right)$
+\end_inset
+
+ but since 
+\begin_inset Formula $r_{2f}>1$
+\end_inset
+
+, must have 
+\begin_inset Formula $p_{f}\left(r_{2f}\right)<0$
+\end_inset
+
+ and since 
+\begin_inset Formula $p_{n}^{\prime}>0$
+\end_inset
+
+, conclude that 
+\begin_inset Formula $r_{2f}<r_{f}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Case 2: Show that 
+\begin_inset Formula $r_{\ell}<r_{2f}$
+\end_inset
+
+.
+ Proof: ?
+\end_layout
+
+\begin_layout Description
+Case 3: Show that 
+\begin_inset Formula $r_{f}<r_{\Lambda\left(f\right)}$
+\end_inset
+
+.
+ Proof: For height zero, 
+\begin_inset Formula $\Lambda\left(f\right)=2f+1$
+\end_inset
+
+ so 
+\begin_inset Formula $p_{\Lambda\left(f\right)}=\beta p_{f}-1$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $1=r_{\Lambda\left(f\right)}p_{f}\left(r_{\Lambda\left(f\right)}\right)$
+\end_inset
+
+ so 
+\begin_inset Formula $0<p_{f}\left(r_{\Lambda\left(f\right)}\right)<1$
+\end_inset
+
+ and since 
+\begin_inset Formula $p_{n}^{\prime}>0$
+\end_inset
+
+, conclude that 
+\begin_inset Formula $r_{f}<r_{\Lambda\left(f\right)}$
+\end_inset
+
+.
+ What about positive heights?
+\end_layout
+
+\begin_layout Description
+Case 4: Show that 
+\begin_inset Formula $r_{\Lambda\left(f\right)}<r_{\rho}$
+\end_inset
+
+.
+ Proof: ?
 \end_layout
 
 \begin_layout Section
