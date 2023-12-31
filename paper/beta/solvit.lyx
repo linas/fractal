@@ -17610,7 +17610,7 @@ noprefix "false"
 
 \end_inset
 
-, to that both appear side by side.
+, so that both appear side by side.
  This is shown in 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -17624,7 +17624,7 @@ noprefix "false"
 .
  The stair-treads line up with the blancmange dips in the bracket map.
  The good map can be used to eliminate the stair treads.
- Thus, there is an identity 
+ The identity is 
 \begin_inset Formula 
 \[
 2A\circ\mathsf{G}=\varrho=r\circ G\circ\delta^{-1}=r\circ\delta^{-1}\circ\mathsf{G}
@@ -17658,17 +17658,14 @@ This is surprising.
 \end_inset
 
 .
- It is local in that it happens at a fixed value of 
-\begin_inset Formula $\beta$
-\end_inset
-
-, irrespective of all other values.
+ It is just specifying locations of roots.
  The map 
 \begin_inset Formula $A$
 \end_inset
 
- is global: it is the limit of a sum, a peculiar integral, that captures
- information about all other 
+ is global: it is counting how many roots there are.
+ It is the limit of a sum, a kind of peculiar integral, that captures informatio
+n about all other 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -17748,6 +17745,18 @@ noprefix "false"
 
  values, but taken sideways, as it were.
  This figure indicates visually what that correspondence is.
+ When the stair-treads are removed with the 
+\begin_inset Quotes eld
+\end_inset
+
+good map
+\begin_inset Quotes erd
+\end_inset
+
+, the two curves are identical.
+ This is surprising, as they have entirely different origins: the indicator
+ measure is counting periodic orbits, while the bracket map is providing
+ the locations.
 \begin_inset Note Note
 status collapsed
 
@@ -17779,7 +17788,105 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-T 
+An alternative interpretation is that this provides a way of estimating
+ the number of orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+, satisfying 
+\begin_inset Formula $\beta<\alpha$
+\end_inset
+
+ for some fixed 
+\begin_inset Formula $1\le\alpha\le2$
+\end_inset
+
+.
+ The total number of orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is given by Moreau's 
+\begin_inset Formula $M_{\nu}$
+\end_inset
+
+.
+ The counting function 
+\begin_inset Formula $S_{\nu}\left(k\right)$
+\end_inset
+
+ returns the total number of orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ that occured at some 
+\begin_inset Formula $\beta$
+\end_inset
+
+ with 
+\begin_inset Formula $\beta\le r_{k}$
+\end_inset
+
+.
+ The normalized version provides this same number slightly more elegantly:
+ the total number of orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ with 
+\begin_inset Formula $\beta<\varrho\left(x\right)$
+\end_inset
+
+ is given by 
+\begin_inset Formula $M_{\nu}F_{\nu}\left(x\right)$
+\end_inset
+
+.
+ The indirection with 
+\begin_inset Formula $\varrho$
+\end_inset
+
+ is annoying; define 
+\begin_inset Formula $f_{\nu}\left(\alpha\right)=F_{\nu}\left(\varrho^{-1}\left(\alpha\right)\right)$
+\end_inset
+
+, so that 
+\begin_inset Formula $f_{\nu}\left(\alpha\right)$
+\end_inset
+
+ counts the fraction of all orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ occuring at some (any) 
+\begin_inset Formula $\beta\le\alpha$
+\end_inset
+
+.
+ This fraction is approximated as 
+\begin_inset Formula $f_{\nu}\left(\alpha\right)\approx\left(\alpha/2\right)^{\nu}$
+\end_inset
+
+, which holds exactly in the limit 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This last again illustrates the local-global tie between these two: 
+\begin_inset Formula $f_{\nu}\left(\alpha\right)$
+\end_inset
+
+ is a counting function, an integral of sorts, while 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is just a number.
+ It's quite rare to find such specific analytic results in this project.
+ Very rare: this is the first.
 \end_layout
 
 \begin_layout Subsubsection
@@ -33386,146 +33493,6 @@ This is also where the valid rational orbits can occur, as well.
  are integers, these give the finite orbits.
  We want to work with the completion.
  How, exactly?
-\end_layout
-
-\begin_layout Subsection
-Measure
-\end_layout
-
-\begin_layout Standard
-Working notes.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-N_{\nu}\left(x\right)=\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+x\right)\right\rfloor \right)}{M_{\nu}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-and
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-A_{\nu}\left(x\right)=\exp\left(M_{\nu}2^{-\nu}\log N_{\nu}\left(x\right)\right)
-\]
-
-\end_inset
-
-but 
-\begin_inset Formula $x=\delta G\delta^{-1}$
-\end_inset
-
- so ...
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $A\left(x\right)=\lim_{\nu\to\infty}A_{\nu}\left(x\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $S\left(k\right)=\sum_{n=1}^{k}\theta_{n}$
-\end_inset
-
- and 
-\begin_inset Formula 
-\[
-S_{\nu}\left(k\right)=S\left(k\right)-S\left(2^{\nu-2}-1\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Fix 
-\begin_inset Formula $n=1,$
-\end_inset
-
-
-\begin_inset Formula $\beta=\varphi=1.618\cdots$
-\end_inset
-
- this is located at root of tree.
- So 
-\begin_inset Formula $A\left(\varphi\right)=\lim_{\nu\to\infty}A_{\nu}\left(\varphi\right)$
-\end_inset
-
-.
- So then 
-\begin_inset Formula 
-\[
-N_{\nu}\left(x\right)=\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+\varphi\right)\right\rfloor \right)}{M_{\nu}}
-\]
-
-\end_inset
-
-so 
-\begin_inset Formula $S_{\nu}\left(2^{\nu-1}-1\right)=M_{\nu}$
-\end_inset
-
- counts the total number of orbits of length 
-\begin_inset Formula $\nu$
-\end_inset
-
- and 
-\begin_inset Formula $S_{\nu}\left(k\right)$
-\end_inset
-
- counts the total number of orbits of length 
-\begin_inset Formula $\nu$
-\end_inset
-
- that have a beta value of less than ...
-\end_layout
-
-\begin_layout Standard
-so 
-\begin_inset Formula $M_{\nu}N_{\nu}\left(x\right)$
-\end_inset
-
- counts the number of orbits of length 
-\begin_inset Formula $\nu$
-\end_inset
-
- that have a root less than 
-\begin_inset Formula $\varrho\left(x\right)$
-\end_inset
-
-.
- Ooops.
- 
-\begin_inset Formula $A=\lim\sqrt[\nu]{A_{\nu}}$
-\end_inset
-
- and 
-\begin_inset Formula $2A=\varrho$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $F_{\nu}\left(\varrho^{-1}\left(\alpha\right)\right)\approx\left(\alpha/2\right)^{\nu}$
-\end_inset
-
-.
- So then 
-\begin_inset Formula $\sum_{\nu}x^{\nu}F_{\nu}\left(\varrho^{-1}\left(\alpha\right)\right)\approx\sum_{\nu}x^{\nu}\left(\alpha/2\right)^{\nu}=1/\left(1-x\alpha/2\right)$
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Section
