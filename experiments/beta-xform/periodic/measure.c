@@ -58,17 +58,17 @@ double comb_sum_norm(unsigned long idx)
 	return rescale;
 }
 
-double bits_to_real(unsigned long idx)
+double bits_to_real(unsigned long idx, double x)
 {
 	double sum = 0.0;
 	int ord = bitlen(idx);
 
-	double tn = 0.5;
+	double tn = x;
 	for (int i=ord-2; 0 <= i; i--)
 	{
 		if ((idx >> i) & 1UL)
 			sum += tn;
-		tn *= 0.5;
+		tn *= x;
 	}
 
 	return sum;
@@ -112,7 +112,9 @@ int main(int argc, char* argv[])
 		nsum = 2.0*nsum - 1.0;
 #endif
 
-		double nsum = bits_to_real(idx);
+		double nsum = bits_to_real(idx, 0.5);
+		// nsum += 0.5;
+		nsum = bits_to_real(idx, nsum);
 
 #if 0
 		unsigned long numo=0, deno=0;

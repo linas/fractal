@@ -10743,7 +10743,7 @@ At the end of the range, the sum
  This gives a normalized version
 \begin_inset Formula 
 \[
-N_{\nu}\left(x\right)=\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+x\right)\right\rfloor \right)}{M_{\nu}}
+F_{\nu}\left(x\right)=\frac{S_{\nu}\left(\left\lfloor 2^{\nu-2}\left(1+x\right)\right\rfloor \right)}{M_{\nu}}
 \]
 
 \end_inset
@@ -10762,7 +10762,7 @@ that runs from zero to one as
  The sequence of functions
 \begin_inset Formula 
 \begin{equation}
-A_{\nu}\left(x\right)=\exp\left(M_{\nu}2^{-\nu}\log N_{\nu}\left(x\right)\right)\label{eq:indicator-sum}
+A_{\nu}\left(x\right)=\exp\left(M_{\nu}2^{-\nu}\log F_{\nu}\left(x\right)\right)\label{eq:indicator-sum}
 \end{equation}
 
 \end_inset
@@ -10790,11 +10790,11 @@ noprefix "false"
 .
  It is perhaps useful to keep in mind the asymptotic limit of Moreau's function,
  
-\begin_inset Formula $M_{\nu}\sim2^{\nu}/\nu$
+\begin_inset Formula $M_{\nu}=2^{\nu}/\nu-\mathcal{O}\left(2^{\nu/2}/\nu\right)$
 \end_inset
 
  and so the radical scales as 
-\begin_inset Formula $M_{\nu}2^{-\nu}\sim1/\nu$
+\begin_inset Formula $M_{\nu}2^{-\nu}=1/\nu-\mathcal{O}\left(2^{-\nu/2}/\nu\right)$
 \end_inset
 
 .
@@ -10815,7 +10815,7 @@ The convergence to the limit appears to be uniform and rapid, except at
  limit is 
 \begin_inset Formula 
 \[
-A\left(0\right)=\lim_{\nu\to\infty}\left(N_{\nu}\left(0\right)\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{1}{M_{\nu}}\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{\nu}{2^{\nu}}\right)^{1/\nu}=\frac{1}{2}\lim_{\nu\to\infty}\nu^{1/\nu}=\frac{1}{2}
+A\left(0\right)=\lim_{\nu\to\infty}\left(F_{\nu}\left(0\right)\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{1}{M_{\nu}}\right)^{M_{\nu}2^{-\nu}}=\lim_{\nu\to\infty}\left(\frac{\nu}{2^{\nu}}\right)^{1/\nu}=\frac{1}{2}\lim_{\nu\to\infty}\nu^{1/\nu}=\frac{1}{2}
 \]
 
 \end_inset
@@ -10872,21 +10872,8 @@ The Beta measure
 \end_layout
 
 \begin_layout Standard
-The good-index bijection 
-\begin_inset Formula $G:\mathbb{N}\to\Psi$
-\end_inset
-
- provides a mechanism to map the full binary tree into the trimmed tree,
- so that every node in the trimmed tree is in one-to-one correspondence
- with the full binary tree.
- As it is a bijection, it can be used to pull back the trimmed tree to the
- full tree.
- Labeling the tree with dyadics, it allows the trimmed tree measure 
-\begin_inset Formula $\mu_{\theta}\left(x\right)$
-\end_inset
-
- to be pulled back to a measure on the entire unit interval.
- This effectively shrinks the stair-treads visible in figure 
+The significance of the comb measure is revealed by superimposing it's graph
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Indicator-Sum"
@@ -10896,10 +10883,7 @@ noprefix "false"
 
 \end_inset
 
- to be of zero width.
- Equivalently, it shrinks the spaces between the comb teeth to be of zero
- size; the comb teeth widen as a result, but without changing weight.
- When this is done, the result is figure 
+ on the bracket map 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Beta-Bracket-Map"
@@ -10909,9 +10893,8 @@ noprefix "false"
 
 \end_inset
 
-.
- Images speak louder than words; the two images are superimposed on one-another
- in figure 
+, to that both appear side by side.
+ This is shown in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Beta-measure"
@@ -10922,6 +10905,57 @@ noprefix "false"
 \end_inset
 
 .
+ The stair-treads line up with the blancmange dips in the bracket map.
+ The good map can be used to eliminate the stair treads.
+ Thus, there is an identity 
+\begin_inset Formula 
+\[
+2A\circ\mathsf{G}=\varrho=r\circ G\circ\delta^{-1}=r\circ\delta^{-1}\circ\mathsf{G}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\mathsf{G}=\delta\circ G\circ\delta^{-1}$
+\end_inset
+
+ is a bijection, it can be peeled off, to give
+\begin_inset Formula 
+\[
+2A=r\circ\delta^{-1}
+\]
+
+\end_inset
+
+This is surprising.
+ The map 
+\begin_inset Formula $r$
+\end_inset
+
+ is purely local: it takes integers 
+\begin_inset Formula $n$
+\end_inset
+
+ to the enumerated roots 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+.
+ It is local in that it happens at a fixed value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+, irrespective of all other values.
+ The map 
+\begin_inset Formula $A$
+\end_inset
+
+ is global: it is the limit of a sum, a peculiar integral, that captures
+ information about all other 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values, and how they behaved.
 \end_layout
 
 \begin_layout Standard
@@ -11024,118 +11058,75 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-The above can be restated with only minor overburdening of notation.
- The infinite comb 
-\begin_inset Formula $\theta$
-\end_inset
-
- was defined to be a subset of the unit interval of the reals; it is a mapping
- of the set 
-\begin_inset Formula $\Psi$
-\end_inset
-
- of valid indexes, passing through the conventional mapping the binary tree
- to dyadic fractions (using the conventional 
-\begin_inset Formula $L,R$
-\end_inset
-
- moves on the tree.) The bracket map is also a mapping of the set set 
-\begin_inset Formula $\Psi$
-\end_inset
-
- of valid indexes to the unit interval, but using instead the 
-\begin_inset Formula $L,\mathfrak{R}$
-\end_inset
-
- moves on the tree.
- The good-index map 
-\begin_inset Formula $G$
-\end_inset
-
- is a bijection between 
-\begin_inset Formula $L,R$
-\end_inset
-
- moves and 
-\begin_inset Formula $L,\mathfrak{R}$
-\end_inset
-
- moves.
- In either case, it is the set 
-\begin_inset Formula $\Psi$
-\end_inset
-
- being illustrated.
-\end_layout
-
-\begin_layout Standard
-The set 
-\begin_inset Formula $\Psi$
-\end_inset
-
- is itself in a bijection with the finite-length orbits of the 
-\begin_inset Formula $\beta$
-\end_inset
-
--map, and the self-describing polynomials 
-\begin_inset Formula $p_{n}$
-\end_inset
-
-, and their roots 
-\begin_inset Formula $1\le r_{n}\le2$
-\end_inset
-
-, being self-describing in that mid-point orbit for 
-\begin_inset Formula $\beta=r_{n}$
-\end_inset
-
- gives the coefficients for the polynomial 
-\begin_inset Formula $p_{n}$
-\end_inset
-
-.
- The set 
-\begin_inset Formula $\Psi$
-\end_inset
-
- and the good-index function 
-\begin_inset Formula $G$
-\end_inset
-
- are just two more bridges between this rather large set of isomorphisms.
-\end_layout
-
-\begin_layout Standard
-The correspondence between 
-\begin_inset Formula $\Psi$
-\end_inset
-
- and the set of roots 
-\begin_inset Formula $\left\{ r_{n}\right\} $
-\end_inset
-
- justifies labeling the y-axis as 
-\begin_inset Formula $\beta$
-\end_inset
-
-.
- The interpretation of the infinite comb as nothing other than the Cantor
- set justifies an assignment of a measure, the comb measure.
- Shrinking the gaps in the comb to zero size gives the Beta measure; it
- is just the bracket map, minus one (so that it runs from zero to one.)
-\end_layout
-
-\begin_layout Standard
-The bracket map has a passing superficial resemblance to the blancmange
- curve.
- The reason for this resemblance can now be given an informal explanation:
- its the integral of the comb.
- That is, the blancmange curve can be understood as the integral of a superposit
-ion of square-waves of increasing frequency.
- The integral of each individual square wave is a triangle wave; thus, the
- blancmange curve becomes a superposition of triangle waves.
- The same effect is at play, here.
+There is an alternative interpretation.
  
+\end_layout
+
+\begin_layout Standard
+is that this provides 
+\end_layout
+
+\begin_layout Standard
+xxx 
+\end_layout
+
+\begin_layout Standard
+The surprising nature of this result can be underscored with a review of
+ what it means.
+ The total number of orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+, for any 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+ at all, is given by Moreau's 
+\begin_inset Formula $M_{\nu}$
+\end_inset
+
+.
+ The counting function 
+\begin_inset Formula $S_{\nu}\left(k\right)$
+\end_inset
+
+ returns the total number of orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ that have 
+\begin_inset Formula $\beta\le r_{k}$
+\end_inset
+
+.
+ The normalized version provides this same number more elegantly: the total
+ number of orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ with 
+\begin_inset Formula $\beta<\varrho\left(x\right)$
+\end_inset
+
+ is given by 
+\begin_inset Formula $M_{\nu}F_{\nu}\left(x\right)$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $F_{\nu}\left(x\right)$
+\end_inset
+
+ is the fraction of such orbits.
+ The fraction is approximated as 
+\begin_inset Formula $F_{\nu}\left(x\right)\approx\left(A\left(x\right)\right)^{\nu}\approx\left(\varrho\left(x\right)/2\right)^{\nu}$
+\end_inset
+
+ which holds exactly in the limit 
+\begin_inset Formula $\nu\to\infty$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
