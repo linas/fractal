@@ -472,7 +472,7 @@ The proper defintion of a pushforward requires a significant development
 \begin_inset Formula $\rho\left(A\right)=\int_{A}\rho\left(x\right)dx$
 \end_inset
 
- is the 
+ is an ordinary integral, the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -485,6 +485,197 @@ size
 \end_inset
 
  with respect to the distribution.
+\end_layout
+
+\begin_layout Standard
+The challenge is to find an explicit expression for the pushforward 
+\begin_inset Formula $\rho\left(f^{-1}\left(A\right)\right)$
+\end_inset
+
+.
+ This can be obtained as a change of variable 
+\begin_inset Formula $y=f\left(x\right)$
+\end_inset
+
+ under integration.
+ Start with any function 
+\begin_inset Formula $h$
+\end_inset
+
+; it's integral over the set 
+\begin_inset Formula $A$
+\end_inset
+
+ is as above: 
+\begin_inset Formula $h\left(A\right)=\int_{A}h\left(y\right)dy$
+\end_inset
+
+.
+ Under the change of variable, this becomes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+h\left(A\right)=\int_{A}h\left(y\right)dy=\int_{f^{-1}\left(A\right)}h\left(f\left(x\right)\right)\left|f^{\prime}\left(x\right)\right|dx
+\]
+
+\end_inset
+
+Writing the integrand as 
+\begin_inset Formula $\rho\left(x\right)=h\left(f\left(x\right)\right)\left|f^{\prime}\left(x\right)\right|$
+\end_inset
+
+ and working backwards, one recovers
+\begin_inset Formula 
+\[
+h\left(y\right)=\frac{\rho\left(f^{-1}\left(y\right)\right)}{\left|f^{\prime}\left(f^{-1}\left(y\right)\right)\right|}
+\]
+
+\end_inset
+
+Plugging this back through gives the identity
+\begin_inset Formula 
+\[
+\int_{A}\frac{\rho\left(f^{-1}\left(y\right)\right)}{\left|f^{\prime}\left(f^{-1}\left(y\right)\right)\right|}dy=\int_{f^{-1}\left(A\right)}\rho\left(x\right)dx=\rho\left(f^{-1}\left(A\right)\right)
+\]
+
+\end_inset
+
+The right-hand-side is the desired pushforward; the left-hand side is an
+ explicit expression for it.
+ There was a minor sleight-of-hand in the above derivation: the map 
+\begin_inset Formula $y=f\left(x\right)$
+\end_inset
+
+ may not be one-to-one.
+ Thus, there may be several distinct points 
+\begin_inset Formula $x=f^{-1}\left(y\right)$
+\end_inset
+
+.
+ In this case, the above needs to be amended as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+h\left(y\right)=\sum_{x\in f^{-1}\left(y\right)}\frac{\rho\left(x\right)}{\left|f^{\prime}\left(x\right)\right|}
+\]
+
+\end_inset
+
+As 
+\begin_inset Formula $h$
+\end_inset
+
+ depends only on 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+, it is conventional to write 
+\begin_inset Formula $h=\mathcal{L}_{f}\rho$
+\end_inset
+
+.
+ The symbol 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is used to remind that this is a linear operator: 
+\begin_inset Formula $\mathcal{L}\left(a\rho+b\sigma\right)=a\mathcal{L}\rho+b\mathcal{L}\sigma$
+\end_inset
+
+ for any pair of real numbers 
+\begin_inset Formula $a,b$
+\end_inset
+
+ and any functions 
+\begin_inset Formula $\rho,\sigma$
+\end_inset
+
+.
+ The pushforward sequence now becomes
+\begin_inset Formula 
+\[
+\rho\left(A\right)\mapsto\left[\mathcal{L}_{f}\rho\right]\left(A\right)\mapsto\left[\mathcal{L}_{f}\mathcal{L}_{f}\rho\right]\left(A\right)\mapsto\cdots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, we've defined a linear operator 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ that depends only on the iterated function 
+\begin_inset Formula $f$
+\end_inset
+
+, and has the property of mapping distributions to other distributions as
+ it is iterated.
+ This is where the fun begins.
+ As a linear operator, the full force of operator theory comes into play.
+ In general, it will have some spectrum; the spectrum might be discrete
+ or continuous.
+ The spectrum depends strongly on the space of functions on which 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ is allowed to act.
+ For example, if the only distributions 
+\begin_inset Formula $\rho$
+\end_inset
+
+ we are allowed to consider are polynomials, then 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ will in general have a discrete spectrum.
+ If instead, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ are allowed to be square-integrable functions, then the spectrum will often
+ be continuous, and perhaps may have a large kernel.
+ Larger spaces exhibit even wilder behavior: if one asks only that 
+\begin_inset Formula $\rho$
+\end_inset
+
+ be 
+\begin_inset Formula $L^{1}$
+\end_inset
+
+-integrable (not square-integrable), then it is possible for continuous-nowhere
+ functions to appear as eigenfunctions of 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+.
+ A rich variety can often be found.
+\end_layout
+
+\begin_layout Standard
+The
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+As a linear operator, 
 \end_layout
 
 \begin_layout Standard
