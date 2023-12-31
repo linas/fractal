@@ -58,6 +58,21 @@ double comb_sum_norm(unsigned long idx)
 	return rescale;
 }
 
+double bits_to_real(unsigned long idx)
+{
+	double sum = 0.0;
+	int ord = bitlen(idx);
+
+	double tn = 0.5;
+	for (int i=ord-2; 0 <= i; i--)
+	{
+		if ((idx >> i) & 1UL)
+			sum += tn;
+		tn *= 0.5;
+	}
+
+	return sum;
+}
 
 int main(int argc, char* argv[])
 {
@@ -90,10 +105,14 @@ int main(int argc, char* argv[])
 		unsigned long idx = good_index_map(mcanon);
 		if (MAXIDX < idx) continue;
 
+#if COMB_CONVERGE
 		unsigned long SUMAC = 1UL << 19;
 		if (SUMAC < idx) continue;
 		double nsum = comb_sum_norm(idx);
 		nsum = 2.0*nsum - 1.0;
+#endif
+
+		double nsum = bits_to_real(idx);
 
 #if 0
 		unsigned long numo=0, deno=0;
