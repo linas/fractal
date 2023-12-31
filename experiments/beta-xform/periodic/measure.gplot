@@ -5,16 +5,31 @@ set term png size 640, 480
 
 set key left
 
-set yrange [0:1]
+# set yrange [0:1]
 set xrange [0:1]
 #set logscale y
 
 set title "Measure"
 
-# plot "measure.dat" using 2:3 with lines linewidth 1 title "meas"
+#plot "measure.dat" using 2:($3-1) with lines linewidth 1 title "bracket map", \
+#     "measure.dat" using 2:5 with lines linewidth 1 title "measure"
 
-plot "measure.dat" using (($2-0.5) / 0.118034) :(4*($3-0.5)) with lines linewidth 1 title "meas", \
-     "irr-tree.dat" using 5:($6-1) with lines linewidth 1 title "irr"
+#plot "bra-comb-6.dat" using (($1-32)/32):($6**(1.0/7)) with lines linewidth 1 title "comb 6", \
+#     "bra-comb-8.dat" using (($1-128)/128):($6**(1.0/9)) with lines linewidth 1 title "comb 8", \
+#     "bra-comb-10.dat" using (($1-512)/512):($6**(1.0/11)) with lines linewidth 1 title "comb 10", \
+#     "measure.dat" using 2:($4**(1.0/13)) with lines linewidth 1 title "frac", \
+#     "measure.dat" using 2:(0.5*($2+1)) with lines linewidth 1 title "fit"
+
+#plot "measure.dat" using ($3-1):($4**(1.0/13)) with lines linewidth 1 title "frac", \
+#     "measure.dat" using 2:(0.5*($2+1)) with lines linewidth 1 title "fit"
+
+set logscale y
+plot "measure.dat" using ($3-1):4 with lines linewidth 1 title "frac", \
+     "measure.dat" using 2:((($2+1)/2)**13) with lines linewidth 1 title "fit 13", \
+     "measure.dat" using 2:((($2+1)/2)**10) with lines linewidth 1 title "fit 10"
+
+
+#     "irr-tree.dat" using 5:($6-1) with lines linewidth 1 title "irr"
 
 
 #####

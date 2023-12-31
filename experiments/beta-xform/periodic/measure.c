@@ -27,7 +27,7 @@ unsigned long comb_sum(unsigned long idx)
 }
 
 // Reset sum to one at every order.
-// This is S_\nu from the paper, wiht \nu infered from the idx.
+// This is S_\nu from the paper, with \nu inferred from the idx.
 unsigned long comb_sum_order(unsigned long idx)
 {
 	int order = bitlen(idx);
@@ -105,16 +105,17 @@ int main(int argc, char* argv[])
 		unsigned long idx = good_index_map(mcanon);
 		if (MAXIDX < idx) continue;
 
-#if COMB_CONVERGE
 		unsigned long SUMAC = 1UL << 19;
 		if (SUMAC < idx) continue;
+
+		double gold = golden_beta(idx);
 		double nsum = comb_sum_norm(idx);
 		nsum = 2.0*nsum - 1.0;
-#endif
 
-		double nsum = bits_to_real(idx, 0.5);
-		// nsum += 0.5;
-		nsum = bits_to_real(idx, nsum);
+		unsigned long norb = comb_sum_order(mcanon);
+		int rank = bitlen(mcanon) + 1;
+		double moreau_nu = (double) necklace(rank);
+		double fracorb = ((double) norb) / moreau_nu;
 
 #if 0
 		unsigned long numo=0, deno=0;
@@ -122,6 +123,7 @@ int main(int argc, char* argv[])
 		double csum_dya = ((double) numo) / ((double) deno);
 #endif
 
-		printf("%d	%g	%g\n", i, x, nsum);
+		printf("%d	%g	%g	%g	%g\n", i, x, gold, fracorb, nsum);
+		fflush(stdout);
 	}
 }
