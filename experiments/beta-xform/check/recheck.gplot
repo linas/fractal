@@ -4,11 +4,14 @@ set term png size 1024,768
 set term png size 640, 480
 
 set xrange [0:1]
-# set yrange [0:1]
+# set yrange [0:5]
 
 set title "stuff"
 
-plot "recheck.dat" using 2:3 with lines title ""
+plot "recheck.dat" using 2:3 with lines title "orig", \
+     "recheck.dat" using 2:4 with lines title "ell", \
+     "recheck.dat" using 2:5 with lines title "rel", \
+     "recheck.dat" using 2:($5/$3) with lines title "rtt"
 
 #####
 

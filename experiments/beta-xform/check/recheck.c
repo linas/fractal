@@ -10,7 +10,8 @@
 
 double base(double x)
 {
-	return 1.0;
+	// return 1.0;
+	return 0.5-x;
 }
 
 double dense(double beta, double x)
@@ -32,6 +33,16 @@ double dense(double beta, double x)
 	return sum;
 }
 
+double ell(double beta, double x)
+{
+	double lo = x / beta;
+	double hi = lo + 0.5;
+
+	double ellie = dense(beta, lo) + dense(beta, hi);
+	ellie /= beta;
+	return ellie;
+}
+
 int main(int argc, char* argv[])
 {
 	double beta = atof(argv[1]);
@@ -41,6 +52,8 @@ int main(int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5) / ((double) npts);
 		double f = dense(beta, x);
-		printf("%d	%g	%g\n", i, x, f);
+		double elf = ell(beta, x);
+		double elg = ell(beta, beta*x);
+		printf("%d	%g	%g	%g	%g\n", i, x, f, elf, elg);
 	}
 }
