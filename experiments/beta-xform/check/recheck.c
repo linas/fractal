@@ -39,12 +39,14 @@ double base(double x, double beta, double strength)
 	histo[n] += strength;
 	nhits += strength;
 
+	double y = x * 2.0 / beta;
 	// return 1.0;
 	// return 1.0 / invar(beta,x);
 
 	// return 0.5-x;
-	return (x-0.5) / invar(beta,x);
-	// return sin(2.0* M_PI * x);
+	// return (x-0.5) / invar(beta,x);
+
+	return sin(2.0* M_PI * y) / invar(beta,x);
 	// if (x < 0.8*0.8) return 0.0;
 // printf("yo x=%g\n", x);
 	// if (x < 0.3333) return 0.0;
