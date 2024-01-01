@@ -5,6 +5,7 @@
  * January 2024
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,6 +13,12 @@ double base(double x)
 {
 	// return 1.0;
 	return 0.5-x;
+	// return x -0.5;
+	// return sin(2.0* M_PI * x);
+	// if (x < 0.8*0.8) return 0.0;
+// printf("yo x=%g\n", x);
+	// if (x < 0.3333) return 0.0;
+	// return 1.0;
 }
 
 double dense(double beta, double x)
@@ -23,7 +30,7 @@ double dense(double beta, double x)
 	{
 		if (x < tit)
 		{
-			sum += obn * base (x/beta);
+			sum += obn * base (x);
 		}
 		if (0.5 < tit) tit -= 0.5;
 		tit *= beta;

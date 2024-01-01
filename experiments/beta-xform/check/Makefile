@@ -9,3 +9,6 @@ all: recheck
 .o:
 	$(CC) -o $@ $^ -lm -lstdc++
 
+
+recheck: recheck.o
+
