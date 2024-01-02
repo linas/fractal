@@ -26,24 +26,35 @@ static void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
 	// printf("beta=%g\n", beta);
+	// printf("omega=%g\n", omega);
 
-	double midpnt = 0.5*beta;
-	double obn = 1.0;
-	for (int j=0; j<500; j++)
+	for (int i = 0; i < itermax; i++)
 	{
-		double x = midpnt;
+		double t = rand();
+		t /= RAND_MAX;
+		t /= array_size;
 
-		double en = array_size * (x-floor(x));
-		int n = en;
-		if (0 > n) n = 0;
-		if (n >= array_size) n = array_size-1;
-		array[n] += obn;
+		double midpnt = 0.5*beta+t;
+		double obn = 1.0;
+		double fade = 1.0;
+		for (int j=0; j<500; j++)
+		{
+			double x = midpnt;
 
-		if (0.5 < midpnt) midpnt -= 0.5;
-		midpnt *= beta;
+			double en = array_size * (x-floor(x));
+			int n = en;
+			if (0 > n) n = 0;
+			if (n >= array_size) n = array_size-1;
+			// array[n] += obn;
+			array[n] += fade / ((double) itermax/2);
 
-		obn /= beta;
-		if (obn < 1.0e-14) break;
+			if (0.5 < midpnt) midpnt -= 0.5;
+			midpnt *= beta;
+
+			fade *= omega;
+			obn /= beta;
+			if (obn < 1.0e-14) break;
+		}
 	}
 
 #if 0
