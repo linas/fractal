@@ -10,7 +10,7 @@ CXX = cc -std=gnu++11 -Wall -g -O2 $(INCLUDES)
 OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
         circout circin circmov brat \
-        draw dx image movie paste stats sum \
+        draw dx image movie paste stats \
         angle curl diff div card mandel morph \
         moire automatic wind winds ray \
         manvert cutoff brat draw dx image
@@ -23,7 +23,7 @@ NEW_EXES = affine alpha baker chirikov \
         mp_zeta mobius plouffe q-exp sho swap takagi totient zeta \
         ray automatic radius
 
-TOOLS = renorm
+TOOLS = renorm sum
 
 all:    $(NEW_EXES) $(TOOLS)
 
@@ -164,8 +164,8 @@ draw: draw.c  util.o
 #	$(CC) -o draw -I /src/tools/inc draw.c util.o -lm
 #	$(CC) -o draw -I /src/tools/inc draw.c util.o /src/tools/lib/Farey.o -lm
 
-sum diff paste mask angle curl div: sum.o  util.o opers.o
-	$(CC) -o sum sum.o util.o opers.o -lm
+sum diff paste mask angle curl div: sum.o  util.o opers.o fileio.o
+	$(CC) -o sum sum.o fileio.o util.o opers.o -lm
 	ln -f sum diff
 	ln -f sum paste
 	ln -f sum mask
