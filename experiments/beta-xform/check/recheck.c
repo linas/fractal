@@ -64,19 +64,23 @@ double base(double x, double beta, double strength)
 	histo[n] += strength;
 	nhits += strength;
 
-	//double y = x * 2.0 / beta;
+	// double y = x * 2.0 / beta;
 	// double ska = 1.0 / invar(beta, x);
 	// return 1.0;
 	// return 1.0 / invar(beta, x);
 
 	// return 0.5-x;
+	return x-0.5;
+	// return 1.0-x;
 	// return (y-0.5) *ska;
 
+	// return sin(2.0* M_PI * x);
 	// return sin(2.0* M_PI * y) / invar(beta, x);
 	// return sin(2.0* M_PI * y) * ska;
 
 	// return sqrt(invar(beta, x)) * ska;
 
+#if ZIGZAG
 	double a = 0.2;
 	double b = 1.4473 / 1.61803;
 	if (x< 0.5)
@@ -84,6 +88,7 @@ double base(double x, double beta, double strength)
 	if (x < 0.5*phi)
 		return b+a*zigzag((x-0.5) * phi * 2);
 	return 0.0;
+#endif
 
 	// if (x < 0.8*0.8) return 0.0;
 // printf("yo x=%g\n", x);
@@ -129,6 +134,11 @@ double ell(double beta, double y)
 
 int main(int argc, char* argv[])
 {
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s beta \n", argv[0]);
+		exit (1);
+	}
 	double beta = atof(argv[1]);
 
 	for (int i=0; i<NHIST; i++) histo[i] = 0.0;

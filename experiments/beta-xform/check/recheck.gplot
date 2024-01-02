@@ -1,17 +1,17 @@
 
-set out 'recheck.png'
 set term png size 1024,768
 set term png size 640, 480
+set out 'recheck.png'
 
 set xrange [0:1]
 # set yrange [0:3]
 
 set title "stuff"
 
-plot "recheck.dat" using 2:3 with lines title "histo", \
+plot "recheck.dat" using 2:3 with lines title "histogram of densy", \
      "recheck.dat" using 2:4 with lines linewidth 2 title "densy", \
-     "recheck.dat" using 2:5 with lines title "invar", \
-     "recheck.dat" using 2:6 with lines title "elf"
+     "recheck.dat" using 2:5 with lines title "invariant meas", \
+     "recheck.dat" using 2:6 with lines title "transfer"
 
 #plot "recheck.dat" using 2:3 with lines title "orig", \
 #     "recheck.dat" using 2:4 with lines title "ell", \
