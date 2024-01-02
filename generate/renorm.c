@@ -108,7 +108,7 @@ void write_flo_file(const char *fname,
    FILE *fh = Fopen(fname, ".flo");
    if (NULL == fh)
 	{
-      fprintf (stderr, "Can't open output file %s \n", fname);
+      fprintf (stderr, "Can't open output file %s.flo\n", fname);
 		return;
    }
 
@@ -116,6 +116,35 @@ void write_flo_file(const char *fname,
    fprintf (fh, "%d %d\n", data_width, data_height);
    fwrite (data, sizeof(float), data_width*data_height, fh);
    fclose (fh);
+}
+
+/*-------------------------------------------------------------------*/
+// Write a *.pfm greyscale floating-point pixmap.
+// The file format is width, height in ascii, then newline
+// then floating point data in machine-native byte order.
+// One float per pixel, a total of width*height floats.
+void write_pfm_file(const char *fname,
+                    float* data,
+                    unsigned int data_width, unsigned int data_height)
+{
+	FILE *fh = Fopen(fname, ".pfm");
+	if (NULL == fh)
+	{
+		fprintf (stderr, "Can't open output file %s.pfm\n", fname);
+		return;
+	}
+
+	/* dump the size to output */
+	fprintf (fh, "Pf\n");
+	fprintf (fh, "%d %d\n", data_width, data_height);
+	double scale = 1.0;
+	// if (htonl(47) != 47) scale = -1.0; // Little-endian
+	if (htobe16(47) != 47) scale = -1.0; // Little-endian
+	fprintf (fh, "%f\n", scale);
+
+	/* And now the data. */
+	fwrite (data, sizeof(float), data_width*data_height, fh);
+	fclose (fh);
 }
 
 /*-------------------------------------------------------------------*/
@@ -193,6 +222,9 @@ int main (int argc, char *argv[])
 
 	if (0 == strcmp(suff, ".flo"))
 		write_flo_file(argv[2], data_in, data_width, data_height);
+
+	if (0 == strcmp(suff, ".pfm"))
+		write_pfm_file(argv[2], data_in, data_width, data_height);
 
 	return 0;
 }
