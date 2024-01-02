@@ -14,7 +14,6 @@ INC = $(TOP)/inc
 CC = /usr/bin/cc -O2 -I $(INC)
 
 all: chop concat
-	cd image; make all
 
 chop:	chop.c 
 	$(CC) -o chop chop.c 
