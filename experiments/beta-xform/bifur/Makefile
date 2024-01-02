@@ -7,8 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../../tools/inc
 FUNC=../../../tools/lib/libfunc.a
 
-all: bernie bigbern unbernie \
-	carry-sum bitshow momenta
+all: bernie bigbern unbernie carry-sum bitshow momenta point
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -24,11 +23,13 @@ bigbern.o: bigbern.C
 unbernie.o: unbernie.C
 carry-sum.o: carry-sum.C
 bitshow.o: bitshow.c $(FUNCDIR)/bitops.h
+momenta.o: momenta.C
+point.o: point.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
 unbernie: unbernie.o $(BRAT)
 carry-sum: carry-sum.o $(BRAT)
 bitshow: bitshow.o $(FUNC)
-
 momenta: momenta.o $(BRAT)
+point: point.o $(BRAT)

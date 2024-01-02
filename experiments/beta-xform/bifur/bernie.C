@@ -1,7 +1,7 @@
 /*
  * bernie.C
  *
- * Draw Feigenboum-style bifurcation diagrams for the beta-map
+ * Draw Feigenbaum-style bifurcation diagrams for the beta-map
  * and lots of other maps. These diagrams collect up the "invariant
  * measure" as they are iterated.
  *

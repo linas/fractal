@@ -1,6 +1,7 @@
 /*
  * recheck.c
  * Recheck old (negative) results.
+ * They're still negative.
  *
  * January 2024
  */
@@ -11,17 +12,17 @@
 
 double invar(double beta, double x)
 {
-	double tit = 0.5*beta;
+	double midpnt = 0.5*beta;
 	double obn = 1.0;
 	double sum = 0.0;
 	double norm = 0.0;
 	for (int i=0; i<1000; i++)
 	{
-		if (x < tit) sum += obn;
-		norm += tit*obn;
+		if (x < midpnt) sum += obn;
+		norm += midpnt*obn;
 
-		if (0.5 < tit) tit -= 0.5;
-		tit *= beta;
+		if (0.5 < midpnt) midpnt -= 0.5;
+		midpnt *= beta;
 		obn /= beta;
 		if (obn < 1e-15) break;
 	}
@@ -92,19 +93,19 @@ double base(double x, double beta, double strength)
 
 double dense(double beta, double x)
 {
-	double tit = 0.5*beta;
+	double midpnt = 0.5*beta;
 	double obn = 1.0;
 	double sum = 0.0;
 	for (int i=0; i<1000; i++)
 	{
-		if (x < tit)
+		if (x < midpnt)
 		{
 			sum += obn * base (x, beta, obn);
 		}
-		if (0.5 < tit) tit -= 0.5;
-		tit *= beta;
+		if (0.5 < midpnt) midpnt -= 0.5;
+		midpnt *= beta;
 		obn /= beta;
-		// printf("i=%d x=%g tit=%g obn=%g sum=%g\n", i, x, tit, obn, sum);
+		// printf("i=%d x=%g midpnt=%g obn=%g sum=%g\n", i, x, midpnt, obn, sum);
 
 		if (obn < 1e-15) break;
 	}
