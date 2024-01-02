@@ -18,15 +18,15 @@ double invar(double beta, double x)
 	for (int i=0; i<1000; i++)
 	{
 		if (x < tit) sum += obn;
-		if (tit < 0.5) norm += obn;
+		norm += tit*obn;
 
 		if (0.5 < tit) tit -= 0.5;
 		tit *= beta;
 		obn /= beta;
 		if (obn < 1e-15) break;
 	}
-	norm *= beta;
 	return sum / norm;
+	return sum;
 }
 
 #define NHIST 1000
