@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "fileio.h"
+
 extern FILE *Fopen();
 extern FILE *Fopenr();
 
@@ -97,12 +99,32 @@ float* read_pfm_file(const char *fname,
 }
 
 /*-------------------------------------------------------------------*/
+float* read_floats(const char *fname, const char** suff,
+                   unsigned int* data_width, unsigned int* data_height)
+{
+	/* open input file */
+	*suff = ".flo";
+	float* data_in = read_flo_file(fname, data_width, data_height);
+	if (NULL == data_in)
+	{
+		*suff = ".pfm";
+		data_in = read_pfm_file(fname, data_width, data_height);
+	}
+	if (NULL == data_in)
+	{
+		*suff = "";
+		fprintf (stderr, "Can't open input file %s\n", fname);
+		return NULL;
+	}
+	return data_in;
+}
+
+/*-------------------------------------------------------------------*/
 // Write a *.flo greyscale floating-point pixmap.
 // The file format is width, height in ascii, then newline
 // then floating point data in machine-native byte order.
 // One float per pixel, a total of width*height floats.
-void write_flo_file(const char *fname,
-                    float* data,
+void write_flo_file(const char *fname, float* data,
                     unsigned int data_width, unsigned int data_height)
 {
    FILE *fh = Fopen(fname, ".flo");
@@ -123,8 +145,7 @@ void write_flo_file(const char *fname,
 // The file format is width, height in ascii, then newline
 // then floating point data in machine-native byte order.
 // One float per pixel, a total of width*height floats.
-void write_pfm_file(const char *fname,
-                    float* data,
+void write_pfm_file(const char *fname, float* data,
                     unsigned int data_width, unsigned int data_height)
 {
 	FILE *fh = Fopen(fname, ".pfm");
@@ -145,6 +166,17 @@ void write_pfm_file(const char *fname,
 	/* And now the data. */
 	fwrite (data, sizeof(float), data_width*data_height, fh);
 	fclose (fh);
+}
+
+/*-------------------------------------------------------------------*/
+void write_floats(const char *fname, const char* suff, float* data,
+                  unsigned int data_width, unsigned int data_height)
+{
+	if (0 == strcmp(suff, ".flo"))
+		write_flo_file(fname, data, data_width, data_height);
+
+	if (0 == strcmp(suff, ".pfm"))
+		write_pfm_file(fname, data, data_width, data_height);
 }
 
 /* --------------- END OF FILE ------------------------- */

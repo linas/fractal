@@ -15,7 +15,6 @@
 /*-------------------------------------------------------------------*/
 int main (int argc, char *argv[])
 {
-   unsigned int data_width, data_height;/* data array dimensions */
    float 		scale_fact;
    float 		offset;
 
@@ -43,13 +42,9 @@ int main (int argc, char *argv[])
 
 	/*-----------------------------------------------*/
 	/* open input file */
-	const char* suff = ".flo";
-	float* data_in = read_flo_file(argv[1], &data_width, &data_height);
-	if (NULL == data_in)
-	{
-		suff = ".pfm";
-		data_in = read_pfm_file(argv[1], &data_width, &data_height);
-	}
+	const char* suff;
+   unsigned int data_width, data_height; /* data array dimensions */
+	float* data_in = read_floats(argv[1], &suff, &data_width, &data_height);
 	if (NULL == data_in)
 	{
 		fprintf (stderr, " Can't open input file %s \n", argv[1]);
@@ -85,11 +80,7 @@ int main (int argc, char *argv[])
    expand (data_in, data_width, data_height, scale_fact/msq, aver);
 */
 
-	if (0 == strcmp(suff, ".flo"))
-		write_flo_file(argv[2], data_in, data_width, data_height);
-
-	if (0 == strcmp(suff, ".pfm"))
-		write_pfm_file(argv[2], data_in, data_width, data_height);
+	write_floats(argv[2], suff, data_in, data_width, data_height);
 
 	return 0;
 }
