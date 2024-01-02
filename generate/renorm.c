@@ -97,10 +97,31 @@ float* read_pfm_file(const char *fname,
 }
 
 /*-------------------------------------------------------------------*/
+// Write a *.flo greyscale floating-point pixmap.
+// The file format is width, height in ascii, then newline
+// then floating point data in machine-native byte order.
+// One float per pixel, a total of width*height floats.
+void write_flo_file(const char *fname,
+                    float* data,
+                    unsigned int data_width, unsigned int data_height)
+{
+   FILE *fh = Fopen(fname, ".flo");
+   if (NULL == fh)
+	{
+      fprintf (stderr, "Can't open output file %s \n", fname);
+		return;
+   }
+
+   /* dump the size to output */
+   fprintf (fh, "%d %d\n", data_width, data_height);
+   fwrite (data, sizeof(float), data_width*data_height, fh);
+   fclose (fh);
+}
+
+/*-------------------------------------------------------------------*/
 int main (int argc, char *argv[])
 {
    unsigned int data_width, data_height;/* data array dimensions */
-   FILE		*fp_out;
    float 		scale_fact;
    float 		offset;
 
@@ -142,16 +163,6 @@ int main (int argc, char *argv[])
 	}
 
    /*-----------------------------------------------*/
-   /* open output file */
-   if ( (fp_out = Fopen (argv[2], ".flo")) == NULL) {
-      fprintf (stderr, " Can't open output file %s \n", argv[2]);
-      return 3;
-   }
-
-   /* dump the size to output */
-   fprintf (fp_out, "%d %d\n", data_width, data_height);
-
-   /*-----------------------------------------------*/
 	/* Strip out the path */
 	char * p = strdup(argv[0]);
 	char * name = strrchr(p, '/');
@@ -180,9 +191,8 @@ int main (int argc, char *argv[])
    expand (data_in, data_width, data_height, scale_fact/msq, aver);
 */
 
-   fwrite (data_in, sizeof(float), data_width*data_height, fp_out);
-
-   fclose (fp_out);
+	if (0 == strcmp(suff, ".flo"))
+		write_flo_file(argv[2], data_in, data_width, data_height);
 
 	return 0;
 }
