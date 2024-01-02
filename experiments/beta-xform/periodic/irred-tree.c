@@ -73,7 +73,7 @@ void low_guess(double rat, int* p, int* q)
 
 int main(int argc, char* argv[])
 {
-// #define SPOT_CHECK
+#define SPOT_CHECK
 #ifdef SPOT_CHECK
 	if (argc != 2)
 	{
@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define PRINT_DYADIC_TO_BETA_MAP
+// #define PRINT_DYADIC_TO_BETA_MAP
 #ifdef PRINT_DYADIC_TO_BETA_MAP
 	// Generate datafile for the bracket-tree graph, and the good-dyad map.
 	if (argc != 2)

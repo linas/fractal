@@ -1,5 +1,6 @@
 /*
  * point.C
+ * Show movement of the midpoint(endpoint).
  *
  * Dec 2017 Jan 2024
  */
@@ -70,11 +71,3 @@ static void bifurcation_diagram (float *array,
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)
-
-#if 0
-int main ( int argc, char * argv[])
-{
-	double om = atof(argv[1]);
-	double kb = atof(argv[2]);
-}
-#endif
