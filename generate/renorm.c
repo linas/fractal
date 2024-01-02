@@ -10,19 +10,47 @@
 #include <math.h>
 #include "opers.h"
 
-/*-------------------------------------------------------------------*/
 extern FILE *Fopen();
 extern FILE *Fopenr();
 
+/* data array dimensions */
+float* read_flo_file(const char *fname,
+                     unsigned int* data_width, unsigned int* data_height)
+{
+	/* open input file */
+	FILE *fh = Fopenr (fname, ".flo");
+	if (NULL == fh) return NULL;
+
+	int i = 0;
+	int j = 1;
+#define CLEN 80
+   char str[CLEN];
+	while ((0 != j) && ('\n' != j) && (i < CLEN))
+	{
+		j =  fgetc (fh);
+		str[i] = j;
+		i++;
+	}
+
+	sscanf(str, "%d %d", data_width, data_height);
+	fprintf(stderr, "Input file %s has width %d height %d \n",
+	        fname, *data_width, *data_height);
+
+	size_t datalen = (*data_width) * (*data_height);
+	float* data_in = (float *) malloc (datalen * sizeof(float));
+
+	/* read floating point data */
+	fread(data_in, sizeof(float), datalen, fh);
+	fclose(fh);
+
+	return data_in;
+}
+
+/*-------------------------------------------------------------------*/
 int main (int argc, char *argv[])
 {
-   float *data_in ;	/* my data array */
-   // float	*data_out;	/* my data array */
-   // float		*tmp; 		/* pointer into data array */
-   unsigned int	data_width, data_height;/* data array dimensions */
-   int		i,j;
-   char 		str[80];
-   FILE		*fp_in, *fp_out;
+   unsigned int data_width, data_height;/* data array dimensions */
+   FILE		*fp_out;
    float 		scale_fact;
    float 		offset;
 
@@ -51,35 +79,12 @@ int main (int argc, char *argv[])
 
    /*-----------------------------------------------*/
    /* open input file */
-   if ( (fp_in = Fopenr (argv[1], ".flo")) == NULL) {
+	float* data_in = read_flo_file(argv[1], &data_width, &data_height);
+   if (NULL == data_in)
+	{
       fprintf (stderr, " Can't open input file %s \n", argv[1]);
       return 2;
    }
-
-   i = 0;
-   j = 1;
-   while ((0 != j) && ('\n' != j)) {
-      j =  fgetc (fp_in);
-      str[i] = j;
-      i++;
-   }
-
-/*
-   if ( NULL == fgets (str, 80, fp_in)) {
-      fprintf (stderr, " Can't read input file %s \n", argv[1]);
-      fclose (fp_in);
-      return;
-   }
-*/
-
-   sscanf (str, "%d %d", &data_width, &data_height);
-   fprintf (stderr, "Input file %s has width %d height %d \n", argv[1], data_width, data_height);
-
-   data_in = (float *) malloc (data_width * data_height * sizeof(float));
-
-   /* read floating point data */
-   fread(data_in, sizeof(float), data_width*data_height, fp_in);
-   fclose (fp_in);
 
    /*-----------------------------------------------*/
    /* open output file */
