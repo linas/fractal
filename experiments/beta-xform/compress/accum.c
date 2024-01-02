@@ -3,6 +3,8 @@
  *
  * Where does the expander function accumulate? A histogram.
  * I thought I did this once before, but I can't find the result.
+ * I even recall looking at the figures...
+ * Found it. It's in "../hessenberg/sampler.c"
  *
  * Linas Vepstas Jan 2024
  */
@@ -15,9 +17,10 @@
 // resummed using K.  Recall K=beta/2.
 double pdr(double x, double Kay)
 {
+#define NBITS 50
 	// Decompose x into a bit sequence.
-	char nbits[50];
-	for (int i=0; i<50; i++)
+	char nbits[NBITS];
+	for (int i=0; i<NBITS; i++)
 	{
 		if (0.5 <= x)
 		{
@@ -30,13 +33,11 @@ double pdr(double x, double Kay)
 
 	// Reconstruct x in a mashed bernoulli sequence.
 	double acc = 1.0e-30;
-	for (int i=0; i<50; i++)
+	for (int i=0; i<NBITS; i++)
 	{
 		acc *= 1.0 / (2.0*Kay);
-		if (nbits[50-i-1])
-		{
+		if (nbits[NBITS-i-1])
 			acc += 0.5;
-		}
 	}
 
 	return acc;
@@ -46,10 +47,11 @@ int main (int argc, char* argv[])
 {
 	if (argc < 2)
 	{
-		fprintf(stderr, "Usage: %s beta\n", argv[0]);
+		fprintf(stderr, "Usage: %s beta npts\n", argv[0]);
 		exit (1);
 	}
 	double beta = atof(argv[1]);
+	int npts = atoi(argv[2]);
 
 #define NHISTO 1000
 	double histo[NHISTO];
@@ -57,7 +59,6 @@ int main (int argc, char* argv[])
 
 	double scale = pdr(1.0, 0.5*beta);
 
-	int npts = 16803;
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
@@ -66,7 +67,7 @@ int main (int argc, char* argv[])
 		int n = floor(NHISTO * y / scale);
 		if (n < 0) n=0;
 		if (NHISTO <= n) n = NHISTO-1;
-		histo[n] += 1.0 / ((double) npts);
+		histo[n] += ((double) NHISTO) / ((double) npts);
 	}
 
 	for (int i=0; i< NHISTO; i++)

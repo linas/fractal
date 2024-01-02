@@ -1,6 +1,7 @@
-
 /*
+ * sampler.c
  * Sampling in the transfer operator.
+ * See also ../compress/accum.c which generates a similar idea.
  *
  * Dec 2017 Linas Vepstas
  */
