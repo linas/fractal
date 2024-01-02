@@ -34,6 +34,29 @@ double histo[NHIST];
 
 double nhits = 0.0;
 
+double phi = 1.618033988749895;
+double phi2 = 0.8090169943749475;
+double zig(double x)
+{
+	x -= floor(x);
+	if (x < phi2) return x/phi2;
+	return (x-phi2) / (1-phi2);
+}
+double zigzag(double x)
+{
+	double w = 0.4;
+	double tn = 1.0;
+	double wn = 1.0;
+	double sum = 0;
+	for (int i=0; i<10; i++)
+	{
+		sum += wn * zig(tn*x);
+		tn *= 2;
+		wn *= w;
+	}
+	return sum;
+}
+
 double base(double x, double beta, double strength)
 {
 	int n = floor(NHIST * x);
@@ -42,7 +65,7 @@ double base(double x, double beta, double strength)
 
 	//double y = x * 2.0 / beta;
 	// double ska = 1.0 / invar(beta, x);
-	return 1.0;
+	// return 1.0;
 	// return 1.0 / invar(beta, x);
 
 	// return 0.5-x;
@@ -52,6 +75,14 @@ double base(double x, double beta, double strength)
 	// return sin(2.0* M_PI * y) * ska;
 
 	// return sqrt(invar(beta, x)) * ska;
+
+	double a = 0.2;
+	double b = 1.4473 / 1.61803;
+	if (x< 0.5)
+		return b + a*zigzag(2.0*x);
+	if (x < 0.5*phi)
+		return b+a*zigzag((x-0.5) * phi * 2);
+	return 0.0;
 
 	// if (x < 0.8*0.8) return 0.0;
 // printf("yo x=%g\n", x);
