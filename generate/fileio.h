@@ -6,6 +6,10 @@
  * more hacks ever since -- Linas
  */
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /*-------------------------------------------------------------------*/
 // Read a *.flo greyscale floating-point pixmap.
 // The file format is width, height in ascii, then newline
@@ -47,4 +51,8 @@ void write_pfm_file(const char *fname, float* data,
 void write_floats(const char *fname, const char* suff, float* data,
                   unsigned int data_width, unsigned int data_height);
 
+/*-------------------------------------------------------------------*/
+#ifdef  __cplusplus
+};
+#endif
 /* --------------- END OF FILE ------------------------- */

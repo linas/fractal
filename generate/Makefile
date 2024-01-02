@@ -54,39 +54,41 @@ renorm.o: opers.h fileio.h
 util.o:	util.h
 fileio..o:	fileio.h util.h
 
-affine.o: affine.C brat.h
-alpha.o: alpha.C brat.h
-baker.o: baker.C brat.h
+brat.o: brat.C brat.h fileio.h
+
+affine.o: affine.C brat.h fileio.h
+alpha.o: alpha.C brat.h fileio.h
+baker.o: baker.C brat.h fileio.h
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
-chirikov.o: chirikov.C brat.h
-circle-mom.o: circle-mom.C brat.h
+chirikov.o: chirikov.C brat.h fileio.h
+circle-mom.o: circle-mom.C brat.h fileio.h
 cutoff.o: cutoff.C
-divisor.o: divisor.C brat.h
-elliptic.o: elliptic.C brat.h
-erdos.o: erdos.C brat.h
-euler-q.o: euler-q.C brat.h
-fdist.o: fdist.C brat.h
-gamma.o: gamma.C brat.h
-gauss-red.o: gauss-red.C brat.h
-gkd.o: gkd.C brat.h
-gkw.o: gkw.C brat.h
-gkw-integrand.o: gkw-integrand.C brat.h
-haar.o: haar.C brat.h
-hardy.o: hardy.C brat.h
-hermite.o: hermite.C brat.h
-hurwitz.o: hurwitz.C brat.h
-ising.o: ising.C brat.h
-mobius.o: mobius.C brat.h
+divisor.o: divisor.C brat.h fileio.h
+elliptic.o: elliptic.C brat.h fileio.h
+erdos.o: erdos.C brat.h fileio.h
+euler-q.o: euler-q.C brat.h fileio.h
+fdist.o: fdist.C brat.h fileio.h
+gamma.o: gamma.C brat.h fileio.h
+gauss-red.o: gauss-red.C brat.h fileio.h
+gkd.o: gkd.C brat.h fileio.h
+gkw.o: gkw.C brat.h fileio.h
+gkw-integrand.o: gkw-integrand.C brat.h fileio.h
+haar.o: haar.C brat.h fileio.h
+hardy.o: hardy.C brat.h fileio.h
+hermite.o: hermite.C brat.h fileio.h
+hurwitz.o: hurwitz.C brat.h fileio.h
+ising.o: ising.C brat.h fileio.h
+mobius.o: mobius.C brat.h fileio.h
 mp_zeta.o: mp_zeta.C
-plouffe.o: plouffe.C brat.h
-q-exp.o: q-exp.C brat.h
-swap.o: swap.C brat.h
-sho.o: sho.C brat.h coord-xforms.h
-takagi.o: takagi.C brat.h
-totient.o: totient.C brat.h
-zeta.o: zeta.C brat.h
+plouffe.o: plouffe.C brat.h fileio.h
+q-exp.o: q-exp.C brat.h fileio.h
+swap.o: swap.C brat.h fileio.h
+sho.o: sho.C brat.h fileio.h coord-xforms.h
+takagi.o: takagi.C brat.h fileio.h
+totient.o: totient.C brat.h fileio.h
+zeta.o: zeta.C brat.h fileio.h
 
 FUNC=../tools/lib/libfunc.a -lpthread
 # MP=../experiments/anant-git/src/libanant.a -ldb -lpthread
@@ -96,45 +98,45 @@ GSL=-lgsl -lgslcblas
 
 ################## Dependencies and compile/link #########
 #
-affine: brat.o affine.o util.o
-alpha: brat.o alpha.o util.o $(GSL)
-baker: brat.o baker.o util.o
-brat-beigen: brat.o brat-beigen.o util.o
-brat-gap-hair: brat.o brat-gap-hair.o util.o $(FUNC)
-brat-gapper: brat.o brat-gapper.o util.o $(FUNC)
-chirikov: brat.o chirikov.o util.o
-circle-mom: brat.o circle-mom.o util.o
-cutoff: brat.o cutoff.o coord-xforms.o util.o
-divisor: brat.o divisor.o util.o $(FUNC)
-elliptic: brat.o elliptic.o util.o
-erdos: brat.o erdos.o coord-xforms.o util.o $(FUNC)
-euler-q: brat.o euler-q.o coord-xforms.o util.o $(FUNC)
-fdist: brat.o fdist.o util.o $(FUNC)
-gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP)
-gauss-red: brat.o gauss-red.o util.o
-gkd: brat.o gkd.o util.o
-gkw: brat.o gkw.o util.o $(FUNC) $(MP) $(GMP)
-gkw-integrand: brat.o gkw-integrand.o util.o $(FUNC) $(MP) $(GMP)
-haar: brat.o haar.o util.o
-hardy: brat.o hardy.o util.o $(FUNC)
-hermite: brat.o hermite.o util.o
-hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP)
-ising: brat.o ising.o util.o $(FUNC)
-ising-moment: brat.o ising-moment.o util.o $(FUNC)
-mand-flow: brat.o mand-flow.o util.o
-mobius: brat.o mobius.o util.o $(FUNC)
-mp_zeta: brat.o mp_zeta.o util.o $(MP) $(GMP)
-plouffe: brat.o plouffe.o util.o
-q-exp: brat.o q-exp.o util.o
-swap: brat.o swap.o util.o
-sho: brat.o sho.o util.o coord-xforms.o $(MP) $(GMP)
-takagi: brat.o takagi.o util.o
-totient: brat.o totient.o util.o $(FUNC)
-zeta: brat.o zeta.o util.o $(GSL)
+affine: fileio.o brat.o affine.o util.o
+alpha: brat.o fileio.o alpha.o util.o $(GSL)
+baker: brat.o fileio.o baker.o util.o
+brat-beigen: brat.o fileio.o brat-beigen.o util.o
+brat-gap-hair: brat.o fileio.o brat-gap-hair.o util.o $(FUNC)
+brat-gapper: brat.o fileio.o brat-gapper.o util.o $(FUNC)
+chirikov: brat.o fileio.o chirikov.o util.o
+circle-mom: brat.o fileio.o circle-mom.o util.o
+cutoff: brat.o fileio.o cutoff.o coord-xforms.o util.o
+divisor: brat.o fileio.o divisor.o util.o $(FUNC)
+elliptic: brat.o fileio.o elliptic.o util.o
+erdos: brat.o fileio.o erdos.o coord-xforms.o util.o $(FUNC)
+euler-q: brat.o fileio.o euler-q.o coord-xforms.o util.o $(FUNC)
+fdist: brat.o fileio.o fdist.o util.o $(FUNC)
+gamma: brat.o fileio.o gamma.o util.o coord-xforms.o $(MP) $(GMP)
+gauss-red: brat.o fileio.o gauss-red.o util.o
+gkd: brat.o fileio.o gkd.o util.o
+gkw: brat.o fileio.o gkw.o util.o $(FUNC) $(MP) $(GMP)
+gkw-integrand: brat.o fileio.o gkw-integrand.o util.o $(FUNC) $(MP) $(GMP)
+haar: brat.o fileio.o haar.o util.o
+hardy: brat.o fileio.o hardy.o util.o $(FUNC)
+hermite: brat.o fileio.o hermite.o util.o
+hurwitz: brat.o fileio.o hurwitz.o util.o $(MP) $(GMP)
+ising: brat.o fileio.o ising.o util.o $(FUNC)
+ising-moment: brat.o fileio.o ising-moment.o util.o $(FUNC)
+mand-flow: brat.o fileio.o mand-flow.o util.o
+mobius: brat.o fileio.o mobius.o util.o $(FUNC)
+mp_zeta: brat.o fileio.o mp_zeta.o util.o $(MP) $(GMP)
+plouffe: brat.o fileio.o plouffe.o util.o
+q-exp: brat.o fileio.o q-exp.o util.o
+swap: brat.o fileio.o swap.o util.o
+sho: brat.o fileio.o sho.o util.o coord-xforms.o $(MP) $(GMP)
+takagi: brat.o fileio.o takagi.o util.o
+totient: brat.o fileio.o totient.o util.o $(FUNC)
+zeta: brat.o fileio.o zeta.o util.o $(GSL)
 
 
-manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
-	$(CC) -o brat brat.o util.o -lm -lstdc++
+manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o fileio.o  util.o $(FAREY)
+	$(CC) -o brat brat.o fileio.o util.o -lm -lstdc++
 	ln -f brat manvert
 	ln -f brat stalk
 	ln -f brat mstop

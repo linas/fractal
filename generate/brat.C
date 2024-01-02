@@ -23,6 +23,7 @@
 #include <time.h>
 
 #include "brat.h"
+#include "fileio.h"
 
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using */
@@ -2714,14 +2715,8 @@ main (int argc, char *argv[])
       return 0;
    }
 
-   /* dump the floating point data */
-   if ( (fp = Fopen (argv[1], ".flo")) == NULL) {
-      printf (" File open failure for %s.flo\n", argv[1]);
-      return 1;
-   }
-   fprintf (fp, "%d %d\n", data_width, data_height);
-   fwrite (data, sizeof(float), data_width*data_height, fp);
-   fclose (fp);
+   /* Dump the floating point data */
+	write_floats(argv[1], ".pfm", data, data_width, data_height);
 
    if ( (fp = Fopen (argv[1], ".txt")) == NULL) {
       printf (" File open failure for %s.txt\n", argv[1]);
