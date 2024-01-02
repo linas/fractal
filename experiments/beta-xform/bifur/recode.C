@@ -1,7 +1,7 @@
 /*
  * recode.C
  * Recode beta orbits to 2-adic values.
- * This is the "expander" diagram, across all beta's.
+ * This is the "compressor" function, turned on it's side, across all beta's.
  *
  * Jan 2024
  */
@@ -12,7 +12,11 @@
 
 #include "brat.h"
 
-double recode(double beta, double x)
+// This is described in the text as the "cpr" function, or the
+// "compressor function". It just recodes a beta bit expansion
+// as a binary bit expansion. Figure 8 or thereabouts, early
+// in the diary.
+double cpr(double beta, double x)
 {
 	double tn = 0.5;
 	double sum = 0.0;
@@ -36,7 +40,7 @@ double recode(double beta, double x)
 
 static double coding (double x, double y, int itermax, double param)
 {
-	return recode(y, x);
+	return cpr(y, x);
 }
 
 DECL_MAKE_HEIGHT(coding)
