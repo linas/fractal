@@ -36,7 +36,9 @@ static void bifurcation_diagram (float *array,
 
 		double midpnt = 0.5*beta+t;
 		double obn = 1.0;
-		double fade = 1.0;
+		double geofade = 1.0;
+		double arithfade = 1.0;
+
 		for (int j=0; j<500; j++)
 		{
 			double x = midpnt;
@@ -46,12 +48,14 @@ static void bifurcation_diagram (float *array,
 			if (0 > n) n = 0;
 			if (n >= array_size) n = array_size-1;
 			// array[n] += obn;
-			array[n] += fade / ((double) itermax/2);
+			array[n] += geofade / ((double) itermax/2);
+			// array[n] += arithfade / ((double) itermax/2);
 
 			if (0.5 < midpnt) midpnt -= 0.5;
 			midpnt *= beta;
 
-			fade *= omega;
+			geofade *= omega;
+			arithfade -= (1.0-omega);
 			obn /= beta;
 			if (obn < 1.0e-14) break;
 		}
