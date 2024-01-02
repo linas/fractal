@@ -80,12 +80,17 @@ double dense(double beta, double x)
 	return sum;
 }
 
-double ell(double beta, double x)
+double ell(double beta, double y)
 {
-	double lo = x / beta;
-	double hi = lo + 0.5;
+	if (0.5 * beta < y) return 0.0;
 
-	double ellie = dense(beta, lo) + dense(beta, hi);
+	double xlo = y / beta;
+	double xhi = xlo + 0.5;
+
+	double dlo = dense(beta, xlo);
+	double dhi = dense(beta, xhi);
+
+	double ellie = dlo + dhi;
 	ellie /= beta;
 	return ellie;
 }
@@ -121,7 +126,7 @@ int main(int argc, char* argv[])
 		double h = save_histo[i] / norm;
 		double f = dense(beta, x) / norm;
 		double mu = invar(beta, x);
-		double elf = ell(beta, x);
+		double elf = ell(beta, x) / norm;
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, h, f, mu, elf);
 	}
 }
