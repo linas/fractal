@@ -18,13 +18,14 @@ double invar(double beta, double x)
 	for (int i=0; i<1000; i++)
 	{
 		if (x < tit) sum += obn;
-		norm += obn;
+		if (tit < 0.5) norm += obn;
 
 		if (0.5 < tit) tit -= 0.5;
 		tit *= beta;
 		obn /= beta;
 		if (obn < 1e-15) break;
 	}
+	norm *= beta;
 	return sum / norm;
 }
 
@@ -39,14 +40,19 @@ double base(double x, double beta, double strength)
 	histo[n] += strength;
 	nhits += strength;
 
-	double y = x * 2.0 / beta;
-	// return 1.0;
-	// return 1.0 / invar(beta,x);
+	//double y = x * 2.0 / beta;
+	// double ska = 1.0 / invar(beta, x);
+	return 1.0;
+	// return 1.0 / invar(beta, x);
 
 	// return 0.5-x;
-	// return (x-0.5) / invar(beta,x);
+	// return (y-0.5) *ska;
 
-	return sin(2.0* M_PI * y) / invar(beta,x);
+	// return sin(2.0* M_PI * y) / invar(beta, x);
+	// return sin(2.0* M_PI * y) * ska;
+
+	// return sqrt(invar(beta, x)) * ska;
+
 	// if (x < 0.8*0.8) return 0.0;
 // printf("yo x=%g\n", x);
 	// if (x < 0.3333) return 0.0;
@@ -115,6 +121,7 @@ int main(int argc, char* argv[])
 		double h = save_histo[i] / norm;
 		double f = dense(beta, x) / norm;
 		double mu = invar(beta, x);
-		printf("%d	%g	%g	%g	%g\n", i, x, h, f, mu);
+		double elf = ell(beta, x);
+		printf("%d	%g	%g	%g	%g	%g\n", i, x, h, f, mu, elf);
 	}
 }
