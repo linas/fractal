@@ -4,6 +4,7 @@
  * more hacks ever since -- Linas
  */
 
+#include <endian.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +14,26 @@
 extern FILE *Fopen();
 extern FILE *Fopenr();
 
-/* data array dimensions */
+/*-------------------------------------------------------------------*/
+// My version of fgets, because fgets is sometimes broken on other machines.
+// I don't remember what the problem was.
+static char *my_fgets(char *s, int size, FILE *stream)
+{
+	for (int i=0; i< size; i++)
+	{
+		int ch =  fgetc(stream);
+		s[i] = ch;
+		if ('\n' == ch) break;
+		if (0 == ch) break;
+	}
+	return s;
+}
+
+/*-------------------------------------------------------------------*/
+// Read a *.flo greyscale floating-point pixmap.
+// The file format is width, height in ascii, then newline
+// then floating point data in machine-native byte order.
+// One float per pixel, a total of width*height floats.
 float* read_flo_file(const char *fname,
                      unsigned int* data_width, unsigned int* data_height)
 {
@@ -21,20 +41,50 @@ float* read_flo_file(const char *fname,
 	FILE *fh = Fopenr (fname, ".flo");
 	if (NULL == fh) return NULL;
 
-	int i = 0;
-	int j = 1;
 #define CLEN 80
    char str[CLEN];
-	while ((0 != j) && ('\n' != j) && (i < CLEN))
-	{
-		j =  fgetc (fh);
-		str[i] = j;
-		i++;
-	}
+	my_fgets(str, CLEN, fh);
 
 	sscanf(str, "%d %d", data_width, data_height);
 	fprintf(stderr, "Input file %s has width %d height %d \n",
 	        fname, *data_width, *data_height);
+
+	size_t datalen = (*data_width) * (*data_height);
+	float* data_in = (float *) malloc (datalen * sizeof(float));
+
+	/* read floating point data */
+	fread(data_in, sizeof(float), datalen, fh);
+	fclose(fh);
+
+	return data_in;
+}
+
+/*-------------------------------------------------------------------*/
+// Read a *.pfm greyscale floating-point pixmap.
+// This reads the PFM file format as described in various places.
+float* read_pfm_file(const char *fname,
+                     unsigned int* data_width, unsigned int* data_height)
+{
+	/* open input file */
+	FILE *fh = Fopenr (fname, ".pfm");
+	if (NULL == fh) return NULL;
+
+#define PFLEN 80
+   char str[PFLEN];
+	my_fgets(str, PFLEN, fh);
+
+	// Handle only greyscale
+	if ('P' != str[0] || 'f' != str[1]) return NULL;
+
+	// Read the dimensions
+	my_fgets(str, PFLEN, fh);
+	sscanf(str, "%d %d", data_width, data_height);
+	fprintf(stderr, "Input file %s has width %d height %d \n",
+	        fname, *data_width, *data_height);
+
+	// Read the "scale factor" and ignore it.
+	my_fgets(str, PFLEN, fh);
+	// double scale = atof(str);
 
 	size_t datalen = (*data_width) * (*data_height);
 	float* data_in = (float *) malloc (datalen * sizeof(float));
@@ -76,15 +126,20 @@ int main (int argc, char *argv[])
    }
    fprintf (stderr, "\n");
 
-
-   /*-----------------------------------------------*/
-   /* open input file */
+	/*-----------------------------------------------*/
+	/* open input file */
+	const char* suff = ".flo";
 	float* data_in = read_flo_file(argv[1], &data_width, &data_height);
-   if (NULL == data_in)
+	if (NULL == data_in)
 	{
-      fprintf (stderr, " Can't open input file %s \n", argv[1]);
-      return 2;
-   }
+		suff = ".pfm";
+		data_in = read_pfm_file(argv[1], &data_width, &data_height);
+	}
+	if (NULL == data_in)
+	{
+		fprintf (stderr, " Can't open input file %s \n", argv[1]);
+		return 2;
+	}
 
    /*-----------------------------------------------*/
    /* open output file */
