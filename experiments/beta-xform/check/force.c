@@ -68,11 +68,36 @@ double ell(double beta, double y)
 
 void setup(double beta)
 {
+#ifdef LINE
 	for (int i=0; i<NHIST; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = x-0.5;
 	}
+#endif
+#ifdef STEP
+	int midp = enx(0.25*beta);
+	for (int i=0; i<midp; i++) histn[i] = 1.0;
+	for (int i=midp; i<2*midp; i++) histn[i] = -1.0;
+	for (int i=2*midp; i<NHIST; i++) histn[i] = 0.0;
+#endif
+
+#define GOLD_ONE
+#ifdef GOLD_ONE
+	int half = NHIST/2;
+	for (int i=0; i<half; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*x-0.5;
+	}
+	int endp = enx(0.5*beta);
+	for (int i=half; i<endp; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = x-0.5;
+	}
+	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
+#endif
 }
 
 double normalize(double beta)
