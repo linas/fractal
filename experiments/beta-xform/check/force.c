@@ -30,11 +30,32 @@ double invar(double beta, double x)
 	return sum;
 }
 
+/* Some magic numbers!
+ *
+ * #define NHIST 27717  with "SAW" intialization and with beta=1.61803
+ * converges in a stable way to the first decaying golden eigenfunc.
+ * Other intializations are NOT stable and do NOT converge!
+ * Other numbers of bins do NOT result in a stable convergence!
+ * Even the explicit initialization of the eigenfunc is NOT  stable!
+ * Other beta values are NOT stable, including beta=1.618034
+ *
+ * What is causing (in)stability?
+ *
+ * Other magic numbers:
+ * Using the SAW or GOLD_ONE initialization:
+ * #define NHIST 28658 (fibo 22) + 1 with beta=1.618034 has ringing pattern
+ * #define NHIST any fib +1 seems to work, with ringing.
+ */
+
 // #define NHIST 360361
 // #define NHIST 160361
 // #define NHIST 27721
 // #define NHIST 27719
-#define NHIST 27717
+// #define NHIST 27717
+// #define NHIST 28657 // (fibo 22)
+// #define NHIST 28658
+// #define NHIST 196418 // (fib 26)
+#define NHIST 196419
 double histo[NHIST];
 double histn[NHIST];
 
@@ -68,13 +89,16 @@ double ell(double beta, double y)
 
 void setup(double beta)
 {
-#ifdef LINE
+#define SAW
+#ifdef SAW
 	for (int i=0; i<NHIST; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = x-0.5;
 	}
 #endif
+
+// #define STEP
 #ifdef STEP
 	int midp = enx(0.25*beta);
 	for (int i=0; i<midp; i++) histn[i] = 1.0;
@@ -82,7 +106,7 @@ void setup(double beta)
 	for (int i=2*midp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-#define GOLD_ONE
+// #define GOLD_ONE
 #ifdef GOLD_ONE
 	int half = NHIST/2;
 	for (int i=0; i<half; i++)
@@ -153,6 +177,7 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
+#define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -162,7 +187,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define SHOW_DENS
+// #define SHOW_DENS
 #ifdef SHOW_DENS
 	printf("#\n# beta=%g\n#\n", beta);
 
