@@ -8,10 +8,19 @@ set out 'forced.png'
 
 set title "stuff"
 
+#plot "forced-27721.dat" using 2:3 with lines title "21", \
+#     "forced-27721.dat" using 2:4 with lines title "19", \
+
+phi = 1.618033988749895
+
+set yrange [-4:3]
 plot "forced.dat" using 2:3 with lines title "0", \
      "forced.dat" using 2:4 with lines title "1", \
      "forced.dat" using 2:5 with lines title "2", \
      "forced.dat" using 2:6 with lines title "3", \
+     "forced.dat" using 2:(4*$2 - 2*phi) with lines title "fita", \
+     "forced.dat" using 2:(6.5*$2 - 2*phi) with lines title "fitb", \
+     "forced.dat" using 2:(10.5*$2 - 2*phi) with lines title "fit"
 
 
 #     "forced.dat" using 2:7 with lines title "4", \

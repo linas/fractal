@@ -32,9 +32,9 @@ double invar(double beta, double x)
 
 // #define NHIST 360361
 // #define NHIST 160361
-#define NHIST 27721
+// #define NHIST 27721
 // #define NHIST 27719
-// #define NHIST 27717
+#define NHIST 27717
 double histo[NHIST];
 double histn[NHIST];
 
@@ -87,7 +87,8 @@ double normalize(double beta)
 	// Normalize
 	double norm = 0.0;
 	for (int i=0; i<NHIST; i++) norm += fabs(histn[i]);
-	for (int i=0; i<NHIST; i++) histo[i] = histn[i] / (norm * delta);
+	norm *= delta;
+	for (int i=0; i<NHIST; i++) histo[i] = histn[i] / norm;
 
 	return norm;
 }
@@ -127,13 +128,21 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
-	printf("#\n# beta=%g\n#\n", beta);
+#ifdef SHOW_NORMS
+	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
 	{
-		step(beta);
-		// double lam = step(beta);
-		// printf("%d	%g\n", i, lam);
+		double lam = step(beta);
+		printf("%d	%g\n", i, lam);
 	}
+#endif
+
+#define SHOW_DENS
+#ifdef SHOW_DENS
+	printf("#\n# beta=%g\n#\n", beta);
+
+	for (int i=0; i< nsteps; i++)
+		step(beta);
 
 	for (int i=0; i< NCAP; i++)
 	{
@@ -152,4 +161,5 @@ int main(int argc, char* argv[])
 		}
 		printf("\n");
 	}
+#endif
 }
