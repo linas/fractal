@@ -1,10 +1,7 @@
 /*
- * accum.c
+ * reorbit.c
  *
- * Where does the expander function accumulate? A histogram.
- * I thought I did this once before, but I can't find the result.
- * I even recall looking at the figures...
- * Found it. It's in "../hessenberg/sampler.c"
+ * Compressor, re-coded. Histogram.
  *
  * Linas Vepstas Jan 2024
  */
@@ -29,22 +26,26 @@ int main (int argc, char* argv[])
 	double histo[NHISTO];
 	for (int i=0; i< NHISTO; i++) histo[i] = 0.0;
 
-	double scale = pdr(1.0, 0.5*beta);
-	// double scale = cpr(1.0, 0.5*beta);
+	double scale = 1.0;
 
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
-		double y = pdr(x, 0.5*beta);
-		// double y = cpr(x, 0.5*beta);
+		double y = cpr(x, 0.5*beta);
 
-		int n = floor(NHISTO * y / scale);
-		if (n < 0) n=0;
-		if (NHISTO <= n) n = NHISTO-1;
-		histo[n] += ((double) NHISTO) / ((double) npts);
+		for (int j=0; j<NBITS-12; j++)
+		{
+			int n = floor(NHISTO * y / scale);
+			if (n < 0) n=0;
+			if (NHISTO <= n) n = NHISTO-1;
+			histo[n] += ((double) NHISTO) / ((double) npts);
+
+			y *= 2.0;
+			if (1.0 < y) y -= 1.0;
+		}
 	}
 
-	printf("#\n# beta=%g  npts=%d\n#\n", beta, npts);
+	printf("#\n# Re-orbit: beta=%g  npts=%d\n#\n", beta, npts);
 	double sum = 0.0;
 	for (int i=0; i< NHISTO; i++)
 	{

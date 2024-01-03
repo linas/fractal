@@ -11,68 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// The expander. A binary bit sequence for x is obtained, and
-// resummed using K.
-double pdr(double x, double Kay)
-{
-	// Decompose x into a bit sequence.
-	char nbits[50];
-	for (int i=0; i<50; i++)
-	{
-		if (0.5 <= x)
-		{
-			x -= 0.5;
-			nbits[i] = 1;
-		}
-		else nbits[i] = 0;
-		x *= 2.0;
-	}
-
-	// Reconstruct x in a mashed bernoulli sequence.
-	double acc = 1.0e-30;
-	for (int i=0; i<50; i++)
-	{
-		acc *= 1.0 / (2.0*Kay);
-		if (nbits[50-i-1])
-		{
-			acc += 0.5;
-		}
-	}
-
-	return acc;
-}
-
-// The compressor. A beta-expansion for y is obtained, i.e. a sequence
-// of bits in base-beta, and then resassembled in base two.
-//
-double cpr(double y, double K)
-{
-	// Iterate on y using mashed Bernoulli, and extract symbol dynamics
-	char nbits[50];
-	for (int i=0; i<50; i++)
-	{
-		if (0.5 <= y)
-		{
-			y -= 0.5;
-			nbits[i] = 1;
-		}
-		else nbits[i] = 0;
-		y *= 2.0*K;
-	}
-
-	// Reconstruct x in a ordinary bernoulli sequence.
-	double acc = 1.0e-30;
-	for (int i=0; i<50; i++)
-	{
-		acc *= 0.5;
-		if (nbits[50-i-1])
-		{
-			acc += 0.5;
-		}
-	}
-
-	return acc;
-}
+#include "compress.c"
 
 double extcpr(double y, double K)
 {
@@ -104,9 +43,7 @@ double der(double y, double K)
 	{
 		acc *= 1.0 / (2.0*K);
 		if (nbits[50-i-1])
-		{
 			acc += 0.5;
-		}
 	}
 
 	return acc;
