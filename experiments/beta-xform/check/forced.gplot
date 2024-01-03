@@ -8,18 +8,24 @@ set out 'forced.png'
 
 set title "stuff"
 
-#plot "forced-27721.dat" using 2:3 with lines title "21", \
-#     "forced-27721.dat" using 2:4 with lines title "19", \
-
-plot "forced.dat" using 2:3 with lines title "0", \
-     "forced.dat" using 2:4 with lines title "1", \
-     "forced.dat" using 2:5 with lines title "2", \
-     "forced.dat" using 2:6 with lines title "3", \
+#plot "forced.dat" using 2:3 with lines title "0", \
+#     "forced.dat" using 2:4 with lines title "1", \
+#     "forced.dat" using 2:5 with lines title "2", \
+#     "forced.dat" using 2:6 with lines title "3", \
 
 
 #     "forced.dat" using 2:7 with lines title "4", \
 #     "forced.dat" using 2:8 with lines title "5"
 
+set yrange [-4:3]
+beta = 1.465571231876768
+plot "forced.dat" using 2:3 with lines title "0", \
+     "forced.dat" using 2:(18*$2 - 2*(2*beta -1)) with lines title "fit 1", \
+     "forced.dat" using 2:(12.5*$2 - 2*(2*beta -1)) with lines title "fit 2", \
+     "forced.dat" using 2:(8*$2 - 2*(2*beta -1)) with lines title "fit 3", \
+
+# ----------------------------------------------------------------------
+# Golden bingo
 # Bingo!  This works!
 # The magic numbers are: 27717 histogram bins (over values don't work)
 # and beta = 1.61803  (other betas don't work, including 1.618034)

@@ -55,7 +55,11 @@ double invar(double beta, double x)
 // #define NHIST 28657 // (fibo 22)
 // #define NHIST 28658
 // #define NHIST 196418 // (fib 26)
-#define NHIST 196419
+// #define NHIST 196419
+
+// #define NHIST 18561 // n=2 fib plus one
+#define NHIST 18560
+
 double histo[NHIST];
 double histn[NHIST];
 
@@ -177,7 +181,7 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
-#define SHOW_NORMS
+// #define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -206,6 +210,35 @@ int main(int argc, char* argv[])
 		printf("%d	%g", j, x);
 
 		for (int i=0; i< NCAP; i++)
+		{
+			printf("	%g", capt[i][j]);
+		}
+		printf("\n");
+	}
+#endif
+
+#define CAPTURE_DENS
+#ifdef CAPTURE_DENS
+	int ncap = 0;
+	for (int i=0; i< nsteps; i++)
+	{
+		double lam = step(beta);
+		if (fabs(lam - 0.5*beta) < 1e-2)
+		{
+			capture(ncap);
+			ncap++;
+			if (NCAP <= ncap) break;
+		}
+	}
+
+	printf("#\n# beta=%g ncaptures = %d\n#\n", beta, ncap);
+
+	for (int j=0; j< NHIST; j++)
+	{
+		double x = (((double) j) + 0.5) / ((double) NHIST);
+		printf("%d	%g", j, x);
+
+		for (int i=0; i< ncap; i++)
 		{
 			printf("	%g", capt[i][j]);
 		}
