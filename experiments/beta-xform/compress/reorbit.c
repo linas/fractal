@@ -50,7 +50,7 @@ int main (int argc, char* argv[])
 	for (int i=0; i< NHISTO; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) NHISTO);
-		sum += histo[i] / ((double) NHISTO);
+		sum += histo[i] / ((double) NHISTO * (NBITS-12));
 		printf("%d	%g	%g	%g\n", i, x, histo[i], sum);
 	}
 

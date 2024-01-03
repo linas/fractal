@@ -29,14 +29,14 @@ int main (int argc, char* argv[])
 	double histo[NHISTO];
 	for (int i=0; i< NHISTO; i++) histo[i] = 0.0;
 
-	double scale = pdr(1.0, 0.5*beta);
-	// double scale = cpr(1.0, 0.5*beta);
+	// double scale = pdr(1.0, 0.5*beta);
+	double scale = cpr(1.0, 0.5*beta);
 
 	for (int i=0; i<npts; i++)
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
-		double y = pdr(x, 0.5*beta);
-		// double y = cpr(x, 0.5*beta);
+		// double y = pdr(x, 0.5*beta);
+		double y = cpr(x, 0.5*beta);
 
 		int n = floor(NHISTO * y / scale);
 		if (n < 0) n=0;
@@ -44,7 +44,7 @@ int main (int argc, char* argv[])
 		histo[n] += ((double) NHISTO) / ((double) npts);
 	}
 
-	printf("#\n# beta=%g  npts=%d\n#\n", beta, npts);
+	printf("#\n# Accum histogram beta=%g  npts=%d\n#\n", beta, npts);
 	double sum = 0.0;
 	for (int i=0; i< NHISTO; i++)
 	{
