@@ -30,7 +30,11 @@ double invar(double beta, double x)
 	return sum;
 }
 
-#define NHIST 10123
+// #define NHIST 360361
+// #define NHIST 160361
+#define NHIST 27721
+// #define NHIST 27719
+// #define NHIST 27717
 double histo[NHIST];
 double histn[NHIST];
 
@@ -83,7 +87,7 @@ double normalize(double beta)
 	// Normalize
 	double norm = 0.0;
 	for (int i=0; i<NHIST; i++) norm += fabs(histn[i]);
-	for (int i=0; i<NHIST; i++) histo[i] = histn[i] / norm;
+	for (int i=0; i<NHIST; i++) histo[i] = histn[i] / (norm * delta);
 
 	return norm;
 }
@@ -102,22 +106,50 @@ double step(double beta)
 	return normalize(beta);
 }
 
+#define NCAP 10
+double capt[NCAP][NHIST];
+
+void capture(int n)
+{
+	for (int i=0; i<NHIST; i++) capt[n][i] = histo[i];
+}
+
 int main(int argc, char* argv[])
 {
-	if (argc != 2)
+	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s beta \n", argv[0]);
+		fprintf(stderr, "Usage: %s beta nsteps\n", argv[0]);
 		exit (1);
 	}
 	double beta = atof(argv[1]);
+	int nsteps = atoi(argv[2]);
 
 	setup(beta);
 	normalize(beta);
 
 	printf("#\n# beta=%g\n#\n", beta);
-	for (int i=0; i< 120; i++)
+	for (int i=0; i< nsteps; i++)
 	{
-		double lam = step(beta);
-		printf("%d	%g\n", i, lam);
+		step(beta);
+		// double lam = step(beta);
+		// printf("%d	%g\n", i, lam);
+	}
+
+	for (int i=0; i< NCAP; i++)
+	{
+		step(beta);
+		capture(i);
+	}
+
+	for (int j=0; j< NHIST; j++)
+	{
+		double x = (((double) j) + 0.5) / ((double) NHIST);
+		printf("%d	%g", j, x);
+
+		for (int i=0; i< NCAP; i++)
+		{
+			printf("	%g", capt[i][j]);
+		}
+		printf("\n");
 	}
 }
