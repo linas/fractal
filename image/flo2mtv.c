@@ -1,6 +1,7 @@
 /* 
  * FUNCTION:
  * Convert .flo files to .mtv files
+ * Also convert .pfm to .ppm files.
  *
  * HISTORY:
  * Linas Vepstas January 16 1994
@@ -121,8 +122,16 @@ int main (int argc, char* argv[])
 
    make_cmap ();
 
-   /* dump the size */
-	fprintf (stdout, "%d %d\n", width, height);
+	if (FLO_FILE == ftype)
+	{
+		// Write an mtv file, which is just width, height and data
+		fprintf (stdout, "%d %d\n", width, height);
+	}
+	else if (PFM_FILE == ftype)
+	{
+		// Wrte a ppm file
+		fprintf (stdout, "P6\n%d %d\n255\n", width, height);
+	}
    
    float *in_row = (float *) malloc (width*sizeof (float));
    char *out_row = (char *) malloc (3*width*sizeof (char));

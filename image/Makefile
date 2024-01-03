@@ -43,6 +43,6 @@ globals.o: globals.c
 flo2mtv.o:	flo2mtv.c
 	$(CC) -c -O2 flo2mtv.c
 
-flo2mtv pfm2mtv:	flo2mtv.o
+flo2mtv pfm2ppm:	flo2mtv.o
 	$(CC) flo2mtv.o -o flo2mtv
-	ln -f flo2mtv pfm2mtv
+	ln -f flo2mtv pfm2ppm
