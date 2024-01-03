@@ -1,4 +1,3 @@
-
 /* 
  * FUNCTION:
  * Convert .flo files to .mtv files
@@ -6,8 +5,10 @@
  * HISTORY:
  * Linas Vepstas January 16 1994
  * Fix colormap 16 Dec 2017
+ * Add pfm support January 2024
  */
 
+#include <endian.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,54 +60,77 @@ void make_cmap (void)
         }
 }
 
-/* ------------------------------------------------------------ */
+/*-------------------------------------------------------------------*/
+// My version of fgets, because fgets is sometimes broken on other machines.
+// I don't remember what the problem was.
+static char *my_fgets(char *s, int size, FILE *stream)
+{
+   for (int i=0; i< size; i++)
+   {
+      int ch =  fgetc(stream);
+      s[i] = ch;
+      if ('\n' == ch) break;
+      if (0 == ch) break;
+   }
+   return s;
+}
 
 int main (int argc, char* argv[])
 {
-   FILE *fil;
-   int i, j, width, height;
-   float *in_row;
-   char *out_row;
-   char ascii_string[80];
-
    if (argc > 2) {
       printf ("Usage: %s <flo filename> \n", argv[0]);
       exit (1);
    }
 
+   /* open up the file */
+   FILE *filh;
+   if (argc == 2) {
+      filh = fopen (argv[1], "r");
+   } else {
+      filh = stdin;
+   }
+
+   /* read file magic */
+   char ascii_string[80];
+	my_fgets(ascii_string, 80, filh);
+
+#define FLO_FILE 1
+#define PFM_FILE 2
+	int ftype = FLO_FILE;
+	if ('P' == ascii_string[0])
+		ftype = PFM_FILE;
+
+   int width, height;
+	if (FLO_FILE == ftype)
+	{
+		sscanf (ascii_string, "%d %d", &width, &height);
+	}
+	else if (PFM_FILE == ftype)
+	{
+		my_fgets(ascii_string, 80, filh);
+		sscanf (ascii_string, "%d %d", &width, &height);
+
+		// Ignore the "scale factor"
+		my_fgets(ascii_string, 80, filh);
+	}
+	else
+	{
+		fprintf(stderr, "%s: unknown file type\n", argv[0]);
+		exit(1);
+	}
+
    make_cmap ();
 
-   /* open up the file */
-   if (argc == 2) {
-      fil = fopen (argv[1], "r");
-   } else {
-      fil = stdin;
-   }
-
-   /* read the size */
-   for (i=0; i<80; i++) {
-      fread (&ascii_string[i], sizeof (char), 1, fil);
-      if (ascii_string[i] == 0x0) break;
-      if (ascii_string[i] == 0xa) break;
-   }
-   ascii_string[i] = 0x0; 
-
-   sscanf (ascii_string, "%d %d", &width, &height);
-
    /* dump the size */
-   fprintf (stdout, "%d %d\n", width, height);
-
-   /* write null terminated string */
-   /*  { char zip=0xa; fwrite (zip, sizeof(char), 1, stdout); }
-   fflush (stdout); */
+	fprintf (stdout, "%d %d\n", width, height);
    
-   in_row = (float *) malloc (width*sizeof (float));
-   out_row = (char *) malloc (3*width*sizeof (char));
+   float *in_row = (float *) malloc (width*sizeof (float));
+   char *out_row = (char *) malloc (3*width*sizeof (char));
 
    /* loop over pixels, using bogus colormap */
-   for (i=0; i<height; i++) {
-      fread (in_row, sizeof(float), width, fil);
-      for (j=0; j<width; j++) {
+   for (int i=0; i<height; i++) {
+      fread (in_row, sizeof(float), width, filh);
+      for (int j=0; j<width; j++) {
          int k;
 
          /* make sure large overflows don't wrap the integers */

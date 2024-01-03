@@ -40,6 +40,9 @@ addblit.o: addblit.c
 globals.o: globals.c
 	$(CC) -c globals.c 
 
+flo2mtv.o:	flo2mtv.c
+	$(CC) -c -O2 flo2mtv.c
 
-flo2mtv:	flo2mtv.c
-	$(CC) flo2mtv.c -o flo2mtv
+flo2mtv pfm2mtv:	flo2mtv.o
+	$(CC) flo2mtv.o -o flo2mtv
+	ln -f flo2mtv pfm2mtv

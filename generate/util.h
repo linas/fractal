@@ -2,6 +2,8 @@
  * ancient code, 1987, 1989, 1993
  */
 
+#include <stdio.h>
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
