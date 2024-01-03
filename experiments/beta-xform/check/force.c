@@ -1,0 +1,123 @@
+/*
+ * force.c
+ * Recheck old (negative) results.
+ * They're still negative.
+ *
+ * January 2024
+ */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+double invar(double beta, double x)
+{
+	double midpnt = 0.5*beta;
+	double obn = 1.0;
+	double sum = 0.0;
+	double norm = 0.0;
+	for (int i=0; i<1000; i++)
+	{
+		if (x < midpnt) sum += obn;
+		norm += midpnt*obn;
+
+		if (0.5 < midpnt) midpnt -= 0.5;
+		midpnt *= beta;
+		obn /= beta;
+		if (obn < 1e-15) break;
+	}
+	return sum / norm;
+	return sum;
+}
+
+#define NHIST 10123
+double histo[NHIST];
+double histn[NHIST];
+
+int enx (double x)
+{
+	int n = floor (NHIST * x);
+	if (0 > n) n=0;
+	if (NHIST <= n) n=NHIST-1;
+	return n;
+}
+
+double dense(double x)
+{
+	return histo[enx(x)];
+}
+
+double ell(double beta, double y)
+{
+	if (0.5 * beta < y) return 0.0;
+
+	double xlo = y / beta;
+	double xhi = xlo + 0.5;
+
+	double dlo = dense(xlo);
+	double dhi = dense(xhi);
+
+	double ellie = dlo + dhi;
+	ellie /= beta;
+	return ellie;
+}
+
+void setup(double beta)
+{
+	for (int i=0; i<NHIST; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = x-0.5;
+	}
+}
+
+double normalize(double beta)
+{
+	double delta =1.0 / ((double) NHIST);
+
+	// Remove constant
+	double sum = 0.0;
+	for (int i=0; i<NHIST; i++) sum += histn[i];
+	for (int i=0; i<NHIST; i++) histn[i] -= sum * delta;
+
+	// Normalize
+	double norm = 0.0;
+	for (int i=0; i<NHIST; i++) norm += fabs(histn[i]);
+	for (int i=0; i<NHIST; i++) histo[i] = histn[i] / norm;
+
+	return norm;
+}
+
+double step(double beta)
+{
+	double delta =1.0 / ((double) NHIST);
+
+	// Run step
+	for (int i=0; i<NHIST; i++)
+	{
+		double x = (((double) i) + 0.5) * delta;
+		histn[i] = ell(beta, x);
+	}
+
+	return normalize(beta);
+}
+
+int main(int argc, char* argv[])
+{
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s beta \n", argv[0]);
+		exit (1);
+	}
+	double beta = atof(argv[1]);
+
+	setup(beta);
+	normalize(beta);
+
+	printf("#\n# beta=%g\n#\n", beta);
+	for (int i=0; i< 120; i++)
+	{
+		double lam = step(beta);
+		printf("%d	%g\n", i, lam);
+	}
+}

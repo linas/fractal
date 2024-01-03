@@ -33,6 +33,7 @@ int main (int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5)/ ((double) npts);
 		double y = cpr(x, 0.5*from_beta);
+// y = x;
 
 #ifdef ADJOINT
 		double z = pdr(y, 0.5*to_beta);
