@@ -23433,6 +23433,11 @@ satisfies
 \end_inset
 
  by defintion.
+ Note that 
+\begin_inset Formula $y-1/2$
+\end_inset
+
+ is the first Euler polynomial.
 \end_layout
 
 \begin_layout Subsubsection
@@ -23507,7 +23512,11 @@ solves
 \end_layout
 
 \begin_layout Itemize
-Write three intervals 
+Write four intervals 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+ and 
 \begin_inset Formula $I_{1}=\left[\frac{1}{2},m_{0}\right]$
 \end_inset
 
@@ -23753,6 +23762,324 @@ obvious
 \end_inset
 
 .
+ Let's look at the proof mechanism for insight.
+\end_layout
+
+\begin_layout Itemize
+Starting with the midpoint (endpoint) 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+, iterate to obtain 
+\begin_inset Formula $T_{\beta}\left(m_{0}\right)=m_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{\beta}\left(m_{1}\right)=1/2$
+\end_inset
+
+.
+ This last iteration is the terminus.
+ Thus, we have a collection of intervals 
+\begin_inset Formula $0<\frac{1}{2}<m_{1}<m_{0}<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Assign numberings to these intervals, from right to left, so that 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{1}=\left[m_{1},m_{0}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}=\left[\frac{1}{2},m_{1}\right]$
+\end_inset
+
+and 
+\begin_inset Formula $I_{3}=\left[0,\frac{1}{2}\right]$
+\end_inset
+
+ (just as before).
+\end_layout
+
+\begin_layout Itemize
+As a notatinal convenience, define restrictions on each interval, so that
+ 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=f_{k}\left(y\right)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $f_{0}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Treat 
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{k}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ as a recurrence relation, so as to relate 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ to other intervals.
+ Specifically, this is 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{k}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{k}}\Theta\left(m_{1}-y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The recurrence relation above requires two interval mappings.
+ Define them as the 
+\begin_inset Quotes eld
+\end_inset
+
+left map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
+\end_inset
+
+ and the 
+\begin_inset Quotes eld
+\end_inset
+
+right map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Lemma: 
+\begin_inset Formula $LI_{k}\subseteq I_{j}$
+\end_inset
+
+ for some 
+\begin_inset Formula $j>k$
+\end_inset
+
+.
+ Likewise for 
+\begin_inset Formula $RI_{k}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+t
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{0}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{0}}=0$
+\end_inset
+
+.
+ This gives no usable conclusions.
+\end_layout
+
+\begin_layout Itemize
+Given that 
+\begin_inset Formula $\frac{1}{2}<m_{1}$
+\end_inset
+
+, define 
+\begin_inset Formula $I_{1}=\left[m_{1},m_{0}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Treat 
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{1}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{1}}$
+\end_inset
+
+ as a recurrence relation, so as to relate 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{1}}$
+\end_inset
+
+ to other intervals.
+ This is 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{1}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{1}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{1}}\Theta\left(m_{1}-y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The two interval mappings are the 
+\begin_inset Quotes eld
+\end_inset
+
+left map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $L:I_{1}\mapsto\frac{I_{1}}{\beta}$
+\end_inset
+
+ and the 
+\begin_inset Quotes eld
+\end_inset
+
+right map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $R:I_{1}\mapsto\frac{I_{1}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+In this case, 
+\begin_inset Formula $L:I_{1}\mapsto\frac{I_{1}}{\beta}=\left[\frac{\beta-1}{2},\frac{1}{2}\right]$
+\end_inset
+
+.
+ The other map is 
+\begin_inset Formula $R:I_{1}\mapsto\frac{I_{1}}{\beta}+\frac{1}{2}=\left[\frac{\beta}{2},1\right]=I_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Define the restriction 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{1}}=f_{1}\left(y\right)$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{2}}=f_{2}\left(y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+By recursion and restriction, deduce that 
+\begin_inset Formula $f_{1}\left(y\right)=f_{2}\left(\frac{y}{\beta}\right)+f_{0}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+.
+ Recall 
+\begin_inset Formula $f_{0}=0$
+\end_inset
+
+, so the second term vanishes.
+\end_layout
+
+\begin_layout Itemize
+The index 
+\begin_inset Formula $n=3$
+\end_inset
+
+ is a period-3 orbit, and so make the Ansatz that there are only two more
+ intervals at play.
+ The natural division is at 1/2, and so make the presumption that 
+\begin_inset Formula $I_{2}=\left[\frac{1}{2},m_{1}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{3}=\left[0,\frac{1}{2}\right]$
+\end_inset
+
+.
+ Define the restriction as 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{2}}=f_{2}\left(y\right)$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $f_{3}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A different way to obtain the above is to note that 
+\begin_inset Formula $T_{\beta}\left(m_{1}\right)=1/2$
+\end_inset
+
+ and so that brings us to the end (start) of the iteration.
+\end_layout
+
+\begin_layout Itemize
+Repeat the process above for 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+ to get 
+\begin_inset Formula $L:I_{2}\mapsto\frac{I_{2}}{\beta}=\left[\frac{1}{2\beta},\frac{\beta-1}{2}\right]\subset I_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:I_{2}\mapsto\frac{I_{2}}{\beta}+\frac{1}{2}=\left[\frac{\beta+1}{2\beta},\frac{\beta}{2}\right]=I_{1}$
+\end_inset
+
+.
+ The bound follows from 
+\begin_inset Formula $\left(\beta+1\right)/2\beta=\beta\left(\beta-1\right)/2=m_{1}$
+\end_inset
+
+ which follows from the defining polynomial 
+\begin_inset Formula $p_{3}\left(\beta\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+By recursion and restriction, 
+\begin_inset Formula $f_{2}\left(y\right)=f_{3}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Repeat the process above for 
+\begin_inset Formula $I_{3}$
+\end_inset
+
+ to get 
+\begin_inset Formula $L:I_{3}\mapsto\frac{I_{3}}{\beta}=\left[0,\frac{1}{2\beta}\right]\subset I_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:I_{3}\mapsto\frac{I_{3}}{\beta}+\frac{1}{2}=\left[\frac{1}{2},\frac{\beta+1}{2\beta}\right]=I_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+By recursion and restriction, 
+\begin_inset Formula $f_{3}\left(y\right)=f_{3}\left(\frac{y}{\beta}\right)+f_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -23848,6 +24175,134 @@ The pattern here is very regular.
 
 \begin_layout Subsubsection
 General case
+\end_layout
+
+\begin_layout Standard
+The general case:
+\end_layout
+
+\begin_layout Itemize
+Compute 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2$
+\end_inset
+
+.
+ Define the interval 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $m_{1}<\frac{1}{2}$
+\end_inset
+
+, define 
+\begin_inset Formula $I_{1}=\left[\frac{1}{2},m_{0}\right]$
+\end_inset
+
+.
+ Else if 
+\begin_inset Formula $\frac{1}{2}<m_{1}$
+\end_inset
+
+, define 
+\begin_inset Formula $I_{1}=\left[m_{1},m_{0}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Iterate the midpoint (endpoint) to obtain 
+\begin_inset Formula $m_{j}=T_{\beta}^{j}\left(m_{0}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Write a sequence L,R if 
+\begin_inset Formula $m_{j+1}<m_{j}$
+\end_inset
+
+ or not ...
+ ???
+\end_layout
+
+\begin_layout Itemize
+Sort the midpoints into ascending order, so that 
+\begin_inset Formula $0<...<m_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Define 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+ from above ...
+\end_layout
+
+\begin_layout Itemize
+Treat 
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{k}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ as a recurrence relation, so as to relate 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ to other intervals.
+ This is 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{k}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{k}}\Theta\left(m_{1}-y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The recursive interval maps are the 
+\begin_inset Quotes eld
+\end_inset
+
+left map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
+\end_inset
+
+ and the 
+\begin_inset Quotes eld
+\end_inset
+
+right map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+As this is an interval mapping, it is useful to define the restriction 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=f_{k}\left(y\right)$
+\end_inset
+
+ .
 \end_layout
 
 \begin_layout Standard
