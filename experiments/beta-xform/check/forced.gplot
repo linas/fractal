@@ -17,12 +17,42 @@ set title "stuff"
 #     "forced.dat" using 2:7 with lines title "4", \
 #     "forced.dat" using 2:8 with lines title "5"
 
-set yrange [-4:3]
 beta = 1.465571231876768
+x = 1/(2*beta)
+set arrow from x,-4 to x,3 nohead linecolor "red"
+x = beta * (2*beta -1) / 9
+set arrow from x,-4 to x,3 nohead linecolor "blue"
+x = 0.5
+set arrow from x,-4 to x,3 nohead linecolor "green"
+x = beta/2
+set arrow from x,-4 to x,3 nohead linecolor "cyan"
+
+f4=4
+f5=6
+f6=9
+f7=13
+f8=19
+fa(x)=4*(x - 0.25*(2*beta -1))
+
+g(x) = 9*x - (2*beta -1)
+h(x) = g(x/beta)
+f(x) = g(x/beta) + g(x/beta + 0.5) - 6
+
+set yrange [-4:3]
 plot "forced.dat" using 2:3 with lines title "0", \
-     "forced.dat" using 2:(18*$2 - 2*(2*beta -1)) with lines title "fit 1", \
-     "forced.dat" using 2:(12.5*$2 - 2*(2*beta -1)) with lines title "fit 2", \
-     "forced.dat" using 2:(8*$2 - 2*(2*beta -1)) with lines title "fit 3", \
+     "forced.dat" using 2:(0) with lines title "z", \
+     "forced.dat" using 2:(2*g($2)) with lines title "fit 1", \
+     "forced.dat" using 2:(2*h($2)) with lines title "fit 2", \
+     "forced.dat" using 2:(2*f($2)) with lines title "fit 3f", \
+     "forced.dat" using 2:(2*fa($2)) with lines title "fit 3fa", \
+
+#     "forced.dat" using 2:(2*(9*$2 - (2*beta -1))) with lines title "fit 1", \
+#     "forced.dat" using 2:(12.5*$2 - 2*(2*beta -1)) with lines title "fit 2", \
+#     "forced.dat" using 2:(2*fb($2)) with lines title "fit 2 f", \
+#     "forced.dat" using 2:(4*(2*beta -1)*(2.33*$2 - 0.5)) with lines title "fit 1x", \
+#     "forced.dat" using 2:(8.5*beta*$2 - 2*(2*beta -1)) with lines title "fit 2.5", \
+#     "forced.dat" using 2:((7 + beta)*beta*$2 - 2*(2*beta -1)) with lines title "fit 2.6", \
+#     "forced.dat" using 2:(12.33*$2 - 2*(2*beta -1)) with lines title "fit 2 ba", \
 
 # ----------------------------------------------------------------------
 # Golden bingo

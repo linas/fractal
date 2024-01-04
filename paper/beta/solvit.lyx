@@ -6500,6 +6500,22 @@ or, written more compactly
 
 \end_inset
 
+or even
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{1}{2}-\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta}{2}-\left(\frac{y}{\beta}+\frac{1}{2}\right)\right)\right]
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta\left(\beta-1\right)}{2}-y\right)\right]
+\]
+
+\end_inset
+
 where 
 \begin_inset Formula $\Theta$
 \end_inset
@@ -6799,48 +6815,6 @@ little
  problem: all of the diagonal entries are larger than one.
  Such solutions would describe not the decaying eigenfunctions, but the
  exploding ones.
-\end_layout
-
-\begin_layout Subsection
-Examples
-\end_layout
-
-\begin_layout Standard
-Consider, for example, 
-\begin_inset Formula $\beta=\varphi\approx1.61803$
-\end_inset
-
- the golden ration.
- Then
-\begin_inset Formula 
-\begin{align*}
-\rho\left(y\right) & =\begin{cases}
-\varphi y-\frac{1}{2} & \mbox{for }0\le y<\frac{1}{2}\\
-y-\frac{1}{2} & \mbox{for }\frac{1}{2}\le y<\frac{\varphi}{2}\\
-0 & \mbox{for }\frac{\varphi}{2}\le y\le1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-satisfies 
-\begin_inset Formula $\mathcal{L}_{\varphi}\rho=\rho/\varphi$
-\end_inset
-
- and so its a decaying eigenfunction.
- It has the 
-\begin_inset Formula $L_{1}$
-\end_inset
-
- norm 
-\begin_inset Formula $\int_{0}^{1}\left|\rho\right|=1/4\varphi$
-\end_inset
-
- and of course 
-\begin_inset Formula $\int_{0}^{1}\rho=0$
-\end_inset
-
- by defintion.
 \end_layout
 
 \begin_layout Subsection
@@ -23365,6 +23339,106 @@ As may be seen, some of these constants are already notable for various
  partially-ordered set of intertwining polynomials.
  Exactly how to express that intertwining in any sort of elegant or insightful
  way is not obvious.
+\end_layout
+
+\begin_layout Section
+Decaying Eigenfuncs
+\end_layout
+
+\begin_layout Standard
+Write convenient form
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta\left(\beta-1\right)}{2}-y\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Examples
+\end_layout
+
+\begin_layout Subsubsection
+Case n=1
+\end_layout
+
+\begin_layout Standard
+Consider, for example, 
+\begin_inset Formula $\beta=\varphi\approx1.61803$
+\end_inset
+
+ the golden ration.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\rho\left(y\right) & =\begin{cases}
+\varphi y-\frac{1}{2} & \mbox{for }0\le y<\frac{1}{2}\\
+y-\frac{1}{2} & \mbox{for }\frac{1}{2}\le y<\frac{\varphi}{2}\\
+0 & \mbox{for }\frac{\varphi}{2}\le y\le1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+satisfies 
+\begin_inset Formula $\mathcal{L}_{\varphi}\rho=\rho/\varphi$
+\end_inset
+
+ and so its a decaying eigenfunction.
+ It has the 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ norm 
+\begin_inset Formula $\int_{0}^{1}\left|\rho\right|=1/4\varphi$
+\end_inset
+
+ and of course 
+\begin_inset Formula $\int_{0}^{1}\rho=0$
+\end_inset
+
+ by defintion.
+\end_layout
+
+\begin_layout Subsubsection
+Case n=2
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+ be the positive real root of 
+\begin_inset Formula $p_{2}\left(\beta\right)=\beta^{3}-\beta^{2}-1$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $g\left(y\right)=9y-\left(2r_{2}-1\right)$
+\end_inset
+
+ Let 
+\begin_inset Formula $b_{1}=$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\rho_{2}\left(y\right) & =\begin{cases}
+g\left(y\right) & \mbox{for }0\le y<b_{1}\\
+g\left(\frac{y}{\beta}\right) & \mbox{for }b_{1}\le y<\frac{1}{2}\\
+y-\frac{1}{2} & \mbox{for }\frac{1}{2}\le y<\frac{r_{2}\left(r_{2}-1\right)}{2}\\
+0 & \mbox{for }\frac{r_{2}\left(r_{2}-1\right)}{2}\le y\le1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
