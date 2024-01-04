@@ -23685,18 +23685,100 @@ Let
 \begin_inset Formula $r_{3}\approx1.839286755214161$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $1/2<m_{1}$
+ and 
+\begin_inset Formula $m_{0}\approx0.9196$
 \end_inset
 
+ and 
+\begin_inset Formula $m_{1}\approx0.7718$
+\end_inset
 
+.
 \end_layout
 
 \begin_layout Standard
-Recursion like above doesn't terminate.
+Since 
+\begin_inset Formula $1/2<m_{1}$
+\end_inset
+
+, the recursive intrval arithmetic that worked above fails here, and the
+ recursive process doesn't terminate.
+ It does appear to be solvable, though.
+\end_layout
+
+\begin_layout Subsubsection
+Case n=4
+\end_layout
+
+\begin_layout Standard
+Perhaps having the midpoint less than 1/2 makes things better? Let 
+\begin_inset Formula $r_{4}$
+\end_inset
+
+ be the positive root of 
+\begin_inset Formula $\beta^{4}-\beta^{3}-1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $r_{4}\approx1.380277569097613$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{0}\approx0.6901$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{1}\approx0.2624$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This works as easily as the 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case.
+ As before, write five intervals 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{1}=\left[\frac{1}{2},m_{0}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}=\left[\frac{1}{2r_{4}},\frac{1}{2}\right]$
+\end_inset
+
+ 
+\begin_inset Formula $I_{3}=\left[m_{1},\frac{1}{2r_{4}}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{4}=\left[0,m_{1}\right]$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\rho_{2}\left(y\right) & =\begin{cases}
+0 & \mbox{on }I_{0}\\
+y-\frac{1}{2} & \mbox{on }I_{1}\\
+\beta y-\frac{1}{2} & \mbox{on }I_{2}\\
+\beta^{2}y-\frac{1}{2} & \mbox{on }I_{3}\\
+\beta^{3}y-\frac{1}{2} & \mbox{on }I_{4}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+So a very regular pattern arises.
 \end_layout
 
 \begin_layout Subsubsection

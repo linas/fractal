@@ -150,7 +150,7 @@ void setup(double beta)
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-#define GOLD_THREE
+// #define GOLD_THREE
 #ifdef GOLD_THREE
 	// This was a guess but it is incorrect.
 	int nlo = enx(0.5*(beta-1.0));
@@ -167,6 +167,36 @@ void setup(double beta)
 	}
 	int endp = enx(0.5*beta);
 	for (int i=m1; i<endp; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = x-0.5;
+	}
+	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
+#endif
+
+#define GOLD_FOUR
+#ifdef GOLD_FOUR
+	// Works great!
+	int m1 = enx(0.5*beta*(beta-1.0));
+	for (int i=0; i<m1; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*beta*beta*x-0.5;
+	}
+	int nit = enx(0.5/beta);
+	for (int i=m1; i<nit; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*beta*x-0.5;
+	}
+	int half = enx(0.5);
+	for (int i=nit; i<half; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*x-0.5;
+	}
+	int endp = enx(0.5*beta);
+	for (int i=half; i<endp; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = x-0.5;
