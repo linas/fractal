@@ -13589,6 +13589,10 @@ trouble spots
 \begin_inset Formula $m_{k}=T_{\beta}^{k}\left(m_{0}\right)$
 \end_inset
 
+ of the midpoint 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
  lands on the starting midpoint 
 \begin_inset Formula $m_{k}=m_{0}$
 \end_inset
@@ -23346,10 +23350,30 @@ Decaying Eigenfuncs
 \end_layout
 
 \begin_layout Standard
-Write convenient form
+Define 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{1}=T_{\beta}\left(m_{0}\right)=\beta\left(\beta-1\right)/2$
+\end_inset
+
+ then the xfer oper is
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta\left(\beta-1\right)}{2}-y\right)\right]
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)\right]
+\]
+
+\end_inset
+
+We now explore decaying eignfuncs for 
+\begin_inset Formula $\lambda=1/\beta$
+\end_inset
+
+ and so look for solutions to
+\begin_inset Formula 
+\[
+f\left(y\right)=f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)
 \]
 
 \end_inset
@@ -23359,6 +23383,10 @@ Write convenient form
 
 \begin_layout Subsection
 Examples
+\end_layout
+
+\begin_layout Standard
+Case by case.
 \end_layout
 
 \begin_layout Subsubsection
@@ -23417,24 +23445,64 @@ Let
 \end_inset
 
 .
- Write 
-\begin_inset Formula $g\left(y\right)=9y-\left(2r_{2}-1\right)$
+ Some useful identities and factoids
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $r_{2}\approx1.465571231876768$
 \end_inset
 
- Let 
-\begin_inset Formula $b_{1}=$
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $m_{0}=r_{2}/2$
 \end_inset
 
+ is the midpoint and its in the theta of the first term in the xfer
+\end_layout
 
+\begin_layout Itemize
+\begin_inset Formula $r_{2}\left(r_{2}-1\right)/2=1/2r_{2}=T_{r_{2}}\left(r_{2}/2\right)=m_{1}$
+\end_inset
+
+ appears in the second theta in the xfer.
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $k\left(y\right)=3.85y-\left(2r_{2}-1\right)$
+\end_inset
+
+ then
 \begin_inset Formula 
 \begin{align*}
 \rho_{2}\left(y\right) & =\begin{cases}
-g\left(y\right) & \mbox{for }0\le y<b_{1}\\
-g\left(\frac{y}{\beta}\right) & \mbox{for }b_{1}\le y<\frac{1}{2}\\
-y-\frac{1}{2} & \mbox{for }\frac{1}{2}\le y<\frac{r_{2}\left(r_{2}-1\right)}{2}\\
-0 & \mbox{for }\frac{r_{2}\left(r_{2}-1\right)}{2}\le y\le1
+k\left(\beta^{2}y\right) & \mbox{for }0\le y<m_{1}\\
+k\left(\beta y\right) & \mbox{for }m_{1}\le y<\frac{1}{2}\\
+k\left(y\right) & \mbox{for }\frac{1}{2}\le y<m_{0}\\
+0 & \mbox{for }m_{0}\le y\le1
 \end{cases}
 \end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+General case
+\end_layout
+
+\begin_layout Standard
+By recursion:
+\begin_inset Formula 
+\[
+\rho\left(y\right)=\begin{cases}
+0 & \mbox{for }m_{0}\le y\le1\\
+\rho\left(\frac{y}{\beta}\right) & \mbox{for }m_{1}\le y<m_{0}
+\end{cases}
+\]
 
 \end_inset
 
