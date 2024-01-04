@@ -152,25 +152,29 @@ void setup(double beta)
 
 #define GOLD_THREE
 #ifdef GOLD_THREE
-	// This was a guess but it is incorrect.
-	// Guessed again, still wrong.
+	// Bingo! This works for index=3
+
+	double em1 = 0.5*beta*(beta-1.0);
+	// Either defintiion of C works.
+	// double C = 0.5 + 0.25 / beta;
+	double C = em1 - 0.25 / beta;
 
 	// ival 3 -- correct by inference
 	int half = enx(0.5);
 	for (int i=0; i<half; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-x *= 0.228;
-		histn[i] = beta*(beta+1)*x-0.5;
+		histn[i] = beta*x - C;
 	}
 
 	// ival 2
-	int m1 = enx(0.5*beta*(beta-1.0));
+	int m1 = enx(em1);
 	for (int i=half; i<m1; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-x *= 0.228;
-		histn[i] = (beta*beta+1)*x-0.5;
+		// Either version works
+		// histn[i] = ((beta + 1.0)/ beta) *x +0.5 - 2.0*C;
+		histn[i] = ((beta + 1.0)/ beta) *x - em1;
 	}
 
 	// ival 1  --
@@ -178,8 +182,7 @@ x *= 0.228;
 	for (int i=m1; i<endp; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-x *= 0.228;
-		histn[i] = (beta+1)*x-0.5;
+		histn[i] = x - C;
 	}
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
@@ -268,7 +271,7 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
-// #define SHOW_NORMS
+#define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -304,7 +307,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define CAPTURE_DENS
+// #define CAPTURE_DENS
 #ifdef CAPTURE_DENS
 	int ncap = 0;
 	for (int i=0; i< nsteps; i++)

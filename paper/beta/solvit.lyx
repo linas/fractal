@@ -23378,7 +23378,11 @@ f\left(y\right)=f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\
 
 \end_inset
 
-
+Solutions are given below.
+ They are remarkably unstable; most small perturbations cause the solution
+ to diverge.
+ Not all; some perturbations result in convergence.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -23697,13 +23701,58 @@ Let
 \end_layout
 
 \begin_layout Standard
-Since 
-\begin_inset Formula $1/2<m_{1}$
+Write four intervals 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
 \end_inset
 
-, the recursive intrval arithmetic that worked above fails here, and the
- recursive process doesn't terminate.
- It does appear to be solvable, though.
+ and 
+\begin_inset Formula $I_{1}=\left[m_{1},m_{0}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}=\left[\frac{1}{2},m_{1}\right]$
+\end_inset
+
+and 
+\begin_inset Formula $I_{3}=\left[0,\frac{1}{2}\right]$
+\end_inset
+
+.
+ This works a bit different than the 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case.
+\begin_inset Formula 
+\begin{align*}
+\rho_{3}\left(y\right) & =\begin{cases}
+0 & \mbox{on }I_{0}\\
+y-\left(m_{1}-\frac{1}{4\beta}\right) & \mbox{on }I_{1}\\
+\left(\frac{\beta+1}{\beta}\right)y-m_{1} & \mbox{on }I_{2}\\
+\beta y-\left(m_{1}-\frac{1}{4\beta}\right) & \mbox{on }I_{3}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+solves 
+\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho/\beta$
+\end_inset
+
+ for 
+\begin_inset Formula $\beta=r_{3}$
+\end_inset
+
+.
+ Written in this final form, it is not at all 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -23756,7 +23805,7 @@ This works as easily as the
 \begin_inset Formula $I_{2}=\left[\frac{1}{2r_{4}},\frac{1}{2}\right]$
 \end_inset
 
- 
+ and 
 \begin_inset Formula $I_{3}=\left[m_{1},\frac{1}{2r_{4}}\right]$
 \end_inset
 
@@ -23765,9 +23814,13 @@ This works as easily as the
 \end_inset
 
 .
+ Then
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\rho_{2}\left(y\right) & =\begin{cases}
+\rho_{4}\left(y\right) & =\begin{cases}
 0 & \mbox{on }I_{0}\\
 y-\frac{1}{2} & \mbox{on }I_{1}\\
 \beta y-\frac{1}{2} & \mbox{on }I_{2}\\
@@ -23778,7 +23831,19 @@ y-\frac{1}{2} & \mbox{on }I_{1}\\
 
 \end_inset
 
-So a very regular pattern arises.
+solves 
+\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho/\beta$
+\end_inset
+
+ for 
+\begin_inset Formula $\beta=r_{4}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The pattern here is very regular.
 \end_layout
 
 \begin_layout Subsubsection
