@@ -58,7 +58,7 @@ double invar(double beta, double x)
 // #define NHIST 196419
 
 // #define NHIST 18561 // n=2 fib plus one
-#define NHIST 18560
+#define NHIST 18559
 
 double histo[NHIST];
 double histn[NHIST];
@@ -93,7 +93,7 @@ double ell(double beta, double y)
 
 void setup(double beta)
 {
-#define SAW
+// #define SAW
 #ifdef SAW
 	for (int i=0; i<NHIST; i++)
 	{
@@ -114,6 +114,29 @@ void setup(double beta)
 #ifdef GOLD_ONE
 	int half = NHIST/2;
 	for (int i=0; i<half; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*x-0.5;
+	}
+	int endp = enx(0.5*beta);
+	for (int i=half; i<endp; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = x-0.5;
+	}
+	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
+#endif
+
+#define GOLD_TWO
+#ifdef GOLD_TWO
+	int m1 = enx(0.5*beta*(beta-1.0));
+	for (int i=0; i<m1; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*beta*x-0.5;
+	}
+	int half = NHIST/2;
+	for (int i=m1; i<half; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = beta*x-0.5;
@@ -181,7 +204,7 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
-// #define SHOW_NORMS
+#define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -217,7 +240,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define CAPTURE_DENS
+// #define CAPTURE_DENS
 #ifdef CAPTURE_DENS
 	int ncap = 0;
 	for (int i=0; i< nsteps; i++)

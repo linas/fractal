@@ -17,48 +17,75 @@ set title "stuff"
 #     "forced.dat" using 2:7 with lines title "4", \
 #     "forced.dat" using 2:8 with lines title "5"
 
+# ----------------------------------------------------------------------
+# index two
 beta = 1.465571231876768
-x = beta * (beta - 1) / 2
-x = 0.5 / beta  # same as above
-set arrow from x,-4 to x,3 nohead linecolor "red"
-x = beta * (2*beta -1) / 9
-set arrow from x,-4 to x,3 nohead linecolor "blue"
-x = 0.5
-set arrow from x,-4 to x,3 nohead linecolor "green"
-x = beta/2
-set arrow from x,-4 to x,3 nohead linecolor "cyan"
-
-f4=4
-f5=6
-f6=9
-f7=13
-f8=19
-
-y0 = 2*beta -1
-g(x) = 9*x - y0
-h(x) = g(x/beta)
-k(x) = 4*x-y0
-
-kb(x)=4*y0*(x - 0.5)
+kb(x)=4*beta*beta*(x - 0.5)
 hb(x) = kb(beta*x)
 gb(x) = hb(beta*x)
 
-set yrange [-4:3]
+x = beta * (beta - 1) / 2
+x = 0.5 / beta  # same as above
+set arrow from x,-4 to x,3 nohead linecolor "red"
+x = 0.5
+set arrow from x,-4 to x,3 nohead linecolor "green"
+x = beta/2
+set arrow from x,-4 to x,3 nohead linecolor "blue"
+
+set yrange [-4.5:2.5]
 plot "forced.dat" using 2:3 with lines title "0", \
+     "forced.dat" using 2:4 with lines title "1", \
+     "forced.dat" using 2:5 with lines title "2", \
+     "forced.dat" using 2:6 with lines title "3", \
      "forced.dat" using 2:(0) with lines title "z", \
-     "forced.dat" using 2:(2*g($2)) with lines title "fit 1g", \
-     "forced.dat" using 2:(gb($2)) with lines title "fit 1gb", \
-     "forced.dat" using 2:(2*h($2)) with lines title "fit 2h", \
-     "forced.dat" using 2:(hb($2)) with lines title "fit 2hb", \
-     "forced.dat" using 2:(2*k($2)) with lines title "fit 3k", \
-     "forced.dat" using 2:(kb($2)) with lines title "fit 3kb", \
+     "forced.dat" using 2:(gb($2)) with lines title "fit 1", \
+     "forced.dat" using 2:(hb($2)) with lines title "fit 2", \
+     "forced.dat" using 2:(kb($2)) with lines title "fit 3", \
 
-# This works: (worked) Note that 9 and 4 are beta-fibonacci convergents
-# but the 12.5 doesn't fit the pattern
-# plot "forced.dat" using 2:(2*(9*$2 - (2*beta -1))) with lines title "fit 1", \
-#      "forced.dat" using 2:(12.5*$2 - 2*(2*beta -1)) with lines title "fit 2", \
-#      "forced.dat" using 2:(2*(4*$2 - (2*beta -1))) with lines title "fit 3"
-
+# ----------------------------------------------------------------------
+# index two
+#beta = 1.465571231876768
+#x = beta * (beta - 1) / 2
+#x = 0.5 / beta  # same as above
+#set arrow from x,-4 to x,3 nohead linecolor "red"
+#x = beta * (2*beta -1) / 9
+#set arrow from x,-4 to x,3 nohead linecolor "cyan"
+#x = 0.5
+#set arrow from x,-4 to x,3 nohead linecolor "green"
+#x = beta/2
+#set arrow from x,-4 to x,3 nohead linecolor "blue"
+#
+#f4=4
+#f5=6
+#f6=9
+#f7=13
+#f8=19
+#
+#y0 = 2*beta -1
+#g(x) = 9*x - y0
+#h(x) = g(x/beta)
+#k(x) = 4*x-y0
+#
+#kb(x)=4*y0*(x - 0.5)
+#hb(x) = kb(beta*x)
+#gb(x) = hb(beta*x)
+#
+#set yrange [-4:3]
+#plot "forced.dat" using 2:3 with lines title "0", \
+#     "forced.dat" using 2:(0) with lines title "z", \
+#     "forced.dat" using 2:(2*g($2)) with lines title "fit 1g", \
+#     "forced.dat" using 2:(gb($2)) with lines title "fit 1gb", \
+#     "forced.dat" using 2:(2*h($2)) with lines title "fit 2h", \
+#     "forced.dat" using 2:(hb($2)) with lines title "fit 2hb", \
+#     "forced.dat" using 2:(2*k($2)) with lines title "fit 3k", \
+#     "forced.dat" using 2:(kb($2)) with lines title "fit 3kb", \
+#
+## This works: (worked) Note that 9 and 4 are beta-fibonacci convergents
+## but the 12.5 doesn't fit the pattern
+## plot "forced.dat" using 2:(2*(9*$2 - (2*beta -1))) with lines title "fit 1", \
+##      "forced.dat" using 2:(12.5*$2 - 2*(2*beta -1)) with lines title "fit 2", \
+##      "forced.dat" using 2:(2*(4*$2 - (2*beta -1))) with lines title "fit 3"
+#
 # ----------------------------------------------------------------------
 # Golden bingo
 # Bingo!  This works!
