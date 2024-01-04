@@ -160,7 +160,8 @@ void setup(double beta)
 	for (int i=0; i<half; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-		histn[i] = beta*(beta-1.0)*x-0.5;
+x *= 0.228;
+		histn[i] = beta*(beta+1)*x-0.5;
 	}
 
 	// ival 2
@@ -168,7 +169,8 @@ void setup(double beta)
 	for (int i=half; i<m1; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-		histn[i] = x-0.5;
+x *= 0.228;
+		histn[i] = (beta*beta+1)*x-0.5;
 	}
 
 	// ival 1  --
@@ -176,7 +178,8 @@ void setup(double beta)
 	for (int i=m1; i<endp; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-		histn[i] = (beta-1.0)*x-0.5;
+x *= 0.228;
+		histn[i] = (beta+1)*x-0.5;
 	}
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
