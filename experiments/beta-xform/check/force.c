@@ -58,7 +58,7 @@ double invar(double beta, double x)
 // #define NHIST 196419
 
 // #define NHIST 18561 // n=2 fib plus one
-#define NHIST 18559
+#define NHIST 25281    // n=3 fib plus one
 
 double histo[NHIST];
 double histn[NHIST];
@@ -127,7 +127,7 @@ void setup(double beta)
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-#define GOLD_TWO
+// #define GOLD_TWO
 #ifdef GOLD_TWO
 	int m1 = enx(0.5*beta*(beta-1.0));
 	for (int i=0; i<m1; i++)
@@ -143,6 +143,30 @@ void setup(double beta)
 	}
 	int endp = enx(0.5*beta);
 	for (int i=half; i<endp; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = x-0.5;
+	}
+	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
+#endif
+
+#define GOLD_THREE
+#ifdef GOLD_THREE
+	// This was a guess but it is incorrect.
+	int nlo = enx(0.5*(beta-1.0));
+	for (int i=0; i<nlo; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*beta*x-0.5;
+	}
+	int m1 = enx(0.5*beta*(beta-1.0));
+	for (int i=nlo; i<m1; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = beta*x-0.5;
+	}
+	int endp = enx(0.5*beta);
+	for (int i=m1; i<endp; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = x-0.5;
@@ -223,8 +247,8 @@ int main(int argc, char* argv[])
 
 	for (int i=0; i< NCAP; i++)
 	{
-		step(beta);
 		capture(i);
+		step(beta);
 	}
 
 	for (int j=0; j< NHIST; j++)
@@ -246,7 +270,7 @@ int main(int argc, char* argv[])
 	for (int i=0; i< nsteps; i++)
 	{
 		double lam = step(beta);
-		if (fabs(lam - 0.5*beta) < 1e-2)
+		if (fabs(lam - 0.5*beta) < 5e-3)
 		{
 			capture(ncap);
 			ncap++;

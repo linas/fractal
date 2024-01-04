@@ -8,40 +8,40 @@ set out 'forced.png'
 
 set title "stuff"
 
-#plot "forced.dat" using 2:3 with lines title "0", \
-#     "forced.dat" using 2:4 with lines title "1", \
-#     "forced.dat" using 2:5 with lines title "2", \
-#     "forced.dat" using 2:6 with lines title "3", \
+plot "forced.dat" using 2:3 with lines title "0", \
+     "forced.dat" using 2:4 with lines title "1", \
+     "forced.dat" using 2:5 with lines title "2", \
+     "forced.dat" using 2:6 with lines title "3", \
 
 
 #     "forced.dat" using 2:7 with lines title "4", \
 #     "forced.dat" using 2:8 with lines title "5"
 
 # ----------------------------------------------------------------------
-# index two
-beta = 1.465571231876768
-kb(x)=4*beta*beta*(x - 0.5)
-hb(x) = kb(beta*x)
-gb(x) = hb(beta*x)
-
-x = beta * (beta - 1) / 2
-x = 0.5 / beta  # same as above
-set arrow from x,-4 to x,3 nohead linecolor "red"
-x = 0.5
-set arrow from x,-4 to x,3 nohead linecolor "green"
-x = beta/2
-set arrow from x,-4 to x,3 nohead linecolor "blue"
-
-set yrange [-4.5:2.5]
-plot "forced.dat" using 2:3 with lines title "0", \
-     "forced.dat" using 2:4 with lines title "1", \
-     "forced.dat" using 2:5 with lines title "2", \
-     "forced.dat" using 2:6 with lines title "3", \
-     "forced.dat" using 2:(0) with lines title "z", \
-     "forced.dat" using 2:(gb($2)) with lines title "fit 1", \
-     "forced.dat" using 2:(hb($2)) with lines title "fit 2", \
-     "forced.dat" using 2:(kb($2)) with lines title "fit 3", \
-
+# index two double-check
+#beta = 1.465571231876768
+#kb(x)=4*beta*beta*(x - 0.5)
+#hb(x) = kb(beta*x)
+#gb(x) = hb(beta*x)
+#
+#x = beta * (beta - 1) / 2
+#x = 0.5 / beta  # same as above
+#set arrow from x,-4 to x,3 nohead linecolor "red"
+#x = 0.5
+#set arrow from x,-4 to x,3 nohead linecolor "green"
+#x = beta/2
+#set arrow from x,-4 to x,3 nohead linecolor "blue"
+#
+#set yrange [-4.5:2.5]
+#plot "forced.dat" using 2:3 with lines title "0", \
+#     "forced.dat" using 2:4 with lines title "1", \
+#     "forced.dat" using 2:5 with lines title "2", \
+#     "forced.dat" using 2:6 with lines title "3", \
+#     "forced.dat" using 2:(0) with lines title "z", \
+#     "forced.dat" using 2:(gb($2)) with lines title "fit 1", \
+#     "forced.dat" using 2:(hb($2)) with lines title "fit 2", \
+#     "forced.dat" using 2:(kb($2)) with lines title "fit 3", \
+#
 # ----------------------------------------------------------------------
 # index two
 #beta = 1.465571231876768

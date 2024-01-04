@@ -23469,6 +23469,13 @@ Let
  appears in the second theta in the xfer.
 \end_layout
 
+\begin_layout Itemize
+\begin_inset Formula $m_{1}<1/2$
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Then
 \begin_inset Formula 
@@ -23492,7 +23499,152 @@ solves
 \end_inset
 
 .
- 
+ Here's a sketchy proof.
+\end_layout
+
+\begin_layout Itemize
+Write three intervals 
+\begin_inset Formula $I_{1}=\left[\frac{1}{2},m_{0}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}=\left[m_{1},\frac{1}{2}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{3}=\left[0,m_{1}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Assume 
+\begin_inset Formula $f_{1}\left(y\right)=y-\frac{1}{2}$
+\end_inset
+
+ on 
+\begin_inset Formula $I_{1}$
+\end_inset
+
+ and some unknown functions 
+\begin_inset Formula $f_{2}\left(y\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}\left(y\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $I_{3}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Then 
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{1}}=\frac{1}{\beta}\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{1}}$
+\end_inset
+
+ because the second term is vanishes on the interval 
+\begin_inset Formula $I_{1}$
+\end_inset
+
+.
+ By defintion, 
+\begin_inset Formula $\mathcal{L}\rho=\frac{1}{\beta}\rho\left(y\right)$
+\end_inset
+
+ so 
+\begin_inset Formula $\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{1}}=\left.\rho\left(y\right)\right|_{I_{1}}$
+\end_inset
+
+.
+ However, 
+\begin_inset Formula $I_{1}/\beta=I_{2}$
+\end_inset
+
+ and so conclude that 
+\begin_inset Formula $f_{2}\left(y/\beta\right)=f_{1}\left(y\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $f_{2}\left(y\right)=f_{1}\left(\beta y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The next part proceeds recursivey, as before, this time with 
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{2}}=\frac{1}{\beta}\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{2}}$
+\end_inset
+
+ because the second term vanishes on 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+.
+ Thus, much as before, 
+\begin_inset Formula $\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{2}}=\left.\rho\left(y\right)\right|_{I_{2}}$
+\end_inset
+
+.
+ The interval arithmetic is that 
+\begin_inset Formula $I_{2}/\beta=\left[\frac{\beta-1}{2},\frac{1}{2\beta}\right]\subset I_{3}$
+\end_inset
+
+ and so conclude that 
+\begin_inset Formula $f_{3}\left(y/\beta\right)=f_{2}\left(y\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $f_{3}\left(y\right)=f_{2}\left(\beta y\right)$
+\end_inset
+
+.
+ All three functions have been determined.
+\end_layout
+
+\begin_layout Itemize
+Verify that the last segment works as desired.
+ This time, all terms participate, so 
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{3}}=\frac{1}{\beta}\left.\rho\left(\frac{y}{\beta}\right)+\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{3}}$
+\end_inset
+
+.
+ The interval arithmetic is 
+\begin_inset Formula $I_{3}/\beta\subset I_{3}$
+\end_inset
+
+ while 
+\begin_inset Formula $I_{3}/\beta+1/2=I_{1}$
+\end_inset
+
+ and so one expects to find that 
+\begin_inset Formula $f_{3}\left(y\right)=f_{3}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+.
+ Plugging through, this is satisfied when 
+\begin_inset Formula $\beta^{3}-\beta^{2}-1=0$
+\end_inset
+
+.
+ But this is the defining eqn for 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+, so everything worked out.
+\end_layout
+
+\begin_layout Standard
+That concludes the proof.
 \end_layout
 
 \begin_layout Standard
@@ -23534,6 +23686,17 @@ Let
 \end_inset
 
 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $1/2<m_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Recursion like above doesn't terminate.
 \end_layout
 
 \begin_layout Subsubsection
