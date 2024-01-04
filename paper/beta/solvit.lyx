@@ -23391,18 +23391,40 @@ Examples
 
 \begin_layout Standard
 Case by case.
+ This proceeds with the conventional polynomial and orbit numbering, so
+ that 
+\begin_inset Formula $n$
+\end_inset
+
+ is a 
+\begin_inset Quotes eld
+\end_inset
+
+valid index
+\begin_inset Quotes erd
+\end_inset
+
+ number, and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is the length of the orbit.
 \end_layout
 
 \begin_layout Subsubsection
-Case n=1
+Case n=1 (order 
+\begin_inset Formula $\nu=2$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
 Consider, for example, 
-\begin_inset Formula $\beta=\varphi\approx1.61803$
+\begin_inset Formula $\beta=\varphi\approx1.618034$
 \end_inset
 
- the golden ration.
+ the golden ratio.
  Then
 \begin_inset Formula 
 \begin{align*}
@@ -23441,7 +23463,11 @@ satisfies
 \end_layout
 
 \begin_layout Subsubsection
-Case n=2
+Case n=2 (order 
+\begin_inset Formula $\nu=3$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -23482,7 +23508,7 @@ Let
 \begin_inset Formula $m_{1}<1/2$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -23678,7 +23704,11 @@ The
 \end_layout
 
 \begin_layout Subsubsection
-Case n=3
+Case n=3 (order 
+\begin_inset Formula $\nu=3$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -23704,6 +23734,10 @@ Let
 
  and 
 \begin_inset Formula $m_{1}\approx0.7718$
+\end_inset
+
+ and 
+\begin_inset Formula $1/r_{3}\approx0.5436$
 \end_inset
 
 .
@@ -23881,82 +23915,33 @@ Lemma:
 \begin_inset Formula $RI_{k}$
 \end_inset
 
- 
+.
+ The specific values of 
+\begin_inset Formula $j$
+\end_inset
+
+ are TBD, as well as whether the subset relation is strict, or an equality.
 \end_layout
 
 \begin_layout Itemize
-t
-\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{0}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{0}}=0$
+Starting recursion with
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{0}}=0$
 \end_inset
 
-.
- This gives no usable conclusions.
+ gives no usable conclusions.
 \end_layout
 
 \begin_layout Itemize
-Given that 
-\begin_inset Formula $\frac{1}{2}<m_{1}$
-\end_inset
-
-, define 
-\begin_inset Formula $I_{1}=\left[m_{1},m_{0}\right]$
+The next interval is 
+\begin_inset Formula $I_{1}$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Itemize
-Treat 
-\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{1}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{1}}$
+ The left map is 
+\begin_inset Formula $L:I_{1}\mapsto\frac{I_{1}}{\beta}=\left[\frac{\beta-1}{2},\frac{1}{2}\right]\subset I_{3}$
 \end_inset
 
- as a recurrence relation, so as to relate 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{1}}$
-\end_inset
-
- to other intervals.
- This is 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{1}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{1}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{1}}\Theta\left(m_{1}-y\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-The two interval mappings are the 
-\begin_inset Quotes eld
-\end_inset
-
-left map
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset Formula $L:I_{1}\mapsto\frac{I_{1}}{\beta}$
-\end_inset
-
- and the 
-\begin_inset Quotes eld
-\end_inset
-
-right map
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset Formula $R:I_{1}\mapsto\frac{I_{1}}{\beta}+\frac{1}{2}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-In this case, 
-\begin_inset Formula $L:I_{1}\mapsto\frac{I_{1}}{\beta}=\left[\frac{\beta-1}{2},\frac{1}{2}\right]$
-\end_inset
-
-.
- The other map is 
+; the right map is 
 \begin_inset Formula $R:I_{1}\mapsto\frac{I_{1}}{\beta}+\frac{1}{2}=\left[\frac{\beta}{2},1\right]=I_{0}$
 \end_inset
 
@@ -23964,63 +23949,24 @@ In this case,
 \end_layout
 
 \begin_layout Itemize
-Define the restriction 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{1}}=f_{1}\left(y\right)$
-\end_inset
-
- and likewise 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{2}}=f_{2}\left(y\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
 By recursion and restriction, deduce that 
-\begin_inset Formula $f_{1}\left(y\right)=f_{2}\left(\frac{y}{\beta}\right)+f_{0}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\begin_inset Formula $f_{1}\left(y\right)=f_{3}\left(\frac{y}{\beta}\right)+f_{0}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
 \end_inset
 
 .
- Recall 
+ Since 
 \begin_inset Formula $f_{0}=0$
 \end_inset
 
-, so the second term vanishes.
-\end_layout
-
-\begin_layout Itemize
-The index 
-\begin_inset Formula $n=3$
-\end_inset
-
- is a period-3 orbit, and so make the Ansatz that there are only two more
- intervals at play.
- The natural division is at 1/2, and so make the presumption that 
-\begin_inset Formula $I_{2}=\left[\frac{1}{2},m_{1}\right]$
-\end_inset
-
- and 
-\begin_inset Formula $I_{3}=\left[0,\frac{1}{2}\right]$
-\end_inset
-
-.
- Define the restriction as 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{2}}=f_{2}\left(y\right)$
-\end_inset
-
- and likewise for 
+, the second term vanishes, and 
 \begin_inset Formula $f_{3}$
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Itemize
-A different way to obtain the above is to note that 
-\begin_inset Formula $T_{\beta}\left(m_{1}\right)=1/2$
+ is determined by 
+\begin_inset Formula $f_{1}$
 \end_inset
 
- and so that brings us to the end (start) of the iteration.
+ (and vice-versa).
 \end_layout
 
 \begin_layout Itemize
@@ -24054,15 +24000,32 @@ By recursion and restriction,
 \end_inset
 
 .
- 
+ This gives 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+.
+ Thus, all three restrictions 
+\begin_inset Formula $f_{1},f_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}$
+\end_inset
+
+ are determined by one-another.
 \end_layout
 
 \begin_layout Itemize
-Repeat the process above for 
+Repeating again for 
 \begin_inset Formula $I_{3}$
 \end_inset
 
- to get 
+ gives 
 \begin_inset Formula $L:I_{3}\mapsto\frac{I_{3}}{\beta}=\left[0,\frac{1}{2\beta}\right]\subset I_{3}$
 \end_inset
 
@@ -24079,11 +24042,93 @@ By recursion and restriction,
 \end_inset
 
 .
- 
+ This gives an additional constraint between the functions.
+\end_layout
+
+\begin_layout Itemize
+As we are looking for first-order eigenfunctions, make the Ansatz that 
+\begin_inset Formula $f_{1}\left(\beta\right)=\beta-c$
+\end_inset
+
+ for some constant to be determined.
+\end_layout
+
+\begin_layout Itemize
+Plugging through gives 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}$
+\end_inset
+
+.
+ The final constraint fixes the value of 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ The result, re-assembled, gives 
+\begin_inset Formula $\rho_{3}$
+\end_inset
+
+ as reported above.
+\end_layout
+
+\begin_layout Standard
+The above is a rather long process, but is readily mechanized, and appears
+ to describe an algorithm that will work for any finite-order polynomial
+ index.
+ There are only a few 
+\begin_inset Quotes eld
+\end_inset
+
+tricky bits
+\begin_inset Quotes erd
+\end_inset
+
+.
+ These are:
+\end_layout
+
+\begin_layout Itemize
+The need to sort the midpoint iterates 
+\begin_inset Formula $T_{\beta}^{j}\left(m_{0}\right)$
+\end_inset
+
+ into ascending order.
+ This is needed, in order to obtain a list of intervals 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The detrmination of 
+\begin_inset Formula $LI_{k}\subseteq I_{j}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $RI_{k}$
+\end_inset
+
+.
+ This seems to require some sort of brute-force elbow-grease; it there is
+ a pattern, it is not yet clear.
+\end_layout
+
+\begin_layout Standard
+The general algo is taken up below.
+ But first one more special case.
 \end_layout
 
 \begin_layout Subsubsection
-Case n=4
+Case n=4 (order 
+\begin_inset Formula $\nu=4$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -24103,12 +24148,20 @@ Perhaps having the midpoint less than 1/2 makes things better? Let
 \begin_inset Formula $r_{4}\approx1.380277569097613$
 \end_inset
 
- and 
+ with 
 \begin_inset Formula $m_{0}\approx0.6901$
 \end_inset
 
- and 
+, 
 \begin_inset Formula $m_{1}\approx0.2624$
+\end_inset
+
+, 
+\begin_inset Formula $m_{2}\approx0.3622$
+\end_inset
+
+ and 
+\begin_inset Formula $1/r_{4}\approx0.7245$
 \end_inset
 
 .
@@ -24129,11 +24182,11 @@ This works as easily as the
 \end_inset
 
  and 
-\begin_inset Formula $I_{2}=\left[\frac{1}{2r_{4}},\frac{1}{2}\right]$
+\begin_inset Formula $I_{2}=\left[m_{2},\frac{1}{2}\right]$
 \end_inset
 
  and 
-\begin_inset Formula $I_{3}=\left[m_{1},\frac{1}{2r_{4}}\right]$
+\begin_inset Formula $I_{3}=\left[m_{1},m_{2}\right]$
 \end_inset
 
  and 
@@ -24170,7 +24223,21 @@ solves
 \end_layout
 
 \begin_layout Standard
-The pattern here is very regular.
+Unlike the 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case, the regular pattern of the 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case is reprised.
+ One can conclude that higher values of 
+\begin_inset Formula $n$
+\end_inset
+
+ are not necessarily messy, but can exhibit recurring patterns seen at lower
+ orders.
 \end_layout
 
 \begin_layout Subsubsection
@@ -24178,50 +24245,48 @@ General case
 \end_layout
 
 \begin_layout Standard
-The general case:
+The general case was msotly described above, in the 
+\begin_inset Formula $n=3$
+\end_inset
+
+ subsection.
+ Let's abstract it in full for general finite orbits of order 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
-Compute 
+Starting with the midpoint 
 \begin_inset Formula $m_{0}=\beta/2$
 \end_inset
 
- and 
+, obtain it's first iterate 
 \begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2$
 \end_inset
 
-.
- Define the interval 
-\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-If 
-\begin_inset Formula $m_{1}<\frac{1}{2}$
-\end_inset
-
-, define 
-\begin_inset Formula $I_{1}=\left[\frac{1}{2},m_{0}\right]$
-\end_inset
-
-.
- Else if 
-\begin_inset Formula $\frac{1}{2}<m_{1}$
-\end_inset
-
-, define 
-\begin_inset Formula $I_{1}=\left[m_{1},m_{0}\right]$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Iterate the midpoint (endpoint) to obtain 
+, and then the rest of them: 
 \begin_inset Formula $m_{j}=T_{\beta}^{j}\left(m_{0}\right)$
+\end_inset
+
+.
+ The iteration is presumed to stop with 
+\begin_inset Formula $m_{\nu}=1/2$
+\end_inset
+
+ for an orbit of order 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ This is exactly as before, for finite orbits.
+ 
+\end_layout
+
+\begin_layout Itemize
+Sort the midpoints into ascending order, so that 
+\begin_inset Formula $0<...<m_{0}$
 \end_inset
 
 .
@@ -24237,33 +24302,17 @@ Write a sequence L,R if
 \end_layout
 
 \begin_layout Itemize
-Sort the midpoints into ascending order, so that 
-\begin_inset Formula $0<...<m_{0}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
 Define 
 \begin_inset Formula $I_{k}$
 \end_inset
 
  from above ...
-\end_layout
-
-\begin_layout Itemize
-Treat 
-\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{k}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{k}}$
+ There are 
+\begin_inset Formula $\nu$
 \end_inset
 
- as a recurrence relation, so as to relate 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}$
-\end_inset
-
- to other intervals.
- This is 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{k}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{k}}\Theta\left(m_{1}-y\right)$
+ of these, not counting 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
 \end_inset
 
 .
@@ -24298,26 +24347,101 @@ right map
 \end_layout
 
 \begin_layout Itemize
-As this is an interval mapping, it is useful to define the restriction 
+Lemma: 
+\begin_inset Formula $LI_{k}\subseteq I_{j}$
+\end_inset
+
+ for some 
+\begin_inset Formula $j>k$
+\end_inset
+
+.
+ Likewise for 
+\begin_inset Formula $RI_{k}$
+\end_inset
+
+.
+ The specific values of 
+\begin_inset Formula $j$
+\end_inset
+
+ are TBD, as well as whether the subset relation is strict, or an equality.
+\end_layout
+
+\begin_layout Itemize
+As a notational convenience, define the restriction 
 \begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=f_{k}\left(y\right)$
 \end_inset
 
  .
+ There will be 
+\begin_inset Formula $\nu$
+\end_inset
+
+ of these, not counting 
+\begin_inset Formula $f_{0}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Treat 
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{k}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ as a recurrence relation, so as to relate 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ to other intervals.
+ This is 
+\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{k}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{k}}\Theta\left(m_{1}-y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Employ the recurrence relation to obtain 
+\begin_inset Formula $\nu$
+\end_inset
+
+ relations between the interval maps 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+.
+ Of these, 
+\begin_inset Formula $\nu-1$
+\end_inset
+
+ interrelate the 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ to one-another, while the last serves to fix any constants.
+\end_layout
+
+\begin_layout Itemize
+Perform the Ansatz 
+\begin_inset Formula $f_{1}\left(y\right)=y-c$
+\end_inset
+
+ for some constant 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ Iterate, and solve for 
+\begin_inset Formula $c$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 By recursion:
-\begin_inset Formula 
-\[
-\rho\left(y\right)=\begin{cases}
-0 & \mbox{for }m_{0}\le y\le1\\
-\rho\left(\frac{y}{\beta}\right) & \mbox{for }m_{1}\le y<m_{0}
-\end{cases}
-\]
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
