@@ -58,7 +58,7 @@ double invar(double beta, double x)
 // #define NHIST 196419
 
 // #define NHIST 18561 // n=2 fib plus one
-#define NHIST 25281    // n=3 fib plus one
+#define NHIST 25282    // n=3 fib plus one
 
 double histo[NHIST];
 double histn[NHIST];
@@ -150,31 +150,38 @@ void setup(double beta)
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-// #define GOLD_THREE
+#define GOLD_THREE
 #ifdef GOLD_THREE
 	// This was a guess but it is incorrect.
-	int nlo = enx(0.5*(beta-1.0));
-	for (int i=0; i<nlo; i++)
+	// Guessed again, still wrong.
+
+	// ival 3 -- correct by inference
+	int half = enx(0.5);
+	for (int i=0; i<half; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-		histn[i] = beta*beta*x-0.5;
+		histn[i] = beta*(beta-1.0)*x-0.5;
 	}
+
+	// ival 2
 	int m1 = enx(0.5*beta*(beta-1.0));
-	for (int i=nlo; i<m1; i++)
-	{
-		double x = (((double) i) + 0.5) / ((double) NHIST);
-		histn[i] = beta*x-0.5;
-	}
-	int endp = enx(0.5*beta);
-	for (int i=m1; i<endp; i++)
+	for (int i=half; i<m1; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = x-0.5;
 	}
+
+	// ival 1  --
+	int endp = enx(0.5*beta);
+	for (int i=m1; i<endp; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = (beta-1.0)*x-0.5;
+	}
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-#define GOLD_FOUR
+// #define GOLD_FOUR
 #ifdef GOLD_FOUR
 	// Works great!
 	int m1 = enx(0.5*beta*(beta-1.0));
@@ -258,7 +265,7 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
-#define SHOW_NORMS
+// #define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -294,13 +301,13 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define CAPTURE_DENS
+#define CAPTURE_DENS
 #ifdef CAPTURE_DENS
 	int ncap = 0;
 	for (int i=0; i< nsteps; i++)
 	{
 		double lam = step(beta);
-		if (fabs(lam - 0.5*beta) < 5e-3)
+		if (fabs(lam - 1.0/beta) < 0.004)
 		{
 			capture(ncap);
 			ncap++;
