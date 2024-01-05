@@ -1,7 +1,7 @@
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-all: recheck force
+all: recheck force orbit
 
 .c.o:
 	$(CC) -c $<
@@ -12,3 +12,4 @@ all: recheck force
 
 recheck: recheck.o
 force: force.o
+orbit: orbit.o
