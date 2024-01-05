@@ -73,6 +73,7 @@ int enx (double x)
 
 double dense(double x)
 {
+	if (1.0 <= x) return 0.0;
 	return histo[enx(x)];
 }
 
@@ -143,10 +144,17 @@ void setup(double beta)
 #ifdef QUAD_ONE
 	// Broken
 	// Should have worked, but I guess there's an algebra error somewhere
-	double lambda = 0.5 * (beta + sqrt(beta+5)) / (2*beta + 1.0);
+	double lambda = 0.5 * (beta + sqrt(beta + 5.0)) / (2.0*beta + 1.0);
 	double a = -beta;
-	double b = 0.25 * (1.0 - 2*beta) / (lambda*lambda*beta*beta - lambda*beta -1.0);
+	double b = 0.25 * (1.0 - 2.0*beta) / (lambda*lambda*beta*beta - lambda*beta -1.0);
 	printf("# quadratic lambda = %g a=%g b=%g\n", lambda, a, b);
+
+double b2=beta*beta;
+double b4=b2*b2;
+double b6=b4*b2;
+double b8=b4*b4;
+double lalt = (b4+sqrt(b8+4*b6)) / (2*b6);
+printf("lalt=%g\n", lalt);
 
 	double sum2 = 0.0;
 	int half = enx(0.5);
@@ -171,6 +179,80 @@ void setup(double beta)
 	sum1 /= (double) endp-half;
 	printf("# Interval-weighted sum_2 = %g sum_1 = %g ratio s1/s2= %g\n",
 		sum2, sum1, sum1/sum2);
+
+printf("f1 at m0 should be %g\n", 0.25*beta*beta + 0.5*beta*a +b);
+printf("f1 at m0 founde %g\n", histn[endp-1]);
+
+printf("f2 at m1 should be %g\n", lambda*beta*(0.25*beta*beta + 0.5*beta*a +b));
+printf("f2 at m1 found %g\n", histn[half-1]);
+
+double enf2 = lambda*beta*(0.25*beta*beta + 0.5*beta*a +b);
+enf2 *= lambda*beta;
+printf("eiegf2 at m1 %g\n", enf2);
+double xlo=0.5/beta;
+double lef = lambda*beta*(beta*beta*xlo*xlo + beta*a*xlo +b);
+printf("lef at m1 %g vs array %g\n", lef, histn[enx(xlo)]);
+double xhi=xlo + 0.5;
+double rig = (xhi*xhi + a*xhi +b);
+printf("rig at m1 %g vs aray %g\n", rig, histn[enx(xhi)-1]);
+printf("sum lef+rig at m1 %g\n", lef+rig);
+printf("-------\n");
+
+printf("quad terms eig %g vs %g + %g = %g \n", lambda*lambda*b4, lambda*b2, 1.0/b2,
+lambda*b2 + 1.0/b2);
+
+printf("line terms eig %g vs %g + %g = %g \n", 
+lambda*lambda*b2*beta*a, lambda*beta*a, 1.0/beta + a/beta,
+lambda*beta*a + 1.0/beta + a/beta);
+
+printf("cone =%g  vs %g + %g = %g\n", lambda*lambda*b2*b,
+lambda*beta*b, 0.25 + 0.5*a+b,
+lambda*beta*b + 0.25 + 0.5*a+b
+);
+
+printf("-------\n");
+double acc = 0.0;
+for (int i=half; i<endp; i++)
+{
+	double x = (((double) i) + 0.5) / ((double) NHIST);
+	int j = enx(x);
+	double f1 = histn[j];
+	f1 *= lambda*beta;
+	int k = enx(x/beta);
+	double f2 = histn[k];
+	double ad = fabs(f1-f2);
+	acc += ad;
+	if (5e-5 < ad)
+		printf("%d %g expect %g got %g diff %g\n", i, x, f1, f2, f1-f2);
+}
+printf("ovr %d total acc=%g\n", endp-half, acc);
+
+#if 1
+acc = 0.0;
+for (int i=0; i<half; i++)
+{
+	double x = (((double) i) + 0.5) / ((double) NHIST);
+	double ef2 = lambda*beta*histn[enx(x)];
+	double lef = histn[enx(x/beta)];
+	double rig = histn[enx(0.5+x/beta)];
+	double ad = fabs(ef2 - (lef+rig));
+	acc += ad;
+	// if (5e-5 < ad)
+		// printf("%d %g egn %g got %g + %g diff %g ska %g\n", i, x, ef2, lef, rig, ad, ad/x);
+
+   // double egn = lambda*lambda*b2*( b2*x*x +a*beta*x + b);
+	// printf("at %d %g expect egn=%g got %g delt=%g\n", i, x, egn, ef2, egn-ef2);
+
+	double ylo = lambda*beta*( beta*x*x +a*x + b);
+	printf("at %d %g expect ylo=%g got %g delt=%g\n", i, x, ylo, lef, ylo-lef);
+
+	// double xhi = x/beta+0.5;
+	// double yhi = xhi*xhi + a*x/beta + 0.5*a + b;
+	// printf("at %d %g expect yhi=%g got %g delt=%g\n", i, x, yhi, rig, yhi-rig);
+}
+printf("yepovr %d total acc=%g\n", half, acc);
+#endif
+
 #endif
 
 // #define GOLD_TWO
