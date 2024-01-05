@@ -236,14 +236,14 @@ for (int i=0; i<half; i++)
 	double rig = histn[enx(0.5+x/beta)];
 	double ad = fabs(ef2 - (lef+rig));
 	acc += ad;
-	// if (5e-5 < ad)
-		// printf("%d %g egn %g got %g + %g diff %g ska %g\n", i, x, ef2, lef, rig, ad, ad/x);
+	if (5e-5 < ad)
+		printf("%d %g egn %g got %g + %g diff %g ska %g\n", i, x, ef2, lef, rig, ad, ad/x);
 
    // double egn = lambda*lambda*b2*( b2*x*x +a*beta*x + b);
 	// printf("at %d %g expect egn=%g got %g delt=%g\n", i, x, egn, ef2, egn-ef2);
 
-	double ylo = lambda*beta*( x*x +a*x + b);
-	printf("at %d %g expect ylo=%g got %g delt=%g\n", i, x, ylo, lef, ylo-lef);
+	// double ylo = lambda*beta*( x*x +a*x + b);
+	// printf("at %d %g expect ylo=%g got %g delt=%g\n", i, x, ylo, lef, ylo-lef);
 
 	// double xhi = x/beta+0.5;
 	// double yhi = xhi*xhi + a*x/beta + 0.5*a + b;
@@ -347,7 +347,6 @@ printf("yepovr %d total acc=%g\n", half, acc);
 
 double normalize(double beta)
 {
-
 	// Remove constant
 	int m0 = enx(0.5*beta);
 	double delta = 1.0 / ((double) m0);
@@ -409,6 +408,7 @@ int main(int argc, char* argv[])
 		printf("%d	%g\n", i, lam);
 	}
 #endif
+
 
 #define SHOW_DENS
 #ifdef SHOW_DENS
