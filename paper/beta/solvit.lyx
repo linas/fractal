@@ -23350,7 +23350,122 @@ Decaying Eigenfuncs
 \end_layout
 
 \begin_layout Standard
-Define 
+This section examines the discrete spectrum of (piece-wise) smooth square-integr
+able decaying eigenfunctions occuring at the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values associated with the finite orbits.
+ The discrete spectrum is closely analogous to the discrete spectrum of
+ the smooth square-integrable eigenfunctions of the Bernoulli operator.
+\end_layout
+
+\begin_layout Standard
+Recall that the Bernoulli operator has a discrete spectrum of 
+\begin_inset Formula $\lambda=2^{-n}$
+\end_inset
+
+ for all non-negative integers 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The corresponding eigenfunction is an Euler polynomial (of the first kind).
+ The Euler polynomials are (of course) smooth and square-integrable (as
+ are all polynomials), and they are orthonormal to one-another.
+ In the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit, they converge to 
+\begin_inset Formula $\cos2\pi x$
+\end_inset
+
+ which lies in the kernel of the operator.
+ Square-integrability is underscored here, as the Bernoulli operator also
+ has a continuous spectrum, if one removes this constraint.
+ For the continuous spectrum, the eigenfunctions have a 
+\begin_inset Formula $2l+1$
+\end_inset
+
+ degeneracy at each order 
+\begin_inset Formula $l$
+\end_inset
+
+, and so allow a choice of basis.
+ In one basis, the eigenfunctions are smooth, but aren't square integrable
+ simply because they deiverge at 
+\begin_inset Formula $x=0,1$
+\end_inset
+
+.
+ In a different basis, the eigenfunctions can be chosen to form a fractal,
+ self-similar basis, of which the blancmange curve is one example.
+\end_layout
+
+\begin_layout Standard
+It is hypothesized that all of the above phenomena also occur for the beta
+ operator, at least at the finite orbits, with which we begin.
+ Certainly the discrete spectrum is readily exhibited.
+\end_layout
+
+\begin_layout Subsubsection
+Stability and numerics
+\end_layout
+
+\begin_layout Standard
+On a tangent to the main topic, an interesting behavior was observed in
+ numerical work.
+ All of the eigenfunctions presented below can be implemented on a discrete
+ lattice, and verified that they behave as expected.
+ The primary utility of doing this is to double-check algebra and create
+ the occasional pretty picture.
+ However, such simulations lead to their own interesting behaviors.
+\end_layout
+
+\begin_layout Standard
+Of primary note is that the eigenfunctions are remarkably unstable.
+ One can set one down on a lattice, say, of 10K or 100K points, and iterate
+ the transfer operator on it, point by point, for dozens or hundereds of
+ iterations.
+ Any given eigenfunction rarely survives a dozen iterations.
+ Of course, finer lattices allow greater stability, but that a 20K-point
+ lattice is only good for a mixing time of only 10 or 15 steps indicates
+ a strong coupling.
+\end_layout
+
+\begin_layout Standard
+This is the usual case.
+ In a few exceptional cases, stability has been observed: poor solutions
+ converge on a good one, and stay there indefinitely.
+ This suggests the lattice dynamics of the beta map have a life of their
+ own.
+\end_layout
+
+\begin_layout Standard
+In addition to the rare case of a stable attractor, a number of cases show
+ a form of Poincare recurrence on extremely short timescales (dozens of
+ iterations).
+ It's not clear what the ultimate cause and explanation is, or what analogy
+ to use.
+ The recurrances resemble bet frequencies, Moire patterns, aliasing and
+ sampling effects.
+ The presence of a discrete lattice necessarily infects the system with
+ p-adic and cyclotomic behaviors.
+ Perhaps there is some resemblance to the Fermi-Pasta-Ulam-Tsingou problem,
+ as the transfer operator does couple across the latice, in an ergodic,
+ possibly mixing kind of way.
+ 
+\end_layout
+
+\begin_layout Subsection
+Defintions
+\end_layout
+
+\begin_layout Standard
+The conventions used in this section follow those used elsewhere in this
+ text.
+ Define 
 \begin_inset Formula $m_{0}=\beta/2$
 \end_inset
 
@@ -23358,7 +23473,8 @@ Define
 \begin_inset Formula $m_{1}=T_{\beta}\left(m_{0}\right)=\beta\left(\beta-1\right)/2$
 \end_inset
 
- then the xfer oper is
+.
+ Then the transfer operator can be written as
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)\right]
@@ -23366,22 +23482,20 @@ Define
 
 \end_inset
 
-We now explore decaying eignfuncs for 
-\begin_inset Formula $\lambda=1/\beta$
+The task is to exhibit eignfunctions with 
+\begin_inset Formula $\lambda<1$
 \end_inset
 
- and so look for solutions to
+; that is, to obtain solutions to
 \begin_inset Formula 
 \[
-f\left(y\right)=f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)
+\lambda\beta f\left(y\right)=f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)
 \]
 
 \end_inset
 
-Solutions are given below.
- They are remarkably unstable; most small perturbations cause the solution
- to diverge.
- Not all; some perturbations result in convergence.
+The presentation works through a sequence of examples, generalizing at each
+ step.
  
 \end_layout
 
@@ -23523,7 +23637,8 @@ In the present case,
 \end_inset
 
  ...
- alas, a victim of the usual convention for naming things.
+ Note the prime.
+ Alas, this is a victim of the usual convention for naming things.
  Plugging through the rest of the way with 
 \begin_inset Formula $f=\rho$
 \end_inset
@@ -24329,6 +24444,14 @@ Unlike the
 
  are not necessarily messy, but can exhibit recurring patterns seen at lower
  orders.
+\end_layout
+
+\begin_layout Subsubsection
+Quadratic eigenfuntions
+\end_layout
+
+\begin_layout Standard
+The above examples all used piece-wise linear 
 \end_layout
 
 \begin_layout Subsubsection
