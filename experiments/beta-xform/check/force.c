@@ -127,13 +127,14 @@ void setup(double beta)
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-#define SQ_ONE
-#ifdef SQ_ONE
+#define QUAD_ONE
+#ifdef QUAD_ONE
 	// Broken
 	// Should have worked, but I guess there's an algebra error somewhere
-	double a = (3*beta+2) / (8*beta+5);
-	double b = -0.25*(14*beta+9)*(3*beta+2) / ((8*beta+5)*(2*beta+1));
-	double lambda = sqrt(2.0/(3*beta+2));
+	double lambda = 0.5 * (beta + sqrt(beta+5)) / (2*beta + 1.0);
+	double a = - beta;
+	double b = 0.25 * (1.0 - 2*beta) / (lambda*lambda*beta*beta - lambda*beta -1.0);
+	printf("# quadratic lambda = %g a=%g b=%g\n", lambda, a, b);
 
 	int half = NHIST/2;
 	for (int i=0; i<half; i++)
@@ -243,19 +244,21 @@ void setup(double beta)
 
 double normalize(double beta)
 {
-	double delta =1.0 / ((double) NHIST);
 
 	// Remove constant
+	int m0 = enx(0.5*beta);
+	double delta = 1.0 / ((double) m0);
 	double sum = 0.0;
-	for (int i=0; i<NHIST; i++) sum += histn[i];
-	for (int i=0; i<NHIST; i++) histn[i] -= sum * delta;
+	for (int i=0; i<m0; i++) sum += histn[i];
+	for (int i=0; i<m0; i++) histn[i] -= sum * delta;
 
 	// Normalize
 	double norm = 0.0;
-	for (int i=0; i<NHIST; i++) norm += fabs(histn[i]);
+	for (int i=0; i<m0; i++) norm += fabs(histn[i]);
 	norm *= delta;
-	for (int i=0; i<NHIST; i++) histo[i] = histn[i] / norm;
+	for (int i=0; i<m0; i++) histo[i] = histn[i] / norm;
 
+	printf("# renorm, sum=%g norm = %g\n", sum * delta, norm);
 	return norm;
 }
 
@@ -294,7 +297,7 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
-#define SHOW_NORMS
+// #define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -304,7 +307,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define SHOW_DENS
+#define SHOW_DENS
 #ifdef SHOW_DENS
 	printf("#\n# beta=%g\n#\n", beta);
 

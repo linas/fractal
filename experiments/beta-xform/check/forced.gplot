@@ -8,28 +8,28 @@ set out 'forced.png'
 
 set title "stuff"
 
-#plot "forced.dat" using 2:3 with lines title "0", \
-#     "forced.dat" using 2:4 with lines title "1", \
-#     "forced.dat" using 2:5 with lines title "2", \
-#     "forced.dat" using 2:6 with lines title "3", \
+plot "forced.dat" using 2:3 with lines title "0", \
+     "forced.dat" using 2:4 with lines title "1", \
+     "forced.dat" using 2:5 with lines title "2", \
+     "forced.dat" using 2:6 with lines title "3", \
 
 
 #     "forced.dat" using 2:7 with lines title "4", \
 #     "forced.dat" using 2:8 with lines title "5"
 # ----------------------------------------------------------------------
-
-beta = 1.83928675521416
-y0 = 2.9
-
-set yrange [-4.5:2.5]
-plot "forced.dat" using 2:3 with lines title "0", \
-     "forced.dat" using 2:((2*y0)*(beta*(beta-1)*$2 - 0.5)) with lines title "a", \
-     "forced.dat" using 2:((2*y0)*($2 - 0.5)) with lines title "b", \
-     "forced.dat" using 2:((2*y0)*((beta-1)*$2 - 0.5)) with lines title "c", \
-     "forced.dat" using 2:(6*$2 - y0) with lines title "bf", \
-     "forced.dat" using 2:(4.5*$2 - y0) with lines title "cf", \
-
-#     "forced.dat" using 2:(9*$2 - y0) with lines title "af", \
+#
+#beta = 1.83928675521416
+#y0 = 2.9
+#
+#set yrange [-4.5:2.5]
+#plot "forced.dat" using 2:3 with lines title "0", \
+#     "forced.dat" using 2:((2*y0)*(beta*(beta-1)*$2 - 0.5)) with lines title "a", \
+#     "forced.dat" using 2:((2*y0)*($2 - 0.5)) with lines title "b", \
+#     "forced.dat" using 2:((2*y0)*((beta-1)*$2 - 0.5)) with lines title "c", \
+#     "forced.dat" using 2:(6*$2 - y0) with lines title "bf", \
+#     "forced.dat" using 2:(4.5*$2 - y0) with lines title "cf", \
+#
+##     "forced.dat" using 2:(9*$2 - y0) with lines title "af", \
 # ----------------------------------------------------------------------
 # index two double-check
 #beta = 1.465571231876768

@@ -23865,7 +23865,7 @@ Treat
 \end_inset
 
  to other intervals.
- Specifically, this is 
+ This is 
 \begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{k}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{k}}\Theta\left(m_{1}-y\right)$
 \end_inset
 
@@ -24049,11 +24049,16 @@ By recursion and restriction,
 \end_layout
 
 \begin_layout Itemize
-As we are looking for first-order eigenfunctions, make the Ansatz that 
-\begin_inset Formula $f_{1}\left(\beta\right)=\beta-c$
+Make the Ansatz that
+\begin_inset Formula $f_{1}\left(y\right)=y-c$
 \end_inset
 
- for some constant to be determined.
+ for some constant 
+\begin_inset Formula $c$
+\end_inset
+
+, to be determined.
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -24393,7 +24398,7 @@ As a notational convenience, define the restriction
 
 \begin_layout Itemize
 Treat 
-\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{k}}=\frac{1}{\beta}\left.\rho\left(y\right)\right|_{I_{k}}$
+\begin_inset Formula $\left.\mathcal{L}\rho\right|_{I_{k}}=\lambda\left.\rho\left(y\right)\right|_{I_{k}}$
 \end_inset
 
  as a recurrence relation, so as to relate 
@@ -24401,8 +24406,17 @@ Treat
 \end_inset
 
  to other intervals.
- This is 
-\begin_inset Formula $\left.\rho\left(y\right)\right|_{I_{k}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{k}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{k}}\Theta\left(m_{1}-y\right)$
+ Note the (re-)appearance of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ as the explicit eigenvalue; it was implicitly taken as 
+\begin_inset Formula $\lambda=1/\beta$
+\end_inset
+
+ in the earlier examples.
+ The recurrence relation, with this generalized eigenvalue, is then 
+\begin_inset Formula $\lambda\beta\left.\rho\left(y\right)\right|_{I_{k}}=\left.\rho\left(\frac{y}{\beta}\right)\right|_{I_{k}}\Theta\left(m_{0}-y\right)+\left.\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right|_{I_{k}}\Theta\left(m_{1}-y\right)$
 \end_inset
 
 .
@@ -24430,26 +24444,48 @@ Employ the recurrence relation to obtain
 \end_layout
 
 \begin_layout Itemize
-Perform the Ansatz 
-\begin_inset Formula $f_{1}\left(y\right)=y-c$
+Make the Ansatz that 
+\begin_inset Formula $f_{1}\left(y\right)=\sum_{j}a_{j}y^{j}$
 \end_inset
 
- for some constant 
-\begin_inset Formula $c$
+ for some unknown constants 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ to be determined.
+ Plugging through, and collecting terms by powers of 
+\begin_inset Formula $y$
+\end_inset
+
+ gives equations for the 
+\begin_inset Formula $a_{j}$
 \end_inset
 
 .
- Iterate, and solve for 
-\begin_inset Formula $c$
+ The leading term gives an expression for 
+\begin_inset Formula $\lambda$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-There are two unresolved issues with the above: the need to sort midpoints,
- and the interval inclusion relations.
- Examining the spacial cases will help.
+There are three unresolved issues with the above: the need to sort midpoints,
+ the precise form of the interval inclusion relations, and the daunting
+ algebra for fixing the 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Some insight can be gained into the interval inclusion problem by examining
+ the special cases again.
  These are given in the table below.
 \end_layout
 
