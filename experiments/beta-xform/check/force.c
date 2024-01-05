@@ -127,6 +127,29 @@ void setup(double beta)
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
+#define SQ_ONE
+#ifdef SQ_ONE
+	// Broken
+	// Should have worked, but I guess there's an algebra error somewhere
+	double a = (3*beta+2) / (8*beta+5);
+	double b = -0.25*(14*beta+9)*(3*beta+2) / ((8*beta+5)*(2*beta+1));
+	double lambda = sqrt(2.0/(3*beta+2));
+
+	int half = NHIST/2;
+	for (int i=0; i<half; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = (beta*beta*x*x +a*beta*x + b)*beta*lambda;
+	}
+	int endp = enx(0.5*beta);
+	for (int i=half; i<endp; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = x*x +a*x + b;
+	}
+	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
+#endif
+
 // #define GOLD_TWO
 #ifdef GOLD_TWO
 	int m1 = enx(0.5*beta*(beta-1.0));
@@ -150,7 +173,7 @@ void setup(double beta)
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-#define GOLD_THREE
+// #define GOLD_THREE
 #ifdef GOLD_THREE
 	// Bingo! This works for index=3
 
