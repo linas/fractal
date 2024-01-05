@@ -144,17 +144,13 @@ void setup(double beta)
 #ifdef QUAD_ONE
 	// Broken
 	// Should have worked, but I guess there's an algebra error somewhere
-	double lambda = 0.5 * (beta + sqrt(beta + 5.0)) / (2.0*beta + 1.0);
-	double a = -beta;
-	double b = 0.25 * (1.0 - 2.0*beta) / (lambda*lambda*beta*beta - lambda*beta -1.0);
+	double lambda = 1.0 / (beta*beta);
+	double a = -1.0;
+	double b = 0.125 * beta;
 	printf("# quadratic lambda = %g a=%g b=%g\n", lambda, a, b);
 
 double b2=beta*beta;
 double b4=b2*b2;
-double b6=b4*b2;
-double b8=b4*b4;
-double lalt = (b4+sqrt(b8+4*b6)) / (2*b6);
-printf("lalt=%g\n", lalt);
 
 	double sum2 = 0.0;
 	int half = enx(0.5);
@@ -198,16 +194,19 @@ printf("rig at m1 %g vs aray %g\n", rig, histn[enx(xhi)-1]);
 printf("sum lef+rig at m1 %g\n", lef+rig);
 printf("-------\n");
 
-printf("quad terms eig %g vs %g + %g = %g \n", lambda*lambda*b4, lambda*b2, 1.0/b2,
-lambda*b2 + 1.0/b2);
+// quad OK
+printf("quad terms eig %g vs %g + %g = %g \n", lambda*lambda*b4, lambda*beta, 1.0/b2,
+lambda*beta + 1.0/b2);
 
+// line OK
 printf("line terms eig %g vs %g + %g = %g \n", 
 lambda*lambda*b2*beta*a, lambda*beta*a, 1.0/beta + a/beta,
 lambda*beta*a + 1.0/beta + a/beta);
 
+// const ok
 printf("cone =%g  vs %g + %g = %g\n", lambda*lambda*b2*b,
-lambda*beta*b, 0.25 + 0.5*a+b,
-lambda*beta*b + 0.25 + 0.5*a+b
+lambda*beta*b, 0.25 + 0.5*a + b,
+lambda*beta*b + 0.25 + 0.5*a + b
 );
 
 printf("-------\n");
@@ -223,7 +222,7 @@ for (int i=half; i<endp; i++)
 	double ad = fabs(f1-f2);
 	acc += ad;
 	if (5e-5 < ad)
-		printf("%d %g expect %g got %g diff %g\n", i, x, f1, f2, f1-f2);
+		printf("%d %g f1 guy expect %g got %g diff %g\n", i, x, f1, f2, f1-f2);
 }
 printf("ovr %d total acc=%g\n", endp-half, acc);
 
@@ -243,7 +242,7 @@ for (int i=0; i<half; i++)
    // double egn = lambda*lambda*b2*( b2*x*x +a*beta*x + b);
 	// printf("at %d %g expect egn=%g got %g delt=%g\n", i, x, egn, ef2, egn-ef2);
 
-	double ylo = lambda*beta*( beta*x*x +a*x + b);
+	double ylo = lambda*beta*( x*x +a*x + b);
 	printf("at %d %g expect ylo=%g got %g delt=%g\n", i, x, ylo, lef, ylo-lef);
 
 	// double xhi = x/beta+0.5;
