@@ -23447,19 +23447,102 @@ satisfies
 \end_inset
 
  norm 
-\begin_inset Formula $\int_{0}^{1}\left|\rho\right|=1/4\varphi$
+\begin_inset Formula $\int_{0}^{1}\left|\rho\left(y\right)\right|dy=1/4\varphi$
 \end_inset
 
- and of course 
-\begin_inset Formula $\int_{0}^{1}\rho=0$
-\end_inset
-
- by defintion.
+.
  Note that 
 \begin_inset Formula $y-1/2$
 \end_inset
 
  is the first Euler polynomial.
+\end_layout
+
+\begin_layout Paragraph
+Orthogonality
+\end_layout
+
+\begin_layout Standard
+The question of orthogonality is interesting.
+ Well, interesting only because it is prone to thought-crime, and so an
+ effort to educate seems needed.
+ Note that 
+\begin_inset Formula $\int_{0}^{1}\rho\left(y\right)dy=0$
+\end_inset
+
+; it this were not so, then 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would not be orthogonal to the invariant measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ Here, the invariant measure is (un-normalized)
+\begin_inset Formula 
+\begin{align*}
+\mu\left(y\right) & =\begin{cases}
+\varphi & \mbox{for }0\le y<\frac{1}{2}\\
+1 & \mbox{for }\frac{1}{2}\le y<\frac{\varphi}{2}\\
+0 & \mbox{for }\frac{\varphi}{2}\le y\le1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Now the subtle point arises.
+ The integral 
+\begin_inset Formula $\int_{0}^{1}\rho\left(y\right)\mu\left(y\right)dy\ne0$
+\end_inset
+
+, but this is not the correct way to compute orthogonality! The problem
+ is the Jacobian is missing.
+ The correct integral to determine the inner product between 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ with respect to the invariant measure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\int_{0}^{1}f\left(y\right)g\left(y\right)\left|\nu^{\prime}\left(\nu^{-1}\left(y\right)\right)\right|^{-1}dy=\int_{0}^{1}f\left(\nu\left(x\right)\right)g\left(\nu\left(x\right)\right)dx
+\]
+
+\end_inset
+
+In the present case, 
+\begin_inset Formula $\nu^{\prime}\left(x\right)=\mu\left(x\right)$
+\end_inset
+
+ ...
+ alas, a victim of the usual convention for naming things.
+ Plugging through the rest of the way with 
+\begin_inset Formula $f=\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $g=\mu$
+\end_inset
+
+ has 
+\begin_inset Formula $g$
+\end_inset
+
+ and the Jacobian cancel, leaving 
+\begin_inset Formula $\int_{0}^{1}\rho\left(y\right)dy=0$
+\end_inset
+
+ as the correct orthogonality result.
+ This works for the present, but requires the reinsertion of the Jacobian,
+ if the product was of some other two functions.
 \end_layout
 
 \begin_layout Subsubsection

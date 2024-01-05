@@ -110,7 +110,7 @@ void setup(double beta)
 	for (int i=2*midp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-#define GOLD_ONE
+// #define GOLD_ONE
 #ifdef GOLD_ONE
 	double sum2 = 0.0;
 	int half = enx(0.5);
@@ -129,12 +129,17 @@ void setup(double beta)
 		histn[i] = x-0.5;
 		sum1 += histn[i];
 	}
+
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 
 	printf("# gold one sum_2 = %g sum_1 = %g\n", sum2, sum1);
+	sum2 /= (double) half;
+	sum1 /= (double) endp-half;
+	printf("# Interval-weighted sum_2 = %g sum_1 = %g ratio s1/s2= %g\n",
+		sum2, sum1, sum1/sum2);
 #endif
 
-// #define QUAD_ONE
+#define QUAD_ONE
 #ifdef QUAD_ONE
 	// Broken
 	// Should have worked, but I guess there's an algebra error somewhere
@@ -162,6 +167,10 @@ void setup(double beta)
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
 
 	printf("# qudratic sum_2 = %g sum_1 = %g\n", sum2, sum1);
+	sum2 /= (double) half;
+	sum1 /= (double) endp-half;
+	printf("# Interval-weighted sum_2 = %g sum_1 = %g ratio s1/s2= %g\n",
+		sum2, sum1, sum1/sum2);
 #endif
 
 // #define GOLD_TWO
