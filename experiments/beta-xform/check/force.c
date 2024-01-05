@@ -110,45 +110,58 @@ void setup(double beta)
 	for (int i=2*midp; i<NHIST; i++) histn[i] = 0.0;
 #endif
 
-// #define GOLD_ONE
+#define GOLD_ONE
 #ifdef GOLD_ONE
-	int half = NHIST/2;
+	double sum2 = 0.0;
+	int half = enx(0.5);
 	for (int i=0; i<half; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = beta*x-0.5;
+		sum2 += histn[i];
 	}
+
+	double sum1 = 0.0;
 	int endp = enx(0.5*beta);
 	for (int i=half; i<endp; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = x-0.5;
+		sum1 += histn[i];
 	}
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
+
+	printf("# gold one sum_2 = %g sum_1 = %g\n", sum2, sum1);
 #endif
 
-#define QUAD_ONE
+// #define QUAD_ONE
 #ifdef QUAD_ONE
 	// Broken
 	// Should have worked, but I guess there's an algebra error somewhere
 	double lambda = 0.5 * (beta + sqrt(beta+5)) / (2*beta + 1.0);
-	double a = - beta;
+	double a = -beta;
 	double b = 0.25 * (1.0 - 2*beta) / (lambda*lambda*beta*beta - lambda*beta -1.0);
 	printf("# quadratic lambda = %g a=%g b=%g\n", lambda, a, b);
 
-	int half = NHIST/2;
+	double sum2 = 0.0;
+	int half = enx(0.5);
 	for (int i=0; i<half; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = (beta*beta*x*x +a*beta*x + b)*beta*lambda;
+		sum2 += histn[i];
 	}
+	double sum1 = 0.0;
 	int endp = enx(0.5*beta);
 	for (int i=half; i<endp; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = x*x +a*x + b;
+		sum1 += histn[i];
 	}
 	for (int i=endp; i<NHIST; i++) histn[i] = 0.0;
+
+	printf("# qudratic sum_2 = %g sum_1 = %g\n", sum2, sum1);
 #endif
 
 // #define GOLD_TWO
