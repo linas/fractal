@@ -53,9 +53,9 @@ double invar(double beta, double x)
 // #define NHIST 27719
 // #define NHIST 27717
 // #define NHIST 28657 // (fibo 22)
-// #define NHIST 28658
+#define NHIST 28658
 // #define NHIST 196418 // (fib 26)
-#define NHIST 196419
+// #define NHIST 196419
 
 // #define NHIST 18561 // n=2 fib plus one
 // #define NHIST 25282    // n=3 fib plus one
@@ -92,8 +92,44 @@ double ell(double beta, double y)
 	return ellie;
 }
 
+double line(double x)
+{
+	return x;
+	// return x - 0.5;
+}
+
+double iterator(double beta, double x)
+{
+	double midpnt = 0.5*beta;
+	if (midpnt < x) return 0.0;
+
+	double obn = 1.0;
+	double sum = 0.0;
+	double norm = 0.0;
+	for (int i=0; i<1000; i++)
+	{
+		// if (x < midpnt) sum += line(x) * obn;
+		if (x < midpnt) sum += line(x*obn);
+		norm += midpnt*obn;
+
+		if (0.5 < midpnt) midpnt -= 0.5;
+		midpnt *= beta;
+		obn /= beta;
+		if (obn < 1e-15) break;
+	}
+	sum -= 0.5;
+	// return sum / norm;
+	return sum;
+}
+
 void setup(double beta)
 {
+	for (int i=0; i<NHIST; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = iterator(beta, x);
+	}
+
 // #define SAW
 #ifdef SAW
 	for (int i=0; i<NHIST; i++)
@@ -140,7 +176,7 @@ void setup(double beta)
 		sum2, sum1, sum1/sum2);
 #endif
 
-#define QUAD_ONE
+// #define QUAD_ONE
 #ifdef QUAD_ONE
 	// Works great, now that we found all the algebra mistakes.
 	double lambda = 1.0 / (beta*beta);
@@ -318,7 +354,7 @@ int main(int argc, char* argv[])
 	setup(beta);
 	normalize(beta);
 
-// #define SHOW_NORMS
+#define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -329,7 +365,7 @@ int main(int argc, char* argv[])
 #endif
 
 
-#define SHOW_DENS
+// #define SHOW_DENS
 #ifdef SHOW_DENS
 	printf("#\n# beta=%g\n#\n", beta);
 
