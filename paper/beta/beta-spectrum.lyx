@@ -577,12 +577,29 @@ As
 \begin_inset Formula $f$
 \end_inset
 
-, it is conventional to write 
+, the sum construction on the right-hand side can be thought of as an operation
+ 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+, defined by 
+\begin_inset Formula $f$
+\end_inset
+
+, acting on 
+\begin_inset Formula $\rho$
+\end_inset
+
+; in short-hand, 
 \begin_inset Formula $h=\mathcal{L}_{f}\rho$
 \end_inset
 
 .
- The symbol 
+ 
+\end_layout
+
+\begin_layout Standard
+The symbol 
 \begin_inset Formula $\mathcal{L}$
 \end_inset
 
@@ -607,10 +624,6 @@ As
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Thus, we've defined a linear operator 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
@@ -621,101 +634,45 @@ Thus, we've defined a linear operator
 
 , and has the property of mapping distributions to other distributions as
  it is iterated.
- This is where the fun begins.
- As a linear operator, the full force of operator theory comes into play.
- In general, it will have some spectrum; the spectrum might be discrete
- or continuous.
- The spectrum depends strongly on the space of functions on which 
-\begin_inset Formula $\mathcal{L}_{f}$
+ It is the result of commuting with function composition: 
+\begin_inset Formula $\mathcal{L}_{f}\circ\rho=\rho\circ f^{-1}$
 \end_inset
 
- is allowed to act.
- For example, if the only distributions 
-\begin_inset Formula $\rho$
+; it's a kind of a trick with function composition.
+ Indeed, one can define an analogoous operator 
+\begin_inset Formula $\mathcal{K}_{f}\circ\rho=\rho\circ f$
 \end_inset
 
- we are allowed to consider are polynomials, then 
-\begin_inset Formula $\mathcal{L}_{f}$
+, the 
+\begin_inset Quotes eld
 \end_inset
 
- will in general have a discrete spectrum.
- If instead, 
-\begin_inset Formula $\rho$
+composition operator
+\begin_inset Quotes erd
 \end_inset
 
- are allowed to be square-integrable functions, then the spectrum will often
- be continuous, and perhaps may have a large kernel.
- Larger spaces exhibit even wilder behavior: if one asks only that 
-\begin_inset Formula $\rho$
+ or 
+\begin_inset Quotes eld
 \end_inset
 
- be 
-\begin_inset Formula $L^{1}$
+Koopman operator
+\begin_inset Quotes erd
 \end_inset
 
--integrable (not square-integrable), then it is possible for continuous-nowhere
- functions to appear as eigenfunctions of 
+, that acts as a kind of (one-sided) inverse to 
 \begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
 .
- A rich variety can often be found.
+ 
 \end_layout
 
 \begin_layout Standard
-The
-\end_layout
-
-\begin_layout Standard
-xxxx
-\end_layout
-
-\begin_layout Standard
-xxxx
-\end_layout
-
-\begin_layout Standard
-As a linear operator, 
-\end_layout
-
-\begin_layout Standard
-The action of an iterated map on a distribution is described in terms of
- the pushforward of the map.
- Informally, in the present case, the pushforward of the beta transform,
- acting on a distribution 
-\begin_inset Formula $\rho:[0,1]\to\mathbb{R}$
+Formally, the pushforward 
+\begin_inset Formula $\mathcal{L}_{f}$
 \end_inset
 
- can be written as
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}\rho\right]\left(x\right)=\sum_{y\in t_{\beta}^{-1}\left(x\right)}\frac{\rho\left(y\right)}{\left|t_{\beta}^{\prime}\left(y\right)\right|}
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $t_{\beta}^{\prime}=dt_{\beta}/dx$
-\end_inset
-
- so that the denominator is understood as the Jacobian determinant.
- The operator 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- is a linear operator, acting on some space of functions 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- Different spaces result in different properties for 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
-; commonly explored are the polynomials, and the square-integrable functions,
- and, in certain special cases, the analysis can be extended to highly singular,
- continuous-nowhere functions.
- The pushforward operator is generically called the 
+ is called the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -732,84 +689,153 @@ Ruelle–Frobenius–Perron operator
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The largest eigenvalue is conventionally called the Frobenius–Perron eigenvalue;
- for the beta transform, as for many other iterated maps, it is equal to
- one.
- Solutions to 
-\begin_inset Formula $\mathcal{L}_{\beta}\mu=\mu$
+ As a linear operator, the full force of operator theory comes into play.
+ The primary task is to describe it's spectrum (it's eigenfunctions and
+ eigenvalues).
+ Two aspects of this spectrum are interesting.
+ The first is the so-called 
+\begin_inset Quotes eld
 \end_inset
 
- define an invariant measure 
-\begin_inset Formula $\mu$
+invariant measure
+\begin_inset Quotes erd
 \end_inset
 
- on the unit interval.
- It is invariant in the usual sense of dynamical systems: one has 
-\begin_inset Formula $\left(\mu\circ t_{\beta}^{-1}\right)\left(x\right)=\mu\left(x\right)$
+, the distribution 
+\begin_inset Formula $\mu:\left[0,1\right]\to\mathbb{R}$
 \end_inset
 
- for almost all 
-\begin_inset Formula $x$
-\end_inset
-
-.
- The proper formal statement of this is to invoke the sigma-algebra 
-\begin_inset Formula $\mathcal{B}$
-\end_inset
-
- of Borel sets on the unit interval.
- The inverse of the beta transform is then a map 
-\begin_inset Formula $t_{\beta}^{-1}:\mathcal{B}\to\mathcal{B}$
-\end_inset
-
- while the measure 
-\begin_inset Formula $\mu:\mathcal{B}\to\mathbb{R}$
-\end_inset
-
- is a sigma-additive measure.
- The pushforward nature of the transfer operator is now more readily visible:
- 
-\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho\circ t_{\beta}^{-1}$
+ that defines a density on the unit interval that is invariant under the
+ application of the pushforward: 
+\begin_inset Formula $\mathcal{L}_{f}\mu=\mu$
 \end_inset
 
 .
- One is generally interested the spectrum of 
-\begin_inset Formula $\mathcal{L_{\beta}}$
+ An informal example of such an invariant measure are the rings of Saturn:
+ an accumulation of dust and gravel, orbiting Saturn, coupled by gravitation
+ to both Saturn and orbiting moons, yet in a stable dynamical distribution.
+ This is the physical meaning and importance of the invariant measure; more
+ generally, it appears as the 
+\begin_inset Quotes eld
 \end_inset
 
-.
- In the current case, the spectrum is simple enough that it can be described
- by eigenfunctions 
-\begin_inset Formula $\mathcal{L_{\beta}\rho=\lambda\rho}$
-\end_inset
-
- of this operator.
- In general, the precise spectrum depends on how the class of mappings 
-\begin_inset Formula $\rho:\mathcal{B}\to\mathbb{C}$
+ground state
+\begin_inset Quotes erd
 \end_inset
 
  or 
-\begin_inset Formula $\rho:\mathcal{B}\to\mathbb{R}$
+\begin_inset Quotes eld
 \end_inset
 
- might be restricted: 
-\emph on
-e.g.
+thermodynamic equilibrium state
+\begin_inset Quotes erd
+\end_inset
 
-\emph default
- by limiting it to functions 
+ in a vast variety of dyanmicl systems.
+\end_layout
+
+\begin_layout Standard
+Aside from the invariant measure, there is also the question of the rest
+ of the spectrum.
+ These are described by the eigenfunctions 
 \begin_inset Formula $\rho$
 \end_inset
 
- that can be interpreted as being polynomials, or square-integrable, 
+ satisfying 
+\begin_inset Formula $\mathcal{L}\rho=\lambda\rho$
+\end_inset
+
+.
+ By the theorem of Frobenius–Perron, all these other solutions have eigenvalue
+ 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ In physics, these correspond to the decaying modes, to the distributions
+ that disappear over time.
+ For the example of Saturn, these are anything not orbiting in the plane
+ of the rings: tidal forces and perturbations from the moons will force
+ such orbits either into the ring, or crash into the planet, or possibly
+ fly away to infinity.
+ The other orbits are not stable.
+ Thus, a characterization of the decaying spectrum is of general interest.
+\end_layout
+
+\begin_layout Standard
+A much stronger conception is that the decaying spectrum has something to
+ do with the irreversibility of time.
+ In the macroscopic world, this is plainly obvious.
+ In the microscopic world, the laws of physics are manifestly time-reversible.
+ Somehow, complex dynamical systems pass through a region of chaotic and
+ turbulent motion, culminating in thermodynamic equilibrium.
+ The decaying spectrum provides a conceptual framework in which one can
+ ponder this transition.
+\end_layout
+
+\begin_layout Standard
+This is where the fun begins.
+ The spectrum is not a 
+\begin_inset Quotes eld
+\end_inset
+
+fixed thing
+\begin_inset Quotes erd
+\end_inset
+
+, but depends strongly on the space of fuctions on which 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ is allowed to act.
+ If one limits oneself to 
+\begin_inset Formula $\rho$
+\end_inset
+
+ drawn from the space of piece-wise continuous and smooth functions, 
 \emph on
-etc.
+i.e.
 
 \emph default
- on the unit interval.
+ polynomials, then 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+ will in general have a discrete spectrum.
+ If instead, 
+\begin_inset Formula $\rho\in L^{2}\left[0,1\right]$
+\end_inset
+
+ the space of functions that are square-integrable on the unit interval,
+ then the spectrum will often be continuous, and perhaps may have a large
+ kernel.
+ Larger spaces exhibit even wilder behavior: if one asks only that 
+\begin_inset Formula $\rho$
+\end_inset
+
+ be 
+\begin_inset Formula $L^{1}$
+\end_inset
+
+-integrable (not square-integrable), then it is possible for continuous-nowhere
+ functions to appear as eigenfunctions of 
+\begin_inset Formula $\mathcal{L}_{f}$
+\end_inset
+
+.
+ An explicit example of the latter is the Minkowski measure for the transfer
+ operator of the Minkowski Question Mark function: it vanishes on the rationals,
+ but can be integrated just fine; it's integral is the Question Mark function.
+ In short, a rich variety can often be found.
+ In the present case, it seems, nothing quite this rich, but getting there.
+\end_layout
+
+\begin_layout Standard
+xxxx
+\end_layout
+
+\begin_layout Standard
+xxxx
 \end_layout
 
 \begin_layout Standard
