@@ -124,11 +124,16 @@ double iterator(double beta, double x)
 
 void setup(double beta)
 {
+#define ITERATOR
+#ifdef ITERATOR
+	// Works great for n=1, n=2, n=4 fails for n=3
+	// I'm missing some constant factor.
 	for (int i=0; i<NHIST; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = iterator(beta, x);
 	}
+#endif
 
 // #define SAW
 #ifdef SAW
@@ -352,9 +357,11 @@ int main(int argc, char* argv[])
 	int nsteps = atoi(argv[2]);
 
 	setup(beta);
-	normalize(beta);
 
-#define SHOW_NORMS
+for (int i=0; i<NHIST; i++) histo[i] = histn[i];
+	// normalize(beta);
+
+// #define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -365,7 +372,7 @@ int main(int argc, char* argv[])
 #endif
 
 
-// #define SHOW_DENS
+#define SHOW_DENS
 #ifdef SHOW_DENS
 	printf("#\n# beta=%g\n#\n", beta);
 
