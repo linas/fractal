@@ -1199,35 +1199,265 @@ x=0.b_{0}b_{1}b_{2}\cdots
 
 \end_inset
 
+is a representation of a real number with a bit-string.
+\end_layout
 
+\begin_layout Subsection
+Binary Trees
 \end_layout
 
 \begin_layout Standard
-xxx
+A variety of mathematical objects that can be placed into a bijection with
+ collections of bit-strings, and much of this text is an exploration of
+ what happens when this is done.
+ There will be several recurring themes; these are reviewed here.
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-The Bernoulli shift has many interesting properties, connecting it to the
- Cantor set and a large class of self-similar fractals.
- It is also connected to the modular group and elliptic functions (thence
- to number theory and Riemann surfaces).
- It is also the primary example of an ergodic system, and, in a sense, has
- far-reaching implications for ergodic systems via Ornstein theory.
- These various connections are far too numerous to review here, beyond these
- brief mentions.
-\end_layout
-
-\begin_layout Standard
-The current task is to attempt to see how many of these properties still
- hold in the more general case of the 
-\begin_inset Formula $\beta$
+The collection of all infinitely-long bit-strings 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}=\left\{ 0,1\right\} \times\left\{ 0,1\right\} \times\cdots$
 \end_inset
 
--transformation.
+ is known as Cantor space.
+ The Cantor set is famously the collection of points 
+\begin_inset Formula $y=\sum_{n=0}^{\infty}b_{n}\left(x\right)3^{-n-1}$
+\end_inset
+
+ that results from taking the binary expansion of a real number, and re-expressi
+ng it as a base-three expansion.
+ It can also be constructed by repeatedly removing the middle-third.
+ If one is careful that the middle-third is always an open set, what remains
+ after subtraction is a closed set.
+ What remains after infinite repetition is a 
+\begin_inset Quotes eld
+\end_inset
+
+perfect set
+\begin_inset Quotes erd
+\end_inset
+
+, and a key theorem is that this perfect set is identical to the collection
+ of points obtained with the sum above.
+ Bouncing between these two distinct constructions requires the definition
+ of the product topology on Cantor space, and thence the Borel sigma algebra,
+ so that one can work in a consistent way with set complements.
+ These ideas will be reviewed as the need arises.
+\end_layout
+
+\begin_layout Standard
+Associated with Cantor space is the infinite binary tree.
+ Any given location in the tree can be specified by giving a sequence of
+ left-right moves, down the tree, starting at the root.
+ Such left-right moves can (of course) be interpreted as bit-strings.
+ After a finite number of moves, one arrives at a node, and under that node
+ extends another infinite binary tree, just like the original.
+ If one has a function 
+\begin_inset Formula $f\left(b\right)$
+\end_inset
+
+ that is defined on every node 
+\begin_inset Formula $b$
+\end_inset
+
+ of the binary tree, then one can compare this function to 
+\begin_inset Formula $f\left(Lb\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(Rb\right)$
+\end_inset
+
+ that result from a left move and a right move.
+ If these are equal to each other, or scale in some way when compared to
+ the original, or if there exist two other functions 
+\begin_inset Formula $g_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(Lb\right)=g_{L}\left(f\left(b\right)\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $b$
+\end_inset
+
+, and likewise, that 
+\begin_inset Formula $f\left(Rb\right)=g_{R}\left(f\left(b\right)\right)$
+\end_inset
+
+, then one has fractal self-similarity.
+ More explicitly, whenever one has a pair of commuting diagrams, 
+\begin_inset Formula $f\circ L=g_{L}\circ f$
+\end_inset
+
+ and , 
+\begin_inset Formula $f\circ R=g_{R}\circ f$
+\end_inset
+
+, then one has a dyadic monoid self-symmetry.
+ This is the symmetry of a large class of fractals.
+\end_layout
+
+\begin_layout Standard
+Some formalities and examples are in order.
+ Let 
+\begin_inset Formula $\left\{ L,R\right\} ^{<\omega}$
+\end_inset
+
+ denote the collection of finite-length binary strings.
+ These can be graded by the length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ of the string, so that 
+\begin_inset Formula 
+\[
+\left\{ L,R\right\} ^{<\omega}=\bigcup_{\nu=0}^{\infty}\left\{ L,R\right\} ^{\nu}=\epsilon\cup\left\{ L,R\right\} \cup\left(\left\{ L,R\right\} \times\left\{ L,R\right\} \right)\cup\cdots
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ denoting the empty (zero-length) string.
+ This can be turned into a monoid by defining multiplication as string concatena
+tion: given 
+\begin_inset Formula $\gamma\in\left\{ L,R\right\} ^{n}$
+\end_inset
+
+ some sequence of 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves of length 
+\begin_inset Formula $n$
+\end_inset
+
+, and 
+\begin_inset Formula $\gamma^{\prime}\in\left\{ L,R\right\} ^{m}$
+\end_inset
+
+ some other sequence of length 
+\begin_inset Formula $m$
+\end_inset
+
+, then 
+\begin_inset Formula $\gamma\gamma^{\prime}\in\left\{ L,R\right\} ^{n+m}$
+\end_inset
+
+ is some other string of length 
+\begin_inset Formula $m+n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This set is in bijection to the integers in a straight-forward way.
+ This bijection, written as 
+\begin_inset Formula $\kappa:\left\{ L,R\right\} ^{<\omega}\to\mathbb{N}$
+\end_inset
+
+, can be defined recursively, by a simple commuting diagram.
+ Define 
+\begin_inset Formula $\kappa\left(\epsilon\right)=1$
+\end_inset
+
+ and ask that 
+\begin_inset Formula $\kappa\left(L\gamma\right)=2\kappa\left(\gamma\right)$
+\end_inset
+
+ and that 
+\begin_inset Formula $\kappa\left(R\gamma\right)=2\kappa\left(\gamma\right)+1$
+\end_inset
+
+ for every 
+\begin_inset Formula $\gamma\in\left\{ L,R\right\} ^{n}$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $\kappa\left(L\right)=2$
+\end_inset
+
+ and 
+\begin_inset Formula $\kappa\left(R\right)=3$
+\end_inset
+
+ and 
+\begin_inset Formula $LL,LR,RL,RR$
+\end_inset
+
+ map to 
+\begin_inset Formula $4,5,6,7$
+\end_inset
+
+ respectively.
+\end_layout
+
+\begin_layout Standard
+Associated with the set 
+\begin_inset Formula $\left\{ L,R\right\} ^{<\omega}$
+\end_inset
+
+ is a binary tree 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ that is of countable size.
+ With the above labelling, the root node can be labelled with 1, and the
+ left and right sub-nodes can be labelled as 2,3.
+ The next rank in the tree gets labels 
+\begin_inset Formula $4,5,6,7$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+The integers are in bijection with the dyadic rationals, of course.
+ Let 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ be the dyadic rationals.
+ The canonical bijection is 
+\begin_inset Formula $\delta:\mathbb{D}\to\mathbb{N}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\delta:\left(2n+1\right)/2^{m}\mapsto2^{m-1}+n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Associated to this 
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+Julia set
 \end_layout
 
 \begin_layout Subsection
