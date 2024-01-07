@@ -1203,7 +1203,7 @@ is a representation of a real number with a bit-string.
 \end_layout
 
 \begin_layout Subsection
-Binary Trees
+Bijections
 \end_layout
 
 \begin_layout Standard
@@ -1308,8 +1308,8 @@ The last paragraph is a bit glib, and so some formalities and examples are
  These are all very straightforward and conventional, almost trivial, belaboring
  the obvious.
  Despite the seeming triteness of the next handful of paragraphs, these
- trivial, formal definitions will be needed, so as to avoid future ambiguities
- and confusions.
+ formal definitions will be needed, so as to avoid future ambiguities and
+ confusions.
 \end_layout
 
 \begin_layout Standard
@@ -1622,7 +1622,339 @@ All of these maps were bijections: they are all invertable.
 \end_inset
 
  in the obvious, intended way.
+\end_layout
+
+\begin_layout Subsubsection
+Julia Sets
+\end_layout
+
+\begin_layout Standard
+As a practical example of the above machinery, consider the Julia set of
+ the Mandelbrot map.
+ Recall the Mandelbrot map is an iterated map on the complex plane, given
+ by 
+\begin_inset Formula $z\mapsto z^{2}+c$
+\end_inset
+
+.
+ The Julia set is the set of points of 
+\begin_inset Quotes eld
+\end_inset
+
+where things came from
+\begin_inset Quotes erd
+\end_inset
+
+ in the Mandelbrot map; it is the inverse 
+\begin_inset Quotes eld
+\end_inset
+
+map
+\begin_inset Quotes erd
+\end_inset
+
  
+\begin_inset Formula $z\mapsto\pm\sqrt{z-c}$
+\end_inset
+
+.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+map
+\begin_inset Quotes erd
+\end_inset
+
+ is in scare quotes, as the plus-minus in front of the square root indicate
+ that each 
+\begin_inset Formula $z$
+\end_inset
+
+ maps to either one of two distinct predecessors.
+ The choice of the plus-minus signs can be interpreted as left-right moves,
+ and so the Julia set can be interpreted as a representation of the binary
+ tree, with it's elements labelled by integers, or dyadic fractions, or
+ nodes in the binary tree, or strings of ones and zeros.
+\end_layout
+
+\begin_layout Standard
+We take a moment to make this explicit.
+ Fix a point 
+\begin_inset Formula $c\in\mathbb{C}$
+\end_inset
+
+ in the complex plane.
+ Define a function 
+\begin_inset Formula $j_{c}:\mathbb{N}\to\mathbb{C}$
+\end_inset
+
+ recursively, by writing 
+\begin_inset Formula $j_{c}\left(1\right)=0$
+\end_inset
+
+ and then 
+\begin_inset Formula $j_{c}\left(2m\right)=-\sqrt{j_{c}\left(m\right)-c}$
+\end_inset
+
+ and 
+\begin_inset Formula $j_{c}\left(2m+1\right)=+\sqrt{j_{c}\left(m\right)-c}$
+\end_inset
+
+.
+ Equivalently, there are a pair of moves on the complex plane, 
+\begin_inset Formula $L_{c}:\mathbb{C}\to\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{c}:\mathbb{C}\to\mathbb{C}$
+\end_inset
+
+ given by 
+\begin_inset Formula $L_{c}:z\to-\sqrt{z-c}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{c}:z\to+\sqrt{z-c}$
+\end_inset
+
+ which commute with the Julia map: 
+\begin_inset Formula $j_{c}\circ L=L_{c}\circ j_{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $j_{c}\circ R=R_{c}\circ j_{c}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The skeleton of the Julia set is a set of points in the complex plane:
+\begin_inset Formula 
+\[
+\mathbb{J}_{c}=\left\{ z\in\mathbb{C}:z=j_{c}\left(n\right),n\in\mathbb{N}\right\} 
+\]
+
+\end_inset
+
+The full Julia set is the closure 
+\begin_inset Formula $\overline{\mathbb{J}}_{c}$
+\end_inset
+
+ which includes all of the limit points of 
+\begin_inset Formula $\mathbb{J}_{c}$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $\mathbb{J}_{c}$
+\end_inset
+
+ is countable; the closure 
+\begin_inset Formula $\overline{\mathbb{J}}_{c}$
+\end_inset
+
+ is uncountable.
+\end_layout
+
+\begin_layout Subsubsection
+de Rham Curves
+\end_layout
+
+\begin_layout Standard
+The above construction generalizes.
+ Given any pair of functions 
+\begin_inset Formula $f:X\to X$
+\end_inset
+
+ and 
+\begin_inset Formula $g:X\to X$
+\end_inset
+
+ and a point 
+\begin_inset Formula $x_{0}\in X$
+\end_inset
+
+ for any space 
+\begin_inset Formula $X$
+\end_inset
+
+, the dyadic monoid induces a map 
+\begin_inset Formula $j:\mathbb{N}\to X$
+\end_inset
+
+ given recursively as 
+\begin_inset Formula $j\left(1\right)=x_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $j\left(2m\right)=f\left(j\left(m\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $j\left(2m+1\right)=g\left(j\left(m\right)\right)$
+\end_inset
+
+.
+ As a commuting diagram, one has that 
+\begin_inset Formula $j\circ L=f\circ j$
+\end_inset
+
+ and 
+\begin_inset Formula $j\circ R=g\circ j$
+\end_inset
+
+.
+ This in turn induces a set 
+\begin_inset Formula $\mathbb{J}=\left\{ x\in X:x=j\left(n\right),n\in\mathbb{N}\right\} $
+\end_inset
+
+.
+ If the space 
+\begin_inset Formula $X$
+\end_inset
+
+ is a topological space, so that limits can be meaningfully taken, then
+ one also has the closure 
+\begin_inset Formula $\overline{\mathbb{J}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In 1957, Georges de Rham notes that if 
+\begin_inset Formula $X$
+\end_inset
+
+ is a topological space, so that continuity can be defined, and if there
+ exist two points 
+\begin_inset Formula $x_{a},x_{b}\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(g\left(x_{a}\right)\right)=g\left(f\left(x_{b}\right)\right)$
+\end_inset
+
+, then the set 
+\begin_inset Formula $\overline{\mathbb{J}}$
+\end_inset
+
+ is a continuous curve.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeRham57"
+literal "false"
+
+\end_inset
+
+ The original proof also requires that 
+\begin_inset Formula $X$
+\end_inset
+
+ be a metric space, and that the two functions 
+\begin_inset Formula $f,g$
+\end_inset
+
+ be suitably contracting, so that the set 
+\begin_inset Formula $\mathbb{J}$
+\end_inset
+
+ remains compact.
+ Without compactness, the curve wanders off to infinity, where conceptions
+ of continuity break down.
+ It is no longer a curve, 
+\begin_inset Quotes eld
+\end_inset
+
+out there
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that Julia sets are not de Rham curves: they don't satisfy the continuity
+ criterion.
+\end_layout
+
+\begin_layout Subsection
+Cantor Tree
+\end_layout
+
+\begin_layout Standard
+The previous section defined a binary tree 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+, but this tree is not the 
+\begin_inset Quotes eld
+\end_inset
+
+infinite binary tree
+\begin_inset Quotes erd
+\end_inset
+
+ alluded to in the opening paragraphs.
+ It is incomplete, in that it does not go 
+\begin_inset Quotes eld
+\end_inset
+
+all the way down
+\begin_inset Quotes erd
+\end_inset
+
+ to it's leaves.
+ It is not compact, in the same sense that the dyadic fractions 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ are not compact: the limit points are absent.
+ The Cantor tree 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ is the closure or completion ore compactification of 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+; it contains all infinitely-long branches, all the way down to the 
+\begin_inset Quotes eld
+\end_inset
+
+leaves
+\begin_inset Quotes erd
+\end_inset
+
+ of the tree.
+ The Cantor tree 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ is in one-to-one correspondence with the Cantor space 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+, and both can be mapped down to the reals on the unit interval, using eqn
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ None of this is particularly deep, but a few paragraphs to articulate these
+ ideas will help avoid later confusion and imprecision.
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
@@ -1672,49 +2004,7 @@ xxx
 \end_layout
 
 \begin_layout Standard
-The next rank in the tree gets labels 
-\begin_inset Formula $4,5,6,7$
-\end_inset
-
-.
- Here is where the fun begins.
- Although the tree 
-\begin_inset Formula $\mathbb{B}$
-\end_inset
-
- is large, countably large, as the integers are countable, it is not the
- same as the infinite binary tree 
-\begin_inset Formula $\overline{\mathbb{B}}$
-\end_inset
-
- alluded to above.
- The tree 
-\begin_inset Formula $\overline{\mathbb{B}}$
-\end_inset
-
- is the completion or closure of 
-\begin_inset Formula $\mathbb{B}$
-\end_inset
-
-: it contains all infinitely-long branches, the 
-\begin_inset Quotes eld
-\end_inset
-
-leaves
-\begin_inset Quotes erd
-\end_inset
-
- of which are reached after a countably-infinite number of left-right moves.
- These 
-\begin_inset Quotes eld
-\end_inset
-
-leaves
-\begin_inset Quotes erd
-\end_inset
-
- are in one-to-one correspondence with the set of infinite-length strings
- 
+the set of infinite-length strings 
 \begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
 \end_inset
 
@@ -1741,18 +2031,6 @@ tips
  The distinction can be clarified by contrasting the dyadic rationals to
  the reals.
  
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-Julia set
 \end_layout
 
 \begin_layout Subsection
