@@ -1303,9 +1303,18 @@ Associated with Cantor space is the infinite binary tree.
 \end_layout
 
 \begin_layout Standard
-Some formalities and examples are in order.
- Let 
-\begin_inset Formula $\left\{ L,R\right\} ^{<\omega}$
+The last paragraph is a bit glib, and so some formalities and examples are
+ in order.
+ These are all very straightforward and conventional, almost trivial, belaboring
+ the obvious.
+ Despite the seeming triteness of the next handful of paragraphs, these
+ trivial, formal definitions will be needed, so as to avoid future ambiguities
+ and confusions.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathbb{M}=\left\{ L,R\right\} ^{<\omega}$
 \end_inset
 
  denote the collection of finite-length binary strings.
@@ -1316,7 +1325,7 @@ Some formalities and examples are in order.
  of the string, so that 
 \begin_inset Formula 
 \[
-\left\{ L,R\right\} ^{<\omega}=\bigcup_{\nu=0}^{\infty}\left\{ L,R\right\} ^{\nu}=\epsilon\cup\left\{ L,R\right\} \cup\left(\left\{ L,R\right\} \times\left\{ L,R\right\} \right)\cup\cdots
+\mathbb{M}=\left\{ L,R\right\} ^{<\omega}=\bigcup_{\nu=0}^{\infty}\left\{ L,R\right\} ^{\nu}=\epsilon\cup\left\{ L,R\right\} \cup\left(\left\{ L,R\right\} \times\left\{ L,R\right\} \right)\cup\cdots
 \]
 
 \end_inset
@@ -1402,6 +1411,65 @@ This set is in bijection to the integers in a straight-forward way.
 \end_layout
 
 \begin_layout Standard
+This bijection commutes with the canonical 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves on the natural numbers.
+ Write these as a pair of functions 
+\begin_inset Formula $L:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+, defined as 
+\begin_inset Formula $L:m\mapsto2m$
+\end_inset
+
+ and 
+\begin_inset Formula $R:m\mapsto2m+1$
+\end_inset
+
+.
+ Interpreting these as strings, one promptly has a pair of commuting diagrams
+ 
+\begin_inset Formula $\kappa\circ L=L\circ\kappa$
+\end_inset
+
+ and 
+\begin_inset Formula $\kappa\circ R=R\circ\kappa$
+\end_inset
+
+.
+ True formality would have required writing 
+\begin_inset Formula $\kappa\circ L_{s}=L_{\mathbb{N}}\circ\kappa$
+\end_inset
+
+ or even that 
+\begin_inset Formula $\kappa\left(L_{s}\gamma\right)=L_{\mathbb{N}}\left(\kappa\left(\gamma\right)\right)$
+\end_inset
+
+ in order to remind us that 
+\begin_inset Formula $L_{s}$
+\end_inset
+
+ is a string (of length one) concatenated onto some other string 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, while 
+\begin_inset Formula $L_{\mathbb{N}}$
+\end_inset
+
+ is a map of the natural numbers.
+ It is convenient to drop these labels, as they mostly serve to clutter
+ the text.
+ The intended meaning is always clear from context.
+\end_layout
+
+\begin_layout Standard
 Associated with the set 
 \begin_inset Formula $\left\{ L,R\right\} ^{<\omega}$
 \end_inset
@@ -1410,29 +1478,95 @@ Associated with the set
 \begin_inset Formula $\mathbb{B}$
 \end_inset
 
- that is of countable size.
- With the above labelling, the root node can be labelled with 1, and the
- left and right sub-nodes can be labelled as 2,3.
- The next rank in the tree gets labels 
-\begin_inset Formula $4,5,6,7$
+.
+ It can be defined as a graph of vertexes 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ and edges 
+\begin_inset Formula $e_{ij}$
+\end_inset
+
+ connecting vertex 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ to vertex 
+\begin_inset Formula $v_{j}$
 \end_inset
 
 .
- 
+ Formally, it is the graph 
+\begin_inset Formula $\mathbb{B}=\left\{ v_{i},e_{ij}:i\in\mathbb{N},j\in\left\{ 2i,2i+1\right\} \right\} $
+\end_inset
+
+.
+ Every vertex 
+\begin_inset Formula $v_{i}\in\mathbb{B}$
+\end_inset
+
+ can be given an integer label: it is just the integer 
+\begin_inset Formula $i$
+\end_inset
+
+ itself.
+ To formalize this, there is a map 
+\begin_inset Formula $\eta:\mathbb{N}\to\mathbb{B}$
+\end_inset
+
+ that provides this labelling.
+ The canonical labelling gives the root node a label of 1, the left and
+ right sub-nodes 2,3, and so on.
 \end_layout
 
 \begin_layout Standard
-xxx
+The canonical moves on this binary tree are 
+\begin_inset Formula $L:\mathbb{B}\to\mathbb{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:\mathbb{B}\to\mathbb{B}$
+\end_inset
+
+ defined by 
+\begin_inset Formula $L:v_{i}\mapsto v_{2i}$
+\end_inset
+
+ and 
+\begin_inset Formula $L:v_{i}\mapsto v_{2i+1}$
+\end_inset
+
+.
+ Just as above, these commute with the left and right moves on the integers.
+ So, 
+\begin_inset Formula $\eta\circ L=L\circ\eta$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta\circ R=R\circ\eta$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The integers are in bijection with the dyadic rationals, of course.
- Let 
+The pattern repeats.
+ Consider the set 
 \begin_inset Formula $\mathbb{D}$
 \end_inset
 
- be the dyadic rationals.
- The canonical bijection is 
+ of dyadic rationals between zero and one.
+ These are fractions that can be written as 
+\begin_inset Formula $\left(2n+1\right)/2^{m}$
+\end_inset
+
+ for some non-negative integers 
+\begin_inset Formula $m,n$
+\end_inset
+
+.
+ These are in one-to-one correspondence with the integers: there is a canonical
+ bijection is 
 \begin_inset Formula $\delta:\mathbb{D}\to\mathbb{N}$
 \end_inset
 
@@ -1441,11 +1575,172 @@ The integers are in bijection with the dyadic rationals, of course.
 \end_inset
 
 .
+ There are obvious left and right moves, given by 
+\begin_inset Formula $\delta\circ L=L\circ\delta$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta\circ R=R\circ\delta$
+\end_inset
+
+.
+ So, for example, 
+\begin_inset Formula $L\left(1/2\right)=1/4$
+\end_inset
+
+ and 
+\begin_inset Formula $R\left(1/2\right)=3/4$
+\end_inset
+
+.
+ Viewed as a tree, this places 1/2 at the root of the tree, and 1/4 and
+ 3/4 as the nodes to the left and right.
+\end_layout
+
+\begin_layout Standard
+All of these maps were bijections: they are all invertable.
+ They place elements of all four objects 
+\begin_inset Formula $\mathbb{M},\mathbb{N},\mathbb{B},\mathbb{D}$
+\end_inset
+
+ in one-to-one correspondence with each other.
+ The commutation of the 
+\begin_inset Formula $L,R$
+\end_inset
+
+ moves guarantees that the multiplication on 
+\begin_inset Formula $\mathbb{M}$
+\end_inset
+
+, i.e.
+ string concatenation, allows elements 
+\begin_inset Formula $\gamma\in\mathbb{M}$
+\end_inset
+
+ to act on 
+\begin_inset Formula $\mathbb{N},\mathbb{B},\mathbb{D}$
+\end_inset
+
+ in the obvious, intended way.
  
 \end_layout
 
 \begin_layout Standard
-Associated to this 
+For example, given 
+\begin_inset Formula $\gamma\in\mathbb{M}$
+\end_inset
+
+, define a set of functions 
+\begin_inset Formula $b_{n}:\mathbb{M}\to\left\{ 0,1\right\} $
+\end_inset
+
+ that take the 
+\begin_inset Formula $n$
+\end_inset
+
+'th letter 
+\end_layout
+
+\begin_layout Standard
+and interetion the left-right moves as bits zero and one, one gets a bit
+ string 
+\begin_inset Formula $0.b_{0}b_{1}\cdots b_{\nu-1}$
+\end_inset
+
+ for a string of length 
+\begin_inset Formula $\nu-1$
+\end_inset
+
+.
+ The numeric value for this is
+\begin_inset Formula 
+\[
+\left[\delta^{-1}\circ\kappa\right]\left(\gamma\right)=\sum_{n=0}^{\nu}b_{n}\left(\gamma\right)2^{-n-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+The next rank in the tree gets labels 
+\begin_inset Formula $4,5,6,7$
+\end_inset
+
+.
+ Here is where the fun begins.
+ Although the tree 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ is large, countably large, as the integers are countable, it is not the
+ same as the infinite binary tree 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ alluded to above.
+ The tree 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ is the completion or closure of 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+: it contains all infinitely-long branches, the 
+\begin_inset Quotes eld
+\end_inset
+
+leaves
+\begin_inset Quotes erd
+\end_inset
+
+ of which are reached after a countably-infinite number of left-right moves.
+ These 
+\begin_inset Quotes eld
+\end_inset
+
+leaves
+\begin_inset Quotes erd
+\end_inset
+
+ are in one-to-one correspondence with the set of infinite-length strings
+ 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+.
+ These are uncountable: there are more of these than there are integers.
+ One can count away, and label every node in 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+ with an integer; this is what the map 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ does.
+ However far one goes, one can never go all the way to the 
+\begin_inset Quotes eld
+\end_inset
+
+tips
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The distinction can be clarified by contrasting the dyadic rationals to
+ the reals.
+ 
 \end_layout
 
 \begin_layout Standard
