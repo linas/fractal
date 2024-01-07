@@ -1866,7 +1866,16 @@ literal "false"
 \end_inset
 
  remains compact.
- More precisely, so that the Banach fixed-point theorem can be applied.
+ More precisely, so that the Banach fixed-point theorem can be applied,
+ giving two fixed points 
+\begin_inset Formula $x_{a}=f\left(x_{a}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{b}=g\left(x_{b}\right)$
+\end_inset
+
+.
  Without compactness, the curve wanders off to infinity, where conceptions
  of continuity break down.
  It is no longer a curve, 
@@ -1885,35 +1894,72 @@ The continuity condition
 \begin_inset Formula $g\left(x_{a}\right)=f\left(x_{b}\right)$
 \end_inset
 
- is most easily understood by taking 
-\begin_inset Formula $x_{a}$
+ and the fixed points have a direct interpretation from the viewpoint of
+ the binary tree 
+\begin_inset Formula $\mathbb{B}$
 \end_inset
 
- to be a fixed point of 
-\begin_inset Formula $f$
+.
+ Pick a point 
+\begin_inset Formula $x\in X$
 \end_inset
 
-, so that 
+, any point at all, and make nothing but left moves: the infinite string
+ 
+\begin_inset Formula $LLL\cdots$
+\end_inset
+
+.
+ The map converts this to the iteration 
+\begin_inset Formula $f\left(f\left(\cdots\left(x\right)\right)\right)$
+\end_inset
+
+ which converges onto the fixed point 
 \begin_inset Formula $x_{a}=f\left(x_{a}\right)$
 \end_inset
 
- and likewise 
+.
+ Likewise, all right-moves converge onto 
 \begin_inset Formula $x_{b}=g\left(x_{b}\right)$
 \end_inset
 
 .
- Then, if one takes the right branch of the infinite binary tree, and then
- left's all the way down, 
+ In between, there all other branches in 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+; but there are also the 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+ in between the branches.
+\end_layout
+
+\begin_layout Standard
+Consider the two paths 
 \begin_inset Formula $RLLL\cdots$
 \end_inset
 
-, one should end up at the same place as first going left, and then right's
- all the way down: 
+ and 
 \begin_inset Formula $LRRR\cdots$
 \end_inset
 
-.
- This results in continuity at the central 
+ down the tree.
+ Both start at the root, but end up at different places.
+ Yet, they are immediate neighbors: there are no other branches 
+\begin_inset Quotes eld
+\end_inset
+
+in between
+\begin_inset Quotes erd
+\end_inset
+
+ these two.
+ Such immediate neighbors always lie at either end of a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1921,9 +1967,55 @@ gap
 \begin_inset Quotes erd
 \end_inset
 
- in the binary tree.
- By symmetry, all other gaps are the same, and so the curve is continuous
- at all of them.
+.
+ Each gap is headed up by the root that sits immediately above them, so
+ that each gap can be labelled by the node from which these two distinct
+ branches diverged.
+ The continuity condition asks that these gaps be closed up: the requirement
+ that 
+\begin_inset Formula $g\left(x_{a}\right)=f\left(x_{b}\right)$
+\end_inset
+
+ is the requirement that the two sides of the central gap converge to the
+ same point.
+ The curve becomes continuous at this point.
+ By self-similarity, each gap in the tree closes up; the curve is continuous
+ at all such gaps.
+\end_layout
+
+\begin_layout Standard
+As a specific example, consider 
+\begin_inset Formula $X=\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(x\right)=x/2$
+\end_inset
+
+ and 
+\begin_inset Formula $g\left(x\right)=\left(x+1\right)/2$
+\end_inset
+
+.
+ The fixed points are 
+\begin_inset Formula $f\left(0\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $g\left(1\right)=1$
+\end_inset
+
+ and the continuity condition is satsified: 
+\begin_inset Formula $g\left(0\right)=f\left(1\right)$
+\end_inset
+
+.
+ Iteration produces a curve that is just all of the real numbers of the
+ unit interval.
+ This curve is just the standard mapping of the Cantor space to the unit
+ interval: it is one-to-one for all points that are not dyadic rationals,
+ and it is two-to-one at the dyadic rationals, as the continuity condition
+ explicitly forces the two-to-one mapping, so as to obtain continuity.
 \end_layout
 
 \begin_layout Standard
@@ -2056,6 +2148,15 @@ The shift can be composed with either
 \end_inset
 
 .
+ Since 
+\begin_inset Formula $\tau$
+\end_inset
+
+ applied to the empty string returns the empty string, so also 
+\begin_inset Formula $T\left(1\right)=1$
+\end_inset
+
+.
  Recycling the same letter 
 \begin_inset Formula $T:\mathbb{D}\to\mathbb{D}$
 \end_inset
@@ -2155,8 +2256,8 @@ For the Julia set example, it has a meaningful form:
 .
 \end_layout
 
-\begin_layout Subsection
-Cantor Tree
+\begin_layout Subsubsection
+Completions
 \end_layout
 
 \begin_layout Standard
@@ -2296,45 +2397,111 @@ To extract the
 
 \end_inset
 
+Comparing this to eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:homomorphism"
+plural "false"
+caps "false"
+noprefix "false"
 
-\end_layout
+\end_inset
 
-\begin_layout Standard
-xxx
-\end_layout
+, the completion is obvious: 
+\begin_inset Formula $\mathbb{M}=\left\{ L,R\right\} ^{<\omega}$
+\end_inset
 
-\begin_layout Standard
-xxx
-\end_layout
+ is completed as 
+\begin_inset Formula $\overline{\mathbb{M}}=\left\{ L,R\right\} ^{\omega}$
+\end_inset
 
-\begin_layout Standard
-the set of infinite-length strings 
-\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+ so that it contains all strings of infinite length.
+ This is consistent with the completion of the dyadic rationals 
+\begin_inset Formula $\mathbb{D}$
+\end_inset
+
+ being the entire real unit interval: 
+\begin_inset Formula $\overline{\mathbb{D}}=\left[0,1\right]$
 \end_inset
 
 .
- These are uncountable: there are more of these than there are integers.
- One can count away, and label every node in 
+ There is no completion 
+\begin_inset Formula $\overline{\mathbb{N}}$
+\end_inset
+
+ of the countable numbers, at least, not unless one wishes to say that it
+ is the uncountable infinity.
+ This could be done, but then the games gets even more circular, as this
+ completion is just the Cantor set, and we already have that.
+ It seems best to leave 
+\begin_inset Formula $\overline{\mathbb{N}}$
+\end_inset
+
+ undefined, to avoid circular confusions.
+ The completion 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ engenders similar confusion.
+ In the original definition, 
 \begin_inset Formula $\mathbb{B}$
 \end_inset
 
- with an integer; this is what the map 
-\begin_inset Formula $\kappa$
+ was defined as a graph with a countable number of vertexes, each labelled
+ with an integer.
+ This labeling must be abandoned: 
+\begin_inset Formula $\overline{\mathbb{B}}$
 \end_inset
 
- does.
- However far one goes, one can never go all the way to the 
-\begin_inset Quotes eld
-\end_inset
-
-tips
-\begin_inset Quotes erd
+ is a graph with an uncountable number of vertexes, each labeled by an element
+ from 
+\begin_inset Formula $\overline{\mathbb{M}}$
 \end_inset
 
 .
- The distinction can be clarified by contrasting the dyadic rationals to
- the reals.
- 
+\end_layout
+
+\begin_layout Standard
+The distinction between 
+\begin_inset Formula $\overline{\mathbb{M}}$
+\end_inset
+
+, 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ becomes hard to maintain at this point: they are all isomrphic.
+ The distinction between 
+\begin_inset Formula $\overline{\mathbb{M}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ is particularly strained: they are both collections of strings in two symbols.
+ The primary purpose of trying to maintain this distinction is to remind
+ that 
+\begin_inset Formula $\overline{\mathbb{M}}$
+\end_inset
+
+ should be though of as a collection of actions that can be applied to sets,
+ while 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ is a set, a collection of points that sometimes act as labels for things.
+ This distinction is useful for avoiding off-by-one mistakes during calculations
+; it is a notational convenience.
+ This is a variant of common practice in textbooks: after showing that two
+ things are isomorphic, only rarely is the notation collapsed into one big
+ tangle.
+ One maintains a Rosetta Stone of different ways of writing the same thing.
+ And so here: a distinction without a difference.
 \end_layout
 
 \begin_layout Subsection
