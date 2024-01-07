@@ -1302,6 +1302,10 @@ Associated with Cantor space is the infinite binary tree.
  This is the symmetry of a large class of fractals.
 \end_layout
 
+\begin_layout Subsubsection
+Formalities
+\end_layout
+
 \begin_layout Standard
 The last paragraph is a bit glib, and so some formalities and examples are
  in order.
@@ -1625,7 +1629,7 @@ All of these maps were bijections: they are all invertable.
 \end_layout
 
 \begin_layout Subsubsection
-Julia Sets
+Example: Julia Sets
 \end_layout
 
 \begin_layout Standard
@@ -1759,7 +1763,7 @@ The full Julia set is the closure
 \end_layout
 
 \begin_layout Subsubsection
-de Rham Curves
+Example: de Rham Curves
 \end_layout
 
 \begin_layout Standard
@@ -1834,7 +1838,7 @@ In 1957, Georges de Rham notes that if
 \end_inset
 
  such that 
-\begin_inset Formula $f\left(g\left(x_{a}\right)\right)=g\left(f\left(x_{b}\right)\right)$
+\begin_inset Formula $g\left(x_{a}\right)=f\left(x_{b}\right)$
 \end_inset
 
 , then the set 
@@ -1862,6 +1866,7 @@ literal "false"
 \end_inset
 
  remains compact.
+ More precisely, so that the Banach fixed-point theorem can be applied.
  Without compactness, the curve wanders off to infinity, where conceptions
  of continuity break down.
  It is no longer a curve, 
@@ -1876,8 +1881,274 @@ out there
 \end_layout
 
 \begin_layout Standard
+The continuity condition 
+\begin_inset Formula $g\left(x_{a}\right)=f\left(x_{b}\right)$
+\end_inset
+
+ is most easily understood by taking 
+\begin_inset Formula $x_{a}$
+\end_inset
+
+ to be a fixed point of 
+\begin_inset Formula $f$
+\end_inset
+
+, so that 
+\begin_inset Formula $x_{a}=f\left(x_{a}\right)$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $x_{b}=g\left(x_{b}\right)$
+\end_inset
+
+.
+ Then, if one takes the right branch of the infinite binary tree, and then
+ left's all the way down, 
+\begin_inset Formula $RLLL\cdots$
+\end_inset
+
+, one should end up at the same place as first going left, and then right's
+ all the way down: 
+\begin_inset Formula $LRRR\cdots$
+\end_inset
+
+.
+ This results in continuity at the central 
+\begin_inset Quotes eld
+\end_inset
+
+gap
+\begin_inset Quotes erd
+\end_inset
+
+ in the binary tree.
+ By symmetry, all other gaps are the same, and so the curve is continuous
+ at all of them.
+\end_layout
+
+\begin_layout Standard
 Note that Julia sets are not de Rham curves: they don't satisfy the continuity
  criterion.
+\end_layout
+
+\begin_layout Subsubsection
+Shifts
+\end_layout
+
+\begin_layout Standard
+Adjoint to the left and right moves is a shift 
+\begin_inset Formula $\tau$
+\end_inset
+
+ that undoes what the L and R moves do.
+ It cancels them out, so that 
+\begin_inset Formula $\tau\circ L=\tau\circ R=e$
+\end_inset
+
+ with 
+\begin_inset Formula $e$
+\end_inset
+
+ the identity function.
+ 
+\end_layout
+
+\begin_layout Standard
+Given a string 
+\begin_inset Formula $\gamma\in\mathbb{M}$
+\end_inset
+
+ of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+, consisting of letters 
+\begin_inset Formula $a_{0}a_{1}\cdots a_{\nu-1}$
+\end_inset
+
+ so that each 
+\begin_inset Formula $a_{k}\in\left\{ L,R\right\} $
+\end_inset
+
+ is a single letter, define the shift 
+\begin_inset Formula $\tau:\mathbb{M}\to\mathbb{M}$
+\end_inset
+
+ as the function that lops off a single letter from the front, so that 
+\begin_inset Formula $\tau:a_{0}a_{1}\cdots a_{\nu-1}\mapsto a_{1}a_{2}\cdots a_{\nu-1}$
+\end_inset
+
+ is a string that is one letter shorter.
+ This shift is adjoint to the moves 
+\begin_inset Formula $L,R$
+\end_inset
+
+, which prepend either L or R to the string.
+ That is, 
+\begin_inset Formula $L:\mathbb{M}\to\mathbb{M}$
+\end_inset
+
+ which acts on strings as 
+\begin_inset Formula $L:\gamma\mapsto L\gamma$
+\end_inset
+
+, and likewise, 
+\begin_inset Formula $R:\gamma\mapsto R\gamma$
+\end_inset
+
+.
+ Then, taken as functions, 
+\begin_inset Formula $\tau\circ L=\tau\circ R=e$
+\end_inset
+
+ with 
+\begin_inset Formula $e$
+\end_inset
+
+ being the identity function on 
+\begin_inset Formula $\mathbb{M}$
+\end_inset
+
+, the function that does nothing.
+ The shift 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is only an adjoint, not an inverse, since there is no way to reattach what
+ was lopped off, at least, not without knowing what it was in the first
+ place.
+ Thus 
+\begin_inset Formula $L\circ\tau\ne e\ne R\circ\tau$
+\end_inset
+
+.
+ The maps 
+\begin_inset Formula $L,R$
+\end_inset
+
+ were one-to-one but not onto; the map 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is onto but not one-to-one.
+\end_layout
+
+\begin_layout Standard
+The shift can be composed with either 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ or with 
+\begin_inset Formula $\delta$
+\end_inset
+
+, to have the obvious effect.
+ It's handy to introduce a new letter and a new function 
+\begin_inset Formula $T:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ so that one has 
+\begin_inset Formula $T\circ\kappa=\kappa\circ\tau$
+\end_inset
+
+ acting as 
+\begin_inset Formula $T\left(2m\right)=T\left(2m+1\right)=m$
+\end_inset
+
+.
+ Recycling the same letter 
+\begin_inset Formula $T:\mathbb{D}\to\mathbb{D}$
+\end_inset
+
+ and defining it so that 
+\begin_inset Formula $\delta\circ T=T\circ\delta$
+\end_inset
+
+ one can infer that 
+\begin_inset Formula $Tx=2x\mod1$
+\end_inset
+
+ for any 
+\begin_inset Formula $x\in\mathbb{D}$
+\end_inset
+
+.
+ So, for example, 
+\begin_inset Formula $T\left(1/4\right)=T\left(3/4\right)=1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+On the binary tree 
+\begin_inset Formula $\mathbb{B}$
+\end_inset
+
+, the shift moves back up the tree, from either the left or the right side.
+ That is, given a vertex 
+\begin_inset Formula $v\in\mathbb{B}$
+\end_inset
+
+, it is the map 
+\begin_inset Formula $\tau:v_{2m}\mapsto v_{m}$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $\tau:v_{2m+1}\mapsto v_{m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the Julia set example, it has a meaningful form: 
+\begin_inset Formula $\tau:z=j_{c}\left(n\right)\mapsto z^{2}+c$
+\end_inset
+
+.
+ It re-does what the two Julia set maps undid.
+ It is onto: it maps 
+\begin_inset Formula $\mathbb{J}_{c}$
+\end_inset
+
+ into all of 
+\begin_inset Formula $\mathbb{J}_{c}$
+\end_inset
+
+, and likewise 
+\begin_inset Formula $\overline{\mathbb{J}}_{c}$
+\end_inset
+
+ onto 
+\begin_inset Formula $\overline{\mathbb{J}}_{c}$
+\end_inset
+
+.
+ For the de Rham curve example, it maps thecurve back onto itself.
+ In all three examples, these sets are fixed points of 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ Taking  
+\begin_inset Formula $\mathbb{J}_{c}\subset\mathbb{C}$
+\end_inset
+
+ as a subset of the complex plane, it is left invariant under the action
+ of 
+\begin_inset Formula $\tau$
+\end_inset
+
+, so that one has 
+\begin_inset Formula $\tau\left(\mathbb{J}_{c}\right)=\mathbb{J}_{c}$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $\tau\left(\mathbb{\overline{\mathbb{J}}}_{c}\right)=\mathbb{\overline{\mathbb{J}}}_{c}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -1954,40 +2225,69 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-For example, given 
-\begin_inset Formula $\gamma\in\mathbb{M}$
+To convert letter strings to binary strings, define a function 
+\begin_inset Formula $b:\mathbb{M}\to\left\{ 0,1\right\} $
 \end_inset
 
-, define a set of functions 
-\begin_inset Formula $b_{n}:\mathbb{M}\to\left\{ 0,1\right\} $
+ such that it returns 0 if the first letter of a string is L, and otherwise
+ it returns 1.
+ If the string is of zero length, then one has a choice: one can take 
+\begin_inset Formula $b$
 \end_inset
 
- that take the 
-\begin_inset Formula $n$
+ to be undefined, or let it be 0, or 1, or introduce a wild-card character
+ 
+\begin_inset Formula $*=0\vee1$
 \end_inset
 
-'th letter 
-\end_layout
-
-\begin_layout Standard
-and interetion the left-right moves as bits zero and one, one gets a bit
- string 
-\begin_inset Formula $0.b_{0}b_{1}\cdots b_{\nu-1}$
+ denoting 
+\begin_inset Quotes eld
 \end_inset
 
- for a string of length 
-\begin_inset Formula $\nu-1$
+either zero or one
+\begin_inset Quotes erd
 \end_inset
 
 .
- The numeric value for this is
+ For the present, any of these choices is satisfactory.
+ The wildcard is appealing when working with the product topology; but,
+ at the moment, we have no topologies at play.
+\end_layout
+
+\begin_layout Standard
+To extract the 
+\begin_inset Formula $n$
+\end_inset
+
+'th letter from a string, define 
+\begin_inset Formula $b_{n}:\mathbb{M}\to\left\{ 0,1\right\} $
+\end_inset
+
+ as 
+\begin_inset Formula $b_{n}=b\circ\tau^{n}$
+\end_inset
+
+.
+ Thus, given 
+\begin_inset Formula $\gamma\in\mathbb{M}$
+\end_inset
+
+ of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+, one can create a bitstring 
+\begin_inset Formula $b_{0}b_{1}\cdots b_{\nu-1}$
+\end_inset
+
+.
+ It can be assigned the obvious numerical value:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-\left[\delta^{-1}\circ\kappa\right]\left(\gamma\right)=\sum_{n=0}^{\nu}b_{n}\left(\gamma\right)2^{-n-1}
+\left[\delta^{-1}\circ\kappa\right]\left(\gamma\right)=\sum_{n=0}^{\nu-1}b_{n}\left(\gamma\right)2^{-n-1}
 \]
 
 \end_inset
