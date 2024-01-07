@@ -19,14 +19,18 @@ set title "stuff"
 # ----------------------------------------------------------------------
 
 beta = 1.83928675521416
-set yrange [-0.8:0.8]
-# rs(x) = x*0.5*beta * 0.5*beta
-rs(x) = x*(beta-1)
+# set yrange [-0.8:0.8]
+rs(x) = x
 plot "forced.dat" using 2:(rs($3)) with lines title "0", \
      "fg.dat" using 2:3 with lines title "good", \
-     "forced.dat" using 2:(rs($3)-0.216) with lines title "s", \
-     "forced.dat" using 2:(rs($3-0.255)) with lines title "s2", \
 
+## rs(x) = x*0.5*beta * 0.5*beta
+#rs(x) = x*(beta-1)
+#plot "forced.dat" using 2:(rs($3)) with lines title "0", \
+#     "fg.dat" using 2:3 with lines title "good", \
+#     "forced.dat" using 2:(rs($3)-0.216) with lines title "s", \
+#     "forced.dat" using 2:(rs($3-0.255)) with lines title "s2", \
+#
 # plot "forced.dat" using 2:3 with lines title "0", \
 #     "forced.dat" using 2:($3-0.25/beta) with lines title "s", \
 #     "forced.dat" using 2:($3-0.5/beta) with lines title "s2", \

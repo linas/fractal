@@ -92,24 +92,20 @@ double ell(double beta, double y)
 	return ellie;
 }
 
-double line(double x)
-{
-	return x;
-	// return x - 0.5;
-}
-
-double iterator(double beta, double x)
+double linear(double beta, double x)
 {
 	double midpnt = 0.5*beta;
 	if (midpnt < x) return 0.0;
 
 	double obn = 1.0;
-	double sum = 0.0;
+	double sumx = 0.0;
+	double sumc = 0.0;
 	double norm = 0.0;
 	for (int i=0; i<1000; i++)
 	{
-		// if (x < midpnt) sum += line(x) * obn;
-		if (x < midpnt) sum += line(x*obn);
+		if (x < midpnt) sumx += x*obn;
+		if ((x/beta)+0.5 < midpnt) sumc += obn;
+		sumc += obn;
 		norm += midpnt*obn;
 
 		if (0.5 < midpnt) midpnt -= 0.5;
@@ -117,8 +113,14 @@ double iterator(double beta, double x)
 		obn /= beta;
 		if (obn < 1e-15) break;
 	}
-	sum -= 0.5;
+
+	return (sumx-1.0) *(beta-1);
+// return sumc/norm - beta*invar(beta,x);
+// return invar(beta,x) - 0.544*sumc/norm;
+// return invar(beta,x);
+return sumc/norm;
 	// return sum / norm;
+	double sum = sumx - sumc;
 	return sum;
 }
 
@@ -131,7 +133,7 @@ void setup(double beta)
 	for (int i=0; i<NHIST; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
-		histn[i] = iterator(beta, x);
+		histn[i] = linear(beta, x);
 	}
 #endif
 
