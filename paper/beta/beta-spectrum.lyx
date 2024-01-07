@@ -1218,16 +1218,22 @@ The collection of all infinitely-long bit-strings
 \begin_inset Formula $\left\{ 0,1\right\} ^{\omega}=\left\{ 0,1\right\} \times\left\{ 0,1\right\} \times\cdots$
 \end_inset
 
- is known as Cantor space.
- The Cantor set is famously the collection of points 
+ is known as the Cantor space; 
+\begin_inset Formula $\omega$
+\end_inset
+
+ denotes countable infinity, so this is a countable product of repeated
+ copies of two things.
+ Closely related is the Cantor set, which is famously the collection of
+ points 
 \begin_inset Formula $y=\sum_{n=0}^{\infty}b_{n}\left(x\right)3^{-n-1}$
 \end_inset
 
  that results from taking the binary expansion of a real number, and re-expressi
 ng it as a base-three expansion.
- It can also be constructed by repeatedly removing the middle-third.
+ The Cantor set can also be constructed by repeatedly removing the middle-third.
  If one is careful that the middle-third is always an open set, what remains
- after subtraction is a closed set.
+ after a single subtraction is a closed set.
  What remains after infinite repetition is a 
 \begin_inset Quotes eld
 \end_inset
@@ -2015,7 +2021,7 @@ As a specific example, consider
  This curve is just the standard mapping of the Cantor space to the unit
  interval: it is one-to-one for all points that are not dyadic rationals,
  and it is two-to-one at the dyadic rationals, as the continuity condition
- explicitly forces the two-to-one mapping, so as to obtain continuity.
+ explicitly forces the two-to-one mapping.
 \end_layout
 
 \begin_layout Standard
@@ -2249,11 +2255,12 @@ For the Julia set example, it has a meaningful form:
 \end_inset
 
 .
- The de Rham curve likewise stays fixed in 
+ Likewise, the de Rham curve stays fixed in 
 \begin_inset Formula $X$
 \end_inset
 
 .
+ These are all examples of invariant subspaces.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2509,221 +2516,245 @@ Shift space
 \end_layout
 
 \begin_layout Standard
-A 
-\begin_inset Quotes eld
+The shift 
+\begin_inset Formula $\tau$
 \end_inset
 
-shift space
-\begin_inset Quotes erd
+ was defined above as an operator that takes a sequence of letters, and
+ lops off the left-most symbol, returning a new sequence that is the remainder
+ of the string.
+ A shift space 
+\begin_inset Formula $S$
 \end_inset
 
- is formally defined to be a set of infinite sequences of a set of 
+ is any subset of the set of all infinite strings that remains invariant
+ under the shift: 
+\begin_inset Formula $\tau S=S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In general settings, one considers a vocabulary of 
 \begin_inset Formula $N$
 \end_inset
 
- letters (or symbols), together with a shift operator 
-\begin_inset Formula $T$
+ letters, and the set of infinite sequences 
+\begin_inset Formula $N^{\omega}$
 \end_inset
 
- that takes each sequence, and lops off the left-most symbol.
+, so that a shift space 
+\begin_inset Formula $S\subseteq N^{\omega}$
+\end_inset
+
+ is a subset of the 
+\begin_inset Quotes eld
+\end_inset
+
+full shift
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $N^{\omega}$
+\end_inset
+
+ (which is trivially invariant under 
+\begin_inset Formula $\tau$
+\end_inset
+
+).
+ Shifts that are proper subsets of a full shift will be called subshifts.
  For the Bernoulli shift, there are 
 \begin_inset Formula $N=2$
 \end_inset
 
- letters, taken from the set 
-\begin_inset Formula $\left\{ 0,1\right\} $
+ letters, and the Bernoulli shift is by defintion the full shift 
+\begin_inset Formula $2^{\omega}=\left\{ 0,1\right\} ^{\omega}$
 \end_inset
 
 .
- For the Bernoulli shift, one is typically interested in the set of 
-\emph on
-all
-\emph default
- possible infinite sequences: this is the 
-\begin_inset Quotes eld
+ A trivial example of a subshift that is not a full shift is the set 
+\begin_inset Formula $S=\left\{ 0^{\omega},1^{\omega}\right\} $
 \end_inset
 
-full shift
-\begin_inset Quotes erd
+; it has two elements, and is obviously invariant; both 
+\begin_inset Formula $0^{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $1^{\omega}$
+\end_inset
+
+ are fixed points of 
+\begin_inset Formula $\tau$
 \end_inset
 
 .
- One writes 
-\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+ Another example is 
+\begin_inset Formula $S=\left\{ \left(01\right)^{\omega},\left(10\right)^{\omega}\right\} $
 \end_inset
 
- for this shift space, 
-\begin_inset Formula $\omega$
+, where 
+\begin_inset Formula $\left(01\right)^{\omega}=0101\cdots$
 \end_inset
 
- denoting countable infinity.
- For the Bernoulli shift, the map 
-\begin_inset Formula $b\left(x\right)$
-\end_inset
-
- is the shift operator: it just lops of the left-most symbol.
+ is a repeating periodic string.
+ Any collection of such periodic strings forms a subshift.
 \end_layout
 
 \begin_layout Standard
-In general, a shift space does not have to include every possible sequence
- of symbols; it does, however, by definition, have to be shift-invariant.
- That is, given some set 
-\begin_inset Formula $S$
+Clearly, the union of two subshifts is a subshift, and so, to classify subshifts
+, one wants to find all of the indecomposable pieces, and characterize those.
+ Factors include periodic strings of fixed period; but not all of these
+ are unique: so, the period-4 string 
+\begin_inset Formula $\left(0101\right)^{\omega}$
 \end_inset
 
- of infinite sequences of 
-\begin_inset Formula $N$
-\end_inset
-
- symbols, the set 
-\begin_inset Formula $S$
-\end_inset
-
- is a shift space if and only if, by loping off the leading symbol of each
- string, one regains 
-\begin_inset Formula $S$
-\end_inset
-
- again.
- That is, a shift space 
-\begin_inset Formula $S$
-\end_inset
-
- must obey 
-\begin_inset Formula 
-\[
-TS=S
-\]
-
-\end_inset
-
-
+ is really just the period-two string in disguise.
 \end_layout
 
 \begin_layout Standard
-For example, 
-\begin_inset Formula $S=\left\{ 000\cdots,111\cdots\right\} $
+Subshifts consisting entirely of periodic strings can be characterized in
+ terms of Lyndon words.
+ Lyndon words are fixed length strings that are not decomposable into shorter
+ sequences.
+ Thus, each one characterizes a periodic subshift.
+ Cyclic permutations of a Lyndon word give the same subshift; for example,
+ both 
+\begin_inset Formula $\left(01\right)^{\omega}$
 \end_inset
 
- contains only two elements: the string of all zeros, and the string of
- all ones; loping off the leading digit just returns 
-\begin_inset Formula $S$
+ and 
+\begin_inset Formula $\left(10\right)^{\omega}$
 \end_inset
 
- again.
- In general, shift spaces may contain a finite, or a countable, or an uncountabl
-e number of elements.
- In general, one defines the 
+ belong to the same subshift.
+ The number of distinct, unique subshifts of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is given by Moreau's necklace counting function: it counts the number of
+ distinct sequences of a given length, modulo cyclic permutations thereof.
+\end_layout
+
+\begin_layout Standard
+Characterizing the subshifts that do not consist of periodic orbits is considera
+bly harder.
+ For example, consider the string 
+\begin_inset Formula $s=010^{\omega}$
+\end_inset
+
+.
+ It has an orbit: 
+\begin_inset Formula $\tau s=10^{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau^{2}s=0^{\omega}$
+\end_inset
+
+ and so one can write down a set 
+\begin_inset Formula $\left\langle s\right\rangle =\left\{ 010^{\omega},10^{\omega},0^{\omega}\right\} $
+\end_inset
+
+ which has the property that 
+\begin_inset Formula $\tau\left\langle s\right\rangle \subset\left\langle s\right\rangle $
+\end_inset
+
+.
+ However, it is not a subshift, because 
+\begin_inset Formula $\tau\left\langle s\right\rangle \ne\left\langle s\right\rangle $
+\end_inset
+
+.
+ The first two points 
 \begin_inset Quotes eld
 \end_inset
 
-full shift
+wander away
 \begin_inset Quotes erd
 \end_inset
 
- as the space 
-\begin_inset Formula $N^{\omega}$
-\end_inset
-
- of all possible strings of 
-\begin_inset Formula $N$
-\end_inset
-
- symbols.
- Subsets that are shift spaces are called 
+ under the application of the shift; they are part of the 
 \begin_inset Quotes eld
 \end_inset
 
-subshifts
+wandering set
 \begin_inset Quotes erd
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The words 
-\begin_inset Quotes eld
-\end_inset
-
-symbolic dynamics
-\begin_inset Quotes erd
-\end_inset
-
- also deserve some mention: given one specific sequence 
-\begin_inset Formula $x\in S$
-\end_inset
-
- out of the shift space 
-\begin_inset Formula $S$
-\end_inset
-
-, one can ponder 
-\begin_inset Quotes eld
-\end_inset
-
-where it goes to
-\begin_inset Quotes erd
-\end_inset
-
-, as one lops off a symbol at a time.
- This gives the 
-\begin_inset Quotes eld
-\end_inset
-
-symbolic dynamics
-\begin_inset Quotes erd
-\end_inset
-
- or the 
-\begin_inset Quotes eld
-\end_inset
-
-point dynamics
-\begin_inset Quotes erd
-\end_inset
-
- of the sequence.
- The 
-\begin_inset Quotes eld
-\end_inset
-
-orbit
-\begin_inset Quotes erd
-\end_inset
-
- is defined as the set 
-\begin_inset Formula $\left\{ T^{m}x\,|\,\mbox{integer }m\ge0\right\} $
-\end_inset
-
- – that is, the set of all places that 
-\begin_inset Formula $x$
-\end_inset
-
- goes to.
- There are several possibilities: one is that 
-\begin_inset Formula $x$
-\end_inset
-
- is a fixed point, so that 
-\begin_inset Formula $Tx=x$
+ What remains is the fixed point 
+\begin_inset Formula $\tau0^{\omega}=0^{\omega}$
 \end_inset
 
 .
- Another is that 
+ The ergodic decomposition theorem states that all such sets 
+\begin_inset Formula $X$
+\end_inset
+
+ having the property that 
+\begin_inset Formula $\tau X\subset X$
+\end_inset
+
+ can be decomposed into two pieces: 
+\begin_inset Formula $X=S\cup W$
+\end_inset
+
+ with 
+\begin_inset Formula $S$
+\end_inset
+
+ a subshift, 
+\begin_inset Formula $\tau S=S$
+\end_inset
+
+ and 
+\begin_inset Formula $W$
+\end_inset
+
+ the wandering set or dissipative set, that eventually dissipates into the
+ empty set: 
+\begin_inset Formula $\lim_{n\to\infty}\tau^{n}W=\varnothing$
+\end_inset
+
+.
+ Subshifts are fixed-points; everything else disappears.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+Finally, there are the non-periodic orbits, of which there are uncountably
+ many.
+ These correspond to the binary expansion of real numbers.
+ The orbits are chaotic: for any fixed real number 
 \begin_inset Formula $x$
 \end_inset
 
- is a repeating sequence of symbols, in which case iteration repeats as
- well: 
-\begin_inset Formula $T^{m}x=x$
+, the sequence will not have any periodic pattern, in general.
+ The orbit is, in general, ergodic: fixing the number 
+\begin_inset Formula $x$
 \end_inset
 
- holds whenever the repeat length is 
-\begin_inset Formula $m$
-\end_inset
+, generating every possible 
+\end_layout
 
-; this is a periodic orbit.
+\begin_layout Standard
+they go every-which way.
+ They are 
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
