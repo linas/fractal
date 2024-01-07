@@ -1125,7 +1125,12 @@ b(x)=\begin{cases}
 
 \end_inset
 
-The symbolic dynamics of this map gives the binary digit expansion of 
+It can be written much more compactly as 
+\begin_inset Formula $b(x)=2x\mod1$
+\end_inset
+
+.
+ The symbolic dynamics of this map gives the binary digit expansion of 
 \begin_inset Formula $x$
 \end_inset
 
@@ -1162,7 +1167,7 @@ b_{n}\left(x\right)=\begin{cases}
 
 \end_inset
 
-(Attention: 
+Attention: 
 \begin_inset Formula $n$
 \end_inset
 
@@ -1172,8 +1177,9 @@ b_{n}\left(x\right)=\begin{cases}
 \begin_inset Formula $b$
 \end_inset
 
- one both sides is a convenient abuse of notation.) The symbolic dynamics
- recreates the initial real number:
+ one both sides is a convenient abuse of notation.
+ Notation will be abused a lot in this text, except when it isn't.
+ The symbolic dynamics recreates the initial real number:
 \begin_inset Formula 
 \begin{equation}
 x=\sum_{n=0}^{\infty}b_{n}\left(x\right)2^{-n-1}\label{eq:homomorphism}
@@ -2725,106 +2731,149 @@ wandering set
 \end_layout
 
 \begin_layout Standard
-xxx
+Given some real number 
+\begin_inset Formula $x\in\left[0,1\right]$
+\end_inset
+
+, and it's binary expansion 
+\begin_inset Formula $x=0.b_{0}b_{1}\cdots$
+\end_inset
+
+, defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bernoulli-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, what is the nature of 
+\begin_inset Formula $\left\langle s\right\rangle $
+\end_inset
+
+ for 
+\begin_inset Formula $s=b_{0}b_{1}\cdots$
+\end_inset
+
+ ? That is, defining
+\begin_inset Formula 
+\[
+\left\langle s\right\rangle =\left\{ \gamma=\tau^{n}s:n\in\mathbb{N}\right\} 
+\]
+
+\end_inset
+
+what portion of 
+\begin_inset Formula $\left\langle s\right\rangle $
+\end_inset
+
+ is wandering, and which part is a subshift? If 
+\begin_inset Formula $x=p/q$
+\end_inset
+
+ is a rational number, the answer is easy: rational numbers have binary
+ expansions that are eventually periodic.
+ They consist of some finite-length prefix of non-repeating digits, folowed
+ by an infinite-length cyclic orbit.
+ The finite-length prefix is the wandering set; the cyclic part is a subshift.
+ If the period of the cyclic part is 
+\begin_inset Formula $\nu$
+\end_inset
+
+, then the subshift contains precisely 
+\begin_inset Formula $\nu$
+\end_inset
+
+ elements.
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
+For the Bernoulli shift 
+\begin_inset Formula $\tau x=2x\mod1$
+\end_inset
 
-\begin_layout Standard
-Finally, there are the non-periodic orbits, of which there are uncountably
- many.
- These correspond to the binary expansion of real numbers.
- The orbits are chaotic: for any fixed real number 
+, for the real numbers, the answer is provided by the ergodic theorem.
+ For all real numbers 
+\begin_inset Formula $x\in\left[0,1\right]\backslash\mathbb{Q}$
+\end_inset
+
+, that is, the unit interval excluding the rationals, the orbit of 
 \begin_inset Formula $x$
 \end_inset
 
-, the sequence will not have any periodic pattern, in general.
- The orbit is, in general, ergodic: fixing the number 
+ is ergodic: given any real number 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and any 
+\begin_inset Formula $y\in\left[0,1\right]$
+\end_inset
+
+ there exists some 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left|y-\tau^{n}x\right|<\varepsilon$
+\end_inset
+
+.
+ Iteration takes 
 \begin_inset Formula $x$
 \end_inset
 
-, generating every possible 
-\end_layout
-
-\begin_layout Standard
-they go every-which way.
- They are 
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-Most importantly, when there are non-periodic orbits, then there are uncountably
- many of them.
- That is, the number of periodic orbits is always countable: there are at
- most 
-\begin_inset Formula $N$
+ arbitrarily close to any location on the unit interval.
+ In terms of symbolic dynamics, the binary expansion of 
+\begin_inset Formula $y$
 \end_inset
 
- starting points for an orbit, and they are of at most length 
+ and the binary expansion of 
+\begin_inset Formula $\tau^{n}x$
+\end_inset
+
+ will have 
+\begin_inset Formula $m=\left\lfloor \log_{2}\varepsilon\right\rfloor $
+\end_inset
+
+ digits in common.
+ The number 
 \begin_inset Formula $m$
 \end_inset
 
-.
- This includes the 
-\begin_inset Quotes eld
+ can be made arbitrarily large; the subsequence will occur somewhere in
+ the expansion.
+ Put differently, every finite-length string 
+\begin_inset Formula $\gamma\in\left\{ 0,1\right\} ^{<\omega}$
 \end_inset
 
-eventually periodic
-\begin_inset Quotes erd
-\end_inset
-
- orbits: those that begin with some finite initial sequence of 
-\begin_inset Quotes eld
-\end_inset
-
-random
-\begin_inset Quotes erd
-\end_inset
-
- moves, eventually settling into a periodic recurrence.
- This cannot be done for the non-periodic orbits: they cannot be placed
- in lexicographic order; as the Cantor slash argument applies.
- The non-periodic orbits are always uncountable.
- In this sense, the non-periodic orbits are 
-\begin_inset Quotes eld
-\end_inset
-
-more important
-\begin_inset Quotes erd
-\end_inset
-
-, in that the make up the bulk of all orbits.
- There are situations in which the periodic orbits can be said to 
-\begin_inset Quotes eld
-\end_inset
-
-govern
-\begin_inset Quotes erd
-\end_inset
-
- the dynamics of the aperiodic ones; this is termed 
-\begin_inset Quotes eld
-\end_inset
-
-coherent structure
-\begin_inset Quotes erd
+ occurs as a prefix of (uncountably many) of the strings in 
+\begin_inset Formula $\left\langle x\right\rangle $
 \end_inset
 
 .
- However such concepts are advanced, and are not obviously applicable to
- the current situation.
 \end_layout
 
 \begin_layout Standard
-For the most part, the goal of this text is to describe what happens to
- the uncountable number of non-periodic orbits.
- The technique to do this is not to describe them individually, but instead
- as collections, distributions, on the unit interval.
+In essence, that takes care of that, for the Bernoulli shift, at least,
+ if one is looking at it from the point of view of point dynamics.
+ As long as one thinks with the mind-set of points and their orbits, there
+ is not much more to be said.
+ The above is, in a sense, a complete description of the Bernoulli shift.
+ But the introduction to this text gave lie to this claim.
+ If one instead looks at the shift in terms of it's transfer operator acting
+ on distributions, then much more can be said.
+ The spectrum of the transfer operator is non-trivial, and the eigenfunctions
+ are fractal, in general.
+ This will be examined more carefully, later; but for now, the topic of
+ point dynamics in the Bernoulli shift is exhausted.
+ This is the end of the line.
+\end_layout
+
+\begin_layout Standard
+The Bernoulli shift is not the only shift on Cantor space.
+ And so, onward ho.
 \end_layout
 
 \begin_layout Subsection
