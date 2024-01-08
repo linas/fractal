@@ -1,7 +1,9 @@
 /*
  * force.c
- * Recheck old (negative) results.
- * They're still negative.
+ * Blindly hunto for eigenfunctions of the transfer operator.
+ * This is done by iterating, and looking for fixed points that
+ * might accidentally appear in the ocean. A handful are found
+ * and pinned down.
  *
  * January 2024
  */
@@ -108,7 +110,7 @@ double linear(double beta, double x)
 	// for (int i=0; i<1000; i++)
 	for (int i=0; i<3; i++)
 	{
-		double stretch = 0.5*bn;
+		double stretch = 0.5*bn*beta;
 		double off = 0.0;
 		double wrap = 0.0;
 		while (x+off < stretch)

@@ -24690,7 +24690,6 @@ In addition to the rare case of a stable attractor, a number of cases show
  Perhaps there is some resemblance to the Fermi-Pasta-Ulam-Tsingou problem,
  as the transfer operator does couple across the latice, in an ergodic,
  possibly mixing kind of way.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -28634,6 +28633,222 @@ Table hand-generated with check/orbit.c
 \end_inset
 
  I don't have anything particularly notable to say about the above table.
+\end_layout
+
+\begin_layout Section
+Fixed-point ruminations
+\end_layout
+
+\begin_layout Standard
+The above commentary about stability and instability of functions under
+ iteration suggests that a slightly more comprehensive viewpoint should
+ be adopted.
+ There are several distinct problems.
+ First, how does the iterated transfre operator 
+\begin_inset Formula $\mathcal{L}^{n}$
+\end_inset
+
+ act on functions on the real interval, and secondly, how does it act on
+ real intervals approximated by finite collections of points? And, for such
+ finite collections, are the points evenly spaced? Or should we generate
+ them by midpoint iteration? Or in some other way? Lets muddle about.
+\end_layout
+
+\begin_layout Standard
+Define the space of functions on the unit interval 
+\begin_inset Formula $\mathcal{F}=\left\{ \rho:\left[0,1\right]\to\mathbb{R}\right\} $
+\end_inset
+
+.
+ This is too large and vauge a set; in practice, we'll want to work with
+ piece-wise smooth functions (chopped up polynomials) or maybe piece-wise
+ real-analytic, or perhaps square integrable, or perhaps continuous, etc.
+ Lots of choices.
+\end_layout
+
+\begin_layout Standard
+With this setting, the transfer operator is a function 
+\begin_inset Formula $\mathcal{L}:\mathcal{F}\to\mathcal{F}$
+\end_inset
+
+, and we are iterating it: so working with 
+\begin_inset Formula $\mathcal{L}^{n}$
+\end_inset
+
+.
+ It has an obvious fixedpoint, the invariant measure.
+ There is a basin of attraction: some region of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ on which 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is contracting in some way, so that the region 
+\begin_inset Formula $\mathcal{LF}$
+\end_inset
+
+ is somehow 
+\begin_inset Quotes eld
+\end_inset
+
+strictly smaller
+\begin_inset Quotes erd
+\end_inset
+
+, so that the Banach fixed-point theorem can be applied.
+\end_layout
+
+\begin_layout Standard
+Questions arise:
+\end_layout
+
+\begin_layout Itemize
+What is the shape of this basin? The answer to this seems staightforward:
+ it is the set of functions for which 
+\begin_inset Formula $\int_{0}^{1}\rho\left(x\right)dx=c\ne0$
+\end_inset
+
+.
+ Furthermore, 
+\begin_inset Formula $\lim_{n\to\infty}\mathcal{L}^{n}\rho=c\nu$
+\end_inset
+
+ with 
+\begin_inset Formula $\nu$
+\end_inset
+
+ the Gelfond-Parry measure.
+\end_layout
+
+\begin_layout Itemize
+How do we characterize 
+\begin_inset Quotes eld
+\end_inset
+
+strictly smaller
+\begin_inset Quotes erd
+\end_inset
+
+? Certainly, any of the Banach norms provide a metric, but only 
+\begin_inset Formula $L^{1}$
+\end_inset
+
+ seems to be compatible with the above definition of the basin.
+ Or ...
+ wait...
+ are we being hasty? Why not general 
+\begin_inset Formula $L^{p}$
+\end_inset
+
+? Hmmm.
+\end_layout
+
+\begin_layout Itemize
+Is the basin regular at the fixed point? That is, is it a stable fixed point?
+ Are there functions 
+\begin_inset Formula $\rho\in\mathcal{F}$
+\end_inset
+
+ for which 
+\begin_inset Formula $\mathcal{L}^{n}\rho$
+\end_inset
+
+ diverges? Since we seem to have picked 
+\begin_inset Formula $L^{1}$
+\end_inset
+
+ as the proper norm, the question becomes, are there 
+\begin_inset Formula $\rho\in\mathcal{F}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\Vert \mathcal{L}\rho\right\Vert ^{1}>\left\Vert \rho\right\Vert ^{1}$
+\end_inset
+
+.
+ We recognize this last question as being 
+\begin_inset Quotes eld
+\end_inset
+
+is 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ a bounded operator
+\begin_inset Quotes erd
+\end_inset
+
+? I'm pretty sure the answer is yes, it is bounded, but oddly, before now,
+ never got around to asking this, or exploring the answer.
+ Huh.
+ Blind spots.
+\end_layout
+
+\begin_layout Standard
+The above does seem to settle one issue: the largest reasonable set of functions
+ 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ are those that are Borel-meaureable.
+ It seems that being able to talk about 
+\begin_inset Formula $\int_{0}^{1}\rho\left(x\right)dx$
+\end_inset
+
+ is a pre-requisite; there's not a lot left if we can't talk about that.
+\end_layout
+
+\begin_layout Standard
+The characterization of the basin of attraction above also tells us exactly
+ what the wandering set is: it is the set of functions 
+\begin_inset Formula $\rho$
+\end_inset
+
+ for which 
+\begin_inset Formula $\int_{0}^{1}\rho\left(x\right)dx=0$
+\end_inset
+
+.
+ To talk about these, it seems we do need an 
+\begin_inset Formula $L^{p}$
+\end_inset
+
+ norm for some 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
+for which repeat
+\end_layout
+
+\begin_layout Standard
+The proper sitting is this: We've got a Borel set 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ on the unit interval, 
+\end_layout
+
+\begin_layout Standard
+and the transfer operator is a function 
+\begin_inset Formula $\mathcal{L}:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+ that we are iterating, so, working with 
+\begin_inset Formula $\mathcal{L}^{n}$
+\end_inset
+
+.
+ Seperately, we have a class of measur
 \end_layout
 
 \begin_layout Section
