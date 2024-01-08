@@ -53,7 +53,8 @@ double invar(double beta, double x)
 // #define NHIST 27719
 // #define NHIST 27717
 // #define NHIST 28657 // (fibo 22)
-#define NHIST 28658
+// #define NHIST 28658
+#define NHIST 100
 // #define NHIST 196418 // (fib 26)
 // #define NHIST 196419
 
@@ -102,30 +103,32 @@ double linear(double beta, double x)
 	double midpnt = 0.5*beta;
 	if (midpnt < x) return 0.0;
 
-	double obn = 1.0;
+	double bn = 1.0;
 	double sum = 0.0;
 	// for (int i=0; i<1000; i++)
 	for (int i=0; i<3; i++)
 	{
-		double stretch = i*0.5*beta;
+		double stretch = 0.5*bn;
 		double off = 0.0;
 		double wrap = 0.0;
-		double xoff = 0.0;
-		while (off < stretch)
+		while (x+off < stretch)
 		{
-			xoff = (x + off)/stretch;
+			double xoff = (x + off)/stretch;
 			wrap += line(xoff);
+printf("#i=%d x=%g str=%g off=%g xoff=%g mid=%g wrap=%g\n", i, x, stretch, off, xoff, midpnt, wrap);
 			off += 1.0;
 		}
-		xoff = (x + off)/stretch;
-		if (xoff < midpnt) wrap += line(xoff);
+		double xoff = (x + off)/stretch;
+		if (xoff<x)	wrap += line(xoff);
+printf("#i=%d x=%g str=%g off=%g xoff=%g mid=%g wrap=%g\n", i, x, stretch, off, xoff, midpnt, wrap);
+printf("#----------\n");
 
-		sum += wrap * obn;
+		sum += wrap / bn;
 
 		if (0.5 < midpnt) midpnt -= 0.5;
 		midpnt *= beta;
-		obn /= beta;
-		if (obn < 1e-15) break;
+		bn *= beta;
+		if (1.0 < 1e-15 * bn) break;
 	}
 
 	return sum;
