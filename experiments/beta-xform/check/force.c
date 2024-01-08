@@ -92,21 +92,35 @@ double ell(double beta, double y)
 	return ellie;
 }
 
+double line (double x)
+{
+	return x-0.5;
+}
+
 double linear(double beta, double x)
 {
 	double midpnt = 0.5*beta;
 	if (midpnt < x) return 0.0;
 
 	double obn = 1.0;
-	double sumx = 0.0;
-	double sumc = 0.0;
-	double norm = 0.0;
-	for (int i=0; i<1000; i++)
+	double sum = 0.0;
+	// for (int i=0; i<1000; i++)
+	for (int i=0; i<3; i++)
 	{
-		if (x < midpnt) sumx += x*obn;
-		if ((x/beta)+0.5 < midpnt) sumc += obn;
-		sumc += obn;
-		norm += midpnt*obn;
+		double stretch = i*0.5*beta;
+		double off = 0.0;
+		double wrap = 0.0;
+		double xoff = 0.0;
+		while (off < stretch)
+		{
+			xoff = (x + off)/stretch;
+			wrap += line(xoff);
+			off += 1.0;
+		}
+		xoff = (x + off)/stretch;
+		if (xoff < midpnt) wrap += line(xoff);
+
+		sum += wrap * obn;
 
 		if (0.5 < midpnt) midpnt -= 0.5;
 		midpnt *= beta;
@@ -114,13 +128,6 @@ double linear(double beta, double x)
 		if (obn < 1e-15) break;
 	}
 
-	return (sumx-1.0) *(beta-1);
-// return sumc/norm - beta*invar(beta,x);
-// return invar(beta,x) - 0.544*sumc/norm;
-// return invar(beta,x);
-return sumc/norm;
-	// return sum / norm;
-	double sum = sumx - sumc;
 	return sum;
 }
 
