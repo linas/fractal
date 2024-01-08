@@ -28895,7 +28895,7 @@ Instead of working with
 \end_inset
 
  lets work with 
-\begin_inset Formula $\mathcal{F}=\left\{ \rho:\mathcal{B}\to\mathbb{R}\right\} $
+\begin_inset Formula $\mathcal{F}=\left\{ \sigma:\mathcal{B}\to\mathbb{R}\right\} $
 \end_inset
 
  where 
@@ -28903,13 +28903,147 @@ Instead of working with
 \end_inset
 
  is the Borel set on the unit interval.
+ So what we've really got is the inverse map 
+\begin_inset Formula $T^{-1}:\mathcal{B}\to\mathcal{B}$
+\end_inset
+
+ composed with the standard measure 
+\begin_inset Formula $\sigma\left(A\right)=\int_{A}\rho$
+\end_inset
+
+ for any 
+\begin_inset Formula $A\in\mathcal{B}.$
+\end_inset
+
+ That is, 
+\begin_inset Formula $\sigma=\int\rho$
+\end_inset
+
+ and we should have been writing 
+\begin_inset Formula $\rho^{\prime}$
+\end_inset
+
+ all along.
+ Oh well.
+ Anyway, this gives 
+\begin_inset Formula $\mathcal{L}\sigma=\sigma\circ T^{-1}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\mathcal{F}=\left\{ \rho:\Delta\to\mathbb{R}\right\} $
+The Borel set 
+\begin_inset Formula $\mathcal{B}$
 \end_inset
 
+ can be obtained will-nilly, but the whole point is that it is easiest to
+ generate it by mid-point iteration.
+ That is, we want to generate a tree of midpoints, and map that into the
+ standard Cantor tree.
+ How does that work?
+\end_layout
 
+\begin_layout Standard
+Start with 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and iterate once to get 
+\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2$
+\end_inset
+
+ which we place at the top of the tree.
+ So 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+ splits the interval 
+\begin_inset Formula $J_{1}=\left[0,m_{0}\right]$
+\end_inset
+
+ into two, a left-half and a right half.
+ Call these two intervals 
+\begin_inset Formula $LJ_{1}=J_{2}=\left[0,m_{1}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $RJ_{1}=J_{3}=\left[m_{1},m_{0}\right]$
+\end_inset
+
+.
+ Then (assuming a non-finite orbit), each subsequent 
+\begin_inset Formula $m_{p}$
+\end_inset
+
+ lands inside of some earlier interval, and splits it in two.
+ Where does it land? That is, 
+\begin_inset Formula $m_{p}\in J_{k}$
+\end_inset
+
+ for some 
+\begin_inset Quotes eld
+\end_inset
+
+earlier
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ The intended interval numbering scheme is one that preserves total order
+ on the tree.
+ For each interval 
+\begin_inset Formula $J_{k}=\left[a,b\right]$
+\end_inset
+
+, there exists the smallest possible 
+\begin_inset Formula $p$
+\end_inset
+
+ such that 
+\begin_inset Formula $m_{p}\in J_{k}$
+\end_inset
+
+.
+ The subintervals are recursively defined as 
+\begin_inset Formula $LJ_{k}=J_{2k}=\left[a,m_{p}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $RJ_{k}=J_{2k+1}=\left[m_{p},b\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This subdivision process suggests the 
+\begin_inset Quotes eld
+\end_inset
+
+visitation function
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $v:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ that maps iterates to intervals.
+ For non-finite orbits, this function is a bijection: every interval gets
+ subdivided, sooner or later.
+ For the finite orbits, it collapses: subdivision stops.
+\end_layout
+
+\begin_layout Standard
+Whatever.
+ The goal here was to use mid-point iteration to generate a tree, the iterate
+ tree.
+ Since it is a tree, it is isomorphic to the Cantor tree.
 \end_layout
 
 \begin_layout Standard
@@ -28917,24 +29051,10 @@ xxx
 \end_layout
 
 \begin_layout Standard
-The proper sitting is this: We've got a Borel set 
-\begin_inset Formula $\mathcal{B}$
+\begin_inset Formula $\mathcal{F}=\left\{ \rho:\Delta\to\mathbb{R}\right\} $
 \end_inset
 
- on the unit interval, 
-\end_layout
 
-\begin_layout Standard
-and the transfer operator is a function 
-\begin_inset Formula $\mathcal{L}:\mathcal{B}\to\mathcal{B}$
-\end_inset
-
- that we are iterating, so, working with 
-\begin_inset Formula $\mathcal{L}^{n}$
-\end_inset
-
-.
- Seperately, we have a class of measur
 \end_layout
 
 \begin_layout Section

@@ -105,6 +105,9 @@ double linear(double beta, double x)
 	double midpnt = 0.5*beta;
 	if (midpnt < x) return 0.0;
 
+// This won't work as implemente below, but if we keep track
+// of the iterated densities recursively, it will work just fine.
+// See reforce.c to be created for the corect recursive implementation.
 	double bn = 1.0;
 	double sum = 0.0;
 	// for (int i=0; i<1000; i++)
