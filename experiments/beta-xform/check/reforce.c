@@ -34,6 +34,8 @@ double line (double x)
 	return x-0.5;
 }
 
+// Recursively defined coherent function.
+// Fast, easy, straight.
 double coh(double beta, double omega, double y, int depth)
 {
 	if (0.5 * beta < y) return 0.0;
@@ -51,6 +53,38 @@ double coh(double beta, double omega, double y, int depth)
 	return ellie;
 }
 
+// Very similar to above, but just apply ell to recursive depth.
+double ellen(double beta, double omega, double y, int depth)
+{
+	if (0.5 * beta < y) return 0.0;
+	if (0 == depth)
+		return line(y/(0.5*beta));
+
+	double xlo = y / beta;
+	double xhi = xlo + 0.5;
+
+	double dlo = ellen(beta, omega, xlo, depth-1);
+	double dhi = ellen(beta, omega, xhi, depth-1);
+
+	double ellie = (dlo + dhi) * omega;
+	return ellie;
+}
+
+// Perform explicit sum adding up recursive elts.
+double coher(double beta, double omega, double y)
+{
+	double omen = 1.0;
+	double sum = 0.0;
+	for (int i=0; i<1000; i++)
+	{
+		sum += ellen(beta, omega, y, i);
+		omen *= omega;
+		if (omen < 1e-6) break;
+	}
+	return sum;
+}
+
+
 int main(int argc, char* argv[])
 {
 	if (argc != 3)
@@ -65,11 +99,14 @@ int main(int argc, char* argv[])
 
 	double omega = 1.0 / beta;
 
-#define NPTS 2019
+// #define NPTS 2019
+#define NPTS 219
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
 		double y = coh(beta, omega, x, depth);
-		printf("%d	%g	%g\n", j, x, y);
+		double z = coher(beta, omega, x);
+		printf("%d	%g	%g	%g\n", j, x, y, z);
+		fflush(stdout);
 	}
 }
