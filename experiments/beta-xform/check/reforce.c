@@ -34,20 +34,20 @@ double line (double x)
 	return x-0.5;
 }
 
-double ell(double beta, double y, int depth)
+double coh(double beta, double omega, double y, int depth)
 {
 	if (0.5 * beta < y) return 0.0;
 	if (0 == depth)
-		return line(y);
+		return line(y/(0.5*beta));
 
 	double xlo = y / beta;
 	double xhi = xlo + 0.5;
 
-	double dlo = ell(beta, xlo, depth-1);
-	double dhi = ell(beta, xhi, depth-1);
+	double dlo = coh(beta, omega, xlo, depth-1);
+	double dhi = coh(beta, omega, xhi, depth-1);
 
-	double ellie = dlo + dhi;
-	ellie /= beta;
+	double ellie = (dlo + dhi) * omega;
+	ellie += line(y/(0.5*beta));
 	return ellie;
 }
 
@@ -63,11 +63,13 @@ int main(int argc, char* argv[])
 
 	printf("#\n# beta=%g\n#\n", beta);
 
-#define NPTS 1019
+	double omega = 1.0 / beta;
+
+#define NPTS 2019
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
-		double y = ell(beta, x, depth);
+		double y = coh(beta, omega, x, depth);
 		printf("%d	%g	%g\n", j, x, y);
 	}
 }

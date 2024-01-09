@@ -3,19 +3,14 @@
 set term png size 640, 480
 set out 'reforced.png'
 
-# set xrange [0:1]
-# set yrange [-4:5]
-
 set title "stuff"
 
-# ----------------------------------------------------------------------
-
 beta = 1.83928675521416
-# set yrange [-0.8:0.8]
-rs(x) = 10*x
+set yrange [-1:0.8]
+rs(x) = 0.7*x
 plot "reforced.dat" using 2:(rs($3)) with lines title "0", \
      "fg.dat" using 2:3 with lines title "good", \
 
-
+# ----------------------------------------------------------------------
 #####
 
