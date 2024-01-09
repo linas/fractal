@@ -53,7 +53,11 @@ double coh(double beta, double omega, double y, int depth)
 	return ellie;
 }
 
-// Very similar to above, but just apply ell to recursive depth.
+#ifdef USELESS_EQUIVALENT
+// This function is similar to above, but just apply ell to
+// recursive depth. Combined with coher sum below, this gives
+// exactly the same result as coh() above. It's just a lot
+// slower.
 double ellen(double beta, double omega, double y, int depth)
 {
 	if (0.5 * beta < y) return 0.0;
@@ -83,7 +87,7 @@ double coher(double beta, double omega, double y)
 	}
 	return sum;
 }
-
+#endif
 
 int main(int argc, char* argv[])
 {
