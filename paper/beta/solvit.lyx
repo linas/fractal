@@ -25929,12 +25929,32 @@ Employ the recurrence relation to obtain
 \end_layout
 
 \begin_layout Itemize
+This recurrense relation is explicitly 
+\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $Lk=j$
+\end_inset
+
+ when 
+\begin_inset Formula $I_{j}\subseteq LI_{k}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $Rk$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
 Make the Ansatz that 
-\begin_inset Formula $f_{1}\left(y\right)=\sum_{j}a_{j}y^{j}$
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{j}^{\left(k\right)}y^{j}$
 \end_inset
 
  for some unknown constants 
-\begin_inset Formula $a_{j}$
+\begin_inset Formula $a_{j}^{\left(k\right)}$
 \end_inset
 
  to be determined.
@@ -25943,7 +25963,7 @@ Make the Ansatz that
 \end_inset
 
  gives equations for the 
-\begin_inset Formula $a_{j}$
+\begin_inset Formula $a_{j}^{\left(k\right)}$
 \end_inset
 
 .
@@ -25982,6 +26002,19 @@ There are three unresolved issues with the above: (1) the need to sort midpoints
 \end_inset
 
 .
+ The tables in the next section try to gain insight by writing out explict
+ cases, but they shine no light on the situation.
+ Ignore them, and skip them and move to the section after.
+\end_layout
+
+\begin_layout Subsubsection
+Interval Inclusion Tables
+\end_layout
+
+\begin_layout Standard
+The tables below try to gain insight by writing out explict cases, but they
+ shine no light on the situation.
+ Ignore them, and hop to the next section.
 \end_layout
 
 \begin_layout Standard
@@ -28633,6 +28666,84 @@ Table hand-generated with check/orbit.c
 \end_inset
 
  I don't have anything particularly notable to say about the above table.
+\end_layout
+
+\begin_layout Subsubsection
+Recursive Rework
+\end_layout
+
+\begin_layout Standard
+Clearly, writing out the intervals, sorting them and labelling them won't
+ work.
+ But perhaps the sorting is not needed, and instead can be inferred directly
+ from the recursive moves.
+ The key ingredients were
+\end_layout
+
+\begin_layout Itemize
+This recurrense relation 
+\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $Lk=j$
+\end_inset
+
+ when 
+\begin_inset Formula $I_{j}\subseteq LI_{k}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $Rk$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The Ansatz that 
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{j}^{\left(k\right)}y^{j}$
+\end_inset
+
+ for some unknown constants 
+\begin_inset Formula $a_{j}^{\left(k\right)}$
+\end_inset
+
+ to be determined.
+ Plugging through, and collecting terms by powers of 
+\begin_inset Formula $y$
+\end_inset
+
+ gives equations for the 
+\begin_inset Formula $a_{j}^{\left(k\right)}$
+\end_inset
+
+.
+ The leading term gives an expression for 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Starting with only 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ it is enough to emply labels 
+\begin_inset Formula $L1$
+\end_inset
+
+ and 
+\begin_inset Formula $R1$
+\end_inset
+
+ and thence 
+\begin_inset Formula $L^{2}1,LR1,RL1,R^{2}1$
+\end_inset
+
+ for the next set of intervals.
 \end_layout
 
 \begin_layout Section
