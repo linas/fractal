@@ -4,12 +4,19 @@ set term png size 640, 480
 set out 'visit.png'
 
 set xrange [0:1]
-# set yrange [0:3]
+set yrange [0:1]
+set key left
 
-set title "visit"
+set title "Midpoint Visits"
 
 # plot "visit.dat" using 4:5 with lines title ""
-plot "visit.dat" using 4:5 with points pointtype 0 title ""
+# plot "visit.dat" using 4:5 with points pointtype 0 title ""
+
+plot "visit-1.2.dat" using 4:5 with lines title "β=1.2", \
+     "visit-1.6.dat" using 4:5 with lines title "β=1.6", \
+     "visit-1.8.dat" using 4:5 with lines title "β=1.8", \
+
+#     "visit-1.79.dat" using 4:5 with lines title "beta=1.79",
 
 #####
 

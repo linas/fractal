@@ -16,7 +16,7 @@ unsigned long rigb[DEPTH];
 double midp[DEPTH];
 int sorted[DEPTH];
 
-int cmp(const void* ida, const void* idb)
+static int cmp(const void* ida, const void* idb)
 {
 	int ia = *((int*) ida);
 	int ib = *((int*) idb);
@@ -27,7 +27,12 @@ int cmp(const void* ida, const void* idb)
 #define MAXIDX (1UL<<(WORDLEN-1))
 #define NEG_ONE ((unsigned long)(-1L))
 
-void iter(double beta)
+/*
+ * Arrange midpoint iterations into a tree, so that each midpoint
+ * splits a prior midpoint interval into two. This generates a kind
+ * of prefered Borel set, where the boundaries are always at midpoints.
+ */
+void visitation_tree(double beta)
 {
 	// Setup
 	for (int i=0; i<DEPTH; i++) visit[i] = NEG_ONE;
@@ -107,6 +112,7 @@ double canonical_dyadic(unsigned long n)
 	return dya;
 }
 
+#ifndef NOMAIN
 int main(int argc, char* argv[])
 {
 	if (argc != 2)
@@ -116,7 +122,7 @@ int main(int argc, char* argv[])
 	}
 	double beta = atof(argv[1]);
 
-	iter(beta);
+	visitation_tree(beta);
 
 	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 0.0, 0.0);
 	for (int i=0; i<DEPTH; i++)
@@ -125,7 +131,8 @@ int main(int argc, char* argv[])
 		int j = sorted[i];
 		unsigned long v = visit[j];
 		double dya = canonical_dyadic(v);
-		printf("%d	%d	%ld	%g	%g\n", i, j, v, dya, midp[j]);
+		double midpnt = midp[j];
+		printf("%d	%d	%ld	%g	%g\n", i, j, v, dya, midpnt);
 	}
 	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 1.0, 1.0);
 
@@ -145,3 +152,4 @@ int main(int argc, char* argv[])
 	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 1.0, 1.0);
 #endif
 }
+#endif
