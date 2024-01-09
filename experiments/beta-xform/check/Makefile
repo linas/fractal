@@ -4,7 +4,7 @@ CC = cc -Wall -g -O2 $(INCLUDES)
 GENDIR = ../../../generate
 BRAT = $(GENDIR)/brat.o $(GENDIR)/fileio.o $(GENDIR)/util.o
 
-all: recheck force orbit visitation borel
+all: recheck force orbit visitation borel reforce
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR)
@@ -21,3 +21,4 @@ force: force.o
 orbit: orbit.o
 visitation: visitation.o
 borel: borel.o $(BRAT)
+reforce: reforce.o

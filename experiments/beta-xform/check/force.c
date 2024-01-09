@@ -1,6 +1,6 @@
 /*
  * force.c
- * Blindly hunto for eigenfunctions of the transfer operator.
+ * Blindly hunt for eigenfunctions of the transfer operator.
  * This is done by iterating, and looking for fixed points that
  * might accidentally appear in the ocean. A handful are found
  * and pinned down.
