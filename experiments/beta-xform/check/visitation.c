@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DEPTH 300
+#define DEPTH 5000
 unsigned long visit[DEPTH];
 unsigned long rigb[DEPTH];
 double midp[DEPTH];
@@ -23,7 +23,10 @@ int cmp(const void* ida, const void* idb)
 	return (midp[ia] < midp[ib]) ? -1: 1;
 }
 
+#define WORDLEN 64
+#define MAXIDX (1UL<<(WORDLEN-1))
 #define NEG_ONE ((unsigned long)(-1L))
+
 void iter(double beta)
 {
 	// Setup
@@ -41,7 +44,8 @@ void iter(double beta)
 		if (0.5 < midpnt) midpnt -= 0.5;
 		midpnt *= beta;
 		obn /= beta;
-		if (obn < 1e-15) break;
+#define EPS 1e-15
+		// if (obn < EPS) break;
 
 		midp[i] = midpnt;
 
@@ -57,6 +61,8 @@ void iter(double beta)
 				rig = j;
 			}
 		}
+
+		if (MAXIDX < rigb[rig]) break;
 
 		// Record right-hand boundary, and update it.
 		visit[i] = rigb[rig];
@@ -82,6 +88,25 @@ int bitlen(unsigned long bitstr)
 	return len;
 }
 
+/* Return canonical dyadic associated with canonical integer
+ * in the canonical tree numbering.The map is
+ *   1 |--> 1/2
+ *   2 |--> 1/4
+ *   3 |--> 3/4
+ *   4 |--> 1/8
+ *   5 |--> 3/8
+ * etc.
+ */
+double canonical_dyadic(unsigned long n)
+{
+	int len = bitlen(n);
+	unsigned long base = 1UL<<len;
+	unsigned long nb = n - base/2;
+	unsigned long nd = 2*nb+1;
+	double dya = ((double) nd) / ((double) base);
+	return dya;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc != 2)
@@ -93,21 +118,30 @@ int main(int argc, char* argv[])
 
 	iter(beta);
 
-	printf("%d	%d	%g	%g\n", -1, -1, 0.0, 0.0);
+	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 0.0, 0.0);
+	for (int i=0; i<DEPTH; i++)
+	{
+		if (NEG_ONE == visit[i]) break;
+		int j = sorted[i];
+		unsigned long v = visit[j];
+		double dya = canonical_dyadic(v);
+		printf("%d	%d	%ld	%g	%g\n", i, j, v, dya, midp[j]);
+	}
+	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 1.0, 1.0);
+
+#ifdef STEPPY
+	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 0.0, 0.0);
 	double yprev = 0.0;
 	for (int i=0; i<DEPTH; i++)
 	{
 		if (NEG_ONE == visit[i]) break;
 		int j = sorted[i];
 		unsigned long v = visit[j];
-		int len = bitlen(v);
-		unsigned long base = 1UL<<len;
-		unsigned long vb = v - base/2;
-		unsigned long vd = 2*vb+1;
-		double dya = ((double) vd) / ((double) base);
-		printf("%d	%d	%g	%g\n", i, j, dya, yprev);
-		printf("%d	%d	%g	%g\n", i, j, dya, midp[j]);
+		double dya = canonical_dyadic(v);
+		printf("%d	%d	%ld	%g	%g\n", i, j, v, dya, yprev);
+		printf("%d	%d	%ld	%g	%g\n", i, j, v, dya, midp[j]);
 		yprev = midp[j];
 	}
-	printf("%d	%d	%g	%g\n", -1, -1, 1.0, 1.0);
+	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 1.0, 1.0);
+#endif
 }
