@@ -7,7 +7,7 @@ set xrange [0:1]
 set yrange [0:1]
 set key left
 
-set title "Midpoint Visits"
+set title "Midpoint Visitation Tree"
 
 # plot "visit.dat" using 4:5 with lines title ""
 # plot "visit.dat" using 4:5 with points pointtype 0 title ""
@@ -17,6 +17,21 @@ plot "visit-1.2.dat" using 4:5 with lines title "β=1.2", \
      "visit-1.8.dat" using 4:5 with lines title "β=1.8", \
 
 #     "visit-1.79.dat" using 4:5 with lines title "beta=1.79",
+
+#########################################################
+# Used for the graph in the paper.
+set term eps color enhanced fontscale 0.58
+set out 'visitation.eps'
+
+set xrange [0:1]
+set yrange [0:1]
+set key left
+
+set title "Midpoint Visitation Tree"
+
+plot "visit-1.2.dat" using 4:5 with lines lw 2 title "β=1.2", \
+     "visit-1.6.dat" using 4:5 with lines lw 2 title "β=1.6", \
+     "visit-1.8.dat" using 4:5 with lines lw 2 title "β=1.8"
 
 #####
 

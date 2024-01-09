@@ -28886,7 +28886,7 @@ There is only a single invariant measure, and so define
 \end_layout
 
 \begin_layout Subsection
-Midpoint to Tree
+Visitation Tree
 \end_layout
 
 \begin_layout Standard
@@ -29021,7 +29021,7 @@ earlier
 \end_layout
 
 \begin_layout Standard
-This subdivision process suggests the 
+The 
 \begin_inset Quotes eld
 \end_inset
 
@@ -29029,14 +29029,206 @@ visitation function
 \begin_inset Quotes erd
 \end_inset
 
- 
+ is 
 \begin_inset Formula $v:\mathbb{N}\to\mathbb{N}$
 \end_inset
 
- that maps iterates to intervals.
+ that maps each iterate to the interval it subdivides, so that 
+\begin_inset Formula $m_{p}\in J_{v\left(p\right)}$
+\end_inset
+
+.
  For non-finite orbits, this function is a bijection: every interval gets
  subdivided, sooner or later.
  For the finite orbits, it collapses: subdivision stops.
+ For finite orbits of length 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the visitation function is defined only up to 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If the orbit iteration is infinite, then this subdivision process places
+ all midpoints somwhere into a binary tree.
+ We'll call this the 
+\begin_inset Quotes eld
+\end_inset
+
+visitation tree
+\begin_inset Quotes erd
+\end_inset
+
+, to indicate where the midpoint visits.
+ Since it is a tree, we can graph it w.r.t.
+ the dyadic tree.
+ Three such maps are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Visitation-Tree"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ These can be understood as three horizontal slices through figure xx.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Visitation Tree
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Visitation-Tree"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename visitation.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the visitation map 
+\begin_inset Formula $v$
+\end_inset
+
+, or more precisely, the map 
+\begin_inset Formula $m\circ v^{-1}\circ\delta^{-1}:\mathbb{D}\to\mathbb{R}$
+\end_inset
+
+, for three different values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The vistitation function is a map 
+\begin_inset Formula $v:\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ that records which interval a midpoint lands in, so that 
+\begin_inset Formula $m_{p}\in J_{v\left(p\right)}$
+\end_inset
+
+.
+ Conversely, fixing the interval to be 
+\begin_inset Formula $J_{k}$
+\end_inset
+
+, one has 
+\begin_inset Formula $m_{v^{-1}\left(k\right)}\in J_{k}$
+\end_inset
+
+.
+ The intervals are numbered canoninically, so that they can be placed in
+ one-to-one correspondence with the canonical dyadic tree.
+ Thus, given a dyadic fraction 
+\begin_inset Formula $\left(2i+1\right)/2^{n}\in\mathbb{D}$
+\end_inset
+
+, it is mapped to 
+\begin_inset Formula $\delta^{-1}:\left(2i+1\right)/2^{n}\mapsto2^{n-1}+i=k$
+\end_inset
+
+.
+ This is mapped to the iteration number 
+\begin_inset Formula $p=v^{-1}\left(k\right)$
+\end_inset
+
+ of the midpoint for that interval.
+ Finally, 
+\begin_inset Formula $m:p\mapsto m_{p}=T^{p}\left(\beta/2\right)$
+\end_inset
+
+ as the actual numerical value of the 
+\begin_inset Formula $p$
+\end_inset
+
+'th iterate.
+ By construction, this map is necessarily monotonically increasing, 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Visitation Map
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -29044,6 +29236,7 @@ Whatever.
  The goal here was to use mid-point iteration to generate a tree, the iterate
  tree.
  Since it is a tree, it is isomorphic to the Cantor tree.
+ It provides natural Borel sets for us.
 \end_layout
 
 \begin_layout Standard
