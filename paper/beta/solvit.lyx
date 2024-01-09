@@ -29077,7 +29077,17 @@ noprefix "false"
 \end_inset
 
 .
- These can be understood as three horizontal slices through figure xx.
+ These can be understood as three horizontal slices through figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Visitation-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -29116,7 +29126,7 @@ name "fig:Visitation-Tree"
 \end_layout
 
 \begin_layout Plain Layout
-This figure shows the visitation map 
+This figure shows the Borel-set-generating visitation map 
 \begin_inset Formula $v$
 \end_inset
 
@@ -29172,7 +29182,28 @@ This figure shows the visitation map
 \end_inset
 
 'th iterate.
- By construction, this map is necessarily monotonically increasing, 
+ By construction, this map is necessarily monotonically increasing.
+ The goal of this map is to convert intervals defined by dyadic fractions
+ (along he x-axis) to intervals defined by midpoints (y-axis), thus providing
+ 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ Borel sets to work with.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Created with beta-xform/check/visitation.c and vistation.gplot
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -29196,7 +29227,7 @@ height "1pt"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -29207,11 +29238,75 @@ status open
 
 \begin_layout Plain Layout
 Visitation Map
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Visitation-Map"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename visitation-map.png
+	lyxscale 60
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the same vistation map as figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Visitation-Tree"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, but arranged so that 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+ bottom to top, so that a horizontal slice is a constant-
+\begin_inset Formula $\beta$
+\end_inset
+
+ slice.
+ The color coding is the same as used elsewhere: black is approx zero, green
+ is approx 0.5 and red is approx 1.0.
+ Note the hard take-off for smaller values of beta: the blue-black region
+ at the bottom lies between 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+ and about 
+\begin_inset Formula $\beta=1.2$
+\end_inset
+
+, after which the march of redness begins diagonally.
+ This is reminiscent of the bracket map, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beta-Bracket-Map"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -29232,11 +29327,15 @@ height "1pt"
 \end_layout
 
 \begin_layout Standard
-Whatever.
- The goal here was to use mid-point iteration to generate a tree, the iterate
- tree.
- Since it is a tree, it is isomorphic to the Cantor tree.
- It provides natural Borel sets for us.
+Since it is a tree, it is isomorphic to the Cantor tree.
+ It provides a natural sigma-algebra, in the reference frame of the mid-point
+ iterates.
+ That is, the map is converts the canonical cylinder sets on 
+\begin_inset Formula $\Delta=2^{\omega}$
+\end_inset
+
+ to cylinder sets that are bounded by mid-point iterates.
+ It provides a measure.
 \end_layout
 
 \begin_layout Standard
