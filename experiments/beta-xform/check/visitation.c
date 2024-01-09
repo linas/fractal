@@ -15,11 +15,12 @@ unsigned long visit[DEPTH];
 unsigned long rigb[DEPTH];
 double midp[DEPTH];
 
+#define NEG_ONE ((unsigned long)(-1L))
 void iter(double beta)
 {
 	// Setup
-	for (int i=0; i<DEPTH; i++) visit[i] = 0;
-	visit[0] = 1;
+	for (int i=0; i<DEPTH; i++) visit[i] = NEG_ONE;
+	visit[0] = 0;
 	rigb[0] = 1;
 
 	double midpnt = 0.5*beta;
@@ -56,6 +57,14 @@ void iter(double beta)
 	}
 }
 
+/* Return length of bitstring. Same as ceil(log2(bitstr)). */
+int bitlen(unsigned long bitstr)
+{
+	int len=0;
+	while (bitstr) { len++; bitstr >>= 1; }
+	return len;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc != 2)
@@ -66,4 +75,16 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 
 	iter(beta);
+
+	for (int i=0; i<DEPTH; i++)
+	{
+		if (NEG_ONE == visit[i]) break;
+		unsigned long v = visit[i];
+		int len = bitlen(v);
+		unsigned long base = 1UL<<len;
+		unsigned long vb = v - base/2;
+		unsigned long vd = 2*vb+1;
+		double dya = ((double) vd) / ((double) base);
+		printf("%d	%g	%g\n", i, dya, midp[i]);
+	}
 }
