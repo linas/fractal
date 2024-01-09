@@ -87,26 +87,26 @@ double coher(double beta, double omega, double y)
 
 int main(int argc, char* argv[])
 {
-	if (argc != 3)
+	if (argc != 4)
 	{
-		fprintf(stderr, "Usage: %s beta depth\n", argv[0]);
+		fprintf(stderr, "Usage: %s beta depth omega\n", argv[0]);
 		exit (1);
 	}
 	double beta = atof(argv[1]);
 	int depth = atoi(argv[2]);
+	double omega = atof(argv[3]);
 
 	printf("#\n# beta=%g\n#\n", beta);
 
-	double omega = 1.0 / beta;
+	omega /= beta;
 
-// #define NPTS 2019
-#define NPTS 219
+#define NPTS 2019
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
 		double y = coh(beta, omega, x, depth);
-		double z = coher(beta, omega, x);
-		printf("%d	%g	%g	%g\n", j, x, y, z);
+		// double z = coher(beta, omega, x);
+		printf("%d	%g	%g\n", j, x, y);
 		fflush(stdout);
 	}
 }
