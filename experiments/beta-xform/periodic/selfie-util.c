@@ -50,4 +50,29 @@ void tree_idx_to_dyafrac(unsigned long idx, unsigned long* p, unsigned long* q)
 	*q = deno;
 }
 
+/* Return canonical dyadic associated with canonical integer
+ * in the canonical tree numbering.The map is
+ *   1 |--> 1/2
+ *   2 |--> 1/4
+ *   3 |--> 3/4
+ *   4 |--> 1/8
+ *   5 |--> 3/8
+ * etc.
+ */
+double canonical_dyadic(unsigned long idx)
+{
+	unsigned long p=0, q=0;
+	tree_idx_to_dyafrac(idx, &p, &q);
+	return ((double) p) / ((double) q);
+
+#ifdef ALT_IMPLEMENTATION
+	int len = bitlen(n);
+	unsigned long base = 1UL<<len;
+	unsigned long nb = n - base/2;
+	unsigned long nd = 2*nb+1;
+	double dya = ((double) nd) / ((double) base);
+	return dya;
+#endif
+}
+
 /* --------------------------- END OF LIFE ------------------------- */
