@@ -10,32 +10,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DEPTH 5000
-unsigned long visit[DEPTH];
-unsigned long rigb[DEPTH];
-double midp[DEPTH];
-int sorted[DEPTH];
-
-static int cmp(const void* ida, const void* idb)
-{
-	int ia = *((int*) ida);
-	int ib = *((int*) idb);
-	return (midp[ia] < midp[ib]) ? -1: 1;
-}
-
-#define WORDLEN 64
-#define MAXIDX (1UL<<(WORDLEN-1))
-#define NEG_ONE ((unsigned long)(-1L))
+#include "selfie.c"
+#include "selfie-util.c"
 
 /*
  * Arrange midpoint iterations into a tree, so that each midpoint
  * splits a prior midpoint interval into two. This generates a kind
  * of prefered Borel set, where the boundaries are always at midpoints.
  */
-void visitation_tree(double beta)
+int visitation_tree(double beta,
+                    unsigned long *visit, // unsigned long visit[DEPTH];
+                    double *midp,         // double midp[DEPTH];
+                    int depth,
+                    double epsilon)
 {
+	unsigned long rigb[depth];
+
 	// Setup
-	for (int i=0; i<DEPTH; i++) visit[i] = NEG_ONE;
+	for (int i=0; i<depth; i++) visit[i] = NEG_ONE;
 	visit[0] = 0;
 	rigb[0] = 1;
 
@@ -43,14 +35,14 @@ void visitation_tree(double beta)
 	midp[0] = midpnt;
 	double obn = 1.0;
 	int tot = 0;
-	for (int i=1; i<DEPTH; i++)
+	for (int i=1; i<depth; i++)
 	{
 		// Step to next midpoint
 		if (0.5 < midpnt) midpnt -= 0.5;
 		midpnt *= beta;
 		obn /= beta;
-#define EPS 1e-15
-		// if (obn < EPS) break;
+
+		if (0.0 < epsilon && obn < epsilon) break;
 
 		midp[i] = midpnt;
 
@@ -79,35 +71,23 @@ void visitation_tree(double beta)
 	}
 	tot++;
 
+	return tot;
+}
+
+#if 0
+static int cmp(const void* ida, const void* idb)
+{
+	int ia = *((int*) ida);
+	int ib = *((int*) idb);
+	return (midp[ia] < midp[ib]) ? -1: 1;
+}
+
+void do_sort(...)
+{
+	int sorted[DEPTH];
 	// Sort into sequential order.
 	for (int i=1; i<DEPTH; i++) sorted[i] = i;
 
 	qsort(sorted, tot, sizeof(int), cmp);
 }
-
-/* Return length of bitstring. Same as ceil(log2(bitstr)). */
-int bitlen(unsigned long bitstr)
-{
-	int len=0;
-	while (bitstr) { len++; bitstr >>= 1; }
-	return len;
-}
-
-/* Return canonical dyadic associated with canonical integer
- * in the canonical tree numbering.The map is
- *   1 |--> 1/2
- *   2 |--> 1/4
- *   3 |--> 3/4
- *   4 |--> 1/8
- *   5 |--> 3/8
- * etc.
- */
-double canonical_dyadic(unsigned long n)
-{
-	int len = bitlen(n);
-	unsigned long base = 1UL<<len;
-	unsigned long nb = n - base/2;
-	unsigned long nd = 2*nb+1;
-	double dya = ((double) nd) / ((double) base);
-	return dya;
-}
+#endif
