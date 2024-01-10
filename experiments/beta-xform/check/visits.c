@@ -15,8 +15,21 @@
 
 /*
  * Arrange midpoint iterations into a tree, so that each midpoint
- * splits a prior midpoint interval into two. This generates a kind
- * of prefered Borel set, where the boundaries are always at midpoints.
+ * splits a prior midpoint interval into two.  This generates a kind
+ * of prefered Borel set (prefered base of a topology?), where the
+ * boundaries are always at midpoints.
+ *
+ * visit: array of `depth` entries, filled in with location of the
+ *        i'th iteration in the midpoint tree. The zeroth iteration
+ *        m_0=beta/2 is always 0 and the first m_1=beta(beta-1)/2
+ *        is always 1.
+ *
+ * midp:  array of `depth` entries, filled in with midpoint values.
+ *
+ * depth: How far to iterate.
+ * epsilon: if greater than zero, then stop iteration after obn**steps
+ *          is smaller than epsilon. If negative, then iterate forever,
+ *          until depth is reached or overflow occurs,
  */
 int visitation_tree(double beta,
                     unsigned long *visit, // unsigned long visit[DEPTH];
@@ -74,20 +87,13 @@ int visitation_tree(double beta,
 	return tot;
 }
 
-#if 0
-static int cmp(const void* ida, const void* idb)
+// Same as above, but beta is gold midpoint given by index.
+int visit_tree(unsigned long idx,
+               unsigned long *visits, // unsigned long visit[DEPTH];
+               double *midpts)        // double midp[DEPTH];
 {
-	int ia = *((int*) ida);
-	int ib = *((int*) idb);
-	return (midp[ia] < midp[ib]) ? -1: 1;
-}
+	double gold = golden_beta(idx);
+	int order = bitlen(idx) + 1;
 
-void do_sort(...)
-{
-	int sorted[DEPTH];
-	// Sort into sequential order.
-	for (int i=1; i<DEPTH; i++) sorted[i] = i;
-
-	qsort(sorted, tot, sizeof(int), cmp);
+	return visitation_tree(gold, visits, midpts, order, -1.0);
 }
-#endif

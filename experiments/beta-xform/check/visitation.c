@@ -1,7 +1,7 @@
 /*
  * visitation.c
  *
- * Visitation function, from the diary.
+ * Visitation function grapher, from the diary.
  *
  * January 2024
  */
@@ -42,6 +42,22 @@ void vtree(double beta)
 #ifndef NOMAIN
 int main(int argc, char* argv[])
 {
+	for (long idx=1; idx< 32; idx++)
+	{
+		if (!valid_gold_index(idx)) continue;
+		visit_tree(idx, visits, midpts);
+
+		int order = bitlen(idx) + 1;
+		printf("idx= %ld order=%d vists=[", idx, order);
+		for (int j=0; j<order; j++)
+			printf("%ld, ", visits[j]);
+		printf("]");
+		printf("		beta=%g", 2.0*midpts[0]);
+		// printf(" last=%g", midpts[order-1]);
+		printf("\n");
+	}
+
+#if GRAPH_VISITATION_TREE
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s beta\n", argv[0]);
@@ -62,6 +78,7 @@ int main(int argc, char* argv[])
 		printf("%d	%d	%ld	%g	%g\n", i, j, v, dya, midpnt);
 	}
 	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 1.0, 1.0);
+#endif
 
 #ifdef STEPPY
 	printf("%d	%d	%ld	%g	%g\n", -1, -1, 0UL, 0.0, 0.0);
