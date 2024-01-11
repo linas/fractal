@@ -56,9 +56,8 @@ double invar(double beta, double x)
 // #define NHIST 27717
 // #define NHIST 28657 // (fibo 22)
 // #define NHIST 28658
-#define NHIST 100
 // #define NHIST 196418 // (fib 26)
-// #define NHIST 196419
+#define NHIST 196419
 
 // #define NHIST 18561 // n=2 fib plus one
 // #define NHIST 25282    // n=3 fib plus one
@@ -95,63 +94,42 @@ double ell(double beta, double y)
 	return ellie;
 }
 
-double line (double x)
+double saw(double x)
 {
-	return x-0.5;
+	x -= floor(x);  // mod 1
+	if (x < 0.5) return x-0.25;
+	return 0.75-x;
 }
 
-double linear(double beta, double x)
+double blancmange(double x, int l, double w, double beta)
 {
-	double midpnt = 0.5*beta;
-	if (midpnt < x) return 0.0;
+	if (0.5*beta < x) return 0.0;
 
-// This won't work as implemente below, but if we keep track
-// of the iterated densities recursively, it will work just fine.
-// See reforce.c to be created for the corect recursive implementation.
-	double bn = 1.0;
+	double xn = x;
+	double wn = 1.0;
 	double sum = 0.0;
-	// for (int i=0; i<1000; i++)
-	for (int i=0; i<3; i++)
+	double tlp = 2*l+1;
+	for (int i=0; i<1000; i++)
 	{
-		double stretch = 0.5*bn*beta;
-		double off = 0.0;
-		double wrap = 0.0;
-		while (x+off < stretch)
-		{
-			double xoff = (x + off)/stretch;
-			wrap += line(xoff);
-printf("#i=%d x=%g str=%g off=%g xoff=%g mid=%g wrap=%g\n", i, x, stretch, off, xoff, midpnt, wrap);
-			off += 1.0;
-		}
-		double xoff = (x + off)/stretch;
-		if (xoff<x)	wrap += line(xoff);
-printf("#i=%d x=%g str=%g off=%g xoff=%g mid=%g wrap=%g\n", i, x, stretch, off, xoff, midpnt, wrap);
-printf("#----------\n");
-
-		sum += wrap / bn;
-
-		if (0.5 < midpnt) midpnt -= 0.5;
-		midpnt *= beta;
-		bn *= beta;
-		if (1.0 < 1e-15 * bn) break;
+		sum += wn * saw(tlp * xn);
+		wn *= w;
+		xn *= beta;
+		if (wn < 1e-15) break;
 	}
-
 	return sum;
+}
+
+void blanc_setup(double beta, int l, double w)
+{
+	for (int i=0; i<NHIST; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) NHIST);
+		histn[i] = blancmange(x, l, w, beta);
+	}
 }
 
 void setup(double beta)
 {
-#define ITERATOR
-#ifdef ITERATOR
-	// Works great for n=1, n=2, n=4 fails for n=3
-	// I'm missing some constant factor.
-	for (int i=0; i<NHIST; i++)
-	{
-		double x = (((double) i) + 0.5) / ((double) NHIST);
-		histn[i] = linear(beta, x);
-	}
-#endif
-
 // #define SAW
 #ifdef SAW
 	for (int i=0; i<NHIST; i++)
@@ -365,20 +343,24 @@ void capture(int n)
 
 int main(int argc, char* argv[])
 {
-	if (argc != 3)
+	if (argc != 5)
 	{
-		fprintf(stderr, "Usage: %s beta nsteps\n", argv[0]);
+		// fprintf(stderr, "Usage: %s beta nsteps\n", argv[0]);
+		fprintf(stderr, "Usage: %s beta nsteps ll w\n", argv[0]);
 		exit (1);
 	}
 	double beta = atof(argv[1]);
 	int nsteps = atoi(argv[2]);
+	int ll = atoi(argv[3]);
+	double w = atof(argv[4]);
 
-	setup(beta);
+	// setup(beta);
+	blanc_setup(beta, ll, w);
+	printf("#\n# blanc beta=%g w=%g l=%d eig=%g\n", beta, w, ll, 2*w/beta);
 
-for (int i=0; i<NHIST; i++) histo[i] = histn[i];
-	// normalize(beta);
+	normalize(beta);
 
-// #define SHOW_NORMS
+#define SHOW_NORMS
 #ifdef SHOW_NORMS
 	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
@@ -388,8 +370,7 @@ for (int i=0; i<NHIST; i++) histo[i] = histn[i];
 	}
 #endif
 
-
-#define SHOW_DENS
+// #define SHOW_DENS
 #ifdef SHOW_DENS
 	printf("#\n# beta=%g\n#\n", beta);
 
