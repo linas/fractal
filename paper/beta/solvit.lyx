@@ -7766,22 +7766,6 @@ or, written more compactly
 
 \end_inset
 
-or even
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{1}{2}-\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta}{2}-\left(\frac{y}{\beta}+\frac{1}{2}\right)\right)\right]
-\]
-
-\end_inset
-
-or
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta\left(\beta-1\right)}{2}-y\right)\right]
-\]
-
-\end_inset
-
 where 
 \begin_inset Formula $\Theta$
 \end_inset
@@ -28815,7 +28799,8 @@ The shift is
 \[
 s\left(x\right)=\begin{cases}
 x-\frac{1}{4} & \mbox{for }x<\frac{1}{2}\\
-\frac{3}{4}-x & \mbox{for }x\ge\frac{1}{2}
+\frac{3}{4}-x & \mbox{for }x\ge\frac{1}{2}\\
+s\left(x\mod1\right) & \mbox{for }x\notin\left[0,1\right]
 \end{cases}
 \]
 
@@ -28830,11 +28815,12 @@ It is easy to verify that
 \begin_inset Formula $s$
 \end_inset
 
- that is odd about 1/2 will be in the kernel 
+ that is odd about 1/2 and periodic with period one will be in the kernel
+ 
 \begin_inset Formula $s\in\ker\mathcal{L}$
 \end_inset
 
- and can be used to build the eigenfunctions, 
+ and so can be used to build the eigenfunctions.
 \end_layout
 
 \begin_layout Standard
@@ -28896,7 +28882,131 @@ Exactly the same construction passes through for the
 \end_inset
 
 -transform.
- Almost without modification, except for  Other than that 
+ Almost without modification.
+ Lets check this.
+ Start with eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xfer oper"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, copied below.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\tau=T_{\beta}$
+\end_inset
+
+ as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, copied below
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+Well need an expression for 
+\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)$
+\end_inset
+
+, valid for any function 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ This is obtained by plugging through:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}\left(f\circ T_{\beta}\right)\right]\left(y\right)=\frac{2}{\beta}f\left(y\right)\Theta\left(\frac{\beta}{2}-y\right)
+\]
+
+\end_inset
+
+For the special case where 
+\begin_inset Formula $f\left(y\right)$
+\end_inset
+
+ vanishes when 
+\begin_inset Formula $y>\beta/2$
+\end_inset
+
+, then there is an identity 
+\begin_inset Formula $f\left(y\right)=f\left(y\right)\Theta\left(\frac{\beta}{2}-y\right)$
+\end_inset
+
+, and for these functions, 
+\begin_inset Formula 
+\[
+\mathcal{L}_{\beta}\left(f\circ T_{\beta}\right)=\frac{2}{\beta}f
+\]
+
+\end_inset
+
+holds.
+ This is all we need for constructing the coherent states.
+ Given any 
+\begin_inset Formula $v\in\ker\mathcal{L}_{\beta}$
+\end_inset
+
+, write 
+\begin_inset Formula $s\left(x\right)=v\left(x\mod1\right)$
+\end_inset
+
+ so as to be explicitly periodic.
+ Then define
+\begin_inset Formula 
+\[
+\psi_{w,l}\left(x\right)=\Theta\left(\frac{\beta}{2}-x\right)\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(x\right)\right)
+\]
+
+\end_inset
+
+Applying the transfer operator to this gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\psi_{w,l}\right]\left(y\right) & =\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)\right]\left(y\right)+\sum_{n=1}^{\infty}w^{n}\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)T_{\beta}^{n}\right]\left(y\right)\\
+ & =\left[\mathcal{L}_{\beta}v\right]\left(y\right)+w\frac{2}{\beta}\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\Theta\left(\frac{\beta}{2}-y\right)\\
+ & =\frac{2w}{\beta}\psi_{w,l}\left(y\right)
+\end{align*}
+
+\end_inset
+
+which is the desired result.
 \end_layout
 
 \begin_layout Section
