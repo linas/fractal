@@ -28752,6 +28752,154 @@ Based on this observation, it seems that a better numbering scheme is to
 \end_layout
 
 \begin_layout Section
+Fractal Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+The Bernoulli operator has the Blancmange curve as an eigenfunction; this
+ is part of a class of fractal eigenfunctions that form the continuous spectrum
+ of the transfer operator.
+ Linear combinations of these can be resummed to define a continuous spectrum
+ of smooth 
+\begin_inset Formula $c^{\infty}$
+\end_inset
+
+ eigenfunctions, smooth everywhere except at the endpoints, where they diverge.
+ This section reviews that construction, and looks at how it goes over for
+ the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-function.
+\end_layout
+
+\begin_layout Subsection
+Bernoulli transform
+\end_layout
+
+\begin_layout Standard
+The Bernoulli transform is the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, at 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+ The transfer operator acts as
+\begin_inset Formula 
+\[
+\left[\mathcal{L}f\right]\left(x\right)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]
+\]
+
+\end_inset
+
+The shift is 
+\begin_inset Formula $\tau\left(x\right)=2x\mod1$
+\end_inset
+
+.
+ A family fractal eigenfunctions are the coherent functions of any master
+ wavelet 
+\begin_inset Formula $s\in\ker\mathcal{L}$
+\end_inset
+
+.
+ Examples include 
+\begin_inset Formula $s\left(x\right)=\sin2\pi x$
+\end_inset
+
+ and sawtooth function 
+\begin_inset Formula 
+\[
+s\left(x\right)=\begin{cases}
+x-\frac{1}{4} & \mbox{for }x<\frac{1}{2}\\
+\frac{3}{4}-x & \mbox{for }x\ge\frac{1}{2}
+\end{cases}
+\]
+
+\end_inset
+
+It is easy to verify that 
+\begin_inset Formula $\mathcal{L}s=0$
+\end_inset
+
+ for either of these two examples.
+ Any function 
+\begin_inset Formula $s$
+\end_inset
+
+ that is odd about 1/2 will be in the kernel 
+\begin_inset Formula $s\in\ker\mathcal{L}$
+\end_inset
+
+ and can be used to build the eigenfunctions, 
+\end_layout
+
+\begin_layout Standard
+The family is the coherent-wave sum
+\begin_inset Formula 
+\[
+\psi_{w,l}\left(x\right)=\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)\tau^{n}\left(x\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $0<w<1$
+\end_inset
+
+ is any real number (or, more generally, any complex number within the unit
+ disk) and 
+\begin_inset Formula $l\in\mathbb{N}$
+\end_inset
+
+ is any non-negative integer.
+ For 
+\begin_inset Formula $s$
+\end_inset
+
+ the sawtooth, and 
+\begin_inset Formula $l=0$
+\end_inset
+
+ this is just the Blancmange curve.
+\end_layout
+
+\begin_layout Standard
+It is not hard to verify that 
+\begin_inset Formula $\mathcal{L}\psi_{w,l}=w\psi_{w,l}$
+\end_inset
+
+.
+ The proof is straight-forward: 
+\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)=f$
+\end_inset
+
+ since the transform and the transfer operator are adjoint to one-another.
+ Then, since 
+\begin_inset Formula $\mathcal{L}s=0$
+\end_inset
+
+, the coherent-wave sum is just itself, again.
+ 
+\end_layout
+
+\begin_layout Subsection
+Beta Transform
+\end_layout
+
+\begin_layout Standard
+Exactly the same construction passes through for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform.
+ Almost without modification, except for  Other than that 
+\end_layout
+
+\begin_layout Section
 Fixed-point ruminations
 \end_layout
 
@@ -30200,6 +30348,53 @@ paths
 \end_inset
 
  column shows exactly the same thing, but encoded as L,R paths.
+ It's got a vaguely suggestive relationship to the 
+\begin_inset Formula $2n+1$
+\end_inset
+
+ column but the 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+ relation breaks at n=13.
+ The 
+\begin_inset Formula $2n+1$
+\end_inset
+
+ column records bits as to whether or not 
+\begin_inset Formula $m_{p}<1/2$
+\end_inset
+
+, whereas the leading symbol of paths records whether or not 
+\begin_inset Formula $m_{p}<m_{1}$
+\end_inset
+
+.
+ So there's similarity, but not really, in the end.
+\end_layout
+
+\begin_layout Itemize
+Sorting is easy; the L,R notation tells us exactly when to swap.
+\end_layout
+
+\begin_layout Itemize
+If the path begins with an R, then 
+\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2<m_{p}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\beta/2<m_{p}/\beta+1/2$
+\end_inset
+
+ and so it is out-of-bounds, and canot contribute to 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section

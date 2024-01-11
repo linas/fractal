@@ -9,26 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double invar(double beta, double x)
-{
-	double midpnt = 0.5*beta;
-	double obn = 1.0;
-	double sum = 0.0;
-	double norm = 0.0;
-	for (int i=0; i<1000; i++)
-	{
-		if (x < midpnt) sum += obn;
-		norm += midpnt*obn;
-
-		if (0.5 < midpnt) midpnt -= 0.5;
-		midpnt *= beta;
-		obn /= beta;
-		if (obn < 1e-15) break;
-	}
-	return sum / norm;
-	return sum;
-}
-
 double line (double x)
 {
 	return x-0.5;
