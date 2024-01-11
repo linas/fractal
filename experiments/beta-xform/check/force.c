@@ -109,7 +109,8 @@ double blancmange(double x, int l, double w, double beta)
 	double wn = 1.0;
 	double sum = 0.0;
 	double tlp = 2*l+1;
-	for (int i=0; i<1000; i++)
+	// for (int i=0; i<1000; i++)
+	for (int i=0; i<1; i++)
 	{
 		sum += wn * saw(tlp * xn);
 		wn *= w;
@@ -356,13 +357,13 @@ int main(int argc, char* argv[])
 
 	// setup(beta);
 	blanc_setup(beta, ll, w);
-	printf("#\n# blanc beta=%g w=%g l=%d eig=%g\n", beta, w, ll, 2*w/beta);
+	printf("#\n# beta=%g NHIST=%d\n", beta, NHIST);
+	printf("# blanc w=%g l=%d eig=%g\n", w, ll, 2*w/beta);
 
 	normalize(beta);
 
-#define SHOW_NORMS
+// #define SHOW_NORMS
 #ifdef SHOW_NORMS
-	printf("#\n# beta=%g NHIST=%d\n#\n", beta, NHIST);
 	for (int i=0; i< nsteps; i++)
 	{
 		double lam = step(beta);
@@ -370,10 +371,8 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define SHOW_DENS
+#define SHOW_DENS
 #ifdef SHOW_DENS
-	printf("#\n# beta=%g\n#\n", beta);
-
 	for (int i=0; i< nsteps; i++)
 		step(beta);
 
