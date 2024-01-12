@@ -28948,9 +28948,10 @@ Well need an expression for
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}\left(f\circ T_{\beta}\right)\right]\left(y\right)=\frac{2}{\beta}f\left(y\right)\Theta\left(\frac{\beta}{2}-y\right)
-\]
+\begin{align*}
+\left[\mathcal{L}_{\beta}\left(f\circ T_{\beta}\right)\right]\left(y\right) & =\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{\beta}{2}-\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta}{2}-\left(\frac{y}{\beta}+\frac{1}{2}\right)\right)\right]\\
+ & =\frac{1}{\beta}f\left(y\right)\left[1+\Theta\left(\frac{\beta\left(\beta-1\right)}{2}-y\right)\right]
+\end{align*}
 
 \end_inset
 
@@ -28966,7 +28967,7 @@ For the special case where
 \begin_inset Formula $f\left(y\right)=f\left(y\right)\Theta\left(\frac{\beta}{2}-y\right)$
 \end_inset
 
-, and for these functions, 
+, and for these functions, xxx wrong
 \begin_inset Formula 
 \[
 \mathcal{L}_{\beta}\left(f\circ T_{\beta}\right)=\frac{2}{\beta}f
@@ -29007,6 +29008,12 @@ Applying the transfer operator to this gives
 \end_inset
 
 which is the desired result.
+\end_layout
+
+\begin_layout Standard
+XXX FIXME.
+ I'm having trouble replicating this numerically.
+ I don't understand why.
 \end_layout
 
 \begin_layout Section

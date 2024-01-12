@@ -90,32 +90,25 @@ double ell(double beta, double y)
 	double dhi = dense(xhi);
 
 	double ellie = dlo + dhi;
+ellie = dhi;
+ellie = dlo;
 	ellie /= beta;
 	return ellie;
 }
 
-// Something, anything in the kernel of ell.
-// ... and what might that be? ???
+// Something, anything in the kernel of the xfer function.
+// ... and what might that be? Not enitrely clear, yet.
 double saw(double x, double beta)
 {
 	x -= floor(x);  // mod 1
-#if 0
-	// fail
-	double m0 = 0.5*beta;
-	if (x < 0.5*m0) return x-0.25*m0;
-	return 0.75*m0-x;
-#endif
-#if 0
-	// fail
-	double m1 = 0.5*beta*(beta-1.0);
-	if (x < m1) return x-0.5*m1;
-	return 1.5*m1-x;
-#endif
+
 	// Seems to be in kernel, for beta=1.618034
 	double b2 = 0.5*(beta-1.0);
 	double a = 0.5*b2;
-	if (x < b2) return x-a;
-	if (beta*b2 < x) return a+0.5-x;
+
+	double c = b2;
+	if (x < c) return x-a;
+	if (0.5*beta-c < x) return a+0.5-x;
 	return 0.0;
 }
 
@@ -130,7 +123,9 @@ double blancmange(double x, int l, double w, double beta)
 	for (int i=0; i<1000; i++)
 	// for (int i=0; i<1; i++)
 	{
+if (1==i) {
 		sum += wn * saw(tlp * xn, beta);
+}
 		wn *= w;
 		if (0.5 < xn) xn -= 0.5;
 		xn *= beta;
@@ -340,6 +335,7 @@ double normalize(double beta)
 	for (int i=0; i<m0; i++) histo[i] = histn[i] / norm;
 
 	printf("# renorm, sum=%g norm = %g\n", sum * delta, norm);
+	fprintf(stderr, "Renorm -> sum=%g norm = %g\n", sum * delta, norm);
 	return norm;
 }
 
@@ -382,6 +378,7 @@ int main(int argc, char* argv[])
 	blanc_setup(beta, ll, w);
 	printf("#\n# beta=%g NHIST=%d\n", beta, NHIST);
 	printf("# blanc w=%g l=%d eig=%g\n", w, ll, 2*w/beta);
+	fprintf(stderr, "Beta=%g blanc w=%g l=%d eig=%g\n", beta, w, ll, 2*w/beta);
 
 	normalize(beta);
 
@@ -399,6 +396,7 @@ int main(int argc, char* argv[])
 	for (int i=0; i< nsteps; i++)
 		step(beta);
 
+	fprintf(stderr, "----- nstep=%d\n", nsteps);
 	for (int i=0; i< NCAP; i++)
 	{
 		capture(i);
