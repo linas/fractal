@@ -90,8 +90,6 @@ double ell(double beta, double y)
 	double dhi = dense(xhi);
 
 	double ellie = dlo + dhi;
-ellie = dhi;
-ellie = dlo;
 	ellie /= beta;
 	return ellie;
 }
@@ -123,9 +121,7 @@ double blancmange(double x, int l, double w, double beta)
 	for (int i=0; i<1000; i++)
 	// for (int i=0; i<1; i++)
 	{
-if (1==i) {
 		sum += wn * saw(tlp * xn, beta);
-}
 		wn *= w;
 		if (0.5 < xn) xn -= 0.5;
 		xn *= beta;
