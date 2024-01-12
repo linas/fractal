@@ -55,9 +55,9 @@ double invar(double beta, double x)
 // #define NHIST 27719
 // #define NHIST 27717
 // #define NHIST 28657 // (fibo 22)
-// #define NHIST 28658
+#define NHIST 28658
 // #define NHIST 196418 // (fib 26)
-#define NHIST 196419
+// #define NHIST 196419
 
 // #define NHIST 18561 // n=2 fib plus one
 // #define NHIST 25282    // n=3 fib plus one
@@ -94,11 +94,14 @@ double ell(double beta, double y)
 	return ellie;
 }
 
-double saw(double x)
+// Something, anything in the kernel of ell.
+// ... and what might that be? ???
+double saw(double x, double beta)
 {
 	x -= floor(x);  // mod 1
-	if (x < 0.5) return x-0.25;
-	return 0.75-x;
+	double m0 = 0.5*beta;
+	if (x < 0.5*m0) return x-0.25*m0;
+	return 0.75*m0-x;
 }
 
 double blancmange(double x, int l, double w, double beta)
@@ -112,7 +115,7 @@ double blancmange(double x, int l, double w, double beta)
 	// for (int i=0; i<1000; i++)
 	for (int i=0; i<1; i++)
 	{
-		sum += wn * saw(tlp * xn);
+		sum += wn * saw(tlp * xn, beta);
 		wn *= w;
 		xn *= beta;
 		if (wn < 1e-15) break;
@@ -306,6 +309,7 @@ double normalize(double beta)
 	// Remove constant
 	int m0 = enx(0.5*beta);
 	double delta = 1.0 / ((double) m0);
+
 	double sum = 0.0;
 	for (int i=0; i<m0; i++) sum += histn[i];
 	for (int i=0; i<m0; i++) histn[i] -= sum * delta;
