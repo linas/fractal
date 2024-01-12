@@ -99,9 +99,24 @@ double ell(double beta, double y)
 double saw(double x, double beta)
 {
 	x -= floor(x);  // mod 1
+#if 0
+	// fail
 	double m0 = 0.5*beta;
 	if (x < 0.5*m0) return x-0.25*m0;
 	return 0.75*m0-x;
+#endif
+#if 0
+	// fail
+	double m1 = 0.5*beta*(beta-1.0);
+	if (x < m1) return x-0.5*m1;
+	return 1.5*m1-x;
+#endif
+	// Seems to be in kernel, for beta=1.618034
+	double b2 = 0.5*(beta-1.0);
+	double a = 0.5*b2;
+	if (x < b2) return x-a;
+	if (beta*b2 < x) return a+0.5-x;
+	return 0.0;
 }
 
 double blancmange(double x, int l, double w, double beta)
@@ -112,11 +127,12 @@ double blancmange(double x, int l, double w, double beta)
 	double wn = 1.0;
 	double sum = 0.0;
 	double tlp = 2*l+1;
-	// for (int i=0; i<1000; i++)
-	for (int i=0; i<1; i++)
+	for (int i=0; i<1000; i++)
+	// for (int i=0; i<1; i++)
 	{
 		sum += wn * saw(tlp * xn, beta);
 		wn *= w;
+		if (0.5 < xn) xn -= 0.5;
 		xn *= beta;
 		if (wn < 1e-15) break;
 	}
@@ -318,6 +334,9 @@ double normalize(double beta)
 	double norm = 0.0;
 	for (int i=0; i<m0; i++) norm += fabs(histn[i]);
 	norm *= delta;
+
+	// Hack to avoid divide by zero.
+	if (norm < 0.001) norm = 1.0;
 	for (int i=0; i<m0; i++) histo[i] = histn[i] / norm;
 
 	printf("# renorm, sum=%g norm = %g\n", sum * delta, norm);
