@@ -28736,331 +28736,7 @@ Based on this observation, it seems that a better numbering scheme is to
 \end_layout
 
 \begin_layout Section
-Fractal Eigenfunctions
-\end_layout
-
-\begin_layout Standard
-The Bernoulli operator has the Blancmange curve as an eigenfunction; this
- is part of a class of fractal eigenfunctions that form the continuous spectrum
- of the transfer operator.
- Linear combinations of these can be resummed to define a continuous spectrum
- of smooth 
-\begin_inset Formula $c^{\infty}$
-\end_inset
-
- eigenfunctions, smooth everywhere except at the endpoints, where they diverge.
- This section reviews that construction, and applies it to the 
-\begin_inset Formula $\beta$
-\end_inset
-
--function.
- The resulting coherent states are not eigenstates; the obstruction is the
- usual one.
-\end_layout
-
-\begin_layout Subsection
-Bernoulli transform
-\end_layout
-
-\begin_layout Standard
-The Bernoulli transform is the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform, at 
-\begin_inset Formula $\beta=2$
-\end_inset
-
-.
- The transfer operator acts as
-\begin_inset Formula 
-\[
-\left[\mathcal{L}f\right]\left(x\right)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]
-\]
-
-\end_inset
-
-The shift is 
-\begin_inset Formula $\tau\left(x\right)=2x\mod1$
-\end_inset
-
-.
- A family fractal eigenfunctions are the coherent functions of any master
- wavelet 
-\begin_inset Formula $s\in\ker\mathcal{L}$
-\end_inset
-
-.
- Examples include 
-\begin_inset Formula $s\left(x\right)=\sin2\pi x$
-\end_inset
-
- and sawtooth function 
-\begin_inset Formula 
-\[
-s\left(x\right)=\begin{cases}
-x-\frac{1}{4} & \mbox{for }x<\frac{1}{2}\\
-\frac{3}{4}-x & \mbox{for }x\ge\frac{1}{2}\\
-s\left(x\mod1\right) & \mbox{for }x\notin\left[0,1\right]
-\end{cases}
-\]
-
-\end_inset
-
-It is easy to verify that 
-\begin_inset Formula $\mathcal{L}s=0$
-\end_inset
-
- for either of these two examples.
- Any function 
-\begin_inset Formula $s$
-\end_inset
-
- that is odd about 1/2 and periodic with period one will be in the kernel
- 
-\begin_inset Formula $s\in\ker\mathcal{L}$
-\end_inset
-
- and so can be used to build the eigenfunctions.
-\end_layout
-
-\begin_layout Standard
-The family is the coherent-wave sum
-\begin_inset Formula 
-\[
-\psi_{w,l}\left(x\right)=\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)\tau^{n}\left(x\right)\right)
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $0<w<1$
-\end_inset
-
- is any real number (or, more generally, any complex number within the unit
- disk) and 
-\begin_inset Formula $l\in\mathbb{N}$
-\end_inset
-
- is any non-negative integer.
- For 
-\begin_inset Formula $s$
-\end_inset
-
- the sawtooth, and 
-\begin_inset Formula $l=0$
-\end_inset
-
- this is just the Blancmange curve.
-\end_layout
-
-\begin_layout Standard
-It is not hard to verify that 
-\begin_inset Formula $\mathcal{L}\psi_{w,l}=w\psi_{w,l}$
-\end_inset
-
-.
- The proof is straight-forward: 
-\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)=f$
-\end_inset
-
- since the transform and the transfer operator are adjoint to one-another.
- Then, since 
-\begin_inset Formula $\mathcal{L}s=0$
-\end_inset
-
-, the coherent-wave sum is just itself, again.
- 
-\end_layout
-
-\begin_layout Subsection
-Beta Transform
-\end_layout
-
-\begin_layout Standard
-The previous construction will build coherent states for the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transform, but these are not eigenfunctions.
- The obstruction is that 
-\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)\ne f$
-\end_inset
-
- and so the proof fails to go through.
- This is reviewed below.
-\end_layout
-
-\begin_layout Standard
-The transfer operator is given in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:xfer oper"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, copied below.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)
-\]
-
-\end_inset
-
-For the case where 
-\begin_inset Formula $f\left(y\right)$
-\end_inset
-
- vanishes when 
-\begin_inset Formula $y>\beta/2$
-\end_inset
-
-, as would be hold for an eigenfunction, then it is convenient to use the
- identity 
-\begin_inset Formula $f\left(y\right)=f\left(y\right)\Theta\left(m_{0}-y\right)$
-\end_inset
-
- with 
-\begin_inset Formula $m_{0}=\beta/2$
-\end_inset
-
- and 
-\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2$
-\end_inset
-
- to write 
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)\right]
-\]
-
-\end_inset
-
-The shift is 
-\begin_inset Formula $\tau=T_{\beta}$
-\end_inset
-
- as defined in eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:downshift"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, copied below
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-T_{\beta}(x)=\begin{cases}
-\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
-\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
-\end{cases}
-\]
-
-\end_inset
-
-The expression for 
-\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)$
-\end_inset
-
-, for any 
-\begin_inset Formula $f\left(y\right)=f\left(y\right)\Theta\left(m_{0}-y\right)$
-\end_inset
-
- is obtained by plugging through:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\left(f\circ T_{\beta}\right)\right]\left(y\right) & =\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{\beta}{2}-\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta}{2}-\left(\frac{y}{\beta}+\frac{1}{2}\right)\right)\right]\\
- & =\frac{1}{\beta}f\left(y\right)\left[1+\Theta\left(m_{1}-y\right)\right]
-\end{align*}
-
-\end_inset
-
-The step function means the transfer function is unable to undo the action
- of the shift.
- For 
-\begin_inset Formula $\beta=2$
-\end_inset
-
-, the iterate is 
-\begin_inset Formula $m_{1}=1$
-\end_inset
-
- and the Bernoulli result 
-\begin_inset Formula $\mathcal{L}_{2}\left(f\circ T_{2}\right)=f$
-\end_inset
-
- is recovered.
-\end_layout
-
-\begin_layout Standard
-One can still construct the coherent states, as before.
- They just won't be eigenstates.
- Given any 
-\begin_inset Formula $v\in\ker\mathcal{L}_{\beta}$
-\end_inset
-
-, write the sawtooth 
-\begin_inset Formula $s\left(x\right)=v\left(x\mod1\right)$
-\end_inset
-
- so as to be explicitly periodic.
- Then define
-\begin_inset Formula 
-\[
-\psi_{w,l}\left(x\right)=\Theta\left(m_{0}-x\right)\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(x\right)\right)
-\]
-
-\end_inset
-
-Applying the transfer operator to this gives
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{\beta}\psi_{w,l}\right]\left(y\right) & =\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)\right]\left(y\right)+\sum_{n=1}^{\infty}w^{n}\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)T_{\beta}^{n}\right]\left(y\right)\\
- & =\left[\mathcal{L}_{\beta}v\right]\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\left[1+\Theta\left(m_{1}-\left(2l+1\right)T_{\beta}^{n}\left(y\right)\mod1\right)\right]\\
- & =\frac{w}{\beta}\psi_{w,l}\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}r\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)
-\end{align*}
-
-\end_inset
-
-where 
-\begin_inset Formula $r\left(x\right)=s\left(x\right)\Theta\left(m_{1}-x\mod1\right)$
-\end_inset
-
- is the restriction sawtooth.
- For 
-\begin_inset Formula $\beta=2$
-\end_inset
-
-, one has 
-\begin_inset Formula $m_{1}=1$
-\end_inset
-
- and this second term can be merged with the first, eliminating the obstruction
- to forming the eigenfunctions.
- 
-\end_layout
-
-\begin_layout Section
-Fixed-point ruminations
+Visitation Tree
 \end_layout
 
 \begin_layout Standard
@@ -29068,7 +28744,7 @@ The above commentary about stability and instability of functions under
  iteration suggests that a slightly more comprehensive viewpoint should
  be adopted.
  There are several distinct problems.
- First, how does the iterated transfre operator 
+ First, how does the iterated transfer operator 
 \begin_inset Formula $\mathcal{L}^{n}$
 \end_inset
 
@@ -29079,8 +28755,10 @@ The above commentary about stability and instability of functions under
 \end_layout
 
 \begin_layout Standard
-This is retracing some old steps; it is a stream-of-consciosness meander.
- Concept salad.
+This is retracing some old steps; it starts as a stream-of-consciosness
+ meander through a concept salad, and concludes with a specific mapping
+ of mid-pooints to a tree, the visitation tree.
+ It appears that the visitation tree is a potentially useful tool.
 \end_layout
 
 \begin_layout Subsection
@@ -30555,6 +30233,363 @@ If the path begins with an R, then
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+Fractal Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+The Bernoulli operator has the Blancmange curve as an eigenfunction; this
+ is part of a class of fractal eigenfunctions that form the continuous spectrum
+ of the transfer operator.
+ Linear combinations of these can be resummed to define a continuous spectrum
+ of smooth 
+\begin_inset Formula $c^{\infty}$
+\end_inset
+
+ eigenfunctions, smooth everywhere except at the endpoints, where they diverge.
+ This section reviews that construction, and applies it to the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-function.
+ The resulting coherent states are not eigenstates; the obstruction is the
+ usual one.
+\end_layout
+
+\begin_layout Subsection
+Bernoulli transform
+\end_layout
+
+\begin_layout Standard
+The Bernoulli transform is the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, at 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+ The transfer operator acts as
+\begin_inset Formula 
+\[
+\left[\mathcal{L}f\right]\left(x\right)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]
+\]
+
+\end_inset
+
+The shift is 
+\begin_inset Formula $\tau\left(x\right)=2x\mod1$
+\end_inset
+
+.
+ A family fractal eigenfunctions are the coherent functions of any master
+ wavelet 
+\begin_inset Formula $s\in\ker\mathcal{L}$
+\end_inset
+
+.
+ Examples include 
+\begin_inset Formula $s\left(x\right)=\sin2\pi x$
+\end_inset
+
+ and sawtooth function 
+\begin_inset Formula 
+\[
+s\left(x\right)=\begin{cases}
+x-\frac{1}{4} & \mbox{for }x<\frac{1}{2}\\
+\frac{3}{4}-x & \mbox{for }x\ge\frac{1}{2}\\
+s\left(x\mod1\right) & \mbox{for }x\notin\left[0,1\right]
+\end{cases}
+\]
+
+\end_inset
+
+It is easy to verify that 
+\begin_inset Formula $\mathcal{L}s=0$
+\end_inset
+
+ for either of these two examples.
+ Any function 
+\begin_inset Formula $s$
+\end_inset
+
+ that is odd about 1/2 and periodic with period one will be in the kernel
+ 
+\begin_inset Formula $s\in\ker\mathcal{L}$
+\end_inset
+
+ and so can be used to build the eigenfunctions.
+\end_layout
+
+\begin_layout Standard
+The family is the coherent-wave sum
+\begin_inset Formula 
+\[
+\psi_{w,l}\left(x\right)=\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)\tau^{n}\left(x\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $0<w<1$
+\end_inset
+
+ is any real number (or, more generally, any complex number within the unit
+ disk) and 
+\begin_inset Formula $l\in\mathbb{N}$
+\end_inset
+
+ is any non-negative integer.
+ For 
+\begin_inset Formula $s$
+\end_inset
+
+ the sawtooth, and 
+\begin_inset Formula $l=0$
+\end_inset
+
+ this is just the Blancmange curve.
+\end_layout
+
+\begin_layout Standard
+It is not hard to verify that 
+\begin_inset Formula $\mathcal{L}\psi_{w,l}=w\psi_{w,l}$
+\end_inset
+
+.
+ The proof is straight-forward: 
+\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)=f$
+\end_inset
+
+ since the transform and the transfer operator are adjoint to one-another.
+ Then, since 
+\begin_inset Formula $\mathcal{L}s=0$
+\end_inset
+
+, the coherent-wave sum is just itself, again.
+ 
+\end_layout
+
+\begin_layout Subsection
+Beta Transform
+\end_layout
+
+\begin_layout Standard
+The previous construction will build coherent states for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform, but these are not eigenfunctions.
+ The obstruction is that 
+\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)\ne f$
+\end_inset
+
+ and so the proof fails to go through.
+ This is reviewed below.
+\end_layout
+
+\begin_layout Standard
+The transfer operator is given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xfer oper"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, copied below.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)
+\]
+
+\end_inset
+
+For the case where 
+\begin_inset Formula $f\left(y\right)$
+\end_inset
+
+ vanishes when 
+\begin_inset Formula $y>\beta/2$
+\end_inset
+
+, as would be hold for an eigenfunction, then it is convenient to use the
+ identity 
+\begin_inset Formula $f\left(y\right)=f\left(y\right)\Theta\left(m_{0}-y\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2$
+\end_inset
+
+ to write 
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)\right]
+\]
+
+\end_inset
+
+The shift is 
+\begin_inset Formula $\tau=T_{\beta}$
+\end_inset
+
+ as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, copied below
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+The expression for 
+\begin_inset Formula $\mathcal{L}\left(f\circ\tau\right)$
+\end_inset
+
+, for any 
+\begin_inset Formula $f\left(y\right)=f\left(y\right)\Theta\left(m_{0}-y\right)$
+\end_inset
+
+ is obtained by plugging through:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\left(f\circ T_{\beta}\right)\right]\left(y\right) & =\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(\frac{\beta}{2}-\frac{y}{\beta}\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(\frac{\beta}{2}-\left(\frac{y}{\beta}+\frac{1}{2}\right)\right)\right]\\
+ & =\frac{1}{\beta}f\left(y\right)\left[1+\Theta\left(m_{1}-y\right)\right]
+\end{align*}
+
+\end_inset
+
+The step function means the transfer function is unable to undo the action
+ of the shift.
+ For 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, the iterate is 
+\begin_inset Formula $m_{1}=1$
+\end_inset
+
+ and the Bernoulli result 
+\begin_inset Formula $\mathcal{L}_{2}\left(f\circ T_{2}\right)=f$
+\end_inset
+
+ is recovered.
+\end_layout
+
+\begin_layout Standard
+One can still construct the coherent states, as before.
+ They just won't be eigenstates.
+ Given any 
+\begin_inset Formula $v\in\ker\mathcal{L}_{\beta}$
+\end_inset
+
+, write the sawtooth 
+\begin_inset Formula $s\left(x\right)=v\left(x\mod1\right)$
+\end_inset
+
+ so as to be explicitly periodic.
+ Then define
+\begin_inset Formula 
+\[
+\psi_{w,l}\left(x\right)=\Theta\left(m_{0}-x\right)\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(x\right)\right)
+\]
+
+\end_inset
+
+Applying the transfer operator to this gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left[\mathcal{L}_{\beta}\psi_{w,l}\right]\left(y\right) & =\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)\right]\left(y\right)+\sum_{n=1}^{\infty}w^{n}\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)T_{\beta}^{n}\right]\left(y\right)\\
+ & =\left[\mathcal{L}_{\beta}v\right]\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\left[1+\Theta\left(m_{1}-\left(2l+1\right)T_{\beta}^{n}\left(y\right)\mod1\right)\right]\\
+ & =\frac{w}{\beta}\psi_{w,l}\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}r\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $r\left(x\right)=s\left(x\right)\Theta\left(m_{1}-x\mod1\right)$
+\end_inset
+
+ is the restriction sawtooth.
+ For 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+, one has 
+\begin_inset Formula $m_{1}=1$
+\end_inset
+
+ and this second term can be merged with the first, eliminating the obstruction
+ to forming the eigenfunctions.
+ 
+\end_layout
+
+\begin_layout Section
+Fredholm Alternatives
+\end_layout
+
+\begin_layout Standard
+Despite this failure, there do seem to be many cases of 
+\begin_inset Quotes eld
+\end_inset
+
+almost-eigenfunctions
+\begin_inset Quotes erd
+\end_inset
+
+, and so the question is how to describe these.
+ These are functions 
+\begin_inset Formula $f$
+\end_inset
+
+ for which there is some 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left|\lambda f\left(x\right)-\left[\mathcal{L}f\right]\left(x\right)\right|^{p}<\varepsilon
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
