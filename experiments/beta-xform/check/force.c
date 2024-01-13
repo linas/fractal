@@ -392,10 +392,13 @@ int main(int argc, char* argv[])
 	for (int i=0; i< nsteps; i++)
 		step(beta);
 
+	// double clam[NCAP];
+
 	fprintf(stderr, "----- nstep=%d\n", nsteps);
 	for (int i=0; i< NCAP; i++)
 	{
 		capture(i);
+		// clam[i] =
 		step(beta);
 	}
 
@@ -404,9 +407,12 @@ int main(int argc, char* argv[])
 		double x = (((double) j) + 0.5) / ((double) NHIST);
 		printf("%d	%g", j, x);
 
-		for (int i=0; i< NCAP; i++)
+		for (int i=0; i< NCAP-1; i++)
 		{
-			printf("	%g", capt[i][j]);
+			// printf("	%g", capt[i][j]);
+			// printf("	%g", capt[i+1][j] - capt[i][j]);
+			if (1.0e-2 < fabs(capt[i][j]))
+			printf("	%g", (capt[i+1][j] - capt[i][j]) / capt[i][j]);
 		}
 		printf("\n");
 	}
@@ -414,6 +420,7 @@ int main(int argc, char* argv[])
 
 // #define CAPTURE_DENS
 #ifdef CAPTURE_DENS
+	// Record only the almost-eigenfunctions
 	int ncap = 0;
 	for (int i=0; i< nsteps; i++)
 	{
