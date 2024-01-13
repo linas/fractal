@@ -30556,7 +30556,104 @@ where
 
  and this second term can be merged with the first, eliminating the obstruction
  to forming the eigenfunctions.
- 
+\end_layout
+
+\begin_layout Subsection
+Wait, there's more ...
+\end_layout
+
+\begin_layout Standard
+During numerical exploration, an odd identity was found, suggesting something
+ incomplete with the above description.
+ The identity is described here.
+\end_layout
+
+\begin_layout Standard
+Construct 
+\begin_inset Formula $\psi_{w,l}\left(x\right)$
+\end_inset
+
+ as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent state"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, for 
+\begin_inset Formula $l=0,\beta=\varphi,w=0.7$
+\end_inset
+
+.
+ For the 
+\begin_inset Quotes eld
+\end_inset
+
+function in the kernel
+\begin_inset Quotes erd
+\end_inset
+
+, define 
+\begin_inset Formula 
+\begin{equation}
+v\left(x\right)=\begin{cases}
+x-a & \mbox{for }0\le x<a\\
+0 & \mbox{for }a<x<\frac{\beta}{2}-a\\
+a+\frac{1}{2}-x & \mbox{for }\frac{\beta}{2}-a\le x<\frac{\beta}{2}\\
+0 & \mbox{for }\frac{\beta}{2}<x\le1
+\end{cases}\label{eq:kernel example}
+\end{equation}
+
+\end_inset
+
+ In the above, 
+\begin_inset Formula $a=\left(\beta-1\right)/4$
+\end_inset
+
+.
+ Then there is a surprising result:
+\begin_inset Formula 
+\[
+\mathcal{L}\psi=\lambda\psi\times\begin{cases}
+1.226 & \mbox{for }0\le x<\frac{1}{2}\\
+0.613 & \mbox{for }\frac{1}{2}\le x\le\frac{\beta}{2}
+\end{cases}
+\]
+
+\end_inset
+
+This result is independent of 
+\begin_inset Formula $w$
+\end_inset
+
+ in the range of 
+\begin_inset Formula $0.6\lesssim w\le1$
+\end_inset
+
+.
+ For smaller 
+\begin_inset Formula $w$
+\end_inset
+
+, it does drift away somewhat, but maintains the two-to-one ratio.
+ The constant 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ does depend on 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ The numbers are accurate to less than the last shown digit.
+ In particular, it is very clearly 
+\emph on
+not
+\emph default
+ 0.618!
 \end_layout
 
 \begin_layout Section
@@ -30680,28 +30777,17 @@ noprefix "false"
 \end_inset
 
  and 
-\begin_inset Formula $v\left(x\right)=x-a$
+\begin_inset Formula $v\left(x\right)$
 \end_inset
 
- for 
-\begin_inset Formula $x<2a$
-\end_inset
+ as described in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:kernel example"
+plural "false"
+caps "false"
+noprefix "false"
 
- and 
-\begin_inset Formula $v\left(x\right)=0.5+a-x$
-\end_inset
-
- for 
-\begin_inset Formula $\beta/2-2a<x$
-\end_inset
-
- and 
-\begin_inset Formula $v\left(x\right)=0$
-\end_inset
-
- otherwise.
- Here, 
-\begin_inset Formula $a=\left(\beta-1\right)/4$
 \end_inset
 
 .
@@ -30713,7 +30799,7 @@ almost eigenfunction
 \begin_inset Quotes erd
 \end_inset
 
-, its OK, but not a very good.
+; its OK, but not a very good.
  However, 
 \begin_inset Formula $\mathcal{L}^{9}\psi$
 \end_inset

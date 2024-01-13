@@ -29,7 +29,6 @@ double invar(double beta, double x)
 		if (obn < 1e-15) break;
 	}
 	return sum / norm;
-	return sum;
 }
 
 /* Some magic numbers!
@@ -127,6 +126,11 @@ double blancmange(double x, int l, double w, double beta)
 		xn *= beta;
 		if (wn < 1e-15) break;
 	}
+
+	// Wow. This almost works ...
+	// sum *= invar(beta,x);
+	// sum *= 2.0 + invar(beta,x);
+
 	return sum;
 }
 
@@ -406,13 +410,14 @@ int main(int argc, char* argv[])
 	{
 		double x = (((double) j) + 0.5) / ((double) NHIST);
 		printf("%d	%g", j, x);
+		// printf("	%g", invar(beta, x));
 
 		for (int i=0; i< NCAP-1; i++)
 		{
-			// printf("	%g", capt[i][j]);
+			printf("	%g", capt[i][j]);
 			// printf("	%g", capt[i+1][j] - capt[i][j]);
-			if (1.0e-2 < fabs(capt[i][j]))
-			printf("	%g", (capt[i+1][j] - capt[i][j]) / capt[i][j]);
+			//if (1.0e-2 < fabs(capt[i][j]))
+			// printf("	%g", (capt[i+1][j] - capt[i][j]) / capt[i][j]);
 		}
 		printf("\n");
 	}

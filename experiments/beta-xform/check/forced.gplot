@@ -5,16 +5,12 @@ set out 'forced.png'
 
 # set xrange [0:1]
 # set yrange [-3:3]
-# set yrange [-7:2]
-set yrange [-0.5:0.5]
+set yrange [-7:2]
+# set yrange [-0.5:0.5]
 
 set title "stuuff"
 
-# Hmm (/ (+ 0.387 0.225) 0.387) is approx 1.618
-plot "forced.dat" using 2:3 with lines title "0", \
-     "forced.dat" using 2:(0.225) with lines title "0.225", \
-     "forced.dat" using 2:(-0.387) with lines title "-0.387", \
-
+#plot "forced.dat" using 2:3 with lines title "0", \
 #     "forced.dat" using 2:4 with lines title "1", \
 
 #     "forced.dat" using 2:5 with lines title "2", \
@@ -24,11 +20,21 @@ plot "forced.dat" using 2:3 with lines title "0", \
 #     "forced.dat" using 2:8 with lines title "5"
 # ----------------------------------------------------------------------
 
-# Hmm (/ (+ 0.387 0.225) 0.387) is approx 1.618
+#set yrange [-0.5:0.5]
+## Hmm (/ (+ 0.387 0.225) 0.387) is approx 1.618
 #plot "forced.dat" using 2:3 with lines title "0", \
 #     "forced.dat" using 2:(0.225) with lines title "0.225", \
-#     "forced.dat" using 2:(-0.387) with lines title "-0.387", \
+#     "forced.dat" using 2:(-0.389) with lines title "-0.389", \
 
+#plot "forced.dat" using 2:3 with lines title "0", \
+#     "forced.dat" using 2:(2*0.6135 - 1.0) with lines title "0.226", \
+#     "forced.dat" using 2:(0.6135 - 1.0) with lines title "-0.387", \
+
+set yrange [-0.2:0.2]
+plot "forced.dat" using 2:($4 - 1.226*$3) with lines title "0", \
+     "forced.dat" using 2:($4 - 0.613*$3) with lines title "1", \
+
+#
 # ----------------------------------------------------------------------
 #
 #beta = 1.83928675521416
