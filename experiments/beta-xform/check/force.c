@@ -418,12 +418,9 @@ int main(int argc, char* argv[])
 		printf("%d	%g", j, x);
 		// printf("	%g", invar(beta, x));
 
-		for (int i=0; i< NCAP-1; i++)
+		for (int i=0; i< NCAP; i++)
 		{
 			printf("	%g", capt[i][j]);
-			// printf("	%g", capt[i+1][j] - capt[i][j]);
-			//if (1.0e-2 < fabs(capt[i][j]))
-			// printf("	%g", (capt[i+1][j] - capt[i][j]) / capt[i][j]);
 		}
 		printf("\n");
 	}
