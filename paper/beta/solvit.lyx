@@ -29358,10 +29358,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -30536,7 +30532,8 @@ Applying the transfer operator to this gives
 \begin{align*}
 \left[\mathcal{L}_{\beta}\psi_{w,l}\right]\left(y\right) & =\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)\right]\left(y\right)+\sum_{n=1}^{\infty}w^{n}\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)T_{\beta}^{n}\right]\left(y\right)\\
  & =\left[\mathcal{L}_{\beta}v\right]\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\left[1+\Theta\left(m_{1}-\left(2l+1\right)T_{\beta}^{n}\left(y\right)\mod1\right)\right]\\
- & =\frac{w}{\beta}\psi_{w,l}\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}r\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)
+ & =\frac{w}{\beta}\psi_{w,l}\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}r\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\\
+ & =\frac{w}{\beta}\psi_{w,l}\left(y\right)+\frac{w}{\beta}\phi_{w,l}\left(y\right)
 \end{align*}
 
 \end_inset
@@ -30656,17 +30653,25 @@ Wait, there's more ...
 \end_layout
 
 \begin_layout Standard
-During numerical exploration, some odd identities were found, suggesting
- an incomplete understanding of the above coherent-wave construction.
- The identities are described here.
+Numerical exploration reveals some interesting identities.
+ In short, the coherent states are 
+\begin_inset Quotes eld
+\end_inset
+
+almost
+\begin_inset Quotes erd
+\end_inset
+
+ eigenstates, in a certain sense.
+ Details below.
 \end_layout
 
 \begin_layout Standard
-Construct 
+Define the coherent state 
 \begin_inset Formula $\psi_{w,l}\left(x\right)$
 \end_inset
 
- as defined in eqn 
+ as in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:coherent state"
@@ -30676,111 +30681,92 @@ noprefix "false"
 
 \end_inset
 
-, for 
-\begin_inset Formula $l=0,\beta=\varphi,w=0.7$
+, and likewise 
+\begin_inset Formula $\phi_{w,l}\left(x\right)$
 \end_inset
 
-, using eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:kernel example"
-plural "false"
-caps "false"
-noprefix "false"
-
+ as the remainder.
+ Then, for 
+\begin_inset Formula $\beta=\varphi$
 \end_inset
 
- to form the kernel.
- Then there is a surprising result:
-\begin_inset Formula 
-\[
-\mathcal{L}\psi=\lambda\psi\times\begin{cases}
-1.226 & \mbox{for }0\le x<\frac{1}{2}\\
-0.613 & \mbox{for }\frac{1}{2}\le x\le\frac{\beta}{2}
-\end{cases}
-\]
-
+ and any 
+\begin_inset Formula $0<w<1$
 \end_inset
 
-This result is independent of 
-\begin_inset Formula $w$
+, it appears that, for 
+\begin_inset Formula $x<1/2$
 \end_inset
 
- in the range of 
-\begin_inset Formula $0.6\lesssim w\le1$
+, that 
+\begin_inset Formula $\phi_{w,l}\left(x\right)=\psi_{w,l}\left(x\right)$
 \end_inset
 
 .
- For smaller 
-\begin_inset Formula $w$
+ That is, for 
+\begin_inset Formula $x<1/2$
 \end_inset
 
-, it does drift away somewhat, but maintains the two-to-one ratio.
- The constant 
-\begin_inset Formula $\lambda$
+, the coherent state 
+\begin_inset Formula $\psi_{w,l}\left(x\right)$
 \end_inset
 
- does depend on 
-\begin_inset Formula $w$
+ 
+\begin_inset Quotes eld
+\end_inset
+
+is
+\begin_inset Quotes erd
+\end_inset
+
+ an eigenstate, with the expected eigenvalue.
+\end_layout
+
+\begin_layout Standard
+The relation 
+\begin_inset Formula $\phi_{w,l}\left(x\right)=\psi_{w,l}\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $x<1/2$
+\end_inset
+
+ holds for any 
+\begin_inset Formula $l$
+\end_inset
+
+ and any kernel function.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $1/2<x$
+\end_inset
+
+, the remainder 
+\begin_inset Formula $\phi_{w,l}\left(x\right)$
+\end_inset
+
+ reproduces the kernel function in a periodic fashion.
+ For 
+\begin_inset Formula $l=0$
+\end_inset
+
+, it vanishes.
+ For higher 
+\begin_inset Formula $l$
+\end_inset
+
+, it reproduces the sawtooth periodically, as a linear function of 
+\begin_inset Formula $\alpha l$
+\end_inset
+
+, for some constant  
+\begin_inset Formula $\alpha<1$
 \end_inset
 
 .
- The numbers are accurate to less than the last shown digit.
- In particular, it is very clearly 
-\emph on
-not
-\emph default
- 0.618!
-\end_layout
-
-\begin_layout Standard
-Iterating one more time gives this:
-\begin_inset Formula 
-\[
-\mathcal{L}^{2}\psi=\lambda\,\begin{cases}
-0.84\,\mathcal{L}\psi+0.9-3.5x & \mbox{for }0\le x<\frac{1}{2}\\
-1.125\,\mathcal{L}\psi & \mbox{for }\frac{1}{2}\le x\le\frac{\beta}{2}
-\end{cases}
-\]
-
-\end_inset
-
-This depends on 
-\begin_inset Formula $w$
-\end_inset
-
- somewhat; values shown are for 
-\begin_inset Formula $w=0.7$
-\end_inset
-
- with other 
-\begin_inset Formula $w$
-\end_inset
-
-'s changing them by about 10%.
- However, the overall structure is very clean.
- The lines are nice and straight.
-\end_layout
-
-\begin_layout Standard
-The behavior is generic.
- Changing the kernel function to the one generated by 
-\begin_inset Formula $\left(x-\left(\beta-1\right)/4\right)^{2}$
-\end_inset
-
- gives
-\begin_inset Formula 
-\[
-\mathcal{L}\psi=\lambda\,\begin{cases}
-1.24\psi+0.210 & \mbox{for }0\le x<\frac{1}{2}\\
-0.62\psi+0.105 & \mbox{for }\frac{1}{2}\le x\le\frac{\beta}{2}
-\end{cases}
-\]
-
-\end_inset
-
-The multiplicative factor close to the earlier one, and the terms are in
- a two-to-one ratio, as before.
+ 
 \end_layout
 
 \begin_layout Standard

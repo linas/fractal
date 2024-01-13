@@ -11,6 +11,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 double invar(double beta, double x)
 {
@@ -99,8 +100,8 @@ double kerg(double x, double beta)
 {
 	double a = 0.25*(beta-1.0);
 	double m = 11.481425;  // Overall scale factor, doesn't matter.
-	// return m*(x-a);
-	return m*(x-a)*(x-a);
+	return m*(x-a);
+	// return m*(x-a)*(x-a);
 }
 
 // This function is in the kernel of the xfer function, for
@@ -321,7 +322,7 @@ void setup(double beta)
 #endif
 }
 
-double normalize(double beta)
+double normalize(double beta, bool skip)
 {
 	// Remove constant
 	int m0 = enx(0.5*beta);
@@ -338,7 +339,10 @@ double normalize(double beta)
 
 	// Hack to avoid divide by zero.
 	if (norm < 0.001) norm = 1.0;
-	for (int i=0; i<m0; i++) histo[i] = histn[i] / norm;
+	if (skip)
+		for (int i=0; i<m0; i++) histo[i] = histn[i];
+	else
+		for (int i=0; i<m0; i++) histo[i] = histn[i] / norm;
 
 	printf("# renorm, sum=%g norm = %g\n", sum * delta, norm);
 	fprintf(stderr, "Renorm -> sum=%g norm = %g\n", sum * delta, norm);
@@ -356,7 +360,8 @@ double step(double beta)
 		histn[i] = ell(beta, x);
 	}
 
-	return normalize(beta);
+	// return normalize(beta, false);
+	return normalize(beta, true);
 }
 
 #define NCAP 10
@@ -386,7 +391,7 @@ int main(int argc, char* argv[])
 	printf("# blanc w=%g l=%d eig=%g\n", w, ll, 2*w/beta);
 	fprintf(stderr, "Beta=%g blanc w=%g l=%d eig=%g\n", beta, w, ll, 2*w/beta);
 
-	normalize(beta);
+	normalize(beta, false);
 
 // #define SHOW_NORMS
 #ifdef SHOW_NORMS
