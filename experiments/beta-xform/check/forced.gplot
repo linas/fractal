@@ -1,16 +1,16 @@
 
 set term png size 1024,768
 # set term png size 640, 480
-set out 'forced.png'
+set out 'forced-almost.png'
 
 # set xrange [0:1]
 # set yrange [-3:3]
-set yrange [-8:3]
+set yrange [-7:2]
 
-set title "stuff"
+set title "Almost-Eigenfunction"
 
-plot "forced.dat" using 2:3 with lines title "0", \
-     "forced.dat" using 2:4 with lines title "1", \
+plot "forced.dat" using 2:3 with lines title "", \
+     "forced.dat" using 2:4 with lines title "", \
 
 #     "forced.dat" using 2:5 with lines title "2", \
 #     "forced.dat" using 2:6 with lines title "3", \
@@ -134,5 +134,18 @@ plot "forced.dat" using 2:3 with lines title "0", \
 #     "forced.dat" using 2:((21/(2*phi))*(phi*$2 - 0.5)) with lines title "fat", \
 #     "forced.dat" using 2:((21/(2*phi))*($2 - 0.5)) with lines title "fatso"
 
-#####
+# ----------------------------------------------------------------------
+############################################################
+# Image in the diary
 
+set term eps color enhanced fontscale 0.58
+set out 'forced-almost.eps'
+set yrange [-7:2]
+
+set title "Almost-Eigenfunction"
+
+plot "forced.dat" using 2:3 with lines title "", \
+     "forced.dat" using 2:4 with lines title ""
+
+# ----------------------------------------------------------------------
+#####

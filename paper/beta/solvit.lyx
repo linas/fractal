@@ -30522,9 +30522,9 @@ One can still construct the coherent states, as before.
  so as to be explicitly periodic.
  Then define
 \begin_inset Formula 
-\[
-\psi_{w,l}\left(x\right)=\Theta\left(m_{0}-x\right)\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(x\right)\right)
-\]
+\begin{equation}
+\psi_{w,l}\left(x\right)=\Theta\left(m_{0}-x\right)\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(x\right)\right)\label{eq:coherent state}
+\end{equation}
 
 \end_inset
 
@@ -30560,20 +30560,28 @@ where
 \end_layout
 
 \begin_layout Section
-Fredholm Alternatives
+Almost-resonances
 \end_layout
 
 \begin_layout Standard
-Despite this failure, there do seem to be many cases of 
-\begin_inset Quotes eld
+Numerical exploration of the coherent states constructed in the previous
+ setion reveals a number of almost-eigenfunctions.
+ One is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Almost-Resonance"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-almost-eigenfunctions
-\begin_inset Quotes erd
+.
+ Selecting some 
+\begin_inset Formula $\varepsilon>0$
 \end_inset
 
-, and so the question is how to describe these.
- These are functions 
+, these are (normalized) functions 
 \begin_inset Formula $f$
 \end_inset
 
@@ -30584,8 +30592,161 @@ almost-eigenfunctions
  
 \begin_inset Formula 
 \[
-\int_{0}^{1}\left|\lambda f\left(x\right)-\left[\mathcal{L}f\right]\left(x\right)\right|^{p}<\varepsilon
+\int_{0}^{1}\left|\lambda f\left(x\right)-\left[\mathcal{L}f\right]\left(x\right)\right|^{p}dx<\varepsilon
 \]
+
+\end_inset
+
+(after normalizing 
+\begin_inset Formula $\int_{0}^{1}\left|f\left(x\right)\right|^{p}dx=1$
+\end_inset
+
+ so that the 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ makes sense.) If there is one of these for any positive 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ then, by compactness/completeness the whole thing will converge to an eigenfunc
+tion.
+ So this question is just as much about almost-resonances: are there small-but-f
+inite 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ that prevent almost-resonances from becoming true resonances? Where are
+ they? What are they like?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Almost-Resonance
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Almost-Resonance"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename forced-almost.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Example of an almost-resonance.
+ This is obtained numerically, by constructing a coherent state 
+\begin_inset Formula $\psi_{w,l}\left(x\right)$
+\end_inset
+
+, as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent state"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, for 
+\begin_inset Formula $l=0,\beta=\varphi,w=0.7$
+\end_inset
+
+ and 
+\begin_inset Formula $v\left(x\right)=x-a$
+\end_inset
+
+ for 
+\begin_inset Formula $x<2a$
+\end_inset
+
+ and 
+\begin_inset Formula $v\left(x\right)=0.5+a-x$
+\end_inset
+
+ for 
+\begin_inset Formula $\beta/2-2a<x$
+\end_inset
+
+ and 
+\begin_inset Formula $v\left(x\right)=0$
+\end_inset
+
+ otherwise.
+ Here, 
+\begin_inset Formula $a=\left(\beta-1\right)/4$
+\end_inset
+
+.
+ The result is an 
+\begin_inset Quotes eld
+\end_inset
+
+almost eigenfunction
+\begin_inset Quotes erd
+\end_inset
+
+, its OK, but not a very good.
+ However, 
+\begin_inset Formula $\mathcal{L}^{9}\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}^{10}\psi$
+\end_inset
+
+ generate the figure above.
+ The eigenvalue is 
+\begin_inset Formula $\lambda\approx0.728$
+\end_inset
+
+, good to three decimal places.
+ This is specifically for 
+\begin_inset Formula $\mathcal{L}^{10}\psi=\lambda\mathcal{L}^{9}\psi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
