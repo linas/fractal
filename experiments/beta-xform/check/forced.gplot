@@ -30,10 +30,16 @@ set title "stuuff"
 #     "forced.dat" using 2:(2*0.6135 - 1.0) with lines title "0.226", \
 #     "forced.dat" using 2:(0.6135 - 1.0) with lines title "-0.387", \
 
-set yrange [-0.2:0.2]
-plot "forced.dat" using 2:($4 - 1.226*$3) with lines title "0", \
-     "forced.dat" using 2:($4 - 0.613*$3) with lines title "1", \
+#set yrange [-0.2:0.2]
+#plot "forced.dat" using 2:($4 - 1.226*$3) with lines title "0", \
+#     "forced.dat" using 2:($4 - 0.613*$3) with lines title "1", \
 
+set yrange [-1:1]
+#plot "forced.dat" using 2:($5 - 0.86*$4 + 0.75 - 3*$2) with lines title "0", \
+#     "forced.dat" using 2:($5 - 1.15*$4) with lines title "1", \
+
+plot "forced.dat" using 2:($5 - 0.84*$4 + 0.9 - 3.5*$2) with lines title "0", \
+     "forced.dat" using 2:($5 - 1.125*$4) with lines title "1", \
 #
 # ----------------------------------------------------------------------
 #
