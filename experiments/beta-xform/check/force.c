@@ -93,19 +93,25 @@ double ell(double beta, double y)
 	return ellie;
 }
 
-// Something, anything in the kernel of the xfer function.
-// ... and what might that be? Not enitrely clear, yet.
+// Kernel generator, used to build the kernel.
+// Can be anything at all.
+double kerg(double x, double beta)
+{
+	double a = 0.25*(beta-1.0);
+	double m = 11.481425;  // Overall scale factor, doesn't matter.
+	// return m*(x-a);
+	return m*(x-a)*(x-a);
+}
+
+// This function is in the kernel of the xfer function, for
+// any possible kerg() function above. If and only if; there
+// are no others.
 double saw(double x, double beta)
 {
 	x -= floor(x);  // mod 1
-
-	// Seems to be in kernel, for beta=1.618034
-	double b2 = 0.5*(beta-1.0);
-	double a = 0.5*b2;
-
-	double c = b2;
-	if (x < c) return x-a;
-	if (0.5*beta-c < x) return a+0.5-x;
+	if (0.5*beta < x) return 0.0;
+	if (x < 0.5*(beta-1.0)) return kerg(x, beta);
+	if (0.5 < x) return -kerg(x-0.5, beta);
 	return 0.0;
 }
 
