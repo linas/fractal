@@ -3,15 +3,17 @@ set term png size 1024,768
 # set term png size 640, 480
 set out 'forced.png'
 
-# set xrange [0:1]
+set xrange [0:1]
 # set yrange [-3:3]
 set yrange [-6:2]
 # set yrange [-0.5:0.5]
 
 set title "stuuff"
 
-#plot "forced.dat" using 2:3 with lines title "0", \
-#     "forced.dat" using 2:4 with lines title "1", \
+beta = 1.618033988749895
+plot "forced.dat" using 2:3 with lines title "0", \
+     "forced.dat" using 2:4 with lines title "1", \
+     "forced.dat" using ($2*beta):($3/beta) with lines title "s", \
 
 #     "forced.dat" using 2:5 with lines title "2", \
 #     "forced.dat" using 2:6 with lines title "3", \
@@ -19,69 +21,17 @@ set title "stuuff"
 #     "forced.dat" using 2:7 with lines title "4", \
 #     "forced.dat" using 2:8 with lines title "5"
 # ----------------------------------------------------------------------
-
-set yrange [-6:3]
-w = 0.4
-beta = 1.618033988749895
-nlam = 2*w / beta
-lam = nlam 
-plot "forced.dat" using 2:3 with lines title "co", \
-     "forced.dat" using 2:4 with lines title "re", \
-     "forced.dat" using 2:5 with lines title "0", \
-     "forced.dat" using 2:($6/lam) with lines title "1/l", \
-     "forced.dat" using 2:($6/(0.5*lam)) with lines title "1/2l", \
-
-#     "forced.dat" using 2:($4 /lam) with lines title "1", \
-
-# ----------------------------------------------------------------------
 #
-#set yrange [-1.7:1.7]
-## set yrange [-1e-3:1e-3]
+#set yrange [-6:3]
 #w = 0.4
 #beta = 1.618033988749895
 #lam = 2*w / beta
-#set xrange [0.5:1]
-#plot "forced.dat" using 2:($4- 0.5*lam*$3) with lines title "d/2", \
-#     "forced.dat" using 2:(1.618) with lines title "", \
-#     "forced.dat" using 2:(-1.618) with lines title "", \
+#plot "forced.dat" using 2:($3 - $4/lam) with lines title "1/l", \
+#     "forced.dat" using 2:($3 - $4/(0.5*lam)) with lines title "1/2l", \
 #
-#set xrange [0:0.6]
-#plot "forced.dat" using 2:($4- lam*$3) with lines title "d", \
-
-# ----------------------------------------------------------------------
-#set yrange [-0.5:0.5]
-## Hmm (/ (+ 0.387 0.225) 0.387) is approx 1.618
-#plot "forced.dat" using 2:3 with lines title "0", \
-#     "forced.dat" using 2:(0.225) with lines title "0.225", \
-#     "forced.dat" using 2:(-0.389) with lines title "-0.389", \
-
-#plot "forced.dat" using 2:3 with lines title "0", \
-#     "forced.dat" using 2:(2*0.6135 - 1.0) with lines title "0.226", \
-#     "forced.dat" using 2:(0.6135 - 1.0) with lines title "-0.387", \
-
-#set yrange [-0.2:0.2]
-#plot "forced.dat" using 2:($4 - 1.226*$3) with lines title "0", \
-#     "forced.dat" using 2:($4 - 0.613*$3) with lines title "1", \
-
-# For gen func = (x-a)**2
-#plot "forced.dat" using 2:($4 - 1.24*$3 + 0.210) with lines title "0", \
-#     "forced.dat" using 2:($4 - 0.62*$3 + 0.105) with lines title "1", \
-#     "forced.dat" using 2:(0.0) with lines title ""
-
-#set yrange [-1:1]
-# For l=0 w=0.8
-#plot "forced.dat" using 2:($5 - 0.86*$4 + 0.75 - 3*$2) with lines title "0", \
-#     "forced.dat" using 2:($5 - 1.15*$4) with lines title "1", \
-
-# For l=0 w=0.7 first iterate
-#plot "forced.dat" using 2:($5 - 0.84*$4 + 0.9 - 3.5*$2) with lines title "0", \
-#     "forced.dat" using 2:($5 - 1.125*$4) with lines title "1", \
+## plot "forced.dat" using 2:3 with lines title "co", \
+##     "forced.dat" using 2:($4 /lam) with lines title "1", \
 #
-# For l=1 w=0.7
-#set yrange [-0.2:0.2]
-#plot "forced.dat" using 2:($4 - 1.18*$3) with lines title "0", \
-#     "forced.dat" using 2:($4 - 0.59*$3) with lines title "1", \
-
 # ----------------------------------------------------------------------
 #
 #beta = 1.83928675521416
