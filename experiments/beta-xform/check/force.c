@@ -116,16 +116,7 @@ double saw(double x, double beta)
 	return 0.0;
 }
 
-// Truncated version of above.
-double raw(double x, double beta)
-{
-	x -= floor(x);  // mod 1
-	if (0.5*beta * (beta-1.0) < x) return 0.0;
-	return saw(x, beta);
-}
-
-double cohere(double x, int l, double w, double beta,
-              double (*fun)(double, double))
+double blancmange(double x, int l, double w, double beta)
 {
 	if (0.5*beta < x) return 0.0;
 
@@ -136,7 +127,7 @@ double cohere(double x, int l, double w, double beta,
 	for (int i=0; i<1000; i++)
 	// for (int i=0; i<1; i++)
 	{
-		sum += wn * fun(tlp * xn, beta);
+		sum += wn * saw(tlp * xn, beta);
 		wn *= w;
 		if (0.5 < xn) xn -= 0.5;
 		xn *= beta;
@@ -146,23 +137,12 @@ double cohere(double x, int l, double w, double beta,
 	return sum;
 }
 
-double blancmange(double x, int l, double w, double beta)
-{
-	return cohere(x, l, w, beta, saw);
-}
-
-double remain(double x, int l, double w, double beta)
-{
-	return cohere(x, l, w, beta, raw);
-}
-
 void blanc_setup(double beta, int l, double w)
 {
 	for (int i=0; i<NHIST; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NHIST);
 		histn[i] = blancmange(x, l, w, beta);
-		// histn[i] = remain(x, l, w, beta);
 	}
 }
 
@@ -440,8 +420,6 @@ int main(int argc, char* argv[])
 		printf("%d	%g", j, x);
 		// printf("	%g", invar(beta, x));
 
-		printf("	%g", blancmange(x, ll, w, beta));
-		printf("	%g", remain(x, ll, w, beta));
 		for (int i=0; i< NCAP; i++)
 		{
 			printf("	%g", capt[i][j]);

@@ -30530,20 +30530,14 @@ Applying the transfer operator to this gives
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\left[\mathcal{L}_{\beta}\psi_{w,l}\right]\left(y\right) & =\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)\right]\left(y\right)+\sum_{n=1}^{\infty}w^{n}\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)T_{\beta}^{n}\right]\left(y\right)\\
- & =\left[\mathcal{L}_{\beta}v\right]\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\left[1+\Theta\left(m_{1}-\left(2l+1\right)T_{\beta}^{n}\left(y\right)\mod1\right)\right]\\
- & =\frac{w}{\beta}\psi_{w,l}\left(y\right)+\frac{w}{\beta}\sum_{n=0}^{\infty}w^{n}r\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\\
- & =\frac{w}{\beta}\psi_{w,l}\left(y\right)+\frac{w}{\beta}\phi_{w,l}\left(y\right)
+\left[\mathcal{L}_{\beta}\psi_{w,l}\right]\left(y\right) & =\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)\right]\left(y\right)+\sum_{n=1}^{\infty}w^{n}\left[\mathcal{L}_{\beta}s\circ\left(2l+1\right)T_{\beta}^{n-1}T_{\beta}\right]\left(y\right)\\
+ & =\left[\mathcal{L}_{\beta}v\right]\left(y\right)+\frac{w}{\beta}\left[1+\Theta\left(m_{1}-y\right)\right]\sum_{n=0}^{\infty}w^{n}s\left(\left(2l+1\right)T_{\beta}^{n}\left(y\right)\right)\\
+ & =\frac{w}{\beta}\psi_{w,l}\left(y\right)\left[1+\Theta\left(m_{1}-y\right)\right]
 \end{align*}
 
 \end_inset
 
-where 
-\begin_inset Formula $r\left(x\right)=s\left(x\right)\Theta\left(m_{1}-x\mod1\right)$
-\end_inset
-
- is the restriction sawtooth.
- For 
+For 
 \begin_inset Formula $\beta=2$
 \end_inset
 
@@ -30551,8 +30545,7 @@ where
 \begin_inset Formula $m_{1}=1$
 \end_inset
 
- and this second term can be merged with the first, eliminating the obstruction
- to forming the eigenfunctions.
+ and the Bernoulli form is recovered.
 \end_layout
 
 \begin_layout Subsection
@@ -30681,61 +30674,7 @@ noprefix "false"
 
 \end_inset
 
-, and likewise 
-\begin_inset Formula $\phi_{w,l}\left(x\right)$
-\end_inset
-
- as the remainder.
- Then, for 
-\begin_inset Formula $\beta=\varphi$
-\end_inset
-
- and any 
-\begin_inset Formula $0<w<1$
-\end_inset
-
-, it appears that, for 
-\begin_inset Formula $x<1/2$
-\end_inset
-
-, that 
-\begin_inset Formula $\phi_{w,l}\left(x\right)=\psi_{w,l}\left(x\right)$
-\end_inset
-
-.
- That is, for 
-\begin_inset Formula $x<1/2$
-\end_inset
-
-, the coherent state 
-\begin_inset Formula $\psi_{w,l}\left(x\right)$
-\end_inset
-
- 
-\begin_inset Quotes eld
-\end_inset
-
-is
-\begin_inset Quotes erd
-\end_inset
-
- an eigenstate, with the expected eigenvalue.
-\end_layout
-
-\begin_layout Standard
-The relation 
-\begin_inset Formula $\phi_{w,l}\left(x\right)=\psi_{w,l}\left(x\right)$
-\end_inset
-
- for 
-\begin_inset Formula $x<1/2$
-\end_inset
-
- holds for any 
-\begin_inset Formula $l$
-\end_inset
-
- and any kernel function.
+, 
 \end_layout
 
 \begin_layout Standard
@@ -30761,7 +30700,7 @@ For
 \begin_inset Formula $\alpha l$
 \end_inset
 
-, for some constant  
+, for some constant 
 \begin_inset Formula $\alpha<1$
 \end_inset
 
