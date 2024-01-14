@@ -21305,11 +21305,34 @@ The nature of the
 \end_inset
 
 -Fibonacci sequences as shift sequences can be emphasized by noting that
- they arise from the iteration of a 
+ they arise from the iteration of the 
+\begin_inset CommandInset href
+LatexCommand href
+name "companion matrix"
+target "https://en.wikipedia.org/wiki/Companion_matrix"
+literal "false"
+
+\end_inset
+
+ for the polynomial 
+\begin_inset Formula $p_{n}\left(x\right)$
+\end_inset
+
+.
+ This is a 
 \begin_inset Formula $\left(k+1\right)\times\left(k+1\right)$
 \end_inset
 
- matrix in lower-Hessenberg form:
+ matrix in lower-Hessenberg form 
+\begin_inset CommandInset href
+LatexCommand href
+name "lower-Hessenberg form"
+target "https://en.wikipedia.org/wiki/Hessenberg_matrix"
+literal "false"
+
+\end_inset
+
+:
 \begin_inset Formula 
 \begin{equation}
 B=\left[\begin{array}{cccccc}
@@ -21324,7 +21347,21 @@ b_{k} & 0 & 0 & 0 & \cdots & 0
 
 \end_inset
 
-That is, the 
+Iteration produces a 
+\begin_inset CommandInset href
+LatexCommand href
+name "linear recursive sequence"
+target "https://en.wikipedia.org/wiki/Linear_recursive_sequence"
+literal "false"
+
+\end_inset
+
+ this is the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-Fibonacci sequence.
+ The 
 \begin_inset Formula $m$
 \end_inset
 
@@ -21337,9 +21374,10 @@ That is, the
 \end_inset
 
 .
- That such iteration results in integer sequences has long been observed
- in the theory of continued fractions.
- It's useful to work an explicit example.
+\end_layout
+
+\begin_layout Standard
+Some explicit examples are in order.
  For the golden ratio, one has 
 \begin_inset Formula 
 \[
@@ -24830,7 +24868,11 @@ Now the subtle point arises.
 
 , but this is not the correct way to compute orthogonality! The problem
  is the Jacobian is missing.
- The correct integral to determine the inner product between 
+ The correct integral to determine the inner product 
+\begin_inset Formula $\left\langle f,g\right\rangle $
+\end_inset
+
+ between 
 \begin_inset Formula $f$
 \end_inset
 
@@ -24845,7 +24887,7 @@ Now the subtle point arises.
  is 
 \begin_inset Formula 
 \[
-\int_{0}^{1}f\left(y\right)g\left(y\right)\left|\nu^{\prime}\left(\nu^{-1}\left(y\right)\right)\right|^{-1}dy=\int_{0}^{1}f\left(\nu\left(x\right)\right)g\left(\nu\left(x\right)\right)dx
+\left\langle f,g\right\rangle =\int_{0}^{1}f\left(y\right)g\left(y\right)\left|\nu^{\prime}\left(\nu^{-1}\left(y\right)\right)\right|^{-1}dy=\int_{0}^{1}f\left(\nu\left(x\right)\right)g\left(\nu\left(x\right)\right)dx
 \]
 
 \end_inset
@@ -30758,7 +30800,7 @@ inite
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -30874,6 +30916,147 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+General confusion.
+ I'm confused by the following issues:
+\end_layout
+
+\begin_layout Paragraph
+Iteration
+\end_layout
+
+\begin_layout Standard
+I'm confused by iteration.
+ What is the correct description of the iteratation of 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+This is explored numerically.
+ Some initial vector 
+\begin_inset Formula $f$
+\end_inset
+
+ is chosen, such that 
+\begin_inset Formula $\int_{0}^{1}\left|f\left(x\right)\right|dx=1$
+\end_inset
+
+ so that 
+\begin_inset Formula $f$
+\end_inset
+
+ is normalized, but also with 
+\begin_inset Formula $\int_{0}^{1}f\left(x\right)dx=0$
+\end_inset
+
+, so that 
+\begin_inset Formula $f$
+\end_inset
+
+ is orthogonal to the invariant measure (see note on orthogonality below).
+ Setting 
+\begin_inset Formula $f_{0}=f$
+\end_inset
+
+, 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is iterated, so that 
+\begin_inset Formula $f_{n+1}=\mathcal{L}f_{n}$
+\end_inset
+
+.
+ After each step, 
+\begin_inset Formula $a_{n}=\int_{0}^{1}\left|f_{n}\left(x\right)\right|dx$
+\end_inset
+
+ is computed.
+ The sequence 
+\begin_inset Formula $a_{n+1}/a_{n}$
+\end_inset
+
+ appears to be sometimes chaotic, sometimes ergodic, sometimes periodic.
+ What is this motion?
+\end_layout
+
+\begin_layout Standard
+Points of confusion include:
+\end_layout
+
+\begin_layout Itemize
+Why is the sequence chaotic? If 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ has an eigenvalue spectrum, I would expect that repeated iteration would
+ cause eigenvectors associated with smaller eigenvalues to vanish geometrically
+ (by powers) – to iterate away.
+ They don't.
+\end_layout
+
+\begin_layout Itemize
+What does this mean? Is there it because Jordan or because ...
+\end_layout
+
+\begin_layout Itemize
+Is there some 
+\begin_inset CommandInset href
+LatexCommand href
+name "minimal polynomial"
+target "https://en.wikipedia.org/wiki/Minimal_polynomial_(linear_algebra)"
+literal "false"
+
+\end_inset
+
+ associated with 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+? What is it?
+\end_layout
+
+\begin_layout Itemize
+Is it worth doing Gaussian elimination?
+\end_layout
+
+\begin_layout Paragraph
+Orthogonality and Lengths
+\end_layout
+
+\begin_layout Standard
+Repeating an observation from earlier in the diary, the correct way to determine
+ the inner product between 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ with respect to the invariant measure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\left\langle f,g\right\rangle =\int_{0}^{1}f\left(y\right)g\left(y\right)\left|\nu^{\prime}\left(\nu^{-1}\left(y\right)\right)\right|^{-1}dy=\int_{0}^{1}f\left(\nu\left(x\right)\right)g\left(\nu\left(x\right)\right)dx
+\]
+
+\end_inset
+
+In the present case, 
+\begin_inset Formula $\nu^{\prime}\left(x\right)=\mu\left(x\right)$
+\end_inset
+
+ ...
+ Note the prime
 \end_layout
 
 \begin_layout Section
