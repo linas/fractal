@@ -11,9 +11,8 @@ set yrange [-6:2]
 set title "stuuff"
 
 beta = 1.618033988749895
-plot "forced.dat" using 2:3 with lines title "0", \
-     "forced.dat" using 2:4 with lines title "1", \
-     "forced.dat" using ($2*beta):($3/beta) with lines title "s", \
+#plot "forced.dat" using 2:3 with lines title "0", \
+#     "forced.dat" using 2:4 with lines title "1", \
 
 #     "forced.dat" using 2:5 with lines title "2", \
 #     "forced.dat" using 2:6 with lines title "3", \
@@ -21,6 +20,13 @@ plot "forced.dat" using 2:3 with lines title "0", \
 #     "forced.dat" using 2:7 with lines title "4", \
 #     "forced.dat" using 2:8 with lines title "5"
 # ----------------------------------------------------------------------
+
+plot "forcer.dat" using 2:3 with lines title "c0", \
+     "forcer.dat" using 2:4 with lines title "c1", \
+     "forced.dat" using 2:3 with lines title "orig0", \
+     "forced.dat" using 2:($3/2.3) with lines title "0/p", \
+
+#     "forced.dat" using ($2*beta):($3/beta) with lines title "s", \
 #
 #set yrange [-6:3]
 #w = 0.4

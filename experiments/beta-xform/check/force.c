@@ -119,7 +119,7 @@ double saw(double x, double beta)
 double blancmange(double x, int l, double w, double beta)
 {
 	if (0.5*beta < x) return 0.0;
-	if (0.5*beta*(beta-1.0) < x) return 0.0;
+	// if (0.5*beta*(beta-1.0) < x) return 0.0;
 
 	double xn = x;
 	double wn = 1.0;
