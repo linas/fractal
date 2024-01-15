@@ -8,6 +8,34 @@
 
 #include "selfie.c"
 
+/* ================================================================= */
+
+/* Implement derivative of the n'th golden polynomial.
+ * Return result from evaluating it.
+ *
+ * Polynomial is constructed from the bit string of (2n+1). Construction
+ * is the bit-shift construction: the lowest powers of x are given by
+ * right-most bits; highest powers are the left-most bits.
+ */
+double golden_poly_deriv(unsigned long idx, double x)
+{
+	double acc = 0.0;
+	double xn = 1.0 / x;
+	double n = 0.0;
+	unsigned long bitstr = 2*idx+1;
+	while (bitstr)
+	{
+		if (bitstr%2 == 1) acc += n * xn;
+		xn *= x;
+		n += 1.0;
+		bitstr >>= 1;
+	}
+
+	return n*xn - acc;
+}
+
+/* ================================================================= */
+
 int main(int argc, char* argv[])
 {
 #define MANUAL_EXPLORER
@@ -25,8 +53,15 @@ int main(int argc, char* argv[])
 		bool ok = valid_gold_index(idx);
 		if (!ok) continue;
 
+		int ord = bitlen(idx);
+		long twoo = 1UL << ord;
 		double gold = golden_beta(idx);
-		printf("Its %ld %g\n", idx, gold);
+		double deriv = golden_poly_deriv(idx, gold);
+		deriv /= twoo;
+		// deriv = 1.0 / deriv;
+		printf("%ld	%g	%g\n", idx, gold, deriv);
 	}
 #endif
 }
+
+/* --------------------------- END OF LIFE ------------------------- */
