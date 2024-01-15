@@ -14409,7 +14409,7 @@ literal "false"
 \begin_inset Formula $\left(k+1\right)\times\left(k+1\right)$
 \end_inset
 
- matrix in lower-Hessenberg form 
+ matrix in 
 \begin_inset CommandInset href
 LatexCommand href
 name "lower-Hessenberg form"
@@ -14463,8 +14463,51 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+Define the 
+\begin_inset CommandInset href
+LatexCommand href
+name "exchange matrix"
+target "https://en.wikipedia.org/wiki/Exchange_matrix"
+literal "false"
+
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+J=\left[\begin{array}{ccccc}
+0 & 0 & \cdots & 0 & 1\\
+0 & 0 & \cdots & 1 & 0\\
+\vdots & \vdots & \iddots &  & \vdots\\
+0 & 1 & \cdots & 0 & 0\\
+1 & 0 & \cdots & 0 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+This can be used to write the above in the more conventional companion-matrix
+ form:
+\begin_inset Formula 
+\[
+C=\left[JBJ\right]^{\mathrm{T}}=\left[\begin{array}{cccccc}
+0 & 1 & 0 & 0 & \cdots & 0\\
+0 & 0 & 1 & 0 & \cdots & 0\\
+0 & 0 & 0 & 1 & \cdots & 0\\
+\vdots & \vdots & \vdots &  & \ddots & \vdots\\
+0 & 0 & 0 & 0 & \cdots & 1\\
+b_{k} & b_{k-1} & b_{k-2} & b_{k-3} & \cdots & b_{0}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Some explicit examples are in order.
- For the golden ratio, one has  
+ For the golden ratio, one has 
 \begin_inset Formula 
 \[
 B=\left[\begin{array}{cc}
@@ -14508,7 +14551,16 @@ with
 \begin_inset Formula $m\ge k-1$
 \end_inset
 
- iterations, one gets the symmetric matrix
+ iterations, one gets the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Hankel matrix"
+target "https://en.wikipedia.org/wiki/Hankel_matrix"
+literal "false"
+
+\end_inset
+
+
 \begin_inset Formula 
 \[
 B^{m}=\left[\begin{array}{cccccc}
@@ -14528,6 +14580,23 @@ so that the top row consists of the latest sequence values.
  sequence.
  The upper-diagonal 1's just serve to shift columns over by one, with each
  iteration: that is why it's a shift!
+\end_layout
+
+\begin_layout Standard
+The product 
+\begin_inset Formula $B^{m}J$
+\end_inset
+
+ is a 
+\begin_inset CommandInset href
+LatexCommand href
+name "Toeplitz matrix"
+target "https://en.wikipedia.org/wiki/Toeplitz_matrix"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
