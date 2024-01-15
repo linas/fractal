@@ -46,20 +46,25 @@ int main(int argc, char* argv[])
 	}
 	int maxord = atoi(argv[1]);
 
-	long maxidx = 1UL << maxord;
+	// long maxidx = 1UL << maxord;
 
-	for (long idx = 1; idx < maxidx; idx++)
+	for (int ord = 2; ord < maxord; ord++)
 	{
-		bool ok = valid_gold_index(idx);
-		if (!ok) continue;
+		long is = 1UL << (ord-2);
+		long ska = 1UL << ord;
+		double sca = ska;
+		// sca /= ord;
+		for (long idx = is; idx < 2*is; idx++)
+		{
+			bool ok = valid_gold_index(idx);
+			if (!ok) continue;
 
-		int ord = bitlen(idx);
-		long twoo = 1UL << ord;
-		double gold = golden_beta(idx);
-		double deriv = golden_poly_deriv(idx, gold);
-		deriv /= twoo;
-		// deriv = 1.0 / deriv;
-		printf("%ld	%g	%g\n", idx, gold, deriv);
+			double gold = golden_beta(idx);
+			double deriv = golden_poly_deriv(idx, gold);
+			double down = deriv / sca;
+			printf("%ld	%g	%g	%g\n", idx, gold, deriv, down);
+		}
+		printf("\n");
 	}
 #endif
 }
