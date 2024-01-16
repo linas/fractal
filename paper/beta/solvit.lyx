@@ -7658,67 +7658,45 @@ Transfer operators
 \end_layout
 
 \begin_layout Standard
-The discovery and study of invariant measures, as well as of decaying states
- can be approached via the transfer operator, or, properly named, the Ruelle-Fro
-benius-Perron operator.
- This is an operator that captures the behavior of a distribution under
- the action of a map.
- The invariant measure is an eigenstate of this operator; indeed, it provides
- a formal definition for what it means to be invariant under the action
- of the map.
- The general theory for this was reviewed in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Dynamical-Systems"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- We recap the definition of the transfer operator in it's more limited sense,
- as a linear operator acting in a point-wise fashion, on the space of functions
- on the unit interval of the real number line.
- In the general setting, it is a pushforward.
- In the more limited setting, this pushforward nature of the map is a bit
- obscured.
+Given any map from a space to itself, maping points to points, the pushfoward
+ maps distributions to distributations.
+ The pushfoward is a linear operator, called the transfer operator or the
+ Ruelle–Frobenius–Perron operator.
+ The spectrum of this operator, broken down into eigenfunctions and eigenvalues,
+ can be used to understand the time evolution of a given density distribution.
+ The invariant measure is an eigenstate of this operator, it is the eigenstate
+ with eigenvalue one.
+ There are other eigenstates; these are explored in this section.
 \end_layout
 
 \begin_layout Standard
-Given an iterated map 
-\begin_inset Formula $g:[0,1]\to[0,1]$
+Restricting to the unit interval, given an iterated map 
+\begin_inset Formula $f:\left[0,1\right]\to\left[0,1\right]$
 \end_inset
 
- on the unit interval, the transfer operator defines how distributions are
- acted on by this map.
- It is defined as
+, the transfer operator acting on a distribution 
+\begin_inset Formula $\rho:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ is defined as
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{g}f\right]\left(y\right)=\sum_{x=g^{-1}(y)}\frac{f(x)}{\left|g^{\prime}(x)\right|}
+\left[\mathcal{L}_{f}\rho\right]\left(y\right)=\sum_{x=f^{-1}(y)}\frac{\rho(x)}{\left|f^{\prime}(x)\right|}
 \]
 
 \end_inset
 
-The left adjoint of the transfer operator is the composition operator (Koopman
- operator).
- This is defined as 
-\begin_inset Formula 
-\[
-\left[\mathcal{C}_{g}f\right]\left(y\right)=f\left(g\left(y\right)\right)
-\]
-
+The next subsection gives an explicit expression for this, when 
+\begin_inset Formula $f$
 \end_inset
 
-The Koopman operator is adjoint, in the sense that 
-\begin_inset Formula $\mathcal{L}_{g}\mathcal{C}_{g}=1$
+ is the 
+\begin_inset Formula $\beta$
 \end_inset
 
- but that, in general, 
-\begin_inset Formula $\mathcal{C}_{g}\mathcal{L}_{g}\ne1$
-\end_inset
-
-.
- 
+-transform.
+ After that, a subsection reviewing the invariant measure, and then a discussion
+ of some other eigenfunctions.
 \end_layout
 
 \begin_layout Subsection
@@ -7730,20 +7708,34 @@ The
 \end_layout
 
 \begin_layout Standard
-The transfer operator for the 
+This text works primarily with the 
 \begin_inset Formula $\beta$
 \end_inset
 
--shift and the 
+-shift, instead of the more common 
 \begin_inset Formula $\beta$
 \end_inset
 
--transform are only superficially different.
- We'll give both of them here, as it is sometimes useful to reference one
- or the other, depending on the situation.
- Superficially, they seem to have a different form, but are in the end just
- scaled versions of one-another.
- The transfer operator the beta-shift map 
+-transform.
+ These two are more-or-less the same thing, differing only by scale factors,
+ as given in eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xform-shift equivalence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The transfer operators are likewise only superficially different, being
+ just rescalings of one-another; both are given below.
+\end_layout
+
+\begin_layout Standard
+The transfer operator the beta-shift map 
 \begin_inset Formula $T_{\beta}(x)$
 \end_inset
 
@@ -7770,7 +7762,16 @@ where
 \begin_inset Formula $\Theta$
 \end_inset
 
- is the Heaviside step function.
+ is the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Heaviside step function"
+target "https://en.wikipedia.org/wiki/Heaviside_step_function"
+literal "false"
+
+\end_inset
+
+.
  The transfer operator for the beta-transform map 
 \begin_inset Formula $t_{\beta}(x)$
 \end_inset
@@ -7797,24 +7798,24 @@ reference "fig:Undershift-Density-Distribution"
  are those functions satisfying 
 \begin_inset Formula 
 \begin{equation}
-\left[\mathcal{L}_{\beta}\rho\right]\left(y\right)=\rho\left(y\right)\label{eq:FP-eigenvector}
+\left[\mathcal{L}_{\beta}\mu\right]\left(y\right)=\mu\left(y\right)\label{eq:FP-eigenvector}
 \end{equation}
 
 \end_inset
 
 That is, the 
-\begin_inset Formula $\rho(y)$
+\begin_inset Formula $\mu\left(y\right)$
 \end_inset
 
  satisfies 
 \begin_inset Formula 
 \begin{equation}
-\rho\left(y\right)=\frac{1}{\beta}\left[\rho\left(\frac{y}{\beta}\right)+\rho\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)\label{eq:eigen-eqn}
+\mu\left(y\right)=\frac{1}{\beta}\left[\mu\left(\frac{y}{\beta}\right)+\mu\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]\Theta\left(\frac{\beta}{2}-y\right)\label{eq:eigen-eqn}
 \end{equation}
 
 \end_inset
 
-Likewise, the Gel'fond-Parry measure of eqn 
+Likewise, the Gelfond-Parry measure of eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:invariant measure"
@@ -7833,12 +7834,12 @@ noprefix "false"
 \end_inset
 
 Recall that 
-\begin_inset Formula $\rho\left(y\right)=\frac{2}{\beta}\nu_{\beta}\left(\frac{2y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)$
+\begin_inset Formula $\mu\left(y\right)=\frac{2}{\beta}\nu_{\beta}\left(\frac{2y}{\beta}\right)\Theta\left(\frac{\beta}{2}-y\right)$
 \end_inset
 
 ; the two invariant measures are just scaled copies of one-another.
  Both are normalized so that 
-\begin_inset Formula $\int_{0}^{1}\rho\left(y\right)dy=\int_{0}^{1}\nu_{\beta}\left(y\right)dy=1$
+\begin_inset Formula $\int_{0}^{1}\mu\left(y\right)dy=\int_{0}^{1}\nu_{\beta}\left(y\right)dy=1$
 \end_inset
 
 .
@@ -7852,7 +7853,7 @@ tions of the corresponding operators, as they correspond to the largest
 \end_layout
 
 \begin_layout Standard
-More generally, one is interested in characterizing the eigenspectrum
+More generally, one is interested in characterizing the spectrum
 \begin_inset Formula 
 \[
 \left[\mathcal{L}_{\beta}\rho\right]\left(y\right)=\lambda\rho\left(y\right)
@@ -7865,129 +7866,106 @@ for eigenvalues
 \end_inset
 
  and eigenfunctions 
-\begin_inset Formula $\rho(y)$
+\begin_inset Formula $\rho\left(y\right)$
 \end_inset
 
 .
  Solving this equation requires choosing a space of functions in which to
  work.
- Natural choices include any of the Banach spaces, and in particular, the
+ Natural choices include piece-wise continuous smooth functions (piece-wise
+ polynomial functions), any of the Banach spaces, and in particular, the
  space of square-integrable functions.
- Particularly interesting is the space of almost-smooth functions, those
- having discontinuities at only a countable number of locations, but otherwise
- being infinitely differentiable.
- Although the discussion so far implicitly conditions one to restrict oneself
- to real-valued functions, and to consider only real-valued eigenvalues,
- this is perhaps too sharp a restriction.
- It will become clear in the following chapters that even the most basic
- form of 
+ In general, the spectrum will be complex-valued: eigenvalues will be complex
+ numbers.
+\end_layout
+
+\begin_layout Standard
+If a distribution 
+\begin_inset Formula $\rho\left(y\right)$
+\end_inset
+
+ is nonozero on the interval 
+\begin_inset Formula $\left[\beta/2,1\right]$
+\end_inset
+
+, the operator 
 \begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
- has a complex-valued spectrum.
- At any rate, it should be obvious that, whatever the choice of function
- space, one must have that 
-\begin_inset Formula $\rho\left(y\right)=0$
-\end_inset
-
- whenever 
-\begin_inset Formula $\beta<2y$
+ will map it to one that is zero on this interval.
+ Thus, it makes sense to restrict oneself to densities that are non-zero
+ only on 
+\begin_inset Formula $\left[0,\beta/2\right]$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-At least one basic fact is known: for at least some kinds of function spaces,
- the RFP eigenfunction is given by Gel'fond and Parry, as shown in eqn 
+ When this is done, eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:invariant measure"
+reference "eq:xfer oper"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-.
- More precisely, it is just the rescaled form 
-\begin_inset Formula $\rho\left(x\right)=\nu\left(2x/\beta\right)$
-\end_inset
-
- for 
-\begin_inset Formula $x<\beta/2$
-\end_inset
-
- and zero otherwise.
- Changing vocabulary, this is sometimes called the 
-\begin_inset Quotes eld
-\end_inset
-
-invariant measure
-\begin_inset Quotes erd
-\end_inset
-
-; as it describes a measure on the unit interval.
- That is, for the space of all possible measures on the unit interval, the
- Gel'fond-Parry measure is one of the eigenfunctions of the transfer operator.
-\end_layout
-
-\begin_layout Standard
-A very minor simplification can be achieved with a change of variable.
- Let 
-\begin_inset Formula $y=\frac{\beta}{2}-\epsilon$
-\end_inset
-
-.
- Then the eigenequation becomes
+ has the slightly more convenient form
 \begin_inset Formula 
 \[
-\lambda\beta\rho\left(\frac{\beta}{2}-\epsilon\right)=\rho\left(\frac{1}{2}-\frac{\epsilon}{\beta}\right)+\rho\left(1-\frac{\epsilon}{\beta}\right)
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)\right]
 \]
 
 \end_inset
 
-The second term vanishes whenever 
-\begin_inset Formula $\beta/2<1-\epsilon/\beta$
+with 
+\begin_inset Formula $m_{0}=\beta/2$
 \end_inset
 
- or 
-\begin_inset Formula $\epsilon<\beta(1-\beta/2)$
+ and 
+\begin_inset Formula $m_{1}=\beta\left(\beta-1\right)/2=T_{\beta}\left(m_{0}\right)$
 \end_inset
 
- and so one has the simpler recurrence relation
-\begin_inset Formula 
-\begin{equation}
-\lambda\rho\left(y\right)=\frac{1}{\beta}\rho\left(\frac{y}{\beta}\right)\label{eq:eigen-branch}
-\end{equation}
-
+.
+ It is always the case that 
+\begin_inset Formula $m_{1}<m_{0}$
 \end_inset
 
-whenever 
-\begin_inset Formula $\beta(\beta-1)<2y\le\beta$
+ and so the second term above vanished on the interval 
+\begin_inset Formula $\left[m_{1},m_{0}\right]$
+\end_inset
+
+.
+ This can be gainfully employed in a variety of settings; typically to write
+ 
+\begin_inset Formula $\mathcal{L}_{\beta}f$
+\end_inset
+
+ on 
+\begin_inset Formula $\left[m_{1},m_{0}\right]$
+\end_inset
+
+ as a simple rescaling of 
+\begin_inset Formula $\mathcal{L}_{\beta}f$
+\end_inset
+
+ on 
+\begin_inset Formula $\left[0,m_{1}\right]$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-The equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:eigen-eqn"
-
+This equation can be treated as a recurrence relation; setting 
+\begin_inset Formula $\mathcal{L}_{\beta}f=f$
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:eigen-branch"
-
-\end_inset
-
- can be treated as recurrence relations, defining the 
+ gives the 
 \begin_inset Formula $\lambda=1$
 \end_inset
 
  eigenstate.
- Recursing on these gives exactly the densities shown in figure 
+ Performing this recursion gives exactly the densities shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Density-Distribution"
@@ -7995,25 +7973,9 @@ reference "fig:Undershift-Density-Distribution"
 \end_inset
 
 .
- Computationally, these are much cheaper to compute, at least for 
-\begin_inset Formula $\beta$
-\end_inset
-
- much larger than 1, although convergence issues present themselves as 
-\begin_inset Formula $\beta$
-\end_inset
-
- approaches 1.
- The resulting density may be called the Ruelle-Frobenius-Perron eigenstate;
- because it can be quickly computed, it provides an alternative view of
- figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Undershift-Density-Distribution"
-
-\end_inset
-
-, free of stochastic sampling noise.
+ Computationally, these are much cheaper to compute than trying to track
+ a scattered cloud of points; the result is free of stochastic sampling
+ noise.
 \begin_inset Note Note
 status collapsed
 
@@ -8023,17 +7985,9 @@ Computed in three places: rexfer.c reigen.c and complex.c
 
 \end_inset
 
- Even ignoring this, there's another 
-\begin_inset Quotes eld
-\end_inset
-
-little
-\begin_inset Quotes erd
-\end_inset
-
- problem: all of the diagonal entries are larger than one.
- Such solutions would describe not the decaying eigenfunctions, but the
- exploding ones.
+ This density is the Ruelle–Frobenius–Perron eigenstate; an explicit expression
+ was given by Gelfond and by Parry, as described in the next section.
+ 
 \end_layout
 
 \begin_layout Subsection
