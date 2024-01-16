@@ -5903,71 +5903,46 @@ with
 \end_inset
 
 .
-\end_layout
+ It is always the case that 
+\begin_inset Formula $m_{1}<m_{0}$
+\end_inset
 
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-A very minor simplification can be achieved with a change of variable.
- Let 
-\begin_inset Formula $y=\frac{\beta}{2}-\epsilon$
+ and so the second term above vanished on the interval 
+\begin_inset Formula $\left[m_{1},m_{0}\right]$
 \end_inset
 
 .
- Then the eigenequation becomes
-\begin_inset Formula 
-\[
-\lambda\beta\rho\left(\frac{\beta}{2}-\epsilon\right)=\rho\left(\frac{1}{2}-\frac{\epsilon}{\beta}\right)+\rho\left(1-\frac{\epsilon}{\beta}\right)
-\]
-
+ This can be gainfully employed in a variety of settings; typically to write
+ 
+\begin_inset Formula $\mathcal{L}_{\beta}f$
 \end_inset
 
-The second term vanishes whenever 
-\begin_inset Formula $\beta/2<1-\epsilon/\beta$
+ on 
+\begin_inset Formula $\left[m_{1},m_{0}\right]$
 \end_inset
 
- or 
-\begin_inset Formula $\epsilon<\beta(1-\beta/2)$
+ as a simple rescaling of 
+\begin_inset Formula $\mathcal{L}_{\beta}f$
 \end_inset
 
- and so one has the simpler recurrence relation
-\begin_inset Formula 
-\begin{equation}
-\lambda\rho\left(y\right)=\frac{1}{\beta}\rho\left(\frac{y}{\beta}\right)\label{eq:eigen-branch}
-\end{equation}
-
-\end_inset
-
-whenever 
-\begin_inset Formula $\beta(\beta-1)<2y\le\beta$
+ on 
+\begin_inset Formula $\left[0,m_{1}\right]$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-The equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:eigen-eqn"
-
+This equation can be treated as a recurrence relation; setting 
+\begin_inset Formula $\mathcal{L}_{\beta}f=f$
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:eigen-branch"
-
-\end_inset
-
- can be treated as recurrence relations, defining the 
+ gives the 
 \begin_inset Formula $\lambda=1$
 \end_inset
 
  eigenstate.
- Recursing on these gives exactly the densities shown in figure 
+ Performing this recursion gives exactly the densities shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Undershift-Density-Distribution"
@@ -5975,25 +5950,9 @@ reference "fig:Undershift-Density-Distribution"
 \end_inset
 
 .
- Computationally, these are much cheaper to compute, at least for 
-\begin_inset Formula $\beta$
-\end_inset
-
- much larger than 1, although convergence issues present themselves as 
-\begin_inset Formula $\beta$
-\end_inset
-
- approaches 1.
- The resulting density may be called the Ruelle-Frobenius-Perron eigenstate;
- because it can be quickly computed, it provides an alternative view of
- figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Undershift-Density-Distribution"
-
-\end_inset
-
-, free of stochastic sampling noise.
+ Computationally, these are much cheaper to compute than trying to track
+ a scattered cloud of points; the result is free of stochastic sampling
+ noise.
 \begin_inset Note Note
 status collapsed
 
@@ -6003,7 +5962,9 @@ Computed in three places: rexfer.c reigen.c and complex.c
 
 \end_inset
 
-
+ This density is the Ruelle–Frobenius–Perron eigenstate; an explicit expression
+ was given by Gelfond and by Parry, as described in the next section.
+ 
 \end_layout
 
 \begin_layout Subsection
