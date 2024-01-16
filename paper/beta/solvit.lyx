@@ -31036,22 +31036,24 @@ height "1pt"
 
 \end_layout
 
-\begin_layout Standard
-General confusion.
- I'm confused by the following issues:
-\end_layout
-
-\begin_layout Paragraph
-Iteration
+\begin_layout Subsection
+Iteration Confusion
 \end_layout
 
 \begin_layout Standard
-I'm confused by iteration.
- What is the correct description of the iteratation of 
+Iterating on 
 \begin_inset Formula $\mathcal{L}$
 \end_inset
 
-?
+ causes exposes cyclic behavior, sometimes seeming periodic, sometimes chaotic.
+ This can be confusing if one is not prepared for it.
+ The underlying cause is that, in general, 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ has complex-valued eigenvalues, approximately cyclic.
+ This results in cyclically-recurring almost-eigenvectors.
+ The symptom and explanation presented below.
 \end_layout
 
 \begin_layout Standard
@@ -31100,93 +31102,63 @@ This is explored numerically.
 \end_inset
 
  appears to be sometimes chaotic, sometimes ergodic, sometimes periodic.
- What is this motion?
+ What is this motion? 
 \end_layout
 
 \begin_layout Standard
-Points of confusion include:
-\end_layout
-
-\begin_layout Itemize
-Why is the sequence chaotic? If 
+The confusion comes from assuming that the eigenvalue spectrum of 
 \begin_inset Formula $\mathcal{L}$
 \end_inset
 
- has an eigenvalue spectrum, I would expect that repeated iteration would
- cause eigenvectors associated with smaller eigenvalues to vanish geometrically
- (by powers) – to iterate away.
+ is purely real.
+ If 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ had a purely real eigenvalue spectrum (as is the case for the Bernoulli
+ shift), then one would expect that repeated iteration would cause eigenvectors
+ associated with smaller eigenvalues to vanish geometrically (by powers)
+ – to iterate away.
  They don't.
 \end_layout
 
-\begin_layout Itemize
-What does this mean? Is this because this is defective, in the way a amtrix
- is defective (needs to be brought to Jordan normal form)? But defective
- matrices just have degenerate eigenvalues, and still have 
-\begin_inset Quotes eld
-\end_inset
-
-generalized
-\begin_inset Quotes erd
-\end_inset
-
- eigenvectors (of the Jordan blocks).
- Here' I'm not seeing eigenvalues, at all...
-\end_layout
-
-\begin_layout Itemize
-Is there some 
-\begin_inset CommandInset href
-LatexCommand href
-name "minimal polynomial"
-target "https://en.wikipedia.org/wiki/Minimal_polynomial_(linear_algebra)"
-literal "false"
-
-\end_inset
-
- associated with 
-\begin_inset Formula $\mathcal{L}$
-\end_inset
-
-? What is it?
-\end_layout
-
-\begin_layout Itemize
-Is it worth doing Gaussian elimination? If these were done, then orthogonality
- needs to be computed as described below.
-\end_layout
-
-\begin_layout Paragraph
-Orthogonality and Lengths
+\begin_layout Subsubsection
+Cyclic Blocks
 \end_layout
 
 \begin_layout Standard
-Repeating an observation from earlier in the diary, the correct way to determine
- the inner product between 
-\begin_inset Formula $f$
-\end_inset
-
- and 
-\begin_inset Formula $g$
-\end_inset
-
- with respect to the invariant measure 
-\begin_inset Formula $\nu$
-\end_inset
-
- is 
+Here's a model for explaining what's going on.
+ The operator is filled with quasi-cyclic blocks, for example
 \begin_inset Formula 
 \[
-\left\langle f,g\right\rangle =\int_{0}^{1}f\left(y\right)g\left(y\right)\left|\nu^{\prime}\left(\nu^{-1}\left(y\right)\right)\right|^{-1}dy=\int_{0}^{1}f\left(\nu\left(x\right)\right)g\left(\nu\left(x\right)\right)dx
+\left[\begin{array}{ccc}
+0 & 0 & a\\
+b & 0 & 0\\
+0 & c & 0
+\end{array}\right]
 \]
 
 \end_inset
 
-In the present case, 
-\begin_inset Formula $\nu^{\prime}\left(x\right)=\mu\left(x\right)$
+Iterating on above will cause pretty much any vector to bounce around in
+ some quasi-cyclic, quasi-ergodic fashion.
+ The above has one real, two complex eigenvalues.
+ The characteristic polynomial is 
+\begin_inset Formula $\lambda^{3}-abc=0$
 \end_inset
 
- ...
- Note the prime
+, and so one real eigenvalue at 
+\begin_inset Formula $\lambda=\sqrt[3]{abc}$
+\end_inset
+
+ and two more at complex 
+\begin_inset Formula $\lambda=-\sqrt[3]{abc}\left(1\pm i\sqrt{3}\right)/2$
+\end_inset
+
+.
+ If we get lucky and find the eigenvector for the real eigenvalue, all is
+ well.
+ Anything else will bounce in a cycle.
 \end_layout
 
 \begin_layout Section
