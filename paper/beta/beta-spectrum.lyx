@@ -6024,7 +6024,7 @@ reference "eq:invariant measure"
 
 \end_inset
 
- from first principles.
+ from geometric intuition.
  The proof is useful for practical purposes; the derivation provides insight.
  Both are given.
 \end_layout
@@ -6151,7 +6151,7 @@ The second line follows from the first, since
 \end_inset
 
  is small or large.
- Explicitly, one has 
+ Explicitly, one has
 \begin_inset Formula 
 \begin{align*}
 \Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
@@ -6240,6 +6240,233 @@ noprefix "false"
 \end_inset
 
  as claimed.
+\end_layout
+
+\begin_layout Subsubsection
+Derivation
+\end_layout
+
+\begin_layout Standard
+The measure can be geometrically constructed and intuitively understood
+ as the result of the repeated application of a bakers-map-style stretch
+ and squash operation.
+ The idea is to iterate 
+\begin_inset Formula $\nu_{n+1}=\mathcal{M}_{\beta}\nu_{n}$
+\end_inset
+
+, starting with 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+ and then take the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+; the result is 
+\begin_inset Formula $\nu_{n}\to\nu$
+\end_inset
+
+ in the limit, given as above.
+ The basic stretch-cut-stack operation provides intuition as to why 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is invariant.
+ The proof that it converges as desired is nearly identical to the (shorter)
+ proof above.
+\end_layout
+
+\begin_layout Standard
+Consider a first approximation that 
+\begin_inset Formula $\nu_{0}$
+\end_inset
+
+ is constant on the interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+, so that 
+\begin_inset Formula $\nu_{0}\left(y\right)=1$
+\end_inset
+
+.
+ The operation of 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ acting on this is to stretch it out to the interval 
+\begin_inset Formula $\left[0,\beta\right]$
+\end_inset
+
+, chop off the 
+\begin_inset Formula $\left[1,\beta\right]$
+\end_inset
+
+ part, move it to 
+\begin_inset Formula $\left[0,\beta-1\right]$
+\end_inset
+
+, stack it on top, thus doubling the density in this region.
+ The doubling, though, is partly counteracted by the stretching, which thins
+ out the density to 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+ uniformly over the entire interval 
+\begin_inset Formula $\left[0,\beta\right]$
+\end_inset
+
+.
+ This operation preserves the grand-total measure on the unit interval.
+ Writing 
+\begin_inset Formula $\beta-1=t_{1}=t\left(t_{0}\right)=t\left(1\right)$
+\end_inset
+
+ for the first iterate of the endpoint 
+\begin_inset Formula $t_{0}=1$
+\end_inset
+
+, this stretch, cut and stack operation should result in 
+\begin_inset Formula 
+\[
+\nu_{1}\left(y\right)=\begin{cases}
+\frac{2}{\beta} & \mbox{for }y\in\left[0,t_{1}\right]\\
+\frac{1}{\beta} & \mbox{for }y\in\left[t_{1},t_{0}\right]
+\end{cases}
+\]
+
+\end_inset
+
+The stretch-cut-stack operation is the intuitive, geometrical explanation
+ for obtaining the first iterate.
+ The same result is obtained algebraically, by writing 
+\begin_inset Formula $\nu_{1}=\mathcal{M}\nu_{0}$
+\end_inset
+
+ and then plugging and chugging:
+\begin_inset Formula 
+\[
+\nu_{1}\left(y\right)=\frac{1}{\beta}\left[1+\Theta\left(t_{1}-y\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The derivation of a recursive formula for 
+\begin_inset Formula $\nu_{n}$
+\end_inset
+
+ follows along the line of the algebraic proof given in the previous section,
+ this time, limiting the sums to finite order.
+ The general form is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}c_{k}\nu_{n-k-1}
+\]
+
+\end_inset
+
+which is preserved under iteration as 
+\begin_inset Formula $\nu_{n+1}=\mathcal{M}\nu_{n}$
+\end_inset
+
+.
+ The two parts are 
+\begin_inset Formula $\rho_{n}$
+\end_inset
+
+ defined as
+\begin_inset Formula 
+\[
+\rho_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)
+\]
+
+\end_inset
+
+This converges, up to overall normalization, to the invariant measure: 
+\begin_inset Formula $\rho_{n}\to F\nu$
+\end_inset
+
+ with 
+\begin_inset Formula $F$
+\end_inset
+
+ the normalization constant from before.
+ The 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ are constants, defined as
+\begin_inset Formula 
+\[
+c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
+\]
+
+\end_inset
+
+The sum in 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ is a partial 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion for 1.
+ Thus, 
+\begin_inset Formula $\left|c_{n}\right|<\beta^{-n+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{n}\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Each iteration preserves the measure, as this is the construction.
+ That is, 
+\begin_inset Formula $\int_{0}^{1}\nu_{n}\left(y\right)dy=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Plugging through gives a curious identity:
+\begin_inset Formula 
+\[
+1=\int_{0}^{1}\nu_{n}\left(y\right)dy=\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}-\sum_{k=0}^{n-1}c_{k}
+\]
+
+\end_inset
+
+which holds for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The Gelfond–Parry normalization was the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit of the first sum: 
+\begin_inset Formula $F=\sum_{k=0}^{\infty}\beta^{-k}t_{k}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection

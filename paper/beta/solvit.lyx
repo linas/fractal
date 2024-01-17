@@ -8620,7 +8620,7 @@ reference "eq:invariant measure"
 
 \end_inset
 
- from first principles.
+ from geometric intuition.
  The proof is useful for practical purposes; the derivation provides insight.
  Both are given.
 \end_layout
@@ -8843,8 +8843,9 @@ Derivation
 \end_layout
 
 \begin_layout Standard
-The measure can be intuitively understood as the result of the repeated
- application of a bakers-map-style stretch and squash operation.
+The measure can be geometrically constructed and intuitively understood
+ as the result of the repeated application of a bakers-map-style stretch
+ and squash operation.
  The idea is to iterate 
 \begin_inset Formula $\nu_{n+1}=\mathcal{M}_{\beta}\nu_{n}$
 \end_inset
@@ -9133,15 +9134,25 @@ The measure is preserved with each iteration, by construction.
 
 \end_inset
 
+This identity can be varified for small 
+\begin_inset Formula $n$
+\end_inset
 
+; TODO provide a formal proof that this holds in general.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+It holds in general, see check/tsum.c for numeric validation.
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-SoThe sum in 
+The sum in 
 \begin_inset Formula $c_{n}$
 \end_inset
 
@@ -9163,6 +9174,23 @@ SoThe sum in
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+The Gelfond–Parry normalization is the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit
+\begin_inset Formula 
+\[
+F=\sum_{k=0}^{\infty}\frac{t_{k}}{\beta^{k}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
