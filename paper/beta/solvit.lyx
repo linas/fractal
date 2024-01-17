@@ -8672,17 +8672,24 @@ noprefix "false"
  The Gelfond-Parry measure is then 
 \begin_inset Formula 
 \[
-\nu\left(y\right)=\sum_{n=0}^{\infty}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
+\nu\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{\Theta\left(t_{n}-y\right)}{\beta^{n}}
 \]
 
 \end_inset
 
-where it is more convenient to write 
-\begin_inset Formula $\varepsilon_{n}\left(y\right)=\Theta\left(t_{n}-y\right)$
+where the normalization 
+\begin_inset Formula $F$
 \end_inset
 
-.
- The transfer operator 
+ is given by 
+\begin_inset Formula 
+\[
+F=\sum_{n=0}^{\infty}\frac{t_{n}}{\beta^{n}}
+\]
+
+\end_inset
+
+The transfer operator 
 \begin_inset Formula $\mathcal{M}$
 \end_inset
 
@@ -8708,8 +8715,8 @@ and we wish to verify that
  Plugging in directly,
 \begin_inset Formula 
 \begin{align*}
-P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right)\Theta\left(\beta-1-y\right) & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n}-\frac{y}{\beta}\right)+\Theta\left(t_{n}-\frac{y+1}{\beta}\right)\Theta\left(\beta-1-y\right)\right)\\
- & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1-y\right)\right)
+P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right)\Theta\left(\beta-1-y\right) & =\frac{1}{F}\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n}-\frac{y}{\beta}\right)+\Theta\left(t_{n}-\frac{y+1}{\beta}\right)\Theta\left(\beta-1-y\right)\right)\\
+ & =\frac{1}{F}\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1-y\right)\right)
 \end{align*}
 
 \end_inset
@@ -8748,7 +8755,7 @@ since
 and so
 \begin_inset Formula 
 \[
-P=\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(\beta t_{n}-1-y\right)\right)\right)
+P=\frac{1}{F}\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(\beta t_{n}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(\beta t_{n}-1-y\right)\right)\right)
 \]
 
 \end_inset
@@ -8765,10 +8772,10 @@ These can be collapsed by noting that
 and so
 \begin_inset Formula 
 \begin{align*}
-P & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(t_{n+1}-y\right)\right)\right)\\
- & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)\left[\Theta\left(1-\beta t_{n}\right)+\Theta\left(\beta t_{n}-1\right)\right]+\Theta\left(\beta t_{n}-1\right)\right)\\
- & =\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\right)\\
- & =\beta\nu\left(y\right)-\beta+\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n}}\\
+P & =\frac{1}{F}\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(1-\beta t_{n}\right)\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\left(1+\Theta\left(t_{n+1}-y\right)\right)\right)\\
+ & =\frac{1}{F}\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)\left[\Theta\left(1-\beta t_{n}\right)+\Theta\left(\beta t_{n}-1\right)\right]+\Theta\left(\beta t_{n}-1\right)\right)\\
+ & =\frac{1}{F}\sum_{n=0}^{\infty}\frac{1}{\beta^{n}}\left(\Theta\left(t_{n+1}-y\right)+\Theta\left(\beta t_{n}-1\right)\right)\\
+ & =\beta\nu\left(y\right)-\frac{\beta}{F}+\frac{1}{F}\sum_{n=0}^{\infty}\frac{\Theta\left(\beta t_{n}-1\right)}{\beta^{n}}\\
  & =\beta\nu\left(y\right)
 \end{align*}
 
@@ -9015,6 +9022,101 @@ The sequence of
 
  limit ...
  foo.
+\end_layout
+
+\begin_layout Subsubsection
+Try again
+\end_layout
+
+\begin_layout Standard
+XXX under construction not yet right
+\end_layout
+
+\begin_layout Standard
+Starting at
+\begin_inset Formula 
+\[
+\nu_{0}\left(y\right)=\Theta\left(t_{0}-y\right)
+\]
+
+\end_inset
+
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nu_{1}\left(y\right)=\frac{1}{\beta}\left[\Theta\left(t_{0}-y\right)+\Theta\left(t_{1}-y\right)\right]
+\]
+
+\end_inset
+
+Assume
+\begin_inset Formula 
+\[
+\nu_{n}=\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Plugging in directly,
+\begin_inset Formula 
+\begin{align*}
+P_{n}=\nu_{n}\left(\frac{y}{\beta}\right)+\nu_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right) & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k}-\frac{y}{\beta}\right)+\Theta\left(t_{k}-\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\right)\\
+ & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1-y\right)\right)
+\end{align*}
+
+\end_inset
+
+These terms simplify, depending on whether 
+\begin_inset Formula $t_{n}$
+\end_inset
+
+ is small or large.
+ Explicitly, one has 
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
+\Theta\left(\beta t_{n}-y\right)=1 & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+P_{n}=\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1\right)\left(1+\Theta\left(\beta t_{k}-1-y\right)\right)\right)
+\]
+
+\end_inset
+
+These can be collapsed by noting that 
+\begin_inset Formula 
+\begin{align*}
+\beta t_{n}=t_{n+1} & \mbox{ if }\beta t_{n}-1<0\\
+\beta t_{n}-1=t_{n+1} & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+P_{n} & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\left(1+\Theta\left(t_{k+1}-y\right)\right)\right)\\
+ & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)\left[\Theta\left(1-\beta t_{k}\right)+\Theta\left(\beta t_{k}-1\right)\right]+\Theta\left(\beta t_{k}-1\right)\right)\\
+ & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
+ & =\beta\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}\\
+ & =\beta P_{n+1}-\beta+\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
