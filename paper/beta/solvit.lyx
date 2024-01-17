@@ -9095,7 +9095,7 @@ The sum in
 
 \begin_layout Standard
 The form 
-\begin_inset Formula $\nu_{n}=\rho_{n}-\sum_{k}a_{k}\nu_{k}$
+\begin_inset Formula $\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}a_{k}\nu_{k}$
 \end_inset
 
  had been assumed.
@@ -9110,21 +9110,20 @@ The form
 \begin_inset Formula 
 \begin{align*}
 \mathcal{M}\nu_{n} & =\frac{1}{\beta}P_{n}-\mathcal{M}\sum_{k=0}^{n-1}a_{k}\nu_{k}\\
- & =\nu_{n+1}-c_{n}-\sum_{k=0}^{n-1}a_{k}\mathcal{M}\nu_{k}
+ & =\rho_{n+1}-c_{n}-\sum_{k=0}^{n-1}a_{k}\mathcal{M}\nu_{k}\\
+ & =\rho_{n+1}-c_{n}-a_{n-1}\left(\rho_{n}-c_{n-1}-\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\right)-\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\\
+ & =\rho_{n+1}-c_{n}+a_{n-1}c_{n-1}-a_{n-1}\rho_{n}-\left(1-a_{n-1}\right)\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\\
+ & =\rho_{n+1}-a_{n-1}\left(\nu_{n}+\sum_{k=0}^{n-1}a_{k}\nu_{k}\right)-c_{n}+a_{n-1}c_{n-1}-\left(1-a_{n-1}\right)\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\\
+ & =\rho_{n+1}-a_{n}\nu_{n}-\sum_{k=0}^{n-1}a_{k}\nu_{k}
 \end{align*}
 
 \end_inset
 
-As noted earlier 
-\begin_inset Formula $c_{n}\to0$
-\end_inset
+xxx
+\end_layout
 
- geometrically as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-.
- This is obtained by integrating:
+\begin_layout Standard
+This is obtained by integrating:
 \end_layout
 
 \begin_layout Standard
