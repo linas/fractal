@@ -8947,7 +8947,12 @@ The stretch-cut-stack operation is the intuitive, geometrical explanation
 
 \end_inset
 
-To make the first recursive step clear, rearrange the above as
+A recursive formula for 
+\begin_inset Formula $\nu_{n}$
+\end_inset
+
+ is needed.
+ Rearrange the above as
 \end_layout
 
 \begin_layout Standard
@@ -8955,34 +8960,53 @@ To make the first recursive step clear, rearrange the above as
 \begin{align*}
 \nu_{1}\left(y\right) & =\frac{1}{\beta}\left[1+\Theta\left(t_{1}-y\right)\right]\\
  & =1+\frac{\Theta\left(t_{1}-y\right)}{\beta}-\left(1-\frac{1}{\beta}\right)\\
- & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-a_{0}\nu_{0}
+ & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-c_{0}\nu_{0}\\
+ & =\rho_{1}-c_{0}\nu_{0}
 \end{align*}
 
 \end_inset
 
-The above has the desired form for the recursive step.
- Assume that
+The appropriate general form will use 
+\begin_inset Formula $\rho_{n}$
+\end_inset
+
+ defined as
 \begin_inset Formula 
 \[
-\nu_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\sum_{k=0}^{n-1}a_{k}\nu_{k}
+\rho_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)
 \]
 
 \end_inset
 
+and 
+\begin_inset Formula $c_{n}$
+\end_inset
 
+ defined as
+\begin_inset Formula 
+\[
+c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
+\]
+
+\end_inset
+
+It will be shown that the recursive form is
+\begin_inset Formula 
+\[
+\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}c_{k}\nu_{n-k-1}
+\]
+
+\end_inset
+
+Iteration is performed directly, so that 
+\begin_inset Formula $\nu_{n+1}=\mathcal{M}\nu_{n}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Iteration is performed directly: 
-\begin_inset Formula $\nu_{n+1}=\mathcal{M}_{\beta}\nu_{n}$
-\end_inset
-
-, as follows.
- For convenience, set aside the lower-order term and write 
-\begin_inset Formula $\rho_{n}=\nu_{n}+\sum_{k}a_{k}\nu_{k}=\sum_{k=0}^{n}\beta^{-k}\Theta\left(t_{k}-y\right)$
-\end_inset
-
- and apply 
+It is conventient to isolate the action of 
 \begin_inset Formula $\mathcal{M}$
 \end_inset
 
@@ -8991,10 +9015,10 @@ Iteration is performed directly:
 \end_inset
 
 .
- Plugging in directly,
+ Plugging through,
 \begin_inset Formula 
 \begin{align*}
-P_{n} & =\rho_{n}\left(\frac{y}{\beta}\right)+\rho_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+\beta\mathcal{M}\rho_{n}=P_{n} & =\rho_{n}\left(\frac{y}{\beta}\right)+\rho_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k}-\frac{y}{\beta}\right)+\Theta\left(t_{k}-\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1-y\right)\right)
 \end{align*}
@@ -9052,24 +9076,42 @@ P_{n} & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)\left[\Theta\left(1-\beta t_{k}\right)+\Theta\left(\beta t_{k}-1\right)\right]+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\beta\sum_{k=0}^{n+1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\beta\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\\
- & \beta\rho_{n+1}-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)
+ & =\beta\rho_{n+1}-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)\\
+ & =\beta\left(\rho_{n+1}-c_{n}\right)
 \end{align*}
 
 \end_inset
 
-This has the same form, as before up to a constant term 
-\begin_inset Formula $c_{n}$
+
+\end_layout
+
+\begin_layout Standard
+Returning to the Ansatz for 
+\begin_inset Formula $\nu_{n}$
 \end_inset
 
-, 
+ in terms of 
+\begin_inset Formula $\rho_{n}$
+\end_inset
+
+ and plugging through,
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
-\[
-c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
-\]
+\begin{align*}
+\nu_{n+1}=\mathcal{M}\nu_{n} & =\frac{1}{\beta}P_{n}-\mathcal{M}\sum_{k=0}^{n-1}c_{k}\nu_{n-k-1}\\
+ & =\rho_{n+1}-c_{n}-\sum_{k=0}^{n-1}c_{k}\nu_{n-k}\\
+ & =\rho_{n+1}-\sum_{k=0}^{n}c_{k}\nu_{n-k-1}
+\end{align*}
 
 \end_inset
 
-The sum in 
+and so the
+\end_layout
+
+\begin_layout Standard
+xxxThe sum in 
 \begin_inset Formula $c_{n}$
 \end_inset
 
@@ -9091,35 +9133,6 @@ The sum in
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The form 
-\begin_inset Formula $\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}a_{k}\nu_{k}$
-\end_inset
-
- had been assumed.
- Returning to work with 
-\begin_inset Formula $\nu_{n}$
-\end_inset
-
- directly gives
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\mathcal{M}\nu_{n} & =\frac{1}{\beta}P_{n}-\mathcal{M}\sum_{k=0}^{n-1}a_{k}\nu_{k}\\
- & =\rho_{n+1}-c_{n}-\sum_{k=0}^{n-1}a_{k}\mathcal{M}\nu_{k}\\
- & =\rho_{n+1}-c_{n}-a_{n-1}\left(\rho_{n}-c_{n-1}-\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\right)-\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\\
- & =\rho_{n+1}-c_{n}+a_{n-1}c_{n-1}-a_{n-1}\rho_{n}-\left(1-a_{n-1}\right)\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\\
- & =\rho_{n+1}-a_{n-1}\left(\nu_{n}+\sum_{k=0}^{n-1}a_{k}\nu_{k}\right)-c_{n}+a_{n-1}c_{n-1}-\left(1-a_{n-1}\right)\sum_{k=0}^{n-2}a_{k}\mathcal{M}\nu_{k}\\
- & =\rho_{n+1}-a_{n}\nu_{n}-\sum_{k=0}^{n-1}a_{k}\nu_{k}
-\end{align*}
-
-\end_inset
-
-xxx
 \end_layout
 
 \begin_layout Standard
