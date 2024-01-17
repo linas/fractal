@@ -8952,56 +8952,9 @@ It will be convenient to write in short-hand
 
  so as to save space.
  Repeating the stretch-cut-and-stack operation a second time gives
-\begin_inset Formula 
-\begin{align*}
-\nu_{2}\left(y\right) & =\frac{1}{\beta}\left[\nu_{1}\left(\frac{y}{\beta}\right)+\nu_{1}\left(\frac{y+1}{\beta}\right)\Theta_{1}\right]\\
- & =\frac{1}{\beta^{2}}\left[\Theta\left(t_{0}-\frac{y}{\beta}\right)+\Theta\left(t_{1}-\frac{y}{\beta}\right)+\Theta\left(t_{0}-\frac{y+1}{\beta}\right)\Theta_{1}+\Theta\left(t_{1}-\frac{y+1}{\beta}\right)\Theta_{1}\right]\\
- & =\frac{1}{\beta^{2}}\left[\Theta_{0}+\Theta\left(\beta t_{1}-y\right)+\Theta\left(t_{1}-y\right)\Theta_{1}+\Theta\left(\beta t_{1}-1-y\right)\Theta_{1}\right]\\
- & =\frac{1}{\beta^{2}}\left[\Theta_{0}+\Theta_{1}+\Theta\left(\beta t_{1}-y\right)+\Theta\left(\beta t_{1}-1-y\right)\Theta_{1}\right]
-\end{align*}
-
-\end_inset
-
-As noted earlier,
-\begin_inset Formula 
-\begin{align*}
-\Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
-\Theta\left(\beta t_{n}-y\right)=1 & \mbox{ if }\beta t_{n}-1>0
-\end{align*}
-
-\end_inset
-
-and
-\begin_inset Formula 
-\begin{align*}
-\beta t_{n}=t_{n+1} & \mbox{ if }\beta t_{n}-1<0\\
-\beta t_{n}-1=t_{n+1} & \mbox{ if }\beta t_{n}-1>0
-\end{align*}
-
-\end_inset
-
-So
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\nu_{2}\left(y\right) & =\frac{1}{\beta^{2}}\left[\Theta_{0}+\Theta_{1}+\Theta_{2}+\Theta_{0}\Theta\left(\beta t_{1}-1\right)\right]\\
- & =\frac{\nu_{1}\left(y\right)}{\beta}+\frac{\Theta\left(\beta t_{1}-1\right)}{\beta^{2}}+\frac{\Theta_{2}}{\beta^{2}}
-\end{align*}
-
-\end_inset
-
-Performing it repeatedly gives ...
- XXXX unfinished.
- The goal here was to reproduce the previous proof, but extract
-\begin_inset Formula 
-\begin{align*}
-\nu_{n}\left(y\right) & =\sum_{k=0}^{n}
-\end{align*}
-
-\end_inset
-
 The integral is preserved, since
 \begin_inset Formula 
 \begin{align*}
@@ -9050,18 +9003,36 @@ and
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-\nu_{1}\left(y\right)=\frac{1}{\beta}\Theta\left(t_{0}-y\right)+\frac{1}{\beta}\Theta\left(t_{1}-y\right)
-\]
+\begin{align*}
+\nu_{1}\left(y\right) & =\frac{1}{\beta}\left[1+\Theta\left(t_{1}-y\right)\right]\\
+ & =1+\frac{\Theta\left(t_{1}-y\right)}{\beta}-\left(1-\frac{1}{\beta}\right)\\
+ & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-c_{1}
+\end{align*}
 
 \end_inset
 
 Assume
 \begin_inset Formula 
 \[
-\nu_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)
+\nu_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-c_{n}
 \]
 
+\end_inset
+
+where 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ is a constant, 
+\begin_inset Formula 
+\[
+c_{n}=1-\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
+\]
+
+\end_inset
+
+For convenience, set aside the constant term and write 
+\begin_inset Formula $\rho_{n}=\nu_{n}+c_{n}$
 \end_inset
 
 
@@ -9071,7 +9042,8 @@ Assume
 Plugging in directly,
 \begin_inset Formula 
 \begin{align*}
-P_{n}=\nu_{n}\left(\frac{y}{\beta}\right)+\nu_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right) & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k}-\frac{y}{\beta}\right)+\Theta\left(t_{k}-\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\right)\\
+P_{n} & =\rho_{n}\left(\frac{y}{\beta}\right)+\rho_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k}-\frac{y}{\beta}\right)+\Theta\left(t_{k}-\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1-y\right)\right)
 \end{align*}
 
@@ -9130,13 +9102,35 @@ and so
 P_{n} & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\left(1+\Theta\left(t_{k+1}-y\right)\right)\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)\left[\Theta\left(1-\beta t_{k}\right)+\Theta\left(\beta t_{k}-1\right)\right]+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
- & =\beta\sum_{k=0}^{n+1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}\\
- & =\beta\nu_{n+1}-\beta-\frac{\Theta\left(\beta t_{n+1}-1\right)}{\beta^{n+1}}+\sum_{k=0}^{n+1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}
+ & =\beta\sum_{k=0}^{n+1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\beta\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\\
+ & =\beta\left(\nu_{n+1}+c_{n+1}\right)-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)\\
+ & =\beta\nu_{n+1}
 \end{align*}
 
 \end_inset
 
+wtih ontly one problem...
+\end_layout
 
+\begin_layout Standard
+But 
+\begin_inset Formula 
+\begin{align*}
+\mathcal{M}\nu_{n} & =\frac{1}{\beta}\left[P_{n}-c_{n}\left(1+\Theta_{1}\right)\right]\\
+ & =\nu_{n+1}-c_{n}\left(1+\Theta_{1}\right)
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $c_{n}\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ so all ok in the end...
 \end_layout
 
 \begin_layout Subsection
