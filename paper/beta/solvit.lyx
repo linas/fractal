@@ -8955,7 +8955,7 @@ To make the first recursive step clear, rearrange the above as
 \begin{align*}
 \nu_{1}\left(y\right) & =\frac{1}{\beta}\left[1+\Theta\left(t_{1}-y\right)\right]\\
  & =1+\frac{\Theta\left(t_{1}-y\right)}{\beta}-\left(1-\frac{1}{\beta}\right)\\
- & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-c_{1}
+ & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-a_{0}\nu_{0}
 \end{align*}
 
 \end_inset
@@ -8964,55 +8964,12 @@ The above has the desired form for the recursive step.
  Assume that
 \begin_inset Formula 
 \[
-\nu_{n}=\frac{1}{a_{n}}\left[\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-c_{n}\right]
+\nu_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\sum_{k=0}^{n-1}a_{k}\nu_{k}
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $c_{n}$
-\end_inset
 
- is a constant, 
-\begin_inset Formula 
-\[
-c_{n}=1-\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
-\]
-
-\end_inset
-
-The sum in 
-\begin_inset Formula $c_{n}$
-\end_inset
-
- is a partial 
-\begin_inset Formula $\beta$
-\end_inset
-
--expansion for 1.
- Thus, 
-\begin_inset Formula $\left|c_{n}\right|<\beta^{-n+1}$
-\end_inset
-
- and 
-\begin_inset Formula $c_{n}\to0$
-\end_inset
-
- as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-.
- The constant 
-\begin_inset Formula $a_{n}$
-\end_inset
-
- is a normaization constant, as the stretch-cut-stack map must maintain
- 
-\begin_inset Formula $\int_{0}^{1}\nu_{n}\left(y\right)dy=1$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -9021,8 +8978,8 @@ Iteration is performed directly:
 \end_inset
 
 , as follows.
- For convenience, set aside the constant term and write 
-\begin_inset Formula $\rho_{n}=a_{n}\nu_{n}+c_{n}=\sum_{k=0}^{n}\beta^{-k}\Theta\left(t_{k}-y\right)$
+ For convenience, set aside the lower-order term and write 
+\begin_inset Formula $\rho_{n}=\nu_{n}+\sum_{k}a_{k}\nu_{k}=\sum_{k=0}^{n}\beta^{-k}\Theta\left(t_{k}-y\right)$
 \end_inset
 
  and apply 
@@ -9095,21 +9052,65 @@ P_{n} & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)\left[\Theta\left(1-\beta t_{k}\right)+\Theta\left(\beta t_{k}-1\right)\right]+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\beta\sum_{k=0}^{n+1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\beta\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\\
- & \beta\rho_{n+1}-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)\\
- & =\beta\left(a_{n+1}\nu_{n+1}+c_{n+1}\right)-\beta c_{n+1}\\
- & =\beta a_{n+1}\nu_{n+1}
+ & \beta\rho_{n+1}-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)
 \end{align*}
 
 \end_inset
 
-To get the final form, the constants should be reinserted:
+This has the same form, as before up to a constant term 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
+\]
+
+\end_inset
+
+The sum in 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ is a partial 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion for 1.
+ Thus, 
+\begin_inset Formula $\left|c_{n}\right|<\beta^{-n+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{n}\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The form 
+\begin_inset Formula $\nu_{n}=\rho_{n}-\sum_{k}a_{k}\nu_{k}$
+\end_inset
+
+ had been assumed.
+ Returning to work with 
+\begin_inset Formula $\nu_{n}$
+\end_inset
+
+ directly gives
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathcal{M}\nu_{n} & =\frac{1}{a_{n}\beta}\left[P_{n}-c_{n}\left(1+\Theta_{1}\right)\right]\\
- & =\frac{1}{a_{n}}\left[a_{n+1}\nu_{n+1}-\frac{1}{\beta}c_{n}\left(1+\Theta_{1}\right)\right]
+\mathcal{M}\nu_{n} & =\frac{1}{\beta}P_{n}-\mathcal{M}\sum_{k=0}^{n-1}a_{k}\nu_{k}\\
+ & =\nu_{n+1}-c_{n}-\sum_{k=0}^{n-1}a_{k}\mathcal{M}\nu_{k}
 \end{align*}
 
 \end_inset
@@ -9123,23 +9124,14 @@ As noted earlier
 \end_inset
 
 .
- The normalization constants approach a limit 
-\begin_inset Formula $a_{n}\to F$
-\end_inset
-
-; the ratio approaches 
-\begin_inset Formula $a_{n+1}/a_{n}\to1$
-\end_inset
-
-.
  This is obtained by integrating:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-1=\int_{0}^{1}\nu_{n}\left(y\right)dy & =\frac{1}{a_{n}}\left[\sum_{k=0}^{n}\frac{1}{\beta^{k}}\int_{0}^{1}\Theta\left(t_{k}-y\right)dy+c_{n}\right]\\
- & =\frac{1}{a_{n}}\left[\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}+c_{n}\right]
+\int_{0}^{1}\rho_{n}\left(y\right)dy & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\int_{0}^{1}\Theta\left(t_{k}-y\right)dy\\
+ & =\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}
 \end{align*}
 
 \end_inset
