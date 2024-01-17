@@ -8827,6 +8827,196 @@ noprefix "false"
  as claimed.
 \end_layout
 
+\begin_layout Subsubsection
+Derivation
+\end_layout
+
+\begin_layout Standard
+The measure can be derived from first principles, by repeated application
+ of a bakers-map-style stretch and squash operation.
+ The idea is simply to iterate 
+\begin_inset Formula $\nu_{n+1}=\mathcal{M}_{\beta}\nu_{n}$
+\end_inset
+
+, starting with 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+ and take the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ With luck, one should find 
+\begin_inset Formula $\nu_{n}\to\nu$
+\end_inset
+
+ in this limit, given as above.
+ This is sketched, a bit informally, here.
+ XXX Unfinished!
+\end_layout
+
+\begin_layout Standard
+Begin with a first approximation that 
+\begin_inset Formula $\nu_{0}$
+\end_inset
+
+ is constant on the interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+, so that 
+\begin_inset Formula $\nu_{0}\left(x\right)=\Theta\left(t_{0}-y\right)$
+\end_inset
+
+ with endpoint 
+\begin_inset Formula $t_{0}=1$
+\end_inset
+
+.
+ The operation of 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ acting on this is to stretch it out to the interval 
+\begin_inset Formula $\left[0,\beta\right]$
+\end_inset
+
+, chop off the 
+\begin_inset Formula $\left[1,\beta\right]$
+\end_inset
+
+ part, and and move it to 
+\begin_inset Formula $\left[0,\beta-1\right]$
+\end_inset
+
+, stacking it on top, doubling the density in this region.
+ The doubling, though, is partly counteracted by the stretching, which thinned
+ out the density to 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+ uniformly over the entire interval 
+\begin_inset Formula $\left[0,\beta\right]$
+\end_inset
+
+.
+ This operation preserves the grand-total measure on the unit interval.
+ Writing 
+\begin_inset Formula $\beta-1=t_{1}=t\left(t_{0}\right)=t\left(1\right)$
+\end_inset
+
+ for the first iterate of the endpoint 
+\begin_inset Formula $t_{0}=1$
+\end_inset
+
+, this stretch, cut and stack operation should result in 
+\begin_inset Formula 
+\[
+\nu_{1}\left(y\right)=\begin{cases}
+\frac{2}{\beta} & \mbox{for }y\in\left[0,t_{1}\right]\\
+\frac{1}{\beta} & \mbox{for }y\in\left[t_{1},t_{0}\right]
+\end{cases}
+\]
+
+\end_inset
+
+That is the intuitive, geometrical explanation.
+ One obtains the same result algebraically by writing 
+\begin_inset Formula $\nu_{1}=\mathcal{M}\nu_{0}$
+\end_inset
+
+ and then plugging and chugging:
+\begin_inset Formula 
+\begin{align*}
+\nu_{1}\left(y\right) & =\frac{1}{\beta}\left[\Theta\left(t_{0}-y\right)+\Theta\left(t_{1}-y\right)\right]\\
+ & =\frac{\nu_{0}\left(y\right)}{\beta}+\frac{\Theta\left(t_{1}-y\right)}{\beta}
+\end{align*}
+
+\end_inset
+
+It will be convenient to write in short-hand 
+\begin_inset Formula $\Theta_{n}=\Theta\left(t_{n}-y\right)$
+\end_inset
+
+ so as to save space.
+ Repeating the stretch-cut-and-stack operation a second time gives
+\begin_inset Formula 
+\begin{align*}
+\nu_{2}\left(y\right) & =\frac{1}{\beta}\left[\nu_{1}\left(\frac{y}{\beta}\right)+\nu_{1}\left(\frac{y+1}{\beta}\right)\Theta_{1}\right]\\
+ & =\frac{1}{\beta^{2}}\left[\Theta\left(t_{0}-\frac{y}{\beta}\right)+\Theta\left(t_{1}-\frac{y}{\beta}\right)+\Theta\left(t_{0}-\frac{y+1}{\beta}\right)\Theta_{1}+\Theta\left(t_{1}-\frac{y+1}{\beta}\right)\Theta_{1}\right]\\
+ & =\frac{1}{\beta^{2}}\left[\Theta_{0}+\Theta\left(\beta t_{1}-y\right)+\Theta\left(t_{1}-y\right)\Theta_{1}+\Theta\left(\beta t_{1}-1-y\right)\Theta_{1}\right]\\
+ & =\frac{1}{\beta^{2}}\left[\Theta_{0}+\Theta_{1}+\Theta\left(\beta t_{1}-y\right)+\Theta\left(\beta t_{1}-1-y\right)\Theta_{1}\right]
+\end{align*}
+
+\end_inset
+
+As noted earlier,
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
+\Theta\left(\beta t_{n}-y\right)=1 & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\beta t_{n}=t_{n+1} & \mbox{ if }\beta t_{n}-1<0\\
+\beta t_{n}-1=t_{n+1} & \mbox{ if }\beta t_{n}-1>0
+\end{align*}
+
+\end_inset
+
+So
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\nu_{2}\left(y\right) & =\frac{1}{\beta^{2}}\left[\Theta_{0}+\Theta_{1}+\Theta_{2}+\Theta_{0}\Theta\left(\beta t_{1}-1\right)\right]\\
+ & =\frac{\nu_{1}\left(y\right)}{\beta}+\frac{\Theta\left(\beta t_{1}-1\right)}{\beta^{2}}+\frac{\Theta_{2}}{\beta^{2}}
+\end{align*}
+
+\end_inset
+
+Performing it repeatedly gives ...
+ XXXX unfinished.
+ The goal here was to reproduce the previous proof, but extract
+\begin_inset Formula 
+\begin{align*}
+\nu_{n}\left(y\right) & =\sum_{k=0}^{n}
+\end{align*}
+
+\end_inset
+
+The integral is preserved, since
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}\nu_{n}\left(y\right)dy & =...
+\end{align*}
+
+\end_inset
+
+The sequence of 
+\begin_inset Formula $\nu_{n}$
+\end_inset
+
+ constructed above give a density that is the result of 
+\begin_inset Formula $n$
+\end_inset
+
+ repeated stretch-cut-stack operations.
+ They preserve the total density.
+ The 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit ...
+ foo.
+\end_layout
+
 \begin_layout Subsection
 Analytic Gelfond-Parry function
 \begin_inset CommandInset label
