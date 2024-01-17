@@ -8721,7 +8721,7 @@ P=\nu\left(\frac{y}{\beta}\right)+\nu\left(\frac{y+1}{\beta}\right)\Theta\left(\
 
 \end_inset
 
-since 
+The second line follows from the first, since 
 \begin_inset Formula $\Theta\left(ax\right)=\Theta\left(x\right)$
 \end_inset
 
@@ -8729,7 +8729,11 @@ since
 \begin_inset Formula $a$
 \end_inset
 
-, and since 
+, and the 
+\begin_inset Formula $\Theta\left(\beta-1-y\right)$
+\end_inset
+
+ can be safely dropped, since 
 \begin_inset Formula $t_{n}\le1$
 \end_inset
 
@@ -9047,7 +9051,7 @@ and
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\nu_{1}\left(y\right)=\frac{1}{\beta}\left[\Theta\left(t_{0}-y\right)+\Theta\left(t_{1}-y\right)\right]
+\nu_{1}\left(y\right)=\frac{1}{\beta}\Theta\left(t_{0}-y\right)+\frac{1}{\beta}\Theta\left(t_{1}-y\right)
 \]
 
 \end_inset
@@ -9055,7 +9059,7 @@ and
 Assume
 \begin_inset Formula 
 \[
-\nu_{n}=\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)
+\nu_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)
 \]
 
 \end_inset
@@ -9067,12 +9071,28 @@ Assume
 Plugging in directly,
 \begin_inset Formula 
 \begin{align*}
-P_{n}=\nu_{n}\left(\frac{y}{\beta}\right)+\nu_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right) & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k}-\frac{y}{\beta}\right)+\Theta\left(t_{k}-\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\right)\\
- & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1-y\right)\right)
+P_{n}=\nu_{n}\left(\frac{y}{\beta}\right)+\nu_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right) & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k}-\frac{y}{\beta}\right)+\Theta\left(t_{k}-\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\right)\\
+ & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1-y\right)\right)
 \end{align*}
 
 \end_inset
 
+The 
+\begin_inset Formula $\Theta\left(t_{1}-y\right)$
+\end_inset
+
+ can be safely dropped, because 
+\begin_inset Formula $t_{k}\le1$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 These terms simplify, depending on whether 
 \begin_inset Formula $t_{n}$
 \end_inset
@@ -9090,7 +9110,7 @@ These terms simplify, depending on whether
 and so
 \begin_inset Formula 
 \[
-P_{n}=\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1\right)\left(1+\Theta\left(\beta t_{k}-1-y\right)\right)\right)
+P_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Theta\left(\beta t_{k}-y\right)+\Theta\left(\beta t_{k}-1\right)\left(1+\Theta\left(\beta t_{k}-1-y\right)\right)\right)
 \]
 
 \end_inset
@@ -9107,11 +9127,11 @@ These can be collapsed by noting that
 and so
 \begin_inset Formula 
 \begin{align*}
-P_{n} & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\left(1+\Theta\left(t_{k+1}-y\right)\right)\right)\\
- & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)\left[\Theta\left(1-\beta t_{k}\right)+\Theta\left(\beta t_{k}-1\right)\right]+\Theta\left(\beta t_{k}-1\right)\right)\\
- & =\sum_{k=0}^{n-1}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
- & =\beta\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}\\
- & =\beta P_{n+1}-\beta+\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}
+P_{n} & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\left(1+\Theta\left(t_{k+1}-y\right)\right)\right)\\
+ & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)\left[\Theta\left(1-\beta t_{k}\right)+\Theta\left(\beta t_{k}-1\right)\right]+\Theta\left(\beta t_{k}-1\right)\right)\\
+ & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
+ & =\beta\sum_{k=0}^{n+1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}\\
+ & =\beta\nu_{n+1}-\beta-\frac{\Theta\left(\beta t_{n+1}-1\right)}{\beta^{n+1}}+\sum_{k=0}^{n+1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k}}
 \end{align*}
 
 \end_inset
