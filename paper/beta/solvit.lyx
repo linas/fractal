@@ -8843,9 +8843,9 @@ Derivation
 \end_layout
 
 \begin_layout Standard
-The measure can be derived from first principles, by repeated application
- of a bakers-map-style stretch and squash operation.
- The idea is simply to iterate 
+The measure can be intuitively understood as the result of the repeated
+ application of a bakers-map-style stretch and squash operation.
+ The idea is to iterate 
 \begin_inset Formula $\nu_{n+1}=\mathcal{M}_{\beta}\nu_{n}$
 \end_inset
 
@@ -8853,18 +8853,18 @@ The measure can be derived from first principles, by repeated application
 \begin_inset Formula $\nu_{0}=1$
 \end_inset
 
- and take the limit 
+ and then take the limit 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
-.
- With luck, one should find 
+; the result is 
 \begin_inset Formula $\nu_{n}\to\nu$
 \end_inset
 
- in this limit, given as above.
- This is sketched, a bit informally, here.
- XXX Unfinished!
+ in the limit, given as above.
+ The basic stretch-cut-stack operation is given below, providing the intuition.
+ The proof that it converges as desired is nearly identical to the (shorter)
+ proof above.
 \end_layout
 
 \begin_layout Standard
@@ -8897,12 +8897,12 @@ Begin with a first approximation that
 \begin_inset Formula $\left[1,\beta\right]$
 \end_inset
 
- part, and and move it to 
+ part, move it to 
 \begin_inset Formula $\left[0,\beta-1\right]$
 \end_inset
 
-, stacking it on top, doubling the density in this region.
- The doubling, though, is partly counteracted by the stretching, which thinned
+, stack it on top, doubling the density in this region.
+ The doubling, though, is partly counteracted by the stretching, which thins
  out the density to 
 \begin_inset Formula $1/\beta$
 \end_inset
@@ -8932,8 +8932,9 @@ Begin with a first approximation that
 
 \end_inset
 
-That is the intuitive, geometrical explanation.
- One obtains the same result algebraically by writing 
+The stretch-cut-stack operation is the intuitive, geometrical explanation
+ for obtaining the first iterate.
+ The same result is obtained algebraically, by writing 
 \begin_inset Formula $\nu_{1}=\mathcal{M}\nu_{0}$
 \end_inset
 
@@ -8946,59 +8947,7 @@ That is the intuitive, geometrical explanation.
 
 \end_inset
 
-It will be convenient to write in short-hand 
-\begin_inset Formula $\Theta_{n}=\Theta\left(t_{n}-y\right)$
-\end_inset
-
- so as to save space.
- Repeating the stretch-cut-and-stack operation a second time gives
-\end_layout
-
-\begin_layout Standard
-The integral is preserved, since
-\begin_inset Formula 
-\begin{align*}
-\int_{0}^{1}\nu_{n}\left(y\right)dy & =...
-\end{align*}
-
-\end_inset
-
-The sequence of 
-\begin_inset Formula $\nu_{n}$
-\end_inset
-
- constructed above give a density that is the result of 
-\begin_inset Formula $n$
-\end_inset
-
- repeated stretch-cut-stack operations.
- They preserve the total density.
- The 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
- limit ...
- foo.
-\end_layout
-
-\begin_layout Subsubsection
-Try again
-\end_layout
-
-\begin_layout Standard
-XXX under construction not yet right
-\end_layout
-
-\begin_layout Standard
-Starting at
-\begin_inset Formula 
-\[
-\nu_{0}\left(y\right)=\Theta\left(t_{0}-y\right)
-\]
-
-\end_inset
-
-and
+To make the first recursive step clear, rearrange the above as
 \end_layout
 
 \begin_layout Standard
@@ -9011,10 +8960,11 @@ and
 
 \end_inset
 
-Assume
+The above has the desired form for the recursive step.
+ Assume that
 \begin_inset Formula 
 \[
-\nu_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-c_{n}
+\nu_{n}=\frac{1}{a_{n}}\left[\sum_{k=0}^{n}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-c_{n}\right]
 \]
 
 \end_inset
@@ -9031,15 +8981,60 @@ c_{n}=1-\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
 
 \end_inset
 
-For convenience, set aside the constant term and write 
-\begin_inset Formula $\rho_{n}=\nu_{n}+c_{n}$
+The sum in 
+\begin_inset Formula $c_{n}$
 \end_inset
 
+ is a partial 
+\begin_inset Formula $\beta$
+\end_inset
 
+-expansion for 1.
+ Thus, 
+\begin_inset Formula $\left|c_{n}\right|<\beta^{-n+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{n}\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ The constant 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ is a normaization constant, as the stretch-cut-stack map must maintain
+ 
+\begin_inset Formula $\int_{0}^{1}\nu_{n}\left(y\right)dy=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Plugging in directly,
+Iteration is performed directly: 
+\begin_inset Formula $\nu_{n+1}=\mathcal{M}_{\beta}\nu_{n}$
+\end_inset
+
+, as follows.
+ For convenience, set aside the constant term and write 
+\begin_inset Formula $\rho_{n}=a_{n}\nu_{n}+c_{n}=\sum_{k=0}^{n}\beta^{-k}\Theta\left(t_{k}-y\right)$
+\end_inset
+
+ and apply 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ on 
+\begin_inset Formula $\rho_{n}$
+\end_inset
+
+.
+ Plugging in directly,
 \begin_inset Formula 
 \begin{align*}
 P_{n} & =\rho_{n}\left(\frac{y}{\beta}\right)+\rho_{n}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
@@ -9062,19 +9057,16 @@ The
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-These terms simplify, depending on whether 
-\begin_inset Formula $t_{n}$
+ These terms simplify, depending on whether 
+\begin_inset Formula $t_{k}$
 \end_inset
 
  is small or large.
  Explicitly, one has 
 \begin_inset Formula 
 \begin{align*}
-\Theta\left(\beta t_{n}-1-y\right)=0 & \mbox{ if }\beta t_{n}-1<0\\
-\Theta\left(\beta t_{n}-y\right)=1 & \mbox{ if }\beta t_{n}-1>0
+\Theta\left(\beta t_{k}-1-y\right)=0 & \mbox{ if }\beta t_{k}-1<0\\
+\Theta\left(\beta t_{k}-y\right)=1 & \mbox{ if }\beta t_{k}-1>0
 \end{align*}
 
 \end_inset
@@ -9090,8 +9082,8 @@ P_{n}=\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)\Th
 These can be collapsed by noting that 
 \begin_inset Formula 
 \begin{align*}
-\beta t_{n}=t_{n+1} & \mbox{ if }\beta t_{n}-1<0\\
-\beta t_{n}-1=t_{n+1} & \mbox{ if }\beta t_{n}-1>0
+\beta t_{k}=t_{k+1} & \mbox{ if }\beta t_{k}-1<0\\
+\beta t_{k}-1=t_{k+1} & \mbox{ if }\beta t_{k}-1>0
 \end{align*}
 
 \end_inset
@@ -9103,34 +9095,71 @@ P_{n} & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)\left[\Theta\left(1-\beta t_{k}\right)+\Theta\left(\beta t_{k}-1\right)\right]+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\beta\sum_{k=0}^{n+1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\beta\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\\
- & =\beta\left(\nu_{n+1}+c_{n+1}\right)-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)\\
- & =\beta\nu_{n+1}
+ & \beta\rho_{n+1}-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)\\
+ & =\beta\left(a_{n+1}\nu_{n+1}+c_{n+1}\right)-\beta c_{n+1}\\
+ & =\beta a_{n+1}\nu_{n+1}
 \end{align*}
 
 \end_inset
 
-wtih ontly one problem...
+To get the final form, the constants should be reinserted:
 \end_layout
 
 \begin_layout Standard
-But 
 \begin_inset Formula 
 \begin{align*}
-\mathcal{M}\nu_{n} & =\frac{1}{\beta}\left[P_{n}-c_{n}\left(1+\Theta_{1}\right)\right]\\
- & =\nu_{n+1}-c_{n}\left(1+\Theta_{1}\right)
+\mathcal{M}\nu_{n} & =\frac{1}{a_{n}}\left[\frac{P_{n}}{\beta}-c_{n}\left(1+\Theta_{1}\right)\right]\\
+ & =\frac{1}{a_{n}}\left[a_{n+1}\nu_{n+1}-c_{n}\left(1+\Theta_{1}\right)\right]
 \end{align*}
 
 \end_inset
 
-but 
+As noted earlier 
 \begin_inset Formula $c_{n}\to0$
 \end_inset
 
- as 
+ geometrically as 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
- so all ok in the end...
+.
+ The normalization constants approach a limit 
+\begin_inset Formula $a_{n}\to F$
+\end_inset
+
+; the ratio approaches 
+\begin_inset Formula $a_{n+1}/a_{n}\to1$
+\end_inset
+
+.
+ This is obtained by integrating:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+1=\int_{0}^{1}\nu_{n}\left(y\right)dy & =\frac{1}{a_{n}}\left[\sum_{k=0}^{n}\frac{1}{\beta^{k}}\int_{0}^{1}\Theta\left(t_{k}-y\right)dy+c_{n}\right]\\
+ & =\frac{1}{a_{n}}\left[\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}+c_{n}\right]
+\end{align*}
+
+\end_inset
+
+The sequence of 
+\begin_inset Formula $\nu_{n}$
+\end_inset
+
+ constructed above give a density that is the result of 
+\begin_inset Formula $n$
+\end_inset
+
+ repeated stretch-cut-stack operations.
+ They preserve the total density.
+ The 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit ...
+ foo.
 \end_layout
 
 \begin_layout Subsection
