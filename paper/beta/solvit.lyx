@@ -8961,7 +8961,7 @@ A recursive formula for
 \begin_inset Formula 
 \begin{align*}
 \nu_{1}\left(y\right) & =\frac{1}{\beta}\left[1+\Theta\left(t_{1}-y\right)\right]\\
- & =1+\frac{\Theta\left(t_{1}-y\right)}{\beta}-\left(1-\frac{1}{\beta}\right)\\
+ & =\Theta\left(t_{0}-y\right)+\frac{\Theta\left(t_{1}-y\right)}{\beta}-\left(1-\frac{1}{\beta}\right)\\
  & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-c_{0}\nu_{0}\\
  & =\rho_{1}-c_{0}\nu_{0}
 \end{align*}
@@ -9040,7 +9040,23 @@ The
 \end_inset
 
 .
- These terms simplify, depending on whether 
+ That is, 
+\begin_inset Formula $\Theta\left(t_{1}-y\right)=\Theta\left(\beta-1-y\right)$
+\end_inset
+
+ and since 
+\begin_inset Formula $\beta t_{k}-1-y\le\beta-1-y$
+\end_inset
+
+ the extra factor of 
+\begin_inset Formula $\Theta\left(t_{1}-y\right)$
+\end_inset
+
+ has no effect.
+\end_layout
+
+\begin_layout Standard
+These terms simplify, depending on whether 
 \begin_inset Formula $t_{k}$
 \end_inset
 
@@ -9451,7 +9467,8 @@ These can be collapsed by noting that
 \begin{align*}
 \eta_{2} & =\left[\nu_{0}\left(\frac{y}{\beta^{2}}+\frac{1}{\beta}\right)+\nu_{0}\left(\frac{y+1}{\beta^{2}}+\frac{1}{\beta}\right)\Theta\left(t_{2}-y\right)\right]\Theta\left(\beta t_{1}-1\right)\\
  & \qquad+\nu_{0}\left(\frac{y}{\beta^{2}}+\frac{1}{\beta}\right)\Theta\left(t_{2}-y\right)\Theta\left(1-\beta t_{1}\right)\\
- & =\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)+\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\right]\Theta\left(t_{2}-y\right)
+ & =\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(1-\beta t_{1}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{2}-y\right)
 \end{align*}
 
 \end_inset
@@ -9460,18 +9477,155 @@ Lets reassemble the grand-total, and contemplate:
 \begin_inset Formula 
 \begin{align*}
 \beta^{2}\nu_{2} & =\nu_{0}\left(\frac{y}{\beta^{2}}\right)\Theta\left(\beta t_{0}-1\right)+\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\\
- & \qquad+\nu_{0}\left(\frac{y+1}{\beta^{2}}\right)\Theta\left(t_{1}-y\right)+\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\right]\Theta\left(t_{2}-y\right)
+ & \qquad+\nu_{0}\left(\frac{y+1}{\beta^{2}}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(1-\beta t_{1}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{2}-y\right)
 \end{align*}
 
 \end_inset
 
-To regain footing w.r.t.
- the earlier proof, contemplate the result of substituting 
-\begin_inset Formula $\nu_{0}=1$
+To follow in the footsteps of the earlier proof, use the identity
+\begin_inset Formula 
+\[
+0=\Theta\left(t_{0}-y\right)-1
+\]
+
 \end_inset
 
- into the above.
- This guides one further re-arrangement of terms
+to organize terms...
+ well almost.
+ Too late.
+ We lost the plot.
+\end_layout
+
+\begin_layout Subsubsection
+Try again
+\end_layout
+
+\begin_layout Standard
+Try again, mirroring the earlier proof more closely.
+ So
+\begin_inset Formula 
+\begin{align*}
+\nu_{1}\left(y\right) & =\frac{1}{\beta}\left[\nu_{0}\left(\frac{y}{\beta}\right)+\nu_{0}\left(\frac{y}{\beta}+\frac{1}{\beta}\right)\Theta\left(t_{1}-y\right)\right]\\
+ & =\nu_{0}\left(y\right)\Theta\left(t_{0}-y\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)-\left[\nu_{0}\left(y\right)-\frac{1}{\beta}\nu_{0}\left(\frac{y}{\beta}\right)\right]\\
+ & =\rho_{1}-c_{0}
+\end{align*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\rho_{1}=\nu_{0}\left(y\right)\Theta\left(t_{0}-y\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+c_{0}=\nu_{0}\left(y\right)-\frac{1}{\beta}\nu_{0}\left(\frac{y}{\beta}\right)
+\]
+
+\end_inset
+
+As before, contemplate the application of 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ to each of these pieces, individually.
+ Start with 
+\begin_inset Formula $\rho$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho & =\nu_{0}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-y\right)\\
+ & \qquad+\left[\nu_{0}\left(\frac{y+1}{\beta}\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-y-1\right)\right]\Theta\left(t_{1}-y\right)\\
+ & =\nu_{0}\left(\frac{y}{\beta}\right)+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-y-1\right)\Theta\left(t_{1}-y\right)
+\end{align*}
+
+\end_inset
+
+As before, the last two terms can be rearranged by using
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(\beta t_{k}-1-y\right)=0 & \mbox{ if }\beta t_{k}-1<0\\
+\Theta\left(\beta t_{k}-y\right)=1 & \mbox{ if }\beta t_{k}-1>0
+\end{align*}
+
+\end_inset
+
+Together with the identity 
+\begin_inset Formula 
+\[
+1=\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)
+\]
+
+\end_inset
+
+This provides
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho & =\nu_{0}\left(\frac{y}{\beta}\right)+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-y-1\right)\Theta\left(t_{1}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
+ & =\nu_{0}\left(\frac{y}{\beta}\right)+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(\beta t_{1}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-y-1\right)\Theta\left(\beta t_{1}-1\right)
+\end{align*}
+
+\end_inset
+
+As before, make use of
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\beta t_{k}=t_{k+1} & \mbox{ if }\beta t_{k}-1<0\\
+\beta t_{k}-1=t_{k+1} & \mbox{ if }\beta t_{k}-1>0
+\end{align*}
+
+\end_inset
+
+to write
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho & =\nu_{0}\left(\frac{y}{\beta}\right)+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(t_{2}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(t_{2}-y\right)\Theta\left(\beta t_{1}-1\right)\\
+ & =\nu_{0}\left(\frac{y}{\beta}\right)+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\frac{1}{\beta}\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(1-\beta t_{1}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{2}-y\right)
+\end{align*}
+
+\end_inset
+
+Rearranging
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho & =\nu_{0}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(1-\beta t_{1}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{2}-y\right)
+\end{align*}
+
+\end_inset
+
+Inserting
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho & =\nu_{0}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+\frac{1}{\beta}\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(1-\beta t_{1}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{2}-y\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
