@@ -43,10 +43,9 @@ double T_n(int n, double beta)
 	return tn;
 }
 
-// Build the "constant" function.
-// This appears to be independent of the value of x.
-// Which is surprising.
-// Well, not, because we now have a proof of this.
+// Build the "constant" function C(beta;z)
+// This is independent of the value of x. Which is surprising.
+// Well, not anymore, because we now have a proof of this.
 COMPLEX dcnst(double x, double beta, COMPLEX zeta)
 {
 	if (0.5*beta < x) return 0.0;
@@ -79,8 +78,38 @@ COMPLEX dcnst(double x, double beta, COMPLEX zeta)
 		zetan *= zeta;
 
 		cnt++;
-		if (3000< cnt) break;
+		if (3000 < cnt) break;
 	}
+
+	return dee;
+}
+
+// Same as above, but fixing x=0.5 which allows a simpler,
+// faster formula.
+COMPLEX eholo(double beta, COMPLEX zeta)
+{
+	COMPLEX zetan = zeta;
+	double tn = 0.5*beta;
+
+	// Accumulated sum
+	COMPLEX dee = 0.0;
+
+	int cnt=0;
+	while (1.0e-16 < abs(zetan))
+	{
+		if (0.5 < tn)
+			dee += zetan;
+
+		// compute T^N(b/2)
+		tn = downshift(tn, beta);
+
+		// compute z^n;
+		zetan *= zeta;
+
+		cnt++;
+		if (3000 < cnt) break;
+	}
+	dee -= 1.0;
 
 	return dee;
 }
@@ -112,7 +141,8 @@ static void almost_zero (float *array,
 		if (r <= 1.0)
 		{
 			COMPLEX zeta = x + I*y;
-			COMPLEX sum = dcnst(undep, beta, zeta);
+			// COMPLEX sum = dcnst(undep, beta, zeta);
+			COMPLEX sum = eholo(beta, zeta);
 			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
 #if HUNT_AND_PRT_ZEROS
