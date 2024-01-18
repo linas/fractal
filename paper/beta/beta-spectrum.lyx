@@ -6005,8 +6005,8 @@ reference "eq:invariant measure"
  and Parry's work, stemming from his PhD thesis, is not available online.
  Therefore, it is of some interest to provide a proof suitable for the current
  text.
- A generalization of this proof is used in the next section to construct
- general eigenfunctions.
+ A generalization of this proof, stated in terms of a Borel algebra, is
+ used in the subsequent section to construct general eigenfunctions.
 \end_layout
 
 \begin_layout Standard
@@ -6025,7 +6025,8 @@ reference "eq:invariant measure"
 \end_inset
 
  from geometric intuition.
- The proof is useful for practical purposes; the derivation provides insight.
+ The direct verification is useful for practical purposes; the geometric
+ construction, as a stretch-cut-stack map, provides insight.
  Both are given.
 \end_layout
 
@@ -6243,7 +6244,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsubsection
-Derivation
+Stretch-Cut-Stack Map
 \end_layout
 
 \begin_layout Standard
@@ -6414,9 +6415,9 @@ This converges, up to overall normalization, to the invariant measure:
 
  are constants, defined as
 \begin_inset Formula 
-\[
-c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
-\]
+\begin{equation}
+c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\label{eq:iteration const}
+\end{equation}
 
 \end_inset
 
@@ -6655,7 +6656,7 @@ coherent
 
 \end_inset
 
-for some complex-valued 
+for a given complex-valued 
 \begin_inset Formula $z$
 \end_inset
 
@@ -6815,10 +6816,18 @@ where
 \end_inset
 
  is a constant for 
-\begin_inset Formula $x<\beta/2$
+\begin_inset Formula $x\le\beta/2$
 \end_inset
 
- and is zero otherwise!
+ and is zero otherwise! (This is normal; 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ was defined in such a way that it is always exactly zero for 
+\begin_inset Formula $x>\beta/2$
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
@@ -6834,7 +6843,7 @@ The interesting limit is where
 \begin_inset Formula $\zeta=z/\beta$
 \end_inset
 
-.
+, so that everything is mapped to the unit disk.
  With some rearrangements, one obtains
 \begin_inset Formula 
 \begin{equation}
@@ -6843,7 +6852,26 @@ E\left(\beta;\zeta\right)\equiv\zeta\beta C\left(\beta;\zeta\beta\right)=-1+\zet
 
 \end_inset
 
-The primary task is to characterize the zeros of 
+Given that 
+\begin_inset Formula $d_{n}\left(1/2\right)=\Theta\left(\beta t_{n}-1\right)$
+\end_inset
+
+, the above can be recognized as the rotated/coherent form of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:iteration const"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit.
+ The primary task is to characterize the zeros of 
 \begin_inset Formula $E\left(\beta;\zeta\right)$
 \end_inset
 
@@ -6854,6 +6882,32 @@ The primary task is to characterize the zeros of
 
 \begin_layout Subsection
 Analytic ergodics
+\end_layout
+
+\begin_layout Standard
+This section proposes that the entire 
+\begin_inset Formula $\beta$
+\end_inset
+
+-subshift can be tied together with a single holomorphic equation.
+ The holomorphic equation effectively provides a continuum (
+\emph on
+i.e.
+
+\emph default
+ uncountable number) of distinct relationships between different parts of
+ the subshift.
+ This can be interpreted either as a form of interaction across the subshift,
+ or as a kind of mixing.
+ Given the nature of the relationship, the moniker of 
+\begin_inset Quotes eld
+\end_inset
+
+fundamental theorem of analytic ergodics
+\begin_inset Quotes erd
+\end_inset
+
+ is an amusing name to assign to the result.
 \end_layout
 
 \begin_layout Standard
@@ -6923,7 +6977,7 @@ E\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\fr
 
 \end_inset
 
-confirming the earlier numerical observation that 
+confirming the earlier observation that 
 \begin_inset Formula $E\left(\beta;\zeta\right)$
 \end_inset
 
@@ -7012,7 +7066,7 @@ one equation
 \begin_layout Standard
 The tying-together of seemingly unrelated sequences seems somehow terribly
  important.
- It is tempting to give this some silly name, such as the 
+ It is amusing to suggest that this is a kind of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -7024,7 +7078,9 @@ fundamental theorem of analytic ergodics
 \end_layout
 
 \begin_layout Standard
-Let's be exceptionally clear about the meaning: equation 
+For such a claim, it is worth discussing the meaning at length, taking the
+ effort to be exceptionally precise and verbose, perhaps a bit repetitive.
+ Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:downshift"
@@ -7073,7 +7129,7 @@ noprefix "false"
 
 -expansion.
  The set of all such bit-sequences defines the shift.
- To emphasize the point, its best to compare side-by-side.
+ To emphasize this point, its best to compare side-by-side.
  Copying equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7084,7 +7140,11 @@ noprefix "false"
 
 \end_inset
 
-, we had 
+, one bitsequence records the orbit of 
+\begin_inset Formula $x$
+\end_inset
+
+ relative to the modpoint: 
 \begin_inset Formula 
 \[
 k_{n}\left(x\right)=\begin{cases}
@@ -7095,7 +7155,12 @@ k_{n}\left(x\right)=\begin{cases}
 
 \end_inset
 
- while
+ while a different bitsequence records the orbit of the midpoint, relative
+ to 
+\begin_inset Formula $x$
+\end_inset
+
+:
 \begin_inset Formula 
 \[
 d_{n}\left(x\right)=\begin{cases}
@@ -7111,8 +7176,8 @@ The iterations are running in opposite directions; this is as appropriate,
 \end_layout
 
 \begin_layout Standard
-It is useful here to return to the language of cylinder sets, as opposed
- to point dynamics.
+It is useful to return to the language of sigma algebras and cylinder sets,
+ as opposed to point dynamics.
  Recall that the Borel algebra 
 \begin_inset Formula $\mathcal{B}$
 \end_inset
@@ -7176,7 +7241,8 @@ backwards
 \end_layout
 
 \begin_layout Standard
-The problem with point dynamics is that one cannot meaningfully write 
+The problem with the language of point dynamics is that one cannot meaningfully
+ write 
 \begin_inset Formula $T^{-n}\left(x\right)$
 \end_inset
 
@@ -7184,7 +7250,7 @@ The problem with point dynamics is that one cannot meaningfully write
 \begin_inset Formula $x$
 \end_inset
 
-, at least, not without sever contortions that lead back to the Borel algebra.
+, at least, not without severe contortions that lead back to the Borel algebra.
  Not for lack of trying; the 
 \begin_inset Formula $T^{-n}\left(x\right)$
 \end_inset
@@ -7224,12 +7290,12 @@ Can the analytic relation be restated in terms of cylinder sets? Yes, and
 \begin_inset Formula $d_{n}:\mathcal{S}\to\left[0,1\right]$
 \end_inset
 
-.
+ into the unit interval, as opposed to being a single bit.
  Let 
 \begin_inset Formula $\mu:\mathcal{B}\to\left[0,1\right]$
 \end_inset
 
- be the Bernoulli measure.
+ be the canonical Bernoulli measure.
  Using the Bernoulli mapping 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7281,7 +7347,10 @@ with
 \end_inset
 
 .
- The Parry measure should be invariant under the action of 
+\end_layout
+
+\begin_layout Standard
+The Parry measure should be invariant under the action of 
 \begin_inset Formula $T^{-1}:\mathcal{S}\to\mathcal{S}$
 \end_inset
 
@@ -7296,17 +7365,14 @@ noprefix "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Let's check.
+ Let's check.
  The proof will mirror the one of the previous section.
- Here, it is convenient to use the 
+ Again, it is convenient to use the 
 \begin_inset Formula $\beta$
 \end_inset
 
 -transform 
-\begin_inset Formula $t$
+\begin_inset Formula $t_{\beta}$
 \end_inset
 
  instead of the 
@@ -7314,7 +7380,7 @@ Let's check.
 \end_inset
 
 -shift 
-\begin_inset Formula $T$
+\begin_inset Formula $T_{\beta}$
 \end_inset
 
 .
@@ -7365,7 +7431,7 @@ Recall that for every
 \begin_inset Formula $D$
 \end_inset
 
- and the complement 
+, and the complement 
 \begin_inset Formula $\overline{D}$
 \end_inset
 

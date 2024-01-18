@@ -8601,8 +8601,8 @@ reference "eq:invariant measure"
  and Parry's work, stemming from his PhD thesis, is not available online.
  Therefore, it is of some interest to provide a proof suitable for the current
  text.
- A generalization of this proof is used in the next section to construct
- general eigenfunctions.
+ A generalization of this proof, stated in terms of a Borel algebra, is
+ used in the subsequent section to construct general eigenfunctions.
 \end_layout
 
 \begin_layout Standard
@@ -8621,7 +8621,8 @@ reference "eq:invariant measure"
 \end_inset
 
  from geometric intuition.
- The proof is useful for practical purposes; the derivation provides insight.
+ The direct verification is useful for practical purposes; the geometric
+ construction, as a stretch-cut-stack map, provides insight.
  Both are given.
 \end_layout
 
@@ -8839,7 +8840,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsubsection
-Derivation
+Stretch-Cut-Stack Map
 \end_layout
 
 \begin_layout Standard
@@ -8985,9 +8986,9 @@ and
 
  defined as
 \begin_inset Formula 
-\[
-c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}
-\]
+\begin{equation}
+c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\label{eq:iteration const}
+\end{equation}
 
 \end_inset
 
@@ -9376,7 +9377,7 @@ name "subsec:Rotated-Parry-function"
 \end_layout
 
 \begin_layout Standard
-The steps performed above can be repeated verbatim for the 
+The steps performed above can be repeated verbatim for a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -9400,7 +9401,7 @@ coherent
 
 \end_inset
 
-for some complex-valued 
+for a given complex-valued 
 \begin_inset Formula $z$
 \end_inset
 
@@ -9560,10 +9561,18 @@ where
 \end_inset
 
  is a constant for 
-\begin_inset Formula $x<\beta/2$
+\begin_inset Formula $x\le\beta/2$
 \end_inset
 
- and is zero otherwise!
+ and is zero otherwise! (This is normal; 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ was defined in such a way that it is always exactly zero for 
+\begin_inset Formula $x>\beta/2$
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
@@ -9579,7 +9588,7 @@ The interesting limit is where
 \begin_inset Formula $\zeta=z/\beta$
 \end_inset
 
-.
+, so that everything is mapped to the unit disk.
  With some rearrangements, one obtains
 \begin_inset Formula 
 \begin{equation}
@@ -9588,7 +9597,26 @@ E\left(\beta;\zeta\right)\equiv\zeta\beta C\left(\beta;\zeta\beta\right)=-1+\zet
 
 \end_inset
 
-The primary task is to characterize the zeros of 
+Given that 
+\begin_inset Formula $d_{n}\left(1/2\right)=\Theta\left(\beta t_{n}-1\right)$
+\end_inset
+
+, the above can be recognized as the rotated/coherent form of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:iteration const"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit.
+ The primary task is to characterize the zeros of 
 \begin_inset Formula $E\left(\beta;\zeta\right)$
 \end_inset
 
@@ -9668,7 +9696,7 @@ E\left(\beta;\zeta\right)=\sum_{n=0}^{\infty}\zeta^{n}\left[\zeta d_{n}\left(\fr
 
 \end_inset
 
-confirming the earlier numerical observation that 
+confirming the earlier observation that 
 \begin_inset Formula $E\left(\beta;\zeta\right)$
 \end_inset
 
