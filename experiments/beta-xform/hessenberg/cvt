@@ -1,0 +1,74 @@
+#! /bin/sh
+
+# ../../generate/renorm matrix-6 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.6.png
+
+# ../../generate/renorm matrix-7 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.7.png
+
+# ../../generate/renorm matrix-8 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.8.png
+
+# ../../generate/renorm matrix-phi j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-phi.png
+
+# ../../generate/renorm matrix-9 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.9.png
+
+# ../../generate/renorm matrix-55 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.55.png
+
+# ../../generate/renorm matrix-65 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.65.png
+
+# ../../generate/renorm matrix-75 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.75.png
+
+# ../../generate/renorm matrix-85 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.85.png
+
+# ../../generate/renorm matrix-95 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.95.png
+
+# ../../generate/renorm matrix-99 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.99.png
+
+# ../../generate/renorm matrix-999 j 1.5 0
+# ../../generate/abs j j
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > matrix-0.999.png
+
+# ../../generate/renorm berg j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > berg.png
+
+# ../../generate/renorm psidelt j 0.7 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > psidelt.png
+
+# ../../generate/renorm subdiag j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > subdiag.png
+
+# ../../generate/renorm alldisk j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > alldisk.png
+
+# ../../generate/renorm betadisk j 1 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > betadisk.png
+
+# ../../generate/renorm moment j 4 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > moment.png
+
+
+# ffmpeg -framerate 25 -i matrix-0.%05d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output.mp4
+
+../../../generate/renorm alldi j 1 0
+cat j.pfm | ../../../image/pfm2ppm | pnmtopng > j.png
+

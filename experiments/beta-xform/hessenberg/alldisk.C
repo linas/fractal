@@ -21,14 +21,12 @@
 #include "brat.h"
 
 // My downshift; beta=2K so T(x) = case bx or b(x-0.5)
-double downshift(double x, double K)
+double downshift(double x, double beta)
 {
-	K *= 2.0;
 	if (0.5 <= x)
-	{
-		return K * (x - 0.5);
-	}
-	return K*x;
+		return beta * (x - 0.5);
+
+	return beta*x;
 }
 
 // Return the iterated downshift t^n(beta/2)
@@ -40,7 +38,7 @@ double T_n(int n, double beta)
 	// compute T^N(b/2)
 	for (int i=0; i<n; i++)
 	{
-		tn = downshift(tn, 0.5*beta);
+		tn = downshift(tn, beta);
 	}
 	return tn;
 }
@@ -75,7 +73,7 @@ COMPLEX dcnst(double x, double beta, COMPLEX zeta)
 		dee += zetan * term;
 
 		// compute T^N(b/2)
-		tn = downshift(tn, 0.5*beta);
+		tn = downshift(tn, beta);
 
 		// compute z^n;
 		zetan *= zeta;
@@ -95,12 +93,11 @@ static void almost_zero (float *array,
                              double x_width,
                              double row,
                              int itermax,
-                             double K)
+                             double beta)
 {
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
-	double beta = 2.0*K;
 	double undep = 0.001*itermax;
 
 	double y = row;
@@ -118,7 +115,7 @@ static void almost_zero (float *array,
 			COMPLEX sum = dcnst(undep, beta, zeta);
 			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
-#if 0
+#if HUNT_AND_PRT_ZEROS
 			double mag = abs(sum);
 			if (mag < 0.06) {
 				COMPLEX z = beta*zeta;
