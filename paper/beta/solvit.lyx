@@ -9134,11 +9134,28 @@ The measure is preserved with each iteration, by construction.
 
 \end_inset
 
-This identity can be varified for small 
-\begin_inset Formula $n$
+This identity can be verified by plugging through, exchanging sums and then
+ comparing terms; the underlying identity is
+\begin_inset Formula 
+\[
+t_{n}=\beta^{n}c_{n-1}
+\]
+
 \end_inset
 
-; TODO provide a formal proof that this holds in general.
+which follows, as each 
+\begin_inset Formula $\Theta\left(\beta t_{k}-1\right)$
+\end_inset
+
+ records a decision to decrement, or not, the product 
+\begin_inset Formula $\beta t_{k}$
+\end_inset
+
+ occurring in the iteration 
+\begin_inset Formula $t_{k+1}=\beta t_{k}\mod1$
+\end_inset
+
+.
 \begin_inset Note Note
 status collapsed
 
@@ -9148,7 +9165,24 @@ It holds in general, see check/tsum.c for numeric validation.
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
+A curious identity arises in the verification of the above.
+ After rearranging terms and swapping the summation order, one gets
+\begin_inset Formula 
+\[
+n+1=\sum_{k=0}^{n}\beta^{-k}\left(t_{k}+\left(n-k+1\right)\Theta\left(\beta t_{k-1}-1\right)\right)
+\]
+
+\end_inset
+
+where, to keep the sum well-defined, set 
+\begin_inset Formula $t_{-1}=0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
