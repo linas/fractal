@@ -9621,7 +9621,28 @@ Try again
 \end_layout
 
 \begin_layout Standard
-Result with 
+Given
+\begin_inset Formula 
+\[
+\rho_{1}=\nu_{0}\left(y\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)
+\]
+
+\end_inset
+
+separate the step function into it's own factor, so that it can be explicitly
+ tracked and manipulated.
+ Thus, define 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
 \rho_{1}=f\left(y\right)+g\left(y\right)\Theta\left(t_{1}-y\right)
@@ -9644,13 +9665,243 @@ Then
 \color none
 
 \begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-y\right)+g\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{1}-y-1\right)\Theta\left(t_{1}-y\right)
+\end{align*}
+
+\end_inset
+
+The g terms are susceptible to 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{align*}
+\Theta\left(\beta t_{k}-1-y\right)=0 & \mbox{ if }\beta t_{k}-1<0\\
+\Theta\left(\beta t_{k}-y\right)=1 & \mbox{ if }\beta t_{k}-1>0
+\end{align*}
+
+\end_inset
+
+Together with the identity 
+\begin_inset Formula 
 \[
-\beta\mathcal{M}\rho_{1}=
+1=\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)
+\]
+
+\end_inset
+
+This allows
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+g\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{1}-y-1\right)\Theta\left(t_{1}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
+ & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(\beta t_{1}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+g\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{1}-y-1\right)\Theta\left(\beta t_{1}-1\right)
+\end{align*}
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+As before, make use of
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\beta t_{k}=t_{k+1} & \mbox{ if }\beta t_{k}-1<0\\
+\beta t_{k}-1=t_{k+1} & \mbox{ if }\beta t_{k}-1>0
+\end{align*}
+
+\end_inset
+
+to write 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(t_{2}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+g\left(\frac{y+1}{\beta}\right)\Theta\left(t_{2}-y\right)\Theta\left(\beta t_{1}-1\right)\\
+ & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\left[g\left(\frac{y}{\beta}\right)\Theta\left(1-\beta t_{1}\right)+g\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{2}-y\right)\\
+ & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+g\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\Theta\left(t_{2}-y\right)
+\end{align*}
+
+\end_inset
+
+Rearraging,
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+g\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\Theta\left(t_{2}-y\right)
+\end{align*}
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Inserting
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho_{1} & =-\beta\nu_{0}\left(y\right)+f\left(\frac{y}{\beta}\right)+g\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\beta\nu_{0}\left(y\right)\Theta\left(t_{0}-y\right)\\
+ & \qquad+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
+ & \qquad+g\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\Theta\left(t_{2}-y\right)
+\end{align*}
+
+\end_inset
+
+which clearly has parts that have a Heaviside 
+\begin_inset Formula $\Theta\left(t_{k}-y\right)$
+\end_inset
+
+ and other parts that don't.
+\end_layout
+
+\begin_layout Standard
+Now take a look at the action of 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ on 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+.
+ Recall that
+\begin_inset Formula 
+\[
+c_{1}=\nu_{0}\left(y\right)-\frac{1}{\beta}\nu_{0}\left(\frac{y}{\beta}\right)
+\]
+
+\end_inset
+
+Then plugging through,
+\begin_inset Formula 
+\[
+\beta\mathcal{M}c_{1}=\beta\nu_{1}-\frac{1}{\beta}\left[\nu_{0}\left(\frac{y}{\beta^{2}}\right)+\nu_{0}\left(\frac{y+1}{\beta^{2}}\right)\Theta\left(t_{1}-y\right)\right]
+\]
+
+\end_inset
+
+which has a term with
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\Theta\left(t_{k}-y\right)$
+\end_inset
+
+ and the rest without it.
+ This suggests that the correct Ansatz is to split the repeated iteration
+ so that
+\begin_inset Formula 
+\[
+\rho_{n}\left(y\right)=\sum_{k=0}^{n}g_{nk}\left(y\right)\Theta\left(t_{k}-y\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+d_{n}\left(y\right)=
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+sooo
 \end_layout
 
 \begin_layout Subsection
