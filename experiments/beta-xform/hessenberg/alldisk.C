@@ -127,7 +127,7 @@ static void almost_zero (float *array,
 	/* clear out the row */
 	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
-	double undep = 0.001*itermax;
+	// double undep = 0.001*itermax;
 
 	double y = row;
 	for (int j=0; j<array_size; j++)
@@ -138,24 +138,24 @@ static void almost_zero (float *array,
 		x *= x_width;
 
 		double r = x*x + y*y;
-		if (r <= 1.0)
-		{
-			COMPLEX zeta = x + I*y;
-			// COMPLEX sum = dcnst(undep, beta, zeta);
-			COMPLEX sum = eholo(beta, zeta);
-			array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
+		if (1.0 < r) continue;
+
+		COMPLEX zeta = x + I*y;
+		// COMPLEX sum = dcnst(undep, beta, zeta);
+		COMPLEX sum = eholo(beta, zeta);
+		array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
 #if HUNT_AND_PRT_ZEROS
-			double mag = abs(sum);
-			if (mag < 0.06) {
-				COMPLEX z = beta*zeta;
-				printf("maybe zero near z=%g +i %g = %g exp(i pi %g)\n",
-					real(z), imag(z), abs(z), atan2(y,x)/M_PI);
+		double mag = abs(sum);
+		if (mag < 0.06) {
+			COMPLEX z = beta*zeta;
+			printf("maybe zero near z=%g +i %g = %g exp(i pi %g)\n",
+				real(z), imag(z), abs(z), atan2(y,x)/M_PI);
 array[j] = 0.5;
 for (int k=0; k<20; k++) array[j-k]=0.25 * (k%4);
-			}
-#endif
 		}
+#endif
+
 	}
 }
 
