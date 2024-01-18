@@ -6378,7 +6378,7 @@ The derivation of a recursive formula for
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}c_{k}\nu_{n-k-1}
+\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}c_{n-k}\nu_{k}
 \]
 
 \end_inset
@@ -6416,7 +6416,7 @@ This converges, up to overall normalization, to the invariant measure:
  are constants, defined as
 \begin_inset Formula 
 \begin{equation}
-c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\label{eq:iteration const}
+c_{n}=1-\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\label{eq:iteration const}
 \end{equation}
 
 \end_inset
@@ -6574,7 +6574,7 @@ Each iteration preserves the measure; this is built into the construction.
  Plugging through gives a curious identity:
 \begin_inset Formula 
 \[
-1=\int_{0}^{1}\nu_{n}\left(y\right)dy=\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}-\sum_{k=0}^{n-1}c_{k}
+1=\int_{0}^{1}\nu_{n}\left(y\right)dy=\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}-\sum_{k=1}^{n}c_{k}
 \]
 
 \end_inset
@@ -6588,7 +6588,7 @@ which holds for all
  is that
 \begin_inset Formula 
 \[
-t_{n}=\beta^{n}c_{n-1}
+t_{n}=\beta^{n}c_{n}
 \]
 
 \end_inset

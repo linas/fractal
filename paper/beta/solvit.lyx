@@ -8962,8 +8962,8 @@ A recursive formula for
 \begin{align*}
 \nu_{1}\left(y\right) & =\frac{1}{\beta}\left[1+\Theta\left(t_{1}-y\right)\right]\\
  & =\Theta\left(t_{0}-y\right)+\frac{\Theta\left(t_{1}-y\right)}{\beta}-\left(1-\frac{1}{\beta}\right)\\
- & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-c_{0}\nu_{0}\\
- & =\rho_{1}-c_{0}\nu_{0}
+ & =\sum_{k=0}^{1}\frac{\Theta\left(t_{k}-y\right)}{\beta^{k}}-c_{1}\nu_{0}\\
+ & =\rho_{1}-c_{1}\nu_{0}
 \end{align*}
 
 \end_inset
@@ -8987,7 +8987,7 @@ and
  defined as
 \begin_inset Formula 
 \begin{equation}
-c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\label{eq:iteration const}
+c_{n}=1-\sum_{k=0}^{n-1}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\label{eq:iteration const}
 \end{equation}
 
 \end_inset
@@ -8995,7 +8995,7 @@ c_{n}=1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\label
 It will be shown that the recursive form is
 \begin_inset Formula 
 \[
-\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}c_{k}\nu_{n-k-1}
+\nu_{n}=\rho_{n}-\sum_{k=0}^{n-1}c_{n-k}\nu_{k}
 \]
 
 \end_inset
@@ -9095,7 +9095,7 @@ P_{n} & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(1-\beta t_{k}\right)
  & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\left(\Theta\left(t_{k+1}-y\right)+\Theta\left(\beta t_{k}-1\right)\right)\\
  & =\beta\sum_{k=0}^{n+1}\frac{1}{\beta^{k}}\Theta\left(t_{k}-y\right)-\beta+\beta\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\\
  & =\beta\rho_{n+1}-\beta\left(1-\sum_{k=0}^{n}\frac{\Theta\left(\beta t_{k}-1\right)}{\beta^{k+1}}\right)\\
- & =\beta\left(\rho_{n+1}-c_{n}\right)
+ & =\beta\left(\rho_{n+1}-c_{n+1}\right)
 \end{align*}
 
 \end_inset
@@ -9118,9 +9118,9 @@ Returning to the Ansatz for
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\nu_{n+1}=\mathcal{M}\nu_{n} & =\frac{1}{\beta}P_{n}-\mathcal{M}\sum_{k=0}^{n-1}c_{k}\nu_{n-k-1}\\
- & =\rho_{n+1}-c_{n}-\sum_{k=0}^{n-1}c_{k}\nu_{n-k}\\
- & =\rho_{n+1}-\sum_{k=0}^{n}c_{k}\nu_{n-k-1}
+\nu_{n+1}=\mathcal{M}\nu_{n} & =\frac{1}{\beta}P_{n}-\mathcal{M}\sum_{k=0}^{n-1}c_{n-k}\nu_{k}\\
+ & =\rho_{n+1}-c_{n+1}-\sum_{k=0}^{n-1}c_{n-k}\nu_{k+1}\\
+ & =\rho_{n+1}-\sum_{k=0}^{n}c_{n+1-k}\nu_{k}
 \end{align*}
 
 \end_inset
@@ -9145,8 +9145,8 @@ The measure is preserved with each iteration, by construction.
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-1=\int_{0}^{1}\nu_{n}\left(y\right)dy & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\int_{0}^{1}\Theta\left(t_{k}-y\right)dy-\sum_{k=0}^{n-1}c_{k}\int_{0}^{1}\nu_{n-k-1}\\
- & =\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}-\sum_{k=0}^{n-1}c_{k}
+1=\int_{0}^{1}\nu_{n}\left(y\right)dy & =\sum_{k=0}^{n}\frac{1}{\beta^{k}}\int_{0}^{1}\Theta\left(t_{k}-y\right)dy-\sum_{k=0}^{n-1}c_{n-k}\int_{0}^{1}\nu_{k}\\
+ & =\sum_{k=0}^{n}\frac{t_{k}}{\beta^{k}}-\sum_{k=1}^{n}c_{k}
 \end{align*}
 
 \end_inset
@@ -9155,7 +9155,7 @@ This identity can be verified by plugging through, exchanging sums and then
  comparing terms; the underlying identity is
 \begin_inset Formula 
 \[
-t_{n}=\beta^{n}c_{n-1}
+t_{n}=\beta^{n}c_{n}
 \]
 
 \end_inset
@@ -9618,14 +9618,15 @@ Rearranging
 Inserting
 \begin_inset Formula 
 \begin{align*}
-\beta\mathcal{M}\rho & =\nu_{0}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\\
+\beta\mathcal{M}\rho & =-\beta\nu_{o}\left(y\right)+\nu_{0}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{0}-1\right)+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\beta\nu_{o}\left(y\right)\Theta\left(t_{0}-y\right)\\
  & \qquad+\nu_{0}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
- & \qquad+\frac{1}{\beta}\left[\nu_{0}\left(\frac{y+\beta}{\beta^{2}}\right)\Theta\left(1-\beta t_{1}\right)+\nu_{0}\left(\frac{y+\beta+1}{\beta^{2}}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{2}-y\right)
+ & \qquad+\frac{1}{\beta}\nu_{0}\left(\frac{y+\beta+\Theta\left(\beta t_{1}-1\right)}{\beta^{2}}\right)\Theta\left(t_{2}-y\right)
 \end{align*}
 
 \end_inset
 
-
+Comparing to earlier forms,
 \end_layout
 
 \begin_layout Subsection
