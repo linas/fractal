@@ -10025,8 +10025,16 @@ if
  are conventional in imperative programming.
  Loops and recursion are dual to one-another, explicitly so when tail recursion
  is possible.
- The recursive step here isnot tail-recursive, so unrolling it into a loop,
- a series summation, will pose some challenges.
+ The recursive step for 
+\begin_inset Formula $g_{nk}$
+\end_inset
+
+ is tail-recursive, so fairly easy to express.
+ The recursive step for 
+\begin_inset Formula $f_{nk}$
+\end_inset
+
+ generates a summation.
 \end_layout
 
 \begin_layout Standard
@@ -10066,6 +10074,76 @@ By definition,
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+It is convenient to introduce a short-hand for the bit-sequence generated
+ by the iterated mid-point.
+ The shorthand is
+\begin_inset Formula 
+\[
+b_{n}=\Theta\left(\beta t_{k}-1\right)=d_{n}\left(\frac{1}{2}\right)=\varepsilon_{n}\left(\frac{1}{\beta}\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\varepsilon_{n}$
+\end_inset
+
+ defined as in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Gelfond-Parry digits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ as in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rescaled-bitseq"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The recursion relations to unroll are 
+\begin_inset Formula 
+\begin{align*}
+\beta g_{n,k}\left(y\right) & =g_{n-1,k-1}\left(\frac{y+b_{k-1}}{\beta}\right)\quad\mbox{ for }k>1\\
+\beta g_{n,1}\left(y\right) & =\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-2}b_{k}f_{n-1,k}\left(\frac{y+1}{\beta}\right)\\
+g_{n,0}\left(y\right) & =\nu_{0}\\
+\beta f_{n,k\left(y\right)} & =f_{n-1,k}\left(\frac{y}{\beta}\right)+g_{n-1,k}\left(\frac{y}{\beta}\right)
+\end{align*}
+
+\end_inset
+
+Recursing on 
+\begin_inset Formula $g_{nk}$
+\end_inset
+
+ gives
+\begin_inset Formula 
+\[
+g_{nk}\left(y\right)=\frac{1}{\beta^{k-1}}g_{n-k+1,1}\left(\frac{y}{\beta^{k-1}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)
+\]
+
+\end_inset
+
+with 
 \end_layout
 
 \begin_layout Subsection
