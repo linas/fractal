@@ -10017,8 +10017,7 @@ Performing term by term compares,
 \beta g_{n+1,1} & =g_{n0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-1}f_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
 g_{n+1,0} & =\nu_{0}\\
 a_{n+1,k} & =a_{n,k-1}\\
-\beta f_{n+1,k} & =f_{nk}\left(\frac{y}{\beta}\right)\quad\mbox{ for }k\ne1\\
-\beta f_{n+1,1} & =f_{n1}\left(\frac{y}{\beta}\right)+\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)
+\beta f_{n+1,k} & =f_{nk}\left(\frac{y}{\beta}\right)+g_{nk}\left(\frac{y}{\beta}\right)
 \end{align*}
 
 \end_inset
@@ -10027,7 +10026,7 @@ a_{n+1,k} & =a_{n,k-1}\\
 \end_layout
 
 \begin_layout Standard
-Seems to be correct; have not triple-checked yet.
+Seems to be correct; have not quadruple-checked yet.
  Seems that 
 \begin_inset Formula $a_{n,k}=1$
 \end_inset
@@ -10081,10 +10080,26 @@ By definition,
 
 \begin_layout Standard
 For 
+\begin_inset Formula $n=0$
+\end_inset
+
+, 
+\begin_inset Formula $g_{00}=\nu_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{00}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The general formula above gives the same 
 \begin_inset Formula $n=1$
 \end_inset
 
-, we started with 
+ result as previously obtained by hand:
 \begin_inset Formula 
 \[
 g_{11}\left(y\right)=\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)
@@ -10108,12 +10123,14 @@ Deduce from general formulas that, for
 \begin_inset Formula 
 \begin{align*}
 g_{22}\left(y\right) & =\frac{1}{\beta}g_{11}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\\
-g_{21}\left(y\right) & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\frac{1}{\beta}f_{10}\left(\frac{y+1}{\beta}\right)
+g_{21}\left(y\right) & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\frac{1}{\beta}f_{10}\left(\frac{y+1}{\beta}\right)\\
+f_{21}\left(y\right) & =\frac{1}{\beta}g_{11}\left(\frac{y}{\beta}\right)\\
+f_{20}\left(y\right) & =\frac{1}{\beta}f_{10}\left(\frac{y}{\beta}\right)+\frac{1}{\beta}g_{10}\left(\frac{y}{\beta}\right)
 \end{align*}
 
 \end_inset
 
-TOK so far
+This also agress with earlier special-case results.
 \end_layout
 
 \begin_layout Subsection
