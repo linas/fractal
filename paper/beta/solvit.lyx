@@ -9883,46 +9883,18 @@ Seems to be correct; have not quadruple-checked yet.
 \end_layout
 
 \begin_layout Paragraph
-Plug through for series
+Double-check
 \end_layout
 
 \begin_layout Standard
-By definition, 
-\begin_inset Formula $g_{n0}=\nu_{0}$
-\end_inset
-
- for all 
-\begin_inset Formula $n$
-\end_inset
-
-.
- It seems that 
-\begin_inset Formula $a_{nk}=1$
-\end_inset
-
- always, so we'll ignore that from now on.
- Then 
-\begin_inset Formula $f_{nn}=0$
-\end_inset
-
- and generally, 
-\begin_inset Formula $f_{nk}=0$
-\end_inset
-
+This general result can be compared to the earlier special-case results
  for 
-\begin_inset Formula $k\ge n$
+\begin_inset Formula $n=0,1,2$
 \end_inset
 
 .
- Likewise, 
-\begin_inset Formula $g_{nk}=0$
-\end_inset
-
- for 
-\begin_inset Formula $k>n$
-\end_inset
-
-.
+ They agree.
+ They are reposted here, for verification.
 \end_layout
 
 \begin_layout Standard
@@ -9946,7 +9918,7 @@ The general formula above gives the same
 \begin_inset Formula $n=1$
 \end_inset
 
- result as previously obtained by hand:
+ result as previously obtained by direct iteration:
 \begin_inset Formula 
 \[
 g_{11}\left(y\right)=\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)
@@ -9988,7 +9960,112 @@ f_{20}\left(y\right) & =\frac{1}{\beta}f_{10}\left(\frac{y}{\beta}\right)+\frac{
 
 \end_inset
 
-This also agress with earlier special-case results.
+These also agree with earlier special-case results.
+\end_layout
+
+\begin_layout Paragraph
+Loop unroll
+\end_layout
+
+\begin_layout Standard
+Given the general form for 
+\begin_inset Formula $\nu_{n}$
+\end_inset
+
+ given above, together with the recursive formula for 
+\begin_inset Formula $g_{nk}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{nk}$
+\end_inset
+
+, it is desirable to unroll the sequence of recursive steps into a series
+ summation.
+ This is the basic goal of 
+\begin_inset Quotes eld
+\end_inset
+
+analytic algorithmics
+\begin_inset Quotes erd
+\end_inset
+
+: to convert recursive formulas into series summations.
+ This is similar to the idea of 
+\begin_inset Quotes eld
+\end_inset
+
+analytic combinatorics
+\begin_inset Quotes erd
+\end_inset
+
+, except that each 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ occuring in the recursive equation can be thought of as an if-then statement,
+ albeit a very primitive one: 
+\begin_inset Formula $\Theta\left(x\right)$
+\end_inset
+
+ is equivalent to 
+\begin_inset Quotes eld
+\end_inset
+
+if 
+\begin_inset Formula $x>0$
+\end_inset
+
+ then 1 else 0
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Recursive expressions are conventional in functional programming; loops
+ are conventional in imperative programming.
+ Loops and recursion are dual to one-another, explicitly so when tail recursion
+ is possible.
+ The recursive step here isnot tail-recursive, so unrolling it into a loop,
+ a series summation, will pose some challenges.
+\end_layout
+
+\begin_layout Standard
+By definition, 
+\begin_inset Formula $g_{n0}=\nu_{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ It seems that 
+\begin_inset Formula $a_{nk}=1$
+\end_inset
+
+ always, so we'll ignore that from now on.
+ Then 
+\begin_inset Formula $f_{nn}=0$
+\end_inset
+
+ and generally, 
+\begin_inset Formula $f_{nk}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\ge n$
+\end_inset
+
+.
+ Likewise, 
+\begin_inset Formula $g_{nk}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k>n$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
