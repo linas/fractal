@@ -9620,6 +9620,10 @@ Seem to be losing the plot.
 Try again
 \end_layout
 
+\begin_layout Standard
+Try again.
+\end_layout
+
 \begin_layout Paragraph
 Part one
 \end_layout
@@ -9655,7 +9659,6 @@ separate the step function into it's own factor, so that it can be explicitly
 \end_inset
 
 Then
-
 \begin_inset Formula 
 \begin{align*}
 \beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
@@ -9665,7 +9668,6 @@ Then
 \end_inset
 
 The g terms are susceptible to 
-
 \begin_inset Formula 
 \begin{align*}
 \Theta\left(\beta t_{k}-1-y\right)=0 & \mbox{ if }\beta t_{k}-1<0\\
@@ -9683,7 +9685,6 @@ Together with the identity
 \end_inset
 
 This allows
-
 \begin_inset Formula 
 \begin{align*}
 \beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
@@ -9696,8 +9697,8 @@ This allows
 
 \end_inset
 
-
 As before, make use of
+\end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
@@ -9709,7 +9710,6 @@ As before, make use of
 \end_inset
 
 to write 
-
 \begin_inset Formula 
 \begin{align*}
 \beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
@@ -9734,6 +9734,7 @@ Rearraging,
 \end{align*}
 
 \end_inset
+
 
 \begin_inset Formula 
 \begin{align*}
@@ -9778,8 +9779,7 @@ Then plugging through,
 
 \end_inset
 
-which has a term with
- 
+which has a term with 
 \begin_inset Formula $\Theta\left(t_{k}-y\right)$
 \end_inset
 
@@ -9791,7 +9791,6 @@ Hypothesis for general form
 \end_layout
 
 \begin_layout Standard
-
 This suggests that the correct Ansatz is to split the repeated iteration
  so that
 \begin_inset Formula 
@@ -9874,7 +9873,6 @@ a_{20}=a_{21}=1
 
 Above looks very regular.
  Plugging through obscures some of this structure.
-
 \begin_inset Formula 
 \begin{align*}
 g_{21}\left(y\right) & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\frac{1}{\beta^{2}}\nu_{0}\left(\frac{y+1}{\beta^{2}}\right)\\
@@ -9892,6 +9890,7 @@ f_{21}\left(y\right) & =\frac{1}{\beta^{2}}\nu_{0}\left(\frac{y+1}{\beta^{2}}\ri
 
 \end_inset
 
+
 \end_layout
 
 \begin_layout Paragraph
@@ -9900,17 +9899,23 @@ Crank for general form
 
 \begin_layout Standard
 Armed with this hypothesis, lets see what happens.
-
+ Starting with
 \begin_inset Formula 
-\begin{align*}
-\beta\mathcal{M}\rho_{1} & =f\left(\frac{y}{\beta}\right)+f\left(\frac{y+1}{\beta}\right)\Theta\left(t_{1}-y\right)\\
- & \qquad+g\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-y\right)+g\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{1}-y-1\right)\Theta\left(t_{1}-y\right)
-\end{align*}
+\[
+\rho_{n}\left(y\right)=\sum_{k=0}^{n}g_{nk}\left(y\right)\Theta\left(t_{k}-y\right)
+\]
 
 \end_inset
 
-The g terms are susceptible to 
+one gets
+\begin_inset Formula 
+\[
+\beta\mathcal{M}\rho_{n}=\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-y\right)+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-y-1\right)\Theta\left(t_{1}-y\right)
+\]
 
+\end_inset
+
+Making use of 
 \begin_inset Formula 
 \begin{align*}
 \Theta\left(\beta t_{k}-1-y\right)=0 & \mbox{ if }\beta t_{k}-1<0\\
@@ -9919,7 +9924,7 @@ The g terms are susceptible to
 
 \end_inset
 
-Together with the identity 
+together with the identity 
 \begin_inset Formula 
 \[
 1=\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)
@@ -9927,7 +9932,80 @@ Together with the identity
 
 \end_inset
 
+ allows
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho_{n} & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-y-1\right)\Theta\left(t_{1}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(\beta t_{k}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-y-1\right)\Theta\left(\beta t_{1}-1\right)
+\end{align*}
 
+\end_inset
+
+As before, make use of
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\beta t_{k}=t_{k+1} & \mbox{ if }\beta t_{k}-1<0\\
+\beta t_{k}-1=t_{k+1} & \mbox{ if }\beta t_{k}-1>0
+\end{align*}
+
+\end_inset
+
+to write
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}\rho_{n} & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(t_{k+1}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{k+1}-y\right)\Theta\left(\beta t_{1}-1\right)\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\sum_{k=0}^{n}\left[g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(1-\beta t_{1}\right)+g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{k+1}-y\right)\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\Theta\left(t_{k+1}-y\right)\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)+\sum_{k=1}^{n+1}g_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\Theta\left(t_{k}-y\right)
+\end{align*}
+
+\end_inset
+
+Meanwhile, given that 
+\begin_inset Formula 
+\[
+d_{n}\left(y\right)=\sum_{k=0}^{n-1}a_{nk}\nu_{k}\left(y\right)-\sum_{k=0}^{n-1}f_{nk}\left(y\right)\Theta\left(\beta t_{k}-1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\beta\mathcal{M}d_{n} & =\beta\sum_{k=1}^{n}a_{n,k-1}\nu_{k}\left(y\right)\\
+ & \qquad-\sum_{k=0}^{n-1}f_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
+ & \qquad-\sum_{k=0}^{n-1}f_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\Theta\left(t_{1}-y\right)
+\end{align*}
+
+\end_inset
+
+Performing term by term compares,
+\begin_inset Formula 
+\begin{align*}
+\beta g_{n+1,k} & =g_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\quad\mbox{ for }k>1\\
+\beta g_{n+1,1} & =g_{n0}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)+\sum_{k=0}^{n-1}f_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
+a_{n+1,k} & =a_{n,k-1}\\
+\beta f_{n+1,k} & =f_{nk}\left(\frac{y}{\beta}\right)\quad\mbox{ for }k>1\\
+\beta f_{n+1,1} & =f_{n1}\left(\frac{y}{\beta}\right)+\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Sooo ...
 \end_layout
 
