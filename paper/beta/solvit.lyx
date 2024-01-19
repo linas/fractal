@@ -9947,7 +9947,7 @@ Making use of
 together with the identity 
 \begin_inset Formula 
 \[
-1=\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)
+1=\Theta\left(\beta t_{k}-1\right)+\Theta\left(1-\beta t_{k}\right)
 \]
 
 \end_inset
@@ -9955,10 +9955,10 @@ together with the identity
  allows
 \begin_inset Formula 
 \begin{align*}
-\beta\mathcal{M}\rho_{n} & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
- & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-y-1\right)\Theta\left(t_{1}-y\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(1-\beta t_{1}\right)\right]\\
- & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(\beta t_{k}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
- & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-y-1\right)\Theta\left(\beta t_{1}-1\right)
+\beta\mathcal{M}\rho_{n} & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-y\right)\left[\Theta\left(\beta t_{k}-1\right)+\Theta\left(1-\beta t_{k}\right)\right]\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-y-1\right)\Theta\left(t_{1}-y\right)\left[\Theta\left(\beta t_{k}-1\right)+\Theta\left(1-\beta t_{k}\right)\right]\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{k}-1\right)+\Theta\left(\beta t_{k}-y\right)\Theta\left(1-\beta t_{k}\right)\right]\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-y-1\right)\Theta\left(\beta t_{k}-1\right)
 \end{align*}
 
 \end_inset
@@ -9978,13 +9978,13 @@ As before, make use of
 to write
 \begin_inset Formula 
 \begin{align*}
-\beta\mathcal{M}\rho_{n} & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{1}-1\right)+\Theta\left(t_{k+1}-y\right)\Theta\left(1-\beta t_{1}\right)\right]\\
- & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{k+1}-y\right)\Theta\left(\beta t_{1}-1\right)\\
- & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
- & \qquad+\sum_{k=0}^{n}\left[g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(1-\beta t_{1}\right)+g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\right]\Theta\left(t_{k+1}-y\right)\\
- & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)\\
- & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\Theta\left(t_{k+1}-y\right)\\
- & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{1}-1\right)+\sum_{k=1}^{n+1}g_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\Theta\left(t_{k}-y\right)
+\beta\mathcal{M}\rho_{n} & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\left[\Theta\left(\beta t_{k}-1\right)+\Theta\left(t_{k+1}-y\right)\Theta\left(1-\beta t_{k}\right)\right]\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(t_{k+1}-y\right)\Theta\left(\beta t_{k}-1\right)\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
+ & \qquad+\sum_{k=0}^{n}\left[g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(1-\beta t_{k}\right)+g_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\right]\Theta\left(t_{k+1}-y\right)\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
+ & \qquad+\sum_{k=0}^{n}g_{nk}\left(\frac{y+\Theta\left(\beta t_{k}-1\right)}{\beta}\right)\Theta\left(t_{k+1}-y\right)\\
+ & =\sum_{k=0}^{n}g_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-1\right)+\sum_{k=1}^{n+1}g_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{k-1}-1\right)}{\beta}\right)\Theta\left(t_{k}-y\right)
 \end{align*}
 
 \end_inset
@@ -10013,8 +10013,8 @@ d_{n}\left(y\right)=\sum_{k=0}^{n-1}a_{nk}\nu_{k}\left(y\right)-\sum_{k=0}^{n-1}
 Performing term by term compares,
 \begin_inset Formula 
 \begin{align*}
-\beta g_{n+1,k} & =g_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\quad\mbox{ for }k>1\\
-\beta g_{n+1,1} & =g_{n0}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)+\sum_{k=0}^{n-1}f_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
+\beta g_{n+1,k} & =g_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{k-1}-1\right)}{\beta}\right)\quad\mbox{ for }k>1\\
+\beta g_{n+1,1} & =g_{n0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-1}f_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
 g_{n+1,0} & =\nu_{0}\\
 a_{n+1,k} & =a_{n,k-1}\\
 \beta f_{n+1,k} & =f_{nk}\left(\frac{y}{\beta}\right)\quad\mbox{ for }k\ne1\\
@@ -10108,13 +10108,12 @@ Deduce from general formulas that, for
 \begin_inset Formula 
 \begin{align*}
 g_{22}\left(y\right) & =\frac{1}{\beta}g_{11}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)\\
-g_{21}\left(y\right) & =\frac{1}{\beta}\nu_{0}\left(\frac{y+\Theta\left(\beta t_{1}-1\right)}{\beta}\right)+\frac{1}{\beta}f_{10}\left(\frac{y+1}{\beta}\right)
+g_{21}\left(y\right) & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\frac{1}{\beta}f_{10}\left(\frac{y+1}{\beta}\right)
 \end{align*}
 
 \end_inset
 
-This miscompares ...
- wtf
+TOK so far
 \end_layout
 
 \begin_layout Subsection
