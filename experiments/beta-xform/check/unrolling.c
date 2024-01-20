@@ -60,7 +60,7 @@ double g_n_k(double beta, int n, int k, double x)
 double f_n_k(double beta, int n, int k, double x)
 {
 	if (n <= k) return 0.0;
-	if (k <= 0) fprintf(stderr, "Error can't have k=0\n");
+	if (k < 0) fprintf(stderr, "Error can't negative k\n");
 	double arg = x / beta;
 	double sum = f_n_k(beta, n-1, k, arg) + g_n_k(beta, n-1, k, arg);
 	return sum / beta;
@@ -127,11 +127,30 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 
 	int imax = 100;
-	int n = 1;
+	int n = 0;
+
+	printf("#\n# beta=%g\n#\n", beta);
+
+#define NIT 4
+	double sum[NIT];
+	for (int j=0; j<NIT; j++) sum[j] = 0.0;
+
+	double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		double y = nu_n(beta, n, x);
-		printf("%d	%g	%g\n", i, x, y);
+		printf("%d	%g", i, x);
+		for (int j=0; j<NIT; j++)
+		{
+			double y = nu_n(beta, n+j, x);
+			sum[j] += y * delta;
+			printf("	%g", y);
+		}
+		printf("\n");
 	}
+
+	printf("#\n# ");
+	for (int j=0; j<NIT; j++)
+		printf(" %g", sum[j] - 1.0);
+	printf("\n#\n");
 }
