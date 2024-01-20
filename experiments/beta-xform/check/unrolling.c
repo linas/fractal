@@ -35,6 +35,53 @@ double gp_invar(double beta, double x)
 	return 0.5*beta*invar(beta, 0.5*beta*x);
 }
 
+// Eigenfunction for n=1 polynomial w/ quadratic generator
+double quad_n1(double beta, double x)
+{
+	double m0 = 0.5*beta;
+	if (x < 0.5) return beta*x*x-x+0.125;
+	if (x < m0) return x*x-x+ beta*0.125;
+	return 0.0;
+}
+
+double gp_quad_n1(double beta, double x)
+{
+	return 0.5*beta*quad_n1(beta, 0.5*beta*x);
+}
+
+// Eigenfunction for n=2 polynomial
+double n2(double beta, double x)
+{
+	double m0 = 0.5*beta;
+	double m1 = 0.5*beta * (beta-1.0);
+	if (x < m1) return beta*beta*x - 0.5;
+	if (x < 0.5) return beta*x-0.5;
+	if (x < m0) return x-0.5;
+	return 0.0;
+}
+
+double gp_n2(double beta, double x)
+{
+	return 0.5*beta*n2(beta, 0.5*beta*x);
+}
+
+// Eigenfunction for n=3 polynomial
+double n3(double beta, double x)
+{
+	double m0 = 0.5*beta;
+	double m1 = 0.5*beta * (beta-1.0);
+	if (x < 0.5) return m1*(beta*x- m1 + 0.25/beta);
+	if (x < m1) return m1*((beta+1.0)*x/beta - m1);
+	if (x < m0) return m1*(x- m1 + 0.25/beta);
+	return 0.0;
+}
+
+double gp_n3(double beta, double x)
+{
+	return 0.5*beta*n3(beta, 0.5*beta*x);
+}
+
+// ==============================================================
 // Return endpoint iterate.
 double t_k(double beta, int k)
 {
@@ -62,13 +109,13 @@ double nu(double x)
 	// return x-0.5;
 
 	// Bernoulli poly B_2
-	// return x*x - x  + 1.0 / 6.0;
+	return x*x - x  + 1.0 / 6.0;
 
 	// Bernoulli poly B_3
-	return x*x*x - 1.5*x*x  + 0.5*x;
+	// return x*x*x - 1.5*x*x  + 0.5*x;
 
 	// Bernoulli poly B_4
-	return x*x*x*x - 2.0*x*x*x  + x*x - 1.0/30.0;
+	// return x*x*x*x - 2.0*x*x*x  + x*x - 1.0/30.0;
 }
 
 // Forward decl
@@ -216,7 +263,10 @@ int main(int argc, char* argv[])
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		double y = gp_invar(beta, x);
+		// double y = gp_invar(beta, x);
+		// double y = gp_n2(beta, x);
+		// double y = gp_n3(beta, x);
+		double y = gp_quad_n1(beta, x);
 		printf("%d	%g	%g", i, x, y);
 
 		double lscale = lamn;
