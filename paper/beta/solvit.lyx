@@ -10126,7 +10126,7 @@ The recursion relations to unroll are
 \beta g_{n,k}\left(y\right) & =g_{n-1,k-1}\left(\frac{y+b_{k-1}}{\beta}\right)\quad\mbox{ for }k>1\\
 \beta g_{n,1}\left(y\right) & =\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-2}b_{k}f_{n-1,k}\left(\frac{y+1}{\beta}\right)\\
 g_{n,0}\left(y\right) & =\nu_{0}\\
-\beta f_{n,k\left(y\right)} & =f_{n-1,k}\left(\frac{y}{\beta}\right)+g_{n-1,k}\left(\frac{y}{\beta}\right)
+\beta f_{n,k}\left(y\right) & =f_{n-1,k}\left(\frac{y}{\beta}\right)+g_{n-1,k}\left(\frac{y}{\beta}\right)
 \end{align*}
 
 \end_inset
@@ -10135,7 +10135,12 @@ Recursing on
 \begin_inset Formula $g_{nk}$
 \end_inset
 
- gives
+ for 
+\begin_inset Formula $k>1$
+\end_inset
+
+ is straight-forward, as only the arguement is iterated.
+ This gives
 \begin_inset Formula 
 \[
 g_{nk}\left(y\right)=\frac{1}{\beta^{k-1}}g_{n-k+1,1}\left(\frac{y}{\beta^{k-1}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)
@@ -10143,7 +10148,48 @@ g_{nk}\left(y\right)=\frac{1}{\beta^{k-1}}g_{n-k+1,1}\left(\frac{y}{\beta^{k-1}}
 
 \end_inset
 
-with 
+Recursing on 
+\begin_inset Formula $f_{nk}$
+\end_inset
+
+ terminates because 
+\begin_inset Formula $f_{nk}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\ge n$
+\end_inset
+
+, leaving only 
+\begin_inset Formula $g_{nk}$
+\end_inset
+
+ behind.
+ Thus gives 
+\begin_inset Formula 
+\[
+f_{n,k}\left(y\right)=\sum_{j=1}^{n-k}\beta^{-j}g_{n-j,k}\left(\frac{y}{\beta^{j}}\right)
+\]
+
+\end_inset
+
+Thus,
+\begin_inset Formula 
+\[
+g_{n,1}\left(y\right)=\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-2}b_{k}\sum_{j=1}^{n-k-1}\beta^{-j-1}g_{n-j-1,k}\left(\frac{y+1}{\beta^{j+1}}\right)
+\]
+
+\end_inset
+
+Exchanging the order of summation,
+\begin_inset Formula 
+\[
+g_{n,1}\left(y\right)=\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+
+\]
+
+\end_inset
+
+so
 \end_layout
 
 \begin_layout Subsection
@@ -25470,7 +25516,6 @@ A088559
 \begin_inset Text
 
 \begin_layout Plain Layout
-
 A263719 
 \end_layout
 
@@ -35545,7 +35590,6 @@ I am not enlightened by staring at that.
 \begin_layout Standard
 It's still an interesting problem: each row of the Vandermonde matrix is
  associated with the polynomial 
-
 \begin_inset Formula $\beta^{n+2}-\beta^{n+1}-1=0$
 \end_inset
 
@@ -35565,19 +35609,6 @@ It's still an interesting problem: each row of the Vandermonde matrix is
 , each row is multiplied by the Pascal matrix (the matrix of binomial coefficien
 ts).
  That is,
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
 \begin_inset Formula 
 \[
 \left[\begin{array}{ccccc}
@@ -46256,7 +46287,6 @@ The primary question for this section is whether the
 \begin_layout Standard
 To obtain the orthogonal polynomial basis, one must satisfy the constraint
  that
-
 \begin_inset Formula $A_{n+1,n}>0$
 \end_inset
 
