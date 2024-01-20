@@ -10227,6 +10227,17 @@ g_{n,1}\left(y\right) & =\sum_{j=0}^{n-1}\beta^{-j-1}\nu_{0}\left(\frac{y+1}{\be
 \end_inset
 
 It does not seem reasonable to try to unroll this any further.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Validity of these formulas checked numerically in check/unrolling.c and it
+ all checks out OK.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -10334,6 +10345,55 @@ Restructure
 \begin_layout Standard
 Lets undo the above mistake.
  Write
+\begin_inset Formula 
+\[
+\nu_{n}=\sigma_{n}+c_{n}
+\]
+
+\end_inset
+
+and hypothesize that 
+\begin_inset Formula 
+\begin{align*}
+\sigma_{n}\left(y\right) & =\sum_{k=0}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
+c_{n}\left(y\right) & =\sum_{k=0}^{n-1}e_{nk}\left(y\right)\Theta\left(\beta t_{k}-1\right)
+\end{align*}
+
+\end_inset
+
+Iterating gives
+\begin_inset Formula 
+\[
+\beta\mathcal{M}\sigma_{n}=\sum_{k=0}^{n}h_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-1\right)+\sum_{k=1}^{n+1}h_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{k-1}-1\right)}{\beta}\right)\Theta\left(t_{k}-y\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\beta\mathcal{M}c_{n}=\sum_{k=0}^{n-1}e_{nk}\left(\frac{y}{\beta}\right)\Theta\left(\beta t_{k}-1\right)+\sum_{k=0}^{n-1}e_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\Theta\left(t_{1}-y\right)
+\]
+
+\end_inset
+
+Comparing term by term gives the recursion relations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\beta h_{n+1,k} & =h_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{k-1}-1\right)}{\beta}\right)\quad\mbox{ for }k>1\\
+\beta h_{n+1,1} & =h_{n0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-1}e_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
+h_{n+1,0} & =0\\
+h_{00} & =\nu_{0}\\
+\beta e_{n+1,k} & =e_{nk}\left(\frac{y}{\beta}\right)+h_{nk}\left(\frac{y}{\beta}\right)\quad\mbox{ for }k<n\\
+\beta e_{n+1,n} & =h_{nn}\left(\frac{y}{\beta}\right)
+\end{align*}
+
+\end_inset
+
+while
 \end_layout
 
 \begin_layout Subsection
