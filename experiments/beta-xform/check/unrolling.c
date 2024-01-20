@@ -257,14 +257,43 @@ double gem_n_1(double beta, int n, double x)
 
 // Return the g_n_1 constant from the "generalized stretch-cut-stack"
 // section of paper. This is computed with the series sum.
+double gfuu_n_1(double beta, int n, double x)
+{
+	double sum = 0.0;
+	double bej = 1.0 / beta;
+	for (int j=0; j<n-1; j++)
+	{
+		double arg = bej * (x + 1.0);
+		sum += bej * nu(arg);
+		bej /= beta;
+		arg /= beta;
+
+		double bitso = 0.0;
+		for (int k=1; k< n-j-1; k++)
+		{
+			if (0 == b_k(beta, k)) continue;
+			bitso += gsum_n_k(beta, n-j-2, k, arg);
+		}
+		sum += bej * bitso;
+	}
+
+	double arg = bej * (x + 1.0);
+	sum += bej * nu(arg);
+	return sum;
+}
+
+// Return the g_n_1 constant from the "generalized stretch-cut-stack"
+// section of paper. This is computed with the series sum.
 double gsum_n_1(double beta, int n, double x)
 {
 	double sum = 0.0;
 	double bej = 1.0 / beta;
 	for (int j=0; j<n-1; j++)
 	{
-		sum += bej * nu((x + 1.0) * bej);
+		double arg = bej * (x + 1.0);
+		sum += bej * nu(arg);
 		bej /= beta;
+		arg /= beta;
 
 		double bitso = 0.0;
 		double bek = 1.0;
@@ -272,6 +301,7 @@ double gsum_n_1(double beta, int n, double x)
 		{
 			if (0 == b_k(beta, k)) continue;
 
+#if 0
 			double arg = 0.0;
 			double bei = 1.0;
 			for (int i=1; i<k; i++)
@@ -281,13 +311,16 @@ double gsum_n_1(double beta, int n, double x)
 			}
 			arg += (x+1.0) * bek * bej * beta;
 			bitso += gsum_n_1(beta, n-k-j-1, arg) * bek;
+#endif
+			bitso += gsum_n_k(beta, n-j-2, k, arg);
 
 			bek /= beta;
 		}
 		sum += bej * bitso;
 	}
 
-	sum += bej * nu((x + 1.0) * bej);
+	double arg = bej * (x + 1.0);
+	sum += bej * nu(arg);
 	return sum;
 }
 
@@ -414,8 +447,9 @@ int main(int argc, char* argv[])
 			double egn1 = g_n_1(beta, n, x);
 			// double gn1 = gro_n_1(beta, n, x);
 			// double gn1 = gex_n_1(beta, n, x);
-			double gn1 = gem_n_1(beta, n, x);
-			// double gn1 = gsum_n_1(beta, n, x);
+			// double gn1 = gem_n_1(beta, n, x);
+			// double gn1 = gfuu_n_1(beta, n, x);
+			double gn1 = gsum_n_1(beta, n, x);
 			printf("%d	%g   %d  gn1=%g egn1=%g  diff=%g\n",
 				i, x, n, gn1, egn1, gn1-egn1);
 		}
