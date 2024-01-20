@@ -46,7 +46,7 @@ double g_n_k(double beta, int n, int k, double x)
 	if (n < k) return 0.0;
 	if (0 == k) return nu(x);
 
-	if (1 == k) g_n_1(beta, n, x);
+	if (1 == k) return g_n_1(beta, n, x);
 
 	// Recurse
 	double bkm1 = b_k(beta, k-1);
