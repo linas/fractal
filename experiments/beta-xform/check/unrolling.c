@@ -59,7 +59,16 @@ int b_k(double beta, int k)
 double nu(double x)
 {
 	// return 1.0;
-	return x-0.5;
+	// return x-0.5;
+
+	// Bernoulli poly B_2
+	// return x*x - x  + 1.0 / 6.0;
+
+	// Bernoulli poly B_3
+	return x*x*x - 1.5*x*x  + 0.5*x;
+
+	// Bernoulli poly B_4
+	return x*x*x*x - 2.0*x*x*x  + x*x - 1.0/30.0;
 }
 
 // Forward decl
@@ -197,7 +206,9 @@ int main(int argc, char* argv[])
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
-	double lambda = 1.0 / beta;
+	// double lambda = 1.0 / beta;
+	double lambda = 1.0 / (beta*beta);
+	// double lambda = 1.0 / (beta*beta*beta);
 	double lamn = pow(lambda, n);
 
 	int imax = 301;
