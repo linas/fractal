@@ -126,11 +126,42 @@ int main(int argc, char* argv[])
 	}
 	double beta = atof(argv[1]);
 
-	int imax = 100;
-	int n = 0;
+	int imax = 20;
+	// int n = 0;
 
 	printf("#\n# beta=%g\n#\n", beta);
 
+	for (int i=0; i< imax; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) imax);
+		// double y = nu_n(beta, n, x);
+
+#if 0
+		// N=1 test cases pass
+		double ef10 = nu (x/beta)/beta;
+		double f10 = f_n_k(beta, 1, 0, x);
+		printf("%d	%g f10=%g ef10=%g\n", i, x, f10, ef10);
+
+		double eg11 = nu ((x+1.0)/beta)/beta;
+		double g11 = g_n_k(beta, 1, 1, x);
+		printf("%d	%g g11=%g eg11=%g\n", i, x, g11, eg11);
+
+		// N=2 efff test cases pass
+		double ef21 = g_n_k(beta, 1, 1, x/beta)/beta;
+		double f21 = f_n_k(beta, 2, 1, x);
+		printf("%d	%g f21=%g ef21=%g\n", i, x, f21, ef21);
+
+		double ef20 = nu(x/beta)/beta + f_n_k(beta, 1, 0, x/beta)/beta;
+		double f20 = f_n_k(beta, 2, 0, x);
+		printf("%d	%g f20=%g ef20=%g\n", i, x, f20, ef20);
+#endif
+
+		double eg21 = nu((x+1.0)/beta)/beta + f_n_k(beta, 1, 0, (x+1.0)/beta)/beta;
+		double g21 = g_n_k(beta, 2, 1, x);
+		printf("%d	%g g21=%g eg21=%g\n", i, x, g21, eg21);
+	}
+
+#if PRINT_DEN
 #define NIT 4
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
@@ -153,4 +184,5 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NIT; j++)
 		printf(" %g", sum[j] - 1.0);
 	printf("\n#\n");
+#endif
 }
