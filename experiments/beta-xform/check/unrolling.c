@@ -127,6 +127,7 @@ int b_k(double beta, int k)
 
 // Forward decl
 double g_n_1(double beta, int n, double x);
+double gro_n_1(double beta, int n, double x);
 
 // Return the g_n_k constant from the "generalized stretch-cut-stack"
 // section of paper. This is computed using the recursing formula.
@@ -135,7 +136,8 @@ double g_n_k(double beta, int n, int k, double x)
 	if (n < k) return 0.0;
 	if (0 == k) return nu(x);
 
-	if (1 == k) return g_n_1(beta, n, x);
+	// if (1 == k) return g_n_1(beta, n, x);
+	if (1 == k) return gro_n_1(beta, n, x);
 
 	// Recurse
 	double bkm1 = b_k(beta, k-1);
@@ -173,38 +175,61 @@ double g_n_1(double beta, int n, double x)
 // Series summations
 
 // Return the g_n_1 constant from the "generalized stretch-cut-stack"
+// section of paper. This is computed with the first unrolling of the
+// series sum.
+double gro_n_1(double beta, int n, double x)
+{
+	double sum = nu((x + 1.0) / beta) / beta;
+
+	for (int k=0; k< n-1; k++)
+	{
+		if (0 == b_k(beta, k)) continue;
+
+		double bej = 1.0 / (beta*beta);
+		for (int j=0; j<n-k-1; j++)
+		{
+			double arg = (x + 1.0) * bej;
+			sum += g_n_k(beta, n-j-2, k, arg) * bej;
+			bej /= beta;
+		}
+	}
+
+	return sum;
+}
+
+// Return the g_n_1 constant from the "generalized stretch-cut-stack"
 // section of paper. This is computed with the series sum.
 double gsum_n_1(double beta, int n, double x)
 {
 	double sum = 0.0;
-	double betaj = 1.0 / beta;
+	double bej = 1.0 / beta;
 	for (int j=0; j<n-1; j++)
 	{
-		sum += betaj * nu((x + 1.0) * betaj);
-		betaj /= beta;
+		sum += bej * nu((x + 1.0) * bej);
+		bej /= beta;
 
 		double bgsum = 0.0;
-		double betak = 1.0;
+		double bek = 1.0;
 		for (int k=1; k< n-j-1; k++)
 		{
 			if (0 == b_k(beta, k)) continue;
 
 			double poly = 0.0;
-			double betai = 1.0 / beta;
+			double bei = 1.0 / beta;
 			for (int i=1; i<k; i++)
 			{
-				poly += b_k(beta, i) * betai;
-				betai /= beta;
+				poly += b_k(beta, i) * bei;
+				bei /= beta;
 			}
-			poly += (x+1.0) * betak * betaj;
-			bgsum += gsum_n_1(beta, n-k-j-1, poly) * betak;
+			poly += (x+1.0) * bek * bej;
+			bgsum += gsum_n_1(beta, n-k-j-1, poly) * bek;
 
-			betak /= beta;
+			bek /= beta;
 		}
-		sum += betaj * bgsum;
+		sum += bej * bgsum;
 	}
 
-	sum += betaj * nu((x + 1.0) * betaj);
+	sum += bej * nu((x + 1.0) * bej);
 	return sum;
 }
 
@@ -302,7 +327,8 @@ int main(int argc, char* argv[])
 		for (int n=0; n<10; n++)
 		{
 			double egn1 = g_n_1(beta, n, x);
-			double gn1 = gsum_n_1(beta, n, x);
+			// double gn1 = gsum_n_1(beta, n, x);
+			double gn1 = gro_n_1(beta, n, x);
 			printf("%d	%g   %d  gn1=%g egn1=%g  diff=%g\n",
 				i, x, n, gn1, egn1, gn1-egn1);
 		}
