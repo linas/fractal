@@ -81,9 +81,40 @@ double g_n_1(double beta, int n, double x)
 }
 
 // Iterated density
+double rho_n(double beta, int n, double x)
+{
+	double sum = 0.0;
+	for (int k=0; k <=n; k++)
+	{
+		double tk = t_k(beta, k);
+		if (tk > x)
+			sum += g_n_k(beta, n, k, x);
+	}
+	return sum;
+}
+
+// Forward decl
+double nu_n(double beta, int n, double x);
+
+// Iterated density
+double dee_n(double beta, int n, double x)
+{
+	double sum = 0.0;
+	for (int k=0; k <n; k++)
+	{
+		sum += nu_n(beta, k, x);
+		if (b_k(beta, k))
+			sum -= f_n_k(beta, n, k, x);
+	}
+	return sum;
+}
+
+// Iterated density
 double nu_n(double beta, int n, double x)
 {
-	return 0.0;
+	if (0 == n) return nu(x);
+
+	return rho_n(beta, n, x) - dee_n(beta, n, x);
 }
 
 int main(int argc, char* argv[])
@@ -95,6 +126,12 @@ int main(int argc, char* argv[])
 	}
 	double beta = atof(argv[1]);
 
-	double x = g_n_k(beta, 3, 3, 0.3);
-printf("its %g\n", x);
+	int imax = 100;
+	int n = 1;
+	for (int i=0; i< imax; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) imax);
+		double y = nu_n(beta, n, x);
+		printf("%d	%g	%g\n", i, x, y);
+	}
 }
