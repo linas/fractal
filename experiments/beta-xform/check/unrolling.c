@@ -134,6 +134,7 @@ double gsum_n_1(double beta, int n, double x);
 double g_n_k(double beta, int n, int k, double x)
 {
 	if (n < k) return 0.0;
+	if (n < 0) { fprintf(stderr, "Error: negative n\n"); return 0.0; }
 	if (0 == k) return nu(x);
 
 	if (1 == k) return g_n_1(beta, n, x);
@@ -186,6 +187,7 @@ double gsum_n_1(double beta, int n, double x)
 	{
 		double arg = bej * (x + 1.0);
 		sum += bej * nu(arg);
+
 		bej /= beta;
 		arg /= beta;
 
@@ -193,20 +195,7 @@ double gsum_n_1(double beta, int n, double x)
 		for (int k=1; k< n-j-1; k++)
 		{
 			if (0 == b_k(beta, k)) continue;
-#if 0
-			double sag = 0.0;
-			double bei = 1.0;
-			for (int i=1; i<k; i++)
-			{
-				bei /= beta;
-				sag += b_k(beta, i) * bei;
-			}
-			double bek = bei;
-			sag += arg * bek;
-			bitso += gsum_n_1(beta, n-k-j-1, sag) * bek;
-#else
 			bitso += gsum_n_k(beta, n-j-2, k, arg);
-#endif
 		}
 		sum += bej * bitso;
 	}
@@ -234,6 +223,22 @@ double gsum_n_k(double beta, int n, int k, double x)
 	double bek = bei;
 	arg += x * bek;
 	return gsum_n_1(beta, n-k+1, arg) * bek;
+}
+
+// Return the f_n_k constant from the "generalized stretch-cut-stack"
+// section of paper. This is computed using the summation formula.
+double fsum_n_k(double beta, int n, int k, double x)
+{
+	if (n <= k) return 0.0;
+	if (k < 0) fprintf(stderr, "Error can't negative k\n");
+	double sum = 0.0;
+	double bej = 1.0;
+	for (int j=1; j <= n-k; j++)
+	{
+		bej /= beta;
+		sum += bej * gsum_n_k(beta, n-j, k, x*bej);
+	}
+	return sum;
 }
 
 // ==============================================================
@@ -325,7 +330,6 @@ int main(int argc, char* argv[])
 		double eg22 = g_n_k(beta, 1, 1, arg) /beta;
 		double g22 = g_n_k(beta, 2, 2, x);
 		printf("%d	%g g22=%g eg22=%g\n", i, x, g22, eg22);
-#endif
 
 		for (int n=0; n<10; n++)
 		{
@@ -335,6 +339,19 @@ int main(int argc, char* argv[])
 				i, x, n, gn1, egn1, gn1-egn1);
 		}
 		printf("---------\n");
+#endif
+
+		for (int k=0; k < 6; k++)
+		{
+			for (int n=k+1; n<10; n++)
+			{
+				double efn1 = f_n_k(beta, n, k, x);
+				double fn1 = fsum_n_k(beta, n, k, x);
+				printf("%d	%f   %d %d  fn1=%f efn1=%f  diff=%g\n",
+					i, x, n, k, fn1, efn1, fn1-efn1);
+			}
+			printf("---------\n");
+		}
 	}
 #endif
 
