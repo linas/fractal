@@ -128,6 +128,7 @@ int b_k(double beta, int k)
 // Forward decl
 double g_n_1(double beta, int n, double x);
 double gro_n_1(double beta, int n, double x);
+double gex_n_1(double beta, int n, double x);
 
 // Return the g_n_k constant from the "generalized stretch-cut-stack"
 // section of paper. This is computed using the recursing formula.
@@ -137,7 +138,8 @@ double g_n_k(double beta, int n, int k, double x)
 	if (0 == k) return nu(x);
 
 	// if (1 == k) return g_n_1(beta, n, x);
-	if (1 == k) return gro_n_1(beta, n, x);
+	// if (1 == k) return gro_n_1(beta, n, x);
+	if (1 == k) return gex_n_1(beta, n, x);
 
 	// Recurse
 	double bkm1 = b_k(beta, k-1);
@@ -198,6 +200,32 @@ double gro_n_1(double beta, int n, double x)
 }
 
 // Return the g_n_1 constant from the "generalized stretch-cut-stack"
+// section of paper. This is computed with exchanged sum of the series.
+double gex_n_1(double beta, int n, double x)
+{
+	double sum = nu((x + 1.0) / beta) / beta;
+
+	double bej = 1.0 / (beta * beta);
+	for (int j=0; j<n-1; j++)
+	{
+		double arg = bej * (x + 1.0);
+
+		double bitso = nu(arg);
+		if (b_k(beta, 1)) bitso += gex_n_1(beta, n-j-2, arg);
+
+		for (int k=2; k< n-j-1; k++)
+		{
+			if (0 == b_k(beta, k)) continue;
+			bitso += g_n_k(beta, n-j-2, k, arg);
+		}
+		sum += bej * bitso;
+		bej /= beta;
+	}
+
+	return sum;
+}
+
+// Return the g_n_1 constant from the "generalized stretch-cut-stack"
 // section of paper. This is computed with the series sum.
 double gsum_n_1(double beta, int n, double x)
 {
@@ -208,25 +236,25 @@ double gsum_n_1(double beta, int n, double x)
 		sum += bej * nu((x + 1.0) * bej);
 		bej /= beta;
 
-		double bgsum = 0.0;
+		double bitso = 0.0;
 		double bek = 1.0;
 		for (int k=1; k< n-j-1; k++)
 		{
 			if (0 == b_k(beta, k)) continue;
 
-			double poly = 0.0;
+			double arg = 0.0;
 			double bei = 1.0 / beta;
 			for (int i=1; i<k; i++)
 			{
-				poly += b_k(beta, i) * bei;
+				arg += b_k(beta, i) * bei;
 				bei /= beta;
 			}
-			poly += (x+1.0) * bek * bej;
-			bgsum += gsum_n_1(beta, n-k-j-1, poly) * bek;
+			arg += (x+1.0) * bek * bej;
+			bitso += gsum_n_1(beta, n-k-j-1, arg) * bek;
 
 			bek /= beta;
 		}
-		sum += bej * bgsum;
+		sum += bej * bitso;
 	}
 
 	sum += bej * nu((x + 1.0) * bej);
@@ -328,7 +356,8 @@ int main(int argc, char* argv[])
 		{
 			double egn1 = g_n_1(beta, n, x);
 			// double gn1 = gsum_n_1(beta, n, x);
-			double gn1 = gro_n_1(beta, n, x);
+			// double gn1 = gro_n_1(beta, n, x);
+			double gn1 = gex_n_1(beta, n, x);
 			printf("%d	%g   %d  gn1=%g egn1=%g  diff=%g\n",
 				i, x, n, gn1, egn1, gn1-egn1);
 		}
