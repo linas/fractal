@@ -1,7 +1,9 @@
 /*
  * unrolling.c
+ *
  * Verify to unrolled recursion relations for generalized
- * stretch-cut-stack map.
+ * stretch-cut-stack map. Result: they are correct, and do
+ * reproduce older results.
  *
  * January 2024
  */
@@ -82,6 +84,24 @@ double gp_n3(double beta, double x)
 }
 
 // ==============================================================
+
+// Arbitrary function
+double nu(double x)
+{
+	// return 1.0;
+	return x-0.5;
+
+	// Bernoulli poly B_2
+	// return x*x - x  + 1.0 / 6.0;
+
+	// Bernoulli poly B_3
+	// return x*x*x - 1.5*x*x  + 0.5*x;
+
+	// Bernoulli poly B_4
+	// return x*x*x*x - 2.0*x*x*x  + x*x - 1.0/30.0;
+}
+
+// ==============================================================
 // Return endpoint iterate.
 double t_k(double beta, int k)
 {
@@ -102,21 +122,8 @@ int b_k(double beta, int k)
 	return 0;
 }
 
-// Arbitrary function
-double nu(double x)
-{
-	// return 1.0;
-	// return x-0.5;
-
-	// Bernoulli poly B_2
-	return x*x - x  + 1.0 / 6.0;
-
-	// Bernoulli poly B_3
-	// return x*x*x - 1.5*x*x  + 0.5*x;
-
-	// Bernoulli poly B_4
-	// return x*x*x*x - 2.0*x*x*x  + x*x - 1.0/30.0;
-}
+// ==============================================================
+// Recursive forms
 
 // Forward decl
 double g_n_1(double beta, int n, double x);
@@ -149,7 +156,7 @@ double f_n_k(double beta, int n, int k, double x)
 }
 
 // Return the g_n_1 constant from the "generalized stretch-cut-stack"
-// section of paper.
+// section of paper. This is computed with the recursive formula.
 double g_n_1(double beta, int n, double x)
 {
 	double arg = (x + 1.0) / beta;
@@ -161,6 +168,48 @@ double g_n_1(double beta, int n, double x)
 	}
 	return sum / beta;
 }
+
+// ==============================================================
+// Series summations
+
+// Return the g_n_1 constant from the "generalized stretch-cut-stack"
+// section of paper. This is computed with the series sum.
+double gsum_n_1(double beta, int n, double x)
+{
+	double sum = 0.0;
+	double betaj = 1.0 / beta;
+	for (int j=0; j<n-1; j++)
+	{
+		sum += betaj * nu((x + 1.0) * betaj);
+		betaj /= beta;
+
+		double bgsum = 0.0;
+		double betak = 1.0;
+		for (int k=1; k< n-j-1; k++)
+		{
+			if (0 == b_k(beta, k)) continue;
+
+			double poly = 0.0;
+			double betai = 1.0 / beta;
+			for (int i=1; i<k; i++)
+			{
+				poly += b_k(beta, i) * betai;
+				betai /= beta;
+			}
+			poly += (x+1.0) * betak * betaj;
+			bgsum += gsum_n_1(beta, n-k-j-1, poly) * betak;
+
+			betak /= beta;
+		}
+		sum += betaj * bgsum;
+	}
+
+	sum += betaj * nu((x + 1.0) * betaj);
+	return sum;
+}
+
+// ==============================================================
+// Density expressions
 
 // Iterated density
 double rho_n(double beta, int n, double x)
@@ -198,6 +247,8 @@ double nu_n(double beta, int n, double x)
 
 	return rho_n(beta, n, x) - dee_n(beta, n, x);
 }
+
+// ==============================================================
 
 int main(int argc, char* argv[])
 {
@@ -253,8 +304,8 @@ int main(int argc, char* argv[])
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
-	// double lambda = 1.0 / beta;
-	double lambda = 1.0 / (beta*beta);
+	double lambda = 1.0 / beta;
+	// double lambda = 1.0 / (beta*beta);
 	// double lambda = 1.0 / (beta*beta*beta);
 	double lamn = pow(lambda, n);
 
@@ -285,7 +336,7 @@ int main(int argc, char* argv[])
 
 	printf("#\n# ");
 	for (int j=0; j<NIT; j++)
-		printf(" %g", sum[j] - 1.0);
+		printf(" %g", sum[j]);
 	printf("\n#\n");
 #endif
 }
