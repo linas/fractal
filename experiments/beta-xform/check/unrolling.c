@@ -296,25 +296,23 @@ double gsum_n_1(double beta, int n, double x)
 		arg /= beta;
 
 		double bitso = 0.0;
-		double bek = 1.0;
 		for (int k=1; k< n-j-1; k++)
 		{
 			if (0 == b_k(beta, k)) continue;
-
-#if 0
-			double arg = 0.0;
+#if 1
+			double sag = 0.0;
 			double bei = 1.0;
 			for (int i=1; i<k; i++)
 			{
 				bei /= beta;
-				arg += b_k(beta, i) * bei;
+				sag += b_k(beta, i) * bei;
 			}
-			arg += (x+1.0) * bek * bej * beta;
-			bitso += gsum_n_1(beta, n-k-j-1, arg) * bek;
-#endif
+			double bek = bei;
+			sag += arg * bek;
+			bitso += gsum_n_1(beta, n-k-j-1, sag) * bek;
+#else
 			bitso += gsum_n_k(beta, n-j-2, k, arg);
-
-			bek /= beta;
+#endif
 		}
 		sum += bej * bitso;
 	}
@@ -334,7 +332,9 @@ double gsum_n_k(double beta, int n, int k, double x)
 	// if (1 == k) return g_n_1(beta, n, x);
 	// if (1 == k) return gro_n_1(beta, n, x);
 	// if (1 == k) return gex_n_1(beta, n, x);
-	if (1 == k) return gem_n_1(beta, n, x);
+	// if (1 == k) return gem_n_1(beta, n, x);
+	// if (1 == k) return gfuu_n_1(beta, n, x);
+	if (1 == k) return gsum_n_1(beta, n, x);
 
 	// Loop.
 	double arg = 0.0;
@@ -348,7 +348,9 @@ double gsum_n_k(double beta, int n, int k, double x)
 	arg += x * bek;
 	// return gro_n_1(beta, n-k+1, arg) * bek;
 	// return gex_n_1(beta, n-k+1, arg) * bek;
-	return gem_n_1(beta, n-k+1, arg) * bek;
+	// return gem_n_1(beta, n-k+1, arg) * bek;
+	// return gfuu_n_1(beta, n-k+1, arg) * bek;
+	return gsum_n_1(beta, n-k+1, arg) * bek;
 }
 
 // ==============================================================
