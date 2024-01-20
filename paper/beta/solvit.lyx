@@ -10208,20 +10208,19 @@ Thus,
 \begin_inset Formula 
 \begin{align*}
 g_{n,1}\left(y\right) & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-2}b_{k}\sum_{j=1}^{n-k-1}\beta^{-j-1}g_{n-j-1,k}\left(\frac{y+1}{\beta^{j+1}}\right)\\
- & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-2}b_{k}\sum_{j=0}^{n-k-2}\beta^{-j-2}g_{n-j-2,k}\left(\frac{y+1}{\beta^{j+2}}\right)
+ & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-2}b_{k}\sum_{j=0}^{n-k-2}\beta^{-j-2}g_{n-j-2,k}\left(\frac{y+1}{\beta^{j+2}}\right)\\
+ & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{j=0}^{n-2}\beta^{-j-2}\nu_{0}\left(\frac{y+1}{\beta^{j+2}}\right)\\
+ & \qquad+\sum_{k=1}^{n-2}b_{k}\sum_{j=0}^{n-k-2}\beta^{-j-2}g_{n-j-2,k}\left(\frac{y+1}{\beta^{j+2}}\right)\\
+ & =\sum_{j=0}^{n-1}\beta^{-j-1}\nu_{0}\left(\frac{y+1}{\beta^{j+1}}\right)+\sum_{k=1}^{n-2}b_{k}\sum_{j=0}^{n-k-2}\beta^{-j-2}g_{n-j-2,k}\left(\frac{y+1}{\beta^{j+2}}\right)
 \end{align*}
 
 \end_inset
 
-Exchanging the order of summation,
+Exchanging the order of summation doesn't seem to do anything interesting.
 \begin_inset Formula 
 \begin{align*}
-g_{n,1}\left(y\right) & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{j=0}^{n-2}\frac{1}{\beta^{j+2}}\sum_{k=0}^{n-j-2}b_{k}g_{n-j-2,k}\left(\frac{y+1}{\beta^{j+2}}\right)\\
- & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)+\sum_{j=0}^{n-2}\frac{1}{\beta^{j+2}}\left[\nu_{0}\left(\frac{y+1}{\beta^{j+2}}\right)+b_{1}g_{n-j-2,1}\left(\frac{y+1}{\beta^{j+2}}\right)\right]\\
- & \qquad+\sum_{j=0}^{n-2}\frac{1}{\beta^{j+2}}\sum_{k=2}^{n-j-2}b_{k}g_{n-j-2,k}\left(\frac{y+1}{\beta^{j+2}}\right)\\
- & =\sum_{j=0}^{n-1}\frac{1}{\beta^{j+1}}\nu_{0}\left(\frac{y+1}{\beta^{j+1}}\right)+b_{1}\sum_{j=0}^{n-2}\frac{1}{\beta^{j+2}}g_{n-j-2,1}\left(\frac{y+1}{\beta^{j+2}}\right)\\
- & \qquad+\sum_{j=0}^{n-2}\frac{1}{\beta^{j+2}}\sum_{k=2}^{n-j-2}b_{k}\frac{1}{\beta^{k-1}}g_{n-k-j-1,1}\left(\frac{y+1}{\beta^{k+j+1}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\\
- & =\sum_{j=0}^{n-1}\frac{1}{\beta^{j+1}}\nu_{0}\left(\frac{y+1}{\beta^{j+1}}\right)\\
+g_{n,1}\left(y\right) & =\sum_{j=0}^{n-1}\beta^{-j-1}\nu_{0}\left(\frac{y+1}{\beta^{j+1}}\right)+\sum_{j=0}^{n-2}\beta^{-j-2}\sum_{k=1}^{n-j-2}b_{k}g_{n-j-2,k}\left(\frac{y+1}{\beta^{j+2}}\right)\\
+ & =\sum_{j=0}^{n-1}\beta^{-j-1}\nu_{0}\left(\frac{y+1}{\beta^{j+1}}\right)\\
  & \qquad+\sum_{j=0}^{n-2}\frac{1}{\beta^{j+2}}\sum_{k=1}^{n-j-2}b_{k}\frac{1}{\beta^{k-1}}g_{n-k-j-1,1}\left(\frac{y+1}{\beta^{k+j+1}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
 \end{align*}
 
