@@ -260,7 +260,8 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-#if UNIT_TEST
+#define UNIT_TEST
+#ifdef UNIT_TEST
 	printf("#\n# beta=%g\n#\n", beta);
 
 	int imax = 20;
@@ -269,6 +270,7 @@ int main(int argc, char* argv[])
 		double x = (((double) i) + 0.5) / ((double) imax);
 		// double y = nu_n(beta, n, x);
 
+#if 0
 		// N=1 test cases pass
 		double ef10 = nu (x/beta)/beta;
 		double f10 = f_n_k(beta, 1, 0, x);
@@ -295,10 +297,20 @@ int main(int argc, char* argv[])
 		double eg22 = g_n_k(beta, 1, 1, arg) /beta;
 		double g22 = g_n_k(beta, 2, 2, x);
 		printf("%d	%g g22=%g eg22=%g\n", i, x, g22, eg22);
+#endif
+
+		for (int n=0; n<10; n++)
+		{
+			double egn1 = g_n_1(beta, n, x);
+			double gn1 = gsum_n_1(beta, n, x);
+			printf("%d	%g   %d  gn1=%g egn1=%g  diff=%g\n",
+				i, x, n, gn1, egn1, gn1-egn1);
+		}
+		printf("---------\n");
 	}
 #endif
 
-#define PRINT_DEN
+// #define PRINT_DEN
 #ifdef PRINT_DEN
 #define NIT 3
 	double sum[NIT];
