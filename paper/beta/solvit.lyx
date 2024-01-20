@@ -9864,7 +9864,7 @@ Performing term by term compares,
 \beta g_{n+1,k} & =g_{n,k-1}\left(\frac{y+\Theta\left(\beta t_{k-1}-1\right)}{\beta}\right)\quad\mbox{ for }k>1\\
 \beta g_{n+1,1} & =g_{n0}\left(\frac{y+1}{\beta}\right)+\sum_{k=0}^{n-1}f_{nk}\left(\frac{y+1}{\beta}\right)\Theta\left(\beta t_{k}-1\right)\\
 g_{n+1,0} & =\nu_{0}\\
-a_{n+1,k} & =a_{n,k-1}\\
+a_{n+1,k} & =a_{n,k-1}=1\\
 \beta f_{n+1,k} & =f_{nk}\left(\frac{y}{\beta}\right)+g_{nk}\left(\frac{y}{\beta}\right)
 \end{align*}
 
@@ -9874,13 +9874,22 @@ a_{n+1,k} & =a_{n,k-1}\\
 \end_layout
 
 \begin_layout Standard
-Seems to be correct; have not quadruple-checked yet.
- Seems that 
+The above can be checked numerically, and it correctly reproduces the Gelfond–Pa
+rry measure, when 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+.
+ The result that 
 \begin_inset Formula $a_{n,k}=1$
 \end_inset
 
- which suggests something wonky unless resummation is done.
- Not sure what that is about, yet.
+ is mildly unexpected, given the earlier calculations.
+ If would appear that there is some resummation that is possible when 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+ but is unavailable when working with the general case.
 \end_layout
 
 \begin_layout Paragraph

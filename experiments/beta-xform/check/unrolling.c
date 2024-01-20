@@ -58,7 +58,8 @@ int b_k(double beta, int k)
 // Arbitrary function
 double nu(double x)
 {
-	return 1.0;
+	// return 1.0;
+	return x-0.5;
 }
 
 // Forward decl
@@ -192,24 +193,33 @@ int main(int argc, char* argv[])
 
 #define PRINT_DEN
 #ifdef PRINT_DEN
-#define NIT 4
+#define NIT 3
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
-	int imax = 101;
+	double lambda = 1.0 / beta;
+	double lamn = pow(lambda, n);
+
+	int imax = 301;
 	double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 		double y = gp_invar(beta, x);
 		printf("%d	%g	%g", i, x, y);
+
+		double lscale = lamn;
 		for (int j=0; j<NIT; j++)
 		{
 			double y = nu_n(beta, n+j, x);
+			y /= lscale;
+			lscale *= lambda;
+
 			sum[j] += y * delta;
 			printf("	%g", y);
 		}
 		printf("\n");
+		fflush(stdout);
 	}
 
 	printf("#\n# ");
