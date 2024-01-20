@@ -10,6 +10,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Invariant measure for beta shift (not beta transform)
+double invar(double beta, double x)
+{
+	double midpnt = 0.5*beta;
+	double obn = 1.0;
+	double sum = 0.0;
+	double norm = 0.0;
+	for (int i=0; i<1000; i++)
+	{
+		if (x < midpnt) sum += obn;
+		norm += midpnt*obn;
+
+		if (0.5 < midpnt) midpnt -= 0.5;
+		midpnt *= beta;
+		obn /= beta;
+		if (obn < 1e-15) break;
+	}
+	return sum / norm;
+}
+
+double gp_invar(double beta, double x)
+{
+	return 0.5*beta*invar(beta, 0.5*beta*x);
+}
+
 // Return endpoint iterate.
 double t_k(double beta, int k)
 {
@@ -119,24 +144,23 @@ double nu_n(double beta, int n, double x)
 
 int main(int argc, char* argv[])
 {
-	if (argc != 2)
+	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s beta \n", argv[0]);
+		fprintf(stderr, "Usage: %s beta n\n", argv[0]);
 		exit (1);
 	}
 	double beta = atof(argv[1]);
+	int n = atoi(argv[2]);
 
-	int imax = 20;
-	// int n = 0;
-
+#if UNIT_TEST
 	printf("#\n# beta=%g\n#\n", beta);
 
+	int imax = 20;
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 		// double y = nu_n(beta, n, x);
 
-#if 0
 		// N=1 test cases pass
 		double ef10 = nu (x/beta)/beta;
 		double f10 = f_n_k(beta, 1, 0, x);
@@ -154,23 +178,31 @@ int main(int argc, char* argv[])
 		double ef20 = nu(x/beta)/beta + f_n_k(beta, 1, 0, x/beta)/beta;
 		double f20 = f_n_k(beta, 2, 0, x);
 		printf("%d	%g f20=%g ef20=%g\n", i, x, f20, ef20);
-#endif
 
 		double eg21 = nu((x+1.0)/beta)/beta + f_n_k(beta, 1, 0, (x+1.0)/beta)/beta;
 		double g21 = g_n_k(beta, 2, 1, x);
 		printf("%d	%g g21=%g eg21=%g\n", i, x, g21, eg21);
-	}
 
-#if PRINT_DEN
+		double arg = (x+b_k(beta, 1)) / beta;
+		double eg22 = g_n_k(beta, 1, 1, arg) /beta;
+		double g22 = g_n_k(beta, 2, 2, x);
+		printf("%d	%g g22=%g eg22=%g\n", i, x, g22, eg22);
+	}
+#endif
+
+#define PRINT_DEN
+#ifdef PRINT_DEN
 #define NIT 4
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
+	int imax = 101;
 	double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		printf("%d	%g", i, x);
+		double y = gp_invar(beta, x);
+		printf("%d	%g	%g", i, x, y);
 		for (int j=0; j<NIT; j++)
 		{
 			double y = nu_n(beta, n+j, x);
