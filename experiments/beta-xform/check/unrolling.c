@@ -181,18 +181,17 @@ double gsum_n_k(double beta, int n, int k, double x);
 // section of paper. This is computed with the series sum.
 double gsum_n_1(double beta, int n, double x)
 {
-	double sum = 0.0;
 	double bej = 1.0 / beta;
+	double arg = (x + 1.0) / beta;
+
+	double sum = bej * nu(arg);
 	for (int j=0; j<n-1; j++)
 	{
-		double arg = bej * (x + 1.0);
-		sum += bej * nu(arg);
-
 		bej /= beta;
 		arg /= beta;
 
 		double bitso = 0.0;
-		for (int k=1; k< n-j-1; k++)
+		for (int k=0; k< n-j-1; k++)
 		{
 			if (0 == b_k(beta, k)) continue;
 			bitso += gsum_n_k(beta, n-j-2, k, arg);
@@ -200,8 +199,6 @@ double gsum_n_1(double beta, int n, double x)
 		sum += bej * bitso;
 	}
 
-	double arg = bej * (x + 1.0);
-	sum += bej * nu(arg);
 	return sum;
 }
 
@@ -331,16 +328,6 @@ int main(int argc, char* argv[])
 		double g22 = g_n_k(beta, 2, 2, x);
 		printf("%d	%g g22=%g eg22=%g\n", i, x, g22, eg22);
 
-		for (int n=0; n<10; n++)
-		{
-			double egn1 = g_n_1(beta, n, x);
-			double gn1 = gsum_n_1(beta, n, x);
-			printf("%d	%g   %d  gn1=%g egn1=%g  diff=%g\n",
-				i, x, n, gn1, egn1, gn1-egn1);
-		}
-		printf("---------\n");
-#endif
-
 		for (int k=0; k < 6; k++)
 		{
 			for (int n=k+1; n<10; n++)
@@ -352,6 +339,16 @@ int main(int argc, char* argv[])
 			}
 			printf("---------\n");
 		}
+#endif
+
+		for (int n=0; n<10; n++)
+		{
+			double egn1 = g_n_1(beta, n, x);
+			double gn1 = gsum_n_1(beta, n, x);
+			printf("%d	%g   %d  gn1=%g egn1=%g  diff=%g\n",
+				i, x, n, gn1, egn1, gn1-egn1);
+		}
+		printf("---------\n");
 	}
 #endif
 
