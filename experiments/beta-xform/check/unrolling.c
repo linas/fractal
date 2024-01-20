@@ -88,8 +88,8 @@ double gp_n3(double beta, double x)
 // Arbitrary function
 double nu(double x)
 {
-	// return 1.0;
-	return x-0.5;
+	return 1.0;
+	// return x-0.5;
 
 	// Bernoulli poly B_2
 	// return x*x - x  + 1.0 / 6.0;
@@ -249,7 +249,7 @@ double rho_n(double beta, int n, double x)
 	{
 		double tk = t_k(beta, k);
 		if (tk > x)
-			sum += g_n_k(beta, n, k, x);
+			sum += gsum_n_k(beta, n, k, x);
 	}
 	return sum;
 }
@@ -265,7 +265,7 @@ double dee_n(double beta, int n, double x)
 	{
 		sum += nu_n(beta, k, x);
 		if (b_k(beta, k))
-			sum -= f_n_k(beta, n, k, x);
+			sum -= fsum_n_k(beta, n, k, x);
 	}
 	return sum;
 }
@@ -290,7 +290,7 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-#define UNIT_TEST
+// #define UNIT_TEST
 #ifdef UNIT_TEST
 	printf("#\n# beta=%g\n#\n", beta);
 
@@ -352,13 +352,14 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define PRINT_DEN
+#define PRINT_DEN
 #ifdef PRINT_DEN
 #define NIT 3
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
-	double lambda = 1.0 / beta;
+	double lambda = 1.0;
+	// double lambda = 1.0 / beta;
 	// double lambda = 1.0 / (beta*beta);
 	// double lambda = 1.0 / (beta*beta*beta);
 	double lamn = pow(lambda, n);
@@ -368,10 +369,10 @@ int main(int argc, char* argv[])
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		// double y = gp_invar(beta, x);
+		double y = gp_invar(beta, x);
 		// double y = gp_n2(beta, x);
 		// double y = gp_n3(beta, x);
-		double y = gp_quad_n1(beta, x);
+		// double y = gp_quad_n1(beta, x);
 		printf("%d	%g	%g", i, x, y);
 
 		double lscale = lamn;

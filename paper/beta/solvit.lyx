@@ -10255,38 +10255,85 @@ The
 , and so
 \begin_inset Formula 
 \begin{align*}
+g_{n0} & =1\\
 g_{n1} & =\sum_{j=0}^{n-1}\frac{1}{\beta^{j+1}}+\sum_{j=0}^{n-2}\frac{1}{\beta^{j+2}}\sum_{k=1}^{n-j-2}b_{k}\frac{1}{\beta^{k-1}}g_{n-k-j-1,1}\\
 g_{nk} & =\frac{1}{\beta^{k-1}}g_{n-k+1,1}\\
+ & =\frac{1}{\beta^{k}}\left[\sum_{j=0}^{n-k}\frac{1}{\beta^{j}}+\sum_{j=0}^{n-k-1}\frac{1}{\beta^{j+1}}\sum_{k=1}^{n-k-j-1}b_{k}\frac{1}{\beta^{k-1}}g_{n-2k-j,1}\right]\\
 f_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}g_{n-j,k}
 \end{align*}
 
 \end_inset
 
-These are to be inserted into 
+Returning to the form 
+\begin_inset Formula $\nu_{n}=\rho_{n}-d_{n}$
+\end_inset
+
+, the above are to be inserted into 
 \begin_inset Formula 
-\[
-\rho_{n}\left(y\right)=\sum_{k=0}^{n}g_{nk}\Theta\left(t_{k}-y\right)
-\]
+\begin{align*}
+\rho_{n}\left(y\right) & =\sum_{k=0}^{n}g_{nk}\Theta\left(t_{k}-y\right)\\
+ & =1+\sum_{k=1}^{n}\frac{1}{\beta^{k-1}}g_{n-k+1,1}\Theta\left(t_{k}-y\right)
+\end{align*}
 
 \end_inset
 
 and
 \begin_inset Formula 
-\[
-d_{n}\left(y\right)=\sum_{k=0}^{n-1}\nu_{k}-\sum_{k=0}^{n-1}b_{k}f_{nk}
-\]
+\begin{align*}
+d_{n}\left(y\right) & =\sum_{k=0}^{n-1}\nu_{k}-\sum_{k=0}^{n-1}b_{k}f_{nk}\\
+ & =\sum_{k=0}^{n-1}\nu_{k}-\sum_{k=0}^{n-1}b_{k}\sum_{j=1}^{n-k}\beta^{-j}g_{n-j,k}
+\end{align*}
 
 \end_inset
 
-Butand 
+This is opaque, and does not have the structure of earlier results.
+ Lets write out the first few.
 \begin_inset Formula 
-\[
-\nu_{n}=\rho_{n}-d_{n}\quad\mbox{ and }\quad\nu_{n+1}=\mathcal{M}\nu_{n}=\mathcal{M}\rho_{n}-\mathcal{M}d_{n}
-\]
+\begin{align*}
+\rho_{1} & =1+\frac{1}{\beta}\Theta\left(t_{1}-y\right)\\
+\rho_{2} & =1+\frac{\beta+1}{\beta^{2}}\Theta\left(t_{1}-y\right)+\frac{1}{\beta^{2}}\Theta\left(t_{2}-y\right)
+\end{align*}
 
 \end_inset
 
+while
+\begin_inset Formula 
+\begin{align*}
+d_{1} & =1-\frac{1}{\beta}\\
+d_{2} & =1+\nu_{1}-\frac{1}{\beta}-\frac{1}{\beta^{2}}-b_{1}\frac{1}{\beta^{2}}
+\end{align*}
 
+\end_inset
+
+So
+\begin_inset Formula 
+\begin{align*}
+\nu_{1}=\rho_{1}-d_{1} & =\frac{1}{\beta}\left[1+\Theta\left(t_{1}-y\right)\right]\\
+\nu_{2}=\rho_{2}-d_{2} & =\frac{1}{\beta^{2}}\left[1+b_{1}+\Theta\left(t_{1}-y\right)+\Theta\left(t_{2}-y\right)\right]
+\end{align*}
+
+\end_inset
+
+Bleh.
+ The most obvious mistake that we made was a failure to group the 
+\begin_inset Formula $\sum_{k=0}^{n-1}\nu_{k}$
+\end_inset
+
+ with the 
+\begin_inset Formula $g_{nk}$
+\end_inset
+
+ where they should have gone.
+ Lets try to amend that mistake now.
+\end_layout
+
+\begin_layout Paragraph
+Restructure
+\end_layout
+
+\begin_layout Standard
+Lets undo the above mistake.
+ Write
 \end_layout
 
 \begin_layout Subsection
