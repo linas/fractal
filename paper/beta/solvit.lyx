@@ -9414,7 +9414,21 @@ The above proof can be extended to other shapes.
 \end_inset
 
  promises generalized results.
- 
+\end_layout
+
+\begin_layout Standard
+The rest of this section is filled with false starts, motivating arguments,
+ repeated calculations, double and triple checks.
+ To get the final result, whil skipping the detailed proof/derivation, hop
+ to the next subsection, title 
+\begin_inset Quotes eld
+\end_inset
+
+Stacking generic functions – conclusion
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -10481,12 +10495,23 @@ The sum
 \begin_inset Formula $h_{n,1}$
 \end_inset
 
- can be left as-is, or expanded:
+ can be left as-is, or expanded; there does not seem to be any benefit to
+ doing the below, but it can be contemplated:
 \begin_inset Formula 
 \begin{align*}
 h_{n,1} & =\frac{1}{\beta}\sum_{k=0}^{n-2}b_{k}\sum_{j=1}^{n-k-1}\beta^{-j}h_{n-j-1,k}\left(\frac{y+1}{\beta^{j+1}}\right)\\
  & =\sum_{k=0}^{n-2}b_{k}\sum_{j=2}^{n-k}\frac{1}{\beta^{j}}h_{n-j,k}\left(\frac{y+1}{\beta^{j}}\right)
 \end{align*}
+
+\end_inset
+
+The above pass numerical checks.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Again, see check/unwrap.c
+\end_layout
 
 \end_inset
 
@@ -10523,7 +10548,200 @@ so
 
 \end_inset
 
-which is correct.
+which is correct & verified.
+\end_layout
+
+\begin_layout Paragraph
+Recheck Gelfond–Parry
+\end_layout
+
+\begin_layout Standard
+Subsistuting 
+\begin_inset Formula $v_{0}=1$
+\end_inset
+
+ should allow Gelfond–Pary to be recovered.
+ Can it be done? So we've got
+\begin_inset Formula 
+\begin{align*}
+h_{n,k} & =\frac{1}{\beta^{k-1}}h_{n-k+1,1}\\
+ & =\frac{1}{\beta^{k}}\sum_{j=0}^{n-k-1}b_{j}e_{n-k,j}\quad\mbox{ for }n>1\\
+ & =\frac{1}{\beta^{k}}c_{n-k}
+\end{align*}
+
+\end_inset
+
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+h_{n,1} & =\frac{1}{\beta}\sum_{k=0}^{n-2}b_{k}e_{n-1,k}\quad\mbox{ for }n>1\\
+ & =\frac{1}{\beta}c_{n-1}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+h_{1,1} & =\frac{1}{\beta}\\
+h_{n+1,0} & =0\\
+e_{n,k} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\quad\mbox{ for }k<n\\
+ & =\sum_{j=1}^{n-k}\frac{1}{\beta^{j+k}}c_{n-k-j}\\
+e_{n,n} & =0
+\end{align*}
+
+\end_inset
+
+So lets see:
+\begin_inset Formula 
+\begin{align*}
+\nu_{n} & =\sigma_{n}+c_{n}\\
+ & =\sum_{k=0}^{n}h_{nk}\Theta\left(t_{k}-y\right)+c_{n}\\
+ & =c_{n}+\sum_{k=0}^{n}\frac{1}{\beta^{k}}c_{n-k}\Theta\left(t_{k}-y\right)
+\end{align*}
+
+\end_inset
+
+But
+\begin_inset Formula 
+\begin{align*}
+c_{n} & =\sum_{k=0}^{n-1}b_{k}e_{nk}\\
+ & =\sum_{k=0}^{n-1}b_{k}\sum_{j=1}^{n-k}\frac{1}{\beta^{j+k}}c_{n-k-j}\\
+ & =\sum_{k=0}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\frac{1}{\beta^{n-m}}c_{m}\\
+ & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Stacking Generic Functions – Conclusion
+\end_layout
+
+\begin_layout Standard
+Given any arbitrary function 
+\begin_inset Formula $\nu_{0}\left(y\right)$
+\end_inset
+
+, define
+\begin_inset Formula 
+\[
+\nu_{n+1}=\mathcal{M}\nu_{n}
+\]
+
+\end_inset
+
+The proof provided in the stretch–cut–stack subsection goes through with
+ only minor modifications needed, to obtain this general form.
+ It is convenient to track two distinct parts:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nu_{n}=\sigma_{n}+c_{n}
+\]
+
+\end_inset
+
+and make the Ansatz that the general solution will have the form
+\begin_inset Formula 
+\begin{align*}
+\sigma_{n}\left(y\right) & =\sum_{k=0}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
+c_{n}\left(y\right) & =\sum_{k=0}^{n-1}e_{nk}\left(y\right)\Theta\left(\beta t_{k}-1\right)
+\end{align*}
+
+\end_inset
+
+The functions 
+\begin_inset Formula $h_{nk}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{nk}$
+\end_inset
+
+ can be solved for recursively; the recursive relations are simple enough
+ that they can be rollwed up as series summations.
+ Write 
+\begin_inset Formula $b_{k}=\Theta\left(\beta t_{k}-1\right)$
+\end_inset
+
+ as short-hand for the orbit bitsequence.
+ The result is
+\begin_inset Formula 
+\begin{align*}
+h_{n,k} & =\frac{1}{\beta^{k-1}}h_{n-k+1,1}\left(\frac{y}{\beta^{k-1}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }k>1\\
+h_{n,1} & =\frac{1}{\beta}\sum_{k=0}^{n-2}b_{k}e_{n-1,k}\left(\frac{y+1}{\beta}\right)\quad\mbox{ for }n>1\\
+ & =\frac{1}{\beta}c_{n-1}\left(\frac{y+1}{\beta}\right)\\
+h_{1,1} & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\\
+h_{n+1,0} & =0\\
+h_{00} & =\nu_{0}\\
+e_{n,k} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }k<n\\
+e_{n,n} & =0
+\end{align*}
+
+\end_inset
+
+Gahh.
+ The ball keeps rollng downhill.
+ So
+\begin_inset Formula 
+\begin{align*}
+h_{n,k} & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>1
+\end{align*}
+
+\end_inset
+
+Next, use 
+\begin_inset Formula $m=n-k-j$
+\end_inset
+
+ or 
+\begin_inset Formula $j=n-k-m$
+\end_inset
+
+ to write
+\begin_inset Formula 
+\begin{align*}
+e_{n,k} & =\sum_{j=1}^{n-k}\beta^{-j}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\quad\mbox{ for }k<n\\
+ & =\beta^{k-n}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+c_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)\\
+ & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\beta^{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+\end{align*}
+
+\end_inset
+
+and so this employs fewer functions, although it is more tangled.
+ To summarize, again,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\nu_{n}\left(y\right) & =c_{n}\left(y\right)+\sum_{k=0}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
+h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>1\\
+h_{1,1} & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\\
+h_{n+1,0} & =0\quad\mbox{ for }n\ge0\\
+h_{00} & =\nu_{0}\\
+c_{n}\left(y\right) & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\beta^{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
