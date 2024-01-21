@@ -10196,7 +10196,7 @@ Recursing on
 \end_inset
 
  behind.
- Thus gives 
+ This gives 
 \begin_inset Formula 
 \[
 f_{n,k}\left(y\right)=\sum_{j=1}^{n-k}\beta^{-j}g_{n-j,k}\left(\frac{y}{\beta^{j}}\right)
@@ -10413,6 +10413,88 @@ Implemented in check/unwrap.c
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Unroll
+\end_layout
+
+\begin_layout Standard
+Lets unroll the recursion.
+ Easier to rewrite above to eliminate off-by-one:
+\begin_inset Formula 
+\begin{align*}
+h_{n,k} & =\frac{1}{\beta}h_{n-1,k-1}\left(\frac{y+b_{k-1}}{\beta}\right)\quad\mbox{ for }k>1\\
+h_{n,1} & =\frac{1}{\beta}\sum_{k=0}^{n-2}b_{k}e_{n-1,k}\left(\frac{y+1}{\beta}\right)\quad\mbox{ for }n>1\\
+h_{1,1} & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\\
+h_{n+1,0} & =0\\
+h_{00} & =\nu_{0}\\
+e_{n,k} & =\frac{1}{\beta}\left[e_{n-1,k}\left(\frac{y}{\beta}\right)+h_{n-1,k}\left(\frac{y}{\beta}\right)\right]\\
+e_{n,n} & =0
+\end{align*}
+
+\end_inset
+
+Recursing on 
+\begin_inset Formula $h_{nk}$
+\end_inset
+
+ for 
+\begin_inset Formula $k>1$
+\end_inset
+
+ is straight-forward, as only the arguement is iterated.
+ This gives
+\begin_inset Formula 
+\[
+h_{nk}\left(y\right)=\frac{1}{\beta^{k-1}}h_{n-k+1,1}\left(\frac{y}{\beta^{k-1}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)
+\]
+
+\end_inset
+
+Recursing on 
+\begin_inset Formula $e_{nk}$
+\end_inset
+
+ terminates because 
+\begin_inset Formula $e_{nk}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\ge n$
+\end_inset
+
+, leaving only 
+\begin_inset Formula $h_{nk}$
+\end_inset
+
+ behind.
+ This gives 
+\begin_inset Formula 
+\[
+e_{n,k}\left(y\right)=\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)
+\]
+
+\end_inset
+
+The sum 
+\begin_inset Formula $h_{n,1}$
+\end_inset
+
+ can be left as-is, or expanded:
+\begin_inset Formula 
+\begin{align*}
+h_{n,1} & =\frac{1}{\beta}\sum_{k=0}^{n-2}b_{k}\sum_{j=1}^{n-k-1}\beta^{-j}h_{n-j-1,k}\left(\frac{y+1}{\beta^{j+1}}\right)\\
+ & =\sum_{k=0}^{n-2}b_{k}\sum_{j=2}^{n-k}\frac{1}{\beta^{j}}h_{n-j,k}\left(\frac{y+1}{\beta^{j}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Basic checks
 \end_layout
 
 \begin_layout Standard
