@@ -10698,33 +10698,26 @@ h_{n,k} & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1
 
 \end_inset
 
-The 
-\begin_inset Formula $k=0$
-\end_inset
-
- case of 
-\begin_inset Formula $e_{nk}$
-\end_inset
-
- needs special handling.
- It is
+while
 \begin_inset Formula 
 \begin{align*}
-e_{n,0} & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y}{\beta^{n}}\right)\quad\mbox{ for }k=0
+h_{k,k} & =\frac{1}{\beta^{k-1}}h_{1,1}\left(\frac{y}{\beta^{k-1}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\\
+ & =\frac{1}{\beta^{k}}\nu_{0}\left(\frac{y}{\beta^{k}}+\frac{1}{\beta}+\frac{1}{\beta}\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\\
+ & =\frac{1}{\beta^{k}}\nu_{0}\left(\frac{y}{\beta^{k}}+\sum_{j=0}^{k-1}b_{j}\beta^{-j-1}\right)
 \end{align*}
 
 \end_inset
 
-The general case for 
+This allows the 
 \begin_inset Formula $e_{nk}$
 \end_inset
 
- is
+ to be written as
 \begin_inset Formula 
 \begin{align*}
-e_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }k>0,n>k\\
- & =\frac{\beta^{k}}{\beta^{n}}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }k>0,n>k\\
- & =\frac{\beta^{k}}{\beta^{n}}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j-k}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\quad\mbox{ for }k>0,n>k
+e_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }n>k\\
+ & =\frac{\beta^{k}}{\beta^{n}}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }n>k\\
+ & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y}{\beta^{n}}+\sum_{i=0}^{k-1}b_{i}\beta^{-i-1}\right)+\sum_{j=1}^{n-k-1}\beta^{-j-k}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
 \end{align*}
 
 \end_inset
@@ -10737,21 +10730,44 @@ Use
 \begin_inset Formula $j=n-k-m$
 \end_inset
 
- to write
+ to write, for 
+\begin_inset Formula $n>k$
+\end_inset
+
+,
 \begin_inset Formula 
 \begin{align*}
-e_{nk} & =\frac{1}{\beta^{n}}\left[\beta^{k}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\right]\quad\mbox{ for }k>0,n>k
+e_{nk} & =\frac{1}{\beta^{n}}\left[\nu_{0}\left(\frac{y}{\beta^{n}}+\sum_{i=0}^{k-1}b_{i}\beta^{-i-1}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\right]
 \end{align*}
 
 \end_inset
 
-This allows
+This allows for the relacement of 
+\begin_inset Formula $e_{nk}$
+\end_inset
+
+ in the expression for 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ to provide a recursiion relation for 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ only, and no other 
+\begin_inset Quotes eld
+\end_inset
+
+external
+\begin_inset Quotes erd
+\end_inset
+
+ factors.
+ Recall
 \begin_inset Formula 
-\begin{align*}
-c_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)\\
- & =e_{n0}\left(y\right)+b_{1}e_{n1}\left(y\right)+\sum_{k=2}^{n-1}b_{k}e_{nk}\left(y\right)\quad\mbox{ for }n>2\\
- & =\frac{1}{\beta^{n}}\left[\nu_{0}\left(\frac{y}{\beta^{n}}\right)++\sum_{k=2}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\right]
-\end{align*}
+\[
+c_{n}\left(y\right)=\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)
+\]
 
 \end_inset
 
@@ -10763,11 +10779,12 @@ and so this employs fewer functions, although it is more tangled.
 \begin_inset Formula 
 \begin{align*}
 \nu_{n}\left(y\right) & =c_{n}\left(y\right)+\sum_{k=0}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
-h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>1,k>0\\
-h_{1,1} & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\\
-h_{n+1,0} & =0\quad\mbox{ for }n\ge0\\
-h_{00} & =\nu_{0}\\
-c_{n}\left(y\right) & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0\\
+h_{k,k}\left(y\right) & =\frac{1}{\beta^{k}}\nu_{0}\left(\frac{y}{\beta^{k}}+\sum_{j=0}^{k-1}b_{j}\beta^{-j-1}\right)\\
+h_{n,0} & =0\quad\mbox{ for }n>0\\
+c_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)\\
+e_{nk}\left(y\right) & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y}{\beta^{n}}+\sum_{i=0}^{k-1}b_{i}\beta^{-i-1}\right)\\
+ & \qquad+\frac{1}{\beta^{n}}\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
 \end{align*}
 
 \end_inset
