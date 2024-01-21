@@ -10693,7 +10693,7 @@ Gahh.
  So
 \begin_inset Formula 
 \begin{align*}
-h_{n,k} & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>1
+h_{n,k} & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>1,k>0
 \end{align*}
 
 \end_inset
@@ -10706,11 +10706,12 @@ Next, use
 \begin_inset Formula $j=n-k-m$
 \end_inset
 
- to write
+ to write XXX must handle n=1 case distinctly.XXX so this is incomplete/misleadin
+g
 \begin_inset Formula 
 \begin{align*}
-e_{n,k} & =\sum_{j=1}^{n-k}\beta^{-j}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\quad\mbox{ for }k<n\\
- & =\beta^{k-n}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+e_{n,k} & =\sum_{j=1}^{n-k}\beta^{-j-k}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\quad\mbox{ for }n>1,k>0,k<n\\
+ & =\frac{1}{\beta^{n}}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
 \end{align*}
 
 \end_inset
@@ -10719,7 +10720,7 @@ and
 \begin_inset Formula 
 \begin{align*}
 c_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)\\
- & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\beta^{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+ & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
 \end{align*}
 
 \end_inset
@@ -10732,16 +10733,17 @@ and so this employs fewer functions, although it is more tangled.
 \begin_inset Formula 
 \begin{align*}
 \nu_{n}\left(y\right) & =c_{n}\left(y\right)+\sum_{k=0}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
-h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>1\\
+h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>1,k>0\\
 h_{1,1} & =\frac{1}{\beta}\nu_{0}\left(\frac{y+1}{\beta}\right)\\
 h_{n+1,0} & =0\quad\mbox{ for }n\ge0\\
 h_{00} & =\nu_{0}\\
-c_{n}\left(y\right) & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\beta^{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+c_{n}\left(y\right) & =\frac{1}{\beta^{n}}\sum_{k=0}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
 \end{align*}
 
 \end_inset
 
-
+This needs numeric verification.
+ TBD.
 \end_layout
 
 \begin_layout Subsection
