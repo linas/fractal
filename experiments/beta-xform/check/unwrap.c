@@ -204,10 +204,14 @@ double hsum_n_k(double beta, int n, int k, double x);
 
 // Return the h_n_1 constant from the "generalized stretch-cut-stack"
 // section of paper. This is computed with the series sum.
-double hsum_n_1(double beta, int n, double x)
+// Does pointless inline; which does nothing but increase complexity.
+double hsumin_n_1(double beta, int n, double x)
 {
+	double arg = (x + 1.0) / beta;
+	if (1 == n) return nu(arg) / beta;
+
 	double sum = 0.0;
-	for (int k=0; k< n-2; k++)
+	for (int k=0; k<= n-2; k++)
 	{
 		if (0 == b_k(beta, k)) continue;
 
@@ -224,6 +228,9 @@ double hsum_n_1(double beta, int n, double x)
 
 	return sum;
 }
+
+// Foward decl
+double hsum_n_1(double beta, int n, double x);
 
 // Return the h_n_k constant from the "generalized stretch-cut-stack"
 // section of paper. This is computed using the summation formula.
@@ -263,6 +270,24 @@ double esum_n_k(double beta, int n, int k, double x)
 		sum += bej * hsum_n_k(beta, n-j, k, x*bej);
 	}
 	return sum;
+}
+
+// Return the h_n_1 constant from the "generalized stretch-cut-stack"
+// section of paper. This is computed with the recursive formula.
+double hsum_n_1(double beta, int n, double x)
+{
+	if (n < 1) { fprintf(stderr, "Error: badness\n"); return 0.0; }
+
+	double arg = (x + 1.0) / beta;
+	if (1 == n) return nu(arg) / beta;
+
+	double sum = 0.0;
+	for (int k=0; k<n-1; k++)
+	{
+		if (b_k(beta, k))
+			sum += esum_n_k(beta, n-1, k, arg);
+	}
+	return sum / beta;
 }
 
 // ==============================================================
