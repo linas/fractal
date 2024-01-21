@@ -10702,34 +10702,19 @@ The
 \begin_inset Formula $k=0$
 \end_inset
 
- and 
-\begin_inset Formula $k=1$
-\end_inset
-
- special cases of 
+ case of 
 \begin_inset Formula $e_{nk}$
 \end_inset
 
- need special handling.
+ needs special handling.
+ It is
 \begin_inset Formula 
 \begin{align*}
-e_{n,0} & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y}{\beta^{n}}\right)\quad\mbox{ for }k=0\\
-e_{n,1} & =\frac{1}{\beta^{n-1}}h_{1,1}\left(\frac{y}{\beta^{n-1}}\right)+\sum_{j=1}^{n-2}\beta^{-j}h_{n-j,1}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }k=1\\
- & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y+1}{\beta^{n}}\right)+\sum_{j=1}^{n-2}\beta^{-j-1}c_{n-j-1}\left(\frac{y+1}{\beta^{j+1}}\right)\\
- & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y+1}{\beta^{n}}\right)+\sum_{j=2}^{n-1}\beta^{-j}c_{n-j}\left(\frac{y+1}{\beta^{j}}\right)\\
- & \frac{1}{\beta^{n}}\left[\nu_{0}\left(\frac{y+1}{\beta^{n}}\right)+\sum_{m=1}^{n-2}\beta^{m}c_{m}\left(\frac{\beta^{m}\left(y+1\right)}{\beta^{n}}\right)\right]
+e_{n,0} & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y}{\beta^{n}}\right)\quad\mbox{ for }k=0
 \end{align*}
 
 \end_inset
 
-where the last step above uses 
-\begin_inset Formula $m=n-j$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 The general case for 
 \begin_inset Formula $e_{nk}$
 \end_inset
@@ -10737,8 +10722,9 @@ The general case for
  is
 \begin_inset Formula 
 \begin{align*}
-e_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }k>1,n>k\\
- & =\sum_{j=1}^{n-k}\beta^{-j-k}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\quad\mbox{ for }k>1,n>k
+e_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }k>0,n>k\\
+ & =\frac{\beta^{k}}{\beta^{n}}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }k>0,n>k\\
+ & =\frac{\beta^{k}}{\beta^{n}}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j-k}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\quad\mbox{ for }k>0,n>k
 \end{align*}
 
 \end_inset
@@ -10754,7 +10740,7 @@ Use
  to write
 \begin_inset Formula 
 \begin{align*}
-e_{nk} & =\frac{1}{\beta^{n}}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\quad\mbox{ for }k>1,n>k
+e_{nk} & =\frac{1}{\beta^{n}}\left[\beta^{k}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\right]\quad\mbox{ for }k>0,n>k
 \end{align*}
 
 \end_inset
@@ -10763,7 +10749,7 @@ This allows
 \begin_inset Formula 
 \begin{align*}
 c_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)\\
- & =e_{n0}\left(y\right)+b_{1}e_{n1}\left(y\right)+\sum_{k=2}^{n-1}b_{k}e_{nk}\left(y\right)\\
+ & =e_{n0}\left(y\right)+b_{1}e_{n1}\left(y\right)+\sum_{k=2}^{n-1}b_{k}e_{nk}\left(y\right)\quad\mbox{ for }n>2\\
  & =\frac{1}{\beta^{n}}\left[\nu_{0}\left(\frac{y}{\beta^{n}}\right)++\sum_{k=2}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\right]
 \end{align*}
 
