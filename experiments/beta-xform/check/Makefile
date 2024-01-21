@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/fileio.o $(GENDIR)/util.o
 PERIODIC = ../periodic
 
 all: recheck force orbit visitation borel reforce tsum unrolling \
-	unwrap
+	unwrap unstack
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR)
@@ -29,3 +29,4 @@ reforce: reforce.o
 tsum: tsum.o
 unrolling: unrolling.o
 unwrap: unwrap.o
+unstack: unstack.o
