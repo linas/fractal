@@ -37,16 +37,83 @@ double gp_invar(double beta, double x)
 	return 0.5*beta*invar(beta, 0.5*beta*x);
 }
 
+// Eigenfunction for n=1 polynomial
+// Use with beta= 1.618034
+double n1(double beta, double x)
+{
+	double whack = 1.105;  // some magic normalization!?
+	double m0 = 0.5*beta;
+	if (x < 0.5) return whack*(beta*x-0.5);
+	if (x < m0) return whack* (x-0.5);
+	return 0.0;
+}
+
+double gp_n1(double beta, double x)
+{
+	return 0.5*beta*n1(beta, 0.5*beta*x);
+}
+
+// Eigenfunction for n=1 polynomial w/ quadratic generator
+double quad_n1(double beta, double x)
+{
+	double whack = 1.0;  // some magic normalization!?
+	double m0 = 0.5*beta;
+	if (x < 0.5) return whack*(beta*x*x-x+0.125);
+	if (x < m0) return whack*(x*x-x+ beta*0.125);
+	return 0.0;
+}
+
+double gp_quad_n1(double beta, double x)
+{
+	return 0.5*beta*quad_n1(beta, 0.5*beta*x);
+}
+
+// Eigenfunction for n=2 polynomial
+// Use with beta= 1.4655712318
+double n2(double beta, double x)
+{
+	double whack = 1.13;  // some magic normalization!?
+	double m0 = 0.5*beta;
+	double m1 = 0.5*beta * (beta-1.0);
+	if (x < m1) return whack*(beta*beta*x - 0.5);
+	if (x < 0.5) return whack*(beta*x-0.5);
+	if (x < m0) return whack*(x-0.5);
+	return 0.0;
+}
+
+double gp_n2(double beta, double x)
+{
+	return 0.5*beta*n2(beta, 0.5*beta*x);
+}
+
+// Eigenfunction for n=3 polynomial
+// Use with beta= 1.839286755
+double n3(double beta, double x)
+{
+	double m0 = 0.5*beta;
+	double m1 = 0.5*beta * (beta-1.0);
+	double whack = 0.95;  // some magic normalization!?
+	if (x < 0.5) return whack*m1*(beta*x- m1 + 0.25/beta);
+	if (x < m1) return whack*m1*((beta+1.0)*x/beta - m1);
+	if (x < m0) return whack*m1*(x- m1 + 0.25/beta);
+	return 0.0;
+}
+
+double gp_n3(double beta, double x)
+{
+	return 0.5*beta*n3(beta, 0.5*beta*x);
+}
+
 // ==============================================================
 
 // Arbitrary function
 double nu(double x)
 {
-	return 1.0;
+	// return 1.0;
 	// return x-0.5;
 
 	// Bernoulli poly B_2
-	// return x*x - x  + 1.0 / 6.0;
+	return x*x - x  + 1.0 / 6.0;
 
 	// Bernoulli poly B_3
 	// return x*x*x - 1.5*x*x  + 0.5*x;
@@ -183,8 +250,10 @@ int main(int argc, char* argv[])
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
-	double lambda = 1.0;
+	// double lambda = 1.0;
 	// double lambda = 1.0 / beta;
+	double lambda = 1.0 / (beta*beta);
+	// double lambda = 1.0 / (beta*beta*beta);
 	double lamn = pow(lambda, n);
 
 	int imax = 314;
@@ -192,7 +261,12 @@ int main(int argc, char* argv[])
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		double y = gp_invar(beta, x);
+
+		// double y = gp_invar(beta, x);
+		// double y = gp_n1(beta, x);
+		// double y = gp_n2(beta, x);
+		// double y = gp_n3(beta, x);
+		double y = gp_quad_n1(beta, x);
 		printf("%d	%g	%g", i, x, y);
 
 		double lscale = lamn;
