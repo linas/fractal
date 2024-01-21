@@ -57,12 +57,12 @@ double q_k(double beta, int k)
 {
 	double sum = 0.0;
 	double bej = 1.0;
-	for (int j=0; j<k; j++)
+	for (int j=0; j<=k; j++)
 	{
 		sum += b_k(beta, j) / bej;
 		bej *= beta;
 	}
-	return sum * bej;
+	return sum * bej/beta;
 }
 
 // ==============================================================
@@ -77,11 +77,22 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-	for (int k=1; k<= n; k++)
+#ifdef QCHECK
+	for (int k=0; k<= n; k++)
 	{
+		int bek = b_k(beta, k);
 		double qk = q_k(beta, k);
 		double bkp1 = pow(beta, k+1);
 		double tk = t_k(beta, k+1);
-		printf("%d	%g	%g	%g\n", k, qk, bkp1-qk, tk);
+		double rek = bkp1-qk;
+		printf("%d	%d	%f	%f	%f	%g\n", k, bek, qk, rek, tk, rek-tk);
+	}
+#endif
+	for (int k=0; k<= n; k++)
+	{
+		int bek = b_k(beta, k);
+		double tk = t_k(beta, k);
+		double nk = beta*tk - bek;
+		printf("%d	%d	%f	%f\n", k, bek, tk, nk);
 	}
 }

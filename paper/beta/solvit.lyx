@@ -10588,9 +10588,9 @@ h_{n,1}\left(y\right)=\frac{1}{\beta}c_{n-1}\left(\frac{y+1}{\beta}\right)\quad\
 
 which enables
 \begin_inset Formula 
-\begin{align*}
-h_{n,k} & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0
-\end{align*}
+\[
+h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0
+\]
 
 \end_inset
 
@@ -10666,6 +10666,28 @@ external
  factors.
 \end_layout
 
+\begin_layout Standard
+Additional simplification follows from the identity 
+\begin_inset Formula 
+\begin{align*}
+t_{k} & =\beta^{k+1}-\sum_{j=0}^{k}b_{j}\beta^{k-j}\\
+\sum_{j=1}^{k-1}b_{j}\beta^{-j} & =t_{1}-\frac{b_{k}+t_{k}}{\beta^{k}}
+\end{align*}
+
+\end_inset
+
+thus
+\begin_inset Formula 
+\begin{align*}
+h_{n,k} & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0\\
+ & =\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y+1-b_{k}-t_{k}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Stacking Generic Functions – Conclusion
 \end_layout
@@ -10713,19 +10735,7 @@ where
 
  can be solved for recursively; the recursive relations are simple enough
  that they can be rolled up as series summations.
- It is convenient to define constants
-\begin_inset Formula 
-\[
-q_{k}=\sum_{j=0}^{k-1}b_{j}\beta^{k-j}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-These are given by
+ These are given by
 \end_layout
 
 \begin_layout Standard
