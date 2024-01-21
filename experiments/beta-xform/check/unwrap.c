@@ -105,7 +105,7 @@ double h_n_k(double beta, int n, int k, double x)
 double e_n_k(double beta, int n, int k, double x)
 {
 	if (n <= k) return 0.0;
-	if (k < 0) fprintf(stderr, "Error can't negative k\n");
+	if (k < 0) { fprintf(stderr, "Error: can't negative k\n"); return 0.0; }
 	double arg = x / beta;
 	double sum = h_n_k(beta, n-1, k, arg);
 	if (k < n) sum += e_n_k(beta, n-1, k, arg);
@@ -116,9 +116,11 @@ double e_n_k(double beta, int n, int k, double x)
 // section of paper. This is computed with the recursive formula.
 double h_n_1(double beta, int n, double x)
 {
-	if (0 == n) return nu(x);
+	if (n < 1) { fprintf(stderr, "Error: badness\n"); return 0.0; }
 
 	double arg = (x + 1.0) / beta;
+	if (1 == n) return nu(arg) / beta;
+
 	double sum = 0.0;
 	for (int k=0; k<n-1; k++)
 	{
@@ -151,7 +153,7 @@ double cee_n(double beta, int n, double x)
 	for (int k=0; k <n; k++)
 	{
 		if (b_k(beta, k))
-			sum -= e_n_k(beta, n, k, x);
+			sum += e_n_k(beta, n, k, x);
 	}
 	return sum;
 }
@@ -185,7 +187,7 @@ int main(int argc, char* argv[])
 	// double lambda = 1.0 / beta;
 	double lamn = pow(lambda, n);
 
-	int imax = 301;
+	int imax = 314;
 	double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
