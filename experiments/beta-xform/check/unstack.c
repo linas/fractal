@@ -67,19 +67,6 @@ double q_k(double beta, int k)
 	return sum * bej/beta;
 }
 
-// Return the flexible constant
-double s_k(double beta, int k)
-{
-	double sum = 0.0;
-	double bej = 1.0;
-	for (int j=1; j<k; j++)
-	{
-		bej *= beta;
-		sum += b_k(beta, j) / bej;
-	}
-	return sum;
-}
-
 // ==============================================================
 
 double e_nk(double beta, double x, int n, int k);
@@ -105,18 +92,17 @@ double e_nk(double beta, double x, int n, int k)
 	if (tk <= x) return 0.0;
 
 	double ben = pow(beta, n);
-	double sen = s_k(beta, k-1);
-	double arg = x/ben + sen/beta;
-	if (0 < k) arg += 1.0/beta;
+	double bek = pow(beta, k);
+	double arg = 1.0 + x/ben - tk/bek;
 	double sum = nu(arg);
 
-	// if (n-k<2) return sum/ben;
+	double cnst = beta -1.0 - (beta*tk -1.0)/bek;
+	double xen = x / ben;
 
-	double bek = pow(beta, k);
 	double bem = beta;
 	for (int m=1; m < n-k; m++)
 	{
-		double arg = bem * x /ben + 1.0/bek + sen;
+		double arg = cnst + bem * xen;
 		sum += bem * c_n(beta, arg, m);
 		bem *= beta;
 	}
