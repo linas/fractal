@@ -95,9 +95,6 @@ double q_k(double beta, int k)
 }
 
 // ==============================================================
-#include "un.c"
-
-// ==============================================================
 
 double e_nk(double beta, double x, int n, int k);
 
@@ -163,11 +160,16 @@ double nu_n(double beta, double x, int n)
 {
 	double sum = c_n(beta, x, n);
 	for (int k=0; k<= n; k++)
+	{
+		double tk = t_k(beta, k);
+		if (tk <= x) continue;
 		sum += h_nk(beta, x, n, k);
+	}
 	return sum;
 }
 
 // ==============================================================
+// #include "un.c"  // for unit testing only. Copy of unwrap.c w/o main()
 
 int main(int argc, char* argv[])
 {
@@ -179,7 +181,7 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-// #define PRINT_CEE
+#define PRINT_CEE
 #ifdef PRINT_CEE
 
 #define NIT 6
@@ -210,16 +212,16 @@ int main(int argc, char* argv[])
 	printf("\n#\n");
 #endif
 
-#define UNIT_TEST
+// #define UNIT_TEST
 #ifdef UNIT_TEST
 
+	// Compare new code to old code from unwrap.c. Everything passes.
 	int imax = 14;
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 		for (int n=0; n<6; n++)
 		{
-#if 0
 			// Test passes; although nu overflows.
 			// Overflow is normal cause this is artificial.
 			for (int k=1; k<n; k++)
@@ -245,14 +247,13 @@ int main(int argc, char* argv[])
 			double ny = c_n(beta, x, n);
 			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
 			if (1.0e-12 < fabs(oy-ny)) printf("------------FAIL\n");
-#endif
 
+			// Test passes, no overflows, everything is OK.
 			double oy = unu_n(beta, n, x);
 			double ny = nu_n(beta, x, n);
 			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
 			if (1.0e-12 < fabs(oy-ny)) printf("------------FAIL\n");
 
-#if 0
 			// Test basic h_n1 -- this passes; although nu overflows.
 			// Overflow is normal cause this is artificial.
 			if (n<2) continue;
@@ -262,7 +263,6 @@ int main(int argc, char* argv[])
 			double ny = h_nk(beta, x, n, 1);
 			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
 			if (1.0e-12 < fabs(oy-ny)) printf("------------FAIL\n");
-#endif
 		}
 		printf("\n");
 		fflush(stdout);
