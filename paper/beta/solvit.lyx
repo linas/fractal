@@ -10794,6 +10794,95 @@ But if we define
  always, and so the special casesing there goes away, too.
 \end_layout
 
+\begin_layout Paragraph
+Validation
+\end_layout
+
+\begin_layout Standard
+Lets see what happens if 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+e_{nk} & =\frac{1}{\beta^{n}}\left[1+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\right]\quad\mbox{ for }k>0\\
+e_{n0} & =\frac{1}{\beta^{n}}\\
+c_{n} & =\sum_{k=0}^{n-1}b_{k}e_{nk}\\
+h_{nk} & =\frac{c_{n-k}}{\beta^{k}}
+\end{align*}
+
+\end_inset
+
+Rearranging,
+\begin_inset Formula 
+\[
+c_{n}=\frac{1}{\beta^{n}}\left[1+\sum_{k=1}^{n-1}b_{k}\left[1+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\right]\right]
+\]
+
+\end_inset
+
+so that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nu_{n}\left(y\right)=c_{n}+\sum_{k=1}^{n}\frac{c_{n-k}}{\beta^{k}}\Theta\left(t_{k}-y\right)
+\]
+
+\end_inset
+
+Comparing to the Gelfond-Parry result, we conclude that 
+\begin_inset Formula $c_{n}\to1$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ Lets look at the first few terms.
+ First, rearrange
+\begin_inset Formula 
+\[
+c_{n}=\frac{1}{\beta^{n}}\left[1+\sum_{k=1}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\beta^{m}c_{m}\right]
+\]
+
+\end_inset
+
+Write 
+\begin_inset Formula $a_{n}=\beta^{n}c_{n}$
+\end_inset
+
+; this gives the beguiling form 
+\begin_inset Formula 
+\[
+a_{n}=1+\sum_{k=1}^{n-1}b_{k}\sum_{m=0}^{n-k-1}a_{m}
+\]
+
+\end_inset
+
+Lets look at the first few.
+\begin_inset Formula 
+\begin{align*}
+a_{0} & =1\\
+a_{1} & =1\\
+a_{2} & =1+b_{1}\\
+a_{3} & =1+2b_{1}+b_{2}\\
+a_{4} & =1+4b_{1}+2b_{2}+b_{3}\\
+a_{5} & =1+b_{1}\left[7+b_{2}\right]+b_{2}\left[3+b_{1}\right]+2b_{3}+b_{4}
+\end{align*}
+
+\end_inset
+
+The first few are beguiling; butthe last one shows that the bitsequence
+ starts to fold in against itself.
+ It clearly won't simplify in a simple manner.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 Stacking Generic Functions – Conclusion
 \end_layout
