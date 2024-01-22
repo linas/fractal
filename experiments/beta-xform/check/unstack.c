@@ -86,6 +86,7 @@ double e_nk(double beta, double x, int n, int k);
 
 double c_n(double beta, double x, int n)
 {
+	if (n < 1) fprintf(stderr, "Error fail index %d\n", n);
 	if (x < 0.0) fprintf(stderr, "Error fail neg %d %g\n", n, x);
 	if (1.0 < x) fprintf(stderr, "Error fail pos %d %g\n", n, x);
 	double sum = 0.0;
@@ -99,12 +100,17 @@ double c_n(double beta, double x, int n)
 
 double e_nk(double beta, double x, int n, int k)
 {
+	if (n <= k) fprintf(stderr, "Error enk fail index %d <= %d\n", n, k);
+
 	double ben = pow(beta, n);
-	double bek = pow(beta, k);
 	double sen = s_k(beta, k-1);
-	double arg = x/ben + 1.0/beta + sen/beta;
+	double arg = x/ben + sen/beta;
+	if (0 < k) arg += 1.0/beta;
 	double sum = nu(arg);
 
+	// if (n-k<2) return sum/ben;
+
+	double bek = pow(beta, k);
 	double bem = beta;
 	for (int m=1; m < n-k; m++)
 	{
