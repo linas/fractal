@@ -10657,7 +10657,7 @@ So, working backwards,
 Thus, it is approrpriate to write 
 \begin_inset Formula 
 \[
-h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t_{k}+1\right)\right)\Theta\left(t_{k}-y\right)\quad\mbox{ for }n>k,k>0
+h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t_{k}+1\right)\right)\quad\mbox{ for }n>k,k>0
 \]
 
 \end_inset
@@ -10772,6 +10772,38 @@ external
  factors.
 \end_layout
 
+\begin_layout Paragraph
+Renaming trick
+\end_layout
+
+\begin_layout Standard
+There's two more tricks we can play to simplify things.
+ So far, we've concluded that
+\begin_inset Formula 
+\begin{align*}
+h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t_{k}+1\right)\right)\quad\mbox{ for }n>k,k>0\\
+h_{k,k}\left(y\right) & =\frac{1}{\beta^{k}}\nu_{0}\left(1-\frac{t_{k}-y}{\beta^{k}}\right)\\
+h_{n,0} & =0\quad\mbox{ for }n>0
+\end{align*}
+
+\end_inset
+
+But if we define 
+\begin_inset Formula $c_{0}=\nu_{0}$
+\end_inset
+
+ then the special case for 
+\begin_inset Formula $h_{kk}$
+\end_inset
+
+ is not needed.
+ This also means that we can now use 
+\begin_inset Formula $h_{n0}=0$
+\end_inset
+
+ always, and so the special casesing there goes away, too.
+\end_layout
+
 \begin_layout Subsubsection
 Stacking Generic Functions – Conclusion
 \end_layout
@@ -10798,7 +10830,7 @@ The proof provided in the stretch–cut–stack subsection goes through with
  The general solution has the form
 \begin_inset Formula 
 \begin{align*}
-\nu_{n}\left(y\right) & =c_{n}\left(y\right)+\sum_{k=0}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
+\nu_{n}\left(y\right) & =c_{n}\left(y\right)+\sum_{k=1}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
 c_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)
 \end{align*}
 
@@ -10825,9 +10857,7 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t_{k}+1\right)\right)\quad\mbox{ for }n>k,k>0,y<t_{k}\\
-h_{k,k}\left(y\right) & =\frac{1}{\beta^{k}}\nu_{0}\left(1-\frac{t_{k}-y}{\beta^{k}}\right)\quad\mbox{ for }y<t_{k}\\
-h_{n,0} & =0\quad\mbox{ for }n>0
+h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{y}{\beta^{k}}\right)\quad\mbox{ for }n\ge k
 \end{align*}
 
 \end_inset
@@ -10857,7 +10887,7 @@ The starting point for iteration is
 \end_inset
 
  and 
-\begin_inset Formula $c_{0}=0$
+\begin_inset Formula $c_{0}=\nu_{0}$
 \end_inset
 
 .
