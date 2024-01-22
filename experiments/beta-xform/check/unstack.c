@@ -14,6 +14,33 @@
 
 // ==============================================================
 
+// Invariant measure for beta shift (not beta transform)
+double invar(double beta, double x)
+{
+	double midpnt = 0.5*beta;
+	double obn = 1.0;
+	double sum = 0.0;
+	double norm = 0.0;
+	for (int i=0; i<1000; i++)
+	{
+		if (x < midpnt) sum += obn;
+		norm += midpnt*obn;
+
+		if (0.5 < midpnt) midpnt -= 0.5;
+		midpnt *= beta;
+		obn /= beta;
+		if (obn < 1e-15) break;
+	}
+	return sum / norm;
+}
+
+double gp_invar(double beta, double x)
+{
+	return 0.5*beta*invar(beta, 0.5*beta*x);
+}
+
+// ==============================================================
+
 // Arbitrary function
 double nu(double x)
 {
@@ -113,6 +140,10 @@ double e_nk(double beta, double x, int n, int k)
 double h_nk(double beta, double x, int n, int k)
 {
 	if (n < k) fprintf(stderr, "Error hnk fail index %d <= %d\n", n, k);
+
+	if (n == 0 && k == 0) return nu(x);
+	if (k == 0) return 0.0;
+
 	double tk = t_k(beta, k);
 	if (tk < x) return 0.0;
 
@@ -149,22 +180,33 @@ int main(int argc, char* argv[])
 
 #define PRINT_CEE
 #ifdef PRINT_CEE
+
+#define NIT 6
+	double sum[NIT];
+	for (int j=0; j<NIT; j++) sum[j] = 0.0;
+
 	int imax = 814;
-	// double delta = 1.0 / ((double) imax);
+	double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		printf("%d	%f", i, x);
-		for (int j=0; j<6; j++)
+		double y = gp_invar(beta, x);
+		printf("%d	%f	%f", i, x, y);
+		for (int j=0; j<NIT; j++)
 		{
 			// double y = c_n(beta, x, n+j);
 			double y = nu_n(beta, x, n+j);
+			sum[j] += y * delta;
 			printf("	%f", y);
 		}
 		printf("\n");
-
 		fflush(stdout);
 	}
+
+	printf("#\n# ");
+	for (int j=0; j<NIT; j++)
+		printf(" %g", sum[j]);
+	printf("\n#\n");
 #endif
 
 // #define QCHECK
