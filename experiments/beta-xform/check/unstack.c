@@ -88,7 +88,7 @@ double c_n(double beta, double x, int n)
 {
 	if (n < 1) fprintf(stderr, "Error fail index %d\n", n);
 	if (x < 0.0) fprintf(stderr, "Error fail neg %d %g\n", n, x);
-	if (1.0 < x) fprintf(stderr, "Error fail pos %d %g\n", n, x);
+	if (1.0 < x) fprintf(stderr, "Error c_n fail pos n=%d x= %g\n", n, x);
 	double sum = 0.0;
 	for (int k=0; k<n; k++)
 	{
@@ -101,6 +101,8 @@ double c_n(double beta, double x, int n)
 double e_nk(double beta, double x, int n, int k)
 {
 	if (n <= k) fprintf(stderr, "Error enk fail index %d <= %d\n", n, k);
+	double tk = t_k(beta, k);
+	if (tk <= x) return 0.0;
 
 	double ben = pow(beta, n);
 	double sen = s_k(beta, k-1);
@@ -133,7 +135,7 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-#define PRINT_CEE
+// #define PRINT_CEE
 #ifdef PRINT_CEE
 
 	int imax = 14;
@@ -160,4 +162,22 @@ int main(int argc, char* argv[])
 		printf("%d	%d	%f	%f	%f	%g\n", k, bek, qk, rek, tk, rek-tk);
 	}
 #endif
+
+#if 0
+	for (int k=0; k<= n; k++)
+	{
+		int bek = b_k(beta, k);
+		double tk = t_k(beta, k);
+		double rek = beta - 1.0 + (1.0 -tk - bek) * pow(beta, -k);
+		printf("%d	%d	%f	%f\n", k, bek, tk, rek);
+	}
+#endif
+
+	for (int k=0; k<= n; k++)
+	{
+		int bek = b_k(beta, k);
+		double tk = t_k(beta, k);
+		double rek = (bek+tk)/beta;
+		printf("%d	%d	%f	%f\n", k, bek, tk, rek);
+	}
 }
