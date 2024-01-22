@@ -163,17 +163,33 @@ int main(int argc, char* argv[])
 	double sum[NIT];
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
+	// double lambda = 1.0;
+	double lambda = 1.0 / beta;
+	// double lambda = 1.0 / (beta*beta);
+	// double lambda = 1.0 / (beta*beta*beta);
+	double lamn = pow(lambda, n);
+
 	int imax = 814;
 	double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		double y = gp_invar(beta, x);
+
+		// double y = gp_invar(beta, x);
+		double y = gp_n1(beta, x);
+		// double y = gp_n2(beta, x);
+		// double y = gp_n3(beta, x);
+		// double y = gp_quad_n1(beta, x);
 		printf("%d	%f	%f", i, x, y);
+
+		double lscale = lamn;
 		for (int j=0; j<NIT; j++)
 		{
 			// double y = c_n(beta, x, n+j);
 			double y = nu_n(beta, x, n+j);
+			y /= lscale;
+			lscale *= lambda;
+
 			sum[j] += y * delta;
 			printf("	%f", y);
 		}
