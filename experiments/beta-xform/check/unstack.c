@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-// #define PRINT_CEE
+#define PRINT_CEE
 #ifdef PRINT_CEE
 
 	int imax = 14;
@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define QCHECK
+// #define QCHECK
 #ifdef QCHECK
 	for (int k=0; k<= n; k++)
 	{

@@ -10655,12 +10655,19 @@ The
 \begin{align*}
 h_{k,k} & =\frac{1}{\beta^{k-1}}h_{1,1}\left(\frac{y}{\beta^{k-1}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\\
  & =\frac{1}{\beta^{k}}\nu_{0}\left(\frac{y}{\beta^{k}}+\frac{1}{\beta}+\frac{1}{\beta}\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\\
- & =\frac{1}{\beta^{k}}\nu_{0}\left(\frac{y}{\beta^{k}}+\sum_{j=0}^{k-1}b_{j}\beta^{-j-1}\right)\\
- & =\frac{1}{\beta^{k}}\nu_{0}\left(\right)
+ & =\frac{1}{\beta^{k}}\nu_{0}\left(1-\frac{t_{k}-y}{\beta^{k}}\right)
 \end{align*}
 
 \end_inset
 
+As before, this is defined only for 
+\begin_inset Formula $y\le t_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 This can then be plugged into 
 \begin_inset Formula $e_{nk}$
 \end_inset
@@ -10670,7 +10677,7 @@ This can then be plugged into
 \begin{align*}
 e_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }n>k,y<t_{k}\\
  & =\frac{\beta^{k}}{\beta^{n}}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }n>k\\
- & =\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y}{\beta^{n}}+\sum_{i=0}^{k-1}b_{i}\beta^{-i-1}\right)+\sum_{j=1}^{n-k-1}\beta^{-j-k}c_{n-k-j}\left(\frac{y}{\beta^{k+j}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)
+ & =\frac{1}{\beta^{n}}\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j-k}c_{n-k-j}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{y}{\beta^{k+j}}\right)
 \end{align*}
 
 \end_inset
@@ -10694,7 +10701,7 @@ Use
 ,
 \begin_inset Formula 
 \[
-e_{nk}=\frac{1}{\beta^{n}}\left[\nu_{0}\left(\frac{y}{\beta^{n}}+\sum_{i=0}^{k-1}b_{i}\beta^{-i-1}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\right]
+e_{nk}=\frac{1}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
 \]
 
 \end_inset
@@ -10720,28 +10727,6 @@ external
 \end_inset
 
  factors.
-\end_layout
-
-\begin_layout Standard
-Additional simplification follows from the identity 
-\begin_inset Formula 
-\begin{align*}
-t_{k} & =\beta^{k+1}-\sum_{j=0}^{k}b_{j}\beta^{k-j}\\
-\sum_{j=1}^{k-1}b_{j}\beta^{-j} & =t_{1}-\frac{b_{k}+t_{k}}{\beta^{k}}
-\end{align*}
-
-\end_inset
-
-thus
-\begin_inset Formula 
-\begin{align*}
-h_{n,k} & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0,y<t_{k}\\
- & =\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y+1-b_{k}-t_{k}\right)\right)
-\end{align*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -10797,8 +10782,8 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0,y<t_{k}\\
-h_{k,k}\left(y\right) & =\frac{1}{\beta^{k}}\nu_{0}\left(\frac{y}{\beta^{k}}+\sum_{j=0}^{k-1}b_{j}\beta^{-j-1}\right)\quad\mbox{ for }y<t_{k}\\
+h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t_{k}+1\right)\right)\quad\mbox{ for }n>k,k>0,y<t_{k}\\
+h_{k,k}\left(y\right) & =\frac{1}{\beta^{k}}\nu_{0}\left(1-\frac{t_{k}-y}{\beta^{k}}\right)\quad\mbox{ for }y<t_{k}\\
 h_{n,0} & =0\quad\mbox{ for }n>0
 \end{align*}
 
@@ -10819,7 +10804,7 @@ which express
 \begin_layout Standard
 \begin_inset Formula 
 \[
-e_{nk}\left(y\right)=\frac{1}{\beta^{n}}\left[\nu_{0}\left(\frac{y}{\beta^{n}}+\sum_{i=0}^{k-1}b_{i}\beta^{-i-1}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(\frac{\beta^{m}y}{\beta^{n}}+\frac{1}{b^{k}}+\sum_{i=1}^{k-1}b_{i}\beta^{-i}\right)\right]
+e_{nk}\left(y\right)=\frac{1}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
 \]
 
 \end_inset
