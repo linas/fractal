@@ -17,6 +17,9 @@
 // Arbitrary function
 double nu(double x)
 {
+	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
+	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
+
 	return 1.0;
 	// return x-0.5;
 
@@ -31,7 +34,6 @@ double nu(double x)
 }
 
 // ==============================================================
-
 // Return endpoint iterate.
 double t_k(double beta, int k)
 {
@@ -65,6 +67,54 @@ double q_k(double beta, int k)
 	return sum * bej/beta;
 }
 
+// Return the flexible constant
+double s_k(double beta, int k)
+{
+	double sum = 0.0;
+	double bej = 1.0;
+	for (int j=1; j<k; j++)
+	{
+		bej *= beta;
+		sum += b_k(beta, j) / bej;
+	}
+	return sum;
+}
+
+// ==============================================================
+
+double e_nk(double beta, double x, int n, int k);
+
+double c_n(double beta, double x, int n)
+{
+	if (x < 0.0) fprintf(stderr, "Error fail neg %d %g\n", n, x);
+	if (1.0 < x) fprintf(stderr, "Error fail pos %d %g\n", n, x);
+	double sum = 0.0;
+	for (int k=0; k<n; k++)
+	{
+		if (0 == b_k(beta, k)) continue;
+		sum += e_nk(beta, x, n, k);
+	}
+	return sum;
+}
+
+double e_nk(double beta, double x, int n, int k)
+{
+	double ben = pow(beta, n);
+	double bek = pow(beta, k);
+	double sen = s_k(beta, k-1);
+	double arg = x/ben + 1.0/beta + sen/beta;
+	double sum = nu(arg);
+
+	double bem = beta;
+	for (int m=1; m < n-k; m++)
+	{
+		double arg = bem * x /ben + 1.0/bek + sen;
+		sum += bem * c_n(beta, arg, m);
+		bem *= beta;
+	}
+	return sum/ben;
+}
+
 // ==============================================================
 
 int main(int argc, char* argv[])
@@ -77,6 +127,22 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
+#define PRINT_CEE
+#ifdef PRINT_CEE
+
+	int imax = 14;
+	// double delta = 1.0 / ((double) imax);
+	for (int i=0; i< imax; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) imax);
+		double y = c_n(beta, x, n);
+
+		printf("%d	%f	%g\n", i, x, y);
+
+		fflush(stdout);
+	}
+#endif
+
 #ifdef QCHECK
 	for (int k=0; k<= n; k++)
 	{
@@ -88,11 +154,4 @@ int main(int argc, char* argv[])
 		printf("%d	%d	%f	%f	%f	%g\n", k, bek, qk, rek, tk, rek-tk);
 	}
 #endif
-	for (int k=0; k<= n; k++)
-	{
-		int bek = b_k(beta, k);
-		double tk = t_k(beta, k);
-		double nk = beta*tk - bek;
-		printf("%d	%d	%f	%f\n", k, bek, tk, nk);
-	}
 }
