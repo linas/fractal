@@ -73,9 +73,10 @@ double e_nk(double beta, double x, int n, int k);
 
 double c_n(double beta, double x, int n)
 {
-	if (n < 1) fprintf(stderr, "Error fail index %d\n", n);
 	if (x < 0.0) fprintf(stderr, "Error fail neg %d %g\n", n, x);
 	if (1.0 < x) fprintf(stderr, "Error c_n fail pos n=%d x= %g\n", n, x);
+	if (0 == n) return 0.0;
+
 	double sum = 0.0;
 	for (int k=0; k<n; k++)
 	{
@@ -109,6 +110,31 @@ double e_nk(double beta, double x, int n, int k)
 	return sum/ben;
 }
 
+double h_nk(double beta, double x, int n, int k)
+{
+	if (n <= k) fprintf(stderr, "Error enk fail index %d <= %d\n", n, k);
+	double tk = t_k(beta, k);
+	if (tk < x) return 0.0;
+
+	double bek = pow(beta, k);
+	if (n == k)
+	{
+		double arg =  1.0 + (x-tk)/bek;
+		return nu(arg) / bek;
+	}
+
+	double arg = beta - 1.0 + (x +1.0 - beta*tk)/bek;
+	return c_n(beta, arg, n-k) / bek;
+}
+
+double nu_n(double beta, double x, int n)
+{
+	double sum = c_n(beta, x, n);
+	for (int k=0; k<= n; k++)
+		sum += h_nk(beta, x, n, k);
+	return sum;
+}
+
 // ==============================================================
 
 int main(int argc, char* argv[])
@@ -123,16 +149,16 @@ int main(int argc, char* argv[])
 
 #define PRINT_CEE
 #ifdef PRINT_CEE
-
-	int imax = 814;
+	int imax = 14;
 	// double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 		printf("%d	%f", i, x);
-		for (int j=0; j<6; j++)
+		for (int j=0; j<1; j++)
 		{
-			double y = c_n(beta, x, n+j);
+			// double y = c_n(beta, x, n+j);
+			double y = nu_n(beta, x, n+j);
 			printf("	%f", y);
 		}
 		printf("\n");
