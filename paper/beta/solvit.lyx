@@ -10835,15 +10835,30 @@ so that
 \end_inset
 
 Comparing to the Gelfond-Parry result, we conclude that 
-\begin_inset Formula $c_{n}\to1$
+\begin_inset Formula $c_{n}\to1/F$
 \end_inset
 
  as 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
-.
- Lets look at the first few terms.
+, with 
+\begin_inset Formula $F$
+\end_inset
+
+ the normalization constant as before:
+\begin_inset Formula 
+\[
+1=\frac{1}{F}\left[\sum_{k=0}^{\infty}\frac{t_{k}}{\beta^{k}}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Lets look at the first few terms.
  First, rearrange
 \begin_inset Formula 
 \[
@@ -10877,10 +10892,9 @@ a_{5} & =1+b_{1}\left[7+b_{2}\right]+b_{2}\left[3+b_{1}\right]+2b_{3}+b_{4}
 
 \end_inset
 
-The first few are beguiling; butthe last one shows that the bitsequence
+The first few are beguiling; but the last one shows that the bitsequence
  starts to fold in against itself.
  It clearly won't simplify in a simple manner.
- 
 \end_layout
 
 \begin_layout Subsubsection
@@ -10981,6 +10995,56 @@ Above works great, verifies against earlier forms.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+When 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+, all three functions 
+\begin_inset Formula $c_{n},e_{nk}$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{nk}$
+\end_inset
+
+ become constants.
+ In this case, 
+\begin_inset Formula $c_{n}\to1/F$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, with 
+\begin_inset Formula $F$
+\end_inset
+
+ the normalization constant from before.
+ Defining 
+\begin_inset Formula $a_{n}=\beta^{n}c_{n}$
+\end_inset
+
+, the recursion relation takes the curious form 
+\begin_inset Formula 
+\[
+a_{n}=1+\sum_{k=1}^{n-1}b_{k}\sum_{m=0}^{n-k-1}a_{m}
+\]
+
+\end_inset
+
+This does not simplify in any obvious manner; at 
+\begin_inset Formula $n=5$
+\end_inset
+
+, products of 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ show up in the sum.
 \end_layout
 
 \begin_layout Subsection

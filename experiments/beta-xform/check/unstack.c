@@ -22,14 +22,14 @@ double nu(double x)
 	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
-	return 1.0;
+	// return 1.0;
 	// return x-0.5;
 
 	// Bernoulli poly B_2
 	// return x*x - x  + 1.0 / 6.0;
 
 	// Bernoulli poly B_3
-	// return x*x*x - 1.5*x*x  + 0.5*x;
+	return x*x*x - 1.5*x*x  + 0.5*x;
 
 	// Bernoulli poly B_4
 	// return x*x*x*x - 2.0*x*x*x  + x*x - 1.0/30.0;
@@ -176,6 +176,7 @@ int main(int argc, char* argv[])
 		double x = (((double) i) + 0.5) / ((double) imax);
 
 		double y = gp_invar(beta, x);
+y= c_n(beta, x, n+8);
 		// double y = gp_n1(beta, x);
 		// double y = gp_n2(beta, x);
 		// double y = gp_n3(beta, x);
