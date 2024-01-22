@@ -10617,7 +10617,7 @@ h_{n,1}\left(y\right)=\frac{1}{\beta}c_{n-1}\left(\frac{y+1}{\beta}\right)\quad\
 which enables
 \begin_inset Formula 
 \[
-h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0,y<t_{k}
+h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j}\right)\quad\mbox{ for }n>k,k>0
 \]
 
 \end_inset
@@ -10626,11 +10626,11 @@ The
 \begin_inset Formula $h_{nk}$
 \end_inset
 
- will only ever be use with 
+ will only ever be used with 
 \begin_inset Formula $y<t_{k}$
 \end_inset
 
- so there is no expectation that the argument is valid for karger 
+ so there is no expectation that the argument is valid for larger 
 \begin_inset Formula $y$
 \end_inset
 
@@ -10662,16 +10662,6 @@ h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t
 
 \end_inset
 
-The appearance of the 
-\begin_inset Formula $\Theta\left(t_{k}-y\right)$
-\end_inset
-
- at this stage of the game is late enough that it does not affect the earlier
- iteration calcluations, and merely affirms earlier results.
- 
-\end_layout
-
-\begin_layout Standard
 The 
 \begin_inset Formula $n=k$
 \end_inset
@@ -10732,7 +10722,7 @@ Use
 ,
 \begin_inset Formula 
 \[
-e_{nk}=\frac{\Theta\left(t_{k}-y\right)}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+e_{nk}=\frac{1}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
 \]
 
 \end_inset
@@ -10877,16 +10867,12 @@ which express
 \begin_layout Standard
 \begin_inset Formula 
 \[
-e_{nk}\left(y\right)=\frac{\Theta\left(t_{k}-y\right)}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\Theta\left(k\right)\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+e_{nk}\left(y\right)=\frac{1}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\Theta\left(k\right)\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
 \]
 
 \end_inset
 
 The starting point for iteration is 
-\begin_inset Formula $h_{00}=\nu_{0}$
-\end_inset
-
- and 
 \begin_inset Formula $c_{0}=\nu_{0}$
 \end_inset
 
