@@ -221,11 +221,29 @@ int main(int argc, char* argv[])
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
-		for (int n=0; n<5; n++)
+		for (int n=0; n<6; n++)
 		{
+			for (int k=1; k<n; k++)
+			{
+				double oy = hsum_n_k(beta, n, k, x);
+				double ny = h_nk(beta, x, n, k);
+				printf("%d %f %d %d  %f %f   %g\n", i, x, n, k, oy, ny, oy-ny);
+			}
+
+#if 0
+			// Test overall -- fails.
 			double oy = cee_n(beta, n, x);
 			double ny = c_n(beta, x, n);
 			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
+
+			// Test basic c_n -- this passes
+			if (beta -1.0 < x) continue;
+			if (n<2) continue;
+			double oy = hsum_n_1(beta, n, x);
+			// double ny = c_n(beta, (1.0+x)/beta, n-1)/beta;
+			double ny = h_nk(beta, x, n, 1);
+			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
+#endif
 		}
 		printf("\n");
 		fflush(stdout);
