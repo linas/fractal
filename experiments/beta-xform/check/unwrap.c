@@ -109,6 +109,9 @@ double gp_n3(double beta, double x)
 // Arbitrary function
 double nu(double x)
 {
+	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
+	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
+
 	return 1.0;
 	// return x-0.5;
 

@@ -151,6 +151,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+#define QCHECK
 #ifdef QCHECK
 	for (int k=0; k<= n; k++)
 	{
@@ -159,7 +160,8 @@ int main(int argc, char* argv[])
 		double bkp1 = pow(beta, k+1);
 		double tk = t_k(beta, k+1);
 		double rek = bkp1-qk;
-		printf("%d	%d	%f	%f	%f	%g\n", k, bek, qk, rek, tk, rek-tk);
+		printf("%d %d qk=%f	b^{k+1}-qk=%f	t{k+1}=%f	%g\n",
+			k, bek, qk, rek, tk, rek-tk);
 	}
 #endif
 
@@ -173,6 +175,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+#if 0
 	for (int k=0; k<= n; k++)
 	{
 		int bek = b_k(beta, k);
@@ -180,4 +183,5 @@ int main(int argc, char* argv[])
 		double rek = (bek+tk)/beta;
 		printf("%d	%d	%f	%f\n", k, bek, tk, rek);
 	}
+#endif
 }

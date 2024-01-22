@@ -10611,8 +10611,9 @@ The
  This can be verified using the identity
 \begin_inset Formula 
 \begin{align*}
-t_{k} & =\beta^{k+1}-\sum_{j=0}^{k}b_{j}\beta^{k-j}\\
-\sum_{j=1}^{k-1}b_{j}\beta^{-j} & =t_{1}-\frac{b_{k}+t_{k}}{\beta^{k}}
+t_{k+1} & =\beta t_{k}-b_{k}\\
+ & =\beta^{k+1}-\sum_{j=0}^{k}b_{j}\beta^{k-j}\\
+\sum_{j=1}^{k-1}b_{j}\beta^{-j} & =t_{1}-\frac{t_{k}}{\beta^{k-1}}
 \end{align*}
 
 \end_inset
@@ -10620,7 +10621,7 @@ t_{k} & =\beta^{k+1}-\sum_{j=0}^{k}b_{j}\beta^{k-j}\\
 So, working backwards, 
 \begin_inset Formula 
 \begin{align*}
-\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j} & =t_{1}+\frac{1}{\beta^{k}}\left(y-t_{k}+1-b_{k}\right)\\
+\frac{y+1}{\beta^{k}}+\sum_{j=1}^{k-1}b_{j}\beta^{-j} & =t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t_{k}+1\right)\\
  & \le1\quad\mbox{ when }y\le t_{k}
 \end{align*}
 
@@ -10629,7 +10630,7 @@ So, working backwards,
 Thus, it is approrpriate to write 
 \begin_inset Formula 
 \[
-h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-t_{k}+1-b_{k}\right)\right)\Theta\left(t_{k}-y\right)\quad\mbox{ for }n>k,k>0
+h_{n,k}=\frac{1}{\beta^{k}}c_{n-k}\left(t_{1}+\frac{1}{\beta^{k}}\left(y-\beta t_{k}+1\right)\right)\Theta\left(t_{k}-y\right)\quad\mbox{ for }n>k,k>0
 \]
 
 \end_inset
