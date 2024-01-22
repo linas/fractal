@@ -53,6 +53,11 @@ double gp_n1(double beta, double x)
 }
 
 // Eigenfunction for n=1 polynomial w/ quadratic generator
+// Works with beta=1.618033988749895 and approx any beta
+// slightly larger than this. Fails with any beta smaller than
+// this, even infinitessimally smaller!  Eigenvalue is
+// 1/beta**2 Well, actually its a period-two bounce so actually
+// some complex eigenvalue.
 double quad_n1(double beta, double x)
 {
 	double whack = 1.0;  // some magic normalization!?
