@@ -111,6 +111,7 @@ double nu(double x)
 {
 	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
+	if (x < 0.0 || 1.0 < x) exit(1);
 
 	return 1.0;
 	// return x-0.5;

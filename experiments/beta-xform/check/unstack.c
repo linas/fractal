@@ -101,10 +101,10 @@ double q_k(double beta, int k)
 
 double e_nk(double beta, double x, int n, int k);
 
+// Due to use in intermediate values, it can (commonly) happen that 1<x
 double c_n(double beta, double x, int n)
 {
 	if (x < 0.0) fprintf(stderr, "Error fail neg %d %g\n", n, x);
-	if (1.0 < x) fprintf(stderr, "Error c_n fail pos n=%d x= %g\n", n, x);
 	if (0 == n) return 0.0;
 
 	double sum = 0.0;
@@ -120,8 +120,6 @@ double e_nk(double beta, double x, int n, int k)
 {
 	if (n <= k) fprintf(stderr, "Error enk fail index %d <= %d\n", n, k);
 	double tk = t_k(beta, k);
-	if (tk < x) return 0.0;
-
 	double ben = pow(beta, n);
 	double bek = pow(beta, k);
 	double arg = 1.0 + x/ben - tk/bek;
@@ -223,27 +221,42 @@ int main(int argc, char* argv[])
 		double x = (((double) i) + 0.5) / ((double) imax);
 		for (int n=0; n<6; n++)
 		{
+#if 0
 			for (int k=1; k<n; k++)
 			{
+				double tk = t_k(beta, k);
+				if (tk < x) continue;
+				double oy = esum_n_k(beta, n, k, x);
+				double ny = e_nk(beta, x, n, k);
+				printf("%d %f %d %d  %f %f   %g\n", i, x, n, k, oy, ny, oy-ny);
+				if (1.0e-12 < fabs(oy-ny)) printf("------------FAIL\n");
+			}
+
+			// Broken in various places
+			for (int k=1; k<n; k++)
+			{
+				double tk = t_k(beta, k);
+				if (tk < x) continue;
 				double oy = hsum_n_k(beta, n, k, x);
 				double ny = h_nk(beta, x, n, k);
 				printf("%d %f %d %d  %f %f   %g\n", i, x, n, k, oy, ny, oy-ny);
+				if (1.0e-12 < fabs(oy-ny)) printf("------------FAIL\n");
 			}
 
-#if 0
 			// Test overall -- fails.
 			double oy = cee_n(beta, n, x);
 			double ny = c_n(beta, x, n);
 			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
+#endif
 
-			// Test basic c_n -- this passes
-			if (beta -1.0 < x) continue;
+			// Test basic h_n1 -- this passes for beta=1.6 but fails else
 			if (n<2) continue;
 			double oy = hsum_n_1(beta, n, x);
-			// double ny = c_n(beta, (1.0+x)/beta, n-1)/beta;
-			double ny = h_nk(beta, x, n, 1);
+			// double oy = hsum_n_k(beta, n, 1, x);
+			double ny = c_n(beta, (1.0+x)/beta, n-1)/beta;
+			// double ny = h_nk(beta, x, n, 1);
 			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
-#endif
+			if (1.0e-12 < fabs(oy-ny)) printf("------------FAIL\n");
 		}
 		printf("\n");
 		fflush(stdout);
