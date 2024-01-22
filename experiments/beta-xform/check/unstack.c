@@ -12,32 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// ==============================================================
-
-// Invariant measure for beta shift (not beta transform)
-double invar(double beta, double x)
-{
-	double midpnt = 0.5*beta;
-	double obn = 1.0;
-	double sum = 0.0;
-	double norm = 0.0;
-	for (int i=0; i<1000; i++)
-	{
-		if (x < midpnt) sum += obn;
-		norm += midpnt*obn;
-
-		if (0.5 < midpnt) midpnt -= 0.5;
-		midpnt *= beta;
-		obn /= beta;
-		if (obn < 1e-15) break;
-	}
-	return sum / norm;
-}
-
-double gp_invar(double beta, double x)
-{
-	return 0.5*beta*invar(beta, 0.5*beta*x);
-}
+#include "unref.c"
 
 // ==============================================================
 
@@ -47,8 +22,8 @@ double nu(double x)
 	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
-	return 1.0;
-	// return x-0.5;
+	// return 1.0;
+	return x-0.5;
 
 	// Bernoulli poly B_2
 	// return x*x - x  + 1.0 / 6.0;

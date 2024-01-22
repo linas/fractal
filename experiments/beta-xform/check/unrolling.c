@@ -3,7 +3,8 @@
  *
  * Verify to unrolled recursion relations for generalized
  * stretch-cut-stack map. Result: they are correct, and do
- * reproduce older results.
+ * reproduce older results. But also obsolete; the unwrap.c
+ * version is newer, better.
  *
  * January 2024
  */
@@ -12,76 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Invariant measure for beta shift (not beta transform)
-double invar(double beta, double x)
-{
-	double midpnt = 0.5*beta;
-	double obn = 1.0;
-	double sum = 0.0;
-	double norm = 0.0;
-	for (int i=0; i<1000; i++)
-	{
-		if (x < midpnt) sum += obn;
-		norm += midpnt*obn;
-
-		if (0.5 < midpnt) midpnt -= 0.5;
-		midpnt *= beta;
-		obn /= beta;
-		if (obn < 1e-15) break;
-	}
-	return sum / norm;
-}
-
-double gp_invar(double beta, double x)
-{
-	return 0.5*beta*invar(beta, 0.5*beta*x);
-}
-
-// Eigenfunction for n=1 polynomial w/ quadratic generator
-double quad_n1(double beta, double x)
-{
-	double m0 = 0.5*beta;
-	if (x < 0.5) return beta*x*x-x+0.125;
-	if (x < m0) return x*x-x+ beta*0.125;
-	return 0.0;
-}
-
-double gp_quad_n1(double beta, double x)
-{
-	return 0.5*beta*quad_n1(beta, 0.5*beta*x);
-}
-
-// Eigenfunction for n=2 polynomial
-double n2(double beta, double x)
-{
-	double m0 = 0.5*beta;
-	double m1 = 0.5*beta * (beta-1.0);
-	if (x < m1) return beta*beta*x - 0.5;
-	if (x < 0.5) return beta*x-0.5;
-	if (x < m0) return x-0.5;
-	return 0.0;
-}
-
-double gp_n2(double beta, double x)
-{
-	return 0.5*beta*n2(beta, 0.5*beta*x);
-}
-
-// Eigenfunction for n=3 polynomial
-double n3(double beta, double x)
-{
-	double m0 = 0.5*beta;
-	double m1 = 0.5*beta * (beta-1.0);
-	if (x < 0.5) return m1*(beta*x- m1 + 0.25/beta);
-	if (x < m1) return m1*((beta+1.0)*x/beta - m1);
-	if (x < m0) return m1*(x- m1 + 0.25/beta);
-	return 0.0;
-}
-
-double gp_n3(double beta, double x)
-{
-	return 0.5*beta*n3(beta, 0.5*beta*x);
-}
+#include "unref.c"
 
 // ==============================================================
 

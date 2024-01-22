@@ -19,6 +19,9 @@ all: recheck force orbit visitation borel reforce tsum unrolling \
 	$(CC) -o $@ $^ -lm -lstdc++
 
 visitation.o: visitation.c visits.c
+unrolling.o: unrolling.c unref.c
+unwrap.o: unwrap.c unref.c
+unstack.o: unstack.c unref.c
 
 recheck: recheck.o
 force: force.o
