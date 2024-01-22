@@ -10552,6 +10552,23 @@ so
 which is correct & verified.
 \end_layout
 
+\begin_layout Standard
+Check for 
+\begin_inset Formula $n=2$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+c_{2}\left(y\right) & =e_{20}\left(y\right)+b_{1}e_{21}\left(y\right)\\
+e_{20} & =\frac{1}{\beta^{2}}h_{00}\left(\frac{y}{\beta^{2}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 More unrolling
 \end_layout
@@ -10675,7 +10692,7 @@ This can then be plugged into
  to write
 \begin_inset Formula 
 \begin{align*}
-e_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }n>k,y<t_{k}\\
+e_{nk} & =\sum_{j=1}^{n-k}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\quad\mbox{ for }n>k,y<t_{k},k>0\\
  & =\frac{\beta^{k}}{\beta^{n}}h_{kk}\left(\frac{\beta^{k}y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j}h_{n-j,k}\left(\frac{y}{\beta^{j}}\right)\\
  & =\frac{1}{\beta^{n}}\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{j=1}^{n-k-1}\beta^{-j-k}c_{n-k-j}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{y}{\beta^{k+j}}\right)
 \end{align*}
@@ -10698,10 +10715,26 @@ Use
 \begin_inset Formula $y<t_{k}$
 \end_inset
 
+ and 
+\begin_inset Formula $k>0$
+\end_inset
+
 ,
 \begin_inset Formula 
 \[
 e_{nk}=\frac{\Theta\left(t_{k}-y\right)}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+\]
+
+\end_inset
+
+while, for 
+\begin_inset Formula $k=0$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+e_{n0}=\frac{1}{\beta^{n}}\nu_{0}\left(\frac{y}{\beta^{n}}\right)
 \]
 
 \end_inset
@@ -10804,7 +10837,7 @@ which express
 \begin_layout Standard
 \begin_inset Formula 
 \[
-e_{nk}\left(y\right)=\frac{\Theta\left(t_{k}-y\right)}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+e_{nk}\left(y\right)=\frac{\Theta\left(t_{k}-y\right)}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\Theta\left(k\right)\sum_{m=1}^{n-k-1}\beta^{m}c_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
 \]
 
 \end_inset

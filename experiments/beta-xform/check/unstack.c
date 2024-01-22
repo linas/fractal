@@ -124,6 +124,8 @@ double e_nk(double beta, double x, int n, int k)
 	double arg = 1.0 + x/ben - tk/bek;
 	double sum = nu(arg);
 
+	if (0 == k) return sum / ben;
+
 	double cnst = beta -1.0 - (beta*tk -1.0)/bek;
 	double xen = x / ben;
 
@@ -134,7 +136,7 @@ double e_nk(double beta, double x, int n, int k)
 		sum += bem * c_n(beta, arg, m);
 		bem *= beta;
 	}
-	return sum/ben;
+	return sum / ben;
 }
 
 double h_nk(double beta, double x, int n, int k)
