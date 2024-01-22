@@ -6678,6 +6678,176 @@ The Gelfond–Parry normalization was the
 .
 \end_layout
 
+\begin_layout Subsubsection
+Stacking Generic Functions
+\end_layout
+
+\begin_layout Standard
+A slightly different calculation results if one works with an an arbitrary
+ function 
+\begin_inset Formula $\nu_{0}\left(y\right)$
+\end_inset
+
+.
+ The iteration to obtain 
+\begin_inset Formula $\nu_{n}=\mathcal{M}^{n}\nu_{0}$
+\end_inset
+
+ proceeds much as before, with only minor modifications needed to obtain
+ the general form.
+\end_layout
+
+\begin_layout Standard
+The trick is to track two distinct travellers: one that travels with 
+\begin_inset Formula $\Theta\left(t_{k}-y\right)$
+\end_inset
+
+ and another that travels with the bitsequence 
+\begin_inset Formula $b_{k}=\Theta\left(\beta t_{k}-1\right)$
+\end_inset
+
+.
+ The general solution has the form
+\begin_inset Formula 
+\begin{align*}
+\nu_{n}\left(y\right) & =a_{n}\left(y\right)+\sum_{k=1}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
+a_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)
+\end{align*}
+
+\end_inset
+
+The functions 
+\begin_inset Formula $h_{nk}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{nk}$
+\end_inset
+
+ can be solved for recursively; the recursive relations are simple enough
+ that they can be rolled up as series summations.
+ These are given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+h_{nk}\left(y\right) & =\frac{1}{\beta^{k}}a_{n-k}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{y}{\beta^{k}}\right)\quad\mbox{ for }n\ge k
+\end{align*}
+
+\end_inset
+
+which express 
+\begin_inset Formula $h_{nk}$
+\end_inset
+
+ in terms of the function 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+.
+ This is given as a recursive series, obtained by iterating
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+e_{nk}\left(y\right)=\frac{1}{\beta^{n}}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\Theta\left(k\right)\sum_{m=1}^{n-k-1}\beta^{m}a_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+\]
+
+\end_inset
+
+The starting point for iteration is 
+\begin_inset Formula $a_{0}=\nu_{0}$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Above works great, verifies against earlier forms.
+ Look at check/unstack.c and unstack.gplot for implementation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+, all three functions 
+\begin_inset Formula $a_{n},e_{nk}$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{nk}$
+\end_inset
+
+ become constants.
+ In this case, 
+\begin_inset Formula $a_{n}\to1/F$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, with 
+\begin_inset Formula $F$
+\end_inset
+
+ the normalization constant as before.
+ Defining 
+\begin_inset Formula $\alpha_{n}=\beta^{n}a_{n}$
+\end_inset
+
+, the recursion relation takes the curious form 
+\begin_inset Formula 
+\[
+\alpha_{n}=1+\sum_{k=1}^{n-1}b_{k}\sum_{m=0}^{n-k-1}\alpha_{m}
+\]
+
+\end_inset
+
+This is an integer sequence: each 
+\begin_inset Formula $\alpha_{n}$
+\end_inset
+
+ is an integer, starting with 
+\begin_inset Formula $\alpha_{0}=\alpha_{1}=1$
+\end_inset
+
+.
+ The start of the sequence is beguiling: 
+\begin_inset Formula $\alpha_{2}=1+b_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{3}=1+2b_{1}+b_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{4}=1+4b_{1}+2b_{2}+b_{3}$
+\end_inset
+
+.
+ The illusion of regularity breaks down at the next step: 
+\begin_inset Formula $\alpha_{5}=1+b_{1}\left[7+b_{2}\right]+b_{2}\left[3+b_{1}\right]+2b_{3}+b_{4}$
+\end_inset
+
+ which contains a product of 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+.
+ If there is a way to simplify, it is not obvious.
+\end_layout
+
 \begin_layout Subsection
 Analytic Gelfond-Parry function
 \begin_inset CommandInset label
