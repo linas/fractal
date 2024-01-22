@@ -95,6 +95,9 @@ double q_k(double beta, int k)
 }
 
 // ==============================================================
+#include "un.c"
+
+// ==============================================================
 
 double e_nk(double beta, double x, int n, int k);
 
@@ -180,7 +183,7 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-#define PRINT_CEE
+// #define PRINT_CEE
 #ifdef PRINT_CEE
 
 #define NIT 6
@@ -209,6 +212,24 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NIT; j++)
 		printf(" %g", sum[j]);
 	printf("\n#\n");
+#endif
+
+#define UNIT_TEST
+#ifdef UNIT_TEST
+
+	int imax = 14;
+	for (int i=0; i< imax; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) imax);
+		for (int n=0; n<5; n++)
+		{
+			double oy = cee_n(beta, n, x);
+			double ny = c_n(beta, x, n);
+			printf("%d %f %d  %f %f   %g\n", i, x, n, oy, ny, oy-ny);
+		}
+		printf("\n");
+		fflush(stdout);
+	}
 #endif
 
 // #define QCHECK

@@ -244,7 +244,7 @@ double hsum_n_k(double beta, int n, int k, double x)
 	if (0 == n && 0 == k) return nu(x);
 	if (0 == k) return 0.0;
 
-	if (1 == k) return h_n_1(beta, n, x);
+	if (1 == k) return hsum_n_1(beta, n, x);
 
 	// Loop.
 	double arg = 0.0;
