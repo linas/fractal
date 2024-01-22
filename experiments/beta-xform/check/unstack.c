@@ -112,7 +112,7 @@ double e_nk(double beta, double x, int n, int k)
 
 double h_nk(double beta, double x, int n, int k)
 {
-	if (n <= k) fprintf(stderr, "Error enk fail index %d <= %d\n", n, k);
+	if (n < k) fprintf(stderr, "Error hnk fail index %d <= %d\n", n, k);
 	double tk = t_k(beta, k);
 	if (tk < x) return 0.0;
 
@@ -149,13 +149,13 @@ int main(int argc, char* argv[])
 
 #define PRINT_CEE
 #ifdef PRINT_CEE
-	int imax = 14;
+	int imax = 814;
 	// double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 		printf("%d	%f", i, x);
-		for (int j=0; j<1; j++)
+		for (int j=0; j<6; j++)
 		{
 			// double y = c_n(beta, x, n+j);
 			double y = nu_n(beta, x, n+j);
