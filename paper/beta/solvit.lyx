@@ -11300,7 +11300,14 @@ and
 
 Well, after all the burbling above about Fibonacci, this doesn't look so
  promising.
- Lets try 
+\end_layout
+
+\begin_layout Paragraph
+Golden Mean
+\end_layout
+
+\begin_layout Standard
+Lets try 
 \begin_inset Formula $\beta=\varphi$
 \end_inset
 
@@ -11428,6 +11435,95 @@ i.e
 
 .
  The general case is slightly more complex, but not much more.
+\end_layout
+
+\begin_layout Standard
+Lets try 
+\begin_inset Formula $\nu_{0}\left(y\right)=y$
+\end_inset
+
+ so that 
+\begin_inset Formula $w_{1}=1$
+\end_inset
+
+ and all other 
+\begin_inset Formula $w_{i}=0$
+\end_inset
+
+.
+ Given 
+\begin_inset Formula $\alpha_{1}\left(y\right)=\nu_{0}\left(y/\beta\right)$
+\end_inset
+
+ conclude 
+\begin_inset Formula $u_{10}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{11}=1$
+\end_inset
+
+ and all other 
+\begin_inset Formula $u_{1p}=0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+u_{2,p} & =\frac{1}{\beta^{2p}}\left[w_{p}+\sum_{i=p}^{\infty}{i \choose p}\frac{1}{\beta^{i-p}}w_{i}\right]\\
+u_{2,0} & =\frac{w_{1}}{\beta^{i}}\\
+u_{2,1} & =\frac{2w_{1}}{\beta^{2}}
+\end{align*}
+
+\end_inset
+
+and all other 
+\begin_inset Formula $u_{2,p}=0$
+\end_inset
+
+.
+ Next,
+\begin_inset Formula 
+\begin{align*}
+u_{3,p} & =\frac{1}{\beta^{3p}}\left[w_{p}+\sum_{i=p}^{\infty}{i \choose p}\frac{1}{\beta^{i-p}}\left[w_{i}+u_{1i}\beta^{p}\right]\right]\\
+ & =\frac{1}{\beta^{3p}}\left[w_{p}+{1 \choose p}\frac{1}{\beta^{1-p}}\left[w_{1}+u_{11}\beta^{p}\right]\right]\quad\mbox{for }p\le1\\
+u_{3,0} & =\frac{1}{\beta}\left[w_{1}+u_{11}\right]\\
+u_{3,1} & =\frac{1}{\beta^{3}}\left[2w_{1}+u_{11}\beta\right]
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $u_{3,p}=0$
+\end_inset
+
+ for all other 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Recursively, 
+\begin_inset Formula $u_{np}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $p>1$
+\end_inset
+
+, but we knew this already.
+ Thus, all we really have is
+\begin_inset Formula 
+\begin{align*}
+u_{n0} & =\sum_{m=1}^{n-2}u_{m0}+\frac{1}{\beta}\sum_{m=1}^{n-2}u_{m1}\\
+u_{n1} & =\frac{1}{\beta^{n}}\left[2w_{1}+\sum_{m=1}^{n-2}u_{m1}\beta^{m}\right]
+\end{align*}
+
+\end_inset
+
+Oof.
+ It's doable, but icky.
+ 
 \end_layout
 
 \begin_layout Subsubsection
