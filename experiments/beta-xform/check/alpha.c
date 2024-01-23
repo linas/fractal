@@ -1,7 +1,8 @@
 /*
  * alpha.c
  *
- * Examine the integer sequence alpha.  Lets see if its recognizable!?
+ * Examine the integer sequence alpha.  It is a generalized Fibonacci.
+ * The linear sequence zeta is a generalzed Lucas number.
  *
  * January 2024
  */
@@ -25,6 +26,8 @@ int bit_k(unsigned long bitstr, int k)
 	return (bitstr >> (nu-k-1)) & 1UL;
 }
 
+// alpha_n is an integer when nu_0=1 and turns out to be
+// a generrlized fibonacci.
 int alpha_n(unsigned long bitstr, int n)
 {
 	if (n<2) return 1;
@@ -37,7 +40,33 @@ int alpha_n(unsigned long bitstr, int n)
 		for (int m=0; m<n-k; m++)
 			sum += alpha_n(bitstr, m);
 	}
+	return sum;
+}
 
+// Grand total number of non-zero bits.
+int delta_n(unsigned long bitstr, int n)
+{
+	if (n<2) return 1;
+
+	int sum = 0;
+	for (int k=1; k<n; k++)
+		sum += bit_k(bitstr, k);
+	return sum;
+}
+
+// Generalized Lucas number, it turns out.
+int zeta_n(unsigned long bitstr, int n)
+{
+	if (n<2) return 1;
+
+	int sum = 1 + delta_n(bitstr, n);
+	for (int k=1; k<n; k++)
+	{
+		int bk = bit_k(bitstr, k);
+		if (0 == bk) continue;
+		for (int m=0; m<n-k; m++)
+			sum += zeta_n(bitstr, m);
+	}
 	return sum;
 }
 
@@ -63,12 +92,16 @@ int main(int argc, char* argv[])
 			int bk = bit_k(bitstr, n);
 			printf("%d", bk);
 		}
+
+		printf("  zeta=");
+		for (int n=0; n<14; n++)
+			printf("%d  ", zeta_n(bitstr, n));
+
+#if 0
 		printf("  alpha=");
 		for (int n=0; n<14; n++)
-		{
-			int an = alpha_n(bitstr, n);
-			printf("%d  ", an);
-		}
+			printf("%d  ", alpha_n(bitstr, n));
+#endif
 		printf("\n");
 	}
 }

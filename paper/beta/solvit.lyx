@@ -11300,9 +11300,98 @@ and
 
 Well, after all the burbling above about Fibonacci, this doesn't look so
  promising.
+ Mash it into one large line
+\begin_inset Formula 
+\[
+\alpha_{n}\left(y\right)=\nu_{0}\left(\frac{y}{\beta^{n}}\right)+\sum_{k=1}^{n-1}b_{k}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\alpha_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+\]
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
+Linear generator
+\end_layout
+
+\begin_layout Standard
+Plug in 
+\begin_inset Formula $\nu_{0}\left(y\right)=y$
+\end_inset
+
+ into above.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\sum_{k=1}^{n-1}b_{k}\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right) & =\left(1+\frac{y}{\beta^{n}}\right)\sum_{k=1}^{n-1}b_{k}-\sum_{k=1}^{n-1}b_{k}\frac{t_{k}}{\beta^{k}}\\
+ & =\gamma_{n}+\frac{\delta_{n}}{\beta^{n}}y
+\end{align*}
+
+\end_inset
+
+The two constants 
+\begin_inset Formula $\gamma_{n},\delta_{n}$
+\end_inset
+
+ are both bounded: 
+\begin_inset Formula $\gamma_{n}<n+1$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta_{n}<n$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\delta_{n}$
+\end_inset
+
+ is an integer! The 
+\begin_inset Formula $\alpha_{n}$
+\end_inset
+
+ will have a similar form:
+\begin_inset Formula 
+\[
+\alpha_{n}\left(y\right)=\epsilon_{n}+\frac{\zeta_{n}}{\beta^{n}}y
+\]
+
+\end_inset
+
+and so plugging through: 
+\begin_inset Formula 
+\begin{align*}
+\alpha_{n}\left(y\right) & =\frac{y}{\beta^{n}}+\gamma_{n}+\frac{\delta_{n}}{\beta^{n}}y+\sum_{k=1}^{n-1}b_{k}\sum_{m=1}^{n-k-1}\left[\epsilon_{m}+\frac{\zeta_{m}}{\beta^{m}}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]\\
+ & =\gamma_{n}+\frac{y}{\beta^{n}}\left[1+\delta_{n}+\sum_{k=1}^{n-1}b_{k}\sum_{m=1}^{n-k-1}\zeta_{m}\right]\\
+ & \qquad+\sum_{k=1}^{n-1}b_{k}\sum_{m=1}^{n-k-1}\epsilon_{m}\\
+ & \qquad+\sum_{k=1}^{n-1}b_{k}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}\right)\sum_{m=1}^{n-k-1}\frac{\zeta_{m}}{\beta^{m}}
+\end{align*}
+
+\end_inset
+
+The constant terms are quite the mess, but the linear terms are not so bad;
+ not only is 
+\begin_inset Formula $\delta_{n}$
+\end_inset
+
+ and integer, but so is 
+\begin_inset Formula $\zeta_{n}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\delta_{n} & =\sum_{k=1}^{n-1}b_{k}\\
+\zeta_{n} & =1+\delta_{n}+\sum_{k=1}^{n-1}b_{k}\sum_{m=1}^{n-k-1}\zeta_{m}
+\end{align*}
+
+\end_inset
+
+For 
+\end_layout
+
+\begin_layout Subsubsection
 Golden Mean
 \end_layout
 
