@@ -11160,562 +11160,128 @@ Lets take a look at above, for finite orbits.
 \end_inset
 
  that terminate after a certain point.
- First, to satsify curiosity, lets get a better look at the 
-\begin_inset Formula $\alpha$
-\end_inset
-
- sequence.
- Refering to the conventions introduced later in this text, encode bits
  
-\begin_inset Formula $b_{i}$
+\end_layout
+
+\begin_layout Standard
+As above, define 
+\begin_inset Formula $\alpha_{n}\left(y\right)=\beta^{n}c_{n}\left(y\right)$
 \end_inset
 
- of the finite orbit as 
-\begin_inset Formula $2n+1=b_{0}b_{1}b_{2}\cdots b_{\nu}$
+ and 
+\begin_inset Formula 
+\[
+s_{nk}\left(y\right)=\sum_{m=1}^{n-k-1}\alpha_{m}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)
+\]
+
 \end_inset
 
- for an orbit of length 
-\begin_inset Formula $\nu=\left\lceil \log_{2}\left(2n+1\right)\right\rceil $
+Then
+\begin_inset Formula 
+\[
+\phi_{nk}\left(y\right)=\beta^{n}e_{nk}\left(y\right)=\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\Theta\left(k\right)s_{nk}\left(y\right)\quad\mbox{ for }k>0
+\]
+
 \end_inset
 
+and
+\begin_inset Formula 
+\[
+\alpha_{n}\left(y\right)=\sum_{k=0}^{n-1}b_{k}\phi_{nk}\left(y\right)
+\]
+
+\end_inset
+
+Well, after all the burbling above about Fibonacci, this doesn't look so
+ promising.
+ Lets try 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+ so that 
+\begin_inset Formula $b_{1}=1$
+\end_inset
+
+ and all others vanish.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\alpha_{n}\left(y\right) & =\phi_{n0}\left(y\right)+\phi_{n1}\left(y\right)\\
+ & =\nu_{0}\left(\frac{y}{\beta^{n}}\right)+\nu_{0}\left(1-\frac{t_{1}}{\beta}+\frac{y}{\beta^{n}}\right)+s_{n1}\left(y\right)\\
+ & =\nu_{0}\left(\frac{y}{\beta^{n}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-2}\alpha_{m}\left(\frac{1}{\beta}+\frac{\beta^{m}y}{\beta^{n}}\right)
+\end{align*}
+
+\end_inset
+
+Lets write some of these out.
+\begin_inset Formula 
+\begin{align*}
+\alpha_{1}\left(y\right) & =\phi_{10}\left(y\right)=\nu_{0}\left(\frac{y}{\beta}\right)\\
+\alpha_{2}\left(y\right) & =\nu_{0}\left(\frac{y}{\beta^{2}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{y}{\beta^{2}}\right)\\
+\alpha_{3}\left(y\right) & =\nu_{0}\left(\frac{y}{\beta^{3}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{y}{\beta^{3}}\right)+\alpha_{1}\left(\frac{1}{\beta}+\frac{y}{\beta^{2}}\right)\\
+ & =\nu_{0}\left(\frac{y}{\beta^{3}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{y}{\beta^{3}}\right)+\nu_{0}\left(\frac{1}{\beta^{2}}+\frac{y}{\beta^{3}}\right)\\
+\alpha_{4}\left(y\right) & =\nu_{0}\left(\frac{y}{\beta^{4}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{y}{\beta^{4}}\right)+\alpha_{1}\left(\frac{1}{\beta}+\frac{y}{\beta^{3}}\right)+\alpha_{2}\left(\frac{1}{\beta}+\frac{y}{\beta^{2}}\right)\\
+ & =\nu_{0}\left(\frac{y}{\beta^{4}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{y}{\beta^{4}}\right)+\nu_{0}\left(\frac{1}{\beta^{2}}+\frac{y}{\beta^{4}}\right)+\nu_{0}\left(\frac{1}{\beta^{3}}+\frac{y}{\beta^{4}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{1}{\beta^{3}}+\frac{y}{\beta^{4}}\right)
+\end{align*}
+
+\end_inset
+
+Lots of heat but no light.
+ Try again.
+ Assume an analytic series, or at least a polynomial.
+\begin_inset Formula 
+\[
+\nu_{0}\left(x\right)=\sum_{i=0}^{\infty}w_{i}x^{i}\qquad\mbox{and}\qquad\alpha_{n}\left(x\right)=\sum_{i=0}^{\infty}u_{ni}x^{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then
+\begin_inset Formula 
+\begin{align*}
+\nu_{0}\left(x+y\right) & =\sum_{i=0}^{\infty}w_{i}\left(x+y\right)^{i}\\
+ & =\sum_{i=0}^{\infty}w_{i}\sum_{j=0}^{i}{i \choose j}x^{j}y^{i-j}
+\end{align*}
+
+\end_inset
+
+So
+\begin_inset Formula 
+\begin{align*}
+\alpha_{n}\left(x\right) & =\nu_{0}\left(\frac{y}{\beta^{n}}\right)+\nu_{0}\left(\frac{1}{\beta}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-2}\sum_{i=0}^{\infty}u_{mi}\left(\frac{1}{\beta}+\frac{\beta^{m}y}{\beta^{n}}\right)^{i}\\
+\sum_{i=0}^{\infty}u_{ni}y^{i} & =\sum_{i=0}^{\infty}w_{i}\left(\frac{y}{\beta^{n}}\right)^{i}+\sum_{i=0}^{\infty}w_{i}\sum_{j=0}^{i}{i \choose j}\left(\frac{y}{\beta^{n}}\right)^{j}\frac{1}{\beta^{i-j}}+\sum_{m=1}^{n-2}\sum_{i=0}^{\infty}u_{mi}\sum_{j=0}^{i}{i \choose j}\left(\frac{\beta^{m}y}{\beta^{n}}\right)^{j}\frac{1}{\beta^{i-j}}
+\end{align*}
+
+\end_inset
+
+Quite the mess.
+ Equating term by term,
+\begin_inset Formula 
+\begin{align*}
+u_{np} & =w_{p}\frac{1}{\beta^{pn}}+\sum_{i=p}^{\infty}w_{i}{i \choose p}\frac{1}{\beta^{pn}}\frac{1}{\beta^{i-p}}+\sum_{m=1}^{n-2}\sum_{i=p}^{\infty}u_{mi}{i \choose p}\frac{\beta^{mp}}{\beta^{np}}\frac{1}{\beta^{i-p}}\\
+ & =\frac{1}{\beta^{pn}}\left[w_{p}+\sum_{i=p}^{\infty}{i \choose p}\frac{1}{\beta^{i-p}}\left[w_{i}+\sum_{m=1}^{n-2}u_{mi}\beta^{mp}\right]\right]
+\end{align*}
+
+\end_inset
+
+Yikes! Even if we assume that quintic terms and higher are zero, 
+\emph on
+i.e
+\emph default
 .
- The table of allowed orbits is 
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace defskip
+ that 
+\begin_inset Formula $w_{p}=0$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="13" columns="4">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\nu$
+ for 
+\begin_inset Formula $p>4$
 \end_inset
 
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $n$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $b_{k}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\alpha_{k}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-11
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-101
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-111
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1001
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1101
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-7
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1111
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10001
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10101
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-12
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-11001
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-13
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-11011
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-14
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-11101
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-11111
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace defskip
-\end_inset
-
-
+, this does not simplify in any meaningful way.
 \end_layout
 
 \begin_layout Subsection
