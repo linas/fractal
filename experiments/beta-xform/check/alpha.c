@@ -56,8 +56,15 @@ int main(int argc, char* argv[])
 	for (long idx=1; idx<nmax; idx++)
 	{
 		unsigned long bitstr = 2*idx+1;
-		printf("idx=%ld  ", idx);
-		for (int n=0; n<10; n++)
+		int ord = bitlen(bitstr);
+		printf("idx=%ld ord=%d bits=", idx, ord);
+		for (int n=0; n<ord; n++)
+		{
+			int bk = bit_k(bitstr, n);
+			printf("%d", bk);
+		}
+		printf("  alpha=");
+		for (int n=0; n<14; n++)
 		{
 			int an = alpha_n(bitstr, n);
 			printf("%d  ", an);
