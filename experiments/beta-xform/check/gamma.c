@@ -52,21 +52,41 @@ double t_ke(double beta, int k)
 	for (int i=0; i<k; i++)
 	{
 		tk *= beta;
+// EPS is needed to prevent idx=3 from becoming cyclic
 #define EPS 2e-15
 		if (1.0 <= tk+EPS) { tk -= 1.0; if (tk < 0.0) tk = 0.0; }
 	}
 	return tk;
 }
 
+double t_kb(double beta, unsigned long bitstr, int k)
+{
+	double tk = 0.0;
+	double ben = 1.0 / beta;
+	int bl = bitlen(bitstr);
+	if (bl < k) k = bl;
+	for (int i=0; i<k; i++)
+	{
+		ben *= beta;
+		if (0 == bit_k(bitstr, i)) continue;
+		tk += 1.0/ben;
+	}
+	tk *= ben;
+	ben *= beta;
+	tk = ben - tk;
+	if (tk < 0.0) tk = 0.0;  // needed for idx=3
+	return tk;
+}
+
 double gamma_n(double beta, unsigned long bitstr, int n)
 {
 	double sum = 0.0;
-	double ben = beta;
+	double ben = 1.0;
 	for (int k=1; k<n; k++)
 	{
-		if (0 == bit_k(bitstr, k)) continue;
-		sum += t_ke(beta, k) / beta;
 		ben *= beta;
+		if (0 == bit_k(bitstr, k)) continue;
+		sum += t_kb(beta, bitstr, k) / ben;
 	}
 	return sum + delta_n(bitstr, n);
 }
@@ -106,12 +126,13 @@ int main(int argc, char* argv[])
 
 		printf("    beta=%.10f", beta);
 		printf("  tk=");
-		for (int n=0; n<8; n++)
-			printf("%.4f  ", t_ke(beta, n));
+		for (int n=0; n<=ord; n++)
+			printf("%.4f  ", t_kb(beta, bitstr, n));
 		printf("\n");
 
+      printf("                  ");
 		printf("  gamma=");
-		for (int n=0; n<8; n++)
+		for (int n=0; n<=ord; n++)
 			printf("%.4f  ", gamma_n(beta, bitstr, n));
 		printf("\n");
 		printf("---\n");
