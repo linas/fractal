@@ -130,6 +130,8 @@ double epsilon_n(double beta, unsigned long bitstr, int n)
 		double fct = beta - 1.0 - (beta*t_kb(beta, bitstr, k) -1) / bek;
 		sum += fct * zsum;
 	}
+
+	sum += gamma_n(beta, bitstr, n);
 	return sum;
 }
 
@@ -144,6 +146,26 @@ int main(int argc, char* argv[])
 	}
 	int nord = atoi(argv[1]);
 
+#define GRAPH_FOR_PAPER
+#ifdef GRAPH_FOR_PAPER
+	// Create a graph for the large-n limit for the paper.
+	long nmax = 1UL << nord;
+	for (long idx=16; idx<nmax; idx++)
+	{
+		if (false == valid_gold_index(idx)) continue;
+
+		double beta = golden_beta(idx);
+		unsigned long bitstr = 2*idx+1;
+		int ord = bitlen(bitstr);
+
+		double bo = pow(beta, ord);
+		double eps = epsilon_n(beta, bitstr, ord);
+		eps /= bo;
+		printf("%ld	%d	%f	%f\n", idx, ord, beta, eps);
+	}
+#endif
+
+// #define PRINT_ALL
 #ifdef PRINT_ALL
 	long nmax = 1UL << nord;
 	for (long idx=1; idx<nmax; idx++)
@@ -197,6 +219,8 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+// #define ASYMPTOTIC_LIMIT
+#ifdef ASYMPTOTIC_LIMIT
 	// Explore asymptotic limit
 	for (long ord=2; ord<nord; ord++)
 	{
@@ -209,9 +233,10 @@ int main(int argc, char* argv[])
 		double zet = zeta_n(bitstr, ord);
 		printf("idx=%2ld ord=%ld beta=%f gamma=%g epsilon=%f zet=%f\n",
 			idx, ord, beta, bo*(gam-ord+2.0),
-			bo*(2.0/3.0 - eps / bo),
+			bo*(3.0 - eps / bo),
 			zet );
 	}
+#endif
 }
 
 // ==============================================================
