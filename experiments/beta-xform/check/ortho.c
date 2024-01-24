@@ -11,27 +11,32 @@
 
 #include "unref.c"
 
-double en0(double beta)
+// Normalization
+double enorm(double beta, int n)
 {
-#define NSAMP 3512
+#define NSAMP 6513
 	double sum = 0.0;
 	for (int i=0; i< NSAMP; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NSAMP);
-		sum += 1.0 / gp_invar(beta, x);
+		double xn = pow(x, n);
+		sum += xn / gp_invar(beta, x);
 	}
 	return sum / ((double) NSAMP);
 }
 
 int main(int argc, char* argv[])
 {
-	int imax = 514;
+	int imax = 800;
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 		double beta = x + 1.0;
-		double no = en0(beta);
-		printf("%d	%f	%f\n", i, beta, no);
+		printf("%d	%f", i, beta);
+		for (int n=0; n<6; n++)
+			printf("	%f", enorm(beta, n));
+
+		printf("\n");
 		fflush(stdout);
 	}
 }
