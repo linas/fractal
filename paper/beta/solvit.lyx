@@ -11242,7 +11242,33 @@ The unfulfilled hope of the above was to obtain an enlightening form in
 \end_inset
 
 ; it has no discontinuities.
+\end_layout
+
+\begin_layout Standard
+The next section determins that
+\begin_inset Formula 
+\[
+c_{n}\left(y\right)\to\mbox{const}
+\]
+
+\end_inset
+
+in the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit, explictly for 
+\begin_inset Formula $\nu_{0}\left(y\right)=y$
+\end_inset
+
+.
+ The const is rather opaque.
+ Numerical work suggests that this holds in general, at least for polynomual
  
+\begin_inset Formula $\nu_{0}\left(y\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -11419,10 +11445,30 @@ The index on the last sum runs from
 \end_inset
 
 .
+ In the asymptotic limit, the ratio of succesive terms converges 
+\begin_inset Formula $\zeta_{n}/\zeta_{n-1}\to\beta$
+\end_inset
+
+.
+ This is the generalized form of the standard Fibonacci series converging
+ to the golden mean.
 \end_layout
 
 \begin_layout Standard
 Lets take a look at the constant terms, now.
+ If the bitstring 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ is of finite length, then both of these stop changing, for 
+\begin_inset Formula $n$
+\end_inset
+
+ greater than the bitstring length (since 
+\begin_inset Formula $b_{k}=0$
+\end_inset
+
+ from that point on).
 \begin_inset Formula 
 \begin{align*}
 \gamma_{n} & =\delta_{n}-\sum_{k=1}^{n-1}b_{k}\frac{t_{k}}{\beta^{k}}\\
@@ -11464,7 +11510,135 @@ Inside the square brackets is a portion the identity
 \end_layout
 
 \begin_layout Standard
-Some
+The largest 
+\begin_inset Formula $\gamma_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\epsilon_{n}$
+\end_inset
+
+ occur when 
+\begin_inset Formula $\beta\to2$
+\end_inset
+
+.
+ In these cases, there is a string of 
+\begin_inset Formula $b_{k}=1$
+\end_inset
+
+ up to 
+\begin_inset Formula $k=p$
+\end_inset
+
+ and then 
+\begin_inset Formula $b_{k}=0$
+\end_inset
+
+ after that.
+ For these cases, the asymptotic limits appear to be
+\begin_inset Formula 
+\begin{align*}
+\gamma_{n} & =p-1+\mathcal{O}\left(\beta^{-p+2}\log p\right)\\
+\epsilon_{n} & =\frac{2}{3}\beta^{p-2}\left[1+\mathcal{O}\left(\beta^{-p+2}\log p\right)\right]
+\end{align*}
+
+\end_inset
+
+where, in both cases, the extra 
+\begin_inset Formula $\log p$
+\end_inset
+
+ is a wild guess based on numerics.
+ As before, this is for 
+\begin_inset Formula $n>p$
+\end_inset
+
+, since, for finite bitsequnces, these stop changing once 
+\begin_inset Formula $n>p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Time to wrap it up.
+ The goal of this exercise was to understand the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit of 
+\begin_inset Formula $c_{n}\left(y\right)$
+\end_inset
+
+.
+ We have acheived that, at least for he case of 
+\begin_inset Formula $\nu_{0}\left(y\right)=y$
+\end_inset
+
+.
+ The result is that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c_{n}\left(y\right) & =\beta^{-n}\alpha_{n}\left(y\right)\\
+ & =\frac{1}{\beta^{n}}\left[\epsilon_{n}+\frac{\zeta_{n}}{\beta^{n}}y\right]
+\end{align*}
+
+\end_inset
+
+In the worst case, 
+\begin_inset Formula $\epsilon_{n}$
+\end_inset
+
+ grows as 
+\begin_inset Formula $\beta^{n}$
+\end_inset
+
+ so the constant term is of order 1, but more commonly small.
+ In the limit, the ratio of succesive generalized Fibonacci terms converge
+ to their generator, so 
+\begin_inset Formula $\zeta_{n}/\zeta_{n-1}\to\beta$
+\end_inset
+
+, and thus, 
+\begin_inset Formula $\zeta_{n}\beta^{-n}\to1$
+\end_inset
+
+.
+ As this is supressed by an additional term of 
+\begin_inset Formula $\beta^{-n}$
+\end_inset
+
+, the final result is that 
+\begin_inset Formula 
+\[
+c_{n}\left(y\right)\to\mbox{const}
+\]
+
+\end_inset
+
+for a somewhat impenetrable const that seems to always be less than one.
+ Based on numerical work with polynomial 
+\begin_inset Formula $\nu_{0}\left(y\right)$
+\end_inset
+
+, this seems to hold in general: only the constant survives, and the polynomial
+ parts are clobbered by a factor of 
+\begin_inset Formula $\beta^{-n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The obvious next step is to make graphs of 
+\begin_inset Formula $\epsilon_{n}$
+\end_inset
+
+ and see if it looks like anything interesting.
 \end_layout
 
 \begin_layout Subsubsection

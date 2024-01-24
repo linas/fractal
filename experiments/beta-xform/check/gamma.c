@@ -108,6 +108,31 @@ double gamma_na(double beta, unsigned long bitstr, int n)
 	return sum;
 }
 
+double epsilon_n(double beta, unsigned long bitstr, int n)
+{
+	double sum = 0.0;
+	double bek = 1.0;
+	for (int k=1; k<n; k++)
+	{
+		bek *= beta;
+		if (0 == bit_k(bitstr, k)) continue;
+		double esum = 0.0;
+		double zsum = 0.0;
+		double bem = beta;
+		for (int m=1; m<n-k; m++)
+		{
+			esum += epsilon_n(beta, bitstr, m);
+			zsum += zeta_n(bitstr, m) / bem;
+			bem *= beta;
+		}
+
+		sum += esum;
+		double fct = beta - 1.0 - (beta*t_kb(beta, bitstr, k) -1) / bek;
+		sum += fct * zsum;
+	}
+	return sum;
+}
+
 // ==============================================================
 
 int main(int argc, char* argv[])
@@ -118,8 +143,9 @@ int main(int argc, char* argv[])
 		exit (1);
 	}
 	int nord = atoi(argv[1]);
-	long nmax = 1UL << nord;
 
+#ifdef PRINT_ALL
+	long nmax = 1UL << nord;
 	for (long idx=1; idx<nmax; idx++)
 	{
 		if (false == valid_gold_index(idx)) continue;
@@ -153,13 +179,38 @@ int main(int argc, char* argv[])
 			printf("%.4f  ", gamma_n(beta, bitstr, n));
 		printf("\n");
 
+#if 0
       printf("                  ");
 		printf("  bamma=");
 		for (int n=0; n<=ord; n++)
 			printf("%.4f  ", gamma_na(beta, bitstr, n));
 		printf("\n");
+#endif
+
+      printf("                  ");
+		printf("epsilon=");
+		for (int n=0; n<=ord; n++)
+			printf("%.4f  ", epsilon_n(beta, bitstr, n));
+		printf("\n");
 
 		printf("---\n");
+	}
+#endif
+
+	// Explore asymptotic limit
+	for (long ord=2; ord<nord; ord++)
+	{
+		unsigned long idx = (1UL << (ord-1)) - 1UL;
+		double beta = golden_beta(idx);
+		unsigned long bitstr = 2*idx+1;
+		double bo = pow(beta, ord-3);
+		double gam = gamma_n(beta, bitstr, ord);
+		double eps = epsilon_n(beta, bitstr, ord);
+		double zet = zeta_n(bitstr, ord);
+		printf("idx=%2ld ord=%ld beta=%f gamma=%g epsilon=%f zet=%f\n",
+			idx, ord, beta, bo*(gam-ord+2.0),
+			bo*(2.0/3.0 - eps / bo),
+			zet );
 	}
 }
 
