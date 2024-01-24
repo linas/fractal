@@ -46,6 +46,18 @@ int zeta_n(unsigned long bitstr, int n)
 	return sum;
 }
 
+double t_ke(double beta, int k)
+{
+	double tk = 1.0;
+	for (int i=0; i<k; i++)
+	{
+		tk *= beta;
+#define EPS 2e-15
+		if (1.0 <= tk+EPS) { tk -= 1.0; if (tk < 0.0) tk = 0.0; }
+	}
+	return tk;
+}
+
 double gamma_n(double beta, unsigned long bitstr, int n)
 {
 	double sum = 0.0;
@@ -53,7 +65,7 @@ double gamma_n(double beta, unsigned long bitstr, int n)
 	for (int k=1; k<n; k++)
 	{
 		if (0 == bit_k(bitstr, k)) continue;
-		sum += t_k(beta, k) / beta;
+		sum += t_ke(beta, k) / beta;
 		ben *= beta;
 	}
 	return sum + delta_n(bitstr, n);
@@ -92,11 +104,15 @@ int main(int argc, char* argv[])
 			printf("%d  ", zeta_n(bitstr, n));
 		printf("\n");
 
-		printf("    beta=%f", beta);
+		printf("    beta=%.10f", beta);
+		printf("  tk=");
+		for (int n=0; n<8; n++)
+			printf("%.4f  ", t_ke(beta, n));
+		printf("\n");
+
 		printf("  gamma=");
 		for (int n=0; n<8; n++)
 			printf("%.4f  ", gamma_n(beta, bitstr, n));
-
 		printf("\n");
 		printf("---\n");
 	}
