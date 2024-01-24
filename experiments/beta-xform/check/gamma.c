@@ -91,6 +91,23 @@ double gamma_n(double beta, unsigned long bitstr, int n)
 	return delta_n(bitstr, n) - sum;
 }
 
+double gamma_na(double beta, unsigned long bitstr, int n)
+{
+	double sum = 0.0;
+	for (int k=1; k<n; k++)
+	{
+		if (0 == bit_k(bitstr, k)) continue;
+		double bem = 1.0;
+		for (int m=0; m<k; m++)
+		{
+			bem *= beta;
+			if (0 == bit_k(bitstr, m)) continue;
+			sum += 1.0 / bem;
+		}
+	}
+	return sum;
+}
+
 // ==============================================================
 
 int main(int argc, char* argv[])
@@ -135,6 +152,13 @@ int main(int argc, char* argv[])
 		for (int n=0; n<=ord; n++)
 			printf("%.4f  ", gamma_n(beta, bitstr, n));
 		printf("\n");
+
+      printf("                  ");
+		printf("  bamma=");
+		for (int n=0; n<=ord; n++)
+			printf("%.4f  ", gamma_na(beta, bitstr, n));
+		printf("\n");
+
 		printf("---\n");
 	}
 }
