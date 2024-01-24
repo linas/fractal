@@ -88,7 +88,7 @@ double gamma_n(double beta, unsigned long bitstr, int n)
 		if (0 == bit_k(bitstr, k)) continue;
 		sum += t_kb(beta, bitstr, k) / ben;
 	}
-	return sum + delta_n(bitstr, n);
+	return delta_n(bitstr, n) - sum;
 }
 
 // ==============================================================
