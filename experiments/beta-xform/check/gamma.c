@@ -73,6 +73,8 @@ int main(int argc, char* argv[])
 
 	for (long idx=1; idx<nmax; idx++)
 	{
+		if (false == valid_gold_index(idx)) continue;
+
 		double beta = golden_beta(idx);
 
 		unsigned long bitstr = 2*idx+1;
@@ -84,18 +86,19 @@ int main(int argc, char* argv[])
 			printf("%d", bk);
 		}
 
-		printf("  alpha=");
-		for (int n=0; n<8; n++)
-			printf("%f  ", gamma_n(beta, bitstr, n));
-		printf("\n");
-
-		printf("                  ");
 		for (int n=0; n<ord; n++) printf(" ");
-		printf("  zeta= ");
-		for (int n=0; n<14; n++)
+		printf("zeta= ");
+		for (int n=0; n<12; n++)
 			printf("%d  ", zeta_n(bitstr, n));
+		printf("\n");
+
+		printf("    beta=%f", beta);
+		printf("  gamma=");
+		for (int n=0; n<8; n++)
+			printf("%.4f  ", gamma_n(beta, bitstr, n));
 
 		printf("\n");
+		printf("---\n");
 	}
 }
 
