@@ -8626,6 +8626,133 @@ reference "eq:invariant measure"
  Both are given.
 \end_layout
 
+\begin_layout Standard
+The Gelfond–Parry measure includes a normalization factor.
+ It will be of recurring interest, and so a graph f it is presented in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Gelfond–Parry-Normalization"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gelfond–Parry Normalization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Gelfond–Parry-Normalization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename normie-log.eps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The above figure shows 
+\begin_inset Formula $1/F$
+\end_inset
+
+ for the normalization constant 
+\begin_inset Formula $F=\sum_{n=0}^{\infty}t_{n}\beta^{-n}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ The horizonal axis is stretched out using 
+\begin_inset Formula $\log\left(\beta-1\right)$
+\end_inset
+
+ so as to amplify the behavior as 
+\begin_inset Formula $\beta\to1$
+\end_inset
+
+.
+ One has that 
+\begin_inset Formula $F\to\infty$
+\end_inset
+
+ in this limit (so 
+\begin_inset Formula $1/F\to0$
+\end_inset
+
+); the curve suggests just how catastrophic that limit is.
+ A graph of 
+\begin_inset Formula $F$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+, without the rescaling of the horizontal axis, is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Normalization-Integral"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Direct verification
 \end_layout
@@ -11272,13 +11399,19 @@ in the
 \end_layout
 
 \begin_layout Subsection
-Bashing about
+Linear form
 \end_layout
 
 \begin_layout Standard
-Given the above form, lets smack it around a bit, see where we can take
- it.
- So far no luck.
+Given the above form, apply some blunt technique, and see what happens.
+ The primary result is that the recursion relation can be specialized to
+ 
+\begin_inset Formula $\nu_{0}\left(y\right)=y$
+\end_inset
+
+ and an explicit form can be given.
+ The linear part results in generalized Fibonacci sequences being generated,
+ while the constant term is messy and opaque (but not hard to compute).
 \end_layout
 
 \begin_layout Subsubsection
@@ -11954,6 +12087,78 @@ where
 \end_inset
 
  does not look promising.
+\end_layout
+
+\begin_layout Subsection
+Orthogonal generators
+\end_layout
+
+\begin_layout Standard
+The Bernoulli polynomials can be used to generate a set of orthonormal eigenfunc
+tions, having eigenvalues 
+\begin_inset Formula $\beta^{-n}$
+\end_inset
+
+.
+ Since orthonormality is fixed with respect to the invariant measure, the
+ Bernoulli polynomials cannot be used in raw form; they must be orthogonalized.
+ The proceedure explored here is basic Gaussian elimination.
+\end_layout
+
+\begin_layout Standard
+A function 
+\begin_inset Formula $f$
+\end_inset
+
+ is normalized with respect to the Gelfond–Parry measure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ if
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left[f\left(y\right)\right]^{2}\frac{dy}{\nu\left(y\right)}=1
+\]
+
+\end_inset
+
+Two functions 
+\begin_inset Formula $f,g$
+\end_inset
+
+ are orthogonal if
+\begin_inset Formula 
+\[
+\int_{0}^{1}f\left(y\right)g\left(y\right)\frac{dy}{\nu\left(y\right)}=0
+\]
+
+\end_inset
+
+The Gelfond–Parry measure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is generated from 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So let 
+\begin_inset Formula $B_{1}\left(x\right)=x-1/2$
+\end_inset
+
+ and then
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left[B_{1}\left(y\right)\right]^{2}\frac{dy}{\nu\left(y\right)}=
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection

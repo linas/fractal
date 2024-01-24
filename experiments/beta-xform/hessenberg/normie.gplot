@@ -1,8 +1,17 @@
 
 set term png size 1024,768
-set out 'normie.png'
+# set out 'normie.png'
+# set yrange [1:2]
+# plot "normie.dat" using 2:3 with lines linewidth 2 title ""
 
-set yrange [1:2]
+###############################################################
+# Used for the paper.
+# set out 'normie-log.png'
+set term eps color enhanced fontscale 0.58
+set out 'normie-log.eps'
+set title "Gelfond--Parry Normalization"
+set xlabel "log(beta-1)"
+set xrange [-6:]
+plot "normie.dat" using (log($2-1)):(1/$3) with lines linewidth 2 title ""
 
-plot "normie.dat" using 2:3 with lines linewidth 2 title ""
-
+###############################################################

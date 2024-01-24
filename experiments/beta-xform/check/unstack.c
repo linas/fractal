@@ -24,12 +24,12 @@ double nu(double x)
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
 	// return 1.0;
-	// return x-0.5;
+	return x-0.5;
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
 	// Being able to integrate to exactly zero is important.
-	return x*x - x  + 1.0 / 6.0;
+	// return x*x - x  + 1.0 / 6.0;
 	// return x*x - x  + 0.16666;
 
 	// Bernoulli poly B_3
@@ -149,8 +149,8 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
 	// double lambda = 1.0;
-	// double lambda = 1.0 / beta;
-	double lambda = 1.0 / (beta*beta);
+	double lambda = 1.0 / beta;
+	// double lambda = 1.0 / (beta*beta);
 	// double lambda = 1.0 / (beta*beta*beta);
 	double lamn = pow(lambda, n);
 
@@ -164,7 +164,8 @@ int main(int argc, char* argv[])
 		// double y = gp_n1(beta, x);
 		// double y = gp_n2(beta, x);
 		// double y = gp_n3(beta, x);
-		double y = gp_quad_n1(beta, x);
+		// double y = gp_quad_n1(beta, x);
+		double y=0.0;
 		printf("%d	%f	%f", i, x, y);
 
 		double lscale = lamn;
