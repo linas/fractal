@@ -1,9 +1,7 @@
 /*
- * alpha.c
+ * gamma.c
  *
- * Examine the integer sequence alpha.  It is a generalized Fibonacci.
- * The linear sequence zeta is also a generalzed Fibonacci.
- * See also gamma.c for the beta-dpendent parts.
+ * Copy of alpha.c, for the beta-dpendent parts.
  *
  * January 2024
  */
@@ -12,36 +10,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-/* Return length of bitstring. Same as ceil(log2(bitstr)). */
-int bitlen(unsigned long bitstr)
-{
-	int len=0;
-	while (bitstr) { len++; bitstr >>= 1; }
-	return len;
-}
+#include "selfie.c"
+#include "unutil.c"
 
 int bit_k(unsigned long bitstr, int k)
 {
 	int nu = bitlen(bitstr);
 	return (bitstr >> (nu-k-1)) & 1UL;
-}
-
-// alpha_n is an integer when nu_0=1 and turns out to be
-// a generalized fibonacci.
-int alpha_n(unsigned long bitstr, int n)
-{
-	if (n<2) return 1;
-
-	int sum = 1;
-	for (int k=1; k<n; k++)
-	{
-		int bk = bit_k(bitstr, k);
-		if (0 == bk) continue;
-		for (int m=0; m<n-k; m++)
-			sum += alpha_n(bitstr, m);
-	}
-	return sum;
 }
 
 // Grand total number of non-zero bits.
@@ -71,6 +46,19 @@ int zeta_n(unsigned long bitstr, int n)
 	return sum;
 }
 
+double gamma_n(double beta, unsigned long bitstr, int n)
+{
+	double sum = 0.0;
+	double ben = beta;
+	for (int k=1; k<n; k++)
+	{
+		if (0 == bit_k(bitstr, k)) continue;
+		sum += t_k(beta, k) / beta;
+		ben *= beta;
+	}
+	return sum + delta_n(bitstr, n);
+}
+
 // ==============================================================
 
 int main(int argc, char* argv[])
@@ -85,6 +73,8 @@ int main(int argc, char* argv[])
 
 	for (long idx=1; idx<nmax; idx++)
 	{
+		double beta = golden_beta(idx);
+
 		unsigned long bitstr = 2*idx+1;
 		int ord = bitlen(bitstr);
 		printf("idx=%2ld ord=%d bits=", idx, ord);
@@ -95,8 +85,8 @@ int main(int argc, char* argv[])
 		}
 
 		printf("  alpha=");
-		for (int n=0; n<14; n++)
-			printf("%d  ", alpha_n(bitstr, n));
+		for (int n=0; n<8; n++)
+			printf("%f  ", gamma_n(beta, bitstr, n));
 		printf("\n");
 
 		printf("                  ");
