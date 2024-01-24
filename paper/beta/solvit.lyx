@@ -8646,11 +8646,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -8733,7 +8729,16 @@ noprefix "false"
 \end_inset
 
 .
- 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Generated with hessenberg/normie.C and normie.gplot
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -12094,14 +12099,14 @@ Orthogonal generators
 \end_layout
 
 \begin_layout Standard
-The Bernoulli polynomials can be used to generate a set of orthonormal eigenfunc
-tions, having eigenvalues 
+The monnomials are used to generate a set of orthonormal eigenfunctions,
+ having eigenvalues 
 \begin_inset Formula $\beta^{-n}$
 \end_inset
 
 .
  Since orthonormality is fixed with respect to the invariant measure, the
- Bernoulli polynomials cannot be used in raw form; they must be orthogonalized.
+ monomials cannot be used in raw form; they must be orthogonalized.
  The proceedure explored here is basic Gaussian elimination.
 \end_layout
 
@@ -12146,19 +12151,53 @@ The Gelfond–Parry measure
 \end_layout
 
 \begin_layout Standard
-So let 
-\begin_inset Formula $B_{1}\left(x\right)=x-1/2$
+Let 
+\begin_inset Formula $f_{n}\left(x\right)=x^{n}$
 \end_inset
 
- and then
+.
+ Then
 \begin_inset Formula 
 \[
-\int_{0}^{1}\left[B_{1}\left(y\right)\right]^{2}\frac{dy}{\nu\left(y\right)}=
+\int_{0}^{1}\left[f_{0}\left(y\right)\right]^{2}\frac{dy}{\nu\left(y\right)}=\int_{0}^{1}\frac{dy}{\nu\left(y\right)}=N_{0}
 \]
 
 \end_inset
 
+Likewise, define
+\begin_inset Formula 
+\[
+\int_{0}^{1}f_{1}\left(y\right)f_{0}\left(y\right)\frac{dy}{\nu\left(y\right)}=\int_{0}^{1}y\frac{dy}{\nu\left(y\right)}=Q_{01}
+\]
 
+\end_inset
+
+Define 
+\begin_inset Formula $g_{1}\left(x\right)=x-Q_{01}/N_{0}$
+\end_inset
+
+.
+ It follows that
+\begin_inset Formula 
+\[
+\int_{0}^{1}g_{1}\left(y\right)f_{0}\left(y\right)\frac{dy}{\nu\left(y\right)}=0
+\]
+
+\end_inset
+
+ The normalization is obtained by setting 
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left[g_{1}\left(y\right)\right]^{2}\frac{dy}{\nu\left(y\right)}=N_{1}
+\]
+
+\end_inset
+
+ and so on down the line, 
+\begin_inset Formula $g_{n}\left(x\right)=f_{n}\left(x\right)-Q_{n-1,n}g_{n-1}\left(x\right)/N_{n-1}$
+\end_inset
+
+ so that they are all orthogonal to one-another.
 \end_layout
 
 \begin_layout Subsection

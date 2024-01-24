@@ -24,7 +24,8 @@ double nu(double x)
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
 	// return 1.0;
-	return x-0.5;
+	// return x-0.5;
+	return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -160,12 +161,11 @@ int main(int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 
-		// double y = gp_invar(beta, x);
+		double y = gp_invar(beta, x);
 		// double y = gp_n1(beta, x);
 		// double y = gp_n2(beta, x);
 		// double y = gp_n3(beta, x);
 		// double y = gp_quad_n1(beta, x);
-		double y=0.0;
 		printf("%d	%f	%f", i, x, y);
 
 		double lscale = lamn;
