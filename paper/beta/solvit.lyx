@@ -10923,7 +10923,7 @@ But if we define
 \begin_inset Formula $h_{n0}=0$
 \end_inset
 
- always, and so the special casesing there goes away, too.
+ always, and so the special casing there goes away, too.
 \end_layout
 
 \begin_layout Paragraph
@@ -12095,6 +12095,70 @@ where
 \end_layout
 
 \begin_layout Subsection
+Coherent Disk
+\end_layout
+
+\begin_layout Standard
+Using the same trick as further below (sorry for out-of-order presentation),
+ we can add a complex 
+\begin_inset Formula $z$
+\end_inset
+
+ to the mix.
+ Cut-n-pasting from up above, a sequence of functions satisfying 
+\begin_inset Formula $\mathcal{M}\mu_{n}=\lambda\mu_{n+1}$
+\end_inset
+
+ are given by
+\begin_inset Formula 
+\begin{align*}
+\mu_{n}\left(y\right) & =c_{n}^{\prime}\left(y\right)+\sum_{k=1}^{n}h_{nk}^{\prime}\left(y\right)\Theta\left(t_{k}-y\right)\\
+c_{n}^{\prime}\left(y\right) & =\nu_{0}\left(y\right)+\frac{1}{\left(\lambda\beta\right)^{n}}\sum_{k=1}^{n-1}b_{k}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\left(\lambda\beta\right)^{m}c_{m}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+\end{align*}
+
+\end_inset
+
+which is identical to before but prime is used to indicate the presence
+ of the 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ in the eqns.
+ The functions 
+\begin_inset Formula $h_{nk}^{\prime}$
+\end_inset
+
+ are given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+h_{nk}^{\prime}\left(y\right) & =\frac{1}{\left(\lambda\beta\right)^{k}}c_{n-k}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{y}{\beta^{k}}\right)\quad\mbox{ for }n\ge k
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $\mu_{n}\to\mu$
+\end_inset
+
+ with 
+\begin_inset Formula $\mathcal{M}\mu=\lambda\mu$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+0=\sum_{k=1}^{\infty}b_{k}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{\infty}\left(\lambda\beta\right)^{m}c_{m}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Orthogonal generators
 \end_layout
 
@@ -12233,6 +12297,7 @@ Numerical exploration shows that
 \end_inset
 
  limit.
+ Not obvious why this would be.
 \end_layout
 
 \begin_layout Subsection
