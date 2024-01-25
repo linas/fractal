@@ -34,8 +34,8 @@ double nu(double x)
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
 	// return 1.0;
-	// return x-0.5;
-	return x - 0.5 + 0.08684;  // appropriate for beta=1.6
+	return x-0.5;
+	//return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -89,7 +89,7 @@ COMPLEX ez_nk(double beta, COMPLEX blam, double x, int n, int k)
 	{
 		double arg = cnst + bem * xen;
 		sum += blem * cz_n(beta, blam, arg, m);
-		beta *= beta;
+		bem *= beta;
 		blem *= blam;
 	}
 	COMPLEX blan = pow(blam, n);
@@ -108,7 +108,8 @@ COMPLEX hz_nk(double beta, COMPLEX blam, double x, int n, int k)
 	if (n == k)
 	{
 		double arg =  1.0 + (x-tk)/bek;
-		return nu(arg) / bek;
+		COMPLEX blek = pow(blam, k);
+		return nu(arg) / blek;
 	}
 
 	double arg = beta - 1.0 + (x +1.0 - beta*tk)/bek;
