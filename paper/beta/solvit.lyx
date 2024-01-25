@@ -17648,12 +17648,12 @@ The first finite orbit can be found when
 
 .
  The length of the orbit is 
-\begin_inset Formula $p=2$
+\begin_inset Formula $\nu=2$
 \end_inset
 
 .
  For 
-\begin_inset Formula $p=3$
+\begin_inset Formula $\nu=3$
 \end_inset
 
 , there are two such trouble spots, which occur when either 
@@ -17801,7 +17801,7 @@ trouble spots
 \end_inset
 
  and a length of 
-\begin_inset Formula $p=2$
+\begin_inset Formula $\nu=2$
 \end_inset
 
 .
@@ -17822,7 +17822,7 @@ trouble spots
 \end_inset
 
 , corresponding to orbits of length 
-\begin_inset Formula $p=3$
+\begin_inset Formula $\nu=3$
 \end_inset
 
 .
@@ -18284,6 +18284,7 @@ new
 This appears to be Sloane's OEIS A001037 which has a number of known relationshi
 ps to roots of unity, Lyndon words, and the number of orbits in the tent
  map.
+ The values are given by Moreau's necklace-counting function.
  The trouble spots are the positive real roots of polynomials of the form
  
 \begin_inset Formula 
@@ -18352,12 +18353,12 @@ rd: it is counting the number of distinct orbits of a given length.
 \end_layout
 
 \begin_layout Standard
-A recurring point of confusion is that the bit-string defining the polynomial
- is not a necklace; it cannot be rotated.
+Yet, the bit-string defining the polynomial is not a necklace; it cannot
+ be rotated.
  Each bit-string corresponds to a unique polynomial, having roots that differ
  from those of other polynomials.
  The polynomials also have a canonical order, fixed as the integer that
- corresponds to the bit-string; they cannot be reordered.
+ generates the bit-string; they cannot be reordered.
  Ideas such as Lyndon words apply to the orbits, but not to the defining
  polynomials.
  The ordering of the polynomials is 
@@ -18497,8 +18498,8 @@ literal "false"
 \end_inset
 
 .
- At any rate, a closer study of the polynomials seems to be called for.
- 
+ At any rate, a closer study of the beta-polynomials seems to be called
+ for.
 \begin_inset Note Note
 status collapsed
 
@@ -18593,7 +18594,7 @@ The table below explicitly shows the polynomials for the first few orders.
  A polynomial is included in the table if it is an iterate of a previous
  polynomial, and if it's real root is bracketed by the roots of the earlier
  iterates.
- Adopting an ordinal numbering, 
+ Adopting ordinal numbering, 
 \begin_inset Formula $\ensuremath{p_{n}\left(\beta\right)}$
 \end_inset
 
@@ -18659,15 +18660,20 @@ The bracketing constraint can be represented by a recursive function
 
 \end_inset
 
-This uses a definition for the Heaviside 
+The Heaviside 
 \begin_inset Formula $\Theta\left(x\right)$
 \end_inset
 
- that is one only for strictly positive 
+ used here is one for strictly positive 
 \begin_inset Formula $x>0$
 \end_inset
 
 , and is zero otherwise.
+ This is important, as using 
+\begin_inset Formula $x\ge0$
+\end_inset
+
+ will not work.
  In numerical work, the test should be bounded away from zero.
  The recursion compares the candidate 
 \begin_inset Formula $\rho$
@@ -18789,7 +18795,11 @@ The indexing has the property that, whenever
 \begin_inset Formula $r_{n}$
 \end_inset
 
- encodes the bitsequence of 2n+1.
+ encodes the bitsequence of 
+\begin_inset Formula $2n+1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -19359,7 +19369,7 @@ root
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $1.7548776662466924\cdots$
+\begin_inset Formula $1.754877666246692\cdots$
 \end_inset
 
 
@@ -19412,7 +19422,7 @@ root
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $1.9275619754829252\cdots$
+\begin_inset Formula $1.927561975482925\cdots$
 \end_inset
 
 
@@ -19518,7 +19528,7 @@ root
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $1.5701473121960547\cdots$
+\begin_inset Formula $1.570147312196054\cdots$
 \end_inset
 
 
