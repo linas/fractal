@@ -35,7 +35,7 @@ double nu(double x)
 
 	// return 1.0;
 	return x-0.5;
-	//return x - 0.5 + 0.08684;  // appropriate for beta=1.6
+	// return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -162,9 +162,14 @@ static void coherent_zero (float *array,
 		COMPLEX z = x + I*y;
 		COMPLEX blam = beta*z;
 
-		double yyy = 0.76;
+		double yyy = 0.86;
 		int n = itermax;
 		COMPLEX sum = zap_n(beta, blam, yyy, n);
+
+#if 0
+		double mag = abs(sum);
+		if (mag < 1.0) printf("yo at %.10f %.10f\n", x, y);
+#endif
 
 		// array[j] = abs(sum);
 		array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;

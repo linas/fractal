@@ -150,7 +150,8 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NIT; j++) sum[j] = 0.0;
 
 	// double lambda = 1.0;
-	double lambda = 1.0 / beta;
+	// double lambda = 1.0 / beta;
+	double lambda = 0.76875;
 	// double lambda = 1.0 / (beta*beta);
 	// double lambda = 1.0 / (beta*beta*beta);
 	double lamn = pow(lambda, n);
