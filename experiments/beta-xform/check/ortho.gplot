@@ -3,18 +3,47 @@ set term png size 1024,768
 # set term png size 640, 480
 set out 'ortho.png'
 
-set title "Monomial Normalization"
-set key left
+set title "Hausdorff moments"
+set key bottom right
+set xrange [1:2]
+set yrange [0:1]
+# set xlabel "beta"
 
-plot "ortho.dat" using 2:3 with lines lw 2 title "eff", \
-     "ortho.dat" using 2:4 with lines lw 2 title "integ", \
-     "ortho.dat" using 2:5 with lines lw 2 title "1/N_0", \
-     "ortho.dat" using 2:6 with lines lw 2 title "1/2N_1", \
-     "ortho.dat" using 2:7 with lines lw 2 title "1/3N_2", \
-     "ortho.dat" using 2:8 with lines lw 2 title "1/4N_3", \
-     "ortho.dat" using 2:9 with lines lw 2 title "1/5N_4", \
-     "ortho.dat" using 2:10 with lines lw 2 title "1/6N_5", \
+#     "ortho.dat" using 2:4 with lines lw 2 title "integ", \
+#     "ortho.dat" using 2:7 with lines lw 2 title "1/3Q_2", \
+#     "ortho.dat" using 2:9 with lines lw 2 title "1/5Q_4", \
+#     "ortho.dat" using 2:10 with lines lw 2 title "1/6Q_5", \
+#     "ortho.dat" using 2:11 with lines lw 2 title "1/7Q_6", \
+#     "ortho.dat" using 2:14 with lines lw 2 title "1/16Q_{15}", \
+#     "ortho.dat" using 2:13 with lines lw 2 title "1/13Q_{12}", \
 
-# ----------------------------------------------------------------------
-#####
+plot "ortho.dat" using 2:3 with lines lw 2 title "F", \
+     "ortho.dat" using 2:5 with lines lw 2 title "1 / Q_0", \
+     "ortho.dat" using 2:6 with lines lw 2 title "1 / 2Q_1", \
+     "ortho.dat" using 2:8 with lines lw 2 title "1 / 4Q_3", \
+     "ortho.dat" using 2:11 with lines lw 2 title "1 / 7Q_6", \
+     "ortho.dat" using 2:12 with lines lw 2 title "1 / 10Q_9", \
+     "ortho.dat" using 2:15 with lines lw 2 title "1 / 19Q_{18}", \
 
+################################################################
+# Graph generated for diary text.
+#
+#set term eps color enhanced fontscale 0.48
+#set out 'moments.eps'
+#
+#set title "Hausdorff moments"
+#set key bottom right
+#set xrange [1:2]
+#set yrange [0:1]
+#
+#plot "ortho.dat" using 2:3 with lines lw 2 title "F", \
+#     "ortho.dat" using 2:5 with lines lw 2 title "1 / Q_0", \
+#     "ortho.dat" using 2:6 with lines lw 2 title "1 / 2Q_1", \
+#     "ortho.dat" using 2:8 with lines lw 2 title "1 / 4Q_3", \
+#     "ortho.dat" using 2:11 with lines lw 2 title "1 / 7Q_6", \
+#     "ortho.dat" using 2:12 with lines lw 2 title "1 / 10Q_9", \
+#     "ortho.dat" using 2:15 with lines lw 2 title "1 / 19Q_{18}", \
+#
+## ----------------------------------------------------------------------
+######
+#
