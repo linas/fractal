@@ -12167,13 +12167,13 @@ Let
 Likewise, define
 \begin_inset Formula 
 \[
-\int_{0}^{1}f_{1}\left(y\right)f_{0}\left(y\right)\frac{dy}{\nu\left(y\right)}=\int_{0}^{1}y\frac{dy}{\nu\left(y\right)}=Q_{01}
+\int_{0}^{1}f_{1}\left(y\right)f_{0}\left(y\right)\frac{dy}{\nu\left(y\right)}=\int_{0}^{1}y\frac{dy}{\nu\left(y\right)}=P_{01}
 \]
 
 \end_inset
 
 Define 
-\begin_inset Formula $g_{1}\left(x\right)=x-Q_{01}/N_{0}$
+\begin_inset Formula $g_{1}\left(x\right)=x-P_{01}/N_{0}$
 \end_inset
 
 .
@@ -12194,7 +12194,7 @@ Define
 \end_inset
 
  and so on down the line, 
-\begin_inset Formula $g_{n}\left(x\right)=f_{n}\left(x\right)-Q_{n-1,n}g_{n-1}\left(x\right)/N_{n-1}$
+\begin_inset Formula $g_{n}\left(x\right)=f_{n}\left(x\right)-P_{n-1,n}g_{n-1}\left(x\right)/N_{n-1}$
 \end_inset
 
  so that they are all orthogonal to one-another.
@@ -12209,6 +12209,30 @@ See check/ortho.c for a computation of N_n and ortho.gplot, ortho.png for a
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Define
+\begin_inset Formula 
+\[
+Q_{n}=\int_{0}^{1}y^{n}\frac{dy}{\nu\left(y\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Numerical exploration shows that 
+\begin_inset Formula $nQ_{n}\to F$
+\end_inset
+
+ in the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit.
 \end_layout
 
 \begin_layout Subsection

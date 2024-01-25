@@ -23,7 +23,7 @@ unrolling.o: unrolling.c unref.c unutil.c
 unwrap.o: unwrap.c unref.c unutil.c
 unstack.o: unstack.c unref.c unutil.c
 gamma.o: gamma.c unutil.c
-ortho.o: ortho.c unref.c
+ortho.o: ortho.c unref.c unutil.c
 
 recheck: recheck.o
 force: force.o
