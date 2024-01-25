@@ -14,6 +14,8 @@
 #include "unref.c"
 #include "unutil.c"
 
+#include "brat.h"
+
 #define COMPLEX std::complex<double>
 
 // ==============================================================
@@ -120,16 +122,39 @@ COMPLEX nuz_n(double beta, COMPLEX blam, double x, int n)
 }
 
 // ==============================================================
-// #include "un.c"  // for unit testing only. Copy of unwrap.c w/o main()
 
-int main(int argc, char* argv[])
+static void coherent_zero (float *array,
+                             int array_size,
+                             double x_center,
+                             double x_width,
+                             double row,
+                             int itermax,
+                             double beta)
 {
-	if (argc != 3)
-	{
-		fprintf(stderr, "Usage: %s beta n\n", argv[0]);
-		exit (1);
-	}
-	double beta = atof(argv[1]);
-	int n = atoi(argv[2]);
+	/* clear out the row */
+	for (int j=0; j<array_size; j++) array[j] = 0.0;
 
+	double y = row;
+	for (int j=0; j<array_size; j++)
+	{
+		double x = ((double) j + 0.5) / ((double) array_size);
+		x -= 0.5;
+		x -= x_center;
+		x *= x_width;
+
+		COMPLEX z = x + I*y;
+		COMPLEX blam = beta*z;
+
+		double yyy = 0.36;
+		int n = 8;
+		COMPLEX sum = cz_n(beta, blam, yyy, n);
+
+		// array[j] = abs(sum);
+		array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
+
+		double r = x*x + y*y;
+		if (0.99 < r and r < 1.01) array[j] = 0.5;
+	}
 }
+
+DECL_MAKE_BIFUR(coherent_zero)
