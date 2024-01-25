@@ -2,6 +2,7 @@
  * uncoherent.C
  *
  * Identical to unstack.c except a complex z is introduced into the sums.
+ * The theory behind this is incomplete or broken. Not working as expected.
  *
  * January 2024
  */
@@ -23,12 +24,18 @@
 // Arbitrary function
 double nu(double x)
 {
-	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
+	if (x < 0.0)
+	{
+		if (-1e-15 < x)
+			x = 0.0;
+		else
+			fprintf(stderr, "Error nu fail neg %g\n", x);
+	}
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
 	// return 1.0;
-	return x-0.5;
-	// return x - 0.5 + 0.08684;  // appropriate for beta=1.6
+	// return x-0.5;
+	return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -121,6 +128,15 @@ COMPLEX nuz_n(double beta, COMPLEX blam, double x, int n)
 	return sum;
 }
 
+COMPLEX zap_n(double beta, COMPLEX blam, double x, int n)
+{
+	COMPLEX zap = cz_n(beta, blam, x, n);
+	zap -= nu(x);
+	zap *= pow(blam, n);
+
+	return zap;
+}
+
 // ==============================================================
 
 static void coherent_zero (float *array,
@@ -145,15 +161,18 @@ static void coherent_zero (float *array,
 		COMPLEX z = x + I*y;
 		COMPLEX blam = beta*z;
 
-		double yyy = 0.36;
-		int n = 8;
-		COMPLEX sum = cz_n(beta, blam, yyy, n);
+		double yyy = 0.76;
+		int n = itermax;
+		COMPLEX sum = zap_n(beta, blam, yyy, n);
 
 		// array[j] = abs(sum);
 		array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
 		double r = x*x + y*y;
 		if (0.99 < r and r < 1.01) array[j] = 0.5;
+
+		r *= beta*beta;
+		if (0.99 < r and r < 1.01) array[j] = 0.75;
 	}
 }
 
