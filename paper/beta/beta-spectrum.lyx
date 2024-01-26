@@ -24550,6 +24550,703 @@ Perhaps most notable is that the good map
 \end_layout
 
 \begin_layout Section
+Formal Work
+\end_layout
+
+\begin_layout Standard
+Theorems, lemmas, proofs.
+ A number of observations, claims and assumptions have been made.
+ They seem 
+\begin_inset Quotes eld
+\end_inset
+
+obviously true
+\begin_inset Quotes erd
+\end_inset
+
+ from numerical work, but are lacking a formal proof.
+ These are given below.
+\end_layout
+
+\begin_layout Itemize
+Theorem: The finite orbits are dense in 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+ Proof: Provided by the bracketing relation, which states that betwen any
+ two endpoints, there's another orbit strictly in the middle.
+ We even have more: the estimate 
+\begin_inset Formula $\nu^{1/\nu}$
+\end_inset
+
+ from the limit diagram, showing how they don't want to accumulate near
+ beta=1.
+\end_layout
+
+\begin_layout Itemize
+Lemma: The bracketed roots are always in strict ascending order, with 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+.
+ A proof is attempted below, using polynomial recursion.
+ It's incomplete.
+\end_layout
+
+\begin_layout Itemize
+Lemma: The valid-index map G is a bijection.
+ Proof: Leadership function is monotonically increasing.
+\end_layout
+
+\begin_layout Itemize
+Theorem: The good map 
+\begin_inset Formula $\mathsf{G}$
+\end_inset
+
+ always maps rationals to rationals.
+ More precisely, those rationals are always inside of 
+\begin_inset Formula $\overline{\theta}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mathsf{G}:\mathbb{Q}_{I}\to\overline{\theta}\cap\mathbb{Q}$
+\end_inset
+
+ is a bijection, except at the dyadics, where we have a countable freedom
+ of finite orbits and one infinite-periodic orbit to choose from.
+ 
+\end_layout
+
+\begin_layout Itemize
+Theorem: 
+\begin_inset Formula $\mathsf{G}:\left[0,1\right]\to\overline{\theta}$
+\end_inset
+
+ is a bijection for all reals 
+\begin_inset Formula $\left[0,1\right]\subset\mathbb{R}$
+\end_inset
+
+.
+ That is, the closure to reals works as expected.
+ Seems that this should follow easily from the roots being dense.
+ 
+\end_layout
+
+\begin_layout Itemize
+Proper diligence requires distinguishing 
+\begin_inset Formula $\overline{\mathfrak{B}}_{\mathbb{Q}}$
+\end_inset
+
+ from 
+\begin_inset Formula $\overline{\mathfrak{B}}_{\mathbb{R}}$
+\end_inset
+
+ and also 
+\begin_inset Formula $\overline{\theta}_{\mathbb{Q}}$
+\end_inset
+
+ from 
+\begin_inset Formula $\overline{\theta}_{\mathbb{R}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The remainder of this section consists of fragments of proofs of the above
+ theorems and lemmas.
+ If these were stitched together properly, whole proofs should emerge.
+ As it is, its more an outline or sketch.
+ 
+\end_layout
+
+\begin_layout Subsection
+The Rational Comb
+\end_layout
+
+\begin_layout Standard
+The dyadic comb, of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Theta-Indicator"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, shows where valid finite orbits can occur.
+ It's limit to infinite rank gives the infinite comb 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:infinite comb"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The only valid rationals, that is, those giving self-describing orbits,
+ are those that belong to 
+\begin_inset Formula $\mathbb{Q}\cap\theta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This can be understood as a limiting procedure.
+ Every rational can be approximated by a dyadic rational; each set is dense
+ in the other.
+ The dyadic rationals are finite walks down the binary tree; the non-dyadic
+ rationals are infinite walks.
+ The infinite comb corresponds to the trimmed tree, described earlier.
+ The trimming always maintains branches of unbounded length.
+ These have a limit; in the limit, some of these will correspond to rationals.
+ These are exactly the rationals that correspond to the ultimately-periodic
+ orbits.
+ The correspondence goes in both directions: given an infinite path down
+ the tree, it is sufficient to truncate it to be of finite length.
+ By construction, the truncated path corresponds to a valid dyadic rational.
+ To recap: going in one direction, there is a sequence of finite orbits
+ that converge, in the limit, onto an eventually-periodic orbit.
+ Conversely, given such an orbit, every truncated version thereof is valid.
+ 
+\end_layout
+
+\begin_layout Subsection
+Closures
+\end_layout
+
+\begin_layout Standard
+The ultimately-periodic orbits live inside the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $\mathfrak{C}\subset\overline{\mathbb{B}}$
+\end_inset
+
+ for the cyclic (ultimately periodic) orbits; these are infinite-length
+ strings describing moves down the infinite binary tree.
+ As already noted, 
+\begin_inset Formula $\mathfrak{C}\cap\mathbb{B}\subset\mathfrak{B}$
+\end_inset
+
+; that is, every infinite-length cyclic orbit, when truncated to finite
+ length, is a valid finite orbit.
+ The closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+ consists of all self-describing bit-strings obtained as solutions to 
+\begin_inset Formula $\beta=S\left(\beta\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $S\left(\beta\right)=\sum_{k=0}^{\infty}b_{k}\beta^{-k}$
+\end_inset
+
+.
+ The cyclic orbits are just a special case: 
+\begin_inset Formula $\mathfrak{C}\subset\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ There are presumably many more, uncountably many chaotic orbits in 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Just a little bit more machinery is needed.
+ Let 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ be Cantor space, the space of infinitely-long binary strings.
+ Let 
+\begin_inset Formula $\chi:2^{\omega}\to\left[0,1\right]$
+\end_inset
+
+ be the canonical mapping of Cantor space to the unit interval: 
+\begin_inset Formula $\chi:\left(b_{0}b_{1}\cdots\right)\mapsto\sum_{k}b_{k}2^{-k-1}$
+\end_inset
+
+.
+ Note that this mapping manages to miss all the dyadic rationals, as these
+ correspond to finite strings, of which there aren't any in the Cantor space.
+ Let 
+\begin_inset Formula $2^{<\omega}=2^{*}$
+\end_inset
+
+ be the set of finite-length binary strings, and allow the symbol 
+\begin_inset Formula $\chi$
+\end_inset
+
+ to perform double-duty, by writing 
+\begin_inset Formula $\chi:2^{*}\to\mathbb{D}$
+\end_inset
+
+ to map finite strings to dyadics.
+ These binary strings can also be interpreted as strings in the symbols
+ 
+\begin_inset Formula $L,R$
+\end_inset
+
+, so that they are moves on the tree.
+ Write 
+\begin_inset Formula $\iota:2^{*}\to\mathbb{B}$
+\end_inset
+
+ that maps the empty string to the root of the tree, and likewise 
+\begin_inset Formula $\iota:2^{\omega}\to\overline{\mathbb{B}}$
+\end_inset
+
+ that maps infinite strings to the leaves of the infinite tree.
+\end_layout
+
+\begin_layout Standard
+The comb was a subset of the unit interval: 
+\begin_inset Formula $\overline{\theta}\subset\left[0,1\right]$
+\end_inset
+
+.
+ The claim is that 
+\begin_inset Formula $\overline{\theta}=\chi\iota\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ The mapping is onto, but not one-to-one: The finite orbits all have correspondi
+ng cyclic orbits, all of which are distinct elements in 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+ but map to the (finite-orbit) polynomial, and thus the same root.
+\end_layout
+
+\begin_layout Standard
+The good-index function provided a bijection 
+\begin_inset Formula $\mathfrak{B}=\eta G\eta^{-1}\mathbb{B}$
+\end_inset
+
+ between the trimmed and untrimmed finite, unbounded trees.
+ The claim is that this can be extended to a bijection 
+\begin_inset Formula $\overline{\mathfrak{B}}=\overline{G}\overline{\mathbb{B}}$
+\end_inset
+
+.
+ This requires a short detour into topology.
+ The standard (weak) topology on Cantor space is the product topology.
+ The base for the topology may be taken as the set of all finite strings,
+ followed by an infinite number of don't-care markers.
+ These are the open sets; the full topology is the finite intersection and
+ infinite union of the open sets in this base.
+\end_layout
+
+\begin_layout Standard
+Every set in the base of the topology is represented by a finite string.
+ The function 
+\begin_inset Formula $\eta^{-1}$
+\end_inset
+
+ maps this to an integer.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined on all integers; it returns an integer, which is mapped by 
+\begin_inset Formula $\eta$
+\end_inset
+
+ to a finite string and thus an open set.
+ To conclude, 
+\begin_inset Formula $\eta G\eta^{-1}$
+\end_inset
+
+ maps open sets to open sets, and it is defined on 
+\emph on
+every
+\emph default
+ open set in the topology.
+ Thus, it is safe to write 
+\begin_inset Formula $\overline{G}=\eta G\eta^{-1}$
+\end_inset
+
+, as it is defined everywhere; all of 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ is in it's domain.
+ The range of 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ can be taken to be the definition of the closure 
+\begin_inset Formula $\overline{\mathfrak{B}}$
+\end_inset
+
+.
+ This has several benefits: it avoids having to make funny arguments that
+ pass through the reals via the comb, and it also makes clear that 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ is a bijection.
+ Note 
+\begin_inset Formula $\overline{G}$
+\end_inset
+
+ is not continuous, in the context that 
+\begin_inset Formula $\overline{\mathfrak{B}}\subset\overline{\mathbb{B}}$
+\end_inset
+
+, since 
+\begin_inset Formula $\overline{G}^{-1}$
+\end_inset
+
+ is defined almost nowhere on 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The points 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $\left[1,2\right]$
+\end_inset
+
+.
+ Within each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+ they are monotonically increasing.
+ The bracketing relation guarantees that, for all 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ in the subtree, these are all contained within the endpoints of the bracket,
+ and that they are always totally ordered, by the natural tree-ordering.
+ The notion of open sets is compatible.
+ Given a basic open set in 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+, the function 
+\begin_inset Formula $\rho=r\circ G\circ\eta^{-1}$
+\end_inset
+
+ maps it to an open set 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+.
+ Claim that the inverse map also maps open sets to open sets, and thus 
+\begin_inset Formula $\varrho$
+\end_inset
+
+ is continuous.
+ This is established as follows.
+ Since the 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ are dense in the interval 
+\begin_inset Formula $\left[1,2\right]$
+\end_inset
+
+, any open set 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+ can be written as a countable union of brackets.
+ The function 
+\begin_inset Formula $\rho^{-1}$
+\end_inset
+
+ is defined on all brackets, and by bracketing, it is defined on all 
+\begin_inset Formula $U\subset\left[1,2\right]$
+\end_inset
+
+ and by bracketing 
+\begin_inset Formula $\rho^{-1}U$
+\end_inset
+
+ is an open set in the product topology on 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The goal is to extend this reasoning to 
+\begin_inset Formula $\varrho:\mathbb{D}\to\left[1,2\right]$
+\end_inset
+
+, given by 
+\begin_inset Formula $\varrho=\rho\circ\eta\circ\delta^{-1}=r\circ G\circ\delta^{-1}$
+\end_inset
+
+ so as to obtain a continuous, monotonic function 
+\begin_inset Formula $\overline{\varrho}:\left[0,1\right]\to\left[1,2\right]$
+\end_inset
+
+ on the unit interval.
+ And we are done, more or less.
+\end_layout
+
+\begin_layout Standard
+The mapping 
+\begin_inset Formula $\chi$
+\end_inset
+
+ maps the basic open sets of 
+\begin_inset Formula $\overline{\mathbb{B}}$
+\end_inset
+
+ to open subintervals of the unit interval; more precisely, to subintervals
+ with dyadics at each end.
+ These are precisely the sets 
+\begin_inset Formula $I\left(m,\nu\right)$
+\end_inset
+
+ defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:topo-base"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ They allowed the infinite comb to be built up from unbounded-length but
+ finite strings in 
+\begin_inset Formula $\mathfrak{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The base of the product topology was mapped to open intervals on the real-number
+ line; and so 
+\begin_inset Formula $\overline{\varrho}$
+\end_inset
+
+ is continuous on the reals.
+ This can also be seen in a different way.
+ The standard measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on the reals says that 
+\begin_inset Formula $\mu I\left(m,\nu\right)=2^{2-\nu}$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ is built from left and right moves.
+ The left moves bump the rank by one, and so always map to sets that are
+ exactly half the size on the real number line.
+ The right moves are given by the leadership function: 
+\begin_inset Formula $\Lambda\Psi_{\nu}\subset\bigcup_{h=0}^{\infty}\Psi_{\nu+1+h}$
+\end_inset
+
+ for each rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ The resulting sets are (at a minimum) half the size, and possibly larger,
+ as the union of additional small intervals.
+ This allows a conventional delta-epsilon proof of continuity to go forward:
+ for each epsilon, one can choose a rank 
+\begin_inset Formula $\nu$
+\end_inset
+
+ where the basis sets 
+\begin_inset Formula $I\left(m,\nu\right)$
+\end_inset
+
+ are smaller than epsilon.
+ The function 
+\begin_inset Formula $G$
+\end_inset
+
+ maps them to other open sets that are strictly smaller.
+ Strictly, because the height of a leader is always a finite number; the
+ union is written as a union over all possible heights, but the union is
+ always finite.
+\end_layout
+
+\begin_layout Subsection
+Proof that roots are correctly bounded
+\end_layout
+
+\begin_layout Standard
+Theorem: The bracket relationship gives roots with 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ being strict inequalities.
+\end_layout
+
+\begin_layout Standard
+Proof: Recursion starts with 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+.
+ The bracket moves are 
+\begin_inset Formula 
+\begin{align*}
+L & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(\ell\Mapsto2f\Mapsfrom f\right)\\
+\mathfrak{R} & :\left(\ell\Mapsto f\Mapsfrom\rho\right)\mapsto\left(f\Mapsto\Lambda\left(f\right)\Mapsfrom\rho\right)
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $p_{1}=\beta^{2}-\beta-1$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{\infty}=p_{1/0}=\beta-1$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{1/\infty}=\beta-2$
+\end_inset
+
+.
+ Must show that bracket bounds are respected in all four cases.
+ The proofs depend on having 
+\begin_inset Formula $p_{n}^{\prime}\left(\beta\right)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Case 1: Show that 
+\begin_inset Formula $r_{2f}<r_{f}$
+\end_inset
+
+.
+ Proof: The L move gives 
+\begin_inset Formula $p_{2f}=\beta\left(p_{f}+1\right)-1$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $1=r_{2f}\left(p_{f}\left(r_{2f}\right)+1\right)$
+\end_inset
+
+ but since 
+\begin_inset Formula $r_{2f}>1$
+\end_inset
+
+, must have 
+\begin_inset Formula $p_{f}\left(r_{2f}\right)<0$
+\end_inset
+
+ and since 
+\begin_inset Formula $p_{n}^{\prime}>0$
+\end_inset
+
+, conclude that 
+\begin_inset Formula $r_{2f}<r_{f}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Case 2: Show that 
+\begin_inset Formula $r_{\ell}<r_{2f}$
+\end_inset
+
+.
+ Proof: ?
+\end_layout
+
+\begin_layout Description
+Case 3: Show that 
+\begin_inset Formula $r_{f}<r_{\Lambda\left(f\right)}$
+\end_inset
+
+.
+ Proof: For height zero, 
+\begin_inset Formula $\Lambda\left(f\right)=2f+1$
+\end_inset
+
+ so 
+\begin_inset Formula $p_{\Lambda\left(f\right)}=\beta p_{f}-1$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $1=r_{\Lambda\left(f\right)}p_{f}\left(r_{\Lambda\left(f\right)}\right)$
+\end_inset
+
+ so 
+\begin_inset Formula $0<p_{f}\left(r_{\Lambda\left(f\right)}\right)<1$
+\end_inset
+
+ and since 
+\begin_inset Formula $p_{n}^{\prime}>0$
+\end_inset
+
+, conclude that 
+\begin_inset Formula $r_{f}<r_{\Lambda\left(f\right)}$
+\end_inset
+
+.
+ What about positive heights?
+\end_layout
+
+\begin_layout Description
+Case 4: Show that 
+\begin_inset Formula $r_{\Lambda\left(f\right)}<r_{\rho}$
+\end_inset
+
+.
+ Proof: ?
+\end_layout
+
+\begin_layout Standard
+This proof is incomplete.
+\end_layout
+
+\begin_layout Section
 Islands of Stability as Arnold Tongues
 \begin_inset CommandInset label
 LatexCommand label
