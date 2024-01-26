@@ -30,3 +30,17 @@ int b_k(double beta, int k)
 	if (beta*tk >= 1.0) return 1;
 	return 0;
 }
+
+// Return the Golfond-Parry normalization constant capital F.
+double fnorm(double beta)
+{
+	double sum = 0.0;
+	double bei = 1.0;
+	for (int i=0; i<2000; i++)
+	{
+		sum += t_k(beta, i) / bei;
+		bei *= beta;
+		if (1.0 < bei * 1e-17) break;
+	}
+	return sum;
+}

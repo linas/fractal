@@ -12,19 +12,6 @@
 #include "unref.c"
 #include "unutil.c"
 
-double fnorm(double beta)
-{
-	double sum = 0.0;
-	double bei = 1.0;
-	for (int i=0; i<2000; i++)
-	{
-		sum += t_k(beta, i) / bei;
-		bei *= beta;
-		if (1.0 < bei * 1e-17) break;
-	}
-	return sum;
-}
-
 // Hausdorff moment (Hamburger moment on unit interval)
 double hmoment(double beta, int n)
 {

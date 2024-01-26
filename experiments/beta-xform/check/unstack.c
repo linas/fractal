@@ -23,8 +23,8 @@ double nu(double x)
 	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
-	// return 1.0;
-	return x-0.5;
+	return 1.0;
+	// return x-0.5;
 	// return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
@@ -142,7 +142,7 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-#define PRINT_CEE
+// #define PRINT_CEE
 #ifdef PRINT_CEE
 
 #define NIT 6
@@ -188,6 +188,16 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NIT; j++)
 		printf(" %g", sum[j]);
 	printf("\n#\n");
+#endif
+
+#define WTF
+#ifdef WTF
+	for (int nn=1; nn<n; nn++)
+	{
+		double cn = c_n(beta, 0.75, nn);
+		printf("its %d %.10f\n", nn, cn);
+	}
+	printf("beta=%f 1/F = %.10f\n", beta, 1.0/fnorm(beta));
 #endif
 
 // #define UNIT_TEST
