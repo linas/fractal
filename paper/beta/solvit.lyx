@@ -12178,6 +12178,18 @@ c_{n}^{\prime}=\nu_{0}+\frac{1}{\left(\lambda\beta\right)^{n}}\sum_{k=1}^{n-1}b_
 
 \end_inset
 
+and
+\begin_inset Formula 
+\[
+\mu_{n}\left(y\right)=c_{n}^{\prime}+\sum_{k=1}^{n}\frac{1}{\left(\lambda\beta\right)^{k}}c_{n-k}^{\prime}\Theta\left(t_{k}-y\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The Parry–Gelfond result is obtained by setting 
 \begin_inset Formula $\lambda=1$
 \end_inset
@@ -12200,6 +12212,60 @@ Comparing term by term, this is possible only if
 .
  A quick numeric check confirms this is the case.
  So everything looks OK, here.
+\end_layout
+
+\begin_layout Subsubsection
+Remarks
+\end_layout
+
+\begin_layout Standard
+This is confusing.
+ The above genrates a sequence 
+\begin_inset Formula $\mu_{n}$
+\end_inset
+
+ for any value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, satisfying 
+\begin_inset Formula $\mathcal{M}\mu_{n}=\lambda\mu_{n+1}$
+\end_inset
+
+ by construction.
+ What happens if 
+\begin_inset Formula $\lambda\ne1$
+\end_inset
+
+? Well, selecting 
+\begin_inset Formula $\nu_{0}=1$
+\end_inset
+
+ it appears that 
+\begin_inset Formula $\lambda\mu_{n+1}\approx\mu_{n}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\lambda^{n}\mu_{n}\to\nu$
+\end_inset
+
+ in the limit.
+ That is, each iterate gets closer and closer to Gelfond–Parry while also
+ blowing up geometrically.
+ There is no free lunch.
+\end_layout
+
+\begin_layout Standard
+XXX Except we did something wrong, the normalization is wrong, should have
+ had 
+\begin_inset Formula $\int\mu_{n+1}=\int\mu_{n}$
+\end_inset
+
+ but we don't ....
 \end_layout
 
 \begin_layout Subsubsection
