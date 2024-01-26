@@ -21,8 +21,8 @@ double nu(double x)
 	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
-	return 1.0;
-	// return x-0.5;
+	// return 1.0;
+	return x-0.5;
 	// return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
@@ -135,7 +135,9 @@ int main(int argc, char* argv[])
 #define PRINT_NU
 #ifdef PRINT_NU
 
-	double lamn = pow(lambda, n);
+	double scale = lambda * beta;
+	scale = lambda;
+	double scan = pow(scale, n);
 	int imax = 814;
 	for (int i=0; i< imax; i++)
 	{
@@ -145,12 +147,12 @@ int main(int argc, char* argv[])
 		printf("%d	%f	%f", i, x, y);
 
 #define NIT 6
-		double plm = lamn;
+		double plm = scan;
 		for (int j=0; j<NIT; j++)
 		{
 			double y = nu_n(beta, blam, x, n+j);
 			y *= plm;
-			plm *= lambda;
+			plm *= scale;
 			printf("	%f", y);
 		}
 		printf("\n");
