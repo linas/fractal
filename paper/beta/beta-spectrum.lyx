@@ -16167,7 +16167,7 @@ only
 , one must have that 
 \begin_inset Formula 
 \[
-\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle v_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
+\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle v_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(E+1\right)=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
 \]
 
 \end_inset
@@ -16184,8 +16184,15 @@ and so the eigenvalue
 \begin_inset Formula $q^{\left\{ b\right\} }\left(1/\lambda\beta\right)=0$
 \end_inset
 
-.
- This is just eqn 
+, equivalently, solves 
+\begin_inset Formula $E=1$
+\end_inset
+
+ with 
+\begin_inset Formula $E$
+\end_inset
+
+ as defined in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:holomorphic-disk"
@@ -16195,7 +16202,7 @@ noprefix "false"
 
 \end_inset
 
- written in a slightly different form.
+.
  This effectively concludes a proof: the solutions to this series are the
  only eigenvalues of the 
 \begin_inset Formula $\beta$
@@ -16206,7 +16213,11 @@ noprefix "false"
 
 \begin_layout Standard
 And yet, there is an issue.
- The holomorphic function 
+ For sequences 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+ that are not finite in length, the holomorphic function 
 \begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
 \end_inset
 
@@ -16214,8 +16225,11 @@ And yet, there is an issue.
 \begin_inset Formula $\lambda=1/\beta$
 \end_inset
 
-, and since these are dense, conventional analytic continuation fails.
- Yet clearly there are eigenfunctions with eigenvalues smaller than 
+.
+ These are dense on the circle, and so conventional analytic continuation
+ cannot be used to find smaller eigenvalues.
+ Does this prove that there are no smaller eigenvalues? No.
+ Clearly there are eigenfunctions with eigenvalues smaller than 
 \begin_inset Formula $\lambda=1/\beta$
 \end_inset
 
@@ -16226,7 +16240,39 @@ And yet, there is an issue.
  was already given.
  Others can be numerically approximated.
  Thus, this description, on it's face, is incomplete.
- 
+ How? Why?
+\end_layout
+
+\begin_layout Standard
+The issue can be localized to the mis-identification of 
+\begin_inset Formula $d_{k}\left(x\right)=\Theta\left(t_{k}-x\right)$
+\end_inset
+
+ as the full and complete similarity transform; it is not.
+ The 
+\begin_inset Formula $d_{k}\left(x\right)$
+\end_inset
+
+ are flat plateaus, and are exactly what the Parry–Gelfond measure is built
+ out of.
+ The example with 
+\begin_inset Formula $\lambda=1/\beta^{2}$
+\end_inset
+
+ is a piece-wise assembly of quadratics, not flat plateus.
+ The correct construction requires replacing the 
+\begin_inset Formula $d_{k}\left(x\right)$
+\end_inset
+
+ with fragments of polynomials.
+ The identification of the 
+\begin_inset Formula $d_{k}\left(x\right)$
+\end_inset
+
+ as the conjugating similarity transform is flawed: it gives only a part
+ of the total space; it cuts off a portion of the spectrum.
+ It does pair Parry–Gelfond to Frobenius-Peron, which is good.
+ Just that parts are missing.
 \end_layout
 
 \begin_layout Subsection
@@ -24871,7 +24917,7 @@ Perhaps most notable is that the good map
 \end_layout
 
 \begin_layout Section
-Formal Work
+Formalities
 \end_layout
 
 \begin_layout Standard
@@ -24886,7 +24932,10 @@ obviously true
 \end_inset
 
  from numerical work, but are lacking a formal proof.
- These are given below.
+ These are sketched below.
+ As sketches, this chapter is still quite informal; the difference is that
+ it uses a more sophisticated vocabulary to say things in a more abstract
+ manner.
 \end_layout
 
 \begin_layout Itemize
@@ -24902,7 +24951,11 @@ Theorem: The finite orbits are dense in
 \end_inset
 
  from the limit diagram, showing how they don't want to accumulate near
- beta=1.
+ 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -24916,7 +24969,11 @@ Lemma: The bracketed roots are always in strict ascending order, with
 \end_layout
 
 \begin_layout Itemize
-Lemma: The valid-index map G is a bijection.
+Lemma: The valid-index map 
+\begin_inset Formula $G$
+\end_inset
+
+ is a bijection.
  Proof: Leadership function is monotonically increasing.
 \end_layout
 

@@ -30,7 +30,7 @@ double downshift(double x, double beta)
 }
 
 // Return the iterated downshift t^n(beta/2)
-// The Renyi-Parry bit d_n is given by (x<tn)
+// The Gelfond-Parry bit d_n is given by (x<tn)
 double T_n(int n, double beta)
 {
 	double tn = 0.5*beta;
@@ -86,7 +86,7 @@ COMPLEX dcnst(double x, double beta, COMPLEX zeta)
 
 // Same as above, but fixing x=0.5 which allows a simpler,
 // faster formula.
-COMPLEX eholo(double beta, COMPLEX zeta)
+COMPLEX eholo(double beta, COMPLEX zeta, int maxsteps)
 {
 	COMPLEX zetan = zeta;
 	double tn = 0.5*beta;
@@ -107,7 +107,7 @@ COMPLEX eholo(double beta, COMPLEX zeta)
 		zetan *= zeta;
 
 		cnt++;
-		if (3000 < cnt) break;
+		if (maxsteps < cnt) break;
 	}
 	dee -= 1.0;
 
@@ -129,20 +129,29 @@ static void almost_zero (float *array,
 
 	// double undep = 0.001*itermax;
 
+	// Once beta^n < 1.0e-16 we are sampling noise.
+	// Don't do that. Cut things off. This will stop the mess
+	// zeros accumulating on the edge of the disk.
+	// Well, this makes sense only for exact finite orbits,
+	// otherwise, the extra random is OK, it shows the impossibility
+	// of analytic continuations.
+	int maxsteps = -log(1.0e-17) / log(beta);
+	maxsteps = 3000;
+
 	double y = row;
 	for (int j=0; j<array_size; j++)
 	{
 		double x = ((double) j + 0.5) / ((double) array_size);
 		x -= 0.5;
-		x -= x_center;
 		x *= x_width;
+		x += x_center;
 
 		double r = x*x + y*y;
 		if (1.0 < r) continue;
 
 		COMPLEX zeta = x + I*y;
 		// COMPLEX sum = dcnst(undep, beta, zeta);
-		COMPLEX sum = eholo(beta, zeta);
+		COMPLEX sum = eholo(beta, zeta, maxsteps);
 		array[j] = 0.5 + 0.5 * atan2(imag(sum), real(sum))/M_PI;
 
 #if HUNT_AND_PRT_ZEROS
