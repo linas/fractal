@@ -12184,7 +12184,28 @@ The monnomials are used to generate a set of orthonormal eigenfunctions,
 \end_layout
 
 \begin_layout Standard
-Preliminary note:
+Preliminary note about the confusion about measures.
+ The Jacobian is used in the integrals below.
+ That is, the integrals are for
+\begin_inset Formula 
+\[
+\int f\left(\rho\left(x\right)\right)dx=\int f\left(y\right)\frac{dy}{\rho^{\prime}\left(\rho^{-1}\left(y\right)\right)}
+\]
+
+\end_inset
+
+after substitution 
+\begin_inset Formula $y=\rho\left(x\right)$
+\end_inset
+
+, so that 
+\begin_inset Formula $\rho^{\prime}\left(\rho^{-1}\left(y\right)\right)=\nu\left(y\right)$
+\end_inset
+
+ is the Parry–Gelfond measure, and, as the Jacobian of the change of variable,
+ it appears in the denominator, not the numerator.
+ Basically, its the push-forwad, not the pullback, so it puts the measure
+ in the denominator.
 \end_layout
 
 \begin_layout Standard
@@ -12288,6 +12309,10 @@ See check/ortho.c for a computation of N_n and ortho.gplot, ortho.png for a
 
 \end_layout
 
+\begin_layout Subsubsection
+Hausdorff moments
+\end_layout
+
 \begin_layout Standard
 Define
 \begin_inset Formula 
@@ -12369,6 +12394,17 @@ The figure shows the (reciprocal of the) Hausdorff moments
 \end_inset
 
  on the horizontal axis.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+See check/ortho.c for a computation of N_n and ortho.gplot, ortho.png for a
+ graph.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
