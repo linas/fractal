@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "unref.c"
 #include "unutil.c"
 
 #define COMPLEX std::complex<double>
@@ -44,7 +43,8 @@ COMPLEX ez_nk(double beta, COMPLEX blam, double x, int n, int k)
 	double arg = 1.0 + x/ben - tk/bek;
 	COMPLEX sum = nu(arg);
 
-	if (0 == k) return sum / ben;
+	COMPLEX bln = pow(blam, n);
+	if (0 == k) return sum / bln;
 
 	double cnst = beta -1.0 - (beta*tk -1.0)/bek;
 	double xen = x / ben;
@@ -58,8 +58,7 @@ COMPLEX ez_nk(double beta, COMPLEX blam, double x, int n, int k)
 		bem *= beta;
 		blem *= blam;
 	}
-	COMPLEX blan = pow(blam, n);
-	return sum / blan;
+	return sum / bln;
 }
 
 COMPLEX hz_nk(double beta, COMPLEX blam, double x, int n, int k)
@@ -71,16 +70,15 @@ COMPLEX hz_nk(double beta, COMPLEX blam, double x, int n, int k)
 
 	double tk = t_k(beta, k);
 	double bek = pow(beta, k);
+	COMPLEX blk = pow(blam, k);
 	if (n == k)
 	{
 		double arg =  1.0 + (x-tk)/bek;
-		COMPLEX blek = pow(blam, k);
-		return nu(arg) / blek;
+		return nu(arg) / blk;
 	}
 
 	double arg = beta - 1.0 + (x +1.0 - beta*tk)/bek;
-	COMPLEX blek = pow(blam, k);
-	return cz_n(beta, blam, arg, n-k) / blek;
+	return cz_n(beta, blam, arg, n-k) / blk;
 }
 
 COMPLEX nuz_n(double beta, COMPLEX blam, double x, int n)

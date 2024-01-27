@@ -10,15 +10,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "unref.c"
 #include "unutil.c"
 
 // ==============================================================
 
-double e_nk(double beta, double blam, double x, int n, int k);
+double el_nk(double beta, double blam, double x, int n, int k);
 
 // Due to use in intermediate values, it can (commonly) happen that 1<x
-double c_n(double beta, double blam, double x, int n)
+double cl_n(double beta, double blam, double x, int n)
 {
 	if (x < 0.0) fprintf(stderr, "Error fail neg %d %g\n", n, x);
 	if (0 == n) return 0.0;
@@ -27,12 +26,12 @@ double c_n(double beta, double blam, double x, int n)
 	for (int k=0; k<n; k++)
 	{
 		if (0 == b_k(beta, k)) continue;
-		sum += e_nk(beta, blam, x, n, k);
+		sum += el_nk(beta, blam, x, n, k);
 	}
 	return sum;
 }
 
-double e_nk(double beta, double blam, double x, int n, int k)
+double el_nk(double beta, double blam, double x, int n, int k)
 {
 	if (n <= k) fprintf(stderr, "Error enk fail index %d <= %d\n", n, k);
 	double tk = t_k(beta, k);
@@ -52,14 +51,14 @@ double e_nk(double beta, double blam, double x, int n, int k)
 	for (int m=1; m < n-k; m++)
 	{
 		double arg = cnst + bem * xen;
-		sum += blm * c_n(beta, blam, arg, m);
+		sum += blm * cl_n(beta, blam, arg, m);
 		bem *= beta;
 		blm *= blam;
 	}
 	return sum / bln;
 }
 
-double h_nk(double beta, double blam, double x, int n, int k)
+double hl_nk(double beta, double blam, double x, int n, int k)
 {
 	if (n < k) fprintf(stderr, "Error hnk fail index %d <= %d\n", n, k);
 
@@ -76,17 +75,17 @@ double h_nk(double beta, double blam, double x, int n, int k)
 	}
 
 	double arg = beta - 1.0 + (x +1.0 - beta*tk)/bek;
-	return c_n(beta, blam, arg, n-k) / blk;
+	return cl_n(beta, blam, arg, n-k) / blk;
 }
 
-double nu_n(double beta, double blam, double x, int n)
+double nul_n(double beta, double blam, double x, int n)
 {
-	double sum = c_n(beta, blam, x, n);
+	double sum = cl_n(beta, blam, x, n);
 	for (int k=0; k<= n; k++)
 	{
 		double tk = t_k(beta, k);
 		if (tk <= x) continue;
-		sum += h_nk(beta, blam, x, n, k);
+		sum += hl_nk(beta, blam, x, n, k);
 	}
 	return sum;
 }

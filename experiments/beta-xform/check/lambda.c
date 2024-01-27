@@ -36,6 +36,7 @@ double nu(double x)
 }
 
 // ==============================================================
+#include "unref.c"
 #include "unlambda.c"
 
 int main(int argc, char* argv[])
@@ -70,7 +71,7 @@ int main(int argc, char* argv[])
 		double plm = scan;
 		for (int j=0; j<NIT; j++)
 		{
-			double y = nu_n(beta, blam, x, n+j);
+			double y = nul_n(beta, blam, x, n+j);
 			y *= plm;
 			plm *= scale;
 			printf("	%f", y);

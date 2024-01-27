@@ -37,6 +37,8 @@ double nu(double x)
 }
 
 #include "uncomplex.C"
+#include "unlambda.c"
+#include "unref.c"
 
 // ==============================================================
 
@@ -69,9 +71,12 @@ int main(int argc, char* argv[])
 		{
 			COMPLEX blam = cexp(2.0*M_PI*I*j*dphi);
 			COMPLEX y = nuz_n(beta, blam, x, n);
+			// double why = nul_n(beta, 1.0, x, n);
+			// printf ("	%f", why);
 			y *= plm;
 			plm *= scale;
-			printf("	%f	%f", real(y), imag(y));
+			// printf("	%f	%f", real(y), imag(y));
+			printf("	%f", std::real(y));
 		}
 		printf("\n");
 		fflush(stdout);

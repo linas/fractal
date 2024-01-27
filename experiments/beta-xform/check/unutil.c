@@ -6,6 +6,9 @@
  * January 2024
  */
 
+#ifndef __UNUTIL_C__
+#define __UNUTIL_C__
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,3 +47,5 @@ double fnorm(double beta)
 	}
 	return sum;
 }
+
+#endif // __UNUTIL_C__
