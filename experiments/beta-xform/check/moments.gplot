@@ -1,0 +1,22 @@
+
+set term png size 1024,768
+# set term png size 640, 480
+set out 'moments.png'
+
+set title "Flip moments"
+set key bottom right
+set xrange [1:2]
+set yrange [0:4]
+# set xlabel "beta"
+
+plot "moments.dat" using 2:3 with lines lw 2 title "M_0", \
+     "moments.dat" using 2:(log($4)) with lines lw 2 title "M_1", \
+     "moments.dat" using 2:($5/2) with lines lw 2 title "M_2", \
+     "moments.dat" using 2:(2*$6/3) with lines lw 2 title "M_3", \
+     "moments.dat" using 2:(3*$7/4) with lines lw 2 title "M_4", \
+     "moments.dat" using 2:(4*$8/5) with lines lw 2 title "M_5", \
+     "moments.dat" using 2:(5*$9/6) with lines lw 2 title "M_6", \
+
+## ----------------------------------------------------------------------
+######
+#

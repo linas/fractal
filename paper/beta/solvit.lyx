@@ -12715,7 +12715,7 @@ The figure shows the (reciprocal of the) Hausdorff moments
 
  on the horizontal axis.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 See check/ortho.c for a computation of N_n and ortho.gplot, ortho.png for a
@@ -12799,6 +12799,51 @@ literal "false"
 The relationship between Hankel matrices, shift operators and Hamburger
  moments (Hausdorff moments) is well-known.
  What seems to be missing is an articulation for the beta shift.
+\end_layout
+
+\begin_layout Subsubsection
+Flip Moments
+\end_layout
+
+\begin_layout Standard
+Of course, there is also 
+\begin_inset Formula 
+\[
+M_{n}=\int_{0}^{1}y^{n}m\left(y\right)dy
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+m\left(y\right)=\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k}}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\delta\left(x\right)$
+\end_inset
+
+ the Dirac delta.
+ Then 
+\begin_inset Formula 
+\[
+M_{1}=\int_{0}^{1}y\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k}}dy=\sum_{k=0}^{\infty}\frac{t_{k}}{\beta^{k}}=F
+\]
+
+\end_inset
+
+the Gelfond–Parry normalization, and more generally,
+\begin_inset Formula 
+\[
+M_{n}=\int_{0}^{1}y^{n}\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k}}dy=\sum_{n=0}^{\infty}\frac{t_{k}^{n}}{\beta^{k}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
