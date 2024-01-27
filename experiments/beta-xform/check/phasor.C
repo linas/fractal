@@ -2,6 +2,7 @@
  * phasor.C
  *
  * Version of unstack.c with complex lambda inserted into it.
+ * Explore behavior on circle.
  *
  * January 2024
  */
