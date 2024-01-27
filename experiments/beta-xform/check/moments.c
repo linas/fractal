@@ -17,7 +17,7 @@ double fmoment(double beta, int n)
 	double sum = 0.0;
 	double bk = 1.0;
 	double tk = 1.0;
-	for (int k=0; k< 3000; k++)
+	for (int k=0; k< 453000; k++)
 	{
 		double tkn = pow (tk, n);
 		sum += tkn / bk;

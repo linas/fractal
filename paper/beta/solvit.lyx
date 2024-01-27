@@ -12809,7 +12809,7 @@ Flip Moments
 Of course, there is also 
 \begin_inset Formula 
 \[
-M_{n}=\int_{0}^{1}y^{n}m\left(y\right)dy
+M_{n}\left(\beta\right)=\int_{0}^{1}y^{n}m_{\beta}\left(y\right)dy
 \]
 
 \end_inset
@@ -12817,7 +12817,7 @@ M_{n}=\int_{0}^{1}y^{n}m\left(y\right)dy
 where 
 \begin_inset Formula 
 \[
-m\left(y\right)=\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k}}
+m_{\beta}\left(y\right)=\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k}}
 \]
 
 \end_inset
@@ -12838,8 +12838,23 @@ M_{1}=\int_{0}^{1}y\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k
 the Gelfond–Parry normalization, and more generally,
 \begin_inset Formula 
 \[
-M_{n}=\int_{0}^{1}y^{n}\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k}}dy=\sum_{n=0}^{\infty}\frac{t_{k}^{n}}{\beta^{k}}
+M_{n}\left(\beta\right)=\int_{0}^{1}y^{n}\sum_{k=0}^{\infty}\frac{\delta\left(t_{k}-y\right)}{\beta^{k}}dy=\sum_{n=0}^{\infty}\frac{t_{k}^{n}}{\beta^{k}}
 \]
+
+\end_inset
+
+Numerics shows that 
+\begin_inset Formula $M_{n}\left(1\right)=n/\left(n-1\right)$
+\end_inset
+
+.
+ Not obvious why this would be.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Computed in check/moments.c and moments.gplot
+\end_layout
 
 \end_inset
 
