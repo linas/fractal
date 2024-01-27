@@ -142,7 +142,7 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	int n = atoi(argv[2]);
 
-// #define PRINT_CEE
+#define PRINT_CEE
 #ifdef PRINT_CEE
 
 #define NIT 6
@@ -190,7 +190,7 @@ int main(int argc, char* argv[])
 	printf("\n#\n");
 #endif
 
-#define WTF
+// #define WTF
 #ifdef WTF
 	for (int nn=1; nn<n; nn++)
 	{

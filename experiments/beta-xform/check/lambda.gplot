@@ -6,8 +6,11 @@ set out 'lambda.png'
 set title "lambda"
 
 c = -1/0.08684
-plot "lambda.dat" using 2:3 with lines lw 2 title "invar", \
-     "lambda.dat" using 2:(c*$4) with lines lw 2 title "0", \
+
+# plot "lambda.dat" using 2:3 with lines lw 2 title "invar", \
+
+c = 1.0
+plot "lambda.dat" using 2:(c*$4) with lines lw 2 title "0", \
      "lambda.dat" using 2:(c*$5) with lines lw 2 title "1", \
      "lambda.dat" using 2:(c*$6) with lines lw 2 title "2", \
      "lambda.dat" using 2:(c*$7) with lines lw 2 title "3", \

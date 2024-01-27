@@ -138,6 +138,15 @@ COMPLEX zap_n(double beta, COMPLEX blam, double x, int n)
 	return zap;
 }
 
+COMPLEX zip_n(double beta, COMPLEX blam, double x, int n)
+{
+	COMPLEX zip = nuz_n(beta, blam, x, n+1);
+	zip -= nuz_n(beta, blam, x, n);
+	zip *= pow(blam, n+1);
+
+	return zip;
+}
+
 // ==============================================================
 
 static void coherent_zero (float *array,
@@ -162,9 +171,21 @@ static void coherent_zero (float *array,
 		COMPLEX z = x + I*y;
 		COMPLEX blam = beta*z;
 
-		double yyy = 0.14;
 		int n = itermax;
-		COMPLEX sum = zap_n(beta, blam, yyy, n);
+#if 1
+		double yyy = 0.33;
+		// COMPLEX sum = zap_n(beta, blam, yyy, n);
+		COMPLEX sum = zip_n(beta, blam, yyy, n);
+#endif
+
+#ifdef AVG
+		COMPLEX sum = 0.0;
+		for (int i=0; i<6; i++)
+		{
+			double yyy = 0.181*i + 0.043678;
+			sum += zip_n(beta, blam, yyy, n);
+		}
+#endif
 
 #if 0
 		double mag = abs(sum);

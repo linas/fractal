@@ -22,8 +22,8 @@ double nu(double x)
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
 	// return 1.0;
-	return x-0.5;
-	// return x - 0.5 + 0.08684;  // appropriate for beta=1.6
+	// return x-0.5;
+	return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -135,10 +135,15 @@ int main(int argc, char* argv[])
 #define PRINT_NU
 #ifdef PRINT_NU
 
+#define NIT 6
+	double sum[NIT];
+	for (int j=0; j<NIT; j++) sum[j] = 0.0;
+
 	double scale = lambda * beta;
-	scale = lambda;
+	// scale = lambda;
 	double scan = pow(scale, n);
 	int imax = 814;
+	double delta = 1.0 / ((double) imax);
 	for (int i=0; i< imax; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
@@ -146,7 +151,6 @@ int main(int argc, char* argv[])
 		double y = gp_invar(beta, x);
 		printf("%d	%f	%f", i, x, y);
 
-#define NIT 6
 		double plm = scan;
 		for (int j=0; j<NIT; j++)
 		{
@@ -154,9 +158,16 @@ int main(int argc, char* argv[])
 			y *= plm;
 			plm *= scale;
 			printf("	%f", y);
+
+			sum[j] += fabs(y) * delta;
 		}
 		printf("\n");
 		fflush(stdout);
 	}
+
+	printf("#\n# ");
+	for (int j=0; j<NIT; j++)
+		printf(" %g", sum[j]);
+	printf("\n#\n");
 #endif
 }
