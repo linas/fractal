@@ -12715,7 +12715,7 @@ The figure shows the (reciprocal of the) Hausdorff moments
 
  on the horizontal axis.
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 See check/ortho.c for a computation of N_n and ortho.gplot, ortho.png for a
@@ -46009,7 +46009,11 @@ Case 1: Show that
 \end_inset
 
 .
- Proof: The L move gives 
+ Proof: The 
+\begin_inset Formula $L$
+\end_inset
+
+ move gives 
 \begin_inset Formula $p_{2f}=\beta\left(p_{f}+1\right)-1$
 \end_inset
 
@@ -46043,7 +46047,69 @@ Case 2: Show that
 \end_inset
 
 .
- Proof: ?
+ Proof: For any 
+\begin_inset Formula $\ell\Mapsto f\Mapsfrom\rho$
+\end_inset
+
+ it is always the case that 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is in the tree rooted by 
+\begin_inset Formula $\ell$
+\end_inset
+
+.
+ This can be seen by examining the two possibilities arising from 
+\begin_inset Formula $\infty\Mapsto1\Mapsfrom0$
+\end_inset
+
+ and then keeping in mind all trees are isomorphic.
+ The path to 
+\begin_inset Formula $\rho$
+\end_inset
+
+ from it's root 
+\begin_inset Formula $\ell$
+\end_inset
+
+ is 
+\begin_inset Formula $\rho=L^{n}R\ell$
+\end_inset
+
+ for some 
+\begin_inset Formula $n\ge0$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $p_{f}=\beta^{n+1}p_{\ell}-1$
+\end_inset
+
+ and so 
+\begin_inset Formula $p_{2f}=\beta^{n+2}p_{l}-1$
+\end_inset
+
+.
+ But 
+\begin_inset Formula $p_{\ell}\left(r_{\ell}\right)=0$
+\end_inset
+
+ and so 
+\begin_inset Formula $p_{2f}\left(r_{\ell}\right)=-1<0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $p_{n}^{\prime}\left(\beta\right)>0$
+\end_inset
+
+, conclude that 
+\begin_inset Formula $r_{\ell}<r_{2f}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Description
@@ -46052,7 +46118,8 @@ Case 3: Show that
 \end_inset
 
 .
- Proof: For height zero, 
+ Proof: Proceeds as a modified proof of case 1.
+ For height zero, 
 \begin_inset Formula $\Lambda\left(f\right)=2f+1$
 \end_inset
 
@@ -46078,7 +46145,32 @@ Case 3: Show that
 \end_inset
 
 .
- What about positive heights?
+ What about positive heights? For height 
+\begin_inset Formula $h$
+\end_inset
+
+, the moves are 
+\begin_inset Formula $L^{h}\mathfrak{R}$
+\end_inset
+
+ and so 
+\begin_inset Formula $p_{\Lambda\left(f\right)}=\beta^{h+1}p_{f}-1$
+\end_inset
+
+.
+ Again, 
+\begin_inset Formula $1=\left(r_{\Lambda\left(f\right)}\right)^{h+1}p_{f}\left(r_{\Lambda\left(f\right)}\right)$
+\end_inset
+
+ and again 
+\begin_inset Formula $0<p_{f}\left(r_{\Lambda\left(f\right)}\right)$
+\end_inset
+
+ and so again 
+\begin_inset Formula $r_{f}<r_{\Lambda\left(f\right)}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Description
@@ -46087,11 +46179,86 @@ Case 4: Show that
 \end_inset
 
 .
- Proof: ?
+ Proof: This proceeds as a modified version of case 2, with the role of
+ left and right reversed.
+ In this case, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ roots a tree, and the path to 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $f=R^{n}L\rho$
+\end_inset
+
+ for some 
+\begin_inset Formula $n\ge0$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $n=0$
+\end_inset
+
+, one has 
+\begin_inset Formula $p_{f}=\beta\left(p_{\rho}+1\right)-1$
+\end_inset
+
+ and so 
+\begin_inset Formula $p_{\Lambda\left(f\right)}=\beta^{h+1}\left(p_{f}\right)-1$
+\end_inset
+
+.
+ Expanding, 
+\begin_inset Formula $p_{\Lambda\left(f\right)}=\beta^{h+2}p_{\rho}+\beta^{h+2}\left(\beta-1\right)-1$
+\end_inset
+
+, and since 
+\begin_inset Formula $p_{\rho}\left(r_{\rho}\right)=0$
+\end_inset
+
+, one concludes that 
+\begin_inset Formula $p_{\Lambda\left(f\right)}\left(r_{\rho}\right)>0$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $r_{\Lambda\left(f\right)}<r_{\rho}$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $n>0$
+\end_inset
+
+, the proof proceeds the same way, with 
+\begin_inset Formula $p_{\Lambda\left(f\right)}=ap_{\rho}+b$
+\end_inset
+
+ for some positive numbers 
+\begin_inset Formula $a,b$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $p_{\Lambda\left(f\right)}\left(r_{\rho}\right)=b>0$
+\end_inset
+
+ and again 
+\begin_inset Formula $r_{\Lambda\left(f\right)}<r_{\rho}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-This proof is incomplete.
+To conclude: the roots are ordered as 
+\begin_inset Formula $r_{\ell}<r_{f}<r_{\rho}$
+\end_inset
+
+ with strict inequalities holding.
+ QED.
 \end_layout
 
 \begin_layout Subsection
