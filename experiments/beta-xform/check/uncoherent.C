@@ -34,8 +34,8 @@ double nu(double x)
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
 	// return 1.0;
-	return x-0.5;
-	// return x - 0.5 + 0.08684;  // appropriate for beta=1.6
+	// return x-0.5;
+	return x - 0.5 + 0.08684;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -131,9 +131,9 @@ COMPLEX nuz_n(double beta, COMPLEX blam, double x, int n)
 
 COMPLEX zap_n(double beta, COMPLEX blam, double x, int n)
 {
-	COMPLEX zap = cz_n(beta, blam, x, n);
-	zap -= nu(x);
-	zap *= pow(blam, n);
+	COMPLEX zap = cz_n(beta, blam, x, n+1);
+	zap -= cz_n(beta, blam, x, n);
+	zap *= pow(blam, n+1);
 
 	return zap;
 }
@@ -162,7 +162,7 @@ static void coherent_zero (float *array,
 		COMPLEX z = x + I*y;
 		COMPLEX blam = beta*z;
 
-		double yyy = 0.86;
+		double yyy = 0.14;
 		int n = itermax;
 		COMPLEX sum = zap_n(beta, blam, yyy, n);
 

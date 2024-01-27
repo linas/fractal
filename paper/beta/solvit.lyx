@@ -12149,7 +12149,11 @@ h_{nk}^{\prime}\left(y\right) & =\frac{1}{\left(\lambda\beta\right)^{k}}c_{n-k}^
 
 \end_inset
 
+and iteration starts with 
+\begin_inset Formula $c_{0}^{\prime}=\nu_{0}$
+\end_inset
 
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -12389,24 +12393,52 @@ Then
 \begin_inset Formula $\mathcal{M}\mu=\lambda\mu$
 \end_inset
 
- if what? wait, no ...
- wtf.the below is wrong...
+ if 
+\begin_inset Formula $\left|\mu_{n+1}-\mu_{n}\right|\to0$
+\end_inset
+
+.
+ Write this out.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-0=\sum_{k=1}^{\infty}b_{k}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{\infty}\left(\lambda\beta\right)^{m}c_{m}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+\mu_{n+1}-\mu_{n}=c_{n+1}^{\prime}-c_{n}^{\prime}+h_{n+1,n+1}^{\prime}\Theta\left(t_{n+1}-y\right)+\sum_{k=1}^{n}\left[h_{n+1,k}^{\prime}-h_{nk}^{\prime}\right]\Theta\left(t_{k}-y\right)
 \]
 
 \end_inset
 
-Need to roll up sleeves, and rewrite this to get the 
-\begin_inset Quotes eld
+We need several parts, here.
+\begin_inset Formula 
+\begin{align*}
+c_{n+1}^{\prime}-c_{n}^{\prime} & =\frac{1}{\left(\lambda\beta\right)^{n+1}}\sum_{k=1}^{n}b_{k}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n+1}}\right)+\sum_{m=1}^{n-k}\left(\lambda\beta\right)^{m}c_{m}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n+1}}\right)\right]\\
+ & \qquad-\frac{1}{\left(\lambda\beta\right)^{n}}\sum_{k=1}^{n-1}b_{k}\left[\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)+\sum_{m=1}^{n-k-1}\left(\lambda\beta\right)^{m}c_{m}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]\\
+ & =\frac{1}{\left(\lambda\beta\right)^{n+1}}b_{n}\nu_{0}\left(1+\frac{y-\beta t_{n}}{\beta^{n+1}}\right)\\
+ & \qquad+\frac{1}{\left(\lambda\beta\right)^{n}}\sum_{k=1}^{n-1}b_{k}\left[\frac{1}{\lambda\beta}\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n+1}}\right)-\nu_{0}\left(1-\frac{t_{k}}{\beta^{k}}+\frac{y}{\beta^{n}}\right)\right]\\
+ & \qquad+\frac{1}{\left(\lambda\beta\right)^{n}}\sum_{k=1}^{n-1}b_{k}\left[\frac{1}{\lambda\beta}\sum_{m=1}^{n-k}\left(\lambda\beta\right)^{m}c_{m}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n+1}}\right)\right]\\
+ & \qquad-\frac{1}{\left(\lambda\beta\right)^{n}}\sum_{k=1}^{n-1}b_{k}\left[\sum_{m=1}^{n-k-1}\left(\lambda\beta\right)^{m}c_{m}^{\prime}\left(t_{1}-\frac{\beta t_{k}-1}{\beta^{k}}+\frac{\beta^{m}y}{\beta^{n}}\right)\right]
+\end{align*}
+
 \end_inset
 
-coherent
-\begin_inset Quotes erd
+
+\end_layout
+
+\begin_layout Standard
+while
+\begin_inset Formula 
+\begin{align*}
+h_{n+1,n+1}^{\prime}\left(y\right) & =\frac{1}{\left(\lambda\beta\right)^{n+1}}\nu_{0}\left(t_{1}+\frac{1}{\beta^{n+1}}+\frac{y-\beta t_{n+1}}{\beta^{n+1}}\right)
+\end{align*}
+
 \end_inset
 
- form, below.
+Blech.
+\end_layout
+
+\begin_layout Standard
+so
 \end_layout
 
 \begin_layout Subsection
