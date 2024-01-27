@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/fileio.o $(GENDIR)/util.o
 PERIODIC = ../periodic
 
 all: recheck force orbit visitation borel reforce tsum unrolling \
-	unwrap unstack alpha gamma ortho uncoherent lambda
+	unwrap unstack alpha gamma ortho uncoherent lambda phasor
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR)
@@ -24,7 +24,7 @@ unwrap.o: unwrap.c unref.c unutil.c
 unstack.o: unstack.c unref.c unutil.c
 gamma.o: gamma.c unutil.c
 ortho.o: ortho.c unref.c unutil.c
-uncoherent.o: uncoherent.C unutil.c
+uncoherent.o: uncoherent.C uncomplex.C unutil.c
 
 recheck: recheck.o
 force: force.o
@@ -41,3 +41,4 @@ gamma: gamma.o
 ortho: ortho.o
 uncoherent: uncoherent.o $(BRAT)
 lambda: lambda.o
+phasor: phasor.o

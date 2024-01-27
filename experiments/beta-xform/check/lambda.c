@@ -117,7 +117,6 @@ double nu_n(double beta, double blam, double x, int n)
 }
 
 // ==============================================================
-// #include "un.c"  // for unit testing only. Copy of unwrap.c w/o main()
 
 int main(int argc, char* argv[])
 {
@@ -131,9 +130,6 @@ int main(int argc, char* argv[])
 	int n = atoi(argv[3]);
 
 	double blam = beta * lambda;
-
-#define PRINT_NU
-#ifdef PRINT_NU
 
 #define NIT 6
 	double sum[NIT];
@@ -169,5 +165,6 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NIT; j++)
 		printf(" %g", sum[j]);
 	printf("\n#\n");
-#endif
 }
+
+// ==============================================================
