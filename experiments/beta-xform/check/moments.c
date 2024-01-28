@@ -27,28 +27,28 @@ double fmoment(double beta, int n)
 	return sum;
 }
 
-double coeff[20][20];
+double norm[20];
+double orth[20];
 
 double orthonormo(double beta, int n, double x)
 {
-	double sum = 0.0;
-	for (int j=0; j<=n; j++)
-	{
-		double tkj = pow(x, j);
-		sum += coeff[n][j] * tkj;
-	}
+	if (0 == n) return norm[n];
+
+	double sum = norm[n] * pow(x, n);
+	sum += orth[n] * orthonormo(beta, n-1, x);
 	return sum;
 }
 
-double normo(double beta, int n)
+double prod(double beta, int n, int m)
 {
 	double sum = 0.0;
 	double bk = 1.0;
 	double tk = 1.0;
 	for (int k=0; k< 453000; k++)
 	{
-		double ort = orthonormo(beta, n, tk);
-		sum += ort * ort / bk;
+		double pa = orthonormo(beta, n, tk);
+		double pb = orthonormo(beta, m, tk);
+		sum += pa * pb / bk;
 		bk *= beta;
 		tk *= beta;
 		if (1.0 <= tk) tk -= 1.0;
@@ -88,13 +88,25 @@ beta=1.6;
 
 double f0 = fmoment(beta, 0);
 printf("f0=%f\n", f0);
-coeff[0][0] = 1.0 / sqrt(f0);
-double n0 = normo(beta, 0);
+norm[0] = 1.0 / sqrt(f0);
+double n0 = prod(beta, 0, 0);
 printf("n0=%f\n", n0);
 
 double f1 = ortho(beta, 1);
 printf("f1=%f\n", f1);
 
+orth[1] = -f1;
+norm[1] = 1.0;
+double p01 = prod(beta, 0, 1);
+printf("p0 x p1=%f\n", p01);
+
+double n1 = prod(beta, 1, 1);
+printf("n1=%f\n", n1);
+orth[1] /= sqrt(n1);
+norm[1] /= sqrt(n1);
+
+double nn1 = prod(beta, 1, 1);
+printf("n1=%f\n", nn1);
 exit(1);
 		printf("%d	%f", i, beta);
 		for (int n=0; n<8; n++)
