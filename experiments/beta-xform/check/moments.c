@@ -27,15 +27,14 @@ double fmoment(double beta, int n)
 	return sum;
 }
 
-double norm[20];
-double proj[20];
+double coeff[20][20];
 
-double orthonormo(double beta, int n, double x)
+double orthonormo(int n, double x)
 {
-	if (0 == n) return norm[n];
-
-	double sum = norm[n] * pow(x, n);
-	sum += proj[n] * orthonormo(beta, n-1, x);
+	double sum = 0.0;
+	for (int j=0; j<n; j++)
+		sum += coeff[n][j] * orthonormo (j, x);
+	sum += coeff[n][n] * pow (x, n);
 	return sum;
 }
 
@@ -46,8 +45,8 @@ double prod(double beta, int n, int m)
 	double tk = 1.0;
 	for (int k=0; k< 453000; k++)
 	{
-		double pa = orthonormo(beta, n, tk);
-		double pb = orthonormo(beta, m, tk);
+		double pa = orthonormo(n, tk);
+		double pb = orthonormo(m, tk);
 		sum += pa * pb / bk;
 		bk *= beta;
 		tk *= beta;
@@ -57,7 +56,7 @@ double prod(double beta, int n, int m)
 	return sum;
 }
 
-double ortho(double beta, int n)
+double ortho(double beta, int n, int j)
 {
 	double sum = 0.0;
 	double bk = 1.0;
@@ -65,7 +64,7 @@ double ortho(double beta, int n)
 	for (int k=0; k< 453000; k++)
 	{
 		double tkn = pow(tk, n);
-		double ort = orthonormo(beta, n-1, tk);
+		double ort = orthonormo(j, tk);
 		sum += ort * tkn / bk;
 		bk *= beta;
 		tk *= beta;
@@ -77,18 +76,18 @@ double ortho(double beta, int n)
 
 void setup(double beta, int max)
 {
-	norm[0] = 1.0;
-	double msq = prod(beta, 0, 0);
-	norm[0] = 1.0 / sqrt(msq);
+	double msq = fmoment(beta, 0);
+	coeff[0][0] = 1.0 / sqrt(msq);
 
 	for (int n=1; n< max; n++)
 	{
-		proj[n] = -ortho(beta, n);
-		norm[n] = 1.0;
+		for (int j=0; j<n; j++)
+			coeff[n][j] = -ortho(beta, n, j);
+		coeff[n][n] = 1.0;
 		double msq = prod(beta, n, n);
-		double rms = sqrt(msq);
-		norm[n] /= rms;
-		proj[n] /= rms;
+		double rms = 1.0 / sqrt(msq);
+		for (int j=0; j<=n; j++)
+			coeff[n][j] *= rms;
 	}
 }
 
@@ -101,11 +100,11 @@ imax=1;
 		double x = (((double) i) + 0.5) / ((double) imax);
 		double beta = x + 1.0;
 beta=1.6;
-		setup(beta, 10);
-for (int n=0; n<8; n++) {
+		int nset = 4;
+		setup(beta, nset);
+for (int n=0; n<nset; n++) {
 for (int m=0; m<=n; m++) {
-double n1 = prod(beta, m, n);
-printf("%d %d pr=%f\n", m,n,n1);
+printf("%d %d co=%f  rat=%f\n", n, m, coeff[n][m], coeff[n][m]/coeff[n][n]);
 }}
 
 exit(1);
@@ -113,7 +112,7 @@ exit(1);
 		for (int n=0; n<8; n++)
 		{
 			// double fmom = fmoment(beta, n);
-			double fmom = ortho(beta, n);
+			double fmom = orthonormo(beta, n);
 			printf("	%.10f", fmom);
 		}
 		printf("\n");
