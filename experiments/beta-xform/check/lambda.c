@@ -25,7 +25,7 @@ double nu(double x)
 	// return x - 0.5*0.826156;
 	// return x - 0.5*0.826154;
 	// return x - 0.5*0.8261542;
-	return x - 0.5*0.8261541;
+	return x - 0.5*0.82615419;
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
