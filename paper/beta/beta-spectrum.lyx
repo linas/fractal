@@ -25803,8 +25803,17 @@ name "subsec:Islands-of-Stability"
 \end_layout
 
 \begin_layout Standard
-The trouble-spots, the eventual fixed-points of the map, can be placed in
- one-to-one accordance with the 
+The classical Fiegenbaum bifurcation diagram, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Logistic-Map-Bifurcation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, manifests two distinct behaviors: the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -25812,56 +25821,152 @@ islands of stability
 \begin_inset Quotes erd
 \end_inset
 
- seen in the iterated logistic map.
- They are, in essence, locations where periodic orbits 
+, in which there are periodic orbits, and the 
 \begin_inset Quotes eld
 \end_inset
 
-could be pasted
+chaotic regions
 \begin_inset Quotes erd
 \end_inset
 
-, or where they 
-\begin_inset Quotes eld
+.
+ These regions alternate and interleave as a parameter 
+\begin_inset Formula $\lambda$
 \end_inset
 
-naturally would appear
-\begin_inset Quotes erd
+ appearing in the iterated equation 
+\begin_inset Formula $\lambda x\left(1-x\right)$
 \end_inset
 
-, if the map supported periodic attractors.
- That is, the beta shift only supports a single attractor, of period-one
- at 
-\begin_inset Formula $x=0$
+ is swept through a range of values.
+ By contrast, the equivalent diagram for the beta-map, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-; there is no 
-\begin_inset Quotes eld
-\end_inset
-
-room
-\begin_inset Quotes erd
-\end_inset
-
- for anything more.
- This is analogous, in a way, to the phase locked loop, at zero coupling
- constant.
- At finite coupling strength, these 
-\begin_inset Quotes eld
-\end_inset
-
-trouble spots
-\begin_inset Quotes erd
-\end_inset
-
- expand out as Arnold tongues, to have a finite size, visible on the Feigenbaum
- diagram for the logistic map as regions where period-doubling is occurring.
+, does not seem to have regions of stability.
+ This is only an illusion: they are there, they are only infinitely thin.
+ This chapter focuses on how to crowbar them open, to finite size.
 \end_layout
 
 \begin_layout Standard
-The idea here can be illustrated explicitly.
- Basically, take the natural saw-tooth shape of the map, widen the middle,
- and insert a slanting downward line, to create a zig-zag.
+In the previous chapters, it was demonstrated that there is a countable
+ set of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values, dense in the range 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+, for which orbits are finite and terminate after a fixed number of iteractions.
+ Alternately, they can be made periodic, simply by changing a less-than
+ sign to a less-than-or-equals sign.
+ The 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values for which orbits are periodic can be placed in correspondence with
+ the periodic orbits of the logistic map; the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values for which orbits are chaotic correspond to the chaotic orbits of
+ the logistic map.
+ The open problem is to demonstrate this correspondence explicitly.
+ This problem is not tackled here; it is just brushed up against.
+\end_layout
+
+\begin_layout Standard
+The circle map 
+\begin_inset Formula $x_{n+1}=x_{n}+\theta+K\sin2\pi x_{n}$
+\end_inset
+
+ provides one possible mechanism for taking a set of measure zero, and crowbarin
+g it open to a set of finite size.
+ For 
+\begin_inset Formula $K=0$
+\end_inset
+
+, this is just the rotation map 
+\begin_inset Formula $x_{n+1}=x_{n}+\theta$
+\end_inset
+
+ which has only periodic orbits, when 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is rational, and chaotic orbits, when 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is not rational.
+ As one sweeps 
+\begin_inset Formula $\theta$
+\end_inset
+
+ through a range, the subset of periodic orbits is countable, and is a set
+ of measure zero: thus, the rotation map can be said to be chaotic for almost
+ all 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $K$
+\end_inset
+
+ to a non-zero value expands the regions of periodic orbits to finite size,
+ termed Arnold tongues.
+ These are the mode-locking regions that are generically visible in driven
+ oscillator systems.
+ The perturbation by the kick 
+\begin_inset Formula $K$
+\end_inset
+
+ displaces what would have been chaotic orbits into mode-locked regions.
+ For small 
+\begin_inset Formula $K$
+\end_inset
+
+, this perturbation is soft, in that one might say 
+\begin_inset Quotes eld
+\end_inset
+
+it shouldn't change things much.
+\begin_inset Quotes erd
+\end_inset
+
+ But even a whisper of a miniscule 
+\begin_inset Formula $K$
+\end_inset
+
+ is enough to convert the set of periodic orbits from a measure of zero
+ to a finite measure.
+\end_layout
+
+\begin_layout Standard
+Another possibility is to just crowbar open the periodic regions with a
+ 
+\begin_inset Quotes eld
+\end_inset
+
+hard
+\begin_inset Quotes erd
+\end_inset
+
+ perturbation, localized at a point.
+ Take the natural saw-tooth shape of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-map, widen the middle, and insert a slanting downward line, to create a
+ zig-zag.
  That is, connect the two endpoints in the middle of the beta shift, 
 \begin_inset Quotes eld
 \end_inset

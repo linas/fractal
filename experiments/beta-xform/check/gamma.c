@@ -1,7 +1,7 @@
 /*
  * gamma.c
  *
- * Copy of alpha.c, for the beta-dpendent parts.
+ * Copy of alpha.c, for the y-dependent parts.
  *
  * January 2024
  */
