@@ -22,10 +22,10 @@ double nu(double x)
 	// return x-0.5;
 	// return x - 0.5*0.8262;     // appropriate for beta=1.6
 	// return x - 0.5*0.82616;
-	// return x - 0.5*0.826156;
 	// return x - 0.5*0.826154;
 	// return x - 0.5*0.8261542;
-	return x - 0.5*0.82615419;
+	// return x - 0.5*0.82615419;
+	return x - 0.5*0.826154195;
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.

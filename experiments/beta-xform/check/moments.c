@@ -100,12 +100,14 @@ imax=1;
 		double x = (((double) i) + 0.5) / ((double) imax);
 		double beta = x + 1.0;
 beta=1.6;
-		int nset = 4;
+		int nset = 8;
 		setup(beta, nset);
 for (int n=0; n<nset; n++) {
 for (int m=0; m<=n; m++) {
-printf("%d %d co=%f  rat=%f\n", n, m, coeff[n][m], coeff[n][m]/coeff[n][n]);
-}}
+printf("%d %d co= %f  rat= %f\n", n, m, coeff[n][m], coeff[n][m]/coeff[n][n]);
+}
+printf("---\n");
+}
 
 exit(1);
 		printf("%d	%f", i, beta);
