@@ -45124,8 +45124,6 @@ Lemma: The bracketed roots are always in strict ascending order, with
 \end_inset
 
 .
- A proof is attempted below, using polynomial recursion.
- It's incomplete.
 \end_layout
 
 \begin_layout Itemize
@@ -45163,7 +45161,8 @@ Theorem:
 
 .
  That is, the closure to reals works as expected.
- Seems that this should follow easily from the roots being dense.
+ This follows because the roots form a countable dense subset, the reals
+ are seperable, and the function is continuous.
  
 \end_layout
 
@@ -48843,6 +48842,76 @@ status collapsed
 Computed in check/moments.c and moments.gplot
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Orthogonal polys
+\end_layout
+
+\begin_layout Standard
+What are the orthogonal polynomials for this measure? These are the polynomials
+ 
+\begin_inset Formula 
+\[
+p_{n}\left(x\right)=\sum_{j=0}^{n}a_{nj}x^{j}
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+\int_{0}^{1}p_{i}\left(x\right)p_{j}\left(x\right)m_{\beta}\left(x\right)dx=\delta_{ij}
+\]
+
+\end_inset
+
+The first few can be done by hand: Clearly, 
+\begin_inset Formula $p_{0}\left(x\right)=1/\sqrt{M_{0}}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{1}\left(x\right)=\left(x-M_{1}\right)/\sqrt{N_{1}}$
+\end_inset
+
+with normalization 
+\begin_inset Formula $N_{1}=M_{2}^{2}-2M_{1}^{2}+M_{1}^{2}M_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Writing 
+\begin_inset Formula $a_{nj}=\left[A\right]_{nj}=A_{nj}$
+\end_inset
+
+ for a matrix 
+\begin_inset Formula $A$
+\end_inset
+
+, the matrix is upper-triangular, solvable.
+ The polynomials are 
+\begin_inset Formula $p_{n}=A_{nj}x^{j}$
+\end_inset
+
+ and from orthogonality, 
+\begin_inset Formula $\int p_{i}p_{j}=\delta_{ij}=A_{ik}A_{jm}M_{k+m}$
+\end_inset
+
+ it follows that 
+\begin_inset Formula $\left[A^{-1}\right]_{nj}=A_{jm}M_{n+m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The moments can be organized into a Hankel matrix 
+\begin_inset Formula $\left[M\right]_{nm}=M_{m+n}$
 \end_inset
 
 
