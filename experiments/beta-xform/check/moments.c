@@ -91,33 +91,57 @@ void setup(double beta, int max)
 	}
 }
 
+// ==============================================================
+
 int main(int argc, char* argv[])
 {
-	int imax = 1200;
-imax=1;
-	for (int i=0; i< imax; i++)
+	if (argc != 2)
 	{
-		double x = (((double) i) + 0.5) / ((double) imax);
-		double beta = x + 1.0;
-beta=1.6;
-		int nset = 8;
-		setup(beta, nset);
+		fprintf(stderr, "Usage: %s beta\n", argv[0]);
+		exit (1);
+	}
+	double beta = atof(argv[1]);
+#if 0
 for (int n=0; n<nset; n++) {
 for (int m=0; m<=n; m++) {
 printf("%d %d co= %f  rat= %f\n", n, m, coeff[n][m], coeff[n][m]/coeff[n][n]);
 }
 printf("---\n");
 }
+#endif
 
-exit(1);
+	int nset = 8;
+	setup(beta, nset);
+	int imax = 432;
+	for (int i=0; i< imax; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) imax);
+
+		printf("%d	%f", i, x);
+		for (int n=0; n<nset; n++)
+		{
+			double poly = orthonormo(n, x);
+			printf("	%f", poly);
+		}
+		printf("\n");
+		fflush(stdout);
+	}
+
+#ifdef PRINT_MOMENTS
+	int imax = 1200;
+	for (int i=0; i< imax; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) imax);
+		double beta = x + 1.0;
+
 		printf("%d	%f", i, beta);
 		for (int n=0; n<8; n++)
 		{
-			// double fmom = fmoment(beta, n);
-			double fmom = orthonormo(beta, n);
+			double fmom = fmoment(beta, n);
 			printf("	%.10f", fmom);
 		}
 		printf("\n");
 		fflush(stdout);
 	}
+#endif
 }
