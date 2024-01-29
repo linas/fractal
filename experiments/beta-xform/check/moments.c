@@ -1,7 +1,14 @@
 /*
  * moments.c
  *
- * Moments.
+ * Compute moments w.r.t. a measure that consists of Dirac deltas.
+ * One delta per midpoint, midpoint k weighted with 1/beta^k.
+ * This measue makes computation of moments and midpoints very
+ * easy and fast.
+ *
+ * What did I learn from this? Nothing in particular. What can I do
+ * with these polynomials? Nothing I can think of.
+ *
  * January 2024
  */
 
@@ -10,6 +17,10 @@
 #include <stdlib.h> 
 
 // Hausdorff moment (Hamburger moment on unit interval)
+// This is an integral of the monmial x^n times a sequence
+// of Dirac delta funcs, located at midpoints, and weighted
+// with 1/beta^k for midpoint k. Thus, the integral becomes
+// a sum, and a rapidly converging one, at that.
 double fmoment(double beta, int n)
 {
 	double sum = 0.0;
@@ -29,6 +40,7 @@ double fmoment(double beta, int n)
 
 double coeff[20][20];
 
+// Evaluate polynomial n at location x.
 double orthonormo(int n, double x)
 {
 	double sum = 0.0;
@@ -38,6 +50,10 @@ double orthonormo(int n, double x)
 	return sum;
 }
 
+// Compute the integral of polynomial n times polynomial m
+// Since these should be orthonormal, this should return
+// zero or one, always. Since the measure is just a sequence
+// of delta funcs, the integral is easy & fast to compute.
 double prod(double beta, int n, int m)
 {
 	double sum = 0.0;
@@ -56,6 +72,8 @@ double prod(double beta, int n, int m)
 	return sum;
 }
 
+// Compute overlap between monomial x^n and polynomial p_j
+// Used for Gaussian elimination & orthogonalization.
 double ortho(double beta, int n, int j)
 {
 	double sum = 0.0;
@@ -74,6 +92,8 @@ double ortho(double beta, int n, int j)
 	return sum;
 }
 
+// Compute polynomial coefficients up to order max. Once
+// this is done, the polynomials can be evaluated.
 void setup(double beta, int max)
 {
 	double msq = fmoment(beta, 0);
