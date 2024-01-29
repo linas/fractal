@@ -8,3 +8,4 @@ all:
 	cd mode-lock; make
 	cd periodic; make
 	cd tree-trim; make
+	cd check; make

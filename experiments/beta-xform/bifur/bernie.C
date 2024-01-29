@@ -275,6 +275,22 @@ double nofeig(double x, double K)
 	// return 2.0* mult_xor(K, 2.0 * mult_xor(x, (1.0 - x)));
 }
 
+// Superimpose a sine-wave like bulge on the straight line.
+double bulge(double x, double K, double epsi)
+{
+	K *= 2.0;
+	if (0.5 <= x)
+	{
+		double y = epsi * (1.0-x) * (0.5-x);
+		x += y;
+		return K * (x - 0.5);
+	}
+	double y = epsi * x * (0.5-x);
+	x += y;
+	return K*x;
+}
+
+
 static void bifurcation_diagram (float *array,
                                  int array_size,
                                  double x_center,
@@ -292,6 +308,7 @@ static void bifurcation_diagram (float *array,
 	// double eps = 0.5* (1.0-K);
 	double eps = 0.04;
 	double alpha = omega;
+	eps = omega;
 	for (int j=0; j<itermax; j++)
 	{
 		double t = rand();
@@ -320,7 +337,8 @@ static void bifurcation_diagram (float *array,
 			// x = lost_island(x, K, eps);
 			// x = hard_island(x, K, eps);
 			// x = ess_island(x, K, eps);
-			x = kink_island(x, K, eps, alpha);
+			// x = kink_island(x, K, eps, alpha);
+			x = bulge(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
