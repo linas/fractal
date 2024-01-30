@@ -42,6 +42,7 @@ double coeff[20][20];
 double amcoe[20][20];
 
 // Evaluate polynomial n at location x.
+// Same as below, uses recursive algo for lower orders.
 double orthonormo(int n, double x)
 {
 	double sum = 0.0;
@@ -103,6 +104,8 @@ double ortho(double beta, int n, int j)
 	return sum;
 }
 
+// Recursively compute coefficient of monomial.
+// Needed for converting coeff matrix to amcoe matrix.
 double pomo(int n, int m)
 {
 	if (n == m) return coeff[n][n];
@@ -149,17 +152,20 @@ int main(int argc, char* argv[])
 		exit (1);
 	}
 	double beta = atof(argv[1]);
-#if 0
-for (int n=0; n<nset; n++) {
-for (int m=0; m<=n; m++) {
-printf("%d %d co= %f  rat= %f\n", n, m, coeff[n][m], coeff[n][m]/coeff[n][n]);
-}
-printf("---\n");
-}
-#endif
-
 	int nset = 8;
 	setup(beta, nset);
+
+#if 1
+	for (int n=0; n<nset; n++)
+	{
+		for (int m=0; m<=n; m++)
+			printf("# %d %d c=%11.4f	cr=%7.3f	a=%11.4f	ar=%7.3f\n",
+				n, m, coeff[n][m], coeff[n][m]/coeff[n][n],
+				amcoe[n][m], amcoe[n][m]/amcoe[n][n]);
+		printf("---\n");
+	}
+#endif
+
 	int imax = 432;
 	for (int i=0; i< imax; i++)
 	{
