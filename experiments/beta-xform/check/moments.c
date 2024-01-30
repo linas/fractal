@@ -39,6 +39,7 @@ double fmoment(double beta, int n)
 }
 
 double coeff[20][20];
+double amcoe[20][20];
 
 // Evaluate polynomial n at location x.
 double orthonormo(int n, double x)
@@ -47,6 +48,16 @@ double orthonormo(int n, double x)
 	for (int j=0; j<n; j++)
 		sum += coeff[n][j] * orthonormo (j, x);
 	sum += coeff[n][n] * pow (x, n);
+	return sum;
+}
+
+// Direct evaluate polynomial n at location x.
+// Same as above, but not recurisve.
+double orthopoly(int n, double x)
+{
+	double sum = 0.0;
+	for (int j=0; j<=n; j++)
+		sum += amcoe[n][j] * pow (x, j);
 	return sum;
 }
 
@@ -92,6 +103,16 @@ double ortho(double beta, int n, int j)
 	return sum;
 }
 
+double pomo(int n, int m)
+{
+	if (n == m) return coeff[n][n];
+	if (n < m) fprintf(stderr, "Error: bad monomial index %d %d\n", n, m);
+	double sum = 0.0;
+	for (int j=n-1; m<=j; j--)
+		sum += coeff[n][j] * pomo (j, m);
+	return sum;
+}
+
 // Compute polynomial coefficients up to order max. Once
 // this is done, the polynomials can be evaluated.
 void setup(double beta, int max)
@@ -108,6 +129,13 @@ void setup(double beta, int max)
 		double rms = 1.0 / sqrt(msq);
 		for (int j=0; j<=n; j++)
 			coeff[n][j] *= rms;
+	}
+
+	// Compute monomial coeffs.
+	for (int n=0; n< max; n++)
+	{
+		for (int j=0; j<=n; j++)
+			amcoe[n][j] = pomo(n,j);
 	}
 }
 
@@ -140,8 +168,12 @@ printf("---\n");
 		printf("%d	%f", i, x);
 		for (int n=0; n<nset; n++)
 		{
-			double poly = orthonormo(n, x);
-			printf("	%f", poly);
+			double polyr = orthonormo(n, x);
+			double polyd = orthopoly(n, x);
+			if (1.0e-9 < fabs(polyr-polyd))
+				fprintf(stderr, "Error: bad code %d %f %f diff=%g\n",
+					n, polyr, polyd, fabs(polyr-polyd));
+			printf("	%f", polyd);
 		}
 		printf("\n");
 		fflush(stdout);
