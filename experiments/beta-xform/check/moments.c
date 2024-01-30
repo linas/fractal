@@ -40,6 +40,7 @@ double fmoment(double beta, int n)
 
 double coeff[20][20];
 double amcoe[20][20];
+double mom[20][20];
 
 // Evaluate polynomial n at location x.
 // Same as below, uses recursive algo for lower orders.
@@ -140,6 +141,51 @@ void setup(double beta, int max)
 		for (int j=0; j<=n; j++)
 			amcoe[n][j] = pomo(n,j);
 	}
+
+	// Compute moments
+	for (int n=0; n< 2*max; n++)
+	{
+		double m = fmoment(beta, n);
+		for (int j=0; j<=n; j++)
+			mom[n-j][j] = m;
+	}
+}
+
+double ainv(int k, int j)
+{
+	double sum = 0.0;
+	for (int m=0; m<=j; m++)
+		sum += mom[k][m] * amcoe[j][m];
+	return sum;
+}
+
+double delt(int i, int j)
+{
+	double sum = 0.0;
+	for (int k=0; k<=i; k++)
+	{
+		sum += amcoe[i][k] * ainv(k, j);
+		// sum += ainv(i, k) * amcoe[k][j];
+	}
+	return sum;
+}
+
+// Should be A times M
+double am(int i, int m)
+{
+	double sum = 0.0;
+	for (int k=0; k<=i; k++)
+		sum += amcoe[i][k] * mom[k][m];
+	return sum;
+}
+
+// Should be kronecker delta up to rounding errors.
+double delta(int i, int j)
+{
+	double sum = 0.0;
+	for (int m=0; m<=j; m++)
+		sum += am(i, m) * amcoe[j][m];
+	return sum;
 }
 
 // ==============================================================
@@ -156,12 +202,24 @@ int main(int argc, char* argv[])
 	setup(beta, nset);
 
 #if 1
+	for (int n=0; n<2*nset; n++)
+		printf("# %d mom= %f\n", n, fmoment(beta, n));
+	printf("---\n");
+
 	for (int n=0; n<nset; n++)
 	{
 		for (int m=0; m<=n; m++)
 			printf("# %d %d c=%11.4f	cr=%7.3f	a=%11.4f	ar=%7.3f\n",
 				n, m, coeff[n][m], coeff[n][m]/coeff[n][n],
 				amcoe[n][m], amcoe[n][m]/amcoe[n][n]);
+		printf("---\n");
+	}
+
+	for (int n=0; n<nset; n++)
+	{
+		for (int m=0; m<=n; m++)
+			printf("# %d %d ainv=%11.4f	d=%f %f\n",
+				n, m, ainv(n,m), delt(n,m), delta(n,m));
 		printf("---\n");
 	}
 #endif
