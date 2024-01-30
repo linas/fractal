@@ -54197,5 +54197,566 @@ options "tufte"
 
 \end_layout
 
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+A lot of notation has been introduced, and can be difficult to track.
+ This is an abbreviated listing of the defintions.
+\end_layout
+
+\begin_layout Paragraph*
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation 
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is 
+\begin_inset Formula $t_{\beta}\left(x\right)=\beta x\mod1$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Paragraph*
+The beta shift
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-shift is defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T_{\beta}(x)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+The relation to the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xform-shift equivalence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T_{\beta}^{n}\left(x\right)=\frac{\beta}{2}t_{\beta}^{n}\left(\frac{2x}{\beta}\right)
+\]
+
+\end_inset
+
+for all positive integers 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph*
+The beta bitsequence
+\end_layout
+
+\begin_layout Standard
+The beta shift generates a bitsequence, defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:down-bits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+k_{n}\left(x\right)=\begin{cases}
+0 & \mbox{ if }0\le T_{\beta}^{n}\left(x\right)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le T_{\beta}^{n}\left(x\right)\le1
+\end{cases}
+\]
+
+\end_inset
+
+Equivalently, written with the Heaviside 
+\begin_inset Formula $\Theta$
+\end_inset
+
+, this is
+\begin_inset Formula 
+\[
+k_{n}\left(x\right)=\Theta\left(T_{\beta}^{n}\left(x\right)-\frac{1}{2}\right)
+\]
+
+\end_inset
+
+Substituting in the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation,
+\begin_inset Formula 
+\[
+k_{n}\left(x\right)=\Theta\left(\beta t_{\beta}^{n}\left(\frac{2x}{\beta}\right)-1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansion
+\end_layout
+
+\begin_layout Standard
+The bit-sequence defines a unique base-
+\begin_inset Formula $\beta$
+\end_inset
+
+ expansion, given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:shift series"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\beta^{n}}
+\]
+
+\end_inset
+
+The beta shift acts on this series as 
+\begin_inset Formula $T\left(k_{0}k_{1}k_{2}\cdots\right)=k_{1}k_{2}\cdots$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+The midpoint/endpoint orbit
+\end_layout
+
+\begin_layout Standard
+The iterated endpoint of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transformation is the same as the iterated mid-point of the beta shift.
+ It is 
+\begin_inset Formula 
+\[
+t_{n}\equiv t_{\beta}^{n}\left(1\right)=\frac{2}{\beta}T_{\beta}^{n}\left(\frac{\beta}{2}\right)
+\]
+
+\end_inset
+
+The iterated mid-point is written as 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{n}=T_{\beta}^{n}\left(\beta/2\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph*
+Gelfond–Parry digit sequence
+\end_layout
+
+\begin_layout Standard
+The Gelfond–Parry digit sequence 
+\begin_inset Formula $\varepsilon_{n}$
+\end_inset
+
+, defined for a fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and a real number 
+\begin_inset Formula $0\le y\le1$
+\end_inset
+
+, is given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Gelfond-Parry digits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\varepsilon_{n}\left(y\right)=\begin{cases}
+1 & \mbox{ if }y\le t_{\beta}^{n}\left(1\right)\\
+0 & \mbox{ otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+Using the Heaviside step function, this can be written as 
+\begin_inset Formula $\varepsilon_{n}\left(y\right)=\Theta\left(t_{n}-y\right)$
+\end_inset
+
+.
+ This is rescaled to the beta shift in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rescaled-bitseq"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+d_{n}\left(x\right)=\varepsilon_{n}\left(\frac{2x}{\beta}\right)=\Theta\left(\frac{\beta}{2}t_{n}-x\right)=\Theta\left(T^{n}\left(\frac{\beta}{2}\right)-x\right)=\begin{cases}
+1 & \mbox{if }x<T^{n}\left(\frac{\beta}{2}\right)\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+This digit sequence runs in the 
+\begin_inset Quotes eld
+\end_inset
+
+opposite direction
+\begin_inset Quotes erd
+\end_inset
+
+ from the beta bitsequence.
+ The transfer operator is a push-forward; the Koopman operator is a pull-back.
+\end_layout
+
+\begin_layout Paragraph*
+Gelfond-Parry measure
+\end_layout
+
+\begin_layout Standard
+The Gelfond-Parry measure, defined for a fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and a real number 
+\begin_inset Formula $0\le y\le1$
+\end_inset
+
+, is given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\nu_{\beta}\left(y\right)=\frac{1}{F}\sum_{n=0}^{\infty}\frac{\varepsilon_{n}\left(y\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+with normalization
+\begin_inset Formula 
+\[
+F=\sum_{n=0}^{\infty}\frac{t_{\beta}^{n}\left(1\right)}{\beta^{n}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Characteristic bit-sequence
+\end_layout
+
+\begin_layout Standard
+Every value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ has a characteristic bit-sequence, obtained from iterating the mid-point
+ 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+b_{n}=\Theta\left(m_{n}-\frac{1}{2}\right)=\Theta\left(T_{\beta}^{n}\left(\frac{\beta}{2}\right)-\frac{1}{2}\right)=d_{n}\left(\frac{1}{2}\right)=k_{n}\left(\frac{\beta}{2}\right)=\varepsilon_{n}\left(\frac{1}{\beta}\right)=\Theta\left(\beta t_{k}-1\right)
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $b_{0}=1$
+\end_inset
+
+ always.
+\end_layout
+
+\begin_layout Paragraph*
+Stopping algo
+\end_layout
+
+\begin_layout Standard
+The bracketing constraint given in (eq: theta mask) is a boolean function
+ (returning true/false)
+\begin_inset Formula 
+\[
+\theta_{n}\left(\rho\right)=\begin{cases}
+\Theta\left(r_{n/2}-\rho\right)\cdot\theta_{n/2}\left(\rho\right) & \mbox{ for \ensuremath{n} even }\\
+\theta_{\left\lfloor n/2\right\rfloor }\left(\rho\right) & \mbox{ for \ensuremath{n} odd }
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ is the positive real root 
+\begin_inset Formula $p_{n}\left(r_{n}\right)=0$
+\end_inset
+
+.
+ The above defintion is written in tail-recursive form, and so can be expressed
+ as a loop: 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $m_{prev}$
+\end_inset
+
+ := 
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $m$
+\end_inset
+
+ := 
+\begin_inset Formula $\left\lfloor n/2\right\rfloor $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+while (0 < 
+\begin_inset Formula $m$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Formula $m_{prev}$
+\end_inset
+
+ is even and 
+\begin_inset Formula $r_{m}$
+\end_inset
+
+ < 
+\begin_inset Formula $\rho$
+\end_inset
+
+ then fail
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Formula $m_{prev}$
+\end_inset
+
+ := 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Formula $m$
+\end_inset
+
+ := 
+\begin_inset Formula $\left\lfloor m/2\right\rfloor $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+if arrived here, then success
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Polynomials
+\end_layout
+
+\begin_layout Standard
+The self-describing polynomials are
+\begin_inset Formula 
+\[
+p_{n}\left(z\right)=z^{k+1}\left(1-b_{0}z^{-1}-b_{1}z^{-2}-\cdots-b_{k}z^{-k-1}\right)
+\]
+
+\end_inset
+
+These have the property that if 
+\begin_inset Formula $\beta$
+\end_inset
+
+ generated the characteristic bitsequence 
+\begin_inset Formula $\left\{ b_{k}\right\} $
+\end_inset
+
+, then 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\end_inset
+
+.
+ For infinite-length bitsequences, define the holomorphic function
+\begin_inset Formula 
+\[
+q^{\left\{ b\right\} }\left(\zeta\right)=1-\sum_{j=0}^{\infty}b_{j}\zeta^{j+1}
+\]
+
+\end_inset
+
+which recovers the polynomial when 
+\begin_inset Formula $\zeta=1/z$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph*
+That's all, folks!
+\end_layout
+
 \end_body
 \end_document
