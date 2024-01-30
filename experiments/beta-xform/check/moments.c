@@ -151,6 +151,7 @@ void setup(double beta, int max)
 	}
 }
 
+// A inverse is M A-transpose
 double ainv(int k, int j)
 {
 	double sum = 0.0;
@@ -159,18 +160,21 @@ double ainv(int k, int j)
 	return sum;
 }
 
+// Kronecker delta aka identity matrix. And it is.
 double delt(int i, int j)
 {
 	double sum = 0.0;
 	for (int k=0; k<=i; k++)
 	{
 		sum += amcoe[i][k] * ainv(k, j);
+		// Below also work,s but much more rounding error
 		// sum += ainv(i, k) * amcoe[k][j];
 	}
 	return sum;
 }
 
 // Should be A times M
+// Transpose of this should be same as ainv above.
 double am(int i, int m)
 {
 	double sum = 0.0;
