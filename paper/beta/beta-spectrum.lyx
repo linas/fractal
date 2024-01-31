@@ -6838,10 +6838,10 @@ The trick is to track two distinct travellers: one that travels with
 .
  The general solution has the form
 \begin_inset Formula 
-\begin{align*}
-\nu_{n}\left(y\right) & =a_{n}\left(y\right)+\sum_{k=1}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\\
-a_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)
-\end{align*}
+\begin{align}
+\nu_{n}\left(y\right) & =a_{n}\left(y\right)+\sum_{k=1}^{n}h_{nk}\left(y\right)\Theta\left(t_{k}-y\right)\nonumber \\
+a_{n}\left(y\right) & =\sum_{k=0}^{n-1}b_{k}e_{nk}\left(y\right)\label{eq:iterated xfer oper}
+\end{align}
 
 \end_inset
 
@@ -9063,6 +9063,55 @@ So there are two questions: what is this magic constant
 
 .
  This is not born out by numerics.
+\end_layout
+
+\begin_layout Standard
+If one considers instead a polynomial 
+\begin_inset Formula $\mu_{0}\left(x\right)=x^{n}+c_{n-1}x^{n-1}+\cdots+c_{0}$
+\end_inset
+
+, one can find an analogous behavior: 
+\begin_inset Formula $\mu_{n}\to K\nu$
+\end_inset
+
+.
+ The leading divergence can be subtracted, so that iterating on 
+\begin_inset Formula $\mu_{0}\left(x\right)=x^{n}+c_{n-1}x^{n-1}+\cdots+c_{0}-K$
+\end_inset
+
+ gives a sequence of 
+\begin_inset Formula $\mu_{n}$
+\end_inset
+
+ whose length diminishes uniformly, in that 
+\begin_inset Formula $\beta^{n}\int\mu_{n}=\mbox{const}$
+\end_inset
+
+, but otherwise bounce around ergodically.
+ The relationship between 
+\begin_inset Formula $K$
+\end_inset
+
+ and the polynomial is opaque.
+ Of course, it can be computed exactly; the polynomial can be inserted into
+ eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:iterated xfer oper"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, binomials can be expanded with binomial coefficients, and one obtains
+ 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ However, these formulas are very tangled; an intuitive description of the
+ manifold or variety is absent.
 \end_layout
 
 \begin_layout Standard
