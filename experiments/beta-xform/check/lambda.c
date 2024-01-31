@@ -98,15 +98,19 @@ int main(int argc, char* argv[])
 #define NIT 6
 	double l1norm[NIT];
 	double l2norm[NIT];
+	double l2orth[NIT];
 	double dotzero[NIT];
 	double dotlast[NIT];
+	double dotorth[NIT];
 	double dotinv[NIT];
 	for (int j=0; j<NIT; j++)
 	{
 		l1norm[j] = 0.0;
 		l2norm[j] = 0.0;
+		l2orth[j] = 0.0;
 		dotzero[j] = 0.0;
 		dotlast[j] = 0.0;
+		dotorth[j] = 0.0;
 		dotinv[j] = 0.0;
 	}
 
@@ -123,11 +127,11 @@ int main(int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 
-		double yinv = gp_invar(beta, x);
-		printf("%d	%f	%f", i, x, yinv);
+		double yinvrnt = gp_invar(beta, x);
+		printf("%d	%f	%f", i, x, yinvrnt);
 
 		double plm = scan;
-		double ylast = yinv;
+		double ylast = yinvrnt;
 		for (int j=0; j<NIT; j++)
 		{
 			double y = nul_n(beta, blam, x, n+j);
@@ -137,9 +141,11 @@ int main(int argc, char* argv[])
 
 			l1norm[j] += fabs(y) * delta;
 			l2norm[j] += y*y * delta;
+			l2orth[j] += (y*y/yinvrnt) * delta;
 			dotzero[j] += y * delta;
 			dotlast[j] += y*ylast * delta;
-			dotinv[j] += y*yinv * delta;
+			dotorth[j] += (y*ylast/yinvrnt) * delta;
+			dotinv[j] += y*yinvrnt * delta;
 			ylast = y;
 		}
 		printf("\n");
@@ -151,12 +157,24 @@ int main(int argc, char* argv[])
 	for (int j=0; j<NIT; j++) printf(" %g", l1norm[j]);
 	printf("\n# l2norm= ");
 	for (int j=0; j<NIT; j++) printf(" %g", l2norm[j]);
+	printf("\n# l2orth= ");
+	for (int j=0; j<NIT; j++) printf(" %g", l2orth[j]);
 	printf("\n# dotzero= ");
 	for (int j=0; j<NIT; j++) printf(" %g", dotzero[j]);
 	printf("\n# dotlast= ");
 	for (int j=0; j<NIT; j++) printf(" %g", dotlast[j]);
+	printf("\n# dotorth= ");
+	for (int j=0; j<NIT; j++) printf(" %g", dotorth[j]);
 	printf("\n# dotinv= ");
 	for (int j=0; j<NIT; j++) printf(" %g", dotinv[j]);
+	printf("\n#\n");
+
+	printf("# cos= ");
+	for (int j=0; j<NIT; j++)
+	{
+		double chk = beta * dotorth[j] / l2orth[j];
+		printf(" %g", chk);
+	}
 	printf("\n#\n");
 #endif
 

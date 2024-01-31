@@ -29,8 +29,8 @@ double nu(double x)
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
 	// return 1.0;
-	return x-0.5;
-	// return x - 0.5 + 0.08684;  // appropriate for beta=1.6
+	// return x-0.5;
+	return x - x - 0.5*0.826154195;  // appropriate for beta=1.6
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -65,6 +65,15 @@ COMPLEX zip_n(double beta, COMPLEX blam, double x, int n)
 	return zip;
 }
 
+COMPLEX zoop_n(double beta, COMPLEX blam, double x, int n)
+{
+	COMPLEX zip = nuz_n(beta, blam, x, n+1);
+	zip -= (blam/beta) * nuz_n(beta, blam, x, n);
+	zip *= pow(blam, n+1);
+
+	return zip;
+}
+
 // ==============================================================
 
 static void coherent_zero (float *array,
@@ -93,7 +102,8 @@ static void coherent_zero (float *array,
 #if 1
 		double yyy = 0.33;
 		// COMPLEX sum = zap_n(beta, blam, yyy, n);
-		COMPLEX sum = zip_n(beta, blam, yyy, n);
+		// COMPLEX sum = zip_n(beta, blam, yyy, n);
+		COMPLEX sum = zoop_n(beta, blam, yyy, n);
 #endif
 
 #ifdef AVG

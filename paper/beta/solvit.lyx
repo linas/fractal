@@ -12912,6 +12912,109 @@ Anyway, the
 .
 \end_layout
 
+\begin_layout Paragraph
+Is it complex? No.
+\end_layout
+
+\begin_layout Standard
+Assume a complex eigenvalue.
+ Assume 
+\begin_inset Formula $\mathcal{M}\left(a+ib\right)=\lambda e^{i\phi}\left(a+ib\right)$
+\end_inset
+
+ for unknown 
+\begin_inset Formula $a,b,\phi$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\mathcal{M}a=\lambda\left(a\cos\phi-b\sin\phi\right)$
+\end_inset
+
+.
+ Assume 
+\begin_inset Formula $\int ab=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\int a\mathcal{M}a=\lambda\cos\phi\int a^{2}$
+\end_inset
+
+.
+ Assume 
+\begin_inset Formula $\mu_{n}\to a$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\int\mu_{n}\mathcal{M}\mu_{n}=\int\mu_{n}\mu_{n+1}=\lambda\cos\phi\int\mu_{n+1}^{2}$
+\end_inset
+
+.
+ We already know that 
+\begin_inset Formula $\lambda=1/\beta$
+\end_inset
+
+ so estimate 
+\begin_inset Formula $\cos\phi\approx\beta\int\mu_{n}\mu_{n+1}/\int\mu_{n+1}^{2}$
+\end_inset
+
+.
+ But this is not supported by numerics.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+As before, computed in check/lambda.c and written to the tail end of the
+ printout.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Did we make a mistake with assuming 
+\begin_inset Formula $\mu_{n}\to a$
+\end_inset
+
+? Assume instead that 
+\begin_inset Formula $\mu_{n}\to K\left(a\cos\theta+b\sin\theta\right)$
+\end_inset
+
+ for some unknown normalization 
+\begin_inset Formula $K$
+\end_inset
+
+ and mixing angle 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mu_{n+1}=\lambda K\left(a\cos\left(\theta-\phi\right)+b\sin\left(\theta-\phi\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\int\mu_{n}\mu_{n+1}=K^{2}\lambda\cos\phi$
+\end_inset
+
+ after assuming that 
+\begin_inset Formula $\int a^{2}=\int b^{2}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\int ab=0$
+\end_inset
+
+.
+ So the corrected hypothesis does not rescue the conclusion that this is
+ not a complex eigenvalue.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 General
 \end_layout
