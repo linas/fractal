@@ -106,8 +106,8 @@ status open
 This text is an extract of a diary of research notes, first published in
  December 2017, with major updates published in February 2018, December
  2018 and January 2024.
- The current version expunges all the unfinished parts and the boring parts
- and the speculative parts, and prettifies the rest into a presentable format.
+ The current version expunges all the unfinished, boring and speculative
+ parts of the diary, and prettifies the rest into a presentable format.
  MSC2020 Classification 37E05, 37G10.
 \end_layout
 
@@ -193,11 +193,18 @@ The fourth part of this text examines small perturbations.
 
 \begin_layout Abstract
 This text assumes very little mathematical sophistication on the part of
- the reader, and should be approachable by those with minimal or no prior
- experience in ergodic theory.
+ the reader, and should be approachable for any enthusiast with minimal
+ or no prior experience in ergodic theory.
  Most of the development is casual.
  As a side effect, the introductory sections are perhaps a fair bit longer
  than strictly needed to present the new results.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -3609,7 +3616,7 @@ name "fig:Undershift-Bifurcation-Diagram"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename bern-4K-crop.png
+	filename bern-4K-square.png
 	lyxscale 80
 	width 100col%
 
@@ -3646,22 +3653,21 @@ This figure shows the density
 
  corresponds to a horizontal slice through the diagram.
  The color green represents values of 
-\begin_inset Formula $\rho_{\beta}(y)\approx0.5$
+\begin_inset Formula $\rho_{\beta}(y)\approx1.0$
 \end_inset
 
 , while red represents 
-\begin_inset Formula $\rho_{\beta}(y)\gtrsim1$
+\begin_inset Formula $\rho_{\beta}(y)\gtrsim2$
 \end_inset
 
  and blue-to-black represents 
-\begin_inset Formula $\rho_{\beta}(y)\apprle0.25$
+\begin_inset Formula $\rho_{\beta}(y)\apprle0.5$
 \end_inset
 
 .
- The lines forming the fan shape are not actually straight, they only seem
- to be; in fact, they have a slight curve.
- The form will be provided in a later section, it is a variant of the polynomail
- in eqn 
+ The lines forming the fan shape are not straight.
+ The precise form is examined in a later section, given by a variant of
+ the polynomial in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:iterated shift"
@@ -3688,8 +3694,7 @@ noprefix "false"
 status collapsed
 
 \begin_layout Plain Layout
-Created with ./experiments/beta-xform/bifur/bigbern.C 800 400 1360 0.5 0.75
- 1
+Created with ./experiments/beta-xform/bifur/bernie.C 800 800 6360 0.5 0.5 1
 \end_layout
 
 \end_inset
@@ -3889,7 +3894,7 @@ name "fig:Tent-Map-Bifur"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename tent-4K.png
+	filename tent-4K-square.png
 	lyxscale 60
 	width 100col%
 
@@ -3916,10 +3921,9 @@ reference "fig:Undershift-Bifurcation-Diagram"
 \end_inset
 
 ; that scheme would obliterate the lower half of this figure in red.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space \qquad{}
 \end_inset
 
@@ -3936,6 +3940,26 @@ The black areas represent parts of the iterated range that are visited at
 \end_inset
 
  are never visited more than a finite number of times.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+The figure can be imagined to be a superposition of a countable number of
+ copies of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, each drawn out so as to terminate in a point, but separated into distinct
+ arms.
+ Each copy is recapitulated in the Feigenbaum bifurcation diagram.
 \end_layout
 
 \begin_layout Plain Layout
@@ -4071,9 +4095,8 @@ name "fig:Logistic-Map-Bifurcation"
 \end_layout
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Graphics
-	filename feig-4K.png
+	filename feig-4K-square.png
 	lyxscale 60
 	width 100col%
 
@@ -4094,17 +4117,67 @@ The logistic map bifurcation diagram.
  value, while blue shows those values that are about half the average value.
  Clearly, the orbits of the iterated points spend much of their time near
  the edges of the diagram.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space \qquad{}
 \end_inset
 
 This is a very widely reproduced diagram.
  The goal here is not to waste space reproducing it yet again, but to draw
- attention to the similarities between this diagram, and the the corresponding
- diagram for the beta shift.
+ attention to the similarities between this diagram, and figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tent-Map-Bifur"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The tent can be smoothly deformed into the parabola; doing so separates
+ the multiple legs visible at the bottom of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tent-Map-Bifur"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, with each leg becoming a bifurcation branch.
+ The central point, where all legs come together, is preserved in both images.
+ The curving arcs, highlighted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Midpoint-Trace"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, are retained as well.
+ The legs of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tent-Map-Bifur"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are chaotic regions, and remain so as the tent is deformed into a parabola.
+ They are merely separated from one-another.
+ The legs do 
+\emph on
+not
+\emph default
+ shrink to zero width.
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -26083,6 +26156,13 @@ To conclude: the roots are ordered as
  QED.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Islands of Stability as Arnold Tongues
 \begin_inset CommandInset label
@@ -27694,11 +27774,12 @@ height "1pt"
 
 \begin_layout Standard
 Another interesting visualization is a Poincaré recurrence plot.
- The islands of stability should manifest as Arnold tongues
-\begin_inset CommandInset citation
-LatexCommand cite
-key "WP-Arnold"
-literal "true"
+ The islands of stability should manifest as 
+\begin_inset CommandInset href
+LatexCommand href
+name "Arnold tongues"
+target "https://en.wikipedia.org/wiki/Arnold_tongue"
+literal "false"
 
 \end_inset
 
@@ -27849,14 +27930,16 @@ viz
 
 .
  The dramatic swallow-tail shapes in the right-hand image are identical
- to those that appear in the classic iterated circle map.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "WP-Arnold"
-literal "true"
+ to those that appear in the 
+\begin_inset CommandInset href
+LatexCommand href
+name "classic iterated circle map"
+target "https://en.wikipedia.org/wiki/Arnold_tongue"
+literal "false"
 
 \end_inset
 
+.
  
 \begin_inset Note Note
 status collapsed
@@ -28199,6 +28282,13 @@ Essentially, the claim is straight-forward: topologically, all chaotic parts
  of the idea would be worthwhile.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Conclusion
 \end_layout
@@ -28432,6 +28522,13 @@ the right answer
  operations performed on finite truncations of infinite series.
  What other algorithms are hiding nearby, and what is their relationship
  to analytic series?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

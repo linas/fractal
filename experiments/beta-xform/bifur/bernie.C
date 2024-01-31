@@ -319,7 +319,7 @@ static void bifurcation_diagram (float *array,
 	double Korg = 0.5 + 0.5*K;
 	// double eps = 0.5* (1.0-K);
 	// double eps = 0.04;
-	double eps = omega;
+	// double eps = omega;
 	// double alpha = omega;
 	for (int j=0; j<itermax; j++)
 	{
@@ -335,6 +335,10 @@ static void bifurcation_diagram (float *array,
 		t *= x_width; // in case its zoomed.
 		K = Korg + t;
 
+		// For Feigenbaum only, runs from 1.75 to 2.0 at top
+		t *= 0.25;
+		K = 1.0 - 0.25*(1.0 - Korg) + t;
+
 		/* OK, now start iterating the benoulli map */
 		for (int iter=0; iter < 1250; iter++)
 		{
@@ -342,7 +346,7 @@ static void bifurcation_diagram (float *array,
 			// x = nocarry(x, K);
 			// x = tent(x, K);
 			// x = notent(x, K);
-			// x = feig(x, K);
+			x = feig(x, K);
 			// x = nofeig(x, K);
 			// x = mangle_carry(x, K);
 			// x = island(x, K, eps);
@@ -351,7 +355,7 @@ static void bifurcation_diagram (float *array,
 			// x = ess_island(x, K, eps);
 			// x = kink_island(x, K, eps, alpha);
 			// x = bulge(x, K, eps);
-			x = bulgetent(x, K, eps);
+			// x = bulgetent(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
@@ -447,11 +451,3 @@ static void bifurcation_diagram (float *array,
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)
-
-#if 0
-int main ( int argc, char * argv[])
-{
-	double om = atof(argv[1]);
-	double kb = atof(argv[2]);
-}
-#endif

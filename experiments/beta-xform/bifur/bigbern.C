@@ -166,14 +166,14 @@ void bifurcation_diagram (float *array,
 		/* OK, now start iterating the map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
-			// bern(ex, Kay);
+			bern(ex, Kay);
 			// tarp(ex, Kay);
 			// feig(ex, four_Kay, scratch);
 // #define SIDETENT
 #ifdef SIDETENT
 			tent(ex, Kay);
 #endif
-#define FLIPTENT
+// #define FLIPTENT
 #ifdef FLIPTENT
 			fliptent(ex, Kay);
 #endif
