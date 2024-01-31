@@ -22,9 +22,11 @@ double nu(double x)
 	if (x < 0.0) fprintf(stderr, "Error nu fail neg %g\n", x);
 	if (1.0 < x) fprintf(stderr, "Error nu fail pos %g\n", x);
 
+#if MODAL
 	if (0 == mode) return 1.0;
 	if (1 == mode) return x;
 	return gp_invar(1.6, x);
+#endif
 
 	// return 1.0;
 	// return x-0.5;
@@ -33,7 +35,7 @@ double nu(double x)
 	// return x - 0.5*0.826154;
 	// return x - 0.5*0.8261542;
 	// return x - 0.5*0.82615419;
-	// return x - 0.5*0.826154195;
+	return x - 0.5*0.826154195;
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
@@ -53,6 +55,7 @@ double nu(double x)
 
 int main(int argc, char* argv[])
 {
+#ifdef COMPARSE_CONST_AND_INVAR
 	if (argc != 3)
 	{
 		fprintf(stderr, "Usage: %s beta n\n", argv[0]);
@@ -77,7 +80,9 @@ int main(int argc, char* argv[])
 		printf("	%f	%f	%f\n", z1, z2, z2/z1);
 		fflush(stdout);
 	}
+#endif
 
+#define DO_GRAPH
 #ifdef DO_GRAPH
 	if (argc != 4)
 	{
@@ -91,8 +96,19 @@ int main(int argc, char* argv[])
 	double blam = beta * lambda;
 
 #define NIT 6
-	double sum[NIT];
-	for (int j=0; j<NIT; j++) sum[j] = 0.0;
+	double l1norm[NIT];
+	double l2norm[NIT];
+	double dotzero[NIT];
+	double dotlast[NIT];
+	double dotinv[NIT];
+	for (int j=0; j<NIT; j++)
+	{
+		l1norm[j] = 0.0;
+		l2norm[j] = 0.0;
+		dotzero[j] = 0.0;
+		dotlast[j] = 0.0;
+		dotinv[j] = 0.0;
+	}
 
 	double scale = lambda * beta;
 	// scale = lambda;
@@ -107,10 +123,11 @@ int main(int argc, char* argv[])
 	{
 		double x = (((double) i) + 0.5) / ((double) imax);
 
-		double y = gp_invar(beta, x);
-		printf("%d	%f	%f", i, x, y);
+		double yinv = gp_invar(beta, x);
+		printf("%d	%f	%f", i, x, yinv);
 
 		double plm = scan;
+		double ylast = yinv;
 		for (int j=0; j<NIT; j++)
 		{
 			double y = nul_n(beta, blam, x, n+j);
@@ -118,16 +135,28 @@ int main(int argc, char* argv[])
 			plm *= scale;
 			printf("	%f", y);
 
-			// sum[j] += fabs(y) * delta;
-			sum[j] += y * delta;
+			l1norm[j] += fabs(y) * delta;
+			l2norm[j] += y*y * delta;
+			dotzero[j] += y * delta;
+			dotlast[j] += y*ylast * delta;
+			dotinv[j] += y*yinv * delta;
+			ylast = y;
 		}
 		printf("\n");
 		fflush(stdout);
 	}
 
-	printf("#\n# ");
-	for (int j=0; j<NIT; j++)
-		printf(" %g", sum[j]);
+	printf("#\n");
+	printf("# l1norm= ");
+	for (int j=0; j<NIT; j++) printf(" %g", l1norm[j]);
+	printf("\n# l2norm= ");
+	for (int j=0; j<NIT; j++) printf(" %g", l2norm[j]);
+	printf("\n# dotzero= ");
+	for (int j=0; j<NIT; j++) printf(" %g", dotzero[j]);
+	printf("\n# dotlast= ");
+	for (int j=0; j<NIT; j++) printf(" %g", dotlast[j]);
+	printf("\n# dotinv= ");
+	for (int j=0; j<NIT; j++) printf(" %g", dotinv[j]);
 	printf("\n#\n");
 #endif
 

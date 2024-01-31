@@ -12746,50 +12746,84 @@ But I still do not understand what is going on.
 
 \begin_layout Itemize
 If 
-\begin_inset Formula $\nu_{0}\left(x\right)=x-1/2$
+\begin_inset Formula $\mu_{0}\left(x\right)=x-1/2$
 \end_inset
 
- then 
+, then 
 \begin_inset Formula $\lambda^{n}\mu_{n}$
 \end_inset
 
  converges to 
-\begin_inset Formula $\approx-0.0869229\nu$
+\begin_inset Formula $\approx-0.0869229\,\nu$
 \end_inset
 
-.
+ with 
+\begin_inset Formula $\nu$
+\end_inset
+
+ the Gelfond–Parry invariant measure.
  This is independent of 
 \begin_inset Formula $\lambda$
 \end_inset
 
 .
+ This is not a surprise; the result should be independent of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, as it is just a rescaling.
 \end_layout
 
 \begin_layout Itemize
 If 
-\begin_inset Formula $\nu_{0}\left(x\right)=x-1/2+0.0869229$
+\begin_inset Formula $\mu_{0}\left(x\right)=x-1/2+0.0869229$
 \end_inset
 
  and 
 \begin_inset Formula $\lambda=1/\beta$
 \end_inset
 
- then the 
+, then the 
 \begin_inset Formula $\mu_{n}$
 \end_inset
 
- appear to bounce around ergodically, maintaining a constant norm.
- That is 
-\begin_inset Formula $\int\left|\mu_{n}\right|\approx\mbox{const}$
+ appear to bounce around ergodically, maintaining a bounded norm.
+ Three behaviors are apparent: 
+\begin_inset Formula $\int\mu_{n}=\mbox{const}\approx0.2767$
 \end_inset
 
- more or less, or rather, bouncing in a bounded range that isn't trending
- to zero.
+.
+ The 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ norms bounce around but remain bounded: 
+\begin_inset Formula $0.3<\int\left|\mu_{n}\right|<0.8$
+\end_inset
+
+ and 
+\begin_inset Formula $0.1<\int\left|\mu_{n}\right|^{2}<1.0$
+\end_inset
+
+, and each iterate is approximately orthogonal to the prior one: 
+\begin_inset Formula $\int\mu_{n}\mu_{n+1}\approx0$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $\int f=\int_{0}^{1}f\left(x\right)dx$
+\end_inset
+
+ is just short-hand notation.
 \end_layout
 
 \begin_layout Itemize
 If 
-\begin_inset Formula $\nu_{0}\left(x\right)=x-1/2+0.0869229$
+\begin_inset Formula $\mu_{0}\left(x\right)=x-1/2+0.0869229$
 \end_inset
 
  and 
@@ -12800,7 +12834,7 @@ If
 \begin_inset Formula $n$
 \end_inset
 
- is held fixed while 
+ is held fixed while the phase 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -12831,7 +12865,7 @@ See check/phasor.C for implementation.
 
 \begin_layout Itemize
 If 
-\begin_inset Formula $\nu_{0}\left(x\right)=x-1/2+0.0869229$
+\begin_inset Formula $\mu_{0}\left(x\right)=x-1/2+0.0869229$
 \end_inset
 
  and 
@@ -12858,6 +12892,24 @@ So there are two questions: what is this magic constant
  ? What is this ergodic bouncing? The ergodic bouncing is not due to complex
  eigenvalues.
  There don't seem to be complex eigenvalues!?? Confused by the last.
+\end_layout
+
+\begin_layout Standard
+Anyway, the 
+\begin_inset Formula $\lambda$
+\end_inset
+
+-independence just says that 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is a red herring, having nothing to do with anything.
+ Get rid of it.
+ Set it to 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -12940,7 +12992,7 @@ name "subsec:Rotated-Parry-function"
 \end_layout
 
 \begin_layout Standard
-The steps performed above can be repeated verbatim for a 
+The technique above can be repeated verbatim for a 
 \begin_inset Quotes eld
 \end_inset
 
