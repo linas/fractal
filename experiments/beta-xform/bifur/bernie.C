@@ -262,6 +262,18 @@ double feig(double x, double K)
 	return K * x * (1.0 - x);
 }
 
+// Smoothly interpolates between tent (for epsi=0) and feigenbaum
+// (for epsi=1)
+double bulgetent(double x, double K, double epsi)
+{
+	K *= 2.0;
+	if (0.5 <= x)
+	{
+		return K * (1.0 - x + epsi * (-1.0 + 3.0*x - 2.0*x*x));
+	}
+	return K*x * (1.0 + epsi * (1.0-2.0*x));
+}
+
 double nofeig(double x, double K)
 {
 	// Below is intersting/crazy
@@ -306,9 +318,9 @@ static void bifurcation_diagram (float *array,
 
 	double Korg = 0.5 + 0.5*K;
 	// double eps = 0.5* (1.0-K);
-	double eps = 0.04;
-	double alpha = omega;
-	eps = omega;
+	// double eps = 0.04;
+	double eps = omega;
+	// double alpha = omega;
 	for (int j=0; j<itermax; j++)
 	{
 		double t = rand();
@@ -338,7 +350,8 @@ static void bifurcation_diagram (float *array,
 			// x = hard_island(x, K, eps);
 			// x = ess_island(x, K, eps);
 			// x = kink_island(x, K, eps, alpha);
-			x = bulge(x, K, eps);
+			// x = bulge(x, K, eps);
+			x = bulgetent(x, K, eps);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
@@ -361,6 +374,7 @@ static void bifurcation_diagram (float *array,
 	for (int j=0; j<array_size; j++)
 		array[j] *= norm;
 
+#ifdef MARKUP_RETICULE
 	double beta = 2.0 * Korg;
 	double pix = 0.45 / array_size;
 	int left = (0.5 + 0.5* (beta-1)) * array_size;
@@ -383,7 +397,7 @@ static void bifurcation_diagram (float *array,
 	phi = pow(2.0/(1.0-alpha), 0.25);
 	if (fabs(beta-phi)<pix)
 		for (int j=left; j<array_size; j++) {array[j] = 1.5; }
-
+#endif
 
 #ifdef GOLDEN_ISLAND
 	double beta = 2.0 * Korg;
