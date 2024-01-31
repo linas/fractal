@@ -16,6 +16,25 @@
 
 int mode = 0;
 
+// #define QUADRATIC_GIVES_LINEAR
+#ifdef QUADRATIC_GIVES_LINEAR
+// This coefficient combo used on the quadratic seems to give
+// another ergodic function sequence when iterated. But the
+// characteristic eigennorm is 1/beta and the functions are
+// linear-like; the parabola is washed out.
+double c1 = 1.0;
+double c0 = 0.9008;
+#endif
+
+// This works, but the linear slopes up! The other sloped down!
+// double c1 = 0.0;
+// double c0 = -1.578;
+
+// This one is flat flat but eigen is still 1/beta. Its not going
+// to be parabolic.
+double c1 = 0.83;
+double c0 = 0.4795;
+
 // Arbitrary function
 double nu(double x)
 {
@@ -35,13 +54,14 @@ double nu(double x)
 	// return x - 0.5*0.826154;
 	// return x - 0.5*0.8261542;
 	// return x - 0.5*0.82615419;
-	return x - 0.5*0.826154195;
+	// return x - 0.5*0.826154195;
 
 	// Bernoulli poly B_2
 	// The result is senstive to this being B_2.
 	// Being able to integrate to exactly zero is important.
 	// return x*x - x  + 1.0 / 6.0;
 	// return x*x - x  + 0.16666;
+	return x*x - c1*x  + c0 / 6.0;
 
 	// Bernoulli poly B_3
 	// return x*x*x - 1.5*x*x  + 0.5*x;
@@ -55,7 +75,7 @@ double nu(double x)
 
 int main(int argc, char* argv[])
 {
-#ifdef COMPARSE_CONST_AND_INVAR
+#ifdef COMPARE_CONST_AND_INVAR
 	if (argc != 3)
 	{
 		fprintf(stderr, "Usage: %s beta n\n", argv[0]);
@@ -92,6 +112,9 @@ int main(int argc, char* argv[])
 	double beta = atof(argv[1]);
 	double lambda = atof(argv[2]);
 	int n = atoi(argv[3]);
+
+	// c1 = atof(argv[4]);
+	// c0 = atof(argv[5]);
 
 	double blam = beta * lambda;
 
@@ -178,6 +201,28 @@ int main(int argc, char* argv[])
 	printf("\n#\n");
 #endif
 
+// #define BISECT
+#ifdef BISECT
+	if (argc != 4)
+	{
+		fprintf(stderr, "Usage: %s beta n\n", argv[0]);
+		exit (1);
+	}
+	double beta = atof(argv[1]);
+	int n = atoi(argv[2]);
+	c0 = atof(argv[3]);
+
+	double blam = beta;
+	double x = 0.01;
+	double yinvrnt = gp_invar(beta, x);
+	double scale = beta;
+	double scan = pow(scale, n);
+	double y = nul_n(beta, blam, x, n);
+	y *= scan;
+	y /= yinvrnt;
+
+	printf("%g n=%d rat= %g\n", c0, n, y);
+#endif
 }
 
 // ==============================================================
