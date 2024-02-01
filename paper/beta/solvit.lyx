@@ -12888,17 +12888,7 @@ If
 \end_layout
 
 \begin_layout Standard
-So there are two questions: what is this magic constant 
-\begin_inset Formula $0.0869229$
-\end_inset
-
- ? What is this ergodic bouncing? The ergodic bouncing is not due to complex
- eigenvalues.
- There don't seem to be complex eigenvalues!?? Confused by the last.
-\end_layout
-
-\begin_layout Standard
-Anyway, the 
+The 
 \begin_inset Formula $\lambda$
 \end_inset
 
@@ -12907,6 +12897,12 @@ Anyway, the
 \end_inset
 
  is a red herring, having nothing to do with anything.
+ The code base rescales by 
+\begin_inset Formula $\beta$
+\end_inset
+
+ anyway, and that is all that is needed.
+ It serves mostly to consue the issue.
  Get rid of it.
  Set it to 
 \begin_inset Formula $\lambda=1$
@@ -12915,38 +12911,53 @@ Anyway, the
 .
 \end_layout
 
+\begin_layout Standard
+This leaves two questions: what is this magic constant 
+\begin_inset Formula $0.0869229$
+\end_inset
+
+? What is this ergodic bouncing? The second question has a relatively simple
+ answer: 
+\begin_inset Formula $\mu_{n}$
+\end_inset
+
+ has converged to a superposition of multiple complex eigenfunctions, all
+ having an eigenvalue with the same norm.
+ 
+\end_layout
+
 \begin_layout Paragraph
-Is it complex? No.
+Is it a single complex eigenvalue? No.
 \end_layout
 
 \begin_layout Standard
-Assume a complex eigenvalue.
+Assume a single complex eigenvalue.
  Assume 
-\begin_inset Formula $\mathcal{M}\left(a+ib\right)=\lambda e^{i\phi}\left(a+ib\right)$
+\begin_inset Formula $\mathcal{M}\left(\psi+i\chi\right)=\lambda e^{i\phi}\left(\psi+i\chi\right)$
 \end_inset
 
  for unknown 
-\begin_inset Formula $a,b,\phi$
+\begin_inset Formula $\psi,\chi,\phi$
 \end_inset
 
 .
  This implies 
-\begin_inset Formula $\mathcal{M}a=\lambda\left(a\cos\phi-b\sin\phi\right)$
+\begin_inset Formula $\mathcal{M}\psi=\lambda\left(\psi\cos\phi-\chi\sin\phi\right)$
 \end_inset
 
 .
  Assume 
-\begin_inset Formula $\int ab=0$
+\begin_inset Formula $\int\psi\chi=0$
 \end_inset
 
 .
  Then 
-\begin_inset Formula $\int a\mathcal{M}a=\lambda\cos\phi\int a^{2}$
+\begin_inset Formula $\int\psi\mathcal{M}\psi=\lambda\cos\phi\int\psi^{2}$
 \end_inset
 
 .
  Assume 
-\begin_inset Formula $\mu_{n}\to a$
+\begin_inset Formula $\mu_{n}\to\psi$
 \end_inset
 
 .
@@ -12980,11 +12991,11 @@ As before, computed in check/lambda.c and written to the tail end of the
 
 \begin_layout Standard
 Did we make a mistake with assuming 
-\begin_inset Formula $\mu_{n}\to a$
+\begin_inset Formula $\mu_{n}\to\psi$
 \end_inset
 
 ? Assume instead that 
-\begin_inset Formula $\mu_{n}\to K\left(a\cos\theta+b\sin\theta\right)$
+\begin_inset Formula $\mu_{n}\to K\left(\psi\cos\theta+\chi\sin\theta\right)$
 \end_inset
 
  for some unknown normalization 
@@ -12997,24 +13008,106 @@ Did we make a mistake with assuming
 
 .
  Then 
-\begin_inset Formula $\mu_{n+1}=\lambda K\left(a\cos\left(\theta-\phi\right)+b\sin\left(\theta-\phi\right)\right)$
+\begin_inset Formula 
+\[
+\mu_{n+1}=\lambda K\left(\psi\cos\left(\theta-\phi\right)+\chi\sin\left(\theta-\phi\right)\right)
+\]
+
 \end_inset
 
- and 
+and 
 \begin_inset Formula $\int\mu_{n}\mu_{n+1}=K^{2}\lambda\cos\phi$
 \end_inset
 
  after assuming that 
-\begin_inset Formula $\int a^{2}=\int b^{2}=1$
+\begin_inset Formula $\int\psi^{2}=\int\chi^{2}=1$
 \end_inset
 
  and 
-\begin_inset Formula $\int ab=0$
+\begin_inset Formula $\int\psi\chi=0$
 \end_inset
 
 .
  So the corrected hypothesis does not rescue the conclusion that this is
- not a complex eigenvalue.
+ not due to a single complex eigenvalue.
+\end_layout
+
+\begin_layout Paragraph
+Is it a mixture? Yes.
+\end_layout
+
+\begin_layout Standard
+Assume there are multiple eigenfunctions 
+\begin_inset Formula $\mathcal{M}\left(\psi_{n}+i\chi_{n}\right)=\frac{1}{\beta}e^{i\phi_{n}}\left(\psi_{n}+i\chi_{n}\right)$
+\end_inset
+
+ so that all have 
+\begin_inset Formula $\left|\lambda\right|=1/\beta$
+\end_inset
+
+ but differing in phase 
+\begin_inset Formula $\phi_{n}$
+\end_inset
+
+.
+ Assume that 
+\begin_inset Formula $\mu_{n}\to\sum_{k}a_{k}\psi_{k}$
+\end_inset
+
+.
+ Then further iteration will just tangle the phase into each of these into
+ a mess.
+ That is,
+\begin_inset Formula 
+\[
+\mathcal{M}\mu_{n}=\mu_{n+1}=\frac{1}{\beta}\sum_{k}a_{k}\left(\psi_{k}\cos\phi_{k}-\chi_{k}\sin\phi_{k}\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $\int\mu_{n}\mathcal{M}\mu_{n}=\int\mu_{n}\mu_{n+1}=\frac{1}{\beta}\sum_{k}a_{k}^{2}\cos\phi_{k}$
+\end_inset
+
+.
+ Hmm.
+ Well, that is a constant, independent of 
+\begin_inset Formula $n$
+\end_inset
+
+ but the numerics are not converging to a constant here.
+ Are the numerics suffering from rounding errors? Possibly.
+ Probably?! Since cancellation of Fibonacci-scale terms is required, this
+ destroys precision after not very many (a dozen) iterations.
+\end_layout
+
+\begin_layout Standard
+Conclusion: the result of iteration is a mixture.
+ The mixture looks like an ergodic bouncing around.
+ The phase angle 
+\begin_inset Formula $\phi_{k}$
+\end_inset
+
+ can be called the 
+\begin_inset Quotes eld
+\end_inset
+
+energy
+\begin_inset Quotes erd
+\end_inset
+
+ of the eigenvalue, so that, up to rescaling, the time evolution is unitary.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+ergodic
+\begin_inset Quotes erd
+\end_inset
+
+ sequence is just a sum of unitarily-evolving eigenfunctions.
+ Huh.
+ Wow!
 \end_layout
 
 \begin_layout Subsubsection

@@ -9092,50 +9092,73 @@ So there are two questions: what is this magic constant
 \begin_inset Formula $0.0869229$
 \end_inset
 
- ? What is this ergodic bouncing? One obvious hypothesis for an answer to
- the second question does not bear out.
- From general principles, it is reasonable to assume that the bouncing behavior
- is due to a complex eigenvalue and eigenfunction.
- Assume 
-\begin_inset Formula $\mathcal{M}\left(a+ib\right)=\lambda e^{i\phi}\left(a+ib\right)$
+? What is this ergodic bouncing?
+\end_layout
+
+\begin_layout Standard
+The answer to the second question is that 
+\begin_inset Formula $\mu_{n}$
 \end_inset
 
- for some unknown real functions 
-\begin_inset Formula $a,b$
+ has converged onto a superposition of eigenvectors, each having an eigenvalue
+ of modulus 
+\begin_inset Formula $1/\beta$
 \end_inset
 
- and unknown real phase angle 
-\begin_inset Formula $\phi$
-\end_inset
-
-.
- Assume 
-\begin_inset Formula $\int ab=0$
-\end_inset
-
- (the real and imaginary parts are orthogonal.) Assume further that 
-\begin_inset Formula $\mu_{n}\to K\left(a\cos\theta+b\sin\theta\right)$
-\end_inset
-
- for some unknown normalization 
-\begin_inset Formula $K$
-\end_inset
-
- and unknown mixing angle 
-\begin_inset Formula $\theta$
+ but differing in phase.
+ Further iteration shows unitary evolution, up to a scale factor.
+ The mixture over-all resembles ergodic behavior.
+ More precisely, assume there are multiple eigenfunctions 
+\begin_inset Formula $\mathcal{M}\left(\psi_{n}+i\chi_{n}\right)=\frac{1}{\beta}e^{i\phi_{n}}\left(\psi_{n}+i\chi_{n}\right)$
 \end_inset
 
 .
- These assumptions imply that 
-\begin_inset Formula $\int\mu_{n}\mu_{n+1}=K^{2}\lambda\cos\phi$
+ Then if 
+\begin_inset Formula $\mu_{n}\to\sum_{k}a_{k}\psi_{k}$
 \end_inset
 
- and so one should observe that 
-\begin_inset Formula $\int\mu_{n}\mu_{n+1}\to\mbox{const}$
+ further iteration will resemble an ergodic walk:
+\begin_inset Formula 
+\[
+\mathcal{M}\mu_{n}=\mu_{n+1}=\frac{1}{\beta}\sum_{k}a_{k}\left(\psi_{k}\cos\phi_{k}-\chi_{k}\sin\phi_{k}\right)
+\]
+
+\end_inset
+
+and so the numerics for 
+\begin_inset Formula $\mu_{n}$
+\end_inset
+
+ will look like a bouncing mess, as the various phase angles 
+\begin_inset Formula $\phi_{k}$
+\end_inset
+
+ make the factors come and go.
+\end_layout
+
+\begin_layout Standard
+At any rate, iteration from a simple starting point cannot cross the barrier-wal
+l of eigenvalues located in a circle of radius 
+\begin_inset Formula $1/\beta$
 \end_inset
 
 .
- This is not born out by numerics.
+ One becomes trapped at this location.
+ To get past it, one must design an initial 
+\begin_inset Formula $\mu_{0}$
+\end_inset
+
+ that is orthogonal to all of these, much as part of the recipe was to design
+ an initial 
+\begin_inset Formula $\mu_{0}$
+\end_inset
+
+ that was orthogonal to 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
