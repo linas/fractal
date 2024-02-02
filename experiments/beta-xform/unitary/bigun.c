@@ -12,16 +12,15 @@
 
 
 /**
- * Compute beta sequence for a given beta value.
+ * Compute binary digit sequence for a given beta value.
  *
  * digs: pointer to byte array in which to store bit sequence.
- * maxn: how many bits to compute.
+ * maxn: how many digits to compute.
  *
  * Each digit records whether 0.5<=midp (true) or not (false).
  * This is the Renyi-Parry sequence. The zeroth bit is always one.
  * the first bit is 0.5 <= (m_1 = T(beta/2))
  */
-
 void
 gen_bitseq(mpf_t beta, char* digs, int maxn)
 {
@@ -51,6 +50,42 @@ gen_bitseq(mpf_t beta, char* digs, int maxn)
 	mpf_clear(midp);
 }
 
+/**
+ * Compute zeta polynomial. Roots of this poly will be the desired
+ * zeros that we hope are accumulating.  This is the E(beta;z) thing.
+ *
+ * sum: returned value
+ * zeta: location at which to evaluate.
+ * digs: arry of digits to use
+ * order: max order of the poly. There must be at least this many
+ *     binary digits available.
+ */
+void ebz(mpf_t sum, mpf_t zeta, char* digs, int order)
+{
+	mpf_t zetan;
+	mpf_init(zetan);
+	mpf_set_ui(zetan, 1);
+
+	mpf_set_ui(sum, 0);
+
+	// Do the first k-1 of them.  The last one is always one.
+	for (int i=0; i<order; i++)
+	{
+		if (digs[i]) mpf_add(sum, sum, zetan);
+		mpf_mul(zetan, zetan, zeta);
+	}
+	// The final bit is always one.
+	mpf_add(sum, sum, zetan);
+
+	// times zeta
+	mpf_mul(sum, sum, zeta);
+
+	// subtract one.
+	mpd_sub_ui(sum, sum, 1);
+
+	mpf_clear(zetan);
+}
+
 int main(int argc, char* argv[])
 {
 	int bprec = 500;
@@ -68,4 +103,10 @@ int main(int argc, char* argv[])
 	for (int i=0; i<70; i++)
 		printf("%d", bitseq[i]);
 	printf("\n");
+
+	mpf_t zeta;
+	mpf_init(zeta);
+	mpf_set_ui(zeta, 1);
+	mpf_div(zeta, zeta, beta);
+	// ebz(
 }
