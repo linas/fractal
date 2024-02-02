@@ -97,13 +97,21 @@ void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 {
 	bitsy* b = (bitsy*) args;
 	ebz(f, z, b->digs, b->order);
-	printf("wrapni %f %f\n", 1.6*cpx_get_re(z), 1.6*cpx_get_im(z));
+
+	double re = cpx_get_re(z);
+	double im = cpx_get_im(z);
+	double r = sqrt(re*re + im*im);
+	double phi = atan2(im, re) / (2.0*M_PI);
+	double fre = cpx_get_re(f);
+	double fim = cpx_get_im(f);
+	double fmo = sqrt(fre*fre + fim*fim);
+	printf("wrapni r=%f phi=%f fmodulus=%g\n", r, phi, fmo);
 }
 
 /**
  * Return zero of polynomial
  */
-void get_zero(cpx_t zero, char* digs, int order)
+void survey(char* digs, int order)
 {
 	bitsy b;
 	b.digs = digs;
@@ -111,14 +119,38 @@ void get_zero(cpx_t zero, char* digs, int order)
 
 	cpx_t e1;
 	cpx_init(e1);
-	cpx_set_d(e1, 0.3, 0.0);
 	cpx_t e2;
 	cpx_init(e2);
-	cpx_set_d(e2, 0.0, 0.3);
 
-	int rc = cpx_find_zero_r(zero, wrapper, zero, e1, e2, 100, 100, &b);
+	cpx_t zero;
+	cpx_init(zero);
+	cpx_t guess;
+	cpx_init(guess);
 
-	printf("yo duude %d %f %f\n", rc, cpx_get_re(zero), cpx_get_im(zero));
+	double scale = 6.4 / order;
+
+	for (int i=0; i<2*order; i++)
+	{
+		double thet = 2.0* M_PI *i / ((double) 2*order);
+		double co = cos(thet);
+		double si = sin(thet);
+		cpx_set_d(guess, 0.9*co, 0.9*si);
+
+		cpx_set_d(e1, -0.5*scale*co, -0.5*scale*si);
+		cpx_set_d(e2, scale*si, scale*co);
+
+		int rc = cpx_find_zero_r(zero, wrapper, guess, e1, e2, 40, 80, &b);
+		double re = cpx_get_re(zero);
+		double im = cpx_get_im(zero);
+		double r = sqrt(re*re + im*im);
+		double phi = atan2(im, re) / (2.0*M_PI);
+		printf("found one rc=%d r=%f phi=%f  x=%f  y=%f\n", rc, r, phi, re, im);
+	}
+
+	cpx_clear(e1);
+	cpx_clear(e2);
+	cpx_clear(guess);
+	cpx_clear(zero);
 }
 
 int main(int argc, char* argv[])
@@ -139,9 +171,5 @@ int main(int argc, char* argv[])
 		printf("%d", bitseq[i]);
 	printf("\n");
 
-	cpx_t zero;
-	cpx_init(zero);
-	cpx_set_d(zero, -1.06/1.6, 1.0/1.6);
-
-	get_zero(zero, bitseq, 100);
+	survey(bitseq, 25);
 }
