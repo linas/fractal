@@ -52,6 +52,7 @@ gen_bitseq(mpf_t beta, char* digs, int maxn)
 	mpf_clear(midp);
 }
 
+// -------------------------------------------------------
 /**
  * Compute zeta polynomial. Roots of this poly will be the desired
  * zeros that we hope are accumulating.  This is the E(beta;z) thing.
@@ -66,11 +67,11 @@ void ebz(cpx_t sum, cpx_t zeta, char* digs, int order)
 {
 	cpx_t zetan;
 	cpx_init(zetan);
-	cpx_set_ui(zetan, 1, 0);
+	cpx_set(zetan, zeta);
 
 	cpx_set_ui(sum, 0, 0);
 
-	// Do the first k-1 of them.  The last one is always one.
+	// Do the first k-1 bits.  The last bit is always one.
 	for (int i=0; i<order; i++)
 	{
 		if (digs[i]) cpx_add(sum, sum, zetan);
@@ -79,14 +80,66 @@ void ebz(cpx_t sum, cpx_t zeta, char* digs, int order)
 	// The final bit is always one.
 	cpx_add(sum, sum, zetan);
 
-	// times zeta
-	cpx_mul(sum, sum, zeta);
-
 	// subtract one.
 	cpx_sub_ui(sum, sum, 1, 0);
 
 	cpx_clear(zetan);
 }
+
+// -------------------------------------------------------
+/**
+ * Same as above, but computes the m'th derivative.
+ * Needed as a test function for zero finding.
+ */
+void ebz_deriv(cpx_t sum, cpx_t zeta, int mderiv, char* digs, int order)
+{
+	cpx_set_ui(sum, 0, 0);
+	if (order+1 < mderiv) return;
+
+	mpf_t fact;
+	mpf_set_ui(fact, 1);
+
+	cpx_t zetan;
+	cpx_init(zetan);
+
+	if (0 == mderiv)
+		cpx_set(zetan, zeta);
+	else
+		cpx_set_ui(zetan, 1, 0);
+
+	cpx_t term;
+	cpx_init(term);
+
+	// Leading factorial
+	for (int i=1; i<mderiv; i++)
+		mpf_mul_ui(fact, fact, i+1);
+
+	// Do the first k-1 bits.  The last bit is always one.
+	for (int i=mderiv; i<order; i++)
+	{
+		if (digs[i])
+		{
+			cpx_times_mpf(term, zetan, fact);
+			cpx_add(sum, sum, term);
+		}
+		cpx_mul(zetan, zetan, zeta);
+		mpf_mul_ui(fact, fact, i+1);
+		mpf_div_ui(fact, fact, i-mderiv+1);
+	}
+	// The final bit is always one.
+	cpx_times_mpf(term, zetan, fact);
+	cpx_add(sum, sum, term);
+
+	// Subtract one.
+	if (0 == mderiv)
+		cpx_sub_ui(sum, sum, 1, 0);
+
+	cpx_clear(zetan);
+	cpx_clear(term);
+	mpf_clear(fact);
+}
+
+// -------------------------------------------------------
 
 typedef struct {
 	char* digs;
