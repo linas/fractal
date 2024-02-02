@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <anant/mp-complex.h>
 
 /**
  * Compute binary digit sequence for a given beta value.
@@ -60,30 +61,30 @@ gen_bitseq(mpf_t beta, char* digs, int maxn)
  * order: max order of the poly. There must be at least this many
  *     binary digits available.
  */
-void ebz(mpf_t sum, mpf_t zeta, char* digs, int order)
+void ebz(cpx_t sum, cpx_t zeta, char* digs, int order)
 {
-	mpf_t zetan;
-	mpf_init(zetan);
-	mpf_set_ui(zetan, 1);
+	cpx_t zetan;
+	cpx_init(zetan);
+	cpx_set_ui(zetan, 1, 0);
 
-	mpf_set_ui(sum, 0);
+	cpx_set_ui(sum, 0, 0);
 
 	// Do the first k-1 of them.  The last one is always one.
 	for (int i=0; i<order; i++)
 	{
-		if (digs[i]) mpf_add(sum, sum, zetan);
-		mpf_mul(zetan, zetan, zeta);
+		if (digs[i]) cpx_add(sum, sum, zetan);
+		cpx_mul(zetan, zetan, zeta);
 	}
 	// The final bit is always one.
-	mpf_add(sum, sum, zetan);
+	cpx_add(sum, sum, zetan);
 
 	// times zeta
-	mpf_mul(sum, sum, zeta);
+	cpx_mul(sum, sum, zeta);
 
 	// subtract one.
-	mpd_sub_ui(sum, sum, 1);
+	cpx_sub_ui(sum, sum, 1, 0);
 
-	mpf_clear(zetan);
+	cpx_clear(zetan);
 }
 
 int main(int argc, char* argv[])
@@ -104,9 +105,12 @@ int main(int argc, char* argv[])
 		printf("%d", bitseq[i]);
 	printf("\n");
 
-	mpf_t zeta;
-	mpf_init(zeta);
-	mpf_set_ui(zeta, 1);
-	mpf_div(zeta, zeta, beta);
-	// ebz(
+	cpx_t zeta;
+	cpx_init(zeta);
+	cpx_set_ui(zeta, 1, 1);
+	cpx_div_mpf(zeta, zeta, beta);
+
+	cpx_t poly;
+	cpx_init(poly);
+	ebz(poly, zeta, bitseq, 100);
 }
