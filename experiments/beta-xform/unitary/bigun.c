@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include <anant/mp-complex.h>
+#include <anant/mp-zerofind.h>
 
 /**
  * Compute binary digit sequence for a given beta value.
@@ -87,6 +88,39 @@ void ebz(cpx_t sum, cpx_t zeta, char* digs, int order)
 	cpx_clear(zetan);
 }
 
+typedef struct {
+	char* digs;
+	int order;
+} bitsy;
+
+void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
+{
+	bitsy* b = (bitsy*) args;
+	ebz(f, z, b->digs, b->order);
+	printf("wrapni %f %f\n", 1.6*cpx_get_re(z), 1.6*cpx_get_im(z));
+}
+
+/**
+ * Return zero of polynomial
+ */
+void get_zero(cpx_t zero, char* digs, int order)
+{
+	bitsy b;
+	b.digs = digs;
+	b.order = order;
+
+	cpx_t e1;
+	cpx_init(e1);
+	cpx_set_d(e1, 0.3, 0.0);
+	cpx_t e2;
+	cpx_init(e2);
+	cpx_set_d(e2, 0.0, 0.3);
+
+	int rc = cpx_find_zero_r(zero, wrapper, zero, e1, e2, 100, 100, &b);
+
+	printf("yo duude %d %f %f\n", rc, cpx_get_re(zero), cpx_get_im(zero));
+}
+
 int main(int argc, char* argv[])
 {
 	int bprec = 500;
@@ -105,12 +139,9 @@ int main(int argc, char* argv[])
 		printf("%d", bitseq[i]);
 	printf("\n");
 
-	cpx_t zeta;
-	cpx_init(zeta);
-	cpx_set_ui(zeta, 1, 1);
-	cpx_div_mpf(zeta, zeta, beta);
+	cpx_t zero;
+	cpx_init(zero);
+	cpx_set_d(zero, -1.06/1.6, 1.0/1.6);
 
-	cpx_t poly;
-	cpx_init(poly);
-	ebz(poly, zeta, bitseq, 100);
+	get_zero(zero, bitseq, 100);
 }

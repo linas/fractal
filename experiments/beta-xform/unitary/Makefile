@@ -15,6 +15,6 @@ all: bigun
 	$(CC) -c $< -I $(PERIODIC)
 
 .o:
-	$(CC) -o $@ $^ -lgmp -lm -lstdc++
+	$(CC) -o $@ $^ -lanant -lgmp -lm -lstdc++
 
 bigun.o: bigun.c
