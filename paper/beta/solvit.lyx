@@ -14937,7 +14937,7 @@ The apparent reason for this is that the coherent state was constructed
 \end_layout
 
 \begin_layout Subsection
-Unitary?
+Unitary Component
 \end_layout
 
 \begin_layout Standard
@@ -15087,6 +15087,11 @@ That leaves the possibility that only the chaotic bit-sequences might have
  violates this theorem.
  Hmm.
  Confusing.
+ I've got forgotten theorems mixed up.
+\end_layout
+
+\begin_layout Subsubsection
+Existence
 \end_layout
 
 \begin_layout Standard
@@ -15133,15 +15138,9 @@ almost solutions
 .
  Hmm.
  But it is clear that there are countably many such roots.
- As the bitsequence lengthens, the roots 
-\begin_inset Quotes eld
-\end_inset
-
-bifurcate
-\begin_inset Quotes erd
-\end_inset
-
- and approach limits that are dense on the unit circle.
+ As the bitsequence lengthens, the number of roots increases by one; each
+ root approaches the circle and so approaches a limit point.
+ These limit poaints are dense on the unit circle.
  The limit points are the desired 
 \begin_inset Formula $\phi$
 \end_inset
@@ -15206,6 +15205,191 @@ find roots numerically and take limits numerically
  In particular, we don't have a Hamiltonian, yet; we just have a proof that
  it exists.
  What is the Hamiltonian?
+\end_layout
+
+\begin_layout Subsubsection
+Estimates
+\end_layout
+
+\begin_layout Standard
+Given a sequence 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+ truncated to length 
+\begin_inset Formula $k$
+\end_inset
+
+, there will be a convergent bracket 
+\begin_inset Formula $\ell\Mapsto m\Mapsfrom\rho$
+\end_inset
+
+ lead by the polynomial 
+\begin_inset Formula $p_{m}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{align*}
+2m+1 & =b_{0}b_{1}b_{2}\cdots b_{k}\\
+p_{m}\left(x\right) & =x^{k+1}-\sum_{n=0}^{k}b_{n}x^{k-n}\\
+\check{E}_{k}\left(\zeta\right) & =-1+\zeta\sum_{n=0}^{k}b_{n}\zeta^{n}=-\zeta^{k+1}p_{m}\left(\frac{1}{\zeta}\right)
+\end{align*}
+
+\end_inset
+
+Suppose that 
+\begin_inset Formula $\zeta_{k}$
+\end_inset
+
+ is a complex root, so that 
+\begin_inset Formula $\check{E}_{k}\left(\zeta_{k}\right)=0$
+\end_inset
+
+.
+ We now want the estimate 
+\begin_inset Formula $\zeta_{k+1}=\zeta_{k}\left(1+\epsilon_{k}\right)$
+\end_inset
+
+ where it is assumed that 
+\begin_inset Formula $\epsilon_{k}$
+\end_inset
+
+ is small.
+ Well, 
+\begin_inset Formula $\check{E}_{k+1}\left(\zeta\right)=-\zeta^{k+2}p_{m^{\prime}}$
+\end_inset
+
+ where 
+\begin_inset Formula $m^{\prime}=2m$
+\end_inset
+
+ if 
+\begin_inset Formula $b_{k+1}=0$
+\end_inset
+
+ else 
+\begin_inset Formula $m^{\prime}=2m$
+\end_inset
+
++1.
+ This follows from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:polynomial recursion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ which takes the form
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{m^{\prime}}\left(x\right)=\begin{cases}
+x\left(p_{m}\left(x\right)+1\right)-1 & \mbox{ for }b_{k+1}=1\\
+xp_{m}\left(x\right)-1 & \mbox{ for }b_{k+1}=0
+\end{cases}
+\]
+
+\end_inset
+
+Thus
+\begin_inset Formula 
+\begin{align*}
+0 & =p_{m^{\prime}}\left(\frac{1}{\zeta_{k+1}}\right)\\
+ & =\frac{1}{\zeta_{k+1}}\left(p_{m}\left(\frac{1}{\zeta_{k+1}}\right)+b_{k+1}\right)-1\\
+ & \approx\frac{1}{\zeta_{k}}\left(1-\epsilon_{k}\right)\left(p_{m}\left(\frac{1}{\zeta_{k}}\left(1-\epsilon_{k}\right)\right)+b_{k+1}\right)-1\\
+ & \approx\frac{1}{\zeta_{k}}\left(1-\epsilon_{k}\right)\left(-\epsilon_{k}p_{m}^{\prime}\left(\frac{1}{\zeta_{k}}\right)+b_{k+1}\right)-1\\
+ & \approx-\epsilon_{k}\left(\frac{1}{\zeta_{k}}p_{m}^{\prime}\left(\frac{1}{\zeta_{k}}\right)+b_{k+1}\right)+\frac{1}{\zeta_{k}}b_{k+1}-1
+\end{align*}
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\[
+\epsilon_{k}\approx\frac{b_{k+1}-\zeta_{k}}{p_{m}^{\prime}\left(\frac{1}{\zeta_{k}}\right)+\zeta_{k}b_{k+1}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{m}^{\prime}$
+\end_inset
+
+ denotes the derivative:
+\begin_inset Formula 
+\begin{align*}
+p_{m}^{\prime}\left(x\right) & =\frac{d}{dx}\left(x^{k+1}-\sum_{n=0}^{k}\check{b}_{n}x^{k-n}\right)\\
+ & =\left(k+1\right)x^{k}-\sum_{n=0}^{k-1}\check{b}_{n}\left(k-n\right)x^{k-n-1}\\
+ & =k\left(x^{k}-\sum_{n=0}^{k-1}\check{b}_{n}x^{k-n-1}\right)+x^{k}+\sum_{n=1}^{k-1}\check{b}_{n}nx^{k-n-1}\\
+ & =\frac{k}{x}\left(x^{k+1}-\sum_{n=0}^{k}\check{b}_{n}x^{k-n}+\check{b}_{k}\right)+x^{k}\left(1+\sum_{n=1}^{k-1}\check{b}_{n}nx^{-n-1}\right)\\
+ & =\frac{k}{x}\left(p_{m}\left(x\right)+1\right)+x^{k}\left(1+\sum_{n=1}^{k-1}b_{n}nx^{-n-1}\right)
+\end{align*}
+
+\end_inset
+
+Above 
+\begin_inset Formula $\check{b}$
+\end_inset
+
+ is used instead of 
+\begin_inset Formula $b$
+\end_inset
+
+ because 
+\begin_inset Formula $\check{b}$
+\end_inset
+
+ is appropriate for the convergent.
+ Note that 
+\begin_inset Formula $\check{b}_{n}=b_{n}$
+\end_inset
+
+ for 
+\begin_inset Formula $n<k$
+\end_inset
+
+ while 
+\begin_inset Formula $\check{b}_{k}=1$
+\end_inset
+
+ so that the series is correctly terminated to get a proper, valid polynomial.
+\end_layout
+
+\begin_layout Standard
+Thus
+\begin_inset Formula 
+\[
+p_{m}^{\prime}\left(\frac{1}{\zeta_{k}}\right)=k\zeta_{k}+\frac{1}{\zeta_{k}^{k}}\left(1+\sum_{n=1}^{k-1}b_{n}n\zeta_{k}^{n+1}\right)
+\]
+
+\end_inset
+
+Keep in mind that 
+\begin_inset Formula $\left|\zeta_{k}\right|\approx1$
+\end_inset
+
+, so it is almost pure phase.
+ So indeed, 
+\begin_inset Formula $\epsilon_{k}$
+\end_inset
+
+ is small, but it is hard to tell which way it is pointing.
+ We want it to be pointing mostly radially outward.
+\end_layout
+
+\begin_layout Standard
+So this isn't going anywhere.
+\end_layout
+
+\begin_layout Standard
+The other isse is there's no insight into where new zeros are sprouting.
+ Time for numerics.
 \end_layout
 
 \begin_layout Subsection
