@@ -12,6 +12,7 @@
 
 #include <anant/mp-complex.h>
 #include <anant/mp-zerofind.h>
+#include <anant/mp-zeroiso.h>
 
 /**
  * Compute binary digit sequence for a given beta value.
@@ -91,7 +92,7 @@ void ebz(cpx_t sum, cpx_t zeta, char* digs, int order)
  * Same as above, but computes the m'th derivative.
  * Needed as a test function for zero finding.
  */
-void ebz_deriv(cpx_t sum, cpx_t zeta, int mderiv, char* digs, int order)
+void ebz_deriv(cpx_t sum, int mderiv, cpx_t zeta, char* digs, int order)
 {
 	cpx_set_ui(sum, 0, 0);
 	if (order+1 < mderiv) return;
@@ -143,13 +144,19 @@ void ebz_deriv(cpx_t sum, cpx_t zeta, int mderiv, char* digs, int order)
 
 typedef struct {
 	char* digs;
-	int order;
+	int degree;
 } bitsy;
+
+void isowrap(cpx_t f, int deriv, cpx_t z, void* args)
+{
+	bitsy* b = (bitsy*) args;
+	ebz_deriv(f, deriv, z, b->digs, b->degree);
+}
 
 void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 {
 	bitsy* b = (bitsy*) args;
-	ebz(f, z, b->digs, b->order);
+	ebz(f, z, b->digs, b->degree);
 
 	double re = cpx_get_re(z);
 	double im = cpx_get_im(z);
@@ -164,46 +171,59 @@ void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 /**
  * Return zero of polynomial
  */
-void survey(char* digs, int order)
+void survey(char* digs, int degree)
 {
 	bitsy b;
 	b.digs = digs;
-	b.order = order;
+	b.degree = degree;
 
+	// Allocate disks.
+	cpx_t* centers = (cpx_t*) malloc(degree*sizeof(cpx_t));
+	mpf_t* radii = (mpf_t*) malloc(degree*sizeof(mpf_t));
+	for (int i=0; i< degree; i++)
+	{
+		cpx_init(centers[i]);
+		mpf_init(radii[i]);
+	}
+
+	// Bounding box
 	cpx_t e1;
 	cpx_init(e1);
 	cpx_t e2;
 	cpx_init(e2);
+	cpx_set_ui(e1, 2, 2);
+	cpx_neg(e2, e1);
+
+	int ndisk = cpx_isolate_roots(isowrap, degree, e2, e1, centers, radii, &b);
+
+	printf("Degree %d found %d disks\n", degree, ndisk);
+	for (int i=0; i<ndisk; i++)
+	{
+		printf("Found disk %d center= %f %f radius= %f\n", i,
+			cpx_get_re(centers[i]),
+			cpx_get_im(centers[i]),
+			mpf_get_d(radii[i]));
+	}
+	printf("----\n");
 
 	cpx_t zero;
 	cpx_init(zero);
 	cpx_t guess;
 	cpx_init(guess);
 
-	double scale = 6.4 / order;
-
-	for (int i=0; i<2*order; i++)
-	{
-		double thet = 2.0* M_PI *i / ((double) 2*order);
-		double co = cos(thet);
-		double si = sin(thet);
-		cpx_set_d(guess, 0.9*co, 0.9*si);
-
-		cpx_set_d(e1, -0.5*scale*co, -0.5*scale*si);
-		cpx_set_d(e2, scale*si, scale*co);
-
-		int rc = cpx_find_zero_r(zero, wrapper, guess, e1, e2, 40, 80, &b);
-		double re = cpx_get_re(zero);
-		double im = cpx_get_im(zero);
-		double r = sqrt(re*re + im*im);
-		double phi = atan2(im, re) / (2.0*M_PI);
-		printf("found one rc=%d r=%f phi=%f  x=%f  y=%f\n", rc, r, phi, re, im);
-	}
 
 	cpx_clear(e1);
 	cpx_clear(e2);
 	cpx_clear(guess);
 	cpx_clear(zero);
+
+	for (int i=0; i< degree; i++)
+	{
+		cpx_clear(centers[i]);
+		mpf_clear(radii[i]);
+	}
+	free(centers);
+	free(radii);
 }
 
 int main(int argc, char* argv[])
@@ -224,5 +244,8 @@ int main(int argc, char* argv[])
 		printf("%d", bitseq[i]);
 	printf("\n");
 
-	survey(bitseq, 25);
+	for (int degree=3; degree<25; degree++)
+	{
+		survey(bitseq, degree);
+	}
 }
