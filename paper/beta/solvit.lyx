@@ -15909,16 +15909,55 @@ while
 \end_inset
 
  from below.
- So then a linear interpolation would be something like this XXX this is
- wrong but the idea is smooth add new roots.
+ So, for 
+\begin_inset Formula $n-1\le\eta<n$
+\end_inset
+
+ there is a linear interpolation 
 \begin_inset Formula 
 \[
-A_{\eta}\left(\zeta\right)=\left(n-1-\eta\right)\left(\zeta-\zeta_{n}\right)
+A_{\eta}\left(\zeta\right)=\left(1+\eta-n\right)\left(\zeta-\zeta_{n}\right)+n-\eta
 \]
 
 \end_inset
 
- 
+or perhaps a (smooth) interpolating function 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $f\left(0\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(1\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+A_{\eta}\left(\zeta\right)=f\left(1+\eta-n\right)\left(\zeta-\zeta_{n}\right)+f\left(n-\eta\right)
+\]
+
+\end_inset
+
+So we have that 
+\begin_inset Formula $A_{\eta}$
+\end_inset
+
+ is this sawtooth, as a function of 
+\begin_inset Formula $\eta$
+\end_inset
+
+ and it is constantly sprouting new monomials, and each sprouted monomial...
+ well, its a blue-sky catastrophe; first there is not any root 
+\begin_inset Formula $\zeta_{n}$
+\end_inset
+
+ and then all of sudden, there is.
+ So we want some Morse-theory-like thing to make these roots appear out
+ of thin air.
+ How? Is there any existing theoretical framework for this?
 \end_layout
 
 \begin_layout Subsection
