@@ -1,6 +1,6 @@
 
 set term png size 1024,768
-set term png size 640, 480
+# set term png size 640, 480
 set out 'bigun.png'
 
 set xrange [-1:1]
@@ -8,10 +8,21 @@ set xrange [-1:1]
 
 set title "E(zeta) zeros at beta=1.6"
 
-x = 0.75
-set arrow from x,0 to x,32 nohead linecolor "green"
+x = 0.757
+set arrow from x,0 to x,22 nohead linecolor "green"
+x = 0.425
+set arrow from x,0 to x,22 nohead linecolor "red"
 
-plot "bigun.dat" using 4:3 with points title ""
+plot "bigun.dat" using 5:3 with linespoints title ""
+
+###################################################
+set out 'bigdev.png'
+
+set xrange [-1:1]
+
+set title "E(zeta) zeros at beta=1.6"
+
+plot "bigun.dat" using 5:4 with lines title ""
 
 #####
 

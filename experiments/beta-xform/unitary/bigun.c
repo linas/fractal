@@ -5,6 +5,7 @@
  * Feb 2024
  */
 
+#define _GNU_SOURCE
 #include <gmp.h>
 #include <math.h>
 #include <stdio.h>
@@ -177,6 +178,17 @@ void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 #endif
 }
 
+int mpts[1000];
+int cmp(const void* vida, const void* vidb, void* args)
+{
+	double* angs = (double*) args;
+	int ida = *((int*) vida);
+	int idb = *((int*) vidb);
+	double ma = angs[ida];
+	double mb = angs[idb];
+	return (ma < mb) ? -1: 1;
+}
+
 /**
  * Return zero of polynomial
  */
@@ -241,6 +253,10 @@ void survey(char* digs, int degree)
 	printf("----\n");
 	fflush(stdout);
 #endif
+
+	double* modulus = (double*) malloc(narr*sizeof(double));
+	double* phase = (double*) malloc(narr*sizeof(double));
+
 	for (int i=0; i<ndisk; i++)
 	{
 		cpx_set(guess, centers[i]);
@@ -249,15 +265,28 @@ void survey(char* digs, int degree)
 		cpx_times_mpf(e1, e1, radii[i]);
 		cpx_times_mpf(e2, e2, radii[i]);
 		int rc = cpx_find_zero_r(zero, wrapper, guess, e1, e2, 25, 70, &b);
+		if (0 != rc) printf("# Aieeeeeeeeeeeeeeeeeeee!\n");
 
 		double re = cpx_get_re(zero);
 		double im = cpx_get_im(zero);
 		double r = sqrt(re*re + im*im);
 		double phi = atan2(im, re) / M_PI;
-		double roff = r + 0.333* degree;
-		printf("%d	%d	%f	%f\n", degree, i, roff, phi);
-		if (0 != rc) printf("# Aieeeeeeeeeeeeeeeeeeee!\n");
+		modulus[i] = r;
+		phase[i] = phi;
 	}
+
+	// Print zeros in angular order.
+	for (int i=0; i< ndisk; i++) mpts[i] = i;
+	qsort_r(mpts, ndisk, sizeof(int), cmp, phase);
+
+	for (int i=0; i<ndisk; i++)
+	{
+		double r = modulus[mpts[i]];
+		double phi = phase[mpts[i]];
+		double roff = r + 0.333* degree;
+		printf("%d	%d	%f	%f	%f\n", degree, mpts[i], roff, r, phi);
+	}
+	printf("\n");
 	fflush(stdout);
 
 	cpx_clear(e1);
@@ -273,6 +302,8 @@ void survey(char* digs, int degree)
 	}
 	free(centers);
 	free(radii);
+	free(modulus);
+	free(phase);
 }
 
 int main(int argc, char* argv[])
