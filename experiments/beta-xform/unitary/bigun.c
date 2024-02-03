@@ -214,6 +214,7 @@ void survey(char* digs, int degree)
 	cpx_t guess;
 	cpx_init(guess);
 
+#ifdef DEBUG
 	printf("Degree %d found %d disks\n", degree, ndisk);
 	for (int i=0; i<ndisk; i++)
 	{
@@ -239,6 +240,25 @@ void survey(char* digs, int degree)
 	}
 	printf("----\n");
 	fflush(stdout);
+#endif
+	for (int i=0; i<ndisk; i++)
+	{
+		cpx_set(guess, centers[i]);
+		cpx_set_ui(e1, 1, 0);
+		cpx_set_ui(e2, 0, 1);
+		cpx_times_mpf(e1, e1, radii[i]);
+		cpx_times_mpf(e2, e2, radii[i]);
+		int rc = cpx_find_zero_r(zero, wrapper, guess, e1, e2, 25, 70, &b);
+
+		double re = cpx_get_re(zero);
+		double im = cpx_get_im(zero);
+		double r = sqrt(re*re + im*im);
+		double phi = atan2(im, re) / M_PI;
+		double roff = r + 0.333* degree;
+		printf("%d	%d	%f	%f\n", degree, i, roff, phi);
+		if (0 != rc) printf("# Aieeeeeeeeeeeeeeeeeeee!\n");
+	}
+	fflush(stdout);
 
 	cpx_clear(e1);
 	cpx_clear(e2);
@@ -259,6 +279,7 @@ int main(int argc, char* argv[])
 {
 	int bprec = 500;
 	mpf_set_default_prec(bprec);
+	printf("#\n# Default prec=%d bits\n#\n", bprec);
 
 	// Set beta to exactly 1.6
 	mpf_t beta;
@@ -269,11 +290,12 @@ int main(int argc, char* argv[])
 #define NBITS 400
 	char bitseq[NBITS];
 	gen_bitseq(beta, bitseq, NBITS);
+	printf("#\n# ");
 	for (int i=0; i<70; i++)
 		printf("%d", bitseq[i]);
-	printf("\n");
+	printf("\n#\n");
 
-	for (int degree=3; degree<25; degree++)
+	for (int degree=3; degree<100; degree++)
 	{
 		survey(bitseq, degree);
 	}
