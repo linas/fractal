@@ -62,7 +62,8 @@ gen_bitseq(mpf_t beta, char* digs, int maxn)
  * zeta: location at which to evaluate.
  * digs: arry of digits to use
  * order: max order of the poly. There must be at least this many
- *     binary digits available.
+ *     binary digits available. Degree of polynomial is one more than
+ *     this. Sorry for the off-by-one, but so it goes.
  */
 void ebz(cpx_t sum, cpx_t zeta, char* digs, int order)
 {
@@ -164,6 +165,7 @@ void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 	bitsy* b = (bitsy*) args;
 	ebz(f, z, b->digs, b->degree);
 
+#if 0
 	double re = cpx_get_re(z);
 	double im = cpx_get_im(z);
 	double r = sqrt(re*re + im*im);
@@ -172,6 +174,7 @@ void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 	double fim = cpx_get_im(f);
 	double fmo = sqrt(fre*fre + fim*fim);
 	printf("wrapni r=%f phi=%f fmodulus=%g\n", r, phi, fmo);
+#endif
 }
 
 /**
@@ -181,7 +184,7 @@ void survey(char* digs, int degree)
 {
 	bitsy b;
 	b.digs = digs;
-	b.degree = degree;
+	b.degree = degree-1;  // off-by one because of defintions
 
 	// Allocate disks.
 	int narr = degree+5;
@@ -203,24 +206,43 @@ void survey(char* digs, int degree)
 
 	int ndisk = cpx_isolate_roots(isowrap, degree, e2, e1, centers, radii, &b);
 
-	printf("Degree %d found %d disks\n", degree, ndisk);
-	for (int i=0; i<ndisk; i++)
-	{
-		printf("Found disk %d center= %f %f radius= %f\n", i,
-			cpx_get_re(centers[i]),
-			cpx_get_im(centers[i]),
-			mpf_get_d(radii[i]));
-	}
-	printf("----\n");
+	mpf_t mod;
+	mpf_init(mod);
 
 	cpx_t zero;
 	cpx_init(zero);
 	cpx_t guess;
 	cpx_init(guess);
 
+	printf("Degree %d found %d disks\n", degree, ndisk);
+	for (int i=0; i<ndisk; i++)
+	{
+		cpx_abs(mod, centers[i]);
+		printf("Found disk %2d center= %f %f radius= %f mod=%f\n", i,
+			cpx_get_re(centers[i]),
+			cpx_get_im(centers[i]),
+			mpf_get_d(radii[i]),
+			mpf_get_d(mod));
+
+		cpx_set(guess, centers[i]);
+		cpx_set_ui(e1, 1, 0);
+		cpx_set_ui(e2, 0, 1);
+		cpx_times_mpf(e1, e1, radii[i]);
+		cpx_times_mpf(e2, e2, radii[i]);
+		int rc = cpx_find_zero_r(zero, wrapper, guess, e1, e2, 25, 70, &b);
+		cpx_abs(mod, zero);
+		printf("            zero rc=%d %f %f                  mod=%f\n", rc,
+			cpx_get_re(zero),
+			cpx_get_im(zero),
+			mpf_get_d(mod));
+		if (0 != rc) printf("Aieeeeeeeeeeeeeeeeeeee!\n");
+	}
+	printf("----\n");
+	fflush(stdout);
 
 	cpx_clear(e1);
 	cpx_clear(e2);
+	mpf_clear(mod);
 	cpx_clear(guess);
 	cpx_clear(zero);
 
