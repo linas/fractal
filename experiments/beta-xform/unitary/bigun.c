@@ -98,6 +98,7 @@ void ebz_deriv(cpx_t sum, int mderiv, cpx_t zeta, char* digs, int order)
 	if (order+1 < mderiv) return;
 
 	mpf_t fact;
+	mpf_init(fact);
 	mpf_set_ui(fact, 1);
 
 	cpx_t zetan;
@@ -116,7 +117,9 @@ void ebz_deriv(cpx_t sum, int mderiv, cpx_t zeta, char* digs, int order)
 		mpf_mul_ui(fact, fact, i+1);
 
 	// Do the first k-1 bits.  The last bit is always one.
-	for (int i=mderiv; i<order; i++)
+	int mstart = mderiv-1;
+	if (mstart < 0) mstart = 0;
+	for (int i=mstart; i<order; i++)
 	{
 		if (digs[i])
 		{
@@ -124,8 +127,11 @@ void ebz_deriv(cpx_t sum, int mderiv, cpx_t zeta, char* digs, int order)
 			cpx_add(sum, sum, term);
 		}
 		cpx_mul(zetan, zetan, zeta);
-		mpf_mul_ui(fact, fact, i+1);
-		mpf_div_ui(fact, fact, i-mderiv+1);
+		if (0 < mderiv)
+		{
+			mpf_mul_ui(fact, fact, i+2);
+			mpf_div_ui(fact, fact, i-mderiv+2);
+		}
 	}
 	// The final bit is always one.
 	cpx_times_mpf(term, zetan, fact);
@@ -178,9 +184,10 @@ void survey(char* digs, int degree)
 	b.degree = degree;
 
 	// Allocate disks.
-	cpx_t* centers = (cpx_t*) malloc(degree*sizeof(cpx_t));
-	mpf_t* radii = (mpf_t*) malloc(degree*sizeof(mpf_t));
-	for (int i=0; i< degree; i++)
+	int narr = degree+5;
+	cpx_t* centers = (cpx_t*) malloc(narr*sizeof(cpx_t));
+	mpf_t* radii = (mpf_t*) malloc(narr*sizeof(mpf_t));
+	for (int i=0; i< narr; i++)
 	{
 		cpx_init(centers[i]);
 		mpf_init(radii[i]);
@@ -217,7 +224,7 @@ void survey(char* digs, int degree)
 	cpx_clear(guess);
 	cpx_clear(zero);
 
-	for (int i=0; i< degree; i++)
+	for (int i=0; i< narr; i++)
 	{
 		cpx_clear(centers[i]);
 		mpf_clear(radii[i]);
