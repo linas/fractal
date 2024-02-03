@@ -4,25 +4,44 @@ set term png size 1024,768
 set out 'bigun.png'
 
 set xrange [-1:1]
-# set yrange [0:3]
+set yrange [0:100]
 
-set title "E(zeta) zeros at beta=1.6"
+set title "Roots of E_n(zeta) at beta=1.6"
+set ylabel "Polynomial degree n"
+set xlabel "Phase / Pi"
 
-x = 0.757
-set arrow from x,0 to x,22 nohead linecolor "green"
-x = 0.425
-set arrow from x,0 to x,22 nohead linecolor "red"
+#x = 0.758
+#set arrow from x,0 to x,100 nohead linecolor "green"
+#x = 0.423
+#set arrow from x,0 to x,100 nohead linecolor "red"
 
-plot "bigun.dat" using 5:3 with linespoints title ""
+plot "bigun.dat" using 5:($3/0.333 - 2) with linespoints title ""
 
 ###################################################
+set term png size 1024,768
 set out 'bigdev.png'
 
 set xrange [-1:1]
+unset yrange
 
 set title "E(zeta) zeros at beta=1.6"
 
 plot "bigun.dat" using 5:4 with lines title ""
 
-#####
-
+####################################################
+## Paper for graph
+## set term png size 1024,768
+## set out 'bigun.png'
+#set term eps color enhanced fontscale 0.42
+#set out 'bigun.eps'
+#
+#set xrange [-1:1]
+#set yrange [0:100]
+#
+#set title "Roots of E_k(zeta) at beta=1.6"
+#set ylabel "Polynomial degree k"
+#set xlabel "Phase / Pi"
+#
+#plot "bigun.dat" using 5:($3/0.333 - 2) with linespoints pointsize 0.25 title ""
+#
+######

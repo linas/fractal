@@ -326,7 +326,7 @@ int main(int argc, char* argv[])
 		printf("%d", bitseq[i]);
 	printf("\n#\n");
 
-	for (int degree=3; degree<100; degree++)
+	for (int degree=100; degree<301; degree += 5)
 	{
 		survey(bitseq, degree);
 	}
