@@ -16220,6 +16220,97 @@ So we have that
 \end_layout
 
 \begin_layout Subsection
+Convolutions
+\end_layout
+
+\begin_layout Standard
+Given any polynomial 
+\begin_inset Formula $p\left(x\right)=\sum_{i=0}^{N}a_{k}x^{i}$
+\end_inset
+
+ with roots 
+\begin_inset Formula $p\left(x\right)=0$
+\end_inset
+
+, the result of inserting a root into the series 
+\begin_inset Formula $E\left(\zeta\right)=-1+\sum_{n=0}^{\infty}b_{n}\zeta^{n+1}$
+\end_inset
+
+ can be understood as a convolution, in that 
+\begin_inset Formula $x^{N}=\frac{1}{a_{N}}\sum_{i-0}^{N-1}a_{i}x^{i}$
+\end_inset
+
+ can be plugged in, replacing any given power 
+\begin_inset Formula $\zeta^{N+k}$
+\end_inset
+
+ with a sequence of lower powers.
+ This can also be done for any 
+\begin_inset Formula $x^{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\le i\le N$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $E*_{i}p$
+\end_inset
+
+ for the result of this substitution, performed once, one every 
+\begin_inset Formula $\zeta^{i}$
+\end_inset
+
+.
+ That is, substitute 
+\begin_inset Formula $\zeta^{i+k}\mapsto a_{i}^{-1}\zeta^{k}\sum_{j\ne i}a_{j}\zeta^{j}$
+\end_inset
+
+.
+ This results in a formal series 
+\begin_inset Formula $E*_{i}p$
+\end_inset
+
+ with the property that 
+\begin_inset Formula $\left[E*_{i}p\right]\left(x\right)=E\left(x\right)$
+\end_inset
+
+ whenever 
+\begin_inset Formula $x$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $p\left(x\right)=0$
+\end_inset
+
+.
+ As this can be done repeatedly and recursively, one obtains a large equivalence
+ class of formal series having this property.
+ This can be thought of as a series resummation technique, but one that
+ is valid only when 
+\begin_inset Formula $p\left(x\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The question is then: are any of these rewritten series absolutely convergent
+ (holding 
+\begin_inset Formula $p\left(x\right)$
+\end_inset
+
+ fixed)? Naively, one might guess this is the empty set, but this is not
+ obvious.
+ Alternately, are there any 
+\begin_inset Formula $p\left(x\right)$
+\end_inset
+
+ for which one the rewritten series becomes absolutely convergent?
+\end_layout
+
+\begin_layout Subsection
 Function field arithmetic
 \end_layout
 
