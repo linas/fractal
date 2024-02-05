@@ -17,4 +17,4 @@ all: bigun
 .o:
 	$(CC) -o $@ $^ -lanant -lgmp -lm -lstdc++
 
-bigun.o: bigun.c
+bigun.o: bigun.c bigseries.c
