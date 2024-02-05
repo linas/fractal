@@ -6,7 +6,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/fileio.o $(GENDIR)/util.o
 
 PERIODIC = ../periodic
 
-all: bigun
+all: bigun bigfourier
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR)
@@ -15,6 +15,9 @@ all: bigun
 	$(CC) -c $< -I $(PERIODIC)
 
 .o:
-	$(CC) -o $@ $^ -lanant -lgmp -lm -lstdc++
+	$(CC) -o $@ $^ -lanant -ldb -lgmp -lm -lstdc++
 
 bigun.o: bigun.c bigseries.c
+bigfourier.o: bigfourier.C
+
+bigfourier: bigfourier.o $(BRAT)

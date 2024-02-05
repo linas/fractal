@@ -146,4 +146,4 @@ void ebz_deriv(cpx_t sum, int mderiv, cpx_t zeta, char* digs, int order)
 	mpf_clear(fact);
 }
 
-// -------------------------------------------------------
+/* --------------------------- END OF LIFE ------------------------- */
