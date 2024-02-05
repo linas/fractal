@@ -18,6 +18,6 @@ all: bigun bigfourier
 	$(CC) -o $@ $^ -lanant -ldb -lgmp -lm -lstdc++
 
 bigun.o: bigun.c bigseries.c
-bigfourier.o: bigfourier.C
+bigfourier.o: bigfourier.C bigseries.c
 
 bigfourier: bigfourier.o $(BRAT)

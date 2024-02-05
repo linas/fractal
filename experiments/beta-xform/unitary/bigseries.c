@@ -5,7 +5,6 @@
  * Feb 2024
  */
 
-#define _GNU_SOURCE
 #include <gmp.h>
 #include <math.h>
 #include <stdio.h>

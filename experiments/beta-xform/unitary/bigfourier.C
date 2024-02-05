@@ -5,7 +5,6 @@
  * Feb 2024
  */
 
-#define _GNU_SOURCE
 #include <gmp.h>
 #include <math.h>
 #include <stdio.h>
@@ -18,13 +17,13 @@
 
 // -------------------------------------------------------
 
-#define NBITS 800
+#define NBITS 1200
 char bitseq[NBITS];
 bool initialized = false;
 
 static void do_init(void)
 {
-	int bprec = 900;
+	int bprec = 1400;
 	mpf_set_default_prec(bprec);
 	printf("#\n# Default prec=%d bits\n#\n", bprec);
 
@@ -49,9 +48,16 @@ static double fourier(double re_q, double im_q, int itermax, double param)
 		do_init();
 	}
 
+#if 0
 	// Frequency on the vertical axis, order on the horizontal.
 	double x = im_q;
-	int order = 200 * re_q;
+	int order = 800 * re_q;
+#endif
+
+	// Frequency angular direction, order on the radial.
+	double phi = atan2(im_q, re_q) / (2.0*M_PI);
+	double x = phi;
+	int order = 800 * sqrt(re_q*re_q + im_q*im_q);
 
 	// zeta = exp (i 2pi x)
 	cpx_t zeta;
@@ -66,6 +72,7 @@ static double fourier(double re_q, double im_q, int itermax, double param)
 	double re = cpx_get_re(sum);
 	double im = cpx_get_im(sum);
 	double mod = sqrt(re*re+im*im);
+	mod /= sqrt(order);
 
 	cpx_clear(zeta);
 	cpx_clear(sum);
