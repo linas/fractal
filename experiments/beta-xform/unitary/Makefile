@@ -17,7 +17,7 @@ all: bigun bigfourier poly-four
 .o:
 	$(CC) -o $@ $^ -lanant -ldb -lgmp -lm -lstdc++
 
-bigun.o: bigun.c bigseries.c
+bigun.o: bigun.c bigseries.c bigzero.c
 bigfourier.o: bigfourier.C bigseries.c
 poly-four.o: poly-four.C
 
