@@ -46,24 +46,20 @@ void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 #endif
 }
 
-int cmp(const void* vida, const void* vidb, void* args)
-{
-	double* angs = (double*) args;
-	int ida = *((int*) vida);
-	int idb = *((int*) vidb);
-	double ma = angs[ida];
-	double mb = angs[idb];
-	return (ma < mb) ? -1: 1;
-}
-
 /**
- * Return zero of polynomial
+ * Obtain roots of polynomial.
+ * Roots are solutions of E = 0 = -1 + b_0 x + b_1 x^2 + b_k x^{k+1}
+ * where degree == k+1
+ * The bits are to be provided in the array "digs".
+ * There are always "degree" roots. They are returned in the arrays
+ * modulus and phase, which must have size greater than degree.
+ * Returns number of roots actually found.
  */
-void survey(char* digs, int degree)
+int get_roots(char* digs, int degree, double* modulus, double* phase)
 {
 	bitsy b;
 	b.digs = digs;
-	b.degree = degree-1;  // off-by one because of defintions
+	b.degree = degree-1;  // off-by one because of definitions
 
 	// Allocate disks.
 	int narr = degree+5;
@@ -84,6 +80,8 @@ void survey(char* digs, int degree)
 	cpx_neg(e2, e1);
 
 	int ndisk = cpx_isolate_roots(isowrap, degree, e2, e1, centers, radii, &b);
+	if (ndisk != degree)
+		fprintf(stderr, "Error: expecting %d roots, got %d\n", degree, ndisk);
 
 	mpf_t mod;
 	mpf_init(mod);
@@ -121,9 +119,6 @@ void survey(char* digs, int degree)
 	fflush(stdout);
 #endif
 
-	double* modulus = (double*) malloc(narr*sizeof(double));
-	double* phase = (double*) malloc(narr*sizeof(double));
-
 	for (int i=0; i<ndisk; i++)
 	{
 		cpx_set(guess, centers[i]);
@@ -142,21 +137,6 @@ void survey(char* digs, int degree)
 		phase[i] = phi;
 	}
 
-	// Print zeros in angular order.
-	int mpts[1000];
-	for (int i=0; i< ndisk; i++) mpts[i] = i;
-	qsort_r(mpts, ndisk, sizeof(int), cmp, phase);
-
-	for (int i=0; i<ndisk; i++)
-	{
-		double r = modulus[mpts[i]];
-		double phi = phase[mpts[i]];
-		double roff = r + 0.333* degree;
-		printf("%d	%d	%f	%f	%f\n", degree, mpts[i], roff, r, phi);
-	}
-	printf("\n");
-	fflush(stdout);
-
 	cpx_clear(e1);
 	cpx_clear(e2);
 	mpf_clear(mod);
@@ -170,8 +150,33 @@ void survey(char* digs, int degree)
 	}
 	free(centers);
 	free(radii);
-	free(modulus);
-	free(phase);
+
+	return ndisk;
+}
+
+int cmp(const void* vida, const void* vidb, void* args)
+{
+	double* angs = (double*) args;
+	int ida = *((int*) vida);
+	int idb = *((int*) vidb);
+	double ma = angs[ida];
+	double mb = angs[idb];
+	return (ma < mb) ? -1: 1;
+}
+
+void sort_roots(int nroots, double* modulus, double* phase)
+{
+	// Sort zeros in angular order.
+	int mpts[1000];
+	for (int i=0; i< nroots; i++) mpts[i] = i;
+	qsort_r(mpts, nroots, sizeof(int), cmp, phase);
+
+	double tmp[1000];
+	for (int i=0; i< nroots; i++) tmp[i] = modulus[mpts[i]];
+	for (int i=0; i< nroots; i++) modulus[i] = tmp[i];
+
+	for (int i=0; i< nroots; i++) tmp[i] = phase[mpts[i]];
+	for (int i=0; i< nroots; i++) phase[i] = tmp[i];
 }
 
 int main(int argc, char* argv[])
@@ -194,8 +199,21 @@ int main(int argc, char* argv[])
 		printf("%d", bitseq[i]);
 	printf("\n#\n");
 
-	for (int degree=100; degree<301; degree += 5)
+	int maxd = 101;
+	double* modulus = (double*) malloc(maxd*sizeof(double));
+	double* phase = (double*) malloc(maxd*sizeof(double));
+	for (int degree=2; degree<maxd; degree ++)
 	{
-		survey(bitseq, degree);
+		get_roots(bitseq, degree, modulus, phase);
+		sort_roots(degree, modulus, phase);
+
+		for (int i=0; i<degree; i++)
+		{
+			double r = modulus[i];
+			double phi = phase[i];
+			printf("%d	%f	%f\n", degree, r, phi);
+		}
+		printf("\n");
+		fflush(stdout);
 	}
 }
