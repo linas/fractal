@@ -46,7 +46,6 @@ void wrapper(cpx_t f, cpx_t z, int nprec, void* args)
 #endif
 }
 
-int mpts[1000];
 int cmp(const void* vida, const void* vidb, void* args)
 {
 	double* angs = (double*) args;
@@ -144,6 +143,7 @@ void survey(char* digs, int degree)
 	}
 
 	// Print zeros in angular order.
+	int mpts[1000];
 	for (int i=0; i< ndisk; i++) mpts[i] = i;
 	qsort_r(mpts, ndisk, sizeof(int), cmp, phase);
 
