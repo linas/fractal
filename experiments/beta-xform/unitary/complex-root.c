@@ -51,8 +51,9 @@ int main(int argc, char* argv[])
 
 	for (int i=0; i<order; i++)
 	{
-		double r = modulus[i];
-		double phi = phase[i];
-		printf("r= %f	phi= %f\n", r, phi);
+		double zr = modulus[i];
+		double zphi = phase[i];
+		double r = 1.0/zr;
+		printf("r=%f	1/r= %f	phi= %f\n", r, zr, zphi);
 	}
 }
