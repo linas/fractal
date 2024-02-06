@@ -17,13 +17,15 @@
 
 // -------------------------------------------------------
 
-#define NBITS 1200
+// #define NBITS 1200
+#define NBITS 9600
 char bitseq[NBITS];
 bool initialized = false;
 
 static void do_init(void)
 {
-	int bprec = 1400;
+	// int bprec = 1400;
+	int bprec = 9800;
 	mpf_set_default_prec(bprec);
 	printf("#\n# Default prec=%d bits\n#\n", bprec);
 
@@ -57,7 +59,8 @@ static double fourier(double re_q, double im_q, int itermax, double param)
 	// Frequency angular direction, order on the radial.
 	double phi = atan2(im_q, re_q) / (2.0*M_PI);
 	double x = phi;
-	int order = 800 * sqrt(re_q*re_q + im_q*im_q);
+	// int order = 800 * sqrt(re_q*re_q + im_q*im_q);
+	int order = 4800 * sqrt(re_q*re_q + im_q*im_q);
 
 	// zeta = exp (i 2pi x)
 	cpx_t zeta;
