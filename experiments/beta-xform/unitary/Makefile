@@ -6,7 +6,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/fileio.o $(GENDIR)/util.o
 
 PERIODIC = ../periodic
 
-all: bigun bigfourier poly-four
+all: bigun bigfourier poly-four complex-root
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(PERIODIC)
@@ -20,6 +20,7 @@ all: bigun bigfourier poly-four
 bigun.o: bigun.c bigseries.c bigzero.c
 bigfourier.o: bigfourier.C bigseries.c
 poly-four.o: poly-four.C
+complex-root.o: complex-root.c bigseries.c bigzero.c
 
 bigfourier: bigfourier.o $(BRAT)
 poly-four: poly-four.o $(BRAT)
