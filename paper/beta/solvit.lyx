@@ -35120,6 +35120,467 @@ Based on this observation, it seems that a better numbering scheme is to
  use the visitation labels (below).
 \end_layout
 
+\begin_layout Subsubsection
+Case n=2 (order 
+\begin_inset Formula $\nu=3$
+\end_inset
+
+) quadratic
+\end_layout
+
+\begin_layout Standard
+Apply the above algo for the 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case, look at the steps explicitly, and see how it goes.
+ This is very verbose.
+\end_layout
+
+\begin_layout Itemize
+Polynomial: 
+\begin_inset Formula $p_{2}\left(\beta\right)=\beta^{3}-\beta^{2}-1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Root: 
+\begin_inset Formula $r_{2}\approx1.465571231876768\cdots$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Midpoints:
+\begin_inset Formula 
+\begin{align*}
+m_{0}=\beta/2 & \approx0.732785615938384\\
+m_{1}=\beta\left(\beta-1\right)/2 & \approx0.3411639019140096\\
+m_{2}=\beta^{2}\left(\beta-1\right)/2 & =1/2
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $0<m_{1}<m_{2}<m_{0}<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Intervals 
+\begin_inset Formula $I_{3}=\left[0,m_{1}\right]<I_{2}=\left[m_{1},m_{2}\right]<I_{1}=\left[m_{2},m_{0}\right]<I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The recursive interval maps are the 
+\begin_inset Quotes eld
+\end_inset
+
+left map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
+\end_inset
+
+ and the 
+\begin_inset Quotes eld
+\end_inset
+
+right map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Interval inclusions: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="10">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m_{j}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $LI_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $LI_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $LI_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $LI_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $RI_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $RI_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $RI_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,2,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=I_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=I_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The segments are 
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{kj}y^{j}$
+\end_inset
+
+ so that 
+\begin_inset Formula 
+\begin{align*}
+f_{0}\left(y\right) & =0\\
+f_{1}\left(y\right) & =a_{10}+a_{11}y+a_{12}y^{2}\\
+f_{2}\left(y\right) & =a_{20}+a_{21}y+a_{22}y^{2}\\
+f_{3}\left(y\right) & =a_{30}+a_{31}y+a_{32}y^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The recurrence relation is 
+\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $Lk=j$
+\end_inset
+
+ when 
+\begin_inset Formula $I_{j}\subseteq LI_{k}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $Rk$
+\end_inset
+
+.
+ Based on the inclusion table, this is
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)\\
+\lambda\beta f_{3}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)
+\end{align*}
+
+\end_inset
+
+Plugging through, 
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta\left(a_{10}+a_{11}y+a_{12}y^{2}\right) & =a_{20}+\frac{a_{21}}{\beta}y+\frac{a_{22}}{\beta^{2}}y^{2}\\
+\lambda\beta\left(a_{20}+a_{21}y+a_{22}y^{2}\right) & =a_{30}+\frac{a_{31}}{\beta}y+\frac{a_{32}}{\beta^{2}}y^{2}\\
+\lambda\beta\left(a_{30}+a_{31}y+a_{32}y^{2}\right) & =a_{30}+\frac{a_{31}}{\beta}y+\frac{a_{32}}{\beta^{2}}y^{2}+a_{10}+a_{11}\left(\frac{y}{\beta}+\frac{1}{2}\right)+a_{12}\left(\frac{y}{\beta}+\frac{1}{2}\right)^{2}\\
+ & =a_{30}+\frac{a_{31}}{\beta}y+\frac{a_{32}}{\beta^{2}}y^{2}+a_{10}+\frac{a_{11}}{2}+\frac{a_{11}}{\beta}y+\frac{a_{12}}{4}+\frac{a_{12}}{\beta}y+\frac{a_{12}}{\beta^{2}}y^{2}
+\end{align*}
+
+\end_inset
+
+Collecting terms,
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta a_{10} & =a_{20}\qquad\lambda\beta a_{11}=\frac{a_{21}}{\beta}\qquad\lambda\beta a_{12}=\frac{a_{22}}{\beta^{2}}\\
+\lambda\beta a_{20} & =a_{30}\qquad\lambda\beta a_{21}=\frac{a_{31}}{\beta}\qquad\lambda\beta a_{22}=\frac{a_{32}}{\beta^{2}}\\
+\lambda\beta a_{30} & =a_{30}+a_{10}+\frac{a_{11}}{2}+\frac{a_{12}}{4}\\
+\lambda\beta a_{31} & =\frac{1}{\beta}\left(a_{31}+a_{11}+a_{12}\right)\\
+\lambda\beta a_{32} & =\frac{1}{\beta^{2}}\left(a_{32}+a_{12}\right)
+\end{align*}
+
+\end_inset
+
+Reducing, last one first:
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta a_{32} & =\frac{1}{\beta^{2}}\left(a_{32}+a_{12}\right)\\
+ & =\frac{1}{\beta^{2}}\left(a_{32}+\frac{a_{22}}{\lambda\beta^{3}}\right)\\
+ & =\frac{1}{\beta^{2}}\left(a_{32}+\frac{a_{32}}{\lambda^{2}\beta^{6}}\right)\\
+\lambda\beta^{3} & =1+\frac{1}{\lambda^{2}\beta^{6}}\\
+0 & =\lambda^{3}\beta^{9}-\lambda^{2}\beta^{6}-1\\
+\lambda & =\frac{1}{\beta^{2}}
+\end{align*}
+
+\end_inset
+
+Plugging in for 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ for readability:
+\begin_inset Formula 
+\begin{align*}
+a_{10} & =\beta a_{20}\qquad a_{11}=a_{21}\qquad a_{12}=\frac{a_{22}}{\beta}\\
+a_{20} & =\beta a_{30}\qquad a_{21}=a_{31}\qquad a_{22}=\frac{a_{32}}{\beta}\\
+a_{30} & =\beta\left(a_{30}+a_{10}+\frac{a_{11}}{2}+\frac{a_{12}}{4}\right)\\
+a_{31} & =a_{31}+a_{11}+a_{12}\\
+a_{32} & =\frac{1}{\beta}\left(a_{32}+a_{12}\right)
+\end{align*}
+
+\end_inset
+
+Working back,
+\end_layout
+
 \begin_layout Section
 Visitation Tree
 \end_layout
