@@ -35070,6 +35070,10 @@ This recurrence relation
 \end_layout
 
 \begin_layout Itemize
+Since the restrictions
+\end_layout
+
+\begin_layout Itemize
 The Ansatz that 
 \begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{j}^{\left(k\right)}y^{j}$
 \end_inset
@@ -35572,13 +35576,145 @@ Plugging in for
 a_{10} & =\beta a_{20}\qquad a_{11}=a_{21}\qquad a_{12}=\frac{a_{22}}{\beta}\\
 a_{20} & =\beta a_{30}\qquad a_{21}=a_{31}\qquad a_{22}=\frac{a_{32}}{\beta}\\
 a_{30} & =\beta\left(a_{30}+a_{10}+\frac{a_{11}}{2}+\frac{a_{12}}{4}\right)\\
-a_{31} & =a_{31}+a_{11}+a_{12}\\
+0 & =a_{11}+a_{12}\\
 a_{32} & =\frac{1}{\beta}\left(a_{32}+a_{12}\right)
 \end{align*}
 
 \end_inset
 
-Working back,
+
+\end_layout
+
+\begin_layout Itemize
+The above were regular and algorithmic, and can be gotten by uniform operations.
+ The operations below are ad hoc, solving the assorted relations in some
+ arbitrary order.
+ Lets do it.
+ Working back,
+\begin_inset Formula 
+\begin{align*}
+a_{12} & =a_{32}\frac{\beta-1}{\beta}\\
+a_{22} & =a_{32}\left(\beta-1\right)\\
+a_{11} & =a_{21}=a_{31}=-a_{12}
+\end{align*}
+
+\end_inset
+
+and finally, the constant term:
+\begin_inset Formula 
+\begin{align*}
+a_{30} & =\beta\left(a_{30}+a_{10}+\frac{a_{11}}{2}+\frac{a_{12}}{4}\right)\\
+ & =\beta\left(a_{30}+\beta^{2}a_{30}-a_{32}\frac{\beta-1}{4\beta}\right)\\
+0 & =a_{30}\left(\beta^{3}+\beta-1\right)-a_{32}\frac{\beta-1}{4}\\
+a_{30} & =a_{32}\frac{\beta-1}{4\left(\beta^{3}+\beta-1\right)}\\
+ & =a_{32}\frac{\beta-1}{4\beta\left(\beta+1\right)}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+a_{20} & =a_{32}\frac{\beta-1}{4\left(\beta+1\right)}\\
+a_{10} & =a_{32}\frac{\beta\left(\beta-1\right)}{4\left(\beta+1\right)}
+\end{align*}
+
+\end_inset
+
+Yuck, what a mess.
+\end_layout
+
+\begin_layout Itemize
+The second from last step can be written as a matrix equation.
+ It is:
+\begin_inset Formula 
+\[
+\lambda\beta\left[\begin{array}{c}
+a_{10}\\
+a_{20}\\
+a_{30}\\
+a_{11}\\
+a_{21}\\
+a_{31}\\
+a_{12}\\
+a_{22}\\
+a_{32}
+\end{array}\right]=\left[\begin{array}{ccccccccc}
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 1 & \frac{1}{2} & 0 & 0 & \frac{1}{4} & 0 & 0\\
+0 & 0 & 0 & 0 & \frac{1}{\beta} & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & \frac{1}{\beta} & 0 & 0 & 0\\
+0 & 0 & 0 & \frac{1}{\beta} & 0 & \frac{1}{\beta} & \frac{1}{\beta} & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta^{2}} & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta^{2}}\\
+0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta^{2}} & 0 & \frac{1}{\beta^{2}}
+\end{array}\right]\left[\begin{array}{c}
+a_{10}\\
+a_{20}\\
+a_{30}\\
+a_{11}\\
+a_{21}\\
+a_{31}\\
+a_{12}\\
+a_{22}\\
+a_{32}
+\end{array}\right]
+\]
+
+\end_inset
+
+and so indeed, the lower-right corner is solved first.
+ It forms a shift, exactly like the earlier-discussed Hessenberg matrix
+ for this polynomial.
+ I guess this is always the case? Next, the linear term als has the Hessenberg
+ form, except it now couples in a term from the quadratic part.
+ Finally, the constant term is likewise, coupling in terms from linear and
+ quadratic.
+\end_layout
+
+\begin_layout Itemize
+Does this Hessenberg-shift-like structure persist for other polynomials?
+ It probably does, but it sems cryptic, given the need to sort intervals
+ and comput their inclusions.
+\end_layout
+
+\begin_layout Standard
+Lets summarize the results:
+\end_layout
+
+\begin_layout Subsection
+Algorithms
+\end_layout
+
+\begin_layout Standard
+The meta problem is one of term rewriting: the recursive equations are all
+ solvable, but their general form is opaque and un-enlightening.
+ We want an algorithmic description of the solution to the recurrence relations
+ that is somehow transparent.
+ There seem to be multiple interacting algorithms:
+\end_layout
+
+\begin_layout Itemize
+The use of multiplication and modulo to compute midpoints.
+ When midpoints are expressed as base-two bit-sequences, the algroithm for
+ multiplication is quite complex, but since we're indoctrinated into thinking
+ that multiplication is simple, this is overloooked.
+\end_layout
+
+\begin_layout Itemize
+After the midpoints are computed, they are placed into sorted order.
+ This requires a sort algorithm.
+\end_layout
+
+\begin_layout Itemize
+Interval inclusion relations are required.
+ These can be algorithmically determined.
+\end_layout
+
+\begin_layout Itemize
+Hypothesing piece-wise polynomial terms on each interval, and then collecting
+ up powers 
 \end_layout
 
 \begin_layout Section
