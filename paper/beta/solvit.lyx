@@ -35714,14 +35714,14 @@ a_{31}\\
 a_{12}\\
 a_{22}\\
 a_{32}
-\end{array}\right]=\left[\begin{array}{ccccccccc}
+\end{array}\right]=\left[\begin{array}{ccc|ccc|ccc}
 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
 1 & 0 & 1 & \frac{1}{2} & 0 & 0 & \frac{1}{4} & 0 & 0\\
-0 & 0 & 0 & 0 & \frac{1}{\beta} & 0 & 0 & 0 & 0\\
+\hline 0 & 0 & 0 & 0 & \frac{1}{\beta} & 0 & 0 & 0 & 0\\
 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta} & 0 & 0 & 0\\
 0 & 0 & 0 & \frac{1}{\beta} & 0 & \frac{1}{\beta} & \frac{1}{\beta} & 0 & 0\\
-0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta^{2}} & 0\\
+\hline 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta^{2}} & 0\\
 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta^{2}}\\
 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{\beta^{2}} & 0 & \frac{1}{\beta^{2}}
 \end{array}\right]\left[\begin{array}{c}
@@ -35740,12 +35740,10 @@ a_{32}
 \end_inset
 
 and so indeed, the lower-right corner is solved first.
- It forms a shift, exactly like the earlier-discussed Hessenberg matrix
- for this polynomial.
- I guess this is always the case? Next, the linear term als has the Hessenberg
- form, except it now couples in a term from the quadratic part.
- Finally, the constant term is likewise, coupling in terms from linear and
- quadratic.
+ Note how each diagonal block forms a shift, exactly like the earlier-discussed
+ Hessenberg matrix for this polynomial.
+ I guess this is always the case? The off-diagonal blocks are coupling between
+ the different orders.
 \end_layout
 
 \begin_layout Itemize
@@ -35790,6 +35788,85 @@ y^{2}-\frac{\beta-1}{\beta}y+\frac{\beta-1}{4\beta\left(\beta+1\right)} & \mbox{
 \end_inset
 
 So there we have it.
+\end_layout
+
+\begin_layout Subsubsection
+Case n=2 (order 
+\begin_inset Formula $\nu=3$
+\end_inset
+
+) arbitrary power
+\end_layout
+
+\begin_layout Standard
+The above computation can be repeated, hypothesizing 
+\begin_inset Formula $f_{N;k}\left(y\right)=\sum_{j=0}^{N}a_{kj}y^{j}$
+\end_inset
+
+ for any 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $k\in\left\{ 1,2,3\right\} $
+\end_inset
+
+.
+ The relations generate a 
+\begin_inset Formula $3N\times3N$
+\end_inset
+
+ matrix that is strictly included in larger matrices, without alteration.
+ That is, the subspaces are strictly nested.
+ Setting 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ gives a representation for 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ in the piece-wise monomial basis, for this specific, fixed value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To conclude, this is the desired 
+\begin_inset Quotes eld
+\end_inset
+
+solution
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ for the general case, expressed the piece-wise monomial basis.
+ It is an operator.
+ It obviously has a spectrum consisting of 
+\begin_inset Formula $\beta^{-N}$
+\end_inset
+
+ as well as an additional complex spectrum that has not been explicitly
+ exhibited, yet.
+ Thus there are three open to-do items:
+\end_layout
+
+\begin_layout Itemize
+Describe the diagonal block structure explicitly.
+\end_layout
+
+\begin_layout Itemize
+Describe the coupling between the iagonal blocks.
+\end_layout
+
+\begin_layout Itemize
+Describe the complex spectrum.
 \end_layout
 
 \begin_layout Subsection
@@ -35865,6 +35942,128 @@ The final matrix is just the matrix representation of
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+How do things start, and where do we want to go?
+\end_layout
+
+\begin_layout Itemize
+There are two starting points: the integer 
+\begin_inset Formula $n$
+\end_inset
+
+ defining the 
+\begin_inset Quotes eld
+\end_inset
+
+valid
+\begin_inset Quotes erd
+\end_inset
+
+ polynomial 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+, or some arbitrary 
+\begin_inset Formula $\beta$
+\end_inset
+
+ from some external source.
+\end_layout
+
+\begin_layout Itemize
+If the start is a polynomial, then a root-finding algo must run, so as to
+ generate a bit-sequence for 
+\begin_inset Formula $\beta$
+\end_inset
+
+ to some indeterminate number of bits.
+\end_layout
+
+\begin_layout Itemize
+The number of needed bits is only enough to perform the mid-point sort.
+ If the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ sources is 
+\begin_inset Quotes eld
+\end_inset
+
+internal
+\begin_inset Quotes erd
+\end_inset
+
+, as the root of a polynomial, then only a hand-ful of bits are needed.
+ The number of bits are determined by the index 
+\begin_inset Formula $n$
+\end_inset
+
+ of the polynomial 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+.
+ For external sources of 
+\begin_inset Formula $\beta$
+\end_inset
+
+, there might be a countable infinity of mid-points, and so an unbounded
+ number of binary digits may be needed.
+\end_layout
+
+\begin_layout Itemize
+Explicit sorting can be avoided by using the visitation tree, which implicitly
+ encodes a left-to-right order.
+\end_layout
+
+\begin_layout Itemize
+For finite orbits, the visitation tree is finite; it splits the unit interval
+ into finitely many pieces.
+\end_layout
+
+\begin_layout Itemize
+The interval inclusion map is 
+\begin_inset Quotes eld
+\end_inset
+
+symbolic
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+relational
+\begin_inset Quotes erd
+\end_inset
+
+; can be treated with an indicator function showing inclusion.
+ Since all inclusions follow from iteration of the intial interval, it can
+ be expressed as a map (injection) from binary tree to binary tree.
+ This is related to the visitation tree, below.
+\end_layout
+
+\begin_layout Itemize
+Polynomials assigned to intervals can be treated with symbolic methods.
+ This includes expansion via binomial coefficient.
+\end_layout
+
+\begin_layout Itemize
+The 
+\begin_inset Quotes eld
+\end_inset
+
+only reason
+\begin_inset Quotes erd
+\end_inset
+
+ for expansion via binomials is to collect terms, and obtain a matrix representa
+tion for the shift in the monomial basis.
+ Some other basis could be chosen; the monomial basis is the simplest, in
+ terms of combinatorics.
 \end_layout
 
 \begin_layout Standard
