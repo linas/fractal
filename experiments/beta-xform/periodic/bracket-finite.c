@@ -11,6 +11,8 @@
 #include "selfie-rational.c"
 #include "selfie-tree.c"
 
+#include "necklace.h"
+
 int main(int argc, char* argv[])
 {
 // #define MANUAL_EXPLORER
@@ -29,8 +31,8 @@ int main(int argc, char* argv[])
 	print_gold_info(moves);
 #endif
 
-#define PRINT_THETA
-#ifdef PRINT_THETA
+// #define PRINT_PSI
+#ifdef PRINT_PSI
 
 	if (2 != argc) {
 		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
@@ -42,7 +44,8 @@ int main(int argc, char* argv[])
 	{
 		unsigned long mstart = 1UL << (k-1);
 		unsigned long mend = 1UL << k;
-		printf("order %d: ", k+1);
+		int rank = k+1;
+		printf("Rank %d: ", rank);
 		int tot = 0;
 		for (unsigned long m=mstart; m<mend; m++)
 		{
@@ -54,8 +57,31 @@ int main(int argc, char* argv[])
 			tot++;
 		}
 		printf("\n");
-		printf("Above has %d entries\n\n", tot);
+		int moreau_nu = necklace(rank);
+		printf("Above has %d entries; expected %d\n\n", tot, moreau_nu);
+		if (0 != moreau_nu - tot) printf("Error!!!!!!! XXXXXXXXXXXX\n");
 	}
+#endif
+
+#define PRINT_BFILE
+#ifdef PRINT_BFILE
+	// To generate OEIS Bfile.
+	printf("# Generated with https://github.com/linas/fractal/blob/master/experiments/beta-xform/periodic/bracket-finite.c\n");
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <nterms>\n", argv[0]);
+		exit(1);
+	}
+	int nterms = atoi(argv[1]);
+	int tot = 0;
+	long idx = -1;
+	while (tot <= nterms)
+	{
+		idx ++;
+		if (false == valid_gold_index(idx)) continue;
+		printf("%d %ld\n", tot, idx);
+		tot++;
+	}
+	printf("\n");
 #endif
 
 // #define INDICATOR_GRAPH
