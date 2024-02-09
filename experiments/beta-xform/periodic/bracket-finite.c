@@ -29,7 +29,32 @@ int main(int argc, char* argv[])
 	print_gold_info(moves);
 #endif
 
-#define INDICATOR_GRAPH
+#define PRINT_THETA
+#ifdef PRINT_THETA
+
+	if (2 != argc) {
+		fprintf(stderr, "Usage: %s <maxord>\n", argv[0]);
+		exit(1);
+	}
+	int maxord = atoi(argv[1]);
+	for (int k=0; k<maxord; k++)
+	{
+		unsigned long mstart = 1UL << k;
+		unsigned long mend = 1UL << (k+1);
+		printf("order %d: ", k+2);
+		int tot = 0;
+		for (unsigned long m=mstart; m<mend; m++)
+		{
+			if (false == valid_gold_index(m)) continue;
+			printf("%ld, ", m);
+			tot++;
+		}
+		printf("\n");
+		printf("Above has %d entries\n\n", tot);
+	}
+#endif
+
+// #define INDICATOR_GRAPH
 #ifdef INDICATOR_GRAPH
 	// Print the indicator function, as well as the front values.
 	// This is used for graphs in the paper.
