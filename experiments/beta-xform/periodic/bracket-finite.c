@@ -37,16 +37,20 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	int maxord = atoi(argv[1]);
-	for (int k=0; k<maxord; k++)
+	int prev = 0;
+	for (int k=1; k<maxord; k++)
 	{
-		unsigned long mstart = 1UL << k;
-		unsigned long mend = 1UL << (k+1);
-		printf("order %d: ", k+2);
+		unsigned long mstart = 1UL << (k-1);
+		unsigned long mend = 1UL << k;
+		printf("order %d: ", k+1);
 		int tot = 0;
 		for (unsigned long m=mstart; m<mend; m++)
 		{
 			if (false == valid_gold_index(m)) continue;
 			printf("%ld, ", m);
+			// printf("%ld, ", m-prev);
+			// if (1 < m-prev) printf("%ld, ", m-prev);
+			prev = m;
 			tot++;
 		}
 		printf("\n");
