@@ -35070,16 +35070,30 @@ This recurrence relation
 \end_layout
 
 \begin_layout Itemize
-Since the restrictions
+Since the 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ are defined as restrictions, the etra 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ terms are superflous: the interval restrictions already enforce the relations.
+ Thus, one can safely write 
+\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Itemize
 The Ansatz that 
-\begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{j}^{\left(k\right)}y^{j}$
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{kj}y^{j}$
 \end_inset
 
  for some unknown constants 
-\begin_inset Formula $a_{j}^{\left(k\right)}$
+\begin_inset Formula $a_{kj}$
 \end_inset
 
  to be determined.
@@ -35088,7 +35102,7 @@ The Ansatz that
 \end_inset
 
  gives equations for the 
-\begin_inset Formula $a_{j}^{\left(k\right)}$
+\begin_inset Formula $a_{kj}$
 \end_inset
 
 .
@@ -35104,7 +35118,11 @@ Starting with only
 \begin_inset Formula $f_{1}$
 \end_inset
 
- it is enough to empty labels 
+ it is enough to work with the empty label 
+\begin_inset Formula $1$
+\end_inset
+
+ and then move to 
 \begin_inset Formula $L1$
 \end_inset
 
@@ -35504,7 +35522,7 @@ f_{3}\left(y\right) & =a_{30}+a_{31}y+a_{32}y^{2}
 
 \begin_layout Itemize
 The recurrence relation is 
-\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)$
+\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
 \end_inset
 
 , where 
@@ -35523,13 +35541,18 @@ The recurrence relation is
  Based on the inclusion table, this is
 \begin_inset Formula 
 \begin{align*}
-\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)\\
-\lambda\beta f_{2}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)\\
-\lambda\beta f_{3}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)
+\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{3}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
 \end{align*}
 
 \end_inset
 
+Note how the above resembles a Hessenberg-form shift matrix.
+ In particular, it is a linear equation.
+\end_layout
+
+\begin_layout Itemize
 Plugging through, 
 \begin_inset Formula 
 \begin{align*}
@@ -35674,9 +35697,24 @@ and so indeed, the lower-right corner is solved first.
 \end_layout
 
 \begin_layout Itemize
-Does this Hessenberg-shift-like structure persist for other polynomials?
- It probably does, but it sems cryptic, given the need to sort intervals
- and comput their inclusions.
+Anyway, the above 
+\begin_inset Formula $9\times9$
+\end_inset
+
+ matrix is the representation of the FP operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+, in the monomial basis, for this specific value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The Hessenberg-shift-like structure arises from the interval inclusion table.
+ Alas, the interval inclusion table is cryptic.
 \end_layout
 
 \begin_layout Standard
@@ -35710,11 +35748,133 @@ After the midpoints are computed, they are placed into sorted order.
 \begin_layout Itemize
 Interval inclusion relations are required.
  These can be algorithmically determined.
+ The algorithm itself is not complicated, but the generated inclusion sequences
+ are opaque and cryptic.
 \end_layout
 
 \begin_layout Itemize
-Hypothesing piece-wise polynomial terms on each interval, and then collecting
- up powers 
+The interval inclusion relations induce a Hessenberg-like linear matrix
+ form relating the 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ on the different intervals.
+ This matrix is solvable.
+\end_layout
+
+\begin_layout Itemize
+Hypothesing the piece-wise polynomial terms 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ on each interval 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+, the Hessenberg-like recurrence relations can be expanded and collected
+ up by powers.
+ The expansion deploys the binomial coefficients inside the polynomials.
+ The expansion via binomial coefficient is purely algorithmic.
+\end_layout
+
+\begin_layout Itemize
+Collecting up the powers once again gives a solvable matrix.
+ Since it is solvable, it can be solved by Gaussian elimination (diagonalization
+).
+ Do, purely algorithmically.
+\end_layout
+
+\begin_layout Itemize
+The final matrix is just the matrix representation of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ in the monomial basis, for this fixed value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What, exactly, is the source of unease? Lets review the issues:
+\end_layout
+
+\begin_layout Itemize
+The precise form for the matrix representation of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ in the monomial basis is tangled and opaque; the closed form is available,
+ but requires algorithms to present it in a classical analytic form, where
+ all matrix entries are rational functions of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Even if a nice computer GUI was developed to show each of the individual
+ entries of the matrix as rational functions of 
+\begin_inset Formula $\beta$
+\end_inset
+
+, the overall symmtry and structure would remain hidden and opaque.
+\end_layout
+
+\begin_layout Itemize
+For any fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+, what interesting things about 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ might one be able to say? We can explicitly give its dimension (it is a
+ product of the orbit length times the degree of the piece-wise polynomial.)
+ We can point out how it is shift-like.
+ We can point out that it's spectrum is discrete, and is explicitly 
+\begin_inset Formula $\lambda=\beta^{-n}$
+\end_inset
+
+ for degree 
+\begin_inset Formula $n$
+\end_inset
+
+ piece-wise pieces.
+\end_layout
+
+\begin_layout Itemize
+What alse would we like to be able to say, if explicit expressions were
+ available?
+\end_layout
+
+\begin_layout Itemize
+The cascade of algorithmic operations above, how should we think about them?
+ We can hand-wave and say 
+\begin_inset Quotes eld
+\end_inset
+
+these are the algorithms of the beta transform
+\begin_inset Quotes erd
+\end_inset
+
+, but that is vague and overly general.
+ We can talk about homeomorphic algorithms, and ask about their homotpic
+ structure.
+ For example, are there other algorithms that are crypto-equivalent, that
+ produce the beta transform, but are not obtainable by homeomorphic deformation
+ of the above 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+ form? 
 \end_layout
 
 \begin_layout Section
