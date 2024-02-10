@@ -35961,12 +35961,24 @@ c_{2j} & =\frac{j\left(j-1\right)}{\beta^{2}2^{j+1}}
 \end_inset
 
 and subsequent rows introduce ever-greater falling factorials.
+ 
 \end_layout
 
 \begin_layout Standard
-The asymptotic case deserves comment.
- Estimates for the binomial coefficient in asymptotic regimes are given
- in ref 
+In the 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit, these behave tamely.
+ For fixed 
+\begin_inset Formula $m$
+\end_inset
+
+ or even 
+\begin_inset Formula $m=o\left(\sqrt{j}\right)$
+\end_inset
+
+, the binomial coefficient is estimated as
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Das2015"
@@ -35974,24 +35986,62 @@ literal "false"
 
 \end_inset
 
-.
-\end_layout
 
-\begin_layout Standard
-Given that 
-\begin_inset Formula ${j \choose m}\le2^{j}$
+\begin_inset Formula 
+\[
+{j \choose m}=\frac{j^{m}}{m!}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
+\]
+
 \end_inset
 
-, the 
+and so
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}=\frac{1}{m!}\left(\frac{2}{\beta}\right)^{m}\frac{j^{m}}{2^{j}}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so the 
 \begin_inset Formula $j\to\infty$
 \end_inset
 
- limit has a bound: 
-\begin_inset Formula $c_{jm}\le\left(2/\beta\right)^{m}$
+ limit is dominated by the 
+\begin_inset Formula $j^{m}2^{-j}$
 \end_inset
 
-.
- This is a crude bound, but appropriate for the 
+ term, which grows for a bit before being stomped out.
+ Similar behavior is seen near the diagonal, where it is handy to write
+ 
+\begin_inset Formula $m=j-n$
+\end_inset
+
+ for small 
+\begin_inset Formula $n$
+\end_inset
+
+, say 
+\begin_inset Formula $n=1$
+\end_inset
+
+ or similar.
+ Then 
+\begin_inset Formula 
+\[
+c_{j,j-n}=\left(\frac{2}{\beta}\right)^{j-n}\frac{1}{2^{j}}{j \choose n}=\frac{1}{n!}\left(\frac{\beta}{2}\right)^{n}\frac{j^{n}}{\beta^{j}}\left(1+o\left(\frac{n^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so this is suppressed by a 
+\begin_inset Formula $j^{n}\beta^{-j}$
+\end_inset
+
+ term.
+\end_layout
+
+\begin_layout Standard
+The worse-case behavior is at the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -36003,7 +36053,8 @@ middle coefficient
 \begin_inset Formula $j=2m$
 \end_inset
 
- and the binomial coefficients are maximal.The asymptotics are
+ and the binomial coefficients are maximal.
+ The asymptotics are
 \begin_inset Formula 
 \[
 {2m \choose m}=\frac{2^{2m}}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
@@ -36011,7 +36062,7 @@ middle coefficient
 
 \end_inset
 
-so plugging through,
+Thus, along the half-diagonal, the matrix terms blow up:
 \begin_inset Formula 
 \[
 c_{2m,m}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
@@ -36019,60 +36070,48 @@ c_{2m,m}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{\sqrt{\pi m}}\left(1+o\left(1\
 
 \end_inset
 
+since 
+\begin_inset Formula $1<2/\beta$
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
 .
- Several estimates can be deployed.
- For 
-\begin_inset Formula $m=o\left(\sqrt{j}\right)$
+ This really is the worst-case location.
+ Close to this half-diagonal, taking 
+\begin_inset Formula $j\to\infty$
 \end_inset
 
+ and writing 
+\begin_inset Formula $m=pj$
+\end_inset
 
-\end_layout
+ for 
+\begin_inset Formula $0\ll p\ll1$
+\end_inset
 
-\begin_layout Standard
+, the binomial coefficient converges to the normal distribution, so that
+ 
 \begin_inset Formula 
 \[
-{j \choose m}=\frac{j^{m}}{m!}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
-\]
-
-\end_inset
-
-while for 
-\begin_inset Formula $m=o\left(j\right)$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-{j \choose m}=\left(\frac{j}{m}\right)^{m}\left(1+o\left(1\right)\right)
-\]
-
-\end_inset
-
-and then 
-\begin_inset Formula $m=\mathcal{O}\left(j\right)$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\log{j \choose m}=jH\left(\frac{m}{j}\right)\left(1+o\left(1\right)\right)
+\log_{2}{j \choose pj}=jH\left(p\right)\left(1+o\left(1\right)\right)
 \]
 
 \end_inset
 
 with 
-\begin_inset Formula $-H\left(p\right)=p\log p+\left(1-p\right)\log\left(1-p\right)$
+\begin_inset Formula $-H\left(p\right)=p\log_{2}p+\left(1-p\right)\log_{2}\left(1-p\right)$
 \end_inset
 
-.
-\end_layout
+ the binary entropy function.
+ This gives 
+\begin_inset Formula 
+\[
+c_{j,pj}=\left(\frac{2}{\beta}\right)^{pj}\frac{2^{H\left(p\right)}}{\sqrt{\pi pj}}\left(1+o\left(1\right)\right)
+\]
 
-\begin_layout Standard
-Some of the 
+\end_inset
+
+as the estimate for the blow-up at the near-half-diagonal.
+ 
 \end_layout
 
 \begin_layout Standard
