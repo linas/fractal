@@ -35799,38 +35799,193 @@ Case n=2 (order
 \end_layout
 
 \begin_layout Standard
-The above computation can be repeated, hypothesizing 
-\begin_inset Formula $f_{N;k}\left(y\right)=\sum_{j=0}^{N}a_{kj}y^{j}$
+The above computation can be repeated to arbitrary power.
+ The interval inclusion table gave the relations for a 
+\begin_inset Formula $3\times3$
 \end_inset
 
- for any 
-\begin_inset Formula $N$
+ block of interval relations.
+ These were
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{3}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
 \end_inset
 
- and 
-\begin_inset Formula $k\in\left\{ 1,2,3\right\} $
+In matrix form, this block has the shape
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+f_{1}\\
+f_{2}\\
+f_{3}
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 0 & 1\\
+1 & 0 & 1
+\end{array}\right]\left[\begin{array}{c}
+f_{1}\\
+f_{2}\\
+f_{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+with the arguments to the 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ suitably twizzled.
+ The block 
+\begin_inset Formula 
+\[
+B=\left[\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 0 & 1\\
+1 & 0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+is exactly of the Hessenberg form discussed earlier.
+\end_layout
+
+\begin_layout Standard
+The next step is to expand 
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j=0}^{\infty}a_{kj}y^{j}$
+\end_inset
+
+ in place, and collect terms.
+ The first two rows are easy; they follow the Hessenberg shift: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta\left(\sum_{j}a_{1j}y^{j}\right) & =\sum_{j}\frac{a_{2j}}{\beta^{j}}y^{j}\\
+\lambda\beta\left(\sum_{j}a_{2j}y^{j}\right) & =\sum_{j}\frac{a_{3j}}{\beta^{j}}y^{j}
+\end{align*}
+
+\end_inset
+
+ The last row is more complex; it requires expansion using binomial coefficients
+:
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta\left(\sum_{j}a_{3j}y^{j}\right) & =\sum_{j}\frac{a_{3j}}{\beta^{j}}y^{j}+\sum_{j}a_{1j}\left(\frac{1}{2}+\frac{y}{\beta}\right)^{j}\\
+ & =\sum_{j}\frac{a_{3j}}{\beta^{j}}y^{j}+\sum_{j}a_{1j}\sum_{m=0}^{j}{j \choose m}y^{m}\frac{1}{\beta^{m}}\cdot\frac{1}{2^{j-m}}\\
+ & =\sum_{m=0}^{\infty}y^{m}\frac{1}{\beta^{m}}\left(a_{3m}+2^{m}\sum_{j=0}^{\infty}a_{1j}\frac{1}{2^{j}}{j \choose m}\right)
+\end{align*}
+
+\end_inset
+
+The algebraic form above is opaque; writing it out in blocks is revealing:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+A_{3}\\
+\vdots
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccccc}
+B & \frac{1}{2}C & \frac{1}{4}C & C_{03} & \cdots\\
+0 & \frac{1}{\beta}B & \frac{1}{\beta}C & C_{13} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}B & C_{23}\\
+0 & 0 & 0 & \frac{1}{\beta^{3}}B & \ddots\\
+\vdots & \vdots &  & \ddots & \ddots
+\end{array}\right]\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+A_{3}\\
+\vdots
+\end{array}\right]
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+A_{j}=\left[\begin{array}{c}
+a_{1j}\\
+a_{2j}\\
+a_{3j}
+\end{array}\right]\quad B=\left[\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 0 & 1\\
+1 & 0 & 1
+\end{array}\right]\quad C=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+0 & 0 & 0\\
+1 & 0 & 0
+\end{array}\right]\quad\mbox{ and }\quad C_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}C
+\]
+
+\end_inset
+
+It is interesting to look at the first few rows and columns.
+ Write 
+\begin_inset Formula $C_{jm}=c_{jm}C$
+\end_inset
+
+ so that 
+\begin_inset Formula $c_{jm}$
+\end_inset
+
+ is the scalar in front of the block 
+\begin_inset Formula $C$
 \end_inset
 
 .
- The relations generate a 
-\begin_inset Formula $3N\times3N$
+ Then the first few rows are
+\begin_inset Formula 
+\begin{align*}
+c_{0j} & =\frac{1}{2^{j}}\\
+c_{1j} & =\frac{j}{\beta2^{j-1}}\\
+c_{2j} & =\frac{j\left(j-1\right)}{\beta^{2}2^{j+1}}
+\end{align*}
+
 \end_inset
 
- matrix that is strictly included in larger matrices, without alteration.
- That is, the subspaces are strictly nested.
- Setting 
-\begin_inset Formula $N\to\infty$
+and subsequent rows introduce ever-greater falling factorials.
+ The asymptotic case is, for 
+\begin_inset Formula $m\ll j$
 \end_inset
 
- gives a representation for 
-\begin_inset Formula $\mathcal{L}_{\beta}$
+ or more formally, for 
+\begin_inset Formula $m=o\left(\sqrt{j}\right)$
 \end_inset
 
- in the piece-wise monomial basis, for this specific, fixed value of 
-\begin_inset Formula $\beta$
+
+\begin_inset Formula 
+\[
+{j \choose m}\approx\frac{j^{m}}{m!}
+\]
+
 \end_inset
 
-.
+
+\end_layout
+
+\begin_layout Standard
+Some of the 
+\end_layout
+
+\begin_layout Standard
+Write
 \end_layout
 
 \begin_layout Standard
