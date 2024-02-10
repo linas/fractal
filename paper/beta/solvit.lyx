@@ -35704,7 +35704,7 @@ The second from last step can be written as a matrix equation.
  It is:
 \begin_inset Formula 
 \[
-\lambda\beta\left[\begin{array}{c}
+\lambda\left[\begin{array}{c}
 a_{10}\\
 a_{20}\\
 a_{30}\\
@@ -35714,7 +35714,7 @@ a_{31}\\
 a_{12}\\
 a_{22}\\
 a_{32}
-\end{array}\right]=\left[\begin{array}{ccc|ccc|ccc}
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccc|ccc|ccc}
 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
 1 & 0 & 1 & \frac{1}{2} & 0 & 0 & \frac{1}{4} & 0 & 0\\
@@ -35822,17 +35822,25 @@ In matrix form, this block has the shape
 \begin_inset Formula 
 \[
 \lambda\left[\begin{array}{c}
-f_{1}\\
-f_{2}\\
-f_{3}
+f_{1}\left(y\right)\\
+f_{2}\left(y\right)\\
+f_{3}\left(y\right)
 \end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccc}
 0 & 1 & 0\\
 0 & 0 & 1\\
-1 & 0 & 1
+0 & 0 & 1
 \end{array}\right]\left[\begin{array}{c}
-f_{1}\\
-f_{2}\\
-f_{3}
+f_{1}\left(\frac{y}{\beta}\right)\\
+f_{2}\left(\frac{y}{\beta}\right)\\
+f_{3}\left(\frac{y}{\beta}\right)
+\end{array}\right]+\frac{1}{\beta}\left[\begin{array}{ccc}
+0 & 0 & 0\\
+0 & 0 & 0\\
+1 & 0 & 0
+\end{array}\right]\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+f_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+f_{3}\left(\frac{y}{\beta}+\frac{1}{2}\right)
 \end{array}\right]
 \]
 
@@ -35843,19 +35851,7 @@ with the arguments to the
 \end_inset
 
  suitably twizzled.
- The block 
-\begin_inset Formula 
-\[
-B=\left[\begin{array}{ccc}
-0 & 1 & 0\\
-0 & 0 & 1\\
-1 & 0 & 1
-\end{array}\right]
-\]
-
-\end_inset
-
-is exactly of the Hessenberg form discussed earlier.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -35882,7 +35878,7 @@ The next step is to expand
 \begin{align*}
 \lambda\beta\left(\sum_{j}a_{3j}y^{j}\right) & =\sum_{j}\frac{a_{3j}}{\beta^{j}}y^{j}+\sum_{j}a_{1j}\left(\frac{1}{2}+\frac{y}{\beta}\right)^{j}\\
  & =\sum_{j}\frac{a_{3j}}{\beta^{j}}y^{j}+\sum_{j}a_{1j}\sum_{m=0}^{j}{j \choose m}y^{m}\frac{1}{\beta^{m}}\cdot\frac{1}{2^{j-m}}\\
- & =\sum_{m=0}^{\infty}y^{m}\frac{1}{\beta^{m}}\left(a_{3m}+2^{m}\sum_{j=0}^{\infty}a_{1j}\frac{1}{2^{j}}{j \choose m}\right)
+ & =\sum_{m=0}^{\infty}y^{m}\frac{1}{\beta^{m}}\left(a_{3m}+2^{m}\sum_{j=m}^{\infty}a_{1j}\frac{1}{2^{j}}{j \choose m}\right)
 \end{align*}
 
 \end_inset
@@ -35900,10 +35896,10 @@ A_{2}\\
 A_{3}\\
 \vdots
 \end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccccc}
-B & \frac{1}{2}C & \frac{1}{4}C & C_{03} & \cdots\\
-0 & \frac{1}{\beta}B & \frac{1}{\beta}C & C_{13} & \cdots\\
-0 & 0 & \frac{1}{\beta^{2}}B & C_{23}\\
-0 & 0 & 0 & \frac{1}{\beta^{3}}B & \ddots\\
+D & \frac{1}{2}C & \frac{1}{4}C & C_{03} & \cdots\\
+0 & \frac{1}{\beta}D & \frac{1}{\beta}C & C_{13} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}D & C_{23}\\
+0 & 0 & 0 & \frac{1}{\beta^{3}}D & \ddots\\
 \vdots & \vdots &  & \ddots & \ddots
 \end{array}\right]\left[\begin{array}{c}
 A_{0}\\
@@ -35926,17 +35922,33 @@ a_{3j}
 \end{array}\right]\quad B=\left[\begin{array}{ccc}
 0 & 1 & 0\\
 0 & 0 & 1\\
-1 & 0 & 1
+0 & 0 & 1
 \end{array}\right]\quad C=\left[\begin{array}{ccc}
 0 & 0 & 0\\
 0 & 0 & 0\\
 1 & 0 & 0
-\end{array}\right]\quad\mbox{ and }\quad C_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}C
+\end{array}\right]\quad D=B+C=\left[\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 0 & 1\\
+1 & 0 & 1
+\end{array}\right]
 \]
 
 \end_inset
 
-This then gives the final desired result: the operator 
+The off-diagonal blocks are scalar multiples 
+\begin_inset Formula $C_{jm}=c_{jm}C$
+\end_inset
+
+ with
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+\]
+
+\end_inset
+
+ This then gives the final desired result: the operator 
 \begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
@@ -36542,32 +36554,114 @@ The recurrence relation is
 \end_layout
 
 \begin_layout Itemize
-The matrix form gives a block of the shape
+This has the twizzled form
 \begin_inset Formula 
 \[
 \lambda\left[\begin{array}{c}
-f_{1}\\
-f_{2}\\
-f_{3}
+f_{1}\left(y\right)\\
+f_{2}\left(y\right)\\
+f_{3}\left(y\right)
 \end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccc}
 0 & 0 & 1\\
-1 & 0 & 1\\
-0 & 1 & 1
+0 & 0 & 1\\
+0 & 0 & 1
 \end{array}\right]\left[\begin{array}{c}
-f_{1}\\
-f_{2}\\
-f_{3}
+f_{1}\left(\frac{y}{\beta}\right)\\
+f_{2}\left(\frac{y}{\beta}\right)\\
+f_{3}\left(\frac{y}{\beta}\right)
+\end{array}\right]+\frac{1}{\beta}\left[\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+f_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+f_{3}\left(\frac{y}{\beta}+\frac{1}{2}\right)
 \end{array}\right]
 \]
 
 \end_inset
 
-with the arguments to the 
-\begin_inset Formula $f_{k}$
+
+\end_layout
+
+\begin_layout Itemize
+The blocks are
+\begin_inset Formula 
+\[
+B=\left[\begin{array}{ccc}
+0 & 0 & 1\\
+0 & 0 & 1\\
+0 & 0 & 1
+\end{array}\right]\quad C=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]\quad D=B+C=\left[\begin{array}{ccc}
+0 & 0 & 1\\
+1 & 0 & 1\\
+0 & 1 & 1
+\end{array}\right]
+\]
+
 \end_inset
 
- suitably twizzled.
- This is not the form of the Hessenberg block, but is different.
+
+\end_layout
+
+\begin_layout Itemize
+Expanding 
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j=0}^{\infty}a_{kj}y^{j}$
+\end_inset
+
+ and gathering together monomials yeilds the same block form as before:
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+\vdots
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{cccc}
+B & C_{01} & C_{02} & \cdots\\
+0 & \frac{1}{\beta}B & C_{12} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}B\\
+\vdots & \vdots &  & \ddots
+\end{array}\right]\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+\vdots
+\end{array}\right]
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $C_{jm}=c_{jm}C$
+\end_inset
+
+ as before, with
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+\]
+
+\end_inset
+
+as before, and of course
+\begin_inset Formula 
+\[
+A_{j}=\left[\begin{array}{c}
+a_{1j}\\
+a_{2j}\\
+a_{3j}
+\end{array}\right]
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
