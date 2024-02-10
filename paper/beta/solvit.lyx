@@ -35936,16 +35936,78 @@ a_{3j}
 
 \end_inset
 
-It is interesting to look at the first few rows and columns.
- Write 
+This then gives the final desired result: the operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ for this particular fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is that upper-diagonal block operator.
+ It can be truncated at any fixed 
+\begin_inset Formula $j$
+\end_inset
+
+, giving a 
+\begin_inset Formula $3j\times3j$
+\end_inset
+
+ matrix, with eigenvalue of 
+\begin_inset Formula $\beta^{-j}$
+\end_inset
+
+ and an eigenfunction consisting of three piece-wise polynomial parts.
+ Setting 
+\begin_inset Formula $j=0$
+\end_inset
+
+ returns the Gelfond–Parry invariant measure, for this fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $j=2$
+\end_inset
+
+ returns the result of the previous section.
+ Truncating at fixed 
+\begin_inset Formula $j$
+\end_inset
+
+ also allows for a hunt of complex eigenvalues.
+\end_layout
+
+\begin_layout Subsubsection
+Bounds estimates
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit is interesting.
+ It presents the opportunity to describe piece-wise analytic eigenfunctions,
+ although, based in the spectrum, these would all presumably live in the
+ kernel.
+\end_layout
+
+\begin_layout Standard
+Write 
 \begin_inset Formula $C_{jm}=c_{jm}C$
 \end_inset
 
  so that 
-\begin_inset Formula $c_{jm}$
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+\]
+
 \end_inset
 
- is the scalar in front of the block 
+is the scalar in front of the block 
 \begin_inset Formula $C$
 \end_inset
 
@@ -36111,47 +36173,401 @@ c_{j,pj}=\left(\frac{2}{\beta}\right)^{pj}\frac{2^{H\left(p\right)}}{\sqrt{\pi p
 \end_inset
 
 as the estimate for the blow-up at the near-half-diagonal.
- 
+\end_layout
+
+\begin_layout Subsubsection
+Case n=3 (order 
+\begin_inset Formula $\nu=3$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
-Write
+It is not yet clear how the interval inclusions are to be interpreted.
+ Thus, a few more special cases are worth looking at.
+ This is a shortened repetition of the 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case.
 \end_layout
 
-\begin_layout Standard
-To conclude, this is the desired 
+\begin_layout Itemize
+Polynomial: 
+\begin_inset Formula $p_{3}\left(\beta\right)=\beta^{3}-\beta^{2}-\beta-1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Root: 
+\begin_inset Formula $r_{3}\approx1.839286755214161\cdots$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Midpoints:
+\begin_inset Formula 
+\begin{align*}
+m_{0}=\beta/2 & \approx0.91964337760708\\
+m_{1}=\beta\left(\beta-1\right)/2 & \approx0.771844506346038\\
+m_{2}=\beta\left(\beta^{2}-\beta-1\right)/2 & =1/2
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $0<m_{2}<m_{1}<m_{0}<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Intervals 
+\begin_inset Formula $I_{3}=\left[0,m_{2}\right]<I_{2}=\left[m_{2},m_{1}\right]<I_{1}=\left[m_{1},m_{0}\right]<I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The recursive interval maps are the 
 \begin_inset Quotes eld
 \end_inset
 
-solution
+left map
 \begin_inset Quotes erd
 \end_inset
 
  
-\begin_inset Formula $\mathcal{L}_{\beta}$
+\begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
 \end_inset
 
- for the general case, expressed the piece-wise monomial basis.
- It is an operator.
- It obviously has a spectrum consisting of 
-\begin_inset Formula $\beta^{-N}$
+ and the 
+\begin_inset Quotes eld
 \end_inset
 
- as well as an additional complex spectrum that has not been explicitly
- exhibited, yet.
- Thus there are three open to-do items:
+right map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
-Describe the diagonal block structure explicitly.
+Interval inclusions: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="9">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m_{j}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $LI_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $LI_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $LI_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $RI_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $RI_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $RI_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2,1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\subset I_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=I_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=I_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=I_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Describe the coupling between the iagonal blocks.
+The recurrence relation is 
+\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $Lk=j$
+\end_inset
+
+ when 
+\begin_inset Formula $I_{j}\subseteq LI_{k}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $Rk$
+\end_inset
+
+.
+ Based on the inclusion table, this is
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta f_{1}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\lambda\beta f_{3}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)+f_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Describe the complex spectrum.
+The matrix form gives a block of the shape
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+f_{1}\\
+f_{2}\\
+f_{3}
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccc}
+0 & 0 & 1\\
+1 & 0 & 1\\
+0 & 1 & 1
+\end{array}\right]\left[\begin{array}{c}
+f_{1}\\
+f_{2}\\
+f_{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+with the arguments to the 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ suitably twizzled.
+ This is not the form of the Hessenberg block, but is different.
 \end_layout
 
 \begin_layout Subsection
