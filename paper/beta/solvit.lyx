@@ -35961,23 +35961,114 @@ c_{2j} & =\frac{j\left(j-1\right)}{\beta^{2}2^{j+1}}
 \end_inset
 
 and subsequent rows introduce ever-greater falling factorials.
- The asymptotic case is, for 
-\begin_inset Formula $m\ll j$
+\end_layout
+
+\begin_layout Standard
+The asymptotic case deserves comment.
+ Estimates for the binomial coefficient in asymptotic regimes are given
+ in ref 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Das2015"
+literal "false"
+
 \end_inset
 
- or more formally, for 
-\begin_inset Formula $m=o\left(\sqrt{j}\right)$
+.
+\end_layout
+
+\begin_layout Standard
+Given that 
+\begin_inset Formula ${j \choose m}\le2^{j}$
 \end_inset
 
+, the 
+\begin_inset Formula $j\to\infty$
+\end_inset
 
+ limit has a bound: 
+\begin_inset Formula $c_{jm}\le\left(2/\beta\right)^{m}$
+\end_inset
+
+.
+ This is a crude bound, but appropriate for the 
+\begin_inset Quotes eld
+\end_inset
+
+middle coefficient
+\begin_inset Quotes erd
+\end_inset
+
+, where 
+\begin_inset Formula $j=2m$
+\end_inset
+
+ and the binomial coefficients are maximal.The asymptotics are
 \begin_inset Formula 
 \[
-{j \choose m}\approx\frac{j^{m}}{m!}
+{2m \choose m}=\frac{2^{2m}}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+so plugging through,
+\begin_inset Formula 
+\[
+c_{2m,m}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+.
+ Several estimates can be deployed.
+ For 
+\begin_inset Formula $m=o\left(\sqrt{j}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+{j \choose m}=\frac{j^{m}}{m!}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+while for 
+\begin_inset Formula $m=o\left(j\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+{j \choose m}=\left(\frac{j}{m}\right)^{m}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+and then 
+\begin_inset Formula $m=\mathcal{O}\left(j\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\log{j \choose m}=jH\left(\frac{m}{j}\right)\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $-H\left(p\right)=p\log p+\left(1-p\right)\log\left(1-p\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
