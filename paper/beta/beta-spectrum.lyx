@@ -26523,7 +26523,262 @@ Is this acceptable? There is no algebraic equation for the real roots of
 \end_layout
 
 \begin_layout Subsection
-Sooo
+Motivating example
+\end_layout
+
+\begin_layout Standard
+The general solution can be placed into context by exhibiting an example
+ of what it produces.
+ This section demonstrates a piecewise quadratic solution to 
+\begin_inset Formula 
+\[
+\mathcal{L}_{\beta}f=\lambda f
+\]
+
+\end_inset
+
+The solution is developed for the 
+\begin_inset Formula $n=2$
+\end_inset
+
+ finite orbit.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $n=2$
+\end_inset
+
+, the defining polynomial is the cubic 
+\begin_inset Formula $p_{2}\left(\beta\right)=\beta^{3}-\beta^{2}-1$
+\end_inset
+
+.
+ It has a root 
+\begin_inset Formula $p_{2}\left(r_{2}\right)=0$
+\end_inset
+
+, numerically determined as 
+\begin_inset Formula $\beta=r_{2}\approx1.46557\cdots$
+\end_inset
+
+.
+ The midpoint orbit is 
+\begin_inset Formula 
+\begin{align*}
+m_{0}=\beta/2 & \approx0.73278\\
+m_{1}=\beta\left(\beta-1\right)/2 & \approx0.34116\\
+m_{2}=\beta^{2}\left(\beta-1\right)/2 & =1/2
+\end{align*}
+
+\end_inset
+
+The length of the orbit is 
+\begin_inset Formula $\nu=3$
+\end_inset
+
+, which is necessarily the same as the degree of the cubic 
+\begin_inset Formula $p_{2}$
+\end_inset
+
+.
+ The midpoints fall in the sequence 
+\begin_inset Formula $0<m_{1}<m_{2}<m_{0}<1$
+\end_inset
+
+, and so this fixes four intervals
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{3}=\left[0,m_{1}\right]<I_{2}=\left[m_{1},m_{2}\right]<I_{1}=\left[m_{2},m_{0}\right]<I_{0}=\left[m_{0},1\right]
+\]
+
+\end_inset
+
+As the desired solution is a quadratic, hypothesize 
+\begin_inset Formula $f_{k}\left(y\right)=a_{k0}+a_{k1}y+a_{k2}y^{2}$
+\end_inset
+
+ on each segment 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+ with constants 
+\begin_inset Formula $a_{kj}$
+\end_inset
+
+ to be determined.
+\end_layout
+
+\begin_layout Standard
+The pushforward is, as always
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{\beta}f\right]\left(y\right)=\frac{1}{\beta}\left[f\left(\frac{y}{\beta}\right)\Theta\left(m_{0}-y\right)+f\left(\frac{y}{\beta}+\frac{1}{2}\right)\Theta\left(m_{1}-y\right)\right]
+\]
+
+\end_inset
+
+and plugging through the 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ results in eigen-relations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda f_{k}\left(y\right)=\frac{1}{\beta}\left[f_{Lk}\left(\frac{y}{\beta}\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
+\]
+
+\end_inset
+
+The notation 
+\begin_inset Formula $f_{Lk}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{Rk}$
+\end_inset
+
+ is shorthand for the recursive interval maps 
+\begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
+ These two maps induce interval inclusion relations
+\begin_inset Formula 
+\begin{align*}
+LI_{3} & \subset I_{3}\quad\mbox{and}\quad LI_{2}\subset I_{3}\quad\mbox{and}\quad LI_{1}=I_{2}\\
+RI_{3} & =I_{1}\quad\mbox{and}\quad RI_{2}\subset I_{0}\quad\mbox{and}\quad RI_{1}\subset I_{0}
+\end{align*}
+
+\end_inset
+
+ The shorthand notation is just a linear operator:
+\begin_inset Formula 
+\[
+f_{Lk}=\sum_{m=0}^{\nu}\Theta\left(LI_{k}\subseteq I_{m}\right)f_{m}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Theta\left(LI_{k}\subseteq I_{m}\right)$
+\end_inset
+
+ is an indicator function that is true for only one 
+\begin_inset Formula $k,m$
+\end_inset
+
+ pair.
+ It is generically the case that 
+\begin_inset Formula $LI_{k}$
+\end_inset
+
+ is wholy contained in only one interval 
+\begin_inset Formula $I_{m}$
+\end_inset
+
+.
+ Likewise for 
+\begin_inset Formula $RI_{k}$
+\end_inset
+
+, and so the eigen-relations become 
+\begin_inset Formula 
+\[
+\lambda f_{k}\left(y\right)=\frac{1}{\beta}\sum_{m=0}^{\nu}\left[\Theta\left(LI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}\right)+\Theta\left(RI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
+\]
+
+\end_inset
+
+That this is just a matrix equation can be manifested more directly by writing
+ it as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+f_{1}\left(y\right)\\
+f_{2}\left(y\right)\\
+f_{3}\left(y\right)
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 1
+\end{array}\right]\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}\right)\\
+f_{2}\left(\frac{y}{\beta}\right)\\
+f_{3}\left(\frac{y}{\beta}\right)
+\end{array}\right]+\frac{1}{\beta}\left[\begin{array}{ccc}
+0 & 0 & 0\\
+0 & 0 & 0\\
+1 & 0 & 0
+\end{array}\right]\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+f_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+f_{3}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+To make an overly-long story short, the hypothesized quadratics 
+\begin_inset Formula $f_{k}\left(y\right)=a_{k0}+a_{k1}y+a_{k2}y^{2}$
+\end_inset
+
+ can be plugged through; the monomials in 
+\begin_inset Formula $y^{j}$
+\end_inset
+
+ gathered together, leaving a solvable matrix equation.
+ The general form will be given shortly.
+ The resulting solution is
+\begin_inset Formula 
+\begin{align*}
+f\left(y\right) & =\begin{cases}
+f_{3}\left(y\right)=\frac{\beta-1}{\beta}y^{2}-\frac{\beta-1}{\beta}y+\frac{\beta\left(\beta-1\right)}{4\left(\beta+1\right)} & \mbox{for }0\le y<m_{1}=\frac{\beta\left(\beta-1\right)}{2}\\
+f_{2}\left(y\right)=\left(\beta-1\right)y^{2}-\frac{\beta-1}{\beta}y+\frac{\beta-1}{4\left(\beta+1\right)} & \mbox{for }m_{1}\le y<m_{2}=\frac{1}{2}\\
+f_{1}\left(y\right)=y^{2}-\frac{\beta-1}{\beta}y+\frac{\beta-1}{4\beta\left(\beta+1\right)} & \mbox{for }\frac{1}{2}\le y<m_{0}=\frac{\beta}{2}\\
+0 & \mbox{for }m_{0}\le y\le1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+During the solution, it becomes apparent that the eigenvalue is 
+\begin_inset Formula $\lambda=1/\beta^{2}$
+\end_inset
+
+.
+ The solution consists of four intervals, three piece-wise quadratics.
+ Keep in mind this holds only for 
+\begin_inset Formula $\beta=r_{2}\approx1.46557\cdots$
+\end_inset
+
+ and so other finite orbits will have a different form.
+  The general form follows this same template, providing additional detail
+ on how to obtain the solvable matrix.
+\end_layout
+
+\begin_layout Subsection
+General form
+\end_layout
+
+\begin_layout Standard
+where 
 \end_layout
 
 \begin_layout Section
