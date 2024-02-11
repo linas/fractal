@@ -35992,202 +35992,6 @@ c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
 \end_layout
 
 \begin_layout Subsubsection
-Bounds estimates
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $j\to\infty$
-\end_inset
-
- limit is interesting.
- It presents the opportunity to describe piece-wise analytic eigenfunctions,
- although, based in the spectrum, these would all presumably live in the
- kernel.
-\end_layout
-
-\begin_layout Standard
-Write 
-\begin_inset Formula $C_{jm}=c_{jm}C$
-\end_inset
-
- so that 
-\begin_inset Formula 
-\[
-c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
-\]
-
-\end_inset
-
-is the scalar in front of the block 
-\begin_inset Formula $C$
-\end_inset
-
-.
- Then the first few rows are
-\begin_inset Formula 
-\begin{align*}
-c_{0j} & =\frac{1}{2^{j}}\\
-c_{1j} & =\frac{j}{\beta2^{j-1}}\\
-c_{2j} & =\frac{j\left(j-1\right)}{\beta^{2}2^{j+1}}
-\end{align*}
-
-\end_inset
-
-and subsequent rows introduce ever-greater falling factorials.
- 
-\end_layout
-
-\begin_layout Standard
-In the 
-\begin_inset Formula $j\to\infty$
-\end_inset
-
- limit, these behave tamely.
- For fixed 
-\begin_inset Formula $m$
-\end_inset
-
- or even 
-\begin_inset Formula $m=o\left(\sqrt{j}\right)$
-\end_inset
-
-, the binomial coefficient is estimated as
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Das2015"
-literal "false"
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-{j \choose m}=\frac{j^{m}}{m!}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
-\]
-
-\end_inset
-
-and so
-\begin_inset Formula 
-\[
-c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}=\frac{1}{m!}\left(\frac{2}{\beta}\right)^{m}\frac{j^{m}}{2^{j}}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
-\]
-
-\end_inset
-
-and so the 
-\begin_inset Formula $j\to\infty$
-\end_inset
-
- limit is dominated by the 
-\begin_inset Formula $j^{m}2^{-j}$
-\end_inset
-
- term, which grows for a bit before being stomped out.
- Similar behavior is seen near the diagonal, where it is handy to write
- 
-\begin_inset Formula $m=j-n$
-\end_inset
-
- for small 
-\begin_inset Formula $n$
-\end_inset
-
-, say 
-\begin_inset Formula $n=1$
-\end_inset
-
- or similar.
- Then 
-\begin_inset Formula 
-\[
-c_{j,j-n}=\left(\frac{2}{\beta}\right)^{j-n}\frac{1}{2^{j}}{j \choose n}=\frac{1}{n!}\left(\frac{\beta}{2}\right)^{n}\frac{j^{n}}{\beta^{j}}\left(1+o\left(\frac{n^{2}}{j}\right)\right)
-\]
-
-\end_inset
-
-and so this is suppressed by a 
-\begin_inset Formula $j^{n}\beta^{-j}$
-\end_inset
-
- term.
-\end_layout
-
-\begin_layout Standard
-The worse-case behavior is at the 
-\begin_inset Quotes eld
-\end_inset
-
-middle coefficient
-\begin_inset Quotes erd
-\end_inset
-
-, where 
-\begin_inset Formula $j=2m$
-\end_inset
-
- and the binomial coefficients are maximal.
- The asymptotics are
-\begin_inset Formula 
-\[
-{2m \choose m}=\frac{2^{2m}}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
-\]
-
-\end_inset
-
-Thus, along the half-diagonal, the matrix terms blow up:
-\begin_inset Formula 
-\[
-c_{2m,m}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
-\]
-
-\end_inset
-
-since 
-\begin_inset Formula $1<2/\beta$
-\end_inset
-
-.
- This really is the worst-case location.
- Close to this half-diagonal, taking 
-\begin_inset Formula $j\to\infty$
-\end_inset
-
- and writing 
-\begin_inset Formula $m=pj$
-\end_inset
-
- for 
-\begin_inset Formula $0\ll p\ll1$
-\end_inset
-
-, the binomial coefficient converges to the normal distribution, so that
- 
-\begin_inset Formula 
-\[
-\log_{2}{j \choose pj}=jH\left(p\right)\left(1+o\left(1\right)\right)
-\]
-
-\end_inset
-
-with 
-\begin_inset Formula $-H\left(p\right)=p\log_{2}p+\left(1-p\right)\log_{2}\left(1-p\right)$
-\end_inset
-
- the binary entropy function.
- This gives 
-\begin_inset Formula 
-\[
-c_{j,pj}=\left(\frac{2}{\beta}\right)^{pj}\frac{2^{H\left(p\right)}}{\sqrt{\pi pj}}\left(1+o\left(1\right)\right)
-\]
-
-\end_inset
-
-as the estimate for the blow-up at the near-half-diagonal.
-\end_layout
-
-\begin_layout Subsubsection
 Case n=3 (order 
 \begin_inset Formula $\nu=3$
 \end_inset
@@ -36623,9 +36427,9 @@ A_{1}\\
 A_{2}\\
 \vdots
 \end{array}\right]=\frac{1}{\beta}\left[\begin{array}{cccc}
-B & C_{01} & C_{02} & \cdots\\
-0 & \frac{1}{\beta}B & C_{12} & \cdots\\
-0 & 0 & \frac{1}{\beta^{2}}B\\
+D & C_{01} & C_{02} & \cdots\\
+0 & \frac{1}{\beta}D & C_{12} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}D\\
 \vdots & \vdots &  & \ddots
 \end{array}\right]\left[\begin{array}{c}
 A_{0}\\
@@ -36662,6 +36466,633 @@ a_{3j}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Comparing to the previous section, the generic form is now visible.
+\end_layout
+
+\begin_layout Subsection
+General case, redux
+\end_layout
+
+\begin_layout Standard
+The above provides sufficient notation to disccern the general case.
+ From the top:
+\end_layout
+
+\begin_layout Itemize
+The goal is to solve 
+\begin_inset Formula $\mathcal{L}_{\beta}f=\lambda f$
+\end_inset
+
+ to obtain the eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and eigenfunction 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ This will be done for 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values that have finite orbits.
+ These values are given by the largest real root of the corresponding polynomial.
+\end_layout
+
+\begin_layout Itemize
+Fix 
+\begin_inset Formula $n$
+\end_inset
+
+, selecting a polynomial 
+\begin_inset Formula $p_{n}\left(\beta\right)$
+\end_inset
+
+ of order 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ Solve 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\end_inset
+
+ to obtain a root 
+\begin_inset Formula $r_{n}=\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Iterate the midpoint 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ to get 
+\begin_inset Formula $m_{1}=T_{\beta}\left(m_{0}\right)=\beta\left(\beta-1\right)/2$
+\end_inset
+
+, ..., 
+\begin_inset Formula $m_{k}=T_{\beta}^{k}\left(m_{0}\right)$
+\end_inset
+
+, ..., 
+\begin_inset Formula $m_{\nu}=1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Use the midpoints to split the interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ into 
+\begin_inset Formula $\nu$
+\end_inset
+
+ distinct subintervals.
+ Provide a label 
+\begin_inset Formula $k$
+\end_inset
+
+ for each interval, so that the intervals 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+ can be refered to by their labels.
+ It is generally easiest to sort these into ascending order, but this is
+ not mandatory.
+\end_layout
+
+\begin_layout Itemize
+Define the recursive interval maps are the 
+\begin_inset Quotes eld
+\end_inset
+
+left map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
+\end_inset
+
+ and the 
+\begin_inset Quotes eld
+\end_inset
+
+right map
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Starting with 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+ define an interval inclusion graph.
+\end_layout
+
+\begin_layout Itemize
+The interval inclusion graph can be sepcified with square matrices 
+\begin_inset Formula $B,C$
+\end_inset
+
+, having matrix entries 
+\begin_inset Formula $B_{kj}=\Theta\left(I_{j}\subseteq LI_{k}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\Theta\left(I_{j}\subseteq LI_{k}\right)=\begin{cases}
+1 & \mbox{if }I_{j}\subseteq LI_{k}\\
+0 & \mbox{if }I_{j}\nsubseteq LI_{k}
+\end{cases}
+\]
+
+\end_inset
+
+is the inclusion membership function.
+ Likewise 
+\begin_inset Formula $C_{kj}=\Theta\left(I_{j}\subseteq RI_{k}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+For each interval 
+\begin_inset Formula $k$
+\end_inset
+
+, define the component 
+\begin_inset Formula $f_{k}\left(y\right)=\left.f\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ as the restriction of 
+\begin_inset Formula $f$
+\end_inset
+
+ to the interval 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+On each interval, the transfer operator 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ takes the form of a recurrence relation 
+\begin_inset Formula $\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $Lk=j$
+\end_inset
+
+ when 
+\begin_inset Formula $I_{j}\subseteq LI_{k}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $Rk$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Explicitly inserting the membership function 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ into the recurrence relation allows it to be written in block form as
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+f_{1}\left(y\right)\\
+\vdots\\
+f_{\nu}\left(y\right)
+\end{array}\right]=\frac{1}{\beta}B\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}\right)\\
+\vdots\\
+f_{\nu}\left(\frac{y}{\beta}\right)
+\end{array}\right]+\frac{1}{\beta}C\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\vdots\\
+f_{\nu}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+with the square matrices 
+\begin_inset Formula $B,C$
+\end_inset
+
+ as just defined.
+\end_layout
+
+\begin_layout Itemize
+For each interval 
+\begin_inset Formula $k$
+\end_inset
+
+, write 
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{kj}y^{j}$
+\end_inset
+
+ for unknown constants 
+\begin_inset Formula $a_{kj}$
+\end_inset
+
+ to be solved for.
+ Thus, the eigenfunction will be piece-wise polynomial.
+ The above forms a linear system that is solvable.
+\end_layout
+
+\begin_layout Itemize
+Inserting the polynomial pieces, and gather terms into monomials 
+\begin_inset Formula $y^{j}$
+\end_inset
+
+.
+ This requires the use of binomial coefficients to write
+\begin_inset Formula 
+\[
+\left(\frac{y}{\beta}+\frac{1}{2}\right)^{j}=\sum_{m=0}^{j}{j \choose m}y^{m}\frac{1}{\beta^{m}}\cdot\frac{1}{2^{j-m}}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\begin{align*}
+f_{k}\left(\frac{y}{\beta}+\frac{1}{2}\right) & =\sum_{j}a_{kj}\left(\frac{1}{2}+\frac{y}{\beta}\right)^{j}\\
+ & =\sum_{m=0}^{\infty}y^{m}\left(\frac{2}{\beta}\right)^{m}\sum_{j=m}^{\infty}a_{kj}\frac{1}{2^{j}}{j \choose m}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Grouping into monomials results in the block-triangular form
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+\vdots
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{cccc}
+D & C_{01} & C_{02} & \cdots\\
+0 & \frac{1}{\beta}D & C_{12} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}D\\
+\vdots & \vdots &  & \ddots
+\end{array}\right]\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+\vdots
+\end{array}\right]
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $D=B+C$
+\end_inset
+
+ and with 
+\begin_inset Formula $C_{jm}=c_{jm}C$
+\end_inset
+
+ with
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+\]
+
+\end_inset
+
+ and block vectors
+\begin_inset Formula 
+\[
+A_{j}=\left[\begin{array}{c}
+a_{1j}\\
+\vdots\\
+a_{\nu j}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+In other words,
+\begin_inset Formula 
+\[
+\mathcal{L}_{\beta}=\frac{1}{\beta}\left[\begin{array}{cccc}
+D & C_{01} & C_{02} & \cdots\\
+0 & \frac{1}{\beta}D & C_{12} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}D\\
+\vdots & \vdots &  & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+is a matrix representation of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ in a monomial-basis form.
+ It is upper-triangular.
+ It is solvable.
+ It can be truncated at any finite 
+\begin_inset Formula $j$
+\end_inset
+
+ to give a finite 
+\begin_inset Formula $\nu j\times\nu j$
+\end_inset
+
+ matrix.
+ The largest real eigenvalue of this matrix will be 
+\begin_inset Formula $\beta^{-j}$
+\end_inset
+
+ and there will in general be additional complex eigenvalues 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\left|\lambda\right|<\beta^{-j}$
+\end_inset
+
+.
+ For any fixed 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the eigenfunction consists of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ pieces, each piece being a polynomial of the same degree 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+This is a complete description for such piece-wise polynomial solutions.
+ As developed above, it works only for the explicitly finite orbits.
+\end_layout
+
+\begin_layout Itemize
+The only irregular or 
+\begin_inset Quotes eld
+\end_inset
+
+difficult
+\begin_inset Quotes erd
+\end_inset
+
+ part to the above is the calculation of the interval inclusions, needed
+ to obtain the left and right incidence matrixes 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+That's it.
+ That's a complete solution for the general case.
+ The section after next takes a closer look at the left and right incidence
+ matrixes 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+, as this is where all the mess is located.
+\end_layout
+
+\begin_layout Subsection
+Bounds estimates
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit is interesting.
+ It presents the opportunity to describe piece-wise analytic eigenfunctions,
+ although, based in the spectrum, these would all presumably live in the
+ kernel.
+\end_layout
+
+\begin_layout Standard
+The off-diagonal blocks have coefficients
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+\]
+
+\end_inset
+
+The first few rows are
+\begin_inset Formula 
+\begin{align*}
+c_{0j} & =\frac{1}{2^{j}}\\
+c_{1j} & =\frac{j}{\beta2^{j-1}}\\
+c_{2j} & =\frac{j\left(j-1\right)}{\beta^{2}2^{j+1}}
+\end{align*}
+
+\end_inset
+
+and subsequent rows introduce ever-greater falling factorials.
+ In the 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit, these behave tamely.
+\end_layout
+
+\begin_layout Standard
+For fixed 
+\begin_inset Formula $m$
+\end_inset
+
+ or even 
+\begin_inset Formula $m=o\left(\sqrt{j}\right)$
+\end_inset
+
+, the binomial coefficient is estimated as
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Das2015"
+literal "false"
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+{j \choose m}=\frac{j^{m}}{m!}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}=\frac{1}{m!}\left(\frac{2}{\beta}\right)^{m}\frac{j^{m}}{2^{j}}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so the 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit is dominated by the 
+\begin_inset Formula $j^{m}2^{-j}$
+\end_inset
+
+ term, which grows for a bit before being stomped out.
+ Similar behavior is seen near the diagonal, where it is handy to write
+ 
+\begin_inset Formula $m=j-n$
+\end_inset
+
+ for small enough 
+\begin_inset Formula $n$
+\end_inset
+
+, so that 
+\begin_inset Formula $n=o\left(\sqrt{j}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+c_{j,j-n}=\left(\frac{2}{\beta}\right)^{j-n}\frac{1}{2^{j}}{j \choose n}=\frac{1}{n!}\left(\frac{\beta}{2}\right)^{n}\frac{j^{n}}{\beta^{j}}\left(1+o\left(\frac{n^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so this is suppressed by a 
+\begin_inset Formula $j^{n}\beta^{-j}$
+\end_inset
+
+ term.
+\end_layout
+
+\begin_layout Standard
+The worse-case behavior is at the 
+\begin_inset Quotes eld
+\end_inset
+
+middle coefficient
+\begin_inset Quotes erd
+\end_inset
+
+, where 
+\begin_inset Formula $j=2m$
+\end_inset
+
+ and the binomial coefficients are maximal.
+ The asymptotics are
+\begin_inset Formula 
+\[
+{2m \choose m}=\frac{2^{2m}}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+Thus, along the half-diagonal, the matrix terms blow up:
+\begin_inset Formula 
+\[
+c_{2m,m}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $1<2/\beta$
+\end_inset
+
+.
+ This really is the worst-case location.
+ Close to this half-diagonal, taking 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ and writing 
+\begin_inset Formula $m=pj$
+\end_inset
+
+ for 
+\begin_inset Formula $0\ll p\ll1$
+\end_inset
+
+, the binomial coefficient converges to the normal distribution, so that
+ 
+\begin_inset Formula 
+\[
+\log_{2}{j \choose pj}=jH\left(p\right)\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $-H\left(p\right)=p\log_{2}p+\left(1-p\right)\log_{2}\left(1-p\right)$
+\end_inset
+
+ the binary entropy function.
+ This gives 
+\begin_inset Formula 
+\[
+c_{j,pj}=\left(\frac{2}{\beta}\right)^{pj}\frac{2^{H\left(p\right)}}{\sqrt{\pi pj}}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+as the estimate for the blow-up at the near-half-diagonal.
 \end_layout
 
 \begin_layout Subsection
