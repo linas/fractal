@@ -26698,7 +26698,7 @@ where
 , and so the eigen-relations become 
 \begin_inset Formula 
 \[
-\lambda f_{k}\left(y\right)=\frac{1}{\beta}\sum_{m=0}^{\nu}\left[\Theta\left(LI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}\right)+\Theta\left(RI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
+\lambda f_{k}\left(y\right)=\frac{1}{\beta}\sum_{m=1}^{\nu}\left[\Theta\left(LI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}\right)+\Theta\left(RI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
 \]
 
 \end_inset
@@ -26769,8 +26769,6 @@ During the solution, it becomes apparent that the eigenvalue is
 \end_inset
 
  and so other finite orbits will have a different form.
-  The general form follows this same template, providing additional detail
- on how to obtain the solvable matrix.
 \end_layout
 
 \begin_layout Subsection
@@ -26778,7 +26776,460 @@ General form
 \end_layout
 
 \begin_layout Standard
+The general form follows the template given in the example above.
+ It provides additional detail on how to obtain the solvable matrix.
+ From the top:
+\end_layout
+
+\begin_layout Itemize
+The goal is to solve 
+\begin_inset Formula $\mathcal{L}_{\beta}f=\lambda f$
+\end_inset
+
+ to obtain the eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and eigenfunction 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ This will be done for 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values that have finite orbits.
+ These values are given by the largest real root of the corresponding polynomial.
+\end_layout
+
+\begin_layout Itemize
+Fix 
+\begin_inset Formula $n$
+\end_inset
+
+, selecting a polynomial 
+\begin_inset Formula $p_{n}\left(\beta\right)$
+\end_inset
+
+ of order 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ Solve 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\end_inset
+
+ to obtain a root 
+\begin_inset Formula $r_{n}=\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Iterate the midpoint 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ to get 
+\begin_inset Formula $m_{1}=T_{\beta}\left(m_{0}\right)=\beta\left(\beta-1\right)/2$
+\end_inset
+
+, ..., 
+\begin_inset Formula $m_{k}=T_{\beta}^{k}\left(m_{0}\right)$
+\end_inset
+
+, ..., 
+\begin_inset Formula $m_{\nu}=1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Use the midpoints to split the interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ into 
+\begin_inset Formula $\nu$
+\end_inset
+
+ distinct sub-intervals.
+ Provide a label 
+\begin_inset Formula $k$
+\end_inset
+
+ for each interval, so that the intervals 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+ can be referred to by their labels.
+ It is generally easiest to sort these into ascending order, but this is
+ not mandatory.
+\end_layout
+
+\begin_layout Itemize
+Define the recursive interval maps 
+\begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Starting with 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+, define an interval inclusion graph.
+\end_layout
+
+\begin_layout Itemize
+The interval inclusion graph determines incidence matrices.
+ These are square matrices 
+\begin_inset Formula $B,C$
+\end_inset
+
+ having matrix entries 
+\begin_inset Formula $B_{kj}=\Theta\left(I_{j}\subseteq LI_{k}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\Theta\left(I_{j}\subseteq LI_{k}\right)=\begin{cases}
+1 & \mbox{if }I_{j}\subseteq LI_{k}\\
+0 & \mbox{if }I_{j}\nsubseteq LI_{k}
+\end{cases}
+\]
+
+\end_inset
+
+is the inclusion membership function.
+ Likewise 
+\begin_inset Formula $C_{kj}=\Theta\left(I_{j}\subseteq RI_{k}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+For each interval 
+\begin_inset Formula $k$
+\end_inset
+
+, define the component 
+\begin_inset Formula $f_{k}\left(y\right)=\left.f\left(y\right)\right|_{I_{k}}$
+\end_inset
+
+ as the restriction of 
+\begin_inset Formula $f$
+\end_inset
+
+ to the interval 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+On each interval, the pushforward 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ takes the form of a recurrence relation 
+\begin_inset Formula 
+\[
+\lambda\beta f_{k}\left(y\right)=f_{Lk}\left(\frac{y}{\beta}\right)+f_{Rk}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\]
+
+\end_inset
+
 where 
+\begin_inset Formula $Lk=j$
+\end_inset
+
+ when 
+\begin_inset Formula $I_{j}\subseteq LI_{k}$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $Rk$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Explicitly inserting the membership function 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ into the recurrence relation gives the linear equation
+\begin_inset Formula 
+\[
+\lambda f_{k}\left(y\right)=\frac{1}{\beta}\sum_{m=1}^{\nu}\left[\Theta\left(LI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}\right)+\Theta\left(RI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This is more visually transparent when written in block form a
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+f_{1}\left(y\right)\\
+\vdots\\
+f_{\nu}\left(y\right)
+\end{array}\right]=\frac{1}{\beta}B\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}\right)\\
+\vdots\\
+f_{\nu}\left(\frac{y}{\beta}\right)
+\end{array}\right]+\frac{1}{\beta}C\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\vdots\\
+f_{\nu}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+with the square matrices 
+\begin_inset Formula $B,C$
+\end_inset
+
+ as just defined.
+\end_layout
+
+\begin_layout Itemize
+For each interval 
+\begin_inset Formula $k$
+\end_inset
+
+, write 
+\begin_inset Formula $f_{k}\left(y\right)=\sum_{j}a_{kj}y^{j}$
+\end_inset
+
+ for unknown constants 
+\begin_inset Formula $a_{kj}$
+\end_inset
+
+ to be solved for.
+ Thus, the eigenfunction will be piece-wise polynomial.
+ The above forms a linear system that is solvable.
+\end_layout
+
+\begin_layout Itemize
+Insert the polynomial pieces, and gather terms into monomials 
+\begin_inset Formula $y^{j}$
+\end_inset
+
+.
+ This requires the use of binomial coefficients to write
+\begin_inset Formula 
+\[
+\left(\frac{y}{\beta}+\frac{1}{2}\right)^{j}=\sum_{m=0}^{j}{j \choose m}y^{m}\frac{1}{\beta^{m}}\cdot\frac{1}{2^{j-m}}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula 
+\begin{align*}
+f_{k}\left(\frac{y}{\beta}+\frac{1}{2}\right) & =\sum_{j}a_{kj}\left(\frac{1}{2}+\frac{y}{\beta}\right)^{j}\\
+ & =\sum_{m=0}^{\infty}y^{m}\left(\frac{2}{\beta}\right)^{m}\sum_{j=m}^{\infty}a_{kj}\frac{1}{2^{j}}{j \choose m}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Grouping into monomials results in the block-triangular form
+\begin_inset Formula 
+\[
+\lambda\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+\vdots
+\end{array}\right]=\frac{1}{\beta}\left[\begin{array}{cccc}
+D & C_{01} & C_{02} & \cdots\\
+0 & \frac{1}{\beta}D & C_{12} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}D\\
+\vdots & \vdots &  & \ddots
+\end{array}\right]\left[\begin{array}{c}
+A_{0}\\
+A_{1}\\
+A_{2}\\
+\vdots
+\end{array}\right]
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $D=B+C$
+\end_inset
+
+ and with 
+\begin_inset Formula $C_{jm}=c_{jm}C$
+\end_inset
+
+ with
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+\]
+
+\end_inset
+
+ and block vectors
+\begin_inset Formula 
+\[
+A_{j}=\left[\begin{array}{c}
+a_{1j}\\
+\vdots\\
+a_{\nu j}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+In other words,
+\begin_inset Formula 
+\[
+\mathcal{L}_{\beta}=\frac{1}{\beta}\left[\begin{array}{cccc}
+D & C_{01} & C_{02} & \cdots\\
+0 & \frac{1}{\beta}D & C_{12} & \cdots\\
+0 & 0 & \frac{1}{\beta^{2}}D\\
+\vdots & \vdots &  & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+is a matrix representation of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ in a monomial-basis form.
+ It is upper-triangular.
+ It is solvable.
+ It can be truncated at any finite 
+\begin_inset Formula $j$
+\end_inset
+
+ to give a finite 
+\begin_inset Formula $\nu j\times\nu j$
+\end_inset
+
+ matrix.
+ The largest real eigenvalue of this matrix will be 
+\begin_inset Formula $\beta^{-j}$
+\end_inset
+
+ and there will in general be additional complex eigenvalues 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\beta^{-j-1}<\left|\lambda\right|<\beta^{-j}$
+\end_inset
+
+.
+ Much as in the 
+\begin_inset Formula $j=0$
+\end_inset
+
+ case, these accumulate onto the circle of radius 
+\begin_inset Formula $\beta^{-j-1}$
+\end_inset
+
+ as 
+\begin_inset Formula $n$
+\end_inset
+
+ gets large.
+ For any fixed 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the eigenfunction consists of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ pieces, each piece being a polynomial of the same degree 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+This is a complete description for such piece-wise polynomial solutions.
+ As developed above, it works only for the explicitly finite orbits.
+\end_layout
+
+\begin_layout Itemize
+The only irregular or 
+\begin_inset Quotes eld
+\end_inset
+
+difficult
+\begin_inset Quotes erd
+\end_inset
+
+ part to the above is the calculation of the interval inclusions, needed
+ to obtain the left and right incidence matrices 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+That's it.
+ That's the complete solution for the general case.
+\end_layout
+
+\begin_layout Standard
+I
+\end_layout
+
+\begin_layout Standard
+An earlier table provides the left and right incidence matrices 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ They are opaque.
+ Of course they are computable, but the pattern is not obvious.
+ It would be nice if there was a recursive definition for them.
 \end_layout
 
 \begin_layout Section

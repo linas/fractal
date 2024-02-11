@@ -37462,27 +37462,11 @@ Use the midpoints to split the interval
 \end_layout
 
 \begin_layout Itemize
-Define the recursive interval maps are the 
-\begin_inset Quotes eld
-\end_inset
-
-left map
-\begin_inset Quotes erd
-\end_inset
-
- 
+Define the recursive interval maps 
 \begin_inset Formula $L:I_{k}\mapsto\frac{I_{k}}{\beta}$
 \end_inset
 
- and the 
-\begin_inset Quotes eld
-\end_inset
-
-right map
-\begin_inset Quotes erd
-\end_inset
-
- 
+ and 
 \begin_inset Formula $R:I_{k}\mapsto\frac{I_{k}}{\beta}+\frac{1}{2}$
 \end_inset
 
@@ -37494,11 +37478,12 @@ Starting with
 \begin_inset Formula $I_{0}=\left[m_{0},1\right]$
 \end_inset
 
- define an interval inclusion graph.
+, define an interval inclusion graph.
 \end_layout
 
 \begin_layout Itemize
-The interval inclusion graph can be specified with square matrices 
+The interval inclusion graph determines incidence matrices.
+ These are square matrices 
 \begin_inset Formula $B,C$
 \end_inset
 
@@ -37546,7 +37531,7 @@ For each interval
 \end_layout
 
 \begin_layout Itemize
-On each interval, the transfer operator 
+On each interval, the pushforward 
 \begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
@@ -37574,7 +37559,19 @@ Explicitly inserting the membership function
 \begin_inset Formula $\Theta$
 \end_inset
 
- into the recurrence relation allows it to be written in block form as
+ into the recurrence relation gives the linear equation
+\begin_inset Formula 
+\[
+\lambda f_{k}\left(y\right)=\frac{1}{\beta}\sum_{m=1}^{\nu}\left[\Theta\left(LI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}\right)+\Theta\left(RI_{k}\subseteq I_{m}\right)f_{m}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This is more visually transparent when written in block form a
 \begin_inset Formula 
 \[
 \lambda\left[\begin{array}{c}
@@ -37620,7 +37617,7 @@ For each interval
 \end_layout
 
 \begin_layout Itemize
-Inserting the polynomial pieces, and gather terms into monomials 
+Insert the polynomial pieces, and gather terms into monomials 
 \begin_inset Formula $y^{j}$
 \end_inset
 
@@ -37739,10 +37736,23 @@ is a matrix representation of
 \end_inset
 
  satisfying 
-\begin_inset Formula $\left|\lambda\right|<\beta^{-j}$
+\begin_inset Formula $\beta^{-j-1}<\left|\lambda\right|<\beta^{-j}$
 \end_inset
 
 .
+ Much as in the 
+\begin_inset Formula $j=0$
+\end_inset
+
+ case, these accumulate onto the circle of radius 
+\begin_inset Formula $\beta^{-j-1}$
+\end_inset
+
+ as 
+\begin_inset Formula $n$
+\end_inset
+
+ gets large.
  For any fixed 
 \begin_inset Formula $\nu$
 \end_inset
