@@ -26336,7 +26336,194 @@ When an orbit is finite, of order
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The method for obtaining these is straightforward.
+ The first step is to obtain the segments on which the polynomials will
+ live.
+ This is easy: the endpoints of the intervals are determined by the midpoint
+ orbit 
+\begin_inset Formula $m_{k}=T_{\beta}^{k}\left(\beta/2\right)$
+\end_inset
+
+.
+ A somewhat inelegant/difficult bit is that these need to be sorted into
+ order, so that they define non-overlapping segments.
+ Hypothesizing a distinct polynomial on each segment, these are plugged
+ through 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ to obtain a matrix relating polynomial coefficients.
+ This matrix is block-upper-triangular, and thus solvable, and that's it;
+ one is done.
+\end_layout
+
+\begin_layout Standard
+Besides the need to sort midpoints, there is one more inelegant or difficult
+ aspect to this.
+ The application of 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ generates additional intervals; these are images of the original intervals
+ under the pushforward 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+.
+ They are determined by the values 
+\begin_inset Formula $m_{k}/\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $1/2+m_{k}/\beta$
+\end_inset
+
+ for each midpoint.
+ These new intervals are entirely contained within the original set, but
+ introduce a practical difficulty: the membership function is needed.
+ Membership is easily computed with arithmetic; what is annoying is that
+ there does not seem to be any obvious recursive relationship that provides
+ this membership function.
+ Instead, one proceeds by brute force: compute the 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+, sort them into order, compute the 
+\begin_inset Formula $m_{k}/\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $1/2+m_{k}/\beta$
+\end_inset
+
+, and see where they land.
+ It would be conceptually preferable if some relationship could be found,
+ that gave the indicator function by means of some small, simple recurrence
+ relation.
+ If there is such a relation, it is not obvious.
+\end_layout
+
+\begin_layout Subsection
+Ruminations
+\end_layout
+
+\begin_layout Standard
+This raises an overall bugaboo: what is the appropriate balance between
  
+\begin_inset Quotes eld
+\end_inset
+
+mathematics
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+algorithmics
+\begin_inset Quotes erd
+\end_inset
+
+? The general goal of the former is to provide understanding and insight
+ by use of small, compact algebraic formulas establishing relationships
+ between things.
+ The later is used to compute things that are too tedious to do by hand.
+ But a thing is computable, only if there is a recursive formulation that
+ terminates.
+ The product of two real numbers is computable only if they themselves are
+ individually computable.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+best
+\begin_inset Quotes erd
+\end_inset
+
+ algorithm for multiplication requires a trade-off between speed, size and
+ complexity; a choice must be made.
+ There is a homotopic landscape of algorithms, but it is hardly clear what
+ is homotopic to what.
+\end_layout
+
+\begin_layout Standard
+The algorithmic difficulty of multiplying a pair of arbitrary numbers is
+ avoided when those two numbers can be given a short, compact mathematical
+ (arithmetical?) definition: as members of some ring or integral domain
+ or whatever.
+ Computing the 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+ is far more annoying: the appropriate value of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ must first be found by solving for the root of a polynomial 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\end_inset
+
+, when the orbit is finite, or by specifying 
+\begin_inset Formula $\beta$
+\end_inset
+
+ in some other way, when the orbit is not finite.
+ But still, this can be brushed away as unconcerning, since multiplication
+ is an old and comfortable prosthesis, as is root-finding.
+\end_layout
+
+\begin_layout Standard
+Thus, in one sense, it is quite fine to say 
+\begin_inset Quotes eld
+\end_inset
+
+compute the 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+, sort them into order, compute the 
+\begin_inset Formula $m_{k}/\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $1/2+m_{k}/\beta$
+\end_inset
+
+, and see where they land
+\begin_inset Quotes erd
+\end_inset
+
+; this is just fine as an algorithm.
+ As a bit of mathematics, it is deeply unsatisfying: the relationship between
+ the endpoints is opaque and unknown; the endpoints themselves can be explicitly
+ graphed and charted and exhibited, showing hints of patterns present.
+ But the form of those patterns is hidden.
+ The mathematical structure is unresolved.
+\end_layout
+
+\begin_layout Standard
+Is this acceptable? There is no algebraic equation for the real roots of
+ a polynomial larger than a cubic; we've come to terms with this state of
+ affairs and accept it.
+ But this is only because there are existing, known proofs that explicitly
+ demonstrate that such roots are fundamentally unobtainable by algebraic
+ means.
+ The state of affairs regarding the iterated 
+\begin_inset Formula $\beta$
+\end_inset
+
+-transform midpoints is not settled: perhaps there are algebraic expressions,
+ and perhaps there are not.
+ A tool-set to determine the answer to this question is absent.
+ I don't know how to solve this, other than to blunder about.
+\end_layout
+
+\begin_layout Subsection
+Sooo
 \end_layout
 
 \begin_layout Section
