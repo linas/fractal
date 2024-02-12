@@ -37969,11 +37969,33 @@ The matrix
 \end_layout
 
 \begin_layout Itemize
+The matrices 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ never share a common non-zero entry.
+ Equivalently, 
+\begin_inset Formula $D=B+C$
+\end_inset
+
+ has entries that are only zero or one.
+\end_layout
+
+\begin_layout Itemize
 The matrix 
 \begin_inset Formula $D$
 \end_inset
 
- has determinant 1, and thus a spectral radius of 1.
+ is unimodular, i.e.
+ has determinant 
+\begin_inset Formula $\pm1$
+\end_inset
+
+, and thus a spectral radius of 1.
 \end_layout
 
 \begin_layout Itemize
@@ -37998,18 +38020,289 @@ ng to look at?
 \end_layout
 
 \begin_layout Subsection
-Coherent states
+Coherent Sawtooth
 \end_layout
 
 \begin_layout Standard
-A section below looks at coherent states, but it fails to treat them in
- a piece-wise fashion.
- So lets try again, within the above framework.
- Write 
-\begin_inset Formula $f_{k}$
+How do the coherent functions work, when treated as piecewise components?
+ Given any function 
+\begin_inset Formula $v$
 \end_inset
 
- ...
+, write the sawtooth 
+\begin_inset Formula $s\left(x\right)=v\left(x\mod1\right)$
+\end_inset
+
+ so as to be explicitly periodic.
+ Then define the coherent sawtooth as
+\begin_inset Formula 
+\[
+\psi_{w,\alpha}\left(x\right)=\sum_{n=0}^{\infty}w^{n}s\left(\alpha T_{\beta}^{n}\left(x\right)\right)
+\]
+
+\end_inset
+
+By convention, 
+\begin_inset Formula $v\in\ker\mathcal{L}_{\beta}$
+\end_inset
+
+ so as to exclude linear combinations of existing, known eigenfunctions
+ constructed previously.
+\end_layout
+
+\begin_layout Standard
+We will need expressions for 
+\begin_inset Formula $\psi_{w,\alpha}\left(y/\beta\right)$
+\end_inset
+
+ and for 
+\begin_inset Formula $\psi_{w,\alpha}\left(y/\beta+1/2\right)$
+\end_inset
+
+, so get them now.
+ The shift 
+\begin_inset Formula $T_{\beta}$
+\end_inset
+
+ was defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:downshift"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T_{\beta}\left(x\right)=\begin{cases}
+\beta x & \mbox{ for }0\le x<\frac{1}{2}\\
+\beta\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+thus,
+\begin_inset Formula 
+\[
+T_{\beta}\left(\frac{y}{\beta}\right)=y\Theta\left(m_{0}-y\right)+\left(y-m_{0}\right)\Theta\left(y-m_{0}\right)
+\]
+
+\end_inset
+
+The second term is ignorable, as it will always be the case that 
+\begin_inset Formula $y<m_{0}$
+\end_inset
+
+ and so this simplifies to
+\begin_inset Formula 
+\[
+T_{\beta}\left(\frac{y}{\beta}\right)=y
+\]
+
+\end_inset
+
+Similarly
+\begin_inset Formula 
+\[
+T_{\beta}\left(\frac{y}{\beta}+\frac{1}{2}\right)=y
+\]
+
+\end_inset
+
+Plugging through gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\psi\left(\frac{y}{\beta}\right) & =s\left(\frac{\alpha}{\beta}y\right)+w\sum_{n=0}^{\infty}w^{n}s\left(\alpha T_{\beta}^{n}\left(y\right)\right)\\
+ & =s\left(\frac{\alpha}{\beta}y\right)+w\psi\left(y\right)
+\end{align*}
+
+\end_inset
+
+and similarly
+\begin_inset Formula 
+\[
+\psi\left(\frac{y}{\beta}+\frac{1}{2}\right)=s\left(\frac{\alpha}{\beta}y+\frac{\alpha}{2}\right)+w\psi\left(y\right)
+\]
+
+\end_inset
+
+This is the point of coherent states: they scale when they shift.
+\end_layout
+
+\begin_layout Subsubsection
+Case n=1 (order 
+\begin_inset Formula $\nu=2$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+For the 
+\begin_inset Formula $n=1$
+\end_inset
+
+ case, 
+\begin_inset Formula $p_{1}\left(\beta\right)=\beta^{2}-\beta-1$
+\end_inset
+
+ has root 
+\begin_inset Formula $\beta=r_{1}=\varphi$
+\end_inset
+
+.
+ The midpoints are 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{1}=1/2$
+\end_inset
+
+ so 
+\begin_inset Formula $0<m_{1}<m_{0}<1$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}=\left[0,1/2\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{1}=\left[1/2,m_{0}\right]$
+\end_inset
+
+.
+ The interval inclusion map is given by 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Theta\left(I_{j}\subseteq LI_{k}\right)=\left[\begin{array}{cc}
+0 & 1\\
+0 & 1
+\end{array}\right]\quad\mbox{and}\quad\Theta\left(I_{j}\subseteq RI_{k}\right)=\left[\begin{array}{cc}
+0 & 0\\
+1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Write 
+\begin_inset Formula $f_{k}\left(y\right)=a_{k}+\psi_{w,\alpha_{k}}\left(y\right)$
+\end_inset
+
+ for unknown constants 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ and scale factors 
+\begin_inset Formula $\alpha_{k}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+Simplify the coherent state notation, and write 
+\begin_inset Formula $\psi_{k}=\psi_{w,\alpha_{k}}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta\left(a_{1}+\psi_{1}\left(y\right)\right) & =a_{2}+\psi_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta\left(a_{2}+\psi_{2}\left(y\right)\right) & =a_{1}+a_{2}+\psi_{2}\left(\frac{y}{\beta}\right)+\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+The constant terms are presumed to be independent of the coherent state,
+ so 
+\begin_inset Formula 
+\begin{align*}
+a_{2} & =\lambda\beta a_{1}\\
+\lambda^{2}\beta^{2}a_{1} & =a_{1}\left(\lambda\beta+1\right)
+\end{align*}
+
+\end_inset
+
+Thus, 
+\begin_inset Formula $a_{1}=a_{2}=0$
+\end_inset
+
+ in order to avoid the unpalatable conclusion that 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+.
+ This leaves 
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta\psi_{1}\left(y\right) & =\psi_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta\psi_{2}\left(y\right) & =\psi_{2}\left(\frac{y}{\beta}\right)+\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+so lets plug through:
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta\psi_{1}\left(y\right) & =s\left(\frac{\alpha}{\beta}y\right)+w\psi_{2}\left(y\right)\\
+\lambda\beta\psi_{2}\left(y\right) & =s\left(\frac{\alpha}{\beta}y\right)+s\left(\frac{\alpha}{\beta}y+\frac{\alpha}{2}\right)+w\psi_{2}\left(y\right)+w\psi_{1}\left(y\right)
+\end{align*}
+
+\end_inset
+
+then reduce:
+\begin_inset Formula 
+\[
+\lambda\beta\psi_{2}\left(y\right)=s\left(\frac{\alpha}{\beta}y\right)+s\left(\frac{\alpha}{\beta}y+\frac{\alpha}{2}\right)+w\psi_{2}\left(y\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha}{\beta}y\right)+\frac{w^{2}}{\lambda\beta}\psi_{2}\left(y\right)
+\]
+
+\end_inset
+
+Collecting terms,
+\begin_inset Formula 
+\begin{align*}
+0 & =s\left(\frac{\alpha}{\beta}y\right)+s\left(\frac{\alpha}{\beta}y+\frac{\alpha}{2}\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha}{\beta}y\right)\\
+\lambda\beta & =w+\frac{w^{2}}{\lambda\beta}
+\end{align*}
+
+\end_inset
+
+The second eqn has the solution 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+ which is great, its exatly what is seen for the Bernoulli shift.
+ For the first eqn, install 
+\begin_inset Formula $s\left(x\right)=v\left(x\mod1\right)$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
