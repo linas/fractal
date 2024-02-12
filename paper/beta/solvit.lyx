@@ -38026,11 +38026,11 @@ Coherent Sawtooth
 \begin_layout Standard
 How do the coherent functions work, when treated as piecewise components?
  Given any function 
-\begin_inset Formula $v$
+\begin_inset Formula $g$
 \end_inset
 
 , write the sawtooth 
-\begin_inset Formula $s\left(x\right)=v\left(x\mod1\right)$
+\begin_inset Formula $s\left(x\right)=g\left(x\mod1\right)$
 \end_inset
 
  so as to be explicitly periodic.
@@ -38043,11 +38043,12 @@ How do the coherent functions work, when treated as piecewise components?
 \end_inset
 
 By convention, 
-\begin_inset Formula $v\in\ker\mathcal{L}_{\beta}$
+\begin_inset Formula $g\in\ker\mathcal{L}_{\beta}$
 \end_inset
 
  so as to exclude linear combinations of existing, known eigenfunctions
  constructed previously.
+ However, this restriction does not seem to be explicitly needed.
 \end_layout
 
 \begin_layout Standard
@@ -38270,8 +38271,8 @@ Thus,
 so lets plug through:
 \begin_inset Formula 
 \begin{align*}
-\lambda\beta\psi_{1}\left(y\right) & =s\left(\frac{\alpha}{\beta}y\right)+w\psi_{2}\left(y\right)\\
-\lambda\beta\psi_{2}\left(y\right) & =s\left(\frac{\alpha}{\beta}y\right)+s\left(\frac{\alpha}{\beta}y+\frac{\alpha}{2}\right)+w\psi_{2}\left(y\right)+w\psi_{1}\left(y\right)
+\lambda\beta\psi_{1}\left(y\right) & =s\left(\frac{\alpha_{2}}{\beta}y\right)+w\psi_{2}\left(y\right)\\
+\lambda\beta\psi_{2}\left(y\right) & =s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+w\psi_{2}\left(y\right)+w\psi_{1}\left(y\right)
 \end{align*}
 
 \end_inset
@@ -38279,7 +38280,7 @@ so lets plug through:
 then reduce:
 \begin_inset Formula 
 \[
-\lambda\beta\psi_{2}\left(y\right)=s\left(\frac{\alpha}{\beta}y\right)+s\left(\frac{\alpha}{\beta}y+\frac{\alpha}{2}\right)+w\psi_{2}\left(y\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha}{\beta}y\right)+\frac{w^{2}}{\lambda\beta}\psi_{2}\left(y\right)
+\lambda\beta\psi_{2}\left(y\right)=s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+w\psi_{2}\left(y\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha_{2}}{\beta}y\right)+\frac{w^{2}}{\lambda\beta}\psi_{2}\left(y\right)
 \]
 
 \end_inset
@@ -38287,7 +38288,7 @@ then reduce:
 Collecting terms,
 \begin_inset Formula 
 \begin{align*}
-0 & =s\left(\frac{\alpha}{\beta}y\right)+s\left(\frac{\alpha}{\beta}y+\frac{\alpha}{2}\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha}{\beta}y\right)\\
+0 & =s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha_{2}}{\beta}y\right)\\
 \lambda\beta & =w+\frac{w^{2}}{\lambda\beta}
 \end{align*}
 
@@ -38298,11 +38299,60 @@ The second eqn has the solution
 \end_inset
 
  which is great, its exatly what is seen for the Bernoulli shift.
- For the first eqn, install 
-\begin_inset Formula $s\left(x\right)=v\left(x\mod1\right)$
+ The first eqn reduces to 
+\begin_inset Formula 
+\[
+0=\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)
+\]
+
 \end_inset
 
+Recall the sawtooth was defined as 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod1\right)$
+\end_inset
 
+.
+ The modulo will kill the additive term, if 
+\begin_inset Formula $\alpha_{1}=2^{k}$
+\end_inset
+
+ for 
+\begin_inset Formula $k\ge1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+0=\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{2^{k}}{\beta}y\right)
+\]
+
+\end_inset
+
+This has a multitude of solutions.
+ For 
+\begin_inset Formula $g\left(x\right)=x$
+\end_inset
+
+ this has a solution 
+\begin_inset Formula $\alpha_{2}=-2^{k}/\beta$
+\end_inset
+
+.
+ In this particular case, one gets
+\begin_inset Formula 
+\begin{align*}
+\psi_{1}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}\left[\left(2^{k}T_{\beta}^{n}\left(x\right)\right)\mod1\right]\\
+\psi_{2}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}\left[\left(-\frac{2^{k}}{\beta}T_{\beta}^{n}\left(x\right)\right)\mod1\right]
+\end{align*}
+
+\end_inset
+
+as a piece-wise fractal solution with eigenvalue 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
