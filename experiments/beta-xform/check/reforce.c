@@ -1,6 +1,9 @@
 /*
  * reforce.c
- * Build eigenfunctions (as coherent states).
+ * Build coherent states.
+ * Unlike later work, these are not the piecewise coherent states,
+ * and so they don't actually work out. See repiece.c for the
+ * piece-wise variant.
  *
  * January 2024
  */

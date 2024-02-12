@@ -2,7 +2,8 @@
 This directory has code that explores the Beta Transform
 which is the iterated eqn  (bx mod 1)  for 1< b < 2
 
-Almost all code is written to use K = b/2
+All the early code is written to use K = b/2
+Later code uses b directly.
 
 Here's what we got:
 
@@ -20,7 +21,6 @@ invariant/beta.c: sanity-check experiments against exact Parry-Gel'fond
 invariant/fp-diagram.C: exact frobenius-perron eigenstate using reigen.c
 
 tree-trim/*: the painful trimmed-tree stuff from the paper.
-
 
 bifur/bernie.C: feignbaum-style diagrams of various maps, low precision.
 
@@ -60,3 +60,9 @@ irred.c, irred-viz.c irred-fraction.c: compute roots of the golden
 
 unitary:
 	Complex roots of polynomials.
+
+check: Early work on decaying eigenfuncs. Visitation tree.
+   The big one here is the iterated pushforward code, in unwrap.c
+   and later un*.c extensions.
+
+coherent: Verify coherent state solutions.

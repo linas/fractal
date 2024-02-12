@@ -2,6 +2,8 @@
  * recheck.c
  * Recheck old (negative) results.
  * They're still negative.
+ * This maintains an array of densities, and applies the pushforward
+ * to that array.
  *
  * January 2024
  */
