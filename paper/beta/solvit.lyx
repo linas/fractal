@@ -38030,7 +38030,7 @@ How do the coherent functions work, when treated as piecewise components?
 \end_inset
 
 , write the sawtooth 
-\begin_inset Formula $s\left(x\right)=g\left(x\mod1\right)$
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
 \end_inset
 
  so as to be explicitly periodic.
@@ -38285,15 +38285,19 @@ The second eqn has the solution
 \end_inset
 
 Recall the sawtooth was defined as 
-\begin_inset Formula $s\left(x\right)=g\left(x\mod1\right)$
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
 \end_inset
 
 .
  The modulo will kill the additive term, if 
-\begin_inset Formula $\alpha_{1}=2$
+\begin_inset Formula $\left(\alpha_{1}/2\right)\mod\beta/2=0$
 \end_inset
 
-k for any integer 
+ which is acheived by 
+\begin_inset Formula $\alpha_{1}=k\beta$
+\end_inset
+
+ for any integer 
 \begin_inset Formula $k$
 \end_inset
 
@@ -38301,13 +38305,13 @@ k for any integer
  Then
 \begin_inset Formula 
 \[
-0=a_{2}\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{2k}{\beta}y\right)
+0=a_{2}\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(ky\right)
 \]
 
 \end_inset
 
 This has a generic solution 
-\begin_inset Formula $\alpha_{2}=\alpha_{1}=2k$
+\begin_inset Formula $\alpha_{2}=\alpha_{1}=k\beta$
 \end_inset
 
  and 
@@ -38318,8 +38322,8 @@ This has a generic solution
  The eigenfunctions are
 \begin_inset Formula 
 \begin{align*}
-\psi_{1}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}g\left(\left(2kT_{\beta}^{n}\left(y\right)\right)\mod1\right)\\
-\psi_{2}\left(\frac{y}{\beta}\right) & =-w\beta^{2}\psi_{1}\left(y\right)
+\psi_{2}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}g\left(\left(\beta kT_{\beta}^{n}\left(y\right)\right)\mod\beta/2\right)\\
+\psi_{1}\left(y\right) & =-\frac{1}{w\beta^{2}}\psi_{2}\left(\frac{y}{\beta}\right)
 \end{align*}
 
 \end_inset

@@ -21,7 +21,7 @@ double coh(double beta, double omega, double alpha, double y)
 	while (1.0e-15 < wn)
 	{
 		double term = alpha * yn;
-		sum += wn * (term - floor(term));
+		sum += wn * (term - m0*floor(term/m0));
 		yn *= beta;
 		if (m0 < yn) yn -= m0;
 		wn *= omega;
@@ -32,15 +32,15 @@ double coh(double beta, double omega, double alpha, double y)
 double goldcoh(double omega, int k, double y)
 {
 	double beta = 0.5*(sqrt(5.0) + 1.0);
-	double tk = 2.0 * k;
+	double alpha = beta * k;
 
 	// Interval 2
 	if (y < 0.5)
-		return -omega*beta*beta*coh(beta, omega, tk, beta*y);
+		return coh(beta, omega, alpha, y);
 
 	// Interval 1
 	if (y < 0.5*beta)
-		return coh(beta, omega, tk, y);
+		return -coh(beta, omega, alpha, y/beta) / (omega*beta*beta);
 
 	return 0.0;
 }
