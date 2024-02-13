@@ -105,13 +105,14 @@ int main(int argc, char* argv[])
 
 #define NPTS 2019
 	double alpha = k*beta;
+	alpha = 1.0;
 	double period = 0.5*beta;
 	double a2 = -1.0 / beta;
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
 		double f1 = psi_one(beta, omega, alpha, period, x);
-		double f2 = a2* psi_two(beta, omega, alpha, period, x/beta);
+		double f2 = a2* psi_two(beta, omega, beta*alpha, period, x/beta);
 		double top = omega*beta*f1 - f2;
 		printf("%d	%f	%f	%f %g\n", j, x, f1, f2, top);
 		fflush(stdout);

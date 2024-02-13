@@ -38024,12 +38024,12 @@ Coherent Sawtooth
 \end_layout
 
 \begin_layout Standard
-How do the coherent functions work, when treated as piecewise components?
- This is an attempt, but it doesn't work out.
- It feels promising, but fails.
+Might the coherent functions work, when treated as piecewise components?
+ Below is an attempt, but it doesn't work out.
+ It is not hard to run with the idea, but it fails.
  Follow along on the beguiling path, only to die at the end.
- This is effectively a proof of the non-existance of a solution of this
- form.
+ What follows is effectively a proof of the non-existance of a solution
+ of this form.
  Alas.
  The dreaded null result.
 \end_layout
@@ -38059,6 +38059,31 @@ By convention,
  so as to exclude linear combinations of existing, known eigenfunctions
  constructed previously.
  However, this restriction does not seem to be explicitly needed.
+ The 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a scaling constant; the intent is to use it as an aid to stitch pieces
+ together.
+ Note that for 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+, the modulo in the sawtooth is not needed.
+ For 
+\begin_inset Formula $\alpha=\beta$
+\end_inset
+
+, together with the mod, it is as if one more shift is introduced.
+ There is also another variant to explore: 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\gamma\right)$
+\end_inset
+
+ for some other value of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -38253,7 +38278,7 @@ Assume that
 \end_inset
 
 .
- Then the goal is to solve.
+ Then the goal is to solve
 \begin_inset Formula 
 \begin{align*}
 \lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
@@ -38276,9 +38301,13 @@ Assuming the above are satisfiable, an algebraic solution is not hard to
  be multiples of one another.
 \end_layout
 
+\begin_layout Subsubsection
+Proof
+\end_layout
+
 \begin_layout Standard
 Try it.
- Plug through:
+ Use the shift to pul out a sawtooth factor:
 \begin_inset Formula 
 \[
 \begin{align*}\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
@@ -38410,6 +38439,123 @@ for some constants
 \end_inset
 
  and so it all falls apart, here.
+\end_layout
+
+\begin_layout Subsubsection
+Alternate attempt
+\end_layout
+
+\begin_layout Standard
+The equation 
+\begin_inset Formula 
+\[
+\lambda\beta a_{1}\psi_{1}\left(y\right)=a_{2}\psi_{2}\left(\frac{y}{\beta}\right)
+\]
+
+\end_inset
+
+can be satisfied by setting 
+\begin_inset Formula $\alpha_{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{2}=\beta$
+\end_inset
+
+.
+ This has the effect of introducing one more shift into 
+\begin_inset Formula $\psi_{2}$
+\end_inset
+
+, so that 
+\begin_inset Formula $\psi_{2}\left(y\right)=\psi_{1}\left(T_{\beta}\left(y\right)\right)$
+\end_inset
+
+.
+ To place this back into normal form:
+\begin_inset Formula 
+\begin{align*}
+\psi_{1}\left(T_{\beta}\left(y\right)\right) & =\sum_{n=0}^{\infty}w^{n}s\left(T_{\beta}^{n+1}\left(y\right)\right)\\
+ & =\frac{1}{w}\left[-s\left(y\right)+\psi_{1}\left(y\right)\right]
+\end{align*}
+
+\end_inset
+
+The next equation to solve is
+\begin_inset Formula 
+\[
+\lambda\beta a_{2}\psi_{2}\left(y\right)=a_{2}\psi_{2}\left(\frac{y}{\beta}\right)+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\]
+
+\end_inset
+
+Plugging through the various forms gives
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta a_{2}\psi_{1}\left(T_{\beta}\left(y\right)\right) & =\lambda\beta a_{1}\psi_{1}\left(y\right)+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\frac{\lambda\beta a_{2}}{w}\left(-s\left(y\right)+\psi_{1}\left(y\right)\right) & =\lambda\beta a_{1}\psi_{1}\left(y\right)+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)+wa_{1}\psi_{1}\left(y\right)
+\end{align*}
+
+\end_inset
+
+Collecting terms requires
+\begin_inset Formula 
+\[
+\frac{\lambda\beta a_{2}}{w}=\lambda\beta a_{1}+wa_{1}
+\]
+
+\end_inset
+
+The above can be satisfied by setting 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2}=w\beta a_{1}$
+\end_inset
+
+.
+ This leaves the sawtooth term.
+ It is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+-\frac{\lambda\beta a_{2}}{w}s\left(y\right) & =a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+-w\beta^{2}s\left(y\right) & =s\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+The definition was 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
+\end_inset
+
+ and since 
+\begin_inset Formula $y\le\beta/2$
+\end_inset
+
+ is guaranteed a priori we can drop the modulo term and hunt for a 
+\begin_inset Formula $g$
+\end_inset
+
+ that satisfies this.
+ In the linear domain, assume 
+\begin_inset Formula $g\left(x\right)=x+b$
+\end_inset
+
+ so that
+\begin_inset Formula 
+\begin{align*}
+0 & =w\beta^{2}\left(y+b\right)+\frac{y}{\beta}+\frac{1}{2}+b\\
+0 & =w\beta^{2}+\frac{1}{\beta}\\
+0 & =b\left(1+w\beta^{2}\right)+\frac{1}{2}
+\end{align*}
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Subsection
