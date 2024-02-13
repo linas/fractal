@@ -16,8 +16,10 @@ double modper(double period, double y)
 	return y;
 }
 
-double gee(double off, double y)
+double gee(double beta, double omega, double y)
 {
+	return 1.0;
+	double off = -0.5 / (1.0 + omega*beta*beta);
 	return y+off;
 }
 
@@ -27,15 +29,13 @@ double psi(double beta, double omega, double alpha, double y)
 	double m0 = 0.5*beta;
 	if (m0 < y) return 0.0;
 
-	double off = -0.5 / (1.0 + omega*beta*beta);
-
 	double wn = 1.0;
 	double yn = y;
 	double sum = 0.0;
 	while (1.0e-15 < fabs(wn))
 	{
 		double term = alpha * yn;
-		sum += wn * gee(off, modper(m0, term));
+		sum += wn * gee(beta, omega, modper(m0, term));
 		yn *= beta;
 		if (m0 < yn) yn -= m0;
 		wn *= omega;
@@ -88,7 +88,8 @@ int main(int argc, char* argv[])
 		double p1 = psi_all(beta, omega, x/beta);
 		if (0.5*beta < x) p1=0.0;
 		double p2 = psi_all(beta, omega, x/beta + 0.5);
-		printf("%d	%f	%f	%f %g\n", j, x, p1, p2, all);
+		double ell = (p1+p2) / beta;
+		printf("%d	%f	%f	%f\n", j, x, all, ell);
 		fflush(stdout);
 	}
 }

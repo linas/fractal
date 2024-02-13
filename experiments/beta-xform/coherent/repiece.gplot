@@ -9,18 +9,12 @@ set out 'repiece.png'
 set title "repiece"
 
 beta=1.618034
-w=0.4
-#plot "repiece.dat" using 2:3 with lines lw 2 title "main", \
-#     "repiece.dat" using 2:4 with lines lw 2 title "b1", \
-#     "repiece.dat" using 2:5 with lines lw 2 title "b2", \
-#     "repiece.dat" using 2:(($4+$5)/(beta*w)) with lines lw 2 title "sum", \
 
-om = -0.2360679774997897
-plot "repiece.dat" using 2:5 with lines lw 2 title "all", \
-     "repiece.dat" using 2:(($3+$4)/(beta*om)) with lines lw 2 title "L1", \
-
-#     "repiece.dat" using 2:(0.5-$2/(1.0+beta)) with lines lw 2 title "f1", \
-#     "repiece.dat" using 2:(-0.5*beta+$2/beta) with lines lw 2 title "f1", \
+om = -0.3819660112501051  # const
+om = -0.2360679774997897  # linear
+om = -0.14589803375031546 # qudratic
+plot "repiece.dat" using 2:3 with lines lw 2 title "all", \
+     "repiece.dat" using 2:($4/om) with lines lw 2 title "L", \
 
 #####
 
