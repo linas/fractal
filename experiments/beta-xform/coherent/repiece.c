@@ -18,9 +18,23 @@ double modper(double period, double y)
 
 double gee(double beta, double omega, double y)
 {
+#ifdef CONST
+	// const
 	return 1.0;
+#endif
+
+#ifdef LINEAR
 	double off = -0.5 / (1.0 + omega*beta*beta);
 	return y+off;
+#endif
+
+	double bee = -1.0 / (1.0 + omega * pow(beta, 3));
+	double cee = -(0.25 + 0.5*bee) / (1.0 + omega * pow(beta, 2));
+
+	// Below are identical to above.
+	bee = - (beta+1.0);
+	cee = 0.25 * (3.0*beta + 2.0);
+	return y*y + bee*y + cee;
 }
 
 // gee coherent function.

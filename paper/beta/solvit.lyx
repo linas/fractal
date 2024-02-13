@@ -38024,14 +38024,11 @@ Coherent Sawtooth
 \end_layout
 
 \begin_layout Standard
-Might the coherent functions work, when treated as piecewise components?
- Below is an attempt, but it doesn't work out.
- It is not hard to run with the idea, but it fails.
- Follow along on the beguiling path, only to die at the end.
- What follows is effectively a proof of the non-existance of a solution
- of this form.
- Alas.
- The dreaded null result.
+Coherent functions can provide additional eigenfunctions, when treated as
+ piecewise components.
+ Ongoing work, incomplete.
+ Currently, have a discrete spectrum with negative eigenvalues.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -38287,27 +38284,39 @@ Assume that
 
 \end_inset
 
-Assuming the above are satisfiable, an algebraic solution is not hard to
- find.
- With only one problem: the above cannot be satsified.
- There is no rescaling that will make 
-\begin_inset Formula $\psi_{1}$
-\end_inset
 
- and 
-\begin_inset Formula $\psi_{2}$
-\end_inset
-
- be multiples of one another.
 \end_layout
 
 \begin_layout Subsubsection
-Proof, one possibility
+Failing variant
+\end_layout
+
+\begin_layout Standard
+The variant below follows an algebraic path that ends in failure.
+ The failure mode is subtle, so it is illustrated here.
+ The mistake hinges around the assumption that the first equation, 
+\begin_inset Formula $\lambda\beta a_{1}\psi_{1}\left(y\right)=a_{2}\psi_{2}\left(y/\beta\right)$
+\end_inset
+
+ can be satisfied by setting 
+\begin_inset Formula $\alpha_{1}=\alpha_{2}$
+\end_inset
+
+.
+ It cannot be; it will not hold.
+ Yet, 
+\begin_inset Formula $\alpha_{1}=\alpha_{2}$
+\end_inset
+
+ is not assumed, it is derived algebraically, but ends with this unsatisfiable
+ relation.
+ So here's a winding garden path that goes nowhere.
+ AKA a proof that this won't work.
 \end_layout
 
 \begin_layout Standard
 Try it.
- Use the shift to pul out a sawtooth factor:
+ Use the shift to pull out a sawtooth factor:
 \begin_inset Formula 
 \[
 \begin{align*}\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
@@ -38344,7 +38353,7 @@ The second eqn has the solution
 \end_inset
 
 , which is great, its exatly what is seen for the Bernoulli shift; its what
- - we expected.
+ we expected.
 \end_layout
 
 \begin_layout Standard
@@ -38442,11 +38451,12 @@ for some constants
 \end_layout
 
 \begin_layout Subsubsection
-Proof, other possibility
+Working variant
 \end_layout
 
 \begin_layout Standard
-The equation 
+Armed with the failure mode above, we look for solutions to the equation
+ 
 \begin_inset Formula 
 \[
 \lambda\beta a_{1}\psi_{1}\left(y\right)=a_{2}\psi_{2}\left(\frac{y}{\beta}\right)
@@ -38454,7 +38464,12 @@ The equation
 
 \end_inset
 
-can be satisfied by setting 
+with 
+\begin_inset Formula $\alpha_{2}\ne\alpha_{1}$
+\end_inset
+
+.
+ One way this can be satisfied is by setting 
 \begin_inset Formula $\alpha_{1}=1$
 \end_inset
 
@@ -38472,7 +38487,12 @@ can be satisfied by setting
 \end_inset
 
 .
- To place this back into normal form:
+ This allows the terms in the coherent series to be lined up.
+ Lets proceed.
+\end_layout
+
+\begin_layout Standard
+Place this back into normal form:
 \begin_inset Formula 
 \begin{align*}
 \psi_{1}\left(T_{\beta}\left(y\right)\right) & =\sum_{n=0}^{\infty}w^{n}s\left(T_{\beta}^{n+1}\left(y\right)\right)\\
@@ -38537,51 +38557,98 @@ The definition was
 \end_inset
 
  is guaranteed a priori we can drop the modulo term and hunt for a 
-\begin_inset Formula $g$
+\begin_inset Formula $g\left(x\right)$
 \end_inset
 
  that satisfies this.
- There are several interesting cases.
- One is 
+ Such 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ can be found.
+ When they are found, the resulting eigenfunction will have the form
+\begin_inset Formula 
+\[
+f\left(y\right)=\begin{cases}
+f_{2}\left(y\right)=a_{2}\psi_{w,\beta}\left(y\right) & \mbox{for }0\le y\le\frac{1}{2}\\
+f_{1}\left(y\right)=a_{1}\psi_{w,1}\left(y\right) & \mbox{for }\frac{1}{2}<y\le\frac{\beta}{2}\\
+f_{0}\left(y\right)=0 & \mbox{for }\frac{\beta}{2}<y\le1
+\end{cases}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\psi$
+\end_inset
+
+ as defined earlier, and with 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2}=w\beta a_{1}$
+\end_inset
+
+ in all cases.
+\end_layout
+
+\begin_layout Standard
+Lets try the first few cases by hand.
+ The first is 
 \begin_inset Formula $g\left(x\right)=1$
 \end_inset
 
- which forces 
+.
+ This forces 
 \begin_inset Formula $w=-1/\beta^{2}$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Verified numerically with beta-xform/coherent/repiece.c and repiece.gplot
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Continuing.
+ In the linear domain, assume 
+\begin_inset Formula $g\left(x\right)=x+b$
+\end_inset
+
+ so that
+\begin_inset Formula 
+\[
+0=w\beta^{2}\left(y+b\right)+\frac{y}{\beta}+\frac{1}{2}+b
+\]
+
+\end_inset
+
+The linear term forces 
+\begin_inset Formula $w=-1/\beta^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $b=-1/2\left(1+w\beta^{2}\right)=-\left(\beta+1\right)/2$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-In the linear domain, assume 
-\begin_inset Formula $g\left(x\right)=x+b$
-\end_inset
-
- so that
-\begin_inset Formula 
-\begin{align*}
-0 & =w\beta^{2}\left(y+b\right)+\frac{y}{\beta}+\frac{1}{2}+b\\
-0 & =w\beta^{2}+\frac{1}{\beta}\\
-0 & =b\left(1+w\beta^{2}\right)+\frac{1}{2}
-\end{align*}
-
-\end_inset
-
-None of this is satisfying.
- This seems to force the eigenvalue to be 
-\begin_inset Formula $\lambda=w=-1/\beta^{3}$
-\end_inset
-
- which is not the intended destination.
-\end_layout
-
-\begin_layout Standard
-How about 
+The quadratic form 
 \begin_inset Formula $g\left(x\right)=x^{2}+bx+c$
 \end_inset
 
-? Then 
+ gives 
 \begin_inset Formula 
 \begin{align*}
 0 & =w\beta^{2}\left(y^{2}+by+c\right)+\left(\frac{y}{\beta}+\frac{1}{2}\right)^{2}+b\left(\frac{y}{\beta}+\frac{1}{2}\right)+c\\
@@ -38592,7 +38659,34 @@ How about
 
 \end_inset
 
+Summarizing,
+\begin_inset Formula 
+\begin{align*}
+w & =-\frac{1}{\beta^{4}}\\
+b & =-\left(\beta+1\right)\\
+c & =\frac{3\beta+2}{4}
+\end{align*}
 
+\end_inset
+
+It appears that this pattern can be followed, thus obtaining an eigenfunction
+ with eigenvalue 
+\begin_inset Formula $\lambda=w=-\beta^{k+2}$
+\end_inset
+
+ for polynomial generators 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ of degree 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Is there a general case?
 \end_layout
 
 \begin_layout Subsection
