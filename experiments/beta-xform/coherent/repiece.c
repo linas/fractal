@@ -38,6 +38,19 @@ double psi(double beta, double omega, double alpha, double y)
 	return sum;
 }
 
+double psi_one(double beta, double omega, double alpha, double y)
+{
+	if (y < 0.5) return 0.0;
+	if (0.5*beta < y) return 0.0;
+	return psi(beta, omega, alpha, y);
+}
+
+double psi_two(double beta, double omega, double alpha, double y)
+{
+	if (0.5 < y) return 0.0;
+	return psi(beta, omega, alpha, y);
+}
+
 double goldpsi(double omega, int k, double y)
 {
 	double beta = 0.5*(sqrt(5.0) + 1.0);
@@ -139,24 +152,43 @@ int main(int argc, char* argv[])
 		printf("%d	%f	%f	%g\n", j, x, y, top);
 #endif
 
-/// #define BOT_ROW
+// #define BOT_ROW
 #ifdef BOT_ROW
 // borken
-		double y = goldpsi(omega, k, x);
 		double a2 = -1.0 / beta;
+		double y = psi_two(beta, omega, alpha, x);
 		double bot = omega*beta*a2*y;
-		bot -= a2* goldpsi(omega, k, x/beta);
-		bot -= goldpsi(omega, k, x/beta + 0.5);
+		bot -= a2* psi_two(beta, omega, alpha, x/beta);
+		bot -= psi_one(beta, omega, alpha, x/beta + 0.5);
 		printf("%d	%f	%f	%g\n", j, x, y, bot);
 #endif
 
+// #define BOT_ELIM
+#ifdef BOT_ELIM
+		// passes like it should
+		double a2 = -1.0 / beta;
+		double y = psi_two(beta, omega, alpha, x);
+		double bot = omega*beta*a2*y;
+		bot -= a2* omega* psi_two(beta, omega, alpha, x);
+		bot -= omega* a2* psi_two(beta, omega, alpha, x) /beta;
+
+		// ss is zero, so this does nothing.
+		double ss = a2*sgen(beta, alpha, x/beta);
+		ss += sgen(beta, alpha, x/beta + 0.5);
+		ss += a2 * sgen(beta, alpha, x/beta) / beta;
+
+		bot -= ss;
+		printf("%d	%f	%f	%g\n", j, x, y, bot);
+#endif
+
+#define BOT_PLUG
 #ifdef BOT_PLUG
 // borken
 		double a2 = -1.0 / beta;
-		double y = goldpsi(omega, k, x);
+		double y = psi_two(beta, omega, alpha, x);
 		double bot = omega*beta*a2*y;
-		bot -= a2* omega* goldpsi(omega, k, x);
-		bot -= omega* goldpsi(omega, k, x);
+		bot -= a2* omega* psi_two(beta, omega, alpha, x);
+		bot -= omega* psi_one(beta, omega, alpha, x);
 
 		double ss = a2*sgen(beta, alpha, x/beta);
 		ss += sgen(beta, alpha, x/beta + 0.5);
