@@ -19,7 +19,7 @@ double sgen(double beta, double alpha, double y)
 }
 
 // Line-generated coherent function.
-double coh(double beta, double omega, double alpha, double y)
+double psi(double beta, double omega, double alpha, double y)
 {
 	double m0 = 0.5*beta;
 	if (m0 < y) return 0.0;
@@ -38,18 +38,18 @@ double coh(double beta, double omega, double alpha, double y)
 	return sum;
 }
 
-double goldcoh(double omega, int k, double y)
+double goldpsi(double omega, int k, double y)
 {
 	double beta = 0.5*(sqrt(5.0) + 1.0);
 	double alpha = beta * k;
 
 	// Interval 2
 	if (y < 0.5)
-		return coh(beta, omega, alpha, y);
+		return psi(beta, omega, alpha, y);
 
 	// Interval 1
 	if (y < 0.5*beta)
-		return -coh(beta, omega, alpha, y/beta) / (omega*beta*beta);
+		return -psi(beta, omega, alpha, y/beta) / (omega*beta*beta);
 
 	return 0.0;
 }
@@ -73,10 +73,10 @@ int main(int argc, char* argv[])
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
-		double y = goldcoh(omega, k, x);
-		double bra1 = goldcoh(omega, k, x/beta);
+		double y = goldpsi(omega, k, x);
+		double bra1 = goldpsi(omega, k, x/beta);
 		if (0.5*beta < x) bra1 = 0.0;
-		double bra2 = goldcoh(omega, k, x/beta+0.5);
+		double bra2 = goldpsi(omega, k, x/beta+0.5);
 		if (0.5 < x) bra2 = 0.0;
 		printf("%d	%f	%f	%f	%f\n", j, x, y, bra1, bra2);
 		fflush(stdout);
@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
 
 #define SANITY_CHECK
 #ifdef SANITY_CHECK
-	// Quadruple-check the coherent sum. Yes, it behaves exactly how
+	// Quadruple-check the psierent sum. Yes, it behaves exactly how
 	// it should. So this is not where the problem lies.
 	double alpha = k*beta;
 #define NPTS 19
@@ -93,15 +93,15 @@ int main(int argc, char* argv[])
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
 #ifdef LCHECK
-		double y = coh(beta, omega, alpha, x);
-		double bra1 = coh(beta, omega, alpha, x/beta);
+		double y = psi(beta, omega, alpha, x);
+		double bra1 = psi(beta, omega, alpha, x/beta);
 		double sha1 = k*x + omega * y - bra1;
 		printf("%d	%f	%f	%f	%g\n", j, x, y, bra1, sha1);
 #endif
 // #define RCHECK
 #ifdef RCHECK
-		double y = coh(beta, omega, alpha, x);
-		double bra2 = coh(beta, omega, alpha, x/beta + 0.5);
+		double y = psi(beta, omega, alpha, x);
+		double bra2 = psi(beta, omega, alpha, x/beta + 0.5);
 		double gen = sgen(beta, alpha, x/beta + 0.5);
 		double sha2 = gen + omega * y - bra2;
 		printf("%d	%f	%f	%f	%g\n", j, x, y, bra2, sha2);
@@ -134,18 +134,34 @@ int main(int argc, char* argv[])
 
 #ifdef TOP_ROW
 		// works
-		double y = goldcoh(omega, k, x);
-		double top = omega*beta*y + goldcoh(omega, k, x/beta)/beta;
+		double y = goldpsi(omega, k, x);
+		double top = omega*beta*y + goldpsi(omega, k, x/beta)/beta;
 		printf("%d	%f	%f	%g\n", j, x, y, top);
 #endif
 
+/// #define BOT_ROW
 #ifdef BOT_ROW
 // borken
-		double y = goldcoh(omega, k, x);
+		double y = goldpsi(omega, k, x);
 		double a2 = -1.0 / beta;
-		double bot = -omega*y;
-		bot -= -goldcoh(omega, k, x/beta) / beta;
-		bot -= goldcoh(omega, k, x/beta + 0.5);
+		double bot = omega*beta*a2*y;
+		bot -= a2* goldpsi(omega, k, x/beta);
+		bot -= goldpsi(omega, k, x/beta + 0.5);
+		printf("%d	%f	%f	%g\n", j, x, y, bot);
+#endif
+
+#ifdef BOT_PLUG
+// borken
+		double a2 = -1.0 / beta;
+		double y = goldpsi(omega, k, x);
+		double bot = omega*beta*a2*y;
+		bot -= a2* omega* goldpsi(omega, k, x);
+		bot -= omega* goldpsi(omega, k, x);
+
+		double ss = a2*sgen(beta, alpha, x/beta);
+		ss += sgen(beta, alpha, x/beta + 0.5);
+
+		bot -= ss;
 		printf("%d	%f	%f	%g\n", j, x, y, bot);
 #endif
 
