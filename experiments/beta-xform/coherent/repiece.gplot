@@ -15,9 +15,12 @@ w=0.4
 #     "repiece.dat" using 2:5 with lines lw 2 title "b2", \
 #     "repiece.dat" using 2:(($4+$5)/(beta*w)) with lines lw 2 title "sum", \
 
+om = -0.2360679774997897
 plot "repiece.dat" using 2:5 with lines lw 2 title "all", \
-     "repiece.dat" using ($2/beta):($5/beta) with lines lw 2 title "p1", \
-     "repiece.dat" using ($2/beta+0.5):($5/beta) with lines lw 2 title "p2", \
+     "repiece.dat" using 2:(($3+$4)/(beta*om)) with lines lw 2 title "L1", \
+
+#     "repiece.dat" using 2:(0.5-$2/(1.0+beta)) with lines lw 2 title "f1", \
+#     "repiece.dat" using 2:(-0.5*beta+$2/beta) with lines lw 2 title "f1", \
 
 #####
 

@@ -1,6 +1,7 @@
 /*
  * repiece.c
- * Build eigenfunctions as piecewise coherent states.
+ * Failed attempt to build eigenfunctions as piecewise coherent states.
+ * The code here is a hacked mess, because the basic idea can't work.
  *
  * February 2024
  */
@@ -40,7 +41,7 @@ double psi(double beta, double omega, double alpha, double period, double y)
 	double wn = 1.0;
 	double yn = y;
 	double sum = 0.0;
-	while (1.0e-15 < wn)
+	while (1.0e-15 < fabs(wn))
 	{
 		double term = alpha * yn;
 		sum += wn * gee(off, modper(period, term));
@@ -81,6 +82,17 @@ double goldpsi(double omega, int k, double y)
 	return 0.0;
 }
 
+double psi_all(double beta, double omega, double y)
+{
+	if (0.5*beta < y) return 0.0;
+	double period = 0.5*beta;
+	double a2 = beta * omega;
+	double f1 = psi_one(beta, omega, 1.0, period, y);
+	double f2 = a2* psi_two(beta, omega, beta, period, y);
+	double sum = f1 + f2;
+	return sum;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc != 3)
@@ -110,6 +122,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+#ifdef PARTS
 #define NPTS 2019
 	double alpha = k*beta;
 	alpha = 1.0;
@@ -122,6 +135,19 @@ int main(int argc, char* argv[])
 		double f2 = a2* psi_two(beta, omega, beta*alpha, period, x/beta);
 		double sum = f1 + f2;
 		printf("%d	%f	%f	%f %g\n", j, x, f1, f2, sum);
+		fflush(stdout);
+	}
+#endif
+
+#define NPTS 2019
+	for (int j=0; j< NPTS; j++)
+	{
+		double x = (((double) j) + 0.5) / ((double) NPTS);
+		double all = psi_all(beta, omega, x);
+		double p1 = psi_all(beta, omega, x/beta);
+		if (0.5*beta < x) p1=0.0;
+		double p2 = psi_all(beta, omega, x/beta + 0.5);
+		printf("%d	%f	%f	%f %g\n", j, x, p1, p2, all);
 		fflush(stdout);
 	}
 
