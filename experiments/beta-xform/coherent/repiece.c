@@ -13,6 +13,8 @@
 double coh(double beta, double omega, double alpha, double y)
 {
 	double m0 = 0.5*beta;
+	if (m0 < y) return 0.0;
+
 	double wn = 1.0;
 	double yn = y;
 	double sum = 0.0;
