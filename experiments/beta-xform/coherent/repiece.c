@@ -24,11 +24,18 @@ double modper(double period, double y)
 	return y;
 }
 
-// Line-generated coherent function.
+double gee(double off, double y)
+{
+	return y+off;
+}
+
+// gee coherent function.
 double psi(double beta, double omega, double alpha, double period, double y)
 {
 	double m0 = 0.5*beta;
 	if (m0 < y) return 0.0;
+
+	double off = -0.5 / (1.0 + omega*beta*beta);
 
 	double wn = 1.0;
 	double yn = y;
@@ -36,7 +43,7 @@ double psi(double beta, double omega, double alpha, double period, double y)
 	while (1.0e-15 < wn)
 	{
 		double term = alpha * yn;
-		sum += wn * modper(period, term);
+		sum += wn * gee(off, modper(period, term));
 		yn *= beta;
 		if (m0 < yn) yn -= m0;
 		wn *= omega;
@@ -107,14 +114,14 @@ int main(int argc, char* argv[])
 	double alpha = k*beta;
 	alpha = 1.0;
 	double period = 0.5*beta;
-	double a2 = -1.0 / beta;
+	double a2 = beta * omega;
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
 		double f1 = psi_one(beta, omega, alpha, period, x);
 		double f2 = a2* psi_two(beta, omega, beta*alpha, period, x/beta);
-		double top = omega*beta*f1 - f2;
-		printf("%d	%f	%f	%f %g\n", j, x, f1, f2, top);
+		double sum = f1 + f2;
+		printf("%d	%f	%f	%f %g\n", j, x, f1, f2, sum);
 		fflush(stdout);
 	}
 
