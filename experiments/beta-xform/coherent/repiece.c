@@ -65,8 +65,32 @@ int main(int argc, char* argv[])
 		double x = (((double) j) + 0.5) / ((double) NPTS);
 		double y = goldcoh(omega, k, x);
 		double bra1 = goldcoh(omega, k, x/beta);
+		if (0.5*beta < x) bra1 = 0.0;
 		double bra2 = goldcoh(omega, k, x/beta+0.5);
+		if (0.5 < x) bra2 = 0.0;
 		printf("%d	%f	%f	%f	%f\n", j, x, y, bra1, bra2);
 		fflush(stdout);
 	}
+
+// #define SANITY_CHECK
+#ifdef SANITY_CHECK
+	// Quadruple-check the coherent sum. Yes, it behaves exactly how
+	// it should. So this is not where the problem lies.
+	double alpha = k*beta;
+#define NPTS 19
+	for (int j=0; j< NPTS; j++)
+	{
+		double x = (((double) j) + 0.5) / ((double) NPTS);
+		double y = coh(beta, omega, alpha, x);
+		// double bra1 = coh(beta, omega, alpha, x/beta);
+		// double sha1 = k*x + omega * y - bra1;
+		// printf("%d	%f	%f	%f	%g\n", j, x, y, bra1, sha1);
+		double bra2 = coh(beta, omega, alpha, x/beta + 0.5);
+		double gen = alpha*(x/beta + 0.5);
+		gen -= 0.5*beta * floor (gen / (0.5*beta));
+		double sha2 = gen + omega * y - bra2;
+		printf("%d	%f	%f	%f	%g\n", j, x, y, bra2, sha2);
+		fflush(stdout);
+	}
+#endif
 }
