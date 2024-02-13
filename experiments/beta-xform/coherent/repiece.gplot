@@ -1,6 +1,6 @@
 
 set term png size 1024,768
-set term png size 640, 480
+# set term png size 640, 480
 set out 'repiece.png'
 
 # set xrange [20:]
@@ -8,10 +8,12 @@ set out 'repiece.png'
 
 set title "repiece"
 
+beta=1.618034
+w=0.4
 plot "repiece.dat" using 2:3 with lines title "main", \
      "repiece.dat" using 2:4 with lines title "b1", \
      "repiece.dat" using 2:5 with lines title "b2", \
-     "repiece.dat" using 2:(($4+$5)/1.618034) with lines title "sum", \
+     "repiece.dat" using 2:(($4+$5)/(beta*w)) with lines title "sum", \
 
 #####
 

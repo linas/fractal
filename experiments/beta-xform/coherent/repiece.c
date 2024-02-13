@@ -30,11 +30,11 @@ double coh(double beta, double omega, double alpha, double y)
 double goldcoh(double omega, int k, double y)
 {
 	double beta = 0.5*(sqrt(5.0) + 1.0);
-	double tk = pow(2.0, k);
+	double tk = 2.0 * k;
 
 	// Interval 2
 	if (y < 0.5)
-		return coh(beta, omega, -tk/beta, y);
+		return -omega*beta*beta*coh(beta, omega, tk, beta*y);
 
 	// Interval 1
 	if (y < 0.5*beta)

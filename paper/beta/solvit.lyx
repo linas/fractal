@@ -38205,14 +38205,14 @@ For the
 
 \begin_layout Standard
 Write 
-\begin_inset Formula $f_{k}\left(y\right)=a_{k}+\psi_{w,\alpha_{k}}\left(y\right)$
+\begin_inset Formula $f_{k}\left(y\right)=a_{k}\psi_{w,\alpha_{k}}\left(y\right)$
 \end_inset
 
- for unknown constants 
+ for unknown scale factors 
 \begin_inset Formula $a_{k}$
 \end_inset
 
- and scale factors 
+ and 
 \begin_inset Formula $\alpha_{k}$
 \end_inset
 
@@ -38234,45 +38234,17 @@ Simplify the coherent state notation, and write
  Then 
 \begin_inset Formula 
 \begin{align*}
-\lambda\beta\left(a_{1}+\psi_{1}\left(y\right)\right) & =a_{2}+\psi_{2}\left(\frac{y}{\beta}\right)\\
-\lambda\beta\left(a_{2}+\psi_{2}\left(y\right)\right) & =a_{1}+a_{2}+\psi_{2}\left(\frac{y}{\beta}\right)+\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta a_{2}\psi_{2}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
 \end{align*}
 
 \end_inset
 
-The constant terms are presumed to be independent of the coherent state,
- so 
+Plug through:
 \begin_inset Formula 
 \begin{align*}
-a_{2} & =\lambda\beta a_{1}\\
-\lambda^{2}\beta^{2}a_{1} & =a_{1}\left(\lambda\beta+1\right)
-\end{align*}
-
-\end_inset
-
-Thus, 
-\begin_inset Formula $a_{1}=a_{2}=0$
-\end_inset
-
- in order to avoid the unpalatable conclusion that 
-\begin_inset Formula $\lambda=1$
-\end_inset
-
-.
- This leaves 
-\begin_inset Formula 
-\begin{align*}
-\lambda\beta\psi_{1}\left(y\right) & =\psi_{2}\left(\frac{y}{\beta}\right)\\
-\lambda\beta\psi_{2}\left(y\right) & =\psi_{2}\left(\frac{y}{\beta}\right)+\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
-\end{align*}
-
-\end_inset
-
-so lets plug through:
-\begin_inset Formula 
-\begin{align*}
-\lambda\beta\psi_{1}\left(y\right) & =s\left(\frac{\alpha_{2}}{\beta}y\right)+w\psi_{2}\left(y\right)\\
-\lambda\beta\psi_{2}\left(y\right) & =s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+w\psi_{2}\left(y\right)+w\psi_{1}\left(y\right)
+\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
+\lambda\beta a_{2}\psi_{2}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+wa_{2}\psi_{2}\left(y\right)+wa_{1}\psi_{1}\left(y\right)
 \end{align*}
 
 \end_inset
@@ -38280,7 +38252,7 @@ so lets plug through:
 then reduce:
 \begin_inset Formula 
 \[
-\lambda\beta\psi_{2}\left(y\right)=s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+w\psi_{2}\left(y\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha_{2}}{\beta}y\right)+\frac{w^{2}}{\lambda\beta}\psi_{2}\left(y\right)
+\lambda\beta a_{2}\psi_{2}\left(y\right)=a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+wa_{2}\psi_{2}\left(y\right)+\frac{w}{\lambda\beta}a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+\frac{w^{2}}{\lambda\beta}a_{2}\psi_{2}\left(y\right)
 \]
 
 \end_inset
@@ -38288,7 +38260,7 @@ then reduce:
 Collecting terms,
 \begin_inset Formula 
 \begin{align*}
-0 & =s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+\frac{w}{\lambda\beta}s\left(\frac{\alpha_{2}}{\beta}y\right)\\
+0 & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+\frac{w}{\lambda\beta}a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)\\
 \lambda\beta & =w+\frac{w^{2}}{\lambda\beta}
 \end{align*}
 
@@ -38302,7 +38274,7 @@ The second eqn has the solution
  The first eqn reduces to 
 \begin_inset Formula 
 \[
-0=\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)
+0=a_{2}\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)
 \]
 
 \end_inset
@@ -38313,46 +38285,36 @@ Recall the sawtooth was defined as
 
 .
  The modulo will kill the additive term, if 
-\begin_inset Formula $\alpha_{1}=2^{k}$
+\begin_inset Formula $\alpha_{1}=2$
 \end_inset
 
- for any integer 
-\begin_inset Formula $k\ge1$
+k for any integer 
+\begin_inset Formula $k$
 \end_inset
 
 .
  Then
 \begin_inset Formula 
 \[
-0=\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+s\left(\frac{2^{k}}{\beta}y\right)
+0=a_{2}\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{2k}{\beta}y\right)
 \]
 
 \end_inset
 
-This has a multitude of solutions.
- For 
-\begin_inset Formula $g\left(x\right)=x$
+This has a generic solution 
+\begin_inset Formula $\alpha_{2}=\alpha_{1}=2k$
 \end_inset
 
- this has a solution 
-\begin_inset Formula $\alpha_{2}=-2^{k}/\beta$
-\end_inset
-
-.
- For 
-\begin_inset Formula $g\left(x\right)=x^{m}$
-\end_inset
-
- this has a solution 
-\begin_inset Formula $\alpha_{2}=-2^{k}/\beta^{1/m}$
+ and 
+\begin_inset Formula $a_{1}/a_{2}=-\beta$
 \end_inset
 
 .
- For this class, the eigenfunctions are
+ The eigenfunctions are
 \begin_inset Formula 
 \begin{align*}
-\psi_{1}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}\left[\left(2^{k}T_{\beta}^{n}\left(y\right)\right)\mod1\right]^{m}\\
-\psi_{2}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}\left[\left(-\frac{2^{k}}{\sqrt[m]{\beta}}T_{\beta}^{n}\left(y\right)\right)\mod1\right]^{m}
+\psi_{1}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}g\left(\left(2^{k}T_{\beta}^{n}\left(y\right)\right)\mod1\right)\\
+\psi_{2}\left(\frac{y}{\beta}\right) & =-w\beta^{2}\psi_{1}\left(y\right)
 \end{align*}
 
 \end_inset
@@ -38362,23 +38324,10 @@ giving a piecewise fractal solution with eigenvalue
 \end_inset
 
 .
- Although 
-\begin_inset Formula $k$
-\end_inset
-
- must be an integer 
-\begin_inset Formula $k\ge1$
-\end_inset
-
-, the exponent 
-\begin_inset Formula $m$
-\end_inset
-
- can be any complex number.
 \end_layout
 
 \begin_layout Standard
-XXX There's still a bug somehwere.
+XXX There's still a bug somewhere.
  Above is not yet debugged.
  Among other things, should use a scale factor for psi.
 \end_layout
