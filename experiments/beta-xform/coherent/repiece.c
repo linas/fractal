@@ -18,8 +18,14 @@ double sgen(double beta, double alpha, double y)
 	return gen;
 }
 
+double modper(double period, double y)
+{
+	y -= period * floor (y / period);
+	return y;
+}
+
 // Line-generated coherent function.
-double psi(double beta, double omega, double alpha, double y)
+double psi(double beta, double omega, double alpha, double period, double y)
 {
 	double m0 = 0.5*beta;
 	if (m0 < y) return 0.0;
@@ -30,7 +36,7 @@ double psi(double beta, double omega, double alpha, double y)
 	while (1.0e-15 < wn)
 	{
 		double term = alpha * yn;
-		sum += wn * (term - m0*floor(term/m0)); // sgen()
+		sum += wn * modper(period, term);
 		yn *= beta;
 		if (m0 < yn) yn -= m0;
 		wn *= omega;
@@ -38,31 +44,32 @@ double psi(double beta, double omega, double alpha, double y)
 	return sum;
 }
 
-double psi_one(double beta, double omega, double alpha, double y)
+double psi_one(double beta, double omega, double alpha, double period, double y)
 {
 	if (y < 0.5) return 0.0;
 	if (0.5*beta < y) return 0.0;
-	return psi(beta, omega, alpha, y);
+	return psi(beta, omega, alpha, period, y);
 }
 
-double psi_two(double beta, double omega, double alpha, double y)
+double psi_two(double beta, double omega, double alpha, double period, double y)
 {
 	if (0.5 < y) return 0.0;
-	return psi(beta, omega, alpha, y);
+	return psi(beta, omega, alpha, period, y);
 }
 
 double goldpsi(double omega, int k, double y)
 {
 	double beta = 0.5*(sqrt(5.0) + 1.0);
 	double alpha = beta * k;
+	double period = 0.5*beta;
 
 	// Interval 2
 	if (y < 0.5)
-		return psi(beta, omega, alpha, y);
+		return psi(beta, omega, alpha, period, y);
 
 	// Interval 1
 	if (y < 0.5*beta)
-		return -psi(beta, omega, alpha, y/beta) / (omega*beta*beta);
+		return -psi(beta, omega, alpha, period, y/beta) / (omega*beta*beta);
 
 	return 0.0;
 }
@@ -98,12 +105,13 @@ int main(int argc, char* argv[])
 
 #define NPTS 2019
 	double alpha = k*beta;
+	double period = 0.5*beta;
 	double a2 = -1.0 / beta;
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
-		double f1 = psi_one(beta, omega, alpha, x);
-		double f2 = a2* psi_two(beta, omega, alpha, x/beta);
+		double f1 = psi_one(beta, omega, alpha, period, x);
+		double f2 = a2* psi_two(beta, omega, alpha, period, x/beta);
 		double top = omega*beta*f1 - f2;
 		printf("%d	%f	%f	%f %g\n", j, x, f1, f2, top);
 		fflush(stdout);

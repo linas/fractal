@@ -38025,7 +38025,13 @@ Coherent Sawtooth
 
 \begin_layout Standard
 How do the coherent functions work, when treated as piecewise components?
- Given any function 
+ This is an attempt, but it doesn't work out.
+ It feels promising, but fails.
+ Follow along.
+\end_layout
+
+\begin_layout Standard
+Given any function 
 \begin_inset Formula $g$
 \end_inset
 
@@ -38213,11 +38219,19 @@ For the
 
 \end_inset
 
-
+The interval relationships that need to be solved are
 \end_layout
 
 \begin_layout Standard
-Write 
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+Assume that 
 \begin_inset Formula $f_{k}\left(y\right)=a_{k}\psi_{w,\alpha_{k}}\left(y\right)$
 \end_inset
 
@@ -38230,21 +38244,12 @@ Write
 \end_inset
 
 .
- Then
-\begin_inset Formula 
-\begin{align*}
-\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\\
-\lambda\beta f_{2}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
-\end{align*}
-
-\end_inset
-
-Simplify the coherent state notation, and write 
+ Simplify the notation, and write 
 \begin_inset Formula $\psi_{k}=\psi_{w,\alpha_{k}}$
 \end_inset
 
 .
- Then 
+ Then the goal is to solve.
 \begin_inset Formula 
 \begin{align*}
 \lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
@@ -38253,12 +38258,29 @@ Simplify the coherent state notation, and write
 
 \end_inset
 
-Plug through:
+Assuming the above are satisfiable, an algebraic solution is not hard to
+ find.
+ With only one problem: the above cannot be satsified.
+ There is no rescaling that will make 
+\begin_inset Formula $\psi_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}$
+\end_inset
+
+ be multiples of one another.
+\end_layout
+
+\begin_layout Standard
+Try it.
+ Plug through:
 \begin_inset Formula 
-\begin{align*}
-\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
+\[
+\begin{align*}\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
 \lambda\beta a_{2}\psi_{2}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+wa_{2}\psi_{2}\left(y\right)+wa_{1}\psi_{1}\left(y\right)
 \end{align*}
+\]
 
 \end_inset
 
@@ -38276,10 +38298,11 @@ then plug in for
 
 Collecting terms,
 \begin_inset Formula 
-\begin{align*}
-0 & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+\frac{w}{\lambda\beta}a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)\\
+\[
+\begin{align*}0 & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+\frac{w}{\lambda\beta}a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)\\
 \lambda\beta & =w+\frac{w^{2}}{\lambda\beta}
 \end{align*}
+\]
 
 \end_inset
 
@@ -38288,8 +38311,11 @@ The second eqn has the solution
 \end_inset
 
 , which is great, its exatly what is seen for the Bernoulli shift; its what
- we expected.
- The first eqn reduces to 
+ - we expected.
+\end_layout
+
+\begin_layout Standard
+The first eqn reduces to
 \begin_inset Formula 
 \[
 0=a_{2}\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)
@@ -38315,42 +38341,27 @@ Recall the sawtooth was defined as
 \end_inset
 
 .
- Then
+ This leads the conclusion that 
+\begin_inset Formula $\alpha_{2}=\alpha_{1}=k\beta$
+\end_inset
+
+ and that 
+\begin_inset Formula $a_{1}/a_{2}=-\beta$
+\end_inset
+
+, and this seems like it should be a solution, since the algebra worked
+ out.
+ With only one little problem: numeric checks reveal that 
 \begin_inset Formula 
 \[
-0=a_{2}\beta s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(ky\right)
+\lambda\beta a_{1}\psi_{1}\left(y\right)\ne a_{2}\psi_{2}\left(\frac{y}{\beta}\right)
 \]
 
 \end_inset
 
-This has a generic solution 
-\begin_inset Formula $\alpha_{2}=\alpha_{1}=k\beta$
-\end_inset
-
- and 
-\begin_inset Formula $a_{1}/a_{2}=-\beta$
-\end_inset
-
-.
- The eigenfunctions are
-\begin_inset Formula 
-\begin{align*}
-\psi_{2}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}g\left(\left(\beta kT_{\beta}^{n}\left(y\right)\right)\mod\beta/2\right)\\
-\psi_{1}\left(y\right) & =-\frac{1}{w\beta^{2}}\psi_{2}\left(\frac{y}{\beta}\right)
-\end{align*}
-
-\end_inset
-
-giving a piecewise fractal solution with eigenvalue 
-\begin_inset Formula $\lambda=w$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-XXX There's still a bug somewhere.
- Above is not yet debugged.
+It won't work.
+ The algebraic manipulations above are all OK, the issue is that the initial
+ assumption that these can be brouht into line is faulty.
 \end_layout
 
 \begin_layout Subsection
