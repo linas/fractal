@@ -96,7 +96,20 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define SANITY_CHECK
+#define NPTS 2019
+	double alpha = k*beta;
+	double a2 = -1.0 / beta;
+	for (int j=0; j< NPTS; j++)
+	{
+		double x = (((double) j) + 0.5) / ((double) NPTS);
+		double f1 = psi_one(beta, omega, alpha, x);
+		double f2 = a2* psi_two(beta, omega, alpha, x/beta);
+		double top = omega*beta*f1 - f2;
+		printf("%d	%f	%f	%f %g\n", j, x, f1, f2, top);
+		fflush(stdout);
+	}
+
+// #define SANITY_CHECK
 #ifdef SANITY_CHECK
 	// Quadruple-check the psierent sum. Yes, it behaves exactly how
 	// it should. So this is not where the problem lies.
@@ -111,8 +124,18 @@ int main(int argc, char* argv[])
 		double sha1 = k*x + omega * y - bra1;
 		printf("%d	%f	%f	%f	%g\n", j, x, y, bra1, sha1);
 #endif
+
+// #define LCHECK_AGAIN
+#ifdef LCHECK_AGAIN
+		// Generic psi identity. passes great.
+		double y = psi(beta, omega, alpha, x);
+		double bra1 = psi(beta, omega, alpha, x/beta);
+		double sha1 = bra1 - omega*y - sgen(beta, alpha, x/beta);
+		printf("%d	%f	%f	%f	%g\n", j, x, y, bra1, sha1);
+#endif
 // #define RCHECK
 #ifdef RCHECK
+		// Generic psi identity. passes great.
 		double y = psi(beta, omega, alpha, x);
 		double bra2 = psi(beta, omega, alpha, x/beta + 0.5);
 		double gen = sgen(beta, alpha, x/beta + 0.5);
@@ -145,21 +168,61 @@ int main(int argc, char* argv[])
 		printf("wat	%d  %f	%g\n", j, x, ss);
 #endif
 
-#ifdef TOP_ROW
-		// works
+#ifdef TOP_ROW_FINAL
+		// works, but only cause its coded to work.
 		double y = goldpsi(omega, k, x);
 		double top = omega*beta*y + goldpsi(omega, k, x/beta)/beta;
 		printf("%d	%f	%f	%g\n", j, x, y, top);
 #endif
 
-// #define BOT_ROW
-#ifdef BOT_ROW
+#define TOP_SIMP
+#ifdef TOP_SIMP
+// borken. This is the most basic assumption. And it doesn't work.
+		double a2 = -1.0 / beta;
+		double y = psi_one(beta, omega, alpha, x);
+		double f1 = y;
+		double f2 = a2* psi_two(beta, omega, alpha, x/beta);
+		double top = omega*beta*f1 - f2;
+		printf("%d	%f	%f	%f %g\n", j, x, f1, f2, top);
+#endif
+
+// #define BOT_SIMP
+#ifdef BOT_SIMP
 // borken
 		double a2 = -1.0 / beta;
 		double y = psi_two(beta, omega, alpha, x);
 		double bot = omega*beta*a2*y;
 		bot -= a2* psi_two(beta, omega, alpha, x/beta);
 		bot -= psi_one(beta, omega, alpha, x/beta + 0.5);
+		printf("%d	%f	%f	%g\n", j, x, y, bot);
+#endif
+
+#ifdef TOP_PLUG
+// borken
+		double a2 = -1.0 / beta;
+		double y = psi_one(beta, omega, alpha, x);
+		double top = omega*beta*y;
+		top -= a2* omega* psi_two(beta, omega, alpha, x);
+
+		double ss = a2*sgen(beta, alpha, x/beta);
+
+		top -= ss;
+		printf("%d	%f	%f	%g\n", j, x, y, top);
+#endif
+
+// #define BOT_PLUG
+#ifdef BOT_PLUG
+// borken
+		double a2 = -1.0 / beta;
+		double y = psi_two(beta, omega, alpha, x);
+		double bot = omega*beta*a2*y;
+		bot -= a2* omega* psi_two(beta, omega, alpha, x);
+		bot -= omega* psi_one(beta, omega, alpha, x);
+
+		double ss = a2*sgen(beta, alpha, x/beta);
+		ss += sgen(beta, alpha, x/beta + 0.5);
+
+		bot -= ss;
 		printf("%d	%f	%f	%g\n", j, x, y, bot);
 #endif
 
@@ -176,22 +239,6 @@ int main(int argc, char* argv[])
 		double ss = a2*sgen(beta, alpha, x/beta);
 		ss += sgen(beta, alpha, x/beta + 0.5);
 		ss += a2 * sgen(beta, alpha, x/beta) / beta;
-
-		bot -= ss;
-		printf("%d	%f	%f	%g\n", j, x, y, bot);
-#endif
-
-#define BOT_PLUG
-#ifdef BOT_PLUG
-// borken
-		double a2 = -1.0 / beta;
-		double y = psi_two(beta, omega, alpha, x);
-		double bot = omega*beta*a2*y;
-		bot -= a2* omega* psi_two(beta, omega, alpha, x);
-		bot -= omega* psi_one(beta, omega, alpha, x);
-
-		double ss = a2*sgen(beta, alpha, x/beta);
-		ss += sgen(beta, alpha, x/beta + 0.5);
 
 		bot -= ss;
 		printf("%d	%f	%f	%g\n", j, x, y, bot);

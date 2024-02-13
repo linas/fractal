@@ -10,10 +10,14 @@ set title "repiece"
 
 beta=1.618034
 w=0.4
-plot "repiece.dat" using 2:3 with lines lw 2 title "main", \
-     "repiece.dat" using 2:4 with lines lw 2 title "b1", \
-     "repiece.dat" using 2:5 with lines lw 2 title "b2", \
-     "repiece.dat" using 2:(($4+$5)/(beta*w)) with lines lw 2 title "sum", \
+#plot "repiece.dat" using 2:3 with lines lw 2 title "main", \
+#     "repiece.dat" using 2:4 with lines lw 2 title "b1", \
+#     "repiece.dat" using 2:5 with lines lw 2 title "b2", \
+#     "repiece.dat" using 2:(($4+$5)/(beta*w)) with lines lw 2 title "sum", \
+
+off=-0.309884
+plot "repiece.dat" using 2:3 with lines lw 2 title "f1", \
+     "repiece.dat" using 2:(-2.2*($4-off)) with lines lw 2 title "f2", \
 
 #####
 
