@@ -39066,7 +39066,7 @@ natural
 
 \begin_layout Standard
 Try this: 
-\begin_inset Formula $f_{1}\left(y\right)=\psi_{w,1}\left(y\right)\equiv\psi_{1}\left(y\right)$
+\begin_inset Formula $f_{1}\left(y\right)=\psi_{w,\alpha}\left(y\right)\equiv\psi_{1}\left(y\right)$
 \end_inset
 
  and then 
@@ -39092,7 +39092,7 @@ Using
 \begin_inset Formula $T_{\beta}\left(y/\beta\right)=y$
 \end_inset
 
- causes dramatic simplification in the first two rows
+ causes dramatic simplification in the first two rows:
 \begin_inset Formula 
 \begin{align*}
 \lambda\beta a_{1} & =a_{2}\\
@@ -39114,23 +39114,128 @@ For the last row, use
 
 Plugging through gives
 \begin_inset Formula 
+\[
+\lambda\beta a_{3}\left[\frac{1}{w^{2}}\psi\left(y\right)-\frac{1}{w}s\left(T_{\beta}\left(y\right)\right)-\frac{1}{w^{2}}s\left(y\right)\right]=\frac{a_{3}}{w}\left[\psi\left(y\right)-s\left(y\right)\right]+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)+a_{1}w\psi\left(y\right)
+\]
+
+\end_inset
+
+Collecting the coefficients of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ gives
+\begin_inset Formula 
 \begin{align*}
-\frac{\lambda\beta}{w^{2}}a_{3}\psi_{3}\left(y\right) & =a_{3}\psi_{2}\left(y\right)+a_{1}\psi\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\frac{\lambda\beta}{w^{2}}a_{3} & =\frac{1}{w}a_{3}+a_{1}w\\
+\frac{\lambda\beta}{w^{3}}a_{3} & =\frac{1}{w^{2}}a_{3}+a_{1}
 \end{align*}
 
 \end_inset
 
+Trying to slot in the identity 
+\begin_inset Formula $\beta^{3}=\beta^{2}+1$
+\end_inset
 
+ into the above gives a solution 
+\begin_inset Formula $a_{3}/w^{2}=\beta^{2}a_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+.
+ The sawtooth term is
 \end_layout
 
 \begin_layout Standard
-Fwhich is what we really want to do anyway.
- Hey! Duhhh.
- Paradigm shift.
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta a_{3}\left[\frac{1}{w}s\left(T_{\beta}\left(y\right)\right)+\frac{1}{w^{2}}s\left(y\right)\right] & =\frac{a_{3}}{w}s\left(y\right)-a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\lambda\beta^{3}\left[ws\left(T_{\beta}\left(y\right)\right)+s\left(y\right)\right] & =\beta^{2}ws\left(y\right)-s\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+The right-most term has the implicit assumption that 
+\begin_inset Formula $y\le1/2$
+\end_inset
+
+ and in this range, 
+\begin_inset Formula $T_{\beta}\left(y\right)=\beta y$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+w^{2}\beta^{3}s\left(\beta y\right)+ws\left(y\right)+s\left(\frac{y}{\beta}+\frac{1}{2}\right)=0
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\beta^{2}\left(\beta-1\right)=1$
+\end_inset
+
+ is used to simplify.
 \end_layout
 
 \begin_layout Standard
-The midpoints iterated out to 
+Look for solutions with 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $g\left(x\right)=1$
+\end_inset
+
+ this gives
+\begin_inset Formula 
+\[
+w^{2}\beta^{3}+w+1=0
+\]
+
+\end_inset
+
+Yikes! This has no real solutions; it does have a pair of complex solutions
+ 
+\begin_inset Formula $w=\left(-1\pm\sqrt{1-4\beta^{3}}\right)/2\beta^{3}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For the general analytic case, 
+\begin_inset Formula $g\left(x\right)=x^{k}+\sum_{j=0}^{k-1}c_{j}x^{j}$
+\end_inset
+
+ and the leading term requires 
+\begin_inset Formula 
+\begin{align*}
+w^{2}\beta^{k+3}+\beta^{2}w\left(\beta-1\right)+\beta^{-k} & =0\\
+w^{2}\beta^{2k+3}+w\beta^{k+2}\left(\beta-1\right)+1 & =0\\
+w^{2}\beta^{2k+3}+w\beta^{k}+1 & =0
+\end{align*}
+
+\end_inset
+
+which is still quadratic in 
+\begin_inset Formula $w$
+\end_inset
+
+ and so again has a pair of complex solutions.
+ 
+\end_layout
+
+\begin_layout Standard
+To summarize, the midpoints iterated out to 
 \begin_inset Formula $0<m_{1}<m_{2}<m_{0}<1$
 \end_inset
 
@@ -39142,17 +39247,16 @@ The midpoints iterated out to
 \begin_inset Formula 
 \[
 f\left(y\right)=\begin{cases}
-f_{3}\left(y\right)=a_{3}\psi_{w,\beta}\left(y\right) & \mbox{for }0\le y\le m_{1}\\
-f_{2}\left(y\right)=a_{2}\psi_{w,\beta}\left(y\right) & \mbox{for }m_{1}<y\le\frac{1}{2}\\
-f_{1}\left(y\right)=a_{1}\psi_{w,1}\left(y\right) & \mbox{for }\frac{1}{2}<y\le m_{0}\\
+f_{3}\left(y\right)=w^{2}\beta^{2}\psi_{w}\left(T_{\beta}^{2}\left(y\right)\right) & \mbox{for }0\le y\le m_{1}\\
+f_{2}\left(y\right)=w\beta\psi_{w}\left(T_{\beta}\left(y\right)\right) & \mbox{for }m_{1}<y\le\frac{1}{2}\\
+f_{1}\left(y\right)=\psi_{w}\left(y\right) & \mbox{for }\frac{1}{2}<y\le m_{0}\\
 f_{0}\left(y\right)=0 & \mbox{for }m_{0}<y\le1
 \end{cases}
 \]
 
 \end_inset
 
-Unfinished.
- 
+This has not yet been double-checked numerically.
 \end_layout
 
 \begin_layout Subsection
