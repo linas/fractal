@@ -38019,6 +38019,241 @@ What other bases, besides the monomial basis, are there, that could be interesti
 ng to look at?
 \end_layout
 
+\begin_layout Standard
+The coherent state is in the section after next.
+ 
+\end_layout
+
+\begin_layout Subsection
+Bounds estimates
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit is interesting.
+ It presents the opportunity to describe piece-wise analytic eigenfunctions,
+ although, based in the spectrum, these would all presumably live in the
+ kernel.
+\end_layout
+
+\begin_layout Standard
+This last statement should be qualified.
+ The limiting behavior of of 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is given by the diagonal sequence 
+\begin_inset Formula $\beta^{-j}D$
+\end_inset
+
+ and since 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is block-diagonal and solvable, it would seem that the eigenvalues are
+ given by the spectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ times 
+\begin_inset Formula $\beta^{-j}$
+\end_inset
+
+.
+ If the spectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ is bounded; indeed, if the spectral radius is one, then the 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit implies that the high-
+\begin_inset Formula $j$
+\end_inset
+
+ solutions approach the kernel.
+ If, however, it could be arranged that the spectrum of 
+\begin_inset Formula $D$
+\end_inset
+
+ becomes unbounded, then the conclusion about the kernel no longer holds.
+\end_layout
+
+\begin_layout Standard
+The off-diagonal blocks have coefficients
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+\]
+
+\end_inset
+
+The first few rows are
+\begin_inset Formula 
+\begin{align*}
+c_{0j} & =\frac{1}{2^{j}}\\
+c_{1j} & =\frac{j}{\beta2^{j-1}}\\
+c_{2j} & =\frac{j\left(j-1\right)}{\beta^{2}2^{j+1}}
+\end{align*}
+
+\end_inset
+
+and subsequent rows introduce ever-greater falling factorials.
+ In the 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit, these behave tamely.
+\end_layout
+
+\begin_layout Standard
+For fixed 
+\begin_inset Formula $m$
+\end_inset
+
+ or even 
+\begin_inset Formula $m=o\left(\sqrt{j}\right)$
+\end_inset
+
+, the binomial coefficient is estimated as
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Das2015"
+literal "false"
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+{j \choose m}=\frac{j^{m}}{m!}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}=\frac{1}{m!}\left(\frac{2}{\beta}\right)^{m}\frac{j^{m}}{2^{j}}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so the 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ limit is dominated by the 
+\begin_inset Formula $j^{m}2^{-j}$
+\end_inset
+
+ term, which grows for a bit before being stomped out.
+ Similar behavior is seen near the diagonal, where it is handy to write
+ 
+\begin_inset Formula $m=j-n$
+\end_inset
+
+ for small enough 
+\begin_inset Formula $n$
+\end_inset
+
+, so that 
+\begin_inset Formula $n=o\left(\sqrt{j}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+c_{j,j-n}=\left(\frac{2}{\beta}\right)^{j-n}\frac{1}{2^{j}}{j \choose n}=\frac{1}{n!}\left(\frac{\beta}{2}\right)^{n}\frac{j^{n}}{\beta^{j}}\left(1+o\left(\frac{n^{2}}{j}\right)\right)
+\]
+
+\end_inset
+
+and so this is suppressed by a 
+\begin_inset Formula $j^{n}\beta^{-j}$
+\end_inset
+
+ term.
+\end_layout
+
+\begin_layout Standard
+The worst-case behavior is at the 
+\begin_inset Quotes eld
+\end_inset
+
+middle coefficient
+\begin_inset Quotes erd
+\end_inset
+
+, where 
+\begin_inset Formula $j=2m$
+\end_inset
+
+ and the binomial coefficients are maximal.
+ The asymptotics are
+\begin_inset Formula 
+\[
+{2m \choose m}=\frac{2^{2m}}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+Thus, along the half-diagonal, the matrix terms blow up:
+\begin_inset Formula 
+\[
+c_{2m,m}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $1<2/\beta$
+\end_inset
+
+.
+ This really is the worst-case location.
+ Close to this half-diagonal, taking 
+\begin_inset Formula $j\to\infty$
+\end_inset
+
+ and writing 
+\begin_inset Formula $m=pj$
+\end_inset
+
+ for 
+\begin_inset Formula $0\ll p\ll1$
+\end_inset
+
+, the binomial coefficient converges to the normal distribution, so that
+ 
+\begin_inset Formula 
+\[
+\log_{2}{j \choose pj}=jH\left(p\right)\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $-H\left(p\right)=p\log_{2}p+\left(1-p\right)\log_{2}\left(1-p\right)$
+\end_inset
+
+ the binary entropy function.
+ This gives 
+\begin_inset Formula 
+\[
+c_{j,pj}=\left(\frac{2}{\beta}\right)^{pj}\frac{2^{H\left(p\right)}}{\sqrt{\pi pj}}\left(1+o\left(1\right)\right)
+\]
+
+\end_inset
+
+as the estimate for the blowup at the near-half-diagonal.
+\end_layout
+
 \begin_layout Subsection
 Coherent Sawtooth
 \end_layout
@@ -38488,11 +38723,21 @@ with
 
 .
  This allows the terms in the coherent series to be lined up.
- Lets proceed.
-\end_layout
+ First, lets double-check this above claim.
+\begin_inset Formula 
+\begin{align*}
+\psi_{2}\left(y\right) & =\sum_{n=0}^{\infty}w^{n}g\left(\left(\alpha_{2}T_{\beta}^{n}\left(y\right)\right)\mod\frac{\beta}{2}\right)\\
+ & =\sum_{n=0}^{\infty}w^{n}g\left(T_{\beta}\left(T_{\beta}^{n}\left(y\right)\right)\right)\\
+ & =\sum_{n=0}^{\infty}w^{n}g\left(T_{\beta}^{n+1}\left(y\right)\right)\\
+ & =\sum_{n=0}^{\infty}w^{n}g\left(\left(\alpha_{1}T_{\beta}^{n+1}\left(y\right)\right)\mod\frac{\beta}{2}\right)\\
+ & =\psi_{1}\left(T_{\beta}\left(y\right)\right)
+\end{align*}
 
-\begin_layout Standard
-Place this back into normal form:
+\end_inset
+
+So that works out, as claimed.
+ Lets proceed.
+ Place this back into normal form:
 \begin_inset Formula 
 \begin{align*}
 \psi_{1}\left(T_{\beta}\left(y\right)\right) & =\sum_{n=0}^{\infty}w^{n}s\left(T_{\beta}^{n+1}\left(y\right)\right)\\
@@ -38671,7 +38916,7 @@ c & =\frac{3\beta+2}{4}
 
 It appears that this pattern can be followed, thus obtaining an eigenfunction
  with eigenvalue 
-\begin_inset Formula $\lambda=w=-\beta^{k+2}$
+\begin_inset Formula $\lambda=w=-1/\beta^{k+2}$
 \end_inset
 
  for polynomial generators 
@@ -38686,237 +38931,136 @@ It appears that this pattern can be followed, thus obtaining an eigenfunction
 \end_layout
 
 \begin_layout Standard
-Is there a general case?
-\end_layout
-
-\begin_layout Subsection
-Bounds estimates
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $j\to\infty$
-\end_inset
-
- limit is interesting.
- It presents the opportunity to describe piece-wise analytic eigenfunctions,
- although, based in the spectrum, these would all presumably live in the
- kernel.
-\end_layout
-
-\begin_layout Standard
-This last statement should be qualified.
- The limiting behavior of of 
-\begin_inset Formula $\mathcal{L}$
-\end_inset
-
- is given by the diagonal sequence 
-\begin_inset Formula $\beta^{-j}D$
-\end_inset
-
- and since 
-\begin_inset Formula $\mathcal{L}$
-\end_inset
-
- is block-diagonal and solvable, it would seem that the eigenvalues are
- given by the spectrum of 
-\begin_inset Formula $D$
-\end_inset
-
- times 
-\begin_inset Formula $\beta^{-j}$
-\end_inset
-
-.
- If the spectrum of 
-\begin_inset Formula $D$
-\end_inset
-
- is bounded; indeed, if the spectral radius is one, then the 
-\begin_inset Formula $j\to\infty$
-\end_inset
-
- limit implies that the high-
-\begin_inset Formula $j$
-\end_inset
-
- solutions approach the kernel.
- If, however, it could be arranged that the spectrum of 
-\begin_inset Formula $D$
-\end_inset
-
- becomes unbounded, then the conclusion about the kernel no longer holds.
-\end_layout
-
-\begin_layout Standard
-The off-diagonal blocks have coefficients
+Is there a general case? For that, we would need solutions to
 \begin_inset Formula 
 \[
-c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
+-w\beta^{2}g\left(y\right)=g\left(\frac{y}{\beta}+\frac{1}{2}\right)
 \]
 
 \end_inset
 
-The first few rows are
+that hold for all 
+\begin_inset Formula $0\le y\le\beta/2$
+\end_inset
+
+.
+ What a curious form! This has no analytic solutions outside the polynomials,
+ due to the arguments above.
+ Are there non-analytic solutions?
+\end_layout
+
+\begin_layout Subsubsection
+Case n=2 (order 
+\begin_inset Formula $\nu=3$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+As before, now that we know which direction to move in.
+ The interval inclusion table gave the relations for a 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ block of interval relations.
+ These were
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-c_{0j} & =\frac{1}{2^{j}}\\
-c_{1j} & =\frac{j}{\beta2^{j-1}}\\
-c_{2j} & =\frac{j\left(j-1\right)}{\beta^{2}2^{j+1}}
+\lambda\beta f_{1}\left(y\right) & =f_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{3}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
 \end{align*}
 
 \end_inset
 
-and subsequent rows introduce ever-greater falling factorials.
- In the 
-\begin_inset Formula $j\to\infty$
-\end_inset
 
- limit, these behave tamely.
 \end_layout
 
 \begin_layout Standard
-For fixed 
-\begin_inset Formula $m$
+As before, assume that 
+\begin_inset Formula $f_{k}\left(y\right)=a_{k}\psi_{w,\alpha_{k}}\left(y\right)$
 \end_inset
 
- or even 
-\begin_inset Formula $m=o\left(\sqrt{j}\right)$
+ for unknown scale factors 
+\begin_inset Formula $a_{k}$
 \end_inset
 
-, the binomial coefficient is estimated as
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Das2015"
-literal "false"
-
+ and 
+\begin_inset Formula $\alpha_{k}$
 \end_inset
 
+.
+ Simplify the notation, and write 
+\begin_inset Formula $\psi_{k}=\psi_{w,\alpha_{k}}$
+\end_inset
 
+.
+ Then the goal is to solve
 \begin_inset Formula 
-\[
-{j \choose m}=\frac{j^{m}}{m!}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
-\]
+\begin{align*}
+\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
+\lambda\beta a_{2}\psi_{2}\left(y\right) & =a_{3}\psi_{3}\left(\frac{y}{\beta}\right)\\
+\lambda\beta a_{3}\psi_{3}\left(y\right) & =a_{3}\psi_{3}\left(\frac{y}{\beta}\right)+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
 
 \end_inset
 
-and so
-\begin_inset Formula 
-\[
-c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}=\frac{1}{m!}\left(\frac{2}{\beta}\right)^{m}\frac{j^{m}}{2^{j}}\left(1+o\left(\frac{m^{2}}{j}\right)\right)
-\]
-
+Following that pattern requires setting 
+\begin_inset Formula $\alpha_{1}=1$
 \end_inset
 
-and so the 
-\begin_inset Formula $j\to\infty$
+ and 
+\begin_inset Formula $\alpha_{2}=\beta$
 \end_inset
 
- limit is dominated by the 
-\begin_inset Formula $j^{m}2^{-j}$
-\end_inset
-
- term, which grows for a bit before being stomped out.
- Similar behavior is seen near the diagonal, where it is handy to write
- 
-\begin_inset Formula $m=j-n$
-\end_inset
-
- for small enough 
-\begin_inset Formula $n$
+.
+ As before, this has the effect of introducing one more shift into 
+\begin_inset Formula $\psi_{2}$
 \end_inset
 
 , so that 
-\begin_inset Formula $n=o\left(\sqrt{j}\right)$
+\begin_inset Formula $\psi_{2}\left(y\right)=\psi_{1}\left(T_{\beta}\left(y\right)\right)$
 \end_inset
 
 .
- Then 
-\begin_inset Formula 
-\[
-c_{j,j-n}=\left(\frac{2}{\beta}\right)^{j-n}\frac{1}{2^{j}}{j \choose n}=\frac{1}{n!}\left(\frac{\beta}{2}\right)^{n}\frac{j^{n}}{\beta^{j}}\left(1+o\left(\frac{n^{2}}{j}\right)\right)
-\]
-
+ The repetition of the trick seems to require that 
+\begin_inset Formula $\alpha_{3}=\beta$
 \end_inset
 
-and so this is suppressed by a 
-\begin_inset Formula $j^{n}\beta^{-j}$
+ as well, so that 
+\begin_inset Formula $\psi_{3}\left(y\right)=\psi_{1}\left(T_{\beta}\left(y\right)\right)$
 \end_inset
 
- term.
+.
 \end_layout
 
 \begin_layout Standard
-The worst-case behavior is at the 
-\begin_inset Quotes eld
+This leaves the third equation, which has exactly the same form as the 
+\begin_inset Formula $n=1$
 \end_inset
 
-middle coefficient
-\begin_inset Quotes erd
-\end_inset
-
-, where 
-\begin_inset Formula $j=2m$
-\end_inset
-
- and the binomial coefficients are maximal.
- The asymptotics are
+ case, and thus the same manipulations apply.
+ The primary term is
 \begin_inset Formula 
 \[
-{2m \choose m}=\frac{2^{2m}}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
+\frac{\lambda\beta a_{3}}{w}=\lambda\beta a_{1}+wa_{1}
 \]
 
 \end_inset
 
-Thus, along the half-diagonal, the matrix terms blow up:
-\begin_inset Formula 
-\[
-c_{2m,m}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{\sqrt{\pi m}}\left(1+o\left(1\right)\right)
-\]
-
+For 
+\begin_inset Formula $n=2$
 \end_inset
 
-since 
-\begin_inset Formula $1<2/\beta$
+ we have the identity 
+\begin_inset Formula $p_{2}\left(\beta\right)=\beta^{3}-\beta^{2}-1$
 \end_inset
 
-.
- This really is the worst-case location.
- Close to this half-diagonal, taking 
-\begin_inset Formula $j\to\infty$
-\end_inset
 
- and writing 
-\begin_inset Formula $m=pj$
-\end_inset
-
- for 
-\begin_inset Formula $0\ll p\ll1$
-\end_inset
-
-, the binomial coefficient converges to the normal distribution, so that
- 
-\begin_inset Formula 
-\[
-\log_{2}{j \choose pj}=jH\left(p\right)\left(1+o\left(1\right)\right)
-\]
-
-\end_inset
-
-with 
-\begin_inset Formula $-H\left(p\right)=p\log_{2}p+\left(1-p\right)\log_{2}\left(1-p\right)$
-\end_inset
-
- the binary entropy function.
- This gives 
-\begin_inset Formula 
-\[
-c_{j,pj}=\left(\frac{2}{\beta}\right)^{pj}\frac{2^{H\left(p\right)}}{\sqrt{\pi pj}}\left(1+o\left(1\right)\right)
-\]
-
-\end_inset
-
-as the estimate for the blowup at the near-half-diagonal.
 \end_layout
 
 \begin_layout Subsection
