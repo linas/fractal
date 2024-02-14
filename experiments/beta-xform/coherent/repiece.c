@@ -1,7 +1,6 @@
 /*
  * repiece.c
- * Failed attempt to build eigenfunctions as piecewise coherent states.
- * The code here is a hacked mess, because the basic idea can't work.
+ * Piecewise coherent states.
  *
  * February 2024
  */
@@ -16,9 +15,14 @@ double modper(double period, double y)
 	return y;
 }
 
+double ach(double y)
+{
+	return sin(44.0*y);
+}
+
 double gee(double beta, double omega, double y)
 {
-#define CONST
+// #define CONST
 #ifdef CONST
 	// const
 	return 1.0;
@@ -30,11 +34,15 @@ double gee(double beta, double omega, double y)
 	return y+off;
 #endif
 
+// #define QUAD
 #ifdef QUAD
 	double bee = -1.0 / (1.0 + omega * pow(beta, 3));
 	double cee = -(0.25 + 0.5*bee) / (1.0 + omega * pow(beta, 2));
 	return y*y + bee*y + cee;
 #endif
+
+	if (y < 0.5) return ach(y);
+	return -omega*beta*beta * ach(beta * (y-0.5));
 }
 
 // gee coherent function.
@@ -84,65 +92,20 @@ double n1_psi(double beta, double omega, double y)
 
 // -----------------------------------------------------------
 
-double n2_psi_3(double beta, double omega, double alpha, double y)
-{
-	double m1 = 0.5*beta*(beta-1.0);
-	if (m1 < y) return 0.0;
-	return psi(beta, omega, alpha, y);
-}
-
-double n2_psi_2(double beta, double omega, double alpha, double y)
-{
-	if (0.5 < y) return 0.0;
-	double m1 = 0.5*beta*(beta-1.0);
-	if (y < m1) return 0.0;
-	return psi(beta, omega, alpha, y);
-}
-
-double n2_psi_1(double beta, double omega, double alpha, double y)
-{
-	if (y < 0.5) return 0.0;
-	if (0.5*beta < y) return 0.0;
-	return psi(beta, omega, alpha, y);
-}
-
-double n2_psi(double beta, double omega, double y)
-{
-	if (0.5*beta < y) return 0.0;
-	double a2 = beta * beta * omega;
-	double a3 = beta * omega;
-	double f1 = n2_psi_1(beta, omega, 1.0, y);
-	double f2 = a2* n2_psi_2(beta, omega, beta, y);
-	double f3 = a3* n2_psi_3(beta, omega, beta, y);
-	double sum = f1 + f2 + f3;
-	return sum;
-}
-
-// -----------------------------------------------------------
-
 int main(int argc, char* argv[])
 {
-	if (argc != 3)
+	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s n k\n", argv[0]);
+		fprintf(stderr, "Usage: %s omega\n", argv[0]);
 		exit (1);
 	}
-	int n = atoi(argv[1]);
-	int k = atoi(argv[2]);
+	double omega = atof(argv[1]);
 
 	// Poly roots
 	double r1 = 0.5*(sqrt(5.0) + 1.0);
-	double r2 = 1.465571231876768;
-
-	double beta = 1.0;
-	if (1 == n)
-		beta = r1;
-	if (2 == n)
-		beta = r2;
-
-	double omega = -pow(beta, -(k+2));
-	if (2 == n)
-		omega = -pow(beta, -(k+3));
+	double beta = r1;
+	// double omega = -pow(beta, -2);
+	// double omega = -pow(beta, -4);
 
 	printf("#\n# beta=%f omega=%g\n#\n", beta, omega);
 
@@ -150,10 +113,10 @@ int main(int argc, char* argv[])
 	for (int j=0; j< NPTS; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) NPTS);
-		double all = n2_psi(beta, omega, x);
-		double p1 = n2_psi(beta, omega, x/beta);
+		double all = n1_psi(beta, omega, x);
+		double p1 = n1_psi(beta, omega, x/beta);
 		if (0.5*beta < x) p1=0.0;
-		double p2 = n2_psi(beta, omega, x/beta + 0.5);
+		double p2 = n1_psi(beta, omega, x/beta + 0.5);
 		double ell = (p1+p2) / beta;
 		printf("%d	%f	%f	%f\n", j, x, all, ell);
 		fflush(stdout);
