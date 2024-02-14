@@ -38519,39 +38519,7 @@ Assume that
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection
-Failing variant
-\end_layout
-
-\begin_layout Standard
-The variant below follows an algebraic path that ends in failure.
- The failure mode is subtle, so it is illustrated here.
- The mistake hinges around the assumption that the first equation, 
-\begin_inset Formula $\lambda\beta a_{1}\psi_{1}\left(y\right)=a_{2}\psi_{2}\left(y/\beta\right)$
-\end_inset
-
- can be satisfied by setting 
-\begin_inset Formula $\alpha_{1}=\alpha_{2}$
-\end_inset
-
-.
- It cannot be; it will not hold.
- Yet, 
-\begin_inset Formula $\alpha_{1}=\alpha_{2}$
-\end_inset
-
- is not assumed, it is derived algebraically, but ends with this unsatisfiable
- relation.
- So here's a winding garden path that goes nowhere.
- AKA a proof that this won't work.
-\end_layout
-
-\begin_layout Standard
-Try it.
- Use the shift to pull out a sawtooth factor:
+Use the shift to pull out a sawtooth factor:
 \begin_inset Formula 
 \[
 \begin{align*}\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
@@ -38600,6 +38568,20 @@ The first eqn reduces to
 
 \end_inset
 
+The task is to find parameter combinations to solve this.
+ This is not so easy; some variants fail to give valid overall solutions.
+\end_layout
+
+\begin_layout Subsubsection
+Failing variant
+\end_layout
+
+\begin_layout Standard
+This subsection documents a failed solution.
+ The failure mode is subtle; we record it here as a lesson.
+\end_layout
+
+\begin_layout Standard
 Recall the sawtooth was defined as 
 \begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
 \end_inset
@@ -38628,7 +38610,15 @@ Recall the sawtooth was defined as
 
 , and this seems like it should be a solution, since the algebra worked
  out.
- With only one little problem: numeric checks reveal that 
+\end_layout
+
+\begin_layout Standard
+This is incorrect.
+ Numeric checks reveal that, for 
+\begin_inset Formula $\alpha_{2}=\alpha_{1}$
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
 \lambda\beta a_{1}\psi_{1}\left(y\right)\ne a_{2}\psi_{2}\left(\frac{y}{\beta}\right)
@@ -38637,12 +38627,8 @@ Recall the sawtooth was defined as
 \end_inset
 
 It won't work.
- The algebraic manipulations above are all OK, the issue is that the initial
- assumption that these can be brouht into line is faulty.
-\end_layout
-
-\begin_layout Standard
-The problem is here: after reduction, one gets
+ Let's look more closely.
+ After reduction, one gets
 \begin_inset Formula 
 \[
 \lambda\beta a_{1}\psi_{1}\left(y\right)=a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)
@@ -38650,7 +38636,7 @@ The problem is here: after reduction, one gets
 
 \end_inset
 
-and the question should be asked: are there any possible values of 
+The question is: are there any possible values of 
 \begin_inset Formula $\alpha_{1}$
 \end_inset
 
@@ -38673,8 +38659,8 @@ for some constants
 \begin_inset Formula $\alpha_{1},\alpha_{2},c,d,e$
 \end_inset
 
- but I don't see that there are any solutions to this, besides the trivial
- solution 
+.
+ This has the trivial solution 
 \begin_inset Formula $c=1,\alpha_{1}=\alpha_{2},d=0$
 \end_inset
 
@@ -38682,7 +38668,28 @@ for some constants
 \begin_inset Formula $a_{1}=a_{2}=0$
 \end_inset
 
- and so it all falls apart, here.
+ and so that won't do.
+\end_layout
+
+\begin_layout Standard
+This is solvable by setting 
+\begin_inset Formula $\alpha_{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{2}=\beta$
+\end_inset
+
+, which allows a factor of 
+\begin_inset Formula $s$
+\end_inset
+
+ to be pulled out of the sum: 
+\begin_inset Formula $s\left(\beta T_{\beta}^{n}\left(x\right)\right)=s\left(T_{\beta}^{n+1}\left(x\right)\right)$
+\end_inset
+
+ and then it does all go through.
+ Rather than trying to rescue the above, a fresh start is made, below.
 \end_layout
 
 \begin_layout Subsubsection
@@ -38995,7 +39002,7 @@ As before, now that we know which direction to move in.
 \end_layout
 
 \begin_layout Standard
-As before, assume that 
+The above are not solvable with the old assumption that 
 \begin_inset Formula $f_{k}\left(y\right)=a_{k}\psi_{w,\alpha_{k}}\left(y\right)$
 \end_inset
 
@@ -39008,16 +39015,70 @@ As before, assume that
 \end_inset
 
 .
- Uhh No.
- Don't use the alpha trick.
- Shift, instead.
- See immediately below.
- Simplify the notation, and write 
-\begin_inset Formula $\psi_{k}=\psi_{w,\alpha_{k}}$
+ To repeat the earlier solution process would require 
+\begin_inset Formula $\alpha_{1}=1,\alpha_{2}=\beta$
+\end_inset
+
+ which is OK, but then 
+\begin_inset Formula $\alpha_{3}=\beta$
+\end_inset
+
+ leads to the 
+\begin_inset Quotes eld
+\end_inset
+
+failed derivation
+\begin_inset Quotes erd
+\end_inset
+
+ (because 
+\begin_inset Formula $\alpha_{2}=\alpha_{3}$
+\end_inset
+
+ gives the same failure mode) while the 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ choice 
+\begin_inset Formula $\alpha_{3}=\beta^{2}$
+\end_inset
+
+ gives a term with a buried 
+\begin_inset Formula $\beta$
+\end_inset
+
+ that cannot be commuted out.
+ The new trick, below, is to insert 
+\begin_inset Formula $T$
+\end_inset
+
+ instead of 
+\begin_inset Formula $\alpha$
 \end_inset
 
 .
- Then the goal is to solve
+ 
+\end_layout
+
+\begin_layout Standard
+Try this: 
+\begin_inset Formula $f_{1}\left(y\right)=\psi_{w,1}\left(y\right)\equiv\psi_{1}\left(y\right)$
+\end_inset
+
+ and then 
+\begin_inset Formula $\psi_{2}\left(y\right)=\psi_{1}\left(T_{\beta}\left(y\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{3}\left(y\right)=\psi_{2}\left(T_{\beta}\left(y\right)\right)$
+\end_inset
+
+.
+ The goal is to solve
 \begin_inset Formula 
 \begin{align*}
 \lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
@@ -39027,35 +39088,43 @@ As before, assume that
 
 \end_inset
 
-Following that pattern requires setting 
-\begin_inset Formula $\alpha_{1}=1$
+Using 
+\begin_inset Formula $T_{\beta}\left(y/\beta\right)=y$
 \end_inset
 
- and 
-\begin_inset Formula $\alpha_{2}=\beta$
+ causes dramatic simplification in the first two rows
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta a_{1} & =a_{2}\\
+\lambda\beta a_{2} & =a_{3}\\
+\lambda\beta a_{3}\psi_{3}\left(y\right) & =a_{3}\psi_{2}\left(y\right)+a_{1}\psi\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
 \end_inset
 
-.
- As before, this has the effect of introducing one more shift into 
-\begin_inset Formula $\psi_{2}$
+For the last row, use
+\begin_inset Formula 
+\begin{align*}
+\psi_{2}\left(y\right)=\psi\left(T_{\beta}\left(y\right)\right) & =\frac{1}{w}\left[-s\left(y\right)+\psi\left(y\right)\right]\\
+\psi_{3}\left(y\right)=\psi\left(T_{\beta}^{2}\left(y\right)\right) & =\frac{1}{w}\left[-s\left(T_{\beta}\left(y\right)\right)+\frac{1}{w}\left[-s\left(y\right)+\psi\left(y\right)\right]\right]\\
+\psi\left(\frac{y}{\beta}+\frac{1}{2}\right) & =s\left(\frac{y}{\beta}+\frac{1}{2}\right)+w\psi\left(y\right)
+\end{align*}
+
 \end_inset
 
-, so that 
-\begin_inset Formula $\psi_{2}\left(y\right)=\psi_{1}\left(T_{\beta}\left(y\right)\right)$
+Plugging through gives
+\begin_inset Formula 
+\begin{align*}
+\frac{\lambda\beta}{w^{2}}a_{3}\psi_{3}\left(y\right) & =a_{3}\psi_{2}\left(y\right)+a_{1}\psi\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\end{align*}
+
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
-Wait.
- Hang on.
- Why even bother with this alpha-trick? Just cut to the chase and define
- 
-\begin_inset Formula $\psi_{3}\left(y\right)=\psi_{2}\left(T_{\beta}\left(y\right)\right)$
-\end_inset
-
- which is what we really want to do anyway.
+Fwhich is what we really want to do anyway.
  Hey! Duhhh.
  Paradigm shift.
 \end_layout
