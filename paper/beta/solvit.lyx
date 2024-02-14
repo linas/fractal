@@ -30936,18 +30936,44 @@ Decaying Eigenfuncs
 \end_layout
 
 \begin_layout Standard
-This section examines the discrete spectrum of (piece-wise) smooth square-integr
-able decaying eigenfunctions occurring at the 
+This section examines the general set of solutions to 
+\begin_inset Formula $\mathcal{L}_{\beta}\psi=\lambda\psi$
+\end_inset
+
+ for 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ Two general classes of solutions are presented.
+ One consists of a discrete spectrum of (piece-wise) polynomial eigenfunctions,
+ occurring at the 
 \begin_inset Formula $\beta$
 \end_inset
 
  values associated with the finite orbits.
- The discrete spectrum is closely analogous to the discrete spectrum of
- the smooth square-integrable eigenfunctions of the Bernoulli operator.
+ The other class consists of (piece-wise) fractal eigenfunctions, which
+ can be constructed for any complex 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ That is, the continous spectrum.
 \end_layout
 
 \begin_layout Standard
-Recall that the Bernoulli operator has a discrete spectrum of 
+The discrete spectrum is closely analogous to the discrete spectrum of the
+ polynomial eigenfunctions of the Bernoulli operator.
+ Recall that the Bernoulli operator is the beta transform, for 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+ It has a discrete spectrum with 
 \begin_inset Formula $\lambda=2^{-n}$
 \end_inset
 
@@ -30955,45 +30981,84 @@ Recall that the Bernoulli operator has a discrete spectrum of
 \begin_inset Formula $n$
 \end_inset
 
-.
- The corresponding eigenfunction is a Bernoulli polynomial (of the first
- kind).
- The Euler polynomials are (of course) smooth and square-integrable (as
- are all polynomials), and they are orthonormal to one-another.
+; the corresponding eigenfunctions are the Bernoulli polynomials.
+ The Bernoulli polynomials are orthonormal to one-another.
  In the 
 \begin_inset Formula $n\to\infty$
 \end_inset
 
- limit, they converge to 
+ limit, they converge to either 
+\begin_inset Formula $\sin2\pi x$
+\end_inset
+
+ or 
 \begin_inset Formula $\cos2\pi x$
 \end_inset
 
- which lies in the kernel of the operator.
- Square-integrability is underscored here, as the Bernoulli operator also
- has a continuous spectrum, if one removes this constraint.
- For the continuous spectrum, the eigenfunctions have a 
-\begin_inset Formula $2l+1$
+, depending on whether 
+\begin_inset Formula $n$
 \end_inset
 
- degeneracy at each order 
-\begin_inset Formula $l$
+ is even or odd.
+ Both of these trig functions, and any function odd about 1/2 lie in the
+ kernel of the operator.
+\end_layout
+
+\begin_layout Standard
+The Bernoulli operator also has a continuous spectrum that has a countable
+ number of distinct eigenfunctions for each 
+\begin_inset Formula $\lambda$
 \end_inset
 
-, and so allow a choice of basis.
- In one basis, the eigenfunctions are smooth, but aren't square integrable
- simply because they diverge at 
+.
+ As these all share the same eigenvalue, one is free to choose the basis
+ as desired.
+ There are two generic possibilities.
+ In one choice, the basis functions are square integrable, but are not different
+iable at the dyadic rationals.
+ These are built up as coherent states of underlying periodic waves.
+ They resemble the blancmange curve; the periodic spectrum appears here,
+ in the same way that the blancmange curve becomes a parabola for a specific
+ paramter value.
+\end_layout
+
+\begin_layout Standard
+A different choice of basis provides eigenfunctions that are smooth over
+ the open interval 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+ but diverge at 
+\begin_inset Formula $x=0,1$
+\end_inset
+
+ and are thus not square-integrable, due to these divergent endpoints.
+ Equivalently, they are not smooth at 
 \begin_inset Formula $x=0,1$
 \end_inset
 
 .
- In a different basis, the eigenfunctions can be chosen to form a fractal,
- self-similar basis, of which the blancmange curve is one example.
+ The discrete spectrum emerges as those special values of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ for which the endpoints are finite, thus both smooth and square-integrable.
 \end_layout
 
 \begin_layout Standard
-It is hypothesized that all of the above phenomena also occur for the beta
- operator, at least at the finite orbits, with which we begin.
- Certainly the discrete spectrum is readily exhibited.
+This section presents explicit analogous solutions for the beta operator,
+ for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values corresponding to finite orbits.
+ That is, both kinds of eigenfunctions are presented: piecewise-polynomial
+ eigenfunctions, and fractal (coherent state) eigenfunctions.
+ The development below is long and verbose, but never rises above the complexity
+ level of basic algebra.
+ There does not seem to be much need for abstract conceptualization here;
+ it is mostly a matter of turning the crank and verifying identities.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -35988,8 +36053,8 @@ Recursive Rework
 \end_layout
 
 \begin_layout Standard
-Clearly, writing out the intervals, sorting them and labeling them won't
- work.
+Clearly, writing out the intervals, sorting them and labeling them blocks
+ the path to generalizing to the non-finite orbits.
  But perhaps the sorting is not needed, and instead can be inferred directly
  from the recursive moves.
  The key ingredients were
@@ -36557,7 +36622,9 @@ a_{32} & =\frac{1}{\beta}\left(a_{32}+a_{12}\right)
 The above were regular and algorithmic, and can be gotten by uniform operations.
  The operations below are ad hoc, solving the assorted relations in some
  arbitrary order.
- Lets do it.
+ They are sloppy Gaussian elimination, sloppy because not explicitly manifested.
+ But for now, its quick and easy.
+ So lets do it.
  Working back,
 \begin_inset Formula 
 \begin{align*}
@@ -36838,7 +36905,7 @@ c_{jm}=\left(\frac{2}{\beta}\right)^{m}\frac{1}{2^{j}}{j \choose m}
 
 \end_inset
 
- This then gives the final desired result: the operator 
+This gives the final desired result: the operator 
 \begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
@@ -38255,15 +38322,21 @@ as the estimate for the blowup at the near-half-diagonal.
 \end_layout
 
 \begin_layout Subsection
-Coherent Sawtooth
+Coherent States
 \end_layout
 
 \begin_layout Standard
-Coherent functions can provide additional eigenfunctions, when treated as
- piecewise components.
- Ongoing work, incomplete.
- Currently, have a discrete spectrum with negative eigenvalues.
+Coherent functions can be used to construct the continuous spectrum solving
  
+\begin_inset Formula $\mathcal{L}_{\beta}\psi=\lambda\psi$
+\end_inset
+
+ for any complex 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ These are exhibited in this section.
 \end_layout
 
 \begin_layout Standard
