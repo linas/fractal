@@ -39008,6 +39008,10 @@ As before, assume that
 \end_inset
 
 .
+ Uhh No.
+ Don't use the alpha trick.
+ Shift, instead.
+ See immediately below.
  Simplify the notation, and write 
 \begin_inset Formula $\psi_{k}=\psi_{w,\alpha_{k}}$
 \end_inset
@@ -39041,121 +39045,19 @@ Following that pattern requires setting
 \end_inset
 
 .
- The repetition of the trick seems to require that 
-\begin_inset Formula $\alpha_{3}=\beta$
-\end_inset
-
- as well, so that 
-\begin_inset Formula $\psi_{3}\left(y\right)=\psi_{1}\left(T_{\beta}\left(y\right)\right)$
-\end_inset
-
-.
- This means 
-\begin_inset Formula $\psi_{2}\left(y\right)=\psi_{3}\left(y\right)$
-\end_inset
-
-.
- (This seems wrong?)
 \end_layout
 
 \begin_layout Standard
-This leaves the third equation, which has exactly the same form as the 
-\begin_inset Formula $n=1$
-\end_inset
-
- case, and thus the same manipulations apply.
- The primary term is
-\begin_inset Formula 
-\[
-\frac{\lambda\beta a_{3}}{w}=\lambda\beta a_{1}+wa_{1}
-\]
-
-\end_inset
-
-For 
-\begin_inset Formula $n=2$
-\end_inset
-
- we have the identity 
-\begin_inset Formula $\beta^{3}-\beta^{2}-1=0$
-\end_inset
-
- so the above can be solved by setting 
-\begin_inset Formula $\lambda\beta a_{3}/w=\beta^{3}wa_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\lambda\beta=\beta^{2}w$
-\end_inset
-
-.
- This last determines 
-\begin_inset Formula $\lambda=\beta w$
-\end_inset
-
- and the earlier that 
-\begin_inset Formula $a_{3}=\beta wa_{1}.$
-\end_inset
-
- Still missing is a number for 
-\begin_inset Formula $a_{2}$
-\end_inset
-
-.
- This is fixed by 
-\begin_inset Formula 
-\begin{align*}
-\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
- & =a_{2}\psi_{1}\left(T_{\beta}\left(\frac{y}{\beta}\right)\right)\\
- & =a_{2}\psi_{1}\left(y\right)
-\end{align*}
-
-\end_inset
-
-so 
-\begin_inset Formula $a_{2}=\lambda\beta a_{1}=\beta^{2}wa_{1}.$
-\end_inset
-
- This can be double-checked by going in the other direction.
-\begin_inset Formula 
-\begin{align*}
-\lambda\beta a_{2}\psi_{2}\left(y\right) & =a_{3}\psi_{3}\left(\frac{y}{\beta}\right)\\
- & =a_{3}\psi_{1}\left(T_{\beta}\left(\frac{y}{\beta}\right)\right)\\
- & =a_{3}\psi_{1}\left(y\right)\\
-\left(\lambda\beta\right)^{2}\psi_{2}\left(y\right) & =\beta w\psi_{1}\left(y\right)\\
-\left(\beta^{2}w\right)^{2}\psi_{1}\left(T_{\beta}\left(y\right)\right) & =\beta w\psi_{1}\left(y\right)\\
-\beta^{4}w\left[-s\left(y\right)+\psi_{1}\left(y\right)\right] & =\beta w\psi_{1}\left(y\right)\\
-\beta^{3}\left[-s\left(y\right)+\psi_{1}\left(y\right)\right] & =\psi_{1}\left(y\right)
-\end{align*}
-
-\end_inset
-
-Well, that's clearly wrong.
- Its' not clear what the mistake is.
- Oh wait.
+Wait.
+ Hang on.
+ Why even bother with this alpha-trick? Just cut to the chase and define
  
-\end_layout
-
-\begin_layout Standard
-The sawtooth term is
-\begin_inset Formula 
-\begin{align*}
--\frac{\lambda\beta a_{3}}{w}s\left(y\right) & =a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
--w\beta^{3}s\left(y\right) & =s\left(\frac{y}{\beta}+\frac{1}{2}\right)
-\end{align*}
-
+\begin_inset Formula $\psi_{3}\left(y\right)=\psi_{2}\left(T_{\beta}\left(y\right)\right)$
 \end_inset
 
-and so for 
-\begin_inset Formula $g\left(x\right)=1$
-\end_inset
-
-, the term forces 
-\begin_inset Formula $w=-1/\beta^{3}$
-\end_inset
-
-.
- 
+ which is what we really want to do anyway.
+ Hey! Duhhh.
+ Paradigm shift.
 \end_layout
 
 \begin_layout Standard
@@ -39180,8 +39082,8 @@ f_{0}\left(y\right)=0 & \mbox{for }m_{0}<y\le1
 
 \end_inset
 
-I did something wrong here, the numeric check is not working.
- XXX
+Unfinished.
+ 
 \end_layout
 
 \begin_layout Subsection
