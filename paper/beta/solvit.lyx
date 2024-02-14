@@ -38645,7 +38645,7 @@ The task is to find parameter combinations to solve this.
  This is not so easy; some variants fail to give valid overall solutions.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Failing variant
 \end_layout
 
@@ -38765,7 +38765,7 @@ This is solvable by setting
  Rather than trying to rescue the above, a fresh start is made, below.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Working variant
 \end_layout
 
@@ -38918,6 +38918,10 @@ with
  in all cases.
 \end_layout
 
+\begin_layout Paragraph
+Polynomial generators
+\end_layout
+
 \begin_layout Standard
 Lets try the first few cases by hand.
  The first is 
@@ -39021,11 +39025,14 @@ It appears that this pattern can be followed, thus obtaining an eigenfunction
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Paragraph
+Arbitrary generators
 \end_layout
 
 \begin_layout Standard
-Is there a general case? For that, we would need solutions to
+The general case requires solutions to
 \begin_inset Formula 
 \[
 -w\beta^{2}g\left(y\right)=g\left(\frac{y}{\beta}+\frac{1}{2}\right)
@@ -39038,7 +39045,7 @@ that hold for all
 \end_inset
 
 .
- But this is easy (and remarkable).
+ But this is easy.
  The map takes 
 \begin_inset Formula $\left[0,1/2\right]$
 \end_inset
@@ -39047,7 +39054,7 @@ that hold for all
 \begin_inset Formula $\left[1/2,\beta/2\right]$
 \end_inset
 
- which are non-overlapping.
+, which are non-overlapping.
  Thus, it is sufficient to set
 \begin_inset Formula 
 \[
@@ -39063,16 +39070,35 @@ for any
 \begin_inset Formula $h$
 \end_inset
 
- whatsoever, and any 
-\begin_inset Formula $-1<w<1$
+ whatsoever, and any complex 
+\begin_inset Formula $w$
 \end_inset
 
- and this will give a valid eigenfunction with eigenvalue 
+ with 
+\begin_inset Formula $\left|w\right|<1$
+\end_inset
+
+.
+ This will give a valid eigenfunction with eigenvalue 
 \begin_inset Formula $\lambda=w$
 \end_inset
 
 .
- So this is the general case.
+ So, for 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+ the golden mean, this provides the general solution.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+As before, verified in beta-xform/coherent/repiece.c
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -39287,6 +39313,35 @@ where
 \end_layout
 
 \begin_layout Standard
+To summarize, the midpoints iterated out to 
+\begin_inset Formula $0<m_{1}<m_{2}<m_{0}<1$
+\end_inset
+
+.
+ The eigenfunc is then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\left(y\right)=\begin{cases}
+f_{3}\left(y\right)=w^{2}\beta^{2}\psi_{w}\left(T_{\beta}^{2}\left(y\right)\right) & \mbox{for }0\le y\le m_{1}\\
+f_{2}\left(y\right)=w\beta\psi_{w}\left(T_{\beta}\left(y\right)\right) & \mbox{for }m_{1}<y\le\frac{1}{2}\\
+f_{1}\left(y\right)=\psi_{w}\left(y\right) & \mbox{for }\frac{1}{2}<y\le m_{0}\\
+f_{0}\left(y\right)=0 & \mbox{for }m_{0}<y\le1
+\end{cases}
+\]
+
+\end_inset
+
+This has not yet been double-checked numerically.
+\end_layout
+
+\begin_layout Paragraph
+Polynomial generators
+\end_layout
+
+\begin_layout Standard
 Look for solutions with 
 \begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
 \end_inset
@@ -39336,32 +39391,44 @@ which is still quadratic in
 \end_inset
 
  and so again has a pair of complex solutions.
- 
+ This has not yet been double-checked numerically.
+\end_layout
+
+\begin_layout Paragraph
+Fractal generators
 \end_layout
 
 \begin_layout Standard
-To summarize, the midpoints iterated out to 
-\begin_inset Formula $0<m_{1}<m_{2}<m_{0}<1$
+Analogous to the 
+\begin_inset Formula $n=1$
 \end_inset
 
-.
- The eigenfunc is then
-\end_layout
-
-\begin_layout Standard
+ case, we look for solutions to
 \begin_inset Formula 
 \[
-f\left(y\right)=\begin{cases}
-f_{3}\left(y\right)=w^{2}\beta^{2}\psi_{w}\left(T_{\beta}^{2}\left(y\right)\right) & \mbox{for }0\le y\le m_{1}\\
-f_{2}\left(y\right)=w\beta\psi_{w}\left(T_{\beta}\left(y\right)\right) & \mbox{for }m_{1}<y\le\frac{1}{2}\\
-f_{1}\left(y\right)=\psi_{w}\left(y\right) & \mbox{for }\frac{1}{2}<y\le m_{0}\\
-f_{0}\left(y\right)=0 & \mbox{for }m_{0}<y\le1
-\end{cases}
+w^{2}\beta^{3}s\left(\beta y\right)+ws\left(y\right)+s\left(\frac{y}{\beta}+\frac{1}{2}\right)=0
 \]
 
 \end_inset
 
-This has not yet been double-checked numerically.
+Since 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
+\end_inset
+
+, the search can be limited to 
+\begin_inset Formula $0\le y\le\beta/2$
+\end_inset
+
+.
+ Just as before, the third term maps 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[1/2,\beta/2\right]$
+\end_inset
+
+ and thus can be used to cancel out any behavior.
 \end_layout
 
 \begin_layout Subsection
