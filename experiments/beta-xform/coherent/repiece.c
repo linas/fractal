@@ -24,6 +24,7 @@ double gee(double beta, double omega, double y)
 	return 1.0;
 #endif
 
+// #define LINEAR
 #ifdef LINEAR
 	double off = -0.5 / (1.0 + omega*beta*beta);
 	return y+off;
@@ -140,6 +141,8 @@ int main(int argc, char* argv[])
 		beta = r2;
 
 	double omega = -pow(beta, -(k+2));
+	if (2 == n)
+		omega = -pow(beta, -(k+3));
 
 	printf("#\n# beta=%f omega=%g\n#\n", beta, omega);
 
