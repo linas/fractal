@@ -4,15 +4,18 @@ set term png size 1024,768
 set out 'repiece.png'
 
 # set xrange [20:]
-set yrange [-0.5:0.5]
+# set yrange [-0.5:0.5]
+set yrange [-1:1]
 
 set title "repiece"
 
 beta=1.618034
 
-om = -0.3819660112501051  # const
-om = -0.2360679774997897  # linear
-om = -0.14589803375031546 # qudratic
+om = -0.3819660112501051  # const for n=1
+om = -0.2360679774997897  # linear for n=1
+om = -0.14589803375031546 # qudratic for n=1
+
+om = -0.6823278038280194 # const for n=2
 plot "repiece.dat" using 2:3 with lines lw 2 title "all", \
      "repiece.dat" using 2:($4/om) with lines lw 2 title "L", \
 

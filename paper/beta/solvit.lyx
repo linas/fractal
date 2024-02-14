@@ -38882,10 +38882,19 @@ The linear term forces
 \end_inset
 
  and 
-\begin_inset Formula $b=-1/2\left(1+w\beta^{2}\right)=-\left(\beta+1\right)/2$
+\begin_inset Formula $b=-1/2\left(1+w\beta^{2}\right)$
 \end_inset
 
 .
+ For 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+ this reduces to 
+\begin_inset Formula $b=-\left(1+\varphi\right)/2$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -38904,12 +38913,16 @@ The quadratic form
 
 \end_inset
 
-Summarizing,
+For 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+, these reduce to 
 \begin_inset Formula 
 \begin{align*}
-w & =-\frac{1}{\beta^{4}}\\
-b & =-\left(\beta+1\right)\\
-c & =\frac{3\beta+2}{4}
+w & =-\frac{1}{\varphi^{4}}=5-3\varphi\\
+b & =-\left(\varphi+1\right)\\
+c & =\frac{3\varphi+2}{4}
 \end{align*}
 
 \end_inset
@@ -39036,6 +39049,11 @@ Following that pattern requires setting
 \end_inset
 
 .
+ This means 
+\begin_inset Formula $\psi_{2}\left(y\right)=\psi_{3}\left(y\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -39057,7 +39075,68 @@ For
 \end_inset
 
  we have the identity 
-\begin_inset Formula $p_{2}\left(\beta\right)=\beta^{3}-\beta^{2}-1$
+\begin_inset Formula $\beta^{3}-\beta^{2}-1=0$
+\end_inset
+
+ so the above can be solved by setting 
+\begin_inset Formula $\lambda\beta a_{3}/w=\beta^{3}wa_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda\beta=\beta^{2}w$
+\end_inset
+
+.
+ This last determines 
+\begin_inset Formula $\lambda=\beta w$
+\end_inset
+
+ and the earlier that 
+\begin_inset Formula $a_{3}=\beta wa_{1}.$
+\end_inset
+
+ Still missing is a number for 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+.
+ This is fixed by 
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
+ & =a_{2}\psi_{1}\left(T_{\beta}\left(\frac{y}{\beta}\right)\right)\\
+ & =a_{2}\psi_{1}\left(y\right)
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $a_{2}=\lambda\beta a_{1}=\beta^{2}wa_{1}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The midpoints iterated out to 
+\begin_inset Formula $0<m_{1}<m_{2}<m_{0}<1$
+\end_inset
+
+.
+ The eigenfunc is then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\left(y\right)=\begin{cases}
+f_{3}\left(y\right)=a_{3}\psi_{w,\beta}\left(y\right) & \mbox{for }0\le y\le m_{1}\\
+f_{2}\left(y\right)=a_{2}\psi_{w,\beta}\left(y\right) & \mbox{for }m_{1}<y\le\frac{1}{2}\\
+f_{1}\left(y\right)=a_{1}\psi_{w,1}\left(y\right) & \mbox{for }\frac{1}{2}<y\le m_{0}\\
+f_{0}\left(y\right)=0 & \mbox{for }m_{0}<y\le1
+\end{cases}
+\]
+
 \end_inset
 
 
