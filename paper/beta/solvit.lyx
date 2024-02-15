@@ -35207,8 +35207,9 @@ is the inclusion membership function.
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="13" columns="9">
-<features islongtable="true" headBottomDL="true" longtabularalignment="center">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
 <column alignment="center" valignment="top" width="0pt">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -35216,8 +35217,7 @@ is the inclusion membership function.
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
+<row endhead="true">
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -37360,11 +37360,11 @@ It seems that
 <features islongtable="true" headBottomDL="true" longtabularalignment="center">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
+<row endhead="true">
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -40966,11 +40966,10 @@ Assume that
 
 Use the shift to pull out a sawtooth factor:
 \begin_inset Formula 
-\[
-\begin{align*}\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
+\begin{align*}
+\lambda\beta a_{1}\psi_{1}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+wa_{2}\psi_{2}\left(y\right)\\
 \lambda\beta a_{2}\psi_{2}\left(y\right) & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+wa_{2}\psi_{2}\left(y\right)+wa_{1}\psi_{1}\left(y\right)
 \end{align*}
-\]
 
 \end_inset
 
@@ -40988,11 +40987,10 @@ then plug in for
 
 Collecting terms,
 \begin_inset Formula 
-\[
-\begin{align*}0 & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+\frac{w}{\lambda\beta}a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)\\
+\begin{align*}
+0 & =a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)+a_{1}s\left(\frac{\alpha_{1}}{\beta}y+\frac{\alpha_{1}}{2}\right)+\frac{w}{\lambda\beta}a_{2}s\left(\frac{\alpha_{2}}{\beta}y\right)\\
 \lambda\beta & =w+\frac{w^{2}}{\lambda\beta}
 \end{align*}
-\]
 
 \end_inset
 
@@ -41883,33 +41881,33 @@ B=\left[\begin{array}{ccc}
 
 \end_inset
 
-These may be compared to the 
-\begin_inset Formula $n=2$
+In non-matrix form, the relations are
+\begin_inset Formula 
+\begin{align*}
+\lambda\beta f_{1}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)\\
+\lambda\beta f_{2}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\lambda\beta f_{3}\left(y\right) & =f_{3}\left(\frac{y}{\beta}\right)+f_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{align*}
+
 \end_inset
 
- case:
+Write 
+\begin_inset Formula $\psi_{k}\left(y\right)=\psi\left(T_{\beta}^{k-1}\left(y\right)\right)$
+\end_inset
+
+.
+ The correct association of 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ to 
+\begin_inset Formula $\psi_{k}$
+\end_inset
+
+ seems to be given by
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-B_{2}=\left[\begin{array}{ccc}
-0 & 1 & 0\\
-0 & 0 & 1\\
-0 & 0 & 1
-\end{array}\right]\quad C_{2}=\left[\begin{array}{ccc}
-0 & 0 & 0\\
-0 & 0 & 0\\
-1 & 0 & 0
-\end{array}\right]\quad D_{2}=B_{2}+C_{2}=\left[\begin{array}{ccc}
-0 & 1 & 0\\
-0 & 0 & 1\\
-1 & 0 & 1
-\end{array}\right]\quad\mbox{for }n=2
-\]
-
-\end_inset
-
 Following the general recipie in the next subsection, backporting it here,
  gives
 \begin_inset Formula 
