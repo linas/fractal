@@ -35155,7 +35155,10 @@ Table hand-generated with check/orbit.c
 
 \end_inset
 
- I don't have anything particularly notable to say about the above table.
+ Although there is a pattern to the above table, it is difficult to express
+ in words.
+ More progress can be made by encoding the binary relationships as matrices.
+ See next section.
 \end_layout
 
 \begin_layout Subsubsection
@@ -36044,13 +36047,12 @@ is the inclusion membership function.
 \end_layout
 
 \begin_layout Standard
-Well, there's nothing particularly enlightening in that table.
- There's a hint of a pseudo-pattern, but nothing specific that jumps out.
-\end_layout
-
-\begin_layout Standard
-Some general comments, though.
- These all follow from the nature of the interval inclusions.
+Well, there's no strong pattern that jumps out.
+ However, there are a number of features that are important for calculations
+ and formulas obtained in alter sections.
+ First, some general comments, though.
+ These all follow from the nature of the interval inclusions, and are fairly
+ easily derived.
 \end_layout
 
 \begin_layout Itemize
@@ -36126,6 +36128,138 @@ The top row of
 \end_inset
 
  is always all-zeros.
+\end_layout
+
+\begin_layout Standard
+A more opaque but important pattern is the shift structure across the two.
+ For every row of 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+, the following holds: If 
+\begin_inset Formula $B\left(i,j\right)=1$
+\end_inset
+
+, then one and only one of the following possibilities hold:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B\left(i+1,j+1\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $C\left(i+1,1\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B\left(i+1,j+1\right)=1$
+\end_inset
+
+ and there does not exist any 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $C\left(i,k\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $C\left(i+1,k+1\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B\left(i+1,j+1\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $C\left(i+1,1\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B\left(i+1,j+1\right)=0$
+\end_inset
+
+ and there exists 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $C\left(i,k\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $C\left(i+1,k+1\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $j=\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $C\left(i+1,1\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $j=\nu$
+\end_inset
+
+ and there exists 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $C\left(i,k\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $C\left(i+1,k+1\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since for every row 
+\begin_inset Formula $i$
+\end_inset
+
+, there is always some column 
+\begin_inset Formula $j$
+\end_inset
+
+ for for which 
+\begin_inset Formula $B\left(i,j\right)=1$
+\end_inset
+
+, the above holds for all rows.
+ It is saying that there is always a shift, either in the 
+\begin_inset Formula $B$
+\end_inset
+
+ matrix, or in the 
+\begin_inset Formula $C$
+\end_inset
+
+ matrix, and never both at the same time, for every row.
 \end_layout
 
 \begin_layout Subsubsection
