@@ -37234,9 +37234,10 @@ ind
 .
  One has that
 \begin_inset Formula 
-\[
-P\left(k,j\right)=\Theta\left(\mbox{ind}\left(k\right)=L\right)B\left(k,j\right)+\Theta\left(\mbox{ind}\left(k\right)=R\right)C\left(k,j\right)
-\]
+\begin{align*}
+P\left(k,j\right) & =\Theta\left(\mbox{ind}\left(k\right)=L\right)B\left(k,j\right)+\Theta\left(\mbox{ind}\left(k\right)=R\right)C\left(k,j\right)\\
+P_{kj} & =\delta_{\mbox{ind}\left(k\right),L}B_{kj}+\delta_{\mbox{ind}\left(k\right),R}C_{kj}
+\end{align*}
 
 \end_inset
 
@@ -37253,7 +37254,34 @@ where
 \end_inset
 
 .
- 
+ The 
+\begin_inset Formula $\delta_{ab}$
+\end_inset
+
+ is the Kronecker delta.
+\end_layout
+
+\begin_layout Standard
+The sequence function 
+\begin_inset Quotes eld
+\end_inset
+
+seq
+\begin_inset Quotes erd
+\end_inset
+
+ is the permutation, expressed as a cycle:
+\begin_inset Formula 
+\[
+P_{kj}=\delta_{\mbox{seq}\left(k\right),j}=\Theta\left(\mbox{seq}\left(k\right)=j\right)
+\]
+
+\end_inset
+
+It is currently unclear how to obtain any of these matrices and functions,
+ other than to brute-force iterate the midpoint, sort the midpoints into
+ order, compute the intervals, and compute the overlaps.
+ This is an algorithmic process that does not provide much insight.
 \end_layout
 
 \begin_layout Subsubsection
