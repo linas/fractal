@@ -36048,6 +36048,86 @@ Well, there's nothing particularly enlightening in that table.
  There's a hint of a pseudo-pattern, but nothing specific that jumps out.
 \end_layout
 
+\begin_layout Standard
+Some general comments, though.
+ These all follow from the nature of the interval inclusions.
+\end_layout
+
+\begin_layout Itemize
+The sum 
+\begin_inset Formula $D=B+C$
+\end_inset
+
+ never has any entries that have 2 in it.
+ This follows from the 
+\begin_inset Formula $L,R$
+\end_inset
+
+ maps.
+\end_layout
+
+\begin_layout Itemize
+The first column of 
+\begin_inset Formula $B$
+\end_inset
+
+ is always zero.
+ This follows because 
+\begin_inset Formula $L$
+\end_inset
+
+ always shifts down; the topmost interval can never be a subinterval of
+ some other interval.
+\end_layout
+
+\begin_layout Itemize
+The first column of 
+\begin_inset Formula $C$
+\end_inset
+
+ always has at least one entry that is one.
+ This follows because 
+\begin_inset Formula $R$
+\end_inset
+
+ always shifts up, and some interval must always be above the one or more
+ lower intervals.
+\end_layout
+
+\begin_layout Itemize
+There are one or more non-zero entries in the last column of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The last column of 
+\begin_inset Formula $C$
+\end_inset
+
+ is always all-zeros.
+\end_layout
+
+\begin_layout Itemize
+Every row in 
+\begin_inset Formula $B$
+\end_inset
+
+ has exactly one non-zero entry.
+ This follows, because every interval is a sub-interval of one and only
+ one other interval.
+\end_layout
+
+\begin_layout Itemize
+The top row of 
+\begin_inset Formula $C$
+\end_inset
+
+ is always all-zeros.
+\end_layout
+
 \begin_layout Subsubsection
 Recursive Rework
 \end_layout
@@ -39527,12 +39607,148 @@ while for
 
 \begin_layout Standard
 \begin_inset Formula 
+\begin{align*}
+\psi\left(\frac{y}{\beta}\right) & =s\left(\frac{y}{\beta}\right)+w\psi\left(y\right)\\
+\psi\left(\frac{y}{\beta}+\frac{1}{2}\right) & =s\left(\frac{y}{\beta}+\frac{1}{2}\right)+w\psi\left(y\right)
+\end{align*}
+
+\end_inset
+
+Plugging through, this gives
+\begin_inset Formula 
 \[
-\psi\left(\frac{y}{\beta}+\frac{1}{2}\right)=s\left(\frac{y}{\beta}+\frac{1}{2}\right)+w\psi\left(y\right)
+\beta\lambda\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu}\left(y\right)
+\end{array}\right]=B\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu-1}\left(y\right)
+\end{array}\right]+C\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu-1}\left(y\right)
+\end{array}\right]
 \]
 
 \end_inset
 
+Setting 
+\begin_inset Formula $D=B+C$
+\end_inset
+
+ (as before) and continueing,
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu}\left(y\right)
+\end{array}\right]=D\left[\begin{array}{c}
+a_{1}w\psi_{1}\left(y\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu-1}\left(y\right)
+\end{array}\right]+B\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+\vdots\\
+0
+\end{array}\right]+C\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+\vdots\\
+0
+\end{array}\right]
+\]
+
+\end_inset
+
+The 
+\begin_inset Formula $B$
+\end_inset
+
+ term above is zero, because the first colum of 
+\begin_inset Formula $B$
+\end_inset
+
+ is always all zeros.
+ Also, there is always at least one non-zero entry in the first column of
+ 
+\begin_inset Formula $C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Shorten the notation for the recurence relation:
+\begin_inset Formula 
+\begin{align*}
+\psi_{k+1}\left(y\right) & =\frac{1}{w^{k}}\left[\psi\left(y\right)-\sum_{n=0}^{k}w^{n}s\left(\alpha T_{\beta}^{n}\left(x\right)\right)\right]\\
+ & =\frac{1}{w^{k}}\left[\psi\left(y\right)-S_{k}\left(y\right)\right]
+\end{align*}
+
+\end_inset
+
+and then plug through and collect distinct terms.
+ The 
+\begin_inset Formula $\psi$
+\end_inset
+
+ terms give
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+a_{1}\\
+\vdots\\
+a_{\nu}
+\end{array}\right]=D\left[\begin{array}{c}
+a_{1}w\\
+a_{2}\\
+a_{3}w^{-1}\\
+\vdots\\
+a_{\nu}w^{2-\nu}
+\end{array}\right]
+\]
+
+\end_inset
+
+while the 
+\begin_inset Formula $s$
+\end_inset
+
+ terms give
+\begin_inset Formula 
+\[
+-\beta\lambda\left[\begin{array}{c}
+0\\
+a_{2}w^{-1}S_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}w^{1-\nu}S_{\nu-1}\left(y\right)
+\end{array}\right]=-D\left[\begin{array}{c}
+0\\
+0\\
+a_{3}w^{-1}S_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}w^{2-\nu}S_{\nu-2}\left(y\right)
+\end{array}\right]+C\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+\vdots\\
+0
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 These
 \end_layout
 
