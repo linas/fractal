@@ -42375,7 +42375,7 @@ Write
 \end_inset
 
 .
- The correct association of 
+ The direct assignment of 
 \begin_inset Formula $f_{k}$
 \end_inset
 
@@ -42383,7 +42383,304 @@ Write
 \begin_inset Formula $\psi_{k}$
 \end_inset
 
- is given by the reversed permutation, in this case, it is 
+ doesn't provide a solution of the form seen in the previous 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+ cases.
+ (Try it! You'll get a form that is satisified only if everything is zero.)
+ But it seems that a permutation should work.
+ Assume that there exists a permutation matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ such that the association of 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ to 
+\begin_inset Formula $\psi_{k}$
+\end_inset
+
+ is passes through that permutation.
+ Assume the form 
+\begin_inset Formula 
+\[
+\left[\begin{array}{c}
+f_{1}\left(y\right)\\
+f_{2}\left(y\right)\\
+f_{3}\left(y\right)
+\end{array}\right]=R\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+a_{2}\psi_{2}\left(y\right)\\
+a_{3}\psi_{3}\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $R^{T}$
+\end_inset
+
+ is the transpose, 
+\begin_inset Formula $RR^{T}=I$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+a_{2}\psi_{2}\left(y\right)\\
+a_{3}\psi_{3}\left(y\right)
+\end{array}\right]=R^{T}BR\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
+a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
+a_{3}\psi_{3}\left(\frac{y}{\beta}\right)
+\end{array}\right]+R^{T}CR\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{2}\psi_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{3}\psi_{3}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+Then apply the shift, for 
+\begin_inset Formula $k>0$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+\psi\left(T_{\beta}^{k}\left(\frac{y}{\beta}\right)\right)=\psi\left(T_{\beta}^{k}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right)=\psi\left(T_{\beta}^{k-1}\left(y\right)\right)
+\]
+
+\end_inset
+
+while for 
+\begin_inset Formula $k=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\psi\left(\frac{y}{\beta}\right) & =s\left(\frac{y}{\beta}\right)+w\psi\left(y\right)\\
+\psi\left(\frac{y}{\beta}+\frac{1}{2}\right) & =s\left(\frac{y}{\beta}+\frac{1}{2}\right)+w\psi\left(y\right)
+\end{align*}
+
+\end_inset
+
+to get
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+a_{2}\psi_{2}\left(y\right)\\
+a_{3}\psi_{3}\left(y\right)
+\end{array}\right]=R^{T}BR\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+a_{3}\psi_{2}\left(y\right)
+\end{array}\right]+R^{T}CR\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+a_{3}\psi_{2}\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+What is left can be reduced by plugging in the general form:
+\begin_inset Formula 
+\begin{align*}
+\psi\left(T_{\beta}^{k}\left(y\right)\right) & =\sum_{n=0}^{\infty}w^{n}s\left(T_{\beta}^{n+k}\left(x\right)\right)\\
+ & =\frac{1}{w^{k}}\left[\psi\left(y\right)-\sum_{n=0}^{k-1}w^{n}s\left(T_{\beta}^{n}\left(x\right)\right)\right]
+\end{align*}
+
+\end_inset
+
+The result requires collecting similar terms.
+ The 
+\begin_inset Formula $\psi$
+\end_inset
+
+ terms give
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+a_{1}\\
+a_{2}w^{-1}\\
+a_{3}w^{-2}
+\end{array}\right]=R^{T}DR\left[\begin{array}{c}
+a_{1}w\\
+a_{2}\\
+a_{3}w^{-1}
+\end{array}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $D=B+C$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $s$
+\end_inset
+
+ terms give
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-\beta\lambda\left[\begin{array}{c}
+0\\
+a_{2}w^{-1}s\left(y\right)\\
+a_{3}w^{-2}S_{1}\left(y\right)
+\end{array}\right]=-R^{T}DR\left[\begin{array}{c}
+0\\
+0\\
+a_{3}w^{-1}s\left(y\right)
+\end{array}\right]+R^{T}BR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+0
+\end{array}\right]+R^{T}CR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+0
+\end{array}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $S_{1}\left(y\right)=s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The desired form requires a permutation matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ that keeps the 
+\begin_inset Formula $s\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+ term alive, so that it can be used, just as in the previous 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+ cases to get an equation of the form
+\begin_inset Formula 
+\[
+\sum_{k}c_{k}s\left(\beta^{k}y\right)+s\left(\frac{y}{\beta}+\frac{1}{2}\right)=0
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
+\end_inset
+
+, the search can be limited to 
+\begin_inset Formula $0\le y\le\beta/2$
+\end_inset
+
+.
+ As before, the second term maps 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[1/2,\beta/2\right]$
+\end_inset
+
+ and thus can be used to cancel out any behavior.
+ Thus, it is sufficient to set
+\begin_inset Formula 
+\[
+g\left(y\right)=\begin{cases}
+h\left(y\right) & \mbox{for }0\le y\le\frac{1}{2}\\
+-\sum_{k}c_{k}h\left(\beta^{k+1}\left(y-\frac{1}{2}\right)\right) & \mbox{for }\frac{1}{2}<y\le\frac{\beta}{2}
+\end{cases}
+\]
+
+\end_inset
+
+for any 
+\begin_inset Formula $h$
+\end_inset
+
+ whatsoever, and any complex 
+\begin_inset Formula $w$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|w\right|<1$
+\end_inset
+
+ to obtain the general coherent state eignefunction.
+ Assuming, that is, that we can show that 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+, which has not been done yet.
+ This provides a complete solution, if an appropriate rotatin matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ can be found.
+\end_layout
+
+\begin_layout Paragraph
+Failed guess
+\end_layout
+
+\begin_layout Standard
+As we are lazy, we can get to guessing.
+ One obvious guess is that 
+\begin_inset Formula $R=P^{T}$
+\end_inset
+
+ with 
+\begin_inset Formula $P$
+\end_inset
+
+ the shift permutation matrix discovered earlier.
+ It turns out this won't work.
+ This subsection documents this failed attempt.
+ Perhaps reasons for the failure become clear, and thus the path to the
+ fix.
+ So, for 
+\begin_inset Formula $n=3$
+\end_inset
+
+, the permutation is gotten from the earlier table, as 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
 P=\left[\begin{array}{ccc}
@@ -42399,71 +42696,10 @@ P=\left[\begin{array}{ccc}
 
 \end_inset
 
+Then
+\end_layout
 
-\begin_inset Formula 
-\[
-\left[\begin{array}{c}
-f_{1}\left(y\right)\\
-f_{2}\left(y\right)\\
-f_{3}\left(y\right)
-\end{array}\right]=P^{T}\left[\begin{array}{c}
-a_{1}\psi_{1}\left(y\right)\\
-a_{2}\psi_{2}\left(y\right)\\
-a_{3}\psi_{3}\left(y\right)
-\end{array}\right]=\left[\begin{array}{ccc}
-\cdot & 1 & \cdot\\
-\cdot & \cdot & 1\\
-1 & \cdot & \cdot
-\end{array}\right]\left[\begin{array}{c}
-a_{1}\psi_{1}\left(y\right)\\
-a_{2}\psi_{2}\left(y\right)\\
-a_{3}\psi_{3}\left(y\right)
-\end{array}\right]
-\]
-
-\end_inset
-
-and so
-\begin_inset Formula 
-\[
-\beta\lambda\left[\begin{array}{c}
-a_{1}\psi_{1}\left(y\right)\\
-a_{2}\psi_{2}\left(y\right)\\
-a_{3}\psi_{3}\left(y\right)
-\end{array}\right]=PBP^{T}\left[\begin{array}{c}
-a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
-a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
-a_{3}\psi_{3}\left(\frac{y}{\beta}\right)
-\end{array}\right]+PCP^{T}\left[\begin{array}{c}
-a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
-a_{2}\psi_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
-a_{3}\psi_{3}\left(\frac{y}{\beta}+\frac{1}{2}\right)
-\end{array}\right]
-\]
-
-\end_inset
-
-Working this gives
-\begin_inset Formula 
-\[
-\beta\lambda\left[\begin{array}{c}
-a_{1}\psi_{1}\left(y\right)\\
-a_{2}\psi_{2}\left(y\right)\\
-a_{3}\psi_{3}\left(y\right)
-\end{array}\right]=PBP^{T}\left[\begin{array}{c}
-a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
-a_{2}\psi_{1}\left(y\right)\\
-a_{3}\psi_{2}\left(y\right)
-\end{array}\right]+PCP^{T}\left[\begin{array}{c}
-a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
-a_{2}\psi_{1}\left(y\right)\\
-a_{3}\psi_{2}\left(y\right)
-\end{array}\right]
-\]
-
-\end_inset
-
-But
+\begin_layout Standard
 \begin_inset Formula 
 \[
 PBP^{T}=\left[\begin{array}{ccc}
@@ -42519,8 +42755,11 @@ PCP^{T}=\left[\begin{array}{ccc}
 
 \end_inset
 
-Following the general recipie in the next subsection, backporting it here,
- gives
+Collecting the 
+\begin_inset Formula $\psi$
+\end_inset
+
+ terms gives
 \begin_inset Formula 
 \[
 \beta\lambda\left[\begin{array}{c}
@@ -42544,7 +42783,8 @@ a_{1}w+a_{2}
 
 \end_inset
 
-The second line gives 
+This can be solved, and gives the desired form.
+ The second line gives 
 \begin_inset Formula $\beta\lambda a_{2}=w^{2}a_{1}$
 \end_inset
 
@@ -42577,16 +42817,15 @@ a_{3} & =a_{1}w^{2}\left(1+1/\beta\right)/\beta\\
 
 \end_inset
 
-
+However, the initial shift form does not work out:
 \end_layout
 
 \begin_layout Standard
-The last bit takes more work:
 \begin_inset Formula 
 \[
 -\beta\lambda\left[\begin{array}{c}
 0\\
-a_{2}w^{-1}S_{0}\left(y\right)\\
+a_{2}w^{-1}s\left(y\right)\\
 a_{3}w^{-2}S_{1}\left(y\right)
 \end{array}\right]=-\left[\begin{array}{ccc}
 1 & 0 & 1\\
@@ -42595,7 +42834,7 @@ a_{3}w^{-2}S_{1}\left(y\right)
 \end{array}\right]\left[\begin{array}{c}
 0\\
 0\\
-a_{3}w^{-1}S_{0}\left(y\right)
+a_{3}w^{-1}s\left(y\right)
 \end{array}\right]+\left[\begin{array}{ccc}
 1 & 0 & 0\\
 1 & 0 & 0\\
@@ -42617,13 +42856,18 @@ a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
 
 \end_inset
 
-Yery disappointing that the 
+Very disappointing that the 
 \begin_inset Formula $s\left(\frac{y}{\beta}+\frac{1}{2}\right)$
 \end_inset
 
  term is killed; this was vital for the construction of the coherent states.
- Perhaps we did somethig wrong? Perhaps we should be striving to preserve
- this, and so multiply-by-permutation was the wrong thing?
+ The loss of this term is fatal for the general theory, and so it seems
+ the guess that 
+\begin_inset Formula $R=P^{T}$
+\end_inset
+
+ is incorrect.
+ Still lets continue on and observe the train-wreck.
 \end_layout
 
 \begin_layout Standard
@@ -42632,10 +42876,10 @@ Multiplying
 \[
 -\beta\lambda\left[\begin{array}{c}
 0\\
-a_{2}w^{-1}S_{0}\left(y\right)\\
+a_{2}w^{-1}s\left(y\right)\\
 a_{3}w^{-2}S_{1}\left(y\right)
 \end{array}\right]=-\left[\begin{array}{c}
-a_{3}w^{-1}S_{0}\left(y\right)\\
+a_{3}w^{-1}s\left(y\right)\\
 0\\
 0
 \end{array}\right]+\left[\begin{array}{c}
@@ -42648,10 +42892,6 @@ a_{1}s\left(\frac{y}{\beta}\right)
 \end_inset
 
 But 
-\begin_inset Formula $S_{0}\left(y\right)=s\left(y\right)$
-\end_inset
-
- while 
 \begin_inset Formula $S_{1}\left(y\right)=s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)$
 \end_inset
 
@@ -42665,7 +42905,8 @@ s\left(y\right)w^{2}\left(1+\beta\right)/\beta^{3} & =s\left(\frac{y}{\beta}\rig
 
 \end_inset
 
-which looks dubious; perhaps there are errors.
+which looks dubious; perhaps there is a way to solve this, but certainly
+ the simple form discovered earlier doesn't work.
 \end_layout
 
 \begin_layout Subsubsection
