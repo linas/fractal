@@ -35489,7 +35489,7 @@ is the inclusion membership function.
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 The ERT below shrinks verical and horizontal spacing inside the matrix.
@@ -42383,10 +42383,142 @@ Write
 \begin_inset Formula $\psi_{k}$
 \end_inset
 
- seems to be given by
-\end_layout
+ is given by the reversed permutation, in this case, it is 
+\begin_inset Formula 
+\[
+P=\left[\begin{array}{ccc}
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot\\
+\cdot & 1 & \cdot
+\end{array}\right]\quad\mbox{ and }\quad P^{T}=\left[\begin{array}{ccc}
+\cdot & 1 & \cdot\\
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot
+\end{array}\right]
+\]
 
-\begin_layout Standard
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[\begin{array}{c}
+f_{1}\left(y\right)\\
+f_{2}\left(y\right)\\
+f_{3}\left(y\right)
+\end{array}\right]=P^{T}\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+a_{2}\psi_{2}\left(y\right)\\
+a_{3}\psi_{3}\left(y\right)
+\end{array}\right]=\left[\begin{array}{ccc}
+\cdot & 1 & \cdot\\
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot
+\end{array}\right]\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+a_{2}\psi_{2}\left(y\right)\\
+a_{3}\psi_{3}\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+a_{2}\psi_{2}\left(y\right)\\
+a_{3}\psi_{3}\left(y\right)
+\end{array}\right]=PBP^{T}\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
+a_{2}\psi_{2}\left(\frac{y}{\beta}\right)\\
+a_{3}\psi_{3}\left(\frac{y}{\beta}\right)
+\end{array}\right]+PCP^{T}\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{2}\psi_{2}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{3}\psi_{3}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+Working this gives
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+a_{2}\psi_{2}\left(y\right)\\
+a_{3}\psi_{3}\left(y\right)
+\end{array}\right]=PBP^{T}\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+a_{3}\psi_{2}\left(y\right)
+\end{array}\right]+PCP^{T}\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+a_{3}\psi_{2}\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+But
+\begin_inset Formula 
+\[
+PBP^{T}=\left[\begin{array}{ccc}
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot\\
+\cdot & 1 & \cdot
+\end{array}\right]\left[\begin{array}{ccc}
+0 & 0 & 1\\
+0 & 0 & 1\\
+0 & 0 & 1
+\end{array}\right]\left[\begin{array}{ccc}
+\cdot & 1 & \cdot\\
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot
+\end{array}\right]=\left[\begin{array}{ccc}
+1 & 0 & 0\\
+1 & 0 & 0\\
+1 & 0 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+PCP^{T}=\left[\begin{array}{ccc}
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot\\
+\cdot & 1 & \cdot
+\end{array}\right]\left[\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]\left[\begin{array}{ccc}
+\cdot & 1 & \cdot\\
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot
+\end{array}\right]=\left[\begin{array}{ccc}
+\cdot & \cdot & 1\\
+1 & \cdot & \cdot\\
+\cdot & 1 & \cdot
+\end{array}\right]\left[\begin{array}{ccc}
+0 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{array}\right]=\left[\begin{array}{ccc}
+0 & 0 & 1\\
+0 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
 Following the general recipie in the next subsection, backporting it here,
  gives
 \begin_inset Formula 
@@ -42396,19 +42528,60 @@ a_{1}\\
 a_{2}w^{-1}\\
 a_{3}w^{-2}
 \end{array}\right]=\left[\begin{array}{ccc}
-0 & 0 & 1\\
 1 & 0 & 1\\
-0 & 1 & 1
+1 & 0 & 0\\
+1 & 1 & 0
 \end{array}\right]\left[\begin{array}{c}
 a_{1}w\\
 a_{2}\\
 a_{3}w^{-1}
+\end{array}\right]=\left[\begin{array}{c}
+a_{1}w+a_{3}w^{-1}\\
+a_{1}w\\
+a_{1}w+a_{2}
 \end{array}\right]
 \]
 
 \end_inset
 
-and the below can't possibly be right ...
+The second line gives 
+\begin_inset Formula $\beta\lambda a_{2}=w^{2}a_{1}$
+\end_inset
+
+.
+ The third line gives 
+\begin_inset Formula $\beta\lambda a_{3}=w^{3}\left(1+w/\beta\lambda\right)a_{1}$
+\end_inset
+
+ and the first line is
+\begin_inset Formula 
+\begin{align*}
+\beta\lambda & =w+w^{2}\left(1+w/\beta\lambda\right)/\beta\lambda\\
+\left(\beta\lambda\right)^{3} & =w\left(\beta\lambda\right)^{2}+w^{2}\beta\lambda+w^{3}
+\end{align*}
+
+\end_inset
+
+which is solved by 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+ just as expected.
+ Hurrah! Plugging through gives
+\begin_inset Formula 
+\begin{align*}
+a_{2} & =a_{1}w/\beta\\
+a_{3} & =a_{1}w^{2}\left(1+1/\beta\right)/\beta\\
+ & =a_{1}\left(w/\beta\right)^{2}\left(1+\beta\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The last bit takes more work:
 \begin_inset Formula 
 \[
 -\beta\lambda\left[\begin{array}{c}
@@ -42416,28 +42589,83 @@ and the below can't possibly be right ...
 a_{2}w^{-1}S_{0}\left(y\right)\\
 a_{3}w^{-2}S_{1}\left(y\right)
 \end{array}\right]=-\left[\begin{array}{ccc}
-0 & 0 & 1\\
 1 & 0 & 1\\
-0 & 1 & 1
+1 & 0 & 0\\
+1 & 1 & 0
 \end{array}\right]\left[\begin{array}{c}
 0\\
 0\\
 a_{3}w^{-1}S_{0}\left(y\right)
 \end{array}\right]+\left[\begin{array}{ccc}
-0 & 0 & 0\\
 1 & 0 & 0\\
+1 & 0 & 0\\
+1 & 0 & 0
+\end{array}\right]\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+0
+\end{array}\right]+\left[\begin{array}{ccc}
+0 & 0 & 1\\
+0 & 0 & 0\\
 0 & 1 & 0
 \end{array}\right]\left[\begin{array}{c}
 a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
 0\\
-\vdots\\
 0
 \end{array}\right]
 \]
 
 \end_inset
 
+Yery disappointing that the 
+\begin_inset Formula $s\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
 
+ term is killed; this was vital for the construction of the coherent states.
+ Perhaps we did somethig wrong? Perhaps we should be striving to preserve
+ this, and so multiply-by-permutation was the wrong thing?
+\end_layout
+
+\begin_layout Standard
+Multiplying
+\begin_inset Formula 
+\[
+-\beta\lambda\left[\begin{array}{c}
+0\\
+a_{2}w^{-1}S_{0}\left(y\right)\\
+a_{3}w^{-2}S_{1}\left(y\right)
+\end{array}\right]=-\left[\begin{array}{c}
+a_{3}w^{-1}S_{0}\left(y\right)\\
+0\\
+0
+\end{array}\right]+\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}\right)\\
+a_{1}s\left(\frac{y}{\beta}\right)\\
+a_{1}s\left(\frac{y}{\beta}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula $S_{0}\left(y\right)=s\left(y\right)$
+\end_inset
+
+ while 
+\begin_inset Formula $S_{1}\left(y\right)=s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\begin{align*}
+s\left(y\right)w^{2}\left(1+\beta\right)/\beta^{3} & =s\left(\frac{y}{\beta}\right)\\
+-s\left(y\right)w & =s\left(\frac{y}{\beta}\right)\\
+\left[s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)\right]\left(1/\beta\right)^{2}\left(1+\beta\right) & =s\left(\frac{y}{\beta}\right)
+\end{align*}
+
+\end_inset
+
+which looks dubious; perhaps there are errors.
 \end_layout
 
 \begin_layout Subsubsection
@@ -42475,6 +42703,8 @@ Set
 \end_inset
 
 .
+ XXX No, insert the permutation matrixes now.
+ XXX FIXME.
  Several identities will be needed.
  One is
 \begin_inset Formula 
@@ -42650,6 +42880,22 @@ a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
 
 \begin_layout Standard
 These
+\end_layout
+
+\begin_layout Standard
+TODO List:
+\end_layout
+
+\begin_layout Itemize
+Obtain orthonormal set.
+\end_layout
+
+\begin_layout Itemize
+Review what happens at 
+\begin_inset Formula $w=1/\beta$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
