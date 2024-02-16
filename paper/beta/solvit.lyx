@@ -43005,69 +43005,7 @@ PCP^{T}=\left[\begin{array}{ccc}
 
 \end_inset
 
-Collecting the 
-\begin_inset Formula $\psi$
-\end_inset
-
- terms gives
-\begin_inset Formula 
-\[
-\beta\lambda\left[\begin{array}{c}
-a_{1}\\
-a_{2}w^{-1}\\
-a_{3}w^{-2}
-\end{array}\right]=\left[\begin{array}{ccc}
-1 & 0 & 1\\
-1 & 0 & 0\\
-1 & 1 & 0
-\end{array}\right]\left[\begin{array}{c}
-a_{1}w\\
-a_{2}\\
-a_{3}w^{-1}
-\end{array}\right]=\left[\begin{array}{c}
-a_{1}w+a_{3}w^{-1}\\
-a_{1}w\\
-a_{1}w+a_{2}
-\end{array}\right]
-\]
-
-\end_inset
-
-This can be solved, and gives the desired form.
- The second line gives 
-\begin_inset Formula $\beta\lambda a_{2}=w^{2}a_{1}$
-\end_inset
-
-.
- The third line gives 
-\begin_inset Formula $\beta\lambda a_{3}=w^{3}\left(1+w/\beta\lambda\right)a_{1}$
-\end_inset
-
- and the first line is
-\begin_inset Formula 
-\begin{align*}
-\beta\lambda & =w+w^{2}\left(1+w/\beta\lambda\right)/\beta\lambda\\
-\left(\beta\lambda\right)^{3} & =w\left(\beta\lambda\right)^{2}+w^{2}\beta\lambda+w^{3}
-\end{align*}
-
-\end_inset
-
-which is solved by 
-\begin_inset Formula $\lambda=w$
-\end_inset
-
- just as expected.
- Hurrah! Plugging through gives
-\begin_inset Formula 
-\begin{align*}
-a_{2} & =a_{1}w/\beta\\
-a_{3} & =a_{1}w^{2}\left(1+1/\beta\right)/\beta\\
- & =a_{1}\left(w/\beta\right)^{2}\left(1+\beta\right)
-\end{align*}
-
-\end_inset
-
-However, the initial shift form does not work out:
+The initial shift form does not work out:
 \end_layout
 
 \begin_layout Standard
@@ -43117,22 +43055,19 @@ Very disappointing that the
 \end_inset
 
  is incorrect.
- Still lets continue on and observe the train-wreck.
-\end_layout
-
-\begin_layout Standard
-Multiplying
+ Lets look at the train-wreck.
+ Multiplying out gives
 \begin_inset Formula 
 \[
--\beta\left[\begin{array}{c}
+\beta\left[\begin{array}{c}
 0\\
 a_{2}s\left(y\right)\\
 a_{3}w^{-1}S_{1}\left(y\right)
-\end{array}\right]=-\left[\begin{array}{c}
+\end{array}\right]=\left[\begin{array}{c}
 a_{3}w^{-1}s\left(y\right)\\
 0\\
 0
-\end{array}\right]+\left[\begin{array}{c}
+\end{array}\right]-\left[\begin{array}{c}
 a_{1}s\left(\frac{y}{\beta}\right)\\
 a_{1}s\left(\frac{y}{\beta}\right)\\
 a_{1}s\left(\frac{y}{\beta}\right)
@@ -43141,21 +43076,7 @@ a_{1}s\left(\frac{y}{\beta}\right)
 
 \end_inset
 
-But 
-\begin_inset Formula $S_{1}\left(y\right)=s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)$
-\end_inset
-
- and so
-\begin_inset Formula 
-\begin{align*}
-s\left(y\right)w^{2}\left(1+\beta\right)/\beta^{3} & =s\left(\frac{y}{\beta}\right)\\
--s\left(y\right)w & =s\left(\frac{y}{\beta}\right)\\
-\left[s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)\right]\left(1/\beta\right)^{2}\left(1+\beta\right) & =s\left(\frac{y}{\beta}\right)
-\end{align*}
-
-\end_inset
-
-which looks dubious; perhaps there is a way to solve this, but certainly
+This looks dubious; perhaps there is a way to solve this, but certainly
  the simple form discovered earlier doesn't work.
 \end_layout
 
@@ -43275,7 +43196,131 @@ Curious.
 \end_layout
 
 \begin_layout Standard
-Lets try the brute-force approach:
+Top row is unsatisfiable, unless 
+\begin_inset Formula $r_{31}=r_{33}=r_{12}=r_{13}=0$
+\end_inset
+
+.
+ That leaves
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{ccc}
+r_{11} & 0 & 0\\
+r_{21} & r_{22} & r_{23}\\
+0 & r_{32} & 0
+\end{array}\right]\qquad BR=\left[\begin{array}{ccc}
+0 & r_{32} & 0\\
+0 & r_{32} & 0\\
+0 & r_{32} & 0
+\end{array}\right]\qquad CR=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+r_{11} & 0 & 0\\
+r_{21} & r_{22} & r_{23}
+\end{array}\right]
+\]
+
+\end_inset
+
+Multiply things out explicitly.
+ The middle row gives
+\begin_inset Formula 
+\[
+\beta r_{22}a_{2}s\left(y\right)+\beta r_{23}a_{3}w^{-1}S_{1}\left(y\right)=-r_{11}a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\]
+
+\end_inset
+
+The bottom row gives 
+\begin_inset Formula 
+\[
+\beta r_{32}a_{2}s\left(y\right)=-r_{21}a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)+r_{23}a_{3}w^{-1}s\left(y\right)
+\]
+
+\end_inset
+
+Either row can be set to zero, without ruining the other.
+ One or the othre must be set to zero, as it looks like their solution set
+ is mutually exclusive.
+ Thus, we have
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 0
+\end{array}\right]\qquad\mbox{or}\qquad R=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+will work.
+ This implies
+\begin_inset Formula 
+\[
+R^{T}DR=\left[\begin{array}{ccc}
+0 & 0 & 1\\
+1 & 0 & 1\\
+0 & 0 & 0
+\end{array}\right]\qquad\mbox{or}\qquad R^{T}DR=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+0 & 1 & 0\\
+0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+The eigenvector eqn to be solved is
+\begin_inset Formula 
+\[
+0=\left[R^{T}DR-\beta I\right]\left[\begin{array}{c}
+a_{1}\\
+a_{2}w^{-1}\\
+a_{3}w^{-2}
+\end{array}\right]
+\]
+
+\end_inset
+
+so
+\begin_inset Formula 
+\[
+E=\left[\begin{array}{ccc}
+-\beta & 0 & 1\\
+1 & -\beta & 1\\
+0 & 0 & -\beta
+\end{array}\right]\qquad\mbox{or}\qquad E=\left[\begin{array}{ccc}
+-\beta & 0 & 0\\
+0 & 1-\beta & 0\\
+0 & 1 & -\beta
+\end{array}\right]
+\]
+
+\end_inset
+
+This second form is solved only by 
+\begin_inset Formula $a_{1}=0$
+\end_inset
+
+ and we certainly do not want that.
+ Meanwhile, the first form forces 
+\begin_inset Formula $a_{3}=0$
+\end_inset
+
+ but this again implies that 
+\begin_inset Formula $a_{1}=0$
+\end_inset
+
+ and thence 
+\begin_inset Formula $a_{2}=0$
+\end_inset
+
+ and it is a total melt-down.
+ It seems that there are no solutions!?
 \end_layout
 
 \begin_layout Subsubsection
