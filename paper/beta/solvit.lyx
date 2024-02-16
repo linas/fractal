@@ -42761,10 +42761,10 @@ The result requires collecting similar terms.
 a_{1}\\
 a_{2}w^{-1}\\
 a_{3}w^{-2}
-\end{array}\right]=R^{T}DR\left[\begin{array}{c}
-a_{1}w\\
-a_{2}\\
-a_{3}w^{-1}
+\end{array}\right]=wR^{T}DR\left[\begin{array}{c}
+a_{1}\\
+a_{2}w^{-1}\\
+a_{3}w^{-2}
 \end{array}\right]
 \]
 
@@ -42775,7 +42775,19 @@ where
 \end_inset
 
 .
- The 
+ This is an eigenvalue equation, and since 
+\begin_inset Formula $p_{n}\left(\beta\right)=\det\left[D-\beta I\right]=0$
+\end_inset
+
+ conclude that 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
 \begin_inset Formula $s$
 \end_inset
 
@@ -42785,10 +42797,10 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \[
--\beta\lambda\left[\begin{array}{c}
+-\beta\left[\begin{array}{c}
 0\\
-a_{2}w^{-1}s\left(y\right)\\
-a_{3}w^{-2}S_{1}\left(y\right)
+a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
 \end{array}\right]=-R^{T}DR\left[\begin{array}{c}
 0\\
 0\\
@@ -43061,10 +43073,10 @@ However, the initial shift form does not work out:
 \begin_layout Standard
 \begin_inset Formula 
 \[
--\beta\lambda\left[\begin{array}{c}
+-\beta\left[\begin{array}{c}
 0\\
-a_{2}w^{-1}s\left(y\right)\\
-a_{3}w^{-2}S_{1}\left(y\right)
+a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
 \end{array}\right]=-\left[\begin{array}{ccc}
 1 & 0 & 1\\
 1 & 0 & 0\\
@@ -43112,10 +43124,10 @@ Very disappointing that the
 Multiplying
 \begin_inset Formula 
 \[
--\beta\lambda\left[\begin{array}{c}
+-\beta\left[\begin{array}{c}
 0\\
-a_{2}w^{-1}s\left(y\right)\\
-a_{3}w^{-2}S_{1}\left(y\right)
+a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
 \end{array}\right]=-\left[\begin{array}{c}
 a_{3}w^{-1}s\left(y\right)\\
 0\\
@@ -43152,28 +43164,118 @@ Required form
 \end_layout
 
 \begin_layout Standard
-Preserving the 
-\begin_inset Formula $s\left(\frac{y}{\beta}+\frac{1}{2}\right)$
-\end_inset
-
- term requires that 
-\begin_inset Formula $R^{T}CR$
-\end_inset
-
- must have a one in the first column, and ideally, perhaps in the upper-left
- corner.
- The 
-\begin_inset Formula $R=I$
-\end_inset
-
- identity rotation did not work, because it arranged terms so that they
- would have to be zero.
- We've knocked out two of six possible permutations.
- It is also possible that a general rotation matrix 
+The goal is to find a rotation matrix 
 \begin_inset Formula $R$
 \end_inset
 
- might be required.
+ such that
+\begin_inset Formula 
+\[
+\beta\left[\begin{array}{c}
+0\\
+a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
+\end{array}\right]=R^{T}DR\left[\begin{array}{c}
+0\\
+0\\
+a_{3}w^{-1}s\left(y\right)
+\end{array}\right]-R^{T}BR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+0
+\end{array}\right]-R^{T}CR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+0
+\end{array}\right]
+\]
+
+\end_inset
+
+falls into the form for which one row has the structure
+\begin_inset Formula 
+\[
+\sum_{k}c_{k}s\left(\beta^{k}y\right)+s\left(\frac{y}{\beta}+\frac{1}{2}\right)=0
+\]
+
+\end_inset
+
+and the other rows do not prevent a solution (typically, by forcing 
+\begin_inset Formula $a_{1}=0$
+\end_inset
+
+).
+ Perhaps the collapsed form is easier to think about?
+\begin_inset Formula 
+\[
+\beta R\left[\begin{array}{c}
+0\\
+a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
+\end{array}\right]=BR\left[\begin{array}{c}
+-a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+a_{3}w^{-1}s\left(y\right)
+\end{array}\right]+CR\left[\begin{array}{c}
+-a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+a_{3}w^{-1}s\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+Try a brute-force approach.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+CR & =\left[\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & 1 & 0
+\end{array}\right]\left[\begin{array}{ccc}
+r_{11} & r_{12} & r_{13}\\
+r_{21} & r_{22} & r_{23}\\
+r_{31} & r_{32} & r_{33}
+\end{array}\right]=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+r_{11} & r_{12} & r_{13}\\
+r_{21} & r_{22} & r_{23}
+\end{array}\right]\\
+BR & =\left[\begin{array}{ccc}
+0 & 0 & 1\\
+0 & 0 & 1\\
+0 & 0 & 1
+\end{array}\right]\left[\begin{array}{ccc}
+r_{11} & r_{12} & r_{13}\\
+r_{21} & r_{22} & r_{23}\\
+r_{31} & r_{32} & r_{33}
+\end{array}\right]=\left[\begin{array}{ccc}
+r_{31} & r_{32} & r_{33}\\
+r_{31} & r_{32} & r_{33}\\
+r_{31} & r_{32} & r_{33}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+Curious.
+ 
+\begin_inset Formula $CR$
+\end_inset
+
+ shifts down by one row, discarding it.
+ But 
+\begin_inset Formula $BR$
+\end_inset
+
+ takes that discarded row, and reproduces it.
+\end_layout
+
+\begin_layout Standard
+Lets try the brute-force approach:
 \end_layout
 
 \begin_layout Subsubsection
@@ -43392,11 +43494,11 @@ The generating terms, those having only
  in them, give
 \begin_inset Formula 
 \[
--\beta\lambda\left[\begin{array}{c}
+-\beta\left[\begin{array}{c}
 0\\
-a_{2}w^{-1}S_{0}\left(y\right)\\
+a_{2}S_{0}\left(y\right)\\
 \vdots\\
-a_{\nu}w^{1-\nu}S_{\nu-2}\left(y\right)
+a_{\nu}w^{2-\nu}S_{\nu-2}\left(y\right)
 \end{array}\right]=-R^{T}DR\left[\begin{array}{c}
 0\\
 0\\
