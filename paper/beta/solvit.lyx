@@ -7,6 +7,7 @@
 \textclass article
 \begin_preamble
 \usepackage{url}
+\usepackage{etoolbox}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -35487,9 +35488,133 @@ is the inclusion membership function.
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The ERT below shrinks verical and horizontal spacing inside the matrix.
+ Tried 
+\backslash
+setlength{
+\backslash
+arraycolsep}{2pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+arraycolsep=2pt 
+\end_layout
+
+\begin_layout Plain Layout
+but it does nothing.I guess these haveto be inside array?
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+def
+\backslash
+arraystretch{0.4}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+renewcommand
+\backslash
+arraystretch{0.2}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+setlength{
+\backslash
+extrarowheight}{-3pt}
+\end_layout
+
+\begin_layout Plain Layout
+But 
+\backslash
+arraycolsep=0.4pt does work, when used inse the array.
+ But only for that one array.
+\end_layout
+
+\begin_layout Plain Layout
+A ahah
+\end_layout
+
+\begin_layout Plain Layout
+preamble: 
+\backslash
+usepackage{etoolbox}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+AtBeginEnvironment{array}{
+\backslash
+setlength{
+\backslash
+arraycolsep}{0.5pt}}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begingroup
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginEnvironment{array}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+arraycolsep}{0.6pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+arraystretch{0.8}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
 \begin_inset Tabular
 <lyxtabular version="3" rows="13" columns="9">
 <features tabularvalignment="middle">
@@ -37191,6 +37316,22 @@ R
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+endgroup
+\end_layout
 
 \end_inset
 
