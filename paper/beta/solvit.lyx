@@ -35493,7 +35493,14 @@ status open
 
 \begin_layout Plain Layout
 The ERT below shrinks verical and horizontal spacing inside the matrix.
- Tried 
+\end_layout
+
+\begin_layout Plain Layout
+Tried the following, they did nothing:
+\end_layout
+
+\begin_layout Plain Layout
+
 \backslash
 setlength{
 \backslash
@@ -35504,10 +35511,6 @@ arraycolsep}{2pt}
 
 \backslash
 arraycolsep=2pt 
-\end_layout
-
-\begin_layout Plain Layout
-but it does nothing.I guess these haveto be inside array?
 \end_layout
 
 \begin_layout Plain Layout
@@ -35535,6 +35538,18 @@ extrarowheight}{-3pt}
 \end_layout
 
 \begin_layout Plain Layout
+
+\backslash
+usepackage{setspace}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+setstretch{0.5}
+\end_layout
+
+\begin_layout Plain Layout
 But 
 \backslash
 arraycolsep=0.4pt does work, when used inse the array.
@@ -35542,7 +35557,7 @@ arraycolsep=0.4pt does work, when used inse the array.
 \end_layout
 
 \begin_layout Plain Layout
-A ahah
+A hah! To do it for all of the arrays
 \end_layout
 
 \begin_layout Plain Layout
@@ -35555,10 +35570,45 @@ usepackage{etoolbox}
 
 \backslash
 AtBeginEnvironment{array}{
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+def
+\backslash
+arraystretch{0.85}
+\end_layout
+
+\begin_layout Plain Layout
+
 \backslash
 setlength{
 \backslash
 arraycolsep}{0.5pt}}
+\end_layout
+
+\begin_layout Plain Layout
+With only one problem: this borkes everything from here on out.
+ So have to unset it at end...
+\end_layout
+
+\begin_layout Plain Layout
+Default arraycolsep is 5 pt 
+\backslash
+the
+\backslash
+arraycolsep
+\backslash
+relax
+\end_layout
+
+\begin_layout Plain Layout
+default arraystrech is 1 (its just a char)
+\end_layout
+
+\begin_layout Plain Layout
+Note also four negative thick spaces at left of table!
 \end_layout
 
 \end_inset
@@ -35580,6 +35630,73 @@ begingroup
 
 \begin_layout Plain Layout
 
+%% the attempted save below doesn't work.
+ Its save but not restored.
+\end_layout
+
+\begin_layout Plain Layout
+
+%% anyway, the default values are 1 for strecth, and 5pt for colsep.
+\end_layout
+
+\begin_layout Plain Layout
+
+% so they are hard coded at the end.
+\end_layout
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+let
+\backslash
+oldstret
+\backslash
+arraystretch
+\end_layout
+
+\begin_layout Plain Layout
+
+%%yooohoo the old one> 
+\backslash
+oldstret < ahhh
+\end_layout
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+newlength{
+\backslash
+oldcolsep}
+\end_layout
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+setlength{
+\backslash
+oldcolsep}{
+\backslash
+arraycolsep}
+\end_layout
+
+\begin_layout Plain Layout
+
+%%and the old sep 
+\backslash
+the
+\backslash
+oldcolsep
+\backslash
+relax 
+\backslash
+par
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
 AtBeginEnvironment{array}{
@@ -35589,23 +35706,18 @@ AtBeginEnvironment{array}{
 
 
 \backslash
-setlength{
-\backslash
-arraycolsep}{0.6pt}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
 def
 \backslash
-arraystretch{0.8}
+arraystretch{0.85}
 \end_layout
 
 \begin_layout Plain Layout
 
-}
+
+\backslash
+setlength{
+\backslash
+arraycolsep}{0.5pt}}
 \end_layout
 
 \end_inset
@@ -35615,6 +35727,22 @@ arraystretch{0.8}
 
 \begin_layout Standard
 \noindent
+\begin_inset space \negthickspace{}
+\end_inset
+
+
+\begin_inset space \negthickspace{}
+\end_inset
+
+
+\begin_inset space \negthickspace{}
+\end_inset
+
+
+\begin_inset space \negthickspace{}
+\end_inset
+
+
 \begin_inset Tabular
 <lyxtabular version="3" rows="13" columns="9">
 <features tabularvalignment="middle">
@@ -37325,6 +37453,52 @@ R
 \begin_layout Standard
 \begin_inset ERT
 status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginEnvironment{array}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+arraystretch{1}
+\end_layout
+
+\begin_layout Plain Layout
+
+%% 
+\backslash
+setlength{
+\backslash
+arraycolsep}{
+\backslash
+oldcolsep} Doesn't work
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+arraycolsep}{5pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
 
 \begin_layout Plain Layout
 
