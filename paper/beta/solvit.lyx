@@ -42784,14 +42784,44 @@ where
 \end_inset
 
 .
+ Lets take a moment to solve this.
+ It has the form 
+\begin_inset Formula 
+\[
+0=\left[D-\beta I\right]R\left[\begin{array}{c}
+a_{1}\\
+a_{2}w^{-1}\\
+a_{3}w^{-2}
+\end{array}\right]\qquad\mbox{or}\qquad0=\left[\begin{array}{ccc}
+-\beta & 0 & 1\\
+1 & -\beta & 1\\
+0 & 1 & 1-\beta
+\end{array}\right]\left[\begin{array}{c}
+e_{1}\\
+e_{2}\\
+e_{3}
+\end{array}\right]
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+e_{3}=\beta e_{1}\qquad\mbox{and}\qquad e_{2}=\beta\left(\beta-1\right)e_{1}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The 
+The generating terms (the 
 \begin_inset Formula $s$
 \end_inset
 
- terms give
+ terms) give
 \end_layout
 
 \begin_layout Standard
@@ -43193,21 +43223,59 @@ Curious.
 \end_inset
 
  takes that discarded row, and reproduces it.
-\end_layout
+ The top row is
+\begin_inset Formula 
+\[
+\beta r_{12}a_{2}s\left(y\right)+\beta r_{13}a_{3}w^{-1}S_{1}\left(y\right)=-r_{31}a_{1}s\left(\frac{y}{\beta}\right)+r_{33}a_{3}w^{-1}s\left(y\right)
+\]
 
-\begin_layout Standard
-Top row is unsatisfiable, unless 
-\begin_inset Formula $r_{31}=r_{33}=r_{12}=r_{13}=0$
+\end_inset
+
+But 
+\begin_inset Formula $S_{1}\left(y\right)=s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)$
+\end_inset
+
+ and when 
+\begin_inset Formula $y<1/2$
+\end_inset
+
+ the shift reduces to 
+\begin_inset Formula $s\left(T_{\beta}\left(y\right)\right)=s\left(\beta y\right)$
+\end_inset
+
+ Plugging through gives the mess
+\begin_inset Formula 
+\begin{align*}
+\beta wr_{12}a_{2}s\left(y\right)+\beta r_{13}a_{3}\left(s\left(y\right)+ws\left(\beta y\right)\right) & =-r_{31}a_{1}ws\left(\frac{y}{\beta}\right)+r_{33}a_{3}s\left(y\right)\\
+\left(\beta wr_{12}a_{2}+\beta r_{13}a_{3}-r_{33}a_{3}\right)s\left(y\right) & =-\beta r_{13}a_{3}ws\left(\beta y\right)-r_{31}a_{1}ws\left(\frac{y}{\beta}\right)
+\end{align*}
+
+\end_inset
+
+This is not solvable for general 
+\begin_inset Formula $s\left(y\right)$
+\end_inset
+
+ unless 
+\begin_inset Formula $r_{13}=r_{31}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $0=\beta wr_{12}a_{2}-r_{33}a_{3}$
 \end_inset
 
 .
- That leaves
+ 
+\end_layout
+
+\begin_layout Standard
+That leaves
 \begin_inset Formula 
 \[
 R=\left[\begin{array}{ccc}
-r_{11} & 0 & 0\\
+r_{11} & r_{12} & 0\\
 r_{21} & r_{22} & r_{23}\\
-0 & r_{32} & 0
+0 & r_{32} & r_{33}
 \end{array}\right]
 \]
 
@@ -43223,45 +43291,67 @@ Next, verifying that
 \begin{align*}
 R^{T}R=I & =\left[\begin{array}{ccc}
 r_{11} & r_{21} & 0\\
-0 & r_{22} & r_{32}\\
-0 & r_{23} & 0
+r_{12} & r_{22} & r_{32}\\
+0 & r_{23} & r_{33}
 \end{array}\right]\left[\begin{array}{ccc}
-r_{11} & 0 & 0\\
+r_{11} & r_{12} & 0\\
 r_{21} & r_{22} & r_{23}\\
-0 & r_{32} & 0
+0 & r_{32} & r_{33}
 \end{array}\right]\\
  & =\left[\begin{array}{ccc}
-r_{11}^{2}+r_{21}^{2} & r_{21}r_{22} & r_{23}r_{21}\\
-r_{21}r_{22} & \;r_{22}^{2}+r_{32}^{2}\; & r_{23}r_{22}\\
-r_{21}r_{23} & r_{22}r_{23} & r_{23}^{2}
+r_{11}^{2}+r_{21}^{2} & r_{11}r_{12}+r_{21}r_{22} & r_{23}r_{21}\\
+r_{11}r_{12}+r_{21}r_{22} & \;\;r_{12}^{2}+r_{22}^{2}+r_{32}^{2}\;\; & r_{22}r_{23}+r_{32}r_{33}\\
+r_{21}r_{23} & r_{22}r_{23}+r_{32}r_{33} & r_{23}^{2}+r_{33}^{2}
 \end{array}\right]
 \end{align*}
 
 \end_inset
 
-which is solved by
+Satisfying this requires either 
+\begin_inset Formula $r_{21}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $r_{23}=0$
+\end_inset
+
+.
+ But the former choice forces 
+\begin_inset Formula $r_{12}=0$
+\end_inset
+
+ which breaks the earlier relation.
+ So take 
+\begin_inset Formula $r_{23}=0$
+\end_inset
+
+ to get 
 \begin_inset Formula 
 \[
 R=\left[\begin{array}{ccc}
-1 & 0 & 0\\
-0 & 0 & 1\\
-0 & 1 & 0
+r_{11} & r_{12} & 0\\
+r_{21} & r_{22} & 0\\
+0 & 0 & 1
 \end{array}\right]
 \]
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 That leaves behind
 \begin_inset Formula 
 \[
 BR=\left[\begin{array}{ccc}
-0 & 1 & 0\\
-0 & 1 & 0\\
-0 & 1 & 0
+0 & 0 & 1\\
+0 & 0 & 1\\
+0 & 0 & 1
 \end{array}\right]\qquad\mbox{and}\qquad CR=\left[\begin{array}{ccc}
 0 & 0 & 0\\
-1 & 0 & 0\\
-0 & 0 & 1
+r_{11} & r_{12} & 0\\
+r_{21} & r_{22} & 0
 \end{array}\right]
 \]
 
@@ -43271,25 +43361,25 @@ Finally,
 \begin_inset Formula 
 \[
 \beta\left[\begin{array}{ccc}
-1 & 0 & 0\\
-0 & 0 & 1\\
-0 & 1 & 0
+r_{11} & r_{12} & 0\\
+r_{21} & r_{22} & 0\\
+0 & 0 & 1
 \end{array}\right]\left[\begin{array}{c}
 0\\
 a_{2}s\left(y\right)\\
 a_{3}w^{-1}S_{1}\left(y\right)
 \end{array}\right]=\left[\begin{array}{ccc}
-0 & 1 & 0\\
-0 & 1 & 0\\
-0 & 1 & 0
+0 & 0 & 1\\
+0 & 0 & 1\\
+0 & 0 & 1
 \end{array}\right]\left[\begin{array}{c}
 -a_{1}s\left(\frac{y}{\beta}\right)\\
 0\\
 a_{3}w^{-1}s\left(y\right)
 \end{array}\right]+\left[\begin{array}{ccc}
 0 & 0 & 0\\
-1 & 0 & 0\\
-0 & 0 & 1
+r_{11} & r_{12} & 0\\
+r_{21} & r_{22} & 0
 \end{array}\right]\left[\begin{array}{c}
 -a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
 0\\
@@ -43299,39 +43389,88 @@ a_{3}w^{-1}s\left(y\right)
 
 \end_inset
 
-The top row dies; that's good.
- The middle row gives
+The top row was already taken care of.
+ Avoid the busywork by killing it, and then killing everything that multiple
+ to zero.
+ This leaves 
 \begin_inset Formula 
 \[
-\beta a_{3}w^{-1}S_{1}\left(y\right)=-a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\beta\left[\begin{array}{cc}
+r_{22} & 0\\
+0 & 1
+\end{array}\right]\left[\begin{array}{c}
+a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
+\end{array}\right]=\left[\begin{array}{c}
+1\\
+1
+\end{array}\right]\left[\begin{array}{c}
+a_{3}w^{-1}s\left(y\right)\end{array}\right]-\left[\begin{array}{c}
+r_{11}\\
+r_{21}
+\end{array}\right]\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\end{array}\right]
 \]
 
 \end_inset
 
-The bottom row gives 
+Multiplying out,
 \begin_inset Formula 
 \[
-\beta a_{2}=a_{3}w^{-1}
+\beta\left[\begin{array}{c}
+r_{22}a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
+\end{array}\right]=\left[\begin{array}{c}
+\begin{array}{c}
+a_{3}w^{-1}s\left(y\right)\end{array}\\
+\begin{array}{c}
+a_{3}w^{-1}s\left(y\right)\end{array}
+\end{array}\right]-\left[\begin{array}{c}
+r_{11}a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+r_{21}a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{array}\right]
 \]
 
 \end_inset
 
-Well, lets hope that this bottom row does not contradict the eigenvalue
- eqn.
- ...
- Except that it does.
- Aieee!
+It would appear that there is a common solution only if the uppwer and lower
+ row are multiples of one-another.
+ This requires
+\begin_inset Formula 
+\[
+r_{21}\left(w\beta r_{22}a_{2}s\left(y\right)-a_{3}s\left(y\right)\right)=r_{11}a_{3}\left(\beta S_{1}\left(y\right)-s\left(y\right)\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The eigenvector eqn is 
+But the erlier constraint gave 
+\begin_inset Formula $a_{3}=\beta wr_{12}a_{2}$
+\end_inset
+
+, so 
 \begin_inset Formula 
 \[
-0=\left[D-\beta I\right]R\left[\begin{array}{c}
-a_{1}\\
-a_{2}w^{-1}\\
-a_{3}w^{-2}
-\end{array}\right]
+r_{21}\left(r_{22}-r_{12}\right)s\left(y\right)=r_{11}r_{12}\left(\beta S_{1}\left(y\right)-s\left(y\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The sticky wicket is that 
+\begin_inset Formula $S_{1}\left(y\right)=s\left(y\right)+ws\left(T_{\beta}\left(y\right)\right)$
+\end_inset
+
+ which forces
+\begin_inset Formula 
+\[
+r_{21}\left(r_{22}-r_{12}\right)s\left(y\right)=r_{11}r_{12}\left(s\left(y\right)\left(\beta-1\right)+ws\left(T_{\beta}\left(y\right)\right)\right)
 \]
 
 \end_inset
@@ -43339,28 +43478,93 @@ a_{3}w^{-2}
 or
 \begin_inset Formula 
 \[
-0=\left[\begin{array}{ccc}
--\beta & 0 & 1\\
-1 & -\beta & 1\\
-0 & 1 & 1-\beta
-\end{array}\right]\left[\begin{array}{c}
-a_{1}\\
-a_{3}w^{-2}\\
-a_{2}w^{-1}
-\end{array}\right]
+\left[r_{21}\left(r_{22}-r_{12}\right)-r_{11}r_{12}\left(\beta-1\right)\right]s\left(y\right)=r_{11}r_{12}ws\left(T_{\beta}\left(y\right)\right)
 \]
 
 \end_inset
 
-which is solved by
+which is unsolvable for general 
+\begin_inset Formula $s$
+\end_inset
+
+ unless 
+\begin_inset Formula $r_{12}=r_{21}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{11}=r_{22}=1$
+\end_inset
+
+.
+ However, this snowballs in all the wrong ways, forcing 
+\begin_inset Formula $a_{3}=0$
+\end_inset
+
+.
+ The eigenvalue equation then implies that 
+\begin_inset Formula $a_{1}=a_{2}=0$
+\end_inset
+
+ so we conclude that this is unsolvable, unless we accept a self-similar
+ 
+\begin_inset Formula $s$
+\end_inset
+
+ that solves
 \begin_inset Formula 
 \[
-a_{2}=a_{1}w\beta\qquad\mbox{and}\qquad a_{3}=a_{1}w^{2}\frac{1+\beta}{\beta}
+Ks\left(y\right)=s\left(\beta y\right)
 \]
 
 \end_inset
 
+for some constant 
+\begin_inset Formula $K$
+\end_inset
 
+.
+ This has no general form, but setting 
+\begin_inset Formula $s\left(y\right)=y^{p}$
+\end_inset
+
+ forces 
+\begin_inset Formula $K=\beta^{p}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{align*}
+r_{11}r_{12}w\beta^{p} & =r_{21}\left(r_{22}-r_{12}\right)-r_{11}r_{12}\left(\beta-1\right)\\
+r_{11}r_{12}\left(w\beta^{p}+\beta-1\right) & =r_{21}\left(r_{22}-r_{12}\right)
+\end{align*}
+
+\end_inset
+
+Is this solvable? Well, 
+\begin_inset Formula $r_{11}=r_{22}=\cos\theta$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{12}=-r_{21}=\sin\theta$
+\end_inset
+
+ so
+\begin_inset Formula 
+\[
+w\beta^{p}+\beta=\frac{r_{12}}{r_{11}}=\tan\theta
+\]
+
+\end_inset
+
+which is solvable for any 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
