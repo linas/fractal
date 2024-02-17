@@ -43208,24 +43208,102 @@ R=\left[\begin{array}{ccc}
 r_{11} & 0 & 0\\
 r_{21} & r_{22} & r_{23}\\
 0 & r_{32} & 0
-\end{array}\right]\qquad BR=\left[\begin{array}{ccc}
-0 & r_{32} & 0\\
-0 & r_{32} & 0\\
-0 & r_{32} & 0
-\end{array}\right]\qquad CR=\left[\begin{array}{ccc}
-0 & 0 & 0\\
-r_{11} & 0 & 0\\
-r_{21} & r_{22} & r_{23}
 \end{array}\right]
 \]
 
 \end_inset
 
-Multiply things out explicitly.
+Next, verifying that 
+\begin_inset Formula $R^{T}R=I$
+\end_inset
+
+ imposes additional constraints.
+ Explicitly verifying,
+\begin_inset Formula 
+\begin{align*}
+R^{T}R=I & =\left[\begin{array}{ccc}
+r_{11} & r_{21} & 0\\
+0 & r_{22} & r_{32}\\
+0 & r_{23} & 0
+\end{array}\right]\left[\begin{array}{ccc}
+r_{11} & 0 & 0\\
+r_{21} & r_{22} & r_{23}\\
+0 & r_{32} & 0
+\end{array}\right]\\
+ & =\left[\begin{array}{ccc}
+r_{11}^{2}+r_{21}^{2} & r_{21}r_{22} & r_{23}r_{21}\\
+r_{21}r_{22} & \;r_{22}^{2}+r_{32}^{2}\; & r_{23}r_{22}\\
+r_{21}r_{23} & r_{22}r_{23} & r_{23}^{2}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+which is solved by
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+That leaves behind
+\begin_inset Formula 
+\[
+BR=\left[\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 1 & 0\\
+0 & 1 & 0
+\end{array}\right]\qquad\mbox{and}\qquad CR=\left[\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & 0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+Finally,
+\begin_inset Formula 
+\[
+\beta\left[\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{array}\right]\left[\begin{array}{c}
+0\\
+a_{2}s\left(y\right)\\
+a_{3}w^{-1}S_{1}\left(y\right)
+\end{array}\right]=\left[\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 1 & 0\\
+0 & 1 & 0
+\end{array}\right]\left[\begin{array}{c}
+-a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+a_{3}w^{-1}s\left(y\right)
+\end{array}\right]+\left[\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & 0 & 1
+\end{array}\right]\left[\begin{array}{c}
+-a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+a_{3}w^{-1}s\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+The top row dies; that's good.
  The middle row gives
 \begin_inset Formula 
 \[
-\beta r_{22}a_{2}s\left(y\right)+\beta r_{23}a_{3}w^{-1}S_{1}\left(y\right)=-r_{11}a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\beta a_{3}w^{-1}S_{1}\left(y\right)=-a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)
 \]
 
 \end_inset
@@ -43233,94 +43311,13 @@ Multiply things out explicitly.
 The bottom row gives 
 \begin_inset Formula 
 \[
-\beta r_{32}a_{2}s\left(y\right)=-r_{21}a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)+r_{23}a_{3}w^{-1}s\left(y\right)
+\beta a_{2}=a_{3}w^{-1}
 \]
 
 \end_inset
 
-Either row can be set to zero, without ruining the other.
- One or the othre must be set to zero, as it looks like their solution set
- is mutually exclusive.
- Thus, we have
-\begin_inset Formula 
-\[
-R=\left[\begin{array}{ccc}
-1 & 0 & 0\\
-0 & 1 & 0\\
-0 & 0 & 0
-\end{array}\right]\qquad\mbox{or}\qquad R=\left[\begin{array}{ccc}
-0 & 0 & 0\\
-1 & 0 & 0\\
-0 & 1 & 0
-\end{array}\right]
-\]
-
-\end_inset
-
-will work.
- This implies
-\begin_inset Formula 
-\[
-R^{T}DR=\left[\begin{array}{ccc}
-0 & 0 & 1\\
-1 & 0 & 1\\
-0 & 0 & 0
-\end{array}\right]\qquad\mbox{or}\qquad R^{T}DR=\left[\begin{array}{ccc}
-0 & 0 & 0\\
-0 & 1 & 0\\
-0 & 1 & 0
-\end{array}\right]
-\]
-
-\end_inset
-
-The eigenvector eqn to be solved is
-\begin_inset Formula 
-\[
-0=\left[R^{T}DR-\beta I\right]\left[\begin{array}{c}
-a_{1}\\
-a_{2}w^{-1}\\
-a_{3}w^{-2}
-\end{array}\right]
-\]
-
-\end_inset
-
-so
-\begin_inset Formula 
-\[
-E=\left[\begin{array}{ccc}
--\beta & 0 & 1\\
-1 & -\beta & 1\\
-0 & 0 & -\beta
-\end{array}\right]\qquad\mbox{or}\qquad E=\left[\begin{array}{ccc}
--\beta & 0 & 0\\
-0 & 1-\beta & 0\\
-0 & 1 & -\beta
-\end{array}\right]
-\]
-
-\end_inset
-
-This second form is solved only by 
-\begin_inset Formula $a_{1}=0$
-\end_inset
-
- and we certainly do not want that.
- Meanwhile, the first form forces 
-\begin_inset Formula $a_{3}=0$
-\end_inset
-
- but this again implies that 
-\begin_inset Formula $a_{1}=0$
-\end_inset
-
- and thence 
-\begin_inset Formula $a_{2}=0$
-\end_inset
-
- and it is a total melt-down.
- It seems that there are no solutions!?
+Well, lets hope that this bottom row does not contradict the eigenvalue
+ eqn.
 \end_layout
 
 \begin_layout Subsubsection
