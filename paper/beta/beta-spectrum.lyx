@@ -32102,6 +32102,628 @@ The
 .
 \end_layout
 
+\begin_layout Subsection
+Coherent States
+\end_layout
+
+\begin_layout Standard
+It is possible to construct coherent-state eigenfunctions satisfying 
+\begin_inset Formula $\mathcal{L}_{\beta}f=wf$
+\end_inset
+
+ for any complex 
+\begin_inset Formula $w$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|w\right|<1$
+\end_inset
+
+.
+ By 
+\begin_inset Quotes eld
+\end_inset
+
+coherent state
+\begin_inset Quotes erd
+\end_inset
+
+ it is meant a fractal function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\psi_{w}\left(x\right)=\sum_{k=0}^{\infty}w^{k}s\left(T_{\beta}^{k}\left(x\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
+\end_inset
+
+ is a sawtooth, and 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ is more-or-less any function on the interval 
+\begin_inset Formula $0\le x\le1/2$
+\end_inset
+
+; it is constrained by recursion on 
+\begin_inset Formula $1/2\le x\le\beta/2$
+\end_inset
+
+.
+ This construction uses the framework established above.
+ It is relatively straight-foreward, although it has a few difficult turns
+ that leave open it's general structure.
+\end_layout
+
+\begin_layout Standard
+The construction appears to yeild a family of functions 
+\begin_inset Formula $f$
+\end_inset
+
+ that should be able to form a countable orthonormal basis, for any fixed
+ 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ This has some intersting ramifications.
+ In the case of 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+ the Bernoulli shift, this basis has been obtained long ago.
+ An interesting property is that
+\end_layout
+
+\begin_layout Standard
+In particular, this means that it might be possible to construct
+\end_layout
+
+\begin_layout Subsubsection
+General case
+\end_layout
+
+\begin_layout Standard
+The general case, for any order 
+\begin_inset Formula $\nu$
+\end_inset
+
+, can be sketched as below.
+ The twizzled form is
+\begin_inset Formula 
+\[
+\beta\lambda\left[\begin{array}{c}
+f_{1}\left(y\right)\\
+\vdots\\
+f_{\nu}\left(y\right)
+\end{array}\right]=B\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}\right)\\
+\vdots\\
+f_{\nu}\left(\frac{y}{\beta}\right)
+\end{array}\right]+C\left[\begin{array}{c}
+f_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+\vdots\\
+f_{\nu}\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+Following the structure of the 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case, assume that there is a rotation matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\left[\begin{array}{c}
+f_{1}\left(y\right)\\
+\vdots\\
+f_{\nu}\left(y\right)
+\end{array}\right]=R\left[\begin{array}{c}
+\psi_{1}\left(y\right)\\
+\vdots\\
+\psi_{\nu}\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+In index notation, this is 
+\begin_inset Formula $f_{k}\left(y\right)=R_{kj}a_{j}\psi_{j}\left(y\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\psi_{k}\left(y\right)=\psi\left(T_{\beta}^{k-1}\left(y\right)\right)$
+\end_inset
+
+.
+ Several identities will be needed.
+ One is
+\begin_inset Formula 
+\begin{align*}
+\psi\left(T_{\beta}^{k}\left(y\right)\right) & =\sum_{n=0}^{\infty}w^{n}s\left(T_{\beta}^{n+k}\left(y\right)\right)\\
+ & =\frac{1}{w^{k}}\left[\psi\left(y\right)-\sum_{n=0}^{k-1}w^{n}s\left(T_{\beta}^{n}\left(y\right)\right)\right]
+\end{align*}
+
+\end_inset
+
+Also, for 
+\begin_inset Formula $k>0$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+\psi\left(T_{\beta}^{k}\left(\frac{y}{\beta}\right)\right)=\psi\left(T_{\beta}^{k}\left(\frac{y}{\beta}+\frac{1}{2}\right)\right)=\psi\left(T_{\beta}^{k-1}\left(y\right)\right)
+\]
+
+\end_inset
+
+while for 
+\begin_inset Formula $k=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\psi\left(\frac{y}{\beta}\right) & =s\left(\frac{y}{\beta}\right)+w\psi\left(y\right)\\
+\psi\left(\frac{y}{\beta}+\frac{1}{2}\right) & =s\left(\frac{y}{\beta}+\frac{1}{2}\right)+w\psi\left(y\right)
+\end{align*}
+
+\end_inset
+
+Plugging through, this gives
+\begin_inset Formula 
+\[
+\beta\lambda R\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu}\left(y\right)
+\end{array}\right]=BR\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu-1}\left(y\right)
+\end{array}\right]+CR\left[\begin{array}{c}
+a_{1}\psi_{1}\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu-1}\left(y\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+Setting 
+\begin_inset Formula $D=B+C$
+\end_inset
+
+ (as before) and continuing,
+\begin_inset Formula 
+\[
+\beta\lambda R\left[\begin{array}{c}
+a_{1}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu}\left(y\right)
+\end{array}\right]=DR\left[\begin{array}{c}
+a_{1}w\psi_{1}\left(y\right)\\
+a_{2}\psi_{1}\left(y\right)\\
+\vdots\\
+a_{\nu}\psi_{\nu-1}\left(y\right)
+\end{array}\right]+BR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+\vdots\\
+0
+\end{array}\right]+CR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+\vdots\\
+0
+\end{array}\right]
+\]
+
+\end_inset
+
+Shorten the notation for the recurence relation:
+\begin_inset Formula 
+\begin{align*}
+\psi_{k+1}\left(y\right)=\psi\left(T_{\beta}^{k}\left(y\right)\right) & =\frac{1}{w^{k}}\left[\psi\left(y\right)-\sum_{n=0}^{k-1}w^{n}s\left(T_{\beta}^{n}\left(x\right)\right)\right]\\
+ & =\frac{1}{w^{k}}\left[\psi\left(y\right)-S_{k-1}\left(y\right)\right]
+\end{align*}
+
+\end_inset
+
+and then plug through and collect distinct terms.
+ The 
+\begin_inset Formula $\psi$
+\end_inset
+
+ terms give
+\begin_inset Formula 
+\[
+\beta\lambda R\left[\begin{array}{c}
+a_{1}\\
+a_{2}w^{-1}\\
+\vdots\\
+a_{\nu}w^{1-\nu}
+\end{array}\right]=wDR\left[\begin{array}{c}
+a_{1}\\
+a_{2}w^{-1}\\
+\vdots\\
+a_{\nu}w^{1-\nu}
+\end{array}\right]
+\]
+
+\end_inset
+
+which has the form of an eigenvalue equation.
+ The solution is given by
+\begin_inset Formula 
+\[
+\det\left[wD-\beta\lambda I\right]=0
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $\det\left[D-\beta I\right]=0$
+\end_inset
+
+ conclude that 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+.
+ Note that this is independent of the matrix 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The generating terms, those having only 
+\begin_inset Formula $s$
+\end_inset
+
+ in them, give
+\begin_inset Formula 
+\[
+\beta R\left[\begin{array}{c}
+0\\
+a_{2}S_{0}\left(y\right)\\
+\vdots\\
+a_{\nu}w^{2-\nu}S_{\nu-2}\left(y\right)
+\end{array}\right]=DR\left[\begin{array}{c}
+0\\
+0\\
+a_{3}w^{-1}S_{0}\left(y\right)\\
+\vdots\\
+a_{\nu}w^{2-\nu}S_{\nu-3}\left(y\right)
+\end{array}\right]-BR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}\right)\\
+0\\
+\vdots\\
+0
+\end{array}\right]-CR\left[\begin{array}{c}
+a_{1}s\left(\frac{y}{\beta}+\frac{1}{2}\right)\\
+0\\
+\vdots\\
+0
+\end{array}\right]
+\]
+
+\end_inset
+
+The goal is to find a rotation matrix that allows the above to be solved.
+ The rotation matrix has 
+\begin_inset Formula $\nu\left(\nu-1\right)/2$
+\end_inset
+
+ free parameters, whereas the above provides only 
+\begin_inset Formula $\nu$
+\end_inset
+
+ constraints.
+ This would appear to allow for a fair amount of freedom.
+\end_layout
+
+\begin_layout Standard
+An additional constraint is that the desired form requires a rotation 
+\begin_inset Formula $R$
+\end_inset
+
+ that keeps the 
+\begin_inset Formula $s\left(\frac{y}{\beta}+\frac{1}{2}\right)$
+\end_inset
+
+ term alive, so that it can be used, just as in the previous 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+ cases, to get an equation of the form
+\begin_inset Formula 
+\[
+s\left(\frac{y}{\beta}+\frac{1}{2}\right)=\sum_{k}c_{k}s\left(\beta^{k}y\right)
+\]
+
+\end_inset
+
+for some constants 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $s\left(x\right)=g\left(x\mod\beta/2\right)$
+\end_inset
+
+, the search is limited to 
+\begin_inset Formula $0\le y\le\beta/2$
+\end_inset
+
+.
+ The left-hand side maps 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[1/2,\beta/2\right]$
+\end_inset
+
+ and thus can be used to cancel out any behavior at all, including the right-han
+d side.
+ Thus, it is sufficient to set
+\begin_inset Formula 
+\[
+g\left(y\right)=\begin{cases}
+h\left(y\right) & \mbox{for }0\le y\le\frac{1}{2}\\
+-\sum_{k}c_{k}h\left(\beta^{k+1}\left(y-\frac{1}{2}\right)\right) & \mbox{for }\frac{1}{2}<y\le\frac{\beta}{2}
+\end{cases}
+\]
+
+\end_inset
+
+This works for any 
+\begin_inset Formula $h$
+\end_inset
+
+ whatsoever, unless 
+\begin_inset Formula $h$
+\end_inset
+
+ is constrained in some way, as it was for the 
+\begin_inset Formula $n=3$
+\end_inset
+
+ solution.
+ It is not clear if the general form will be similarly constrained or not.
+ Still, a one-parameter family of solutions were obtained (for fixed 
+\begin_inset Formula $w$
+\end_inset
+
+), which is plenty enough to develop a countable orthonormal basis (for
+ fixed 
+\begin_inset Formula $w$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Presuming such a rotation matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ can be found, this gives a family of solutions to 
+\begin_inset Formula $\mathcal{L}_{\beta}f=wf$
+\end_inset
+
+ for any complex 
+\begin_inset Formula $w$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|w\right|<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Commentary
+\end_layout
+
+\begin_layout Standard
+This wraps up the general case.
+ The 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+ cases were relatively straight-forward; the 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case caused much greif, but was eventually solvable.
+ It seems clear that all three cases will provide a complete set of orthonormal
+ solutions to 
+\begin_inset Formula $\mathcal{L}_{\beta}f=wf$
+\end_inset
+
+ for any complex 
+\begin_inset Formula $w$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|w\right|<1$
+\end_inset
+
+.
+ Explicit formulas for this set remain out of reach with the given toolset.
+ Clearly, the 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+ cases could be brute-forced, if desired.
+\end_layout
+
+\begin_layout Standard
+It is not hard to hypothesize that the required form of 
+\begin_inset Formula $R$
+\end_inset
+
+ always exists.
+ The initial hypothesis that 
+\begin_inset Formula $R$
+\end_inset
+
+ was the identity, and that 
+\begin_inset Formula $R$
+\end_inset
+
+ was a permutation matrix, were both broken by the 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case.
+ In general, 
+\begin_inset Formula $R$
+\end_inset
+
+ could be taken to be unitary, instead of orthogonal, but nothing in the
+ 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case even whispered that this extra freedom was needed.
+ Complex conjugates never appear.
+\end_layout
+
+\begin_layout Standard
+The coherent states provide a general solution.
+ Presumably, this aligns with the piece-wise polynomial solutions, given
+ earlier.
+ This requires a review of what happens at 
+\begin_inset Formula $w=\beta^{-k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The coherent state construction is performed for the countable set of finite
+ orbits, enumerated by 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\end_inset
+
+.
+ These give a collection of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ that are dense in the interval 
+\begin_inset Formula $1\le\beta\le2$
+\end_inset
+
+.
+ Can the construction be extended to all 
+\begin_inset Formula $\beta$
+\end_inset
+
+? Doing so would require some way of obtaining the interval inclusion map
+ that the 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ matrixes encode.
+ This inclusion map is implicit in the sofic shift, but none of the above
+ constructions work at an abstraction level that was appropriate for exposing
+ it.
+ There's some Borel algebra here, but the above calculations were not sufficient
+ to make it explicit.
+\end_layout
+
+\begin_layout Standard
+There are unexplored tools.
+ For example, most real numbers 
+\begin_inset Formula $x$
+\end_inset
+
+ have an uncountable number of distinct 
+\begin_inset Formula $\beta$
+\end_inset
+
+-expansions for most values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ This is the opposite of the so-called 
+\begin_inset Quotes eld
+\end_inset
+
+univoke
+\begin_inset Quotes erd
+\end_inset
+
+ expansions.
+ Nowhere in the above constructions was this fact made use of, or touched
+ upon.
+ Yet it is implicitly there: the coherent state is iterating with 
+\begin_inset Formula $T_{\beta}^{k}\left(x\right)$
+\end_inset
+
+ but it was never questioned or debated that this may result in different
+ iterates, and thus different coherent states.
+ This is bad: it was implicitly assumed that the coherent state is unique
+ and well-defined, whereas perhaps each coherent state should be taken to
+ be an uncountable family of such states.
+ Whether they all come together in the end, or remain distinct, is entirely
+ unclear.
+\end_layout
+
+\begin_layout Standard
+Clearly, we've pried the lid off of a jar, and peered inside.
+ It seems to hold a bottomless collection of tasks, each engendering new
+ and ever-more-complex hypothesis.
+ Of course, this is the way of mathematics, and one must be careful how
+ one spends one's time on Earth.
+ Still, it is all a bit un-nerving.
+ 
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
