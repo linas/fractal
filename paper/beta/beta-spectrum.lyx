@@ -26323,6 +26323,152 @@ Decaying Eigenfunctions
 \end_layout
 
 \begin_layout Standard
+This section examines the general set of solutions to 
+\begin_inset Formula $\mathcal{L}_{\beta}\psi=\lambda\psi$
+\end_inset
+
+ for 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ Two general classes of solutions are presented.
+ One consists of a discrete spectrum of (piece-wise) polynomial eigenfunctions,
+ occurring at the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values associated with the finite orbits.
+ The other class consists of (piece-wise) fractal eigenfunctions, which
+ can be constructed for any complex 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ That is, the continous spectrum.
+\end_layout
+
+\begin_layout Standard
+The discrete spectrum is closely analogous to the discrete spectrum of the
+ polynomial eigenfunctions of the Bernoulli operator.
+ Recall that the Bernoulli operator is the beta transform, for 
+\begin_inset Formula $\beta=2$
+\end_inset
+
+.
+ It has a discrete spectrum with 
+\begin_inset Formula $\lambda=2^{-n}$
+\end_inset
+
+ for all non-negative integers 
+\begin_inset Formula $n$
+\end_inset
+
+; the corresponding eigenfunctions are the Bernoulli polynomials.
+ The Bernoulli polynomials are orthonormal to one-another.
+ In the 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ limit, they converge to either 
+\begin_inset Formula $\sin2\pi x$
+\end_inset
+
+ or 
+\begin_inset Formula $\cos2\pi x$
+\end_inset
+
+, depending on whether 
+\begin_inset Formula $n$
+\end_inset
+
+ is even or odd.
+ Both of these trig functions, and any function odd about 1/2 lie in the
+ kernel of the operator.
+\end_layout
+
+\begin_layout Standard
+The Bernoulli operator also has a continuous spectrum that has a countable
+ number of distinct eigenfunctions for each 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-B04"
+literal "false"
+
+\end_inset
+
+ As these all share the same eigenvalue, one is free to choose the basis
+ as desired.
+ There are two generic possibilities.
+ In one choice, the basis functions are square integrable, but are not different
+iable at the dyadic rationals.
+ These are built up as coherent states of underlying periodic waves.
+ They resemble the blancmange curve; the periodic spectrum appears here,
+ in the same way that the blancmange curve becomes a parabola for a specific
+ paramter value.
+\end_layout
+
+\begin_layout Standard
+A different choice of basis provides eigenfunctions that are smooth over
+ the open interval 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+ but diverge at 
+\begin_inset Formula $x=0,1$
+\end_inset
+
+ and are thus not square-integrable, due to these divergent endpoints.
+ Equivalently, they are not smooth at 
+\begin_inset Formula $x=0,1$
+\end_inset
+
+.
+ The discrete spectrum emerges as those special values of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ for which the endpoints are finite, thus both smooth and square-integrable.
+ Explicit constructins of both sets of basis functions, and the transformation
+ between them, is given in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-B04"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This section presents explicit analogous solutions for the beta operator,
+ for the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values corresponding to finite orbits.
+ That is, both kinds of eigenfunctions are presented: piecewise-polynomial
+ eigenfunctions, and fractal (coherent state) eigenfunctions.
+ The development below is long and verbose, but never rises above the complexity
+ level of basic algebra.
+ There does not seem to be much need for abstract conceptualization here;
+ it is mostly a matter of turning the crank and verifying identities.
+\end_layout
+
+\begin_layout Subsection
+General Framework
+\end_layout
+
+\begin_layout Standard
 When an orbit is finite, of order 
 \begin_inset Formula $\nu$
 \end_inset
@@ -26427,8 +26573,8 @@ Ruminations
 \end_layout
 
 \begin_layout Standard
-This raises an overall bugaboo: what is the appropriate balance between
- 
+The development of this section raises an overall bugaboo: what is the appropria
+te balance between 
 \begin_inset Quotes eld
 \end_inset
 
@@ -31669,8 +31815,8 @@ Well, the the structure of the
  matrices have no strong, easy-to-describe pattern that jumps out.
  It is all more subtle.
  There are several patterns in the above that are needed for later for the
- generalized coherent (fractal) solution described in a later section, so
- these need to be exposed.
+ generalized coherent (fractal) solution described in the next section,
+ so these need to be exposed.
 \end_layout
 
 \begin_layout Standard
@@ -32177,25 +32323,81 @@ The construction appears to yeild a family of functions
 \begin_inset Formula $\beta=2$
 \end_inset
 
- the Bernoulli shift, this basis has been obtained long ago.
- An interesting property is that
-\end_layout
+, the Bernoulli shift, this basis has been obtained long ago.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-B04"
+literal "false"
 
-\begin_layout Standard
-In particular, this means that it might be possible to construct
+\end_inset
+
+ Since the collection of basis functions is countable, the space is quite
+ large.
+ It includes smooth functions, infinitely differentiable on the open interval
+ 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+, but divergent at the endpoints.
+ These also form a countable basis, which can be explicitly exhibited.
+ Furthermore the (orthogonal) transform, taking the one basis into the other,
+ can also be exhibited.
+ Explicit expressions are given in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-B04"
+literal "false"
+
+\end_inset
+
+.
+ No such explicit form is given below.
+ It is hypothesized to exist, by analogy.
+ However, the manipulations here are sufficiently daunting that an explicit
+ demonstration remains an open problem.
+ There are more than a few open problems that arise, here.
 \end_layout
 
 \begin_layout Subsubsection
-General case
+Construction
 \end_layout
 
 \begin_layout Standard
-The general case, for any order 
+Fixing a self-describint polynomial 
+\begin_inset Formula $p_{n}\left(\beta\right)=0$
+\end_inset
+
+ fir fixed 
+\begin_inset Formula $n$
+\end_inset
+
+ and order 
 \begin_inset Formula $\nu$
 \end_inset
 
-, can be sketched as below.
- The twizzled form is
+, the construction follows the framework developed above.
+ The solution 
+\begin_inset Formula $f$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathcal{L}_{\beta}f=\lambda f$
+\end_inset
+
+ consists of piece-wise components 
+\begin_inset Formula $f\left(y\right)=f_{k}\left(y\right)$
+\end_inset
+
+, when 
+\begin_inset Formula $y$
+\end_inset
+
+ is restricted to the interval 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+.
+ The interval inclusion maps give the twizzled form
 \begin_inset Formula 
 \[
 \beta\lambda\left[\begin{array}{c}
@@ -32215,11 +32417,8 @@ f_{\nu}\left(\frac{y}{\beta}+\frac{1}{2}\right)
 
 \end_inset
 
-Following the structure of the 
-\begin_inset Formula $n=3$
-\end_inset
-
- case, assume that there is a rotation matrix 
+Each segment is a superposition of coherent states, expressed with a rotation
+ matrix 
 \begin_inset Formula $R$
 \end_inset
 
@@ -32248,7 +32447,64 @@ In index notation, this is
 \end_inset
 
 .
- Several identities will be needed.
+ For the case of 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+, it is possible to obtain a solution with 
+\begin_inset Formula $R$
+\end_inset
+
+ being the identity.
+ For the case 
+\begin_inset Formula $n=3$
+\end_inset
+
+, this is no longer possible, and 
+\begin_inset Formula $R$
+\end_inset
+
+ is non-trivial, and depends on the eigenvalue.
+ It is hypothsized that one can take 
+\begin_inset Formula $R=I$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\beta\apprle1.5$
+\end_inset
+
+, while larger 
+\begin_inset Formula $\beta$
+\end_inset
+
+ values require a non-trivial 
+\begin_inset Formula $R$
+\end_inset
+
+, and may also incur other constraints.
+ The need for 
+\begin_inset Formula $R$
+\end_inset
+
+ arises from the form of the 
+\begin_inset Formula $C$
+\end_inset
+
+ matrix: if it has more than one non-zero entry, then it applies a constraint
+ that must be resolved with a non-trivial 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Several identities are needed.
  One is
 \begin_inset Formula 
 \begin{align*}
@@ -32453,15 +32709,7 @@ An additional constraint is that the desired form requires a rotation
 \begin_inset Formula $s\left(\frac{y}{\beta}+\frac{1}{2}\right)$
 \end_inset
 
- term alive, so that it can be used, just as in the previous 
-\begin_inset Formula $n=1$
-\end_inset
-
- and 
-\begin_inset Formula $n=2$
-\end_inset
-
- cases, to get an equation of the form
+ term alive, so that it can be used to get an equation of the form
 \begin_inset Formula 
 \[
 s\left(\frac{y}{\beta}+\frac{1}{2}\right)=\sum_{k}c_{k}s\left(\beta^{k}y\right)
@@ -32512,12 +32760,41 @@ This works for any
 \begin_inset Formula $h$
 \end_inset
 
- is constrained in some way, as it was for the 
+ is constrained for some other reason.
+ The function 
+\begin_inset Formula $h$
+\end_inset
+
+ can be freely chosen to be anything at all, for the 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+ cases.
+ The 
 \begin_inset Formula $n=3$
 \end_inset
 
- solution.
- It is not clear if the general form will be similarly constrained or not.
+ solution places a constraint on 
+\begin_inset Formula $h$
+\end_inset
+
+; it must be of the form 
+\begin_inset Formula $h\left(y\right)=y^{p}$
+\end_inset
+
+ for any compex number 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ For an explicit solution, and details on this constraint, refer to the
+ accompanying diary.
+ It is not clear when the general form will be similarly constrained or
+ not.
  Still, a one-parameter family of solutions were obtained (for fixed 
 \begin_inset Formula $w$
 \end_inset
@@ -32548,15 +32825,322 @@ Presuming such a rotation matrix
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Example solution for n=1
+\end_layout
+
+\begin_layout Standard
+For the 
+\begin_inset Formula $n=1$
+\end_inset
+
+ case, 
+\begin_inset Formula $p_{1}\left(\beta\right)=\beta^{2}-\beta-1$
+\end_inset
+
+ has a root 
+\begin_inset Formula $\beta=r_{1}=\varphi$
+\end_inset
+
+.
+ The midpoints are 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m_{1}=1/2$
+\end_inset
+
+ so 
+\begin_inset Formula $0<m_{1}<m_{0}<1$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}=\left[0,1/2\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{1}=\left[1/2,m_{0}\right]$
+\end_inset
+
+.
+ The interval inclusion map is given by 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+B=\Theta\left(I_{j}\subseteq LI_{k}\right)=\left[\begin{array}{cc}
+0 & 1\\
+0 & 1
+\end{array}\right]\quad\mbox{and}\quad C=\Theta\left(I_{j}\subseteq RI_{k}\right)=\left[\begin{array}{cc}
+0 & 0\\
+1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+The rotation matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ can be taken to be the identity; it is not needed.
+ Plugging through and cranking gives the solution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\left(y\right)=\begin{cases}
+f_{2}\left(y\right)=w\beta\psi\left(T_{\beta}\left(y\right)\right) & \mbox{for }0\le y\le\frac{1}{2}\\
+f_{1}\left(y\right)=\psi\left(y\right) & \mbox{for }\frac{1}{2}<y\le\frac{\beta}{2}\\
+f_{0}\left(y\right)=0 & \mbox{for }\frac{\beta}{2}<y\le1
+\end{cases}
+\]
+
+\end_inset
+
+In the process of obtaining the above, one finds the constraint
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-w\beta^{2}g\left(y\right)=g\left(\frac{y}{\beta}+\frac{1}{2}\right)
+\]
+
+\end_inset
+
+that must hold for all 
+\begin_inset Formula $0\le y\le\beta/2$
+\end_inset
+
+.
+ Satsifying this constraint is easy.
+ The map takes 
+\begin_inset Formula $\left[0,1/2\right]$
+\end_inset
+
+ to 
+\begin_inset Formula $\left[1/2,\beta/2\right]$
+\end_inset
+
+, and these two intervals are non-overlapping.
+ Thus, it is sufficient to set
+\begin_inset Formula 
+\[
+g\left(y\right)=\begin{cases}
+h\left(y\right) & \mbox{for }0\le y\le\frac{1}{2}\\
+-w\beta^{2}h\left(\beta\left(y-\frac{1}{2}\right)\right) & \mbox{for }\frac{1}{2}<y\le\frac{\beta}{2}
+\end{cases}
+\]
+
+\end_inset
+
+for any 
+\begin_inset Formula $h$
+\end_inset
+
+ whatsoever, and any complex 
+\begin_inset Formula $w$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|w\right|<1$
+\end_inset
+
+.
+ This will give a valid eigenfunction with eigenvalue 
+\begin_inset Formula $\lambda=w$
+\end_inset
+
+.
+ So, for 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+ the golden mean, this provides the general solution.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Verified in beta-xform/coherent/repiece.c and repiece.gplot 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
+Polynomial generators
+\end_layout
+
+\begin_layout Standard
+An interesting case arises, of one wishes 
+\begin_inset Formula $g\left(y\right)$
+\end_inset
+
+ to be smooth over the entire interval 
+\begin_inset Formula $0\le y\le\beta/2$
+\end_inset
+
+.
+ This ends up constraining the spectrum.
+ A few examples.
+\end_layout
+
+\begin_layout Standard
+First consider the form 
+\begin_inset Formula $g\left(x\right)=1$
+\end_inset
+
+.
+ The constraint then forces 
+\begin_inset Formula $w=-1/\beta^{2}$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+This and the linear and quadratic cases verified numerically with beta-xform/coh
+erent/repiece.c and repiece.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The linear form is 
+\begin_inset Formula $g\left(x\right)=x+b$
+\end_inset
+
+, which must satisfy 
+\begin_inset Formula 
+\[
+0=w\beta^{2}\left(y+b\right)+\frac{y}{\beta}+\frac{1}{2}+b
+\]
+
+\end_inset
+
+The linear forrm forces 
+\begin_inset Formula $w=-1/\beta^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $b=-1/2\left(1+w\beta^{2}\right)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+, this reduces to 
+\begin_inset Formula $b=-\left(1+\varphi\right)/2$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The quadratic form is 
+\begin_inset Formula $g\left(x\right)=x^{2}+bx+c$
+\end_inset
+
+ and the constraing forces
+\begin_inset Formula 
+\[
+w=-\frac{1}{\varphi^{4}}=5-3\varphi\qquad b=-\left(\varphi+1\right)\qquad c=\frac{3\varphi+2}{4}
+\]
+
+\end_inset
+
+It appears that this pattern can be followed, thus obtaining an eigenfunction
+ with eigenvalue 
+\begin_inset Formula $w=-1/\beta^{k+2}$
+\end_inset
+
+ for polynomial generators 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ of degree 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
 Commentary
 \end_layout
 
 \begin_layout Standard
-This wraps up the general case.
- The 
+The 
+\begin_inset Formula $n=2$
+\end_inset
+
+ case is very nearly identical to the above.
+ The solution to the 
+\begin_inset Formula $n=3$
+\end_inset
+
+ case can be exhibited (see the diary) but only after much greif.
+ It requires a non-trivial rotation matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ that depends on 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ It also imposes a constraint on 
+\begin_inset Formula $h\left(y\right)$
+\end_inset
+
+, which can no longer be arbitrary, but must have 
+\begin_inset Formula $h\left(y\right)=y^{p}$
+\end_inset
+
+ for arbitrary complex number 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ At any rate, it is solvable.
+\end_layout
+
+\begin_layout Standard
+It is hypothesized that solutions are possible for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The rotation matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ is needed to resolve multiple consraints introduced by the 
+\begin_inset Formula $C$
+\end_inset
+
+ matrix.
+ It seems quite resonable to think that this is always possible, although
+ we have no proof in hand.
+\end_layout
+
+\begin_layout Standard
+The immense freedom in the 
 \begin_inset Formula $n=1$
 \end_inset
 
@@ -32564,13 +33148,12 @@ This wraps up the general case.
 \begin_inset Formula $n=2$
 \end_inset
 
- cases were relatively straight-forward; the 
+ cases, and the one-parameter familiy of solutions for the 
 \begin_inset Formula $n=3$
 \end_inset
 
- case caused much greif, but was eventually solvable.
- It seems clear that all three cases will provide a complete set of orthonormal
- solutions to 
+ case suggests that one can provide a complete set of orthonormal solutions
+ to 
 \begin_inset Formula $\mathcal{L}_{\beta}f=wf$
 \end_inset
 
@@ -32583,8 +33166,7 @@ This wraps up the general case.
 \end_inset
 
 .
- Explicit formulas for this set remain out of reach with the given toolset.
- Clearly, the 
+ Explicit formulas for the 
 \begin_inset Formula $n=1$
 \end_inset
 
@@ -32593,45 +33175,18 @@ This wraps up the general case.
 \end_inset
 
  cases could be brute-forced, if desired.
-\end_layout
-
-\begin_layout Standard
-It is not hard to hypothesize that the required form of 
-\begin_inset Formula $R$
+ However, explicit formulas for this set for general 
+\begin_inset Formula $n$
 \end_inset
 
- always exists.
- The initial hypothesis that 
-\begin_inset Formula $R$
-\end_inset
-
- was the identity, and that 
-\begin_inset Formula $R$
-\end_inset
-
- was a permutation matrix, were both broken by the 
-\begin_inset Formula $n=3$
-\end_inset
-
- case.
- In general, 
-\begin_inset Formula $R$
-\end_inset
-
- could be taken to be unitary, instead of orthogonal, but nothing in the
- 
-\begin_inset Formula $n=3$
-\end_inset
-
- case even whispered that this extra freedom was needed.
- Complex conjugates never appear.
+ remain out of reach with the given toolset.
 \end_layout
 
 \begin_layout Standard
 The coherent states provide a general solution.
  Presumably, this aligns with the piece-wise polynomial solutions, given
  earlier.
- This requires a review of what happens at 
+ Understanding how these align requires a review of what happens at 
 \begin_inset Formula $w=\beta^{-k}$
 \end_inset
 
@@ -32690,6 +33245,13 @@ There are unexplored tools.
 \end_inset
 
 .
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sidorov03"
+literal "true"
+
+\end_inset
+
  This is the opposite of the so-called 
 \begin_inset Quotes eld
 \end_inset
@@ -32699,6 +33261,13 @@ univoke
 \end_inset
 
  expansions.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeVries06"
+literal "true"
+
+\end_inset
+
  Nowhere in the above constructions was this fact made use of, or touched
  upon.
  Yet it is implicitly there: the coherent state is iterating with 
