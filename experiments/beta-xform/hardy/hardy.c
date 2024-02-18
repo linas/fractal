@@ -36,7 +36,14 @@ int main(int argc, char* argv[])
 		fprintf(stderr, "Usage: %s <index>\n", argv[0]);
 		exit(1);
 	}
-	long idx = atol(argv[1]);
+	long aidx = atol(argv[1]);
+	long idx = aidx;
+
+	while (false == valid_gold_index(idx))
+		idx++;
+
+	if (idx != aidx)
+		fprintf(stderr, "Warning: bump %ld to %ld\n", aidx, idx);
 
 	unsigned long tno = 2UL * idx + 1UL;
 	int order = bitlen(tno);
@@ -49,7 +56,7 @@ int main(int argc, char* argv[])
 		tno >>= 1;
 	}
 
-	printf("#\n# Order=%d bitseq= ", order);
+	printf("#\n# Index=%ld Order=%d bitseq= ", idx, order);
 	for (int i=0; i<order; i++)
 		printf("%d", bitseq[i]);
 	printf("\n");
