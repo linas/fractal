@@ -14,10 +14,10 @@
 
 complex hardy(const char* bitseq, int order, double beta, double angle)
 {
-	complex zee = cexp(2.0 * M_PI * angle) / beta;
+	complex zee = cexp(I * 2.0 * M_PI * angle) / beta;
 
 	complex zn = 1.0;
-	double sum = 0.0;
+	complex sum = 0.0;
 	for (int i=0; i< order; i++)
 	{
 		if (bitseq[i]) sum -= zn;
