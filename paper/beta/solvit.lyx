@@ -37569,7 +37569,7 @@ endgroup
 \end_layout
 
 \begin_layout Standard
-Well, the the structure of the 
+The structure of the 
 \begin_inset Formula $B$
 \end_inset
 
@@ -37579,13 +37579,7 @@ Well, the the structure of the
 
  matrices have no strong, easy-to-describe pattern that jumps out.
  It is all more subtle.
- There are several patterns in the above that are needed for later for the
- generalized coherent (fractal) solution described in a later section, so
- these need to be exposed.
-\end_layout
-
-\begin_layout Standard
-First, some general comments.
+ First, some general comments.
  These all follow from the nature of the interval inclusions, and are fairly
  easily derived.
 \end_layout
@@ -37666,7 +37660,7 @@ The top row of
 \end_layout
 
 \begin_layout Itemize
-The following is always true: 
+It is always the case that 
 \begin_inset Formula $B\left(\nu,\nu\right)=1$
 \end_inset
 
@@ -38037,15 +38031,10 @@ Each matrix
 \end_inset
 
  can be taken to be the adjacency matrix for a graph.
- These are shown below.
- 
+ These are shown below; they show how intervals mix into one-another.
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace defskip
-\end_inset
-
-
 \begin_inset Note Note
 status collapsed
 
@@ -38110,11 +38099,11 @@ arraycolsep}{0.5pt}}
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="13" columns="4">
-<features headBottomDL="true" tabularvalignment="middle">
+<features islongtable="true" longtabularalignment="center">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top" width="0pt">
 <column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
 <row endhead="true">
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -38203,7 +38192,7 @@ diagram
 \begin_inset Graphics
 	filename graph-1.eps
 	lyxscale 50
-	width 20col%
+	width 18col%
 	BoundingBox 0bp 0bp 272bp 94bp
 
 \end_inset
@@ -38361,7 +38350,7 @@ diagram
 \begin_inset Graphics
 	filename graph-4.eps
 	lyxscale 50
-	width 40col%
+	width 45col%
 
 \end_inset
 
@@ -38414,7 +38403,7 @@ diagram
 \begin_inset Graphics
 	filename graph-6.eps
 	lyxscale 50
-	width 40col%
+	width 45col%
 
 \end_inset
 
@@ -38464,6 +38453,13 @@ diagram
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename graph-7.eps
+	lyxscale 50
+	width 45col%
+
+\end_inset
+
 
 \end_layout
 
@@ -38511,6 +38507,13 @@ diagram
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename graph-8.eps
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
 
 \end_layout
 
@@ -38558,6 +38561,13 @@ diagram
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename graph-10.eps
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
 
 \end_layout
 
@@ -38605,6 +38615,13 @@ diagram
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename graph-12.eps
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
 
 \end_layout
 
@@ -38652,6 +38669,13 @@ diagram
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename graph-13.eps
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
 
 \end_layout
 
@@ -38699,6 +38723,13 @@ diagram
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename graph-14.eps
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
 
 \end_layout
 
@@ -38746,6 +38777,13 @@ diagram
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename graph-15.eps
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
 
 \end_layout
 
@@ -38811,13 +38849,6 @@ endgroup
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Left-moving arrows indicate 
 \begin_inset Formula $LI_{k}\mapsto I_{j}=I_{k}/\beta$
 \end_inset
@@ -38839,6 +38870,8 @@ Left-moving arrows indicate
 
 , this map is always an inclusion (recursively splitting the interval into
  ever-smaller pieces).
+ These in turn are mapped back to the right, eventually creating a set of
+ enpoint mappings that is dense in the unit interval.
  Note also that there is always a map 
 \begin_inset Formula $LI_{\nu-1}\mapsto I_{\nu}$
 \end_inset
@@ -38851,14 +38884,67 @@ Left-moving arrows indicate
 \end_layout
 
 \begin_layout Standard
+Some open questions:
+\end_layout
+
+\begin_layout Itemize
+Why these graphs, and not others?
+\end_layout
+
+\begin_layout Itemize
+Are these somehow the prime graphs, in that all other (measure-preserving)
+ graphs can be constructed from these? For example, all Markovian two-point
+ graphs can be taken as linear combinations of the 
+\begin_inset Formula $n=0$
+\end_inset
+
+ and 
+\begin_inset Formula $n=1$
+\end_inset
+
+ graphs.
+ In this example, 
+\begin_inset Formula $M_{ij}=a\delta_{i1}\delta_{j1}+b\delta_{i2}\delta_{j2}+c\left(\delta_{i1}\delta_{j1}+\delta_{i2}\delta_{j1}+\delta_{i1}\delta_{j2}\right)$
+\end_inset
+
+ represents all possible 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ graphs, where as much material flows into a vertex, as flows out of it.
+ The 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ terms are just the 
+\begin_inset Formula $n=0$
+\end_inset
+
+ graph, while the 
+\begin_inset Formula $c$
+\end_inset
+
+ term is the 
+\begin_inset Formula $n=1$
+\end_inset
+
+ graph.
+ (A Markov normalization additionally requires that 
+\begin_inset Formula $a+c=b+c=1$
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Standard
 Another table (why?):
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace defskip
-\end_inset
-
-
 \begin_inset Note Note
 status collapsed
 
@@ -38923,7 +39009,7 @@ arraycolsep}{0.5pt}}
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="13" columns="7">
-<features headBottomDL="true" tabularvalignment="middle">
+<features islongtable="true" headBottomDL="true" longtabularalignment="center">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top" width="0pt">
 <column alignment="center" valignment="top">
@@ -40340,10 +40426,6 @@ arraycolsep}{5pt}
 endgroup
 \end_layout
 
-\end_inset
-
-
-\begin_inset VSpace defskip
 \end_inset
 
 
