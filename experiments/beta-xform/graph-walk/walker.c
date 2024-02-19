@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 	double beta = golden_beta(idx);
 	printf("# Beta = %f\n", beta);
 
-#define NPTS 1024
+#define NPTS 256
 	double eps = 0.5 / ((double) NPTS);
 	for (int i=0; i< NPTS; i++)
 	{
