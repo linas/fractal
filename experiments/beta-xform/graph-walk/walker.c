@@ -1,6 +1,8 @@
 /*
  * walker.c
- * Graph walker
+ * Graph walker.
+ * This is not (as currently envisioned) going to go anywhere.
+ * Abandoned.
  *
  * Feb 2024
  */
