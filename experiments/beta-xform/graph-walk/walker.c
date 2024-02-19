@@ -15,6 +15,8 @@
 // beta=golden mean.
 double walk(double beta, double eps, double x)
 {
+	double sum = 0.0;
+	// int steps = 0;
 	double pt = 0.5*beta;
 	while (eps < fabs(x))
 	{
@@ -28,11 +30,14 @@ double walk(double beta, double eps, double x)
 
 			// Fall down once.
 			pt /= beta;
+
+			// Relocate
+			sum += pt;
 		}
 		x *= 2.0;
 		x -= floor(x);
 	}
-	return pt;
+	return sum;
 }
 
 // -------------------------------------------------------
@@ -56,7 +61,7 @@ int main(int argc, char* argv[])
 	double beta = golden_beta(idx);
 	printf("# Beta = %f\n", beta);
 
-#define NPTS 256
+#define NPTS 512
 	double eps = 0.5 / ((double) NPTS);
 	for (int i=0; i< NPTS; i++)
 	{
