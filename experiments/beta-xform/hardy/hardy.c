@@ -12,7 +12,11 @@
 
 #include "selfie.c"
 
-complex hardy(const char* bitseq, int order, double beta, double angle)
+// This is a buggy mistake, but an interesting one.  It accidentally
+// reversed the bit-sequence.  oops(z) = z^n+1 - sum_k z^k b_k
+// for the usual bitsequence b_k.  This is evaluated on the circle
+// |z| = 1/beta. It's minorly curious. But whatever.
+complex oops(const char* bitseq, int order, double beta, double angle)
 {
 	complex zee = cexp(I * 2.0 * M_PI * angle) / beta;
 
@@ -24,6 +28,24 @@ complex hardy(const char* bitseq, int order, double beta, double angle)
 		zn *= zee;
 	}
 	sum += zn;
+	return sum;
+}
+
+// The "analytic ergodics" function, E(beta,z) = -1 + sum_n b_n zeta^n
+// is ... surprisingly boring on ring zeta=1 mostly cause of
+// Jentzch theorem, which is just splattering zeros on the rim.
+// So I dunno; what was I thinking?
+complex hardy(const char* bitseq, int order, double angle)
+{
+	complex zee = cexp(I * 2.0 * M_PI * angle);
+
+	complex zn = zee;
+	complex sum = -1.0;
+	for (int i=0; i< order; i++)
+	{
+		if (bitseq[i]) sum += zn;
+		zn *= zee;
+	}
 	return sum;
 }
 
@@ -68,7 +90,8 @@ int main(int argc, char* argv[])
 	for (int i=0; i< NPTS; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) NPTS);
-		complex h = hardy(bitseq, order, beta, x);
+		// complex h = hardy(bitseq, order, x);
+		complex h = oops(bitseq, order, beta, x);
 
 		printf("%d	%f	%f	%f\n", i, x, creal(h), cimag(h));
 	}
