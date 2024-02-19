@@ -25,6 +25,9 @@ double walk(double beta, double eps, double x)
 			// General case requires post-raise fall-downs.
 			while (0.5*beta < pt + 0.5) pt /= beta;
 			pt += 0.5;
+
+			// Fall down once.
+			pt /= beta;
 		}
 		x *= 2.0;
 		x -= floor(x);
