@@ -1,12 +1,13 @@
 /*
  * complex-root.c
  *
- * Compute complex roots.
+ * Compute complex roots of golden polynomial of a given index.
  * Feb 2024
  */
 
 #include "bigzero.c"
 #include "selfie.c"
+#include "metrics.c"
 
 #include <gmp.h>
 #include <math.h>
@@ -55,5 +56,18 @@ int main(int argc, char* argv[])
 		double zphi = phase[i];
 		double r = 1.0/zr;
 		printf("r=%f	1/r= %f	phi= %f\n", r, zr, zphi);
+	}
+
+	for (int i=1; i<order; i++)
+	{
+		double ur = modulus[i-1];
+		double uphi = phase[i-1];
+		double vr = modulus[i];
+		double vphi = phase[i];
+
+		ur /= 2.0;
+		vr /= 2.0;
+		double delt = poincare_iso(ur, uphi, vr, vphi);
+		printf("i=%d delt=%f\n", i, delt);
 	}
 }
