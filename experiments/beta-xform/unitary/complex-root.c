@@ -57,6 +57,11 @@ int main(int argc, char* argv[])
 		double r = 1.0/zr;
 		printf("r=%f	1/r= %f	phi= %f\n", r, zr, zphi);
 	}
+	printf("\n");
+
+	double beta = golden_beta(idx);
+	printf("beta = %f\n", beta);
+	printf("\n");
 
 	for (int i=1; i<order; i++)
 	{
@@ -65,8 +70,8 @@ int main(int argc, char* argv[])
 		double vr = modulus[i];
 		double vphi = phase[i];
 
-		ur /= 2.0;
-		vr /= 2.0;
+		ur /= beta;
+		vr /= beta;
 		double delt = poincare_iso(ur, uphi, vr, vphi);
 		double kdelt = klein_iso(ur, uphi, vr, vphi);
 		printf("i=%d delt=%f klein=%f\n", i, delt, kdelt);
