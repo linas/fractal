@@ -68,6 +68,7 @@ int main(int argc, char* argv[])
 		ur /= 2.0;
 		vr /= 2.0;
 		double delt = poincare_iso(ur, uphi, vr, vphi);
-		printf("i=%d delt=%f\n", i, delt);
+		double kdelt = klein_iso(ur, uphi, vr, vphi);
+		printf("i=%d delt=%f klein=%f\n", i, delt, kdelt);
 	}
 }

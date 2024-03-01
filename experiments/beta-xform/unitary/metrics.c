@@ -25,3 +25,11 @@ double poincare_iso(double ru, double tu, double rv, double tv)
 
 	return delta;
 }
+
+// Assume inputs are in Klein coords
+double klein_iso(double kru, double tu, double krv, double tv)
+{
+	double ru = kru / (1.0 + sqrt(1.0 - kru*kru));
+	double rv = krv / (1.0 + sqrt(1.0 - krv*krv));
+	return poincare_iso(ru, tu, rv, tv);
+}
