@@ -70,8 +70,13 @@ int main(int argc, char* argv[])
 		double vr = modulus[i];
 		double vphi = phase[i];
 
-		ur /= beta;
-		vr /= beta;
+		ur = 1.0 / ur;
+		vr = 1.0 / vr;
+		// ur /= beta;
+		// vr /= beta;
+		ur *= 0.5;
+		vr *= 0.5;
+
 		double delt = poincare_iso(ur, uphi, vr, vphi);
 		double kdelt = klein_iso(ur, uphi, vr, vphi);
 		printf("i=%d delt=%f klein=%f\n", i, delt, kdelt);

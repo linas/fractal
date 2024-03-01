@@ -20,7 +20,7 @@ all: bigun bigfourier poly-four complex-root
 bigun.o: bigun.c bigseries.c bigzero.c
 bigfourier.o: bigfourier.C bigseries.c
 poly-four.o: poly-four.C
-complex-root.o: complex-root.c bigseries.c bigzero.c
+complex-root.o: complex-root.c bigseries.c bigzero.c metrics.c
 
 bigfourier: bigfourier.o $(BRAT)
 poly-four: poly-four.o $(BRAT)
