@@ -63,6 +63,10 @@ int main(int argc, char* argv[])
 
 #if 1
 	// Print leaders
+
+	int upcnt[32];
+	for (int i=0; i<32; i++) upcnt[i] = 0;
+
 	for (int nu = 2; nu< maxord; nu++)
 	{
 		int ntall = 0;
@@ -80,10 +84,21 @@ int main(int argc, char* argv[])
 			int height = bitlen(pheight) - 1;
 			if (0 < height) ntall ++;
 
+			upcnt[nu+height] ++;
+
 			// printf("ord = %d idx = %ld ldr = %ld height=%d\n", nu, i, ldr, height);
 		}
 		printf("ord = %d ntal = %d\n", nu, ntall);
 	}
+
+	printf("\nPopulation at each height:\n");
+	for (int nu = 2; nu< maxord; nu++)
+		printf("ord = %d pop = %d\n", nu, upcnt[nu]);
+
+	printf("\n");
+	for (int nu = 2; nu< maxord; nu++)
+		printf("%d, ", upcnt[nu]);
+	printf("\n");
 	exit(0);
 #endif
 
