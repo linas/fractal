@@ -66,6 +66,8 @@ int main(int argc, char* argv[])
 
 	int upcnt[32];
 	for (int i=0; i<32; i++) upcnt[i] = 0;
+	int zupcnt[32];
+	for (int i=0; i<32; i++) zupcnt[i] = 0;
 
 	for (int nu = 2; nu< maxord; nu++)
 	{
@@ -85,6 +87,8 @@ int main(int argc, char* argv[])
 			if (0 < height) ntall ++;
 
 			upcnt[nu+height] ++;
+			if (0 < height)
+				zupcnt[nu+height] ++;
 
 			// printf("ord = %d idx = %ld ldr = %ld height=%d\n", nu, i, ldr, height);
 		}
@@ -93,11 +97,17 @@ int main(int argc, char* argv[])
 
 	printf("\nPopulation at each height:\n");
 	for (int nu = 2; nu< maxord; nu++)
-		printf("ord = %d pop = %d\n", nu, upcnt[nu]);
+		printf("ord = %d pop = %d \thpop = %d \tdiff = %d\n",
+			nu, upcnt[nu], zupcnt[nu], upcnt[nu] - zupcnt[nu]);
 
-	printf("\n");
+	printf("\nPromoted = ");
 	for (int nu = 2; nu< maxord; nu++)
 		printf("%d, ", upcnt[nu]);
+	printf("\n");
+
+	printf("\nTall Promoted = ");
+	for (int nu = 2; nu< maxord; nu++)
+		printf("%d, ", zupcnt[nu]);
 	printf("\n");
 	exit(0);
 #endif
