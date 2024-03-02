@@ -61,6 +61,30 @@ int main(int argc, char* argv[])
 	exit(0);
 #endif
 
+#if 1
+	// Print leaders
+	for (int nu = 2; nu< maxord; nu++)
+	{
+		long istart = (1UL<<(nu-2));
+		long iend = 2*istart;
+		for (long i = istart; i< iend; i++)
+		{
+			bool valid = is_valid_index(i);
+			if (false == valid) continue;
+			// long ldr = find_leader(i);
+			long ldr = gold_leader(i);
+
+			long pheight = ldr / (2*i+1);
+			int height = bitlen(pheight) - 1;
+
+			printf("ord = %d idx = %ld ldr = %ld height=%d\n", nu, i, ldr, height);
+		}
+	}
+	exit(0);
+#endif
+
+// #define SELF_CONSISTENCY_CHECK
+#ifdef SELF_CONSISTENCY_CHECK
 	// Except for the printf, this should always be silent.
 	printf("Check self-consistency of the irred-gold.c codebase\n");
 	for (long i = 0; i< maxidx; i++)
@@ -103,6 +127,7 @@ int main(int argc, char* argv[])
 
 	// print_stoppers(256);
 	// print_stoppers(2048);
+#endif
 
 #if 0
 	for (int p=0; p<20; p++)
