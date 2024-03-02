@@ -65,6 +65,7 @@ int main(int argc, char* argv[])
 	// Print leaders
 	for (int nu = 2; nu< maxord; nu++)
 	{
+		int ntall = 0;
 		long istart = (1UL<<(nu-2));
 		long iend = 2*istart;
 		for (long i = istart; i< iend; i++)
@@ -73,12 +74,15 @@ int main(int argc, char* argv[])
 			if (false == valid) continue;
 			// long ldr = find_leader(i);
 			long ldr = gold_leader(i);
+			if (ldr <= 0) { printf ("Error: overflow at %ld\n", i); }
 
 			long pheight = ldr / (2*i+1);
 			int height = bitlen(pheight) - 1;
+			if (0 < height) ntall ++;
 
-			printf("ord = %d idx = %ld ldr = %ld height=%d\n", nu, i, ldr, height);
+			// printf("ord = %d idx = %ld ldr = %ld height=%d\n", nu, i, ldr, height);
 		}
+		printf("ord = %d ntal = %d\n", nu, ntall);
 	}
 	exit(0);
 #endif
