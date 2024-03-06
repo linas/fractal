@@ -17123,16 +17123,10 @@ noprefix "false"
 \end_inset
 
 .
- This mapping is not invertible; it is incomplete, and is, at best, a projection.
- The issue is that 
-\begin_inset Formula $\mathcal{L}_{\beta}$
-\end_inset
-
- clearly has a larger spectrum than 
-\begin_inset Formula $\mathcal{H}_{\beta}$
-\end_inset
-
-; this was already demonstrated in section 
+ This mapping is not invertible; it is a projection from some larger space
+ of functions on the unit interval, to those functions that can be represented
+ with piecewise constant segments.
+ Subsection 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Other-eigenfunctions"
@@ -17142,13 +17136,23 @@ noprefix "false"
 
 \end_inset
 
-.
- The problem seems to lie with 
-\begin_inset Formula $\mathcal{H}_{\beta}$
+ demonstrated that there are also piece-wise quadratic solutions, and a
+ general form for piece-wise polynomial solutions will be given in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Decaying-general-form"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
- When a bitsequence 
+\end_layout
+
+\begin_layout Standard
+Clouding the issue is that when a bitsequence 
 \begin_inset Formula $\left\{ b\right\} $
 \end_inset
 
@@ -17186,18 +17190,114 @@ noprefix "false"
 \begin_inset Formula $\lambda=1/\beta^{2}$
 \end_inset
 
- which correspnds to 
+ which corresponds to 
 \begin_inset Formula $\zeta=\beta>1$
 \end_inset
 
 .
  Classical analysis doesn't allow us into that region.
- The generalized 
-\begin_inset Formula $\beta$
+ This suggests some incomplete description or paradox.
+\end_layout
+
+\begin_layout Standard
+The paradox is resolved in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Decaying-general-form"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
--Fibonacci sequences and the associated Hessenberg shift get our foot in
- the door, but don't allow access to the full spectrum.
+.
+ The resolution maps the 
+\begin_inset Formula $e_{j}$
+\end_inset
+
+ to piece-wise polynomial functions.
+ When the polynomials are of degree 
+\begin_inset Formula $m$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ has a block upper-triangular form, with the diagonal blocks containing
+ 
+\begin_inset Formula $\beta^{-k}\mathcal{H}_{\beta}$
+\end_inset
+
+, for 
+\begin_inset Formula $0\le k\le m$
+\end_inset
+
+.
+ Off-diagonal blocks couple terms.
+ This form reproduces the spectrum: when a bitsequence 
+\begin_inset Formula $\left\{ b\right\} $
+\end_inset
+
+ is not of finite length, the spectrum still accumulates on a ring at 
+\begin_inset Formula $\left|\zeta\right|=1$
+\end_inset
+
+, but this time, that ring corresponds to 
+\begin_inset Formula $\beta^{-m}$
+\end_inset
+
+, so that there is an accumulation of eigenvalues at 
+\begin_inset Formula $\left|\lambda\right|\ge\beta^{-m}$
+\end_inset
+
+.
+ For piecewise-polynomial solutions, there are accumulation rings at each
+ 
+\begin_inset Formula $m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+These are the piecewise-polynomial solutions.
+ In the 
+\begin_inset Formula $m\to\infty$
+\end_inset
+
+ limit, the piecewise real-analytic solutions lie in the kernel 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+.
+ In addition to these, there are also the piecewise-fractal solutions, termed
+ 
+\begin_inset Quotes eld
+\end_inset
+
+coherent states
+\begin_inset Quotes erd
+\end_inset
+
+, as they are (again) constructed as shifts.
+ These belong to the continuous spectrum, and can be constructed for any
+ 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+.
+ This construction is given in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Coherent-States"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -27372,6 +27472,13 @@ During the solution, it becomes apparent that the eigenvalue is
 
 \begin_layout Subsection
 General form
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Decaying-general-form"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -33609,6 +33716,13 @@ Are these somehow the prime graphs, in that all other (measure-preserving)
 
 \begin_layout Subsection
 Coherent States
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Coherent-States"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
