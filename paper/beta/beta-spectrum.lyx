@@ -9074,6 +9074,13 @@ literal "false"
 
 \begin_layout Subsection
 Other eigenfunctions
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Other-eigenfunctions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -17085,77 +17092,30 @@ noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-This operator appears to be conjugate to the beta shift via a similarity
- transform.
- There is an operator 
-\begin_inset Formula $S$
-\end_inset
-
- such that
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\mathcal{L}_{\beta}=S^{-1}\mathcal{H}_{\beta}S
-\]
-
-\end_inset
-
-The Parry–Gelfond invariant measure 
-\begin_inset Formula $\mathcal{L}_{\beta}\rho=\rho$
-\end_inset
-
- is mapped to 
-\begin_inset Formula $\sigma=S\rho$
-\end_inset
-
-, where 
-\begin_inset Formula $\mathcal{H}_{\beta}\sigma=\sigma$
-\end_inset
-
- is now the Frobenius–Perron eigenvector.
- This eigenvector is easy to write down explicitly: it as 
-\begin_inset Formula $\sigma=\left(1,\beta^{-1},\beta^{-2},\cdots\right)$
-\end_inset
-
-, so that 
-\begin_inset Formula $\sigma_{j}=\beta^{-j}$
-\end_inset
-
 .
- This is easy to verify: the subdiagonal entries of 
-\begin_inset Formula $\mathcal{B}_{\beta}$
+\end_layout
+
+\begin_layout Standard
+The mapping 
+\begin_inset Formula $S:e_{j}\mapsto d_{j}\left(x\right)$
 \end_inset
 
- act as a shift on 
-\begin_inset Formula $\sigma$
-\end_inset
-
- and the top row is just
+ can be thought of as a similarity transform, so that 
 \begin_inset Formula 
 \[
-1=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle \sigma_{j}=\sum_{j=0}^{\infty}b_{j}\beta^{-j-1}=1-q^{\left\{ b\right\} }\left(\frac{1}{\beta}\right)=1
+\mathcal{L}_{\beta}S=S\mathcal{H}_{\beta}
 \]
 
 \end_inset
 
 with 
-\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
- the same holomorphic function as defined earlier, in eqn 
+ the transfer operator from eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:holomorphic-beta-function"
+reference "eq:xfer oper"
 plural "false"
 caps "false"
 noprefix "false"
@@ -17163,100 +17123,19 @@ noprefix "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-The similarity transformation can be given directly.
- If 
-\begin_inset Formula $w$
+ This mapping is not invertible; it is incomplete, and is, at best, a projection.
+ The issue is that 
+\begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
- is a vector satisfying 
-\begin_inset Formula $\mathcal{H}_{\beta}w=\lambda w$
-\end_inset
-
-, with vector elements 
-\begin_inset Formula $w_{j}$
-\end_inset
-
-, then the function
-\begin_inset Formula 
-\[
-w\left(x\right)=\sum_{j=0}^{\infty}d_{j}\left(x\right)w_{j}
-\]
-
-\end_inset
-
-is an eigenfunction of the transfer operator, satisfying 
-\begin_inset Formula $\mathcal{L}_{\beta}w=\lambda w$
-\end_inset
-
-.
- For 
-\begin_inset Formula $\lambda=1$
-\end_inset
-
-, this is just 
-\begin_inset Formula $w=\sigma$
-\end_inset
-
- which is explicitly the Parry–Gelfond invariant measure.
-\end_layout
-
-\begin_layout Standard
-The conjugacy allows a strong statement: the 
-\emph on
-only
-\emph default
- solutions to 
-\begin_inset Formula $\mathcal{H}_{\beta}w=\lambda w$
-\end_inset
-
- are necessarily of the form 
-\begin_inset Formula $w=\left(1,\left(\lambda\beta\right)^{-1},\left(\lambda\beta\right)^{-2},\cdots\right)$
-\end_inset
-
-, because the subdiagonal forces this shift.
- To satisfy the the top row of 
+ clearly has a larger spectrum than 
 \begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
-, one must have that 
-\begin_inset Formula 
-\[
-\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle w_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(E+1\right)=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
-\]
-
-\end_inset
-
-and so the eigenvalue 
-\begin_inset Formula $\lambda$
-\end_inset
-
- is exactly the eigenvalue that solves the 
-\begin_inset Formula $\beta$
-\end_inset
-
--series 
-\begin_inset Formula $q^{\left\{ b\right\} }\left(1/\lambda\beta\right)=0$
-\end_inset
-
-, equivalently, solves 
-\begin_inset Formula $E=0$
-\end_inset
-
- with 
-\begin_inset Formula $E$
-\end_inset
-
- as defined in eqn 
+; this was already demonstrated in section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:holomorphic-disk"
+reference "subsec:Other-eigenfunctions"
 plural "false"
 caps "false"
 noprefix "false"
@@ -17264,76 +17143,61 @@ noprefix "false"
 \end_inset
 
 .
- This effectively concludes a proof: the solutions to this series are the
- only eigenvalues of the 
-\begin_inset Formula $\beta$
-\end_inset
-
--transfer operator; there are no others.
-\end_layout
-
-\begin_layout Standard
-And yet, there is an issue.
- For sequences 
-\begin_inset Formula $\left\{ b\right\} $
-\end_inset
-
- that are not finite in length, the holomorphic function 
-\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
-\end_inset
-
- has a countable number of zeros, arranged in a circular ring at 
-\begin_inset Formula $\lambda=1/\beta$
+ The problem seems to lie with 
+\begin_inset Formula $\mathcal{H}_{\beta}$
 \end_inset
 
 .
- These are dense on the circle, and so conventional analytic continuation
- cannot be used to find smaller eigenvalues.
- Does this prove that there are no smaller eigenvalues? No.
- Clearly there are eigenfunctions with eigenvalues smaller than 
-\begin_inset Formula $\lambda=1/\beta$
+ When a bitsequence 
+\begin_inset Formula $\left\{ b\right\} $
 \end_inset
 
-; an explicit example for 
+ is not of finite length, the holomorphic function 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+ has a countable number of zeros, accumulating on a circular ring at 
+\begin_inset Formula $\left|\zeta\right|=1$
+\end_inset
+
+.
+ These appear to be dense on the circle, and so Jentzch's theorem blocks
+ conventional analytic continuation to the region 
+\begin_inset Formula $\left|\zeta\right|>1$
+\end_inset
+
+.
+ But clealy, 
+\begin_inset Formula $\mathcal{L}_{\beta}$
+\end_inset
+
+ has eigenvalues in this region; the piecewise quadratic eigenfunction exhibited
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Other-eigenfunctions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ has the eigenvalue 
 \begin_inset Formula $\lambda=1/\beta^{2}$
 \end_inset
 
- was already given.
- Others can be numerically approximated.
- Thus, this description, on it's face, is incomplete.
- How? Why?
-\end_layout
-
-\begin_layout Standard
-The issue can be localized to the mis-identification of 
-\begin_inset Formula $d_{k}\left(x\right)=\Theta\left(t_{k}-x\right)$
+ which correspnds to 
+\begin_inset Formula $\zeta=\beta>1$
 \end_inset
 
- as the full and complete similarity transform; it is not.
- The 
-\begin_inset Formula $d_{k}\left(x\right)$
+.
+ Classical analysis doesn't allow us into that region.
+ The generalized 
+\begin_inset Formula $\beta$
 \end_inset
 
- are flat plateaus, and are exactly what the Parry–Gelfond measure is built
- out of.
- The example with 
-\begin_inset Formula $\lambda=1/\beta^{2}$
-\end_inset
-
- is a piece-wise assembly of quadratics, not flat plateaus.
- The correct construction requires replacing the 
-\begin_inset Formula $d_{k}\left(x\right)$
-\end_inset
-
- with fragments of polynomials.
- The identification of the 
-\begin_inset Formula $d_{k}\left(x\right)$
-\end_inset
-
- as the conjugating similarity transform is flawed: it gives only a part
- of the total space; it cuts off a portion of the spectrum.
- It does pair Parry–Gelfond to Frobenius-Perron, which is good.
- Just that parts are missing.
+-Fibonacci sequences and the associated Hessenberg shift get our foot in
+ the door, but don't allow access to the full spectrum.
 \end_layout
 
 \begin_layout Subsection
