@@ -42257,24 +42257,140 @@ As always, the midpoints are
 
 .
  They are sorted so that 
-\begin_inset Formula $0<\cdots<m_{j}^{\prime}<m_{j}<\cdots<m_{0}<1$
+\begin_inset Formula $0<\cdots<m_{j}<\cdots<m_{0}<1$
 \end_inset
 
- with the prime denoting the nearest neighbor in the sort order.
- It is possible to identify such a nearest neighbor only when there are
- a finite number of midpoints.
- Thus, we have
+.
+ These define intervals, numbers right to left, with 
+\begin_inset Formula $I_{0}=\left[m_{0},1\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{1}=\left[m_{\pi},m_{0}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}=\left[m_{\pi^{2}},m_{\pi}\right]$
+\end_inset
+
+ and so 
+\begin_inset Formula $I_{k}=\left[m_{\pi^{k}},m_{\pi^{k-1}}\right]$
+\end_inset
+
+ where 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is the permutation that places the midpoints in sorted order.
+ It is the same as the permutation matrix 
+\begin_inset Formula $P$
+\end_inset
+
+ given earlier, except for an off-by-one in the numbering.
+ For order 
+\begin_inset Formula $\nu$
+\end_inset
+
+ there are a total of 
+\begin_inset Formula $\nu+1$
+\end_inset
+
+ intervals, with the left-most being 
+\begin_inset Formula $I_{\nu}=\left[0,m_{\pi^{\nu-1}}\right]$
+\end_inset
+
+ since 
+\begin_inset Formula $m_{\pi^{\nu}}=0$
+\end_inset
+
+ by definition.
+ That is, the midpoints in sorted order are 
 \begin_inset Formula 
 \[
-\left[0,m_{j}\right]=\bigcup_{k:m_{k}\le m_{j}}\left[m_{k}^{\prime},m_{k}\right]
+0=m_{\pi^{\nu}}<m_{\pi^{\nu-1}}<m_{\pi^{\nu-2}}<\cdots<m_{j}=m_{\pi^{i}}<\cdots<m_{\pi}<m_{0}<1
 \]
 
 \end_inset
 
-and therefore xxx
+With this notation, the union of intervals is
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-\Theta\left(x\le m_{j}\right)=\sum_{k:m_{k}\le m_{j}}\Theta\left(x\in I_{k}\right)
+\left[0,m_{j}\right]=\bigcup_{k:m_{k}\le m_{j}}\left[m_{\pi k},m_{k}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\pi k$
+\end_inset
+
+ is the midpoint immediately to the left, in sorted order, not to be confused
+ with 
+\begin_inset Formula $\pi^{k}$
+\end_inset
+
+ which is the permutation iterated 
+\begin_inset Formula $k$
+\end_inset
+
+ times.
+ The notation is killing me.
+ For a fixed 
+\begin_inset Formula $j$
+\end_inset
+
+, there is some integer 
+\begin_inset Formula $i$
+\end_inset
+
+ such that it is given by the permutation 
+\begin_inset Formula $\pi^{i}=j$
+\end_inset
+
+.
+ Thus, the right-most interval containing 
+\begin_inset Formula $m_{j}$
+\end_inset
+
+ is 
+\begin_inset Formula $I_{i+1}=\left[m_{\pi j},m_{j}\right]=\left[m_{\pi^{i+1}},m_{\pi^{i}}\right]$
+\end_inset
+
+.
+ The union runs over a total of 
+\begin_inset Formula $\nu-i$
+\end_inset
+
+ intervals to the left of 
+\begin_inset Formula $m_{j}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\left[0,m_{j}\right]=\bigcup_{k=i+1;j=\pi^{i}}^{\nu}I_{k}
+\]
+
+\end_inset
+
+Fiddling with equivalent notation,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Theta\left(x\le m_{j}\right)=\sum_{k=i+1;j=\pi^{i}}^{\nu}\Theta\left(x\in I_{k}\right)
+\]
+
+\end_inset
+
+which is the change of basis 
+\begin_inset Formula 
+\[
+e_{j}^{\prime}=\sum_{k=i+1;j=\pi^{i}}^{\nu}e_{k}=Me_{k}
 \]
 
 \end_inset
