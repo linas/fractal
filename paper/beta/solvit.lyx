@@ -32853,7 +32853,7 @@ There are three unresolved issues with the above: (1) the need to sort midpoints
  Ignore them, and skip them and move to the section after.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Interval Inclusion Tables
 \end_layout
 
@@ -42197,6 +42197,92 @@ As before, there is no particularly obvious way to obtain any of these matrices,
 \end_layout
 
 \begin_layout Subsubsection
+Change of basis
+\end_layout
+
+\begin_layout Standard
+The matrix 
+\begin_inset Formula $D$
+\end_inset
+
+ encodes the the eigenvalues, in that 
+\begin_inset Formula $\det\left(D-\lambda I\right)=0$
+\end_inset
+
+ is solved by 
+\begin_inset Formula $\lambda=\beta$
+\end_inset
+
+.
+ The eigenvectors are interpreted as distributions, in the basis where 
+\begin_inset Formula $e_{k}\mapsto\Theta\left(x\in I_{k}\right)$
+\end_inset
+
+: that is, a function that is one on the interval 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+ but zero elsewhere.
+ By contrast, until now, we've been working with the invariant measure stated
+ in terms of 
+\begin_inset Formula $\Theta\left(x\le m_{j}\right)$
+\end_inset
+
+; that is, with 
+\begin_inset Formula $\mu\left(x\right)=F^{-1}\sum_{k=0}^{\infty}\beta^{-j}\Theta\left(x\le m_{j}\right)$
+\end_inset
+
+.
+ We now wish to explore a change of basis from 
+\begin_inset Formula $e_{k}\mapsto\Theta\left(x\in I_{k}\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $e_{j}^{\prime}\mapsto\Theta\left(x\le m_{j}\right)$
+\end_inset
+
+.
+ This is not hard, it's just a triangular matrix.
+ The painful part is to provide an adequate notation for this.
+\end_layout
+
+\begin_layout Standard
+As always, the midpoints are 
+\begin_inset Formula $m_{k}=T^{k}\left(m_{0}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $m_{0}=\beta/2$
+\end_inset
+
+.
+ They are sorted so that 
+\begin_inset Formula $0<\cdots<m_{j}^{\prime}<m_{j}<\cdots<m_{0}<1$
+\end_inset
+
+ with the prime denoting the nearest neighbor in the sort order.
+ It is possible to identify such a nearest neighbor only when there are
+ a finite number of midpoints.
+ Thus, we have
+\begin_inset Formula 
+\[
+\left[0,m_{j}\right]=\bigcup_{k:m_{k}\le m_{j}}\left[m_{k}^{\prime},m_{k}\right]
+\]
+
+\end_inset
+
+and therefore xxx
+\begin_inset Formula 
+\[
+\Theta\left(x\le m_{j}\right)=\sum_{k:m_{k}\le m_{j}}\Theta\left(x\in I_{k}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Recursive Rework
 \end_layout
 
