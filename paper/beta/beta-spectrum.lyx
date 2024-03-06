@@ -16849,7 +16849,7 @@ noprefix "false"
 \end_inset
 
 .
- The transpose is take to put it into upper-Hessenberg form; the subdiagonal
+ The transpose puts the matrix into upper-Hessenberg form; the subdiagonal
  provides the shift.
  It is rescaled so that the largest eigenvalue is 1.
  To be explicit: given the bit-sequence 
@@ -16880,12 +16880,216 @@ b_{0} & b_{1} & b_{2} & b_{3} & \cdots\\
 0 & 1 & 0 & 0 & \cdots\\
 0 & 0 & 1\\
 \vdots & \vdots & \vdots &  & \ddots
+\end{array}\right]\qquad\mbox{with}\qquad w=\left[\begin{array}{c}
+1\\
+\left(\lambda\beta\right)^{-1}\\
+\left(\lambda\beta\right)^{-2}\\
+\left(\lambda\beta\right)^{-3}\\
+\vdots
 \end{array}\right]
 \]
 
 \end_inset
 
+where 
+\begin_inset Formula $w$
+\end_inset
 
+ is the shift state, satisfying 
+\begin_inset Formula $\mathcal{H}_{\beta}w=\lambda w$
+\end_inset
+
+ whenever the eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ can satisfy the top row:
+\begin_inset Formula 
+\[
+\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle w_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(E+1\right)=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $q^{\left\{ b\right\} }\left(\zeta\right)$
+\end_inset
+
+ the same holomorphic function as defined earlier, in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-beta-function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and with 
+\begin_inset Formula $E$
+\end_inset
+
+ as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:holomorphic-disk"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, where we'd previously identified solutions 
+\begin_inset Formula $E=0$
+\end_inset
+
+ as eigenvalues.
+\end_layout
+
+\begin_layout Standard
+Explict eigenfunctions on the unit interval can be recovered directly from
+ this shift state.
+ The eigenvector 
+\begin_inset Formula $w$
+\end_inset
+
+ can be expanded in terms of the canonical basis vectors 
+\begin_inset Formula $e_{j}$
+\end_inset
+
+ so that 
+\begin_inset Formula $w=\sum_{j}w_{j}e_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{j}$
+\end_inset
+
+ is the vector with a one in the 
+\begin_inset Formula $j$
+\end_inset
+
+'th position, and zero everywhere else.
+ Then make the identification
+\begin_inset Formula 
+\[
+e_{j}\mapsto\varepsilon_{j}\left(y\right)=\Theta\left(t_{j}-y\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\varepsilon_{j}\left(y\right)$
+\end_inset
+
+ is the step function previously given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Gelfond-Parry digits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, with 
+\begin_inset Formula $t_{n}=t_{\beta}^{n}\left(1\right)$
+\end_inset
+
+ being the iterated endpoint from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta transform"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Alternately, after rescaling with 
+\begin_inset Formula $x=y\beta/2$
+\end_inset
+
+ so as to work with the rescaled shift,
+\begin_inset Formula 
+\[
+e_{j}\mapsto d_{j}\left(x\right)=\Theta\left(m_{j}-x\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $m_{j}=T_{\beta}^{j}\left(\beta/2\right)$
+\end_inset
+
+ being the iterated midpoint from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xform-shift equivalence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, and 
+\begin_inset Formula $d_{j}\left(x\right)$
+\end_inset
+
+ the rescaled step function from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rescaled-bitseq"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ With this identification, one has 
+\begin_inset Formula 
+\[
+w\left(x\right)=\sum_{j=0}^{\infty}d_{j}\left(x\right)w_{j}=\sum_{j=0}^{\infty}\frac{1}{\left(\beta\lambda\right)^{j}}\Theta\left(m_{j}-x\right)
+\]
+
+\end_inset
+
+which is just eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:coherent-first-order"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in a slightly different form.
+ It satsifies 
+\begin_inset Formula $\mathcal{L}_{\beta}w=\lambda w$
+\end_inset
+
+ and, for 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ recovers the original Gelfond–Parry invariant measure from eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invariant measure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+xxx
 \end_layout
 
 \begin_layout Standard
@@ -16962,6 +17166,10 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Standard
 The similarity transformation can be given directly.
  If 
 \begin_inset Formula $w$
@@ -17020,7 +17228,7 @@ only
 , one must have that 
 \begin_inset Formula 
 \[
-\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle v_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(E+1\right)=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
+\lambda=\sum_{j=0}^{\infty}\left\langle 0\left|\mathcal{H}_{\beta}\right|j\right\rangle w_{j}=\frac{1}{\beta}\sum_{j=0}^{\infty}\frac{b_{j}}{\left(\lambda\beta\right)^{j}}=\lambda\left(E+1\right)=\lambda\left(1-q^{\left\{ b\right\} }\left(\frac{1}{\lambda\beta}\right)\right)=\lambda
 \]
 
 \end_inset
@@ -17038,7 +17246,7 @@ and so the eigenvalue
 \end_inset
 
 , equivalently, solves 
-\begin_inset Formula $E=1$
+\begin_inset Formula $E=0$
 \end_inset
 
  with 
