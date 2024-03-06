@@ -42206,10 +42206,10 @@ The matrix
 \end_inset
 
  encodes the the eigenvalues, in that 
-\begin_inset Formula $\det\left(D-\lambda I\right)=0$
+\begin_inset Formula $\det\left(D-\lambda I\right)=p_{n}\left(\lambda\right)$
 \end_inset
 
- is solved by 
+ and, as always, the largest real eigenvalue is 
 \begin_inset Formula $\lambda=\beta$
 \end_inset
 
@@ -42223,12 +42223,13 @@ The matrix
 \end_inset
 
  but zero elsewhere.
- By contrast, until now, we've been working with the invariant measure stated
- in terms of 
+ By contrast, the Gelfond–Parry until invariant measure was stated in terms
+ of 
 \begin_inset Formula $\Theta\left(x\le m_{j}\right)$
 \end_inset
 
-; that is, with 
+.
+ Explicitly, it is 
 \begin_inset Formula $\mu\left(x\right)=F^{-1}\sum_{k=0}^{\infty}\beta^{-j}\Theta\left(x\le m_{j}\right)$
 \end_inset
 
@@ -42243,7 +42244,7 @@ The matrix
 
 .
  This is not hard, it's just a triangular matrix.
- The painful part is to provide an adequate notation for this.
+ The painful part is to provide an adequate notation for all of this.
 \end_layout
 
 \begin_layout Standard
@@ -42261,7 +42262,7 @@ As always, the midpoints are
 \end_inset
 
 .
- These define intervals, numbers right to left, with 
+ These define intervals, numbered right to left, with 
 \begin_inset Formula $I_{0}=\left[m_{0},1\right]$
 \end_inset
 
@@ -42342,7 +42343,15 @@ where
 \begin_inset Formula $j$
 \end_inset
 
-, there is some integer 
+, the midpoint 
+\begin_inset Formula $m_{j}$
+\end_inset
+
+ appears at location 
+\begin_inset Formula $i$
+\end_inset
+
+ in the sort order: there is some integer 
 \begin_inset Formula $i$
 \end_inset
 
@@ -42395,7 +42404,7 @@ u_{j}=\sum_{k=i+1;j=\pi^{i}}^{\nu}e_{k}
 
 \end_inset
 
-
+A concrete example follows.
 \end_layout
 
 \begin_layout Paragraph
@@ -42520,7 +42529,27 @@ M=\left[\begin{array}{cc}
 
 \end_inset
 
+In the union basis, we have 
+\begin_inset Formula 
+\[
+L=M^{-1}DM=\left[\begin{array}{cc}
+1 & 1\\
+1 & 0
+\end{array}\right]
+\]
 
+\end_inset
+
+satisfying 
+\begin_inset Formula $L\psi=\varphi\psi$
+\end_inset
+
+ with 
+\begin_inset Formula $\psi=u_{0}+u_{1}/\varphi$
+\end_inset
+
+ exactly as before.
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -42811,7 +42840,7 @@ arraycolsep}{0.5pt}}
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $MDM$
+\begin_inset Formula $L=M^{-1}DM$
 \end_inset
 
 
@@ -42882,6 +42911,12 @@ arraycolsep}{0.5pt}}
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cc}
+1 & \cdot\\
+-1 & 1
+\end{array}\right]$
+\end_inset
+
 
 \end_layout
 
@@ -42891,6 +42926,12 @@ arraycolsep}{0.5pt}}
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cc}
+1 & 1\\
+1 & \cdot
+\end{array}\right]$
+\end_inset
+
 
 \end_layout
 
