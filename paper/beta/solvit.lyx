@@ -42557,14 +42557,26 @@ Summary Table
 \end_layout
 
 \begin_layout Standard
-As before, the table below gives explicit values: 
+Armed with appropriate notation and a worked example, a table of explicit
+ values for the remaining low-order cases provides some insight.
+ The inverse 
+\begin_inset Formula $M^{-1}$
+\end_inset
+
+ has an interesing form: it appears to be a copy of the permutation 
+\begin_inset Formula $Q$
+\end_inset
+
+ from before, minus a column-shifted copy of 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ This is perhaps not a surprise.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace defskip
-\end_inset
-
-
 \begin_inset Note Note
 status collapsed
 
@@ -44296,27 +44308,25 @@ endgroup
 \end_inset
 
 
-\begin_inset VSpace defskip
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-So conclude in general the expected form:
+Visible in the above is the general form, which is exactly what were expecting.
+ It is
 \begin_inset Formula 
 \[
-H=\left[\begin{array}{cccc}
-b_{0} & b_{1} & \cdots & b_{\nu}\\
-1\\
- & 1\\
- &  & \ddots
+H=\left[\begin{array}{ccccc}
+b_{0} & b_{1} & \cdots & b_{\nu-1} & b_{\nu}\\
+1 & 0 & \cdots & 0 & 0\\
+0 & 1 &  & 0 & 0\\
+\vdots &  & \ddots &  & \vdots\\
+0 & 0 & \cdots & 1 & 0
 \end{array}\right]
 \]
 
 \end_inset
 
-so this is exactly 
+This is exactly 
 \begin_inset Formula $H=\beta\mathcal{H}_{\beta}=B^{T}$
 \end_inset
 
@@ -44359,6 +44369,19 @@ noprefix "false"
 
  this is identical to the Gelfond–Parry solution.
  So this was a very round-about check of an expected result.
+\end_layout
+
+\begin_layout Standard
+The column 
+\begin_inset Formula $K=M^{-1}CM$
+\end_inset
+
+ seems to almost have a predictable pattern to it.
+ If it did, then the rest of the table could be filled in from that pattern.
+ But that's the core issue: all of these structures seem to have some almost
+ regular, predictable pattern, but exactly what that is remains elusive.
+ Every variant seems to require explicit midpoint iteration; a simpler algorithm
+ic or recursive description remains unmanifested.
  
 \end_layout
 
