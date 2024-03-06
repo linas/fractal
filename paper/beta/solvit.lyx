@@ -42238,7 +42238,7 @@ The matrix
 \end_inset
 
  to 
-\begin_inset Formula $e_{j}^{\prime}\mapsto\Theta\left(x\le m_{j}\right)$
+\begin_inset Formula $u_{j}\mapsto\Theta\left(x\le m_{j}\right)$
 \end_inset
 
 .
@@ -42390,9 +42390,1469 @@ Fiddling with equivalent notation,
 which is the change of basis 
 \begin_inset Formula 
 \[
-e_{j}^{\prime}=\sum_{k=i+1;j=\pi^{i}}^{\nu}e_{k}=Me_{k}
+u_{j}=\sum_{k=i+1;j=\pi^{i}}^{\nu}e_{k}
 \]
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Change of basis, explicit example
+\end_layout
+
+\begin_layout Standard
+So as not to lose track of what we are doing here, consider the case of
+ 
+\begin_inset Formula $\nu=2,n=1$
+\end_inset
+
+ which has 
+\begin_inset Formula $\beta=\varphi$
+\end_inset
+
+ the golden ratio and 
+\begin_inset Formula $0<m_{1}=\varphi\left(\varphi-1\right)/2<m_{0}=\varphi/2<1$
+\end_inset
+
+ with intervals 
+\begin_inset Formula $I_{2}=\left[0,m_{1}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{1}=\left[m_{1},m_{0}\right]$
+\end_inset
+
+.
+ In the union basis, the intervals are 
+\begin_inset Formula $U_{1}=\left[0,m_{1}\right]=I_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{0}=\left[0,m_{0}\right]=I_{2}\cup I_{1}$
+\end_inset
+
+ and the corresponding vectors are 
+\begin_inset Formula $u_{1}=e_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{0}=e_{1}+e_{2}$
+\end_inset
+
+.
+ In the interval basis, we solve for 
+\begin_inset Formula $D\psi=\lambda\psi$
+\end_inset
+
+ with 
+\begin_inset Formula 
+\[
+D=\left[\begin{array}{cc}
+0 & 1\\
+1 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+This has the solution 
+\begin_inset Formula 
+\[
+\psi=\left[\begin{array}{c}
+1\\
+\varphi
+\end{array}\right]=e_{1}+\varphi e_{2}=\Theta\left(x\in I_{1}\right)+\varphi\Theta\left(x\in I_{2}\right)=\begin{cases}
+\varphi & \mbox{for }0\le x<m_{1}\\
+1 & \mbox{for }m_{1}\le x<m_{0}
+\end{cases}
+\]
+
+\end_inset
+
+which is just the usual Gelfond–Parry invariant measure, up to a normalization
+ constant.
+ In the union basis, this is 
+\begin_inset Formula 
+\[
+\psi=u_{0}+\frac{1}{\varphi}u_{1}=\Theta\left(x\le m_{0}\right)+\frac{1}{\varphi}\Theta\left(x<I_{1}\right)=\begin{cases}
+\varphi & \mbox{for }0\le x<m_{1}\\
+1 & \mbox{for }m_{1}\le x<m_{0}
+\end{cases}
+\]
+
+\end_inset
+
+since, of course, 
+\begin_inset Formula $1+1/\varphi=\varphi$
+\end_inset
+
+ for the golden mean.
+ These are equivalent descriptions, with the union form having the familiar
+ shape 
+\begin_inset Formula 
+\[
+\psi=\sum_{j=0}^{\nu-1}\frac{1}{\beta^{j}}\Theta\left(x\le m_{j}\right)=\sum_{j=0}^{\nu-1}\frac{1}{\beta^{j}}u_{j}
+\]
+
+\end_inset
+
+The change of basis can be written as 
+\begin_inset Formula $e_{k}=M_{kj}u_{j}$
+\end_inset
+
+ with the matrix 
+\begin_inset Formula $M$
+\end_inset
+
+ being
+\begin_inset Formula 
+\[
+M=\left[\begin{array}{cc}
+1 & 0\\
+1 & 1
+\end{array}\right]\qquad\qquad M^{-1}=\left[\begin{array}{cc}
+1 & 0\\
+-1 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Summary Table
+\end_layout
+
+\begin_layout Standard
+As before, the table below gives explicit values: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The ERT below shrinks vertical and horizontal spacing inside the matrix.
+\end_layout
+
+\begin_layout Plain Layout
+Tried the following, they did nothing:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+setlength{
+\backslash
+arraycolsep}{2pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+arraycolsep=2pt
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+def
+\backslash
+arraystretch{0.4}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+renewcommand
+\backslash
+arraystretch{0.2}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+setlength{
+\backslash
+extrarowheight}{-3pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+usepackage{setspace}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+setstretch{0.5}
+\end_layout
+
+\begin_layout Plain Layout
+But 
+\backslash
+arraycolsep=0.4pt does work, when used inse the array.
+ But only for that one array.
+\end_layout
+
+\begin_layout Plain Layout
+A hah! To do it for all of the arrays
+\end_layout
+
+\begin_layout Plain Layout
+preamble: 
+\backslash
+usepackage{etoolbox}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+AtBeginEnvironment{array}{
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+def
+\backslash
+arraystretch{0.85}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+setlength{
+\backslash
+arraycolsep}{0.5pt}}
+\end_layout
+
+\begin_layout Plain Layout
+With only one problem: this borkes everything from here on out.
+ So have to unset it at end...
+\end_layout
+
+\begin_layout Plain Layout
+Default arraycolsep is 5 pt 
+\backslash
+the
+\backslash
+arraycolsep
+\backslash
+relax
+\end_layout
+
+\begin_layout Plain Layout
+default arraystrech is 1 (its just a char)
+\end_layout
+
+\begin_layout Plain Layout
+Note also four negative thick spaces at left of table!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begingroup
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginEnvironment{array}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+arraystretch{0.85}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+arraycolsep}{0.5pt}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset space \negthickspace{}
+\end_inset
+
+
+\begin_inset space \negthickspace{}
+\end_inset
+
+
+\begin_inset space \negthickspace{}
+\end_inset
+
+
+\begin_inset space \negthickspace{}
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="13" columns="7">
+<features islongtable="true" longtabularalignment="center">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row endhead="true">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m_{j}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $D$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $M$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $M^{-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $MDM$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cc}
+\cdot & 1\\
+1 & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cc}
+1 & \cdot\\
+1 & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,2,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccc}
+\cdot & 1 & \cdot\\
+\cdot & \cdot & 1\\
+1 & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccc}
+\cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2,1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccc}
+\cdot & \cdot & 1\\
+1 & \cdot & 1\\
+\cdot & 1 & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccc}
+\cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,2,3,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cccc}
+\cdot & 1 & \cdot & \cdot\\
+\cdot & \cdot & 1 & \cdot\\
+\cdot & \cdot & \cdot & 1\\
+1 & \cdot & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cccc}
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2,3,1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cccc}
+\cdot & \cdot & 1 & \cdot\\
+1 & \cdot & 1 & \cdot\\
+1 & \cdot & \cdot & 1\\
+\cdot & 1 & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cccc}
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3,2,1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cccc}
+\cdot & \cdot & \cdot & 1\\
+1 & \cdot & \cdot & 1\\
+\cdot & 1 & \cdot & 1\\
+\cdot & \cdot & 1 & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{cccc}
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,2,3,4,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & 1 & \cdot & \cdot & \cdot\\
+\cdot & \cdot & 1 & \cdot & \cdot\\
+\cdot & \cdot & \cdot & 1 & \cdot\\
+\cdot & \cdot & \cdot & \cdot & 1\\
+1 & \cdot & \cdot & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3,1,4,2,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & 1 & \cdot & \cdot\\
+\cdot & \cdot & \cdot & 1 & \cdot\\
+\cdot & \cdot & \cdot & \cdot & 1\\
+1 & \cdot & \cdot & \cdot & 1\\
+\cdot & 1 & \cdot & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2,3,4,1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & 1 & \cdot & \cdot\\
+1 & \cdot & 1 & \cdot & \cdot\\
+1 & \cdot & \cdot & 1 & \cdot\\
+1 & \cdot & \cdot & \cdot & 1\\
+\cdot & 1 & \cdot & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2,4,1,3,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & 1 & \cdot\\
+\cdot & \cdot & \cdot & \cdot & 1\\
+1 & \cdot & \cdot & \cdot & 1\\
+\cdot & 1 & \cdot & \cdot & 1\\
+\cdot & \cdot & 1 & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3,4,2,1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & 1 & \cdot\\
+1 & \cdot & \cdot & 1 & \cdot\\
+\cdot & 1 & \cdot & 1 & \cdot\\
+\cdot & 1 & \cdot & \cdot & 1\\
+\cdot & \cdot & 1 & \cdot & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4,3,2,1,0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & \cdot & 1\\
+1 & \cdot & \cdot & \cdot & 1\\
+\cdot & 1 & \cdot & \cdot & 1\\
+\cdot & \cdot & 1 & \cdot & 1\\
+\cdot & \cdot & \cdot & 1 & 1
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[\begin{array}{ccccc}
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot\\
+\cdot & \cdot & \cdot & \cdot & \cdot
+\end{array}\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginEnvironment{array}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+arraystretch{1}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+arraycolsep}{5pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+endgroup
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace defskip
 \end_inset
 
 
