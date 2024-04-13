@@ -283,6 +283,328 @@ This might be entirely a misunderstanding on my part, or a flight of imagination
  from this daydream.
 \end_layout
 
+\begin_layout Standard
+Starting at section 5.4 
+\begin_inset Quotes eld
+\end_inset
+
+Dynamics of multi-particle systems
+\begin_inset Quotes erd
+\end_inset
+
+, including a 
+\begin_inset Quotes eld
+\end_inset
+
+recent review
+\begin_inset Quotes erd
+\end_inset
+
+.
+ There's the Lipkin–Meshkov–Glick (LMG) bath, with a 
+\begin_inset Quotes eld
+\end_inset
+
+critical slowing down near the critical point
+\begin_inset Quotes erd
+\end_inset
+
+, which is opposite of teh speedng up shown in the graph.
+ Is the graph mislabelled? Arghh.
+ Closer reading says 
+\begin_inset Quotes eld
+\end_inset
+
+interestingly, we see 
+\begin_inset Formula $\tau_{\mbox{QSL}}\to0$
+\end_inset
+
+ in the vicinity of the ciritical point, thus reflecting the characteristic
+ slowing down mentioned previously.
+\begin_inset Quotes erd
+\end_inset
+
+ I'm confused.
+ Speed goes as 
+\begin_inset Formula $1/\tau$
+\end_inset
+
+ so 
+\begin_inset Formula $\tau\to0$
+\end_inset
+
+ should mean 
+\begin_inset Quotes eld
+\end_inset
+
+speeding up
+\begin_inset Quotes erd
+\end_inset
+
+.
+ WTF.
+ But only a few paragraphs later, a speed-up in noted for QED-in-a-cavity,
+ with a long explanation given that the speedup is measured by considering
+ the cavity as well as the test particle state.
+ So is it a speedup or a slow-down? See? Perhaps I misunderstand.
+ So lets restart at square one.
+ 
+\end_layout
+
+\begin_layout Standard
+The generic geometric statement of the quantum speed limit for mixed states
+ (in the Mandelstam–Tamm formulation) is that
+\begin_inset Formula 
+\[
+\int_{0}^{\tau}\gamma_{t}dt\ge D\left(\rho_{0},\rho_{\tau}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $D$
+\end_inset
+
+ is the Bures distance, 
+\begin_inset Formula $\rho_{t}$
+\end_inset
+
+ is the density matrix, and 
+\begin_inset Formula $\gamma_{t}$
+\end_inset
+
+ is the instantaneous RMS variation of the Hamiltonian.
+ The geometric interpretation of this is that 
+\begin_inset Formula $\rho_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho_{\tau}$
+\end_inset
+
+ are two distinct points on some space/manifold, and that 
+\begin_inset Formula $D$
+\end_inset
+
+ is the geodesic (minimal, extremal) distance between these two points (given
+ by the Bures distance.) The geometric interpretation of 
+\begin_inset Formula $\sigma_{t}$
+\end_inset
+
+ is that it is some tangent vector on this space, tangent to some curve,
+ so that the integral is the total length of the curve.
+ The inequality is then 
+\begin_inset Quotes eld
+\end_inset
+
+trivial
+\begin_inset Quotes erd
+\end_inset
+
+: all other paths between two points are necessarily longer than the minimal
+ path between them.
+ The actual path taken, described by the curve, depends on the actual Hamiltonia
+n.
+ Roughtly speaking, 
+\begin_inset Formula $\gamma_{t}/\hbar=\sqrt{\left|\mbox{tr}\rho_{t}H_{t}^{2}\right|-\left|\mbox{tr}\rho_{t}H_{t}\right|^{2}}$
+\end_inset
+
+ is the RMS variation of the Hamiltonian.
+\end_layout
+
+\begin_layout Standard
+In order to convert the above into a case of 
+\begin_inset Quotes eld
+\end_inset
+
+rapid wave-function collapse
+\begin_inset Quotes erd
+\end_inset
+
+ argument, we need to do two things: make an argument that 
+\begin_inset Formula $\rho_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho_{\tau}$
+\end_inset
+
+ are very close to one-another, so that 
+\begin_inset Formula $D\left(\rho_{0},\rho_{\tau}\right)\to0$
+\end_inset
+
+, and then after this, to find some 
+\begin_inset Formula $H_{t}$
+\end_inset
+
+ that integrates close to this minimal path.
+ The former seems 
+\begin_inset Quotes eld
+\end_inset
+
+easy
+\begin_inset Quotes erd
+\end_inset
+
+: in the large-
+\begin_inset Formula $N$
+\end_inset
+
+ limit of some ergodic thermal state, a pair of entangled qubits should
+ not matter much, so that 
+\begin_inset Formula $D\left(\rho_{0},\rho_{\tau}\right)\sim2/N$
+\end_inset
+
+ as 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ in the environment.
+ Here, 
+\begin_inset Formula $\rho_{0}$
+\end_inset
+
+ is the state of a pair of entangled qubits (with e.g.
+ spacelike separation) and 
+\begin_inset Formula $\rho_{\tau}$
+\end_inset
+
+ is the case where Alice and/or Bob have made a measurement of their respective
+ qubit.
+ Then 
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of quantum states in the measuring apparatus that Alice&Bob
+ wield.
+ Say, a photographic plate, or a cloud chamber for ionizing radiation.
+ Or a phtomultiplier tube.
+ Something like that.
+ Finding the appropriate 
+\begin_inset Formula $H$
+\end_inset
+
+ is harder.
+\end_layout
+
+\begin_layout Standard
+Since something weird is going on with the LMG bath, lets look at that more
+ closely.
+ It either provides what we want, or it does the exact opposite.
+ The Hamiltonian has three parts: 
+\begin_inset Formula $H_{S}$
+\end_inset
+
+ for the probe particle, 
+\begin_inset Formula $H_{B}$
+\end_inset
+
+ for the bath and 
+\begin_inset Formula $H_{SB}$
+\end_inset
+
+ for the probe-bath interaction: 
+\begin_inset Formula 
+\[
+H=H_{S}+H_{B}+H_{SB}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+H_{S} & =-\sigma_{z}\\
+H_{B} & =-\frac{\lambda}{N}\sum_{i<j}^{N}\left(\sigma_{x,i}\sigma_{x,j}+\sigma_{y,i}\sigma_{y,j}\right)-\sum_{i=1}^{N}\sigma_{z,i}\\
+H_{SB} & =-\gamma\sum_{i=1}^{N}\left(\sigma_{x,i}\sigma_{x}+\sigma_{y,i}\sigma_{y}\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is ...
+ ? and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the system-probe coupling, the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ are the Pauli matrices if the probe spin, and the bath spins.
+ The claim is this model has a phase transition at 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ and is ferromagnetic (broken symmetry) at 
+\begin_inset Formula $0<\lambda<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The density matrix of the bath only is awkwardly written as 
+\begin_inset Formula 
+\[
+\rho_{B}=\int\mu\;\prod_{i=1}^{N}\left|s_{i}\right\rangle \left\langle s_{i}\right|
+\]
+
+\end_inset
+
+which trying to say that each spin site is 
+\begin_inset Formula $|s_{i}\rangle=|+\rangle$
+\end_inset
+
+ or 
+\begin_inset Formula $|s_{i}\rangle=|-\rangle$
+\end_inset
+
+ is spin up or spin-down.
+ The product is the ordinary Cartesian product.
+ The integral 
+\begin_inset Formula $\int\mu$
+\end_inset
+
+ is attempting to assign a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to each possible configuration of the spin states: correctly speaking,
+ the integral is a sum over 
+\begin_inset Formula $2^{N}$
+\end_inset
+
+ possible configurations.
+ We'll let the notation stand as an integral for now, rather than a sum,
+ as a reminder that the measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is defined on the sigma algebra (with the product topology).
+ Its meant to be normalized: 
+\begin_inset Formula $\int\mu=1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The claim is this model has a phase transition at 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ and is ferromagnetic (broken symmetry) at 
+\begin_inset Formula $0<\lambda<1$
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Bibliography
 \end_layout
