@@ -525,8 +525,7 @@ where
 \begin_inset Formula $\lambda$
 \end_inset
 
- is ...
- ? and 
+ is a coupling strength, and 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -547,7 +546,33 @@ where
 \end_layout
 
 \begin_layout Standard
-The density matrix of the bath only is awkwardly written as 
+This next paragraph has problems, but lets go with it anyway.
+ Will dissect later.
+\end_layout
+
+\begin_layout Standard
+The density matrix is to be written as 
+\begin_inset Formula $\rho=\rho_{S}\rho_{B}$
+\end_inset
+
+ where the probe density matrix is 
+\begin_inset Formula 
+\[
+\rho_{S}=p\left|+\right\rangle \left\langle +\right|+\left(1-p\right)\left|-\right\rangle \left\langle -\right|
+\]
+
+\end_inset
+
+for some probability 
+\begin_inset Formula $p$
+\end_inset
+
+ with 
+\begin_inset Formula $0\le p\le1$
+\end_inset
+
+.
+ The bath-only density matrix is awkwardly written as 
 \begin_inset Formula 
 \[
 \rho_{B}=\int\mu\;\prod_{i=1}^{N}\left|s_{i}\right\rangle \left\langle s_{i}\right|
@@ -594,15 +619,144 @@ which trying to say that each spin site is
 \end_layout
 
 \begin_layout Standard
-The claim is this model has a phase transition at 
-\begin_inset Formula $\lambda=1$
+Before we begin, lets see if this is correct and appropriate.
+ I see some problems, already.
+\end_layout
+
+\begin_layout Itemize
+The 
+\begin_inset Formula $H_{B}$
 \end_inset
 
- and is ferromagnetic (broken symmetry) at 
-\begin_inset Formula $0<\lambda<1$
+ term has no location-dependent terms or distnace-dependent interaction.
+ This is, I guess, appropriate for a nuclear model (of nucleons in a nucleus),
+ but not for a photographic plate or cloud chamber, where there would be
+ nearest-neighbor intereactions, mostly, in a 2D or 3D volume.
+ But, for now, perhpas this is OK.
+\end_layout
+
+\begin_layout Itemize
+I think I wrote the density matrix wrong.
+ The probe density matrix should probably be written as 
+\begin_inset Formula $\rho_{S}=\int d\Omega\;p\left(\theta\right)\left|\theta\right\rangle \left\langle \theta\right|$
 \end_inset
 
+ where 
+\begin_inset Formula $\theta$
+\end_inset
 
+ is the coordinate on the Bloch sphere and the integration 
+\begin_inset Formula $d\Omega$
+\end_inset
+
+ is over all points on the Bloch sphere and 
+\begin_inset Formula $p\left(\theta\right)$
+\end_inset
+
+ is the measure.
+ A likewise more complex expression for 
+\begin_inset Formula $\rho_{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The dynamical variable of interest is then 
+\begin_inset Formula $p\left(\theta\right)$
+\end_inset
+
+ and it's time evolution.
+ Wave-function collapse is then associated with the condensation of 
+\begin_inset Formula $p\left(\theta\right)$
+\end_inset
+
+ to a single point.
+\end_layout
+
+\begin_layout Standard
+Is this last sentence correct? Well, one might argue that 
+\begin_inset Formula $\rho_{S}$
+\end_inset
+
+ should be written for an entangled pair.
+ But this would not seem to be helpful, because the Alice/Bob entanglement
+ collapse would be baked in a priori with any kind of QM notation: chicken
+ and egg-ish.
+ The present task does not attempt to 
+\begin_inset Quotes eld
+\end_inset
+
+explain
+\begin_inset Quotes erd
+\end_inset
+
+ entangement; that is already explained 
+\begin_inset Quotes eld
+\end_inset
+
+just fine
+\begin_inset Quotes erd
+\end_inset
+
+ by conventional textbook QM, and nothing here seems to shed light on it.
+ The present task really is about collapse, and for that, it is enough to
+ explain Alice's measuring instrument.
+ The behavior at Bob's is a forgone conclusion.
+ So it would seem that the goal of demonstrating collapse is to demonstrate
+ that the time evolution is that 
+\begin_inset Formula $p\left(\theta\right)\to\delta\left(\theta-\theta_{m}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\theta_{m}$
+\end_inset
+
+ is the measurement axis, and more specifically, is either 
+\begin_inset Quotes eld
+\end_inset
+
+up
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+down
+\begin_inset Quotes erd
+\end_inset
+
+ along that axis.
+\end_layout
+
+\begin_layout Standard
+This now illustrates a distinct issue with the Hamiltonian above: we picked
+ a reference frame x,y,z with the Pauli matrices, and there's nothing specific
+ about the measuring device 
+\begin_inset Formula $\theta_{m}$
+\end_inset
+
+ in this frame, unless we take 
+\begin_inset Formula $\theta_{m}$
+\end_inset
+
+ to be the z axis.
+ This is not credibly a Stern-Gerlach or anything like that.
+\end_layout
+
+\begin_layout Standard
+I feel perhaps I'm wasting time here, and need to do more background reading.
+ I suspect that perhaps the QED-cavity work is already trying to set up
+ exactly this problem, or this type of problem.
+ That there's already been lots of work in this area, and that perhaps someone
+ has already demonstrated what I'm hacking on here.
+ So halt for now.
+ I have to do more reading.
+ And deal with many other non-physics tasks.
+ I might not be able to get back to this for a long while.
+ 13 April 2024.
 \end_layout
 
 \begin_layout Section*
