@@ -1,0 +1,328 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass acmart
+\begin_preamble
+\usepackage{tikz-cd}
+\end_preamble
+\options format=acmsmall
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "courier" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 0
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Hi Michael,
+\end_layout
+
+\begin_layout Standard
+You wrote me a confusing email, so I will try to respond here in the simplest
+ and plainest fashion that I can.
+ I will use language that is so plain and simple that even undergrads should
+ be able to follow; so excuse me if it seems too simple.
+ The goal is to avoid confusion and misunderstanding.
+ 
+\end_layout
+
+\begin_layout Standard
+Linas Vepstas 27 April 2024
+\end_layout
+
+\begin_layout Subsection*
+Spectral basics
+\end_layout
+
+\begin_layout Standard
+Lets say we have some Hamiltonian operator 
+\begin_inset Formula $H$
+\end_inset
+
+ and we are able to solve it to find a discrete eigenvalue spectrum for
+ it:
+\begin_inset Formula 
+\[
+H\psi_{n}=\omega_{n}\psi_{n}
+\]
+
+\end_inset
+
+Written in this form, this 
+\begin_inset Formula $H$
+\end_inset
+
+ could be anything: a vibrating guitar string, a vibrating airplane wing,
+ the Schroedinger eqn for the hydrogen atom, a radar cavity for some electronics
+, a harmonic operator on some quotient of Lie algebras, a Dirac operator
+ on some n-dimensional spacetime.
+ Don't care, doesn't matter as long as the spectrum is discrete (and thus
+ countable).
+\end_layout
+
+\begin_layout Standard
+The eigenfunctions are assumed to be orthonormal.
+ Pick your favorite notation, I don't care:
+\begin_inset Formula 
+\[
+\delta_{mn}=\left\langle \psi_{m}\vert\psi_{n}\right\rangle =\int\overline{\psi_{m}}\psi_{n}=\left\langle m\vert n\right\rangle =\int\overline{\psi_{m}}\left(x\right)\psi_{n}\left(x\right)dx
+\]
+
+\end_inset
+
+Whatever, its all good.
+\end_layout
+
+\begin_layout Standard
+In bra-ket notation, of course one writes
+\begin_inset Formula 
+\[
+H\left|\psi_{n}\right\rangle =\omega_{n}\left|\psi_{n}\right\rangle 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The vacuum expectation value of the Hamiltonian is
+\begin_inset Formula 
+\[
+\left\langle H\right\rangle =\sum_{n}\left\langle \psi_{n}\right|H\left|\psi_{n}\right\rangle =\sum_{n}\omega_{n}
+\]
+
+\end_inset
+
+and note that this expression is 
+\begin_inset Quotes eld
+\end_inset
+
+valid
+\begin_inset Quotes erd
+\end_inset
+
+ even for guitar strings! This has nothing to do with quantum.
+ It's generic for any operator.
+\end_layout
+
+\begin_layout Standard
+The issue is that, for guitar strings, the eigenvalues are unbounded: 
+\begin_inset Formula $\omega_{n}=2\pi n/L$
+\end_inset
+
+ with 
+\begin_inset Formula $L$
+\end_inset
+
+ the length of the guitar string, and so 
+\begin_inset Formula $\left\langle H\right\rangle =\left(2\pi/L\right)\sum_{n=0}^{\infty}n$
+\end_inset
+
+ and the sum is not convergent: the expectation value is infinity.
+\end_layout
+
+\begin_layout Standard
+This is a generic problem: Hamiltonians have spectrums that are unbounded.
+ For radar cavities, the radial part has 
+\begin_inset Formula $\omega_{n}$
+\end_inset
+
+ similar to the guitar string, but sphere symmety means sphere harmonics
+ which means there are 
+\begin_inset Formula $\ell\left(\ell+1\right)$
+\end_inset
+
+ of them for each radial excitation, and so the sum goes like 
+\begin_inset Formula $\left\langle H\right\rangle \sim\sum_{n=0}^{\infty}n^{3}$
+\end_inset
+
+ which is even more divergent.
+ For general 
+\begin_inset Formula $D$
+\end_inset
+
+-dimensional space, it will go like 
+\begin_inset Formula $\left\langle H\right\rangle \sim\sum_{n=0}^{\infty}n^{D}$
+\end_inset
+
+.
+ This includes harmonic operators (aka 
+\begin_inset Quotes eld
+\end_inset
+
+wave equations
+\begin_inset Quotes erd
+\end_inset
+
+) on homogeneous spaces, which are quotients of Lie groups.
+ https://en.wikipedia.org/wiki/Homogeneous_space
+\end_layout
+
+\begin_layout Standard
+It gets interesting when 
+\begin_inset Formula $H$
+\end_inset
+
+ is a Dirac operator.
+ In this case, the spectrum is both positive and negative.
+ If the spectrum is perfectly symmetric, so that for each positive 
+\begin_inset Formula $\omega_{n}$
+\end_inset
+
+ there is exactly one other 
+\begin_inset Formula $-\omega_{n}$
+\end_inset
+
+, one can argue (hand-wave) that these should exactly cancel one-another
+ to get exactly zero.
+ The sum 
+\begin_inset Formula $\sum_{n}\omega_{n}$
+\end_inset
+
+ is now 
+\begin_inset Quotes eld
+\end_inset
+
+conditionally convergent
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It's not absolutely convergent in the formal mathematical sense.
+ The whole point of regulators is to deal with this.
+\end_layout
+
+\begin_layout Standard
+BTW, for Dirac operators, if the positive spectrum almost pairs up with
+ the negative spectrum, but not quite, then you can 
+\begin_inset Quotes eld
+\end_inset
+
+split the difference
+\begin_inset Quotes erd
+\end_inset
+
+, and the sum 
+\begin_inset Formula $\left\langle H\right\rangle =\sum_{n}\omega_{n}$
+\end_inset
+
+ now measures the 
+\begin_inset Quotes eld
+\end_inset
+
+spectral asymmetry
+\begin_inset Quotes erd
+\end_inset
+
+.
+ If the spectrum is perfectly symmetric, then 
+\begin_inset Formula $\left\langle H\right\rangle =\sum_{n}\omega_{n}=0$
+\end_inset
+
+ but otherwise its not.
+ There are some famous theorems about this; the most important of these
+ is the Atiyah–Singer theorem.
+ https://en.wikipedia.org/wiki/Spectral_asymmetry
+\end_layout
+
+\begin_layout Subsection*
+Regulators
+\end_layout
+
+\begin_layout Standard
+This is a quasi repeat of my earlier email, but now in the Hamiltonian setting.
+ Given some complex number 
+\begin_inset Formula $s$
+\end_inset
+
+, write 
+\begin_inset Formula 
+\[
+\left\langle H\right\rangle _{s}=\sum_{n}\omega_{n}\left|\omega_{n}\right|^{-s}
+\]
+
+\end_inset
+
+As a general rulewhich 
+\end_layout
+
+\end_body
+\end_document
