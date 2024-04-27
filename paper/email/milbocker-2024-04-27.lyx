@@ -4,11 +4,10 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass acmart
+\textclass article
 \begin_preamble
 \usepackage{tikz-cd}
 \end_preamble
-\options format=acmsmall
 \use_default_options false
 \maintain_unincluded_children false
 \language english
@@ -131,8 +130,8 @@ Written in this form, this
 
  could be anything: a vibrating guitar string, a vibrating airplane wing,
  the Schroedinger eqn for the hydrogen atom, a radar cavity for some electronics
-, a harmonic operator on some quotient of Lie algebras, a Dirac operator
- on some n-dimensional spacetime.
+, a harmonic operator on some quotient of Lie groups, a Dirac operator on
+ some n-dimensional spacetime.
  Don't care, doesn't matter as long as the spectrum is discrete (and thus
  countable).
 \end_layout
@@ -184,6 +183,32 @@ valid
 \end_layout
 
 \begin_layout Standard
+When this sum is absolutely convergent, then such an operator 
+\begin_inset Formula $H$
+\end_inset
+
+ is called 
+\begin_inset Quotes eld
+\end_inset
+
+trace class
+\begin_inset Quotes erd
+\end_inset
+
+.
+ https://en.wikipedia.org/wiki/Trace_class For the case where 
+\begin_inset Formula $H$
+\end_inset
+
+ is not an operator, but is instead a map between spaces, see https://en.wikipedi
+a.org/wiki/Nuclear_operator
+\end_layout
+
+\begin_layout Standard
+Returning to simple things:
+\end_layout
+
+\begin_layout Standard
 The issue is that, for guitar strings, the eigenvalues are unbounded: 
 \begin_inset Formula $\omega_{n}=2\pi n/L$
 \end_inset
@@ -205,7 +230,7 @@ This is a generic problem: Hamiltonians have spectrums that are unbounded.
 \begin_inset Formula $\omega_{n}$
 \end_inset
 
- similar to the guitar string, but sphere symmety means sphere harmonics
+ similar to the guitar string, but sphere symmetry means sphere harmonics
  which means there are 
 \begin_inset Formula $\ell\left(\ell+1\right)$
 \end_inset
@@ -300,7 +325,10 @@ spectral asymmetry
  but otherwise its not.
  There are some famous theorems about this; the most important of these
  is the Atiyah–Singer theorem.
- https://en.wikipedia.org/wiki/Spectral_asymmetry
+\end_layout
+
+\begin_layout Standard
+https://en.wikipedia.org/wiki/Spectral_asymmetry
 \end_layout
 
 \begin_layout Subsection*
@@ -308,7 +336,7 @@ Regulators
 \end_layout
 
 \begin_layout Standard
-This is a quasi repeat of my earlier email, but now in the Hamiltonian setting.
+This is a quasi-repeat of my earlier email, but now in the Hamiltonian setting.
  Given some complex number 
 \begin_inset Formula $s$
 \end_inset
@@ -321,7 +349,286 @@ This is a quasi repeat of my earlier email, but now in the Hamiltonian setting.
 
 \end_inset
 
-As a general rulewhich 
+For the guitar string example, ignore the assorted constants and take 
+\begin_inset Formula $\omega_{n}=n$
+\end_inset
+
+ for positive 
+\begin_inset Formula $n$
+\end_inset
+
+ only.
+ Then
+\begin_inset Formula 
+\[
+\left\langle H\right\rangle _{s}=\sum_{n=1}^{\infty}n\left|n\right|^{-s}=\sum_{n=1}^{\infty}n^{-s+1}
+\]
+
+\end_inset
+
+and this sum is absolutely convergent for 
+\begin_inset Formula $\sigma>2$
+\end_inset
+
+ where 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset
+
+ are the real and imaginary parts of 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ More interesting is that this is just some plain-old complex-analytic series,
+ and can be analytically continued to the 
+\begin_inset Quotes eld
+\end_inset
+
+entire
+\begin_inset Quotes erd
+\end_inset
+
+ complex plane.
+ It has a simple pole at 
+\begin_inset Formula $s=0$
+\end_inset
+
+ and no poles anywhere else.
+ Simple pole means it behaves like 
+\begin_inset Formula $1/s$
+\end_inset
+
+ near 
+\begin_inset Formula $s=0$
+\end_inset
+
+ and so now one can talk about the expression
+\begin_inset Formula 
+\[
+\left\langle H\right\rangle _{\mbox{finite}}=\left\langle H\right\rangle _{s}-\frac{1}{s}
+\]
+
+\end_inset
+
+and make some hand-waving arguments about how 
+\begin_inset Formula $\left\langle H\right\rangle _{\mbox{finite}}$
+\end_inset
+
+ is the vacuum expectation value for a vibrating guitar string, after removal
+ of the divergences.
+ In fact, for the guitar string, we have 
+\begin_inset Formula $\left\langle H\right\rangle _{\mbox{finite}}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now let me take the conventional big leap.
+ If one studies quantum field theory, using the standard formalism used
+ in the 1960's through 1990's, one discovers that the quantized bosonic
+ field looks more-or-less like a guitar-string at every point in spacetime.
+ More formally, it is a simple harmonic oscillator at every point in spacetime.
+ Well, actually, it is a simple harmonic oscillator at every point in momentum
+ space, and it was wrong to talk about position space, because in momentum
+ space, the propagator blah-blah-blah.
+ For the hand-waving part, it is sufficient to claim that there's an SHO
+ at every point, and since the SHO has 
+\begin_inset Formula $\omega_{n}=n+1/2$
+\end_inset
+
+ you plug through the sum above to get 
+\begin_inset Formula $\left\langle H\right\rangle _{s}$
+\end_inset
+
+ and you remove the the obvious simple pole to get 
+\begin_inset Formula $\left\langle H\right\rangle _{\mbox{finite}}$
+\end_inset
+
+ and since its a non-interacting bosonic field, its 
+\begin_inset Formula $\left\langle H\right\rangle _{\mbox{finite}}=0$
+\end_inset
+
+ or I guess its 
+\begin_inset Formula $\left\langle H\right\rangle _{\mbox{finite}}=1/2$
+\end_inset
+
+; I'm too lazy to do the sum and the analytic continuation: this is just
+ the Hurwicz zeta function, and this is just a plain-old-ordinary complex-analyt
+ic function and conventional 19th century math handles this just fine.
+\end_layout
+
+\begin_layout Standard
+Of course, there's an infinite number of points in space, so you have to
+ multiply the above by infinity.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+correct
+\begin_inset Quotes erd
+\end_inset
+
+ solution for this is not to count points but to use measure theory.
+ There's actually some formal mathematically-rigorous ways of doing this;
+ one I've tripped across is 
+\begin_inset Quotes eld
+\end_inset
+
+abstract Weiner space
+\begin_inset Quotes erd
+\end_inset
+
+ which is pretty cool.
+ https://en.wikipedia.org/wiki/Abstract_Wiener_space
+\end_layout
+
+\begin_layout Standard
+There are other ways of making some amount of mathematically-rigorous forward
+ progress within this conventional QFT framework.
+ They don't go all the way.
+ The other alternative is to throw up your hands and say 
+\begin_inset Quotes eld
+\end_inset
+
+screw it
+\begin_inset Quotes erd
+\end_inset
+
+ and use string theory, in which you can explicitly show that these kinds
+ of sums are explicitly finite, using completely unrelated mechanisms.
+ But then you get the string swampland.
+ At any rate, we're totally off-topic.
+\end_layout
+
+\begin_layout Standard
+Returning to the main topic: for an airplane wing, or for a vibrating drum
+ (instead of a guitar string) one has 
+\begin_inset Formula $\omega_{n}=n+\mathcal{O}\left(1\right)$
+\end_inset
+
+ but you have 
+\begin_inset Formula $\ell$
+\end_inset
+
+ of these (for a 
+\begin_inset Quotes eld
+\end_inset
+
+perfectly round wing
+\begin_inset Quotes erd
+\end_inset
+
+ aka a 
+\begin_inset Quotes eld
+\end_inset
+
+spherical cow
+\begin_inset Quotes erd
+\end_inset
+
+), and so now your right-most pole is at 
+\begin_inset Formula $s=1$
+\end_inset
+
+ and maybe more poles in other locations, and for a spherical radar cavity,
+ the modes are 
+\begin_inset Formula $\ell\left(\ell+1\right)$
+\end_inset
+
+ degenerate so you get a pole at 
+\begin_inset Formula $s=2$
+\end_inset
+
+ and maybe more poles in other places, and so on down the line: a pole at
+ 
+\begin_inset Formula $s=D-1$
+\end_inset
+
+ for 
+\begin_inset Formula $D$
+\end_inset
+
+ dimensions.
+ All this is more-or-less 19th century complex analysis, with no particular
+ magic.
+ Except for the spectrum, it's not physics; the sums are just classical
+ sums.
+\end_layout
+
+\begin_layout Standard
+As already noted, the exponential regulator is 
+\begin_inset Formula 
+\[
+\left\langle H\right\rangle _{t}=\sum_{n}\omega_{n}\exp-t\left|\omega_{n}\right|
+\]
+
+\end_inset
+
+and as you already know, this can be related to 
+\begin_inset Formula $\left\langle H\right\rangle _{s}$
+\end_inset
+
+ with the Laplace transform & Mellin transform.
+ 
+\end_layout
+
+\begin_layout Standard
+The gaussian regulator is 
+\begin_inset Formula 
+\[
+\left\langle H\right\rangle _{gt}=\sum_{n}\omega_{n}\exp-t^{2}\left|\omega_{n}\right|^{2}
+\]
+
+\end_inset
+
+and I'm not sure how to relate this to the other regulators, but again,
+ the place to look is not physics books, cause this is not physics, but
+ instead books on complex analysis.
+ In my experience, books from the late 19th and early 20th century are better
+ places to look for obscure stuff like this, because the modern texts have
+ decided that the obscure stuff is boring and they skip it in favor of modern
+ developments.
+ And honestly, the obscure stuff really is mind-numbingly dull, unless you
+ actually need to actually have some specific obscure formula, in which
+ case it's fascinating.
+ So I'm thinking, for example, the Hardy&Littlewood (or is it Hardy & Wright?)
+ book from 1921, which is filled with mathematical gems on complex analysis
+ that you'll never find in modern texts, and which will also drain from
+ your mind as soon as you turn the page.
+ Frack, I can't even remember the names of the authors of some of the things
+ I've seen.
+ In short, I've seen this stuff, but I haven't memorized it, so I can't
+ tell you what it is.
+ Sorry, I have to say 
+\begin_inset Quotes eld
+\end_inset
+
+happy hunting
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Anyway, I hope this clarifies what it means for something 
+\begin_inset Quotes eld
+\end_inset
+
+to be finite
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+to be convergent
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_body
