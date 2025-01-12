@@ -193,6 +193,213 @@ Here's how to start.
  more gracefully than others.
 \end_layout
 
+\begin_layout Standard
+From here on out, you will read a mish-mash of formulas, confusing shit,
+ unwarranted leaps of inference, flat-out wrong statements, not-even-wrong
+ statements, and hopefully maybe a grand insight.
+ Fingers crossed.
+ This will probably be written in chronological order, rather than in conceptual
+, pedagogical order.
+ This will be mostly a diary, with stitching.
+\end_layout
+
+\begin_layout Section
+Ingredients
+\end_layout
+
+\begin_layout Standard
+Lets review the proposed ingredients.
+ These are combinatorics, statistical mechanics and syntax.
+\end_layout
+
+\begin_layout Subsection
+Moreau's Necklace-counting Function
+\end_layout
+
+\begin_layout Standard
+Moreau's neckalce-counting function is well-described in the Wikipedia article
+ on the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Necklace Polynomial"
+target "https://en.wikipedia.org/wiki/Necklace_polynomial"
+literal "false"
+
+\end_inset
+
+, I wrote most of the Wikipedia articles on the Free Lie Algebra, and on
+ Hall Words.
+ Check the edit history, I am 
+\begin_inset CommandInset href
+LatexCommand href
+name "User 67.198.37.16"
+target "https://en.wikipedia.org/wiki/User_talk:67.198.37.16"
+literal "false"
+
+\end_inset
+
+.
+ I also wrote a chunk of the Poincare-Birkoff-Witt theorem article, and
+ the universal enveloping algebra article, and the tensor algebra article,
+ and so on.
+ So all of those are percolating in the back of my mind as I write this.
+ I write this because they percolate, but fail to make an impact.
+ I don't know why.
+\end_layout
+
+\begin_layout Standard
+Necklaces are about beads, but I want to think about words drawn from a
+ vocabulary.
+ so ideas like cyclic permutations fall by the wayside.
+ I guess I want aperiodic necklaces.
+\end_layout
+
+\begin_layout Standard
+This is probably the wrong place to start.
+ Perhaps 
+\begin_inset CommandInset href
+LatexCommand href
+name "Pólya theory"
+target "https://en.wikipedia.org/wiki/P%C3%B3lya_enumeration_theorem"
+literal "false"
+
+\end_inset
+
+ is more appropriate, and I suspect part of my problems is that I'm ignorant
+ of Pólya theory.
+ Except I'm only marginally interested in permutations.
+\end_layout
+
+\begin_layout Standard
+I'm going to skip quoting explicit formulas, until I figure out how to motivate
+ their need.
+\end_layout
+
+\begin_layout Subsection
+Ising model
+\end_layout
+
+\begin_layout Standard
+I've lightly edited various Wikipedia articles in the general area of the
+ Ising model.
+ This area has a huge bundle of nearby research as well, of which I am mostly
+ ignorant.
+ Sorry.
+ In the most basic form, we have a lattice 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ with lattice sites 
+\begin_inset Formula $k\in\Lambda$
+\end_inset
+
+.
+ At each site 
+\begin_inset Formula $k$
+\end_inset
+
+ there is a spin 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ taking values over some alphabet 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ By convention, 
+\begin_inset Formula $V=\left\{ +1,-1\right\} $
+\end_inset
+
+ so that 
+\begin_inset Formula $\sigma_{k}\in\left\{ +1,-1\right\} $
+\end_inset
+
+ is interpreted as spin-up and spin-down.
+ The Hamiltonian is
+\begin_inset Formula 
+\[
+H\left(\sigma\right)=-\sum_{\left\langle ij\right\rangle }J_{ij}\sigma_{i}\sigma_{j}-\mu\sum_{j}h_{j}\sigma_{j}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $J_{ij}$
+\end_inset
+
+ is the interaction energy, 
+\begin_inset Formula $\left\langle ij\right\rangle $
+\end_inset
+
+ denotes nearest neighbors, 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is the magnetization and 
+\begin_inset Formula $h_{j}$
+\end_inset
+
+ is the magnetic field at site 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ The unsubscripted 
+\begin_inset Formula $\sigma=\left\{ \sigma_{k}\right\} _{k\in\Lambda}$
+\end_inset
+
+ is a given fixed spin configuration on the lattice 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For a linguistic application, this is to be generalized by an alphabet 
+\begin_inset Formula $V$
+\end_inset
+
+ the vocabulary, with the size of the vocabulary 
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ being ten thousand or 100 thousand words, or perhaps a mixture of words
+ and morphemes.
+ In transformer theory, this is called 
+\begin_inset Quotes eld
+\end_inset
+
+subword tokenization
+\begin_inset Quotes erd
+\end_inset
+
+, a variant of which is 
+\begin_inset Quotes eld
+\end_inset
+
+Byte Pair Encoding
+\begin_inset Quotes erd
+\end_inset
+
+.
+ To stick to more classical linguistic theory, I like calling them 
+\begin_inset Quotes eld
+\end_inset
+
+morphemes
+\begin_inset Quotes erd
+\end_inset
+
+, even though that invites arguments.
+ The arguments are evaded with probability.
+\end_layout
+
+\begin_layout Standard
+The intended Hamiltonian is
+\end_layout
+
 \begin_layout Section
 The End
 \end_layout
