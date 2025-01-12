@@ -145,7 +145,7 @@ l spaces.
  through Europe and Asia? All these are describable via complex, dynamic
  structured graphs and relationships interacting in non-linear ways.
  They are all big enough and complex enough that we should be able to find
- some sort of generic meso-scale statistical-mechanical theory for them.
+ some sort of generic mesoscale statistical-mechanical theory for them.
  Drunk people at parties say things like 
 \begin_inset Quotes eld
 \end_inset
@@ -165,7 +165,7 @@ This diary entry will start very very small.
  this.
  I tend to get distracted easily, and leave projects unfinished.
  The above captures the inspiration for why, perhaps, this diary is needed.
- Again, what follows will be miniscule, compared to the over-arching sketch
+ Again, what follows will be minuscule, compared to the over-arching sketch
  above.
 \end_layout
 
@@ -357,6 +357,40 @@ where
 \end_layout
 
 \begin_layout Standard
+If the interaction strength is homogeneous, but limited to nearest neighbors
+ only, then one writes
+\begin_inset Formula 
+\[
+J_{ij}=\begin{cases}
+J & \mbox{if \ensuremath{i,j} are nearest neighbors}\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+so that the interaction no longer depends on the sites 
+\begin_inset Formula $i,j$
+\end_inset
+
+.
+ Likewise, 
+\begin_inset Formula $h_{j}=h$
+\end_inset
+
+ is used to denote a uniform magnetic field.
+ This can be folded into 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Link Grammar
+\end_layout
+
+\begin_layout Standard
 For a linguistic application, this is to be generalized by an alphabet 
 \begin_inset Formula $V$
 \end_inset
@@ -397,7 +431,222 @@ morphemes
 \end_layout
 
 \begin_layout Standard
-The intended Hamiltonian is
+The intended Hamiltonian is as follows.
+ I will need a few attempts to get this right, so bear with me.
+\begin_inset Formula 
+\[
+H\left(\sigma\right)=-\sum_{l}C_{l}\left(\sigma\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is now a fixed sequence of words (of some fixed length) and 
+\begin_inset Formula $C_{l}\left(\sigma\right)$
+\end_inset
+
+ is the total cost of the linkage 
+\begin_inset Formula $l$
+\end_inset
+
+ of those words.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+cost
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+linkage
+\begin_inset Quotes erd
+\end_inset
+
+ are terminology from Link Grammar.
+ Linkages factorize in such a way that only certain words interact, but
+ not others, in a standard dependency grammar fashion.
+ Thus intransitive verbs link to subjects, but transitive verbs require
+ both subjects and objects.
+ I won't recap the theory, read the papers.
+ The primary property is that, for a fixed word-sequence 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and a fixed linkage 
+\begin_inset Formula $l$
+\end_inset
+
+, the cost 
+\begin_inset Formula $C_{l}\left(\sigma\right)$
+\end_inset
+
+ factorizes linearly, as
+\begin_inset Formula 
+\[
+C_{l}\left(\sigma\right)=\sum_{d}J_{d}\left(w_{i(1)},w_{i(2)},\cdots,w_{i(m)}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma=\left(w_{1},w_{2},\cdots,w_{n}\right)$
+\end_inset
+
+ is the sequence of words 
+\begin_inset Formula $\sigma_{k}=w_{k}$
+\end_inset
+
+ in a sentence of length 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The sentence consists of a covering by subsequences 
+\begin_inset Formula $\left(w_{i(1)},w_{i(2)},\cdots,w_{i(m)}\right)$
+\end_inset
+
+ of variable size 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ These subsequences overlap (must overlap) and must cover the entire sentences
+ (else a cost of infinity can be imposed).
+ That is, every work belongs to one or more subsequences.
+ The 
+\begin_inset Formula $i(k)$
+\end_inset
+
+ is an awkward notation to denote the selected words in the subsequence,
+ which I will use till I find a better notation.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $d$
+\end_inset
+
+ is a 
+\begin_inset Quotes eld
+\end_inset
+
+disjunct
+\begin_inset Quotes erd
+\end_inset
+
+ stemming from the fact that, in Link Grammar, connectors are conjoined
+ into one disjunct, and the grammar rules are disjoined collections of disjuncts.
+ All that matters here is that 
+\begin_inset Formula $J_{d}\left(w_{i(1)},w_{i(2)},\cdots,w_{i(m)}\right)$
+\end_inset
+
+ is a real number assigned to a subsequence of words.
+ The total cost is the cost of the subsequences.
+\end_layout
+
+\begin_layout Standard
+Hopefully, the relationship to the Ising model is clear.
+ The Ising model has two words, denoted by 
+\begin_inset Formula $\uparrow$
+\end_inset
+
+ and 
+\begin_inset Formula $\downarrow$
+\end_inset
+
+.
+ It has a set of four disjuncts: 
+\begin_inset Formula $\left\{ J_{\uparrow\uparrow},J_{\uparrow\downarrow},J_{\downarrow\uparrow},J_{\downarrow\downarrow}\right\} $
+\end_inset
+
+ that have the numerical values 
+\begin_inset Formula $J_{\uparrow\uparrow}=J_{\downarrow\downarrow}=+J$
+\end_inset
+
+ and 
+\begin_inset Formula $J_{\uparrow\downarrow}=J_{\downarrow\uparrow}=-J$
+\end_inset
+
+.
+ For Link Grammar, the 
+\begin_inset Formula $J_{d}$
+\end_inset
+
+ might be over nearest neighbors, or they might range over three words,
+ and rarely four or more.
+ Usually but not always, these interactions are local.
+\end_layout
+
+\begin_layout Standard
+A multitude of comments:
+\end_layout
+
+\begin_layout Itemize
+In the past, I've claimed that the Link Grammar costs should be thought
+ of as entropy or mutual information.
+ But for the above model, its clear they should be interpreted as energy.
+ I don't yet know how to resolve these conflicting claims.
+\end_layout
+
+\begin_layout Itemize
+Posing this problem in this way already makes in intractable, since the
+ complexity of language means that there cannot be any simple closed-form
+ solution.
+ I had vaguely thought I'd take a few logarithms of Moreau's necklace counting
+ function and find some simple edifying example, but this can't happen in
+ this way.
+\end_layout
+
+\begin_layout Itemize
+Posing the problem in this way does allow numerical treatments, although
+ we haven't specified how to obtain the disjunct costs 
+\begin_inset Formula $J_{d}$
+\end_inset
+
+ for a natural language.
+ The original Link Grammar does provide a dictionary of these, but that
+ dict is hand-built.
+ I've explored learning algos for it, but will not get into that here.
+\end_layout
+
+\begin_layout Itemize
+The point of writing down the 
+\begin_inset Formula $J_{d}$
+\end_inset
+
+ is that it is a factorization of what would otherwise be an 
+\begin_inset Formula $n$
+\end_inset
+
+–word interaction 
+\begin_inset Formula $C_{l}\left(w_{1},w_{2},\cdots,w_{n}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This last point is the pebble in my shoe.
+ The conventional deep-learning neural net transformers work with unfactored
+ 
+\begin_inset Formula $C_{l}\left(w_{1},w_{2},\cdots,w_{n}\right)$
+\end_inset
+
+ directly, working against the intuition of linguists that such factorization
+ is possible.
+ I've repeatedly hand-waved about this, but never seriously sat down to
+ articulate this precisely.
+ In some sense, the world doesn't care if this is done; they're happy with
+ transformers as they are.
+ Myself, I'm irked, but I make only lame attempts to extract that pebble
+ from my shoe.
 \end_layout
 
 \begin_layout Section
