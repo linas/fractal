@@ -281,7 +281,16 @@ Ising model
 
 \begin_layout Standard
 I've lightly edited various Wikipedia articles in the general area of the
- Ising model.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Ising model"
+target "https://en.wikipedia.org/wiki/Ising_model"
+literal "false"
+
+\end_inset
+
+.
  This area has a huge bundle of nearby research as well, of which I am mostly
  ignorant.
  Sorry.
@@ -434,9 +443,9 @@ morphemes
 The intended Hamiltonian is as follows.
  I will need a few attempts to get this right, so bear with me.
 \begin_inset Formula 
-\[
-H\left(\sigma\right)=-\sum_{l}C_{l}\left(\sigma\right)
-\]
+\begin{equation}
+H\left(\sigma\right)=-\sum_{l}C_{l}\left(\sigma\right)\label{eq:sum over linkages}
+\end{equation}
 
 \end_inset
 
@@ -489,9 +498,9 @@ linkage
 
  factorizes linearly, as
 \begin_inset Formula 
-\[
-C_{l}\left(\sigma\right)=\sum_{d}J_{d}\left(w_{i(1)},w_{i(2)},\cdots,w_{i(m)}\right)
-\]
+\begin{equation}
+C_{l}\left(\sigma\right)=\sum_{d}J_{d}\left(w_{i(1)},w_{i(2)},\cdots,w_{i(m)}\right)\label{eq:sum over disjuncts}
+\end{equation}
 
 \end_inset
 
@@ -589,6 +598,14 @@ A multitude of comments:
 \end_layout
 
 \begin_layout Itemize
+There are many other ways of talking about grammar and syntax.
+ They are all, in some general sense, equivalent.
+ I like Link Grammar because it is amenable to this kind of thinking.
+ This is the incorrect place to demonstrate equivalence between different
+ grammatical approaches.
+\end_layout
+
+\begin_layout Itemize
 In the past, I've claimed that the Link Grammar costs should be thought
  of as entropy or mutual information.
  But for the above model, its clear they should be interpreted as energy.
@@ -614,6 +631,40 @@ Posing the problem in this way does allow numerical treatments, although
  The original Link Grammar does provide a dictionary of these, but that
  dict is hand-built.
  I've explored learning algos for it, but will not get into that here.
+\end_layout
+
+\begin_layout Itemize
+Posing the problem this way does allow reformulation as a graph-theoretic
+ maximum-cut problem.
+ See the Wikipedia article for the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Ising model"
+target "https://en.wikipedia.org/wiki/Ising_model"
+literal "false"
+
+\end_inset
+
+.
+ For AI, the maximum cut can be tied to Tononi's 
+\begin_inset Quotes eld
+\end_inset
+
+cruelest cut
+\begin_inset Quotes erd
+\end_inset
+
+, and Tegmark's exposition of the same.
+ (Tegmark, 
+\begin_inset CommandInset href
+LatexCommand href
+name "Consciousness as a State Of Matter"
+target "https://www.sciencedirect.com/science/article/abs/pii/S0960077915000958"
+literal "false"
+
+\end_inset
+
+, 2015)
 \end_layout
 
 \begin_layout Itemize
@@ -647,6 +698,128 @@ This last point is the pebble in my shoe.
  transformers as they are.
  Myself, I'm irked, but I make only lame attempts to extract that pebble
  from my shoe.
+\end_layout
+
+\begin_layout Subsection
+Statistical Mechanics
+\end_layout
+
+\begin_layout Standard
+For the present case, the Boltzmann distribution suffices.
+ It is
+\begin_inset Formula 
+\[
+P_{\beta}\left(\sigma\right)=\frac{\exp-\beta H\left(\sigma\right)}{Z_{\beta}}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\beta$
+\end_inset
+
+ the inverse temperature, and 
+\begin_inset Formula $Z_{\beta}$
+\end_inset
+
+ the partition function,
+\begin_inset Formula 
+\[
+Z_{\beta}=\sum_{\sigma}\exp-\beta H\left(\sigma\right)
+\]
+
+\end_inset
+
+More precisely, the above should be taken to be the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Gibbs measure"
+target "https://en.wikipedia.org/wiki/Gibbs_measure"
+literal "false"
+
+\end_inset
+
+.
+ Writing the energy as a sum over linkages 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sum over linkages"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and sum over disjuncts 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sum over disjuncts"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ imply that the probability factorizes into Markov cluster.
+ The resulting form goes under the name of a 
+\begin_inset CommandInset href
+LatexCommand href
+name "Markov random field"
+target "https://en.wikipedia.org/wiki/Markov_random_field"
+literal "false"
+
+\end_inset
+
+.
+ The Wikipedia article provides a suitable notation.
+ When presented in the form of a 
+\begin_inset CommandInset href
+LatexCommand href
+name "conditional random field"
+target "https://en.wikipedia.org/wiki/Conditional_random_field"
+literal "false"
+
+\end_inset
+
+, the utility for natural language and machine learning has already been
+ recognized: Wikipedia gives papers dating to 2001, one by John Lafferty,
+ a co-creator of Link Grammar.
+\end_layout
+
+\begin_layout Standard
+The question mark, or pebble in my shoe, is whether and how it might be
+ possible to factorize transformers, in all their varied manifestations,
+ into Markov random fields.
+ Again, linguistics suggests this should be possible, at least to some approxima
+te degree.
+ Good old-fashioned AI also suggests this.
+ But what is that factorization?
+\end_layout
+
+\begin_layout Subsection
+Geometry
+\end_layout
+
+\begin_layout Standard
+I wish to give this a differential–geometric interpretation.
+ The inspiration would be the use of exp to map from adjoint Lie algebras
+ to elements of the Lie group, or perhaps more generally, the use of exp
+ to map from vectors in a tangent space to geodesics in Riemannian manifolds.
+ This is the intended inspiration.
+ Some of this has surely been articulated before, but I am ignorant of the
+ literature.
+ I think Gaussian orthogonal ensembles play into this.
+ But I digress.
+ Lets get back on track.
+\end_layout
+
+\begin_layout Standard
+We take the vocabulary 
+\begin_inset Formula $V$
+\end_inset
+
+ to define a high-dimensional vector space.
+ 
 \end_layout
 
 \begin_layout Section
