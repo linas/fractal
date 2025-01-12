@@ -4,16 +4,12 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass amsart
+\textclass article
 \begin_preamble
-\usepackage{tikz-cd}
+\usepackage{url} 
+\usepackage{slashed}
 \end_preamble
 \use_default_options false
-\begin_modules
-theorems-ams
-eqs-within-sections
-figs-within-sections
-\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -21,7 +17,7 @@ figs-within-sections
 \fontencoding global
 \font_roman "times" "default"
 \font_sans "helvet" "default"
-\font_typewriter "courier" "default"
+\font_typewriter "cmtt" "default"
 \font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
@@ -43,20 +39,20 @@ figs-within-sections
 \pdf_bookmarksnumbered false
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
-\pdf_breaklinks false
-\pdf_pdfborder false
-\pdf_colorlinks false
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
 \pdf_backref false
 \pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_package amsmath 2
-\use_package amssymb 0
+\use_package amssymb 2
 \use_package cancel 1
 \use_package esint 0
 \use_package mathdots 1
 \use_package mathtools 1
-\use_package mhchem 1
+\use_package mhchem 0
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
@@ -68,7 +64,7 @@ figs-within-sections
 \paperorientation portrait
 \suppress_date false
 \justification true
-\use_refstyle 1
+\use_refstyle 0
 \use_minted 0
 \index Index
 \shortcut idx
@@ -96,6 +92,109 @@ figs-within-sections
 
 \begin_layout Title
 Complexity
+\begin_inset Newline newline
+\end_inset
+
+Combinatorial Syntactical Constraints
+\begin_inset Newline newline
+\end_inset
+
+Syntactical Kinematics
+\end_layout
+
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Date
+11 January 2025
+\end_layout
+
+\begin_layout Abstract
+Diary exploring how complexity is expressed, using tools from combinatorics
+ and model theory.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Approximately 100 to 140 years ago, Boltzmann, Planck, Bose, Einstein, Dirac
+ and Fermi considered the distributions to which their names are now attached.
+ They considered collections of a large number of identical particles (photons,
+ bosons, fermions) and how such collections behaved, thermodynamically.
+ This lead to a microscopic description of the equation of state for a gas
+ in a box, of a formula for black-body radiation, and foundations for some
+ of the more exotic structures in nature.
+\end_layout
+
+\begin_layout Standard
+Since then, there have been broad advances in dynamical systems and ergodic
+ theory.
+ There have also been advances in linguistics, computers, model theory,
+ proof theory and, of course deep-learing neural-net large language models
+ (LLM's) embedded in hyperdimensional vector spaces.
+ Despite this, I have been unable to find, read about or personally formulate
+ a general conception of how entropy and thermodynamics works in high-dimensiona
+l spaces.
+ Examples are abundant: What's the entropy of protein folding? What's the
+ entropy of galaxy formation? What's the entropy of an immunoglobulin antibody
+ binding site? A DNA coding region? What's the entropy of the English language?
+ What's the entropy of the spread of Human culture, language and genetics
+ through Europe and Asia? All these are describable via complex, dynamic
+ structured graphs and relationships interacting in non-linear ways.
+ They are all big enough and complex enough that we should be able to find
+ some sort of generic meso-scale statistical-mechanical theory for them.
+ Drunk people at parties say things like 
+\begin_inset Quotes eld
+\end_inset
+
+oh, is a lot like the Ising Model
+\begin_inset Quotes erd
+\end_inset
+
+ and everyone shakes their heads in agreement, but it never gets farther
+ than that.
+\end_layout
+
+\begin_layout Standard
+This diary entry will start very very small.
+ The above grandiose and almost bombastic introduction is meant to serve
+ as a reminder to myself as to why I should invest my time and energy into
+ this.
+ I tend to get distracted easily, and leave projects unfinished.
+ The above captures the inspiration for why, perhaps, this diary is needed.
+ Again, what follows will be miniscule, compared to the over-arching sketch
+ above.
+\end_layout
+
+\begin_layout Standard
+Here's how to start.
+ Consider first Moreau's Necklace-counting function.
+ This is a combinatoric function, counting how many distinct necklaces can
+ be made from colored beads.
+ The beads can be freely arranged; the length and the number of colors are
+ fixed.
+ What's the entropy? For two colors and one dimension, this is just the
+ Ising model, with zero interaction.
+ What if we imagine the beads to be words, selected from a vocabulary of
+ size N, but require that the constructed necklaces be grammatically correct
+ sentences? That is, we apply syntactic constraints to limit acceptable
+ sentences.
+ To make it more physics-like, we should say that grammatically unacceptable
+ sentences are high-energy, while grammatical ones are low-energy.
+ We can assign to each rule of grammar, each grammatical dependency, a cost,
+ an interaction-energy, so that an analogy can be made to ferromagnetic
+ and antiferromagnetic behaviors in Ising models.
+ This diary is an effort to mash up and push on this collection of ideas.
+ I fear it won't get far.
+ Every journey starts with a single step, but some of us walk faster and
+ more gracefully than others.
+\end_layout
+
+\begin_layout Section
+The End
 \end_layout
 
 \end_body
