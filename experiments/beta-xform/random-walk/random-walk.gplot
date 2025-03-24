@@ -7,4 +7,8 @@ set out 'random-walk.png'
 
 set xrange [-0.01:1.01]
 
-plot "random-walk.dat" using 2:4 with lines linewidth 2 title ""
+gauss(x) = exp(-0.5*x*x) / sqrt(2.0 * 3.14159)
+width = 6.0
+
+plot "random-walk.dat" using 2:($4/width) with lines linewidth 2 title "", \
+	gauss(width*(x-0.5)) linewidth 2
