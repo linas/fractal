@@ -15,9 +15,6 @@
 /* Number of samples */
 #define NSAMP 5000
 
-/* Number of steps to take */
-#define NUM_STEPS 3000
-
 int left_or_right(void)
 {
 	int r = rand();
@@ -67,15 +64,25 @@ void histo_print(void)
 
 int main(int argc, char* argv[])
 {
+	if (argc !=2)
+	{
+		fprintf(stderr, "Usage: %s nsteps\n", argv[0]);
+		exit(-1);
+	}
+
+	/* Number of steps to take */
+	int num_steps = atoi(argv[1]);
+
 	histo_init();
 	for (int ns=0; ns < NSAMP; ns++)
 	{
-		int pt = walk(NUM_STEPS);
-		// double x = pt / sqrt(NUM_STEPS);
-		double x = pt / ((double) NUM_STEPS);
+		int pt = walk(num_steps);
+		// double x = pt / sqrt(num_steps);
+		double x = pt / ((double) num_steps);
 		x += 0.5;
 		histo_accum(x);
 	}
 
+	printf("#\n# num-steps=%d\n#\n", num_steps);
 	histo_print();
 }
