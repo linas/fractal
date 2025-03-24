@@ -16,7 +16,7 @@
 #define NSAMP 5000
 
 /* Number of steps to take */
-#define NUM_STEPS 300
+#define NUM_STEPS 3000
 
 int left_or_right(void)
 {
@@ -71,7 +71,9 @@ int main(int argc, char* argv[])
 	for (int ns=0; ns < NSAMP; ns++)
 	{
 		int pt = walk(NUM_STEPS);
-		double x = pt / sqrt(NUM_STEPS);
+		// double x = pt / sqrt(NUM_STEPS);
+		double x = pt / ((double) NUM_STEPS);
+		x += 0.5;
 		histo_accum(x);
 	}
 
