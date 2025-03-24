@@ -72,13 +72,16 @@ int main(int argc, char* argv[])
 
 	/* Number of steps to take */
 	int num_steps = atoi(argv[1]);
+	double norm = 1.0 / sqrt(num_steps);
+
+	/* six sigma */
+	norm /= 6.0;
 
 	histo_init();
 	for (int ns=0; ns < NSAMP; ns++)
 	{
 		int pt = walk(num_steps);
-		// double x = pt / sqrt(num_steps);
-		double x = pt / ((double) num_steps);
+		double x = norm * pt;
 		x += 0.5;
 		histo_accum(x);
 	}
