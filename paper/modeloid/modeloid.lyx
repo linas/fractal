@@ -1,0 +1,614 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Modeloid Homework
+\end_layout
+
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Date
+21 June 2023
+\end_layout
+
+\begin_layout Abstract
+Some simple examples of modeloids.
+ T ahese are simple enough to be considered to be 
+\begin_inset Quotes eld
+\end_inset
+
+homework problems
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The goal is to help me understand the concept.
+ Examples include an abelian group and binary trees.
+\end_layout
+
+\begin_layout Section*
+Examples
+\end_layout
+
+\begin_layout Standard
+Some worked examples of modeloids.
+ Based on Benda's paper from 1979.
+ All text refers to definitions there.
+\end_layout
+
+\begin_layout Subsection*
+Equality on five objects
+\end_layout
+
+\begin_layout Standard
+Consider a set 
+\begin_inset Formula $A=\left\{ a,b,c,d,e\right\} $
+\end_inset
+
+ with five objects.
+ The goal is to model equality on this set.
+ Thus, the structure is just 
+\begin_inset Formula $\left\{ =\right\} $
+\end_inset
+
+ with 
+\begin_inset Formula $=$
+\end_inset
+
+ a binary relation, equality.
+ 
+\end_layout
+
+\begin_layout Standard
+The set 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ consists of 5 strings of length one, 
+\begin_inset Formula $4\times5=20$
+\end_inset
+
+ strings of length two, 
+\begin_inset Formula $5\times4\times3=60$
+\end_inset
+
+ strings of length three, 
+\begin_inset Formula $5\times4\times3\times2=120$
+\end_inset
+
+ of length four and 120 of length five.
+ So a total 325 strings.
+\end_layout
+
+\begin_layout Standard
+There are five relations: 
+\begin_inset Formula $\left\{ a=a,b=b,c=c,d=d,e=e\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Following example 1.5, we look for functions 
+\begin_inset Formula $f:A\to A$
+\end_inset
+
+ such that 
+\begin_inset Formula $x=y$
+\end_inset
+
+ iff 
+\begin_inset Formula $fx=fy$
+\end_inset
+
+.
+ These will have to be 1-to-1 and onto.
+ Any permutation of 
+\begin_inset Formula $A$
+\end_inset
+
+ will do, and so there are 120 such functions.
+ Picking any one of these gives a modeloid 
+\begin_inset Formula $E$
+\end_inset
+
+ and so we conclude there are 120 distinct modeloids for this object.
+ Extending 
+\begin_inset Formula $E$
+\end_inset
+
+ to all of 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ is trivial; consideration of strings of length two or more add nothing
+ new.
+\end_layout
+
+\begin_layout Standard
+We conclude the modeloid corresponds to the permutations on five objects.
+\end_layout
+
+\begin_layout Standard
+Per definition of derivatives, this has complexity 0, and is thus a basic
+ modeloid.
+\end_layout
+
+\begin_layout Subsection*
+Module addition on five objects
+\end_layout
+
+\begin_layout Standard
+Same as above, but using the structure 
+\begin_inset Formula $\left\{ =,+\right\} $
+\end_inset
+
+ with 
+\begin_inset Formula $+$
+\end_inset
+
+ interpreted as affine modulo addition.
+ Here, 
+\begin_inset Quotes eld
+\end_inset
+
+affine
+\begin_inset Quotes erd
+\end_inset
+
+ just means there is no zero object.
+ Example 1.5 asks us to convert addition to a relation 
+\begin_inset Formula $R\left(x,y,z\right)$
+\end_inset
+
+ which is true when 
+\begin_inset Formula $x+y=z$
+\end_inset
+
+.
+ For this case, assume 
+\begin_inset Formula $+$
+\end_inset
+
+ is a total function.
+ For 
+\begin_inset Formula $A$
+\end_inset
+
+, any set of sequential integers will do.
+ Any set of sequetial even numbers will also work.
+ Multiples of 3, etc.
+ May as well use 
+\begin_inset Formula $A=\left\{ 0,1,2,3,4\right\} $
+\end_inset
+
+ without loss of generality.
+\end_layout
+
+\begin_layout Standard
+The number of functions 
+\begin_inset Formula $f$
+\end_inset
+
+ now drops to five.
+ For all five, must have 
+\begin_inset Formula $f0=0$
+\end_inset
+
+.
+ Other than this, 
+\begin_inset Formula $f1$
+\end_inset
+
+ can be anything.
+\end_layout
+
+\begin_layout Standard
+Appearently, we are forced into this, without having to add constants 0
+ or 1 to the structure.
+ Modulo addition always has some element that must behave like 0.
+\end_layout
+
+\begin_layout Standard
+Extending 
+\begin_inset Formula $E$
+\end_inset
+
+ to strings in 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ brings nothing new.
+\end_layout
+
+\begin_layout Standard
+We conclude the modeliod corresponds to the Abelian group 
+\begin_inset Formula $\mathbb{Z}/5\mathbb{Z}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As before, this is a basic modeloid.
+\end_layout
+
+\begin_layout Subsection*
+Binary strings
+\end_layout
+
+\begin_layout Standard
+Prelude to constructing binary trees.
+ The set 
+\begin_inset Formula $A=2^{*}$
+\end_inset
+
+ consists of all binary strings of finite length.
+ This includes the string 
+\begin_inset Formula $\varnothing$
+\end_inset
+
+ of zero length.
+ Structure has one relation 
+\begin_inset Formula $<$
+\end_inset
+
+ interpreted as substrings with same leading digits.
+ This is not basic, for the same reason that the structure 
+\begin_inset Formula $\left\{ \mathbb{N},<\right\} $
+\end_inset
+
+ is not basic: There is no letter 
+\begin_inset Formula $x\in2=\left\{ 0,1\right\} $
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\left[0\right]\left[x\right]E\left[01\right]\left[\varnothing\right]$
+\end_inset
+
+ where brackets are used to denote strings.
+ The problem persists even if we remove the empty string and work with 
+\begin_inset Formula $A\backslash\varnothing$
+\end_inset
+
+.
+ The derivative 
+\begin_inset Formula $E^{\prime}$
+\end_inset
+
+ of 
+\begin_inset Formula $E$
+\end_inset
+
+ is just 
+\begin_inset Formula $E$
+\end_inset
+
+ with all strings containing null on the right removed.
+ 
+\end_layout
+
+\begin_layout Standard
+Let's practice putting this into symbols.
+ Write 
+\begin_inset Formula $B=A\backslash\varnothing$
+\end_inset
+
+ and construct 
+\begin_inset Formula $\hat{B}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $E^{\prime}=E\cap\left(\hat{A}\times\hat{B}\right)$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $E\subset\hat{A}\times\hat{A}$
+\end_inset
+
+ of Cartesian pairs of binary strings.
+\end_layout
+
+\begin_layout Standard
+There are no further problems, so 
+\begin_inset Formula $E^{\prime\prime}=E^{\prime}$
+\end_inset
+
+, and the modeloid has complexity one.
+\end_layout
+
+\begin_layout Subsection*
+Binary Trees 
+\end_layout
+
+\begin_layout Standard
+Same as above, but now we define a binary tree as the union of the letters
+ in a string 
+\begin_inset Formula $a\in\hat{A}$
+\end_inset
+
+.
+ The resulting modeloid is now basic, because the issue above does not occur:
+ one has that 
+\begin_inset Formula $\left[0\right]\left[0\right]E\left[01\right]\left[\varnothing\right]$
+\end_inset
+
+ because 
+\begin_inset Formula $\left[0\right]\left[0\right]=\left[0\right]$
+\end_inset
+
+ is a proper subtree of 
+\begin_inset Formula $\left[01\right]\left[\varnothing\right]=\left[01\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Boolean algebra
+\end_layout
+
+\begin_layout Standard
+We can consider adding negation 
+\begin_inset Formula $\lnot$
+\end_inset
+
+ to the structure, and explore 
+\begin_inset Formula $\left\{ 2^{*},<,\lnot\right\} .$
+\end_inset
+
+ Negation is a function, we re-express it as a relation 
+\begin_inset Formula $R\left(x,y\right)$
+\end_inset
+
+ which is true whenever 
+\begin_inset Formula $x=\lnot y$
+\end_inset
+
+.
+ Next, per example 1.5, look for functions 
+\begin_inset Formula $f$
+\end_inset
+
+ such that 
+\begin_inset Formula $R\left(x,y\right)$
+\end_inset
+
+ iff 
+\begin_inset Formula $R\left(fx,fy\right)$
+\end_inset
+
+.
+ The only such seems to be negation.
+ We conclude there is only one such modeloid.
+ As before, the modeloid has complexity one.
+\end_layout
+
+\begin_layout Standard
+If we add the function 
+\begin_inset Formula $\wedge$
+\end_inset
+
+ denoting the and'ing of strings, then we have two choices: define it only
+ on strings of exactly the same length, or define it so that the longer
+ string is truncated.
+ Defining 
+\begin_inset Formula $R\left(x,y,z\right)$
+\end_inset
+
+ is true iff 
+\begin_inset Formula $x\wedge y=z$
+\end_inset
+
+ leads to asking for 
+\begin_inset Formula $f$
+\end_inset
+
+ that satisfy 
+\begin_inset Formula $R\left(x,y,z\right)$
+\end_inset
+
+ iff 
+\begin_inset Formula $R\left(fx,fy,fz\right)$
+\end_inset
+
+.
+ But there are non-such, except for the identity.
+ So this changes nothing.
+\end_layout
+
+\begin_layout Subsection*
+Affine Boolean algebra
+\end_layout
+
+\begin_layout Standard
+Like above, but we add a relation that marks two strings as being identical
+ if they have the same langth, and are negations of one-another.
+ That is, 
+\begin_inset Quotes eld
+\end_inset
+
+modulo reflection
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The modeloid is complexity one, as before.
+\end_layout
+
+\begin_layout Subsection*
+Infinite binary tree
+\end_layout
+
+\begin_layout Standard
+The modeloid for the infinite binary tree is boring, because there is only
+ one such tree, and so everything is trivial.
+ We could represent it as the union of all infinite binary strings 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ but this changes nothing.
+ There is no substring relationship; all such strings are distinct.
+ Adding an equality relation to this does nothing interesting.
+\end_layout
+
+\begin_layout Standard
+More interesting is if we provide a topology, the weak topology.
+ The set 
+\begin_inset Formula $A$
+\end_inset
+
+ then consists of all cylinder sets.
+ 
+\end_layout
+
+\begin_layout Standard
+Hmmm.
+ We can leave 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ uninterpreted, in chich case the modeloid is basic.
+ Alternately, we can take either the intersection or the union of strings
+ in 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ in which case, it collapses, and one has 
+\begin_inset Formula $\hat{A}=A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
+Issues
+\end_layout
+
+\begin_layout Standard
+While reading Benda, multiple conceptual or theoretical issues arise.
+ So, below is a collection of open, unresolved questions (for me).
+\end_layout
+
+\begin_layout Description
+Countability - In section 0.
+ Preliminaries, he seems to assume the set 
+\begin_inset Formula $A$
+\end_inset
+
+ is finite.
+ But the intersting objects are integers, reals, the Cantor set, etc.
+ These are countable or uncountable.
+ How will this work out?
+\end_layout
+
+\begin_layout Description
+Partial
+\begin_inset space \space{}
+\end_inset
+
+relations - In example 1.5, we are asked to convert functions to relations.
+ Should we assume that these are only the true relations, or true and also
+ false? For example, on a partial order, the order relation is not total.
+ So I guess the answer is no.
+\end_layout
+
+\begin_layout Description
+Least
+\begin_inset space \space{}
+\end_inset
+
+modeloid At the start of the section on modeloids, Benda talks as if there
+ is only one 
+\begin_inset Quotes eld
+\end_inset
+
+least modeloid
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But the above five examples have no unique single least.
+ 
+\end_layout
+
+\end_body
+\end_document
