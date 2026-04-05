@@ -109,7 +109,7 @@ Linas Vepstas
 
 \begin_layout Date
 December 2017 (Current version:
- July 2025)
+ April 2026)
 \begin_inset Foot
 status collapsed
 
@@ -69055,7 +69055,7 @@ Miscellaneous unfinished ideas
 \end_layout
 
 \begin_layout Standard
-An ad-hoc collection of half-finished thoughts.
+An ad–hoc collection of half–finished thoughts.
 \end_layout
 
 \begin_layout Subsection
@@ -69295,14 +69295,14 @@ Given a polynomial,
  that,
  iterated upon,
  generates a sequence.
- The projection of that sequence to a non-expanding orthogonal plane is a Rauzy fractal.
+ The projection of that sequence to a non–expanding orthogonal plane is a Rauzy fractal.
  What are the corresponding Rauzy fractals for this situation?
 \end_layout
 
 \begin_layout Standard
 How about the general iterated sequence (e.g.
  the sequence of midpoints)?
- Is this space-filling,
+ Is this space–filling,
  or not?
 \end_layout
 
@@ -69312,6 +69312,151 @@ Fourier spectrum
 
 \begin_layout Standard
 What is the Fourier spectrum of the eigenfunctions?
+\end_layout
+
+\begin_layout Subsection
+Clocks
+\end_layout
+
+\begin_layout Standard
+What happens if I commute a finite–dimensional beta–shift matrix with a clock matrix?
+ Recall that a clock matrix is a diagonal matrix with powers of roots of unity on the diagonal;
+ i.e.
+ it has the form
+\begin_inset Formula 
+\[
+U=\left[\begin{array}{ccccc}
+1 & 0 & 0 & \cdots & 0\\
+0 & \omega & 0 & \cdots & 0\\
+0 & 0 & \omega^{2} & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots\\
+0 & 0 & 0 & 0 & \omega^{k}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The shift matrix is that of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:golden matrix"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ copied below for convenience:
+\begin_inset Formula 
+\[
+B=\left[\begin{array}{cccccc}
+b_{0} & 1 & 0 & 0 & \cdots & 0\\
+b_{1} & 0 & 1 & 0 & \cdots & 0\\
+b_{2} & 0 & 0 & 1 & \cdots & 0\\
+\vdots & \vdots & \vdots &  & \ddots & \vdots\\
+b_{k-1} & 0 & 0 & 0 & \cdots & 1\\
+b_{k} & 0 & 0 & 0 & \cdots & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+Recall that the convention 
+\begin_inset Formula $b_{0}=b_{k}=1$
+\end_inset
+
+ is used.
+ Then,
+ by hand:
+\begin_inset Formula 
+\[
+BU=\left[\begin{array}{cccccc}
+b_{0} & \omega &  &  &  & 0\\
+b_{1} &  & \omega^{2} &  &  & 0\\
+b_{2} &  &  & \omega^{3} & \cdots & 0\\
+\vdots &  &  &  & \ddots & \vdots\\
+b_{k-1} &  &  &  & \cdots & \omega^{k}\\
+b_{k} & 0 & 0 & 0 & \cdots & 0
+\end{array}\right]\qquad\qquad UB=\left[\begin{array}{cccccc}
+b_{0} & 1\\
+\omega b_{1} &  & \omega\\
+\omega^{2}b_{2} &  &  & \omega^{2}\\
+\vdots &  &  &  & \ddots\\
+\omega^{k-1}b_{k-1} &  &  &  & \cdots & \omega^{k-1}\\
+\omega^{k}b_{k} & 0 & 0 & 0 & \cdots & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+Well,
+ that's not very interesting.
+ Taking 
+\begin_inset Formula $BU-\omega UB$
+\end_inset
+
+ knocks out everything but the first column.
+\end_layout
+
+\begin_layout Standard
+The question then becomes:
+ is there some other matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ which commute as 
+\begin_inset Formula $BA=\omega AB$
+\end_inset
+
+?
+ If so,
+ then we could call this the beta–clock,
+ or the clock associated with the beta–shift.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ case seems to be given by 
+\begin_inset Formula 
+\[
+U=\left[\begin{array}{cc}
+-\left(\omega+1\right) & \omega\\
+1 & -\omega\left(\omega+2\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+which is solved by 
+\begin_inset Formula $\omega=1$
+\end_inset
+
+ or by 
+\begin_inset Formula $\omega=\left(-3\pm\sqrt{5}\right)/2$
+\end_inset
+
+ which works out to be 
+\begin_inset Formula $\omega=\varphi+1$
+\end_inset
+
+ or 
+\begin_inset Formula $\omega=\varphi-2$
+\end_inset
+
+.
+ Note that these last two are real,
+ not complex.
+ Note the clock matrix is not diagonal.
+ 
 \end_layout
 
 \begin_layout Standard
