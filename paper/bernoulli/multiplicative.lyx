@@ -184,7 +184,15 @@ Then,
 
 \end_inset
 
-The question in my mind is how this generalizes.
+
+\end_layout
+
+\begin_layout Subsection
+Generlization?
+\end_layout
+
+\begin_layout Standard
+How might this generalize?
  There are two directions to go in.
  One is to replace 
 \begin_inset Formula $\sum_{m}\exp$
@@ -237,26 +245,341 @@ anything
  be group valued as well.
  Down this path lies generic group and ring theory,
  and that's a potentially bottomless pit which does not seem to promise interesting results.
- One possible exception might be to replace the Fourier xform by the Gelfand representation on C*-algebras,
+ 
+\end_layout
+
+\begin_layout Standard
+Another possible exception might be to replace the Fourier xform by the Gelfand representation on C*-algebras,
  but this again wanders into territory that is quite different,
  and has it's own distinct set of rules.
 \end_layout
 
 \begin_layout Standard
-at least if 
+If 
 \begin_inset Formula $h$
 \end_inset
 
- is continuous.
+ is continuous,
+ this exhausts all the possibilities.
+ If 
+\begin_inset Formula $h$
+\end_inset
+
+ is not continuous,
+ then there's some uncountable set of possibilities.
+ What are these?
  
 \end_layout
 
 \begin_layout Standard
-Suppose that 
+Another possibility is to wrote 
 \begin_inset Formula $h\left(x+a\right)=h\left(x\right)r\left(a\right)$
 \end_inset
 
+,
+ which seems like it should open up more possibilities,
+ but doesn't.
+\end_layout
+
+\begin_layout Standard
+Another possibility is to explore 
+\begin_inset Formula $p$
+\end_inset
+
+–adic fields,
+ so more constrained than rings in general,
+ but less constrained than 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Completely mutliplicative functions?
+\end_layout
+
+\begin_layout Standard
+The function 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ obeys the multiplication theorem whenever 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ is completely multiplicative,
+ and when the Fourier sum converges.
+ Completely multiplicative functions are completely determined by their values on the prime numbers.
+ Let 
+\begin_inset Formula $\rho\left(n\right)=p_{n}$
+\end_inset
+
+ where 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ is the 
+\begin_inset Formula $n$
+\end_inset
+
+'th prime number so that 
+\begin_inset Formula $\rho\left(1\right)=2$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho\left(2\right)=3$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho\left(0\right)=1$
+\end_inset
+
+ if that becomes necessary.
+ Why the symbol 
+\begin_inset Formula $\rho$
+\end_inset
+
+?
+ Because prime numbers are 
+\begin_inset Formula $\rho$
+\end_inset
+
+andom and because it looks like the letter 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Thus,
+ for any sequence 
+\begin_inset Formula $\left\{ c_{n}\right\} $
+\end_inset
+
+ write
+\begin_inset Formula 
+\[
+f\left(n\right)=\begin{cases}
+c_{m} & \mbox{for }n\mbox{ prime and }\rho\left(m\right)=n\\
+f^{a_{1}}\left(p_{1}\right)\cdots f^{a_{k}}\left(p_{k}\right) & \mbox{for composite }n=p_{1}^{a_{1}}\cdots p_{k}^{a_{k}}
+\end{cases}
+\]
+
+\end_inset
+
+The question then becomes:
+ what is the space of sequences 
+\begin_inset Formula $\left\{ c_{n}\right\} $
+\end_inset
+
+ for which 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ is defined?
+ This is tricky in several ways.
+ Do we want 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ to be defined on the unit interval?
+ The whole real line?
+ The entire complex plane?
+ The complex unit disk?
+ The upper half–plane?
+ And what type of convergence do we require?
+ Hardy space,
+ for the last two?
+ Hilbert space,
+ for the former?
+ Perhaps some Banach 
+\begin_inset Formula $L^{p}$
+\end_inset
+
+?
+ A space of continuous functions?
+ A space of once–differentiable Or maybe just the space of analytic functions,
+ so that 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ is analytic (infinite–polynomial) on some disk?
+\end_layout
+
+\begin_layout Standard
+All the classical functions are analytic,
+ so this is a good place to start.
+ However,
+ when I was younger,
+ I failed to appreciate just how 
+\begin_inset Quotes eld
+\end_inset
+
+small
+\begin_inset Quotes erd
+\end_inset
+
+ the space of analytic functions are,
+ as compared to,
+ for example,
+ a Hilbert space.
+ This difference is striking,
+ once you see it;
+ its a bit like 
+\begin_inset Formula $\mathbb{Q}\subset\mathbb{R}$
+\end_inset
+
+ but the differences between 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ are striking.
+ In the past,
+ I have found the differences between the spectral theory of analytic functions and square–integrable functions to be wildly confusing;
+ a confusion I never entirely cleared up.
+ A bit lat to make amends,
+ but,
+ oh well.
+ (Specifically:
+ the spectrum of the Bernoulli operator being discrete when limited to polynomials,
+ but continuous when considering the square–integrable functions.)
+\end_layout
+
+\begin_layout Standard
+Still (and I ask google LLM at this point) I am reminded of the Stone–Weierstrass theorem;
+ this says that the analytic functions are dense in the space of continuous functions,
+ i.e.
+ that any continuous function can be approximated by polynomials.
+ But we also have that the analytic functions are dense in the usual Hilbert spaces.
+ But this is (only) for compact spaces;
+ the LLM reminds me:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+
+\series bold
+\emph on
+Not Dense in Bergman Space
+\series default
+:
+ The space of analytic functions 
+\begin_inset Formula $A^{2}\left(U\right)$
+\end_inset
+
+ (the Bergman space) on an open set 
+\begin_inset Formula $U\subset\mathbb{C}$
+\end_inset
+
+ is a closed subspace of 
+\begin_inset Formula $L^{2}\left(U\right)$
+\end_inset
+
+,
+ meaning the analytic functions are not dense in 
+\begin_inset Formula $L^{2}\left(U\right)$
+\end_inset
+
+ itself.
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are also several things that bug me.
+ One is ringing (Gibbs phenomenon).
+ This is a finite fourier series converging to a discontinuity.
+ It does converge in the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ norm,
+ because the energy contained in the ringing decreases as 
+\begin_inset Formula $1/N$
+\end_inset
+
+ in the number of terms (because the width of the rings decreases as 
+\begin_inset Formula $1/N$
+\end_inset
+
+).
+ There is no uniform convergence (the 
+\begin_inset Formula $L^{\infty}$
+\end_inset
+
+ norm);
+ that is,
  
+\begin_inset Formula $\left\Vert f-S_{N}\right\Vert _{\infty}$
+\end_inset
+
+ remains finite even as 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ for partial sums 
+\begin_inset Formula $S_{N}$
+\end_inset
+
+,
+ due to the Gibbs phenomenon.
+ 
+\end_layout
+
+\begin_layout Standard
+Stone–Weierstrass says that the polynomials are dense in the space of continuous functions with compact support.
+ Likewise,
+ finite Fourier series are dense in the space of continuous functions.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Dense
+\begin_inset Quotes erd
+\end_inset
+
+ means uniform convergence:
+ the polynomials converge uniformly to continuous functions.
+ For discontinuous functions,
+ one gets convergence only in the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ norm.
+ But also the continuous functions with compact support are dense in 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
 \end_layout
 
 \end_body
