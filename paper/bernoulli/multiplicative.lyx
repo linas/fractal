@@ -401,7 +401,8 @@ The question then becomes:
 
 ?
  A space of continuous functions?
- A space of once–differentiable Or maybe just the space of analytic functions,
+ A space of once–differentiable functions?
+ Or maybe just the space of analytic functions,
  so that 
 \begin_inset Formula $g\left(x\right)$
 \end_inset
@@ -599,6 +600,159 @@ g\left(x\right)=\sum_{n\mbox{ prime}}f\left(n\right)\exp\left(2\pi inx\right)+\s
 \end_inset
 
 The hypothesis is that the second term is effectively bounded if the first is.
+ Lets skip this for now.
+ What about the first term?
+\end_layout
+
+\begin_layout Standard
+It is hard to fish an answer out of the google LLM,
+ it is very coy and stupid.
+ It did cough up the condition:
+\begin_inset Formula 
+\[
+\sum_{p\in\mathscr{P}}\frac{\left|f\left(p\right)\right|^{2}}{\log p}<\infty
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $\mathscr{P}$
+\end_inset
+
+ the set of prime numbers.
+ This is the 
+\begin_inset Quotes eld
+\end_inset
+
+yeah,
+ duhh
+\begin_inset Quotes erd
+\end_inset
+
+ condition,
+ as the density of primes is 
+\begin_inset Quotes eld
+\end_inset
+
+eventually becomes
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $1/\log p$
+\end_inset
+
+ (the prime number theorem).
+ Equivalently,
+ use 
+\begin_inset Formula $1/\mathrm{li}p$
+\end_inset
+
+;
+ it doesn't matter.
+ Apparently,
+ this is deducible from the Paley–Zygmund condition.
+\end_layout
+
+\begin_layout Standard
+Is this result boring,
+ or interesting?
+ I don't know.
+ Writing 
+\begin_inset Formula $z=\exp\left(2\pi inx\right)$
+\end_inset
+
+ the sum becomes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sum_{p\in\mathscr{P}}f_{p}z^{p}
+\]
+
+\end_inset
+
+Now what?
+ The google LLM knows exactly zero results on such sums.
+ It can tell me nothing at all – no theorems,
+ rupelations,
+ transformations,
+ nothing.
+ It does cough up Vinogradov's Theorem (1937) for the sum 
+\begin_inset Formula 
+\[
+S\left(N;\alpha\right)=\sum_{p<N}\exp\left(2\pi ip\alpha\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ irrational,
+ and then Vaughan's Identity (1977) which is a refinement thereof.
+ It points out that the sum 
+\begin_inset Formula $\sum_{p\in\mathscr{P}}z^{p}$
+\end_inset
+
+ has a natural boundary at 
+\begin_inset Formula $\left|z\right|=1$
+\end_inset
+
+.
+ I don't recall if I've ever visualized this before.
+ I should.
+\end_layout
+
+\begin_layout Standard
+Here are some questions.
+ Define the operator 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ on sequences 
+\begin_inset Formula $\left\{ f_{p}\right\} $
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\left[\mathcal{A}f\right]\left(z\right)=\sum_{p\in\mathscr{P}}f_{p}z^{p}
+\]
+
+\end_inset
+
+Clearly,
+ if the sequence 
+\begin_inset Formula $f=\left\{ f_{p}\right\} $
+\end_inset
+
+ is finite,
+ then this is a finite sum and is entire.
+ Clearly,
+ there are various infinite sequences that are analytic on the complex plane,
+ having scattered poles and branch cuts here and there.
+ Clearly,
+ for 
+\begin_inset Formula $f_{p}=1$
+\end_inset
+
+ we have that 
+\begin_inset Formula $\left[\mathcal{A}f\right]\left(z\right)$
+\end_inset
+
+ has a dense set of singularities on the unit circle.
+ What about some arbitrary sequence 
+\begin_inset Formula $\left\{ f_{p}\right\} $
+\end_inset
+
+?
+ Will it also have a natural boundary on the unit circle?
+ What fraction of such arbitrary sequences extend past the unit circle?
+ Is it almost all?
+ Almost none?
 \end_layout
 
 \begin_layout Standard
